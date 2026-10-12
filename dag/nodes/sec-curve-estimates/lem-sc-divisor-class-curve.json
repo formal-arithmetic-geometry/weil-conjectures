@@ -24,97 +24,36 @@
  ],
  "proof": [
   {
-   "text": "Setting. By [lem-sc-smooth-connected-curve-local-rings], $C$ is a Noetherian integral scheme with generic point $\\eta$ and function field $k(C)=\\mathcal O_{C,\\eta}$; $\\mathcal O_C(V)\\subseteq\\mathcal O_{C,x}\\subseteq k(C)$ for nonempty open $V$ and $x\\in V$; every point other than $\\eta$ is closed and closed points exist; and for every closed point $P$, $\\mathcal O_{C,P}$ is a discrete valuation ring with fraction field $k(C)$ and normalized valuation $v_P$. Hence $\\operatorname{div}(f)=\\sum_Pv_P(f)[P]$ of [def-sc-divisor] is defined for $f\\in k(C)^*$, and $v_P(fg)=v_P(f)+v_P(g)$ gives $\\operatorname{div}(fg)=\\operatorname{div}(f)+\\operatorname{div}(g)$ and $\\operatorname{div}(f^{-1})=-\\operatorname{div}(f)$ (Stacks 02RP). So the principal divisors form a subgroup and $\\operatorname{Cl}(C)=\\operatorname{Div}(C)/\\{\\operatorname{div}f\\}$ is an abelian group. By [lem-sc-divisor-module-local], for every $D\\in\\operatorname{Div}(C)$ the sheaf $\\mathcal O_C(D)\\subseteq k(C)$ is an invertible $\\mathcal O_C$-module [def-sc-invertible-module], so $D\\mapsto[\\mathcal O_C(D)]$ is a map $\\operatorname{Div}(C)\\to\\operatorname{Pic}(C)$ [def-sc-picard-group].",
+   "text": "Supply C.Over by f. Obtain the integral instance from smooth_connected_curve_local_rings and Noetherianity from locally finite type over k. Since C is irreducible, smoothOfRelativeDimension_iff_topologicalKrullDim_eq and the dimension-one field of IsConnectedCurve give SmoothOfRelativeDimension 1 f.",
    "uses": [
-    "lem-sc-smooth-connected-curve-local-rings",
-    "lem-sc-divisor-module-local",
-    "def-sc-divisor",
-    "def-sc-function-field",
-    "def-sc-picard-group",
-    "def-sc-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Section 31.26 'Weil divisors' (section-Weil-divisors): Definition 0BE2, Lemma 02RP (divisors-lemma-div-additive), Definition 0BE4 (class group), exact sequence 0BE5; hypotheses of Lemma 0BE9"
-   }
-  },
-  {
-   "text": "The map factors through $\\operatorname{Cl}(C)$. Let $D=\\sum_Qn_Q[Q]$ and $f\\in k(C)^*$, and put $D'=D+\\operatorname{div}(f)$. For a nonempty open $V$ and $g\\in k(C)^*$: $v_Q(gf^{-1})+n_Q+v_Q(f)=v_Q(g)+n_Q$ for every closed $Q\\in V$, so $g\\in\\mathcal O_C(D)(V)$ if and only if $gf^{-1}\\in\\mathcal O_C(D')(V)$ (and $0\\mapsto0$). Thus multiplication by $f^{-1}$ in $k(C)$ is a bijection $\\mathcal O_C(D)(V)\\to\\mathcal O_C(D')(V)$, $\\mathcal O_C(V)$-linear and compatible with restrictions (all sections are elements of the one field $k(C)$), with inverse multiplication by $f$; so $\\mathcal O_C(D')=f^{-1}\\mathcal O_C(D)\\cong\\mathcal O_C(D)$ and $[\\mathcal O_C(D')]=[\\mathcal O_C(D)]$. In particular ($D=0$, using $\\mathcal O_C(0)=\\mathcal O_C$ from [lem-sc-divisor-module-local]) $\\mathcal O_C(\\operatorname{div}f)=f^{-1}\\mathcal O_C\\cong\\mathcal O_C$. Hence $D\\mapsto[\\mathcal O_C(D)]$ induces a map $\\phi:\\operatorname{Cl}(C)\\to\\operatorname{Pic}(C)$.",
-   "uses": [
-    "def-sc-divisor",
-    "lem-sc-divisor-module-local"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-divisor-class-curve.md",
-    "place": "## Proof, first sentence ('The map is well defined: ... $\\mathcal O_C(\\operatorname{div}f)=f^{-1}\\mathcal O_C\\cong\\mathcal O_C$'); cf. Stacks Divisors Lemma 02SH (divisors-lemma-divisor-meromorphic-well-defined)"
-   }
-  },
-  {
-   "text": "$\\phi$ is a homomorphism. Let $D=\\sum n_Q[Q]$, $D'=\\sum n'_Q[Q]$. For a nonempty open $V$, $g\\in\\mathcal O_C(D)(V)$, $h\\in\\mathcal O_C(D')(V)$ (both nonzero) we have $v_Q(gh)+n_Q+n'_Q=(v_Q(g)+n_Q)+(v_Q(h)+n'_Q)\\ge0$ for closed $Q\\in V$, so $gh\\in\\mathcal O_C(D+D')(V)$. The product $(g,h)\\mapsto gh$ is $\\mathcal O_C(V)$-bilinear and compatible with restrictions, hence induces (universal property of the tensor product of $\\mathcal O_C$-modules, the sheafification of the presheaf tensor product) an $\\mathcal O_C$-linear map $\\mu:\\mathcal O_C(D)\\otimes_{\\mathcal O_C}\\mathcal O_C(D')\\to\\mathcal O_C(D+D')$. It is an isomorphism, which may be checked on an open cover. Let $P$ be a closed point and $t$ a uniformizer of $\\mathcal O_{C,P}$; [lem-sc-divisor-module-local] applied to $D$, $D'$, $D+D'$ with the same $t$ gives neighbourhoods whose intersection $U\\ni P$ satisfies $\\mathcal O_C(D)|_U=t^{-n_P}\\mathcal O_U$, $\\mathcal O_C(D')|_U=t^{-n'_P}\\mathcal O_U$, $\\mathcal O_C(D+D')|_U=t^{-n_P-n'_P}\\mathcal O_U$. Under the isomorphisms $a\\mapsto t^{-n_P}a$, $b\\mapsto t^{-n'_P}b$, $c\\mapsto t^{-n_P-n'_P}c$ from $\\mathcal O_U$, $\\mu|_U$ becomes the multiplication $\\mathcal O_U\\otimes_{\\mathcal O_U}\\mathcal O_U\\to\\mathcal O_U$, $a\\otimes b\\mapsto ab$, an isomorphism. These $U$ cover $C$: they cover the closed points, and $\\eta$ lies in every nonempty open ([lem-sc-smooth-connected-curve-local-rings]: every point is closed or $\\eta$, and a closed point exists). So $\\mu$ is an isomorphism and $\\phi([D+D'])=\\phi([D])\\cdot\\phi([D'])$ for the group law of $\\operatorname{Pic}(C)$ given by $\\otimes$ [lem-sc-pic-group], [def-sc-picard-group].",
-   "uses": [
-    "lem-sc-divisor-module-local",
-    "lem-sc-smooth-connected-curve-local-rings",
-    "lem-sc-pic-group",
-    "def-sc-picard-group",
-    "def-sc-divisor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-divisor-class-curve.md",
-    "place": "## Proof, second sentence ('It is a homomorphism: the multiplication map ... is an isomorphism (locally both sides are invertible modules generated by the same element of $k(C)$)'); cf. Stacks Divisors Lemma 02SL (divisors-lemma-c1-additive)"
-   }
-  },
-  {
-   "text": "$\\phi$ is surjective. Let $\\mathcal L$ be an invertible $\\mathcal O_C$-module. $C$ is an integral curve over $k$ ([lem-sc-smooth-connected-curve-local-rings]), so by [lem-sc-line-bundle-rational-section] $\\mathcal L$ has a nonzero rational section $s$ and $f\\mapsto fs$ is an isomorphism $\\mathcal O_C(\\operatorname{div}s)\\to\\mathcal L$. Hence $[\\mathcal L]=\\phi([\\operatorname{div}s])$.",
-   "uses": [
-    "lem-sc-line-bundle-rational-section",
     "lem-sc-smooth-connected-curve-local-rings"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-divisor-class-curve.md",
-    "place": "## Proof, 'Surjectivity: by [lem-sc-line-bundle-rational-section] every invertible module is $\\mathcal O_C(D)$ for $D=\\operatorname{div}(s)$ a rational section'; cf. Stacks Divisors Definition 0BE6 (divisors-definition-divisor-invertible-sheaf) and the proof of Lemma 0BE9, first paragraph ('the canonical section $1_D$ of $\\mathcal O_X(D)$ vanishes exactly along $D$')"
-   }
+   "elementary": true
   },
   {
-   "text": "$\\phi$ is injective. Let $D=\\sum_Pn_P[P]$ with $\\mathcal O_C(D)\\cong\\mathcal O_C$, and let $\\psi:\\mathcal O_C\\to\\mathcal O_C(D)$ be an isomorphism. Put $f=\\psi_C(1)\\in\\mathcal O_C(D)(C)\\subseteq k(C)$. For a nonempty open $V$ and $a\\in\\mathcal O_C(V)$, $\\mathcal O_C$-linearity and compatibility with restriction give $\\psi_V(a)=a\\cdot\\psi_V(1|_V)=af$ in $k(C)$; as $\\psi_V$ is bijective, $\\mathcal O_C(D)(V)=f\\cdot\\mathcal O_C(V)$ for every nonempty open $V$. Let $P$ be a closed point (one exists by [lem-sc-smooth-connected-curve-local-rings]) and $t$ a uniformizer of $\\mathcal O_{C,P}$. Passing to the stalk at $P$ (the union over $V\\ni P$ inside $k(C)$) and using [lem-sc-divisor-module-local]: $f\\mathcal O_{C,P}=\\mathcal O_C(D)_P=t^{-n_P}\\mathcal O_{C,P}\\neq0$. So $f\\neq0$ and $f=ut^{-n_P}$ with $u\\in\\mathcal O_{C,P}^*$, i.e. $v_P(f)=-n_P$, for every closed point $P$. Hence $D=-\\operatorname{div}(f)=\\operatorname{div}(f^{-1})$ (step 1), and $[D]=0$ in $\\operatorname{Cl}(C)$. (The blueprint writes $D=\\operatorname{div}(f)$; with the convention $\\mathcal O_C(D)=\\{g:\\operatorname{div}g+D\\ge0\\}$ of [def-sc-divisor] the sign is $D=\\operatorname{div}(f^{-1})$; either way $D$ is principal.)",
+   "text": "Apply the existing source-library point-ideal divisor-class equivalence [lem-sc-divisor-class-toPic-equivalence] to obtain e with e([D]) = Divisor.toPic k C D. This implementation supplies the well-defined homomorphism, its kernel calculation, and surjectivity, following the divisor-class argument of this unit.",
    "uses": [
-    "lem-sc-divisor-module-local",
-    "lem-sc-smooth-connected-curve-local-rings",
-    "def-sc-divisor"
+    "lem-sc-divisor-class-toPic-equivalence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Lemma 0BE8 (divisors-lemma-normal-c1-injective), proof: a regular meromorphic section with trivial Weil divisor trivializes $\\mathcal L$, checked on stalks of the normal local rings; blueprint ## Proof, 'Injectivity: if $\\mathcal O_C(D)\\cong\\mathcal O_C$, let $f$ be the image of $1$ ... whence $D=\\operatorname{div}(f)$'"
-   }
+   "elementary": false
   },
   {
-   "text": "Conclusion. By steps 2 and 3, $\\phi:\\operatorname{Cl}(C)\\to\\operatorname{Pic}(C)$, $[D]\\mapsto[\\mathcal O_C(D)]$, is a well-defined homomorphism of abelian groups; by step 5 its kernel (the classes $[D]$ with $\\mathcal O_C(D)\\cong\\mathcal O_C$, the unit of $\\operatorname{Pic}(C)$) is trivial, so it is injective; by step 4 it is surjective. Hence it is an isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Lemma 0BE9 (divisors-lemma-local-rings-UFD-c1-bijective), last sentence: 'In this case $\\Pic(X)\\to\\mathrm{Cl}(X)$ is an isomorphism' (the map of the item is the inverse of that map)"
-   }
+   "text": "For each D rewrite by the computation rule of e, then apply [lem-sc-divisor-toPic-representative] to obtain the required representative isomorphism. No quotient or bijectivity statement is assumed by this comparison lemma.",
+   "uses": [
+    "lem-sc-divisor-toPic-representative"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-smooth-connected-curve-local-rings",
-  "lem-sc-divisor-module-local",
-  "def-sc-divisor",
-  "def-sc-function-field",
-  "def-sc-picard-group",
-  "def-sc-invertible-module",
-  "lem-sc-pic-group",
-  "lem-sc-line-bundle-rational-section"
+  "lem-sc-divisor-class-toPic-equivalence",
+  "lem-sc-divisor-toPic-representative"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/divisors.tex",
-  "place": "Stacks Divisors Lemma 0BE9 (divisors-lemma-local-rings-UFD-c1-bijective) with Lemma 0BE8 (divisors-lemma-normal-c1-injective), for a curve whose local rings at closed points are DVRs; the map of the item, $D\\mapsto[\\mathcal O_C(D)]$, is the inverse of the Stacks map $\\Pic\\to\\mathrm{Cl}$, and the four parts (well defined, homomorphism, surjective, injective) follow the blueprint proof literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-divisor-class-curve.md"
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Curve/Picard.lean",
+  "place": "Reuse exists_divisorClassGroup_addEquiv_pic and compare its point-ideal representative with the explicit divisor module via the original homomorphism step and effective-divisor agreement."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -185,5 +124,15 @@
   "reviewer": "R-dcc",
   "group": "C1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T060729-L-2903279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

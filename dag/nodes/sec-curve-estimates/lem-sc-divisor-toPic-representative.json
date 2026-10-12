@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-divisor-toPic-representative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-divisor-class-curve",
+   "place": "Proof: comparison of divisor modules and the Picard homomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The point-ideal Picard class represents the explicit divisor module",
+ "statement": "Let k be algebraically closed and C a smooth connected curve over k, with its structure morphism smooth of relative dimension one. For every (possibly negative) divisor D, the chosen representative of the Picard class Divisor.toPic k C D is isomorphic to the valuation-bounded module O_C(D) of [def-sc-divisor].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-divisor-class-curve.md",
+  "place": "Proof, homomorphism step (step 3 in the DAG), combined with lem-pc-divisor-line-bundle-agrees-sc; Stacks Divisors 02SL"
+ },
+ "stmt_deps": [
+  "def-sc-divisor",
+  "def-sc-picard-group",
+  "lem-sc-pic-group",
+  "def-sc-curves"
+ ],
+ "proof": [
+  {
+   "text": "Write D as its positive part E1 minus its negative part E2, using Divisor.mapRange_toNat_sub. For an effective divisor E its point-ideal product is its ideal sheaf, whose dual is the valuation-bounded module O(E), by lem-pc-divisor-line-bundle-agrees-sc. In particular this identifies the point classes.",
+   "uses": [
+    "lem-pc-divisor-line-bundle-agrees-sc",
+    "def-sc-divisor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "$\\phi$ is a homomorphism. Let $D=\\sum n_Q[Q]$, $D'=\\sum n'_Q[Q]$. For a nonempty open $V$, $g\\in\\mathcal O_C(D)(V)$, $h\\in\\mathcal O_C(D')(V)$ (both nonzero) we have $v_Q(gh)+n_Q+n'_Q=(v_Q(g)+n_Q)+(v_Q(h)+n'_Q)\\ge0$ for closed $Q\\in V$, so $gh\\in\\mathcal O_C(D+D')(V)$. The product $(g,h)\\mapsto gh$ is $\\mathcal O_C(V)$-bilinear and compatible with restrictions, hence induces (universal property of the tensor product of $\\mathcal O_C$-modules, the sheafification of the presheaf tensor product) an $\\mathcal O_C$-linear map $\\mu:\\mathcal O_C(D)\\otimes_{\\mathcal O_C}\\mathcal O_C(D')\\to\\mathcal O_C(D+D')$. It is an isomorphism, which may be checked on an open cover. Let $P$ be a closed point and $t$ a uniformizer of $\\mathcal O_{C,P}$; [lem-sc-divisor-module-local] applied to $D$, $D'$, $D+D'$ with the same $t$ gives neighbourhoods whose intersection $U\\ni P$ satisfies $\\mathcal O_C(D)|_U=t^{-n_P}\\mathcal O_U$, $\\mathcal O_C(D')|_U=t^{-n'_P}\\mathcal O_U$, $\\mathcal O_C(D+D')|_U=t^{-n_P-n'_P}\\mathcal O_U$. Under the isomorphisms $a\\mapsto t^{-n_P}a$, $b\\mapsto t^{-n'_P}b$, $c\\mapsto t^{-n_P-n'_P}c$ from $\\mathcal O_U$, $\\mu|_U$ becomes the multiplication $\\mathcal O_U\\otimes_{\\mathcal O_U}\\mathcal O_U\\to\\mathcal O_U$, $a\\otimes b\\mapsto ab$, an isomorphism. These $U$ cover $C$: they cover the closed points, and $\\eta$ lies in every nonempty open ([lem-sc-smooth-connected-curve-local-rings]: every point is closed or $\\eta$, and a closed point exists). So $\\mu$ is an isomorphism and $\\phi([D+D'])=\\phi([D])\\cdot\\phi([D'])$ for the group law of $\\operatorname{Pic}(C)$ given by $\\otimes$ [lem-sc-pic-group], [def-sc-picard-group]. For B=-A this multiplication and O(0)=O identify O(-A) with the inverse class of O(A).",
+   "uses": [
+    "lem-sc-divisor-module-local",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-pic-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Thus O(D) has class [I(E1)^dual] [I(E2)], which is exactly (Divisor.toPic k C D).toMul by Divisor.toMul_toPic_mapRange_sub. Equality of Picard classes gives an isomorphism from the chosen representative to O(D), by Pic.eq_ofIsInvertible_iff. This statement does not assert any quotient, injectivity, or surjectivity.",
+   "uses": [
+    "def-sc-picard-group",
+    "lem-sc-pic-group"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-divisor-line-bundle-agrees-sc",
+  "def-sc-divisor",
+  "lem-sc-divisor-module-local",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-pic-group",
+  "def-sc-picard-group"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-divisor-class-curve.md",
+  "place": "Proof, homomorphism step (step 3 in the DAG), combined with lem-pc-divisor-line-bundle-agrees-sc; Stacks Divisors 02SL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Divisor class group Picard group smooth integral curve; divisor module and point-ideal dual comparison",
+   "results": "UNAVAILABLE: service returned Internal Server Error (two attempts).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divisor module represented by product of dual point ideals on a smooth curve",
+   "results": "Only elliptic curve coordinate ideals (WeierstrassCurve.Affine.CoordinateRing.XYIdeal) and ring-level ClassGroup/PicardGroup results; no scheme module comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg divisor.*module|toPic Mathlib/AlgebraicGeometry Mathlib/RingTheory/PicardGroup.lean; rg associatedModule|moduleOfSmoothConnectedCurve lean/Sheaf lean/WeilConjectures",
+   "results": "No Mathlib scheme-level match. Existing source Curve.Picard supplies the toPic quotient equivalence; Sheaf.DivisorLineBundleAgreesSC supplies only effective-divisor comparison.",
+   "date": "2026-10-12",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DivisorClassCurve",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-def-pic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DivisorPicRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/DivisorPicRepresentative.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Divisor.nonempty_toPic_iso_module",
+  "statement": "theorem Divisor.nonempty_toPic_iso_module (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsConnectedCurve (C ↘ Spec (.of k))] [Smooth (C ↘ Spec (.of k))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] (D : C.Divisor) : Nonempty ((fromSkeleton C.Modules).obj (Divisor.toPic k C D).toMul.val ≅ D.moduleOfSmoothConnectedCurve k C (C ↘ Spec (.of k)))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T060729-L-2903279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T060729-L-2903279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

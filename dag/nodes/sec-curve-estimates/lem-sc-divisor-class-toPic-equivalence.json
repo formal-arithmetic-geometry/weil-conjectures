@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-divisor-class-toPic-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-divisor-class-curve",
+   "place": "Proof: comparison of divisor modules and the Picard homomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The existing point-ideal divisor-class equivalence",
+ "statement": "Let k be a field and C a Noetherian integral curve over k, with structure morphism smooth of relative dimension one. The homomorphism Divisor.toPic k C factors through an additive equivalence e : Cl(C) ≃+ Additive Pic(C), with e([D]) = Divisor.toPic k C D for every D. This uses the point-ideal construction, without any assertion about the explicit valuation-bounded module.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Curve/Picard.lean",
+  "place": "exists_divisorClassGroup_addEquiv_pic, its complete proof and docstring"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-divisor",
+  "def-sc-picard-group",
+  "lem-sc-pic-group"
+ ],
+ "proof": [
+  {
+   "text": "Use the already implemented theorem exists_divisorClassGroup_addEquiv_pic in Curve.Picard. Its proof computes the kernel of Divisor.toPic as principalDivisors using the positive and negative parts of D and the two ideal-sheaf comparison theorems nonempty_toModules_idealSheaf_iso_of_ord_eq and exists_ord_eq_of_nonempty_iso.",
+   "uses": [
+    "def-sc-divisor",
+    "lem-sc-pic-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The same implementation proves surjectivity using Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj, then applies QuotientAddGroup.quotientAddEquivOfEq and quotientKerEquivOfSurjective. On a divisor the quotient equivalence computes to Divisor.toPic by reflexivity. The entire implementation is already present, and is not restated in a new Lean module.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-picard-group"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-divisor",
+  "lem-sc-pic-group",
+  "def-sc-invertible-module",
+  "def-sc-picard-group"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Curve/Picard.lean",
+  "place": "exists_divisorClassGroup_addEquiv_pic, its complete proof and docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Divisor class group Picard group smooth integral curve; divisor module and point-ideal dual comparison",
+   "results": "UNAVAILABLE: service returned Internal Server Error (two attempts).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Divisor module represented by product of dual point ideals on a smooth curve",
+   "results": "Only elliptic curve coordinate ideals (WeierstrassCurve.Affine.CoordinateRing.XYIdeal) and ring-level ClassGroup/PicardGroup results; no scheme module comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg divisor.*module|toPic Mathlib/AlgebraicGeometry Mathlib/RingTheory/PicardGroup.lean; rg associatedModule|moduleOfSmoothConnectedCurve lean/Sheaf lean/WeilConjectures",
+   "results": "No Mathlib scheme-level match. Existing source Curve.Picard supplies the toPic quotient equivalence; Sheaf.DivisorLineBundleAgreesSC supplies only effective-divisor comparison.",
+   "date": "2026-10-12",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DivisorClassCurve",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-def-pic",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.Picard",
+  "declaration": "AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic",
+  "statement": "theorem exists_divisorClassGroup_addEquiv_pic {k : Type u} [Field k] {C : Scheme.{u}} [C.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsCurve (C ↘ Spec (.of k))] [IsIntegral C] [IsNoetherian C] : ∃ e : C.DivisorClassGroup ≃+ Additive C.Pic, ∀ D : C.Divisor, e (QuotientAddGroup.mk D) = Divisor.toPic k C D",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T060729-L-2903279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T060729-L-2903279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

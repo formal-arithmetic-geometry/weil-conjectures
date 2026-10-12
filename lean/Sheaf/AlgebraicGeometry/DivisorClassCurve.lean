@@ -7,12 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DivisorModuleLocal
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
-import Sheaf.AlgebraicGeometry.DivisorModule
-import Sheaf.AlgebraicGeometry.FunctionField
-import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
-import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.PicardFunctor
+import Sheaf.AlgebraicGeometry.DivisorPicRepresentative
+import WeilConjectures.AlgebraicGeometry.Curve.Picard
 
 /-!
 # Divisor classes and the Picard group of a smooth connected curve
@@ -64,6 +60,21 @@ theorem exists_divisorClassGroup_addEquiv_pic_associatedModule
       ∀ D : C.Divisor,
         Nonempty ((fromSkeleton C.Modules).obj (e (QuotientAddGroup.mk D)).toMul.val ≅
           D.moduleOfSmoothConnectedCurve k C f) := by
-  sorry
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  let : IsIntegral C := (C.smooth_connected_curve_local_rings k f).choose
+  let : IsNoetherian C := isNoetherian_of_locallyOfFiniteType f
+  let : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) := by
+    change SmoothOfRelativeDimension 1 f
+    exact (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := f))
+  let : IsCurve (C ↘ Spec (.of k)) := by change IsCurve f; infer_instance
+  let : IsConnectedCurve (C ↘ Spec (.of k)) := by
+    change IsConnectedCurve f
+    infer_instance
+  let : Smooth (C ↘ Spec (.of k)) := by change Smooth f; infer_instance
+  obtain ⟨e, he⟩ := exists_divisorClassGroup_addEquiv_pic (k := k) (C := C)
+  refine ⟨e, fun D ↦ ?_⟩
+  rw [he D]
+  exact Divisor.nonempty_toPic_iso_module k C D
 
 end AlgebraicGeometry.Scheme
