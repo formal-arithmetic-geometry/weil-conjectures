@@ -7886,3 +7886,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficientsForward (stage 3; reviewer PASS; after a return; landing 20261012T135259-L-1682647 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Curve.PrincipalDivisorOpenExtension (stage 3; reviewer PASS; first push; landing 20261012T135300-L-1683058 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/P2/Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation (stage 3; reviewer PASS; first push; landing 20261012T135300-L-1683493 (interface); batch 20261012T135212; modules 2; new nodes 2)
+- 13:53 L: merged deliver/P2/Sheaf.AlgebraicGeometry.DivisorPicRepresentative (stage 3; reviewer PASS; first push; landing 20261012T135300-L-1683904 (interface); batch 20261012T135212; modules 2; new nodes 1)

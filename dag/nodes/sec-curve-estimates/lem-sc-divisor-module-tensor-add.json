@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-divisor-module-tensor-add",
+ "kind": "statement",
+ "title": "Tensor product of explicit divisor modules realizes addition",
+ "statement": "Let $k$ be an algebraically closed field and $C$ a smooth connected curve over $k$ [def-sc-curves], with structure morphism $f:C\\to\\operatorname{Spec}k$. For any two divisors $A,B$ [def-sc-divisor], their valuation-bounded modules satisfy $\\mathcal O_C(A)\\otimes_{\\mathcal O_C}\\mathcal O_C(B)\\cong\\mathcal O_C(A+B)$, with tensor product as in [def-pur-sheaf-tensor-product]. No properness or effectiveness is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-divisor-class-curve.md",
+  "place": "Proof, homomorphism assertion: multiplication of rational sections; compare Stacks Divisors Tag 02SL."
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-divisor",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For sections s of O(A) and t of O(B) on an open V, take pointwise product st. It is locally constant. At a closed point either a factor is zero, or additivity of the order gives ord(st)+A(P)+B(P)=(ord(s)+A(P))+(ord(t)+B(P))>=0. Pointwise multiplication is bilinear over the regular-section scalar action and commutes with restriction. The universal property of the sheafified tensor product induces O(A) tensor O(B) to O(A+B).",
+   "uses": [
+    "def-sc-divisor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a uniformizer t at a closed point P. Apply lem-sc-divisor-module-local to A, B and A+B with this same t and intersect the three neighbourhoods. On their intersection the source factors have generators t^(-A(P)) and t^(-B(P)) and the target has generator t^(-A(P)-B(P)). The product morphism becomes O tensor O to O, the monoidal unit multiplication, which is an isomorphism.",
+   "uses": [
+    "lem-sc-divisor-module-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These neighbourhoods cover all closed points and also the generic point, since every nonempty open contains it and a closed point exists. Every point is closed or generic by lem-sc-smooth-connected-curve-local-rings. The local inverses agree on overlaps as inverses of the same multiplication morphism, so they glue to its global inverse by the sheaf property. This gives the stated nonempty isomorphism.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "def-sc-divisor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-divisor",
+  "def-pur-sheaf-tensor-product",
+  "lem-sc-divisor-module-local",
+  "lem-sc-smooth-connected-curve-local-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-def-pic/lem-sc-divisor-class-curve.md",
+  "place": "Expansion of the multiplication-isomorphism step in lem-sc-divisor-toPic-representative; Stacks 02SL supplies valuation additivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of modules associated to divisors is the module of the sum",
+   "results": "UNAVAILABLE: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf associated to a divisor on a smooth curve respects addition by tensor product",
+   "results": "Eight hits, including Proj.add_apply and elliptic-curve ideal class identities; none states the explicit scheme divisor-module tensor comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleOfSmoothConnectedCurve|nonempty_tensorObj_dual_iso_unit",
+   "results": "msearch grep found no hits. Direct rg on Sheaf found only DivisorModule, DivisorModuleLocal, DivisorLineBundleAgreesSC and the representative/class comparison. Mathlib AlgebraicGeometry/Modules has no divisor construction; ring-level PicardGroup is not this sheaf statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DivisorPicRepresentative",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-divisor-class-curve",
+   "place": "Proof, homomorphism assertion: multiplication identifies O(A) tensor O(B) with O(A+B).",
+   "via": [
+    "lem-sc-divisor-toPic-representative"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-def-pic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DivisorModuleTensorAdd",
+  "file": "lean/Sheaf/AlgebraicGeometry/DivisorModuleTensorAdd.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Divisor.nonempty_module_tensor_add_iso",
+  "statement": "theorem Divisor.nonempty_module_tensor_add_iso (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] (A B : C.Divisor) : Nonempty (A.moduleOfSmoothConnectedCurve k C f ⊗ B.moduleOfSmoothConnectedCurve k C f ≅ (A + B).moduleOfSmoothConnectedCurve k C f)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T135300-L-1683904",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T135300-L-1683904",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
