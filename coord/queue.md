@@ -1,6 +1,6 @@
 # Work queue
 
-60 items; claim with `tools/claim.py next <group> [--stage N]`.
+61 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -22,7 +22,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (52)
+## Stage 3: modules to prove (53)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -33,7 +33,6 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder` | 2 | 1 | proof |
 | `Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.KernelCokernel` | 2 | 1 | proof |
@@ -69,7 +68,6 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteCechMathlibComparison` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic` | 6 | 1 | proof |
-| `Sheaf.Topology.IrreducibleIntegerExtensionVanishing` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison` | 7 | 1 | proof |
@@ -77,7 +75,10 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.Topology.ClosedUnionCohomologyVanishing` | 7 | 1 | proof |
 | `Sheaf.Topology.CohomologyReductionConstantSubsheaves` | 7 | 1 | proof |
 | `Sheaf.Topology.ConstantSubsheafFiniteFiltration` | 7 | 1 | proof |
+| `Sheaf.Topology.IrreducibleNoetherianConstantAcyclic` | 7 | 1 | proof |
+| `Sheaf.Topology.NoetherianOpenClosedCohomologySequence` | 7 | 1 | proof |
 | `Sheaf.Topology.ClosedImmersionPushforwardCohomology` | 8 | 1 | proof |
+| `Sheaf.Topology.IrreducibleConstantSections` | 8 | 1 | proof |
 
 Waiting, not claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
 
