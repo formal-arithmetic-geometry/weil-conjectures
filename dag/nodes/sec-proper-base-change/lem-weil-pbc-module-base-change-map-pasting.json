@@ -29,52 +29,54 @@
  ],
  "proof": [
   {
-   "text": "*(1) Conventions.* For a morphism of schemes $k:Y\\to Z$ [def-pc-scheme], the adjunction $k^*\\dashv k_*$ of pullback and pushforward of modules [def-pc-module-pullback] (Stacks, Sheaves, Lemma 0096), with unit $\\eta_k$, gives the bijection $\\operatorname{Hom}_{\\mathcal O_Y}(k^*\\mathcal M,\\mathcal N)\\to\\operatorname{Hom}_{\\mathcal O_Z}(\\mathcal M,k_*\\mathcal N)$, $\\psi\\mapsto k_*(\\psi)\\circ\\eta_{k,\\mathcal M}$, for $\\mathcal O_Z$-modules $\\mathcal M$ and $\\mathcal O_Y$-modules $\\mathcal N$ [def-weil-sheaf-of-modules-category]; it is the morphism *corresponding* to $\\psi$ in the statement. In particular two morphisms $\\psi_1,\\psi_2:k^*\\mathcal M\\to\\mathcal N$ are equal as soon as $k_*(\\psi_1)\\circ\\eta_{k,\\mathcal M}=k_*(\\psi_2)\\circ\\eta_{k,\\mathcal M}$, and every $\\phi:\\mathcal M\\to k_*\\mathcal N$ is $k_*(\\psi)\\circ\\eta_{k,\\mathcal M}$ for exactly one $\\psi$. The unit is natural: $k_*k^*(\\phi)\\circ\\eta_{k,\\mathcal M}=\\eta_{k,\\mathcal M'}\\circ\\phi$ for $\\phi:\\mathcal M\\to\\mathcal M'$. Pushforward is computed on sections, $(k_*\\mathcal N)(W)=\\mathcal N(k^{-1}W)$ and $k_*(\\psi)_W=\\psi_{k^{-1}W}$; hence for morphisms $a:Z'\\to Y$, $b:Y\\to W$ the functors $(b\\circ a)_*$ and $b_*\\circ a_*$ from $\\mathcal O_{Z'}$-modules to $\\mathcal O_W$-modules are equal (Stacks, Sheaves, Lemma 0097): same sections $\\mathcal N(a^{-1}b^{-1}V)$, same maps, and the same $\\mathcal O_W$-module structure because $(b\\circ a)^\\sharp=b_*(a^\\sharp)\\circ b^\\sharp$ (Stacks, Sheaves, Definition 0093). Consequently, for a commutative square $f\\circ v=u\\circ f_1$ as in the statement, $f_*v_*=(f\\circ v)_*=(u\\circ f_1)_*=u_*f_{1*}$. For the rectangle of the statement this gives the equalities of functors $(g\\circ h)_*=g_*h_*$, $(g'\\circ h')_*=g'_*h'_*$, $g_*f'_*=f_*g'_*$, $h_*f''_*=f'_*h'_*$, and hence $(g\\circ h)_*f''_*=g_*h_*f''_*=g_*f'_*h'_*=f_*g'_*h'_*=f_*(g'\\circ h')_*$; these identifications are used without comment below. All of this is the definition of an adjunction and of pushforward.",
+   "text": "Form the right-adjoint square as pushforwardComp(g′,f).hom followed by pushforwardCongr of the square equality and pushforwardComp(f′,g).inv. Its inverse mate under the pinned tensor-pullback adjunctions is a natural transformation. The unit identity unit_mateEquiv_symm and injectivity of the adjunction Hom equivalence identify each component with the already defined moduleBaseChangeMap. This is the proved private helper baseChangeSquare_app.",
    "uses": [
     "def-pc-scheme",
     "def-pc-module-pullback",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemmas 0096 and 0097 and Definition 0093; sectionwise pushforward composition and the pullback-pushforward adjunction"
+   }
+  },
+  {
+   "text": "The right-adjoint square of the outer rectangle is the horizontal paste of the two inner right-adjoint squares, precomposed with pushforwardComp(h′,g′).inv and postcomposed with pushforwardComp(h,g).hom. Check components on opens: the pushforward composition maps are identities and pushforwardCongr is restriction along the equality of inverse-image opens. The two restrictions compose by functoriality, and the two resulting maps of opens agree because opens form a thin category. This is the proved private helper pushforwardSquare_pasting.",
+   "uses": [
+    "def-pc-scheme",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 0096 (sheaves-lemma-adjoint-pullback-pushforward-modules: f^* left adjoint to f_* on modules), Lemma 0097 (sheaves-lemma-push-pull-composition-modules: (g\\circ f)_*=g_*\\circ f_*, (g\\circ f)^*\\cong f^*g^*) and Definition 0093 (sheaves-definition-composition-maps-ringed-spaces); the verification itself is omitted in Stacks, Cohomology, Remark 0ATM (cohomology-remark-compose-base-change-horizontal) and is written out here by an agent"
+    "place": "Sheaves, Lemmas 0096 and 0097 and Definition 0093; sectionwise pushforward composition and the pullback-pushforward adjunction"
    }
   },
   {
-   "text": "*(2) The base change map is well defined and natural.* For the square $f\\circ v=u\\circ f_1$ and an $\\mathcal O_X$-module $\\mathcal F$, $f_*(\\eta_{v,\\mathcal F}):f_*\\mathcal F\\to f_*v_*v^*\\mathcal F=u_*f_{1*}v^*\\mathcal F$ (step (1)) is a morphism of $\\mathcal O_S$-modules, so by step (1) there is exactly one $\\beta_{\\mathcal F}:u^*f_*\\mathcal F\\to f_{1*}v^*\\mathcal F$ with $$u_*(\\beta_{\\mathcal F})\\circ\\eta_{u,f_*\\mathcal F}=f_*(\\eta_{v,\\mathcal F}).\\qquad(\\ast)$$ Naturality: for $\\phi:\\mathcal F\\to\\mathcal F'$ the two morphisms $\\beta_{\\mathcal F'}\\circ u^*f_*(\\phi)$ and $f_{1*}v^*(\\phi)\\circ\\beta_{\\mathcal F}$ from $u^*f_*\\mathcal F$ to $f_{1*}v^*\\mathcal F'$ have the adjoints $u_*(\\beta_{\\mathcal F'})\\circ\\eta_{u,f_*\\mathcal F'}\\circ f_*(\\phi)=f_*(\\eta_{v,\\mathcal F'}\\circ\\phi)$ (naturality of $\\eta_u$ and $(\\ast)$) and $u_*f_{1*}v^*(\\phi)\\circ f_*(\\eta_{v,\\mathcal F})=f_*(v_*v^*(\\phi)\\circ\\eta_{v,\\mathcal F})=f_*(\\eta_{v,\\mathcal F'}\\circ\\phi)$ ($(\\ast)$, $u_*f_{1*}=f_*v_*$ and naturality of $\\eta_v$), which agree; so they are equal by step (1).",
-   "uses": [
-    "def-pc-module-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 0096 (sheaves-lemma-adjoint-pullback-pushforward-modules: f^* left adjoint to f_* on modules), Lemma 0097 (sheaves-lemma-push-pull-composition-modules: (g\\circ f)_*=g_*\\circ f_*, (g\\circ f)^*\\cong f^*g^*) and Definition 0093 (sheaves-definition-composition-maps-ringed-spaces); the verification itself is omitted in Stacks, Cohomology, Remark 0ATM (cohomology-remark-compose-base-change-horizontal) and is written out here by an agent"
-   }
-  },
-  {
-   "text": "*(3) The composition isomorphisms $c_{b,a}$ exist and are unique.* Let $a:Z\\to Y$, $b:Y\\to W$ be morphisms of schemes. Composing the adjunctions $b^*\\dashv b_*$ and $a^*\\dashv a_*$ [def-pc-module-pullback] gives the composite adjunction $a^*b^*\\dashv b_*a_*$ [def-weil-pbc-composite-adjunction] (with $F=b^*$, $G=b_*$, $H=a^*$, $I=a_*$) with unit $b_*(\\eta_{a,b^*\\mathcal M})\\circ\\eta_{b,\\mathcal M}$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $L_1=a^*b^*\\dashv R_1=b_*a_*$ (this unit), $L_2=(b\\circ a)^*\\dashv R_2=(b\\circ a)_*$ (unit $\\eta_{b\\circ a}$) and $\\delta=\\mathrm{id}:R_2=(b\\circ a)_*\\to b_*a_*=R_1$ (the equality of step (1)): there is a unique natural transformation $c_{b,a}:a^*b^*\\to(b\\circ a)^*$ with $b_*a_*(c_{b,a,\\mathcal M})\\circ b_*(\\eta_{a,b^*\\mathcal M})\\circ\\eta_{b,\\mathcal M}=\\eta_{b\\circ a,\\mathcal M}$ for every $\\mathcal O_W$-module $\\mathcal M$, i.e. $(b\\circ a)_*(c_{b,a})\\circ b_*(\\eta_{a,b^*})\\circ\\eta_b=\\eta_{b\\circ a}$, and it is an isomorphism; uniqueness among isomorphisms follows from uniqueness among all natural transformations. This is the isomorphism $(b\\circ a)^*\\cong a^*b^*$ of Stacks, Sheaves, Lemma 0097 (obtained there from $(b\\circ a)_*=b_*a_*$ by uniqueness of adjoints), normalised by its compatibility with the units (Stacks, Categories, Lemma 0B65), so the composition isomorphisms in the statement are well defined.",
+   "text": "Let c and c′ be the inverse conjugates of the pushforward composition isomorphisms, exactly as in the theorem statement. Their hom and inv conjugate to pushforwardComp(h,g).hom and pushforwardComp(h′,g′).inv respectively by the inverse laws of conjugateIsoEquiv. The adjunctions for the successive pullbacks are the composite adjunctions.",
    "uses": [
     "def-pc-module-pullback",
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Lemma 0B65 (categories-lemma-transformation-between-functors-and-adjoints) and Sheaves, Lemma 0097 (sheaves-lemma-push-pull-composition-modules, literature/stacks-project/sheaves.tex: the isomorphism (g\\circ f)^*\\cong f^*g^* comes from (g\\circ f)_*=g_*f_* and uniqueness of adjoints); the unit characterisation is written out by an agent"
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "conjugateIsoEquiv, conjugateIsoEquiv_symm_apply_hom and conjugateIsoEquiv_symm_apply_inv; the composition adjunction is CategoryTheory.Adjunction.comp"
    }
   },
   {
-   "text": "*(4) The pasting identity.* Fix an $\\mathcal O_X$-module $\\mathcal F$, put $\\mathcal M=f_*\\mathcal F$, $\\mathcal G=g'^*\\mathcal F$, $c=c_{g,h}$, $c'=c_{g',h'}$ (step (3)), and let $\\rho=f''_*(c'_{\\mathcal F})\\circ\\beta^2_{\\mathcal G}\\circ h^*(\\beta^1_{\\mathcal F})\\circ c^{-1}_{\\mathcal M}:(g\\circ h)^*\\mathcal M\\to f''_*(g'\\circ h')^*\\mathcal F$ be the right-hand side. By step (2) for the outer rectangle, $\\beta^{12}_{\\mathcal F}$ is the unique morphism whose adjoint under $(g\\circ h)^*\\dashv(g\\circ h)_*$ is $f_*(\\eta_{g'\\circ h',\\mathcal F})$; so by step (1) it suffices to show $(g\\circ h)_*(\\rho)\\circ\\eta_{g\\circ h,\\mathcal M}=f_*(\\eta_{g'\\circ h',\\mathcal F})$ as maps $\\mathcal M\\to(g\\circ h)_*f''_*(g'\\circ h')^*\\mathcal F=f_*(g'\\circ h')_*(g'\\circ h')^*\\mathcal F$. Write $\\sigma=f''_*(c'_{\\mathcal F})\\circ\\beta^2_{\\mathcal G}\\circ h^*(\\beta^1_{\\mathcal F}):h^*g^*\\mathcal M\\to f''_*(g'\\circ h')^*\\mathcal F$, so $\\rho=\\sigma\\circ c^{-1}_{\\mathcal M}$.\\n(a) The defining equation of $c$ at $\\mathcal M$ (step (3), $b=g$, $a=h$) reads $(g\\circ h)_*(c_{\\mathcal M})\\circ g_*(\\eta_{h,g^*\\mathcal M})\\circ\\eta_{g,\\mathcal M}=\\eta_{g\\circ h,\\mathcal M}$; applying $(g\\circ h)_*(c^{-1}_{\\mathcal M})$ gives $(g\\circ h)_*(c^{-1}_{\\mathcal M})\\circ\\eta_{g\\circ h,\\mathcal M}=g_*(\\eta_{h,g^*\\mathcal M})\\circ\\eta_{g,\\mathcal M}$. Hence $(g\\circ h)_*(\\rho)\\circ\\eta_{g\\circ h,\\mathcal M}=g_*\\big(h_*(\\sigma)\\circ\\eta_{h,g^*\\mathcal M}\\big)\\circ\\eta_{g,\\mathcal M}$, using $(g\\circ h)_*=g_*h_*$.\\n(b) Naturality of $\\eta_h$ for $\\beta^1_{\\mathcal F}:g^*\\mathcal M\\to f'_*\\mathcal G$ gives $h_*h^*(\\beta^1_{\\mathcal F})\\circ\\eta_{h,g^*\\mathcal M}=\\eta_{h,f'_*\\mathcal G}\\circ\\beta^1_{\\mathcal F}$, so $h_*(\\sigma)\\circ\\eta_{h,g^*\\mathcal M}=h_*f''_*(c'_{\\mathcal F})\\circ h_*(\\beta^2_{\\mathcal G})\\circ\\eta_{h,f'_*\\mathcal G}\\circ\\beta^1_{\\mathcal F}$.\\n(c) Equation $(\\ast)$ of step (2) for the square $(f',f'',h,h')$ at $\\mathcal G$ is $h_*(\\beta^2_{\\mathcal G})\\circ\\eta_{h,f'_*\\mathcal G}=f'_*(\\eta_{h',\\mathcal G})$; with $h_*f''_*=f'_*h'_*$ this gives $h_*(\\sigma)\\circ\\eta_{h,g^*\\mathcal M}=f'_*\\big(h'_*(c'_{\\mathcal F})\\circ\\eta_{h',\\mathcal G}\\big)\\circ\\beta^1_{\\mathcal F}$.\\n(d) Inserting (c) into (a) and using $(\\ast)$ for the square $(f,f',g,g')$ at $\\mathcal F$, $g_*(\\beta^1_{\\mathcal F})\\circ\\eta_{g,\\mathcal M}=f_*(\\eta_{g',\\mathcal F})$, together with $g_*f'_*=f_*g'_*$: $(g\\circ h)_*(\\rho)\\circ\\eta_{g\\circ h,\\mathcal M}=f_*g'_*\\big(h'_*(c'_{\\mathcal F})\\circ\\eta_{h',\\mathcal G}\\big)\\circ f_*(\\eta_{g',\\mathcal F})=f_*\\big(g'_*h'_*(c'_{\\mathcal F})\\circ g'_*(\\eta_{h',g'^*\\mathcal F})\\circ\\eta_{g',\\mathcal F}\\big)$.\\n(e) The defining equation of $c'$ at $\\mathcal F$ (step (3), $b=g'$, $a=h'$, $(g'\\circ h')_*=g'_*h'_*$) says that the bracket equals $\\eta_{g'\\circ h',\\mathcal F}$. So $(g\\circ h)_*(\\rho)\\circ\\eta_{g\\circ h,\\mathcal M}=f_*(\\eta_{g'\\circ h',\\mathcal F})$, and $\\rho=\\beta^{12}_{\\mathcal F}$ by step (1). (This is the instance, for pullback and pushforward of modules, of the compatibility of mates with pasting of squares and with change of the adjunction along conjugate transformations; for the derived functors it is Stacks, Cohomology, Remark 0ATM, whose verification is omitted there.)",
+   "text": "Apply the injectivity of mateEquiv for the outer pair of adjunctions. Move the c′.inv and c.hom whiskerings through the mates correspondence with conjugateEquiv_mateEquiv_vcomp and mateEquiv_conjugateEquiv_vcomp. Apply mateEquiv_hcomp to the vertical paste of the two inverse mates. The result is precisely the equality of right-adjoint squares from step 2, using the conjugate identities from step 3. Evaluate at F and expand vertical composition and whiskering; the component identities from step 1 give the displayed four-arrow pasting equation.",
    "uses": [
-    "def-pc-module-pullback",
-    "def-pc-scheme"
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 0096 (sheaves-lemma-adjoint-pullback-pushforward-modules: f^* left adjoint to f_* on modules), Lemma 0097 (sheaves-lemma-push-pull-composition-modules: (g\\circ f)_*=g_*\\circ f_*, (g\\circ f)^*\\cong f^*g^*) and Definition 0093 (sheaves-definition-composition-maps-ringed-spaces); the verification itself is omitted in Stacks, Cohomology, Remark 0ATM (cohomology-remark-compose-base-change-horizontal) and is written out here by an agent"
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv_hcomp, mateEquiv_conjugateEquiv_vcomp and conjugateEquiv_mateEquiv_vcomp; an underived instance of Stacks Project, Cohomology, Remark 0ATM"
    }
   }
  ],
@@ -82,13 +84,15 @@
   "def-pc-scheme",
   "def-pc-module-pullback",
   "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Remark 0ATM (cohomology-remark-compose-base-change-horizontal) states the derived version and says 'We omit the verification'; the underived verification is written by an agent from Sheaves, Lemmas 0096, 0097 and Definition 0093 (literature/stacks-project/sheaves.tex) and Categories, Lemma 0B65 (literature/stacks-project/categories.tex)"
+  "place": "Cohomology, Remark 0ATM (underived module version); implemented by F2 using the generic mate-pasting laws in Mathlib/CategoryTheory/Adjunction/Mates.lean and sectionwise pushforward coherence from Sheaves, Lemmas 0096 and 0097"
  },
  "mathlib_searches": [
   {
@@ -172,5 +176,15 @@
   "group": "C1",
   "result": "fix",
   "note": "6 schemes, 7 maps (g',h'), squares g'f=f'g and h'f'=f''h, F:X.Modules; beta^1,beta^2 at g'^*F, beta^12 on (h≫g,h'≫g') via landed moduleBaseChangeMap; naturality = landed moduleBaseChangeMap_naturality; c_{g,h}^{-1}=(conj ... pushforwardComp h g).hom at f_*F, c_{g',h'}=(... h' g').inv at F, directions checked; four-arrow composite and endpoints"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135232-L-1664360",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
