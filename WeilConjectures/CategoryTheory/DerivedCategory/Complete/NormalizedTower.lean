@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
+public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 
 /-!
 # Strict models of normalized towers
@@ -377,5 +379,66 @@ lemma towerFunctor_map_homOfLE (n k : ℕ) :
     rfl
 
 end RTower
+
+section Smul
+
+variable {A A' : Type (u + 1)} [CommRing A] [CommRing A'] (f : A →+* A')
+
+lemma _root_.CategoryTheory.Sheaf.restrictScalars_map_smul (r : A)
+    {F G : Sheaf J (ModuleCat.{u + 1} A')} (g : F ⟶ G) :
+    (Sheaf.restrictScalars J f).map (f r • g) = r • (Sheaf.restrictScalars J f).map g := by
+  ext U x
+  rfl
+
+lemma _root_.CategoryTheory.Sheaf.smul_id_restrictScalars_obj {r : A} (hr : f r = 0)
+    (F : Sheaf J (ModuleCat.{u + 1} A')) :
+    r • 𝟙 ((Sheaf.restrictScalars J f).obj F) = 0 := by
+  rw [← CategoryTheory.Functor.map_id, ← Sheaf.restrictScalars_map_smul, hr, zero_smul,
+    Functor.map_zero]
+
+end Smul
+
+section Normalized
+
+variable {R : Type (u + 1)} [CommRing R] {A : ℕ → Type (u + 1)} [∀ n, CommRing (A n)]
+  (φ : ∀ {n m : ℕ}, n ≤ m → A m →+* A n) (ψ : ∀ n, R →+* A n)
+  (hψ : ∀ {n m : ℕ} (h : n ≤ m), (φ h).comp (ψ m) = ψ n)
+  (hφ : ∀ {n m k : ℕ} (h₁ : n ≤ m) (h₂ : m ≤ k), (φ h₁).comp (φ h₂) = φ (h₁.trans h₂))
+  {ϖ : R} (hψ₀ : ∀ n, ψ n (ϖ ^ n) = 0)
+  (hexact : ∀ a b : ℕ, Function.Exact (fun x : A (a + b) ↦ ψ (a + b) (ϖ ^ a) * x)
+    (fun x ↦ ψ (a + b) (ϖ ^ b) * x))
+  (hsurj : ∀ {n m : ℕ} (h : n ≤ m), Function.Surjective (φ h))
+  (hker : ∀ {n m : ℕ} (h : n ≤ m), RingHom.ker (φ h) = Ideal.span {ψ m (ϖ ^ n)})
+  (L : ∀ n : ℕ, DerivedCategory (Sheaf J (ModuleCat.{u + 1} (A n))))
+  (t : ∀ n : ℕ, L (n + 1) ⟶ (Sheaf.derivedRestrictScalars J (φ n.le_succ)).obj (L n))
+  (ht : ∀ n, Sheaf.IsDerivedBaseChange (t n))
+
+include hψ₀ in
+lemma smul_id_towerFunctor_obj (n : ℕ) :
+    ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op n)) = 0 := by
+  ext i : 1
+  exact Sheaf.smul_id_restrictScalars_obj (J := J) (ψ n) (hψ₀ n) _
+
+include hψ₀ hexact in
+lemma exact_smul_towerFunctor_obj (a b : ℕ) :
+    (ShortComplex.mk (ϖ ^ a • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (a + b))))
+      (ϖ ^ b • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (a + b)))) (by
+        rw [Linear.smul_comp, Category.id_comp, smul_smul, ← pow_add, add_comm,
+          smul_id_towerFunctor_obj φ ψ hψ hψ₀ L t])).Exact := by
+  refine HomologicalComplex.exact_of_degreewise_exact _ fun i ↦ ?_
+  have hxy : ψ (a + b) (ϖ ^ a) * ψ (a + b) (ϖ ^ b) = 0 := by
+    rw [← map_mul, ← pow_add, hψ₀]
+  have h := (Sheaf.exact_smul_of_flat J ((towerModel (φ := fun n ↦ φ n.le_succ) L t
+    (a + b)).flat i) _ _ hxy (hexact a b)).map (Sheaf.restrictScalars J (ψ (a + b)))
+  refine (ShortComplex.exact_iff_of_iso ?_).1 h
+  exact ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
+    (by simp only [Iso.refl_hom, Category.comp_id, Category.id_comp, ShortComplex.map_f]
+        rw [Sheaf.restrictScalars_map_smul, CategoryTheory.Functor.map_id]
+        rfl)
+    (by simp only [Iso.refl_hom, Category.comp_id, Category.id_comp, ShortComplex.map_g]
+        rw [Sheaf.restrictScalars_map_smul, CategoryTheory.Functor.map_id]
+        rfl)
+
+end Normalized
 
 end DerivedCategory
