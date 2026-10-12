@@ -59,7 +59,7 @@ theorem baseChange_morphism_projections {A B : Over S} (h : A ⟶ B) (T : Over S
       pullback.fst A.hom T.hom ≫ h.left ∧
     ((Over.pullback T.hom).map h).left ≫ pullback.snd B.hom T.hom =
       pullback.snd A.hom T.hom := by
-  sorry
+  constructor <;> simp [Over.pullback_map_left]
 
 /-- The map `g_X` exhibits `X_{T'}` as `X_T ×_T T'`, with compatible projections.
 Source: Stacks, Tag 01JX and pullback pasting (blueprint: def-pc-base-change).
@@ -70,7 +70,8 @@ theorem baseChange_iterated (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
     ∃ e : pullback f T'.hom ≅ pullback (pullback.snd f T.hom) g.left,
       e.hom ≫ pullback.fst (pullback.snd f T.hom) g.left = baseChangeMap f g ∧
       e.hom ≫ pullback.snd (pullback.snd f T.hom) g.left = pullback.snd f T'.hom := by
-  sorry
+  let h := isPullback_baseChangeMap f g
+  exact ⟨h.isoPullback, h.isoPullback_hom_fst, h.isoPullback_hom_snd⟩
 
 /-- `X ×_S Spec κ(t)` is the scheme-theoretic fibre of `pr_T` over `t`.
 Source: Stacks, Tag 01K0 (blueprint: def-pc-base-change).
@@ -84,7 +85,11 @@ theorem baseChange_fiber (f : X ⟶ S) (T : Over S) (t : T.left) :
         pullback.fst f (T.left.fromSpecResidueField t ≫ T.hom) ∧
       e.hom ≫ (pullback.snd f T.hom).fiberToSpecResidueField t =
         pullback.snd f (T.left.fromSpecResidueField t ≫ T.hom) := by
-  sorry
+  refine ⟨(pullbackLeftPullbackSndIso f T.hom
+    (T.left.fromSpecResidueField t)).symm, ?_, ?_⟩
+  · exact pullbackLeftPullbackSndIso_inv_fst f T.hom (T.left.fromSpecResidueField t)
+  · exact pullbackLeftPullbackSndIso_inv_snd_snd f T.hom
+      (T.left.fromSpecResidueField t)
 
 /-- The geometric fibre `X ×_S Spec Ω` at `t`, for a chosen algebraic closure `Ω` of `κ(t)`.
 The map from `Spec Ω` is induced by the residue-field embedding and the canonical point map.
@@ -110,7 +115,11 @@ theorem baseChange_section_characterization (f : X ⟶ S) (σ : SplitEpi f) (T :
       s ≫ pullback.snd f T.hom = 𝟙 T.left →
       s ≫ pullback.fst f T.hom = T.hom ≫ σ.section_ →
       s = sectionBaseChange f σ.section_ σ.id T := by
-  sorry
+  refine ⟨sectionBaseChange_snd f σ.section_ σ.id T, pullback.lift_fst .., ?_⟩
+  intro s hs₁ hs₂
+  apply pullback.hom_ext
+  · simpa only [sectionBaseChange, pullback.lift_fst] using hs₂
+  · simpa only [sectionBaseChange, pullback.lift_snd] using hs₁
 
 end
 end AlgebraicGeometry
