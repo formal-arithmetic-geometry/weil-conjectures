@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-relatively-flat-canonical-module-base-change",
+ "kind": "statement",
+ "title": "Canonical base change with ordinary module target for a relatively flat module",
+ "statement": "Choose shared derived-category localizations [def-pc-derived-category]. Let f:X → S be quasi-compact and separated, and let (g′:X′ → X,f′:X′ → S′,f,g:S′ → S) be cartesian [def-pc-fibre-product]. Let G be a quasi-coherent O_X-module [pqf-def-coherent] flat over S [def-pc-scheme-module-flat-over]. Assume tensorPullback g′ [def-pc-module-pullback] is additive. There exists c:Lg′*(G[0]) → (g′*G)[0] satisfying IsDerivedModulePullbackComparison [def-pc-derived-module-base-change-map], such that the canonical derived base-change map [def-pc-derived-base-change-map] followed by Rf′*(c) is invertible. No intrinsic flatness of G over O_X is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Proof, local affine reduction, flat Cech tensor comparison, and final canonical-map identification; Stacks Tag 0A1D"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-fibre-product",
+  "pqf-def-coherent",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-module-pullback",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Take a left-derived counit of the recorded tensor pullback and its single-complex identification to obtain c with the module-comparison predicate. Reduce locally on affine opens of S and S′, choose the finite alternating affine Cech complex, and use separatedness to make intersections affine. It computes Rf_*G. Relative flatness makes its terms flat over the base coordinate ring; flat-complex derived pullback is therefore ordinary tensor. Affine pullback of sections identifies that tensor complex with the Cech complex on the pulled-back cover, including its differentials. The Cech map characterization identifies the resulting invertible map with the canonical mate followed by Rf′_*c. Transport from the chosen pullback to the arbitrary cartesian square by its projection-preserving isomorphism; naturality of the composition comparisons and mates preserves the formula. Check invertibility locally on cohomology sheaves. The empty-scheme case uses zero complexes.",
+   "uses": [
+    "lem-pc-cech-resolution",
+    "lem-pc-base-change-map-cech",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-derived-module-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-module-base-change-map",
+  "lem-pc-base-change-map-cech",
+  "lem-pc-cech-resolution",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-weil-pbc-module-pullback-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Proof, local affine reduction, flat Cech tensor comparison, and final canonical-map identification; Stacks Tag 0A1D"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived pullback comparison is invertible for a flat quasi coherent module concentrated in degree zero",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change morphism with ordinary pullback target for a relatively flat module on quasi compact separated scheme; left derived counit at a flat module in degree zero",
+   "results": "Found scheme Flat.isStableUnderBaseChange and projective-resolution leftDerivedZeroIsoSelf. Neither states unbounded canonical module comparison or relatively flat canonical base change.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*derived|IsDerivedModulePullbackComparison in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology",
+   "results": "No matches. Local library has Nonempty iso in RelativelyFlatDerivedBaseChange and an existential Cech map, but no canonical isomorphism assertion in this generality. Blueprint searches for canonical derived pullback and canonical module base change found no matching blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 1: canonical relatively flat module comparison",
+   "via": [
+    "lem-pc-flat-invertible-canonical-derived-base-change",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyFlatCanonicalModuleBaseChange.lean",
+  "declaration": "AlgebraicGeometry.exists_isIso_canonicalModuleBaseChange_of_isFlatOver",
+  "statement": "theorem exists_isIso_canonicalModuleBaseChange_of_isFlatOver\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] [IsSeparated f]\n    (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')\n    (sq : IsPullback g' f' f g) [(Scheme.Modules.tensorPullback g').Additive]\n    (G : X.Modules) [SheafOfModules.IsQuasicoherent.{u} G]\n    (hflat : Scheme.Modules.IsFlatOver G f) :\n    ∃ c : (derivedPullback g').obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).obj\n            ((Scheme.Modules.tensorPullback g').obj G),\n      IsDerivedModulePullbackComparison g' G c ∧\n        IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w\n            ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫\n          (schemeDerivedDirectImage f').map c)",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T110258-L-613463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T110258-L-613463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

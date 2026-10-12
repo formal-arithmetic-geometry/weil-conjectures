@@ -7340,3 +7340,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:02 L: merged deliver/D2/Sheaf.AlgebraicGeometry.InvertibleSectionLocalization (stage 3; reviewer PASS; first push; landing 20261012T110257-L-613146 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:02 L: merged deliver/D2/Sheaf.AlgebraicGeometry.SchemeTorsorPullbackEquivariantHomIsIso (stage 3; reviewer PASS; first push; landing 20261012T110258-L-613270 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:02 L: merged deliver/D3/Sheaf.Algebra.Homology.QuasiIsoHomComplexMap (stage 3; reviewer PASS; first push; landing 20261012T110258-L-613365 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:02 L: merged deliver/D3/Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange (stage 3; reviewer PASS; first push; landing 20261012T110258-L-613463 (interface); batch 20261012T110249; modules 3; new nodes 2)

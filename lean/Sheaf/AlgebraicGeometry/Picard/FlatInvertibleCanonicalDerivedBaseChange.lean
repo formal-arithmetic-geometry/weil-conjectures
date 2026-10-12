@@ -9,9 +9,8 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeMapCech
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
+import Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 
 /-! # Canonical derived base change for a flat family and a line bundle
 
@@ -60,6 +59,18 @@ theorem isIso_derivedBaseChange_of_flat_invertible
     IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) := by
-  sorry
+  let F := Scheme.Modules.tensorPullback g'
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction g'
+  let : F.IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
+  have : F.Additive := CategoryTheory.rightExactFunctor_le_additiveFunctor _ _ F
+    (by
+      rw [CategoryTheory.rightExactFunctor_iff]
+      infer_instance)
+  obtain ⟨c, hc, hbc⟩ := exists_isIso_canonicalModuleBaseChange_of_isFlatOver
+    f g g' f' sq M (isFlatOver_of_isInvertible f M)
+  have : IsIso c := isIso_modulePullbackComparison_of_isFlatOver_identity
+    g' M (isFlatOver_of_isInvertible (𝟙 X) M) c hc
+  have := hbc
+  exact (isIso_comp_right_iff _ ((schemeDerivedDirectImage f').map c)).mp hbc
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-flat-module-canonical-derived-pullback",
+ "kind": "statement",
+ "title": "Invertibility of the canonical derived pullback comparison for an intrinsically flat module",
+ "statement": "Choose shared derived-category localizations [def-pc-derived-category]. Let a:X → Y be any scheme morphism [def-pc-scheme]. Assume tensorPullback a [def-pc-module-pullback] is additive. Let G be a quasi-coherent O_Y-module [pqf-def-coherent] with IsFlatOver G (identity Y) [def-pc-scheme-module-flat-over]. Every morphism c:La*(G[0]) → (a*G)[0] satisfying IsDerivedModulePullbackComparison [def-pc-derived-module-base-change-map] is invertible. No base-change square or direct image occurs.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 06YD and 06YJ: bounded-above flat complexes are K-flat and compute derived pullback; single-complex specialization"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "pqf-def-coherent",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-derived-module-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Affine-local flatness over the identity and quasi-coherence imply stalkwise flatness and hence exactness of tensor with G. The single complex G[0] is bounded above and termwise flat, so apply flatComplexDerivedPullback. Identify its functor F with tensorPullback using the specified object and map equalities. Its left-derived counit is invertible at this single complex. By the left-derived universal property, any left-derived counit on the recorded derived functor differs by an invertible natural comparison, so is invertible there too. The module-comparison predicate expresses c as this component followed by the localized single-complex pullback isomorphism. Both factors are invertible. The zero module and empty schemes satisfy the same argument.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "def-pc-derived-module-base-change-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-module-base-change-map",
+  "lem-pc-flat-complex-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 06YD and 06YJ: bounded-above flat complexes are K-flat and compute derived pullback; single-complex specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived pullback comparison is invertible for a flat quasi coherent module concentrated in degree zero",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change morphism with ordinary pullback target for a relatively flat module on quasi compact separated scheme; left derived counit at a flat module in degree zero",
+   "results": "Found scheme Flat.isStableUnderBaseChange and projective-resolution leftDerivedZeroIsoSelf. Neither states unbounded canonical module comparison or relatively flat canonical base change.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*derived|IsDerivedModulePullbackComparison in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology",
+   "results": "No matches. Local library has Nonempty iso in RelativelyFlatDerivedBaseChange and an existential Cech map, but no canonical isomorphism assertion in this generality. Blueprint searches for canonical derived pullback and canonical module base change found no matching blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 2: cancellation of the flat single-module pullback comparison",
+   "via": [
+    "lem-pc-flat-invertible-canonical-derived-base-change",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModuleCanonicalDerivedPullback.lean",
+  "declaration": "AlgebraicGeometry.isIso_modulePullbackComparison_of_isFlatOver_identity",
+  "statement": "theorem isIso_modulePullbackComparison_of_isFlatOver_identity\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (a : X ⟶ Y) [(Scheme.Modules.tensorPullback a).Additive]\n    (G : Y.Modules) [SheafOfModules.IsQuasicoherent.{u} G]\n    (hflat : Scheme.Modules.IsFlatOver G (𝟙 Y))\n    (c : (derivedPullback a).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj\n            ((Scheme.Modules.tensorPullback a).obj G))\n    (hc : IsDerivedModulePullbackComparison a G c) : IsIso c",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T110258-L-613463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T110258-L-613463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
