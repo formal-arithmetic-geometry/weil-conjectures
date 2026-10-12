@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-fraction-field-sections-base-change",
+ "kind": "statement",
+ "title": "Normalized degree-zero base change to the fraction field",
+ "statement": "Let A be a domain with fraction field K, X a quasi-compact scheme [def-weil-pbc-quasi-compact-scheme], f:X\\to\\operatorname{Spec}(A) a separated morphism [def-weil-proper-morphism], and L a quasi-coherent module [pqf-def-coherent]. Form X_K=X\\times_{\\operatorname{Spec}(A)}\\operatorname{Spec}(K) [def-pc-base-change], with projections g:X_K\\to X and f_K:X_K\\to\\operatorname{Spec}(K). Use scalar actions induced by f and f_K. There exists a K-linear isomorphism e:K\\otimes_A\\Gamma(X,L)\\xrightarrow{\\sim}\\Gamma(X_K,g^*L) such that e(1\\otimes s)=\\eta_L(s) for every global section s, where g^* is the categorical module pullback and \\eta is its adjunction unit [def-pc-module-pullback]. No valuation, properness, flatness of f, finite presentation, or triviality is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-pc-base-change",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Cohomology of Schemes, Lemma lemma-flat-base-change-cohomology, degree zero and its canonical section comparison; used in Tag 0EX8 general-case proof"
+ },
+ "proof": [
+  {
+   "text": "A fraction field is flat over its domain. Apply H.baseChange_bijective_of_isSeparated at q=0 to f and L. This gives the K-linear comparison isomorphism on Ext-based degree-zero cohomology.",
+   "uses": [
+    "lem-pc-flat-cohomology-separated",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify degree-zero cohomology with sections using H.zeroLinearEquiv, restricting scalars through the displayed structure maps. Tensor the inverse identification on X and compose with the preceding comparison and the identification on X_K. This yields the asserted K-linear isomorphism.",
+   "uses": [
+    "pqf-def-cohomology",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Track the degree-zero section augmentation through H.zeroLinearEquiv and the inverse-image coefficient adjunction defining H.baseChangeLinear. On 1 tensor s the comparison gives the adjunction-unit image of s. This is the normalization in the degree-zero Cech inverse-image comparison. The formula also holds on empty X.",
+   "uses": [
+    "lem-pc-cech-inverse-image-degree-zero",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-cohomology-separated",
+  "def-pc-flat-cohomology-comparison",
+  "pqf-def-cohomology",
+  "lem-pc-cech-inverse-image-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Cohomology of Schemes, Lemma lemma-flat-base-change-cohomology, degree zero and its canonical section comparison; used in Tag 0EX8 general-case proof; degree-zero comparison glue specified by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of global sections quasi coherent sheaf to fraction field canonical tensor comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of global sections of a quasi-coherent sheaf along localization of the base ring",
+   "results": "Module.flat_of_isLocalized_span; Module.Flat.of_isLocalizedModule; Module.flat_iff_of_isLocalization; Module.Flat.localizedModule; AlgebraicGeometry.Scheme.Hom.flat_appLE; Module.flat_of_localized_span; AlgebraicGeometry.Flat.flat_appLE; Module.flat_of_localized_maximal",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric statement; use the existing library and algebraic lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "flat_appLE|IsSMulRegular|eq_of_locally_eq",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Cover/Open.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric statement; use the existing library and algebraic lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ValuationGenericTrivializingGenerator",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "valuation-ring generic triviality, flat base change identifying H^0(X,L) tensor_A K with H^0(X_K,L_K)",
+   "via": [
+    "lem-sc-valuation-generic-trivializing-generator",
+    "lem-sc-picard-locus-closed-valuation-triviality",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FractionFieldSectionsBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FractionFieldSectionsBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_fractionField_sections_baseChange",
+  "statement": "theorem exists_fractionField_sections_baseChange\n    (A : Type u) [CommRing A] [IsDomain A]\n    (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]\n    {X : Scheme.{u}} [CompactSpace X]\n    (f : X ⟶ Spec (CommRingCat.of A)) [IsSeparated f]\n    (L : X.Modules) [L.IsQuasicoherent] :\n    let g := pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap A K)))\n    let fK := pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap A K)))\n    let M := (ModuleCat.restrictScalars\n      ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj\n      ((SheafOfModules.evaluation X.ringCatSheaf (op ⊤)).obj L)\n    let MK := (ModuleCat.restrictScalars\n      ((Scheme.ΓSpecIso (CommRingCat.of K)).inv ≫ fK.appTop).hom).obj\n      ((SheafOfModules.evaluation _ (op ⊤)).obj ((Modules.pullback g).obj L))\n    ∃ e : K ⊗[A] M ≃ₗ[K] MK,\n      ∀ s : Γ(L, ⊤), e (1 ⊗ₜ[A] s) =\n        ((pullbackPushforwardAdjunction g).unit.app L).app ⊤ s",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T235559-L-2202947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T235559-L-2202947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

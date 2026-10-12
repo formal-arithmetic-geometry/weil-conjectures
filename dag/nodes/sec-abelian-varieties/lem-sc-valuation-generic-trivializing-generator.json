@@ -29,66 +29,50 @@
  ],
  "proof": [
   {
-   "text": "Proper coherent cohomology gives finite presentation of H^0(X,L) over A, with the scalar action induced by the structural map f.",
+   "text": "Use finitePresentation_moduleCohomology_zero_of_valuationRing and the degree-zero right-derived-functor isomorphism to make the actual section module, with scalars restricted along the structural map, finitely presented.",
    "uses": [
     "lem-sc-valuation-proper-coherent-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
-   }
+   "elementary": false
   },
   {
-   "text": "For any nonzero a in A, multiplication by a on each locally free rank-one L stalk is injective: flatness of X/A preserves the injection A --a--> A on stalks, and a local basis identifies L with O_X. If a section is killed by a, all its germs vanish; the section vanishes. Thus H^0(X,L) is torsion-free. Apply the valuation-ring finite-free lemma to obtain a finite A-basis.",
+   "text": "The proved injective_smul_sections_of_flat kills its torsion submodule. Since A is a valuation domain, Mathlib flat_iff_torsion_eq_bot_of_isBezout and free_of_flat_of_isLocalRing make this finite module free. Choose its finite basis b.",
    "uses": [
-    "lem-sc-valuation-fp-torsionfree-free",
-    "def-sc-invertible-module",
-    "def-weil-scheme-morphism-properties"
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "lem-sc-valuation-fp-torsionfree-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply flat base change along A to K. The resulting K-module of sections is H^0(X_K,L_K). A trivialization of L_K and the canonical K-global-function isomorphism identify it with the one-dimensional K-module K. The base change of a finite A-basis is a K-basis, so its index set has cardinality one. Its sole element s gives the asserted bijection A to Gamma(X,L).",
+   "text": "Apply the normalized fraction-field section comparison and map b.baseChange K along it, obtaining a K-basis bK of generic sections. Uniqueness of left adjoints identifies tensor and categorical pullbacks. The given generic trivialization and canonical global-function isomorphism give a K-linear isomorphism K to the generic sections. Their finrank is one, so Basis.nonempty_unique_index_of_finrank_eq_one makes the index unique. Its sole section s satisfies the A-bijection by b.repr and b.sum_repr.",
    "uses": [
-    "lem-pc-flat-base-change-cohom"
+    "lem-sc-fraction-field-sections-base-change",
+    "def-pc-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Under a generic trivialization, s_K corresponds to a nonzero scalar in K, which is a unit. Thus its zero ideal is the unit ideal. The zero-scheme pullback formula identifies that ideal with the pullback of the zero ideal of s. The tensor and categorical pullbacks are canonically isomorphic as left adjoints to the same pushforward.",
+   "text": "Normalization identifies bK(i) with the adjunction-unit image of s. It is nonzero; under the generic trivialization its coefficient is a nonzero field scalar, hence a unit. Thus it is a free generator on the generic fibre. Naturality of the pullback unit shows the pulled-back homOfGlobalSection sends a free generator of the pulled-back unit module to this section. On each affine open its zero ideal is span{1}=top by Hom.ideal_zeroLocus. Hom.comap_zeroLocus and IdealSheafData.ext give the required equality.",
    "uses": [
     "lem-pc-zero-scheme-properties",
-    "lem-pc-module-pullback-adjunction"
+    "def-sc-invertible-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-valuation-proper-coherent-sections",
+  "lem-sc-flat-invertible-sections-torsion-free",
   "lem-sc-valuation-fp-torsionfree-free",
-  "def-sc-invertible-module",
-  "def-weil-scheme-morphism-properties",
-  "lem-pc-flat-base-change-cohom",
+  "lem-sc-fraction-field-sections-base-change",
+  "def-pc-module-pullback",
   "lem-pc-zero-scheme-properties",
-  "lem-pc-module-pullback-adjunction"
+  "def-sc-invertible-module"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-on-morphisms.tex",
-  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8, general-case proof"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EX8",
+  "place": "General-case proof through the rank-one generator; Y2 formalizes finite-free/rank-one and the generic zero ideal, reducing only the normalized degree-zero base-change bridge."
  },
  "mathlib_searches": [
   {
@@ -145,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T194127-L-460411",
+  "landing": "20261012T235559-L-2202947",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

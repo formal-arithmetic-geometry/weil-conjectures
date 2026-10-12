@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-flat-invertible-sections-torsion-free",
+ "kind": "statement",
+ "title": "Nonzero base scalars act injectively on sections of an invertible module",
+ "statement": "Let A be a domain, let f:X\\to\\operatorname{Spec}(A) be flat [def-weil-flat-morphism], and let L be an invertible module on X [def-sc-invertible-module]. For every a\\in A\\setminus\\{0\\}, multiplication by the image of a under A\\simeq\\Gamma(\\operatorname{Spec}(A),\\mathcal O)\\to\\Gamma(X,\\mathcal O_X) is injective on \\Gamma(X,L). No properness, finite-presentation, valuation, or nonemptiness hypothesis is needed.",
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sc-invertible-module"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EX8",
+  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, general-case proof, torsion-freeness of global sections by flatness"
+ },
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods U_x with free generators e_x of L. Local invertibility supplies these neighbourhoods; they cover X.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Flatness gives flat maps on the affine charts (Mathlib Scheme.Hom.flat_appLE). Compose with GammaSpecIso.inv using RingHom.Flat.of_bijective and RingHom.Flat.comp. Module.Flat.isSMulRegular_of_nonZeroDivisors then makes multiplication by each nonzero a injective on Gamma(U_x,O).",
+   "uses": [
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write restrictions of s,t as b e_x,c e_x. Restrict as=at, use map_smul, and cancel the free generator to get a b=a c in Gamma(U_x,O). The preceding injection gives b=c, so the restricted sections agree. TopCat.Sheaf.eq_of_locally_eq' on the covering U_x gives s=t.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0EX8",
+  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, general-case proof, torsion-freeness of global sections by flatness; affine and scalar-action glue formalized by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of an invertible sheaf on a flat scheme over a domain are torsion free",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of global sections of a quasi-coherent sheaf along localization of the base ring",
+   "results": "Module.flat_of_isLocalized_span; Module.Flat.of_isLocalizedModule; Module.flat_iff_of_isLocalization; Module.Flat.localizedModule; AlgebraicGeometry.Scheme.Hom.flat_appLE; Module.flat_of_localized_span; AlgebraicGeometry.Flat.flat_appLE; Module.flat_of_localized_maximal",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric statement; use the existing library and algebraic lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "flat_appLE|IsSMulRegular|eq_of_locally_eq",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Cover/Open.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric statement; use the existing library and algebraic lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ValuationGenericTrivializingGenerator",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "valuation-ring generic triviality, the assertion that H^0(X,L) is torsion-free by flatness",
+   "via": [
+    "lem-sc-valuation-generic-trivializing-generator",
+    "lem-sc-picard-locus-closed-valuation-triviality",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatInvertibleSectionsTorsionFree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.injective_smul_sections_of_flat",
+  "statement": "theorem injective_smul_sections_of_flat\n    (A : Type u) [CommRing A] [IsDomain A]\n    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [Flat f]\n    (L : X.Modules) [L.IsInvertible] (a : A) (ha : a ≠ 0) :\n    Function.Injective (fun s : Γ(L, ⊤) ↦\n      ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom a • s)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T235559-L-2202947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T235559-L-2202947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
