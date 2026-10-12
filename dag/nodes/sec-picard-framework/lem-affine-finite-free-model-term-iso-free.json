@@ -1,0 +1,123 @@
+{
+ "id": "lem-affine-finite-free-model-term-iso-free",
+ "kind": "lemma",
+ "title": "Finite-free isomorphism for affine model terms",
+ "statement": "For each integer degree, the transported term of the explicit affine finite-free model is isomorphic to a finite free localized structure-sheaf module when K_n is finite free.",
+ "source": {
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "Tag 068C, affine finite free resolution argument"
+ },
+ "stmt_deps": [
+  "def-affine-finite-free-model-complex"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the model and split according to whether the integer degree is in the image of embeddingDownNat. In the image, extendXIso identifies the extended term with the corresponding sheafified module. Outside the image, isZero_extend_X makes it zero.",
+   "uses": [
+    "def-affine-finite-free-model-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an in-range term, use Module.Free.chooseBasis and ChooseBasisIndex.fintype, reindex the finite basis by ULift (Fin m), and map its repr.toModuleIso through tilde. Compose with tildeFinsupp.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restriction is a left adjoint (restrictAdjunction), and the inverse overEquiv is an equivalence, so both preserve coproducts. Apply mapFreeIso to restrictUnitIso and sheafOfModulesEquivOverInverseUnit, and compose the mapped isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Outside the embedding image, map_isZero transports zero through the inverse equivalence. The free sheaf on ULift (Fin 0) is zero: Sigma.hom_ext proves its identity equals zero, since there are no indices. IsZero.iso finishes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-affine-finite-free-model-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "Tag 068C"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free module has a finite basis",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: service returned Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of sheaves of modules preserves free modules",
+   "date": "2026-10-13",
+   "results": "Generic free sheaf API; no theorem for this explicit model.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.mapFreeIso",
+   "date": "2026-10-13",
+   "results": "mapFreeIso provides the coproduct transport used in the complete proof.",
+   "verdict": "generic tool used"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafOfModulesEquivOverInverseUnit|tildeFinsupp|mapFreeIso",
+   "date": "2026-10-13",
+   "results": "Mathlib basis and transport APIs; upstream restrictFreeIso and overIsoFreeEquiv are generic tools, not this term statement.",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFiniteFreeModelRetracts",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-affine-finite-free-model-retracts",
+   "place": "finite-basis transport substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFiniteFreeModelTermIsoFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFiniteFreeModelTermIsoFree.lean",
+  "declaration": "AlgebraicGeometry.affine_finite_free_model_term_iso_free",
+  "statement": "theorem affine_finite_free_model_term_iso_free {Y : Scheme.{u}}\n    (U : Y.Opens) (hU : IsAffineOpen U)\n    (K : ChainComplex (ModuleCat.{u} (Γ(Y, U) : Type u)) ℕ)\n    (hfree : ∀ n, Module.Free (Γ(Y, U) : Type u) (K.X n))\n    (hfinite : ∀ n, Module.Finite (Γ(Y, U) : Type u) (K.X n)) (n : ℤ) :\n    ∃ m : ℕ, Nonempty ((affineFiniteFreeModelComplex U hU K).X n ≅\n      SheafOfModules.free\n        (R := (moduleRings Y.toRingedSpace).over U) (ULift.{u} (Fin m)))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T184252-L-4000569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T184252-L-4000569",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

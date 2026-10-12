@@ -8915,3 +8915,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/E1/Sheaf.RingTheory.LocalizationFiniteGlobalDimension (stage 3; reviewer PASS; first push; landing 20261012T184251-L-4000267 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/E2/Sheaf.Algebra.TorDimensionShiftFree (stage 3; reviewer PASS; first push; landing 20261012T184251-L-4000364 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/E2/Sheaf.AlgebraicGeometry.EtaleLimitAffineExactLadder (stage 3; reviewer PASS; first push; landing 20261012T184251-L-4000461 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:42 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffineFiniteFreeModelRetracts (stage 3; reviewer PASS; first push; landing 20261012T184252-L-4000569 (interface); batch 20261012T184234; modules 2; new nodes 1)

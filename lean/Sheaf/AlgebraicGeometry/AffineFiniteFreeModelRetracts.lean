@@ -2,6 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineFiniteFreeModelComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import Sheaf.AlgebraicGeometry.AffineFiniteFreeModelTermIsoFree
 
 @[expose] public section
 
@@ -33,6 +34,8 @@ theorem affine_finite_free_model_retracts {Y : Scheme.{u}}
             (R := (moduleRings Y.toRingedSpace).over U) (ULift.{u} (Fin m)) ⟶
           (affineFiniteFreeModelComplex U hU K).X n),
         ι ≫ π = 𝟙 _ := by
-  sorry
+  intro n
+  obtain ⟨m, ⟨e⟩⟩ := affine_finite_free_model_term_iso_free U hU K hfree hfinite n
+  exact ⟨m, e.hom, e.inv, e.hom_inv_id⟩
 
 end AlgebraicGeometry
