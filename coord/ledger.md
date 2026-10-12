@@ -6713,3 +6713,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: returned deliver/F3/Sheaf.AlgebraicGeometry.DescendFiniteLocallyFree (reviewer RETURN: (the landing tools, head 5630158e1) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 08:52 L: returned deliver/J1/Sheaf.Paper.GabberPrincipalVanishingIdeal (reviewer RETURN: (the landing tools, head 8ace1738a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 08:52 L: returned deliver/J2/Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension (reviewer RETURN: (the landing tools, head f4e1a181f) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
+- 08:52 L: returned deliver/K3/Sheaf.AlgebraicGeometry.PullbackSectionsComparison (reviewer RETURN: (the landing tools, head 491a9ab22) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
