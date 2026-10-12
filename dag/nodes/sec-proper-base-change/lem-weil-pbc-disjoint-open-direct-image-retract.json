@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-disjoint-open-direct-image-retract",
+ "kind": "statement",
+ "title": "Direct-image retract from a disjoint open component",
+ "statement": "Let $\\Lambda$ be a commutative ring, $f:X\\to Y$ a morphism of schemes [def-pc-scheme], and $F$ an etale $\\Lambda$-module sheaf [def-weil-pbc-etale-sheaves]. Let $(W_j)_{j\\in\\operatorname{Fin}(n)}$ be a pairwise disjoint open covering of $X$. For every $i$ the sheaf $(f\\circ\\iota_i)_*\\iota_i^*F$ is a retract of $f_*F$, where $\\iota_i:W_i\\hookrightarrow X$ is the inclusion and the functors are [def-weil-pbc-inverse-image, def-weil-pbc-direct-image]. There is no finiteness, Noetherianity, or local-constancy hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "source": {
+  "document": "Stacks Project and lem-weil-pbc-finite-module-generic-reflection",
+  "place": "Parent proof step 2, finite product of sections on disjoint pieces; module direct-factor refinement of Tag 0A5D. The formal proof uses the proved clopen comparison in WeilConjectures.SixFunctors.Etale.LowerShriek.Proper."
+ },
+ "proof": [
+  {
+   "text": "The complement of W_i is the union of the W_j for j unequal to i, hence is open, so W_i is closed. For j:W_i to X, the already proved Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range identifies extension by zero with direct image. Set H=j^*F and write L for j_! adjoint to j^* and R for j^* adjoint to j_*. The characterization of the comparison under these adjunctions, and their triangle identities, prove L.counit_F followed by R.unit_F equals the comparison at H. Its inverse followed by L.counit_F is therefore a section of R.unit_F. This gives a retract of F onto j_*H. This is the formal version of projection to one factor followed by zero extension in the disjoint product of sections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply f_* to the section and retraction. Functoriality preserves the retract identity. Transport through Etale.lowerStarComp to obtain the displayed composite direct image. The empty-index case is vacuous and the same adjunction identities cover empty pieces.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and lem-weil-pbc-finite-module-generic-reflection",
+  "place": "Parent proof step 2, finite product of sections on disjoint pieces; module direct-factor refinement of Tag 0A5D. The formal proof uses the proved clopen comparison in WeilConjectures.SixFunctors.Etale.LowerShriek.Proper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Direct image of a sheaf restricted to a disjoint open component is a retract of its direct image",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of the restriction of a sheaf of modules to a clopen subscheme is a retract of the whole sheaf",
+   "results": "Returned restrictFunctorId and module sheaf restriction facts.",
+   "date": "2026-10-13",
+   "verdict": "No exact etale module direct-image retract statement."
+  },
+  {
+   "tool": "grep",
+   "query": "retract|Retract|openImmersionLowerShriekToLowerStar_of_isClosed_range in Mathlib sites and WeilConjectures SixFunctors",
+   "results": "No exact retract declaration. Found proved clopen lowerShriek/lowerStar comparison and the two adjunctions.",
+   "date": "2026-10-13",
+   "verdict": "Prove the retract formally from their comparison and triangle identities."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleGenericReflection",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-normalization-constant",
+   "place": "Parent proof step 2, finite product of sections on disjoint pieces; module direct-factor refinement of Tag 0A5D. The formal proof uses the proved clopen comparison in WeilConjectures.SixFunctors.Etale.LowerShriek.Proper.",
+   "via": [
+    "lem-weil-pbc-finite-module-generic-reflection",
+    "lem-weil-pbc-finite-module-locally-constant-strata",
+    "p2-finite-pushforward-module-constructible-reflection",
+    "b3-finite-pushforward-module-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DisjointOpenDirectImageRetract",
+  "file": "lean/Sheaf/AlgebraicGeometry/DisjointOpenDirectImageRetract.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_retract_lowerStar_of_disjoint_open_partition",
+  "statement": "theorem nonempty_retract_lowerStar_of_disjoint_open_partition\n    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (n : ℕ) (W : Fin n → X.Opens) (hcover : (⨆ j, W j) = ⊤)\n    (hdisjoint : Pairwise (fun j k ↦ Disjoint (W j) (W k)))\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (i : Fin n) :\n    Nonempty (Retract\n      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) ((W i).ι ≫ f)).obj\n        ((Etale.upperStar (ModuleCat.{u + 1} Λ) (W i).ι).obj F))\n      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T205159-L-906846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T205159-L-906846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

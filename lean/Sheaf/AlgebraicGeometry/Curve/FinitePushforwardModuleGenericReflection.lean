@@ -8,12 +8,13 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting
-import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.GenericFiniteNoetherianSchemeSplitting
+import Sheaf.AlgebraicGeometry.DisjointOpenDirectImageRetract
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.ConstructibleSheaf.GenericConstancy
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.SixFunctors.Finite.BaseChange
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 
 /-! # Generic local constancy reflected by a finite direct image
 
@@ -27,6 +28,58 @@ argument in the parent node's proof, steps 1--3.
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
+
+private theorem locallyConstant_of_retract
+    {Λ : Type (u + 1)} [CommRing Λ] {S : Scheme.{u}}
+    {F G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (e : Retract G F) [IsFiniteLocallyConstantSheaf F] : IsLocallyConstantSheaf G := by
+  have h : e.i ≫ (𝟙 F - e.r ≫ e.i) = 0 := by simp
+  have := (IsLocallyConstantSheaf.kernel_and_cokernel (𝟙 F - e.r ≫ e.i)).1
+  refine IsLocallyConstantSheaf.of_iso (F' := G)
+    ⟨Limits.kernel.ι _ ≫ e.r, Limits.kernel.lift _ e.i h,
+      (cancel_mono (Limits.kernel.ι _)).1 ?_, by simp⟩
+  have := Limits.kernel.condition (𝟙 F - e.r ≫ e.i)
+  rw [Preadditive.comp_sub, Category.comp_id, sub_eq_zero] at this
+  simpa using this.symm
+
+private theorem locallyConstant_of_split_lowerStar
+    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (n : ℕ) (W : Fin n → X.Opens) (hcover : (⨆ j, W j) = ⊤)
+    (hdisjoint : Pairwise (fun j k ↦ Disjoint (W j) (W k)))
+    (hW : ∀ j, IsUniversalHomeomorphism ((W j).ι ≫ f))
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsFiniteLocallyConstantSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)] :
+    IsLocallyConstantSheaf F := by
+  let 𝒲 : OpenCover.{u} X :=
+    { I₀ := ULift.{u} (Fin n)
+      X i := (W i.down).toScheme
+      f i := (W i.down).ι
+      mem₀ := by
+        refine (presieve₀_mem_precoverage_iff _).mpr ⟨fun x ↦ ?_, fun i ↦ inferInstance⟩
+        have hx : x ∈ (⨆ j, W j) := by rw [hcover]; trivial
+        obtain ⟨j, hj⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+        exact ⟨⟨j⟩, ⟨x, hj⟩, rfl⟩ }
+  let 𝒲' : Cover.{u} etalePrecoverage X := 𝒲.changeProp (Q := @Etale) fun _ ↦ inferInstance
+  have hlocal (i : 𝒲'.I₀) : IsLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒲'.f i)).obj F) := by
+    let H := (Etale.upperStar (ModuleCat.{u + 1} Λ) (W i.down).ι).obj F
+    let q := (W i.down).ι ≫ f
+    let : IsUniversalHomeomorphism q := hW i.down
+    obtain ⟨e⟩ := nonempty_retract_lowerStar_of_disjoint_open_partition
+      Λ f n W hcover hdisjoint F i.down
+    have hG : IsLocallyConstantSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) q).obj H) :=
+      locallyConstant_of_retract e
+    let := hG
+    have hH := IsLocallyConstantSheaf.upperStar q
+      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) q).obj H)
+    let := hH
+    let := Etale.isEquivalence_lowerStar (ModuleCat.{u + 1} Λ) q
+    exact IsLocallyConstantSheaf.of_iso
+      (F := (Etale.upperStar (ModuleCat.{u + 1} Λ) q).obj
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) q).obj H))
+      (asIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).counit.app H))
+  let := hlocal
+  exact IsLocallyConstantSheaf.of_cover 𝒲' F
 
 /-- Generic local constancy of the source, after shrinking a dense open where the finite
 module direct image is finite locally constant. Only the generic part is asserted;
@@ -62,6 +115,61 @@ theorem exists_dense_open_locallyConstant_of_finite_lowerStar_module
         ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F))) :
     ∃ U : Y.Opens, U ≤ V ∧ Dense (U : Set Y) ∧
       IsLocallyConstantSheaf
-        ((Etale.upperStar (ModuleCat.{u + 1} Λ) (f ⁻¹ᵁ U).ι).obj F) := by sorry
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) (f ⁻¹ᵁ U).ι).obj F) := by
+  obtain ⟨U, hUV, hUd, 𝒯, hsplit⟩ :=
+    exists_dense_open_finite_noetherian_scheme_splitting f V hV
+  refine ⟨U, hUV, hUd, ?_⟩
+  let G := (Etale.upperStar (ModuleCat.{u + 1} Λ) (f ⁻¹ᵁ U).ι).obj F
+  let g := f ∣_ U
+  let a := Y.homOfLE hUV
+  let := h
+  have hM := IsFiniteLocallyConstantSheaf.upperStar a
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) V.ι).obj
+      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F))
+  let := hM
+  let eU := ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) a V.ι).app
+    ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)).symm ≪≫
+    eqToIso (congrArg (fun m ↦ (Etale.upperStar (ModuleCat.{u + 1} Λ) m).obj
+      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)) (Scheme.homOfLE_ι Y hUV))
+  have hU : IsFiniteLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)) :=
+    IsFiniteLocallyConstantSheaf.of_iso
+      (F := (Etale.upperStar (ModuleCat.{u + 1} Λ) a).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) V.ι).obj
+          ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F))) eU
+  let := hU
+  have := Etale.isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} Λ)
+    (isPullback_morphismRestrict f U).flip
+  have hG : IsFiniteLocallyConstantSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) g).obj G) :=
+    IsFiniteLocallyConstantSheaf.of_iso
+      (F := (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F))
+      (asIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ)
+        (isPullback_morphismRestrict f U).flip.toCommSq).app F))
+  let := hG
+  let 𝒞 := 𝒯.pullback₂ g
+  have hlocal (i : 𝒞.I₀) : IsLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒞.f i)).obj G) := by
+    obtain ⟨n, W, hcover, hdisjoint, hW⟩ := hsplit i
+    have hp := IsFiniteLocallyConstantSheaf.upperStar (𝒯.f i)
+      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) g).obj G)
+    let := hp
+    have := Etale.isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} Λ)
+      (IsPullback.of_hasPullback (𝒯.f i) g).flip
+    have hfp : IsFiniteLocallyConstantSheaf
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) (Limits.pullback.fst (𝒯.f i) g)).obj
+          ((Etale.upperStar (ModuleCat.{u + 1} Λ) (Limits.pullback.snd (𝒯.f i) g)).obj G)) :=
+      IsFiniteLocallyConstantSheaf.of_iso
+        (F := (Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒯.f i)).obj
+          ((Etale.lowerStar (ModuleCat.{u + 1} Λ) g).obj G))
+        (asIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ)
+          (IsPullback.of_hasPullback (𝒯.f i) g).flip.toCommSq).app G))
+    let := hfp
+    exact locallyConstant_of_split_lowerStar Λ (Limits.pullback.fst (𝒯.f i) g)
+      n W hcover hdisjoint hW
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (Limits.pullback.snd (𝒯.f i) g)).obj G)
+  let := hlocal
+  exact IsLocallyConstantSheaf.of_cover 𝒞 G
 
 end AlgebraicGeometry.Scheme

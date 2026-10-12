@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-generic-finite-noetherian-scheme-splitting",
+ "kind": "statement",
+ "title": "Generic finite splitting over a Noetherian scheme",
+ "statement": "Let $f:X\\to Y$ be a finite morphism with $Y$ Noetherian [def-weil-pbc-scheme-conventions, def-weil-finite-integral-morphism], and let $V\\subseteq Y$ be a dense open. There is a dense open $U\\subseteq V$ and an etale covering family $(T_i\\to U)_i$ such that for every $i$ the fibre product $P_i=T_i\\times_U f^{-1}(U)$ [def-pc-fibre-product] has a finite pairwise disjoint open covering $(W_{ij})_{j\\in\\operatorname{Fin}(n_i)}$, and every composite $W_{ij}\\to P_i\\to T_i$ is a universal homeomorphism [def-weil-universal-homeomorphism]. The cover and partition are independent of any sheaf. The integer $n_i$ may be zero.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product",
+  "def-weil-universal-homeomorphism"
+ ],
+ "source": {
+  "document": "Stacks Project and lem-weil-pbc-finite-module-generic-reflection",
+  "place": "Parent proof step 1; Tags 095K (etale-cohomology-lemma-decompose-quasi-finite-morphism) and 04DZ (etale-cohomology-theorem-topological-invariance); the generic finite-algebra refinement is in lem-weil-pbc-generic-finite-scheme-splitting."
+ },
+ "proof": [
+  {
+   "text": "Reduce Y. Its irreducible components form a finite family. Remove their pairwise intersections; each remaining component is open and integral. In each choose a nonempty affine open inside V. Apply exists_dense_open_finite_scheme_splitting to the finite map over this integral Noetherian affine open, and shrink to its dense splitting open. Each resulting open contains the generic point of its component, so their union is dense and lies in V.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-weil-pbc-generic-finite-scheme-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reduction immersion is a nilpotent thickening because Y is Noetherian. Etale-site equivalence lifts each etale covering scheme from the reduced open to the corresponding open of Y. Lift its structural map, and use invariance of the underlying space to see that these lifted etale maps jointly cover U. Open component inclusions compose with the lifted covers to make an etale cover of U.",
+   "uses": [
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reduction of the finite source over each lifted cover is the finite disjoint union from the affine splitting. Lift its clopen partition along the reduction homeomorphism. Each lifted piece remains finite over the cover: a clopen subscheme of a finite scheme is finite. It is universally injective and surjective because these properties are unchanged by nilpotent reduction of source and target, also after any base change. Hence it is a universal homeomorphism. Empty inverse images give empty partitions; for empty Y use U empty and the empty covering family.",
+   "uses": [
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-weil-pbc-generic-finite-scheme-splitting",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and lem-weil-pbc-finite-module-generic-reflection",
+  "place": "Parent proof step 1; Tags 095K (etale-cohomology-lemma-decompose-quasi-finite-morphism) and 04DZ (etale-cohomology-theorem-topological-invariance); the generic finite-algebra refinement is in lem-weil-pbc-generic-finite-scheme-splitting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism of Noetherian schemes splits into universal homeomorphisms on an etale cover of a dense open",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism of Noetherian schemes generic disjoint universal homeomorphism components after etale covering",
+   "results": "Returned normalizationOpenCover, Scheme.Etale, discrete_fiber, IsFinite and ring-map facts.",
+   "date": "2026-10-13",
+   "verdict": "No generic splitting theorem over a general Noetherian target; the existing project theorem handles integral affine targets."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*splitting|dense_open.*splitting|GenericFiniteSchemeSplitting in Mathlib, WeilConjectures and Sheaf",
+   "results": "Mathlib has no generic splitting theorem. Sheaf.GenericFiniteSchemeSplitting has the proved integral affine version, not the general Noetherian version.",
+   "date": "2026-10-13",
+   "verdict": "Use the existing affine theorem, lifting through reduction and component-open gluing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleGenericReflection",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-normalization-constant",
+   "place": "Parent proof step 1; Tags 095K (etale-cohomology-lemma-decompose-quasi-finite-morphism) and 04DZ (etale-cohomology-theorem-topological-invariance); the generic finite-algebra refinement is in lem-weil-pbc-generic-finite-scheme-splitting.",
+   "via": [
+    "lem-weil-pbc-finite-module-generic-reflection",
+    "lem-weil-pbc-finite-module-locally-constant-strata",
+    "p2-finite-pushforward-module-constructible-reflection",
+    "b3-finite-pushforward-module-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFiniteNoetherianSchemeSplitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFiniteNoetherianSchemeSplitting.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_dense_open_finite_noetherian_scheme_splitting",
+  "statement": "theorem exists_dense_open_finite_noetherian_scheme_splitting\n    {X Y : Scheme.{u}} [IsNoetherian Y] (f : X ⟶ Y) [IsFinite f]\n    (V : Y.Opens) (hV : Dense (V : Set Y)) :\n    ∃ U : Y.Opens, U ≤ V ∧ Dense (U : Set Y) ∧\n      ∃ 𝒯 : Cover.{u} etalePrecoverage U.toScheme, ∀ i,\n        ∃ (n : ℕ) (W : Fin n → (pullback (𝒯.f i) (f ∣_ U)).Opens),\n          (⨆ j, W j) = ⊤ ∧ Pairwise (fun j k ↦ Disjoint (W j) (W k)) ∧\n          ∀ j, IsUniversalHomeomorphism\n            ((W j).ι ≫ pullback.fst (𝒯.f i) (f ∣_ U))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T205159-L-906846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T205159-L-906846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
