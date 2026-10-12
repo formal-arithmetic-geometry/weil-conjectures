@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Sheaf.RingTheory.HenselianLocalRootLifting
-import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.RingTheory.HenselianEtaleRetractionExistence
+import Sheaf.RingTheory.HenselianEtaleRetractionUniqueness
 
 /-!
 # Retractions of étale algebras over henselian local rings
@@ -68,4 +68,9 @@ theorem existsUnique_algHom_of_henselianLocalRing_etale
     letI : Algebra S B := φ.toAlgebra
     ∃! σ : B →ₐ[S] S,
       (IsLocalRing.maximalIdeal S).comap σ.toRingHom = q' := by
-  sorry
+  set_option linter.style.haveILetI false in
+    letI : Algebra S B := φ.toAlgebra
+  obtain ⟨σ, hσ⟩ := exists_algHom_of_henselianLocalRing_etale φ q' hq hres
+  refine ⟨σ, hσ, ?_⟩
+  intro τ hτ
+  exact (algHom_eq_of_henselianLocalRing_etale φ q' hq hres σ τ hσ hτ).symm

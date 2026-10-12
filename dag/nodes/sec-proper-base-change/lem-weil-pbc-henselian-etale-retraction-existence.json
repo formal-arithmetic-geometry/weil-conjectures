@@ -1,0 +1,121 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-henselian-etale-retraction",
+   "place": "proof split",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 04GG, implication (1)⇒(8)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply the etale-local standard presentation and the henselian simple-root lifting theorem to the residue-field point; the standard-etale universal property gives a map on the presentation, and localization at an element outside q' descends it to B with the required maximal-ideal preimage.",
+   "uses": [
+    "lem-weil-pbc-etale-locally-standard",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-weil-pbc-standard-etale-pair-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG, implication (1) => (8)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-locally-standard",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-standard-etale-pair-maps"
+ ],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "henselian local ring etale algebra prime trivial residue field section",
+   "results": "no exact match in Mathlib",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "AlgHom retraction henselian etale local ring",
+   "results": "StandardEtalePair and HenselianLocalRing root lifting only",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -r HenselianLocalRing Etale Mathlib/RingTheory",
+   "results": "only root lifting and standard etale declarations; no retraction theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-weil-pbc-henselian-etale-retraction-existence",
+ "title": "Existence of a henselian étale retraction",
+ "statement": "Under the hypotheses of lem-weil-pbc-henselian-etale-retraction, there exists an S-algebra homomorphism σ : B → S whose inverse image of the maximal ideal is q'.",
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianEtaleRetractionExistence",
+  "declaration": "exists_algHom_of_henselianLocalRing_etale",
+  "file": "lean/Sheaf/RingTheory/HenselianEtaleRetractionExistence.lean",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12",
+  "existing": false,
+  "statement": "theorem exists_algHom_of_henselianLocalRing_etale {S B : Type u} [CommRing S] [CommRing B] [HenselianLocalRing S] (φ : S →+* B) [AlgebraicGeometry.Etale (Scheme.Spec.map (CommRingCat.ofHom φ).op)] (q' : Ideal B) [q'.IsPrime] (hq : q'.comap φ = IsLocalRing.maximalIdeal S) (hres : Function.Bijective (Ideal.ResidueField.map (IsLocalRing.maximalIdeal S) q' φ hq.symm)) : letI : Algebra S B := φ.toAlgebra ∃ σ : B →ₐ[S] S, (IsLocalRing.maximalIdeal S).comap σ.toRingHom = q'"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HenselianEtaleRetraction",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T044747-L-2036892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T044747-L-2036892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
