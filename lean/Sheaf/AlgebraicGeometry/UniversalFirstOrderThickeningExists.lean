@@ -11,6 +11,7 @@ import Sheaf.AlgebraicGeometry.Thickening
 import Sheaf.AlgebraicGeometry.UniversalThickeningAffineCase
 import Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces
 import Sheaf.RingTheory.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExistence
 
 /-!
 # Existence and uniqueness of universal first order thickenings
@@ -71,6 +72,9 @@ theorem FormallyUnramified.exists_universalFirstOrderThickening {Z X : Scheme.{u
       IsUniversalFirstOrderThickening h i₂ h₂ →
         (∃! φ : Z₁ ⟶ Z₂, φ ≫ h₂ = h₁ ∧ i₁ ≫ φ = i₂) ∧
           ∀ φ : Z₁ ⟶ Z₂, φ ≫ h₂ = h₁ → i₁ ≫ φ = i₂ → IsIso φ := by
-  sorry
+  constructor
+  · exact FormallyUnramified.exists_universalFirstOrderThickening_existence h
+  · intro Z₁ Z₂ i₁ h₁ i₂ h₂ H₁ H₂
+    exact IsUniversalFirstOrderThickening.unique h i₁ h₁ i₂ h₂ H₁ H₂
 
 end AlgebraicGeometry
