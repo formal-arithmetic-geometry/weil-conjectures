@@ -8184,3 +8184,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/R1/Sheaf.AlgebraicGeometry.FormalFibreCohomology (stage 3; reviewer PASS; first push; landing 20261012T144139-L-2105522 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/R1/Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowersData (stage 3; reviewer PASS; first push; landing 20261012T144140-L-2105619 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SheafCoinductionAction (stage 3; reviewer PASS; first push; landing 20261012T144140-L-2105716 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/R2/Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension (stage 3; reviewer PASS; first push; landing 20261012T144140-L-2105813 (proof); batch 20261012T144049; modules 1; new nodes 0)

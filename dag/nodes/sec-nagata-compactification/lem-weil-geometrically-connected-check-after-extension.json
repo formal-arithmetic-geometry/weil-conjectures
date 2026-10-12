@@ -56,10 +56,10 @@
  ],
  "proof": [
   {
-   "text": "Assume $X$ is geometrically connected over $k$. For every field extension $L/k$, the base change $X_L$ is connected by the definition of geometric connectedness. For a field extension $k'/k$, the base change $(X_{k'})_L$ is canonically $X_L$ over $L$, so the same condition holds for $X_{k'}$ over $k'$.",
+   "text": "Assuming geometric connectedness of X over k, Mathlib's base-change stability instance for GeometricallyConnected gives geometric connectedness of the second pullback projection over k'.",
    "uses": [
     "def-pc-geometrically-irreducible",
-    "def-pc-base-change"
+    "def-pc-fibre-product"
    ],
    "elementary": true,
    "source": {
@@ -68,10 +68,10 @@
    }
   },
   {
-   "text": "Conversely, assume $X_{k'}$ is geometrically connected over $k'$, and let $k''/k$ be arbitrary. By [lem-weil-common-extension-fields] there is a field $k'''$ with embeddings of $k'$ and $k''$ over $k$. The iterated base-change identification gives $X_{k'''}=(X_{k'})_{k'''}$, which is connected because $X_{k'}$ is geometrically connected and $k'''/k'$ is a field extension.",
+   "text": "For the converse use geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms to fix an arbitrary field extension K/k. Obtain a common extension M of k' and K using Field.exists_common_extension [lem-weil-common-extension-fields]. Write a: Spec M → Spec k' and b: Spec M → Spec K for the maps induced by the two algebra embeddings. Their composites to Spec k agree because the embeddings are k-linear. Form T = (X ×_k Spec K) ×_K Spec M. The universal property of the pullback [def-pc-fibre-product] constructs r: T → X ×_k Spec k'. Pasting the two defining pullback squares and cancelling the defining square for X ×_k Spec k' shows that (r, T → Spec M) is a pullback square over Spec k'. The assumed geometric connectedness over k' therefore gives ConnectedSpace T.",
    "uses": [
     "def-pc-geometrically-irreducible",
-    "def-pc-base-change",
+    "def-pc-fibre-product",
     "lem-weil-common-extension-fields"
    ],
    "elementary": false,
@@ -81,10 +81,9 @@
    }
   },
   {
-   "text": "The morphism $\\operatorname{Spec}(k''')\\to\\operatorname{Spec}(k'')$ is surjective, both spaces being one point. By the base-change identification $X_{k'''}=X_{k''}\\times_{\\operatorname{Spec}k''}\\operatorname{Spec}k'''$, the projection $X_{k'''}\\to X_{k''}$ is the base change of this surjective morphism, hence is surjective by [lem-weil-pbc-surjective-base-change]. The continuous image of the connected space $X_{k'''}$ is therefore the connected space $X_{k''}$. Since $k''/k$ was arbitrary, $X$ is geometrically connected over $k$.",
+   "text": "The map b: Spec M → Spec K is surjective: its source is nonempty and its target is a singleton. Mathlib's base-change stability instance for Surjective makes the first projection p: T → X ×_k Spec K surjective. Apply Function.Surjective.connectedSpace to p.surjective and p.continuous. Since K/k was arbitrary, the commutative-ring criterion for geometrically connected morphisms proves geometric connectedness of X over k.",
    "uses": [
-    "def-pc-base-change",
-    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product",
     "def-pc-geometrically-irreducible"
    ],
    "elementary": false,
@@ -96,14 +95,13 @@
  ],
  "proof_deps": [
   "def-pc-geometrically-irreducible",
-  "def-pc-base-change",
-  "lem-weil-common-extension-fields",
-  "lem-weil-pbc-surjective-base-change"
+  "def-pc-fibre-product",
+  "lem-weil-common-extension-fields"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Lemma 33.7.3, tag 054N, proof"
+  "place": "Lemma 33.7.3, tag 054N, proof; implemented by R2 with Mathlib pullback pasting and cancellation, Field.exists_common_extension, base-change stability of Surjective, and Function.Surjective.connectedSpace"
  },
  "mathlib_match": null,
  "status": "split",
@@ -162,5 +160,15 @@
   "group": "M1",
   "result": "pass",
   "note": "field k = {k}[Field k]; X over k = [X.Over (Spec (.of k))]; k'/k = [Field k'][Algebra k k'] (k' in universe u, Mathlib geometrically convention); X_{k'} = pullback (X ↘ Spec k) (Spec.map (ofHom (algebraMap k k'))) over k' via pullback.snd (STATE BASE CHANGE X_T); geom. connected = Mathlib GeometricallyConnected on structure maps (as G1 54b8d74b6); iff both directions; #check confirms namespaces; empty X both sides false"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T144140-L-2105813",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
