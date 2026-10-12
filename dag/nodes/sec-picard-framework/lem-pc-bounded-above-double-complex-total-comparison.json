@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-bounded-above-double-complex-total-comparison",
+ "kind": "statement",
+ "title": "Columnwise quasi-isomorphism comparison for uniformly bounded-above double complexes",
+ "statement": "Let C be an abelian category [def-sp-abelian], and let K,L be integer-indexed commuting double cochain complexes [def-sp-double-complex-total]. Suppose their total complexes exist. Let x0,y0 be integers such that K and L vanish as column complexes in first indices greater than x0, and every column of either complex vanishes in second indices greater than y0. For a morphism phi:K→L whose column morphisms phi.f i are quasi-isomorphisms for every integer i, the induced total morphism Tot(phi) is a quasi-isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0132",
+  "place": "Lemma 12.25.3, finite-diagonal convergence; the comparison proof is formalized in WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns, total.quasiIso_map_of_isStrictlyGE_of_isStrictlyLE"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "First consider a finite interval of columns [x,x0]. Induct on its length. For the empty interval both truncated double complexes and their totals are zero, hence the total map is a quasi-isomorphism. On adjoining the next column, the stupid filtration gives a degreewise split short exact sequence from the preceding truncation to the larger one, with quotient the single-column complex. Totalization preserves this sequence: every degreewise splitting of double-complex objects induces a splitting on their diagonal coproducts. The total of a single column is its vertical complex shifted by minus its first index. The quotient map is therefore a shift of a column quasi-isomorphism. The homology long exact sequences and the five lemma imply that the middle total map is a quasi-isomorphism.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix the homology degree n and retain columns with first index at least x=n-y0-1. For any total degree m in {n-1,n,n+1}, a removed first index p<x would force the second index q=m-p>y0, so its summand vanishes. Thus the inclusion of this stupid truncation into the original total is an isomorphism in the three degrees controlling homology at n, hence a quasi-isomorphism at n. Apply this to K and L. Naturality identifies the square formed by the two inclusions and the total maps. The finite-column comparison from the first step makes the truncated total map a quasi-isomorphism; cancellation with the two inclusion maps gives that Tot(phi) is a quasi-isomorphism at n. As n is arbitrary, it is a quasi-isomorphism.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/BicomplexColumns.lean",
+  "place": "Existing complete Lean proof, transcribed above; corresponds to the finite-diagonal argument of Stacks Tag 0132."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded above double complexes columnwise quasi isomorphism induces quasi isomorphism of total complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "total complex bounded above double complex acyclic columns exact",
+   "results": "Generic exactness and support lemmas; no total-comparison match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, HomologicalComplex.ExactAt",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*(acyclic|exact)|acyclic.*total; quasiIso.*total|total.*quasiIso in Mathlib/Algebra/Homology and lean/WeilConjectures",
+   "results": "The exact comparison is already completely proved in WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns. No existing DAG node states this bounded-above integer-indexed comparison. The first-quadrant node lem-sc-first-quadrant-total-column-comparison has different support hypotheses.",
+   "date": "2026-10-12",
+   "verdict": "use existing source declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclicDegree",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "Bounded-above flat-complex clause: fixed-degree tensor exactness, finite diagonal comparison.",
+   "via": [
+    "lem-pc-bounded-above-flat-tensor-acyclic-degree",
+    "lem-pc-bounded-above-flat-tensor-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns",
+  "declaration": "HomologicalComplex₂.total.quasiIso_map_of_isStrictlyGE_of_isStrictlyLE",
+  "statement": "lemma total.quasiIso_map_of_isStrictlyGE_of_isStrictlyLE\n    {K L : HomologicalComplex₂ C (up ℤ) (up ℤ)}\n    (φ : K ⟶ L) [K.HasTotal (up ℤ)] [L.HasTotal (up ℤ)] (x₀ y₀ : ℤ)\n    [CochainComplex.IsStrictlyLE K x₀] [CochainComplex.IsStrictlyLE L x₀]\n    [∀ x, CochainComplex.IsStrictlyLE (K.X x) y₀]\n    [∀ x, CochainComplex.IsStrictlyLE (L.X x) y₀]\n    (hφ : ∀ (i : ℤ), QuasiIso (φ.f i)) :\n    QuasiIso (total.map φ (up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "HomologicalComplex₂.total.quasiIso_map_of_isStrictlyGE_of_isStrictlyLE"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T163619-L-2786997",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T163619-L-2786997",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

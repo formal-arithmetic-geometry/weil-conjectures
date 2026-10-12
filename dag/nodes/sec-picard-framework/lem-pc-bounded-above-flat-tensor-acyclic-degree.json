@@ -15,28 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Fix n, truncate the bounded-above complexes below the finite diagonal range affecting degrees n-1,n,n+1, translate the resulting bounded double complex to the first quadrant, and apply the first-quadrant double-complex spectral-sequence convergence theorem. Filter by the P-degree; flatness makes every column acyclic, so the E1 page and hence the finite filtration of degree-n cohomology vanish.",
+   "text": "Form the tensor double complex K(A,P) and flip it, so the column in index j is the image of A under tensorRight(P.X j). Flatness supplies preservation of finite limits and colimits. The tensor-right functor is additive because it preserves binary products and zero morphisms, and it preserves homology because it is exact. Map the given acyclicity of A along this exact functor to prove every flipped column is acyclic.",
    "uses": [
-    "thm-sp-double-complex-spectral-sequences",
     "def-pc-flat-sheaf-modules",
     "def-pc-acyclic-complex-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YQ, bounded-above case"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Choose the upper degree bounds a for A and b for P. Each flipped column is strictly supported in degrees at most a since tensorRight preserves zero objects. Above first degree b the whole flipped column is a zero complex: each term is the image of a zero P term under tensorLeft, and extensionality makes its identity zero. These bounds imply the flipped double complex has a total using the finite-diagonal construction in BicomplexColumns.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the zero double complex Z and its zero map f to the flipped tensor double complex. Z satisfies the same bounds. Each f.f i is a quasi-isomorphism because both its source and target columns are acyclic. Apply the existing uniformly bounded-above columnwise total comparison to f to obtain a total quasi-isomorphism. The source total is zero, so the target total is exact at n. Finally use the signed totalFlipIso to transport exactness back to Tot(A tensor P).",
+   "uses": [
+    "lem-pc-bounded-above-double-complex-total-comparison",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-sp-double-complex-spectral-sequences",
   "def-pc-flat-sheaf-modules",
-  "def-pc-acyclic-complex-modules"
+  "def-pc-acyclic-complex-modules",
+  "lem-pc-bounded-above-double-complex-total-comparison"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 06YQ, bounded-above case"
+  "by": "agent",
+  "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/BicomplexColumns.lean",
+  "place": "total.quasiIso_map_of_isStrictlyGE_of_isStrictlyLE plus exact-functor preservation of acyclicity and Mathlib totalFlipIso; replaces the spectral-sequence route of Tag 06YQ by its existing finite-truncation comparison proof."
  },
  "mathlib_searches": [
   {
@@ -119,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T115005-L-875809",
-  "kind": "interface",
+  "landing": "20261012T163619-L-2786997",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
