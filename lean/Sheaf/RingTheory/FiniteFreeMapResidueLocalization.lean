@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.FiniteFreeMapResidueLocalizationStrong
 
 /-!
 # Residue-field rank criterion for maps of finite free modules
@@ -47,6 +48,17 @@ theorem finiteFreeMap_residue_localization
             LinearMap.range (u.baseChange (Localization.Away f)))) ∧
     (Function.Bijective (u.baseChange p.ResidueField) →
       ∃ f : R, f ∉ p ∧ Function.Bijective (u.baseChange (Localization.Away f))) := by
-  sorry
+  have h := finiteFreeMap_residue_localization_strong m n u p
+  constructor
+  · intro hu
+    obtain ⟨f, hf, v, hv, hfin, hfree⟩ := h.1 hu
+    refine ⟨f, hf, ?_, hfin, hfree⟩
+    exact Function.HasLeftInverse.injective ⟨v, LinearMap.congr_fun hv⟩
+  · intro hu
+    obtain ⟨f, hf, v, hv, hw⟩ := h.2 hu
+    refine ⟨f, hf, ?_⟩
+    constructor
+    · exact Function.HasLeftInverse.injective ⟨v, LinearMap.congr_fun hv⟩
+    · exact Function.HasRightInverse.surjective ⟨v, LinearMap.congr_fun hw⟩
 
 end Module
