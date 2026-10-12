@@ -1,0 +1,112 @@
+{
+ "id": "lem-pc-derived-pullback-across-universes-retraction",
+ "kind": "statement",
+ "title": "Cancellation of mixed-universe pullback along a retraction",
+ "statement": "Let X,Y be schemes with independent derived localizations, and let i:X→Y and p:Y→X satisfy i followed by p = id_X. For every E in the specified D(X), the composite L i* L p* E using [def-pc-derived-pullback-across-universes] is isomorphic to E. No Noetherian, flatness, or properness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RU, 06YI and 0D5S"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback-across-universes"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the mixed-universe pullbacks. Apply the counit of the Y localization equivalence, map through the standard pullback of i and the inverse X equivalence. Apply the standard derived-pullback composition isomorphism at the image of E. Rewrite i followed by p as id_X and apply the identity comparison, then apply the inverse of the unit of the X equivalence. These are exactly the isomorphisms composed in the Lean proof.",
+   "uses": [
+    "def-pc-derived-pullback-across-universes",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback-across-universes",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Q and 0A9U, and Tag 05RU localization uniqueness; source text read online because local Stacks source is absent. Universe-transport details written by Q2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right adjoint derived direct image diagonal counit flat proper structure sheaf localization equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence claim from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizations of complexes in different universes equivalence derived pullback composition retraction; perfect proper closed immersion derived tensor formula specified right adjoint",
+   "results": "Localization.compUniqFunctor, Localization.compEquivalenceFromModelInverseIso; no scheme duality match. The equivalence constructors were read and used in the real construction.",
+   "date": "2026-10-12",
+   "verdict": "generic localization tools used; no exact scheme-duality statement"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*counit|derived.*pullback.*retraction|perfect.*immersion.*tensor; Localization.uniq in Mathlib/CategoryTheory/Localization/Predicate.lean; rg in both project roots and DAG",
+   "results": "No Mathlib diagonal counit or immersion tensor evaluation. Localization.uniq and compUniqFunctor found. Existing scheme pullback universe transport in DerivedPullbackOpenRestrictionUniverses is private and compares pairs of common universes, not independent-universe source and target. Existing diagonal and tensor formulas use a single common universe.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; reuse existing formulas below new adapters"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDiagonalDualizingEvaluation",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BRT displayed chain: localization transport for the first three equalities",
+   "via": [
+    "lem-sc-perfect-diagonal-dualizing-evaluation",
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesRetraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackAcrossUniversesRetraction.lean",
+  "declaration": "AlgebraicGeometry.derivedPullbackAcrossUniverses_retraction",
+  "statement": "theorem derivedPullbackAcrossUniverses_retraction {X Y : Scheme.{u}} [hx : HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [hy : HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (i : X ⟶ Y) (p : Y ⟶ X) (h : i ≫ p = 𝟙 X) (E : schemeDerivedCategory X) : Nonempty ((derivedPullbackAcrossUniverses i).obj ((derivedPullbackAcrossUniverses p).obj E) ≅ E)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T110315-L-620416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T110315-L-620416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

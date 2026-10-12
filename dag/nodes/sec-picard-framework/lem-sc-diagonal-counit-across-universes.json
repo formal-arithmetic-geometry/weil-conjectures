@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-diagonal-counit-across-universes",
+ "kind": "statement",
+ "title": "Diagonal counit with independent derived localizations",
+ "statement": "Let X,S be Noetherian schemes and f:X→S flat and proper. Choose independent derived localizations on X,S,P=X×_S X. Let R be a functor on the quasi-coherent derived subcategories equipped with the given comparison to Rf*, and a its specified right adjoint. Let c be the specified right adjoint of the restriction of RDelta*, using a given quasi-coherent preservation witness. Let O be a quasi-coherent object isomorphic to O_S[0]. Then Lpr_1* a(O), defined using [def-pc-derived-pullback-across-universes], has quasi-coherent cohomology; for its corresponding full-subcategory object K there is an isomorphism c(K) ≅ O_X[0] in D(X). Perfection of the diagonal is not assumed. The adjoints are the supplied ones.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Q and 05RU"
+ },
+ "stmt_deps": [
+  "def-pc-derived-pullback-across-universes",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use base change of properness and finite type over a Noetherian scheme to obtain Noetherian P. The Noetherian direct-image theorem gives preservation on the standard localizations. Derived pullback preserves quasi-coherent cohomology; the same is true after the explicit localization equivalences, since homology functors commute with them by uniqueness of their factorization through Qh.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-base-change",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "def-pc-derived-pullback-across-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison with Qh identifies single objects under the localization equivalences. Uniqueness of right derived functors identifies the transported Rf* and RDelta* with the standard ones. Restrict the equivalences to quasi-coherent full subcategories using the homology comparison. Conjugate adj and adjC by these equivalences and transfer adj along comparison. Apply diagonal_counit_identity in the standard universe at the standard structure single objects. Map hO through a, transport the counit isomorphism back and invert it. The object transported from the standard pullback is exactly the explicit mixed-universe pullback, by its definition.",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "def-pc-derived-pullback-across-universes",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback-across-universes",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "lem-sc-smooth-proper-diagonal-pushforward-structure",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Q and 0A9U, and Tag 05RU localization uniqueness; source text read online because local Stacks source is absent. Universe-transport details written by Q2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right adjoint derived direct image diagonal counit flat proper structure sheaf localization equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence claim from this service"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizations of complexes in different universes equivalence derived pullback composition retraction; perfect proper closed immersion derived tensor formula specified right adjoint",
+   "results": "Localization.compUniqFunctor, Localization.compEquivalenceFromModelInverseIso; no scheme duality match. The equivalence constructors were read and used in the real construction.",
+   "date": "2026-10-12",
+   "verdict": "generic localization tools used; no exact scheme-duality statement"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*counit|derived.*pullback.*retraction|perfect.*immersion.*tensor; Localization.uniq in Mathlib/CategoryTheory/Localization/Predicate.lean; rg in both project roots and DAG",
+   "results": "No Mathlib diagonal counit or immersion tensor evaluation. Localization.uniq and compUniqFunctor found. Existing scheme pullback universe transport in DerivedPullbackOpenRestrictionUniverses is private and compares pairs of common universes, not independent-universe source and target. Existing diagonal and tensor formulas use a single common universe.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; reuse existing formulas below new adapters"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectDiagonalDualizingEvaluation",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BRT displayed chain: localization transport for the first three equalities",
+   "via": [
+    "lem-sc-perfect-diagonal-dualizing-evaluation",
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DiagonalCounitAcrossUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalCounitAcrossUniverses.lean",
+  "declaration": "AlgebraicGeometry.diagonal_counit_acrossUniverses",
+  "statement": "theorem diagonal_counit_acrossUniverses (X S : Scheme.{u}) [IsNoetherian X] [IsNoetherian S] (f : X ⟶ S) [Flat f] [IsProper f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{wP} (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace))] (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory S) (comparison : R ⋙ (schemeDerivedQCohProperty S).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory S ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) (O : schemeDerivedQCohCategory S) (hO : O.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj (SheafOfModules.unit S.ringCatSheaf)) (hRΔ : ∀ E : schemeDerivedQCohCategory X, schemeDerivedQCohProperty (pullback f f) ((schemeDerivedDirectImage (pullback.diagonal f)).obj E.obj)) (c : schemeDerivedQCohCategory (pullback f f) ⥤ schemeDerivedQCohCategory X) (adjC : (schemeDerivedQCohProperty (pullback f f)).lift ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage (pullback.diagonal f)) hRΔ ⊣ c) : ∃ hK : schemeDerivedQCohProperty (pullback f f) ((derivedPullbackAcrossUniverses (pullback.fst f f)).obj (a.obj O).obj), Nonempty ((c.obj ⟨(derivedPullbackAcrossUniverses (pullback.fst f f)).obj (a.obj O).obj, hK⟩).obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (SheafOfModules.unit X.ringCatSheaf))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T110315-L-620416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T110315-L-620416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

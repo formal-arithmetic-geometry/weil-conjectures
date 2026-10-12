@@ -11,11 +11,10 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.DiagonalPushforwardStructure
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DiagonalCounitAcrossUniverses
+import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniversesRetraction
+import Sheaf.AlgebraicGeometry.PerfectImmersionTensorAcrossUniverses
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Evaluation against the dualizing object of a perfect diagonal
 
@@ -94,6 +93,34 @@ theorem perfectDiagonal_dualizing_evaluation
         (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace)) 0).obj
           (SheafOfModules.unit (pullback f f).ringCatSheaf)) :
     Nonempty (((a.obj O).obj ⊗ (c.obj OP).obj) ≅
-      𝟙_ (schemeDerivedCategory X)) := by sorry
+      𝟙_ (schemeDerivedCategory X)) := by
+  have : IsLocallyNoetherian (pullback f f) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.fst f f)
+  have : CompactSpace (pullback f f : Scheme.{u}) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.fst f f)
+  have : IsNoetherian (pullback f f) := ⟨⟩
+  obtain ⟨hK, e⟩ := diagonal_counit_acrossUniverses X S f R comparison a adj O hO hRΔ c adjC
+  let K : schemeDerivedQCohCategory (pullback f f) :=
+    ⟨(derivedPullbackAcrossUniverses (pullback.fst f f)).obj (a.obj O).obj, hK⟩
+  obtain ⟨ec⟩ := e
+  obtain ⟨et⟩ := perfectImmersion_tensor_acrossUniverses (pullback.diagonal f)
+    hperfect hRΔ c adjC OP hOP K
+  obtain ⟨ep⟩ := derivedPullbackAcrossUniverses_retraction (pullback.diagonal f)
+    (pullback.fst f f) (pullback.diagonal_fst f) (a.obj O).obj
+  refine ⟨(tensorIso ep (Iso.refl (c.obj OP).obj)).symm ≪≫ et.symm ≪≫ ec ≪≫ ?_⟩
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := SheafOfModules.symmetricCategory X.sheaf
+  have : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
+  let : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
+  have : IsGrothendieckAbelian.{u}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  have := schemeModule_hasFunctorialFlatResolution X
+  have : HasColimitsOfSize.{0, 0}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    hasColimitsOfSizeShrink.{0, 0, u, u} _
+  exact DerivedCategory.singleFunctorObjUnitIso _
 
 end AlgebraicGeometry

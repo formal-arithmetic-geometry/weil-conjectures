@@ -21,47 +21,42 @@
  ],
  "proof": [
   {
-   "text": "Use properness and finite type to see that P is Noetherian. The Noetherian direct-image theorem supplies the preservation witnesses. In a common derived universe, lift the comparison for R through the full inclusion, and transfer its adjunction to the canonical restricted direct image. The diagonal counit identity gives O_X[0] isomorphic to c(Lpr_1* a(O_S[0])).",
+   "text": "Obtain Noetherian P from finite type and quasi-compactness of the proper base-changed projection. Apply diagonal_counit_acrossUniverses to obtain K=Lpr_1*a(O) in D_QCoh(P) and c(K) ≅ O_X[0].",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-proper-base-change",
-    "lem-pc-noetherian-derived-direct-image-right-adjoint",
-    "lem-sc-smooth-proper-diagonal-pushforward-structure"
+    "lem-sc-diagonal-counit-across-universes"
    ],
    "elementary": false
   },
   {
-   "text": "The proper closed diagonal has exact module pushforward, so its derived pushforward of the tensor unit is the given perfect single complex. Apply the perfect immersion tensor formula to K=Lpr_1* a(O_S[0]); its invertible mate gives LDelta* K tensor c(O_P[0]) isomorphic to c(K).",
+   "text": "Apply perfectImmersion_tensor_acrossUniverses to the closed proper diagonal and K. This gives c(K) ≅ LDelta*K tensor c(OP). Apply derivedPullbackAcrossUniverses_retraction using pullback.diagonal_fst to identify LDelta*K with a(O).",
    "uses": [
-    "lem-sc-smooth-proper-diagonal-tensor-formula",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-sc-perfect-immersion-tensor-across-universes",
+    "lem-pc-derived-pullback-across-universes-retraction"
    ],
    "elementary": false
   },
   {
-   "text": "Compose the derived pullback composition and identity comparisons with Delta followed by pr_1 = id. This identifies LDelta* Lpr_1* with the identity. Compose with the preceding two isomorphisms and invert. Transport the two structure objects by a and c. For distinct derived universes, use the equivalences of localizations induced by the identity of complexes; their comparisons with single functors, homology, derived functors and K-flat derived tensor transport this construction and both adjunctions. This establishes the assertion for the specified adjoints.",
+   "text": "Tensor the retraction isomorphism with the identity of c(OP), invert and compose with the inverse tensor-formula isomorphism and counit. Identify O_X[0] with the tensor unit using the proved upstream DerivedCategory.singleFunctorObjUnitIso. This gives exactly the unchanged parent conclusion.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-category",
     "def-pc-scheme-derived-tensor-structure"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-proper-base-change",
-  "lem-pc-noetherian-derived-direct-image-right-adjoint",
-  "lem-sc-smooth-proper-diagonal-pushforward-structure",
-  "lem-sc-smooth-proper-diagonal-tensor-formula",
   "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "def-pc-derived-category"
+  "lem-pc-derived-pullback-across-universes-retraction",
+  "lem-sc-diagonal-counit-across-universes",
+  "lem-sc-perfect-immersion-tensor-across-universes",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-base-change"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0E2Q and 0A9U, first three equalities in the displayed chain of Tag 0BRT"
+  "place": "Tags 0E2Q and 0A9U, and Tag 05RU localization uniqueness; source text read online because local Stacks source is absent. Universe-transport details written by Q2."
  },
  "mathlib_searches": [
   {
@@ -134,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T085324-L-33840",
+  "landing": "20261012T110315-L-620416",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
