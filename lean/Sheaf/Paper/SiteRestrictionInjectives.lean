@@ -70,6 +70,10 @@ theorem siteRestriction_injectives
       (∀ (S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{w})),
         S.ShortExact →
           (S.map (J.toGrothendieck.overPullback AddCommGrpCat.{w} W)).ShortExact) := by
-  sorry
+  refine ⟨⟨Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Over.forget W) AddCommGrpCat (J.toGrothendieck.over W) J.toGrothendieck⟩, ?_, ?_⟩
+  · exact site_extensionByZero_exact J W
+  · intro S hS
+    exact siteRestriction_exact J W S hS
 
 end CategoryTheory

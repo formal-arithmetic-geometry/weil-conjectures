@@ -7528,3 +7528,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/N1/Sheaf.RingTheory.RegularPowerSeriesGenericFormalFiber (stage 3; reviewer PASS; first push; landing 20261012T112845-L-769948 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/N1/Sheaf.RingTheory.RegularSequenceKoszulRegular (stage 3; reviewer PASS; first push; landing 20261012T112845-L-770053 (proof); batch 20261012T112824; modules 1; new nodes 0)
 - 11:28 L: merged deliver/N2/Sheaf.RingTheory.TorKernelBoundaryNaturality (stage 3; reviewer PASS; first push; landing 20261012T112846-L-770148 (interface); batch 20261012T112824; modules 3; new nodes 2)
+- 11:28 L: merged deliver/N3/Sheaf.Paper.SiteRestrictionInjectives (stage 3; reviewer PASS; first push; landing 20261012T112846-L-770267 (proof); batch 20261012T112824; modules 1; new nodes 0)
