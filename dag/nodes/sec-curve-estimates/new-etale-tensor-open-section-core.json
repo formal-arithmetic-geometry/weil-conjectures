@@ -1,0 +1,114 @@
+{
+ "id": "new-etale-tensor-open-section-core",
+ "kind": "statement",
+ "title": "Core compatibility of tensor restriction with canonical open-section comparison",
+ "statement": "After expanding the transport along hi and the canonical tensor-to-restriction comparison, the tensor restriction map commutes with these component comparisons and the ordinary presheaf restriction.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "Equation (35.8.0.1)"
+ },
+ "proof": [
+  {
+   "text": "Use the unit equation for the left-adjoint uniqueness comparison and the normalized composition comparison, then evaluate at top sections.",
+   "uses": [
+    "new-etale-tensor-open-section-iso",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-etale-tensor-open-section-iso",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "Equation (35.8.0.1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq unit restriction",
+   "date": "2026-10-13",
+   "digest": "worker",
+   "results": "No direct theorem found",
+   "verdict": "Core theorem required."
+  },
+  {
+   "tool": "loogle",
+   "query": "unit_leftAdjointUniq_hom_app",
+   "date": "2026-10-13",
+   "digest": "worker",
+   "results": "Adjunction unit equation found",
+   "verdict": "Ingredient only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction comparison naturality",
+   "date": "2026-10-13",
+   "digest": "worker",
+   "results": "No direct match",
+   "verdict": "Core theorem required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor restriction canonical open section comparison naturality",
+   "date": "2026-10-13",
+   "digest": "worker",
+   "results": "No direct result",
+   "verdict": "Core theorem remains."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-etale-tensor-open-section-naturality",
+   "place": "core compatibility step"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorOpenSectionsNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorOpenSectionIso_component_core",
+  "statement": "theorem etaleTensorOpenSectionIso_component_core (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules) {U V : X.Opensᵒᵖ} (f : U ⟶ V) : (i.op ⋙ etaleTensorSectionsPresheaf F).map f ≫ (eqToIso (congrArg (fun T : Over X ↦ Γ((tensorPullback T.hom).obj F, ⊤)) (congrArg (fun k : X.Opens ⥤ Over X ↦ k.obj V.unop) hi))).hom ≫ (tensorOpenSectionIso X F V.unop).hom = (eqToIso (congrArg (fun T : Over X ↦ Γ((tensorPullback T.hom).obj F, ⊤)) (congrArg (fun k : X.Opens ⥤ Over X ↦ k.obj U.unop) hi))).hom ≫ (tensorOpenSectionIso X F U.unop).hom ≫ (F.presheafModuleCat ⋙ forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u}).map f",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "new-etale-tensor-open-section-iso",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184402-L-4026371",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T184402-L-4026371",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

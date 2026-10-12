@@ -68,6 +68,23 @@ the ordinary presheaf restriction, while restrictAppIso identifies the whole-ope
 sections with F(U) and F(V). The transports of image-top and a≫b=V.ι commute with
 these maps by functoriality of F.presheaf. This gives the displayed square. Empty
 opens, identity inclusions, and zero modules obey the same unit equations. -/
+/- Core comparison compatibility after expanding the constructed isomorphisms.
+Source: Stacks, Tag 03DR, equation (35.8.0.1) (blueprint: new-etale-tensor-open-section-core).
+-/
+theorem etaleTensorOpenSectionIso_component_core
+    (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
+    (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules)
+    {U V : X.Opensᵒᵖ} (f : U ⟶ V) :
+    (i.op ⋙ etaleTensorSectionsPresheaf F).map f ≫
+        (eqToIso (congrArg (fun T : Over X ↦ Γ((tensorPullback T.hom).obj F, ⊤))
+          (congrArg (fun k : X.Opens ⥤ Over X ↦ k.obj V.unop) hi))).hom ≫
+        (tensorOpenSectionIso X F V.unop).hom =
+      (eqToIso (congrArg (fun T : Over X ↦ Γ((tensorPullback T.hom).obj F, ⊤))
+          (congrArg (fun k : X.Opens ⥤ Over X ↦ k.obj U.unop) hi))).hom ≫
+        (tensorOpenSectionIso X F U.unop).hom ≫
+        (F.presheafModuleCat ⋙ forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u}).map f := by
+  sorry
+
 theorem etaleTensorOpenSectionIso_naturality
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules)
@@ -76,7 +93,8 @@ theorem etaleTensorOpenSectionIso_naturality
         (etaleTensorOpenSectionIso X i hi F V).hom =
       (etaleTensorOpenSectionIso X i hi F U).hom ≫
         (F.presheafModuleCat ⋙ forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u}).map f := by
-  sorry
+  simpa [etaleTensorOpenSectionIso] using
+    etaleTensorOpenSectionIso_component_core X i hi F f
 
 end
 end AlgebraicGeometry.Scheme.Modules
