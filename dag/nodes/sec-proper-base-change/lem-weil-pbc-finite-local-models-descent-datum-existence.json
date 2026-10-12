@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-finite-local-models-descent-datum-existence",
+ "kind": "statement",
+ "title": "Existence of assembled finite etale local model",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $E$ a sheaf of sets [def-weil-pbc-etale-sheaf-of-sets] on its small etale site [def-weil-pbc-etale-site], and $\\{U_i\\to T\\}_{i\\in I}$ an etale cover, with $I$ in the universe of the schemes. Suppose that for each $i$ the restriction of $E$ transported to the small etale site of $U_i$ is represented by a finite etale $U_i$-scheme [def-weil-pbc-finite-etale-category]. Put $U=\\coprod_iU_i$ with its codiagonal $U\\to T$. There is a finite etale $U$-scheme $Q$ and an isomorphism between $E$ restricted to the site localized at $U$ and the lifted Yoneda presheaf of $Q$, precomposed with the equivalence from that localized site to the small etale site of $U$. No descent datum is asserted here.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV (lemma-characterize-finite-locally-constant), converse; Descent Tag 02W5 (lemma-descent-data-sheaves)"
+ },
+ "proof": [
+  {
+   "text": "Choose the finite etale representatives Q_i and representation isomorphisms from hrep. Use the localized-site equivalence to regard each isomorphism as a representation of E over U_i.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the coproducts U of U_i and V of Q_i, with the morphism V to U induced by the structure maps. The coprojections are disjoint open and closed embeddings. The inverse image of each component U_i is Q_i: the component square is a pullback by disjointness and the coproduct universal property.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each target component U_i the morphism is finite because its restriction is Q_i to U_i. Target locality makes V to U finite. On each source component Q_i it is the composite of an etale map with an open immersion into U. Source locality makes V to U etale. These properties give a finite etale object Q over U.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any etale W over U use the disjoint etale covering by W_i=W times_U U_i. The local isomorphisms identify sections of E on W_i with maps W_i to Q_i over U_i. Disjoint-cover sheaf gluing identifies E(W) with the product of those section sets, including the empty index case. The representable presheaf of V has the same gluing property and the same local sections: a map over U lands in the indicated component. Glue the maps and their inverses; uniqueness proves naturality and the inverse equations. Transport through the site equivalence to obtain the stated presheaf isomorphism.",
+   "uses": [
+    "lem-weil-pbc-disjoint-etale-sections-product",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-disjoint-etale-sections-product",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03RV and 02W5; small-site and arbitrary-scheme transport details expanded by S1 after reading the online text (local checkout absent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local finite etale representatives of a sheaf assemble over a coproduct and induce a descent datum compatible with sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale scheme representing restriction of a sheaf on the small etale site carries a descent datum compatible with sections",
+   "results": "Pseudofunctor.isEquivalence_toDescentData, Scheme.Etale.forget, Scheme.smallEtaleTopology and GlueData.sheafValGluedMk; supporting interfaces only, no theorem with this localized small-site representation input.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale",
+   "results": "Scheme.Etale, Etale.forgetFullyFaithful and finite-limit instances; no assembly or compatible descent theorem.",
+   "date": "2026-10-12",
+   "verdict": "Supporting interfaces only."
+  },
+  {
+   "tool": "grep",
+   "query": "overDescentDatum|sigmaDesc|sigmaOpenCover",
+   "results": "Mathlib Cover.sigma, IsZariskiLocalAtSource.sigmaDesc, Surjective.sigmaDesc_of_union_range_eq_univ and sigmaOpenCover; the source library overDescentDatum requires a presheaf on all schemes over T, not a small-site sheaf. No exact assertion.",
+   "date": "2026-10-12",
+   "verdict": "Cover.sigma and surjectivity are used in the upper proof; the remaining steps require the two intermediate constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatum",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+   "place": "Assembly of the local representatives over the coproduct of the cover",
+   "via": [
+    "lem-weil-pbc-finite-local-models-descent-datum",
+    "lem-weil-pbc-finite-locally-constant-sets-descent",
+    "lem-weil-pbc-finite-locally-constant-sets-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalModelsDescentDatumExistence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocalModels_descentDatum_exists",
+  "statement": "theorem finiteLocalModels_descentDatum_exists\n    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))\n    (𝒰 : Cover.{u} etalePrecoverage T)\n    (hrep : ∀ i, ∃ Q : (𝒰.etalePrecoverageToEtale i).left.FiniteEtale,\n      Nonempty (((Etale.overSheafEquiv (𝒰.etalePrecoverageToEtale i)\n        (Type (u + 1))).functor.obj (E.over (𝒰.etalePrecoverageToEtale i))).obj ≅\n          uliftYoneda.{u + 1}.obj Q.obj)) :\n    let U := 𝒰.sigma.etalePrecoverageToEtale default\n    ∃ (Q : U.left.FiniteEtale),\n      Nonempty ((E.over U).obj ≅ (Etale.overToEtale U).op ⋙\n        uliftYoneda.{u + 1}.obj Q.obj)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085334-L-37394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085334-L-37394",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

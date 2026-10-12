@@ -17,38 +17,34 @@
  ],
  "proof": [
   {
-   "text": "Choose the local finite etale representatives and their isomorphisms. Transport them back through the localized-site equivalence. Form the coproducts U of the cover members and V of the representatives. Coprojections are disjoint open and closed embeddings covering each coproduct. The codiagonal U to T is etale by source locality and surjective by the given cover. V to U is finite by target locality on the components, and etale by source locality.",
+   "text": "Take the etale cover Cover.sigma obtained by collapsing the cover to its coproduct. Its codiagonal is surjective by the Mathlib Surjective instance for Sigma.desc of a scheme cover. Apply the assembly theorem at this fixed covering object U to get a finite etale Q and presheaf isomorphism e.",
    "uses": [
-    "def-weil-pbc-etale-site",
     "lem-weil-pbc-scheme-coproduct-family",
     "lem-weil-pbc-etale-local-on-source",
-    "lem-weil-pbc-finite-local-on-target"
+    "lem-weil-pbc-finite-local-models-descent-datum-existence"
    ],
    "elementary": false
   },
   {
-   "text": "Glue the local presheaf representations along the disjoint components using the sheaf axiom. On U times_T U, the two pullbacks of V represent the same restriction of E. Yoneda gives their unique comparison isomorphism over the overlap. On the triple product Yoneda faithfulness proves the cocycle; on the diagonal it proves the identity. Base-changing this comparison along arbitrary scheme maps gives the transport datum. Evaluating at an etale W and a section s gives exactly the displayed transport equation. Empty components and the empty cover use the sheaf axiom for the empty covering.",
+   "text": "Apply compatible transport construction to U, Q and e; it needs no surjectivity hypothesis. Package Q as the Over object with hom Q.obj.hom, together with the constructed datum, Q.property (finiteness) and Q.obj.prop (etaleness), yielding D in FiniteEtaleDescentData. The underlying etale object of this D is definitionally Q.obj, so the original e and transport equation fill the remaining existential witnesses unchanged.",
    "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-galois-yoneda-fully-faithful",
-    "def-pd-descent-datum"
+    "lem-weil-pbc-finite-local-models-descent-datum-compatibility",
+    "def-galois-finite-etale-descent-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-site",
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-etale-local-on-source",
-  "lem-weil-pbc-finite-local-on-target",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "lem-galois-yoneda-fully-faithful",
-  "def-pd-descent-datum"
+  "lem-weil-pbc-finite-local-models-descent-datum-existence",
+  "lem-weil-pbc-finite-local-models-descent-datum-compatibility",
+  "def-galois-finite-etale-descent-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03RV and Descent Tag 02W5, small-site details expanded by A3; local literature checkout absent, online text checked"
+  "place": "Tags 03RV and 02W5; S1 decomposition into fixed-coproduct representation and compatible datum construction; Cover.sigma and surjectivity are proved by Mathlib."
  },
  "mathlib_searches": [
   {
@@ -149,9 +145,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T070526-L-3465419",
+  "landing": "20261012T085334-L-37394",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

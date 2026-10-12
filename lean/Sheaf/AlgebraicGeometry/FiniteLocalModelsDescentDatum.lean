@@ -8,7 +8,8 @@ public import Sheaf.AlgebraicGeometry.FiniteEtaleDescentData
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumExistence
+import Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibility
 
 /-!
 # Descent datum from finite etale local representatives
@@ -68,6 +69,15 @@ theorem finiteLocalModels_descentDatum
           ((MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm)
           (Over.homMk ((e.hom.app (op (Over.mk a))) s).down.left
             (MorphismProperty.Over.w ((e.hom.app (op (Over.mk a))) s).down))).left =
-          ((e.hom.app (op (Over.mk b))) s).down.left := by sorry
+          ((e.hom.app (op (Over.mk b))) s).down.left := by
+  let U := 𝒰.sigma.etalePrecoverageToEtale default
+  have hU : Surjective U.hom := by
+    change Surjective (CategoryTheory.Limits.Sigma.desc 𝒰.f)
+    infer_instance
+  obtain ⟨Q, ⟨e⟩⟩ := finiteLocalModels_descentDatum_exists T E 𝒰 hrep
+  obtain ⟨d, hd⟩ := finiteLocalModels_descentDatum_compatibility T E U Q e
+  let D : AlgebraicGeometry.FiniteEtaleDescentData U.hom :=
+    ⟨⟨Over.mk Q.obj.hom, d⟩, Q.property, Q.obj.prop⟩
+  exact ⟨U, hU, D, e, hd⟩
 
 end AlgebraicGeometry.Scheme

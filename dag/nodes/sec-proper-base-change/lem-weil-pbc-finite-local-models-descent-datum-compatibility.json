@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-finite-local-models-descent-datum-compatibility",
+ "kind": "statement",
+ "title": "Compatibility of assembled local model with transport",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $E$ a sheaf of sets [def-weil-pbc-etale-sheaf-of-sets] on its small etale site [def-weil-pbc-etale-site], and $U\\to T$ an etale morphism (not necessarily surjective). Let $Q$ be a finite etale $U$-scheme [def-weil-pbc-finite-etale-category] and let $e$ identify the restriction of $E$ to the localized site at $U$ with the lifted Yoneda presheaf of $Q$ precomposed with the localized-site equivalence. There exists a scheme descent datum $d$ [def-pd-descent-datum] on $Q$ relative to $U\\to T$ such that, for every etale $W\\to T$, lifts $a,b:W\\to U$ and section $s\\in E(W)$, $d$ transports the $Q$-point corresponding under $e$ to $(W,a,s)$ to the $Q$-point corresponding under $e$ to $(W,b,s)$. No covering hypothesis or assembly of Q is needed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-finite-etale-category",
+  "def-pd-descent-datum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV (lemma-characterize-finite-locally-constant), converse; Descent Tag 02W5 (lemma-descent-data-sheaves)"
+ },
+ "proof": [
+  {
+   "text": "Over H=U times_T U, pull back Q along both projections. Each pullback represents the restriction of E to H via the given isomorphism e and the corresponding projection. This identification is natural in etale objects over H by naturality of e and the pullback universal property. Yoneda full faithfulness gives the unique scheme comparison isomorphism over H.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over U times_T U times_T U the comparisons all identify the same section of E. Composing the first two comparisons therefore gives the third. Yoneda faithfulness proves the cocycle equality of scheme morphisms. Pullback along the diagonal similarly gives the identity comparison.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any scheme W and lifts a,b with equal composite to T, base change the comparison along (a,b):W to H, and apply it to points of Q over a. Pullback functoriality proves naturality in arbitrary W. The diagonal and cocycle equalities give transport_self and transport_transport, yielding a scheme descent datum. It is legitimate to construct the comparison on the small site: H and the pullback representatives are etale over the indicated bases. The later base change to W does not evaluate E on W unless W is etale over T.",
+   "uses": [
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an etale W over T, the comparison is defined under the two representation isomorphisms to identify the same section s of E(W). Evaluating its transport on the point e_a(s) therefore gives e_b(s), exactly the displayed underlying scheme-map equality. Empty objects satisfy this equation by their unique sections.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-galois-yoneda-fully-faithful",
+  "def-pd-descent-datum",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03RV and 02W5; small-site and arbitrary-scheme transport details expanded by S1 after reading the online text (local checkout absent)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local finite etale representatives of a sheaf assemble over a coproduct and induce a descent datum compatible with sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale scheme representing restriction of a sheaf on the small etale site carries a descent datum compatible with sections",
+   "results": "Pseudofunctor.isEquivalence_toDescentData, Scheme.Etale.forget, Scheme.smallEtaleTopology and GlueData.sheafValGluedMk; supporting interfaces only, no theorem with this localized small-site representation input.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale",
+   "results": "Scheme.Etale, Etale.forgetFullyFaithful and finite-limit instances; no assembly or compatible descent theorem.",
+   "date": "2026-10-12",
+   "verdict": "Supporting interfaces only."
+  },
+  {
+   "tool": "grep",
+   "query": "overDescentDatum|sigmaDesc|sigmaOpenCover",
+   "results": "Mathlib Cover.sigma, IsZariskiLocalAtSource.sigmaDesc, Surjective.sigmaDesc_of_union_range_eq_univ and sigmaOpenCover; the source library overDescentDatum requires a presheaf on all schemes over T, not a small-site sheaf. No exact assertion.",
+   "date": "2026-10-12",
+   "verdict": "Cover.sigma and surjectivity are used in the upper proof; the remaining steps require the two intermediate constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatum",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+   "place": "Yoneda comparison and transport for a fixed local representation",
+   "via": [
+    "lem-weil-pbc-finite-local-models-descent-datum",
+    "lem-weil-pbc-finite-locally-constant-sets-descent",
+    "lem-weil-pbc-finite-locally-constant-sets-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalModelsDescentDatumCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocalModels_descentDatum_compatibility",
+  "statement": "theorem finiteLocalModels_descentDatum_compatibility\n    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))\n    (U : T.Etale)\n    (Q : U.left.FiniteEtale)\n    (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙\n      uliftYoneda.{u + 1}.obj Q.obj) :\n    ∃ d : Over.DescentDatum U.hom (Over.mk Q.obj.hom),\n      ∀ (W : T.Etale) (a b : W ⟶ U) (s : E.obj.obj (op W)),\n        (d.transport a.left b.left\n          ((MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm)\n          (Over.homMk ((e.hom.app (op (Over.mk a))) s).down.left\n            (MorphismProperty.Over.w ((e.hom.app (op (Over.mk a))) s).down))).left =\n          ((e.hom.app (op (Over.mk b))) s).down.left",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085334-L-37394",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085334-L-37394",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
