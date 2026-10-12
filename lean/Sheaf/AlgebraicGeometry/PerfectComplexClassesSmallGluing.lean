@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Gluing smallness of perfect isomorphism classes
 

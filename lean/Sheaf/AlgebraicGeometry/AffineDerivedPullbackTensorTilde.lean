@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 import Sheaf.AlgebraicGeometry.AffineTildeTotalTensor
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-! # Affine computations of derived pullback and tensor
 

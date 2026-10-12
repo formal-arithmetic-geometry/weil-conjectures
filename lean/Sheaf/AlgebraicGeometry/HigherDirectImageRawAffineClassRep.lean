@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Raw affine cohomology classes descend to a stage
 

@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.IsFlasqueHomObjOfInjective
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import Sheaf.Topology.FlasqueZariskiAcyclic
+import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Acyclicity of internal Hom into an injective module
 

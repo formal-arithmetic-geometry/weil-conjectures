@@ -6,6 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleComplexPullbackTransport
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Coherence of termwise pullbacks over a cone
 
