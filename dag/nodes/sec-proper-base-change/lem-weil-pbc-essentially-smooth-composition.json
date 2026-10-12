@@ -27,81 +27,31 @@
  ],
  "proof": [
   {
-   "text": "*The presentations.* By [def-weil-pbc-essentially-smooth-ring-map] there are a smooth $R$-algebra $P$ [def-weil-pbc-smooth-ring-map], a multiplicative subset $S\\subseteq P$ and an isomorphism of $R$-algebras $A\\cong S^{-1}P$; and a smooth $A$-algebra $Q$, a multiplicative subset $T\\subseteq Q$ and an isomorphism of $A$-algebras $B\\cong T^{-1}Q$. Since essential smoothness depends only on the isomorphism class of the algebra (step 1 of [def-weil-pbc-essentially-smooth-ring-map]) we may replace $A$ by $S^{-1}P$ (transporting $Q$, $T$ and the structure maps along the isomorphism) and $B$ by $T^{-1}Q$; an isomorphism of $A$-algebras is an isomorphism of $R$-algebras for the structures through $R\\to A$. So $R\\to A=S^{-1}P$ is $R\\to P\\to S^{-1}P$, and $R\\to B$ is $R\\to S^{-1}P\\to Q\\to T^{-1}Q$. It suffices to find a smooth $R$-algebra $Q_0$, a multiplicative subset $U\\subseteq Q_0$ and an isomorphism of $R$-algebras $T^{-1}Q\\cong U^{-1}Q_0$.",
+   "text": "Extract the localization presentation of B over a smooth A-algebra Q. Use the compatible composite R-algebra structure on Q and the smooth-over-essentially-smooth-base model to obtain a smooth R-algebra P with Q a localization.",
    "uses": [
     "def-weil-pbc-essentially-smooth-ring-map",
-    "def-weil-pbc-smooth-ring-map"
+    "lem-weil-pbc-smooth-over-essentially-smooth-base"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, Section 07FF (section-inseparable), uses of 'essentially smooth' in Lemma 07FI (line 2638) and the proof of Lemma 07FJ (line 2752); written by an agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Descend $Q$ to a principal localization of $P$.* By [lem-weil-pbc-localization-colimit-principal-localizations], $S$ preordered by divisibility is filtered and $A=S^{-1}P=\\varinjlim_{f\\in S}P_f$ in commutative rings, with coprojections $\\kappa_f:P_f\\to A$, $a/f^e\\mapsto a/f^e$. Since $A\\to Q$ is smooth, [lem-weil-pbc-smooth-algebra-filtered-colimit-descent] gives an $s\\in S$, a smooth ring map $\\beta:P_s\\to Q_0$ and an isomorphism of $A$-algebras $Q\\cong A\\otimes_{P_s}Q_0$, the tensor product formed via $\\kappa_s$. Again transporting $T$, we may take $Q=A\\otimes_{P_s}Q_0$.",
-   "uses": [
-    "lem-weil-pbc-localization-colimit-principal-localizations",
-    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00CR (lemma-localization-colimit, line 1243) and Lemma Tag 0CAQ (lemma-smooth-descends-through-colimit, line 38230)"
-   }
-  },
-  {
-   "text": "*$Q_0$ is smooth over $R$.* $R\\to P$ is smooth and $s\\in P$, so $R\\to P\\to P_s$ is smooth [lem-weil-pbc-smooth-ring-map-principal-localization]; $P_s\\to Q_0$ is smooth (step 2); hence the composite $R\\to P_s\\to Q_0$ is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition] (2). We regard $Q_0$ as an $R$-algebra through this composite.",
-   "uses": [
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00T3 (lemma-localize-smooth, line 37113) and Lemma Tag 00TD (lemma-compose-smooth, line 37597), as recorded in the two cited Mathlib leaves"
-   }
-  },
-  {
-   "text": "*$Q$ is a localization of $Q_0$.* Let $\\phi:P\\to P_s$ and $\\phi':P\\to S^{-1}P$ be the localization maps. The powers of $s$ lie in $S$, and $\\kappa_s\\circ\\phi=\\phi'$ ([lem-weil-pbc-localization-colimit-principal-localizations], last clause), so by [lem-weil-pbc-localization-of-localization] (2) (with $M=\\{s^e\\}\\subseteq N=S$) $\\kappa_s:P_s\\to A$ is a localization of $P_s$ at the multiplicative subset $\\phi(S)$. By [lem-weil-pbc-localization-base-change] (with the ring $P_s$, the subset $\\phi(S)$, $R'=A$ and $\\psi=\\beta:P_s\\to Q_0$), $Q_0\\to Q_0\\otimes_{P_s}A$, $q\\mapsto q\\otimes1$, is a localization of $Q_0$ at $S_1=\\beta(\\phi(S))$; composing with the isomorphism $Q_0\\otimes_{P_s}A\\cong A\\otimes_{P_s}Q_0=Q$, $q\\otimes a\\mapsto a\\otimes q$ (conditions (a)-(c) of a localization are preserved by composing with a ring isomorphism), $\\lambda:Q_0\\to Q$, $q\\mapsto1\\otimes q$, is a localization of $Q_0$ at $S_1$. It is compatible with the $R$-structures: for $r\\in R$ with image $p\\in P$, $\\lambda(\\beta(\\phi(p)))=1\\otimes\\beta(\\phi(p))=\\kappa_s(\\phi(p))\\otimes1=\\phi'(p)\\otimes1$, which is the image of $r$ under $R\\to P\\to S^{-1}P=A\\to Q$.",
-   "uses": [
-    "lem-weil-pbc-localization-colimit-principal-localizations",
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-localization-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section 00CM (section-localization) and Lemma Tag 00DK (lemma-tensor-localization, line 2087), as recorded in lem-weil-pbc-localization-base-change; written by an agent"
-   }
-  },
-  {
-   "text": "*$B$ is a localization of the smooth $R$-algebra $Q_0$; conclusion.* $\\lambda:Q_0\\to Q$ is a localization at $S_1$ (step 4) and $Q\\to T^{-1}Q=B$ a localization at $T$, so by [lem-weil-pbc-localization-of-localization] (1) the composite $Q_0\\to B$ is a localization of $Q_0$ at $U=\\{x\\in Q_0:\\lambda(x)=t\\lambda(\\sigma)\\text{ for some }t\\in T,\\ \\sigma\\in S_1\\}$, and $B\\cong U^{-1}Q_0$ as $Q_0$-algebras, hence as $R$-algebras, since the $R$-structure of $B$, $R\\to A\\to Q\\to B$, equals $R\\to Q_0\\to Q\\to B$ (step 4). As $Q_0$ is smooth over $R$ (step 3), $R\\to B$ is essentially smooth [def-weil-pbc-essentially-smooth-ring-map].",
+   "text": "Transport the Q-algebra structure on B through its A-algebra presentation and prove the A,Q,B and R,Q,B scalar towers. Compose the localizations P to Q and Q to B using Mathlib IsLocalization.localization_localization_isLocalization; the canonical localization equivalence restricted to R gives the required essentially smooth presentation.",
    "uses": [
     "lem-weil-pbc-localization-of-localization",
     "def-weil-pbc-essentially-smooth-ring-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section 00CM (section-localization); written by an agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-essentially-smooth-ring-map",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-localization-colimit-principal-localizations",
-  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
-  "lem-weil-pbc-smooth-ring-map-principal-localization",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
   "lem-weil-pbc-localization-of-localization",
-  "lem-weil-pbc-localization-base-change"
+  "lem-weil-pbc-smooth-over-essentially-smooth-base"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/smoothing.tex",
-  "place": "Used without statement in Smoothing Ring Maps, Lemma Tag 07FI (lemma-enlarge-solution-modulo) and the proof of Lemma Tag 07FJ (lemma-resolve-general, item item-choose-deltai); proof written by an agent from Algebra Lemmas 00CR and 0CAQ"
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Second reading by Y3: steps 2-4 isolated as a localization model for a smooth algebra; step 5 proved using Mathlib localization composition."
  },
  "mathlib_searches": [
   {
@@ -177,5 +127,15 @@
   "group": "F1",
   "result": "pass",
   "note": "R,A,B CommRing in independent universes; f:R→+*A, g:A→+*B; hf/hg = recorded Algebra.EssentiallySmooth under f.toAlgebra/g.toAlgebra; conclusion EssentiallySmooth R B under (g.comp f).toAlgebra; no extra hypotheses; name free (#check)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T144203-L-2113794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

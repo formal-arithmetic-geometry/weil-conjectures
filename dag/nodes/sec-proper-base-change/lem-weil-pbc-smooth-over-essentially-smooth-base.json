@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-smooth-over-essentially-smooth-base",
+ "kind": "statement",
+ "title": "Smooth algebras over an essentially smooth base have localization models",
+ "statement": "Let $R,A,Q$ be commutative rings with compatible algebra structures $R\\to A\\to Q$. If $A$ is essentially smooth over $R$ [def-weil-pbc-essentially-smooth-ring-map] and $Q$ is smooth over $A$ [def-weil-pbc-smooth-ring-map], then in any universe containing that of $R$ there is a smooth $R$-algebra $P$, an $R$-compatible algebra map $P\\to Q$, and a multiplicative subset $S$ such that $Q$ is its localization [def-weil-pbc-module-localization].",
+ "stmt_deps": [
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-module-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CR, 0CAQ, 00T3, 00TD and 00DK; agent-written combination, verified online at https://stacks.math.columbia.edu/tag/0CAQ and /tag/00CR and /tag/00DK"
+ },
+ "proof": [
+  {
+   "text": "Present A as a localization of a smooth R-algebra C, form the filtered diagram of its principal localizations, and descend the smooth A-algebra Q to a smooth C_s-algebra P.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "P is smooth over R by smoothness of principal localization and composition. Base change identifies P to Q as a localization, compatibly with the R structures by the tensor balancing relation.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite type over R gives a surjection from a polynomial ring in finitely many variables, so P is small in the universe of R. Transport the ring, algebras, submonoid and localization along a small model, then lift to the requested universe.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-principal-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Reduction from Tags 00CR and 0CAQ followed by smooth composition and localization base change; universe transport by finite-type smallness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a smooth algebra over a localization descends to a smooth algebra over a principal localization",
+   "results": "Algebra.Smooth.of_isLocalization_Away; Algebra.IsStandardSmooth.localization_away; RingHom.Smooth.holdsForLocalizationAway; RingHom.isStandardSmooth_holdsForLocalizationAway; RingHom.Smooth.ofLocalizationSpanTarget; RingHom.isStandardSmooth_localizationPreserves; Algebra.IsStandardSmoothOfRelativeDimension.localization_away; RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway",
+   "date": "2026-10-12",
+   "verdict": "no exact match; smooth principal localization and finite-type smallness only"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*(descend|localiz)|localiz.*smooth|FiniteType.small",
+   "results": "Mathlib/RingTheory/Finiteness/Small.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/Basic.lean; Mathlib/RingTheory/Smooth/Basic.lean; Mathlib/RingTheory/Smooth/Basic.lean; Mathlib/RingTheory/Smooth/Basic.lean; Mathlib/RingTheory/Smooth/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; smooth principal localization and finite-type smallness only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth algebra over a localization of a smooth algebra is itself a localization of a smooth algebra over the original base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EssentiallySmoothComp",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothOverEssentiallySmoothBase",
+  "file": "lean/Sheaf/RingTheory/SmoothOverEssentiallySmoothBase.lean",
+  "declaration": "Algebra.exists_smooth_localization_model",
+  "statement": "theorem exists_smooth_localization_model\n    (R : Type u) (A : Type v) (Q : Type w)\n    [CommRing R] [CommRing A] [CommRing Q]\n    [Algebra R A] [Algebra A Q] [Algebra R Q] [IsScalarTower R A Q]\n    (hA : EssentiallySmooth R A) (hQ : Smooth A Q) :\n    ∃ (P : Type (max u t)) (hP : CommRing P),\n      letI : CommRing P := hP\n      ∃ (hRP : Algebra R P),\n        letI : Algebra R P := hRP\n        ∃ (hPQ : Algebra P Q),\n          letI : Algebra P Q := hPQ\n          IsScalarTower R P Q ∧ Smooth R P ∧\n            ∃ (S : Submonoid P), IsLocalization S Q",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T144203-L-2113794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T144203-L-2113794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
