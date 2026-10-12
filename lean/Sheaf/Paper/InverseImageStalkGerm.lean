@@ -26,12 +26,16 @@ of `ȳ` to the germ of `a` at `(U, ū)`. Here `f⁻¹ = Etale.upperStar`, `η` i
 `Etale.upperStarLowerStarAdjunction`, stalks and germs are `pointSmallEtale`'s
 `sheafFiber`/`toPresheafFiber`, and `(ū, ȳ)` is `(pointSmallEtaleFiberEtaleIso f y).inv`.
 
-Proof (blueprint): model `f⁻¹G` as the sheafification `(f_pG)^#` of the presheaf pullback,
-whose unit is `θ ∘ ι_(U,id)`; stalks commute with sheafification, so it suffices to identify
-`(f_pG)_ȳ` with `G_x̄`. Define `α : G_x̄ → (f_pG)_ȳ`, `[a]_(U,ū) ↦ [ι_(U,id) a]_(U×_XY,(ū,ȳ))`,
-and `β : (f_pG)_ȳ → G_x̄`, `[ι_(U,φ) a]_(V,v̄) ↦ [a]_(U, p_U φ v̄)`; both are well defined by the
-universal property of the colimits and are mutually inverse on generators. Put
-`c = β ∘ θ_ȳ⁻¹`; the germ formula is `β ∘ α = id`, and naturality is checked on generators.
+Proof: take `Etale.upperStarCompSheafFiberIso`, the general-site identification of
+pullback stalks transported along `pointSmallEtaleComapIso`. To check the germ formula,
+compose with its inverse and expand its three factors. The germ formula for an
+isomorphism of points transports `ū` to `(pointSmallEtaleFiberEtaleIso f y).inv.app U ū`.
+The germ formula for `sheafFiberComapIso` gives the unit of the abstract sheaf pullback.
+Move the comparison with the constructed pullback past the germ map by naturality;
+`Adjunction.unit_leftAdjointUniq_hom_app` identifies the resulting composite with the
+unit of `Etale.upperStarLowerStarAdjunction`. Naturality in `G` is already part of the
+chosen natural isomorphism. This is the general-site route of Stacks Tag 03Q1 (3),
+which cites Sites Tag 05V1, rather than its alternative direct colimit computation.
 
 Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03Q1 (3)
 (blueprint: lem-weil-pbc-inverse-image-stalk-germ). -/
@@ -50,6 +54,26 @@ theorem inverseImage_stalk_germ
               ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj G).obj ≫
             (c.app G).hom =
           (pointSmallEtale (y ≫ f)).toPresheafFiber U ū G.obj := by
-  sorry
+  refine ⟨Etale.upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} f y, ?_⟩
+  intro G U ū
+  rw [← Category.assoc]
+  apply (Iso.eq_comp_inv _).1
+  simp only [Etale.upperStarCompSheafFiberIso, Iso.app_inv, Iso.trans_inv, Iso.symm_inv,
+    NatTrans.comp_app, Functor.isoWhiskerRight_inv, Functor.whiskerRight_app,
+    Category.assoc]
+  rw [GrothendieckTopology.Point.toPresheafFiber_sheafFiberIso_inv_app_assoc]
+  rw [GrothendieckTopology.Point.toPresheafFiber_sheafFiberComapIso_hom_app_assoc]
+  rw [show (pointSmallEtale y).sheafFiber.map _ =
+    (pointSmallEtale y).presheafFiber.map _ from rfl,
+    GrothendieckTopology.Point.toPresheafFiber_naturality]
+  have hu := Adjunction.unit_leftAdjointUniq_hom_app
+    (Functor.sheafAdjunctionContinuous
+      (MorphismProperty.Over.pullback @Etale ⊤ f) AddCommGrpCat.{u + 1}
+      (X.smallGrothendieckTopology (P := @Etale))
+      (Y.smallGrothendieckTopology (P := @Etale)))
+    (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f) G
+  have huU := NatTrans.congr_app (Sheaf.hom_ext_iff.1 hu) (op U)
+  rw [← Category.assoc, ← huU]
+  rfl
 
 end AlgebraicGeometry

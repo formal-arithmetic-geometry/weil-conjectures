@@ -5872,3 +5872,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:50 L: returned deliver/M1/Sheaf.Topology.CohomologyReductionConstantSubsheaves (reviewer RETURN: (the landing tools, head 86a05e638) the delivery did not land: NOT MERGED Sheaf.Topology.CohomologyReductionConstantSubs)
 - 02:52 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks (stage 3; reviewer PASS; first push; landing 20261012T025055-L-1225101 (interface); modules 3; new nodes 3)
 - 02:53 L: merged deliver/V1/Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1 (stage 3; reviewer PASS; after a return; landing 20261012T025240-L-1234414 (interface); modules 1; new nodes 0; change records: coord/changes/etale-sections-cech-h1-redundant-imports.md)
+- 02:53 L: merged deliver/P1/Sheaf.Paper.InverseImageStalkGerm (stage 3; reviewer PASS; after a return; landing 20261012T025316-L-1237125 (proof); modules 1; new nodes 0)
