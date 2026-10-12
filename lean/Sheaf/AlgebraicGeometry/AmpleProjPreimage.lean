@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.Paper.NonvanishingSectionTrivializes
+import Sheaf.AlgebraicGeometry.SectionRingProjPreimageForward
+import Sheaf.AlgebraicGeometry.SectionRingProjPreimageReverse
 
 /-! # Detecting nonvanishing from the section-ring chart formula
 
@@ -60,6 +61,9 @@ theorem sectionRing_proj_mem_basicOpen (X : Scheme.{v}) (L : X.Modules) [L.IsInv
       0 < e ∧ x ∈ nonvanishingLocus (L.tensorPow e) (t.val e))
     (d : ℕ) (hd : 0 < d) (s : sectionRingGrade L d) :
     x ∈ f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val ↔
-      x ∈ nonvanishingLocus (L.tensorPow d) (s.val d) := by sorry
+      x ∈ nonvanishingLocus (L.tensorPow d) (s.val d) := by
+  constructor
+  · exact sectionRing_proj_mem_basicOpen_forward X L f hformula x hx d hd s
+  · exact sectionRing_proj_mem_basicOpen_reverse X L f hformula x hx d hd s
 
 end AlgebraicGeometry.Scheme.Modules
