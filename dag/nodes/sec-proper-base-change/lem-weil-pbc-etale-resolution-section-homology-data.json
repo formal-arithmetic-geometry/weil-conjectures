@@ -34,22 +34,42 @@
  ],
  "proof": [
   {
-   "text": "Construct the four degreewise comparisons by identifying the Hom complexes computing Ext with sections of the prescribed injective resolutions, including each open localization.",
+   "text": "For an object A representing evaluation at W through a natural additive Hom equivalence, construct an isomorphism from the Hom complex out of A[0] to the universe-lifted section complex of the integer extension of the prescribed resolution. Naturality in the resolution differential gives the chain-map identity. Apply InjectiveResolution.extAddEquivCohomologyClass, HomComplex.leftHomologyData, and the homology-preserving ulift functor. The mapExtendIso and extendHomologyIso comparisons return to natural-number-indexed homology. This is a direct Lean construction, adapting the already proved resolution_section_cohomology argument to larger coefficients.",
    "uses": [
-    "def-sp-injective-resolutions",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the terminal identity etale object, take A to be the constant integer sheaf. The constantSheafAdj homAddEquiv followed by uliftZMultiplesAddEquiv represents sections, naturally in the coefficient sheaf. The preceding construction therefore identifies global section homology with Sheaf.H in every degree.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At the open object W, take A to be the sheafification of the free abelian presheaf on uliftYoneda(W). Use EtaleOpenComparison.sectionsEquiv and its naturality for the preceding construction. Compose with etaleCohomologyOverOpenEquiv, then with the Ext functor applied to the inverse of upperStarIsoOpenImmersionRestriction at the coefficient sheaf. This gives the open section homology comparison, including the empty open and degree zero.",
+   "uses": [
+    "def-weil-pbc-etale-open-comparison-data",
     "lem-weil-pbc-etale-inverse-image-restriction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the global and open constructions independently to I and to J. Classical choice of witnesses of the proved Nonempty comparisons assembles the four equivalence families; the final True is immediate. No data is defined from an unproved existence result, and the map alpha and its augmentation identity are unnecessary for this existence-only conclusion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-open-comparison-data",
   "lem-weil-pbc-etale-inverse-image-restriction"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A50, resolution-section comparison."
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A50 (resolution-section complexes) and 03F3 (cohomology of an open); Hom-complex implementation adapted from the proved Sheaf.resolution_section_cohomology."
  },
  "mathlib_searches": [
   {
@@ -98,10 +118,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T160823-L-2609539",
-  "kind": "interface",
+  "landing": "20261012T165507-L-2931646",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
