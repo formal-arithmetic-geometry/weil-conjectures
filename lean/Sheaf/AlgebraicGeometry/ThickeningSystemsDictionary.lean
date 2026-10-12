@@ -10,17 +10,10 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.ThickeningSystemsEquivalence
+import Sheaf.AlgebraicGeometry.ThickeningSystemsCompletionComparison
 
 /-! # The dictionary for coherent systems on infinitesimal thickenings
 
@@ -47,6 +40,66 @@ namespace AlgebraicGeometry
 noncomputable section
 
 set_option autoImplicit false
+
+private lemma support_eq_of_iso {Y : Scheme.{v}} {F G : Y.Modules} (e : F ≅ G) :
+    {y : Y | ¬ Subsingleton (F.presheaf.stalk y)} =
+      {y : Y | ¬ Subsingleton (G.presheaf.stalk y)} := by
+  ext y
+  let e' := ((Scheme.Modules.toPresheaf Y) ⋙
+    TopCat.Presheaf.stalkFunctor AddCommGrpCat.{v} y).mapIso e
+  exact not_congr (Equiv.subsingleton_congr (Equiv.ofBijective e'.hom
+    (ConcreteCategory.bijective_of_isIso e'.hom)))
+
+private lemma support_proper_iff_of_iso {Y S : Scheme.{v}} (g : Y ⟶ S)
+    [LocallyOfFiniteType g] {F G : Y.Modules} (e : F ≅ G) :
+    Scheme.Modules.HasSupportProperOver g F ↔
+      Scheme.Modules.HasSupportProperOver g G := by
+  unfold Scheme.Modules.HasSupportProperOver
+  rw [support_eq_of_iso e]
+
+private lemma support_proper_closed_square {Y X S₀ S : Scheme.{v}}
+    (j : Y ⟶ X) (g : Y ⟶ S₀) (f : X ⟶ S) (q : S₀ ⟶ S)
+    [IsClosedImmersion j] [LocallyOfFiniteType g] [LocallyOfFiniteType f]
+    [IsProper q] (hsq : j ≫ f = g ≫ q) (F : Y.Modules) (G : X.Modules)
+    (hsupp : {x : X | ¬ Subsingleton (G.presheaf.stalk x)} =
+      j '' {y : Y | ¬ Subsingleton (F.presheaf.stalk y)}) :
+    Scheme.Modules.HasSupportProperOver g F ↔
+      Scheme.Modules.HasSupportProperOver f G := by
+  classical
+  constructor
+  · rintro ⟨Z, hZ, hp⟩
+    let t := (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι
+    have ht : Set.range t.base = (Z : Set Y) := by
+      simp [t]
+    have : IsProper (t ≫ g) := hp
+    have : IsProper ((t ≫ j) ≫ f) := by
+      rw [Category.assoc, hsq, ← Category.assoc]
+      infer_instance
+    let W : TopologicalSpace.Closeds X :=
+      ⟨j '' (Z : Set Y), j.isClosedEmbedding.isClosedMap _ Z.isClosed⟩
+    refine ⟨W, ?_, ?_⟩
+    · change j '' (Z : Set Y) = _
+      rw [hZ, ← hsupp]
+    · apply (Scheme.closed_subset_proper_over_base_properties f W).1.mpr
+      refine ⟨_, t ≫ j, inferInstance, ?_, inferInstance⟩
+      change Set.range (t ≫ j).base = j '' (Z : Set Y)
+      rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, ht]
+  · rintro ⟨W, hW, hp⟩
+    let Z : TopologicalSpace.Closeds Y :=
+      ⟨j ⁻¹' (W : Set X), W.isClosed.preimage j.continuous⟩
+    have hZ : (Z : Set Y) = {y : Y | ¬ Subsingleton (F.presheaf.stalk y)} := by
+      change j ⁻¹' (W : Set X) = _
+      rw [hW, hsupp, Set.preimage_image_eq _ j.isClosedEmbedding.injective]
+    let t := (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι
+    have ht : Set.range t.base = (Z : Set Y) := by simp [t]
+    have htw : Set.range (t ≫ j).base = (W : Set X) := by
+      rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, ht, hZ, ← hsupp, ← hW]
+    have : IsProper ((t ≫ j) ≫ f) :=
+      (Scheme.closed_subset_proper_over_base_properties f W).2.1.mp hp _ (t ≫ j) htw
+    have : IsProper ((t ≫ g) ≫ q) := by
+      rw [Category.assoc, ← hsq, ← Category.assoc]
+      infer_instance
+    exact ⟨Z, hZ, IsProper.of_comp (t ≫ g) q⟩
 
 /-- The dictionary, including its naturality and proper-support restriction.
 Source: Stacks, Remark 088F, Lemma 087T, equation 0880 and Lemma 0CYL
@@ -214,7 +267,61 @@ theorem thickeningSystems_dictionary {A : Type v} [CommRing A] [IsNoetherianRing
               (pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1))))))
               (M.term 0) ↔
             Scheme.Modules.HasSupportProperOver f ((Φ.obj M).obj.obj (op 0))) := by
-  sorry
+  classical
+  have hX : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  have hgeom : (∀ n : ℕ, IsClosedImmersion (pullback.fst f
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk
+          (I ^ (n + 1)))))) ∧
+        (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))).ker =
+            (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of
+            A)).inv.hom)).comap f ^ (n + 1)) := by
+    intro n
+    obtain ⟨hc, hk, _⟩ := quotientBaseChange_closedImmersion_ideal f (I ^ (n + 1))
+    refine ⟨hc, hk.trans ?_⟩
+    exact ((quotientBaseChange_extendedIdeal_mul_pow f).2 I (n + 1)
+      (Nat.succ_le_succ (Nat.zero_le n))).symm
+  obtain ⟨Φ, β, hΦ, ht⟩ := thickeningSystems_pushforward_equivalence f I i hi hi₂ ai aj hgeom
+  obtain ⟨c, R, r, ρ, hu, hr, hρ⟩ :=
+    thickeningSystems_completion_comparison f I i hi hi₂ ai aj hgeom Φ β ht
+  have : Φ.IsEquivalence := hΦ
+  have : IsClosedImmersion
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1))))) :=
+    IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+  refine ⟨hX, hgeom, Φ, β, hΦ, ht, c, R, r, ρ, hu, hr, hρ, ?_, ?_, ?_, ?_, ?_⟩
+  · intro F G
+    exact ((Functor.FullyFaithful.ofFullyFaithful Φ).homEquiv.trans
+      (Iso.homCongr (ρ.app G).symm (ρ.app F).symm)).bijective
+  · intro F G v
+    simpa only [Functor.comp_map, Category.assoc, Iso.hom_inv_id_app,
+      Category.comp_id] using congrArg (fun k ↦ k ≫ ρ.inv.app F) (ρ.hom.naturality v).symm
+  · intro F M
+    refine ⟨(Functor.FullyFaithful.ofFullyFaithful Φ).isoEquiv.trans
+      (Iso.isoCongrLeft (ρ.app F).symm), ?_⟩
+    intro e
+    simp [Iso.isoCongrLeft]
+  · intro F₀
+    have : IsClosedImmersion (pullback.fst f
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1)))))) := (hgeom 0).1
+    have : IsNoetherian (pullback f
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1)))))) :=
+      isNoetherian_of_locallyOfFiniteType (pullback.fst f
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1))))))
+    have hs := closedImmersion_coherent_support (pullback.fst f
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1)))))) F₀
+    refine ⟨hs, ?_⟩
+    exact support_proper_closed_square _ _ _ _ pullback.condition _ _ hs
+  · intro M
+    have : IsClosedImmersion (pullback.fst f
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1)))))) := (hgeom 0).1
+    have : IsNoetherian (pullback f
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1)))))) :=
+      isNoetherian_of_locallyOfFiniteType (pullback.fst f
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1))))))
+    have hs := closedImmersion_coherent_support (pullback.fst f
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1))))))
+      ⟨M.term 0, M.coherent 0⟩
+    exact (support_proper_closed_square _ _ _ _ pullback.condition _ _ hs).trans
+      (support_proper_iff_of_iso f ((β 0).app M).symm)
 
 end
 end AlgebraicGeometry
