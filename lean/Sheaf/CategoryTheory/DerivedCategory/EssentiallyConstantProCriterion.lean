@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 public import Mathlib.CategoryTheory.Limits.Types.ColimitType
 public import Mathlib.CategoryTheory.Yoneda
+import Mathlib.CategoryTheory.Limits.Types.ColimitTypeFiltered
 
 /-! # Hom-colimit criterion for an essentially constant pro-diagram
 
@@ -57,6 +58,51 @@ theorem homColimit_essentiallyConstantProDiagram
           (G.op ⋙ yoneda.obj (G.obj j)).ιColimitType (Opposite.op j)
             (𝟙 (G.obj j)))
     := by
-  sorry
+  classical
+  have post {W W' : C} {i j : J} (x : G.obj i ⟶ W) (y : G.obj j ⟶ W)
+      (f : W ⟶ W')
+      (e : (G.op ⋙ yoneda.obj W).ιColimitType (Opposite.op i) x =
+        (G.op ⋙ yoneda.obj W).ιColimitType (Opposite.op j) y) :
+      (G.op ⋙ yoneda.obj W').ιColimitType (Opposite.op i) (x ≫ f) =
+        (G.op ⋙ yoneda.obj W').ιColimitType (Opposite.op j) (y ≫ f) := by
+    obtain ⟨k, a, b, e⟩ :=
+      ((G.op ⋙ yoneda.obj W).ιColimitType_eq_iff_of_isFiltered x y).mp e
+    apply (G.op ⋙ yoneda.obj W').ιColimitType_eq_of_map_eq_map _ _ a b
+    change G.map a.unop ≫ x = G.map b.unop ≫ y at e
+    change G.map a.unop ≫ (x ≫ f) = G.map b.unop ≫ (y ≫ f)
+    simpa only [Category.assoc] using congrArg (fun t ↦ t ≫ f) e
+  choose v hv using fun j ↦ (h (G.obj j)).surjective
+    ((G.op ⋙ yoneda.obj (G.obj j)).ιColimitType (Opposite.op j) (𝟙 (G.obj j)))
+  let u : (Functor.const J).obj X ⟶ G :=
+    { app := v
+      naturality := by
+        intro i j a
+        change 𝟙 X ≫ v j = v i ≫ G.map a
+        rw [Category.id_comp]
+        symm
+        apply (h (G.obj j)).injective
+        calc
+          _ = (G.op ⋙ yoneda.obj (G.obj j)).ιColimitType
+              (Opposite.op i) (G.map a) := by
+            simpa using
+              post (r ≫ v i) (𝟙 (G.obj i)) (G.map a) (hv i)
+          _ = (G.op ⋙ yoneda.obj (G.obj j)).ιColimitType
+              (Opposite.op j) (𝟙 (G.obj j)) := by
+            simpa using (G.op ⋙ yoneda.obj (G.obj j)).ιColimitType_map
+              a.op (𝟙 (G.obj j))
+          _ = _ := (hv j).symm }
+  have hr : u.app j₀ ≫ r = 𝟙 X := by
+    change v j₀ ≫ r = 𝟙 X
+    apply (h X).injective
+    simpa using
+      post (r ≫ v j₀) (𝟙 (G.obj j₀)) r (hv j₀)
+  refine ⟨⟨inferInstance, u, j₀, r, hr, ?_⟩, u, hr, hv⟩
+  intro j
+  obtain ⟨k, a, b, e⟩ :=
+    ((G.op ⋙ yoneda.obj (G.obj j)).ιColimitType_eq_iff_of_isFiltered
+      (r ≫ v j) (𝟙 (G.obj j))).mp (hv j)
+  refine ⟨k.unop, a.unop, b.unop, ?_⟩
+  change G.map a.unop ≫ (r ≫ v j) = G.map b.unop ≫ 𝟙 (G.obj j) at e
+  simpa only [Category.comp_id] using e.symm
 
 end CategoryTheory
