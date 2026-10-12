@@ -16,29 +16,28 @@
  ],
  "proof": [
   {
-   "text": "Use the proved boundaries-in-cycles inclusion to construct every Q_r as a cokernel, with its cycles-to-quotient projection.",
+   "text": "The unchanged page objects and projections are the actual cokernels of the proved boundary inclusions. For every related pair obtain a descended map with its full representative equation from the single-map descent lemma. Define d on related pairs by that map and zero elsewhere; its representative equation follows by reducing the dependent if.",
    "uses": [
-    "lem-sp-filtered-complex-boundaries-le-cycles",
-    "def-sp-filtered-complex-subquotients"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Restrict d to R = F^p K^n intersect d-inverse(F^(p+r)K^(n+1)). It lands in F^(p+r)K^(n+1) intersect ker d. Project to the target quotient. If two representatives have the same class in the graded cycles, their difference is in R intersect F^(p+1). Its differential is a target r-boundary, because the incoming filtration degree for that target is (p+r)-r+1 = p+1. Thus the map descends to graded cycles. A source boundary is represented by d of an incoming representative and has zero differential, so it also descends through the source boundary cokernel.",
-   "uses": [
-    "def-sp-abelian",
-    "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-single-differential-descent",
     "lem-sp-filtered-complex-boundaries-le-cycles"
    ],
    "elementary": false
   },
   {
-   "text": "Set nonrelated differentials to zero. On related bidegrees, successive differentials vanish by d squared = 0. The equation on representatives holds by construction. The representative projection onto graded cycles is epic: adding F^(p+1) before the graded projection does not change its image. Compose with the epic cycles-to-Q_r projection. This composite is epic and forces uniqueness of the differential on every related pair; nonrelated pairs are zero. Proof irrelevance gives uniqueness of the full data record.",
+   "text": "For two related consecutive pairs obtain A,t,tprime,x,y with x epic from the proved representative-cover lemma. The composite x π_i is epic. Precomposing d(i,j)d(j,k) gives y π_j d(j,k). Differentiating tprime is zero, by its equality with dt and K.d_comp_d. Apply the representative equation to tprime and the zero representative at k: y π_j d(j,k)=0. Cancel x π_i. If either pair is unrelated, one factor is zero by construction. This proves square-zero and shape and hence constructs the data record.",
    "uses": [
+    "lem-sp-filtered-complex-differential-representatives-cover",
+    "lem-sp-filtered-complex-single-differential-descent",
     "def-sp-abelian",
-    "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any other data record E, compare each component with the constructed D. At a related pair use the same representative cover and precompose with epic x π_i. Both maps give y π_j by their representative equations, so epi cancellation gives equality. At a nonrelated pair both components are zero. Function extensionality identifies their d fields and proof irrelevance identifies the remaining structure fields. This gives existence and uniqueness without any new homology claim.",
+   "uses": [
+    "lem-sp-filtered-complex-differential-representatives-cover",
+    "def-sp-abelian",
     "lem-sp-filtered-complex-boundaries-le-cycles"
    ],
    "elementary": false
@@ -46,14 +45,14 @@
  ],
  "proof_deps": [
   "def-sp-abelian",
-  "def-sp-filtered-complex-subquotients",
-  "def-sp-filtration",
-  "lem-sp-filtered-complex-boundaries-le-cycles"
+  "lem-sp-filtered-complex-boundaries-le-cycles",
+  "lem-sp-filtered-complex-differential-representatives-cover",
+  "lem-sp-filtered-complex-single-differential-descent"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+  "place": "F2: Tag 012K componentwise descent plus proved epimorphic representative test, followed by Lean assembly, square-zero and uniqueness."
  },
  "mathlib_searches": [
   {
@@ -124,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T144052-L-2088584",
+  "landing": "20261012T230755-L-1908188",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-filtered-complex-single-differential-descent",
+ "kind": "statement",
+ "title": "One differential descends through the filtered cycle-boundary quotients",
+ "statement": "Let C be an abelian category [def-sp-abelian], K an integer-indexed cochain complex, F a decreasing filtration [def-sp-filtration], and r≥1 an integer. Let j=i+(r,1-r). Form Q_r^a=coker(B_r^a→Z_r^a) using the concrete cycles and boundaries [def-sp-filtered-complex-subquotients] and their inclusion [lem-sp-filtered-complex-boundaries-le-cycles], and write π_a:Z_r^a→Q_r^a for its cokernel projection. There exists a single morphism δ:Q_r^i→Q_r^j such that for every object A and maps t,tprime,x,y at i,j, if dt=tprime in K and x,y are the respective graded projections of t,tprime, then x π_i δ=y π_j. This asserts neither square-zero, shape at nonrelated pairs, nor uniqueness.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-boundaries-le-cycles"
+ ],
+ "proof": [
+  {
+   "text": "Put p=i.1 and n=i.1+i.2. Restrict d to R=F^pK^n∩d-inverse(F^(p+r)K^(n+1)). Its derivative is a target cycle representative by d squared=0. Project its target graded class to Q_r^j. The source representative projection is epic by the representative-cover construction.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-differential-representatives-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel of the projection from R to graded cycles is R∩F^(p+1). Its derivative belongs to target r-boundaries, whose incoming filtration is (p+r)-r+1=p+1. Thus the composite kills this kernel and descends to source graded cycles by the abelian cokernel universal property. The image of a source boundary is zero: after an epimorphic pullback a boundary representative is dz+f with z in F^(p-r+1) and f in F^(p+1), and differentiating the first term gives zero while the second is a target boundary. Pullbacks preserve epimorphisms, so this calculation proves the restriction to source boundaries is zero globally.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend again through the source boundary cokernel, obtaining δ. An arbitrary t satisfying dt=tprime factors through R. The two universal-property equations, and monicity of the target filtration and cycle inclusions, give x π_i δ=y π_j for every test object A. This is a statement about one map only and contains no complex assembly or uniqueness assertion.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-boundaries-le-cycles",
+  "lem-sp-filtered-complex-differential-representatives-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "F2: componentwise expansion of Tag 012K, displayed cycle and differential formulas, read at https://stacks.math.columbia.edu/tag/012K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Epimorphism from representatives onto the image subobject in an abelian category",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered cochain complex differential descends to the quotient of filtered cycles by boundaries",
+   "results": "Eight hits, including CochainComplex.cm5b.fac and CochainComplex.HomComplex.leftHomologyData'. None identify these concrete filtered cycle/boundary quotients. A separate representative-cover query and Subobject/Epi Loogle query were also tried; the latter finds factorThruImageSubobject and general image/pullback epimorphism APIs used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "no match for the filtered quotient statements"
+  },
+  {
+   "tool": "grep",
+   "query": "complexCycles|complexCycleRepresentatives|filteredComplexPage|pageDifferential in lean/WeilConjectures, lean/Sheaf and Mathlib/Algebra/Homology; representative/descent phrases in dag/nodes",
+   "results": "Only the project subquotient definitions and downstream statements use these representatives. Mathlib spectral objects provide differently constructed page objects, with no ready comparison to the present quotients. Existing quotient-image comparison does not assert the representative projection is epic.",
+   "date": "2026-10-13",
+   "verdict": "no existing statement of either component lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexPageDifferential",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Step 3: descend the differential at one related pair through the two concrete cokernels.",
+   "via": [
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-positive-pages",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexSingleDifferentialDescent",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexSingleDifferentialDescent.lean",
+  "declaration": "CategoryTheory.filteredComplex_single_differential_descent",
+  "statement": "theorem filteredComplex_single_differential_descent\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)\n    (i j : ℤ × ℤ) (hij : (ComplexShape.up' (r, 1 - r)).Rel i j) :\n    let Q := fun pq : ℤ × ℤ ↦ cokernel (Subobject.ofLE _ _\n      (filteredComplex_boundaries_le_cycles K F pq.1 (pq.1 + pq.2) r))\n    let π := fun pq : ℤ × ℤ ↦ cokernel.π (Subobject.ofLE _ _\n      (filteredComplex_boundaries_le_cycles K F pq.1 (pq.1 + pq.2) r))\n    ∃ δ : Q i ⟶ Q j,\n      ∀ (A : C)\n        (t : A ⟶ (F.step i.1 : CochainComplex C ℤ).X (i.1 + i.2))\n        (t' : A ⟶ (F.step j.1 : CochainComplex C ℤ).X (j.1 + j.2))\n        (x : A ⟶ (F.complexCycles i.1 (i.1 + i.2) r : C))\n        (y : A ⟶ (F.complexCycles j.1 (j.1 + j.2) r : C)),\n        t ≫ (F.step i.1).arrow.f (i.1 + i.2) ≫ K.d (i.1 + i.2) (j.1 + j.2) =\n          t' ≫ (F.step j.1).arrow.f (j.1 + j.2) →\n        x ≫ (F.complexCycles i.1 (i.1 + i.2) r).arrow =\n          t ≫ (F.complexQuotientπ i.1 (i.1 + 1) (by omega)).f (i.1 + i.2) →\n        y ≫ (F.complexCycles j.1 (j.1 + j.2) r).arrow =\n          t' ≫ (F.complexQuotientπ j.1 (j.1 + 1) (by omega)).f (j.1 + j.2) →\n        x ≫ π i ≫ δ = y ≫ π j",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T230755-L-1908188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T230755-L-1908188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
