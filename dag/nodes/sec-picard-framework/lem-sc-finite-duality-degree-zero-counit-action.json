@@ -18,34 +18,22 @@
  ],
  "proof": [
   {
-   "text": "Use the affine underived sheaf-Hom adjunction, whose A-valued Hom carries precomposition by multiplication and evaluates its counit at one. The locally finite free dual of A is locally finite free. Canonical evaluation identifies tensor by the dual with Hom(A,-), hence Hom is exact. Restriction of scalars is exact and conservative, so the A-valued Hom functor is exact too.",
+   "text": "Obtain H, iH and adjH together with their sectionwise action and counit formulas from sheafHom_affine_rightAdjoint. Apply finite_algebraHom_exact to H and iH.",
    "uses": [
     "lem-sc-finite-sheafhom-affine",
-    "lem-sc-ext-evaluation",
-    "lem-sc-ext-tensor-exact",
-    "def-pc-derived-rhom-algebra-module"
+    "lem-sc-finite-algebra-hom-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Derive this exact Hom model with its canonical single-complex comparison, retaining evaluation and the action. The finite affine derived equivalence identifies it with the right adjoint on D_QCoh at K=L[0]. Uniqueness of right adjoints preserves counits, encoded by the finite-duality equations and the affine derived-adjunction counit equation. Normalize the Hom-from-unit identification to actual evaluation, rather than an arbitrary automorphism.",
+   "text": "Use the exact Hom degree-zero lift with the supplied canonical comparison c to obtain the A-linear isomorphism j and its counit equation. Set e=T.mapIso(j) followed by iH(L), and epsilon=T.map(j.hom) followed by adjH.counit(L). The first conjunct is the lift equation.",
    "uses": [
-    "lem-sc-finite-sheafhom-affine-adjoint",
-    "lem-sc-finite-affine-derived-equivalence",
-    "lem-sc-finite-duality-derived-hom"
+    "lem-sc-finite-exact-hom-degree-zero-lift"
    ],
    "elementary": false
   },
   {
-   "text": "Use the canonical affine comparison for M and naturality along e0. Both sides of the A-linear derived identification are now in degree zero. Full faithfulness of singleFunctor in the A-module category lifts it to an A-linear isomorphism; after restriction this is e. Lift the counit to epsilon. The derived counit identity gives the displayed singleFunctor equation.",
-   "uses": [
-    "lem-sc-affine-single-pushforward-unit-iso",
-    "def-pc-derived-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The canonical exact model retains the underived evaluation formula and action formula on each open. Specialize the Over(U) precomposition formula from sheafHom_affine_rightAdjoint to the identity inclusion to obtain Phi(a omega)(b)=Phi(omega)(ab). No division, nonzero rank, nonempty open or cancellation is needed.",
+   "text": "Evaluate the underived counit formula at j(omega) to prove the second conjunct. For the third conjunct use linearity j(a omega)=a j(omega), then specialize the sheaf-Hom action formula to the identity object of Over(U). Functor.map_id makes the restriction of a equal to a; this gives evaluation at ab, without cancellation or nonzero hypotheses.",
    "uses": [
     "lem-sc-finite-sheafhom-affine"
    ],
@@ -54,19 +42,13 @@
  ],
  "proof_deps": [
   "lem-sc-finite-sheafhom-affine",
-  "lem-sc-ext-evaluation",
-  "lem-sc-ext-tensor-exact",
-  "def-pc-derived-rhom-algebra-module",
-  "lem-sc-finite-sheafhom-affine-adjoint",
-  "lem-sc-finite-affine-derived-equivalence",
-  "lem-sc-finite-duality-derived-hom",
-  "lem-sc-affine-single-pushforward-unit-iso",
-  "def-pc-derived-category"
+  "lem-sc-finite-algebra-hom-exact",
+  "lem-sc-finite-exact-hom-degree-zero-lift"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project and cited Lean declarations",
-  "place": "Tags 0AX2 and 0AX3; Tag 0FKW first and second remarks; canonical exact sheaf-Hom model; detailed assembly by Q2"
+  "document": "Stacks Project and existing library declarations",
+  "place": "N3 Lean assembly of exact-Hom degree-zero lift with the sectionwise formulas of Tag 0BUZ"
  },
  "mathlib_searches": [
   {
@@ -136,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q2",
+  "reviewer": "X-58047",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T085322-L-32902",
+  "landing": "20261012T144132-L-2103043",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match the recorded node statements and compile cleanly, including direct importer FiniteFlatDualityEvaluation; required set_option interface check passes."
  }
 }

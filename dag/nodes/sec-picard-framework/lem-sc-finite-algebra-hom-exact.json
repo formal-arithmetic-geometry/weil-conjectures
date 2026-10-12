@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-finite-algebra-hom-exact",
+ "kind": "statement",
+ "title": "Exactness of the algebra-valued finite sheaf-Hom functor",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $A=f_*\\mathcal O_X$ finite locally free [def-amb-finite-locally-free-module]. Write $T:\\operatorname{Mod}(A)\\to\\operatorname{Mod}(\\mathcal O_Y)$ for scalar restriction [def-sc-direct-image-algebra-derived-category]. For any functor $H:\\operatorname{Mod}(\\mathcal O_Y)\\to\\operatorname{Mod}(A)$ with natural isomorphism $H T\\cong\\mathcal Hom(A,-)$ [def-pur-sheaf-hom], $H$ preserves finite limits and finite colimits. No finiteness of the morphism or quasi-coherence of the coefficient module is required.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 0BUZ, lemma-compute-sheafhom-affine; finite locally free tensor exactness (Tags 01C6 and 05NE)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "The finite locally free dual of A is finite locally free. Use dual_tensor_hom_iso and its naturality to form a natural isomorphism from tensorLeft(dual A) to Hom(A,-). Tensor exactness and the specified iH transfer finite-limit and finite-colimit preservation to H followed by T.",
+   "uses": [
+    "lem-sc-ext-evaluation",
+    "lem-sc-ext-tensor-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of scalars preserves finite limits and colimits by the recorded scalar-restriction declarations. It reflects isomorphisms: after forgetting to abelian sheaves, its map of a morphism is the identical morphism; the module-to-sheaf functor reflects isomorphisms. Mathlib reflectsLimitsOfShape_of_reflectsIsomorphisms and its colimit counterpart give finite-limit and finite-colimit reflection. Apply preservesFiniteLimits_of_reflects_of_preserves and its colimit counterpart to H and T.",
+   "uses": [
+    "def-pc-derived-rhom-algebra-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ext-evaluation",
+  "lem-sc-ext-tensor-exact",
+  "def-pc-derived-rhom-algebra-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and existing library declarations",
+  "place": "Tag 0BUZ, lemma-compute-sheafhom-affine; finite locally free tensor exactness (Tags 01C6 and 05NE); N3 assembly of canonical comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom from a finite locally free sheaf of modules is exact",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact finite locally free sheaf Hom right adjoint preserves colimits and limits, and finite duality counit evaluated at one",
+   "results": "8 hits: LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, PresheafOfModules.freeAdjunction",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical infrastructure; no duplicate sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteLimits_of_reflects_of_preserves|preservesFiniteColimits_of_reflects_of_preserves",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/CategoryTheory/Limits/Preserves/Finite.lean, Mathlib/CategoryTheory/Limits/Preserves/Finite.lean",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical infrastructure; no duplicate sheaf theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteDualityDegreeZeroCounitAction",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine restriction-of-scalars adjunction, with the trace comparison used in the final paragraph",
+   "via": [
+    "lem-sc-finite-duality-degree-zero-counit-action",
+    "lem-sc-finite-flat-duality-evaluation",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAlgebraHomExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAlgebraHomExact.lean",
+  "declaration": "AlgebraicGeometry.finite_algebraHom_exact",
+  "statement": "theorem finite_algebraHom_exact {X Y : Scheme.{u}} (f : X ⟶ Y) [SheafOfModules.IsFiniteLocallyFree.{u, u, u} ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))] (H : Y.Modules ⥤ SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) (iH : H ⋙ SheafOfModules.restrictScalars f.toRingCatSheafHom ≅ (SheafOfModules.homFunctor Y.sheaf).obj (op ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)))) : PreservesFiniteLimits H ∧ PreservesFiniteColimits H",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-58047",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T144132-L-2103043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-58047",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T144132-L-2103043",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and compile cleanly, including direct importer FiniteFlatDualityEvaluation; required set_option interface check passes."
+ }
+}

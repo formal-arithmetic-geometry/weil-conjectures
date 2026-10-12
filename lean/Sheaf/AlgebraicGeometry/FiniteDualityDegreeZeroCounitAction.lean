@@ -10,15 +10,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom
-import Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint
 import Sheaf.AlgebraicGeometry.FiniteSheafHomAffine
-import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
-import Sheaf.AlgebraicGeometry.ExtEvaluation
-import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
-import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
+import Sheaf.AlgebraicGeometry.FiniteAlgebraHomExact
+import Sheaf.AlgebraicGeometry.FiniteExactHomDegreeZeroLift
 
 /-! # FiniteDualityDegreeZeroCounitAction
 
@@ -34,6 +28,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 500000 in
+-- The sectionwise action calculation unfolds scalar restriction and internal Hom.
 /-- Descend finite duality's counit and algebra action to a quasi-coherent degree-zero
 representative. The final evaluation-at-an-arbitrary-section identity is not asserted.
 
@@ -121,6 +117,34 @@ theorem finiteDuality_degreeZero_counit_action
           L.val U ((Scheme.Modules.Hom.app e.hom U) (a₁ • ω))) b =
         (PresheafOfModules.homObjEvalId
           ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val
-          L.val U ((Scheme.Modules.Hom.app e.hom U) ω)) (a₁ * b)) := by sorry
+          L.val U ((Scheme.Modules.Hom.app e.hom U) ω)) (a₁ * b)) := by
+  obtain ⟨H, iH, adjH, haction, heval, _⟩ := sheafHom_affine_rightAdjoint f
+  obtain ⟨hlim, hcolim⟩ := finite_algebraHom_exact f H iH
+  let := hlim
+  let := hcolim
+  obtain ⟨j, hj⟩ := finite_exactHom_degreeZero_lift f L R comparison a adj K eL M _hM
+    e₀ c _hc H iH adjH
+  let T := SheafOfModules.restrictScalars f.toRingCatSheafHom
+  let e := T.mapIso j ≪≫ iH.app L
+  let ε := T.map j.hom ≫ adjH.counit.app L
+  refine ⟨e, ε, hj, ?_, ?_⟩
+  · intro U ω
+    exact heval L U ((j.hom.val.app (op U)).hom ω)
+  · intro U a₁ b ω
+    have hlin := (j.hom.val.app (op U)).hom.map_smul a₁ ω
+    have h := haction L U a₁ ((j.hom.val.app (op U)).hom ω) (Over.mk (𝟙 U)) b
+    change ((((iH.hom.app L).val.app (op U)).hom
+      ((j.hom.val.app (op U)).hom (a₁ • ω))).app (op (Over.mk (𝟙 U)))).hom b =
+      ((((iH.hom.app L).val.app (op U)).hom
+        ((j.hom.val.app (op U)).hom ω)).app (op (Over.mk (𝟙 U)))).hom (a₁ * b)
+    rw [hlin]
+    have hid : (((TopologicalSpace.Opens.map f.base).sheafPushforwardContinuous
+        RingCat (Opens.grothendieckTopology Y)
+        (Opens.grothendieckTopology X)).obj X.ringCatSheaf).obj.map
+          (Over.mk (𝟙 U)).hom.op = 𝟙 _ := by
+      change (X.presheaf ⋙ forget₂ CommRingCat RingCat).map (𝟙 _) = 𝟙 _
+      exact CategoryTheory.Functor.map_id _ _
+    rw [hid] at h
+    exact h
 
 end AlgebraicGeometry

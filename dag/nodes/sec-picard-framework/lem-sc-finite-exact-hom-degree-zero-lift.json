@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-finite-exact-hom-degree-zero-lift",
+ "kind": "statement",
+ "title": "A-linear degree-zero lift of the finite adjunction counit",
+ "statement": "Let $f:X\\to Y$ be finite [def-weil-finite-integral-morphism] between Noetherian schemes [def-pc-scheme], with $A=f_*\\mathcal O_X$ finite locally free [def-amb-finite-locally-free-module], and $L$ invertible [def-sc-invertible-module]. Assume derived categories of module sheaves on X and Y exist [def-pc-derived-category]. Fix $R:D_{QCoh}(X)\\to D_{QCoh}(Y)$, its comparison with $Rf_*$ [def-pc-derived-direct-image], and an adjunction $R\\dashv a$. Fix $K\\cong L[0]$, a quasi-coherent module $M$ on X, an isomorphism $e_0:M[0]\\cong a(K)$, and the canonical comparison $c:(f_*M)[0]\\cong Rf_*(M[0])$ given by the inverse single-complex comparison followed by the right-derived unit. Let $T$ be scalar restriction along $\\mathcal O_Y\\to A$ and $g:(X,\\mathcal O_X)\\to(Y,A)$ [def-sc-direct-image-algebra-derived-category]. Fix an exact functor $H:\\operatorname{Mod}(\\mathcal O_Y)\\to\\operatorname{Mod}(A)$, a natural isomorphism $HT\\cong\\mathcal Hom(A,-)$ [def-pur-sheaf-hom], and an adjunction $T\\dashv H$. There exists an A-linear isomorphism $j:g_*M\\cong H(L)$ such that $(T(j)\\mathbin{\\gg}\\varepsilon_{H,L})[0]$ equals $c\\mathbin{\\gg}Rf_*(e_0)\\mathbin{\\gg}\\mathrm{comparison}_{aK}^{-1}\\mathbin{\\gg}\\varepsilon_{R,K}\\mathbin{\\gg}e_L$. No sectionwise evaluation or multiplication-action compatibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex; literature/stacks-project/perfect.tex",
+  "place": "Tag 0AX2, lemma-finite, right-adjoint comparison; Tag 0AX3, remark-trace-map-finite; Tag 0AVW, lemma-affine-morphism"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sc-invertible-module",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pur-sheaf-hom",
+  "def-amb-finite-locally-free-module",
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose the standard derived category of A-modules. Scalar restriction is exact and the supplied H is exact. Derive their adjunction using localization of the termwise functors. The derived adjunction counit formula identifies its counit, on L[0], with the single of the underived counit via the canonical exact-functor single comparisons. Additivity of H follows from being right adjoint between additive categories.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
+    "def-pc-derived-rhom-algebra-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let G = Rg_*, rho = RT and rhoR = RH, with derived adjunction adjA. Construct gamma : G ⋙ rho ≅ Rf_* from the exact-restriction comparison, the inverse derived-composite comparison, and the identity g_* ⋙ T = f_*. Put J = iX ⋙ G and beta : R ⋙ iY ≅ J ⋙ rho using comparison and gamma.symm. The finite affine derived equivalence makes J fully faithful. Since K is bounded below by eL, finite_scalar_right_adjoint_qcoh puts rhoR(K) in the essential image of J. Define phi as the adjA-transpose of beta.inv.app(a(K)) followed by iY(adj.counit.app K). For every N, composition with phi is bijective by full faithfulness of J and iY and the two adjunction hom equivalences. Choose an isomorphism J(N0) ≅ rhoR(K) from essential image membership; bijectivity supplies a right inverse to phi, and injectivity at a(K) makes it a left inverse. Thus phi is an isomorphism. Its transpose equation gives rho(phi) followed by adjA.counit = gamma.hom followed by comparison.inv followed by the geometric counit, with this same gamma.",
+   "uses": [
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-scalar-right-adjoint-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the canonical g_* single comparison using its right-derived unit. After exact scalar restriction and the same canonical gamma of step 2, its image is the canonical f_* single comparison, invertible by affine_singlePushforward_unit_isIso for the quasi-coherent M. Derived scalar restriction reflects isomorphisms: its cohomology is underived restriction, which reflects isomorphisms through the unchanged underlying abelian sheaf. Hence the g_* single comparison is invertible. Combine it, Rg_*(e0), phi, the derived image of eL, and the exact-H single comparison to obtain an isomorphism from (g_*M)[0] to H(L)[0]. Full faithfulness of singleFunctor over A lifts this isomorphism to j.",
+   "uses": [
+    "lem-sc-affine-single-pushforward-unit-iso",
+    "def-pc-derived-category",
+    "def-pc-derived-rhom-algebra-module",
+    "lem-sc-finite-affine-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the same canonical gamma constructed in step 2, from g_* followed by T being identically f_*, the exact-restriction right-derived comparison, and the derived-composite comparison. Its localization factorization equations identify the composite of the canonical g_* single comparison with this factorization and exact T single comparison with the canonical f_* single comparison. Apply naturality along e0 and eL. Restrict the lifted morphism to O_Y, use the counit equation of step 2 and the derived-adjunction counit formula of step 1, then use hc to replace the initial canonical f_* single comparison by c.hom. The zero object, empty schemes, and rank-zero A satisfy the same identities.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-sc-finite-affine-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-adjunction-from-underived",
+  "def-pc-derived-rhom-algebra-module",
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-sc-finite-scalar-right-adjoint-qcoh",
+  "lem-sc-affine-single-pushforward-unit-iso",
+  "def-pc-derived-category",
+  "lem-sc-finite-affine-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and existing library declarations",
+  "place": "Tag 0AX2, lemma-finite, right-adjoint comparison; Tag 0AX3, remark-trace-map-finite; Tag 0AVW, lemma-affine-morphism; N3 assembly of canonical comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functor derived adjunction single degree zero preserves counit",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory.singleFunctor",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical infrastructure; no duplicate sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*[Ss]ingle|[Ss]ingle.*rightDerivedFunctor|rightAdjointUniq.*counit",
+   "results": "11 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+   "date": "2026-10-12",
+   "verdict": "Generic categorical infrastructure; no duplicate sheaf theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteDualityDegreeZeroCounitAction",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, affine restriction-of-scalars adjunction, with the trace comparison used in the final paragraph",
+   "via": [
+    "lem-sc-finite-duality-degree-zero-counit-action",
+    "lem-sc-finite-flat-duality-evaluation",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteExactHomDegreeZeroLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteExactHomDegreeZeroLift.lean",
+  "declaration": "AlgebraicGeometry.finite_exactHom_degreeZero_lift",
+  "statement": "theorem finite_exactHom_degreeZero_lift {X Y : Scheme.{u}} (f : X ⟶ Y) [IsNoetherian X] [IsNoetherian Y] [IsFinite f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (L : Y.Modules) [L.IsInvertible] [SheafOfModules.IsFiniteLocallyFree.{u, u, u} ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))] (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (comparison : R ⋙ (schemeDerivedQCohProperty Y).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) (K : schemeDerivedQCohCategory Y) (eL : K.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L) (M : X.Modules) (_hM : M.IsQuasicoherent) (e₀ : (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M ≅ (a.obj K).obj) (c : (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward f).obj M) ≅ (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) (_hc : c.hom = DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))) (H : Y.Modules ⥤ SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) (iH : H ⋙ SheafOfModules.restrictScalars f.toRingCatSheafHom ≅ (SheafOfModules.homFunctor Y.sheaf).obj (op ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)))) (adjH : SheafOfModules.restrictScalars f.toRingCatSheafHom ⊣ H) [PreservesFiniteLimits H] [PreservesFiniteColimits H] : ∃ j : (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).obj M ≅ H.obj L, (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map ((SheafOfModules.restrictScalars f.toRingCatSheafHom).map j.hom ≫ adjH.counit.app L) = c.hom ≫ (schemeDerivedDirectImage f).map e₀.hom ≫ comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom ≫ eL.hom",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-58047",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T144132-L-2103043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-58047",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T144132-L-2103043",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and compile cleanly, including direct importer FiniteFlatDualityEvaluation; required set_option interface check passes."
+ }
+}
