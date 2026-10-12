@@ -16,16 +16,30 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Compute the asserted identities on Finsupp basis elements and extend by linearity.",
+   "text": "Compute epsilon d on a basis pair: the two summands are 1 and -1, so epsilon d_0 = 0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove d_p d_(p+1) = 0 by induction on p, checking on basis tuples x. Write x = Fin.cons (x 0) (Fin.tail x), so [x] = h[y] with y = Fin.tail x and prefix s = x 0. Apply d_p to d_(p+1) h[y] + h d_p[y] = [y]. For p=0, apply the degree-zero homotopy identity to d_0[y] and use epsilon d_0=0; it gives d_0 h d_0[y] = d_0[y]. For p=q+1, apply the homotopy identity one degree lower to d_(q+1)[y]; the induction hypothesis kills d_q d_(q+1)[y], so again d_(q+1) h d_(q+1)[y] = d_(q+1)[y]. In either case cancellation gives d_p d_(p+1)[x] = 0.",
+   "uses": [
+    "lem-weil-pbc-power-set-complex-homotopy-identities"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If S is empty, any tuple of positive length would give an element x 0 of S. Its type is therefore empty, and Finsupp on that type is subsingleton.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-power-set-complex-homotopy-identities"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03AT"
+  "place": "Lemma Tag 03AT, final paragraph; M1 Lean proof elaborating the prefixing homotopy and its elementary consequences (2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -89,7 +103,7 @@
   "reviewer": "COMPILER",
   "group": "M1",
   "result": "pass",
-  "landing": "20261012T053941-L-2639301",
+  "landing": "20261012T063514-L-3157144",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

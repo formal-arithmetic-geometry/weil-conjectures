@@ -23,51 +23,24 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "$d\\circ d=0$ and $\\varepsilon\\circ d=0$. All maps are $A$-linear and $C_{p+2}(S;A)$ is free on the tuples, so it suffices to check on a basis element $x=[(s_0,\\ldots,s_{p+2})]$. Write $x_{\\hat i\\hat j}$ ($i<j$) for the tuple with the entries in positions $i$ and $j$ deleted. Then $d(d x)=\\sum_{j}(-1)^j d[(s_0,\\ldots,\\widehat{s_j},\\ldots,s_{p+2})]=\\sum_j\\sum_{i<j}(-1)^{j}(-1)^{i}[x_{\\hat i\\hat j}]+\\sum_j\\sum_{i>j}(-1)^{j}(-1)^{i-1}[x_{\\hat j\\hat i}]$ (after deleting position $j$, an entry originally at position $i>j$ sits at position $i-1$). Renaming $(j,i)\\mapsto(i,j)$ in the second sum turns it into $\\sum_{i<j}(-1)^{i+j-1}[x_{\\hat i\\hat j}]$, the negative of the first sum; so $d\\circ d=0$. Also $\\varepsilon(d[(s_0,s_1)])=\\varepsilon([s_1]-[s_0])=1-1=0$, so $\\varepsilon\\circ d=0$ on $C_1(S;A)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof (the complex Z[S x S] -> Z[S] -> Z (sum) -> 0; the sign computation is the standard one, written out here)"
-   }
-  },
-  {
-   "text": "Empty case. If $S=\\emptyset$ then $S^{p+1}=\\emptyset$ for every $p\\geq0$, so $C_p(S;A)$ is the free module on the empty set, i.e. $0$; the non-augmented complex is $0$ and all its homology vanishes. (The augmented complex is then $0\\to A\\to0$, exact only if $A=0$; this is why the exactness clause assumes $S\\neq\\emptyset$, as Stacks does.) From now on $S\\neq\\emptyset$ and $s\\in S$ is fixed.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof ('for any nonempty set S'); the empty case is used in the proof of 03AT when some S_phi is empty"
-   }
-  },
-  {
-   "text": "The homotopy identities. Define $A$-linear maps $h:C_p(S;A)\\to C_{p+1}(S;A)$, $[(s_0,\\ldots,s_p)]\\mapsto[(s,s_0,\\ldots,s_p)]$ ($p\\geq0$) and $h:A\\to C_0(S;A)$, $1\\mapsto[s]$ (Stacks' homotopy $n_{(s_0,\\ldots,s_p)}\\mapsto n_{(s,s_0,\\ldots,s_p)}$ with coefficients in $A$, as in the proof of 03F5). On a basis element $x=[(s_0,\\ldots,s_p)]$: the $j=0$ term of $d[(s,s_0,\\ldots,s_p)]$ is $x$ and the term $j+1$ is $(-1)^{j+1}[(s,s_0,\\ldots,\\widehat{s_j},\\ldots,s_p)]$, so $d(hx)=x-\\sum_{j=0}^p(-1)^j[(s,s_0,\\ldots,\\widehat{s_j},\\ldots,s_p)]$. For $p\\geq1$ the subtracted sum is exactly $h(dx)$, so $dh+hd=\\mathrm{id}$ on $C_p(S;A)$. For $p=0$ it is $[s]=h(\\varepsilon x)$, so $dh+h\\varepsilon=\\mathrm{id}$ on $C_0(S;A)$. Finally $\\varepsilon(h(1))=\\varepsilon[s]=1$, so $\\varepsilon h=\\mathrm{id}_A$. Hence, writing the augmented complex as $K_0=A$, $K_{p+1}=C_p(S;A)$ with differentials $\\varepsilon$ and $d$, the maps $h$ satisfy $d_Kh+hd_K=\\mathrm{id}_{K_n}$ for all $n\\geq0$: they are a homotopy from $\\mathrm{id}_K$ to $0$ (a contracting homotopy).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof; coefficients A as in Lemma Tag 03F5 (lemma-complex-tensored-still-exact), proof (coefficients O(V) in place of Z)"
-   }
-  },
-  {
-   "text": "Exactness. By the first step $K_\\bullet$ (the augmented complex of the previous step) is a chain complex of $A$-modules, and by the previous step it carries a homotopy from the identity to $0$; by [lem-weil-pbc-contractible-complex-acyclic] it is exact in every degree. (Directly: a cycle $z\\in K_n$ satisfies $z=d(hz)+h(dz)=d(hz)$, and $1=\\varepsilon(h(1))$.) Exactness at $K_{p+1}=C_p(S;A)$ for $p\\geq1$ is $H_p(C_\\bullet(S;A))=0$, since the augmentation does not touch these degrees. Exactness at $K_0=A$ and at $K_1=C_0(S;A)$ says that $\\varepsilon$ is surjective and $\\ker\\varepsilon=\\operatorname{im}(d:C_1\\to C_0)$, so $\\varepsilon$ induces $H_0(C_\\bullet(S;A))=C_0/\\operatorname{im}d\\cong A$.",
+   "text": "Assemble the basic differential identities, empty case, exactness for nonempty sets, and prefixing homotopy identities as the conjunction in powerSetComplex_contractible.",
    "uses": [
-    "lem-weil-pbc-contractible-complex-acyclic"
+    "lem-weil-pbc-power-set-complex-basic-identities",
+    "lem-weil-pbc-power-set-complex-nonempty-contracting",
+    "lem-weil-pbc-power-set-complex-homotopy-identities"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof ('is exact in all degrees. To see this fix an element s in S, and use the homotopy')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-contractible-complex-acyclic"
+  "lem-weil-pbc-power-set-complex-basic-identities",
+  "lem-weil-pbc-power-set-complex-nonempty-contracting",
+  "lem-weil-pbc-power-set-complex-homotopy-identities"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03AT (lemma-homology-complex), last paragraph of the proof; with coefficients A as in Lemma Tag 03F5 (lemma-complex-tensored-still-exact), proof (coefficients O(V) in place of Z)"
+  "place": "Lemma Tag 03AT, final paragraph; M1 Lean proof elaborating the prefixing homotopy and its elementary consequences (2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -193,16 +166,8 @@
   "reviewer": "COMPILER",
   "group": "M1",
   "result": "pass",
-  "landing": "20261012T053941-L-2639301",
+  "landing": "20261012T063514-L-3157144",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "Algebra.powerSetComplex_contractible"
-  ],
-  "sorry_after": [
-   "Algebra.powerSetComplex_basic_identities",
-   "Algebra.powerSetComplex_homotopy_identities",
-   "Algebra.powerSetComplex_nonempty_contracting"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
