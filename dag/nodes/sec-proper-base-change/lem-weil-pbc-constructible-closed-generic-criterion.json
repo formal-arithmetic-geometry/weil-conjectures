@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-constructible-closed-generic-criterion",
+ "kind": "statement",
+ "title": "Constructibility from generic finite local constancy on closed subschemes",
+ "statement": "Let $X$ be a Noetherian scheme [def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring, and $F$ a sheaf of $\\Lambda$-modules on its small etale site [def-weil-pbc-etale-site]. Assume that for every closed immersion $i:Z\\to X$ [def-weil-closed-immersion] with $Z$ Noetherian, there is a dense open $U\\subseteq Z$ on which $i^*F$ [prop-constructible-pullback] is finite locally constant [def-constructible-finite-locally-constant]. Then $F$ is constructible [def-constructible-constructible]. No target sheaf or monomorphism is assumed, and no Noetherian condition on $\\Lambda$ is needed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09BH, Proposition 59.74.1 (3), proof of (3), Noetherian-induction step; Tag 095E, finite stratifications"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-weil-closed-immersion",
+  "prop-constructible-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Induct on closed subsets C of X, with the strengthened claim for every closed immersion i:Z -> X whose range is contained in C. Closed subsets satisfy the well-founded descending condition. Z is Noetherian since it is a closed subscheme of X; in Lean use LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace, both applied to i, then construct IsNoetherian Z.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For empty Z its sheaf is zero and therefore constructible. Otherwise choose the dense open U supplied by the hypothesis; it is nonempty. The reduced closed complement i′:Z′ -> Z has range Z minus U. Its image C′ in X is a proper closed subset of C: a point of U maps to C but cannot lie in that image because i is injective. Apply the induction hypothesis to i′ composed with i.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback composition transports the constructibility just obtained to the restriction of i^*F to Z′. On U the finite locally constant sheaf is constructible by the trivial one-stratum stratification and pullback stability. Apply the existing open-closed constructibility equivalence to glue these two restrictions. Finally take C=X and i=id, and use the identity pullback isomorphism.",
+   "uses": [
+    "prop-constructible-pullback",
+    "prop-constructible-open-closed",
+    "def-constructible-stratification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "prop-constructible-open-closed",
+  "prop-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09BH, proof of (3); implementation follows the parent node’s generic-open/closed-complement route; second reading identifies the closed-complement construction with the existing Mathlib leaf lem-weil-pbc-closed-subset-closed-subscheme, not the unproved full reduced-induced theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A subsheaf of a constructible sheaf of modules over a Noetherian ring on a Noetherian scheme is constructible",
+   "results": [
+    "SheafOfModules.IsFiniteType",
+    "AlgebraicGeometry.noetherianSpace_of_isAffineOpen",
+    "Topology.IsLocallyConstructible.isConstructible",
+    "PrimeSpectrum.ConstructibleSetData",
+    "SheafOfModules.GeneratingSections.IsFiniteType",
+    "AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+    "AlgebraicGeometry.noetherianSpace_of_isAffine",
+    "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian"
+   ],
+   "verdict": "No matching general sheaf theorem; the listed results provide adjacent definitions or topology.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NoetherianSpace\"",
+   "results": [
+    "TopologicalSpace.NoetherianSpace",
+    "TopologicalSpace.instNoetherianSpaceCofiniteTopology",
+    "TopologicalSpace.Finite.to_noetherianSpace",
+    "TopologicalSpace.instNoetherianSpaceOfIndiscreteTopology",
+    "TopologicalSpace.NoetherianSpace.compactSpace",
+    "TopologicalSpace.NoetherianSpace.finite",
+    "TopologicalSpace.NoetherianSpace.discrete",
+    "TopologicalSpace.NoetherianSpace.finite_irreducibleComponents"
+   ],
+   "verdict": "No matching general sheaf theorem; the listed results provide adjacent definitions or topology.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(subobject|subsheaf)|IsConstructibleSheaf",
+   "results": [],
+   "verdict": "No matching general sheaf theorem; the listed results provide adjacent definitions or topology.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subsheaf of a constructible sheaf of modules over a Noetherian ring is finite locally constant on a dense open",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-eight-curve-devissage",
+   "place": "Proof step 2(b): constructibility of subsheaves over Noetherian coefficients.",
+   "via": [
+    "lem-weil-pbc-constructible-module-subobject-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleClosedGenericCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleClosedGenericCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constructible_of_closed_generic",
+  "statement": "theorem constructible_of_closed_generic\n    {X : Scheme.{u}} [IsNoetherian X] {Λ : Type (u + 1)} [CommRing Λ]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (h : ∀ (Z : Scheme.{u}) (i : Z ⟶ X), IsClosedImmersion i → IsNoetherian Z →\n      ∃ U : Z.Opens, Dense (U : Set Z) ∧\n        IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj\n          ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).obj F))) :\n    IsConstructibleSheaf F",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c4612",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T023042-L-1092605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c4612",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T023042-L-1092605",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures match the nodes; proofs, dependencies, source arguments and report agree. All three modules compile cleanly; axiom checks show only allowed axioms plus sorryAx from the named generic-constancy lemma."
+ }
+}

@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.ConstructibleSheaf.Pullback
+import Sheaf.AlgebraicGeometry.ModuleSubobjectGenericConstancy
+import Sheaf.AlgebraicGeometry.ConstructibleClosedGenericCriterion
 
 /-!
 # Constructibility of module subsheaves over Noetherian rings
@@ -58,6 +61,14 @@ theorem constructible_of_mono_noetherian
     [IsNoetherianRing Λ]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (φ : F ⟶ G) [Mono φ] [IsConstructibleSheaf G] :
-    IsConstructibleSheaf F := by sorry
+    IsConstructibleSheaf F := by
+  apply constructible_of_closed_generic F
+  intro Z i hi hZ
+  have : IsClosedImmersion i := hi
+  have : IsNoetherian Z := hZ
+  have : IsConstructibleSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).obj G) :=
+    IsConstructibleSheaf.upperStar i G
+  exact exists_dense_open_of_mono_noetherian
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).map φ)
 
 end AlgebraicGeometry.Scheme

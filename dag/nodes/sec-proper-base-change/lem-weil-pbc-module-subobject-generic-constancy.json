@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-module-subobject-generic-constancy",
+ "kind": "statement",
+ "title": "Generic finite local constancy of module subsheaves",
+ "statement": "Let $X$ be a Noetherian scheme [def-weil-pbc-scheme-conventions], $\\Lambda$ a Noetherian commutative ring [def-weil-pbc-noetherian-ring], and $\\varphi:F\\to G$ a monomorphism of sheaves of $\\Lambda$-modules on the small etale site [def-weil-pbc-etale-site]. Assume $G$ is constructible [def-constructible-constructible]. There exists an open subset $U\\subseteq X$ dense in $X$ such that the restriction of $F$ to $U$ is finite locally constant [def-constructible-finite-locally-constant], where finite means finitely generated module stalks. No constructibility conclusion is asserted on $X\\setminus U$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09BH, Proposition 59.74.1 (3), proof of (3), generic-neighbourhood argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use generic constancy of G. At each of the finitely many irreducible component generic points, choose an etale trivialization and remove the other components. The target is constant with value a finitely generated module M on an irreducible neighbourhood.",
+   "uses": [
+    "prop-constructible-generic-constancy",
+    "def-constructible-locally-constant",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The geometric generic stalk identifies F with a submodule N of M. N has finitely many generators over the Noetherian ring. Choose representatives on a common pointed etale neighbourhood and shrink so their images are the fixed constant generators.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-constructible-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two pullbacks of each representative agree because their images are constant and the inclusion is monic. The sheaf axiom descends them over the open image. Thus the constant N is contained in F. The quotient F/N is a subsheaf of constant M/N with zero generic stalk, hence zero: any nonzero constant germ on a nonempty etale neighbourhood of an irreducible scheme persists at a generic point. These local trivializations descend to finite local constancy about each component generic point. Take disjoint component opens by removing the other components; their finite union is dense. This is the generic-neighbourhood argument of Stacks 09BH (3), without the subsequent Noetherian induction.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-geometric-stalks",
+    "def-constructible-constant",
+    "def-constructible-locally-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constant",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "prop-constructible-generic-constancy"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09BH, proof of (3); implementation follows the parent node’s generic-open/closed-complement route"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A subsheaf of a constructible sheaf of modules over a Noetherian ring on a Noetherian scheme is constructible",
+   "results": [
+    "SheafOfModules.IsFiniteType",
+    "AlgebraicGeometry.noetherianSpace_of_isAffineOpen",
+    "Topology.IsLocallyConstructible.isConstructible",
+    "PrimeSpectrum.ConstructibleSetData",
+    "SheafOfModules.GeneratingSections.IsFiniteType",
+    "AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+    "AlgebraicGeometry.noetherianSpace_of_isAffine",
+    "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian"
+   ],
+   "verdict": "No matching general sheaf theorem; the listed results provide adjacent definitions or topology.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NoetherianSpace\"",
+   "results": [
+    "TopologicalSpace.NoetherianSpace",
+    "TopologicalSpace.instNoetherianSpaceCofiniteTopology",
+    "TopologicalSpace.Finite.to_noetherianSpace",
+    "TopologicalSpace.instNoetherianSpaceOfIndiscreteTopology",
+    "TopologicalSpace.NoetherianSpace.compactSpace",
+    "TopologicalSpace.NoetherianSpace.finite",
+    "TopologicalSpace.NoetherianSpace.discrete",
+    "TopologicalSpace.NoetherianSpace.finite_irreducibleComponents"
+   ],
+   "verdict": "No matching general sheaf theorem; the listed results provide adjacent definitions or topology.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(subobject|subsheaf)|IsConstructibleSheaf",
+   "results": [],
+   "verdict": "No matching general sheaf theorem; the listed results provide adjacent definitions or topology.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A subsheaf of a constructible sheaf of modules over a Noetherian ring is finite locally constant on a dense open",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-eight-curve-devissage",
+   "place": "Proof step 2(b): constructibility of subsheaves over Noetherian coefficients.",
+   "via": [
+    "lem-weil-pbc-constructible-module-subobject-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleSubobjectGenericConstancy",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleSubobjectGenericConstancy.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_dense_open_of_mono_noetherian",
+  "statement": "theorem exists_dense_open_of_mono_noetherian\n    {X : Scheme.{u}} [IsNoetherian X] {Λ : Type (u + 1)} [CommRing Λ]\n    [IsNoetherianRing Λ]\n    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}\n    (φ : F ⟶ G) [Mono φ] [IsConstructibleSheaf G] :\n    ∃ U : X.Opens, Dense (U : Set X) ∧\n      IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c4612",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T023042-L-1092605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c4612",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T023042-L-1092605",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures match the nodes; proofs, dependencies, source arguments and report agree. All three modules compile cleanly; axiom checks show only allowed axioms plus sorryAx from the named generic-constancy lemma."
+ }
+}
