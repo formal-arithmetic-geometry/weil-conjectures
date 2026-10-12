@@ -6663,3 +6663,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/T2/Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful (stage 3; reviewer PASS; first push; landing 20261012T070553-L-3478150 (interface); batch 20261012T070523; modules 5; new nodes 4; change records: coord/changes/fpqc-descent-category-relocation.md)
 - 07:05 L: merged deliver/T2/Sheaf.CategoryTheory.Abelian.HorseshoePrescribedRows (stage 3; reviewer PASS; first push; landing 20261012T070553-L-3478312 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/T2/Sheaf.Paper.GabberCriterionDegree (stage 3; reviewer PASS; first push; landing 20261012T070553-L-3478408 (interface); batch 20261012T070523; modules 3; new nodes 2)
+- 07:05 L: merged deliver/T2/Sheaf.RingTheory.FibreRingNoetherian (stage 3; reviewer PASS; first push; landing 20261012T070554-L-3478523 (proof); batch 20261012T070523; modules 1; new nodes 0)

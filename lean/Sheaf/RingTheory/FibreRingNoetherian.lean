@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 
+import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+import Mathlib.RingTheory.Localization.Submodule
+
 /-!
 # Noetherian fibre rings
 
@@ -41,6 +44,9 @@ theorem isNoetherianRing_fiber
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     [IsNoetherianRing B] (p : Ideal A) [p.IsPrime] :
     IsNoetherianRing (p.Fiber B) := by
-  sorry
+  let : Algebra B (p.Fiber B) := Algebra.TensorProduct.rightAlgebra
+  let S := Localization (Algebra.algebraMapSubmonoid B p.primeCompl)
+  have : IsNoetherianRing S := inferInstance
+  exact isNoetherianRing_of_ringEquiv _ (Fiber.algEquivQuotient (S := B) p).symm.toRingEquiv
 
 end Ideal
