@@ -8,6 +8,12 @@ module
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Mathlib.RingTheory.Kaehler.Polynomial
+import Mathlib.RingTheory.Kaehler.JacobiZariski
+import Mathlib.RingTheory.Smooth.Basic
+import Mathlib.LinearAlgebra.TensorProduct.Basis
+import Mathlib.LinearAlgebra.Basis.Prod
+import Mathlib.LinearAlgebra.StdBasis
 
 /-!
 # Kähler differentials of a polynomial algebra over an algebra
@@ -33,22 +39,18 @@ its finite free rank consequence. Source: Stacks Project, Algebra, Tags 00RS
 (blueprint: lem-weil-pbc-kahler-differentials-polynomial-extension).
 
 Proof:
-1. The first exact sequence (lem-weil-pbc-kahler-differentials-first-exact-sequence)
-   supplies `u : B ⊗[A] Ω[A⁄R] → Ω[B⁄R]` and the surjection `v` to `Ω[B⁄A]`, with
-   kernel equal to the image of `u`. Constants use def-weil-pbc-mv-polynomial-ring.
-2. By lem-weil-pbc-polynomial-ring-kahler-basis, `Ω[B⁄A]` has basis `dzⱼ`.
-   Thus the map `s : Bᵉ → Ω[B⁄R]` given by the sum of `bⱼ dzⱼ` makes `v ∘ s`
-   an isomorphism.
-3. Subtracting `s ((v ∘ s)⁻¹ (v ω))` shows `(x,b) ↦ u x + s b` is surjective.
-   Applying `v` to an element of its kernel shows `b = 0`, reducing injectivity to `u`.
-4. Set `P = R[z₁, …, zₑ]`. By lem-weil-pbc-polynomial-scalar-extension,
-   `B = A ⊗[R] P`; lem-weil-pbc-kahler-differentials-base-change identifies
-   `B ⊗[A] Ω[A⁄R]` with `Ω[B⁄P]`, sending `1 ⊗ dα` to `dα`.
-5. The map `c : Ω[B⁄R] → Ω[B⁄P]` from the first exact sequence satisfies
-   `c ∘ u = μ`, the isomorphism in step 4: both maps agree on the generators
-   `1 ⊗ dα` (def-weil-pbc-kahler-differentials). Hence `u` is injective.
-6. A basis of `Ω[A⁄R]` indexed by `Fin d` extends to a basis of its scalar extension.
-   Combining it with the `e` variable differentials gives a basis indexed by `Fin (d+e)`.
+Write `B = A[z₁, …, zₑ]`, `u = mapBaseChange R A B`, and `v = map R A B B`.
+The polynomial algebra `B` is formally smooth over `A`, so `H₁(L_{B/A}) = 0`.
+The Jacobi–Zariski sequence (Stacks Tag 00S2) therefore makes `u` injective.
+The first fundamental sequence (Tag 00RS) gives `ker v = range u`.
+The polynomial basis (Tag 00RX) identifies `Ω[B⁄A]` with `Bᵉ`. Let
+`s(b) = ∑ j, b j • d_R zⱼ`; then `v(s(b))` is the inverse basis-coordinate map.
+Thus `(x,b) ↦ u(x) + s(b)` is injective: applying `v` determines `b`, and
+injectivity of `u` determines `x`. It is surjective: for `ω`, take the coordinates
+`b` of `v(ω)`; then `ω - s(b)` lies in `ker v = range u`.
+Finally extend the given `Fin d` basis to `B`, take its product with the standard
+`Fin e` basis, transport through the constructed equivalence, and reindex by
+`Fin d ⊕ Fin e ≃ Fin (d+e)`. The argument also covers `e = 0`, `d = 0`, and zero rings.
 -/
 theorem exists_polynomial_extension_equiv
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] (e : ℕ) :
@@ -62,6 +64,48 @@ theorem exists_polynomial_extension_equiv
     (∀ d : ℕ, Nonempty (Module.Basis (Fin d) A (KaehlerDifferential R A)) →
       Nonempty (Module.Basis (Fin (d + e)) (MvPolynomial (Fin e) A)
         (KaehlerDifferential R (MvPolynomial (Fin e) A)))) := by
-  sorry
+  classical
+  let B := MvPolynomial (Fin e) A
+  let u := mapBaseChange R A B
+  let v := map R A B B
+  have hu : Function.Injective u := by
+    apply (LinearMap.injective_iff_eq_zero_of_exact
+      (Algebra.H1Cotangent.exact_δ_mapBaseChange R A B)).mpr
+    ext x
+    simp only [Subsingleton.elim x 0, map_zero]
+  let s : (Fin e → B) →ₗ[B] KaehlerDifferential R B :=
+    { toFun := fun b ↦ ∑ j : Fin e, b j • D R B (MvPolynomial.X j)
+      map_add' := by intro b c; simp [add_smul, Finset.sum_add_distrib]
+      map_smul' := by intro a b; simp [mul_smul, Finset.smul_sum] }
+  let q := (mvPolynomialBasis A (Fin e)).equivFun
+  have hvs (b : Fin e → B) : v (s b) = q.symm b := by
+    simp [s, v, Module.Basis.equivFun_symm_apply, q, B]
+  have hvu (x : B ⊗[A] KaehlerDifferential R A) : v (u x) = 0 :=
+    (exact_mapBaseChange_map R A B (u x)).mpr ⟨x, rfl⟩
+  let f : ((B ⊗[A] KaehlerDifferential R A) × (Fin e → B)) →ₗ[B]
+      KaehlerDifferential R B :=
+    u.comp (LinearMap.fst B _ _) + s.comp (LinearMap.snd B _ _)
+  have hf : Function.Bijective f := by
+    constructor
+    · intro x y h
+      have hb : x.2 = y.2 := q.symm.injective (by
+        simpa only [f, LinearMap.add_apply, LinearMap.comp_apply,
+          LinearMap.fst_apply, LinearMap.snd_apply, map_add, hvu, hvs, zero_add]
+          using congrArg v h)
+      exact Prod.ext (hu (by
+        simpa only [f, LinearMap.add_apply, LinearMap.comp_apply,
+          LinearMap.fst_apply, LinearMap.snd_apply, hb, add_left_inj] using h)) hb
+    · intro ω
+      let b := q (v ω)
+      obtain ⟨x, hx⟩ := (exact_mapBaseChange_map R A B (ω - s b)).mp (by
+        rw [map_sub, hvs]; simp [b, v])
+      exact ⟨(x, b), by
+        change u x + s b = ω
+        rw [hx, sub_add_cancel]⟩
+  let E := LinearEquiv.ofBijective f hf
+  refine ⟨⟨E, fun x b ↦ rfl⟩, ?_⟩
+  intro d ⟨basis⟩
+  exact ⟨(((basis.baseChange B).prod (Pi.basisFun B (Fin e))).map E).reindex
+    finSumFinEquiv⟩
 
 end KaehlerDifferential
