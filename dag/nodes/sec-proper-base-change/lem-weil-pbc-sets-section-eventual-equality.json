@@ -13,45 +13,34 @@
  ],
  "proof": [
   {
-   "text": "Pass to the cofinal upper tail. Transition maps are affine by hypothesis and limit projections are affine by the limit-affine theorem (transport from its chosen limit to c). Use the affine-etale site colimit and restriction equivalences. The unit-compatible affine inverse-image comparison transports the sheaves and their transition isomorphisms to this site presentation. Composition identifies the inverse-image sheaves at the limit with a constant system, whose colimit is that inverse image by connectedness. The colimit-of-sites sections theorem therefore identifies the filtered colimit of affine stage sections with the limit sections, with the displayed unit/composition maps.",
+   "text": "Choose the finite affine family of etale_finite_affine_restriction_detection. Restrict the two sections to each affine member. Restriction naturality transports the assumed cone equality to the restricted sections, so affine eventual equality gives a later stage and two arrows for each member.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "lem-weil-pbc-site-equivalence-sheaf-transport",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "lem-weil-pbc-sets-section-comparison-laws"
+    "lem-weil-pbc-sets-section-affine-eventual-equality",
+    "lem-weil-pbc-sets-section-comparison-naturality",
+    "lem-weil-pbc-etale-finite-affine-restriction-detection"
    ],
    "elementary": false
   },
   {
-   "text": "Move the two original stages to a common stage using directedness. For an affine descended object, equality of limit sections becomes equality in the filtered colimit furnished by the affine comparison. Two representatives equal in a filtered colimit agree after two arrows to a common later stage. For a general qcqs etale object choose a finite affine cover, apply this to each restricted pair, then move all finitely many equalities to one common stage. Naturality of the comparisons commutes with restriction. Separatedness of the sheaf gives equality over the whole object. Coherence supplies arrows back to the original stages and their displayed comparisons. The empty-object case uses the empty covering and uniqueness.",
+   "text": "Use IsCofiltered.inf_objs_exists on the finite set containing j, k, and all local witness stages, choosing arrows from l to every stage. Hom sets in Over of a preorder are subsingletons, so composites through each local stage equal the chosen arrows to j and k. Apply the comparison composition laws to transport every local equality to l. Restriction naturality then identifies these with restrictions of the two global sections. The finite affine restriction detection theorem gives their equality. Including j and k in the finite set handles an empty family without a separate inhabitedness assumption.",
    "uses": [
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lem-weil-pbc-pretopology-sheaf-condition",
-    "lem-weil-pbc-sets-section-comparison-laws"
+    "lem-weil-pbc-sets-section-comparison-laws",
+    "lem-weil-pbc-sets-section-comparison-naturality",
+    "lem-weil-pbc-etale-finite-affine-restriction-detection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-pretopology-sheaf-condition",
-  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+  "lem-weil-pbc-etale-finite-affine-restriction-detection",
+  "lem-weil-pbc-sets-section-affine-eventual-equality",
   "lem-weil-pbc-sets-section-comparison-laws",
-  "lem-weil-pbc-site-equivalence-sheaf-transport"
+  "lem-weil-pbc-sets-section-comparison-naturality"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem Tag 09YQ (theorem-colimit), degree zero for sheaves of sets; proof via Tags 0EYL, 04HR, 09YN and the finite affine-cover reduction for qcqs schemes; concrete section formulation and finite-cover argument written by T1"
+  "place": "Tag 09YQ affine-site proof and finite affine-cover reduction; complete Lean finite-cover reduction by C2"
  },
  "mathlib_searches": [
   {
@@ -120,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-fcc6f",
-  "group": "T1",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T053955-L-2646381",
+  "landing": "20261012T085219-L-5404",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, Lean declarations, DAG nodes, report, relocation record, and clean compilation match the stage-3 review requirements."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

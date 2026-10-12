@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-sets-section-comparison-naturality",
+ "kind": "statement",
+ "title": "Restriction naturality of canonical section comparisons",
+ "statement": "Let T → S → R be morphisms h,f with composite k, G a sheaf of sets on the small etale site of R, and v : V → W a morphism of etale objects over R. The canonical section comparison [def-weil-pbc-sets-section-comparison] for (h,f,k) commutes with restriction along the base changes of v: comparison on W followed by restriction along k*v equals restriction along f*v followed by comparison on V. No limit, qcqs or affine hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Sites Tags 03CB and 03CC; naturality calculation for the definition of the section comparison"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Package the adjunction unit, composition comparison, equality transport, and opposite of the pullback-pasting transformation as four whiskered natural transformations. Their composite has components exactly etaleSetSectionComparison. Apply naturality of the composite to v.op and take the symmetric equality.",
+   "uses": [
+    "def-weil-pbc-sets-section-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Sites Tags 03CB and 03CC; naturality calculation for the definition of the section comparison; concrete formulation and glue by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of sections of inverse image etale sheaves on inverse limit detected at later finite stage",
+   "results": "Returned: AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, StandardEtalePair.homEquiv_symm_apply, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, StandardEtalePair.homEquiv, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk. No identical concrete statement found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine open cover of a quasi compact scheme and sheaf sections jointly injective under restriction",
+   "results": "Unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|finite.*affine|isColimit_eq_iff",
+   "results": "Returned: Mathlib/CategoryTheory/MarkovCategory/Basic.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/GaloisObjects.lean, Mathlib/CategoryTheory/Enriched/HomCongr.lean, Mathlib/CategoryTheory/Enriched/HomCongr.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean. No identical concrete statement found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image adjunction unit natural in etale object restriction of sheaf sections",
+   "results": "Returned: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso. No identical concrete statement found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_eq_iff|hom_ext_ofArrows|finiteSubcover",
+   "results": "Returned: Mathlib/CategoryTheory/Presentable/Type.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Limits.lean, Mathlib/CategoryTheory/Presentable/Limits.lean, Mathlib/CategoryTheory/Presentable/Finite.lean. No identical concrete statement found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Sites Tags 03CB and 03CC; naturality calculation for the definition of the section comparison",
+   "via": [
+    "lem-weil-pbc-sets-section-eventual-equality",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionComparisonNaturality.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSectionComparison_naturality",
+  "statement": "theorem etaleSetSectionComparison_naturality\n    {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)\n    (G : Sheaf R.smallEtaleTopology (Type (u + 1)))\n    {V W : R.Etale} (v : V ⟶ W) :\n    etaleSetSectionComparison h f k hk G W ≫\n        ((Scheme.etaleSetPullback k).obj G).obj.map\n          ((MorphismProperty.Over.pullback @Etale ⊤ k).map v).op =\n      ((Scheme.etaleSetPullback f).obj G).obj.map\n          ((MorphismProperty.Over.pullback @Etale ⊤ f).map v).op ≫\n        etaleSetSectionComparison h f k hk G V",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085219-L-5404",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085219-L-5404",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

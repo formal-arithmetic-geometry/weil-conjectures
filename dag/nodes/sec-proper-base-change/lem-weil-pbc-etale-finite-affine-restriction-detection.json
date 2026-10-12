@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-etale-finite-affine-restriction-detection",
+ "kind": "statement",
+ "title": "Finite affine restrictions detect equality after base change",
+ "statement": "Let S be a qcqs scheme and W an etale object over S with qcqs structure map. There exists a finite family Vₐ → W of etale objects over S with affine domains and qcqs structure maps. For every scheme T, morphism h : T → S, sheaf F of sets on the small etale site of T, and sections s,t on h*W, equality of their restrictions to each h*Vₐ implies s=t. The family may be empty for empty W.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q4 finite affine-cover reduction; Tags 01IT and 00VL; Lean proof uses finiteSubcover and sheaf hom_ext_ofArrows"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Use QuasiCompact.compactSpace_of_compactSpace to make W quasi-compact. Take Scheme.OpenCover.finiteSubcover of its canonical affine cover and reindex by Fin using Fintype.equivFin. Compose its open immersions with W → S to obtain the etale objects and arrows. Affine sources are compact and quasi-separated, so quasiCompact_of_compactSpace and QuasiSeparated.of_quasiSeparatedSpace give their qcqs structure maps.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Scheme.ofArrows_mem_smallEtaleTopology_iff turns the union-of-ranges equation of the finite open cover into a covering sieve. The proved upstream Scheme.coverPreserving_overPullback sends it to a covering sieve on T; Sieve.functorPushforward_ofArrows identifies its arrows. Apply Presheaf.IsSheaf.hom_ext_ofArrows to the two maps from PUnit given by s and t. The assumed restriction equations identify these maps on each covering arrow; evaluation at PUnit.unit gives s=t, including the empty covering.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-pretopology-sheaf-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-pretopology-sheaf-condition",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q4 finite affine-cover reduction; Tags 01IT and 00VL; Lean proof uses finiteSubcover and sheaf hom_ext_ofArrows; concrete formulation and glue by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of sections of inverse image etale sheaves on inverse limit detected at later finite stage",
+   "results": "Returned: AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, StandardEtalePair.homEquiv_symm_apply, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, StandardEtalePair.homEquiv, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk. No identical concrete statement found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine open cover of a quasi compact scheme and sheaf sections jointly injective under restriction",
+   "results": "Unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "naturality|finite.*affine|isColimit_eq_iff",
+   "results": "Returned: Mathlib/CategoryTheory/MarkovCategory/Basic.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/GaloisObjects.lean, Mathlib/CategoryTheory/Enriched/HomCongr.lean, Mathlib/CategoryTheory/Enriched/HomCongr.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean. No identical concrete statement found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image adjunction unit natural in etale object restriction of sheaf sections",
+   "results": "Returned: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso. No identical concrete statement found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_eq_iff|hom_ext_ofArrows|finiteSubcover",
+   "results": "Returned: Mathlib/CategoryTheory/Presentable/Type.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Basic.lean, Mathlib/CategoryTheory/Presentable/Limits.lean, Mathlib/CategoryTheory/Presentable/Limits.lean, Mathlib/CategoryTheory/Presentable/Finite.lean. No identical concrete statement found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionEventualEquality",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Tag 03Q4 finite affine-cover reduction; Tags 01IT and 00VL; Lean proof uses finiteSubcover and sheaf hom_ext_ofArrows",
+   "via": [
+    "lem-weil-pbc-sets-section-eventual-equality",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFiniteAffineRestrictionDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFiniteAffineRestrictionDetection.lean",
+  "declaration": "AlgebraicGeometry.etale_finite_affine_restriction_detection",
+  "statement": "theorem etale_finite_affine_restriction_detection\n    {S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S]\n    (W : S.Etale) [QuasiCompact W.hom] [QuasiSeparated W.hom] :\n    ∃ (n : ℕ) (V : Fin n → S.Etale) (v : ∀ a, V a ⟶ W),\n      (∀ a, IsAffine (V a).left) ∧\n      (∀ a, QuasiCompact (V a).hom) ∧\n      (∀ a, QuasiSeparated (V a).hom) ∧\n      ∀ (T : Scheme.{u}) (h : T ⟶ S)\n        (F : Sheaf T.smallEtaleTopology (Type (u + 1)))\n        (s t : F.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W))),\n        (∀ a, F.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ h).map (v a)).op s =\n          F.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ h).map (v a)).op t) →\n        s = t",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085219-L-5404",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085219-L-5404",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
