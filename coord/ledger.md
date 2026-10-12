@@ -8009,3 +8009,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 22:13 L: batch 20261012T135212 dependency take-out
 - 14:17 L: returned deliver/X2/Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1 (reviewer RETURN: (reviewer X-13e39, head 13e395afb) F (brief points 5 and 7): In coord/reports/X2/Sheaf.AlgebraicGeometry.ModuleSectionsS)
+- 14:25 L: returned deliver/F2/Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen (reviewer RETURN: (reviewer X-e5dd8, head e5dd88cac) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Et)
