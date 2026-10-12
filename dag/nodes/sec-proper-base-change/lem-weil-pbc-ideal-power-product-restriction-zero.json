@@ -17,38 +17,38 @@
  ],
  "proof": [
   {
-   "text": "Restriction computes sections on image opens with scalars transported through the structure-ring isomorphism. Kernels are computed sectionwise, so restriction preserves kernels; the restriction adjunction preserves cokernels. Consequently restriction preserves images. The natural tensor and unit comparisons identify the multiplication maps, since on pure tensors both composites give a scalar times a section.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-module-restriction-tensor-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The restriction of the inclusion of K agrees with the inclusion of its comap to V: check the section ideals on each affine open of V. The product restriction comparison identifies the resulting multiplication images as subobjects.",
-   "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Induct on n to identify the restricted power inclusion with the power of the restricted inclusion. At zero both are identity inclusions of the structure sheaf. At one use the preceding identification. At n+2 use the multiplication-image comparison on K and its (n+1)-st power and compose their inclusions. Apply that comparison to the product with F.",
+   "text": "The recursively defined sheaf power inclusion is monic by two-step induction. On every affine open its range equals the corresponding ideal power, by the affine-power clause; the module realization of Mathlib IdealSheafData power has the same ranges. The existing affine-range subobject helper therefore gives equality of the two subobjects and an isomorphism commuting with their inclusions.",
    "uses": [
     "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-closed-immersion-ideal-power-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An isomorphism of ideal modules commuting with their inclusions induces an isomorphism of their products with any module: after whiskering, the multiplication maps have equal image subobjects. Apply this to the power identification on X and on the open.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing single-product restriction clause to the ideal-sheaf-data power and F. Restriction preserves monomorphisms because sections on an open immersion are sections on the image open. The equal image subobjects yield an isomorphism of the product objects.",
+   "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "The preceding identifications yield an isomorphism of the two module sheaves. Being a zero object is invariant under isomorphism, proving both directions. This includes n=0, the empty open, the zero module and the zero and unit ideals.",
+   "text": "For an open immersion, comap commutes with ideal powers by the affine ideal formula and Ideal.map_pow. Combine the two product isomorphisms, restriction of the first, the single-product comparison, and this equality; IsZero is invariant under isomorphism.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01YD, lemma-prepare-filter-support, proof: restriction of I^n F to X minus Z'; with Schemes Tag 01I8 and Modules Tag 01CD. Read online at https://stacks.math.columbia.edu/tag/01YD."
+  "place": "J4 stage 3: affine-power identification and the existing single-product restriction clause, following the ideal-power restriction used in Tag 01YD; affine sections as in Tag 01I8. Repair: reuse the existing affine-range subobject helper from ClosedImmersionIdealPowerImage."
  },
  "mathlib_searches": [
   {
@@ -105,10 +105,9 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "proof_deps": [
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-weil-pbc-ideal-module-product-stalk",
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-ideal-module-product-stalk"
+  "lem-weil-pbc-closed-immersion-ideal-power-image"
  ],
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.IdealPowerProductRestrictionZero",
@@ -134,10 +133,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261012T184342-L-4019500",
-  "kind": "interface",
+  "landing": "20261012T235112-L-2171902",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
