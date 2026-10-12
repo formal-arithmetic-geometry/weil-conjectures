@@ -4,7 +4,6 @@ Copyright (c) 2026 The SHEAF contributors.
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-!
 # Left exactness of global sections on scheme modules
@@ -45,6 +44,16 @@ theorem globalSectionsFunctor_additive_leftExact (X : Scheme.{u}) :
     (globalSectionsFunctor X).Additive ∧
       ∀ {M N : X.Modules} (f : M ⟶ N),
         PreservesLimit (parallelPair f 0) (globalSectionsFunctor X) := by
-  sorry
+  unfold globalSectionsFunctor
+  constructor
+  · constructor
+    intro M N f g
+    rfl
+  · intro M N f
+    have : PreservesLimits (toPresheaf X) := inferInstance
+    have : PreservesLimits ((evaluation (TopologicalSpace.Opens (X : TopCat))ᵒᵖ
+        AddCommGrpCat.{u}).obj (Opposite.op (⊤ : TopologicalSpace.Opens (X : TopCat)))) :=
+      inferInstance
+    infer_instance
 
 end AlgebraicGeometry.Scheme.Modules

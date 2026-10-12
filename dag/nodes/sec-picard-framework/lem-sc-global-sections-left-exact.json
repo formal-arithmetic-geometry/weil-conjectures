@@ -26,50 +26,28 @@
  ],
  "proof": [
   {
-   "text": "By the definition of the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], this category is abelian and kernels of module morphisms are computed sectionwise. Thus for every morphism $u:\\mathcal F\\to\\mathcal G$, the kernel module $\\ker(u)$ has sections $\\ker(u)(X)=\\ker(\\mathcal F(X)\\to\\mathcal G(X))$.",
+   "text": "Unfold the global-sections functor as toPresheaf X followed by evaluation at the top open. Addition of module-sheaf morphisms is sectionwise by [def-weil-sheaf-of-modules-category], so mapping f + g gives the sum of the two section maps by definitional equality. This constructs Functor.Additive directly.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma Tag 01EZ (lemma-before-Leray), proof setup for $\\Gamma(Y,-)$"
-   }
+   "elementary": true
   },
   {
-   "text": "Evaluating at $X$ therefore carries the kernel of every module morphism to the kernel of the induced homomorphism of abelian groups. Hence $\\Gamma(X,-)$ preserves kernels.",
+   "text": "The sectionwise-limit theorem [lem-weil-pbc-module-sheaves-limits-sectionwise] is implemented for schemes by the Mathlib PreservesLimits instance for AlgebraicGeometry.Scheme.Modules.toPresheaf. Evaluation also preserves limits (CategoryTheory.Limits.evaluationPreservesLimits). Instantiate both preservation classes explicitly, then infer preservation of the parallel-pair diagram (f, 0) by composition. This is the kernel-preservation clause of the statement.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma Tag 01EZ (lemma-before-Leray), proof setup for $\\Gamma(Y,-)$"
-   }
-  },
-  {
-   "text": "The section map of a module morphism is a homomorphism of abelian groups [def-weil-sheaf-of-modules-category], and finite products in $\\operatorname{Mod}(\\mathcal O_X)$ are computed sectionwise, evaluation at $X$ carrying them to the products of the abelian groups of sections [lem-weil-pbc-module-sheaves-limits-sectionwise]. Thus evaluation at $X$, namely $\\Gamma(X,-)$, preserves finite products, i.e. is additive. Combining additivity with kernel preservation gives left exactness by the definition [def-sp-left-exact-additive].",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "def-sp-left-exact-additive"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma Tag 01EZ (lemma-before-Leray), proof setup for $\\Gamma(Y,-)$"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-sheaf-of-modules-category",
-  "def-sp-left-exact-additive",
   "lem-weil-pbc-module-sheaves-limits-sectionwise"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology of Sheaves, Lemma Tag 01EZ (lemma-before-Leray), proof setup for $\\Gamma(Y,-)$"
+  "document": "Mathlib.AlgebraicGeometry.Modules.Sheaf; Mathlib.CategoryTheory.Limits.FunctorCategory.Basic",
+  "place": "Scheme.Modules.toPresheaf preserves limits (Sheaf.lean:78); evaluationPreservesLimits (Basic.lean:405); sectionwise addition gives additivity by rfl"
  },
  "mathlib_searches": [
   {
@@ -189,5 +167,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f2e08",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T063518-L-3159141",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged Lean definition and signature match the node; proof and dependencies agree with Mathlib instances; delivery compiles cleanly and both declarations use only permitted axioms; import removal is documented and safe for current users."
  }
 }
