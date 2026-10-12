@@ -1,6 +1,6 @@
 # Work queue
 
-44 items; claim with `tools/claim.py next <group> [--stage N]`.
+43 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,7 +24,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (34)
+## Stage 3: modules to prove (33)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -57,7 +57,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 6 | proof |
 | `Sheaf.AlgebraicGeometry.TorsionEtaleSheaf` | 4 | 3 | proof |
-| `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct` | 5 | 3 | proof |
 | `Sheaf.Topology.InverseImageModule` | 5 | 2 | proof |
 | `Sheaf.Topology.NoetherianVanishingByIrreducibleComponents` | 5 | 2 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
