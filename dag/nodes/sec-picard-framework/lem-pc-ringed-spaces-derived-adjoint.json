@@ -26,56 +26,54 @@
  ],
  "proof": [
   {
-   "text": "For the morphism of ringed spaces underlying f, the module pullback P_f = O_X tensor_{f^{-1}O_Y} f^{-1}(-) is left adjoint to the underived direct image f_*: the natural map Hom_{O_X}(P_f G,F) -> Hom_{O_Y}(G,f_*F) is a bijection, by [lem-pc-module-pullback-adjunction]. The derived pullback Lf^* and derived direct image Rf_* are the left and right derived functors of these two functors, as specified in [def-pc-derived-pullback] and [def-pc-derived-direct-image].",
+   "text": "Use the tensor pullback/direct image adjunction and map it to homotopy categories. Extract the chosen derived pullback counit and universal property from exists_derivedPullback; Functor.ext applied to its object and map clauses identifies its underived functor with Scheme.Modules.tensorPullback f.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-derived-pullback",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install the recorded sheaf tensor structure, functorial flat resolutions, and exact colimits. The existing K-flat machinery gives the localizer K-flat left derivability structure. Translate categorical K-flatness to the sheaf K-flat predicate using kFlat_iff_preserves_acyclic and the homotopy quotient characterization, then apply the chosen counit clause to obtain the left derived composite property.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module category on X is Grothendieck abelian and hence has K-injective resolutions. Apply the existing right-derived-functor composition theorem to the direct-image unit and derived pullback, obtaining the right derived composite property.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib CategoryTheory.Adjunction.derived to the homotopy adjunction, the chosen pullback counit, the direct-image unit, and the two composite universal properties. Explicitly specify the derived functors so the result is exactly derivedPullback f ⊣ schemeDerivedDirectImage f, then package it as Nonempty.",
    "uses": [
     "lem-pc-module-pullback-adjunction",
     "def-pc-derived-pullback",
     "def-pc-derived-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-derived-adjoint-functors] with $\\mathcal A$ the abelian category of $\\mathcal O_X$-modules, $\\mathcal B$ that of $\\mathcal O_Y$-modules, $F=f_*$ and $G=P_f$; $G$ is left adjoint to $F$ by Step 1. By [def-pc-derived-direct-image] and [def-pc-derived-pullback], $Rf_*$ and $Lf^*$ are the right derived functor of $f_*$ and the left derived functor of $P_f$, defined on all of $D(\\mathcal O_X)$ and $D(\\mathcal O_Y)$ (computed by K-injective, resp. K-flat, resolutions), where these derived categories are those of [def-pc-derived-category], i.e. the derived categories of the two module categories. The cited lemma therefore gives that $Lf^*$ is left adjoint to $Rf_*$, with a canonical bijection $\\operatorname{Hom}_{D(\\mathcal O_X)}(Lf^*G,F)\\cong\\operatorname{Hom}_{D(\\mathcal O_Y)}(G,Rf_*F)$.",
-   "uses": [
-    "lem-pc-derived-adjoint-functors",
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image",
-    "def-pc-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 09T5 (lemma-derived-adjoint-functors), as invoked in the proof of Cohomology Lemma 079W"
-   }
-  },
-  {
-   "text": "The bijection of Step 2 is functorial in both variables by the functoriality clause of [lem-pc-derived-adjoint-functors] (here $RF=Rf_*$ and $LG=Lf^*$ are defined everywhere), i.e. bifunctorial in $F\\in D(\\mathcal O_X)$ and $G\\in D(\\mathcal O_Y)$; this is the displayed statement.",
-   "uses": [
-    "lem-pc-derived-adjoint-functors"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079W, Cohomology Lemma cohomology-lemma-adjoint (functoriality clause)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-module-pullback-adjunction",
-  "lem-pc-derived-adjoint-functors",
   "def-pc-derived-pullback",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
   "def-pc-derived-direct-image",
-  "def-pc-derived-category"
+  "def-pc-ringed-spaces-derived-direct-image"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 079W, Cohomology Lemma cohomology-lemma-adjoint"
+  "place": "Tag 079W, lemma-adjoint; formal derived-adjunction argument implemented with Mathlib CategoryTheory.Adjunction.derived and existing K-flat/K-injective derivability APIs",
+  "group": "A2"
  },
  "mathlib_searches": [
   {
@@ -154,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T184239-L-3994604",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
