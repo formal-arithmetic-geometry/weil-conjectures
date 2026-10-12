@@ -12,16 +12,39 @@
  },
  "proof": [
   {
-   "text": "Take the exponent n of the finite underlying group. For n = 1 the group is zero, and the empty sum is its identity. Otherwise enumerate the prime factors p_i of n, with q_i the corresponding prime powers. Take N_i to be the subgroup killed by q_i, with the restricted integral action. The subgroup is invariant because linear maps commute with multiplication by q_i. Its stabilizers equal those in M, so they are open. Its group is finite and p_i-primary. Chinese remainder gives integers c_i congruent to one modulo q_i and zero modulo the other prime powers. Multiplication by c_i takes M into N_i and commutes with the action. Together with subgroup inclusion these give the required maps. Their composite on M is multiplication by c_i. Since the sum of c_i is one modulo n and n annihilates M, their composites sum to identity.",
+   "text": "Normalize the bundled Z-module structure using uniqueness of the integral module structure. Finiteness gives additive torsion, hence Module.IsTorsion Z M. Apply Mathlib Submodule.exists_isInternal_prime_power_torsion_of_pid to obtain a finite index type, irreducible integers p_i, exponents e_i and an internal direct sum of S_i = Submodule.torsionBy Z M (p_i ^ e_i). Use IsInternal.chooseDecomposition and decomposeLinearEquiv for its unique inverse.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Each S_i is invariant under the action because integral linear maps commute with scalar multiplication. Restrict the representation using Representation.subrepresentation. Equality in the subtype is equality in M, so each element has exactly its original open stabilizer. The subtype is finite. Int.prime_iff_natAbs_prime makes natAbs(p_i) prime, and smul_torsionBy together with natAbs_nsmul_eq_zero shows every element is killed by natAbs(p_i) ^ e_i; isPGroup_iff_pow_pow_eq_one gives the primary-group property.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define P_i by composing the unique inverse of the internal direct-sum map with DirectSum.component. To prove P_i commutes with each action map, apply DirectSum.decompose_lhom_ext and check on S_j. On S_i the projection is identity; on every other S_j it is zero. The action preserves S_j, so both sides agree in either case. Construct a_i from P_i and b_i from the subtype inclusion as equivariant maps in the full subcategory.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "DirectSum.sum_support_decompose says the sum of all nonzero components of x equals x. Enlarge its support to the whole finite index set: components outside the support are zero. Thus the sum over i of the inclusions of P_i(x) equals x, including the empty-index case.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Reindex the finite family along (Fintype.equivFin iota).symm. The full-subcategory inclusion functor is additive, so Functor.map_sum transfers the categorical sum to Rep. Rep.sum_hom and IntertwiningMap.sum_apply evaluate it pointwise. Fintype.sum_equiv and the preceding identity prove that the sum of a_i followed by b_i is the identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
+  "group": "M3",
+  "date": "2026-10-12",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
-  "place": "proof paragraph 1"
+  "place": "proof paragraph 1",
+  "note": "Mathlib PID internal primary decomposition replaces explicit exponent factorization and CRT coefficients; all representation and categorical glue is proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -100,10 +123,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T135323-L-1695655",
-  "kind": "interface",
+  "landing": "20261012T160138-L-2565095",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
