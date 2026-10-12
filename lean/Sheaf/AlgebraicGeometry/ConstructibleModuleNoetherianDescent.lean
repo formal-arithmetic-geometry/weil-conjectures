@@ -3,6 +3,10 @@ module
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
+import Mathlib.CategoryTheory.Presentable.Directed
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
+
 /-!
 # Noetherian descent of constructible module sheaves
 
@@ -41,6 +45,26 @@ theorem exists_noetherian_descent
       ∃ (ν : X ⟶ X') (F' : Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         Scheme.IsConstructibleEtaleModuleSheaf F' ∧
           Nonempty (((ν)^*[ModuleCat.{u + 1} Λ]).obj F' ≅ F) := by
-  sorry
+  obtain ⟨N⟩ := X.nonempty_noetherianApproximation
+  obtain ⟨I, hI, hd, hn, G, hG⟩ := IsFiltered.exists_directed N.Iᵒᵖ
+  let := hI
+  let := hd
+  let := hn
+  let := hG
+  let D := G.leftOp ⋙ N.D
+  let c := (CategoryTheory.Limits.Cone.mk X N.π).whisker G.leftOp
+  have hc : CategoryTheory.Limits.IsLimit c :=
+    (Functor.Initial.isLimitWhiskerEquiv G.leftOp _).symm N.isLimit
+  let : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f) :=
+    fun {_ _} f ↦ N.isAffineHom_map (G.leftOp.map f)
+  let : ∀ i : Iᵒᵖ, CompactSpace (D.obj i) :=
+    fun i ↦ N.compactSpace_obj (G.leftOp.obj i)
+  let : ∀ i : Iᵒᵖ, IsNoetherian (D.obj i) :=
+    fun i ↦ N.isNoetherian_obj (G.leftOp.obj i)
+  let : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i) :=
+    fun i ↦ IsLocallyNoetherian.quasiSeparatedSpace
+  obtain ⟨i, F', hF', e⟩ :=
+    Scheme.exists_constructible_etaleModuleSheaf_descent D c hc Λ F hF
+  exact ⟨D.obj (Opposite.op i), N.isNoetherian_obj _, c.π.app (Opposite.op i), F', hF', e⟩
 
 end AlgebraicGeometry.Etale

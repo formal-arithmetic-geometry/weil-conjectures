@@ -5823,3 +5823,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:03 L: merged deliver/T1/Sheaf.Topology.AbelianOpenExtensionByZeroStalks (stage 3; reviewer PASS; first push; landing 20261012T020248-L-962244 (interface); modules 2; new nodes 1)
 - 02:03 L: returned deliver/U1/Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions (reviewer RETURN: (reviewer X-9d9d7, head 9d9d7fd20) 1. C5 (brief points 4–5): ReducedConstantLowerShriekReduction.lean:41 leaves a duplic)
 - 02:04 L: merged deliver/U1/Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf (stage 3; reviewer PASS; first push; landing 20261012T020410-L-970280 (proof); modules 1; new nodes 0)
+- 02:04 L: merged deliver/V1/Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent (stage 3; reviewer PASS; first push; landing 20261012T020425-L-971522 (proof); modules 1; new nodes 0)

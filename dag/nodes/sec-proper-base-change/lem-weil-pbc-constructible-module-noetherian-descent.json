@@ -40,11 +40,10 @@
    }
   },
   {
-   "text": "*Reindexing by a directed set.* By [lem-weil-pbc-cofiltered-limit-directed-reindex] applied to the cofiltered $\\mathcal I$, the diagram $\\lambda\\mapsto S_\\lambda$ and the limit cone of step 1, there are a nonempty directed set $T$, objects $\\lambda_t\\in\\mathcal I$ ($t\\in T$) and compatible morphisms $\\lambda_s\\to\\lambda_t$ ($t\\le s$) such that, with $X_t=S_{\\lambda_t}$, $f_{st}:X_s\\to X_t$ the image of $\\lambda_s\\to\\lambda_t$ and $\\nu_t=p_{\\lambda_t}:X\\to X_t$, the cone $(X,(\\nu_t)_t)$ is a limit of the inverse system $(X_t,f_{st})$ over $T$ in the category of schemes. Every $X_t$ is one of the $S_\\lambda$, hence of finite type over $\\operatorname{Spec}\\mathbf Z$, and every $f_{st}$ is one of the transition morphisms of step 1, hence affine [pqf-def-affine-morphism]. So $X=\\varprojlim_{t\\in T}X_t$ is a limit of a directed inverse system with affine transition morphisms, as in [lem-weil-pbc-limit-affine-transition] (which also says that this limit is the one of that node, limits being unique up to unique isomorphism compatible with the projections).",
+   "text": "Reindex the approximation N by applying CategoryTheory.IsFiltered.exists_directed to N.Iᵒᵖ [lem-weil-pbc-cofiltered-limit-directed-reindex]. This gives a nonempty directed partial order I and a final functor G : I ⥤ N.Iᵒᵖ. Its left opposite G.leftOp is initial. Put D = G.leftOp ⋙ N.D and c = (Cone.mk X N.π).whisker G.leftOp. Functor.Initial.isLimitWhiskerEquiv transports N.isLimit to IsLimit c. Affineness of D.map follows directly from N.isAffineHom_map [pqf-def-affine-morphism]. No separate existence theorem for the limit is used.",
    "uses": [
     "lem-weil-pbc-cofiltered-limit-directed-reindex",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-limit-affine-transition"
+    "pqf-def-affine-morphism"
    ],
    "elementary": false,
    "source": {
@@ -53,7 +52,7 @@
    }
   },
   {
-   "text": "*Every $X_t$ is Noetherian, in particular quasi-compact and quasi-separated.* The ring $\\mathbf Z$ is Noetherian (a principal ideal domain), so $\\operatorname{Spec}\\mathbf Z$, covered by the single affine open $\\operatorname{Spec}\\mathbf Z$ with Noetherian ring of sections, is locally Noetherian [pqf-def-locnoeth]. The structure morphism $X_t\\to\\operatorname{Spec}\\mathbf Z$ is locally of finite type (step 2), so $X_t$ is locally Noetherian by [pqf-lem-locnoeth-lft] (Stacks 01T6). $X_t$ is quasi-compact (step 2), hence Noetherian (locally Noetherian and quasi-compact), and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated] (Stacks 01OY); so $X_t$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions].",
+   "text": "For each i : Iᵒᵖ, D.obj i is N.D.obj (G.leftOp.obj i). Use the existing proved instance Scheme.NoetherianApproximation.isNoetherian_obj, whose proof applies LocallyOfFiniteType.isLocallyNoetherian over Spec of the lifted integers [pqf-lem-locnoeth-lft], together with N.compactSpace_obj and the definition of a Noetherian scheme [pqf-def-locnoeth]. Thus each D.obj i is Noetherian and quasi-compact; IsLocallyNoetherian.quasiSeparatedSpace [lem-weil-pbc-locally-noetherian-quasi-separated] supplies quasi-separatedness [def-weil-pbc-scheme-conventions].",
    "uses": [
     "pqf-def-locnoeth",
     "pqf-lem-locnoeth-lft",
@@ -94,7 +93,6 @@
   "def-nagata-noetherian-inverse-system",
   "lem-weil-pbc-cofiltered-limit-directed-reindex",
   "pqf-def-affine-morphism",
-  "lem-weil-pbc-limit-affine-transition",
   "pqf-def-locnoeth",
   "pqf-lem-locnoeth-lft",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
@@ -106,7 +104,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), proof, first paragraph, etale-cohomology.tex lines 13063-13072, with Limits Proposition 01ZA (limits.tex line 1255) and Lemma 09YU (3) (etale-cohomology.tex line 12552)"
+  "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), proof, first paragraph, etale-cohomology.tex lines 13063-13072, with Limits Proposition 01ZA (limits.tex line 1255) and Lemma 09YU (3) (etale-cohomology.tex line 12552); Lean assembly by V1 uses the approximation's existing limit cone and Noetherian-stage instance, reindexed by G.leftOp"
  },
  "mathlib_searches": [
   {
@@ -224,5 +222,15 @@
   "group": "G1",
   "result": "pass",
   "note": "qcqs X = [CompactSpace X][QuasiSeparatedSpace X]; Λ : Type (u+1) finite comm ring; F : Sheaf X.smallEtaleTopology (ModuleCat.{u+1} Λ) with landed IsConstructibleEtaleModuleSheaf; ∃ X' : Scheme.{u} with AlgebraicGeometry.IsNoetherian (#print: IsLocallyNoetherian + CompactSpace), ν : X ⟶ X', constructible F', Nonempty ((ν)^*[ModuleCat Λ]).obj F' ≅ F, notation rfl to Etale.upperStar"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-947eb",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T020425-L-971522",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered Lean module, node proof metadata, report, and compile result match the stated theorem; compilation succeeds cleanly and no review rule is violated."
  }
 }
