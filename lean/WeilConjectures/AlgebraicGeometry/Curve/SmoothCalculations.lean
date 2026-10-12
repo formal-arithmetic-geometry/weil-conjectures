@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.ArtinSchreier
 import Sheaf.AlgebraicGeometry.ArtinSchreierSequence
 import Sheaf.AlgebraicGeometry.BaseChangeCurve
-import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
+import Sheaf.AlgebraicGeometry.Curve.ConstantModCharPDegreeTwo
 import Sheaf.AlgebraicGeometry.Curve.ConstantInvariance
 import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
 import Sheaf.AlgebraicGeometry.Curve.ProperCohomology
@@ -143,7 +143,12 @@ theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP [IsCurve f] [Smo
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         (Etale.constantModSheaf Λ C p)) q) :=
-  sorry
+  by
+    by_cases hq2 : q = 2
+    · subst q
+      exact subsingleton_sheafH_constantModSheaf_of_charP_two Λ f p
+    · have hq' : 2 < q := by omega
+      exact subsingleton_sheafH_constantModSheaf_of_two_lt Λ f p q hq'
 
 /-- **`C₄` for `𝐅_r`.** Let `C` be a smooth separated connected curve over an algebraically
 closed field `k` and `r` a prime different from `char k`. If `Λ/rΛ` is finite, then
@@ -274,7 +279,9 @@ theorem constantModSheaf_curveCalculations [IsCurve f] [Smooth f] [ConnectedSpac
       IsPullback ι' f' f ι → ∀ q, Function.Bijective (Etale.cohomologyMap ι' F q)) ∧
     (∀ {W : Scheme.{u}} (a : W ⟶ C) [IsOpenImmersion a],
       Function.Surjective (Etale.cohomologyMap a F 2)) :=
-  ⟨subsingleton_sheafH_constantModSheaf_of_two_lt Λ f n,
+  by
+    dsimp
+    exact ⟨subsingleton_sheafH_constantModSheaf_of_two_lt Λ f n,
     fun _ ↦ subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine Λ f n,
     fun _ ↦ subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP Λ f n,
     fun hn _ ↦ finite_sheafH_constantModSheaf_of_ne_zero Λ f n hn,
