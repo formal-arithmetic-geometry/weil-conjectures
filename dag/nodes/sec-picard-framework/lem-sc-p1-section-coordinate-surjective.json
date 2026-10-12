@@ -14,44 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Use coordinate multiplication to form 0 -> O(-1) -> O^2 -> O(1) -> 0, with maps t -> (-x1*t,x0*t) and (a,b) -> x0*a+x1*b. On D+(xi), xi is a unit in the trivialized twists, so the sequence is split exact. Tensor with G tensor O(z); local splitting preserves exactness without assuming G flat. Twist addition identifies the kernel with G tensor O(z-1). The quotient maps are exactly G whiskered with twistMul by x0 and x1, by the fraction formula.",
+   "text": "Apply the polynomial-Proj H1 vanishing theorem to G, obtaining an integer b. Choose N=(b+1).toNat. For z>=N, integer arithmetic gives z-1>=b, hence H1(G(z-1)) is subsingleton.",
    "uses": [
-    "lem-pc-twist-tensor",
-    "def-weil-pbc-proj-twisting-sheaf"
+    "lem-sc-p1-proj-serre-h1-vanishing"
    ],
    "elementary": true
   },
   {
-   "text": "Identify the Proj twists with the twists on the standard projective line using the chart isomorphism and uniqueness of TwistData. Coherence on projective space over a field supplies the quasi-coherence and finite presentation required by Serre vanishing. Apply vanishing to G and choose a natural bound N such that H1(G tensor O(z-1)) is zero for z>=N.",
+   "text": "Use the coordinate short exact sequence with kernel G(z-1). Forget to abelian sheaves using the exact functor Scheme.Modules.toAb. In Ext.covariant_sequence_exact3, the boundary of any H0 class is zero because H1 of the kernel is subsingleton. Thus its class lifts to H0 of the biproduct.",
    "uses": [
-    "lem-sc-p1-proj-shifted-free-twist",
-    "lem-sc-p1-twist-exists",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-pc-projective-space-serre-vanishing"
+    "lem-sc-p1-proj-coordinate-short-exact"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The long exact sequence makes the section map from two copies of Gamma(G tensor O(z)) onto Gamma(G tensor O(z+1)) surjective. Sections commute with finite direct sums; read a preimage as a pair to obtain the displayed sum. The zero sheaf case uses the zero pair.",
-   "uses": [
-    "pqf-def-cohomology"
-   ],
-   "elementary": false
+   "text": "Convert H0 to sections with H.zeroLinearEquiv and its naturality. Apply the two biproduct projections to the lifted section. Expand biprod.desc as fst followed by the first coordinate map plus snd followed by the second. Additivity of Hom.app gives exactly the asserted sum.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proj-twisting-sheaf",
-  "lem-pc-projective-space-serre-vanishing",
-  "lem-pc-twist-tensor",
-  "lem-sc-p1-proj-shifted-free-twist",
-  "lem-sc-p1-twist-exists",
-  "pqf-def-cohomology",
-  "pqf-lem-coherent-ft-locnoeth"
+  "lem-sc-p1-proj-coordinate-short-exact",
+  "lem-sc-p1-proj-serre-h1-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Stacks Project, Tag 01YS (4); coordinate split exact sequence on P1, checked on D+(x0) and D+(x1); online source read because local checkout is absent"
+  "place": "R3 Lean reduction of the existing coordinate-sequence/Serre-vanishing plan; exactness is Ext.covariant_sequence_exact3 and H0 naturality."
  },
  "mathlib_searches": [
   {
@@ -121,9 +110,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T110322-L-623056",
+  "landing": "20261012T135311-L-1689887",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
