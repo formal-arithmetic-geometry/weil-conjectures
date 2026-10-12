@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.Modules.LocalSplittingFiniteFree
-import Sheaf.LinearAlgebra.ExteriorTopDirectSum
+import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphism
+import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismSplit
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 
 /-!
 # Construction of the determinant isomorphism
@@ -60,6 +62,17 @@ theorem determinant_shortExact_exists {X : Scheme.{v}} (S : ShortComplex X.Modul
             (exteriorSheafSection S.X₃ r₃ U b)) =
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) :=
-  by sorry
+  by
+  obtain ⟨φ, hφ⟩ := determinant_wedgeMorphism_exists S hS r₁ r₂ r₃ hr
+  obtain ⟨ι, U, hU, hsplit⟩ := exists_openCover_split_shortExact S hS r₁ r₂ r₃
+  have hφiso : IsIso φ := by
+    apply Hom.isIso_of_forall_bijective_app
+    intro x
+    have hx : x ∈ (⨆ i, U i) := by rw [hU]; trivial
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+    obtain ⟨e, hf, hg⟩ := hsplit i
+    exact ⟨U i, hi,
+      determinant_wedgeMorphism_bijective_of_split S r₁ r₂ r₃ hr φ hφ (U i) e hf hg⟩
+  exact ⟨(asIso φ).symm, hφ⟩
 
 end AlgebraicGeometry.Scheme.Modules

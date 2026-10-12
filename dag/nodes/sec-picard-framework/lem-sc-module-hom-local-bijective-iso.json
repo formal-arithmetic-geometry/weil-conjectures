@@ -1,0 +1,107 @@
+{
+ "id": "lem-sc-module-hom-local-bijective-iso",
+ "kind": "statement",
+ "title": "A module sheaf morphism locally bijective on sections is an isomorphism",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M,N$ sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and $\\varphi:M\\to N$. If every $x\\in X$ has an open neighbourhood $V$ such that $\\varphi(W)$ is bijective for every open $W\\subseteq V$, then $\\varphi$ is an isomorphism.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/PullbackFreeGenerator.lean",
+  "place": "Hom.isIso_of_forall_bijective_app, lines 218-236"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Forget to sheaves of abelian groups. Given two sections with equal image, intersect their domain with the prescribed neighbourhood of each point. Bijectivity on that intersection gives equality locally, proving local injectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Given a target section, intersect its domain with the prescribed neighbourhood of each point. Surjectivity gives a local preimage. Apply Sheaf.isLocallyBijective_iff_isIso to obtain an isomorphism of abelian sheaves, then reflect isomorphisms through Modules.toPresheaf.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/PullbackFreeGenerator.lean",
+  "place": "Hom.isIso_of_forall_bijective_app, lines 218-236"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of sheaves of modules is isomorphism if bijective on sections locally",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of sheaves of modules is isomorphism if bijective on sections locally",
+   "results": "Sheaf.isLocallyBijective_iff_isIso and Scheme.Modules.Hom.isIso_iff_isIso_app; the former is used by the existing source-library proof.",
+   "date": "2026-10-12",
+   "verdict": "Exact source-library match; Mathlib supplies the underlying local-bijectivity criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "rg isIso_of_forall_bijective_app lean/WeilConjectures; rg isLocallyBijective_iff_isIso Mathlib; rg PullbackFreeGenerator dag/nodes; blueprint_refs.py search locally bijective",
+   "results": "WeilConjectures/AlgebraicGeometry/Modules/PullbackFreeGenerator.lean:218 has the exact statement, proved through Mathlib. No DAG node or blueprint match for that source declaration.",
+   "date": "2026-10-12",
+   "verdict": "No matching theorem; checked the related declarations by their signatures."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantShortExactExists",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing",
+   "via": [
+    "lem-sc-determinant-short-exact-exists",
+    "lem-sc-determinant-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_of_forall_bijective_app",
+  "statement": "lemma Hom.isIso_of_forall_bijective_app {M N : X.Modules} (φ : M ⟶ N)\n    (h : ∀ x : X, ∃ V : X.Opens, x ∈ V ∧ ∀ W ≤ V, Function.Bijective (φ.app W)) :\n    IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12",
+  "note": "Existing proved source-library declaration, read in full; no new Lean file or hole."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

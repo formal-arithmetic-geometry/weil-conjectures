@@ -10,16 +10,43 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the local map from the local splitting and exterior-power basis statements, then glue it by sheaf extensionality and separatedness.",
-   "uses": [],
+   "text": "Construct phi and its wedge formula by determinant_wedgeMorphism_exists, without yet asserting invertibility.",
+   "uses": [
+    "lem-sc-determinant-wedge-morphism"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Take the splitting cover from exists_openCover_split_shortExact. For each point choose a member containing it, using the supremum equality with the top open.",
+   "uses": [
+    "lem-sc-local-splitting-finite-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On that member, determinant_wedgeMorphism_bijective_of_split gives bijectivity on every subopen. Hom.isIso_of_forall_bijective_app gives IsIso phi globally.",
+   "uses": [
+    "lem-sc-determinant-wedge-morphism-split",
+    "lem-sc-module-hom-local-bijective-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse of asIso phi for e. Its inverse is definitionally phi, so the required formula is hphi unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-determinant-wedge-morphism",
+  "lem-sc-local-splitting-finite-free",
+  "lem-sc-determinant-wedge-morphism-split",
+  "lem-sc-module-hom-local-bijective-iso"
+ ],
  "proof_origin": {
-  "by": "X2",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph"
+  "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing; T2 decomposition into construction and split-local bijectivity"
  },
  "mathlib_searches": [
   {
@@ -99,9 +126,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T112854-L-773413",
+  "landing": "20261012T135318-L-1693515",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

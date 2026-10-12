@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-determinant-wedge-morphism",
+ "kind": "statement",
+ "title": "Construction of the determinant wedge morphism",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ a short exact sequence of sheaves of $\\mathcal O_X$-modules. Let $r_1,r_2,r_3\\in\\mathbb N$ with $r_2=r_1+r_3$, and suppose only that $A$ is finite locally free of rank $r_1$ [def-amb-finite-locally-free-module]. Using exterior sheaves and wedge sections [def-sc-sheaf-exterior-power], there exists a sheaf morphism $\\varphi:(\\bigwedge^{r_1}A)\\otimes(\\bigwedge^{r_3}C)\\to\\bigwedge^{r_2}B$ such that, for every open $V$, tuples $a\\in A(V)^{r_1}$, $b\\in C(V)^{r_3}$ and $c\\in B(V)^{r_3}$ with $g(c_i)=b_i$, its value on $(\\bigwedge a_i)\\otimes(\\bigwedge b_i)$ is $\\bigwedge(f(a_1),\\ldots,f(a_{r_1}),c_1,\\ldots,c_{r_3})$. There is no invertibility assertion or local freeness assumption on $B$ or $C$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "For a finite tuple of sections of C on V, local surjectivity of the sheaf epimorphism g gives lifts on a common refinement of finitely many covers. Differences of two such lift tuples locally belong to the image of f by sheaf exactness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Trivialize A. Changing one lift alters the concatenated wedge by a wedge with r1+1 factors from A. Expand these factors in a basis of size r1: every term repeats a factor and is zero by alternation. Changing one lift at a time proves independence of the whole tuple. This is the vanishing above the rank from the finite free exterior-power basis theorem.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Separatedness glues the resulting sections independently of local lifts. Common lifts show multilinearity, alternation separately in the two tuples, and compatibility with restriction. Linearize separately through the exterior-power universal properties, giving a bilinear rule on the two exterior-power presheaves with values in the exterior sheaf of B.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend the bilinear rule to sheafifications locally using representatives of sections. Restriction compatibility and separatedness show independence of representatives and agreement on overlaps. The sheaf tensor universal property gives phi. Its formula on arbitrary given lifts follows from its construction and separatedness. Empty tuples require no lifts, so there are no exceptions in rank zero or on the empty scheme.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing; details written by T2 from preserved blueprint proof text"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact modules exterior wedge product map independent of quotient lifts",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "short exact modules exterior wedge product map independent of quotient lifts",
+   "results": "ModuleCat.exteriorPower.desc, desc_mk, map, hom_ext; exteriorPower.map_comp_ιMulti and linearMap_ext. These only concern ordinary modules, not lift-independent sheaf morphisms.",
+   "date": "2026-10-12",
+   "verdict": "The listed infrastructure does not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "rg exterior.*(shortExact|short_exact)|determinant.*(shortExact|short_exact) Mathlib; rg determinant|exteriorPower lean/WeilConjectures/AlgebraicGeometry/Modules; blueprint_refs.py search determinant and wedge",
+   "results": "No matching construction. DeterminantShortExactExists is the item; ExteriorTensorLiftHomExt proves equality, not existence. Blueprint matches are the ancestor RR argument or unrelated Weil representations.",
+   "date": "2026-10-12",
+   "verdict": "No matching theorem; checked the related declarations by their signatures."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantShortExactExists",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing",
+   "via": [
+    "lem-sc-determinant-short-exact-exists",
+    "lem-sc-determinant-short-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphism",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_wedgeMorphism_exists",
+  "statement": "theorem determinant_wedgeMorphism_exists {X : Scheme.{v}} (S : ShortComplex X.Modules)\n    (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] :\n    ∃ φ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂,\n      ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))\n        (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)),\n        (∀ i, S.g.val.app (op U) (c i) = b i) →\n        φ.val.app (op U)\n          (tmulSection (exteriorSheafSection S.X₁ r₁ U a)\n            (exteriorSheafSection S.X₃ r₃ U b)) =\n          exteriorSheafSection S.X₂ r₂ U\n            (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantWedgeMorphism.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693515",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135318-L-1693515",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
