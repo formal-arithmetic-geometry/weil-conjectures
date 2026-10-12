@@ -1,0 +1,186 @@
+{
+ "id": "lem-weil-pbc-smooth-section-stabilization-free",
+ "kind": "statement",
+ "title": "Smooth section stabilization data",
+ "statement": "Let A and B be commutative rings with B a smooth A-algebra [def-weil-pbc-smooth-ring-map], J an ideal of A, and σ:B→A/J an A-algebra map. There exist an étale A-algebra A₁ [def-weil-etale-morphism], a compatible A₁-algebra D smooth over A₁, and A-algebra maps j:B→D and τ:D→A/J with τ∘j=σ, such that A₁→D→A/J is surjective and (A/J)⊗_D Ω[D/A₁] [def-weil-pbc-kahler-differentials] is free [def-weil-pbc-free-module]. No basis or lifts of basis elements are chosen.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M7, first paragraph through the symmetric-algebra stabilization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "The reduced differential module P is finite projective by smoothness and base change. Choose a finite projective complement Kbar so P ⊕ Kbar is finite free.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift Kbar to a finite projective module K over an etale A-algebra A₁ inducing the quotient equivalence alpha. Set B₁=A₁ tensor_A B, with the transported section.",
+   "uses": [
+    "lem-weil-pbc-lift-projective-module-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set D=B₁ tensor_A₁ Sym(K). Smoothness follows from smoothness of Sym(K), base change and composition. Compose augmentation, the transported section and alpha inverse to obtain tau; the canonical B→D gives j and tau j=sigma.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the universal properties of derivations and symmetric algebras, Omega of Sym(K) is Sym(K) tensor K. The tensor-product differential formula and reduction along the augmentation identify the reduced differentials of D with P ⊕ Kbar, hence free. The composite A₁→D→A/J is the quotient followed by alpha inverse, hence surjective.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-lift-projective-module-etale",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
+  "lem-weil-pbc-symmetric-algebra-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M1",
+  "date": "2026-10-12",
+  "description": "Intermediate statement isolating the construction data needed by the differential-basis proof."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T10:15:53Z",
+   "tool": "grep",
+   "query": "projective_kaehlerDifferential|exact_cotangentComplex_toKaehler|tensorKaehlerEquiv",
+   "sub": "",
+   "ok": true,
+   "n_hits": 25,
+   "note": "",
+   "top": [
+    "Mathlib/RingTheory/Extension/Cotangent/Free.lean",
+    "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+    "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+    "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+    "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+    "Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean",
+    "Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean",
+    "Mathlib/RingTheory/Smooth/Basic.lean"
+   ],
+   "digest": "d177f9af18e3b3a8"
+  },
+  {
+   "t": "2026-10-12T10:15:53Z",
+   "tool": "leansearch",
+   "query": "A smooth algebra with a section has a finite free cotangent module after adding a symmetric algebra of a projective complement",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "t": "2026-10-12T10:15:53Z",
+   "tool": "leanfinder",
+   "query": "A smooth section to a quotient ring has finite free differentials after etale base change and symmetric algebra stabilization",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+    "StandardEtalePair.instFormallyEtaleRing",
+    "Algebra.Etale.formallyEtale",
+    "Algebra.Smooth",
+    "Algebra.Etale.exists_subalgebra_fg",
+    "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+    "Algebra.Etale",
+    "RingHom.IsStandardSmooth.exists_etale_mvPolynomial"
+   ],
+   "digest": "8b0f07899d88955f"
+  },
+  {
+   "t": "2026-10-12T10:15:54Z",
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.Basis",
+   "sub": "",
+   "ok": true,
+   "n_hits": 12,
+   "note": "",
+   "top": [
+    "KaehlerDifferential.mvPolynomialBasis",
+    "KaehlerDifferential.mvPolynomialBasis_apply",
+    "Algebra.Generators.cotangentSpaceBasis",
+    "Algebra.Generators.cotangentSpaceBasis_apply",
+    "Algebra.Generators.toKaehler_cotangentSpaceBasis",
+    "Algebra.Generators.repr_CotangentSpaceMap",
+    "Algebra.SubmersivePresentation.basisKaehler",
+    "Algebra.SubmersivePresentation.basisKaehlerOfIsCompl"
+   ],
+   "digest": "6a5e46dba52e714d"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionDifferentialBasis",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-smooth-section-differential-basis",
+   "place": "Tag 07M7",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothSectionDifferentialData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSectionDifferentialData.lean",
+  "declaration": "AlgebraicGeometry.exists_smooth_section_differential_data",
+  "statement": "theorem exists_smooth_section_differential_data\n    (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]\n    [Algebra.Smooth A B] (J : Ideal A) (σ : B →ₐ[A] A ⧸ J) :\n    ∃ A₁ : CommAlgCat.{u} A,\n      Etale (Spec.map (CommRingCat.ofHom (algebraMap A A₁))) ∧\n      ∃ (D : CommAlgCat.{u} A) (_ : Algebra A₁ D) (_ : IsScalarTower A A₁ D),\n        Algebra.Smooth A₁ D ∧\n        ∃ (j : B →ₐ[A] D) (τ : D →ₐ[A] A ⧸ J),\n          τ.comp j = σ ∧\n          Function.Surjective (τ.toRingHom.comp (algebraMap A₁ D)) ∧\n          letI : Algebra D (A ⧸ J) := τ.toRingHom.toAlgebra\n          Module.Free (A ⧸ J) ((A ⧸ J) ⊗[D] KaehlerDifferential A₁ D)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110311-L-618535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110311-L-618535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

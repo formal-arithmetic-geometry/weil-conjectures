@@ -15,57 +15,23 @@
  ],
  "proof": [
   {
-   "text": "Put N=ker σ. The map σ is surjective because σ(algebraMap(a)) is the class of a, and A→A/J is surjective. Apply the smooth conormal sequence. Its right term is (A/J)⊗_B Ω[B/A], finite projective by smoothness and base change of a finite projective module. The image of J/J² is (JB+N²)/N²: if σ(b) is the class of a and x∈J, then (b-algebraMap(a))algebraMap(x)∈N². Thus P=N/(N²+JB) identifies with that right term.",
+   "text": "Apply the stabilization-data theorem to obtain an etale base extension and a smooth algebra with free reduced differentials. Choose its finite basis, reindexed by Fin n. Apply surjectivity in the smooth conormal sequence, then surjectivity of Cotangent.mk, to lift each basis vector to a section-kernel element. The cotangentComplex_mk formula identifies its differential with the original basis vector.",
    "uses": [
-    "lem-weil-pbc-smooth-conormal-sequence-exact",
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose a finite projective complement Kbar with P⊕Kbar≅(A/J)^n. By projective lifting, choose A→A₁ étale, a quotient equivalence α:A/J≅A₁/JA₁ compatible with A, and a finite projective A₁-module K whose reduction is Kbar base changed by α. Put B₁=A₁⊗_A B and σ₁(a₁⊗b)=class(a₁)α(σ(b)). Base change of smoothness and differentials gives P₁≅P⊗_(A/J)(A₁/JA₁), so P₁⊕K/JK is free of rank n.",
-   "uses": [
-    "lem-weil-pbc-lift-projective-module-etale",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-kahler-differentials-base-change",
-    "lem-weil-pbc-smooth-conormal-sequence-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Construct D=B₁⊗_(A₁) Sym_(A₁)(K). The symmetric algebra is smooth, so D is smooth over A₁. Its augmentation p:D→B₁ and σ₁ give the section ρ:D→A₁/JA₁. Writing the augmentation ideal as k, its degree-one quotient k/k² is B₁⊗K, and ker ρ=j(ker σ₁)⊕k. Modulo the square of ker ρ and JD, the degree-zero part is P₁ and the degree-one part is K/JK. Products of positive-degree elements and products with the old kernel are killed. Thus the conormal module along ρ is P₁⊕K/JK, finite free of rank n.",
-   "uses": [
-    "lem-weil-pbc-symmetric-algebra-universal-property",
-    "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-smooth-conormal-sequence-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose a basis of the free conormal module and lift each vector to an fᵢ∈ker ρ. The conormal identification sends these vectors to 1⊗dfᵢ. Compose ρ with α⁻¹ to obtain τ:D→A/J; restrict the canonical map into D to B to obtain j. The maps are A-linear and τj=σ. The composite A₁→D→A/J is the quotient A₁→A₁/JA₁ followed by α⁻¹, hence surjective. Transport the basis along α⁻¹.",
-   "uses": [
+    "lem-weil-pbc-smooth-section-stabilization-free",
     "lem-weil-pbc-smooth-conormal-sequence-exact"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-kahler-differentials-base-change",
-  "lem-weil-pbc-lift-projective-module-etale",
-  "lem-weil-pbc-smooth-conormal-sequence-exact",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
-  "lem-weil-pbc-symmetric-algebra-universal-property"
+  "lem-weil-pbc-smooth-section-stabilization-free",
+  "lem-weil-pbc-smooth-conormal-sequence-exact"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "G1",
+  "group": "M1",
   "date": "2026-10-12",
-  "description": "Follows Stacks 07M7, with the module and ring-map transports written explicitly."
+  "description": "Finite free stabilization split off; basis selection and kernel lifts fully proved."
  },
  "mathlib_searches": [
   {
@@ -133,9 +99,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T095902-L-316404",
+  "landing": "20261012T110311-L-618535",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

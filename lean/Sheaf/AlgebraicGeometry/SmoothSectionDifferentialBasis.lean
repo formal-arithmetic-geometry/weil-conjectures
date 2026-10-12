@@ -10,10 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.LinearAlgebra.Basis.Defs
-import Sheaf.AlgebraicGeometry.LiftProjectiveModuleEtale
+import Sheaf.AlgebraicGeometry.SmoothSectionDifferentialData
 import Sheaf.RingTheory.SmoothConormalSequenceExact
-import Sheaf.RingTheory.SymmetricAlgebraSmooth
-import Mathlib.RingTheory.Kaehler.TensorProduct
+import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-! # Stabilization of the differentials of a smooth section
 
@@ -67,6 +66,37 @@ theorem exists_smooth_section_differential_basis
           ∃ (n : ℕ) (f : Fin n → D), (∀ i, τ (f i) = 0) ∧
             letI : Algebra D (A ⧸ J) := τ.toRingHom.toAlgebra
             ∃ b : Module.Basis (Fin n) (A ⧸ J) ((A ⧸ J) ⊗[D] KaehlerDifferential A₁ D),
-              ∀ i, b i = 1 ⊗ₜ[D] KaehlerDifferential.D A₁ D (f i) := by sorry
+              ∀ i, b i = 1 ⊗ₜ[D] KaehlerDifferential.D A₁ D (f i) := by
+  obtain ⟨A₁, hA₁, D, hAD, hTower, hD, j, τ, hτj, hsurj, hfree⟩ :=
+    exists_smooth_section_differential_data A B J σ
+  let : Algebra A₁ D := hAD
+  let : IsScalarTower A A₁ D := hTower
+  refine ⟨A₁, hA₁, D, hAD, hTower, hD, j, τ, hτj, hsurj, ?_⟩
+  classical
+  let : Algebra D (A ⧸ J) := τ.toRingHom.toAlgebra
+  let η := τ.toRingHom.comp (algebraMap A₁ D)
+  let : Algebra A₁ (A ⧸ J) := η.toAlgebra
+  let : IsScalarTower A₁ D (A ⧸ J) := IsScalarTower.of_algebraMap_eq' rfl
+  let : Algebra.Smooth A₁ D := hD
+  let : Module.Free (A ⧸ J) ((A ⧸ J) ⊗[D] KaehlerDifferential A₁ D) := hfree
+  obtain ⟨hβ, u, hu, hinj, hex, hv⟩ :=
+    Algebra.Extension.smooth_conormal_sequence_exact (A := A₁) (B := D)
+      (C := A ⧸ J) hsurj
+  let Q := Algebra.Extension.ofSurjective (IsScalarTower.toAlgHom A₁ D (A ⧸ J)) hβ
+  let M := (A ⧸ J) ⊗[D] KaehlerDifferential A₁ D
+  let b := (Module.Free.chooseBasis (A ⧸ J) M).reindex
+    (Fintype.equivFin (Module.Free.ChooseBasisIndex (A ⧸ J) M))
+  have hlift : ∀ i, ∃ x : Q.ker, Q.cotangentComplex
+      (Algebra.Extension.Cotangent.mk x) = b i := by
+    intro i
+    obtain ⟨y, hy⟩ := hv (b i)
+    obtain ⟨x, hx⟩ := Algebra.Extension.Cotangent.mk_surjective y
+    exact ⟨x, hx ▸ hy⟩
+  choose f hf using hlift
+  refine ⟨_, fun i ↦ (f i).1, ?_, b, ?_⟩
+  · intro i
+    exact (f i).2
+  · intro i
+    exact (hf i).symm
 
 end AlgebraicGeometry
