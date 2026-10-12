@@ -1,0 +1,108 @@
+{
+ "id": "lem-exc-etale-coproduct-embedding-points",
+ "kind": "statement",
+ "title": "Geometric points of a coproduct of field spectra",
+ "statement": "For a field K [def-pc-field-extension] with separable closure Ksep and an indexed family of intermediate fields E, if the coproduct of their spectra is etale [def-weil-etale-morphism], its geometric Ksep-points, with the action of [lem-exc-etale-field-geometric-action-continuous], are equivariantly equivalent to the disjoint union of the K-algebra embeddings of each E into Ksep.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR, Lemma lemma-sheaves-point; read at https://stacks.math.columbia.edu/tag/03QR; construction of an inverse by orbit stabilizer fixed fields"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-etale-morphism",
+  "lem-exc-etale-field-geometric-action-continuous"
+ ],
+ "proof": [
+  {
+   "text": "Use the coproduct decomposition of spectra and the affine spectrum anti-equivalence to identify maps with the sigma type of embeddings, preserving the Galois action.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR; construction of an inverse by orbit stabilizer fixed fields"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois action on geometric points of an etale scheme is continuous with open stabilizers",
+   "results": "Unavailable: Internal Server Error from service (msearch.py).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric point functor etale schemes field full faithful essentially surjective Galois action",
+   "results": "Scheme.Etale.forgetFullyFaithful concerns the forgetful functor to Over, not the geometric-point functor. Scheme.SpecToEquivOfField describes individual geometric points. No exact categorical equivalence or full-faithfulness/essential-surjectivity result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousSMul_iff_stabilizer_isOpen",
+   "results": "General criterion for continuity of discrete group actions; used for the proved continuity node.",
+   "date": "2026-10-12",
+   "verdict": "tool, not an exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rg pointSmallEtale|DiscreteContAction|etaleFieldGsets|galois.*Equivalence lean/WeilConjectures lean/Sheaf; rg stabilizer.*Open Mathlib/FieldTheory Mathlib/Topology/Algebra",
+   "results": "Mathlib provides exists_fac_of_etale_of_isSepClosed and pointSmallEtaleFiberObjToPreimage_surjective, used to prove covers; stabilizer_isOpen_of_isIntegral and continuousSMul_iff_stabilizer_isOpen prove continuity. Existing library supplies finite-field classification and fibre decomposition, but not the passage to arbitrary etale schemes.",
+   "date": "2026-10-12",
+   "verdict": "tools found; no exact result for the categorical gaps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFieldPointFunctorEssSurj",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-etale-field-point-functor-ess-surj",
+   "place": "proof decomposition",
+   "via": [
+    "lem-exc-etale-field-point-functor-ess-surj"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoproductEmbeddingPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoproductEmbeddingPoints.lean",
+  "declaration": "AlgebraicGeometry.etaleCoproduct_embedding_points",
+  "statement": "theorem etaleCoproduct_embedding_points\n    (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]\n    [IsSepClosure K Ksep] (I : Type u) (E : I → IntermediateField K Ksep)\n    [Etale (Sigma.desc (fun i : I ↦\n      Spec.map (CommRingCat.ofHom (algebraMap K (E i)))))] :\n    let X := Scheme.Etale.mk (Sigma.desc (fun i : I ↦\n      Spec.map (CommRingCat.ofHom (algebraMap K (E i)))))\n    ∃ e : ((etaleFieldPointFunctor K Ksep).obj X).obj.obj.V ≃\n        (Σ i, E i →ₐ[K] Ksep),\n      ∀ (g : Gal(Ksep/K)) (x : ((etaleFieldPointFunctor K Ksep).obj X).obj.obj.V),\n        e (((etaleFieldPointFunctor K Ksep).obj X).obj.obj.ρ g x) =\n          ⟨(e x).1, g.toAlgHom.comp (e x).2⟩",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9f26d",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T135228-L-1659698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9f26d",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T135228-L-1659698",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and DAG statements match the recorded item; all delivered files and the direct importer compile cleanly, with only the named coproduct-point sorry and permitted dependency axioms."
+ }
+}

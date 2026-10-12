@@ -1,0 +1,110 @@
+{
+ "id": "lem-exc-galois-set-embedding-decomposition",
+ "kind": "statement",
+ "title": "Decomposition of continuous Galois sets into embedding sets",
+ "statement": "Let K be a field [def-pc-field-extension] and Ksep a separable closure. Every continuous discrete action M of Gal(Ksep/K), with its Krull topology, is equivariantly equivalent to a disjoint union of embedding sets of finite separable intermediate fields of Ksep/K.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR, Lemma lemma-sheaves-point; read at https://stacks.math.columbia.edu/tag/03QR; construction of an inverse by orbit stabilizer fixed fields"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Construct the orbit quotient, choose representatives, and apply finite Galois classification to each finite orbit; combine the orbit equivalences.",
+   "uses": [
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-field-galois-classification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR; construction of an inverse by orbit stabilizer fixed fields"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois action on geometric points of an etale scheme is continuous with open stabilizers",
+   "results": "Unavailable: Internal Server Error from service (msearch.py).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric point functor etale schemes field full faithful essentially surjective Galois action",
+   "results": "Scheme.Etale.forgetFullyFaithful concerns the forgetful functor to Over, not the geometric-point functor. Scheme.SpecToEquivOfField describes individual geometric points. No exact categorical equivalence or full-faithfulness/essential-surjectivity result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousSMul_iff_stabilizer_isOpen",
+   "results": "General criterion for continuity of discrete group actions; used for the proved continuity node.",
+   "date": "2026-10-12",
+   "verdict": "tool, not an exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rg pointSmallEtale|DiscreteContAction|etaleFieldGsets|galois.*Equivalence lean/WeilConjectures lean/Sheaf; rg stabilizer.*Open Mathlib/FieldTheory Mathlib/Topology/Algebra",
+   "results": "Mathlib provides exists_fac_of_etale_of_isSepClosed and pointSmallEtaleFiberObjToPreimage_surjective, used to prove covers; stabilizer_isOpen_of_isIntegral and continuousSMul_iff_stabilizer_isOpen prove continuity. Existing library supplies finite-field classification and fibre decomposition, but not the passage to arbitrary etale schemes.",
+   "date": "2026-10-12",
+   "verdict": "tools found; no exact result for the categorical gaps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFieldPointFunctorEssSurj",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-etale-field-point-functor-ess-surj",
+   "place": "proof decomposition",
+   "via": [
+    "lem-exc-etale-field-point-functor-ess-surj"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisSetEmbeddingDecomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisSetEmbeddingDecomposition.lean",
+  "declaration": "AlgebraicGeometry.galoisSet_embedding_decomposition",
+  "statement": "theorem galoisSet_embedding_decomposition\n    (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]\n    [IsSepClosure K Ksep] (M : DiscreteContAction (Type u) (Gal(Ksep/K))) :\n    ∃ (I : Type u) (E : I → IntermediateField K Ksep),\n      (∀ i, FiniteDimensional K (E i)) ∧\n      (∀ i, Algebra.IsSeparable K (E i)) ∧\n      ∃ e : M.obj.obj.V ≃ (Σ i, E i →ₐ[K] Ksep),\n        ∀ (g : Gal(Ksep/K)) (x : M.obj.obj.V),\n          e (M.obj.obj.ρ g x) = ⟨(e x).1, g.toAlgHom.comp (e x).2⟩",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9f26d",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T135228-L-1659698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9f26d",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T135228-L-1659698",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and DAG statements match the recorded item; all delivered files and the direct importer compile cleanly, with only the named coproduct-point sorry and permitted dependency axioms."
+ }
+}
