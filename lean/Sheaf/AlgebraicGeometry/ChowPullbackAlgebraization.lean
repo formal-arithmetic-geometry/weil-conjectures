@@ -9,13 +9,8 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.AlgebraicGeometry.FormalSystemsPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.PushforwardCoherentOnOpen
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
-import WeilConjectures.AlgebraicGeometry.ChowLemma
+import Sheaf.AlgebraicGeometry.ChowModificationData
+import Sheaf.AlgebraicGeometry.ChowAlgebraizationData
 import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
@@ -81,6 +76,13 @@ theorem exists_chowPullbackAlgebraization
       Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅
         formalCompletionSystem (Q.comap q) F.obj) ∧
       Scheme.Modules.HasSupportProperOver f ((Scheme.Modules.pushforward q).obj F.obj)
-      := by sorry
+      := by
+  obtain ⟨Y, q, hq, L, n, e, heImm, he, hL, hIso⟩ :=
+    exists_chow_modification_data A f hZ
+  have : IsProper q := hq
+  have : IsImmersion e := heImm
+  obtain ⟨F, hF, hSupp⟩ :=
+    exists_chow_algebraization_data A I f Q hQ G hR Y q n e he L hL hIso
+  exact ⟨Y, q, hq, L, F, hL, hIso, hF, hSupp⟩
 
 end AlgebraicGeometry

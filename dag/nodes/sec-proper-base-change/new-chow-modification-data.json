@@ -1,0 +1,111 @@
+{
+ "id": "new-chow-modification-data",
+ "kind": "statement",
+ "title": "Geometric Chow modification data",
+ "statement": "Let A be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], Z a nonempty Noetherian scheme, and f : Z → Spec A separated and of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism]. There exist Y, a proper q : Y → Z, an ideal sheaf L on Z, a natural number n, and an immersion e : Y → ProjectiveSpace (ULift (Fin (n+1))) (Spec A) over Spec A, meaning e followed by projection equals q followed by f. The complement of L.support is nonempty, and the second projection of the pullback of q along that open inclusion is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4 (closed quotient, Chow modification, projective algebraization and proper push-pull comparison); verified at https://stacks.math.columbia.edu/tag/088E"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply ChowModification.nonempty_data to f over the Noetherian scheme Spec A. Extract its source Y, proper surjective map q, finite coordinate type N, immersion into ProjectiveSpace N (Spec A), equation over Spec A, and dense open U on which the restriction of q is an isomorphism. Since Z is nonempty and q is surjective, Y is nonempty. Projective space with an empty coordinate type is empty, so N is nonempty. Choose a finite enumeration N ≃ ULift (Fin (n + 1)), with n one less than its positive cardinality. Renaming homogeneous variables induces an isomorphism of projective spaces over Spec A. Compose the extracted immersion with this isomorphism to obtain e; composition preserves immersion and the equation over Spec A. Take L to be the vanishing ideal of the reduced closed complement of U. The reduced complement theorem identifies its support with that complement, hence L.support.compl with U. Density of U and nonemptiness of Z imply U is nonempty. Finally the canonical isomorphism from the pullback along U.ι to the restricted source identifies pullback.snd with q restricted to U. Transport the restriction isomorphism along this identification and the equality U = L.support.compl. These constructions supply all asserted data.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E; corrected projective-immersion route in repair of X-85771"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Algebraization of coherent adic system pulled back along Chow modification",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of coherent adic system pulled back along Chow modification",
+   "results": "LeanFinder returned adic completion algebra maps and formally smooth lifting statements, none about Chow pullbacks. Library search found projective existence and formal pullback, but no existing statement supplying their compactification and support glue.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*[Pp]resentation|chowPullbackAlgebraization|ComparisonTransport",
+   "results": "rg on both Lean roots found no matching declaration. Additional source and node searches located the existing dependencies recorded in the proof. Whole-blueprint searches for closed immersion formal system proper support, Chow algebraization, and closed quotient kernel ideal returned no matches.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowPullbackAlgebraization",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite-etale lifting: geometric comparison in the proof of Theorem 088E, paragraphs 2--4, before the Noetherian induction conclusion. This node supplies algebraization of the pullback to a chow modification.",
+   "via": [
+    "lem-weil-pbc-chow-pullback-algebraization",
+    "lem-weil-pbc-grothendieck-existence-chow-comparison",
+    "lem-weil-pbc-grothendieck-existence-system-support",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowModificationData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowModificationData.lean",
+  "declaration": "AlgebraicGeometry.exists_chow_modification_data",
+  "statement": "theorem exists_chow_modification_data\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    {Z : Scheme.{u}} [IsNoetherian Z] (f : Z ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (hZ : Nonempty Z) :\n    ∃ (Y : Scheme.{u}) (q : Y ⟶ Z) (_ : IsProper q) (L : Z.IdealSheafData)\n      (n : ℕ)\n      (e : Y ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A))),\n      IsImmersion e ∧\n      e ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ↘ Spec (.of A)) =\n        q ≫ f ∧\n      (L.support.compl : Set Z).Nonempty ∧\n      IsIso (pullback.snd q (Scheme.Opens.ι L.support.compl))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T194153-L-469364",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T194153-L-469364",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
