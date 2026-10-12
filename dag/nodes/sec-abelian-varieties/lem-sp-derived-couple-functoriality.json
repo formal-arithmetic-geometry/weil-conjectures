@@ -22,51 +22,43 @@
  ],
  "proof": [
   {
-   "text": "Write $d=g\\circ f$ and $d'=g'\\circ f'$. The three commutative squares for a morphism of couples give $t_Ed=d't_E$. Hence $t_E$ carries $\\ker d$ into $\\ker d'$ and $\\operatorname{im}d$ into $\\operatorname{im}d'$, so the universal property of the kernel and quotient defines a map from the derived $E$-term of the first couple to the derived $E'$-term of the second. Likewise $t_D\\alpha=\\alpha't_D$ carries $\\operatorname{im}\\alpha$ into $\\operatorname{im}\\alpha'$, defining the map on the derived $D$-terms. The identities with $\\alpha,f,g$ descend to the derived structure maps because the defining maps are restrictions, factorizations, and quotient maps; thus the induced pair is a morphism of derived couples.",
+   "text": "For a type-s couple morphism, the f and g squares imply differential commutation. Construct the cycle map with kernel.map. Rewrite the incoming differential bidegrees using integer equality transports to prove dInto commutation. Cancel the target kernel inclusion to show that the cycle map carries the lifted incoming differential to the target lifted incoming differential. Compose with the target cokernel projection and use cokernel.desc to construct the derived E map. Construct the derived D map with image.map of the incoming alpha square; the image inclusion equation follows after transporting its endpoint. Cancel the target derived D inclusion for the alpha square, and the source derived E projection followed by the target derived D inclusion for the f square. For g, cancel the source factorThruImage(alpha); image.factor_map, the original g square, the kernel map equation and the derived quotient equation give the required equality, after transporting the successor bidegrees. The defining alpha_comm, f_comm and g_comm fields of the DerivedMaps chosen by derived supply all structure-map equations. These are exactly the maps of the existing derived construction, without invoking the additional derived_couple_exact theorem.",
    "uses": [
-    "def-sp-exact-couple",
-    "lem-sp-derived-couple-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Section 12.21, Lemma 12.21.2 (Tag 011R), functoriality in the construction of the derived couple; Definition 12.21.1 (Tag 011Q)"
-   }
-  },
-  {
-   "text": "By the exactness assertion for the derived couple (item 3, and item 4 for the iteration), the preceding construction may be applied to every iterate of both couples: start with $C_2=C=(D,E,\\alpha,f,g)$ and $\\tilde C_2=(D',E',\\alpha',f',g')$ and define $C_{r+1}$, $\\tilde C_{r+1}$ as the derived couples of $C_r$, $\\tilde C_r$ (couples of type $r-2$). Induction on $r$, applying the previous step to the type-$(r-2)$ couples $C_r$ and $\\tilde C_r$, gives morphisms of couples $C_r\\to\\tilde C_r$ for all $r\\ge2$, whose $D$-component is the restriction of $t_D$ to $D_r^{p,q}=\\operatorname{im}(\\alpha^{r-2})\\subseteq D^{p,q}$. On the $E$-terms these are maps $\\varphi_r:E_r\\to\\tilde E_r$ with $\\varphi_2=t_E$; the equality $\\varphi_r d_r=\\tilde d_r\\varphi_r$, where $d_r=g_r\\circ f_r$ and $\\tilde d_r=\\tilde g_r\\circ\\tilde f_r$, follows from the commutation of the $r$-th morphism with $f_r$ and $g_r$. Thus every page map commutes with its differential.",
-   "uses": [
-    "lem-sp-derived-couple-exact",
     "def-sp-exact-couple"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spectral-sequences.tex",
-    "place": "Definitions 12.21.1, 12.21.3 and Lemmas 12.21.2, 12.21.4 (Tags 011Q, 011S, 011R, 011T)"
-   }
+   "elementary": false
   },
   {
-   "text": "The compatible page maps preserve cycles and boundaries in the recursive construction of [def-sp-convergence]. Inductively, $\\varphi_2$ maps each $Z_r$ into $Z_r'$ and each $B_r$ into $B_r'$, and the induced map on $Z_r/B_r$ is $\\varphi_r$; the induction step uses that $\\varphi_r$ commutes with $d_r$. Passing to the intersection and union gives $\\varphi_2(Z_\\infty)\\subseteq Z_\\infty'$ and $\\varphi_2(B_\\infty)\\subseteq B_\\infty'$, so the quotient map $E_\\infty=Z_\\infty/B_\\infty\\to Z_\\infty'/B_\\infty'=E_\\infty'$ is well defined.",
+   "text": "Define nextMorphism using the one-step construction. Its D map is uniquely determined by the monic derivedDInclusion equation; its E map is uniquely determined by the epimorphic derivedEProjection equation and the uniquely determined kernel map. Thus these choices do not introduce arbitrary data. Use dependent Nat.rec starting at T to define M n on the pageCouple iterates. The one-step inclusion and quotient equations give the required successor equations definitionally. At every n, its f and g squares imply differential commutation by associativity.",
    "uses": [
-    "def-sp-convergence",
-    "lem-sp-derived-couple-exact"
+    "def-sp-exact-couple"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spectral-sequences.tex",
-    "place": "Definition 12.21.3 (Tag 011S) and the limiting cycle/boundary construction; Lemma 12.21.2 (Tag 011R)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Prove finite cycle preservation and the projection square simultaneously by induction on the index r. At zero use Z_zero = top and projection_zero, with the initial E-map equality. In the successor step differential commutation preserves the kernel. In the commuting projection square, restriction to pullbacks and postcomposition with the cycle inclusions preserve their images: the source extended pullback is the subobject of the composite of its monic pullback inclusion and the old cycle inclusion; the target image factorization gives the needed factorization. Apply this to Z_succ to obtain the restricted initial map zn on successor cycles. Cancel the differential kernel inclusion, and then the previous target cycle inclusion, to identify the two cycleLift maps composed with the kernel map and zn. Compose with derivedEProjection and use projection_succ to obtain the successor projection square. For B_0 use the zero subobject. For B_(r+1), rewrite the differential square at the incoming bidegree to get dInto commutation, use imageSubobjectMap to transport the incoming differential image, and apply the same extended-pullback argument to B_succ.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For limiting cycles, compose finite-cycle transport with the inclusion from LX.Z into each finite source cycle. The image of LX.Z.arrow followed by tE is a lower bound of all finite target cycles, so LY.Z_glb puts it below LY.Z. Image factorization gives cycle transport at infinity. For boundaries, pull back LY.B along tE. Every finite source boundary lies in this pullback by finite-boundary transport and LY.B_lub; LX.B_lub therefore puts LX.B in the pullback, proving boundary transport. Restrict tE to the limiting cycles and boundaries, obtaining z and b. Cancel LY.Z.arrow to prove that the source boundary inclusion followed by z equals b followed by the target boundary inclusion. Compose with the target cokernel projection; the composite vanishes. The cokernel universal property then constructs e, and cokernel.π_desc supplies precisely the required quotient equation.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sp-exact-couple",
-  "lem-sp-derived-couple-exact",
   "def-sp-convergence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/spectral-sequences.tex",
-  "place": "Definitions 12.21.1, 12.21.3 and Lemmas 12.21.2, 12.21.4 (Tags 011Q, 011S, 011R, 011T)"
+  "place": "Lean proof of the functoriality construction of Tags 011Q, 011R and 011S, with the finite-cycle recursion of def-sp-convergence and GLB/LUB quotient descent; Tag 011R omits its proof."
  },
  "mathlib_searches": [
   {
@@ -165,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T095859-L-315489",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
