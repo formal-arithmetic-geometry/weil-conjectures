@@ -12,30 +12,38 @@
  ],
  "proof": [
   {
-   "text": "Use the exterior-power basis [lem-weil-pbc-exterior-power-free-basis] for the free modules on Fin r and Fin (r+1). In positive degree, partition the basis wedges according to whether the final generator occurs. The first part identifies with the prefix exterior power in that degree. In the second part move the final generator to the front, absorbing the sign of that permutation, and identify the remaining wedge with the prefix exterior power one degree lower. This gives genuine linear equivalences over any commutative ring, including the zero ring.",
+   "text": "Use the explicit assembly bijection [lem-weil-pbc-koszul-last-generator-assembly] in every positive exterior degree. Degree zero uses exteriorPower.zeroEquiv and its naturality from [lem-weil-pbc-exterior-power-free-basis]. Turn the assembly maps into linear equivalences with LinearEquiv.ofBijective; their inverses are determined uniquely by the explicit maps. Tensor their inverses with M and compose with TensorProduct.prodLeft.",
    "uses": [
-    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-weil-pbc-koszul-last-generator-assembly",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove contraction commutes with the prefix exterior-algebra map by left induction and linearCombination_comp_lmapDomain. Apply contractLeft_ι_mul to the second assembly summand: its contraction is f(last r) times the included b minus the last generator times the included prefix contraction. This proves the higher-degree formula on untensored assembly elements. In degree zero, every prefix scalar is an algebraMap element and has zero contraction, giving the separate degree-one formula.",
+   "uses": [
     "def-weil-pbc-koszul-complex"
    ],
    "elementary": false
   },
   {
-   "text": "In degree zero use the identifications of each zeroth exterior power with R. Tensor these degreewise equivalences with M and distribute tensor products over the two summands. On a wedge without the final generator contraction is the prefix differential. On e_last wedge b, contractLeft_ι_mul gives f_last*b - e_last wedge d_A b. Thus the differential formulas hold on spanning basis tensors and hence everywhere. Degree one has only the first component in degree zero; exterior powers above the rank are zero, so the formulas also cover all higher degrees and r=0.",
+   "text": "Use tensor-product induction. For each pure tensor choose its unique exterior assembly coordinates using the bijection, apply the proved untensored boundary formula, and use rTensor_tmul, prodLeft_tmul, add_tmul, smul_tmul and neg_tmul. The zero and sum cases follow by linearity and additive rearrangement. ChainComplex.of_d identifies the displayed complex differentials with the tensor boundaries. This yields both formulas with arbitrary M, including r=0.",
    "uses": [
-    "lem-weil-pbc-exterior-power-free-basis",
-    "def-weil-pbc-koszul-complex"
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-koszul-last-generator-assembly"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-koszul-complex",
-  "lem-weil-pbc-exterior-power-free-basis"
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-koszul-last-generator-assembly"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 0628 and 0629, cone of multiplication by the final generator; step 2 of the regular-sequence node"
+  "place": "Tags 0628 and 0629, explicit projection-and-contraction inverse for the exterior-power identification, followed by contraction naturality and tensor-product induction."
  },
  "mathlib_searches": [
   {
@@ -122,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "X-a5faa",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T135323-L-1695321",
+  "landing": "20261012T173851-L-3302331",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match their DAG nodes and unchanged target signatures; all compile cleanly, including the direct importer."
  }
 }

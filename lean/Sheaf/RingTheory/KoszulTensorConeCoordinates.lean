@@ -6,6 +6,8 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.Paper.KoszulComplex
+import Sheaf.RingTheory.KoszulLastGeneratorAssembly
+import Mathlib.LinearAlgebra.TensorProduct.Prod
 
 /-!
 # Coordinates for adjoining the final Koszul generator
@@ -20,6 +22,99 @@ universe u v
 
 namespace ExteriorAlgebra
 
+open scoped TensorProduct
+
+private theorem contract_prefix {R : Type u} [CommRing R] {r : ℕ}
+    (f : Fin (r + 1) → R) (x : ExteriorAlgebra R (Fin r →₀ R)) :
+    CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R (Fin (r + 1) →₀ R)))
+      (Finsupp.linearCombination R f) (ExteriorAlgebra.map (koszulPrefixInclusion R r) x) =
+    ExteriorAlgebra.map (koszulPrefixInclusion R r)
+      (CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R (Fin r →₀ R)))
+        (Finsupp.linearCombination R (fun i ↦ f i.castSucc)) x) := by
+  have hφ (v : Fin r →₀ R) :
+      Finsupp.linearCombination R f (koszulPrefixInclusion R r v) =
+        Finsupp.linearCombination R (fun i ↦ f i.castSucc) v :=
+    LinearMap.congr_fun (Finsupp.linearCombination_comp_lmapDomain R (v' := f) Fin.castSucc) v
+  induction x using CliffordAlgebra.left_induction with
+  | algebraMap c => simp
+  | add x y hx hy => simp only [map_add, hx, hy]
+  | ι_mul v x hx =>
+    simp only [map_mul, ExteriorAlgebra.map_apply_ι, CliffordAlgebra.contractLeft_ι_mul,
+      hφ, map_sub, map_smul, hx]
+
+private theorem prefix_map_coe {R : Type u} [CommRing R] (r n : ℕ)
+    (x : ⋀[R]^n (Fin r →₀ R)) :
+    (exteriorPower.map n (koszulPrefixInclusion R r) x :
+      ExteriorAlgebra R (Fin (r + 1) →₀ R)) =
+      ExteriorAlgebra.map (koszulPrefixInclusion R r) (x : ExteriorAlgebra R (Fin r →₀ R)) := by
+  have h : (⋀[R]^n (Fin (r + 1) →₀ R)).subtype.comp
+      (exteriorPower.map n (koszulPrefixInclusion R r)) =
+      (ExteriorAlgebra.map (koszulPrefixInclusion R r)).toLinearMap.comp
+        (⋀[R]^n (Fin r →₀ R)).subtype := by
+    apply exteriorPower.linearMap_ext
+    ext v
+    simp only [LinearMap.compAlternatingMap_apply, LinearMap.comp_apply,
+      exteriorPower.map_apply_ιMulti, AlgHom.toLinearMap_apply]
+    exact (ExteriorAlgebra.map_apply_ιMulti (koszulPrefixInclusion R r) v).symm
+  exact LinearMap.congr_fun h x
+
+private theorem boundary_assembly {R : Type u} [CommRing R] {r : ℕ}
+    (f : Fin (r + 1) → R) (n : ℕ)
+    (a : ⋀[R]^(n + 2) (Fin r →₀ R)) (b : ⋀[R]^(n + 1) (Fin r →₀ R)) :
+    koszulBoundary R (r + 1) f (n + 1) (koszulLastAssembly R r (n + 1) (a, b)) =
+      koszulLastAssembly R r n
+        (koszulBoundary R r (fun i ↦ f i.castSucc) (n + 1) a + f (Fin.last r) • b,
+          -koszulBoundary R r (fun i ↦ f i.castSucc) n b) := by
+  apply Subtype.ext
+  change CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R (Fin (r + 1) →₀ R)))
+    (Finsupp.linearCombination R f)
+      ((exteriorPower.map (n + 2) (koszulPrefixInclusion R r) a :
+          ExteriorAlgebra R (Fin (r + 1) →₀ R)) +
+        ι R (Finsupp.single (Fin.last r) 1) *
+          (exteriorPower.map (n + 1) (koszulPrefixInclusion R r) b :
+            ExteriorAlgebra R (Fin (r + 1) →₀ R))) = _
+  simp only [map_add, CliffordAlgebra.contractLeft_ι_mul,
+    Finsupp.linearCombination_single, one_smul]
+  change _ = (exteriorPower.map (n + 1) (koszulPrefixInclusion R r)
+    (koszulBoundary R r (fun i ↦ f i.castSucc) (n + 1) a + f (Fin.last r) • b) :
+      ExteriorAlgebra R (Fin (r + 1) →₀ R)) +
+    ι R (Finsupp.single (Fin.last r) 1) *
+      (exteriorPower.map n (koszulPrefixInclusion R r)
+        (-koszulBoundary R r (fun i ↦ f i.castSucc) n b) :
+          ExteriorAlgebra R (Fin (r + 1) →₀ R))
+  simp only [map_add, map_smul, map_neg, Submodule.coe_add, Submodule.coe_smul,
+    Submodule.coe_neg, mul_neg, sub_eq_add_neg]
+  simp only [prefix_map_coe, contract_prefix]
+  simp only [koszulBoundary, LinearMap.codRestrict_apply, LinearMap.comp_apply, add_assoc]
+  rfl
+
+private theorem boundary_assembly_zero {R : Type u} [CommRing R] {r : ℕ}
+    (f : Fin (r + 1) → R)
+    (a : ⋀[R]^1 (Fin r →₀ R)) (b : ⋀[R]^0 (Fin r →₀ R)) :
+    koszulBoundary R (r + 1) f 0 (koszulLastAssembly R r 0 (a, b)) =
+      exteriorPower.map 0 (koszulPrefixInclusion R r)
+        (koszulBoundary R r (fun i ↦ f i.castSucc) 0 a + f (Fin.last r) • b) := by
+  have hb : (b : ExteriorAlgebra R (Fin r →₀ R)) ∈ (1 : Submodule R _) := by
+    simpa only [exteriorPower, pow_zero] using b.property
+  obtain ⟨c, hc⟩ := Submodule.mem_one.mp hb
+  apply Subtype.ext
+  change CliffordAlgebra.contractLeft (Q := (0 : QuadraticForm R (Fin (r + 1) →₀ R)))
+    (Finsupp.linearCombination R f)
+      ((exteriorPower.map 1 (koszulPrefixInclusion R r) a :
+          ExteriorAlgebra R (Fin (r + 1) →₀ R)) +
+        ι R (Finsupp.single (Fin.last r) 1) *
+          (exteriorPower.map 0 (koszulPrefixInclusion R r) b :
+            ExteriorAlgebra R (Fin (r + 1) →₀ R))) = _
+  simp only [map_add, CliffordAlgebra.contractLeft_ι_mul,
+    Finsupp.linearCombination_single, one_smul]
+  simp only [map_smul, Submodule.coe_add, Submodule.coe_smul]
+  rw [prefix_map_coe r 0 b, ← hc, AlgHom.commutes,
+    CliffordAlgebra.contractLeft_algebraMap, mul_zero, sub_zero]
+  simp only [prefix_map_coe, contract_prefix]
+  rfl
+
+set_option maxHeartbeats 800000 in
+-- Tensoring the dependent exterior-power equivalences needs extra elaboration heartbeats.
 /-- Source: Stacks Project, Tags 0628 and 0629
 (blueprint: lem-weil-pbc-koszul-tensor-cone-coordinates).
 
@@ -44,6 +139,76 @@ theorem exists_koszulTensorConeCoordinates {R : Type u} [CommRing R]
       (∀ (n : ℕ) (x : B.X (n + 2)), e n (B.d (n + 2) (n + 1) x) =
         (A.d (n + 2) (n + 1) (e (n + 1) x).1 +
           f (Fin.last r) • (e (n + 1) x).2,
-        -A.d (n + 1) n (e (n + 1) x).2)) := by sorry
+        -A.d (n + 1) n (e (n + 1) x).2)) := by
+  let i₀ : ⋀[R]^0 (Fin r →₀ R) ≃ₗ[R] ⋀[R]^0 (Fin (r + 1) →₀ R) :=
+    (exteriorPower.zeroEquiv R (Fin r →₀ R)).trans
+      (exteriorPower.zeroEquiv R (Fin (r + 1) →₀ R)).symm
+  have hi₀ (x : ⋀[R]^0 (Fin r →₀ R)) :
+      i₀ x = exteriorPower.map 0 (koszulPrefixInclusion R r) x := by
+    apply (exteriorPower.zeroEquiv R (Fin (r + 1) →₀ R)).injective
+    simp only [i₀, LinearEquiv.trans_apply, LinearEquiv.apply_symm_apply]
+    exact (LinearMap.congr_fun
+      (exteriorPower.zeroEquiv_naturality (koszulPrefixInclusion R r)) x).symm
+  let i (n : ℕ) :
+      (⋀[R]^(n + 1) (Fin r →₀ R) × ⋀[R]^n (Fin r →₀ R)) ≃ₗ[R]
+        ⋀[R]^(n + 1) (Fin (r + 1) →₀ R) :=
+    LinearEquiv.ofBijective (koszulLastAssembly R r n) (koszulLastAssembly_bijective R r n)
+  have hi (n : ℕ) (a : ⋀[R]^(n + 1) (Fin r →₀ R))
+      (b : ⋀[R]^n (Fin r →₀ R)) : i n (a, b) = koszulLastAssembly R r n (a, b) := rfl
+  let e₀ := i₀.symm.rTensor M
+  let e (n : ℕ) := ((i n).symm.rTensor M).trans
+    (TensorProduct.prodLeft R R (⋀[R]^(n + 1) (Fin r →₀ R))
+      (⋀[R]^n (Fin r →₀ R)) M)
+  have he (n : ℕ) (a : ⋀[R]^(n + 1) (Fin r →₀ R))
+      (b : ⋀[R]^n (Fin r →₀ R)) (m : M) :
+      e n (koszulLastAssembly R r n (a, b) ⊗ₜ[R] m) = (a ⊗ₜ[R] m, b ⊗ₜ[R] m) := by
+    change e n (i n (a, b) ⊗ₜ[R] m) = _
+    simp [e]
+  have he₀ (a : ⋀[R]^0 (Fin r →₀ R)) (m : M) :
+      e₀ (exteriorPower.map 0 (koszulPrefixInclusion R r) a ⊗ₜ[R] m) = a ⊗ₜ[R] m := by
+    rw [← hi₀]
+    simp [e₀]
+  refine ⟨e₀, e, ?_, ?_⟩
+  · intro x
+    change e₀ ((koszulBoundary R (r + 1) f 0).rTensor M x) =
+      (koszulBoundary R r (fun i ↦ f i.castSucc) 0).rTensor M (e 0 x).1 +
+        f (Fin.last r) • (e 0 x).2
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul x m =>
+      obtain ⟨⟨a, b⟩, rfl⟩ := (i 0).surjective x
+      rw [hi]
+      change e₀ ((koszulBoundary R (r + 1) f 0).rTensor M
+        (koszulLastAssembly R r 0 (a, b) ⊗ₜ[R] m)) = _
+      rw [LinearMap.rTensor_tmul, boundary_assembly_zero, he₀, he]
+      simp only [TensorProduct.add_tmul, TensorProduct.smul_tmul', LinearMap.rTensor_tmul]
+    | add x y hx hy =>
+      simp only [map_add, Prod.fst_add, Prod.snd_add, smul_add]
+      rw [hx, hy]
+      abel
+  · intro n x
+    dsimp only [koszulComplexTensor, ChainComplex.of] at x ⊢
+    erw [ChainComplex.of_d _ _ (n + 1), ChainComplex.of_d _ _ (n + 1),
+      ChainComplex.of_d _ _ n]
+    change e n ((koszulBoundary R (r + 1) f (n + 1)).rTensor M x) =
+      ((koszulBoundary R r (fun i ↦ f i.castSucc) (n + 1)).rTensor M (e (n + 1) x).1 +
+          f (Fin.last r) • (e (n + 1) x).2,
+        -(koszulBoundary R r (fun i ↦ f i.castSucc) n).rTensor M (e (n + 1) x).2)
+    induction x using TensorProduct.induction_on with
+    | zero => simp; rfl
+    | tmul x m =>
+      obtain ⟨⟨a, b⟩, rfl⟩ := (i (n + 1)).surjective x
+      rw [hi]
+      change e n ((koszulBoundary R (r + 1) f (n + 1)).rTensor M
+        (koszulLastAssembly R r (n + 1) (a, b) ⊗ₜ[R] m)) = _
+      rw [LinearMap.rTensor_tmul, boundary_assembly, he, he]
+      simp only [TensorProduct.add_tmul, TensorProduct.smul_tmul',
+        TensorProduct.neg_tmul, LinearMap.rTensor_tmul]
+    | add x y hx hy =>
+      simp only [map_add, Prod.fst_add, Prod.snd_add, smul_add, neg_add]
+      rw [hx, hy]
+      ext <;> dsimp
+      all_goals abel
+
 
 end ExteriorAlgebra

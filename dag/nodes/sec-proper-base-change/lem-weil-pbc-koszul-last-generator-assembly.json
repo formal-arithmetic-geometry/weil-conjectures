@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-koszul-last-generator-assembly",
+ "kind": "statement",
+ "title": "Explicit last-generator exterior-power assembly is bijective",
+ "statement": "Let $R$ be a commutative ring and $r,n\\in\\mathbb N$. Put $E=R^{(\\operatorname{Fin}r)}$ and $E^+=R^{(\\operatorname{Fin}(r+1))}$. Let $j:E\\to E^+$ send the standard generator $e_i$ to $e_{i.\\mathrm{castSucc}}$, and let $\\ell=e_{\\operatorname{last}r}$. For the exterior powers of [def-weil-pbc-exterior-algebra], the explicitly constructed linear map $S_n:\\Lambda^{n+1}E\\oplus\\Lambda^n E\\to\\Lambda^{n+1}E^+$, $S_n(a,b)=\\Lambda^{n+1}(j)(a)+\\iota(\\ell)\\Lambda^n(j)(b)$, is bijective. No regularity or nonzero-ring assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0628 (Lemma 15.29.7), proof identifying the cone terms by placing the new generator first; Tag 0629 (Lemma 15.29.8), specialization to the final generator of a finite sequence. Read online at https://stacks.math.columbia.edu/tag/0628 and https://stacks.math.columbia.edu/tag/0629."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Construct j by Finsupp.lmapDomain Fin.castSucc, and left wedge with the last generator by multiplication followed by restriction to exterior degree n+1. Membership follows from multiplication of powers of the generator submodule. Form S_n as the coprod of these two explicit linear maps.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let p be restriction to the prefix and let δ evaluate the last coordinate. Prove p(j(v))=v, p(ell)=0 and j(p(v))+δ(v)ell=v by evaluating finitely supported vectors. Contraction δ kills the prefix exterior algebra by left induction, using the contraction recursion. The inverse in degree n+1 is x ↦ (Λ^(n+1)(p)x, Λ^n(p)(koszulBoundary δ x)); the degree restriction of contraction is supplied by the existing Koszul complex definition. Applying this inverse to S_n(a,b) recovers a and b, using p(ell)=0, contraction δ on the prefix equal to zero, and δ(ell)=1.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set T=Λ(j)∘Λ(p) and L=ι(ell). Left induction on the full exterior algebra proves T(x)+L*T(contractLeft δ x)=x. Scalars and sums are immediate. For ι(v)*x, write ι(v)=ι(j(p(v)))+δ(v)L. Apply the contraction recursion and the induction hypothesis. Anticommutation moves L past ι(j(p(v))); L²=0 removes the extra last-generator term. Restrict to degree n+1 to show S_n applied to its proposed inverse is the identity. The two identities prove bijectivity over every commutative ring, also in rank zero or above the rank.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Explicit projection-and-contraction inverse refining the degreewise identification in Stacks Tag 0628."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exterior power of a free module splits into wedges containing a last generator and wedges without that generator",
+   "results": "Service unavailable: Internal Server Error; no absence verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior algebra of a direct sum decomposes exterior powers adjoining one generator Koszul complex mapping cone",
+   "results": "ExteriorAlgebra.GradedAlgebra.ι_apply, .ι, .liftι, .liftι_eq, .gradedAlgebra describe grading; no last-generator assembly bijection.",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"map\"",
+   "results": "exteriorPower.map, map_comp, map_injective, map_surjective and linearMap_ext; none states the two-summand assembly bijection.",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*[Cc]one|[Cc]one.*koszul|exterior.*[Ss]um",
+   "results": "msearch grep returned Euclidean exterior-angle theorem and exterior-power norm sums, not a decomposition. Direct rg of Mathlib exterior-algebra/exterior-power sources and Sheaf/WeilConjectures found grading and bases but no assembly map bijection.",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulTensorConeCoordinates",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the specialization of Stacks 0665 (hypothesis H_1-regular) to a regular sequence, via Stacks 062F then 0CEM; Tags 0628 and 0629, cone of multiplication by the final generator; step 2 of the regular-sequence node; degreewise assembly of the last exterior generator",
+   "via": [
+    "lem-weil-pbc-koszul-tensor-cone-coordinates",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulLastGeneratorAssembly",
+  "file": "lean/Sheaf/RingTheory/KoszulLastGeneratorAssembly.lean",
+  "declaration": "ExteriorAlgebra.koszulLastAssembly_bijective",
+  "declarations": [
+   "ExteriorAlgebra.koszulPrefixInclusion",
+   "ExteriorAlgebra.koszulLastWedge",
+   "ExteriorAlgebra.koszulLastAssembly",
+   "ExteriorAlgebra.koszulLastAssembly_bijective"
+  ],
+  "statement": "theorem koszulLastAssembly_bijective (n : ℕ) : Function.Bijective (koszulLastAssembly R r n)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a5faa",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T173851-L-3302331",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a5faa",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T173851-L-3302331",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match their DAG nodes and unchanged target signatures; all compile cleanly, including the direct importer."
+ }
+}
