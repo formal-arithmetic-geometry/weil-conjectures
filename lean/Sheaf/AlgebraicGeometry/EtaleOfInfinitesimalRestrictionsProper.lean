@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
-import Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.EtaleOpenOfInfinitesimalRestrictions
+import Sheaf.AlgebraicGeometry.ProperEtaleOpen
 
 /-!
 # Étaleness detected by infinitesimal restrictions with proper source
@@ -28,6 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
 
 /-- A finite type morphism to a locally Noetherian scheme is étale if all its
 infinitesimal restrictions are étale and its source is proper over the complete base.
@@ -61,6 +62,12 @@ theorem etale_of_infinitesimal_restrictions_of_proper
     (h_etale : ∀ n : ℕ, Etale (pullback.snd g (pullback.fst f
       (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))))) :
     Etale g := by
-  sorry
+  obtain ⟨W, hW, hEt⟩ :=
+    etale_open_of_infinitesimal_restrictions I f g h_etale
+  have htop : W = ⊤ := proper_closed_fiber_open_eq_top I f g W hW
+  subst W
+  let : Etale ((⊤ : X.Opens).ι ≫ g) := hEt
+  have : Etale (X.topIso.inv ≫ ((⊤ : X.Opens).ι ≫ g)) := inferInstance
+  simpa only [← Category.assoc, Scheme.toIso_inv_ι, Category.id_comp] using this
 
 end AlgebraicGeometry

@@ -1,0 +1,125 @@
+{
+ "kind": "lemma",
+ "title": "An open containing the closed fiber of a proper scheme over a complete base is everything",
+ "statement": "Let A be a commutative ring complete for an ideal I [def-weil-pbc-adically-complete-ring]. Let f : Y → Spec A [def-weil-affine-spectrum] and g : X → Y be scheme morphisms with g followed by f proper [def-weil-proper-morphism]. Let W be an open subset of X containing g⁻¹(image(Y ×_A Spec(A/I) → Y)) [def-pc-base-change, def-pc-fibre-product]. Then W = X.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, Lemma 0GS2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-pc-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Set h = g followed by f. The complement C of W is closed, so properness makes h(C) closed in Spec A. Write it as V(K). If x belongs to C, then K is contained in the prime ideal h(x), which is contained in a maximal ideal m. Thus m belongs to V(K), so m = h(t) for some t in C.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Completeness gives I ≤ jacobson(0) ≤ m. The range of Spec(A/I) → Spec A is V(I), by range_comap_of_surjective and Ideal.mk_ker; Scheme.Pullback.range_fst says that the range of Y_0 → Y is f⁻¹(V(I)). Hence g(t) lies in that range. The containment hypothesis puts t in W, contradicting t in C. Thus W = X.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "def-pc-fibre-product",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An open subscheme containing the closed fiber of a proper scheme over an adically complete ring is the whole scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper scheme over complete ring open subset containing special fiber equals whole scheme",
+   "results": "AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.isCompact_iff_exists, AlgebraicGeometry.Scheme.Opens.exists_toScheme, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.range (PrimeSpectrum.comap _)",
+   "results": "PrimeSpectrum.iUnion_range_comap_comp_evalRingHom, range_comap_of_surjective, PrimeSpectrum.mem_range_comap_iff, PrimeSpectrum.nontrivial_iff_mem_rangeComap, PrimeSpectrum.residueField_comap, PrimeSpectrum.isClosed_range_of_stableUnderSpecialization, PrimeSpectrum.stableUnderSpecialization_range_iff, PrimeSpectrum.localization_away_comap_range",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedMap.*|jacobson.*|subscheme.*pow",
+   "results": "Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean, Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean, Mathlib/NumberTheory/Transcendental/Lindemann/AnalyticalPart.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean, Mathlib/LinearAlgebra/Matrix/Ideal.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOfInfinitesimalRestrictionsProper",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-infinitesimal-restrictions-proper",
+   "place": "Step 3 (proper specialization argument)"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperEtaleOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperEtaleOpen.lean",
+  "declaration": "AlgebraicGeometry.proper_closed_fiber_open_eq_top",
+  "statement": "theorem proper_closed_fiber_open_eq_top\n    {A : Type u} [CommRing A] (I : Ideal A) [IsAdicComplete I A]\n    {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) (g : X ⟶ Y)\n    [IsProper (g ≫ f)] (W : X.Opens)\n    (hW : (g : X → Y) ⁻¹' Set.range\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) : _ → _) ⊆\n        (W : Set X)) : W = ⊤",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "id": "lem-weil-pbc-etale-infinitesimal-restrictions-proper-open",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T060737-L-2907256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T060737-L-2907256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

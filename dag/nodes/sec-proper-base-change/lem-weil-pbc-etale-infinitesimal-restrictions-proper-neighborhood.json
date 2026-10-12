@@ -1,0 +1,135 @@
+{
+ "kind": "lemma",
+ "title": "Infinitesimal restrictions give an etale neighborhood of the closed fiber",
+ "statement": "Let A be a commutative ring complete for an ideal I [def-weil-pbc-adically-complete-ring], f : Y → Spec A [def-weil-affine-spectrum], and g : X → Y a finite type morphism [def-weil-finite-type-morphism] with Y locally Noetherian [pqf-def-locnoeth]. For each n ≥ 0 let Y_n = Y ×_A Spec(A/I^(n+1)) [def-pc-base-change, def-pc-fibre-product]. If X ×_Y Y_n → Y_n is etale [def-weil-etale-morphism] for all n, there is an open subset W of X containing g⁻¹(image(Y_0 → Y)), such that W → Y is etale.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups, Tag 0GS2, essential-surjectivity proof, using More on Morphisms, Tag 0A43(2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The quotient A → A/I is surjective. Base change its closed immersion of spectra to obtain j : Y_0 → Y and set J = ker(j). On affine Spec R in Y its ideal is IR. Extension of ideals commutes with products, giving J^(n+1) = I^(n+1)R on that affine. The quotient algebras identify the corresponding closed subscheme with Y_n; the canonical quotient identifications commute with restriction and hence glue.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the etale hypotheses along these isomorphisms and apply etale_on_open_of_etale_infinitesimal_neighbourhoods with g, j, J and hJ = rfl. The required locally Noetherian and finite type assumptions are precisely the stated ones.",
+   "uses": [
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "pqf-def-locnoeth",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+  "pqf-def-locnoeth",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism etale on every quotient by a power of an ideal is etale on an open neighborhood of the closed fiber",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change by quotient ideal powers is infinitesimal neighbourhood kernel ideal sheaf etale open",
+   "results": "StandardEtalePair.instFormallyEtaleRing, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus, Algebra.etaleLocus_eq_compl_support, Algebra.mem_etaleLocus_iff, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.IsEtaleAt",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.Scheme.nilradical, AlgebraicGeometry.Scheme.IdealSheafData.instAdd, AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice, AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup, AlgebraicGeometry.Scheme.IdealSheafData.instIdemCommSemiring, AlgebraicGeometry.Scheme.IdealSheafData.instMul, AlgebraicGeometry.Scheme.IdealSheafData.instOne",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "subschemeι",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOfInfinitesimalRestrictionsProper",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-infinitesimal-restrictions-proper",
+   "place": "Step 1-2"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenOfInfinitesimalRestrictions",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenOfInfinitesimalRestrictions.lean",
+  "declaration": "AlgebraicGeometry.etale_open_of_infinitesimal_restrictions",
+  "statement": "theorem etale_open_of_infinitesimal_restrictions\n    {A : Type u} [CommRing A] (I : Ideal A) [IsAdicComplete I A]\n    {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) (g : X ⟶ Y)\n    [IsLocallyNoetherian Y] [LocallyOfFiniteType g] [QuasiCompact g]\n    (h_etale : ∀ n : ℕ, Etale (pullback.snd g (pullback.fst f\n      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))))) :\n    ∃ W : X.Opens,\n      (g : X → Y) ⁻¹' Set.range\n        (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) : _ → _) ⊆\n          (W : Set X) ∧ Etale (W.ι ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "id": "lem-weil-pbc-etale-infinitesimal-restrictions-proper-neighborhood",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T060737-L-2907256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T060737-L-2907256",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
