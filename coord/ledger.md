@@ -6728,3 +6728,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.HigherDirectImageLimitPresheafClassDescent (stage 3; reviewer PASS; first push; landing 20261012T085209-L-1107 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/A2/Sheaf.CategoryTheory.FilteredColimitCategoryDescent (stage 3; reviewer PASS; first push; landing 20261012T085209-L-1227 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:52 L: merged deliver/A2/Sheaf.LinearAlgebra.IdempotentCharpolyMonic (stage 3; reviewer PASS; first push; landing 20261012T085209-L-1329 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:52 L: merged deliver/A2/Sheaf.LinearAlgebra.IdempotentEndomorphismCharpolyField (stage 3; reviewer PASS; first push; landing 20261012T085210-L-1442 (proof); batch 20261012T085205; modules 1; new nodes 0)

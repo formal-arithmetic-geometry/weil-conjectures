@@ -6,7 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.LinearAlgebra.Charpoly.ToMatrix
-import Sheaf.LinearAlgebra.IdempotentImageBaseChange
+import Mathlib.LinearAlgebra.Projection
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # Characteristic polynomial of an idempotent endomorphism over a field
@@ -28,9 +29,9 @@ Source: Stacks Project, More on Algebra, proof of Lemma 07M5
 The hypothesis `p ∘ p = p` is `IsIdempotentElem p` in `Module.End k (Fin n → k)`, whose
 multiplication is composition.
 
-Proof: The image decomposition of
-[lem-weil-pbc-idempotent-endomorphism-image-base-change], specialized to `k`, gives
-`kⁿ = range p ⊕ ker p`. Idempotence makes `p` the identity on its image and zero on its kernel.
+Proof: Mathlib's `IsIdempotentElem.isProj_range` and `IsProj.eq_conj_prodMap`
+identify `p` with the conjugate of the identity on its range and zero on its kernel.
+Thus `kⁿ = range p ⊕ ker p`, with `p` the identity and zero on the two summands.
 Both subspaces are finite dimensional. Rank-nullity
 [lem-weil-pbc-idempotent-charpoly-rank-nullity] gives kernel dimension `n - r`, where
 `r = dimₖ(range p)`. Concatenate bases of the image and kernel. Basis invariance
@@ -47,6 +48,22 @@ theorem charpoly_toMatrix_of_idempotent {k : Type u} [Field k] (n : ℕ)
     (LinearMap.toMatrix b b p).charpoly = (Polynomial.X - 1) ^ r * Polynomial.X ^ (n - r) ∧
       (LinearMap.toMatrix b b p).charpoly ∣
         (Polynomial.X : Polynomial k) ^ n * (Polynomial.X - 1) ^ n := by
-  sorry
+  classical
+  have hdim := p.finrank_range_add_finrank_ker
+  have hn : Module.finrank k (Fin n → k) = n := by simp
+  rw [hn] at hdim
+  have hker : Module.finrank k p.ker = n - Module.finrank k p.range := by omega
+  have hchar : (LinearMap.toMatrix b b p).charpoly =
+      (Polynomial.X - 1) ^ Module.finrank k p.range *
+        Polynomial.X ^ (n - Module.finrank k p.range) := by
+    rw [charpoly_toMatrix]
+    conv_lhs => rw [(IsIdempotentElem.isProj_range p hp).eq_conj_prodMap]
+    rw [LinearEquiv.charpoly_conj, charpoly_prodMap]
+    change (1 : Module.End k p.range).charpoly * (0 : Module.End k p.ker).charpoly = _
+    rw [charpoly_one, charpoly_zero, hker]
+  refine ⟨hchar, ?_⟩
+  rw [hchar, mul_comm ((Polynomial.X - 1) ^ Module.finrank k p.range)]
+  exact mul_dvd_mul (pow_dvd_pow _ (Nat.sub_le _ _))
+    (pow_dvd_pow _ (by omega))
 
 end LinearMap
