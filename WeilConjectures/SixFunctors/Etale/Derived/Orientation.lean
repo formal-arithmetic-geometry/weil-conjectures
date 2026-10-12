@@ -445,7 +445,7 @@ theorem Orientation.nonempty_iso_verdierDual_coefficientDual (o : Orientation Λ
 
 Under an orientation the Verdier dual of a perfect complex is perfect, so that `𝔻_X`
 restricts to a contravariant anti-equivalence of the perfect objects. -/
-theorem Orientation.isDualizable_verdierDual (o : Orientation Λ a d)
+theorem Orientation.isDualizable_verdierDual [HasInvertibleExponent Λ X] (o : Orientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : IsDualizable K) :
     IsDualizable ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)) := by
   obtain ⟨e⟩ := o.nonempty_iso_verdierDual_coefficientDual hK
