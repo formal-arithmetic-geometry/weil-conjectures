@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.TorSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Finite.Exact
 
@@ -63,8 +64,17 @@ theorem isConstructibleSheaf_homology_tensor_singleFunctor {X : Scheme.{u}}
     [IsConstructibleSheaf F] [IsConstructibleSheaf G] (r : ℤ) :
     IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ r).obj
       (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).obj
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) :=
-  sorry
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G))) := by
+  obtain ⟨S, hS⟩ := (inferInstance : IsConstructibleSheaf F).exists_stratification
+  obtain ⟨T, hT⟩ := (inferInstance : IsConstructibleSheaf G).exists_stratification
+  refine ⟨S.inter T, fun k ↦ ?_⟩
+  have := (S.inter_refines_left T).isFiniteLocallyConstantSheaf_upperStar F hS k
+  have := (S.inter_refines_right T).isFiniteLocallyConstantSheaf_upperStar G hT k
+  have := isFiniteLocallyConstantSheaf_homology_derivedTensor_singleFunctor
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).obj F)
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)).obj G) r
+  exact IsFiniteLocallyConstantSheaf.of_iso
+    (upperStarHomologyDerivedTensorSingleFunctorIso ((S.inter T).immersion k) F G r).symm
 
 /-- Blueprint `sk-thm-sf-ctf-stability`: Stability of the constructible finite-Tor
 subcategories.
