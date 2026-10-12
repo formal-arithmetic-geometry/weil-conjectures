@@ -3,6 +3,8 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Sheaf.ConstructibleSheaf.ConstantFiniteFreeDualNaturality
 
 @[expose] public section
 universe u
@@ -28,6 +30,12 @@ theorem constantFiniteMatrixDualKernelIso_aux
             (ModuleCat.ofHom g)).op) ≅
       (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (kernel (ModuleCat.ofHom g.dualMap))) := by
-  sorry
+  obtain ⟨e, he⟩ := constantFiniteFreeDualNaturality X (Λ := Λ)
+  let C := constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  let D := MonoidalClosed.internalHom.flip.obj
+    (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+  exact ⟨kernel.mapIso (D.map (C.map (ModuleCat.ofHom g)).op)
+    (C.map (ModuleCat.ofHom g.dualMap)) (e n) (e m) (he n m g) ≪≫
+      (PreservesKernel.iso C (ModuleCat.ofHom g.dualMap)).symm⟩
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,103 @@
+{
+ "id": "lem-constant-finite-free-dual-naturality",
+ "kind": "statement",
+ "title": "Natural dual-basis comparison for constant finite free sheaves",
+ "statement": "Let X be a scheme and Λ a commutative ring. For every n there is an isomorphism between the internal-Hom dual of the constant sheaf on the finite free Λ-module Λ^n and the constant sheaf on its coefficient dual. For every matrix g : Λ^m →ₗ Λ^n, these isomorphisms intertwine the internal-Hom map induced by g with the constant sheaf map induced by g.dualMap.",
+ "stmt_deps": [
+  "def-constructible-constant"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring; finite free transpose step"
+ },
+ "proof": [
+  {
+   "text": "Identify finite free modules with finite biproducts of copies of Λ. The monoidal constant sheaf functor preserves these finite biproducts and sends Λ to the monoidal unit. The tensor-Hom adjunction and unit constraints identify the internal Hom dual with the constant sheaf on the coefficient dual.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate both composites on each finite basis vector. Linearity shows that precomposition by g has coordinates given by g.dualMap, so the square commutes; the empty finite products give the n=0 and m=0 cases.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "finite free transpose and constant sheaf argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf finite free module dual basis internal hom",
+   "date": "2026-10-12",
+   "results": "No exact match",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "kernel.mapIso",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Limits.kernel.mapIso found",
+   "verdict": "match used"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*dual",
+   "date": "2026-10-12",
+   "results": "No exact match; finite-limit preservation found in ConstantSheafOver.lean",
+   "verdict": "partial"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernelAux",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-finite-matrix-dual-kernel-aux",
+   "place": "finite-free categorical kernel substep",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.ConstantFiniteFreeDualNaturality",
+  "file": "lean/Sheaf/ConstructibleSheaf/ConstantFiniteFreeDualNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantFiniteFreeDualNaturality",
+  "statement": "theorem constantFiniteFreeDualNaturality (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ] : ∃ e : ∀ n : ℕ, (MonoidalClosed.internalHom.flip.obj (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))).obj (Opposite.op ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ (Fin n → Λ)))) ≅ (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ ((Fin n → Λ) →ₗ[Λ] Λ)), ∀ (n m : ℕ) (g : (Fin m → Λ) →ₗ[Λ] (Fin n → Λ)), ((MonoidalClosed.internalHom.flip.obj (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))).map ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map (ModuleCat.ofHom g)).op) ≫ (e m).hom = (e n).hom ≫ (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map (ModuleCat.ofHom g.dualMap)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T154837-L-2474939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T154837-L-2474939",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
