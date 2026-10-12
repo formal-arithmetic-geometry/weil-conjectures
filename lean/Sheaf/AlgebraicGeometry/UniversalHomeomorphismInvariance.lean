@@ -7,10 +7,13 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleSetPullbackSheafEquivalence
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismIdentity
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismComposition
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismPullback
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+
+set_option linter.style.haveILetI false
 
 /-!
 # Universal-homeomorphism invariance, with functorial compatibility
@@ -115,6 +118,22 @@ theorem universalHomeomorphism_invariance {X X' : Scheme.{u}} (u : X' ⟶ X)
           ((upperStarComp AddCommGrpCat.{u + 1} (pullback.fst g u) g).inv.app F) q
           (cohomologyMap (pullback.fst g u) ((upperStar AddCommGrpCat.{u + 1} g).obj F) q
             (cohomologyMap g F q x))) := by
-  sorry
+  letI : (u.Etale).IsEquivalence := Scheme.Hom.isEquivalence_etale u
+  letI : (upperStar AddCommGrpCat.{u + 1} u).IsEquivalence :=
+    isEquivalence_upperStar _ u
+  refine ⟨inferInstance, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro I V Vᵢ a
+    simpa only [Sieve.functorPushforward_ofArrows] using
+      (Scheme.Hom.functorPushforward_mem_smallEtaleTopology_iff u
+        (Sieve.ofArrows Vᵢ a)).symm
+  · refine ⟨(sheafEquivalence (Type (u + 1)) u).symm.changeFunctor
+        (Classical.choice (etaleSetPullback_eq_sheafEquivalence u)), rfl, ?_⟩
+    exact (lowerStar_eq_sheafEquivalence_functor (Type (u + 1)) u).symm
+  · infer_instance
+  · infer_instance
+  · intro F q
+    exact cohomologyMap_bijective u F q
+  · exact ⟨universalHomeomorphism_identity u, universalHomeomorphism_composition u,
+      universalHomeomorphism_pullback u⟩
 
 end AlgebraicGeometry.Etale

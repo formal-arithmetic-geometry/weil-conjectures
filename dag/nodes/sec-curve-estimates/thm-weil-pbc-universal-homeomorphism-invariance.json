@@ -33,92 +33,32 @@
  ],
  "proof": [
   {
-   "text": "(Equivalence of sites, coverings.) Let $u:X'\\to X$ be a universal homeomorphism [def-weil-pbc-scheme-conventions]. By [lemma-weil-pbc-universal-homeomorphism-site-equivalence] (Stacks Tag 04DZ, the theorem on topological invariance of the small etale site) the base-change functor $u^{\\Et}:X_{\\Et}\\to X'_{\\Et}$, $V\\mapsto V\\times_XX'$, of the small etale sites [def-weil-pbc-etale-site] is an equivalence of the underlying categories. By [lemma-weil-pbc-universal-homeomorphism-coverings] a family $\\{V_i\\to V\\}$ of etale $X$-schemes is jointly surjective, i.e. a covering of $X_{\\Et}$, if and only if its base change $\\{V_i\\times_XX'\\to V\\times_XX'\\}$ is a covering of $X'_{\\Et}$. This is the clause that the equivalence preserves and reflects covering families; together the two give part (1) of Stacks Tag 03SI, an isomorphism of sites $X_{\\Et}\\simeq X'_{\\Et}$ (the step that Stacks omits, that coverings correspond, is the second cited lemma).",
+   "text": "Apply site equivalence and covering reflection; change the functor of the inverse sheaf equivalence along the set-valued comparison isomorphism; obtain the additive adjunction unit and counit isomorphisms from upperStar being an equivalence; apply cohomologyMap_bijective; finish with the identity, composition and pullback supporting theorems.",
    "uses": [
     "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
     "lemma-weil-pbc-universal-homeomorphism-coverings",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03SI (proposition-topological-invariance), proof, first two sentences; Tag 04DZ (theorem-topological-invariance)"
-   }
-  },
-  {
-   "text": "(Equivalence of topoi; inverse and direct image.) By [prop-weil-pbc-universal-homeomorphism-topos] (Stacks Tag 03SI (2)), the inverse image $u^{-1}:\\operatorname{Sh}(X_{\\Et})\\to\\operatorname{Sh}(X'_{\\Et})$ [def-weil-pbc-inverse-image] is an equivalence of the categories of etale sheaves [def-weil-pbc-etale-sheaves]. The direct image $u_*$, $(u_*F)(V)=F(V\\times_XX')$ [def-weil-pbc-direct-image], is right adjoint to $u^{-1}$ with unit $\\eta_u$ and counit $\\varepsilon_u$ [def-weil-pbc-inverse-image]. A right adjoint of an equivalence is a quasi-inverse of it, and the unit and counit of the adjunction are then isomorphisms (if $u^{-1}$ has a quasi-inverse $Q$, then $Q$ is also right adjoint to $u^{-1}$, so $Q\\cong u_*$ by uniqueness of adjoints, compatibly with the units). Hence $u_*$ is an equivalence quasi-inverse to $u^{-1}$, $\\eta_u:\\mathrm{id}\\to u_*u^{-1}$ and $\\varepsilon_u:u^{-1}u_*\\to\\mathrm{id}$ are isomorphisms, and both functors are exact. This is the equivalence $\\operatorname{Sh}(X_{\\Et})\\simeq\\operatorname{Sh}(X'_{\\Et})$ of the statement and its compatibility with inverse and direct images.",
-   "uses": [
     "prop-weil-pbc-universal-homeomorphism-topos",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-sheaves"
+    "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence",
+    "thm-weil-pbc-universalHomeomorphism_identity",
+    "thm-weil-pbc-universalHomeomorphism_composition",
+    "thm-weil-pbc-universalHomeomorphism_pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03SI (proposition-topological-invariance), part (2), proof: 'Parts (2) and (3) follow formally from (1)'"
-   }
-  },
-  {
-   "text": "(Cohomology.) For an abelian sheaf $F$ on $X_{\\Et}$ and $q\\ge0$, let $u^*:H^q(X_{\\Et},F)\\to H^q(X'_{\\Et},u^{-1}F)$ be the pullback map on etale cohomology [def-weil-pbc-cohomology-pullback], [def-weil-pbc-etale-cohomology]. By [prop-weil-pbc-universal-homeomorphism-topos] (Stacks Tag 03SI (3)) it is an isomorphism for every $F$ and every $q$. (Its argument: $u^{-1}$ is an exact equivalence, so it carries an injective resolution $F\\to I^\\bullet$ to an injective resolution $u^{-1}F\\to u^{-1}I^\\bullet$, and on global sections $u^*$ is $\\Gamma(X,I^\\bullet)\\xrightarrow{\\eta_u}\\Gamma(X,u_*u^{-1}I^\\bullet)=\\Gamma(X',u^{-1}I^\\bullet)$, an isomorphism of complexes since $\\eta_u$ is one by step 2.) This is the compatibility of the equivalence with cohomology.",
-   "uses": [
-    "prop-weil-pbc-universal-homeomorphism-topos",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-etale-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03SI (proposition-topological-invariance), part (3)"
-   }
-  },
-  {
-   "text": "(Identities and composition.) For $u=\\mathrm{id}_X$ the base-change functor is isomorphic to the identity of $X_{\\Et}$ via $V\\times_XX\\cong V$, and [lem-weil-pbc-inverse-image-composition] (3) gives $e_X:\\mathrm{id}_X^{-1}\\xrightarrow{\\sim}\\mathrm{id}$ and $d_X:(\\mathrm{id}_X)_*\\xrightarrow{\\sim}\\mathrm{id}$. For universal homeomorphisms $u:X'\\to X$ and $v:X''\\to X'$, the composite $u\\circ v$ is a universal homeomorphism (the base change of $u\\circ v$ along any $T\\to X$ is the composite of the base change of $u$ along $T\\to X$ and of $v$ along $T\\times_XX'\\to X'$, a composite of homeomorphisms; [def-weil-pbc-scheme-conventions]); the base-change functor of $u\\circ v$ is isomorphic to the composite of those of $u$ and $v$ by $(V\\times_XX')\\times_{X'}X''\\cong V\\times_XX''$, and on sheaves [lem-weil-pbc-inverse-image-composition] (1),(2) give the isomorphisms $d_{u,v}:(u\\circ v)_*\\xrightarrow{\\sim}u_*v_*$ and $c_{u,v}:v^{-1}u^{-1}\\xrightarrow{\\sim}(u\\circ v)^{-1}$, compatible with the units. So the equivalence of step 2 for a composite is the composite of the equivalences, and that for an identity is the identity, up to these canonical isomorphisms. On cohomology, [lem-weil-pbc-cohomology-pullback-functorial] (4) gives $(u\\circ v)^*=H^q(c_{u,v,F})\\circ v^*\\circ u^*$ and $H^q(e_{X,F})\\circ\\mathrm{id}_X^*=\\mathrm{id}$, so the isomorphisms of step 3 are compatible with identities and composition.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/thm-weil-pbc-universal-homeomorphism-invariance.md",
-    "place": "## Proof, first sentence ('naturally in the schemes and compatible with identities and composites') and last sentence ('the equivalence of a composite is the composite of the equivalences')"
-   }
-  },
-  {
-   "text": "(Pullback.) Let $g:Y\\to X$ be a morphism of schemes, $Y'=Y\\times_XX'$, $u':Y'\\to Y$ and $g':Y'\\to X'$ the projections, so $u\\circ g'=g\\circ u'$. By [lem-weil-pbc-universal-homeomorphism-base-change] $u'$ is a universal homeomorphism, so steps 2 and 3 apply to $u'$. Applying [lem-weil-pbc-inverse-image-composition] (2) to the two factorizations of $w=u\\circ g'=g\\circ u'$ gives $c_{g,u'}^{-1}\\circ c_{u,g'}:g'^{-1}u^{-1}\\xrightarrow{\\sim}w^{-1}\\xrightarrow{\\sim}u'^{-1}g^{-1}$, the commutative square of inverse images: the equivalences $u^{-1}$ and $u'^{-1}$ commute with pullback of sheaves along $g$ and $g'$. For the quasi-inverses: using the isomorphisms $\\eta_u$, $\\varepsilon_{u'}$ of step 2, $u'_*g'^{-1}\\cong u'_*g'^{-1}u^{-1}u_*\\cong u'_*u'^{-1}g^{-1}u_*\\cong g^{-1}u_*$. On cohomology, [lem-weil-pbc-cohomology-pullback-functorial] (4) applied to both factorizations of $w$ gives, for an abelian sheaf $F$ on $X_{\\Et}$, $H^q(c_{u,g',F})\\circ g'^*\\circ u^*=w^*=H^q(c_{g,u',F})\\circ u'^*\\circ g^*$, i.e. the isomorphisms $u^*$ (on $X$) and $u'^*$ (on $Y$) of step 3 commute with the pullback maps $g^*$ and $g'^*$, up to the canonical isomorphism $c_{g,u'}^{-1}c_{u,g'}$. This is the compatibility with pullback of sheaves and cohomology.",
-   "uses": [
-    "lem-weil-pbc-universal-homeomorphism-base-change",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/thm-weil-pbc-universal-homeomorphism-invariance.md",
-    "place": "## Proof, last sentence ('for a base change u' of u ... the equivalences of u and u' form a commutative square with the inverse-image functors')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
   "lemma-weil-pbc-universal-homeomorphism-coverings",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-etale-site",
   "prop-weil-pbc-universal-homeomorphism-topos",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-universal-homeomorphism-base-change"
+  "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence",
+  "thm-weil-pbc-universalHomeomorphism_identity",
+  "thm-weil-pbc-universalHomeomorphism_composition",
+  "thm-weil-pbc-universalHomeomorphism_pullback"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03SI (proposition-topological-invariance) and 04DZ (theorem-topological-invariance), Section 04DY; the compatibility clauses follow the blueprint proof (literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/thm-weil-pbc-universal-homeomorphism-invariance.md, ## Proof), written out by an agent"
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/UniversalHomeomorphismInvariance.lean",
+  "place": "AlgebraicGeometry.Etale.universalHomeomorphism_invariance"
  },
  "mathlib_searches": [
   {
@@ -203,5 +143,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a09cb",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468192",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five delivered Lean declarations with their nodes, the unchanged parent signature, proof dependencies, report and earlier return; compilation and axiom checks passed."
  }
 }

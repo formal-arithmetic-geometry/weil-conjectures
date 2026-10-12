@@ -1,0 +1,148 @@
+{
+ "id": "thm-weil-pbc-universalHomeomorphism_pullback",
+ "blueprint": {
+  "is": null,
+  "from": "thm-weil-pbc-universal-homeomorphism-invariance"
+ },
+ "kind": "statement",
+ "title": "universalHomeomorphism_pullback",
+ "statement": "For a universal homeomorphism u : X' → X and any g : Y → X, pullback.fst g u is universal; its additive upper-star/lower-star adjunction is an equivalence and its cohomology pullback is bijective. The four displayed etale and star base-change isomorphisms exist, and the resulting cohomology square commutes.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/thm-weil-pbc-universal-homeomorphism-invariance.md",
+  "place": "node thm-weil-pbc-universal-homeomorphism-invariance, order 999",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 04DY"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 04DZ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Stability of universal homeomorphisms under base change makes pullback.fst g u a universal homeomorphism. Apply topological invariance to it: its additive upperStar is an equivalence, so the unit and counit of upperStarLowerStarAdjunction are isomorphisms, and cohomologyMap_bijective gives the asserted cohomology bijections.",
+   "uses": [
+    "lem-weil-pbc-universal-homeomorphism-base-change",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct set-valued inverse-image compositors by comparing composite sheaf pullback adjunctions using lowerStarComp and leftAdjointUniq. Equivalently use the repaired comparison to inverse sheaf equivalences on the universal-homeomorphism sides. Compose the inverse compositor for pullback.snd g u followed by u with the compositor for pullback.fst g u followed by g, identifying the total morphisms by pullback.condition. This gives the set-valued square isomorphism; upperStarComp gives the additive square isomorphism in the same way.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-inverse-image-composition",
+    "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a sheaf F on X', insert the inverse counit F → u^*u_*F and apply s^*, where s = pullback.snd g u. Use the inverse-image square s^*u^* ≅ p^*g^*, where p = pullback.fst g u, then apply p_* and cancel p_*p^* by the inverse unit. This constructs p_*s^*F ≅ g^*u_*F, naturally in F, which is the displayed mixed square isomorphism. Every arrow is invertible by topological invariance for u and p. Perform this construction both for sets (using the repaired comparison) and for additive sheaves.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the composition clause of cohomologyPullbackFunctorial to both paths in the pullback square. Apply Sheaf.H.map of the respective inverse upperStarComp to cancel each forward compositor. The two results are pullback along the common composite, identified by pullback.condition, so they are equal as asserted.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-universal-homeomorphism-base-change",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-inverse-image-composition",
+  "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/UniversalHomeomorphismPullback.lean",
+  "place": "AlgebraicGeometry.Etale.universalHomeomorphism_pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal homeomorphism of schemes induces equivalence of small etale sites / etale topoi",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), TopCat.Presheaf.presheafEquivOfIso, Scheme.Hom.homeomorph (isomorphisms only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "topological invariance of the étale site: base change along a universal homeomorphism is an equivalence of étale schemes, and étale cohomology is invariant",
+   "results": "Scheme.etaleTopology, Scheme.smallEtaleTopology, Scheme.smallEtalePretopology (Mathlib.AlgebraicGeometry.Sites.Etale); Algebra.Etale.of_equiv and similar ring-level invariance lemmas",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'universal homeomorphism|universalHomeomorph|topological invariance|04DZ|03SI' and 'IsEquivalence|Equivalence' in AlgebraicGeometry/Sites/Etale.lean, in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only RingTheory/Spectrum/Prime/Homeomorph.lean (purely inseparable field extensions are universal homeomorphisms); no class of universal homeomorphisms of schemes and no equivalence of small etale sites in Mathlib (the class IsUniversalHomeomorphism is in WeilConjectures/AlgebraicGeometry/Morphisms/UniversalHomeomorphism.lean)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UniversalHomeomorphismPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalHomeomorphismPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.universalHomeomorphism_pullback",
+  "statement": "theorem universalHomeomorphism_pullback {X X' : Scheme.{u}} (u : X' ⟶ X) [IsUniversalHomeomorphism u] : ∀ (Y : Scheme.{u}) (g : Y ⟶ X), IsUniversalHomeomorphism (pullback.fst g u) ∧ IsIso (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (pullback.fst g u)).unit ∧ IsIso (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (pullback.fst g u)).counit ∧ (∀ (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ), Function.Bijective (cohomologyMap (pullback.fst g u) G q)) ∧ Nonempty (Scheme.etaleSetPullback u ⋙ Scheme.etaleSetPullback (pullback.snd g u) ≅ Scheme.etaleSetPullback g ⋙ Scheme.etaleSetPullback (pullback.fst g u)) ∧ Nonempty (Scheme.etaleSetPullback (pullback.snd g u) ⋙ lowerStar (Type (u + 1)) (pullback.fst g u) ≅ lowerStar (Type (u + 1)) u ⋙ Scheme.etaleSetPullback g) ∧ Nonempty (upperStar AddCommGrpCat.{u + 1} u ⋙ upperStar AddCommGrpCat.{u + 1} (pullback.snd g u) ≅ upperStar AddCommGrpCat.{u + 1} g ⋙ upperStar AddCommGrpCat.{u + 1} (pullback.fst g u)) ∧ Nonempty (upperStar AddCommGrpCat.{u + 1} (pullback.snd g u) ⋙ lowerStar AddCommGrpCat.{u + 1} (pullback.fst g u) ≅ lowerStar AddCommGrpCat.{u + 1} u ⋙ upperStar AddCommGrpCat.{u + 1} g) ∧ ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (x : Sheaf.H F q), Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (pullback.snd g u) u (pullback.fst g u ≫ g) (pullback.condition (f := g) (g := u))).inv.app F) q (cohomologyMap (pullback.snd g u) ((upperStar AddCommGrpCat.{u + 1} u).obj F) q (cohomologyMap u F q x)) = Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (pullback.fst g u) g).inv.app F) q (cohomologyMap (pullback.fst g u) ((upperStar AddCommGrpCat.{u + 1} g).obj F) q (cohomologyMap g F q x))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a09cb",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a09cb",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468192",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five delivered Lean declarations with their nodes, the unchanged parent signature, proof dependencies, report and earlier return; compilation and axiom checks passed."
+ }
+}

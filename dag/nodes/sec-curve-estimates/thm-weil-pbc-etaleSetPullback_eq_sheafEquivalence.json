@@ -1,0 +1,119 @@
+{
+ "id": "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence",
+ "blueprint": {
+  "is": null,
+  "from": "thm-weil-pbc-universal-homeomorphism-invariance"
+ },
+ "kind": "statement",
+ "title": "etaleSetPullback_eq_sheafEquivalence",
+ "statement": "For schemes X and X' and a universal homeomorphism u : X' → X, the inverse functor of the chosen sheaf equivalence is naturally isomorphic to the set-valued etale inverse-image functor: Nonempty ((sheafEquivalence (Type (u + 1)) u).symm.functor ≅ Scheme.etaleSetPullback u).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/thm-weil-pbc-universal-homeomorphism-invariance.md",
+  "place": "node thm-weil-pbc-universal-homeomorphism-invariance, order 999",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 04DY"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 04DZ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The constructed set-valued inverse image is left adjoint to lowerStar by the continuous-functor sheaf pullback adjunction. The inverse of sheafEquivalence is also left adjoint to this same functor by the equivalence adjunction. Adjunction.leftAdjointUniq compares these left adjoints; invert its natural isomorphism for the displayed orientation. Uniqueness yields a natural isomorphism, not equality of functors.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/EtaleSetPullbackSheafEquivalence.lean",
+  "place": "AlgebraicGeometry.Etale.etaleSetPullback_eq_sheafEquivalence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal homeomorphism of schemes induces equivalence of small etale sites / etale topoi",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), TopCat.Presheaf.presheafEquivOfIso, Scheme.Hom.homeomorph (isomorphisms only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "topological invariance of the étale site: base change along a universal homeomorphism is an equivalence of étale schemes, and étale cohomology is invariant",
+   "results": "Scheme.etaleTopology, Scheme.smallEtaleTopology, Scheme.smallEtalePretopology (Mathlib.AlgebraicGeometry.Sites.Etale); Algebra.Etale.of_equiv and similar ring-level invariance lemmas",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'universal homeomorphism|universalHomeomorph|topological invariance|04DZ|03SI' and 'IsEquivalence|Equivalence' in AlgebraicGeometry/Sites/Etale.lean, in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only RingTheory/Spectrum/Prime/Homeomorph.lean (purely inseparable field extensions are universal homeomorphisms); no class of universal homeomorphisms of schemes and no equivalence of small etale sites in Mathlib (the class IsUniversalHomeomorphism is in WeilConjectures/AlgebraicGeometry/Morphisms/UniversalHomeomorphism.lean)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetPullbackSheafEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetPullbackSheafEquivalence.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSetPullback_eq_sheafEquivalence",
+  "statement": "theorem etaleSetPullback_eq_sheafEquivalence {X X' : Scheme.{u}} (u : X' ⟶ X) [IsUniversalHomeomorphism u] : Nonempty ((sheafEquivalence (Type (u + 1)) u).symm.functor ≅ Scheme.etaleSetPullback u)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a09cb",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a09cb",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468192",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five delivered Lean declarations with their nodes, the unchanged parent signature, proof dependencies, report and earlier return; compilation and axiom checks passed."
+ }
+}
