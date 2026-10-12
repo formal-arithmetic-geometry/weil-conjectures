@@ -825,6 +825,41 @@ lemma twistHTopBasis_repr {d : ℕ} (hn : Fintype.card n = d + 1) (E : Fin (d + 
       (twistHLinearEquivMonomialCechHomology A m d x) :=
   rfl
 
+open Classical in
+/-- **The Serre pairing in the monomial bases.** Let `d ≥ 1`, `m ≤ -d - 1` and
+`D = -m - d - 1`. Under the Serre pairing `H⁰(𝒪(D)) × Hᵈ(𝒪(m)) → A` (`twistSerrePairing`), the
+monomial `x^f` (`f` of degree `D`) pairs to `1` with the basis class `x^{-f-𝟏}` of
+`twistHTopBasis` and to `0` with the other basis classes `xᵉ`. The basis is taken for the
+ordering of the coordinates used by the trace, which fixes the signs.
+
+(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+theorem twistSerrePairing_basis {p : ℕ} (hn : Fintype.card n = p + 1 + 1) {m : ℤ}
+    (hm : m ≤ -((p + 1 : ℕ) : ℤ) - 1)
+    (s : {s : n →₀ ℕ | s.degree = (-m - ((p + 1 : ℕ) : ℤ) - 1).toNat})
+    (e : negativeExponents n m) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+    twistSerrePairing A hn hm (homogeneousSubmoduleToTwist A _ (homogeneousSubmoduleBasis n A _ s))
+        (twistHTopBasis A hn (Fintype.equivFinOfCardEq hn).symm (.inl (Nat.succ_ne_zero p)) e) =
+      if (e : n → ℤ) = fun i ↦ -(s.1 i : ℤ) - 1 then 1 else 0 := by
+  let := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) (p + 1)
+  rw [twistSerrePairing_apply, ← twistHTopLinearEquivDual_apply hn hm]
+  have h1 : twistHLinearEquivMonomialCechHomology A m (p + 1)
+      (twistHTopBasis A hn (Fintype.equivFinOfCardEq hn).symm (.inl (Nat.succ_ne_zero p)) e) =
+      (monomialCechComplexHomologyTopLinearEquiv n A m hn (Fintype.equivFinOfCardEq hn).symm
+        (.inl (Nat.succ_ne_zero p))).symm (Finsupp.single e 1) := by
+    rw [twistHTopBasis, Module.Basis.coe_ofRepr]
+    exact LinearEquiv.apply_symm_apply _ _
+  rw [twistHTopLinearEquivDual, LinearEquiv.trans_apply, h1]
+  simp only [monomialCechComplexHomologyTopLinearEquivDual, LinearEquiv.trans_apply,
+    LinearEquiv.apply_symm_apply]
+  change ((homogeneousSubmoduleBasis n A _).constr A _) _ = _
+  rw [Module.Basis.constr_basis]
+  simp only [Finsupp.linearEquivFunOnFinite_apply, Finsupp.domLCongr_apply,
+    Finsupp.domCongr_apply, Finsupp.equivMapDomain_apply, Finsupp.single_apply]
+  by_cases h : (e : n → ℤ) = fun i ↦ -(s.1 i : ℤ) - 1
+  · rw [if_pos h, if_pos (Subtype.ext h)]
+  · rw [if_neg h, if_neg fun h' ↦ h (congrArg Subtype.val h')]
+
 end Canonical
 
 end AlgebraicGeometry.ProjectiveSpace
