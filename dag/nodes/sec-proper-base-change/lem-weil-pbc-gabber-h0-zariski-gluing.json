@@ -1,0 +1,184 @@
+{
+ "id": "lem-weil-pbc-gabber-h0-zariski-gluing",
+ "kind": "statement",
+ "title": "Zariski inverse-image gluing after a local refinement",
+ "statement": "Let i:Z→X be a closed immersion [def-weil-closed-immersion], q:U→X etale, and h:Xprime→X any morphism. Let F be an etale sheaf of sets on X, t a global section of i_et^*F, and s∈F(U) with i^*s equal to the restriction of t to U times_X Z [def-weil-pbc-etale-sheaf-of-sets, lem-weil-pbc-sets-etale-inverse-image-composition-units]. Suppose opens W_a cover Xprime and maps phi_a:W_a→U satisfy phi_a followed by q equal to the restriction of h. Put Zprime=Z times_X Xprime and iPrime:Zprime→Xprime [def-pc-fibre-product]. There exist a Zariski sheaf G on Xprime, a map lift from G(Xprime) to the displayed global sections of h_et^*F, a map compare from (iPrime_Zar^*G)(Zprime) to the displayed global sections of (Zprime→Z→X)_et^*F, and sigma∈(iPrime_Zar^*G)(Zprime), such that compare(sigma) is the composition-compatible pullback of t, and compare(unit_Zar(a)) is the composition-compatible pullback of lift(a), transported along the fibre-product commuting equation, for every a∈G(Xprime) [def-weil-pbc-topological-inverse-image, lem-weil-pbc-sets-etale-inverse-image-composition-units]. Neither finiteness of h nor global Zariski section bijectivity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph: construction of tPrime and its membership in the Zariski inverse-image subsheaf"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let Fprime=h^*F and iPrime=pullback.snd i h. Restrict Fprime along the open-subscheme inclusion to obtain the Zariski sheaf G. The top-open and identity-base-change isomorphisms identify G(Xprime) with the displayed sections of Fprime, defining lift. The open-subscheme inclusion is continuous by the Zariski-etale inclusion morphism of sites, so restriction is a sheaf.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-topological-inverse-image",
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
+   }
+  },
+  {
+   "text": "On each W_a pull the representative s back along phi_a; the commuting equation identifies its structure morphism with the restriction of h. The assumed representative equation, unit naturality, and composition comparisons show that its iPrime-pullback is tPrime on the preimage of W_a.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
+   }
+  },
+  {
+   "text": "Apply the injective Zariski-etale comparison for iPrime. The images under the Zariski unit of the local sections agree on overlaps because their comparison images both equal tPrime there. Injectivity makes them equal before comparison. Glue to sigma in the topological inverse image by its sheaf axiom, since the preimages of W_a cover the fibre product.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
+   }
+  },
+  {
+   "text": "Define compare by the comparison on global sections followed by the unit-compatible etale composition isomorphism and the fibre-product pasting identification. The sheaf axiom gives compare(sigma) equal to the left-hand pullback of t. The comparison-unit equation gives compare(unit(a)) equal to the right-hand pullback of lift(a), transported along pullback.condition. These assertions use neither finiteness of h nor hFinite.",
+   "uses": [
+    "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph: construction of tPrime and its membership in the Zariski inverse-image subsheaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*surjective.*section|gabber|sheaf.*locally.*lift",
+   "results": "Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean; Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean; Mathlib/CategoryTheory/Sites/LocallySurjective.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale sheaf section on a closed subscheme lifts after a finite surjective cover using Zariski inverse image bijectivity",
+   "results": "Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.exists_lift_of_germInjective; Algebra.basicOpen_subset_etaleLocus_iff_etale; Algebra.isOpen_etaleLocus; AlgebraicGeometry.exists_lift_of_germInjective_aux; Algebra.mem_etaleLocus_iff; AlgebraicGeometry.IsEtale.of_comp; Algebra.etaleLocus",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Etale",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.instHasFiniteLimitsEtale; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.instPreservesFiniteLimitsEtaleOverForget",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*glue|exists.*glue|eq_of_locally_eq",
+   "results": "Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/CommRingCat.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an inverse image of an etale sheaf is represented on a surjective etale cover when every closed subset meets the closed subscheme",
+   "results": "Algebra.basicOpen_subset_etaleLocus_iff; Algebra.basicOpen_subset_etaleLocus_iff_etale; Algebra.mem_etaleLocus_iff; Algebra.isOpen_etaleLocus; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgebraicGeometry.Scheme.etaleTopology; Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of an etale inverse image on a closed subscheme is represented on a surjective etale cover and glues in the Zariski inverse image after local refinement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0FiniteSection",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-gabber-h0-finite-section",
+   "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph: construction of tPrime and its membership in the Zariski inverse-image subsheaf"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GabberH0ZariskiGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiGluing.lean",
+  "declaration": "AlgebraicGeometry.gabber_h0_zariski_gluing",
+  "statement": "theorem gabber_h0_zariski_gluing\n    {X Z U X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (q : U ⟶ X) [Etale q] (h : X' ⟶ X)\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (t : ((Scheme.etaleSetPullback i).obj F).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk (𝟙 X)))))\n    (s : F.obj.obj (op (Scheme.Etale.mk q)))\n    (hs : etaleSetDescentUnit i F (Scheme.Etale.mk q) s =\n      ((Scheme.etaleSetPullback i).obj F).obj.map\n        ((MorphismProperty.Over.pullback @Etale ⊤ i).map\n          (MorphismProperty.Over.homMk q (Category.comp_id q) :\n            Scheme.Etale.mk q ⟶ Scheme.Etale.mk (𝟙 X))).op t)\n    (J : Type) (W : J → X'.Opens) (phi : ∀ a, (W a).toScheme ⟶ U)\n    (hW : ⨆ a, W a = ⊤) (hphi : ∀ a, phi a ≫ q = (W a).ι ≫ h) :\n    let b : CategoryTheory.Functor.{u, u, u, u}\n        X'.Opens (pullback i h : Scheme.{u}).Opens :=\n      Opens.map ((pullback.snd i h : (pullback i h : Scheme.{u}) ⟶ X').base)\n    letI : ∀ P : X'.Opensᵒᵖ ⥤ Type (u + 1), b.op.HasPointwiseLeftKanExtension P :=\n      fun P V ↦\n        @Types.hasColimit.{u, u + 1, u} (CostructuredArrow.{u, u, u, u} b.op V)\n          inferInstance (small_succ.{u} _) (CostructuredArrow.proj b.op V ⋙ P)\n    ∃ (G : TopCat.Sheaf (Type (u + 1)) X'.toTopCat)\n      (lift : G.obj.obj (op (⊤ : X'.Opens)) →\n        ((Scheme.etaleSetPullback h).obj F).obj.obj\n          (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj\n            (Scheme.Etale.mk (𝟙 X)))))\n      (compare :\n        ((Functor.sheafPullbackConstruction.sheafPullback b (Type (u + 1))\n          (Opens.grothendieckTopology X')\n          (Opens.grothendieckTopology (pullback i h : Scheme.{u}))).obj G).obj.obj\n            (op (⊤ : (pullback i h : Scheme.{u}).Opens)) →\n        ((Scheme.etaleSetPullback (pullback.fst i h ≫ i)).obj F).obj.obj\n          (op ((MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst i h ≫ i)).obj\n            (Scheme.Etale.mk (𝟙 X)))))\n      (sigma :\n        ((Functor.sheafPullbackConstruction.sheafPullback b (Type (u + 1))\n          (Opens.grothendieckTopology X')\n          (Opens.grothendieckTopology (pullback i h : Scheme.{u}))).obj G).obj.obj\n            (op (⊤ : (pullback i h : Scheme.{u}).Opens))),\n      compare sigma =\n        etaleSetDescentComparison i (pullback.fst i h) F (Scheme.Etale.mk (𝟙 X)) t ∧\n      ∀ a : G.obj.obj (op (⊤ : X'.Opens)),\n        compare\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            b (Type (u + 1)) (Opens.grothendieckTopology X')\n            (Opens.grothendieckTopology (pullback i h : Scheme.{u}))).unit.app G).hom.app\n              (op (⊤ : X'.Opens)) a) =\n          eqToHom (congrArg\n            (fun k : pullback i h ⟶ X ↦ ((Scheme.etaleSetPullback k).obj F).obj.obj\n              (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj\n                (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm)\n            (etaleSetDescentComparison h (pullback.snd i h) F\n              (Scheme.Etale.mk (𝟙 X)) (lift a))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-02903",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T095851-L-312145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-02903",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T095851-L-312145",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered signatures and proof with the nodes and Stacks Tag 09ZF; verified import users, unchanged existing interface, permitted node changes, clean compilation, and axioms containing sorryAx only for the reported decomposition."
+ }
+}

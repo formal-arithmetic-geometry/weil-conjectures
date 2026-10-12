@@ -10,11 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
-public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.Paper.GabberZariskiEtaleRestrictionInjective
-import Sheaf.Paper.SiteSheafificationSectionsLocal
-import Sheaf.Topology.ClosedPushforwardConstantStalks
+public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
+import Sheaf.AlgebraicGeometry.GabberH0EtaleCoverSection
+import Sheaf.AlgebraicGeometry.GabberH0ZariskiGluing
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
 
 /-! # Finite-cover sections before imposing the descent equation
@@ -107,6 +105,17 @@ theorem gabber_h0_finite_section
             (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj
               (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm)
           (etaleSetDescentComparison h (pullback.snd i h) F (Scheme.Etale.mk (𝟙 X)) s') := by
-  sorry
+  obtain ⟨U, q, hq, hqsurj, s, hs⟩ :=
+    gabber_h0_etale_cover_section i (fun G ↦ (hZar G).injective) F t
+  let : Etale q := hq
+  let : Surjective q := hqsurj
+  obtain ⟨X', h, hh, _, hsurj, J, _, W, phi, hW, hphi⟩ :=
+    Scheme.exists_finite_surjective_refinement_of_etale q
+  let : IsFinite h := hh
+  obtain ⟨G, lift, compare, sigma, hsigma, hunit⟩ :=
+    gabber_h0_zariski_gluing i q h F t s hs J W phi hW hphi
+  obtain ⟨a, ha⟩ := (hFinite X' h G).surjective sigma
+  refine ⟨X', h, hh, hsurj, lift a, ?_⟩
+  exact hsigma.symm.trans ((congrArg compare ha).symm.trans (hunit a))
 
 end AlgebraicGeometry
