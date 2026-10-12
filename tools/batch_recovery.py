@@ -8,7 +8,7 @@ queue.tsv, queue.md, blueprint-index.tsv and blueprint backfill. Take-out restor
 each delivery-owned change, preserves later independent edits, closes its request
 with restored sorry_allowed, restores its claim, then writes a return and regenerates
 the queue. Withdrawal does the same inverse without worker returns, restores branch
-heads/passed markers, and schedules only the original batch for bisection. A genuine
+heads/passed markers, and leaves every removed delivery waiting; there is no bisection. A genuine
 conflicting maintainer edit is never discarded: the transaction refuses before writes.
 """
 from __future__ import annotations
@@ -193,24 +193,53 @@ def commit_inverse(root, prepared, expected, message):
         raise
 
 
-def split(entries):
-    n = max(1, len(entries) // 2)
-    return entries[:n], entries[n:]
+
+def interface_delta(old, new):
+    """Existing classification plus added declarations/public imports and module removal."""
+    import leanindex as li
+    if old is None or new is None:
+        return ['(new/removed module)']
+    a, b = li.interface(old), li.interface(new)
+    return sorted(set(li.interface_changes(old, new)) |
+                  {k for k in b if not k.startswith('#') and k not in a} |
+                  ({'(public imports changed)'} if a['#imports'] != b['#imports'] else set()))
 
 
-def replay_bisect(entries, build):
-    """One independent bad delivery: baseline, logarithmic tests, final survivors.
+def select(entries, failures, imports, changes, messages=None):
+    """Pure decision shared by live triage and read-only replay. No build or writes.
 
-    With arbitrary interacting faults this bound is impossible. Live recovery caps
-    its tests, defers unresolved halves, and alerts rather than asserting they pass.
-    The injected build is a pure test oracle, never tools/build.py.
+    changes(entry, module) returns importer-visible declaration names. Exact
+    quoted compiler names prefer their changing delivery; never use downstream
+    modules as causes of an older importer failure.
     """
-    good, suspect, tests = [], list(entries), 1
-    assert build([]), 'published baseline plus maintainer edits is red'
-    while len(suspect) > 1:
-        left, right = split(suspect); tests += 1
-        if build(left): good.extend(left); suspect = right
-        else: good.extend(right); suspect = left
-    tests += 1
-    assert build(good), 'multiple or interacting bad deliveries; defer unresolved halves'
-    return good, suspect, tests
+    import leanindex as li
+    messages = messages or {}; memo = {}; out = []
+    for module in failures:
+        closure = li.closure(module, imports, memo) | {module}
+        writers = [e for e in entries if module in e['modules']]
+        suspects, changed = list(writers), {}
+        if not writers:
+            for e in entries:
+                names = {m: changes(e, m) for m in set(e['modules']) & closure}
+                names = {m: ns for m, ns in names.items() if ns}
+                if names:
+                    suspects.append(e); changed[id(e)] = names
+            quoted = set(re.findall(r"[`'“‘]([A-Za-z_][\w.']*)[`'”’]", messages.get(module, '')))
+            preferred = [e for e in suspects if any(n in quoted for ns in changed[id(e)].values() for n in ns)]
+            if preferred: suspects = preferred
+        out.append({'failure': module, 'closure': closure, 'suspects': suspects,
+                    'message': messages.get(module, ''), 'case': 'own-fault' if writers else 'breaker'})
+    return out
+
+
+def dependents(entries, suspects, imports):
+    """Transitive delivery dependency closure, including multi-module deliveries."""
+    import leanindex as li
+    removed = {id(e) for e in suspects}; modules = {m for e in suspects for m in e['modules']}
+    memo = {}
+    while True:
+        added = [e for e in entries if id(e) not in removed and
+                 any(li.closure(m, imports, memo) & modules for m in e['modules'])]
+        if not added: break
+        removed.update(id(e) for e in added); modules.update(m for e in added for m in e['modules'])
+    return [e for e in entries if id(e) in removed and e not in suspects]

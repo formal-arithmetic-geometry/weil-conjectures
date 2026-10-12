@@ -81,54 +81,6 @@ class Repo(unittest.TestCase):
         self.assertFalse((builds / 'requests/L.json').exists())
         self.assertEqual(json.loads((self.root / 'coord/claims/Sheaf.A.lock').read_text())['who'], 'G')
         self.assertIn('triage breaker', (self.root / 'coord/returns/G.md').read_text())
-    def test_live_bisection_state_machine_with_injected_build(self):
-        import copy, contextlib, landing as ld
-        local = self.root / 'local'; builds = local / 'builds'
-        for d in ('requests', 'done', 'backup'): (builds / d).mkdir(parents=True)
-        entries = []
-        for i in range(8):
-            p = self.root / 'lean/Sheaf/A.lean'; p.write_text(p.read_text() + f'-- delivery {i}\n')
-            sha = self.commit(f'delivery {i}')
-            entries.append({'group': 'G', 'item': f'Sheaf.Item{i}', 'head': sha, 'commit': sha,
-                            'landing': f'L{i}', 'state': 'landed', 'modules': ['Sheaf.A'], 'reviewer': 'test'})
-        logs, calls = [], []
-        b = {'id': 'batch', 'entries': copy.deepcopy(entries), 'round': 1}
-        def put_result(ids, result):
-            calls.append(ids)
-            ld.write_json(builds / 'last.json', {'time': str(len(calls)), 'result': result, 'included': ids,
-                          'verified': ids if result == 'green' else [], 'failing': ['Sheaf.A'], 'errors': ['bad delivery 0']})
-        def land_subset(b, chosen):
-            out = []
-            for e in chosen:
-                p = self.root / 'lean/Sheaf/A.lean'
-                i = e['item'].removeprefix('Sheaf.Item'); p.write_text(p.read_text() + f'-- delivery {i}\n')
-                sha = self.commit('reland ' + i)
-                x = dict(e, commit=sha, landing='new' + sha, state='landed')
-                ld.write_json(builds / ('requests/' + x['landing'] + '.json'),
-                              {'id': x['landing'], 'group': 'G', 'files': [{'path': 'Sheaf/A.lean', 'module': 'Sheaf.A'}]})
-                out.append(x)
-            return out
-        with patch.object(bl, 'ROOT', self.root), patch.object(bl.md, 'ROOT', self.root), \
-             patch.object(bl, 'OPEN', local / 'batch/open.json'), patch.object(bl, 'CLOSED', local / 'batch/closed'), \
-             patch.object(bl, 'PASSED', local / 'batch/passed'), patch.object(ld.li, 'LEAN', self.root / 'lean'), \
-             patch.object(ld, 'LOCAL', local), patch.object(ld, 'B', builds), patch.object(ld, 'REQUESTS', builds / 'requests'), \
-             patch.object(ld, 'DONE', builds / 'done'), patch.object(bl.md, 'merge_lock', lambda: contextlib.nullcontext()), \
-             patch.object(bl, 'refresh_recovery_queue'), patch.object(bl, 'reland_subset', land_subset), \
-             patch.dict(os.environ, {'SHEAF_ALERT_DIR': str(self.root / 'alerts')}):
-            ld.write_json(builds / 'last.json', {'time': '0', 'result': 'red', 'failing': ['Sheaf.A']})
-            bl.withdraw(b, 'failed take-out', lambda *x: logs.append(x))
-            for _ in range(8):
-                r = b['recovery']; ids = [e['landing'] for e in r.get('tested', [])]
-                text = (self.root / 'lean/Sheaf/A.lean').read_text()
-                put_result(ids, 'red' if '-- delivery 0\n' in text else 'green')
-                bl.recovery_step(b, lambda *x: logs.append(x))
-                if not (local / 'batch/open.json').exists(): break
-            else: self.fail('recovery did not close')
-        self.assertEqual(len(calls), 5)
-        self.assertEqual(sum(e['state'] == 'verified' for e in b['entries']), 7)
-        self.assertEqual(b['entries'][0]['state'], 'returned')
-        self.assertNotIn('-- delivery 0\n', (self.root / 'lean/Sheaf/A.lean').read_text())
-
     def test_transaction_conflict_writes_nothing(self):
         p = self.root / 'lean/Sheaf/A.lean'; p.write_text(p.read_text().replace('trivial', 'other'))
         self.commit('overlapping maintainer edit'); before = p.read_bytes()
@@ -156,16 +108,6 @@ class Repo(unittest.TestCase):
 
 
 class Logic(unittest.TestCase):
-    def test_eight_deliveries_one_bad_injected_build(self):
-        seen = []
-        def fake_build(group): seen.append(list(group)); return 0 not in group
-        good, bad, builds = br.replay_bisect(list(range(8)), fake_build)
-        self.assertEqual(bad, [0]); self.assertEqual(set(good), set(range(1, 8)))
-        self.assertEqual(builds, 5); self.assertEqual(len(seen), 5)
-    def test_bisection_every_position(self):
-        for bad in range(8):
-            good, found, builds = br.replay_bisect(list(range(8)), lambda group: bad not in group)
-            self.assertEqual(found, [bad]); self.assertEqual(builds, math.ceil(math.log2(8)) + 2)
     def test_reader_rules(self):
         old = 'module\npublic import Sheaf.B\npublic theorem a : True := by sorry\n'
         for addition in ('instance myInst : X := x\n', '@[simp] public theorem a : True := by trivial\n',
@@ -217,3 +159,127 @@ class ImportCycleTests(unittest.TestCase):
         import import_cycles as ic
         x='error: build cycle detected:\n  error: Sheaf/B.lean: bad import \'Sheaf.A\'\n'
         self.assertEqual(ic.log_cycles(x), [['Sheaf.B','Sheaf.A']])
+
+class SelectiveRecovery(Repo):
+    def run_batch(self, bad=(0,), own=False, deps=(), no_suspect=False, staged=False):
+        import contextlib, landing as ld
+        self.put('lean/Sheaf/Old.lean', 'module\nimport Sheaf.D0\npublic theorem old : True := by exact value0\n')
+        for i in range(30):
+            self.put(f'lean/Sheaf/D{i}.lean', f'module\npublic theorem value{i} : True := by sorry\n')
+        self.commit('pre-batch')
+        entries=[]
+        for i in range(30):
+            imports = 'import Sheaf.D0\n' if i in deps else ''
+            stmt = 'False' if i in bad else 'True'
+            self.put(f'lean/Sheaf/D{i}.lean', f'module\n{imports}public theorem value{i} : {stmt} := by trivial\n')
+            sha=self.commit('delivery '+str(i))
+            entries.append(dict(group='G', item=f'Sheaf.D{i}', head=sha, commit=sha, landing=f'L{i}',
+                                state='landed', modules=[f'Sheaf.D{i}'], kind='interface', reviewer='test', claim=None))
+        local=self.root/'local'; builds=local/'builds'
+        for d in ('requests','done','backup'): (builds/d).mkdir(parents=True)
+        for e in entries:
+            ld.write_json(builds/'requests'/f"{e['landing']}.json", dict(id=e['landing'],group='G',files=[
+                          dict(path=e['item'].replace('.', '/')+'.lean',module=e['item'])]))
+        b=dict(id='batch',time=ld.now(),round=0,handled=[],entries=entries)
+        logs=[]; calls=[]
+        with patch.object(bl,'ROOT',self.root), patch.object(bl.md,'ROOT',self.root), \
+             patch.object(bl,'BD',local/'batch'),patch.object(bl,'OPEN',local/'batch/open.json'), \
+             patch.object(bl,'CLOSED',local/'batch/closed'),patch.object(bl,'PASSED',local/'batch/passed'), \
+             patch.object(ld.li,'LEAN',self.root/'lean'),patch.object(ld,'LOCAL',local),patch.object(ld,'B',builds), \
+             patch.object(ld,'REQUESTS',builds/'requests'),patch.object(ld,'DONE',builds/'done'), \
+             patch.object(bl.md,'merge_lock',lambda: contextlib.nullcontext()),patch.object(bl,'refresh_recovery_queue'), \
+             patch.object(bl,'candidates',lambda cache: []), \
+             patch.dict(os.environ,{'SHEAF_ALERT_DIR':str(self.root/'alerts')}):
+            bl.write_json(bl.OPEN,b)
+            for n in range(5):
+                active=[e for e in bl.read_json(bl.OPEN)['entries'] if e['state']=='landed']
+                broken=[e for e in active if int(e['item'].split('D')[-1]) in bad]
+                if staged and n==0: broken=broken[:1]
+                fails = ([e['item'] for e in broken] if own else
+                         ['Sheaf.Old' if e['item']=='Sheaf.D0' else e['item'] for e in broken])
+                if no_suspect and n==0: fails=['Sheaf.Old']
+                result='red' if fails else 'green'; calls.append(result)
+                last=dict(time=str(n),result=result,included=[e['landing'] for e in active],failing=fails,
+                          errors=["Unknown identifier 'value0'"] if not no_suspect else ['unknown'], batch_checks=[])
+                ld.write_json(builds/'last.json',last)
+                if result=='green':
+                    for e in active:
+                        rec=ld.read_json(builds/'requests'/f"{e['landing']}.json")
+                        rec.update(result='verified',commit=self.g('rev-parse','HEAD'))
+                        ld.write_json(builds/'done'/f"{e['landing']}.json",rec)
+                bl.step({'_pre':type('Pre',(),{'pump':lambda *a:None})()},lambda *x:logs.append(x))
+                if not bl.OPEN.exists(): break
+                if no_suspect and n==0:
+                    self.assertTrue((self.root/'alerts/ALERT').exists())
+            else: self.fail('did not finish')
+            closed=bl.read_json(bl.CLOSED/'batch.json')
+        return closed,calls,logs
+
+    def test_older_importer_one_bad_of_thirty(self):
+        b,calls,_=self.run_batch()
+        self.assertEqual(calls,['red','green'])
+        self.assertEqual(sum(e['state']=='verified' for e in b['entries']),29)
+        self.assertEqual([e['item'] for e in b['entries'] if e['state']=='returned'],['Sheaf.D0'])
+        self.assertIn('your change of Sheaf.D0 broke its importer Sheaf.Old',
+                      (self.root/'coord/returns/G.md').read_text())
+
+    def test_failing_module_batch_writer(self):
+        b,calls,_=self.run_batch(own=True)
+        self.assertEqual(calls,['red','green']);self.assertEqual(b['entries'][0]['state'],'returned')
+
+    def test_two_independent_bad_deliveries(self):
+        b,calls,_=self.run_batch(bad=(0,5))
+        self.assertEqual(calls,['red','green'])
+        self.assertEqual(sum(e['state']=='returned' for e in b['entries']),2)
+        text=(self.root/'coord/returns/G.md').read_text()
+        self.assertIn('## Sheaf.D0',text);self.assertIn('## Sheaf.D5',text)
+
+    def test_bad_with_two_dependents(self):
+        b,calls,_=self.run_batch(deps=(1,2))
+        self.assertEqual(calls,['red','green'])
+        self.assertEqual([e['state'] for e in b['entries'][:3]],['returned','waiting','waiting'])
+        self.assertEqual(sum(e['state']=='verified' for e in b['entries']),27)
+        self.assertNotIn('## Sheaf.D1',(self.root/'coord/returns/G.md').read_text())
+
+    def test_no_suspect_alert_closure_touching_out_rest_lands(self):
+        b,calls,logs=self.run_batch(bad=(),no_suspect=True)
+        self.assertEqual(calls,['red','green'])
+        self.assertEqual(b['entries'][0]['state'],'waiting')
+        self.assertEqual(sum(e['state']=='verified' for e in b['entries']),29)
+        self.assertTrue(any('ALERT' in str(x) for x in logs))
+
+    def test_exact_declaration_preference(self):
+        entries=[dict(modules=['Sheaf.A']),dict(modules=['Sheaf.B'])]
+        graph={'Sheaf.Old':{'Sheaf.A','Sheaf.B'}}
+        selected=br.select(entries,['Sheaf.Old'],graph,lambda e,m:[m+'.value'],
+                           {'Sheaf.Old':"Unknown identifier 'Sheaf.B.value'"})
+        self.assertEqual(selected[0]['suspects'],[entries[1]])
+
+    def test_interface_additions_and_public_import(self):
+        old='module\npublic theorem a : True := by sorry\n'
+        self.assertIn('b',br.interface_delta(old,old+'public theorem b : True := by trivial\n'))
+        self.assertTrue(br.interface_delta(old,'public import Sheaf.B\n'+old))
+        self.assertEqual(br.interface_delta(old,old.replace('sorry','trivial')),[])
+
+class IncrementalGraph(Repo):
+    def test_cached_graph_updates_external_tip_without_rescan(self):
+        import import_cycles as ic
+        with patch.object(bl.md,'ROOT',self.root),patch.object(bl,'ROOT',self.root),patch.object(bl.li,'LEAN',self.root/'lean'), \
+             patch.object(ic,'graph',wraps=ic.graph) as scan:
+            pre=bl.Pre(); self.addCleanup(lambda: __import__('shutil').rmtree(pre.dir))
+            pre.snapshot()
+            self.put('lean/Sheaf/B.lean','module\nimport Sheaf.A\n');self.commit('external source edit')
+            graph=pre.snapshot()
+            self.assertEqual(graph['Sheaf.B'],{'Sheaf.A'})
+            self.assertEqual(scan.call_count,1)
+            self.assertEqual(ic.closing_cycle(graph,{'Sheaf.A':'module\nimport Sheaf.B\n'}),['Sheaf.A','Sheaf.B','Sheaf.A'])
+            self.assertTrue(pre.graph_file.exists())
+
+
+class RepeatedRed(SelectiveRecovery):
+    def test_second_red_removes_new_suspect_without_withdrawal(self):
+        b,calls,logs=self.run_batch(bad=(0,5),staged=True)
+        self.assertEqual(calls,['red','red','green'])
+        self.assertEqual(b['round'],2)
+        self.assertEqual(sum(e['state']=='returned' for e in b['entries']),2)
+        self.assertFalse(any('withdrawn' in str(x) for x in logs))

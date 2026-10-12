@@ -26,11 +26,13 @@ def main():
             'source_matches_prelanding': prepared[p] == old,
             'builds_after_takeout': 1, 'counterfactual_seconds': 16,
             'estimate_basis': 'final observed green reused compiled snapshot; actual restored source recompilation may take longer'}, indent=2))
-        p = r.inverse(d, [e['commit'] for e in b['entries']])
-        good, bad, builds = r.replay_bisect(b['entries'], lambda xs: not any(x['commit'].startswith('316464bcc') for x in xs))
-        print(json.dumps({'fallback_withdrawal_paths': len(p), 'one_bad_oracle_builds': builds,
-                          'oracle_bad': bad[0]['item'], 'minutes_at_60s_build_plus_15s_poll': round(builds * 75 / 60, 1),
-                          'warning': 'source-only oracle; no claim that replay compiles'}, indent=2))
+        import import_cycles as cycles
+        imports = cycles.graph(pathlib.Path(d) / 'lean')
+        deps = r.dependents(b['entries'], [e], imports)
+        print(json.dumps({'dependent_deliveries_waiting': [x['item'] for x in deps],
+                          'survivors': len(b['entries']) - 1 - len(deps),
+                          'one_bad_oracle_builds': 2,
+                          'warning': 'initial red plus survivor build; source-only oracle, no claim that replay compiles'}, indent=2))
 
 
 if __name__ == '__main__': main()
