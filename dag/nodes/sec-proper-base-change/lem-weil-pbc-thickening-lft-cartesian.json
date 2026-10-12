@@ -27,62 +27,53 @@
  ],
  "proof": [
   {
-   "text": "($f'$ locally of finite type $\\Rightarrow$ $f$ locally of finite type.) $f:X=S\\times_{S'}X'\\to S$ is the base change of $f'$ along $i_S:S\\to S'$ [def-pc-base-change], and the base change of a morphism locally of finite type is locally of finite type (Morphisms, Lemma 01T4) [lem-weil-pbc-lft-base-change]. It remains to prove the converse.",
+   "text": "If f' is locally of finite type, MorphismProperty.pullback_fst gives local finite type of pullback.fst i f' [lem-weil-pbc-lft-base-change, def-pc-fibre-product].",
    "uses": [
-    "def-pc-base-change",
-    "lem-weil-pbc-lft-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 09ZW, proof, first paragraph ('The properties ... are all stable under base change ... Morphisms, Lemma base-change-finite-type') and second paragraph ('The interesting direction ...')"
-   }
-  },
-  {
-   "text": "(Reduction to affines.) Let $p:X\\to X'$ and $q:X\\to S$ be the projections, so $f=q$ and $f'\\circ p=i_S\\circ f$. Let $U'=\\operatorname{Spec}A'\\subseteq S'$ be an affine open and $V'=\\operatorname{Spec}B'\\subseteq X'$ an affine open with $f'(V')\\subseteq U'$. Put $I=\\mathcal I(U')\\subseteq A'$, where $\\mathcal I$ is the ideal sheaf of $S\\subseteq S'$; then $U:=i_S^{-1}(U')$ is an open subscheme of $S$ and $U\\to U'$ is identified with $\\operatorname{Spec}(A'/I)\\to\\operatorname{Spec}A'$ [def-sbc-closed-immersion-ideal-sheaf], and $I^{n+1}=\\mathcal I^{n+1}(U')=0$ since $\\mathcal I^{n+1}=0$ [def-sbc-first-order-thickening, def-sbc-ideal-sheaf-powers]. Put $W:=p^{-1}(V')\\subseteq X$, an open subscheme. Since $i_S(f(W))=f'(p(W))\\subseteq U'$, we have $f(W)\\subseteq U$, i.e. $W\\subseteq q^{-1}(U)$, so $W=q^{-1}(U)\\cap p^{-1}(V')$; by the open-subscheme property of fibre products (Schemes, Lemma 01JR) [lem-weil-pbc-open-fibre-product] applied to the opens $U\\subseteq S$, $V'\\subseteq X'$, $U'\\subseteq S'$, the canonical morphism $U\\times_{U'}V'\\to X$ is an open immersion with image $W$, compatibly with the projections. By [lem-weil-pbc-fibre-product-affine-spectra] (Schemes, Lemma 01I4/01JQ) $U\\times_{U'}V'\\cong\\operatorname{Spec}(A'/I\\otimes_{A'}B')$, with the projection to $U$ being $\\operatorname{Spec}$ of $A'/I\\to A'/I\\otimes_{A'}B'$; and $A'/I\\otimes_{A'}B'\\cong B'/IB'$ via $\\bar a\\otimes b\\mapsto \\overline{ab}$ (right exactness of $-\\otimes_{A'}B'$ applied to $I\\to A'\\to A'/I\\to0$; elementary). Hence $W$ is an affine open of $X$, $W\\cong\\operatorname{Spec}(B'/IB')$, $f(W)\\subseteq U$, and the ring map $\\mathcal O_S(U)\\to\\mathcal O_X(W)$ induced by $f$ is the map $A/I\\to B'/IB'$ induced by $A'\\to B'$ (with $A/I$ meaning $A'/I$). This is the diagram of the source with exact rows $0\\to IB'\\to B'\\to B'/IB'\\to0$, $0\\to I\\to A'\\to A'/I\\to0$.",
-   "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-first-order-thickening",
-    "def-sbc-ideal-sheaf-powers",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-lft-base-change",
     "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 09ZW, proof, fourth paragraph ('Most of the proofs will use a reduction to the affine case. Let U' ⊂ S' be an affine open ... Then V' ∩ X = Spec(B'/IB') ...')"
-   }
+   "elementary": false
   },
   {
-   "text": "($f$ locally of finite type $\\Rightarrow$ $f'$ locally of finite type.) Assume $f$ is locally of finite type, and let $U'=\\operatorname{Spec}A'$, $V'=\\operatorname{Spec}B'$ be any affine opens of $S'$, $X'$ with $f'(V')\\subseteq U'$. With the notation of step 2, $U\\subseteq S$ and $W\\subseteq X$ are affine opens with $f(W)\\subseteq U$, so by Morphisms 01T2 ((1)$\\Rightarrow$(2)) [lem-weil-pbc-lft-affine-pairs] the ring map $A'/I\\to B'/IB'$ is of finite type. As $I^{n+1}=0$, the ring lemma [lem-weil-pbc-finite-type-lift-nilpotent] (Nakayama's lemma, Algebra 00DV, applied to $A'[x_1,\\dots,x_m]\\to B'$ lifting generators of $B'/IB'$) gives that $A'\\to B'=\\mathcal O_{S'}(U')\\to\\mathcal O_{X'}(V')$ is of finite type. Since $U'$, $V'$ were arbitrary, $f'$ is locally of finite type by 01T2 ((2)$\\Rightarrow$(1)) [lem-weil-pbc-lft-affine-pairs]. (The source first reduces, by induction on the order of the thickening along the filtration $S=S_1\\subseteq\\dots\\subseteq S_{n+1}=S'$, to $I^2=0$; this is not needed here, since the ring lemma, like Nakayama's lemma 00DV (11) on which it rests, holds for any nilpotent $I$.) With step 1: $f$ is locally of finite type iff $f'$ is.",
+   "text": "For the converse, obtain n, the closed-immersion hypothesis, and i.ker^(n+1)=bottom from the finite order thickening [def-sbc-first-order-thickening]. Fix arbitrary affine opens U in S' and V in X' with V contained in f' inverse image U. Put p=pullback.snd i f', q=pullback.fst i f', T=i inverse image U and W=p inverse image V. Both T and W are affine, since i and its base change p are closed immersions. The pullback equation and the containment give W contained in q inverse image T, hence W=p inverse image V intersect q inverse image T. The affine fibre-product calculation [lem-weil-pbc-fibre-product-affine-spectra], in the form packaged by Mathlib's isIso_pushoutSection_of_isAffineOpen and isIso_pushoutSection_iff (Morphisms/Flat.lean:234-254), gives a pushout of the four appLE maps on these opens. The map a=i.app U is surjective (Scheme.Hom.app_surjective); its kernel is I=i.ker.ideal(U) by Scheme.Hom.ker_apply [def-sbc-closed-immersion-ideal-sheaf]. The map c=q.appLE T W is of finite type by the affine-pairs criterion [lem-weil-pbc-lft-affine-pairs].",
    "uses": [
-    "lem-weil-pbc-lft-affine-pairs",
-    "lem-weil-pbc-finite-type-lift-nilpotent"
+    "def-sbc-first-order-thickening",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-lft-affine-pairs"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 09ZW, proof, third paragraph (induction on the order; bypassed, see the step) and 'The translation of (2) into algebra'; Morphisms, Lemma 01T2 (literature/stacks-project/morphisms.tex, label lemma-locally-finite-type-characterize)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "In this ring pushout, write b=f'.appLE U V and J=I.map b. The first isomorphism theorem identifies the target C of the surjective map a with A/I. Let e:A/I iso C and let r:A/I to B/J be the induced quotient map. The maps k=r composed with e inverse from C to B/J and l:B to B/J commute over A, as is checked on representatives. The pushout universal property gives t:D to B/J with c followed by t=k and d followed by t=l. Since l is surjective, t is surjective. Since c is of finite type, k is of finite type (RingHom.FiniteType.comp_surjective). Composing k with the surjective isomorphism e proves that r is of finite type. These are the completely proved private helpers quotient_finiteType_of_isPushout and finiteType_quotient_appLE_of_closed_baseChange; no explicit tensor-quotient isomorphism is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluating i.ker^(n+1)=bottom at the affine open U gives I^(n+1)=bottom, using Scheme.IdealSheafData.ideal_pow and ideal_bot [def-sbc-ideal-sheaf-powers]. Apply finiteType_of_quotient_finiteType_nilpotent to b, I, this nilpotence equality and the finite-type quotient map established above [lem-weil-pbc-finite-type-lift-nilpotent]. This proves finite type of f'.appLE on every affine pair, so LocallyOfFiniteType.mk gives local finite type of f' [lem-weil-pbc-lft-affine-pairs].",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-finite-type-lift-nilpotent",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
   "lem-weil-pbc-lft-base-change",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "def-sbc-first-order-thickening",
-  "def-sbc-ideal-sheaf-powers",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
   "def-pc-fibre-product",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-closed-immersion-ideal-sheaf",
   "lem-weil-pbc-lft-affine-pairs",
+  "def-sbc-ideal-sheaf-powers",
   "lem-weil-pbc-finite-type-lift-nilpotent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 09ZW (label lemma-thicken-property-morphisms-cartesian), proof: base change paragraph, reduction to affines, 'The translation of (2) into algebra'; the induction on the order is replaced by the nilpotent form of the ring lemma (Algebra 00DV (11))"
+  "place": "Stacks Tag 09ZW, part (2), base-change paragraph, affine reduction and finite-type ring translation. The affine ring calculation uses the pushout universal property and a surjection to B/IB, rather than constructing a tensor-quotient isomorphism. The existing nilpotent ring lemma handles all finite orders."
  },
  "mathlib_searches": [
   {
@@ -164,5 +155,15 @@
   "reviewer": "R-tlc",
   "group": "G1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-76846",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T144103-L-2092166",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem with its node, the proof with recorded dependencies, and the import removal with its change record; delivery and sole direct importer compile cleanly, and axioms match the reported existing sorry dependency."
  }
 }
