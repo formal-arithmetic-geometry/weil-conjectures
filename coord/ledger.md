@@ -7006,3 +7006,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/R1/Sheaf.AlgebraicGeometry.DerivedPullbackPreservesQCoh (stage 3; reviewer PASS; first push; landing 20261012T085326-L-34617 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:53 L: merged deliver/R1/Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence (stage 3; reviewer PASS; first push; landing 20261012T085326-L-34811 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/R1/Sheaf.RingTheory.AffineBasicSetsDisjointRefinement (stage 3; reviewer PASS; first push; landing 20261012T085327-L-34909 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/R1/Sheaf.RingTheory.SerreSkGoesUp (stage 3; reviewer PASS; first push; landing 20261012T085327-L-35004 (interface); batch 20261012T085205; modules 3; new nodes 2)
