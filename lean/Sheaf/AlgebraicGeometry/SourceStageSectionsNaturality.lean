@@ -6,6 +6,9 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+import Sheaf.AlgebraicGeometry.EtaleObjectSections
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import Sheaf.AlgebraicGeometry.ObjectSectionsNaturality
 
 /-! # Restriction of the underived stage sections comparison
 
@@ -22,6 +25,31 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem sectionsPullbackNat_app {Y Z : Scheme.{v}} (m : Y ⟶ Z)
+    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{v + 1}) :
+    (sectionsPullbackNat m).app F = globalSectionsUpperStarMap AddCommGrpCat.{v + 1} m F := by
+  let A := AddCommGrpCat.{v + 1}
+  let η := (upperStarLowerStarAdjunction A m).unit.app F
+  let K := (upperStar A m).obj F
+  let tZ := Sheaf.ΓNatIsoSheafSections Z.smallEtaleTopology A terminalIsTerminal
+  let tY := Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology A terminalIsTerminal
+  change (Sheaf.Γ Z.smallEtaleTopology A).map η ≫
+      (tZ.hom.app ((lowerStar A m).obj K) ≫
+        K.obj.map (PreservesTerminal.iso m.Etale).inv.op ≫ tY.inv.app K) =
+    tZ.hom.app F ≫ η.hom.app (op (⊤_ Z.Etale)) ≫
+      K.obj.map (PreservesTerminal.iso m.Etale).inv.op ≫ tY.inv.app K
+  exact (reassoc_of% (tZ.hom.naturality η))
+    (K.obj.map (PreservesTerminal.iso m.Etale).inv.op ≫ tY.inv.app K)
+
+set_option maxRecDepth 2048 in
+set_option maxHeartbeats 800000 in
+-- Unfolding the stage comparison and the complex components needs additional elaboration.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- The stage comparison intertwines restriction already at the chain level.
 Source: Stacks Project, Tag 03Q9, final paragraph, and Tag 03S2,
 etale restriction and its left adjoint.
@@ -71,6 +99,28 @@ theorem sourceStageSectionsIso_naturality {X S : Scheme.{v}} (f : X ⟶ S)
                 ((strictLocalNeighbourhoodProjection f s).app i)
                 ((Category.comp_id _).symm.trans
                   ((strictLocalNeighbourhoodProjection f s).naturality a).symm))
-              (.up ℤ)).inv.app M)) := by sorry
+              (.up ℤ)).inv.app M)) := by
+  apply HomologicalComplex.Hom.ext
+  funext k
+  let P := MorphismProperty.Over.pullback @Etale ⊤ f
+  let U := P.obj ((strictLocalNeighbourhoods s).obj i)
+  let V := P.obj ((strictLocalNeighbourhoods s).obj j)
+  let b := P.map ((strictLocalNeighbourhoods s).map a)
+  let A := AddCommGrpCat.{v + 1}
+  let e := (upperStarComp A b.left V.hom U.hom b.w.symm).app (M.X k)
+  let Γ := Sheaf.Γ U.left.smallEtaleTopology A
+  have hn := objectSections_naturality b (M.X k)
+  have h := congrArg (fun t ↦ t ≫ Γ.map e.inv) hn
+  change (M.X k).obj.map b.op ≫ (etaleObjectSectionsIso U).hom.app (M.X k) ≫
+      Γ.map e.hom ≫ Γ.map e.inv =
+    (etaleObjectSectionsIso V).hom.app (M.X k) ≫
+      globalSectionsUpperStarMap A b.left ((upperStar A V.hom).obj (M.X k)) ≫
+        Γ.map e.inv at h
+  erw [← Γ.map_comp e.hom e.inv, e.hom_inv_id, Γ.map_id, Category.comp_id] at h
+  change (M.X k).obj.map b.op ≫ (etaleObjectSectionsIso U).hom.app (M.X k) =
+    (etaleObjectSectionsIso V).hom.app (M.X k) ≫
+      (sectionsPullbackNat b.left).app ((upperStar A V.hom).obj (M.X k)) ≫ Γ.map e.inv
+  rw [sectionsPullbackNat_app]
+  exact h
 
 end AlgebraicGeometry.Etale

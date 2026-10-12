@@ -1,0 +1,97 @@
+{
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "status": "split",
+ "id": "lem-weil-pbc-object-sections-naturality",
+ "kind": "statement",
+ "title": "Naturality of object sections",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q9 and 03S2"
+ },
+ "statement": "For an etale arrow b : U → V over X and a sheaf F on the small etale site of X, the object sections comparison followed by restriction along the composition comparison equals the object sections comparison at V followed by globalSectionsUpperStarMap along b.left.",
+ "proof": [
+  {
+   "text": "Expand the explicit object-sections comparisons. Use naturality of the units of the upper/lower-star adjunctions and the coherence identity for upperStarComp. The remaining equality of arrows in the iterated pullback follows by pullback.hom_ext and the two defining projection formulas.",
+   "uses": [
+    "lem-weil-pbc-etale-object-sections-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-object-sections-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker decomposition of the source-stage naturality proof",
+  "document": "Stacks Project",
+  "place": "Tags 03Q9 and 03S2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ObjectSectionsNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ObjectSectionsNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.objectSections_naturality",
+  "statement": "theorem objectSections_naturality {X : Scheme.{v}} {U V : X.Etale} (b : U ⟶ V) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1}) : F.obj.map b.op ≫ (etaleObjectSectionsIso U).hom.app F ≫ (Sheaf.Γ U.left.smallEtaleTopology AddCommGrpCat.{v + 1}).map ((upperStarComp AddCommGrpCat.{v + 1} b.left V.hom U.hom b.w.symm).hom.app F) = (etaleObjectSectionsIso V).hom.app F ≫ globalSectionsUpperStarMap AddCommGrpCat.{v + 1} b.left ((upperStar AddCommGrpCat.{v + 1} V.hom).obj F)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SourceStageSectionsNaturality",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-source-stage-sections-naturality",
+   "place": "pointwise comparison after identity-etale evaluation"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of sheaf sections under etale morphism adjunction units",
+   "results": "No exact match; project-specific comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; project-specific comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.comp_unit_app",
+   "results": "One related hit: Adjunction.comp_unit_app.",
+   "date": "2026-10-13",
+   "verdict": "Used for the unit coherence calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarComp_hom_app_unit_app|pullback.hom_ext",
+   "results": "Found project coherence lemma and pullback extensionality.",
+   "date": "2026-10-13",
+   "verdict": "Found the project coherence lemma and pullback extensionality."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T223422-L-1642649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T223422-L-1642649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
