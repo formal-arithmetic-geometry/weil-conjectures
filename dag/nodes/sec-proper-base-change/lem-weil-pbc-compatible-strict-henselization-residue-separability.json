@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-compatible-strict-henselization-residue-separability",
  "kind": "statement",
  "title": "Separability of compatible strict-henselization residue elements",
- "statement": "Under the hypotheses of lem-weil-pbc-compatible-strict-henselization-residue-polynomial and an algebra structure on the second residue field over k′, every image of a first residue-field element in k′ is separable over the second residue field.",
+ "statement": "Under the hypotheses of lem-weil-pbc-compatible-strict-henselization-residue-polynomial and an algebra structure from the second residue field to k′ whose algebraMap equals the embedding induced by ρB, every image of a first residue-field element in k′ is separable over the second residue field.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 04HX and 095T, residue-field comparison"
@@ -12,22 +12,30 @@
  ],
  "proof": [
   {
-   "text": "Transport the pointed-neighbourhood and residue-triple colimit descriptions through eA and eB; the resulting residue extension is separable, and compatibility hι, hρA and hρB identifies the displayed image with that extension element.",
+   "text": "Use the single-model residue comparison for A to obtain s, f:κ(s)→κA, separability, and a factorization of its closed-point structural morphism.",
    "uses": [
-    "lem-weil-pbc-etale-local-ring-triples",
-    "lem-weil-pbc-strict-henselization-triples"
+    "lem-weil-pbc-strict-henselization-residue-separable-model"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose the factorization with ι and ρA; rewrite with hρA, hι and hρB. The resulting field point agrees with ρB followed by the second closed-point structural morphism and g. Apply SpecToEquivOfField, transport along the equality of image points, and cancel the monomorphism fromSpecResidueField s to construct c:κ(s)→κB with a∘f=b∘c. This is the proved private lemma residue_factorization_descends.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Install the algebra structures from f, a∘f, and c. The compatibility equation and hAlgebra give IsScalarTower κ(s) κB k′. Apply IsSeparable.map to the injective κ(s)-algebra map a, then IsSeparable.tower_top to enlarge the base to κB.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-local-ring-triples",
-  "lem-weil-pbc-strict-henselization-triples"
+  "lem-weil-pbc-strict-henselization-residue-separable-model"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04HX and 095T"
+  "document": "https://stacks.math.columbia.edu/tag/095T",
+  "place": "Residue-field comparison; single-model identification from Tag 04HX, assembled with Mathlib residue and separability APIs"
  },
  "mathlib_searches": [
   {
@@ -78,7 +86,7 @@
   "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueSeparability",
   "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationResidueSeparability.lean",
   "declaration": "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_isSeparable",
-  "statement": "theorem Etale.compatibleStrictHenselization_residue_isSeparable\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]\n    [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    [Algebra (IsLocalRing.ResidueField B) k'] :\n    ∀ x : IsLocalRing.ResidueField A,\n      IsSeparable (IsLocalRing.ResidueField B)\n        ((Spec.preimage (ι ≫ ρA)).hom x)",
+  "statement": "theorem Etale.compatibleStrictHenselization_residue_isSeparable\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]\n    [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    [Algebra (IsLocalRing.ResidueField B) k']\n    (hAlgebra : algebraMap (IsLocalRing.ResidueField B) k' = (Spec.preimage ρB).hom) :\n    ∀ x : IsLocalRing.ResidueField A,\n      IsSeparable (IsLocalRing.ResidueField B)\n        ((Spec.preimage (ι ≫ ρA)).hom x)",
   "branch": "sheaf-dag",
   "by": "J3",
   "date": "2026-10-13"
@@ -96,17 +104,36 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-cd39b",
-  "group": "K2",
+  "reviewer": "X-c863d",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T194121-L-458212",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module and report match the packet/node; no target or signatures changed, the disputed counterexample compiles, and lcompile.py --all succeeds cleanly.",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_isSeparable"
+  "landing": "20261012T225257-L-1800483",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and DAG/change/report records matched against the packet and clone; all delivered modules compiled, the original caller failed with the documented forced error, the adapted caller compiled, signatures and imports were verified, and permitted axioms were confirmed."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "B3 stage 2",
+  "old_statement": "Under the hypotheses of lem-weil-pbc-compatible-strict-henselization-residue-polynomial and an algebra structure on the second residue field over k′, every image of a first residue-field element in k′ is separable over the second residue field.",
+  "what": "Require the algebraMap to equal (Spec.preimage ρB).hom. The original arbitrary instance permitted a different base embedding, so was false. The only caller already installs precisely the required algebra and supplies rfl; its statement is unchanged. This correction restores the field embedding used in the source.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/095T",
+   "place": "Final residue-field inclusion, with the geometric embeddings of Tag 04HX"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Transport the pointed-neighbourhood and residue-triple colimit descriptions through eA and eB; the resulting residue extension is separable, and compatibility hι, hρA and hρB identifies the displayed image with that extension element.",
+    "uses": [
+     "lem-weil-pbc-etale-local-ring-triples",
+     "lem-weil-pbc-strict-henselization-triples"
+    ],
+    "elementary": false
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_isSeparable"
+  "old_proof_deps": [
+   "lem-weil-pbc-etale-local-ring-triples",
+   "lem-weil-pbc-strict-henselization-triples"
   ]
  }
 }

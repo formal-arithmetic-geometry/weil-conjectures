@@ -72,7 +72,7 @@ theorem Etale.compatibleStrictHenselization_residue_separable_polynomial
   let algebra : Algebra (IsLocalRing.ResidueField B) k' :=
     (Spec.preimage ρB).hom.toAlgebra
   have hs := Etale.compatibleStrictHenselization_residue_isSeparable
-    σ τ ι hι ν eA eB ρA ρB hρA hρB
+    σ τ ι hι ν eA eB ρA ρB hρA hρB rfl
   intro x
   exact @exists_separable_polynomial_of_isSeparable _ _ _ _ algebra
     (Spec.preimage ρB).hom rfl _ (hs x)

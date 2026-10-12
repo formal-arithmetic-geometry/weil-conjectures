@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-residue-separable-model",
+ "kind": "statement",
+ "title": "Separable residue extension of a strict-henselization model",
+ "statement": "Let S be a scheme, z:Spec Ω→S a geometric point, A a henselian local ring, and e:Spec A≅strictHenselizationScheme(z). There exist s∈S and a ring homomorphism f:κ(s)→κA such that every element of κA is separable over κ(s) via f and Spec(f) followed by the canonical map Spec κ(s)→S equals the residue closed-point map Spec κA→Spec A followed by e and the strict-henselization structural morphism. The scheme, geometric point, residue field and strict-henselization maps are those of the statement dependencies.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/04HX",
+  "place": "Lemma 59.33.1, proof; Algebra Tag 04GP, property (5)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-residue-field",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply strictHenselizationResidue with the geometric residue-field algebra structure. Obtain a local coordinate colimit, its residue equivalence with the relative separable closure K in Ω, and the pointed structural factorization.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse-image ring isomorphism of e.inv. Compose it with the coordinate colimit residue surjection to K; surjectivity and IsLocalRing.ker_eq_maximalIdeal give a residue-field equivalence σA:κA≃K. Let d be σA followed by inclusion into Ω. Transport the pointed factorization to Spec(d) followed by q, the closed-point structural morphism of A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "SpecToEquivOfField applied to q gives its image point and its residue embedding. The factorization through Spec(d) shows that this image is s=z(closedPoint Ω). Transport the embedding to f:κ(s)→κA. Cancellation of the canonical monomorphism fromSpecResidueField gives d∘f equal to the geometric embedding of κ(s) in Ω.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every σA(x) lies in K, so d(x) is separable over κ(s) by mem_separableClosure_iff. Regard d as a κ(s)-algebra homomorphism via d∘f. Apply IsSeparable.of_algHom to descend separability to x.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/04HX",
+  "place": "Transport of existing strictHenselizationResidue (clause (1) of the functoriality node) across an affine local model; Mathlib field-point and separability APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The residue field of a strict henselization is separable over the original residue field",
+   "results": "Service returned Internal Server Error; search unavailable.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue field of a strict henselization model is separable over the residue field of the base point",
+   "results": "Found finite-type formally unramified residue-field instances, not the filtered-colimit model comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSeparable",
+   "results": "IsSeparable.map and tower_top handle the assembly, not the geometric model identification.",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*[Ss]epar|[Ss]epar.*strictHenselization",
+   "results": "No Mathlib match. Repository search found the current compatible separability theorem, polynomial theorem, and triples theorems; none states the single-model residue comparison.",
+   "date": "2026-10-13",
+   "verdict": "new single-model comparison needed"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*[Ss]epar|[Ss]epar.*residue|[Hh]ensel.*[Ii]so|[Ii]so.*[Hh]ensel",
+   "results": "Second reading found strictHenselizationResidue in Sheaf.Paper.StrictHenselizationFunctoriality; used its pointed identification and proved model transport, eliminating the new hole.",
+   "date": "2026-10-13",
+   "verdict": "existing single-model colimit comparison used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueSeparability",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Arbitrary-base residue comparison: identification of the first strict-henselization residue field with the separable algebraic closure of the base point residue field, before the residue-field inclusion",
+   "via": [
+    "lem-weil-pbc-compatible-strict-henselization-residue-separability",
+    "lem-weil-pbc-compatible-strict-henselization-residue-polynomial",
+    "lem-weil-pbc-compatible-strict-henselization-residue-image",
+    "compatible-strict-henselization-residue-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationResidueSeparableModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationResidueSeparableModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_residue_separable_model",
+  "statement": "theorem strictHenselization_residue_separable_model\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]\n    [HenselianLocalRing A]\n    (z : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictHenselizationScheme z) :\n    ∃ (s : S) (f : S.residueField s →+* IsLocalRing.ResidueField A),\n      (letI := f.toAlgebra; ∀ x : IsLocalRing.ResidueField A,\n        IsSeparable (S.residueField s) x) ∧\n      Spec.map (CommRingCat.ofHom f) ≫ S.fromSpecResidueField s =\n        Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ e.hom ≫\n          strictHenselizationStructuralMap z",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c863d",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T225257-L-1800483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c863d",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T225257-L-1800483",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and DAG/change/report records matched against the packet and clone; all delivered modules compiled, the original caller failed with the documented forced error, the adapted caller compiled, signatures and imports were verified, and permitted axioms were confirmed."
+ }
+}
