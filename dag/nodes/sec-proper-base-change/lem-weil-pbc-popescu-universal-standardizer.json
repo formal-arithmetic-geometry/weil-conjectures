@@ -1,0 +1,169 @@
+{
+ "id": "lem-weil-pbc-popescu-universal-standardizer",
+ "kind": "statement",
+ "title": "Universal polynomial standardizer and its improved presentation",
+ "statement": "Let k be a field, A a finitely presented commutative k-algebra, Λ any commutative k-algebra, d a natural number and N>0. Write S=k[x_0,...,x_(d-1)]. There exist s, generators a_j (j in Fin s) of singularIdeal k A, a commutative algebra B in Type(max u v) over k,A,S with compatible towers, and an A-presentation P on variables Fin d ⊕ (Fin d × Fin s) and relations Fin d. The first generators are the images of X_i under S→B, and the i-th relation is x_i^(2N)-sum_j z_ij a_j. There exist C₀ in Type(max u v), compatible k- and S-algebra structures, finite presentation over S, β₀:A→C₀ over k, ρ:C₀→B over S, and c>0 such that ρβ₀ equals the coefficient map A→B. For every commutative k-algebra R in Type u with compatible S→R→Λ structures and every S-algebra map h:B→Λ, put C=R⊗_S C₀ and γ the R-algebra tensor lift of hρ. Then popescuIdeal of h restricted to A is contained in popescuIdeal γ. For every x in R that is zero or the image of some X_i^c, its image in C is strictly standard over R. The notions of presentation, singular ideal, Popescu ideal, strict standardness and algebra tensor product are those of the cited statement dependencies.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ, items item-generators through item-strictly-standard and Ad item-first-solve"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-strictly-standard-element",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "A is Noetherian because it is finitely presented over the field k. Choose finitely many generators a_j of H = singularIdeal k A. For any d and positive N, form the actual quotient B = A[x_i,z_ij]/(x_i^(2N)-sum_j z_ij a_j), and its quotient presentation P over A. The k[x]-structure sends X_i to the class of x_i. The presentation has exactly the displayed generator values and relations.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the a_j-open solve uniquely for z_ij as a_j^(-1)(x_i^(2N)-sum_(l≠j)z_il a_l). This gives a polynomial algebra over A_(a_j) after base change to k[x], hence a smooth k[x]-algebra. On each x_i-open, the a_j generate the unit ideal by the defining relation, so the smooth a_j-opens cover and B_(x_i) is smooth.",
+   "uses": [
+    "lem-weil-pbc-singular-ideal-localization-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-smooth-ring-map-local-on-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply improvement of presentation over S=k[x] to obtain the explicit conormal symmetric algebra C₀, its inclusion of B and its retraction ρ. Set β₀ to A→B→C₀. The retraction gives ρβ₀ equal to the coefficient map A→B. C₀ is finite type over the Noetherian ring S and hence finitely presented. Its smooth x_i-opens have finite free differentials. Take a common positive exponent c above the finitely many strict-standard bounds from 07EZ(e). For d=0 choose c=1. These actual finite polynomial quotients and symmetric algebras lie in Type(max u v).",
+   "uses": [
+    "lem-weil-pbc-improve-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-smooth-free-differentials-strictly-standard-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any compatible base change S→R, the smooth a_j-opens persist in C=R⊗_S C₀. Thus the image of H is contained in singularIdeal R C. Extend along the tensor lift of hρ and take radicals to obtain the displayed Popescu-ideal inclusion. Base change preserves finite presentation and strict standardness of x_i^c. Zero is strictly standard: choose any finite presentation and c=0 in the strict-standard definition, with all minor coefficients zero. Its lift lies in the relation ideal, so its product with each relation lies in its square.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-strictly-standard-base-change",
+    "def-weil-pbc-strictly-standard-element",
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-popescu-resolution",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-singular-ideal-localization-smooth",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-smooth-ring-map-local-on-cover",
+  "lem-weil-pbc-improve-presentation",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-strictly-standard-base-change",
+  "def-weil-pbc-strictly-standard-element",
+  "def-weil-pbc-popescu-resolution",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ, items item-generators through item-strictly-standard and Ad item-first-solve"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Polynomial standardizer quotient x_i powers sum z_ij a_j smooth free differentials retraction",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial quotient with relations x_i^(2N) = sum z_ij a_j has smooth localizations and admits a retract with free differentials",
+   "date": "2026-10-13",
+   "results": "Algebra.IsStandardSmooth, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth. These do not construct the simultaneous universal standardizer and retract.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "standardizer|EssentiallySmooth|geometricallyRegular in Mathlib; standardizer and 07FJ in lean/WeilConjectures and lean/Sheaf; whole-DAG standardizer search",
+   "date": "2026-10-13",
+   "results": "No Mathlib standardizer construction; the source library has no implementation. The parent global-preparation node is the only same construction, and is being decomposed.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuCharPPreparationGlobal",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07FJ, items item-generators through item-strictly-standard and Ad item-first-solve; construction in the approximation step of finite étale lifting",
+   "via": [
+    "lem-weil-pbc-popescu-char-p-preparation-global",
+    "popescu-char-p-preparation-core",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuUniversalStandardizer",
+  "file": "lean/Sheaf/RingTheory/PopescuUniversalStandardizer.lean",
+  "declaration": "Algebra.exists_popescu_universal_standardizer",
+  "statement": "theorem exists_popescu_universal_standardizer\n    {k : Type u} {A : Type v} {Λ : Type w}\n    [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]\n    [FinitePresentation k A] (d N : ℕ) (hN : 0 < N) :\n    let S := MvPolynomial (Fin d) k\n    ∃ (s : ℕ) (a : Fin s → A), Ideal.span (Set.range a) = singularIdeal k A ∧\n      ∃ (B : Type (max u v)) (_ : CommRing B) (_ : Algebra k B)\n        (_ : Algebra A B) (_ : IsScalarTower k A B)\n        (_ : Algebra S B) (_ : IsScalarTower k S B)\n        (P : Presentation A B (Fin d ⊕ (Fin d × Fin s)) (Fin d)),\n        (∀ i, P.val (Sum.inl i) = algebraMap S B (MvPolynomial.X i)) ∧\n        (∀ i : Fin d, P.relation i =\n          ((MvPolynomial.X (Sum.inl i) :\n            MvPolynomial (Fin d ⊕ (Fin d × Fin s)) A) ^ (2 * N) -\n            ∑ j : Fin s, MvPolynomial.X (Sum.inr (i, j)) * MvPolynomial.C (a j) :\n              MvPolynomial (Fin d ⊕ (Fin d × Fin s)) A)) ∧\n      ∃ (C₀ : Type (max u v)) (_ : CommRing C₀) (_ : Algebra k C₀)\n        (_ : Algebra S C₀) (_ : IsScalarTower k S C₀)\n        (_ : FinitePresentation S C₀)\n        (β₀ : A →ₐ[k] C₀) (ρ : C₀ →ₐ[S] B) (c : ℕ),\n        0 < c ∧ (ρ.restrictScalars k).comp β₀ = IsScalarTower.toAlgHom k A B ∧\n        ∀ (R : Type u) [CommRing R] [Algebra k R] [Algebra S R]\n          [IsScalarTower k S R] [Algebra R Λ] [IsScalarTower k R Λ]\n          [Algebra S Λ] [IsScalarTower S R Λ] [IsScalarTower k S Λ]\n          (h : B →ₐ[S] Λ),\n          let C := R ⊗[S] C₀\n          let γ := AlgHom.liftEquiv S R C₀ Λ (h.comp ρ)\n          popescuIdeal ((h.restrictScalars k).comp (IsScalarTower.toAlgHom k A B)) ≤\n              popescuIdeal γ ∧\n            ∀ x : R, (x = 0 ∨ ∃ i : Fin d,\n              x = algebraMap S R (MvPolynomial.X i ^ c)) →\n              IsStrictlyStandardElement (R := R) (algebraMap R C x)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T211612-L-1056327",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T211612-L-1056327",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

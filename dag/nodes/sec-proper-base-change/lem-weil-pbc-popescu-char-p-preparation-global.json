@@ -22,195 +22,47 @@
  ],
  "proof": [
   {
-   "text": "Use the supplied positive exponent N and containment m_L^N⊆HΛ_q. Choose finite generators of H because A is a finite-type algebra over the field k, hence Noetherian, and put d=dim Λ_q. The minimal-prime/radical step is not assumed or proved here.",
+   "text": "Set L=Λ_q and d=spanFinrank(m_L). Apply the universal-standardizer lemma at d,N to obtain generators a_j, the explicitly presented B, improved C₀, β₀, retraction ρ, positive c, and the universal base-change conclusions.",
    "uses": [
-    "def-weil-pbc-singular-ideal",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-popescu-universal-standardizer"
    ],
    "elementary": false
   },
   {
-   "text": "(Items item-standardizer, item-elkik, item-strictly-standard, item-set-n: the algebras $B$, $C$ and the integers $c$, $e$, $n$.) Let $B=A[x_1,\\dots,x_d,z_{ij}]/(x_i^{2N}-\\sum_{j=1}^tz_{ij}a_j)_{i=1,\\dots,d}$ ($i\\le d$, $j\\le t$), a $k[x_1,\\dots,x_d]$-algebra of finite presentation (finitely many variables and relations over the finitely presented $k$-algebra $A$). (a) For each $j$, $A_{a_j}$ is smooth over $k$ [lem-weil-pbc-singular-ideal-localization-smooth]. In $B_{a_j}$ the $i$-th relation reads $z_{ij}=a_j^{-1}(x_i^{2N}-\\sum_{l\\ne j}z_{il}a_l)$, so $B_{a_j}\\cong A_{a_j}[x_1,\\dots,x_d][z_{il}:l\\ne j]$ as $k[x]$-algebras (the map sending $z_{il}\\mapsto z_{il}$ for $l\\ne j$ and inverse sending $z_{ij}$ to that expression), i.e. a polynomial algebra over $A_{a_j}\\otimes_kk[x]$; this is smooth over $k[x]$ by base change of $k\\to A_{a_j}$ along $k\\to k[x]$, the smoothness of polynomial algebras and composition [lem-weil-pbc-smooth-ring-map-base-change-composition] [lem-weil-pbc-polynomial-ring-smooth]. (b) In $B$, $x_i^{2N}\\in(a_1,\\dots,a_t)B$, so $a_1,\\dots,a_t$ generate the unit ideal of $B_{x_i}$, and $(B_{x_i})_{a_j}=(B_{a_j})_{x_i}$ is smooth over $k[x]$ [lem-weil-pbc-smooth-ring-map-principal-localization]; hence $B_{x_i}$ is smooth over $k[x]$ [lem-weil-pbc-smooth-ring-map-local-on-cover]. (c) Apply [lem-weil-pbc-improve-presentation] to the $k[x]$-algebra $B$: we get a $B$-algebra $C$ of finite type with a $B$-algebra retraction $\\rho:C\\to B$ such that $C_{x_i}$ and $C_{a_j}$ (by (b), (a)) are smooth over $k[x]$ with free modules of differentials. $C$ is of finite type over the Noetherian ring $k[x]$ [lem-weil-pbc-finite-type-algebra-noetherian], hence of finite presentation [lem-weil-pbc-finite-type-noetherian-finite-presentation]. By [lem-weil-pbc-smooth-free-differentials-strictly-standard-power] there is $c\\ge1$ such that $x_1^c,\\dots,x_d^c$ are strictly standard in $C$ over $k[x]$ [def-weil-pbc-strictly-standard-element] (take $c$ at least each of the $d$ bounds $e_0$). Put $e=8c$ and $n=N+de$. (Stacks sets $n=N+dc$; the justification of item (item-sixth-resolve) needs $\\mathfrak p^nk[y]_{\\mathfrak p}\\subset(\\pi_1^e,\\dots,\\pi_d^e)$ for a regular system of parameters $\\pi_1,\\dots,\\pi_d$, i.e. $n\\ge d(e-1)+1$, which $N+dc$ does not give when $e=8c$; $n=N+de$ satisfies $n\\ge N$ and $n\\ge d(e-1)+1$, and nothing else in the proof bounds $n$, so this corrects a misprint.) Let $\\bar\\Lambda=\\Lambda_{\\mathfrak q}/\\mathfrak q^n\\Lambda_{\\mathfrak q}$ and $E\\subset\\bar\\Lambda$ the images of finitely many $k$-algebra generators of $A$.",
+   "text": "Apply the compatible-parameter-solution lemma to this B and its actual presentation P, with c. Obtain R,η,π, n,I₀,K and the polynomial Artinian solution E with θ:B→E and b:E→L/K. Its hypotheses on generators and relations come from the first lemma, not from any assumed presentation of C₀.",
    "uses": [
-    "lem-weil-pbc-singular-ideal-localization-smooth",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "lem-weil-pbc-smooth-ring-map-local-on-cover",
-    "lem-weil-pbc-improve-presentation",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
-    "def-weil-pbc-strictly-standard-element"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ (lemma-resolve-general), items (item-standardizer), (item-elkik), (item-strictly-standard), (item-set-n), (item-set-E) and 'Ad (item-strictly-standard)', lines 2695-2716 and 2860-2871"
-   }
-  },
-  {
-   "text": "(Item item-NP: the solution modulo $\\mathfrak q^n$.) By [lem-weil-pbc-popescu-solution-modulo] (applicable: $k$ of characteristic $p$, $\\Lambda$ Noetherian and geometrically regular, $n$ and $E$ as in Step 2) there are $m\\ge0$, a $k$-algebra map $\\varphi:k[y_1,\\dots,y_m]\\to\\Lambda$, with $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ and $P_0=k[y_1,\\dots,y_m]_{\\mathfrak p}$, such that $\\mathfrak p\\Lambda_{\\mathfrak q}=\\mathfrak q\\Lambda_{\\mathfrak q}$, $P_0\\to\\Lambda_{\\mathfrak q}$ is flat, and a factorization $P_0/\\mathfrak p^nP_0\\to D\\to\\bar\\Lambda$ by local homomorphisms of local Artinian rings with the first arrow essentially smooth [def-weil-pbc-essentially-smooth-ring-map], the second flat, and $E$ contained in the image of $D$. The flat local map $D\\to\\bar\\Lambda$ is faithfully flat [lem-weil-pbc-flat-local-hom-faithfully-flat], hence injective [lem-weil-pbc-faithfully-flat-ideal-contraction] (case $I=0$); we identify $D$ with its image, a $k$-subalgebra of $\\bar\\Lambda$. Since $D$ contains the images of generators of $A$, the map $A\\to\\bar\\Lambda$ takes values in $D$; in particular $a_1,\\dots,a_t\\in D$.",
-   "uses": [
-    "lem-weil-pbc-popescu-solution-modulo",
-    "def-weil-pbc-essentially-smooth-ring-map",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ (lemma-resolve-general), item (item-NP) and 'Ad (item-NP)', lines 2717-2733 and 2873"
-   }
-  },
-  {
-   "text": "(Item item-choose-pii: the parameters $\\pi_i$.) The field $k$ is a regular ring [lem-weil-pbc-field-regular-ring] and $k\\to k[y_1,\\dots,y_m]$ is smooth [lem-weil-pbc-polynomial-ring-smooth], so $k[y]$ is a regular ring [lem-weil-pbc-regular-ring-smooth-ascent] and $P_0$ is a regular local ring [def-weil-regular-scheme]. Apply [lem-weil-pbc-flat-height-formula] to the flat map $P_0\\to\\Lambda_{\\mathfrak q}$ of Noetherian rings ($k[y]$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian], localizations of Noetherian rings are Noetherian [lem-weil-pbc-localization-noetherian]) and the maximal ideal $\\mathfrak q\\Lambda_{\\mathfrak q}$, which lies over $\\mathfrak pP_0$ (Step 3: $\\mathfrak q\\Lambda_{\\mathfrak q}=\\mathfrak p\\Lambda_{\\mathfrak q}$): the prime $\\mathfrak q\\Lambda_{\\mathfrak q}/\\mathfrak p\\Lambda_{\\mathfrak q}$ is the zero ideal of the field $\\Lambda_{\\mathfrak q}/\\mathfrak q\\Lambda_{\\mathfrak q}$, of height $0$, so $d=\\dim\\Lambda_{\\mathfrak q}=\\dim P_0$ [def-weil-pbc-localization-at-prime]. As $P_0$ is regular of dimension $d$, $\\mathfrak pP_0$ is generated by $d$ elements; multiplying them by units of $P_0$ we may take them as images of $\\pi_1,\\dots,\\pi_d\\in\\mathfrak p$. Their images generate $\\mathfrak pP_0\\Lambda_{\\mathfrak q}=\\mathfrak q\\Lambda_{\\mathfrak q}$, so $\\Lambda_{\\mathfrak q}$, a Noetherian local ring of dimension $d$ whose maximal ideal is generated by $d$ elements, is a regular local ring [def-weil-regular-scheme] with regular system of parameters $\\pi_1,\\dots,\\pi_d$. (Stacks writes 'pi_1,...,pi_d in Lambda which map to a regular system of parameters in Lambda_q'; the elements are taken in $k[y]$, as item (item-choose-pii) says.)",
-   "uses": [
-    "lem-weil-pbc-field-regular-ring",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-regular-ring-smooth-ascent",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-flat-height-formula",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ (lemma-resolve-general), item (item-choose-pii) and 'Ad (item-choose-pii)', lines 2734-2737 and 2875-2882 (Algebra, Lemma 00ON)"
-   }
-  },
-  {
-   "text": "(Items item-set-R, item-modify-pii: the ring $R$ and the annihilator conditions in $R$.) Let $R=k[y_1,\\dots,y_m,t_1,\\dots,t_d]$ (Stacks writes $t_1,\\dots,t_m$ in item (item-set-R), a misprint for $t_d$ as in item (item-set-map-R)), $\\gamma_i=\\pi_it_i$, $S_0=k[y]\\setminus\\mathfrak p$, so $S_0^{-1}R=P_0[t_1,\\dots,t_d]$. Each permutation of $\\pi_1,\\dots,\\pi_d$ generates $\\mathfrak pP_0$ and so is a regular sequence in $P_0$ [lem-weil-pbc-regular-local-generators-regular-sequence] [def-weil-pbc-regular-sequence]; the $\\pi_i$ lie in the maximal ideal, so by [lem-weil-pbc-regular-sequence-polynomial-variables] $\\gamma_1,\\dots,\\gamma_d$ is a regular sequence in $S_0^{-1}R$. Both facts persist when the $\\pi_i$ are multiplied by elements of $S_0$ (units of $P_0$). We modify $\\pi_1,\\dots,\\pi_d$ one at a time so that for $i=1,\\dots,d$: $\\operatorname{Ann}_{M_i}(\\gamma_i)=\\operatorname{Ann}_{M_i}(\\gamma_i^2)$, $M_i=R/(\\gamma_1^e,\\dots,\\gamma_{i-1}^e)R$. Suppose this holds for $i\\le t_0$. By [lem-weil-pbc-regular-sequence-powers] (exponents $e,\\dots,e,1$), $\\gamma_1^e,\\dots,\\gamma_{t_0}^e,\\gamma_{t_0+1}$ is a regular sequence in $S_0^{-1}R$, so $\\gamma_{t_0+1}$ is a nonzerodivisor on $S_0^{-1}M_{t_0+1}=S_0^{-1}R/(\\gamma_1^e,\\dots,\\gamma_{t_0}^e)$ and $\\operatorname{Ker}(\\gamma_{t_0+1})=0=\\operatorname{Ker}(\\gamma_{t_0+1}^2)$ there. $R$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian] and $M_{t_0+1}$ is a finite $R$-module, so [lem-weil-pbc-ogoma] gives $s\\in S_0$ with $\\operatorname{Ann}_{M_{t_0+1}}(s\\gamma_{t_0+1})=\\operatorname{Ann}_{M_{t_0+1}}((s\\gamma_{t_0+1})^2)$ (its case $n=1$). Replace $\\pi_{t_0+1}$ by $s\\pi_{t_0+1}$ (still in $\\mathfrak p$; $\\gamma_{t_0+1}$ becomes $s\\gamma_{t_0+1}$); the conditions for $i\\le t_0$ involve only $\\gamma_1,\\dots,\\gamma_{t_0}$ and are unchanged. Induction on $t_0$ gives the conditions for all $i\\le d$; Step 4 still holds for the modified $\\pi_i$.",
-   "uses": [
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-regular-sequence-polynomial-variables",
-    "lem-weil-pbc-regular-sequence-powers",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-ogoma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ (lemma-resolve-general), items (item-set-R), (item-modify-pii) and 'Ad (item-modify-pii)', lines 2738-2747 and 2884-2918 (Algebra, Lemmas 00NQ, 07DW, 07DV; Lemma 07FC)"
-   }
-  },
-  {
-   "text": "(Item item-choose-deltai: the units $\\delta_i$, the elements $\\lambda_{ij}$ and the enlarged $D'$.) We show by induction on $t_0\\in\\{0,\\dots,d\\}$: there are $\\delta_1,\\dots,\\delta_{t_0}\\in S_\\Lambda$, $\\lambda_{ij}\\in\\Lambda$ ($i\\le t_0$) and a factorization $D\\to D'\\to\\bar\\Lambda$ by local homomorphisms of local Artinian rings, $D\\to D'$ essentially smooth, $D'\\to\\bar\\Lambda$ flat, such that with $\\pi'_i=\\delta_i\\pi_i$: (a) $(\\pi'_i)^{2N}=\\sum_ja_j\\lambda_{ij}$ in $\\Lambda$ and the image of $\\lambda_{ij}$ in $\\bar\\Lambda$ lies in $D'$; (b) $\\operatorname{Ann}_{\\Lambda/({\\pi'_1}^e,\\dots,{\\pi'_{i-1}}^e)}(\\pi'_i)=\\operatorname{Ann}_{\\Lambda/({\\pi'_1}^e,\\dots,{\\pi'_{i-1}}^e)}({\\pi'_i}^2)$; (c) the image of $\\delta_i$ in $\\bar\\Lambda$ lies in $D'$. For $t_0=0$ take $D'=D$ ($D\\to D$ is smooth, so essentially smooth). Throughout, $P_0/\\mathfrak p^nP_0\\to D'$ is essentially smooth [lem-weil-pbc-essentially-smooth-composition], so [lem-weil-pbc-popescu-enlarge-solution-modulo] applies to $D'$ in place of $D$, and each enlargement $D'\\to D''$ is again essentially smooth over $D$ [lem-weil-pbc-essentially-smooth-composition], keeps (a)-(c) for the earlier indices (the image only grows), and $D''\\to\\bar\\Lambda$ is flat local, hence faithfully flat [lem-weil-pbc-flat-local-hom-faithfully-flat] and injective [lem-weil-pbc-faithfully-flat-ideal-contraction]; we identify $D''$ with its image. Inductive step, $\\pi=\\pi_{t_0+1}$: $\\pi^N\\in\\mathfrak q^N\\Lambda_{\\mathfrak q}\\subset H\\Lambda_{\\mathfrak q}$ (Step 1), so in $\\bar\\Lambda$, $\\pi^N\\in(a_1,\\dots,a_t)\\bar\\Lambda$; $\\pi$ and the $a_j$ lie in $D'$ (Step 3), so $\\pi^N\\in(a_1,\\dots,a_t)\\bar\\Lambda\\cap D'=(a_1,\\dots,a_t)D'$ [lem-weil-pbc-faithfully-flat-ideal-contraction]: $\\pi^N=\\sum_ja_jd_j$, $d_j\\in D'$. Lift $d_j$ to $c_j\\in\\Lambda_{\\mathfrak q}$; then $\\varepsilon=\\pi^N-\\sum c_ja_j\\in\\mathfrak q^n\\Lambda_{\\mathfrak q}=\\mathfrak q^{n-N}\\mathfrak q^N\\Lambda_{\\mathfrak q}\\subset\\mathfrak q^{n-N}H\\Lambda_{\\mathfrak q}$, so $\\varepsilon=\\sum a_jc'_j$ with $c'_j\\in\\mathfrak q^{n-N}\\Lambda_{\\mathfrak q}$, and $\\pi^{2N}=\\sum_jw_ja_j$ with $w_j=\\pi^N(c_j+c'_j)$, where $\\pi^Nc'_j\\in\\mathfrak q^n\\Lambda_{\\mathfrak q}$ maps to $0$ in $\\bar\\Lambda$ (the 'key observation' of Stacks). (The detail Stacks omits:) write $w_j=u_j/s_0$ with $u_j\\in\\Lambda$, $s_0\\in S_\\Lambda$; then $s_0\\pi^{2N}-\\sum u_ja_j$ is $0$ in $\\Lambda_{\\mathfrak q}$, so $s_1(s_0\\pi^{2N}-\\sum u_ja_j)=0$ in $\\Lambda$ for some $s_1\\in S_\\Lambda$; with $s=s_0s_1$ and $\\mu_j=s^{2N-1}s_1u_j$ we get $(s\\pi)^{2N}=\\sum_j\\mu_ja_j$ in $\\Lambda$ and $\\mu_j/s^{2N}=w_j$. Enlarge $D'$ by [lem-weil-pbc-popescu-enlarge-solution-modulo] with $\\lambda=s$ so that some $s^{q_1}\\in D'$, and replace $s$ by $s^{q_1}$ and $\\mu_j$ by $s^{2N(q_1-1)}\\mu_j$ (both equations persist); now $s\\in D'$ and the image of $\\mu_j$ in $\\bar\\Lambda$ is $s^{2N}\\pi^Nd_j\\in D'$ (Stacks writes $s^{2N}d_j$). Next, $\\pi_1,\\dots,\\pi_d$ is a regular sequence in the regular local ring $\\Lambda_{\\mathfrak q}$ (Step 4, [lem-weil-pbc-regular-local-generators-regular-sequence]); multiplying its terms by the units $\\delta_1,\\dots,\\delta_{t_0},s$ of $\\Lambda_{\\mathfrak q}$ keeps it regular (the ideals $(f_1,\\dots,f_{i-1})$ and the nonzerodivisor conditions are unchanged) [def-weil-pbc-regular-sequence], and by [lem-weil-pbc-regular-sequence-powers] ${\\pi'_1}^e,\\dots,{\\pi'_{t_0}}^e,s\\pi$ is a regular sequence in $S_\\Lambda^{-1}\\Lambda$. So on $M=\\Lambda/({\\pi'_1}^e,\\dots,{\\pi'_{t_0}}^e)$, a finite module over the Noetherian ring $\\Lambda$, multiplication by $s\\pi$ is injective on $S_\\Lambda^{-1}M$, whence $\\operatorname{Ker}(s\\pi)=\\operatorname{Ker}((s\\pi)^2)$ on $S_\\Lambda^{-1}M$, and [lem-weil-pbc-ogoma] gives $s'\\in S_\\Lambda$ with $\\operatorname{Ann}_M((s')^qs\\pi)=\\operatorname{Ann}_M(((s')^qs\\pi)^2)$ for every $q>0$. By [lem-weil-pbc-popescu-enlarge-solution-modulo] with $\\lambda=s'$ choose $q$ and enlarge $D'$ so that $(s')^q\\in D'$. Set $\\delta_{t_0+1}=(s')^qs$ and $\\lambda_{t_0+1,j}=(s')^{2Nq}\\mu_j$: then $(\\pi'_{t_0+1})^{2N}=(s')^{2Nq}(s\\pi)^{2N}=\\sum_ja_j\\lambda_{t_0+1,j}$ with $\\lambda_{t_0+1,j}\\mapsto(s')^{2Nq}s^{2N}\\pi^Nd_j\\in D'$, which is (a); (b) is the choice of $s'$; (c) holds as $s,(s')^q\\in D'$.",
-   "uses": [
-    "lem-weil-pbc-essentially-smooth-composition",
-    "lem-weil-pbc-popescu-enlarge-solution-modulo",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-regular-sequence-powers",
-    "lem-weil-pbc-ogoma",
-    "def-weil-pbc-essentially-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FJ (lemma-resolve-general), item (item-choose-deltai) and 'Ad (item-choose-deltai)', lines 2748-2766 and 2920-2996 (Algebra, Lemmas 05CK, 00NQ, 07DV; Lemmas 07FC, 07FI)"
-   }
-  },
-  {
-   "text": "7. Distinguish the algebra C_old from step 2 from the final algebra C. Map B to Λ by the original map α on A, x_i to δ_iπ_i and z_ij to λ_ij; step 6 verifies its relations. Compose with the retraction C_old→B. Map k[x]→R by x_i↦π_it_i and R→Λ by y_j↦φ(y_j), t_i↦δ_i. Set C=R⊗_(k[x])C_old, β the map A→B→C_old→C, and γ the tensor lift of these compatible maps. On A, γβ=α. The images of all a_j have smooth principal localizations over R by base change of the opens from step 2; hence the extended singular ideal of A over k lies in the singular ideal of C over R after extension to Λ. Taking radicals gives popescuIdeal α≤popescuIdeal γ. Finite presentation follows by base change. Choose the lifting parameters (π_it_i)^c. Strict standardness survives base change. If multiplication by x and x^2 have the same kernel, induct on j to see that every positive power has this kernel; apply this to the annihilator equalities from steps 5 and 6. Thus the displayed eighth-power lifting hypotheses hold.",
-   "uses": [
-    "def-weil-pbc-popescu-resolution",
-    "def-weil-pbc-singular-ideal",
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "lem-weil-pbc-strictly-standard-base-change",
-    "def-weil-pbc-strictly-standard-element",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+    "lem-weil-pbc-popescu-parameter-solution"
    ],
    "elementary": false
   },
   {
-   "text": "Work before taking the final eighth-power quotient. Write Q=R_r and L=Λ_q, r=q∩R. The t_i map to units δ_i of L, hence t_i are units in Q. Thus JQ is generated by π_i^e, e=8c. The modified π_i still generate the maximal ideal of the original polynomial localization P_0; their images generate the maximal ideal of L. The pigeonhole bound gives m_L^(d(e-1)+1)⊆JL and p_0^(d(e-1)+1)Q⊆JQ. With n=N+de>0 these containments also hold for n-th powers. Set I=p_0^n Q and K=m_L^n. Then I⊆JQ, K⊆JL, and IL⊆K because p_0L=m_L. These are actual power and ideal-containment witnesses, not a consequence of the annihilator conditions.",
+   "text": "Construct C=R⊗_S C₀, β=(C₀→C)β₀, and γ the R-algebra tensor lift of ηρ. Finite presentation follows by base change. On x∈A, γβ(x)=ηρβ₀(x)=η(A→B)(x)=α(x), using the two supplied coefficient-map equalities. Specialize the universal base-change conclusion to R,η to obtain the Popescu-ideal inclusion. Each π_i is zero or an image of X_j^c, so its image in C is strictly standard. The nonempty parameter count is r=d+1.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-regular-local-generators-regular-sequence"
+    "lem-weil-pbc-popescu-universal-standardizer",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
-   }
+   "elementary": true
   },
   {
-   "text": "Retain E=D'[t] before localizing at q∩R, with t=d, I₀=p₀^nR and K=m_L^n. The base (P₀/p₀^n)[t] is the localization of R/I₀ at the image of k[y]\\p₀; the localization map is essentially smooth directly from the definition using the smooth model R/I₀. D' is essentially smooth over P₀/p₀^n by composition, so E is essentially smooth over (P₀/p₀^n)[t] by essential-smooth base change, and hence over R/I₀ by composition. The images of the δ_i are units in D' because its map to L/K is local. Map C_old through its retraction to B, then send x_i to π_it_i and z_ij to bar(λ_ij)t_i^(2N)bar(δ_i)^(-2N). The equation (δ_iπ_i)^(2N)=Σ_j a_jλ_ij and injectivity of the faithfully flat map D'→L/K verify the defining relation in D'[t]. Tensor lifting gives a:C→E. Evaluation t_i↦δ_i followed by D'→L/K gives b:E→L/K. Their composite agrees with the canonical map on A,x_i,z_ij and on R; the quotient and tensor universal properties establish equality. Only R-algebra maps are asserted here, not maps over Q. The final base change to Q/I₀Q is done by the parent theorem.",
+   "text": "Retain n,I₀,K,t,D′ and the actual polynomial E from the coefficient solution. Construct a:C→E as the tensor lift of θρ. Both b a and the canonical C→Λ→L/K are R-algebra maps. By tensor-map extensionality it suffices to compare them on 1⊗x for x∈C₀. There the identity is bθρ(x)=ηρ(x) modulo K, exactly the supplied identity on B evaluated at ρ(x). This proves the required quotient factorization.",
    "uses": [
-    "def-weil-pbc-essentially-smooth-ring-map",
-    "lem-weil-pbc-essentially-smooth-composition",
-    "lem-weil-pbc-essentially-smooth-base-change",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+    "lem-weil-pbc-popescu-parameter-solution",
+    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Lemma 07FJ"
-   }
-  },
-  {
-   "text": "10. If d=0 pad the parameter list by a zero; otherwise padding by a final zero is harmless. Its annihilator equality is tautological, and it is strictly standard by choosing zero minor coefficients in any finite presentation. The eighth-power ideal is unchanged, as are Q,L,I,K and the global auxiliary factorization. In dimension zero m_L=0, so the positive power bound holds even when all parameters are zero. The constructed standardized algebra and the local Artinian solution D′ have representatives in Type(max u v). For the Artinian solutions supplied in a larger universe, essential smoothness expresses each as a localization of a smooth algebra over P_0/p_0^n. A smooth algebra is finitely presented, so its finite polynomial presentation gives a small representative; transport the multiplicative subset to it and localize. The polynomial algebra E=D′[t] has the same small universe. Tensor products, quotients and localizations of these small representatives remain small. Transport all structures and maps along the resulting algebra equivalences.",
-   "uses": [
-    "def-weil-pbc-strictly-standard-element",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-essentially-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-singular-ideal",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-singular-ideal-localization-smooth",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-smooth-ring-map-principal-localization",
-  "lem-weil-pbc-smooth-ring-map-local-on-cover",
-  "lem-weil-pbc-improve-presentation",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
-  "def-weil-pbc-strictly-standard-element",
-  "lem-weil-pbc-popescu-solution-modulo",
-  "def-weil-pbc-essentially-smooth-ring-map",
-  "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
-  "lem-weil-pbc-field-regular-ring",
-  "lem-weil-pbc-regular-ring-smooth-ascent",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-flat-height-formula",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-regular-sequence-polynomial-variables",
-  "lem-weil-pbc-regular-sequence-powers",
-  "lem-weil-pbc-ogoma",
-  "lem-weil-pbc-essentially-smooth-composition",
-  "lem-weil-pbc-popescu-enlarge-solution-modulo",
-  "def-weil-pbc-popescu-resolution",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "lem-weil-pbc-strictly-standard-base-change",
-  "lem-weil-pbc-essentially-smooth-base-change",
-  "lem-weil-pbc-localization-base-change",
-  "def-weil-pbc-finitely-presented-algebra"
+  "lem-weil-pbc-popescu-universal-standardizer",
+  "lem-weil-pbc-popescu-parameter-solution",
+  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
+  "lem-weil-pbc-finite-presentation-base-change-composition"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma 07FJ"
+  "place": "Lemma 07FJ, item-first-solve and item-eighth-resolve; tensor assembly from the two separately stated construction lemmas"
  },
  "mathlib_searches": [
   {
@@ -292,9 +144,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T173847-L-3301416",
+  "landing": "20261012T211612-L-1056327",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

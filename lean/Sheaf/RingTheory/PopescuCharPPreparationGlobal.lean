@@ -12,20 +12,8 @@ public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 
-import Sheaf.AlgebraicGeometry.Ogoma
-import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.EssentiallySmoothBaseChange
-import Sheaf.RingTheory.ImprovePresentation
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
-import Sheaf.RingTheory.PopescuSolutionModulo
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
-import Sheaf.RingTheory.SingularIdeal
-import Sheaf.RingTheory.SingularIdealLocalizationSmooth
-import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
-import Sheaf.RingTheory.StrictlyStandardBaseChange
+import Sheaf.RingTheory.PopescuUniversalStandardizer
+import Sheaf.RingTheory.PopescuParameterSolution
 
 /-!
 # Global auxiliary factorization in characteristic p
@@ -152,6 +140,79 @@ theorem exists_popescu_char_p_preparation_global
             ∃ (a : C →ₐ[R] E) (b : E →ₐ[R] L ⧸ K),
               b.comp a = (Ideal.Quotient.mkₐ R K).comp
                 ((IsScalarTower.toAlgHom R Λ L).comp γ) := by
-  sorry
+  let L := Localization.AtPrime q.asIdeal
+  let d := (IsLocalRing.maximalIdeal L).spanFinrank
+  obtain ⟨s, gens, hgens, B, hB, hkB, hAB, hkAB, hSB, hkSB, P, hval, hrel,
+    C₀, hC₀, hkC₀, hSC₀, hkSC₀, hfpC₀, β₀, ρ, c, hc, hρβ, hgeometry⟩ :=
+    exists_popescu_universal_standardizer (k := k) (A := A) (Λ := Λ) d N hN
+  let S := MvPolynomial (Fin d) k
+  let : CommRing B := hB
+  let : Algebra k B := hkB
+  let : Algebra A B := hAB
+  have : IsScalarTower k A B := hkAB
+  let : Algebra S B := hSB
+  have : IsScalarTower k S B := hkSB
+  let : CommRing C₀ := hC₀
+  let : Algebra k C₀ := hkC₀
+  let : Algebra S C₀ := hSC₀
+  have : IsScalarTower k S C₀ := hkSC₀
+  have : FinitePresentation S C₀ := hfpC₀
+  obtain ⟨m, hRΛ, hkRΛ, hSR, hkSR, hSΛ, hSRΛ, hkSΛ, η, π,
+    hη, hπ, hmem, hkerR, hkerΛ, hsolution⟩ :=
+    exists_popescu_parameter_solution p hp α q hreg N hN hpower d rfl
+      s gens hgens B P hval hrel c hc
+  let R := MvPolynomial (Fin m) k
+  let : Algebra R Λ := hRΛ
+  have : IsScalarTower k R Λ := hkRΛ
+  let : Algebra S R := hSR
+  have : IsScalarTower k S R := hkSR
+  let : Algebra S Λ := hSΛ
+  have : IsScalarTower S R Λ := hSRΛ
+  have : IsScalarTower k S Λ := hkSΛ
+  let C := R ⊗[S] C₀
+  let β : A →ₐ[k] C :=
+    (TensorProduct.includeRight.restrictScalars k).comp β₀
+  let γ : C →ₐ[R] Λ := AlgHom.liftEquiv S R C₀ Λ (η.comp ρ)
+  have hfactor : (γ.restrictScalars k).comp β = α := by
+    ext x
+    change γ (β x) = α x
+    have hβ : β x = 1 ⊗ₜ[S] β₀ x := rfl
+    rw [hβ]
+    change (AlgHom.liftEquiv S R C₀ Λ (η.comp ρ)) (1 ⊗ₜ[S] β₀ x) = α x
+    rw [AlgHom.liftEquiv_tmul]
+    simp only [one_smul, AlgHom.comp_apply]
+    have hρβx : ρ (β₀ x) = algebraMap A B x := AlgHom.congr_fun hρβ x
+    exact (congrArg η hρβx).trans (AlgHom.congr_fun hη x)
+  obtain ⟨hideal, hstandard⟩ := hgeometry R η
+  refine ⟨m, hRΛ, hkRΛ, C, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, β, γ, hfactor, ?_, d + 1, π,
+    Nat.le_add_left 1 d, hmem, hkerR, hkerΛ, ?_, ?_⟩
+  · simpa only [hη] using hideal
+  · intro i
+    exact hstandard (π i) (hπ i)
+  · dsimp only at hsolution ⊢
+    obtain ⟨n, hn, hnil, I₀, K, hI₀, hK, hIK, t, D', hD', hlocal, hart,
+      hRE, hquotE, htowerE, hSE, hSRE, hsmooth, θ, b, hθ⟩ := hsolution
+    let : CommRing D' := hD'
+    have : IsLocalRing D' := hlocal
+    have : IsArtinianRing D' := hart
+    let E := MvPolynomial (Fin t) D'
+    let : Algebra R E := hRE
+    let : Algebra (R ⧸ I₀) E := hquotE
+    have : IsScalarTower R (R ⧸ I₀) E := htowerE
+    let : Algebra S E := hSE
+    have : IsScalarTower S R E := hSRE
+    let a : C →ₐ[R] E := AlgHom.liftEquiv S R C₀ E (θ.comp ρ)
+    refine ⟨n, hn, hnil, I₀, K, hI₀, hK, hIK, t, D', hD', hlocal, hart,
+      hRE, hquotE, htowerE, hsmooth, a, b, ?_⟩
+    apply TensorProduct.ext_ring
+    ext x
+    simp only [a, γ, AlgHom.coe_comp, AlgHom.coe_restrictScalars',
+      Function.comp_apply, TensorProduct.includeRight_apply]
+    rw [AlgHom.liftEquiv_tmul, AlgHom.liftEquiv_tmul]
+    simp only [one_smul, AlgHom.comp_apply]
+    change b (θ (ρ x)) = _
+    exact AlgHom.congr_fun hθ (ρ x)
+
 
 end Algebra
