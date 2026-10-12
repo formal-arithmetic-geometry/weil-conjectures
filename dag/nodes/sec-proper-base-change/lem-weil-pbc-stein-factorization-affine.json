@@ -26,98 +26,64 @@
  ],
  "proof": [
   {
-   "text": "Write $S=\\operatorname{Spec}A$ and $S\\xleftarrow{s}S' = \\operatorname{Spec}B$ for the relative-spectrum factorization supplied by [def-weil-pbc-stein-factorization]. The preceding universal factorization lemma (Tag 03GY) applies because a proper morphism is universally closed and quasi-separated. It gives that $q:X\\to S'$ is universally closed, quasi-compact, quasi-separated and surjective, that $s$ is integral, and that $q_*\\mathcal O_X=\\mathcal O_{S'}$ with $S'=\\underline{\\operatorname{Spec}}_S(f_*\\mathcal O_X)$.",
+   "text": "For q = X.toSpecΓ and s = f.steinFactorizationBase, the adjunction identity q ≫ s = f is [def-weil-pbc-stein-factorization]. Since s has affine source and affine target, it is separated. Apply the exact Mathlib leaf [lem-weil-pbc-proper-over-separated], IsProper.of_comp, to conclude that q is proper. This replaces the longer universal-factorization and finite-type cancellation argument.",
    "uses": [
     "def-weil-pbc-stein-factorization",
-    "lem-weil-pbc-stein-universally-closed-factor"
+    "lem-weil-pbc-proper-over-separated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma 37.53.4 (Tag 03GY), lines 15087--15152; Theorem 37.53.5 setup, lines 15312--15320"
-   }
+   "elementary": false
   },
   {
-   "text": "The morphism $q$ is separated by cancellation from the separated proper composite $s\\circ q=f$ [lem-weil-pbc-separated-cancellation], and it is locally of finite type because $s\\circ q=f$ is locally of finite type and locally finite type is permanent under this composition [lem-weil-pbc-proper-fp-permanence]. Tag 03GY already gives that $q$ is universally closed. Combining universal closedness, separatedness and finite type is exactly properness, so $q$ is proper.",
-   "uses": [
-    "lem-weil-pbc-stein-universally-closed-factor",
-    "lem-weil-pbc-separated-cancellation",
-    "lem-weil-pbc-proper-fp-permanence",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Proof of Theorem 37.53.5 (Tag 03H2), lines 15312--15321; Morphisms Lemma 03GN (used in the preceding factorization proof)"
-   }
-  },
-  {
-   "text": "The universal factorization lemma already identifies $s$ as integral and $S'$ as $\\operatorname{Spec}H^0(X,\\mathcal O_X)$; over the affine base this is the induced integral ring map $A\\to B$. Equivalently, the exact Mathlib leaf [lem-weil-pbc-stein-integral-global-sections] applies via `AlgebraicGeometry.isIntegral_appTop_of_universallyClosed` at Proper.lean:138.",
+   "text": "The Mathlib leaf [lem-weil-pbc-stein-integral-global-sections] gives integrality of f.appTop. Precomposing with the inverse of the affine global-sections isomorphism preserves integrality (RingHom.isIntegral_respectsIso), giving the displayed map A → Γ(X, ⊤).",
    "uses": [
     "lem-weil-pbc-stein-integral-global-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Theorem 37.53.5 (Tag 03H2), clauses (2) and (4), line 15290"
-   }
+   "elementary": false
   },
   {
-   "text": "To prove geometric connectedness, replace the base by $S'$ using $q_*\\mathcal O_X=\\mathcal O_{S'}$ from Tag 03GY; since $S'=\\operatorname{Spec}B$ in the Stein factorization, the replaced situation has $H^0(X,\\mathcal O_X)=B$. For a point $s\\in S'$ apply the etale criterion Tag 03GZ: it suffices to check connectedness after every affine etale neighbourhood $(U,u)\\to(S',s)$. Properness is preserved by this base change [lem-weil-pbc-proper-fp-permanence]. Writing $U=\\operatorname{Spec}R'$, Tag 02KH (the proper special case of its quasi-compact quasi-separated flat-base-change lemma) gives $H^0(X_U,\\mathcal O_{X_U})=H^0(X,\\mathcal O_X)\\otimes_B R'=B\\otimes_B R'=R'$, so the fibre over $u$ is in the normalized situation of [lem-weil-pbc-stein-normalized-fibre-idempotent].",
+   "text": "The canonical map q.appTop is Scheme.ΓSpecIso Γ(X, ⊤).hom and hence an isomorphism. By [lem-weil-pbc-stein-geometric-fibre-etale-criterion], it suffices to prove connectedness of each fibre after an étale base change e : U → Spec Γ(X, ⊤). Choose an affine open neighbourhood j : Spec R → U of the point t and a point v with j(v)=t. The composite e′ = j ≫ e is flat. Properness of q implies that X is quasi-compact and quasi-separated; [lem-weil-pbc-flat-base-change-global-sections-qcqs], used through the already proved source declaration isPushout_appTop_of_flat, gives a pushout of global-section rings. Since q.appTop is invertible, the opposite pushout map p.appTop is invertible. Thus the canonical ring map R → Γ(X ×_{Spec Γ(X, ⊤)} Spec R, ⊤) is invertible. Properness of p follows by base change [lem-weil-pbc-proper-fp-permanence]. Apply [lem-weil-pbc-stein-normalized-fibre-idempotent] to conclude that p.fiber v is connected and nonempty.",
    "uses": [
-    "lem-weil-pbc-stein-universally-closed-factor",
     "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
-    "lem-weil-pbc-stein-flat-base-change-global-sections",
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-stein-normalized-fibre-idempotent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Proof of Theorem 37.53.5 (Tag 03H2), lines 15321--15334; Lemma 03GZ; Cohomology Lemma 02KH"
-   }
+   "elementary": false
   },
   {
-   "text": "The normalized affine situation is handled by the formal-functions/idempotent argument of Tag 03H2. The theorem on formal functions identifies the completed local ring at $s$ with the inverse limit of the global sections on the infinitesimal neighbourhoods $X_n$. A nontrivial idempotent on the fibre lifts compatibly through these neighbourhoods, producing a nontrivial idempotent in the completed local ring, which is impossible because that ring is local. The fibre is therefore connected and nonempty, by [lem-weil-pbc-stein-normalized-fibre-idempotent]. This proves that every geometric fibre of $q$ is connected.",
+   "text": "Pullback pasting makes the square from X × Spec R to X × U, over j : Spec R → U, Cartesian. The fibre pullback square from [def-pc-scheme-fibre] has lower map Spec of j.residueFieldMap v. An open immersion induces an isomorphism on residue fields; consequently the upper map between the two fibres is an isomorphism. Transport ConnectedSpace across its underlying homeomorphism and rewrite j(v)=t. This establishes every étale test and hence geometric connectedness of q. In Lean these are IsPullback.of_right, isPullback_fiberToSpecResidueField_of_isPullback, the open-immersion residue-field isomorphism instance, and IsPullback.isIso_fst_of_isIso.",
    "uses": [
-    "lem-weil-pbc-stein-normalized-fibre-idempotent"
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-stein-geometric-fibre-etale-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Proof of Theorem 37.53.5 (Tag 03H2), lines 15334--15357; Cohomology Lemma 02OD and Derived Categories Lemma 0G7X"
-   }
+   "elementary": true
   },
   {
-   "text": "Finally, [def-pc-scheme-fibre] identifies the underlying space of the scheme-theoretic fibre $X_t$ with the topological inverse image $q^{-1}(t)$ by a homeomorphism (Stacks Schemes Lemma 26.18.5, Tag 01K1). Hence connectedness and nonemptiness of $X_t$ give the final topological assertion.",
+   "text": "For geometrically connected q, Mathlib supplies ConnectedSpace (q.fiber t) and Scheme.Hom.isConnected_preimage_singleton q t. The latter transports connectedness and nonemptiness through q.fiberHomeo, exactly the homeomorphism of [def-pc-scheme-fibre].",
    "uses": [
     "def-pc-scheme-fibre",
     "def-weil-connected-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Theorem 37.53.5 (Tag 03H2), clause (1), together with Schemes Definition 26.18.2 and Lemma 26.18.5 (Tags 01K0, 01K1)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-scheme-fibre",
   "def-weil-connected-scheme",
   "def-weil-pbc-stein-factorization",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-stein-flat-base-change-global-sections",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated",
   "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
   "lem-weil-pbc-stein-integral-global-sections",
-  "lem-weil-pbc-stein-normalized-fibre-idempotent",
-  "lem-weil-pbc-stein-universally-closed-factor",
-  "lem-weil-pbc-separated-cancellation",
-  "lem-weil-pbc-proper-fp-permanence"
+  "lem-weil-pbc-stein-normalized-fibre-idempotent"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "B2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Theorem 37.53.5 (Tag 03H2), proof lines 15312--15357, using Lemma 03GY and Lemma 03GZ"
+  "place": "Theorem 37.53.5 (Tag 03H2), affine étale and normalized-fibre reductions; properness shortened using Morphisms Tag 01W6 (IsProper.of_comp), and degree-zero flat base change via the proved source isPushout_appTop_of_flat."
  },
  "mathlib_searches": [
   {
@@ -195,5 +161,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-94b16",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T150949-L-2229367",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged Lean signature with its node, proof with recorded dependencies, and import change with its users; delivery and both direct importers compile cleanly, and axioms are permitted apart from sorryAx from existing prerequisites."
  }
 }
