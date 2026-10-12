@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
+import Mathlib.Algebra.CharP.Algebra
 import Sheaf.RingTheory.CohenStructurePowerSeriesSurjection
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 
@@ -77,6 +78,94 @@ theorem cohen_power_series_presentation
           IsRegularSystemOfParameters
             (MvPowerSeries.C (p : Λ) :: List.ofFn (fun i : Fin n ↦
               (MvPowerSeries.X i : MvPowerSeries (Fin n) Λ))))) := by
-  sorry
+  classical
+  let p := ringChar (ResidueField A)
+  obtain ⟨n, Λ, hcomm, hzero, hpos, q, hq⟩ :=
+    cohen_structure_power_series_surjection A (maximalIdeal A).fg_of_isNoetherianRing p
+  let _ := hcomm
+  have hΛ : IsField Λ ∨ ∃ r : ℕ, IsCohenRing r Λ := by
+    by_cases hp : p = 0
+    · exact Or.inl (hzero hp).1
+    · exact Or.inr ⟨p, hpos (Nat.pos_of_ne_zero hp)⟩
+  rcases MvPowerSeries.power_series_field_cohen_regular_complete n hΛ with
+    ⟨hfield, hnoeth, hdomain, hlocal, hm, e, he, hcomplete, hregular, hdim⟩ |
+    ⟨r, hcohen, hnoeth, hdomain, hlocal, hm, e, he, hcomplete, hregular, hdim⟩
+  · let _ := hfield.toField
+    let _ := hnoeth
+    let _ := hdomain
+    let _ := hlocal
+    let _ := hregular
+    have hqLocal := IsLocalHom.of_surjective q hq
+    let f := ResidueField.map q
+    have hf : Function.Bijective f := by
+      refine ⟨f.injective, ?_⟩
+      intro a
+      obtain ⟨a, rfl⟩ := residue_surjective a
+      obtain ⟨b, rfl⟩ := hq a
+      exact ⟨residue _ b, rfl⟩
+    let eq := RingEquiv.ofBijective f hf
+    have heq (b) : eq (residue _ b) = residue A (q b) := rfl
+    let ec := ((RingEquiv.quotientBot Λ).symm.trans e).trans eq
+    have hec (a : Λ) : ec a = residue A (q (MvPowerSeries.C a)) := by
+      change eq (e (Ideal.Quotient.mk _ a)) = _
+      rw [he]
+      exact heq _
+    have hp : p = 0 := by
+      by_contra hp
+      obtain ⟨_, hd, hv, _, _⟩ := hpos (Nat.pos_of_ne_zero hp)
+      let _ := hd
+      let _ := hv
+      exact IsDiscreteValuationRing.not_isField Λ hfield
+    have hcharΛ := (hzero hp).2
+    have hchar : CharZero (ResidueField A) :=
+      charZero_of_injective_ringHom (f := ec.toRingHom) ec.injective
+    refine ⟨n, Λ, inferInstance, inferInstance, hregular, hcomplete,
+      q, hq, hqLocal, ⟨eq, heq⟩, Or.inl ?_⟩
+    refine ⟨hfield, hchar, ⟨ec, hec⟩, ?_, ?_⟩
+    · have hmap := map_maximalIdeal_of_surjective q hq
+      rw [hm, Ideal.map_span, ← Set.range_comp] at hmap
+      exact hmap
+    · constructor
+      · simpa only [List.mem_ofFn', Set.ofPred_mem_eq] using hm.symm
+      · simpa only [List.length_ofFn] using hdim.symm
+  · have hcohenCopy := hcohen
+    obtain ⟨hprime, hd, hv, _, _⟩ := hcohen
+    let _ := hd
+    let _ := hv
+    let _ := hnoeth
+    let _ := hdomain
+    let _ := hlocal
+    let _ := hregular
+    have hqLocal := IsLocalHom.of_surjective q hq
+    let f := ResidueField.map q
+    have hf : Function.Bijective f := by
+      refine ⟨f.injective, ?_⟩
+      intro a
+      obtain ⟨a, rfl⟩ := residue_surjective a
+      obtain ⟨b, rfl⟩ := hq a
+      exact ⟨residue _ b, rfl⟩
+    let eq := RingEquiv.ofBijective f hf
+    have heq (b) : eq (residue _ b) = residue A (q b) := rfl
+    let ec := e.trans eq
+    have hec (a : Λ) : ec (Ideal.Quotient.mk _ a) =
+        residue A (q (MvPowerSeries.C a)) := by
+      change eq (e (Ideal.Quotient.mk _ a)) = _
+      rw [he]
+      exact heq _
+    have hchar : CharP (ResidueField A) r := by
+      apply (CharP.charP_iff_prime_eq_zero hprime).mpr
+      have hr : Ideal.Quotient.mk (Ideal.span {(r : Λ)}) (r : Λ) = 0 :=
+        Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (Set.mem_singleton _))
+      simpa only [map_natCast, map_zero] using congrArg ec hr
+    refine ⟨n, Λ, inferInstance, inferInstance, hregular, hcomplete,
+      q, hq, hqLocal, ⟨eq, heq⟩, Or.inr ?_⟩
+    refine ⟨r, hchar, hcohenCopy, ⟨ec, hec⟩, ?_, ?_⟩
+    · have hmap := map_maximalIdeal_of_surjective q hq
+      rw [hm, Ideal.map_span, Set.image_insert_eq, ← Set.range_comp] at hmap
+      exact hmap
+    · constructor
+      · simpa only [List.mem_cons, List.mem_ofFn', Set.ofPred_or, Set.ofPred_eq_eq_singleton,
+          Set.singleton_union, Set.ofPred_mem_eq] using hm.symm
+      · simpa only [List.length_cons, List.length_ofFn] using hdim.symm
 
 end IsLocalRing

@@ -10036,3 +10036,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:08 L: merged deliver/W2/Sheaf.AlgebraicGeometry.FiniteFreeReverseComponentsLift (stage 3; reviewer PASS; first push; landing 20261012T230805-L-1911780 (interface); batch 20261012T230749; modules 4; new nodes 3)
 - 23:16 L: merged deliver/A4/Sheaf.AlgebraicGeometry.SheafZeroStalks (stage 3; reviewer PASS; first push; landing 20261012T231632-L-1961218 (proof); batch 20261012T231631; modules 1; new nodes 0)
 - 23:16 L: merged deliver/B2/Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison (stage 3; reviewer PASS; after a return; landing 20261012T231632-L-1961315 (interface); batch 20261012T231631; modules 3; new nodes 2)
+- 23:16 L: merged deliver/B4/Sheaf.RingTheory.CohenPowerSeriesPresentation (stage 3; reviewer PASS; first push; landing 20261012T231632-L-1961426 (proof); batch 20261012T231631; modules 1; new nodes 0)
