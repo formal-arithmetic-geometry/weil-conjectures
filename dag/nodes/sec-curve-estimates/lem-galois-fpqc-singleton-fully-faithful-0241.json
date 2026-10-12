@@ -26,58 +26,39 @@
  ],
  "proof": [
   {
-   "text": "Let $(V,\\varphi)$ and $(W,\\psi)$ be descent data over $X/S$, put $T=X'$, $V'=T\\times_XV$, $W'=T\\times_XW$, $\\varphi'=(r\\times r)^*\\varphi$, $\\psi'=(r\\times r)^*\\psi$, and let $\\beta:V'\\to W'$ be a morphism over $T$ with $\\psi'\\circ\\mathrm{pr}_0^*\\beta=\\mathrm{pr}_1^*\\beta\\circ\\varphi'$ over $T\\times_ST$. Let $j:T\\times_XT\\to T\\times_ST$ be the morphism induced by the identities of $T$ [def-pc-fibre-product], and $\\rho=r\\circ\\mathrm{pr}_0:T\\times_XT\\to X$. Then $\\mathrm{pr}_k\\circ j$ are the two projections of $T\\times_XT$, so $j^*\\mathrm{pr}_k^*\\beta=\\mathrm{pr}_k^*\\beta$ for $k=0,1$; and $(r\\times r)\\circ j=\\Delta\\circ\\rho$ with $\\Delta:X\\to X\\times_SX$ the diagonal, so $j^*\\varphi'=\\rho^*\\Delta^*\\varphi$ up to the canonical identifications of fibre products. By [lem-galois-descent-datum-diagonal-identity], $\\Delta^*\\varphi=\\mathrm{id}_V$ and $\\Delta^*\\psi=\\mathrm{id}_W$, so $j^*\\varphi'$ and $j^*\\psi'$ are the canonical isomorphisms $\\mathrm{can}_V$, $\\mathrm{can}_W$ of $V\\times_XT$, $W\\times_XT$ over $T\\times_XT$. Pulling the compatibility equation of $\\beta$ back along $j$ therefore gives $\\mathrm{can}_W\\circ\\mathrm{pr}_0^*\\beta=\\mathrm{pr}_1^*\\beta\\circ\\mathrm{can}_V$ over $T\\times_XT$, which is the overlap equation of [lem-galois-fpqc-morphisms-descend] for the base $X$ and the cover $\\{r:T\\to X\\}$ (identifying $T\\times_XV$ with $V\\times_XT$ by the symmetry of fibre products).",
+   "text": "Construct the pullback functor and projections using lem-galois-descent-pullback-construction.",
    "uses": [
-    "def-pd-descent-datum",
-    "def-pc-fibre-product",
-    "lem-galois-descent-datum-diagonal-identity"
+    "lem-galois-descent-pullback-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 0241, proof: compatibility of a morphism of pulled-back descent data on the double overlap"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-galois-fpqc-morphisms-descend] with base scheme $S=X$, fpqc singleton cover $\\{r:X'\\to X\\}$, and schemes $V,W$ over $X$. The overlap equality of Step 1 gives a unique morphism $\\alpha:V\\to W$ over $X$ whose pullback $\\mathrm{id}_{X'}\\times_X\\alpha$ is $\\beta$.",
+   "text": "For each compatible β use lem-galois-fpqc-descent-underlying-morphism to descend its underlying scheme map uniquely; lem-galois-fpqc-descent-morphism-compatibility gives the transport equation and hence a morphism of descent data. Choose these morphisms as preimage.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend",
-    "def-weil-pbc-fpqc-covering",
-    "def-pc-fibre-product"
+    "lem-galois-fpqc-descent-underlying-morphism",
+    "lem-galois-fpqc-descent-morphism-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 0241, proof via Lemma Tag 02W0 (fpqc descent of morphisms)"
-   }
+   "elementary": false
   },
   {
-   "text": "The morphism $\\alpha$ is a morphism of descent data, i.e. the two morphisms $\\psi\\circ\\mathrm{pr}_0^*\\alpha$ and $\\mathrm{pr}_1^*\\alpha\\circ\\varphi$ from $\\mathrm{pr}_0^*V$ to $\\mathrm{pr}_1^*W$ over $X_2=X\\times_SX$ agree. The morphism $r\\times r:T\\times_ST\\to X_2$ is the composite of $u=\\mathrm{id}_X\\times_Sr:X\\times_ST\\to X_2$ and $v=r\\times_S\\mathrm{id}_T:T\\times_ST\\to X\\times_ST$ [def-pc-fibre-product]. $u$ is the base change of $r$ along $\\mathrm{pr}_1:X_2\\to X$ and $v$ is the base change of $r$ along the first projection $X\\times_ST\\to X$, so $\\{u\\}$ and $\\{v\\}$ are fpqc coverings by [lem-galois-fpqc-covering-base-change] applied to the singleton covering $\\{r\\}$. Pulled back along $r\\times r$ (by functoriality of fibre products and the definitions of $\\varphi',\\psi'$, and since $\\mathrm{id}_T\\times_X\\alpha=\\beta$ by Step 2), the two morphisms become $\\psi'\\circ\\mathrm{pr}_0^*\\beta$ and $\\mathrm{pr}_1^*\\beta\\circ\\varphi'$, which are equal by the compatibility of $\\beta$. The injectivity clause of [lem-galois-fpqc-morphisms-descend], applied first with base $X\\times_ST$ and cover $\\{v\\}$ and then with base $X_2$ and cover $\\{u\\}$, shows that the two morphisms already agree over $X_2$. Hence every compatible $\\beta$ is the pullback of a morphism $\\alpha$ of descent data (fullness). Finally, if two morphisms $\\alpha,\\alpha'$ of descent data have $\\mathrm{id}_T\\times_X\\alpha=\\mathrm{id}_T\\times_X\\alpha'$, then $\\alpha=\\alpha'$ by the injectivity clause of [lem-galois-fpqc-morphisms-descend] with base $X$ and cover $\\{r\\}$ (faithfulness).",
+   "text": "The map of the chosen preimage is β by the joint-monic projections of the cartesian square: one equation is reconstruction followed by naturality, the other is the over-category condition. Uniqueness of the underlying descended map proves preimage(map(α))=α. These two equations construct FullyFaithful; package with the comparison data.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend",
-    "lem-galois-fpqc-covering-base-change",
-    "def-pd-descent-datum",
+    "lem-galois-fpqc-descent-underlying-morphism",
     "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 0241, conclusion (full faithfulness)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pd-descent-datum",
   "def-pc-fibre-product",
-  "lem-galois-descent-datum-diagonal-identity",
-  "lem-galois-fpqc-morphisms-descend",
-  "def-weil-pbc-fpqc-covering",
-  "lem-galois-fpqc-covering-base-change"
+  "lem-galois-descent-pullback-construction",
+  "lem-galois-fpqc-descent-morphism-compatibility",
+  "lem-galois-fpqc-descent-underlying-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Descent, Lemma Tag 0241 (lemma-fully-faithful), proof and conclusion"
+  "place": "023Y(1) and 0241; construction followed by unique underlying descent, compatibility, and inverse laws in Lean."
  },
  "mathlib_searches": [
   {
@@ -131,8 +112,6 @@
   "module": "Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful",
   "declaration": "CategoryTheory.fpqc_singleton_pullback_fullyFaithful",
   "declarations": [
-   "CategoryTheory.Over.DescentDataCategory",
-   "CategoryTheory.Over.DescentDataCategory.Hom",
    "CategoryTheory.fpqc_singleton_pullback_fullyFaithful"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/FpqcSingletonFullyFaithful.lean",
@@ -162,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e2404",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T070553-L-3478150",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, node records, report, and compiled Lean files match the stage-3 review requirements; target statement is byte-for-byte unchanged."
  }
 }

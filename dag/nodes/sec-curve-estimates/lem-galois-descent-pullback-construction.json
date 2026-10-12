@@ -1,0 +1,195 @@
+{
+ "id": "lem-galois-descent-pullback-construction",
+ "kind": "statement",
+ "title": "Construction of pullback on scheme descent data",
+ "statement": "Let S,X,X′ be schemes [def-pc-scheme], a:X→S and r:X′→X any morphisms. There is a functor F:DD(a)→DD(r≫a) [def-galois-scheme-descent-data-category] and projections q_A from the underlying scheme of F(A) to that of A. Every square with q_A, the two structure maps and r is a pullback [def-pc-fibre-product], its datum satisfies IsBaseChange [def-pd-descent-datum], and F maps morphisms to their pullbacks: F(f).hom.left≫q_B=q_A≫f.hom.left.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/023Y",
+  "place": "023Y(1), construction of the pullback functor"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pd-descent-datum",
+  "def-galois-scheme-descent-data-category",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For each object take its fibre product with X′ over X. Lift the transported original point and the new structure map to define transport. Projecting to both factors verifies naturality, self-transport, and the cocycle.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the usual fibre-product map on morphisms; compatibility, identity, composition, the cartesian square and the two comparison equations follow from the universal property and the original compatibility.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "023Y(1), construction of the pullback functor",
+  "note": "Transport-form details supplied from the cited argument. Second reading found the proved object-level construction AlgebraicGeometry.exists_canonical_pullback_descent_datum (lem-galois-fpqc-canonical-pullback-datum). Use it for the object datum when its module enters the last green build; the functor-on-morphisms extension remains part of this node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of scheme descent data along an fpqc morphism is fully faithful",
+   "results": {
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": []
+   },
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.FullyFaithful",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.FullyFaithful'",
+    "top": []
+   },
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic category APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "DescentData|FullyFaithful",
+   "results": {
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean",
+     "Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Pullback.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Basic.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Basic.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Basic.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Basic.lean"
+    ]
+   },
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic category APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "DescentDatum|IsBaseChange|EffectiveEpimorphic",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/LocalProperties/Projective.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+     "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean"
+    ]
+   },
+   "date": "2026-10-12",
+   "verdict": "Independent second reading: generic pseudofunctor descent and effective-epimorphism APIs do not supply the scheme transport statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme descent data pullback transport compatible morphism fpqc",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom_eq",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_hom",
+     "CategoryTheory.Pseudofunctor.DescentData.pullHom_hom",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorObj_obj",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctor_map_hom",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctor_obj",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorObjHom",
+     "CategoryTheory.Pseudofunctor.DescentData.pullFunctorIso_hom_app_hom"
+    ]
+   },
+   "date": "2026-10-12",
+   "verdict": "Independent second reading: generic pseudofunctor descent and effective-epimorphism APIs do not supply the scheme transport statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "EffectiveEpi.desc",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'EffectiveEpi.desc'",
+    "top": []
+   },
+   "date": "2026-10-12",
+   "verdict": "Independent second reading: generic pseudofunctor descent and effective-epimorphism APIs do not supply the scheme transport statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "Step 2 full-faithfulness input, Stacks 0241: 023Y(1), construction of the pullback functor",
+   "via": [
+    "lem-galois-fpqc-singleton-fully-faithful-0241"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DescentPullbackConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescentPullbackConstruction.lean",
+  "declaration": "CategoryTheory.descent_pullback_construction",
+  "statement": "theorem descent_pullback_construction {S X X' : Scheme.{u}} (a : X ⟶ S) (r : X' ⟶ X) : ∃ (F : Over.DescentDataCategory a ⥤ Over.DescentDataCategory (r ≫ a)) (q : ∀ A : Over.DescentDataCategory a, (F.obj A).V.left ⟶ A.V.left), (∀ A, ∃ hq : q A ≫ A.V.hom = (F.obj A).V.hom ≫ r, IsPullback (q A) (F.obj A).V.hom A.V.hom r ∧ Over.DescentDatum.IsBaseChange rfl hq A.datum (F.obj A).datum) ∧ ∀ A B (f : A ⟶ B), (F.map f).hom.left ≫ q B = q A ≫ f.hom.left",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e2404",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T070553-L-3478150",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e2404",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T070553-L-3478150",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery packet, node records, report, and compiled Lean files match the stage-3 review requirements; target statement is byte-for-byte unchanged."
+ }
+}

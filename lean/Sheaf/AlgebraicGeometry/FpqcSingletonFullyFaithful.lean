@@ -4,9 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
+public import Sheaf.AlgebraicGeometry.SchemeDescentDataCategory
+import Sheaf.AlgebraicGeometry.DescentPullbackConstruction
+import Sheaf.AlgebraicGeometry.FpqcDescentUnderlyingMorphism
+import Sheaf.AlgebraicGeometry.FpqcDescentMorphismCompatibility
 
 /-!
 # Fully faithful pullback of descent data along an fpqc singleton
@@ -29,56 +30,9 @@ Source: Stacks Project, Descent, Lemma 0241 (lemma-fully-faithful)
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits
-open AlgebraicGeometry
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace CategoryTheory
-
-namespace Over
-
-/-- Objects of the category of descent data relative to `X/S`, in the transport form of
-`Over.DescentDatum`. Source: Stacks Project, Descent, Definition 35.34.1 (Tag 023V)
-(blueprint: lem-galois-fpqc-singleton-fully-faithful-0241). -/
-structure DescentDataCategory {S X : Scheme.{u}} (a : X ⟶ S) where
-  V : Over X
-  datum : DescentDatum a V
-
-namespace DescentDataCategory
-
-variable {S X : Scheme.{u}} {a : X ⟶ S}
-
-/-- Morphisms over `X` compatible with the two descent data. Source: Stacks Project,
-Descent, Definition 35.34.1 (3) (Tag 023V)
-(blueprint: lem-galois-fpqc-singleton-fully-faithful-0241). -/
-@[ext]
-structure Hom (A B : DescentDataCategory a) where
-  hom : A.V ⟶ B.V
-  commutes : ∀ {T : Scheme.{u}} (f₀ f₁ : T ⟶ X) (h : f₀ ≫ a = f₁ ≫ a)
-    (z : Over.mk f₀ ⟶ A.V),
-    B.datum.transport f₀ f₁ h (z ≫ hom) =
-      A.datum.transport f₀ f₁ h z ≫ hom
-
-instance : Category (DescentDataCategory a) where
-  Hom := Hom
-  id A :=
-    { hom := 𝟙 A.V
-      commutes := by
-        intro T f₀ f₁ h z
-        simp only [Category.comp_id] }
-  comp := fun {A B C} f g =>
-    { hom := f.hom ≫ g.hom
-      commutes := by
-        intro T i j h z
-        change C.datum.transport i j h ((z ≫ f.hom) ≫ g.hom) =
-          (A.datum.transport i j h z ≫ f.hom) ≫ g.hom
-        rw [g.commutes, f.commutes] }
-  id_comp := by intros; rfl
-  comp_id := by intros; rfl
-  assoc := by intros; rfl
-
-end DescentDataCategory
-
-end Over
 
 /--
 Let `a : X ⟶ S` be a morphism of schemes and let `r : X' ⟶ X` be a singleton
@@ -111,6 +65,29 @@ theorem fpqc_singleton_pullback_fullyFaithful
         IsPullback (q A) (F.obj A).V.hom A.V.hom r ∧
         Over.DescentDatum.IsBaseChange rfl hq A.datum (F.obj A).datum) ∧
       ∀ A B (f : A ⟶ B), (F.map f).hom.left ≫ q B = q A ≫ f.hom.left := by
-  sorry
+  classical
+  obtain ⟨F, q, hq, hn⟩ := descent_pullback_construction a r
+  have lift_exists (A B : Over.DescentDataCategory a) (β : F.obj A ⟶ F.obj B) :
+      ∃ α : A ⟶ B, q A ≫ α.hom.left = β.hom.left ≫ q B := by
+    obtain ⟨α, hα, _⟩ := fpqc_descent_underlying_morphism a r hr F q hq A B β
+    exact ⟨⟨α, fpqc_descent_morphism_compatibility a r hr F q hq A B β α hα⟩, hα⟩
+  let preimage {A B : Over.DescentDataCategory a} (β : F.obj A ⟶ F.obj B) : A ⟶ B :=
+    (lift_exists A B β).choose
+  have preimage_eq {A B : Over.DescentDataCategory a} (β : F.obj A ⟶ F.obj B) :
+      q A ≫ (preimage β).hom.left = β.hom.left ≫ q B :=
+    (lift_exists A B β).choose_spec
+  refine ⟨F, q, ⟨{ preimage := preimage, map_preimage := ?_, preimage_map := ?_ }⟩,
+    hq, hn⟩
+  · intro A B β
+    apply Over.DescentDataCategory.Hom.ext
+    apply Over.OverMorphism.ext
+    obtain ⟨h, hp, _⟩ := hq B
+    apply hp.hom_ext
+    · simpa only [hn] using (preimage_eq β)
+    · exact (Over.w _).trans (Over.w _).symm
+  · intro A B α
+    obtain ⟨γ, hγ, hu⟩ := fpqc_descent_underlying_morphism a r hr F q hq A B (F.map α)
+    apply Over.DescentDataCategory.Hom.ext
+    exact (hu _ (preimage_eq (F.map α))).trans (hu _ (hn A B α).symm).symm
 
 end CategoryTheory
