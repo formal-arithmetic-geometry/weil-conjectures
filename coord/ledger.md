@@ -8582,7 +8582,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/U3/Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare (stage 3; reviewer PASS; first push; landing 20261012T163622-L-2788292 (interface); batch 20261012T163610; modules 4; new nodes 3; change records: coord/changes/U3-canonical-single-compatibilities.md)
 - 16:36 L: merged deliver/V2/Sheaf.ConstructibleSheaf.TorsorInvariantSections (stage 3; reviewer PASS; first push; landing 20261012T163622-L-2788394 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: merged deliver/V3/Sheaf.AlgebraicGeometry.FixedPullbackDegreeZeroDescent (stage 3; reviewer PASS; first push; landing 20261012T163623-L-2788500 (interface); batch 20261012T163610; modules 2; new nodes 1)
-- 16:36 L: merged deliver/W2/Sheaf.AlgebraicGeometry.DerivedSingleHomEvaluation (stage 3; reviewer PASS; first push; landing 20261012T163623-L-2788602 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: merged deliver/W2/Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology (stage 3; reviewer PASS; first push; landing 20261012T163623-L-2788701 (proof); batch 20261012T163610; modules 1; new nodes 2)
 - 16:36 L: merged deliver/X2/Sheaf.AlgebraicGeometry.EtaleLimitAffineDegreeZeroKernel (stage 3; reviewer PASS; first push; landing 20261012T163624-L-2788805 (interface); batch 20261012T163610; modules 2; new nodes 1)
 - 16:36 L: merged deliver/X2/Sheaf.AlgebraicGeometry.FieldFibreHomology (stage 3; reviewer PASS; first push; landing 20261012T163624-L-2788903 (proof); batch 20261012T163610; modules 1; new nodes 0)
@@ -8593,3 +8592,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:45 L: returned deliver/W3/Sheaf.AlgebraicGeometry.EtaleZariskiAbelianPositiveComparison (reviewer RETURN: (reviewer X-4d2b7, head 4d2b7d7d3) F (report accuracy; review points 5 and 7): In coord/reports/W3/Sheaf.AlgebraicGeomet)
 - 16:46 L: returned deliver/S3/Sheaf.RingTheory.PopescuSeparablePreparationCore (reviewer RETURN: (reviewer X-cc535, head cc535c0b1) F: In coord/reports/S3/Sheaf.RingTheory.PopescuSeparablePreparationCore.md, lines 33–)
 - 16:49 L: returned deliver/K3/Sheaf.AlgebraicGeometry.DualTensorHomComparison (reviewer RETURN: (reviewer X-2be2b, head 2be2b75ba) D1/D2 — Relabelling, not decomposition (brief §4): dualTensorHom_transpose restates t)
+
+- 00:52 L: batch 20261012T163610 dependency take-out
