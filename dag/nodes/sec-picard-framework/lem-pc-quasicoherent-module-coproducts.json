@@ -1,0 +1,102 @@
+{
+ "id": "lem-pc-quasicoherent-module-coproducts",
+ "kind": "statement",
+ "title": "Arbitrary coproducts of quasi-coherent scheme modules",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $I$ be any set, and let $(\\mathcal F_i)_{i\\in I}$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. If every $\\mathcal F_i$ is quasi-coherent [pqf-def-coherent], their coproduct $\\bigoplus_{i\\in I}\\mathcal F_i$ in the category of all sheaves of $\\mathcal O_X$-modules is quasi-coherent. This includes an empty family.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Section 01LA (section-quasi-coherence), item (3); also the final sentence of Lemma 08DT in perfect.tex."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "This is the already proved source-library theorem AlgebraicGeometry.Scheme.Modules.isQuasicoherent_sigma, WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean, lines 313-321. Its proof restricts to all affine opens via fromSpec; restriction preserves coproducts. Each restricted summand admits its affine tilde presentation, and Presentation.sigma gives a presentation of the restricted coproduct. Transport that presentation along PreservesCoproduct.iso. These affine opens cover X, so isQuasicoherent_of_iSup_opensRange_eq_top proves quasi-coherence. The theorem has no finiteness or nonemptiness assumption on I. As a finished source-library declaration this node is a tool and is not split further.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean",
+  "place": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_sigma, lines 313-321; existing Lean proof read in full."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Any coproduct of quasi-coherent sheaves of modules on a scheme is quasi-coherent",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any direct sum of quasi-coherent modules on a scheme is quasi-coherent",
+   "results": "Eight hits: Scheme.Modules.instHasColimits, quasi-coherent definitions/data, isColimitFreeCofan and generic sheaf colimits. None asserts quasi-coherence of coproducts.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isQuasicoherent.*sigma|sigma.*[Qq]uasicoherent|[Qq]uasicoherent.*[Cc]oproduct|[Qq]uasicoherent.*[Cc]olimit, in Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/AlgebraicGeometry/Modules",
+   "results": "No hits. A separate source-library search found isQuasicoherent_sigma, whose signature and full proof were read in QuasicoherentKernel.lean:313-321. Blueprint searches for quasi-coherent direct sum, direct sums of quasi, coproduct of quasi and 01LA found no matching blueprint node; the existing binary-sum node only covers two summands.",
+   "date": "2026-10-12",
+   "verdict": "no Mathlib match; existing source-library theorem used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Quasi-coherence of the cohomology direct sum in lem-pc-derived-qcoh-closed-coproducts; no blueprint ancestor is recorded for this auxiliary node.",
+   "via": [
+    "lem-pc-derived-qcoh-closed-coproducts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_sigma",
+  "statement": "theorem isQuasicoherent_sigma {ι : Type u} (M : ι → X.Modules) [∀ i, SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) (M i)] : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) (∐ M)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12",
+  "note": "The source-library declaration is adopted unchanged in the one shared library. No duplicate theorem or new Lean module is delivered."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468027",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070531-L-3468027",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

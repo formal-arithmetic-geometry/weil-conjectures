@@ -1,9 +1,19 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
 module
 
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
-import Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
 public import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+
+/-! # Ambient coproducts and quasi-coherent cohomology
+
+Source: Stacks Project, Lemma 08DT and Section 01LA, item (3).
+The proofs use the termwise ambient coproduct and its cohomology comparison, together
+with the source library's proved closure of quasi-coherent modules under arbitrary sums.
+-/
 
 @[expose] public section
 
@@ -22,7 +32,16 @@ obtain the coproduct cocone and its universal property; choice of representative
 assembles these cocones for every small discrete diagram. -/
 theorem derivedAmbientHasCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
-    HasCoproducts.{u} (schemeDerivedCategory X) := by sorry
+    HasCoproducts.{u} (schemeDerivedCategory X) := by
+  classical
+  let Q := DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let K {I : Type u} (E : I → schemeDerivedCategory X) := fun i ↦ Q.objPreimage (E i)
+  let e {I : Type u} (E : I → schemeDerivedCategory X) :=
+    fun i ↦ Q.objObjPreimageIso (E i)
+  let c {I : Type u} (E : I → schemeDerivedCategory X) : Cofan E :=
+    Cofan.mk (Q.obj (∐ K E)) (fun i ↦ (e E i).inv ≫ Q.map (Sigma.ι (K E) i))
+  exact hasCoproducts_of_colimit_cofans (fun E ↦ c E)
+    (fun E ↦ (derivedAmbientDirectSums X _ E (K E) (e E)).1.some)
 
 /-- Quasi-coherent cohomology is closed under ambient derived coproducts
 (blueprint: lem-pc-derived-qcoh-closed-coproducts). The proof identifies cohomology of
@@ -36,6 +55,32 @@ sheaves. Express that direct sum as the filtered colimit of finite partial sums;
 theorem schemeDerivedQCohClosedUnderCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) :
-    (schemeDerivedQCohProperty X).IsClosedUnderColimitsOfShape (Discrete I) := by sorry
+    (schemeDerivedQCohProperty X).IsClosedUnderColimitsOfShape (Discrete I) := by
+  classical
+  constructor
+  rintro Y ⟨p⟩ q
+  let Q := DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let E := fun i : I ↦ p.diag.obj ⟨i⟩
+  let K := fun i ↦ Q.objPreimage (E i)
+  let e := fun i ↦ Q.objObjPreimageIso (E i)
+  let c : Cofan E :=
+    Cofan.mk (Q.obj (∐ K)) (fun i ↦ (e i).inv ≫ Q.map (Sigma.ι K i))
+  obtain ⟨⟨hc⟩, hH⟩ := derivedAmbientDirectSums X I E K e
+  let c' := (Cocone.precompose (Discrete.natIsoFunctor (F := p.diag)).inv).obj
+    p.cocone
+  have hc' : IsColimit c' :=
+    (IsColimit.precomposeInvEquiv Discrete.natIsoFunctor p.cocone).symm p.isColimit
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) q
+  have hM : ∀ i : I, (H.obj (E i)).IsQuasicoherent :=
+    fun i ↦ p.prop_diag_obj ⟨i⟩ q
+  -- The proved arbitrary-sum theorem bypasses the finite-sum/filtered-colimit plan.
+  have hsum : (∐ (fun i : I ↦ H.obj (E i))).IsQuasicoherent :=
+    @Scheme.Modules.isQuasicoherent_sigma X I (fun i ↦ H.obj (E i)) hM
+  have hcomparison : IsIso (Sigma.desc (fun i ↦ H.map (c.inj i))) := hH q
+  let comparison := asIso (Sigma.desc (fun i ↦ H.map (c.inj i)))
+  let iso := comparison ≪≫ H.mapIso (hc.coconePointUniqueUpToIso hc')
+  exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+    iso hsum
 
 end AlgebraicGeometry

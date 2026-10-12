@@ -18,19 +18,28 @@
  },
  "proof": [
   {
-   "text": "Use `lem-pc-derived-ambient-direct-sums` to identify cohomology of an ambient coproduct with direct sums, express each direct sum as a filtered colimit of finite sums, and apply finite-sum and filtered-colimit quasi-coherence closure.",
+   "text": "Unpack an arbitrary discrete colimit presentation p of Y whose diagram objects have quasi-coherent cohomology. Put E(i) = p.diag.obj(Discrete.mk i); choose complex representatives using Q.objPreimage and Q.objObjPreimageIso. Apply derivedAmbientDirectSums to obtain the colimit cofan c and its canonical cohomology comparison in every integer degree.",
    "uses": [
-    "lem-pc-derived-ambient-direct-sums",
-    "lem-weil-pbc-quasi-coherent-module-direct-sum",
-    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+    "lem-pc-derived-ambient-direct-sums"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each integer q, all H^q(E(i)) are quasi-coherent by p.prop_diag_obj. Apply the already proved source-library arbitrary coproduct theorem isQuasicoherent_sigma to conclude that their coproduct is quasi-coherent. No expression as a filtered colimit of finite sums is needed.",
+   "uses": [
+    "lem-pc-quasicoherent-module-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose p.cocone with the inverse of Discrete.natIsoFunctor to obtain a colimit cofan c-prime for E. Uniqueness of colimits gives an isomorphism c.pt to Y. The canonical comparison isomorphism from the coproduct of the H^q(E(i)) to H^q(c.pt), followed by homology of this colimit-uniqueness isomorphism, gives an isomorphism to H^q(Y). Transport quasi-coherence along it. This proves all degrees and hence the object-property closure, including an empty index set.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-derived-ambient-direct-sums",
-  "lem-weil-pbc-quasi-coherent-module-direct-sum",
-  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+  "lem-pc-quasicoherent-module-coproducts"
  ],
  "lean": {
   "existing": false,
@@ -46,9 +55,9 @@
   "def-pc-derived-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 08DT proof, split intermediate obligation"
+  "place": "Lemma 08DT (lemma-quasi-coherence-direct-sums), proof; use Schemes Section 01LA item (3) directly via the proved source-library arbitrary coproduct theorem, and transport along colimit uniqueness."
  },
  "mathlib_searches": [
   {
@@ -103,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T060753-L-2914849",
-  "kind": "interface",
+  "landing": "20261012T070531-L-3468027",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
