@@ -10,7 +10,10 @@ public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 public import Mathlib.RingTheory.Localization.Defs
-import Sheaf.Paper.KoszulComplex
+import Sheaf.RingTheory.KoszulConormalBasis
+import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Mathlib.LinearAlgebra.Dual.Basis
+import Mathlib.Algebra.Homology.SingleHomology
 
 /-!
 # Duality for a Koszul-regular quotient
@@ -40,6 +43,88 @@ universe uT
 open CategoryTheory CategoryTheory.Limits
 
 namespace ExteriorAlgebra
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem pairingDual_injective_of_basis
+    {R M : Type uT} [CommRing R] [AddCommGroup M] [Module R M]
+    {r : ℕ} (b : Module.Basis (Fin r) R M) (n : ℕ) :
+    Function.Injective (exteriorPower.pairingDual R M n) := by
+  classical
+  let bd := b.dualBasis.exteriorPower n
+  have hc (s : Set.powersetCard (Fin r) n) :
+      bd.coord s = (exteriorPower.pairingDual R M n).flip
+        ((b.exteriorPower n) s) := by
+    apply bd.ext
+    intro t
+    simp only [Module.Basis.coord_apply, Module.Basis.repr_self,
+      Finsupp.single_apply, LinearMap.flip_apply]
+    simp only [bd, exteriorPower.basis_apply]
+    change (if t = s then 1 else 0) =
+      exteriorPower.pairingDual R M n
+        (exteriorPower.ιMulti_family R n b.dualBasis t)
+        (exteriorPower.ιMulti_family R n b s)
+    by_cases h : t = s
+    · subst t
+      simpa [exteriorPower.ιMultiDual, Module.Basis.dualBasis_apply] using
+        (exteriorPower.ιMultiDual_apply_diag R n b s).symm
+    · simpa [h, exteriorPower.ιMultiDual, Module.Basis.dualBasis_apply] using
+        (exteriorPower.ιMultiDual_apply_nondiag R n b t s h).symm
+  intro w w' h
+  apply bd.repr.injective
+  ext s
+  change bd.coord s w = bd.coord s w'
+  rw [hc]
+  exact DFunLike.congr_fun h _
+
+private theorem conormalVector_comp
+    (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f g : Fin r → A)
+    (hf : Ideal.span (Set.range f) = I) (hg : Ideal.span (Set.range g) = I)
+    (t : (Fin r →₀ A) →ₗ[A] (Fin r →₀ A))
+    (ht : (Finsupp.linearCombination A g).comp t = Finsupp.linearCombination A f) :
+    (koszulConormalVector A I r g hg).comp t = koszulConormalVector A I r f hf := by
+  have heval (k : Fin r → A) (hk : Ideal.span (Set.range k) = I)
+      (v : Fin r →₀ A) :
+      I.cotangentToQuotientSquare (koszulConormalVector A I r k hk v) =
+        (I ^ 2).mkQ (Finsupp.linearCombination A k v) := by
+    simp only [koszulConormalVector, Finsupp.linearCombination_apply,
+      map_finsuppSum, map_smul, Ideal.toCotangent_to_quotient_square,
+      Submodule.mkQ_apply]
+  apply LinearMap.ext
+  intro v
+  apply I.cotangentToQuotientSquare_injective
+  simp only [LinearMap.comp_apply]
+  rw [heval, heval]
+  exact congrArg ((I ^ 2).mkQ) (LinearMap.congr_fun ht v)
+
+private theorem conormalVector_surjective
+    (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
+    (hf : Ideal.span (Set.range f) = I) :
+    Function.Surjective (koszulConormalVector A I r f hf) := by
+  have hspan : Submodule.span A
+      (Set.range (fun i ↦ I.toCotangent
+        ⟨f i, hf ▸ Ideal.subset_span (Set.mem_range_self i)⟩)) = ⊤ := by
+    apply top_unique
+    intro y _
+    obtain ⟨x, rfl⟩ := I.toCotangent_surjective y
+    have hx : (x : A) ∈ Ideal.span (Set.range f) := hf.symm ▸ x.property
+    refine Submodule.span_induction
+      (p := fun z hz ↦ I.toCotangent ⟨z, hf ▸ hz⟩ ∈ _)
+      ?_ ?_ ?_ ?_ hx
+    · rintro z ⟨j, rfl⟩
+      exact Submodule.subset_span (Set.mem_range_self j)
+    · change I.toCotangent 0 ∈ _
+      rw [map_zero]
+      exact Submodule.zero_mem _
+    · intro x y hx hy hxx hyy
+      change I.toCotangent (⟨x, hf ▸ hx⟩ + ⟨y, hf ▸ hy⟩) ∈ _
+      rw [map_add]
+      exact Submodule.add_mem _ hxx hyy
+    · intro a x hx hxx
+      change I.toCotangent (a • ⟨x, hf ▸ hx⟩) ∈ _
+      rw [map_smul]
+      exact Submodule.smul_mem _ a hxx
+  apply LinearMap.range_eq_top.mp
+  simpa only [koszulConormalVector, Finsupp.range_linearCombination] using hspan
 
 /-- The uniquely normalized comparison is a quasi-isomorphism.
 Source: Stacks Project, Tag 0BQZ
@@ -96,7 +181,53 @@ theorem koszul_conormal_comparison_cohomology
       ∀ z : (koszulDualComplex A r f).cycles r,
         e.hom (ι.inv ((koszulDualComplex A r f).homologyπ r z)) =
           koszulComparisonValue A I r f φ ((koszulDualComplex A r f).iCycles r z) := by
-  sorry
+  obtain ⟨ψ, hψ, _huniq⟩ := exists_unique_koszul_conormal_comparison A I r f hreg hf
+  obtain ⟨b, _hb⟩ := exists_koszul_conormal_basis A I r f hreg hf
+  have hsame : φ = ψ := by
+    apply HomologicalComplex.to_single_hom_ext
+    apply (cancel_mono (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) r
+      (koszulNormalDeterminant A I r)).hom).mp
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    apply pairingDual_injective_of_basis b r
+    apply exteriorPower.linearMap_ext
+    ext v
+    choose w hw using fun i ↦ conormalVector_surjective A I r f hf (v i)
+    have hwv : (fun i ↦ koszulConormalVector A I r f hf (w i)) = v := funext hw
+    have hh := (hφ x w).trans (hψ.1 x w).symm
+    rw [hwv] at hh
+    convert hh using 1 <;> rfl
+  have hq : QuasiIso φ := hsame ▸ hψ.2
+  let := hq
+  have : QuasiIso (HomologicalComplex.extendMap φ ComplexShape.embeddingUpNat) :=
+    (HomologicalComplex.quasiIso_extendMap_iff φ ComplexShape.embeddingUpNat).mpr hq
+  refine ⟨by infer_instance, ?_, ?_⟩
+  · intro i hi
+    let η := HomologicalComplex.extendMap φ ComplexShape.embeddingUpNat
+    let e := HomologicalComplex.extendSingleIso ComplexShape.embeddingUpNat
+      (koszulNormalDeterminant A I r) r (r : ℤ) rfl
+    let : QuasiIso η := inferInstance
+    let : QuasiIso (η ≫ e.hom) := inferInstance
+    exact (HomologicalComplex.isZero_single_obj_homology (ComplexShape.up ℤ) (r : ℤ)
+      (koszulNormalDeterminant A I r) i hi).of_iso
+        (asIso (HomologicalComplex.homologyMap (η ≫ e.hom) i))
+  · let e := asIso (HomologicalComplex.homologyMap φ r) ≪≫
+      HomologicalComplex.singleObjHomologySelfIso (ComplexShape.up ℕ) r
+        (koszulNormalDeterminant A I r)
+    refine ⟨ModuleCat.of (A ⧸ I)
+      (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent)), e.symm, Iso.refl _, ?_⟩
+    intro z
+    change e.hom ((koszulDualComplex A r f).homologyπ r z) = _
+    have hh : (koszulDualComplex A r f).homologyπ r ≫ e.hom =
+        (koszulDualComplex A r f).iCycles r ≫ φ.f r ≫
+          (HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) r
+            (koszulNormalDeterminant A I r)).hom := by
+      simp only [e, Iso.trans_hom, asIso_hom, HomologicalComplex.homologyπ_naturality_assoc,
+        HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom,
+        HomologicalComplex.singleObjCyclesSelfIso_hom,
+        HomologicalComplex.cyclesMap_i_assoc]
+    exact congrArg (fun k ↦ k z) hh
 
 /-- The Koszul augmentation is a quasi-isomorphism to the quotient in degree zero.
 Source: Stacks Project, Tag 0BQZ
@@ -177,6 +308,7 @@ theorem exists_intrinsic_koszul_ext_determinant
                     (exteriorPower.ιMulti A r v)))) := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The normalized comparisons commute with a change of Koszul generators.
 Source: Stacks Project, Tag 0BQZ
 (blueprint: lem-sc-koszul-regular-sequence-dual-complex).
@@ -204,7 +336,32 @@ theorem koszul_conormal_comparison_change_generators
       koszulComparisonValue A I r f φ
           (ModuleCat.ofHom (x.hom.comp (exteriorPower.map r t))) =
         koszulComparisonValue A I r g ψ x := by
-  sorry
+  have _ := hregg
+  obtain ⟨b, _hb⟩ := exists_koszul_conormal_basis A I r f hregf hf
+  intro x
+  apply pairingDual_injective_of_basis b r
+  apply exteriorPower.linearMap_ext
+  ext v
+  choose w hw using fun i ↦ conormalVector_surjective A I r f hf (v i)
+  have hc := conormalVector_comp A I r f g hf hg t ht
+  have hwv : (fun i ↦ koszulConormalVector A I r f hf (w i)) = v := funext hw
+  have hv : (fun i ↦ koszulConormalVector A I r g hg (t (w i))) = v := by
+    funext i
+    exact (LinearMap.congr_fun hc (w i)).trans (hw i)
+  calc
+    _ = (-1 : A ⧸ I) ^ (r * (r - 1) / 2) *
+        Ideal.Quotient.mk I ((x.hom.comp (exteriorPower.map r t))
+          (exteriorPower.ιMulti A r w)) := by
+      have hh := hφ (ModuleCat.ofHom (x.hom.comp (exteriorPower.map r t))) w
+      rw [hwv] at hh
+      convert hh using 1 <;> rfl
+    _ = (-1 : A ⧸ I) ^ (r * (r - 1) / 2) *
+        Ideal.Quotient.mk I (x.hom (exteriorPower.ιMulti A r (fun i ↦ t (w i)))) := by
+      congr 2
+      exact congrArg x.hom (exteriorPower.map_apply_ιMulti t w)
+    _ = _ := by
+      simpa only [LinearMap.compAlternatingMap_apply, hv] using
+        (hψ x (fun i ↦ t (w i))).symm
 
 /-- Localization preserves regularity and the determinant-normalized comparison.
 The maps `χ` and `ν` are the coefficient-extension maps on the degree-`r` dual
