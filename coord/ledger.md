@@ -6021,3 +6021,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/V1/Sheaf.Topology.NoetherianOpenClosedCohomologySequence (stage 3; reviewer PASS; first push; landing 20261012T042424-L-1823057 (interface); batch 20261012T042402; modules 3; new nodes 2)
 - 04:24 L: merged deliver/V1/WeilConjectures.SixFunctors.Integral.Exact (stage 3; reviewer PASS; first push; landing 20261012T042424-L-1823156 (interface); batch 20261012T042402; modules 2; new nodes 2)
 - 04:24 L: merged deliver/V2/Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism (stage 3; reviewer PASS; first push; landing 20261012T042424-L-1823281 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/V2/Sheaf.RingTheory.EtaleColimitNormalLocalDomain (stage 3; reviewer PASS; first push; landing 20261012T042425-L-1823378 (proof); batch 20261012T042402; modules 1; new nodes 0)
