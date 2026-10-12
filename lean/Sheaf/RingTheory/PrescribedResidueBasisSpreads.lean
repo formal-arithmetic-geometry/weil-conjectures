@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Localization.Free
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
+import Mathlib.RingTheory.LocalRing.Module
 
 /-!
 # Spreading a prescribed residue basis
@@ -54,6 +55,72 @@ theorem exists_basis_away_of_prescribed_residue_basis
     ∃ f : A, f ∉ p ∧
       ∃ b : Module.Basis (Fin r) (Localization.Away f) (LocalizedModule.Away f M),
         ∀ i : Fin r, b i = LocalizedModule.mkLinearMap (Submonoid.powers f) M (m i) := by
-  sorry
+  classical
+  let L := Localization.AtPrime p
+  let N := LocalizedModule p.primeCompl M
+  let K := p.ResidueField
+  let loc : M →ₗ[A] N := LocalizedModule.mkLinearMap p.primeCompl M
+  obtain ⟨bres, hbres⟩ := hres
+  obtain ⟨bfree⟩ := hfree
+  -- Identify the residue base change of the prime localization.
+  let eK : (K ⊗[L] N) ≃ₗ[K] (K ⊗[A] M) :=
+    (LinearEquiv.baseChange L K _ _
+      (LocalizedModule.equivTensorProduct p.primeCompl M)).trans
+      (TensorProduct.AlgebraTensorModule.cancelBaseChange A L K K M)
+  let bk := bres.map eK.symm
+  have hbk : ∀ i, (1 : K) ⊗ₜ[L] loc (m i) = bk i := by
+    intro i
+    apply eK.injective
+    change eK ((1 : K) ⊗ₜ[L] loc (m i)) = eK (eK.symm (bres i))
+    rw [eK.apply_symm_apply, hbres]
+    simp only [eK, LinearEquiv.trans_apply]
+    rw [LinearEquiv.baseChange_tmul]
+    dsimp only [loc]
+    rw [LocalizedModule.mkLinearMap_apply, LocalizedModule.equivTensorProduct_apply_mk,
+      TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul]
+    simp only [Localization.mk_one, one_smul]
+  -- Nakayama makes the localized prescribed family generate.
+  have : Module.Finite L N := Module.Finite.of_basis bfree
+  have hspan : Submodule.span L (Set.range (loc ∘ m)) = ⊤ :=
+    IsLocalRing.span_eq_top_of_tmul_eq_basis (loc ∘ m) bk hbk
+  let φ : (Fin r →₀ A) →ₗ[A] M := Finsupp.linearCombination A m
+  let l₁ : (Fin r →₀ A) →ₗ[A] (Fin r →₀ L) :=
+    Finsupp.mapRange.linearMap (Algebra.linearMap A L)
+  let φp : (Fin r →₀ L) →ₗ[L] N :=
+    IsLocalizedModule.mapExtendScalars p.primeCompl l₁ loc L φ
+  have hφp : φp = Finsupp.linearCombination L (loc ∘ m) :=
+    LinearMap.restrictScalars_injective A
+      (IsLocalizedModule.map_linearCombination p.primeCompl L loc)
+  have hsurj : Function.Surjective φp := by
+    rw [hφp, ← LinearMap.range_eq_top, Finsupp.range_linearCombination]
+    exact hspan
+  -- Equal ranks turn this surjection into an endomorphism of a finite free module.
+  have hendo : Function.Bijective (bfree.repr.toLinearMap.comp φp) :=
+    OrzechProperty.bijective_of_surjective_endomorphism _
+      (bfree.repr.surjective.comp hsurj)
+  have hbij : Function.Bijective φp :=
+    ⟨fun x y h ↦ hendo.injective (congrArg bfree.repr h), hsurj⟩
+  -- Spread the isomorphism defined by the original global elements.
+  obtain ⟨f, hf, hφf⟩ := Module.FinitePresentation.exists_notMem_bijective φ p l₁ loc hbij
+  let l₁f : (Fin r →₀ A) →ₗ[A] (Fin r →₀ Localization.Away f) :=
+    Finsupp.mapRange.linearMap (Algebra.linearMap A (Localization.Away f))
+  let locf : M →ₗ[A] LocalizedModule.Away f M :=
+    LocalizedModule.mkLinearMap (Submonoid.powers f) M
+  rw [← IsLocalizedModule.map_bijective_iff_localizedModuleMap_bijective l₁f locf] at hφf
+  let φf : (Fin r →₀ Localization.Away f) →ₗ[Localization.Away f]
+      LocalizedModule.Away f M :=
+    IsLocalizedModule.mapExtendScalars (Submonoid.powers f) l₁f locf
+      (Localization.Away f) φ
+  -- Its images of the standard vectors are exactly the prescribed lifts.
+  let ef := LinearEquiv.ofBijective φf hφf
+  refine ⟨f, hf, Module.Basis.ofRepr ef.symm, ?_⟩
+  intro i
+  change φf (Finsupp.single i 1) = locf (m i)
+  have heq := IsLocalizedModule.map_linearCombination (Submonoid.powers f)
+    (Localization.Away f) locf (v := m)
+  change IsLocalizedModule.map (Submonoid.powers f) l₁f locf φ
+    (Finsupp.single i 1) = locf (m i)
+  rw [heq]
+  simp
 
 end Module.FinitePresentation
