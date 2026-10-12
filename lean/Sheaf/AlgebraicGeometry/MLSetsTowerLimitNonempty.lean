@@ -1,6 +1,7 @@
 module
 
 public import Mathlib.CategoryTheory.CofilteredSystem
+import Mathlib.CategoryTheory.Limits.Types.Images
 
 /-!
 # Nonempty limit of a Mittag-Leffler tower of sets
@@ -40,6 +41,17 @@ choice; the sequence is compatible, so lies in the limit of `(E_i)`.
 theorem nonempty_sections_of_isMittagLeffler (F : ℕᵒᵖ ⥤ Type u)
     [∀ n : ℕᵒᵖ, Nonempty (F.obj n)] (hF : F.IsMittagLeffler) :
     F.sections.Nonempty := by
-  sorry
+  let G := F.toEventualRanges
+  have hsurj : ∀ n, Function.Surjective
+      (G.map (CategoryTheory.homOfLE (Nat.le_succ n)).op) := by
+    intro n
+    exact F.surjective_toEventualRanges hF _
+  have hproj : Function.Surjective
+      ((CategoryTheory.Limits.Types.limitCone G).π.app ⟨0⟩) :=
+    CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map
+      (CategoryTheory.Limits.Types.limitConeIsLimit G) hsurj
+  obtain ⟨x, hx⟩ := hproj (Classical.choice (F.toEventualRanges_nonempty hF ⟨0⟩))
+  let y := (F.toEventualRangesSectionsEquiv) x
+  exact ⟨y, y.property⟩
 
 end CategoryTheory.Functor

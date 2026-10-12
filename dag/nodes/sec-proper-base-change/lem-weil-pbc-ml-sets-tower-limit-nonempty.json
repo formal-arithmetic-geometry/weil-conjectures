@@ -31,46 +31,38 @@
  ],
  "proof": [
   {
-   "text": "For each $i\\ge1$ put $B_i=\\varphi_{c(i),i}(E_{c(i)})\\subseteq E_i$. Every $B_i$ is nonempty because $E_{c(i)}$ is nonempty. The images $\\varphi_{k,i}(E_k)$ decrease as $k$ increases, since $\\varphi_{k,i}=\\varphi_{j,i}\\circ\\varphi_{k,j}$ for $k\\ge j\\ge i$ [def-weil-inverse-system]. By the Mittag-Leffler hypothesis they equal $B_i$ for all $k\\ge c(i)$, so $B_i=\\bigcap_{k\\ge i}\\varphi_{k,i}(E_k)$; the terms with $i\\le k<c(i)$ contain $B_i$ by the same composite identity.",
-   "uses": [
-    "def-weil-inverse-system"
-   ],
+   "text": "Restrict F to G = F.toEventualRanges, the functor of stable images. Mathlib CategoryTheory.Functor.toEventualRanges_nonempty hF makes G.obj 0 nonempty, and CategoryTheory.Functor.surjective_toEventualRanges hF makes every adjacent transition of G surjective.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Definition 0595 (definition-ML-system) and Example 0596 (example-ML-surjective-maps), algebra.tex lines 20710--20745: stable images"
+    "document": "Mathlib/CategoryTheory/CofilteredSystem.lean",
+    "place": "toEventualRanges, surjective_toEventualRanges, toEventualRanges_nonempty; implements Stacks Algebra 0595 and 0596"
    }
   },
   {
-   "text": "The restricted transition $f_i:B_{i+1}\\to B_i$ is well defined: if $x\\in B_{i+1}$, then $x=\\varphi_{k,i+1}(z)$ for some $k\\ge\\max(c(i),c(i+1),i+1)$ and $z\\in E_k$, by stabilization of the image at level $i+1$; hence $f_i(x)=\\varphi_{k,i}(z)\\in B_i$. It is surjective: for $y\\in B_i$ choose the same kind of $k$; stabilization at $i$ gives $z\\in E_k$ with $\\varphi_{k,i}(z)=y$. Put $x=\\varphi_{k,i+1}(z)$. Since $k\\ge c(i+1)$, stabilization at $i+1$ gives $x\\in B_{i+1}$, and $f_i(x)=\\varphi_{k,i}(z)=y$. Thus $(B_i,f_i|_{B_{i+1}})$ is a tower of nonempty sets with surjective transitions, and its compatible sequences are exactly those of $(E_i)$: any compatible $(e_i)$ satisfies $e_i=\\varphi_{k,i}(e_k)\\in B_i$ for $k\\ge\\max(i,c(i))$, while a compatible sequence in the $B_i$ is already one in the $E_i$.",
-   "uses": [
-    "def-weil-inverse-system"
-   ],
+   "text": "Apply CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map to Types.limitConeIsLimit G and the adjacent surjections. Choose an element of the nonempty G.obj 0 and a preimage under the projection. The preimage is a compatible section of G; the Mathlib theorem constructs successive preimages by recursion.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Example 0596 (example-ML-surjective-maps), algebra.tex lines 20736--20745: stable-image tower with surjective maps and unchanged limit; surjectivity calculation expanded"
+    "document": "Mathlib/CategoryTheory/Limits/Types/Images.lean",
+    "place": "surjective_π_app_zero_of_surjective_map and its auxiliary recursion; implements the countable case of Stacks Algebra 0597"
    }
   },
   {
-   "text": "Choose $b_1\\in B_1$. Given $b_i\\in B_i$, surjectivity in Step 2 gives $b_{i+1}\\in B_{i+1}$ with $f_i(b_{i+1})=b_i$. Dependent choice makes these successive choices into one sequence $(b_i)_{i\\ge1}$; it is compatible at every level, hence belongs to $\\varprojlim_iB_i$. By Step 2 the same sequence belongs to $\\varprojlim_iE_i$, proving the latter nonempty.",
-   "uses": [
-    "def-weil-inverse-system"
-   ],
+   "text": "Transport that section by CategoryTheory.Functor.toEventualRangesSectionsEquiv to a section y of F. Its underlying family together with y.property witnesses F.sections.Nonempty.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 0597 (lemma-ML-limit-nonempty), algebra.tex lines 20748--20767: countable positive-integer case follows from the axiom of choice"
+    "document": "Mathlib/CategoryTheory/CofilteredSystem.lean",
+    "place": "toEventualRangesSectionsEquiv; implements the unchanged-limit assertion of Stacks Algebra 0596"
    }
   }
  ],
- "proof_deps": [
-  "def-weil-inverse-system"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Definition 0595 (definition-ML-system), Example 0596 (example-ML-surjective-maps), Lemma 0597 (lemma-ML-limit-nonempty), algebra.tex lines 20724--20767, specialized to the positive integers"
+  "place": "Algebra, Definition 0595, Example 0596, Lemma 0597, specialized to positive integers; realized by the Mathlib stable-image and surjective-limit APIs named in the proof steps, reviewed by G3 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -163,5 +155,15 @@
   "group": "E1",
   "result": "fix",
   "note": "tower E_i,f_i,φ = F : ℕᵒᵖ ⥤ Type u (n ↦ level n+1); nonempty levels = instance; ML c(i) = F.IsMittagLeffler (equivalent on ℕᵒᵖ); limit nonempty = F.sections.Nonempty; statement correction reverted (corrupted \\t/\\v, unnecessary); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T184301-L-4003872",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
