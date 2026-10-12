@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-finite-idempotent-factor-transfer",
+ "kind": "statement",
+ "title": "Transfer of a finite idempotent factor through an away isomorphism",
+ "statement": "Let $A,B$ be commutative rings with $B$ an $A$-algebra and $I\\subset A$ an ideal. Let $D\\subset B$ be an $A$-subalgebra finite as an $A$-module [def-weil-finitely-generated-module]. Let $C$ be an $(A/I)$-algebra and $\\Phi:D/ID\\cong (A/I)\\times C$ an isomorphism respecting the $A/I$ structure maps. Suppose $b,d\\in D$, $d^2=d$, $\\alpha\\in A$ is a unit, $bd=\\alpha d$, $D[1/b]\\to B[1/b]$ is bijective [def-weil-ring-localization-away], and $\\Phi(\\bar d)=(1,0)$. For $e$ the image of $d$ in $B$, $A\\to B[1/e]$ is integral and the structure map $A/I\\to B[1/e]/IB[1/e]$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI (lemma-characterize-henselian-pair), proof of (5) implies (2), identifying B'₁ with A'₁ and the compatible fibre splitting; details proved directly from Mathlib localization and integral-algebra lemmas; read at https://stacks.math.columbia.edu/tag/09XI on 2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Choose a unit v with value α. The relation bd = αd gives d = b(α⁻¹d), hence b divides d. Apply Localization.awayMap_bijective_of_dvd to obtain the isomorphism D[1/d] → B[1/e]. The map D → D[1/d] is surjective by Away.algebraMap_surjective_of_isIdempotentElem. Therefore F:D → B[1/e] is surjective, and Algebra.IsIntegral.of_surjective transfers integrality of the finite A-algebra D.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define s:D → A/I as the first projection of Φ after quotient. It is an A-algebra map and s(d)=1. Extend s over D[1/d], then transport along the isomorphism to a map ρ:B[1/e] → A/I. The ideal IB[1/e] is in its kernel, since ρ fixes A-scalars. Hence ρ induces a left inverse of the quotient structure map, proving injectivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For surjectivity, represent an element of B[1/e]/IB[1/e] by F(x), using the surjectivity of F. Lift the first coordinate of Φ(x mod ID) to a∈A. Then Φ(d(x-a) mod ID)=(1,0)(Φ(x)-(a,scalar(a)))=0. Thus d(x-a)∈ID; mapping by F, for which F(d)=1, gives F(x)-a∈IB[1/e]. The quotient element is therefore the image of a mod I.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI (lemma-characterize-henselian-pair), proof of (5) implies (2), identifying B'₁ with A'₁ and the compatible fibre splitting; details proved directly from Mathlib localization and integral-algebra lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite subalgebra whose localization is an isomorphism induces an integral idempotent factor when the localization parameter is a unit on that factor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "available": false
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.awayMap_bijective_of_dvd",
+   "results": "Localization.awayMap_bijective_of_dvd",
+   "date": "2026-10-12",
+   "available": true,
+   "verdict": "No exact match; related declarations read and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_idempotent_factor_transfer|exists_finite_gabber_section_model|awayMap_bijective_of_dvd",
+   "results": "Mathlib/RingTheory/Localization/Away/Basic.lean, Mathlib/RingTheory/Unramified/LocalStructure.lean",
+   "date": "2026-10-12",
+   "available": true,
+   "verdict": "No exact match; related declarations read and used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GabberIntegralSectionFactor",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 09XI (lemma-characterize-henselian-pair), proof of (5) implies (2), identifying B'₁ with A'₁ and the compatible fibre splitting; details proved directly from Mathlib localization and integral-algebra lemmas",
+   "via": [
+    "lem-weil-pbc-gabber-root-criterion-integral-section-factor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteIdempotentFactorTransfer",
+  "file": "lean/Sheaf/RingTheory/FiniteIdempotentFactorTransfer.lean",
+  "declaration": "Algebra.finite_idempotent_factor_transfer",
+  "statement": "theorem finite_idempotent_factor_transfer\n    {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]\n    (I : Ideal A) (D : Subalgebra A B) [Module.Finite A D]\n    (C : Type w) [CommRing C] [Algebra (A ⧸ I) C]\n    (Φ : (D ⧸ I.map (algebraMap A D)) ≃+* ((A ⧸ I) × C))\n    (hΦ : ∀ a : A, Φ (Ideal.Quotient.mk _ (algebraMap A D a)) =\n      (algebraMap (A ⧸ I) (A ⧸ I) (Ideal.Quotient.mk I a),\n        algebraMap (A ⧸ I) C (Ideal.Quotient.mk I a)))\n    (b d : D) (hd : IsIdempotentElem d)\n    (α : A) (hα : IsUnit α) (hbd : b * d = algebraMap A D α * d)\n    (hloc : Function.Bijective (Localization.awayMap D.val.toRingHom b))\n    (hΦd : Φ (Ideal.Quotient.mk _ d) = (1, 0)) :\n    (algebraMap A (Localization.Away d.1)).IsIntegral ∧\n      Function.Bijective\n        (Ideal.quotientMap (I.map (algebraMap A (Localization.Away d.1)))\n          (algebraMap A (Localization.Away d.1)) Ideal.le_comap_map)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085248-L-18405",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085248-L-18405",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

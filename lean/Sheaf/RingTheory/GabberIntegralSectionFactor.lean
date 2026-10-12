@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group H2
+-/
 module
 
 public import Mathlib.RingTheory.Etale.Basic
@@ -5,9 +10,19 @@ public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Idempotents
-import Sheaf.Paper.IntegralClosureFiniteFibrePartLocalization
-import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
+import Sheaf.RingTheory.FiniteGabberSectionModel
+import Sheaf.RingTheory.FiniteIdempotentFactorTransfer
 import Sheaf.RingTheory.FiniteGabberPolynomial
+import Mathlib.Algebra.Polynomial.Div
+import Mathlib.Tactic.Ring
+
+/-!
+# Integral section factor from Gabber roots
+
+Source: Stacks Project, Tag 09XI, proof of (5) implies (2), integral factor construction.
+The finite-model lemma isolates the construction before any root is chosen; the
+idempotent and its section extension are constructed in this file.
+-/
 
 @[expose] public section
 
@@ -63,6 +78,120 @@ theorem exists_gabber_integral_section_factor
           (algebraMap A (Localization.Away e)) Ideal.le_comap_map) ∧
       ∃ ρ : Localization.Away e →ₐ[A] A ⧸ I,
         ∀ x : B, ρ (algebraMap B (Localization.Away e) x) = σ x := by
-  sorry
+  classical
+  obtain ⟨D, hD, C, hC, hAC, Φ, b, hΦ, hb, hσ, hloc⟩ :=
+    exists_finite_gabber_section_model A I B σ
+  let := hD
+  let := hC
+  let := hAC
+  obtain ⟨n, a, f, hn, ha, hf, hzero, hform⟩ :=
+    exists_monic_aeval_eq_zero_gabber_polynomial I hI (A ⧸ I) C Φ hΦ
+      (fun x ↦ ⟨x, rfl⟩) b hb
+  obtain ⟨α, hαI, hroot⟩ := hroots n hn a ha f hf hform
+  have hα : IsUnit α := Ideal.isUnit_of_sub_one_mem_jacobson_bot α (hI hαI)
+  let q := Ideal.Quotient.mk I
+  let J := I.map (algebraMap A D)
+  let π := Ideal.Quotient.mk J
+  have hαbar : q α = 1 := (Ideal.Quotient.mk_eq_one_iff_sub_mem _).mpr hαI
+  have hcoeff : ∀ j, q (a j) = 0 := fun j ↦ Ideal.Quotient.eq_zero_iff_mem.mpr (ha j)
+  have hfbar : f.map q = X ^ n * (X - 1) := by
+    rw [hform]
+    simp only [Polynomial.map_add, Polynomial.map_mul, Polynomial.map_pow, map_X,
+      Polynomial.map_sub, Polynomial.map_one]
+    rw [show Polynomial.map q (∑ j, Polynomial.C (a j) * X ^ (j : ℕ)) = 0 from ?_]
+    · rw [add_zero]
+    · change (Polynomial.mapRingHom q) _ = 0
+      simp [hcoeff]
+  obtain ⟨g, hg⟩ := dvd_iff_isRoot.mpr hroot
+  have hgbar : g.map q = X ^ n := by
+    apply (monic_X_sub_C (1 : A ⧸ I)).isRegular.left
+    calc
+      (X - Polynomial.C 1) * g.map q = f.map q := by
+        rw [hg, Polynomial.map_mul, Polynomial.map_sub, map_X, map_C, hαbar]
+      _ = (X - Polynomial.C 1) * X ^ n := by simpa [mul_comm] using hfbar
+  have hgeval : q (g.eval α) = 1 := by
+    rw [← eval_map_apply, hgbar, eval_pow, eval_X, hαbar, one_pow]
+  have hgevalI : g.eval α - 1 ∈ I :=
+    (Ideal.Quotient.mk_eq_one_iff_sub_mem _).mp hgeval
+  obtain ⟨v, hv⟩ := Ideal.isUnit_of_sub_one_mem_jacobson_bot (g.eval α) (hI hgevalI)
+  let u : A := ↑v⁻¹
+  have hu : u * g.eval α = 1 := by
+    rw [← hv]
+    simp [u]
+  have hubar : q u = 1 := by
+    have h := congrArg q hu
+    simpa [hgeval] using h
+  obtain ⟨r, hr⟩ := X_sub_C_dvd_sub_C_eval (p := g) (a := α)
+  have hbg : (b - algebraMap A D α) * aeval b g = 0 := by
+    have h := congrArg (aeval b) hg
+    simpa [hzero] using h.symm
+  have hgr : aeval b g - algebraMap A D (g.eval α) =
+      (b - algebraMap A D α) * aeval b r := by
+    simpa using congrArg (aeval b) hr
+  let d : D := algebraMap A D u * aeval b g
+  have huD : algebraMap A D u * algebraMap A D (g.eval α) = 1 := by
+    rw [← map_mul, hu, map_one]
+  have hdminus : d - 1 =
+      algebraMap A D u * (b - algebraMap A D α) * aeval b r := by
+    calc
+      d - 1 = algebraMap A D u *
+          (aeval b g - algebraMap A D (g.eval α)) := by rw [mul_sub, huD]
+      _ = _ := by rw [hgr]; ring
+  have hdzero : d * (d - 1) = 0 := by
+    rw [hdminus]
+    calc
+      d * (algebraMap A D u * (b - algebraMap A D α) * aeval b r) =
+          (algebraMap A D u) ^ 2 * aeval b r *
+            ((b - algebraMap A D α) * aeval b g) := by dsimp [d]; ring
+      _ = 0 := by rw [hbg, mul_zero]
+  have hd : IsIdempotentElem d := by
+    change d * d = d
+    exact sub_eq_zero.mp (by simpa only [mul_sub, mul_one] using hdzero)
+  have hbd : b * d = algebraMap A D α * d := by
+    apply sub_eq_zero.mp
+    calc
+      b * d - algebraMap A D α * d =
+          algebraMap A D u * ((b - algebraMap A D α) * aeval b g) := by
+        dsimp [d]; ring
+      _ = 0 := by rw [hbg, mul_zero]
+  have hbidem : IsIdempotentElem (π b) := by
+    change π b * π b = π b
+    apply Φ.injective
+    simp only [map_mul]
+    dsimp [π, J]
+    rw [hb]
+    simp
+  let Q := Ideal.quotientMap J (algebraMap A D) Ideal.le_comap_map
+  have hmapg : g.map (π.comp (algebraMap A D)) = X ^ n := by
+    calc
+      _ = (g.map q).map Q := by
+        rw [Polynomial.map_map]
+        congr 1
+      _ = X ^ n := by rw [hgbar]; simp
+  have hπg : π (aeval b g) = π b := by
+    calc
+      π (aeval b g) = π ((g.map (algebraMap A D)).eval b) := by
+        rw [eval_map, aeval_def]
+      _ = ((g.map (algebraMap A D)).map π).eval (π b) :=
+        (eval_map_apply π b).symm
+      _ = (π b) ^ n := by rw [Polynomial.map_map, hmapg]; simp
+      _ = π b := hbidem.pow_eq (by omega)
+  have hπu : π (algebraMap A D u) = 1 := by
+    change Q (q u) = 1
+    rw [hubar, map_one]
+  have hπd : π d = π b := by
+    dsimp [d]
+    rw [map_mul, hπu, one_mul, hπg]
+  have hΦd : Φ (π d) = (1, 0) := hπd ▸ hb
+  obtain ⟨hint, hbij⟩ :=
+    finite_idempotent_factor_transfer I D C Φ hΦ b d hd α hα hbd hloc hΦd
+  have hσd : σ d.1 = 1 := by rw [← hσ d, hΦd]
+  refine ⟨d.1, ?_, hint, hbij, ?_⟩
+  · exact congrArg (fun x : D ↦ x.1) hd
+  · refine ⟨IsLocalization.Away.liftAlgHom (S := Localization.Away d.1) d.1
+      (hσd.symm ▸ isUnit_one), ?_⟩
+    intro x
+    exact IsLocalization.Away.lift_eq (g := σ.toRingHom) d.1
+      (hσd.symm ▸ isUnit_one) x
 
 end Algebra
