@@ -9,6 +9,7 @@ public import Sheaf.Topology.ClosedPushforwardConstantPresheaf
 public import Mathlib.Topology.Sheaves.Stalks
 import Sheaf.Topology.LocallyConstantGermEvaluation
 import Sheaf.Topology.LocallyConstantMapsSheaf
+import Mathlib.Topology.Sheaves.Functors
 
 /-!
 # Stalks of a constant sheaf pushed forward from a closed subset
@@ -62,6 +63,77 @@ theorem closed_pushforward_constant_stalks
     (∀ (x : X), x ∉ C →
       Nonempty ((closedPushforwardConstantPresheaf X C R).stalk x) ∧
       Subsingleton ((closedPushforwardConstantPresheaf X C R).stalk x)) := by
-  sorry
+  let Z := TopCat.of C
+  let i : Z ⟶ X := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩
+  let L := locallyConstantMapsPresheaf Z R
+  let F := closedPushforwardConstantPresheaf X C R
+  let e : F ≅ (Presheaf.pushforward (Type w) i).obj L :=
+    NatIso.ofComponents (fun V ↦
+      { hom := TypeCat.ofHom (LocallyConstant.comap
+          ⟨fun y ↦ ⟨y.1.1, y.2, y.1.2⟩,
+            (continuous_subtype_val.comp continuous_subtype_val).subtype_mk _⟩)
+        inv := TypeCat.ofHom (LocallyConstant.comap
+          ⟨fun y ↦ ⟨⟨y.1, y.2.2⟩, y.2.1⟩,
+            (continuous_subtype_val.subtype_mk _).subtype_mk _⟩)
+        hom_inv_id := by ext g; rfl
+        inv_hom_id := by ext g; rfl }) (by intros; rfl)
+  refine ⟨?_, ?_, ?_⟩
+  · exact (Presheaf.isSheaf_iso_iff e).mpr
+      (Sheaf.pushforward_sheaf_of_sheaf i (locallyConstantMapsPresheaf_isSheaf Z R))
+  · intro x hxC
+    let z : Z := ⟨x, hxC⟩
+    have hi : Topology.IsInducing i := Topology.IsInducing.subtypeVal
+    have := Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing
+      (Type w) hi L z
+    let q : F.stalk x ≅ L.stalk z :=
+      (Presheaf.stalkFunctor (Type w) x).mapIso e ≪≫
+        asIso (L.stalkPushforward (Type w) i z)
+    obtain ⟨ev, hev, hbij, _⟩ := existsUnique_locallyConstant_germ_evaluation Z z R
+    change ∃ ev : F.stalk x → R, _
+    refine ⟨ev ∘ q.hom, ?_, ?_, ?_⟩
+    · intro V hxV g
+      change ev ((L.stalkPushforward (Type w) i z)
+        (((Presheaf.stalkFunctor (Type w) x).map e.hom) (F.germ V x hxV g))) = _
+      rw [Presheaf.stalkFunctor_map_germ_apply]
+      erw [Presheaf.stalkPushforward_germ_apply (Type w) i L V z hxV]
+      exact hev _ hxV _
+    · exact hbij.comp (ConcreteCategory.bijective_of_isIso q.hom)
+    · intro ev' hev'
+      funext t
+      obtain ⟨V, hxV, g, rfl⟩ := F.exists_germ_eq t
+      rw [hev']
+      change _ = ev ((L.stalkPushforward (Type w) i z)
+        (((Presheaf.stalkFunctor (Type w) x).map e.hom) (F.germ V x hxV g)))
+      erw [Presheaf.stalkFunctor_map_germ_apply,
+        Presheaf.stalkPushforward_germ_apply (Type w) i L V z hxV, hev]
+      rfl
+  · intro x hxC
+    let V : Opens X := ⟨Cᶜ, hC.isOpen_compl⟩
+    have hxV : x ∈ V := hxC
+    have empty (U : Opens X) (hU : U ≤ V) : IsEmpty {y : X // y ∈ U ∧ y ∈ C} :=
+      ⟨fun y ↦ hU y.2.1 y.2.2⟩
+    let g : LocallyConstant {y : X // y ∈ V ∧ y ∈ C} R :=
+      letI := empty V le_rfl
+      ⟨isEmptyElim, by
+        intro S
+        have : isEmptyElim ⁻¹' S = (∅ : Set {y : X // y ∈ V ∧ y ∈ C}) := by
+          ext y
+          exact isEmptyElim y
+        rw [this]
+        exact isOpen_empty⟩
+    refine ⟨⟨F.germ V x hxV g⟩, ⟨?_⟩⟩
+    intro a b
+    obtain ⟨U, hUV, hxU, s, rfl⟩ := F.exists_le_germ_eq a hxV
+    obtain ⟨W, hWV, hxW, t, rfl⟩ := F.exists_le_germ_eq b hxV
+    let Q := U ⊓ W
+    have hxQ : x ∈ Q := ⟨hxU, hxW⟩
+    have := empty Q (inf_le_left.trans hUV)
+    have heq : F.map (homOfLE (inf_le_left : Q ≤ U)).op s =
+        F.map (homOfLE (inf_le_right : Q ≤ W)).op t := by
+      apply LocallyConstant.ext
+      intro y
+      exact isEmptyElim y
+    rw [← F.germ_res_apply (homOfLE (inf_le_left : Q ≤ U)) x hxQ s,
+      ← F.germ_res_apply (homOfLE (inf_le_right : Q ≤ W)) x hxQ t, heq]
 
 end TopCat

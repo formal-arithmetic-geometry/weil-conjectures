@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "For each open V in T, define L(V) as the locally constant maps from V intersected with C to R. Compatible maps on an open cover glue pointwise; local constancy is checked in the member containing each point. Uniqueness is pointwise, so the resulting presheaf is a sheaf by the locally constant maps sheaf node.",
+   "text": "Construct a natural isomorphism between the displayed intersection presheaf and the pushforward of locallyConstantMapsPresheaf on C along the subtype inclusion, by flattening nested subtypes. The latter is a sheaf by lem-weil-pbc-locally-constant-maps-sheaf and Mathlib TopCat.Sheaf.pushforward_sheaf_of_sheaf. Transport the sheaf property across the natural isomorphism.",
    "uses": [
     "lem-weil-pbc-locally-constant-maps-sheaf"
    ],
@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Fix x in C. Every open neighbourhood W of x in C is V intersected with C for some open neighbourhood V of x in T, and restricting V in T restricts W in C. Conversely, equality of two sections after restriction to a neighbourhood W in C implies equality after restriction to its representing neighbourhood V in T. Therefore the germ equivalence relation for L at x is exactly the germ equivalence relation for locally constant maps on C. The map taking a representative g on V to its restriction on V intersected with C identifies these two stalks. Under this identification, the evaluation map is the evaluation map of the locally constant germ node applied to U = C: it is well defined, bijective and uniquely determined by evaluation of representatives.",
+   "text": "For x in C, apply Mathlib TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing to the subtype inclusion. Compose its stalk isomorphism with that induced by the natural isomorphism from step 1. Apply lem-weil-pbc-locally-constant-germ-evaluation on C and compose evaluation with this stalk isomorphism. Mathlib stalkFunctor_map_germ_apply and stalkPushforward_germ_apply prove the required formula, and composition of bijections proves bijectivity. For uniqueness, represent each ambient stalk element by a germ using TopCat.Presheaf.exists_germ_eq and apply the evaluation formula.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "lem-weil-pbc-locally-constant-germ-evaluation"
@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "For x outside C, the open complement of C is a neighbourhood of x and has empty intersection with C, so it carries the unique empty map. Restricting any germ to a smaller neighbourhood inside this complement gives that map; hence the stalk is a singleton.",
+   "text": "For x outside C, let V be the open complement, using closedness. Every open U contained in V has empty intersection with C. The unique empty locally constant map over V supplies a germ, even when R is empty. Represent any two stalk elements over neighbourhoods U and W contained in V using Mathlib TopCat.Presheaf.exists_le_germ_eq. Their restrictions to U intersect W agree by empty-domain function extensionality. TopCat.Presheaf.germ_res_apply then identifies their germs, proving subsingleton.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -71,7 +71,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Definition Tag 006W, Example Tag 007B and Lemma Tag 00AE; the pointwise gluing and germ arguments are written out"
+  "place": "Tags 006W, 007B and 00AE, implemented via the natural subtype-flattening isomorphism, Mathlib pushforward_sheaf_of_sheaf and stalkPushforward_iso_of_isInducing, and direct empty-complement germ argument; P2 stage 3."
  },
  "mathlib_searches": [
   {
@@ -148,5 +148,15 @@
   "group": "J1",
   "result": "pass",
   "note": "T=X:TopCat, C closed, R:Type; L=closedPushforwardConstantPresheaf (LocallyConstant on V∩C subtype, comap restriction; new def node, no landed/Mathlib named form, siblings only inline lets); (0) IsSheaf; (a) ∃ ev on stalk with ev(germ g)=g x, Bijective, unique among all ev'; (b) off C Nonempty ∧ Subsingleton; check_dag clean for new node"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T044751-L-2038476",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
