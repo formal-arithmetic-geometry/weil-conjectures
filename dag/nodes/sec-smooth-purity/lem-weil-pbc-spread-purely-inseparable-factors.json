@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Because E is finite over A', it is integral over A'. The inclusion A' to E is injective because it induces the stated inclusion of fraction fields. After the indicated principal localization, lying over gives a prime of E_1 above every prime of A'_1, so Spec(E_1) to Spec(A'_1) is surjective.",
+   "text": "The compatible fraction-field maps imply injectivity of A' → E. Identify the tensor-product map after inverting s with IsLocalization.Away.map. RingHom.localization_away_map_finite and IsLocalization.map_injective_of_injective give integrality and injectivity. RingHom.IsIntegral.comap_surjective (the lying-over node) and IsIntegralHom.SpecMap_iff give the surjectivity of the affine scheme morphism.",
    "uses": [
     "lem-weil-pbc-integral-injective-lying-over"
    ],
@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "A' is finite over the Noetherian domain A, hence Noetherian, so the power-in-base node applies to E over A' and gives a nonzero s' in A'. Since A' is a domain integral over A, take a monic equation s'^m+a_{m-1}s'^{m-1}+...+a_0=0 over A of minimal degree; then a_0 is nonzero and a_0 = s'*(element of A'), so s=a_0 in A is nonzero and A'[1/s] is a localization of A'[1/s'], E_1=E[1/s]; the power property persists under this further localization. In characteristic zero E_1=A'_1, so the morphism is an isomorphism. In characteristic p>0 every x in E_1 has x^{p^n} in the image of A'_1. Hence two primes q, q' of E_1 over the same prime P of A'_1 coincide (x in q iff x^{p^n} in P iff x in q'), so Spec(E_1) to Spec(A'_1) is injective; and every element of a residue field of E_1, being a quotient of images of elements of E_1, has a p^n-th power in the residue field of A'_1, so each residue-field extension is purely inseparable. By the radicial definition (Stacks 01S4) the morphism is radicial, equivalently universally injective.",
+   "text": "Finiteness over the Noetherian ring A gives IsNoetherianRing A'. RingTheory.power_in_base_after_localization gives nonzero t in A' and both characteristic clauses. Since t is integral over A and is a non-zero-divisor in A', IsAlgebraic.exists_nonzero_dvd gives a nonzero s in A such that t divides its image. Thus t is a unit in A' ⊗[A] A[1/s]. Use tfae_universallyInjective, the field-point criterion of the radicial node. Two field-valued points agreeing on A' ⊗[A] A[1/s] extend via IsLocalization.Away.lift to E ⊗[A'] A'[1/t], and agree on A'[1/t] by localization extensionality. In characteristic zero, surjectivity of includeRight makes the extensions equal. In positive characteristic p, characteristic descends from K' to A' and then to the field of points; the power clause and injectivity of iterateFrobenius make the extensions equal. Localization extensionality gives equality of the original points.",
    "uses": [
     "lem-weil-pbc-power-in-base-after-localization",
     "def-weil-radicial-morphism"
@@ -49,7 +49,7 @@
    }
   },
   {
-   "text": "The preceding steps give an integral, surjective and radicial morphism. Applying the integral-radicial-surjective universal-homeomorphism criterion yields that Spec(E_1) to Spec(A'_1) is a universal homeomorphism.",
+   "text": "The localized morphism is integral, surjective and universally injective, hence has an IsUniversalHomeomorphism instance. Apply AlgebraicGeometry.isUniversalHomeomorphism_le_universally_isHomeomorph (the recorded universal-homeomorphism criterion) to obtain the final conclusion.",
    "uses": [
     "lem-pc-integral-radicial-surjective-universal-homeomorphism"
    ],
@@ -68,8 +68,10 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-12",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "proof, finite-algebra calculation, purely inseparable factors"
+  "place": "finite-algebra calculation, following the existing three-step route with Mathlib localization and field-point criteria; independently reviewed by Y2"
  },
  "mathlib_searches": [
   {
@@ -155,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T135337-L-1701943",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
