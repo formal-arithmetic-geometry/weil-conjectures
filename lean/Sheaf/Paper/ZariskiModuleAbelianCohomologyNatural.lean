@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Y3
+Authors: SHEAF groups Y3 and Y2
 -/
 module
 
@@ -12,13 +12,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.
 public import Mathlib.Algebra.Category.Grp.AB
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
+import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
+import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 
 /-! # Natural comparison of module and abelian cohomology
 
@@ -32,6 +29,36 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 
+-- Naturality of forgetting homology is independent of the ringed space.
+private theorem resolutionForget_naturality
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
+    (G : A ⥤ B) (V : B ⥤ D) [G.Additive] [V.Additive] [V.PreservesHomology]
+    {M N : A} (f : M ⟶ N) (I : InjectiveResolution M) (J : InjectiveResolution N)
+    (φ : I.cocomplex ⟶ J.cocomplex) (comm : I.ι.f 0 ≫ φ.f 0 = f ≫ J.ι.f 0)
+    (q : ℕ) :
+    V.map ((G.rightDerived q).map f) ≫
+        (V.mapIso (J.isoRightDerivedObj G q) ≪≫
+          ((((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex).sc q).mapHomologyIso
+            V).symm).hom =
+      (V.mapIso (I.isoRightDerivedObj G q) ≪≫
+          ((((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).sc q).mapHomologyIso
+            V).symm).hom ≫
+        HomologicalComplex.homologyMap
+          ((V.mapHomologicalComplex _).map ((G.mapHomologicalComplex _).map φ)) q := by
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+  rw [← Category.assoc, ← V.map_comp,
+    InjectiveResolution.isoRightDerivedObj_hom_naturality f I J φ comm G q,
+    V.map_comp]
+  simp only [Category.assoc]
+  exact congrArg (fun k ↦ V.map (I.isoRightDerivedObj G q).hom ≫ k)
+    (ShortComplex.mapHomologyIso_inv_naturality
+      ((HomologicalComplex.shortComplexFunctor _ _ q).map
+        ((G.mapHomologicalComplex _).map φ)) V)
+
+set_option maxHeartbeats 800000 in
+-- Comparing the two section complexes requires unfolding module and abelian evaluations.
+set_option backward.isDefEq.respectTransparency false in
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
 
 Source: Stacks Project, sites-cohomology.tex, Lemma Tag 03FD.
@@ -60,7 +87,85 @@ theorem zariskiModuleAbelianCohomologyNatural_components (X : Scheme.{u}) (q : �
       (evaluation (Opens X.carrier)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
     ∃ e : ∀ M, F.obj M ≅ G.obj M,
       ∀ {M N} (f : M ⟶ N), F.map f ≫ (e N).hom = (e M).hom ≫ G.map f := by
-  sorry
+  classical
+  let : EnoughInjectives
+      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}) :=
+    @IsGrothendieckAbelian.enoughInjectives _ _ _
+      (Sheaf.isGrothendieckAbelian_of_essentiallySmall'.{u}
+        (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u})
+  let : HasExt.{u} (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u}) :=
+    hasExt_of_enoughInjectives _
+  let : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
+  have : T.PreservesHomology := inferInstance
+  let Γ := sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u} ⋙
+    (evaluation (Opens X.carrier)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  let G := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  let V := forget₂ (ModuleCat.{u}
+    ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
+  obtain ⟨d⟩ := Sheaf.nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived
+    (Opens.grothendieckTopology X.carrier) (⊤ : Opens X.carrier) q
+  have hac (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))
+      [Injective I] : Γ.rightAcyclic (T.obj I) := by
+    intro n
+    let : Subsingleton (Sheaf.H' (T.obj I) (n + 1) ⊤) :=
+      injective_module_abelian_acyclic ⊤ I (n + 1) (Nat.succ_pos n)
+    obtain ⟨dn⟩ := Sheaf.nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived
+      (Opens.grothendieckTopology X.carrier) (⊤ : Opens X.carrier) (n + 1)
+    have hz : IsZero (Sheaf.H' (T.obj I) (n + 1) ⊤) :=
+      AddCommGrpCat.isZero_of_subsingleton _
+    exact hz.of_iso (dn.app (T.obj I)).symm
+  let I := fun M : SheafOfModules.{u} (moduleRings X.toRingedSpace) ↦ injectiveResolution M
+  let ι := fun M ↦
+    (HomologicalComplex.singleMapHomologicalComplex T (ComplexShape.up ℕ) 0).inv.app M ≫
+      (T.mapHomologicalComplex (ComplexShape.up ℕ)).map (I M).ι
+  have hι (M) : QuasiIso (ι M) := by
+    dsimp only [ι]
+    have : QuasiIso ((T.mapHomologicalComplex (ComplexShape.up ℕ)).map (I M).ι) :=
+      inferInstance
+    exact quasiIso_comp _ _
+  -- The forgotten module resolution is termwise acyclic for abelian sections.
+  let c := fun M ↦ Γ.rightDerivedObjIsoOfResolution (ι M)
+    (fun n ↦ hac ((I M).cocomplex.X n)) q
+  -- Exact forgetting commutes with the homology of the section complex.
+  let a : ∀ M, V.obj ((G.rightDerived q).obj M) ≅
+      ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj
+        ((T.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I M).cocomplex)).homology q :=
+    fun M ↦ V.mapIso ((I M).isoRightDerivedObj G q) ≪≫
+      ((((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I M).cocomplex).sc q).mapHomologyIso
+        V).symm
+  let e := fun M ↦ a M ≪≫ (c M).symm ≪≫ (d.app (T.obj M)).symm
+  refine ⟨e, ?_⟩
+  intro M N f
+  let φ := InjectiveResolution.desc f (I N) (I M)
+  -- Use one lift of f throughout all three comparison squares.
+  have ha : V.map ((G.rightDerived q).map f) ≫ (a N).hom =
+      (a M).hom ≫ HomologicalComplex.homologyMap
+        ((Γ.mapHomologicalComplex _).map ((T.mapHomologicalComplex _).map φ)) q := by
+    exact resolutionForget_naturality G V f (I M) (I N) φ
+      (InjectiveResolution.desc_commutes_zero f (I N) (I M)) q
+  have hw : ι M ≫ (T.mapHomologicalComplex _).map φ =
+      (CochainComplex.single₀ _).map (T.map f) ≫ ι N := by
+    dsimp only [ι]
+    rw [Category.assoc, ← Functor.map_comp, InjectiveResolution.desc_commutes,
+      Functor.map_comp, ← Category.assoc]
+    simpa only [Functor.comp_map, Category.assoc] using
+      congrArg (fun k ↦ k ≫ (T.mapHomologicalComplex _).map (I N).ι)
+        ((HomologicalComplex.singleMapHomologicalComplex T
+          (ComplexShape.up ℕ) 0).inv.naturality f).symm
+  have hc := acyclicComparison_naturality Γ (ι M) (ι N)
+    (fun n ↦ hac ((I M).cocomplex.X n)) (fun n ↦ hac ((I N).cocomplex.X n))
+    (T.map f) ((T.mapHomologicalComplex _).map φ) hw q
+  dsimp only [e, Iso.trans_hom, Iso.symm_hom]
+  change V.map ((G.rightDerived q).map f) ≫
+    ((a N).hom ≫ (c N).inv ≫ (d.app (T.obj N)).inv) =
+      ((a M).hom ≫ (c M).inv ≫ (d.app (T.obj M)).inv) ≫ _
+  rw [← Category.assoc, ← Category.assoc, ha]
+  simp only [Category.assoc]
+  rw [reassoc_of% hc]
+  exact congrArg (fun k ↦ (a M).hom ≫ (c M).inv ≫ k)
+    (d.inv.naturality (T.map f))
 
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.
 

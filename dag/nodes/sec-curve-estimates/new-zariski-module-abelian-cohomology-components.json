@@ -15,31 +15,49 @@
  ],
  "proof": [
   {
-   "text": "Choose injective resolutions of module sheaves. Exactness of forgetting modules to abelian sheaves identifies the resulting global-sections complexes, and the acyclic-resolution comparison gives an isomorphism on each homology object.",
+   "text": "Supply enough injectives in module sheaves from lem-sc-ringed-space-module-sheaves-enough-injectives and in abelian sheaves from their Grothendieck structure. The source-library finite-colimit-preservation instance for SheafOfModules.toSheaf, together with finite-limit preservation, gives preservation of homology and quasi-isomorphisms. Forget a chosen module injective resolution, using singleMapHomologicalComplex to identify its augmentation source. This is a genuine abelian resolution, not an injective abelian resolution.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sc-site-cohomology-right-derived-sections at the top open in each positive degree to transfer injective_module_abelian_acyclic from lem-sc-injective-module-abelian-acyclic-zariski into rightAcyclic for abelian evaluation. The acyclic-resolution comparison rightDerivedObjIsoOfResolution of lemma-weil-pbc-leray-acyclicity now computes abelian derived sections on the forgotten resolution in every degree, including zero.",
+   "uses": [
+    "lem-sc-site-cohomology-right-derived-sections",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
     "lemma-weil-pbc-leray-acyclicity"
    ],
    "elementary": false
   },
   {
-   "text": "A lift of a module morphism to the chosen resolutions induces the corresponding chain map after forgetting. Independence of lifts up to homotopy gives the displayed naturality equation.",
+   "text": "Compose the module injective-resolution isomorphism after forgetting with ShortComplex.mapHomologyIso.symm, the inverse abelian acyclic-resolution comparison, and the inverse Ext-to-derived-sections comparison. The module and abelian section complexes agree definitionally. These are the family e in the Lean proof; no arbitrary family of isomorphisms is chosen.",
    "uses": [
-    "lemma-weil-pbc-leray-acyclicity"
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-sc-site-cohomology-right-derived-sections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a module morphism f use InjectiveResolution.desc to lift f between the chosen module resolutions. Its augmentation equation survives forgetting by naturality of singleMapHomologicalComplex. InjectiveResolution.isoRightDerivedObj_hom_naturality and ShortComplex.mapHomologyIso_inv_naturality give the first square. Apply acyclicComparison_naturality of lem-sc-acyclic-comparison-natural to the forgotten resolutions for the second square. Naturality of the inverse Ext comparison gives the final square. Compose the three equalities using associativity to obtain the required naturality equation for e.",
+   "uses": [
+    "lem-sc-acyclic-comparison-natural",
+    "lem-sc-site-cohomology-right-derived-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-sc-ringed-space-module-sheaves-enough-injectives",
-  "lemma-weil-pbc-leray-acyclicity"
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-sc-acyclic-comparison-natural"
  ],
  "proof_origin": {
-  "by": "U3 stage 3 worker",
+  "by": "Y2 stage-3 worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FD"
+  "place": "Tag 03FD; injective and acyclic resolution implementation, naturality via Tag 015E"
  },
  "mathlib_searches": [
   {
@@ -113,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U3",
+  "reviewer": "X-5a26c",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T112852-L-772501",
+  "landing": "20261012T144201-L-2113025",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered Lean proof and unchanged signatures with the node statements, recorded dependencies, report, axiom checks, and successful compilation of the delivery and all three direct importers."
  }
 }
