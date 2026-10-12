@@ -9,6 +9,9 @@ public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
+import Mathlib.RingTheory.TensorProduct.Quotient
+import Sheaf.RingTheory.FiniteIntegralAwayApproximation
+import Sheaf.RingTheory.QuotientSectionFactorTransfer
 import Sheaf.Paper.IntegralClosureFiniteFibrePartLocalization
 import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
 
@@ -63,6 +66,51 @@ theorem exists_finite_gabber_section_model
           algebraMap (A ⧸ I) C (Ideal.Quotient.mk I a))) ∧
       Φ (Ideal.Quotient.mk _ b) = (1, 0) ∧
       (∀ x : D, (Φ (Ideal.Quotient.mk _ x)).1 = σ x.1) ∧
-      Function.Bijective (Localization.awayMap D.val.toRingHom b) := by sorry
+      Function.Bijective (Localization.awayMap D.val.toRingHom b) := by
+  classical
+  let J := I.map (algebraMap A B)
+  have hJ : J ≤ RingHom.ker σ.toRingHom := by
+    rw [Ideal.map_le_iff_le_comap]
+    intro a ha
+    change σ (algebraMap A B a) = 0
+    rw [σ.commutes]
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr ha
+  let s : (B ⧸ J) →ₐ[A ⧸ I] A ⧸ I :=
+    (Ideal.Quotient.liftₐ J σ hJ).extendScalarsOfSurjective Ideal.Quotient.mk_surjective
+  let : Etale (A ⧸ I) (B ⧸ J) :=
+    Etale.of_equiv (Algebra.TensorProduct.quotIdealMapEquivQuotTensor B I).symm
+  obtain ⟨ε, hε, hsε, hker, ⟨hC, _, e, hes⟩, _⟩ :=
+    Etale.exists_idempotent_splitting_of_algHom s
+  let := hC
+  have he : ∀ a : A, e (Ideal.Quotient.mk J (algebraMap A B a)) =
+      (algebraMap (A ⧸ I) (A ⧸ I) (Ideal.Quotient.mk I a),
+        algebraMap (A ⧸ I) hε.one_sub.Corner (Ideal.Quotient.mk I a)) := by
+    intro a
+    exact e.commutes (Ideal.Quotient.mk I a)
+  have heε : e ε = (1, 0) := by
+    have hy : s (e.symm (0, 1)) = 0 := by
+      simpa using (hes (e.symm (0, 1))).symm
+    have hyker : e.symm (0, 1) ∈ Ideal.span {1 - ε} :=
+      hker ▸ RingHom.mem_ker.mpr hy
+    obtain ⟨z, hz⟩ := Ideal.mem_span_singleton.mp hyker
+    have hmul : ε * e.symm (0, 1) = 0 := by
+      rw [hz, ← mul_assoc, mul_sub, mul_one, hε.eq, sub_self, zero_mul]
+    have hsecond := congrArg (fun x ↦ (e x).2) hmul
+    apply Prod.ext
+    · exact (hes ε).trans hsε
+    · simpa using hsecond
+  obtain ⟨ε', g, q, hq, hε', hqε, _, _, _, hg, hloc⟩ :=
+    integralClosure_finiteFibrePart_localization A B I (A ⧸ I)
+      hε.one_sub.Corner e.toRingEquiv he ε heε
+  obtain ⟨D, hD, b, hbg, hb, hDb⟩ :=
+    exists_finite_integral_away_approximation A B I g (hg ▸ hε') hloc
+  obtain ⟨C, hC', hAC, Φ, hΦ, hΦb, hΦs⟩ :=
+    quotient_section_factor_transfer I σ hε.one_sub.Corner e.toRingEquiv
+      (fun x ↦ hes (Ideal.Quotient.mk J x)) D b hb hDb (by
+        rw [hbg]
+        have h := hq g
+        rw [hg, hqε] at h
+        exact h.symm ▸ heε)
+  exact ⟨D, hD, C, hC', hAC, Φ, b, hΦ, hΦb, hΦs, hDb⟩
 
 end Algebra

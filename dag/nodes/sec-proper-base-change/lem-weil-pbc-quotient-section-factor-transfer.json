@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-quotient-section-factor-transfer",
+ "kind": "statement",
+ "title": "Transfer a section factor through a localized subalgebra inclusion",
+ "statement": "Let A and B be commutative rings, B an A-algebra, I an ideal of A, and sigma:B to A/I an A-algebra homomorphism. Suppose C0 is a commutative ring and e:B/IB to (A/I) times C0 is a ring isomorphism with first projection sigma. Let D be an A-subalgebra of B and b in D have idempotent image delta in D/ID. Suppose the canonical localization map D[1/b] to B[1/b] is bijective [def-weil-ring-localization-away], and e sends the image of b to (1,0). There exist an A/I-algebra C in the universe of B and a ring isomorphism Phi:D/ID to (A/I) times C respecting the A/I structure maps, sending delta to (1,0), with first projection sigma restricted to D.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI (lemma-characterize-henselian-pair), proof of (5) implies (2), construction and closed-fibre decomposition of B''; https://stacks.math.columbia.edu/tag/09XI, read 2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Restrict sigma to D. It kills ID, so factor through a section s:D/ID to A/I; s(delta)=1. The localized algebra equivalence preserves the extended ideal I, and induces a quotient ring equivalence kq.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Quotient commutes with localization: the two localized quotients are localizations of D/ID and B/IB at the corresponding images of b. The induced quotient inclusion j and localization maps tD,tB satisfy kq(tD(x))=tB(j(x)).",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If s(x)=s(y), applying e shows j(delta)*j(x)=j(delta)*j(y). Thus tB(j(x))=tB(j(y)), whence tD(x)=tD(y) by kq injectivity. The fraction equality criterion gives delta^n*x=delta^n*y. If n=0 multiply by delta; if n is positive idempotence gives delta*x=delta*y. Conversely the latter equality gives s(x)=s(y) because s(delta)=1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take C to be the (1-delta)-corner of D/ID, with the algebra map r sent to (1-delta) times its scalar image. Define Phi(x)=(s(x),(1-delta)*x). Injectivity follows from the preceding equality criterion and x=delta*x+(1-delta)*x. Surjectivity sends (r,y) to delta*algebraMap(r)+y: corner membership gives (1-delta)*y=y, hence s(y)=0. Scalar compatibility and Phi(delta)=(1,0) follow directly. The corner has the universe of D, which is the universe of B.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-quotient-commute"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K3",
+  "date": "2026-10-12",
+  "note": "Explicit Lean realization of the finite-subalgebra and corner argument of Stacks 09XI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite subalgebra integral closure localization finite type idempotent quotient",
+   "results": "Algebra.QuasiFinite.of_isIntegral_of_finiteType, Algebra.EssFiniteType.cond, Algebra.FiniteType.of_span_eq_top_target, Algebra.FiniteType.of_span_eq_top_source, IsLocalization.finite, Algebra.QuasiFinite.instOfIsFractionRing, Algebra.essFiniteType_iff_exists_subalgebra, instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl",
+   "date": "2026-10-12",
+   "available": true,
+   "verdict": "No exact matching statement; relevant Mathlib declarations used in the complete proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem.Corner",
+   "results": "IsIdempotentElem.Corner, instSemiringCorner, instCommSemiringCorner, instRingCorner, instCommRingCorner, CompleteOrthogonalIdempotents.ringEquivOfIsMulCentral, CompleteOrthogonalIdempotents.ringEquivOfComm",
+   "date": "2026-10-12",
+   "available": true,
+   "verdict": "No exact matching statement; relevant Mathlib declarations used in the complete proof."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*subalgebra.*away|awayMap.*bijective|prodQuotientOfIsIdempotentElem",
+   "results": "Mathlib/RingTheory/Localization/Away/Basic.lean, Mathlib/RingTheory/Ideal/Pure.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/Idempotents.lean",
+   "date": "2026-10-12",
+   "available": true,
+   "verdict": "No exact matching statement; relevant Mathlib declarations used in the complete proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite integral subalgebra inducing localization isomorphism and retaining ideal congruence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of subalgebra quotient at idempotent transfers section product decomposition",
+   "results": "IsLocalization.away_of_isIdempotentElem, IsLocalization.Away.quotient_of_isIdempotentElem, IsLocalization.away_of_isIdempotentElem_of_mul, AlgEquiv.prodQuotientOfIsIdempotentElem_apply_fst, AlgEquiv.prodQuotientOfIsIdempotentElem_apply_snd, AlgEquiv.prodQuotientOfIsIdempotentElem_apply, AlgEquiv.prodQuotientOfIsIdempotentElem, RingHom.prod_bijective_of_isIdempotentElem",
+   "date": "2026-10-12",
+   "available": true,
+   "verdict": "No exact matching statement; relevant Mathlib declarations used in the complete proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientEquiv",
+   "results": "Ideal.quotientEquiv, Ideal.quotientEquiv_mk, Ideal.quotientEquiv_symm_mk, Ideal.quotientEquiv_apply, Ideal.quotientEquiv_symm_apply, PowerBasis.quotientEquivQuotientMinpolyMap_apply, PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply",
+   "date": "2026-10-12",
+   "available": true,
+   "verdict": "No exact matching statement; relevant Mathlib declarations used in the complete proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteGabberSectionModel",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 09XI (lemma-characterize-henselian-pair), proof of (5) implies (2), the section decomposition and paragraphs constructing B' and B'', before invoking Tag 0EM0; Tag 09XH (lemma-helper-finite-type); read at https://stacks.math.columbia.edu/tag/09XI on 2026-10-12",
+   "via": [
+    "lem-weil-pbc-finite-gabber-section-model",
+    "lem-weil-pbc-gabber-root-criterion-integral-section-factor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.QuotientSectionFactorTransfer",
+  "file": "lean/Sheaf/RingTheory/QuotientSectionFactorTransfer.lean",
+  "declaration": "Algebra.quotient_section_factor_transfer",
+  "statement": "theorem quotient_section_factor_transfer\n    {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]\n    (I : Ideal A) (σ : B →ₐ[A] A ⧸ I)\n    (C₀ : Type w) [CommRing C₀]\n    (e : (B ⧸ I.map (algebraMap A B)) ≃+* ((A ⧸ I) × C₀))\n    (hes : ∀ x : B, (e (Ideal.Quotient.mk _ x)).1 = σ x)\n    (D : Subalgebra A B) (b : D)\n    (hb : IsIdempotentElem (Ideal.Quotient.mk (I.map (algebraMap A D)) b))\n    (hloc : Function.Bijective (Localization.awayMap D.val.toRingHom b))\n    (heb : e (Ideal.Quotient.mk _ b.1) = (1, 0)) :\n    ∃ (C : Type v) (_ : CommRing C) (_ : Algebra (A ⧸ I) C)\n      (Φ : (D ⧸ I.map (algebraMap A D)) ≃+* ((A ⧸ I) × C)),\n      (∀ a : A, Φ (Ideal.Quotient.mk _ (algebraMap A D a)) =\n        (algebraMap (A ⧸ I) (A ⧸ I) (Ideal.Quotient.mk I a),\n          algebraMap (A ⧸ I) C (Ideal.Quotient.mk I a))) ∧\n      Φ (Ideal.Quotient.mk _ b) = (1, 0) ∧\n      (∀ x : D, (Φ (Ideal.Quotient.mk _ x)).1 = σ x.1)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144126-L-2101247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144126-L-2101247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
