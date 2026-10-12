@@ -38,4 +38,35 @@ theorem finite_subfamily_iInter_eq_empty_of_isConstructible
     (hE : ∀ a, IsConstructible (E a))
     (hEmpty : (⋂ a, E a) = ∅) :
     ∃ A₀ : Finset A, (⋂ a ∈ A₀, E a) = ∅ := by
-  sorry
+  let E' : A → Set (WithConstructibleTopology T) := fun a =>
+    {x | WithTopology.ofTopology x ∈ E a}
+  have hclosed : ∀ a, IsClosed (E' a) := fun a => by
+    rw [WithConstructibleTopology.isClosed_iff]
+    exact (@Topology.IsConstructible.isClopen_constructibleTopology T _ inferInstance _
+      (hE a)).1
+  have hcompact : IsCompact (Set.univ : Set (WithConstructibleTopology T)) := isCompact_univ
+  have hEmpty' : (⋂ a, E' a) = ∅ := by
+    ext x
+    constructor
+    · intro hx
+      have hx' : x.ofTopology ∈ ⋂ a, E a := by
+        refine Set.mem_iInter.mpr fun a => ?_
+        exact (Set.mem_iInter.mp hx a)
+      rw [hEmpty] at hx'
+      exact hx'
+    · intro hx
+      exact hx.elim
+  obtain ⟨A₀, hA₀⟩ :=
+    hcompact.elim_finite_subfamily_closed E' hclosed (by simpa using hEmpty')
+  refine ⟨A₀, ?_⟩
+  apply Set.eq_empty_iff_forall_notMem.mpr
+  intro x hx
+  let y : WithConstructibleTopology T := WithTopology.toTopology (constructibleTopology T) x
+  have hy : y ∈ ⋂ a ∈ A₀, E' a := by
+    simp only [Set.mem_iInter]
+    intro a ha
+    simpa [E', y] using Set.mem_iInter.mp (Set.mem_iInter.mp hx a) ha
+  have : y ∈ (∅ : Set (WithConstructibleTopology T)) := by
+    rw [← hA₀]
+    exact ⟨Set.mem_univ _, hy⟩
+  simp at this
