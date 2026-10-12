@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "*$\\mathbf Z$ is a Nagata ring* [def-weil-pbc-nagata-ring] (Proposition 0335 (3)). $\\mathbf Z$ is Noetherian [def-weil-pbc-noetherian-ring], since every ideal is $n\\mathbf Z$ for some $n\\ge0$ (division with remainder by the least positive element). Its prime ideals are $(p)$ for primes $p$ and $(0)$; we show each $\\mathbf Z/\\mathfrak p$ is N-2 [def-weil-pbc-japanese-domain]. (a) $\\mathfrak p=(p)$: $\\mathbf Z/(p)=\\mathbf F_p$ is a field, its own fraction field. For a finite extension $L/\\mathbf F_p$ [def-pc-field-extension] every $y\\in L$ is algebraic over $\\mathbf F_p$ (the powers $1,y,\\dots,y^{d}$, $d=\\dim L$, are linearly dependent), and dividing a nonzero polynomial relation by its leading coefficient gives a monic one, so $y$ is integral over $\\mathbf F_p$ [def-weil-pbc-integral-closure]; the integral closure of $\\mathbf F_p$ in $L$ is $L$, which is a finitely generated $\\mathbf F_p$-module [def-weil-finitely-generated-module] since $\\dim_{\\mathbf F_p}L<\\infty$. (b) $\\mathfrak p=(0)$: $\\mathbf Z$ is a normal domain [def-weil-pbc-normal-ring]: if $x=a/b\\in\\mathbf Q$ with $\\gcd(a,b)=1$, $b>0$, satisfies $x^n+c_{n-1}x^{n-1}+\\dots+c_0=0$ with $c_i\\in\\mathbf Z$, multiplying by $b^n$ gives $a^n=-b(c_{n-1}a^{n-1}+\\dots+c_0b^{n-1})$, so every prime factor of $b$ divides $a$, hence $b=1$ and $x\\in\\mathbf Z$. Let $L/\\mathbf Q$ be a finite extension. As $\\mathbf Q$ has characteristic $0$, $L/\\mathbf Q$ is separable by [lem-weil-pbc-char-zero-field-extension-separable]; since $L/\\mathbf Q$ is algebraic its transcendence basis is empty, so this says $L/\\mathbf Q$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. By [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] the integral closure of $\\mathbf Z$ in $L$ is a finitely generated $\\mathbf Z$-module. So $\\mathbf Z$ is N-2. Hence $\\mathbf Z$ is Noetherian and every $\\mathbf Z/\\mathfrak p$ is N-2: $\\mathbf Z$ is a Nagata ring.",
+   "text": "Prove the Nagata condition for any ring R ring-isomorphic to the integers, hence for ULift.{u} ℤ. Transport the Noetherian, integrally closed and dimension-at-most-one instances from ℤ. For a nonzero prime p, dimension one makes p maximal, so R/p is a field. Its canonical fraction field is linearly equivalent to itself; a finite extension L of that fraction field is finite over R/p by transitivity. The integral closure is an R/p-submodule of this finite-dimensional space, hence is Noetherian and finite. For p = 0, identify R/(0) with ℤ. It is normal Noetherian and has characteristic zero; the fraction field has characteristic zero and the finite extension is separable (Mathlib instances PerfectField.ofCharZero and Algebra.IsAlgebraic.isSeparable_of_perfectField). Apply IsIntegralClosure.finite [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite]. This proves IsNagataRing R [def-weil-pbc-nagata-ring]. These two branches are implemented by the fully proved private helpers isN2_field and isNagataRing_of_equiv_int.",
    "uses": [
     "def-weil-pbc-nagata-ring",
     "def-weil-pbc-noetherian-ring",
@@ -36,7 +36,6 @@
     "def-weil-pbc-integral-closure",
     "def-weil-finitely-generated-module",
     "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-char-zero-field-extension-separable",
     "def-weil-pbc-separable-algebraic-extension",
     "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
    ],
@@ -47,7 +46,7 @@
    }
   },
   {
-   "text": "*$A$ is N-2.* By hypothesis $\\mathbf Z\\to A$ is a ring map of finite type [def-weil-pbc-finite-type-algebra] and $A$ is a domain. By step 1 $\\mathbf Z$ is a Nagata ring, so by Nagata's theorem [lem-weil-pbc-nagata-universally-japanese] $\\mathbf Z$ is universally Japanese [def-weil-pbc-nagata-ring], and therefore $A$ is N-2 [def-weil-pbc-japanese-domain].",
+   "text": "Equip A with the ULift.{u} ℤ-algebra structure by composing the original integer algebra map with ULift.ringEquiv. The scalar tower ℤ → ULift ℤ → A follows from multiplication associativity, and Algebra.FiniteType.of_restrictScalars_finiteType preserves finite type. Apply isUniversallyJapanese_of_isNagataRing [lem-weil-pbc-nagata-universally-japanese] to the lifted integer ring proved Nagata in step 1, then evaluate the universally Japanese condition [def-weil-pbc-nagata-ring] at A. Obtain IsN2 A (FractionRing A) [def-weil-pbc-japanese-domain]. No universe or binder of the statement is changed.",
    "uses": [
     "def-weil-pbc-finite-type-algebra",
     "lem-weil-pbc-nagata-universally-japanese",
@@ -61,7 +60,7 @@
    }
   },
   {
-   "text": "*Conclusion.* Apply the definition of N-2 [def-weil-pbc-japanese-domain] to the trivial finite extension $L=K$ of the fraction field $K$ of $A$: the integral closure $A'$ of $A$ in $K$ [def-weil-pbc-integral-closure] is a finitely generated $A$-module [def-weil-finitely-generated-module] (an N-2 domain is N-1).",
+   "text": "Apply IsN2 A (FractionRing A) directly to the trivial extension L = FractionRing A, whose finite-dimensional and scalar-tower instances are available. Thus Module.Finite A (integralClosure A (FractionRing A)). The canonical fraction-field equivalence FractionRing.algEquiv A K induces an A-algebra equivalence of integral closures by AlgEquiv.mapIntegralClosure. Transport Module.Finite along its underlying linear equivalence using Module.Finite.equiv. This gives the required finiteness in the specified arbitrary-universe fraction field K without using the still-sorry helper isN1_of_isN2.",
    "uses": [
     "def-weil-pbc-japanese-domain",
     "def-weil-pbc-integral-closure",
@@ -82,7 +81,6 @@
   "def-weil-pbc-integral-closure",
   "def-weil-finitely-generated-module",
   "def-weil-pbc-normal-ring",
-  "lem-weil-pbc-char-zero-field-extension-separable",
   "def-weil-pbc-separable-algebraic-extension",
   "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
   "def-weil-pbc-finite-type-algebra",
@@ -91,7 +89,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Proposition Tag 0335 (proposition-ubiquity-nagata) items (3) and (5) with its proof, Proposition Tag 0334, Lemmas Tag 032M and 032L, Definitions Tag 032F and 032R"
+  "place": "Proposition Tag 0335 (3), its Dedekind-domain proof, Proposition Tag 0334 (1) => (3), and Definitions Tags 032F and 032R. Lean implementation by X2: the integer Nagata condition is proved from Mathlib, with a universe lift of the base and transport along the canonical fraction-field equivalence."
  },
  "mathlib_searches": [
   {
@@ -181,5 +179,15 @@
   "group": "E1",
   "result": "pass",
   "note": "domain A = CommRing+IsDomain; Z->A finite type = Algebra.FiniteType ℤ A; K fraction field = Field K, Algebra A K, IsFractionRing A K; A' = integralClosure A K (recorded); f.g. A-module = Module.Finite A (integralClosure A K); no Mathlib/source finite-normalization theorem for finite type Z-domains (only Noetherian integrally closed base)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T070559-L-3480670",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
