@@ -26,61 +26,53 @@
  ],
  "proof": [
   {
-   "text": "Factor the proper morphism through the relative spectrum of its global sections using [lem-weil-pbc-stein-universally-closed-factor]. In the hypothesis $H^0(X,\\mathcal O_X)=R$, this relative spectrum is $\\operatorname{Spec}R$ itself, and the factorization lemma makes the resulting morphism surjective. Therefore every scheme-theoretic fibre is nonempty.",
+   "text": "Use [lem-weil-pbc-stein-universally-closed-factor] to obtain surjectivity of q = X.toSpecΓ and invertibility of its sharp map. The normalization hypothesis makes f.steinFactorizationBase an isomorphism. By f = q composed with this isomorphism, f is surjective and all section maps f.app U are isomorphisms. The fibre homeomorphism of [def-pc-scheme-fibre] transfers a preimage of s to a point of the scheme-theoretic fibre.",
    "uses": [
-    "lem-weil-pbc-stein-universally-closed-factor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Theorem 37.53.5 (Tag 03H2), setup and Lemma 37.53.4 (Tag 03GY)"
-   }
-  },
-  {
-   "text": "To prove connectedness, suppose a fibre has a nontrivial clopen decomposition and take its characteristic idempotent. The proper-fibre idempotent image lemma [lem-weil-pbc-stein-fibre-idempotent-image] lifts this idempotent to the stalk of $f_*\\mathcal O_X$. Properness gives quasi-compactness and quasi-separatedness [pqf-lem-proper-basic], so pushforward preserves quasi-coherent modules [pqf-lem-pushforward-qcoh]. The universal factorization [lem-weil-pbc-stein-universally-closed-factor], specialized to $B=H^0(X,\\mathcal O_X)=R$, identifies the pushforward algebra with $\\mathcal O_{\\operatorname{Spec}R}$; the affine relative-spectrum and tilde/global-sections identifications [lem-weil-pbc-affine-morphism-relative-spec] [lem-weil-pbc-affine-tilde-gamma-adjunction] therefore identify its stalk with the local ring $R_s$.",
-   "uses": [
-    "lem-weil-pbc-stein-fibre-idempotent-image",
-    "pqf-lem-proper-basic",
-    "pqf-lem-pushforward-qcoh",
     "lem-weil-pbc-stein-universally-closed-factor",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "def-pc-scheme-fibre"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Theorem 37.53.5 (Tag 03H2), normalized affine reduction, lines 15321--15342, using Lemma 37.53.4 (Tag 03GY)"
+    "place": "Theorem 37.53.5 (Tag 03H2), normalized affine reduction and final idempotent argument; checked at https://stacks.math.columbia.edu/tag/03H2"
    }
   },
   {
-   "text": "Let $r\\in R_s$ be the lifted idempotent. Since $R_s$ is local, either $r$ is a unit or $r\\in\\mathfrak m_s$. By the fibre definition [def-pc-scheme-fibre] and the residue-field quotient [def-weil-residue-field], the map $R_s\\to H^0(X_s,\\mathcal O_{X_s})$ factors through $\\kappa(s)=R_s/\\mathfrak m_s$. If $r$ is a unit, its image is a unit and an idempotent unit is $1$; if $r\\in\\mathfrak m_s$, its image is $0$. Thus the image is $0$ or $1$, contradicting the characteristic idempotent from [lem-weil-pbc-scheme-clopen-idempotent], which is $1$ on one nonempty clopen piece and $0$ on the other. Hence the fibre is connected.",
+   "text": "For any clopen subset V of the fibre, use [lem-weil-pbc-scheme-clopen-idempotent] to choose its characteristic idempotent e. By [lem-weil-pbc-stein-fibre-idempotent-image], e is the restriction of a section t over the inverse image of an open neighbourhood U of s. Invert f.app U to obtain the base section a with f.app U a = t. No idempotence of t or a is needed.",
    "uses": [
-    "def-pc-scheme-fibre",
-    "def-weil-residue-field",
-    "lem-weil-pbc-scheme-clopen-idempotent"
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "lem-weil-pbc-stein-fibre-idempotent-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Theorem 37.53.5 (Tag 03H2), formal-functions/idempotent conclusion, lines 15334--15357"
+    "place": "Theorem 37.53.5 (Tag 03H2), normalized affine reduction and final idempotent argument; checked at https://stacks.math.columbia.edu/tag/03H2"
+   }
+  },
+  {
+   "text": "The canonical map k : Spec κ(s) to the base has image s by [def-weil-residue-field], hence its inverse image of U is the whole spectrum. Pull a back to a global section b of Spec κ(s). The Cartesian fibre identity of [def-pc-scheme-fibre] and functoriality of appLE show e = g.appTop b for g the fibre projection to Spec κ(s). Through ΓSpecIso, b corresponds to an element of the field κ(s), so b is zero or a unit. Its image e is therefore zero or a unit; an idempotent unit equals one. Thus e is zero or one and V is empty or the whole fibre. Together with nonemptiness, the topological clopen criterion gives ConnectedSpace.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Theorem 37.53.5 (Tag 03H2), normalized affine reduction and final idempotent argument; checked at https://stacks.math.columbia.edu/tag/03H2"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-stein-universally-closed-factor",
-  "lem-weil-pbc-stein-fibre-idempotent-image",
-  "pqf-lem-proper-basic",
-  "pqf-lem-pushforward-qcoh",
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "def-pc-scheme-fibre",
-  "def-weil-residue-field",
-  "lem-weil-pbc-scheme-clopen-idempotent"
+  "lem-weil-pbc-scheme-clopen-idempotent",
+  "lem-weil-pbc-stein-fibre-idempotent-image",
+  "def-weil-residue-field"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Theorem 37.53.5 (Tag 03H2), proof lines 15312--15357; idempotent image is Derived Categories Lemma 21.16.1 (Tag 0G7X)"
+  "place": "Theorem 37.53.5 (Tag 03H2), normalized affine reduction and final idempotent argument; checked at https://stacks.math.columbia.edu/tag/03H2"
  },
  "mathlib_searches": [
   {
@@ -157,5 +149,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T144059-L-2090844",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
