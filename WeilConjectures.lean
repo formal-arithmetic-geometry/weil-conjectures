@@ -415,6 +415,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Descent
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentDataModules
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Modules
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
+public import WeilConjectures.AlgebraicGeometry.Picard.RationalPointBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
