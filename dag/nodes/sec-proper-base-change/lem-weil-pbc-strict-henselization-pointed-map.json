@@ -17,22 +17,30 @@
  ],
  "proof": [
   {
-   "text": "Obtain the canonical pointed map from the existential factorization statement. Apply the algebraic-properties theorem to that same map and its pointed equations to obtain surjectivity. Mathlib IsLocalRing.ker_eq_maximalIdeal then gives its kernel equality. Combine both properties with the pointed equations.",
+   "text": "Use the concrete evaluation map restricted to the relative separable closure, and the evaluation surjectivity theorem. Apply IsLocalRing.ker_eq_maximalIdeal to obtain the kernel equality.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-pointed-map-factorization",
-    "strict-henselization-pointed-map-properties"
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+    "lem-weil-pbc-strict-henselization-point-evaluation-image"
    ],
    "elementary": false
+  },
+  {
+   "text": "The inclusion composed with codRestrict equals the original evaluation map by extensionality and rfl. Its coprojection pointedness theorem gives all required neighbourhood equations.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-point-evaluation-pointed"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-pointed-map-factorization",
-  "strict-henselization-pointed-map-properties"
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+  "lem-weil-pbc-strict-henselization-point-evaluation-image",
+  "lem-weil-pbc-strict-henselization-point-evaluation-pointed"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04HX; J3 repair of X-60362 E2, existential pointed witness first"
+  "place": "Tag 04HX; F2 second reading: proof metadata matched to delivered Lean (core proof unchanged)"
  },
  "mathlib_searches": [
   {
@@ -102,10 +110,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T163616-L-2785849",
-  "kind": "proof",
+  "landing": "20261012T173824-L-3295166",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

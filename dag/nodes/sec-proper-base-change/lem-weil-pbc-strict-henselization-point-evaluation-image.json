@@ -1,0 +1,137 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, with algebra Tags 04GW and 04GP"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselizationPointedMap",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-henselization-pointed-map",
+   "place": "stage 3 reduction",
+   "via": [
+    "lem-weil-pbc-strict-henselization-pointed-map"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible geometric point induces a ring map on a filtered colimit with image the relative separable closure of the residue field",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "unavailable; no match verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimit.ι_desc",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Limits.colimit.ι_desc",
+   "digest": "e743fce885762f22",
+   "verdict": "Components only; no project-specific evaluation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "residue_descResidueField|colimit_exists_rep|ker_eq_maximalIdeal",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean, Mathlib/CategoryTheory/Limits/ConcreteCategory/WithAlgebraicStructures.lean, Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
+   "digest": "a4dd0446918293e9",
+   "verdict": "Components only; no project-specific evaluation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every element of a filtered colimit of commutative rings comes from one of the rings",
+   "date": "2026-10-13",
+   "results": "CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimitCocone, CommRingCat.FilteredColimits.R, CommRingCat.FilteredColimits.colimitCommRing, CommRingCat.Colimits.colimitIsColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, CommRingCat.Colimits.coconeFun",
+   "digest": "a58ae383bb3ee77b",
+   "verdict": "Components only; no project-specific evaluation theorem."
+  }
+ ],
+ "id": "lem-weil-pbc-strict-henselization-point-evaluation-image",
+ "title": "Pointed evaluation lands in the relative separable closure",
+ "statement": "Let Y be a scheme, barY: Spec Ω → Y an algebraically closed geometric point, and give Ω the residue-field algebra structure specified by barY (hΩ). For every a in the chosen coordinate-ring colimit C [def-weil-pbc-strict-henselization-limit], its canonical pointed evaluation [def-weil-pbc-strict-henselization-point-evaluation] in Ω belongs to the relative separable closure of the residue field of the image of barY [def-weil-pbc-relative-separable-closure]. No local-ring hypothesis on C is required.",
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-strict-henselization-point-evaluation"
+ ],
+ "proof": [
+  {
+   "text": "Cofilteredness of the representative category and preservation of filtered colimits by the forgetful functor give a representative b at one neighbourhood for each colimit element (Concrete.colimit_exists_rep).",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The colimit coprojection equation and residue_descResidueField identify the evaluation with the geometric residue embedding applied to the global-section residue of b.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-point-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The etale neighbourhood residue extension is separable. Its embedding into Ω preserves separability (IsSeparable.map). The pointed factorization identifies the base points and, by hΩ, the base algebra maps; IsSeparable.of_equiv_equiv transports across residueFieldCongr. mem_separableClosure_iff gives the claim.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "def-weil-pbc-strict-henselization-point-evaluation",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "def-weil-pbc-relative-separable-closure"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, with algebra Tag 04GW; F2 second reading, canonical evaluation reduction"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictHenselizationPointEvaluationImage",
+  "file": "lean/Sheaf/Paper/StrictHenselizationPointEvaluationImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationPointEvaluation_mem",
+  "statement": "theorem strictHenselizationPointEvaluation_mem {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Y) [Algebra (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω] (hΩ : algebraMap (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω = (descResidueField (stalkClosedPointTo barY)).hom) (a : strictHenselizationRing barY) : strictHenselizationPointEvaluation barY a ∈ separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T173824-L-3295166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T173824-L-3295166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

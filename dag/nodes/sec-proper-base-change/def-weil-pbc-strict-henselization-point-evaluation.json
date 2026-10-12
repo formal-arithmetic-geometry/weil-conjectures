@@ -1,0 +1,117 @@
+{
+ "kind": "definition",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, with algebra Tags 04GW and 04GP"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselizationPointedMap",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-strict-henselization-pointed-map",
+   "place": "stage 3 reduction",
+   "via": [
+    "lem-weil-pbc-strict-henselization-pointed-map"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible geometric point induces a ring map on a filtered colimit with image the relative separable closure of the residue field",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "unavailable; no match verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimit.ι_desc",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Limits.colimit.ι_desc",
+   "digest": "e743fce885762f22",
+   "verdict": "Components only; no project-specific evaluation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "residue_descResidueField|colimit_exists_rep|ker_eq_maximalIdeal",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Limits/Shapes/ConcreteCategory.lean, Mathlib/CategoryTheory/Limits/ConcreteCategory/WithAlgebraicStructures.lean, Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
+   "digest": "a4dd0446918293e9",
+   "verdict": "Components only; no project-specific evaluation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every element of a filtered colimit of commutative rings comes from one of the rings",
+   "date": "2026-10-13",
+   "results": "CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimitCocone, CommRingCat.FilteredColimits.R, CommRingCat.FilteredColimits.colimitCommRing, CommRingCat.Colimits.colimitIsColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, CommRingCat.Colimits.coconeFun",
+   "digest": "a58ae383bb3ee77b",
+   "verdict": "Components only; no project-specific evaluation theorem."
+  }
+ ],
+ "id": "def-weil-pbc-strict-henselization-point-evaluation",
+ "title": "Canonical geometric-point evaluation of the neighbourhood ring colimit",
+ "statement": "For an algebraically closed geometric point barY: Spec Ω → Y, define the compatible evaluation cocone of the chosen affine pointed-neighbourhood coordinate rings [def-weil-pbc-strict-henselization-limit] by z.appTop followed by ΓSpecIso Ω. Pointed transition equations prove its naturality. Define the map from their colimit to Ω by colimit.desc of that cocone. This constructs a specified ring homomorphism by a universal property; no arbitrary existential witness is chosen.",
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit"
+ ],
+ "proof": [
+  {
+   "text": "Pointed transition equations give cocone naturality after taking global sections. Construct the ring map as colimit.desc of this concrete cocone.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "F2",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictHenselizationPointEvaluation",
+  "file": "lean/Sheaf/Paper/StrictHenselizationPointEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselizationPointEvaluation",
+  "statement": "def strictHenselizationPointEvaluation {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Y) : strictHenselizationRing barY →+* Ω",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T173824-L-3295166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T173824-L-3295166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

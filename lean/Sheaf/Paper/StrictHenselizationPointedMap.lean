@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.StrictHenselizationTriples
+import Sheaf.Paper.StrictHenselizationPointEvaluationPointed
+import Sheaf.Paper.StrictHenselizationPointEvaluationProperties
 
 /-! # The pointed map from the neighbourhood colimit to its residue closure
 
@@ -146,7 +148,19 @@ theorem strictHenselizationPointedMap
             (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left)).isoSpec.inv =
           ((equivSmallModel.{v}
             (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).2.left := by
-  sorry
+  let ψ := Scheme.strictHenselizationPointEvaluationToSep barY hΩ
+  have hp := Scheme.strictHenselizationPointEvaluationToSep_surjective barY hΩ
+  refine ⟨ψ, hp, IsLocalRing.ker_eq_maximalIdeal ψ hp, ?_⟩
+  intro j
+  have h := Scheme.strictHenselizationPointEvaluation_pointed barY j
+  have he : ((IntermediateField.val
+      (separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+        (Scheme.strictHenselizationPointEvaluationToSep barY hΩ)) =
+      Scheme.strictHenselizationPointEvaluation barY := by
+    ext a
+    rfl
+  rw [he]
+  exact h
 
 
 end AlgebraicGeometry
