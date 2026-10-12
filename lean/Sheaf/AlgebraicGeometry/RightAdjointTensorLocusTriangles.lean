@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonNatural
+import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonDiagrams
 
 /-! # The pinned right-adjoint tensor locus is closed under shifts and third triangle objects.
 
@@ -80,6 +81,61 @@ theorem rightAdjointTensorLocus_triangles
       ∀ (T : Pretriangulated.Triangle (schemeDerivedCategory Y)),
         T ∈ Pretriangulated.distinguishedTriangles →
         Nonempty (T.obj₁ ≅ A.obj) → Nonempty (T.obj₂ ≅ B.obj) →
-        ∀ (C : schemeDerivedQCohCategory Y), Nonempty (T.obj₃ ≅ C.obj) → P C) := by sorry
+        ∀ (C : schemeDerivedQCohCategory Y), Nonempty (T.obj₃ ≅ C.obj) → P C) := by
+  dsimp only
+  obtain ⟨τ, hτ⟩ := rightAdjointTensorComparison_natural f hRf hO hTensor a c adj
+  obtain ⟨hshift, htriangle⟩ :=
+    rightAdjointTensorComparison_diagrams f hRf hO hTensor a c adj τ hτ
+  have hP (K : schemeDerivedQCohCategory Y) :
+      (∃ pf : (schemeDerivedDirectImage f).obj
+            (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅
+          K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj,
+          pf.inv = (a.homEquiv _ _)
+            ((Functor.Monoidal.μIso (derivedPullback f) K.obj
+              ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫
+              (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧
+          IsIso ((adj.homEquiv
+            ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,
+              hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
+            (ObjectProperty.homMk (pf.hom ≫
+              K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))) ↔
+        IsIso (τ.app K).hom := by
+    obtain ⟨pf, hpf, heq⟩ := hτ K
+    constructor
+    · rintro ⟨pf', hpf', hiso⟩
+      have hp : pf' = pf := Iso.ext_inv (hpf'.trans hpf.symm)
+      subst pf'
+      rw [heq]
+      exact (ObjectProperty.isIso_hom_iff _).2 hiso
+    · intro hiso
+      refine ⟨pf, hpf, ?_⟩
+      apply (ObjectProperty.isIso_hom_iff _).1
+      rwa [← heq]
+  constructor
+  · intro A n hA B e
+    have : IsIso (τ.app A).hom := (hP A).1 hA
+    obtain ⟨eF, ec, heq⟩ := hshift A n B e
+    apply (hP B).2
+    have : IsIso ((τ.app B).hom ≫ ec.hom) := by
+      rw [heq]
+      infer_instance
+    exact IsIso.of_isIso_comp_right (τ.app B).hom ec.hom
+  · intro A B hA hB T hT eA eB C eC
+    have : IsIso (τ.app A).hom := (hP A).1 hA
+    have : IsIso (τ.app B).hom := (hP B).1 hB
+    obtain ⟨T₁, T₂, m, hT₁, hT₂, eF₁, ec₁, eF₂, ec₂, eF₃, ec₃, hm₁, hm₂, hm₃⟩ :=
+      htriangle A B C T hT eA eB eC
+    have hmiso₁ : IsIso m.hom₁ := by rw [hm₁]; infer_instance
+    have hmiso₂ : IsIso m.hom₂ := by rw [hm₂]; infer_instance
+    have hmiso₃ : IsIso m.hom₃ :=
+      Pretriangulated.isIso₃_of_isIso₁₂ m hT₁ hT₂ hmiso₁ hmiso₂
+    apply (hP C).2
+    have : IsIso (eF₃.hom ≫ (τ.app C).hom ≫ ec₃.inv) := by
+      rw [← hm₃]
+      exact hmiso₃
+    have : IsIso ((τ.app C).hom ≫ ec₃.inv) :=
+      IsIso.of_isIso_comp_left eF₃.hom _
+    exact IsIso.of_isIso_comp_right (τ.app C).hom ec₃.inv
+
 
 end AlgebraicGeometry
