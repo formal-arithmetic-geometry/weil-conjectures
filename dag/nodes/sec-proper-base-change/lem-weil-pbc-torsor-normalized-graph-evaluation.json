@@ -17,17 +17,18 @@
  ],
  "proof": [
   {
-   "text": "Etale inverse image agrees with restriction to Y. The supplied trivialization identifies F restricted to Y with the constant sheaf A. Constant sheaf sections on an etale Y-object are locally constant A-valued functions; this follows by gluing constant labels on their open fibres, and in the other direction from openness and surjectivity of etale covers. Since Y is connected and nonempty, constant functions identify A with F(Y). Hence obtain bijections gamma_T:F(T) -> LC(T,F(Y)) for objects over Y, carrying restriction of x in F(Y) to the constant function x.",
+   "text": "Use the etale inverse-image/localization comparison [lem-weil-pbc-etale-inverse-image-restriction] to restrict F to c.P, then forget module scalars. The supplied trivialization and constantCommuteCompose identify this abelian sheaf with the constant abelian sheaf of A. The proved upstream constantSheafIsoContinuousMapSheaf identifies it with continuous functions to discrete A. Connectedness and a point of c.P identify F(c.P) additively with A. Regard W as etale over c.P using f; the comparison isomorphism and this coefficient equivalence give gamma:F(W) ≃ LC(W,F(c.P)). For each section and point w use the open fibre of its A-valued function through w. Its inclusion i:U→W and the coefficient x in F(c.P) satisfy F(i)(s)=F(i≫f)(x), by naturality of the comparison and injectivity of its component. This is the fully proved private helper constantCoordinates_localRestriction.",
    "uses": [
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-constant-sheaf",
     "def-weil-connected-scheme",
-    "def-weil-pbc-torsor-section-representation"
+    "def-weil-pbc-torsor-section-representation",
+    "lem-weil-pbc-etale-inverse-image-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Given s in F(W), take the open fibres of gamma_W(s). On a fibre with label x, the restriction of s is the restriction of the global section x along f. Naturality of beta along the fibre inclusion and its map to Y identifies graph evaluation there with beta_Y(x) on the diagonal, which equals x by normalization. Thus graph evaluation of beta_W(s) equals gamma_W(s) pointwise. It is consequently bijective. Empty W has a unique sheaf section by the empty cover and a unique locally constant function; zero modules and the identity torsor obey the same formulas. This uses no splitting into translates or equivariance of beta.",
+   "text": "Given s and w choose U,i,z,x from the private constant-coordinate lemma, with i(z)=w and gamma(s)(w)=x. Prove the two pullback graph identities graph(i≫f)≫sectionRestriction(i)=i≫graph(f) and graph(i≫f)≫sectionRestriction(i≫f)=(i≫f)≫diagonal by pullback.hom_ext. Naturality of beta along i and i≫f, the equality of the restricted sections, and diagonal normalization show graphEvaluation(beta(s))(w)=x. Extensionality gives graphEvaluation(beta(s))=gamma(s) for all s. Rewrite the graph evaluation function as gamma and apply Equiv.bijective. No equivariance, torsor splitting, or nonemptiness of W is required.",
    "uses": [
     "def-weil-pbc-torsor-associated-module",
     "def-weil-pbc-torsor-section-representation",
@@ -41,13 +42,14 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-torsor-associated-module",
-  "def-weil-pbc-torsor-section-representation"
+  "def-weil-pbc-torsor-section-representation",
+  "lem-weil-pbc-etale-inverse-image-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3); explicit section-evaluation implementation of the fixed-torsor argument; explicit graph evaluation and constant-coordinate steps of the local fixed-torsor argument",
-  "note": "Explicit local argument extracted from the parent plan; proof details expanded by H2. Sources read in the available local Stacks mirror."
+  "note": "D2 stage 3: implemented both planned steps in Lean, with a proved private constant-coordinate helper. Reused the source library localization and discrete continuous-function comparisons, following the already implemented comparison in TorsorOrdinaryEvaluation. No new holes or nodes."
  },
  "mathlib_searches": [
   {
@@ -137,10 +139,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T154831-L-2473160",
-  "kind": "interface",
+  "landing": "20261012T165508-L-2931914",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
