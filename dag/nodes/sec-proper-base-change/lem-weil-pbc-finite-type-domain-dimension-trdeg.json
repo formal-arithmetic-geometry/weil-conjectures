@@ -34,69 +34,53 @@
  ],
  "proof": [
   {
-   "text": "Write $A=k[x_1,\\ldots,x_n]/\\mathfrak p$, where $\\mathfrak p$ is prime because $A$ is a domain. By [lem-weil-pbc-finite-type-domain-dimension-local-ring] (Algebra 00OS), $\\dim A$ is a finite non-negative integer and $\\dim A_{\\mathfrak m}=\\dim A$ for every maximal ideal $\\mathfrak m$ of $A$. This proves the local-ring assertion, leaving the comparison with transcendence degree.",
+   "text": "Apply the finite-type domain local-dimension theorem [lem-weil-pbc-finite-type-domain-dimension-local-ring]. It supplies a natural number d with ringKrullDim S = d and identifies the dimension of every maximal localization with d.",
    "uses": [
     "lem-weil-pbc-finite-type-domain-dimension-local-ring"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00P0 (lemma-dimension-prime-polynomial-ring), first two sentences: the source invokes Lemma 00OR (lemma-dimension-height-polynomial-ring); the cited 00OS node states the needed local-dimension consequence, proved from 00OR"
+    "document": "lean/Sheaf/RingTheory/FiniteTypeDomainDimensionLocalRing.lean",
+    "place": "finiteTypeDomain_ringKrullDim_localizationAtMaximal"
    }
   },
   {
-   "text": "By Noether normalization [lem-weil-pbc-noether-normalization-field] (Algebra 00OY), there are $d\\ge0$ and an injective $k$-algebra map $P=k[Y_1,\\ldots,Y_d]\\hookrightarrow A$ such that $A$ is a finite $P$-module. The finite ring map is integral [lem-weil-pbc-finite-algebra-is-integral], so [lem-weil-pbc-integral-injective-dimension-equal] gives $\\dim A=\\dim P$. The polynomial ring $P$ is a finite type domain over $k$, hence [lem-weil-pbc-finite-type-domain-dimension-local-ring] identifies its dimension with that of the localization at the maximal ideal $(Y_1,\\ldots,Y_d)$; [lem-weil-pbc-polynomial-ring-maximal-localization-dimension] computes the latter as $d$. Thus $d=\\dim A$, the dimension clause of 00OY. Write $y_i$ for the images of $Y_i$; their algebraic independence follows from injectivity.",
-   "uses": [
-    "lem-weil-pbc-noether-normalization-field",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-integral-injective-dimension-equal",
-    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension"
-   ],
+   "text": "The Mathlib theorem Algebra.trdeg_eq_of_ringKrullDim_eq applies to the finite-type domain S and the equality ringKrullDim S = d, yielding Algebra.trdeg k S = d.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00P0, 'Apply Lemma [00OY]. We get a finite injective ring map ... with d = dim(S)'"
+    "document": "lean/WeilConjectures/Mathlib/RingTheory/NoetherNormalization.lean",
+    "place": "Algebra.trdeg_eq_of_ringKrullDim_eq"
    }
   },
   {
-   "text": "Put $F=\\operatorname{Frac}(P)=k(y_1,\\ldots,y_d)\\subseteq K$. Localizing the finite $P$-module $A$ at $P\\setminus\\{0\\}$ gives a finite-dimensional $F$-algebra $B=F\\otimes_PA$; it remains a nonzero domain because $P\\hookrightarrow A$ and $A$ is a domain. By [lem-weil-pbc-finite-dimensional-domain-is-field], $B$ is a field. It contains $A$, and each element of $B$ is a fraction $a/s$ with $a\\in A$ and $0\\ne s\\in P$; thus $B\\subseteq K$, while, being a field containing $A$, it contains $K$. Hence $B=K$ and $K/F$ is finite-dimensional, therefore algebraic.",
-   "uses": [
-    "lem-weil-pbc-finite-dimensional-domain-is-field"
-   ],
+   "text": "Equip FractionRing S with its induced k-algebra structure and the scalar tower k → S → FractionRing S. Localization makes FractionRing S algebraic over S, so trdeg S (FractionRing S) = 0. The Mathlib identity trdeg_add_eq then gives trdeg k (FractionRing S) = trdeg k S + 0 = trdeg k S.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00P0, 'Clearly, k(y_1, ..., y_d) subset K is a finite extension' (finite-module localization expanded)"
+    "document": "Mathlib and lean/Sheaf/RingTheory/FiniteTypeDomainDimensionTrdeg.lean",
+    "place": "IsLocalization.isAlgebraic, trdeg_eq_zero_iff and trdeg_add_eq"
    }
   },
   {
-   "text": "The $y_i$ are algebraically independent over $k$ (Step 2), and $K$ is algebraic over $k(y_1,\\ldots,y_d)$ (Step 3). Thus $(y_1,\\ldots,y_d)$ is a transcendence basis of $K/k$ [def-weil-pbc-transcendence-basis]. By the cardinality clause of [def-kun-transcendence-degree], $\\operatorname{trdeg}_kK=d=\\dim A$; Step 1 gives the same value for every $A_{\\mathfrak m}$.",
+   "text": "Combining the preceding equalities gives Algebra.trdeg k (FractionRing S) = d, while the localization equality from the first step gives the final assertion for every maximal ideal.",
    "uses": [
-    "def-weil-pbc-transcendence-basis",
-    "def-kun-transcendence-degree"
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 00P0, last sentence '... finite extension and we win'; Fields, Definition 030E and Definition 030G"
+    "document": "lean/Sheaf/RingTheory/FiniteTypeDomainDimensionTrdeg.lean",
+    "place": "finiteType_domain_ringKrullDim_eq_trdeg"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-  "lem-weil-pbc-noether-normalization-field",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-integral-injective-dimension-equal",
-  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-  "lem-weil-pbc-finite-dimensional-domain-is-field",
-  "def-weil-pbc-transcendence-basis",
-  "def-kun-transcendence-degree"
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00P0 (lemma-dimension-prime-polynomial-ring), proof, via 00OR (used through its 00OS consequence) and 00OY"
+  "by": "library-and-mathlib",
+  "document": "lean/Sheaf/RingTheory/FiniteTypeDomainDimensionTrdeg.lean",
+  "place": "finiteTypeDomain_ringKrullDim_localizationAtMaximal together with Algebra.trdeg_eq_of_ringKrullDim_eq and trdeg_add_eq"
  },
  "mathlib_searches": [
   {
@@ -190,5 +174,15 @@
   "group": "F1",
   "result": "fix",
   "note": "k field, S finite type k-algebra domain (K1 binders); exists d:N with ringKrullDim S = d, Algebra.trdeg k (FractionRing S) = d, and ringKrullDim (Localization.AtPrime m) = d for all maximal m; moved Paper/ -> RingTheory/ (Stacks 00P0 is general algebra), [m.IsMaximal] binder as K1; left out new module(s) lean/Sheaf/Paper/FiniteTypeDomainDimensionTrdeg.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0b6ad",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T202254-L-709524",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; theorem signature is unchanged and proof, imports, node metadata, and report satisfy the stage-3 review points."
  }
 }
