@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-polynomial-complete-local-generic-fibre-regular-part",
+ "kind": "statement",
+ "title": "Regularity after purely inseparable base change of generic fibre",
+ "statement": "Let A be a Noetherian complete local domain and q a maximal ideal of A[X] contracting to its maximal ideal. For every finite purely inseparable extension L of κ(0) of A[X], the ring L ⊗_{κ(0)} (κ(0) ⊗_{A[X]} completion(A[X]_q)) is regular. The definitions are those of def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring, def-weil-pbc-adic-completion, def-weil-polynomial-ring, def-weil-pbc-localization-at-prime, def-weil-pbc-g-ring.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Proposition 07PV, paragraphs 3--5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Reduce by the finite regular complete coefficient subring and quasi-finite formal-fibre ascent. For the regular model, localize the regular completion to prove regularity in characteristic zero; finite purely inseparable extensions are trivial. In positive characteristic the Cohen-ring model is excluded by injectivity and characteristic zero, so apply 07PR for the power-series-field model with one polynomial variable and transport the polynomial and completion isomorphisms. Quasi-finite ascent gives regularity after all the stated extensions.",
+   "uses": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-helper-g-ring-char-p"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-helper-g-ring-char-p"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Proposition 07PV, paragraphs 3--5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian localization tensor residue field regular generic formal fibre",
+   "results": "Eight related fibre/quasi-finite results; none proves this regularity statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, TensorProduct",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genericFormalFiber|formalFiber_polynomial",
+   "results": "Existing regular-power-series generic fibre concerns no polynomial variable; 07PR is the positive-characteristic model case already in proof dependencies. FibreRingNoetherian proves the other component and is used directly.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite purely inseparable base change of the generic formal fibre of a polynomial ring over a complete local domain is regular",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-polynomial-complete-local-generic-fibre",
+   "place": "decomposition",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialCompleteLocalGenericFibreRegularPart",
+  "file": "lean/Sheaf/RingTheory/PolynomialCompleteLocalGenericFibreRegularPart.lean",
+  "declaration": "Polynomial.completeLocalGenericFibre_regularPart",
+  "statement": "theorem completeLocalGenericFibre_regularPart\n    (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]\n    [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\n    (q : Ideal (Polynomial A)) [q.IsMaximal]\n    (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A) :\n    ∀ (k' : Type (max u u)) [Field k']\n      [Algebra (⊥ : Ideal (Polynomial A)).ResidueField k']\n      [Module.Finite (⊥ : Ideal (Polynomial A)).ResidueField k']\n      [IsPurelyInseparable (⊥ : Ideal (Polynomial A)).ResidueField k'],\n      IsRegularRing\n        (k' ⊗[(⊥ : Ideal (Polynomial A)).ResidueField]\n          ((⊥ : Ideal (Polynomial A)).Fiber\n            (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))\n              (Localization.AtPrime q))))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T125027-L-1204004",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T125027-L-1204004",
+  "kind": "interface"
+ }
+}
