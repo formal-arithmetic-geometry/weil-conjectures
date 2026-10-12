@@ -6,7 +6,7 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Frobenius
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Additivity
 
 /-!
 # The finite-coefficient Lefschetz trace formula
@@ -60,45 +60,6 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A] [DerivedBraiding A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {s X : Scheme.{u}}
-
-/-- Compact trace additivity: for a closed immersion `i : Z ⟶ X` and its open complement
-`j : U ⟶ X`, the Frobenius coefficient morphisms induced on the functorial compact
-localization triangle satisfy
-
-`tr_A(F_{c,m}, RΓ_c(X, K)) = tr_A(F_{c,m}, RΓ_c(U, j^* K)) + tr_A(F_{c,m}, RΓ_c(Z, i^* K))`.
-
-Invertibility of the coefficient morphism is unnecessary, so the statement is for plain
-`WeilComplex`es (blueprint: `prop-trf-trace-additivity-open-closed`, subsection
-`sk-i-global-additivity`). -/
-theorem trace_globalOperator_eq_trace_add_trace (G : GeometricOperations A s)
-    {U Z : Scheme.{u}} {aX : X ⟶ s} {aU : U ⟶ s} {aZ : Z ⟶ s}
-    [IsGeometric aX] [IsGeometric aU] [IsGeometric aZ]
-    [HasCompactification aX] [HasCompactification aU] [HasCompactification aZ]
-    (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsClosedImmersion i]
-    (hj : j ≫ aX = aU) (hi : i ≫ aX = aZ)
-    (hcompl : IsCompl (Set.range j.base) (Set.range i.base))
-    (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (frobU : U ⟶ U) (frobZ : Z ⟶ Z)
-    (sqU : CommSq frobU j j (W.frobeniusIterate 1))
-    (sqZ : CommSq frobZ i i (W.frobeniusIterate 1))
-    (m : ℕ)
-    [IsProper (W.graph G hW m).snd]
-    [IsProper ((W.upperStarPull j hj frobU sqU).graph G
-      (G.ctf_upperStar j (.mk hj) hW) m).snd]
-    [IsProper ((W.upperStarPull i hi frobZ sqZ).graph G
-      (G.ctf_upperStar i (.mk hi) hW) m).snd]
-    [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
-    [HasRightDual ((rightDerivedLowerShriek A aU).obj (W.upperStarPull j hj frobU sqU).obj)]
-    [HasRightDual ((rightDerivedLowerShriek A aZ).obj (W.upperStarPull i hi frobZ sqZ).obj)] :
-    MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G hW m) hW) =
-      MonoidalCategory.trace
-          (Correspondence.globalOperator G
-            ((W.upperStarPull j hj frobU sqU).graph G (G.ctf_upperStar j (.mk hj) hW) m)
-            (G.ctf_upperStar j (.mk hj) hW)) +
-        MonoidalCategory.trace
-          (Correspondence.globalOperator G
-            ((W.upperStarPull i hi frobZ sqZ).graph G (G.ctf_upperStar i (.mk hi) hW) m)
-            (G.ctf_upperStar i (.mk hi) hW)) :=
-  sorry
 
 /-- Blueprint `thm-trf-coefficient-morphism-trace-formula`: the trace formula for an arbitrary
 Frobenius coefficient morphism `φ : LΦ₁^* K ⟶ K`, with no invertibility assumed. For a Weil
