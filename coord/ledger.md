@@ -8382,3 +8382,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:42 L: merged deliver/C2/Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroDictionary (stage 3; reviewer PASS; first push; landing 20261012T154242-L-2434262 (interface); batch 20261012T154240; modules 4; new nodes 3)
 - 15:42 L: merged deliver/C3/Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneral (stage 3; reviewer PASS; first push; landing 20261012T154242-L-2434371 (interface); batch 20261012T154240; modules 3; new nodes 2)
 - 15:42 L: merged deliver/E2/Sheaf.AlgebraicGeometry.RationalPointTopologicalLocalDimensionBaseChange (stage 3; reviewer PASS; after a return; landing 20261012T154243-L-2434478 (proof); batch 20261012T154240; modules 1; new nodes 0)
+- 15:42 L: merged deliver/F3/Sheaf.Topology.CompactCechDirectedColimit (stage 3; reviewer PASS; after a return; landing 20261012T154243-L-2434575 (proof); batch 20261012T154240; modules 1; new nodes 0)

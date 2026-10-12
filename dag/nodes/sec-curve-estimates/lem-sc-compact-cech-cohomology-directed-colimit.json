@@ -24,21 +24,21 @@
    "elementary": true
   },
   {
-   "text": "Filtered colimits of abelian groups are exact, so homology commutes with this colimit. The isomorphism respects cocone legs and proves preservation of the diagram colimit by Cech cohomology. The empty family gives zero in every degree.",
+   "text": "Reuse the proved private shortComplexHomologyPreserves theorem from Sheaf.CategoryTheory.DirectedColimitHomology via a proof-only import all. Taking the three adjacent terms of an N-indexed complex preserves colimits, since each projection is evaluation. Compose this with short-complex homology preservation and transport along HomologicalComplex.homologyFunctorIso. Composing with the degreewise Cech-complex preservation proves the stated cohomology preservation. The empty family gives zero in every degree.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+    "lem-weil-pbc-directed-colimit-homology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-topological-abelian-sections-filtered-colimit",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+  "lem-weil-pbc-directed-colimit-homology"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 01FF; separated termwise comparison and exact-colimit step by T1"
+  "place": "Lemma 01FF; reuse of the proved short-complex helper in DirectedColimitHomology and specialization of adjacent-term preservation to natural degrees, repaired by F3"
  },
  "mathlib_searches": [
   {
@@ -112,9 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T132138-L-1417565",
-  "kind": "interface"
+  "landing": "20261012T154243-L-2434575",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

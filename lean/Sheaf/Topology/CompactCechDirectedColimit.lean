@@ -7,6 +7,7 @@ module
 public import Mathlib.CategoryTheory.Sites.Spaces
 public import Sheaf.CategoryTheory.SiteCechComplex
 import Sheaf.Topology.AbelianSectionsFilteredColimit
+import all Sheaf.CategoryTheory.DirectedColimitHomology
 
 /-!
 # Directed colimits and finite compact Čech complexes
@@ -23,6 +24,29 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Sheaf
 
+/-- Source: Stacks Project, Algebra, Tag 00DB. Taking the three adjacent terms
+preserves colimits degreewise; compose with short-complex homology preservation. -/
+private theorem complexHomologyPreserves
+    {I : Type u} [SmallCategory I] [IsFiltered I] (p : ℕ) :
+    PreservesColimitsOfShape I
+      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p) := by
+  have : PreservesColimitsOfShape I
+      (ShortComplex.homologyFunctor AddCommGrpCat.{u}) :=
+    CategoryTheory.shortComplexHomologyPreserves
+  have : PreservesColimitsOfShape I
+      (HomologicalComplex.shortComplexFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p) := by
+    refine ⟨fun {F} ↦ ⟨fun {s} hs ↦ ⟨?_⟩⟩⟩
+    apply ShortComplex.isColimitOfIsColimitπ
+    · exact isColimitOfPreserves
+        (HomologicalComplex.eval _ _ ((ComplexShape.up ℕ).prev p)) hs
+    · exact isColimitOfPreserves (HomologicalComplex.eval _ _ p) hs
+    · exact isColimitOfPreserves
+        (HomologicalComplex.eval _ _ ((ComplexShape.up ℕ).next p)) hs
+  exact preservesColimitsOfShape_of_natIso
+    (HomologicalComplex.homologyFunctorIso AddCommGrpCat.{u} (ComplexShape.up ℕ) p).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
 /-- Finite compact Čech cohomology preserves an existing directed colimit of abelian
 sheaves on a space with a compact open basis and compact intersections.
 
@@ -56,6 +80,53 @@ theorem compact_siteCech_cohomology_preserves_directedColimit
     (p : ℕ) :
     PreservesColimit F
       (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
-        S.cohomologyFunctor p) := by sorry
+        S.cohomologyFunctor p) := by
+  classical
+  let C := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
+    S.complexFunctor
+  have : PreservesColimitsOfShape I C := by
+    apply HomologicalComplex.preservesColimitsOfShape_of_eval C
+    intro q
+    let A := Fin (q + 1) → T
+    let G : Discrete A ⥤ (TopologicalSpace.Opens X)ᵒᵖ :=
+      Discrete.functor fun a ↦ Opposite.op (S.W q a)
+    let E := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
+      (Functor.whiskeringLeft (Discrete A) (TopologicalSpace.Opens X)ᵒᵖ
+        AddCommGrpCat.{u}).obj G
+    have : PreservesColimitsOfShape I E :=
+      preservesColimitsOfShape_of_evaluation E I (fun a ↦ by
+        exact TopCat.abelianSections_preservesDirectedColimits
+          X hbas hint I (S.W q a.as) (hcompact q a.as))
+    have : HasFiniteBiproducts AddCommGrpCat.{u} := Abelian.hasFiniteBiproducts
+    have : PreservesColimitsOfShape I
+        (lim (J := Discrete A) (C := AddCommGrpCat.{u})) :=
+      preservesColimitsOfShape_of_natIso (HasBiproductsOfShape.colimIsoLim (J := A))
+    let e : C ⋙ HomologicalComplex.eval _ (ComplexShape.up ℕ) q ≅ E ⋙ lim :=
+      NatIso.ofComponents (fun H ↦
+        (AddCommGrpCat.HasLimit.productLimitCone
+          (fun a : A ↦ H.obj.obj (Opposite.op (S.W q a)))).isLimit.conePointUniqueUpToIso
+            (productIsProduct _) ≪≫ Pi.isoLimit (E.obj H)) (by
+        intro H H' φ
+        apply limit.hom_ext
+        rintro ⟨a⟩
+        simp only [Functor.comp_map, Iso.trans_hom, Category.assoc, lim_map, limMap_π,
+          Pi.isoLimit_hom_π, Pi.isoLimit_hom_π_assoc]
+        have hp (H : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :
+            ((AddCommGrpCat.HasLimit.productLimitCone
+              (fun a : A ↦ H.obj.obj (Opposite.op (S.W q a)))).isLimit.conePointUniqueUpToIso
+                (productIsProduct _)).hom ≫ Pi.π _ a =
+              AddCommGrpCat.ofHom
+                (Pi.evalAddMonoidHom (fun a : A ↦ H.obj.obj (Opposite.op (S.W q a))) a) :=
+          IsLimit.conePointUniqueUpToIso_hom_comp
+            (AddCommGrpCat.HasLimit.productLimitCone
+              (fun a : A ↦ H.obj.obj (Opposite.op (S.W q a)))).isLimit
+            (productIsProduct _) (Discrete.mk a)
+        erw [hp H', ← Category.assoc, hp H]
+        rfl)
+    exact preservesColimitsOfShape_of_natIso e.symm
+  have := complexHomologyPreserves (I := I) p
+  change PreservesColimit F
+    (C ⋙ HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) p)
+  infer_instance
 
 end CategoryTheory.Sheaf
