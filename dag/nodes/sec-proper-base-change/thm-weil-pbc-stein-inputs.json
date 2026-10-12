@@ -33,9 +33,63 @@
   "lemma-weil-pbc-spectral-restriction",
   "def-weil-pbc-henselian-terminology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The existing Noetherian finiteness proof identifies sections of the zeroth higher direct image with sections of the structure sheaf, and uses finite generation of coherent proper direct images. Its surjective linear map makes the ring of global sections finite over the affine base. Transport across the global-sections isomorphism of Spec A proves IsFinite for the Stein base map.",
+   "uses": [
+    "lem-pc-cohomology-sections-affine-base",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize C by the explicitly constructed vanishing-ideal subscheme Z, with closed immersion i and range i = C. The closed embedding identifies Z homeomorphically with C, hence Z is irreducible. The composite f = i followed by p is proper.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine Stein factorization to f. The first map q = Z.toSpecΓ is proper and each inverse image of a singleton is connected and nonempty. Thus q is surjective, and its target Spec B, with B = Γ(Z, O_Z), is irreducible. The canonical ring map A to B is integral.",
+   "uses": [
+    "lem-weil-pbc-stein-factorization-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use integral extension of henselian pairs to give (B,K) a henselian structure, K = I.map φ. Irreducibility of Spec B means its nilradical N is prime (Mathlib PrimeSpectrum.irreducibleSpace_iff_isPrime_nilradical). Apply connectedSpace_zeroLocus_sup_of_henselian to N and K. Since V(N) is all of Spec B, the equality V(N + K) = V(N) intersect V(K) gives connectedness of V(K).",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lem-weil-pbc-henselian-pair-prime-connected"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proper surjection q is a closed quotient map. The connected-fibre quotient-preimage criterion gives connectedness of q inverse image V(K). The factorization identity f = q followed by Spec φ and the spectrum zero-locus preimage formula identify this set with f inverse image V(I). Its continuous image under i is exactly C intersect p inverse image V(I), hence this intersection is connected, including nonemptiness. The existing independent nonempty_inter_preimage_zeroLocus lemma remains available but is not needed by this proof.",
+   "uses": [
+    "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+    "def-weil-pbc-stein-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-stein-factorization",
+  "lem-pc-coherent-hi",
+  "lem-pc-cohomology-sections-affine-base",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-connected-fibres-quotient-preimage-connected",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-stein-factorization-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0A0B and 03H2",
+  "place": "F1 Lean realization of lemma-zariski-h0-proper-over-henselian-pair: closed-subscheme reduction, integral Stein factorization, henselian affine connectedness and the closed quotient criterion; existing Noetherian finiteness proof retained."
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
  "status": "unsplit",
@@ -137,5 +191,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2097f",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T135231-L-1662598",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, report, and direct importers all agree; delivered set and four reader-gate importers compile cleanly."
  }
 }

@@ -27,55 +27,24 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (finiteness).* The finiteness of $A\\to B$ is not proved in this\nblueprint; it is input (i) of [thm-weil-pbc-stein-inputs], where the\nNoetherian reference and the approximation route available here are recorded.\nWe use it as a hypothesis for the rest of the proof.",
+   "text": "Properness over the affine spectrum gives compactness and quasi-separatedness, hence spectrality of Y. The inverse image of V(I) is closed by continuity of p. For each closed irreducible C, apply Scheme.Hom.isConnected_inter_preimage_zeroLocus, now realized through the general integral Stein factorization. Assemble these three clauses exactly as the existing Lean theorem does.",
    "uses": [
-    "thm-weil-pbc-stein-inputs"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 2 (the pair $(B,IB)$ is henselian).* This is proved here. Given a\nfinite $B$-algebra $C$, the composite $A\\to C$ is finite: finiteness is\nclosed under composition in the sense of\n[def-weil-pbc-scheme-conventions]. For such a $C$, every idempotent of $C/IC$\nlifts uniquely to an idempotent of $C$, because $(A,I)$ is henselian\n[def-weil-pbc-henselian-terminology] and a finite $A$-algebra is in\nparticular integral over $A$. That is precisely the definition of the pair\n$(B,IB)$ being henselian.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-henselian-terminology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 3 (connectedness).* This is not proved in this blueprint; it is input\n(ii) of [thm-weil-pbc-stein-inputs], the henselian-pair proper-base-change\ntheorem stating that for $Z$ proper over $\\operatorname{Spec}A$ every\nirreducible closed subset of $Z$ meets $Z\\times_AA/I$ in a nonempty connected\nsubset. Applied to $Z=Y$ it gives the connectedness clause of the statement.",
-   "uses": [
-    "thm-weil-pbc-stein-inputs"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 4 (spectrality and closedness).* This is proved here. $Y$ is spectral\n[def-weil-pbc-scheme-conventions]: $p$ is separated and of finite type, so\n$Y$ is quasi-compact and quasi-separated, and the underlying space of a\nscheme is sober with a basis of quasi-compact opens. The subscheme\n$Y_0\\subset Y$ is closed, since\n$S_0=\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}A$ is a closed immersion\nand closed immersions are stable under base change by\n[lem-weil-pbc-closed-immersion-products].",
-   "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-closed-immersion-products"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*Step 5.* Steps 3 and 4 verify the hypotheses of the Zariski restriction\ncriterion [lemma-weil-pbc-spectral-restriction] for the pair $(Y,Y_0)$, so its\nconclusion applies to $(Y,Y_0)$; the last assertion of the statement follows.\nWe repeat the warning of input (iii) of [thm-weil-pbc-stein-inputs]: that\ncriterion is available for *locally constant* sheaves only, and the\nconstructible sheaf to which the degree-zero argument applies it is not known\nto be locally constant.",
-   "uses": [
-    "lemma-weil-pbc-spectral-restriction",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-scheme-spectral",
     "thm-weil-pbc-stein-inputs"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-weil-pbc-stein-inputs",
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-closed-immersion-products",
-  "lemma-weil-pbc-spectral-restriction"
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "thm-weil-pbc-stein-inputs"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-iff/lemma-weil-pbc-stein-connectedness.md",
-  "place": "## Proof"
+  "document": "Stacks Project, Tag 0A0B",
+  "place": "F1 records the actual Lean assembly spectralSpace_and_isClosed_and_isConnected_inter. This theorem packages hypotheses; it does not itself apply the spectral sheaf restriction theorem or assert finiteness for non-Noetherian bases."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -170,5 +139,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2097f",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T135231-L-1662598",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, report, and direct importers all agree; delivered set and four reader-gate importers compile cleanly."
  }
 }

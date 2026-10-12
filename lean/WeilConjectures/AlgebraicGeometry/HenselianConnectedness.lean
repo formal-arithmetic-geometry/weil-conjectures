@@ -9,8 +9,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.Topology.Spectral.Basic
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+
+import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
+import Sheaf.RingTheory.HenselianPairPrimeConnected
+import Sheaf.RingTheory.IntegralOverHenselianPair
 
 /-!
 # Connectedness of closed fibres of proper schemes over a henselian pair
@@ -106,9 +110,57 @@ theorem Scheme.Hom.isConnected_inter_preimage_zeroLocus {A : Type u} [CommRing A
     (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]
     {C : Set Y} (hC : IsClosed C) (hC' : IsIrreducible C) :
     IsConnected (C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)) := by
-  refine ⟨p.nonempty_inter_preimage_zeroLocus I HenselianRing.jac hC hC'.nonempty, ?_⟩
-  -- The preconnectedness is the Stein-factorization step of Stacks 0A0B.
-  sorry
+  let J := Scheme.IdealSheafData.vanishingIdeal (⟨C, hC⟩ : TopologicalSpace.Closeds Y)
+  let Z := J.subscheme
+  let i : Z ⟶ Y := J.subschemeι
+  have hi : Set.range i = C := J.range_subschemeι
+  have hZi : IsIrreducible (Set.range i) := hi.symm ▸ hC'
+  let : IrreducibleSpace (Set.range i) := isIrreducible_iff_irreducibleSpace.mp hZi
+  let e : Z ≃ₜ Set.range i := i.isClosedEmbedding.isEmbedding.toHomeomorph
+  let : IrreducibleSpace Z := e.irreducibleSpace_iff.mpr inferInstance
+  let f := i ≫ p
+  obtain ⟨hint, hproper, _, hfib⟩ := f.steinFactorization_affine
+  let : IsProper Z.toSpecΓ := hproper
+  have hsurj : Function.Surjective Z.toSpecΓ := by
+    intro t
+    obtain ⟨z, hz⟩ := (hfib t).2.nonempty
+    exact ⟨z, hz⟩
+  let : IrreducibleSpace (Spec Γ(Z, ⊤)) :=
+    hsurj.irreducibleSpace Z.toSpecΓ.continuous
+  let φ := ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom
+  let : Algebra A Γ(Z, ⊤) := φ.toAlgebra
+  let : Algebra.IsIntegral A Γ(Z, ⊤) := algebraMap_isIntegral_iff.mp hint
+  let K := I.map φ
+  let : HenselianRing Γ(Z, ⊤) K := henselianRing_of_isIntegral A I Γ(Z, ⊤)
+  have hbirr : IrreducibleSpace (PrimeSpectrum (Γ(Z, ⊤) : Type u)) := by
+    change IrreducibleSpace (Spec Γ(Z, ⊤))
+    infer_instance
+  let : (_root_.nilradical (Γ(Z, ⊤) : Type u)).IsPrime :=
+    PrimeSpectrum.irreducibleSpace_iff_isPrime_nilradical.mp hbirr
+  have hK : _root_.IsConnected (PrimeSpectrum.zeroLocus (K : Set Γ(Z, ⊤))) := by
+    have := PrimeSpectrum.connectedSpace_zeroLocus_sup_of_henselian K
+      (_root_.nilradical (Γ(Z, ⊤) : Type u))
+    have hconn := isConnected_iff_connectedSpace.mpr this
+    simpa only [PrimeSpectrum.zeroLocus_sup, PrimeSpectrum.zeroLocus_nilradical,
+      Set.univ_inter] using hconn
+  have hfconn : _root_.IsConnected (Z.toSpecΓ ⁻¹' PrimeSpectrum.zeroLocus (K : Set Γ(Z, ⊤))) :=
+    (Z.toSpecΓ.isClosedMap.isQuotientMap Z.toSpecΓ.continuous hsurj).isCoinducing
+      |>.isConnected_preimage_of_isClosed (fun t ↦ (hfib t).2)
+        (PrimeSpectrum.isClosed_zeroLocus _) hK
+  have hfzero : f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) =
+      Z.toSpecΓ ⁻¹' PrimeSpectrum.zeroLocus (K : Set Γ(Z, ⊤)) := by
+    rw [← Scheme.toSpecΓ_steinFactorizationBase f, Scheme.Hom.comp_base, TopCat.coe_comp]
+    rw [Set.preimage_comp]
+    change Z.toSpecΓ ⁻¹' (PrimeSpectrum.comap φ ⁻¹' _) = _
+    rw [PrimeSpectrum.preimage_comap_zeroLocus]
+    rw [← PrimeSpectrum.zeroLocus_span, ← Ideal.map]
+  rw [← hfzero] at hfconn
+  have himage : i '' (f ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)) =
+      C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+    change i '' (i ⁻¹' (p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A))) = _
+    rw [Set.image_preimage_eq_inter_range, hi, Set.inter_comm]
+  rw [← himage]
+  exact hfconn.image i i.continuous.continuousOn
 
 /-- **Stein connectedness.** Let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper, with
 closed fibre `Y₀ = p⁻¹(V(I))`. Then `Y` is a spectral space, `Y₀` is closed in `Y`, and every
