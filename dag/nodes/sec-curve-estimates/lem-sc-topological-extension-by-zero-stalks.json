@@ -27,60 +27,52 @@
  ],
  "proof": [
   {
-   "text": "By the stalk-sheafification lemma, the canonical map from the stalk of the presheaf j_{p!}G to the stalk of its sheafification j_!G is an isomorphism, compatibly with the germ maps.",
+   "text": "Use lem-sc-abelian-open-extension-presheaf-stalk at each interior point to choose the canonical presheaf stalk isomorphism with its injection/germ formula. Compose it with asIso of stalkFunctor.map(toSheafify), using stalkFunctor_map_unit_toSheafify_isIso. The stalkFunctor_map_germ identity then gives exactly the asserted abelianOpenExtensionSection germ formula.",
    "uses": [
+    "lem-sc-abelian-open-extension-presheaf-stalk",
     "lem-weil-pbc-stalk-sheafification-space"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 007Z (lemma-stalk-sheafification) and Lemma 0085 (lemma-sheafify-abelian-presheaf)"
-   }
+   "elementary": false
   },
   {
-   "text": "If x is outside U, every open neighborhood V of x is not contained in U, so (j_{p!}G)(V)=0. The filtered colimit defining the stalk of j_{p!}G is therefore the zero abelian group, and the isomorphism in step 1 gives (j_!G)_x=0.",
+   "text": "Outside U, represent each element of the presheaf stalk by a germ using exists_germ_eq. Its neighborhood V cannot have an inclusion into U, since such an inclusion would put x in U. The direct sum over the empty inclusion type is subsingleton, so its section is zero and its germ is zero. AddCommGrpCat.isZero_iff_subsingleton makes this stalk zero; transport along the sheafification stalk isomorphism to conclude for j_!G.",
    "uses": [
+    "def-sc-abelian-open-extension-by-zero",
+    "lem-weil-pbc-stalk-sheafification-space",
     "def-weil-pbc-module-stalk"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A5 (lemma-j-shriek-abelian), part (3), outside U"
-   }
+   "elementary": true
   },
   {
-   "text": "If x is in U, the neighborhoods V∩U, for V an open neighborhood of x in X, are cofinal among the open neighborhoods of x in U. On these neighborhoods j_{p!}G(V∩U)=G(V∩U), with the same restriction maps. The two filtered colimits are consequently canonically identified, giving G_x ≅ (j_{p!}G)_x; composing with step 1 gives the asserted natural isomorphism G_x ≅ (j_!G)_x.",
+   "text": "To prove naturality, use stalk_hom_ext and write every open W of U as the preimage of its open image V in X (Opens.map_functor_eq). The germ square reduces the assertion to naturality of abelianOpenExtensionSection. Before sheafification this is DirectSum.toAddMonoid_of for the componentwise map on the sole summand; after sheafification it is toSheafify_naturality. Associativity composes these identities.",
    "uses": [
-    "def-weil-pbc-module-stalk"
+    "def-sc-abelian-open-extension-by-zero",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A5 (lemma-j-shriek-abelian), part (2), and the definition of stalks"
-   }
+   "elementary": true
   },
   {
-   "text": "All maps used above are induced by restriction maps and by the canonical sheafification morphism, so the identifications commute with morphisms of G. For F on X, the presheaf map j_{p!}j^*F→F is the identity on opens contained in U and zero otherwise; at x∈U its germ map is therefore the identity on F_x under the identification of step 3, while at x outside U the source stalk is zero. This is the stated naturality and adjunction-map clause.",
+   "text": "For restriction, take Mathlib PresheafedSpace.restrictStalkIso for the underlying presheaf of F. Its germ formula followed by openImage_preimage_eq gives the specified r formula, transporting sections by eqToHom. The injection followed by abelianOpenCounit.app equals this eqToHom: toSheafify_sheafifyLift removes sheafification and DirectSum.toAddMonoid_of evaluates the presheaf counit on the unique injection. Check the final stalk equality by stalk_hom_ext on these germs and compose the inside-stalk germ formula, stalkFunctor_map_germ, the section/counit identity and the restriction germ formula.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-module-stalk"
+    "def-sc-abelian-open-extension-by-zero",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A5 (lemma-j-shriek-abelian), parts (2), (3), (5)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sheafification",
+  "def-sc-abelian-open-extension-by-zero",
   "def-weil-pbc-module-stalk",
+  "def-weil-pbc-sheafification",
+  "lem-sc-abelian-open-extension-presheaf-stalk",
   "lem-weil-pbc-stalk-sheafification-space"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma 00A5 (lemma-j-shriek-abelian), parts (2), (3), (5)"
+  "place": "Definition 00A4 and Lemma 00A5(2)-(5), whose proof is omitted; explicit Lean argument using Mathlib restriction and sheafification stalk isomorphisms"
  },
  "mathlib_searches": [
   {
@@ -176,5 +168,15 @@
   "group": "T1",
   "result": "pass",
   "note": "headless review: X arbitrary TopCat, U : Opens X, G every abelian sheaf on U (TopCat.Sheaf AddCommGrpCat on the subspace); j_{p!}G = landed siteExtensionByZeroPresheaf U over (Over U) (one summand iff V≤U, else zero), j_!G = presheafToSheaf; e x G : G_x ≅ (j_!G)_x pinned on all germs over V≤U via summand injection ≫ toSheafify (canonical map); naturality square for every α : G ⟶ H; IsZero stalk in AddCommGrpCat for x ∉ U; for every sheaf F on X, the counit = sheafifyLift of the presheaf map (eqToHom on the sole summand, zero on the empty sum), and e ≫ stalk(counit) = r with r the germ-pinned restriction-stalk iso, i.e. the identity of F_x; combined copy of both modules compiles clean (2.4 s)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c3e69",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T020248-L-962244",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean statements to their nodes and Stacks 00A4/00A5; checked unchanged signatures, proof dependencies, unit route, imports, report, clean compilation, and axioms of both public theorems and all helpers. sorryAx comes from unchanged imported construction proofs."
  }
 }

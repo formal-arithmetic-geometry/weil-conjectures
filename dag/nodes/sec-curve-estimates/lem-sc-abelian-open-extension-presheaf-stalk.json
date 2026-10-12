@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-abelian-open-extension-presheaf-stalk",
+ "kind": "statement",
+ "title": "Canonical interior stalk comparison for the abelian extension presheaf",
+ "statement": "Let $X$ be a topological space, $U$ an open subset, $x\\in U$, and $G$ an abelian sheaf on $U$. Let $P=j_{p!}G$ be the direct-sum extension presheaf [def-sc-abelian-open-extension-by-zero], with stalks [def-weil-pbc-module-stalk]. There is an isomorphism $e:G_x\\simeq P_x$ such that for every open $V\\subseteq U$ containing $x$, the germ map $G(V)\\to G_x$ followed by $e$ is the injection of the unique summand indexed by $V\\to U$ into $P(V)$ followed by its germ map to $P_x$. No sheafification, outside-stalk assertion, morphism naturality or counit assertion is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition 00A4; Lemma 00A5(3), (4); proof omitted in Stacks, supplied by T1 using Mathlib restriction-stalk comparison"
+ },
+ "stmt_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "On opens W of U, take V to be the open image of W in X. The inverse-image/open-image composite is naturally isomorphic to the identity, by Opens.map_functor_eq and thinness of the category of opens. Precomposing G with this comparison gives a presheaf Q naturally isomorphic to G. Inject Q(W) into the summand of P(V) indexed by V into U. This is natural: siteExtensionByZeroRestrict evaluated on the injection is the injection indexed by the composite inclusion, followed by the same restriction of G. The two inclusions into U are equal by thinness.",
+   "uses": [
+    "def-sc-abelian-open-extension-by-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every W, inclusions V into U form a Unique type. The component of the preceding natural transformation is therefore the inverse of DirectSum.id, the canonical sum-over-a-single-index equivalence. Thus all components are isomorphisms and NatIso.isIso_of_isIso_app gives a presheaf isomorphism G to the restriction of P.",
+   "uses": [
+    "def-sc-abelian-open-extension-by-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply stalkFunctor.mapIso to this presheaf isomorphism and compose with PresheafedSpace.restrictStalkIso. The latter follows from Final.colimitIso for the opposite of the open-image neighborhood functor, which is initial by its adjunction with inverse image. Its germ formula is restrictStalkIso_hom_eq_germ. For V contained in U, open image of inverse image equals V. Combining this with stalkFunctor_map_germ and transporting along that equality computes the composite as the specified injection followed by the germ.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-sc-abelian-open-extension-by-zero"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition 00A4; Lemma 00A5(3), (4); proof omitted in Stacks, supplied by T1 using Mathlib restriction-stalk comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of extension by zero presheaf inside an open subset",
+   "results": "Internal Server Error; unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of extension by zero along an open inclusion",
+   "results": "Skyscraper and generic stalk-to-fiber maps; no direct comparison for this direct-sum extension presheaf",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalk",
+   "results": "Generic stalk, stalkPullbackIso and stalkPushforward. No extension-presheaf comparison. Mathlib restriction-stalk comparison is used as a tool after constructing the presheaf isomorphism.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*stalk|stalk.*restriction; restrictStalkIso",
+   "results": "No extension-presheaf formula in Mathlib. Geometry/RingedSpace/Stalks.lean provides restrictStalkIso and its germ equation, used in the proof. No existing node or blueprint node states the presheaf comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.AbelianOpenExtensionByZeroStalks",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "02UZ open-closed sequence: interior stalk of the extension presheaf, step 3 of lem-sc-topological-extension-by-zero-stalks",
+   "via": [
+    "lem-sc-topological-extension-by-zero-stalks",
+    "lem-sc-noetherian-open-closed-cohomology-sequence",
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.AbelianOpenExtensionPresheafStalk",
+  "file": "lean/Sheaf/Topology/AbelianOpenExtensionPresheafStalk.lean",
+  "declaration": "TopCat.Sheaf.abelianOpenExtensionPresheaf_stalk",
+  "statement": "theorem abelianOpenExtensionPresheaf_stalk (X : TopCat.{w}) (U : Opens X) (x : U) (G : TopCat.Sheaf AddCommGrpCat.{w} ((Opens.toTopCat X).obj U)) : ∃ e : TopCat.Presheaf.stalk G.obj x ≅ TopCat.Presheaf.stalk ((abelianOpenExtensionPresheaf U).obj G) x.val, ∀ (V : Opens X) (hV : V ≤ U) (hx : x.val ∈ V), TopCat.Presheaf.germ G.obj ((Opens.map U.inclusion').obj V) x hx ≫ e.hom = AddCommGrpCat.ofHom (DirectSum.of (fun φ : V ⟶ U ↦ (openSlicePresheaf U G.obj).obj (op (Over.mk φ))) (homOfLE hV)) ≫ TopCat.Presheaf.germ ((abelianOpenExtensionPresheaf U).obj G) V x.val hx",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c3e69",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T020248-L-962244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c3e69",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T020248-L-962244",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean statements to their nodes and Stacks 00A4/00A5; checked unchanged signatures, proof dependencies, unit route, imports, report, clean compilation, and axioms of both public theorems and all helpers. sorryAx comes from unchanged imported construction proofs."
+ }
+}
