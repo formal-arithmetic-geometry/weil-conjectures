@@ -100,9 +100,9 @@ theorem exists_topological_induced_cohomology_cocycle
               ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
               (J.extMk s (p + 1) rfl hs))) =
             I.extMk z (p + 1) rfl hz) := by
-  obtain ⟨edge, a, ha⟩ :=
+  obtain ⟨_, a, ha⟩ :=
     exists_topological_induced_edge_and_map f HX HZ hX hZ
-  exact ⟨edge, a, ha,
-    topological_induced_cocycle_formula f HX HZ hX hZ edge a ha⟩
+  obtain ⟨edge, hedge⟩ := topological_induced_cocycle_formula f HX HZ hX hZ a ha
+  exact ⟨edge, a, ha, hedge⟩
 
 end CategoryTheory

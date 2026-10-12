@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-topological-cocycle-naturality",
+ "kind": "statement",
+ "title": "Naturality of objectwise topological cohomology comparison",
+ "statement": "Let f:Z -> X be continuous and assume its direct image on abelian sheaves is additive [def-sp-left-exact-additive]. Let KX and KZ be the free abelian terminal sheaves, and H_X^p and H_Z^p the canonical Ext cohomology functors [def-sc-topological-abelian-cohomology]. Let a:KX -> f_*KZ send each sheafification generator h to f^{-1}(h) followed by the terminal-open equality. Suppose additive maps tau_{p,F}:H_X^p(f_*F) -> H_Z^p(F) are given for all p,F and satisfy the resolution-cocycle formula: for all injective resolutions I of F and J of f_*F, all comparisons phi:J -> f_*I over f_*F, and all cycles s,z with a composed with f_*z = s composed with phi^p, tau_{p,F}(J.extMk(s))=I.extMk(z). Then for each coefficient morphism g:F -> G and each p, H_X^p(f_*g) followed by tau_{p,G} equals tau_{p,F} followed by H_Z^p(g). This statement constructs no maps.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/013G",
+  "place": "Derived Categories, Lemmas 13.18.6 and 13.18.7; with the cohomology definition of Tag 01DZ and terminal-section identity of the proof of Tag 01EZ"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Represent a class by a cocycle in a resolution J of f_*F. Lift any coefficient\nmap g:F -> G to a map between injective resolutions I and I' and lift f_*g between\nJ and J'. Choose comparisons J -> f_*I and J' -> f_*I'. The two composites from J\ninto f_*I' extend the same augmentation map and are homotopic, because f_*I' is\ntermwise injective. Their global-section maps therefore agree on cohomology.\nAs a sends the generators to terminal-section generators, precomposition\nz maps to a >> f_*z is a bijection Hom(KZ,T) -> Hom(KX,f_*T), natural in T.\nThus for each comparison and source cycle there exists a unique matching z;\nthe bijection commutes with differentials, so z is a cycle. Apply the formula\nfor tau to these matching cycles. The Ext functor maps a cycle class by composing\nwith a resolution lift of the coefficient map (InjectiveResolution.extMk_comp_mk₀).\nThis identifies the two paths around the naturality square with the composites. Every Ext class\nhas a cocycle representative, so the\nsquare commutes on every element; extensionality of additive homomorphisms gives\nthe displayed equality. This also covers degree zero and zero coefficient maps.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology",
+    "def-weil-pbc-topological-inverse-image",
+    "lem-sc-topological-pushforward-injective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-sc-topological-pushforward-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/013G",
+  "place": "Derived Categories, Lemmas 13.18.6 and 13.18.7; with the cohomology definition of Tag 01DZ and terminal-section identity of the proof of Tag 01EZ; explicit terminal-representable and Ext glue expanded by H3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A continuous map induces natural additive maps from cohomology of a pushforward sheaf to the cohomology of the original sheaf, computed by injective resolution cocycles",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Map on Ext from an exact left adjoint and right adjoint computed using arbitrary injective resolution comparison",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapExtLinearMap_apply; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Adjunction.derived; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Adjunction.derived'; CategoryTheory.Functor.mapExtAddHom_apply",
+   "verdict": "no matching specialization; useful generic APIs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Objectwise maps induced by injective resolution comparisons commute with coefficient sheaf morphisms",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'; CategoryTheory.InjectiveResolution.iso_hom_naturality; CategoryTheory.InjectiveResolution.Hom.ι_comp_hom; CategoryTheory.InjectiveResolution.desc_commutes; CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc; CategoryTheory.InjectiveResolution.desc_commutes_assoc; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality; CategoryTheory.InjectiveResolution.Hom.ι_f_zero_comp_hom_f_zero",
+   "verdict": "no matching specialization; useful generic APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|extMk_comp_mk₀|descHomotopy",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "verdict": "no matching specialization; useful generic APIs only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalInducedCocycleFormula",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Resolution-comparison part of the induced cohomology map used in the Leray argument; naturality step.",
+   "via": [
+    "lem-sc-topological-induced-cocycle-formula",
+    "lem-sc-topological-leray-spectral-sequence",
+    "lem-sc-leray-closed-pushforward-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.TopologicalCocycleNaturality",
+  "file": "lean/Sheaf/Topology/TopologicalCocycleNaturality.lean",
+  "declaration": "CategoryTheory.topological_cocycle_naturality",
+  "statement": "theorem topological_cocycle_naturality {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive] (a : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶ (TopCat.Sheaf.pushforwardAb f).obj ((presheafToSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free))) (ha : ∀ (U : Opens X) (h : U ⟶ (⊤ : Opens X)), a.hom.app (op U) ((toSheafify (Opens.grothendieckTopology X) (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free)).app (op U) (FreeAbelianGroup.of h)) = (toSheafify (Opens.grothendieckTopology Z) (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)).app (op ((Opens.map f).obj U)) (FreeAbelianGroup.of ((Opens.map f).map h ≫ eqToHom (Opens.map_top f)))) (τ : ∀ (p : ℕ) (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}), (Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) p ⋙ (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)).obj ((TopCat.Sheaf.pushforwardAb f).obj F) ⟶ (Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) p ⋙ (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)).obj F) (hτ : ∀ (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) (I : InjectiveResolution F) (J : InjectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F)) (φ : J.cocomplex ⟶ ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) (hφ : J.ι.f 0 ≫ φ.f 0 = (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0)) (p : ℕ) (s : (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶ J.cocomplex.X p) (hs : s ≫ J.cocomplex.d p (p + 1) = 0) (z : (presheafToSheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}).obj (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶ I.cocomplex.X p) (hz : z ≫ I.cocomplex.d p (p + 1) = 0) (hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p), τ p F (J.extMk s (p + 1) rfl hs) = I.extMk z (p + 1) rfl hz) : ∀ (p : ℕ) {F G : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}} (g : F ⟶ G), (Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) p ⋙ (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)).map ((TopCat.Sheaf.pushforwardAb f).map g) ≫ τ p G = τ p F ≫ (Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) p ⋙ (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)).map g",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-118cf",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T173834-L-3297854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-118cf",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T173834-L-3297854",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered files, node statements and proof records, change record, report, compilation results, and forced caller adaptation against the stage-3 review brief; all checks pass."
+ }
+}

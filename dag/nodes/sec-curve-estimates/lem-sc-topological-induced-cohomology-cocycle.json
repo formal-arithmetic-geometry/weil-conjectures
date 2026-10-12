@@ -13,32 +13,28 @@
  ],
  "proof": [
   {
-   "text": "Use the exact inverse-image/direct-image adjunction on abelian sheaves. The free abelian sheaf on the terminal representable represents global sections. Sectionwise equality of terminal sections identifies inverse image of KX with KZ. The adjunction unit under this identification constructs a. By the free/sheafification adjunction it sends each generator h to inverse image of h composed with the terminal-open equality, exactly as stated, and this rule uniquely determines a.",
+   "text": "Obtain the terminal-generator map a and its generator equation from the existing existence statement. Its unconstrained edge witness is not used.",
    "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "def-sc-topological-abelian-cohomology"
+    "lem-sc-topological-induced-edge-and-map"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the exact inverse-image functor to Ext(KX,f_*F), identify the inverse image of KX with KZ, and compose with the derived counit to F. This defines natural additive maps on Ext, and hence edge on the recorded H-prime functors. Compute on injective resolutions J and I: direct image of each I^n is injective, and a comparison phi over f_*F induces the same map on global-section cohomology. Source resolution exactness and target termwise injectivity imply that any two such comparisons are homotopic, so the computation is independent of them. Chain maps preserve cycles and boundaries; if a composed with f_*z equals s composed with phi, the image of the cocycle class represented by s is the class represented by z. Use the Ext computation by InjectiveResolution.extMk and transport through hX,hZ. The zero sheaf gives zero maps; the identity map gives the identity; degree zero gives the usual terminal-section map.",
+   "text": "Apply the corrected cocycle formula to a to obtain a compatible edge and its cocycle computation. Combine edge, a, the generator equation and the computation into the asserted existential pair.",
    "uses": [
-    "lem-sc-topological-pushforward-injective",
-    "def-sc-topological-abelian-cohomology",
-    "def-weil-pbc-topological-inverse-image"
+    "lem-sc-topological-induced-cocycle-formula"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-topological-inverse-image",
-  "def-sc-topological-abelian-cohomology",
-  "lem-sc-topological-pushforward-injective"
+  "lem-sc-topological-induced-edge-and-map",
+  "lem-sc-topological-induced-cocycle-formula"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01DZ",
-  "place": "Source construction specialized to abelian sheaves; explicit naturality and cocycle glue expanded by Q3"
+  "place": "Forced adaptation of the construction: obtain a first and then construct its compatible edge; existential assembly in Lean by H3"
  },
  "mathlib_searches": [
   {
@@ -108,14 +104,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y2",
+  "reviewer": "X-118cf",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T132613-L-1449099",
+  "landing": "20261012T173834-L-3297854",
   "kind": "interface",
-  "sorry_before": [
-   "CategoryTheory.exists_topological_induced_cohomology_cocycle"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Matched the delivered files, node statements and proof records, change record, report, compilation results, and forced caller adaptation against the stage-3 review brief; all checks pass."
  }
 }
