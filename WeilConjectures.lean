@@ -169,10 +169,12 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.SheafOfSections
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Specialization
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.StalkTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TameInertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorCoefficients
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorExtension
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorExtensionAdd
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorExtensionCount
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorExtensionMap
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorExtensionTransport
@@ -184,6 +186,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroupDense
 public import WeilConjectures.AlgebraicGeometry.GenericFiniteness
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapPow
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.AlgebraicGeometry.GeometricallyConnected
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
@@ -330,6 +333,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedCoverExtension
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Affine
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Flat.QuasiCompactCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
 public import WeilConjectures.AlgebraicGeometry.ProEtale.LocalProperties
@@ -1514,6 +1518,7 @@ public import WeilConjectures.RingTheory.ProEtale.IntegralLocal
 public import WeilConjectures.RingTheory.ProEtale.LocalIso
 public import WeilConjectures.RingTheory.ProEtale.ProEtaleContraction
 public import WeilConjectures.RingTheory.ProEtale.PullbackProfinite
+public import WeilConjectures.RingTheory.ProEtale.RegularLocalization
 public import WeilConjectures.RingTheory.ProEtale.RetractionsStrictlyHenselian
 public import WeilConjectures.RingTheory.ProEtale.StalkAlgebraic
 public import WeilConjectures.RingTheory.ProEtale.StalkIso
@@ -1534,6 +1539,7 @@ public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.StrictlyHenselianNormal
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
+public import WeilConjectures.Scratch.SorryAudit
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
@@ -1782,12 +1788,15 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenFunctions
+public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZeroSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleCounit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
@@ -1932,8 +1941,8 @@ public import WeilConjectures.WeilSheaf.FourierTateTwist
 public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 public import WeilConjectures.WeilSheaf.FourierTateTwist.Transform
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
-public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
+public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.LocalFrobenius
