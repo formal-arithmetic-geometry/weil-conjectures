@@ -8,11 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
-import Sheaf.Paper.SiteRestrictionInjectives
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMapBijective
+import Sheaf.AlgebraicGeometry.EtaleOpenFreeSheafUnitCoherence
+import Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison
+
 /-! # Natural comparison for cohomology over open étale objects
 
 Source: Stacks Project, Cohomology on Sites, Tag 03F3, and Étale Cohomology, Tag 09AX.
@@ -27,6 +26,51 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.types false
+
+private lemma canonicalMap_naturality {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
+    (U V : X.Opens) (h : V ≤ U) :
+    ((Functor.flip ((etaleOpenFreeSheaf X).op ⋙ Abelian.extFunctor q)).obj F).map
+        (MorphismProperty.Over.homMk (P := @Etale) (Q := ⊤) (X := X)
+          (A := Scheme.Etale.mk V.ι) (B := Scheme.Etale.mk U.ι)
+          (X.homOfLE h) (X.homOfLE_ι h) trivial).op ≫
+        etaleOpenObjectCohomologyMap F q V =
+      etaleOpenObjectCohomologyMap F q U ≫ AddCommGrpCat.ofHom
+        (Etale.cohomologyMap (X.homOfLE h)
+          ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F) q) ≫
+        AddCommGrpCat.ofHom (Sheaf.H.map
+          ((Etale.upperStarComp AddCommGrpCat.{u + 1} (X.homOfLE h) U.ι V.ι
+            (X.homOfLE_ι h).symm).inv.app F) q) := by
+  let L := Etale.upperStar AddCommGrpCat.{u + 1} U.ι
+  let G := Etale.upperStar AddCommGrpCat.{u + 1} (X.homOfLE h)
+  let H := Etale.upperStar AddCommGrpCat.{u + 1} V.ι
+  let c := Etale.upperStarComp AddCommGrpCat.{u + 1} (X.homOfLE h) U.ι V.ι
+    (X.homOfLE_ι h).symm
+  let a := (etaleOpenFreeSheaf X).map
+    (MorphismProperty.Over.homMk (P := @Etale) (Q := ⊤) (X := X)
+      (A := Scheme.Etale.mk V.ι) (B := Scheme.Etale.mk U.ι)
+      (X.homOfLE h) (X.homOfLE_ι h) trivial)
+  let k := (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1}
+    (X.homOfLE h)).inv.app (AddCommGrpCat.of (ULift ℤ))
+  ext x
+  change Abelian.Ext ((etaleOpenFreeSheaf X).obj (Scheme.Etale.mk U.ι)) F q at x
+  change (Abelian.Ext.mk₀ (etaleOpenFreeSheafUnit V)).comp
+      (((Abelian.Ext.mk₀ a).comp x (zero_add q)).mapExactFunctor H) (zero_add q) =
+    ((Abelian.Ext.mk₀ k).comp
+      (((Abelian.Ext.mk₀ (etaleOpenFreeSheafUnit U)).comp
+        (x.mapExactFunctor L) (zero_add q)).mapExactFunctor G) (zero_add q)).comp
+      (Abelian.Ext.mk₀ (c.inv.app F)) (add_zero q)
+  rw [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀,
+    Abelian.Ext.mk₀_comp_mk₀_assoc]
+  rw [Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_mk₀,
+    Abelian.Ext.mk₀_comp_mk₀_assoc]
+  rw [← etaleOpenFreeSheafUnit_coherence U V h]
+  simp only [← Category.assoc]
+  rw [← Abelian.Ext.mk₀_comp_mk₀_assoc
+    (etaleOpenFreeSheafUnit V ≫ H.map a) (c.hom.app _)]
+  rw [Abelian.Ext.comp_assoc_of_third_deg_zero]
+  rw [← Abelian.Ext.exactFunctorCompositionComparison L G H c x]
+  simp
 
 /-- Object cohomology over an open is the cohomology of its inverse-image sheaf,
 naturally for inclusions of opens.
@@ -71,6 +115,13 @@ theorem etaleOpenObjectCohomology_natural
               ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F) q) ≫
             AddCommGrpCat.ofHom (Sheaf.H.map
               ((Etale.upperStarComp AddCommGrpCat.{u + 1} (X.homOfLE h) U.ι V.ι
-                (X.homOfLE_ι h).symm).inv.app F) q)) := by sorry
+                (X.homOfLE_ι h).symm).inv.app F) q)) := by
+  subst P
+  let e (U : X.Opens) :=
+    (AddEquiv.ofBijective (etaleOpenObjectCohomologyMap F q U).hom
+      (etaleOpenObjectCohomologyMap_bijective F q U)).toAddCommGrpIso
+  refine ⟨e, ?_⟩
+  intro U V h
+  exact canonicalMap_naturality F q U V h
 
 end AlgebraicGeometry

@@ -1,0 +1,113 @@
+{
+ "id": "def-weil-pbc-etale-open-object-cohomology-map",
+ "kind": "definition",
+ "title": "Canonical map from open-object Ext cohomology to inverse-image cohomology",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $U\\subseteq X$ open with inclusion $j_U$ [def-weil-open-immersion]. Let $A_U$ be the sheafification of the free abelian presheaf on $\\operatorname{ULift}\\operatorname{Hom}(-,U)$ [def-weil-pbc-sites-and-cohomology]. The sheafification unit maps the generator of the identity of $U$ to a section of $A_U(U)$. The inverse-image/localization comparison [lem-weil-pbc-etale-inverse-image-restriction] transports it to a section of $j_U^*A_U$ at the terminal object of $U_{et}$. The constant-sheaf adjunction classifies this section by $k_U:\\mathbb Z_U\\to j_U^*A_U$. For every abelian etale sheaf $F$ [def-weil-pbc-abelian-etale-sheaves] and $q\\in\\mathbb N$, define $m_U:\\operatorname{Ext}^q(A_U,F)\\to H^q(U_{et},j_U^*F)$ by $m_U(x)=\\operatorname{mk}_0(k_U)\\circ j_U^*x$ [def-pc-ext]. All of these are the explicit constructions in the Lean module, without arbitrary choices of witnesses.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma cohomology-of-open, proof by restriction of an injective resolution; free-representable/Yoneda and constant-sheaf adjunctions. Explicit identity-generator construction and unit compatibility supplied by F2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-ext"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma cohomology-of-open, proof by restriction of an injective resolution; free-representable/Yoneda and constant-sheaf adjunctions. Explicit identity-generator construction and unit compatibility supplied by F2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext cohomology of a sheaf on an open via free representable and restriction",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from free abelian representable sheaf is cohomology of restriction to open subscheme",
+   "date": "2026-10-12",
+   "results": "Sheaf.H, Sheaf.cohomologyPresheafFunctor and InjectiveResolution.extAddEquivCohomologyClass; no exact open comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.Adjunction",
+   "date": "2026-10-12",
+   "results": "Search service reports Adjunction.extEquiv in Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction, but that file and declaration do not exist in the pinned Mathlib checkout.",
+   "verdict": "no exact match in pinned version"
+  },
+  {
+   "tool": "grep",
+   "query": "uliftYoneda|constantSheafAdj|mk₀_comp_mk₀_assoc",
+   "date": "2026-10-12",
+   "results": "Found Yoneda, constantSheafAdj and Ext.mk₀_comp_mk₀_assoc; rg in library also found cohomology_over_object_localization (unlifted Yoneda, slice object cohomology) and etaleCohomologyOverOpen (global cohomology signature, unusable here). No exact lifted comparison or identity-generator coherence.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Proof, step 7: passage from neighbourhood cohomology to local-ring cohomology via Tag 09AX; original item proof steps 1-2, the natural object/open cohomology comparison; canonical open-object comparison and its identity generator",
+   "via": [
+    "lem-weil-pbc-etale-open-object-cohomology-natural",
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenObjectCohomologyMap.lean",
+  "declaration": "AlgebraicGeometry.etaleOpenObjectCohomologyMap",
+  "declarations": [
+   "AlgebraicGeometry.etaleOpenFreeSheaf",
+   "AlgebraicGeometry.etaleOpenFreeSheafSection",
+   "AlgebraicGeometry.etaleOpenFreeSheafUnit",
+   "AlgebraicGeometry.etaleOpenObjectCohomologyMap"
+  ],
+  "statement": "def etaleOpenObjectCohomologyMap {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (U : X.Opens) : ((Functor.flip ((etaleOpenFreeSheaf X).op ⋙ Abelian.extFunctor q)).obj F).obj (op (Scheme.Etale.mk U.ι)) ⟶ AddCommGrpCat.of (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F) q)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T110300-L-614220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T110300-L-614220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

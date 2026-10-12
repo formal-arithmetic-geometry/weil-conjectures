@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-etale-open-object-cohomology-map-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of the canonical open-object cohomology map",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves], $q\\in\\mathbb N$, and $U\\subseteq X$ open [def-weil-open-immersion]. The explicitly constructed map $m_U:\\operatorname{Ext}^q(A_U,F)\\to H^q(U_{et},j_U^*F)$ of [def-weil-pbc-etale-open-object-cohomology-map] is bijective. No compatibility between different opens is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma cohomology-of-open, proof by restriction of an injective resolution; free-representable/Yoneda and constant-sheaf adjunctions. Explicit identity-generator construction and unit compatibility supplied by F2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-open-object-cohomology-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective resolution I of F. Restriction is exact and preserves injectives since its extension-by-zero left adjoint is exact. Identify inverse image with localization restriction, so the pulled-back resolution computes cohomology on U. Use the Ext/injective-resolution comparison on both sites.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-weil-pbc-site-restriction-injectives",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafification/free/Yoneda adjunction identifies Hom(A_U,I) with I(U) in each degree. The constant-sheaf adjunction identifies Hom(Z_U,j_U^*I) with the same sections. The composite is exactly pullback followed by precomposition with the constructed identity-generator map k_U. These additive bijections commute with the differentials and therefore induce a bijection on cohomology. This covers q=0 and the empty open as well.",
+   "uses": [
+    "def-weil-pbc-etale-open-object-cohomology-map",
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-site-restriction-injectives",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-etale-open-object-cohomology-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma cohomology-of-open, proof by restriction of an injective resolution; free-representable/Yoneda and constant-sheaf adjunctions. Explicit identity-generator construction and unit compatibility supplied by F2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext cohomology of a sheaf on an open via free representable and restriction",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from free abelian representable sheaf is cohomology of restriction to open subscheme",
+   "date": "2026-10-12",
+   "results": "Sheaf.H, Sheaf.cohomologyPresheafFunctor and InjectiveResolution.extAddEquivCohomologyClass; no exact open comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.Adjunction",
+   "date": "2026-10-12",
+   "results": "Search service reports Adjunction.extEquiv in Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction, but that file and declaration do not exist in the pinned Mathlib checkout.",
+   "verdict": "no exact match in pinned version"
+  },
+  {
+   "tool": "grep",
+   "query": "uliftYoneda|constantSheafAdj|mk₀_comp_mk₀_assoc",
+   "date": "2026-10-12",
+   "results": "Found Yoneda, constantSheafAdj and Ext.mk₀_comp_mk₀_assoc; rg in library also found cohomology_over_object_localization (unlifted Yoneda, slice object cohomology) and etaleCohomologyOverOpen (global cohomology signature, unusable here). No exact lifted comparison or identity-generator coherence.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Proof, step 7: passage from neighbourhood cohomology to local-ring cohomology via Tag 09AX; original item proof steps 1-2, the natural object/open cohomology comparison; canonical open-object comparison and its identity generator",
+   "via": [
+    "lem-weil-pbc-etale-open-object-cohomology-natural",
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMapBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenObjectCohomologyMapBijective.lean",
+  "declaration": "AlgebraicGeometry.etaleOpenObjectCohomologyMap_bijective",
+  "declarations": [
+   "AlgebraicGeometry.etaleOpenObjectCohomologyMap_bijective"
+  ],
+  "statement": "theorem etaleOpenObjectCohomologyMap_bijective {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (U : X.Opens) : Function.Bijective (etaleOpenObjectCohomologyMap F q U)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T110300-L-614220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T110300-L-614220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

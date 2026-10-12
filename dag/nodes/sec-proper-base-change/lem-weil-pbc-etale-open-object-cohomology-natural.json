@@ -18,42 +18,32 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective resolution of the abelian etale sheaf F. Ext from the sheafified free abelian representable at U is cohomology of this resolution evaluated at U, by the free-sheaf and Yoneda adjunctions and Ext via an injective resolution. Restriction to U preserves injectives because it has exact extension by zero as left adjoint. The inverse-image/localization comparison therefore identifies this section complex with the restricted injective resolution on U. Taking cohomology gives the displayed isomorphism e_U. This construction is independent of the chosen injective resolution by the comparison theorem for Ext.",
+   "text": "For each open U use the explicit map etaleOpenObjectCohomologyMap. Its bijectivity upgrades its underlying additive homomorphism to AddEquiv.ofBijective and then to an isomorphism e_U. The inverse is the uniquely determined inverse of a bijection, not an arbitrary witness from an existence theorem. Substitute hP to identify the given presheaf with its actual Ext construction.",
    "uses": [
-    "lem-weil-pbc-ext-via-injective-resolution",
-    "lem-weil-pbc-site-restriction-injectives",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-open-immersion-etale",
-    "def-weil-pbc-sites-and-cohomology"
+    "def-weil-pbc-etale-open-object-cohomology-map",
+    "lem-weil-pbc-etale-open-object-cohomology-map-bijective"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For V contained in U, the unit identity for open restriction identifies the pullback of a section with its restriction. Apply it with g equal to the inclusion of U into X and W equal to V. The fibre product V times_X U is V; the identity unit cancels with its identity comparison. Thus the two successive restriction isomorphisms, followed by the inverse-image composition comparison, equal the direct restriction isomorphism for V. Apply this identity degreewise to the injective resolution and take cohomology. It gives precisely the naturality equation for e.",
+   "text": "Prove naturality of these concrete maps pointwise. Expand the presheaf map, the canonical map, cohomologyMap and Sheaf.H.map into Ext compositions. Apply mapExactFunctor_comp and mapExactFunctor_mk₀. Replace the composite of the constant comparison with the pulled-back generator by the degree-zero identity-generator coherence. Apply exactFunctorCompositionComparison to the Ext class, reassociate, and cancel the composition comparison with its inverse. This proves the required equation for the actual maps, hence for the e_U with those homomorphisms.",
    "uses": [
-    "lem-weil-pbc-open-restriction-pullback-unit",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-etale-open-free-sheaf-unit-coherence",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ext-via-injective-resolution",
-  "lem-weil-pbc-site-restriction-injectives",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-open-immersion-etale",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-open-restriction-pullback-unit",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-cohomology-pullback-functorial"
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "lem-weil-pbc-etale-open-object-cohomology-map-bijective",
+  "lem-weil-pbc-etale-open-free-sheaf-unit-coherence",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/03F3",
-  "place": "Lemma cohomology-of-open, proof (restriction of an injective resolution); Tag 09AX, proof (object cohomology over neighbourhoods). Naturality is the original item proof steps 1-2, with the unit calculation supplied by the agent.; explicit Lean specialization by B2."
+  "place": "Tag 03F3 restriction argument; F2 concrete identity-generator map and complete Ext-algebra naturality proof, with bijectivity and degree-zero generator coherence split off."
  },
  "mathlib_searches": [
   {
@@ -121,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-04b89",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T085212-L-2646",
+  "landing": "20261012T110300-L-614220",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, proofs, new obligations and node records against the original item, cited sources and unit route; all three modules compile cleanly and axiom checks pass for a partial delivery."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
