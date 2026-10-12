@@ -9,7 +9,12 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
 public import WeilConjectures.SixFunctors.Finite.BaseChange
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves
@@ -64,6 +69,102 @@ noncomputable instance Etale.hasFiniteBiproducts_sheaf_moduleCat (X : Scheme.{u}
     HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   HasFiniteBiproducts.of_hasFiniteProducts
 
+section UnitComp
+
+universe u'
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+/-- The unit of `(h₁ ≫ h₂)^* ⊣ (h₁ ≫ h₂)_*` is the composite of the units of `h₂` and `h₁`, up to
+the composition isomorphisms. -/
+theorem Etale.unit_app_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (F : Sheaf R.smallEtaleTopology A) :
+    (upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F ≫ (lowerStarComp A h₁ h₂).inv.app _ =
+      ((upperStarLowerStarAdjunction A h₂).unit.app F ≫
+        (h₂)_*[A].map ((upperStarLowerStarAdjunction A h₁).unit.app ((h₂)^*[A].obj F))) ≫
+        (h₂)_*[A].map ((h₁)_*[A].map
+          (((conjugateEquiv (upperStarLowerStarAdjunction A (h₁ ≫ h₂))
+            ((upperStarLowerStarAdjunction A h₂).comp (upperStarLowerStarAdjunction A h₁))).symm
+              (lowerStarComp A h₁ h₂).inv).app F)) := by
+  rw [unit_conjugateEquiv_symm, Adjunction.comp_unit_app]
+  rfl
+
+/-- If the units of `h₁ ≫ h₂` at `F` and of `h₁` at `h₂^* F` are isomorphisms, so is the unit of
+`h₂` at `F`. -/
+theorem Etale.isIso_unit_app_of_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (F : Sheaf R.smallEtaleTopology A)
+    [IsIso ((upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F)]
+    [IsIso ((upperStarLowerStarAdjunction A h₁).unit.app ((h₂)^*[A].obj F))] :
+    IsIso ((upperStarLowerStarAdjunction A h₂).unit.app F) := by
+  have h := Etale.unit_app_comp A h₁ h₂ F
+  have : IsIso ((upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F ≫
+      (lowerStarComp A h₁ h₂).inv.app _) := inferInstance
+  rw [h] at this
+  simpa only [isIso_comp_right_iff] using this
+
+/-- If the units of `h₂` at `F` and of `h₁` at `h₂^* F` are isomorphisms, so is the unit of
+`h₁ ≫ h₂` at `F`. -/
+theorem Etale.isIso_unit_app_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (F : Sheaf R.smallEtaleTopology A)
+    [IsIso ((upperStarLowerStarAdjunction A h₂).unit.app F)]
+    [IsIso ((upperStarLowerStarAdjunction A h₁).unit.app ((h₂)^*[A].obj F))] :
+    IsIso ((upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F) := by
+  have h := Etale.unit_app_comp A h₁ h₂ F
+  have : IsIso ((upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F ≫
+      (lowerStarComp A h₁ h₂ (h₁ ≫ h₂) rfl).inv.app _) := by
+    rw [h]; infer_instance
+  exact IsIso.of_isIso_comp_right _ ((lowerStarComp A h₁ h₂ (h₁ ≫ h₂) rfl).inv.app _)
+
+
+
+/-- The unit of `g^* ⊣ g_*` along an isomorphism `g` is an isomorphism. -/
+instance Etale.isIso_unit_app_of_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (F : Sheaf Y.smallEtaleTopology A) :
+    IsIso ((upperStarLowerStarAdjunction A g).unit.app F) := by
+  have := (upperStarLowerStarAdjunction A g).isEquivalence_left_of_isEquivalence_right
+  infer_instance
+
+end UnitComp
+
+/-- **The open-immersion half of 09Z5 from the generic-point half.** Let `Y` be a normal integral
+scheme and `j : U ⟶ Y` the inclusion of a nonempty open subscheme. If the unit
+`M_Z ⟶ g_* g^* M_Z` along the generic point `g` is an isomorphism for every normal integral `Z`,
+then the unit `M_Y ⟶ j_* j^* M_Y` is an isomorphism: the generic point of `Y` factors as the
+generic point of `U` followed by `j`, up to the isomorphism of stalks at the generic point. -/
+theorem Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint
+    (M : ModuleCat.{u + 1} Λ)
+    (hgen : ∀ (Z : Scheme.{u}) [IsIntegral Z], (∀ z : Z, IsIntegrallyClosed (Z.presheaf.stalk z)) →
+      IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (Z.fromSpecStalk (genericPoint Z))).unit.app
+          ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))
+    {Y : Scheme.{u}} [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))
+    {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U] :
+    IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
+      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
+  have : IsIntegral U := isIntegral_of_isOpenImmersion j
+  have hU : ∀ x : U, IsIntegrallyClosed (U.presheaf.stalk x) := fun x ↦
+    have := hY (j x)
+    IsIntegrallyClosed.of_equiv (asIso (j.stalkMap x)).commRingCatIsoToRingEquiv
+  let MY := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
+  let gU := U.fromSpecStalk (genericPoint U)
+  -- the unit of the generic point of `U` at `j^* M_Y ≅ M_U`
+  have : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) gU).unit.app
+      ((j)^*[ModuleCat.{u + 1} Λ].obj MY)) :=
+    (NatTrans.isIso_app_iff_of_iso _
+      ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) j).app M)).2 (hgen U hU)
+  -- the unit of the generic point of `Y`, through the point `j η_U = η_Y`
+  have hη : j (genericPoint U) = genericPoint Y := genericPoint_eq_of_isOpenImmersion j
+  have hY' : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (Y.fromSpecStalk (j (genericPoint U)))).unit.app MY) := by
+    rw [hη]
+    exact hgen Y hY
+  have : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (Spec.map (j.stalkMap (genericPoint U)) ≫ Y.fromSpecStalk (j (genericPoint U)))).unit.app
+        MY) :=
+    Etale.isIso_unit_app_comp _ _ _ _
+  rw [Scheme.SpecMap_stalkMap_fromSpecStalk] at this
+  exact Etale.isIso_unit_app_of_comp _ gU j MY
+
 /-- **Constant sheaves on a normal scheme.** Let `Y` be an integral scheme all of whose local
 rings are integrally closed, `g : Spec K ⟶ Y` the inclusion of its generic point and `M` a
 `Λ`-module. Then the unit `M_Y ⟶ g_* g^* M_Y = g_* M_{Spec K}` is an isomorphism; the same
@@ -82,20 +183,75 @@ theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [I
       ∀ {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U],
         IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
-  sorry
+  by
+  -- The generic-point half: on the integral étale `Z`-schemes `W` the constant sections are
+  -- `M`, and so are those over the one-point generic fibre `W ×_Z Spec K`.
+  have hgen : ∀ (Z : Scheme.{u}) [IsIntegral Z],
+      (∀ z : Z, IsIntegrallyClosed (Z.presheaf.stalk z)) →
+        IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+          (Z.fromSpecStalk (genericPoint Z))).unit.app
+            ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
+    fun Z _ hZ ↦ Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint Z hZ M
+  -- The open-immersion half follows from the generic-point half.
+  exact ⟨hgen Y hY, fun j ↦
+    Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint Λ M hgen hY j⟩
 
+attribute [local instance] Cardinal.fact_isRegular_aleph0 in
+/-- A finite sum of extensions by zero of constant sheaves along étale morphisms from affine
+schemes is finitely presentable. -/
+theorem Etale.isFinitelyPresentable_sigma_etaleLowerShriek {X : Scheme.{u}} {n : ℕ}
+    (U : Fin n → Scheme.{u}) (w : ∀ i, U i ⟶ X) (hw : ∀ i, Etale (w i))
+    (hU : ∀ i, IsAffine (U i)) :
+    IsFinitelyPresentable.{u} (∐ fun i ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (w i)
+      (hw i)).obj ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (ModuleCat.of Λ Λ))) := by
+  have (i : Fin n) : IsFinitelyPresentable.{u} ((Discrete.functor fun i ↦
+      (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (w i) (hw i)).obj
+        ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+          (ModuleCat.of Λ Λ))).obj ⟨i⟩) := by
+    have := hU i
+    exact Etale.isFinitelyPresentable_etaleLowerShriek_constantSheaf (w i) (hw i)
+  exact isCardinalPresentable_of_isColimit' _ (colimit.isColimit _) _
+    ((hasCardinalLT_aleph0_iff _).2 inferInstance)
+
+attribute [local instance] Cardinal.fact_isRegular_aleph0 in
 /-- **Constructible sheaves are finitely presentable.** On a quasi-compact quasi-separated
 scheme `X`, with `Λ` Noetherian, a constructible sheaf of `Λ`-modules `F` is a finitely
 presentable object of the category of sheaves: `Hom(F, -)` commutes with filtered colimits
 (indexed by small categories), i.e. every morphism from `F` to a filtered colimit factors
 through a stage, and two such factorisations agree at a later stage.
+
+By Stacks 095N, `F` is a cokernel of a map between finite sums of extensions by zero `v_! Λ`
+along étale maps from affine schemes; these are finitely presentable
+(`AlgebraicGeometry.Etale.isFinitelyPresentable_etaleLowerShriek_constantSheaf`, by Stacks 0738),
+and finitely presentable objects are closed under finite colimits.
 (blueprint: `lem-weil-pbc-constructible-finitely-presented`) -/
 @[stacks 09Z4]
 theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ]
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
-    IsFinitelyPresentable.{u} F :=
-  sorry
+    IsFinitelyPresentable.{u} F := by
+  -- Stacks 095N (`Etale.exists_presentation_of_isConstructibleSheaf`)
+  obtain ⟨m, n, V, v, hv, hV, U, w, hw, hU, φ, π, hφπ, ⟨hc⟩⟩ :
+      ∃ (m n : ℕ) (V : Fin m → Scheme.{u}) (v : ∀ j, V j ⟶ X) (hv : ∀ j, Etale (v j))
+        (_ : ∀ j, IsAffine (V j)) (U : Fin n → Scheme.{u}) (w : ∀ i, U i ⟶ X)
+        (hw : ∀ i, Etale (w i)) (_ : ∀ i, IsAffine (U i))
+        (φ : (∐ fun j ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (v j) (hv j)).obj
+          ((constantSheaf (V j).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+            (ModuleCat.of Λ Λ))) ⟶
+          ∐ fun i ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (w i) (hw i)).obj
+            ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+              (ModuleCat.of Λ Λ)))
+        (π : (∐ fun i ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (w i) (hw i)).obj
+            ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+              (ModuleCat.of Λ Λ))) ⟶ F)
+        (hφπ : φ ≫ π = 0), Nonempty (IsColimit (CokernelCofork.ofπ π hφπ)) :=
+    Etale.exists_presentation_of_isConstructibleSheaf F
+  have := Etale.isFinitelyPresentable_sigma_etaleLowerShriek Λ V v hv hV
+  have := Etale.isFinitelyPresentable_sigma_etaleLowerShriek Λ U w hw hU
+  have (j : WalkingParallelPair) : IsFinitelyPresentable.{u} ((parallelPair φ 0).obj j) := by
+    cases j <;> assumption
+  exact isCardinalPresentable_of_isColimit' _ hc _ ((hasCardinalLT_aleph0_iff _).2 inferInstance)
 
 /-- **The finite-pushforward embedding over a Noetherian base.** A constructible sheaf of
 `Λ`-modules `C` on a Noetherian scheme `U` admits a monomorphism
@@ -110,11 +266,24 @@ theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing 
       (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Module.Finite Λ (M i))
       (φ : C ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
         ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ :=
+  -- Proved steps of the Stacks proof: Step 3
+  -- (`Scheme.exists_isConstant_upperStar_of_isConstructibleSheaf`, constancy over a finite
+  -- separable extension of a residue field), Step 5
+  -- (`Etale.homLowerStarConstantSheafEquiv`) and the 09Z5 input. Missing: 09YV, 0817, 09Z1.
   sorry
 
 section Auxiliary
 
 /-! ### Auxiliary lemmas -/
+
+/-- The case of `AlgebraicGeometry.Etale.exists_isNoetherian_upperStar_iso` where `U` is already
+Noetherian: take `U' = U` and `ν = 𝟙 U`. This is the trivial end of the Noetherian approximation;
+the general case needs étale sheaves to descend along a limit `U = lim Uᵢ` (Stacks 01ZA). -/
+theorem Etale.exists_isNoetherian_upperStar_iso_of_isNoetherian {U : Scheme.{u}} [IsNoetherian U]
+    (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf C] :
+    ∃ (U' : Scheme.{u}) (ν : U ⟶ U') (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) :=
+  ⟨U, 𝟙 U, C, inferInstance, inferInstance, ⟨(Etale.upperStarId _ U).app C⟩⟩
 
 /-- **Descent of a constructible sheaf to a Noetherian scheme.** A constructible sheaf of
 `Λ`-modules on a quasi-compact quasi-separated scheme `U`, for `Λ` noetherian, is the pullback

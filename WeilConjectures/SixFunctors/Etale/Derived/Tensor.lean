@@ -120,6 +120,18 @@ lemma derivedTensorRightFunctor_obj (N : DerivedCategory (Sheaf X.smallEtaleTopo
     (derivedTensorRightFunctor A X).obj N = derivedTensorRight A X N :=
   rfl
 
+/-- The derived tensor product acts on a morphism in its first variable by whiskering. -/
+lemma derivedTensor_map_app {K K' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (f : K ⟶ K')
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).map f).app M = f ▷ M :=
+  rfl
+
+/-- The derived tensor product acts on a morphism in its second variable by whiskering. -/
+lemma derivedTensor_obj_map (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {M M' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (f : M ⟶ M') :
+    ((derivedTensor A X).obj K).map f = K ◁ f :=
+  rfl
+
 noncomputable instance laxMonoidal_Q :
     (DerivedCategory.Q (C := Sheaf X.smallEtaleTopology A)).LaxMonoidal :=
   DerivedCategory.laxMonoidalQ (Sheaf X.smallEtaleTopology A)
