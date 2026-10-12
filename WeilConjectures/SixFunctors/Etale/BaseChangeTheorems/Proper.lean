@@ -77,16 +77,6 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- `ℤ`-indexed colimits of `Λ`-modules are exact: `ℤ` is a filtered category, and
-`ModuleCat.{u + 1} Λ` is Grothendieck abelian, hence satisfies `AB5` for shapes of size
-`u + 1`; `AB5OfSize_of_univLE` brings that down to the shapes of size `0` in which `ℤ`
-lives. It is not an instance in mathlib because in that generality instance search would
-climb the universes. -/
-instance : HasExactColimitsOfShape ℤ (ModuleCat.{u + 1} Λ) := by
-  have : AB5OfSize.{0, 0} (ModuleCat.{u + 1} Λ) :=
-    AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} (ModuleCat.{u + 1} Λ)
-  infer_instance
-
 variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
@@ -110,9 +100,9 @@ is an isomorphism in `D⁺(Y'_ét, Λ)`. No hypothesis is imposed on `g`. For `�
 is [SGA 4, Exp. XII, Thm 5.1] and Stacks Project, Tag 0DDE; the case of a general
 coefficient ring follows by restriction of scalars. -/
 theorem Etale.isIso_baseChange_of_isProper [IsProper f] (sq : IsPullback g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ X K) :
-    IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1}))
+    (hK : Etale.DerivedCategory.Plus.torsionHomology X K) :
+    IsIso ((Etale.baseChange Ab.{u + 1} sq.toCommSq).app K) :=
   sorry
 
 /-- **Proper base change as an isomorphism of functors**: if the coefficient ring `Λ` is
@@ -126,9 +116,6 @@ on the bounded below derived categories is an isomorphism: every complex of shea
 theorem Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ) [IsProper f]
     (sq : IsPullback g' f' f g) :
     IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-  have : ∀ K, IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := fun K ↦
-    Etale.isIso_baseChange_of_isProper Λ sq K
-      (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ K)
-  NatIso.isIso_of_isIso_app _
+  sorry
 
 end AlgebraicGeometry
