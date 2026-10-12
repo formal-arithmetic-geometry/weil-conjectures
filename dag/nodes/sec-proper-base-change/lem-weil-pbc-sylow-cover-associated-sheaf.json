@@ -19,65 +19,36 @@
  ],
  "proof": [
   {
-   "text": "Choose a geometric point of the nonempty connected irreducible scheme U. Under the finite monodromy correspondence G is a finite-dimensional ZMod ℓ-module. Its finite image Q acts faithfully. Choose an ℓ-Sylow subgroup P; its index d is prime to ℓ. Replace P by an isomorphic finite group in Type u if necessary. The connected Galois Q-cover Y determines the connected cover V=Y/P. Functoriality identifies the pulled-back sheaf with the restriction M of the representation to P.",
+   "text": "Construct the Sylow cover, representation, additive associated-sheaf functor and natural comparisons of its geometric stalks with the underlying-module functor.",
    "uses": [
-    "cor-galois-lisse-representations",
-    "lem-weil-pbc-sylow-subgroup-prime-index",
-    "thm-galois-fundamental",
-    "thm-galois-lc-etale"
+    "lem-weil-pbc-sylow-cover-stalk-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
-   }
+   "elementary": false
   },
   {
-   "text": "The cover is finite étale, hence finite locally free. Its degree is locally constant on connected U and invariant under residue-field extension. Over a separably closed geometric point its algebra splits into copies of the field, whose number is both its degree and the number of geometric lifts. At the chosen point this number is [Q:P]=d, hence all the geometric fibres have cardinality d.",
-   "uses": [
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-    "lem-weil-pbc-fibre-degree-base-change",
-    "lem-galois-geometric-fibre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
-   }
+   "text": "The underlying-module functor on Rep preserves limits and colimits (Mathlib Rep.preservesLimits_forget and Rep.preservesColimits_forget). Restriction of scalars along the ULift ring equivalence is fully faithful, so it reflects finite limits and colimits. Transfer preservation across the natural stalk isomorphisms and cancel this restriction to show each composite of T with a geometric stalk preserves finite limits and colimits.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The finite étale P-torsor Y over V defines an associated-sheaf functor T on P-representations. Concretely glue the constant module sheaf on étale trivializations of Y using the transition P-actions. The cocycle identity is the group-action identity, and equivariant linear maps commute with the gluing. Transport scalars through ZMod ℓ ≃ ULift (ZMod ℓ). This construction applies to infinite modules too, since a finite P-action is discrete and continuous. On every geometric stalk T is the underlying-module functor followed by this scalar equivalence. It is additive and exact by exactness and conservativity of geometric stalks, hence preserves finite limits and colimits. The trivial rank-one representation glues with identity transition maps, giving the constant coefficient sheaf; the monodromy of v*G identifies T(M) with v*G. No invariant flag is constructed here.",
+   "text": "Geometric stalks preserve finite limits and colimits and jointly reflect isomorphisms. Apply Mathlib JointlyReflectIsomorphisms.jointlyReflectsLimit and jointlyReflectsColimit to the image under T of each limiting cone and colimiting cocone. This gives global preservation by T. Combine with the construction witnesses to obtain the unchanged conclusion.",
    "uses": [
-    "cor-galois-lisse-representations",
-    "thm-galois-lc-etale",
     "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "cor-galois-lisse-representations",
-  "def-pc-finite-locally-free",
-  "lem-galois-geometric-fibre",
-  "lem-weil-pbc-fibre-degree-base-change",
-  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-weil-pbc-sylow-cover-stalk-data",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "thm-galois-fundamental",
-  "thm-galois-lc-etale"
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)",
-  "note": "Detailed realization of the corresponding step of the cited Stacks proof."
+  "note": "R1 second reading: construction with natural geometric-stalk comparisons, then a complete Lean derivation of global finite-limit and finite-colimit preservation using existing Mathlib reflection lemmas."
  },
  "mathlib_searches": [
   {
@@ -154,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T034934-L-1564424",
+  "landing": "20261012T044752-L-2039147",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

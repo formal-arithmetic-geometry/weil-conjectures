@@ -12,13 +12,8 @@ public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import Mathlib.GroupTheory.PGroup
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
-import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
-import Sheaf.Paper.GaloisLisseRepresentations
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.ConstructibleSheaf.SylowCoverStalkData
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 
 /-!
 # A Sylow cover and its associated-sheaf functor
@@ -77,6 +72,66 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_associated_sheaf
           Nonempty (T.obj (Rep.trivial (ZMod ℓ) P (ULift.{u + 1} (ZMod ℓ))) ≅
             (constantSheaf V.smallEtaleTopology
               (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
-              (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by sorry
+              (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by
+  obtain ⟨V, v, hv, he, hc, d, hd, hf, P, hg, hfin, hp, M, hm, T, ha, hs, eM, e1⟩ :=
+    Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_stalk_data ℓ G
+  let R : ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)) ⥤
+      ModuleCat.{u + 1} (ZMod ℓ) := ModuleCat.restrictScalars.{u + 1}
+    (ULift.ringEquiv.symm.toRingHom : ZMod ℓ →+* ULift.{u + 1} (ZMod ℓ))
+  have : R.IsEquivalence := inferInstance
+  have : ReflectsFiniteLimits R := by
+    have : ReflectsLimitsOfSize.{0, 0} R := fullyFaithful_reflectsLimits R
+    exact ReflectsLimitsOfSize.reflectsFiniteLimits R
+  have : ReflectsFiniteColimits R := by
+    have : ReflectsColimitsOfSize.{0, 0} R := fullyFaithful_reflectsColimits R
+    exact ReflectsColimitsOfSize.reflectsFiniteColimits R
+  have hL (x : V) : PreservesFiniteLimits (T ⋙ (V.uliftPointSmallEtale x).sheafFiber
+      (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) := by
+    obtain ⟨e⟩ := hs x
+    let S := (V.uliftPointSmallEtale x).sheafFiber
+      (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))
+    have : PreservesFiniteLimits ((T ⋙ S) ⋙ R) :=
+      preservesFiniteLimits_of_natIso ((Functor.associator T S R) ≪≫ e).symm
+    exact preservesFiniteLimits_of_reflects_of_preserves
+      (T ⋙ (V.uliftPointSmallEtale x).sheafFiber
+        (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) R
+  have hC (x : V) : PreservesFiniteColimits (T ⋙ (V.uliftPointSmallEtale x).sheafFiber
+      (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) := by
+    obtain ⟨e⟩ := hs x
+    let S := (V.uliftPointSmallEtale x).sheafFiber
+      (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))
+    have : PreservesFiniteColimits ((T ⋙ S) ⋙ R) :=
+      preservesFiniteColimits_of_natIso ((Functor.associator T S R) ≪≫ e).symm
+    exact preservesFiniteColimits_of_reflects_of_preserves
+      (T ⋙ (V.uliftPointSmallEtale x).sheafFiber
+        (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) R
+  have hl : PreservesFiniteLimits T := by
+    constructor
+    intro J _ _
+    constructor
+    intro K
+    apply preservesLimit_of_preserves_limit_cone (limit.isLimit K)
+    apply (Scheme.jointlyReflectIsomorphisms_ulift_pointSmallEtale V _).jointlyReflectsLimit
+    intro p
+    apply Classical.choice
+    rcases p with ⟨_, ⟨x⟩⟩
+    have := hL x
+    exact ⟨isLimitOfPreserves (T ⋙ (V.uliftPointSmallEtale x).sheafFiber
+      (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) (limit.isLimit K)⟩
+  have hcol : PreservesFiniteColimits T := by
+    constructor
+    intro J _ _
+    constructor
+    intro K
+    apply preservesColimit_of_preserves_colimit_cocone (colimit.isColimit K)
+    apply (Scheme.jointlyReflectIsomorphisms_ulift_pointSmallEtale V _).jointlyReflectsColimit
+    intro p
+    apply Classical.choice
+    rcases p with ⟨_, ⟨x⟩⟩
+    have := hC x
+    exact ⟨isColimitOfPreserves (T ⋙ (V.uliftPointSmallEtale x).sheafFiber
+      (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
+      (colimit.isColimit K)⟩
+  exact ⟨V, v, hv, he, hc, d, hd, hf, P, hg, hfin, hp, M, hm, T, ha, hl, hcol, eM, e1⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-sylow-cover-stalk-data",
+ "kind": "statement",
+ "title": "Sylow-cover associated sheaf construction with natural stalk comparisons",
+ "statement": "Let $\\ell$ be prime, $U$ an irreducible scheme [def-weil-irreducible-components], and $G$ a finite locally constant sheaf of $\\operatorname{ULift}(\\mathbf F_\\ell)$-modules on the small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. There exist a connected finite etale cover $v:V\\to U$ [def-weil-connected-scheme, def-weil-pbc-scheme-conventions], a natural number $d$ prime to $\\ell$, and a finite $\\ell$-group $P$, such that every geometric fibre of $v$ has cardinality $d$ [def-weil-pbc-geometric-fibre]. There are a finite-dimensional $\\mathbf F_\\ell$-representation $M$ of $P$ and an additive functor $T$ from all $\\mathbf F_\\ell$-representations of $P$ to module sheaves on $V$. For each point $x$ of $V$, the composite of $T$, the universe-lifted geometric stalk at the algebraic closure of the residue field at $x$ [def-weil-pbc-geometric-stalks], and restriction of scalars along $\\mathbf F_\\ell\\simeq\\operatorname{ULift}(\\mathbf F_\\ell)$ is naturally isomorphic to the underlying-module functor. Moreover $T(M)\\simeq v^*G$ [def-weil-pbc-inverse-image], and $T$ sends the trivial rank-one representation to the constant coefficient sheaf. A representation is a vector space equipped with a linear $P$-action; its morphisms are equivariant linear maps. No global preservation of finite limits or colimits is asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Choose a geometric point of the nonempty connected irreducible scheme U. Under the finite monodromy correspondence G is a finite-dimensional ZMod ℓ-module. Its finite image Q acts faithfully. Choose an ℓ-Sylow subgroup P; its index d is prime to ℓ. Replace P by an isomorphic finite group in Type u if necessary. The connected Galois Q-cover Y determines the connected cover V=Y/P. Functoriality identifies the pulled-back sheaf with the restriction M of the representation to P.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-weil-pbc-sylow-subgroup-prime-index",
+    "thm-galois-fundamental",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+   }
+  },
+  {
+   "text": "The cover is finite étale, hence finite locally free. Its degree is locally constant on connected U and invariant under residue-field extension. Over a separably closed geometric point its algebra splits into copies of the field, whose number is both its degree and the number of geometric lifts. At the chosen point this number is [Q:P]=d, hence all the geometric fibres have cardinality d.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-weil-pbc-fibre-degree-base-change",
+    "lem-galois-geometric-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)"
+   }
+  },
+  {
+   "text": "Descend the constant module sheaf on the finite P-torsor Y over V, transporting scalars through ZMod l ≃ ULift (ZMod l), to obtain an additive functor T on all P-representations. Each action is continuous because P is finite discrete. Equivariant linear maps descend and preserve addition. Choose a point of Y over each canonical algebraic-closure point of V. It identifies the torsor fibre with P, and thus identifies the stalk of T naturally in the representation with its underlying module, after restricting coefficients along the inverse ULift ring equivalence. The restricted monodromy representation M descends to v*G; the trivial rank-one representation has identity transition functions and descends to the constant coefficient sheaf. No preservation of global finite limits or colimits is asserted in this construction step.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-galois-lisse-representations",
+  "def-pc-finite-locally-free",
+  "lem-galois-geometric-fibre",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "thm-galois-fundamental",
+  "thm-galois-lc-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A3R (lemma-pullback-filtered), statement and proof; Lemma 0DV5 (lemma-locally-constant-on-connected); Remark 0DV6 (remark-functorial-locally-constant-on-connected)",
+  "note": "The Sylow-cover construction follows the cited proof; the natural stalk comparison spells out descent after choosing a point in each torsor fibre."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale Sylow cover of finite locally constant module sheaf associated representation functor stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale torsor associated module sheaf functor geometric fiber underlying representation",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj, Condensed.finFree, SheafOfModules.forgetToSheafModuleCat_obj_val, CompHausLike.LocallyConstantModule.functor_map_val, CompHausLike.LocallyConstantModule.functor_obj_val, TannakaDuality.FiniteGroup.forget, AlgebraicGeometry.Scheme.Etale.forget, TannakaDuality.FiniteGroup.forget_obj",
+   "date": "2026-10-12",
+   "verdict": "No exact Sylow-cover construction with the natural stalk comparison. Existing Rep forgetful functors and stalk tools are used for the subsequent exactness proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Sylow|associatedSheaf|associated_sheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact Sylow-cover construction with the natural stalk comparison. Existing Rep forgetful functors and stalk tools are used for the subsequent exactness proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.SylowCoverAssociatedSheaf",
+  "group": "R1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "split-locally-constant-cover-filtration",
+   "place": "proof: finite monodromy, Sylow cover, and associated sheaf before the filtration",
+   "via": [
+    "lem-weil-pbc-sylow-cover-associated-sheaf"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.SylowCoverStalkData",
+  "file": "lean/Sheaf/ConstructibleSheaf/SylowCoverStalkData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_stalk_data",
+  "statement": "theorem Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_stalk_data\n    {U : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]\n    (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))\n    [IsFiniteLocallyConstantSheaf G] :\n    ∃ (V : Scheme.{u}) (v : V ⟶ U) (_ : IsFinite v) (_ : Etale v) (_ : ConnectedSpace V)\n      (d : ℕ), ¬ ℓ ∣ d ∧\n      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U),\n        Nat.card (v.GeometricFiber s) = d) ∧\n      ∃ (P : Type u) (_ : Group P) (_ : Finite P), IsPGroup ℓ P ∧\n        ∃ (M : Rep.{u + 1} (ZMod ℓ) P) (_ : FiniteDimensional (ZMod ℓ) M.V)\n          (T : Rep.{u + 1} (ZMod ℓ) P ⥤\n            Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))\n          (_ : T.Additive),\n          (∀ x : V, Nonempty\n            (T ⋙ (V.uliftPointSmallEtale x).sheafFiber\n                  (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) ⋙\n                ModuleCat.restrictScalars.{u + 1}\n                  (ULift.ringEquiv.symm.toRingHom : ZMod ℓ →+* ULift.{u + 1} (ZMod ℓ)) ≅\n              forget₂ (Rep.{u + 1} (ZMod ℓ) P) (ModuleCat.{u + 1} (ZMod ℓ)))) ∧\n          Nonempty (T.obj M ≅ (v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ∧\n          Nonempty (T.obj (Rep.trivial (ZMod ℓ) P (ULift.{u + 1} (ZMod ℓ))) ≅\n            (constantSheaf V.smallEtaleTopology\n              (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj\n              (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T044752-L-2039147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T044752-L-2039147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
