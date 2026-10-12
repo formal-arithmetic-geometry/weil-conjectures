@@ -12,6 +12,10 @@ public import Mathlib.RingTheory.Nilpotent.Lemmas
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Spec
 
+import Mathlib.RingTheory.Localization.Submodule
+import Sheaf.AlgebraicGeometry.GenericProductLocalization
+import Sheaf.AlgebraicGeometry.DescendModelLocalization
+
 /-!
 # Spreading an injective generic product map
 
@@ -86,4 +90,32 @@ theorem exists_spread_generic_product_embedding
             Function.Injective f ∧
             (∀ j, ∃ e, ∀ i, f e i = if i = j then 1 else 0) ∧
             (∀ j (z : L j), ∃ a : A', a ≠ 0 ∧
-              ∃ x, algebraMap A' (L j) a * z = f x j) := by sorry
+              ∃ x, algebraMap A' (L j) a * z = f x j) := by
+  let : Algebra A A0 := Algebra.compHom A0 (algebraMap A S0)
+  have : IsScalarTower A S0 A0 := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower A A0 K' := IsScalarTower.to₁₃₄ A S0 A0 K'
+  have : IsNoetherianRing S0 :=
+    IsLocalization.isNoetherianRing (Submonoid.powers c0) S0 inferInstance
+  have : IsNoetherianRing A0 :=
+    isNoetherian_of_tower S0 (inferInstance : IsNoetherian S0 A0)
+  obtain ⟨t, ht, hlocal⟩ :=
+    exists_generic_product_localization A B K K' A0 r L hsplit
+  obtain ⟨s, hts, hs, c, A', instRing, instLocAlg, instAlg, instTower,
+    instDomain, instFieldAlg, instModelAlg, instModelTower, instFracTower,
+    instLocalization, hc, hfinite, hetale, hfrac, hsurj'⟩ :=
+    exists_descend_model_localization A K' c0 hc0 S0 A0 hsurj t ht
+  let := instRing
+  let := instLocAlg
+  let := instAlg
+  let := instTower
+  let := instDomain
+  let := instFieldAlg
+  let := instModelAlg
+  let := instModelTower
+  let := instFracTower
+  let := instLocalization
+  let := hfrac
+  obtain ⟨instFactors, instFactorTowers, f, hf, hid, hden⟩ := hlocal s hts A'
+  exact ⟨c, A', instRing, instLocAlg, instAlg, instTower, instDomain, instFieldAlg,
+    hc, hfinite, hetale, hfrac, hsurj', instFactors, instFactorTowers, f, hf, hid, hden⟩
+

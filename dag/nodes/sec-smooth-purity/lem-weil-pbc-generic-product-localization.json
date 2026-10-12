@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-generic-product-localization",
+ "kind": "statement",
+ "title": "Spreading a generic product embedding on the model ring",
+ "statement": "Let $A$ be a commutative ring, $B$ a finite commutative $A$-algebra [pqf-lem-finite-integral-lft], $K$ a fraction field of $A$, and $K'$ a field extension of $K$ [def-pc-field-extension] with compatible $A$-algebra structure. Let $R_0$ be a Noetherian domain with compatible $A$-algebra structure and an $R_0$-algebra structure on $K'$ making $K'$ its fraction field. Let $r$ be a natural number, and $L_j$ fields over $K'$ for $j\\in\\operatorname{Fin}(r)$. Suppose the reduction of $(K\\otimes_A B)\\otimes_K K'$ is isomorphic as a $K'$-algebra to $\\prod_jL_j$. Then there is $0\\ne t\\in R_0$ such that for every $s\\in R_0$ divisible by $t$ and every commutative ring $R$ in the universe of $A$ which is $R_0[1/s]$, with compatible maps $A\\to R_0\\to R\\to K'$ making $K'$ a fraction field of $R$, there are $R$-algebra structures on each $L_j$ compatible with $R\\to K'\\to L_j$ and an injective $R$-algebra map $f:(B\\otimes_A R)_{\\mathrm{red}}\\to\\prod_jL_j$. For every $j$ there is $e_j$ in the source with $f(e_j)_i=1$ if $i=j$ and $0$ otherwise. For every $j$ and every $z\\in L_j$ there are $0\\ne a\\in R$ and $x$ in the source with $az=f(x)_j$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9: torsion killing, spreading coordinate idempotents, and descending their denominators"
+ },
+ "stmt_deps": [
+  "pqf-lem-finite-integral-lft",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Form C = (B tensor_A R0)_red, a finite module over the Noetherian domain R0. Tensor associativity and localization of the nilradical identify its generic fibre over K prime with the specified product of fields. Its torsion kernel is finitely generated. Choose a nonzero annihilator for each generator and multiply them; localization at this product kills the kernel.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Represent the finitely many coordinate idempotents as fractions in C with nonzero R0 denominators. Multiply these denominators with the annihilator product to obtain nonzero t. If t divides s, localization at s inverts each factor of t, retains injectivity and contains the coordinate idempotents. Reduction commutes with localization, identifying the source with (B tensor_A R)_red. Generic surjectivity expresses any coordinate field element as a numerator over a nonzero base denominator; its image in R stays nonzero because R has fraction field K prime. If r = 0, the kernel is all of C and localization kills it; the coordinate assertions are vacuous.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "proof steps 4--9: torsion killing, spreading coordinate idempotents, and descending their denominators; extracted from the existing embedding node and its docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra generic product fields injective after localization lift coordinate idempotents",
+   "results": "8 hits: PrimeSpectrum.toPiLocalization_injective, MaximalSpectrum.toPiLocalization_injective, injective_of_isLocalization_of_span_eq_top, Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway, IsLocalization.bijective_lift_piRingHom_algebraMap_comp_piEvalRingHom, PrimeSpectrum.sigmaToPi_injective, exists_finite_inj_algHom_of_fg, Localization.algebraMap_injective_of_span_eq_top",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization and etale ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*localiz|localiz.*idempotent|Finite.*Small",
+   "results": "25 hits: Mathlib/LinearAlgebra/Dimension/Constructions.lean, Mathlib/Logic/Hydra.lean, Mathlib/SetTheory/Cardinal/Basic.lean, Mathlib/Condensed/Light/Basic.lean, Mathlib/FieldTheory/SeparableDegree.lean, Mathlib/FieldTheory/SeparableDegree.lean, Mathlib/Data/Set/Constructions.lean, Mathlib/Algebra/Module/StablyFree/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization and etale ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away",
+   "results": "12 hits: IsLocalization.Away, IsLocalization.Away.invSelf, selfZPow, IsLocalization.Away.sec, IsLocalization.Away.of_associated, IsLocalization.Away.iff_of_associated, IsLocalization.atUnit, IsLocalization.Away.isDomain",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization and etale ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite integral domain extension invert nonzero element after localization of base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(localiz|denominator)|constantCoeff.*(ne_zero|dvd)|small",
+   "results": "12 hits: Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization and etale ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale integral domain model descend localization at nonzero denominator to principal localization base",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.of_isLocalization_Away, Algebra.Etale.of_isLocalizationAway, Algebra.IsStandardEtale.of_isLocalizationAway, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization and etale ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegral, IsLocalization",
+   "results": "7 hits: IsLocalization.exists_isIntegral_smul_of_isIntegral_map, IsIntegral.exists_multiple_integral_of_isLocalization, FractionalIdeal.adjoinIntegral, FractionalIdeal.mem_adjoinIntegral_self, FractionalIdeal.isFractional_adjoin_integral, FractionalIdeal.adjoinIntegral_coe, IsIntegral.isAlmostIntegral_of_isLocalization",
+   "date": "2026-10-12",
+   "verdict": "no exact match; localization and etale ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SpreadGenericProductEmbedding",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "proof steps 4--9: torsion killing and lifting coordinate idempotents",
+   "via": [
+    "lem-weil-pbc-spread-generic-product-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericProductLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericProductLocalization.lean",
+  "declaration": "exists_generic_product_localization",
+  "statement": "theorem exists_generic_product_localization\n    (A : Type u) [CommRing A]\n    (B : Type v) [CommRing B] [Algebra A B] [Module.Finite A B]\n    (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]\n    (K' : Type (max u v)) [Field K'] [Algebra K K'] [Algebra A K']\n    [IsScalarTower A K K']\n    (R0 : Type (max u v)) [CommRing R0] [IsNoetherianRing R0] [IsDomain R0]\n    [Algebra A R0] [Algebra R0 K'] [IsScalarTower A R0 K'] [IsFractionRing R0 K']\n    (r : ℕ) (L : Fin r → Type (max u v)) [∀ j, Field (L j)]\n    [∀ j, Algebra K' (L j)]\n    (hsplit :\n      letI := Algebra.TensorProduct.rightAlgebra (R := K) (A := K ⊗[A] B) (B := K')\n      Nonempty ((((K ⊗[A] B) ⊗[K] K') ⧸\n        nilradical ((K ⊗[A] B) ⊗[K] K')) ≃ₐ[K'] (∀ j, L j))) :\n    ∃ t : R0, t ≠ 0 ∧ ∀ (s : R0), t ∣ s →\n      ∀ (R : Type u) [CommRing R] [Algebra R0 R] [IsLocalization.Away s R]\n        [Algebra A R] [IsScalarTower A R0 R] [Algebra R K']\n        [IsScalarTower R0 R K'] [IsFractionRing R K'],\n        ∃ (_ : ∀ j, Algebra R (L j)) (_ : ∀ j, IsScalarTower R K' (L j)),\n          letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := R)\n          ∃ f : ((B ⊗[A] R) ⧸ nilradical (B ⊗[A] R)) →ₐ[R] (∀ j, L j),\n            Function.Injective f ∧\n            (∀ j, ∃ e, ∀ i, f e i = if i = j then 1 else 0) ∧\n            (∀ j (z : L j), ∃ a : R, a ≠ 0 ∧\n              ∃ x, algebraMap R (L j) a * z = f x j)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T160132-L-2562639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T160132-L-2562639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
