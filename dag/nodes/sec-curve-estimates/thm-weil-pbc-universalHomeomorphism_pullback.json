@@ -45,24 +45,23 @@
    "elementary": false
   },
   {
-   "text": "Construct set-valued inverse-image compositors by comparing composite sheaf pullback adjunctions using lowerStarComp and leftAdjointUniq. Equivalently use the repaired comparison to inverse sheaf equivalences on the universal-homeomorphism sides. Compose the inverse compositor for pullback.snd g u followed by u with the compositor for pullback.fst g u followed by g, identifying the total morphisms by pullback.condition. This gives the set-valued square isomorphism; upperStarComp gives the additive square isomorphism in the same way.",
+   "text": "Construct the set-valued inverse-image square by composing the sheaf pullback adjunctions with Adjunction.leftAdjointCompIso and lowerStarComp, using pullback.condition to name the common composite. Compose the compositor on the snd/u path with the inverse compositor on the fst/g path. For additive sheaves compose the inverse upperStarComp on the snd/u path with upperStarComp on the fst/g path.",
    "uses": [
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-inverse-image-composition",
-    "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence"
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
   },
   {
-   "text": "For a sheaf F on X', insert the inverse counit F → u^*u_*F and apply s^*, where s = pullback.snd g u. Use the inverse-image square s^*u^* ≅ p^*g^*, where p = pullback.fst g u, then apply p_* and cancel p_*p^* by the inverse unit. This constructs p_*s^*F ≅ g^*u_*F, naturally in F, which is the displayed mixed square isomorphism. Every arrow is invertible by topological invariance for u and p. Perform this construction both for sets (using the repaired comparison) and for additive sheaves.",
+   "text": "For U = u^*, S = (pullback.snd g u)^*, G = g^*, P = (pullback.fst g u)^*, write the inverse-image square as U ⋙ S ≅ G ⋙ P. Insert the inverse counit to identify S ⋙ P_* with u_* ⋙ U ⋙ S ⋙ P_*. Whisker the square isomorphism to obtain u_* ⋙ G ⋙ P ⋙ P_*, then cancel P ⋙ P_* by the inverse unit. Functor associators and unitors give the displayed mixed isomorphism. For set-valued sheaves lowerStar is an equivalence by topological invariance, hence the unit and counit of its left adjoint are invertible; for additive sheaves upperStar is an equivalence. The private proved helper mixedSquareIso implements this construction in both coefficient categories.",
    "uses": [
     "prop-weil-pbc-universal-homeomorphism-topos",
-    "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence"
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the composition clause of cohomologyPullbackFunctorial to both paths in the pullback square. Apply Sheaf.H.map of the respective inverse upperStarComp to cancel each forward compositor. The two results are pullback along the common composite, identified by pullback.condition, so they are equal as asserted.",
+   "text": "The proved helper cohomologyMap_comp_cancel first substitutes an arbitrary named composite h = f ≫ g, then uses the composition clause of cohomologyPullbackFunctorial and Sheaf.H.map_comp_apply to cancel the forward compositor with its inverse. Apply it to each path in the square, taking h = pullback.fst g u ≫ g and using pullback.condition on the snd/u path. Both sides become cohomologyMap h F q x.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-cohomology-pullback-functorial"
@@ -75,13 +74,12 @@
   "prop-weil-pbc-universal-homeomorphism-topos",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
   "lem-weil-pbc-inverse-image-composition",
-  "thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence",
   "lem-weil-pbc-cohomology-pullback-functorial"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "lean/Sheaf/AlgebraicGeometry/UniversalHomeomorphismPullback.lean",
-  "place": "AlgebraicGeometry.Etale.universalHomeomorphism_pullback"
+  "place": "AlgebraicGeometry.Etale.universalHomeomorphism_pullback; D2 compiled proof using mixedSquareIso and cohomologyMap_comp_cancel"
  },
  "mathlib_searches": [
   {
@@ -143,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a09cb",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T070531-L-3468192",
-  "kind": "interface",
-  "note": "independent Codex review: Matched all five delivered Lean declarations with their nodes, the unchanged parent signature, proof dependencies, report and earlier return; compilation and axiom checks passed."
+  "landing": "20261012T085224-L-8035",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
