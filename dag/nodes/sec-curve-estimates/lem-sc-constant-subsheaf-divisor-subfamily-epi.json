@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-constant-subsheaf-divisor-subfamily-epi",
+ "kind": "statement",
+ "title": "An active divisor subfamily is epimorphic",
+ "statement": "Let $X$ be a topological space, $\\iota:K\\to C$ a monomorphism of abelian sheaves, and $C\\simeq\\underline{\\mathbb Z}$ [def-weil-pbc-constant-sheaf]. Let $g:\\bigoplus_{i\\in\\operatorname{Fin}(n)}j_{A_i!}\\underline{\\mathbb Z}\\to K$ be epi, where $A_i$ are opens and $c_i$ are natural labels [def-sc-abelian-open-extension-by-zero]. Suppose its canonical unit images $s_i$ have constant value $c_i$ in $C$. Let $q:\\operatorname{Fin}(m)\\to\\operatorname{Fin}(n)$ be any function. Suppose that at each point in the union of the $A_i$ there is an index $k$ with $x\\in A_{q(k)}$ and $c_{q(k)}$ dividing every label active at $x$. For any stalk coordinates $e_x:C_x\\simeq\\mathbb Z$ [def-weil-pbc-module-stalk], the coproduct map with kth component the q(k)th component of g is epi. No compactness, positivity, injectivity of q, or bound on the labels is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0A38, normalized generators and filtration paragraph: retain generators whose active divisor is still present; https://stacks.math.columbia.edu/tag/0A38"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Define the retained map by Sigma.desc. Sigma.ι_desc shows that its canonical unit sections and their values are inherited from g. Apply the selected-stalk-range formula with the predicate True to g and to the retained family to identify both stalk ranges with their active-label closures.",
+   "uses": [
+    "lem-sc-constant-subsheaf-selected-stalk-range"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every retained active label is an original active label, giving one subgroup containment. For an original active label, use hretain to obtain a retained active divisor. Multiplying that divisor by the integer divisibility witness places the original label in the retained closure. Closure_le proves the reverse containment.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The stalk functor preserves epis, so g is surjective on stalks. The inclusion of K followed by e_x is injective on stalks. The equal ranges therefore imply surjectivity of the retained map on stalks. Its cokernel stalks are zero by preservation of cokernels; detection of zero sheaves by stalks implies the cokernel is zero, and epi_of_isZero_cokernel concludes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-constant-subsheaf-selected-stalk-range"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Cohomology, Lemma 0A38",
+  "place": "Lemma 0A38, normalized generators and filtration paragraph: retain generators whose active divisor is still present",
+  "note": "The source webpage was read because the local TeX is absent. The omitted categorical and stalk details were expanded by P2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A subfamily of integer labelled constant sheaf generators that retains an active divisor at every point gives an epimorphism",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Preadditive.epi_of_isZero_cokernel",
+   "date": "2026-10-12",
+   "results": "1 hits: CategoryTheory.Preadditive.epi_of_isZero_cokernel",
+   "verdict": "No exact match; the proof uses the library stalk-range formula and elementary subgroup arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "epi.*stalk|stalk.*epi",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact match; the proof uses the library stalk-range formula and elementary subgroup arguments.",
+   "sub": "Topology/Sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafNormalizedCore",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the finite filtration of a finitely generated subsheaf of the constant sheaf in the proof of Lemma 02UX: Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph and filtration/final paragraphs; normalization; Lemma 0A38, normalized generators and filtration paragraph: retain generators whose active divisor is still present",
+   "via": [
+    "lem-sc-constant-subsheaf-normalized-completion",
+    "lem-sc-constant-subsheaf-lower-layer-generator",
+    "lem-sc-constant-subsheaf-peel-layer",
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-constant-subsheaf-finite-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantSubsheafDivisorSubfamilyEpi",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafDivisorSubfamilyEpi.lean",
+  "declaration": "TopCat.Sheaf.constantSubsheaf_divisor_subfamily_epi",
+  "statement": "theorem constantSubsheaf_divisor_subfamily_epi\n    (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]\n    (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n      (AddCommGrpCat.of (ULift.{u} ℤ)))\n    (n : ℕ) (A : Fin n → Opens X) (c : Fin n → ℕ)\n    (g : (∐ fun i => (abelianOpenExtensionByZero (A i)).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K)\n    (_hg : Epi g)\n    (s : ∀ i, K.obj.obj (op (A i)))\n    (hsection : ∀ i,\n      (Sigma.ι (fun j => (abelianOpenExtensionByZero (A j)).obj\n        ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A j)))\n          AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) i ≫ g).hom.app\n        (op (A i))\n        (abelianOpenExtensionSection (A i)\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) le_rfl\n          ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n            ((Functor.const (Opens ((Opens.toTopCat X).obj (A i)))ᵒᵖ).obj\n              (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n            (op ((Opens.map (A i).inclusion').obj (A i))) (ULift.up 1))) = s i)\n    (hvalue : ∀ i, (ι ≫ isoC.hom).hom.app (op (A i)) (s i) =\n      (toSheafify (Opens.grothendieckTopology X)\n        ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n          (op (A i)) (ULift.up (c i : ℤ)))\n    (m : ℕ) (q : Fin m → Fin n)\n    (hretain : ∀ x : X, x ∈ iSup A →\n      ∃ k, x ∈ A (q k) ∧ ∀ j, x ∈ A j → c (q k) ∣ c j)\n    (e : ∀ x : X, TopCat.Presheaf.stalk C.obj x ≅ AddCommGrpCat.of (ULift.{u} ℤ)) :\n    let D := fun i => (abelianOpenExtensionByZero (A i)).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))\n    Epi (Sigma.desc (fun k ↦ Sigma.ι D (q k) ≫ g))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T202248-L-707368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T202248-L-707368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
