@@ -910,6 +910,19 @@ theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
     (X ↘ Spec (.of k)).genus = arithmeticGenus k X := by
   rw [Hom.genus_eq_finrankH_zero, finrankH_relativeDifferentials_zero_eq_arithmeticGenus]
 
+/-- Blueprint `def-sc-genus`: The genus of a curve.
+
+The genus of a smooth proper curve `X` over `k` is finite: `H⁰(X, Ω¹_{X/k})`, whose dimension is
+the genus (`AlgebraicGeometry.Scheme.Hom.genus_eq_finrankH_zero`), is a finite-dimensional
+`k`-vector space, since `Ω¹_{X/k}` is invertible and the cohomology of a coherent module on a
+proper scheme over a field is finite-dimensional (Stacks 02O5). -/
+theorem finiteDimensional_H_relativeDifferentials
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (q : ℕ) :
+    FiniteDimensional k ((X ↘ Spec (.of k)).relativeDifferentials.H q) :=
+  have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
+  have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
+  inferInstance
+
 end Duality
 
 section PointIdeal
