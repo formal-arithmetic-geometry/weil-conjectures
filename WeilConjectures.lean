@@ -456,6 +456,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
+public import WeilConjectures.AlgebraicGeometry.Sites.EtalePointFieldExtension
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleRigidity
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleSectionContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleStructureSheaf
