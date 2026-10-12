@@ -11,6 +11,10 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierDimension
+public import WeilConjectures.AlgebraicGeometry.Curve.ExtensionInvariance
+public import WeilConjectures.AlgebraicGeometry.Sites.ConstantModSheaf
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # The curve assertions for constant coefficients on smooth curves
@@ -86,6 +90,156 @@ namespace IsCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
 
+/-! ### Auxiliary lemmas -/
+
+omit [IsAlgClosed k] in
+/-- A curve over a field is quasi-compact and quasi-separated. -/
+lemma compactSpace_and_quasiSeparatedSpace [IsCurve f] :
+    CompactSpace C ∧ QuasiSeparatedSpace C :=
+  ⟨(quasiCompact_iff_compactSpace f).mp inferInstance,
+    (quasiSeparated_iff_quasiSeparatedSpace f).mp inferInstance⟩
+
+/-- If the structure morphism of `C` is an isomorphism, so that `C` is the point `Spec k` with
+`k` separably closed, every étale sheaf on `C` has no cohomology in positive degrees. -/
+lemma subsingleton_sheafH_succ_of_isIso [IsIso f]
+    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
+    Subsingleton (Sheaf.H G (q + 1)) := by
+  have := Scheme.subsingleton_H_of_isSepClosed k
+    ((Etale.upperStar AddCommGrpCat.{u + 1} (inv f)).obj G) q
+  exact (Etale.injective_cohomologyMap_of_comp_eq_id (inv f) f (IsIso.hom_inv_id _) G
+    (q + 1)).subsingleton
+
+/-- **`𝐅_p`-cohomology of a smooth connected curve in characteristic `p`.** For a smooth
+separated connected curve `C` over an algebraically closed field of characteristic `p > 0`,
+possibly a point, `Hᵠ(C, ℤ/p) = 0` for `q > 1`: this is the Artin–Schreier vanishing
+`AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_constantZMod_of_charP` if `C` has
+dimension one, and `C = Spec k` otherwise. -/
+lemma subsingleton_sheafH_constantZMod_of_charP [IsCurve f] [Smooth f] [ConnectedSpace C]
+    (p : ℕ) [Fact p.Prime] [CharP k p] (q : ℕ) (hq : 1 < q) :
+    Subsingleton (Sheaf.H (C.constantZMod p) q) := by
+  by_cases hdim : topologicalKrullDim C = 1
+  · have : IsConnectedCurve f := { connectedSpace := inferInstance, krullDim_eq_one := hdim }
+    exact IsConnectedCurve.subsingleton_sheafH_constantZMod_of_charP f p q hq
+  · have : IsIso f := IsCurve.isIso_of_connectedSpace f hdim
+    obtain ⟨q, rfl⟩ : ∃ q', q = q' + 1 := ⟨q - 1, by omega⟩
+    exact subsingleton_sheafH_succ_of_isIso f _ q
+
+omit [IsAlgClosed k] in
+/-- The pullback maps along the two sides of a cartesian square over a field extension agree up
+to the isomorphism of the corner with the pullback: one is bijective if and only if the other is.
+-/
+lemma bijective_cohomologyMap_iff_of_isPullback {k' : Type u} [Field k'] {C' : Scheme.{u}}
+    {a : CommRingCat.of k ⟶ CommRingCat.of k'} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
+    (h : IsPullback ι' f' f (Spec.map a)) (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap ι' G q) ↔
+      Function.Bijective (Etale.cohomologyMap (Limits.pullback.fst f (Spec.map a)) G q) := by
+  rw [← Etale.bijective_cohomologyMap_comp_iff h.isoPullback.hom
+    (Limits.pullback.fst f (Spec.map a)) ι' h.isoPullback_hom_fst]
+  exact ⟨fun H ↦ (Function.Bijective.of_comp_iff' (Etale.cohomologyMap_bijective _ _ _) _).1 H,
+    fun H ↦ (Etale.cohomologyMap_bijective _ _ _).comp H⟩
+
+omit [IsAlgClosed k] in
+/-- The base change of a curve to a field extension is quasi-compact and quasi-separated. -/
+lemma compactSpace_and_quasiSeparatedSpace_pullback [IsCurve f] {k' : Type u} [Field k']
+    (a : CommRingCat.of k ⟶ CommRingCat.of k') :
+    CompactSpace (Limits.pullback f (Spec.map a) : Scheme.{u}) ∧
+      QuasiSeparatedSpace (Limits.pullback f (Spec.map a) : Scheme.{u}) :=
+  ⟨(quasiCompact_iff_compactSpace (Limits.pullback.snd f (Spec.map a))).mp inferInstance,
+    (quasiSeparated_iff_quasiSeparatedSpace (Limits.pullback.snd f (Spec.map a))).mp
+      inferInstance⟩
+
+/-- **The constant sheaf `ℤ/p` in characteristic `p` under an algebraically closed extension,
+away from degree one.** Let `C` be a smooth proper connected curve over `k` algebraically closed
+of characteristic `p`, possibly a point, and `k'/k` an algebraically closed extension. The
+pullback `Hᵠ(C, ℤ/p) ⟶ Hᵠ(C_{k'}, ℤ/p)` is bijective for `q ≠ 1`: both sides are `ℤ/p` in
+degree zero, the map being injective, and vanish in degrees above one. -/
+lemma bijective_fieldExtensionCohomologyMap_constantZMod_of_charP [IsCurve f] [Smooth f]
+    [ConnectedSpace C] [IsProper f] (p : ℕ) [Fact p.Prime] [CharP k p] (k' : Type u)
+    [Field k'] [IsAlgClosed k'] [Algebra k k'] (q : ℕ) (hq : q ≠ 1) :
+    Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod p) q) := by
+  obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace f
+  have : NeZero p := ⟨(Fact.out : p.Prime).ne_zero⟩
+  have : CharP k' p := charP_of_injective_algebraMap (algebraMap k k').injective p
+  set C' := Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))
+  have hinj := injective_cohomologyMap_pullback_fst_of_isAlgClosed f k' (C.constantZMod p) q
+  let E := f.sheafHBaseChangeConstantZModAddEquiv k' p q
+  -- the base change is again a smooth connected curve, possibly a point
+  have key : ConnectedSpace C' ∧ (1 < q → Subsingleton (Sheaf.H (C'.constantZMod p) q)) := by
+    by_cases hdim : topologicalKrullDim C = 1
+    · have : IsConnectedCurve f := { connectedSpace := inferInstance, krullDim_eq_one := hdim }
+      have : SmoothOfRelativeDimension 1 f := IsConnectedCurve.smoothOfRelativeDimension_one f
+      obtain ⟨hs, -, -, -⟩ := f.baseChangeField_isCurve k'
+      have : Smooth (f.baseChangeField k') := hs.smooth
+      have := IsConnectedCurve.baseChangeField f k'
+      exact ⟨IsConnectedCurve.connectedSpace' (f.baseChangeField k'), fun hq ↦
+        IsConnectedCurve.subsingleton_sheafH_constantZMod_of_charP (f.baseChangeField k') p q hq⟩
+    · have : IsIso f := IsCurve.isIso_of_connectedSpace f hdim
+      have : Subsingleton C' := Scheme.subsingleton_of_iso (asIso (f.baseChangeField k'))
+      obtain ⟨x₀⟩ := (inferInstance : Nonempty C)
+      obtain ⟨z, -, -⟩ := Scheme.Pullback.exists_preimage_pullback
+        (f := f) (g := Spec.map (CommRingCat.ofHom (algebraMap k k'))) x₀
+        (default : Spec (.of k')) (Subsingleton.elim _ _)
+      have : Nonempty C' := ⟨z⟩
+      refine ⟨inferInstance, fun hq ↦ ?_⟩
+      obtain ⟨q, rfl⟩ : ∃ q', q = q' + 1 := ⟨q - 1, by omega⟩
+      exact subsingleton_sheafH_succ_of_isIso (f.baseChangeField k') _ q
+  obtain ⟨_, hvan⟩ := key
+  rcases (show q = 0 ∨ 1 < q by omega) with rfl | hq
+  · obtain ⟨e₀⟩ := C.nonempty_addEquiv_sheafH_zero_constantZMod p
+    obtain ⟨e₀'⟩ := C'.nonempty_addEquiv_sheafH_zero_constantZMod p
+    have : Finite (Sheaf.H (C'.constantZMod p) 0) := Finite.of_equiv _ e₀'.symm.toEquiv
+    have := Finite.of_equiv _ E.symm.toEquiv
+    refine hinj.bijective_of_nat_card_le ?_
+    rw [Nat.card_congr E.toEquiv, Nat.card_congr e₀.toEquiv, Nat.card_congr e₀'.toEquiv]
+  · have := hvan hq
+    have : Subsingleton (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1}
+        (Limits.pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))).obj
+          (C.constantZMod p)) q) := E.toEquiv.subsingleton
+    exact ⟨hinj, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
+
+/-- **Opens of a smooth connected curve.** Let `C` be a smooth separated connected curve over
+an algebraically closed field, possibly a point, and `a : W ⟶ C` an open immersion. Then either
+`a` is an isomorphism, or `W` is an affine curve: a proper open of a smooth connected curve is
+a proper open of its smooth compactification, hence affine
+(`AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top`). -/
+lemma isIso_or_isAffine_of_isOpenImmersion [IsCurve f] [Smooth f] [ConnectedSpace C]
+    {W : Scheme.{u}} (a : W ⟶ C) [IsOpenImmersion a] :
+    IsIso a ∨ (IsAffine W ∧ IsCurve (a ≫ f)) := by
+  by_cases ha : Function.Surjective a
+  · have : Surjective a := ⟨ha⟩
+    exact Or.inl ((isIso_iff_isOpenImmersion_and_surjective a).mpr ⟨inferInstance, inferInstance⟩)
+  refine Or.inr ⟨?_, ?_⟩
+  · by_cases hdim : topologicalKrullDim C = 1
+    · have : IsConnectedCurve f := { connectedSpace := inferInstance, krullDim_eq_one := hdim }
+      obtain ⟨c, hc, hs, -, -⟩ := IsConnectedCurve.exists_smooth_properCompactification f
+      let V := (a ≫ c.i).opensRange
+      have hV : V ≠ ⊤ := by
+        intro htop
+        apply ha
+        intro x
+        have hx : c.i x ∈ V := by rw [htop]; trivial
+        obtain ⟨w, hw⟩ := hx
+        exact ⟨w, c.i.isOpenEmbedding.injective hw⟩
+      have : IsAffine V := IsConnectedCurve.isAffine_of_ne_top c.g V hV
+      exact IsAffine.of_isIso (IsOpenImmersion.isoOfRangeEq (a ≫ c.i) V.ι
+        (by rw [Scheme.Opens.range_ι]; rfl)).hom
+    · have : IsIso f := IsCurve.isIso_of_connectedSpace f hdim
+      have : IsAffine C := IsAffine.of_isIso f
+      have : Subsingleton C := Scheme.subsingleton_of_iso (asIso f)
+      have : Subsingleton W := ⟨fun x y ↦ a.isOpenEmbedding.injective (Subsingleton.elim _ _)⟩
+      by_cases hW : Nonempty W
+      · obtain ⟨w⟩ := hW
+        exact absurd (fun x ↦ ⟨w, Subsingleton.elim _ _⟩) ha
+      · have : IsEmpty W := not_nonempty_iff.mp hW
+        infer_instance
+  · have : IsNoetherian C := isNoetherian_of_locallyOfFiniteType f
+    have : QuasiCompact a := ⟨fun U _ _ ↦
+      (a.isOpenEmbedding.isInducing.noetherianSpace).isCompact _⟩
+    have hW : topologicalKrullDim W ≤ 1 :=
+      a.isOpenEmbedding.isInducing.topologicalKrullDim_le.trans (IsCurve.krullDim_le_one (f := f))
+    exact { krullDim_le_one := hW }
+
 /-! ### The assertions `C₁, …, C₈` for `𝐅_n` -/
 
 /-- **`C₁` for `𝐅_n`.** Let `C` be a smooth separated connected curve over an algebraically
@@ -125,8 +279,10 @@ theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP [IsCurve f] [Smo
     [ConnectedSpace C] (p : ℕ) [Fact p.Prime] [CharP k p] (q : ℕ) (hq : 1 < q) :
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        (Etale.constantModSheaf Λ C p)) q) :=
-  sorry
+        (Etale.constantModSheaf Λ C p)) q) := by
+  obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace f
+  exact Etale.subsingleton_sheafH_constantModSheaf Λ p q
+    (subsingleton_sheafH_constantZMod_of_charP f p q hq)
 
 /-- **`C₄` for `𝐅_r`.** Let `C` be a smooth separated connected curve over an algebraically
 closed field `k` and `r` a prime different from `char k`. If `Λ/rΛ` is finite, then
@@ -140,7 +296,8 @@ theorem finite_sheafH_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] [Connec
     Finite (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         (Etale.constantModSheaf Λ C r)) q) :=
-  sorry
+  Etale.finite_sheafH_constantModSheaf Λ r q
+    (IsCurve.finite_sheafH_constantZMod_of_connectedSpace f r hr q)
 
 /-- **`C₅` for `𝐅_r`.** Let `C` be a smooth proper connected curve over an algebraically closed
 field `k` and `r` an arbitrary prime. If `Λ/rΛ` is finite, then `Hᵠ(C, 𝐅_r)` is finite for
@@ -153,8 +310,20 @@ theorem finite_sheafH_constantModSheaf_of_isProper [IsCurve f] [Smooth f] [Conne
     (q : ℕ) :
     Finite (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        (Etale.constantModSheaf Λ C r)) q) :=
-  sorry
+        (Etale.constantModSheaf Λ C r)) q) := by
+  by_cases hr : (r : k) = 0
+  · have : CharP k r := (CharP.charP_iff_prime_eq_zero (Fact.out : r.Prime)).2 hr
+    have : NeZero r := ⟨(Fact.out : r.Prime).ne_zero⟩
+    rcases (show q = 0 ∨ q = 1 ∨ 1 < q by omega) with rfl | rfl | hq
+    · obtain ⟨e₀⟩ := C.nonempty_addEquiv_sheafH_zero_constantZMod r
+      exact Etale.finite_sheafH_constantModSheaf Λ r 0 (Finite.of_equiv _ e₀.symm.toEquiv)
+    · -- `H¹(C, 𝐅_p) = ker(F - 1 : H¹(C, 𝒪_C) ⟶ H¹(C, 𝒪_C))` by the Artin–Schreier sequence,
+      -- which is finite by `lem-sc-fixed-points-finite`; the étale sheaf `𝔾ₐ`, the
+      -- Artin–Schreier sequence and the comparison with Zariski cohomology are missing.
+      sorry
+    · have := subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP Λ f r q hq
+      infer_instance
+  · exact finite_sheafH_constantModSheaf_of_ne_zero Λ f r hr q
 
 /-- **`C₆` for `𝐅_r`.** Let `k ⊆ k'` be algebraically closed fields, `C` a smooth separated
 connected curve over `k` and `r` a prime different from `char k`. For every cartesian square
@@ -178,8 +347,14 @@ theorem bijective_cohomologyMap_constantModSheaf_of_ne_zero [IsCurve f] [Smooth 
     {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι) (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        (Etale.constantModSheaf Λ C r)) q) :=
-  sorry
+        (Etale.constantModSheaf Λ C r)) q) := by
+  obtain ⟨a, rfl⟩ := Spec.map_surjective ι
+  let : Algebra k k' := a.hom.toAlgebra
+  obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace f
+  obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace_pullback f a
+  rw [bijective_cohomologyMap_iff_of_isPullback f h]
+  exact Etale.bijective_cohomologyMap_constantModSheaf Λ r q _
+    (IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace f k' r hr q)
 
 /-- **`C₇` for `𝐅_r`.** Let `k ⊆ k'` be algebraically closed fields, `C` a smooth proper
 connected curve over `k` and `r` an arbitrary prime. For every cartesian square
@@ -201,8 +376,24 @@ theorem bijective_cohomologyMap_constantModSheaf_of_isProper [IsCurve f] [Smooth
     {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι) (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        (Etale.constantModSheaf Λ C r)) q) :=
-  sorry
+        (Etale.constantModSheaf Λ C r)) q) := by
+  by_cases hr : (r : k) = 0
+  · have : CharP k r := (CharP.charP_iff_prime_eq_zero (Fact.out : r.Prime)).2 hr
+    obtain ⟨a, rfl⟩ := Spec.map_surjective ι
+    let : Algebra k k' := a.hom.toAlgebra
+    obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace f
+    obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace_pullback f a
+    rw [bijective_cohomologyMap_iff_of_isPullback f h]
+    by_cases hq : q = 1
+    · -- `H¹(C, 𝐅_p)` is the kernel of `F - 1` on `H¹(C, 𝒪_C)` by the Artin–Schreier
+      -- sequence, compatibly with the base change `H¹(C_{k'}, 𝒪) = H¹(C, 𝒪) ⊗_k k'`, and the
+      -- Frobenius-fixed points are invariant (`lem-sc-frobenius-fixed-invariance`); the étale
+      -- sheaf `𝔾ₐ`, the Artin–Schreier sequence and the comparison with Zariski cohomology
+      -- are missing.
+      sorry
+    · exact Etale.bijective_cohomologyMap_constantModSheaf Λ r q _
+        (bijective_fieldExtensionCohomologyMap_constantZMod_of_charP f r k' q hq)
+  · exact bijective_cohomologyMap_constantModSheaf_of_ne_zero Λ f r hr k' h q
 
 /-- **`C₈` for `𝐅_r`.** Let `C` be a smooth separated connected curve over an algebraically
 closed field `k`, `a : W ⟶ C` an open immersion and `r` a prime. Then the restriction
@@ -213,8 +404,15 @@ theorem surjective_cohomologyMap_constantModSheaf_two [IsCurve f] [Smooth f] [Co
     (r : ℕ) [Fact r.Prime] {W : Scheme.{u}} (a : W ⟶ C) [IsOpenImmersion a] :
     Function.Surjective (Etale.cohomologyMap a
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        (Etale.constantModSheaf Λ C r)) 2) :=
-  sorry
+        (Etale.constantModSheaf Λ C r)) 2) := by
+  obtain ha | ⟨_, _⟩ := isIso_or_isAffine_of_isOpenImmersion f a
+  · exact (Etale.cohomologyMap_bijective a _ 2).surjective
+  · have : Subsingleton (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+          (Etale.constantModSheaf Λ C r))) 2) :=
+      subsingleton_sheafH_of_two_le_of_isAffine (a ≫ f) _ (Etale.isTorsion_upperStar a
+        (Etale.isTorsion_constantModSheaf Λ C (Fact.out : r.Prime).pos)) 2 le_rfl
+    exact fun y ↦ ⟨0, Subsingleton.elim _ _⟩
 
 /-! ### The smooth-curve calculations -/
 
