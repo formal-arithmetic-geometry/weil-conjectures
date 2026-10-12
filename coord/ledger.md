@@ -8453,3 +8453,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:01 L: merged deliver/N1/Sheaf.RingTheory.KoszulRegularSequenceDualComplex (stage 3; reviewer PASS; first push; landing 20261012T160139-L-2565465 (proof); batch 20261012T160131; modules 1; new nodes 0)
 - 16:01 L: merged deliver/N2/Sheaf.AlgebraicGeometry.EtaleLimitInjectiveColimitAcyclic (stage 3; reviewer PASS; after a return; landing 20261012T160140-L-2565581 (interface); batch 20261012T160131; modules 2; new nodes 1)
 - 16:01 L: merged deliver/N3/Sheaf.Topology.TopologicalResolutionCocycleLift (stage 3; reviewer PASS; first push; landing 20261012T160140-L-2565681 (proof); batch 20261012T160131; modules 1; new nodes 0)
+- 16:01 L: merged deliver/P2/Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete (stage 3; reviewer PASS; first push; landing 20261012T160140-L-2565778 (interface); batch 20261012T160131; modules 2; new nodes 1)
