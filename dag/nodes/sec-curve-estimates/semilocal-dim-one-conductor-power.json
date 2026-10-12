@@ -1,0 +1,129 @@
+{
+ "id": "semilocal-dim-one-conductor-power",
+ "kind": "statement",
+ "title": "Conductor power for the normalization of a one-dimensional semilocal domain",
+ "statement": "Let B be a commutative Noetherian semilocal domain of Krull dimension one [def-weil-pbc-noetherian-ring] [def-weil-pbc-krull-dimension-ring] and K its fraction field. Write B' for the integral closure of B in K [def-weil-pbc-integral-closure] and assume B' has finitely many maximal ideals. For x,y in B', if x is nonzero and lies in the Jacobson radical of B', there exist n > 0 and b in B with algebraMap B K b = x^n y in K.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09N2, finite-conductor and Jacobson-radical paragraphs"
+ },
+ "proof": [
+  {
+   "text": "Inside K, form A = B[x,y]. Its generators are integral, so A is finite over B. The inclusions B ⊆ A ⊆ K identify K as the fraction field of A. The finite conductor theorem gives r > 0 with J(B)^r A contained in B, including finite sums of products.",
+   "uses": [
+    "lem-sc-finite-generated-integral-subring",
+    "lem-sc-finite-integral-conductor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inclusion A into B' is injective and integral, so lying-over gives Spec-surjectivity. The integral-overring Jacobson theorem, using that B and B' are semilocal, gives m > 0 with x^m in J(B) A. Then x^(m*r)y lies in (J(B) A)^r = J(B)^r A and thus in B. Both factors are positive, so n = m*r is positive.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-sc-integral-overring-jacobson-power"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-generated-integral-subring",
+  "lem-sc-finite-integral-conductor",
+  "lem-sc-integral-overring-jacobson-power",
+  "lem-weil-pbc-integral-injective-lying-over"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09N2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-integral-closure"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09N2 conductor-power conclusion, separated from the normalization clause",
+   "via": [
+    "lem-sc-semilocal-dim-one-conductor",
+    "lem-sc-jacobson-denominator-function-field",
+    "lem-sc-find-globally-generated",
+    "lem-sc-integral-dim-one-ample",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilocalDimOneConductorPower",
+  "declaration": "semilocal_dim_one_conductor_power",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilocalDimOneConductorPower.lean",
+  "statement": "theorem semilocal_dim_one_conductor_power\n    (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B]\n    [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1)\n    (K : Type v) [Field K] [Algebra B K] [IsFractionRing B K]\n    [Finite (MaximalSpectrum (integralClosure B K))] :\n    ∀ x y : integralClosure B K,\n      x ≠ 0 → x ∈ Ideal.jacobson (⊥ : Ideal (integralClosure B K)) →\n        ∃ n : ℕ, 0 < n ∧ ∃ b : B,\n          algebraMap B K b = (x : K) ^ n * (y : K)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.SemilocalDimOneConductor",
+  "by": "worker",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "jacobson.*pow|pow.*jacobson|conductor",
+   "results": "No exact match; hits: Mathlib/RingTheory/Jacobson/Ring.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.jacobson, IsIntegral",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An element of the Jacobson radical of an integral normalization has powers multiplying a prescribed integral element into the base semilocal ring",
+   "results": "No exact match; hits: Algebra.zariskisMainProperty_iff', Polynomial.quotient_mk_comp_C_isIntegral_of_isJacobsonRing, Algebra.zariskisMainProperty_iff, isJacobsonRing_of_isIntegral, MvPolynomial.quotient_mk_comp_C_isIntegral_of_isJacobsonRing, Polynomial.jacobson_bot_of_integral_localization, isJacobsonRing_of_isIntegral', Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_mem_map",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If R is a Noetherian semilocal one dimensional domain, x is in the Jacobson radical of its integral closure, and y is integral, then some positive power of x times y belongs to R",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T194055-L-450485",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T194055-L-450485",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

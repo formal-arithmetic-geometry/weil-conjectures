@@ -6,9 +6,8 @@ public import Mathlib.RingTheory.DedekindDomain.Basic
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.KrullDimension.Basic
-import Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower
-import Sheaf.RingTheory.FiniteIntegralConductor
 import Sheaf.RingTheory.SemilocalNormalizationDimOne
+import Sheaf.AlgebraicGeometry.SemilocalDimOneConductorPower
 
 /-! # Conductor control for a one-dimensional semilocal domain
 
@@ -46,4 +45,7 @@ theorem semilocal_dim_one_conductor
       ∀ x y : integralClosure B K,
         x ≠ 0 → x ∈ Ideal.jacobson (⊥ : Ideal (integralClosure B K)) →
           ∃ n : ℕ, 0 < n ∧ ∃ b : B, algebraMap B K b = (x : K) ^ n * (y : K) := by
-  sorry
+  obtain ⟨hfinite, hdedekind, hdim', hfrac⟩ :=
+    integralClosure.semilocal_normalization_dim_one B hdim K
+  refine ⟨hfinite, hdedekind, hdim', hfrac, ?_⟩
+  exact semilocal_dim_one_conductor_power B hdim K
