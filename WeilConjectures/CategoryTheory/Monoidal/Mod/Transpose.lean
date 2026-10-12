@@ -33,7 +33,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C] {A : C} [MonObj A]
 
 section Bilinear
 
-variable [BraidedCategory C] [IsCommMonObj A]
+variable [BraidedCategory C]
 
 /-- A morphism `u : P ⊗ M ⟶ N` of underlying objects of `A`-modules is *bilinear* if it is
 `A`-linear in `P` and coequalizes the actions of `A` on `P` and on `M`. -/
@@ -77,7 +77,7 @@ end Bilinear
 
 section Symmetric
 
-variable [SymmetricCategory C] [IsCommMonObj A] {P M N : Mod C A}
+variable [SymmetricCategory C] {P M N : Mod C A}
 
 /-- The braiding identity `(A ⊗ M) ⊗ P ≅ A ⊗ (P ⊗ M)` used to transpose bilinear maps. -/
 @[reassoc]
@@ -115,10 +115,8 @@ end Symmetric
 
 section Hom
 
-variable [SymmetricCategory C] [IsCommMonObj A] [Abelian C] [MonoidalPreadditive C]
-  [IsGrothendieckAbelian.{v} C]
+variable [SymmetricCategory C] [IsCommMonObj A] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)]
   {P P' M M' N N' : Mod C A}
 
 variable (P M) in
@@ -150,6 +148,8 @@ noncomputable def IsBilinear.tensorRightHom {u : P.X ⊗ M.X ⟶ N.X}
     (hu : IsBilinear (P := P) (M := M) u) : (tensorRight A M.X).obj P ⟶ N :=
   homMk (M := (tensorRight A M.X).obj P) u ((Category.assoc _ _ _).trans hu.linear)
 
+omit [Abelian C] [IsGrothendieckAbelian.{v} C]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)] in
 lemma IsBilinear.tensorRightHom_coequalizes {u : P.X ⊗ M.X ⟶ N.X}
     (hu : IsBilinear (P := P) (M := M) u) :
     (tensorRightMap A (act M.X)).app P ≫ hu.tensorRightHom =
@@ -178,6 +178,9 @@ lemma tensorπ_tensorDesc (u : P.X ⊗ M.X ⟶ N.X) (hu : IsBilinear (P := P) (M
     tensorπ P M ≫ (tensorDesc u hu).hom = u := by
   rw [tensorπ, ← Mod.comp_hom', tensorDesc, colimit.ι_desc]
   rfl
+
+variable [MonoidalPreadditive C]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)]
 
 /-- The morphism `P ⊗ M ⟶ N` of underlying objects corresponding to `v : P ⟶ Hom_A(M, N)`:
 `p ⊗ m ↦ v(p)(m)`. -/
