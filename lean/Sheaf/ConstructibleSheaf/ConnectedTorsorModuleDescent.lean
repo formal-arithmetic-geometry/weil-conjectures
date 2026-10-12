@@ -13,8 +13,10 @@ public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.NormalScheme
+
+import Sheaf.ConstructibleSheaf.TorsorModuleDescentEquivalence
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Associated module sheaves on a connected finite torsor
@@ -103,6 +105,64 @@ theorem Scheme.GaloisCover.exists_module_descent_stalk_functor
       Nonempty (T.obj (Rep.trivial (ZMod ℓ) P (ULift.{u + 1} (ZMod ℓ))) ≅
         (constantSheaf V.smallEtaleTopology
           (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
-          (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by sorry
+          (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) := by
+  classical
+  let := c.etale
+  let C := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))
+  let D : ObjectProperty (Sheaf V.smallEtaleTopology C) := fun G ↦
+    ∃ B : C, Nonempty ((c.π)^*[C].obj G ≅
+      (constantSheaf c.P.smallEtaleTopology C).obj B)
+  obtain ⟨E, hT, ⟨eπ⟩, hunit⟩ := c.exists_module_descent_equivalence ℓ P
+  let T := E.functor ⋙ D.ι
+  -- The inverse equivalence recovers the representation from the sheaf itself.
+  let G : D.FullSubcategory := ⟨F, A, hF⟩
+  let M := E.inverse.obj G
+  let eF : T.obj M ≅ F := D.ι.mapIso (E.counitIso.app G)
+  obtain ⟨y⟩ := (inferInstance : Nonempty c.P)
+  let Φ := c.P.uliftPointSmallEtale y
+  let U := forget₂ (Rep.{u + 1} (ZMod ℓ) P) (ModuleCat.{u + 1} (ZMod ℓ))
+  let S := ModuleCat.restrictScalars.{u + 1}
+    (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ)
+  obtain ⟨iF⟩ := hF
+  -- Compare the two constant pullbacks at one geometric point upstairs.
+  let iA : S.obj (U.obj M) ≅ A :=
+    (Φ.sheafFiberConstantSheafIso (S.obj (U.obj M))).symm ≪≫
+      Φ.sheafFiber.mapIso ((eπ.app M).symm ≪≫
+        ((c.π)^*[C]).mapIso eF ≪≫ iF) ≪≫ Φ.sheafFiberConstantSheafIso A
+  let f : A →ₛₗ[ULift.ringEquiv.toRingHom] M.V :=
+    { toFun := iA.inv
+      map_add' := iA.inv.hom.map_add
+      map_smul' := fun r a ↦ iA.inv.hom.map_smul r a }
+  have hM : FiniteDimensional (ZMod ℓ) M.V :=
+    Module.Finite.of_surjective f iA.toLinearEquiv.symm.surjective
+  refine ⟨M, hM, T, hT, ?_, ⟨eF⟩, hunit⟩
+  intro x
+  -- Lift the geometric point, then use the natural pullback and constant-stalk isomorphisms.
+  obtain ⟨z, hz⟩ := c.surjective.surj x
+  obtain ⟨s, hs, _⟩ := Scheme.exists_fac_of_etale_of_isSepClosed c.π
+    (V.algClosurePoint x) z (by simpa using hz)
+  let Ψ := (Scheme.pointSmallEtale s).ulift.{u + 1}
+  let ebase : (c.π)^*[C] ⋙ Ψ.sheafFiber ≅
+      (V.uliftPointSmallEtale x).sheafFiber :=
+    (upperStarCompUliftSheafFiberIso C c.π s) ≪≫
+      (eqToIso (by rw [hs]; rfl))
+  let econst := Ψ.constantSheafCompSheafFiberIso c.P.smallEtaleTopology C
+  let R := ModuleCat.restrictScalars.{u + 1}
+    (ULift.ringEquiv.symm.toRingHom : ZMod ℓ →+* ULift.{u + 1} (ZMod ℓ))
+  let ering : S ⋙ R ≅ 𝟭 (ModuleCat.{u + 1} (ZMod ℓ)) :=
+    (ModuleCat.restrictScalarsEquivalenceOfRingEquiv
+      (ULift.ringEquiv : ULift.{u + 1} (ZMod ℓ) ≃+* ZMod ℓ)).unitIso.symm
+  let e : T ⋙ (V.uliftPointSmallEtale x).sheafFiber ≅ U ⋙ S :=
+    Functor.isoWhiskerLeft T ebase.symm ≪≫
+      (Functor.associator T ((c.π)^*[C]) Ψ.sheafFiber).symm ≪≫
+      Functor.isoWhiskerRight eπ Ψ.sheafFiber ≪≫
+      Functor.associator U (S ⋙ constantSheaf c.P.smallEtaleTopology C) Ψ.sheafFiber ≪≫
+      Functor.isoWhiskerLeft U
+        (Functor.associator S (constantSheaf c.P.smallEtaleTopology C) Ψ.sheafFiber) ≪≫
+      Functor.isoWhiskerLeft U (Functor.isoWhiskerLeft S econst) ≪≫
+      Functor.isoWhiskerLeft U (Functor.rightUnitor S)
+  exact ⟨(Functor.associator T (V.uliftPointSmallEtale x).sheafFiber R).symm ≪≫
+    Functor.isoWhiskerRight e R ≪≫ Functor.associator U S R ≪≫
+    Functor.isoWhiskerLeft U ering ≪≫ Functor.rightUnitor U⟩
 
 end AlgebraicGeometry
