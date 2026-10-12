@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-sets-terminal-transition",
+ "kind": "statement",
+ "title": "Terminal section identifications commute with etale transitions",
+ "statement": "Let H be a sheaf of sets on R [def-weil-pbc-etale-sheaf-of-sets], let U,V,W be etale objects over R [def-weil-pbc-etale-site], and let f:V to U, q:U to W, r:V to W be site morphisms with f.left followed by q.left equal to r.left. For X=U,V, combine terminal restriction [def-weil-pbc-sets-terminal-restriction] with terminal transport [def-weil-pbc-sets-terminal-transport] along q.left or r.left to obtain a_X. Then H(f opposite) followed by a_V equals a_U followed by the canonical section comparison [def-weil-pbc-sets-section-comparison] for this triangle, evaluated on the inverse image of H along W to R and the terminal object over W.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex and sites.tex",
+  "place": "Tag 03S2, paragraph following Definition 03S3; Tags 03CB and 03CC. Read online at https://stacks.math.columbia.edu/tag/03S2, /03CB and /03CC; local source files are absent. The explicit terminal-section formulas and compatibility calculations are written by U1 from these adjunction and restriction facts."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sets-terminal-transport",
+  "def-weil-pbc-sets-terminal-restriction",
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply the naturality of the chosen restriction isomorphism to the diagonal lift from the terminal object of V to U base changed to V. Postcompose the restriction unit equation with the restriction of this lift. The lift followed by the first projection is f.left, while the terminal-to-V identification has identity underlying map. Thus the unit for V to R, followed by diagonal restriction, equals H(f opposite) followed by terminal restriction. This equality is fully proved in terminalRestriction_unit using cancellation of an isomorphism, sheaf-map extensionality, and pullback.lift_fst.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "def-pc-fibre-product",
+    "def-weil-pbc-sets-terminal-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the terminal cone compatibility theorem to T=V.left, p=V.hom, t=f.left, t0=r.left. The structure-map equalities are the over-morphism equations. Substitute the unit equation of step 1 and reassociate composition. The two terminal isomorphisms are their explicit composites by definition, giving the stated transition equation.",
+   "uses": [
+    "lem-weil-pbc-sets-terminal-cone",
+    "def-weil-pbc-sets-terminal-transport",
+    "def-weil-pbc-sets-terminal-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-sets-terminal-restriction",
+  "def-weil-pbc-sets-terminal-transport",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-terminal-cone"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "U1 stage-3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex and sites.tex",
+  "place": "Tag 03S2, paragraph following Definition 03S3; Tags 03CB and 03CC. Read online at https://stacks.math.columbia.edu/tag/03S2, /03CB and /03CC; local source files are absent. The explicit terminal-section formulas and compatibility calculations are written by U1 from these adjunction and restriction facts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "terminal sections of etale inverse image compatibility with pullback composition and restriction",
+   "results": "Internal Server Error; service unavailable. No mathematical conclusion inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image etale sheaf sections terminal object restriction composition isomorphism",
+   "results": "Scheme.restrictFunctorΓ and Scheme.Opens.topIso_inv concern the Zariski structure sheaf, not set-valued small-etale inverse images. Second query on adjunction composition units returned SheafOfModules pullback lemmas, with module coefficients. No matching set-valued etale terminal-section formula.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointUniq",
+   "results": "Unknown identifier in the remote index; direct source search found the generic uniqueness theorem, already used by the existing restriction theorem.",
+   "date": "2026-10-12",
+   "verdict": "no additional match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleSetTerminal|etaleSetSectionComparison|unit_leftAdjointUniq; rg terminal and GlobalSections in lean/WeilConjectures/SixFunctors/Etale; Mathlib Pullback/Iso and MorphismProperty/OverAdjunction",
+   "results": "Generic adjunction unit uniqueness and pullback.snd isomorphism are present. Existing Etale global-section results impose abelian coefficients; ProEtale.overPullbackObjMkIdIso is for the pro-etale site. The set-valued constituents are exactly the already proved composition and restriction declarations. No terminal transport definition or its diagram-free compatibility equation exists.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DirectedEtaleSectionIdentifications",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Terminal-section identification step of directed etale limit sections, degree-zero Tag 09YQ comparison.",
+   "via": [
+    "lem-weil-pbc-directed-etale-section-identifications",
+    "lem-weil-pbc-directed-etale-limit-sections",
+    "lem-weil-pbc-cofiltered-etale-limit-sections",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetTerminalTransition",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetTerminalTransition.lean",
+  "declaration": "AlgebraicGeometry.etaleSetTerminalTransition",
+  "statement": "theorem etaleSetTerminalTransition {R : Scheme.{u}} (H : Sheaf R.smallEtaleTopology (Type (u + 1))) (U V W : R.Etale) (f : V ⟶ U) (q : U ⟶ W) (r : V ⟶ W) (hr : f.left ≫ q.left = r.left) : H.obj.map f.op ≫ (etaleSetTerminalRestriction H V ≪≫ etaleSetTerminalTransport W.hom r.left V.hom (MorphismProperty.Over.w r) H).hom = (etaleSetTerminalRestriction H U ≪≫ etaleSetTerminalTransport W.hom q.left U.hom (MorphismProperty.Over.w q) H).hom ≫ etaleSetSectionComparison f.left q.left r.left hr ((Scheme.etaleSetPullback W.hom).obj H) (Scheme.Etale.mk (𝟙 W.left))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085345-L-41856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085345-L-41856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

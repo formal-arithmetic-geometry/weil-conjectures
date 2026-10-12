@@ -6,8 +6,8 @@ Authors: SHEAF group W2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetTerminalTransition
+import Sheaf.AlgebraicGeometry.EtaleSetTerminalCone
 
 /-! # Identification of the directed étale section comparisons
 
@@ -89,6 +89,21 @@ theorem directedEtaleSectionIdentifications
       (∀ j : Over (op i₀),
         ν.app (op j.left) ≫ l.hom = (a j).hom ≫
           etaleSetSectionComparison (c.π.app j.left) (D.map j.hom)
-            (c.π.app (op i₀)) (c.w j.hom) G W₀) := by sorry
+            (c.π.app (op i₀)) (c.w j.hom) G W₀)  := by
+  let D := B ⋙ Scheme.Etale.forget R ⋙ Over.forget R
+  let W := B.obj (op i₀)
+  let a := fun j : Over (op i₀) ↦
+    etaleSetTerminalRestriction H (B.obj j.left) ≪≫
+      etaleSetTerminalTransport W.hom (D.map j.hom) (B.obj j.left).hom
+        (MorphismProperty.Over.w (B.map j.hom)) H
+  let l := etaleSetTerminalTransport W.hom (c.π.app (op i₀)) p (h (op i₀)) H
+  refine ⟨a, l, ?_, ?_⟩
+  · intro j k f
+    exact etaleSetTerminalTransition H (B.obj j.left) (B.obj k.left) W
+      (B.map f.left) (B.map j.hom) (B.map k.hom) _
+  · intro j
+    rw [hν (op j.left)]
+    exact etaleSetTerminalCone H (B.obj j.left) W (B.map j.hom) p
+      (c.π.app j.left) (c.π.app (op i₀)) (c.w j.hom) (h j.left) (h (op i₀))
 
 end AlgebraicGeometry

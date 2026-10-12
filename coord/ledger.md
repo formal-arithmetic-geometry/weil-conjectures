@@ -7069,3 +7069,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/T3/Sheaf.Topology.SheafIsomorphismLocalOpenCover (stage 3; reviewer PASS; first push; landing 20261012T085344-L-41537 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/U1/Sheaf.Algebra.Module.GradedModuleAwayRestriction (stage 3; reviewer PASS; first push; landing 20261012T085344-L-41644 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Curve.GenericPrimeFiltrationStep (stage 3; reviewer PASS; first push; landing 20261012T085344-L-41759 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:53 L: merged deliver/U1/Sheaf.AlgebraicGeometry.DirectedEtaleSectionIdentifications (stage 3; reviewer PASS; first push; landing 20261012T085345-L-41856 (interface); batch 20261012T085205; modules 5; new nodes 4)

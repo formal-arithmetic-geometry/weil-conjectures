@@ -1,0 +1,108 @@
+{
+ "id": "def-weil-pbc-sets-terminal-transport",
+ "kind": "definition",
+ "title": "Terminal section transport for a triangle of schemes",
+ "statement": "For schemes R, S, T [def-weil-pbc-etale-site], maps e:S to R, t:T to S and k:T to R with t followed by e equal to k, and a sheaf of sets H on R [def-weil-pbc-etale-sheaf-of-sets], define the isomorphism from terminal sections of k inverse image H to sections of t inverse image of e inverse image H on the base change of the terminal etale object of S. Its data is the inverse of equality transport along the triangle equation, followed by the inverse of the chosen inverse-image composition isomorphism [lem-weil-pbc-sets-etale-inverse-image-composition-units] evaluated at the terminal object of T, followed by contravariant restriction along the second-projection isomorphism from the pullback of the identity of S [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex and sites.tex",
+  "place": "Tag 03S2, paragraph following Definition 03S3; Tags 03CB and 03CC. Read online at https://stacks.math.columbia.edu/tag/03S2, /03CB and /03CC; local source files are absent. The explicit terminal-section formulas and compatibility calculations are written by U1 from these adjunction and restriction facts."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "U1 stage-3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex and sites.tex",
+  "place": "Tag 03S2, paragraph following Definition 03S3; Tags 03CB and 03CC. Read online at https://stacks.math.columbia.edu/tag/03S2, /03CB and /03CC; local source files are absent. The explicit terminal-section formulas and compatibility calculations are written by U1 from these adjunction and restriction facts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "terminal sections of etale inverse image compatibility with pullback composition and restriction",
+   "results": "Internal Server Error; service unavailable. No mathematical conclusion inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image etale sheaf sections terminal object restriction composition isomorphism",
+   "results": "Scheme.restrictFunctorΓ and Scheme.Opens.topIso_inv concern the Zariski structure sheaf, not set-valued small-etale inverse images. Second query on adjunction composition units returned SheafOfModules pullback lemmas, with module coefficients. No matching set-valued etale terminal-section formula.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointUniq",
+   "results": "Unknown identifier in the remote index; direct source search found the generic uniqueness theorem, already used by the existing restriction theorem.",
+   "date": "2026-10-12",
+   "verdict": "no additional match"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleSetTerminal|etaleSetSectionComparison|unit_leftAdjointUniq; rg terminal and GlobalSections in lean/WeilConjectures/SixFunctors/Etale; Mathlib Pullback/Iso and MorphismProperty/OverAdjunction",
+   "results": "Generic adjunction unit uniqueness and pullback.snd isomorphism are present. Existing Etale global-section results impose abelian coefficients; ProEtale.overPullbackObjMkIdIso is for the pro-etale site. The set-valued constituents are exactly the already proved composition and restriction declarations. No terminal transport definition or its diagram-free compatibility equation exists.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DirectedEtaleSectionIdentifications",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Terminal-section identification step of directed etale limit sections, degree-zero Tag 09YQ comparison.",
+   "via": [
+    "lem-weil-pbc-directed-etale-section-identifications",
+    "lem-weil-pbc-directed-etale-limit-sections",
+    "lem-weil-pbc-cofiltered-etale-limit-sections",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetTerminalTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetTerminalTransport.lean",
+  "declaration": "AlgebraicGeometry.etaleSetTerminalTransport",
+  "statement": "def etaleSetTerminalTransport {R S T : Scheme.{u}} (e : S ⟶ R) (t : T ⟶ S) (k : T ⟶ R) (hk : t ≫ e = k) (H : Sheaf R.smallEtaleTopology (Type (u + 1))) : ((Scheme.etaleSetPullback k).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 T))) ≅ ((Scheme.etaleSetPullback t).obj ((Scheme.etaleSetPullback e).obj H)).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ t).obj (Scheme.Etale.mk (𝟙 S))))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085345-L-41856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085345-L-41856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
