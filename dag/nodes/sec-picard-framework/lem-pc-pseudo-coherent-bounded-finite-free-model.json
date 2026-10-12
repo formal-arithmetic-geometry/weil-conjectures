@@ -24,38 +24,33 @@
  ],
  "proof": [
   {
-   "text": "By pseudo-coherence, choose a quasi-isomorphism $Q^\\bullet\\to C$ with $Q^\\bullet$ bounded above, say $Q^i=0$ for $i>n_0$, and each $Q^i$ finitely generated projective. Apply the finite-free replacement construction of Tag 064U (proof of (3) $\\Rightarrow$ (1)): choose a finite free $P^{n_0}=Q^{n_0}\\oplus D^{n_0}$, and, descending in $n\\le n_0$, a finite free $P^{n-1}=Q^{n-1}\\oplus D^n\\oplus D^{n-1}$, where $D^{n-1}$ is a finitely generated projective complement of $Q^{n-1}\\oplus D^n$ in a finite free module; the differential $P^{n-1}\\to P^n$ agrees with the differential of $Q$ on the $Q$-summands, is the identity $D^n\\to D^n$, and is zero on $D^{n-1}$. The projection $P^\\bullet\\to Q^\\bullet$ has kernel a direct sum of contractible two-term complexes $D^n\\xrightarrow{\\mathrm{id}}D^n$, hence is a homotopy equivalence and a quasi-isomorphism, and $P^i=0$ for $i>n_0$. Composing with $Q^\\bullet\\to C$ gives a quasi-isomorphism $P^\\bullet\\to C$ from a bounded-above complex of finite free modules.",
+   "text": "Unpack the definition IsPseudoCoherent to obtain a bounded-above finite free representative E with an isomorphism Q(E) ≅ C. For a fixed target bound b, induct on a natural number k, proving the conclusion for every such representative supported at most b+k. The zero case returns the representative itself. An arbitrary initial bound n is at most b+(n-b).toNat, including n<b.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), used in Lemma 15.76.2 (Tag 0658)"
-   }
+   "elementary": true
   },
   {
-   "text": "The quasi-isomorphism $P^\\bullet\\to C$ identifies cohomology, so the hypothesis $H^i(C)=0$ for $i>b$ gives $H^i(P^\\bullet)=0$ for $i>b$.",
+   "text": "In the successor case put n=b+k+1. The homologyFunctorFactors isomorphism and the image of Q(E) ≅ C under homologyFunctor identify H^n(E) with H^n(C), which is zero since n>b. Thus E is exact in degree n. Its outgoing differential is zero, because its target in degree n+1 is zero. ShortComplex.exact_iff_epi makes the incoming differential E^(n-1) → E^n epic. Freeness of E^n supplies its categorical projectivity, and Projective.factorThru applied to the identity supplies a section.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), used in Lemma 15.76.2 (Tag 0658)"
-   }
+   "elementary": true
   },
   {
-   "text": "If $P^i=0$ for all $i>b$ we are done. Otherwise let $n>b$ be the highest degree with $P^n\\ne0$ (it exists as $P^\\bullet$ is bounded above). Since $H^n(P^\\bullet)=0$ and $P^{n+1}=0$, the differential $d^{n-1}:P^{n-1}\\to P^n$ is surjective. As $P^n$ is finite projective, the surjection splits, so $P^{n-1}=K\\oplus P^n$ and the differential restricts to the identity on the displayed $P^n$ summand. Removing the contractible two-term summand $P^n\\xrightarrow{\\mathrm{id}}P^n$ gives a quasi-isomorphic complex whose term in degree $n$ is zero; if the complementary module $K$ is only finite projective, apply the finite-free replacement construction of Step 1 (Tag 064U) to the resulting complex, whose top nonzero degree is now at most $n-1$, and add its contractible summands. Repeating for the finitely many degrees $n>b$ yields a finite-free complex $P'^{\\bullet}$ with $P'^i=0$ for $i>b$, and $P'^{\\bullet}\\to P^\\bullet\\to C$ is a quasi-isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), used in Lemma 15.76.2 (Tag 0658)"
-   }
+   "text": "Apply the split-top cancellation theorem to this representative, its bound n, its finite free terms, and the section. Obtain a finite free L supported at most n-1 and a quasi-isomorphism π:L → E. Its image under Q is an isomorphism; compose with Q(E) ≅ C. Since n-1=b+k, apply the induction hypothesis to L.",
+   "uses": [
+    "lem-pc-finite-free-split-top-cancellation"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-finite-free-split-top-cancellation"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "K2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), used in Lemma 15.76.2 (Tag 0658)"
+  "place": "Tag 064U, Lemma 15.66.5, finite-free replacement by identity complexes; split-top cancellation in step 3 of lem-pc-pseudo-coherent-bounded-finite-free-model. Source read at https://stacks.math.columbia.edu/tag/064U.",
+  "note": "Fully compiled finite descent using a fully proved split-top cancellation construction; the original signature is unchanged."
  },
  "mathlib_searches": [
   {
@@ -168,5 +163,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184315-L-4008684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

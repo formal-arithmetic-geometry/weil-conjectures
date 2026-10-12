@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-finite-free-split-top-cancellation",
+ "kind": "statement",
+ "title": "Finite free cancellation of a split top differential",
+ "statement": "Let $R$ be a commutative ring and $n\\in\\mathbf Z$. Let $P^\\bullet$ be a cochain complex of $R$-modules, that is modules $P^i$ and maps $d^i:P^i\\to P^{i+1}$ with $d^{i+1}d^i=0$. Suppose $P^i=0$ for $i>n$ and every $P^i$ is finite free (isomorphic to $R^{r_i}$ for some finite $r_i$). Given an $R$-linear section $s:P^n\\to P^{n-1}$ satisfying $d^{n-1}s=1_{P^n}$, there exist a cochain complex $L^\\bullet$ of finite free $R$-modules, with $L^i=0$ for $i>n-1$, and a chain map $\\pi:L^\\bullet\\to P^\\bullet$ inducing isomorphisms on all cohomology modules $H^i=\\ker d^i/\\operatorname{im}d^{i-1}$. No lower bound is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064U, Lemma 15.66.5, finite-free replacement by identity complexes; split-top cancellation in step 3 of lem-pc-pseudo-coherent-bounded-finite-free-model. Source read at https://stacks.math.columbia.edu/tag/064U."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Put m=n-1 and T=P^n. The cycles of P at m are the kernel of d:P^m → T. The given section s splits the short exact kernel sequence, giving the explicit isomorphism cycles(P,m) ⊕ T ≅ P^m. This uses ShortComplex.Splitting.ofExactOfSection and cyclesIsKernel.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct K=truncLE(m)P and A=mappingCone(id(single(m,T))); define L=K ⊕ A. The cone A is the identity two-term complex in degrees m-1,m and hence is contractible. Both K and A vanish above m. Below m, terms of K are isomorphic to the original finite free terms of P; terms of A are biproducts of zero or T and are finite free. At m, K^m=cycles(P,m) and A^m≅T, so the splitting in step 1 identifies L^m with the original finite free P^m. Above m the terms are zero, also finite free. Thus L is supported at most m and all its terms are finite free.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove P is cohomologically supported at most m. At n=m+1, the section makes d:P^m → P^n epic and the outgoing differential is zero, hence the short complex is exact. All higher terms of P are zero and hence exact. The canonical inclusion K → P is therefore a quasi-isomorphism by CochainComplex.quasiIso_ιTruncLE_iff.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The identity of A is homotopic to zero by mappingCone.homotopyToZeroOfId, so its map on every homology object is both the identity and zero. Therefore H^i(A) is a zero object. Under the additive homology functor, the two biproduct identities show that the map induced by L → K has inverse the map induced by K → L: the contribution through H^i(A) vanishes. Hence L → K is a quasi-isomorphism. Its composite with K → P is the required π. All constructions use the supplied section and Mathlib truncations and cones, with no witness selected from an unproved existence theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064U, Lemma 15.66.5, finite-free replacement by identity complexes; split-top cancellation in step 3 of lem-pc-pseudo-coherent-bounded-finite-free-model. Source read at https://stacks.math.columbia.edu/tag/064U.",
+  "note": "Explicit one-step stabilization of the canonical truncation; all four steps are proved in Lean using only Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A split top differential of a bounded above finite free cochain complex can be cancelled by a quasi-isomorphic finite free complex with upper bound lowered by one",
+   "date": "2026-10-13",
+   "results": "service unavailable: ",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above finite free cochain complex with a split top differential is quasi-isomorphic to a finite free complex whose upper bound is one smaller",
+   "date": "2026-10-13",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.quasiIso_πTruncGE_iff, CochainComplex.exists_iso_single, CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CochainComplex.quasiIso_truncGEMap_iff, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.quasiIso_truncLEMap_iff",
+   "verdict": "No exact theorem; the proof combines the Mathlib constructions and homology API."
+  },
+  {
+   "tool": "grep",
+   "query": "cancel.*split.*top|split.*top.*cancel|finiteFree.*cancel|finite.*free.*shorten",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact theorem; the proof combines the Mathlib constructions and homology API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0658 proof: choose a finite-free model vanishing above the upper Tor-amplitude bound; one-degree cancellation in the subsidiary Tag 064U argument.",
+   "via": [
+    "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteFreeSplitTopCancellation",
+  "file": "lean/Sheaf/RingTheory/FiniteFreeSplitTopCancellation.lean",
+  "declaration": "CochainComplex.exists_finiteFree_cancel_split_top",
+  "statement": "theorem exists_finiteFree_cancel_split_top\n    {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{v} R) ℤ) (n : ℤ)\n    (hbound : P.IsStrictlyLE n)\n    (hfree : ∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i))\n    (s : P.X n ⟶ P.X (n - 1)) (hs : s ≫ P.d (n - 1) n = 𝟙 (P.X n)) :\n    ∃ (L : CochainComplex (ModuleCat.{v} R) ℤ) (π : L ⟶ P),\n      L.IsStrictlyLE (n - 1) ∧\n      (∀ i : ℤ, Module.Free R (L.X i) ∧ Module.Finite R (L.X i)) ∧\n      QuasiIso π",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184315-L-4008684",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184315-L-4008684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
