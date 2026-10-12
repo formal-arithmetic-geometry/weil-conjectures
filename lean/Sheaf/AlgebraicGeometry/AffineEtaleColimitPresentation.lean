@@ -59,6 +59,14 @@ Proof (steps 4 and 8 of lem-weil-pbc-affine-etale-site-colimit):
    at a common later stage. Invariance under isomorphism then identifies the original
    presieve with an image of a stage cover. This gives the asserted iff and site axioms.
 (blueprint: lem-weil-pbc-affine-etale-colimit-presentation). -/
+-- STATEMENT-DISPUTED: finite covering presieves are incompatible with the asserted
+-- IsStableUnderComposition and cover-preserving equivalences. For a singleton index
+-- and identity system over a field, each fold map from n+1 copies of Spec(k) covers.
+-- Repeat the identity cover with index Nat and refine its nth copy by this singleton
+-- fold cover. IsStableUnderComposition makes their infinite union cover, whereas
+-- the conclusion requires it to be finite. Equivalence keeps the pairwise
+-- nonisomorphic source objects distinct. Mathlib's finite Pretopology satisfies
+-- the weaker presieve-bind transitivity, not this arbitrary-family composition axiom.
 theorem exists_affineEtale_colimit_presentation
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})
