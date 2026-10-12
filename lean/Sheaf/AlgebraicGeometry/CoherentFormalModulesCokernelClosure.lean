@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesCokernelCanonical
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesIsoInvariant
 
 /-! # CoherentFormalModulesCokernelClosure
 
@@ -51,6 +50,10 @@ as required by IsClosedUnderCokernels. This includes I=0, I=O_X, and zero arrows
 theorem coherentFormalModules_closedUnderCokernels (X : Scheme.{u})
     [IsNoetherian X] (I : X.IdealSheafData) :
     (IsCoherentFormalModule I).IsClosedUnderCokernels := by
-  sorry
+  refine ⟨?_⟩
+  intro _ ⟨f, k, hk, ⟨hF, hG⟩⟩
+  have hc := coherentFormalModules_canonicalCokernel_isCoherent X I hF hG f
+  exact coherentFormalModules_of_iso X I (
+    IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk) hc
 
 end AlgebraicGeometry
