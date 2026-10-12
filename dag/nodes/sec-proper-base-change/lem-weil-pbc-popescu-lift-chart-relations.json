@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-popescu-lift-chart-relations",
+ "kind": "statement",
+ "title": "Divisibility by pi of the other chart equations",
+ "statement": "For compatible prepared data R,Cbar,pi,d [lem-weil-pbc-popescu-lift-preparation], fix k and the explicit chart D_k and chartMap constructed in [lem-weil-pbc-popescu-lift-partial-chart-dimension]. Let q be any prime of the full lifting algebra D avoiding the image of a_k. Put T=(D_k)_{q_k}, q_k the inverse image of q [def-weil-pbc-localization-at-prime]. For every other chart kprime and every equation index l, the image of p_kprime,l in T is pi*y for some y in T. This assertion does not assume flatness, equality of annihilators or membership of pi in q.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-popescu-lift-preparation",
+  "lem-weil-pbc-popescu-lift-partial-chart-dimension",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "In the explicit partial chart D_k, the polynomial key identity pi*p_kl=-a_k*u_l+sum h_klj*u_j is proved by mapping Prepared.relation into Q and distributing the finite sums. For l in E_k, u_l is a defining relation. For l outside E_k, p_kl is a defining relation and the key identity, with a_k invertible at the pullback prime, kills u_l. These steps are already proved by equation_key_identity and chart_original_equation_eq_zero.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
+  },
+  {
+   "text": "For fixed kprime,l and j in E_k, form b_j=a_kprime*h_klj-sum_{jprime in E_kprime}h_kprime,l,jprime*h_k,jprime,j. Comparing the two cleared expressions for a_k*a_kprime*f_l gives the zero conormal class with coefficients b_j on the chosen conormal basis. Prepared.conormal makes each b_j zero in Cbar localized at a_k. Using Prepared.kernel and surjectivity, clear finitely many denominators to put a_k^N*b_j in I+pi^2P.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
+  },
+  {
+   "text": "Prepared.relation implies a_k*I is contained in I_Ek+pi^2P. Multiply the preceding coefficient relations once more by a_k. Expand a_k*p_kprime,l-a_kprime*p_kl+sum h_kprime,l,jprime*p_k,jprime modulo pi; its z_j coefficients are b_j. All p_kl vanish in D_k, including l in E_k by normalization. Multiply by the common a_k^N and substitute f_j=pi*z_j for j in E_k. The result belongs to pi*D_k after inverting a_k. Divide by the unit power of a_k and pass to the local ring at q_k to obtain the claimed witness y.",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-popescu-lift-preparation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (lemma-lifting), https://stacks.math.columbia.edu/tag/07CP; read from the online tag because the local TeX is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Popescu chart comparison map induces an isomorphism on local rings after using equality of annihilators",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjection from a partial Popescu chart induces a bijection of local rings when the annihilator of pi equals the annihilator of pi squared",
+   "results": "Module.FinitePresentation.exists_notMem_bijective; Localization.AtPrime.mapPiEvalRingHom_bijective; RingEquiv.surjectiveOnStalks; no conormal coefficient divisibility theorem",
+   "date": "2026-10-13",
+   "verdict": "The localization step can be proved directly, but these results do not supply the conormal coefficient computation."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*span|span.*annihilator|localRingHom.*bijective|pi_torsion|partial_chart",
+   "results": "Read PopescuLiftMaps and the annihilator/base-change lemma. Mathlib localRingHom_bijective_of_saturated_inf_eq_top concerns a subalgebra saturation, not the polynomial coefficient calculation. No chart divisibility lemma found.",
+   "date": "2026-10-13",
+   "verdict": "Retain the prepared conormal relations and write the missing divisibility calculation as a separate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLiftChartFlat",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Divisibility by pi of the other chart equations in the local chart argument of Tag 07CP",
+   "via": [
+    "lem-weil-pbc-popescu-lift-chart-flat",
+    "lem-weil-pbc-popescu-lift-smooth-special",
+    "lem-weil-pbc-popescu-lift-smooth",
+    "lem-weil-pbc-popescu-lifting",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuLiftChartComparison",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftChartComparison.lean",
+  "declaration": "Algebra.PopescuLiftPresentation.chart_relations_pi_divisible",
+  "statement": "theorem chart_relations_pi_divisible {R : Type a} {Cbar : Type c}\n    [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)\n    (k : Fin d.r) (q : PrimeSpectrum d.liftingAlgebra)\n    (hk : ULift.up (Ideal.Quotient.mk d.definingIdeal (d.includeX (d.a k))) ∉ q.asIdeal)\n    : ∀ (k' : Fin d.r) (l : Fin d.m),\n      ∃ y : d.chartLocal k q,\n        algebraMap (d.chartAlgebra k) (d.chartLocal k q)\n          (ULift.up (Ideal.Quotient.mk (d.chartIdeal k) (d.equation (.inr (k', l))))) =\n            algebraMap R (d.chartLocal k q) π * y",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T232142-L-1993271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T232142-L-1993271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
