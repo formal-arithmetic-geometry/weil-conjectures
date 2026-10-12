@@ -257,6 +257,243 @@ theorem exists_algEquiv_pi_isLocalRing_of_forall_exists_algHom
   exact (AlgEquiv.ofBijective (AlgHom.pi fun j ↦ Ideal.Quotient.mkₐ R _)
     hJ.bijective_pi).trans (AlgEquiv.piCongrLeft R Q eJ.symm).symm
 
+/-- **Idempotents congruent modulo the Jacobson radical are equal.** If `e, e'` are idempotents
+of a commutative ring `B` with `e - e'` in the Jacobson radical, then `e = e'`. -/
+theorem _root_.IsIdempotentElem.eq_of_sub_mem_jacobson_bot {B : Type*} [CommRing B] {e e' : B}
+    (he : IsIdempotentElem e) (he' : IsIdempotentElem e') (h : e - e' ∈ Ideal.jacobson ⊥) :
+    e = e' := by
+  have hd : (e - e') * (1 + (e - e') * -(e - e')) = 0 := by
+    have he₁ : e * e = e := he
+    have he₂ : e' * e' = e' := he'
+    linear_combination (3 * e' - e - 1) * he₁ + (e' + 1 - 3 * e) * he₂
+  have hu : IsUnit ((e - e') * -(e - e') + 1) := Ideal.mem_jacobson_bot.mp h _
+  rw [add_comm] at hu
+  exact sub_eq_zero.mp (hu.mul_left_eq_zero.mp hd)
+
+/-- In a local ring, an element which is idempotent modulo an ideal `J` is congruent to `0` or to
+`1` modulo `J`. -/
+theorem sub_mem_or_sub_one_mem_of_mul_self_sub_mem {A : Type*} [CommRing A] [IsLocalRing A]
+    {J : Ideal A} {y : A} (hy : y * y - y ∈ J) : y ∈ J ∨ y - 1 ∈ J := by
+  rw [show y * y - y = (y - 1) * y by ring] at hy
+  rcases isUnit_or_isUnit_one_sub_self y with h | h
+  · exact .inr ((J.mul_unit_mem_iff_mem h).mp hy)
+  · refine .inl ((J.mul_unit_mem_iff_mem h.neg).mp ?_)
+    rw [show y * -(1 - y) = (y - 1) * y by ring]
+    exact hy
+
+/-- An element of a finite product of rings lies in an ideal `K` as soon as each of its
+components lies in the image of `K` under the corresponding projection. -/
+theorem _root_.Ideal.mem_of_forall_apply_mem_map_evalRingHom {ι : Type*} [Finite ι]
+    {B : ι → Type*} [∀ i, CommRing (B i)] (K : Ideal (∀ i, B i)) (z : ∀ i, B i)
+    (hz : ∀ i, z i ∈ K.map (Pi.evalRingHom B i)) : z ∈ K := by
+  classical
+  have := Fintype.ofFinite ι
+  have hsum : z = ∑ i, Pi.single i (z i) := by ext; simp
+  rw [hsum]
+  refine Ideal.sum_mem _ fun i _ ↦ ?_
+  obtain ⟨w, hw, hwi⟩ :=
+    (Ideal.mem_map_iff_of_surjective _ (Function.surjective_eval i)).mp (hz i)
+  have : Pi.single i (z i) = Pi.single i 1 * w := by
+    ext j
+    by_cases hj : j = i
+    · subst hj; simp [← hwi]
+    · simp [hj]
+  rw [this]
+  exact K.mul_mem_left _ hw
+
+/-- **Idempotent lifting for finite products of local rings.** If a commutative ring `B` is
+isomorphic to a finite product of local rings, then every idempotent of `B / I` lifts to an
+idempotent of `B`, for every ideal `I` of `B`. -/
+theorem exists_isIdempotentElem_mk_eq_of_ringEquiv_pi {B : Type*} [CommRing B] {ι : Type*}
+    [Finite ι] {B' : ι → Type*} [∀ i, CommRing (B' i)] [∀ i, IsLocalRing (B' i)]
+    (ψ : B ≃+* ∀ i, B' i) (I : Ideal B) (e : B ⧸ I) (he : IsIdempotentElem e) :
+    ∃ e' : B, IsIdempotentElem e' ∧ Ideal.Quotient.mk I e' = e := by
+  classical
+  obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective e
+  have hb : b * b - b ∈ I := by
+    rw [← Ideal.Quotient.eq, map_mul]
+    exact he
+  let K : Ideal (∀ i, B' i) := I.map ψ
+  let J (i : ι) : Ideal (B' i) := K.map (Pi.evalRingHom B' i)
+  have hy (i : ι) : ψ b i * ψ b i - ψ b i ∈ J i := by
+    have := Ideal.mem_map_of_mem (Pi.evalRingHom B' i) (Ideal.mem_map_of_mem ψ hb)
+    simpa using this
+  let ε : ∀ i, B' i := fun i ↦ if ψ b i ∈ J i then 0 else 1
+  have hε (i : ι) : ψ b i - ε i ∈ J i := by
+    simp only [ε]
+    split_ifs with h
+    · simpa using h
+    · exact (sub_mem_or_sub_one_mem_of_mul_self_sub_mem (hy i)).resolve_left h
+  have hεi : IsIdempotentElem ε := by
+    ext i
+    simp only [Pi.mul_apply, ε]
+    split_ifs <;> simp
+  refine ⟨ψ.symm ε, hεi.map ψ.symm, ?_⟩
+  rw [Ideal.Quotient.eq]
+  have hz : ψ b - ε ∈ K :=
+    Ideal.mem_of_forall_apply_mem_map_evalRingHom K _ fun i ↦ by simpa using hε i
+  obtain ⟨x, hx, hxz⟩ := (Ideal.mem_map_of_equiv ψ _).mp hz
+  have : ψ.symm ε - b = -x := by
+    apply ψ.injective
+    simp [hxz]
+  rw [this]
+  exact I.neg_mem hx
+
+/-- **Idempotent lifting implies henselian.** Let `(R, 𝔪)` be a local ring such that for every
+finite `R`-algebra `B` every idempotent of `B / 𝔪B` lifts to an idempotent of `B`. Then `R` is
+henselian.
+
+We apply the hypothesis to `S = R[X]/(f)` and the idempotent of `S / 𝔪S` cutting out the simple
+root; the corresponding factor of `S` is isomorphic to `R`, and the image of `X` there is the
+desired root. -/
+theorem henselianLocalRing_of_forall_exists_isIdempotentElem
+    (H : ∀ (B : Type u) [CommRing B] [Algebra R B] [Module.Finite R B]
+      (e : B ⧸ (maximalIdeal R).map (algebraMap R B)), IsIdempotentElem e →
+        ∃ e' : B, IsIdempotentElem e' ∧ Ideal.Quotient.mk _ e' = e) :
+    HenselianLocalRing R := by
+  refine ⟨fun f hf b hfb hf'b ↦ ?_⟩
+  -- the polynomial algebra computations
+  have hfh : f = (X - C b) * (f /ₘ (X - C b)) + C (f.eval b) := by
+    rw [← modByMonic_X_sub_C_eq_C_eval, add_comm]
+    exact (modByMonic_add_div _ _).symm
+  generalize f /ₘ (X - C b) = h at hfh
+  have hc : f.derivative.eval b = h.eval b := by
+    conv_lhs => rw [hfh]
+    simp [derivative_mul]
+  have hhq : h = (X - C b) * (h /ₘ (X - C b)) + C (h.eval b) := by
+    rw [← modByMonic_X_sub_C_eq_C_eval, add_comm]
+    exact (modByMonic_add_div _ _).symm
+  generalize h /ₘ (X - C b) = q at hhq
+  let u : Rˣ := hf'b.unit
+  have hu : (u : R) = h.eval b := hc
+  -- the algebra `S = R[X]/(f)`
+  have : Module.Finite R (AdjoinRoot f) := hf.finite_adjoinRoot
+  let pb := AdjoinRoot.powerBasis' hf
+  let x : AdjoinRoot f := AdjoinRoot.root f
+  let I : Ideal (AdjoinRoot f) := (maximalIdeal R).map (algebraMap R (AdjoinRoot f))
+  have hfx : aeval x f = 0 := by rw [AdjoinRoot.aeval_eq, AdjoinRoot.mk_self]
+  have hfbI : algebraMap R (AdjoinRoot f) (f.eval b) ∈ I := Ideal.mem_map_of_mem _ hfb
+  have h1 : (x - algebraMap R (AdjoinRoot f) b) * aeval x h =
+      -algebraMap R (AdjoinRoot f) (f.eval b) := by
+    have := congr(aeval x $hfh)
+    simp only [map_add, map_mul, map_sub, aeval_X, aeval_C, hfx] at this
+    linear_combination -this
+  have h2 : aeval x h =
+      (x - algebraMap R (AdjoinRoot f) b) * aeval x q + algebraMap R (AdjoinRoot f) u := by
+    have := congr(aeval x $hhq)
+    simpa only [map_add, map_mul, map_sub, aeval_X, aeval_C, hu] using this
+  have h3 : algebraMap R (AdjoinRoot f) ↑u⁻¹ * algebraMap R (AdjoinRoot f) u = 1 := by
+    rw [← map_mul, Units.inv_mul, map_one]
+  let e₀ : AdjoinRoot f := algebraMap R (AdjoinRoot f) ↑u⁻¹ * aeval x h
+  have he₀ : e₀ * e₀ - e₀ ∈ I := by
+    rw [show e₀ * e₀ - e₀ =
+        -(algebraMap R (AdjoinRoot f) ↑u⁻¹ ^ 2 * aeval x q) *
+          algebraMap R (AdjoinRoot f) (f.eval b) by
+      linear_combination (algebraMap R (AdjoinRoot f) ↑u⁻¹ ^ 2 * aeval x q) * h1 +
+        (algebraMap R (AdjoinRoot f) ↑u⁻¹ * aeval x h * algebraMap R (AdjoinRoot f) ↑u⁻¹) * h2 +
+        (algebraMap R (AdjoinRoot f) ↑u⁻¹ * aeval x h) * h3]
+    exact I.mul_mem_left _ hfbI
+  have hxe₀ : (x - algebraMap R (AdjoinRoot f) b) * e₀ ∈ I := by
+    rw [show (x - algebraMap R (AdjoinRoot f) b) * e₀ =
+        -algebraMap R (AdjoinRoot f) ↑u⁻¹ * algebraMap R (AdjoinRoot f) (f.eval b) by
+      linear_combination algebraMap R (AdjoinRoot f) ↑u⁻¹ * h1]
+    exact I.mul_mem_left _ hfbI
+  -- lift the idempotent
+  obtain ⟨e, he, hee₀⟩ := H (AdjoinRoot f) (Ideal.Quotient.mk I e₀) (by
+    rw [IsIdempotentElem, ← map_mul, Ideal.Quotient.eq]
+    exact he₀)
+  rw [Ideal.Quotient.eq] at hee₀
+  -- `e ∉ 𝔪S`, detected by the evaluation `S → κ` at the residue of `b`
+  let φ : (AdjoinRoot f) →+* ResidueField R := AdjoinRoot.lift (residue R) (residue R b) (by
+    rw [eval₂_hom, residue_eq_zero_iff]
+    exact hfb)
+  have hφI : ∀ s ∈ I, φ s = 0 := by
+    intro s hs
+    refine (Ideal.map_le_iff_le_comap.mpr ?_ hs : s ∈ RingHom.ker φ)
+    intro r hr
+    simp only [Ideal.mem_comap, RingHom.mem_ker, AdjoinRoot.algebraMap_eq, φ,
+      AdjoinRoot.lift_of]
+    exact (residue_eq_zero_iff r).mpr hr
+  have hφe₀ : φ e₀ = 1 := by
+    simp only [e₀, φ, x, AdjoinRoot.aeval_eq, AdjoinRoot.algebraMap_eq, map_mul,
+      AdjoinRoot.lift_of, AdjoinRoot.lift_mk, eval₂_hom, ← hu]
+    rw [← map_mul, Units.inv_mul, map_one]
+  have heI : e ∉ I := by
+    intro heI
+    have : e₀ ∈ I := by simpa using I.sub_mem heI hee₀
+    simpa [hφe₀] using hφI _ this
+  -- hence some coordinate of `e` is a unit
+  obtain ⟨i, hi⟩ : ∃ i, IsUnit (pb.basis.repr e i) := by
+    by_contra! hne
+    refine heI ?_
+    rw [← pb.basis.sum_repr e]
+    refine Ideal.sum_mem _ fun i _ ↦ ?_
+    rw [Algebra.smul_def]
+    exact I.mul_mem_right _ (Ideal.mem_map_of_mem _ ((mem_maximalIdeal _).mpr (hne i)))
+  -- the factor `A = S / (1 - e)` of `S`
+  let A := (AdjoinRoot f) ⧸ Ideal.span {1 - e}
+  let π : (AdjoinRoot f) →ₐ[R] A := Ideal.Quotient.mkₐ R _
+  have : Module.Finite R A :=
+    Module.Finite.of_surjective π.toLinearMap Ideal.Quotient.mk_surjective
+  let IA : Ideal A := (maximalIdeal R).map (algebraMap R A)
+  have hπI : ∀ s ∈ I, π s ∈ IA := by
+    intro s hs
+    refine (Ideal.map_le_iff_le_comap.mpr ?_ hs : s ∈ IA.comap π)
+    intro r hr
+    rw [Ideal.mem_comap, Ideal.mem_comap, AlgHom.commutes]
+    exact Ideal.mem_map_of_mem _ hr
+  have hπe : π e = 1 := by
+    rw [← sub_eq_zero, ← map_one π, ← map_sub, Ideal.Quotient.mkₐ_eq_mk,
+      Ideal.Quotient.eq_zero_iff_mem, show e - 1 = -(1 - e) by ring]
+    exact neg_mem (Ideal.mem_span_singleton_self _)
+  have hxA : π x - algebraMap R A b ∈ IA := by
+    have : (x - algebraMap R (AdjoinRoot f) b) * e ∈ I := by
+      rw [show (x - algebraMap R (AdjoinRoot f) b) * e = (x - algebraMap R (AdjoinRoot f) b) * e₀ +
+        (x - algebraMap R (AdjoinRoot f) b) * (e - e₀) by ring]
+      exact I.add_mem hxe₀ (I.mul_mem_left _ hee₀)
+    have := hπI _ this
+    rwa [map_mul, hπe, mul_one, map_sub, AlgHom.commutes] at this
+  have hinj : Function.Injective (algebraMap R A) := by
+    refine (injective_iff_map_eq_zero _).mpr fun r hr ↦ ?_
+    rw [IsScalarTower.algebraMap_apply R (AdjoinRoot f) A, Ideal.Quotient.algebraMap_eq,
+      Ideal.Quotient.eq_zero_iff_mem, Ideal.mem_span_singleton'] at hr
+    obtain ⟨s, hs⟩ := hr
+    have hre : r • e = 0 := by
+      rw [Algebra.smul_def, ← hs, mul_assoc, he.one_sub_mul_self, mul_zero]
+    have := congr(pb.basis.repr $hre i)
+    rw [map_smul, Finsupp.smul_apply, smul_eq_mul, map_zero, Finsupp.zero_apply] at this
+    exact hi.mul_left_eq_zero.mp this
+  have hsurj : Function.Surjective (algebraMap R A) := by
+    let N : Submodule R A := LinearMap.range (Algebra.linearMap R A)
+    have htop : (⊤ : Submodule R A) ≤ N ⊔ maximalIdeal R • ⊤ := by
+      rintro a -
+      obtain ⟨s, rfl⟩ := Ideal.Quotient.mk_surjective a
+      obtain ⟨p, rfl⟩ := AdjoinRoot.mk_surjective s
+      have hpA : Ideal.Quotient.mk _ (AdjoinRoot.mk f p) = aeval (π x) p := by
+        rw [← AdjoinRoot.aeval_eq, ← Ideal.Quotient.mkₐ_eq_mk R, ← aeval_algHom_apply]
+      rw [hpA]
+      have hmem : aeval (π x) p - algebraMap R A (p.eval b) ∈ IA := by
+        rw [← aeval_algebraMap_apply_eq_algebraMap_eval, aeval_def, aeval_def, eval₂_eq_eval_map,
+          eval₂_eq_eval_map]
+        obtain ⟨k, hk⟩ := sub_dvd_eval_sub (π x) (algebraMap R A b) (p.map (algebraMap R A))
+        rw [hk]
+        exact IA.mul_mem_right _ hxA
+      rw [← sub_add_cancel (aeval (π x) p) (algebraMap R A (p.eval b)), add_comm]
+      refine Submodule.add_mem_sup ⟨p.eval b, rfl⟩ ?_
+      rw [Ideal.smul_top_eq_map]
+      exact hmem
+    have := Submodule.le_of_le_smul_of_le_jacobson_bot (Module.Finite.fg_top)
+      (maximalIdeal_le_jacobson ⊥) htop
+    exact fun a ↦ this Submodule.mem_top
+  -- the root
+  obtain ⟨a, ha⟩ := hsurj (π x)
+  refine ⟨a, hinj ?_, ?_⟩
+  · rw [map_zero, ← aeval_algebraMap_apply_eq_algebraMap_eval, ha, aeval_algHom_apply, hfx,
+      map_zero]
+  · rw [← Ideal.comap_map_of_bijective _ ⟨hinj, hsurj⟩ (I := maximalIdeal R), Ideal.mem_comap,
+      map_sub, ha]
+    exact hxA
+
 /-- **Henselian local rings: idempotent lifting versus root lifting.** For a local ring
 `(R, 𝔪, κ)` the following are equivalent:
 (i) for every finite `R`-algebra `B`, every idempotent of `B / 𝔪B` lifts uniquely to an
@@ -270,8 +507,17 @@ theorem forall_existsUnique_isIdempotentElem_iff_forall_exists_isRoot :
       (e : B ⧸ (maximalIdeal R).map (algebraMap R B)), IsIdempotentElem e →
         ∃! e' : B, IsIdempotentElem e' ∧ Ideal.Quotient.mk _ e' = e) ↔
     ∀ f : R[X], f.Monic → ∀ a₀ : ResidueField R, aeval a₀ f = 0 →
-      aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀ :=
-  sorry
+      aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀ := by
+  refine ⟨fun H ↦ ((HenselianLocalRing.TFAE R).out 0 1).mp
+    (henselianLocalRing_of_forall_exists_isIdempotentElem fun B _ _ _ e he ↦ (H B e he).exists),
+    fun H B _ _ _ e he ↦ ?_⟩
+  obtain ⟨r, B', _, _, _, ⟨ψ⟩⟩ := exists_algEquiv_pi_isLocalRing_of_forall_exists_algHom
+    (fun R' _ _ _ m' _ hm' hκ ↦
+      (existsUnique_algHom_comap_maximalIdeal_eq_of_forall_exists_isRoot H m' hm' hκ).exists) B
+  obtain ⟨e', he', rfl⟩ :=
+    exists_isIdempotentElem_mk_eq_of_ringEquiv_pi ψ.toRingEquiv _ e he
+  refine ⟨e', ⟨he', rfl⟩, fun e'' ⟨he'', h⟩ ↦ he''.eq_of_sub_mem_jacobson_bot he' ?_⟩
+  exact map_maximalIdeal_le_jacobson_of_finite (Ideal.Quotient.eq.mp h)
 
 end IsLocalRing
 
@@ -302,8 +548,9 @@ theorem iff_forall_existsUnique_isIdempotentElem [IsLocalRing R] :
     HenselianLocalRing R ↔
       ∀ (B : Type u) [CommRing B] [Algebra R B] [Module.Finite R B]
         (e : B ⧸ (maximalIdeal R).map (algebraMap R B)), IsIdempotentElem e →
-          ∃! e' : B, IsIdempotentElem e' ∧ Ideal.Quotient.mk _ e' = e :=
-  sorry
+          ∃! e' : B, IsIdempotentElem e' ∧ Ideal.Quotient.mk _ e' = e := by
+  rw [IsLocalRing.forall_existsUnique_isIdempotentElem_iff_forall_exists_isRoot]
+  exact (HenselianLocalRing.TFAE R).out 0 1
 
 end HenselianLocalRing
 
