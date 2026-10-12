@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-normalized-component-section-cover",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "ExistsGluedSection docstring, choosing isolated-intersection neighborhoods and normalized frames, then arbitrary component trivializing opens off T; Stacks 09NE direct proof, before choosing transition functions.",
+   "via": [
+    "lem-sc-exists-glued-section"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A normalized frame cover for prescribed component sections",
+ "statement": "Let $Y$ be a reduced scheme [def-pc-scheme, def-pc-reduced-scheme], and let $i_a:Z_a\\to Y$ be a finite family of closed immersions [def-weil-closed-immersion] whose images cover $Y$. Suppose intersections of distinct images are discrete. Let $M_a$ be invertible modules [def-sc-invertible-module] and let $s_a\\in\\Gamma(Z_a,M_a)$ be nonvanishing [def-weil-pbc-ample-invertible-module] at all intersections involving $a$. There are an open cover $(U_b)$ of $Y$, functions $f_b\\in\\Gamma(Y,U_b)$, and free generators [def-sc-local-free-generator] $m_{ab}$ of $M_a$ on $i_a^{-1}U_b$ such that $s_a=i_a^\\sharp(f_b)m_{ab}$ on $i_a^{-1}U_b$. For every distinct pair $b\\ne c$ and every open $W\\subset U_b\\cap U_c$, the map $\\Gamma(Y,W)\\to\\prod_a\\Gamma(Z_a,i_a^{-1}W)$ induced by the closed immersions is bijective. The cover index is a type in universe $\\max(u,v)$. No transitions, cocycle, glued module, or global section are asserted.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Let T be the union of pairwise intersections of the finite closed cover. It is closed. Each constituent is a closed discrete subset; a finite union of closed discrete subsets is discrete (around a point remove the finitely many other closed subsets and isolate it in those containing it). Away from T the components are disjoint open subschemes, with the structure-section product bijection.",
+   "uses": [
+    "lem-sc-glue-component-reduced-cover-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+   }
+  },
+  {
+   "text": "Around each t in T choose U_t meeting T only at t. Remove the components not containing t. Each prescribed section on an incident component is nonzero in the residue-field fibre, hence, for an invertible module, a free generator on a neighborhood. Shrink U_t simultaneously for the finitely many incident components and use these sections as frames. Cover the complement of T by component trivializing opens. Index the disjoint collection of point neighborhoods and component opens by a type in universe max(u,v), using points and finite-component trivializing opens. For components with empty preimages use their unique section as the vacuous free generator.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sc-local-free-generator",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sc-nonvanishing-iff-generates-at"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+   }
+  },
+  {
+   "text": "On a point neighborhood U_t all nonempty component preimages have their frame equal to the restricted prescribed section, so the single function 1 expresses every s_a. On a component open away from T, take its unique frame coefficient and transfer the family of coefficients (including the unique empty-component values) to a function f_b by the reduced-cover bijection. Distinct point neighborhoods intersect away from T, and every other member avoids T; therefore every open W in a distinct overlap avoids T and the reduced-cover bijection applies. There are at most a family indexed by points of Y and a family indexed by a component and one of its points; this index lies in universe max(u,v). With empty Y choose the empty cover.",
+   "uses": [
+    "lem-sc-glue-component-reduced-cover-sections",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-glue-component-reduced-cover-sections",
+  "lem-sc-nonvanishing-iff-generates-at"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DiscreteTopology|IsFreeGenerator|trivialis|trivializ",
+   "results": "No hits; no normalized closed-component frame-cover theorem returned.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite closed cover with discrete intersections admits normalized component free generators on an open cover whose distinct overlaps are disjoint unions of the components",
+   "results": "AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.Scheme.zero_of_zero_cover; TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover; exists_iUnion_eq_closure_subset; AlgebraicGeometry.Scheme.Hom.normalizationOpenCover; exists_iUnion_eq_closed_subset; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx; no normalized closed-component frame-cover theorem returned.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose an open cover of a reduced scheme with discrete intersections of finitely many closed components, with free component frames expressing prescribed sections and a bijection of structure sections on overlaps of distinct cover members",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExistsGluedSection",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedComponentSectionCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedComponentSectionCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_normalized_component_section_cover",
+  "statement": "theorem exists_normalized_component_section_cover\n    {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]\n    (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]\n    (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ)\n    (hdiscrete : ∀ a b : ι, a ≠ b →\n      DiscreteTopology ↥(Set.range (i a) ∩ Set.range (i b)))\n    (M : ∀ a : ι, (Z a).Modules) [∀ a : ι, (M a).IsInvertible]\n    (s : ∀ a : ι, Γ(M a, ⊤))\n    (hs : ∀ a b : ι, a ≠ b → Set.range (i a) ∩ Set.range (i b) ⊆\n      i a '' nonvanishingLocus (M a) (s a)) :\n    ∃ (κ : Type (max u v)) (U : κ → Y.Opens) (f : ∀ b, Γ(Y, U b))\n      (m : ∀ a b, Γ(M a, (i a) ⁻¹ᵁ U b)),\n      (⨆ b, U b) = ⊤ ∧\n      (∀ a b, IsFreeGenerator (m a b)) ∧\n      (∀ a b, (M a).presheaf.map (homOfLE le_top).op (s a) =\n        ((i a).app (U b)).hom (f b) • m a b) ∧\n      ∀ b c, b ≠ c → ∀ (W : Y.Opens), W ≤ U b → W ≤ U c →\n        Function.Bijective\n          (fun r : Γ(Y, W) ↦ fun a ↦ ((i a).app W).hom r)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144149-L-2108631",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144149-L-2108631",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

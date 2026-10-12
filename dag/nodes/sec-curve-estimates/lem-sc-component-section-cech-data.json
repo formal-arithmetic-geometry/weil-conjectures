@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-component-section-cech-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "ExistsGluedSection docstring: choose isolated-intersection neighborhoods and normalized frames, descend component transition units and local coefficient functions; Stacks 09NE direct proof before gluing.",
+   "via": [
+    "lem-sc-exists-glued-section"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized component section frames and compatible Čech functions",
+ "statement": "Let $Y$ be a reduced scheme [def-pc-scheme, def-pc-reduced-scheme], and let $i_a:Z_a\\to Y$ be finitely many closed immersions [def-weil-closed-immersion] whose images cover $Y$ and whose pairwise intersections for distinct indices are discrete. Let $M_a$ be invertible modules [def-sc-invertible-module] and $s_a\\in\\Gamma(Z_a,M_a)$ sections nonvanishing [def-weil-pbc-ample-invertible-module] at every intersection involving $a$. There are an open cover $(U_b)$ of $Y$, units $g_{bc}\\in\\Gamma(Y,U_b\\cap U_c)^\\times$, functions $f_b\\in\\Gamma(Y,U_b)$, and free generators [def-sc-local-free-generator] $m_{ab}$ of $M_a$ over $i_a^{-1}U_b$. The units satisfy identity, inverse and Čech cocycle equations after restriction to every common open. The component frames satisfy $m_{ab}=i_a^\\sharp(g_{bc})m_{ac}$ on $i_a^{-1}(U_b\\cap U_c)$, the section satisfies $s_a=i_a^\\sharp(f_b)m_{ab}$ on $i_a^{-1}U_b$, and $f_b g_{bc}=f_c$ on $U_b\\cap U_c$. The cover index lies in universe $\\max(u,v)$. No glued module or global section is asserted.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-invertible-module",
+  "def-sc-local-free-generator",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized open cover U, component free frames m, and common scalar expressions f for the prescribed sections, with a structure-section bijection on each subopen of a distinct overlap.",
+   "uses": [
+    "lem-sc-normalized-component-section-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+   }
+  },
+  {
+   "text": "On each distinct overlap use IsFreeGenerator.exists_unit_smul_eq to obtain component frame-ratio units. Lift their values and inverse values through the bijection to r,r'. Injectivity and multiplicativity prove rr'=1, so these lifts form a unit of the structure ring. Set the diagonal transition explicitly to 1. This is the proved private helper exists_transition_unit; exists_cech_of_component_frame_cover assembles the transitions.",
+   "uses": [
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+   }
+  },
+  {
+   "text": "Restrict the component frame equations to any subopen of an overlap, using naturality of the structure map and module restriction. Cancel a free generator to check the inverse and cocycle scalar equations componentwise, then apply injectivity of the structure-section comparison. For a triple with distinct indices use either the first distinct pair or the second; when all three coincide all units are 1. For f_b g_bc=f_c, restrict both expressions for s_a to the overlap, substitute the frame equation, cancel the c-frame, and descend by injectivity. The diagonal coefficient equation is reflexive. All these checks are fully proved private lemmas in the module.",
+   "uses": [
+    "def-sc-local-free-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-local-free-generator",
+  "lem-sc-normalized-component-section-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE (lemma-glue-invertible-sheaves), direct proof and final paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech|transition.*(unit|invertible)|closed.*cover",
+   "results": "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean; Mathlib/AlgebraicGeometry/Morphisms/Integral.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; inspected hits provide no component-frame cocycle construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced scheme with finite closed components having discrete intersections admits an open cover with normalized free generators of component invertible modules, compatible unit transition functions, and coefficients for prescribed sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a finite closed cover of a reduced scheme with discrete intersections, construct component line bundle frames and a Cech unit cocycle with compatible coefficient functions for sections nonvanishing at intersections",
+   "results": "AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; ModuleCat.Tilde.exists_const; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen; AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover; inspected hits provide no component-frame cocycle construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ExistsGluedSection",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComponentSectionCechData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComponentSectionCechData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_component_section_cech_data",
+  "statement": "theorem exists_component_section_cech_data\n    {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]\n    (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]\n    (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ)\n    (hdiscrete : ∀ a b : ι, a ≠ b →\n      DiscreteTopology ↥(Set.range (i a) ∩ Set.range (i b)))\n    (M : ∀ a : ι, (Z a).Modules) [∀ a : ι, (M a).IsInvertible]\n    (s : ∀ a : ι, Γ(M a, ⊤))\n    (hs : ∀ a b : ι, a ≠ b → Set.range (i a) ∩ Set.range (i b) ⊆\n      i a '' nonvanishingLocus (M a) (s a)) :\n    ∃ (κ : Type (max u v)) (U : κ → Y.Opens)\n      (g : ∀ b c, Γ(Y, U b ⊓ U c)ˣ) (f : ∀ b, Γ(Y, U b))\n      (m : ∀ a b, Γ(M a, (i a) ⁻¹ᵁ U b)),\n      (⨆ b, U b) = ⊤ ∧\n      (∀ b, g b b = 1) ∧\n      (∀ b c (W : Y.Opens) (hb : W ≤ U b) (hc : W ≤ U c),\n        Units.map (Y.presheaf.map (homOfLE (le_inf hc hb)).op).hom.toMonoidHom (g c b) =\n          (Units.map (Y.presheaf.map (homOfLE (le_inf hb hc)).op).hom.toMonoidHom\n            (g b c))⁻¹) ∧\n      (∀ b c d (W : Y.Opens)\n        (hb : W ≤ U b) (hc : W ≤ U c) (hd : W ≤ U d),\n        Units.map (Y.presheaf.map (homOfLE (le_inf hb hd)).op).hom.toMonoidHom (g b d) =\n          Units.map (Y.presheaf.map (homOfLE (le_inf hb hc)).op).hom.toMonoidHom (g b c) *\n            Units.map (Y.presheaf.map (homOfLE (le_inf hc hd)).op).hom.toMonoidHom (g c d)) ∧\n      (∀ a b, IsFreeGenerator (m a b)) ∧\n      (∀ a b c,\n        (M a).presheaf.map (homOfLE ((i a).preimage_mono inf_le_left)).op (m a b) =\n          ((i a).app (U b ⊓ U c)).hom (g b c).val •\n            (M a).presheaf.map (homOfLE ((i a).preimage_mono inf_le_right)).op (m a c)) ∧\n      (∀ a b, (M a).presheaf.map (homOfLE le_top).op (s a) =\n        ((i a).app (U b)).hom (f b) • m a b) ∧\n      ∀ b c, Y.presheaf.map (homOfLE inf_le_left).op (f b) * (g b c).val =\n        Y.presheaf.map (homOfLE inf_le_right).op (f c)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144149-L-2108631",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144149-L-2108631",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
