@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-finite-etale-unit-stalk-inclusion",
+ "kind": "statement",
+ "title": "Finite etale reverse-adjunction unit includes a geometric stalk summand",
+ "statement": "Let $f:Y\\to X$ be finite etale [def-weil-pbc-scheme-conventions], $R$ a commutative ring, and $H$ a sheaf of $R$-modules on $Y_{\\mathrm{Et}}$ [def-weil-pbc-etale-sheaves]. Let $s:\\operatorname{Spec}\\Omega\\to X$ be a geometric point with $\\Omega$ algebraically closed [def-weil-pbc-geometric-stalks] and let $t$ be a lift to $Y$ [def-weil-pbc-geometric-fibre]. Use the reverse adjunction $f_*\\dashv f^*$ furnished by finite etale extension by zero [lem-weil-pbc-etale-shriek-star-finite-modules], with unit $\\nu_H:H\\to f^*f_*H$, and the canonical pullback stalk comparison $c_{f_*H,t}:(f^*f_*H)_t\\cong(f_*H)_{t\\circ f}$ [lemma-openclosed-stalk-upperstar]. Let $j_t:H_t\\to(f_*H)_s$ send a germ of a section over a pointed etale Y-neighbourhood $(U,x)$ to the germ, over the localized X-neighbourhood $U\\to Y\\to X$, of its extension by zero from the graph $U\\to U\\times_XY$. Then $c_{f_*H,t}\\circ(\\nu_H)_t=j_t$, after transport along $t\\circ f=s$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH, Definition 03SE (trace as adjunction counit), and Lemma 03S7 (extension by zero equals direct image for finite etale module sheaves). Explicit normalization: WeilConjectures/SixFunctors/Etale/UpperLowerStar/FiniteEtale.lean, lowerStarUnit, lowerStarLocalizationRestrictionAdjunction_unit, lowerStarUpperStarAdjunctionOfIsFinite and sheafFiberToLowerStar; the germ comparison follows Stacks 03Q1 (3), via Sites 05V1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-geometric-fibre",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "proof": [
+  {
+   "text": "Expand lowerStarUpperStarAdjunctionOfIsFinite: its unit at H is lowerStarUnit.app H followed by upperStarIsoLocalizationRestriction.inv.app (f_*H). The unit lowerStarUnit extends sections by zero from the graph of each etale Y-object. This uses the existing finite-etale reverse adjunction constructed from the shriek-to-star comparison in the source module, not an assumed trace.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-star-finite-modules",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the pullback-unit germ formula directly for ModuleCat: cancel the hom of upperStarCompSheafFiberIso, expand its three inverse factors, use the germ formulas for the point isomorphism and sheafFiberComapIso, then use Adjunction.unit_leftAdjointUniq_hom_app to identify the abstract unit with the constructed unit. This is the proof of private pullback_unit_germ, the coefficient-linear version of the general-site argument for Stacks 03Q1.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an etale Y-object U compute upperStarIsoLocalizationRestriction.inv.app G on sections: it is the ordinary unit at the localized X-object followed by restriction along graph U. Apply homEquiv_leftAdjointUniq_hom_app with the adjunctions exchanged, then homEquiv_counit and the source localization counit section formula. This proves private localizationIso_inv_sections.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reduce the desired stalk identity to germs at every pointed Y-neighbourhood (U,x). The germ of sheafFiberToLowerStar is graphExtend followed by the germ over the localized object at fiberMapPoint. Expand the reverse unit and substitute the section formula in step 3. The transported pullback point has first component x and second component t, hence is the image of x under graph U; verify equality by pullback.hom_ext. The colimit relation toPresheafFiber_w for this graph changes the germ after restriction to the germ at that point. The formula of step 2 now gives precisely graphExtend followed by the localized germ. Equality on every germ proves equality of stalk maps.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Eliminate the fibre witness (t,t followed by f = s) and transport along its equality. No lift is required for an empty fibre: the statement is then vacuous. All morphisms remain coefficient-linear.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "lemma-openclosed-stalk-upperstar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "S2: germ normalization of the existing extension-by-zero reverse adjunction, following the sources named in source.place; complete Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit of finite etale pushforward adjoint to pullback on sheaves is the inclusion into a summand on geometric stalks",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no conclusion drawn"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"unit\"",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "No exact finite-etale reverse-unit normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale sheaf modules trace unit degree sum local split cover",
+   "results": "8 hits concerning etale algebras, etale loci and algebraic traces, none about reverse-adjunction sheaf stalk inclusions",
+   "date": "2026-10-12",
+   "verdict": "No match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtaleUnit|lowerStarUnit|sheafFiberToLowerStar in Mathlib/CategoryTheory/Sites and Mathlib/AlgebraicGeometry",
+   "results": "0 hits; the source library defines lowerStarUnit and sheafFiberToLowerStar but has no theorem identifying them through upperStarCompSheafFiberIso",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem; proved the missing normalization from the existing source constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleModuleTraceData",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "split-locally-constant-retraction",
+   "place": "blueprint_sketch proof: the adjunction unit is diagonal on a geometric stalk and the fibrewise trace is the sum; this node supplies the normalization of the reverse adjunction needed for that sum formula",
+   "via": [
+    "lem-weil-pbc-finite-etale-module-trace-data",
+    "lem-weil-pbc-finite-etale-module-trace-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleUnitStalkInclusion",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleUnitStalkInclusion.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtaleUnit_stalk_inclusion",
+  "statement": "theorem finiteEtaleUnit_stalk_inclusion\n    {X Y : Scheme.{u}} (R : Type (u + 1)) [CommRing R]\n    (f : Y ⟶ X) [IsFinite f] [Etale f]\n    (H : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X)\n    (t : f.GeometricFiber s) :\n    (Scheme.pointSmallEtale t.1).sheafFiber.map\n        ((lowerStarUpperStarAdjunctionOfIsFinite (ModuleCat.{u + 1} R) f).unit.app H) ≫\n      ((upperStarCompSheafFiberIso (ModuleCat.{u + 1} R) f t.1).app\n        ((f)_*[ModuleCat.{u + 1} R].obj H)).hom ≫\n      eqToHom (by rw [t.2]) =\n    sheafFiberToLowerStar (ModuleCat.{u + 1} R) f t H",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T063519-L-3159435",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T063519-L-3159435",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
