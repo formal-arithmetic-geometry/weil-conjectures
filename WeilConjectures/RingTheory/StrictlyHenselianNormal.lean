@@ -206,3 +206,49 @@ theorem of_isFractionRing_of_isSepClosed : IsStrictlyHenselianLocalRing A :=
   ⟨isSepClosed_residueField_of_isFractionRing (Ω := Ω)⟩
 
 end IsStrictlyHenselianLocalRing
+
+namespace Ideal
+
+variable {R Ω : Type*} [CommRing R] [Field Ω] [Algebra R Ω]
+  (Q : Ideal (integralClosure R Ω)) [Q.IsPrime]
+
+/-- The localization at a prime `Q` of the integral closure of `R` in a field `Ω` maps to `Ω`. -/
+noncomputable def atPrimeToField : Localization.AtPrime Q →+* Ω :=
+  IsLocalization.lift (M := Q.primeCompl) (g := (integralClosure R Ω).val.toRingHom) fun s ↦
+    IsUnit.mk0 _ fun h ↦ s.2 (by
+      have : s.1 = 0 := Subtype.ext h
+      rw [this]
+      exact Q.zero_mem)
+
+@[simp]
+lemma atPrimeToField_algebraMap (b : integralClosure R Ω) :
+    atPrimeToField Q (algebraMap _ (Localization.AtPrime Q) b) = b :=
+  IsLocalization.lift_eq _ _
+
+lemma injective_atPrimeToField : Function.Injective (atPrimeToField Q) := by
+  refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
+  obtain ⟨b, s, rfl⟩ := IsLocalization.exists_mk'_eq Q.primeCompl x
+  rw [atPrimeToField, IsLocalization.lift_mk'_spec, mul_zero] at hx
+  rw [IsLocalization.mk'_eq_zero_iff]
+  exact ⟨1, by rw [OneMemClass.coe_one, one_mul]; exact Subtype.ext hx⟩
+
+variable [IsDomain R] [IsSepClosed Ω] [Algebra.IsAlgebraic R Ω]
+
+/-- The localization at a prime of the integral closure of a domain `R` in a separably closed
+field `Ω` algebraic over `R` is strictly henselian. -/
+theorem isStrictlyHenselianLocalRing_atPrime (hR : Function.Injective (algebraMap R Ω)) :
+    IsStrictlyHenselianLocalRing (Localization.AtPrime Q) := by
+  have : IsFractionRing (integralClosure R Ω) Ω := integralClosure.isFractionRing_of_algebraic
+    fun x hx ↦ hR (hx.trans (map_zero _).symm)
+  have : IsIntegrallyClosed (integralClosure R Ω) :=
+    (IsIntegrallyClosed.integralClosure_eq_bot_iff Ω).mp integralClosure_idem
+  have : IsIntegrallyClosed (Localization.AtPrime Q) :=
+    isIntegrallyClosed_of_isLocalization _ Q.primeCompl Q.primeCompl_le_nonZeroDivisors
+  let : Algebra (Localization.AtPrime Q) Ω := (atPrimeToField Q).toAlgebra
+  have : IsScalarTower (integralClosure R Ω) (Localization.AtPrime Q) Ω :=
+    IsScalarTower.of_algebraMap_eq fun b ↦ (atPrimeToField_algebraMap Q b).symm
+  have : IsFractionRing (Localization.AtPrime Q) Ω :=
+    IsFractionRing.isFractionRing_of_isDomain_of_isLocalization Q.primeCompl _ Ω
+  exact IsStrictlyHenselianLocalRing.of_isFractionRing_of_isSepClosed Ω
+
+end Ideal
