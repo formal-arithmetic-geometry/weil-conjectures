@@ -7372,3 +7372,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/J2/Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassVanishing (stage 3; reviewer PASS; first push; landing 20261012T110307-L-617079 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/J3/Sheaf.AlgebraicGeometry.EtaleRestrictScalarsExchange (stage 3; reviewer PASS; first push; landing 20261012T110307-L-617175 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:03 L: merged deliver/J3/Sheaf.AlgebraicGeometry.SerreSectionModuleChartRestriction (stage 3; reviewer PASS; first push; landing 20261012T110307-L-617272 (proof); batch 20261012T110249; modules 1; new nodes 0)
+- 11:03 L: merged deliver/K1/Sheaf.AlgebraicGeometry.DeterminantExteriorDualIso (stage 3; reviewer PASS; first push; landing 20261012T110308-L-617414 (interface); batch 20261012T110249; modules 3; new nodes 2)

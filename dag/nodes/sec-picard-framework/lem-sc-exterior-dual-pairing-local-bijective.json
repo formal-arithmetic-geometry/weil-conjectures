@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-exterior-dual-pairing-local-bijective",
+ "kind": "statement",
+ "title": "Local perfection of the exterior dual determinant pairing",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $M$ a sheaf of $\\mathcal O_X$-modules. Write $M^\\vee$ for its internal dual [def-pur-sheaf-hom], and use sheafified exterior powers [def-sc-sheaf-exterior-power]. Let $n,r\\geq0$ and let $f:\\bigwedge^n M^\\vee\\to(\\bigwedge^n M)^\\vee$ be a morphism whose value on every pair of wedges of sections over any open $W$ is $\\det(\\varphi_j(a_i))$. Suppose an open $U$ has a sheaf isomorphism $M|_U\\cong\\mathcal O_U^{\\oplus r}$, the finite free sheaf [def-weil-pbc-free-module]. Then for every open $V\\subseteq U$, $f(V)$ is bijective on sections.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BRT (lemma-smooth-proper), final determinant inversion; expanded local determinant pairing argument, original node steps 1-3. Ring pairing: Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean:64-74."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the finite free trivialization to every V contained in U. Basis coordinates identify the internal dual sections with the ring-linear dual of the sections of M. In each direction the coordinates commute with restriction: a functional is reconstructed as a sheaf morphism by its values on the restricted finite basis.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The increasing-wedge basis identifies the sectionwise exterior powers on the trivializing open with finite free sheaves of rank binomial(r,n). These presheaves are already sheaves: each is a finite power of the structure sheaf under the basis coordinates. The localized site has the same open covers, so restriction of sheafification is this sheaf. This identifies both exterior sheaves and the internal dual exterior sheaf on V with their ring-module counterparts.",
+   "uses": [
+    "def-sc-sheaf-exterior-power",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The determinant formula identifies f on pure wedges with the ring-module pairingDual; pure wedges span, so the maps agree. The wedge of the dual basis pairs with the corresponding increasing wedge by 1 and all other basis wedges by 0. Hence f carries a basis to its dual basis and is bijective, by exteriorPower.basis_coord and the finite dual basis. This includes n=0, n>r, zero rings, and empty opens.",
+   "uses": [
+    "lem-sc-exterior-power-dual-pairing",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-sc-sheaf-exterior-power",
+  "def-weil-pbc-free-module",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-sc-exterior-power-dual-pairing",
+  "lem-weil-pbc-exterior-power-free-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BRT determinant inversion: expanded the local-to-global argument from the item node; finite free pairing from Mathlib Pairing.lean and Basis.lean. In the installed Mathlib, local bijectivity follows from basis_coord and the finite dual basis; bijective_pairingDual is not present."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exterior powers of the internal dual of a sheaf determinant pairing",
+   "results": "exteriorPower.pairingDual; exteriorPower.pairingDual_ιMulti_ιMulti; ModuleCat.exteriorPower.functor; ModuleCat.exteriorPower.functor_obj; ModuleCat.exteriorPower; exteriorPower.alternatingMapToDual; exteriorPower.pairingDual_apply_apply_eq_one; CommRing.Pic.mk_dual",
+   "date": "2026-10-12",
+   "verdict": "ring-module pairing and basis results; no sheaf-level theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower.pairingDual",
+   "results": "exteriorPower.pairingDual; exteriorPower.pairingDual_ιMulti_ιMulti; exteriorPower.pairingDual_apply_apply_eq_one_zero; exteriorPower.pairingDual_apply_apply_eq_one; exteriorPower.bijective_pairingDual; exteriorPower.pairingDual_apply_dualBasis_exteriorPower; exteriorPower.pairingDual_eq_dualBasis_constr",
+   "date": "2026-10-12",
+   "verdict": "ring-module pairing and basis results; no sheaf-level theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "exterior.*dual|dual.*exterior",
+   "results": "Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean; Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean; Mathlib/LinearAlgebra/ExteriorPower/Basis.lean; Mathlib/LinearAlgebra/ExteriorPower/Basis.lean; Mathlib/LinearAlgebra/ExteriorPower/Basis.lean",
+   "date": "2026-10-12",
+   "verdict": "ring-module pairing and basis results; no sheaf-level theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exterior powers of the dual of a sheaf determinant pairing",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DeterminantExteriorDualIso",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BRT final determinant inversion, finite-free local perfection of the determinant pairing",
+   "via": [
+    "lem-sc-determinant-dual-evaluation-dual-identification",
+    "lem-sc-determinant-dual-evaluation",
+    "lem-sc-shifted-determinant-dual-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/DeterminantDualPairingLocal.lean",
+  "declaration": "AlgebraicGeometry.exterior_dual_pairing_app_bijective",
+  "statement": "theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n : ℕ)\n    (f : Scheme.Modules.exteriorSheaf (Scheme.Modules.dual M) n ⟶\n      Scheme.Modules.dual (Scheme.Modules.exteriorSheaf M n))\n    (hf : ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U))\n      (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)),\n      (f.val.app (op U) (Scheme.Modules.exteriorSheafSection\n        (Scheme.Modules.dual M) n U φ)).app (op (Over.mk (𝟙 U)))\n        (Scheme.Modules.exteriorSheafSection M n U a) =\n      (Matrix.of fun i j ↦\n        (show X.presheaf.obj (op U) from\n          (φ j).app (op (Over.mk (𝟙 U))) (a i))).det)\n    (U : X.Opens) (r : ℕ)\n    (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r)))\n    (V : X.Opens) (g : V ⟶ U) :\n    Function.Bijective (f.val.app (op V))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T110308-L-617414",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T110308-L-617414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
