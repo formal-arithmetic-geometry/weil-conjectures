@@ -7931,3 +7931,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/S2/Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramArrows (stage 3; reviewer PASS; first push; landing 20261012T135314-L-1691477 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:53 L: merged deliver/S2/Sheaf.AlgebraicGeometry.EtaleCoproductCechRestriction (stage 3; reviewer PASS; first push; landing 20261012T135314-L-1691730 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/S2/Sheaf.Paper.DerivedTotalResolutionQuasiIso (stage 3; reviewer PASS; after a return; landing 20261012T135315-L-1691860 (interface); batch 20261012T135212; modules 3; new nodes 2)
+- 13:53 L: merged deliver/S2/Sheaf.RingTheory.FlatLocalDepthReduction (stage 3; reviewer PASS; first push; landing 20261012T135315-L-1691986 (proof); batch 20261012T135212; modules 1; new nodes 0)
