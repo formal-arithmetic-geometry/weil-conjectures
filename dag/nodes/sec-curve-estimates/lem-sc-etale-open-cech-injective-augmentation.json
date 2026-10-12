@@ -15,36 +15,40 @@
  ],
  "proof": [
   {
-   "text": "The open covering defines a covering sieve on top. Cover preservation pushes it to a covering sieve on i(top). Since i preserves finite limits and i(top) is terminal, i applied to a finite open product is a product of the image opens, equivalently their fibre product over i(top). The unique projection-compatible product isomorphisms commute with each omitted-factor map, so restriction along them identifies the alternating Cech complexes. Reindex the open family using ULift into universe u+1 when invoking the large-index etale acyclicity interface; the equivalence of tuple index types induces inverse product maps commuting with each differential.",
-   "uses": [
-    "def-weil-pbc-cech-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply injective_sheaf_cech_acyclic to the image covering and J. Transport the vanishing back through the projection-compatible complex isomorphism to obtain zero positive homology of Cech(U,i^*J). The single-term source has zero homology in positive degrees, so the induced maps there are isomorphisms between zero objects.",
-   "uses": [
-    "lem-weil-pbc-injective-sheaf-cech-acyclic"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In degree zero the differential says exactly that the restrictions to pairwise intersections agree. Apply the sheaf condition on the image covering: there is a unique section at i(top) giving any such compatible family. This is additive and its inverse is the canonical restriction map fixed by he. There is no incoming differential in degree zero, so this identifies the homology map of e with an isomorphism. The same sheaf condition forces sections to be zero for an empty cover, and the Cech terms are empty products, hence zero objects. Thus e is a quasi-isomorphism in all degrees.",
+   "text": "Finite-limit preservation makes i representably flat. Cover preservation then makes i continuous; apply op_comp_isSheaf to regard i.op composed with J.obj as an open sheaf. Prove degree-zero descent directly: the one-fold products cover top; the difference differential is compatibility on pairwise intersections; unique gluing identifies restriction with cycles. The component hypothesis he fixes e.f 0 to the restriction map by product projection uniqueness. CochainComplex.isIso_liftCycles_iff and ShortComplex.quasiIso_iff_of_zeros show that e is a quasi-isomorphism in degree zero. The proof works also for an empty cover.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The open cover generates a covering sieve on top. Push it through hc, then enlarge it to the same family indexed by ULift(iota), using Sieve.mem_ofArrows_iff. Apply [lem-sc-etale-open-cech-product-comparison] to identify the pulled-back open Cech complex with the lifted image-family Cech complex.",
+   "uses": [
+    "def-weil-pbc-cech-complex",
+    "lem-sc-etale-open-cech-product-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-injective-sheaf-cech-acyclic] to the lifted image covering and J. Transport its zero positive homology across homologyMapIso of the comparison. The single source is exact in every positive degree, so quasiIsoAt_iff_exactAt proves the positive-degree cases. Combine degree zero and successor degrees by the definition of QuasiIso.",
+   "uses": [
+    "lem-weil-pbc-injective-sheaf-cech-acyclic"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-cech-complex",
-  "lem-weil-pbc-injective-sheaf-cech-acyclic",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-sc-etale-open-cech-product-comparison",
+  "lem-weil-pbc-injective-sheaf-cech-acyclic"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/03AW",
-  "place": "Lemma 21.10.2 and its proof; finite-limit product comparison from original total-comparison steps 1 and 2"
+  "place": "Lemma 03AW positive vanishing and Tag 03AN degree-zero descent; product comparison as in the original proof step 1"
  },
  "mathlib_searches": [
   {
@@ -122,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-a3521",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T165512-L-2933202",
+  "landing": "20261012T194155-L-470170",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched both delivered theorems with their node statements and proof records; verified unchanged existing signature, clean compilation including the direct importer, and allowed axioms only."
  }
 }

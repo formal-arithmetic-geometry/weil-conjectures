@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-etale-open-cech-product-comparison",
+ "kind": "statement",
+ "title": "Finite-product and index-lift comparison for an open etale Cech row",
+ "statement": "Let X be a scheme [def-weil-pbc-scheme-conventions], let i : X.Opens → X.Etale preserve finite limits, and assume i(top) is terminal [def-weil-pbc-sites-and-cohomology]. For any u-small family U of opens (with no covering or finiteness assumption) and any presheaf P on X.Etale valued in AddCommGrpCat of universe u+1, the categorical Cech complex [def-weil-pbc-cech-complex] of U with coefficients i.op composed with P is isomorphic to the Cech complex of the family ULift(iota) indexed by s, with members i(U(s.down)) mapping to i(top), computed as products in Over(i(top)) with coefficients restricted from P. The index lift changes neither the terms nor their alternating differentials. This includes an empty index type.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AK",
+  "place": "Section 03AK (section-cech), alternating restriction formula; Definition 03AM (definition-cech-complex); finite-product comparison in lem-sc-etale-open-cech-injective-augmentation, proof step 1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "For a nonempty finite tuple, map the chosen open product fan along i. It remains limiting by finite-limit preservation. Regard its image as a fan in Over(i(top)); terminality supplies every required structure equation. The underlying limiting cone constructs the lift; its uniqueness proves uniqueness in the slice. Compare this fan with the chosen slice product by conePointUniqueUpToIso and forget the structure arrow. The inverse composite with each image projection is the corresponding slice projection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The tuple equivalence sends a lifted tuple to its pointwise down image. Reindex the product of coefficient groups by Pi.reindex and apply P contravariantly to the inverse product comparisons, obtaining the degreewise isomorphisms. This is a direct comparison of the categorical complexes of [def-weil-pbc-cech-complex].",
+   "uses": [
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every finite index map alpha, check the product comparison identity after composing with each image projection, using preservation of the product fan. It commutes with each omitted-factor map. Apply P and project the reindexed degreewise maps to each lifted tuple. The resulting face maps agree, hence so do their signed sums. HomologicalComplex.Hom.isoOfComponents assembles the isomorphism. Empty tuple-index products are handled by the same universal properties, without choosing a covering member.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/03AK",
+  "place": "Finite-product universal-property comparison of the categorical Cech complex, realizing step 1 of the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving finite products identifies Cech complexes and reindexing by an equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor",
+   "results": "CategoryTheory.cechComplexFunctor, the definition only; no comparison theorem",
+   "date": "2026-10-13",
+   "verdict": "No complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*[Ii]so|[Ii]so.*cech",
+   "results": "FormalCoproduct.cechIsoCechNerveApp and CechNerveTerminalFrom.iso compare Cech nerves, not a finite-limit-preserving functor or universe-lifted coefficient complexes. Local source reads found Pi.reindex, isLimitOfHasProductOfPreservesLimit and conePointUniqueUpToIso, which are used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "No complete match; elementary product comparison APIs used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sc-etale-open-cech-injective-augmentation, proof step 1 (finite-product and tuple-index comparison)",
+   "via": [
+    "lem-sc-etale-open-cech-injective-augmentation",
+    "lem-sc-etale-open-cech-resolution-total"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenCechProductComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenCechProductComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleOpenCechProductComparison",
+  "statement": "theorem etaleOpenCechProductComparison (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) [PreservesFiniteLimits i] (ht : IsTerminal (i.obj ⊤)) {ι : Type u} (U : ι → X.Opens) (P : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1}) : Nonempty ((cechComplexFunctor U).obj (i.op ⋙ P) ≅ (cechComplexFunctor (fun t : ULift.{u + 1} ι ↦ Over.mk (i.map (homOfLE (le_top (a := U t.down)))))).obj ((Over.forget (i.obj ⊤)).op ⋙ P))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3521",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194155-L-470170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a3521",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T194155-L-470170",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both delivered theorems with their node statements and proof records; verified unchanged existing signature, clean compilation including the direct importer, and allowed axioms only."
+ }
+}
