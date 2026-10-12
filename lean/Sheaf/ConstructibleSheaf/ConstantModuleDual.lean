@@ -7,6 +7,7 @@ module
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import Sheaf.ConstructibleSheaf.ConstantFiniteDual
 
 /-! # Dual of a finite constant module sheaf
 
@@ -44,6 +45,6 @@ theorem nonempty_constantModuleDualIso
     Nonempty ((ihom ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)).obj
       (𝟙_ _) ≅ (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (M →ₗ[Λ] Λ))) := by
-  sorry
+  exact nonempty_constant_finite_dual_iso X M
 
 end AlgebraicGeometry.Scheme
