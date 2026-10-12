@@ -6,6 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
+import Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions
+import Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer
 
 /-! # Eight assertions for constructible prime coefficients on reduced proper curves
 
@@ -219,6 +223,27 @@ theorem primeCoefficientCurveAssertions {k : Type u} [Field k] [IsAlgClosed k]
     {r : ℕ} [Fact r.Prime]
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))
     [Scheme.IsConstructibleSheaf F] :
-    IsCurve.Assertions (ULift.{u + 1} (ZMod r)) f F := by sorry
+    IsCurve.Assertions (ULift.{u + 1} (ZMod r)) f F := by
+  classical
+  let R := ULift.{u + 1} (ZMod r)
+  have hF : r • 𝟙 F = 0 := by
+    have hr : (r : R) = 0 := by simp [R]
+    rw [← Nat.cast_smul_eq_nsmul R, hr, zero_smul]
+  obtain ⟨n, U, _hdense, _hdisjoint, hirr, _hdim, hlc, hlocal⟩ :=
+    exists_dense_assertions_iff_forall_lowerShriek R f r F hF
+  apply hlocal.mpr
+  intro a
+  have : IrreducibleSpace (U a) := Subtype.irreducibleSpace (hirr a)
+  have := hlc a
+  let G := (Etale.upperStar (ModuleCat.{u + 1} R) (U a).ι).obj F
+  obtain ⟨V, v, hvfinite, hvetale, _hconnected, _d, _hdegree, _hfibres,
+    ⟨m, W, ι, hzero, hend, hquot⟩, ρ, hρ⟩ :=
+    Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction r G
+  have := hvfinite
+  have := hvetale
+  exact filteredFiniteCoverLowerShriekTransfer f (U a).ι r G v m W ι hzero hend hquot
+    ρ hρ (by
+      intro Y T g _ _ b _
+      exact reducedConstantLowerShriekAssertions g b r)
 
 end AlgebraicGeometry.IsCurve
