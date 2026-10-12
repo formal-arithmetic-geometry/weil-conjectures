@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
@@ -46,7 +48,15 @@ def fullAffineEtalePrecoverage (S : Scheme.{uS}) : Precoverage S.FullAffineEtale
 Proof: scheme pullbacks of affines over an affine are affine, and their structure maps to S
 are étale. Fullness transfers the scheme-theoretic universal property to this category. -/
 theorem fullAffineEtale_hasPullbacks (S : Scheme.{uS}) :
-    HasPullbacks S.FullAffineEtale := by sorry
+    HasPullbacks S.FullAffineEtale := by
+  let P : ObjectProperty S.Etale := fun U => IsAffine U.left
+  have : P.IsClosedUnderLimitsOfShape WalkingCospan := ⟨by
+    rintro X ⟨h⟩
+    let F := Etale.forget S ⋙ Over.forget S
+    have (j : WalkingCospan) : IsAffine ((h.diag ⋙ F).obj j) := h.prop_diag_obj j
+    exact Scheme.isAffine_of_isLimit (F.mapCone h.toLimitPresentation.cone)
+      (isLimitOfPreserves F h.isLimit)⟩
+  infer_instance
 
 attribute [instance] fullAffineEtale_hasPullbacks
 

@@ -13,9 +13,20 @@
   "document": "literature/stacks-project/topologies.tex",
   "place": "Definitions 0219 (definition-standard-etale), 021B(4) (definition-big-small-etale); site axioms 021C and fibre products 021D"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "For fullAffineEtale_hasPullbacks, map a limiting WalkingCospan cone through Etale.forget S followed by Over.forget S. The former preserves finite limits and the latter preserves connected limits. All diagram schemes are affine, so Mathlib AlgebraicGeometry.Scheme.isAffine_of_isLimit makes its cone point affine. This supplies the local ObjectProperty.IsClosedUnderLimitsOfShape instance; Mathlib hasLimitsOfShape_of_closedUnderLimits supplies pullbacks in the full subcategory. The pretopology and both sheafification theorems remain open with their existing documented arguments.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "kind": "written by agent",
+  "by": "G1 second reader",
+  "date": "2026-10-12",
+  "source": "Stacks Project, Topologies 021D; Mathlib AlgebraicGeometry.Scheme.isAffine_of_isLimit and CategoryTheory.Limits.hasLimitsOfShape_of_closedUnderLimits"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -110,5 +121,15 @@
   "group": "K1",
   "result": "pass",
   "note": "S arbitrary; S_aff,et = full subcategory IsAffine U.left of S.Etale with Fin-n etale jointly surjective coverings (0219/021B(4)); special cocontinuity via dependency module (landed IsSpecialCocontinuous needs Precoverage.IsStableUnderComposition, false for finite coverings: repeated-index counterexample verified against Mathlib's indexed class); sets and Ab restriction equivalences via sheafPushforwardContinuous; natural H^p comparison at each affine U with degree-0 identity on sections; U=S affine via Sheaf.functorH (stage-3 bridge per def-weil-pbc-etale-cohomology note); check_dag clean on branch"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053931-L-2634959",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
