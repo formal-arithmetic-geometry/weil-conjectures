@@ -9452,3 +9452,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: merged deliver/M1/Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional (stage 3; reviewer PASS; first push; landing 20261012T203944-L-830888 (proof); batch 20261012T203936; modules 1; new nodes 1)
 - 20:39 L: merged deliver/M3/Sheaf.Algebra.Homology.TorAmplitudeFlatModel (stage 3; reviewer PASS; first push; landing 20261012T203945-L-831000 (proof); batch 20261012T203936; modules 1; new nodes 0)
 - 20:39 L: merged deliver/N1/Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisExact (stage 3; reviewer PASS; first push; landing 20261012T203945-L-831157 (interface); batch 20261012T203936; modules 2; new nodes 1)
+- 20:39 L: merged deliver/N2/Sheaf.RingTheory.RegularSequencePermutationsSubsequences (stage 3; reviewer PASS; first push; landing 20261012T203945-L-831301 (proof); batch 20261012T203936; modules 1; new nodes 0)
