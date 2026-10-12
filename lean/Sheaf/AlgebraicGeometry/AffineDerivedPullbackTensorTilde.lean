@@ -14,6 +14,10 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
 
 /-! # Affine computations of derived pullback and tensor
 

@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
+import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-! # Vanishing for a dense-open closed complement after open restriction
 

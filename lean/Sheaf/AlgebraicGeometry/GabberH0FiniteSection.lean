@@ -11,6 +11,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.Paper.GabberZariskiEtaleRestrictionInjective
+import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.Topology.ClosedPushforwardConstantStalks
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
 
 /-! # Finite-cover sections before imposing the descent equation
 

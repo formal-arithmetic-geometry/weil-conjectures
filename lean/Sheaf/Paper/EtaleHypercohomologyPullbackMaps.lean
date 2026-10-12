@@ -17,6 +17,7 @@ import Sheaf.CategoryTheory.CartanEilenbergFunctorial
 import Sheaf.CategoryTheory.HypercohomologyFirstPage
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Construction and abutment comparison for termwise hypercohomology pullback
 

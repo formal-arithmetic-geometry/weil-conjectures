@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 import Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Injectivity of the constant-module continuity comparison
 

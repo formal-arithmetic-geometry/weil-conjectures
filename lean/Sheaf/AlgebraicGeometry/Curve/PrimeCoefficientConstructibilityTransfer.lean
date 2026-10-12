@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Data.ZMod.Basic
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.AlgebraicGeometry.FiniteLocalCyclicModuleForget
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 
 /-! # Prime-field coefficients on a prime-annihilated constructible sheaf
 

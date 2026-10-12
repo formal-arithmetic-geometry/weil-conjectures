@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 
 /-!
 # Reduction of constant module coefficients to cyclic abelian coefficients

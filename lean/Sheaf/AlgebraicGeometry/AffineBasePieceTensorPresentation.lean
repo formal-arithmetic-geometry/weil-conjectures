@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 
 /-!
 # Tensor-product presentation of an affine base piece

@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.GrothendieckComposablePair
 import Sheaf.CategoryTheory.CartanEilenbergExists
 import Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel
+import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 
 /-! # Comparing the Grothendieck edge with the cocycle quotient
 

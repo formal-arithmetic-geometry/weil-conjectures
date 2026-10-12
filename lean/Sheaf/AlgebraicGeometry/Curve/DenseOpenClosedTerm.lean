@@ -15,6 +15,7 @@ import Sheaf.Paper.ZeroDimensionalCohomology
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import WeilConjectures.SixFunctors.OpenClosed.Exact
+import Sheaf.AlgebraicGeometry.CurveCoefficientPair
 
 /-! # Acyclic closed term for a dense-open counit -/
 

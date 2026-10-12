@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-!
 # The cycle comparison for direct image before deriving

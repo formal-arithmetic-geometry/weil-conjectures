@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Finite local constancy after forgetting an abelian structure

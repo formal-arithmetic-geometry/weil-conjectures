@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-! # Local reflection of equality for the Zariski–étale unit
 Source: Stacks Project, Tag 09ZF, first proof paragraph.

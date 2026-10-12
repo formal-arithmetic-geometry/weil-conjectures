@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 import Sheaf.AlgebraicGeometry.Curve.PicAffineQuotient
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Affine Picard torsion under extension of algebraically closed fields

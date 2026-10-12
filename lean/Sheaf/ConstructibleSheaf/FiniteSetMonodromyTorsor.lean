@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 
 /-!
 # Connected monodromy torsors for finite sheaves of sets

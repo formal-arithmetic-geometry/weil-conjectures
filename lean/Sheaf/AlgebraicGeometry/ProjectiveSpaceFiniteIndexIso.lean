@@ -6,6 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Topology.GlueSheavesOfModules
 
 /-! # Reindexing finite projective space and its twisting module
 

@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 import Mathlib.CategoryTheory.Limits.Constructions.Filtered
+import Sheaf.Paper.PQFCohomology
 
 /-! # Finite-stage representatives for cohomology of a coproduct
 

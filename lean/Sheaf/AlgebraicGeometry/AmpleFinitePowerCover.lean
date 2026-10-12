@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # A finite affine section cover in one positive tensor power
 

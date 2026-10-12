@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # GabberPrincipalVanishingIdeal
 

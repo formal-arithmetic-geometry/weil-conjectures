@@ -8,6 +8,7 @@ public import Sheaf.AlgebraicGeometry.FiniteEtaleDescentData
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
 # Descent datum from finite etale local representatives

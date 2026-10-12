@@ -10,6 +10,9 @@ public import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.Filtration
 
 /-! # The second-filtration spectral sequence and its total abutment
 

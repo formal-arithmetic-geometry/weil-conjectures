@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Comparing tensor-pullback sections with the presheaf of module homomorphisms

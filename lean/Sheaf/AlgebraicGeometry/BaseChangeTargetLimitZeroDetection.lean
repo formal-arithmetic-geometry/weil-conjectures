@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Finite-stage detection of zero in target stalks
 

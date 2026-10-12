@@ -7,6 +7,11 @@ module
 
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.KInjectiveBridge
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.KInjectiveComputes
 
 /-! # The augmented Cartan--Eilenberg total complex
 

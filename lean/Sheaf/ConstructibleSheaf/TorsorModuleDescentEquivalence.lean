@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.NormalScheme
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Descent equivalence for a connected finite torsor

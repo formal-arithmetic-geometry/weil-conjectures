@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-!
 # Local vanishing of higher direct images with cyclic coefficients

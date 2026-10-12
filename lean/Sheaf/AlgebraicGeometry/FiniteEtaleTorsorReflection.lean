@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.CategoryTheory.Sites.Torsor
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
+import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Finite étale equivalences and transport of torsors

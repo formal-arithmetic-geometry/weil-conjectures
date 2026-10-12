@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
+import Sheaf.AlgebraicGeometry.DivisorClassCurve
 
 /-!
 # Exactness of Picard restriction at the boundary

@@ -8,6 +8,12 @@ module
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
+import Sheaf.Algebra.Homology.FilteredComplexZBDescription
+import Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence
+import Sheaf.CategoryTheory.CartanEilenbergExists
+import Sheaf.CategoryTheory.CartanEilenbergFunctorial
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.Paper.CartanEilenbergLeftExactCohomology
 
 /-! # CartanEilenbergPageRealization
 

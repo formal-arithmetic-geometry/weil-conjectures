@@ -6,6 +6,9 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-!
 # Acyclicity of a direct image of a K-injective complex

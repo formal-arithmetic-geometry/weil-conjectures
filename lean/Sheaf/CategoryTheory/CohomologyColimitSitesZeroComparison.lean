@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-! # The degree-zero stage comparison
 

@@ -19,6 +19,8 @@ import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 import Sheaf.Paper.ZeroDimensionalCohomology
 import WeilConjectures.SixFunctors.Finite.Exact
+import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Finite cohomology of the dense-open boundary
 

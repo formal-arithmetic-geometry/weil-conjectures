@@ -6,6 +6,11 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyMaps
+import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
+import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # A section-complex diagram computing étale Mayer–Vietoris pullback

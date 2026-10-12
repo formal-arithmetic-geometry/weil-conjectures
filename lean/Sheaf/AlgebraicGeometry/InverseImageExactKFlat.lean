@@ -9,6 +9,9 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Topology.InverseImageModule
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Topology.InverseImageStalk
 
 /-! # Exact inverse image and K-flat resolutions
 

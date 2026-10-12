@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-! # Degree-zero descent on a filtered colimit of sites.
 

@@ -6,6 +6,7 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Composition calculation for étale section comparisons
 

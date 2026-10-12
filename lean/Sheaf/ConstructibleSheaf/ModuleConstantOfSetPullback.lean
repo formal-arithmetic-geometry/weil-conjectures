@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.CategoryTheory.Sites.Adjunction
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Recovering constant modules from a constant underlying inverse image

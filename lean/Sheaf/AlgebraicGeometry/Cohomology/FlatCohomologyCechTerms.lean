@@ -10,6 +10,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Canonical degree maps for affine Cech base change
 

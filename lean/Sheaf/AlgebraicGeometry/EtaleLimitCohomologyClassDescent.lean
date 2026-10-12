@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.CategoryTheory.CohomologyColimitSites
 import Sheaf.CategoryTheory.ColimitSites
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Finite-stage representatives of limit cohomology classes
 

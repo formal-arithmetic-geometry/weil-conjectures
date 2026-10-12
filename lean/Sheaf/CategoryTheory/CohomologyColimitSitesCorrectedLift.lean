@@ -7,6 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.CategoryTheory.CohomologyColimitSitesClassDescent
+import Sheaf.Paper.ColimitSitesInjectiveSystem
 
 /-! # Corrected lifts for dimension shifting
 

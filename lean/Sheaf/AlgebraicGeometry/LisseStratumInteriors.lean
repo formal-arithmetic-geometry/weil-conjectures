@@ -7,6 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! Lissity on the union of the interiors of lisse strata. -/
 

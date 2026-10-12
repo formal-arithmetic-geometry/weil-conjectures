@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Pulling back the torsor of generators

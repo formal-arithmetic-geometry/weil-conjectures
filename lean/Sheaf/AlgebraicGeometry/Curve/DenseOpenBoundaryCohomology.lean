@@ -17,6 +17,8 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 import Sheaf.Paper.ZeroDimensionalCohomology
+import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Cohomology of the closed boundary of a dense open curve

@@ -6,6 +6,7 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Equality of projection pullbacks after restriction to the closed fibre
 

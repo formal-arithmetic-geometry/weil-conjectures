@@ -6,6 +6,7 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-!
 # Coherence of canonical unbounded derived direct images

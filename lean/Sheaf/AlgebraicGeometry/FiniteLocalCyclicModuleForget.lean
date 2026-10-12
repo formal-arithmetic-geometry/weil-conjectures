@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.Data.ZMod.Basic
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.Paper.SheavesKilledByNZmodModules
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Finite constant values for cyclic module sheaves
