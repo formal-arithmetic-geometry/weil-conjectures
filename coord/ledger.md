@@ -9518,3 +9518,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:56 L: merged deliver/X2/Sheaf.FieldTheory.ProjectiveMatrixDescent (stage 3; reviewer PASS; first push; landing 20261012T205633-L-933416 (interface); batch 20261012T205626; modules 4; new nodes 3)
 - 20:58 L: returned deliver/M1/Sheaf.CategoryTheory.ColimitSiteFiniteUnitZeroDetection (reviewer RETURN: (reviewer X-1e6db, head 1e6db9df6) 2: coord/changes/demote-comma-over-basic-import.md does not list the direct importer.)
 - 21:00 L: returned deliver/W3/Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceTermwise (reviewer RETURN: (the landing tools, head 093c7d9b4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 21:00 L: merged deliver/G1/Sheaf.RingTheory.MPseudoCoherentVanishingBase (stage 3; reviewer PASS; first push; landing 20261012T210028-L-953341 (proof); batch 20261012T210027; modules 1; new nodes 0)
