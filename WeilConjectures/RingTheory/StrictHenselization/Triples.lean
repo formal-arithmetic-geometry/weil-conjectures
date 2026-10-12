@@ -216,7 +216,50 @@ under `β₁ ⊗ β₂` coequalizes `β₁` and `β₂`, and `S'[1/u]` is an ét
 `1` in `K`. (This is the étale neighbourhood `S' ⊗_{S ⊗[R] S} S` of the blueprint.) -/
 lemma exists_hom_comp_eq_comp {t t' : EtaleTriple R p K} (f g : t ⟶ t') :
     ∃ (t'' : EtaleTriple R p K) (h : t' ⟶ t''), f ≫ h = g ≫ h := by
-  sorry
+  obtain ⟨e, he, hsp⟩ : ∃ e, IsIdempotentElem e ∧
+      KaehlerDifferential.ideal R t.S = Ideal.span {e} :=
+    (Ideal.isIdempotentElem_iff_of_fg _ (KaehlerDifferential.ideal_fg R t.S)).mp <|
+      (Ideal.cotangent_subsingleton_iff _).mp <| inferInstanceAs <| Subsingleton Ω[t.S⁄R]
+  let β : t.S ⊗[R] t.S →ₐ[R] t'.S :=
+    Algebra.TensorProduct.lift f.β g.β fun _ _ ↦ Commute.all _ _
+  have hβ : t'.toAlgHom.comp β = t.toAlgHom.comp (Algebra.TensorProduct.lmul' R) := by
+    ext a
+    · simpa [β] using congr($(f.toAlgHom_comp) a)
+    · simpa [β] using congr($(g.toAlgHom_comp) a)
+  have he₀ : Algebra.TensorProduct.lmul' R e = 0 := by
+    have : e ∈ KaehlerDifferential.ideal R t.S := hsp ▸ Ideal.mem_span_singleton_self e
+    exact this
+  let u := β (1 - e)
+  have hu : IsUnit (t'.toAlgHom u) := by
+    have : t'.toAlgHom u = 1 := by
+      change (t'.toAlgHom.comp β) (1 - e) = 1
+      rw [hβ, AlgHom.comp_apply, map_sub, he₀, map_one, sub_zero, map_one]
+    simp [this]
+  let S'' := Localization.Away u
+  let χ : S'' →ₐ[R] K := IsLocalization.liftAlgHom (M := Submonoid.powers u)
+    (f := t'.toAlgHom) (by rintro ⟨_, n, rfl⟩; simpa using hu.pow n)
+  let t'' := ofAlgHom (ker_algebraMap R p K) S'' χ
+  have hχ : t''.toAlgHom.comp (IsScalarTower.toAlgHom R t'.S S'') = t'.toAlgHom := by
+    rw [toAlgHom_ofAlgHom]
+    ext s
+    exact IsLocalization.lift_eq (S := Localization.Away u) _ s
+  refine ⟨t'', homMk (t' := t'') _ hχ, hom_ext ?_⟩
+  have hβe : algebraMap t'.S S'' (β e) = 0 := by
+    have h1 : IsUnit (algebraMap t'.S S'' u) := IsLocalization.Away.algebraMap_isUnit u
+    have h2 : algebraMap t'.S S'' (β e) * algebraMap t'.S S'' u = 0 := by
+      rw [← map_mul, ← map_mul, mul_sub, mul_one, he.eq, sub_self, map_zero, map_zero]
+    exact (h1.mul_left_eq_zero).mp h2
+  ext s
+  have hs : s ⊗ₜ[R] (1 : t.S) - 1 ⊗ₜ s ∈ Ideal.span {e} := by
+    rw [← hsp]
+    change Algebra.TensorProduct.lmul' R (s ⊗ₜ[R] (1 : t.S) - 1 ⊗ₜ s) = 0
+    simp
+  obtain ⟨x, hx⟩ := Ideal.mem_span_singleton'.mp hs
+  have : f.β s - g.β s = β x * β e := by
+    rw [← map_mul, hx, map_sub]
+    simp [β]
+  change algebraMap t'.S S'' (f.β s) = algebraMap t'.S S'' (g.β s)
+  rw [← sub_eq_zero, ← map_sub, this, map_mul, hβe, mul_zero]
 
 instance : IsFiltered (EtaleTriple R p K) where
   cocone_objs t t' := exists_hom_hom t t'
