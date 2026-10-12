@@ -26,160 +26,53 @@
  ],
  "proof": [
   {
-   "text": "*Reduction to smooth ring maps.* By [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is smooth [def-sbc-smooth-morphisms] if and only if $A\\to B$ is a smooth ring map [def-weil-pbc-smooth-ring-map]: $B$ is a finitely presented $A$-algebra, $H_1(L_{B/A})=0$ and $\\Omega_{B/A}$ is a finite projective $B$-module. So it suffices to prove the following claim $(\\ast)$ for every commutative ring $A$, ideal $J\\subseteq A$, smooth ring map $A\\to B$ and homomorphism of $A$-algebras $\\sigma:B\\to A/J$: there are a ring map $A\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale such that $\\alpha:A/J\\to A'/JA'$ is an isomorphism, and an $A$-algebra map $\\tilde\\sigma:B\\to A'$ with $q\\circ\\tilde\\sigma=\\alpha\\circ\\sigma$. Throughout, put $N=\\ker\\sigma\\subseteq B$. Since $\\sigma$ is a homomorphism of $A$-algebras and $A\\to A/J$ is surjective, $\\sigma$ is surjective and induces an isomorphism of $A$-algebras $\\bar\\sigma:B/N\\to A/J$; and $JB\\subseteq N$ (as $\\sigma(j\\cdot1)=\\pi(j)=0$). Through $\\bar\\sigma$, every $B/N$-module is an $A/J$-module.",
+   "text": "Apply exists_etale_neighbourhoods_of_smooth_section to obtain E,jE,tauE with tauE o jE=sigma and etale principal neighbourhoods at every prime containing ker tauE.",
    "uses": [
-    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-smooth-ring-map"
+    "lem-weil-pbc-smooth-section-etale-neighbourhoods"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7 (lemma-lift-section-smooth-morphism, line 2139): 'B is a smooth A-algebra' is a smooth ring map; first sentence of the proof ('Let J be the kernel of B -> A/I so that B/J = A/I')"
-   }
+   "elementary": false
   },
   {
-   "text": "*The conormal module $N/(N^2+JB)$.* Apply [lem-weil-pbc-smooth-conormal-sequence-exact] to the smooth ring map $A\\to B$, the surjection $\\pi:A\\to A/J$ and $\\beta=\\sigma$: the sequence of $A/J$-modules $0\\to J/J^2\\xrightarrow{u}N/N^2\\xrightarrow{v}\\Omega_{B/A}\\otimes_BB/N\\to0$ is exact, $u$ induced by $A\\to B$ and $v(b\\bmod N^2)=\\mathrm db\\otimes1$. The image of $u$ is $(J\\cdot1+N^2)/N^2$, and $J\\cdot1+N^2=JB+N^2$: for $b\\in B$ and $j\\in J$ choose $a\\in A$ with $\\sigma(b)=\\pi(a)$; then $b-a\\cdot1\\in N$ and $j\\cdot1\\in N$, so $bj-aj\\cdot1=(b-a\\cdot1)(j\\cdot1)\\in N^2$. Hence $v$ induces an isomorphism of $A/J$-modules $$\\overline P:=N/(N^2+JB)\\xrightarrow{\\ \\sim\\ }\\Omega_{B/A}\\otimes_BB/N,\\qquad f\\bmod(N^2+JB)\\mapsto\\mathrm df\\otimes1.$$ Since $\\Omega_{B/A}$ is a direct summand of a finite free $B$-module [def-weil-pbc-smooth-ring-map], $\\Omega_{B/A}\\otimes_BB/N$ is a direct summand of a finite free $B/N$-module; so $\\overline P$ is a finite projective $A/J$-module.",
+   "text": "Apply exists_etale_localization_of_prime_mem to E and ker tauE. Obtain h invertible modulo the kernel and C=E_h etale over A.",
    "uses": [
-    "lem-weil-pbc-smooth-conormal-sequence-exact",
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-kahler-differentials"
+    "lem-weil-pbc-etale-localize-upstairs"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, first paragraph: 'By Algebra, Lemma 06A9 the sequence 0 -> I/I^2 -> J/J^2 -> Omega_{B/A} (x)_B B/J -> 0 is split exact. Thus P-bar = J/(J^2 + IB) = Omega_{B/A} (x)_B B/J is a finite projective A/I-module.' (the identification of the image of I/I^2 with (IB + J^2)/J^2 written out by the agent)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The free case: choice of $f_1,\\dots,f_n$ and the ring $C$.* Assume in this and the next three steps the extra hypothesis (F): $\\overline P=N/(N^2+JB)$ is a free $A/J$-module with a basis of $n$ elements. Choose $f_1,\\dots,f_n\\in N$ whose classes form a basis of $\\overline P$, let $\\mathfrak f=(f_1,\\dots,f_n)\\subseteq B$ and $C=B/\\mathfrak f$, an $A$-algebra via $A\\to B\\to C$. $C$ is a finitely presented $A$-algebra: if $B\\cong A[x_1,\\dots,x_m]/(g_1,\\dots,g_k)$ and $F_i\\in A[x_1,\\dots,x_m]$ lift $f_i$, then $C\\cong A[x_1,\\dots,x_m]/(g_1,\\dots,g_k,F_1,\\dots,F_n)$. Since $\\mathfrak f\\subseteq N$, $\\sigma$ factors as $B\\to C\\xrightarrow{\\tau}A/J$, $\\tau$ a surjective homomorphism of $A$-algebras with $\\ker\\tau=NC=N/\\mathfrak f$. By step 2, the elements $\\mathrm df_i\\otimes1$ ($i=1,\\dots,n$) form a basis of the $B/N$-module $\\Omega_{B/A}\\otimes_BB/N$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, second paragraph: 'choose f_1, ..., f_n in J which map to a basis of J/(J^2 + IB). Consider the finitely presented A-algebra C = B/(f_1, ..., f_n)'"
-   }
+   "text": "Map the unit h modulo ker tauE through RingHom.kerLift tauE. Extend tauE to tau:C -> A/J by IsLocalization.Away.liftAlgHom, and set j=(E -> C) o jE. The formula for the lift on E gives tau o j=sigma.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false
   },
   {
-   "text": "*The free case: the Jacobi-Zariski sequence of $C$.* Since $A\\to B$ is smooth, $H_1(L_{B/A})=0$ and $\\Omega_{B/A}$ is (finite) projective [def-weil-pbc-smooth-ring-map], so [lem-weil-pbc-jacobi-zariski-quotient-smooth] applied to $A\\to B$ and $\\mathfrak a=\\mathfrak f$ gives an exact sequence of $C$-modules $$0\\to H_1(L_{C/A})\\to\\mathfrak f/\\mathfrak f^2\\xrightarrow{\\ \\delta\\ }C\\otimes_B\\Omega_{B/A}\\xrightarrow{\\ w\\ }\\Omega_{C/A}\\to0,\\qquad\\delta(f_i\\bmod\\mathfrak f^2)=1\\otimes\\mathrm df_i.$$ Localization is exact, so for every prime $\\bar{\\mathfrak q}$ of $C$ the localized sequence is exact, and $H_1(L_{C/A})_{\\bar{\\mathfrak q}}=\\ker\\delta_{\\bar{\\mathfrak q}}$, $(\\Omega_{C/A})_{\\bar{\\mathfrak q}}=\\operatorname{coker}\\delta_{\\bar{\\mathfrak q}}$.",
+   "text": "Apply the quotient cutout theorem to C,tau to obtain g and t:D/JD -> A/J for D=C_g, with t(q(c/1))=tau(c).",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-quotient-smooth",
-    "def-weil-pbc-smooth-ring-map"
+    "lem-weil-pbc-etale-section-quotient-cutout"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, second paragraph: 'Note that we have an exact sequence 0 -> H_1(L_{C/A}) -> (f_1, ..., f_n)/(f_1, ..., f_n)^2 -> Omega_{B/A} (x)_B C -> Omega_{C/A} -> 0 see Algebra, Lemma 00S2 (note that H_1(L_{B/A}) = 0 and that Omega_{B/A} is finite projective, in particular flat so the Tor group vanishes)'"
-   }
+   "elementary": false
   },
   {
-   "text": "*The free case: $\\delta$ is an isomorphism at every prime containing $NC$.* Let $\\mathfrak q\\subset B$ be a prime with $N\\subseteq\\mathfrak q$ (so $\\mathfrak f\\subseteq\\mathfrak q$) and $\\bar{\\mathfrak q}=\\mathfrak q/\\mathfrak f$ the corresponding prime of $C$; these $\\bar{\\mathfrak q}$ are exactly the primes of $C$ containing $NC$. (a) *Rank.* As $\\Omega_{B/A}$ is finite projective, $(\\Omega_{B/A})_{\\mathfrak q}$ is a finite free $B_{\\mathfrak q}$-module, of some rank $r$ [lem-weil-pbc-finite-projective-rank-locally-constant]. With $\\kappa=\\kappa(\\mathfrak q)$, $\\dim_\\kappa\\Omega_{B/A}\\otimes_B\\kappa=r$; but $B\\to\\kappa$ factors through $B/N$ (as $N\\subseteq\\mathfrak q$), so $\\Omega_{B/A}\\otimes_B\\kappa=(\\Omega_{B/A}\\otimes_BB/N)\\otimes_{B/N}\\kappa$ is free over $\\kappa$ with basis the images of $\\mathrm df_1,\\dots,\\mathrm df_n$ (step 3). Hence $r=n$. (b) *Surjectivity.* $(C\\otimes_B\\Omega_{B/A})_{\\bar{\\mathfrak q}}=(\\Omega_{B/A})_{\\mathfrak q}/\\mathfrak f(\\Omega_{B/A})_{\\mathfrak q}$ is a free $C_{\\bar{\\mathfrak q}}$-module of rank $n$, finitely generated over the local ring $C_{\\bar{\\mathfrak q}}$ with residue field $\\kappa$, and modulo the maximal ideal it is $\\Omega_{B/A}\\otimes_B\\kappa$, spanned by the images of $1\\otimes\\mathrm df_i=\\delta(f_i)$. By Nakayama [lem-weil-pbc-nakayama-local-generators] the elements $\\delta(f_i)$ generate $(C\\otimes_B\\Omega_{B/A})_{\\bar{\\mathfrak q}}$, i.e. $\\delta_{\\bar{\\mathfrak q}}$ is surjective. (c) *Injectivity.* Let $\\psi:C_{\\bar{\\mathfrak q}}^{\\oplus n}\\to(\\mathfrak f/\\mathfrak f^2)_{\\bar{\\mathfrak q}}$, $e_i\\mapsto f_i$; it is surjective since the $f_i$ generate $\\mathfrak f$. Choose an isomorphism $\\theta:(C\\otimes_B\\Omega_{B/A})_{\\bar{\\mathfrak q}}\\cong C_{\\bar{\\mathfrak q}}^{\\oplus n}$ (by (b), rank $n$). Then $\\theta\\circ\\delta_{\\bar{\\mathfrak q}}\\circ\\psi$ is a surjective endomorphism of the finite $C_{\\bar{\\mathfrak q}}$-module $C_{\\bar{\\mathfrak q}}^{\\oplus n}$, hence an isomorphism [lem-weil-pbc-finite-module-surjective-endomorphism-bijective]. So $\\psi$ is injective, hence an isomorphism, and $\\delta_{\\bar{\\mathfrak q}}=\\theta^{-1}\\circ(\\theta\\delta_{\\bar{\\mathfrak q}}\\psi)\\circ\\psi^{-1}$ is an isomorphism. By step 4, $H_1(L_{C/A})_{\\bar{\\mathfrak q}}=0$ and $(\\Omega_{C/A})_{\\bar{\\mathfrak q}}=0$.",
+   "text": "Principal localization is etale, and compose with A -> C to get A -> D etale. Take alpha=t inverse and tilde sigma=(C -> D) o j. For b in B, apply the injective t to both sides of the requested equation; the cutout formula makes its left side tau(j(b))=sigma(b), while t(alpha(sigma(b)))=sigma(b).",
    "uses": [
-    "lem-weil-pbc-finite-projective-rank-locally-constant",
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, second paragraph: 'For any prime q containing J of B the module Omega_{B/A,q} is free of rank n because Omega_{B/A} is finite projective and because Omega_{B/A} (x)_B B/J is free of rank n (see Algebra, Lemma 00NX). By our choice of f_1, ..., f_n the map ((f)/(f)^2)_q -> Omega_{B/A,q} is surjective modulo J. Hence ... has to be an isomorphism (by Algebra, Lemma 00DV the map is surjective and for example by Algebra, Lemma 05G8 because ((f)/(f)^2)_q is generated by n elements the map is injective). Thus H_1(L_{C/A})_q = 0 and Omega_{C/A,q} = 0.'"
-   }
-  },
-  {
-   "text": "*The free case: an etale localization $C_h$.* By step 5 and [lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing] (applied to the finitely presented $A$-algebra $C$, step 3), for every prime $\\bar{\\mathfrak q}$ of $C$ containing $NC$ there is $h'\\in C\\setminus\\bar{\\mathfrak q}$ with $\\operatorname{Spec}C_{h'}\\to\\operatorname{Spec}A$ etale [def-weil-etale-morphism]. By [lem-weil-pbc-etale-localize-upstairs] (with $B:=C$, $\\mathfrak b:=NC$) there is $h\\in C$ whose image in $C/NC$ is a unit such that $\\operatorname{Spec}C_h\\to\\operatorname{Spec}A$ is etale. Since $\\tau:C\\to A/J$ has kernel $NC$, $\\tau(h)$ is a unit of $A/J$, so $\\tau$ extends to a homomorphism of $A$-algebras $\\tau_h:C_h\\to A/J$, $c/h^k\\mapsto\\tau(c)\\tau(h)^{-k}$, with kernel $NC_h\\supseteq JC_h$.",
-   "uses": [
-    "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
-    "lem-weil-pbc-etale-localize-upstairs",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, second paragraph: 'By Algebra, Lemma 07BU we see that A -> C is smooth at the prime q-bar of C corresponding to q. Since Omega_{C/A,q} = 0 it is actually etale at q-bar. Thus A -> C is etale at all primes of C containing JC. By Lemma 07M0 we can find an f in C mapping to an invertible element of C/JC such that A -> C_f is etale. By our choice of f it is still true that C_f/JC_f = A/I.'"
-   }
-  },
-  {
-   "text": "*The free case: cutting out $A/J$ by an idempotent, and conclusion.* Put $S=C_h/JC_h$, an $A/J$-algebra via $A\\to C_h$; by [lem-weil-pbc-etale-quotient-base-change] (applied to $A\\to C_h$ and $J$), $\\operatorname{Spec}S\\to\\operatorname{Spec}(A/J)$ is etale. $\\tau_h$ induces $s:S\\to A/J$, a homomorphism of $A$-algebras, hence of $A/J$-algebras. By [lem-weil-pbc-etale-section-idempotent-splitting] there is an idempotent $e\\in S$ with $s(e)=1$ such that $s$ induces an isomorphism of $A/J$-algebras $s_e:S_e\\to A/J$. Choose $g\\in C_h$ mapping to $e$ and put $A'=(C_h)_g$. By [lem-weil-pbc-lift-invertible-element] (1), applied to the ring $C_h$, the element $g$ and the ideal $(1-g)C_h$ (modulo which $g$ is $1$, a unit), $\\operatorname{Spec}A'\\to\\operatorname{Spec}C_h$ is etale; composing with the etale $\\operatorname{Spec}C_h\\to\\operatorname{Spec}A$ (step 6), $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is etale [lem-weil-pbc-etale-composition-cancellation] (2). Localization commutes with quotients, so $A'/JA'=(C_h)_g/J(C_h)_g\\cong S_e$; let $t:A'/JA'\\to A/J$ be this isomorphism followed by $s_e$, an isomorphism of $A$-algebras. Then $t\\circ\\alpha:A/J\\to A/J$ is a homomorphism of $A$-algebras, hence the identity; so $\\alpha=t^{-1}$ is an isomorphism. Let $\\tilde\\sigma:B\\to C\\to C_h\\to A'$ be the composite of the canonical $A$-algebra maps. For $b\\in B$, $t(q(\\tilde\\sigma(b)))=\\tau_h(\\bar b/1)=\\tau(\\bar b)=\\sigma(b)=t(\\alpha(\\sigma(b)))$; since $t$ is injective, $q\\circ\\tilde\\sigma=\\alpha\\circ\\sigma$. This proves $(\\ast)$ under (F).",
-   "uses": [
-    "lem-weil-pbc-etale-quotient-base-change",
-    "lem-weil-pbc-etale-section-idempotent-splitting",
-    "lem-weil-pbc-lift-invertible-element",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, last sentences: 'The map C_f/IC_f -> A/I is surjective and etale by Algebra, Lemma 00U7. Hence A/I is isomorphic to the localization of C_f/IC_f at some element g in C, see Algebra, Lemma 00U8. Set A' = C_{fg} to conclude the proof.' (00U7 and 00U8 are carried by lem-weil-pbc-etale-section-idempotent-splitting; the verification of alpha and of the lift written out by the agent)"
-   }
-  },
-  {
-   "text": "*The case (H): adding a symmetric algebra.* Assume now hypothesis (H): there are $n\\ge0$ and a finite projective $A$-module $Q$ with an isomorphism of $A/J$-modules $\\overline P\\oplus Q/JQ\\cong(A/J)^{\\oplus n}$. Let $\\operatorname{Sym}_A(Q)$ be the symmetric algebra and $\\iota:Q\\to\\operatorname{Sym}_A(Q)$ [lem-weil-pbc-symmetric-algebra-universal-property]. It is the quotient of the tensor algebra by the ideal generated by the $x\\otimes y-y\\otimes x$, which is homogeneous and lies in degrees $\\ge2$; so $\\operatorname{Sym}_A(Q)=\\bigoplus_{d\\ge0}\\operatorname{Sym}^d(Q)$ is graded, $\\operatorname{Sym}^0=A$, $\\iota:Q\\xrightarrow{\\sim}\\operatorname{Sym}^1$, and $\\operatorname{Sym}^d$ is spanned by products of $d$ elements of $\\iota(Q)$. Let $\\varepsilon:\\operatorname{Sym}_A(Q)\\to A$ be the $A$-algebra map with $\\varepsilon\\circ\\iota=0$ (universal property); it is the projection to degree $0$. Put $B'=B\\otimes_A\\operatorname{Sym}_A(Q)$, $j:B\\to B'$, $b\\mapsto b\\otimes1$, and $p=\\mathrm{id}_B\\otimes\\varepsilon:B'\\to B$, a $B$-algebra map with $p\\circ j=\\mathrm{id}_B$. *Smoothness:* $A\\to\\operatorname{Sym}_A(Q)$ is smooth [lem-weil-pbc-symmetric-algebra-finite-projective-smooth], so $j:B\\to B\\otimes_A\\operatorname{Sym}_A(Q)$ is smooth (base change) and $A\\to B\\to B'$ is smooth (composition) [lem-weil-pbc-smooth-ring-map-base-change-composition]. Put $\\sigma'=\\sigma\\circ p:B'\\to A/J$, an $A$-algebra map, and $N'=\\ker\\sigma'$. *Computation of $N'/(N'^2+JB')$:* as $B$-modules $B'=\\bigoplus_{d\\ge0}B\\otimes_A\\operatorname{Sym}^d(Q)$ with degree $0$ part $j(B)$, and $\\mathfrak k:=\\ker p=\\bigoplus_{d\\ge1}B\\otimes_A\\operatorname{Sym}^d(Q)$; so $N'=p^{-1}(N)=j(N)\\oplus\\mathfrak k$. Then $N'^2=j(N^2)+N\\mathfrak k+\\mathfrak k^2$ and $JB'=j(JB)\\oplus J\\mathfrak k$, with $N\\mathfrak k,J\\mathfrak k,\\mathfrak k^2\\subseteq\\mathfrak k$, so $N'^2+JB'=j(N^2+JB)\\oplus(N\\mathfrak k+J\\mathfrak k+\\mathfrak k^2)$ and $N'/(N'^2+JB')\\cong N/(N^2+JB)\\oplus\\mathfrak k/(N\\mathfrak k+J\\mathfrak k+\\mathfrak k^2)$. Since $\\mathfrak k^2=\\bigoplus_{d\\ge2}B\\otimes_A\\operatorname{Sym}^d(Q)$, $\\mathfrak k=(B\\otimes_AQ)\\oplus\\mathfrak k^2$, and modulo $\\mathfrak k^2$ the submodule $N\\mathfrak k+J\\mathfrak k$ is $(N+JB)(B\\otimes_AQ)=N(B\\otimes_AQ)$ (as $JB\\subseteq N$). Hence $\\mathfrak k/(N\\mathfrak k+J\\mathfrak k+\\mathfrak k^2)\\cong(B/N)\\otimes_AQ\\cong(A/J)\\otimes_AQ=Q/JQ$ via $\\bar\\sigma$. These are isomorphisms of modules over $B'/N'=B/N\\cong A/J$, so $N'/(N'^2+JB')\\cong\\overline P\\oplus Q/JQ\\cong(A/J)^{\\oplus n}$: $(A\\to B',\\sigma')$ satisfies (F). By steps 3-7 there are $A\\to A'$ etale with $\\alpha$ an isomorphism and $\\tilde\\sigma':B'\\to A'$ with $q\\circ\\tilde\\sigma'=\\alpha\\circ\\sigma'$. Then $\\tilde\\sigma=\\tilde\\sigma'\\circ j$ is an $A$-algebra map and $q\\circ\\tilde\\sigma=\\alpha\\circ\\sigma'\\circ j=\\alpha\\circ\\sigma\\circ p\\circ j=\\alpha\\circ\\sigma$. This proves $(\\ast)$ under (H).",
-   "uses": [
-    "lem-weil-pbc-symmetric-algebra-universal-property",
-    "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, first paragraph: 'Set B' = B (x)_A Sym_A^*(K). Since A -> Sym_A^*(K) is smooth by Lemma 07M6 we see that B -> B' is smooth which in turn implies that A -> B' is smooth (see Algebra, Lemmas 00T4 and 00TC). Moreover the section Sym^*_A(K) -> A determines a section B' -> B ... We have JB' in J' and B (x)_A K in J'. These maps combine to give an isomorphism (A/I)^n = J/(J^2 + IB) (+) K-bar -> J'/((J')^2 + IB'). Thus, after replacing B by B' we may assume that J/(J^2 + IB) is a free A/I-module of rank n.' (the composition is Algebra 00TD; the computation of J'/((J')^2 + IB') written out by the agent)"
-   }
-  },
-  {
-   "text": "*The general case: lifting a complement over an etale neighbourhood.* Let $A\\to B$, $\\sigma$ be arbitrary. By step 2, $\\overline P$ is finite projective over $A/J$, so there are $n\\ge0$ and an $A/J$-module $\\overline K$ with $\\overline P\\oplus\\overline K\\cong(A/J)^{\\oplus n}$; $\\overline K$ is finite projective. By [lem-weil-pbc-lift-projective-module-etale] there are a ring map $A\\to A_1$ with $\\operatorname{Spec}A_1\\to\\operatorname{Spec}A$ etale and $\\alpha_1:A/J\\to A_1/JA_1$ an isomorphism, and a finite projective $A_1$-module $Q$ with $Q/JQ\\cong\\overline K\\otimes_{A/J}A_1/JA_1$. Put $B_1=A_1\\otimes_AB$, $\\iota_1:B\\to B_1$, $b\\mapsto1\\otimes b$; $A_1\\to B_1$ is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition] (1). Let $\\sigma_1:B_1\\to A_1/JA_1$ be the $A_1$-algebra map $a\\otimes b\\mapsto\\bar a\\,\\alpha_1(\\sigma(b))$ (universal property of $\\otimes_A$), so $\\sigma_1\\circ\\iota_1=\\alpha_1\\circ\\sigma$, and $N_1=\\ker\\sigma_1$, $\\overline P_1=N_1/(N_1^2+JB_1)$. By step 2 for $(A_1,JA_1,B_1,\\sigma_1)$ and [lem-weil-pbc-kahler-differentials-base-change], $$\\overline P_1\\cong\\Omega_{B_1/A_1}\\otimes_{B_1}B_1/N_1\\cong(B_1\\otimes_B\\Omega_{B/A})\\otimes_{B_1}(A_1/JA_1)\\cong\\Omega_{B/A}\\otimes_B(A_1/JA_1)\\cong(\\Omega_{B/A}\\otimes_BB/N)\\otimes_{A/J}A_1/JA_1\\cong\\overline P\\otimes_{A/J}A_1/JA_1,$$ where $B$ acts on $A_1/JA_1$ through $\\sigma_1\\circ\\iota_1=\\alpha_1\\circ\\sigma$ (associativity of $\\otimes$). Hence $\\overline P_1\\oplus Q/JQ\\cong(\\overline P\\oplus\\overline K)\\otimes_{A/J}A_1/JA_1\\cong(A_1/JA_1)^{\\oplus n}$: $(A_1,JA_1,A_1\\to B_1,\\sigma_1)$ satisfies (H) (note $(JA_1)B_1=JB_1$).",
-   "uses": [
-    "lem-weil-pbc-lift-projective-module-etale",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-smooth-conormal-sequence-exact",
-    "lem-weil-pbc-kahler-differentials-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, first paragraph: 'Choose an integer n and a direct sum decomposition A/I^n = P-bar (+) K-bar. By Lemma 07M5 we can find an etale ring map A -> A' which induces an isomorphism A/I -> A'/IA' and a finite projective A-module K which lifts K-bar. We may and do replace A by A'.' (that the replacement keeps P-bar, by base change of differentials, Algebra Lemma 00RV, written out by the agent)"
-   }
-  },
-  {
-   "text": "*The general case: conclusion.* By step 8 applied to $(A_1,JA_1,B_1,\\sigma_1)$ there are a ring map $A_1\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A_1$ etale and $\\beta:A_1/JA_1\\to A'/(JA_1)A'=A'/JA'$ an isomorphism, and an $A_1$-algebra map $\\tilde\\sigma_1:B_1\\to A'$ with $q\\circ\\tilde\\sigma_1=\\beta\\circ\\sigma_1$. Then $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ is the composite of the etale morphisms $\\operatorname{Spec}A'\\to\\operatorname{Spec}A_1\\to\\operatorname{Spec}A$, hence etale [lem-weil-pbc-etale-composition-cancellation] (2); the map $A/J\\to A'/JA'$ induced by $A\\to A_1\\to A'$ is $\\alpha=\\beta\\circ\\alpha_1$, an isomorphism; and $\\tilde\\sigma=\\tilde\\sigma_1\\circ\\iota_1:B\\to A'$ is a homomorphism of $A$-algebras with $q\\circ\\tilde\\sigma=\\beta\\circ\\sigma_1\\circ\\iota_1=\\beta\\circ\\alpha_1\\circ\\sigma=\\alpha\\circ\\sigma$. This proves $(\\ast)$, hence the lemma (step 1).",
-   "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07M7, proof, first paragraph ('We may and do replace A by A''), the composition written out by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-  "def-sbc-smooth-morphisms",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-smooth-conormal-sequence-exact",
-  "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-jacobi-zariski-quotient-smooth",
-  "lem-weil-pbc-finite-projective-rank-locally-constant",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective",
-  "lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing",
-  "lem-weil-pbc-etale-localize-upstairs",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-etale-quotient-base-change",
-  "lem-weil-pbc-etale-section-idempotent-splitting",
-  "lem-weil-pbc-lift-invertible-element",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-symmetric-algebra-universal-property",
-  "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "lem-weil-pbc-lift-projective-module-etale",
-  "lem-weil-pbc-kahler-differentials-base-change"
+  "lem-weil-pbc-etale-localize-upstairs",
+  "lem-weil-pbc-etale-section-quotient-cutout",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-smooth-section-etale-neighbourhoods"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07M7 (lemma-lift-section-smooth-morphism, line 2139) and its proof, with Algebra Lemmas 06A9, 00S2, 00NX, 00DV, 05G8, 07BU, 00U7, 00U8, 00T4, 00TD, 00RV and More on Algebra Lemmas 07M5, 07M6, 07M0; the reduction steps that Stacks states without computation (image of I/I^2, the conormal module of B (x) Sym(K), the base change to A', the final verification of alpha and the lift) written out by the agent"
+  "by": "worker",
+  "group": "R2",
+  "date": "2026-10-12",
+  "description": "Compiled reduction: construction of etale neighbourhoods along the kernel split off; global localization, quotient cutout and lift compatibility fully proved. Same Tag 07M7 route, unchanged signature."
  },
  "mathlib_searches": [
   {
@@ -248,7 +141,7 @@
  "lean": {
   "module": "Sheaf.Paper.SmoothSectionEtaleLift",
   "declaration": "AlgebraicGeometry.exists_etale_lift_of_smooth",
-  "statement": "theorem exists_etale_lift_of_smooth (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] (J : Ideal A) (σ : B →ₐ[A] A ⧸ J) (hB : Smooth (Scheme.Spec.map (CommRingCat.ofHom (algebraMap A B)).op)) : ∃ (A' : CommAlgCat.{u} A), Etale (Scheme.Spec.map (CommRingCat.ofHom (algebraMap A A')).op) ∧ ∃ (α : A ⧸ J →ₐ[A] A' ⧸ (J.map (algebraMap A A'))), Function.Bijective α ∧ ∃ (tildeσ : B →ₐ[A] A'), Ideal.Quotient.mk (J.map (algebraMap A A')) ∘ tildeσ = α.toRingHom ∘ σ.toRingHom",
+  "statement": "theorem exists_etale_lift_of_smooth\n    (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]\n    (J : Ideal A) (σ : B →ₐ[A] A ⧸ J)\n    (hB : Smooth (Scheme.Spec.map (CommRingCat.ofHom (algebraMap A B)).op)) :\n    ∃ (A' : CommAlgCat.{u} A),\n      Etale (Scheme.Spec.map (CommRingCat.ofHom (algebraMap A A')).op) ∧\n      ∃ (α : A ⧸ J →ₐ[A]\n          A' ⧸ (J.map (algebraMap A A'))),\n        Function.Bijective α ∧\n        ∃ (tildeσ : B →ₐ[A] A'),\n          Ideal.Quotient.mk (J.map (algebraMap A A')) ∘ tildeσ =\n            α.toRingHom ∘ σ.toRingHom",
   "by": "H1",
   "date": "2026-10-11",
   "file": "lean/Sheaf/Paper/SmoothSectionEtaleLift.lean",
@@ -262,5 +155,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085329-L-35620",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

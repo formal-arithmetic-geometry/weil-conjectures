@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-etale-section-quotient-cutout",
+ "kind": "statement",
+ "title": "Cutting out a section modulo an ideal from an étale algebra",
+ "statement": "Let $A$ and $C$ be commutative rings with an $A$-algebra structure on $C$, let $J\\subseteq A$ be an ideal and $\\tau:C\\to A/J$ an $A$-algebra homomorphism. Assume $\\operatorname{Spec}C\\to\\operatorname{Spec}A$ is etale [def-weil-etale-morphism]. Then there exist $g\\in C$ and an $A$-algebra isomorphism $t:C_g/JC_g\\to A/J$, where $C_g$ is the principal localization [def-weil-ring-localization-away], such that $t(q(c/1))=\\tau(c)$ for every $c\\in C$, with $q:C_g\\to C_g/JC_g$ the quotient map.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M7 (lemma-lift-section-smooth-morphism), last paragraph, with Algebra Tags 00U7, 00U8, 00CT"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "The A-algebra map tau kills JC: the algebra commutation equation sends j in J to zero modulo J, and ideal extension lies in the kernel. Descend to C/JC and extend scalars along the surjective map A -> A/J to obtain an A/J-algebra section s.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Base change étaleness from A -> C to A/J -> S=C/JC using the quotient-tensor equivalence.",
+   "uses": [
+    "lem-weil-pbc-etale-quotient-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the idempotent splitting theorem to s to obtain e in S and an equivalence psi:S_e -> A/J satisfying psi(c/1)=s(c). Choose g in C reducing to e.",
+   "uses": [
+    "lem-weil-pbc-etale-section-idempotent-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization commutes with quotient: (C_g)/(JC)C_g is a localization of S at e. Uniqueness of localization gives an S-algebra equivalence E from this quotient to S_e. Restrict scalars to A and compose E with psi.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transitivity of ideal extension identifies (JC)C_g with JC_g. Transport along this ideal equality to get t. On c in C the localization equivalence commutes with the structural map, and psi extends s, so t(c/1 mod JC_g)=tau(c).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-quotient-base-change",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-localization-quotient-commute"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R2",
+  "date": "2026-10-12",
+  "description": "Following Stacks Tag 07M7; explicit Lean localization and quotient compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of an etale algebra with section modulo an ideal has quotient isomorphic to the base quotient",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization commutes with quotient by an ideal",
+   "results": "quotMapEquivQuotMapMaximalIdealOfIsLocalization, Submodule.toLocalizedQuotient'_mk, localizedQuotientEquiv, Algebra.idealMap_eq_ofEq_comp_toLocalized₀, DoubleQuot.quotQuotEquivComm_mk_mk, Ideal.powQuotPowSuccEquivMapMkPowSuccPow, DoubleQuot.quotQuotEquivQuotSup_quot_quot_algebraMap, quotAdjoinEquivQuotMap",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; no theorem with the same statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization.*|quotIdealMapEquivQuotTensor",
+   "results": "31, 36, 62, 65, 69",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; no theorem with the same statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothSectionEtaleLift",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity step 7: smooth section lifting used in henselian-pair approximation; Tag 07M7 last paragraph",
+   "via": [
+    "lem-weil-pbc-smooth-section-etale-lift",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionQuotientCutout",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionQuotientCutout.lean",
+  "declaration": "AlgebraicGeometry.exists_localization_quotient_equiv_of_etale_section",
+  "statement": "theorem exists_localization_quotient_equiv_of_etale_section\n    (A C : Type u) [CommRing A] [CommRing C] [Algebra A C]\n    (J : Ideal A) (τ : C →ₐ[A] A ⧸ J)\n    (hC : Etale (Scheme.Spec.map (CommRingCat.ofHom (algebraMap A C)).op)) :\n    ∃ (g : C) (t :\n      (Localization.Away g ⧸ (J.map (algebraMap A (Localization.Away g)))) ≃ₐ[A] (A ⧸ J)),\n      ∀ c : C, t (Ideal.Quotient.mk _\n        (algebraMap C (Localization.Away g) c)) = τ c",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085329-L-35620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085329-L-35620",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
