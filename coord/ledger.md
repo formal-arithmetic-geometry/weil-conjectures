@@ -8372,3 +8372,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:34 L: returned deliver/Q3/Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise (reviewer RETURN: (reviewer X-ce97d, head ce97d49b2) G1: In dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-colimit-algebras-tensor)
 - 15:36 L: merged deliver/D3/Sheaf.AlgebraicGeometry.ProjLineCoordinateShortExact (stage 3; reviewer PASS; first push; landing 20261012T153648-L-2394789 (interface); batch 20261012T153647; modules 3; new nodes 2)
 - 15:36 L: merged deliver/J3/Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite (stage 3; reviewer PASS; first push; landing 20261012T153648-L-2394931 (interface); batch 20261012T153647; modules 3; new nodes 2)
+- 15:36 L: merged deliver/N2/Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison (stage 3; reviewer PASS; first push; landing 20261012T153649-L-2395235 (interface); batch 20261012T153647; modules 2; new nodes 1)

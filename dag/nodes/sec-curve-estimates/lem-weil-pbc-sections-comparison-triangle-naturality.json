@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-sections-comparison-triangle-naturality",
+ "kind": "statement",
+ "title": "Naturality of sections comparison along an arbitrary triangle",
+ "statement": "Let $a:X\\to Y$, $g:Y\\to T$, and $h:X\\to T$ be morphisms of schemes with $h=a\\mathbin{\\gg}g$. Let $J$ be any cochain complex of abelian sheaves on $T_{\\mathrm{et}}$, let $K$ be any object of its derived category, let $q:K\\cong QJ$, and let $n\\in\\mathbf Z$. Inverse image and its derived localization are as in [def-weil-pbc-derived-inverse-image], and derived sections and degree-$n$ homology are as in [def-weil-pbc-etale-cohomology]. Define $c_g:H^n(Q\\Gamma_Y(g^{-1}J))\\to H^n(Y,g^{-1}K)$ by the right-derived sections unit followed by the inverse exact-localization comparison and $g^{-1}q^{-1}$; define $c_h$ likewise. Define $r_{a,g,h}$ by degree-$n$ homology of the inverse-image unit followed by the underived Leray comparison and inverse upperStarComp for the given equality. Let $d_{a,g,h}$ be the canonical derived cohomology pullback, namely the derived adjunction unit [prop-weil-pbc-derived-inverse-image-adjunction], the derived Leray isomorphism, and inverse derived inverse-image composition comparison. Then $c_g\\mathbin{\\gg}d_{a,g,h}=r_{a,g,h}\\mathbin{\\gg}c_h$. No boundedness, injectivity, etaleness, or invertibility of $c_g$ or $c_h$ is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03Q9 (theorem-higher-direct-images), final injective-complex paragraph; naturality detail of its maps of sections complexes"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "In the homotopy category let F=a inverse image, R=a direct image, G=sections on Y and H=sections on X. The derived adjunction factorization equates Q of the termwise unit followed by the R-derived unit with the derived unit followed by R of the exact-localization factorization. Naturality of the right-derived G unit moves Q of the termwise unit across it. The derived composition unit factorization followed by the natural derived isomorphism R then G = H gives the restriction square. Cancel only the exact-localization isomorphism of F, never the H-derived unit.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this square from the homotopy quotient to Q of complexes via naturality of quotientCompQhIso. Apply it to g inverse image of J. Naturality of the H-derived unit for the inverse of upperStarComp on J transports the target to h inverse image of J. The localization factorization identities mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_fac identify that chain-level comparison with the derived composition comparison.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the derived adjunction unit, the Leray isomorphism and the derived inverse-image composition isomorphism on q inverse. Apply the degree n homology functor and functoriality of composition. This gives the stated equality for any q, with no injectivity, boundedness, etaleness or quasi-compactness hypothesis.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "prop-weil-pbc-derived-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "N2, agent-written categorical detail following document",
+  "document": "Stacks Project",
+  "place": "Tag 03Q9, final paragraph, naturality of the comparison unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the right derived global sections comparison under inverse image along a commutative triangle of schemes",
+   "results": "AlgebraicGeometry.Scheme.Hom.naturality_assoc, AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.Hom.map_appLE_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc",
+   "date": "2026-10-12",
+   "verdict": "Generic naturality and localization infrastructure only; no exact triangle comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-12",
+   "verdict": "Generic naturality and localization infrastructure only; no exact triangle comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso_fac|rightDerivedNatTrans_app",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-12",
+   "verdict": "Generic naturality and localization infrastructure only; no exact triangle comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived sections unit is natural under inverse image along morphisms of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInjectiveSectionsComparison",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Tag 03Q9 final paragraph: maps from neighbourhood sections complexes to the limit, compatibility on cohomology",
+   "via": [
+    "lem-weil-pbc-injective-sections-pullback-comparison",
+    "lem-weil-pbc-strict-local-mate-projection-formulas",
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsTriangleNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsTriangleNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.sectionsComparison_triangle_naturality",
+  "statement": "theorem sectionsComparison_triangle_naturality {X Y T : Scheme.{v}}\n    (a : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = a ≫ g)\n    {K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1})}\n    (J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)\n    (q : K ≅ DerivedCategory.Q.obj J) (n : ℤ) :\n  let restriction :=\n    Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} a).unit\n          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ≫\n        (Functor.associator _ _ _).hom ≫\n        Functor.whiskerLeft (upperStar AddCommGrpCat.{v + 1} a)\n          (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} a).hom\n  let toDerived (Y : Scheme.{v})\n      (C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :=\n    (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map\n        ((DerivedCategory.quotientCompQhIso AddCommGrpCat.{v + 1}).inv.app\n            (((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).mapHomologicalComplex\n              (.up ℤ)).obj C) ≫\n          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctorUnit.app\n            ((HomotopyCategory.quotient _ _).obj C) ≫\n          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{v + 1}).rightDerivedFunctor.map\n            ((DerivedCategory.quotientCompQhIso _).hom.app C))\n  let comparison (Y : Scheme.{v}) (g : Y ⟶ T) :=\n    toDerived Y\n          (((upperStar AddCommGrpCat.{v + 1} g).mapHomologicalComplex (.up ℤ)).obj J) ≫\n        (cohomology AddCommGrpCat.{v + 1} Y n).map\n          (((upperStar AddCommGrpCat.{v + 1} g).mapDerivedCategoryFactors.inv.app J) ≫\n            (upperStar AddCommGrpCat.{v + 1} g).mapDerivedCategory.map q.inv)\n  let chainRestriction :=\n    (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map\n        (DerivedCategory.Q.map\n          ((NatTrans.mapHomologicalComplex restriction (.up ℤ)).app\n              (((upperStar AddCommGrpCat.{v + 1} g).mapHomologicalComplex (.up ℤ)).obj J) ≫\n            ((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{v + 1}).mapHomologicalComplex\n              (.up ℤ)).map ((NatIso.mapHomologicalComplex\n                (upperStarComp AddCommGrpCat.{v + 1} a g h hh) (.up ℤ)).inv.app J)))\n  comparison Y g ≫\n    (cohomology AddCommGrpCat.{v + 1} Y n).map\n      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} a).unit.app\n        ((upperStar AddCommGrpCat.{v + 1} g).mapDerivedCategory.obj K)) ≫\n    (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map\n      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso\n        AddCommGrpCat.{v + 1} a).hom.app\n          ((upperStar AddCommGrpCat.{v + 1} a).mapDerivedCategory.obj\n            ((upperStar AddCommGrpCat.{v + 1} g).mapDerivedCategory.obj K))) ≫\n    (cohomology AddCommGrpCat.{v + 1} X n).map\n      ((Functor.mapDerivedCategoryNatIso\n        (upperStarComp AddCommGrpCat.{v + 1} a g h hh) ≪≫\n          Functor.mapDerivedCategoryCompIso\n            (upperStar AddCommGrpCat.{v + 1} g)\n            (upperStar AddCommGrpCat.{v + 1} a)).inv.app K) =\n    chainRestriction ≫ comparison X h",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T153649-L-2395235",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T153649-L-2395235",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

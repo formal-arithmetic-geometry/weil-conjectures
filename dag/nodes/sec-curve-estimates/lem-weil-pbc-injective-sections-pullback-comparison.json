@@ -16,18 +16,11 @@
  ],
  "proof": [
   {
-   "text": "Each stage projection is etale by base change. Etale inverse image is localization restriction; the exact extension-by-zero left adjoint and the right-adjoint-preserves-injectives theorem show that the restricted complex J has injective terms. It is bounded below, hence K-injective.",
+   "text": "Every stage projection is etale by base change. Use the already proved injective_upperStar_obj_of_etale_addCommGrp of WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic to show that every term of the restricted complex is injective. Its lower bound is inherited by the mapped complex. CochainComplex.isKInjective_of_injective makes it K-injective. The right-derived sections unit is therefore invertible; the localization factorization and q inverse are isomorphisms, as is their image under homology.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-site-restriction-injectives",
     "lem-sp-right-adjoint-preserves-injectives",
-    "lem-weil-pbc-dplus-injective-representative"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The right-derived sections unit is invertible on each restricted injective complex. The localization comparisons and q are isomorphisms, so their homology composite c_t is invertible.",
-   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
     "lem-weil-pbc-right-derived-plus-injective",
     "def-weil-pbc-derived-inverse-image",
     "def-weil-pbc-etale-cohomology"
@@ -35,12 +28,10 @@
    "elementary": false
   },
   {
-   "text": "For each transition and each cone leg, apply naturality of the right-derived sections unit to the termwise inverse-image unit and sections restriction. The derived adjunction unit and Leray comparison are the derived images of these maps. Transport inverse-image composition through localization and q; the resulting square is c_g followed by derived pullback equals r followed by c_h. At the limit retain the comparison unit rather than an inverse, so no injective-preservation claim for the limit projection is used.",
+   "text": "Specialize the arbitrary triangle naturality theorem to each neighbourhood map, the projection at its target, and the projection at its source. The equality h = a followed by g is the symmetry of naturality of strictLocalNeighbourhoodProjection, with its identity composite removed. Specialize the same theorem to each cone leg, the stage projection, and the pullback first projection, using the symmetry of Q.over. These give the two restriction assertions without an injectivity assertion for the limit.",
    "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-pbc-strict-local-mate-projection-data",
-    "lem-weil-pbc-right-derived-plus-injective"
+    "lem-weil-pbc-sections-comparison-triangle-naturality",
+    "def-weil-pbc-strict-local-mate-projection-data"
    ],
    "elementary": false
   }
@@ -53,13 +44,12 @@
   "lem-weil-pbc-dplus-injective-representative",
   "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-weil-pbc-right-derived-plus-injective",
-  "lem-weil-pbc-site-restriction-injectives",
-  "prop-weil-pbc-derived-inverse-image-adjunction"
+  "lem-weil-pbc-sections-comparison-triangle-naturality"
  ],
  "proof_origin": {
-  "by": "E3 following document",
+  "by": "N2 following document",
   "document": "Stacks Project",
-  "place": "Tag 03Q9, final paragraph, factored through actual termwise sections; no continuity argument"
+  "place": "Tag 03Q9 final paragraph: invertibility proved using the source-library injective restriction lemma; naturality isolated in an arbitrary triangle theorem"
  },
  "mathlib_searches": [
   {
@@ -145,10 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a40cd",
-  "group": "E3",
+  "reviewer": "COMPILER",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T144105-L-2092764",
-  "kind": "interface"
+  "landing": "20261012T153649-L-2395235",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

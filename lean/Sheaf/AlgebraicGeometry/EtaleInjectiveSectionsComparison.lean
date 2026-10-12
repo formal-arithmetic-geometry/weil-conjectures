@@ -6,6 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionData
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
+import Sheaf.AlgebraicGeometry.EtaleSectionsTriangleNaturality
 
 /-! # Termwise sections and derived pullback cohomology
 
@@ -96,6 +98,30 @@ noncomputable def representativeSectionsComparison {Y T : Scheme.{v}} (g : Y ⟶
     (cohomology AddCommGrpCat.{v + 1} Y n).map
       (((upperStar AddCommGrpCat.{v + 1} g).mapDerivedCategoryFactors.inv.app J) ≫
         (upperStar AddCommGrpCat.{v + 1} g).mapDerivedCategory.map q.inv)
+
+private theorem isIso_representativeSectionsComparison_of_etale
+    {Y T : Scheme.{v}} (g : Y ⟶ T) [AlgebraicGeometry.Etale g]
+    {K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1})}
+    (J : CochainComplex.Plus (InjectiveObject
+      (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1})))
+    (q : K ≅ DerivedCategory.Q.obj
+      (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj)) (n : ℤ) :
+    IsIso (representativeSectionsComparison g q n) := by
+  let C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
+    ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
+  let D : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ :=
+    ((upperStar AddCommGrpCat.{v + 1} g).mapHomologicalComplex (.up ℤ)).obj C
+  have (k : ℤ) : Injective (D.X k) :=
+    injective_upperStar_obj_of_etale_addCommGrp g ((J.obj.X k).obj)
+  obtain ⟨d, hd⟩ := J.property
+  have : J.obj.IsStrictlyGE d := hd
+  have : D.IsStrictlyGE d := by
+    dsimp [D, C]
+    infer_instance
+  have : D.IsKInjective := CochainComplex.isKInjective_of_injective D d
+  dsimp [representativeSectionsComparison, termwiseSectionsToDerived]
+  infer_instance
+
 
 /-- The comparison from termwise sections to stage hypercohomology is invertible,
 and intertwines both neighbourhood and cone restrictions. This theorem concerns
@@ -195,6 +221,25 @@ theorem injectiveSections_strictLocal_comparison {X S : Scheme.{v}}
           (Q.over i).symm
           (((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj) n ≫
         representativeSectionsComparison
-          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n) := by sorry
+          (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) q n) := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro i
+    have : AlgebraicGeometry.Etale ((strictLocalNeighbourhoodProjection f s).app i) := by
+      dsimp [strictLocalNeighbourhoodProjection]
+      infer_instance
+    exact isIso_representativeSectionsComparison_of_etale _ J q n
+  · intro i j a
+    exact sectionsComparison_triangle_naturality
+      ((strictLocalNeighbourhoodDiagram f s).map a)
+      ((strictLocalNeighbourhoodProjection f s).app j)
+      ((strictLocalNeighbourhoodProjection f s).app i)
+      ((Category.comp_id _).symm.trans
+        ((strictLocalNeighbourhoodProjection f s).naturality a).symm)
+      _ q n
+  · intro i
+    exact sectionsComparison_triangle_naturality (Q.legs.app i)
+      ((strictLocalNeighbourhoodProjection f s).app i)
+      (pullback.fst f (Scheme.strictHenselizationStructuralMap s)) (Q.over i).symm
+      _ q n
 
 end AlgebraicGeometry.Etale
