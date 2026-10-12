@@ -8,7 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Limits.Shapes.NormalMono.Equalizers
 
 /-!
 # Local lifts in a short exact sequence of etale module sheaves
@@ -50,7 +52,30 @@ theorem exists_etale_local_lift_of_shortExact (X : Scheme.{u}) (Λ : Type u) [Co
     ∃ (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)
       (s : ∀ i : I, S.X₂.val.obj (op (V i))),
       Sieve.ofArrows V f ∈ X.smallEtaleTopology U ∧
-        ∀ i : I, S.g.val.app (op (V i)) (s i) = S.X₃.val.map (f i).op t :=
-  sorry
+        ∀ i : I, S.g.val.app (op (V i)) (s i) = S.X₃.val.map (f i).op t := by
+  classical
+  let R := (constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj
+    (RingCat.of (ULift.{u + 1, u} Λ))
+  let F := SheafOfModules.toSheaf.{u + 1} R
+  have : CategoryTheory.Limits.PreservesFiniteColimits F :=
+    SheafOfModules.preservesFiniteColimits_toSheaf R
+  have : ∀ {A B : SheafOfModules.{u + 1} R} (f : A ⟶ B),
+      CategoryTheory.Limits.PreservesColimit
+        (CategoryTheory.Limits.parallelPair f 0) F := fun _ ↦ inferInstance
+  have : F.PreservesEpimorphisms :=
+    NormalMonoCategory.preservesEpimorphisms_of_preservesCokernels F
+  have : Epi S.g := hS.epi_g
+  have : Sheaf.IsLocallySurjective (F.map S.g) :=
+    (Sheaf.isLocallySurjective_iff_epi' AddCommGrpCat.{u + 1} (F.map S.g)).2
+      inferInstance
+  let T := Presheaf.imageSieve (F.map S.g).hom t
+  obtain ⟨I, V, f, hf⟩ := T.exists_eq_ofArrows
+  have hmem : T ∈ X.smallEtaleTopology U :=
+    Presheaf.imageSieve_mem X.smallEtaleTopology (F.map S.g).hom t
+  have hlift (i : I) : ∃ s : S.X₂.val.obj (op (V i)),
+      S.g.val.app (op (V i)) s = S.X₃.val.map (f i).op t := by
+    exact (show T (f i) from hf.symm ▸ Sieve.ofArrows_mk V f i)
+  choose s hs using hlift
+  exact ⟨I, V, f, s, hf ▸ hmem, hs⟩
 
 end AlgebraicGeometry.Scheme

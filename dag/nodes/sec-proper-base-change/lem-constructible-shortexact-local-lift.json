@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "The displayed sequence is short exact, so its right-hand map $\\pi$ is an epimorphism in the abelian category of sheaves of $\\Lambda$-modules, by [def-weil-pbc-exact-sequence].",
+   "text": "The short exact sequence makes its quotient map S.g an epimorphism, by ShortComplex.ShortExact.epi_g ([def-weil-pbc-exact-sequence]).",
    "uses": [
     "def-weil-pbc-exact-sequence"
    ],
@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "The forgetful functor from sheaves of $\\Lambda$-modules on $X_{\\Et}$ (sheaves of modules over the constant sheaf of rings $\\Lambda_X$) to the category $\\Ab(X_{\\Et})$ of abelian sheaves is exact, in particular it preserves cokernels, by [lem-weil-pbc-module-sheaves-colimits-forgetful] (1) (the small etale site admits sheafification of abelian presheaves). Since $\\pi$ is an epimorphism, $\\operatorname{Coker}\\pi=0$ in sheaves of $\\Lambda$-modules, hence the cokernel of the underlying map of abelian sheaves is $0$, so $\\pi$ is an epimorphism of $\\Ab(X_{\\Et})$.",
+   "text": "Use the already proved source-library instance SheafOfModules.preservesFiniteColimits_toSheaf from WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification, which supplies the finite-colimit preservation part of [lem-weil-pbc-module-sheaves-colimits-forgetful]. The forgetful functor F to abelian sheaves preserves zero morphisms and cokernels. NormalMonoCategory.preservesEpimorphisms_of_preservesCokernels therefore gives that F preserves epimorphisms; hence F.map S.g is an epimorphism. The broad unproved theorem moduleSheaves_colimits_forgetful is not needed.",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] to $\\pi:\\mathcal E\\to\\mathcal N$, an epimorphism of $\\Ab(X_{\\Et})$ by the previous step. For the given etale object $U$ and section $t\\in\\mathcal N(U)$, it supplies an etale covering $(U_i\\to U)_i$ and sections $s_i\\in\\mathcal E(U_i)$ such that $\\pi(s_i)=t|_{U_i}$ for every $i$.",
+   "text": "Apply Sheaf.isLocallySurjective_iff_epi' for AddCommGrpCat to F.map S.g, as in [lem-weil-pbc-abelian-sheaf-epi-locally-surjective]. Its image sieve T for the given section t is covering by Presheaf.imageSieve_mem. Write T = Sieve.ofArrows V f using Sieve.exists_eq_ofArrows, with index type in universe u+1. Each generating arrow f i lies in T by Sieve.ofArrows_mk. Membership in the image sieve is precisely the existence of a section s i whose image equals the restriction of t. Choose these sections and transport the covering condition along the equality of sieves. This also allows the empty covering when appropriate.",
    "uses": [
     "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
    ],
@@ -149,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T042423-L-1822866",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
