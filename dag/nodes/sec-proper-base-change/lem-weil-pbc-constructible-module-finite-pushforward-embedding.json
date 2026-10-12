@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "*The Noetherian case.* By [lem-weil-pbc-constructible-module-finite-pushforward-noetherian] applied to the Noetherian scheme $X'$ and the constructible sheaf of $\\Lambda$-modules $F'$ there are $n\\ge0$, finite morphisms $f_i:Y_i\\to X'$, finite $\\Lambda$-modules $M_i$ ($i=1,\\dots,n$) and a monomorphism $\\varphi:F'\\hookrightarrow\\bigoplus_{i=1}^nf_{i,*}\\underline{M_i}$ in $\\Mod(X'_{\\Et},\\Lambda)$.",
+   "text": "*The Noetherian case.* Apply [lem-weil-pbc-constructible-module-finite-pushforward-noetherian], realized by `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian_etaleModule`, directly to the descended sheaf and its `Scheme.IsConstructibleEtaleModuleSheaf` proof. This retains constructibility of every stratum and produces finite morphisms, finite module values, and the required monomorphism on the Noetherian base. No conversion to the disputed `IsConstructibleSheaf` predicate is used.",
    "uses": [
     "lem-weil-pbc-constructible-module-finite-pushforward-noetherian"
    ],
@@ -85,15 +85,15 @@
  ],
  "proof_deps": [
   "def-sbc-locally-finite-presentation",
-  "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
   "lem-weil-pbc-constructible-module-noetherian-descent",
   "lem-weil-pbc-finite-pushforward-embedding-pullback",
-  "pqf-lem-finite-fp-locnoeth"
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-weil-pbc-constructible-module-finite-pushforward-noetherian"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09Z7 (lemma-constructible-maps-into-constant-general), part (3), and its proof, etale-cohomology.tex lines 13028-13081"
+  "place": "Lemma 09Z7 (3), using Noetherian descent, the corrected realization of 09Z6 (3) for constructible etale module sheaves, and finite-pushforward base change"
  },
  "mathlib_searches": [
   {
@@ -186,5 +186,15 @@
   "group": "C1",
   "result": "pass",
   "note": "qcqs X as [CompactSpace][QuasiSeparatedSpace]; finite Λ (Type u+1, CommRing, Finite); F in Sheaf X_et (ModuleCat Λ) with recorded Scheme.IsConstructibleEtaleModuleSheaf; ∃ n, Y, f : Fin n with IsFinite and LocallyOfFinitePresentation; finite M_i (Finite carrier); constantSheaf on (Y i)_et; Etale.lowerStar; finite biproduct ⨁; Mono φ; n=0 allowed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1cce5",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T013244-L-831553",
+  "kind": "interface",
+  "note": "independent Codex review: Both Lean signatures match their nodes; the proof follows descent, the corrected Noetherian case, and pullback, consistent with https://stacks.math.columbia.edu/tag/09Z6 and https://stacks.math.columbia.edu/tag/09Z7. Compilation and axiom checks pass; earlier return points are repaired."
  }
 }

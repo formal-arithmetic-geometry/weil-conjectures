@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
+import Sheaf.AlgebraicGeometry.ConstructibleModuleNoetherianDescent
+import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian
 
 /-!
 # Finite-pushforward embeddings of constructible module sheaves
@@ -58,6 +60,14 @@ theorem finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf
           (lowerStar (ModuleCat.{u + 1} Λ) (f i)).obj
             ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))),
           Mono φ := by
-  sorry
+  obtain ⟨X', hX', ν, F', hF', e⟩ := exists_noetherian_descent Λ F hF
+  have : IsNoetherian X' := hX'
+  obtain ⟨n, Y, f, hf, M, hM, φ, hφ⟩ :=
+    exists_mono_biproduct_lowerStar_of_isNoetherian_etaleModule Λ F' hF'
+  have : ∀ i, IsFinite (f i) := hf
+  have : ∀ i, LocallyOfFinitePresentation (f i) := fun _ ↦ inferInstance
+  obtain ⟨Y', g, hg, hgfp, φ', hφ'⟩ :=
+    exists_mono_biproduct_lowerStar_upperStar Λ ν F' Y f M φ
+  exact ⟨n, Y', g, hg, hgfp, M, hM, e.some.inv ≫ φ', inferInstance⟩
 
 end AlgebraicGeometry.Etale

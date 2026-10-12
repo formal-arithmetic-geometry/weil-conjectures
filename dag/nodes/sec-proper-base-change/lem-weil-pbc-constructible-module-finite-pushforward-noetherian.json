@@ -240,15 +240,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "branch": "slopmaster2",
-  "module": "WeilConjectures.ConstructibleSheaf.FinitePushforward",
-  "lines": [
-   100,
-   112
-  ],
-  "declarations": [
-   "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian"
-  ]
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleFinitePushforwardNoetherian.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_isNoetherian_etaleModule",
+  "statement": "theorem exists_mono_biproduct_lowerStar_of_isNoetherian_etaleModule (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}} [IsNoetherian X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : Scheme.IsConstructibleEtaleModuleSheaf F) : ∃ (n : ℕ) (Y : Fin n → Scheme.{u}) (f : ∀ i : Fin n, Y i ⟶ X), (∀ i : Fin n, IsFinite (f i)) ∧ ∃ (M : Fin n → ModuleCat.{u + 1} Λ), (∀ i : Fin n, Finite (M i)) ∧ ∃ (φ : F ⟶ ⨁ fun i : Fin n ↦ (lowerStar (ModuleCat.{u + 1} Λ) (f i)).obj ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "Correct realization of the existing mathematical node: retains constructible strata via IsConstructibleEtaleModuleSheaf; does not invoke the disputed source theorem."
  },
  "split_report": {
   "date": "2026-10-10",
@@ -265,5 +265,15 @@
   "by": "L",
   "result": "pass",
   "note": "Eight steps along Stacks 09Z6 (1), carried to the module form (3): the generic trivialization at a point (new node lem-weil-pbc-constructible-field-finite-separable-constant), the normal model (new node lem-weil-pbc-normalization-in-residue-field-extension, 035I), the map F -> nu_* M via lem-weil-pbc-normal-constant-generic (09Z5) and the module adjunction, injectivity at geometric points over x (triangle identities, stalk-germ leaves), Y as a limit of finite X-schemes (new node lem-weil-pbc-integral-morphism-limit-of-finite, 09YZ/0817), nu_* M as the colimit of finite pushforwards (tool use sbc-lem-higher-direct-image-limit, 09Z1 in degree 0), factorization through a finite stage by lem-weil-pbc-constructible-finitely-presented (09Z4; the only place where Lambda Noetherian enters), finitely many points (tool use lem-weil-pbc-constructible-noetherian-finite-selection; see the literature note). LITERATURE NOTE (worker, recorded in STATE): Stacks 09Z6 justifies 'finitely many points suffice' by the ACC 09YV, which does not apply to the shrinking kernels (no DCC: on Spec Z with Lambda = Z/2 the extensions by zero from complements of more and more primes form a strictly descending chain); the step uses the partition alternative Stacks mentions in the same sentence. The attached Lean takes any CommRing Lambda (no finiteness), stronger than the node; the IsConstructibleSheaf defect is harmless on a Noetherian scheme. Stage-3 merge candidate: lem-weil-pbc-constructible-finite-pushforward-noetherian (the abelian form 09Z6 (2))."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1cce5",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T013244-L-831553",
+  "kind": "interface",
+  "note": "independent Codex review: Both Lean signatures match their nodes; the proof follows descent, the corrected Noetherian case, and pullback, consistent with https://stacks.math.columbia.edu/tag/09Z6 and https://stacks.math.columbia.edu/tag/09Z7. Compilation and axiom checks pass; earlier return points are repaired."
  }
 }
