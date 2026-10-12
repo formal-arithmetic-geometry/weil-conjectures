@@ -8930,3 +8930,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Curve.PrimeModuleFiniteOpenAssertionsTransfer (stage 3; reviewer PASS; after a return; landing 20261012T184256-L-4002013 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/F2/Sheaf.AlgebraicGeometry.FormalCompletionMapInjectiveProper (stage 3; reviewer PASS; first push; landing 20261012T184256-L-4002110 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/F2/Sheaf.RingTheory.FormallySmoothAdicQuotientGrid (stage 3; reviewer PASS; first push; landing 20261012T184256-L-4002207 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:42 L: merged deliver/F3/Sheaf.AlgebraicGeometry.AffineModuleTensorCounitLinear (stage 3; reviewer PASS; first push; landing 20261012T184257-L-4002311 (interface); batch 20261012T184234; modules 2; new nodes 1)

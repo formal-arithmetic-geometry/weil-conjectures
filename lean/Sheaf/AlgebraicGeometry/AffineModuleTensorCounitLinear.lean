@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Sheaf.AlgebraicGeometry.AffineModuleTensorCounitSmul
 /-! # Linearity of the affine tensor counit
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
@@ -106,7 +107,20 @@ theorem affine_module_tensor_counitLinear
         ∀ (W : (Opens U)ᵒᵖ) (p : (P.obj ((R).obj F)).val.obj W),
           δ.val.app W p =
             ((adj₀).counit.app F).val.app W ((κ.hom.app ((R).obj F)).val.app W p) := by
-  sorry
+  intro F
+  let q := (κ.hom.app ((R).obj F)).val ≫ ((adj₀).counit.app F).val
+  let φ : (P.obj ((R).obj F)).val.presheaf ⟶
+      ((SheafOfModules.restrictScalars (𝓻 ε)).obj F).val.presheaf :=
+    (PresheafOfModules.toPresheaf U.ringCatSheaf.obj).map q
+  refine ⟨⟨PresheafOfModules.homMk φ ?_⟩, ?_⟩
+  · intro W c p
+    change ((adj₀).counit.app F).val.app W
+        ((κ.hom.app ((R).obj F)).val.app W (c • p)) =
+      (ε.hom.app W c) •
+        ((adj₀).counit.app F).val.app W ((κ.hom.app ((R).obj F)).val.app W p)
+    exact affine_module_tensor_counit_smul f B b t ε hpush hb ht P pobj κ hP F W c p
+  · intro W p
+    rfl
 
 end
 end AlgebraicGeometry.Scheme.Modules
