@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-etale-sections-equality-subterminal",
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "title": "Subterminal agreement sheaf and its geometric stalks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $F$ a sheaf of sets on its small étale site [def-weil-pbc-etale-sheaf-of-sets], $V\\to S$ an étale object, and $s,t\\in F(V)$. There exists a sheaf $H$ of sets on the small étale site of $V$ such that the unique map $H\\to 1$ to the terminal sheaf is a monomorphism and, for every geometric point $x:\\operatorname{Spec}\\Omega\\to V$ [def-weil-geometric-point], the stalk $H_x$ [def-weil-pbc-geometric-stalks] is nonempty if and only if the germs of $s$ and $t$ at the pointed object $(V,x)$ in the stalk of $F$ at $x\\to V\\to S$ are equal.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XM (lemma-where-sections-are-equal), first paragraph; Tag 03Q1 for germs under inverse image"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "For a sheaf G on V and two global sections p,q, take the subfunctor of the constant singleton presheaf whose membership on U is equality of the restrictions of p,q to U. The canonical maps U to the identity étale object compose compatibly, so restriction preserves membership. Separatedness of G on the sieve of sections of this subfunctor proves the subfunctor is a sheaf, using Subfunctor.isSheaf_iff. Every section set is a subsingleton, so the unique map to the terminal sheaf is mono.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An inhabited geometric stalk has a representative on a pointed étale neighbourhood. Its membership proof gives equality of restricted sections, and germ naturality gives equality of global germs. Conversely Point.toPresheafFiber_eq_iff' witnesses equality of global germs on a pointed neighbourhood, whose agreement section produces a stalk element.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding construction to G = inverse image of F along V to S and to the unit images restricted along the diagonal V to V times_S V. Naturality of the germ map and pullback projection identities identify their germs under the bijective inverse-image stalk comparison with the original germs of s and t.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XM (lemma-where-sections-are-equal), first paragraph; Tag 03Q1 for germs under inverse image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The equalizer of two sections of an etale sheaf is a subterminal sheaf whose stalk is nonempty exactly when the two germs agree",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where two sections of a sheaf on the small etale site have equal germs is an open subscheme",
+   "results": "exists_lift_of_germInjective, spread_out_unique_of_isGermInjective and structure-sheaf basic-open lemmas",
+   "date": "2026-10-12",
+   "verdict": "No direct agreement-subsheaf theorem; the elementary construction is proved in Lean."
+  },
+  {
+   "tool": "grep",
+   "query": "subterminal|subsheaf.*final|equalizerSieve",
+   "results": "CategoryTheory.Subterminal; Presheaf.equalizerSieve; no theorem assembling the agreement sheaf and its geometric stalk criterion",
+   "date": "2026-10-12",
+   "verdict": "Use Mathlib Subfunctor.isSheaf_iff and Point.toPresheafFiber_eq_iff' for the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenExistence",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Tag 09XM agreement-presheaf step of the largest-agreement-open argument used in fpqc descent",
+   "via": [
+    "lem-weil-pbc-etale-sections-equal-open-existence",
+    "lem-weil-pbc-etale-sections-equal-open",
+    "lem-weil-pbc-etale-sections-fpqc-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionsEqualitySubterminal",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionsEqualitySubterminal.lean",
+  "declaration": "AlgebraicGeometry.exists_etaleSections_equality_subterminal",
+  "statement": "theorem exists_etaleSections_equality_subterminal (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (V : S.Etale) (s t : F.obj.obj (op V)) : ∃ H : Sheaf V.left.smallEtaleTopology (Type (u + 1)), Mono (terminal.from H) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ V.left), Nonempty ((Scheme.pointSmallEtale x).sheafFiber.obj H) ↔ (Scheme.pointSmallEtale (x ≫ V.hom)).toPresheafFiber V (Over.homMk x rfl) F.obj s = (Scheme.pointSmallEtale (x ≫ V.hom)).toPresheafFiber V (Over.homMk x rfl) F.obj t",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0e56b",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T112830-L-764194",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0e56b",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T112830-L-764194",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all modules and direct importer compiled, with permitted axioms only."
+ }
+}

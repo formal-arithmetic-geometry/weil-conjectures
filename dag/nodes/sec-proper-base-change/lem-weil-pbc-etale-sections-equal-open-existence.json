@@ -28,52 +28,49 @@
  ],
  "proof": [
   {
-   "text": "On the etale site of $V$, define a subpresheaf $H$ of the final sheaf by putting $H(U)=\\{\\ast\\}$ when the pullbacks of $s$ and $t$ to $U$ agree and $H(U)=\\varnothing$ otherwise. Restrictions preserve agreement, and the sheaf equalizer axiom for $F$ shows that these local singleton sections glue; hence $H$ is a subsheaf of the final sheaf.",
+   "text": "Construct the subterminal agreement sheaf H on V and its inhabited-stalk criterion.",
    "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets"
+    "lem-weil-pbc-etale-sections-equality-subterminal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09XM proof, first paragraph (lines 4947-4951)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the open-representability statement for subsheaves of the final etale sheaf to $H$. It gives a unique open subscheme $W\\subset V$ such that an etale object $U\\to V$ factors through $W$ exactly when the pullbacks of $s$ and $t$ to $U$ agree.",
+   "text": "Apply existsUnique_open_of_etale_subsheaf_final to H. Its geometric stalk clause identifies membership in the resulting W with equality of the original section germs.",
    "uses": [
     "lem-weil-pbc-etale-subsheaf-final-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09XM proof, invoking Lemma Tag 04HV (lines 4950-4951)"
-   }
+   "elementary": false
   },
   {
-   "text": "For a geometric point $\\bar{x}\\to V$, the point lies in $W$ exactly when the germs of $s$ and $t$ in the stalk $F_{\\bar{x}}$ agree: the stalk of $H$ is the singleton precisely in that case. For any morphism $a:T\\to V$, the existing stalk-and-germ description of etale inverse images identifies the germ of the restricted section at a geometric point $\\bar{y}\\to T$ with the germ of $s$ (respectively $t$) at $a\\bar{y}$. Thus $s|_T=t|_T$ implies every geometric point of $T$ maps into $W$, so $a$ factors through the open $W$; the converse follows from $s|_W=t|_W$ (Step 2): by the restriction compatibility (0) of the units, $(e^*s)|_{W\\times_ST}=e^*(s|_W)=e^*(t|_W)=(e^*t)|_{W\\times_ST}$, and $(a,\\mathrm{id}_T)$ factors through $W\\times_ST$. The stalks and germs used here are those of [def-weil-pbc-geometric-stalks].",
+   "text": "For a:T to V, compare the germ of each unit-pulled-back section restricted along (a,id) with the original germ at y followed by a. Germ naturality, the pullback projection identities, and injectivity of the inverse-image stalk comparison give an equivalence of the two germ equalities.",
    "uses": [
     "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09XM proof, lines 4952-4956, using Lemma Tag 03Q1"
-   }
+   "elementary": false
+  },
+  {
+   "text": "If a factors through W, all original germs agree and hence all pulled-back germs agree. Apply etaleSetSection_ext_of_geometric_germs to the identity object of T; every pointed identity object is Over.homMk y (Category.comp_id y), by Over.OverMorphism.ext and Over.w. Thus the global sections agree. Conversely, equality implies every algebraic-closure point maps into W; algClosurePoint_base gives image containment, and IsOpenImmersion.lift factors a through W.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-sets-sections-geometric-germ-ext"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-sections-equality-subterminal",
   "lem-weil-pbc-etale-subsheaf-final-open",
   "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-sections-geometric-germ-ext"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 09XM (lemma-where-sections-are-equal), proof"
+  "place": "Tag 09XM proof; both directions completed stalkwise via Tag 03Q1 and existing geometric-germ section extensionality (Tag 03PU)"
  },
  "mathlib_searches": [
   {
@@ -147,11 +144,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "X-0e56b",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T053953-L-2645611",
+  "landing": "20261012T112830-L-764194",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all modules and direct importer compiled, with permitted axioms only."
  }
 }
