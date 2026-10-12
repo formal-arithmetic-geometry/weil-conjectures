@@ -26,62 +26,36 @@
  ],
  "proof": [
   {
-   "text": "Represent objects and arrows by elements of the two filtered colimits of sets. For any finite collection of representatives, filteredness supplies a common later stage; the equality criterion in the reviewed elementwise filtered-colimit lemma then shows that source, target, identities and composition are independent of representatives. The same criterion proves the category axioms and that each coprojection is a functor, with v_{j'} v_phi = v_j.",
+   "text": "Obtain the category structure on the chosen object colimit, compatible stage functors, and the arrow colimit equivalence from filteredColimit_category_structure.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-filtered-colimit-category-structure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "proof of Lemma Tag 09YL (09YL), first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose representatives for the finitely many objects and arrows and representatives for every listed source, target, composition and identity relation. Filteredness gives one stage dominating all of them; applying the transition functors makes every relation hold at that stage. If two lifts are chosen, apply the same eventual-equality clause to their finite list of objects and arrows and then use filteredness to obtain a common later stage where they agree. A functor from a finite category is exactly such a finite list with these relations.",
+   "text": "Apply filteredColimit_category_descent to these same structure data to obtain finite relation lifting, eventual equality, finite functor lifting, and the under-category Hom assertions.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-filtered-colimit-category-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "proof of Lemma Tag 09YL (09YL), first paragraph and its finite-diagram remark"
-   }
+   "elementary": false
   },
   {
-   "text": "For fixed X,Y in C_j, a morphism in the colimit is represented by an arrow at some j' reached by phi:j -> j'. The source and target equalities can be made literal at a common later stage by the same filtered-colimit equality criterion. Surjectivity follows from arrow representability; injectivity says that two such arrows have equal images exactly when they become equal after a further arrow out of j'. This is precisely the canonical bijection from the filtered colimit over the filtered slice j/J of the Hom sets.",
+   "text": "Apply the proved filteredColimit_category_iso_clause using the finite-functor lifting assertion. Assemble the existential witnesses and all conjunctions.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-filtered-colimit-category-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "filtered-colimit category construction following Lemma Tag 09YL"
-   }
-  },
-  {
-   "text": "An isomorphism at a stage maps to an isomorphism because the coprojection is a functor. Conversely, represent a colimit morphism and an inverse by stage arrows. Their two inverse equations, together with source and target identities, form a finite list of relations; the finite-stage argument above moves this list to one common stage. There the representative has a two-sided inverse, so it is an isomorphism.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "filtered-colimit category construction following Lemma Tag 09YL"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-filtered-colimit-category-structure",
+  "lem-weil-pbc-filtered-colimit-category-descent",
+  "lem-weil-pbc-filtered-colimit-category-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "proof of Lemma Tag 09YL"
+  "place": "proof of Lemma Tag 09YL; category construction, finite-diagram remark, and Hom calculation, using Categories Section Tag 04AX"
  },
  "mathlib_searches": [
   {
@@ -179,5 +153,15 @@
   "group": "F1",
   "result": "pass",
   "note": "J small filtered; F : J ⥤ Cat strict laws; O = colimit (F⋙Cat.objects); ∃ Category O, V j functors with obj=colimit.ι, (F.map f)⋙V k = V j; arrows colimit cocone ≃ Arrow O via mapArrow; (2) finite lists lift with src/tgt/comp/id relations, eventual equality, FinCategory functors lift; (3) Hom colimit over j/J elementwise (surj + eq iff refinement with f≫h=g≫i); (4) iso iff iso representative; new node Cat.arrows not in Mathlib (only objects/connectedComponents/isomorphismClasses)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-category-structure",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-filtered-colimit-categories",
+   "place": "proof step 1",
+   "via": []
+  }
+ },
+ "kind": "statement",
+ "title": "The category structure induced on the filtered object colimit",
+ "statement": "For a small filtered category J and a functor F : J → Cat of small categories, let O be the colimit of its object sets [def-weil-pbc-category-colimit]. There exist a category structure on O and functors V_j : F(j) → O whose object maps are the object coprojections and which commute strictly with every transition functor. There is a colimit cocone of the sets of arrows [def-weil-pbc-arrows-functor] equipped with an equivalence to Arrow O intertwining its coprojections with the arrow maps of V_j.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL (lemma-colimit-sites), first paragraph: 'The formula C = colim C_i means that Ob(C) = colim Ob(C_i) and Arrows(C) = colim Arrows(C_i). Then source, target, and composition are inherited ... Remark that given any finite diagram in C there exists an i such that this diagram is the image of a diagram in C_i' (stated without proof); filtered colimits of sets: categories.tex Section Tag 04AX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Represent objects and arrows by elements of the two filtered colimits of sets. For any finite collection of representatives, filteredness supplies a common later stage; the equality criterion in the reviewed elementwise filtered-colimit lemma then shows that source, target, identities and composition are independent of representatives. The same criterion proves the category axioms and that each coprojection is a functor, with v_{j'} v_phi = v_j.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "proof of Lemma Tag 09YL (09YL), first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL, first paragraph, with the elementwise description in Categories Section Tag 04AX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of categories finite diagram lifts",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit category finite diagrams lift and isomorphisms have invertible representatives",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable; CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag; CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit; CategoryTheory.IsFiltered.of_hasFiniteColimits; CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f; CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Cat, CategoryTheory.IsFiltered",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.instIsFilteredGrothendieckOfαCategoryObjCat",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit|colimit.*filtered",
+   "date": "2026-10-12",
+   "results": "No matching declarations.",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_eq_iff|jointly_surjective",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category colimit filtered objects morphisms",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredColimitCategories",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredColimitCategoryStructure",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitCategoryStructure.lean",
+  "declaration": "CategoryTheory.filteredColimit_category_structure",
+  "statement": "theorem filteredColimit_category_structure (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) : let O := colimit (F ⋙ Cat.objects) ∃ (s : Category.{z} O), letI := s ∃ V : ∀ j : J, F.obj j ⥤ O, (∀ (j : J) (X : F.obj j), (V j).obj X = colimit.ι (F ⋙ Cat.objects) j X) ∧ (∀ (j k : J) (f : j ⟶ k), (F.map f).toFunctor ⋙ V k = V j) ∧ (∃ (a : Cocone (F ⋙ Cat.arrows)) (e : a.pt ≃ Arrow O), Nonempty (IsColimit a) ∧ ∀ (j : J) (f : Arrow (F.obj j)), e (a.ι.app j f) = (V j).mapArrow.obj f)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

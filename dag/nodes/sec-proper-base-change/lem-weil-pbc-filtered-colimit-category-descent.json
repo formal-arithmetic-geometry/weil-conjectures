@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-category-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-filtered-colimit-categories",
+   "place": "proof steps 2 and 3",
+   "via": []
+  }
+ },
+ "kind": "statement",
+ "title": "Finite-diagram and Hom descent from the object and arrow colimits",
+ "statement": "Let J be a small filtered category and F : J → Cat. Let O be the chosen object-set colimit [def-weil-pbc-category-colimit], equipped with a category structure and functors V_j whose object maps are its coprojections and which commute with transitions. Suppose a colimit cocone of the arrow sets is equivalent to Arrow O, intertwining the coprojections with the arrow maps of V_j [def-weil-pbc-arrows-functor]. Then finite lists of objects and arrows lift with every source, target, identity and composition relation; two finite lists with equal images agree at a common refinement; every functor from a finite category lifts to a stage; and the stage Hom sets represent every Hom in O, with equality exactly at a common refinement whose maps out of the starting stage commute.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL (lemma-colimit-sites), first paragraph: 'The formula C = colim C_i means that Ob(C) = colim Ob(C_i) and Arrows(C) = colim Arrows(C_i). Then source, target, and composition are inherited ... Remark that given any finite diagram in C there exists an i such that this diagram is the image of a diagram in C_i' (stated without proof); filtered colimits of sets: categories.tex Section Tag 04AX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose representatives for the finitely many objects and arrows and representatives for every listed source, target, composition and identity relation. Filteredness gives one stage dominating all of them; applying the transition functors makes every relation hold at that stage. If two lifts are chosen, apply the same eventual-equality clause to their finite list of objects and arrows and then use filteredness to obtain a common later stage where they agree. A functor from a finite category is exactly such a finite list with these relations.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "proof of Lemma Tag 09YL (09YL), first paragraph and its finite-diagram remark"
+   }
+  },
+  {
+   "text": "For fixed X,Y in C_j, a morphism in the colimit is represented by an arrow at some j' reached by phi:j -> j'. The source and target equalities can be made literal at a common later stage by the same filtered-colimit equality criterion. Surjectivity follows from arrow representability; injectivity says that two such arrows have equal images exactly when they become equal after a further arrow out of j'. This is precisely the canonical bijection from the filtered colimit over the filtered slice j/J of the Hom sets.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "filtered-colimit category construction following Lemma Tag 09YL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL, first paragraph, with the elementwise description in Categories Section Tag 04AX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of categories finite diagram lifts",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit category finite diagrams lift and isomorphisms have invertible representatives",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable; CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag; CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit; CategoryTheory.IsFiltered.of_hasFiniteColimits; CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f; CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Cat, CategoryTheory.IsFiltered",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.instIsFilteredGrothendieckOfαCategoryObjCat",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit|colimit.*filtered",
+   "date": "2026-10-12",
+   "results": "No matching declarations.",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_eq_iff|jointly_surjective",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category colimit filtered objects morphisms",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredColimitCategories",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredColimitCategoryDescent",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitCategoryDescent.lean",
+  "declaration": "CategoryTheory.filteredColimit_category_descent",
+  "statement": "theorem filteredColimit_category_descent (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) : let O := colimit (F ⋙ Cat.objects) ∀ (_s : Category.{z} O) (V : ∀ j : J, F.obj j ⥤ O), ((∀ (j : J) (X : F.obj j), (V j).obj X = colimit.ι (F ⋙ Cat.objects) j X) ∧ (∀ (j k : J) (f : j ⟶ k), (F.map f).toFunctor ⋙ V k = V j) ∧ (∃ (a : Cocone (F ⋙ Cat.arrows)) (e : a.pt ≃ Arrow O), Nonempty (IsColimit a) ∧ ∀ (j : J) (f : Arrow (F.obj j)), e (a.ι.app j f) = (V j).mapArrow.obj f)) → (∀ (n m : ℕ) (X : Fin n → O) (A : Fin m → Arrow O), ∃ (j : J) (Xj : Fin n → F.obj j) (Aj : Fin m → Arrow (F.obj j)), (∀ q, (V j).obj (Xj q) = X q) ∧ (∀ p, (V j).mapArrow.obj (Aj p) = A p) ∧ (∀ p q, (A p).left = X q → (Aj p).left = Xj q) ∧ (∀ p q, (A p).right = X q → (Aj p).right = Xj q) ∧ (∀ p q r (h : (A p).right = (A q).left), Arrow.mk ((A p).hom ≫ eqToHom h ≫ (A q).hom) = A r → ∃ hj : (Aj p).right = (Aj q).left, Arrow.mk ((Aj p).hom ≫ eqToHom hj ≫ (Aj q).hom) = Aj r) ∧ (∀ p q, A p = Arrow.mk (𝟙 (X q)) → Aj p = Arrow.mk (𝟙 (Xj q)))) ∧ (∀ (n m : ℕ) (j k : J) (Xj : Fin n → F.obj j) (Xk : Fin n → F.obj k) (Aj : Fin m → Arrow (F.obj j)) (Ak : Fin m → Arrow (F.obj k)), (∀ q, (V j).obj (Xj q) = (V k).obj (Xk q)) → (∀ p, (V j).mapArrow.obj (Aj p) = (V k).mapArrow.obj (Ak p)) → ∃ (t : J) (f : j ⟶ t) (g : k ⟶ t), (∀ q, (F.map f).toFunctor.obj (Xj q) = (F.map g).toFunctor.obj (Xk q)) ∧ (∀ p, (F.map f).toFunctor.mapArrow.obj (Aj p) = (F.map g).toFunctor.mapArrow.obj (Ak p))) ∧ (∀ (D : Type z) [SmallCategory D] [FinCategory D] (d : D ⥤ O), ∃ (j : J) (dj : D ⥤ F.obj j), dj ⋙ V j = d) ∧ (∀ (j : J) (X Y : F.obj j), (∀ b : (V j).obj X ⟶ (V j).obj Y, ∃ (k : J) (f : j ⟶ k) (g : (F.map f).toFunctor.obj X ⟶ (F.map f).toFunctor.obj Y), Arrow.mk ((V k).map g) = Arrow.mk b) ∧ (∀ (k l : J) (f : j ⟶ k) (g : j ⟶ l) (a : (F.map f).toFunctor.obj X ⟶ (F.map f).toFunctor.obj Y) (b : (F.map g).toFunctor.obj X ⟶ (F.map g).toFunctor.obj Y), Arrow.mk ((V k).map a) = Arrow.mk ((V l).map b) ↔ ∃ (t : J) (h : k ⟶ t) (i : l ⟶ t), f ≫ h = g ≫ i ∧ Arrow.mk ((F.map h).toFunctor.map a) = Arrow.mk ((F.map i).toFunctor.map b)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

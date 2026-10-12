@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-category-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-filtered-colimit-categories",
+   "place": "proof step 4",
+   "via": []
+  }
+ },
+ "kind": "statement",
+ "title": "Invertible representatives from lifting finite functors",
+ "statement": "Let J be a small filtered category and F : J → Cat, and equip the object-set colimit O [def-weil-pbc-category-colimit] with any category structure and functors V_j : F(j) → O. Assume every functor from a finite category to O is exactly a composite dj ⋙ V_j. Then an arrow a of O is invertible if and only if it is the image under some V_j of an invertible stage arrow, with equality of the complete arrows including endpoints [def-weil-pbc-arrows-functor].",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL (lemma-colimit-sites), first paragraph: 'The formula C = colim C_i means that Ob(C) = colim Ob(C_i) and Arrows(C) = colim Arrows(C_i). Then source, target, and composition are inherited ... Remark that given any finite diagram in C there exists an i such that this diagram is the image of a diagram in C_i' (stated without proof); filtered colimits of sets: categories.tex Section Tag 04AX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "For an invertible arrow a, form the finite groupoid on two objects and one morphism between any pair. Map its objects to the endpoints of a and its forward and backward arrows to a and its inverse. Lift this functor using the hypothesis. Its forward arrow maps to an invertible stage arrow, with the correct image because the lifted composite functor equals the given one. Conversely, functors preserve isomorphisms. The Lean proof constructs this groupoid locally on ULift Bool with PUnit Hom spaces, so no unfinished category construction is needed for this step.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL, first paragraph, with the elementwise description in Categories Section Tag 04AX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of categories finite diagram lifts",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit category finite diagrams lift and isomorphisms have invertible representatives",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.MorphismProperty.instIsStableUnderFilteredColimitsIsomorphisms; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable; CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag; CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit; CategoryTheory.IsFiltered.of_hasFiniteColimits; CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f; CategoryTheory.ObjectProperty.isFiltered_costructuredArrow_colimitsCardinalClosure_ι",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Cat, CategoryTheory.IsFiltered",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.instIsFilteredGrothendieckOfαCategoryObjCat",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit|colimit.*filtered",
+   "date": "2026-10-12",
+   "results": "No matching declarations.",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_eq_iff|jointly_surjective",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean; Mathlib/CategoryTheory/Limits/Types/ColimitTypeFiltered.lean",
+   "verdict": "no exact match: no filtered category construction with the stated elementwise clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category colimit filtered objects morphisms",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredColimitCategories",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredColimitCategoryIso",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitCategoryIso.lean",
+  "declaration": "CategoryTheory.filteredColimit_category_iso_clause",
+  "statement": "theorem filteredColimit_category_iso_clause (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) : let O := colimit (F ⋙ Cat.objects) ∀ (_s : Category.{z} O), ∀ (V : ∀ j : J, F.obj j ⥤ O), (∀ (D : Type z) [SmallCategory D] [FinCategory D] (d : D ⥤ O), ∃ (j : J) (dj : D ⥤ F.obj j), dj ⋙ V j = d) → (∀ a : Arrow O, IsIso a.hom ↔ ∃ (j : J) (b : Arrow (F.obj j)), IsIso b.hom ∧ (V j).mapArrow.obj b = a)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635735",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

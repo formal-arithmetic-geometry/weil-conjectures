@@ -8,6 +8,9 @@ module
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Limits.Types.Filtered
 public import Mathlib.CategoryTheory.FinCategory.Basic
+import Sheaf.CategoryTheory.FilteredColimitCategoryStructure
+import Sheaf.CategoryTheory.FilteredColimitCategoryDescent
+import Sheaf.CategoryTheory.FilteredColimitCategoryIso
 
 /-! # Filtered colimits of categories
 
@@ -99,6 +102,10 @@ theorem exists_filteredColimit_category
       (∀ a : Arrow O, IsIso a.hom ↔
         ∃ (j : J) (b : Arrow (F.obj j)),
           IsIso b.hom ∧ (V j).mapArrow.obj b = a) := by
-  sorry
+  obtain ⟨s, V, hObj, hCompat, hArrows⟩ := filteredColimit_category_structure J F
+  obtain ⟨hLift, hEqual, hFinite, hHom⟩ :=
+    filteredColimit_category_descent J F s V ⟨hObj, hCompat, hArrows⟩
+  exact ⟨s, V, hObj, hCompat, hArrows, hLift, hEqual, hFinite, hHom,
+    filteredColimit_category_iso_clause J F s V hFinite⟩
 
 end CategoryTheory
