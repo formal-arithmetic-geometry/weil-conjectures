@@ -26,10 +26,9 @@
  ],
  "proof": [
   {
-   "text": "Let $K^\\bullet$ be acyclic. The Hom complex from $K^\\bullet$ to the termwise product $I^\\bullet$ is the product, over $t\\in T$, of the Hom complexes from $K^\\bullet$ to $I_t^\\bullet$, because $I^n=\\prod_t I_t^n$ in every degree. Each factor is acyclic by K-injectivity, and products of abelian groups are exact [lem-pc-abelian-groups-exact-products], so a product of acyclic complexes of abelian groups is acyclic (cohomology commutes with products, kernels and images being computed factorwise); hence the product Hom complex is acyclic. Thus $I^\\bullet$ is K-injective.",
+   "text": "For a map from an acyclic complex K into the termwise product P, each composite with a projection to I_t admits a null-homotopy by K-injectivity [def-sp-kinjective-bridge]. Assemble their degree-(p,q) components using the limit in degree q. The homotopy zero and commutation identities hold after every projection, so degreewise limit extensionality proves them. This gives a null-homotopy of the original map, hence P is K-injective. The Lean helper productHomotopy proves the more general assertion for homotopies between any two maps.",
    "uses": [
-    "def-sp-kinjective-bridge",
-    "lem-pc-abelian-groups-exact-products"
+    "def-sp-kinjective-bridge"
    ],
    "elementary": false,
    "source": {
@@ -38,7 +37,7 @@
    }
   },
   {
-   "text": "For every complex $K^\\bullet$, the termwise definition of $I^\\bullet$ identifies chain maps $K^\\bullet\\to I^\\bullet$ and chain homotopies between them with families of chain maps $K^\\bullet\\to I_t^\\bullet$ and chain homotopies. Therefore composition with the projections gives $\\operatorname{Hom}_{K(\\mathcal A)}(K^\\bullet,I^\\bullet)=\\prod_t\\operatorname{Hom}_{K(\\mathcal A)}(K^\\bullet,I_t^\\bullet)$.",
+   "text": "Mathlib isLimitConeOfHasLimitEval gives the termwise cone its limit property in complexes. Lift a cone in the homotopy category componentwise through the full quotient functor and then apply this limit property. The projection equations follow by functoriality. For uniqueness, represent a candidate by a chain map and turn equality of its projections in the homotopy category into component homotopies; productHomotopy assembles them, proving equality in the quotient.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -47,7 +46,7 @@
    }
   },
   {
-   "text": "Each $I_t^\\bullet$, and by Step 1 also $I^\\bullet$, satisfies the hypothesis of the K-injective Hom comparison: a chain map from an acyclic complex $N^\\bullet$ is a $0$-cocycle of the acyclic Hom complex $\\operatorname{Hom}^\\bullet(N^\\bullet,-)$, hence a coboundary, i.e. homotopic to zero. For every $K^\\bullet$, the K-injective Hom comparison identifies each Hom set into $QI^\\bullet$ in $D(\\mathcal A)$ with the corresponding Hom set in $K(\\mathcal A)$, and does the same for every $QI_t^\\bullet$. Combining these bijections with Step 2 yields $\\operatorname{Hom}_{D(\\mathcal A)}(QK^\\bullet,QI^\\bullet)=\\prod_t\\operatorname{Hom}_{D(\\mathcal A)}(QK^\\bullet,QI_t^\\bullet)$, so $QI^\\bullet$ with the projections represents the product.",
+   "text": "Use the K-injective Hom comparison [lem-weil-pbc-kinjective-hom-derived] for P and every I_t. The private mapProduct helper transfers a discrete limit through an essentially surjective functor whose maps on morphisms into the cone point and every diagram object are bijective: pull back each cone through an object preimage and the Hom bijections, lift with the original limit, and prove uniqueness using the same bijections. Apply it to Qh and the homotopy-category product of Step 2. Finally transport the limiting cone along quotientCompQhIso, obtaining exactly Q.mapCone P and thus the product [def-weil-category-product].",
    "uses": [
     "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-category-product"
@@ -62,13 +61,14 @@
  "proof_deps": [
   "def-sp-kinjective-bridge",
   "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-category-product",
-  "lem-pc-abelian-groups-exact-products"
+  "def-weil-category-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "N2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0BK6, label lemma-product-K-injective"
+  "place": "Tag 0BK6; componentwise null-homotopy variant of its Hom-complex argument; Mathlib Qh_map_bijective"
  },
  "mathlib_searches": [
   {
@@ -145,5 +145,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T095915-L-321649",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
