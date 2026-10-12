@@ -152,7 +152,8 @@ lemma isPullback_local {U' : X'.affineOpens} {U : X.affineOpens} (h : U'.1 ≤ g
 
 /-- **Base change of the relative `Proj`**: if `A'` is identified with the coefficientwise
 pullback `g^* A`, then the comparison morphism exhibits `Proj_{X'}(A')` as the fibre product
-`X' ×_X Proj_X(A)`. No flatness of `g` is needed.
+`X' ×_X Proj_X(A)`. No flatness of `g` is needed: this is the base change of the relative `Proj`
+along an arbitrary morphism (blueprint: `lemma-nagata-relative-proj-base-change-arbitrary`).
 (blueprint: `prop-nagata-relative-proj-functoriality`, item 4) -/
 theorem isPullback :
     IsPullback D.relProjComparison A'.relProjHom A.relProjHom g := by
@@ -172,7 +173,8 @@ theorem isPullback :
   · simp
   · simp
 
-/-- The base change isomorphism `Proj_{X'}(g^* 𝒜) ≅ X' ×_X Proj_X(𝒜)`.
+/-- The base change isomorphism `Proj_{X'}(g^* 𝒜) ≅ X' ×_X Proj_X(𝒜)` for an arbitrary morphism
+`g : X' ⟶ X` (blueprint: `lemma-nagata-relative-proj-base-change-arbitrary`).
 (blueprint: `prop-nagata-relative-proj-functoriality`, item 4) -/
 noncomputable def relProjIsoPullback : A'.relProj ≅ pullback A.relProjHom g :=
   D.isPullback.isoPullback
