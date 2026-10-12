@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Module base change maps and open restriction
@@ -56,7 +55,14 @@ theorem moduleBaseChangeMap_naturality {X S T X₁ : Scheme.{u}}
     (tensorPullback u₁).map ((pushforward f).map φ) ≫ moduleBaseChangeMap f f₁ u₁ v h G =
       moduleBaseChangeMap f f₁ u₁ v h F ≫
         (pushforward f₁).map ((tensorPullback v).map φ) := by
-  sorry
+  unfold moduleBaseChangeMap
+  apply (Classical.choose (exists_tensorPullbackAdjunction u₁)).homEquiv_naturality_right_square
+  let e := Classical.choose (exists_tensorPullbackAdjunction v)
+  let t : pushforward f ⟶ tensorPullback v ⋙ pushforward v ⋙ pushforward f :=
+    Functor.whiskerRight e.unit (pushforward f)
+  let q : pushforward v ⋙ pushforward f ⟶ pushforward f₁ ⋙ pushforward u₁ :=
+    (pushforwardComp v f).hom ≫ (pushforwardCongr h).hom ≫ (pushforwardComp f₁ u₁).inv
+  exact (t ≫ Functor.whiskerLeft (tensorPullback v) q).naturality φ
 
 /-- Base change maps commute with restriction to open squares with full inverse-image
 opens, and the restriction maps are isomorphisms.
