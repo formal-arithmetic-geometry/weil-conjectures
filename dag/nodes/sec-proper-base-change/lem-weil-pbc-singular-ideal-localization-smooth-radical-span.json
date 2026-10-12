@@ -22,22 +22,42 @@
  ],
  "proof": [
   {
-   "text": "Use the finite principal-cover argument: after localizing at f, the smooth elements generate the unit ideal; localizations at them are smooth by localization and commuting principal localizations; apply smoothness local on a finite principal cover.",
+   "text": "Set B = A_f and s to the image of smoothElements R A in B. Ideal.mem_map_of_mem and Ideal.map_span map the hypothesis f^n in the span to its image in Ideal.span s. IsLocalization.Away.algebraMap_isUnit and IsUnit.pow show this image is a unit. Ideal.eq_top_of_isUnit_mem therefore gives Ideal.span s = top, including n = 0 and the zero ring.",
    "uses": [
     "def-weil-pbc-singular-ideal",
     "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each g in smoothElements R A, let C = (A_g)_f and D = (A_f)_g. Smooth.of_isLocalization_Away gives smoothness of C over A_g; Smooth.comp gives smoothness over R. IsLocalization.Away.mul and mul' identify C and D as localizations of A at f*g. IsLocalization.algEquiv gives their canonical A-algebra equivalence, and restrictScalars R makes it an R-algebra equivalence. Smooth.of_equiv transports smoothness from C to D.",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-smooth-ring-map-principal-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Algebra.smooth_of_localization_span_universes to B and s, using the span equality from step 1 and the smooth principal localizations from step 2.",
+   "uses": [
+    "lem-weil-pbc-smooth-of-localization-span-universes"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-singular-ideal",
-  "def-weil-pbc-smooth-ring-map"
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-smooth-of-localization-span-universes"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "proof of Lemma 07EU"
+  "place": "proof of Lemma 07EU, expanded by Algebra Lemmas 00T3 and 00TC; Lean realization by A3 using Mathlib localization equivalences and the existing universe-polymorphic span criterion"
  },
  "mathlib_searches": [
   {
@@ -97,10 +117,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T113946-L-820474",
-  "kind": "interface",
+  "landing": "20261012T135216-L-1655387",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

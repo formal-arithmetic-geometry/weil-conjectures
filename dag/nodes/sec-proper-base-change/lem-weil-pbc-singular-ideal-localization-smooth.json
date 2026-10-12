@@ -28,52 +28,22 @@
  ],
  "proof": [
   {
-   "text": "(A finite relation.) Let $G=\\{g\\in A: A_g\\text{ is a smooth }R\\text{-algebra}\\}$, so that $H_{A/R}=\\sqrt{(G)}$ by [def-weil-pbc-singular-ideal]. Since $f\\in H_{A/R}$ there is $n\\ge1$ with $f^n\\in(G)$, i.e. there are finitely many $g_1,\\dots,g_m\\in G$ ($m\\ge0$; $m=0$ when $f^n=0$) and $a_1,\\dots,a_m\\in A$ with $f^n=\\sum_{i=1}^m a_ig_i$, and each $A_{g_i}$ is a smooth $R$-algebra. In $A_f$ the element $f$ is a unit, so $1=\\sum_i (a_i/f^n)\\,(g_i/1)$: the images $g_1/1,\\dots,g_m/1$ generate the unit ideal of $A_f$ (if $m=0$ then $1=0$ in $A_f$, $A_f=0$, and the empty family generates its unit ideal).",
+   "text": "Unfold membership in singularIdeal R A as membership in the radical of Ideal.span (smoothElements R A). Ideal.mem_radical_iff gives n with f^n in that span. Apply Algebra.smooth_localization_span_from_radical R A f n to conclude smoothness of A_f.",
    "uses": [
-    "def-weil-pbc-singular-ideal"
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-singular-ideal-localization-smooth-radical-span"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Definition Tag 07C5 (definition-singular-ideal), with $H_{A/R}=\\sqrt{(G)}$ as in the node; the use 'A_{f_i} is smooth over R by definition of H_{A/R}' in the proof of Lemma Tag 07EU (lemma-final-solve)"
-   }
-  },
-  {
-   "text": "($(A_f)_{g_i}$ is smooth over $R$.) Fix $i$ and write $g=g_i$. The composite $A\\to A_f\\to(A_f)_{g}$ is a localization of $A$ at $M=\\{(fg)^k:k\\ge0\\}$ in the sense of [lem-weil-pbc-localization-of-localization]: (a) $fg$ maps to the product of the units $f/1$ and $g/1$; (b) every element is $(x/f^l)/(g/1)^k=(xf^kg^l)/(fg)^{k+l}$; (c) if $x$ maps to $0$, then $g^kx/1=0$ in $A_f$ for some $k$, so $f^lg^kx=0$ in $A$ for some $l$, and $(fg)^{\\max(k,l)}x=0$. Hence $(A_f)_g\\cong A_{fg}$ as $A$-algebras, and by the same check with $f,g$ exchanged $(A_g)_f\\cong A_{fg}$; so $(A_f)_g\\cong(A_g)_f$ as $A$-algebras, hence as $R$-algebras via $R\\to A$. Since $R\\to A_g$ is smooth ($g\\in G$), its principal localization $R\\to A_g\\to(A_g)_{f}$ (at the image $f/1$ of $f$) is smooth [lem-weil-pbc-smooth-ring-map-principal-localization]; smoothness [def-weil-pbc-smooth-ring-map] is preserved by an $R$-algebra isomorphism, so $R\\to(A_f)_{g_i}$ is smooth.",
-   "uses": [
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "def-weil-pbc-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00T3 (lemma-localize-smooth: a principal localization of a smooth algebra is smooth); the identification $(A_f)_g\\cong A_{fg}$ by the characterization of localizations in Algebra, Section Tag 00CM (Definition Tag 00CO, Proposition Tag 00CP)"
-   }
-  },
-  {
-   "text": "($A_f$ is smooth.) Apply [lem-weil-pbc-smooth-ring-map-local-on-cover] to $R\\to S=A_f$ and the elements $g_1/1,\\dots,g_m/1\\in A_f$, which generate the unit ideal (step 1) and whose localizations $(A_f)_{g_i}$ are smooth over $R$ (step 2). Hence $A_f$ is a smooth $R$-algebra. (This is the finite-cover form of Algebra, Lemma Tag 00TC: $R\\to A_f$ is smooth at every prime of $A_f$.)",
-   "uses": [
-    "lem-weil-pbc-smooth-ring-map-local-on-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00TC (lemma-locally-smooth), the finite covering in its proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-singular-ideal",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-localization-of-localization",
-  "lem-weil-pbc-smooth-ring-map-local-on-cover",
-  "lem-weil-pbc-smooth-ring-map-principal-localization"
+  "lem-weil-pbc-singular-ideal-localization-smooth-radical-span"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "proof of Lemma Tag 07EU (lemma-final-solve), 'A_{f_i} is smooth over R by definition of H_{A/R}', expanded with Definition Tag 07C5 and Algebra, Lemma Tag 00TC (lemma-locally-smooth, literature/stacks-project/algebra.tex)"
+  "place": "proof of Lemma 07EU; existing radical-membership wrapper, with its dependency record aligned by A3"
  },
  "mathlib_searches": [
   {
@@ -161,16 +131,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T113946-L-820474",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "Algebra.smooth_localization_of_mem_singularIdeal"
-  ],
-  "sorry_after": [
-   "Algebra.smooth_localization_span_from_radical"
-  ]
+  "landing": "20261012T135216-L-1655387",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
