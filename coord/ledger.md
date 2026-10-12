@@ -9543,3 +9543,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: merged deliver/D2/Sheaf.AlgebraicGeometry.StrictHenselizationModuleFibreFactorization (stage 3; reviewer PASS; after a return; landing 20261012T211612-L-1056618 (proof); batch 20261012T211610; modules 1; new nodes 0)
 - 21:16 L: merged deliver/E1/Sheaf.CategoryTheory.ColimitSiteRawSectionDiagram (stage 3; reviewer PASS; first push; landing 20261012T211613-L-1056764 (proof); batch 20261012T211610; modules 1; new nodes 0)
 - 21:16 L: merged deliver/E2/Sheaf.RingTheory.CohenRingModPowFormallySmooth (stage 3; reviewer PASS; first push; landing 20261012T211613-L-1056869 (interface); batch 20261012T211610; modules 4; new nodes 3)
+- 21:16 L: merged deliver/F2/Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent (stage 3; reviewer PASS; first push; landing 20261012T211613-L-1056993 (proof); batch 20261012T211610; modules 1; new nodes 0)

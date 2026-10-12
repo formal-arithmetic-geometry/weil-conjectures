@@ -25,38 +25,38 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded finite-free witness E^\\bullet\\to K^\\bullet for the m-pseudo-coherence hypothesis; finite free modules are finite projective, so E^\\bullet is a bounded complex of finite projective R-modules. Because H^i(K^\\bullet)=0 for i>m and the witness induces isomorphisms in those degrees, H^i(E^\\bullet)=0 for every i>m.",
+   "text": "Unpack the m-pseudo-coherent witness E, its upper bound b, its degreewise finite free modules, and f:Q(E)→Q(K). A free module is projective (Mathlib ModuleCat.projective_of_categoryTheory_projective). For i>m, the isomorphism H^i(f) and H^i(K)=0 give H^i(Q(E))=0; homologyFunctorFactors identifies this with E.homology i, so E is exact at i.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064S, proof of lemma-finite-cohomology"
+    "place": "Tag 064S, label lemma-finite-cohomology"
    }
   },
   {
-   "text": "Working with finite projective modules (the splitting below need not preserve freeness): if the largest degree b with E^b\\ne0 satisfies b>m, then H^b(E^\\bullet)=0 makes d^{b-1}:E^{b-1}\\to E^b surjective. Since E^b is finite projective, split this surjection and write E^{b-1}=E'^{b-1}\\oplus E^b so that the differential on the second summand is the identity. Removing the resulting contractible two-term summand leaves a bounded complex of finite projectives with the same cohomology and top degree at most b-1. Repeating finitely many times gives E'^\\bullet with E'^i=0 for i>m and H^m(E')\\cong H^m(E^\\bullet). Then H^m(E')=E'^m/\\operatorname{im}(d^{m-1}) is a quotient of the finitely generated module E'^m, hence finite type.",
+   "text": "Set B=max(m,b), so E is strictly supported in degrees ≤B. Descend from B to m, proving that Z^i(E) is a retract of E^i. At B the outgoing differential is zero, so iCyclesIso identifies the cycles with E^B. In the induction step n>m, Z^n(E) is projective as a retract of E^n (Retract.projective). Exactness at n makes g:E^(n-1)→Z^n(E) an epimorphism (ShortComplex.Exact.epi_toCycles, transported by cyclesIsoSc'). Let s:Z^n(E)→E^(n-1) be a section supplied by Projective.factorThru. The endomorphism 1-g≫s of E^(n-1) has zero composite with d^(n-1), so liftCycles factors it through Z^(n-1)(E). Its restriction to Z^(n-1)(E) is the identity, because iCycles≫g=0. This is the required retract. The induction is Int.leInductionDown, with invariant m≤i→Nonempty(Retract(Z^i(E),E^i)). This is the cycle-level form of the source's split top-term cancellation; no modified complex or freeness of a kernel is required.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064S, proof of lemma-finite-cohomology"
+    "place": "Tag 064S, label lemma-finite-cohomology"
    }
   },
   {
-   "text": "The witness map induces a surjection H^m(E^\\bullet)\\twoheadrightarrow H^m(K) by m-pseudo-coherence. A quotient of a finite type module is finite type, so H^m(K) is finite type.",
+   "text": "At i=m, the retract projection E^m→Z^m(E) is epic and hence surjective by ModuleCat.epi_iff_surjective. Apply Module.Finite.of_surjective to obtain finite cycles, then to homologyπ to obtain finite H^m(E). Transport finite generation to H^m(Q(E)) using the inverse of homologyFunctorFactors, and apply Module.Finite.of_surjective again to H^m(f), which is epic by the witness hypothesis. This proves finite generation of H^m(Q(K)).",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064S, proof of lemma-finite-cohomology"
+    "place": "Tag 064S, label lemma-finite-cohomology"
    }
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 064S, proof of lemma-finite-cohomology"
+  "place": "Tag 064S (1), proof of lemma-finite-cohomology; F2 formalization of its descending projective splitting argument using cycle retracts"
  },
  "mathlib_searches": [
   {
@@ -167,5 +167,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T211613-L-1056993",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
