@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-!
 # Local constancy under open restriction
@@ -22,6 +24,36 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
+
+private noncomputable def overRestrictionIso {X : Scheme.{u}} (V : X.Etale)
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+    (Etale.overSheafEquiv V (Type (u + 1))).functor.obj (F.over V) ≅
+      (AlgebraicGeometry.Etale.localizationRestriction (Type (u + 1)) V.hom V.prop).obj F :=
+  (fullyFaithfulSheafToPresheaf _ _).preimageIso
+    (Functor.isoWhiskerRight (NatIso.op (Etale.etaleToOverCompForgetIso V).symm) F.obj)
+
+private lemma constant_over_iff_setPullback {X : Scheme.{u}} (V : X.Etale)
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+    (F.over V).IsConstant (X.smallEtaleTopology.over V) ↔
+      ((etaleSetPullback V.hom).obj F).IsConstant V.left.smallEtaleTopology := by
+  obtain ⟨ρ, _⟩ := etaleSetInverseImageRestriction V.hom
+  let e := overRestrictionIso V F ≪≫ (ρ.app F).symm
+  rw [← Sheaf.isConstant_sheafCongr_functor_iff (J := X.smallEtaleTopology.over V)
+    (K := V.left.smallEtaleTopology) (Etale.overEquiv V) Over.mkIdTerminal (F.over V)]
+  constructor
+  · intro h
+    let : CategoryTheory.Sheaf.IsConstant V.left.smallEtaleTopology
+        ((Etale.overSheafEquiv V (Type (u + 1))).functor.obj (F.over V)) := h
+    exact Sheaf.isConstant_congr _ e
+  · intro h
+    let : CategoryTheory.Sheaf.IsConstant V.left.smallEtaleTopology
+        ((etaleSetPullback V.hom).obj F) := h
+    exact Sheaf.isConstant_congr _ e.symm
+
+private lemma constant_setPullback {X Y : Scheme.{u}} (g : Y ⟶ X) [Etale g]
+    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) [F.IsConstant X.smallEtaleTopology] :
+    ((etaleSetPullback g).obj F).IsConstant Y.smallEtaleTopology := by
+  exact (constant_over_iff_setPullback (Etale.mk g) F).mp (F.isConstant_over _)
 
 /-- Restricting a locally constant set-valued etale sheaf to an open subscheme preserves
 local constancy. No finiteness or Noetherian hypothesis is needed.
@@ -45,6 +77,31 @@ Thus the base-changed cover is a trivializing cover of the inverse image on U. -
 theorem isLocallyConstantEtaleSheafOfSets_open_pullback
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (Type (u + 1)))
     (U : X.Opens) (hF : IsLocallyConstantEtaleSheafOfSets F) :
-    IsLocallyConstantEtaleSheafOfSets ((etaleSetPullback U.ι).obj F) := by sorry
+    IsLocallyConstantEtaleSheafOfSets ((etaleSetPullback U.ι).obj F) := by
+  obtain ⟨𝒰, h𝒰⟩ := hF
+  let : etalePrecoverage.IsStableUnderBaseChange :=
+    inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
+  obtain ⟨c, _⟩ := etaleSetInverseImageCompositionUnits.2.2
+  refine ⟨𝒰.pullback₂ U.ι, fun i ↦ ?_⟩
+  apply (constant_over_iff_setPullback _ _).mpr
+  have h₁ := (constant_over_iff_setPullback (𝒰.etalePrecoverageToEtale i) F).mp (h𝒰 i)
+  let : CategoryTheory.Sheaf.IsConstant (𝒰.X i).smallEtaleTopology
+      ((etaleSetPullback (𝒰.f i)).obj F) := h₁
+  have h₂ := constant_setPullback (Limits.pullback.fst (𝒰.f i) U.ι)
+    ((etaleSetPullback (𝒰.f i)).obj F)
+  let : CategoryTheory.Sheaf.IsConstant
+      (Cover.etalePrecoverageToEtale (𝒰.pullback₂ U.ι) i).left.smallEtaleTopology
+      ((etaleSetPullback (Limits.pullback.fst (𝒰.f i) U.ι)).obj
+        ((etaleSetPullback (𝒰.f i)).obj F)) := h₂
+  let e : (etaleSetPullback (Limits.pullback.fst (𝒰.f i) U.ι)).obj
+      ((etaleSetPullback (𝒰.f i)).obj F) ≅
+      (etaleSetPullback (Limits.pullback.snd (𝒰.f i) U.ι)).obj
+        ((etaleSetPullback U.ι).obj F) :=
+    ((c X (𝒰.X i) (Limits.pullback (𝒰.f i) U.ι) (𝒰.f i)
+        (Limits.pullback.fst (𝒰.f i) U.ι)).app F) ≪≫
+      eqToIso (congrArg (fun m ↦ (etaleSetPullback m).obj F) Limits.pullback.condition) ≪≫
+      ((c X U (Limits.pullback (𝒰.f i) U.ι) U.ι
+        (Limits.pullback.snd (𝒰.f i) U.ι)).app F).symm
+  exact Sheaf.isConstant_congr _ e
 
 end AlgebraicGeometry.Scheme

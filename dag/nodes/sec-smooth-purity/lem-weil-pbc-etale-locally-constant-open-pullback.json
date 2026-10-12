@@ -25,28 +25,38 @@
  ],
  "proof": [
   {
-   "text": "Choose an etale cover trivializing F on the localized sites and base change it to U. The etale inverse-image restriction comparison identifies the restriction of the pullback sheaf on each base-changed member with the twice-localized restriction of F.",
+   "text": "Identify constancy of F.over V with constancy of its inverse image along V.hom. Use Scheme.Etale.overSheafEquiv, etaleToOverCompForgetIso, fullyFaithfulSheafToPresheaf.preimageIso and the inverse-image restriction comparison to identify the two sheaves. Sheaf.isConstant_sheafCongr_functor_iff transports constancy across the site equivalence and Sheaf.isConstant_congr across the comparison isomorphism. These general constant-sheaf and equivalence interfaces are already proved in WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence.",
    "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-site-localization-open"
    ],
    "elementary": false
   },
   {
-   "text": "Localization sends a constant sheaf to a constant sheaf: restrict the constant presheaf and use that localization preserves covering families, so its associated sheaf is the localization of the associated constant sheaf. Transport this constancy through the comparison isomorphisms. The base-changed etale cover therefore trivializes the pullback of F. This is the localization/constant-sheaf argument recorded in the declaration docstring; it does not assert finite stalks.",
+   "text": "For an etale morphism g, restriction of a constant sheaf to the site localized at Etale.mk g is constant by the proved general library lemma CategoryTheory.Sheaf.isConstant_over (WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf). The preceding identification makes its set inverse image constant. Apply this to each projection V times_X U to V. Choose the original trivializing cover and base change it using Cover.pullback₂; stability under base change is the precoverage instance.",
    "uses": [
     "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the composition isomorphisms c supplied by the inverse-image composition theorem. The pullback square condition identifies the two composite scheme morphisms, so composing c, eqToIso of that equality, and the inverse of c gives an isomorphism between the two iterated inverse images. Transport constancy with Sheaf.isConstant_congr and then the first-step identification. Every member of the base-changed cover therefore trivializes the inverse image on U, giving local constancy.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
   "lem-weil-pbc-sets-etale-inverse-image-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-constructible-noetherian.md",
-  "place": "Detailed reduction of blueprint proof steps 2--3, as in the Lean declaration docstring; second reading by J2."
+  "place": "Open restriction preserves local constancy; Lean implementation by E1 using site localization and inverse-image composition."
  },
  "mathlib_searches": [
   {
@@ -137,10 +147,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T060742-L-2909566",
-  "kind": "interface",
+  "landing": "20261012T070533-L-3468991",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
