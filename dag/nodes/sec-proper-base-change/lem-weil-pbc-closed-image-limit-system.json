@@ -1,0 +1,176 @@
+{
+ "id": "lem-weil-pbc-closed-image-limit-system",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0A0P approximation goal; alternative closed-image argument written by N2, using Morphisms Tag 01R8 and Limits Tag 01YX",
+   "via": [
+    "lem-weil-pbc-proper-limit-noetherian-core",
+    "lem-weil-pbc-proper-limit-noetherian",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Closed subschemes are limits of their stage scheme-theoretic images",
+ "statement": "Let $J$ be a small nonempty cofiltered category and $D:J\\to\\mathsf{Scheme}$ a diagram of schemes [def-pc-scheme]. Suppose every $D_j$ is quasi-compact [def-weil-pbc-quasi-compact-scheme] and quasi-separated (the intersection of any two quasi-compact open subsets is quasi-compact), and every transition morphism is affine [pqf-def-affine-morphism]. Let $\\pi_Y$ be a limit cone with vertex $Y$ and let $i:X\\to Y$ be a closed immersion [def-weil-closed-immersion]. Then there exist a diagram $Z:J\\to\\mathsf{Scheme}$, a natural transformation $k:Z\\to D$ with closed immersion components, and a cone $\\pi_X$ with vertex $X$, such that $X$ is its limit, every transition of $Z$ is affine, and $\\pi_{X,j}\\mathbin{;}k_j=i\\mathbin{;}\\pi_{Y,j}$ for every $j\\in J$ (composition written in diagram order).",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0A0P approximation goal; alternative closed-image argument written by N2, using Morphisms Tag 01R8 and Limits Tag 01YX"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The limit projections are affine by isAffineHom_π_app. Hence i followed by a projection is quasi-compact. For each j take the scheme-theoretic image Z_j with its closed inclusion k_j and factorization of X → D_j. The kernel description on affine opens supplies these images.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arrow j → l, the composite Z_j → D_j → D_l factors through Z_l: functions in the image ideal at l map to zero on X and hence vanish in the image ring at j. The unique factorization defines Z_j → Z_l. Monicity of k_l proves composition, identities, naturality, and the cone equations. The induced map from Z_j into Z_l × over D_l with D_j is a closed immersion since its composite to D_j is k_j. The projection of this pullback to Z_l is affine, so transitions of Z are affine.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-weil-pbc-closed-immersion-from-composite",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix an affine open of a stage and restrict to its over category. The affine inverse images have rings B_j with filtered colimit B; X over their limit is Spec(B/I). The image over each stage open is Spec(B_j/ker(B_j → B/I)). Every element of B/I comes from some B_j. If an element of an image ring maps to zero in B/I, it is already zero by the definition of that kernel. Thus these quotient rings have colimit B/I. Spec turns this into a limit, giving the limit property locally on every such affine open.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-limit-global-sections-colimit",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local identifications and factorizations agree on overlaps by uniqueness of the maps into the closed images. They therefore glue. For a test cone, first use the limit property of Y to get its map to Y, and then use these affine local identifications to factor it uniquely through X. This is the IsLimit structure on the displayed cone.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-from-composite",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0A0P approximation goal; alternative closed-image argument written by N2, using Morphisms Tag 01R8 and Limits Tag 01YX; Lean implementation by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme of a cofiltered limit of schemes is the inverse limit of its scheme theoretic images in the stages",
+   "results": "Service unavailable (Internal Server Error), recorded in searches.jsonl; no search verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme of a cofiltered limit of schemes is the inverse limit of its scheme theoretic images in the stages",
+   "results": "isAffineHom_π_app, isLimitOpensCone, exists_appTop_π_eq_of_isLimit; properness and finite-type instances. No single theorem gives this construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, CategoryTheory.Limits.IsLimit",
+   "results": "none",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*isLimit|isLimit.*image|proper.*stage",
+   "results": "No matching closed-image limit construction. Scheme.exists_isPullback_of_finitePresentation supplies finite-presentation descent, and exists_isProper_baseChange_of_isLimit supplies eventual properness.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reconstruct a closed subscheme of an affine inverse limit by quotients of the rings at each stage by the kernels of their maps to its coordinate ring",
+   "results": "IdealSheafData.subscheme, subschemeObjIso, and specTargetImage; no closed-image inverse-system reconstruction theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"image\", \"IsLimit\"",
+   "results": "Two ShortComplex.Exact image limit lemmas in abelian categories; neither concerns schemes.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subscheme.*(limit|cone)|isLimit.*(ker|image)|image.*IsLimit",
+   "results": "Mathlib.AlgebraicGeometry.AffineTransitionLimit: closed-subscheme cone construction inside exists_mem_of_isClosed_of_nonempty. It does not identify the original closed subscheme with the supremum of pulled-back image ideals; no exact theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperLimitNoetherianCore",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImageLimitSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImageLimitSystem.lean",
+  "declaration": "AlgebraicGeometry.exists_closed_image_limit_system",
+  "statement": "theorem exists_closed_image_limit_system\n    {J : Type u} [SmallCategory J] [IsCofiltered J]\n    (D : J ⥤ Scheme.{u})\n    [∀ {j k : J} (a : j ⟶ k), IsAffineHom (D.map a)]\n    [∀ j : J, CompactSpace (D.obj j)]\n    [∀ j : J, QuasiSeparatedSpace (D.obj j)]\n    {X Y : Scheme.{u}} (i : X ⟶ Y) [IsClosedImmersion i]\n    (πY : (Functor.const J).obj Y ⟶ D) (hY : IsLimit (Cone.mk Y πY)) :\n    ∃ (Z : J ⥤ Scheme.{u}) (k : Z ⟶ D)\n      (πX : (Functor.const J).obj X ⟶ Z),\n      Nonempty (IsLimit (Cone.mk X πX)) ∧\n      (∀ {j k : J} (a : j ⟶ k), IsAffineHom (Z.map a)) ∧\n      (∀ j : J, IsClosedImmersion (k.app j)) ∧\n      (∀ j : J, πX.app j ≫ k.app j = i ≫ πY.app j)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-877b3",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T085312-L-28775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-877b3",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T085312-L-28775",
+  "kind": "interface",
+  "note": "independent Codex review: Compiled delivery files and checked their declarations, nodes, report, proof dependencies, and disputed affine-clause counterexample against the review brief"
+ }
+}

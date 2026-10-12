@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-proper-noetherian-stage",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0A0P, finite-presentation descent and subsequent properness descent (Tags 01ZM, 081F)",
+   "via": [
+    "lem-weil-pbc-proper-limit-noetherian-core",
+    "lem-weil-pbc-proper-limit-noetherian",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A proper finitely presented scheme descends to one proper Noetherian stage",
+ "statement": "Let $g:Y\\to S$ be a proper morphism of schemes [def-pc-scheme, def-weil-proper-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated (its diagonal is quasi-compact). Let $N=(I,D,\\pi)$ be a Noetherian approximation of $S$ [def-nagata-noetherian-inverse-system]. There exist $a\\in I$, a scheme $Y_0$, a proper, locally finitely presented, quasi-compact and quasi-separated morphism $p:Y_0\\to D_a$, and $h:Y\\to Y_0$, such that the commuting square with top $h$, left $g$, right $p$ and bottom $\\pi_a:S\\to D_a$ is cartesian. This is a single-stage descent assertion, with no construction of models for a general proper $X$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0A0P, finite-presentation descent and subsequent properness descent (Tags 01ZM, 081F)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-nagata-noetherian-inverse-system",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the given approximation by a nonempty directed partial order using IsFiltered.exists_directed applied to N.I opposite. Its leftOp functor is initial, so whiskering the approximation cone retains S as the limit.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Scheme.exists_isPullback_of_finitePresentation to g over this limit. Obtain p at a stage and its cartesian square H. The source of p is qcqs because p is finitely presented over a Noetherian stage.",
+   "uses": [
+    "lemma-nagata-finite-presentation-descends"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the limit pullback projection of p with g via H.isoPullback. Its map to the pullback of the identity of the base is proper: composition with the second projection equals that proper projection, and this second projection is an isomorphism. Apply exists_isProper_baseChange_of_isLimit to p and the identity of the stage to obtain a later stage where p is proper.",
+   "uses": [
+    "lem-weil-pbc-eventually-proper"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At this later stage choose p prime = pullback.snd p t. Composing the map returned by eventual properness with the second projection of the pullback of the identity gives p prime, so it is proper. Its finite-presentation properties are preserved by base change. Form h prime by pullback.lift h (g followed by the new cone leg). The cone equation and H.w give the required equality. IsPullback.of_right cancels the right pullback square to obtain the new square. Return the corresponding object in the original approximation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-eventually-proper",
+  "lemma-nagata-finite-presentation-descends"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0A0P, finite-presentation descent and subsequent properness descent (Tags 01ZM, 081F); Lean implementation by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A proper finitely presented scheme over an inverse limit descends to a proper finite stage",
+   "results": "Service unavailable (Internal Server Error), recorded in searches.jsonl; no search verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper finitely presented scheme over an inverse limit descends to a proper finite stage",
+   "results": "isAffineHom_π_app, isLimitOpensCone, exists_appTop_π_eq_of_isLimit; properness and finite-type instances. No single theorem gives this construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Limits.IsLimit",
+   "results": "none",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "image.*isLimit|isLimit.*image|proper.*stage",
+   "results": "No matching closed-image limit construction. Scheme.exists_isPullback_of_finitePresentation supplies finite-presentation descent, and exists_isProper_baseChange_of_isLimit supplies eventual properness.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper scheme of finite presentation over the limit of a noetherian approximation is the pullback of a proper finitely presented morphism at a finite stage",
+   "results": "Finite-type limit Hom descent and properness/finite-presentation pullback instances; no single proper-stage descent theorem. The upstream Scheme.exists_isPullback_of_finitePresentation and the library exists_isProper_baseChange_of_isLimit are used separately.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperLimitNoetherianCore",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperNoetherianStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperNoetherianStage.lean",
+  "declaration": "AlgebraicGeometry.exists_proper_noetherian_stage",
+  "statement": "theorem exists_proper_noetherian_stage\n    {Y S : Scheme.{u}} (g : Y ⟶ S) [IsProper g]\n    [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g]\n    (N : S.NoetherianApproximation) :\n    ∃ (a : N.I) (Y₀ : Scheme.{u}) (p : Y₀ ⟶ N.D.obj a) (h : Y ⟶ Y₀),\n      IsProper p ∧ LocallyOfFinitePresentation p ∧ QuasiCompact p ∧\n        QuasiSeparated p ∧ IsPullback h g p (N.π.app a)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-877b3",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T085312-L-28775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-877b3",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T085312-L-28775",
+  "kind": "interface",
+  "note": "independent Codex review: Compiled delivery files and checked their declarations, nodes, report, proof dependencies, and disputed affine-clause counterexample against the review brief"
+ }
+}

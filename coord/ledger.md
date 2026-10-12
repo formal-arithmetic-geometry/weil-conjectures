@@ -6952,3 +6952,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/N2/Sheaf.AlgebraicGeometry.Curve.DenseOpenRestrictionComparison (stage 3; reviewer PASS; after a return; landing 20261012T085311-L-28353 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/N2/Sheaf.AlgebraicGeometry.EtaleTensorSectionsHomComparison (stage 3; reviewer PASS; first push; landing 20261012T085311-L-28503 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/N2/Sheaf.AlgebraicGeometry.FiniteUnramifiedNeighbourhoodsDisjointRefinement (stage 3; reviewer PASS; first push; landing 20261012T085312-L-28634 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/N2/Sheaf.AlgebraicGeometry.ProperLimitNoetherianCore (stage 3; reviewer PASS; first push; landing 20261012T085312-L-28775 (interface); batch 20261012T085205; modules 3; new nodes 2)
