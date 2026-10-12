@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapDataLinearity
 
 /-! # Linearity property of module cohomology maps
 
@@ -48,6 +49,8 @@ theorem moduleCohomologyFMap_basic_linearity {X Y : Scheme.{u}} (h : X ⟶ Y)
           (ModuleCat.restrictScalars h.appTop.hom).obj
             ((X.toRingedSpace.moduleCohomology p).obj F),
       (forget₂ _ AddCommGrpCat).map L = moduleCohomologyFMap h φ p := by
-  sorry
+  let D := Classical.choice (moduleCohomologyFMapData_nonempty h G F φ)
+  obtain ⟨L, hL⟩ := moduleCohomologyFMapData_map_linear D p
+  exact ⟨L, hL.trans rfl⟩
 
 end AlgebraicGeometry.Scheme.Modules

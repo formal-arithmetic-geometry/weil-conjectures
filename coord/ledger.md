@@ -10176,3 +10176,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:55 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties (stage 3; reviewer PASS; first push; landing 20261012T235553-L-2200999 (proof); batch 20261012T235552; modules 1; new nodes 0)
 - 23:55 L: merged deliver/F4/Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel (stage 3; reviewer PASS; first push; landing 20261012T235554-L-2201107 (proof); batch 20261012T235552; modules 1; new nodes 0)
 - 23:55 L: merged deliver/H1/Sheaf.AlgebraicGeometry.AffineUniversallyExactOpcyclesFlat (stage 3; reviewer PASS; first push; landing 20261012T235554-L-2201213 (interface); batch 20261012T235552; modules 3; new nodes 2)
+- 23:55 L: merged deliver/J1/Sheaf.AlgebraicGeometry.BasicPropertiesLinearity (stage 3; reviewer PASS; first push; landing 20261012T235554-L-2201324 (interface); batch 20261012T235552; modules 2; new nodes 1)
