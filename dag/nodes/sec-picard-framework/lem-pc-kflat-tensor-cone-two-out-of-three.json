@@ -26,10 +26,11 @@
  ],
  "proof": [
   {
-   "text": "By the cone comparison for total tensor complexes [lem-pc-tensor-mapping-cone-iso], applied to $\\mathcal A^\\bullet$ and the morphism $K_1^\\bullet\\to K_2^\\bullet$, the total complex $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_3^\\bullet)$ [def-pc-tensor-complex-sheaves] is isomorphic to the mapping cone of the induced map $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_1^\\bullet)\\to\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes_{\\mathcal O}K_2^\\bullet)$. This is the identification of the tensored cone sequence with the cone of the tensor map.",
+   "text": "Use MonoidalPreadditive from [lem-pc-sheaf-modules-tensor-closed], and the zero-morphism preservation instances of [def-pc-tensor-complex-sheaves]. Apply [lem-pc-tensor-mapping-cone-iso], CochainComplex.mapBifunctorMappingCone₂Iso, and its inr compatibility lemma to identify Tot(A ⊗ Cone(f)) with Cone(Tot(1_A ⊗ f)), including the claimed inclusion equality.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
-    "lem-pc-tensor-mapping-cone-iso"
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false,
    "source": {
@@ -38,7 +39,7 @@
    }
   },
   {
-   "text": "The cone sequence for $K_1^\\bullet\\to K_2^\\bullet\\to K_3^\\bullet$ is a distinguished triangle in the homotopy category. After tensoring with the acyclic complex $\\mathcal A^\\bullet$, Step 1 gives the corresponding triangle of total tensor complexes. The two-out-of-three acyclicity statement [lem-pc-acyclic-triangle-two-out-of-three] therefore implies that if any two of $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes K_i^\\bullet)$ are acyclic, then the third is acyclic.",
+   "text": "For g = Tot(1_A ⊗ f), HomotopyCategory.mappingCone_triangleh_distinguished g gives a distinguished cone triangle. By [lem-pc-acyclic-triangle-two-out-of-three], apply ObjectProperty.ext_of_isTriangulatedClosed₃, ext_of_isTriangulatedClosed₂ and ext_of_isTriangulatedClosed₁ to the acyclic subcategory, respectively. Convert subcategory membership to complex acyclicity using quotient_obj_mem_subcategoryAcyclic_iff_acyclic; transport the third vertex along the quotient of the cone comparison isomorphism from Step 1 using prop_iff_of_iso. These are the three desired implications.",
    "uses": [
     "def-pc-acyclic-complex-modules",
     "def-weil-abstract-derived-category",
@@ -55,6 +56,7 @@
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
   "lem-pc-tensor-mapping-cone-iso",
+  "lem-pc-sheaf-modules-tensor-closed",
   "def-pc-acyclic-complex-modules",
   "def-weil-abstract-derived-category",
   "lem-pc-acyclic-triangle-two-out-of-three"
@@ -62,7 +64,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 07A3"
+  "place": "Lemma 07A3; realized by the bifunctor cone comparison and the triangulated acyclic subcategory"
  },
  "mathlib_searches": [
   {
@@ -158,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T120728-L-970755",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
