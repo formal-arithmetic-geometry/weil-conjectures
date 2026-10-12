@@ -18,9 +18,41 @@
   "def-sp-kinjective-bridge",
   "def-sp-exact-couple"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a strict lower bound n from K.property. Mathlib HomologicalComplex.instIsStrictlySupportedTruncLE preserves support in embeddingUpIntGE n, giving truncLE_plus. Construct truncation and the single cohomology complex exactly as before.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the transition defined using the inverse upper-truncation inclusion, apply CochainComplex.ιTruncLE_naturality and cancel that inverse. This proves transition_comp_ιTruncLE.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take the canonical map j supplied by [lem-weil-pbc-truncation-step-ses]. Its degree-q component, after the single-object isomorphism, is the cycles-to-homology quotient. Rewrite the required differential composite by this equation; the chain-map equation for j and the zero differential of a single complex make it zero. This proves truncLE_d_comp_homologyπ and validates the explicitly constructed projection.",
+   "uses": [
+    "lem-weil-pbc-truncation-step-ses"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the first clause of [lem-weil-pbc-truncation-triangle] to K.obj. Its first arrow equals transition by cancelling the monomorphism ιTruncLE q and using transition_comp_ιTruncLE. Its second arrow equals projection by to_single_hom_ext, cancelling singleObjXSelf.hom, and mkHomToSingle_f. Substituting these equalities into its unique-boundary conclusion proves existsUnique_boundary. The remaining definitions apply the K-injective right derived functor and transport homology along bridgeIso, as in the original construction.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-truncation-step-ses",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/def-sp-truncation-couple.md",
+  "place": "Construction at order 520, reduced to the existing canonical upper-truncation sequence and distinguished-triangle declarations; Mathlib support preservation and naturality handle the elementary compatibility proofs."
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
  "status": "split",
@@ -89,5 +121,15 @@
   "group": "E1",
   "result": "fix",
   "note": "A,B Grothendieck abelian (IsGrothendieckAbelian at hom universes); v additive+PreservesFiniteLimits; K : CochainComplex.Plus, a, ha on homology; D/E = bridge rightDerivedCohomologyWithResolution on Mathlib truncLE q and singleFunctor q (H^q K) at p+q; alpha (-1,+1) via transition at q+1; f (+2,-1) = HomologySequence.δ of RF-image of truncation triangle; g (0,0) = mor2; FIX: transition/projection now built from Mathlib ιTruncLE/truncLEMap/mkHomToSingle instead of Classical.choose of sorry'd existsUnique"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T144051-L-2088236",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

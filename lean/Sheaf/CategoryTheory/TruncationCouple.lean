@@ -9,6 +9,8 @@ public import Sheaf.CategoryTheory.KInjectiveBridge
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.CategoryTheory.TruncationTriangle
+import Sheaf.Algebra.Homology.UpperTruncationStepSES
 
 /-!
 # The truncation couple
@@ -40,7 +42,9 @@ or zero. This gives a lower bound for the truncation.
 Source: blueprint order 520 (blueprint: def-sp-truncation-couple). -/
 theorem truncLE_plus (K : CochainComplex.Plus A) (q : ℤ) :
     CochainComplex.plus A (K.obj.truncLE q) := by
-  sorry
+  obtain ⟨n, hn⟩ := K.property
+  have := hn
+  exact ⟨n, inferInstance⟩
 
 /-- The bounded-below complex representing tau_{<=q}K.
 Source: blueprint order 520 (blueprint: def-sp-truncation-couple). -/
@@ -78,7 +82,7 @@ the inclusion of tau_{<=q-1}K; cancel the inverse.
 Source: blueprint order 520 (blueprint: def-sp-truncation-couple). -/
 theorem transition_comp_ιTruncLE (K : CochainComplex.Plus A) (q : ℤ) :
     transition K q ≫ K.obj.ιTruncLE q = K.obj.ιTruncLE (q - 1) := by
-  sorry
+  simp [transition, Category.assoc]
 
 /-- The cycles-to-cohomology quotient in degree q kills the incoming differential
 of tau_{<=q}K: in degree q that complex has the cycles of K, the incoming
@@ -88,7 +92,11 @@ Source: blueprint order 520 (blueprint: def-sp-truncation-couple). -/
 theorem truncLE_d_comp_homologyπ (K : CochainComplex.Plus A) (q : ℤ) :
     ∀ i : ℤ, (ComplexShape.up ℤ).Rel i q →
       (K.obj.truncLE q).d i q ≫ (K.obj.truncLEXIsoCycles q).hom ≫ K.obj.homologyπ q = 0 := by
-  sorry
+  obtain ⟨i, j, b, hi, hs, hz, he, hj, hn⟩ :=
+    CochainComplex.exists_upperTruncationStepSES (C := A)
+  intro r hr
+  rw [← (hj K.obj q).1, ← Category.assoc, ← (j K.obj q).comm r q]
+  simp
 
 /-- The canonical second arrow of the truncation triangle: the map to the single
 complex H^q(K)[-q] whose degree-q component is the quotient from cycles to
@@ -117,7 +125,20 @@ theorem existsUnique_boundary (K : CochainComplex.Plus A) (q : ℤ) :
         (DerivedCategory.Q.obj (truncation K (q - 1)).obj)⟦(1 : ℤ)⟧,
       Triangle.mk (DerivedCategory.Q.map (transition K q))
         (DerivedCategory.Q.map (projection K q)) δ ∈ distTriang (DerivedCategory A) := by
-  sorry
+  obtain ⟨i, j, hi, hj, hδ⟩ := (DerivedCategory.truncation_triangle A q).1 K.obj
+  have hi' : i = transition K q := by
+    have : Mono (K.obj.ιTruncLE q) := by
+      dsimp only [CochainComplex.ιTruncLE]
+      infer_instance
+    apply (cancel_mono (K.obj.ιTruncLE q)).1
+    rw [hi, transition_comp_ιTruncLE]
+  have hj' : j = projection K q := by
+    apply HomologicalComplex.to_single_hom_ext
+    apply (cancel_mono
+      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.obj.homology q)).hom).1
+    rw [hj]
+    simp [projection, HomologicalComplex.mkHomToSingle_f]
+  simpa only [hi', hj', truncation, cohomologyComplex] using hδ
 
 /-- The canonical truncation triangle, with all three objects represented by complexes.
 Source: blueprint order 520 (blueprint: def-sp-truncation-couple). -/
