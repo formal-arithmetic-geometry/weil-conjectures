@@ -376,6 +376,46 @@ theorem Scheme.Modules.finite_H_of_isClosedImmersion (A : Type u) [CommRing A]
         exact he _ x }
   exact Module.Finite.equiv e'.symm
 
+/-- **Finiteness of the higher direct images of a projective morphism over a noetherian affine
+base.** Let `S` be affine with noetherian ring of global sections `A = Γ(S, ⊤)`, `f : X ⟶ S`
+projective, i.e. `f = i ≫ π` for a closed immersion `i : X ⟶ ℙⁿ_S`, and `ℱ` a coherent
+`𝒪_X`-module. Then `Γ(S, R^q f_* ℱ)` is a finite `A`-module: it is `H^q(X, ℱ)`, linearly along
+`f^♯`
+(`AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`),
+and `X` is a closed subscheme of `ℙⁿ_A ≅ ℙⁿ_S`, so
+`AlgebraicGeometry.Scheme.Modules.finite_H_of_isClosedImmersion` applies.
+
+(blueprint: `lem-pc-projective-coherent-finiteness`) -/
+theorem Scheme.Modules.finite_sections_higherDirectImage_of_isClosedImmersion {S : Scheme.{u}}
+    [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (f : X ⟶ S) (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i]
+    (hi : i ≫ ℙ(n; S) ↘ S = f) [HasInjectiveResolutions X.Modules] (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
+    Module.Finite Γ(S, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) := by
+  subst hi
+  have : IsClosedImmersion (ProjectiveSpace.map n S.toSpecΓ) :=
+    MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_map n S.toSpecΓ).flip
+      inferInstance
+  have h := finite_H_of_isClosedImmersion Γ(S, ⊤) (i ≫ ProjectiveSpace.map n S.toSpecΓ) ℱ q
+  have hg : (Scheme.ΓSpecIso Γ(S, ⊤)).inv ≫
+      ((i ≫ ProjectiveSpace.map n S.toSpecΓ) ≫ ℙ(n; Spec Γ(S, ⊤)) ↘ Spec Γ(S, ⊤)).appTop =
+      (i ≫ ℙ(n; S) ↘ S).appTop := by
+    rw [Category.assoc, ProjectiveSpace.map_over, ← Category.assoc, Scheme.Hom.comp_appTop,
+      Scheme.toSpecΓ_appTop, Iso.inv_hom_id_assoc]
+  have key (φ ψ : Γ(S, ⊤) →+* Γ(X, ⊤)) (hφψ : φ = ψ)
+      (hφ : letI := Module.compHom (ℱ.H q) φ; Module.Finite Γ(S, ⊤) (ℱ.H q)) :
+      letI := Module.compHom (ℱ.H q) ψ; Module.Finite Γ(S, ⊤) (ℱ.H q) := by
+    subst hφψ
+    exact hφ
+  let : Module Γ(S, ⊤) (ℱ.H q) := Module.compHom _ (i ≫ ℙ(n; S) ↘ S).appTop.hom
+  have h' : Module.Finite Γ(S, ⊤) (ℱ.H q) := key _ _ (congrArg (·.hom) hg) h
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+    (i ≫ ℙ(n; S) ↘ S) ℱ q
+  let e₀ : Γ((higherDirectImage (i ≫ ℙ(n; S) ↘ S) q).obj ℱ, ⊤) →ₗ[Γ(S, ⊤)] ℱ.H q :=
+    { toFun := e, map_add' := e.map_add, map_smul' := e.map_smulₛₗ }
+  let e' := LinearEquiv.ofBijective e₀ he
+  exact Module.Finite.equiv e'.symm
+
 /-- **Serre vanishing on projective space over a noetherian ring.** Let `A` be noetherian and
 `ℱ` a coherent module on `ℙⁿ_A`. There is `d₀` such that `H^q(ℙⁿ_A, ℱ(d)) = 0` for all
 `d ≥ d₀` and all `q > 0`.
