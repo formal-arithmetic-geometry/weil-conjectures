@@ -12,7 +12,9 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
-import Sheaf.CategoryTheory.FilteredColimitCategories
+import Sheaf.CategoryTheory.ColimitSiteRawStageRestriction
+import Sheaf.CategoryTheory.FinitePresieveFilteredColimit
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Raw sections: separated on stage-image covers
 
@@ -29,6 +31,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
 finite-cover matching-family calculation, with the raw Kan presentation explicit.
 (blueprint: lem-weil-pbc-colimit-site-raw-section-separated).
@@ -115,6 +118,25 @@ theorem colimit_site_raw_section_isSeparatedFor
       Arrow.mk ((θ t t' b).hom.app (op X) ≫
         (β t').app (op ((F.map b.right).toFunctor.obj X))))
     (j : J) (X : F.obj j) (R : Presieve X) (hR : R ∈ P j X) :
-    Presieve.IsSeparatedFor (colimit B) (R.map (V.ι.app j).toFunctor) := by sorry
+    Presieve.IsSeparatedFor (colimit B) (R.map (V.ι.app j).toFunctor) := by
+  obtain ⟨k, _, _, D, ⟨q⟩, _⟩ := colimit_site_raw_stage_restriction
+    J F P V hobjects harrows Q i G θ hθ B β hβ hβmap j
+  let D₀ := D ⋙ sheafToPresheaf (P j).toGrothendieck (Type u)
+  have hD : ∀ t : Under k, Presieve.IsSheafFor (D₀.obj t) R := by
+    intro t
+    have hs :=
+      (isSheaf_iff_isSheaf_of_type (P j).toGrothendieck (D.obj t).obj).mp
+        (D.obj t).property
+    exact hs.isSheafFor R ((P j).generate_mem_toGrothendieck hR)
+  let : R.HasPairwisePullbacks := (P j).hasPairwisePullbacks_of_mem hR
+  have hf : R.uncurry.Finite := Set.finite_coe_iff.mp (hfinite j X R hR)
+  have hc := finitePresieve_isSheafFor_filteredColimit D₀
+    (colimit.cocone D₀) (colimit.isColimit D₀) R hf hD
+  have hs := (Presieve.isSheafFor_iso q hc).isSeparatedFor
+  intro z x y hx hy
+  apply hs.ext
+  intro Y f hf
+  exact (hx ((V.ι.app j).toFunctor.map f) ⟨hf⟩).trans
+    (hy ((V.ι.app j).toFunctor.map f) ⟨hf⟩).symm
 
 end CategoryTheory
