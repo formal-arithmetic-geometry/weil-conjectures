@@ -16,46 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Since X is finite type over k, it is Noetherian. Its finitely many irreducible components have generic points in the dense open U. On each component the closed complement is a proper closed subset of a space of dimension at most one, so it is zero-dimensional. The reduced induced closed subscheme Z on the complement is therefore zero-dimensional and has finitely many closed points. The residue fields of these closed points are k. This includes the empty complement and zero-dimensional components, whose generic points must all lie in U.",
+   "text": "Apply exists_dense_irreducible_opens to shrink U to a dense finite union W with zero-dimensional complement. The closed-complement immersion identifies Z with a subspace of X minus U, hence with a subspace of X minus W. The inducing-map Krull dimension inequality gives dim Z <= 0. Closed immersion composed with f is separated and finite type, so the zero-dimensional cohomology theorem applies, including empty X and empty Z.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "def-weil-pbc-curve-setting"
+    "lem-pbc-q1-dense-irreducible-opens"
    ],
    "elementary": false
   },
   {
-   "text": "The constructible module sheaf F has finitely generated stalk modules, hence finite stalks because Lambda is finite. Pullback to Z has those same geometric stalks. The zero-dimensional cohomology theorem identifies its degree-zero cohomology with their finite product and makes all positive-degree cohomology zero.",
+   "text": "Pullback preserves constructibility, so G=i^*F is constructible. The proved upstream tool Scheme.IsConstructibleSheaf.isFiniteSheaf gives finitely generated geometric stalks. ModuleCat.isFinitelyGenerated_iff and Module.finite_of_finite give finite underlying sets over finite Lambda. Point.sheafFiberCompIso commutes the stalk with forgetful passage to abelian groups. Thus every abelian stalk of G is finite.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-zero-dimensional-cohomology"
+    "prop-constructible-pullback",
+    "def-constructible-constructible",
+    "def-constructible-finite"
    ],
    "elementary": false
   },
   {
-   "text": "The closed immersion i:Z to X is finite. Its direct image is exact, and the Leray identification carries the cohomology of i_*i^*F on X to that of i^*F on Z. Forgetting to abelian sheaves commutes with the direct image and inverse image comparison. Thus the underlying abelian boundary sheaf has finite H^0 and zero H^q for q positive. For the empty complement the finite product is the zero group.",
+   "text": "Apply zero_dimensional_etale_cohomology to Z, i composed with f, the underlying abelian sheaf A of G, and the algebraic-closure geometric point at each z. Its index set Z is finite. Inject the categorical product of its finite stalks into the dependent function type using its projections; Concrete.isLimit_ext proves injectivity. The degree-zero map in the theorem is an isomorphism. Compose it with nonempty_sheafH_extDerivedIso to inject Sheaf.H A 0 into that finite product. In every positive degree the same Ext-to-derived isomorphism transfers the subsingleton conclusion to Sheaf.H A q.",
    "uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-cohomology-pullback-derived-unit"
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting module structure commutes definitionally with closed-immersion direct image. Use bijective_edgeMap_of_isFinite for i and A in each degree: injectivity transfers finite degree-zero cohomology and subsingleton positive-degree cohomology from Z to X. This proves the two original conclusions, with every signature unchanged.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-curve-setting",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-constructible-constructible",
+  "def-constructible-finite",
+  "lem-pbc-q1-dense-irreducible-opens",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
   "lem-weil-pbc-zero-dimensional-cohomology",
-  "lemma-weil-pbc-finite-direct-image-exact"
+  "prop-constructible-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJA (lemma-restrict-to-open), proof, closed complement and finite stalk product; read at https://stacks.math.columbia.edu/tag/0GJA"
+  "place": "Tag 0GJA, closed-boundary computation; Lean implementation by P1 using the existing dense-open dimension, zero-dimensional cohomology, Ext/derived comparison and finite edge-map tools."
  },
  "mathlib_searches": [
   {
@@ -136,10 +140,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T063509-L-3155046",
-  "kind": "interface",
+  "landing": "20261012T085315-L-30100",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
