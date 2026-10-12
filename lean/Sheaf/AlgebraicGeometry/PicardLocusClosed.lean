@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import Sheaf.AlgebraicGeometry.ClosedImmersionOfValuativeFactorization
-import Sheaf.AlgebraicGeometry.PicardLocusClosedValuationTriviality
+import Sheaf.AlgebraicGeometry.PicardLocusClosedValuativeFactorization
 
 /-!
 # Closedness of the invertible-module pullback locus
@@ -69,6 +69,9 @@ theorem picard_locus_closed {X S : Scheme.{u}} (f : X ⟶ S)
             Nonempty (((Scheme.Modules.tensorPullback (pullback.fst f g)).obj E) ≅
               ((Scheme.Modules.tensorPullback (pullback.snd f g)).obj N)))
     [GeometricallyIntegral f] : IsClosedImmersion j := by
-  sorry
+  let _ : IsImmersion j := hj.1
+  let _ : QuasiCompact j := hj.2.2.1
+  exact (isClosed_range_and_isClosedImmersion_of_valuativeFactorization j
+    (fun sq ↦ picard_valuative_factorization f hO E j hj.2.2.2.2 sq)).2
 
 end AlgebraicGeometry.Scheme

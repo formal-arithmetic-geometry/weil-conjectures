@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-picard-locus-closed-valuative-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-locus-closed",
+   "place": "valuative factorization step",
+   "via": [
+    "lem-sc-picard-locus-closed"
+   ]
+  }
+ },
+ "kind": "statement",
+ "title": "Valuative factorization for the Picard pullback locus",
+ "statement": "Let f : X ⟶ S be flat, proper and locally of finite presentation with geometrically integral fibres, and universally isomorphic structure-sheaf adjunction units. Let E be invertible on X. Let j : Z ⟶ S satisfy the universal factorization equivalence of lem-sc-picard-diagonal-locally-closed (no immersion or finiteness assumption on j). Then each sq : ValuativeCommSq j has a factorization l : Spec(sq.R) ⟶ Z with l ≫ j = sq.i₂.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "More on Morphisms, Tag 0BF0, valuation-ring step using Tag 0EX8"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-scheme-over-base",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-sc-invertible-module",
+  "lem-sc-picard-diagonal-locally-closed",
+  "def-weil-geometric-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Base change f and E to A = sq.R. Flatness, properness, finite presentation and geometric integrality persist. The adjunction-unit hypothesis gives H⁰(X_K,O)=K. The square and the universal factorization equivalence give a finite locally free N over Spec K pulling back to L_K. Nonemptiness of X_K and invertibility of L_K force N to have rank one, so N and L_K are trivial.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Tag 0BF0"
+   }
+  },
+  {
+   "text": "The valuation-ring triviality theorem gives a trivialization over Spec sq.R. Taking the finite locally free module O on Spec sq.R in the universal property of j yields the required lift l and its commutativity.",
+   "uses": [
+    "lem-sc-picard-locus-closed-valuation-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Tag 0BF0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-locus-closed-valuation-triviality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "More on Morphisms, Tag 0BF0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "valuative Picard locus factorization",
+   "results": "8 hits including ValuativeCommSq declarations; no Picard factorization theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "valuative Picard locus factorization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuativeCommSq factorization immersion",
+   "results": "0 hits; unknown identifier ValuativeCommSq",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "picard_valuative_factorization",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "line bundle triviality valuation ring generic fibre extends",
+   "results": "Second reader: 8 hits; no exact Picard extension theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ValuativeCommSq\"",
+   "results": "Second reader: 12 hits; no exact Picard extension theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*trivial|picard.*factor|valuative.*factor",
+   "results": "Second reader: 2 hits; no exact Picard extension theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.PicardLocusClosed",
+  "by": "worker",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardLocusClosedValuativeFactorization",
+  "declaration": "AlgebraicGeometry.Scheme.picard_valuative_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardLocusClosedValuativeFactorization.lean",
+  "statement": "theorem picard_valuative_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (E : X.Modules) [E.IsInvertible] {Z : Scheme.{u}} (j : Z ⟶ S) (hj : ∀ {T : Scheme.{u}} (g : T ⟶ S), (∃ (h : T ⟶ Z), h ≫ j = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty (((Scheme.Modules.tensorPullback (pullback.fst f g)).obj E) ≅ ((Scheme.Modules.tensorPullback (pullback.snd f g)).obj N))) [GeometricallyIntegral f] (sq : ValuativeCommSq j) : ∃ l : Spec (CommRingCat.of sq.R) ⟶ Z, l ≫ j = sq.i₂",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T135303-L-1686121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T135303-L-1686121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
