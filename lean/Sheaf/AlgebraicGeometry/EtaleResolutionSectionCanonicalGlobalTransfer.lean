@@ -6,6 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalGlobalTransferPointwise
 
 /-!
 # Transfer of normalized resolution comparisons
@@ -53,6 +54,8 @@ theorem resolutionSection_canonical_transfer_global
       ((upperStar AddCommGrpCat.{u + 1} g).obj G) J) :
     ∀ q x, cY.globalEquiv q (HomologicalComplex.homologyMap
       (globalResolutionSectionTransfer g I.cocomplex J.cocomplex α) q x) =
-      cohomologyMap g G q (cX.globalEquiv q x) := by sorry
+      cohomologyMap g G q (cX.globalEquiv q x) := by
+  intro q x
+  exact resolutionSection_canonical_transfer_global_pointwise g G I J α hα cX cY q x
 
 end AlgebraicGeometry.Etale
