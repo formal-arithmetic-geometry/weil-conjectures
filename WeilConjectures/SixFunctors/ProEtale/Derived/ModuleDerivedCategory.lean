@@ -49,6 +49,18 @@ of sheaves of `A`-modules on the small pro-étale site `Y.ProEt`
 The size convention is realised by universes: schemes in `Type u`, the coefficient ring `A` and
 the values in `ModuleCat.{u + 1} A` in `Type (u + 1)`, the site being essentially small in `u + 1`.
 
+The ingredients of the blueprint definition are Mathlib's:
+* the small pro-étale site `AlgebraicGeometry.Scheme.ProEt`
+  (blueprint: `def-weil-pbc-small-proetale-site`);
+* fpqc covering families, `AlgebraicGeometry.Scheme.fpqcPrecoverage`
+  (blueprint: `def-weil-pbc-fpqc-covering`);
+* pro-étale covering families (fpqc coverings by weakly étale maps),
+  `AlgebraicGeometry.Scheme.proetalePrecoverage` (blueprint: `def-weil-pbc-proetale-covering`);
+* sheafification, `CategoryTheory.presheafToSheaf` (blueprint: `def-weil-pbc-sheafification`);
+* the constant sheaf `A_Y`, `CategoryTheory.constantSheaf`
+  (blueprint: `def-weil-pbc-constant-sheaf`); sheaves of `A_Y`-modules are the sheaves with
+  values in `ModuleCat A`.
+
 (blueprint: `def-weil-pbc-proetale-site`, `def-weil-size-convention`) -/
 abbrev ModuleDerivedCategory (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] : Type _ :=
   DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))
