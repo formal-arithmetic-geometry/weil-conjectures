@@ -31,10 +31,9 @@
  ],
  "proof": [
   {
-   "text": "(The field $k^{1/p}$.) Let $\\iota:k\\to\\Omega$ be an algebraic closure of $k$ [def-weil-algebraic-closure] (every field has one). As $p\\cdot1=0$ in $\\Omega$, the Frobenius $F_\\Omega:u\\mapsto u^p$ is a ring homomorphism [def-weil-ring-frobenius], injective since $\\Omega$ is a field. Put $L=\\{\\mu\\in\\Omega:\\mu^p\\in\\iota(k)\\}$. It contains $\\iota(k)$ ($\\iota(c)^p=\\iota(c^p)$) and is closed under sums, differences and products (as $F_\\Omega$ is a ring homomorphism) and under inverses of nonzero elements ($(\\mu^{-1})^p=(\\mu^p)^{-1}$), so $L$ is a subfield of $\\Omega$ and, with $\\iota$, a field extension of $k$ [def-pc-field-extension]; this is $k^{1/p}$. For $c\\in k$ the polynomial $T^p-\\iota(c)$ has a root $\\mu\\in\\Omega$ ($\\Omega$ is algebraically closed; for $c=0$ take $\\mu=0$), and $\\mu\\in L$; it is unique by injectivity of $F_\\Omega$. Write $c^{1/p}\\in L$ for it, so $(c^{1/p})^p=c$ (identifying $k$ with $\\iota(k)$), and $c^{1/p}=0$ only if $c=(c^{1/p})^p=0$.",
+   "text": "Let L = ULift (AlgebraicClosure k), lifted to Type (max u v). It is a field extension of k [def-weil-algebraic-closure, def-pc-field-extension]. For each coefficient c in k, the polynomial T^p-c has a root in AlgebraicClosure k, since p is positive; lift that root to L. Mathlib IsAlgClosed.exists_pow_nat_eq supplies the proved existence. There is no need to construct the smaller subfield k^{1/p}: the reducedness hypothesis applies to the whole algebraic closure.",
    "uses": [
     "def-weil-algebraic-closure",
-    "def-weil-ring-frobenius",
     "def-pc-field-extension"
    ],
    "elementary": true,
@@ -44,7 +43,7 @@
    }
   },
   {
-   "text": "((4) $\\Rightarrow$ (3).) By hypothesis, applied to the field extension $L=k^{1/p}$ of step 1, the ring $A=K\\otimes_kL$ [def-weil-vector-space-scalar-extension] is reduced. $A$ is a commutative ring with $(a\\otimes\\mu)(a'\\otimes\\mu')=aa'\\otimes\\mu\\mu'$ and unit $1\\otimes1$; it is an $L$-vector space by $\\lambda\\cdot(a\\otimes\\mu)=a\\otimes\\lambda\\mu$ [def-weil-vector-space-scalar-extension]; and for $c\\in k$ one has $ca\\otimes\\mu=a\\otimes c\\mu$ (the tensor product is over $k$). In particular $p\\cdot1_A=(p\\cdot1_k)(1\\otimes1)=0$.",
+   "text": "Apply the hypothesis to L to obtain IsReduced (K tensor_k L). Transport reducedness along Algebra.TensorProduct.comm to A = L tensor_k K [def-weil-vector-space-scalar-extension]. The tensor product is nontrivial by Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left: L is a nontrivial vector space over k and k maps injectively into K. The algebra map k to A is then injective, so charP_of_injective_algebraMap gives characteristic p.",
    "uses": [
     "def-weil-vector-space-scalar-extension"
    ],
@@ -55,7 +54,7 @@
    }
   },
   {
-   "text": "(The identity $x^p=m(x)\\otimes1$.) Let $b_1,\\dots,b_m\\in K$ and $c_1,\\dots,c_m\\in k$, and put $x=\\sum_{i=1}^mb_i\\otimes c_i^{1/p}\\in A$ (step 1). Since $A$ is commutative with $p\\cdot1_A=0$ (step 2), its Frobenius $F_A:y\\mapsto y^p$ is a ring homomorphism [def-weil-ring-frobenius], so $x^p=\\sum_i(b_i\\otimes c_i^{1/p})^p=\\sum_ib_i^p\\otimes(c_i^{1/p})^p=\\sum_ib_i^p\\otimes c_i=\\big(\\sum_ic_ib_i^p\\big)\\otimes1$, the last equality because $c_i\\in k$ passes across the tensor sign over $k$ (step 2). (This is the source's $x^p=m(x)\\otimes1$ for the map $m:\\lambda\\otimes\\mu\\mapsto\\lambda^p\\mu^p$, evaluated on $x$; only this value of $m$ is used below, so $m$ need not be constructed on all of $A$.)",
+   "text": "Given a finite linearly independent subset s of K and coefficients c with sum c(b) b^p = 0, choose roots r(b) in L with r(b)^p = c(b), from step 1. Put x = sum r(b) tensor b in A. Mathlib sum_pow_char [def-weil-ring-frobenius] and Algebra.TensorProduct.tmul_pow give x^p = sum c(b) tensor b^p. Tensor balancing [def-weil-vector-space-scalar-extension] gives x^p = 1 tensor (sum c(b) b^p) = 0.",
    "uses": [
     "def-weil-ring-frobenius",
     "def-weil-vector-space-scalar-extension"
@@ -67,9 +66,8 @@
    }
   },
   {
-   "text": "((3) $\\Rightarrow$ (2).) Let $b_1,\\dots,b_m\\in K$ be pairwise distinct and linearly independent over $k$, and let $c_1,\\dots,c_m\\in k$ with $\\sum_ic_ib_i^p=0$; we show all $c_i=0$. For $x=\\sum_ib_i\\otimes c_i^{1/p}$, step 3 gives $x^p=0\\otimes1=0$, so $x$ is nilpotent and, $A$ being reduced (step 2), $x=0$. By [lem-weil-pbc-vector-space-basis-through-vector] the linearly independent set $\\{b_1,\\dots,b_m\\}$ is contained in a $k$-basis $\\mathcal B$ of $K$, and by [def-weil-vector-space-scalar-extension] the family $(b\\otimes1)_{b\\in\\mathcal B}$ is an $L$-basis of $A=K\\otimes_kL$; in particular $b_1\\otimes1,\\dots,b_m\\otimes1$ are linearly independent over $L$. Now $0=x=\\sum_ic_i^{1/p}\\cdot(b_i\\otimes1)$ for the $L$-vector space structure of step 2, so every $c_i^{1/p}=0$, hence $c_i=0$ by step 1. Thus $K$ satisfies condition (2) of Stacks 030W: for all pairwise distinct $b_1,\\dots,b_m\\in K$ linearly independent over $k$, the elements $b_1^p,\\dots,b_m^p$ are linearly independent over $k$.",
+   "text": "Reducedness of A gives x = 0. The k-linear independence of s extends to L-linear independence of (1 tensor b) for b in s, directly by the proved Mathlib lemma Module.Flat.linearIndependent_one_tmul, since every vector space over a field is flat [def-weil-vector-space-scalar-extension]. Rewriting x as sum r(b) times (1 tensor b), Fintype.linearIndependent_iff gives every r(b) = 0. Raising to p and using injectivity of the algebra map k to L yields every c(b) = 0. Thus p-th powers preserve finite linear independence. No separate basis-extension lemma is needed.",
    "uses": [
-    "lem-weil-pbc-vector-space-basis-through-vector",
     "def-weil-vector-space-scalar-extension"
    ],
    "elementary": false,
@@ -79,7 +77,7 @@
    }
   },
   {
-   "text": "((2) $\\Rightarrow$ (1).) Let $k\\subset K'\\subset K$ be a subextension with $K'=k(a_1,\\dots,a_n)$ finitely generated over $k$; $K'$ is a field extension of $k$ [def-pc-field-extension] of characteristic $p$. If $b_1,\\dots,b_m\\in K'$ are pairwise distinct and linearly independent over $k$, they are so as elements of $K$ (a relation $\\sum c_ib_i=0$ with $c_i\\in k$ is the same in $K'$ and in $K$), so by step 4 there is no nontrivial relation $\\sum_ic_ib_i^p=0$ with $c_i\\in k$, in $K$ and hence in $K'$. Thus $K'/k$ satisfies the hypothesis of [lem-weil-pbc-p-power-independence-separably-generated], which shows that $K'$ is separably generated over $k$ in the sense of [def-weil-pbc-separable-field-extension] (1). As $K'$ was an arbitrary finitely generated subextension, $K$ is separable over $k$ in the sense of [def-weil-pbc-separable-field-extension] (2).",
+   "text": "For any finitely generated intermediate field F of K, IntermediateField.essFiniteType_iff gives Algebra.EssFiniteType k F. The inclusion F.val is injective and k-linear, so finite linear independence passes into K using LinearIndepOn.map_injOn. Apply the p-power independence from step 4 to the finite image set in K; pull it back with LinearIndepOn.comp_of_image and the linear-map criterion. Powers commute with the inclusion. Apply Mathlib exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType [lem-weil-pbc-p-power-independence-separably-generated] to F to get a finite separating transcendence basis. Its finset coerces to the set required by Algebra.IsSeparablyGenerated. Since F was arbitrary, this proves Algebra.IsSeparableExtension [def-weil-pbc-separable-field-extension].",
    "uses": [
     "lem-weil-pbc-p-power-independence-separably-generated",
     "def-weil-pbc-separable-field-extension",
@@ -97,14 +95,13 @@
   "def-weil-ring-frobenius",
   "def-pc-field-extension",
   "def-weil-vector-space-scalar-extension",
-  "lem-weil-pbc-vector-space-basis-through-vector",
   "lem-weil-pbc-p-power-independence-separably-generated",
   "def-weil-pbc-separable-field-extension"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 030W (lemma-characterize-separable-field-extensions, line 10360), proof of (4) => (3) => (2) => (1) (lines 10376-10407), with the definition of $k^{1/p}$ (lines 10352-10357); the finitely generated case of (2) => (1), proved in the source with Lemma Tag 0H71 (line 10296), is the Mathlib leaf lem-weil-pbc-p-power-independence-separably-generated"
+  "place": "Algebra, Lemma Tag 030W (4) => (3) => (2) => (1), lines 10376-10407. The same Frobenius argument is implemented with roots in the whole algebraic closure instead of its k^{1/p} subfield (the hypothesis covers both), and scalar-extension independence is supplied directly by Mathlib Module.Flat.linearIndependent_one_tmul. The finitely generated (2) => (1) step is Mathlib exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, tagged 030W."
  },
  "mathlib_searches": [
   {
@@ -224,5 +221,15 @@
   "group": "M1",
   "result": "fix",
   "note": "p prime (Fact p.Prime), k field char p (CharP k p), K/k Algebra, hred over all fields L/k in Type (max u v) (w dropped), IsReduced (K ⊗[k] L) with Mathlib tensor ring, conclusion recorded Algebra.IsSeparableExtension (FG intermediate fields separably generated); not hollow"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T144138-L-2105192",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
