@@ -60,8 +60,31 @@ theorem formallyUnramified_localization_of_mem_minimalPrimes [IsReduced X]
     (hV : IsAffineOpen V) (hV' : IsAffineOpen (f ⁻¹ᵁ V)) (p : Ideal Γ(X, f ⁻¹ᵁ V)) [p.IsPrime]
     (hp : p ∈ minimalPrimes Γ(X, f ⁻¹ᵁ V)) :
     letI := (f.app V).hom.toAlgebra
-    Algebra.FormallyUnramified Γ(Y, V) (Localization.AtPrime p) :=
-  sorry
+    Algebra.FormallyUnramified Γ(Y, V) (Localization.AtPrime p) := by
+  let := (f.app V).hom.toAlgebra
+  let y : PrimeSpectrum Γ(X, f ⁻¹ᵁ V) := ⟨p, ‹_›⟩
+  have hx : hV'.fromSpec y ∈ f ⁻¹ᵁ V := hV'.range_fromSpec.subset ⟨y, rfl⟩
+  let := X.presheaf.algebra_section_stalk ⟨_, hx⟩
+  have := hV'.isLocalization_stalk' y hx
+  let e : X.presheaf.stalk (hV'.fromSpec y) ≃ₐ[Γ(X, f ⁻¹ᵁ V)] Localization.AtPrime p :=
+    IsLocalization.algEquiv p.primeCompl _ _
+  have hfield : IsField (X.presheaf.stalk (hV'.fromSpec y)) := by
+    have := IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes p hp
+      (Localization.AtPrime p)
+    exact e.toMulEquiv.isField (PrimeSpectrum.subsingleton_iff_isField_of_isReduced.mp this)
+  have hfy : (Y.presheaf.germ V _ hx).hom.FormallyUnramified := by
+    let := Y.presheaf.algebra_section_stalk ⟨_, hx⟩
+    have := hV.isLocalization_stalk ⟨_, hx⟩
+    rw [← RingHom.algebraMap_toAlgebra (Y.presheaf.germ _ _ _).hom,
+      RingHom.formallyUnramified_algebraMap]
+    exact .of_isLocalization (hV.primeIdealOf ⟨_, hx⟩).asIdeal.primeCompl
+  have H : algebraMap Γ(Y, V) (Localization.AtPrime p) =
+      e.toRingHom.comp ((f.stalkMap _).hom.comp (Y.presheaf.germ V _ hx).hom) := by
+    rw [← CommRingCat.hom_comp, f.germ_stalkMap]
+    ext r
+    exact (e.commutes (f.app V r)).symm
+  rw [← RingHom.formallyUnramified_algebraMap, H]
+  exact .comp (.comp hfy (hf _ hfield)) (.of_surjective e.surjective)
 
 end AlgebraicGeometry.Scheme.Hom
 
