@@ -14,33 +14,33 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-etale-fibre-discrete-separable-points], specialized over the unique point of Spec K and transported along the canonical fibre isomorphism, the singleton opens are spectra of finite separable K-extensions. Pick the singleton U at x.",
+   "text": "Construct the singleton chart directly over K in the proved private helper singleton_chart, without transporting a scheme-theoretic fibre. Mathlib Scheme.Hom.isDiscrete_preimage_singleton, with the singleton of Spec K equal to the entire base, makes X discrete. The source-library etale_residueFieldMap and the isomorphism from the base residue-field spectrum show that the composite Spec κ(x) → X → Spec K is étale. Algebra.FormallyUnramified.finite_of_free and Algebra.FormallyEtale.iff_isSeparable make κ(x)/K finite separable. Reducedness follows from [etale-proposition-etale-reduced]. Lift the residue-field point to the singleton open U by IsOpenImmersion.lift. Its lift is a surjective preimmersion, hence a closed immersion because U is discrete; reducedness of U makes it an isomorphism. The inverse gives the chart over Spec K.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+    "etale-proposition-etale-reduced"
    ],
    "elementary": false
   },
   {
-   "text": "Its embeddings into Ksep form a nonempty transitive Galois set by [lem-exc-etale-field-galois-classification]. Since the action preserves components, equivariance makes their images land in one singleton target component Spec L′. The Hom-bijection of that classification produces a K-algebra map L′→L inducing the prescribed embedding map.",
+   "text": "Let L = κ(x) and send each K-embedding σ:L→Ksep to its geometric point on X through the singleton chart. Applying the given equivariant map gives geometric points b(σ) of Y. Nonemptiness and transitivity from [lem-exc-etale-field-galois-classification], together with equivariance and the one-point spectrum of Ksep, show that every b(σ) has the same underlying point y. Apply singleton_chart to Y at y, obtaining a finite separable extension M=κ(y) and a singleton chart V. Lift each b(σ) through V and compose with its chart to obtain a map Spec Ksep→Spec M. Spec.homEquiv and the equality over Spec K turn it into τ(σ):M→ₐ[K]Ksep. Cancel the monomorphism Spec M→Y to prove equivariance of τ. The surjectivity clause of the same Galois classification then produces f₀:M→ₐ[K]L with σ.comp f₀=τ(σ) for every σ.",
    "uses": [
     "lem-exc-etale-field-galois-classification"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the contravariant spectrum functor, transport via the singleton-open isomorphisms and compose with the target open immersion. The algebra map is over K and its embedding identity is the required formula for every geometric point of U. No x exists for an empty source; an empty target excludes a nonempty source by existence of a geometric point on U.",
+   "text": "Set f equal to the source chart followed by Spec(f₀) and the inverse target chart and open immersion. The commutes identity of f₀ and Spec.map_comp prove f≫Y.hom=U.ι≫X.hom. For an arbitrary geometric point p of U over K, Spec.homEquiv of p followed by the chart gives a K-embedding σ of L. Its geometric point on X equals p followed by U.ι. The identity σ.comp f₀=τ(σ), transported through Spec, and the defining factorization of τ prove the required equality p≫f=φ(p≫U.ι). Empty sources have no x, and the construction of b(σ₀) supplies the target point whenever x exists.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-exc-etale-field-galois-classification",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+  "etale-proposition-etale-reduced",
+  "lem-exc-etale-field-galois-classification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 03QR with Tag 02GL; finite-spectrum realization"
+  "place": "Tag 03QR with Morphisms Tag 02GL(1); direct singleton residue-field charts via proved source-library and Mathlib tools, followed by the finite-separable Galois Hom bijection (W2 Lean realization)"
  },
  "mathlib_searches": [
   {
@@ -116,10 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-38027",
-  "group": "P2",
+  "reviewer": "COMPILER",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T130429-L-1295874",
-  "kind": "interface"
+  "landing": "20261012T153013-L-2351753",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
