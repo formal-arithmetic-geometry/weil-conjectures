@@ -26,10 +26,9 @@
  ],
  "proof": [
   {
-   "text": "*Clause (0): standard opens are open, and intersections.* For $f$ homogeneous of positive degree, $D_+(f)$ is the set $D(f)=\\{\\mathfrak p\\in X: f\\notin\\mathfrak p\\}$ of [lem-weil-pbc-projective-spectrum-basic-opens-basis], hence open by (i) of that lemma. For $f,g$ homogeneous of positive degrees $d,k$, the product $fg$ is homogeneous of degree $d+k>0$, and $D_+(fg)=D(fg)=D(f)\\cap D(g)=D_+(f)\\cap D_+(g)$ by (ii) of that lemma (directly: $fg\\notin\\mathfrak p$ iff $f\\notin\\mathfrak p$ and $g\\notin\\mathfrak p$, $\\mathfrak p$ being prime).",
+   "text": "Use Mathlib Proj.isBasis_basicOpen, Proj.basicOpen_mul and Proj.basicOpen_eq_iSup_proj for arbitrary basic opens, intersections and homogeneous components.",
    "uses": [
-    "lem-weil-pbc-projective-spectrum-basic-opens-basis",
-    "def-nagata-affine-proj"
+    "lem-weil-pbc-projective-spectrum-basic-opens-basis"
    ],
    "elementary": false,
    "source": {
@@ -38,9 +37,10 @@
    }
   },
   {
-   "text": "*Clause (0): the standard opens form a basis.* Let $U\\subseteq X$ be open and $x\\in U$ with prime $\\mathfrak p$. By (i) of [lem-weil-pbc-projective-spectrum-basic-opens-basis] there is $r\\in S$ with $x\\in D(r)\\subseteq U$; write $r=\\sum_ir_i$, $r_i\\in S_i$; by (iii) of that lemma $x\\in D(r_i)\\subseteq D(r)$ for some $i$. If $i\\ge1$, $D(r_i)=D_+(r_i)$ is a standard open with $x\\in D_+(r_i)\\subseteq U$. If $i=0$: since $S_+\\not\\subseteq\\mathfrak p$, some $s\\in S_+$ is not in $\\mathfrak p$; $s$ is the sum of its homogeneous components, all of positive degree, and $\\mathfrak p$ is an ideal, so some homogeneous $h$ of positive degree has $h\\notin\\mathfrak p$. Then $r_0h\\notin\\mathfrak p$ ($\\mathfrak p$ prime), $r_0h$ is homogeneous of degree $\\deg h>0$, and $D_+(r_0h)=D(r_0)\\cap D(h)\\subseteq D(r_0)$ by (ii) of that lemma; so $x\\in D_+(r_0h)\\subseteq U$. Hence every open set is a union of standard opens, and with step 1 the standard opens form a basis of the topology of $X$.",
+   "text": "For a point in an arbitrary basic neighbourhood D(r), choose a homogeneous component r_i outside its prime. The affineOpenCover provides a positive-degree homogeneous h outside that prime. Then D(r_i h) contains the point and lies in D(r); its degree i+deg(h) is positive. This proves the positive-degree basis.",
    "uses": [
-    "lem-weil-pbc-projective-spectrum-basic-opens-basis"
+    "lem-weil-pbc-projective-spectrum-basic-opens-basis",
+    "def-nagata-affine-proj"
    ],
    "elementary": false,
    "source": {
@@ -49,7 +49,7 @@
    }
   },
   {
-   "text": "*Clause (1), forward: the unit of $S_{(g)}$.* Let $f,g$ be homogeneous of positive degrees $d=\\deg f$, $k=\\deg g$, with $D_+(g)\\subseteq D_+(f)$. Let $\\iota_g:\\operatorname{Spec}S_{(g)}\\to X$ be the open immersion with image $D_+(g)$ of [lem-weil-pbc-proj-basic-open-intersection] (the homeomorphism $D_+(g)\\cong\\operatorname{Spec}S_{(g)}$ of Algebra 00JP (6)); by that lemma (with the roles of $f,g$ exchanged) $\\iota_g^{-1}(D_+(f))=D(f^k/g^d)$, the principal open of $u=f^k/g^d\\in S_{(g)}$ [def-nagata-homogeneous-localization-degree-zero]. Since the image $D_+(g)$ of $\\iota_g$ is contained in $D_+(f)$, $\\iota_g^{-1}(D_+(f))$ is all of $\\operatorname{Spec}S_{(g)}$, i.e. $D(u)=\\operatorname{Spec}S_{(g)}$: $u$ lies in no prime ideal of $S_{(g)}$. By (ii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], $u=f^{\\deg g}/g^{\\deg f}$ is a unit of $S_{(g)}$.",
+   "text": "Pull an arbitrary family D(g_i) back through awayι_f using the preimage formula. Since opensRange_awayι is D(f), D(f) is contained in the union exactly when the pullback is top. PrimeSpectrum.iSup_basicOpen_eq_top_iff makes this equivalent to the unit-ideal criterion. Specialize to a singleton family to obtain that f^k/g^d is a unit in S_(g).",
    "uses": [
     "lem-weil-pbc-proj-basic-open-intersection",
     "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
@@ -62,7 +62,7 @@
    }
   },
   {
-   "text": "*Clause (1), forward: $f$ is a unit of $S_g$ and the homogeneous witness.* Keep the notation of step 3 and let $v\\in S_{(g)}$ with $uv=1$. In $S_g$ (which contains $S_{(g)}$ as the subring of degree-zero fractions [def-nagata-homogeneous-localization-degree-zero]) we have $f\\cdot(f^{k-1}v/g^d)=f^kv/g^d=uv=1$ ($k\\ge1$), so $f$ is a unit of $S_g$. Write its inverse as $b/g^n$ with $b\\in S$, $n\\ge0$; replacing $(b,n)$ by $(bg^t,n+t)$ for large $t$ we may assume $n\\ge1$ and $nk\\ge d$. Then $fb/g^n=1$ in $S_g$ means $g^N(fb-g^n)=0$ in $S$ for some $N\\ge0$, i.e. $g^Nfb=g^{N+n}$. Let $a_0$ be the homogeneous component of $b$ of degree $nk-d$. Since $g^N$ and $f$ are homogeneous, the component of degree $(N+n)k$ of $g^Nfb$ is $g^Nfa_0$, while $g^{N+n}$ is homogeneous of degree $(N+n)k$; comparing components gives $g^Nfa_0=g^{N+n}$. Put $e=N+n\\ge1$ and $a=g^Na_0$, homogeneous of degree $ek-d$: then $g^e=af$. (If $af\\ne0$, any homogeneous $a$ with $g^e=af$ has degree $e\\deg g-\\deg f$, by comparing degrees.)",
+   "text": "Map the unit f^k/g^d into the ordinary localization S_g and multiply by the unit g^d to obtain that f^k, hence f, is a unit. IsLocalization.algebraMap_isUnit_iff gives g^n=f*b. Put e=n+d+1 and replace b by b*g^(d+1); then e>0 and e*k>=d. Apply DirectSum.decompose in degree e*k and coe_decompose_mul_of_left_mem_of_le to obtain g^e=f*a, where a is the homogeneous component in degree e*k-d.",
    "uses": [
     "def-nagata-homogeneous-localization-degree-zero"
    ],
@@ -73,8 +73,9 @@
    }
   },
   {
-   "text": "*Clause (1), converse and the unit statements.* Suppose $g^e=af$ with $e\\ge1$, $a$ homogeneous. If $\\mathfrak p\\in D_+(g)$ then $g^e\\notin\\mathfrak p$ ($\\mathfrak p$ prime), so $f\\notin\\mathfrak p$ (else $af\\in\\mathfrak p$): $D_+(g)\\subseteq D_+(f)$. Units: in $S_g$, $f\\cdot a/g^e=g^e/g^e=1$. In $S_{(g)}$ [def-nagata-homogeneous-localization-degree-zero]: if $af=0$ then $g^e=0$, so $S_g=0=S_{(g)}$ and every element is a unit; otherwise $\\deg a=ek-d\\ge0$ ($d=\\deg f$, $k=\\deg g$), $a^k/g^{ek-d}\\in S_{(g)}$ (numerator of degree $k(ek-d)$), and $(f^k/g^d)(a^k/g^{ek-d})=(af)^k/g^{ek}=g^{ek}/g^{ek}=1$. So $f$ is a unit of $S_g$ and $f^{\\deg g}/g^{\\deg f}$ is a unit of $S_{(g)}$; with steps 3 and 4 this proves (1).",
+   "text": "Conversely g^e=a*f with e>0 implies D(g)=D(g^e)=D(a) intersect D(f), hence the inclusion. The unit assertions follow from the chart and ordinary-localization arguments above, without constructing explicit inverses or separating the zero-ring case. If a*f is nonzero, DirectSum.degree_eq_of_mem_mem applied to a*f=g^e gives l+d=e*k, hence l=e*k-d.",
    "uses": [
+    "lem-weil-pbc-projective-spectrum-basic-opens-basis",
     "def-nagata-homogeneous-localization-degree-zero"
    ],
    "elementary": true,
@@ -84,9 +85,9 @@
    }
   },
   {
-   "text": "*Clause (2).* Let $f$ be homogeneous of positive degree and $D_+(f)=\\bigcup_jU_j$ an open covering. The space $D_+(f)$ is quasi-compact: it is the image of $\\operatorname{Spec}S_{(f)}$ under the continuous map $\\iota_f$ of [lem-weil-pbc-proj-basic-open-intersection], and $\\operatorname{Spec}S_{(f)}$ is quasi-compact by (iii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. For each $x\\in D_+(f)$ choose $j$ with $x\\in U_j$; $U_j$ is open in $X$ (as $D_+(f)$ is, step 1), so by the basis property (step 2) there is $h_x$ homogeneous of positive degree with $x\\in D_+(h_x)\\subseteq U_j$. The open sets $D_+(h_x)$ cover $D_+(f)$, so finitely many $D_+(h_{x_1}),\\dots,D_+(h_{x_n})$ do; with $g_i=h_{x_i}$ we get $D_+(f)=\\bigcup_{i=1}^nD_+(g_i)$ (each $D_+(g_i)\\subseteq U_{j}\\subseteq D_+(f)$), a finite covering by standard opens refining $(U_j)$.",
+   "text": "For each point of D(f), choose a member of the given cover and a positive-degree basic neighbourhood within it using the basis. Proj.isAffineOpen_basicOpen gives compactness of D(f), so IsCompact.elim_finite_subcover supplies finitely many of these neighbourhoods. Reindex their finite set by Fin n using Fintype.equivFin. They cover D(f), and each lies in a given cover member, hence also in D(f).",
    "uses": [
-    "lem-weil-pbc-proj-basic-open-intersection",
+    "def-nagata-affine-proj",
     "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
     "lem-weil-pbc-projective-spectrum-basic-opens-basis"
    ],
@@ -97,7 +98,7 @@
    }
   },
   {
-   "text": "*Clause (3).* Let $f$ have degree $d>0$ and $g_1,\\dots,g_n$ be homogeneous of positive degrees $k_i$; put $u_i=g_i^{d}/f^{k_i}\\in S_{(f)}$ [def-nagata-homogeneous-localization-degree-zero]. By [lem-weil-pbc-proj-basic-open-intersection], $\\iota_f^{-1}(D_+(g_i))=D(u_i)$ in $\\operatorname{Spec}S_{(f)}$, hence $\\iota_f^{-1}(\\bigcup_iD_+(g_i))=\\bigcup_iD(u_i)$. Since $\\iota_f$ maps $\\operatorname{Spec}S_{(f)}$ onto $D_+(f)$, $D_+(f)\\subseteq\\bigcup_iD_+(g_i)$ iff $\\iota_f^{-1}(\\bigcup_iD_+(g_i))=\\operatorname{Spec}S_{(f)}$ iff $\\bigcup_iD(u_i)=\\operatorname{Spec}S_{(f)}$, and by (i) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] this holds iff $u_1,\\dots,u_n$ generate the unit ideal of $S_{(f)}$.",
+   "text": "Apply the arbitrary-family chart unit-ideal criterion from step 3 to the finite family indexed by Fin n. This is exactly the stated finite covering criterion.",
    "uses": [
     "lem-weil-pbc-proj-basic-open-intersection",
     "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
@@ -120,7 +121,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions, Section 01M3 (label section-proj), the paragraph before Lemma 01M4, and Lemma 01M4 (label lemma-standard-open) with its proof; Algebra, Lemma 00JP (label lemma-topology-proj) for clause (0)"
+  "place": "Constructions, Section 01M3 (label section-proj), the paragraph before Lemma 01M4, and Lemma 01M4 (label lemma-standard-open) with its proof; Algebra, Lemma 00JP (label lemma-topology-proj) for clause (0); Lean realization by H3: chart-cover criterion first, homogeneous factor via the ordinary localization unit criterion and DirectSum.decompose"
  },
  "mathlib_searches": [
   {
@@ -259,5 +260,15 @@
   "group": "J1",
   "result": "pass",
   "note": "S/σ/𝒜 GradedRing = N-graded ring; Proj 𝒜 and basicOpen resolve (#check) to AlgebraicGeometry.Proj.basicOpen : (Proj 𝒜).Opens; (0) positive-degree basis set identical to landed C1 isBasis_positiveDegree_basicOpen_and_isAffineOpen, ⊓ = D+(fg); (1) iff with e>0, homogeneous a any degree, degree l = ek-d under af≠0, Away.mk 𝒜 hg d (f^k) = f^k/g^d (Away.mk signature checked), unit in Localization.Away g; (2) arbitrary I:Type w cover (not a limit index, no vacuity), Fin n positive-degree refinement; (3) Away.mk 𝒜 hf (k i) (g i^d) = g_i^d/f^k_i span = ⊤; no let/show, no new defs, no node changes besides lean record"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085249-L-19030",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
