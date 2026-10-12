@@ -513,6 +513,75 @@ theorem twistHTopLinearEquivDual_apply {p : ℕ} (hn : Fintype.card n = p + 1 + 
     twistMulPairing_apply, key]
   rfl
 
+/-! ### Global sections of `𝒪(D)` -/
+
+lemma twistLaurentSection_injective {m : ℤ} {s : Set n} (hs : s.Nonempty) {c c' : (n → ℤ) →₀ A}
+    (hc : c ∈ Finsupp.supported A A (laurentExponents s m))
+    (hc' : c' ∈ Finsupp.supported A A (laurentExponents s m))
+    (h : twistLaurentSection A m s c = twistLaurentSection A m s c') : c = c' := by
+  have hm : twistMonomialLinearMap A m s (Finsupp.supportedEquivFinsupp _ ⟨c, hc⟩) =
+      twistMonomialLinearMap A m s (Finsupp.supportedEquivFinsupp _ ⟨c', hc'⟩) := by
+    rw [twistMonomialLinearMap_supportedEquivFinsupp, twistMonomialLinearMap_supportedEquivFinsupp]
+    exact h
+  exact congrArg Subtype.val ((Finsupp.supportedEquivFinsupp _).injective
+    ((bijective_twistMonomialLinearMap hs).1 hm))
+lemma exists_twistLaurentSection_eq {m : ℤ} {s : Set n} (hs : s.Nonempty)
+    (x : Γ(twist n (Spec (.of A)) m, toProjInt n (Spec (.of A)) ⁻¹ᵁ basicOpenInt n s)) :
+    ∃ c ∈ Finsupp.supported A A (laurentExponents s m), twistLaurentSection A m s c = x := by
+  obtain ⟨g, hg⟩ := (bijective_twistMonomialLinearMap (k := A) (m := m) hs).2 x
+  refine ⟨((Finsupp.supportedEquivFinsupp (M := A) (R := A) _).symm g : (n → ℤ) →₀ A),
+    ((Finsupp.supportedEquivFinsupp _).symm g).2, ?_⟩
+  rw [← hg, ← LinearEquiv.apply_symm_apply (Finsupp.supportedEquivFinsupp (M := A) (R := A) _) g,
+    twistMonomialLinearMap_supportedEquivFinsupp, LinearEquiv.symm_apply_apply]
+  rfl
+
+variable (n) in
+/-- `U_{i} = D₊(xᵢ)`. -/
+lemma preimage_basicOpenInt_singleton (S : Scheme.{u}) (i : n) :
+    toProjInt n S ⁻¹ᵁ basicOpenInt n {i} = standardOpen n S i :=
+  le_antisymm (preimage_basicOpenInt_le_standardOpen S rfl) fun _ hx ↦
+    Proj.mem_basicOpen_monomialToNat_indicator.2 fun _ hj ↦ (Set.mem_singleton_iff.1 hj) ▸ hx
+
+/-- **Global sections of `𝒪(m)` are polynomials**: for `m ≥ 0`, every global section of `𝒪(m)`
+on `ℙ(n; Spec A)` is the section of a polynomial of degree `m`. Its restrictions to the standard
+opens `D₊(xᵢ)` are Laurent polynomials, which agree on the overlaps and hence are a single
+polynomial.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology` (i)) -/
+lemma exists_twistPolynomialSection_eq [Nonempty n] {m : ℤ} (hm : 0 ≤ m)
+    (t : Γ(twist n (Spec (.of A)) m, ⊤)) :
+    ∃ c ∈ Finsupp.supported A A (monomialExponents n m), twistPolynomialSection A m c = t := by
+  choose G hG hGt using fun i : n ↦ exists_twistLaurentSection_eq (A := A) (m := m)
+    (Set.singleton_nonempty i) ((twist n (Spec (.of A)) m).presheaf.map (homOfLE le_top).op t)
+  have hsub (i j : n) : ({i} : Set n) ⊆ {i, j} := Set.singleton_subset_iff.2 (Set.mem_insert i _)
+  have hsub' (i j : n) : ({j} : Set n) ⊆ {i, j} :=
+    Set.singleton_subset_iff.2 (Set.mem_insert_of_mem i rfl)
+  have hG' (i j : n) : G i = G j := by
+    refine twistLaurentSection_injective (s := {i, j}) ⟨i, Set.mem_insert i _⟩
+      (Finsupp.supported_mono (laurentExponents_mono (hsub i j) m) (hG i))
+      (Finsupp.supported_mono (laurentExponents_mono (hsub' i j) m) (hG j)) ?_
+    rw [← twistLaurentSection_map (hsub i j) (hG i), ← twistLaurentSection_map (hsub' i j) (hG j),
+      hGt i, hGt j, presheaf_map_homOfLE_map_homOfLE, presheaf_map_homOfLE_map_homOfLE]
+  obtain ⟨i₀⟩ := ‹Nonempty n›
+  have hmem : G i₀ ∈ Finsupp.supported A A (monomialExponents n m) := by
+    intro e he
+    have hl (j : n) : e ∈ laurentExponents {j} m := hG j (by rwa [← hG' i₀ j])
+    refine ⟨(hl i₀).1, fun l ↦ ?_⟩
+    by_cases h : ∃ j, j ≠ l
+    · obtain ⟨j, hj⟩ := h
+      exact (hl j).2 l fun h' ↦ hj (Set.mem_singleton_iff.1 h').symm
+    · push Not at h
+      have hs := (hl l).1
+      rw [Fintype.sum_eq_single l fun j hj ↦ absurd (h j) hj] at hs
+      exact hs ▸ hm
+  refine ⟨G i₀, hmem, TopCat.Sheaf.eq_of_locally_eq'
+    ⟨(twist n (Spec (.of A)) m).presheaf, (twist n (Spec (.of A)) m).isSheaf⟩
+    (fun i ↦ toProjInt n (Spec (.of A)) ⁻¹ᵁ basicOpenInt n {i}) ⊤ (fun _ ↦ homOfLE le_top)
+    ?_ _ _ fun i ↦ ?_⟩
+  · simp only [preimage_basicOpenInt_singleton, iSup_standardOpen, le_refl]
+  · rw [← hGt i, hG' i₀ i]
+    exact twistPolynomialSection_map _ (hG' i₀ i ▸ hmem)
+
 end Pairing
 
 end AlgebraicGeometry.ProjectiveSpace
