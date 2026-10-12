@@ -10,8 +10,9 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Algebra.Rat
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
-import WeilConjectures.AlgebraicGeometry.Regular
+import Mathlib.RingTheory.DedekindDomain.Dvr
+import Mathlib.RingTheory.Ideal.NatInt
+import Mathlib.RingTheory.KrullDimension.PID
 
 /-!
 # Prime localizations of the integers
@@ -59,6 +60,22 @@ theorem prime_localizations_dvr :
           ∃ p : ℕ, p.Prime ∧ P = Ideal.span {(p : ℤ)} ∧
             IsLocalRing.maximalIdeal (Localization.AtPrime P) =
               Ideal.span {algebraMap ℤ (Localization.AtPrime P) (p : ℤ)}) := by
-  sorry
+  refine ⟨inferInstance, IsPrincipalIdealRing.ringKrullDim_eq_one ℤ Int.not_isField,
+    inferInstance, fun _ ↦ Ideal.isPrime_int_iff, ?_, ?_⟩
+  · have : IsLocalization (⊥ : Ideal ℤ).primeCompl ℚ := by
+      rw [Ideal.primeCompl_bot]
+      infer_instance
+    exact ⟨Localization.algEquiv (⊥ : Ideal ℤ).primeCompl ℚ⟩
+  · intro P _ hP
+    obtain ⟨p, hp, hspan⟩ := (Ideal.isPrime_int_iff.mp ‹P.IsPrime›).resolve_left hP
+    have : IsNoetherianRing (Localization.AtPrime P) :=
+      IsLocalization.isNoetherianRing P.primeCompl _ inferInstance
+    refine ⟨inferInstance, inferInstance,
+      IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain ℤ hP _,
+      p, hp, hspan, ?_⟩
+    rw [← IsLocalization.AtPrime.map_eq_maximalIdeal P]
+    rw [congrArg (Ideal.map (algebraMap ℤ (Localization.AtPrime P))) hspan,
+      Ideal.map_span]
+    simp
 
 end Int
