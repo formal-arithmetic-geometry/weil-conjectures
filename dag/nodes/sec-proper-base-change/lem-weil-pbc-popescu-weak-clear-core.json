@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-popescu-weak-clear-core",
+ "kind": "statement",
+ "title": "Clear defining equations and the inverse-Jacobian certificate while retaining the localized kernel",
+ "statement": "Let R be a commutative ring, p a prime ideal, R_p its localization [def-weil-pbc-localization-at-prime], and D an R_p-algebra with compatible R-algebra structure. Let n,m,c be natural numbers with c ≤ n+m, and P a submersive presentation of D over R_p on n+m variables and c equations whose selected variables are the first c [def-weil-pbc-standard-smooth-algebra]. There exist f_j ∈ R[x_1,…,x_{n+m}], s ∈ R \\\\ p and h ∈ R[x_1,…,x_{n+m}] such that C(s)-h det(∂f_j/∂x_i)_{i,j≤c} belongs to (f_j), every f_j evaluates to zero at P.val, and extension of the ideal (f_j) to R_p[x_1,…,x_{n+m}] is exactly the kernel of evaluation at P.val. Polynomial rings and derivatives are those of [def-weil-pbc-mv-polynomial-ring] and [def-weil-pbc-polynomial-partial-derivative].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak), lines 2179–2188, clearing the equations, inverse determinant, and relations"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "Identify the polynomial ring over R_p with the localization of the polynomial ring over R at the constants outside p, using polynomial scalar extension and localization base change.",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each defining relation of P clear its finitely many coefficients to obtain f_j whose coefficient extension is a scalar unit times P.relation j. These generate the same localized ideal, namely the kernel of evaluation; the f_j vanish in D. Differentiation commutes with coefficient extension and kills the scalars, so the new determinant is the old determinant multiplied by the product of these scalar units. Its evaluation is a unit.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift the inverse of the new determinant through the surjective presentation evaluation. The difference between its product with the determinant and 1 is in the localized ideal of the f_j. Express it as a finite linear combination, clear all coefficients of the inverse and combination, then multiply by another scalar outside p killing the remaining localization-kernel error. Obtain C(s)-h*det in (f), with s outside p. Empty products and determinant are 1.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Tag 07F9 (lemma-delocalize-weak), lines 2179–2188, clearing the equations, inverse determinant, and relations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Clear denominators in a standard smooth presentation over a localization at a prime, obtaining coefficients in the base ring and Jacobian and relation ideal certificates outside the prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no negative verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clear denominators in a standard smooth presentation over a localization at a prime, obtaining coefficients in the base ring and Jacobian and relation ideal certificates outside the prime",
+   "results": "Algebra.SubmersivePresentation.localizationAway, Algebra.PreSubmersivePresentation.localizationAway_jacobian, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth: localization and smooth-cover primitives, no clearing certificates.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "SubmersivePresentation.*localiz|clear.*denomin|jacobian.*localiz",
+   "results": "25 hits; FieldSimp and univariate Polynomial.DenomsClearable plus finite denominator lemmas in LocalizedModule/Int.lean; no submersive-presentation clearing theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.algebraMap_mem_map_algebraMap_iff",
+   "results": "Found the exact localization ideal-membership criterion in Mathlib.RingTheory.Localization.Ideal; used to prove the relation-clearing theorem, but does not construct the core equations or determinant certificate.",
+   "date": "2026-10-13",
+   "verdict": "used ingredient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite set of multivariate polynomial equations over a localized ring descends to equations over the base ring preserving the ideal and an invertible Jacobian minor",
+   "results": "SubmersivePresentation.ofHasCoeffs, jacobianRelations, invJacobianOfHasCoeffs, jacobianRelationsOfHasCoeffs, map_jacobianRelationsOfHasCoeffs and localizationAway. These descend to a coefficient subring or give certificates over the existing base; none clears denominators to the fixed ring R.",
+   "date": "2026-10-13",
+   "verdict": "ingredients, no exact core match"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_mem_map_algebraMap_iff|isLocalization.*MvPolynomial|jacobian.*unit",
+   "results": "Found localization ideal-membership criterion, MvPolynomial.isLocalization and submersive Jacobian primitives. Also searched lean/Sheaf and lean/WeilConjectures for cleared_submersive, polynomial localization and denominator clearing; no prior core theorem or relation wrapper.",
+   "date": "2026-10-13",
+   "verdict": "used localization ingredients; no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuWeakClearPresentation",
+  "group": "T2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); lines 2179–2188, clearing the equations, inverse determinant, and relations",
+   "via": [
+    "lem-weil-pbc-popescu-delocalize-weak",
+    "lem-weil-pbc-popescu-delocalize-height-zero",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuWeakClearCore",
+  "file": "lean/Sheaf/RingTheory/PopescuWeakClearCore.lean",
+  "declaration": "Algebra.exists_cleared_submersive_presentation_core",
+  "statement": "theorem exists_cleared_submersive_presentation_core\n    {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime]\n    {D : Type v} [CommRing D] [Algebra (Localization.AtPrime p) D]\n    [Algebra R D] [IsScalarTower R (Localization.AtPrime p) D]\n    (n m c : ℕ) (hc : c ≤ n + m)\n    (P : SubmersivePresentation (Localization.AtPrime p) D (Fin (n + m)) (Fin c))\n    (hmap : P.map = Fin.castLE hc) :\n    ∃ (f : Fin c → MvPolynomial (Fin (n + m)) R)\n      (s : R) (h : MvPolynomial (Fin (n + m)) R),\n      s ∉ p ∧\n      (MvPolynomial.C s - h * Matrix.det\n        (fun i j : Fin c ↦ pderiv (Fin.castLE hc i) (f j)) ∈\n          Ideal.span (Set.range f)) ∧\n      (∀ j, aeval P.val (f j) = 0) ∧\n      Ideal.map (MvPolynomial.map (algebraMap R (Localization.AtPrime p)))\n        (Ideal.span (Set.range f)) = RingHom.ker (aeval P.val)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T184347-L-4021265",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T184347-L-4021265",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

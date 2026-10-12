@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Extension.Presentation.Submersive
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.PopescuWeakClearCore
+import Sheaf.RingTheory.PopescuWeakClearRelations
 
 /-!
 # Clearing a local standard smooth presentation
@@ -64,6 +66,17 @@ theorem exists_cleared_submersive_presentation
           Ideal.span (Set.range f)) ∧
       (∀ j : Fin t, MvPolynomial.C (s j.succ) *
         rename (Fin.castLE (Nat.le_add_right n m)) (g j) ∈ Ideal.span (Set.range f)) ∧
-      (∀ j, aeval P.val (f j) = 0) := by sorry
+      (∀ j, aeval P.val (f j) = 0) := by
+  classical
+  obtain ⟨f, s0, h, hs0, hdet, hf, hkernel⟩ :=
+    exists_cleared_submersive_presentation_core p n m c hc P hmap
+  obtain ⟨sr, hsr, hgr⟩ :=
+    exists_cleared_submersive_relations p n m c t P f hkernel g hg
+  let s : Fin (t + 1) → R := Fin.cases s0 (fun j ↦ sr j)
+  refine ⟨f, s, h, ?_, hdet, ?_, hf⟩
+  · intro j
+    exact Fin.cases hs0 (fun j ↦ hsr j) j
+  · intro j
+    exact hgr j
 
 end Algebra
