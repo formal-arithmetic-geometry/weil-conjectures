@@ -19,41 +19,41 @@
  ],
  "proof": [
   {
-   "text": "For every closed subset $T\\subset U$, give $T$ its reduced scheme structure and put $V_T=V\\times_UT$. By the constructible-pullback statement, the pullback of $E$ to $V_T$ (and to any open of $V_T$) is constructible; that statement uses stratifications without the constructible-subset condition of the definition used here, but all schemes involved are Noetherian ($V$ is finite over the Noetherian $U$), where every locally closed subset is constructible [def-weil-constructible-subset, Stacks 005L], so the two notions agree. The finite-exchange statement identifies $(h_*E)|_T$ with the direct image of this constructible pullback along the finite map $V_T\\to T$.",
+   "text": "Apply the finite-stalk set-sheaf Noetherian criterion. For each integral Noetherian affine immersion $g:S\\to U$, form $V_S=V\\times_U S$ and $E_S=\\operatorname{pr}_V^{-1}E$. The finite projection $V_S\\to S$ is a base change of $h$. The specialized constructible pullback theorem gives constructibility of the underlying set sheaf of $E_S$, including finite geometric stalks.",
    "uses": [
-    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-set-pullback",
+    "lem-weil-pbc-constructible-etale-noetherian-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing generic finite-pushforward theorem over $S$ to obtain a dense open $W\\subset S$ on which the underlying set sheaf of $\\operatorname{pr}_{S,*}E_S$ is lisse. All its hypotheses hold: $S$ is integral, affine and Noetherian, the projection is finite, and $E_S$ has finite-stalk constructibility.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-generic-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite exchange gives $g^{-1}h_*E\\cong\\operatorname{pr}_{S,*}E_S$ as abelian sheaves. The inverse-image algebraic-structures theorem identifies the underlying set sheaf of $g^{-1}h_*E$ with set inverse image of the underlying set sheaf of $h_*E$. Compose this comparison with the forgotten exchange isomorphism, pull it back along $W\\to S$, and transport lissity in the reverse direction. The private Lean helper proves this transport by retaining the trivializing cover and transporting finite stalks along a bijection. Thus every test in the Noetherian criterion is satisfied; its conclusion proves the original theorem.",
+   "uses": [
     "lemma-weil-pbc-finite-exchange",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "We prove that $(h_*E)|_T$ has a finite lisse partition by Noetherian induction on these closed subsets. The empty subset is immediate. If $T$ is reducible, the finite-components statement gives finitely many irreducible components $T_1,\\ldots,T_r$, each a proper closed subset. Apply induction to each and restrict its partition to $T_i\\setminus\\bigcup_{j<i}T_j$. These restricted pieces are locally closed, disjoint and cover $T$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-finite-components"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "If $T$ is irreducible, its reduced structure is integral. Choose a nonempty affine open $Q\\subset T$ and apply the generic finite-pushforward statement to $V_Q\\to Q$. It supplies a dense open $Q^\\circ\\subset T$ on which $(h_*E)|_T$ is lisse. The proper closed complement $T\\setminus Q^\\circ$ has a finite lisse partition by induction. Adjoining $Q^\\circ$ gives the required partition of $T$. At $T=U_{\\mathrm{red}}$, its locally closed pieces, composed with $U_{\\mathrm{red}}\\to U$, are locally closed subschemes partitioning $U$, and each piece is a constructible subset because $U$ is Noetherian [def-weil-constructible-subset, Stacks 005L], which proves constructibility on $U$. No finite bound on the Krull dimension is used.",
-   "uses": [
-    "lem-weil-pbc-finite-pushforward-generic-constructible",
-    "def-weil-constructible-subset"
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-constructible-etale-noetherian-criterion"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-exchange",
-  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-constructible-etale-noetherian-criterion",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
   "lem-weil-pbc-finite-pushforward-generic-constructible",
-  "prop-constructible-pullback",
-  "def-weil-constructible-subset"
+  "lemma-weil-pbc-finite-exchange"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/EtaleCohomology.tex",
-  "place": "Lemma 095R (finite pushforward of constructible sheaves)"
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-constructible-noetherian.md",
+  "place": "Proof steps 1--3, translated to Lean via the two finite-stalk intermediate statements; generic finite pushforward and finite exchange are applied explicitly."
  },
  "mathlib_searches": [
   {
@@ -167,5 +167,15 @@
   "group": "K1",
   "result": "pass",
   "note": "U Noetherian=[IsNoetherian U]; h finite=[IsFinite h]; E abelian etale sheaf on V=Sheaf V.smallEtaleTopology AddCommGrpCat.{u+1}; constructible=recorded IsConstructibleEtaleSheafOfSets (def-weil-pbc-etale-sheaves, the stmt_dep) on the underlying set sheaf, as landed ConstructibleFiniteSelection; h_*=AlgebraicGeometry.Etale.lowerStar (#check); no source finite-pushforward constructibility (only closed immersion, different IsConstructibleSheaf) so existing:false"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044743-L-2034939",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
