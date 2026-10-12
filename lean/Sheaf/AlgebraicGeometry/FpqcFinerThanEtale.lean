@@ -40,6 +40,12 @@ theorem fpqcCover_of_smallEtaleCover
     (hf : Sieve.ofArrows Z f ∈ T.smallEtaleTopology U) :
     Presieve.ofArrows (fun i ↦ (Z i).left) (fun i ↦ (f i).left) ∈
       Scheme.fpqcPrecoverage U.left := by
-  sorry
+  apply fppfPrecoverage_le_fpqcPrecoverage
+  apply (ofArrows_mem_precoverage_iff _).mpr
+  refine ⟨?_, fun i ↦ ⟨inferInstance, inferInstance⟩⟩
+  intro x
+  have hx : x ∈ (Set.univ : Set U.left) := Set.mem_univ x
+  rw [← (ofArrows_mem_smallEtaleTopology_iff f).mp hf] at hx
+  exact Set.mem_iUnion.mp hx
 
 end AlgebraicGeometry.Scheme

@@ -27,64 +27,35 @@
  ],
  "proof": [
   {
-   "text": "Let $(f_i:U_i\\to U)_{i\\in I}$ be a covering family of $T_{\\mathrm{Et}}$. By the definition of the covering families of $T_{\\mathrm{Et}}$ [def-weil-pbc-etale-site], each $f_i$ is an etale morphism, and by the definition of etale [def-weil-etale-morphism] (locally of finite presentation, flat and unramified) each $f_i$ is flat. This is the first clause of [def-weil-pbc-fpqc-covering].",
+   "text": "Apply Mathlib Scheme.ofArrows_mem_smallEtaleTopology_iff to the covering hypothesis. For each point x of U.left, membership in the resulting union of ranges gives an index i and membership of x in the range of (f i).left. Thus the underlying family is jointly surjective.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-etale-morphism"
+    "def-weil-pbc-etale-site"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, lines 3050-3065 (\"By definition this means that the $f_i$ are flat\")"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $V\\subseteq U$ be an affine open, so $V$ with its open subscheme structure is an affine scheme. For $i\\in I$ put $W_i=f_i^{-1}(V)$, an open subscheme of $U_i$, and let $g_i:W_i\\to V$ be the restriction of $f_i$, so that $j_V\\circ g_i=f_i\\circ j_{W_i}$ for the inclusions $j_V:V\\hookrightarrow U$ and $j_{W_i}:W_i\\hookrightarrow U_i$, which are open immersions [def-weil-open-immersion]. By [lem-weil-pbc-etale-composition-cancellation] (1) the open immersions $j_{W_i}$ and $j_V$ are etale, by (2) the composite $f_i\\circ j_{W_i}=j_V\\circ g_i$ is etale, and by (3), applied to $g_i$ followed by the etale $j_V$, each $g_i$ is etale. The family $(g_i)_{i\\in I}$ is jointly surjective onto $V$: for $v\\in V$ the covering family is jointly surjective, so $v=f_i(x)$ for some $i$ and $x\\in U_i$, and then $x\\in f_i^{-1}(V)=W_i$ and $g_i(x)=v$.",
+   "text": "Every underlying morphism (f i).left is etale by the Mathlib instances for morphisms in T.Etale. Etale morphisms are flat and locally of finite presentation. Scheme.ofArrows_mem_precoverage_iff combines these properties with joint surjectivity to place the family in fppfPrecoverage.",
    "uses": [
-    "def-weil-open-immersion",
-    "lem-weil-pbc-etale-composition-cancellation"
+    "def-weil-pbc-etale-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, lines 3050-3065 (the restriction of the family over the affine open $V$); Tag 0218 (topologies-lemma-etale-affine)"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-etale-covering-affine-refinement] to the affine scheme $V$ and the jointly surjective family of etale morphisms $(g_i:W_i\\to V)_{i\\in I}$ of step 2: there are $m\\ge0$, indices $i(1),\\dots,i(m)\\in I$ and affine open subschemes $V_j\\subseteq W_{i(j)}$ with $V=\\bigcup_{j=1}^m g_{i(j)}(V_j)$. Since $W_{i(j)}$ is open in $U_{i(j)}$, each $V_j$ is an affine open of $U_{i(j)}$, and $f_{i(j)}(V_j)=g_{i(j)}(V_j)$ because $g_{i(j)}$ is the restriction of $f_{i(j)}$. Hence $V=\\bigcup_{j=1}^m f_{i(j)}(V_j)$. (This lemma carries the argument of the source: etale morphisms are open, the images of affine opens covering the $W_i$ form an open covering of $V$, and $V$ is quasi-compact.)",
-   "uses": [
-    "lem-weil-pbc-etale-covering-affine-refinement"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, lines 3050-3065 (each $f_i$ is open, $V=\\bigcup_i\\bigcup_j f_i(V_{ij})$ is an open covering, $V$ quasi-compact gives a finite refinement); Tag 0218 (topologies-lemma-etale-affine)"
-   }
-  },
-  {
-   "text": "Steps 1 and 3 are the two clauses of [def-weil-pbc-fpqc-covering] for the family $(f_i)_{i\\in I}$ over $U$ (with $n=m$, $i_j=i(j)$ and the affine opens $V_j$ of step 3), so $(f_i)_{i\\in I}$ is an fpqc covering of $U$; the explicit form of the conclusion in the statement is the same two clauses.",
+   "text": "Apply Mathlib Scheme.fppfPrecoverage_le_fpqcPrecoverage. This comparison proves the required quasi-compact covering condition from openness of flat locally finitely presented morphisms; its finite-open-subcover argument is the argument of Stacks Tag 022C. Together with flatness this gives fpqcPrecoverage membership.",
    "uses": [
     "def-weil-pbc-fpqc-covering"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, lines 3050-3065 (\"This finishes the proof\"); Definition Tag 022B (topologies-definition-fpqc-covering)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-site",
-  "def-weil-etale-morphism",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-covering-affine-refinement",
   "def-weil-pbc-fpqc-covering"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/topologies.tex",
-  "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), lines 3043-3065, specialized to etale coverings (the fppf case, an etale covering being fppf); cf. Remark Tag 03O4 (etale-cohomology-remark-fpqc-finest), literature/stacks-project/etale-cohomology.tex lines 1086-1095"
+  "place": "Tag 022C, specialized to etale covers; implemented by Mathlib Scheme.ofArrows_mem_smallEtaleTopology_iff, Scheme.ofArrows_mem_precoverage_iff, and Scheme.fppfPrecoverage_le_fpqcPrecoverage. The node is below the sk-thm-p1 unit realizations, whose route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -191,5 +162,15 @@
   "group": "K1",
   "result": "fix",
   "note": "FIX: étale family restated as Sieve.ofArrows Z f ∈ T.smallEtaleTopology U (recorded dep; replaces Cover+[Over T]+derivable hEt), conclusion as Presieve.ofArrows ((f i).left) ∈ Scheme.fpqcPrecoverage U.left (fpqc convention, H4/H12); arbitrary ι, n=0 inside Mathlib qc clause; truth checked: reduces to etale≤proetale≤fpqc"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T044748-L-2037245",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
