@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-artinian-separable-residue-lift-flat",
+ "kind": "statement",
+ "title": "Flatness of the Artinian finite étale lift",
+ "statement": "For a flat local map D to S of local Artinian rings and a finite étale local Artinian D-algebra D' with a local map D' to S factoring D to S, the map D' to S is flat.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FI, flatness of the last map; proof refined using Mathlib etale cancellation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the factorization equality to define the S-algebra section sigma:S tensor_D D'→S, s tensor d ↦ s g'(d).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The inclusion D'→S tensor_D D' is flat by flat base change and the tensor commutativity equivalence (RingHom.flat_algebraMap_iff, the tensor-flatness instance, RingHom.Flat.of_bijective and RingHom.Flat.comp).",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Etale base change makes the tensor algebra etale over S. The identity S→S is etale; Algebra.Etale.of_restrictScalars makes its section sigma etale. Algebra.Smooth.flat then makes sigma flat. These are direct Mathlib applications.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composite of the inclusion with sigma is g'; RingHom.Flat.comp concludes.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-etale-ring-base-change"
+ ],
+ "proof_origin": {
+  "by": "X2 second reading",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FI flatness assertion; shorter below-unit proof by Mathlib etale cancellation and flat base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If A is flat over R and B is an etale R algebra acting on A then A is flat over B",
+   "results": "Algebra.Etale.baseChange and Algebra.Etale.of_restrictScalars provide the shorter proof; no exact theorem.",
+   "date": "2026-10-13",
+   "verdict": "proved from Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale.of_restrictScalars",
+   "results": "Exact cancellation lemma, checked against source and used in proof.",
+   "date": "2026-10-13",
+   "verdict": "component match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Ff]lat|[Ff]lat.*etale",
+   "results": "Smooth.flat, flat tensor base change, RingHom.Flat.comp and Etale.of_restrictScalars suffice.",
+   "date": "2026-10-13",
+   "verdict": "proved from Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness of an algebra over an etale extension when the composite is flat",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "status": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ArtinianSeparableResidueLift",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-artinian-separable-residue-lift",
+   "place": "flatness paragraph",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ArtinianSeparableResidueLiftFlat",
+  "file": "lean/Sheaf/RingTheory/ArtinianSeparableResidueLiftFlat.lean",
+  "declaration": "Algebra.flat_of_finiteEtale_artinian_residue_lift_core",
+  "statement": "theorem flat_of_finiteEtale_artinian_residue_lift_core\n    (D : Type u) (S : Type v) [CommRing D] [CommRing S]\n    [IsLocalRing D] [IsArtinianRing D] [IsLocalRing S] [IsArtinianRing S]\n    [Algebra D S] [IsLocalHom (algebraMap D S)]\n    (hflat : (algebraMap D S).Flat)\n    (D' : Type (max u v z)) [CommRing D'] [Algebra D D']\n    (g' : D' →+* S) [IsLocalRing D'] [IsArtinianRing D']\n    [IsLocalHom (algebraMap D D')] [IsLocalHom g']\n    [Etale D D'] [Module.Finite D D']\n    (hcomp : g'.comp (algebraMap D D') = algebraMap D S) : g'.Flat",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T212724-L-1131975",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T212724-L-1131975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

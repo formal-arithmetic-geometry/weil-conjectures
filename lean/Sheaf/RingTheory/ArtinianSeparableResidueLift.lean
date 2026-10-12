@@ -10,11 +10,8 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.FieldTheory.Separable
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
-import Sheaf.RingTheory.HenselianEtaleRetraction
-import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
-import Sheaf.RingTheory.LocalDimensionZeroHenselian
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Sheaf.RingTheory.ArtinianSeparableResidueLiftCore
+import Sheaf.RingTheory.ArtinianSeparableResidueLiftFlat
 
 /-!
 # Lifting a separable residue element across a flat map of Artinian local rings
@@ -61,6 +58,19 @@ theorem exists_finiteEtale_artinian_residue_lift
       IsLocalHom (algebraMap D D') ∧ IsLocalHom g' ∧
       Etale D D' ∧ Module.Finite D D' ∧ g'.Flat ∧
       g'.comp (algebraMap D D') = algebraMap D S ∧
-      ∃ d : D', IsLocalRing.residue S (g' d) = b := by sorry
+      ∃ d : D', IsLocalRing.residue S (g' d) = b := by
+  obtain ⟨D', hD', hDD', g', hlocal, hart, hmap, hg', het, hfin, hcomp, d, hd⟩ :=
+    exists_finiteEtale_artinian_residue_lift_core D S b hb
+  let : CommRing D' := hD'
+  let : Algebra D D' := hDD'
+  let : IsLocalRing D' := hlocal
+  let : IsArtinianRing D' := hart
+  let : IsLocalHom (algebraMap D D') := hmap
+  let : IsLocalHom g' := hg'
+  let : Etale D D' := het
+  let : Module.Finite D D' := hfin
+  have hflat' : g'.Flat :=
+    flat_of_finiteEtale_artinian_residue_lift_core D S hflat D' g' hcomp
+  exact ⟨D', hD', hDD', g', hlocal, hart, hmap, hg', het, hfin, hflat', hcomp, d, hd⟩
 
 end Algebra

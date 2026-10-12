@@ -33,77 +33,28 @@
  ],
  "proof": [
   {
-   "text": "Let $F=D/\\mathfrak m_D$, $K=S/\\mathfrak m_S$ and $E=F(b)\\subseteq K$. Since $b$ is separable over $F$, the simple extension $E/F$ is finite separable and therefore finite étale.",
+   "text": "Obtain the finite étale local Artinian lift and residue element from the core construction theorem.",
    "uses": [
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-finite-separable-extension-etale"
+    "lem-weil-pbc-artinian-separable-residue-lift-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
-   }
+   "elementary": false
   },
   {
-   "text": "Artinian local rings $D$ and $S$ are Noetherian with nilpotent maximal ideals and only one prime, hence are henselian. Apply the essential-surjectivity clause of the finite étale equivalence for $D$ to $E$. It gives a finite étale $D$-algebra $D_1$ with $D_1/\\mathfrak m_DD_1\\cong E$. The ideal $\\mathfrak m_DD_1$ is nilpotent and the quotient is a field, so the elements outside it are units; $D_1$ is local and $D\\to D_1$ is local. Finiteness makes $D_1$ Noetherian, and the nilpotent maximal ideal makes it Artinian.",
+   "text": "Apply the proved tensor base-change and etale-section flatness lemma to the resulting tower, and assemble all the original conjuncts.",
    "uses": [
-    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
-    "lem-weil-pbc-artinian-local-unique-prime",
-    "lem-weil-pbc-local-dimension-zero-henselian",
-    "lem-weil-pbc-henselian-finite-etale-equivalence",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+    "lem-weil-pbc-artinian-separable-residue-lift-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
-   }
-  },
-  {
-   "text": "Form the étale $S$-algebra $B=S\\otimes_D D_1$. Its reduction maps onto $K$ using $E\\hookrightarrow K$ and the residue map $S\\to K$; the kernel $Q$ is prime over $\\mathfrak m_S$ and its residue field is $K$. Henselian étale retraction supplies $B\\to S$ reducing to this map. Restriction to $D_1$ gives a map $g_1:D_1\\to S$ factoring $D\\to S$. It is local because $D_1$ has only one prime; it induces the specified embedding $E\\to K$. Lift $b\\in E$ through the quotient map of $D_1$ to an element $d$, so $\\operatorname{res}_S(g_1(d))=b$.",
-   "uses": [
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-henselian-etale-retraction",
-    "lem-weil-pbc-artinian-local-unique-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
-   }
-  },
-  {
-   "text": "Apply the Noetherian fibre flatness criterion to $D\\to D_1\\to S$ and $M=S$. The maps are local, $M$ is finite and nonzero over $S$, and is flat over $D$ by hypothesis. Its fibre is a module over $D_1/\\mathfrak m_DD_1=E$, a field, hence flat. Thus $g_1$ is flat. Replace $D_1$ by its canonical universe lift if necessary, transporting the ring, algebra, maps and properties through the ring equivalence.",
-   "uses": [
-    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
-  "lem-weil-pbc-artinian-local-unique-prime",
-  "lem-weil-pbc-local-dimension-zero-henselian",
-  "lem-weil-pbc-henselian-finite-etale-equivalence",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-  "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-henselian-etale-retraction",
-  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
-  "def-weil-pbc-flat-ring-map"
+  "lem-weil-pbc-artinian-separable-residue-lift-core",
+  "lem-weil-pbc-artinian-separable-residue-lift-flat"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "X2 stage 3",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
+  "place": "Tag 07FI, construction followed by flatness; the flatness step is closed by Mathlib etale cancellation and flat base change"
  },
  "mathlib_searches": [
   {
@@ -180,9 +131,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T184400-L-4025524",
+  "landing": "20261012T212724-L-1131975",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
