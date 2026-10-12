@@ -8337,3 +8337,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:23 L: merged deliver/X3/Sheaf.Algebra.Homology.InverseImageStalkScalarTransportNaturality (stage 3; reviewer PASS; first push; landing 20261012T152348-L-2313576 (proof); batch 20261012T152345; modules 1; new nodes 0)
 - 15:23 L: merged deliver/Y2/Sheaf.RingTheory.HeightOfHomogeneousIndependence (stage 3; reviewer PASS; first push; landing 20261012T152348-L-2313677 (interface); batch 20261012T152345; modules 3; new nodes 2)
 - 15:30 L: returned deliver/K3/Sheaf.AlgebraicGeometry.ProjTwistDegreeDetection (reviewer RETURN: (the landing tools, head 2c54a9a59) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 15:30 L: returned deliver/Y3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (reviewer RETURN: (the landing tools, head 1c7c33469) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Con)
