@@ -389,6 +389,28 @@ theorem trace_globalOperator_eq_integral_traceClass (G : GeometricOperations A s
       G.integral c.fixStr (G.traceClass c hK) :=
   sorry
 
+/-- Blueprint `thm-trf-lefschetz-verdier`, the Lefschetz-Verdier trace comparison: for `X`
+proper over `s`, an endocorrespondence `(C, c, u)` on `(X, K)` with proper ordinary leg `c₂` and
+whose fixed scheme is proper over `s` and a finite disjoint union of clopen pieces
+`j_β : β ⟶ Fix(c)`, the trace of the global operator on `RΓ_c(X, K)` is the sum of the local
+terms, `tr_A(T_c(u) ∣ RΓ_c(X, K)) = ∑_β LT_β(u)`. It combines the proper global trace
+comparison `trace_globalOperator_eq_integral_traceClass` (blueprint `sk-c-proper-global`) with
+the decomposition into local terms `integral_eq_sum_localTerm` (blueprint `sk-p-local`). -/
+theorem trace_globalOperator_eq_sum_localTerm (G : GeometricOperations A s)
+    [HasCompactification aX] [IsProper aX]
+    [s.IsSpecOfField] (hK : G.ctf X K) (c : Correspondence aX aX K K) [IsGeometric c.str]
+    [IsProper c.snd] [HasCompactification c.str] [HasCompactification c.toProd]
+    [HasRightDual ((rightDerivedLowerShriek A aX).obj K)]
+    [HasCompactification c.fixStr] [IsProper c.fixStr] {ι : Type u} [Fintype ι]
+    {B : ι → Scheme.{u}} (j : ∀ i, B i ⟶ c.fix) [∀ i, IsOpenImmersion (j i)]
+    (hclosed : ∀ i, IsClosed (Set.range (j i).base))
+    (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).base) (Set.range (j i').base))
+    (hcover : ⋃ i, Set.range (j i).base = Set.univ) :
+    MonoidalCategory.trace (Correspondence.globalOperator G c hK) =
+      ∑ i, G.localTerm c.fixStr (j i) (hclosed i) (G.traceClass c hK) := by
+  rw [G.trace_globalOperator_eq_integral_traceClass hK c,
+    G.integral_eq_sum_localTerm c.fixStr j hclosed hdisj hcover]
+
 end GeometricOperations
 
 end AlgebraicGeometry.ProEtale
