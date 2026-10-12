@@ -20,34 +20,23 @@
  ],
  "proof": [
   {
-   "text": "Each fixed W₀(n,t) is qcqs. Its base changes form an affine-transition limit with limit W_X(n,t). The prescribed first-projection equations make γ and δ the canonical pullback-pasting comparisons.",
+   "text": "The finite product defining each W0(n,t) is qcqs: apply Scheme.compactSpace_and_quasiSeparatedSpace_piObj to U0 and the V0 factors. Apply scalar continuity to W0 with the given gamma and delta, obtaining representatives and eventual zero for every tuple.",
    "uses": [
-    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-etale-limit-scalar-section-continuity",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "def-weil-pbc-cech-complex"
    ],
    "elementary": false
   },
   {
-   "text": "Use the affine étale site presentation and small-site comparison; compute each inverse image on sections by later-stage presentations (09YM), insert these into the sectionwise colimit of G, and reindex the iterated filtered colimit by final common refinements (09YN) to get stage-section continuity on every affine piece. Glue by the finite-cover equalizer on the qcqs nerve object, with finite affine covers for its overlaps. Finality of the tail identifies the restricted coefficient colimit with L. The maps are exactly α and β, because their equations explicitly evaluate the adjunction units, coefficient transitions and L.ι.",
+   "text": "In degree n, transport through eA, eK and the products of the sheaf images of eNj and eNlim, using the explicit product-to-function-group isomorphism. Precomposition with eA.hom cancels its inverse in the prescribed equations, identifying every transition and leg after projection. For each tuple coordinate, its inclusion splits the projection, and the cocone law then gives compatibility of scalar transitions and legs. Choose representatives for the finitely many coordinates, put them at a common upper stage, and assemble them as a product element. This proves surjectivity. If two product representatives have the same image, their difference has zero image in each coordinate; choose later zeros coordinatewise and a common refinement of these arrows. All projections of the difference then vanish, proving equality. Types.FilteredColimit.isColimitOf' gives the underlying set colimit, and the forgetful functor reflects colimits of abelian groups.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "lem-weil-pbc-colimit-of-sites"
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For fixed degree n, the tuple set Fin(n+1) → K is finite. Commute its product with the filtered section colimit. The transition and leg equations identify the resulting degreewise colimit cocone with evaluation of cA.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Given any complex cocone, the degreewise universal properties supply unique degree maps. Precompose the differential-commutation equation with all stage legs; the cocone equations give equality. Uniqueness in each degree makes these maps a unique complex morphism, proving IsColimit cA.",
+   "text": "Apply HomologicalComplex.isColimitOfEval to the degreewise colimits just constructed. Its mediating maps commute with differentials because their composites agree after every stage leg; degreewise uniqueness proves uniqueness of the complex morphism.",
    "uses": [
     "def-weil-pbc-cech-complex",
     "def-weil-pbc-category-colimit"
@@ -57,8 +46,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 01ZM, 07RP, 07RR, 09YN, 09YP and 09YQ",
-  "place": "Canonical finite-cover descent and degreewise Čech comparison; expanded by V1 for the returned interface repair."
+  "document": "Stacks Project, Tag 09YP",
+  "place": "Finite-product and degreewise universal-property argument, with scalar continuity split off; implemented by Q3."
  },
  "mathlib_searches": [
   {
@@ -122,14 +111,8 @@
   "date": "2026-10-13"
  },
  "proof_deps": [
-  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-etale-limit-scalar-section-continuity",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-colimit-of-sites",
   "def-weil-pbc-cech-complex",
   "def-weil-pbc-category-colimit"
  ],
@@ -146,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-37db9",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T194148-L-467380",
+  "landing": "20261012T225325-L-1811703",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean modules, signatures, nodes, report, and direct importer matched against the packet and base; all compiled successfully."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
