@@ -7,13 +7,9 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.ColimitSiteCechComplex
-import Sheaf.CategoryTheory.SiteCechComplex
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.ColimitSitesInjectiveSystem
+import Sheaf.CategoryTheory.ColimitSitesAcyclicReplacement
+import Sheaf.CategoryTheory.ColimitSitesCohomologyDiagram
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 
 /-! # A connecting-map ladder for colimit-site cohomology.
 
@@ -27,6 +23,33 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
+private theorem hom_eq_of_arrow_eq {C : Type*} [Category C]
+    {A B A' B' : C} (f : A ⟶ B) (g : A' ⟶ B')
+    (h : Arrow.mk f = Arrow.mk g) (hA : A = A') (hB : B = B') :
+    f = eqToHom hA ≫ g ≫ eqToHom hB.symm := by
+  obtain ⟨hA', hB', hg⟩ := (Arrow.mk_eq_mk_iff f g).mp h
+  exact hg
+
+private theorem transport_ladder {C : Type*} [Category C]
+    {A A' Ar Ar' B B' Br Br' T T' : C}
+    (l : A ⟶ T) (r : A' ⟶ T') (ll : Ar ⟶ Br) (rr : Ar' ⟶ Br')
+    (β : Ar' ⟶ Ar) (d : B' ⟶ B)
+    (hA : A = Ar) (hA' : A' = Ar') (hT : T = B) (hT' : T' = B')
+    (hU : Br = B) (hU' : Br' = B')
+    (hl : Arrow.mk l = Arrow.mk ll) (hr : Arrow.mk r = Arrow.mk rr)
+    (hb : β ≫ ll ≫ eqToHom hU = rr ≫ eqToHom hU' ≫ d) :
+    (eqToHom hA' ≫ β ≫ eqToHom hA.symm) ≫ l =
+      r ≫ (eqToHom hT' ≫ d ≫ eqToHom hT.symm) := by
+  have hl' := hom_eq_of_arrow_eq l ll hl hA (hT.trans hU.symm)
+  have hr' := hom_eq_of_arrow_eq r rr hr hA' (hT'.trans hU'.symm)
+  rw [hl', hr']
+  simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
+  simpa only [Category.assoc, eqToHom_trans] using
+    congrArg (fun z ↦ eqToHom hA' ≫ z ≫ eqToHom hT.symm) hb
+
+-- Retain the named existential proof witnesses in the unchanged signature.
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency true in
 /-- A positive-degree comparison admits a lower-degree connecting-map ladder.
 The returned system is a cokernel of a compatible injective embedding after
 normalizing any idempotent identity transitions.
@@ -291,6 +314,42 @@ theorem cohomology_colimit_sites_connecting_ladder
             (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))),
       ∃ (δ : cR.pt ⟶ c.pt) (δstage : ∀ t : Under i, DR.obj t ⟶ D.obj t),
         Function.Surjective δ.hom ∧
-        (∀ t : Under i, δstage t ≫ c.ι.app t = cR.ι.app t ≫ δ) := by sorry
+        (∀ t : Under i, δstage t ≫ c.ι.app t = cR.ι.app t ≫ δ) := by
+  classical
+  have hU (t : Under i) :
+      (V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i) =
+        (V.ι.app i).toFunctor.obj X_i := by
+    exact congrArg (fun a : F.obj i ⟶ V.pt ↦ a.toFunctor.obj X_i) (V.w t.hom)
+  obtain ⟨FsR, φR, hφR, SR, hSobjR, hSmapR, KR, hKR, hidR,
+      G, f, g, w, hE, d, hdformula, hG, β, hβ⟩ :=
+    colimit_sites_acyclic_replacement J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover
+      hVpullback @pullbackMap @hpullbackMap canonicalMap hcanonicalMap @e @he @eV @heV
+      Fs @φ @hφ S hSobj @hSmap K hK i X_i n hU
+  obtain ⟨DR, hDobjR, hDmapR, cR, hcptR, hclegsR⟩ :=
+    colimit_sites_cohomology_diagram J F P hcover hpullback V Q hVcover
+      hVpullback @pullbackMap @hpullbackMap canonicalMap hcanonicalMap @e @he @eV @heV
+      FsR @φR @hφR SR hSobjR @hSmapR KR i X_i n hidR
+  have hd : Function.Surjective d.hom := by
+    intro x
+    have hz := hG ((V.ι.app i).toFunctor.obj X_i) (n + 1) (Nat.zero_lt_succ n)
+    obtain ⟨y, hy⟩ := Abelian.Ext.covariant_sequence_exact₁ _ hE x
+      ((AddCommGrpCat.subsingleton_of_isZero hz).elim _ _) rfl
+    exact ⟨y, (hdformula y).trans hy⟩
+  let δ : cR.pt ⟶ c.pt := eqToHom hcptR ≫ d ≫ eqToHom hcpt.symm
+  let δstage (t : Under i) : DR.obj t ⟶ D.obj t :=
+    eqToHom (hDobjR t) ≫ β t ≫ eqToHom (hDobj t).symm
+  refine ⟨FsR, @φR, @hφR, SR, hSobjR, @hSmapR, KR, hKR, DR, hDobjR,
+    @hDmapR, cR, hcptR, hclegsR, δ, δstage, ?_, ?_⟩
+  · have : IsIso (eqToHom hcptR) := inferInstance
+    have : IsIso (eqToHom hcpt.symm) := inferInstance
+    exact ((AddCommGrpCat.epi_iff_surjective δ).mp (by
+      have : Epi d := (AddCommGrpCat.epi_iff_surjective d).mpr hd
+      dsimp [δ]
+      infer_instance))
+  · intro t
+    exact transport_ladder (c.ι.app t) (cR.ι.app t) _ _ (β t) d
+      (hDobj t) (hDobjR t) hcpt hcptR
+      (congrArg (Sheaf.H' K.pt (n + 1)) (hU t))
+      (congrArg (Sheaf.H' KR.pt n) (hU t)) (hclegs t) (hclegsR t) (hβ t)
 
 end CategoryTheory

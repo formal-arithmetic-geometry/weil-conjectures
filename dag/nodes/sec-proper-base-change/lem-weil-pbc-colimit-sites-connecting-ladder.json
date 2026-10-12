@@ -15,78 +15,46 @@
  ],
  "proof": [
   {
-   "text": "Identify inverse image along an identity with the identity functor compatibly with the unit. The identity coefficient action is idempotent by the cocycle hφ. Take its image in the abelian sheaf category to normalize the coefficient system: transitions restrict to the images and satisfy identity laws. The identity laws of S and D, together with hSmap and hDmap, identify its inverse-image diagram with S and its degree-(n+1) stage diagram with D. Transpose the normalized transitions through adjunctions. By the cocycle and unit coherence their transposes satisfy the right-adjoint cocycle. Apply exists_compatible_injective_system and transpose back. Composing the normalized stage connecting maps with inclusion will give the ladder for the original specified diagram.",
+   "text": "The strict cocone equation V.w gives U_t = U by evaluating the underlying functors at X_i.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply colimit_sites_acyclic_replacement to obtain the compatible cokernel coefficients, inverse-image colimit KR, degree-n identity law hidR, a short exact sequence K.pt → G → KR.pt, vanishing H^q(U,G) for q>0, the target boundary d with its pointwise Yoneda-product formula, and pointwise natural boundaries β_t.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-injective-system",
-    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-weil-pbc-colimit-sites-acyclic-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply colimit_sites_cohomology_diagram to the replacement coefficients in degree n, using hidR. Obtain DR and cR with all required object, map and leg equations.",
+   "uses": [
+    "lem-weil-pbc-colimit-sites-cohomology-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the returned formula d(x)=x.comp E.extClass. For x in H^(n+1)(U,K.pt), its image in H^(n+1)(U,G) is zero because this group is subsingleton. Mathlib Abelian.Ext.covariant_sequence_exact₁ gives a degree-n preimage, proving d is surjective. This is the long exact sequence for the Ext definition of H', so no general right-derived-functor comparison is needed.",
+   "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Take the stage cokernels of the compatible monomorphisms. Exact inverse image induces their transition maps; cancel the cokernel epimorphisms to prove the cocycle. Form SR from their colimit-site inverse images, with the stated object and arrow equalities, and choose a colimit KR. Exact filtered colimits of abelian sheaves make 0 → K.pt → G → KR.pt → 0 short exact.",
-   "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "By hQ each colimit-site covering comes from a finite stage covering. The Cech comparison expresses the complex for G as a filtered colimit of the stage injective complexes. Stage Cech acyclicity and exact filtered colimits make it positively acyclic. The Cech vanishing criterion applied to all objects yields positive object-cohomology vanishing of G.",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "lem-weil-pbc-colimit-of-sites-cech-complex",
-    "def-weil-pbc-site-cech-complex",
-    "lem-weil-pbc-site-injective-cech-acyclic",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-site-cech-vanishing-criterion"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Form the degree-n cokernel cohomology diagram DR and its canonical comparison cocone cR. Uniqueness of siteCohomology_pullback identifies the given map families with canonical pullbacks; the composition clause and the cocycle give DR and cR functor and cocone laws. Record hDobjR, hDmapR, hcptR and hclegsR.",
-   "uses": [
-    "lem-weil-pbc-site-cohomology-pullback",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take the long exact sequences of the short exact sequences of step 2. The connecting homomorphism δ from degree-n cohomology of KR.pt to degree-(n+1) cohomology of K.pt is surjective because its next term is the zero group from step 3. The stage sequences give δstage.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-derived-functor-long-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Naturality of the long exact sequences under the stage-to-colimit comparison, and the connecting-map clauses of the supplied map families, give δstage(t) ≫ c_t = cR_t ≫ δ. Transport endpoints with the specified equalities. No finite-stage representative and no induction hypothesis is used in the construction.",
-   "uses": [
-    "lem-weil-pbc-site-cohomology-pullback"
-   ],
-   "elementary": false
+   "text": "Transport d by hcptR and hcpt to define δ, and β_t by hDobjR and hDobj to define δstage. Isomorphism transports preserve surjectivity. Arrow.mk_eq_mk_iff converts the two leg equalities into transported hom equalities. Substitute them, cancel opposite eqToHom transports, and use the pointwise β square. This proves δstage t ≫ c_t = cR_t ≫ δ.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-of-sites-injective-system",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-colimit-of-sites",
-  "lem-weil-pbc-colimit-of-sites-cech-complex",
-  "def-weil-pbc-site-cech-complex",
-  "lem-weil-pbc-site-injective-cech-acyclic",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-site-cech-vanishing-criterion",
-  "lem-weil-pbc-derived-functor-long-exact"
+  "lem-weil-pbc-colimit-sites-acyclic-replacement",
+  "lem-weil-pbc-colimit-sites-cohomology-diagram",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/09YP",
-  "place": "Tag 09YP (lemma-colimit), second and third paragraphs; the short exact sequence and right-exact comparison diagram in Tag 0739; the injective system in Tag 0EXZ; adaptation to the formal nonunital cocycle by splitting identity idempotents, using the supplied functor identity laws."
+  "place": "09YP and the comparison diagram of 0739, reduced to two strictly smaller constructions by Q2. The main Lean proof supplies Ext exactness, surjectivity and endpoint-transport assembly."
  },
  "mathlib_searches": [
   {
@@ -167,9 +135,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T063508-L-3154331",
+  "landing": "20261012T085322-L-33099",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
