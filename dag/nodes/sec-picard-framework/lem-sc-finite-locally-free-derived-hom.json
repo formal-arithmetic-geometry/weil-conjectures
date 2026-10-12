@@ -26,42 +26,50 @@
  ],
  "proof": [
   {
-   "text": "The functor $T=\\mathcal H om_{\\mathcal O_Y}(P,-)$ on $\\mathcal O_Y$-modules is exact. Indeed, on each open $V_a$ of the cover with $P|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$, the definition of sheaf Hom [def-pur-sheaf-hom] (Hom out of a finite direct sum) gives $P^{\\vee}|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$ for $P^{\\vee}=\\mathcal H om_{\\mathcal O_Y}(P,\\mathcal O_Y)$, so $P^{\\vee}$ is finite locally free in the open-cover sense and $P^{\\vee}\\otimes_{\\mathcal O_Y}-$ preserves short exact sequences by [lem-sc-ext-tensor-exact]. By [lem-sc-ext-evaluation], evaluation is an isomorphism $P^{\\vee}\\otimes-\\cong T$ natural in the module, so $T$ preserves short exact sequences as well.",
+   "text": "The dual of P is finite locally free (Scheme.Modules.IsFiniteLocallyFree.dual, via the existing local free Hom calculation). Evaluation [lem-sc-ext-evaluation] gives a natural isomorphism tensorLeft(P dual) ≅ Hom(P,-). TensorLeft(P dual) preserves finite limits and colimits by [lem-sc-ext-tensor-exact]. Transport both preservation properties through the natural isomorphism; call the exact additive sheaf Hom functor T.",
    "uses": [
     "def-pur-sheaf-hom",
-    "lem-sc-ext-tensor-exact",
-    "lem-sc-ext-evaluation"
+    "lem-sc-ext-evaluation",
+    "lem-sc-ext-tensor-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DQ, cohomology-lemma-dual-perfect-complex (special case K = P[0]); route of the reviewer audit via lem-sc-ext-evaluation and lem-sc-ext-tensor-exact"
-   }
+   "elementary": false
   },
   {
-   "text": "By [def-pur-derived-internal-hom], $R\\mathcal H om_{\\mathcal O_Y}(P,L)$ is the Hom complex $\\mathcal H om^\\bullet(P,\\mathcal I^\\bullet)$, where $P$ sits in degree zero and $L\\to\\mathcal I^\\bullet$ is a K-injective resolution. Since $P$ is concentrated in degree zero with zero differential, the product formula there reduces to the complex $T(\\mathcal I^\\bullet)$: terms $\\mathcal H om(P,\\mathcal I^n)$, differential $T(d_{\\mathcal I})$. An exact additive functor preserves kernels and images, hence commutes with cohomology of complexes: $\\mathcal H^n(T(\\mathcal I^\\bullet))\\cong T(\\mathcal H^n(\\mathcal I^\\bullet))$ by step 1. As $\\mathcal I^\\bullet$ is quasi-isomorphic to $L$ in degree zero, this is $\\mathcal H om(P,L)$ for $n=0$ and $0$ for $n\\neq0$; in particular $\\mathcal E xt^i(P,L)=0$ for $i>0$. A complex $C$ with cohomology only in degree zero is isomorphic in $D(\\mathcal O_Y)$ [def-pc-derived-category] to $\\mathcal H^0(C)$ in degree zero, through the quasi-isomorphisms $C\\leftarrow(\\cdots\\to C^{-1}\\to\\ker d^0\\to0)\\to\\mathcal H^0(C)$. So $R\\mathcal H om(P,L)$ is represented by $\\mathcal H om(P,L)$ in degree zero.",
+   "text": "Choose the functorial K-injective resolution eta:L[0]→I(L[0]). Its map is a quasi-isomorphism and its target K-injective. The representative comparison [def-pur-derived-internal-hom] identifies derived Hom(P[0],L[0]) with Q Hom-complex(P[0],I(L[0])). The new complex comparison [lem-sc-hom-complex-single] identifies this with Q(T applied degreewise to I(L[0])).",
    "uses": [
     "def-pur-derived-internal-hom",
+    "lem-sc-hom-complex-single"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib HomologicalComplex.quasiIso_map_of_preservesHomology applies to the exact additive T: T(eta) is a quasi-isomorphism. Invert its image under Q. Mathlib HomologicalComplex.singleMapHomologicalComplex then identifies degreewise T(L[0]) with Hom(P,L)[0]. Compose these isomorphisms to prove the first clause.",
+   "uses": [
+    "def-pur-sheaf-hom",
     "def-pc-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DQ, cohomology-lemma-dual-perfect-complex (special case K = P[0]); route of the reviewer audit via lem-sc-ext-evaluation and lem-sc-ext-tensor-exact"
-   }
+   "elementary": true
+  },
+  {
+   "text": "A derived single object at zero is IsLE zero by Mathlib DerivedCategory.TStructure. DerivedCategory.isZero_of_isLE gives zero homology in every strictly positive degree. Transport this IsZero property through the homology functor applied to the isomorphism just constructed.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-sheaf-hom",
-  "lem-sc-ext-tensor-exact",
   "lem-sc-ext-evaluation",
+  "lem-sc-ext-tensor-exact",
   "def-pur-derived-internal-hom",
+  "lem-sc-hom-complex-single",
   "def-pc-derived-category"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DQ, cohomology-lemma-dual-perfect-complex (special case K = P[0], argued directly)"
+  "place": "Tag 08DQ, degree-zero case: original exactness route, with the Hom-complex single-source comparison formalized in lem-sc-hom-complex-single and the exact-functor and single-object homology steps using Mathlib"
  },
  "mathlib_searches": [
   {
@@ -141,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T070542-L-3473238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

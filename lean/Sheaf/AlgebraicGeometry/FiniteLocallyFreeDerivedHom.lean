@@ -10,7 +10,8 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import Sheaf.AlgebraicGeometry.ExtEvaluation
 import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.AlgebraicGeometry.HomComplexSingle
+import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Derived internal Hom from a finite locally free sheaf
@@ -68,6 +69,47 @@ theorem finiteLocallyFree_derivedInternalHom_single
               (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj P),
               (DerivedCategory.singleFunctor
                 (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L))) := by
-  sorry
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let Pc := (CochainComplex.singleFunctor A 0).obj P
+  let Lc := (CochainComplex.singleFunctor A 0).obj L
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  have : QuasiIso (η.app Lc) :=
+    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A Lc).2
+  have : (I.obj Lc).IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A Lc
+  obtain ⟨e⟩ := derivedInternalHom_obj_iso
+    (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
+    ((DerivedCategory.singleFunctor A 0).obj P)
+    ((DerivedCategory.singleFunctor A 0).obj L) Pc (I.obj Lc)
+    (Iso.refl _)
+    ((asIso (DerivedCategory.Q.map (η.app Lc))).symm)
+  let Pd : Y.Modules := Scheme.Modules.dual P
+  have : Pd.IsFiniteLocallyFree := Scheme.Modules.IsFiniteLocallyFree.dual P
+  obtain ⟨ev, _, hn⟩ := Scheme.Modules.dual_tensor_hom_iso Y P
+  let t : CategoryTheory.MonoidalCategory.tensorLeft Pd ≅
+      (SheafOfModules.homFunctor Y.sheaf).obj (op P) :=
+    NatIso.ofComponents ev (fun g ↦ (hn g).symm)
+  obtain ⟨hl, hc⟩ := Scheme.Modules.finiteLocallyFree_tensorLeft_exact Pd
+  have := hl
+  have := hc
+  have : PreservesFiniteLimits ((SheafOfModules.homFunctor Y.sheaf).obj (op P)) :=
+    preservesFiniteLimits_of_natIso t
+  have : PreservesFiniteColimits ((SheafOfModules.homFunctor Y.sheaf).obj (op P)) :=
+    preservesFiniteColimits_of_natIso t
+  let T := (SheafOfModules.homFunctor Y.sheaf).obj (op P)
+  obtain ⟨h⟩ := homComplex_single_iso Y P (I.obj Lc)
+  let f := (T.mapHomologicalComplex (ComplexShape.up ℤ)).map (η.app Lc)
+  have : QuasiIso f := inferInstance
+  let s := (HomologicalComplex.singleMapHomologicalComplex T (ComplexShape.up ℤ) 0).app L
+  let d := e ≪≫ DerivedCategory.Q.mapIso h ≪≫
+    (asIso (DerivedCategory.Q.map f)).symm ≪≫ DerivedCategory.Q.mapIso s
+  refine ⟨⟨d⟩, ?_⟩
+  intro i hi
+  exact (DerivedCategory.isZero_of_isLE
+    ((DerivedCategory.singleFunctor A 0).obj
+      (SheafOfModules.homObj (R := Y.toRingedSpace.sheaf) P L)) 0 i hi).of_iso
+    ((DerivedCategory.homologyFunctor A i).mapIso d)
 
 end AlgebraicGeometry
