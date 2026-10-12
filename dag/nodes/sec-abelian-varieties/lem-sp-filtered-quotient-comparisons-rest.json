@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-filtered-quotient-comparisons-rest",
+ "kind": "statement",
+ "title": "Remaining natural comparison data after boundary containment",
+ "statement": "Assume the boundary-to-cycle containments for all finite filtered complexes and the quotient transition maps satisfy their projection squares. Then the quotient isomorphisms, representative maps, and all filtered-map naturality data appearing after the containment clause in lem-sp-filtered-quotient-comparisons exist.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas, lemma-spectral-sequence-filtered-complex, first differential and functoriality; https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Construct the quotient isomorphisms and representative maps from the quotient-image comparison, then prove the filtered-map squares by cokernel descent and cancellation.",
+   "uses": [
+    "lem-sp-filtered-complex-quotient-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-quotient-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "G3 stage 3",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas, lemma-spectral-sequence-filtered-complex, first differential and functoriality; https://stacks.math.columbia.edu/tag/012K",
+  "note": "Componentwise categorical expansion of the parent construction; no countable sums are assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial spectral sequence of finite filtered cochain complexes with natural cycle boundary quotient pages and exact couple",
+   "date": "2026-10-12",
+   "results": "8 hits. Top results: CochainComplex.exactAt_of_isLE, CochainComplex.shortComplexTruncLE, HomotopyCategory.spectralObjectMappingCone_ω₁, HomotopyCategory.spectralObjectMappingCone, CochainComplex.exactAt_of_isGE, CochainComplex.cm5b, CochainComplex.isLE_iff, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p. Inspected the local filtered-complex and spectral-sequence modules; no exact theorem for this statement.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.pageFunctor",
+   "date": "2026-10-12",
+   "results": "6 hits. Top results: CategoryTheory.SpectralSequence.pageFunctor, CategoryTheory.SpectralSequence.pageFunctor_obj, CategoryTheory.SpectralSequence.pageHomologyNatIso, CategoryTheory.SpectralSequence.pageFunctor_map, CategoryTheory.SpectralSequence.pageHomologyNatIso_hom_app, CategoryTheory.SpectralSequence.pageHomologyNatIso_inv_app. Inspected the local filtered-complex and spectral-sequence modules; no exact theorem for this statement.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural image comparison for cycles modulo boundaries of a filtered complex",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*spectral|spectral.*filtered|image.*naturality",
+   "date": "2026-10-12",
+   "results": "0 hits. Top results: none. Inspected the local filtered-complex and spectral-sequence modules; no exact theorem for this statement.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "K3 stage 3 worker",
+  "item": "Sheaf.CategoryTheory.FilteredQuotientComparisons",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-filtered-quotient-comparisons",
+   "place": "decomposition of its quotient and naturality clauses",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredQuotientComparisons",
+  "file": "lean/Sheaf/CategoryTheory/FilteredQuotientComparisons.lean",
+  "declaration": "CategoryTheory.filteredQuotient_comparisons_rest",
+  "statement": "theorem filteredQuotient_comparisons_rest (C : Type u) [Category.{v} C] [Abelian C] (φ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p r : ℤ) (hr : 1 ≤ r), U.obj.filtration.complexQuotient p (p + r) (by omega) ⟶ U.obj.filtration.complexQuotient (p - r + 1) (p + 1) (by omega)) (hφ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p r : ℤ) (hr : 1 ≤ r), U.obj.filtration.complexQuotientπ p (p + r) (by omega) ≫ φ U p r hr = Subobject.ofLE (U.obj.filtration.step p) (U.obj.filtration.step (p - r + 1)) (U.obj.filtration.antitone_step (by omega)) ≫ U.obj.filtration.complexQuotientπ (p - r + 1) (p + 1) (by omega)) (hBZ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q r : ℤ) (hr : 1 ≤ r), U.obj.filtration.complexBoundaries p (p + q) r ≤ U.obj.filtration.complexCycles p (p + q) r) : ∃ eH : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ), cokernel (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≅ (U.obj.filtration.gradedPiece p).homology (p + q), ∃ (eQ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q r : ℤ) (hr : 1 ≤ r), cokernel (Subobject.ofLE _ _ (hBZ U p q r hr)) ≅ image (HomologicalComplex.homologyMap (φ U p r hr) (p + q))), (∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ), ∃ (z : (U.obj.filtration.complexCycleRepresentatives p (p + q) 1 : C) ⟶ (U.obj.filtration.complexCycles p (p + q) 1 : C)) (g : (U.obj.filtration.complexCycleRepresentatives p (p + q) 1 : C) ⟶ (U.obj.filtration.gradedPiece p).cycles (p + q)), z ≫ (U.obj.filtration.complexCycles p (p + q) 1).arrow = (U.obj.filtration.complexCycleRepresentatives p (p + q) 1).arrow ≫ (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q) ∧ g ≫ (U.obj.filtration.gradedPiece p).iCycles (p + q) = (U.obj.filtration.complexCycleRepresentatives p (p + q) 1).arrow ≫ (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q) ∧ Epi z ∧ z ≫ cokernel.π (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≫ (eH U p q).hom = g ≫ (U.obj.filtration.gradedPiece p).homologyπ (p + q)) ∧ (∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ), (eQ U p q 1 (by omega)).hom ≫ image.ι (HomologicalComplex.homologyMap (φ U p 1 (by omega)) (p + q)) = (eH U p q).hom ≫ HomologicalComplex.homologyMap (φ U p 1 (by omega)) (p + q)) ∧ (∀ (U V : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (p q r : ℤ) (hr : 1 ≤ r), ∃ (s : ∀ a : ℤ, (U.obj.filtration.step a : CochainComplex C ℤ) ⟶ (V.obj.filtration.step a : CochainComplex C ℤ)) (a : U.obj.filtration.complexQuotient p (p + r) (by omega) ⟶ V.obj.filtration.complexQuotient p (p + r) (by omega)) (b : U.obj.filtration.complexQuotient (p - r + 1) (p + 1) (by omega) ⟶ V.obj.filtration.complexQuotient (p - r + 1) (p + 1) (by omega)) (g : U.obj.filtration.gradedPiece p ⟶ V.obj.filtration.gradedPiece p) (kz : (U.obj.filtration.complexCycles p (p + q) r : C) ⟶ (V.obj.filtration.complexCycles p (p + q) r : C)) (k : cokernel (Subobject.ofLE _ _ (hBZ U p q r hr)) ⟶ cokernel (Subobject.ofLE _ _ (hBZ V p q r hr))), (∀ i : ℤ, s i ≫ (V.obj.filtration.step i).arrow = (U.obj.filtration.step i).arrow ≫ t.hom.hom) ∧ U.obj.filtration.complexQuotientπ p (p + r) (by omega) ≫ a = s p ≫ V.obj.filtration.complexQuotientπ p (p + r) (by omega) ∧ U.obj.filtration.complexQuotientπ (p - r + 1) (p + 1) (by omega) ≫ b = s (p - r + 1) ≫ V.obj.filtration.complexQuotientπ (p - r + 1) (p + 1) (by omega) ∧ U.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫ g = s p ≫ V.obj.filtration.complexQuotientπ p (p + 1) (by omega) ∧ kz ≫ (V.obj.filtration.complexCycles p (p + q) r).arrow = (U.obj.filtration.complexCycles p (p + q) r).arrow ≫ g.f (p + q) ∧ cokernel.π (Subobject.ofLE _ _ (hBZ U p q r hr)) ≫ k = kz ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q r hr)) ∧ (∃ (kz₁ : (U.obj.filtration.complexCycles p (p + q) 1 : C) ⟶ (V.obj.filtration.complexCycles p (p + q) 1 : C)) (k₁ : cokernel (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ⟶ cokernel (Subobject.ofLE _ _ (hBZ V p q 1 (by omega)))), kz₁ ≫ (V.obj.filtration.complexCycles p (p + q) 1).arrow = (U.obj.filtration.complexCycles p (p + q) 1).arrow ≫ g.f (p + q) ∧ cokernel.π (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≫ k₁ = kz₁ ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q 1 (by omega)))) ∧ (∀ k₁ : cokernel (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ⟶ cokernel (Subobject.ofLE _ _ (hBZ V p q 1 (by omega))), (∃ kz₁ : (U.obj.filtration.complexCycles p (p + q) 1 : C) ⟶ (V.obj.filtration.complexCycles p (p + q) 1 : C), kz₁ ≫ (V.obj.filtration.complexCycles p (p + q) 1).arrow = (U.obj.filtration.complexCycles p (p + q) 1).arrow ≫ g.f (p + q) ∧ cokernel.π (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≫ k₁ = kz₁ ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q 1 (by omega)))) → k₁ ≫ (eH V p q).hom = (eH U p q).hom ≫ HomologicalComplex.homologyMap g (p + q)) ∧ k ≫ (eQ V p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (φ V p r hr) (p + q)) = (eQ U p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (φ U p r hr) (p + q)) ≫ HomologicalComplex.homologyMap b (p + q))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T232900-L-2042013",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T232900-L-2042013",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
