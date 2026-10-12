@@ -28,61 +28,57 @@
  ],
  "proof": [
   {
-   "text": "Let $K\\in\\Dplus(Y_{\\Et})$ (for the sheaf clause $K=F$ placed in degree $0$). There are a bounded below complex $I^\\bullet$ of injective objects of $\\Ab(Y_{\\Et})$ and an isomorphism $K\\cong QI^\\bullet$, and $I^\\bullet$ is K-injective [lem-weil-pbc-dplus-injective-representative]; for $K=F$ this may be taken to be an injective resolution $F\\to I^\\bullet$. By [def-weil-pbc-direct-image], $Rh_*K\\cong Q(h_*I^\\bullet)$, so $R^qh_*K=\\mathcal H^q(h_*I^\\bullet)$, and $(h_*I^r)(U)=I^r(U\\times_XY)$ for each etale $U\\to X$.",
+   "text": "Let A(U) be the sheafification of the free abelian presheaf on the representable U. The free-forgetful adjunction, the sheafification adjunction and Yoneda give Hom(A(U),G) = G(U), naturally in both U and G. The exact pullback functor commutes with single complexes; the bounded below derived adjunction therefore identifies the displayed presheaf with U ↦ Hom(A(U)[0], Rh_*(K[q])). This is the Lean isomorphism higherDirectImagePresheafIso, assembled from mapDerivedCategoryPlusSingleFunctor and Adjunction.derivedPlus.",
    "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072W proof; etale specialization in Lemma Tag 03Q8"
-   }
-  },
-  {
-   "text": "Fix an etale $U\\to X$, put $W=U\\times_XY$ with its etale projection $v:W\\to Y$, and read $K|_W$ as $v^{-1}K$. The functor $v^{-1}$ is exact [prop-weil-pbc-inverse-image-exact] and sends injective sheaves to injective sheaves, being right adjoint to the exact functor $v_!$ [lem-weil-pbc-etale-restriction-injectives] (with $R=\\mathbf Z$). Hence $v^{-1}K\\cong Q(v^{-1}I^\\bullet)$ with $v^{-1}I^\\bullet$ a bounded below complex of injectives, which is K-injective [lem-weil-pbc-dplus-injective-representative]; so by [def-weil-pbc-etale-cohomology] (resolution independence) $H^q(W,K|_W)=H^q(\\Gamma(W,v^{-1}I^\\bullet))$. Through the isomorphisms $\\rho_{I^r}(W):\\Gamma(W,v^{-1}I^r)\\xrightarrow{\\sim}I^r(W)$, natural in $I^r$ and so compatible with the differentials [lem-weil-pbc-etale-inverse-image-restriction] (1), this is $H^q(I^\\bullet(W))=H^q\\bigl((h_*I^\\bullet)(U)\\bigr)$. No hypothesis on $h$ is used.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072W proof; etale specialization in Lemma Tag 03Q8"
-   }
-  },
-  {
-   "text": "Kernels and images of the underlying presheaf complex are sectionwise. Exact sheafification commutes with cohomology of complexes, so the cohomology sheaf $\\mathcal H^q(h_*I^\\bullet)=R^qh_*K$ is the sheafification of the sectionwise cohomology presheaf, which by the previous step is $U\\mapsto H^q(U\\times_XY,K|)$. For $K=F$ in degree $0$ this is the ordinary-sheaf clause.",
-   "uses": [
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-derived-inverse-image",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-direct-image",
     "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072W proof, cohomology-sheaf paragraph"
+    "place": "Lemma Tag 072W proof; Tag 03Q8 etale specialization; derived-adjunction reformulation of the sectionwise comparison"
+   }
+  },
+  {
+   "text": "For any bounded below derived object L on X_et, choose a bounded below K-injective representative M. The natural map Hom(A(U)[0],L) → H^0(L)(U) is locally surjective: the epimorphism Z^0(M) → H^0(M) is locally surjective, so a section locally lifts to a cycle; the free-sheaf Hom equivalence turns that cycle into a morphism of complexes A(U)[0] → M. It is locally injective: represent the difference of two maps by a chain map f using K-injectivity. If its cohomology section is zero, its cycle map factors through the kernel of Z^0(M) → H^0(M). The epimorphism from M^{-1} onto this kernel locally lifts that factorization, giving a local b with f^0 = b d^{-1}. The explicitly constructed single-complex homotopy then makes the local derived morphism zero. Naturality transports both properties along Q(M) ≅ L. These arguments are the private local comparison lemmas in the delivered module and use the K-injective fully faithful comparison, not restriction of injectives to U.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 0BKV proof, K-injective sectionwise cycles and boundaries; Tag 03Q8"
+   }
+  },
+  {
+   "text": "A locally injective and locally surjective map P → G from a presheaf to a sheaf induces an isomorphism P^# ≅ G: its adjoint ψ satisfies η_P ≫ ψ = φ, and local surjectivity of η_P transfers local injectivity and local surjectivity to ψ; Mathlib Sheaf.isLocallyBijective_iff_isIso gives invertibility. Apply this to the preceding comparison for L = Rh_*(K[q]), and apply sheafification to the adjunction presheaf isomorphism from the first step. Compose with the shift isomorphisms H^0(Rh_*(K[q])) ≅ H^0((Rh_*K)[q]) ≅ H^q(Rh_*K). The sheaf clause is the specialization K = F[0].",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W proof, cohomology sheaf paragraph; Tag 03Q8"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-pbc-derived-inverse-image",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
   "def-weil-pbc-direct-image",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-derived-direct-image-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-higher-direct-image-presheaf.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/CohomologyPresheaf.lean",
+  "place": "Adapted DerivedSections and higherDirectImagePresheafIso to abelian coefficients, generic site helpers, and composition of sheafification and shift isomorphisms; Stacks 072W/03Q8."
  },
  "mathlib_searches": [
   {
@@ -173,5 +169,15 @@
   "group": "N1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-dc6e3",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T060730-L-2903589",
+  "kind": "interface",
+  "note": "independent Codex review: Both public signatures are byte-identical to the library; the derived-adjunction, local cycles-and-boundaries, and shift proofs match the node metadata. Compilation is clean, and both axiom closures contain only propext, Classical.choice, and Quot.sound."
  }
 }
