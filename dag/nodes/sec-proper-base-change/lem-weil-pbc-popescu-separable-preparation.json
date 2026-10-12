@@ -16,67 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Choose finite generators a_j of H_{A/k}. Construct B=A[x_i,z_ij]/(x_i^n−Σ_j z_ij a_j); its presentation over R is finite.",
+   "text": "Apply the polynomial construction lemma to k, A, d, n to obtain c, C, β and the universal evaluation property, independent of Λ and q.",
    "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-pbc-singular-ideal"
+    "lem-weil-pbc-popescu-separable-preparation-core"
    ],
    "elementary": false
   },
   {
-   "text": "Eliminate z_il after inverting a_l. This exhibits B_(a_l) as a polynomial extension of the smooth base change of A_(a_l). After inverting x_i the a_j generate the unit ideal; smoothness on their principal cover proves B_(x_i) smooth. The empty generator family produces the zero localization.",
-   "uses": [
-    "lem-weil-pbc-singular-ideal-localization-smooth",
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "lem-weil-pbc-smooth-ring-map-local-on-cover"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Improve B to C with a B-algebra retraction. Its indicated localizations are smooth, and at the x_i their differentials are free. Noetherianity makes C finitely presented. Choose a common positive strictly-standard exponent c.",
-   "uses": [
-    "lem-weil-pbc-improve-presentation",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "lem-weil-pbc-smooth-free-differentials-strictly-standard-power"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply controlled generators with exponent e=8c and ideal I (not its radical). Obtain π_i with π_i^n∈I, the required localized generation, and the first/square annihilator equalities modulo the earlier e-th powers.",
+   "text": "Apply controlled generators to I = H_{A/k}Λ with exponent 8c. Define φ = aeval π, and use π_i^n ∈ I to specialize the universal evaluation property, obtaining γ and the factorization and Popescu-ideal inequality.",
    "uses": [
     "lem-weil-pbc-popescu-find-sequence"
    ],
    "elementary": false
   },
   {
-   "text": "Write π_i^n=Σ λ_ij α(a_j). Evaluation x_i↦π_i,z_ij↦λ_ij annihilates the relations; compose with the retraction C→B. Smoothness of C_(a_j) places the image of each a_j in H_{C/R}, proving the required ideal containment after mapping and taking radicals. Contraction of the localized maximal ideal gives π_i∈q. Finite type over R over k gives a small presentation, transported to universe max(u,v).",
-   "uses": [
-    "def-weil-pbc-popescu-resolution",
-    "def-weil-pbc-singular-ideal"
-   ],
-   "elementary": false
+   "text": "Rewrite the image of q in its prime localization as its maximal ideal. Primality and π_i^n ∈ I ⊆ q give π_i ∈ q, hence π_i^c ∈ q. The equality (π_j^c)^8 = π_j^(8c) identifies the quotient ideals, and aeval(X_i) = π_i transports the first/square annihilator equality. Assemble the conclusions with strict standardness from the construction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-weil-pbc-singular-ideal",
-  "lem-weil-pbc-singular-ideal-localization-smooth",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "lem-weil-pbc-smooth-ring-map-principal-localization",
-  "lem-weil-pbc-smooth-ring-map-local-on-cover",
-  "lem-weil-pbc-improve-presentation",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
-  "lem-weil-pbc-popescu-find-sequence",
-  "def-weil-pbc-popescu-resolution"
+  "lem-weil-pbc-popescu-separable-preparation-core",
+  "lem-weil-pbc-popescu-find-sequence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FE, as repaired in lem-weil-pbc-popescu-resolve-separable; Y2 formal decomposition"
+  "place": "Proof of Lemma 07FE, using the independent polynomial construction then the existing controlled-generator lemma 07FD; F1 second reading."
  },
  "mathlib_searches": [
   {
@@ -149,9 +115,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T095933-L-328164",
+  "landing": "20261012T135230-L-1662221",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

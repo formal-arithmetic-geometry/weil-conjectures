@@ -6,13 +6,11 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.RingTheory.PopescuResolution
+import Sheaf.RingTheory.PopescuSeparablePreparationCore
+import Sheaf.RingTheory.ExistsGeneratorsWithControlledAnnihilators
 public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.ExistsGeneratorsWithControlledAnnihilators
-import Sheaf.RingTheory.ImprovePresentation
-import Sheaf.RingTheory.SingularIdealLocalizationSmooth
-import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
 import Sheaf.RingTheory.SingularIdeal
 
 /-!
@@ -88,6 +86,42 @@ theorem exists_popescu_separable_preparation
             (MvPolynomial.X i : MvPolynomial (Fin d) k) ^ 2 • x = 0) ∧
         (∀ i : Fin d, IsStrictlyStandardElement (R := MvPolynomial (Fin d) k)
           (algebraMap (MvPolynomial (Fin d) k) C
-            ((MvPolynomial.X i : MvPolynomial (Fin d) k) ^ c))) := by sorry
+            ((MvPolynomial.X i : MvPolynomial (Fin d) k) ^ c))) := by
+  have _ := hd
+  obtain ⟨c, C, instC, instkC, instRC, instTower, instFP, β, hc, hstrict, hlift⟩ :=
+    exists_popescu_separable_preparation_core.{u, v, w} (k := k) (A := A) d n hn
+  let _ : CommRing C := instC
+  let _ : Algebra k C := instkC
+  let _ : Algebra (MvPolynomial (Fin d) k) C := instRC
+  let _ : IsScalarTower k (MvPolynomial (Fin d) k) C := instTower
+  let _ : FinitePresentation (MvPolynomial (Fin d) k) C := instFP
+  obtain ⟨π, hgen, hπ, hann⟩ := Ideal.exists_generators_with_controlled_annihilators
+    (Ideal.map α.toRingHom (singularIdeal k A)) q.asIdeal hIq n (8 * c) d
+    (by omega) (by omega) hpow hdim
+  let φ : MvPolynomial (Fin d) k →ₐ[k] Λ := MvPolynomial.aeval π
+  let _ := φ.toRingHom.toAlgebra
+  obtain ⟨γ, hcomp, hpop⟩ := hlift α φ (by simpa [φ] using hπ)
+  refine ⟨c, φ, C, instC, instkC, instRC, instTower, instFP, β, γ,
+    hc, ?_, hcomp, hpop, ?_, ?_, hstrict⟩
+  · simpa [φ, Localization.AtPrime.map_eq_maximalIdeal] using hgen
+  · intro i
+    have hi : π i ∈ q.asIdeal := (inferInstance : q.asIdeal.IsPrime).mem_of_pow_mem n (hIq (hπ i))
+    change φ (MvPolynomial.X i ^ c) ∈ q.asIdeal
+    simpa [φ] using q.asIdeal.pow_mem_of_mem hi c (by omega)
+  · intro i
+    have heq : (8 * c) = c * 8 := Nat.mul_comm _ _
+    have h := Set.ext_iff.mp (hann i)
+    simp only [Set.mem_ofPred_eq] at h
+    change ∀ x : Λ ⧸ Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧
+      y = φ (MvPolynomial.X j ^ c) ^ 8},
+      φ (MvPolynomial.X i) • x = 0 ↔ φ (MvPolynomial.X i ^ 2) • x = 0
+    have hJ : Ideal.span {y : Λ | ∃ j : Fin d, j.val < i.val ∧
+        y = φ (MvPolynomial.X j ^ c) ^ 8} =
+        Ideal.span {y : Λ | ∃ j : Fin d, j < i ∧ y = π j ^ (8 * c)} := by
+      congr 1
+      ext y
+      simp only [φ, map_pow, MvPolynomial.aeval_X, heq, pow_mul, Fin.lt_def]
+    rw [hJ]
+    simpa only [φ, map_pow, MvPolynomial.aeval_X] using h
 
 end Algebra
