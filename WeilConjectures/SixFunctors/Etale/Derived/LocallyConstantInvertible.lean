@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.InternalHom
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
@@ -22,10 +22,8 @@ Let `Λ` be a commutative ring and `L` a locally constant sheaf of `Λ`-modules 
 site of a scheme `X` whose stalk at every geometric point is free of rank one. Then `L` is
 ⊗-invertible, with inverse its dual `L^∨ = [L, Λ_X]`: the evaluation `L ⊗ L^∨ ⟶ Λ_X` is an
 isomorphism. On a trivialising étale cover `U_i ⟶ X` the pullback of `L` is the constant sheaf
-`Λ_{U_i}`, the pullback commutes with internal homs
-(`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar`) and with the tensor product, so the
-pullback of the evaluation is the evaluation of the unit, an isomorphism; and the pullbacks
-along a jointly surjective family of étale maps reflect isomorphisms.
+`Λ_{U_i}`, so this follows from the general criterion for sheaves which are trivial étale-locally
+(`AlgebraicGeometry.Etale.isIso_ihom_ev_app_unit_of_upperStar_iso`).
 
 Placed in any degree, such an `L` is then invertible in `D(X_ét, Λ)`.
 
@@ -33,8 +31,6 @@ This is step (4c) of the proof of blueprint `sk-prop-cohsm`.
 
 ## Main statements
 
-- `CategoryTheory.MonoidalClosed.isIso_ihom_ev_app_of_iso_unit`: the evaluation of an object
-  isomorphic to the unit is an isomorphism.
 - `AlgebraicGeometry.Etale.isIso_ihom_ev_app_unit_of_isLocallyConstantSheaf`: the evaluation
   `L ⊗ [L, Λ_X] ⟶ Λ_X` of a locally constant sheaf with free rank-one stalks is an isomorphism.
 - `AlgebraicGeometry.Etale.isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf`:
@@ -46,21 +42,6 @@ This is step (4c) of the proof of blueprint `sk-prop-cohsm`.
 universe u
 
 open CategoryTheory Limits MonoidalCategory Functor.LaxMonoidal
-
-namespace CategoryTheory.MonoidalClosed
-
-variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
-
-/-- In a monoidal closed category, the evaluation `A ⊗ [A, B] ⟶ B` at an object `A` isomorphic
-to the unit is an isomorphism: tensoring with `A` is then an equivalence, so the counit of its
-adjunction with `[A, -]` is invertible. -/
-lemma isIso_ihom_ev_app_of_iso_unit {A : C} (e : A ≅ 𝟙_ C) (B : C) :
-    IsIso ((ihom.ev A).app B) := by
-  have : (tensorLeft A).IsEquivalence :=
-    Functor.isEquivalence_of_iso ((leftUnitorNatIso C).symm ≪≫ (tensoringLeft C).mapIso e.symm)
-  exact NatIso.isIso_app_of_isIso (ihom.adjunction A).counit B
-
-end CategoryTheory.MonoidalClosed
 
 namespace AlgebraicGeometry
 
@@ -88,38 +69,31 @@ lemma nonempty_iso_unit_of_isConstant (F : Sheaf X.smallEtaleTopology (ModuleCat
 /-- Blueprint `sk-prop-cohsm`, step (4c): a lisse sheaf of rank one is invertible.
 
 For a locally constant sheaf `L` of `Λ`-modules on `X_ét` whose stalk at every geometric point
-is `Λ`, the evaluation `L ⊗ [L, Λ_X] ⟶ Λ_X` is an isomorphism. On every member `U_i` of a
-trivialising étale cover, `L|_{U_i}` is constant with stalks `Λ`, hence isomorphic to the unit
-(`AlgebraicGeometry.Etale.nonempty_iso_unit_of_isConstant`; an empty `U_i` carries only zero
-sheaves), and the restriction of the evaluation is the evaluation of `L|_{U_i}`, the restriction
-commuting with internal homs (`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar`); the
-restrictions to the members of the cover reflect isomorphisms. -/
+is `Λ`, the evaluation `L ⊗ [L, Λ_X] ⟶ Λ_X` is an isomorphism. On every nonempty member `U_i` of
+a trivialising étale cover, `L|_{U_i}` is constant with stalks `Λ`, hence isomorphic to the unit
+(`AlgebraicGeometry.Etale.nonempty_iso_unit_of_isConstant`), and the nonempty members still cover
+`X`; conclude by `AlgebraicGeometry.Etale.isIso_ihom_ev_app_unit_of_upperStar_iso`. -/
 theorem isIso_ihom_ev_app_unit_of_isLocallyConstantSheaf
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
     (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
       Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) :
     IsIso ((ihom.ev L).app (𝟙_ _)) := by
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := L)
-  refine Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ) 𝒰.f
-    (fun x ↦ 𝒰.exists_eq x) _ fun i ↦ ?_
-  have : Etale (𝒰.f i) := 𝒰.map_prop i
+  have (i : 𝒰.I₀) : Etale (𝒰.f i) := 𝒰.map_prop i
+  -- only the nonempty members of the cover are kept: on them `L` is isomorphic to the unit
+  let ι := {i : 𝒰.I₀ // Nonempty (𝒰.X i)}
+  refine isIso_ihom_ev_app_unit_of_upperStar_iso (ModuleCat.{u + 1} Λ) (fun i : ι ↦ 𝒰.f i.1)
+    (Set.eq_univ_of_forall fun x ↦ ?_) L fun i ↦ ?_
+  · obtain ⟨i, y, hy⟩ := 𝒰.exists_eq x
+    exact Set.mem_iUnion.2 ⟨⟨i, ⟨y⟩⟩, y, hy⟩
+  obtain ⟨i, hi⟩ := i
   let G := (𝒰.f i)^*[ModuleCat.{u + 1} Λ]
-  by_cases hU : IsEmpty (𝒰.X i)
-  · exact Scheme.isIso_of_isIso_sheafFiber_map _ fun x ↦ (IsEmpty.false x).elim
-  obtain ⟨x⟩ := not_isEmpty_iff.1 hU
   have hc : (G.obj L).IsConstant (𝒰.X i).smallEtaleTopology :=
     (isConstant_over_iff_upperStar _ (𝒰.etalePrecoverageToEtale i) L).1 (h𝒰 i)
-  let t := (𝒰.X i).algClosurePoint x
-  obtain ⟨eL⟩ := hL _ (t ≫ 𝒰.f i)
-  obtain ⟨e⟩ := nonempty_iso_unit_of_isConstant (G.obj L) t
-    ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (𝒰.f i) t).app L ≪≫ eL)
-  have := MonoidalClosed.isIso_ihom_ev_app_of_iso_unit e (G.obj (𝟙_ _))
-  have := Etale.isIso_ihomComparison_upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i) L
-  have h := ihomComparison_ev G L (𝟙_ _)
-  have : IsIso (μ G L _ ≫ G.map ((ihom.ev L).app (𝟙_ _))) := by
-    rw [← h]
-    infer_instance
-  exact IsIso.of_isIso_comp_left (μ G L _) _
+  let t := (𝒰.X i).algClosurePoint hi.some
+  let eL := (hL _ (t ≫ 𝒰.f i)).some
+  exact (nonempty_iso_unit_of_isConstant (G.obj L) t
+    ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (𝒰.f i) t).app L ≪≫ eL)).some
 
 /-- Blueprint `sk-prop-cohsm`, step (4c): a lisse sheaf of rank one is invertible.
 
