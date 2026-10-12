@@ -14,16 +14,24 @@
  },
  "proof": [
   {
-   "text": "Present A as a localization of a smooth R-algebra C, form the filtered diagram of its principal localizations, and descend the smooth A-algebra Q to a smooth C_s-algebra P.",
+   "text": "Write A as a localization of a smooth R-algebra C, transferring the C-algebra structure along its R-algebra equivalence. To use the single-universe colimit interface, note that a localization of C is small in the universe of C, and that Q is small there because it is of finite type over A. Shrink A and Q to that universe. Apply the principal-localization colimit theorem to C and S; compose its colimit ring isomorphism with the localization equivalence to the shrunken A. Smoothness of Q over this colimit follows by smooth composition with that isomorphism. Apply filtered-colimit smooth descent to obtain a stage and its smooth algebra P.",
    "uses": [
     "def-weil-pbc-essentially-smooth-ring-map",
     "lem-weil-pbc-localization-colimit-principal-localizations",
-    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent"
+    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
    ],
    "elementary": false
   },
   {
-   "text": "P is smooth over R by smoothness of principal localization and composition. Base change identifies P to Q as a localization, compatibly with the R structures by the tensor balancing relation.",
+   "text": "Transport the stage algebra to C_s using the stage ring isomorphism. Its inverse is a smooth map, so smooth composition gives smoothness over C_s. The colimit coprojection identity and its compatibility with C prove the scalar tower C to C_s to A. Replace the tensor base ring by C_s using the two inverse scalar towers and tensor compatibility; replace the colimit factor by A using tensor congruence. Algebra-map compatibility of the resulting isomorphism is checked by taking preimages under the ring equivalence. Transport the shrunken A and Q back and lift P to the common universe; the tensor congruence on the right factor transports its model isomorphism.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The principal localization C_s is smooth over C, and therefore over R. Smooth composition now shows P is smooth over R. Because the powers of s lie in S, C_s to A is a localization at the image of S. Its tensor base change to P is a localization by IsLocalization.tensorRight. Give Q the P-algebra structure obtained from the inverse tensor model isomorphism and transport this localization to Q. The tensor balancing identity and the A-linearity of the isomorphism prove the scalar tower R to P to Q.",
    "uses": [
     "lem-weil-pbc-smooth-ring-map-principal-localization",
     "lem-weil-pbc-smooth-ring-map-base-change-composition",
@@ -33,7 +41,7 @@
    "elementary": false
   },
   {
-   "text": "Finite type over R gives a surjection from a polynomial ring in finitely many variables, so P is small in the universe of R. Transport the ring, algebras, submonoid and localization along a small model, then lift to the requested universe.",
+   "text": "P is finite type over R, so Algebra.FiniteType.small makes it small in the requested universe max u t. Use Shrink.algEquiv to transfer its ring and R-algebra structures. Compose the map P to Q with this equivalence; its compatibility with R proves the final scalar tower. Smooth.of_equiv transfers smoothness and IsLocalization.isLocalization_of_base_ringEquiv transfers the submonoid and localization property. These are the witnesses of the stated existential.",
    "uses": [],
    "elementary": true
   }
@@ -50,7 +58,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Reduction from Tags 00CR and 0CAQ followed by smooth composition and localization base change; universe transport by finite-type smallness."
+  "place": "Tags 00CR and 0CAQ, followed by 00T3, 00TD and 00DK; Lean transport through category isomorphisms, tensor compatibility and finite-type smallness. Tags 00CR and 0CAQ read online on 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -122,10 +130,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261012T144203-L-2113794",
-  "kind": "interface",
+  "landing": "20261012T225301-L-1802120",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
