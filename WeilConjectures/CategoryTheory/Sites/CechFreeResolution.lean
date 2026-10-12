@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.Preadditive
 public import Mathlib.Algebra.Category.Grp.Adjunctions
 public import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
@@ -135,12 +136,6 @@ lemma cechFreeD_comp_cechFreeD (n : ℕ) : cechFreeD U (n + 1) ≫ cechFreeD U n
 /-- The augmentation `ℤ_𝔘[0] ⟶ ℤ[yoneda X]`. -/
 noncomputable def cechFreeAug : cechFree U 0 ⟶ yoneda.obj X ⋙ AddCommGrpCat.free :=
   Functor.whiskerRight (cechNerveSigmaAug U) AddCommGrpCat.free
-
-/-- A finite sum of morphisms of abelian groups is computed pointwise. -/
-lemma _root_.AddCommGrpCat.sum_apply {M N : AddCommGrpCat.{v}} {κ : Type*} (f : κ → (M ⟶ N))
-    (s : Finset κ) (x : M) : (∑ i ∈ s, f i) x = ∑ i ∈ s, f i x := by
-  rw [← AddMonoidHom.finsetSum_apply]
-  exact congr($(map_sum AddCommGrpCat.homAddEquiv f s) x)
 
 lemma cechFreeD_app_of (n : ℕ) (T : Cᵒᵖ) (s : (cechNerveSigma U (n + 1)).obj T) :
     (cechFreeD U n).app T (FreeAbelianGroup.of s) =

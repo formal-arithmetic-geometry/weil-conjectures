@@ -248,7 +248,7 @@ uses instead a cover of `X` by two affine opens.
 theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 2 ≤ q) :
     Subsingleton (ℱ.H q) := by
-  obtain ⟨π, hπ, hfin, -, -⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
+  obtain ⟨π, hπ, hfin, -, -, -⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
   obtain ⟨e⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k π q
   have := Modules.isQuasicoherent_pushforward_of_isAffineHom π ℱ
   have h := ProjectiveLine.subsingleton_H_of_two_le (k := k) ((Modules.pushforward π).obj ℱ) hq
@@ -1657,7 +1657,7 @@ Of the hypothesis `H⁰(X, 𝒪_X) = k`, only `h⁰(X, 𝒪_X) = 1` is used, thr
 `χ(𝒪_{X_ℂ}) = 2` rather than `1 - g = 1`, and the line bundle that is `𝒪(-1)` on one copy and
 `𝒪` on the other has `χ(ℒ) = 1`, hence `deg ℒ = 1 - 2 = -1 ≠ g = 0`.
 
-(blueprint: `sk-cor-picard-degree-g`) -/
+(blueprint: `sk-cor-picard-degree-g`, `cor-picard-degree-g`) -/
 theorem degree_eq_genus [GlobalSectionsBijective k X]
     (ℒ : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)

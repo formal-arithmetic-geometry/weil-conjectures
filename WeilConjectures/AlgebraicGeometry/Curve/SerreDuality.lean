@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
+public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.PushforwardHom
@@ -424,15 +425,100 @@ theorem isFinite_flat_of_hom_projectiveLine_of_functionField [IsIntegral X]
     rfl
   exact key _ Scheme.fromSpecStalk_closedPoint.symm
 
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- The rational function `t` lies in the image of the stalk map of `π_t` at the generic point
+of `X`: it is the pullback of the affine coordinate `x₁ / x₀` of `ℙ¹_k`. -/
+theorem mem_range_stalkMap_genericPoint_of_functionField [IsIntegral X] (t : X.functionField)
+    (π : X ⟶ ProjectiveLine (Spec (.of k)))
+    (hπ : ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
+      (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs) :
+    t ∈ Set.range (π.stalkMap (genericPoint X)) := by
+  have hg₀ : X.fromSpecFunctionField ≫ X ↘ Spec (.of k) =
+      Spec.map (CommRingCat.ofHom (functionFieldRingHom k X)) := by
+    refine ext_of_isAffine ?_
+    rw [← cancel_epi (Scheme.ΓSpecIso _).inv, ← Scheme.ΓSpecIso_inv_naturality]
+    ext a
+    simp only [Scheme.Hom.comp_appTop, Scheme.fromSpecStalk_appTop, functionFieldRingHom,
+      globalSectionsRingHom]
+    rfl
+  have hs : Ideal.span (Set.range (functionFieldCoordinates (X := X) t)) = ⊤ :=
+    Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span ⟨⟨0⟩, rfl⟩) (by simp)
+  let g := X.fromSpecFunctionField
+  have hrange : (Scheme.descResidueField (Scheme.stalkClosedPointTo (g ≫ π))).hom.fieldRange =
+      Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t}) := by
+    have e := hπ hs
+    rw [hg₀] at e
+    have key' : ∀ h : Spec X.functionField ⟶ ProjectiveLine (Spec (.of k)),
+        h = ProjectiveSpace.homOfSections
+          (Spec.map (CommRingCat.ofHom (functionFieldRingHom k X)))
+          (fun i : ULift.{u} (Fin 2) ↦ (Scheme.ΓSpecIso (.of X.functionField)).inv
+            (![1, t] i.down)) hs →
+          (Scheme.descResidueField (Scheme.stalkClosedPointTo h)).hom.fieldRange =
+            Subfield.closure (Set.range (functionFieldRingHom k X) ∪ {t}) := by
+      rintro h rfl
+      exact ProjectiveLine.fieldRange_descResidueField_homOfSections _ t hs
+    exact key' _ e
+  have htmem : t ∈ (Scheme.descResidueField (Scheme.stalkClosedPointTo (g ≫ π))).hom.fieldRange :=
+    hrange ▸ Subfield.subset_closure (Or.inr rfl)
+  obtain ⟨r, hr⟩ := RingHom.mem_fieldRange.mp htmem
+  obtain ⟨s, rfl⟩ := (ProjectiveLine (Spec (.of k))).residue_surjective _ r
+  rw [← CommRingCat.comp_apply, Scheme.residue_descResidueField, Scheme.stalkClosedPointTo_comp,
+    CommRingCat.comp_apply, Scheme.stalkClosedPointTo_fromSpecStalk] at hr
+  have key (x : X) (h : x = genericPoint X)
+      (s : (ProjectiveLine (Spec (.of k))).presheaf.stalk (π x))
+      (hi : Inseparable x (genericPoint X)) :
+      (X.presheaf.stalkCongr hi).hom (π.stalkMap x s) ∈
+        Set.range (π.stalkMap (genericPoint X)) := by
+    subst h
+    exact ⟨s, by simp⟩
+  exact hr ▸ key _ Scheme.fromSpecStalk_closedPoint s _
+
+omit [IsProper (X ↘ Spec (.of k))] in
+/-- **Separating functions give generically unramified morphisms.** Let `X` be a proper smooth
+integral curve over `k`, `t ∈ k(X)` with `dt ≠ 0` in `Ω[k(X)⁄k]`, and `π_t : X ⟶ ℙ¹_k` the
+morphism with `π_t^* (x₁ / x₀) = t`. Then the stalk map of `π_t` at the generic point, the field
+extension `k(t) ⊆ k(X)`, is formally unramified: `Ω[k(X)⁄k]` is spanned by `dt`
+(`finrank_kaehlerDifferential_functionField`), and `t` comes from `k(t)`. -/
+theorem formallyUnramified_stalkMap_genericPoint_of_functionField [IsIntegral X]
+    (t : X.functionField)
+    (ht : letI := ((X ↘ Spec (.of k)).appTop ≫
+        X.presheaf.germ ⊤ (genericPoint X) trivial).hom.toAlgebra
+      KaehlerDifferential.D Γ(Spec (.of k), ⊤) X.functionField t ≠ 0)
+    (π : X ⟶ ProjectiveLine (Spec (.of k))) [π.IsOver (Spec (.of k))]
+    (hπ : ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
+      (X.fromSpecFunctionField ≫ X ↘ Spec (.of k)) (functionFieldCoordinates t) hs) :
+    (π.stalkMap (genericPoint X)).hom.FormallyUnramified := by
+  let P := ProjectiveLine (Spec (.of k))
+  let := ((X ↘ Spec (.of k)).appTop ≫
+    X.presheaf.germ ⊤ (genericPoint X) trivial).hom.toAlgebra
+  let := ((P ↘ Spec (.of k)).appTop ≫
+    P.presheaf.germ ⊤ (π (genericPoint X)) trivial).hom.toAlgebra
+  let := (π.stalkMap (genericPoint X)).hom.toAlgebra
+  have : IsScalarTower Γ(Spec (.of k), ⊤) (P.presheaf.stalk (π (genericPoint X)))
+      X.functionField := by
+    refine IsScalarTower.of_algebraMap_eq' ?_
+    change ((X ↘ Spec (.of k)).appTop ≫ X.presheaf.germ ⊤ _ trivial).hom =
+      (((P ↘ Spec (.of k)).appTop ≫ P.presheaf.germ ⊤ _ trivial) ≫ π.stalkMap _).hom
+    congr 1
+    rw [Category.assoc, Scheme.Hom.germ_stalkMap, ← Category.assoc]
+    rw [← HomIsOver.comp_over (f := π) (S := Spec (.of k))]
+    rfl
+  exact Algebra.FormallyUnramified.of_finrank_kaehlerDifferential_eq_one
+    (finrank_kaehlerDifferential_functionField (X ↘ Spec (.of k))) ht
+    (mem_range_stalkMap_genericPoint_of_functionField t π hπ)
+
 /-- **Finite flat morphisms to the projective line.** Every smooth proper curve `X` over `k` has
-a finite flat morphism `X ⟶ ℙ¹_k` over `k`. Each connected component of `X` is integral
-(`AlgebraicGeometry.IsRegular.irreducibleSpace`) of dimension one, so its function field has a
-transcendental element `t`, and `π_t` is finite flat
-(`isFinite_flat_of_hom_projectiveLine_of_functionField`); there are finitely many components,
-and the morphisms on the components glue. -/
+a finite flat morphism `X ⟶ ℙ¹_k` over `k`, unramified at the generic points of `X`. Each
+connected component of `X` is integral (`AlgebraicGeometry.IsRegular.irreducibleSpace`) of
+dimension one, so its function field has a transcendental element `t` with `dt ≠ 0`
+(`exists_transcendental_and_D_ne_zero`), and `π_t` is finite flat
+(`isFinite_flat_of_hom_projectiveLine_of_functionField`) and generically unramified
+(`formallyUnramified_stalkMap_genericPoint_of_functionField`); there are finitely many
+components, and the morphisms on the components glue. -/
 theorem exists_isFinite_flat_hom_projectiveLine :
     ∃ f : X ⟶ ProjectiveLine (Spec (.of k)), f.IsOver (Spec (.of k)) ∧ IsFinite f ∧ Flat f ∧
-      LocallyOfFinitePresentation f := by
+      LocallyOfFinitePresentation f ∧
+        ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified := by
   have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
   let U : ConnectedComponents X → X.Opens := fun c ↦ ⟨ConnectedComponents.mk ⁻¹' {c}, by
@@ -444,7 +530,8 @@ theorem exists_isFinite_flat_hom_projectiveLine :
     isClosed_singleton.preimage ConnectedComponents.continuous_coe
   have key (c) : ∃ g : (U c).toScheme ⟶ ProjectiveLine (Spec (.of k)),
       g ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = (U c).ι ≫ X ↘ Spec (.of k) ∧
-        IsFinite g ∧ Flat g := by
+        IsFinite g ∧ Flat g ∧ ∀ y : (U c).toScheme, IsField ((U c).toScheme.presheaf.stalk y) →
+          (g.stalkMap y).hom.FormallyUnramified := by
     let : (U c).toScheme.Over (Spec (.of k)) := ⟨(U c).ι ≫ X ↘ Spec (.of k)⟩
     have : SmoothOfRelativeDimension 1 ((U c).toScheme ↘ Spec (.of k)) := by
       exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) ((U c).ι ≫ X ↘ Spec (.of k)))
@@ -469,13 +556,29 @@ theorem exists_isFinite_flat_hom_projectiveLine :
     have : IsIntegral (U c).toScheme := isIntegral_of_irreducibleSpace_of_isReduced _
     obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := (U c).toScheme)
       Set.univ_nonempty
-    obtain ⟨t, ht⟩ := exists_transcendental_functionField (k := k) x (by
+    obtain ⟨s, hs⟩ := exists_transcendental_functionField (k := k) x (by
       rw [ringKrullDim_stalk_eq_one_of_isClosed ((U c).toScheme ↘ Spec (.of k)) hx]
       exact one_ne_zero)
+    -- choose a separating `t`, i.e. with `dt ≠ 0`
+    let := (functionFieldRingHom k (U c).toScheme).toAlgebra
+    let := (((U c).toScheme ↘ Spec (.of k)).appTop ≫
+      (U c).toScheme.presheaf.germ ⊤ (genericPoint (U c).toScheme) trivial).hom.toAlgebra
+    obtain ⟨t, ht, hDt⟩ := exists_transcendental_and_D_ne_zero (k := k)
+      (finrank_kaehlerDifferential_functionField ((U c).toScheme ↘ Spec (.of k))) hs
     obtain ⟨π, hπ, hπ'⟩ := exists_hom_projectiveLine_of_functionField t ht
     obtain ⟨h₁, -, h₂, -⟩ := isFinite_flat_of_hom_projectiveLine_of_functionField t ht π hπ'
-    exact ⟨π, hπ.comp_over, h₁, h₂⟩
-  choose g hg hfin hflat using key
+    have hunr := formallyUnramified_stalkMap_genericPoint_of_functionField t hDt π hπ'
+    have hdim : topologicalKrullDim (U c).toScheme ≤ 1 := by
+      exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension
+        ((U c).toScheme ↘ Spec (.of k)) 1
+    refine ⟨π, hπ.comp_over, h₁, h₂, fun y hy ↦ ?_⟩
+    obtain rfl : y = genericPoint (U c).toScheme := eq_genericPoint_of_not_isClosed hdim
+      fun hyc ↦ by
+        have := ringKrullDim_stalk_eq_one_of_isClosed ((U c).toScheme ↘ Spec (.of k)) hyc
+        rw [ringKrullDim_eq_zero_of_isField hy] at this
+        exact zero_ne_one this
+    exact hunr
+  choose g hg hfin hflat hunr using key
   let 𝒰 : X.OpenCover := X.openCoverOfIsOpenCover U <| eq_top_iff.2 fun x _ ↦
     TopologicalSpace.Opens.mem_iSup.2 ⟨ConnectedComponents.mk x, rfl⟩
   have hcompat (c d) : pullback.fst (𝒰.f c) (𝒰.f d) ≫ g c = pullback.snd _ _ ≫ g d := by
@@ -514,8 +617,25 @@ theorem exists_isFinite_flat_hom_projectiveLine :
   have : IsFinite f := IsFinite.of_isProper_of_locallyQuasiFinite f
   have : IsLocallyNoetherian (ProjectiveLine (Spec (.of k))) :=
     LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))
-  exact ⟨f, ⟨hover⟩, inferInstance, inferInstance,
-    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance⟩
+  refine ⟨f, ⟨hover⟩, inferInstance, inferInstance,
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance, fun x hx ↦ ?_⟩
+  -- the stalk map of `f` at `x` is that of `g c` on the component `U c` of `x`
+  let c := ConnectedComponents.mk x
+  let y : U c := ⟨x, rfl⟩
+  let e := asIso ((U c).ι.stalkMap y)
+  have hy : IsField ((U c).toScheme.presheaf.stalk y) :=
+    MulEquiv.isField hx e.symm.commRingCatIsoToRingEquiv.toMulEquiv
+  have h₁ : ∀ φ : (U c).toScheme ⟶ ProjectiveLine (Spec (.of k)), φ = g c →
+      (φ.stalkMap y).hom.FormallyUnramified := by
+    rintro _ rfl
+    exact hunr c y hy
+  have h₂ := h₁ _ (hf c)
+  rw [Scheme.Hom.stalkMap_comp] at h₂
+  have h₃ : f.stalkMap x = (f.stalkMap ((U c).ι y) ≫ (U c).ι.stalkMap y) ≫ e.inv := by
+    simp [e]
+    rfl
+  rw [h₃, CommRingCat.hom_comp]
+  exact .comp h₂ (.of_surjective (ConcreteCategory.bijective_of_isIso e.inv).2)
 
 
 end ProjectiveLine
@@ -534,7 +654,8 @@ codifferent of the finite flat extension `R ⊆ B` of Dedekind domains, i.e. Gro
 
 (blueprint: `lem-sc-finite-duality`, the trace identification) -/
 theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
+    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
     ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
         (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
       IsIso (Modules.pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf)) :=
@@ -550,12 +671,13 @@ since `ℳ` is a direct summand of a free module of finite rank over the affine 
 
 (blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
 theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
+    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
     ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
         (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
       ∀ ℳ : X.Modules, ℳ.IsFiniteLocallyFree →
         IsIso (Modules.pushforwardHomObjComparison f τ ℳ) := by
-  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison_unit f
+  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison_unit f hf
   exact ⟨τ, fun ℳ _ ↦ Modules.isIso_pushforwardHomObjComparison_of_isIso_unit hτ ℳ⟩
 
 /-- **Duality along a finite flat morphism to `ℙ¹`, sheaf-level.** Let `X` be a smooth curve
@@ -566,7 +688,8 @@ naturally in finite locally free `ℳ`: the isomorphism `φ ↦ τ ∘ f_* φ` o
 
 (blueprint: `lem-sc-finite-duality`, the sheaf-level statement) -/
 theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
+    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.pushforward f).op ⋙
         (SheafOfModules.homFunctor (ProjectiveLine (Spec (.of k))).sheaf).flip.obj
@@ -574,7 +697,7 @@ theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ Projective
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (SheafOfModules.homFunctor X.sheaf).flip.obj (X ↘ Spec (.of k)).relativeDifferentials ⋙
           Modules.pushforward f) := by
-  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison f
+  obtain ⟨τ, hτ⟩ := exists_isIso_pushforwardHomObjComparison f hf
   have (ℳ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategoryᵒᵖ) :
       IsIso ((Functor.whiskerLeft (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op
         (Modules.pushforwardHomObjComparisonNatTrans f τ)).app ℳ) :=
@@ -595,7 +718,8 @@ since `Ω¹_{X/k}` is invertible (`Modules.dualTensorHomIso`).
 
 (blueprint: `lem-sc-finite-duality`) -/
 theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
+    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
+    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.pushforward f).op ⋙
         (SheafOfModules.homFunctor (ProjectiveLine (Spec (.of k))).sheaf).flip.obj
@@ -603,7 +727,7 @@ theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k))
         Modules.cohomologyFunctor k 0 ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
         tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k 0) := by
-  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso_pushforward_homObj f
+  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso_pushforward_homObj f hf
   have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
   have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
   exact ⟨Functor.isoWhiskerRight E (Modules.cohomologyFunctor k 0) ≪≫
@@ -1172,10 +1296,10 @@ theorem nonempty_dual_H_one_iso :
         (Modules.cohomologyFunctor k 1).op ⋙ ModuleCat.dualFunctor k ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
         tensorRight (X ↘ Spec (.of k)).relativeDifferentials ⋙ Modules.cohomologyFunctor k 0) := by
-  obtain ⟨f, _, _, _, _⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
+  obtain ⟨f, _, _, _, _, hf⟩ := exists_isFinite_flat_hom_projectiveLine (k := k) (X := X)
   obtain ⟨T⟩ := Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom k f 1
   obtain ⟨D⟩ := ProjectiveLine.nonempty_dual_H_one_iso k
-  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso f
+  obtain ⟨E⟩ := nonempty_homObj_pushforward_iso f hf
   let L₁ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory ⥤
       (SheafOfModules.isQuasicoherent X.ringCatSheaf).FullSubcategory :=
     ObjectProperty.lift _ (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι fun ℱ ↦ by

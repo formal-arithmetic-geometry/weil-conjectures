@@ -203,8 +203,7 @@ lemma comp_d_totalπ_zero {A : C} {n : ℕ} (x : A ⟶ (K.total (ComplexShape.up
   rw [d_totalπ_zero_succ, Category.assoc]
 
 variable (hrow : ∀ p q, (ShortComplex.mk ((K.d p (p + 1)).f q) ((K.d (p + 1) (p + 2)).f q)
-  (by rw [← HomologicalComplex.comp_f, HomologicalComplex.d_comp_d,
-    HomologicalComplex.zero_f])).Exact)
+  (K.d_f_comp_d_f _ _ _ q)).Exact)
 
 include hrow in
 /-- One step of the staircase: if the components of `x` vanish in the columns `≥ k + 2` and the
@@ -275,6 +274,9 @@ end Staircase
 
 variable {L : CochainComplex C ℕ} (ε : L ⟶ K.X 0) (hε : ε ≫ K.d 0 1 = 0)
 
+lemma comp_f_d_f_eq_zero (hε : ε ≫ K.d 0 1 = 0) (q : ℕ) : ε.f q ≫ (K.d 0 1).f q = 0 := by
+  rw [← HomologicalComplex.comp_f, hε, HomologicalComplex.zero_f]
+
 /-- The morphism from `L` to the total complex of `K` induced by a morphism `ε : L ⟶ K.X 0`
 such that `ε ≫ K.d 0 1 = 0`. -/
 noncomputable def toTotalOfAugmentation (hε : ε ≫ K.d 0 1 = 0) :
@@ -302,10 +304,9 @@ variable {K ε hε}
 
 variable (h₀ : ∀ q, Mono (ε.f q))
   (h₁ : ∀ q, (ShortComplex.mk (ε.f q) ((K.d 0 1).f q)
-    (by rw [← HomologicalComplex.comp_f, hε, HomologicalComplex.zero_f])).Exact)
+    (K.comp_f_d_f_eq_zero ε hε q)).Exact)
   (hrow : ∀ p q, (ShortComplex.mk ((K.d p (p + 1)).f q) ((K.d (p + 1) (p + 2)).f q)
-    (by rw [← HomologicalComplex.comp_f, HomologicalComplex.d_comp_d,
-      HomologicalComplex.zero_f])).Exact)
+    (K.d_f_comp_d_f _ _ _ q)).Exact)
 
 include h₁ in
 /-- A morphism to the total complex whose components vanish in the columns `p ≥ 1` and whose
