@@ -7640,3 +7640,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:24 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ThickeningIntegral (stage 3; reviewer PASS; first push; landing 20261012T122435-L-1065351 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:25 L: merged deliver/D2/Sheaf.Topology.NestedSliceExtensionStalks (stage 3; reviewer PASS; first push; landing 20261012T122537-L-1067366 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:25 L: merged deliver/D3/Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat (stage 3; reviewer PASS; first push; landing 20261012T122554-L-1068984 (proof); batch 20261012T120425; modules 1; new nodes 0)
+- 12:25 L: returned deliver/V2/WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations (reviewer RETURN: (reviewer X-fcaa7, head fcaa7a81a) C1: In dag/nodes/sec-proper-base-change/lem-sc-c6.json, proof[3].uses is ["lem-weil-p)
