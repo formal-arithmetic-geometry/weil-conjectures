@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Topology.InverseImageModule
+import Sheaf.Topology.InverseImageOperationExt
 
 /-!
 # Inverse image of sheaf modules and direct image
@@ -66,29 +67,108 @@ def moduleInverseImageAdjunctionSpec {X Y : TopCat.{u}} (f : X ⟶ Y)
 /-- The inverse-image module adjunction: the abelian adjunction restricts to linear maps,
 naturally in both modules. Source: Stacks Project, Sheaves, Tags 008X and 008Y.
 
-Proof, following the four steps of the node:
-1. Apply `lem-pc-presheaf-module-inverse-image-adjunction` (1) to `A` and `M`.
-Its coprojection formula defines the action on `f_p M`. Apply
-`lem-pc-presheaf-module-sheafification-ring` to sheafify this module over `f_p A`.
-The underlying abelian sheaf is `(f_p M)^#`, and the sheafification map is semilinear
-for `theta_A`. Naturality gives linear maps on inverse images (008X).
-2. Regard `N` as an `f_p A`-module through `theta_A`. The universal property in
-`lem-pc-presheaf-module-sheafification-ring` identifies linear maps from `(f_p M)^#`
-to `N` with linear presheaf maps from `f_p M` to `N`. On abelian maps this is
-composition with `theta_M`, by `def-weil-pbc-sheafification`.
-3. Apply `lem-pc-presheaf-module-inverse-image-adjunction` (3). The presheaf
-adjunction sends a map `psi` to `f_* psi` composed with `i_M`. The scalar action on
-its target is through `i_A` and then `theta_A`, hence through `eta_A`. Direct image
-is a sheaf by `def-weil-pbc-topological-inverse-image` (1), and its module morphisms
-are exactly its linear presheaf morphisms by `def-weil-sheaf-of-modules-category`.
-4. Compose the two natural bijections. On abelian maps the composite sends `alpha`
-to `f_* alpha` composed with `f_* theta_M` composed with `i_M`, which is
-`f_* alpha` composed with `eta_M`, the abelian adjunction formula of
-`def-weil-pbc-topological-inverse-image` (3). Thus it restricts the abelian
-bijection exactly to linear maps and is natural in both modules.
+Proof: send a linear morphism to its abelian adjunct. The canonical unit is
+semilinear, so this adjunct is linear for the action through the ring unit.
+Conversely, take the inverse abelian adjunct of a linear map. Its two candidate
+scalar operations commute with restriction and agree on pairs of unit images,
+by semilinearity of the unit and linearity of the given map.
+`TopCat.Sheaf.inverseImageOperation_ext` extends this equality to all sections,
+so the inverse adjunct is linear. Faithfulness of `toSheaf` and the abelian Hom
+equivalence give bijectivity and naturality in both modules; the section formula
+is the defining formula of that equivalence.
 (blueprint: lem-pc-module-inverse-image-adjunction). -/
 theorem moduleInverseImageAdjunction {X Y : TopCat.{u}} (f : X ⟶ Y)
     (A : Y.Sheaf CommRingCat.{u}) : moduleInverseImageAdjunctionSpec f A := by
-  sorry
+  classical
+  -- Restrict the abelian adjunction directly; local representatives detect linearity.
+  let J := Opens.grothendieckTopology Y
+  let K := Opens.grothendieckTopology X
+  let R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj A
+  let R' := (sheafCompose K (forget₂ CommRingCat RingCat)).obj
+    (TopCat.Sheaf.inverseImageRing f A)
+  let η : R ⟶ ((Opens.map f).sheafPushforwardContinuous RingCat.{u} J K).obj R' :=
+    (sheafCompose J (forget₂ CommRingCat RingCat)).map
+      ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map f) CommRingCat.{u} J K).unit.app A)
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (Opens.map f) AddCommGrpCat.{u} J K
+  let forward (M : SheafOfModules.{u} R) (N : SheafOfModules.{u} R')
+      (ψ : TopCat.Sheaf.inverseImageModule f A M ⟶ N) :
+      M ⟶ (pushforward.{u} η).obj N :=
+    ⟨PresheafOfModules.homMk
+      (adj.homEquiv ((toSheaf R).obj M) ((toSheaf R').obj N)
+        ((toSheaf R').map ψ)).hom (by
+      intro V r m
+      change (ψ.val.app ((Opens.map f).op.obj V)).hom
+        ((adj.unit.app ((toSheaf R).obj M)).hom.app V (r • m)) = _
+      rw [(Classical.choose_spec
+        (TopCat.Sheaf.exists_inverseImageModuleInstances f A M)).2]
+      exact (ψ.val.app ((Opens.map f).op.obj V)).hom.map_smul _ _)⟩
+  have bijective (M : SheafOfModules.{u} R) (N : SheafOfModules.{u} R') :
+      Function.Bijective (forward M N) := by
+    constructor
+    · intro ψ χ h
+      apply (toSheaf R').map_injective
+      apply (adj.homEquiv ((toSheaf R).obj M) ((toSheaf R').obj N)).injective
+      exact congrArg ((toSheaf R).map) h
+    · intro g
+      let q : TopCat.Sheaf.inverseImageAb f A M ⟶ (toSheaf R').obj N :=
+        (adj.homEquiv ((toSheaf R).obj M) ((toSheaf R').obj N)).symm
+        ((toSheaf R).map g)
+      have hq (V : (Opens Y)ᵒᵖ) (m : M.val.obj V) :
+          q.hom.app ((Opens.map f).op.obj V)
+            ((adj.unit.app ((toSheaf R).obj M)).hom.app V m) =
+            (g.val.app V).hom m := by
+        exact congrArg (fun (t : (toSheaf R).obj M ⟶
+          ((Opens.map f).sheafPushforwardContinuous AddCommGrpCat.{u} J K).obj
+            ((toSheaf R').obj N)) ↦ t.hom.app V m)
+          ((adj.homEquiv ((toSheaf R).obj M) ((toSheaf R').obj N)).apply_symm_apply
+            ((toSheaf R).map g))
+      have linear (U : (Opens X)ᵒᵖ) (r : R'.obj.obj U)
+          (m : (TopCat.Sheaf.inverseImageModule f A M).val.obj U) :
+          q.hom.app U (r • m) =
+            @SMul.smul _ _ (N.val.obj U).isModule.toSMul r (q.hom.app U m) := by
+        apply TopCat.Sheaf.inverseImageOperation_ext f A ((toSheaf R).obj M)
+          ((toSheaf R').obj N)
+          (fun V r m ↦ q.hom.app V
+            (@SMul.smul _ _ (TopCat.Sheaf.inverseImageModuleInstances f A M V).toSMul
+              r m))
+          (fun V r m ↦ @SMul.smul _ _ (N.val.obj V).isModule.toSMul
+            r (q.hom.app V m))
+          (by
+            intro V W i r m
+            rw [← NatTrans.naturality_apply q.hom i]
+            exact congrArg (q.hom.app W)
+              ((Classical.choose_spec
+                (TopCat.Sheaf.exists_inverseImageModuleInstances f A M)).1 i r m))
+          (by
+            intro V W i r m
+            change N.val.map i
+              (@SMul.smul _ _ (N.val.obj V).isModule.toSMul r (q.hom.app V m)) = _
+            exact ((N.val.map i).hom.map_smul r _).trans
+              (congrArg (fun z ↦ @SMul.smul _ _ (N.val.obj W).isModule.toSMul
+                (R'.obj.map i r) z) (NatTrans.naturality_apply q.hom i m).symm))
+          (by
+            intro V r m
+            rw [← (Classical.choose_spec
+              (TopCat.Sheaf.exists_inverseImageModuleInstances f A M)).2]
+            rw [hq, hq]
+            exact (g.val.app V).hom.map_smul r m)
+          U r m
+      let ψ : TopCat.Sheaf.inverseImageModule f A M ⟶ N :=
+        ⟨PresheafOfModules.homMk q.hom linear⟩
+      refine ⟨ψ, ?_⟩
+      apply (toSheaf R).map_injective
+      exact (adj.homEquiv ((toSheaf R).obj M) ((toSheaf R').obj N)).apply_symm_apply
+        ((toSheaf R).map g)
+  refine ⟨fun M N ↦ Equiv.ofBijective (forward M N) (bijective M N), ?_, ?_, ?_⟩
+  · intro M N ψ V x
+    rfl
+  · intro M M' N a ψ
+    apply (toSheaf R).map_injective
+    exact adj.homEquiv_naturality_left ((toSheaf R).map a) ((toSheaf R').map ψ)
+  · intro M N N' ψ b
+    apply (toSheaf R).map_injective
+    exact adj.homEquiv_naturality_right ((toSheaf R').map ψ) ((toSheaf R').map b)
 
 end SheafOfModules
