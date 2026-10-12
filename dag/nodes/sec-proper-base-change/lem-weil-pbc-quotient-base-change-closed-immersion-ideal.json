@@ -33,135 +33,114 @@
  ],
  "proof": [
   {
-   "text": "(Notation, the ideal $\\widetilde K$, and equality on a basis.) Write $c_K:\\operatorname{Spec}(A/K)\\to S$ for $\\operatorname{Spec}$ of the quotient map $A\\to A/K$ [def-weil-affine-spectrum] and $p_K:X_K\\to\\operatorname{Spec}(A/K)$ for the second projection, so $f\\circ j_K=c_K\\circ p_K$ [def-pc-fibre-product]. For an affine open $U\\subseteq X$ with $B=\\mathcal O_X(U)$ let $\\rho_U:A=\\mathcal O_S(S)\\to B$ be $f^\\sharp_S$ followed by restriction to $U$; under the canonical $U\\cong\\operatorname{Spec}B$ the morphism $f|_U:U\\to S$ is $\\operatorname{Spec}\\rho_U$ (a morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is $\\operatorname{Spec}$ of exactly one ring map, its map on global sections [def-weil-affine-spectrum]), and $KB$ means $\\rho_U(K)B$. The ideal sheaf $\\widetilde K\\subseteq\\mathcal O_S$ is quasi-coherent and $\\widetilde K(S)=K$: by [lem-weil-pbc-spec-module-tilde-sections] $\\widetilde K$ is quasi-coherent with $\\widetilde K(D(r))=K_r$, the inclusion $K\\subseteq A$ induces $\\widetilde K\\to\\widetilde A=\\mathcal O_S$, injective on every $D(r)$ since $K_r\\to A_r$ is injective (localization is exact), and for $r=1$, $D(1)=S$ and $\\tau_S:K\\to\\widetilde K(S)$ is a localization at the powers of $1$, i.e. an isomorphism onto $K\\subseteq A$. Hence by [lem-weil-pbc-module-pullback-ideal-quotient] (1), applied to $f:X\\to Y=S$, $\\mathcal J=\\widetilde K$ and $V=S$: $K\\mathcal O_X$ [def-nagata-extended-ideal] is a quasi-coherent sheaf of ideals of $\\mathcal O_X$ and $(K\\mathcal O_X)(U)=\\rho_U(K)B=KB$ for every affine open $U\\subseteq X$; the same holds for every ideal of $A$ and every scheme over $S$ (in particular for $X_K$ over $S$ via $f\\circ j_K$), and, with $A/J$ in place of $A$, for schemes over $\\operatorname{Spec}(A/J)$. Finally, two sub-$\\mathcal O_X$-modules $\\mathcal S,\\mathcal S'$ of a sheaf $\\mathcal F$ on a scheme with $\\mathcal S(U)=\\mathcal S'(U)$ for all $U$ in a basis $\\mathfrak B$ of the topology are equal: for $s\\in\\mathcal S(W)$ cover $W$ by members $U_k$ of $\\mathfrak B$; the $s|_{U_k}\\in\\mathcal S'(U_k)$ agree on overlaps and glue in the sheaf $\\mathcal S'$ to $t\\in\\mathcal S'(W)$, and $t=s$ in $\\mathcal F$; symmetrically. The affine opens of a scheme form a basis [def-pc-scheme].",
+   "text": "Compute the kernel of Spec(A/K) -> Spec A using Scheme.ker_of_isAffine, naturality of ΓSpecIso, invariance of a ring kernel under postcomposition by a ring isomorphism, and Ideal.mk_ker. This gives ofIdealTop(K.map ΓSpecIso.inv). The quotient map is surjective, hence its spectrum is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion]. Base change preserves closed immersions [lem-weil-pbc-closed-immersion-base-change], and Mathlib ker_fst_of_isClosedImmersion identifies j_K.ker with that ideal sheaf pulled back along f.",
    "uses": [
     "def-weil-affine-spectrum",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "def-sbc-closed-immersion-ideal-sheaf",
     "def-nagata-extended-ideal",
-    "def-pc-scheme"
+    "lem-weil-pbc-spec-quotient-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01IN (lemma-closed-subspace-scheme) for quasi-coherent ideals on affine opens; written by the agent"
+    "place": "Stacks 01JU (1); Mathlib IdealSheaf/Functorial.lean, ker_fst_of_isClosedImmersion"
    }
   },
   {
-   "text": "($j_K$ is a closed immersion.) $c_K$ is a closed immersion [def-weil-closed-immersion] by [lem-weil-pbc-closed-immersion-affine-cover-criterion] (2) applied to the one-member affine cover $\\{S\\}$ of $S$: $c_K^{-1}(S)=\\operatorname{Spec}(A/K)$ is affine and $(c_K)^\\sharp_S:A\\to A/K$ is the quotient map (the map on global sections of $\\operatorname{Spec}$ of a ring map is that ring map [def-weil-affine-spectrum]), which is surjective. By [lem-weil-pbc-closed-immersion-base-change] with $i=c_K$ and $g=f$, the projection $\\operatorname{Spec}(A/K)\\times_SX\\to X$ is a closed immersion. Exchanging the factors, $(X_K,p_K,j_K)$ is a fibre product of $c_K$ and $f$ with first projection to $\\operatorname{Spec}(A/K)$, so by uniqueness of fibre products [def-pc-fibre-product] there is an isomorphism $\\theta:X_K\\to\\operatorname{Spec}(A/K)\\times_SX$ with $j_K$ equal to the projection to $X$ composed with $\\theta$. A closed immersion composed with an isomorphism on the source is a closed immersion (the image and the map $\\mathcal O_X\\to j_{K*}\\mathcal O_{X_K}$ are unchanged up to the isomorphism $\\theta_*$), so $j_K$ is a closed immersion.",
+   "text": "For any ideal K and affine open U, apply the already proved ideal_comap_appLE [lem-pc-ideal-sheaf-comap-affine-extension] with the top affine open of Spec A. ofIdealTop_ideal and Ideal.map_map identify the result with the extension of K along ΓSpecIso.inv followed by f.appLE. This computes (K O_X)(U)=KB without any module-pullback or tilde theorem.",
    "uses": [
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-pc-ideal-sheaf-comap-affine-extension",
     "def-weil-affine-spectrum",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-pc-fibre-product"
+    "def-nagata-extended-ideal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion) (1), first assertion; Morphisms, Lemma 01QO (literature/stacks-project/morphisms.tex, lemma-closed-immersion) for c_K"
+    "place": "Stacks 01IN; WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Affine.lean, ideal_comap_appLE"
    }
   },
   {
-   "text": "(Affine description of $j_K$ over $U$.) Let $U\\subseteq X$ be an affine open, $B=\\mathcal O_X(U)$, $\\iota_U:U\\to X$ the inclusion. By [lem-weil-pbc-open-preimage-fibre-product] applied to $j_K$ and the open $U$, the square with corners $j_K^{-1}(U)\\to U$ (restriction of $j_K$), $j_K^{-1}(U)\\to X_K$ (inclusion), $U\\to X$, $X_K\\to X$ is cartesian. Apply [lem-weil-pbc-cartesian-square-pasting] to the diagram whose upper square is this one and whose lower square is the cartesian square of $X_K$ ($j_K:X_K\\to X$ over $c_K:\\operatorname{Spec}(A/K)\\to S$, with vertical maps $p_K$ and $f$): the upper square is cartesian, so the outer rectangle is, i.e. $j_K^{-1}(U)$ with the maps $j_K|:j_K^{-1}(U)\\to U$ and $p_K|:j_K^{-1}(U)\\to\\operatorname{Spec}(A/K)$ is a fibre product of $f\\circ\\iota_U=\\operatorname{Spec}\\rho_U$ (step 1) and $c_K$. By [lem-weil-pbc-fibre-product-affine-spectra] (with $R=A$, the $A$-algebras $B$ via $\\rho_U$ and $A/K$), $\\operatorname{Spec}(B\\otimes_AA/K)$ with $\\operatorname{Spec}$ of $b\\mapsto b\\otimes1$ and $\\bar a\\mapsto1\\otimes\\bar a$ is also such a fibre product, so by uniqueness [def-pc-fibre-product] $j_K^{-1}(U)\\cong\\operatorname{Spec}(B\\otimes_AA/K)$ compatibly with the maps to $U\\cong\\operatorname{Spec}B$. By [lem-weil-pbc-tensor-quotient-base-change], $B/KB\\to B\\otimes_AA/K$, $\\bar b\\mapsto b\\otimes1$, is an isomorphism of $B$-algebras, so composing with $\\operatorname{Spec}$ of it: $j_K^{-1}(U)$ is affine and $j_K^{-1}(U)\\to U$ is identified over $U\\cong\\operatorname{Spec}B$ with $\\operatorname{Spec}$ of the quotient map $B\\to B/KB$. In particular the ring map $(j_K)^\\sharp_U:B\\to\\mathcal O_{X_K}(j_K^{-1}U)$ is identified with $B\\to B/KB$, and the composite $A\\to B\\to B/KB$ is the ring map of $(f\\circ j_K)|_{j_K^{-1}(U)}$ on global sections.",
+   "text": "For a closed immersion j and an affine open U, its inverse image is affine [lem-weil-pbc-closed-immersion-affine-cover-criterion]. Apply Mathlib IsClosedImmersion.Spec_iff to (j restricted to U) followed by U.isoSpec.hom to obtain a quotient by an ideal I. Compute the kernel of this quotient using step 1 and ker_comp_of_isIso. Compute the same kernel from the restriction appTop formula and isoSpec_hom_appTop: after cancelling topIso, it is the comap of j.ker.ideal U along ΓSpecIso.hom. Since that ring map is surjective, Ideal.comap_injective_of_surjective gives I=j.ker.ideal U. Substituting the ideal yields the required isomorphism and projection identity. For j_K, steps 1 and 2 identify this ideal with KB, completing clause (1).",
    "uses": [
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sbc-closed-immersion-ideal-sheaf",
     "def-weil-affine-spectrum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I4 (lemma-fibre-product-affine-schemes), Lemma 01JQ (lemma-fibre-product-affines) and Lemma 01JR (lemma-open-fibre-product)"
+    "place": "Stacks 01IN (3)-(4); Mathlib Morphisms/ClosedImmersion.lean, Spec_iff, and Restrict.lean, resLE_app_top"
    }
   },
   {
-   "text": "(Clause (1): the ideal sheaf.) Let $\\mathcal I=\\ker(\\mathcal O_X\\to j_{K*}\\mathcal O_{X_K})$ be the ideal sheaf of the closed immersion $j_K$ (step 2) [def-sbc-closed-immersion-ideal-sheaf]; it is a quasi-coherent sheaf of ideals, and on an affine open $U=\\operatorname{Spec}B$, where $j_K^{-1}(U)\\to U$ is identified with $\\operatorname{Spec}(B/KB)\\to\\operatorname{Spec}B$ (step 3), $\\mathcal I(U)=KB$. By step 1, $(K\\mathcal O_X)(U)=KB$ as well. So the sub-$\\mathcal O_X$-modules $\\mathcal I$ and $K\\mathcal O_X$ of $\\mathcal O_X$ agree on the basis of affine opens, and are equal by step 1. With step 3 this is (1).",
-   "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01JU (1), second assertion ('corresponds to the sheaf of ideals Im(g^*I -> O_Y)'), and Lemma 01IN"
-   }
-  },
-  {
-   "text": "(Clause (2).) $K\\mathcal O_X$, $K'\\mathcal O_X$ and $(KK')\\mathcal O_X$ are quasi-coherent ideals with sections $KB$, $K'B$, $(KK')B$ on an affine open $U$ with ring $B$ (step 1). Their product $(K\\mathcal O_X)(K'\\mathcal O_X)$ [def-sbc-ideal-sheaf-powers] is the quasi-coherent ideal with sections $(KB)(K'B)$ on $U$. Now $(KB)(K'B)=(KK')B$: the left side is generated as an ideal by the products $\\rho_U(k)\\rho_U(k')=\\rho_U(kk')$, $k\\in K$, $k'\\in K'$, and $KK'$ is additively generated by the $kk'$, so both ideals have the same generators. Hence the two ideals agree on all affine opens and are equal (step 1). The powers follow by induction on $m$: $(K\\mathcal O_X)^1=K\\mathcal O_X$, and $(K\\mathcal O_X)^{m+1}=(K\\mathcal O_X)^m(K\\mathcal O_X)=(K^m\\mathcal O_X)(K\\mathcal O_X)=(K^{m+1})\\mathcal O_X$ by the product formula with $K^m$ and $K$ in place of $K,K'$.",
+   "text": "Use step 2 for K, K-prime, their product and their powers. IdealSheafData.ext reduces equality of ideal sheaves to equality of ideals on each affine open. ideal_mul and ideal_pow [def-sbc-ideal-sheaf-powers], together with Ideal.map_mul and Ideal.map_pow, prove clause (2).",
    "uses": [
     "def-sbc-ideal-sheaf-powers"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "written by the agent (Schemes, Lemma 01IN for ideals on affine opens)"
+    "place": "Stacks 01IN; elementary ideal extension calculation"
    }
   },
   {
-   "text": "(Clause (3): the morphism $i$ and a cartesian square.) Let $c_{J',J}:\\operatorname{Spec}(A/J')\\to\\operatorname{Spec}(A/J)$ be $\\operatorname{Spec}$ of the quotient map $A/J\\to A/J'$; then $c_J\\circ c_{J',J}=c_{J'}$ by functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum], as $A\\to A/J\\to A/J'$ is the quotient map. Since $f\\circ j_{J'}=c_{J'}\\circ p_{J'}=c_J\\circ(c_{J',J}\\circ p_{J'})$, the universal property of $X_J$ [def-pc-fibre-product] gives exactly one $i:X_{J'}\\to X_J$ with $j_J\\circ i=j_{J'}$ and $p_J\\circ i=c_{J',J}\\circ p_{J'}$. Apply [lem-weil-pbc-cartesian-square-pasting] to the diagram with left column $X_{J'}\\xrightarrow{i}X_J\\xrightarrow{j_J}X$, right column $\\operatorname{Spec}(A/J')\\xrightarrow{c_{J',J}}\\operatorname{Spec}(A/J)\\xrightarrow{c_J}S$ and horizontal maps $p_{J'},p_J,f$: both squares commute, the lower square is the cartesian square of $X_J$, and the outer rectangle ($X_{J'}$ with $p_{J'}$ and $j_J\\circ i=j_{J'}$, over $c_J\\circ c_{J',J}=c_{J'}$ and $f$) is the cartesian square of $X_{J'}$; hence the upper square is cartesian: $(X_{J'},i,p_{J'})$ is a fibre product of $p_J:X_J\\to\\operatorname{Spec}(A/J)$ and $c_{J',J}$.",
+   "text": "For J <= J-prime, let c be Spec of Ideal.Quotient.factor h. Functoriality and factor_comp_mk give c followed by the quotient immersion for J equal to the quotient immersion for J-prime. Construct i by pullback.lift with first projection j_J-prime and second projection p_J-prime followed by c; pullback.lift_fst, lift_snd and hom_ext give both identities and uniqueness. As i followed by j_J equals j_J-prime, i is a closed immersion by [lem-weil-pbc-closed-immersion-factor-ideal-inclusion]. For its kernel, use Hom.ker_comp to write j_J-prime.ker = i.ker.map j_J. Pulling back this pushforward along the monomorphism j_J recovers i.ker: the identity square with i.ker.subschemeι and its composite with j_J is cartesian by of_horiz_isIso_mono, and ker_fst_of_isClosedImmersion, the pullback isomorphism, and ker_subschemeι prove the assertion. This is the already proved library lemma comap_map_of_isClosedImmersion. Step 1 and comap_comp then identify i.ker with J-prime O_X_J.",
    "uses": [
+    "def-pc-fibre-product",
     "def-weil-affine-spectrum",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-closed-immersion-factor-ideal-inclusion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-nagata-extended-ideal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "written by the agent; the system X_n -> X_{n+1} of Cohomology of Schemes, Remark 088F (literature/stacks-project/coherent.tex, remark-reformulate-existence-theorem)"
+    "place": "Stacks 01QP (1) and 01JU (1); WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, comap_map_of_isClosedImmersion"
    }
   },
   {
-   "text": "(Clause (3): closed immersion, ideal sheaf, affine description.) Put $\\bar A=A/J$ and $\\bar J'=J'/J\\subseteq\\bar A$. The isomorphism $\\bar A/\\bar J'\\cong A/J'$ compatible with the quotient maps from $\\bar A$ makes $\\operatorname{Spec}(A/J')\\to\\operatorname{Spec}\\bar A$ isomorphic over $\\operatorname{Spec}\\bar A$ to $\\operatorname{Spec}$ of $\\bar A\\to\\bar A/\\bar J'$, so by step 6 and uniqueness of fibre products [def-pc-fibre-product] there is an isomorphism $\\psi:X_{J'}\\to(X_J)_{\\bar J'}:=X_J\\times_{\\operatorname{Spec}\\bar A}\\operatorname{Spec}(\\bar A/\\bar J')$ with $i$ equal to the first projection composed with $\\psi$. Steps 2-4 applied to $p_J:X_J\\to\\operatorname{Spec}\\bar A$ and the ideal $\\bar J'$ show that this first projection is a closed immersion with ideal sheaf $\\bar J'\\mathcal O_{X_J}$ (formed for $p_J$), hence so is $i$ (composition with an isomorphism changes neither the image nor $\\ker(\\mathcal O_{X_J}\\to i_*\\mathcal O_{X_{J'}})$ [def-sbc-closed-immersion-ideal-sheaf]). Moreover $\\bar J'\\mathcal O_{X_J}=J'\\mathcal O_{X_J}$ (the latter formed for $f\\circ j_J=c_J\\circ p_J$): for an affine open $W\\subseteq X_J$ with ring $C$, step 1 gives $(J'\\mathcal O_{X_J})(W)$ = the ideal generated by the image of $J'$ under $A\\to\\bar A\\to C$ (the global-sections map of $c_J\\circ p_J|_W$ is the composite) and $(\\bar J'\\mathcal O_{X_J})(W)$ = the ideal generated by the image of $\\bar J'$ under $\\bar A\\to C$; as $\\bar J'$ is the image of $J'$ in $\\bar A$ these have the same generators, so the two ideals agree on all affine opens and are equal (step 1). Over an affine open $U=\\operatorname{Spec}B$ of $X$: $W=j_J^{-1}(U)$ is affine with ring $B/JB$ (step 3 for $J$), $i^{-1}(W)=j_{J'}^{-1}(U)$, and step 3 for $p_J$ and $\\bar J'$ identifies $i^{-1}(W)\\to W$ with $\\operatorname{Spec}$ of the quotient map $B/JB\\to(B/JB)/\\bar J'(B/JB)$; here $\\bar J'(B/JB)=(J'B+JB)/JB=J'B/JB$ as $J\\subseteq J'$, and $(B/JB)/(J'B/JB)=B/J'B$, so $i$ is $\\operatorname{Spec}(B/J'B)\\to\\operatorname{Spec}(B/JB)$ induced by the quotient map.",
+   "text": "Choose the quotient isomorphisms of clause (1) for J and J-prime. To prove compatibility of i with the spectrum of the quotient factor, compose the desired identity with j_J, which is a monomorphism. The projection identities of the charts and i reduce both sides to the quotient map B -> B/J-prime B followed by the affine inclusion. The remaining equality is factor_comp_mk and functoriality of Spec. Cancel j_J to obtain the displayed equality, completing clause (3).",
    "uses": [
     "def-pc-fibre-product",
-    "def-sbc-closed-immersion-ideal-sheaf"
+    "def-weil-affine-spectrum"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01JU (1) applied over Spec(A/J); written by the agent"
+    "place": "Stacks 01JU (1); elementary quotient-factor calculation"
    }
   },
   {
-   "text": "(Clause (4).) Let $L\\subseteq A$ be an ideal. By step 1, $L\\mathcal O_X$ is a quasi-coherent ideal of $\\mathcal O_X$ with $(L\\mathcal O_X)(U)=LB$ on affine opens $U$ with ring $B$, and the ideal sheaf of $j_K$ has $\\mathcal I(U)=KB$ (step 4). By [lem-weil-pbc-closed-immersion-pushforward-ideal-powers] (1) for the closed immersion $j_K$ and the quasi-coherent ideal $L\\mathcal O_X$, $(L\\mathcal O_X)\\mathcal O_{X_K}$ [def-nagata-extended-ideal] is a quasi-coherent ideal of $\\mathcal O_{X_K}$ with sections $LB\\cdot(B/KB)=L\\cdot(B/KB)$ on $j_K^{-1}(U)=\\operatorname{Spec}(B/KB)$. By step 1 for $X_K$ over $S$, $L\\mathcal O_{X_K}$ is a quasi-coherent ideal with sections on the affine open $j_K^{-1}(U)$ the ideal generated by the image of $L$ under $A\\to B\\to B/KB$ (step 3), i.e. $L\\cdot(B/KB)$. The opens $j_K^{-1}(U)$, $U\\subseteq X$ affine, form a basis of $X_K$: $j_K$ is a homeomorphism onto its image [def-weil-closed-immersion], so an open $W'\\ni z$ of $X_K$ is $j_K^{-1}(O)$ for an open $O\\subseteq X$, and an affine open $U$ with $j_K(z)\\in U\\subseteq O$ gives $z\\in j_K^{-1}(U)\\subseteq W'$. So the two ideals agree on a basis and are equal (step 1).",
+   "text": "For clause (4), apply Mathlib IdealSheafData.comap_comp to the ideal attached to L, j_K and f. For the affine formula choose the affine inverse image supplied by the closed immersion. Apply ideal_comap_appLE [lem-pc-ideal-sheaf-comap-affine-extension] to j_K and U with its full preimage, where appLE is app. Step 2 computes the starting ideal LB. The composition identity gives the same formula for the other ideal. No closed-immersion pushforward module theorem is required.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers",
     "def-nagata-extended-ideal",
-    "def-weil-closed-immersion"
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-pc-ideal-sheaf-comap-affine-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "written by the agent (Schemes, Lemma 01JU (1) and Lemma 01IN)"
+    "place": "Stacks 01JU (1) and 01IN; Mathlib IdealSheaf/Functorial.lean, comap_comp; source-library ideal_comap_appLE"
    }
   }
  ],
  "proof_deps": [
   "def-weil-affine-spectrum",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-module-pullback-ideal-quotient",
-  "def-nagata-extended-ideal",
-  "def-pc-scheme",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-tensor-quotient-base-change",
   "def-sbc-closed-immersion-ideal-sheaf",
+  "def-nagata-extended-ideal",
+  "lem-weil-pbc-spec-quotient-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
   "def-sbc-ideal-sheaf-powers",
-  "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion) (1) for the statement of (1); the proof here argues on affine opens via Lemmas 01I4, 01JQ, 01JR and Morphisms Lemma 01QO instead of the locally ringed space argument of 01JU; clauses (2)-(4) are written by the agent; the use with K = I^{n+1} is Cohomology of Schemes, Remark 088F"
+  "place": "Q3 stage-3 proof, 2026-10-12: Stacks 01JU (1), 01IN and Morphisms 01QP; implemented directly from Mathlib closed-immersion classification, kernels and pullbacks, and the proved source-library affine ideal extension and closed-immersion comap-map lemmas. The tensor-product, module-pullback and pushforward routes are pruned."
  },
  "mathlib_searches": [
   {
@@ -256,22 +235,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "P3",
+  "reviewer": "X-567e3",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T112846-L-770384",
+  "landing": "20261012T135307-L-1688341",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.quotientBaseChange_closedImmersion_ideal",
-   "AlgebraicGeometry.quotientBaseChange_extendedIdeal_comap",
-   "AlgebraicGeometry.quotientBaseChange_extendedIdeal_mul_pow",
-   "AlgebraicGeometry.quotientBaseChange_nestedIdeals"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.quotientBaseChange_closedImmersion_ideal",
-   "AlgebraicGeometry.quotientBaseChange_extendedIdeal_comap",
-   "AlgebraicGeometry.quotientBaseChange_nestedIdeals"
-  ]
+  "note": "independent Codex review: Delivered module, DAG node, report, axioms, full compile, and all seven direct importers match the required stage-3 proof and interface checks"
  }
 }
