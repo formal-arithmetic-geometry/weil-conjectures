@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.DerivedLerayComp
 
 /-! # Coherence of the derived unit and Leray comparison -/
 
@@ -18,6 +16,30 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
+private theorem derivedUnit_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (g ≫ f)).unit.app K ≫
+      (lowerStar AddCommGrpCat.{u + 1} (g ≫ f)).rightDerivedFunctor.map
+        ((Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} g f) ≪≫
+          Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} f)
+            (upperStar AddCommGrpCat.{u + 1} g)).hom.app K) =
+    (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app K ≫
+      (lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctor.map
+        ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app
+          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K)) ≫
+      (rightDerivedLowerStarComp AddCommGrpCat.{u + 1} g f).hom.app
+        ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory.obj
+          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K)) := by
+  simpa only [rightDerivedLowerStarComp, Iso.symm_hom, conjugateIsoEquiv_apply_inv,
+    Iso.symm_inv, Adjunction.comp_unit_app, Category.assoc, Functor.comp_obj] using
+    (unit_conjugateEquiv
+      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).comp
+        (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g))
+      (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (g ≫ f))
+      (Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} g f) ≪≫
+        Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} f)
+          (upperStar AddCommGrpCat.{u + 1} g)).hom K).symm
+
 /-- The derived unit--Leray composites respect inverse-image composition.
 Source: Stacks Project, Tags 015M and 03CB.
 (blueprint: lem-weil-pbc-derived-unit-leray-comp).
@@ -64,6 +86,32 @@ theorem derivedUnitLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
     (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} g).hom.app
       ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory.obj
         ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj K)) := by
-  sorry
+  let C := Functor.mapDerivedCategoryNatIso (upperStarComp AddCommGrpCat.{u + 1} g f) ≪≫
+    Functor.mapDerivedCategoryCompIso (upperStar AddCommGrpCat.{u + 1} f)
+      (upperStar AddCommGrpCat.{u + 1} g)
+  let U := (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory
+  let V := (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory
+  let R := (lowerStar AddCommGrpCat.{u + 1} f).rightDerivedFunctor
+  let G := rightDerivedGlobalSections AddCommGrpCat.{u + 1} X
+  let H := rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y
+  let eta := (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app K
+  let theta := (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app
+    (U.obj K)
+  let lambda := (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+    AddCommGrpCat.{u + 1} f).hom
+  let mu := (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+    AddCommGrpCat.{u + 1} (g ≫ f)).hom
+  have hn := mu.naturality (C.hom.app K)
+  have hu := congrArg G.map (derivedUnit_comp f g K)
+  have hl := derivedLeray_comp f g (V.obj (U.obj K))
+  have ht := lambda.naturality theta
+  dsimp only [Functor.comp_map] at hn ht
+  change G.map _ ≫ mu.app _ ≫ _ =
+    G.map eta ≫ lambda.app (U.obj K) ≫ H.map theta ≫ _
+  rw [← hn, ← G.map_comp_assoc, hu]
+  simp only [Functor.map_comp, Category.assoc]
+  erw [hl]
+  change G.map eta ≫ G.map (R.map theta) ≫ lambda.app _ ≫ _ = _
+  erw [reassoc_of% ht]
 
 end AlgebraicGeometry.Etale
