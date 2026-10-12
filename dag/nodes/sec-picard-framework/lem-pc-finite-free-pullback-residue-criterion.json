@@ -14,7 +14,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof steps 1--4, recorded verbatim in dag/nodes/sec-picard-framework/lem-pc-perfect-locus.json"
+  "place": "Proof step 4: local normal form and flat single fibre; same-image matrix-minor comparison replaces scalar-extension dimension descent. Lean reduction by M2, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -61,28 +61,28 @@
  "statement": "Let $Y,Y\\prime$ be schemes [def-pc-scheme], $g:Y\\prime\\to Y$ a morphism, $d,i,r\\in\\mathbb N$, and $P$ a cochain complex of $\\mathcal O_Y$-modules [def-pc-derived-category] with zero terms below $0$ and above $d$ and terms isomorphic to finite free modules [def-weil-pbc-free-module]. Let $g^*P$ and $P_y$ be termwise pullbacks [def-pc-derived-pullback], the latter along $\\operatorname{Spec}\\kappa(y)\\to Y$. Then $H^q(g^*P)=0$ for every $q\\in\\mathbb N\\setminus\\{i\\}$ and $H^i(g^*P)$ is finite locally free of rank $r$ [def-amb-finite-locally-free-module] if and only if, for every $y$ in the image of $g$, $H^q(P_y)=0$ for every $q\\in\\mathbb N\\setminus\\{i\\}$ and $H^i(P_y)$ is finite locally free of rank $r$.",
  "proof": [
   {
-   "text": "Suppose all image points satisfy the residue condition. Over each such point localize the finite free complex at the local ring and repeatedly split unit differential entries. Each splitting removes a two-term contractible summand and decreases total rank. In the remaining minimal complex all residue differentials vanish; the residue condition forces rank r in degree i and zero ranks elsewhere. The finitely many basis changes and inverses spread to a neighbourhood. Pullback of the explicit homotopy equivalence to a rank-r single complex computes cohomology after every map. These neighbourhoods cover Y\\prime, so the homology sheaves vanish off i and are locally free of rank r in degree i. Empty sources and rank zero are included.",
+   "text": "For each source point z, apply lem-pc-finite-free-residue-local-homotopy to the residue hypothesis at g(z). Choose its open U_z and homotopy equivalence. The U_z cover the source because z belongs to U_z. Exact open restriction commutes with cohomology, and homotopy equivalences induce homology isomorphisms. The homology of a single free complex is zero off i and free of rank r at i. Vanishing glues by isZero_of_iSup_eq_top; the explicit restricted free isomorphisms glue finite local freeness by isFiniteLocallyFreeOfRank_of_restrict_iso_free. The empty source is included by the empty point-indexed cover.",
    "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits",
-    "lem-pc-flat-complex-derived-pullback"
+    "lem-pc-finite-free-residue-local-homotopy"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Conversely suppose g^*P has the indicated cohomology. Its negative cohomology vanishes by nonnegative support. Locally it is quasi-isomorphic by truncation to its flat locally free degree-i cohomology sheaf in that degree. For z mapping to y, its derived residue fibre is κ(z)^r in degree i. Flat-complex pullback and composition identify this with P_y extended along κ(y)→κ(z). Scalar extension is exact and the field-extension dimension formula preserves the ranks of finite-dimensional cohomology. Hence P_y vanishes off i and has rank r in degree i. Every image point has such a z; this proves the converse.",
+   "text": "For the converse, let z map to y and let Q=g^*P. Pullback preserves the strict support bounds and termwise finite freeness. Apply lem-pc-finite-free-single-field-fibre to Q along Spec κ(z)→Y\\prime. Its homotopy equivalence computes the required single cohomology of this fibre. The ordinary pullback composition isomorphism pullbackComp, mapped to complexes and then homology, identifies it with the fibre of P along Spec κ(z)→Y.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-finrank-field-base-change"
+    "lem-pc-finite-free-single-field-fibre"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Compare this field-valued point with Spec κ(y)→Y. For a matrix of global functions, le_rank_map_appTop_iff characterizes every lower bound on its rank by a nonvanishing minor at the image point. Since the two points have the same image, the ranks are equal. Apply this to the incoming and outgoing differentials in each degree. The proved source-library formula finrank_homology_pullback_add_rank_add_rank then makes the two cohomology dimensions equal, by cancellation in the natural numbers. The source-library finite_moduleSpecΓFunctor_obj_homology_pullback gives finite-dimensionality. On the spectrum of a field, zero cohomology is equivalent to dimension zero, and finite local freeness of rank r is equivalent to dimension r. Transport the computed vanishing and dimension r across the dimension equality. Every image point has a source preimage by definition of Set.range. The three private helpers of the module carry the matrix-rank comparison, dimension comparison and single homology computation explicitly in Lean.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-finrank-field-base-change",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-weil-pbc-free-complex-unit-entry-splits"
+  "lem-pc-finite-free-residue-local-homotopy",
+  "lem-pc-finite-free-single-field-fibre"
  ],
  "blueprint": {
   "is": null,
@@ -119,7 +119,7 @@
   "reviewer": "COMPILER",
   "group": "M2",
   "result": "pass",
-  "landing": "20261012T135254-L-1678067",
+  "landing": "20261012T144127-L-2101646",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
