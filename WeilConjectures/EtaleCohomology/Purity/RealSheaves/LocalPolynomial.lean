@@ -35,8 +35,9 @@ namespace AlgebraicGeometry
 namespace WeilGroup
 
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
-  [IsCurve (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ) [Fact l.Prime]
-  [Fact (ringChar K ≠ l)]
+  [IsCurve (C ↘ Spec (.of K))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
+  [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
+  [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
 /-- Blueprint `p-real-operations`: Local Frobenius polynomials.
 

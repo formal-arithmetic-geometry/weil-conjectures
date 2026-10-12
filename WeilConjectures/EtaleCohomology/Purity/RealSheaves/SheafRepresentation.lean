@@ -12,9 +12,9 @@ public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 /-!
 # Lisse Weil sheaves and lisse Weil representations
 
-Let `C₀` be a curve over the finite field `K` with Weil group `W = W(C₀)`
-(`AlgebraicGeometry.WeilGroup`). This file connects the two sides of the purity theorem for
-real sheaves: the sheaf side, lisse Weil sheaves `AlgebraicGeometry.WeilSheaf` on `C₀` with
+Let `C₀` be a smooth geometrically connected curve over the finite field `K` with Weil group
+`W = W(C₀)` (`AlgebraicGeometry.WeilGroup`). This file connects the two sides of the purity theorem
+for real sheaves: the sheaf side, lisse Weil sheaves `AlgebraicGeometry.WeilSheaf` on `C₀` with
 their geometric stalks, local Frobenius, global sections and geometric coinvariants, and the
 representation side, lisse representations of `W(C₀)`.
 
@@ -93,8 +93,9 @@ namespace AlgebraicGeometry
 namespace WeilGroup
 
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
-  [IsCurve (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ) [Fact l.Prime]
-  [Fact (ringChar K ≠ l)]
+  [IsCurve (C ↘ Spec (.of K))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
+  [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
+  [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
 /-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `sk-i-real-sheaves`):
 The lisse sheaf–representation equivalence.
