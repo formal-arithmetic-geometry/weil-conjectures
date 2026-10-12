@@ -358,6 +358,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Modules
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedFpqc
 public import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
+public import WeilConjectures.AlgebraicGeometry.Picard.Seams
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
