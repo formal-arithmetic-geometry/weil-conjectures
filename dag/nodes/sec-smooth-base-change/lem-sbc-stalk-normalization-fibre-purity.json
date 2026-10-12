@@ -15,33 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Localize at s. The normalization commutes with localization. It is etale away from the special fibre by the assumed restriction and base change. A smooth geometrically connected fibre is geometrically integral, so W contains its generic point.",
+   "text": "Put A=O(S,s), q=the second projection of the stalk pullback, and V=fromSpecStalk(s) inverse U. The range of fromSpecStalk consists of generalizations of s, and its map on points is injective. Using hmin and hs gives t in V iff t is not the closed point. The pullback square identifies l inverse C_U with q inverse V. Restrict the normalization pullback square using Mathlib isPullback_resLE and transfer etaleness by base change. These steps are proved in Lean.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "In dimension one the local base is a DVR and the special fibre is a regular effective Cartier divisor. Etaleness at its generic point excludes ramification in codimension one. Purity extends the punctured cover etale across the divisor. Normal finite algebras are integral closures in their generic algebras, identifying this extension with N after localization.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply the localized-normalization certificate to obtain normal local rings of the source and density of its punctured open. Transport density using the equality of the two opens. Extract W and x, and use injectivity of fromSpecStalk plus its closed-point formula to show q(x) is the closed point. All comparison and transport steps are proved in Lean.",
+   "uses": [
+    "lem-sbc-stalk-normalization-normal-dense"
+   ],
+   "elementary": true
   },
   {
-   "text": "In dimension at least two, normality and flatness give depth at least two along the missing fibre. The finite normalization is normal and satisfies the depth-two condition, hence is the unique extension of the punctured cover. The union of W with the punctured open is fibrewise dense and contains every fibre over a base point of depth at most one. Apply fibrewise purity to extend the cover on this union etale everywhere; uniqueness identifies it with the normalization. Dimension zero is excluded by eta in U and s outside U.",
+   "text": "Split according as dim A is at least two. In that case use normal-local depth-two to get depth A at least two and apply finite_normal_etale_of_depth_two_neighbourhood. Otherwise discreteness of WithBot extended natural dimensions gives dim A at most one, and finite_normal_etale_of_trait_neighbourhood applies. The latter includes the dimension-zero empty-cover case, so no extra dimension-zero hypothesis or hole is needed.",
    "uses": [
     "lem-weil-pbc-normal-local-depth-two",
-    "lem-weil-pbc-flat-local-depth-formula"
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-finite-normal-trait-purity"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sbc-stalk-normalization-normal-dense",
   "lem-weil-pbc-normal-local-depth-two",
-  "lem-weil-pbc-flat-local-depth-formula"
+  "lem-sbc-finite-normal-depth-two-purity",
+  "lem-sbc-finite-normal-trait-purity"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "E2",
+  "by": "C1",
   "document": "Stacks Project",
-  "place": "Tags 0EYE (purity across a regular Cartier divisor), 0EYB (fibrewise dense open purity), and 0EY6, as used in Tag 0EYJ"
+  "place": "Tags 0EYE, 0EYB, 0EY6 and 0EYJ; compiling Lean assembly from normality/density, trait purity and depth-two purity."
  },
  "mathlib_searches": [
   {
@@ -127,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-8bc48",
-  "group": "E2",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T205628-L-931505",
+  "landing": "20261012T223359-L-1634629",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the packet declarations and DAG nodes; all modules and the direct importer compile without errors or warnings, with only the two documented sorry theorem statements remaining."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

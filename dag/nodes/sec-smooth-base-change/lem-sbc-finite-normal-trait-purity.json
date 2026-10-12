@@ -1,0 +1,145 @@
+{
+ "id": "lem-sbc-finite-normal-trait-purity",
+ "kind": "statement",
+ "title": "Purity for a finite normal cover over a local base of dimension at most one",
+ "statement": "Let $A$ be a Noetherian normal local domain, with closed point $a\\in\\operatorname{Spec}A$ (normal means integral domain and integrally closed in its fraction field [def-weil-pbc-normal-ring]; local means it has a unique maximal ideal). Let $q:L\\to\\operatorname{Spec}A$ be quasi-compact, quasi-separated, smooth with geometrically connected fibres [def-weil-pbc-scheme-conventions, def-sbc-smooth-morphisms]. Let $V\\subset\\operatorname{Spec}A$ be the open whose points are exactly those different from $a$. Let $n:N\\to L$ be finite [def-weil-finite-integral-morphism], with every local ring of $N$ a normal domain. Assume the open $n^{-1}(q^{-1}(V))$ is dense in $N$ and $n|_{q^{-1}(V)}$ is etale [def-weil-etale-morphism]. Let $W\\subset L$ be open and $x\\in W$ satisfy $q(x)=a$ and $n|_W$ etale. If $\\dim A\\le1$ [def-weil-pbc-krull-dimension-ring], then $n$ is etale.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYE (pione-lemma-purity-one-divisor), 0EYJ (trait paragraph) and 0BQL (normal finite etale covers)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "If A has dimension zero it is a field and V is empty. Density forces N empty, hence n is etale. In the other case a normal Noetherian local domain of dimension one is a DVR. Smoothness makes its closed fibre a regular effective Cartier divisor; smoothness with geometric connectedness makes that fibre integral.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open W meets the closed fibre and hence contains its generic point. The punctured finite etale cover is unramified at that point, and away from the divisor it is already etale. Tag 0EYE therefore supplies a finite etale cover E of L extending the punctured cover.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "L and E are normal. Density excludes a component of N supported on the closed fibre; every generic component of N lies over a generic component of L, since n is etale over the puncture. On each affine component, both E and N are the integral closure of the base algebra in the same generic algebra: their rings are integral over the base, and any element integral over the base is integral over each normal finite algebra and therefore belongs to it. The resulting isomorphisms agree on overlaps and give N isomorphic to E over L. Consequently n is etale.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-etale-over-normal-ring-normal"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "C1",
+  "document": "Stacks Project",
+  "place": "Tags 0EYE (pione-lemma-purity-one-divisor), 0EYJ (trait paragraph) and 0BQL (normal finite etale covers)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite normal cover of a smooth scheme over a normal local ring of dimension at most one etale outside the closed fibre and near its generic point is etale",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normal cover of a smooth scheme over a normal local ring of dimension at most one etale outside the closed fibre and near its generic point is etale",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.etaleLocus, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.of_comp, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale; no finite-normal-cover purity theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|etale.*depth|depth.*etale",
+   "results": "0 hits: ; no finite-normal-cover purity theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFibrePurity",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Local boundary extension in the trait and depth-two paragraphs, as used in Tag 0EYJ; Purity for a finite normal cover over a local base of dimension at most one",
+   "via": [
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalTraitPurity",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteNormalTraitPurity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_normal_etale_of_trait_neighbourhood",
+  "statement": "theorem finite_normal_etale_of_trait_neighbourhood\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    [IsDomain A] [IsIntegrallyClosed A]\n    {L N : Scheme.{u}} (q : L ⟶ Spec (.of A))\n    [QuasiCompact q] [QuasiSeparated q] [Smooth q] [GeometricallyConnected q]\n    (V : (Spec (.of A)).Opens)\n    (hV : ∀ t : Spec (.of A), t ∈ V ↔ t ≠ IsLocalRing.closedPoint A)\n    (n : N ⟶ L) [IsFinite n]\n    (hnormal : ∀ z : N, IsDomain (N.presheaf.stalk z) ∧\n      IsIntegrallyClosed (N.presheaf.stalk z))\n    (hdense : Dense (↑(n ⁻¹ᵁ (q ⁻¹ᵁ V)) : Set N))\n    (het : Etale (n ∣_ (q ⁻¹ᵁ V)))\n    (W : L.Opens) (x : L) (hx : x ∈ W)\n    (hqx : q x = IsLocalRing.closedPoint A) (hW : Etale (n ∣_ W))\n    (hdim : ringKrullDim A ≤ (1 : WithBot ℕ∞)) : Etale n",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T223359-L-1634629",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T223359-L-1634629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

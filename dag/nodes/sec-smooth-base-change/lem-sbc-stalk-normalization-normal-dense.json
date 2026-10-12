@@ -1,0 +1,149 @@
+{
+ "id": "lem-sbc-stalk-normalization-normal-dense",
+ "kind": "statement",
+ "title": "Normality and density of the localized relative normalization",
+ "statement": "Let $S$ be an integral Noetherian quasi-separated scheme whose local rings are integrally closed [def-weil-pbc-scheme-conventions, def-weil-pbc-normal-ring]. Let $c:C\\to S$ be quasi-compact, quasi-separated and smooth [def-sbc-smooth-morphisms]. Let $U\\subset S$ be open, $P\\to C_U=c^{-1}(U)$ a finite etale scheme [def-weil-pbc-finite-etale-category], and $s\\in S$. Put $f:P\\to C_U\\to C$, $L=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$ with projection $l:L\\to C$ [def-pc-fibre-product], and $n:N=f.\\mathrm{normalization}\\times_C L\\to L$, where relative normalization means integral closure of $\\mathcal O_C$ in $f_*\\mathcal O_P$ [lem-weil-pbc-relative-normalization]. Then each local ring of $N$ is a domain and integrally closed, and $n^{-1}(l^{-1}(C_U))$ is dense in $N$. No finiteness hypothesis on $n$, boundary minimality, fibre neighbourhood, generic-point membership, or geometric connectedness is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 035L (morphisms-lemma-normal-normalization), 035K, 035I, 0307 and 0EYJ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness over the normal integral base gives normal local rings of C; etaleness gives normal local rings of P. Both are locally Noetherian, so quasi-compact opens of P have finitely many irreducible components.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine integral-closure construction and Tag 035L: decompose the source over each affine chart into its finitely many normal integral components. Each ring of sections is a normal domain. Its integral closure over the base algebra is a normal domain, so all local rings of the relative normalization are normal domains. Choose an affine neighbourhood of s; base change to its stalk is localization of the base algebra. Integral closure commutes with this localization (0307), proving the same property after the displayed base change. The affine descriptions agree on overlaps.",
+   "uses": [
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inclusion of the integral-closure algebra into the rings of sections makes P to its relative normalization schematically dominant (035I). Localization is flat, so this inclusion remains injective after base change to the stalk. Thus the localized source has dense image in N. That image lies over C_U, which proves density of the displayed open; when P is empty N is empty and density is vacuous.",
+   "uses": [
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "C1",
+  "document": "Stacks Project",
+  "place": "Tags 035L (morphisms-lemma-normal-normalization), 035K, 035I, 0307 and 0EYJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative normalization in a normal scheme has normal local rings and the original scheme is dense after localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative normalization in a normal scheme has normal local rings and the original scheme is dense after localization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization; no exact scheme normality and density theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*normal|normal.*normalization|normalization.*dense",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean; no exact scheme normality and density theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFibrePurity",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Local boundary extension in the trait and depth-two paragraphs, as used in Tag 0EYJ; Normality and density of the localized relative normalization",
+   "via": [
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationNormalDense.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_normal_and_dense",
+  "statement": "theorem stalk_normalization_normal_and_dense {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens)\n    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι\n    let l := pullback.fst c (S.fromSpecStalk s)\n    let n := pullback.snd f.fromNormalization l\n    (∀ z : (pullback f.fromNormalization l : Scheme.{u}),\n      IsDomain ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z) ∧\n      IsIntegrallyClosed ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z)) ∧\n    Dense (↑(n ⁻¹ᵁ (l ⁻¹ᵁ (c ⁻¹ᵁ U))) :\n      Set (pullback f.fromNormalization l : Scheme.{u}))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T223359-L-1634629",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T223359-L-1634629",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
