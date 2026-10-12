@@ -19,46 +19,38 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal N_{\\bar s}$ for all pointed etale neighbourhoods and $\\mathcal J_{\\bar s}$ for the small full subcategory of affine representatives chosen in [def-weil-pbc-strict-henselization-limit]. The definition gives $S_{(\\bar s)}=\\operatorname{Spec}(\\varinjlim_{\\mathcal J_{\\bar s}^{\\mathrm{op}}}A_V)$; [lem-weil-pbc-spec-small-colimit-limit] says that its canonical projections form a limit cone over $\\mathcal J_{\\bar s}$. Every affine pointed neighbourhood is isomorphic to a representative. Transport its projection through such an isomorphism; naturality makes this independent of the choice, and restricting or extending cones along these isomorphisms gives inverse correspondences. Hence the same cone is limiting over all affine pointed neighbourhoods; clause (2) of [lem-weil-pbc-colimit-initial-full-subcategory], applied in $\\mathbf{Sch}^{\\mathrm{op}}$, identifies the resulting limit with the representative limit and its projections. The affine full subcategory is initial in $\\mathcal N_{\\bar s}$ by [lemma-weil-pbc-affine-neighbourhood-cofinal]; clause (1) of [lem-weil-pbc-colimit-initial-full-subcategory], again in $\\mathbf{Sch}^{\\mathrm{op}}$, carries the limit cone to all of $\\mathcal N_{\\bar s}$. Thus $S_{(\\bar s)}$ with its canonical projections $p_V:S_{(\\bar s)}\\to V$ is a limit of the full neighbourhood diagram, and $p_S:S_{(\\bar s)}\\to S$ is its structure map, since $(S,\\bar s)$ is an object.",
+   "text": "Apply strictHenselization_properties from [def-weil-pbc-strict-henselization-limit] to obtain initiality of the small affine representative functor F, cofilteredness of its source J, and the limit property of strictHenselizationCone. Whisker that cone by opOp J. The natural isomorphism with components (Spec A).isoSpec.inv identifies the resulting spectrum-of-global-sections diagram with F followed by the neighbourhood scheme diagram; naturality is Scheme.isoSpec_inv_naturality. Postcompose the cone by this isomorphism, retaining its vertex and its prescribed affine legs. IsLimit.postcomposeHomEquiv transports the limit property.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "lemma-weil-pbc-affine-neighbourhood-cofinal",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
-    "place": "proof, affine-neighbourhood limit comparison; universal-property expansion using Stacks Tags 01YW, 0BUC and 04E7"
-   }
-  },
-  {
-   "text": "Let $T$ be any scheme and let $g_V:T\\to X\\times_SV$ be a compatible cone indexed by $\\mathcal N_{\\bar s}$. Write $x_V:T\\to X$ and $v_V:T\\to V$ for its two components. The $v_V$ form a cone over $\\mathcal N_{\\bar s}$, so Step 1 gives a unique $b:T\\to S_{(\\bar s)}$ with $p_Vb=v_V$ for every $V$. For any $V,W$, cofilteredness [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] supplies $U\\to V$ and $U\\to W$; compatibility of the $g$'s and the fibre-product projections gives $x_V=x_U=x_W$. Call the common map $a:T\\to X$. At the object $(S,\\bar s)$, $g_S:T\\to X\\times_SS$ gives $fa=v_S=p_Sb$. The universal property [def-pc-fibre-product] therefore gives a unique $h:T\\to X\\times_SS_{(\\bar s)}$ with components $a,b$; for every $V$, its projection to $X\\times_SV$ has components $a,p_Vb=x_V,v_V$, hence equals $g_V$. If two such $h$ induce the same cone, their $S_{(\\bar s)}$ components agree by the limit uniqueness of Step 1 and their $X$ components agree already at $S$; fibre-product uniqueness makes them equal. Thus the canonical cone from $X\\times_SS_{(\\bar s)}$ is limiting and gives the displayed isomorphism.",
-   "uses": [
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "def-pc-fibre-product",
     "def-weil-pbc-strict-henselization-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
-    "place": "proof, global fibre-product limit; direct universal-property expansion"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Cofilteredness makes J connected. Mathlib CostructuredArrow.CreatesConnected.raiseCone lifts the affine scheme cone to Over S with the same underlying scheme and the same underlying legs; isLimitRaiseCone makes it limiting in Over S. Extend this cone along the initial functor F using Functor.Initial.extendCone, the limit counterpart of [lem-weil-pbc-colimit-initial-full-subcategory]. Take p to be the structure map of its vertex and q its cone legs. Functor.Initial.extendCone_obj_π_app' applied to the identity of F(j) proves that the extended leg at F(j) equals the original affine leg, which is the required colimit-spectrum formula.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre-product functor [def-pc-fibre-product] Over.pullback f is a right adjoint by Over.mapPullbackAdj and hence preserves limits. Over.forget X preserves connected limits, so the composite takes the raised affine cone to a limiting scheme cone. The unit isomorphism of Functor.Initial.conesEquiv identifies that cone with the restriction of the base-changed extended cone. Transport the limit property through this cone isomorphism and use Functor.Initial.isLimitWhiskerEquiv to obtain the desired full-neighbourhood limit. This is the categorical implementation of comparing the X-components along common refinements and invoking the pullback universal property; quasi-compactness and quasi-separatedness are unnecessary but their original hypotheses are retained.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-strict-henselization-limit",
-  "lem-weil-pbc-spec-small-colimit-limit",
-  "lemma-weil-pbc-affine-neighbourhood-cofinal",
   "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
   "def-pc-fibre-product"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent A2 stage 3",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-fibre-product-limit.md",
-  "place": "## Proof"
+  "place": "DAG universal-property proof, implemented using connected over-category limits and initial cone extension"
  },
  "mathlib_searches": [
   {
@@ -164,5 +156,15 @@
   "reviewer": "R-fp2",
   "group": "R1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T042405-L-1813614",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
