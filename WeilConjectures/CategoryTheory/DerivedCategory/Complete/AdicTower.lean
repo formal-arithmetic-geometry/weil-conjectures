@@ -72,7 +72,8 @@ noncomputable local instance (priority := high) adicTowerIsTriangulatedRight
     ((curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj K).IsTriangulated :=
   (sheafTensorStructure J R).isTriangulated_tensorRight K
 
-local instance adicTowerIsIsoε : IsIso (sheafTensorStructure J R).ε := (sheafTensorStructure J R).isIso_ε
+local instance adicTowerIsIsoε : IsIso (sheafTensorStructure J R).ε :=
+  (sheafTensorStructure J R).isIso_ε
 
 variable {J}
 

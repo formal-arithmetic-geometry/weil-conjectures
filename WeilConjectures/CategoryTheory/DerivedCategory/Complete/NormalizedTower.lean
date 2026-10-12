@@ -203,6 +203,7 @@ variable {A₀ A₁ A₂ A₃ : Type (u + 1)} [CommRing A₀] [CommRing A₁] [C
   (f₁₂₃ : A₀ →+* A₃) (h₁₂ : f₁₂ = f₂.comp f₁) (h₂₃ : f₂₃ = f₃.comp f₂)
   (h₁ : f₁₂₃ = f₂₃.comp f₁) (h₂ : f₁₂₃ = f₃.comp f₁₂)
 
+omit [EssentiallySmall.{u + 1} C] in
 /-- The composition isomorphisms of restrictions of scalars are associative. -/
 lemma _root_.CategoryTheory.Sheaf.restrictScalarsCompIso_assoc
     (F : Sheaf J (ModuleCat.{u + 1} A₃)) :
@@ -213,6 +214,7 @@ lemma _root_.CategoryTheory.Sheaf.restrictScalarsCompIso_assoc
   ext U x
   rfl
 
+omit [EssentiallySmall.{u + 1} C] in
 /-- The composition isomorphisms of restrictions of scalars of complexes are associative. -/
 lemma restrictScalarsCompIso_assoc_complex
     (K : CochainComplex (Sheaf J (ModuleCat.{u + 1} A₃)) ℤ) :
@@ -341,7 +343,8 @@ lemma isDerivedBaseChange_towerModelComp (ht : ∀ n, Sheaf.IsDerivedBaseChange 
             (towerModel (φ := fun n ↦ φ n.le_succ) L t (n + k + 1)).P) ≫
         (Sheaf.derivedRestrictScalars J (φ (n + k + 1).le_succ)).map
           (Q.map (towerModelComp φ L t hφ n k) ≫
-            (Sheaf.restrictScalars J (φ (Nat.le_add_right n (k + 1)))).mapDerivedCategoryFactors.inv.app
+            (Sheaf.restrictScalars J
+              (φ (Nat.le_add_right n (k + 1)))).mapDerivedCategoryFactors.inv.app
               (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P) ≫
         (Sheaf.derivedRestrictScalarsCompIso J
           (hφ (Nat.le_add_right n (k + 1)) (n + k + 1).le_succ).symm).hom.app
@@ -368,7 +371,8 @@ lemma towerFunctor_map_homOfLE (n k : ℕ) :
     rw [h, Functor.map_comp, ih]
     erw [Functor.ofOpSequence_map_homOfLE_succ]
     have hnat := (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J
-      (ψ (n + (k + 1) + 1)) (φ (n + k + 1).le_succ) (ψ (n + k + 1)) (hψ _).symm) (.up ℤ)).hom.naturality
+      (ψ (n + (k + 1) + 1)) (φ (n + k + 1).le_succ) (ψ (n + k + 1)) (hψ _).symm)
+        (.up ℤ)).hom.naturality
         (towerModelComp φ L t hφ n k)
     have hcoh := restrictScalarsCompIso_assoc_complex (J := J) (ψ (n + (k + 1) + 1))
       (φ (n + k + 1).le_succ) (φ (Nat.le_add_right n (k + 1))) (ψ (n + k + 1))
@@ -385,12 +389,14 @@ section Smul
 
 variable {A A' : Type (u + 1)} [CommRing A] [CommRing A'] (f : A →+* A')
 
+omit [EssentiallySmall.{u + 1} C] in
 lemma _root_.CategoryTheory.Sheaf.restrictScalars_map_smul (r : A)
     {F G : Sheaf J (ModuleCat.{u + 1} A')} (g : F ⟶ G) :
     (Sheaf.restrictScalars J f).map (f r • g) = r • (Sheaf.restrictScalars J f).map g := by
   ext U x
   rfl
 
+omit [EssentiallySmall.{u + 1} C] in
 lemma _root_.CategoryTheory.Sheaf.smul_id_restrictScalars_obj {r : A} (hr : f r = 0)
     (F : Sheaf J (ModuleCat.{u + 1} A')) :
     r • 𝟙 ((Sheaf.restrictScalars J f).obj F) = 0 := by
@@ -457,6 +463,7 @@ lemma quasiIso_cokernelDesc_towerFunctor_self (n : ℕ) :
   infer_instance
 
 set_option maxHeartbeats 1000000 in
+-- The derived-category computations at concrete restriction functors are slow to elaborate.
 include hφ hψ₀ hsurj hker ht in
 lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
     QuasiIso (cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1))))
@@ -501,13 +508,14 @@ lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
       ((D.exact ((M (n + k + 1)).P.X i)).map (Sheaf.restrictScalars J (ψ (n + k + 1))))
     refine ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_
     · simp only [Iso.refl_hom, Category.comp_id, Category.id_comp, ShortComplex.map_f]
-      change (Sheaf.restrictScalars J (ψ (n + k + 1))).map ((ψ (n + k + 1)) (ϖ ^ n) • 𝟙 ((M (n + k + 1)).P.X i)) = _
+      change (Sheaf.restrictScalars J (ψ (n + k + 1))).map
+        ((ψ (n + k + 1)) (ϖ ^ n) • 𝟙 ((M (n + k + 1)).P.X i)) = _
       rw [Sheaf.restrictScalars_map_smul, CategoryTheory.Functor.map_id]
       rfl
     · simp only [Iso.refl_hom, Category.comp_id, Category.id_comp, ShortComplex.map_g]
       rfl
   have : Epi ρ := HomologicalComplex.epi_of_epi_f _ fun i ↦ by
-    haveI := D.epi_r ((M (n + k + 1)).P.X i)
+    have := D.epi_r ((M (n + k + 1)).P.X i)
     exact (Sheaf.restrictScalars J (ψ (n + k + 1))).map_epi (D.r.app _)
   let c := (cokernelIsCokernel _).coconePointUniqueUpToIso hS.gIsCokernel
   have hc : cokernel.π _ ≫ c.hom = ρ :=

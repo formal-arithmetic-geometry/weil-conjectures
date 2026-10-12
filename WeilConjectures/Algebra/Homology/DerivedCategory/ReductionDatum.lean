@@ -205,6 +205,8 @@ lemma complexMap_ext [res.Faithful] {P : CochainComplex 𝒜 ℤ} {M : CochainCo
   ext i
   exact D.hom_ext (by simpa using HomologicalComplex.congr_hom h i)
 
+omit [Abelian.HasFunctorialFlatResolution 𝒜] [HasDerivedCategory 𝒜] [HasDerivedCategory 𝒜']
+  [PreservesFiniteLimits res] [PreservesFiniteColimits res] in
 /-- Every morphism of complexes `P ⟶ res M` factors uniquely through the reduction of `P`. -/
 lemma existsUnique_complexMap_comp [res.Full] [res.Faithful] {P : CochainComplex 𝒜 ℤ}
     {M : CochainComplex 𝒜' ℤ} (g : P ⟶ (res.mapHomologicalComplex (.up ℤ)).obj M) :
