@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-surjective-stalks-residue-field-iso",
+ "kind": "statement",
+ "title": "Surjectivity on stalks gives residue-field isomorphisms",
+ "statement": "Let p : W → Z be a morphism of schemes [def-pc-scheme] whose maps on stalks are surjective. For every w ∈ W, the induced residue-field map κ(p(w)) → κ(w) [def-weil-residue-field] is an isomorphism.",
+ "source": {
+  "document": "lean/WeilConjectures/ConstructibleSheaf/UniversalHomeomorphism.lean",
+  "place": "Hom.residueFieldMap_surjective and Hom.isIso_residueFieldMap, lines 48–64"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "For y in κ(w), choose a representative b in the local ring O_W,w, and lift b through the surjective stalk map to a in O_Z,p(w). Compatibility of the residue-field map with the residue maps shows that the residue of a maps to y. Thus the residue-field map is surjective. A unital homomorphism of fields is injective, hence this map is bijective and is an isomorphism in CommRingCat. This is the existing, kernel-checked proof in Hom.residueFieldMap_surjective and Hom.isIso_residueFieldMap; no new Lean statement is introduced.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/ConstructibleSheaf/UniversalHomeomorphism.lean",
+  "place": "Hom.residueFieldMap_surjective and Hom.isIso_residueFieldMap, lines 48–64"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes surjective on stalks induces an isomorphism on residue fields",
+   "results": "UNAVAILABLE: service Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme morphism surjective stalk homomorphisms induces bijective residue fields",
+   "results": "SurjectiveOnStalks, Scheme.Hom.stalkMap_surjective and ring-level RingHom.SurjectiveOnStalks.residueFieldMap_bijective",
+   "date": "2026-10-12",
+   "verdict": "Related Mathlib facts; existing upstream scheme-level theorem is the exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.residueFieldMap, CategoryTheory.IsIso",
+   "results": "Open-immersion instance only",
+   "date": "2026-10-12",
+   "verdict": "No generic scheme-level Mathlib theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg isIso_residueFieldMap|residueFieldMap_surjective lean/Sheaf lean/WeilConjectures; rg residueFieldMap Mathlib/AlgebraicGeometry",
+   "results": "UniversalHomeomorphism.lean:48 and :61 contain the exact generic surjectivity and isomorphism theorems; Mathlib has the open-immersion instance. msearch grep returned zero hits.",
+   "date": "2026-10-12",
+   "verdict": "Use the existing upstream theorem without restating it."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-finitely-presented",
+   "place": "closed-immersion residue-field tool used in the split of step 2",
+   "via": [
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isIso_residueFieldMap",
+  "statement": "lemma Hom.isIso_residueFieldMap (w : W) : IsIso (p.residueFieldMap w)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638507",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638507",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
