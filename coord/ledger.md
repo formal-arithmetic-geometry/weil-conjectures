@@ -7133,3 +7133,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:54 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso (stage 3; reviewer PASS; first push; landing 20261012T085402-L-48701 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:54 L: merged deliver/X2/Sheaf.RingTheory.PairHenselizationFlatQuotients (stage 3; reviewer PASS; first push; landing 20261012T085402-L-48799 (proof); batch 20261012T085205; modules 1; new nodes 1)
 - 08:54 L: merged deliver/X2/Sheaf.RingTheory.PolynomialGRingComparison (stage 3; reviewer PASS; first push; landing 20261012T085402-L-48928 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:54 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FinitePushforwardCoherent (stage 3; reviewer PASS; first push; landing 20261012T085403-L-49037 (proof); batch 20261012T085205; modules 1; new nodes 0)

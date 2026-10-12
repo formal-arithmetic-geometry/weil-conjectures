@@ -28,121 +28,95 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (f over an affine open).* Let $U=\\operatorname{Spec}R\\subseteq X$ be an affine open. Since $f$ is finite it is affine and $f^{-1}(U)$ is affine, $f^{-1}(U)=\\operatorname{Spec}B$ with $B=\\mathcal O_Y(f^{-1}U)$, and the ring map $\\varphi=f^\\sharp_U:R\\to B$ is finite: $B$ is a finitely generated $R$-module [def-weil-finite-integral-morphism]. (This is the definition applied to $U$.)",
+   "text": "Since f is finite, it is affine and locally of finite type. Mathlib LocallyOfFiniteType.isLocallyNoetherian f makes Y locally Noetherian. For every affine open U of X, hU.preimage f makes the inverse image affine, and f.finite_app U hU makes its coordinate ring finite over the base coordinate ring.",
    "uses": [
-    "def-weil-finite-integral-morphism"
+    "def-weil-finite-integral-morphism",
+    "pqf-def-locnoeth"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent, line 2455), proof: 'By Morphisms, Definition 01WH we see that f^{-1}(V)=Spec(B) with A -> B finite'"
+    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent), coherence part, with Lemma 01XZ (lemma-coherent-Noetherian)"
    }
   },
   {
-   "text": "*Step 2 (F is quasi-coherent of finite type).* $\\mathcal F$ is of finite type by the definition of coherent [pqf-def-coherent]. It is moreover of finite presentation: given $y\\in Y$, choose an open $W\\ni y$ and a surjection $\\Psi:\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$ (finite type); by the second condition of coherence $\\ker\\Psi$ is of finite type, so there are an open $y\\in V\\subseteq W$ and a surjection $\\mathcal O_V^{\\oplus m}\\to(\\ker\\Psi)|_V$; the composite $\\mathcal O_V^{\\oplus m}\\to\\mathcal O_V^{\\oplus n}\\xrightarrow{\\Psi|_V}\\mathcal F|_V\\to0$ is exact (exactness of sheaves restricted to $V$ is checked on the same sheaves), which is a finite presentation of $\\mathcal F$ near $y$ in the sense of [lem-weil-pbc-quasi-coherent-finite-type-affine]. Hence $\\mathcal F$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-finite-type-affine](0).",
+   "text": "Apply isCoherent_iff_isQuasicoherent_and_isFiniteType on Y to obtain quasi-coherence and finite type of F. The proved private helper isFiniteType_over restricts finite local generating families: pull the covering back along Over.forget U, and map each generating epimorphism by the slice pushforward, which preserves colimits and the unit. Its index type is unchanged, so remains finite.",
    "uses": [
     "pqf-def-coherent",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+    "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BW (lemma-coherent-finite-presentation, line 1596) and its proof; Lemma 01BO (lemma-finite-presentation-quasi-coherent) for quasi-coherence; cited in the proof of Cohomology of Schemes, Lemma 01XZ, (1)=>(2)"
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent), coherence part, with Lemma 01XZ (lemma-coherent-Noetherian)"
    }
   },
   {
-   "text": "*Step 3 (sections over the affine preimage).* With $U$, $B$ as in Step 1, put $M=\\mathcal F(f^{-1}U)$. The restriction $\\mathcal F|_{f^{-1}U}$ is quasi-coherent of finite type (Step 2; both properties are local, so they pass to the open subscheme $f^{-1}U$), and $f^{-1}U$ is affine with $\\mathcal O_Y(f^{-1}U)=B$; by [lem-weil-pbc-quasi-coherent-finite-type-affine](a) $M$ is a finitely generated $B$-module [def-weil-finitely-generated-module].",
+   "text": "Apply the affine finite-type criterion to F.over (f inverse U), obtaining Module.Finite over the inverse-image coordinate ring. The pushforward sections are definitionally the same abelian group, with the base-ring scalar action restricted along f.app U. Install that algebra and the scalar tower (its compatibility is rfl), and apply Module.Finite.trans with f.finite_app to prove finite base-ring sections.",
    "uses": [
     "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma 01PB (lemma-finite-type-module, line 2093), as used in the proof of Cohomology of Schemes, Lemma 01XZ ((2)=>(4)) and of Lemma 01Y6"
-   }
-  },
-  {
-   "text": "*Step 4 (the sections of f_*F over U are a finite R-module).* By definition of the direct image of modules along $f$ [def-pc-module-pullback], $(f_*\\mathcal F)(U)=\\mathcal F(f^{-1}U)=M$, with $R=\\mathcal O_X(U)$ acting through $\\varphi=f^\\sharp_U:R\\to B$. Since $B$ is a finitely generated $R$-module (Step 1) and $M$ a finitely generated $B$-module (Step 3), $M$ is a finitely generated $R$-module [lem-weil-pbc-finite-module-over-finite-algebra]. This is the second assertion of the statement.",
-   "uses": [
-    "def-pc-module-pullback",
     "lem-weil-pbc-finite-module-over-finite-algebra"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent, line 2455), proof: 'If M is a finite B-module, then M is also finite viewed as an A-module, see Algebra, Lemma 00GJ'"
+    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent), coherence part, with Lemma 01XZ (lemma-coherent-Noetherian)"
    }
   },
   {
-   "text": "*Step 5 (f_*F is quasi-coherent).* $f$ is affine [def-weil-finite-integral-morphism] and $\\mathcal F$ is quasi-coherent (Step 2), so $f_*\\mathcal F$ is a quasi-coherent $\\mathcal O_X$-module by [lem-weil-pbc-affine-pushforward-base-change](1).",
+   "text": "Use the already proved source-library declaration isQuasicoherent_pushforward_of_isAffineHom f F, carried by lem-pc-affine-morphism-hi, for quasi-coherence of the pushforward. The affine base-change theorem is not used.",
    "uses": [
     "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-affine-pushforward-base-change"
+    "lem-pc-affine-morphism-hi"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent, line 2455), proof (a finite morphism is affine, by definition); Schemes, Lemma 01LC for the quasi-coherence of the direct image"
+    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent), coherence part, with Lemma 01XZ (lemma-coherent-Noetherian)"
    }
   },
   {
-   "text": "*Step 6 (f_*F is of finite type).* Cover $X$ by affine opens $U_j$ [def-pc-scheme]. By Step 4, $(f_*\\mathcal F)(U_j)$ is a finitely generated $\\mathcal O_X(U_j)$-module for every $j$, and $f_*\\mathcal F$ is quasi-coherent (Step 5); hence $f_*\\mathcal F$ is of finite type by [lem-weil-pbc-quasi-coherent-finite-type-affine](c).",
+   "text": "Use the covering of all affine opens, with iSup_affineOpens_eq_top X. The affine criterion applied to the finite-section calculation gives finite type of the quasi-coherent direct image. Apply the coherence criterion on X and pair the result with rfl for the sections equality and the previously proved finiteness.",
    "uses": [
     "def-pc-scheme",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent, line 2455), proof, via Lemma 01XZ ((5)=>(2)): quasi-coherent with finite modules on an affine open covering"
-   }
-  },
-  {
-   "text": "*Step 7 (f_*F is coherent).* $X$ is locally Noetherian and $f_*\\mathcal F$ is quasi-coherent of finite type (Steps 5, 6), so $f_*\\mathcal F$ is coherent by [pqf-lem-coherent-ft-locnoeth]. With Step 4 this proves the statement for coherent $\\mathcal F$.",
-   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
     "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01XZ (lemma-coherent-Noetherian, line 2225), (2)=>(1), as invoked in the proof of Lemma 01Y6"
+    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent), coherence part, with Lemma 01XZ (lemma-coherent-Noetherian)"
    }
   },
   {
-   "text": "*Step 8 (the example F = O_Y is coherent).* $Y$ is locally Noetherian: by [pqf-def-locnoeth] choose an affine open covering $X=\\bigcup_iU_i$, $U_i=\\operatorname{Spec}R_i$ with $R_i$ Noetherian; by Step 1, $f^{-1}(U_i)=\\operatorname{Spec}B_i$ with $B_i$ a finitely generated $R_i$-module, so $B_i$ is a Noetherian ring [lem-weil-pbc-finite-algebra-noetherian], and the affine opens $f^{-1}(U_i)$ cover $Y$, so $Y$ is locally Noetherian [pqf-def-locnoeth]. The module $\\mathcal O_Y$ is of finite presentation (the sequence $\\mathcal O_Y^{\\oplus0}\\to\\mathcal O_Y^{\\oplus1}\\xrightarrow{\\mathrm{id}}\\mathcal O_Y\\to0$ is exact), hence quasi-coherent by [lem-weil-pbc-quasi-coherent-finite-type-affine](0), and of finite type (the identity $\\mathcal O_Y\\to\\mathcal O_Y$ is a surjection) [pqf-def-coherent]; so $\\mathcal O_Y$ is coherent by [pqf-lem-coherent-ft-locnoeth] on the locally Noetherian $Y$, and Steps 1-7 apply to $\\mathcal F=\\mathcal O_Y$.",
+   "text": "For the companion statement, Y is locally Noetherian by LocallyOfFiniteType.isLocallyNoetherian f. The unit module is invertible, hence finite locally free and finitely presented by the proved source-library instances. It is quasi-coherent and finite type. Apply the coherence criterion on Y.",
    "uses": [
-    "pqf-def-locnoeth",
     "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-def-locnoeth",
     "pqf-def-coherent",
     "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent, line 2455), proof: 'the assumptions imply that also X is locally Noetherian (see Morphisms, Lemma 01T6)'; Lemma 01XZ: 'In particular O_X is coherent'; literature/stacks-project/morphisms.tex Lemma 01T6 (lemma-finite-type-noetherian, line 2765): 'a ring of finite type over a Noetherian ring is Noetherian'"
+    "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent), coherence part, with Lemma 01XZ (lemma-coherent-Noetherian)"
    }
   }
  ],
  "proof_deps": [
   "def-weil-finite-integral-morphism",
-  "pqf-def-coherent",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "def-weil-finitely-generated-module",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-finite-module-over-finite-algebra",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "def-pc-scheme",
-  "pqf-lem-coherent-ft-locnoeth",
   "pqf-def-locnoeth",
-  "lem-weil-pbc-finite-algebra-noetherian"
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finite-module-over-finite-algebra",
+  "lem-pc-affine-morphism-hi",
+  "def-pc-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 01Y6 (lemma-finite-pushforward-coherent), proof, with Lemma 01XZ (lemma-coherent-Noetherian); Modules, Lemma 01BW (modules.tex); Properties, Lemma 01PB (properties.tex); Algebra, Lemma 00GJ"
+  "place": "Lemma 01Y6 (lemma-finite-pushforward-coherent), proof, with Lemma 01XZ; Lean implementation by X3 uses the proved affine-pushforward declaration of lem-pc-affine-morphism-hi and Mathlib LocallyOfFiniteType.isLocallyNoetherian."
  },
  "mathlib_searches": [
   {
@@ -232,5 +206,15 @@
   "group": "C1",
   "result": "pass",
   "note": "schemes f:Y->X; [IsFinite f]; [IsLocallyNoetherian X]; F:Y.Modules with RingedSpace.IsCoherent; conclusion IsCoherent of Scheme.Modules.pushforward f; every IsAffineOpen U: sections equality (rfl, Ab) and Module.Finite Γ(X,U) with action rfl-checked = restriction along f.app U; companion O_Y coherent for the 'for instance' clause; no extra Noetherian hyp, no let, universe u only"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T085403-L-49037",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
