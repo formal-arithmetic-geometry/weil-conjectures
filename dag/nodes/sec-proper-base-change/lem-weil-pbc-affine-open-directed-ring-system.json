@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Restrict D to the upper tail. Set W_i to the inverse image of W and F(i)=Γ(W_i). Restricted transition maps and functoriality of global sections give the covariant functor F. All W_i are affine. The identity transition at o identifies W_o with W, and affine spectrum presentations give e0 and each ei with the required commutation square.",
+   "text": "Set J={i | i₀ ≤ i} and o=(i₀, refl). The functor K:Jᵒᵖ → Over(op i₀) sends i to its order arrow; it is initial by Functor.initial_of_exists_of_isCofiltered, since every over-object is represented and the base preorder has subsingleton hom sets. Set E=K ⋙ opensDiagram D (op i₀) W and F=E.rightOp ⋙ Scheme.Γ. Every E(i) is affine by IsAffineOpen.preimage. Identify E(o) with W by Scheme.isoOfEq applied to D.map(id)⁻¹(W)=W. Compose its inverse with E(o).isoSpec to define e0. Scheme.isoSpec_hom_naturality gives every stage compatibility; the restrictions agree after composition with W.ι, which is mono.",
    "uses": [
     "pqf-def-affine-morphism",
     "lem-weil-pbc-affine-open-spec-points",
@@ -23,10 +23,9 @@
    "elementary": false
   },
   {
-   "text": "The opposite of the upper tail is equivalent to Over(op i₀). The restricted cone is limiting by the affine-open limit-cone lemma. Spec sends the opposite colimit cocone of F to another limiting cone. The unique comparison isomorphism of these cones supplies eL, and its leg at o supplies the required coprojection square. Nonemptiness follows from i₀; no quasi-compactness of the original schemes is used.",
+   "text": "Whisker opensCone D c (op i₀) W by K. Initiality and isLimitOpensCone prove this cone cE limiting. Scheme.isAffine_of_isLimit makes its vertex affine. Taking the right-opposite cone and using preservesColimit_Γ gives a colimit cocone on F with vertex Γ(cE.pt). Let eΓ be its coconePointUniqueUpToIso with the chosen colimit. Define eL=cE.pt.isoSpec followed by Spec.mapIso eΓ.symm.op. The comparison identity comp_coconePointUniqueUpToIso_inv at o identifies the composite of the coprojection and eΓ.inv with the global-sections map of cE.π(o). Applying Spec and Scheme.isoSpec_hom_naturality gives the limit compatibility; composition with the mono W.ι identifies its restricted leg with the required resLE. No nonemptiness of W is used.",
    "uses": [
     "lem-weil-pbc-limit-cone-affine-projections-opens",
-    "lem-weil-pbc-spec-colimit-limit",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false
@@ -37,14 +36,13 @@
   "lem-weil-pbc-affine-open-spec-points",
   "lem-weil-pbc-morphism-into-affine-scheme",
   "lem-weil-pbc-limit-cone-affine-projections-opens",
-  "lem-weil-pbc-spec-colimit-limit",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
   "place": "Tags 01YX (lemma-directed-inverse-system-has-limit) and 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)",
-  "note": "Source argument written out with the exact spectrum and projection compatibilities required by Lean."
+  "note": "Lean proof by M1: reindex the Mathlib affine-open cone using an initial upper-tail functor, and compare the global-sections colimit using preservesColimit_Γ. The original unit route is unchanged; this node is not a realized unit statement or step."
  },
  "mathlib_searches": [
   {
@@ -126,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T070557-L-3479785",
-  "kind": "interface",
+  "landing": "20261012T085303-L-24907",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
