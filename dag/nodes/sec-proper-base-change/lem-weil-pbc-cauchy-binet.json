@@ -31,72 +31,41 @@
  ],
  "proof": [
   {
-   "text": "(Expansion.) Write $[m]=\\{1,\\dots,m\\}$. By the definition of the determinant [def-weil-pbc-matrix-determinant] and of the product, $\\det(AB)=\\sum_{\\sigma\\in S_m}\\operatorname{sgn}(\\sigma)\\prod_{k=1}^m\\sum_{j=1}^n a_{\\sigma(k)j}b_{jk}$. Expanding the product of the $m$ sums by distributivity, $\\prod_{k=1}^m\\sum_{j=1}^n x_{k,j}=\\sum_{f:[m]\\to[n]}\\prod_{k=1}^m x_{k,f(k)}$ (one term for each choice of an index $f(k)$ in the $k$-th factor), so, exchanging the two finite sums and using commutativity of $R$, $$\\det(AB)=\\sum_{f:[m]\\to[n]}\\Big(\\prod_{k=1}^m b_{f(k)k}\\Big)\\sum_{\\sigma\\in S_m}\\operatorname{sgn}(\\sigma)\\prod_{k=1}^m a_{\\sigma(k)f(k)}=\\sum_{f:[m]\\to[n]}\\Big(\\prod_{k=1}^m b_{f(k)k}\\Big)\\det(A_f),$$ where $A_f$ is the $m\\times m$ matrix [def-weil-matrix] with $(A_f)_{ik}=a_{i,f(k)}$ (column $k$ of $A_f$ is column $f(k)$ of $A$), the last equality being the definition of $\\det(A_f)$.",
+   "text": "Take the standard basis b of R^n and its exterior-power basis e = b.exteriorPower m. Apply Basis.sum_repr to the wedge of the columns of B. By exteriorPower.basis_repr_apply and exteriorPower.ιMultiDual_apply_ιMulti, its S coordinate is det(B_S.transpose). The index type Set.powersetCard (Fin n) m is the same subtype as the statement.",
    "uses": [
+    "def-weil-matrix",
     "def-weil-pbc-matrix-determinant",
-    "def-weil-matrix"
+    "def-weil-submatrix"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
-   }
+   "elementary": true
   },
   {
-   "text": "(Non-injective $f$ contribute $0$.) If $f:[m]\\to[n]$ is not injective, there are $k\\ne l$ with $f(k)=f(l)$; then $(A_f)_{ik}=a_{i,f(k)}=a_{i,f(l)}=(A_f)_{il}$ for all $i$, so columns $k$ and $l$ of $A_f$ are equal and $\\det(A_f)=0$ by [lem-weil-pbc-det-repeated-column-zero]. Hence in step 1 the sum may be restricted to the injective maps $f:[m]\\to[n]$.",
+   "text": "Apply the linear form exteriorPower.alternatingMapToDual to the rows of A, viewed as coordinate projections composed with A.toLin'. The theorem alternatingMapToDual_apply_ιMulti identifies its value on the wedge of columns of B with det((AB).transpose), and on the S basis vector with det((A^S).transpose). Mapping the finite basis sum through this linear form and using det_transpose and commutativity proves the main equality.",
    "uses": [
-    "lem-weil-pbc-det-repeated-column-zero"
+    "def-weil-matrix",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-submatrix"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
-   }
+   "elementary": true
   },
   {
-   "text": "(Injective maps by image and permutation.) For $S\\subseteq[n]$ with $|S|=m$ write $S=\\{s_1<\\dots<s_m\\}$. The map $(S,\\tau)\\mapsto f$, $f(k)=s_{\\tau(k)}$, from pairs of such a subset $S$ and a permutation $\\tau\\in S_m$ to injective maps $[m]\\to[n]$ is a bijection: $f$ is injective as a composite of injective maps, with image $S$; conversely an injective $f$ has an image $S=f([m])$ with $|S|=m$, and $\\tau(k)$ is then forced to be the unique $t$ with $s_t=f(k)$, which defines a permutation $\\tau$ of $[m]$ because $f:[m]\\to S$ and $t\\mapsto s_t$, $[m]\\to S$, are bijections. (If $n<m$ there is no such $S$ and no injective $f$.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
-   }
-  },
-  {
-   "text": "(The term of $f=s\\circ\\tau$.) Let $S=\\{s_1<\\dots<s_m\\}$ and $f(k)=s_{\\tau(k)}$ as in step 3. By the definition of the submatrices [def-weil-submatrix] taken in increasing order, $(A^S)_{it}=a_{i,s_t}$ and $(B_S)_{tk}=b_{s_t,k}$ for $1\\le i,t,k\\le m$. Hence $(A_f)_{ik}=a_{i,s_{\\tau(k)}}=(A^S)_{i,\\tau(k)}$: $A_f$ is $A^S$ with its columns permuted by $\\tau$, so $\\det(A_f)=\\operatorname{sgn}(\\tau)\\det(A^S)$ by [lem-weil-pbc-det-column-permutation]. And $\\prod_k b_{f(k)k}=\\prod_k b_{s_{\\tau(k)},k}=\\prod_k(B_S)_{\\tau(k),k}$.",
-   "uses": [
-    "def-weil-submatrix",
-    "lem-weil-pbc-det-column-permutation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
-   }
-  },
-  {
-   "text": "(Conclusion.) By steps 1–4, $$\\det(AB)=\\sum_{|S|=m}\\sum_{\\tau\\in S_m}\\Big(\\prod_{k=1}^m(B_S)_{\\tau(k),k}\\Big)\\operatorname{sgn}(\\tau)\\det(A^S)=\\sum_{|S|=m}\\det(A^S)\\sum_{\\tau\\in S_m}\\operatorname{sgn}(\\tau)\\prod_{k=1}^m(B_S)_{\\tau(k),k}=\\sum_{|S|=m}\\det(A^S)\\det(B_S),$$ the last equality being the definition of $\\det(B_S)$ [def-weil-pbc-matrix-determinant]. For $n<m$ both the sum over injective $f$ and the sum over $S$ are empty and $\\det(AB)=0$; for $m=0$ the only $f$ is the empty map, the only $S$ is $\\emptyset$, and both sides are $1$.",
+   "text": "If n < m, card_le_univ rules out every subset index, so the sum is zero; the main equality gives det(AB)=0. If m=0, the empty determinant is one, and the main equality gives the sum equal to one.",
    "uses": [
     "def-weil-pbc-matrix-determinant"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-matrix-determinant",
   "def-weil-matrix",
-  "lem-weil-pbc-det-repeated-column-zero",
-  "def-weil-submatrix",
-  "lem-weil-pbc-det-column-permutation"
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-submatrix"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof; the proof (expansion of det(AB) by distributivity over maps f:[m]->[n], vanishing of the non-injective terms, grouping by image) is written by the agent, as Mathlib's own proof of Matrix.det_mul (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean lines 138-160) does in the square case"
+  "place": "Algebra, Section 00AR, item 0F0K (statement without proof)",
+  "note": "Second reader E3: direct exterior-power basis proof using Mathlib.LinearAlgebra.ExteriorPower.Basis and Pairing, and Matrix.ToLin; no new statements or holes. This changes only the argument below the unit level."
  },
  "mathlib_searches": [
   {
@@ -214,5 +183,15 @@
   "group": "F1",
   "result": "pass",
   "note": "CommRing R (Stacks ring); m n : ℕ unrestricted; A : Matrix (Fin m) (Fin n), B : Matrix (Fin n) (Fin m); AB = rectangular A * B; S over {S : Finset (Fin n) // card = m} once each; increasing order via orderEmbOfFin shared by A^S columns and B_S rows via Matrix.submatrix; Matrix.det; main equality + both parenthetical cases as conjuncts; no Mathlib Cauchy-Binet (grep binet in 3 Mathlib checkouts: only CrossProduct/GoldenRatio)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T225305-L-1803429",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
