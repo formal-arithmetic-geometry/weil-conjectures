@@ -7,7 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.ColimitSiteSections
+import Sheaf.CategoryTheory.FiniteCoverDegreeZeroColimit
+import Sheaf.CategoryTheory.ColimitSitesInverseImageDegreeZero
 
 /-! # Degree-zero descent on a filtered colimit of sites.
 
@@ -221,6 +222,43 @@ theorem cohomology_colimit_sites_degree_zero_descent
         ((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck 0).map
           (eqToHom (hSobj t.right).symm ≫ K.ι.app t.right)).app
             (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))) :
-    ∀ y : c.pt, ∃ (t : Under i) (x : D.obj t), (c.ι.app t).hom x = y := by sorry
+    ∀ y : c.pt, ∃ (t : Under i) (x : D.obj t), (c.ι.app t).hom x = y := by
+  have _ := @hpullbackMap
+  have _ := @he
+  have _ := @hφ
+  have _ := @hDmap
+  have hQfinite : Q ≤ Precoverage.finite V.pt := by
+    intro Y R hR
+    obtain ⟨j, X, Rj, h, hRj, heq⟩ := (hQ Y R).1 hR
+    subst h
+    subst R
+    have : Finite Rj.uncurry := hfinite j X Rj hRj
+    have hrange : (Rj.map (V.ι.app j).toFunctor).uncurry =
+        Set.range (fun a : Rj.uncurry ↦
+          (⟨(V.ι.app j).toFunctor.obj a.val.1,
+            (V.ι.app j).toFunctor.map a.val.2⟩ :
+              Σ Y : V.pt, Y ⟶ (V.ι.app j).toFunctor.obj X)) := by
+      ext ⟨Y, f⟩
+      constructor
+      · intro hf
+        cases hf with
+        | @of Y f h => exact ⟨⟨⟨Y, f⟩, h⟩, rfl⟩
+      · rintro ⟨a, ha⟩
+        rw [← ha]
+        exact Presieve.map.of a.property
+    rw [Precoverage.mem_finite_iff, hrange]
+    exact Set.finite_range _
+  intro y
+  obtain ⟨j, z, hz⟩ := finiteCover_degreeZero_colimit_representatives
+    Q hQfinite S K hK ((V.ι.app i).toFunctor.obj X_i) ((eqToHom hcpt).hom y)
+  obtain ⟨t, a, x, hx⟩ := colimitSites_inverseImage_degreeZero_representative
+    J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback
+    (fun j ↦ canonicalMap j 0) (fun j ↦ (hcanonicalMap j).2.2) eV heV
+    Fs φ S hSobj hSmap K i X_i D hDobj c hcpt hclegs j z
+  refine ⟨t, x, ?_⟩
+  rw [hx, hz]
+  change ((eqToHom hcpt ≫ eqToHom hcpt.symm).hom) y = y
+  rw [eqToHom_trans]
+  rfl
 
 end CategoryTheory

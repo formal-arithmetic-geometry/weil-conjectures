@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-inverse-image-degree-zero-representative",
+ "kind": "statement",
+ "title": "Finite-stage representatives for one inverse-image sheaf",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $P_j$ precoverages containing isomorphisms and stable under composition and base change, with pullbacks along covering arrows and finite covering presieves. Suppose transition functors preserve covers and their indicated pullbacks, are continuous, and their inverse images on sheaves of sets preserve finite limits and finite colimits. Let $V$ be a cocone whose object and arrow cocones are colimits, and let $Q$ on $V.pt$ consist exactly of images of the $P_j$-covers, allowing equality transport of their targets. Assume $Q$ has the same precoverage axioms; the cocone functors preserve covers and their pullbacks, are continuous, and their inverse images on sets preserve finite limits and finite colimits. These are the site notions of [def-weil-pbc-sites-and-cohomology], and the colimit notion of [def-weil-pbc-category-colimit]. Assume all abelian inverse images are additive and small Ext groups exist for the sheaf categories. For $a:j\\to k$, let $eV_a:f_j^{-1}\\cong f_k^{-1}f_a^{-1}$ be compatible with adjunction units. Let $A_j$ be abelian sheaves, $\\varphi_a:f_a^{-1}A_j\\to A_k$ coefficient maps, and $S:J\\to\\operatorname{Sh}(Q,\\mathrm{Ab})$ a functor with $S_j=f_j^{-1}A_j$ and $S(a)=f_k^{-1}(\\varphi_a)\\circ eV_a$. Let $\\gamma_j$ be degree-zero cohomology pullbacks which evaluate to adjunction units under Ext-zero and evaluation at the free representable generator. Let $K$ be any cocone on $S$; no colimit property is assumed. Fix $i\\in J$, $X_i\\in F_i$, and put $U=u_i(X_i)$. Let $D:\\operatorname{Under}(i)\\to\\mathrm{Ab}$ have $D_t=H^0(u_t(X_i),A_{t.right})$. Let $c$ be a cocone on $D$ with target identified with $H^0(U,K.pt)$ and legs given by $\\gamma_{t.right}$ followed by the coefficient map $K_{t.right}$. Endpoint identifications are by the stated object equalities, the cocone equation for $V$, and equality transport, as in the Lean signature. For every $j\\in J$ and $z\\in H^0(U,S_j)$ there exist $t\\in\\operatorname{Under}(i)$, an arrow $a:j\\to t.right$, and $x\\in D_t$ such that $c_t(x)$ is the image of $z$ under $H^0(U,K_j)$, transported to $c.pt$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A35",
+  "place": "Tag 0A35, equation-compute-pullback-to-limit and its arbitrary-object formula; Tag 09YN, reindexing of composable arrows in its proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Identify H^0 over each object with sections using Ext.addEquiv₀, sheafification, the free-forgetful adjunction, and Yoneda. The hypothesis on the canonical map identifies its evaluation with the adjunction unit.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse-image section formula of colimit-of-sites to A_j at U. Choose a common upper stage of i and j; descend the required objects, arrows and finite covering families through the object-and-arrow colimits. Reindex by further common refinements. For arbitrary specified V, compare with the constructed colimit category using the two universal properties; the induced equivalence preserves Q, since both coverages are exactly images of stage covers. This yields a representative in f_a^{-1}A_j over u_t(X_i).",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply phi_a to the representative. The identity hSmap and unit coherence heV identify its canonical image in S_t with the image of z under S(a). After applying K_t, the cocone equation K_j=S(a)≫K_t identifies their images in K.pt. Naturalness of the degree-zero section identification gives this same equation for H^0.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use hDobj to transport the class to D_t, then hclegs to identify its image under c_t. hcpt supplies the final endpoint transport. This argument never uses a colimit property of K.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-colimit-of-sites",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0A35",
+  "place": "Tag 0A35, equation-compute-pullback-to-limit and its arbitrary-object formula; Tag 09YN, reindexing of composable arrows in its proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree zero sheaf cohomology sections filtered colimit",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of an inverse image on a filtered colimit of sites descend to a finite stage",
+   "results": "Point.presheafFiber joint surjectivity, Plus.exists_rep and condensed-space comparisons do not assert inverse-image descent for a varying site.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Presieve.map|homEquiv₀|siteFilteredColimit_sections_isIso",
+   "results": "Presieve.map and Ext.homEquiv₀ supply finite-presieve and degree-zero ingredients, not the inner inverse-image section formula.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CohomologyColimitSitesDegreeZeroDescent",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Degree-zero continuity in the filtered-colimit-of-sites argument used in the restriction-acyclicity proof; Tag 0A35, equation-compute-pullback-to-limit and its arbitrary-object formula; Tag 09YN, reindexing of composable arrows in its proof",
+   "via": [
+    "lem-weil-pbc-colimit-sites-degree-zero-descent",
+    "lem-weil-pbc-colimit-sites-class-descent",
+    "lem-weil-pbc-cohomology-colimit-of-sites"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSitesInverseImageDegreeZero",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSitesInverseImageDegreeZero.lean",
+  "declaration": "CategoryTheory.colimitSites_inverseImage_degreeZero_representative",
+  "statement": "theorem colimitSites_inverseImage_degreeZero_representative\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderComposition]\n    [∀ j, (P j).IsStableUnderBaseChange] [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits\n      (sheafPullback (F.map a).toFunctor (Type u)\n        (P j).toGrothendieck (P k).toGrothendieck)]\n    [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits\n      (sheafPullback (F.map a).toFunctor (Type u)\n        (P j).toGrothendieck (P k).toGrothendieck)]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [Q.HasIsos] [Q.IsStableUnderComposition] [Q.IsStableUnderBaseChange] [Q.HasPullbacks]\n    (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n      ∃ (j : J) (X : F.obj j) (S : Presieve X)\n        (h : (V.ι.app j).toFunctor.obj X = Y),\n        S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)\n    (hVcover : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      R.map (V.ι.app j).toFunctor ∈ Q ((V.ι.app j).toFunctor.obj X))\n    (hVpullback : ∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →\n      ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (V.ι.app j).toFunctor)\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    [∀ j : J, PreservesFiniteLimits (sheafPullback (V.ι.app j).toFunctor (Type u)\n      (P j).toGrothendieck Q.toGrothendieck)]\n    [∀ j : J, PreservesFiniteColimits (sheafPullback (V.ι.app j).toFunctor (Type u)\n      (P j).toGrothendieck Q.toGrothendieck)]\n    [∀ (j k : J) (a : j ⟶ k),\n      (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck (P k).toGrothendieck).Additive]\n    [∀ j : J, (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n      (P j).toGrothendieck Q.toGrothendieck).Additive]\n    [∀ j : J, HasExt.{u} (Sheaf (P j).toGrothendieck AddCommGrpCat.{u})]\n    [HasExt.{u} (Sheaf Q.toGrothendieck AddCommGrpCat.{u})]\n    (canonicalMap : ∀ (j : J) (X : F.obj j)\n      (A : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}),\n      Sheaf.H' A 0 X ⟶ Sheaf.H' ((sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck Q.toGrothendieck).obj A) 0 ((V.ι.app j).toFunctor.obj X))\n    (hcanonicalMap : ∀ (j : J)\n      (X : F.obj j) (A : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (x : Sheaf.H' A 0 X),\n        ((Abelian.Ext.addEquiv₀ ((canonicalMap j X A).hom x)).hom.app (op ((V.ι.app\n          j).toFunctor.obj X))).hom\n            (((toSheafify Q.toGrothendieck\n              (yoneda.obj ((V.ι.app j).toFunctor.obj X) ⋙ AddCommGrpCat.free)).app (op ((V.ι.app\n                j).toFunctor.obj X))).hom\n                (FreeAbelianGroup.of (𝟙 ((V.ι.app j).toFunctor.obj X)))) =\n          (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u}\n            (P j).toGrothendieck Q.toGrothendieck).unit.app A).hom.app (op X)).hom\n            (((Abelian.Ext.addEquiv₀ x).hom.app (op X)).hom\n              (((toSheafify (P j).toGrothendieck\n                (yoneda.obj X ⋙ AddCommGrpCat.free)).app (op X)).hom\n                  (FreeAbelianGroup.of (𝟙 X)))))\n    (eV : ∀ {j k : J} (a : j ⟶ k),\n      (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck\n        Q.toGrothendieck) ≅ (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck (P k).toGrothendieck) ⋙ (sheafPullback (V.ι.app k).toFunctor\n        AddCommGrpCat.{u} (P k).toGrothendieck Q.toGrothendieck))\n    (heV : ∀ {j k : J} (a : j ⟶ k)\n      (G : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (X : F.obj j),\n      Arrow.mk (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X) ≫\n        ((eV a).hom.app G).hom.app (op ((V.ι.app j).toFunctor.obj X))) =\n      Arrow.mk (((sheafAdjunctionContinuous (F.map a).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck (P k).toGrothendieck).unit.app G).hom.app (op X) ≫\n        ((sheafAdjunctionContinuous (V.ι.app k).toFunctor AddCommGrpCat.{u} (P k).toGrothendieck\n          Q.toGrothendieck).unit.app ((sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P\n          j).toGrothendieck (P k).toGrothendieck).obj G)).hom.app (op ((F.map a).toFunctor.obj\n          X))))\n    (Fs : ∀ j : J, Sheaf (P j).toGrothendieck AddCommGrpCat.{u})\n    (φ : ∀ {j k : J} (a : j ⟶ k),\n      (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck (P k).toGrothendieck).obj (Fs j) ⟶ Fs k)\n    (S : J ⥤ Sheaf Q.toGrothendieck AddCommGrpCat.{u})\n    (hSobj : ∀ j : J, S.obj j =\n      (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck Q.toGrothendieck).obj (Fs j))\n    (hSmap : ∀ {j k : J} (a : j ⟶ k),\n      Arrow.mk (S.map a) = Arrow.mk ((eV a).hom.app (Fs j) ≫\n        (sheafPullback (V.ι.app k).toFunctor AddCommGrpCat.{u}\n          (P k).toGrothendieck Q.toGrothendieck).map (φ a)))\n    (K : Cocone S)\n    (i : J) (X_i : F.obj i)\n    (D : Under i ⥤ AddCommGrpCat.{u})\n    (hDobj : ∀ t : Under i,\n      D.obj t = Sheaf.H' (Fs t.right) 0 ((F.map t.hom).toFunctor.obj X_i))\n    (c : Cocone D)\n    (hcpt : c.pt = Sheaf.H' K.pt 0 ((V.ι.app i).toFunctor.obj X_i))\n    (hclegs : ∀ t : Under i, Arrow.mk (c.ι.app t) = Arrow.mk\n      (canonicalMap t.right ((F.map t.hom).toFunctor.obj X_i) (Fs t.right) ≫\n        ((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck 0).map\n          (eqToHom (hSobj t.right).symm ≫ K.ι.app t.right)).app\n            (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))) :\n    ∀ (j : J) (z : Sheaf.H' (S.obj j) 0 ((V.ι.app i).toFunctor.obj X_i)),\n      ∃ (t : Under i) (_a : j ⟶ t.right) (x : D.obj t),\n        (c.ι.app t).hom x = (eqToHom hcpt.symm).hom\n          (((((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck 0).map\n            (K.ι.app j)).app (op ((V.ι.app i).toFunctor.obj X_i))).hom) z)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35523",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35523",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
