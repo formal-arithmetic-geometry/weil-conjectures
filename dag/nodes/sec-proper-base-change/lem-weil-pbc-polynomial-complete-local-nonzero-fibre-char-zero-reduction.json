@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-polynomial-complete-local-nonzero-fibre-char-zero-reduction",
+ "kind": "statement",
+ "title": "Reduction of the nonzero characteristic-zero polynomial fibre",
+ "statement": "Let A be a Noetherian complete local domain with characteristic-zero fraction field, q a maximal ideal of A[X] over its maximal ideal, and nonzero r ≤ q a prime contracting to zero in A. There exist a characteristic-zero regular Noetherian complete local domain A₀ in the same universe and maximal/prime ideals q₀,r₀ of A₀[X], with q₀ over its maximal ideal, nonzero r₀ ≤ q₀ over zero, such that regularity of the completion fibre at r₀ implies geometric regularity of the original fibre at r. This asserts only the finite-subring transfer step, not regularity of the smaller fibre. The notions use [def-weil-pbc-noetherian-ring], [def-weil-pbc-adically-complete-ring], [def-weil-pbc-adic-completion], [def-weil-polynomial-ring], [def-weil-pbc-localization-at-prime], [def-weil-pbc-g-ring]. Regularity is in the sense of [def-weil-regular-scheme], applied to the affine spectrum.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Proposition 07PV, paragraphs 3--4"
+ },
+ "proof": [
+  {
+   "text": "Choose a regular complete local coefficient subring using 032D. Finiteness of the polynomial extension gives quasi-finiteness; integral contraction preserves the primes and nonzero contraction follows after passage to the finite fraction-field extension.",
+   "uses": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-finite-ring-map-quasi-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The characteristic-zero residue field has only trivial purely inseparable extensions. Noetherianity and regularity of the contracted fibre thus imply geometric regularity. Apply 07PP(1).",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-formal-fibre-quasi-finite-ascent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-formal-fibre-quasi-finite-ascent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Proposition 07PV, paragraphs 3--4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular polynomial formal fibre characteristic zero",
+   "results": "service unavailable in first-worker search",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing, AdicCompletion",
+   "results": "second reader: 0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsGeometricallyRegular|formalFiber|formalFibre",
+   "results": "msearch: 0 Mathlib hits; rg lean/: positive-characteristic PolynomialFormalFiberGeometric and DVRCompletionGenericFiber have different hypotheses; Mathlib regular polynomial localization lemma supplies the first regular-base step",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal fibres of polynomial rings over regular local rings in characteristic zero",
+   "results": "8 hits about smooth/etale loci and polynomial quotients; none states either split lemma",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZero",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-polynomial-complete-local-nonzero-fibre-char-zero",
+   "place": "reduction",
+   "via": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZeroReduction",
+  "file": "lean/Sheaf/RingTheory/PolynomialCompleteLocalNonzeroFibreCharZeroReduction.lean",
+  "declaration": "Polynomial.completeLocalNonzeroFibreCharZero_reduction",
+  "statement": "theorem completeLocalNonzeroFibreCharZero_reduction\n    (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]\n    [IsAdicComplete (IsLocalRing.maximalIdeal A) A]\n    (q : Ideal (Polynomial A)) [q.IsMaximal]\n    (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A)\n    [CharZero (Localization.AtPrime (⊥ : Ideal A))]\n    (r : Ideal (Polynomial A)) [r.IsPrime] (hrq : r ≤ q) (hr : r ≠ ⊥)\n    (hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥) :\n    ∃ (A₀ : Type u) (_ : CommRing A₀) (_ : IsDomain A₀) (_ : IsNoetherianRing A₀)\n      (_ : IsRegularLocalRing A₀) (_ : CharZero A₀)\n      (_ : IsLocalRing A₀) (_ : IsAdicComplete (IsLocalRing.maximalIdeal A₀) A₀)\n      (q₀ r₀ : Ideal (Polynomial A₀)) (_ : q₀.IsMaximal) (_ : r₀.IsPrime),\n      q₀.comap (Polynomial.C : A₀ →+* Polynomial A₀) = IsLocalRing.maximalIdeal A₀ ∧\n      r₀ ≤ q₀ ∧ r₀ ≠ ⊥ ∧\n      r₀.comap (Polynomial.C : A₀ →+* Polynomial A₀) = ⊥ ∧\n      (IsRegularRing (r₀.Fiber (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q₀))\n          (Localization.AtPrime q₀))) →\n       Algebra.IsGeometricallyRegular r.ResidueField\n        (r.Fiber (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))\n          (Localization.AtPrime q))))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-g-ring",
+  "def-weil-regular-scheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T115125-L-881367",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T115125-L-881367",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

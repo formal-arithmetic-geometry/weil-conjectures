@@ -9,15 +9,8 @@ public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Sheaf.RingTheory.GRing
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
-import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
-import Sheaf.RingTheory.HypersurfaceDerivationRegular
-import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import Sheaf.RingTheory.PolynomialRegularBaseFormalFibre
+import Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZeroReduction
 
 /-!
 # Nonzero polynomial formal fibres in characteristic zero
@@ -68,6 +61,18 @@ theorem completeLocalNonzeroFibreCharZero
     (hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥) :
     Algebra.IsGeometricallyRegular r.ResidueField
       (r.Fiber (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
-        (Localization.AtPrime q))) := by sorry
+        (Localization.AtPrime q))) := by
+  obtain ⟨A₀, hA₀, hdom, hnoeth, hreg, hchar, hlocal, hcomplete, q₀, r₀,
+    hq₀max, hr₀prime, hq₀, hr₀q₀, hr₀, hr₀A, htransfer⟩ :=
+    completeLocalNonzeroFibreCharZero_reduction A q hq r hrq hr hrA
+  let _ := hdom
+  let _ := hnoeth
+  let _ := hreg
+  let _ := hchar
+  let _ := hlocal
+  let _ := hcomplete
+  let _ := hq₀max
+  let _ := hr₀prime
+  exact htransfer (regularBase_formalFibre_isRegular A₀ q₀ hq₀ r₀ hr₀q₀ hr₀A)
 
 end Polynomial
