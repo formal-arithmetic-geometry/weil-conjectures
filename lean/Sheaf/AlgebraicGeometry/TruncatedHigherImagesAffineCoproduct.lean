@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent
+import Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitEvaluation
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine evaluation of coproducts of lower-truncated higher images
 
@@ -65,6 +68,14 @@ theorem truncated_higherImages_affine_coproduct
             ((DerivedCategory.TStructure.t.truncGE a).obj (E i).obj)))
           (Sigma.ι (fun i ↦ (schemeHigherDirectImage f q).obj
             ((DerivedCategory.TStructure.t.truncGE a).obj (E i).obj)))))) := by
-  sorry
+  let M : I → Y.Modules := fun i ↦ (schemeHigherDirectImage f q).obj
+    ((DerivedCategory.TStructure.t.truncGE a).obj (E i).obj)
+  have hM : ∀ i, (M i).IsQuasicoherent := fun i ↦
+    truncated_higherImage_isQuasicoherent f (E i) a q
+  let : ∀ i, (M i).IsQuasicoherent := hM
+  have hsum : (∐ M).IsQuasicoherent := Scheme.Modules.isQuasicoherent_sigma M
+  exact Scheme.Modules.quasiCoherentModuleColimitEvaluation Y (Discrete I)
+    (Discrete.functor M) (Cofan.mk (∐ M) (Sigma.ι M))
+    (coproductIsCoproduct M) (fun i ↦ hM i.as) hsum U hU
 
 end AlgebraicGeometry
