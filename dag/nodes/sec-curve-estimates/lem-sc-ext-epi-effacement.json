@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-ext-epi-effacement",
+ "kind": "statement",
+ "title": "Individual positive Ext classes are killed by an epimorphism",
+ "statement": "Let A be an abelian category with objects in Type u and morphisms in Type v, equipped with HasExt in universe w. For objects X,Y of A, q>0, and x in Ext^q(X,Y), there are G in A and an epimorphism g:G -> X such that Ext.mk0(g) composed with x is zero in Ext^q(G,Y). No enough-projectives or enough-injectives hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XU, first paragraph: represent an Ext class by a fraction; equivalently take the final epimorphism of its Yoneda extension. Read at https://stacks.math.columbia.edu/tag/06XU."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use HasDerivedCategory.standard and Ext.hom to view x as a derived morphism X[0] -> Y[q]. Transfer the shift through Q using Q.commShiftIso. DerivedCategory.right_fac writes it as inv(Q(s)) composed with Q(f), where s:L -> X[0] is a quasi-isomorphism and f:L -> Y[0][q].",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take G = L.cycles 0 and g = cyclesMap(s,0) followed by singleObjCyclesSelfIso.hom. HomologicalComplex.homology_pi_naturality identifies g with L.homology_pi(0), the isomorphism homologyMap(s,0), and singleObjHomologySelfIso.hom. The first is epic and the latter two are isomorphisms, so g is epic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The inclusion L.iCycles(0) yields l:G[0] -> L by HomologicalComplex.mkHomFromSingle, since iCycles_d is zero. Equality l s = g[0] is checked in degree zero by from_single_hom_ext and cyclesMap_i. The chain map l f is zero: its only potentially nonzero component has target the degree-zero component of Y[0][q], which is zero for q>0, as certified by isStrictlyLE_shift.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Under Ext.hom, pullback along g is Q(g[0]) followed by x.hom. Substitute g[0] = l s and the fraction for x, cancel Q(s) with its inverse, and obtain Q(l f), hence zero. Ext.ext transfers this equality back to Ext. All witnesses are local to the proof, so no data is defined by arbitrary unproved existence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XU, first paragraph; the direct degree-zero cycle argument is the specialization implemented by B2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every positive Ext class in an abelian category is killed by some epimorphism onto its first argument",
+   "results": "UNAVAILABLE: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "positive Ext class killed by pulling back along an epimorphism",
+   "results": "Eight hits, including Ext.precomp_mk0_injective_of_epi and Ext.contravariant_sequence_exact1/2/3; no existence of an effacing epimorphism.",
+   "verdict": "No exact match.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, Epi",
+   "results": "No hit: Epi was not recognized by the service.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*epi.*comp.*zero|exists_epi_comp_eq_zero; effac|exists.*epi in Mathlib/Algebra/Homology/DerivedCategory/Ext",
+   "results": "Three epiModSerre hits, concerning Serre localization rather than positive Ext. Ext files have no effacement lemma. Mathlib DerivedCategory/Fractions has right_fac, which is used in the proof. Blueprint searches for Ext effacement and 06XU found no imported blueprint node.",
+   "verdict": "No existing theorem for the full statement; proved from the fraction API.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "Local Ext killing: the final epimorphism of a positive Yoneda extension; proven by the fraction construction of 06XU.",
+   "via": [
+    "lem-sc-presheaf-free-ext-local-killing-witness",
+    "lem-sc-presheaf-cech-vanishing-criterion",
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.ExtEpiEffacement",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/ExtEpiEffacement.lean",
+  "declaration": "CategoryTheory.Abelian.Ext.exists_epi_comp_eq_zero",
+  "statement": "theorem exists_epi_comp_eq_zero\n    {A : Type u} [Category.{v} A] [Abelian A] [HasExt.{w} A]\n    {X Y : A} (q : ℕ) (hq : 0 < q) (x : Ext X Y q) :\n    ∃ (G : A) (g : G ⟶ X), Epi g ∧ (mk₀ g).comp x (Nat.zero_add q) = 0",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T173808-L-3290344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T173808-L-3290344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
