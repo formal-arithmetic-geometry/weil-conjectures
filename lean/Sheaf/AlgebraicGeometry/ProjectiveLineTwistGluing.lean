@@ -6,7 +6,7 @@ Authors: SHEAF group J3
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import Sheaf.Topology.GlueSheavesOfModules
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjectiveLineTwistData
 
 /-!
 # Gluing the two free modules defining a projective-line twist
@@ -46,6 +46,8 @@ all five fields of `TwistData`, for positive, zero, and negative degrees alike.
 (blueprint: lem-sc-p1-twist-gluing). -/
 theorem exists_twistData (k : Type u) [Field k] (d : ℤ) :
     ∃ L : (ProjectiveLine (Spec (.of k))).Modules,
-      Nonempty (TwistData (Spec (.of k)) d L) := by sorry
+      Nonempty (TwistData (Spec (.of k)) d L) := by
+  exact ⟨ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d,
+    nonempty_twistData_projectiveSpace k d⟩
 
 end AlgebraicGeometry.ProjectiveLine
