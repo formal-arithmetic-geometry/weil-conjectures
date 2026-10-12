@@ -37,6 +37,71 @@ universe u
 
 open CategoryTheory Limits Opposite ZeroObject
 
+namespace CochainComplex
+
+variable {C : Type*} [Category* C] [Abelian C] {Z : C} {K L : CochainComplex C ℕ}
+  (ι : (single₀ C).obj Z ⟶ K) [QuasiIso ι] [∀ n, Injective (L.X n)]
+
+/-- An auxiliary definition for `CochainComplex.homotopyZeroOfQuasiIso`. -/
+noncomputable def homotopyZeroOfQuasiIsoZero (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
+    K.X 1 ⟶ L.X 0 :=
+  (exact₀_of_quasiIso_single₀ ι).descToInjective (φ.f 0) comm
+
+@[reassoc (attr := simp)]
+lemma comp_homotopyZeroOfQuasiIsoZero (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
+    K.d 0 1 ≫ homotopyZeroOfQuasiIsoZero ι φ comm = φ.f 0 :=
+  (exact₀_of_quasiIso_single₀ ι).comp_descToInjective _ _
+
+/-- An auxiliary definition for `CochainComplex.homotopyZeroOfQuasiIso`. -/
+noncomputable def homotopyZeroOfQuasiIsoOne (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
+    K.X 2 ⟶ L.X 1 :=
+  (exact_succ_of_quasiIso_single₀ ι 0).descToInjective
+    (φ.f 1 - homotopyZeroOfQuasiIsoZero ι φ comm ≫ L.d 0 1)
+    (by rw [Preadditive.comp_sub, comp_homotopyZeroOfQuasiIsoZero_assoc, φ.comm, sub_self])
+
+@[reassoc (attr := simp)]
+lemma comp_homotopyZeroOfQuasiIsoOne (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
+    K.d 1 2 ≫ homotopyZeroOfQuasiIsoOne ι φ comm =
+      φ.f 1 - homotopyZeroOfQuasiIsoZero ι φ comm ≫ L.d 0 1 :=
+  (exact_succ_of_quasiIso_single₀ ι 0).comp_descToInjective _ _
+
+/-- An auxiliary definition for `CochainComplex.homotopyZeroOfQuasiIso`. -/
+noncomputable def homotopyZeroOfQuasiIsoSucc (φ : K ⟶ L) (n : ℕ) (g : K.X (n + 1) ⟶ L.X n)
+    (g' : K.X (n + 2) ⟶ L.X (n + 1))
+    (w : φ.f (n + 1) = K.d (n + 1) (n + 2) ≫ g' + g ≫ L.d n (n + 1)) :
+    K.X (n + 3) ⟶ L.X (n + 2) :=
+  (exact_succ_of_quasiIso_single₀ ι (n + 1)).descToInjective (φ.f (n + 2) - g' ≫ L.d _ _) (by
+    dsimp
+    rw [Preadditive.comp_sub, ← HomologicalComplex.Hom.comm, w, Preadditive.add_comp,
+      Category.assoc, Category.assoc, HomologicalComplex.d_comp_d, comp_zero, add_zero,
+      sub_self])
+
+@[reassoc (attr := simp)]
+lemma comp_homotopyZeroOfQuasiIsoSucc (φ : K ⟶ L) (n : ℕ) (g : K.X (n + 1) ⟶ L.X n)
+    (g' : K.X (n + 2) ⟶ L.X (n + 1))
+    (w : φ.f (n + 1) = K.d (n + 1) (n + 2) ≫ g' + g ≫ L.d n (n + 1)) :
+    K.d (n + 2) (n + 3) ≫ homotopyZeroOfQuasiIsoSucc ι φ n g g' w =
+      φ.f (n + 2) - g' ≫ L.d _ _ :=
+  (exact_succ_of_quasiIso_single₀ ι (n + 1)).comp_descToInjective _ _
+
+/-- A morphism from a resolution `ι : single₀ Z ⟶ K` to a complex of injective objects which
+vanishes on `Z` is homotopic to zero. This generalises `InjectiveResolution.descHomotopyZero`,
+where the source is an injective resolution and the target is exact. -/
+noncomputable def homotopyZeroOfQuasiIso (φ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = 0) :
+    Homotopy φ 0 :=
+  Homotopy.mkCoinductive _ (homotopyZeroOfQuasiIsoZero ι φ comm) (by simp)
+    (homotopyZeroOfQuasiIsoOne ι φ comm) (by simp) (fun n ⟨g, g', w⟩ ↦
+      ⟨homotopyZeroOfQuasiIsoSucc ι φ n g g' (by simp only [w, add_comm]), by simp⟩)
+
+/-- Two morphisms from a resolution `ι : single₀ Z ⟶ K` to a complex of injective objects which
+agree on `Z` are homotopic. -/
+noncomputable def homotopyOfQuasiIso (φ ψ : K ⟶ L) (comm : ι.f 0 ≫ φ.f 0 = ι.f 0 ≫ ψ.f 0) :
+    Homotopy φ ψ :=
+  Homotopy.equivSubZero.symm
+    (homotopyZeroOfQuasiIso ι (φ - ψ) (by simp [Preadditive.comp_sub, comm]))
+
+end CochainComplex
+
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
@@ -531,6 +596,67 @@ noncomputable def higherDirectImageIsoCechResolution [IsAffine S] [IsSeparated f
   have := quasiIso_cechResolutionι U ℱ hU'
   (pushforward f).rightDerivedObjIsoOfResolution (cechResolutionι U ℱ)
     (rightAcyclic_cechResolution_X f U hU ℱ) q
+
+/-- The augmentation of the Čech complex is natural in the module. -/
+@[reassoc]
+lemma cechResolutionAugmentation_naturality {ℱ 𝒢 : X.Modules} (φ : ℱ ⟶ 𝒢) :
+    cechResolutionAugmentation U ℱ ≫ ((cechResolutionFunctor U).map φ).f 0 =
+      φ ≫ cechResolutionAugmentation U 𝒢 := by
+  rw [cechResolutionAugmentation, cechResolutionAugmentation, Category.assoc]
+  erw [cechAugmentation_naturality]
+  rw [← Category.assoc, ← Category.assoc]
+  congr 1
+  exact ((restrictAdjunction (⊤ : X.Opens).ι).unit.naturality φ).symm
+
+/-- **The identification of `R^q f_* ℱ` with the cohomology of `f_* Č(U, ℱ)` is natural** in the
+quasi-coherent module `ℱ`. -/
+lemma higherDirectImageIsoCechResolution_hom_naturality [IsAffine S] [IsSeparated f] [Finite ι]
+    [HasInjectiveResolutions X.Modules] (hU : ∀ i, IsAffineOpen (U i)) (hU' : ⨆ i, U i = ⊤)
+    {ℱ 𝒢 : X.Modules} [ℱ.IsQuasicoherent] [𝒢.IsQuasicoherent] (φ : ℱ ⟶ 𝒢) (q : ℕ) :
+    (higherDirectImage f q).map φ ≫ (higherDirectImageIsoCechResolution f U hU hU' 𝒢 q).hom =
+      (higherDirectImageIsoCechResolution f U hU hU' ℱ q).hom ≫
+        HomologicalComplex.homologyMap
+          (((pushforward f).mapHomologicalComplex _).map ((cechResolutionFunctor U).map φ)) q := by
+  have := quasiIso_cechResolutionι U ℱ hU'
+  have := quasiIso_cechResolutionι U 𝒢 hU'
+  let cℱ := InjectiveResolution.descOfQuasiIso (𝟙 ℱ) (injectiveResolution ℱ)
+    (cechResolutionι U ℱ)
+  let c𝒢 := InjectiveResolution.descOfQuasiIso (𝟙 𝒢) (injectiveResolution 𝒢)
+    (cechResolutionι U 𝒢)
+  let d := InjectiveResolution.desc φ (injectiveResolution 𝒢) (injectiveResolution ℱ)
+  have hcℱ := InjectiveResolution.descOfQuasiIso_commutes (𝟙 ℱ) (injectiveResolution ℱ)
+    (cechResolutionι U ℱ)
+  have hc𝒢 := InjectiveResolution.descOfQuasiIso_commutes (𝟙 𝒢) (injectiveResolution 𝒢)
+    (cechResolutionι U 𝒢)
+  have hd := InjectiveResolution.desc_commutes φ (injectiveResolution 𝒢) (injectiveResolution ℱ)
+  have ho : Homotopy ((cechResolutionFunctor U).map φ ≫ c𝒢) (cℱ ≫ d) :=
+    CochainComplex.homotopyOfQuasiIso (cechResolutionι U ℱ) _ _ (by
+      have e1 := congrArg (fun h ↦ HomologicalComplex.Hom.f h 0) hc𝒢
+      have e2 := congrArg (fun h ↦ HomologicalComplex.Hom.f h 0) hcℱ
+      have e3 := congrArg (fun h ↦ HomologicalComplex.Hom.f h 0) hd
+      simp only [HomologicalComplex.comp_f, cechResolutionι_f_zero] at e1 e2 e3 ⊢
+      calc _ = φ ≫ cechResolutionAugmentation U 𝒢 ≫ c𝒢.f 0 := by
+            erw [cechResolutionAugmentation_naturality_assoc]
+        _ = φ ≫ (injectiveResolution 𝒢).ι.f 0 := by erw [e1]; simp
+        _ = (injectiveResolution ℱ).ι.f 0 ≫ d.f 0 := by erw [e3]; simp
+        _ = _ := by erw [reassoc_of% e2]; simp)
+  have : QuasiIso (((pushforward f).mapHomologicalComplex _).map c𝒢) :=
+    (pushforward f).quasiIso_map_of_rightAcyclic_nat c𝒢
+      (rightAcyclic_cechResolution_X f U hU 𝒢) fun _ ↦ Functor.rightAcyclic_of_injective _
+  have hH := ((pushforward f).mapHomotopy ho).homologyMap_eq q
+  rw [Functor.map_comp, Functor.map_comp, HomologicalComplex.homologyMap_comp,
+    HomologicalComplex.homologyMap_comp] at hH
+  have hnat := InjectiveResolution.isoRightDerivedObj_hom_naturality φ (injectiveResolution ℱ)
+    (injectiveResolution 𝒢) d (congrArg (fun h ↦ HomologicalComplex.Hom.f h 0) hd) (pushforward f) q
+  dsimp only [higherDirectImageIsoCechResolution, Functor.rightDerivedObjIsoOfResolution,
+    InjectiveResolution.isoRightDerivedObjOfQuasiIso]
+  rw [Iso.trans_hom, Iso.trans_hom, Iso.symm_hom, Iso.symm_hom, asIso_inv, asIso_inv,
+    ← cancel_mono (HomologicalComplex.homologyMap
+      (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).map c𝒢) q)]
+  simp only [Category.assoc]
+  erw [IsIso.inv_hom_id, Category.comp_id]
+  rw [hH, IsIso.inv_hom_id_assoc]
+  exact hnat
 
 end Acyclic
 
