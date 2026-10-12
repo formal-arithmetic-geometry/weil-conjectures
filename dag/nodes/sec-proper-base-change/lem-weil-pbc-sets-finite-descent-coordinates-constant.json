@@ -20,13 +20,26 @@
  ],
  "proof": [
   {
-   "text": "The germ-compatible inverse-image bijections identify each coordinate with the stalk of G. The composition-unit formula, transported through the fibre-product universal property, identifies the two comparison maps with the two projections on the set of pairs of geometric lifts. Applying compatibility and the bijectivity of the composite inverse-image germ map gives equality of the two chosen coordinates.",
+   "text": "Represent each base-stalk element by a section germ. Germ naturality and the inverse-image germ formula give a bijective coordinate map left inverse to restriction of the stalk unit at any geometric lift.",
    "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composable morphisms f and g, form Q by restricting the second stalk unit and then applying the stalk map of the composition isomorphism. Naturality of germs and the pullback pasting projection equations identify Q on section germs with the germ of etaleSetDescentComparison. The composition-unit formula gives Q R_f = R_(g f) on base-stalk elements. Injectivity of a coordinate map c satisfying c R_f = identity implies R_f c = identity, so any coordinate map d satisfying d R_(g f) = identity obeys d Q = c.",
+   "uses": [
     "lem-weil-pbc-sets-etale-inverse-image-composition-units",
     "def-pc-fibre-product"
    ],
    "elementary": false
+  },
+  {
+   "text": "For lifts t and v use the pullback universal property to obtain their common lift w to the fibre product. Transport both comparison sections to an abstract common composite k; equality of the transported sections follows by equality induction for a family of section sets, using the equality between the projection composites. Apply the composition calculation to both projections with the same coordinate d at w. Apply their common germ function to the equality of transported sections and compose the three equalities to obtain c_t(r_t([s])) = c_v(r_v([s])). In Lean use primitive casts privately, with the proved equality between eqToHom evaluation and cast, so the large inverse-image construction is not unfolded by categorical transport conversions.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -124,10 +137,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-86599",
-  "group": "J2",
+  "reviewer": "COMPILER",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T144120-L-2099121",
-  "kind": "interface"
+  "landing": "20261012T212207-L-1097174",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
