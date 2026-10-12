@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-ext-injective-positive-vanishing",
+ "kind": "statement",
+ "title": "Positive-degree Ext into an injective object vanishes",
+ "statement": "Let C be an abelian category with small Ext groups [def-sp-abelian], X an object, and I an injective object [def-sp-injective-resolutions]. For every n≥0, Extⁿ⁺¹(X,I) is a subsingleton, hence its only element is zero.",
+ "source": {
+  "document": "literature/stacks-project/derived-categories.tex",
+  "place": "Tag 015B (long exact sequence and injective effacement), Mathlib Ext API"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing Mathlib declaration CategoryTheory.Abelian.Ext.subsingleton_of_injective with the indicated specialization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Dimension shifting: vanishing of positive-degree stage cohomology of injective middle terms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Split coefficient identity idempotents before compatible injective embeddings and cokernels on filtered colimit sites",
+   "date": "2026-10-12",
+   "results": "Eight results including Limits.splitEpiOfIdempotentOfIsColimitCofork_section_; the others concern Dold-Kan splittings or Grothendieck presentability. No compatible site-system construction.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.subsingleton_of_injective",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Abelian.Ext.subsingleton_of_injective, Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives: Ext X I (n+1) is a subsingleton when I is injective.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "covariant_sequence_exact₃|subsingleton_of_injective|compatible_injective_system",
+   "date": "2026-10-12",
+   "results": "17 results including Ext.ExactSequences:159 and Ext.EnoughInjectives:110. They supply row exactness and positive-degree vanishing, not the site-system assembly.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible injective coefficient systems on filtered colimit sites, their short exact cokernels, cohomology boundary diagrams and Ext exactness",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error; no results assessed.",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.subsingleton_of_injective",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean",
+  "how": "Exact specialization of Ext.subsingleton_of_injective (lines 110–112): with [HasExt C], X,I and [Injective I], its type is Subsingleton (Ext X I (n+1))."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CohomologyColimitSitesExactLadder",
+  "group": "K2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Dimension shifting: vanishing of positive-degree stage cohomology of injective middle terms",
+   "via": [
+    "lem-weil-pbc-colimit-sites-exact-ladder",
+    "lem-weil-pbc-colimit-sites-eventual-vanishing",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives",
+  "declaration": "CategoryTheory.Abelian.Ext.subsingleton_of_injective",
+  "statement": "lemma subsingleton_of_injective [HasExt.{w} C]\n    (X I : C) [Injective I] (n : ℕ) : Subsingleton (Ext.{w} X I (n + 1))",
+  "branch": "mathlib",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2c2ad",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T144124-L-2100478",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2c2ad",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T144124-L-2100478",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, proofs, axioms, and direct importer matched against the stage-3 brief; all compiled successfully."
+ }
+}

@@ -7,11 +7,9 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.Paper.ColimitSitesInjectiveSystem
+import Sheaf.CategoryTheory.CohomologyColimitSitesShortExactSystems
+import Sheaf.CategoryTheory.CohomologyColimitSitesBoundaryDiagrams
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 
 /-! # Exact ladders before finite-stage correction
 
@@ -25,6 +23,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
+set_option maxHeartbeats 1000000 in
+-- The dependent continuation elaborates many sheaf-pullback and Ext endpoints.
+set_option linter.unusedVariables false in
+-- Proof binders in the original continuation are required witnesses, even when unused in result.
 /-- The exact cohomology ladder for a compatible injective embedding, before any
 finite-stage correction is chosen. The two returned coefficient systems are its cokernel
 and its injective middle term. Only stage surjectivity and target exactness are asserted;
@@ -319,6 +321,38 @@ theorem cohomology_colimit_sites_exact_ladder (n : ℕ)
         (∀ t : Under i, α.app t ≫ δ.app t = 0) ∧
         (∀ t : Under i, δ.app t ≫ c.ι.app t = d.ι.app t ≫ β) ∧
         (∀ t : Under i, α.app t ≫ d.ι.app t = b.ι.app t ≫ α₀) ∧
-        (∀ y : d.pt, β.hom y = 0 → ∃ w : b.pt, α₀.hom w = y) → result) → result := by sorry
+        (∀ y : d.pt, β.hom y = 0 → ∃ w : b.pt, α₀.hom w = y) → result) → result := by
+  intro result continuation
+  apply cohomology_colimit_sites_short_exact_systems
+    n J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback pullbackMap
+    hpullbackMap canonicalMap hcanonicalMap e he eV heV Fs φ hφ S hSobj hSmap K hK i X_i D hDobj
+    hDmap c hcpt hclegs
+    result
+  intro Rs ρ hρ T hTobj hTmap L hL Gs ψ hψ U hUobj hUmap M hM As θ hθ pA hpA hpAV hpAD γ π hG
+    hst hγ hπ f₀ g₀ w₀ h₀ hf₀ hg₀ hψid hρid
+  apply cohomology_colimit_sites_boundary_diagrams
+    n J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback pullbackMap
+    hpullbackMap canonicalMap hcanonicalMap e he eV heV Fs φ hφ S hSobj hSmap K hK i X_i D hDobj
+    hDmap c hcpt hclegs
+    Rs ρ hρ T hTobj hTmap L hL Gs ψ hψ U hUobj hUmap M hM As θ hθ pA hpA hpAV hpAD γ π hG hst hγ
+    hπ f₀ g₀ w₀ h₀ hf₀ hg₀ hψid hρid
+    result
+  intro E hEobj hEmap d hdpt hdlegs δ B hBobj hBmap b hbpt hblegs α α₀ β hrows
+  rcases hrows with ⟨hsurj, hzero, hdelta, halpha, hα₀, hβ⟩
+  apply continuation
+    Rs ρ hρ T hTobj hTmap L hL E hEobj hEmap d hdpt hdlegs δ Gs ψ hψ U hUobj hUmap M hM B hBobj
+    hBmap b hbpt hblegs α α₀ β
+  refine ⟨hsurj, hzero, hdelta, halpha, ?_⟩
+  intro y hy
+  have hy' : Abelian.Ext.comp ((eqToHom hdpt).hom y) h₀.extClass rfl = 0 := by
+    rw [← hβ y, hy, map_zero]
+  obtain ⟨z, hz⟩ := Abelian.Ext.covariant_sequence_exact₃ _ h₀
+    ((eqToHom hdpt).hom y) rfl hy'
+  refine ⟨(eqToHom hbpt.symm).hom z, ?_⟩
+  apply (ConcreteCategory.bijective_of_isIso (eqToHom hdpt)).1
+  rw [hα₀]
+  simpa only [← ConcreteCategory.comp_apply, eqToHom_trans, eqToHom_refl,
+    CategoryTheory.id_apply] using hz
+
 
 end CategoryTheory

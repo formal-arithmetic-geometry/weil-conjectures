@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-ext-covariant-boundary-exact",
+ "kind": "statement",
+ "title": "Ext kernel-image exactness at a covariant boundary",
+ "statement": "Let C be an abelian category with small Ext groups [def-sp-abelian], X an object, and S a short exact sequence 0→S.X₁→S.X₂→S.X₃→0 [def-sp-injective-resolutions]. For n≥0, if y∈Extⁿ(X,S.X₃) has Yoneda product zero with the extension class of S, then there exists z∈Extⁿ(X,S.X₂) whose product with the degree-zero class of S.g is y.",
+ "source": {
+  "document": "literature/stacks-project/derived-categories.tex",
+  "place": "Tag 015B (long exact sequence and injective effacement), Mathlib Ext API"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing Mathlib declaration CategoryTheory.Abelian.Ext.covariant_sequence_exact₃ with the indicated specialization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Dimension shifting: target-row exactness at the cokernel cohomology term"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Split coefficient identity idempotents before compatible injective embeddings and cokernels on filtered colimit sites",
+   "date": "2026-10-12",
+   "results": "Eight results including Limits.splitEpiOfIdempotentOfIsColimitCofork_section_; the others concern Dold-Kan splittings or Grothendieck presentability. No compatible site-system construction.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃ in Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences, exactly the kernel-image assertion at the boundary.",
+   "verdict": "exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "covariant_sequence_exact₃|subsingleton_of_injective|compatible_injective_system",
+   "date": "2026-10-12",
+   "results": "17 results including Ext.ExactSequences:159 and Ext.EnoughInjectives:110. They supply row exactness and positive-degree vanishing, not the site-system assembly.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible injective coefficient systems on filtered colimit sites, their short exact cokernels, cohomology boundary diagrams and Ext exactness",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error; no results assessed.",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean",
+  "how": "Exact specialization of covariant_sequence_exact₃ (lines 159–164): X, hS, x₃=y, n₁=n₀+1, hn₁=rfl. The result is ∃ x₂, x₂.comp (mk₀ S.g) (add_zero n₀) = x₃."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CohomologyColimitSitesExactLadder",
+  "group": "K2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Dimension shifting: target-row exactness at the cokernel cohomology term",
+   "via": [
+    "lem-weil-pbc-colimit-sites-exact-ladder",
+    "lem-weil-pbc-colimit-sites-eventual-vanishing",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences",
+  "declaration": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃",
+  "statement": "lemma covariant_sequence_exact₃ {n₀ : ℕ} (x₃ : Ext X S.X₃ n₀) {n₁ : ℕ} (hn₁ : n₀ + 1 = n₁)\n    (hx₃ : x₃.comp hS.extClass hn₁ = 0) :\n    ∃ (x₂ : Ext X S.X₂ n₀), x₂.comp (mk₀ S.g) (add_zero n₀) = x₃",
+  "branch": "mathlib",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2c2ad",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T144124-L-2100478",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2c2ad",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T144124-L-2100478",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, DAG nodes, report, proofs, axioms, and direct importer matched against the stage-3 brief; all compiled successfully."
+ }
+}
