@@ -455,6 +455,7 @@ lemma quasiIso_cokernelDesc_towerFunctor_self (n : ℕ) :
     ⟨cokernel.π _, by rw [← cancel_epi (cokernel.π _), reassoc_of% hπ, Category.comp_id], hπ⟩
   infer_instance
 
+set_option maxHeartbeats 1000000 in
 include hφ hψ₀ hsurj hker ht in
 lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
     QuasiIso (cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1))))
@@ -493,7 +494,39 @@ lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
   have hρ : (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1)))) ≫ ρ = 0 := by
     rw [Linear.smul_comp, Category.id_comp, ← Category.comp_id ρ, ← Linear.comp_smul, hzero,
       Limits.comp_zero]
-  sorry
+  have hS : (ShortComplex.mk _ _ hρ).Exact := by
+    refine HomologicalComplex.exact_of_degreewise_exact _ fun i ↦ ?_
+    refine (ShortComplex.exact_iff_of_iso ?_).1
+      ((D.exact ((M (n + k + 1)).P.X i)).map (Sheaf.restrictScalars J (ψ (n + k + 1))))
+    refine ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_
+    · simp only [Iso.refl_hom, Category.comp_id, Category.id_comp, ShortComplex.map_f]
+      change (Sheaf.restrictScalars J (ψ (n + k + 1))).map ((ψ (n + k + 1)) (ϖ ^ n) • 𝟙 ((M (n + k + 1)).P.X i)) = _
+      rw [Sheaf.restrictScalars_map_smul, CategoryTheory.Functor.map_id]
+      rfl
+    · simp only [Iso.refl_hom, Category.comp_id, Category.id_comp, ShortComplex.map_g]
+      rfl
+  have : Epi ρ := HomologicalComplex.epi_of_epi_f _ fun i ↦ by
+    haveI := D.epi_r ((M (n + k + 1)).P.X i)
+    exact (Sheaf.restrictScalars J (ψ (n + k + 1))).map_epi (D.r.app _)
+  let c := (cokernelIsCokernel _).coconePointUniqueUpToIso hS.gIsCokernel
+  have hc : cokernel.π _ ≫ c.hom = ρ :=
+    (cokernelIsCokernel _).comp_coconePointUniqueUpToIso_hom hS.gIsCokernel
+      WalkingParallelPair.one
+  have hT := towerFunctor_map_homOfLE φ ψ hψ L t hφ n k
+  rw [← hg] at hT
+  have heq : cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1))))
+      ((towerFunctor φ ψ hψ L t).map (homOfLE (Nat.le_add_right n (k + 1))).op) (by
+        rw [Linear.smul_comp, Category.id_comp, ← Category.comp_id
+          ((towerFunctor φ ψ hψ L t).map _), ← Linear.comp_smul,
+          smul_id_towerFunctor_obj φ ψ hψ hψ₀ L t, Limits.comp_zero]) =
+      c.hom ≫ ((Sheaf.restrictScalars J (ψ (n + k + 1))).mapHomologicalComplex (.up ℤ)).map
+        (((Sheaf.restrictScalars J (φ h)).mapHomologicalComplex (.up ℤ)).map g) ≫
+        (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J (ψ (n + k + 1))
+          (φ (Nat.le_add_right n (k + 1))) (ψ n) (hψ _).symm) (.up ℤ)).hom.app _ := by
+    refine coequalizer.hom_ext ?_
+    rw [cokernel.π_desc, reassoc_of% hc, hT, Functor.map_comp, Category.assoc]
+  rw [heq]
+  infer_instance
 
 end Normalized
 
