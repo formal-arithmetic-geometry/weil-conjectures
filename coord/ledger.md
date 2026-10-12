@@ -9498,3 +9498,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:51 L: merged deliver/H1/Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleGenericReflection (stage 3; reviewer PASS; first push; landing 20261012T205159-L-906846 (interface); batch 20261012T205157; modules 3; new nodes 2)
 - 20:52 L: merged deliver/N2/Sheaf.RingTheory.RegularSequenceSubsequencesPolynomial (stage 3; reviewer PASS; first push; landing 20261012T205200-L-907007 (proof); batch 20261012T205157; modules 1; new nodes 0)
 - 20:52 L: merged deliver/T2/Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex (stage 3; reviewer PASS; first push; landing 20261012T205200-L-907127 (proof); batch 20261012T205157; modules 1; new nodes 0)
+- 20:52 L: merged deliver/U1/Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalizationZero (stage 3; reviewer PASS; first push; landing 20261012T205200-L-907266 (interface); batch 20261012T205157; modules 6; new nodes 5)

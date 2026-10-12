@@ -17,34 +17,38 @@
  ],
  "proof": [
   {
-   "text": "Restrict L, F and s to the affine scheme Y=U.toScheme. Mathlib restrictFunctor, restrictFunctorIsoPullback and restrictAppIso identify sections and tensor powers naturally. Invertibility follows from pullback and restriction preserves quasi-coherence. Apply affine_section_localization on Y, and identify its nonvanishing open with the preimage of S using the stalk criterion.",
+   "text": "Compare cohomology fractions on U with ordinary section fractions using the direct sum of canonical degree-zero comparisons and the induced quotient equivalence, preserving fraction generators.",
    "uses": [
-    "lem-sc-affine-section-localization",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-sc-open-cohomology-fraction-zero-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The left exact sections functor has the natural comparison Functor.rightDerivedZeroIsoSelf. Its naturality in coefficient morphisms and the derived restriction natural transformation identify degree-zero cohomology and all transition maps with ordinary sections on U and U cap S. Take the direct sum over numerator degrees. The additive closure of section fraction relations is their module span as an additive subgroup: scalar multiplication sends the generator (n,b,t) to (n,b,r*t), so the additive closure is a submodule and contains the span; the reverse inclusion is immediate. Consequently the direct-sum equivalence descends to the section fraction quotient and preserves every generator.",
-   "uses": [],
+   "text": "Apply ordinary section localization over U to obtain an additive equivalence to sections of F on U cap S.",
+   "uses": [
+    "lem-sc-affine-open-section-fraction-localization"
+   ],
    "elementary": false
   },
   {
-   "text": "Compose the quotient equivalence with the affine section localization equivalence and the inverse degree-zero comparison on the target. The sections map of the tensor morphism is tmulSection with s^n. Naturality and the formula in affine_section_localization therefore give exactly the required equation for every numerator. Empty U and zero s require no separate nonzero or inhabited hypotheses.",
+   "text": "Compose with the inverse canonical degree-zero comparison on U cap S. Coefficient naturality transports multiplication by s^n; compatibility with open restriction transports the right side. The generator formula of the quotient comparison and injectivity of the target comparison prove the required equality.",
    "uses": [
-    "lem-sc-affine-section-localization"
+    "lem-sc-open-cohomology-zero-sections",
+    "lem-sc-open-cohomology-zero-restriction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-section-localization",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+  "lem-sc-open-cohomology-fraction-zero-comparison",
+  "lem-sc-affine-open-section-fraction-localization",
+  "lem-sc-open-cohomology-zero-sections",
+  "lem-sc-open-cohomology-zero-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex; properties.tex; cohomology.tex",
-  "place": "09MR affine-open step, with explicit Lean presentation/restriction glue for 01PW and 01E1"
+  "place": "09MR degree-zero case: explicit Lean naturality, quotient comparison, and transport of 01PW over the affine open"
  },
  "mathlib_searches": [
   {
@@ -122,9 +126,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T184316-L-4009102",
+  "landing": "20261012T205200-L-907266",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

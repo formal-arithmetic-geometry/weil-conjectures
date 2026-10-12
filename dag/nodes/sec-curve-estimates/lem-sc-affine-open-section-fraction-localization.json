@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-affine-open-section-fraction-localization",
+ "kind": "statement",
+ "title": "Ordinary section localization over an ambient affine open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $L$ an invertible module [def-sc-invertible-module], $F$ a quasi-coherent module [pqf-def-coherent], and $s\\in\\Gamma(X,L)$. Let $S$ be open with underlying set the nonvanishing locus of $s$ [def-weil-pbc-ample-invertible-module], and let $U$ be affine open. There is an additive equivalence $e:Q^\\Gamma(U)\\simeq\\Gamma(U\\cap S,F)$ [def-sc-open-section-fraction-presentation] such that $s^n e([n,t])=t|_{U\\cap S}$ for every $n\\geq0$ and $t\\in\\Gamma(U,F\\otimes L^{\\otimes n})$. Multiplication is the section map of the inverse right unitor followed by tensorPowSection.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex; properties.tex; cohomology.tex",
+  "place": "Tags 01PW (2), equation module-invert-s, and 09MR, affine-open paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-open-section-fraction-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Restrict L, F and s to Y = U.toScheme. Restriction agrees with pullback, hence preserves invertibility and quasi-coherence. Restriction of sections and tensor powers identifies all numerator groups and their transition maps.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine_section_localization on Y. The stalk criterion identifies its nonvanishing open with the preimage of S, whose image is U cap S. The additive closure of fraction generators equals the additive subgroup of their module span: each scalar multiple of a generator is the generator of the scalar multiple numerator. Thus the numerator comparison descends to the additive fraction quotients.",
+   "uses": [
+    "lem-sc-affine-section-localization",
+    "def-sc-open-section-fraction-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the quotient comparison and the section localization equivalence with restrictAppIso on the target. Naturality of restriction and the definition of tmulSection transport the fraction formula to the displayed coefficient-map identity. Empty U and zero s require no extra hypotheses.",
+   "uses": [
+    "lem-sc-affine-section-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-open-section-fraction-presentation",
+  "lem-sc-affine-section-localization",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex; properties.tex; cohomology.tex",
+  "place": "Tags 01PW (2), equation module-invert-s, and 09MR, affine-open paragraph; explicit Lean comparison and quotient argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Degree zero sheaf cohomology fractions compare with ordinary section fractions by naturality and additive quotient",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedZeroIsoSelf; QuotientAddGroup.congr",
+   "results": "Found canonical comparison in Mathlib.CategoryTheory.Abelian.RightDerived and quotient transport in Mathlib.GroupTheory.QuotientGroup.Defs. No open fraction localization theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive fractions of sections on an open subset with relations identifying numerator and denominator multiplied by a section power",
+   "results": "Eight hits about structure-sheaf fractions and ModuleCat.Tilde.isFraction; no tensor-power fraction presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openSectionFraction|rightDerivedZeroIsoSelf|toRightDerivedZero in Mathlib; DirectSum.map in Algebra/DirectSum/Basic.lean; QuotientAddGroup.congr in GroupTheory/QuotientGroup/Defs.lean",
+   "results": "rightDerivedZeroIsoSelf and toRightDerivedZero in RightDerived.lean; DirectSum.map and map_of in Basic.lean:471-474; congr and congr_mk in QuotientGroup/Defs.lean:396-414. No existing openSectionFraction.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalizationZero",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Cohomology of Schemes, Lemma 01XR proof: invoke Lemma 09MR to identify the localization of graded cohomology with cohomology on the principal affine open; 09MR affine-open base case: degree-zero comparison and vanishing; degree-zero section and quotient comparisons",
+   "via": [
+    "lem-sc-invert-s-cohomology-affine-open-zero",
+    "lem-sc-invert-s-cohomology",
+    "lem-sc-section-affine-open-kills-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenSectionFractionLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineOpen_sectionFraction_localization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineOpen_sectionFraction_localization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenSectionFractionLocalization.lean",
+  "statement": "theorem affineOpen_sectionFraction_localization (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (F : X.Modules) [F.IsQuasicoherent] (S : X.Opens) (hS : (S : Set X) = nonvanishingLocus L s) (U : X.Opens) (hU : IsAffineOpen U) : ∃ e : OpenSectionFractionPresentation L F s U ≃+ Γ(F, U ⊓ S), ∀ (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, U)), (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) : F ⟶ (F ⊗ L.tensorPow n : X.Modules)).app (U ⊓ S) (e (openSectionFraction L F s U n t)) = (F ⊗ L.tensorPow n).presheaf.map (homOfLE (inf_le_left : U ⊓ S ≤ U)).op t",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T205200-L-907266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T205200-L-907266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-open-cohomology-zero-sections",
+ "kind": "definition",
+ "title": "Canonical degree-zero cohomology comparison with open sections",
+ "statement": "For a ringed space $X$ and an open $U$, let $\\Gamma_U$ denote the additive open-sections functor and $H^0_U$ its zeroth right-derived functor [def-sc-open-module-cohomology]. Define the canonical natural isomorphism $c_U:H^0_U\\simeq\\Gamma_U$ as rightDerivedZeroIsoSelf. The functor $\\Gamma_U$ preserves finite limits. For every coefficient morphism $f:M\\to N$, $c_{U,N}H^0_U(f)=\\Gamma_U(f)c_{U,M}$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex; properties.tex; cohomology.tex",
+  "place": "Tag 01DZ, equation cohomology-modules and zeroth derived functor"
+ },
+ "stmt_deps": [
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the open-sections functor into forgetting a module sheaf, forming its underlying presheaf, and evaluation. The Mathlib limit-preservation instances compose to show preservation of finite limits.",
+   "uses": [
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing enough-injectives instance and Functor.rightDerivedZeroIsoSelf for this left exact additive functor. Its naturality square is the displayed coefficient identity.",
+   "uses": [
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-open-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex; properties.tex; cohomology.tex",
+  "place": "Tag 01DZ, equation cohomology-modules and zeroth derived functor; explicit Lean comparison and quotient argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Degree zero sheaf cohomology fractions compare with ordinary section fractions by naturality and additive quotient",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedZeroIsoSelf; QuotientAddGroup.congr",
+   "results": "Found canonical comparison in Mathlib.CategoryTheory.Abelian.RightDerived and quotient transport in Mathlib.GroupTheory.QuotientGroup.Defs. No open fraction localization theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive fractions of sections on an open subset with relations identifying numerator and denominator multiplied by a section power",
+   "results": "Eight hits about structure-sheaf fractions and ModuleCat.Tilde.isFraction; no tensor-power fraction presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openSectionFraction|rightDerivedZeroIsoSelf|toRightDerivedZero in Mathlib; DirectSum.map in Algebra/DirectSum/Basic.lean; QuotientAddGroup.congr in GroupTheory/QuotientGroup/Defs.lean",
+   "results": "rightDerivedZeroIsoSelf and toRightDerivedZero in RightDerived.lean; DirectSum.map and map_of in Basic.lean:471-474; congr and congr_mk in QuotientGroup/Defs.lean:396-414. No existing openSectionFraction.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenCohomologyLocalizationZero",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Cohomology of Schemes, Lemma 01XR proof: invoke Lemma 09MR to identify the localization of graded cohomology with cohomology on the principal affine open; 09MR affine-open base case: degree-zero comparison and vanishing; degree-zero section and quotient comparisons",
+   "via": [
+    "lem-sc-invert-s-cohomology-affine-open-zero",
+    "lem-sc-invert-s-cohomology",
+    "lem-sc-section-affine-open-kills-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenCohomologyZeroSections",
+  "declaration": "AlgebraicGeometry.RingedSpace.openCohomologyZeroSectionsIso",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.openModuleSections_preservesFiniteLimits",
+   "AlgebraicGeometry.RingedSpace.openCohomologyZeroSectionsIso",
+   "AlgebraicGeometry.RingedSpace.openCohomologyZeroSectionsIso_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCohomologyZeroSections.lean",
+  "statement": "def openCohomologyZeroSectionsIso (X : RingedSpace.{u}) (U : Opens X) : openModuleCohomology X 0 U ≅ openModuleSections X U",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T205200-L-907266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T205200-L-907266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

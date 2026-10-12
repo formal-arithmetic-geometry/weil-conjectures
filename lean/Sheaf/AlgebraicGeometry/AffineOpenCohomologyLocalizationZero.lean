@@ -8,7 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.AffineSectionLocalization
+import Sheaf.AlgebraicGeometry.OpenCohomologyFractionZeroComparison
+import Sheaf.AlgebraicGeometry.OpenCohomologyZeroRestriction
+import Sheaf.AlgebraicGeometry.AffineOpenSectionFractionLocalization
 
 /-! # Localization of cohomology on an ambient affine open
 
@@ -72,6 +74,29 @@ theorem affineOpen_cohomology_localization_zero
             (e (cohomologyFraction L F s 0 U n ξ)) =
           (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace 0
             (homOfLE (inf_le_left : U ⊓ S ≤ U))).app (F ⊗ L.tensorPow n : X.Modules) ξ := by
-  sorry
+  obtain ⟨q, hq⟩ := openCohomologyFraction_zero_comparison X L F s U
+  obtain ⟨a, ha⟩ := affineOpen_sectionFraction_localization X L s F S hS U hU
+  let c := ((RingedSpace.openCohomologyZeroSectionsIso X.toRingedSpace (U ⊓ S)).app
+    F).addCommGroupIsoToAddEquiv
+  refine ⟨(q.trans a).trans c.symm, ?_⟩
+  intro n ξ
+  let T : X.Modules := F ⊗ L.tensorPow n
+  let f : F ⟶ T := (ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n
+  apply ((RingedSpace.openCohomologyZeroSectionsIso X.toRingedSpace (U ⊓ S)).app
+    T).addCommGroupIsoToAddEquiv.injective
+  change (RingedSpace.openCohomologyZeroSectionsIso X.toRingedSpace (U ⊓ S)).hom.app T
+      ((RingedSpace.openModuleCohomology X.toRingedSpace 0 (U ⊓ S)).map f
+        (c.symm (a (q (cohomologyFraction L F s 0 U n ξ))))) = _
+  rw [show (RingedSpace.openCohomologyZeroSectionsIso X.toRingedSpace (U ⊓ S)).hom.app T
+      ((RingedSpace.openModuleCohomology X.toRingedSpace 0 (U ⊓ S)).map f
+        (c.symm (a (q (cohomologyFraction L F s 0 U n ξ))))) =
+        f.app (U ⊓ S) (c (c.symm (a (q (cohomologyFraction L F s 0 U n ξ))))) from
+    congrArg (fun g ↦ g (c.symm (a (q (cohomologyFraction L F s 0 U n ξ)))))
+      (RingedSpace.openCohomologyZeroSectionsIso_naturality
+      X.toRingedSpace (U ⊓ S) f)]
+  rw [c.apply_symm_apply, hq]
+  exact (ha n _).trans
+    (RingedSpace.openCohomologyZeroSectionsIso_restriction X.toRingedSpace
+      (homOfLE (inf_le_left : U ⊓ S ≤ U)) T ξ).symm
 
 end AlgebraicGeometry.Scheme.Modules
