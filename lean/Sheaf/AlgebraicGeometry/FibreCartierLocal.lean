@@ -6,7 +6,6 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
-import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 
 /-!
 # Local fibre criterion for relative effective Cartier divisors
@@ -51,6 +50,133 @@ theorem fibre_cartier_local {X S : Scheme.{u}} (π : X ⟶ S) [Flat π]
       ((J.comap (π.fiberι (π x))).comap ((π.fiberι (π x) ⁻¹ᵁ V).ι)).IsInvertible) :
     ∃ U : X.Opens, x ∈ U ∧
       (J.comap U.ι).IsRelativeEffectiveCartier (U.ι ≫ π) := by
-  sorry
+  have _hx := hx
+  obtain ⟨Vp, hxp, hp⟩ := hprincipal
+  obtain ⟨Vf, hxf, hf⟩ := hfibre
+  simp only [Scheme.Hom.fiberι, Scheme.Hom.fiber] at hf
+  obtain ⟨W, hW, hsW, -⟩ :=
+    exists_isAffineOpen_mem_and_subset (x := π x) (U := ⊤) trivial
+  obtain ⟨C, hxC, hCO, hJC⟩ := hp.exists_isPrincipal_le
+    (x := ⟨x, hxp⟩) (O := Vp.ι ⁻¹ᵁ (π ⁻¹ᵁ W ⊓ Vf)) ⟨hsW, hxf⟩
+  let U : X.affineOpens := ⟨Vp.ι ''ᵁ C.1, C.2.image_of_isOpenImmersion Vp.ι⟩
+  have hxU : x ∈ U.1 := ⟨⟨x, hxp⟩, hxC, rfl⟩
+  have hUW : U.1 ≤ π ⁻¹ᵁ W := by
+    rintro y ⟨z, hz, rfl⟩
+    exact (hCO hz).1
+  have hUV : U.1 ≤ Vf := by
+    rintro y ⟨z, hz, rfl⟩
+    exact (hCO hz).2
+  have hJU : (J.ideal U).IsPrincipal := by
+    rw [ideal_comap_of_isOpenImmersion] at hJC
+    let := hJC
+    exact Ideal.IsPrincipal.of_comap (Vp.ι.appIso C).inv.hom
+      (ConcreteCategory.bijective_of_isIso _).2 (J.ideal U)
+  have hU : IsAffineOpen U.1 := U.2
+  obtain ⟨q, hq⟩ : x ∈ Set.range hU.fromSpec := by
+    rw [IsAffineOpen.range_fromSpec]
+    exact hxU
+  have hsW' : ⊤ ≤ S.fromSpecResidueField (π x) ⁻¹ᵁ W := fun y _ ↦ by
+    rw [Scheme.Hom.mem_preimage, Scheme.fromSpecResidueField_apply]
+    exact hsW
+  let := (π.appLE W U hUW).hom.toAlgebra
+  let := ((S.fromSpecResidueField (π x)).appLE W ⊤ hsW').hom.toAlgebra
+  have : Module.Flat Γ(S, W) Γ(X, U) := π.flat_appLE hW U.2 hUW
+  have : Algebra.FinitePresentation Γ(S, W) Γ(X, U) :=
+    HasRingHomProperty.appLE (P := @LocallyOfFinitePresentation) π inferInstance ⟨W, hW⟩ U hUW
+  have hfib : ∀ P : Ideal (TensorProduct Γ(S, W) Γ(X, U)
+      Γ(Spec (S.residueField (π x)), ⊤)), P.IsPrime →
+      ∃ g ∉ P, (((J.ideal U).map Algebra.TensorProduct.includeLeftRingHom).map
+        (algebraMap (TensorProduct Γ(S, W) Γ(X, U)
+          Γ(Spec (S.residueField (π x)), ⊤))
+          (Localization.Away g))).IsRegularPrincipal := by
+    intro P _
+    obtain ⟨ι, hι, hιg, -, -⟩ :=
+      IsPullback.exists_isOpenImmersion_spec_tensorProduct
+        (IsPullback.of_hasPullback π (S.fromSpecResidueField (π x)))
+        hW U.2 hUW (isAffineOpen_top _) hsW'
+    have hrange : Set.range ι ⊆
+        Set.range ((Limits.pullback.fst π (S.fromSpecResidueField (π x)) ⁻¹ᵁ Vf).ι) := by
+      rintro y ⟨z, rfl⟩
+      rw [Scheme.Opens.range_ι]
+      change Limits.pullback.fst π (S.fromSpecResidueField (π x)) (ι z) ∈ Vf
+      rw [← Scheme.Hom.comp_apply, hιg, Scheme.Hom.comp_apply]
+      apply hUV
+      change hU.fromSpec _ ∈ U.1
+      exact (show Set.range hU.fromSpec ⊆ U.1 from le_of_eq hU.range_fromSpec) ⟨_, rfl⟩
+    let l := IsOpenImmersion.lift
+      ((Limits.pullback.fst π (S.fromSpecResidueField (π x)) ⁻¹ᵁ Vf).ι) ι hrange
+    have hl : IsOpenImmersion l := by
+      apply IsOpenImmersion.of_comp l
+        ((Limits.pullback.fst π (S.fromSpecResidueField (π x)) ⁻¹ᵁ Vf).ι)
+    have hinv := @IsInvertible.comap_of_isOpenImmersion _ _ _ hf l hl
+    rw [← comap_comp, IsOpenImmersion.lift_fac, ← comap_comp, hιg] at hinv
+    exact hinv.exists_isRegularPrincipal_map_localizationAway
+      (ideal_top_comap_specMap_ofHom_fromSpec J U _) P
+  have := q.isPrime
+  obtain ⟨g, hgq, hg⟩ := Algebra.exists_notMem_isRegularPrincipal_and_flat_of_fiber
+    (isField_residueField_sections _) (J.ideal U) hJU q.asIdeal
+    (ker_appLE_fromSpecResidueField π _ hW hsW' hU hUW q (by rw [hq])) hfib
+  let D := X.affineBasicOpen (U := U) g
+  have hDU : D.1 ≤ U.1 := X.basicOpen_le g
+  let := (X.presheaf.map (homOfLE hDU).op).hom.toAlgebra
+  have : IsLocalization.Away g Γ(X, D) :=
+    hU.isLocalization_of_eq_basicOpen g (homOfLE hDU) rfl
+  obtain ⟨h₁, h₂⟩ := hg Γ(X, D) Γ(J.subscheme, J.subschemeι ⁻¹ᵁ D)
+    (J.subschemeι.app D).hom (J.subschemeι_app_surjective D) (by
+      rw [ker_subschemeι_app, ← J.map_ideal hDU]
+      rfl)
+  have hxD : x ∈ D.1 := by
+    have : q ∈ hU.fromSpec ⁻¹ᵁ X.basicOpen g := by
+      rw [hU.fromSpec_preimage_basicOpen]
+      exact hgq
+    rw [← hq]
+    exact this
+  have hJD : (J.ideal D).IsRegularPrincipal := by
+    rw [← J.map_ideal hDU]
+    exact h₁
+  have hflat : ((J.subschemeι.app D.1).hom.comp
+      (π.appLE W D (hDU.trans hUW)).hom).Flat := by
+    rw [← Scheme.Hom.appLE_map π hUW (homOfLE hDU).op]
+    exact h₂
+  refine ⟨D.1, hxD, ?_, ?_⟩
+  · have : IsAffine D.1.toScheme := D.2
+    apply IsInvertible.of_isAffine
+    have hm := map_topIso_ideal_top_comap_ι J D
+    rw [← hm] at hJD
+    have ht := hJD.map_of_bijective
+      (f := D.1.topIso.inv.hom) (ConcreteCategory.bijective_of_isIso _)
+    rw [Ideal.map_map, ← CommRingCat.hom_comp, Iso.hom_inv_id,
+      CommRingCat.hom_id, Ideal.map_id] at ht
+    exact ht
+  · let O := J.subschemeι ⁻¹ᵁ D.1
+    have hO : IsAffineOpen O := D.2.preimage J.subschemeι
+    have hOW : O ≤ (J.subschemeι ≫ π) ⁻¹ᵁ W :=
+      J.subschemeι.preimage_mono (hDU.trans hUW)
+    let f := (J.subschemeι ≫ π).resLE W O hOW
+    have hflat' : ((J.subschemeι ≫ π).appLE W O hOW).hom.Flat := by
+      rwa [← Scheme.Hom.appLE_comp_appLE _ _ _ D.1 _ (hDU.trans hUW) le_rfl,
+        CommRingCat.hom_comp, ← Scheme.Hom.app_eq_appLE]
+    have : IsAffine O.toScheme := hO
+    have : IsAffine W.toScheme := hW
+    have : Flat f := by
+      rw [HasRingHomProperty.iff_of_isAffine (P := @Flat)]
+      dsimp [f, Scheme.Hom.appTop]
+      rw [Scheme.Hom.resLE_app_top, CommRingCat.hom_comp, CommRingCat.hom_comp]
+      exact ((RingHom.Flat.of_bijective
+        (ConcreteCategory.bijective_of_isIso W.topIso.hom)).comp hflat').comp
+        (RingHom.Flat.of_bijective (ConcreteCategory.bijective_of_isIso O.topIso.inv))
+    let e := J.comapIso D.1.ι ≪≫ Limits.pullbackSymmetry D.1.ι J.subschemeι ≪≫
+      pullbackRestrictIsoRestrict J.subschemeι D.1
+    have he : e.hom ≫ O.ι ≫ J.subschemeι = (J.comap D.1.ι).subschemeι ≫ D.1.ι := by
+      dsimp [e, O]
+      simp only [Category.assoc, pullbackRestrictIsoRestrict_hom_ι_assoc,
+        Limits.pullbackSymmetry_hom_comp_fst_assoc]
+      rw [← Limits.pullback.condition, ← Category.assoc, comapIso_hom_fst]
+    have hcomp : e.hom ≫ f ≫ W.ι =
+        (J.comap D.1.ι).subschemeι ≫ D.1.ι ≫ π := by
+      rw [Scheme.Hom.resLE_comp_ι, ← Category.assoc O.ι J.subschemeι π,
+        ← Category.assoc e.hom, he, Category.assoc]
+    rw [← hcomp]
+    infer_instance
 
 end AlgebraicGeometry.Scheme.IdealSheafData

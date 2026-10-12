@@ -10184,3 +10184,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:55 L: merged deliver/Q2/Sheaf.Paper.NormalLocusOpen (stage 3; reviewer PASS; first push; landing 20261012T235556-L-2201941 (interface); batch 20261012T235552; modules 2; new nodes 1)
 - 23:55 L: merged deliver/R1/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilized (stage 3; reviewer PASS; first push; landing 20261012T235557-L-2202051 (interface); batch 20261012T235552; modules 3; new nodes 2)
 - 23:55 L: merged deliver/R2/Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact (stage 3; reviewer PASS; first push; landing 20261012T235557-L-2202257 (proof); batch 20261012T235552; modules 1; new nodes 0)
+- 23:55 L: merged deliver/S3/Sheaf.AlgebraicGeometry.FibreCartierLocal (stage 3; reviewer PASS; first push; landing 20261012T235557-L-2202360 (proof); batch 20261012T235552; modules 1; new nodes 0)
