@@ -13,7 +13,7 @@
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tags 0BQ5 and 0EY3, proofs; relative base change and finite-presentation descent"
+  "place": "Tags 0BQ5 and 0EY3, stalk-neighbourhood limit and property descent; Lean assembly and returned-delivery repair by D3 using existing object and property descent declarations, Mathlib connected-limit pullback, open-restriction squares, morphism-property cancellation, and stability under base change."
  },
  "mathlib_searches": [
   {
@@ -93,16 +93,14 @@
  "statement": "Let S be a Noetherian quasi-separated scheme and c:C\\to S a quasi-compact quasi-separated morphism locally of finite presentation [def-weil-pbc-scheme-conventions, def-sbc-locally-finite-presentation]. Let s\\in S and let Q be a finite etale cover of C_s^{loc}=C\\times_S Spec O_{S,s} [def-sbc-normal-dominant-galois, def-pc-fibre-product]. There exist an open neighbourhood W of s, a finite etale cover R of C_W=c^{-1}(W), and a map l:C_s^{loc}\\to C_W such that l followed by the open inclusion equals the canonical projection C_s^{loc}\\to C, and l^*R is isomorphic to Q. No cover on another open and no comparison on an overlap are part of this conclusion.",
  "proof": [
   {
-   "text": "Express Spec O(S,s) as the inverse limit of affine open neighbourhoods of s. Base change by c. The stages C_W are qcqs because c is qcqs and W is affine. Inclusions between affine neighbourhoods are affine, so their base changes are affine. The resulting limit is the local family C_s^loc.",
+   "text": "Use the affine-neighbourhood limit theorem to obtain nonemptiness, directedness, compatible canonical projections, and unique factorization. Form the diagram of affine open subschemes, reindex by the opposite of its order dual, and build its limit cone from the unique-factorization clause. Base change by c; use Mathlib isLimitOfIsPullbackOfIsConnected and isPullback_pullback_map to prove the resulting cone is a limit. Its stages are qcqs by base change of the qcqs morphism c over affine schemes; its transition maps are affine by base change of maps between affine schemes.",
    "uses": [
-    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-    "lem-kun-fibre-product-limits",
-    "lem-weil-pbc-open-fibre-product"
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
    ],
    "elementary": false
   },
   {
-   "text": "The finite etale cover Q is quasi-compact, separated and locally of finite presentation. Descend the underlying scheme and its structure map to a finitely presented morphism over one stage C_W. Descend finiteness and etaleness to later stages and pass to a common refinement; both properties persist under base change.",
+   "text": "Apply exists_isPullback_of_finitePresentation in the main theorem to descend Q to an explicitly chosen finitely presented qcqs cartesian model at stage i. Apply the proved private exists_finiteEtale_refinement to this model: transport finiteness and etaleness to its limit pullback, apply the existing finite and etale property-descent declarations separately, and take a directed common refinement r with i <= r. Mathlib MorphismProperty.of_isPullback transports each property to r. Pullback lifting and IsPullback.of_right construct the refined cartesian model. This helper only refines a supplied model, rather than repeating the library's combined object-and-property descent theorem.",
    "uses": [
     "thm-pd-spreading-out",
     "lem-weil-pbc-descend-finite",
@@ -111,17 +109,15 @@
    "elementary": false
   },
   {
-   "text": "Package the finite etale morphism at that stage as R. The limit projection to C_W is l; its composite with the open inclusion is the projection to C by the cone equations. The cartesian comparison from descent is an isomorphism l^*R with Q in the finite etale category.",
+   "text": "Identify the selected pullback stage with the preimage open in C by Mathlib isPullback_morphismRestrict. Compose the limit projection with the inverse of this identification to construct l, and use pullback projection equations to prove the required composite equality. Transport the descended structure map across the same isomorphism, package it using Etale.mk, and lift the inverse cartesian comparison to the finite etale full subcategory using MorphismProperty.Over.isoMk and ObjectProperty.isoMk.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-kun-fibre-product-limits",
   "lem-weil-pbc-descend-etale",
   "lem-weil-pbc-descend-finite",
   "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-  "lem-weil-pbc-open-fibre-product",
   "thm-pd-spreading-out"
  ],
  "blueprint": {
@@ -163,10 +159,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T173908-L-3307011",
-  "kind": "interface",
+  "landing": "20261012T194106-L-453506",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
