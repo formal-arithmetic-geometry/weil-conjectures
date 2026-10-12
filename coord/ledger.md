@@ -7422,3 +7422,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/U3/Sheaf.AlgebraicGeometry.BaseChangeTargetStalkHigherImageComparison (stage 3; reviewer PASS; first push; landing 20261012T110321-L-622914 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/U3/Sheaf.AlgebraicGeometry.SerreSectionModuleTailFinite (stage 3; reviewer PASS; first push; landing 20261012T110322-L-623056 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/V1/Sheaf.AlgebraicGeometry.DerivedTensorUnitCompact (stage 3; reviewer PASS; first push; landing 20261012T110322-L-623155 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:03 L: merged deliver/V1/Sheaf.AlgebraicGeometry.FiniteFibreCokernelTensor (stage 3; reviewer PASS; first push; landing 20261012T110322-L-623254 (proof); batch 20261012T110249; modules 1; new nodes 0)
