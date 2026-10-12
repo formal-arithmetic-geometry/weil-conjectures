@@ -10,9 +10,8 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.Paper.ZariskiEtaleResolutionHomologyIndependent
+import Sheaf.Paper.ZariskiEtalePullbackMapExt
+import Sheaf.CategoryTheory.ExactFunctorResolutionCocycle
 
 
 /-! # Cocycle comparisons for object cohomology
@@ -29,6 +28,15 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 
+private noncomputable def resolutionSectionEquiv
+    {C : Type*} [Category.{u + 1} C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u + 1}] (V : C)
+    (A : Sheaf J AddCommGrpCat.{u + 1}) :
+    ((presheafToSheaf J AddCommGrpCat.{u + 1}).obj
+      (yoneda.obj V ⋙ AddCommGrpCat.free) ⟶ A) ≃ A.obj.obj (op V) :=
+  ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).homEquiv _ A).trans
+    (((AddCommGrpCat.adj.whiskerRight Cᵒᵖ).homEquiv (yoneda.obj V) A.obj).trans yonedaEquiv)
+
 /-- The characterized pullback-counit map sends a resolution cocycle to the
 section cocycle obtained by an augmented comparison.
 
@@ -36,25 +44,25 @@ Source: Stacks Project, Cohomology, Tag 01FB; Derived Categories, Tags 013P
 and 015B (4); Cohomology on Sites, Section 01FT and Tag 0730.
 (blueprint: lem-weil-pbc-zariski-etale-resolution-pullback-cocycle)
 
-Proof: The equality hsec identifies the evaluated cocycle of c with the image
-of the evaluated cocycle of a under b. To identify its Ext class, resolve an
-arbitrary Zariski sheaf A and its inverse
-image. Exactness of inverse image implies preservation of injectives by direct
-image. Extend the unit to a comparison of resolutions degree by degree.
-Two extensions are homotopic: factor their difference through successive
-differentials using exactness of the source and injectivity of the target.
-The horseshoe construction shows that the induced maps on cocycle classes
-commute with connecting homomorphisms, and lifts of coefficient morphisms
-show naturality. In degree zero the map is evaluation of the unit. Efface
-positive Ext in the coefficient variable by embedding A into an injective.
-The surjective connecting maps then determine the transformation inductively,
-so hfstar identifies it with fstar. For A = i_*F, compose with a counit lift
-into I. The triangle identity identifies its augmentation with i_* of I.ι.
-The difference from b is null-homotopic by the same extension argument.
-Consequently their cocycles differ by a coboundary and have the same Ext
-class. The counit coefficient map gives exactly the displayed composite.
-Degree zero has no incoming boundaries; zero sheaves and empty opens satisfy
-the same adjunction calculations. No homology equivalences are assumed. -/
+Proof: Construct t from the adjunction-unit section using the inverse of the
+sheafification, free-abelian and Yoneda adjunction equivalences. In degree zero,
+unit naturality identifies pullback with precomposition by t after exact-functor
+transport of Ext. In positive degree, embed the coefficient sheaf into an
+injective and use the surjective connecting map from its cokernel. Induction
+and the assumed boundary compatibility identify this family with fstar; this
+is zariski_etale_pullback_eq_mapExt.
+Transpose each component of the supplied b through the inverse-image/direct-image
+adjunction to obtain e : LR → I. Adjunction naturality gives the chain-map
+equations, and hb gives the counit augmentation. Naturality of the unit and
+evaluation of t show that t followed by L(a) followed by e evaluates to the
+section prescribed by hsec. The free-representable section equivalence is
+injective, so this composite equals c. The theorem
+exactFunctor_resolution_cocycle computes exact-functor transport followed by
+the counit using e. Reassociate the Ext products and use
+InjectiveResolution.mk₀_comp_extMk to precompose the cocycle with t. Substitute
+the equality with c to finish. No injective preservation by inverse image,
+homology equivalence, or choice of an arbitrary existence witness is used.
+Degree zero and zero sheaves require no additional hypotheses. -/
 theorem zariski_etale_resolution_pullback_cocycle
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)
@@ -136,4 +144,80 @@ theorem zariski_etale_resolution_pullback_cocycle
         ((Sheaf.cohomologyPresheafFunctor X.smallEtaleTopology q).map
           ((sheafAdjunctionContinuous i AddCommGrpCat.{u + 1}
             (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).counit.app F)).app
-              (op (i.obj V))).hom (R.extMk a (q + 1) rfl ha) = I.extMk c (q + 1) rfl hc := by sorry
+              (op (i.obj V))).hom (R.extMk a (q + 1) rfl ha) = I.extMk c (q + 1) rfl hc := by
+  classical
+  let J := Opens.grothendieckTopology X.carrier
+  let K := X.smallEtaleTopology
+  let L := sheafPullback i AddCommGrpCat.{u + 1} J K
+  let G := i.sheafPushforwardContinuous AddCommGrpCat.{u + 1} J K
+  let adj := sheafAdjunctionContinuous i AddCommGrpCat.{u + 1} J K
+  let : PreservesColimits L := adj.leftAdjoint_preservesColimits
+  let P := (presheafToSheaf J AddCommGrpCat.{u + 1}).obj
+    (yoneda.obj V ⋙ AddCommGrpCat.free)
+  let t := (resolutionSectionEquiv K (i.obj V) (L.obj P)).symm
+    (resolutionSectionEquiv J V (G.obj (L.obj P)) (adj.unit.app P))
+  have ht : resolutionSectionEquiv K (i.obj V) (L.obj P) t =
+      resolutionSectionEquiv J V (G.obj (L.obj P)) (adj.unit.app P) :=
+    Equiv.apply_symm_apply _ _
+  let e : (L.mapHomologicalComplex (ComplexShape.up ℕ)).obj R.cocomplex ⟶
+      I.cocomplex :=
+    { f := fun n ↦ (adj.homEquiv _ _).symm (b.f n)
+      comm' := by
+        intro n m _
+        change (adj.homEquiv _ _).symm (b.f n) ≫ I.cocomplex.d n m =
+          L.map (R.cocomplex.d n m) ≫ (adj.homEquiv _ _).symm (b.f m)
+        apply (adj.homEquiv _ _).injective
+        rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+        simpa using (b.comm n m) }
+  have he : L.map (R.ι.f 0) ≫ e.f 0 = adj.counit.app F ≫ I.ι.f 0 := by
+    change L.map (R.ι.f 0) ≫ (adj.homEquiv _ _).symm (b.f 0) =
+      adj.counit.app F ≫ I.ι.f 0
+    rw [← adj.homEquiv_naturality_left_symm, hb]
+    change (adj.homEquiv (G.obj F) (I.cocomplex.X 0)).symm (G.map (I.ι.f 0)) =
+      adj.counit.app F ≫ I.ι.f 0
+    have h := adj.homEquiv_naturality_right_symm (𝟙 (G.obj F)) (I.ι.f 0)
+    have hε := adj.homEquiv_symm_id F
+    change (adj.homEquiv (G.obj F) F).symm (𝟙 (G.obj F)) = adj.counit.app F at hε
+    rw [hε] at h
+    simpa only [Category.id_comp] using h
+  have hca : (L.map a ≫ e.f q) ≫ I.cocomplex.d q (q + 1) = 0 := by
+    have hecomm := e.comm q (q + 1)
+    change e.f q ≫ I.cocomplex.d q (q + 1) =
+      L.map (R.cocomplex.d q (q + 1)) ≫ e.f (q + 1) at hecomm
+    rw [Category.assoc, hecomm]
+    rw [← L.map_comp_assoc, ha, L.map_zero, zero_comp]
+  have hte : t ≫ L.map a ≫ e.f q = c := by
+    apply (resolutionSectionEquiv K (i.obj V) (I.cocomplex.X q)).injective
+    have hcompK (A B : Sheaf K AddCommGrpCat.{u + 1})
+        (u : (presheafToSheaf K AddCommGrpCat.{u + 1}).obj
+          (yoneda.obj (i.obj V) ⋙ AddCommGrpCat.free) ⟶ A) (f : A ⟶ B) :
+        resolutionSectionEquiv K (i.obj V) B (u ≫ f) =
+          (f.hom.app (op (i.obj V))).hom
+            (resolutionSectionEquiv K (i.obj V) A u) := by
+      rfl
+    have hcompJ (A B : Sheaf J AddCommGrpCat.{u + 1})
+        (u : (presheafToSheaf J AddCommGrpCat.{u + 1}).obj
+          (yoneda.obj V ⋙ AddCommGrpCat.free) ⟶ A) (f : A ⟶ B) :
+        resolutionSectionEquiv J V B (u ≫ f) =
+          (f.hom.app (op V)).hom (resolutionSectionEquiv J V A u) := by
+      rfl
+    have hn : a ≫ adj.unit.app (R.cocomplex.X q) =
+        adj.unit.app P ≫ G.map (L.map a) := adj.unit.naturality a
+    have hbe : adj.unit.app (R.cocomplex.X q) ≫ G.map (e.f q) = b.f q := by
+      exact (adj.homEquiv _ _).apply_symm_apply (b.f q)
+    have hn' : adj.unit.app P ≫ G.map (L.map a ≫ e.f q) = a ≫ b.f q := by
+      rw [G.map_comp, ← Category.assoc, ← hn, Category.assoc, hbe]
+    have hs := congrArg (resolutionSectionEquiv J V (G.obj (I.cocomplex.X q))) hn'
+    rw [hcompJ, hcompJ] at hs
+    rw [hcompK, ht]
+    exact hs.trans hsec
+  change (((Sheaf.cohomologyPresheafFunctor K q).map (adj.counit.app F)).app
+    (op (i.obj V))).hom ((fstar q V (G.obj F)).hom (R.extMk a (q + 1) rfl ha)) = _
+  rw [zariski_etale_pullback_eq_mapExt i hi fstar hfstar V t ht]
+  change ((Abelian.Ext.mk₀ t).comp
+    ((R.extMk a (q + 1) rfl ha).mapExactFunctor L) (zero_add q)).comp
+      (Abelian.Ext.mk₀ (adj.counit.app F)) (add_zero q) = _
+  rw [Abelian.Ext.comp_assoc_of_third_deg_zero]
+  rw [exactFunctor_resolution_cocycle L (adj.counit.app F) R I e he q a ha hca]
+  rw [I.mk₀_comp_extMk]
+  simp only [hte]

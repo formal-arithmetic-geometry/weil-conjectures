@@ -1,0 +1,175 @@
+{
+ "id": "lem-weil-pbc-exact-functor-resolution-cocycle",
+ "kind": "statement",
+ "title": "Exact-functor transport on resolution cocycles",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be abelian categories [def-sp-abelian] with Ext, and let $L:\\mathcal C\\to\\mathcal D$ be additive and preserve finite limits and colimits. Let $R$ be an injective resolution of $A\\in\\mathcal C$ and $I$ an injective resolution of $B\\in\\mathcal D$ [def-sp-injective-resolutions]. For a morphism $f:LA\\to B$, let $e:LR^\\bullet\\to I^\\bullet$ be a cochain map satisfying $L(\\iota_R^0)e^0=f\\iota_I^0$. Let $P\\in\\mathcal C$, $q\\ge0$, and $a:P\\to R^q$ with $ad_R^q=0$. Write $h_c$ for any proof that $L(a)e^q d_I^q=0$. Then $L_{\\mathrm{Ext}}(\\operatorname{extMk}_R(a))\\circ\\mathrm{Ext}^0(f)=\\operatorname{extMk}_I(L(a)e^q)$ in $\\mathrm{Ext}^q(LP,B)$. The statement makes no assumption that $L$ preserves injectives; it only uses the supplied comparison $e$.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+  "place": "derived.tex lemma-morphisms-lift, Tag 013P; cohomology.tex remark-explain-arrow, Tag 01FB. The sections were fetched into scratchpad and read. Ext specialization uses Mathlib InjectiveResolution.extMk_hom and Ext.mapExactFunctor_hom."
+ },
+ "proof": [
+  {
+   "text": "Extend R, I and e by zero to integer-indexed complexes. Construct the natural isomorphism between extending LR and applying L to the extension of R termwise: in nonnegative degree it is the identity through the extension component isomorphisms; in negative degree both objects are zero. Use the augmentation equality to show that the extended e composed with the mapped augmentation equals the single-complex map of f followed by the augmentation of I.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness of L preserves the augmentation quasi-isomorphism. Apply the derived-category localization and invert the augmentations in the preceding square. This identifies the resulting coefficient map with f, independently of any preservation of injectives by L.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The formula Mathlib InjectiveResolution.extMk_hom expresses the cocycle class as the localized shifted map from a single complex followed by the inverse augmentation. The formula Ext.mapExactFunctor_hom transports this expression through L. Naturality of the single-complex and shift isomorphisms, followed by the localized augmentation square, gives the class of L(a)e^q. Its closedness is hc. There are no negative boundaries in degree zero; zero objects satisfy the same computation.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+  "place": "derived.tex lemma-morphisms-lift, Tag 013P; cohomology.tex remark-explain-arrow, Tag 01FB. The sections were fetched into scratchpad and read. Ext specialization uses Mathlib InjectiveResolution.extMk_hom and Ext.mapExactFunctor_hom.",
+  "by": "agent",
+  "note": "Detailed specialization written by E2 from the cited sources; the original tex sections were read in the sandbox scratchpad."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extMk",
+   "date": "2026-10-12",
+   "results": "12 hits; CategoryTheory.InjectiveResolution.extMk_zero, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.extMk_eq_zero_iff, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.InjectiveResolution.neg_extMk, CategoryTheory.InjectiveResolution.sub_extMk",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "extMk_comp_mk₀|mkCoinductive|descToInjective",
+   "date": "2026-10-12",
+   "results": "17 hits; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/Exact.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean, Mathlib/Algebra/Homology/Homotopy.lean",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor sends Ext classes represented by resolution cocycles to their mapped cocycles in a comparison injective resolution",
+   "date": "2026-10-12",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExtAddHom_apply, CategoryTheory.Functor.mapExtLinearMap_apply, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.mapExtAddHom, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Functor.mapExtAddHom_coe",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-12",
+   "results": "12 hits; CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.id_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀, CategoryTheory.Abelian.Ext.mapExactFunctor_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_extClass, CategoryTheory.Abelian.Ext.comp_mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp, CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor_extClass|covariant_sequence_exact₁|eq_zero_of_injective",
+   "date": "2026-10-12",
+   "results": "0 hits; ",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functors transport Ext classes represented by cocycles in injective resolutions",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor_extClass|covariant_sequence_exact₁|eq_zero_of_injective",
+   "date": "2026-10-12",
+   "results": "25 hits; Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/FieldTheory/Minpoly/IsConjRoot.lean, Mathlib/FieldTheory/Minpoly/IsConjRoot.lean, Mathlib/FieldTheory/Minpoly/IsConjRoot.lean",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZariskiEtaleResolutionPullbackCocycle",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zariski-etale-resolution-map",
+   "place": "Pullback-counit identification in the resolution comparison: Exact-functor transport on resolution cocycles",
+   "via": [
+    "lem-weil-pbc-zariski-etale-resolution-pullback-cocycle",
+    "lem-zariski-etale-resolution-homology-data-exists",
+    "lem-weil-pbc-zariski-etale-resolution-comparison-exists",
+    "lem-weil-pbc-zariski-etale-resolution-map",
+    "lem-weil-pbc-zariski-etale-canonical-leray",
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "mathlib": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactFunctorResolutionCocycle",
+  "file": "lean/Sheaf/CategoryTheory/ExactFunctorResolutionCocycle.lean",
+  "declaration": "exactFunctor_resolution_cocycle",
+  "statement": "theorem exactFunctor_resolution_cocycle\n    {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]\n    [Abelian C] [Abelian D] [HasExt.{w₁} C] [HasExt.{w₂} D]\n    (L : C ⥤ D) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    {A : C} {B : D} (f : L.obj A ⟶ B)\n    (R : InjectiveResolution A) (I : InjectiveResolution B)\n    (e : (L.mapHomologicalComplex (ComplexShape.up ℕ)).obj R.cocomplex ⟶ I.cocomplex)\n    (he : L.map (R.ι.f 0) ≫ e.f 0 = f ≫ I.ι.f 0)\n    {P : C} (q : ℕ) (a : P ⟶ R.cocomplex.X q)\n    (ha : a ≫ R.cocomplex.d q (q + 1) = 0)\n    (hc : (L.map a ≫ e.f q) ≫ I.cocomplex.d q (q + 1) = 0) :\n    ((R.extMk a (q + 1) rfl ha).mapExactFunctor L).comp\n      (Abelian.Ext.mk₀ f) (add_zero q) = I.extMk (L.map a ≫ e.f q) (q + 1) rfl hc",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T225304-L-1803031",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T225304-L-1803031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -18,27 +18,25 @@
  },
  "proof": [
   {
-   "text": "Resolve an arbitrary A and LA. Since L is an additive left adjoint preserving finite limits, it is exact, so G preserves injectives. Extend the unit augmentation into the pushed resolution degree by degree, using injectivity and exactness of the source. Differences of two extensions factor through the differentials and extend into the next injective term; hence the extensions are homotopic.",
+   "text": "Construct t by applying the inverse of the actual identity-generator section equivalence to the section given by the adjunction unit on P(V). The new normalized-pullback theorem, proved by dimension shifting, identifies fstar with precomposition by Ext.mk₀ t after exact-functor transport.",
    "uses": [
-    "def-sp-injective-resolutions",
+    "lem-weil-pbc-zariski-etale-pullback-map-ext",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "The section maps induced by these unit comparisons are natural in A, because lifts of coefficient morphisms commute up to homotopy. The horseshoe construction makes them commute with the connecting maps, and their degree-zero value is the unit evaluated at the identity generator. Positive Ext with P(V) fixed is effaceable in the coefficient variable by embedding the coefficient into an injective. Use surjective connecting maps and induction on degree to conclude that the characterized family fstar is this family. The connecting class is the Yoneda product with the extension class, as in the site pullback theorem.",
+   "text": "Transpose every component of b through the adjunction to construct e: LR → I. Adjunction naturality proves commutation with differentials and turns hb into the counit augmentation condition. It also proves that t followed by L(a) followed by e evaluates to b applied to the section of a. By hsec and injectivity of the free-representable section equivalence this cocycle is c.",
    "uses": [
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-weil-pbc-site-cohomology-pullback",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exactFunctor_resolution_cocycle to a and e with the counit coefficient morphism. Reassociate Ext products and use Mathlib InjectiveResolution.mk₀_comp_extMk to precompose the represented cocycle by t. Substitute the cocycle equality from the previous step. The result is the displayed pullback-counit equality.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-resolution-cocycle",
     "def-sp-injective-resolutions"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take A=GF and postcompose the unit comparison with a comparison lifting the counit into I. The triangle identity gives the pushed augmentation of I. The homotopy argument for equally augmented comparisons identifies this composite with b on section cocycle classes. By hsec the image of the section of a is the section of c; the free-representable adjunction is bijective, so this is exactly c. Computing the coefficient counit map on Ext gives H(counit) fstar([a]) = [c]. In degree zero there are no incoming boundaries; the same adjunction computations cover zero sheaves and empty V.",
-   "uses": [
-    "lem-weil-pbc-zariski-etale-resolution-homology-independent",
-    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false
   }
@@ -46,15 +44,14 @@
  "proof_deps": [
   "def-sp-injective-resolutions",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-zariski-etale-resolution-homology-independent"
+  "lem-weil-pbc-exact-functor-resolution-cocycle",
+  "lem-weil-pbc-zariski-etale-pullback-map-ext"
  ],
  "proof_origin": {
-  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 01F8 and 01FB, cohomology.tex lemma-functoriality and remark-explain-arrow; Tags 013P and 015B (4), derived.tex lemma-morphisms-lift and lemma-higher-derived-functors; sites-cohomology.tex Section 01FT, equation-cohomology-object-site, and Tag 0730. The corresponding original .tex sections were fetched into the sandbox scratchpad and read.",
-  "note": "Cocycle-level specialization of the source comparison argument; the upper Lean proof constructs the transported cocycle by actual adjunction inversion."
+  "by": "agent",
+  "note": "E2 Ext-transport route: characterize pullback by dimension shifting, transpose b by the adjunction, and compute the resulting Ext class. No section-homology independence is needed. One general exact-functor cocycle computation remains a named theorem with sorry."
  },
  "mathlib_searches": [
   {
@@ -156,9 +153,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T173820-L-3293869",
+  "landing": "20261012T225304-L-1803031",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
