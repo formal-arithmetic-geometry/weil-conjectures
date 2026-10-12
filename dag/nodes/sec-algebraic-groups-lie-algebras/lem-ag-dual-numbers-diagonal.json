@@ -13,17 +13,17 @@
  ],
  "proof": [
   {
-   "text": "Locally on an affine open Spec R of the base, the product of dual-number thickenings is Spec A for A=R[epsilon,delta]/(epsilon^2,delta^2). Its underlying space and those of both axes and the diagonal identify with Spec R, since the nilpotent ideals lie in every prime. Equality on either axis therefore identifies the underlying maps of f and g. Around every image point restrict to an affine target open, and shrink the affine base open inside its inverse image.",
+   "text": "Construct on double dual numbers the natural ring homomorphism x ↦ x.fst + inr x.snd.fst. Multiplicativity follows from square-zero multiplication. Whisker this natural transformation with the structure presheaf to obtain d:S[epsilon] → S[epsilon][delta]. Units are detected by the constant coefficient, which proves the induced stalk maps are local. Both composites with the two projections are identities, as checked on sections.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The two ring maps now agree modulo (delta) and modulo (epsilon). For each element of the target coordinate ring their difference lies in the intersection of these ideals. The unique expansion a+b epsilon+c delta+d epsilon delta shows that this intersection is exactly (epsilon delta), even if R is nonreduced or has zero divisors.",
+   "text": "For f,g:S[epsilon][delta] → Y equal on the two axes, equality on the first axis identifies their underlying maps and their fst section maps. Equality on the second axis identifies their snd.fst section maps. For any ring map q from double to single dual numbers which is identity on each inclusion, q(inr(inr r))=0: express this mixed term as inl(inr r)*inr(inl 1), whose images multiply to zero. Expanding x shows q(x)=x.fst+inr x.snd.fst. Apply this formula to each structure-sheaf component of d to deduce equality of d followed by f and g. Scheme.Hom.ext concludes globally.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The diagonal ring map sends epsilon and delta to the same square-zero variable, so annihilates (epsilon delta). The diagonal comorphisms therefore agree. Scheme morphisms glue uniquely over an open cover of the source; hence the diagonal scheme maps, and thus the slice morphisms over S, agree globally.",
+   "text": "Let k:S[epsilon][delta] → D×_S D be the categorical lift of the two projections. Product extensionality and the dual-number identities identify the two axes followed by k with the categorical axes, and identify d followed by k with the categorical diagonal. Precompose the given f and g with k, apply the preceding sectionwise calculation using their axis equalities, and conclude equality in Over S by OverMorphism.ext.",
    "uses": [],
    "elementary": true
   }
@@ -32,7 +32,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0B2B",
-  "place": "Local arbitrary-base extension of the square-zero calculation; group-unit-law deduction"
+  "place": "Square-zero calculation of Lemma 33.16.2, implemented sectionwise for arbitrary bases by H3; comparison map replaces an affine product identification."
  },
  "mathlib_searches": [
   {
@@ -128,10 +128,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T042409-L-1815968",
-  "kind": "interface",
+  "landing": "20261012T085248-L-18802",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
