@@ -6793,3 +6793,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/D3/Sheaf.RingTheory.RegularBaseChange (stage 3; reviewer PASS; first push; landing 20261012T085226-L-9113 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/D3/Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber (stage 3; reviewer PASS; first push; landing 20261012T085227-L-9222 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/E1/Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechTerms (stage 3; reviewer PASS; first push; landing 20261012T085227-L-9332 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:52 L: merged deliver/E1/Sheaf.AlgebraicGeometry.CurveCohomologyConnectedReduction (stage 3; reviewer PASS; first push; landing 20261012T085227-L-9497 (interface); batch 20261012T085205; modules 3; new nodes 2)

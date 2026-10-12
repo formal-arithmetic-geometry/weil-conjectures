@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-finite-coproduct-constant-base-change-square",
+ "kind": "statement",
+ "title": "Base-change target coordinates and the constant-coefficient restriction square",
+ "statement": "Let k and K be fields with a k-algebra structure on K, let I be a finite type, let f:C -> Spec k, and let D_i be schemes with structure morphisms g_i and coprojections iota_i:D_i -> C whose composites with f equal g_i. Suppose C with the iota_i is a coproduct [lem-weil-pbc-scheme-coproduct-family]. For n,q natural numbers use the constant Z/n sheaves [def-weil-pbc-constant-sheaf] and canonical cohomology pullback [def-weil-pbc-cohomology-pullback]. Write p:C_K -> C and p_i:(D_i)_K -> D_i for the first projections. There is an equivalence eK from H^q(C_K,p^*Z/n_C) to the product of H^q((D_i)_K,p_i^*Z/n_D_i). For each x and i, the i-coordinate of eK(p^*x) equals p_i^* of the normalized restriction of x along iota_i, where normalization is Sheaf.H.map of the canonical inverse-image constant-sheaf isomorphism. No comparison bijectivity, smoothness, connectedness, algebraic closure or invertibility is assumed; n=0, n=1, q=0 and an empty index type are included.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
+  "place": "First step: finite clopen component reduction; Base-change target coordinates and the constant-coefficient restriction square"
+ },
+ "proof": [
+  {
+   "text": "The coprojections are clopen immersions with disjoint images covering C. Base change pulls back those images to a disjoint clopen cover of C_K by (D_i)_K. Apply the scheme coproduct universal property to this cover, identifying the component maps using iota_i followed by f = g_i. This includes the empty coproduct.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finiteCoproductCohomologyAssembly on C_K to the coefficient sheaf p^*Z/n_C. The pullback squares and upperStarComp identify its inverse images on (D_i)_K with p_i^*Z/n_D_i after the constant-sheaf restriction isomorphism. Compose each coordinate with the equivalence induced on H by that sheaf isomorphism, obtaining eK.",
+   "uses": [
+    "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use cohomologyPullbackFunctorial on the two paths around each square. Naturality in the sheaf and constantPullbackCompositionCoherence identify the resulting coefficient isomorphisms with the chosen inverse-image constant-sheaf comparison. Thus the i-coordinate of eK applied to p^*x is p_i^* applied to H.map of the constant-sheaf comparison on iota_i^*x, exactly the formula in Lean. This is an identity of maps and asserts no bijectivity of p^* or p_i^*.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-weil-pbc-constant-pullback-composition-coherence",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-constant-pullback-composition-coherence",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
+  "place": "First-step reduction, made explicit using the named library declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a finite disjoint union of schemes is a product compatible with base change and constant coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "Service unavailable; no result inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coproduct restriction maps on sheaf cohomology commute with base change and inverse image of constant sheaves",
+   "results": "8 hits: TopCat.Sheaf.interUnionPullbackConeLift_right, TopCat.Sheaf.interUnionPullbackConeLift_left, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_fst, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, AlgebraicGeometry.Scheme.coprodPresheafObjIso_hom_snd, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso",
+   "date": "2026-10-12",
+   "verdict": "No match: the hits concern restrictions on sections, rather than etale cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologyMap\", \"Bijective\"",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyMap|finiteCoproductCohomology",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No Mathlib declaration; the library has the generic finiteCoproductCohomologyAssembly and cohomologyPullbackFunctorial ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CurveCohomologyConnectedReduction",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Reduction to connected curves by the finite clopen decomposition, before the connected-curve estimate",
+   "via": [
+    "lem-sc-curve-cohomology-connected-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoproductConstantBaseChangeSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoproductConstantBaseChangeSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteCoproductConstantBaseChangeSquare",
+  "statement": "theorem finiteCoproductConstantBaseChangeSquare\n    {k K : Type u} [Field k] [Field K] [Algebra k K]\n    {I : Type u} [Finite I] {C : Scheme.{u}} (D : I → Scheme.{u})\n    (f : C ⟶ Spec (.of k)) (g : ∀ i, D i ⟶ Spec (.of k))\n    (ι : ∀ i, D i ⟶ C) (hw : ∀ i, ι i ≫ f = g i)\n    (hc : IsColimit (Cofan.mk C ι)) (n q : ℕ) :\n    ∃ eK : Sheaf.H\n      ((upperStar AddCommGrpCat.{u + 1}\n        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj\n          (C.constantZMod n)) q ≃\n      ∀ i, Sheaf.H\n        ((upperStar AddCommGrpCat.{u + 1}\n          (pullback.fst (g i) (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj\n            ((D i).constantZMod n)) q,\n    ∀ (x : Sheaf.H (C.constantZMod n) q) (i : I),\n      eK (cohomologyMap\n        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n        (C.constantZMod n) q x) i =\n      cohomologyMap\n        (pullback.fst (g i) (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n        ((D i).constantZMod n) q\n        (Sheaf.H.map\n          ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (ι i)).hom.app\n            (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))) q\n          (cohomologyMap (ι i) (C.constantZMod n) q x))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T085227-L-9497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T085227-L-9497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

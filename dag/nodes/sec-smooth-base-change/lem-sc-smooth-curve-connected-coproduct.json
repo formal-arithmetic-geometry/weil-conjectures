@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-smooth-curve-connected-coproduct",
+ "kind": "statement",
+ "title": "Finite coproduct decomposition of a smooth relative-dimension-one curve",
+ "statement": "Let k be a field and f:C -> Spec k a quasi-compact separated smooth morphism of relative dimension one [def-sbc-smooth-morphisms]. There exist a finite index type I, schemes D_i, morphisms g_i:D_i -> Spec k and coprojections iota_i:D_i -> C, such that each g_i is a connected smooth curve [def-sc-curves], iota_i followed by f equals g_i, and C with these coprojections is a coproduct of the D_i [lem-weil-pbc-scheme-coproduct-family]. The index type is allowed to be empty, so this includes C empty. No algebraic closure or field extension is required.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-sc-curves",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
+  "place": "First step: finite clopen component reduction; Finite coproduct decomposition of a smooth relative-dimension-one curve"
+ },
+ "proof": [
+  {
+   "text": "SmoothOfRelativeDimension.smooth gives smoothness. Apply Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace; hence C is Noetherian. The proved upstream NoetherianSpace.locallyConnectedSpace supplies locally connectedness, and Mathlib gives a finite discrete type ConnectedComponents C. Its singleton preimages are clopen open subschemes U c.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set D c=(U c).toScheme, iota c=(U c).iota and g c=iota c followed by f. Mathlib gives separatedness, finite type and quasi-compactness, and smoothOfRelativeDimension_comp gives relative dimension one. connectedComponents_preimage_singleton and isConnected_connectedComponent give ConnectedSpace (U c). Apply the already proved upstream topologicalKrullDim_le_of_smoothOfRelativeDimension and topologicalKrullDim_eq_of_smoothOfRelativeDimension to g c. Their conclusions fill the IsConnectedCurve fields, without any unproved geometry lemma.",
+   "uses": [
+    "def-sc-curves",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Singleton preimages are pairwise disjoint and cover C. Mathlib nonempty_isColimit_cofanMk_of applied to the open immersions gives exactly the required coproduct universal property. If C is empty, the same proof uses the empty component type.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sc-curves",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
+  "place": "First-step reduction, made explicit using the named library declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact smooth scheme of relative dimension one over a field is a finite coproduct of connected smooth curves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "Service unavailable; no result inferred."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact smooth curve is a finite disjoint union of connected smooth curves",
+   "results": "8 hits: AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec, AlgebraicGeometry.instIsAffineCoprodScheme, AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.compactSpace_of_universallyClosed, AlgebraicGeometry.compactSpace_iff_exists, AlgebraicGeometry.instHasFiniteCoproductsScheme",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; generic scheme coproduct results."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConnectedComponents\", \"Finite\"",
+   "results": "4 hits: ConnectedComponents.exists_fun_isClopen_of_infinite, instFiniteConnectedComponentsOfLocallyConnectedSpaceOfCompactSpace, IsOpenMap.finite_connectedComponents_of_finite_preimage_singleton_of_connectedSpace, IsOpenMap.finite_connectedComponents_of_finite_preimage_singleton",
+   "date": "2026-10-12",
+   "verdict": "Finite components of a locally connected compact space are available; this does not identify the component structure maps as curves."
+  },
+  {
+   "tool": "grep",
+   "query": "ConnectedComponents|isColimit_cofanMk",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "date": "2026-10-12",
+   "verdict": "Mathlib supplies nonempty_isColimit_cofanMk_of; no complete smooth-curve decomposition theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CurveCohomologyConnectedReduction",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "Reduction to connected curves by the finite clopen decomposition, before the connected-curve estimate",
+   "via": [
+    "lem-sc-curve-cohomology-connected-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothCurveConnectedCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveConnectedCoproduct.lean",
+  "declaration": "AlgebraicGeometry.exists_smoothCurveConnectedCoproduct",
+  "statement": "theorem exists_smoothCurveConnectedCoproduct\n    {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    [SmoothOfRelativeDimension 1 f] [IsSeparated f] [QuasiCompact f] :\n    ∃ (I : Type u) (_ : Finite I) (D : I → Scheme.{u})\n      (g : ∀ i, D i ⟶ Spec (.of k)) (ι : ∀ i, D i ⟶ C),\n      (∀ i, IsConnectedCurve (g i) ∧ Smooth (g i)) ∧\n      (∀ i, ι i ≫ f = g i) ∧ Nonempty (IsColimit (Cofan.mk C ι))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T085227-L-9497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T085227-L-9497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

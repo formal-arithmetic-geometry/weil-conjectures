@@ -15,26 +15,33 @@
  },
  "proof": [
   {
-   "text": "Finite type over the field makes C Noetherian, smoothness makes C regular, and its connected components are finitely many integral clopen smooth connected curves of dimension one. Base change preserves the clopen decomposition and connectedness over the algebraically closed base.",
+   "text": "Use exists_smoothCurveConnectedCoproduct to obtain a finite coproduct of connected smooth curves with structure morphisms g_i. This step is fully proved from closed upstream and Mathlib theorems, including the empty case.",
    "uses": [
-    "def-sc-curves",
-    "lem-sc-base-change-curve"
+    "lem-sc-smooth-curve-connected-coproduct"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use the canonical finite-coproduct cohomology product isomorphisms on C and its base change. Naturality of cohomology pullback identifies the map with the product of the component maps. Supply the hypothesis h for each component, take the product of these bijections and conjugate by the product isomorphisms. An empty product gives the empty-curve case.",
+   "text": "Use finiteCoproductCohomologyAssembly on C. Transport every restriction cohomology group along the upperStarConstantSheafIso and explicitly prove the induced H.map functions are equivalences using H.map_comp_apply and H.map_id_apply. The product of these equivalences composed with assembly is bijective; Equiv.ofBijective gives e.",
    "uses": [
     "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use finiteCoproductConstantBaseChangeSquare for target product coordinates eK and its coordinate equation. Apply the given h separately to each g_i. For injectivity use component injectivity, the coordinate equation and injectivity of e. For surjectivity choose a lift for each coordinate of eK(y), lift the assembled tuple through e.symm, then use the coordinate equation and injectivity of eK. This Lean proof also handles an empty index type.",
+   "uses": [
+    "lem-sc-finite-coproduct-constant-base-change-square",
     "def-weil-pbc-cohomology-pullback"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
-  "place": "First step: reduction by finite clopen connected components"
+  "place": "First-step component reduction; source assembly and final bijection argument proved explicitly in Lean"
  },
  "mathlib_searches": [
   {
@@ -96,9 +103,10 @@
   "date": "2026-10-12"
  },
  "proof_deps": [
-  "def-sc-curves",
-  "lem-sc-base-change-curve",
+  "lem-sc-smooth-curve-connected-coproduct",
   "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "def-weil-pbc-inverse-image",
+  "lem-sc-finite-coproduct-constant-base-change-square",
   "def-weil-pbc-cohomology-pullback"
  ],
  "tool_uses": [
@@ -120,8 +128,8 @@
   "reviewer": "COMPILER",
   "group": "E1",
   "result": "pass",
-  "landing": "20261012T040421-L-1646442",
+  "landing": "20261012T085227-L-9497",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
