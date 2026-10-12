@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-hom-complex-sections-cochains-comm",
+ "kind": "lemma",
+ "title": "Section cochain identifications respect the Hom differential",
+ "statement": "For a ringed site [def-pur-localized-ringed-site], commutative ring sheaf R, object U and arbitrary module-sheaf cochain complexes L,I [def-pc-cochain-complex-modules], let S be sections at U of their sheaf Hom complex [def-pur-hom-complex], res restriction to U and π its chosen projections. Suppose additive equivalences e_n from S.X n to external degree-n cochains are given, and each component at p,q with p+n=q and localized W equals the evaluated projection π(L,I,n,p,q) applied to the section. Then for all integers i,j with i+1=j and all x in S.X i, e_j(S.d i j x)=δ i j(e_i x), where δ is Mathlib external Hom differential. No cycles or homology conclusion is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, Section 21.34, construction and differential of Hom complexes; Tag 0A8Y, Equation 21.34.0.1"
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-pc-cochain-complex-modules",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "For p+j=q, use the differential projection identity of homComplex_exists with q′=p+i and p′=p+1. Evaluate at U and at W, preserving subtraction and integer multiplication. Internal Hom pre- and postcomposition become composition with the restricted complex differentials.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute the hypothesized component formulas for e_i and e_j. The external differential formula δ_v uses j.negOnePow on the second summand; from j=i+1 derive j.negOnePow=-i.negOnePow. Thus both component maps agree. Extensionality of module-sheaf morphisms and cochains concludes. At i=0 this is d_I f-f d_L; at i=-1 it is d_I f+f d_L, and zero complexes give zero on both sides.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of the degreewise product and differential arguments preceding Equation 21.34.0.1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sections of product internal Hom sheaves identify all external cochains and commute with differential",
+   "results": "sheafHomSectionsEquiv; SheafOfModules.unitHomEquiv component and composition lemmas; generic sheaf global-section naturality. No arbitrary-degree sheaf Hom complex comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact sheaf comparison found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.isLimitFanMkObjOfIsLimit",
+   "results": "Generic preservation of product fans; no identification of internal Hom sections with localized external cochains.",
+   "date": "2026-10-13",
+   "verdict": "The product preservation tool supplies one part of the argument."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex_sections_cochains|sections.*Cochain|Cochain.*sections",
+   "results": "No existing general degreewise section-cochain comparison in Sheaf or WeilConjectures; LocalizedHomComplexCycles gives only degree-zero cycles. Mathlib has δ_v for the external differential.",
+   "date": "2026-10-13",
+   "verdict": "Existing degree-zero lemmas do not give these degreewise statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sections of sheaf internal Hom complex identify localized external cochains and respect differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "δ_v|isLimitFanMkObjOfIsLimit|Cochain.mk|homologyAddEquiv in Mathlib HomComplex, HomComplexCohomology and Preserves/Shapes/Products",
+   "results": "Cochain.mk, δ_v, isLimitFanMkObjOfIsLimit, and homologyAddEquiv. These supply generic external cochains, differential expansion, preserved products and quotient transport; no sheaf-section comparison.",
+   "date": "2026-10-13",
+   "verdict": "Use the generic tools; the localized section identification is not present."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomComplexSectionsCanonicalComparison",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-hom-complex-sections-canonical-comparison",
+   "place": "Proof step 2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexSectionsCochainsComm",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexSectionsCochainsComm.lean",
+  "declaration": "CategoryTheory.homComplex_sections_cochains_comm",
+  "statement": "theorem homComplex_sections_cochains_comm\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{max u v}) (U : C)\n    (L I : CochainComplex\n      (SheafOfModules.{max u v}\n        ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R\n    let E := (SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙\n      forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n    letI := module_overFunctor_preservesZero R₀ U\n    let res := (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    let S := E.obj (homComplex (R := R) L I)\n    let π := Classical.choose (Classical.choose_spec\n      (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))\n    ∀ (e : ∀ n : ℤ, S.X n ≃+\n        CochainComplex.HomComplex.Cochain (res.obj L) (res.obj I) n),\n      (∀ (n : ℤ) (x : S.X n) (p q : ℤ) (hpq : p + n = q) (W : (Over U)ᵒᵖ),\n        ((e n x).v p q hpq).val.app W =\n          (((π L I n p q hpq).val.app (op U)) x).app W) →\n      ∀ (i j : ℤ), i + 1 = j → ∀ x : S.X i,\n        e j (S.d i j x) = CochainComplex.HomComplex.δ i j (e i x)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T203948-L-832141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T203948-L-832141",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

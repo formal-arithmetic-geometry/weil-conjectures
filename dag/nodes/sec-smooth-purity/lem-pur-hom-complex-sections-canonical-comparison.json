@@ -14,32 +14,32 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the product cone in homComplex_exists at U. The forgetful functor on module sheaves and evaluation preserve products, and the underlying abelian-group functor preserves them. Internal Hom sections at U are localized presheaf-module maps; since the objects are module sheaves these are exactly localized sheaf-module maps. Thus the product projections give an additive bijection from each degree of the section complex to all external cochains of that degree between L restricted to U and I restricted to U. Its components are precisely the evaluated projections appearing in the conclusion.",
+   "text": "Use homComplex_sections_cochains to obtain degreewise additive equivalences with the required component formulas. Use homComplex_sections_cochains_comm on those equivalences and formulas to prove that they commute with successive differentials. Construct the morphism S to the external Hom complex using AddCommGrpCat.ofHom. Each component is an isomorphism, so HomologicalComplex.Hom.isIso_of_components makes it an isomorphism of complexes.",
    "uses": [
-    "def-pur-hom-complex"
+    "lem-pur-hom-complex-sections-cochains",
+    "lem-pur-hom-complex-sections-cochains-comm"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the differential projection formula in homComplex_exists to every p. Under the degreewise additive bijections, the differential is d_I composed with the family minus n.negOnePow times the family composed with d_L. This is the external Hom differential. Hence the bijections carry kernels to external cocycles and images to external coboundaries, yielding the equivalence e with the stated component formula and an additive bijection on the corresponding quotient groups. The standard homology projection and the external cocycle quotient both have exactly these kernels, so their universal properties give an equivalence from S.homology n to external Hom cohomology classes, sending S.homologyπ n z to the class of e z.",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": false
+   "text": "Apply HomologicalComplex.cyclesMapIso to this complex isomorphism. Compose with the cyclesIso of Mathlib HomComplex.leftHomologyData. The cyclesMap_i and cyclesIso_hom_comp_i formulas identify the resulting cocycle with the degreewise equivalence applied to the section cycle inclusion. The supplied component formula therefore proves precisely the required representative formula for e.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Compose the quotient equivalence with Mathlib CochainComplex.HomComplex.CohomologyClass.homAddEquiv. Its representative lemma toHom_mk identifies the class of e z with the homotopy-category image of Cocycle.equivHomShift.symm (e z), giving a and the requested formula. This uses no K-injectivity. At n=0 it is the usual unshifted comparison; for a zero complex both quotients are singleton groups. All degrees use products over every integer, so unbounded complexes introduce no finite-support condition.",
+   "text": "Apply HomologicalComplex.homologyMapIso and compose with the homologyIso of the same external Hom leftHomologyData, then CohomologyClass.homAddEquiv. The homologyπ_naturality and homologyπ_comp_homologyIso_hom equations identify the image of a section cycle with the cohomology class of its external cocycle. CohomologyClass.toHom_mk proves the asserted shifted homotopy-category representative formula.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex"
+  "lem-pur-hom-complex-sections-cochains",
+  "lem-pur-hom-complex-sections-cochains-comm"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Expansion of the immediate comparison of Tag 0A8Y, Equation 21.34.0.1, via product projections and Mathlib external Hom cohomology"
+  "place": "Tag 0A8Y, Equation 21.34.0.1: R3 decomposition of products and differential, with cycles and homology transport proved using Mathlib"
  },
  "mathlib_searches": [
   {
@@ -129,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T173815-L-3292495",
+  "landing": "20261012T203948-L-832141",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -9459,3 +9459,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: merged deliver/Q1/Sheaf.Paper.SmoothAtMaximalIdeal (stage 3; reviewer PASS; first push; landing 20261012T203947-L-831775 (interface); batch 20261012T203936; modules 3; new nodes 2)
 - 20:39 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftRestrict (stage 3; reviewer PASS; first push; landing 20261012T203947-L-831887 (proof); batch 20261012T203936; modules 1; new nodes 0)
 - 20:39 L: merged deliver/R1/Sheaf.CategoryTheory.Sites.PresheafFreeNerveExact (stage 3; reviewer PASS; first push; landing 20261012T203948-L-832013 (proof); batch 20261012T203936; modules 1; new nodes 0)
+- 20:39 L: merged deliver/R3/Sheaf.Algebra.Homology.HomComplexSectionsCanonicalComparison (stage 3; reviewer PASS; first push; landing 20261012T203948-L-832141 (interface); batch 20261012T203936; modules 3; new nodes 2)

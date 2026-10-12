@@ -7,7 +7,9 @@ module
 
 public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
-import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.HomComplexSectionsCochains
+import Sheaf.Algebra.Homology.HomComplexSectionsCochainsComm
+import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 
 /-!
 # Canonical comparison for sections of a sheaf Hom complex
@@ -22,6 +24,9 @@ universe u v
 open CategoryTheory Opposite
 namespace CategoryTheory
 
+set_option maxHeartbeats 800000 in
+-- Elaborating chosen products through section evaluation requires extra heartbeats.
+set_option backward.isDefEq.respectTransparency false in
 /-- The canonical shifted section comparison, specified on cocycle representatives.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
 (blueprint: lem-pur-hom-complex-sections-canonical-comparison)
@@ -63,6 +68,64 @@ theorem homComplex_sections_canonical_comparison
       ∃ a : S.homology n ≃ (Q.obj (res.obj L) ⟶ Q.obj ((res.obj I)⟦n⟧)),
         ∀ z : S.cycles n, a (S.homologyπ n z) =
           Q.map (CochainComplex.HomComplex.Cocycle.equivHomShift.symm (e z)) := by
-  sorry
+  classical
+  let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R
+  let := module_overFunctor_preservesZero.{u, v, max u v, max u v} R₀ U
+  let res : CochainComplex (SheafOfModules.{max u v} R₀) ℤ ⥤
+      CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ :=
+    (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  let E := (SheafOfModules.forget R₀ ⋙ PresheafOfModules.evaluation R₀.obj (op U) ⋙
+    forget₂ (ModuleCat.{max u v} (R₀.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex
+      (ComplexShape.up ℤ)
+  let S : CochainComplex AddCommGrpCat.{max u v} ℤ :=
+    E.obj (homComplex (R := R) L I)
+  let T : CochainComplex AddCommGrpCat.{max u v} ℤ :=
+    CochainComplex.HomComplex (res.obj L) (res.obj I)
+  let π := Classical.choose (Classical.choose_spec
+    (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))
+  have hco := homComplex_sections_cochains.{u, v} (C := C) (J := J) R U L I
+  dsimp only at hco
+  obtain ⟨e, he⟩ := hco
+  have hcomm := homComplex_sections_cochains_comm.{u, v}
+    (C := C) (J := J) R U L I
+  dsimp only at hcomm
+  have hd := hcomm e he
+  let f : S ⟶ T :=
+    { f := fun i => AddCommGrpCat.ofHom (e i).toAddMonoidHom
+      comm' := by
+        intro i j hij
+        ext x
+        exact (hd i j hij x).symm }
+  have hf (i : ℤ) : IsIso (f.f i) := by
+    exact (AddEquiv.toAddCommGrpIso (X := S.X i) (Y := T.X i) (e i)).isIso_hom
+  have : IsIso f := HomologicalComplex.Hom.isIso_of_components f
+  let F := asIso f
+  let h := CochainComplex.HomComplex.leftHomologyData (res.obj L) (res.obj I) n
+  let ec := (HomologicalComplex.cyclesMapIso F n) ≪≫ h.cyclesIso
+  let ac := (HomologicalComplex.homologyMapIso F n) ≪≫ h.homologyIso
+  let a := ac.addCommGroupIsoToAddEquiv.trans
+    CochainComplex.HomComplex.CohomologyClass.homAddEquiv
+  refine ⟨ec.addCommGroupIsoToAddEquiv.toEquiv, ?_, a.toEquiv, ?_⟩
+  · intro z p q hpq W
+    have hc : (ec.hom z).val = e n (S.iCycles n z) := by
+      have hh := ConcreteCategory.congr_hom
+        (h.cyclesIso_hom_comp_i) (HomologicalComplex.cyclesMap f n z)
+      have hh' := ConcreteCategory.congr_hom (HomologicalComplex.cyclesMap_i f n) z
+      exact hh.trans hh'
+    exact (congrArg (fun c => (c.v p q hpq).val.app W) hc).trans
+      (he n (S.iCycles n z) p q hpq W)
+  · intro z
+    have ha : ac.hom (S.homologyπ n z) =
+        CochainComplex.HomComplex.CohomologyClass.mk (ec.hom z) := by
+      have hh := ConcreteCategory.congr_hom
+        (h.homologyπ_comp_homologyIso_hom) (HomologicalComplex.cyclesMap f n z)
+      have hh' := ConcreteCategory.congr_hom
+        (HomologicalComplex.homologyπ_naturality f n) z
+      exact (congrArg h.homologyIso.hom hh').trans hh
+    change CochainComplex.HomComplex.CohomologyClass.homAddEquiv
+      (ac.hom (S.homologyπ n z)) = _
+    exact (congrArg CochainComplex.HomComplex.CohomologyClass.homAddEquiv ha).trans
+      (CochainComplex.HomComplex.CohomologyClass.toHom_mk (ec.hom z))
 
 end CategoryTheory
