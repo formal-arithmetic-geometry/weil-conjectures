@@ -1,0 +1,134 @@
+{
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055Q, first two paragraphs; Tag 01ZM(1)-(3); Tag 0C0C"
+ },
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 055Q, first two paragraphs; Tag 01ZM(1)-(3); Tag 0C0C",
+  "note": "Source read online. Lean component proof adapted from the proved source library."
+ },
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModel",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-smooth-section-component-noetherian-model",
+   "place": "Tag 055Q, first two paragraphs; Tag 01ZM(1)-(3); Tag 0C0C"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12",
+  "module": "Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModelData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSectionComponentNoetherianModelData.lean",
+  "declaration": "AlgebraicGeometry.Smooth.exists_section_component_noetherian_model_data",
+  "statement": "theorem Smooth.exists_section_component_noetherian_model_data {P T : Scheme.{u}} (g : P ⟶ T)\n    [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (x : P) :\n    ∃ (W : P.Opens) (_ : x ∈ W) (V : T.Opens) (P₀ T₀ : Scheme.{u})\n      (g₀ : P₀ ⟶ T₀) (σ₀ : T₀ ⟶ P₀) (a : W.toScheme ⟶ P₀)\n      (q : W.toScheme ⟶ V.toScheme) (τ : V.toScheme ⟶ W.toScheme)\n      (b : V.toScheme ⟶ T₀),\n      IsNoetherian T₀ ∧ Smooth g₀ ∧ QuasiCompact g₀ ∧ QuasiSeparated g₀ ∧\n      σ₀ ≫ g₀ = 𝟙 T₀ ∧ τ ≫ q = 𝟙 V.toScheme ∧\n      IsPullback W.ι q g V.ι ∧ IsPullback a q g₀ b ∧\n      τ ≫ W.ι = V.ι ≫ σ ∧ τ ≫ a = b ≫ σ₀"
+ },
+ "id": "lem-sbc-smooth-section-component-noetherian-model-data",
+ "kind": "statement",
+ "title": "Existence of local noetherian model data",
+ "statement": "Let g:P\\to T be smooth, quasi-compact and quasi-separated [def-sbc-smooth-morphisms], and let σ:T\\to P satisfy σ≫g=id. For every x in P there exist opens W of P and V of T with x in W, schemes P₀,T₀, maps g₀:P₀\\to T₀, σ₀:T₀\\to P₀, a:W\\to P₀, q:W\\to V, τ:V\\to W and b:V\\to T₀. The base T₀ is noetherian, g₀ is smooth, quasi-compact and quasi-separated, σ₀≫g₀=id and τ≫q=id. The squares with projections (W.ι,q) over (g,V.ι), and (a,q) over (g₀,b), are cartesian. Moreover τ≫W.ι=V.ι≫σ and τ≫a=b≫σ₀.",
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "choose an affine open V containing g(x), and set W = g⁻¹(V). The restriction\nq : W → V is smooth and finitely presented: smoothness gives local finite presentation,\nand quasi-compactness and quasi-separatedness give finite presentation. Its section τ\nis the restriction of σ, so τ≫W.ι = V.ι≫σ. Express the coordinate ring of V as the\nfiltered union of its finite-type ℤ-subalgebras. Tag 01ZM(1) descends q to a finitely\npresented g₀ over one such subalgebra. Tag 01ZM(2) descends τ, and clause (3) permits\nincreasing the index until its section identity holds. Tag 0C0C permits another\nincrease so that g₀ is smooth. The affine base T₀ is noetherian because its ring is\nfinite type over ℤ. Finite presentation of g₀ supplies quasi-compactness and\nquasi-separatedness. The base-change isomorphism supplies a and b and the second\ncartesian square, with τ≫a = b≫σ₀. The first square is cartesian by the construction\nW = g⁻¹(V). Every later increase of the index preserves these identities.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "noetherian.*model|connectedComponentIn|exists_subalgebra_fg",
+   "results": "Hits: []; no exact scheme-level theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation of a smooth finitely presented scheme morphism with a section as a cartesian base change",
+   "results": "Hits: ['AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite', 'AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth', 'AlgebraicGeometry.LocallyOfFinitePresentation', 'Algebra.Smooth.exists_finiteType', 'AlgebraicGeometry.IsSmoothOfRelativeDimension', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension', 'AlgebraicGeometry.isSmoothOfRelativeDimension_iff', 'AlgebraicGeometry.IsSmooth']; no exact scheme-level theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "848daa2b5a596461"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"connectedComponentIn\", \"IsPullback\"",
+   "results": "Hits: []; no exact scheme-level theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth quasi-compact quasi-separated scheme morphism with a section descends locally to a noetherian base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponentIn|of_connectedSpace_of_section|noetherian.*[Mm]odel",
+   "results": "Hits: ['Mathlib/Topology/Homeomorph/Lemmas.lean', 'Mathlib/Topology/Homeomorph/Lemmas.lean', 'Mathlib/Topology/Homeomorph/Lemmas.lean', 'Mathlib/Topology/Homeomorph/Lemmas.lean', 'Mathlib/RingTheory/Smooth/NoetherianDescent.lean', 'Mathlib/Analysis/Normed/Algebra/Spectrum.lean', 'Mathlib/Analysis/Normed/Algebra/Spectrum.lean', 'Mathlib/Analysis/Normed/Algebra/Spectrum.lean']; no exact scheme-level theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "ec33955d08b1c879"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The connected component containing a section in each scheme fibre commutes with base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connected component of a section point in each fibre of a smooth morphism commutes with cartesian base change",
+   "results": "Hits: ['AlgebraicGeometry.Scheme.Pullback.Triplet.hy', 'AlgebraicGeometry.Scheme.Hom.fiberι_asFiber', 'AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField', 'AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField', 'AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo', 'AlgebraicGeometry.Scheme.Pullback.Triplet.hx', 'AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo', 'AlgebraicGeometry.Scheme.Hom.asFiber']; no exact scheme-level theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "5353afb2bc31563c"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T135313-L-1691067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T135313-L-1691067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

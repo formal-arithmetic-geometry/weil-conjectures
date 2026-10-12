@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModelData
+import Sheaf.AlgebraicGeometry.SmoothSectionComponentNoetherianModelComponents
 
 /-!
 # Local noetherian models for a smooth section component
@@ -46,6 +48,19 @@ theorem Smooth.exists_section_component_noetherian_model {P T : Scheme.{u}} (g :
       σ₀ ≫ g₀ = 𝟙 T₀ ∧
       ∀ w : W.toScheme,
         (W.ι w ∈ connectedComponentIn (g ⁻¹' {g (W.ι w)}) (σ (g (W.ι w)))) ↔
-          a w ∈ connectedComponentIn (g₀ ⁻¹' {g₀ (a w)}) (σ₀ (g₀ (a w))) := by sorry
+          a w ∈ connectedComponentIn (g₀ ⁻¹' {g₀ (a w)}) (σ₀ (g₀ (a w))) := by
+  obtain ⟨W, hxW, V, P₀, T₀, g₀, σ₀, a, q, τ, b,
+    hT₀, hg₀, hqc, hqs, hσ₀, hτ, sq, sq₀, hsec, hsec₀⟩ :=
+    Smooth.exists_section_component_noetherian_model_data g σ hσ x
+  let : Smooth g₀ := hg₀
+  let : QuasiCompact g₀ := hqc
+  let : QuasiSeparated g₀ := hqs
+  refine ⟨W, hxW, P₀, T₀, g₀, σ₀, a, hT₀, hg₀, hqc, hqs, hσ₀, ?_⟩
+  intro w
+  have hlocal := Smooth.section_component_iff_of_isPullback g σ hσ
+    q τ W.ι V.ι sq hτ hsec w
+  have hmodel := Smooth.section_component_iff_of_isPullback g₀ σ₀ hσ₀
+    q τ a b sq₀ hτ hsec₀ w
+  exact hlocal.symm.trans hmodel
 
 end AlgebraicGeometry
