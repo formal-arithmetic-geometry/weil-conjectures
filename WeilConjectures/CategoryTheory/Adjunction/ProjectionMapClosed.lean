@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.Functor
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Yoneda
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 
 /-!
@@ -42,12 +43,24 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
 section InternalAdjunction
 
 variable [MonoidalClosed C] [MonoidalClosed D] {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
-  [F.Monoidal] {H : D ⥤ C} (adj' : G ⊣ H)
+  [F.OplaxMonoidal] {H : D ⥤ C} (adj' : G ⊣ H)
 
 /-- The projection map `G M ⊗ L ⟶ G (M ⊗ F L)` of an adjunction `F ⊣ G` with `F` oplax
 monoidal: the transpose of `F (G M ⊗ L) ⟶ F G M ⊗ F L ⟶ M ⊗ F L`. -/
 noncomputable def projectionHom (M : C) (L : D) : G.obj M ⊗ L ⟶ G.obj (M ⊗ F.obj L) :=
   adj.homEquiv _ _ (δ F (G.obj M) L ≫ adj.counit.app M ▷ F.obj L)
+
+omit [MonoidalClosed C] [MonoidalClosed D] in
+/-- `CategoryTheory.Adjunction.projectionHom` is the right adjoint projection map
+(`CategoryTheory.Adjunction.rightAdjointProjectionMap`) of any natural transformation `φ` of
+bifunctors with components the comonoidal structure maps `δ` of `F`. -/
+lemma projectionHom_eq_rightAdjointProjectionMap
+    (φ : (Functor.postcompose₂.obj F).obj (curriedTensor D) ⟶
+      (((Functor.whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))
+    (hφ : ∀ X Y, (φ.app X).app Y = δ F X Y) (M : C) (L : D) :
+    adj.projectionHom M L = ((adj.rightAdjointProjectionMap φ).app M).app L := by
+  rw [rightAdjointProjectionMap_app_app, hφ]
+  rfl
 
 omit [MonoidalClosed C] [MonoidalClosed D] in
 /-- The lax monoidal structure of the right adjoint `G` through the projection map: for
@@ -147,3 +160,51 @@ theorem isIso_ihomComparison_of_isIso_leftProjectionHom (A B : C)
 end IhomComparison
 
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory
+
+open MonoidalCategory MonoidalClosed Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
+
+/-- The comparison maps `G [A, B] ⟶ [G A, G B]` of a lax monoidal functor are natural in `A`:
+for `u : A' ⟶ A` the square
+```
+  G [A, B] ──────c──────→ [G A, G B]
+     │                        │
+  G [u, B]                [G u, G B]
+     ↓                        ↓
+  G [A', B] ─────c─────→ [G A', G B]
+```
+commutes. -/
+@[reassoc]
+lemma Functor.LaxMonoidal.map_pre_app_comp_ihomComparison [MonoidalClosed C] [MonoidalClosed D]
+    (G : C ⥤ D) [G.LaxMonoidal] {A A' : C} (u : A' ⟶ A) (B : C) :
+    G.map ((pre u).app B) ≫ (ihomComparison G A').natTrans.app B =
+      (ihomComparison G A).natTrans.app B ≫ (pre (G.map u)).app (G.obj B) := by
+  apply uncurry_injective
+  rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, uncurry_pre_app, uncurry_eq,
+    ihomComparison_ev, μ_natural_right_assoc, ← G.map_comp, id_tensor_pre_app_comp_ev,
+    G.map_comp, ← μ_natural_left_assoc]
+
+namespace Adjunction
+
+/-- The lax monoidal right adjoint (`CategoryTheory.Adjunction.rightAdjointLaxMonoidal`) of an
+oplax monoidal functor `F` whose comonoidal structure is compatible with the braidings is lax
+braided. -/
+@[instance_reducible]
+noncomputable def rightAdjointLaxBraidedOfMapBraidingCompδ [BraidedCategory C]
+    [BraidedCategory D] {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
+    (h : ∀ X Y, F.map (β_ X Y).hom ≫ δ F Y X = δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom) :
+    G.LaxBraided where
+  toLaxMonoidal := adj.rightAdjointLaxMonoidal
+  braided X Y := by
+    let := adj.rightAdjointLaxMonoidal
+    rw [rightAdjointLaxMonoidal_μ, rightAdjointLaxMonoidal_μ,
+      ← homEquiv_naturality_right, ← homEquiv_naturality_left]
+    congr 1
+    rw [Category.assoc, BraidedCategory.braiding_naturality, reassoc_of% (h (G.obj X) (G.obj Y))]
+
+end Adjunction
+
+end CategoryTheory
