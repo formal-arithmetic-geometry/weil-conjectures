@@ -5875,3 +5875,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:53 L: merged deliver/P1/Sheaf.Paper.InverseImageStalkGerm (stage 3; reviewer PASS; after a return; landing 20261012T025316-L-1237125 (proof); modules 1; new nodes 0)
 - 02:54 L: merged deliver/P1/Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest (stage 3; reviewer PASS; after a return; landing 20261012T025349-L-1240944 (interface); modules 3; new nodes 2)
 - 02:55 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder (stage 3; reviewer PASS; after a return; landing 20261012T025525-L-1249023 (proof); modules 1; new nodes 1)
+- 02:56 L: merged deliver/Q1/Sheaf.Topology.IrreducibleIntegerExtensionVanishing (stage 3; reviewer PASS; after a return; landing 20261012T025541-L-1250432 (interface); modules 3; new nodes 2)

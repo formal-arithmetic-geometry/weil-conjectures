@@ -1,0 +1,130 @@
+{
+ "id": "new-node-constant-integer-open-extension-comparison",
+ "kind": "statement",
+ "title": "Comparison of constant integer open extension constructions",
+ "statement": "Let $X$ be a topological space, $U\\subseteq X$ open and $C_X$ and $C_U$ the constant abelian sheaves with value $\\mathbb Z$ [def-weil-pbc-constant-sheaf]. Let $C_X|_{\\operatorname{Opens}(X)/U}$ be its slice restriction. There exists an isomorphism from the abelian open extension by zero $j_!C_U$ [def-sc-abelian-open-extension-by-zero] to the sheafification of the slice-site extension-by-zero presheaf of this slice restriction [def-weil-pbc-site-extension-by-zero-presheaf]. No nonemptiness or finiteness assumption is imposed on $X$ or $U$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof, final irreducible-space induction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-site-extension-by-zero-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib's equivCommuteConstant' for Opens.overEquivalence from the slice of opens over U to Opens U, with the terminal objects Over.mkIdTerminal and the top open, to identify the constant sheaf on the slice with the image of the constant sheaf on U. Use upstream GrothendieckTopology.overPullbackConstantSheafIso to identify the slice restriction of the constant sheaf on X with the constant sheaf on the slice.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the inverse component isomorphisms from the preceding step. Apply sheafToPresheaf on the slice, siteExtensionByZeroPresheaf U, and presheafToSheaf on X via mapIso. The resulting isomorphism has exactly the asserted source and target, including for empty U.",
+   "uses": [
+    "def-sc-abelian-open-extension-by-zero",
+    "def-weil-pbc-site-extension-by-zero-presheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof, final irreducible-space induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf restriction to an open subset commutes with extension by zero slice site",
+   "results": "8 hits: TopCat.Sheaf.extend_hom_app, AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app, CategoryTheory.Sheaf.ΓRes_map, ModuleCat.Tilde.res_const, CategoryTheory.Sheaf.natTransΓRes_app, AlgebraicGeometry.Scheme.restrictFunctorΓ, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app; no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf",
+   "results": "12 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.constantSheafAdj, CategoryTheory.constantCommuteCompose, CategoryTheory.equivCommuteConstant; no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Rr]estrict|[Rr]estrict.*constant",
+   "results": "12 hits: Mathlib/Probability/Kernel/Basic.lean, Mathlib/Probability/Kernel/Basic.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean; no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf restricted to open subset is constant",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "equivCommuteConstant.|overEquivalence|overPullbackConstantSheafIso",
+   "results": "Read Mathlib CategoryTheory/Sites/ConstantSheaf.lean: CategoryTheory.equivCommuteConstant'; Mathlib Topology/Sheaves/Over.lean: TopologicalSpace.Opens.overEquivalence; upstream WeilConjectures/Mathlib/CategoryTheory/Sites/ConstantSheaf.lean: CategoryTheory.GrothendieckTopology.overPullbackConstantSheafIso. Compose the inverse component isomorphisms and apply sheafToPresheaf, siteExtensionByZeroPresheaf and presheafToSheaf via mapIso.",
+   "date": "2026-10-12",
+   "verdict": "composition proves the statement"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.IrreducibleIntegerExtensionVanishing",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "02UZ reduction to integer extensions on an irreducible space: Comparison of constant integer open extension constructions",
+   "via": [
+    "lem-sc-noetherian-topological-cohomology-vanishing",
+    "new-node-irreducible-integer-extension-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantIntegerOpenExtensionComparison",
+  "file": "lean/Sheaf/Topology/ConstantIntegerOpenExtensionComparison.lean",
+  "declaration": "TopCat.constant_integer_open_extension_comparison",
+  "statement": "theorem constant_integer_open_extension_comparison (X : TopCat.{u}) (U : Opens X) :\n    Nonempty\n      (((TopCat.Sheaf.abelianOpenExtensionByZero U).obj\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ≅\n        (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n          ((siteExtensionByZeroPresheaf U).obj\n            (((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n              (AddCommGrpCat.of (ULift.{u} ℤ))).over U).obj))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-extension-by-zero-presheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025541-L-1250432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025541-L-1250432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

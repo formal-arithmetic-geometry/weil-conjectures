@@ -11,7 +11,7 @@
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/02UZ",
-  "place": "Proposition 02UZ proof; finite closed-cover formulation of its component argument"
+  "place": "Proposition 02UZ final exact-sequence argument, with empty cases explicit and Mathlib Ext long exact sequence"
  },
  "mathlib_searches": [
   {
@@ -69,49 +69,53 @@
  "statement": "Let X be an irreducible Noetherian topological space and d a nonnegative integer with dim X <= d [def-kun-topological-krull-dimension]. Assume that for every nonnegative integer e<d, every Noetherian topological space Y with dim Y <= e, every abelian sheaf G on Y, and every nonnegative integer r>e, H^r(Y,G) [def-sc-topological-abelian-cohomology] is zero. Then for every nonnegative integer p>d and every quasi-compact open U of X, H^p(X,j_! Z_U) is zero, where Z_U is the constant integer sheaf on U and j_! is abelian open extension by zero [def-sc-abelian-open-extension-by-zero].",
  "proof": [
   {
-   "text": "If U is empty, extension by zero is zero (its presheaf has empty sums), so all cohomology vanishes.",
+   "text": "If U is empty, all stalks of j_!Z_U are zero by the extension-by-zero stalk theorem, so the sheaf is zero. The additive Ext cohomology functor preserves zero objects, so the conclusion follows.",
    "uses": [
-    "def-sc-abelian-open-extension-by-zero",
+    "lem-sc-topological-extension-by-zero-stalks",
     "def-sc-topological-abelian-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For nonempty U, if d=0 a proper nonempty closed subset would supply an irreducible closed chain of length one, contradicting the bound. Thus U=X and constant-sheaf acyclicity applies.",
+   "text": "For nonempty U, apply the proper-complement dimension lemma. If the complement Z is empty, every abelian sheaf on Z has zero stalks, hence is zero and has zero cohomology in every degree. Otherwise obtain e<d with dim Z<=e and apply hlower to the inverse image G of the constant integer sheaf, in degree p-1. The integer inequality e<p-1 follows from e<d<p.",
    "uses": [
-    "def-kun-topological-krull-dimension",
-    "lem-sc-irreducible-noetherian-constant-acyclic"
+    "new-node-irreducible-open-complement-dimension",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the open-closed sequence to the constant integer sheaf C_X. Closed-pushforward comparison identifies the cohomology of its third term with that of G on Z. Mathlib Ext.chgUniv transports subsingletonness between the universe of this comparison and the smaller Ext universe used in the unchanged target.",
+   "uses": [
+    "lem-sc-noetherian-open-closed-cohomology-sequence",
+    "lem-sc-cohomology-closed-immersion-pushforward"
    ],
    "elementary": false
   },
   {
-   "text": "For d>0, Z=X\\U is a proper closed Noetherian subspace of dimension at most d-1: append the irreducible closed set X to each chain in Z. Restriction of the constant integer sheaf is the constant integer sheaf (canonically on stalks); the open-closed sequence therefore has terms j_!Z_U, Z_X and i_*Z_Z.",
-   "uses": [
-    "def-kun-topological-krull-dimension",
-    "def-sc-abelian-open-extension-by-zero",
-    "lem-sc-topological-extension-by-zero-stalks",
-    "lem-sc-noetherian-open-closed-cohomology-sequence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For p>d the constant term has zero degree-p cohomology. Closed-immersion comparison and hlower at e=d-1 kill degree p-1 on the closed complement. The long exact sequence kills degree p of the integer extension; p-1>d-1 follows from p>d.",
+   "text": "Constant-sheaf acyclicity kills degree p of the middle term since p>0. Mathlib Ext.covariant_sequence_exact₁ says every degree-p class of the first term is the boundary of a degree-(p-1) class of the third term. The latter is zero, so every class of the first term is zero.",
    "uses": [
     "lem-sc-irreducible-noetherian-constant-acyclic",
-    "lem-sc-cohomology-closed-immersion-pushforward",
     "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport along the comparison between the two constant-integer extension constructions to obtain the required vanishing.",
+   "uses": [
+    "new-node-constant-integer-open-extension-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-topological-krull-dimension",
-  "def-sc-abelian-open-extension-by-zero",
   "def-sc-topological-abelian-cohomology",
   "lem-sc-cohomology-closed-immersion-pushforward",
   "lem-sc-irreducible-noetherian-constant-acyclic",
   "lem-sc-noetherian-open-closed-cohomology-sequence",
-  "lem-sc-topological-extension-by-zero-stalks"
+  "lem-sc-topological-extension-by-zero-stalks",
+  "new-node-constant-integer-open-extension-comparison",
+  "new-node-irreducible-open-complement-dimension"
  ],
  "lean": {
   "existing": false,
@@ -136,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-aacdc",
-  "group": "P1",
+  "reviewer": "COMPILER",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T012259-L-793100",
+  "landing": "20261012T025541-L-1250432",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, node statements/dependencies, proofs, report, and Lean compilation matched the packet and stage-3 requirements; all three modules compiled cleanly."
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

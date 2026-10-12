@@ -1,0 +1,118 @@
+{
+ "id": "new-node-irreducible-open-complement-dimension",
+ "kind": "statement",
+ "title": "Dimension bound for an irreducible open complement",
+ "statement": "Let $X$ be an irreducible topological space, $d\\in\\mathbb N$ and $\\dim X\\leq d$ [def-kun-topological-krull-dimension]. If $U$ is a nonempty open subset, then its complement is empty, or there exists $e\\in\\mathbb N$ with $e<d$ and $\\dim(X\\setminus U)\\leq e$ [def-kun-topological-krull-dimension]. This requires neither Noetherianity nor separation.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof, final irreducible-space induction"
+ },
+ "stmt_deps": [
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Every chain of irreducible closed subsets of Z=X minus U maps strictly increasingly to a chain in X. Since Z is closed these images remain closed; append the whole irreducible space X, which strictly contains every image because U is nonempty. Thus a chain in Z of length n implies n+1<=d.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If d=0, the closure of any point of Z would be a length-zero chain, contradicting 1<=0, so Z is empty. If d=e+1, every chain of Z has length at most e, so its Krull dimension is at most e and e<d.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof, final irreducible-space induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper closed subset of irreducible topological space has strictly smaller Krull dimension",
+   "results": "8 hits: topologicalKrullDim, topologicalKrullDim_subspace_le, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, IsClosedEmbedding.topologicalKrullDim_le, ringKrullDim_quotient, IsInducing.topologicalKrullDim_le, Ring.krullDimLE_iff, ringKrullDim_quotient_le; no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim",
+   "results": "7 hits: topologicalKrullDim, IsHomeomorph.topologicalKrullDim_eq, topologicalKrullDim_zero_of_discreteTopology, Topology.IsInducing.topologicalKrullDim_le, topologicalKrullDim_subspace_le, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero; no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "krullDim.*(lt|succ)|krullDim.*[Ii]sEmpty",
+   "results": "24 hits: Mathlib/RingTheory/Ideal/Height.lean, Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Regular.lean, Mathlib/RingTheory/KrullDimension/Module.lean; no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension proper closed subset irreducible space",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.IrreducibleIntegerExtensionVanishing",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "02UZ reduction to integer extensions on an irreducible space: Dimension bound for an irreducible open complement",
+   "via": [
+    "lem-sc-noetherian-topological-cohomology-vanishing",
+    "new-node-irreducible-integer-extension-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.IrreducibleOpenComplementDimension",
+  "file": "lean/Sheaf/Topology/IrreducibleOpenComplementDimension.lean",
+  "declaration": "irreducible_open_complement_dimension",
+  "statement": "theorem irreducible_open_complement_dimension\n    (X : Type u) [TopologicalSpace X] [IrreducibleSpace X]\n    (d : ℕ) (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))\n    (U : Opens X) (hU : U ≠ ⊥) :\n    IsEmpty ↥((U : Set X)ᶜ) ∨\n      ∃ e : ℕ, e < d ∧ topologicalKrullDim ↥((U : Set X)ᶜ) ≤ (e : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-kun-topological-krull-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025541-L-1250432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T025541-L-1250432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
