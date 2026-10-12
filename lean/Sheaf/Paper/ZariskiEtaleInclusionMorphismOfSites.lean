@@ -5,7 +5,8 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Sites.CoverPreserving
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Topology.Sheaves.Sheaf
-import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+import Sheaf.Paper.ZariskiEtaleCore
+import Sheaf.Paper.ZariskiEtaleSheafLeftExact
 
 /-!
 # The inclusion of the Zariski site into the small étale site
@@ -69,6 +70,19 @@ theorem zariski_to_etale_is_morphism (X : Scheme.{u}) :
           Nonempty (L ⊣ i.sheafPushforwardContinuous (Type (max (u + 1) v))
             (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology) ∧
           PreservesFiniteLimits L ∧ PreservesFiniteColimits L := by
-  sorry
+  obtain ⟨i, hi_forget, hi_cover, hi_limits, hi_terminal, hcont⟩ :=
+    zariski_to_etale_core X
+  obtain ⟨hcontinuous, hflat, _⟩ := hcont
+  let : RepresentablyFlat i := hflat
+  let L := i.sheafPullback (Type (max (u + 1) v))
+    (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology
+  have hLlim : PreservesFiniteLimits L := zariski_to_etale_sheaf_left_exact X i hcontinuous
+  have : L.IsLeftAdjoint :=
+    (i.sheafAdjunctionContinuous (Type (max (u + 1) v))
+      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).isLeftAdjoint
+  have hLcolim : PreservesFiniteColimits L := inferInstance
+  exact ⟨i, hi_forget, hi_cover, hi_limits, hi_terminal,
+    ⟨hcontinuous, L, ⟨i.sheafAdjunctionContinuous (Type (max (u + 1) v))
+      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology⟩, hLlim, hLcolim⟩⟩
 
 end AlgebraicGeometry
