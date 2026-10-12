@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Algebra.Homology.HomComplexUnitIso
 
 /-! # Derived internal Hom from the structure sheaf
 
@@ -49,6 +48,43 @@ theorem derivedInternalHom_unit_iso (Y : Scheme.{u})
           (op ((DerivedCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
               (SheafOfModules.unit Y.ringCatSheaf))) ≅ 𝟭 _) := by
-  sorry
+  let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  let L := (CochainComplex.singleFunctor A 0).obj (SheafOfModules.unit Y.ringCatSheaf)
+  obtain ⟨e⟩ := homComplex_unit_iso (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf
+  obtain ⟨c⟩ := derivedInternalHom_comparison.{u, wY}
+    (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf I η
+    (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩)
+  let c' := ((Functor.curry.mapIso c).app (op L))
+  have hη (M : CochainComplex A ℤ) : IsIso (DerivedCategory.Q.map (η.app M)) := by
+    have : QuasiIso (η.app M) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
+    infer_instance
+  let r : DerivedCategory.Q ≅ I ⋙ DerivedCategory.Q :=
+    NatIso.ofComponents (fun M ↦ asIso (DerivedCategory.Q.map (η.app M))) (by
+      intro M N f
+      simpa only [Functor.comp_map, Functor.id_map, asIso_hom, Functor.map_comp] using
+        congrArg DerivedCategory.Q.map (η.naturality f))
+  refine ⟨(Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
+    (HomologicalComplex.quasiIso A (.up ℤ)) _).preimageIso ?_⟩
+  let a := (Functor.curryObjProdComp DerivedCategory.Q.op DerivedCategory.Q
+    (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).app
+      (op L)
+  let b : (Functor.curry.obj
+      ((𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor
+        (R := Y.toRingedSpace.sheaf)) ⋙ DerivedCategory.Q)).obj (op L) ≅
+      I ⋙ (homComplexFunctor (R := Y.toRingedSpace.sheaf)).obj (op L) ⋙
+        DerivedCategory.Q :=
+    NatIso.ofComponents (fun M ↦ Iso.refl _) (by
+      intro M N f
+      simp)
+  exact a.symm ≪≫ c' ≪≫ b ≪≫
+    Functor.isoWhiskerLeft I (Functor.isoWhiskerRight e DerivedCategory.Q) ≪≫
+      (Functor.associator I (𝟭 _) DerivedCategory.Q).symm ≪≫
+      Functor.isoWhiskerRight I.rightUnitor DerivedCategory.Q ≪≫ r.symm ≪≫
+        DerivedCategory.Q.rightUnitor.symm
 
 end AlgebraicGeometry
