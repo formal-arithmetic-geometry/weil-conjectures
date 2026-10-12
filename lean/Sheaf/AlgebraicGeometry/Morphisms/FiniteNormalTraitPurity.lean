@@ -5,15 +5,15 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.KrullDimension.Basic
 
-import Sheaf.RingTheory.SmoothNormalRing
-import Sheaf.RingTheory.EtaleNormalRing
+import Sheaf.AlgebraicGeometry.Morphisms.TraitEtaleExtension
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
 
 /-!
 # FiniteNormalTraitPurity
@@ -57,6 +57,15 @@ theorem finite_normal_etale_of_trait_neighbourhood
     (het : Etale (n ∣_ (q ⁻¹ᵁ V)))
     (W : L.Opens) (x : L) (hx : x ∈ W)
     (hqx : q x = IsLocalRing.closedPoint A) (hW : Etale (n ∣_ W))
-    (hdim : ringKrullDim A ≤ (1 : WithBot ℕ∞)) : Etale n := by sorry
+    (hdim : ringKrullDim A ≤ (1 : WithBot ℕ∞)) : Etale n := by
+  let : IsLocallyNoetherian L := LocallyOfFiniteType.isLocallyNoetherian q
+  obtain ⟨E, p, hpfin, hpet, henormal, hpdense, e, he⟩ :=
+    exists_finite_etale_extension_of_trait_neighbourhood A q V hV n het W x hx hqx hW hdim
+  let : IsFinite p := hpfin
+  let : Etale p := hpet
+  obtain ⟨e', he'⟩ :=
+    finite_normal_iso_of_dense_open n p hnormal henormal (q ⁻¹ᵁ V) hdense hpdense e he
+  rw [← he']
+  infer_instance
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,121 @@
+{
+ "id": "lem-sbc-trait-etale-extension",
+ "kind": "statement",
+ "title": "Existence of a normal finite etale extension on a smooth trait",
+ "statement": "Let A be a Noetherian normal local domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring] of Krull dimension at most one [def-weil-pbc-krull-dimension-ring]. Let q:L→Spec A [def-weil-affine-spectrum] be quasi-compact, quasi-separated, smooth with geometrically connected fibres [def-weil-pbc-scheme-conventions, def-sbc-smooth-morphisms]. Let V be the complement of the closed point. Let n:N→L be finite [def-weil-finite-integral-morphism] and etale over q⁻¹V [def-weil-etale-morphism]. Suppose n is etale on an open W of L containing a point x over the closed point. Then there exist a finite etale p:E→L with all local rings of E normal domains, dense p⁻¹(q⁻¹V) in E, and an isomorphism N|q⁻¹V ≅ E|q⁻¹V over q⁻¹V. No normality or density hypothesis on N is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYE and 0EYJ, trait paragraph; Tag 033C for normality"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "A Noetherian normal local domain of dimension at most one is either a\nfield or a DVR. In the field case V is empty; take the empty scheme E, whose\nmorphism to L is finite etale, whose local rings are vacuously normal, and whose\nempty open is dense. The two restrictions to the empty open are isomorphic.\nIn the DVR case, smoothness implies flatness, so the special fibre is an\neffective Cartier divisor. It is regular, since it is smooth over the residue\nfield. Smoothness and geometric connectedness make this nonempty fibre\nintegral. Since W contains x on the fibre, W contains its generic point. The\nfinite etale model n on W shows that the punctured cover is unramified there;\nthis is the only codimension-one point on that divisor. Away from the divisor\nthe cover is already etale. Apply Tag 0EYE to obtain a finite etale E over L and\nan isomorphism of its restriction with the punctured cover. Smoothness over a\nnormal base makes L normal; etale ascent then makes all local rings of E normal\n(Tag 033C). The puncture is dense in E: a uniformizer is a nonzerodivisor on L\nby flatness over the DVR, and remains a nonzerodivisor on E by etale flatness.\nThus its vanishing locus contains no irreducible component of the locally\nNoetherian scheme E. Choose the restriction isomorphism in the direction\nfrom N to E; its compatibility with their structure maps gives the equation.\nThis theorem asserts existence only; no definition selects a witness.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-etale-over-normal-ring-normal"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "U1",
+  "document": "Stacks Project",
+  "place": "Tags 0EYE and 0EYJ, trait paragraph; Tag 033C for normality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|codimension|normal.*[Ii]so|[Ii]so.*normal|integralClosure",
+   "results": "13 hits: Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean; checked the relevant normalization/etale declarations; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite etale cover of the punctured smooth trait extends if it is etale near a point of the connected special fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale cover extends across a regular effective Cartier divisor if unramified in codimension one",
+   "results": "8 hits: Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, Algebra.etaleLocus, Algebra.exists_etale_of_isEtaleAt, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.of_comp, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.instFormallyEtaleRing; checked the relevant normalization/etale declarations; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalTraitPurity",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait-case purity extension and identification of the finite normal model",
+   "via": [
+    "lem-sbc-finite-normal-trait-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.TraitEtaleExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/TraitEtaleExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_etale_extension_of_trait_neighbourhood",
+  "statement": "theorem exists_finite_etale_extension_of_trait_neighbourhood\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    [IsDomain A] [IsIntegrallyClosed A]\n    {L N : Scheme.{u}} (q : L ⟶ Spec (.of A))\n    [QuasiCompact q] [QuasiSeparated q] [Smooth q] [GeometricallyConnected q]\n    (V : (Spec (.of A)).Opens)\n    (hV : ∀ t : Spec (.of A), t ∈ V ↔ t ≠ IsLocalRing.closedPoint A)\n    (n : N ⟶ L) [IsFinite n]\n    (het : Etale (n ∣_ (q ⁻¹ᵁ V)))\n    (W : L.Opens) (x : L) (hx : x ∈ W)\n    (hqx : q x = IsLocalRing.closedPoint A) (hW : Etale (n ∣_ W))\n    (hdim : ringKrullDim A ≤ (1 : WithBot ℕ∞)) :\n    ∃ (E : Scheme.{u}) (p : E ⟶ L), IsFinite p ∧ Etale p ∧\n      (∀ z : E, IsDomain (E.presheaf.stalk z) ∧\n        IsIntegrallyClosed (E.presheaf.stalk z)) ∧\n      Dense (↑(p ⁻¹ᵁ (q ⁻¹ᵁ V)) : Set E) ∧\n      ∃ e : (n ⁻¹ᵁ (q ⁻¹ᵁ V)).toScheme ≅ (p ⁻¹ᵁ (q ⁻¹ᵁ V)).toScheme,\n        e.hom ≫ (p ∣_ (q ⁻¹ᵁ V)) = n ∣_ (q ⁻¹ᵁ V)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-02391",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T235558-L-2202589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-02391",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T235558-L-2202589",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered declarations, node signatures, proofs, imports, report, and direct importer match the review requirements and compile cleanly."
+ }
+}

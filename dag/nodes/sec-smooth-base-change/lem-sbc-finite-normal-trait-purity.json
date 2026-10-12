@@ -19,36 +19,34 @@
  ],
  "proof": [
   {
-   "text": "If A has dimension zero it is a field and V is empty. Density forces N empty, hence n is etale. In the other case a normal Noetherian local domain of dimension one is a DVR. Smoothness makes its closed fibre a regular effective Cartier divisor; smoothness with geometric connectedness makes that fibre integral.",
+   "text": "Smoothness over Spec A implies L is locally Noetherian by Mathlib LocallyOfFiniteType.isLocallyNoetherian. Apply the punctured-cover extension theorem to get a finite etale p:E→L, normal local rings on E, density over the puncture, and an isomorphism over the puncture.",
    "uses": [
-    "lem-weil-pbc-smooth-over-normal-ring-normal",
-    "lem-weil-pbc-etale-over-normal-ring-normal"
+    "lem-sbc-trait-etale-extension"
    ],
    "elementary": false
   },
   {
-   "text": "The open W meets the closed fibre and hence contains its generic point. The punctured finite etale cover is unramified at that point, and away from the divisor it is already etale. Tag 0EYE therefore supplies a finite etale cover E of L extending the punctured cover.",
+   "text": "Apply the finite-normal dense-open comparison to n and p using normality and density of both sources to obtain an isomorphism e′:N≅E over L.",
+   "uses": [
+    "lem-sbc-finite-normal-dense-open-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite n as e′.hom composed with p. Isomorphisms are etale and etale morphisms compose, so n is etale.",
    "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "L and E are normal. Density excludes a component of N supported on the closed fibre; every generic component of N lies over a generic component of L, since n is etale over the puncture. On each affine component, both E and N are the integral closure of the base algebra in the same generic algebra: their rings are integral over the base, and any element integral over the base is integral over each normal finite algebra and therefore belongs to it. The resulting isomorphisms agree on overlaps and give N isomorphic to E over L. Consequently n is etale.",
-   "uses": [
-    "lem-weil-pbc-smooth-over-normal-ring-normal",
-    "lem-weil-pbc-etale-over-normal-ring-normal"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-smooth-over-normal-ring-normal",
-  "lem-weil-pbc-etale-over-normal-ring-normal"
+  "lem-sbc-trait-etale-extension",
+  "lem-sbc-finite-normal-dense-open-iso"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "C1",
+  "by": "U1",
   "document": "Stacks Project",
-  "place": "Tags 0EYE (pione-lemma-purity-one-divisor), 0EYJ (trait paragraph) and 0BQL (normal finite etale covers)"
+  "place": "Tags 0EYE and 0EYJ for extension; Tag 0BQL for the integral-closure comparison; assembled by U1"
  },
  "mathlib_searches": [
   {
@@ -135,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "X-02391",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T223359-L-1634629",
+  "landing": "20261012T235558-L-2202589",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered declarations, node signatures, proofs, imports, report, and direct importer match the review requirements and compile cleanly."
  }
 }

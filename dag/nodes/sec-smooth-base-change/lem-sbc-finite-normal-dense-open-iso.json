@@ -1,0 +1,111 @@
+{
+ "id": "lem-sbc-finite-normal-dense-open-iso",
+ "kind": "statement",
+ "title": "Finite normal extensions agree if their dense open restrictions agree",
+ "statement": "Let L be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], and n:N→L and p:E→L finite morphisms [def-weil-finite-integral-morphism]. Suppose every local ring of N and E is a normal domain (domain and integrally closed) [def-weil-pbc-normal-ring]. Let U be open in L with dense inverse images in both N and E. For any isomorphism e:N|U ≅ E|U over U, there exists an isomorphism e′:N ≅ E over L.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BQL, componentwise integral-closure argument"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Work over an affine open Spec R of L. Finiteness gives affine inverse\nimages Spec B and Spec C. These are Noetherian normal rings: normality of all\nlocal rings implies normality of the affine rings, and Noetherian normal rings\nare finite products of integrally closed domains. The inverse image of U is\nopen dense in each source, so it contains every generic point. The given\nisomorphism over U identifies the products of the fraction fields of B and C\nas R-algebras. Both B and C are the integral closure of the image of R in this\ncommon product: every element of either finite R-algebra is integral over R;\nconversely, an element of the product integral over R is integral over B (or C)\nand lies in B (or C), by integral closedness in the total ring of fractions.\nThus B and C agree inside that product and the resulting R-algebra isomorphism\nextends the given isomorphism over U. The extension is unique, since a map into\na separated L-scheme is determined on a schematically dense open of a reduced\nsource. The affine isomorphisms therefore agree on intersections and glue.\nIf one source is empty, density and the restricted isomorphism force the other\nsource empty as well, and the same conclusion holds.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "U1",
+  "document": "Stacks Project",
+  "place": "Tag 0BQL, componentwise integral-closure argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|codimension|normal.*[Ii]so|[Ii]so.*normal|integralClosure",
+   "results": "13 hits: Mathlib/AlgebraicGeometry/OrderOfVanishing.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean, Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean; checked the relevant normalization/etale declarations; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism on a common dense open extends uniquely between two finite normal schemes over a locally Noetherian base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two finite normal schemes isomorphic over an open dense in both sources are isomorphic",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso, AlgebraicGeometry.IsFinite.instOfIsIsoScheme, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization; checked the relevant normalization/etale declarations; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalTraitPurity",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait-case purity extension and identification of the finite normal model",
+   "via": [
+    "lem-sbc-finite-normal-trait-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteNormalDenseOpenIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_normal_iso_of_dense_open",
+  "statement": "theorem finite_normal_iso_of_dense_open\n    {L N E : Scheme.{u}} [IsLocallyNoetherian L]\n    (n : N ⟶ L) (p : E ⟶ L) [IsFinite n] [IsFinite p]\n    (hnormal : ∀ z : N, IsDomain (N.presheaf.stalk z) ∧\n      IsIntegrallyClosed (N.presheaf.stalk z))\n    (henormal : ∀ z : E, IsDomain (E.presheaf.stalk z) ∧\n      IsIntegrallyClosed (E.presheaf.stalk z))\n    (U : L.Opens)\n    (hn : Dense (↑(n ⁻¹ᵁ U) : Set N))\n    (hp : Dense (↑(p ⁻¹ᵁ U) : Set E))\n    (e : (n ⁻¹ᵁ U).toScheme ≅ (p ⁻¹ᵁ U).toScheme)\n    (he : e.hom ≫ (p ∣_ U) = n ∣_ U) :\n    ∃ e' : N ≅ E, e'.hom ≫ p = n",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-02391",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T235558-L-2202589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-02391",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T235558-L-2202589",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered declarations, node signatures, proofs, imports, report, and direct importer match the review requirements and compile cleanly."
+ }
+}
