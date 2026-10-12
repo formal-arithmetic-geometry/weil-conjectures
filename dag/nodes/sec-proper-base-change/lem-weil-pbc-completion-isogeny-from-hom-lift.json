@@ -1,0 +1,169 @@
+{
+ "id": "lem-weil-pbc-completion-isogeny-from-hom-lift",
+ "kind": "statement",
+ "title": "Unique lifting of maps between coherent ideal isogenies under a fixed module",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $\\mathcal I$ a quasi-coherent ideal sheaf, and $G,H,H^{\\prime}$ coherent modules [pqf-def-coherent]. Let $a:G\\to H$ and $a^{\\prime}:G\\to H^{\\prime}$ have kernels and cokernels annihilated by positive powers of $\\mathcal I$. If a morphism $\\theta:\\widehat H\\to\\widehat H^{\\prime}$ in the coherent formal category [def-weil-pbc-coherent-formal-module] satisfies $\\theta\\circ\\widehat a=\\widehat a^{\\prime}$, there exists a unique $\\gamma:H\\to H^{\\prime}$ with $\\gamma\\circ a=a^{\\prime}$ and $\\widehat\\gamma=\\theta$. The morphism $\\theta$ need not be invertible.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 0889(2), omitted uniqueness verification, expanded from More on Algebra, Lemma 05EK and Sheaves, Lemma 04TN"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to a basis of Noetherian affine opens. The affine tilde/Gamma correspondence identifies coherent modules with finite modules. The formal affine equivalence identifies completion and its morphisms with tensoring finite modules with the completed ring, naturally by 00MA. Ideal products on affines and quasi-coherent kernels and cokernels identify the torsion conditions with those on the module maps.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-coherent-formal-modules-local-exactness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On Spec A put S = the I-adic completion and choose finitely many generators f_i of I. The completion map is flat and induces an isomorphism modulo I. Localizing a and a' at f_i makes them isomorphisms: localization is exact and kills the I-power-torsion kernels and cokernels. Put u_i = a'_i composed with the inverse of a_i. The equation for theta forces its localization to equal the base change of u_i by cancellation. The u_i agree after localizing at f_i f_j.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in H the pair (theta(1 tensor x), (u_i(x/1))_i) is in the kernel of the difference map in the formal gluing complex for H'. Exactness gives a unique gamma(x) with those components. Injectivity proves additivity and A-linearity. The completed map is theta, by equality on pure tensors; the localized maps are u_i. Injectivity in that complex for H' proves gamma composed with a equals a', since the equation holds after completion and every localization. Every other lift has the same completed and localized maps, so is equal by injectivity. For I=0 the empty generator complex reduces to identity completion; for I=1 both maps under G are already isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-complex-exact",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer the resulting unique maps by the fully faithful affine correspondence. Restriction to a smaller affine preserves the torsion condition and completed equations, so uniqueness makes the lifts compatible. Every intersection of two affines is covered by smaller affines; equality there is local. Glue the maps by 04TN, and check both equations and uniqueness locally. This does not require intersections to be affine.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-coherent-formal-modules-local-exactness",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-formal-modules-local-exactness",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-formal-glueing-complex-exact",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 0889(2), omitted uniqueness verification; expanded by P1 from 05EK and 04TN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unique lifting of formal morphisms between coherent modules equipped with ideal power torsion isogenies",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique lifting of formal morphisms between coherent modules equipped with ideal power torsion isogenies",
+   "results": "Hausdorffification.lift_eq, AdicCompletion.map_ext'', AdicCompletion.map_ext''_iff, IsAdicComplete.StrictMono.lift, IsAdicComplete.lift, AdicCompletion.lift, Hausdorffification.lift, IsAdicComplete.mk_lift",
+   "date": "2026-10-12",
+   "verdict": "No exact match: ring completion material only."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(map_bijective|isogeny|hom_lift)|isogeny.*completion",
+   "results": "1 hits: Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match: ring completion material only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 0889(2) in the essential-surjectivity chain: compatible Hom descent (original node steps 6 and 8)",
+   "via": [
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompletionIsogenyFromHomLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletionIsogenyFromHomLift.lean",
+  "declaration": "AlgebraicGeometry.completion_isogeny_from_hom_lift",
+  "statement": "theorem completion_isogeny_from_hom_lift (X : Scheme.{u}) [IsNoetherian X]\n    (I : X.IdealSheafData) :\n    ∀ (G H H' : CoherentModules X) (a : G ⟶ H) (a' : G ⟶ H'),\n      (∃ t : ℕ, 1 ≤ t ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2 (kernel a.hom)) ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2 (cokernel a.hom))) →\n      (∃ t : ℕ, 1 ≤ t ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2 (kernel a'.hom)) ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2 (cokernel a'.hom))) →\n      ∀ θ : (completion X I).obj H ⟶ (completion X I).obj H',\n        (completion X I).map a ≫ θ = (completion X I).map a' →\n        ∃! γ : H ⟶ H', a ≫ γ = a' ∧ (completion X I).map γ = θ",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-93659",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T213437-L-1178375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-93659",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T213437-L-1178375",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match their DAG nodes; all three modules compile cleanly, no direct importers require reader-gate compilation, and the statement correction is documented and source-authorized."
+ }
+}

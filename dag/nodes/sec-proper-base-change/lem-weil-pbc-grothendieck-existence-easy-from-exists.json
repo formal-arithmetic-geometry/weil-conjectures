@@ -1,0 +1,188 @@
+{
+ "id": "lem-weil-pbc-grothendieck-existence-easy-from-exists",
+ "kind": "statement",
+ "title": "Existence of algebraization of a map out of a coherent completion",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $\\mathcal I$ a quasi-coherent ideal sheaf, $G$ a coherent module [pqf-def-coherent], and $F$ a coherent formal module [def-weil-pbc-coherent-formal-module]. Let $\\alpha:\\widehat G\\to F$ be a morphism whose component kernels and cokernels are all annihilated by one positive power of $\\mathcal I$ [lem-weil-pbc-formal-systems-annihilated-by-power]. There exist a coherent module $H$, a map $a:G\\to H$ with kernel and cokernel killed by one positive power of $\\mathcal I$, and an isomorphism $\\beta:\\widehat H\\cong F$, such that $\\alpha=\\beta\\circ\\widehat a$. No uniqueness assertion is made.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 0889 (lemma-existence-easy), proof of (2), lines 6504--6550; More on Algebra, Lemma 0ALK(2) and Remark 05EU"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-formal-systems-annihilated-by-power"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to Noetherian affine opens. Exact restriction commutes with ideal products and quotient modules, hence with completion. The affine tilde/Gamma correspondence identifies coherent modules with finite modules. Lemma 087W identifies formal modules with finite modules over the completed ring. By 00MA, completion of a finite A-module is its base change to the completed ring. Remark 0888 converts the componentwise kernel/cokernel bound into a bound for the completed module map.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-local-exactness",
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On Spec A put S = the I-adic completion, M = Gamma(G), and N' the finite S-module of the formal system. The map A -> S is flat, I is finitely generated since A is Noetherian, and A/I -> S/IS is an isomorphism. Apply formal gluing isogeny part (2) to the map S tensor M -> N'. It yields an A-module N, a map psi:M -> N with I-power-torsion kernel and cokernel, and an isomorphism S tensor N -> N' compatible with the formal map.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-formal-glueing-isogeny"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finitely many generators f_i of I. Each localized psi is an isomorphism because localization is exact and kills I-power torsion. Thus N_f_i is finite, and S tensor N is N', also finite. The formal gluing finiteness criterion makes N finite over A. Its kernel and cokernel are finite over the Noetherian ring A. Take a positive maximum of the exponents killing their finitely many generators. The affine dictionary and natural completion/tensor comparison now give a coherent triple with a uniform ordinary torsion bound.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-finite-modules",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-completion-isogeny-from-hom-lift] to the formal comparison and its inverse on every affine inside an overlap of local triples. The unique lifts are inverse: their composites and the identities are lifts of the same formal map. Uniqueness also forces restriction compatibility. Glue those maps on overlaps by 04TN; uniqueness gives their cocycle identity. No intersection is assumed affine.",
+   "uses": [
+    "lem-weil-pbc-completion-isogeny-from-hom-lift",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-coherent-formal-modules-local-exactness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Glue the local coherent modules by 00AL/00AM and their maps and completion comparisons componentwise by 04TN. Coherence is local. Quotients commute with restriction, so the glued comparisons and their inverses form the required formal isomorphism. Naturality and factorization are local equalities. Since X is Noetherian there is a finite affine subcover; the positive maximum of the local annihilating exponents kills the kernel and cokernel of the glued ordinary map. Use exponent one on the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-local-exactness",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-formal-systems-annihilated-by-power",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-formal-glueing-isogeny",
+  "lem-weil-pbc-formal-glueing-finite-modules",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-completion-isogeny-from-hom-lift",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "pqf-def-coherent",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 0889(2), its omitted outgoing existence argument expanded using 0ALK(2), 05EU, and Zariski descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent formal modules algebraization existence with ideal power torsion kernel and cokernel",
+   "results": "AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Hausdorffification, IsAdicComplete, AdicCompletion",
+   "date": "2026-10-12",
+   "verdict": "No exact match: ring completion material only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent formal modules algebraization existence with ideal power torsion kernel and cokernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*formal|formal.*coherent|existence.*completion",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact match: ring completion material only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 0889(2) in the essential-surjectivity chain: affine existence and Zariski descent (original node steps 1-3, 6-7 and 9)",
+   "via": [
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceEasyFromExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceEasyFromExists.lean",
+  "declaration": "AlgebraicGeometry.grothendieckExistenceEasy_exists_from",
+  "statement": "theorem grothendieckExistenceEasy_exists_from (X : Scheme.{u}) [IsNoetherian X]\n    (I : X.IdealSheafData) (G : CoherentModules X)\n    (F : CoherentFormalModule X I) :\n    ∀ (α : (completion X I).obj G ⟶ F),\n      (∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ,\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2\n          (kernel (α.hom.app (op n)))) ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2\n          (cokernel (α.hom.app (op n))))) →\n      ∃ (H : CoherentModules X) (a : G ⟶ H)\n        (β : (completion X I).obj H ≅ F),\n        (∃ t : ℕ, 1 ≤ t ∧\n          IsZero (Scheme.idealModuleProduct\n            (Scheme.idealSheafPower I.toModulesι t).2 (kernel a.hom)) ∧\n          IsZero (Scheme.idealModuleProduct\n            (Scheme.idealSheafPower I.toModulesι t).2 (cokernel a.hom))) ∧\n        α = (completion X I).map a ≫ β.hom",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-93659",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T213437-L-1178375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-93659",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T213437-L-1178375",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match their DAG nodes; all three modules compile cleanly, no direct importers require reader-gate compilation, and the statement correction is documented and source-authorized."
+ }
+}

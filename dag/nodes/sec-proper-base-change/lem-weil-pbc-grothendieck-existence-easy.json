@@ -31,172 +31,36 @@
  ],
  "proof": [
   {
-   "text": "(Restriction to opens.) For an open $U\\subseteq X$, $U$ is a Noetherian scheme, $\\mathcal I|_U$ a quasi-coherent ideal and $(\\mathcal F_n)\\mapsto(\\mathcal F_n|_U)$ a functor $\\mathit{Coh}(X,\\mathcal I)\\to\\mathit{Coh}(U,\\mathcal I|_U)$ [lem-weil-pbc-coherent-formal-modules-local-exactness] (1). Restriction commutes with completion: $(\\mathcal F/\\mathcal I^n\\mathcal F)|_U=\\mathcal F|_U/(\\mathcal I|_U)^n\\mathcal F|_U$, since $\\mathcal I^n\\mathcal F$ is the image of $\\mathcal I^n\\otimes\\mathcal F\\to\\mathcal F$ [def-weil-pbc-coherent-formal-module] (0) and images, cokernels and tensor products of $\\mathcal O_X$-modules are formed compatibly with restriction to opens. By [lem-weil-pbc-formal-systems-annihilated-by-power] (with $\\mathcal K=\\mathcal I$), '$\\alpha$ has kernel and cokernel annihilated by a power of $\\mathcal I$' is condition (1) there ($\\mathcal I^t\\operatorname{Ker}\\alpha_n=\\mathcal I^t\\operatorname{Coker}\\alpha_n=0$ for all $n$), which is preserved by restriction to $U$, and which holds on $X$ as soon as it holds, for some $t_i$, on each member $U_i$ of a finite affine open covering (condition (3) there). Likewise $\\mathcal I^t\\operatorname{Ker}a=0$ for a map $a$ of coherent modules is a local condition, and for quasi-coherent $\\mathcal H$ and affine $U$, $(\\mathcal I^t\\mathcal H)(U)=\\mathcal I(U)^t\\mathcal H(U)$ [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (2). Hence the restriction to $U$ of a triple $(\\mathcal F,a,\\beta)$ for $((\\mathcal F_n),\\mathcal G,\\alpha)$ is a triple for $((\\mathcal F_n|_U),\\mathcal G|_U,\\alpha|_U)$, and the restriction of an isomorphism of triples is one.",
+   "text": "For part (1), use [lem-weil-pbc-easy-algebraization-torsion-triple], the already stated source-faithful torsion-controlled version. Reorder the two conjuncts and the comparison hypotheses to match the present interface. This is a direct application of an existing declaration.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-local-exactness",
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-formal-systems-annihilated-by-power",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0889 (lemma-existence-easy), proof lines 6504--6550 ('it suffices to construct (F, a, beta) Zariski locally on X'); Lemma 087X (lemma-inverse-systems-abelian) (2); Remark 0888"
-   }
+   "elementary": true
   },
   {
-   "text": "(The affine dictionary.) Let $X=\\operatorname{Spec}A$ with $A$ a Noetherian ring [def-weil-pbc-noetherian-ring], $I=\\mathcal I(X)$, $\\mathcal I=\\widetilde I$, $A^\\wedge$ the $I$-adic completion and $S=A^\\wedge$. Quasi-coherent $\\mathcal O_X$-modules and $A$-modules correspond by $\\mathcal H\\mapsto\\Gamma(X,\\mathcal H)$, $P\\mapsto\\widetilde P$ (fully faithful on morphisms, unit and counit isomorphisms) [lem-weil-pbc-affine-tilde-gamma-adjunction], and coherent modules correspond to finitely generated modules [pqf-lem-coherent-ft-locnoeth], [lem-weil-pbc-quasi-coherent-finite-type-affine]. Kernels and cokernels of maps of quasi-coherent modules are quasi-coherent with sections over $X$ the kernel and cokernel of the map on sections [lem-weil-pbc-quasi-coherent-module-kernel], [lem-weil-pbc-quasi-coherent-module-cokernel-image], and $\\Gamma(X,\\mathcal I^t\\mathcal H)=I^t\\Gamma(X,\\mathcal H)$, $\\Gamma(X,\\mathcal H/\\mathcal I^n\\mathcal H)=P/I^nP$ for $P=\\Gamma(X,\\mathcal H)$ [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections]. The functor $E:(\\mathcal F_n)\\mapsto\\varprojlim\\Gamma(X,\\mathcal F_n)$ is an equivalence of $\\mathit{Coh}(X,\\mathcal I)$ with finitely generated $A^\\wedge$-modules [lem-weil-pbc-coherent-formal-modules-affine] (2); for coherent $\\mathcal H=\\widetilde P$ it gives $E(\\mathcal H^\\wedge)=\\varprojlim P/I^nP=P^\\wedge$ and $E(u^\\wedge)=u^\\wedge$, and $c_P:P\\otimes_AS\\to P^\\wedge$ is a natural isomorphism for finite $P$ [lem-weil-pbc-completion-finite-module-tensor]. Put $M'=E((\\mathcal F_n))$, $N=\\Gamma(X,\\mathcal G)$. In case (1), $\\alpha$ corresponds to $\\varphi=c_N^{-1}E(\\alpha):M'\\to N\\otimes_AS$, and by [lem-weil-pbc-formal-systems-annihilated-by-power] ((1)$\\Leftrightarrow$(2) with $\\mathcal K=\\mathcal I$) $\\operatorname{Ker}\\varphi$, $\\operatorname{Coker}\\varphi$ are killed by some $I^t$. A triple $(\\mathcal F,a,\\beta)$ on $X$ is the same (up to these equivalences) as a triple $(M,\\psi,b)$ of a finitely generated $A$-module $M=\\Gamma(X,\\mathcal F)$, an $A$-linear $\\psi=\\Gamma(X,a):M\\to N$ with $\\operatorname{Ker}\\psi$, $\\operatorname{Coker}\\psi$ killed by a power of $I$, and an $S$-linear isomorphism $b=c_M^{-1}E(\\beta):M'\\to M\\otimes_AS$ with $(\\psi\\otimes_AS)\\circ b=\\varphi$ (naturality of $c$ turns $\\alpha=a^\\wedge\\beta$ into this equation); isomorphisms of triples correspond to $A$-linear isomorphisms $\\gamma:M\\to M_2$ with $\\psi_2\\gamma=\\psi$ and $(\\gamma\\otimes_AS)b=b_2$. Case (2) is translated the same way: $\\alpha$ corresponds to $\\varphi=E(\\alpha)c_M:M\\otimes_AS\\to N'$ with $M=\\Gamma(X,\\mathcal G)$, $N'=E((\\mathcal F_n))$, and triples to $(N,\\psi:M\\to N,b:N\\otimes_AS\\cong N')$ with $b(\\psi\\otimes_AS)=\\varphi$.",
+   "text": "For part (2), use [lem-weil-pbc-grothendieck-existence-easy-from-exists] to obtain H, a, beta and the ordinary torsion bound. Given another torsion-controlled triple, set theta to beta followed by beta' inverse and theta' to beta' followed by beta inverse. The factorization equations imply that both formal maps commute with the completed maps from G.",
    "uses": [
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-adic-completion",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-formal-systems-annihilated-by-power"
+    "lem-weil-pbc-grothendieck-existence-easy-from-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0889 (lemma-existence-easy), proof lines 6504--6550 ('Lemma 087W applies ... alpha corresponds to a map phi : M' -> N^ ... N^ = N (x)_A A^ (Algebra, Lemma 00MA)'); Lemma 087W; Algebra, Lemma 00MA"
-   }
+   "elementary": true
   },
   {
-   "text": "(Hypotheses of formal glueing.) In the affine situation of step 2, $A\\to S=A^\\wedge$ is flat [lem-weil-pbc-noetherian-completion-flat], $I=(f_1,\\dots,f_r)$ is finitely generated ($A$ Noetherian [def-weil-pbc-noetherian-ring]), and $A/I\\to S/IS$ is an isomorphism [lem-weil-pbc-adic-completion-mod-ideal] (2). So [lem-weil-pbc-formal-glueing-isogeny], [lem-weil-pbc-formal-glueing-complex-exact] and [lem-weil-pbc-formal-glueing-finite-modules] apply to $A\\to S$ and $f_1,\\dots,f_r$. Moreover a finitely generated module is $I$-power torsion iff it is killed by some $I^t$ (take $t$ the maximum over generators), and if $u:P\\to Q$ has kernel and cokernel killed by $I^t$ then $u_{f_i}:P_{f_i}\\to Q_{f_i}$ is an isomorphism for every $i$ [def-weil-pbc-module-localization-away] (localization is exact and kills modules annihilated by $f_i^t$).",
+   "text": "Use [lem-weil-pbc-completion-isogeny-from-hom-lift] to lift theta to f and theta' to g. Apply its uniqueness to each identity formal map: f followed by g and the identity are lifts of the same map under G, so are equal; similarly g followed by f is the identity. Thus f and g define an isomorphism. Its equations follow from the lifting equations and beta inverse identities. For any second isomorphism of triples, cancel beta' to identify its completed hom with theta. Unique Hom lifting gives equality of homs, and Iso.ext gives equality of isomorphisms. All these steps are proved in Lean, with no hole in the parent module.",
    "uses": [
-    "lem-weil-pbc-noetherian-completion-flat",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-adic-completion-mod-ideal",
-    "lem-weil-pbc-formal-glueing-isogeny",
-    "lem-weil-pbc-formal-glueing-complex-exact",
-    "lem-weil-pbc-formal-glueing-finite-modules",
-    "def-weil-pbc-module-localization-away"
+    "lem-weil-pbc-completion-isogeny-from-hom-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 0ALK (hypotheses), Proposition 05ER; Algebra, Lemma 00MB; Cohomology of Schemes, Lemma 0889, proof"
-   }
-  },
-  {
-   "text": "(Existence over an affine, part (1).) With $\\varphi:M'\\to N\\otimes_AS$ as in step 2, [lem-weil-pbc-formal-glueing-isogeny] (1) gives an $A$-module $M$, an $A$-linear $\\psi:M\\to N$ and an $S$-isomorphism $b:M'\\to M\\otimes_AS$ with $(\\psi\\otimes_AS)b=\\varphi$; by its part (3) $\\operatorname{Ker}\\psi\\cong\\operatorname{Ker}(\\psi\\otimes_AS)\\cong\\operatorname{Ker}\\varphi$ and $\\operatorname{Coker}\\psi\\cong\\operatorname{Coker}\\varphi$, so both are killed by $I^t$. $M$ is finitely generated by [lem-weil-pbc-formal-glueing-finite-modules]: $M\\otimes_AS\\cong M'$ is a finitely generated $S$-module, and $M_{f_i}\\cong N_{f_i}$ by $\\psi_{f_i}$ (step 3) is finitely generated over $A_{f_i}$ because $N$ is finite over $A$ [def-weil-finitely-generated-module]. Hence $M\\otimes_AS=M^\\wedge$ via $c_M$ and $(M,\\psi,b)$ is a triple in the sense of step 2; by step 2, $(\\widetilde M,\\widetilde\\psi,\\beta)$ with $E(\\beta)=c_M b$ is a triple $(\\mathcal F,a,\\beta)$ for $\\alpha$ on $X$.",
-   "uses": [
-    "lem-weil-pbc-formal-glueing-isogeny",
-    "lem-weil-pbc-formal-glueing-finite-modules",
-    "def-weil-finitely-generated-module",
-    "lem-weil-pbc-completion-finite-module-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0889 (lemma-existence-easy), proof lines 6504--6550 ('By More on Algebra, Lemma 0ALK there is an A-module map psi : M -> N ... As N and M' are finite modules, we conclude that M is a finite A-module, see More on Algebra, Remark 05EU. Hence M (x)_A A^ = M^')"
-   }
-  },
-  {
-   "text": "(Uniqueness over an affine, part (1); Stacks omits this verification, written out here.) Let $(M,\\psi,b)$, $(M_2,\\psi_2,b_2)$ be two triples as in step 2 and $\\theta=b_2b^{-1}:M\\otimes_AS\\to M_2\\otimes_AS$, so $(\\psi_2\\otimes_AS)\\theta=\\psi\\otimes_AS$. By step 3, $\\psi_{f_i}$ and $\\psi_{2,f_i}$ are isomorphisms; put $u_i=\\psi_{2,f_i}^{-1}\\psi_{f_i}:M_{f_i}\\to M_{2,f_i}$. (i) Under $(P\\otimes_AS)_{f_i}=P_{f_i}\\otimes_AS$, $\\theta_{f_i}=u_i\\otimes_AS$, since composing either with the isomorphism $\\psi_{2,f_i}\\otimes_AS$ gives $\\psi_{f_i}\\otimes_AS$; (ii) $u_i$ and $u_j$ induce the same map $M_{f_if_j}\\to M_{2,f_if_j}$, namely $\\psi_{2,f_if_j}^{-1}\\psi_{f_if_j}$. For $m\\in M$ the element $(\\theta(m\\otimes1),(u_i(m/1))_i)$ lies in the kernel of the map $\\beta$ of the glueing complex of $M_2$ (by (i) and (ii)), so by [lem-weil-pbc-formal-glueing-complex-exact] it is $\\alpha_{M_2}(\\gamma(m))$ for a unique $\\gamma(m)\\in M_2$. Then $\\gamma:M\\to M_2$ is $A$-linear, $\\gamma\\otimes_AS=\\theta$ (both $S$-linear, equal on the $m\\otimes1$) and $\\gamma_{f_i}=u_i$; $\\psi_2\\gamma=\\psi$ because $\\alpha_N(\\psi_2\\gamma(m))=((\\psi_2\\otimes S)\\theta(m\\otimes1),(\\psi_{2,f_i}u_i(m/1))_i)=\\alpha_N(\\psi(m))$ and $\\alpha_N$ is injective; and $(\\gamma\\otimes_AS)b=b_2$. So $\\gamma$ is a morphism of triples. Exchanging the roles gives $\\gamma':M_2\\to M$; $\\gamma'\\gamma$ is a morphism of triples from $(M,\\psi,b)$ to itself, and any such $\\delta$ has $\\delta\\otimes_AS=\\mathrm{id}$ and $\\delta_{f_i}=\\mathrm{id}$ (as $\\psi\\delta=\\psi$ and $\\psi_{f_i}$ is invertible), so $\\delta=\\mathrm{id}$ by injectivity of $\\alpha_M$; likewise $\\gamma\\gamma'=\\mathrm{id}$. Finally any morphism of triples $\\delta:M\\to M_2$ has $\\delta\\otimes_AS=b_2b^{-1}=\\theta$ and $\\delta_{f_i}=\\psi_{2,f_i}^{-1}\\psi_{f_i}=u_i$, hence $\\alpha_{M_2}(\\delta(m))=\\alpha_{M_2}(\\gamma(m))$ and $\\delta=\\gamma$. By step 2 the same holds for triples on $X=\\operatorname{Spec}A$: between two triples there is exactly one isomorphism.",
-   "uses": [
-    "lem-weil-pbc-formal-glueing-complex-exact",
-    "def-weil-pbc-module-localization-away",
-    "def-weil-module-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0889 (lemma-existence-easy), proof lines 6504--6550 ('We omit the verification that the triple ... so obtained is unique up to unique isomorphism'); argument written by the agent from More on Algebra, Lemma 05EK (lemma-recover-module-from-glueing-data) and the full faithfulness in Proposition 05ER"
-   }
-  },
-  {
-   "text": "(Part (2) over an affine.) With $\\varphi:M\\otimes_AS\\to N'$ as in step 2 (kernel and cokernel killed by $I^t$), [lem-weil-pbc-formal-glueing-isogeny] (2) gives an $A$-module $N$, an $A$-linear $\\psi:M\\to N$ and an $S$-isomorphism $b:N\\otimes_AS\\to N'$ with $b(\\psi\\otimes_AS)=\\varphi$, and by its part (3) $\\operatorname{Ker}\\psi$, $\\operatorname{Coker}\\psi$ are isomorphic to $\\operatorname{Ker}\\varphi$, $\\operatorname{Coker}\\varphi$, hence killed by $I^t$. $N$ is finitely generated by [lem-weil-pbc-formal-glueing-finite-modules]: $N\\otimes_AS\\cong N'$ is finite over $S$ and $N_{f_i}\\cong M_{f_i}$ via $\\psi_{f_i}$ (step 3) is finite over $A_{f_i}$. This gives the triple on $X$ as in step 4. Uniqueness is step 5 with the arrows reversed: for triples $(N,\\psi,b)$, $(N_2,\\psi_2,b_2)$ put $\\theta=b_2^{-1}b$ (so $\\theta(\\psi\\otimes S)=\\psi_2\\otimes S$) and $u_i=\\psi_{2,f_i}\\psi_{f_i}^{-1}$; then $\\theta_{f_i}=u_i\\otimes S$, the $u_i$ agree on $N_{f_if_j}$, [lem-weil-pbc-formal-glueing-complex-exact] for $N_2$ gives a unique $\\gamma:N\\to N_2$ with $\\gamma\\otimes S=\\theta$, $\\gamma_{f_i}=u_i$, and $\\gamma\\psi=\\psi_2$ is checked after applying the injective $\\alpha_{N_2}$; inverse and uniqueness as in step 5.",
-   "uses": [
-    "lem-weil-pbc-formal-glueing-isogeny",
-    "lem-weil-pbc-formal-glueing-finite-modules",
-    "lem-weil-pbc-formal-glueing-complex-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0889 (lemma-existence-easy), proof lines 6504--6550 ('The proof of (2) is exactly the same and we omit it'); More on Algebra, Lemma 0ALK (2)"
-   }
-  },
-  {
-   "text": "(A basis of Noetherian affine opens.) Let $\\mathcal B$ be the set of opens $U\\subseteq X$ such that $(U,\\mathcal O_X|_U)\\cong\\operatorname{Spec}A$ for a Noetherian ring $A$. Since $X$ is locally Noetherian, it is covered by opens $\\operatorname{Spec}A_i$ with $A_i$ Noetherian [pqf-def-locnoeth]; the principal opens $D(g)$, $g\\in A_i$, form a basis of the topology of $\\operatorname{Spec}A_i$ [def-weil-affine-spectrum], and $D(g)\\cong\\operatorname{Spec}(A_i)_g$ [lem-weil-pbc-principal-localization-open-immersion] with $(A_i)_g$ Noetherian [lem-weil-pbc-localization-noetherian]. Hence $\\mathcal B$ is a basis of the topology of $X$ (and of every open $W\\subseteq X$: every point of $W$ has a neighbourhood in $\\mathcal B$ contained in $W$). Steps 4-6 apply to every $U\\in\\mathcal B$ with the data restricted to $U$ (step 1).",
-   "uses": [
-    "pqf-def-locnoeth",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-localization-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0889, proof ('Zariski locally on X'); written out by the agent (Schemes, principal opens D(g) = Spec A_g; Algebra, localization of a Noetherian ring is Noetherian)"
-   }
-  },
-  {
-   "text": "(Uniqueness on $X$.) Let $(\\mathcal F,a,\\beta)$, $(\\mathcal F_2,a_2,\\beta_2)$ be two triples on the Noetherian scheme $X$ (case (1); case (2) is identical). For every $U\\in\\mathcal B$ (step 7) the restrictions are triples on $U$ (step 1), and steps 5-6 give a unique isomorphism of triples $\\gamma_U:\\mathcal F|_U\\to\\mathcal F_2|_U$. For $V\\subseteq U$ both in $\\mathcal B$, $\\gamma_U|_V=\\gamma_V$ by uniqueness on $V$. Since $\\mathcal B$ is a basis, for $U,U'\\in\\mathcal B$ the maps $\\gamma_U|_{U\\cap U'}$, $\\gamma_{U'}|_{U\\cap U'}$ agree on every $V\\in\\mathcal B$ with $V\\subseteq U\\cap U'$, and these $V$ cover $U\\cap U'$, hence they agree [lem-weil-pbc-glue-sheaves-of-modules] (1). So the $\\gamma_U$ glue to an $\\mathcal O_X$-linear $\\gamma:\\mathcal F\\to\\mathcal F_2$, and the $\\gamma_U^{-1}$ to its inverse [lem-weil-pbc-glue-sheaves-of-modules] (1). The identities $a_2\\gamma=a$ and $\\gamma^\\wedge\\beta=\\beta_2$ (componentwise maps of sheaves $\\mathcal F_n\\to\\mathcal F_2/\\mathcal I^n\\mathcal F_2$, with $(\\gamma^\\wedge)|_U=(\\gamma|_U)^\\wedge$ by step 1) hold on every $U\\in\\mathcal B$, hence on $X$ by the uniqueness clause of [lem-weil-pbc-glue-sheaves-of-modules] (1). Any isomorphism of triples restricts on each $U\\in\\mathcal B$ to $\\gamma_U$, hence equals $\\gamma$.",
-   "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0889 (lemma-existence-easy), proof lines 6504--6550 ('The uniqueness implies it suffices to construct (F, a, beta) Zariski locally on X'); Sheaves, Lemma 04TN (lemma-glue-maps)"
-   }
-  },
-  {
-   "text": "(Existence on $X$.) The underlying space of $X$ is quasi-compact [pqf-def-locnoeth] and $\\mathcal B$ (step 7) covers $X$, so $X=U_1\\cup\\dots\\cup U_s$ with $U_i\\in\\mathcal B$. On each $U_i$ step 4 (case (1)) or step 6 (case (2)) gives a triple $T_i=(\\mathcal F^{(i)},a_i,\\beta_i)$ for the restricted data (step 1), with $\\mathcal I^{t_i}$ killing $\\operatorname{Ker}a_i$ and $\\operatorname{Coker}a_i$. The open $U_{ij}=U_i\\cap U_j$ is a Noetherian scheme [lem-weil-pbc-coherent-formal-modules-local-exactness] (1) and $T_i|_{U_{ij}}$, $T_j|_{U_{ij}}$ are triples there (step 1), so step 8 gives a unique isomorphism of triples $\\varphi_{ij}:T_i|_{U_{ij}}\\to T_j|_{U_{ij}}$; by the same uniqueness on $U_{ijk}$, $\\varphi_{ik}=\\varphi_{jk}\\varphi_{ij}$. Glue [lem-weil-pbc-glue-sheaves-of-modules] (2) to an $\\mathcal O_X$-module $\\mathcal F$ with isomorphisms $\\mathcal F|_{U_i}\\cong\\mathcal F^{(i)}$; $\\mathcal F$ is coherent because coherence is a local property [pqf-def-coherent] (equivalently quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth]). Since the $\\varphi_{ij}$ commute with the $a_i$ and $\\beta_i$, the maps $a_i$ glue to $a:\\mathcal F\\to\\mathcal G$ (case (1); $a:\\mathcal G\\to\\mathcal F$ in case (2)) and, for each $n$, the $\\beta_{i,n}$ glue to $\\beta_n$ between $\\mathcal F_n$ and $\\mathcal F/\\mathcal I^n\\mathcal F$ (using step 1 to identify $(\\mathcal F/\\mathcal I^n\\mathcal F)|_{U_i}$), compatible with the transition maps and invertible, i.e. an isomorphism $\\beta$ in $\\mathit{Coh}(X,\\mathcal I)$ [lem-weil-pbc-glue-sheaves-of-modules] (1). The identity $\\alpha=a^\\wedge\\beta$ (resp. $\\alpha=\\beta a^\\wedge$) holds on every $U_i$, hence on $X$; and $\\operatorname{Ker}a$, $\\operatorname{Coker}a$ are killed by $\\mathcal I^t$, $t=\\max_it_i$, since this holds on each $U_i$ (step 1). This is the required triple; its uniqueness up to unique isomorphism is step 8.",
-   "uses": [
-    "pqf-def-locnoeth",
-    "lem-weil-pbc-coherent-formal-modules-local-exactness",
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "pqf-def-coherent",
-    "pqf-lem-coherent-ft-locnoeth",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 0889 (lemma-existence-easy), proof lines 6504--6550; Sheaves, Lemmas 00AL and 00AM (lemma-glue-sheaves, lemma-glue-sheaves-structures)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-local-exactness",
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-formal-systems-annihilated-by-power",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-adic-completion",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-completion-finite-module-tensor",
-  "lem-weil-pbc-noetherian-completion-flat",
-  "lem-weil-pbc-adic-completion-mod-ideal",
-  "lem-weil-pbc-formal-glueing-isogeny",
-  "lem-weil-pbc-formal-glueing-complex-exact",
-  "lem-weil-pbc-formal-glueing-finite-modules",
-  "def-weil-pbc-module-localization-away",
-  "def-weil-finitely-generated-module",
-  "def-weil-module-base-change",
-  "pqf-def-locnoeth",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-glue-sheaves-of-modules",
-  "pqf-def-coherent"
+  "lem-weil-pbc-easy-algebraization-torsion-triple",
+  "lem-weil-pbc-grothendieck-existence-easy-from-exists",
+  "lem-weil-pbc-completion-isogeny-from-hom-lift"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0889 (lemma-existence-easy, line 6487), proof lines 6504--6550, with More on Algebra, Lemma 0ALK and Remark 05EU (literature/stacks-project/more-algebra.tex); the reduction to affines (steps 1, 7, 8, 9), the uniqueness Stacks omits (step 5) and part (2) Stacks omits (step 6) are written out by an agent, from More on Algebra, Lemma 05EK and Sheaves, Section 00AK"
+  "place": "Lemma 0889(1) via the existing torsion-triple declaration; (2) via its affine existence and Hom-descent arguments, with the inverse and isomorphism uniqueness assembly proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -266,10 +130,10 @@
   "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy",
   "declaration": "AlgebraicGeometry.grothendieckExistenceEasy",
   "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceEasy.lean",
-  "statement": "theorem grothendieckExistenceEasy (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (G : CoherentModules X) (F : CoherentFormalModule X I) : (∀ (α : F ⟶ (completion X I).obj G), (∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι t).2 (kernel (α.hom.app (op n)))) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι t).2 (cokernel (α.hom.app (op n))))) → ∃ (H : CoherentModules X) (a : H ⟶ G) (β : F ≅ (completion X I).obj H), α = β.hom ≫ (completion X I).map a ∧ ∀ (H' : CoherentModules X) (a' : H' ⟶ G) (β' : F ≅ (completion X I).obj H'), α = β'.hom ≫ (completion X I).map a' → ∃! γ : H ≅ H', γ.hom ≫ a' = a ∧ β.hom ≫ (completion X I).map γ.hom = β'.hom) ∧ (∀ (α : (completion X I).obj G ⟶ F), (∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι t).2 (kernel (α.hom.app (op n)))) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι t).2 (cokernel (α.hom.app (op n))))) → ∃ (H : CoherentModules X) (a : G ⟶ H) (β : (completion X I).obj H ≅ F), α = (completion X I).map a ≫ β.hom ∧ ∀ (H' : CoherentModules X) (a' : G ⟶ H') (β' : (completion X I).obj H' ≅ F), α = (completion X I).map a' ≫ β'.hom → ∃! γ : H ≅ H', a ≫ γ.hom = a' ∧ (completion X I).map γ.hom ≫ β'.hom = β.hom)",
+  "statement": "theorem grothendieckExistenceEasy (X : Scheme.{u}) [IsNoetherian X]\n    (I : X.IdealSheafData) (G : CoherentModules X)\n    (F : CoherentFormalModule X I) :\n    (∀ (α : F ⟶ (completion X I).obj G),\n      (∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ,\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2\n          (kernel (α.hom.app (op n)))) ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2\n          (cokernel (α.hom.app (op n))))) →\n      ∃ (H : CoherentModules X) (a : H ⟶ G)\n        (β : F ≅ (completion X I).obj H),\n        (∃ t : ℕ, 1 ≤ t ∧\n          IsZero (Scheme.idealModuleProduct\n            (Scheme.idealSheafPower I.toModulesι t).2 (kernel a.hom)) ∧\n          IsZero (Scheme.idealModuleProduct\n            (Scheme.idealSheafPower I.toModulesι t).2 (cokernel a.hom))) ∧\n        α = β.hom ≫ (completion X I).map a ∧\n        ∀ (H' : CoherentModules X) (a' : H' ⟶ G)\n          (β' : F ≅ (completion X I).obj H'),\n          (∃ t : ℕ, 1 ≤ t ∧\n            IsZero (Scheme.idealModuleProduct\n              (Scheme.idealSheafPower I.toModulesι t).2 (kernel a'.hom)) ∧\n            IsZero (Scheme.idealModuleProduct\n              (Scheme.idealSheafPower I.toModulesι t).2 (cokernel a'.hom))) →\n          α = β'.hom ≫ (completion X I).map a' →\n          ∃! γ : H ≅ H',\n            γ.hom ≫ a' = a ∧\n              β.hom ≫ (completion X I).map γ.hom = β'.hom) ∧\n    (∀ (α : (completion X I).obj G ⟶ F),\n      (∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ,\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2\n          (kernel (α.hom.app (op n)))) ∧\n        IsZero (Scheme.idealModuleProduct\n          (Scheme.idealSheafPower I.toModulesι t).2\n          (cokernel (α.hom.app (op n))))) →\n      ∃ (H : CoherentModules X) (a : G ⟶ H)\n        (β : (completion X I).obj H ≅ F),\n        (∃ t : ℕ, 1 ≤ t ∧\n          IsZero (Scheme.idealModuleProduct\n            (Scheme.idealSheafPower I.toModulesι t).2 (kernel a.hom)) ∧\n          IsZero (Scheme.idealModuleProduct\n            (Scheme.idealSheafPower I.toModulesι t).2 (cokernel a.hom))) ∧\n        α = (completion X I).map a ≫ β.hom ∧\n        ∀ (H' : CoherentModules X) (a' : G ⟶ H')\n          (β' : (completion X I).obj H' ≅ F),\n          (∃ t : ℕ, 1 ≤ t ∧\n            IsZero (Scheme.idealModuleProduct\n              (Scheme.idealSheafPower I.toModulesι t).2 (kernel a'.hom)) ∧\n            IsZero (Scheme.idealModuleProduct\n              (Scheme.idealSheafPower I.toModulesι t).2 (cokernel a'.hom))) →\n          α = (completion X I).map a' ≫ β'.hom →\n          ∃! γ : H ≅ H',\n            a ≫ γ.hom = a' ∧\n              (completion X I).map γ.hom ≫ β'.hom = β.hom)",
   "branch": "sheaf-dag",
-  "by": "Q1",
-  "date": "2026-10-12",
+  "by": "P1",
+  "date": "2026-10-13",
   "existing": false
  },
  "reviewed_lean": {
@@ -279,5 +143,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-93659",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T213437-L-1178375",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match their DAG nodes; all three modules compile cleanly, no direct importers require reader-gate compilation, and the statement correction is documented and source-authorized."
  }
 }
