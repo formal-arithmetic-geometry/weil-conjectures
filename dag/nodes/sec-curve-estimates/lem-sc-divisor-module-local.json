@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "*Choice of $U$.* Since $t$ is a uniformizer of the discrete valuation ring $\\mathcal O_{C,P}\\subseteq k(C)$ [lem-sc-smooth-connected-curve-local-rings, clause 3], $t\\neq0$ in the field $k(C)$ and $v_P(t)=1$. Let $S_1$ be the set of closed points $Q\\neq P$ with $n_Q\\neq0$; it is finite because $D$ is a finite formal sum [def-sc-divisor]. Let $S_2$ be the set of closed points $Q\\ne P$ with $v_Q(t)\\neq0$. $C$ is a Noetherian integral scheme [lem-sc-smooth-connected-curve-local-rings, clause 1], so it has a finite affine open cover with Noetherian coordinate rings; every closed point $Q$ has $\\mathcal O_{C,Q}$ a discrete valuation ring, hence of dimension one, so $Q$ has codimension one, and there $\\operatorname{ord}_Q(a)=\\operatorname{length}(\\mathcal O_{C,Q}/a\\mathcal O_{C,Q})=v_Q(a)$ for $0\\ne a\\in\\mathcal O_{C,Q}$ (the chain $\\mathcal O_{C,Q}\\supset\\pi\\mathcal O_{C,Q}\\supset\\dots\\supset\\pi^{m}\\mathcal O_{C,Q}=a\\mathcal O_{C,Q}$, $\\pi$ a uniformizer, has $m=v_Q(a)$ successive quotients isomorphic to the residue field), so $\\operatorname{ord}_Q=v_Q$ on $k(C)^*$; by the finiteness of zeros and poles [lem-sc-divisor-finite-support] applied to $t$, $S_2$ is finite. Put $S=S_1\\cup S_2$, a finite set of closed points not containing $P$; a finite union of closed points is closed, so $U:=C\\setminus S$ is an open neighbourhood of $P$. By construction, for every closed point $Q\\in U$: if $Q\\neq P$ then $n_Q=0$ and $v_Q(t)=0$; and $v_P(t)=1$.",
+   "text": "*Choice of $U$.* Since $t$ is a uniformizer of the discrete valuation ring $\\mathcal O_{C,P}\\subseteq k(C)$ [lem-sc-smooth-connected-curve-local-rings, clause 3], $t\\neq0$ in the field $k(C)$ and $v_P(t)=1$. Let $S_1$ be the set of closed points $Q\\neq P$ with $n_Q\\neq0$; it is finite because $D$ is a finite formal sum [def-sc-divisor]. Let $S_2$ be the set of closed points $Q\\ne P$ with $v_Q(t)\\neq0$. $C$ is a Noetherian integral scheme [lem-sc-smooth-connected-curve-local-rings, clause 1], so it has a finite affine open cover with Noetherian coordinate rings; every closed point $Q$ has $\\mathcal O_{C,Q}$ a discrete valuation ring, hence of dimension one, so $Q$ has codimension one, and there $\\operatorname{ord}_Q(a)=\\operatorname{length}(\\mathcal O_{C,Q}/a\\mathcal O_{C,Q})=v_Q(a)$ for $0\\ne a\\in\\mathcal O_{C,Q}$ (the chain $\\mathcal O_{C,Q}\\supset\\pi\\mathcal O_{C,Q}\\supset\\dots\\supset\\pi^{m}\\mathcal O_{C,Q}=a\\mathcal O_{C,Q}$, $\\pi$ a uniformizer, has $m=v_Q(a)$ successive quotients isomorphic to the residue field), so $\\operatorname{ord}_Q=v_Q$ on $k(C)^*$; by the finiteness of zeros and poles [lem-sc-divisor-finite-support] applied to $t$, $S_2$ is finite. Put $S=S_1\\cup S_2$, a finite set of closed points not containing $P$; a finite union of closed points is closed, so $U:=C\\setminus S$ is an open neighbourhood of $P$. By construction, for every closed point $Q\\in U$: if $Q\\neq P$ then $n_Q=0$ and $v_Q(t)=0$; and $v_P(t)=1$. Lean realization: use the finite Finsupp supports of D and div(t), erase P, and take the complement of the union of their closed singletons. Prove ord(t)=1 by Scheme.coheight_eq_one_of_isClosed and Ring.ordFrac_irreducible; obtain the integer-power order formula by evaluating map_zsmul for Scheme.div.",
    "uses": [
     "def-sc-divisor",
     "lem-sc-smooth-connected-curve-local-rings",
@@ -38,10 +38,9 @@
    }
   },
   {
-   "text": "*Sections of $\\mathcal O_C$ inside $k(C)$.* Identify $\\mathcal O_C(V)$, for nonempty open $V$, and $\\mathcal O_{C,x}$ with their images in $k(C)$ under the injective germ maps [lem-sc-smooth-connected-curve-local-rings, clause 1]. Claim: for every nonempty open $V\\subseteq C$, $\\mathcal O_C(V)=\\{g\\in k(C): g\\in\\mathcal O_{C,Q}\\text{ for every closed point }Q\\in V\\}$. If $s\\in\\mathcal O_C(V)$ and $Q\\in V$, then $s_\\eta$ is the image of the germ $s_Q\\in\\mathcal O_{C,Q}$, so $\\subseteq$ holds. Conversely let $g$ lie in $\\mathcal O_{C,Q}$ for every closed $Q\\in V$. Every point of $V$ is either a closed point or $\\eta$ [lem-sc-smooth-connected-curve-local-rings, clause 2], and $\\mathcal O_{C,\\eta}=k(C)$ contains $g$; so $g$ lies in the image of $\\mathcal O_{C,x}$ for every $x\\in V$, and by [lem-sc-function-field-sections-glue] (applied to the integral scheme $C$ and the nonempty open $V$) $g$ is the image of a section of $\\mathcal O_C(V)$.",
+   "text": "*Sections of $\\mathcal O_C$ inside $k(C)$.* Use the existing proved theorem Scheme.exists_germToFunctionField_eq_of_ord_nonneg in WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf: on a smooth curve a rational function with nonnegative order at every point of a nonempty open V is the rational value of a regular section over V. Its proof realizes each rational value in the local DVR (or generic stalk), represents these stalk elements by sections, and glues them using injectivity into the function field. Scheme.ord_germToFunctionField_nonneg gives the converse. Obtain SmoothOfRelativeDimension 1 f from smoothness and the curve's dimension-one hypothesis. A nonclosed point cannot have coheight one, by Scheme.isClosed_of_coheight_eq_one; therefore its order is zero. Thus it suffices to check the order bounds at closed points. Integrality and Noetherianity are supplied by [lem-sc-smooth-connected-curve-local-rings]. This uses the already-proved source specialization, not the declaration of lem-sc-function-field-sections-glue; no new gluing theorem is stated or assumed.",
    "uses": [
-    "lem-sc-smooth-connected-curve-local-rings",
-    "lem-sc-function-field-sections-glue"
+    "lem-sc-smooth-connected-curve-local-rings"
    ],
    "elementary": false,
    "source": {
@@ -50,7 +49,7 @@
    }
   },
   {
-   "text": "*Comparison of $\\mathcal O_C(D)(V)$ with $t^{-n_P}\\mathcal O_C(V)$.* Let $V\\subseteq U$ be a nonempty open and $g\\in k(C)$. If $g=0$ then $g\\in\\mathcal O_C(D)(V)$ and $g=t^{-n_P}\\cdot0\\in t^{-n_P}\\mathcal O_C(V)$. Let $g\\neq0$ and $Q\\in V$ a closed point. By step 1, if $Q\\neq P$ then $v_Q(t^{n_P}g)=n_Pv_Q(t)+v_Q(g)=v_Q(g)=v_Q(g)+n_Q$; if $Q=P$ then $v_P(t^{n_P}g)=n_P+v_P(g)$. So in all cases $v_Q(t^{n_P}g)=v_Q(g)+n_Q$. For a discrete valuation ring $\\mathcal O_{C,Q}$ with fraction field $k(C)$ and valuation $v_Q$, a nonzero $h\\in k(C)$ lies in $\\mathcal O_{C,Q}$ iff $v_Q(h)\\ge0$ [lem-sc-smooth-connected-curve-local-rings, clause 3]. Hence, by the formula for $\\mathcal O_C(D)(V)$ [def-sc-divisor], $g\\in\\mathcal O_C(D)(V)$ iff $t^{n_P}g\\in\\mathcal O_{C,Q}$ for every closed $Q\\in V$, iff $t^{n_P}g\\in\\mathcal O_C(V)$ by step 2, iff $g\\in t^{-n_P}\\mathcal O_C(V)$. This proves $\\mathcal O_C(D)(V)=t^{-n_P}\\mathcal O_C(V)$ for every nonempty open $V\\subseteq U$.",
+   "text": "*Comparison of $\\mathcal O_C(D)(V)$ with $t^{-n_P}\\mathcal O_C(V)$.* Let $V\\subseteq U$ be a nonempty open and $g\\in k(C)$. If $g=0$ then $g\\in\\mathcal O_C(D)(V)$ and $g=t^{-n_P}\\cdot0\\in t^{-n_P}\\mathcal O_C(V)$. Let $g\\neq0$ and $Q\\in V$ a closed point. By step 1, if $Q\\neq P$ then $v_Q(t^{n_P}g)=n_Pv_Q(t)+v_Q(g)=v_Q(g)=v_Q(g)+n_Q$; if $Q=P$ then $v_P(t^{n_P}g)=n_P+v_P(g)$. So in all cases $v_Q(t^{n_P}g)=v_Q(g)+n_Q$. For a discrete valuation ring $\\mathcal O_{C,Q}$ with fraction field $k(C)$ and valuation $v_Q$, a nonzero $h\\in k(C)$ lies in $\\mathcal O_{C,Q}$ iff $v_Q(h)\\ge0$ [lem-sc-smooth-connected-curve-local-rings, clause 3]. Hence, by the formula for $\\mathcal O_C(D)(V)$ [def-sc-divisor], $g\\in\\mathcal O_C(D)(V)$ iff $t^{n_P}g\\in\\mathcal O_{C,Q}$ for every closed $Q\\in V$, iff $t^{n_P}g\\in\\mathcal O_C(V)$ by step 2, iff $g\\in t^{-n_P}\\mathcal O_C(V)$. This proves $\\mathcal O_C(D)(V)=t^{-n_P}\\mathcal O_C(V)$ for every nonempty open $V\\subseteq U$. Lean realization: the private helper Divisor.local_section_image proves the equality of the explicitly given submodule carrier with the range of a -> c * divisorScalarMap(a), including the zero case and locally constant section condition.",
    "uses": [
     "def-sc-divisor",
     "lem-sc-smooth-connected-curve-local-rings"
@@ -62,7 +61,7 @@
    }
   },
   {
-   "text": "*Invertibility.* For a nonempty open $V\\subseteq U$ let $\\phi_V:\\mathcal O_C(V)\\to\\mathcal O_C(D)(V)$, $a\\mapsto t^{-n_P}a$ (products in $k(C)$), and $\\phi_\\emptyset=0$. By step 3 $\\phi_V$ is well defined and surjective; it is injective since $t^{-n_P}\\neq0$ in the field $k(C)$; it is $\\mathcal O_C(V)$-linear since the module structure of $\\mathcal O_C(D)(V)$ is multiplication in $k(C)$ [def-sc-divisor]; and it commutes with restriction, because for $V'\\subseteq V$ both restriction maps are inclusions of subsets of $k(C)$ (for $\\mathcal O_C$ the germ at $\\eta$ of $s|_{V'}$ equals that of $s$). So $\\phi:\\mathcal O_U\\to\\mathcal O_C(D)|_U$ is an isomorphism of $\\mathcal O_U$-modules. Every closed point $P$ has such a neighbourhood $U$, and the generic point $\\eta$ lies in any of them (a nonempty open contains $\\eta$, and $C$ has a closed point by [lem-sc-smooth-connected-curve-local-rings, clause 2]); since every point of $C$ is closed or $\\eta$, these opens cover $C$. Hence $\\mathcal O_C(D)$ is locally isomorphic to $\\mathcal O_C$, so it is quasi-coherent and locally free of rank one, i.e. an invertible $\\mathcal O_C$-module [def-sc-invertible-module].",
+   "text": "*Invertibility.* For a nonempty open $V\\subseteq U$ let $\\phi_V:\\mathcal O_C(V)\\to\\mathcal O_C(D)(V)$, $a\\mapsto t^{-n_P}a$ (products in $k(C)$), and $\\phi_\\emptyset=0$. By step 3 $\\phi_V$ is well defined and surjective; it is injective since $t^{-n_P}\\neq0$ in the field $k(C)$; it is $\\mathcal O_C(V)$-linear since the module structure of $\\mathcal O_C(D)(V)$ is multiplication in $k(C)$ [def-sc-divisor]; and it commutes with restriction, because for $V'\\subseteq V$ both restriction maps are inclusions of subsets of $k(C)$ (for $\\mathcal O_C$ the germ at $\\eta$ of $s|_{V'}$ equals that of $s$). So $\\phi:\\mathcal O_U\\to\\mathcal O_C(D)|_U$ is an isomorphism of $\\mathcal O_U$-modules. Every closed point $P$ has such a neighbourhood $U$, and the generic point $\\eta$ lies in any of them (a nonempty open contains $\\eta$, and $C$ has a closed point by [lem-sc-smooth-connected-curve-local-rings, clause 2]); since every point of $C$ is closed or $\\eta$, these opens cover $C$. Hence $\\mathcal O_C(D)$ is locally isomorphic to $\\mathcal O_C$, so it is quasi-coherent and locally free of rank one, i.e. an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Lean realization: construct the section map as a LinearMap with the explicit divisorFunctionAlgebra module instance, use LinearEquiv.ofBijective, and construct an over-site presheaf isomorphism with PresheafOfModules.isoMk. Supply the empty-open equivalence with LinearEquiv.ofSubsingleton. Transport this isomorphism through Modules.overFunctorEquiv and Modules.restrictFunctorIsoPullback. Closed stalks supply irreducible uniformizers; the generic point lies in a neighbourhood of any closed point.",
    "uses": [
     "def-sc-divisor",
     "def-sc-invertible-module",
@@ -75,9 +74,8 @@
    }
   },
   {
-   "text": "*Stalk at $P$.* The open neighbourhoods $V\\subseteq U$ of $P$ are cofinal among all open neighbourhoods of $P$, so the stalk [def-weil-pbc-module-stalk] is $\\mathcal O_C(D)_P=\\varinjlim_{P\\in V\\subseteq U}\\mathcal O_C(D)(V)$, a filtered colimit of subgroups of $k(C)$ along inclusions, hence equal to their union inside $k(C)$. By step 3 it is $t^{-n_P}\\bigcup_{P\\in V\\subseteq U}\\mathcal O_C(V)$, and $\\bigcup_{P\\in V\\subseteq U}\\mathcal O_C(V)=\\mathcal O_{C,P}$ inside $k(C)$ (the same colimit for $\\mathcal O_C$, whose germ maps to $k(C)$ are injective [lem-sc-smooth-connected-curve-local-rings, clause 1]). So $\\mathcal O_C(D)_P=t^{-n_P}\\mathcal O_{C,P}$.",
+   "text": "*Stalk at $P$.* The open neighbourhoods $V\\subseteq U$ of $P$ are cofinal among all open neighbourhoods of $P$, so the existing presheaf stalk is $\\mathcal O_C(D)_P=\\varinjlim_{P\\in V\\subseteq U}\\mathcal O_C(D)(V)$, a filtered colimit of subgroups of $k(C)$ along inclusions, hence equal to their union inside $k(C)$. By step 3 it is $t^{-n_P}\\bigcup_{P\\in V\\subseteq U}\\mathcal O_C(V)$, and $\\bigcup_{P\\in V\\subseteq U}\\mathcal O_C(V)=\\mathcal O_{C,P}$ inside $k(C)$ (the same colimit for $\\mathcal O_C$, whose germ maps to $k(C)$ are injective [lem-sc-smooth-connected-curve-local-rings, clause 1]). So $\\mathcal O_C(D)_P=t^{-n_P}\\mathcal O_{C,P}$. Lean realization: evaluation defines a colimit cocone in AddCommGrpCat, hence an additive stalk map. Modules.stalkLinearMapMk proves its stalk-ring linearity from the germ formula. To prove injectivity, represent a germ and use local constancy on the preconnected open. For its range, restrict both divisor sections and regular-section representatives to the intersection with U and apply the section equivalence and germ_res_apply. No custom moduleStalkFunctor is required.",
    "uses": [
-    "def-weil-pbc-module-stalk",
     "lem-sc-smooth-connected-curve-local-rings"
    ],
    "elementary": true,
@@ -87,7 +85,7 @@
    }
   },
   {
-   "text": "*$\\mathcal O_C(0)=\\mathcal O_C$.* For $D=0$ and nonempty open $V$, the formula of [def-sc-divisor] gives $\\mathcal O_C(0)(V)=\\{g: g=0\\text{ or }v_Q(g)\\ge0\\ \\forall\\text{ closed }Q\\in V\\}=\\{g:g\\in\\mathcal O_{C,Q}\\ \\forall\\text{ closed }Q\\in V\\}$ (DVR, [lem-sc-smooth-connected-curve-local-rings, clause 3]), which is $\\mathcal O_C(V)$ by step 2; both sheaves are $0$ on $\\emptyset$, and the restriction maps of both are inclusions in $k(C)$.",
+   "text": "*$\\mathcal O_C(0)=\\mathcal O_C$.* For $D=0$ and nonempty open $V$, the formula of [def-sc-divisor] gives $\\mathcal O_C(0)(V)=\\{g: g=0\\text{ or }v_Q(g)\\ge0\\ \\forall\\text{ closed }Q\\in V\\}=\\{g:g\\in\\mathcal O_{C,Q}\\ \\forall\\text{ closed }Q\\in V\\}$ (DVR, [lem-sc-smooth-connected-curve-local-rings, clause 3]), which is $\\mathcal O_C(V)$ by step 2; both sheaves are $0$ on $\\emptyset$, and the restriction maps of both are inclusions in $k(C)$. Lean realization: the private helper divisor_zero_sections uses the same existing no-poles/regular-section theorem; empty-open equality is proved by extensionality and elimination of its points.",
    "uses": [
     "def-sc-divisor",
     "lem-sc-smooth-connected-curve-local-rings"
@@ -103,14 +101,12 @@
   "def-sc-divisor",
   "lem-sc-smooth-connected-curve-local-rings",
   "lem-sc-divisor-finite-support",
-  "lem-sc-function-field-sections-glue",
-  "def-sc-invertible-module",
-  "def-weil-pbc-module-stalk"
+  "def-sc-invertible-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Divisors Lemma 0BE9 (divisors-lemma-local-rings-UFD-c1-bijective), proof, with Lemma 0AGA (divisors-lemma-weil-divisor-is-cartier-UFD) and Algebra Lemma 031T (algebra-lemma-normal-domain-intersection-localizations-height-1); Stacks works with effective Cartier divisors and their invertible sheaves, the node's $\\mathcal O_C(D)$ is the subsheaf of $k(C)$ of def-sc-divisor, so the local computation is written out by the agent along those lemmas"
+  "place": "Divisors Lemma 0BE9 (divisors-lemma-local-rings-UFD-c1-bijective), proof, with Lemma 0AGA (divisors-lemma-weil-divisor-is-cartier-UFD) and Algebra Lemma 031T (algebra-lemma-normal-domain-intersection-localizations-height-1); Stacks works with effective Cartier divisors and their invertible sheaves, the node's $\\mathcal O_C(D)$ is the subsheaf of $k(C)$ of def-sc-divisor, so the local computation is written out by the agent along those lemmas; Lean realization by K2, 2026-10-12: explicit finite-support complement, section-map bijectivity, over-site isomorphism, evaluation colimit and intersection-of-neighbourhoods range calculation; source no-poles lemmas from Curve.DivisorIdealSheaf. Second reading by K2: pruned lem-sc-function-field-sections-glue, whose recorded declaration is not used by the source no-poles theorem or this module; recorded its already-proved DVR-and-gluing specialization instead."
  },
  "mathlib_searches": [
   {
@@ -197,5 +193,15 @@
   "group": "K1",
   "result": "fix",
   "note": "k alg closed; C via IsConnectedCurve f + Smooth f; IsIntegral from smooth_connected_curve_local_rings.choose; D : closedPoints →₀ ℤ, n_P = D P; t uniformizer via maxIdeal = span{t}; c = t^(-D P) in functionField; ∃U∋P, ∀ nonempty V≤U, linear equiv Γ(V) ≃ O(D)(V) given pointwise by c·germ; IsInvertible; stalk embedding j injective, germ-compatible, range c·O_{C,P}; O(0)=O_C as subsets for all V incl. empty; FIX: M := recorded moduleOfSmoothConnectedCurve instead of raw associatedModule"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T144123-L-2100133",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
