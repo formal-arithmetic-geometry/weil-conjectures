@@ -29,6 +29,13 @@
  ],
  "proof": [
   {
+   "text": "Use minimalPrimes.finite_of_isNoetherianRing to give the minimal-prime subtype a Fintype instance; Fintype.equivFin supplies its finite enumeration.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Proof of (1). Each $\\mathfrak q_i$ is a minimal prime of the reduced ring $R$, so $R_{\\mathfrak q_i}$ is a field and its maximal ideal $\\mathfrak q_iR_{\\mathfrak q_i}$ is $0$ [lem-weil-pbc-minimal-prime-reduced-localization-field]. Hence $\\kappa(\\mathfrak q_i)=R_{\\mathfrak q_i}/\\mathfrak q_iR_{\\mathfrak q_i}=R_{\\mathfrak q_i}/0=R_{\\mathfrak q_i}$ [def-weil-pbc-localization-at-prime].",
    "uses": [
     "lem-weil-pbc-minimal-prime-reduced-localization-field",
@@ -54,55 +61,25 @@
    }
   },
   {
-   "text": "The prime ideals of $Q(R)$. Let $\\lambda:R\\to Q(R)$, $r\\mapsto r/1$, a localization of $R$ at $S$. By [lem-weil-pbc-localization-prime-residue-field-iso] (1), $\\mathfrak q'\\mapsto\\lambda^{-1}(\\mathfrak q')$ is a bijection from the primes of $Q(R)$ onto the primes $\\mathfrak p$ of $R$ with $\\mathfrak p\\cap S=\\emptyset$, with inverse $\\mathfrak p\\mapsto\\mathfrak pQ(R)$; it preserves inclusions in both directions ($\\mathfrak q'=\\lambda(\\lambda^{-1}\\mathfrak q')Q(R)$). Let $\\mathfrak p$ be such a prime. Then $\\mathfrak p\\subseteq R\\setminus S=\\mathfrak q_1\\cup\\dots\\cup\\mathfrak q_t$ (Step 2), so by prime avoidance [lem-weil-pbc-prime-avoidance] (all $\\mathfrak q_i$ prime) $\\mathfrak p\\subseteq\\mathfrak q_j$ for some $j$, and $\\mathfrak p=\\mathfrak q_j$ by minimality of $\\mathfrak q_j$. Conversely each $\\mathfrak q_i$ is disjoint from $S$ (Step 2). Hence the prime ideals of $Q(R)$ are exactly $\\mathfrak m_i=\\mathfrak q_iQ(R)$, $i=1,\\dots,t$, pairwise distinct (as $\\lambda^{-1}(\\mathfrak m_i)=\\mathfrak q_i$), with no inclusion $\\mathfrak m_i\\subsetneq\\mathfrak m_j$ (it would give $\\mathfrak q_i\\subsetneq\\mathfrak q_j$, against minimality of $\\mathfrak q_j$). Every $\\mathfrak m_i$ lies in a maximal ideal, which is prime, hence is some $\\mathfrak m_j$, hence equals $\\mathfrak m_i$: so $\\mathfrak m_1,\\dots,\\mathfrak m_t$ are all maximal, and they are all the maximal ideals of $Q(R)$.",
+   "text": "Apply fractionRing_pi_bijective_of_compatible to every compatible family. Its two halves are now fully proved, using the prime correspondence, finite discrete spectrum decomposition, and factor equivalences from Stacks Tag 02LX directly in Mathlib.",
    "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-prime-avoidance"
+    "lem-weil-pbc-fraction-ring-pi-bijective-compatible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points), proof, third and fourth sentences (Lemma Tag 00DS lemma-silly, Lemma Tag 00E3 lemma-spec-localization)"
-   }
-  },
-  {
-   "text": "$Q(R)$ is the product of its localizations at the $\\mathfrak m_i$. The intersection $\\mathfrak m_1\\cap\\dots\\cap\\mathfrak m_t$ is the intersection of all prime ideals of $Q(R)$ (Step 3), which is the nilradical $\\sqrt{(0)}$ of $Q(R)$ [lem-weil-pbc-zero-locus-eq-iff-radical-eq] (with $I=0$); so every element of the Jacobson radical of $Q(R)$ is nilpotent. As $Q(R)$ has the finitely many maximal ideals $\\mathfrak m_1,\\dots,\\mathfrak m_t$, the canonical map $Q(R)\\to\\prod_{i=1}^tQ(R)_{\\mathfrak m_i}$, $x\\mapsto(x/1)_i$, is an isomorphism of $Q(R)$-algebras, hence of $R$-algebras [lem-weil-pbc-product-of-localizations-at-maximal]. (For $t=0$, $R=0$, $Q(R)=0$ and both sides are the zero ring.)",
-   "uses": [
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-    "lem-weil-pbc-product-of-localizations-at-maximal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points), proof, fifth sentence: Spec Q(R) finite discrete gives Q(R) = A_1 x ... x A_t (Lemma Tag 00EM lemma-disjoint-implies-product, here in the form of Lemma Tag 00JA)"
-   }
-  },
-  {
-   "text": "Identification of the factors and conclusion. By [lem-weil-pbc-localization-prime-residue-field-iso] (2), applied to $\\lambda:R\\to Q(R)$ and $\\mathfrak q'=\\mathfrak m_i$ (with $\\lambda^{-1}(\\mathfrak m_i)=\\mathfrak q_i$), the map $R_{\\mathfrak q_i}\\to Q(R)_{\\mathfrak m_i}$, $a/s\\mapsto\\lambda(a)/\\lambda(s)$, is an isomorphism of $R$-algebras. Composing the inverses of these with the isomorphism of Step 4 gives an isomorphism of $R$-algebras $Q(R)\\to R_{\\mathfrak q_1}\\times\\dots\\times R_{\\mathfrak q_t}$ whose $i$-th component is a ring map $Q(R)\\to R_{\\mathfrak q_i}$ compatible with the maps from $R$; by the uniqueness in Step 2 it is $\\phi_i$. Hence $\\phi$ is this isomorphism, proving (2).",
-   "uses": [
-    "lem-weil-pbc-localization-prime-residue-field-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points), proof, last two sentences ('A_i is a local ring, which is a localization of R. Hence A_i = R_{q_i}')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
   "lem-weil-pbc-minimal-prime-reduced-localization-field",
   "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
   "def-weil-pbc-module-localization",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-prime-avoidance",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "lem-weil-pbc-product-of-localizations-at-maximal"
+  "lem-weil-pbc-fraction-ring-pi-bijective-compatible"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points, line 4612) with its hypothesis from Lemma Tag 00EW (3) (line 4560) and Lemma Tag 00EU (line 4543); the product decomposition of Step 4 via the node of Lemma Tag 00JA in place of 00EM"
+  "place": "Stacks Tags 00FR, 00EU, 00EW and 02LX; the product decomposition is delegated to the fully proved compatible-bijectivity declaration and its fully proved halves."
  },
  "mathlib_searches": [
   {
@@ -191,17 +168,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T202255-L-709794",
+  "landing": "20261012T223410-L-1638576",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "fractionRing_pi_bijective_of_compatible"
-  ],
-  "sorry_after": [
-   "fractionRing_pi_injective_of_compatible",
-   "fractionRing_pi_surjective_of_compatible"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
