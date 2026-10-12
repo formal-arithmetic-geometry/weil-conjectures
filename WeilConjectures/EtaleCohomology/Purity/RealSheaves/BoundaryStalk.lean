@@ -295,7 +295,43 @@ theorem exists_boundarySpecialization_eq {Λ : Type (u + 1)} [CommRing Λ] [Fini
     refine fiber_ext _ ?_
     rw [galoisToAut_hom_app_left]
     exact (Category.assoc _ _ _).symm.trans (congrArg Over.Hom.left h'')
-  sorry
+  -- the étale neighbourhood and the section over its punctured part
+  obtain ⟨V, ℓ, hℓ, g, hg, hgt⟩ :=
+    exists_etale_lift_of_forall_inertia j Fact.out ϖ hϖ hWU m Q hint P t ht
+  let gU : (MorphismProperty.Over.pullback @Etale ⊤ j).obj V ⟶ P.obj :=
+    MorphismProperty.Over.homMk g hg
+  let z : ToType (F'.obj.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ j).obj V))) :=
+    i.inv.hom.hom.app _ (ULift.up gU)
+  let v : (pointSmallEtale (boundaryGeometricPoint Q)).fiber.obj V :=
+    Over.homMk (closedGeometricPoint _ ≫ ℓ) (by
+      change (closedGeometricPoint _ ≫ ℓ) ≫ V.hom = _
+      rw [Category.assoc, hℓ]
+      rfl)
+  refine ⟨(pointSmallEtale _).toPresheafFiber V v
+    ((sheafToPresheaf _ _).obj ((j)_*[ModuleCat.{u + 1} Λ].obj F)) z, ?_⟩
+  rw [boundarySpecialization, specializationStalk_toPresheafFiber, ← hx₀]
+  apply (FiniteLocallyConstantModule.forgetStalkEquiv η F₀).symm.injective
+  apply (FiniteLocallyConstant.isoStalkEquiv η i).injective
+  rw [hgerm]
+  refine (hgerm _ _ z).trans ?_
+  congr 1
+  -- the specialized point maps to `t`
+  have hz : (i.hom.hom.hom.app _ z).down = gU := by
+    change (i.hom.hom.hom.app _ (i.inv.hom.hom.app _ (ULift.up gU))).down = gU
+    exact congrArg (fun φ : (FiniteEtale.toFiniteLocallyConstant U).obj P ⟶
+        (FiniteEtale.toFiniteLocallyConstant U).obj P ↦
+      (φ.hom.hom.app (op ((MorphismProperty.Over.pullback
+      @Etale ⊤ j).obj V)) (ULift.up gU)).down) i.inv_hom_id
+  rw [hz]
+  refine Over.OverMorphism.ext ?_
+  change _ ≫ g = t.left
+  rw [← hgt]
+  congr 1
+  refine pullback.hom_ext ?_ ?_
+  · rw [specializationFiber_left_fst, pullback.lift_fst]
+    congr 1
+    exact henselianLift_eq _ _ _ _ _ hℓ rfl
+  · rw [specializationFiber_left_snd, pullback.lift_snd]
 
 end Surjective
 
