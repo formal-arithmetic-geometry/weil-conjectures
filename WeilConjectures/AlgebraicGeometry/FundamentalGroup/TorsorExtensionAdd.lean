@@ -388,4 +388,135 @@ lemma isIso_pairUnit : IsIso T.pairUnit := by
     exact Sheaf.epi_of_isLocallySurjective T.pairUnit
   exact isIso_of_mono_of_epi _
 
+/-! ### Mapping the extension of a `ℤ/m`-torsor to the pair sequence -/
+
+lemma comp_pairPhi_eq_zero {Z : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (f : Z ⟶ T.pairMu) (h₁ : f ≫ T.pairMuDiff (1, 0) = 0) (h₂ : f ≫ T.pairMuDiff (0, 1) = 0) :
+    f ≫ T.pairPhi = 0 := by
+  apply biprod.hom_ext
+  · rw [Category.assoc, pairPhi, biprod.lift_fst, h₁, zero_comp]
+  · rw [Category.assoc, pairPhi, biprod.lift_snd, h₂, zero_comp]
+
+variable {T} (t : EtaleTorsor (ULift.{u + 1} (ZMod m)) Y) (h : T.P ⟶ t.P) (hπ : h ≫ t.π = T.π)
+
+/-- Pullback of units along `h : Q ⟶ P`. -/
+noncomputable abbrev pairW : t.pushforwardGm ⟶ T.pushforwardGm :=
+  lowerStarGmSheafMap t.π h T.π hπ
+
+lemma pairW_pairDiff (b : ULift.{u + 1} (ZMod m) × ULift.{u + 1} (ZMod m)) (c : ℕ)
+    (hv : T.vadd b ≫ h = h ≫ t.vadd (c • 1)) :
+    pairW t h hπ ≫ T.pairDiff b = (t.transl c - 𝟙 _) ≫ pairW t h hπ := by
+  have e : pairW t h hπ ≫ T.pushforwardGmTranslate b = t.transl c ≫ pairW t h hπ := by
+    rw [pairW, pushforwardGmTranslate, transl, pushforwardGmTranslate, lowerStarGmSheafMap_comp,
+      lowerStarGmSheafMap_comp]
+    congr 1
+  rw [pairDiff, Preadditive.comp_sub, e, Preadditive.sub_comp, Category.comp_id,
+    Category.id_comp]
+
+/-- Pullback of units along `h` on `π_* μ_m`. -/
+noncomputable def pairV' : t.pushforwardMu ⟶ T.pairMu :=
+  kernel.lift _ (kernel.ι _ ≫ pairW t h hπ) (by
+    rw [Category.assoc, comp_nsmul_id, ← Category.assoc, Preadditive.comp_nsmul,
+      Category.comp_id, t.nsmul_kernel_ι_pushforwardMu, zero_comp])
+
+@[reassoc (attr := simp)]
+lemma pairV'_ι : pairV' t h hπ ≫ kernel.ι _ = kernel.ι _ ≫ pairW t h hπ :=
+  kernel.lift_ι _ _ _
+
+lemma comp_pairV'_pairMuDiff {Z : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (X : Z ⟶ t.pushforwardMu) (hX : X ≫ t.muDiff ≫ t.muDiff = 0)
+    (b : ULift.{u + 1} (ZMod m) × ULift.{u + 1} (ZMod m)) (c : ℕ)
+    (hv : T.vadd b ≫ h = h ≫ t.vadd (c • 1)) :
+    X ≫ pairV' t h hπ ≫ T.pairMuDiff b = c • (X ≫ t.muDiff ≫ pairV' t h hπ) := by
+  rw [← cancel_mono (kernel.ι (m • 𝟙 T.pushforwardGm))]
+  have hX' : (X ≫ kernel.ι (m • 𝟙 t.pushforwardGm)) ≫ t.gmDiff ≫ t.gmDiff = 0 := by
+    have : X ≫ t.muDiff ≫ t.muDiff ≫ kernel.ι (m • 𝟙 t.pushforwardGm) = 0 := by
+      rw [reassoc_of% hX, zero_comp]
+    simpa only [Category.assoc, muDiff_ι, muDiff_ι_assoc] using this
+  have key := t.comp_transl_sub _ hX' c
+  calc (X ≫ pairV' t h hπ ≫ T.pairMuDiff b) ≫ kernel.ι (m • 𝟙 T.pushforwardGm) =
+      (X ≫ kernel.ι (m • 𝟙 t.pushforwardGm)) ≫ pairW t h hπ ≫ T.pairDiff b := by
+        simp only [Category.assoc, pairMuDiff_ι, pairV'_ι_assoc]
+    _ = ((X ≫ kernel.ι (m • 𝟙 t.pushforwardGm)) ≫ (t.transl c - 𝟙 _)) ≫ pairW t h hπ := by
+        rw [pairW_pairDiff t h hπ b c hv]
+        simp only [Category.assoc]
+    _ = (c • (X ≫ t.muDiff ≫ pairV' t h hπ)) ≫ kernel.ι (m • 𝟙 T.pushforwardGm) := by
+        rw [key]
+        simp only [Preadditive.nsmul_comp, Category.assoc, pairV'_ι, muDiff_ι_assoc]
+
+lemma comp_pairV'_pairMuDiff_eq_zero (c₁ c₂ : ℕ)
+    (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd (c₁ • 1))
+    (hv₂ : T.vadd (0, 1) ≫ h = h ≫ t.vadd (c₂ • 1))
+    {Z : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (X : Z ⟶ t.pushforwardMu) (hX : X ≫ t.muDiff = 0)
+    (b : ULift.{u + 1} (ZMod m) × ULift.{u + 1} (ZMod m)) (hb : b = (1, 0) ∨ b = (0, 1)) :
+    X ≫ pairV' t h hπ ≫ T.pairMuDiff b = 0 := by
+  have hX₂ : X ≫ t.muDiff ≫ t.muDiff = 0 := by rw [← Category.assoc, hX, zero_comp]
+  rcases hb with rfl | rfl
+  · rw [comp_pairV'_pairMuDiff t h hπ X hX₂ _ c₁ hv₁, ← Category.assoc, hX, zero_comp,
+      smul_zero]
+  · rw [comp_pairV'_pairMuDiff t h hπ X hX₂ _ c₂ hv₂, ← Category.assoc, hX, zero_comp,
+      smul_zero]
+
+/-- The map `K₁ ⟶ N`. -/
+noncomputable def pairK₁ (c₁ c₂ : ℕ) (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd (c₁ • 1))
+    (hv₂ : T.vadd (0, 1) ≫ h = h ≫ t.vadd (c₂ • 1)) : kernel t.muDiff ⟶ T.pairN :=
+  kernel.lift _ (kernel.ι _ ≫ pairV' t h hπ) (by
+    refine T.comp_pairPhi_eq_zero _ ?_ ?_ <;> rw [Category.assoc]
+    · exact comp_pairV'_pairMuDiff_eq_zero t h hπ c₁ c₂ hv₁ hv₂ _ (kernel.condition _) _
+        (Or.inl rfl)
+    · exact comp_pairV'_pairMuDiff_eq_zero t h hπ c₁ c₂ hv₁ hv₂ _ (kernel.condition _) _
+        (Or.inr rfl))
+
+@[reassoc (attr := simp)]
+lemma pairK₁_ι (c₁ c₂ : ℕ) (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd (c₁ • 1))
+    (hv₂ : T.vadd (0, 1) ≫ h = h ≫ t.vadd (c₂ • 1)) :
+    pairK₁ t h hπ c₁ c₂ hv₁ hv₂ ≫ kernel.ι _ = kernel.ι _ ≫ pairV' t h hπ :=
+  kernel.lift_ι _ _ _
+
+lemma comp_pairV'_pairMuDiff_pairPhi (c₁ c₂ : ℕ) (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd (c₁ • 1))
+    (hv₂ : T.vadd (0, 1) ≫ h = h ≫ t.vadd (c₂ • 1))
+    {Z : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (X : Z ⟶ t.pushforwardMu) (hX : X ≫ t.muDiff ≫ t.muDiff = 0)
+    (b : ULift.{u + 1} (ZMod m) × ULift.{u + 1} (ZMod m)) (c : ℕ)
+    (hv : T.vadd b ≫ h = h ≫ t.vadd (c • 1)) :
+    X ≫ pairV' t h hπ ≫ T.pairMuDiff b ≫ T.pairPhi = 0 := by
+  have hX' : (X ≫ t.muDiff) ≫ t.muDiff = 0 := by rw [Category.assoc, hX]
+  have e₁ := comp_pairV'_pairMuDiff_eq_zero t h hπ c₁ c₂ hv₁ hv₂ _ hX' _ (Or.inl rfl)
+  have e₂ := comp_pairV'_pairMuDiff_eq_zero t h hπ c₁ c₂ hv₁ hv₂ _ hX' _ (Or.inr rfl)
+  have e₃ : ((X ≫ t.muDiff) ≫ pairV' t h hπ) ≫ T.pairPhi = 0 :=
+    T.comp_pairPhi_eq_zero _ (by rw [Category.assoc, e₁]) (by rw [Category.assoc, e₂])
+  calc X ≫ pairV' t h hπ ≫ T.pairMuDiff b ≫ T.pairPhi =
+      (X ≫ pairV' t h hπ ≫ T.pairMuDiff b) ≫ T.pairPhi := by simp only [Category.assoc]
+    _ = c • (((X ≫ t.muDiff) ≫ pairV' t h hπ) ≫ T.pairPhi) := by
+        rw [comp_pairV'_pairMuDiff t h hπ X hX b c hv, Preadditive.nsmul_comp]
+        simp only [Category.assoc]
+    _ = 0 := by rw [e₃, smul_zero]
+
+lemma comp_pairV'_pairPhi_map (c₁ c₂ : ℕ) (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd (c₁ • 1))
+    (hv₂ : T.vadd (0, 1) ≫ h = h ≫ t.vadd (c₂ • 1))
+    {Z : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (X : Z ⟶ t.pushforwardMu) (hX : X ≫ t.muDiff ≫ t.muDiff = 0) :
+    (X ≫ pairV' t h hπ) ≫ T.pairPhi ≫ biprod.map T.pairPhi T.pairPhi = 0 := by
+  apply biprod.hom_ext
+  · rw [Category.assoc, Category.assoc, Category.assoc, biprod.map_fst, ← Category.assoc T.pairPhi,
+      show T.pairPhi ≫ biprod.fst = T.pairMuDiff (1, 0) from biprod.lift_fst _ _, zero_comp]
+    exact comp_pairV'_pairMuDiff_pairPhi t h hπ c₁ c₂ hv₁ hv₂ X hX _ c₁ hv₁
+  · rw [Category.assoc, Category.assoc, Category.assoc, biprod.map_snd, ← Category.assoc T.pairPhi,
+      show T.pairPhi ≫ biprod.snd = T.pairMuDiff (0, 1) from biprod.lift_snd _ _, zero_comp]
+    exact comp_pairV'_pairMuDiff_pairPhi t h hπ c₁ c₂ hv₁ hv₂ X hX _ c₂ hv₂
+
+/-- The map `K₂ ⟶ V`. -/
+noncomputable def pairK₂ (c₁ c₂ : ℕ) (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd (c₁ • 1))
+    (hv₂ : T.vadd (0, 1) ≫ h = h ≫ t.vadd (c₂ • 1)) :
+    kernel (t.muDiff ≫ t.muDiff) ⟶ T.pairV :=
+  kernel.lift _ (kernel.ι _ ≫ pairV' t h hπ)
+    (comp_pairV'_pairPhi_map t h hπ c₁ c₂ hv₁ hv₂ _ (kernel.condition _))
+
+@[reassoc (attr := simp)]
+lemma pairK₂_ι (c₁ c₂ : ℕ) (hv₁ : T.vadd (1, 0) ≫ h = h ≫ t.vadd (c₁ • 1))
+    (hv₂ : T.vadd (0, 1) ≫ h = h ≫ t.vadd (c₂ • 1)) :
+    pairK₂ t h hπ c₁ c₂ hv₁ hv₂ ≫ kernel.ι _ = kernel.ι _ ≫ pairV' t h hπ :=
+  kernel.lift_ι _ _ _
+
 end AlgebraicGeometry.Scheme.EtaleTorsor
