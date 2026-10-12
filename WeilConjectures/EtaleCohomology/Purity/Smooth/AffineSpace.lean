@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Twist
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
@@ -70,66 +71,6 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
-
-/-! ### Twists of pulled-back objects -/
-
-section Twists
-
-variable {X Y : Scheme.{u}} [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
-
-/-- `Λ_X(m)[2m] = (Λ_X ⊗^L Λ_X(m))[2m] ≅ Λ_X(m)[2m]`, through the left unitor. -/
-noncomputable def twistShiftConstantComplexIso (X : Scheme.{u}) (m : ℤ) :
-    (twistShift Λ X m).obj (constantComplex Λ X) ≅ (tateObject Λ X m)⟦2 * m⟧ :=
-  (shiftFunctor _ (2 * m)).mapIso (derivedTensorLeftUnitor _ X _)
-
-/-- The zero twist is trivial: `K(0)[0] ≅ K`. -/
-noncomputable def twistShiftZeroIso (X : Scheme.{u}) [HasInvertibleExponent Λ X]
-    {m : ℤ} (hm : m = 0)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (twistShift Λ X m).obj K ≅ K :=
-  (shiftFunctorZero' _ (2 * m) (by simp [hm])).app _ ≪≫
-    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
-      (eqToIso (by rw [hm]; rfl) ≪≫ HasTateTwist.twistObjectZeroIso X) ≪≫
-    derivedTensorRightUnitor _ X K
-
-/-- Pullback commutes with twist-and-shift, `Lf^*(K(m)[2m]) ≅ (Lf^* K)(m)[2m]`. -/
-noncomputable def leftDerivedUpperStarTwistShiftIso (f : X ⟶ Y) (m : ℤ)
-    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (L((f)^*[ModuleCat.{u + 1} Λ])).obj ((twistShift Λ Y m).obj K) ≅
-      (twistShift Λ X m).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  ((L((f)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 * m)).app _ ≪≫
-    (shiftFunctor _ (2 * m)).mapIso
-      (leftDerivedUpperStarTensorIso _ f K (tateObject Λ Y m) ≪≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso
-          (leftDerivedUpperStarTateObjectIso f m))
-
-/-- Twist-and-shifts compose additively, `(K(m)[2m])(m')[2m'] ≅ K(m + m')[2(m + m')]`. All
-shifts are even, so no sign is involved. -/
-noncomputable def twistShiftTwistShiftIso (X : Scheme.{u}) [HasInvertibleExponent Λ X]
-    (m m' : ℤ)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (twistShift Λ X m').obj ((twistShift Λ X m).obj K) ≅ (twistShift Λ X (m + m')).obj K :=
-  (shiftFunctor _ (2 * m')).mapIso
-      ((((derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj (tateObject Λ X m')).commShiftIso
-        (2 * m)).app _) ≪≫
-    ((shiftFunctorAdd' _ (2 * m) (2 * m') (2 * (m + m')) (by ring)).app _).symm ≪≫
-    (shiftFunctor _ (2 * (m + m'))).mapIso
-      (derivedTensorAssociator _ X _ _ _ ≪≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
-          (HasTateTwist.twistObjectAddIso X m m'))
-
-omit [HasInvertibleExponent Λ Y] in
-/-- `Lf^* K (m)[2m]` lies in `D^b_{ctf}` when `K` does. -/
-theorem boundedConstructibleFiniteTor_twistShift_leftDerivedUpperStar (f : X ⟶ Y) (m : ℤ)
-    {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
-    DerivedCategory.boundedConstructibleFiniteTor Λ X
-      ((twistShift Λ X m).obj ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) :=
-  DerivedCategory.boundedConstructibleFiniteTor.shift
-    (constructibleFiniteTor_tensor _ X (constructibleFiniteTor_leftDerivedUpperStar _ f hK)
-      (boundedConstructibleFiniteTor_tateObject Λ X m)) _
-
-end Twists
 
 /-! ### The `Rz^!`-form -/
 
