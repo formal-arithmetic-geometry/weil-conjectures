@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "The module sheafification functor $\\#$ is left adjoint to the inclusion of sheaves by [def-weil-presheaf-modules-sheafification], and it is exact by [lem-weil-pbc-ringed-site-module-sheafification-exact]. Thus the inclusion of $\\mathrm{Mod}(\\mathcal C,\\mathcal O)$ into $\\mathrm{PMod}(\\mathcal C,\\mathcal O)$ is the right adjoint of an exact functor.",
+   "text": "For the identity ring map, use the Mathlib adjunction PresheafOfModules.sheafificationAdjunction (𝟙 R.obj) from [def-weil-presheaf-modules-sheafification]. Its left adjoint preserves finite limits by the Mathlib instance realizing [lem-weil-pbc-ringed-site-module-sheafification-exact], and hence preserves monomorphisms. Only finite-limit preservation, not finite-colimit preservation, is needed here.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
     "lem-weil-pbc-ringed-site-module-sheafification-exact"
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Apply [lem-sp-right-adjoint-preserves-injectives] to the exact sheafification functor and its inclusion right adjoint. Since $I$ is injective in $\\mathrm{Mod}(\\mathcal C,\\mathcal O)$, the inclusion sends it to an injective object of $\\mathrm{PMod}(\\mathcal C,\\mathcal O)$, which is precisely the underlying presheaf of $I$.",
+   "text": "Apply CategoryTheory.Adjunction.map_injective, the objectwise Mathlib form of [lem-sp-right-adjoint-preserves-injectives], to the injective sheaf I [def-sp-injective-resolutions] in [def-weil-sheaf-of-modules-category]. The right adjoint is SheafOfModules.forget R followed by restriction of scalars along 𝟙 R.obj. This identity restriction of scalars is definitionally the identity, so its value on I is the underlying module presheaf, and Lean accepts the result directly.",
    "uses": [
     "lem-sp-right-adjoint-preserves-injectives",
     "def-sp-injective-resolutions",
@@ -61,9 +61,9 @@
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FB (lemma-injective-module-injective-presheaf), proof via Homology Lemma Tag 015Z and Modules on Sites Section Tag 03CX"
+  "place": "Lemma Tag 03FB, the original sheafification-adjunction argument; implemented using Mathlib Adjunction.map_injective and the existing finite-limit-preservation instance."
  },
  "mathlib_searches": [
   {
@@ -143,5 +143,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T042405-L-1813899",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

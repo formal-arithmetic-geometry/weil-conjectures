@@ -2,7 +2,6 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Injective module sheaves are injective presheaves
@@ -42,6 +41,7 @@ theorem injective_module_sheaf_injective_presheaf
     [J.WEqualsLocallyBijective AddCommGrpCat.{t}]
     (I : SheafOfModules.{t} R) [Injective I] :
     Injective ((SheafOfModules.forget R).obj I) := by
-  sorry
+  exact (PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).map_injective I
+    inferInstance
 
 end CategoryTheory

@@ -5946,3 +5946,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: returned deliver/X2/Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk (reviewer RETURN: (the landing tools, head 536d705c4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 04:24 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit (stage 3; reviewer PASS; first push; landing 20261012T042405-L-1813614 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/B3/Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal (stage 3; reviewer PASS; first push; landing 20261012T042405-L-1813732 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/B3/Sheaf.CategoryTheory.InjectiveModulePresheaf (stage 3; reviewer PASS; first push; landing 20261012T042405-L-1813899 (proof); batch 20261012T042402; modules 1; new nodes 0)
