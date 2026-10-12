@@ -30,64 +30,47 @@
  ],
  "proof": [
   {
-   "text": "Fix an affine open $U\\subseteq X$, write $R=\\mathcal O_X(U)$, and identify $U\\cong\\operatorname{Spec}R$ by the canonical affine chart. Restricting a quasi-coherent module to this affine open remains quasi-coherent, and the affine tilde/global-sections equivalence identifies $\\mathcal F|_U$ with $\\widetilde{\\mathcal F(U)}$ and $\\mathcal G|_U$ with $\\widetilde{\\mathcal G(U)}$.",
+   "text": "On Spec R, choose the counit isomorphisms tilde Γ(F) ≅ F and tilde Γ(G) ≅ G. Apply affine_tilde_tensor to the two modules of global sections. Its sheaf isomorphism proves quasi-coherence of the tensor. Identify its beta with tensorSectionsMap after the semilinear global-section equivalences, by induction on tensors. Transport bijectivity by the counit section isomorphisms and tensorHom_app_tmulSection.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 01LA item (1), Lemmas 01IA and 01IB; restriction to an affine open"
-   }
-  },
-  {
-   "text": "On $U=\\operatorname{Spec}R$, apply the affine tilde-tensor comparison to $M=\\mathcal F(U)$ and $N=\\mathcal G(U)$. The sectionwise tensor presheaf restricts to the corresponding tensor presheaf on $U$ by definition. For sheafification, let $j:U\\hookrightarrow X$ be the open immersion and let $P$ be this tensor presheaf on $X$, with sheafification $P^\\#$. For every sheaf $H$ of $\\mathcal O_U$-modules, the four Hom sets are naturally identified: $\\operatorname{Hom}_U((P^\\#)|_U,H)=\\operatorname{Hom}_X(P^\\#,j_*H)=\\operatorname{Hom}_X(P,j_*H)=\\operatorname{Hom}_U(P|_U,H)$. The first and last equalities use [lem-weil-pbc-module-restriction-open-immersion-colimits], which says restriction is left adjoint to direct image; the middle equality is the sheafification universal property [def-weil-presheaf-modules-sheafification]; and $j_*H$ is a sheaf by [lem-weil-pbc-site-continuous-pushforward-sheaf], with the open-immersion direct image as in [def-weil-pbc-direct-image]. Thus $(P^\\#)|_U$ is canonically the sheafification of $P|_U$, so $(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)|_U\\cong(\\mathcal F|_U)\\otimes_{\\mathcal O_U}(\\mathcal G|_U)$. By [lem-weil-pbc-affine-tilde-tensor] this is canonically $\\widetilde{M\\otimes_RN}$, with $m\\otimes n$ sent to $\\tau_M(m)\\otimes\\tau_N(n)$. Therefore the original component $t_U:M\\otimes_RN\\to(\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G)(U)$ is the affine node's global-sections bijection.",
-   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
     "lem-weil-pbc-affine-tilde-tensor",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-site-continuous-pushforward-sheaf",
-    "def-weil-pbc-direct-image"
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I8 item (1); Modules, Lemma 01CE item (3), with restriction and sheafification expanded from their definitions"
-   }
+   "elementary": false
   },
   {
-   "text": "By [pqf-def-coherent], an $\\mathcal O_X$-module is quasi-coherent when every point has an affine open neighbourhood on which it is isomorphic to $\\widetilde P$ for some module $P$. Every point of the scheme $X$ has an affine open neighbourhood [def-pc-scheme], and Step 2 identifies the tensor product on each such $U$ with $\\widetilde{\\mathcal F(U)\\otimes_{\\mathcal O_X(U)}\\mathcal G(U)}$. Thus the tensor product is quasi-coherent. Step 2 also proves the asserted bijectivity of $t_U$ for every affine open $U$.",
+   "text": "For an affine open U restrict F,G along the canonical chart fromSpec. Restriction preserves quasi-coherence. Use the restriction-tensor comparison and its pure-section identity to transport the affine result. Semilinear restriction-section equivalences induce a tensor equivalence; tensor induction identifies the maps and hence gives bijectivity of tensorSectionsMap F G U.",
    "uses": [
-    "pqf-def-coherent",
-    "def-pc-scheme",
-    "lem-weil-pbc-affine-tilde-tensor"
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 01LA items (1), (2), and (8)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "On each affine-chart restriction the tensor is quasi-coherent, so the tilde counit gives a global presentation by mapping a presentation of the section module. Transport the presentation to the affine open and its over-site. Apply IsQuasicoherent.of_coversTop to the standard affine cover.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-affine-tilde-tensor",
+  "def-pc-scheme",
   "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-site-continuous-pushforward-sheaf",
-  "def-weil-pbc-direct-image",
-  "pqf-def-coherent",
-  "def-pc-scheme"
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-affine-tilde-tensor",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-def-coherent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemmas 01I7, 01I8 and Section 01LA; Modules, Lemma 01CE"
+  "place": "Lemma 01I8(1) and Section 01LA, using the canonical tilde counits and restriction-tensor comparison"
  },
  "mathlib_searches": [
   {
@@ -179,5 +162,15 @@
   "group": "J1",
   "result": "fix",
   "note": "scheme X, F G : X.Modules with IsQuasicoherent instances, tensorObj = SheafOfModules.monoidalCategory tensor (source global instance), clause 1 IsQuasicoherent, clause 2 every affine open U, t_U = existing tensorSectionsMap F G U bijective"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T095859-L-315198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
