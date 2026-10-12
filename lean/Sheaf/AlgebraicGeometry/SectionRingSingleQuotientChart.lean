@@ -8,7 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.Paper.NonvanishingSectionTrivializes
+import Sheaf.AlgebraicGeometry.SectionRingCoefficientHom
+import Sheaf.AlgebraicGeometry.SectionRingQuotientChartTransfer
 
 /-! # A single quotient chart for an invertible section ring
 
@@ -45,7 +48,13 @@ is a unit. Localizing there, a fraction xi/t^n maps to the coefficient of xi div
 by c^n. Multiplication by the restricted t^n gives xi, which is the desired equation.
 These equations agree on changes of z and hence glue as equations of sections.
 For n = 0 this is the unit-degree coefficient map. On an empty U the section rings
-are zero rings and the morphism and equations are unique. -/
+are zero rings and the morphism and equations are unique.
+
+The Lean reduction obtains the free-generator property from
+`nonvanishing_section_trivializes`, applies `exists_sectionRing_coefficient_hom`,
+and constructs the affine morphism using `ΓSpec.adjunction`. The adjunction identity
+verifies its induced ring map. Composing with `Proj.awayι` and applying
+`sectionRing_quotient_chart_transfer` gives all of the displayed equations. -/
 theorem exists_sectionRing_single_quotient_chart
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (d : ℕ) (s : sectionRingGrade L d) (hd : 0 < d) (U : X.Opens)
@@ -64,6 +73,33 @@ theorem exists_sectionRing_single_quotient_chart
               ⊤)).op ((t.val ^ n) (n • e)) =
         (L.tensorPow (n • e)).presheaf.map (homOfLE
           (le_top : U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤
-            ⊤)).op (ξ.val (n • e)) := by sorry
+            ⊤)).op (ξ.val (n • e)) := by
+  obtain ⟨V, hV, _, hcoeff⟩ :=
+    nonvanishing_section_trivializes X (L.tensorPow d) (s.val d)
+  have hVU : V = U := SetLike.coe_injective (hV.trans hU.symm)
+  subst V
+  have hs : IsFreeGenerator ((L.tensorPow d).presheaf.map
+      (homOfLE (le_top : U ≤ ⊤)).op (s.val d)) := by
+    intro W hW
+    have hc := hcoeff W hW
+    simp only [presheaf_map_map_apply]
+    constructor
+    · intro a b hab
+      obtain ⟨c, _, huniq⟩ := hc (a • (L.tensorPow d).presheaf.map
+        (homOfLE (le_top : W ≤ ⊤)).op (s.val d))
+      exact (huniq a rfl).trans (huniq b hab).symm
+    · intro t
+      obtain ⟨a, ha, _⟩ := hc t
+      exact ⟨a, ha.symm⟩
+  obtain ⟨ρ, hρ⟩ := exists_sectionRing_coefficient_hom X L d s hd U hs
+  let φ := CommRingCat.ofHom ρ ≫ U.topIso.inv
+  let q := (ΓSpec.adjunction.homEquiv U.toScheme
+    (.op (.of (HomogeneousLocalization.Away (sectionRingGrade L) s.val)))) φ.op
+  have hq : (Scheme.ΓSpecIso (.of (HomogeneousLocalization.Away
+      (sectionRingGrade L) s.val))).inv ≫ q.appTop = φ :=
+    ΓSpecIso_inv_ΓSpec_adjunction_homEquiv φ
+  refine ⟨q ≫ Proj.awayι (sectionRingGrade L) s.val s.property hd, ?_⟩
+  exact sectionRing_quotient_chart_transfer X L d s hd U hs ρ hρ q hq
+
 
 end AlgebraicGeometry.Scheme.Modules

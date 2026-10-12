@@ -16,42 +16,45 @@
  ],
  "proof": [
   {
-   "text": "Use nonvanishing_section_trivializes on L^{tensor d}. Tensor its generator s to get unique coefficients of restrictions of degree nd numerators with respect to s^n. Equality after multiplying homogeneous fractions by a power of s gives equality of coefficients by cancellation. The tensor multiplication of the section ring makes these coefficients into a unital ring map S_(s) to Gamma(U,O_X).",
+   "text": "Apply nonvanishing_section_trivializes to L.tensorPow d, using the proved source IsInvertible.tensorPow instance. Identify the resulting open with U by their underlying sets. Convert unique coefficients on every subopen into the IsFreeGenerator property of s restricted to U, by explicit injectivity and surjectivity arguments.",
    "uses": [
     "lem-weil-pbc-nonvanishing-section-trivializes",
-    "def-sc-invertible-section-ring"
+    "def-sc-invertible-section-ring",
+    "def-sc-local-free-generator"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the affine morphism correspondence and identify Spec S_(s) with D_+(s) to obtain g. On local trivializations of L write s=b z^d and t=c z^e, with b a unit. The chart function t^d/s^e pulls back to c^d/b^e. Its unit locus is exactly where c is a unit. On that locus localization sends xi/t^n to the coefficient of xi divided by c^n, giving the stated section equation. These local equations glue. For n=0 use the tensor unit. Empty source opens have unique maps and sections.",
+   "text": "Apply lem-sc-section-ring-coefficient-hom to obtain rho with the chosen-section numerator equations. Compose rho with U.topIso.inv, and apply the Gamma-Spec adjunction to construct q:U.toScheme -> Spec S_(s). The Mathlib identity GammaSpecIso_inv_GammaSpec_adjunction_homEquiv proves that q induces exactly this ring map.",
    "uses": [
-    "def-pc-proj",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "def-sc-invertible-section-ring"
+    "lem-sc-section-ring-coefficient-hom",
+    "lem-weil-pbc-morphism-into-affine-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Set g=q composed with Proj.awayι for the positive homogeneous section s. The chart-transfer theorem applies to the proved generator property, rho equations and verified q global-sections map, and yields every required positive-degree quotient equation.",
+   "uses": [
+    "lem-sc-section-ring-quotient-chart-transfer",
+    "def-pc-proj"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-proj",
   "def-sc-invertible-section-ring",
+  "def-sc-local-free-generator",
+  "lem-sc-section-ring-coefficient-hom",
+  "lem-sc-section-ring-quotient-chart-transfer",
   "lem-weil-pbc-morphism-into-affine-scheme",
   "lem-weil-pbc-nonvanishing-section-trivializes"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
+  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)",
+  "note": "A3 Lean reduction: derive the generator, construct the affine map with the Gamma-Spec adjunction, verify its induced functions map, and compose the Proj chart inclusion; two source-based intermediate theorems remain."
  },
  "mathlib_searches": [
   {
@@ -135,9 +138,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T184308-L-4006137",
+  "landing": "20261012T223358-L-1634258",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
