@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-stalk-normalization-etale-local-charts",
+ "kind": "statement",
+ "title": "Affine-chart criterion for stalk normalization etaleness",
+ "statement": "For the finite normalization morphism obtained from the data of `lem-sbc-stalk-normalization-etale`, every affine chart map on the stalk base has an etale ring homomorphism.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of local claim: split-section trait test and formal section computation for etaleness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the local normalization, purity, and split-section argument of Stacks Tag 0EYJ to identify each affine chart with a finite etale algebra.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "A2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ, local claim",
+  "note": "The affine-chart algebra computation is the substantive geometric step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalization of a smooth normal local scheme in a tame finite etale punctured cover is finite and is etale if its section fibre is split",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative normalization of a smooth family along a punctured local normal base is finite for a tame Galois cover and etale when split at a section",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.Scheme.Hom.toNormalization, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.Scheme.Hom.normalization; no local finiteness or etaleness theorem found",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite|etale).*normalization|normalization.*(finite|etale)",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; no local finiteness or etaleness theorem found",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationEtale",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-stalk-normalization-etale",
+   "place": "local affine-chart step",
+   "via": [
+    "lem-sbc-stalk-normalization-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.stalk_normalization_etale_local_charts",
+  "statement": "theorem GaloisCover.stalk_normalization_etale_local_charts {S C : Scheme.{u}} [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    (hG : IsUnit (Nat.card G : Γ(S, ⊤)))\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)\n    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)\n    (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    IsFinite (pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n      (pullback.fst c (S.fromSpecStalk s))) →\n    ∀ {V : (pullback c (S.fromSpecStalk s)).Opens} (_ : IsAffineOpen V)\n      {W : (pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n        (pullback.fst c (S.fromSpecStalk s))).Opens} (_ : IsAffineOpen W)\n      (e : W ≤ (pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n        (pullback.fst c (S.fromSpecStalk s))) ⁻¹ᵁ V),\n      ((pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n        (pullback.fst c (S.fromSpecStalk s))).appLE V W e).hom.Etale",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T184239-L-3994736",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T184239-L-3994736",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
