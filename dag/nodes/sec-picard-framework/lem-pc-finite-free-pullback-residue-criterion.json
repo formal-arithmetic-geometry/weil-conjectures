@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof steps 1--4, recorded verbatim in dag/nodes/sec-picard-framework/lem-pc-perfect-locus.json"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-amb-finite-locally-free-module",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof steps 1--4, recorded verbatim in dag/nodes/sec-picard-framework/lem-pc-perfect-locus.json"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free complex locus of cohomology concentrated in degree i rank r open residue fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite free complex residue fibre cohomology concentrated in one degree fixed rank is open and detected after pullback",
+   "results": "Module.isOpen_freeLocus, CochainComplex.isKInjective_of_injective_aux, CochainComplex.cm5b, CochainComplex.IsKProjective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.isLE_iff, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*locus|finite.free.*complex",
+   "results": "Mathlib/AlgebraicGeometry/Group/Smooth.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"pullback\"",
+   "results": "0 hits (second reading)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "id": "lem-pc-finite-free-pullback-residue-criterion",
+ "title": "Residue detection of pulled-back single cohomology",
+ "statement": "Let $Y,Y\\prime$ be schemes [def-pc-scheme], $g:Y\\prime\\to Y$ a morphism, $d,i,r\\in\\mathbb N$, and $P$ a cochain complex of $\\mathcal O_Y$-modules [def-pc-derived-category] with zero terms below $0$ and above $d$ and terms isomorphic to finite free modules [def-weil-pbc-free-module]. Let $g^*P$ and $P_y$ be termwise pullbacks [def-pc-derived-pullback], the latter along $\\operatorname{Spec}\\kappa(y)\\to Y$. Then $H^q(g^*P)=0$ for every $q\\in\\mathbb N\\setminus\\{i\\}$ and $H^i(g^*P)$ is finite locally free of rank $r$ [def-amb-finite-locally-free-module] if and only if, for every $y$ in the image of $g$, $H^q(P_y)=0$ for every $q\\in\\mathbb N\\setminus\\{i\\}$ and $H^i(P_y)$ is finite locally free of rank $r$.",
+ "proof": [
+  {
+   "text": "Suppose all image points satisfy the residue condition. Over each such point localize the finite free complex at the local ring and repeatedly split unit differential entries. Each splitting removes a two-term contractible summand and decreases total rank. In the remaining minimal complex all residue differentials vanish; the residue condition forces rank r in degree i and zero ranks elsewhere. The finitely many basis changes and inverses spread to a neighbourhood. Pullback of the explicit homotopy equivalence to a rank-r single complex computes cohomology after every map. These neighbourhoods cover Y\\prime, so the homology sheaves vanish off i and are locally free of rank r in degree i. Empty sources and rank zero are included.",
+   "uses": [
+    "lem-weil-pbc-free-complex-unit-entry-splits",
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely suppose g^*P has the indicated cohomology. Its negative cohomology vanishes by nonnegative support. Locally it is quasi-isomorphic by truncation to its flat locally free degree-i cohomology sheaf in that degree. For z mapping to y, its derived residue fibre is κ(z)^r in degree i. Flat-complex pullback and composition identify this with P_y extended along κ(y)→κ(z). Scalar extension is exact and the field-extension dimension formula preserves the ranks of finite-dimensional cohomology. Hence P_y vanishes off i and has rank r in degree i. Every image point has such a z; this proves the converse.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-finrank-field-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finrank-field-base-change",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-free-complex-unit-entry-splits"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof step 4: the two directions of residue detection, before constructing the global open.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreePullbackResidueCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreePullbackResidueCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteFree_pullback_single_iff_residue",
+  "statement": "theorem finiteFree_pullback_single_iff_residue\n    {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ)\n    (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d)\n    (hfree : ∀ n : ℤ, ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (i r : ℕ) {Y' : Scheme.{u}} (g : Y' ⟶ Y) :\n    ((∀ q : ℕ, q ≠ i → IsZero\n        ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q)) ∧\n      ((((Modules.pullback g).mapHomologicalComplex _).obj\n        P).homology i).IsFiniteLocallyFreeOfRank r) ↔\n      ∀ y ∈ Set.range g.base, ((∀ q : ℕ, q ≠ i → IsZero\n          ((((Modules.pullback (Y.fromSpecResidueField y)).mapHomologicalComplex _).obj\n            P).homology q)) ∧\n        ((((Modules.pullback (Y.fromSpecResidueField y)).mapHomologicalComplex _).obj\n          P).homology i).IsFiniteLocallyFreeOfRank r)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T135254-L-1678067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T135254-L-1678067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

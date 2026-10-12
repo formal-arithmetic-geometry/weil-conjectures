@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.FiniteFreeResidueLocusOpen
+import Sheaf.AlgebraicGeometry.FiniteFreePullbackResidueCriterion
 
 /-!
 # Higher direct images are computed by finite free complexes
@@ -83,8 +85,18 @@ theorem IsFiniteFreeComplex.exists_opens_range_subset_iff {Y : Scheme.{u}}
     {P : CochainComplex Y.Modules ℤ} {d : ℕ} (hP : IsFiniteFreeComplex P d) (i r : ℕ) :
     ∃ U : Y.Opens, ∀ {Y' : Scheme.{u}} (g : Y' ⟶ Y), Set.range g.base ⊆ U ↔
       IsFiniteLocallyFreeInDegree
-        (fun q : ℕ ↦ (((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) i r :=
-  sorry
+        (fun q : ℕ ↦ (((Modules.pullback g).mapHomologicalComplex _).obj P).homology q) i r := by
+  let U : Y.Opens := ⟨_, isOpen_finiteFree_residue_locus P d
+    hP.isStrictlyGE hP.isStrictlyLE hP.exists_iso_free i r⟩
+  refine ⟨U, fun g ↦ ?_⟩
+  have h := finiteFree_pullback_single_iff_residue P d
+    hP.isStrictlyGE hP.isStrictlyLE hP.exists_iso_free i r g
+  constructor
+  · intro hg
+    obtain ⟨hz, hf⟩ := h.mpr hg
+    exact ⟨hz, hf⟩
+  · intro hg
+    exact h.mp ⟨hg.isZero, hg.isFiniteLocallyFreeOfRank⟩
 
 section Coherence
 
