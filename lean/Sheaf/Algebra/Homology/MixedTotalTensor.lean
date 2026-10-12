@@ -46,15 +46,23 @@ noncomputable abbrev mixedTensor {R A : Type u} [CommRing R] [CommRing A] (f : R
 morphisms in its first variable. Source: Stacks Project, Section 06Y5.
 Proof: extension of scalars and tensoring are additive, so their composite is additive. -/
 @[instance] theorem mixedTensor_preservesZeroMorphisms {R A : Type u} [CommRing R] [CommRing A]
-    (f : R →+* A) : (mixedTensor f).PreservesZeroMorphisms :=
-  sorry
+    (f : R →+* A) : (mixedTensor f).PreservesZeroMorphisms := by
+  infer_instance
 
 /-- (blueprint: def-pc-mixed-total-tensor) The mixed module tensor preserves zero
 morphisms in its second variable. Source: Stacks Project, Section 06Y5.
 Proof: extension of scalars and tensoring with the fixed module are additive. -/
 @[instance] theorem mixedTensor_obj_preservesZeroMorphisms {R A : Type u} [CommRing R] [CommRing A]
-    (f : R →+* A) (X : ModuleCat.{u} A) : ((mixedTensor f).obj X).PreservesZeroMorphisms :=
-  sorry
+    (f : R →+* A) (X : ModuleCat.{u} A) : ((mixedTensor f).obj X).PreservesZeroMorphisms := by
+  refine ⟨?_⟩
+  intro Y Z
+  have h : (extendScalars f).map (0 : Y ⟶ Z) = 0 := by
+    apply ExtendScalars.hom_ext
+    intro y
+    simp [ExtendScalars.map_tmul]
+  dsimp [mixedTensor]
+  rw [h]
+  simp
 
 /-- (blueprint: def-pc-mixed-total-tensor) The total tensor bifunctor on complexes, with
 terms `⨁_{p+q=n} Mᵖ ⊗_R Eᑫ` and differential `d_M ⊗ 1 + (-1)^p 1 ⊗ d_E`.
