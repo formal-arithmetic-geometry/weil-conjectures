@@ -7651,3 +7651,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:39 L: batch 20261012T120425 bisection test completed
 - 12:40 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingPullback (stage 3; reviewer PASS; after a return; landing 20261012T124043-L-1149106 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:40 L: returned deliver/T1/Sheaf.FieldTheory.EtaleFieldGaloisClassification (reviewer RETURN: (reviewer X-9844c, head 9844c8bb4) Point 2 / F: In coord/changes/etale-field-galois-classification-imports.md replace `|)
+- 12:41 L: returned deliver/G1/Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence (reviewer RETURN: (reviewer X-2e7f1, head 2e7f17323) H9 (proof imports; stages/2-statements.md §3.7 and stages/3-proving-and-pruning.md §2)
