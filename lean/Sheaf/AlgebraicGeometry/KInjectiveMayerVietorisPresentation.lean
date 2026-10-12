@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
 import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # The short exact complex presenting direct-image Mayer--Vietoris
 

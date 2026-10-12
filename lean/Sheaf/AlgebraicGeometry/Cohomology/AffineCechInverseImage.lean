@@ -6,6 +6,9 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
 /-! # Inverse image on affine Čech cocycles
 

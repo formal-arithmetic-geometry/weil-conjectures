@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DiagonalPushforwardStructure
 import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Diagonal counit in independent localization universes
 

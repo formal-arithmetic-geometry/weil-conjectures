@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # The perfect immersion tensor formula in independent derived universes
 

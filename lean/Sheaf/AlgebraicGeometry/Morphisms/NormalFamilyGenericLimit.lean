@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.RingTheory.FiniteTypeZDomainNormalizationFinite
+import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # A normal Noetherian family system and its pointed generic fibres

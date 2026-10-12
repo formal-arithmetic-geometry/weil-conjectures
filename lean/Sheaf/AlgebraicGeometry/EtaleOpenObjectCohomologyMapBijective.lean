@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
 import Mathlib.CategoryTheory.Abelian.Injective.Ext
 import Sheaf.Paper.SiteRestrictionInjectives
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Bijectivity of the canonical open-object cohomology map
 

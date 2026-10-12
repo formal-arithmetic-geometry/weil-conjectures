@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Canonical comparison maps for a base-change cube
 

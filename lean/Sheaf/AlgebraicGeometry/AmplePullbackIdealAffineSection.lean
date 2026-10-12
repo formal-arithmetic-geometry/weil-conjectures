@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.AmpleIdealSection
 import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Ideal-supported affine sections of ample pullbacks
 

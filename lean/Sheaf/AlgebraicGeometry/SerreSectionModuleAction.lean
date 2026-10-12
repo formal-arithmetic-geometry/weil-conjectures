@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.DirectSum.Module
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-! # The explicit action on the nonnegative twisted section direct sum
 

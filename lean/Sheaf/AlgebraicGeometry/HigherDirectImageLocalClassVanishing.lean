@@ -10,6 +10,7 @@ import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
 import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
 import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Local eventual vanishing of higher-image sections
 

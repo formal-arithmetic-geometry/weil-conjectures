@@ -12,6 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.DiagonalConormalDifferentials
+import Sheaf.AlgebraicGeometry.DiagonalConormal
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # The ideal-sheaf conormal and its rank for a smooth closed diagonal
 

@@ -6,6 +6,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
+import Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp
+import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+import Sheaf.AlgebraicGeometry.LowerStarPlusTransitionComp
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Naturality of the canonical target sheaf comparison
 

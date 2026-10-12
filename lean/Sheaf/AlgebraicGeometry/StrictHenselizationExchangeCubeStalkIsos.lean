@@ -11,6 +11,8 @@ import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
 import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import Sheaf.Paper.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-! # Invertibility of the canonical strict-local stalk comparisons
 

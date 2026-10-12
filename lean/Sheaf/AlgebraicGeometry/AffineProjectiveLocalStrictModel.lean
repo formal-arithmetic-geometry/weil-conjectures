@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Local strictly perfect models of bounded finite-projective affine complexes -/
 

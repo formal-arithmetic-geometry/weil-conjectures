@@ -8,6 +8,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Single
+import Sheaf.Algebra.Homology.ModuleStalkExact
 
 /-!
 # Sheafifying an affine quotient resolution

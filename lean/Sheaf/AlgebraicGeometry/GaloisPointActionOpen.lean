@@ -2,6 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
+import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 
 @[expose] public section
 

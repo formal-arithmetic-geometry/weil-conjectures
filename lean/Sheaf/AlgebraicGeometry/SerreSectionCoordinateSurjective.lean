@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
 import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-! # Eventual surjectivity of coordinate multiplication on twisted sections
 

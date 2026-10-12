@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Finite-term presentations on arbitrary affine schemes
 

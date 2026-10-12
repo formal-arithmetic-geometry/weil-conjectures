@@ -6,6 +6,7 @@ Authors: SHEAF group B3
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
+import Sheaf.AlgebraicGeometry.DerivedCategories
 
 /-! # Lifting a commuting cube to bounded below right derived functors
 

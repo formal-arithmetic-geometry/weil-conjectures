@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleStageSectionCocone
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-! # Equality detection for two affine stage sections
 Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN.

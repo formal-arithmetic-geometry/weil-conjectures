@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 
 /-!
 # Sectionwise invariance of Hom complexes into K-injectives

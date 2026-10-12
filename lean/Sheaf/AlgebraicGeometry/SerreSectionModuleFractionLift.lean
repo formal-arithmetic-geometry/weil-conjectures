@@ -9,6 +9,7 @@ public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 
 /-!

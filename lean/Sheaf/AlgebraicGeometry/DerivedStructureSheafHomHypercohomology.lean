@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 /-! # Hom from the derived structure sheaf
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,

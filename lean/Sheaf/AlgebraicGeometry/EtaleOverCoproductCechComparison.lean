@@ -8,6 +8,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Sheaf.AlgebraicGeometry.EtaleCoproductCechRestriction
+import Sheaf.AlgebraicGeometry.EtaleFibreProductCoproduct
+import Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison
 
 /-! # Čech comparison for a finite coproduct over an étale object
 Source: Stacks Project, Tag 03OZ, equation-sheaf-coprod.

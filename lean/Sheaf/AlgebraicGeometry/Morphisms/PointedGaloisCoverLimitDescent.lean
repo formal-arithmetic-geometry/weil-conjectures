@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Descent of a pointed finite torsor along affine inverse limits

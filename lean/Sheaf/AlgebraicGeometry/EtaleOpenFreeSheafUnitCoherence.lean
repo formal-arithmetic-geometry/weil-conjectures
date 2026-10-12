@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
 import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Identity-generator coherence for nested open subschemes
 

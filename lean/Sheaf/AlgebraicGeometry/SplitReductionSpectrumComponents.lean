@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Spec
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Mathlib.AlgebraicGeometry.Limits
 import Sheaf.AlgebraicGeometry.ThickeningIntegral
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-!
 # Components of an affine scheme with split reduction

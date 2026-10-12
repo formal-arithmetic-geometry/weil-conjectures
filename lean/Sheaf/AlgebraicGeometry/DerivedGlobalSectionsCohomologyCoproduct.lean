@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.DirectSum.Basic
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import Sheaf.AlgebraicGeometry.GlobalDerivedHom
+import Sheaf.CategoryTheory.DerivedModuleDirectSums
 
 /-! # Zeroth derived global sections of a coproduct
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,

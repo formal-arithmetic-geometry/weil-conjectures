@@ -19,6 +19,8 @@ import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.Paper.PQFCohomology
+import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
 
 /-! # Ideal subobjects of finite affine pushforwards
 

@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.AlgebraicGeometry.BaseChangeMapCech
+import Sheaf.AlgebraicGeometry.CechResolution
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Canonical relatively flat module base change
 

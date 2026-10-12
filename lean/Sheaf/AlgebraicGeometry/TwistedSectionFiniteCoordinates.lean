@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
 import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-! # Finite scalar coordinates for twisted coherent global sections
 

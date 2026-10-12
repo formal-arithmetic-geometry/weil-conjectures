@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.SixFunctors.Finite.Stalk
+import Sheaf.Paper.EtaleFiniteDataDescent
 
 /-! # Extension of pointed étale neighbourhoods from the generic point
 

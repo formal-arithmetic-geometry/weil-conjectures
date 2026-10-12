@@ -8,6 +8,9 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Singleton affine tensor-section Čech complexes
 Source: Stacks Project, Tag 03P2, affine tensor-product calculation.

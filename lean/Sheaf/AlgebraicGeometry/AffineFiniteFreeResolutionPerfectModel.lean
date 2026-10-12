@@ -8,6 +8,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Single
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-!
 # Local strictly perfect models from bounded finite free resolutions

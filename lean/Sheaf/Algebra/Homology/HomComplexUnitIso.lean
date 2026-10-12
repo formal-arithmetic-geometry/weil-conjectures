@@ -9,6 +9,7 @@ public import Sheaf.Algebra.Homology.HomComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Hom complexes from the structure sheaf
 

@@ -1,6 +1,7 @@
 module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
+import Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 @[expose] public section
 universe u
 open CategoryTheory

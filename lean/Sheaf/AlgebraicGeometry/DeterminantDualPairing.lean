@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Construction of the exterior dual pairing
 Source: Stacks Project, Tag 0BRT, determinant inversion.

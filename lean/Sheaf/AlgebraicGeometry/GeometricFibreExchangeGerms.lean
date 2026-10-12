@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
 /-! # The geometric fibre restriction formula for exchange
 

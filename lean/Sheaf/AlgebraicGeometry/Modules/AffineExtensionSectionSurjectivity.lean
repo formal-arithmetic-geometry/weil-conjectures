@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Global lifting in an affine extension
 

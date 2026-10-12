@@ -12,6 +12,9 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.CategoryTheory.SiteExtensionByZeroExact
+import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
+import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
 
 /-! # Injective resolutions for the Zariski-etale comparison
 

@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 @[expose] public section
 

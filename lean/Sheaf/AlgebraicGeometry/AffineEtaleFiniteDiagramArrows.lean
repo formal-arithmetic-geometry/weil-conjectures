@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange
 
 /-!
 # Eventual lifting of arrows between affine étale models

@@ -10,6 +10,9 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
+import Sheaf.RingTheory.ExistsCoefficientSubring
+import Sheaf.RingTheory.ExistsLiftOfFieldCharP
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 
 /-!
 # A power series comparison map for a complete adically formally smooth algebra

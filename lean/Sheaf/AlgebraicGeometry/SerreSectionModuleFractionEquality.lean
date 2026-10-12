@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 import Sheaf.AlgebraicGeometry.SerreSectionModuleComparison
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Equality of represented homogeneous fractions

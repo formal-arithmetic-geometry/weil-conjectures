@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Sheaf.AlgebraicGeometry.Ample
 import Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # A line bundle and two sections from reciprocal local functions
 
