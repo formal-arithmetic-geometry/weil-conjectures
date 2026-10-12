@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-descended-qc-neighborhood-core",
+ "kind": "statement",
+ "title": "Core finite coefficient construction for a descended compact neighborhood",
+ "statement": "For a field k, a k-scheme X, a commutative k-algebra A, an open V in X_A, and x ∈ V, there are a finitely generated subalgebra B and compact open W in X_B whose canonical projection preimage contains x and is contained in V.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 0388 (lemma-descend-open), lines 811--848"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine chart around x, then a principal open contained in V; express its defining tensor using finitely many coefficients and descend the principal open to the corresponding finitely generated subalgebra.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Tag 0388, lines 811--848"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pointwise principal open neighborhoods of base changed scheme defined over finitely generated subalgebras",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every point in an open of X base changed to A has a neighborhood descending to a compact open over a finitely generated subalgebra",
+   "results": "AlgebraicGeometry.isCompact_iff_exists; AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen; AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat; PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation; AlgebraicGeometry.isCompactOpen_iff_eq_basicOpen_union; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.isCompact_basicOpen; AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "descended.*neighborhood|descend.*qc.*open|exists_preimage_eq",
+   "results": "Mathlib/Dynamics/Ergodic/Ergodic.lean; Mathlib/MeasureTheory/Measure/QuasiMeasurePreserving.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DescendedQCNeighborhood",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-descended-qc-neighborhood",
+   "place": "Decomposition of the single-principal-open construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendedQCNeighborhoodCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendedQCNeighborhoodCore.lean",
+  "declaration": "AlgebraicGeometry.exists_descended_qc_neighborhood_core",
+  "statement": "theorem exists_descended_qc_neighborhood_core (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k)) (A : Type u) [CommRing A] [Algebra k A] (V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A)))).Opens) (x : ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A))))) (hx : x ∈ V) : ∃ (B : Subalgebra k A), B.FG ∧ ∃ (W : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k B)))).Opens), IsCompact W.1 ∧ x ∈ (canonicalProjection k X f A B) ⁻¹ᵁ W ∧ (canonicalProjection k X f A B) ⁻¹ᵁ W ≤ V",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T160134-L-2563289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T160134-L-2563289",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

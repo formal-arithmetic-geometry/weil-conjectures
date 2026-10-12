@@ -6,6 +6,7 @@ Authors: SHEAF group C3
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+import Sheaf.AlgebraicGeometry.DescendedQCNeighborhoodCore
 /-!
 # Finite type descent of compact opens
 Source: Stacks Project, Varieties, Lemma Tag 0388 (`lemma-descend-open`).
@@ -48,6 +49,11 @@ theorem exists_descended_qc_neighborhood (k : Type u) [Field k] (X : Scheme.{u})
               congr 1) :
             Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k A))) ⟶
               Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k B))))
-        x ∈ π ⁻¹ᵁ W ∧ π ⁻¹ᵁ W ≤ V := by sorry
+        x ∈ π ⁻¹ᵁ W ∧ π ⁻¹ᵁ W ≤ V := by
+  obtain ⟨B, hB, W, hW, hxW, hWV⟩ :=
+    exists_descended_qc_neighborhood_core k X f A V x hx
+  refine ⟨B, hB, W, hW, ?_⟩
+  dsimp only
+  simpa [canonicalProjection] using And.intro hxW hWV
 
 end AlgebraicGeometry
