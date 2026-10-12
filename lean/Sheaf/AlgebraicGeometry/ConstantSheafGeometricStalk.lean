@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # The canonical map to the geometric stalk of a constant étale sheaf
@@ -51,6 +52,29 @@ theorem constantSheaf_geometricStalk_isIso (T : Scheme.{u})
         (pointSmallEtale t).toPresheafFiber (Etale.mk (𝟙 T))
           (Over.homMk t (Category.comp_id t))
           ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{(max u v) + 1}).obj E).obj) := by
-  sorry
+  let Φ := pointSmallEtale t
+  let U : T.Etale := Etale.mk (𝟙 T)
+  let x : Φ.fiber.obj U := Over.homMk t (Category.comp_id t)
+  have h₁ : (Φ.presheafFiberConstIso E).inv =
+      Φ.toPresheafFiber U x ((Functor.const T.Etaleᵒᵖ).obj E) := by
+    have h := Φ.toPresheafFiber_presheafFiberConstIso_hom E U x
+    calc
+      (Φ.presheafFiberConstIso E).inv = 𝟙 _ ≫ (Φ.presheafFiberConstIso E).inv :=
+        (Category.id_comp _).symm
+      _ = _ := by rw [← h, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  have hcomp : (Φ.presheafFiberConstIso E).inv ≫
+      Φ.presheafFiber.map (toSheafify T.smallEtaleTopology
+        ((Functor.const T.Etaleᵒᵖ).obj E)) =
+      (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj E)).app
+        (op U) ≫ Φ.toPresheafFiber U x
+          ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{(max u v) + 1}).obj E).obj := by
+    rw [h₁, Φ.toPresheafFiber_naturality]
+    rfl
+  have hi : IsIso ((Φ.presheafFiberConstIso E).inv ≫
+      Φ.presheafFiber.map (toSheafify T.smallEtaleTopology
+        ((Functor.const T.Etaleᵒᵖ).obj E))) := by
+    infer_instance
+  rw [← hcomp]
+  exact hi
 
 end AlgebraicGeometry.Scheme
