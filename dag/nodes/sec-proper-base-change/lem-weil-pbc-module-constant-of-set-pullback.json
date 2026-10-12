@@ -15,26 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Module inverse image commutes with passage to underlying sets: neighbourhood colimits are filtered, and forgetting modules preserves their colimits and finite limits, hence commutes with sheafification. Thus the underlying sheaf of f^*F is constant.",
+   "text": "The private proved helper set_constant_sections_bijective embeds an arbitrary set E in FreeAbelianGroup E. Left exact sheafification preserves this monomorphism. Compose the embedding with the canonical sheafification/forget comparison. By lem-weil-pbc-constant-sheaf-sections-connected, the image of a global set section is the constant abelian section of some a. Choose a point of X and a local representative e of the set section on an etale neighbourhood of that point. Naturality identifies the restriction of a with the constant section of FreeAbelianGroup.of e. The neighbourhood is nonempty, so injectivity of the constant-presheaf sheafification map there gives a = FreeAbelianGroup.of e. Monicity now gives that the original global section is e. Injectivity follows from the abelian constant-section injection and FreeAbelianGroup.of_injective. This includes E empty and arbitrarily large E in Type (u+1).",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-weil-pbc-constant-sheaf-sections-connected"
    ],
    "elementary": false
   },
   {
-   "text": "On a connected nonempty scheme the global sections of a constant set sheaf are its value, since locally constant functions are constant. Thus the constant set sheaf functor is fully faithful and preserves finite products. Transfer addition, zero, negation, and each scalar action to the value. Faithfulness gives the module axioms, and the underlying identification is then a module-sheaf isomorphism. Equivalently, use reflection of isomorphisms on the constant/global-sections counit. This applies to the zero module, zero coefficient ring, and infinite constant values.",
+   "text": "The preceding bijectivity says the unit of the constant-set-sheaf/global-sections adjunction is an isomorphism at every set. Adjunction.fullyFaithfulLOfIsIsoUnit gives full faithfulness of the constant-set-sheaf functor. The set inverse image preserves finite limits: unfold it as sheafToPresheaf, left Kan extension, and sheafification; the base-change functor is flat and AB5OfSize for types supplies finite-limit preservation of its filtered left Kan extension. Apply lem-weil-pbc-etale-inverse-image-abelian-lift-hom to this finite-limit preservation. Compose its component with the underlying-set image of lem-weil-pbc-etale-module-pullback-forget-naturality to identify the underlying set sheaf of the module inverse image with the given constant set inverse image.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+    "lem-weil-pbc-etale-module-pullback-forget-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For G equal to the module inverse image, Mathlib constantSheafAdj_counit_w factors the forgotten module counit as the constant/forget comparison followed by the set counit. The comparison is an isomorphism since forgetting modules preserves sheafification. The set counit is an isomorphism by full faithfulness and constancy from step 2. Thus the forgotten module counit is invertible. The module-sheaf forgetful functor reflects isomorphisms, so the module counit is invertible. Its inverse explicitly identifies G with the constant module sheaf on its global sections, proving IsConstant without requiring full faithfulness of the module constant functor.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 0DV5, proof of (2)--(3), Tag 0DV6; sites-modules Tag 093S; agent elaboration to arbitrary constant values using connectedness",
-  "note": "Elaboration of the source argument; the constant-module reflection includes arbitrary constant values."
+  "note": "G1 complete Lean proof: free-abelian embedding derives arbitrary set constant sections from the proved abelian theorem; abelian and module forget comparisons; reflection of the module counit. No new sorries."
  },
  "mathlib_searches": [
   {
@@ -103,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T070556-L-3479225",
-  "kind": "interface",
+  "landing": "20261012T085240-L-15295",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
