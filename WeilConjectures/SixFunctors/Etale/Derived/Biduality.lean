@@ -6,7 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
-public import WeilConjectures.SixFunctors.Etale.Derived.GeometricGenericFibre
+public import WeilConjectures.AlgebraicGeometry.CompactificationDimension
+public import WeilConjectures.SixFunctors.Etale.Derived.BidualityGeneric
+public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPointSupport
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenCover
+public import WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 
 /-!
@@ -62,89 +66,6 @@ namespace Etale
 open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-
-section Steps
-
-/-- **Locality of isomorphisms in `D(X_ét, Λ)`.** A morphism of `D(X_ét, Λ)` is an isomorphism
-as soon as its restrictions to the members of an open cover of `X` are. -/
-theorem isIso_of_forall_isIso_leftDerivedUpperStar_map {X : Scheme.{u}} {ι : Type*}
-    (U : ι → X.Opens) (hU : ⨆ i, U i = ⊤)
-    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (f : K ⟶ L) (h : ∀ i, IsIso ((L(((U i).ι)^*[ModuleCat.{u + 1} Λ])).map f)) :
-    IsIso f :=
-  sorry
-
-/-- Blueprint `lem-weil-coefficient-frobenius`, at the separably closed point: for a separably
-closed field `k` and `K ∈ Dctf(Spec k, Λ)`, the double-dual morphism `K ⟶ 𝔻 𝔻 K` of the point
-`Spec k` over itself is an isomorphism: under `RΓ(Spec k, -)` it is derived evaluation into the
-coefficient double dual of a perfect complex of `Λ`-modules. -/
-theorem isIso_verdierDualDoubleDual_app_id_of_isSepClosed {k : Type u} [Field k] [IsSepClosed k]
-    {K : _root_.DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) (Spec (.of k)) K) :
-    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) (𝟙 (Spec (.of k)))).app K) :=
-  sorry
-
-/-- **Detection on closed points and global sections.** Let `X` be of finite type over an
-algebraically closed field `k`, with structure morphism `a`, and let `f : K ⟶ L` be a morphism
-of bounded constructible complexes on `X_ét` whose geometric stalks are isomorphisms at every
-nonclosed point. Then the cone of `f` is supported on finitely many closed points, and `f` is an
-isomorphism as soon as `Ra_* f` is. -/
-theorem isIso_of_isIso_rightDerivedLowerStar_map_of_not_isClosed {k : Type u} [Field k]
-    [IsAlgClosed k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a]
-    [QuasiCompact a]
-    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
-    (hL : boundedConstructible (ModuleCat.{u + 1} Λ) X L) (f : K ⟶ L)
-    (hf : ∀ (x : X), ¬ IsClosed ({x} : Set X) → ∀ q : ℤ,
-      IsIso ((X.uliftPointSmallEtale x).sheafFiber.map
-        ((_root_.DerivedCategory.homologyFunctor _ q).map f)))
-    (ha : IsIso ((R((a)_*[ModuleCat.{u + 1} Λ])).map f)) :
-    IsIso f :=
-  sorry
-
-/-- **Compactification without raising the dimension.** An affine scheme `X` of finite type
-over a field `k` with `dim X ≤ d` is a quasi-compact open subscheme of a proper `k`-scheme `Y`
-with `dim Y ≤ d` (the scheme-theoretic closure of `X` in a Nagata compactification). -/
-theorem exists_isProper_isOpenImmersion_topologicalKrullDim_le {k : Type u} [Field k]
-    {X : Scheme.{u}} [IsAffine X] (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] (d : ℕ)
-    (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
-    ∃ (Y : Scheme.{u}) (b : Y ⟶ Spec (.of k)) (j : X ⟶ Y), IsProper b ∧ IsOpenImmersion j ∧
-      QuasiCompact j ∧ j ≫ b = a ∧ topologicalKrullDim Y ≤ (d : WithBot ℕ∞) :=
-  sorry
-
-/-- The statement proved by induction on the dimension: Verdier biduality on `Dctf(X, Λ)` for
-every separated scheme `X` of finite type and of dimension at most `d` over an algebraically
-closed field whose characteristic is invertible in `Λ`... -/
-def BidualityUpTo (d : ℕ) : Prop :=
-  ∀ (k : Type u) [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
-    (X : Scheme.{u}) (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
-    [QuasiCompact a], topologicalKrullDim X ≤ (d : WithBot ℕ∞) →
-    ∀ (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
-      constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
-        IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K)
-
-/-- **Biduality at nonclosed points.** Assume Verdier biduality in dimensions `< d`. Let `X` be
-separated of finite type over an algebraically closed field `k` with `dim X ≤ d`, and let
-`K ∈ Dctf(X, Λ)`. Then at every nonclosed point `x` of `X` the geometric stalks of the
-cohomology of `δ_K` are isomorphisms. A coordinate `t` on an affine neighbourhood `V` of `x`
-sends `x` to the generic point of `𝔸¹_k`; the geometric generic fibre `V_η̄` has dimension
-`< d` (`lem-fin-coordinate-generic-dimension`), so `δ` is an isomorphism on it, and it is the
-restriction of `δ_K` (`lem-weil-geometric-generic-duality`, `lem-weil-delta-restriction`); and a
-geometric point over `x` factors through `V_η̄`. -/
-theorem isIso_sheafFiber_map_verdierDualDoubleDual_app_of_not_isClosed (d : ℕ)
-    (IH : ∀ d' < d, BidualityUpTo Λ d') {k : Type u} [Field k] [IsAlgClosed k]
-    [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
-    [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
-    (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) (x : X)
-    (hx : ¬ IsClosed ({x} : Set X)) (q : ℤ) :
-    IsIso ((X.uliftPointSmallEtale x).sheafFiber.map
-      ((_root_.DerivedCategory.homologyFunctor _ q).map
-        ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K))) :=
-  sorry
-
-end Steps
 
 section Induction
 

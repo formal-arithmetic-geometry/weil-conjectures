@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.Etale.Derived.DualizingComplexId
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
@@ -42,8 +43,6 @@ is perfect: its tensor–internal-hom adjoint is an isomorphism.
   category in which the projection formula holds.
 - `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit`
   (`sk-thm-sf-global-duality`): `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`.
-- `AlgebraicGeometry.Etale.dualizingComplexIdIso` (`lem-sf-point`): `ω_S ≅ Λ_S` for the
-  identity of the base.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`
   (`sk-thm-sf-identification`): under an orientation, `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
 
@@ -98,38 +97,6 @@ universe u'
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-
-section Point
-
-variable (S : Scheme.{u})
-
-/-- Blueprint `lem-sf-point` (the dualizing complex of the base): the derived lower shriek along
-the identity of `S` is the identity, `R(𝟙_S)_! ≅ 𝟭`. The identity is proper, so `R(𝟙_S)_!` is
-`R(𝟙_S)_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and
-`(𝟙_S)_* ≅ 𝟭`. -/
-noncomputable def rightDerivedLowerShriekIdIso : R(𝟙 S)_![A] ≅ 𝟭 _ :=
-  rightDerivedLowerShriekIsoRightDerivedLowerStar A (𝟙 S) ≪≫
-    Functor.rightDerivedFunctorNatIso (lowerStarId A S) ≪≫
-    (𝟭 _).rightDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
-
-/-- The derived lower shriek along the identity of `S` is a left adjoint, being isomorphic to
-the identity (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIdIso`). -/
-instance isLeftAdjoint_rightDerivedLowerShriek_id : (R(𝟙 S)_![A]).IsLeftAdjoint :=
-  ⟨_, ⟨Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm⟩⟩
-
-/-- Blueprint `lem-sf-point` (the dualizing complex of the base): the exceptional inverse image
-along the identity of `S` is the identity, `R(𝟙_S)^! ≅ 𝟭`, being right adjoint to
-`R(𝟙_S)_! ≅ 𝟭`. -/
-noncomputable def rightDerivedUpperShriekIdIso : R(𝟙 S)^![A] ≅ 𝟭 _ :=
-  (rightDerivedUpperShriekAdjunction A (𝟙 S)).rightAdjointUniq
-    (Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm)
-
-/-- Blueprint `lem-sf-point`: for the structure morphism `a_s = 𝟙_s` of the base, the dualizing
-complex is the unit, `ω_s = Ra_s^! Λ ≅ Λ_s`. -/
-noncomputable def dualizingComplexIdIso : dualizingComplex A (𝟙 S) ≅ 𝟙_ _ :=
-  (rightDerivedUpperShriekIdIso A S).app _
-
-end Point
 
 variable {X S : Scheme.{u}} (aX : X ⟶ S) [HasCompactification aX] [(R(aX)_![A]).IsLeftAdjoint]
 
