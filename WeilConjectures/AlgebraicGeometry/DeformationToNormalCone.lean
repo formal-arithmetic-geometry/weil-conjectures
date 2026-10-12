@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+public import WeilConjectures.AlgebraicGeometry.NormalBundle
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
@@ -42,12 +43,13 @@ deformation over `𝔾_{m,B}` with `V ×_B 𝔾_{m,B}` — is a field. `𝔾_m` 
 so `𝔾_{m,B}` is carried as an open subscheme of `𝔸¹_B` whose underlying set is the complement of
 the zero section, as in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine`.
 
-TODO: nothing ties the normal cone datum `N` to the section `s`: the structure
-`AlgebraicGeometry.Scheme.Hom.NormalConeData` is not yet the normal cone of `s` (see its TODO), so
-the fibre over `t = 0` is only some vector bundle with a zero section. Tying `NormalConeData` to
-the conormal sheaf of the immersion is the subject of the smooth-purity follow-up (branch
-`prove2/sk-thm-smooth-purity-2`); once it lands, `N` in `DeformationToNormalConeData d g s N`
-becomes the normal cone of `s` and no field needs to be added here.
+The structure is stated for an arbitrary normal cone datum `N`
+(`AlgebraicGeometry.Scheme.Hom.NormalConeData`), so that the DNC invariance of
+`WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation` is proved for every such datum. The
+existence statement `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData` is about
+the normal bundle actually attached to the section `s`, `N_s = V(s^* Ω_{V/B})`
+(`AlgebraicGeometry.Scheme.Hom.sectionNormalCone`,
+`WeilConjectures.AlgebraicGeometry.NormalBundle`).
 
 ## Main definitions
 
@@ -106,7 +108,9 @@ surjective étale `v : B' ⟶ B`, an open neighbourhood of the section in the ba
 `𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` maps étale to `𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}`, carrying the section to
 the zero section (`exists_etale_coordinates`).
 
-The normal cone datum `N` is not yet tied to `s`; see the TODO in the module documentation.
+The datum is stated for an arbitrary normal cone datum `N`; the deformation to the normal cone
+of `s` is the one with `N = N_s` the normal bundle of `s`
+(`AlgebraicGeometry.Scheme.Hom.sectionNormalCone`).
 
 In the purity conventions every scheme is separated of finite type over the base field, so
 `g̃` and the coordinate chart are moreover separated and compactifiable, and every open
@@ -206,18 +210,16 @@ Since `g` is separated and compactifiable, so is `g̃`: the deformation space is
 blow-up of `V̄ ×_B 𝔸¹_B` along `s(B) × {0}`, for a compactification `V̄` of `g`, and this
 blow-up is proper over `𝔸¹_B`.
 
-As long as `AlgebraicGeometry.Scheme.Hom.NormalConeData` is not tied to `s` (see the TODO in the
-module documentation), this statement, which quantifies over every datum `N`, is false. Let `B`
-be a smooth projective curve with a nontrivial line bundle `L`, `V = 𝔸¹_B`, `s` the zero section,
-`d = 1`, and `N` the total space of `L` with its zero section. For a datum `𝒟`, the line bundle
-`s̃^* Ω_{𝒟/𝔸¹_B}` on `𝔸¹_B` restricts to `s^* Ω_{V/B} ≅ 𝒪_B` at `t = 1` and to `L^∨` at `t = 0`,
-contradicting `Pic(𝔸¹_B) = Pic(B)`. It becomes the blueprint lemma once `N` is the normal cone of
-`s`. -/
+The fibre over `t = 0` is the normal bundle `N_s = Spec_B (Sym (I/I²)) = V(s^* Ω_{V/B})` of the
+section (`AlgebraicGeometry.Scheme.Hom.sectionNormalCone`). For an arbitrary normal cone datum in
+place of `N_s` the statement would be false: for `B` a smooth projective curve with a nontrivial
+line bundle `L`, `V = 𝔸¹_B`, `s` the zero section and the total space of `L`, the line bundle
+`s̃^* Ω_{𝒟/𝔸¹_B}` would restrict to `𝒪_B` at `t = 1` and to `L^∨` at `t = 0`, contradicting
+`Pic(𝔸¹_B) = Pic(B)`. -/
 theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] [IsSeparated g] [HasCompactification g] (s : B ⟶ V)
-    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
-    (N : NormalConeData d s) :
-    Nonempty (DeformationToNormalConeData d g s N) :=
+    [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
+    Nonempty (DeformationToNormalConeData d g s (g.sectionNormalCone s d)) :=
   sorry
 
 end Scheme.Hom
