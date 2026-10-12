@@ -16,21 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Tensor the given module isomorphism n times, with the identity of the structure sheaf in degree zero. This gives isomorphisms between every pair of tensor powers, compatible with restrictions and germs.",
+   "text": "Construct tensorPow_iso by induction on n using Scheme.Modules.tensorPow from the source Invertible module: degree zero uses Iso.refl of the monoidal unit, and the successor uses the monoidal tensor of the given isomorphism with the induction isomorphism. No positiveTensorPower or change-of-rings construction is used.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
+    "def-sc-invertible-module"
    ],
    "elementary": true
   },
   {
-   "text": "A linear isomorphism on stalks maps the maximal ideal times the entire stalk onto that same submodule on the target. Transport a section through the tensor-power isomorphism; its nonvanishing locus is unchanged.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
+   "text": "Prove stalk_map_smul for the commutative-ring-valued scheme stalk. Represent both the scalar and vector as germs using TopCat.Presheaf.exists_germ_eq, restrict to the intersection of their neighborhoods with germ_res_apply, and apply PresheafOfModules.germ_smul, stalkFunctor_map_germ_apply, and Hom.app_smul. This gives linearity over X.presheaf.stalk x without using the ring-valued moduleStalkFunctor.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "The definition of ampleness is witnessed by compactness and, for each point, a positive tensor power, a section, and an affine open equal to its nonvanishing locus. Reuse the exponent and affine open for the transported section. The inverse isomorphism gives the reverse implication. The empty-space case has no points to check.",
+   "text": "For any module isomorphism, apply toPresheaf followed by the abelian-group stalk functor. Its hom and inv are additive inverse stalk maps, and stalk_map_smul makes them linear over the commutative stalk ring. Mathlib Submodule.smul_top_le_comap_smul_top shows that each map preserves the maximal ideal times the whole stalk. The inverse identity gives the converse membership implication. Compatibility with germs then proves nonvanishingLocus_iso for the transported global section.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Unpack IsAmple. Preserve CompactSpace X and, for each point, its positive exponent and affine open. Transport the witnessing section along tensorPow_iso; nonvanishingLocus_iso identifies the required pointwise predicates. Apply the same construction to the inverse isomorphism for the reverse implication. On the empty scheme the pointwise obligation is vacuous.",
    "uses": [
     "def-weil-pbc-ample-invertible-module"
    ],
@@ -38,14 +41,13 @@
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-module-stalk",
+  "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
  "proof_origin": {
-  "by": "H2 stage 3",
+  "by": "B3 stage 3",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Proposition 09NZ, restriction of the lifted invertible module; expanded by transporting tensor-power sections as in the parent node step 5"
+  "place": "Proposition 09NZ, transport of ampleness along the restriction isomorphism; expanded following Properties Definition 01PS and Section 01PR, using Mathlib germ and ideal-module lemmas"
  },
  "mathlib_searches": [
   {
@@ -114,10 +116,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T060739-L-2907961",
-  "kind": "interface",
+  "landing": "20261012T085215-L-3516",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
