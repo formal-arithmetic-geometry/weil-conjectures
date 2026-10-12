@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Let $U_E=\\coprod_{e\\in E}U$ and let $h_{U_E}$ be the representable presheaf on $U_{\\Et}$. By [lem-galois-constant-sheaf-sets-representable], the constant sheaf $\\underline E$ is canonically isomorphic to $h_{U_E}$, and the canonical constant section associated to $e$ corresponds to the morphism $\\iota_e\\circ\\mathrm{id}_U:U\\to U_E$. Thus $\\underline E(U)$ is identified with the set of morphisms $U\\to U_E$ over $U$.",
+   "text": "Apply [lem-galois-constant-sheaf-sets-representable] to obtain the represented sheaf, the constant-presheaf map c, and a sheaf isomorphism phi with eta followed by phi equal to c. At the terminal etale object (U,id), c(e) has underlying morphism the e-th coprojection. Evaluation of phi is bijective, so it suffices to prove that these coprojections give all morphisms over U into the coproduct, uniquely.",
    "uses": [
     "lem-galois-constant-sheaf-sets-representable"
    ],
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "Apply [lem-galois-coproduct-copies-morphisms-clopen] with $W=U$ and $s=\\mathrm{id}_U$. A morphism $U\\to U_E$ over $U$ is an $E$-indexed clopen decomposition of $U$, equivalently a map $|U|\\to E$ with open fibres. By [lem-weil-pbc-connected-locally-constant-map], every such map is constant because $U$ is nonempty and connected. Therefore exactly one index $e$ has piece $U$ and all other pieces are empty, so every section is the unique constant section with value $e$; nonemptiness makes the value unique. Hence $E\\to\\underline E(U)$ is bijective.",
+   "text": "Apply the locally-constant-map equivalence and the constant-coprojection fibre formula in [lem-galois-coproduct-copies-morphisms-clopen] with W=U and s=id. Choose a point x of U using nonemptiness from [def-weil-connected-scheme]. The fibre formula implies that the locally constant map associated to the e-th coprojection takes value e at x. By Mathlib LocallyConstant.eq_const (the bundled form of [lem-weil-pbc-connected-locally-constant-map]), every locally constant map is the constant map with its value at x. Hence the coprojection map is injective by evaluation at x, and surjective by choosing that value and applying injectivity of the equivalence. Transfer this bijectivity to ULift of the Over morphisms by their left components, then cancel the bijective evaluated phi using eta followed by phi equal to c.",
    "uses": [
     "lem-galois-coproduct-copies-morphisms-clopen",
     "lem-weil-pbc-connected-locally-constant-map",
@@ -55,10 +55,9 @@
    }
   },
   {
-   "text": "Let $v:V\\to U$ be an $\\Omega$-morphism. By Step 1 the canonical map $E\\to\\underline E(U)$ is $e\\mapsto\\eta_U(e)$, the image of $e$ under the canonical map $\\eta$ from the constant presheaf, and the section corresponding to $e$ is $\\eta_U(e)$. Its pullback along $v$ is $v^*\\eta_U(e)\\in(v^{-1}\\underline E_U)(V)$ [lem-weil-pbc-sets-etale-inverse-image-composition-units] (with $U\\times_UV=V$), and the canonical isomorphism $\\gamma_v:v^{-1}\\underline E_U\\xrightarrow{\\sim}\\underline E_V$ of [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf] sends it to $\\eta_V(e)$, the constant section with value $e$ on $V$. Nothing about $V$ is used, so the naturality holds without any connectedness assumption on $V$.",
+   "text": "Apply [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf] directly to v:V->U and E. It supplies a sheaf morphism gamma, its IsIso proof, and exactly the required equation for every constant section at the base-changed terminal object. Promote gamma to asIso gamma and retain its equation. Neither connectedness of V nor a composition-unit compatibility theorem is needed in this combination.",
    "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
    ],
    "elementary": false,
    "source": {
@@ -72,13 +71,15 @@
   "lem-galois-coproduct-copies-morphisms-clopen",
   "lem-weil-pbc-connected-locally-constant-map",
   "def-weil-connected-scheme",
-  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "P1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Remark 03P5 (remark-constant-locally-constant-maps), set-valued form"
+  "place": "Remark 03P5; existing inverse-image constant-sheaf theorem for naturality",
+  "note": "Compiling proof follows representation and locally constant morphism equivalence; bundled Mathlib LocallyConstant.eq_const closes connectedness. Composition-unit theorem not applied."
  },
  "mathlib_searches": [
   {
@@ -176,5 +177,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T044749-L-2037592",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
