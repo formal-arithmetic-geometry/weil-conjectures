@@ -15,43 +15,33 @@
  ],
  "proof": [
   {
-   "text": "Restrict the finite free trivialization to every V contained in U. Basis coordinates identify the internal dual sections with the ring-linear dual of the sections of M. In each direction the coordinates commute with restriction: a functional is reconstructed as a sheaf morphism by its values on the restricted finite basis.",
+   "text": "Obtain a section basis a, its internal dual coordinate sections φ, the two increasing-wedge section bases b and d, and the evaluation linear equivalence c from the local frame theorem. Form the target basis by transporting d.dualBasis through c⁻¹. This is independent of f.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-weil-pbc-free-module"
+    "lem-sc-exterior-dual-local-frames"
    ],
    "elementary": false
   },
   {
-   "text": "The increasing-wedge basis identifies the sectionwise exterior powers on the trivializing open with finite free sheaves of rank binomial(r,n). These presheaves are already sheaves: each is a finite power of the structure sheaf under the basis coordinates. The localized site has the same open covers, so restriction of sheafification is this sheaf. This identifies both exterior sheaves and the internal dual exterior sheaf on V with their ring-module counterparts.",
+   "text": "For indices s,t, evaluate f(b_s) on d_t using the assumed determinant formula. The frame formulas identify the matrix with a.coord_j(a_i) on the corresponding increasing subsets. exteriorPower.ιMultiDual_apply_ιMulti and exteriorPower.basis_coord identify its determinant with the s-coordinate of the t-th exterior basis vector, hence with δ_ts. This equals d.dualBasis_s(d_t). Equality on the basis d, followed by injectivity of c, gives f(b_s)=c⁻¹(d.dualBasis_s).",
    "uses": [
-    "def-sc-sheaf-exterior-power",
-    "lem-weil-pbc-exterior-power-free-basis",
-    "lem-pc-sites-module-sheafification-interface"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The determinant formula identifies f on pure wedges with the ring-module pairingDual; pure wedges span, so the maps agree. The wedge of the dual basis pairs with the corresponding increasing wedge by 1 and all other basis wedges by 0. Hence f carries a basis to its dual basis and is bijective, by exteriorPower.basis_coord and the finite dual basis. This includes n=0, n>r, zero rings, and empty opens.",
-   "uses": [
-    "lem-sc-exterior-power-dual-pairing",
     "lem-weil-pbc-exterior-power-free-basis"
    ],
    "elementary": false
+  },
+  {
+   "text": "Basis extensionality identifies f(V) with b.equiv targetBasis (Equiv.refl I). This linear equivalence is bijective. The statement and all hypotheses of the original theorem are unchanged.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-sc-sheaf-exterior-power",
-  "def-weil-pbc-free-module",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-sc-exterior-power-dual-pairing",
+  "lem-sc-exterior-dual-local-frames",
   "lem-weil-pbc-exterior-power-free-basis"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BRT determinant inversion: expanded the local-to-global argument from the item node; finite free pairing from Mathlib Pairing.lean and Basis.lean. In the installed Mathlib, local bijectivity follows from basis_coord and the finite dual basis; bijective_pairingDual is not present."
+  "place": "Tag 0BRT determinant inversion, local frame reduction. Steps 1-2 of the old plan are isolated as the f-independent frame theorem; step 3 is now proved in Lean using exteriorPower.basis_coord and the finite dual basis."
  },
  "mathlib_searches": [
   {
@@ -133,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T110308-L-617414",
+  "landing": "20261012T135249-L-1675946",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
