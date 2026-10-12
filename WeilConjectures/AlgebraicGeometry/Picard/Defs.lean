@@ -249,6 +249,59 @@ noncomputable def overMapOpCompSheafifyIso (g : S' ⟶ S) (P : (Over S)ᵒᵖ �
     (((Over.map g).pushforwardContinuousSheafificationCompatibility (Type (u + 1))
       (Scheme.fppfTopology.over S') (Scheme.fppfTopology.over S)).app P).symm
 
+/-- The identification `AlgebraicGeometry.overMapOpCompSheafifyIso` is compatible with the maps
+from the presheaves to their sheafifications. -/
+@[reassoc (attr := simp)]
+lemma whiskerLeft_toSheafify_overMapOpCompSheafifyIso_hom (g : S' ⟶ S)
+    (P : (Over S)ᵒᵖ ⥤ Type (u + 1)) :
+    Functor.whiskerLeft (Over.map g).op (toSheafify (Scheme.fppfTopology.over S) P) ≫
+        (overMapOpCompSheafifyIso g P).hom =
+      toSheafify (Scheme.fppfTopology.over S') ((Over.map g).op ⋙ P) := by
+  rw [overMapOpCompSheafifyIso, Functor.mapIso_symm, Iso.symm_hom, Iso.comp_inv_eq,
+    Functor.mapIso_hom, Iso.app_hom]
+  exact (Functor.toSheafify_pullbackSheafificationCompatibility (Over.map g) (Type (u + 1))
+    (Scheme.fppfTopology.over S') (Scheme.fppfTopology.over S) P).symm
+
+/-- **The Picard functor is compatible with base change**, as a canonical isomorphism. For a
+cartesian square exhibiting `f' : X' ⟶ S'` as the base change of `f : X ⟶ S` along
+`g : S' ⟶ S`, the restriction of `Pic_{X/S}` to schemes over `S'` is `Pic_{X'/S'}`, through the
+identifications `X' ×_{S'} T ≅ X ×_S T` (`AlgebraicGeometry.pullbackIsoOfIsPullback`); see
+`AlgebraicGeometry.picardFunctorIsoOfIsPullback_hom_app_toPicardFunctor`.
+
+(blueprint: `lem-pd-picard-base-change`) -/
+noncomputable def picardFunctorIsoOfIsPullback (h : IsPullback g' f' f g) :
+    (Over.map g).op ⋙ (picardFunctor f).obj ≅ (picardFunctor f').obj :=
+  overMapOpCompSheafifyIso g (picardPresheaf f) ≪≫
+    (sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso (picardPresheafIsoOfIsPullback h))
+
+/-- The canonical isomorphism `AlgebraicGeometry.picardFunctorIsoOfIsPullback`, on presheaf
+level: it is induced by the Picard presheaf identification
+`AlgebraicGeometry.picardPresheafIsoOfIsPullback`. -/
+@[reassoc]
+lemma whiskerLeft_toPicardFunctor_picardFunctorIsoOfIsPullback_hom (h : IsPullback g' f' f g) :
+    Functor.whiskerLeft (Over.map g).op (toPicardFunctor f) ≫
+        (picardFunctorIsoOfIsPullback h).hom =
+      (picardPresheafIsoOfIsPullback h).hom ≫ toPicardFunctor f' := by
+  rw [picardFunctorIsoOfIsPullback, Iso.trans_hom,
+    whiskerLeft_toSheafify_overMapOpCompSheafifyIso_hom_assoc, toSheafify_naturality,
+    Functor.mapIso_hom, Functor.mapIso_hom]
+  rfl
+
+/-- **The canonical base change isomorphism on classes.** The isomorphism
+`AlgebraicGeometry.picardFunctorIsoOfIsPullback` sends the class of an invertible module `ℒ` on
+`X ×_S T` to the class of its pullback along `X' ×_{S'} T ≅ X ×_S T`.
+
+(blueprint: `lem-pd-picard-base-change`) -/
+lemma picardFunctorIsoOfIsPullback_hom_app_toPicardFunctor (h : IsPullback g' f' f g)
+    (T : (Over S')ᵒᵖ) (L : (picardPresheaf f).obj ((Over.map g).op.obj T)) :
+    (picardFunctorIsoOfIsPullback h).hom.app T ((toPicardFunctor f).app _ L) =
+      (toPicardFunctor f').app T (Pic.map (pullbackIsoOfIsPullback h T.unop).hom L) := by
+  have h' := NatTrans.congr_app (whiskerLeft_toPicardFunctor_picardFunctorIsoOfIsPullback_hom h) T
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h'
+  rw [← picardPresheafIsoOfIsPullback_hom_app]
+  rw [← ConcreteCategory.comp_apply, ← h', ConcreteCategory.comp_apply]
+  rfl
+
 end BaseChange
 
 /-- **The Picard functor is compatible with base change.** Let `f : X ⟶ S` be a morphism of
@@ -259,9 +312,8 @@ For `T` over `S'` the fibre products `X ×_S T` and `X' ×_{S'} T` agree, so the
 agree on schemes over `S'`; the fppf coverings of a scheme over `S'` are the same in both sites, so
 their sheafifications agree as well (the remark after Stacks 0B9K).
 
-The blueprint asserts that the restriction *is* `Pic_{X'/S'}`, through the canonical
-identification induced by `X' ×_{S'} T = X ×_S T`. The statement here only asserts that some
-isomorphism exists, which is weaker; this suffices for the current applications.
+The canonical identification induced by `X' ×_{S'} T = X ×_S T`, which the blueprint asserts,
+is `AlgebraicGeometry.picardFunctorIsoOfIsPullback`; this is its existence corollary.
 
 (blueprint: `lem-pd-picard-base-change`) -/
 theorem nonempty_picardFunctor_iso_of_isPullback {X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S}

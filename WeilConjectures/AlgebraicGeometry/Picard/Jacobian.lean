@@ -1894,6 +1894,116 @@ theorem exists_jacobian_pullback (ks : Type u) [Field ks] [Algebra k ks] [IsSepC
   rw [← hg, ← arithmeticGenus_pullback ks]
   exact exists_jacobian (k := ks)
 
+section PicardFunctorDegreeBaseChange
+
+variable {K : Type u} [Field K] [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))]
+  [C'.Over (Spec (.of K))] [IsProper (C ↘ Spec (.of k))]
+  [LocallyOfFinitePresentation (C ↘ Spec (.of k))]
+
+/-- The identification `X' ×_{S'} T ≅ X ×_S T` of a cartesian square `C' = C ×_k K` preserves
+the fibrewise degrees: a class on `C ×_k T` has fibrewise degree `d` if and only if its pullback
+to `C' ×_K T` does. -/
+theorem pic_map_pullbackIsoOfIsPullback_mem_picardSubfunctorDegree_iff (q : C' ⟶ C)
+    (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) (T : Over (Spec (.of K)))
+    (L : (picardPresheaf (C ↘ Spec (.of k))).obj
+      (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T))) :
+    Pic.map (pullbackIsoOfIsPullback h T).hom L ∈
+        (picardSubfunctorDegree (C' ↘ Spec (.of K)) d).obj (.op T) ↔
+      L ∈ (picardSubfunctorDegree (C ↘ Spec (.of k)) d).obj
+        (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T)) := by
+  have : IsProper (C' ↘ Spec (.of K)) := IsProper.isStableUnderBaseChange.of_isPullback h ‹_›
+  have : LocallyOfFinitePresentation (C' ↘ Spec (.of K)) :=
+    MorphismProperty.of_isPullback (P := @LocallyOfFinitePresentation) h inferInstance
+  rw [mem_picardSubfunctorDegree_iff, mem_picardSubfunctorDegree_iff]
+  refine forall_congr' fun t ↦ ?_
+  rw [picardPresheafDegree_pic_map_of_isPullback (C ↘ Spec (.of k)) (C' ↘ Spec (.of K))
+    (𝟙 T.left) _ (IsPullback.of_horiz_isIso ⟨by simp⟩) L t]
+  rfl
+
+/-- The degree-`d` subfunctors of the Picard presheaves are compatible with base change: the
+identification `AlgebraicGeometry.picardPresheafIsoOfIsPullback` restricts to them
+(`AlgebraicGeometry.pic_map_pullbackIsoOfIsPullback_mem_picardSubfunctorDegree_iff`). -/
+noncomputable def picardSubfunctorDegreeIsoOfIsPullback (q : C' ⟶ C)
+    (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) :
+    (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+        (picardSubfunctorDegree (C ↘ Spec (.of k)) d).toFunctor ≅
+      (picardSubfunctorDegree (C' ↘ Spec (.of K)) d).toFunctor :=
+  NatIso.ofComponents
+    (fun T ↦ Equiv.toIso (((picardPresheafIsoOfIsPullback h).app T).toEquiv.subtypeEquiv
+      fun L ↦ (pic_map_pullbackIsoOfIsPullback_mem_picardSubfunctorDegree_iff q h d T.unop L).symm))
+    fun {T T'} φ ↦ by
+      ext L
+      apply Subtype.ext
+      exact NatTrans.naturality_apply (picardPresheafIsoOfIsPullback h).hom φ L.1
+
+/-- **The degree-`d` part is compatible with base change**, as a canonical isomorphism. Let `C`
+be a proper curve over `k`, let `K/k` be a field extension and let `C' = C ×_k K` be presented by
+a cartesian square. The restriction of `Pic^d_{C/k}` to schemes over `K` is `Pic^d_{C'/K}`,
+through the identifications `C' ×_K T ≅ C ×_k T`; see
+`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback_hom_app_toSheafify`.
+
+(blueprint: `cor-pd-pic0-base-change`, `lem-pd-picard-base-change`) -/
+noncomputable def picardFunctorDegreeIsoOfIsPullback (q : C' ⟶ C)
+    (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) :
+    (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+        (picardFunctorDegree (C ↘ Spec (.of k)) d).obj ≅
+      (picardFunctorDegree (C' ↘ Spec (.of K)) d).obj :=
+  overMapOpCompSheafifyIso _ _ ≪≫
+    (sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso
+      (picardSubfunctorDegreeIsoOfIsPullback q h d))
+
+/-- The canonical isomorphism `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, on
+presheaf level: it is induced by `AlgebraicGeometry.picardSubfunctorDegreeIsoOfIsPullback`. -/
+@[reassoc]
+lemma whiskerLeft_toSheafify_picardFunctorDegreeIsoOfIsPullback_hom (q : C' ⟶ C)
+    (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) :
+    Functor.whiskerLeft (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op
+        (toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree (C ↘ Spec (.of k)) d).toFunctor) ≫
+        (picardFunctorDegreeIsoOfIsPullback q h d).hom =
+      (picardSubfunctorDegreeIsoOfIsPullback q h d).hom ≫
+        toSheafify (fppfTopology.over (Spec (.of K)))
+          (picardSubfunctorDegree (C' ↘ Spec (.of K)) d).toFunctor := by
+  rw [picardFunctorDegreeIsoOfIsPullback, Iso.trans_hom,
+    whiskerLeft_toSheafify_overMapOpCompSheafifyIso_hom_assoc, toSheafify_naturality,
+    Functor.mapIso_hom, Functor.mapIso_hom]
+  rfl
+
+/-- **The canonical base change isomorphism of `Pic^d` on classes.** The isomorphism
+`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback` sends the class of an invertible module
+`ℒ` of fibrewise degree `d` on `C ×_k T` to the class of its pullback along
+`C' ×_K T ≅ C ×_k T`.
+
+(blueprint: `cor-pd-pic0-base-change`) -/
+lemma picardFunctorDegreeIsoOfIsPullback_hom_app_toSheafify (q : C' ⟶ C)
+    (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) (T : Over (Spec (.of K)))
+    (L : (picardPresheaf (C ↘ Spec (.of k))).obj
+      (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T)))
+    (hL : L ∈ (picardSubfunctorDegree (C ↘ Spec (.of k)) d).obj
+      (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T))) :
+    (picardFunctorDegreeIsoOfIsPullback q h d).hom.app (.op T)
+        ((toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree (C ↘ Spec (.of k)) d).toFunctor).app _ ⟨L, hL⟩) =
+      (toSheafify (fppfTopology.over (Spec (.of K)))
+          (picardSubfunctorDegree (C' ↘ Spec (.of K)) d).toFunctor).app (.op T)
+        ⟨Pic.map (pullbackIsoOfIsPullback h T).hom L,
+          (pic_map_pullbackIsoOfIsPullback_mem_picardSubfunctorDegree_iff q h d T L).2 hL⟩ := by
+  have h' := NatTrans.congr_app
+    (whiskerLeft_toSheafify_picardFunctorDegreeIsoOfIsPullback_hom q h d) (.op T)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h'
+  have h'' := ConcreteCategory.congr_hom h'
+    (⟨L, hL⟩ : (picardSubfunctorDegree (C ↘ Spec (.of k)) d).toFunctor.obj
+      (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T)))
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h''
+  exact h''
+
+end PicardFunctorDegreeBaseChange
+
 /-- **The degree-zero part is compatible with base change.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `K/k` be a field extension and let `C_K` be the base
 change of `C`, presented by a cartesian square. Then the restriction of `Pic^0_{C/k}` to schemes
@@ -1903,9 +2013,8 @@ This follows from the compatibility of the Picard functor with base change
 (`AlgebraicGeometry.nonempty_picardFunctor_iso_of_isPullback`), the fibrewise degree of a class
 being computed on the same fibres in both cases.
 
-The blueprint asserts that the restriction *is* `Pic^0_{C_K/K}`, through the canonical
-identification. The statement here only asserts that some isomorphism exists, which is weaker;
-this suffices for the current applications.
+The canonical identification which the blueprint asserts is
+`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`; this is its existence corollary.
 
 (blueprint: `cor-pd-pic0-base-change`) -/
 theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [Algebra k K]
@@ -2854,8 +2963,11 @@ proper smooth geometrically connected curve of genus `g` over `k₀`.  Let `C` b
 `C₀ ×_{k₀} k̄₀`, presented by a cartesian square.  Then the Jacobian of `C` descends to `k₀`:
 there is a `k₀`-scheme `J₀` carrying a commutative group scheme structure, proper, smooth of
 relative dimension `g` and geometrically integral over `k₀`, which represents `Pic^0_{C₀/k₀}`
-compatibly with the group laws, whose base change `J₀ ×_{k₀} k̄₀` represents `Pic^0_{C/k̄₀}`, and
-whose group of `k̄₀`-points is isomorphic to `Pic^0(C)`.  The isomorphism is equivariant: every
+compatibly with the group laws by `r`, whose base change `J₀ ×_{k₀} k̄₀` represents
+`Pic^0_{C/k̄₀}` by the base change `rK` of `r` (through the canonical identification
+`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`), and whose group of `k̄₀`-points is
+isomorphic to `Pic^0(C)` by an isomorphism `e` induced by `r`: `e` sends `ℒ` to the point of `J₀`
+which `r` attaches to the class of `ℒ`. The isomorphism is equivariant: every
 `k₀`-algebra automorphism `σ` of `k̄₀` induces the automorphism `γ` of `C` over `C₀` lying over
 `Spec σ`, base change along `γ` preserves `Pic^0(C)`, and the isomorphism intertwines that
 action with the action on `k̄₀`-points by precomposition with
@@ -2879,11 +2991,19 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
       (r : (picardFunctorDegree (C₀ ↘ Spec (.of k₀)) 0).obj.RepresentableBy J₀),
       IsProper J₀.hom ∧ SmoothOfRelativeDimension g J₀.hom ∧ GeometricallyIntegral J₀.hom ∧
         IsPicardZeroMul _ r ∧
-        Nonempty ((picardFunctorDegree (C ↘ Spec (.of K)) 0).obj.RepresentableBy
-          (Over.mk (Limits.pullback.snd J₀.hom
-            (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))))) ∧
+        (∃ rK : (picardFunctorDegree (C ↘ Spec (.of K)) 0).obj.RepresentableBy
+            (Over.mk (Limits.pullback.snd J₀.hom
+              (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))))),
+          ∀ (T : Over (Spec (.of K)))
+            (y : (picardFunctorDegree (C₀ ↘ Spec (.of k₀)) 0).obj.obj
+              (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))).obj T))),
+            rK.homEquiv.symm ((picardFunctorDegreeIsoOfIsPullback p hC 0).hom.app (.op T) y) =
+              (Over.mapPullbackAdj _).homEquiv T J₀ (r.homEquiv.symm y)) ∧
         ∃ e : picardZero K C ≃*
             (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))) ⟶ J₀),
+          (∀ L, ∃ h, e L = r.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k₀)))
+            (picardSubfunctorDegree (C₀ ↘ Spec (.of k₀)) 0).toFunctor).app _
+              ⟨Pic.map hC.isoPullback.inv L.1, h⟩)) ∧
           ∀ σ : K ≃ₐ[k₀] K, ∃ γ : C ⟶ C, γ ≫ p = p ∧
             γ ≫ (C ↘ Spec (.of K)) = (C ↘ Spec (.of K)) ≫
               Spec.map (CommRingCat.ofHom σ.toAlgHom.toRingHom) ∧
@@ -2898,8 +3018,6 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
   -- Steps 1–7: the Jacobian `J₀` over `k₀`.
   obtain ⟨J₀, _, r, hP, hS, hG, hr⟩ :=
     exists_commGrpObj_representableBy_picardFunctorDegree ks C₀ g hg
-  -- Step 8: its base change to `K` represents `Pic^0_{C/K}`.
-  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback p hC 0
   -- Steps 9–11: the geometric points, equivariantly and as groups.
   have : IsAlgClosed K := IsAlgClosure.isAlgClosed k₀
   obtain ⟨Φ, hΦ, hΦσ⟩ := exists_picardZero_equiv_picardFunctorDegree C₀ C p hC
@@ -2907,11 +3025,20 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
     (T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))))
     (fun L : picardZero K C ↦ Pic.map hC.isoPullback.inv L.1)
     (fun a b ↦ Pic.map_mul _ a.1 b.1) Φ hΦ
+  -- Step 8: its base change to `K` represents `Pic^0_{C/K}`, through the canonical
+  -- identification of `Pic^0_{C₀/k₀}` restricted to `K`-schemes with `Pic^0_{C/K}`.
   refine ⟨J₀, inferInstance, r, hP, hS, hG, hr,
-    ⟨(r.ofAdjunction (Over.mapPullbackAdj _)).ofIso e⟩, ψ, fun σ ↦ ?_⟩
-  obtain ⟨γ, hγp, hγ, act, hact, hΦσ⟩ := hΦσ σ
-  refine ⟨γ, hγp, hγ, act, hact, fun L ↦ r.homEquiv.injective ?_⟩
-  simp only [hψ, Equiv.apply_symm_apply, r.homEquiv_comp, hΦσ]
+    ⟨(r.ofAdjunction (Over.mapPullbackAdj _)).ofIso (picardFunctorDegreeIsoOfIsPullback p hC 0),
+      fun T y ↦ ?_⟩, ψ, fun L ↦ ?_, fun σ ↦ ?_⟩
+  · rw [Equiv.symm_apply_eq]
+    simp only [Functor.RepresentableBy.ofIso, Equiv.trans_apply, Iso.toEquiv_fun, Iso.app_hom,
+      Functor.RepresentableBy.ofAdjunction_homEquiv]
+    erw [Equiv.symm_apply_apply, Equiv.apply_symm_apply]
+  · obtain ⟨h, hL⟩ := hΦ L
+    exact ⟨h, (hψ L).trans (congrArg _ hL)⟩
+  · obtain ⟨γ, hγp, hγ, act, hact, hΦσ⟩ := hΦσ σ
+    refine ⟨γ, hγp, hγ, act, hact, fun L ↦ r.homEquiv.injective ?_⟩
+    simp only [hψ, Equiv.apply_symm_apply, r.homEquiv_comp, hΦσ]
 
 end Descent
 
