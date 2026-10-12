@@ -9622,3 +9622,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:38 L: merged deliver/A2/Sheaf.Paper.RegularMaximalJacobianPresentation (stage 3; reviewer PASS; first push; landing 20261012T213846-L-1207343 (proof); batch 20261012T213845; modules 1; new nodes 1)
 - 21:38 L: merged deliver/D2/Sheaf.RingTheory.RegularTensorProductOfFormallySmoothAdic (stage 3; reviewer PASS; first push; landing 20261012T213846-L-1207487 (proof); batch 20261012T213845; modules 1; new nodes 0)
 - 21:38 L: merged deliver/D3/Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue (stage 3; reviewer PASS; first push; landing 20261012T213847-L-1207586 (interface); batch 20261012T213845; modules 3; new nodes 2)
+- 21:38 L: merged deliver/E2/Sheaf.AlgebraicGeometry.ClosedImmersionFormalKernelAnnihilation (stage 3; reviewer PASS; first push; landing 20261012T213847-L-1207694 (interface); batch 20261012T213845; modules 3; new nodes 2)

@@ -1,0 +1,121 @@
+{
+ "id": "aux-closed-immersion-formal-kernel-comparison",
+ "kind": "statement",
+ "title": "Closed pushforward comparison for categorical formal kernels",
+ "statement": "Let $j:Z\\to X$ be a closed immersion of Noetherian schemes [def-weil-closed-immersion] and $Q$ a quasi-coherent ideal on $X$ [def-sbc-closed-immersion-ideal-sheaf]. Choose an Abelian structure on $\\operatorname{Coh}(X,Q)$ [lem-weil-pbc-coherent-formal-modules-abelian]. Let $M,N\\in\\operatorname{Coh}(X,Q)$, $G,D\\in\\operatorname{Coh}(Z,Q\\mathcal O_Z)$ [def-weil-pbc-coherent-formal-module], and morphisms $a:M\\to N$, $\\alpha:G\\to D$. Suppose isomorphisms of underlying inverse systems $e:M\\cong j_*G$, $d:N\\cong j_*D$ satisfy $d\\circ a=(j_*\\alpha)\\circ e$. For any limiting kernel fork $k$ of $\\alpha$, there is an isomorphism of inverse systems $(\\operatorname{Ker}(a))_\\bullet\\cong j_*(k.\\mathrm{pt})_\\bullet$. This asserts no termwise kernel formula and requires no annihilation hypothesis.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087T (lemma-i-star-equivalence), 087W (lemma-inverse-systems-affine), 087X (lemma-inverse-systems-abelian); closed quotient replacement in Theorem 088E. Verified against https://stacks.math.columbia.edu/tag/087T, /087W, /087X and /088E."
+ },
+ "proof": [
+  {
+   "text": "Closed coherent pushforward is the termwise equivalence onto systems supported on the closed subscheme. On each Noetherian affine the formal-module equivalence identifies it with restriction of scalars from the quotient of the completed ring. The inverse limits and their actions agree, and restriction of scalars preserves kernels of finite modules. Thus the pushed formal kernel is the categorical formal kernel on this affine.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical affine kernel identifications commute with restriction. Local exactness identifies the pushed fork as a limiting kernel fork globally.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-local-exactness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this fork by e and d using the commuting square. Uniqueness of limiting kernel forks identifies its underlying system with that of kernel(a), for the chosen Abelian structure.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-local-exactness"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "E2",
+  "date": "2026-10-13",
+  "note": "Second reading: genuine kernel comparison / sectionwise annihilation reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed immersion pushforward comparison of categorical kernels of coherent formal modules",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion direct image kernel coherent formal modules inverse systems restriction scalars",
+   "results": "8 hits: localCohomology, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, localCohomology.diagram; ",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the project-specific sheaf statement; use existing section and categorical lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*kernel|PreservesLimit.*parallelPair",
+   "results": "25 hits: Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean; ",
+   "date": "2026-10-13",
+   "verdict": "No exact match for the project-specific sheaf statement; use existing section and categorical lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionFormalKernelAnnihilation",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-closed-immersion-formal-kernel-annihilation",
+   "place": "Closed pushforward comparison for categorical formal kernels",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionFormalKernelComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionFormalKernelComparison.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_formalKernel_comparison",
+  "statement": "theorem closedImmersion_formalKernel_comparison\n    {X Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z]\n    (j : Z ⟶ X) [IsClosedImmersion j] (Q : X.IdealSheafData)\n    [Abelian (CoherentFormalModule X Q)]\n    (M N : CoherentFormalModule X Q)\n    (G D : CoherentFormalModule Z (Q.comap j))\n    (a : M ⟶ N) (α : G ⟶ D)\n    (e : M.obj ≅ G.obj ⋙ Scheme.Modules.pushforward j)\n    (d : N.obj ≅ D.obj ⋙ Scheme.Modules.pushforward j)\n    (hsquare : a.hom ≫ d.hom =\n      e.hom ≫ Functor.whiskerRight α.hom (Scheme.Modules.pushforward j))\n    (k : KernelFork α) (hk : IsLimit k) :\n    Nonempty ((kernel a).obj ≅ k.pt.obj ⋙ Scheme.Modules.pushforward j)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T213847-L-1207694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T213847-L-1207694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
