@@ -6,8 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
-import Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension
+import Sheaf.AlgebraicGeometry.FiniteTypeEpiImage
+import Sheaf.AlgebraicGeometry.CoherentCokernelRelationsLocal
 
 /-! # Coherent CokernelRelations
 
@@ -44,6 +44,11 @@ theorem coherent_cokernel_relations (X : RingedSpace.{u})
     (U : Opens X) (n : ℕ)
     (g : SheafOfModules.free (R := (moduleRings X).over U) (ULift.{u} (Fin n)) ⟶
       (cokernel f).over U) :
-    (kernel g).IsFiniteType := by sorry
+    (kernel g).IsFiniteType := by
+  obtain ⟨m, ψ, e, he⟩ := coherent_cokernel_relations_local X F G f hF hG U n g
+  set_option linter.style.haveILetI false in
+    haveI : Epi e := he
+  exact sheaf_finiteType_of_epi (R := (moduleRings X).over U)
+    (A := kernel ψ) (B := kernel g) e (hG.2 U m ψ)
 
 end AlgebraicGeometry.RingedSpace
