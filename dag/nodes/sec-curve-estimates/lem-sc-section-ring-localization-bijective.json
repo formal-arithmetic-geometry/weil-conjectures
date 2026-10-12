@@ -15,33 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Apply the degree-zero case of invertS_cohomology to the invertible module L tensorPow d and the structure module. Its comparison is an additive equivalence with sections on the nonvanishing open.",
+   "text": "Apply exists_sectionFraction_nonvanishing_equiv to M=L.tensorPow d, the structure module, and the section s.val d. Its compactness and quasi-separatedness assumptions are precisely the stated ones; tensor powers and the structure module supply invertibility and quasi-coherence. Identify its nonvanishing open with U by equality of their underlying sets. Compose with the Veronese section-fraction equivalence and the unit-sections equivalence to obtain an additive equivalence e from homogeneous localization to functions on U.",
    "uses": [
-    "lem-sc-invert-s-cohomology"
+    "lem-sc-p1-invertible-section-localization",
+    "lem-sc-section-ring-veronese-fractions"
    ],
    "elementary": false
   },
   {
-   "text": "Use the left unitor, tensor-power associativity and degree-zero cohomology identification to express each numerator as a global section of L tensorPow (n*d). The additive fraction relations become exactly the equality relation in the homogeneous localization of the section ring: equality after multiplying by a further power of s. This identifies the localized Veronese presentation with Away S s. Identify the open supplied by the comparison with U by equality of their underlying sets.",
+   "text": "The private ring_power_of lemma proves by induction that the nth ring power of a homogeneous section is the direct-sum injection of its nth tensor power transported along tensorPowMulIso inverse. The successor step expands tensorPowMulIso, tensors sections, and cancels the degree cast. The private veroneseIso_power lemma evaluates this identity in degree n*d and cancels the tensor-power isomorphism. Naturality supplies the same identity after restriction to U.",
    "uses": [
     "def-sc-invertible-section-ring"
    ],
    "elementary": true
   },
   {
-   "text": "The comparison equivalence and the given ring map satisfy the same formula on every fraction. Since s generates its invertible module on U, multiplication by every power is injective. Their images of each fraction agree. Every localization element is represented by one such fraction, hence the ring map is bijective. This includes the empty open and nilpotent sections, where both rings are zero.",
-   "uses": [],
-   "elementary": true
+   "text": "Use nonvanishing_section_trivializes to make s a free generator on U; its tensor powers are free generators too. For an arbitrary homogeneous localization element choose a fraction representative using Away.mk_surjective. Transport hphi through the numerator tensor-power isomorphism. Apply the left unitor to the section-fraction equivalence formula and cancel its inverse. Both equations identify multiplication of the functions phi(q) and e(q) by the same tensor-power generator with the same restricted numerator. Cancel that generator to prove phi(q)=e(q). Function extensionality then transports the bijectivity of e to phi.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-p1-invertible-section-localization",
+  "lem-sc-section-ring-veronese-fractions",
   "def-sc-invertible-section-ring",
-  "lem-sc-invert-s-cohomology"
+  "lem-weil-pbc-nonvanishing-section-trivializes"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PW(2), as applied to the Veronese ring in Lemma 01Q1"
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
  },
  "mathlib_searches": [
   {
@@ -120,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T184339-L-4018644",
+  "landing": "20261012T225302-L-1802362",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

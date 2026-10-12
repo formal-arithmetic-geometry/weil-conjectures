@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-section-ring-veronese-fractions",
+ "kind": "statement",
+ "title": "Veronese section fractions present homogeneous localization",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $L$ be an invertible module [def-sc-invertible-module], and let $S=\\bigoplus_{i\\geq0}\\Gamma(X,L^{\\otimes i})$ be its graded section ring [def-sc-invertible-section-ring]. Let $d\\in\\mathbf N$ and $s\\in S_d$. Set $M=L^{\\otimes d}$ and write $\\sigma=s_d\\in\\Gamma(X,M)$. Let $Q$ be the section-fraction presentation [def-sc-section-fraction-presentation] for $M$, $\\mathcal O_X$, and $\\sigma$: its numerator in degree $n$ is a section of $\\mathcal O_X\\otimes M^{\\otimes n}$. There exists an additive equivalence $e:S_{(s)}\\simeq Q$ such that, for every $n\\geq0$ and $\\xi\\in S_{nd}$, $e(\\xi/s^n)=[n,T_n(\\xi_{nd})]$. Here $S_{(s)}$ is the degree-zero homogeneous localization at the powers of $s$, and $T_n:L^{\\otimes nd}\\simeq\\mathcal O_X\\otimes M^{\\otimes n}$ is the composite of the exponent equality $nd=dn$, the canonical tensor-power multiplication isomorphism, and the inverse left unitor. No compactness or positive-degree hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-fraction-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Identify the section-ring summand of degree n*d with sections of O_X tensor (L tensorPow d) tensorPow n using the exponent equality, tensorPowMulIso and the inverse left unitor. The direct-sum injection and evaluation are inverse on this summand. Tensor-power coherence identifies multiplication by s^b with the section-fraction transition map.",
+   "uses": [
+    "def-sc-invertible-section-ring",
+    "def-sc-section-fraction-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Send each section-fraction summand generator [n,t] to the homogeneous fraction with denominator s^n and numerator T_n inverse applied to t. Extend additively from the direct sum. The fraction transition relations and their global-function scalar multiples map to zero, so this descends to the section-fraction quotient.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every element of the homogeneous localization has a representative xi/s^n. To send it back, use [n,T_n(xi)]. If xi/s^n = eta/s^m, the localization equality criterion gives a power s^b killing s^m*xi-s^n*eta. Move both numerator classes to degree n+m+b with the fraction transitions; their equality follows. Addition is computed at a common denominator, so this map is additive. Both composites fix each fraction or direct-sum generator, proving the additive equivalence and its specified formula. If s is zero or nilpotent both presentations vanish by the same transitions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-section-ring",
+  "def-sc-section-fraction-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Equation module-invert-s (Tag 0B5L), Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous localization away from homogeneous element is additive direct limit of graded components with multiplication transition maps",
+   "results": "Service unavailable: HTTP Internal Server Error. No verdict available.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homogeneous localization Away section ring Veronese additive equivalence quotient direct sum tensor power sections fractions",
+   "results": "Generic HomogeneousLocalization, Away.mk, Away.val_mk and NumDenSameDeg.embedding; no equivalence to the tensor-power section-fraction quotient.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Veronese|veronese|DirectLimit|directLimit|fraction in Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization.lean; sectionRing.*localiz and sectionRing.*fraction in both repository roots",
+   "results": "Away.mk and Away.mk_surjective provide fractions; no tensor-section fraction equivalence. Blueprint search Veronese fractions returned zero nodes. DAG searches found only the ancestor localization comparison and ample chart.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionRingLocalizationBijective",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ample-proj-local-chart",
+   "place": "Proof steps 3 and 4: identify localized Veronese sections with the homogeneous section-ring localization, before comparing their restriction maps",
+   "via": [
+    "lem-sc-section-ring-localization-bijective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionRingVeroneseFractions",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRingVeroneseFractions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_sectionRing_veronese_fraction_equiv",
+  "statement": "theorem exists_sectionRing_veronese_fraction_equiv\n    (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]\n    (d : ℕ) (s : sectionRingGrade L d) :\n    ∃ e : HomogeneousLocalization.Away (sectionRingGrade L) s.val ≃+\n        SectionFractionPresentation (L.tensorPow d) (𝟙_ X.Modules) (s.val d),\n      ∀ (n : ℕ) (ξ : sectionRingGrade L (n • d)),\n        e (HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n\n          ξ.val ξ.property) =\n        sectionFraction (L.tensorPow d) (𝟙_ X.Modules) (s.val d) n\n          ((eqToIso (congrArg L.tensorPow (by simp [Nat.mul_comm])) ≪≫\n            L.tensorPowMulIso d n ≪≫ (λ_ _).symm).hom.app ⊤ (ξ.val (n • d)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T225302-L-1802362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T225302-L-1802362",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
