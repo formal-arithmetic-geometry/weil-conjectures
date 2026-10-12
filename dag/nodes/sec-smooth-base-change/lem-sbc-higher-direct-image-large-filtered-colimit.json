@@ -1,0 +1,155 @@
+{
+ "id": "lem-sbc-higher-direct-image-large-filtered-colimit",
+ "kind": "statement",
+ "title": "Higher direct images preserve coefficient-size filtered colimits",
+ "statement": "Let $h:Y\\to X$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme], let $\\Lambda$ be a commutative ring, and let $q\\in\\mathbf Z$. Let $J$ be a filtered small category. The functor $F\\mapsto H^q(Rh_*(F[0]))=R^q h_*F$ on small-etale sheaves of $\\Lambda$-modules [def-weil-pbc-etale-sheaves, def-weil-pbc-direct-image] preserves colimits of shape $J$ [def-weil-pbc-category-colimit]: applying this functor to any colimit cocone gives a colimit cocone. Schemes live in universe $u$; the ring, coefficient modules, and objects and morphisms of $J$ live in universe $u+1$. No torsion hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0739 (lemma-colim-works-over-collection), 03Q8, and the fixed-scheme case of 09Z1 (lemma-relative-colimit)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "For affine etale W over X, its pullback Z to Y is qcqs. Restriction to Z preserves colimits as a left adjoint. Apply etaleCohomology_isColimit_large_filtered to underlying abelian sheaves on Z. The natural comparison nonempty_etaleModuleCohomology_forgetIso transfers this to module cohomology: coefficient forgetting preserves colimits and reflects isomorphisms, hence reflects colimits. The free-sheaf derived-sections comparison identifies the result with maps from the degree-zero free sheaf on Z into a shifted degree-zero sheaf.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lem-pbc-u2-sheafH-large-filtered-colimit-derived",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-free-sheaf-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given a diagram D, write G for higher direct image. Sheafify the presheaf colimit of D composed with G and use its colimit universal property to obtain the canonical map a to G(colim D). The source-library raw cohomology presheaf comparison with G is natural and locally bijective. All comparison maps are the canonical maps induced by the coprojections.",
+   "uses": [
+    "sbc-lem-module-higher-image-raw-comparison-locally-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For local surjectivity of a, lift a section of G(colim D) locally to a raw cohomology class, then cover by affine etale objects. Step 1 represents that class at a stage of D. Map the stagewise class to its higher image and then to the sheafified colimit. Its image under a is the required restricted section by naturality.",
+   "uses": [
+    "sbc-lem-module-higher-image-raw-comparison-locally-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For local injectivity, subtract sections with the same image. Represent their difference locally at a stage and lift this representative to a raw cohomology class. Local injectivity of the raw comparison makes its image vanish locally in the input-colimit cohomology. Refine by affine objects. Step 1 and exactness of filtered abelian-group colimits make the class zero at a later stage. Its stagewise higher image is zero, so the original section vanishes locally. The local-bijection criterion makes a an isomorphism, proving colimit preservation.",
+   "uses": [
+    "sbc-lem-module-higher-image-raw-comparison-locally-bijective",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For negative q, derived direct image of a degree-zero sheaf is nonnegative by the standard t-structure; its degree-q homology is zero. Thus the zero functor preserves colimits. The positive-degree argument uses only finite covers and finitely many equality witnesses; J remains in Type(u+1). Zero coefficients, empty schemes, degree zero and singleton diagrams are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-u2-sheafH-large-filtered-colimit-derived",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-free-sheaf-derived-sections",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "sbc-lem-module-higher-image-raw-comparison-locally-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0739 (lemma-colim-works-over-collection), 03Q8, and the fixed-scheme case of 09Z1 (lemma-relative-colimit)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of etale sheaves preserve filtered colimits for quasi compact quasi separated morphisms with arbitrary universe index",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images along quasi compact quasi separated scheme morphisms preserve filtered colimits indexed in the same universe as the coefficients",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.Scheme.Modules.instHasColimits; Condensed.instAB5CondensedMod; CategoryTheory.Sheaf.ab5ofSize; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected; LightCondensed.instIsGrothendieckAbelianLightCondMod; instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology; instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "verdict": "Generic colimit infrastructure and affine-transition limits only; no higher-direct-image preservation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesColimitsOfShape.*[Hh]igher|[Hh]igherDirectImage.*[Cc]olimit",
+   "date": "2026-10-12",
+   "results": "No matches in Mathlib.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothBaseChange.ConstantFiniteSubmoduleVanishing",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-universal-test",
+   "place": "Cyclic-coefficient reduction in the universal curve-test datum: commute higher direct image with the filtered union of finitely generated coefficient submodules.",
+   "via": [
+    "lem-sbc-constant-finite-submodule-vanishing",
+    "lem-sbc-torsion-constant-prime-devissage",
+    "lem-sbc-prime-cyclic-detection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageLargeFilteredColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothBaseChange/HigherDirectImageLargeFilteredColimit.lean",
+  "declaration": "AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage_large",
+  "statement": "theorem preservesColimitsOfShape_higherDirectImage_large (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (J : Type (u + 1)) [SmallCategory J] [IsFiltered J] : PreservesColimitsOfShape J (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙ R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T144151-L-2109125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T144151-L-2109125",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
