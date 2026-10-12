@@ -99,4 +99,31 @@ theorem IsAdicLisseSheaf.le_finrank_of_ne_zero (s : Spec (.of K) ⟶ Y) (n : ℕ
         Nat.add_le_add_right h₂ _
       _ = _ := by rw [add_comm]; exact hrk
 
+omit [IrreducibleSpace Y] in
+/-- The stalk of a pullback `g^* M` at a geometric point `s` is the stalk of `M` at `s ≫ g`. -/
+theorem finrank_geometricStalkFunctor_upperStar {Z : Scheme.{u}} (g : Y ⟶ Z) (M : AdicSheaf l Z)
+    (s : Spec (.of K) ⟶ Y) :
+    Module.finrank (PadicAlgCl l)
+        ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj ((g)^*ᵃ[l].obj M))) =
+      Module.finrank (PadicAlgCl l)
+        ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l (s ≫ g)).obj M)) :=
+  ((AdicSheaf.forget _ ⋙ Sheaf.Γ _ _ ⋙ WeilCoefficients.toModuleCat l).mapIso
+    ((adicUpperStarComp l s g).app M)).toLinearEquiv.finrank_eq.symm
+
+/-- **A lisse sheaf of rank one is an irreducible local system**, on an irreducible scheme: a
+nonzero lisse subsheaf has rank one as well, so it is everything. -/
+theorem IsAdicLisseSheaf.isIrreducibleAdicLocalSystem_of_finrank_eq_one {H : AdicSheaf l Y}
+    (hH : IsAdicLisseSheaf H) (s : Spec (.of K) ⟶ Y)
+    (h1 : Module.finrank (PadicAlgCl l)
+      ((WeilCoefficients.toModuleCat l).obj ((geometricStalkFunctor l s).obj H)) = 1) :
+    IsIrreducibleAdicLocalSystem H := by
+  refine ⟨hH, fun h ↦ ?_, fun A j _ hA ↦ ?_⟩
+  · rw [(hH.isZero_iff_finrank_geometricStalkFunctor_eq_zero s).1 h] at h1
+    exact zero_ne_one h1
+  have hle := finrank_geometricStalkFunctor_le_of_mono hH j s
+  rw [h1] at hle
+  rcases Nat.le_one_iff_eq_zero_or_eq_one.1 hle with h | h
+  · exact Or.inl ((hA.isZero_iff_finrank_geometricStalkFunctor_eq_zero s).2 h)
+  · exact Or.inr (hA.isIso_of_mono_of_finrank_eq hH j s (h.trans h1.symm))
+
 end AlgebraicGeometry.ProEtale
