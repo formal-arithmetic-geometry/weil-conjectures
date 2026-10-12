@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+import Sheaf.CategoryTheory.DiscreteContinuousRepCommGrpAux
 
 /-!
 # Commutative group objects in discrete continuous actions
@@ -61,6 +62,9 @@ theorem discreteContinuousRep_commGrp
       Nonempty (E.functor ⋙ U ⋙ RepToAction ℤ G ⋙
         (CategoryTheory.forget (ModuleCat.{w} ℤ)).mapAction G ≅
           CommGrp.forget _ ⋙ V) := by
-  sorry
+  dsimp
+  obtain ⟨E, ⟨e, he⟩⟩ :=
+    discreteContinuousRep_equiv_with_compatible_objectwise_iso G
+  refine ⟨E, ⟨NatIso.ofComponents e he⟩⟩
 
 end Rep

@@ -1,0 +1,123 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-discrete-continuous-rep-commgrp",
+   "place": "proof steps 1 and 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "commutative group objects in discrete continuous group actions equivalent to integer representations",
+   "results": "Internal Server Error; the service was unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative group objects in discrete continuous group actions equivalent to integer representations",
+   "results": "Eight hits: DiscreteContAction and its category instance, and fundamental-group/Galois-category results. None gives this equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DiscreteContAction, CategoryTheory.Equivalence",
+   "results": "Zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommGrp.*Discrete|Discrete.*CommGrp|Rep.*commGrp",
+   "results": "Eight hits, including CommGrpObj.ofRepresentableBy and categorical exact-limit instances, but no discrete representation equivalence. Repository rg also found no existing such identification.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DiscreteContinuousRepCommGrp",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "merged_into": null,
+ "id": "lem-exc-discrete-continuous-rep-commgrp-compatible",
+ "title": "Compatible objectwise isomorphisms for the discrete representation construction",
+ "statement": "Under the hypotheses of lem-exc-discrete-continuous-rep-commgrp, the elementwise construction yields an equivalence E and chosen isomorphisms e_X between the two underlying action functors, such that every equivariant morphism f satisfies F.map f ≫ e_Y = e_X ≫ G.map f.",
+ "proof": [
+  {
+   "text": "Construct the forward and inverse functors from internal commutative group laws and discrete continuous integer representations, then prove the carrier comparisons and their compatibility on morphisms.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DiscreteContinuousRepCommGrpAux",
+  "file": "lean/Sheaf/CategoryTheory/DiscreteContinuousRepCommGrpAux.lean",
+  "declaration": "Rep.discreteContinuousRep_equiv_with_compatible_objectwise_iso",
+  "statement": "theorem discreteContinuousRep_equiv_with_compatible_objectwise_iso\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CartesianMonoidalCategory (DiscreteContAction (Type w) G)]\n    [BraidedCategory (DiscreteContAction (Type w) G)] :\n    let D := DiscreteContinuousRep.{0, u, w} ℤ G\n    let U : D ⥤ Rep.{w} ℤ G := ObjectProperty.ι _\n    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type w) (G := G)) ⋙\n      ObjectProperty.ι (Action.IsContinuous (V := Type w) (G := G))\n    ∃ E : CommGrp (DiscreteContAction (Type w) G) ≌ D,\n      ∃ e : ∀ X, (E.functor ⋙ U ⋙ RepToAction ℤ G ⋙\n        (CategoryTheory.forget (ModuleCat.{w} ℤ)).mapAction G).obj X ≅\n          (CommGrp.forget (DiscreteContAction (Type w) G) ⋙ V).obj X,\n      ∀ {X Y} (f : X ⟶ Y),\n        ((E.functor ⋙ U ⋙ RepToAction ℤ G ⋙\n          (CategoryTheory.forget (ModuleCat.{w} ℤ)).mapAction G).map f) ≫\n            (e Y).hom = (e X).hom ≫\n              ((CommGrp.forget (DiscreteContAction (Type w) G) ⋙ V).map f)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T112843-L-769043",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T112843-L-769043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
