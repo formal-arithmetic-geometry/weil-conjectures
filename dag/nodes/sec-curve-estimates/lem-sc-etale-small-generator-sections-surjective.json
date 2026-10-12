@@ -13,12 +13,41 @@
  ],
  "proof": [
   {
-   "text": "Compute sections on the u-small affine model as a u-small coproduct of u-small coefficient groups, transport along the dense-site equivalences, and use restriction to a u-small affine-open covering to obtain a surjection from a Type u onto sections. The empty covering is handled by the singleton domain.",
+   "text": "The private helper small_colimit proves that a u-small diagram of pointwise u-small abelian groups has a u-small colimit: its direct sum is small by DFinsupp.small, its quotient is small, and AddCommGrpCat.isColimit_iff_bijective_desc gives a surjection from that quotient to the chosen colimit. No additional unproved statement is used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On a small category, covers and their arrow types lie in Type u. In small_plus, each Meq type is a subtype of a small dependent product. GrothendieckTopology.Plus.exists_rep shows that the sigma type of covers and matching families surjects onto plus sections. Apply small_plus twice and plusPlusIsoSheafify to prove small_sheafify for any choice of the sheafification left adjoint. These helpers are proved in Lean.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The helper small_sheaf_colimit computes the presheaf colimit pointwise using colimitObjIsoColimitCompEvaluation, applies small_colimit, then sheafifies using small_sheafify. Sheaf.isColimitSheafifyCocone identifies this result with the chosen sheaf colimit. Apply it to the small coproduct in the concrete generator [def-sc-etale-small-generator]; each free-Yoneda presheaf has small sections by small_colimit, and its sheafification by small_sheafify.",
+   "uses": [
+    "def-sc-etale-small-generator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The helper small_dense_extension sends a section to all its restrictions along maps from objects of the small dense site. The target dependent product is u-small, and Functor.IsCoverDense.ext proves injectivity. The small-model comparison unit identifies the restricted values of the affine transported generator with the already bounded small-model sections.",
+   "uses": [
+    "def-sc-etale-small-generator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an essentially u-small dense source, small_dense_extension_essentiallySmall indexes this same restriction map only by SmallModel source. To prove injectivity for an arbitrary source object, use its small-model unit isomorphism: restrict along its inverse and then back along its forward map; functoriality and the inverse identity recover the original restriction. Cover-density then detects the section. Apply this to AffineEtale.Spec and use the second comparison unit to bound sections on the full etale site [def-weil-pbc-etale-site].",
    "uses": [
     "def-sc-etale-small-generator",
     "def-weil-pbc-etale-site"
    ],
    "elementary": false
+  },
+  {
+   "text": "For the resulting small section type, take alpha to be its Shrink and f to be the inverse of equivShrink. The inverse equivalence is surjective. The constructions of matching families and dependent products include empty covers and empty objects without a separate case.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -26,9 +55,9 @@
   "def-weil-pbc-etale-site"
  ],
  "proof_origin": {
-  "by": "T2 stage 3",
-  "document": "https://stacks.math.columbia.edu/tag/01DO",
-  "place": "Free abelian representable sheaves; universe-explicit affine-model construction"
+  "by": "M3 stage-3 worker",
+  "document": "Stacks Project, Tags 00W1 and 01DO; pinned Mathlib concrete sheafification and dense-subsite comparison",
+  "place": "Tag 00W1 matching-family plus construction, instantiated twice; Mathlib Plus.exists_rep, plusPlusIsoSheafify, Sheaf.isColimitSheafifyCocone and Functor.IsCoverDense.ext. All cardinal and comparison glue proved in the delivered module."
  },
  "mathlib_searches": [
   {
@@ -106,10 +135,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T165534-L-2940562",
-  "kind": "interface",
+  "landing": "20261012T194125-L-459889",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
