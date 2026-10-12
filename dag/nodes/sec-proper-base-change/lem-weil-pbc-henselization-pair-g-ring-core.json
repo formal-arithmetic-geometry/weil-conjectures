@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-henselization-pair-g-ring-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-henselization-pair-g-ring",
+   "place": "proof steps 1--4: Noetherianity and regularity of every maximal local completion map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Noetherianity and maximal-local regularity of a henselization of a G-ring",
+ "statement": "Let A be a G-ring and let c present the henselization of (A,I) as the filtered colimit of etale A-algebras trivial modulo I, with its henselian-pair and quotient-isomorphism properties. Then c.pt.right is Noetherian and every maximal ideal m of c.pt.right has a regular map from the localization at m to its adic completion.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH3 proof, paragraphs 1--4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-pair-henselization"
+ ],
+ "proof": [
+  {
+   "text": "Apply Tag 0AGV to obtain Noetherianity and the completion comparison, then use Tag 0AGX, Tag 0AH1 and Tag 07QH to identify each completed fibre as a geometrically regular direct factor; this gives regularity at every maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-flat-local-completion-iso",
+    "lem-weil-pbc-henselization-finite-separable-fibres",
+    "lem-weil-pbc-geometric-regularity-separable-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-flat-local-completion-iso",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-weil-pbc-geometric-regularity-separable-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH3 proof, paragraphs 1--4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian henselization of a G-ring and regular maximal local completion maps",
+   "results": "No matching project theorem in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing R ∧ ∀ m, RingHom.IsRegular",
+   "results": "No matching declaration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'G-ring|formal fibre|henselization' Mathlib",
+   "results": "No matching Mathlib theorem; statement is project-specific.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HenselizationPairGRing",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HenselizationPairGRingCore",
+  "file": "lean/Sheaf/RingTheory/HenselizationPairGRingCore.lean",
+  "declaration": "RingTheory.henselization_pair_noetherian_and_maximal_regular",
+  "statement": "theorem henselization_pair_noetherian_and_maximal_regular (A : Type u) [CommRing A] (I : Ideal A) (c : Cocone (ObjectProperty.ι (fun C : Under (CommRingCat.of A) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (I.map C.hom.hom) C.hom.hom (Ideal.le_comap_map))))) (hc : Nonempty (IsColimit c) ∧ HenselianRing c.pt.right (I.map c.pt.hom.hom) ∧ Function.Bijective (Ideal.quotientMap (I.map c.pt.hom.hom) c.pt.hom.hom (Ideal.le_comap_map))) (hA : IsGRing A) : IsNoetherianRing c.pt.right ∧ ∀ (m : Ideal c.pt.right) [m.IsMaximal], RingHom.IsRegular (algebraMap (Localization.AtPrime m) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime m)) (Localization.AtPrime m)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635834",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

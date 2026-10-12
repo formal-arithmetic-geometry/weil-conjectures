@@ -7,11 +7,7 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.PairHenselization
-import Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit
-import Sheaf.RingTheory.FlatLocalCompletionIso
-import Sheaf.RingTheory.GRingMaximalIdealCriterion
-import Sheaf.RingTheory.GeometricRegularitySeparableExtension
-import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
+import Sheaf.RingTheory.HenselizationPairGRingCore
 
 /-!
 # G-rings and henselizations of pairs
@@ -76,6 +72,8 @@ theorem isGRing_of_pair_henselization
       Function.Bijective (Ideal.quotientMap (I.map c.pt.hom.hom) c.pt.hom.hom
         (Ideal.le_comap_map)))
     (hA : IsGRing A) : IsGRing c.pt.right := by
-  sorry
+  obtain ⟨hn, hm⟩ := henselization_pair_noetherian_and_maximal_regular A I c hc hA
+  let _ : IsNoetherianRing c.pt.right := hn
+  exact (isGRing_iff_maximalIdeal c.pt.right).2 hm
 
 end RingTheory

@@ -25,81 +25,28 @@
  ],
  "proof": [
   {
-   "text": "Since $A$ is a G-ring, it is Noetherian. Applying Tag 0AGV to the Noetherian pair $(A,I)$ and its henselization $(A^h,I^h)$ gives that $A^h$ is Noetherian, $I^h=IA^h$, and the canonical map of adic completions $A^\\wedge\\xrightarrow{\\sim}(A^h)^\\wedge$ is an isomorphism; it also gives flatness of $A\\to A^h$.",
+   "text": "Apply the intermediate Noetherian-and-maximal-regularity theorem to the henselization data and the G-ring hypothesis.",
    "uses": [
-    "lem-weil-pbc-henselization-noetherian-completion"
+    "lem-weil-pbc-henselization-pair-g-ring-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH3 proof, first paragraph, invoking Tag 0AGV"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix a maximal ideal $\\mathfrak m^h\\subset A^h$ and put $\\mathfrak m=(A\\to A^h)^{-1}(\\mathfrak m^h)$. Because $I^h\\subset\\mathfrak m^h$ and $A/I\\xrightarrow{\\sim}A^h/I^h$ by the henselization pair theorem, $I\\subset\\mathfrak m$, $\\mathfrak mA^h_{\\mathfrak m^h}=\\mathfrak m^hA^h_{\\mathfrak m^h}$, and the residue-field map $\\kappa(\\mathfrak m)\\to\\kappa(\\mathfrak m^h)$ is an isomorphism. Localizing the flat map from Step 1 therefore gives a flat local map of Noetherian local rings $A_{\\mathfrak m}\\to A^h_{\\mathfrak m^h}$ satisfying the hypotheses of Tag 0AGX, so $(A_{\\mathfrak m})^\\wedge\\xrightarrow{\\sim}(A^h_{\\mathfrak m^h})^\\wedge$.",
-   "uses": [
-    "lem-weil-pbc-henselization-noetherian-completion",
-    "lem-weil-pbc-pair-henselization",
-    "lem-weil-pbc-flat-local-completion-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH3 proof, first paragraph, invoking Tag 0AGX and the quotient property of Tag 0A02"
-   }
-  },
-  {
-   "text": "Let $\\mathfrak q\\subset A_{\\mathfrak m}$ be a prime and let $\\mathfrak q^h\\subset A^h_{\\mathfrak m^h}$ lie over it. The pair henselization is a filtered colimit of etale $A$-algebras, and Step 1 says it is Noetherian. Applying Tag 0AH1 to this colimit gives finitely many primes $\\mathfrak q_i^h$ of $A^h$ over $\\mathfrak q$ and $A^h\\otimes_A\\kappa(\\mathfrak q)=\\prod_i\\kappa(\\mathfrak q_i^h)$, with every extension $\\kappa(\\mathfrak q)\\subset\\kappa(\\mathfrak q_i^h)$ separable algebraic; localization at $\\mathfrak m^h$ selects the displayed factor containing $\\mathfrak q^h$.",
-   "uses": [
-    "lem-weil-pbc-pair-henselization",
-    "lem-weil-pbc-henselization-noetherian-completion",
-    "lem-weil-pbc-henselization-finite-separable-fibres"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH3 proof, middle paragraph, invoking Tag 0AH1"
-   }
-  },
-  {
-   "text": "Write $C=(A_{\\mathfrak m})^\\wedge\\otimes_{A_{\\mathfrak m}}\\kappa(\\mathfrak q)$ and $C_h=(A^h_{\\mathfrak m^h})^\\wedge\\otimes_{A^h_{\\mathfrak m^h}}\\kappa(\\mathfrak q^h)$. The completion isomorphism of Step 2 and the product decomposition of Step 3 identify $C$ with the finite product of the factors $(A^h_{\\mathfrak m^h})^\\wedge\\otimes_{A^h_{\\mathfrak m^h}}\\kappa(\\mathfrak q_i^h)$; hence $C_h$ is a direct factor of $C$. Since $A$ is a G-ring, its defining regularity at $\\mathfrak m$ says that $C$ is geometrically regular over $\\kappa(\\mathfrak q)$, and a direct factor is geometrically regular over that field. The chosen residue extension $\\kappa(\\mathfrak q)\\subset\\kappa(\\mathfrak q^h)$ is separable algebraic by Step 3, so Tag 07QH transfers geometric regularity of $C_h$ from $\\kappa(\\mathfrak q)$ to $\\kappa(\\mathfrak q^h)$.",
-   "uses": [
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-flat-local-completion-iso",
-    "lem-weil-pbc-henselization-finite-separable-fibres",
-    "lem-weil-pbc-geometric-regularity-separable-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH3 proof, final paragraphs, invoking Algebra Tag 07QH"
-   }
-  },
-  {
-   "text": "Steps 2--4 prove geometrically regular formal fibres for every maximal ideal $\\mathfrak m^h$ of $A^h$ and every prime of $A^h_{\\mathfrak m^h}$. Since $A^h$ is Noetherian by Step 1, Tag 07PT, the maximal-ideal criterion for G-rings, implies that $A^h$ is a G-ring.",
+   "text": "Install the Noetherian instance and apply the maximal-ideal criterion for G-rings to conclude that the henselization ring is a G-ring.",
    "uses": [
     "lem-weil-pbc-g-ring-maximal-ideal-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH3 proof, invoking Tag 07PT"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-henselization-noetherian-completion",
-  "lem-weil-pbc-pair-henselization",
-  "lem-weil-pbc-flat-local-completion-iso",
-  "lem-weil-pbc-henselization-finite-separable-fibres",
-  "def-weil-pbc-g-ring",
-  "lem-weil-pbc-geometric-regularity-separable-extension",
+  "lem-weil-pbc-henselization-pair-g-ring-core",
   "lem-weil-pbc-g-ring-maximal-ideal-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0AH3 (lemma-henselization-pair-G-ring) and its proof"
+  "place": "Lemma Tag 0AH3 proof; Lean assembly follows the split core proposition and Tag 07PT"
  },
  "mathlib_searches": [
   {
@@ -197,5 +144,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635834",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
