@@ -13,31 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Set K^0=I_A^0⊕I_C^0 and w=(t,g s_C^0). The equation f t=s_A^0 and fg=0 give the two commutative squares with the split biproduct row. The outer augmentations are mono. The snake lemma makes w mono and gives a short exact sequence of its three cokernels.",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-snake-lemma-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2; object specialization by the prescribed-endpoint cokernel induction of lem-sp-horseshoe-prescribed-resolutions, Steps 2--3."
-   }
-  },
-  {
-   "text": "Exactness of each prescribed outer resolution gives a monomorphism from the cokernel of its augmentation into its degree-one term. Apply injectivity of I_A^1 to extend the left cokernel embedding across the first map of the cokernel short exact sequence. Pair this extension with the right cokernel embedding composed with the second map to obtain the next middle embedding into I_A^1⊕I_C^1. Apply the snake lemma to obtain the next short exact cokernel sequence. Repeat this operation recursively with the cokernels and the next prescribed outer terms. At step n, the chosen middle object is I_A^n⊕I_C^n, and the new maps on cokernels commute with the inclusions and projections.",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-snake-lemma-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2; object specialization by the prescribed-endpoint cokernel induction of lem-sp-horseshoe-prescribed-resolutions, Steps 2--3."
-   }
-  },
-  {
-   "text": "Define d_K^n as the quotient from K^n to the current middle cokernel followed by its embedding into K^(n+1). Its composite with the next differential is zero because the next quotient kills this embedding. The cokernel squares and the embedding squares show that the outer inclusions and projections commute with these differentials. They therefore define complex maps α and β with αβ=0; the initial squares give the augmentation equations. Every row is the canonical split biproduct row. The identity of K^0 with the initial biproduct gives e_0 and the required equality.",
+   "text": "Construct the initial off-diagonal map δ₀:I_C⁰→I_A¹. The composite -t d_A⁰ vanishes on f, so exactness of S and epimorphy of g descend it to q:C→I_A¹. Extend q across the monomorphism s_C⁰ using injectivity of I_A¹. Thus t d_A⁰+g s_C⁰ δ₀=0. Epimorphy of g and d_A⁰ d_A¹=0 also imply q d_A¹=0.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
@@ -48,7 +24,29 @@
    }
   },
   {
-   "text": "The first differential is the quotient onto Coker(w) followed by a monomorphism. Thus its kernel is the image of w, and B → K^0 → K^1 is exact. The equation w d_K^0=0 determines the augmentation B[0] → K. No verification of positive-degree exactness, termwise injectivity, or quasi-isomorphism is needed for this construction statement.",
+   "text": "Use exactness of (s_C⁰,d_C⁰) and injectivity of I_A² to descend -δ₀ d_A¹ to δ₁ with δ₀ d_A¹+d_C⁰ δ₁=0. Given δ_n and δ_(n+1) with δ_n d_A^(n+1)+d_C^n δ_(n+1)=0, composition with d_A^(n+2) shows that -δ_(n+1) d_A^(n+2) kills d_C^n. Apply exactness of the next three terms of I_C and injectivity of I_A^(n+3) to choose δ_(n+2). Recursively retain adjacent pairs to obtain a coherent sequence δ.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2; object specialization by the prescribed-endpoint cokernel induction of lem-sp-horseshoe-prescribed-resolutions, Steps 2--3."
+   }
+  },
+  {
+   "text": "Set K^n=I_A^n⊕I_C^n and d_K^n=(fst d_A^n+snd δ_n, snd d_C^n). Biproduct identities and the recursion equation imply d_K²=0. The inclusions α and projections β commute with differentials, their composite is zero, and every row is the split biproduct sequence. The initial twisting equation says w=(t,g s_C⁰) is killed by d_K⁰, so it determines an augmentation. The degree-zero squares follow from f t=s_A⁰ and fg=0; take e₀ to be the identity.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013T (lemma-injective-resolution-ses), proof Step 2; object specialization by the prescribed-endpoint cokernel induction of lem-sp-horseshoe-prescribed-resolutions, Steps 2--3."
+   }
+  },
+  {
+   "text": "Verify exactness at K⁰ by the exactness-up-to-epimorphic-refinements criterion in Mathlib.CategoryTheory.Abelian.Refinements. For a cycle x:T→K⁰, exactness and monomorphy of s_C⁰ lift x snd to c:T→C. Since g is epi, after an epimorphic refinement π:T′→T choose b:T′→B with π c=b g. Then y=π x-b w has zero right coordinate and is a cycle. Its left coordinate is killed by d_A⁰, so exactness and monomorphy of s_A⁰ lift it to a:T′→A. The biproduct identities give π x=(a f+b)w. This proves the required exactness without a snake-lemma application.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
@@ -60,13 +58,12 @@
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-snake-lemma-abelian"
+  "def-sp-injective-resolutions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 013T, proof Step 2; degree-by-degree cokernel argument from the parent node, with fixed initial lift and verification separated."
+  "place": "Tag 013T, proof Step 2, implemented by recursive triangular biproduct differentials using Mathlib descToInjective; degree-zero exactness by epimorphic refinements (T2 stage 3)."
  },
  "mathlib_searches": [
   {
@@ -145,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T060801-L-2919222",
-  "kind": "interface",
+  "landing": "20261012T070553-L-3478312",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
