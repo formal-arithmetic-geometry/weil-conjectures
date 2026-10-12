@@ -9,7 +9,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.CategoryTheory.Sites.Torsor
+import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSectionsNatural
+import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackMapUnitFormula
 
 /-!
 # Pullback of generators on adjunction-unit sections
@@ -66,6 +67,32 @@ theorem exists_etale_generators_pullback_unit_map
             ((upperStarGmSheafToGmSheaf f).hom.app (op (b.obj W))
               (ηG.hom.app (op W) g))
             (ρ.hom.app (op (b.obj W)) (η.hom.app (op W) s)) := by
-  sorry
+  let b := MorphismProperty.Over.pullback @Etale ⊤ f
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b
+    (Type (u + 1)) (X.smallGrothendieckTopology @Etale)
+    (Y.smallGrothendieckTopology @Etale)
+  let T := (etaleIsoTorsor L).sheaf
+  let Q := (etaleIsoTorsor ((tensorPullback f).obj L)).sheaf
+  let τ : T ⟶ (b.sheafPushforwardContinuous (Type (u + 1))
+      (X.smallGrothendieckTopology @Etale)
+      (Y.smallGrothendieckTopology @Etale)).obj Q :=
+    ⟨{ app := fun W ↦ ↾(etaleGeneratorsPullbackSection f L W.unop)
+       naturality := by
+         intro V W i
+         ext s
+         exact (etaleGeneratorsPullbackSection_naturality f L i.unop s).symm }⟩
+  let ρ := (adj.homEquiv T Q).symm τ
+  have hunit : adj.unit.app T ≫ (b.sheafPushforwardContinuous (Type (u + 1))
+      (X.smallGrothendieckTopology @Etale)
+      (Y.smallGrothendieckTopology @Etale)).map ρ = τ := by
+    exact (adj.homEquiv T Q).apply_symm_apply τ
+  have heval (W : X.Etale) (s : T.obj.obj (op W)) :
+      ρ.hom.app (op (b.obj W)) ((adj.unit.app T).hom.app (op W) s) =
+        etaleGeneratorsPullbackSection f L W s := by
+    exact congrArg (fun a ↦ a.hom.app (op W) s) hunit
+  refine ⟨ρ, ?_⟩
+  intro W g s
+  erw [heval, heval]
+  exact etale_generators_pullback_map_unit_formula f L W g s
 
 end AlgebraicGeometry.Scheme.Modules

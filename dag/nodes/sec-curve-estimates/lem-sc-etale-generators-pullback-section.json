@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-etale-generators-pullback-section",
+ "kind": "definition",
+ "title": "Explicit pulled-back generator section",
+ "statement": "For schemes X and Y [def-pc-scheme], f:Y→X, an invertible X-module L [def-sc-invertible-module] with invertible tensor pullback f*L [def-pc-module-pullback], and an étale W→X, construct a map from the generator torsor T_L(W) [def-sc-gm-torsor] to T_f*L(W×_X Y). For a trivialization s:W*O_X≅W*L, pull s back along p:W×_X Y→W. Use the structure-module comparisons, p followed by W→X equals q followed by f, and pullback composition to identify its source as q*O_Y and its target as q*f*L. The tensor/abstract pullback comparison is a local expression from the proved nonempty_tensorPullbackAdjunction and Mathlib leftAdjointUniq. The resulting explicit composite is an isomorphism, hence a generator.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/040E",
+  "place": "Lemma 21.6.1, generator torsor construction; pullback/restriction of its trivializations.",
+  "external": [
+   {
+    "document": "https://stacks.math.columbia.edu/tag/0097",
+    "place": "Lemma 6.26.3, composition of module pullbacks"
+   },
+   {
+    "document": "https://stacks.math.columbia.edu/tag/0096",
+    "place": "Lemma 6.26.2, tensor pullback adjunction"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sc-gm-torsor"
+ ],
+ "proof": [
+  {
+   "text": "The proved nonempty_tensorPullbackAdjunction and pullbackPushforwardAdjunction have the same right adjoint. Apply Mathlib Adjunction.leftAdjointUniq. Form the displayed composite of pullbackObjUnitIso, pullback of s, pullbackComp, pullbackCongr, and the tensor comparison. Package its hom and IsIso proof as a lifted generator.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-gm-torsor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/040E",
+   "place": "Lemma 21.6.1, generator torsor construction; pullback/restriction of its trivializations.",
+   "external": [
+    {
+     "document": "https://stacks.math.columbia.edu/tag/0097",
+     "place": "Lemma 6.26.3, composition of module pullbacks"
+    },
+    {
+     "document": "https://stacks.math.columbia.edu/tag/0096",
+     "place": "Lemma 6.26.2, tensor pullback adjunction"
+    }
+   ]
+  },
+  "why": "Explicit elaboration of the pullback construction and its composition coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of sheaves of modules preserves trivializations and commutes with restriction and multiplication by units",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of pulling back isomorphisms of sheaves of modules along a cartesian square",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-12",
+   "verdict": "Related pullback/free-module coherence primitives only; no theorem about this explicitly constructed generator map."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|triviali[sz]|pullbackObjFreeIso",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-12",
+   "sub": "Algebra/Category/ModuleCat/Sheaf",
+   "verdict": "Related pullback/free-module coherence primitives only; no theorem about this explicitly constructed generator map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackUnitMap",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Proof, third step: Kummer naturality and Picard pullback; generator-torsor naturality, construction and equivariance on adjunction units",
+   "via": [
+    "lem-sc-etale-generators-pullback-unit-map",
+    "lem-sc-etale-generators-pullback-equivariant",
+    "lem-sc-h1-gm-pic-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeneratorsPullbackSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleGeneratorsPullbackSection",
+  "statement": "def etaleGeneratorsPullbackSection {X Y : Scheme.{u}} (f : Y ⟶ X) (L : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} L] [SheafOfModules.IsInvertible.{u, u, u} ((tensorPullback f).obj L)] (W : X.Etale) (s : (etaleIsoTorsor L).sheaf.obj.obj (op W)) : (etaleIsoTorsor ((tensorPullback f).obj L)).sheaf.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T112829-L-763854",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T112829-L-763854",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
