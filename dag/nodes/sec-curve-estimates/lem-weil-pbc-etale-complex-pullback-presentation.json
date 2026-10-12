@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-etale-complex-pullback-presentation",
+ "kind": "statement",
+ "title": "Coherent complex presentation of a canonical derived pullback cocone",
+ "statement": "Let $I$ be a small cofiltered category, $T$ a scheme [def-weil-pbc-scheme-conventions], $D:I\\to\\mathrm{Scheme}$ a diagram, $c$ a cone with point $Y$, $t:D\\to T$ a compatible family of structure maps, and $p:Y\\to T$ with $\\pi_i t_i=p$. Let $K\\in D(\\mathrm{Ab}(T_{\\mathrm{et}}))$ [def-weil-abstract-derived-category, def-weil-pbc-etale-sheaves], $C$ a complex on $T$, and $q:K\\simeq QC$. Fix an integer $n$, a diagram $H:I^{\\mathrm{op}}\\to\\mathrm{Ab}$, and a cocone $B$ whose objects, transition maps and legs are identified with the derived pullback cohomology of $K$ by object isomorphisms $e_i,e_Y$ and the canonical adjunction-unit, Leray and inverse-image composition formulas [def-weil-pbc-derived-inverse-image, def-weil-pbc-etale-cohomology, lem-weil-pbc-inverse-image-composition]. Let $P(f,A)$ be the canonical complex cohomology pullback, namely cohomology of derived global sections of the derived adjunction unit, followed by the Leray comparison and the exact-functor localization factorization [lem-weil-pbc-exact-functor-derived-factorization]. Then there are complexes $C_i=t_i^{-1}C$, maps $\\phi_f:f^{-1}C_i\\to C_j$ satisfying the identity and composition laws, and isomorphisms $eG_i:p^{-1}C\\simeq\\pi_i^{-1}C_i$ identifying their transitions with the identity of the constant diagram $G=\\mathrm{const}(p^{-1}C)$. With $L$ the identity cocone of $G$, there are isomorphisms $eH_i:H_i\\simeq H^n(D_i,QC_i)$ and $eB:B\\simeq H^n(Y,QL)$ such that $H(f)=eH_i\\,P(D(f),C_i)\\,H^n(Q\\phi_f)\\,eH_j^{-1}$ and $B_i\\,eB=eH_i\\,P(\\pi_i,C_i)\\,H^n(Q(eG_i^{-1}L_i))$. These are the fields of ComplexPullbackPresentation. No boundedness, geometric limit, qcqs or affine-transition assumption is made and no cohomology colimit is asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIT (lemma-colimit-complexes), proof lines 7869-7873; Tag 0EZM (lemma-colimit-variant-complexes), canonical pullback maps in its proof. Source read from the obtained local Stacks TeX copy."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Put C_i=t_i^{-1}C termwise. For f:j to i, the composition comparison is C_j -> f^{-1}C_i; its inverse is phi_f:f^{-1}C_i -> C_j. Apply the identity and associativity equations of inverse image to complexes degreewise: natural transformations applied termwise respect composition, so these are exactly hidentity and hcomposition.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put C_Y=p^{-1}C termwise and G=const(C_Y) on I opposite, with L its identity cocone. For every i, use the composition comparison p^{-1} -> pi_i^{-1}t_i^{-1}, evaluated on C, as eG_i. The cone equation pi_j followed by D(f)=pi_i and inverse-image associativity imply eG_i followed by the comparison and the pullback of phi_f equals eG_j. Cancellation of eG_j gives hG, since G maps every arrow to the identity. No colimit universal property is asserted or used.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each scheme map f, let alpha_f:D(f^{-1})(QC) -> Q(f^{-1}C) be the exact-functor factorization. Define eH_i=e_i followed by H^n(D(t_i^{-1})(q)) and H^n(alpha_t_i); define eB using eY, D(p^{-1})(q), and alpha_p. Both are isomorphisms. The prescribed equation hP gives the cohomology pullback on complexes. Naturality of the derived adjunction unit and of the Leray comparison first moves q through hm and hs. The localization comparison for a natural isomorphism and for composition then replaces the derived upperStarComp by Q of its termwise comparison. Functoriality of H^n and cancellation of the comparison isomorphisms yield hH. Apply the identical computation to pi_i and hp_i; the complex composite (eG_i).inv followed by L_i is the inverse composition comparison, so it yields hB. The expanded right-derived composition in hP is definitionally the Leray comparison of hm and hs.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIT (lemma-colimit-complexes), proof lines 7869-7873; Tag 0EZM (lemma-colimit-variant-complexes), canonical pullback maps in its proof. Source read from the obtained local Stacks TeX copy.",
+  "note": "Explicit algebraic coherence expansion by H1 of the termwise pullback and canonical-map steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "termwise pullbacks of a complex over schemes form a coherent constant diagram after pullback to a cone and derived cohomology pullback maps agree with localization",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryFactors\"",
+   "results": "11 hits including mapDerivedCategoryFactors and its naturality; no assembled varying-site pullback presentation theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; factorization ingredients found"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|upperStarComp_assoc|isColimitConstCocone",
+   "results": "23 Mathlib hits, including exact-functor localization factorization and constant-diagram colimits; no varying-site coherence and cohomology-map identification. Local source also has upperStarComp_assoc.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "second Proof, sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; termwise pullback and canonical-map identifications of the derived continuity subargument",
+   "via": [
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexPullbackPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexPullbackPresentation.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_complexPullbackPresentation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ComplexPullbackPresentation",
+   "AlgebraicGeometry.Etale.nonempty_complexPullbackPresentation"
+  ],
+  "statement": "theorem nonempty_complexPullbackPresentation {I : Type u} [SmallCategory I] [IsCofiltered I] (T : Scheme.{u}) (D : I ⥤ Scheme.{u}) (c : Cone D) (t : D ⟶ (Functor.const I).obj T) (p : c.pt ⟶ T) (hp : ∀ i, c.π.app i ≫ t.app i = p) (K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})) (n : ℤ) (F : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (e : ∀ i : I, F.obj (op i) ≅ (Etale.cohomology AddCommGrpCat.{u + 1} (D.obj i) n).obj ((Etale.upperStar AddCommGrpCat.{u + 1} (t.app i)).mapDerivedCategory.obj K)) (hm : ∀ {i j : I} (f : i ⟶ j), F.map f.op = (e j).hom ≫ (Etale.cohomology AddCommGrpCat.{u + 1} (D.obj j) n).map ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map f)).unit.app ((Etale.upperStar AddCommGrpCat.{u + 1} (t.app j)).mapDerivedCategory.obj K)) ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} (D.map f)).hom.app ((Etale.upperStar AddCommGrpCat.{u + 1} (D.map f)).mapDerivedCategory.obj ((Etale.upperStar AddCommGrpCat.{u + 1} (t.app j)).mapDerivedCategory.obj K))) ≫ (Etale.cohomology AddCommGrpCat.{u + 1} (D.obj i) n).map ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp AddCommGrpCat.{u + 1} (D.map f) (t.app j) (t.app i) ((Category.comp_id (t.app i)).symm.trans (t.naturality f).symm)) ≪≫ Functor.mapDerivedCategoryCompIso (Etale.upperStar AddCommGrpCat.{u + 1} (t.app j)) (Etale.upperStar AddCommGrpCat.{u + 1} (D.map f))).inv.app K) ≫ (e i).inv) (s : Cocone F) (eY : s.pt ≅ (Etale.cohomology AddCommGrpCat.{u + 1} c.pt n).obj ((Etale.upperStar AddCommGrpCat.{u + 1} p).mapDerivedCategory.obj K)) (hs : ∀ i : I, s.ι.app (op i) = (e i).hom ≫ (Etale.cohomology AddCommGrpCat.{u + 1} (D.obj i) n).map ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (c.π.app i)).unit.app ((Etale.upperStar AddCommGrpCat.{u + 1} (t.app i)).mapDerivedCategory.obj K)) ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map ((Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{u + 1} (c.π.app i)).hom.app ((Etale.upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapDerivedCategory.obj ((Etale.upperStar AddCommGrpCat.{u + 1} (t.app i)).mapDerivedCategory.obj K))) ≫ (Etale.cohomology AddCommGrpCat.{u + 1} c.pt n).map ((Functor.mapDerivedCategoryNatIso (Etale.upperStarComp AddCommGrpCat.{u + 1} (c.π.app i) (t.app i) p (hp i).symm) ≪≫ Functor.mapDerivedCategoryCompIso (Etale.upperStar AddCommGrpCat.{u + 1} (t.app i)) (Etale.upperStar AddCommGrpCat.{u + 1} (c.π.app i))).inv.app K) ≫ eY.inv) (C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (q : K ≅ DerivedCategory.Q.obj C) (P : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ), (cohomology AddCommGrpCat.{u + 1} Y n).obj (DerivedCategory.Q.obj K) ⟶ (cohomology AddCommGrpCat.{u + 1} X n).obj (DerivedCategory.Q.obj (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K))) (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ), P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app (DerivedCategory.Q.obj K)) ≫ (Functor.rightDerivedFunctorCompIso' (lowerStar AddCommGrpCat.{u + 1} f) (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (Functor.isoWhiskerLeft (lowerStar AddCommGrpCat.{u + 1} f) (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal) ≪≫ lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} f ≪≫ (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).symm)).hom.app ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫ (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K))) : Nonempty (ComplexPullbackPresentation T D c t C n F s ((Functor.const Iᵒᵖ).obj (((upperStar AddCommGrpCat.{u + 1} p).mapHomologicalComplex (ComplexShape.up ℤ)).obj C)) P (constCocone Iᵒᵖ (((upperStar AddCommGrpCat.{u + 1} p).mapHomologicalComplex (ComplexShape.up ℤ)).obj C)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T042408-L-1815424",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T042408-L-1815424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

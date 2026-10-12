@@ -25,65 +25,48 @@
  ],
  "proof": [
   {
-   "text": "Represent $K$ by a complex $C^\\bullet$ of abelian sheaves, using the localization description of the derived category [def-weil-abstract-derived-category]. Since $K\\in D^+$ [def-weil-pbc-bounded-derived-subcategories], choose $a$ with $H^r(C^\\bullet)=0$ for $r<a$. Replace $C^\\bullet$ by the good truncation $G^\\bullet=\\tau_{\\geq a}C^\\bullet$: it is zero below $a$, has $G^a=\\operatorname{coker}(C^{a-1}\\to C^a)$, and agrees with $C^\\bullet$ above $a$. The quotient map $C^\\bullet\\to G^\\bullet$ induces an isomorphism on $H^r$ for $r\\geq a$, and both sides have zero $H^r$ for $r<a$, so it is a quasi-isomorphism and $G^\\bullet$ represents $K$. No injectivity or acyclicity of the terms of $G^\\bullet$ is asserted.",
+   "text": "Extract a lower bound a from K.property and use Mathlib DerivedCategory.exists_iso_Q_obj_of_isGE to obtain a complex C strictly zero below a and q:K.obj iso Q(C).",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-pbc-bounded-derived-subcategories"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0GIT (lemma-colimit-complexes), proof lines 7867-7869; bounded-below replacement spelled out"
-   }
+   "elementary": true
   },
   {
-   "text": "For each $i$ and for $Y$, pull $G^\\bullet$ back termwise to $F_i^\\bullet$ and $F_Y^\\bullet$. The derived inverse-image definition [def-weil-pbc-derived-inverse-image] says these complexes represent $K_i$ and $K_Y$, without requiring their terms to be injective. The transition maps are the inverse-image composition isomorphisms [lem-weil-pbc-inverse-image-composition], degree by degree and compatible with differentials. After pulling to $Y$, every $f_i^{-1}F_i^r$ identifies with the same sheaf $F_Y^r$; the transition maps become identities. The connected filtered-diagram colimit statement [lem-weil-pbc-colimit-constant-connected-diagram] therefore identifies $\\varinjlim_i f_i^{-1}F_i^\\bullet$ with $F_Y^\\bullet$ termwise. Every $F_i^r$ is zero for $r<a$ because inverse image preserves zero objects.",
+   "text": "Set CY to the termwise pullback of C along p, G to its constant I opposite diagram and L to the identity cocone. The opposite category is filtered and hence connected by Mathlib IsFiltered.isConnected; isColimitConstCocone proves IsColimit L. Define P by the derived adjunction unit, Leray comparison and localization factorization; its required equation is reflexivity.",
    "uses": [
     "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-colimit-constant-connected-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0GIT (lemma-colimit-complexes), proof lines 7869-7873"
-   }
+   "elementary": true
   },
   {
-   "text": "The system $(F_i^\\bullet)$ satisfies the uniform lower bound and all the transition and affine-limit hypotheses of [lem-weil-pbc-etale-cohomology-limit-complex-systems] (Stacks 0EZM). Apply that lemma in degree $n$ and use the termwise colimit identification of Step 2 to obtain $\\varinjlim_iH^n(Y_{i,\\Et},F_i^\\bullet)\\cong H^n(Y_{\\Et},F_Y^\\bullet)$. Here $H^n$ means cohomology of derived global sections [def-weil-pbc-etale-cohomology]; 0EZM uses $H^t(Y_i,F_i^s)$ in all degrees $t$ to obtain this conclusion. No termwise global-sections complex is claimed to compute these groups.",
+   "text": "Apply lem-weil-pbc-etale-complex-pullback-presentation to C and q to obtain the system, its coherence, and the identifications of the given diagram and cocone. For each stage i and degree r<a, rewrite F_i as the termwise pullback of C using F_eq and apply Functor.map_isZero to C.isZero_of_isStrictlyGE a r. This proves the uniform lower bound without assuming inverse images of injectives are acyclic.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-    "def-weil-pbc-etale-cohomology"
+    "lem-weil-pbc-etale-complex-pullback-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0GIT (lemma-colimit-complexes), proof lines 7870-7874; Lemma Tag 0EZM, lines 7783-7823"
-   }
+   "elementary": true
   },
   {
-   "text": "The identifications $F_i^\\bullet\\simeq K_i$ and $F_Y^\\bullet\\simeq K_Y$ from Step 2 replace the two sides of Step 3 with the groups in the statement. The map supplied by 0EZM is induced by the projection pullbacks and the colimit coprojections, so under those natural identifications it is precisely the displayed canonical map.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0GIT (lemma-colimit-complexes), conclusion of the proof lines 7870-7874"
-   }
+   "text": "Apply nonempty_isColimit_etale_complex_cohomology to the supplied system, the uniform bound, the constant-diagram colimit just proved, the prescribed P, and the supplied identifications. Its cocone is exactly s, so its conclusion is the required Nonempty(IsColimit s).",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
   "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-colimit-constant-connected-diagram",
   "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "def-weil-pbc-etale-cohomology"
+  "lem-weil-pbc-etale-complex-pullback-presentation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 0GIT (lemma-colimit-complexes), proof lines 7852-7881"
+  "place": "Tag 0GIT proof, lines 7867-7874, realized in Lean by H1 using Mathlib bounded representatives, constant colimits and Tag 0EZM complex continuity."
  },
  "mathlib_searches": [
   {
@@ -184,5 +167,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T042408-L-1815424",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -9,9 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.CategoryTheory.Filtered.Basic
 import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleComplexPullbackPresentation
+import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Derived étale cohomology over an inverse limit
 
@@ -105,6 +104,40 @@ theorem derivedEtaleCohomology_limit
             (Etale.upperStar AddCommGrpCat.{u + 1} (t.app i))
             (Etale.upperStar AddCommGrpCat.{u + 1} (c.π.app i))).inv.app K.obj) ≫
       eY.inv) : Nonempty (IsColimit s) := by
-  sorry
+  obtain ⟨a, ha⟩ := K.property
+  have : K.obj.IsGE a := ha
+  obtain ⟨C, hC, ⟨q⟩⟩ := K.obj.exists_iso_Q_obj_of_isGE a
+  let CY := ((Etale.upperStar AddCommGrpCat.{u + 1} p).mapHomologicalComplex
+    (ComplexShape.up ℤ)).obj C
+  let G := (Functor.const Iᵒᵖ).obj CY
+  have : IsConnected Iᵒᵖ := IsFiltered.isConnected Iᵒᵖ
+  let L : Cocone G := constCocone Iᵒᵖ CY
+  let P : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
+      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),
+      (Etale.cohomology AddCommGrpCat.{u + 1} Y n).obj (DerivedCategory.Q.obj K) ⟶
+      (Etale.cohomology AddCommGrpCat.{u + 1} X n).obj
+        (DerivedCategory.Q.obj
+          (((Etale.upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+            (ComplexShape.up ℤ)).obj K)) :=
+    fun {X Y} f A => (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map
+      ((Etale.rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map
+          ((Etale.mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app
+            (DerivedCategory.Q.obj A)) ≫
+        (Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+          AddCommGrpCat.{u + 1} f).hom.app
+            ((Etale.upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj
+              (DerivedCategory.Q.obj A)) ≫
+        (Etale.rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map
+          ((Etale.upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app A))
+  obtain ⟨v⟩ := Etale.nonempty_complexPullbackPresentation
+    T D c t p hp K.obj n F e hm s eY hs C q P (by intros; rfl)
+  have hbelow : ∀ (i : I) (r : ℤ), r < a → IsZero ((v.F i).X r) := by
+    intro i r hr
+    rw [v.F_eq i]
+    exact (Etale.upperStar AddCommGrpCat.{u + 1} (t.app i)).map_isZero
+      (C.isZero_of_isStrictlyGE a r hr)
+  exact Etale.nonempty_isColimit_etale_complex_cohomology D c hc
+    v.F v.φ v.hidentity v.hcomposition a hbelow G v.eG v.hG n P (by intros; rfl)
+    F v.eH v.hH L (isColimitConstCocone Iᵒᵖ CY) s v.eB v.hB
 
 end AlgebraicGeometry
