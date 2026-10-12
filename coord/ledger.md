@@ -5763,3 +5763,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:44 L: merged deliver/E1/Sheaf.AlgebraicGeometry.TorsionEtaleSheaf (stage 3; reviewer PASS; first push; landing 20261012T004444-L-639286 (proof); modules 1; new nodes 0)
 - 00:47 L: returned deliver/E1/Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding (reviewer RETURN: (reviewer X-37d07, head 37d07423e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Co)
 - 00:48 L: returned deliver/M1/Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison (reviewer RETURN: (reviewer X-363fe, head 363fea3a6) D1: The new positive and zero declarations are only the q>0 and q=0 restrictions of t)
+- 00:56 L: returned deliver/C1/Sheaf.AlgebraicGeometry.TorsionFilteredUnion (reviewer RETURN: (reviewer X-0103c, head 0103c5265) H4 (existing-declaration reuse; stage-3 brief §0, review point 5): In lean/Sheaf/Alge)
