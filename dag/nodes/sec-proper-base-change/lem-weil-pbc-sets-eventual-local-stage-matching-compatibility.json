@@ -14,50 +14,52 @@
  },
  "proof": [
   {
-   "text": "Y_j is affine because W is affine and f_j is affine. The pairwise fibre products P_qq′ of the affine V_q over affine Y_j are affine étale objects; their structure maps are of finite presentation by qcqs permanence. Restrict the two sections to these overlaps. Naturality of the comparison and the common equations with t identify their limit images.",
+   "text": "For each ordered pair form the qcqs overlap using etale_pair_restriction_detection. Affineness of the sources gives quasi-compactness and quasi-separatedness by Mathlib permanence. Naturality of the sheaf comparison and the common equations with t give equality of the two restricted sections after pullback to the limit. No covering or colimit-site presentation is used.",
    "uses": [
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-pair-restriction-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any two sections on an arbitrary stage object Q, apply existsUnique_etaleSections_equal_open to its stage sheaf. etaleSetCartesianUnit_eq_iff identifies equality of unit sections on the cartesian base change with factorization of its first projection through this open. The composition comparison is an isomorphism, so it preserves and reflects equality; factorization through an open is equivalent to whole inverse image. This proves the private comparison_equal_open helper without requiring Q to descend from the original base.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open",
+    "lem-weil-pbc-sets-cartesian-unit-equality",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict to the cofinal upper tail above j. Use the affine-site colimit presentation, full/affine equivalence, and unit-compatible inverse-image comparison. The section formula of Stacks 0A35 for H_j on P_qq′ identifies sections on its limit base change with the filtered colimit of later stage sections. Equality of the two representatives in this colimit gives one later equality witness for each ordered pair.",
+   "text": "Restrict D to the initial category Over(j.left). Base-change Q along this diagram and the limiting cone. Connected limits commute with pullbacks, hence these base changes form a limiting cone; the stages are compact because Q.hom is quasi-compact, and transitions are affine by base change. Pull back the agreement open to the identity-tail object. Mathlib exists_map_eq_top gives one later stage with whole inverse image. Pullback functoriality keeps the inverse image whole at every subsequent stage. The open criterion then gives eventual comparison equality, stably under every later refinement. This is the private comparison_eventually_equal helper.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-limit-image-contained-in-open",
+    "lem-weil-pbc-etale-base-change-finite-limits"
    ],
    "elementary": false
   },
   {
-   "text": "Directedness moves the finitely many witnesses to one common stage, and functoriality preserves their equalities. Base change preserves the overlaps. Every two arrows with equal composites into Y_j′ factor through the corresponding base-changed overlap, so restricting its equality proves compatibility. For n=0 use the identity stage.",
+   "text": "Apply that equality detection to each overlap. Naturality of the stage comparison changes the equality into equality of the transported restrictions; etale_pair_restriction_detection propagates it to every pair of arrows with equal composites after base change. Choose a common predecessor of j and the finite set of pairwise witness stages using IsCofiltered.inf_objs_exists. Thinness identifies the composite witness arrows with the selected arrow r. Finally cancel d.inv, an isomorphism, in the equality of composites. These pairwise equalities are exactly Presieve.Arrows.Compatible. The finite set can be empty, so n=0 is included.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-etale-pair-restriction-detection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
   "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-etale-pair-restriction-detection",
+  "lem-weil-pbc-etale-sections-equal-open",
+  "lem-weil-pbc-limit-image-contained-in-open",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-sets-cartesian-unit-equality",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "V3",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, equation-compute-pullback-to-limit and finite-matching argument; Étale Cohomology 0EYL"
+  "group": "C2",
+  "document": "Stacks Project, Tags 09XM and 01Z3; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "place": "09XM agreement-open criterion; exists_map_eq_top (lines 180-198), connected-pullback limit construction; finite overlap argument"
  },
  "mathlib_searches": [
   {
@@ -130,10 +132,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T202256-L-710118",
-  "kind": "interface",
+  "landing": "20261012T225300-L-1801587",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
