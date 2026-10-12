@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-flat-cech-base-change-differential",
+ "kind": "statement",
+ "title": "Canonical Cech component maps commute with the differential",
+ "statement": "Let $R,S$ be commutative rings with an $R$-algebra structure on $S$, let $f:X\\to\\operatorname{Spec}R$ be any scheme morphism, let $U_i$ be any indexed family of opens and let $M$ be any module, using [def-pc-scheme], [pqf-def-coherent]. Use $X_S$, $g:X_S\\to X$, $f_S$, $N=g^*M$ and its adjunction unit from [def-pc-base-change], [def-pc-flat-cohomology-comparison]. Put $V_i=g^{-1}U_i$, and restrict the module presheaves to scalars $R,S$ to obtain $P,Q$. Let $C=\\check C(U,P)$, $A=S\\otimes_R C$ degreewise and $B=\\check C(V,Q)$ using [pqf-def-cohomology], [def-pc-cochain-complex-modules]. Choose the automatic inclusions $h_y:\\bigcap_l V_{y_l}\\subseteq g^{-1}(\\bigcap_l U_{y_l})$. If a family of $S$-linear maps $c_k:A^k\\to B^k$ satisfies the canonical coordinate equation $z_y(c_k(b\\otimes x))=b|_{\\cap_lV_{y_l}}\\cdot\\eta_{M,\\cap_lU_{y_l}}(a_y(x))|_{\\cap_lV_{y_l}}$ for every tuple, scalar and cochain, where $a_y,z_y$ mean product projections restricted to the intersections, then $d_B^k\\circ c_k=c_{k+1}\\circ d_A^k$. This asserts no existence or invertibility of the maps, and needs no finiteness, affine, covering, flat or quasi-coherence hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-base-change",
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Proof of Lemma 30.5.2, separated-case paragraph, equality of Cech complexes; affine scalar-extension computation in Tag 02KG."
+ },
+ "proof": [
+  {
+   "text": "For a fixed degree test the morphism equality on pure tensors and on target tuple coordinates. Tensor induction suffices for the first test. The source-library Cech coordinate isomorphism cechComplexFunctorXAddEquiv proves coordinates jointly injective, including for the empty index type.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The source-library cechComplexFunctorπ_d_apply expands the differential as the signed sum of face restrictions. Restrict from product opens to intersections and use functoriality to identify each composite with the face inclusion. Apply the assumed canonical-coordinate formula to each face. Naturality of the module adjunction unit commutes with these restrictions, and the structure-sheaf restriction commutes with the image of the scalar b. Maps between opens agree by thinness; finite-intersection inverse image is the corresponding intersection. Linearity distributes over the signed finite sum, proving equality on pure tensors. Tensor induction and coordinate injectivity finish. No affineness, quasi-coherence, finiteness of the index family, or flatness is needed.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Proof of Lemma 30.5.2, separated-case paragraph, equality of Cech complexes; affine scalar-extension computation in Tag 02KG. Explicit degreewise reduction and coordinate naturality argument by F2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech cochain differential naturality pullback of module sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cochain differential naturality pullback of module sections",
+   "results": "groupCohomology.cochainsMap; groupCohomology.cochainsMap_f; inhomogeneousCochains.d_eq; groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply; groupCohomology.cochainsMap_f_hom; groupCohomology.cochainsMap_f_1_comp_cochainsIso₁; CategoryTheory.PresheafOfGroups.OneCochain.ev_precomp; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-12",
+   "verdict": "No complete match for the stated scalar-extension coordinate assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor_d_π|cechComplexFunctorπ_d_apply|cechComplexFunctorXAddEquiv",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "No complete match for the stated scalar-extension coordinate assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof of Lemma 30.5.2, separated-case paragraph, equality of Cech complexes; affine scalar-extension computation in Tag 02KG.",
+   "via": [
+    "lem-pc-flat-cech-base-change",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechDifferential",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatCohomologyCechDifferential.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechBaseChange_components_comm",
+  "statement": "theorem cechBaseChange_components_comm (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (M : X.Modules) (hI : ∀ (k : ℕ) (y : Fin (k + 1) → ι), (⨅ l, baseChangeFst (S := S) f ⁻¹ᵁ U (y l)) ≤ baseChangeFst (S := S) f ⁻¹ᵁ (⨅ l, U (y l))) : let g := baseChangeFst (S := S) f let V : ι → (baseChangedScheme (S := S) f).Opens := fun i ↦ g ⁻¹ᵁ U i let N := baseChangedModule (S := S) f M let P := M.presheafModuleCat ⋙ ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom) let Q := N.presheafModuleCat ⋙ ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom) let C := (cechComplexFunctor U).obj P let A := ((ModuleCat.extendScalars (algebraMap R S)).mapHomologicalComplex (.up ℕ)).obj C let B := (cechComplexFunctor V).obj Q let a := fun (k : ℕ) (y : Fin (k + 1) → ι) (x : C.X k) ↦ M.presheaf.map (homOfLE (TopCat.Presheaf.iInf_le_piObj U y)).op (TopCat.Presheaf.cechComplexFunctorπ U P k y x) let z := fun (k : ℕ) (y : Fin (k + 1) → ι) (x : B.X k) ↦ N.presheaf.map (homOfLE (TopCat.Presheaf.iInf_le_piObj V y)).op (TopCat.Presheaf.cechComplexFunctorπ V Q k y x) ∀ c : ∀ k, A.X k ⟶ B.X k, (∀ (k : ℕ) (y : Fin (k + 1) → ι) (b : S) (x : C.X k), z k y (c k (b ⊗ₜ[R] x)) = ((baseChangedScheme (S := S) f).presheaf.map (homOfLE (le_top : (⨅ l, V (y l)) ≤ ⊤)).op).hom (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom b) • N.presheaf.map (homOfLE (hI k y)).op ((baseChangeUnit (S := S) f M).val.app (op (⨅ l, U (y l))) (a k y x))) → ∀ k, c k ≫ B.d k (k + 1) = A.d k (k + 1) ≫ c (k + 1)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T070535-L-3470358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T070535-L-3470358",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

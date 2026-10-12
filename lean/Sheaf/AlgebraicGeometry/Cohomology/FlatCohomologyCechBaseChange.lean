@@ -10,7 +10,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechTerms
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechDifferential
 
 /-! # The termwise scalar extension of a finite affine Cech complex
 
@@ -128,6 +129,17 @@ theorem exists_cechBaseChange_iso (f : X ⟶ Spec (.of R)) [IsSeparated f]
     ∃ c : tensorCech (S := S) f U M ⟶
       cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)
         (baseChangedModule (S := S) f M), IsCechBaseChange f U M c ∧ IsIso c := by
-  sorry
+  obtain ⟨e, he⟩ := exists_cechBaseChange_term_isos (S := S) f U hU M
+    (baseChangeCover_intersection_le (S := S) f U)
+  have hd := cechBaseChange_components_comm (S := S) f U M
+    (baseChangeCover_intersection_le (S := S) f U) (fun k ↦ (e k).hom) he
+  let c : tensorCech (S := S) f U M ⟶
+      cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)
+        (baseChangedModule (S := S) f M) :=
+    CochainComplex.ofHom (fun k ↦ (e k).hom) hd
+  refine ⟨c, ?_, ?_⟩
+  · exact he
+  · have : ∀ k, IsIso (c.f k) := fun k ↦ (e k).isIso_hom
+    exact HomologicalComplex.Hom.isIso_of_components c
 
 end AlgebraicGeometry.Scheme.Modules
