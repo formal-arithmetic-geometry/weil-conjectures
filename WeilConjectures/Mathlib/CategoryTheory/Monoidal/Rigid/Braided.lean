@@ -8,8 +8,10 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 
 /-!
 # The categorical trace, and internal duals of dualizable objects
@@ -40,6 +42,10 @@ and `End (𝟙_ C) = R`.
 
 - `CategoryTheory.IsDualizable.ihom_unit`: in a braided monoidal closed category, the internal
   dual of a dualizable object is dualizable.
+
+- `CategoryTheory.MonoidalClosed.IsPerfectPairing.braiding_hom_comp`,
+  `CategoryTheory.MonoidalClosed.isPerfectPairing_braiding_hom_comp_iff`: perfectness of a
+  pairing of dualizable objects is symmetric in the two variables.
 
 ## Implementation notes
 
@@ -125,6 +131,58 @@ theorem isIso_toIhomIhomUnit (X : C) [HasRightDual X] : IsIso (toIhomIhomUnit X)
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((pre e.inv).app (𝟙_ C))
 
+/-- A perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` of a dualizable object `X` is the evaluation of an
+exact pairing of `Y` and `X` (`IsPerfectPairing.evaluation_exactPairing`): `Y` is a
+left dual of `X`. -/
+@[instance_reducible]
+noncomputable def IsPerfectPairing.exactPairing {X Y : C} (hX : IsDualizable X)
+    {b : X ⊗ Y ⟶ 𝟙_ C} (h : IsPerfectPairing b) : ExactPairing Y X :=
+  have := h.isIso
+  have : IsIso (ihomUnitTensorToIhom X X) := by
+    obtain ⟨_⟩ := hX
+    let := BraidedCategory.exactPairing_swap X Xᘁ
+    exact isIso_ihomUnitTensorToIhom Xᘁ X X
+  let := exactPairingOfIsIso X
+  exactPairingCongrLeft (asIso (curry b))
+
+/-- The evaluation of the exact pairing `IsPerfectPairing.exactPairing` of a perfect pairing
+`b` is `b`. -/
+lemma IsPerfectPairing.evaluation_exactPairing {X Y : C} (hX : IsDualizable X)
+    {b : X ⊗ Y ⟶ 𝟙_ C}
+    (h : IsPerfectPairing b) :
+    letI := h.exactPairing hX
+    ε_ Y X = b :=
+  uncurry_curry b
+
+/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
+`def-pod-perfect-derived-pairing`): perfectness of a pairing is symmetric in the two variables.
+
+If `X` is dualizable and the pairing `b : X ⊗ Y ⟶ 𝟙_ C` is perfect, `Y ≅ [X, 𝟙_ C]`, then the
+swapped pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect as well, `X ≅ [Y, 𝟙_ C]`: `b` is the
+evaluation of an exact pairing of `Y` and `X`, and the braiding turns it into an exact pairing
+of `X` and `Y` whose evaluation is the swapped pairing. -/
+theorem IsPerfectPairing.braiding_hom_comp {X Y : C} (hX : IsDualizable X)
+    {b : X ⊗ Y ⟶ 𝟙_ C} (h : IsPerfectPairing b) : IsPerfectPairing ((β_ Y X).hom ≫ b) := by
+  let := h.exactPairing hX
+  let := BraidedCategory.exactPairing_swap Y X
+  have hε : ε_ X Y = (β_ Y X).hom ≫ b := by
+    rw [← h.evaluation_exactPairing hX]
+    rfl
+  exact ⟨hε ▸ isIso_curry_evaluation X Y⟩
+
+/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
+`def-pod-perfect-derived-pairing`): perfectness of a pairing is symmetric in the two variables.
+
+In a symmetric monoidal closed category, a pairing `b : X ⊗ Y ⟶ 𝟙_ C` of dualizable objects
+(for instance perfect point complexes) is perfect, `Y ≅ [X, 𝟙_ C]`, if and only if the swapped
+pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect, `X ≅ [Y, 𝟙_ C]`. -/
+theorem isPerfectPairing_braiding_hom_comp_iff {C : Type*} [Category C] [MonoidalCategory C]
+    [SymmetricCategory C] [MonoidalClosed C] {X Y : C} (hX : IsDualizable X)
+    (hY : IsDualizable Y) {b : X ⊗ Y ⟶ 𝟙_ C} :
+    IsPerfectPairing ((β_ Y X).hom ≫ b) ↔ IsPerfectPairing b := by
+  refine ⟨fun h ↦ ?_, fun h ↦ h.braiding_hom_comp hX⟩
+  simpa using h.braiding_hom_comp hY
+
 section
 
 variable (Y X : C) [ExactPairing Y X] (e : Y ⊗ X ≅ 𝟙_ C)
@@ -155,5 +213,76 @@ lemma pre_whiskerRight_app_whiskerRight_comp_ihomTensorObjWhiskerRightIso_hom {A
 end
 
 end MonoidalClosed
+
+/-- **Duality into an invertible object.** In a braided monoidal closed category, for a
+dualizable `K` and an invertible `ω`, the double `ω`-dual of `K` is `K`:
+`[[K, ω], ω] ≅ K`. Indeed `[K, ω] ≅ Kᘁ ⊗ ω`, whose left dual is `M ⊗ K` for a tensor inverse `M`
+of `ω`, so `[[K, ω], ω] ≅ (M ⊗ K) ⊗ ω ≅ K ⊗ (M ⊗ ω) ≅ K`. -/
+theorem nonempty_iso_ihom_obj_ihom_obj_of_isInvertible {K ω : C} (hK : IsDualizable K)
+    (hω : IsInvertible ω) :
+    Nonempty ((ihom ((ihom K).obj ω)).obj ω ≅ K) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨M, ⟨e⟩, ⟨e'⟩⟩ := hω
+  let : ExactPairing M ω := exactPairingOfTensorIso e' e
+  let : ExactPairing Kᘁ K := BraidedCategory.exactPairing_swap K Kᘁ
+  let : ExactPairing (M ⊗ K) ((ihom K).obj ω) :=
+    exactPairingCongrRight (MonoidalClosed.ihomObjIsoTensor Kᘁ K ω)
+  exact ⟨MonoidalClosed.ihomObjIsoTensor (M ⊗ K) ((ihom K).obj ω) ω ≪≫
+    whiskerRightIso (β_ M K) ω ≪≫ α_ K M ω ≪≫ whiskerLeftIso K e' ≪≫ ρ_ K⟩
+
+
+section ExternalHom
+
+variable {C₁ C₂ : Type*} [Category C₁] [Category C₂] [MonoidalCategory C₁] [MonoidalCategory C₂]
+  [BraidedCategory C₁] [BraidedCategory C₂] [MonoidalClosed C₁] [MonoidalClosed C₂]
+  (F₁ : C₁ ⥤ C) (F₂ : C₂ ⥤ C) [F₁.Monoidal] [F₂.Monoidal]
+
+/-- The rearrangement `(a ⊗ b) ⊗ (c ⊗ d) ≅ (c ⊗ a) ⊗ (b ⊗ d)` in a braided monoidal category. -/
+noncomputable def tensorTensorRearrangeIso (a b c d : C) :
+    (a ⊗ b) ⊗ (c ⊗ d) ≅ (c ⊗ a) ⊗ (b ⊗ d) :=
+  α_ a b (c ⊗ d) ≪≫ whiskerLeftIso a (α_ b c d).symm ≪≫
+    whiskerLeftIso a (whiskerRightIso (β_ b c) d) ≪≫ whiskerLeftIso a (α_ c b d) ≪≫
+    (α_ a c (b ⊗ d)).symm ≪≫ whiskerRightIso (β_ a c) (b ⊗ d)
+
+/-- **The external Hom map for dualizable objects.** For monoidal functors `F₁ : C₁ ⥤ C`,
+`F₂ : C₂ ⥤ C` into a braided monoidal closed category and dualizable `E₁`, `E₂`,
+`F₁ [E₁, N₁] ⊗ F₂ [E₂, N₂] ≅ [F₁ E₁ ⊗ F₂ E₂, F₁ N₁ ⊗ F₂ N₂]`: both sides are
+`F₂ E₂ᘁ ⊗ F₁ E₁ᘁ ⊗ F₁ N₁ ⊗ F₂ N₂` up to rearrangement, internal homs out of dualizable objects
+being tensor products with their duals. -/
+theorem nonempty_iso_tensorObj_map_ihom_obj {E₁ N₁ : C₁} {E₂ N₂ : C₂} (h₁ : IsDualizable E₁)
+    (h₂ : IsDualizable E₂) :
+    Nonempty (F₁.obj ((ihom E₁).obj N₁) ⊗ F₂.obj ((ihom E₂).obj N₂) ≅
+      (ihom (F₁.obj E₁ ⊗ F₂.obj E₂)).obj (F₁.obj N₁ ⊗ F₂.obj N₂)) := by
+  obtain ⟨_⟩ := h₁
+  obtain ⟨_⟩ := h₂
+  let _ : ExactPairing E₁ᘁ E₁ := BraidedCategory.exactPairing_swap E₁ E₁ᘁ
+  let _ : ExactPairing E₂ᘁ E₂ := BraidedCategory.exactPairing_swap E₂ E₂ᘁ
+  let _ : ExactPairing (F₁.obj E₁) (F₁.obj E₁ᘁ) := ExactPairing.map F₁ E₁ E₁ᘁ
+  let _ : ExactPairing (F₂.obj E₂) (F₂.obj E₂ᘁ) := ExactPairing.map F₂ E₂ E₂ᘁ
+  let _ : ExactPairing (F₂.obj E₂ᘁ ⊗ F₁.obj E₁ᘁ) (F₁.obj E₁ ⊗ F₂.obj E₂) :=
+    BraidedCategory.exactPairing_swap _ _
+  exact ⟨(F₁.mapIso (MonoidalClosed.ihomObjIsoTensor E₁ᘁ E₁ N₁) ⊗ᵢ
+      F₂.mapIso (MonoidalClosed.ihomObjIsoTensor E₂ᘁ E₂ N₂)) ≪≫
+    ((Functor.Monoidal.μIso F₁ _ _).symm ⊗ᵢ (Functor.Monoidal.μIso F₂ _ _).symm) ≪≫
+    tensorTensorRearrangeIso _ _ _ _ ≪≫
+    (MonoidalClosed.ihomObjIsoTensor (F₂.obj E₂ᘁ ⊗ F₁.obj E₁ᘁ) _ _).symm⟩
+
+omit [MonoidalCategory C₁] [BraidedCategory C₁] [MonoidalClosed C₁] [F₁.Monoidal] in
+/-- **The Künneth–Verdier map for a dualizable second factor.** For monoidal functors
+`F₁ : C₁ ⥤ C`, `F₂ : C₂ ⥤ C` into a braided monoidal closed category and a dualizable `N`,
+`F₁ M ⊗ F₂ [N, ω] ≅ [F₂ N, F₁ M ⊗ F₂ ω]`: both sides are `F₂ Nᘁ ⊗ F₁ M ⊗ F₂ ω`. -/
+theorem nonempty_iso_tensorObj_map_ihom_obj_right (M : C₁) {N : C₂} (ω : C₂)
+    (hN : IsDualizable N) :
+    Nonempty (F₁.obj M ⊗ F₂.obj ((ihom N).obj ω) ≅
+      (ihom (F₂.obj N)).obj (F₁.obj M ⊗ F₂.obj ω)) := by
+  obtain ⟨_⟩ := hN
+  let _ : ExactPairing Nᘁ N := BraidedCategory.exactPairing_swap N Nᘁ
+  let _ : ExactPairing (F₂.obj Nᘁ) (F₂.obj N) := ExactPairing.map F₂ Nᘁ N
+  exact ⟨whiskerLeftIso (F₁.obj M) (F₂.mapIso (MonoidalClosed.ihomObjIsoTensor Nᘁ N ω) ≪≫
+      (Functor.Monoidal.μIso F₂ _ _).symm) ≪≫ (α_ _ _ _).symm ≪≫
+    whiskerRightIso (β_ _ _) _ ≪≫ α_ _ _ _ ≪≫
+    (MonoidalClosed.ihomObjIsoTensor (F₂.obj Nᘁ) (F₂.obj N) _).symm⟩
+
+end ExternalHom
 
 end CategoryTheory
