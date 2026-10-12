@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-generic-fibre-closed-avoidance",
+ "kind": "statement",
+ "title": "A closed subset with empty fibre disappears after shrinking",
+ "statement": "Let g : P → T be a locally finite type, quasi-compact morphism of schemes. Let y ∈ T and C ⊆ P be closed, with g⁻¹({y}) ∩ C = ∅. There is an ambient open V ⊆ T containing y such that g⁻¹(V ∩ closure({y})) and C are disjoint.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054W (Lemma 37.24.1), empty generic fibre; Tag 055N, reduction to the reduced closure of a point"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "give the closure of `y` its reduced closed subscheme structure `Z`. This is\nintegral with generic point over `y`. Base change `g` to `Z` and pull back the closed\nset `C`. Give this pullback its reduced closed subscheme structure `W`. A closed\nimmersion is locally of finite type and quasi-compact, so `W → Z` is finite type.\nIts generic fibre is empty by `hempty` and the homeomorphism from the scheme-theoretic\nfibre onto the set-theoretic fibre. Tag 054W gives a nonempty open of `Z` over which\n`W` is empty. Every nonempty open of the integral `Z` contains its generic point.\nRepresent this open as `V ∩ closure {y}` with `V` ambient open in `T`; then `y ∈ V`.\nThe base-change projection is a homeomorphism onto the inverse image of the closure\nof `y`, so emptiness of `W` there is exactly the asserted disjointness. If `C` is\nempty the conclusion holds with `V = Set.univ`.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 054W (Lemma 37.24.1), empty generic fibre; Tag 055N, reduction to the reduced closure of a point",
+  "note": "Specialization to the reduced closure of y; source read online on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finite type morphism with empty generic fibre over an integral scheme there is an open neighbourhood of the generic point with empty inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism with empty generic fibre over an integral scheme there is an open neighbourhood of the generic point with empty inverse image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem, AlgebraicGeometry.Scheme.Hom.preimage_bot, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.IsDominant, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.Scheme.Hom.discrete_fiber; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*empty|empty.*generic|exists.*open.*fiber",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/Topology/Sober.lean; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFibreComponentSpread",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 054W (Lemma 37.24.1), empty generic fibre; Tag 055N, reduction to the reduced closure of a point; shrinking the component and complement closures before identifying the section component.",
+   "via": [
+    "lem-sbc-generic-fibre-component-spread",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFibreClosedAvoidance",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreClosedAvoidance.lean",
+  "declaration": "AlgebraicGeometry.exists_open_generic_fibre_closed_avoidance",
+  "statement": "theorem exists_open_generic_fibre_closed_avoidance {P T : Scheme.{u}} (g : P ⟶ T)\n    [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (C : Set P)\n    (hC : IsClosed C) (hempty : g ⁻¹' {y} ∩ C = ∅) :\n    ∃ V : Set T, IsOpen V ∧ y ∈ V ∧ Disjoint (g ⁻¹' (V ∩ closure {y})) C",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T223401-L-1635198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T223401-L-1635198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

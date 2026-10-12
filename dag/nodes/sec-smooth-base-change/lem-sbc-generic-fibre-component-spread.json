@@ -12,17 +12,38 @@
  ],
  "proof": [
   {
-   "text": "give the closure of y its reduced closed subscheme structure and base change g. This is an integral base with generic point y. The generic fibre is finite type over a field, hence noetherian, so the component of x and its complement are clopen. Take their closures in the base-changed total space. Their generic fibres are the original subsets. Tag 054Y shrinks the base so the two closures cover the total space. Their intersection has empty generic fibre; Tag 054W shrinks again so the intersection is empty. Each closure is now clopen, and its trace on the generic fibre is unchanged. The base change by the reduced closed immersion is a homeomorphism onto the inverse image of the closure of y. Represent the open of that closure by an ambient open V, and represent the chosen closure by a subset A of P under this homeomorphism. The generic point belongs to V, and the trace of A on its fibre is exactly the component of x. Empty complements cause no problem: the same closure argument applies.",
+   "text": "The scheme-theoretic fibre is locally noetherian by LocallyOfFiniteType.isLocallyNoetherian and is compact by quasi-compactness of g. Thus it is noetherian. Transport NoetherianSpace to the set-theoretic fibre by g.fiberHomeo. WeilConjectures.Mathlib.Topology.NoetherianSpace supplies local connectedness, so the connected component S of x in that fibre is clopen.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set C = closure(Subtype.val image S) and D = closure(Subtype.val image Sᶜ) in P. Since S and its complement are closed in the fibre, IsEmbedding.subtypeVal.closure_eq_preimage_closure_image identifies their traces with S and Sᶜ. Consequently C and D cover the fibre and their intersection has empty fibre.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the closed-cover spreading theorem to get V₁ over which C and D cover the inverse image of closure({y}). Use closed avoidance for C ∩ D to get V₂ over which they are disjoint.",
+   "uses": [
+    "lem-sbc-generic-fibre-closed-cover-spread",
+    "lem-sbc-generic-fibre-closed-avoidance"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Take V = V₁ ∩ V₂ and A = C. The traces of C and D on g⁻¹(V ∩ closure({y})) are closed and complementary, hence clopen. The fibre trace of C is S under the subtype inclusion. connectedComponentIn_eq_image then gives exactly g⁻¹({y}) ∩ A = connectedComponentIn(g⁻¹({y})) x.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-generic-fibre-closed-cover-spread",
+  "lem-sbc-generic-fibre-closed-avoidance"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
   "place": "Tag 055N, integral-base proof through clopenness of the closure; Tags 054Y and 054W",
-  "note": "Groups a strictly proper geometric step of Tag 055N; the remaining topological combination is proved in the parent Lean module. Source tags read online on 2026-10-12."
+  "note": "E2, 2026-10-13: Lean reduction using concrete closures and two strictly smaller shrinking statements. No component is chosen from an unproved existence theorem. The fibre topology and all combination steps are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -95,14 +116,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T165508-L-2931768",
+  "landing": "20261012T223401-L-1635198",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.exists_open_generic_fibre_component_spread"
-  ],
-  "sorry_after": []
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

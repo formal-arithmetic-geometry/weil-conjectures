@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-generic-fibre-closed-cover-spread",
+ "kind": "statement",
+ "title": "Two closed sets covering a fibre spread to a covering",
+ "statement": "Let g : P → T be a locally finite type, quasi-compact morphism of schemes. Let y ∈ T and let C and D be closed subsets of P. If g⁻¹({y}) ⊆ C ∪ D, there is an ambient open V ⊆ T containing y such that g⁻¹(V ∩ closure({y})) ⊆ C ∪ D.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 054Y (Lemma 37.24.5), finite closed covering; Tag 055N, reduction to the reduced closure of a point"
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "give the closure of `y` its induced reduced closed subscheme structure `Z`.\nIt is integral with generic point mapping to `y`. Base change `g` to `Z`; this remains\nfinite type, and the projection identifies its underlying space with the inverse\nimage of the closure of `y`. Pull back the closed subsets `C` and `D` to this space.\nTheir traces cover the generic fibre and are closed in it. Tag 054Y applied to the\ntwo traces gives an open neighbourhood of the generic point where their closures\ncover the total space. Those closures lie in the pullbacks of `C` and `D`, since\nthese are closed and contain the original traces. Represent this neighbourhood in\n`Z` by the intersection with an ambient open `V` of `T`. Its generic point maps to\n`y`, so `y ∈ V`, and the stated inclusion follows under the topological identification.\nNeither trace needs to be nonempty; the argument also covers an empty generic fibre.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 054Y (Lemma 37.24.5), finite closed covering; Tag 055N, reduction to the reduced closure of a point",
+  "note": "Specialization to the reduced closure of y; source read online on 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite closed covering of the generic fibre spreads to a covering after shrinking the integral base of a finite type scheme morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite closed covering of the generic fibre spreads to a covering after shrinking the integral base of a finite type scheme morphism",
+   "results": "8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.QuasiCompactCover.of_finite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.Scheme.Cover.exists_eq; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*cover|cover.*generic|closure.*fiber",
+   "results": "1 hits: Mathlib/Dynamics/SymbolicDynamics/Basic.lean; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFibreComponentSpread",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 054Y (Lemma 37.24.5), finite closed covering; Tag 055N, reduction to the reduced closure of a point; shrinking the component and complement closures before identifying the section component.",
+   "via": [
+    "lem-sbc-generic-fibre-component-spread",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericFibreClosedCoverSpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreClosedCoverSpread.lean",
+  "declaration": "AlgebraicGeometry.exists_open_generic_fibre_closed_cover",
+  "statement": "theorem exists_open_generic_fibre_closed_cover {P T : Scheme.{u}} (g : P ⟶ T)\n    [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (C D : Set P)\n    (hC : IsClosed C) (hD : IsClosed D) (hcover : g ⁻¹' {y} ⊆ C ∪ D) :\n    ∃ V : Set T, IsOpen V ∧ y ∈ V ∧ g ⁻¹' (V ∩ closure {y}) ⊆ C ∪ D",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T223401-L-1635198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T223401-L-1635198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

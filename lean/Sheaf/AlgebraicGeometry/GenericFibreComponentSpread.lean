@@ -6,8 +6,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.GenericFibreComponentSpreadCore
-import Sheaf.AlgebraicGeometry.GenericFibreComponentSpreadTrace
+import Mathlib.AlgebraicGeometry.Fiber
+import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.Mathlib.Topology.NoetherianSpace
+import Sheaf.AlgebraicGeometry.GenericFibreClosedCoverSpread
+import Sheaf.AlgebraicGeometry.GenericFibreClosedAvoidance
 
 /-!
 # Spreading a connected component of a generic fibre
@@ -46,6 +49,71 @@ theorem exists_open_generic_fibre_component_spread {P T : Scheme.{u}} (g : P ⟶
     [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (x : P) (hx : g x = y) :
     ∃ (V : Set T) (A : Set P), IsOpen V ∧ y ∈ V ∧
       IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A} ∧
-      g ⁻¹' {y} ∩ A = connectedComponentIn (g ⁻¹' {y}) x := by sorry
+      g ⁻¹' {y} ∩ A = connectedComponentIn (g ⁻¹' {y}) x := by
+  classical
+  have : LocallyOfFiniteType (g.fiberToSpecResidueField y) :=
+    show LocallyOfFiniteType (Limits.pullback.snd g (T.fromSpecResidueField y)) from
+      inferInstance
+  have : IsLocallyNoetherian (g.fiber y) :=
+    LocallyOfFiniteType.isLocallyNoetherian (g.fiberToSpecResidueField y)
+  have : IsNoetherian (g.fiber y) := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace (g ⁻¹' {y}) :=
+    (TopologicalSpace.noetherianSpace_iff_of_homeomorph (g.fiberHomeo y)).mp inferInstance
+  let F : Set P := g ⁻¹' {y}
+  let S : Set F := connectedComponent ⟨x, hx⟩
+  have hS : IsClopen S := isClopen_connectedComponent
+  let C : Set P := closure (Subtype.val '' S)
+  let D : Set P := closure (Subtype.val '' Sᶜ)
+  have hCtrace : Subtype.val ⁻¹' C = S := by
+    rw [← IsEmbedding.subtypeVal.closure_eq_preimage_closure_image, hS.isClosed.closure_eq]
+  have hDtrace : Subtype.val ⁻¹' D = Sᶜ := by
+    rw [← IsEmbedding.subtypeVal.closure_eq_preimage_closure_image,
+      hS.compl.isClosed.closure_eq]
+  have hcover : g ⁻¹' {y} ⊆ C ∪ D := by
+    intro q hq
+    by_cases h : (⟨q, hq⟩ : F) ∈ S
+    · exact Or.inl (subset_closure ⟨⟨q, hq⟩, h, rfl⟩)
+    · exact Or.inr (subset_closure ⟨⟨q, hq⟩, h, rfl⟩)
+  have hempty : g ⁻¹' {y} ∩ (C ∩ D) = ∅ := by
+    apply Set.eq_empty_iff_forall_notMem.mpr
+    rintro q ⟨hq, hqC, hqD⟩
+    have h : (⟨q, hq⟩ : F) ∈ S := by
+      rw [← hCtrace]
+      exact hqC
+    have hn : (⟨q, hq⟩ : F) ∈ Sᶜ := by
+      rw [← hDtrace]
+      exact hqD
+    exact hn h
+  obtain ⟨V₁, hV₁, hy₁, hcov⟩ := exists_open_generic_fibre_closed_cover
+    g y C D isClosed_closure isClosed_closure hcover
+  obtain ⟨V₂, hV₂, hy₂, hdisj⟩ := exists_open_generic_fibre_closed_avoidance
+    g y (C ∩ D) (isClosed_closure.inter isClosed_closure) hempty
+  refine ⟨V₁ ∩ V₂, C, hV₁.inter hV₂, ⟨hy₁, hy₂⟩, ?_, ?_⟩
+  · have heq : {q : g ⁻¹' ((V₁ ∩ V₂) ∩ closure {y}) | (q : P) ∈ C}ᶜ =
+        {q : g ⁻¹' ((V₁ ∩ V₂) ∩ closure {y}) | (q : P) ∈ D} := by
+      ext q
+      have hq₁ : (q : P) ∈ g ⁻¹' (V₁ ∩ closure {y}) :=
+        ⟨q.property.1.1, q.property.2⟩
+      have hq₂ : (q : P) ∈ g ⁻¹' (V₂ ∩ closure {y}) :=
+        ⟨q.property.1.2, q.property.2⟩
+      change (q : P) ∉ C ↔ (q : P) ∈ D
+      constructor
+      · intro hn
+        exact (hcov hq₁).resolve_left hn
+      · intro hd hc
+        exact Set.disjoint_left.mp hdisj hq₂ ⟨hc, hd⟩
+    refine ⟨isClosed_closure.preimage continuous_subtype_val, ?_⟩
+    rw [← isClosed_compl_iff, heq]
+    exact isClosed_closure.preimage continuous_subtype_val
+  · rw [connectedComponentIn_eq_image (show x ∈ g ⁻¹' {y} from hx)]
+    change F ∩ C = Subtype.val '' S
+    ext q
+    constructor
+    · rintro ⟨hq, hqC⟩
+      refine ⟨⟨q, hq⟩, ?_, rfl⟩
+      rw [← hCtrace]
+      exact hqC
+    · rintro ⟨q', hq', rfl⟩
+      exact ⟨q'.property, subset_closure ⟨q', hq', rfl⟩⟩
 
 end AlgebraicGeometry
