@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import Sheaf.AlgebraicGeometry.EtaleSheaves
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
@@ -55,6 +56,24 @@ Proof:
    `def-weil-pbc-etale-site`. Finiteness of `Λ` supplies the Noetherian coefficient
    hypothesis of Tag 03S8; finiteness of `M` supplies finite constant values.
 -/
+/- Core stalk constructibility argument for Tag 03S8(3).
+Source: Stacks Project, Tag 03S8, proof lines 12198-12212.
+The finite stratification, base change, finite-etale comparison, and finite pushforward
+steps produce the constructibility witness.
+(blueprint: lem-weil-pbc-etale-free-sheaf-constructible-core).
+-/
+theorem isConstructibleSheaf_etaleLowerShriek_constant_core
+    {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    [CompactSpace U] [QuasiSeparatedSpace U]
+    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+    (j : U ⟶ X) [Etale j] (M : ModuleCat.{u + 1} Λ) [Finite M] :
+    IsConstructibleSheaf
+      (FA := fun A B : ModuleCat.{u + 1} Λ => A →ₗ[Λ] B)
+      (CA := fun A : ModuleCat.{u + 1} Λ => A)
+      ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) j inferInstance).obj
+        ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
+  sorry
+
 theorem isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace U] [QuasiSeparatedSpace U]
@@ -62,6 +81,8 @@ theorem isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
     (j : U ⟶ X) [Etale j] (M : ModuleCat.{u + 1} Λ) [Finite M] :
     IsConstructibleEtaleModuleSheaf
       ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) j inferInstance).obj
-        ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := sorry
+        ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
+  apply (isConstructibleEtaleModuleSheaf_iff _).2
+  exact isConstructibleSheaf_etaleLowerShriek_constant_core j M
 
 end AlgebraicGeometry.Scheme

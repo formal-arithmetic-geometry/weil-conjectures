@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-etale-free-sheaf-constructible-core",
+ "kind": "lemma",
+ "title": "Stalk constructibility of etale lower shriek of a finite constant module",
+ "statement": "For qcqs schemes X and U, a finite commutative ring Lambda, an etale map j : U -> X and a finite Lambda-module M, the sheaf j_! constantSheaf(M) is constructible in the stalk-based IsConstructibleSheaf predicate.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S8(3), proof lines 12198-12212"
+ },
+ "proof": [
+  {
+   "text": "Choose the finite constructible stratification on which j becomes finite etale, identify lower shriek after pullback with lower shriek on the base change, replace finite-etale lower shriek by lower star, and use finite local constancy of finite-etale pushforward; these witnesses give the stalk-based constructibility predicate.",
+   "uses": [
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lem-weil-pbc-etale-shriek-star-finite-modules",
+    "lem-weil-pbc-etale-finite-pushforward-locally-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03S8(3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "IsConstructibleSheaf finite locally constant etale lower shriek",
+   "results": "no direct match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsConstructibleSheaf _",
+   "results": "generic predicate lemmas only",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar finite etale constructible",
+   "results": "finiteLocallyConstant_lowerStar_of_finite_etale only",
+   "date": "2026-10-12",
+   "verdict": "used as planned dependency"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-etale-free-sheaf-constructible"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLowerShriekConstantConstructible.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleSheaf_etaleLowerShriek_constant_core",
+  "statement": "theorem isConstructibleSheaf_etaleLowerShriek_constant_core {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace U] [QuasiSeparatedSpace U] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (j : U ⟶ X) [Etale j] (M : ModuleCat.{u + 1} Λ) [Finite M] : IsConstructibleSheaf (FA := fun A B : ModuleCat.{u + 1} Λ => A →ₗ[Λ] B) (CA := fun A : ModuleCat.{u + 1} Λ => A) ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) j inferInstance).obj ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "lem-weil-pbc-etale-finite-pushforward-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T044754-L-2040429",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T044754-L-2040429",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
