@@ -17,41 +17,40 @@
  ],
  "proof": [
   {
-   "text": "The open cover generates a covering sieve on top. Push it forward using cover preservation to obtain a cover of i(top). Finite-limit preservation identifies products over i(top) with i applied to intersections; universal uniqueness makes these identifications commute with every projection and hence every Čech face. If needed to apply the existing large-index interface, lift the cover index by ULift and transport products along its canonical equivalence.",
+   "text": "Construct restriction_0 by Pi.lift of J.map (i.map (homOfLE le_top)).op. Prove naturality by Pi.hom_ext and NatTrans.naturality. Expand the degree-zero Cech differential into its two faces; functoriality and uniqueness of arrows into the top open make the two restrictions equal, so their signed sum vanishes. Apply these restrictions termwise to I.cocomplex to construct a chain map a from the evaluated resolution A to D.X 0, with a followed by D.d 0 1 zero. These constructions require no covering or injectivity hypotheses.",
    "uses": [
     "def-sc-etale-open-cech-resolution-double-complex"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Augment the horizontal row C^bullet(U,i^*I^q) by I^q(i(top)) via restrictions. The sheaf condition computes H^0 and injective Čech acyclicity computes the positive groups as zero. The product comparisons from the preceding step identify these rows with the image-cover Čech complexes. Thus each row augmentation is a quasi-isomorphism, including empty covers.",
-   "uses": [
-    "lem-weil-pbc-injective-sheaf-cech-acyclic"
-   ],
-   "elementary": false
+   "text": "Construct b:A→Tot(D) by a.f q followed by the (0,q) total inclusion. The total differential formulas split into horizontal and vertical parts. The horizontal term vanishes by the preceding calculation; both signs at (0,q) are +1. Naturality of a then proves the chain map identity.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Naturality of restriction makes the row augmentations a morphism from the evaluated resolution to D.X 0 and then to Tot D by inclusion of the (0,q) summand. Its horizontal differential is zero and its vertical sign is +1. Apply the first-quadrant column-augmentation theorem to conclude that the total augmentation is a quasi-isomorphism. This theorem uses the finite diagonal filtration, so it does not assume a bound on the length of I.",
+   "text": "For each resolution degree q, apply etaleOpenCechInjectiveAugmentation_quasiIso to the injective sheaf I.cocomplex.X q. CochainComplex.fromSingle_0Equiv identifies the degree-zero component with a.f q, and Pi.lift_pi verifies its restriction projections. Apply quasiIso_of_column_augmentation with these row quasi-isomorphisms and the defining component equality for b.",
    "uses": [
+    "lem-sc-etale-open-cech-injective-augmentation",
     "lem-sc-first-quadrant-column-augmentation"
    ],
    "elementary": false
   },
   {
-   "text": "Invert the homology isomorphism of that augmentation and compose with the inverse of I.isoRightDerivedObj for the sheaf-evaluation functor in degree n. This identifies total homology with the displayed derived evaluation.",
+   "text": "Invert isoOfQuasiIsoAt b n and compose with the inverse of I.isoRightDerivedObj F n, where F is sheaf-to-presheaf followed by evaluation at i(top). This yields the stated isomorphism from total homology to derived evaluation.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-etale-open-cech-resolution-double-complex",
-  "lem-sc-first-quadrant-column-augmentation",
-  "lem-weil-pbc-injective-sheaf-cech-acyclic"
+  "lem-sc-etale-open-cech-injective-augmentation",
+  "lem-sc-first-quadrant-column-augmentation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/03AW",
-  "place": "Original proof step 2: the injective Čech augmentation and total-complex abutment comparison; direct derived-resolution formulation"
+  "place": "Original row-augmentation route; explicit restriction and total maps, first-quadrant criterion, then Mathlib InjectiveResolution.isoRightDerivedObj. G1 stage 3, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -126,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T160138-L-2564845",
+  "landing": "20261012T165512-L-2933202",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

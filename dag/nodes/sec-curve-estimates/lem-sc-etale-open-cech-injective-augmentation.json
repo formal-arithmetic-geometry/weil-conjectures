@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-etale-open-cech-injective-augmentation",
+ "kind": "statement",
+ "title": "Restriction augmentation for one injective étale sheaf on an open cover",
+ "statement": "Let X be a scheme [def-weil-pbc-scheme-conventions], let i:X.Opens → X.Etale be cover preserving and preserve finite limits, and suppose i(top) is terminal [def-weil-pbc-sites-and-cohomology]. Let U be a finite u-small open covering of X. For any injective étale abelian sheaf J valued in AddCommGrpCat of universe u+1 [def-weil-pbc-abelian-etale-sheaves], every map e from J(i(top)) concentrated in cochain degree zero to Cech(U,i^*J) [def-weil-pbc-cech-complex], whose degree-zero projections are restriction along i of the inclusions of tuple intersections into top, is a quasi-isomorphism. No resolution, total complex, or derived evaluation occurs in this assertion. Empty covers are allowed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Lemma 21.10.2, including its degree-zero clause; Tag 03F6; row comparison in lem-sc-etale-open-cech-resolution-total, steps 1 and 2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "The open covering defines a covering sieve on top. Cover preservation pushes it to a covering sieve on i(top). Since i preserves finite limits and i(top) is terminal, i applied to a finite open product is a product of the image opens, equivalently their fibre product over i(top). The unique projection-compatible product isomorphisms commute with each omitted-factor map, so restriction along them identifies the alternating Cech complexes. Reindex the open family using ULift into universe u+1 when invoking the large-index etale acyclicity interface; the equivalence of tuple index types induces inverse product maps commuting with each differential.",
+   "uses": [
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply injective_sheaf_cech_acyclic to the image covering and J. Transport the vanishing back through the projection-compatible complex isomorphism to obtain zero positive homology of Cech(U,i^*J). The single-term source has zero homology in positive degrees, so the induced maps there are isomorphisms between zero objects.",
+   "uses": [
+    "lem-weil-pbc-injective-sheaf-cech-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree zero the differential says exactly that the restrictions to pairwise intersections agree. Apply the sheaf condition on the image covering: there is a unique section at i(top) giving any such compatible family. This is additive and its inverse is the canonical restriction map fixed by he. There is no incoming differential in degree zero, so this identifies the homology map of e with an isomorphism. The same sheaf condition forces sections to be zero for an empty cover, and the Cech terms are empty products, hence zero objects. Thus e is a quasi-isomorphism in all degrees.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cech-complex",
+  "lem-weil-pbc-injective-sheaf-cech-acyclic",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Lemma 21.10.2 and its proof; finite-limit product comparison from original total-comparison steps 1 and 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A cover preserving finite limit preserving functor induces exact sheaf pullback and preserves injective sheaves under pushforward",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total complex of the Cech complex of an injective resolution computes right derived evaluation",
+   "results": "InjectiveResolution.toRightDerivedZero and related resolution/derived comparison lemmas; no pulled-back open Cech row augmentation theorem",
+   "date": "2026-10-13",
+   "verdict": "No exact match; direct source search found the totalization criterion and over-category augmentation, but neither states the pulled-back open row."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.fromSingle₀Equiv",
+   "results": "CochainComplex.fromSingle₀Equiv and its degree-zero component lemmas",
+   "date": "2026-10-13",
+   "verdict": "Used to express the row augmentation; no acyclicity theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*augmentation|augmentation.*cech; rg cech.*Iso|Iso.*cech|PreservesInjective on project and Mathlib sites",
+   "results": "msearch grep: 0 hits. Local rg: Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso, SiteCechMathlibComparison, InjectiveSheafCechAcyclic, and the sites Pullback API.",
+   "date": "2026-10-13",
+   "verdict": "Existing augmentation is for an over-category, with coefficient universe equal to the Hom universe. The item needs the open pullback and u+1-valued coefficients. Positive acyclicity remains delegated to its existing node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenCechResolutionTotal",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Row comparison (steps 1 and 2) of lem-sc-etale-open-cech-resolution-total",
+   "via": [
+    "lem-sc-etale-open-cech-resolution-total",
+    "lem-sc-etale-affine-open-cech-derived-evaluation-succ",
+    "lem-sc-etale-affine-open-cech-derived-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenCechInjectiveAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenCechInjectiveAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleOpenCechInjectiveAugmentation_quasiIso",
+  "statement": "theorem etaleOpenCechInjectiveAugmentation_quasiIso (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) (hc : CoverPreserving (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology i) [PreservesFiniteLimits i] (ht : IsTerminal (i.obj ⊤)) {ι : Type u} [Finite ι] (U : ι → X.Opens) (hcover : iSup U = ⊤) (J : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) [Injective J] (e : (CochainComplex.single₀ AddCommGrpCat.{u + 1}).obj (J.obj.obj (op (i.obj ⊤))) ⟶ (cechComplexFunctor U).obj (i.op ⋙ J.obj)) (he : ∀ t : Fin 1 → ι, e.f 0 ≫ Pi.π (fun s : Fin 1 → ι ↦ J.obj.obj (op (i.obj (∏ᶜ fun k ↦ U (s k))))) t = J.obj.map (i.map (homOfLE le_top)).op) : QuasiIso e",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T165512-L-2933202",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T165512-L-2933202",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
