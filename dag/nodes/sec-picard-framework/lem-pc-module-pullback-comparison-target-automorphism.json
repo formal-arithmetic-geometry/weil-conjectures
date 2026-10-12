@@ -14,15 +14,30 @@
  ],
  "proof": [
   {
-   "text": "Compare the witnessing derived counits by right Kan extension uniqueness. Construct the standard comparison using a flat resolution of G concentrated in nonpositive degrees. Its tensor pullback is nonpositive and right exactness identifies H0 with a*G. The other counit differs by an invertible natural automorphism of La*, so both c0 and c induce isomorphisms on H0.",
+   "text": "Take the functorial bounded-above flat replacement of G[0] with bound zero. Its augmentation s:P→G[0] is a quasi-isomorphism and P is flat termwise and zero above zero. Use flatComplexDerivedPullback to identify the derived pullback of P with its termwise pullback; termwise additive functors preserve strict upper support. Transport this upper support across the localization of s, the derived functor map, and the quotient-comparison isomorphisms. The proved private helper modulePullback_single_isLE concludes La*(G[0])≤0.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-derived-module-base-change-map"
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-flat-complex-derived-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "In the truncation triangle tau_le_minus_one E -> E -> H0(E)[0], for E=La*(G[0]), orthogonality kills maps from both the negative truncation and its shift by one to (a*G)[0]. Therefore every map from E to this single module factors uniquely through H0(E)[0]. Take alpha to be H0(c) after the inverse of H0(c0), transported through the canonical single-functor H0 isomorphism. It is invertible. Full faithfulness of the single functor and uniqueness of the factorization give c=c0 followed by alpha[0]. The zero module and empty schemes are included.",
+   "text": "For a right-exact additive functor F and a quasi-isomorphism between complexes supported in degrees ≤0, the map of zeroth homology after applying F is an isomorphism. Prove this locally as rightExact_homology_zero_isIso: the outgoing degree-zero differentials vanish, so F preserves the left homology of the corresponding short complexes by Mathlib Functor.preservesLeftHomology_of_zero_g; naturality of mapHomologyIso conjugates the homology map with F applied to the original invertible homology map.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For each comparison c, unpack its witnessing counit ε. On the bounded flat replacement P, compare ε by Functor.leftDerivedUnique with the chosen counit from exists_derivedPullback, transported to the recorded tensorPullback functor by Functor.ext. The chosen counit is invertible on P because P is K-flat, hence ε at P is invertible. Apply H0 to the naturality square for s:P→G[0]. The source vertical map is invertible because s localizes to an isomorphism; the bottom tensor-pullback map is invertible on H0 by the preceding right-exact calculation. Cancel the source vertical isomorphism to deduce that H0(ε at G[0]) is invertible. The final single-complex identification is an isomorphism. This is the proved private helper modulePullbackComparison_homology_zero_isIso.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-derived-module-base-change-map",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-bounded-above-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let S be the degree-zero single functor, H zeroth homology, M=a*G, and e:H(S(M))≅M its canonical isomorphism. Define α=e⁻¹ followed by H(c0)⁻¹, H(c), and e. Since the source is nonpositive and S(M) is nonnegative, the already proved source-library lemma DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE makes H injective on these morphisms. Apply it to c and c0 followed by S(α.hom). Naturality of singleFunctorCompHomologyFunctorIso and isomorphism cancellation give equality after H, hence the required equality before H. This uses the same truncation route as the original plan; zero modules and empty schemes need no exceptions.",
    "uses": [
     "def-pc-derived-category"
    ],
@@ -32,12 +47,17 @@
  "proof_deps": [
   "def-pc-derived-category",
   "def-pc-derived-module-base-change-map",
-  "def-pc-derived-pullback"
+  "def-pc-derived-pullback",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-kflat-bounded-flat-replacement"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "K1",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-  "place": "Steps 2--5, independence of comparison; Step 4 of lem-pc-affine-alternating-cech-base-change-factorization; Stacks Tag 06YJ (derived pullback via K-flat complexes), and standard truncation argument written by Q1"
+  "place": "Steps 2--5, independence of comparison; Step 4 of lem-pc-affine-alternating-cech-base-change-factorization; Stacks Tag 06YJ (derived pullback via K-flat complexes), and standard truncation argument written by Q1",
+  "note": "The original flat-resolution, H0 and truncation plan is now a compiling proof. The generic truncation/H0 bijection is reused from WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure; no new holes or new public statements."
  },
  "mathlib_searches": [
   {
@@ -116,10 +136,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T184331-L-4015232",
-  "kind": "interface",
+  "landing": "20261012T214709-L-1270951",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
