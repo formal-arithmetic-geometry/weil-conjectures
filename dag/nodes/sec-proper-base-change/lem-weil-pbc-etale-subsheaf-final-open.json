@@ -28,53 +28,33 @@
  ],
  "proof": [
   {
-   "text": "For each etale object $U\\to S$, the inclusion $H(U)\\subseteq\\{\\ast\\}$ makes $H(U)$ either empty or a singleton. Let $W$ be the union, over all etale objects $U\\to S$ and elements of $H(U)$, of the image of $U\\to S$. This is open because etale morphisms are open. The construction is independent of the chosen element, since the final sheaf has only one section.",
+   "text": "Choose an open W with the section factorization and emptiness property from the support construction.",
    "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-weil-pbc-etale-morphism-open-map"
+    "lem-weil-pbc-etale-subsheaf-final-open-parts-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 04HV (lemma-support-subsheaf-final), proof, construction of the open locus"
-   }
+   "elementary": false
   },
   {
-   "text": "If $V\\to S$ is etale and $H(V)$ is nonempty, then its image is contained in $W$ by construction. Conversely, if the image of $V$ is contained in $W$, every point of $V$ has an etale neighbourhood whose map to $S$ is one of the objects used in the union defining $W$; pulling back the corresponding singleton section gives a section of $H$ on an etale covering of $V$. On overlaps these sections agree because $H$ is a subsheaf of the final sheaf, so the sheaf equalizer condition glues them to a unique element of $H(V)$. Thus $H(V)$ is a singleton exactly when $V\\to S$ factors through the open subscheme $W$.",
+   "text": "Apply the stalk criterion to this W and conjoin it with its section property.",
    "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-weil-pbc-etale-morphism-open-map"
+    "lem-weil-pbc-etale-subsheaf-final-open-parts-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 04HV (lemma-support-subsheaf-final), proof, local sections and sheaf gluing"
-   }
+   "elementary": false
   },
   {
-   "text": "The open subscheme is unique: if $W'$ has the same factorization property, apply it to the open immersion $W\\to S$ to get $W\\subseteq W'$, and apply the stated property for $W$ to the open immersion $W'\\to S$ to get $W'\\subseteq W$. For a geometric point $\\bar{x}$, the stalk $H_{\\bar{x}}$ is nonempty exactly when some pointed etale neighbourhood of $\\bar{x}$ has a section of $H$, which is exactly the condition that the image point lies in the union defining $W$. Since $H_{\\bar{x}}$ is a subsingleton, nonempty is equivalent to being a singleton.",
-   "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-geometric-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 04HV (lemma-support-subsheaf-final), proof, uniqueness and stalk criterion"
-   }
+   "text": "For any other candidate W′, apply its section property to the étale object W → S. The identity factorization gives a section over W, so W → S factors through W′ and W is contained in W′. Interchange W and W′ to obtain the reverse inclusion; antisymmetry proves equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-geometric-point"
+  "lem-weil-pbc-etale-subsheaf-final-open-parts-factorization",
+  "lem-weil-pbc-etale-subsheaf-final-open-parts-stalk"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 04HV (lemma-support-subsheaf-final), proof"
+  "place": "Tag 04HV, construction and stalk criterion split; uniqueness proved by testing open immersions"
  },
  "mathlib_searches": [
   {
@@ -151,5 +131,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
