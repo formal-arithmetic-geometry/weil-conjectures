@@ -10,13 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
-import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
-import Sheaf.AlgebraicGeometry.FormallySmooth
-import Sheaf.AlgebraicGeometry.SmoothArtinianLiftingAtPoint
-import Sheaf.AlgebraicGeometry.Thickening
-import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoodsPointwise
 
 /-!
 # Étaleness along a closed subscheme from its infinitesimal neighbourhoods
@@ -79,6 +73,17 @@ theorem etale_on_open_of_etale_infinitesimal_neighbourhoods
       Etale (pullback.snd g ((J ^ (n + 1)).subschemeι))) :
     ∃ W : X.Opens,
       (g : X → S) ⁻¹' Set.range (i : Z → S) ⊆ (W : Set X) ∧ Etale (W.ι ≫ g) := by
-  sorry
+  classical
+  let I := {x : X // (g : X → S) x ∈ Set.range (i : Z → S)}
+  choose U hU hEU using fun x : I =>
+    etale_infinitesimal_pointwise g i J hJ h_etale x.1 x.2
+  let W : X.Opens := ⨆ x : I, U x
+  refine ⟨W, ?_, ?_⟩
+  · intro x hx
+    let y' : I := ⟨x, hx⟩
+    exact (le_iSup U y') (hU y')
+  · apply IsZariskiLocalAtSource.of_openCover (Scheme.Opens.iSupOpenCover U)
+    intro x
+    simpa [W, Scheme.Opens.iSupOpenCover] using hEU x
 
 end AlgebraicGeometry

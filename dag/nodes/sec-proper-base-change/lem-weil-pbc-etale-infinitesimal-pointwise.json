@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-etale-infinitesimal-pointwise",
+ "kind": "statement",
+ "title": "Pointwise etale neighbourhood from infinitesimal neighbourhoods",
+ "statement": "Under the hypotheses of etale_on_open_of_etale_infinitesimal_neighbourhoods, every point over Z has an open etale neighbourhood.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 0A43, part (2), pointwise conclusion"
+ },
+ "proof": [
+  {
+   "text": "Apply the Artinian lifting criterion to obtain smoothness near the point, identify the fibre dimension as zero from the etale zeroth neighbourhood, and shrink to an etale open.",
+   "uses": [
+    "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-artinian-lifting-at-point",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 0A43"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoodsPointwise",
+  "declaration": "AlgebraicGeometry.etale_infinitesimal_pointwise",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInfinitesimalNeighbourhoodsPointwise.lean",
+  "statement": "theorem etale_infinitesimal_pointwise {X S Z : Scheme.{u}} (g : X ⟶ S) (i : Z ⟶ S) [IsLocallyNoetherian S] [LocallyOfFiniteType g] [QuasiCompact g] [IsClosedImmersion i] (J : S.IdealSheafData) (hJ : J = i.ker) (h_etale : ∀ n : ℕ, Etale (pullback.snd g ((J ^ (n + 1)).subschemeι))) (x : X) (hx : (g : X → S) x ∈ Set.range (i : Z → S)) : ∃ W : X.Opens, x ∈ W ∧ Etale (W.ι ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+   "place": "pointwise part of proof",
+   "via": []
+  },
+  "same_as": null
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-smooth-artinian-lifting-at-point",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale neighbourhood from smooth zero dimensional fibre",
+   "results": "no direct theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale near point smooth fibre dimension zero",
+   "results": "no direct theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZariskiLocalAtSource.of_openCover",
+   "results": "found locality API",
+   "date": "2026-10-12",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "iSupOpenCover Etale",
+   "results": "found Scheme.Opens.iSupOpenCover",
+   "date": "2026-10-12",
+   "verdict": "used"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T044747-L-2036769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T044747-L-2036769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -29,115 +29,34 @@
  ],
  "proof": [
   {
-   "text": "(Setting.) A morphism of finite type is locally of finite type [def-weil-finite-type-morphism] and $S$ is locally Noetherian [pqf-def-locnoeth], so the hypotheses of [lem-weil-pbc-smooth-artinian-lifting-at-point] hold for $g$ at every point of $X$. Fix $x\\in X$ with $s:=g(x)\\in Z$. For each $n\\ge0$ write $\\iota_n:Z_n\\to S$ for the closed immersion cut out by $\\mathcal J^{n+1}$ [def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers], $X_n=Z_n\\times_SX$ with projections $p_n:X_n\\to Z_n$ and $q_n:X_n\\to X$, so $\\iota_n\\circ p_n=g\\circ q_n$ [def-pc-fibre-product, def-pc-base-change].",
+   "text": "For each point x over Z, apply the split pointwise theorem to obtain an open U x containing x on which g is etale.",
    "uses": [
-    "def-weil-finite-type-morphism",
-    "pqf-def-locnoeth",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers",
-    "def-pc-fibre-product",
-    "def-pc-base-change"
+    "lem-weil-pbc-etale-infinitesimal-pointwise"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0A43 (label lemma-check-smoothness-on-infinitesimal-nbhds, line 3671), proof, first sentences ('Let x in X be a point lying over a point of Z')"
-   }
+   "elementary": false
   },
   {
-   "text": "(Lifting along small extensions at $x$.) Let $\\varphi:B'\\to B$ be a small extension (as in [lem-weil-pbc-smooth-artinian-lifting-at-point]), $i=\\operatorname{Spec}\\varphi$, and $\\alpha:\\operatorname{Spec}B\\to X$, $\\beta:\\operatorname{Spec}B'\\to S$ with $g\\circ\\alpha=\\beta\\circ i$ and $\\alpha$ sending the closed point to $x$. (a) $\\beta$ factors through some $Z_n$: $\\operatorname{Spec}B'$ has a single point $\\mathfrak m_{B'}$, sent by $\\beta$ to $g(\\alpha(\\mathfrak m_B))=s$. Choose an affine open $V=\\operatorname{Spec}R\\ni s$ of $S$ [def-weil-affine-spectrum]; $\\beta$ lands in $V$ and is $\\operatorname{Spec}$ of a ring map $\\psi:R\\to B'$ with $\\psi^{-1}(\\mathfrak m_{B'})=\\mathfrak p_s$. On $V$, $\\mathcal J$ is given by an ideal $J_V\\subseteq R$ and $Z_n\\cap V=\\operatorname{Spec}(R/J_V^{n+1})$ [def-sbc-closed-immersion-ideal-sheaf, def-sbc-ideal-sheaf-powers]; since $s\\in Z$, $J_V\\subseteq\\mathfrak p_s$, so $\\psi(J_V)\\subseteq\\mathfrak m_{B'}$. As $B'$ is Artinian local, $\\mathfrak m_{B'}^{N}=0$ for some $N\\ge1$, so with $n=N-1$, $\\psi(J_V^{n+1})\\subseteq\\mathfrak m_{B'}^{n+1}=0$ and $\\psi$ factors through $R/J_V^{n+1}$: $\\beta=\\iota_n\\circ\\beta_n$ for a morphism $\\beta_n:\\operatorname{Spec}B'\\to Z_n$. (b) $\\iota_n\\circ(\\beta_n\\circ i)=\\beta\\circ i=g\\circ\\alpha$, so the universal property gives $\\alpha_n=(\\beta_n\\circ i,\\alpha):\\operatorname{Spec}B\\to X_n$ with $p_n\\circ\\alpha_n=\\beta_n\\circ i$ and $q_n\\circ\\alpha_n=\\alpha$ [def-pc-fibre-product]. (c) $I=\\ker\\varphi$ has length $1$, so $\\mathfrak m_{B'}I=0$ and $I\\subseteq\\mathfrak m_{B'}$, whence $I^2=0$: $i$ is a first order thickening of affine schemes [def-sbc-first-order-thickening], over $Z_n$ via $\\beta_n$. The morphism $p_n:X_n\\to Z_n$ is etale by hypothesis, hence smooth [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], hence formally smooth [def-sbc-smooth-morphisms, def-sbc-formally-smooth]: there is $\\gamma_n:\\operatorname{Spec}B'\\to X_n$ with $\\gamma_n\\circ i=\\alpha_n$ and $p_n\\circ\\gamma_n=\\beta_n$. (d) Put $\\gamma=q_n\\circ\\gamma_n$. Then $\\gamma\\circ i=q_n\\circ\\alpha_n=\\alpha$ and $g\\circ\\gamma=g\\circ q_n\\circ\\gamma_n=\\iota_n\\circ p_n\\circ\\gamma_n=\\iota_n\\circ\\beta_n=\\beta$. So condition (2) of [lem-weil-pbc-smooth-artinian-lifting-at-point] holds for $g$ at $x$.",
+   "text": "Let W be the supremum of the opens U x indexed by points over Z. Each point over Z lies in its corresponding U x, hence in W.",
    "uses": [
-    "lem-weil-pbc-smooth-artinian-lifting-at-point",
-    "def-weil-affine-spectrum",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers",
-    "def-pc-fibre-product",
-    "def-sbc-first-order-thickening",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "def-sbc-smooth-morphisms",
-    "def-sbc-formally-smooth"
+    "lem-weil-pbc-etale-infinitesimal-pointwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0A43 (label lemma-check-smoothness-on-infinitesimal-nbhds, line 3671), proof: 'Given a small extension B' -> B and morphisms alpha, beta as in Lemma [02HX] part (3) the maximal ideal of B' is nilpotent (as B' is Artinian) and hence the morphism beta factors through Z_n and alpha factors through X_n for a suitable n. Thus the lifting property for X_n -> Z_n kicks in'"
-   }
+   "elementary": true
   },
   {
-   "text": "($g$ is smooth near $x$.) By step 2 and [lem-weil-pbc-smooth-artinian-lifting-at-point] ((2)$\\Rightarrow$(1)), there is an open subscheme $U_x\\subseteq X$ with $x\\in U_x$ such that $g|_{U_x}:U_x\\to S$ is smooth [def-sbc-smooth-morphisms].",
+   "text": "The opens U x form the canonical iSup open cover of W. Etaleness is local on the source, so the restrictions imply Etale (W.ι ≫ g).",
    "uses": [
-    "lem-weil-pbc-smooth-artinian-lifting-at-point",
-    "def-sbc-smooth-morphisms"
+    "lem-weil-pbc-etale-infinitesimal-pointwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0A43 (label lemma-check-smoothness-on-infinitesimal-nbhds, line 3671), proof: 'This proves (1)' (with Lemma 02HX, (3)=>(1))"
-   }
-  },
-  {
-   "text": "(The fibre through $x$ has dimension $0$ at $x$.) Since $s\\in Z=Z_0$ and $\\mathcal O_{Z_0,s}=\\mathcal O_{S,s}/\\mathcal J_s$ has the same residue field $\\kappa(s)$ [def-weil-residue-field], the morphism $\\operatorname{Spec}\\kappa(s)\\to S$ is $\\iota_0\\circ t$ for the canonical $t:\\operatorname{Spec}\\kappa(s)\\to Z_0$. By transitivity of fibre products [def-pc-fibre-product, def-pc-base-change], $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)\\cong X_0\\times_{Z_0}\\operatorname{Spec}\\kappa(s)=(X_0)_s$, the fibre of $p_0$ over $s$, and under this isomorphism the point of $X_s$ corresponding to $x$ is the point corresponding to the unique $x_0\\in X_0$ with $q_0(x_0)=x$ (it exists since $g(x)\\in Z_0$). As $p_0:X_0\\to Z_0$ is etale, [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] gives that $(X_0)_s$ has dimension $0$ at that point; hence $X_s$ has dimension $0$ at the point corresponding to $x$ [def-kun-dimension].",
-   "uses": [
-    "def-weil-residue-field",
-    "def-pc-fibre-product",
-    "def-pc-base-change",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "def-kun-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0A43 (label lemma-check-smoothness-on-infinitesimal-nbhds, line 3671), proof: 'Part (2) follows from (1) and the fact that a morphism is etale if and only if it is smooth of relative dimension 0' (relative dimension at x read on the fibre X_0 -> Z_0)"
-   }
-  },
-  {
-   "text": "($g$ is etale near $x$.) By steps 3 and 4, [lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension] applies to $g$, $x$ and $U_x$: there is an open subscheme $W_x\\subseteq U_x$ with $x\\in W_x$ such that $g|_{W_x}:W_x\\to S$ is etale [def-weil-etale-morphism]. Thus $g$ is etale at $x$ in the sense of Morphisms, Definition 02GI.",
-   "uses": [
-    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Lemma 0A43 (label lemma-check-smoothness-on-infinitesimal-nbhds, line 3671), proof, last sentence (part (2))"
-   }
-  },
-  {
-   "text": "(The open $W$.) Let $W=\\bigcup_xW_x$, the union over all $x\\in g^{-1}(Z)$ of the opens of step 5 ($W=\\emptyset$ if $g^{-1}(Z)=\\emptyset$). It is an open subscheme of $X$ containing $g^{-1}(Z)$, and the $W_x$ form an open cover of $W$ with $g|_W\\circ j_x=g|_{W_x}$ etale for the inclusions $j_x:W_x\\to W$. By [lem-weil-pbc-etale-local-on-source], $g|_W:W\\to S$ is etale.",
-   "uses": [
-    "lem-weil-pbc-etale-local-on-source",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Definition 02GI (definition-etale, line 8058: etale at x means etale on an affine open neighbourhood) and Lemma 02GJ (lemma-etale-characterize: etale is local on the source)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-finite-type-morphism",
-  "pqf-def-locnoeth",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "def-sbc-ideal-sheaf-powers",
-  "def-pc-fibre-product",
-  "def-pc-base-change",
-  "lem-weil-pbc-smooth-artinian-lifting-at-point",
-  "def-weil-affine-spectrum",
-  "def-sbc-first-order-thickening",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-  "def-sbc-smooth-morphisms",
-  "def-sbc-formally-smooth",
-  "def-weil-residue-field",
-  "def-kun-dimension",
-  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-etale-local-on-source"
+  "lem-weil-pbc-etale-infinitesimal-pointwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "document and split theorem",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 0A43 (lemma-check-smoothness-on-infinitesimal-nbhds), parts (1) and (2) with proof, via Lemma 02HX (lemma-lifting-along-artinian-at-point); morphisms.tex Definition 02GI and Lemma 02GJ for the open W"
+  "place": "Lemma 0A43, part (2), with pointwise reduction and source-locality assembly"
  },
  "mathlib_searches": [
   {
@@ -213,5 +132,15 @@
   "group": "G1",
   "result": "pass",
   "note": "finite type = LocallyOfFiniteType+QuasiCompact g; loc. Noetherian S (X derived via LocallyOfFiniteType.isLocallyNoetherian, checked); closed Z = IsClosedImmersion i with J tied by hJ : J = i.ker; Z_n = (J^(n+1)).subscheme, J^(n+1) the IdealSheafData semiring power (affinewise ideal^(n+1), checked); X_n -> Z_n = pullback.snd g _ per BASE CHANGE X_T; all n incl. 0; conclusion = ETALE AT A POINT form uniformly over g^-1(range i); one universe; node fields unchanged"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T044747-L-2036769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
