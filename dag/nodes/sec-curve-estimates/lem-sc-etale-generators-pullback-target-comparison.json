@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-etale-generators-pullback-target-comparison",
+ "kind": "statement",
+ "title": "Target comparison for generator pullback restrictions",
+ "statement": "For schemes X,Y, f:Y→X, an arbitrary X-module M [def-pc-module-pullback] and an etale arrow i:V→W over X [def-pc-scheme], define P_U,p_U,q_U,j and K as in [lem-sc-etale-generators-pullback-source-comparison]. The explicit target factor B_U(M):p_U*U*M ≅ q_U*tensorPullback(f)(M) of [lem-sc-etale-generators-pullback-section] satisfies K(W*M).inv ≫ j*B_W(M).hom ≫ c(j,q_W;q_V,tensorPullback(f)(M)).hom = p_V*c(i,W;V,M).hom ≫ B_V(M). No section or invertibility is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/040E",
+  "place": "Lemma 21.6.1, generator torsor construction; pullback/restriction of its trivializations.",
+  "external": [
+   {
+    "document": "https://stacks.math.columbia.edu/tag/0097",
+    "place": "Lemma 6.26.3, composition of module pullbacks"
+   },
+   {
+    "document": "https://stacks.math.columbia.edu/tag/0096",
+    "place": "Lemma 6.26.2, tensor pullback adjunction"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-sc-etale-generators-pullback-section",
+  "lem-sc-etale-generators-pullback-source-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Write B_U(M) as the comparison p_U*U*M to q_U*f*M, followed by q_U* of the inverse tensor/abstract pullback comparison. Naturality of c(j,q_W;q_V) with respect to this last inverse moves that factor to q_V*. The remaining comparison identity is the associativity coherence of the module pullback pseudofunctor: both composites identify j*p_W*W*M with q_V*f*M through the same morphism to X. Use j followed by p_W equals p_V followed by i, i followed by W equals V, and j followed by q_W equals q_V. Apply the three-fold composition coherence on each path and cancel the common comparison for the total morphism. This gives K(M).inv followed by j*B_W(M) and the q comparison equal to p_V* of c(i,W;V).hom followed by B_V(M). The argument is natural for every module M, including the zero module, and does not use any section or invertibility.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-sc-etale-generators-pullback-section",
+    "lem-sc-etale-generators-pullback-source-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-sc-etale-generators-pullback-section",
+  "lem-sc-etale-generators-pullback-source-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/040E",
+   "place": "Lemma 21.6.1, generator torsor construction; pullback/restriction of its trivializations.",
+   "external": [
+    {
+     "document": "https://stacks.math.columbia.edu/tag/0097",
+     "place": "Lemma 6.26.3, composition of module pullbacks"
+    },
+    {
+     "document": "https://stacks.math.columbia.edu/tag/0096",
+     "place": "Lemma 6.26.2, tensor pullback adjunction"
+    }
+   ]
+  },
+  "why": "Explicit factor of the original naturality argument, using canonical pullback composition coherence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of structure sheaf pullback isomorphisms with composition and commuting squares",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "results": "pullbackComp; pseudofunctor_associativity and unit laws. These give coherence primitives, but do not state these explicit factor identities.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit|pseudofunctor_associativity|pullHom_pullHom",
+   "results": "Mathlib PullbackFree.lean and Modules/Sheaf.lean; no complete factor identity found.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSectionsNatural",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-generators-pullback-sections-natural",
+   "place": "Proof: source and target comparison factors",
+   "via": [
+    "lem-sc-etale-generators-pullback-sections-natural"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackTargetComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeneratorsPullbackTargetComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleGeneratorsPullbackTarget_naturality",
+  "statement": "theorem etaleGeneratorsPullbackTarget_naturality {X Y : Scheme.{u}} (f : Y ⟶ X) (L : X.Modules)\n    {V W : X.Etale} (i : V ⟶ W) :\n    (etaleGeneratorsPullbackSquareIso f i ((pullback W.hom).obj L)).inv ≫\n      (pullback ((MorphismProperty.Over.pullback @Etale ⊤ f).map i).left).map\n        (etaleGeneratorsPullbackTargetIso f W L).hom ≫ (pullbackCompOfEq\n        ((MorphismProperty.Over.pullback @Etale ⊤ f).map i).left\n      (Limits.pullback.snd W.hom f) (Limits.pullback.snd V.hom f)\n      ((MorphismProperty.Over.pullback @Etale ⊤ f).map i).w ((tensorPullback f).obj L)).hom =\n      (pullback (Limits.pullback.fst V.hom f)).map (pullbackCompOfEq i.left W.hom V.hom i.w\n        (L)).hom ≫\n        (etaleGeneratorsPullbackTargetIso f V L).hom",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.etaleGeneratorsPullbackTargetIso",
+   "AlgebraicGeometry.Scheme.Modules.etaleGeneratorsPullbackTarget_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T160832-L-2613071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T160832-L-2613071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

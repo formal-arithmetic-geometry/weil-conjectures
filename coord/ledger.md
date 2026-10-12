@@ -8500,3 +8500,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:08 L: merged deliver/S2/Sheaf.Algebra.Homology.BoundedFlatKFlat (stage 3; reviewer PASS; first push; landing 20261012T160831-L-2612694 (proof); batch 20261012T160822; modules 1; new nodes 0)
 - 16:08 L: merged deliver/T1/Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison (stage 3; reviewer PASS; first push; landing 20261012T160831-L-2612868 (interface); batch 20261012T160822; modules 3; new nodes 2)
 - 16:08 L: merged deliver/U2/Sheaf.Algebra.Module.GradedModuleAwayClearingRing (stage 3; reviewer PASS; first push; landing 20261012T160832-L-2612973 (proof); batch 20261012T160822; modules 1; new nodes 0)
+- 16:08 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSectionsNatural (stage 3; reviewer PASS; first push; landing 20261012T160832-L-2613071 (interface); batch 20261012T160822; modules 3; new nodes 2)
