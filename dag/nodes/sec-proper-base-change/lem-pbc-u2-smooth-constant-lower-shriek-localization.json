@@ -18,39 +18,56 @@
  },
  "proof": [
   {
-   "text": "Finite type over k makes X Noetherian, hence gives finitely many irreducible components. Smooth curve local rings are normal domains. Distinct irreducible components through one point would give distinct minimal primes in its local domain, impossible. Thus the components are disjoint. Each is closed and has closed complement, the finite union of the other components, so each is also open. The component inclusion is consequently both open and closed, hence finite. Each component is a smooth curve over k.",
+   "text": "Apply H to the ambient smooth curve X. Smoothness makes the local rings regular, hence reduced, and finite type gives local Noetherianity; infer IsReduced X from the reduced stalks. Put R = ULift(ZMod r) and F = constantModSheaf R X r. Its value R/(r) is a finitely generated R-module, so the existing constant-sheaf finite-locally-constant instance and the trivial stratification give constructibility. Applying the additive constantSheaf functor to r times the identity of its value shows r times the identity of F is zero (r = 0 in R).",
    "uses": [
+    "lem-sc-smooth-regular",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-sc-smooth-normal"
+    "prop-constructible-pullback"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "On each component C the pullback of j is an open immersion. If its image is empty, extension by zero is zero, whose cohomology vanishes and whose comparisons are isomorphisms. Otherwise its image is dense because C is irreducible. Apply the hypothesis H to C; the constant finite coefficient sheaf is constructible and annihilated by r. Its restriction is canonically the constant coefficient sheaf on the pullback open. Apply dense-open prime-torsion localization to obtain the assertions for extension by zero. A zero-dimensional component has no proper nonempty open, so the nonempty case is the identity comparison and needs no separate zero-dimensional cohomology theorem.",
+   "text": "Let V be the open image of j and E the open complement of closure(V). They are disjoint by V subset closure(V). Their union is the coborder of V and is dense, by Mathlib dense_coborder. Explicitly enumerate these two opens by Fin 2. Apply assertions_iff_dense_open_prime to F and this dense union, using H f, to obtain assertions for extension by zero of the restriction to the union.",
    "uses": [
     "lem-pbc-q1-dense-open-prime-assertions"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Apply assertions_iff_disjoint_open_prime to the two disjoint opens, with the same constructible r-annihilated constant sheaf. Evaluate the resulting family of assertions at index zero to obtain Assertions for V_! V^* F. The disjoint-open equivalence already handles conditional primary and invertible torsion hypotheses.",
+   "uses": [
+    "lem-pbc-q1-disjoint-open-prime-assertions"
+   ],
    "elementary": false
   },
   {
-   "text": "Transfer each component extension-by-zero sheaf by its finite open-and-closed inclusion. Finite pushforward preserves the assertions; when using the abelian-sheaf formulation, forget the finite-field module structure. The underlying abelian sheaf of the module direct image is canonically the abelian direct image, since sections and restriction maps coincide; this is not an equivalence of finite-field modules with abelian groups. The definitions of the eight assertions use these underlying abelian sheaves. The canonical comparisons commute with inverse image and cohomology maps, and constructibility and torsion hypotheses agree for these finite prime-field sheaves. Affineness and properness of X pass to its open-and-closed components. Component projections preserve primary and invertible torsion hypotheses, so each conditional assertion applies to every summand with the required hypotheses. On the disjoint component cover these pushforwards form a finite direct sum canonically isomorphic to j_! of the constant coefficient sheaf on U. For two summands use the split short exact sequence from the first summand to the sum to the second summand, and iterate curve devissage. The isomorphism is induced by the component restrictions and therefore commutes with field-extension pullback and open restriction. This proves all eight conditional assertions with the original comparison maps. When X is empty the sum has no summands and is zero.",
+   "text": "Use upperStarConstantSheafIso to identify V^* F with constantModSheaf R V r. The canonical open-immersion image isomorphism e:U ≅ V satisfies e.inv followed by j = V.ι. Composition of extension by zero identifies V_! with e.inv_! followed by j_!. For an isomorphism, e.inv_! is naturally isomorphic to e.hom^*. Pullback of the constant sheaf along e.hom gives the constant sheaf on U. Compose these isomorphisms to obtain V_! V^* F ≅ j_! constantModSheaf R U r.",
    "uses": [
-    "lem-weil-pbc-curve-assertions-finite-pushforward",
-    "lemma-weil-pbc-eight-curve-devissage"
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The restriction V^* F is constructible by constructible pullback. X is Noetherian, so V.ι is quasi-compact. Use the open-closed constructibility theorem with V.closedComplement to show V_! V^* F constructible, and transport constructibility through the displayed sheaf isomorphism. Apply assertions_of_underlying_abelian_iso to the image of this isomorphism under the forgetful sheaf functor. This existing public theorem transports all eight assertions; no duplicate cohomology or assertion transport helpers are needed. Empty opens, empty schemes and zero-dimensional schemes are included.",
+   "uses": [
+    "prop-constructible-pullback",
+    "lem-fin-extension-by-zero",
+    "lem-v2-underlying-abelian-assertions"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-sc-smooth-normal",
+  "lem-fin-extension-by-zero",
   "lem-pbc-q1-dense-open-prime-assertions",
-  "lem-weil-pbc-curve-assertions-finite-pushforward",
-  "lemma-weil-pbc-eight-curve-devissage"
+  "lem-pbc-q1-disjoint-open-prime-assertions",
+  "lem-sc-smooth-regular",
+  "lem-v2-underlying-abelian-assertions",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-constructible-pullback-constant",
+  "prop-constructible-pullback"
  ],
- "proof_origin": "Stacks Project 03SG proof, with finite component assembly made explicit and the smooth constant calculations supplied as a hypothesis. Written by U2 from the cited proof.",
+ "proof_origin": "Written by A2 from Stacks 0GJA dense-open comparison and 0A5C finite-sum devissage, using the existing prime-torsion disjoint-open comparison. Mathlib dense_coborder replaces the component decomposition in the 03SG plan; complete combining proof checked by Lean. The unit curve-calculation route is unchanged. Repair: removed the copied private isomorphism-transport helpers; uses the existing public underlying-abelian assertion transport theorem after establishing constructibility by the open-closed theorem.",
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -127,10 +144,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T042423-L-1822566",
-  "kind": "interface",
+  "landing": "20261012T070524-L-3464338",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

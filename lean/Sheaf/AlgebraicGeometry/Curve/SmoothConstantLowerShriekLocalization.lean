@@ -8,13 +8,15 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
-import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions
-import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+import Sheaf.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions
 import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
+import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
+import Sheaf.AlgebraicGeometry.Curve.UnderlyingAbelianAssertions
 
 /-! # Localization of smooth constant-coefficient curve assertions
 
-Source: Stacks Project, Tag 03SG, proof.
+Source: Stacks Project, Tags 03SG, 0GJA and 0A5C, proofs.
 (blueprint: lem-pbc-u2-smooth-constant-lower-shriek-localization)
 -/
 
@@ -28,36 +30,19 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- The constant-coefficient calculations on all smooth curves imply the corresponding
 extension-by-zero calculations for every open immersion into a smooth curve.
-Source: Stacks Project, Tag 03SG, proof, using Tag 0GJA for dense-open localization.
+Source: Stacks Project, Tags 03SG, 0GJA (dense-open localization) and 0A5C (finite sums).
 (blueprint: lem-pbc-u2-smooth-constant-lower-shriek-localization)
 
-Proof: A smooth finite-type scheme over an algebraically closed field is Noetherian and
-has normal local rings. Two distinct components through a point would give two minimal
-primes in its local domain, which is impossible. Thus the finitely many components are
-pairwise disjoint. Each is closed; its complement is a finite union of the other closed
-components, so each is also open. For each component C, the inverse image of U is either empty
-or a dense open. In the empty case extension by zero is the zero sheaf, which satisfies
-all eight assertions: its cohomology groups are zero and every comparison is the unique
-map between zero groups. Otherwise apply H to the smooth curve C. The constant coefficient
-sheaf is constructible and killed by r. Its pullback to the dense open is canonically the
-constant coefficient sheaf there. Dense-open prime-torsion localization then gives the
-assertions for its extension by zero. This includes zero-dimensional components: a nonempty
-open in such a component is the whole component, so localization is the identity.
-Push each component's sheaf along the finite open-and-closed component inclusion. Finite
-pushforward preserves the assertions. To use its abelian-sheaf formulation, forget the
-R-module structure on both sheaves. The underlying abelian sheaf of the R-module direct
-image is canonically the abelian direct image: both have the same sections and restriction
-maps. This is a comparison after forgetting coefficients, not an equivalence between
-R-modules and abelian groups. The definitions of all eight assertions use this underlying
-abelian sheaf. The comparison respects inverse image, cohomology pullback and restriction;
-constructibility and torsion conditions agree here because R is the finite prime field.
-Affineness and properness of X imply the corresponding conditions on every component.
-Their finite direct sum is the extension by zero on X, as checked on the disjoint component
-cover. Assemble the summands using split short exact sequences and curve devissage.
-The component projections preserve primary and invertible torsion conditions, and every
-comparison map is the direct sum of the component maps. Thus the conditional hypotheses
-and the comparison maps are precisely those in the eight assertions. The empty scheme is
-the empty direct sum, hence gives the zero case. -/
+Proof: Put V = image(j) and E = X minus closure(V). These are disjoint opens, and
+V union E is dense, by the dense coborder lemma. The constant finite-coefficient sheaf
+is constructible and annihilated by r. Apply H to X and dense-open prime-torsion
+localization to V union E. The disjoint-open comparison then gives the assertions
+for V_! of the restriction of the constant sheaf. Pullback preserves constant sheaves.
+Identify U with V by the canonical open-immersion image isomorphism. Composition of
+extension by zero, and its identification with inverse pullback for an isomorphism,
+identify this sheaf with j_! of the constant sheaf on U. Transport all eight assertions
+along that isomorphism. Smoothness supplies reducedness; no component decomposition
+is needed. Empty opens and empty schemes are covered by the same two-open argument. -/
 theorem smoothConstantLowerShriekAssertions_of_constant
     {k : Type u} [Field k] [IsAlgClosed k] (r : ℕ) [Fact r.Prime]
     (H : ∀ {C : Scheme.{u}} (g : C ⟶ Spec (.of k)) [IsCurve g] [Smooth g],
@@ -68,6 +53,77 @@ theorem smoothConstantLowerShriekAssertions_of_constant
     IsCurve.Assertions (ULift.{u + 1} (ZMod r)) f
       ((Etale.openImmersionLowerShriek
         (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj
-        (Etale.constantModSheaf (ULift.{u + 1} (ZMod r)) U r)) := by sorry
+        (Etale.constantModSheaf (ULift.{u + 1} (ZMod r)) U r)) := by
+  classical
+  let R := ULift.{u + 1} (ZMod r)
+  let A := ModuleCat.{u + 1} R
+  let N := ModuleCat.of R (R ⧸ (Ideal.span {(r : R)} : Ideal R))
+  let F := Etale.constantModSheaf R X r
+  have : IsRegular X := IsRegular.of_smooth f
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsReduced X := isReduced_of_isReduced_stalk X
+  have : Scheme.IsFiniteLocallyConstantSheaf F := by
+    dsimp [F, Etale.constantModSheaf]
+    infer_instance
+  have : Scheme.IsConstructibleSheaf F :=
+    ⟨Scheme.Stratification.trivial X, fun _ ↦
+      Scheme.IsFiniteLocallyConstantSheaf.upperStar _ _⟩
+  have hF : r • 𝟙 F = 0 := by
+    dsimp [F, Etale.constantModSheaf]
+    rw [← (constantSheaf _ _).map_id, ← Functor.map_nsmul,
+      ← (constantSheaf _ _).map_zero]
+    congr 1
+    ext
+    simp [← Nat.cast_smul_eq_nsmul R]
+  let V : X.Opens := j.opensRange
+  let E : X.Opens := ⟨(closure (V : Set X))ᶜ, isClosed_closure.isOpen_compl⟩
+  let O : Fin 2 → X.Opens := ![V, E]
+  have hdisj : Pairwise (fun a b ↦ Disjoint (O a : Set X) (O b)) := by
+    have hd : Disjoint (V : Set X) (E : Set X) :=
+      Set.disjoint_left.mpr (fun _ hx hxc ↦ hxc (subset_closure hx))
+    intro a b hab
+    fin_cases a <;> fin_cases b <;> simp_all [O, hd.symm]
+  have hdense : Dense ((⨆ a, O a : X.Opens) : Set X) := by
+    have heq : ((⨆ a, O a : X.Opens) : Set X) =
+        (V : Set X) ∪ (closure (V : Set X))ᶜ := by
+      ext x
+      simp [O, E, Fin.exists_fin_two]
+    rw [heq, ← coborder_eq_union_closure_compl]
+    exact dense_coborder
+  have hsum := (assertions_iff_dense_open_prime R f r F hF (⨆ a, O a) hdense).mp (H f)
+  have hV := ((assertions_iff_disjoint_open_prime R f r F hF 2 O hdisj).mp hsum) 0
+  change Assertions R f
+    ((Etale.openImmersionLowerShriek A V.ι).obj ((Etale.upperStar A V.ι).obj F)) at hV
+  let e : U ≅ V.toScheme := IsOpenImmersion.isoOfRangeEq j V.ι
+    (by simp [V, Scheme.Opens.range_ι])
+  have he : e.inv ≫ j = V.ι := IsOpenImmersion.isoOfRangeEq_inv_fac _ _ _
+  let ec : ((Etale.upperStar A V.ι).obj F) ≅ Etale.constantModSheaf R V.toScheme r :=
+    (Scheme.upperStarConstantSheafIso A V.ι).app N
+  let ei : ((Etale.openImmersionLowerShriek A V.ι).obj ((Etale.upperStar A V.ι).obj F)) ≅
+      ((Etale.openImmersionLowerShriek A j).obj (Etale.constantModSheaf R U r)) :=
+    (Etale.openImmersionLowerShriek A V.ι).mapIso ec ≪≫
+      eqToIso (by simp only [he]) ≪≫
+      (Etale.openImmersionLowerShriekComp A e.inv j).app
+        (Etale.constantModSheaf R V.toScheme r) ≪≫
+      (Etale.openImmersionLowerShriek A j).mapIso
+        ((Etale.upperStarIsoOpenImmersionLowerShriekInv A e).symm.app
+          (Etale.constantModSheaf R V.toScheme r)) ≪≫
+      (Etale.openImmersionLowerShriek A j).mapIso ((Scheme.upperStarConstantSheafIso A e.hom).app N)
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  have : Scheme.IsConstructibleSheaf ((Etale.upperStar A V.ι).obj F) :=
+    Scheme.IsConstructibleSheaf.upperStar _ _
+  have : TopologicalSpace.NoetherianSpace V :=
+    V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact V.ι :=
+    ⟨fun W _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have : Scheme.IsConstructibleSheaf
+      ((Etale.openImmersionLowerShriek A V.ι).obj ((Etale.upperStar A V.ι).obj F)) :=
+    Scheme.IsConstructibleSheaf.openImmersionLowerShriek V.ι V.closedComplement
+      (by rw [Scheme.Opens.range_closedComplement, Scheme.Opens.range_ι]) _
+  have : Scheme.IsConstructibleSheaf
+      ((Etale.openImmersionLowerShriek A j).obj (Etale.constantModSheaf R U r)) :=
+    Scheme.IsConstructibleSheaf.of_iso ei
+  exact assertions_of_underlying_abelian_iso f
+    ((sheafCompose _ (forget₂ A AddCommGrpCat.{u + 1})).mapIso ei) hV
 
 end AlgebraicGeometry.IsCurve
