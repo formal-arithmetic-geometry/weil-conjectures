@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-etale-abelian-direct-image-internal",
+ "kind": "statement",
+ "title": "The internal commutative-group identification commutes with abelian etale direct image",
+ "statement": "Let U,V be schemes [def-pc-scheme], f:U\\to V, S_T the category of sheaves of sets on the small etale site of T [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets], A_T the category of abelian sheaves [def-weil-pbc-abelian-etale-sheaves], and FaT:A_T\\to S_T the sectionwise forgetful functor. Let R:S_U\\to S_V and Ra:A_U\\to A_V be the set and abelian direct images by precomposition with etale base change [def-weil-pbc-direct-image]. Endow R with the canonical braided monoidal structure induced by its preservation of finite products, and let R^gr be its lift to internal commutative group objects [lem-weil-pbc-adjunction-lifts-abelian-group-objects]. There exist equivalences eV:A_V\\simeq CommGrp(S_V), eU:A_U\\simeq CommGrp(S_U), natural isomorphisms iV:eV\\,forget\\simeq FaV and iU:eU\\,forget\\simeq FaU, and a natural isomorphism beta:eU\\,R^gr\\simeq Ra\\,eV such that for every F in A_U, forget(beta_F) followed by iV_(Ra F) equals R(iU_F). No inverse-image functor or finite-limit hypothesis on it occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR, quadruple description; Proposition 00YV, proof of (2), the pushforward paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
+ ],
+ "proof": [
+  {
+   "text": "Apply the sectionwise abelian identification at each small etale site. Its strict inverse functors define equivalences eV and eU, and its underlying-functor identities give iV and iU. The equivalence constructor may adjust unit/counit data but leaves the functors and these comparisons unchanged.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The continuous base-change functor gives a set direct image R and abelian direct image Ra by precomposition. Products and terminal sheaves are sectionwise. The canonical product comparison of R is the pairing of the two section projections, and its terminal comparison is the unique map between singleton sheaves. Thus R.mapCommGrp has the sectionwise addition, zero and negation at the base-changed object.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an abelian sheaf F on U, take the underlying comparison R(iU_F) followed by iV_(Ra F) inverse. By the section operation formulas in the abelian identification, it preserves addition and zero. Its inverse is iV_(Ra F) followed by R(iU_F inverse), and preserves the same operations; negation compatibility follows from the group laws. Hence this is an isomorphism of internal commutative group objects.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of iU and iV and the precomposition formulas for Ra show that these isomorphisms are natural in F; faithfulness of the internal-group forgetful functor gives naturality upstairs. This constructs beta. Composing its underlying map with iV_(Ra F) cancels iV inverse and gives R(iU_F), which is the displayed compatibility equation.",
+   "uses": [
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-algebraic-structures-abelian-component",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR, quadruple description; Proposition 00YV, proof of (2), the pushforward paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between abelian sheaves and internal commutative group objects commutes with direct image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCommGrp|sheafCompose.*[Aa]ddCommGrp|[Aa]ddCommGrp.*sheafCompose",
+   "results": "Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; Mathlib/CategoryTheory/Monoidal/CommGrp_.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the equivalences compatible with the abelian direct image; mapCommGrp is the generic lift used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal commutative group objects in sheaves and abelian sheaves equivalence natural under direct image",
+   "results": "SheafOfModules.toSheafCompSheafToPresheafIso; CategoryTheory.sheafIsAbelian; SheafOfModules.instAbelian; CategoryTheory.sheafHom'Iso; instAbelianLightCondMod; CategoryTheory.Presheaf.coherentExtensiveEquivalence_functor_map_val; CategoryTheory.Equivalence.sheafCongrPreregular_functor_map_val_app; CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_map_val_app",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the equivalences compatible with the abelian direct image; mapCommGrp is the generic lift used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Abelian part of the algebraic inverse-image compatibility: identify the lifted right adjoint with the sectionwise direct image (step 3 of lem-weil-pbc-etale-inverse-image-abelian-lift-hom).",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAbelianDirectImageInternal",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAbelianDirectImageInternal.lean",
+  "declaration": "AlgebraicGeometry.etaleAbelianDirectImageInternal",
+  "statement": "theorem etaleAbelianDirectImageInternal (U V : Scheme.{u}) (f : U ⟶ V) :\n    let R : Sheaf U.smallEtaleTopology (Type (u + 1)) ⥤\n        Sheaf V.smallEtaleTopology (Type (u + 1)) :=\n      (MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous\n      (Type (u + 1)) (V.smallGrothendieckTopology @Etale)\n      (U.smallGrothendieckTopology @Etale)\n    letI : R.Braided := Functor.Braided.ofChosenFiniteProducts R\n    ∃ (eV : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n          CommGrp (Sheaf V.smallEtaleTopology (Type (u + 1))))\n      (eU : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n          CommGrp (Sheaf U.smallEtaleTopology (Type (u + 1))))\n      (iV : eV.functor ⋙ CommGrp.forget _ ≅\n        sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology)\n      (iU : eU.functor ⋙ CommGrp.forget _ ≅\n        sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology)\n      (β : eU.functor ⋙ R.mapCommGrp ≅\n        Etale.lowerStar AddCommGrpCat.{u + 1} f ⋙ eV.functor),\n      ∀ F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1},\n        (CommGrp.forget _).map (β.hom.app F) ≫\n            iV.hom.app ((Etale.lowerStar AddCommGrpCat.{u + 1} f).obj F) =\n          R.map (iU.hom.app F)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T085252-L-20077",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T085252-L-20077",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

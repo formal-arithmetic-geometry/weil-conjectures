@@ -17,50 +17,50 @@
  ],
  "proof": [
   {
-   "text": "The base-change functor is continuous. The recorded set inverse image is left adjoint to its sectionwise set direct image by Mathlib.sheafAdjunctionContinuous. The assumed finite-limit preservation implies finite-product preservation.",
+   "text": "Form the set inverse/direct-image adjunction a for continuous etale base change. The finite-limit hypothesis on its left functor gives the canonical finite-product braided structure; the right functor preserves products by precomposition. Apply Mathlib Adjunction.mapCommGrp to lift a to internal commutative group objects.",
    "uses": [
     "lem-weil-pbc-etale-base-change-continuous",
-    "def-weil-pbc-etale-sheaves"
+    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
    ],
    "elementary": false
   },
   {
-   "text": "Use the abelian clause of the sheaf/internal-object identification on the source and target sites; its section formulas identify the structure maps with the actual sectionwise operations. Apply the corresponding clause of the product-preserving lifted adjunction to the set adjunction.",
+   "text": "Obtain eV,eU,iV,iU and the right square beta with its underlying equation from etaleAbelianDirectImageInternal. Define Lt = eV.functor followed by L.mapCommGrp followed by eU.inverse. The counit isomorphism of eU gives q:eV.functor L.mapCommGrp iso Lt eU.functor. Restrict the lifted adjunction along the fully faithful eV and eU using q and beta, obtaining aLift:Lt adjoint Ra.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the lifted adjunction through the inverse sheaf/internal-object functors. Its right lift evaluates at base-changed objects and hence has exactly the sectionwise operations and restriction maps of the recorded direct image. The resulting right forgetful comparison is the identity; restrict the hom-set equations of the generic lift accordingly.",
-   "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "lem-weil-pbc-etale-abelian-direct-image-internal",
     "def-weil-pbc-direct-image"
    ],
    "elementary": false
   },
   {
-   "text": "Compare the transported left adjoint with Etale.upperStar, another left adjoint of the same abelian direct image, using the unique isomorphism compatible with the adjunctions. Composing its underlying comparison with that of the internal-object lift gives ea. The compatibility of adjunction bijections gives precisely the displayed hom-set equation.",
+   "text": "Compose the inverse underlying comparison iU with q inverse, the strict underlying comparison of mapCommGrp, and iV to obtain gamma:Lt FaU iso FaV L. For any t:Lt G to F, map the restricted adjunct by eV and then by CommGrp.forget. The map_preimage formula gives the original lifted adjunct followed by beta. Its underlying map is the set adjunct by the unit formula for Adjunction.mapCommGrp. Use the underlying equation for beta and naturality of iV to replace the right factor by R(iU_F). The naturality equations of the set homEquiv in both arguments, cancellation of L(iV_G) with L(iV_G inverse), and naturality of iU give FaV(aLift(t)) = a(gamma inverse followed by FaU(t)). Each equality is written and checked in Lean.",
+   "uses": [
+    "lem-weil-pbc-etale-abelian-direct-image-internal",
+    "lem-weil-pbc-adjunction-lifts-abelian-group-objects"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let aa be the recorded abelian inverse/direct-image adjunction. Choose e=aa.leftAdjointUniq aLift, and set ea=(e whiskered with FaU) followed by gamma. For t=e inverse followed by h, the unit_leftAdjointUniq_hom_app equation gives aLift(t)=aa(h). Substitute this in the preceding hom-set equation and expand the inverse of the composite iso to obtain exactly the claimed equation.",
    "uses": [
     "def-weil-pbc-inverse-image"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-base-change-continuous",
   "def-weil-pbc-etale-sheaves",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "lem-weil-pbc-adjunction-lifts-abelian-group-objects",
+  "lem-weil-pbc-etale-abelian-direct-image-internal",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Proposition 00YV and uniqueness of adjoints (Example 00X2)"
+  "place": "Proposition 00YV, abelian-group case; Example 00X2, uniqueness of adjoints. Implemented using Mathlib Adjunction.mapCommGrp and restrictFullyFaithful; the direct-image square is isolated as lem-weil-pbc-etale-abelian-direct-image-internal."
  },
  "mathlib_searches": [
   {
@@ -159,9 +159,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T060753-L-2914984",
+  "landing": "20261012T085252-L-20077",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
