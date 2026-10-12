@@ -1,0 +1,123 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedKoszulUnitSummand",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-pc-supported-open-unit-cone-properties",
+ "title": "The supported open-unit cone remains supported and quasi-coherent",
+ "statement": "Let X be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions], with chosen derived module categories for X and its over-sites [def-pc-derived-category]. Let T be closed, U quasi-compact open, L exact derived restriction to U, and adj:L left adjoint to any R. Let K be quasi-coherent with all cohomology stalks off T zero. In every distinguished triangle K --adj.unit_K to R(L(K)) --g to C --h to K[1], C is quasi-coherent, its cohomology stalks off T are zero, and L(C) is zero. This statement has no orthogonality, affine-cover, or perfectness assumption.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IR, first unit-cone paragraph; Tag 08D5; cohomology.tex Tag 08DF support/base-change argument"
+ },
+ "proof": [
+  {
+   "text": "Transport the canonical support triangle for U to the supplied over-site adjunction. The equivalence Modules.overEquiv transports exact restriction, and uniqueness of right adjoints transports units. The canonical triangle and the given triangle have isomorphic first two vertices with commuting first arrows. TR3 and the triangle morphism isomorphism criterion identify the two cones. The canonical cone is quasi-coherent and has zero restriction to U, hence so does C.",
+   "uses": [
+    "lem-sc-open-restriction-support-triangle",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let O=X minus T. Supported derived restriction gives K restricted to O zero. Open base change identifies restriction of R(L(K)) to O with the direct image from U intersect O of the restriction of K. That restriction is zero, so its right adjoint image is zero. Restricting the distinguished triangle to O now gives C restricted to O zero. Exact restriction commutes with homology and identifies its stalks with the original stalks at points of O, proving support on T.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-supported-derived-restriction-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-supported-derived-restriction-zero",
+  "lem-sc-open-restriction-support-triangle",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IR, first unit-cone paragraph; Tag 08D5; cohomology.tex Tag 08DF support/base-change argument"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-supported-koszul-unit-summand",
+   "place": "supported Koszul construction and unit-cone steps of the supported-summand argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "supported perfect Koszul detector and quasi-coherent supported open unit cone",
+   "date": "2026-10-13",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cone of derived open restriction unit quasi-coherent and supported; supported Koszul relative zero detection",
+   "date": "2026-10-13",
+   "results": "Generic affine/open restriction and derived category representatives; no exact match. Existing affine-only DerivedOpenUnitCone does not assert closed T support on general qcqs X.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "supported.*open.*unit.*cone|unit.*cone.*properties|relative.*koszul.*detector",
+   "date": "2026-10-13",
+   "results": "No Mathlib match. Repository affine detector and canonical support triangle found and used in proof plan; neither gives these complete interfaces.",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedOpenUnitConeProperties",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedOpenUnitConeProperties.lean",
+  "declaration": "AlgebraicGeometry.supported_open_unit_cone_properties",
+  "statement": "theorem supported_open_unit_cone_properties\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (T : Set X) (hT : IsClosed T) (U : X.Opens) (hU : IsCompact (U : Set X))\n    (R : DerivedCategory\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n      schemeDerivedCategory X)\n    (adj : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R)\n    (K : schemeDerivedQCohCategory X)\n    (hKT : (∀ (n : ℤ) (x : X), x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K.obj).val.presheaf x))))\n    (C : schemeDerivedCategory X)\n    (g : R.obj ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj K.obj) ⟶ C)\n    (h : C ⟶ K.obj⟦(1 : ℤ)⟧)\n    (htri : Pretriangulated.Triangle.mk (adj.unit.app K.obj) g h ∈ distTriang _) :\n    schemeDerivedQCohProperty X C ∧\n      (∀ (n : ℤ) (x : X), x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj C).val.presheaf x))) ∧\n      IsZero ((SheafOfModules.overFunctor.{u}\n        (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj C)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T165515-L-2934038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T165515-L-2934038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

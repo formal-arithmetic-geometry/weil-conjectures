@@ -8627,3 +8627,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/G3/Sheaf.AlgebraicGeometry.CohomologyPowersIdealImageBound (stage 3; reviewer PASS; first push; landing 20261012T165514-L-2933708 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/G3/Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded (stage 3; reviewer PASS; first push; landing 20261012T165514-L-2933829 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/H1/Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso (stage 3; reviewer PASS; first push; landing 20261012T165515-L-2933928 (interface); batch 20261012T165503; modules 2; new nodes 1)
+- 16:55 L: merged deliver/H3/Sheaf.AlgebraicGeometry.SupportedKoszulUnitSummand (stage 3; reviewer PASS; first push; landing 20261012T165515-L-2934038 (interface); batch 20261012T165503; modules 3; new nodes 2)
