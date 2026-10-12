@@ -12,30 +12,40 @@
  ],
  "proof": [
   {
-   "text": "A central simple algebra splits over a finite Galois extension. Its projective-linear descent cocycle lifts to matrices whose scalar defects give a continuous two-cocycle. Changes of lifts give coboundaries; tensor products multiply the scalar defects, and matrix amplification preserves the class. Thus this construction is well-defined on Brauer equivalence.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "When the scalar defect is a coboundary, adjust the lifts to a general-linear cocycle. Matrix Hilbert 90 trivializes that cocycle and descends a vector space V with algebra End_K(V). Thus the kernel consists of split algebras. Applying this to A tensor B^op proves injectivity.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "A continuous class is represented over a finite Galois extension L/K. The twisted algebra with L-basis u_g and relations u_g a=g(a)u_g and u_g u_h=c(g,h)u_gh is central simple and realizes the class (up to the chosen scalar-defect sign convention). Hence the map is surjective. Homogeneous and inhomogeneous continuous cochains are identified by their usual change of variables, giving the indicated bijection. Since G is compact Hausdorff, the compact-open exponential law identifies Mathlib iterated continuous maps with continuous maps on finite powers of G. TopModuleCat homology has underlying algebraic kernel modulo image, so forgetting its topology preserves the cocycle classes.",
+   "text": "Apply the proved upstream Algebra.IsCentral.exists_algEquiv_matrix_of_isSepClosed (recorded among lem-sc-c1-brauer-trivial declarations) to obtain a positive matrix splitting. Apply the matrix-lift theorem to obtain locally constant lifts and a homogeneous cycle. Its homology image x, with these concrete witnesses, satisfies HasBrauerScalarDefect. Faithfulness with A=B proves uniqueness of x. Choose that unique class for each A.",
    "uses": [
-    "def-sc-galois-units-cohomology"
+    "lem-sc-c1-brauer-trivial",
+    "lem-sc-brauer-scalar-defect-exists",
+    "lem-sc-brauer-scalar-defect-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Faithfulness in the reverse direction proves that the unique-class map respects IsBrauerEquivalent. Quotient.lift descends it to BrauerGroup. For injectivity, induct on both quotient representatives and apply the forward direction of faithfulness, followed by Quotient.sound.",
+   "uses": [
+    "lem-sc-brauer-scalar-defect-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each x, the crossed-product realization theorem supplies A realizing x. Faithfulness with A=A identifies the chosen class of A with x. The quotient class of A is therefore a preimage. Equiv.ofBijective gives the required equivalence. The choice of the class uses its proved uniqueness, not mere existence of an arbitrary witness.",
+   "uses": [
+    "lem-sc-brauer-scalar-defect-surjective",
+    "lem-sc-brauer-scalar-defect-faithful"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-galois-units-cohomology"
+  "lem-sc-brauer-scalar-defect-exists",
+  "lem-sc-brauer-scalar-defect-faithful",
+  "lem-sc-brauer-scalar-defect-surjective",
+  "lem-sc-c1-brauer-trivial"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Theorem 03R7, its scalar-defect construction following Lemma 03R6, and Section 0DVG"
+  "place": "The scalar-defect construction following Lemma 03R6, Theorem 03R7, and Section 0DVG"
  },
  "mathlib_searches": [
   {
@@ -111,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T042415-L-1819088",
+  "landing": "20261012T085341-L-40370",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

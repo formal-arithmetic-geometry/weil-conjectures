@@ -1,0 +1,105 @@
+{
+ "id": "lem-sc-brauer-scalar-defect-faithful",
+ "kind": "statement",
+ "title": "Scalar defects distinguish precisely Brauer classes",
+ "statement": "Let K be a field, A and B finite-dimensional central simple K-algebras, and x,y in its continuous degree-two units cohomology [def-sc-galois-units-cohomology]. Suppose R(A,x) and R(B,y) in the matrix scalar-defect relation [def-sc-brauer-scalar-defect]. Then x=y if and only if A and B are Brauer equivalent (their positive matrix amplifications are K-algebra isomorphic).",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "The scalar-defect construction following Lemma 03R6, Theorem 03R7, and Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "changing a splitting conjugates the projective descent datum; changing matrix lifts multiplies its scalar defect by a continuous coboundary. These changes therefore preserve its class. A matrix amplification uses the tensor product of the lifts with identity matrices, so preserves the same scalar defect. An isomorphism between matrix amplifications consequently proves the reverse implication. For the forward implication, equality of classes means their homogeneous cocycles differ by a boundary: the underlying module of TopModuleCat homology is the algebraic kernel modulo the image. In inhomogeneous coordinates this is a continuous scalar coboundary. Tensor the descent datum of the first algebra with that of the opposite of the second. Its defect is the ratio of their defects. Adjust its matrix lifts by the scalar one-cochain to make them a genuine general-linear cocycle. All the data descend to a finite Galois extension. Matrix Hilbert 90, or finite Galois descent of vector spaces, trivializes this cocycle. The tensor product algebra is thus an endomorphism algebra. The central-simple-algebra criterion that `A ⊗ Bᵒᵖ` is split exactly when A and B have isomorphic positive matrix amplifications gives `IsBrauerEquivalent A B`. The homogeneous/inhomogeneous conversions use evaluation at `(1,g,g*h)` and its Galois-equivariant inverse, so the classes here are exactly those in the stated relation.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "The scalar-defect construction following Lemma 03R6, Theorem 03R7, and Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous second Galois cohomology Brauer scalar defect",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "central simple algebra matrix splitting Galois descent scalar two cocycle; equal scalar defect cohomology classes if and only if Brauer equivalent; continuous Galois two cocycle realized by a central simple crossed product algebra",
+   "results": "IsBrauerEquivalent, CSA, BrauerGroup, Hilbert90 degree one only. No scalar-defect construction, faithfulness, or crossed-product realization.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "BrauerGroup|scalarDefect|crossedProduct|HasBrauerScalarDefect in Mathlib, WeilConjectures and Sheaf; blueprint_refs scalar defect, 03R7, crossed product, Brauer equivalence",
+   "results": "Only the parent comparison. Upstream ReducedNorm proves separable-closure matrix splitting and pointwise inner conjugacy, but not locally constant lifts or continuous scalar-defect classes. Blueprint searches found no corresponding node.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerGaloisComparison",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: comparison of field Brauer classes with continuous Galois units classes; Scalar defects distinguish precisely Brauer classes",
+   "via": [
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.BrauerScalarDefectFaithful",
+  "file": "lean/Sheaf/FieldTheory/BrauerScalarDefectFaithful.lean",
+  "declaration": "Field.brauerScalarDefect_eq_iff",
+  "statement": "theorem brauerScalarDefect_eq_iff (K : Type u) [Field K] (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K) (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y) : x = y ↔ IsBrauerEquivalent A B",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085341-L-40370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085341-L-40370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

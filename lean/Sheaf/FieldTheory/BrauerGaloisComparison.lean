@@ -7,6 +7,10 @@ module
 
 public import Mathlib.Algebra.BrauerGroup.Defs
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
+import WeilConjectures.Algebra.Central.ReducedNorm
+import Sheaf.FieldTheory.BrauerScalarDefectExists
+import Sheaf.FieldTheory.BrauerScalarDefectFaithful
+import Sheaf.FieldTheory.BrauerScalarDefectSurjective
 
 /-!
 # Algebraic Brauer classes and continuous Galois cohomology
@@ -49,6 +53,42 @@ homogeneous and inhomogeneous cochains). All fields, including imperfect fields,
 separable-closure units, not algebraic-closure units.
 (blueprint: lem-sc-brauer-galois-units-comparison). -/
 theorem nonempty_equiv_brauerGroup_galoisUnitsH2 (K : Type u) [Field K] :
-    Nonempty (BrauerGroup.{u, u} K ≃ GaloisUnitsH2 K) := by sorry
+    Nonempty (BrauerGroup.{u, u} K ≃ GaloisUnitsH2 K) := by
+  classical
+  have uniqueClass (A : CSA.{u, u} K) :
+      ∃! x : GaloisUnitsH2 K, HasBrauerScalarDefect K A x := by
+    obtain ⟨n, hn, ⟨e⟩⟩ :=
+      Algebra.IsCentral.exists_algEquiv_matrix_of_isSepClosed K A (SeparableClosure K)
+    obtain ⟨b, hb, z, hdesc, hdefect⟩ :=
+      exists_brauerScalarDefect_lifts K A n hn.ne e
+    let x : GaloisUnitsH2 K := (ContinuousCohomology.π (galoisUnitsTopRep K) 2).hom z
+    have hx : HasBrauerScalarDefect K A x :=
+      ⟨n, hn.ne, e, b, hb, z, rfl, hdesc, hdefect⟩
+    refine ⟨x, hx, ?_⟩
+    intro y hy
+    exact (brauerScalarDefect_eq_iff K A A y x hy hx).mpr
+      (IsBrauerEquivalent.refl A)
+  let f : CSA.{u, u} K → GaloisUnitsH2 K :=
+    fun A ↦ Classical.choose (uniqueClass A)
+  have hf (A : CSA.{u, u} K) : HasBrauerScalarDefect K A (f A) :=
+    (Classical.choose_spec (uniqueClass A)).1
+  have respects (A B : CSA.{u, u} K) (h : IsBrauerEquivalent A B) : f A = f B :=
+    (brauerScalarDefect_eq_iff K A B (f A) (f B) (hf A) (hf B)).mpr h
+  let F : BrauerGroup.{u, u} K → GaloisUnitsH2 K :=
+    Quotient.lift f respects
+  refine ⟨Equiv.ofBijective F ⟨?_, ?_⟩⟩
+  · intro a b
+    induction a using Quotient.inductionOn with
+    | h A =>
+      induction b using Quotient.inductionOn with
+      | h B =>
+        intro h
+        apply Quotient.sound
+        exact (brauerScalarDefect_eq_iff K A B (f A) (f B) (hf A) (hf B)).mp h
+  · intro x
+    obtain ⟨A, hx⟩ := exists_csa_brauerScalarDefect K x
+    refine ⟨Quotient.mk _ A, ?_⟩
+    exact (brauerScalarDefect_eq_iff K A A (f A) x (hf A) hx).mpr
+      (IsBrauerEquivalent.refl A)
 
 end Field

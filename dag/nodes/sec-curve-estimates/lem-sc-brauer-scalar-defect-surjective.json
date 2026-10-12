@@ -1,0 +1,105 @@
+{
+ "id": "lem-sc-brauer-scalar-defect-surjective",
+ "kind": "statement",
+ "title": "Crossed products realize every continuous units class",
+ "statement": "For every field K and every x in its continuous degree-two separable-closure units cohomology [def-sc-galois-units-cohomology], there exists a finite-dimensional central simple K-algebra A with R(A,x), where R is the matrix scalar-defect relation [def-sc-brauer-scalar-defect].",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "The scalar-defect construction following Lemma 03R6, Theorem 03R7, and Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "the map from cycles to homology is surjective on underlying modules, since TopModuleCat homology is the algebraic kernel modulo image with quotient topology. Choose a homogeneous cycle representing `x`. Uncurry its iterated continuous maps, using compact Hausdorffness of the Galois group, and evaluate at `(1,g,g*h)` to obtain a continuous multiplicative two-cocycle `c`. Its values have finite image in the discrete units. Compactness and local constancy give an open normal subgroup on whose cosets `c` is constant; shrink it also to fix all values. Its fixed field L is finite Galois over K and `c` is inflated from a cocycle on Gal(L/K) with values in Lˣ. Normalize `c` by a coboundary. Form the crossed product with L-basis `u_g`, multiplication `u_g a = g(a) u_g` and `u_g u_h = c(g,h) u_(g*h)`. The cocycle identity makes this associative and normalization gives its unit. Commuting with L forces a central element into L, and commuting with all `u_g` forces it into K. The usual minimal-support argument proves simplicity, and its K-dimension is `[L:K]^2`. The crossed product splits over L. In its regular splitting representation the projective descent matrices have scalar defect `c` (choose the opposite algebra if the splitting convention gives the inverse class). Inflate those matrices to the absolute Galois group; they are locally constant and satisfy the two equations in `HasBrauerScalarDefect`. Their homogeneous cycle has class `x`, as normalization only changed a coboundary. This supplies the required central simple algebra and realization.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "The scalar-defect construction following Lemma 03R6, Theorem 03R7, and Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous second Galois cohomology Brauer scalar defect",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "central simple algebra matrix splitting Galois descent scalar two cocycle; equal scalar defect cohomology classes if and only if Brauer equivalent; continuous Galois two cocycle realized by a central simple crossed product algebra",
+   "results": "IsBrauerEquivalent, CSA, BrauerGroup, Hilbert90 degree one only. No scalar-defect construction, faithfulness, or crossed-product realization.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "BrauerGroup|scalarDefect|crossedProduct|HasBrauerScalarDefect in Mathlib, WeilConjectures and Sheaf; blueprint_refs scalar defect, 03R7, crossed product, Brauer equivalence",
+   "results": "Only the parent comparison. Upstream ReducedNorm proves separable-closure matrix splitting and pointwise inner conjugacy, but not locally constant lifts or continuous scalar-defect classes. Blueprint searches found no corresponding node.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerGaloisComparison",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: comparison of field Brauer classes with continuous Galois units classes; Crossed products realize every continuous units class",
+   "via": [
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.BrauerScalarDefectSurjective",
+  "file": "lean/Sheaf/FieldTheory/BrauerScalarDefectSurjective.lean",
+  "declaration": "Field.exists_csa_brauerScalarDefect",
+  "statement": "theorem exists_csa_brauerScalarDefect (K : Type u) [Field K] (x : GaloisUnitsH2 K) : ∃ A : CSA.{u, u} K, HasBrauerScalarDefect K A x",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085341-L-40370",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T085341-L-40370",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
