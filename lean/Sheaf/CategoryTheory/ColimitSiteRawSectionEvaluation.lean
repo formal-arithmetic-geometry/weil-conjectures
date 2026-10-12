@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+import Sheaf.CategoryTheory.ColimitSiteRawSectionPresentation
 
 /-! # ColimitSiteRawSectionEvaluation
 
@@ -113,6 +114,17 @@ theorem colimit_site_raw_section_evaluation
         Arrow.mk (R.ι.app t ≫ q.hom ≫
           (colimit.desc B (Cocone.mk T γ)).app
             (op ((V.ι.app i).toFunctor.obj U))) =
-        Arrow.mk ((E t).hom ≫ (a t).app (op ((F.map t.hom).toFunctor.obj U))) := by sorry
+        Arrow.mk ((E t).hom ≫ (a t).app (op ((F.map t.hom).toFunctor.obj U))) := by
+  obtain ⟨R, q, hR, hq⟩ := raw_section_presentation
+    J F P V hobjects harrows Q i G θ hθ B β hβ hβmap U D E hm
+  refine ⟨R, q, hR, ?_⟩
+  intro t
+  obtain ⟨e, he⟩ := hq t
+  rw [← Category.assoc, he]
+  have hn := (colimit.desc B (Cocone.mk T γ)).naturality (eqToHom (congrArg op e))
+  simp only [eqToHom_map] at hn
+  rw [Category.assoc, Category.assoc, Category.assoc, hn]
+  simp only [← Category.assoc, colimit.ι_desc_app]
+  rw [Arrow.arrow_mk_comp_eqToHom, Category.assoc, ha]
 
 end CategoryTheory

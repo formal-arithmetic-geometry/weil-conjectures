@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-colimit-site-raw-section-presentation",
+ "kind": "statement",
+ "title": "Canonical raw presheaf colimit presentation at a represented object",
+ "statement": "Let J, F, P, V, Q, i, G, theta, B, beta, U, D and E satisfy the category, continuity, object/arrow colimit, Kan-extension, unit and transition hypotheses of the raw-section setup [def-weil-pbc-category-colimit, def-weil-pbc-sites-and-cohomology, def-weil-pbc-arrows-functor]. Thus theta preserves the pullback units, beta exhibits each B_t as the raw left Kan extension of A_t, beta is compatible with B transitions, and E identifies D transitions with theta at transported U. Set Y=V_i(U) and Y_t=V_t(F(t.hom)(U)). There exist a colimit cocone R of D and an isomorphism q:R.pt -> (colimit B)(Y) such that for every t there is an equality e:Y_t=Y and R.ι_t q = E_t beta_t(F(t.hom)(U)) (colimit.ι B t)(Y_t) eqToHom((colimit B)(e)). In particular q is compatible with the canonical generator maps, not an arbitrary isomorphism. No presheaf T, map gamma or maps a are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the cocone object equalities to form canonical maps D_t -> (colimit B)(V_i U). The beta and E transition equations make these maps a cocone, inducing mu from colimit D.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-arrows-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+   }
+  },
+  {
+   "text": "Present B_t(V_i U) by the pointwise Kan formula. Lift each generator arrow and its endpoints to a common later stage using jointly surjective filtered object/arrow colimits and eventual equality. Transport its section by theta, restrict along the lifted arrow and use E inverse to obtain a colimit D class. Eventual equality of lifts, naturality, hbeta_map and hm respect the finite Kan and outer-colimit relations, giving psi.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-arrows-functor",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+   }
+  },
+  {
+   "text": "Check psi mu on a D generator using the identity lift; check mu psi on a Kan generator using naturality and the beta transition equation. Joint surjectivity extends the inverse equations to all elements. Use the chosen colimit cocone as R and the resulting isomorphism mu as q; its defining coprojection equation gives the compatibility formula.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 section construction; agent-expanded raw Kan presentation and finite-refinement verification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered diagram of categories left Kan extensions evaluation colimit sections canonical comparison",
+   "results": "CategoryTheory.lanEvaluationIsoColim; CategoryTheory.Functor.leftKanExtensionObjIsoColimit; CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_hom; CategoryTheory.Functor.pointwiseLeftKanExtensionUnit_app; CategoryTheory.Functor.pointwiseLeftKanExtensionIsPointwiseLeftKanExtension; CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtension_map_leftKanExtensionObjIsoColimit_hom; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.ι_isoColimit_hom; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.isoColimit",
+   "date": "2026-10-13",
+   "verdict": "Related Kan and colimit tools found; no theorem identifies this varying-category section presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftKanExtension",
+   "results": "CategoryTheory.Functor.isLeftKanExtensionId; CategoryTheory.Functor.instIsLeftKanExtensionLeftKanExtensionLeftKanExtensionUnit; CategoryTheory.Functor.IsLeftKanExtension; CategoryTheory.Functor.HasLeftKanExtension.mk; CategoryTheory.Functor.coconeOfIsLeftKanExtension; CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence; CategoryTheory.Functor.isLeftKanExtensionAlongEquivalence'; CategoryTheory.Functor.colimitIsoOfIsLeftKanExtension",
+   "date": "2026-10-13",
+   "verdict": "Related Kan and colimit tools found; no theorem identifies this varying-category section presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftKanExtensionObjIsoColimit|colimit.ι_desc_app|raw_section_presentation",
+   "results": "Mathlib/Topology/Sheaves/LocalPredicate.lean; Mathlib/Topology/Sheaves/LocalPredicate.lean; Mathlib/CategoryTheory/ConcreteCategory/Elementwise.lean; Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Limits/Types/Colimits.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean",
+   "date": "2026-10-13",
+   "verdict": "Related Kan and colimit tools found; no theorem identifies this varying-category section presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical comparison between filtered colimit of stage sections and evaluation of stage presheaf left Kan extensions on a filtered colimit category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawSectionEvaluation",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-raw-section-evaluation",
+   "place": "intermediate decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteRawSectionPresentation",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteRawSectionPresentation.lean",
+  "declaration": "CategoryTheory.raw_section_presentation",
+  "statement": "theorem raw_section_presentation\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck (Type u))\n    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n                        (sheafPullback (F.map t.hom).toFunctor (Type u)\n                          (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                        ((F.map b.right).toFunctor.sheafPushforwardContinuous (Type u)\n                          (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj\n                          ((sheafPullback (F.map t'.hom).toFunctor (Type u)\n                            (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))\n    (hθ : ∀ (t t' : Under i) (b : t ⟶ t'),\n      (∀ X : F.obj i,\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t.right).toGrothendieck).unit.app\n                                G).hom.app (op X) ≫\n                              (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app\n                                G).hom.app (op X))))\n    (B : Under i ⥤ (V.ptᵒᵖ ⥤ Type u))\n    (β : ∀ t : Under i,\n      ((sheafPullback (F.map t.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⟶\n        (V.ι.app t.right).toFunctor.op ⋙ B.obj t)\n    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))\n    (hβmap : ∀ (t t' : Under i) (b : t ⟶ t') (X : F.obj t.right),\n      Arrow.mk ((β t).app (op X) ≫\n        (B.map b).app (op ((V.ι.app t.right).toFunctor.obj X))) =\n      Arrow.mk ((θ t t' b).hom.app (op X) ≫\n        (β t').app (op ((F.map b.right).toFunctor.obj X))))\n    (U : F.obj i)\n    (D : Under i ⥤ Type u)\n    (E : ∀ t : Under i, D.obj t ≅ ((sheafPullback (F.map t.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj\n          (op ((F.map t.hom).toFunctor.obj U)))\n    (hm : ∀ (t t' : Under i) (b : t ⟶ t'),\n      Arrow.mk ((E t).hom ≫\n        (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj U))) =\n      Arrow.mk (D.map b ≫ (E t').hom)) :\n    ∃ (R : Cocone D)\n      (q : R.pt ≅ (colimit B).obj (op ((V.ι.app i).toFunctor.obj U))),\n      Nonempty (IsColimit R) ∧\n      ∀ t : Under i,\n        ∃ e : (V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U) =\n            (V.ι.app i).toFunctor.obj U,\n          R.ι.app t ≫ q.hom =\n            (E t).hom ≫ (β t).app (op ((F.map t.hom).toFunctor.obj U)) ≫\n              (colimit.ι B t).app\n                (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U))) ≫\n              eqToHom (congrArg (fun X => (colimit B).obj (op X)) e)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T220529-L-1396512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T220529-L-1396512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
