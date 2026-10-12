@@ -8,7 +8,6 @@ module
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Flat.Equalizer
 
 /-!
 # Vanishing of the tensor-map kernel modulo the target maximal ideal
@@ -22,6 +21,36 @@ Source: Stacks Project, Remark 07NS (part (4)) and Proposition 07NQ, kernel argu
 universe u v w z
 
 namespace RingHom
+
+/-- The closed-fibre calculation isolated as quotient vanishing.
+Source: Stacks Project, Remark 07NS (part (4)).
+(blueprint: lem-weil-pbc-finite-coefficient-tensor-kernel-reduction-quotient)
+
+Proof: flat tensor exactness injects the kernel modulo the maximal ideal. Residue
+surjectivity reduces tensors to `c ⊗ 1`; the kernel equality puts such a class in
+the maximal-ideal multiple of the kernel, so its quotient class is zero.
+-/
+theorem finite_coefficient_tensor_kernel_reduction_quotient
+    {A₀ : Type u} {A : Type v} {B : Type w} {C : Type z}
+    [CommRing A₀] [CommRing A] [CommRing B] [CommRing C]
+    [Algebra A₀ A] [Algebra A₀ C]
+    [IsLocalRing A₀] [IsLocalRing A] [IsLocalRing B] [IsLocalRing C]
+    (α : A₀ →+* A) (hα : algebraMap A₀ A = α) [IsLocalHom α]
+    (hres : Function.Bijective (IsLocalRing.ResidueField.map α))
+    (γ : A₀ →+* C) (hγ : algebraMap A₀ C = γ) [IsLocalHom γ]
+    (φ : A →+* B) [IsLocalHom φ]
+    (ψ : C →+* B) [IsLocalHom ψ] (hψγ : ψ.comp γ = φ.comp α)
+    (F : TensorProduct A₀ C A →+* B)
+    (hF : ∀ c a, F (TensorProduct.tmul A₀ c a) = ψ c * φ a)
+    (hflat : RingHom.Flat φ) (hsurj : Function.Surjective F)
+    (hker : RingHom.ker
+      ((Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A).map φ)).comp ψ) =
+      (IsLocalRing.maximalIdeal A₀).map γ) :
+    ∀ x : TensorProduct A₀ C A, x ∈ RingHom.ker F →
+    Submodule.mkQ (((IsLocalRing.maximalIdeal A).map
+        (Algebra.TensorProduct.includeRight (R := A₀) (A := C)).toRingHom) •
+        (RingHom.ker F : Submodule (TensorProduct A₀ C A) (TensorProduct A₀ C A))) x = 0 := by
+  sorry
 
 /-- Flatness and the correct closed-fibre kernel make K/m_A K vanish.
 Source: Stacks Project, Remark 07NS (part (4)); Proposition 07NQ, tensor exactness argument.
@@ -62,6 +91,10 @@ theorem finite_coefficient_tensor_kernel_reduction
     (RingHom.ker F : Submodule (TensorProduct A₀ C A) (TensorProduct A₀ C A)) ≤
       ((IsLocalRing.maximalIdeal A).map
         (Algebra.TensorProduct.includeRight (R := A₀) (A := C)).toRingHom) •
-        (RingHom.ker F : Submodule (TensorProduct A₀ C A) (TensorProduct A₀ C A)) := by sorry
+      (RingHom.ker F : Submodule (TensorProduct A₀ C A) (TensorProduct A₀ C A)) := by
+  intro x hx
+  have hq := finite_coefficient_tensor_kernel_reduction_quotient α hα hres γ hγ φ ψ hψγ F hF
+    hflat hsurj hker x hx
+  exact (Submodule.Quotient.mk_eq_zero _).mp hq
 
 end RingHom
