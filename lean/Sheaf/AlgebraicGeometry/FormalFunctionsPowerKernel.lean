@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.FormalModuleQuotientScalarZero
+import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
@@ -52,6 +54,24 @@ theorem formalFunctions_power_le_ker {A : Type v} [CommRing A]
     LinearMap.ker ((RingedSpace.moduleCohomology X.toRingedSpace p ⋙
       ModuleCat.restrictScalars
         ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map
-      (formalModuleQuotientπ J n F)).hom := by sorry
+      (formalModuleQuotientπ J n F)).hom := by
+  let C := RingedSpace.moduleCohomology X.toRingedSpace p
+  let r := ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom
+  let Q := formalModuleQuotient J n F
+  apply (Submodule.smul_le).2
+  intro a ha x _
+  apply LinearMap.mem_ker.mpr
+  let y := (C.map (formalModuleQuotientπ J n F)).hom x
+  have hz := moduleCohomology_scalar_endomorphism Q (0 : Q ⟶ Q) (r a)
+    (fun U t ↦ by
+      change 0 = _
+      exact (formalModuleQuotient_scalar_zero I f J hJ F n a ha U t).symm)
+    p y
+  have hz₀ := moduleCohomology_scalar_endomorphism Q (0 : Q ⟶ Q) 0
+    (fun U t ↦ by change 0 = _; simp) p y
+  have hy : r a • y = 0 := by
+    simpa only [zero_smul] using hz.symm.trans hz₀
+  rw [map_smul]
+  exact hy
 
 end AlgebraicGeometry
