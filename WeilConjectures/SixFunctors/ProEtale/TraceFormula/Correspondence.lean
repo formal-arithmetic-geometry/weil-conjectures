@@ -990,4 +990,35 @@ theorem integration_add_smul {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a]
 
 end GeometricOperations
 
+
+namespace Correspondence
+
+variable [DerivedBraiding A] (G : GeometricOperations A s) {X : Scheme.{u}} {aX : X ⟶ s}
+  [IsGeometric aX] {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+
+omit [DerivedBraiding A] [IsGeometric aX] in
+/-- Blueprint `thm-trf-fixed-point-base-change` (1): pullback along the ordinary leg in the
+fixed square, `Li_F^* Lc₂^* K ≃ Ld^* K` for `d = c₁ ∘ i_F = c₂ ∘ i_F`, the composition
+isomorphism of derived pullbacks along `c₂ ∘ i_F = d`. -/
+noncomputable def fixUpperStarIso (c : Correspondence aX aX K K) :
+    ((upperStar A c.fixι).leftDerivedFunctor).obj (((upperStar A c.snd).leftDerivedFunctor).obj K) ≅
+      ((upperStar A (c.fixι ≫ c.fst)).leftDerivedFunctor).obj K :=
+  leftDerivedUpperStarCompIso c.fixι c.fixι_snd K
+
+/-- Blueprint `thm-trf-fixed-point-base-change` (2): base change for the total correspondence in
+the Cartesian fixed square `Fix(c) = C ×_{X × X} X` (`isPullback_fixι_toProd`),
+`LΔ_X^* Rc_! M ≃ Rd_! Li_F^* M` on `Dᵇctf(C)`: the `!`-base change of the package for that
+square. -/
+noncomputable def fixLowerShriekBaseChange (c : Correspondence aX aX K K) [IsGeometric c.str]
+    [HasCompactification c.toProd] :
+    G.lowerShriekCtf c.toProd c.isGeometricHom_toProd ⋙
+        G.upperStarCtf (pullback.diagonal aX)
+          (.mk (aX := aX) (aY := pullback.fst aX aX ≫ aX) (by simp)) ≅
+      G.upperStarCtf c.fixι (.mk (aX := c.fixStr) (aY := c.str) rfl) ⋙
+        G.lowerShriekCtf (c.fixι ≫ c.fst)
+          (.mk (aX := c.fixStr) (aY := aX) (by simp [fixStr, c.fst_comp])) :=
+  G.baseChange c.isPullback_fixι_toProd _ _ _ _
+
+end Correspondence
+
 end AlgebraicGeometry.ProEtale
