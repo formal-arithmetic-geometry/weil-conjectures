@@ -23,23 +23,23 @@
  ],
  "proof": [
   {
-   "text": "In dimension zero, smooth finite-type connected C over algebraically closed k is Spec k. Choose the geometric point over k and apply zero-dimensional-etale-cohomology-rest in degree two to the underlying abelian sheaf. The Ext/derived comparison transfers this vanishing to Sheaf.H.",
+   "text": "Compare Ext cohomology in degree two with derived etale cohomology. Split on topologicalKrullDim C = 1. In that case form IsConnectedCurve f from the existing hypotheses and apply Artin-Schreier vanishing with q = 2. Otherwise the dimension bound gives topologicalKrullDim C ≤ 0 by Order.le_of_lt_succ. Use the existing algebraic-closure point at each x and apply zero_dimensional_etale_cohomology_rest to C.constantZMod p. Transport both cases through the Ext/derived comparison to obtain IsZero of H²(C,constantZMod p).",
    "uses": [
-    "zero-dimensional-etale-cohomology-rest",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In dimension one C is an IsConnectedCurve. Artin–Schreier gives zero degree-two derived cohomology of the constant ZMod p sheaf. The natural Ext/derived comparison gives the same vanishing for Sheaf.H.",
-   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
     "lem-sc-artin-schreier-dimension",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
+    "zero-dimensional-etale-cohomology-rest"
    ],
    "elementary": false
   },
   {
-   "text": "The additive group Λ/pΛ is an F_p-vector space. It is the filtered colimit, indexed in the coefficient universe, of its finite-dimensional subspaces. Each is a finite sum of ZMod p. Constant sheafification and coefficient forgetting preserve this colimit, and additive cohomology vanishes on the finite sums. The large filtered-colimit continuity theorem on the qcqs curve then gives zero degree-two cohomology for Λ/pΛ. This includes the zero quotient and infinite-dimensional quotients.",
+   "text": "Apply lem-sc-constant-mod-charp-finite-sum-colimit to present the underlying Λ/pΛ sheaf as a coefficient-universe filtered colimit of finite biproducts of constantZMod p. Sheaf.functorH is additive and preserves finite biproducts. Map each finite-stage isomorphism and compose with mapBiproduct. Every projection of the identity on the resulting cohomology biproduct is zero, since its target is H²(C,constantZMod p). biproduct.hom_ext and IsZero.iff_id_eq_zero prove every value of the mapped diagram zero.",
+   "uses": [
+    "lem-sc-constant-mod-charp-finite-sum-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "C is compact by QuasiCompact.compactSpace_of_compactSpace f and quasi-separated by quasiSeparatedSpace_of_quasiSeparated f. Apply sheafH_isColimit_large_filtered in degree two. The mapped diagram is zero, so IsColimit.isZero_pt makes its colimit point zero. AddCommGrpCat.subsingleton_of_isZero gives precisely the unchanged conclusion.",
    "uses": [
     "lem-pbc-u2-sheafH-large-filtered-colimit"
    ],
@@ -47,15 +47,16 @@
   }
  ],
  "proof_deps": [
-  "zero-dimensional-etale-cohomology-rest",
-  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-pbc-u2-sheafH-large-filtered-colimit",
   "lem-sc-artin-schreier-dimension",
-  "lem-pbc-u2-sheafH-large-filtered-colimit"
+  "lem-sc-constant-mod-charp-finite-sum-colimit",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "zero-dimensional-etale-cohomology-rest"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c3.md",
-  "place": "C3 proof, with explicit coefficient extension by finite-dimensional subspaces and dimension-zero case"
+  "place": "C3 degree-two case: original dimension split and Artin-Schreier route; coefficients extended via the proved basis/finite-subcoproduct presentation and large filtered-colimit continuity"
  },
  "mathlib_searches": [
   {
@@ -120,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T054002-L-2649820",
+  "landing": "20261012T070536-L-3470751",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
