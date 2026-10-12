@@ -260,6 +260,142 @@ theorem exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv
   exact ⟨a k, e₁.hom ≫ biproduct.π _ k ≫ (e k).some.hom ≫
     biproduct.π _ ⟨0, Nat.pos_of_ne_zero hk⟩, inferInstance⟩
 
+namespace LisseOnDenseOpen
+
+variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
+
+/-- **The geometric sheaf of the middle extension, by inversion.** If the transform of
+`(j_*M)[1]` is a sheaf `G` placed in degree `0`, and `FT_{ψ⁻¹}(G)` is a sheaf `H` placed in degree
+`-1`, then Fourier inversion `(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(FT_ψ((j_*M)[1])) ≅ H[1]` shows that `j_*M`
+and `H` have the same underlying geometric sheaf, the Tate twist being a constant twist. -/
+theorem nonempty_carrier_directImage_iso_of_iso (hψ : ψ ≠ 1)
+    {G H : WeilSheaf k₀ l (affineLine k₀)}
+    (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G)
+    (e₂ : (fourierTransform ψ⁻¹).obj (WeilSheaf.toComplex.obj G) ≅
+      WeilSheaf.toShiftedComplex.obj H) :
+    Nonempty (D.directImage.obj.carrier ≅ H.obj.carrier) := by
+  obtain ⟨eInv⟩ := nonempty_fourierTransform_comp_fourierTransform_inv_iso (l := l) ψ hψ
+  let Φ := (WeilSheaf.objectProperty k₀ l (affineLine k₀)).ι ⋙
+    Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l (affineLine k₀))
+  let c₀ : Φ.obj ((WeilComplex.homologySheaf (-1)).obj D.middleExtension) ≅
+      Φ.obj (((WeilComplex.homologySheaf (-1)).obj D.middleExtension).constantTwist
+        (WeilSheaf.cyclotomicUnit k₀ l ^ (-1 : ℤ))) := Iso.refl _
+  exact ⟨Φ.mapIso (WeilComplex.homologySheafShiftToComplexIso D.directImage 1 (-1)
+      (by simp)).symm ≪≫ c₀ ≪≫
+    Φ.mapIso (WeilComplex.homologySheafTateTwistIso (-1) (-1) D.middleExtension).symm ≪≫
+    Φ.mapIso ((WeilComplex.homologySheaf (-1)).mapIso
+      ((eInv.app _).symm ≪≫ (fourierTransform ψ⁻¹).mapIso e ≪≫ e₂)) ≪≫
+    Φ.mapIso (WeilSheaf.toShiftedComplexCompHomologySheafIso.app H)⟩
+
+/-- A quotient `ℒ_{ψ(a x)}` of the geometric sheaf of `j_*M` restricts to a quotient
+`ℒ_{ψ(a x)}|_U` of `M_k̄`, since `j^* j_* M = M`: a linear geometric constituent of `M`. -/
+theorem hasLinearArtinSchreierConstituent_of_epi {a : AlgebraicClosure k₀}
+    (p : D.directImage.obj.carrier ⟶
+      (affineLine.geometricSMul k₀ a)^*ᵃ[l].obj (artinSchreier ψ 1).obj.carrier) [Epi p] :
+    D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
+  let jg := Scheme.Hom.geometricFiberMap D.j (comp_over D.j (Spec (CommRingCat.of k₀)))
+  have := (ProEtale.adicUpperStarLowerStarAdjunction l jg).isLeftAdjoint
+  let ΦU := (WeilSheaf.objectProperty k₀ l D.U).ι ⋙
+    Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l D.U)
+  let cD : D.sheaf.obj.carrier ≅ (jg)^*ᵃ[l].obj D.directImage.obj.carrier :=
+    ΦU.mapIso (upperStarDirectImageIso D.j D.sheaf).symm
+  exact ⟨D.sheaf.obj.carrier, 𝟙 _, cD.hom ≫ (jg)^*ᵃ[l].map p, D.lisse,
+    inferInstance, epi_comp' inferInstance (Functor.map_epi _ _)⟩
+
+/-- If `j_*M` has zero underlying geometric sheaf, then `M = j^* j_* M` is zero. -/
+theorem isZero_of_isZero_carrier_directImage (h : IsZero D.directImage.obj.carrier) :
+    IsZero D.sheaf := by
+  let jg := Scheme.Hom.geometricFiberMap D.j (comp_over D.j (Spec (CommRingCat.of k₀)))
+  let ΦU := (WeilSheaf.objectProperty k₀ l D.U).ι ⋙
+    Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l D.U)
+  let cD : D.sheaf.obj.carrier ≅ (jg)^*ᵃ[l].obj D.directImage.obj.carrier :=
+    ΦU.mapIso (upperStarDirectImageIso D.j D.sheaf).symm
+  have := (ProEtale.adicUpperStarLowerStarAdjunction l jg).isLeftAdjoint
+  exact isZero_iff_isZero_carrier.2 (((jg)^*ᵃ[l].map_isZero h).of_iso cD)
+
+/-- The punctual case of `prop-a1-fourier-middle-extension`, Step 3, for an explicit
+presentation `FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E))[1]` of the inverse transform. -/
+theorem exists_hasLinearArtinSchreierConstituent_of_iso_of_isPullback (hψ : ψ ≠ 1)
+    (hD : ¬ IsZero D.sheaf) (G : WeilSheaf k₀ l (affineLine k₀))
+    (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G)
+    {Z X' : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+    [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] [X'.Over (Spec (CommRingCat.of k₀))]
+    (i : Z ⟶ affineLine k₀) [i.IsOver (Spec (CommRingCat.of k₀))]
+    (q : X' ⟶ Z) [q.IsOver (Spec (CommRingCat.of k₀))]
+    (i' : X' ⟶ affinePlane k₀) [i'.IsOver (Spec (CommRingCat.of k₀))]
+    (π : X' ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact π]
+    [QuasiSeparated π] [LocallyOfFiniteType π]
+    (hπ : i' ≫ affinePlane.snd k₀ = π) (hw : i' ≫ affinePlane.fst k₀ = q ≫ i)
+    (hP : IsPullback q π (Z ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
+    (E : WeilSheaf k₀ l Z)
+    (e₂ : (fourierTransform ψ⁻¹).obj (WeilSheaf.toComplex.obj G) ≅
+      WeilSheaf.toShiftedComplex.obj ((WeilSheaf.lowerStar π).obj
+        (((WeilSheaf.upperStar i').obj (fourierKernel ψ⁻¹)).tensorObj
+          ((WeilSheaf.upperStar q).obj E)
+          (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ⁻¹))))) :
+    ∃ a : AlgebraicClosure k₀, D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
+  obtain ⟨c⟩ := D.nonempty_carrier_directImage_iso_of_iso ψ hψ e e₂
+  obtain ⟨a, p, hp⟩ := exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv ψ i q i' π hπ hw
+    hP E fun h ↦ hD (D.isZero_of_isZero_carrier_directImage (h.of_iso c))
+  exact ⟨a, D.hasLinearArtinSchreierConstituent_of_epi ψ (c.hom ≫ p)⟩
+
+/-- **A punctual transform forces a linear geometric constituent** (blueprint
+`prop-a1-fourier-middle-extension`, Step 3). If the transform of the middle extension
+`(j_*M)[1]` is a sheaf `G` of finite support in degree `0`, then by Fourier inversion
+`(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^* i^* G))[1]`, so `j_*M` and
+`π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^* i^* G)` have the same underlying geometric sheaf. The latter surjects onto
+some `ℒ_{ψ(a x)}` if `M ≠ 0`
+(`AlgebraicGeometry.WeilSheaf.exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv`), and
+restricting along `j` with `j^* j_* M = M` makes `ℒ_{ψ(a x)}|_U` a quotient of `M_k̄`. -/
+theorem exists_hasLinearArtinSchreierConstituent_of_iso (hψ : ψ ≠ 1) (hD : ¬ IsZero D.sheaf)
+    (G : WeilSheaf k₀ l (affineLine k₀)) (hG : (WeilSheaf.support G).Finite)
+    (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G) :
+    ∃ a : AlgebraicClosure k₀, D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
+  -- the dense open `V` off the support of `G`, and its reduced closed complement `Z`
+  obtain ⟨V, hV, hVS⟩ := affineLine.exists_opens_dense_compl_finite _ hG
+  have hz : IsZero ((WeilSheaf.upperStar V.ι).obj G) := by
+    refine WeilSheaf.isZero_upperStar_of_forall_notMem_support V.ι G fun y hy ↦ ?_
+    refine hVS _ hy ?_
+    change V.ι.base y.1 ∈ (V : Set (affineLine k₀))
+    rw [Scheme.Opens.ι_apply]
+    exact y.1.2
+  have : IsDominant V.ι := ⟨by rwa [DenseRange, Scheme.Opens.range_ι]⟩
+  have : TopologicalSpace.NoetherianSpace (affineLine k₀) := by
+    have := LocallyOfFiniteType.isLocallyNoetherian (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+    have : IsNoetherian (affineLine k₀) := {}
+    infer_instance
+  have : TopologicalSpace.NoetherianSpace V :=
+    V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact V.ι := ⟨fun U _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  obtain ⟨Z, _, i, _, _, _, _, hi⟩ := exists_isReduced_isClosedImmersion_range_eq_compl V.ι
+  let X' := pullback i (affinePlane.fst k₀)
+  let q : X' ⟶ Z := pullback.fst i (affinePlane.fst k₀)
+  let i' : X' ⟶ affinePlane k₀ := pullback.snd i (affinePlane.fst k₀)
+  let : X'.Over (Spec (CommRingCat.of k₀)) := ⟨i' ≫ affinePlane k₀ ↘ Spec (CommRingCat.of k₀)⟩
+  have : i'.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : q.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    change q ≫ Z ↘ Spec (CommRingCat.of k₀) = i' ≫ affinePlane.fst k₀ ≫ _
+    rw [← comp_over i (Spec (CommRingCat.of k₀)), ← Category.assoc, pullback.condition,
+      Category.assoc]⟩
+  let π : X' ⟶ affineLine k₀ := i' ≫ affinePlane.snd k₀
+  have hP : IsPullback q π (Z ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    have := (IsPullback.of_hasPullback i (affinePlane.fst k₀)).paste_vert
+      (IsPullback.of_hasPullback (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
+    rwa [comp_over] at this
+  have : IsFinite π := MorphismProperty.of_isPullback hP inferInstance
+  have : LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (i' ≫ _))
+  -- `FT_{ψ⁻¹}(G)` is the sheaf `π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^* i^* G)` in degree `-1`
+  obtain ⟨e₂⟩ := nonempty_iso_fourierTransform_toComplex_of_isPullback ψ⁻¹ V.ι i hi q i' π rfl
+    (IsPullback.of_hasPullback i (affinePlane.fst k₀)) G hz
+  exact D.exists_hasLinearArtinSchreierConstituent_of_iso_of_isPullback ψ hψ hD G e i q i' π rfl
+    pullback.condition.symm hP _ e₂
+
+end LisseOnDenseOpen
+
 end WeilSheaf
 
 end AlgebraicGeometry
