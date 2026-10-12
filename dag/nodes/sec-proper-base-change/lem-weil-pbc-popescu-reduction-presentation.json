@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-popescu-reduction-presentation",
+ "kind": "statement",
+ "title": "Polynomial data of a standard smooth stage of the reduced map",
+ "statement": "Let $R$ be a commutative ring, $I$ an ideal, $\\Lambda$ an $R$-algebra whose reduction $\\Lambda/I\\Lambda$ is ind standard smooth [def-weil-pbc-filtered-colimit-smooth-algebras, def-weil-pbc-standard-smooth-algebra], and $A$ a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra] with a map $\\varphi:A\\to\\Lambda$. There are finite lists of variables $t_1,\\ldots,t_n$, polynomials $g_1,\\ldots,g_m\\in A[t]$ and elements $\\lambda_1,\\ldots,\\lambda_n\\in\\Lambda$ such that each $\\varphi(g_i)(\\lambda)$ belongs to $I\\Lambda$ and $(A/IA)[t]/(\\bar g_i)_i$ is standard smooth over $R/I$. Here $\\bar g_i$ denotes coefficientwise reduction. No algebra factoring $\\varphi$ over $R$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CK (lemma-lift-once), proof: choice of A/IA -> Bbar -> Lambda/ILambda, presentation over A/IA, and lifting gbar and variable images; original steps 1-4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "The base change of a finite presentation of A to R/I gives finite presentation of A/IA. The map phi induces an R/I-algebra map on the quotients.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Represent A/IA by a finite polynomial quotient in the diagram universe if its original carrier is larger. Apply finite-presentation factorization to the given filtered colimit to get A/IA -> C -> Lambda/ILambda with C standard smooth.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "C is finitely presented over R/I and A/IA is finite type over R/I. Hence C is finitely presented over A/IA. Choose a finite polynomial presentation C = (A/IA)[t]/(gbar).",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift finitely many coefficients of the equations and images of the variables along the surjective quotient maps. The two maps from A[t] to Lambda/ILambda agree on coefficients and variables, and the map through C kills each lifted equation. Thus their values lie in ILambda. The reduced polynomial quotient is C, so is standard smooth. Empty lists and I=top use the same surjective maps.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-finite-presentation-over-finite-type-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CK (lemma-lift-once), proof: choice of A/IA -> Bbar -> Lambda/ILambda, presentation over A/IA, and lifting gbar and variable images; original steps 1-4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite polynomial data of a standard smooth stage through which the reduced map factors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a finitely presented algebra into an ind standard smooth algebra factors through a standard smooth stage and a finite polynomial presentation",
+   "results": "8 hits: Algebra.IsStandardSmooth.out, Algebra.IsStandardSmooth.finitePresentation, Algebra.Smooth.finitePresentation, RingHom.smooth_def, Algebra.smooth_iff, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg",
+   "date": "2026-10-13",
+   "verdict": "no exact match: only individual smoothness or finite presentation results",
+   "digest": "0d5a8a28d58fa0da"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation.of_restrict_scalars_finitePresentation",
+   "results": "1 hits: Algebra.FinitePresentation.of_restrict_scalars_finitePresentation",
+   "date": "2026-10-13",
+   "verdict": "ingredient only: presentation over an intermediate finite-type algebra",
+   "digest": "5757f20ae5ccd4cd"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientEquivQuotientMvPolynomial|of_restrict_scalars_finitePresentation|exists_eq_comp_ι_app_of_isColimit",
+   "results": "12 hits: Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/Polynomial/Quotient.lean, Mathlib/RingTheory/Polynomial/Quotient.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no theorem packages this polynomial data",
+   "digest": "b15f1df8609f85a9"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuStandardReductionFactor",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-lift-once",
+   "place": "Tag 07CK (lemma-lift-once), proof: choice of A/IA -> Bbar -> Lambda/ILambda, presentation over A/IA, and lifting gbar and variable images; original steps 1-4",
+   "via": [
+    "lem-weil-pbc-popescu-standard-reduction-factor",
+    "lem-weil-pbc-popescu-lift-once-core",
+    "lem-weil-pbc-popescu-lift-once"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuReductionPresentation",
+  "file": "lean/Sheaf/RingTheory/PopescuReductionPresentation.lean",
+  "declaration": "Algebra.exists_popescu_reduction_presentation",
+  "statement": "theorem exists_popescu_reduction_presentation (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ] (I : Ideal R) (hΛ : ObjectProperty.ind.{max u v} (fun C : CommAlgCat.{max u v} (R ⧸ I) ↦ IsStandardSmooth (R ⧸ I) C) (CommAlgCat.of (R ⧸ I) (Λ ⧸ I.map (algebraMap R Λ)))) (A : Type w) [CommRing A] [Algebra R A] [FinitePresentation R A] (φ : A →ₐ[R] Λ) : ∃ (n m : ℕ) (g : Fin m → MvPolynomial (Fin n) A) (lifts : Fin n → Λ), (∀ i, MvPolynomial.eval₂ φ.toRingHom lifts (g i) ∈ I.map (algebraMap R Λ)) ∧ IsStandardSmooth (R ⧸ I) (MvPolynomial (Fin n) (A ⧸ I.map (algebraMap R A)) ⧸ Ideal.span (Set.range fun i ↦ MvPolynomial.map (Ideal.Quotient.mk (I.map (algebraMap R A))) (g i)))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T215154-L-1304038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T215154-L-1304038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

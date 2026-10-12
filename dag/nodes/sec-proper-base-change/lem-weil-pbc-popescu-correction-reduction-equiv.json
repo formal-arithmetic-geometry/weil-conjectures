@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-popescu-correction-reduction-equiv",
+ "kind": "statement",
+ "title": "Reduction isomorphism of the explicit corrected polynomial quotient",
+ "statement": "Let $R$ be a commutative ring, $A$ an $R$-algebra, and $I\\subset R$ an ideal. Fix natural numbers $n,m$, natural numbers $N_i$ for $i\\in\\mathrm{Fin}(m)$, polynomials $g_i\\in A[t_1,\\ldots,t_n]$, and elements $\\epsilon_{ij}\\in I$ for $j\\in\\mathrm{Fin}(N_i)$. Let $D$ be the finite set of pairs $(i,j)$, with any ULift relabelling. Form the explicit quotient $Q=A[t,\\delta_{ij}]/(g_i-\\sum_j\\epsilon_{ij}\\delta_{ij})_i$, where coefficients from $R$ are mapped into $A$. Put $B=(A/IA)[t]/(\\bar g_i)_i$, with coefficientwise reductions $\\bar g_i$. Then there exists an $R/I$-algebra isomorphism $Q/IQ\\cong B[\\delta_{ij}]$. Neither ind smoothness nor any evaluation map into another algebra is assumed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CK (lemma-lift-once), proof: equality A'/IA' = (A/IA)[t]/(gbar)[delta] = Bbar[delta]; original step 6"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The maps from A and the polynomial variables to B[delta] send each corrected relation modulo I to zero, since epsilon_ij lies in I and each reduced g_i vanishes in B. Descend successively through the corrected relation ideal and IQ to define the forward R/I-algebra map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Send A/IA and the old variables to their classes in Q/IQ. Each reduced g_i vanishes there, because the corrected relation holds and epsilon_ij vanishes modulo I. Descend to B and extend by sending each delta variable to its correction-variable class. This defines the reverse R/I-algebra map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The two composites fix every coefficient, every old variable, and every correction variable. Polynomial and quotient extensionality give the inverse identities. Check scalar compatibility on lifts from R. ULift is a bijective relabelling; empty lists, I=top, and zero rings require no exceptions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CK (lemma-lift-once), proof: equality A'/IA' = (A/IA)[t]/(gbar)[delta] = Bbar[delta]; original step 6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The corrected polynomial quotient has standard smooth reduction modulo I",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduction modulo I of A[t,delta] divided by g minus sum epsilon delta is the polynomial algebra in delta over the quotient of (A/IA)[t] by the reduced g",
+   "results": "8 hits: Polynomial.IsDistinguishedAt.map_eq_X_pow, Polynomial.IsDistinguishedAt.algEquivQuotient_apply, PowerSeries.IsWeierstrassDivisorAt.mod', PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self, AdjoinRoot.modByMonicHom, PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod, Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply, AdjoinRoot.Polynomial.quotQuotEquivComm",
+   "date": "2026-10-13",
+   "verdict": "no exact match: polynomial quotient results only",
+   "digest": "4754a7dd77a91d50"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.quotientEquivQuotientMvPolynomial",
+   "results": "1 hits: MvPolynomial.quotientEquivQuotientMvPolynomial",
+   "date": "2026-10-13",
+   "verdict": "ingredient only: quotient of coefficients, not the corrected relations",
+   "digest": "d9d3d9b5e3fdb1b8"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientEquivQuotientMvPolynomial|of_restrict_scalars_finitePresentation|exists_eq_comp_ι_app_of_isColimit",
+   "results": "12 hits: Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/Polynomial/Quotient.lean, Mathlib/RingTheory/Polynomial/Quotient.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no corrected quotient comparison",
+   "digest": "b15f1df8609f85a9"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuStandardReductionFactor",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-lift-once",
+   "place": "Tag 07CK (lemma-lift-once), proof: equality A'/IA' = (A/IA)[t]/(gbar)[delta] = Bbar[delta]; original step 6",
+   "via": [
+    "lem-weil-pbc-popescu-standard-reduction-factor",
+    "lem-weil-pbc-popescu-lift-once-core",
+    "lem-weil-pbc-popescu-lift-once"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuCorrectionReduction",
+  "file": "lean/Sheaf/RingTheory/PopescuCorrectionReduction.lean",
+  "declaration": "Algebra.nonempty_popescuCorrectionQuotient_reduction_equiv",
+  "statement": "theorem nonempty_popescuCorrectionQuotient_reduction_equiv : Nonempty ((PopescuCorrectionQuotient.{u, w, d} R A I n m N g ε ⧸ I.map (algebraMap R (PopescuCorrectionQuotient.{u, w, d} R A I n m N g ε))) ≃ₐ[R ⧸ I] MvPolynomial (ULift.{d} (Σ i : Fin m, Fin (N i))) (MvPolynomial (Fin n) (A ⧸ I.map (algebraMap R A)) ⧸ Ideal.span (Set.range fun i ↦ MvPolynomial.map (Ideal.Quotient.mk (I.map (algebraMap R A))) (g i))))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T215154-L-1304038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T215154-L-1304038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
