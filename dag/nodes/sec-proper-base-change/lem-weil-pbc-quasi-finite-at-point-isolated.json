@@ -31,87 +31,40 @@
  ],
  "proof": [
   {
-   "text": "*Affine charts.* Since $f$ is quasi-finite at $x$ [pqf-def-quasifinite] (Stacks 01TD (1)), there are an affine open $U\\subseteq X$ with $x\\in U$, an affine open $V\\subseteq S$ with $f(U)\\subseteq V$, and isomorphisms $U\\cong\\operatorname{Spec}A$, $V\\cong\\operatorname{Spec}R$ [def-weil-affine-spectrum] such that the restriction $f_U:U\\to V$ of $f$ is $\\operatorname{Spec}\\varphi$ for a ring map $\\varphi:R\\to A$ (every morphism of affine schemes is $\\operatorname{Spec}$ of a unique ring map) which is of finite type and quasi-finite at the prime $\\mathfrak q\\subset A$ corresponding to $x$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. Since $f(x)=s\\in V$, the point $s$ corresponds to the prime $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ of $R$ (the map $\\operatorname{Spec}\\varphi$ sends $\\mathfrak q$ to $\\varphi^{-1}(\\mathfrak q)$). Let $F=A\\otimes_R\\kappa(\\mathfrak p)$, $j:A\\to F$, $a\\mapsto a\\otimes1$, and $\\overline{\\mathfrak q}$ the prime of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$; by definition of quasi-finiteness at $\\mathfrak q$, $\\{\\overline{\\mathfrak q}\\}$ is open in $\\operatorname{Spec}F$.",
+   "text": "Unpack IsQuasiFiniteAtPoint [pqf-def-quasifinite] into affine opens U, V, the appLE algebra, its finite-type witness, and IsQuasiFiniteAtPrime [def-weil-pbc-ring-map-quasi-finite-at-prime] at q = hU.primeIdealOf x. Transport the open singleton through PrimeSpectrum.preimageHomeomorphFiber [lem-weil-pbc-fibre-ring-primes-bijection], obtaining an open singleton in the set-theoretic affine fibre. Mathlib Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber then gives Algebra.QuasiFiniteAt R q.asIdeal.",
    "uses": [
     "pqf-def-quasifinite",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-ring-map-quasi-finite-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Definition Tag 01TD (1), line 3538, and the proof of Lemma 01TH, line 3684 ('By assumption there exist opens U, V such that f(U) in V, x in U and x an isolated point of U_s')"
-   }
-  },
-  {
-   "text": "*The open piece $p^{-1}(U)$ of $X_s$ is the fibre of $f_U$.* Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ with projections $p:X_s\\to X$, $q:X_s\\to\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre], and $c:\\operatorname{Spec}\\kappa(s)\\to S$ the canonical morphism. The residue field of the open subscheme $V$ at $s$ is $\\kappa(s)$ and the canonical morphism $c_V:\\operatorname{Spec}\\kappa(s)\\to V$ satisfies $\\iota_V\\circ c_V=c$ for the inclusion $\\iota_V:V\\hookrightarrow S$ [lem-weil-pbc-residue-field-point-naturality] (the residue map of an open immersion is an isomorphism). Apply [lem-weil-pbc-open-fibre-product] to $f$, $c$ and the opens $U\\subseteq X$, $V\\subseteq S$, $W=\\operatorname{Spec}\\kappa(s)$ (so $f(U)\\subseteq V$, $c(W)=\\{s\\}\\subseteq V$): the canonical morphism $U\\times_V\\operatorname{Spec}\\kappa(s)\\to X_s$, where the fibre product is taken over $f_U$ and $c_V$, is an open immersion [def-weil-open-immersion] with image $p^{-1}(U)\\cap q^{-1}(W)=p^{-1}(U)$, compatibly with the projections: it carries the first projection $U\\times_V\\operatorname{Spec}\\kappa(s)\\to U$ to $p$ restricted to $p^{-1}(U)$.",
-   "uses": [
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-residue-field-point-naturality",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma 01TH, lines 3686-3688 ('Since U_s = U \\cap X_s \\subset X_s is also open'), written out"
-   }
-  },
-  {
-   "text": "*The fibre of $f_U$ is $\\operatorname{Spec}F$.* Let $\\pi:R\\to\\kappa(\\mathfrak p)$ be the canonical map. By [lem-weil-pbc-spec-residue-field-identification] there is an isomorphism $e:\\kappa(s)=\\kappa_{\\operatorname{Spec}R}(\\mathfrak p)\\xrightarrow{\\sim}\\kappa(\\mathfrak p)$ with $c_V=\\operatorname{Spec}(e^{-1}\\circ\\pi)=\\operatorname{Spec}(\\pi)\\circ\\operatorname{Spec}(e^{-1})$, $\\operatorname{Spec}(e^{-1})$ an isomorphism of schemes. Hence $U\\times_V\\operatorname{Spec}\\kappa(s)$, the fibre product of $f_U$ and $c_V$, is with the same first projection a fibre product of $\\operatorname{Spec}\\varphi$ and $\\operatorname{Spec}\\pi$ (compose its second projection with the isomorphism $\\operatorname{Spec}(e^{-1})$; the universal property [def-pc-fibre-product] is unchanged). By [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}A\\times_{\\operatorname{Spec}R}\\operatorname{Spec}\\kappa(\\mathfrak p)\\cong\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))=\\operatorname{Spec}F$ with first projection $\\operatorname{Spec}(j)$. By uniqueness of fibre products up to unique isomorphism over the factors [def-pc-fibre-product] and step 2, there is a homeomorphism $h:\\operatorname{Spec}F\\to p^{-1}(U)$ onto the open subset $p^{-1}(U)$ of $X_s$ with $p\\circ h=\\iota_U\\circ\\operatorname{Spec}(j)$ (under $U\\cong\\operatorname{Spec}A$), where $\\iota_U:U\\hookrightarrow X$.",
-   "uses": [
-    "lem-weil-pbc-spec-residue-field-identification",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma 01TH, lines 3684-3688 (U_s is the fibre of U -> V; cf. the third paragraph, lines 3707-3712, 'Spec(\\overline A) is an open subscheme of the fibre X_s'), written out"
-   }
-  },
-  {
-   "text": "*The point $\\xi$ and openness.* Let $\\xi\\in X_s$ be a point with $p(\\xi)=x$ (by [def-pc-scheme-fibre] $p$ is a homeomorphism of $X_s$ onto the subspace $f^{-1}(s)$ of $X$, which contains $x$; so $\\xi$ exists and is unique). Since $x\\in U$, $\\xi\\in p^{-1}(U)$, so $\\xi=h(\\mathfrak Q)$ for a prime $\\mathfrak Q$ of $F$ (step 3), and $\\operatorname{Spec}(j)(\\mathfrak Q)=j^{-1}(\\mathfrak Q)$ is the point of $\\operatorname{Spec}A$ that $p(\\xi)=x$ corresponds to, namely $\\mathfrak q$. By [lem-weil-pbc-fibre-ring-primes-bijection] (injectivity of $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$), $\\mathfrak Q=\\overline{\\mathfrak q}$. By step 1, $\\{\\overline{\\mathfrak q}\\}$ is open in $\\operatorname{Spec}F$; as $h$ is a homeomorphism onto $p^{-1}(U)$, $\\{\\xi\\}=h(\\{\\overline{\\mathfrak q}\\})$ is open in $p^{-1}(U)$, and since $p^{-1}(U)$ is open in $X_s$ ($p$ is continuous), $\\{\\xi\\}$ is open in $X_s$.",
-   "uses": [
-    "def-pc-scheme-fibre",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
     "lem-weil-pbc-fibre-ring-primes-bijection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, proof of Lemma 01TH, lines 3685-3690 ('Hence {x} \\subset U_s is an open subset ... {x} \\subset X_s is an open subset also')"
-   }
+   "elementary": false
   },
   {
-   "text": "*The equivalent form.* By [def-pc-scheme-fibre] the first projection $p$ is a homeomorphism of $X_s$ onto the subspace $f^{-1}(s)$ of $X$; it carries $\\xi$ to $x$, hence the open set $\\{\\xi\\}$ of $X_s$ to the open set $\\{x\\}$ of $f^{-1}(s)$, and conversely $p^{-1}(\\{x\\})=\\{\\xi\\}$. So $\\{\\xi\\}$ open in $X_s$ is equivalent to $\\{x\\}$ open in $f^{-1}(s)$.",
+   "text": "Use Mathlib IsAffineOpen.arrowStalkMapIso on U and V [def-weil-affine-spectrum] and RingHom.QuasiFinite.respectsIso.arrow_mk_iso_iff to reduce Scheme.Hom.QuasiFiniteAt f x to quasi-finiteness of Localization.localRingHom. Its composite with R -> R_p is R -> A_q, by Localization.localRingHom_to_map and the scalar tower. Algebra.QuasiFiniteAt R q supplies quasi-finiteness of this composite; RingHom.QuasiFinite.of_comp supplies quasi-finiteness of the local ring map.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber to obtain openness of {f.asFiber x}. The locally-of-finite-type hypothesis is exactly the hypothesis of this Mathlib theorem. Transport this open singleton by f.fiberHomeo (f x) [def-pc-scheme-fibre]; asFiber is its inverse applied to <x,rfl>, so its image is the required singleton in the set-theoretic fibre.",
    "uses": [
     "def-pc-scheme-fibre"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01TH (2), line 3672 ('The point x is isolated in X_s', the point of X_s over x identified with x)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "pqf-def-quasifinite",
-  "def-weil-affine-spectrum",
   "def-weil-pbc-ring-map-quasi-finite-at-prime",
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-residue-field-point-naturality",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-spec-residue-field-identification",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-fibre-ring-primes-bijection"
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "N3 stage 3",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, first paragraph of the proof ((1) implies (2)), lines 3684-3690; the identification of U_s with Spec(A tensor_R kappa(p)) and with the open p^{-1}(U) of X_s, which Stacks uses tacitly, written out in steps 2-4"
+  "place": "Lemma 01TH (1) implies (2), implemented through Mathlib ring and scheme quasi-finiteness characterizations; Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite and Mathlib.RingTheory.ZariskisMainTheorem. The affine/stalk bridge is proved in this delivery."
  },
  "mathlib_searches": [
   {
@@ -195,5 +148,15 @@
   "group": "F1",
   "result": "fix",
   "note": "X S f, LocallyOfFiniteType f, x, IsQuasiFiniteAtPoint f x (recorded pqf-def-quasifinite); conclusion restated with f.asFiber x (the unique fibre point over x) open in f.fiber (f x), and <x,rfl> open in f ⁻¹' {f x}"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T085313-L-29176",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
