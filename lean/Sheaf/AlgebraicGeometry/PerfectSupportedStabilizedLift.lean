@@ -6,9 +6,8 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
-import Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension
-import Sheaf.AlgebraicGeometry.DerivedOpenGluing
+import Sheaf.AlgebraicGeometry.SupportedMapInitialAmbientLift
+import Sheaf.AlgebraicGeometry.SupportedMapAffineAttachment
 
 /-! # The finite stabilization construction for supported map lifting
 
@@ -25,6 +24,8 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the iterated derived restriction and the biproduct map equation needs this budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine-cover construction extends one finite stabilization of the given map.
 This records the actual iterated object and its first-projection map.
@@ -88,6 +89,77 @@ theorem exists_perfect_supported_stabilized_lift
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-            (Modules.overEquiv U)).mapDerivedCategory.map β = e.hom ≫ a n := by sorry
+            (Modules.overEquiv U)).mapDerivedCategory.map β = e.hom ≫ a n := by
+  classical
+  let P (W : X.Opens) : Prop :=
+    ∃ (n : ℕ) (R : schemeDerivedCategory X) (β : R ⟶ E.obj),
+      (∀ x : X, x ∈ W → ∃ O : X.Opens, x ∈ O ∧
+        ∃ K : CochainComplex
+            (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O)) ℤ,
+          IsStrictlyPerfect X O K ∧
+          Nonempty ((SheafOfModules.overFunctor.{u}
+            (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj R ≅
+              DerivedCategory.Q.obj K)) ∧
+      (∀ (i : ℤ) (x : X), x ∈ W → x ∉ T →
+        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
+          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj R).val.presheaf x))) ∧
+      ∃ e : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙
+          Equivalence.functor
+            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+            (Modules.overEquiv U)).mapDerivedCategory.obj R ≅ S n,
+        ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙
+          Equivalence.functor
+            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+            (Modules.overEquiv U)).mapDerivedCategory.map β = e.hom ≫ a n
+  have hbase : P U := by
+    obtain ⟨R, β, hR, hRT, e, he⟩ :=
+      exists_supported_map_initial_ambient_lift X U T E (S 0) hP hPT (a 0)
+    exact ⟨0, R, β, hR, hRT, e, he⟩
+  have hstep (W : X.Opens) (hUW : U ≤ W) (hW : IsCompact (W : Set X))
+      (V : X.affineOpens) (hPW : P W) : P (W ⊔ V.val) := by
+    obtain ⟨n, R, β, hR, hRT, e, he⟩ := hPW
+    obtain ⟨R', β', hR', hRT', e', he'⟩ :=
+      exists_supported_map_affine_attachment X U W V.val hUW hW V.property T hT hTc
+        E R β hR hRT
+    let d := biprod.mapIso e
+      ((shiftFunctor (schemeDerivedCategory U.toScheme) (1 : ℤ)).mapIso e)
+    refine ⟨n + 1, R', β', hR', hRT', e' ≪≫ d ≪≫ (hS n).symm, ?_⟩
+    rw [he', he, ha n]
+    simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc,
+      Iso.inv_hom_id_assoc, d, biprod.mapIso_hom, biprod.map_fst_assoc]
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover
+    (fun V : X.affineOpens ↦ (V.val : Set X)) (fun V ↦ V.val.isOpen) (by
+      intro x _
+      obtain ⟨V, hV, hx, _⟩ := exists_isAffineOpen_mem_and_subset
+        (show x ∈ (⊤ : X.Opens) from trivial)
+      exact Set.mem_iUnion.mpr ⟨⟨V, hV⟩, hx⟩)
+  have hind (t : Finset X.affineOpens) :
+      IsCompact ((U ⊔ ⨆ V ∈ t, V.val : X.Opens) : Set X) ∧
+        P (U ⊔ ⨆ V ∈ t, V.val) := by
+    induction t using Finset.induction_on with
+    | empty => simpa using And.intro hU hbase
+    | @insert V t hV ih =>
+      have hUW : U ≤ U ⊔ ⨆ V ∈ t, V.val := le_sup_left
+      have hp := hstep _ hUW ih.1 V ih.2
+      have hc : IsCompact
+          (((U ⊔ ⨆ V ∈ t, V.val) ⊔ V.val : X.Opens) : Set X) :=
+        ih.1.union V.property.isCompact
+      simpa only [Finset.iSup_insert, sup_assoc, sup_comm, sup_left_comm] using
+        And.intro hc hp
+  have hcover : (U ⊔ ⨆ V ∈ s, V.val : X.Opens) = ⊤ := by
+    apply top_unique
+    intro x _
+    obtain ⟨V, hV, hx⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))
+    have hx' : x ∈ (⨆ V ∈ s, V.val : X.Opens) := by
+      simp only [TopologicalSpace.Opens.mem_iSup]
+      exact ⟨V, hV, hx⟩
+    exact (le_sup_right : (⨆ V ∈ s, V.val : X.Opens) ≤ U ⊔ ⨆ V ∈ s, V.val) hx'
+  have htop : P ⊤ := by simpa only [hcover] using (hind s).2
+  obtain ⟨n, R, β, hR, hRT, e, he⟩ := htop
+  refine ⟨n, R, β, ?_, ?_, e, he⟩
+  · exact fun x ↦ hR x trivial
+  · exact fun i x hx ↦ hRT i x trivial hx
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-supported-map-affine-attachment",
+ "kind": "statement",
+ "title": "Single affine attachment of a supported perfect map",
+ "statement": "Let $X$ be a quasi-separated scheme [def-pc-scheme], let $U\\subseteq W$ be opens with $W$ quasi-compact, and let $V$ be an affine open. Let $T\\subseteq X$ be closed with quasi-compact complement. Use chosen derived categories [def-pc-derived-category] on $X$, its localized open sites, $U$, and the localized open sites of $U$, in one Hom universe. Let $E\\in D_{QCoh}(\\mathcal O_X)$, $R\\in D(\\mathcal O_X)$ and $\\beta:R\\to E$. Assume that at every $x\\in W$ there is a strictly perfect local model for $R$ [def-pc-perfect-complex] and that every cohomology stalk of $R$ vanishes at every $x\\in W\\setminus T$. Then there exist $R^\\prime\\in D(\\mathcal O_X)$ and $\\beta^\\prime:R^\\prime\\to E$ having these local perfectness and support properties on $W\\cup V$, and an isomorphism $e:R^\\prime|_U\\cong R|_U\\oplus(R|_U)[1]$ such that $\\beta^\\prime|_U=(\\beta|_U)\\circ\\mathrm{pr}_1\\circ e$. No property outside $W\\cup V$ is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09IM",
+  "place": "Tag 09IM, proof paragraph assuming a two-open cover with the second open affine, applied on W union V; initial ambient extension by Tag 08BT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the ambient R and beta to W. For x in W restrict its given strictly perfect local model to W; its bounded finite-free retract terms give perfectness on W. Restriction computes the same cohomology stalks, giving support on T intersect W. Restrict E to W and V; quasi-coherent cohomology is preserved by [lem-pc-derived-open-restriction-qcoh-iff] and ordinary open restriction. The needed local derived category choices in the ambient universe are supplied by [lem-pc-derived-open-localization-universe], transported through Modules.overEquiv.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-derived-open-restriction-qcoh-iff",
+    "lem-pc-derived-open-localization-universe"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The intersection W intersect V is quasi-compact: both opens are quasi-compact and X is quasi-separated (Mathlib IsCompact.inter_of_isOpen). The same argument applies to V intersect the open complement of T, since V is affine and the complement of T is quasi-compact. Closedness of T restricts to V. On the affine V apply [lem-sc-affine-perfect-support-extension] to the source on W intersect V. It gives Q supported on T intersect V restricting to R plus R[1] on the intersection.",
+   "uses": [
+    "lem-sc-affine-perfect-support-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On W use R plus R[1] and first projection followed by beta. Compose this map with the overlap identification for Q. Apply [lem-sc-affine-perfect-map-lift] on V: its tensor augmentation is invertible on the overlap and remains perfect and supported on T intersect V. The lifting equation identifies the maps on the intersection.",
+   "uses": [
+    "lem-sc-affine-perfect-map-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-derived-open-gluing] on the two-open cover of W union V. The resulting source and map restrict on W to R plus R[1] with its first-projection map and on V to the augmented source. Perfectness and support follow from these local models and cohomology stalks. Apply [lem-sc-supported-map-initial-ambient-lift] to this source and map on W union V, obtaining R prime and beta prime on X with the same local properties on the union. Restrict its isomorphism to U and compose the iterated restriction, biproduct and shift comparison isomorphisms. This gives e into R|U plus (R|U)[1], and the gluing and initial-lift equations give beta prime restricted to U = e.hom followed by first projection followed by beta restricted to U.",
+   "uses": [
+    "lem-sc-derived-open-gluing",
+    "lem-sc-supported-map-initial-ambient-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-pc-derived-open-localization-universe",
+  "lem-sc-affine-perfect-support-extension",
+  "lem-sc-affine-perfect-map-lift",
+  "lem-sc-derived-open-gluing",
+  "lem-sc-supported-map-initial-ambient-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/09IM",
+  "place": "Tag 09IM, proof paragraph assuming a two-open cover with the second open affine, applied on W union V; initial ambient extension by Tag 08BT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect supported complex and morphism extend across one affine open after adjoining the shift",
+   "results": "LeanSearch returned Internal Server Error; no result available.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "Three restriction functor/comparison declarations; none states the local perfect supported map extension.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZeroPresheaf|overEquiv",
+   "results": "Twenty algebraic-geometry hits, including Modules.overEquiv and overMapCompOverEquiv. These are categorical comparison infrastructure, not either extension statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectSupportedStabilizedLift",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 09IM, proof paragraph assuming a two-open cover with the second open affine, applied on W union V; initial ambient extension by Tag 08BT",
+   "via": [
+    "lem-sc-perfect-supported-stabilized-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedMapAffineAttachment",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedMapAffineAttachment.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_supported_map_affine_attachment",
+  "statement": "theorem exists_supported_map_affine_attachment\n    (X : Scheme.{u}) [QuasiSeparatedSpace X]\n    (U W V : X.Opens) (hUW : U ≤ W) (hW : IsCompact (W : Set X))\n    (hV : IsAffineOpen V) (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens,\n      HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    (E : schemeDerivedQCohCategory X)\n    (R : schemeDerivedCategory X) (β : R ⟶ E.obj)\n    (hR : (∀ x : X, x ∈ W → ∃ O : X.Opens, x ∈ O ∧\n        ∃ K : CochainComplex\n            (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O)) ℤ,\n          IsStrictlyPerfect X O K ∧\n          Nonempty ((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj R ≅\n              DerivedCategory.Q.obj K)))\n    (hRT : (∀ (i : ℤ) (x : X), x ∈ W → x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj R).val.presheaf x))))\n    :\n    ∃ (R' : schemeDerivedCategory X) (β' : R' ⟶ E.obj),\n      (∀ x : X, x ∈ (W ⊔ V) → ∃ O : X.Opens, x ∈ O ∧\n        ∃ K : CochainComplex\n            (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O)) ℤ,\n          IsStrictlyPerfect X O K ∧\n          Nonempty ((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj R' ≅\n              DerivedCategory.Q.obj K)) ∧\n      (∀ (i : ℤ) (x : X), x ∈ (W ⊔ V) → x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj R').val.presheaf x))) ∧\n      ∃ e : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj R' ≅\n          ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj R ⊞\n            (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj R)⟦(1 : ℤ)⟧,\n        ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.map β' =\n          e.hom ≫ biprod.fst ≫ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.map β",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261012T234224-L-2126666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261012T234224-L-2126666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

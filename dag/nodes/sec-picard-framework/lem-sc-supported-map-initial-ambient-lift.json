@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-supported-map-initial-ambient-lift",
+ "kind": "statement",
+ "title": "Initial ambient representative of a supported perfect map",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U$ an open and $T\\subseteq X$ any subset. Use chosen derived categories [def-pc-derived-category] of modules on $X$, on every localized open site of $X$, on $U$, and on every localized open site of $U$, in one Hom universe. Let $E\\in D_{QCoh}(\\mathcal O_X)$, let $F\\in D(\\mathcal O_U)$ be perfect [def-pc-perfect-complex], and assume all cohomology stalks of $F$ vanish at $x\\in U$ with $x\\notin T$. For every $\\alpha:F\\to E|_U$, there exist $R\\in D(\\mathcal O_X)$ and $\\beta:R\\to E$ such that at every $x\\in U$ the object $R$ has an open neighbourhood on which it is represented by a bounded complex of finite-free retracts, its cohomology stalks vanish at every $x\\in U\\setminus T$, and there is $e:R|_U\\cong F$ with $\\beta|_U=\\alpha\\circ e$. There is no condition on $R$ outside $U$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08BT",
+  "place": "Tag 08BT, exact derived extension-by-zero adjunction; Tag 00A7 (4), unit on the open; Tag 09IM, initial object before the first affine attachment"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Transport F through the inverse of Modules.overEquiv U. Apply the actual extension-by-zero presheaf followed by module sheafification, termwise on complexes and then on the derived category. Exactness and the adjunction in [lem-sc-derived-open-restriction-adjunction-exact] induce a derived adjunction. The adjoint of alpha is beta from this concrete ambient source R to E.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit is invertible: the stalk comparison and germ formulas of [lem-sc-module-extension-by-zero-stalk-maps] identify it with the identity on every stalk in U. Equivalently use [lem-pc-open-extension-restriction-iso]. Apply mapDerivedCategoryCompIso, mapDerivedCategoryNatIso and mapDerivedCategoryIdIso to the natural isomorphism and compose with the equivalence comparisons. Its inverse is e : R restricted to U isomorphic to F. The adjunction unit equation gives beta restricted to U = e.hom followed by alpha.",
+   "uses": [
+    "lem-pc-open-extension-restriction-iso",
+    "lem-sc-module-extension-by-zero-stalk-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in U, take a local strictly perfect model K of F on an open O of U. Regard O as an open of X contained in U; the localized module sites are canonically equivalent. Transport K termwise through that equivalence. Its bounded terms remain bounded since equivalences preserve zero objects. For each finite-free retract transport its inclusion and projection and identify the finite free objects by the coproduct comparison and the unit-module isomorphism. Functoriality preserves their retract equation. The iterated restriction comparison transports the model isomorphism, giving the displayed ambient local perfectness. Exactness makes derived homology equal to the functor applied to homology; the interior stalk comparison of [lem-sc-module-extension-by-zero-stalk-maps] gives support. No conclusion is asserted away from U.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-sc-module-extension-by-zero-stalk-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-open-extension-restriction-iso",
+  "lem-sc-module-extension-by-zero-stalk-maps",
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08BT",
+  "place": "Tag 08BT, exact derived extension-by-zero adjunction; Tag 00A7 (4), unit on the open; Tag 09IM, initial object before the first affine attachment"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of a complex along an open immersion restricts to the original complex",
+   "results": "LeanSearch returned Internal Server Error; no result available.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "Three restriction functor/comparison declarations; none states the local perfect supported map extension.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZeroPresheaf|overEquiv",
+   "results": "Twenty algebraic-geometry hits, including Modules.overEquiv and overMapCompOverEquiv. These are categorical comparison infrastructure, not either extension statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectSupportedStabilizedLift",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08BT, exact derived extension-by-zero adjunction; Tag 00A7 (4), unit on the open; Tag 09IM, initial object before the first affine attachment",
+   "via": [
+    "lem-sc-perfect-supported-stabilized-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedMapInitialAmbientLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedMapInitialAmbientLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_supported_map_initial_ambient_lift",
+  "statement": "theorem exists_supported_map_initial_ambient_lift\n    (X : Scheme.{u}) (U : X.Opens) (T : Set X)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    [∀ V : U.toScheme.Opens,\n      HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))]\n    (E : schemeDerivedQCohCategory X)\n    (F : schemeDerivedCategory U.toScheme) (hF : IsPerfect U.toScheme F)\n    (hFT : ∀ (i : ℤ) (x : U.toScheme), x.val ∉ T →\n      Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) i).obj F).val.presheaf x)))\n    (α : F ⟶ ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj E.obj) :\n    ∃ (R : schemeDerivedCategory X) (β : R ⟶ E.obj),\n      (∀ x : X, x ∈ U → ∃ O : X.Opens, x ∈ O ∧\n        ∃ K : CochainComplex\n            (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O)) ℤ,\n          IsStrictlyPerfect X O K ∧\n          Nonempty ((SheafOfModules.overFunctor.{u}\n            (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj R ≅\n              DerivedCategory.Q.obj K)) ∧\n      (∀ (i : ℤ) (x : X), x ∈ U → x ∉ T →\n        Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj R).val.presheaf x))) ∧\n      ∃ e : ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.obj R ≅ F,\n        ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙\n          Equivalence.functor\n            (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n            (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n            (Modules.overEquiv U)).mapDerivedCategory.map β = e.hom ≫ α",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261012T234224-L-2126666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261012T234224-L-2126666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
