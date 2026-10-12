@@ -32,10 +32,19 @@
  ],
  "proof": [
   {
-   "text": "Independence: obtain a simultaneous homotopy comparison e between the auxiliary injective complexes. Apply additive global sections and homology to the two homotopies. Naturality of the canonical sections comparison gives m followed by q equals i followed by mprime, and beta gives b followed by q equals j followed by bprime. The resolution isomorphisms intertwine identity descent by isoRightDerivedObj_hom_naturality and mapHomologyIso_inv_naturality. Cancel mprime and the resolution isomorphisms to identify C.map with Cprime.map. Composition remains open as moduleCohomologyFMap_comp, with its original complete proof plan in the docstring.",
+   "text": "Independence: obtain a simultaneous homotopy comparison e between the auxiliary injective complexes. Apply additive global sections and homology to the two homotopies. Naturality of the canonical sections comparison gives m followed by q equals i followed by mprime, and beta gives b followed by q equals j followed by bprime. The resolution isomorphisms intertwine identity descent by isoRightDerivedObj_hom_naturality and mapHomologyIso_inv_naturality. Cancel mprime and the resolution isomorphisms to identify C.map with Cprime.map.",
    "uses": [
     "def-weil-pbc-module-cohomology-fmap",
     "lem-weil-pbc-module-cohomology-fmap-comparison",
+    "lem-weil-pbc-scheme-modules-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition: use the common-target section-homology diagram. ResolutionSectionsIso naturality supplies the three identity-descent squares. The private composition_diagram_cancel lemma first cancels the target resolution isomorphism and the invertible map mh followed by s. Use mc qc=i mh s and mk qk=g bh s to remove the inverse vertical maps; the beta square bc qc=j bk qk and source-resolution naturality finish the equality. Expand the definitions with explicit associativity simplification to transport it to Cc.map=Ck.map followed by Ch.map. Apply this proved helper to the three choices in moduleCohomologyFMap.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-comp-data",
+    "def-weil-pbc-module-cohomology-fmap",
     "lem-weil-pbc-scheme-modules-enough-injectives"
    ],
    "elementary": false
@@ -74,13 +83,14 @@
  "proof_deps": [
   "def-weil-pbc-module-cohomology-fmap",
   "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+  "lem-weil-pbc-module-cohomology-fmap-comp-data",
   "lem-weil-pbc-module-cohomology-fmap-comparison",
   "lem-weil-pbc-scheme-modules-enough-injectives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Lemma 01F8, Remark 01FB; Stacks obtains functoriality in D^+ and states neither the independence of the choices nor the composition rule at the level of the explicit construction; the steps are written by the agent from Derived Categories Lemmas 013P (2) and 013S and Homology Lemma 0116; U1 second reading: partial Lean realization of the two naturality clauses and pullback composition by Step 7, retaining the other three named holes. V2: independence by simultaneous homotopy comparison and resolution-isomorphism cancellation; restriction by explicit adjunction transposition and composition. General composition remains the only named hole."
+  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Lemma 01F8, Remark 01FB; Stacks obtains functoriality in D^+ and states neither the independence of the choices nor the composition rule at the level of the explicit construction; the steps are written by the agent from Derived Categories Lemmas 013P (2) and 013S and Homology Lemma 0116; U1 second reading: partial Lean realization of the two naturality clauses and pullback composition by Step 7, retaining the other three named holes. V2: independence by simultaneous homotopy comparison and resolution-isomorphism cancellation; restriction by explicit adjunction transposition and composition. V2 left general composition as the only named hole. G2: composition reduced to a common-target diagram strictly before derived-resolution transport; all inverse cancellation and naturality transport are proved in the parent module. Independence cancellation is refactored into a private abstract diagram lemma to avoid unfolding concrete homology morphisms during rewriting."
  },
  "mathlib_searches": [
   {
@@ -189,11 +199,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-e16b1",
-  "group": "V2",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T194150-L-467918",
+  "landing": "20261012T223405-L-1636835",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered proofs and comparison theorem with their DAG statements and dependencies; existing signatures are unchanged, axioms are permitted, and both delivered modules plus all three direct importers compile cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

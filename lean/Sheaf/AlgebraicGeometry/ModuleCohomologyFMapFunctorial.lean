@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapCompData
 import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
 
 /-! # Functoriality of cohomology maps induced by scheme maps
@@ -77,6 +78,23 @@ private theorem resolutionSectionsIso_naturality {A : Type*} [Category* A] [Abel
     U.map (I'.isoRightDerivedObj Γ p).hom ≫ (S'.mapHomologyIso U).inv
   rw [← hs, ← Category.assoc, ← Functor.map_comp]
   exact congrArg (fun f ↦ U.map f ≫ (S'.mapHomologyIso U).inv) hn.symm
+
+private theorem independence_diagram_cancel
+    {A B C D E F K L : AddCommGrpCat.{u}}
+    (rI : A ≅ B) (rI' : A ≅ C) (rJ : D ≅ E) (rJ' : D ≅ F)
+    (b : E ⟶ K) (b' : F ⟶ L) (m : B ⟶ K) (m' : C ⟶ L)
+    [IsIso m] [IsIso m'] (i : B ⟶ C) (j : E ⟶ F) (q : K ⟶ L)
+    (hi : rI.hom ≫ i = rI'.hom) (hj : rJ.hom ≫ j = rJ'.hom)
+    (hlambda : m ≫ q = i ≫ m') (hβ : b ≫ q = j ≫ b') :
+    rJ.hom ≫ b ≫ inv m ≫ rI.inv = rJ'.hom ≫ b' ≫ inv m' ≫ rI'.inv := by
+  rw [← cancel_mono rI'.hom]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [← hi, Iso.inv_hom_id_assoc]
+  have hm : inv m ≫ i ≫ m' = q := by
+    rw [← hlambda, IsIso.inv_hom_id_assoc]
+  rw [← cancel_mono m']
+  simp only [Category.assoc]
+  rw [hm, IsIso.inv_hom_id, Category.comp_id, hβ, ← Category.assoc, hj]
 
 set_option maxHeartbeats 800000 in
 -- The sections square elaborates two scheme-module and complex functor composites.
@@ -175,24 +193,104 @@ theorem moduleCohomologyFMap_independent {X Y : Scheme.{u}} (h : X ⟶ Y)
     (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C.J p).hom ≫ j =
     (resolutionSectionsIso
     (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C'.J p).hom at hj
-  change (resolutionSectionsIso
-    (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C.J p).hom ≫ b ≫ inv m ≫
-      (resolutionSectionsIso
-    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C.I p).inv =
-    (resolutionSectionsIso
-    (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C'.J p).hom ≫ b' ≫ inv m' ≫
-      (resolutionSectionsIso
-    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C'.I p).inv
-  rw [← cancel_mono (resolutionSectionsIso
-    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C'.I p).hom]
+  have hh := independence_diagram_cancel
+    (resolutionSectionsIso (RingedSpace.globalSectionsFunctor X.toRingedSpace) C.I p)
+    (resolutionSectionsIso (RingedSpace.globalSectionsFunctor X.toRingedSpace) C'.I p)
+    (resolutionSectionsIso (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C.J p)
+    (resolutionSectionsIso (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C'.J p)
+    b b' m m' i j q hi hj hlambda hβ
+  simpa only [b, b', m, m', H, HX, HY, ΓX, ΓY, resolutionSectionsIso,
+    ModuleCohomologyFMapData.map,
+    RingedSpace.globalSectionsComplex, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Iso.symm_inv, Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc] using hh
+
+
+private theorem composition_diagram_cancel
+    {A B C D E F I J K L M N Q : AddCommGrpCat.{u}}
+    (rj : A ≅ B) (rk : A ≅ C) (rc : D ≅ E) (rh : D ≅ F)
+    (rg : I ≅ J) (rg' : I ≅ K)
+    (bc : B ⟶ L) (bk : C ⟶ M) (bh : K ⟶ N)
+    (mc : E ⟶ L) (mk : J ⟶ M) (mh : F ⟶ N)
+    [IsIso mc] [IsIso mk] [IsIso mh]
+    (i : E ⟶ F) (j : B ⟶ C) (g : J ⟶ K)
+    (qc : L ⟶ Q) (qk : M ⟶ Q) (s : N ⟶ Q) [IsIso s]
+    (hi : rc.hom ≫ i = rh.hom) (hj : rj.hom ≫ j = rk.hom)
+    (hg : rg.hom ≫ g = rg'.hom) (hb : bc ≫ qc = j ≫ bk ≫ qk)
+    (hc : mc ≫ qc = i ≫ mh ≫ s) (hk : mk ≫ qk = g ≫ bh ≫ s) :
+    rj.hom ≫ bc ≫ inv mc ≫ rc.inv =
+      (rk.hom ≫ bk ≫ inv mk ≫ rg.inv) ≫ (rg'.hom ≫ bh ≫ inv mh ≫ rh.inv) := by
+  rw [← cancel_mono rh.hom]
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rw [← hi, Iso.inv_hom_id_assoc]
-  have hm : inv m ≫ i ≫ m' = q := by
-    rw [← hlambda, IsIso.inv_hom_id_assoc]
-  rw [← cancel_mono m']
+  rw [← cancel_mono (mh ≫ s)]
   simp only [Category.assoc]
-  rw [hm, IsIso.inv_hom_id, Category.comp_id, hβ, ← Category.assoc, hj]
+  have hqc : inv mc ≫ i ≫ mh ≫ s = qc := by
+    rw [← hc, IsIso.inv_hom_id_assoc]
+  have hqk : inv mk ≫ g ≫ bh ≫ s = qk := by
+    rw [← hk, IsIso.inv_hom_id_assoc]
+  rw [hqc, IsIso.inv_hom_id_assoc, ← hg]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [hqk, hb, ← Category.assoc, hj]
 
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem moduleCohomologyFMap_comp_aux {X Y Z : Scheme.{u}}
+    (h : X ⟶ Y) (k : Y ⟶ Z) {H : Z.Modules} {G : Y.Modules} {F : X.Modules}
+    (ψ : H ⟶ (pushforward k).obj G) (φ : G ⟶ (pushforward h).obj F)
+    (Ck : ModuleCohomologyFMapData k H G ψ)
+    (Ch : ModuleCohomologyFMapData h G F φ)
+    (Cc : ModuleCohomologyFMapData (h ≫ k) H F
+      (ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F)) (p : ℕ) :
+    Cc.map p = Ck.map p ≫ Ch.map p := by
+  let HX := (RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
+    forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+  let HY := (RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
+    forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+  let HZ := (RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
+    forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+  let Hp := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
+  let i := Hp.map (HX.map (InjectiveResolution.desc (𝟙 F) Ch.I Cc.I))
+  let j := Hp.map (HZ.map (InjectiveResolution.desc (𝟙 H) Ck.J Cc.J))
+  let g := Hp.map (HY.map (InjectiveResolution.desc (𝟙 G) Ch.J Ck.I))
+  let bc := Hp.map (HZ.map Cc.β)
+  let bk := Hp.map (HZ.map Ck.β)
+  let bh := Hp.map (HY.map Ch.β)
+  let mc := Hp.map (Cc.a.hom ≫ HZ.map Cc.lambda)
+  let mk := Hp.map (Ck.a.hom ≫ HZ.map Ck.lambda)
+  let mh := Hp.map (Ch.a.hom ≫ HY.map Ch.lambda)
+  have : IsIso mc := Cc.invertible p
+  have : IsIso mk := Ck.invertible p
+  have : IsIso mh := Ch.invertible p
+  have hd := moduleCohomologyFMap_comp_data h k ψ φ Ck Ch Cc p
+  dsimp only at hd
+  obtain ⟨Q, qk, qc, s, hs, hb, hc, hk⟩ := hd
+  change bc ≫ qc = j ≫ bk ≫ qk at hb
+  change mc ≫ qc = i ≫ mh ≫ s at hc
+  change mk ≫ qk = g ≫ bh ≫ s at hk
+  have : IsIso s := hs
+  have hi := resolutionSectionsIso_naturality
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace) Cc.I Ch.I p
+  have hj := resolutionSectionsIso_naturality
+    (RingedSpace.globalSectionsFunctor Z.toRingedSpace) Cc.J Ck.J p
+  have hg := resolutionSectionsIso_naturality
+    (RingedSpace.globalSectionsFunctor Y.toRingedSpace) Ck.I Ch.J p
+  let rc := resolutionSectionsIso (RingedSpace.globalSectionsFunctor X.toRingedSpace) Cc.I p
+  let rh := resolutionSectionsIso (RingedSpace.globalSectionsFunctor X.toRingedSpace) Ch.I p
+  let rj := resolutionSectionsIso (RingedSpace.globalSectionsFunctor Z.toRingedSpace) Cc.J p
+  let rk := resolutionSectionsIso (RingedSpace.globalSectionsFunctor Z.toRingedSpace) Ck.J p
+  let rg := resolutionSectionsIso (RingedSpace.globalSectionsFunctor Y.toRingedSpace) Ck.I p
+  let rg' := resolutionSectionsIso (RingedSpace.globalSectionsFunctor Y.toRingedSpace) Ch.J p
+  change rc.hom ≫ i = rh.hom at hi
+  change rj.hom ≫ j = rk.hom at hj
+  change rg.hom ≫ g = rg'.hom at hg
+  have hh := composition_diagram_cancel rj rk rc rh rg rg' bc bk bh mc mk mh
+    i j g qc qk s hi hj hg hb hc hk
+  simpa only [rc, rh, rj, rk, rg, rg', bc, bk, bh, mc, mk, mh, HX, HY, HZ, Hp,
+    resolutionSectionsIso, RingedSpace.globalSectionsComplex,
+    ModuleCohomologyFMapData.map, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Iso.symm_inv, Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc] using hh
+
+
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Source: Stacks Project, Tags 01F8 and 01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
 
@@ -224,7 +322,11 @@ theorem moduleCohomologyFMap_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ 
     moduleCohomologyFMap (h ≫ k)
       (ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F) p =
         moduleCohomologyFMap k ψ p ≫ moduleCohomologyFMap h φ p := by
-  sorry
+  exact moduleCohomologyFMap_comp_aux h k ψ φ
+    (Classical.choice (moduleCohomologyFMapData_nonempty k H G ψ))
+    (Classical.choice (moduleCohomologyFMapData_nonempty h G F φ))
+    (Classical.choice (moduleCohomologyFMapData_nonempty (h ≫ k) H F
+      (ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F))) p
 
 /-- Source: Stacks Project, Tags 01F8 and 01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).

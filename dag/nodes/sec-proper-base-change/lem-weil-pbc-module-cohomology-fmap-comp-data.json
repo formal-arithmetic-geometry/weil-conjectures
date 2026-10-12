@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-comp-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "composition clause of the f-map functoriality tool in step 2: common injective comparison target, before derived-cohomology transport and inverse cancellation",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Common-target section-homology diagram for composition of module f-maps",
+ "statement": "Let h:X→Y and k:Y→Z be scheme morphisms, H, G, F modules on Z, Y, X, and psi:H→k_*G and phi:G→h_*F. Let Ck, Ch, Cc be choice systems of [def-weil-pbc-module-cohomology-fmap] for psi, phi, and psi followed by k_*phi and the canonical successive-pushforward comparison. Fix p≥0. Write HX, HY, HZ for global sections on complexes followed by forgetting scalars, and Hp for degree-p homology. Write bc=Hp(HZ(Cc.beta)), bk=Hp(HZ(Ck.beta)), bh=Hp(HY(Ch.beta)), mc=Hp(Cc.a followed by HZ(Cc.lambda)), mk=Hp(Ck.a followed by HZ(Ck.lambda)), mh=Hp(Ch.a followed by HY(Ch.lambda)). Let i=Hp(HX(desc id from Cc.I to Ch.I)), j=Hp(HZ(desc id from Cc.J to Ck.J)), and g=Hp(HY(desc id from Ck.I to Ch.J)). There exist an abelian group Q, qk:Hp(HZ(Ck.K))→Q, qc:Hp(HZ(Cc.K))→Q, and an isomorphism s:Hp(HY(Ch.K))→Q such that bc followed by qc equals j followed by bk and qk, mc followed by qc equals i followed by mh and s, and mk followed by qk equals g followed by bh and s.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 01FB and Lemma 01F8; agent-written common-target diagram using Derived Categories Lemmas 013P and 013S; verified from the corresponding Stacks tag pages"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Use enough injectives for Z.Modules. Replace the nonnegative complex k_*Ch.K by a termwise injective nonnegative complex L with a quasi-isomorphism mu, by extending by zero and using bounded-below injective replacement, then truncating back. The canonical sections comparison followed by Gamma(mu) induces an isomorphism s by the pushforward-injectives sections theorem, since Ch.K is termwise injective.",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "lem-weil-pbc-scheme-modules-enough-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift k_*(desc id from Ck.I to Ch.J) followed by k_*(Ch.beta) and mu across Ck.lambda to a map e:Ck.K to L up to homotopy. Lift (kh)_* of the identity descent from Cc.I to Ch.I, followed by the inverse successive-pushforward comparison at Ch.I, k_*(Ch.lambda), and mu across Cc.lambda to f:Cc.K to L up to homotopy. These quasi-isomorphisms need not be monic: extend by zero, use the mapping-cylinder split injection and homotopy retraction to reduce to lifting along a monic quasi-isomorphism (013P(1)), and use full faithfulness of extension to return to natural indices.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the two routes Cc.beta followed by f and desc id from Cc.J to Ck.J followed by Ck.beta and e with the augmentation of Cc.J. The beta compatibility equations for Cc, Ck, and Ch, naturality of pushforwardComp, and the identity-descent augmentation equations identify them up to homotopy. Uniqueness of lifts to the injective complex L therefore gives a homotopy between the original routes.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply additive global sections and homology to all three homotopies. The canonical sections comparisons commute with identity descents and successive pushforwards because restriction is natural and h inverse k inverse top equals (h followed by k) inverse top. Set Q=H^p(Gamma(Z,L)), qk=H^p(Gamma(e)), qc=H^p(Gamma(f)), and s as in the first step. The three squares are exactly bc qc=j bk qk, mc qc=i mh s, and mk qk=g bh s. This proves only the common-target diagram; derived-cohomology transport and cancellation are performed in the parent module.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F8 and 01FB, with 013P(1) and 013S; common-target diagram written explicitly by G2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of sheaf cohomology maps via injective resolution comparison homotopy",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "common injective complex target to compare composition of maps on sheaf cohomology",
+   "results": "MayerVietorisSquare shortComplex lemmas and CochainComplex.isKInjective_of_injective_aux. These give injective-complex tools, not the scheme-module section comparison diagram.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.descCompHomotopy",
+   "results": "Unknown identifier in service index. Local source confirms descCompHomotopy for resolutions within one abelian category.",
+   "date": "2026-10-13",
+   "verdict": "no match for cross-scheme comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rg descCompHomotopy|mapHomotopy|homotopy_of_comp_quasiIso in Mathlib injective resolution and KInjective sources; rg moduleCohomologyFMap and sections comparisons in lean/WeilConjectures and lean/Sheaf",
+   "results": "InjectiveResolution.descCompHomotopy concerns one category; Functor.mapHomotopy and K-injective lemmas supply homotopy tools. Existing ModuleCohomologyFMapComparison compares two systems for one scheme morphism. No common-target composition diagram. Blueprint search cohomology f-map composition: zero matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapCompData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMapCompData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_comp_data",
+  "statement": "theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z) {H : Z.Modules} {G : Y.Modules} {F : X.Modules} (ψ : H ⟶ (pushforward k).obj G) (φ : G ⟶ (pushforward h).obj F) (Ck : ModuleCohomologyFMapData k H G ψ) (Ch : ModuleCohomologyFMapData h G F φ) (Cc : ModuleCohomologyFMapData (h ≫ k) H F (ψ ≫ (pushforward k).map φ ≫ (pushforwardComp h k).hom.app F)) (p : ℕ) : let HX := (RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ) let HY := (RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ) let HZ := (RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ) let Hp := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p ∃ (Q : AddCommGrpCat.{u}) (qk : Hp.obj (HZ.obj Ck.K) ⟶ Q) (qc : Hp.obj (HZ.obj Cc.K) ⟶ Q) (s : Hp.obj (HY.obj Ch.K) ⟶ Q), IsIso s ∧ Hp.map (HZ.map Cc.β) ≫ qc = Hp.map (HZ.map (InjectiveResolution.desc (𝟙 H) Ck.J Cc.J)) ≫ Hp.map (HZ.map Ck.β) ≫ qk ∧ Hp.map (Cc.a.hom ≫ HZ.map Cc.lambda) ≫ qc = Hp.map (HX.map (InjectiveResolution.desc (𝟙 F) Ch.I Cc.I)) ≫ Hp.map (Ch.a.hom ≫ HY.map Ch.lambda) ≫ s ∧ Hp.map (Ck.a.hom ≫ HZ.map Ck.lambda) ≫ qk = Hp.map (HY.map (InjectiveResolution.desc (𝟙 G) Ch.J Ck.I)) ≫ Hp.map (HY.map Ch.β) ≫ s",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T223405-L-1636835",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T223405-L-1636835",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
