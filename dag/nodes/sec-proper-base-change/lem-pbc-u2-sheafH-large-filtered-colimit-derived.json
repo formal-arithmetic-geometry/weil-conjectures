@@ -1,0 +1,104 @@
+{
+ "id": "lem-pbc-u2-sheafH-large-filtered-colimit-derived",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-u2-sheafH-large-filtered-colimit",
+   "place": "proof step 1, larger indexing universe",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Large-universe filtered-colimit continuity of etale cohomology",
+ "statement": "For a quasi-compact quasi-separated scheme X and a filtered category A in Type(u+1), the cocone obtained by applying the derived etale cohomology functor in degree q to a colimit cocone of abelian etale sheaves is a colimit cocone.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q5 and 0739, with the indexing universe tracked explicitly"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-abelian-sheaves",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Repeat the qcqs finite-cover and injective-resolution proof of filtered-colimit continuity, with all objects and morphisms of the filtered index category in Type(u+1). Filtered colimits remain exact and the finite Cech complexes commute with them; induction through the long exact sequences gives continuity in every degree.",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q5 and 0739"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "large universe filtered colimit etale cohomology",
+   "results": "No direct match; theorem requires explicit larger index universe.",
+   "date": "2026-10-12",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit derived etale cohomology",
+   "results": "No direct matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleCohomology_isColimit.*Type (u + 1)",
+   "results": "Only the smaller-index theorem was found.",
+   "date": "2026-10-12",
+   "verdict": "No direct match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleSheafHLargeFilteredColimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleCohomology_isColimit_large_filtered",
+  "statement": "theorem etaleCohomology_isColimit_large_filtered\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    {A : Type (u + 1)} [SmallCategory A] [IsFiltered A]\n    {D : A ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    {c : Cocone D} (hc : IsColimit c) (q : ℕ) :\n    Nonempty (IsColimit\n      ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙\n        Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053920-L-2630140",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T053920-L-2630140",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
