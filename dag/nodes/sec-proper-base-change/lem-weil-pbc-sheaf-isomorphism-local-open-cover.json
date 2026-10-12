@@ -29,72 +29,48 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (restriction is a functor).* For opens $V\\subseteq U\\subseteq X$ and morphisms $\\alpha:\\mathcal M\\to\\mathcal N$, $\\beta:\\mathcal N\\to\\mathcal P$ of $\\mathcal O_X$-modules: $(\\beta\\circ\\alpha)|_U=\\beta|_U\\circ\\alpha|_U$, $\\mathrm{id}_{\\mathcal M}|_U=\\mathrm{id}_{\\mathcal M|_U}$, and $(\\alpha|_U)|_V=\\alpha|_V$ (with $(\\mathcal M|_U)|_V=\\mathcal M|_V$). Indeed all of these have the same component at every open $W\\subseteq U$ (resp. $W\\subseteq V$), namely $\\beta_W\\circ\\alpha_W$, $\\mathrm{id}_{\\mathcal M(W)}$, $\\alpha_W$, by the definition of restriction in the statement; and morphisms of sheaves of modules with equal components are equal [def-weil-sheaf-of-modules-category].",
+   "text": "Restriction of module sheaves to Over (U i) is SheafOfModules.overFunctor, so it preserves isomorphisms. This proves the forward implication.",
    "uses": [
-    "def-weil-pbc-module-finite-type-presentation",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 04TN (lemma-glue-maps, line 5078) and its proof (Section 00AK)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 2 (only if).* Let $\\beta:\\mathcal N\\to\\mathcal M$ be an inverse of $\\alpha$: $\\beta\\circ\\alpha=\\mathrm{id}_{\\mathcal M}$, $\\alpha\\circ\\beta=\\mathrm{id}_{\\mathcal N}$. Restricting these equalities to $U_a$ and using Step 1 gives $\\beta|_{U_a}\\circ\\alpha|_{U_a}=\\mathrm{id}_{\\mathcal M|_{U_a}}$ and $\\alpha|_{U_a}\\circ\\beta|_{U_a}=\\mathrm{id}_{\\mathcal N|_{U_a}}$, so $\\alpha|_{U_a}$ is an isomorphism with inverse $\\beta|_{U_a}$.",
+   "text": "For the converse, apply the forgetful functor SheafOfModules.toSheaf (moduleRings X) to the morphism. Mathlib proves that this functor reflects isomorphisms, so it suffices to show the underlying morphism of abelian sheaves is an isomorphism.",
    "uses": [
-    "def-weil-pbc-module-finite-type-presentation"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 04TN (lemma-glue-maps, line 5078) and its proof (Section 00AK)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 3 (the local inverses agree on overlaps).* Assume each $\\alpha|_{U_a}$ is an isomorphism and let $\\beta_a:\\mathcal N|_{U_a}\\to\\mathcal M|_{U_a}$ be its inverse. Fix $a,b\\in A$ and put $U_{ab}=U_a\\cap U_b$. By Step 1, $(\\alpha|_{U_a})|_{U_{ab}}=\\alpha|_{U_{ab}}=(\\alpha|_{U_b})|_{U_{ab}}$, and restricting $\\beta_a\\circ\\alpha|_{U_a}=\\mathrm{id}$, $\\alpha|_{U_a}\\circ\\beta_a=\\mathrm{id}$ to $U_{ab}$ shows that $\\beta_a|_{U_{ab}}$ is a two-sided inverse of $\\alpha|_{U_{ab}}$; likewise $\\beta_b|_{U_{ab}}$. A two-sided inverse is unique: if $\\gamma,\\gamma'$ are both inverse to $\\alpha|_{U_{ab}}$ then $\\gamma=\\gamma\\circ(\\alpha|_{U_{ab}}\\circ\\gamma')=(\\gamma\\circ\\alpha|_{U_{ab}})\\circ\\gamma'=\\gamma'$. Hence $\\beta_a|_{U_{ab}}=\\beta_b|_{U_{ab}}$ for all $a,b\\in A$.",
+   "text": "The hypothesis that the supremum of the opens U i is top gives a covering family for Opens.grothendieckTopology X by Mathlib Opens.coversTop_iff.",
    "uses": [
-    "def-weil-pbc-module-finite-type-presentation"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 04TN (lemma-glue-maps, line 5078) and its proof (Section 00AK)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 4 (glue the inverses).* By Step 3, the $\\mathcal O_{U_a}$-linear maps $\\beta_a:\\mathcal N|_{U_a}\\to\\mathcal M|_{U_a}$ satisfy $\\beta_a|_{U_{ab}}=\\beta_b|_{U_{ab}}$ for all $a,b$. By [lem-weil-pbc-glue-sheaves-of-modules] (1), applied to the covering $X=\\bigcup_aU_a$ with $\\mathcal F=\\mathcal N$, $\\mathcal G=\\mathcal M$, $\\varphi_a=\\beta_a$, there is an $\\mathcal O_X$-linear $\\beta:\\mathcal N\\to\\mathcal M$ with $\\beta|_{U_a}=\\beta_a$ for every $a\\in A$.",
+   "text": "For each i, the restriction of the underlying abelian sheaf morphism via the topology overPullback is definitionally the underlying abelian sheaf morphism of alpha.over (U i). Functoriality of SheafOfModules.toSheaf sends the assumed local module isomorphism to this local abelian sheaf isomorphism.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 04TN (lemma-glue-maps, line 5078) and its proof (Section 00AK)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 5 ($\\beta$ is inverse to $\\alpha$).* For every $a$, Step 1 gives $(\\beta\\circ\\alpha)|_{U_a}=\\beta_a\\circ\\alpha|_{U_a}=\\mathrm{id}_{\\mathcal M|_{U_a}}=\\mathrm{id}_{\\mathcal M}|_{U_a}$ and $(\\alpha\\circ\\beta)|_{U_a}=\\alpha|_{U_a}\\circ\\beta_a=\\mathrm{id}_{\\mathcal N}|_{U_a}$. By the uniqueness clause of [lem-weil-pbc-glue-sheaves-of-modules] (1) (two $\\mathcal O_X$-linear maps that agree on every member of an open covering are equal), $\\beta\\circ\\alpha=\\mathrm{id}_{\\mathcal M}$ and $\\alpha\\circ\\beta=\\mathrm{id}_{\\mathcal N}$. Hence $\\alpha$ is an isomorphism of $\\mathcal O_X$-modules with inverse $\\beta$.",
+   "text": "Apply Mathlib CategoryTheory.Sheaf.isIso_of_coversTop to obtain the global abelian sheaf isomorphism. Reflect it through SheafOfModules.toSheaf to obtain IsIso alpha. The Mathlib cover criterion glues the local inverses, performing the gluing and uniqueness argument of the original plan without a dependency on the project gluing theorem.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "def-weil-pbc-module-finite-type-presentation"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 04TN (lemma-glue-maps, line 5078) and its proof (Section 00AK)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-finite-type-presentation",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-glue-sheaves-of-modules"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma 04TN (lemma-glue-maps, line 5078) and its proof; the Stacks project states no separate lemma for this criterion, so the argument (glue the local inverses, then uniqueness of glued maps) is written by the agent from 04TN"
+  "place": "Sheaves, Section 00AK, Lemma 04TN: local inverses glue uniquely. Formalized by specialization of Mathlib CategoryTheory.Sheaf.isIso_of_coversTop (Mathlib/CategoryTheory/Sites/LocalProperties.lean), Opens.coversTop_iff (Mathlib/CategoryTheory/Sites/Spaces.lean), and the ReflectsIsomorphisms instance for SheafOfModules.toSheaf (Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean)."
  },
  "mathlib_searches": [
   {
@@ -210,5 +186,15 @@
   "group": "G1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085344-L-41537",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

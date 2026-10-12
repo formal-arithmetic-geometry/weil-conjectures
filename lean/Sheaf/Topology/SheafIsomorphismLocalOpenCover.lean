@@ -6,7 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.Topology.GlueSheavesOfModules
+import Mathlib.CategoryTheory.Sites.LocalProperties
 
 /-!
 # Isomorphisms of sheaf modules are local on an open cover
@@ -29,17 +29,12 @@ restriction to every member of an open cover is an isomorphism.
 Source: Stacks Project, Sheaves, Section 00AK, Lemma 04TN
 (blueprint: lem-weil-pbc-sheaf-isomorphism-local-open-cover).
 Proof:
-1. Restriction preserves identities and composition, and repeated restriction agrees
-   with restriction to the smaller open: all maps have the same components
-   (`def-weil-sheaf-of-modules-category`, `def-weil-pbc-module-finite-type-presentation`).
-2. A global two-sided inverse restricts to a two-sided inverse on each cover member.
-3. The local inverses agree on overlaps: both restrict to two-sided inverses of the
-   same restricted morphism, and a two-sided inverse is unique.
-4. Apply `lem-weil-pbc-glue-sheaves-of-modules` (1) to glue these compatible linear
-   maps to a global module morphism.
-5. Its composites with the original morphism restrict to identities on every cover
-   member. The uniqueness clause of that gluing lemma makes both global composites
-   identities, giving the required two-sided inverse.
+1. Restriction is a functor, so it preserves isomorphisms.
+2. Forget to sheaves of abelian groups. This functor reflects isomorphisms.
+3. The equality `hcover` gives `CoversTop U` for the open-set Grothendieck topology.
+4. Underlying abelian sheaves commute definitionally with restriction to `Over (U i)`.
+   Thus each local module isomorphism gives a local abelian sheaf isomorphism.
+5. Apply Mathlib's `Sheaf.isIso_of_coversTop` and reflect the resulting isomorphism.
 -/
 theorem sheaf_module_isIso_iff_isIso_over_open_cover
     (X : RingedSpace.{u₂}) (I : Type w₂) (U : I → Opens X)
@@ -47,6 +42,17 @@ theorem sheaf_module_isIso_iff_isIso_over_open_cover
     (M N : SheafOfModules.{max u₂ v₂} (moduleRings X))
     (α : M ⟶ N) :
     IsIso α ↔ ∀ i : I, IsIso (α.over (U i)) := by
-  sorry
+  constructor
+  · intro h i
+    exact (SheafOfModules.overFunctor (moduleRings X) (U i)).map_isIso α
+  · intro h
+    have : IsIso ((SheafOfModules.toSheaf (moduleRings X)).map α) := by
+      apply Sheaf.isIso_of_coversTop ((Opens.coversTop_iff X U).2 hcover)
+      intro i
+      have := h i
+      change IsIso ((SheafOfModules.toSheaf ((moduleRings X).over (U i))).map
+        (α.over (U i)))
+      infer_instance
+    exact isIso_of_reflects_iso α (SheafOfModules.toSheaf (moduleRings X))
 
 end AlgebraicGeometry
