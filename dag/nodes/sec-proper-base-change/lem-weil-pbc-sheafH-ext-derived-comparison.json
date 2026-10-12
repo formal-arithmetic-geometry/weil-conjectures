@@ -15,37 +15,37 @@
  ],
  "proof": [
   {
-   "text": "For each abelian sheaf F choose an injective resolution. A bounded-below injective resolution is K-injective, and the homology of derived global sections on F[0] is the cohomology of its complex of global sections.",
+   "text": "For the constant integer sheaf Z_X, use constantSheafΓAdj.homAddEquiv followed by uliftZMultiplesAddEquiv to identify Hom(Z_X,F) additively with Γ(F). Compose this with Cochain.fromSingleEquiv in each degree to construct an isomorphism from the Hom complex of Z_X[0] to any sheaf complex K onto the complex Γ(K). The adjunction naturality and δ_fromSingleMk prove compatibility with differentials and with every morphism of complexes. These compatibility proofs are written out as private helpers in the item module.",
    "uses": [
-    "lem-sp-derived-functor-single-identification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compute Ext from the constant integer sheaf using that same injective resolution. The constant-sheaf/global-sections adjunction, followed by evaluation at 1 in the integers, identifies each Hom group with global sections of the corresponding injective term. These maps commute with the differentials, so induce an additive isomorphism on cohomology in every nonnegative degree.",
-   "uses": [
-    "lem-weil-pbc-ext-via-injective-resolution",
     "def-weil-pbc-constant-sheaf"
    ],
    "elementary": false
   },
   {
-   "text": "Lift a morphism F → G to the chosen injective resolutions. Both cohomology constructions use the same lift and the preceding termwise identification commutes with it. Homotopic lifts induce the same cohomology map. Thus the isomorphisms are natural and independent of choices, including degree zero and the empty scheme.",
+   "text": "Choose injectiveResolution F. Its extAddEquivCohomologyClass identifies Sheaf.H F q with the cohomology classes of Hom(Z_X[0],I_F). The explicit leftHomologyData identifies these classes with homology, and the preceding complex isomorphism identifies that homology with H^q(Γ(I_F)). Compose with isoRightDerivedObjCochainComplex.symm to obtain Sheaf.H F q ≅ R^qΓ(F). To prove naturality, define postcomposition on cochains, cocycles and their quotient and verify the associated LeftHomologyMapData. Lift f:F→G by InjectiveResolution.desc. The equality extMk_comp_mk₀, applied to representatives supplied by extMk_surjective, proves compatibility with Ext maps; combine it with the proved homology naturality and isoRightDerivedObjCochainComplex_inv_naturality. NatIso.ofComponents packages the resulting natural isomorphism.",
    "uses": [
-    "lem-weil-pbc-ext-via-injective-resolution"
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker rightDerivedFunctorPlusCompatibility.symm by the degree-zero single functor and the qth homology functor. Compose with singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso to identify H^q(RΓ(F[0])) naturally with R^qΓ(F). Compose the inverse of this isomorphism with the preceding Sheaf.H comparison. All degrees are handled uniformly, including q=0; no case-split theorem or unresolved comparison lemma is used.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-constant-sheaf",
-  "lem-sp-derived-functor-single-identification",
-  "lem-weil-pbc-ext-via-injective-resolution"
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-sp-derived-functor-single-identification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Definition 015A, Lemmas 05TI and 06XR; the injective-resolution convention for cohomology in Etale Cohomology Lemma 03Q5."
+  "place": "Definition 015A, Lemmas 05TI and 06XR; completed in Lean by M1 using Mathlib Injective.Ext and the source PlusSingle/PlusCompatibility APIs."
  },
  "mathlib_searches": [
   {
@@ -119,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-efdeb",
-  "group": "G1",
+  "reviewer": "X-796d8",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T001209-L-509996",
+  "landing": "20261012T012858-L-817697",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; proofs, new declarations, node metadata, imports, and report satisfy the stage-3 review requirements."
+  "note": "independent Codex review: Matched delivered files to the packet, base clone, node metadata, compilation, and permitted axiom set; all stage-3 checks pass."
  }
 }
