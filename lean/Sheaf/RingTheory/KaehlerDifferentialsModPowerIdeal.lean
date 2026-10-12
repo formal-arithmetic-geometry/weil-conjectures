@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
+import Sheaf.RingTheory.KaehlerDifferentialsModPowerIdealCore
 
 /-!
 # Kähler differentials modulo a power of an ideal
@@ -60,4 +61,6 @@ theorem kahlerDifferential_mod_power_ideal
           Ideal.Quotient.mk (I ^ n) t ⊗ₜ[S ⧸ I ^ (n + 1)]
             KaehlerDifferential.D R (S ⧸ I ^ (n + 1))
               (Ideal.Quotient.mk (I ^ (n + 1)) s) := by
-  sorry
+  obtain ⟨f, hf, hgen⟩ :=
+    kahlerDifferential_mod_power_ideal_bijective R S I n _hn
+  exact ⟨LinearEquiv.ofBijective f hf, hgen⟩
