@@ -6,16 +6,11 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.RingTheory.GRing
-import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
-import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
 import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
+import Sheaf.RingTheory.FiniteSubringGenericFormalFiber
 import Sheaf.RingTheory.GRingPairsOfPrimes
-import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
-import Sheaf.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.RegularPowerSeriesGenericFormalFiber
 
 /-!
 # Complete local Noetherian rings are G-rings
@@ -60,4 +55,22 @@ geometric regularity of every required formal fibre, hence the G-ring condition.
 theorem isGRing_of_isNoetherianRing_of_isAdicComplete
     (S : Type u) [CommRing S] [IsNoetherianRing S] [IsLocalRing S]
     [IsAdicComplete (IsLocalRing.maximalIdeal S) S] : IsGRing S := by
-  sorry
+  apply (isGRing_iff_pairsOfPrimes S).mpr
+  intro q p hq hp hqp
+  let B := S ⧸ q
+  let : Nontrivial B := Ideal.Quotient.nontrivial_iff.mpr hq.ne_top
+  let : IsLocalRing B :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk q) Ideal.Quotient.mk_surjective
+  have hcomplete := quotient_complete_local S q hq.ne_top
+  let : IsAdicComplete (IsLocalRing.maximalIdeal B) B := hcomplete.2.2.2
+  let P := p.map (Ideal.Quotient.mk q)
+  let : P.IsPrime := Ideal.isPrime_map_quotientMk_of_isPrime hqp
+  obtain ⟨B₀, hreg, _, hfinite, _, _, _, hmodel⟩ :=
+    IsLocalRing.complete_local_domain_finite_over_regular B
+  let : IsRegularLocalRing B₀ := hreg
+  let : Module.Finite B₀ B := hfinite
+  have hbase := isGeometricallyRegular_genericFormalFiber_of_regular_powerSeries
+    B₀ hmodel (P.comap (algebraMap B₀ B))
+  have hgeom := isGeometricallyRegular_genericFormalFiber_of_finite_subring
+    B B₀ q.ResidueField P hbase
+  exact ⟨hgeom.1, hgeom⟩

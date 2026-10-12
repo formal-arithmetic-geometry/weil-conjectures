@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-finite-subring-generic-formal-fibre",
+ "kind": "statement",
+ "title": "Generic formal-fibre ascent from a finite subring",
+ "statement": "Let $A$ be a Noetherian commutative domain [def-weil-pbc-noetherian-ring], let $A_0\\subset A$ be a Noetherian subring, and assume that $A$ is a finite $A_0$-module [def-weil-finitely-generated-module]. Let $K$ be any fraction field of $A$, meaning a field localization of $A$ at its nonzero elements [def-weil-pbc-localization-at-prime]. For a prime $P\\subset A$, put $P_0=P\\cap A_0$, and let $C$ and $C_0$ be the maximal-ideal-adic completions of $A_P$ and $(A_0)_{P_0}$ [def-weil-pbc-adic-completion]. If $\\kappa_{A_0}(0)\\otimes_{A_0}C_0$ is geometrically regular over $\\kappa_{A_0}(0)$ [def-weil-pbc-g-ring], then $K\\otimes_A C$ is geometrically regular over $K$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PS (proposition-Noetherian-complete-G-ring), second paragraph; Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), item (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "A subring of a domain is a domain. Injectivity of the inclusion makes the contraction of the zero prime zero. Finiteness as a module implies finite type as an algebra.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The fibre at P0 is finite-dimensional over kappa(P0): tensors of module generators span it. It is Artinian, so its prime spectrum is discrete (Mathlib RingTheory.Spectrum.Prime.Noetherian). Hence the point corresponding to P is isolated, exactly the ring-map quasi-finiteness condition.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply 07PP(1) at the prime pair zero contained in P. Its contractions are zero contained in P0, and its premise is precisely the assumed geometric regularity. This gives geometric regularity of kappa_A(0) tensor_A C.",
+   "uses": [
+    "lem-weil-pbc-formal-fibre-quasi-finite-ascent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both kappa_A(0) and K localize A at the same submonoid, so the universal property gives inverse A-algebra isomorphisms. Tensoring with C identifies the generic fibres. For any finite purely inseparable L/K, restrict its field-algebra structure along the field isomorphism; finite dimension and the power-in-base characterization of pure inseparability are invariant under this bijection. Tensor cancellation identifies the resulting base change of the old fibre with L tensor_K (K tensor_A C). Thus its regularity, and Noetherianity of the unextended fibre, transport to the displayed conclusion.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-weil-pbc-formal-fibre-quasi-finite-ascent",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition Tag 07PS (proposition-Noetherian-complete-G-ring), second paragraph; Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), item (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric regularity of generic formal fibres ascends from a finite subring of a Noetherian domain",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing",
+   "date": "2026-10-12",
+   "results": "12 hits: NNRat.isFractionRing, Rat.isFractionRing, IsFractionRing, instIsFractionRing, IsFractionRing.nontrivial, IsFractionRing.nontrivial_iff_nontrivial, IsFractionRing.inv, IsFractionRing.toField; checked: no theorem on geometric regularity of these formal fibres",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiFinite.*finite|finite.*quasiFinite|IsFractionRing.*[Ee]quiv",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/FieldTheory/RatFunc/AsPolynomial.lean, Mathlib/FieldTheory/RatFunc/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; checked: no theorem on geometric regularity of these formal fibres",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra over a Noetherian domain geometric regularity of formal fibres ascends",
+   "date": "2026-10-12",
+   "results": "8 hits: Algebra.IsGeometricallyReduced.of_forall_fg, Algebra.quasiFinite_iff, Algebra.QuasiFiniteAt, Algebra.Smooth.exists_finiteType, fg_of_fg_of_fg, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.IsGeometricallyReduced; checked: no theorem on geometric regularity of these formal fibres",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompleteLocalGRing",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 (essential-surjectivity) via complete-local G-rings; Proposition Tag 07PS (proposition-Noetherian-complete-G-ring), second paragraph; Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), item (1)",
+   "via": [
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteSubringGenericFormalFiber",
+  "file": "lean/Sheaf/RingTheory/FiniteSubringGenericFormalFiber.lean",
+  "declaration": "isGeometricallyRegular_genericFormalFiber_of_finite_subring",
+  "statement": "theorem isGeometricallyRegular_genericFormalFiber_of_finite_subring (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] (A₀ : Subring A) [IsNoetherianRing A₀] [Module.Finite A₀ A] (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K] (P : Ideal A) [P.IsPrime] (hbase : let P₀ := P.comap (algebraMap A₀ A) let C₀ := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P₀)) (Localization.AtPrime P₀) Algebra.IsGeometricallyRegular (⊥ : Ideal A₀).ResidueField ((⊥ : Ideal A₀).Fiber C₀)) : let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime P)) (Localization.AtPrime P) Algebra.IsGeometricallyRegular K (TensorProduct A K C)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T095918-L-322619",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T095918-L-322619",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
