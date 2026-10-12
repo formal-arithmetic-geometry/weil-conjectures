@@ -79,10 +79,10 @@ lemma isIso_ihomComparison_comp_pre {Y K : C} [ExactPairing Y K] (φ : F.obj K �
   have hb : IsPerfectPairing (μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u) := by
     refine ⟨?_⟩
     have h : μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u =
-        ε_ (F.obj ((ihom K).obj (𝟙_ C))) (F.obj K) ≫ LaxMonoidal.ε F ≫ u := by
-      simp only [ExactPairing.evaluation, Category.assoc, Monoidal.η_ε_assoc]
-      rfl
-    rw [h, ← Category.assoc, curry_natural_right]
+        ε_ (F.obj ((ihom K).obj (𝟙_ C))) (F.obj K) ≫ (LaxMonoidal.ε F ≫ u) := by
+      change _ = (μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ OplaxMonoidal.η F) ≫ _
+      simp only [Category.assoc, Monoidal.η_ε_assoc]
+    rw [h, curry_natural_right]
     infer_instance
   rw [e]
   exact (hb.whiskerRight_comp φ.inv).isIso
@@ -98,9 +98,10 @@ lemma map_curry_leftUnitor_comp_ihomComparison_comp_pre (φ : F.obj (𝟙_ C) �
   apply uncurry_injective
   rw [uncurry_eq, uncurry_eq, MonoidalCategory.whiskerLeft_comp_assoc,
     whiskerLeft_ihomComparison_comp_pre_comp_ev, MonoidalCategory.whiskerLeft_comp_assoc,
-    ← uncurry_eq, uncurry_curry, leftUnitor_naturality, whisker_exchange_assoc,
+    ← uncurry_eq, uncurry_curry, whisker_exchange_assoc,
     μ_natural_right_assoc, ← F.map_comp_assoc, ← uncurry_eq, uncurry_curry, ← hφ,
-    Monoidal.μ_δ_assoc, inv_hom_whiskerRight_assoc]
+    Category.assoc, Category.assoc, Monoidal.μ_δ_assoc, inv_hom_whiskerRight_assoc]
+  exact (MonoidalCategory.leftUnitor_naturality φ.hom).symm
 
 end Monoidal
 
