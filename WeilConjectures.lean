@@ -655,6 +655,7 @@ public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 public import WeilConjectures.CategoryTheory.Sites.InjectiveCocycle
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
+public import WeilConjectures.CategoryTheory.Sites.LocallyExact
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.NsmulSheaf
 public import WeilConjectures.CategoryTheory.Sites.Point.DiscreteModule
@@ -669,6 +670,7 @@ public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlatModel
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Basic
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Cohomology
+public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Cone
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.FreeResolution
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Refinement
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective

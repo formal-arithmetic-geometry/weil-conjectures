@@ -142,46 +142,7 @@ end Sections
 
 section FreeSheaf
 
-/-! ### Additivity of `freeSheafHomEquiv`
-
-These are facts about the free sheaves `R[V]` of `FreeResolution.lean`. -/
-
-variable (J R) in
-/-- `freeSheafHomEquiv` is additive. -/
-lemma freeSheafHomEquiv_add (V : C) (F : Sheaf J (ModuleCat.{max u v} R))
-    (φ ψ : (freeSheaf J R).obj V ⟶ F) :
-    freeSheafHomEquiv J R V F (φ + ψ) =
-      freeSheafHomEquiv J R V F φ + freeSheafHomEquiv J R V F ψ := by
-  have h : φ + ψ = biprod.lift φ ψ ≫ (biprod.fst + biprod.snd) := by simp
-  rw [h, freeSheafHomEquiv_comp, Sheaf.Hom.add_app, ModuleCat.hom_add, LinearMap.add_apply,
-    ← freeSheafHomEquiv_comp, ← freeSheafHomEquiv_comp, biprod.lift_fst, biprod.lift_snd]
-
-variable (J R) in
-/-- `freeSheafHomEquiv` as an additive equivalence. -/
-noncomputable def freeSheafHomAddEquiv (V : C) (F : Sheaf J (ModuleCat.{max u v} R)) :
-    ((freeSheaf J R).obj V ⟶ F) ≃+ F.obj.obj (op V) where
-  __ := freeSheafHomEquiv J R V F
-  map_add' := freeSheafHomEquiv_add J R V F
-
-variable (J R) in
-@[simp]
-lemma freeSheafHomAddEquiv_apply (V : C) (F : Sheaf J (ModuleCat.{max u v} R))
-    (φ : (freeSheaf J R).obj V ⟶ F) :
-    freeSheafHomAddEquiv J R V F φ = freeSheafHomEquiv J R V F φ :=
-  rfl
-
-variable (J R) in
-/-- Under `freeSheafHomEquiv`, precomposition with the differential of the free complex
-corresponds to the differential of the cochain complex. -/
-lemma freeSheafHomEquiv_d_comp (U : SemiSimplicialObject C) (F : Sheaf J (ModuleCat.{max u v} R))
-    (q : ℕ) (φ : (U.freeComplex J R).X q ⟶ F) :
-    freeSheafHomEquiv J R (U.obj (q + 1)) F ((U.freeComplex J R).d (q + 1) q ≫ φ) =
-      (U.cochainDifferential F.obj q).hom (freeSheafHomEquiv J R (U.obj q) F φ) := by
-  rw [freeComplex_d, Preadditive.sum_comp, ← freeSheafHomAddEquiv_apply, map_sum,
-    cochainDifferential, ModuleCat.hom_sum, LinearMap.sum_apply]
-  refine Finset.sum_congr rfl fun i _ ↦ ?_
-  rw [Preadditive.zsmul_comp, map_zsmul, freeSheafHomAddEquiv_apply, freeSheafHomEquiv_map_comp,
-    ModuleCat.hom_zsmul, LinearMap.smul_apply]
+/-! ### Maps of free complexes -/
 
 /-- The morphism of sheaves `R[f] : R[V_•] ⟶ R[U_•]` of free complexes induced by a morphism of
 semi-simplicial objects `f : V ⟶ U`. -/
@@ -380,21 +341,6 @@ lemma bijective_cohomologyClass_zero (F : Sheaf J (ModuleCat.{max u v} R)) :
   have h := (hU.isResolution.bijective_cocycleClass_zero F).comp e.bijective
   convert h using 1
   exact funext key
-
-omit [HasExt.{w} (Sheaf J (ModuleCat.{max u v} R))] in
-/-- The cochain complex of an injective sheaf on a hypercover is exact in positive degrees,
-elementwise. -/
-lemma exists_cochainDifferential_eq_of_injective (I : Sheaf J (ModuleCat.{max u v} R))
-    [Injective I] (q : ℕ) (z : I.obj.obj (op (U.obj (q + 1)))) (hz : U.IsCocycle I (q + 1) z) :
-    ∃ y, (U.cochainDifferential I.obj q).hom y = z := by
-  have h := (HomologicalComplex.exactAt_iff' _ q (q + 1) (q + 1 + 1) (by simp) (by simp)).1
-    (hU.exactAt_cochainComplex_of_injective I q)
-  rw [ShortComplex.moduleCat_exact_iff] at h
-  obtain ⟨y, hy⟩ := h z (by
-    rw [HomologicalComplex.shortComplexFunctor'_obj_g, cochainComplex_d]
-    exact hz)
-  rw [HomologicalComplex.shortComplexFunctor'_obj_f, cochainComplex_d] at hy
-  exact ⟨y, hy⟩
 
 end IsHypercover
 
