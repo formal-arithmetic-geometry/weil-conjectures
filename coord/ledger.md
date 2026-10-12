@@ -9662,3 +9662,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:47 L: merged deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitBinaryGeometricLadder (stage 3; reviewer PASS; first push; landing 20261012T214708-L-1270623 (interface); batch 20261012T214703; modules 3; new nodes 2)
 - 21:47 L: merged deliver/J2/Sheaf.AlgebraicGeometry.StrictHenselianIntegralSectionsInjective (stage 3; reviewer PASS; after a return; landing 20261012T214709-L-1270803 (interface); batch 20261012T214703; modules 3; new nodes 2)
 - 21:47 L: merged deliver/K1/Sheaf.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism (stage 3; reviewer PASS; first push; landing 20261012T214709-L-1270951 (proof); batch 20261012T214703; modules 1; new nodes 0)
+- 21:47 L: merged deliver/K3/Sheaf.AlgebraicGeometry.IntegralStrictHenselianGeometricFibreSections (stage 3; reviewer PASS; after a return; landing 20261012T214710-L-1271074 (proof); batch 20261012T214703; modules 1; new nodes 0)

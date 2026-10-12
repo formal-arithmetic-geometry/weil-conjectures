@@ -14,21 +14,22 @@
  },
  "proof": [
   {
-   "text": "Integrality over affine Spec A makes Z affine Spec B, with B integral over A. Set J=m_A B. The pair (A,m_A) is henselian, and the integral-over-henselian-pair theorem gives HenselianRing B J.",
+   "text": "For an integral X over Spec A, X is affine. Put B=Gamma(X,O_X) and use the canonical affine isomorphism X to Spec B. The Stein-base ring map A to B is integral, since its Spec map is the given integral map after cancelling the affine isomorphism. For a henselian ideal I in A, Tag 09XK gives the henselian pair (B,IB). Map an irreducible closed C to D in Spec B. Mathlib identifies D with V(P), where P=vanishingIdeal(D) is prime. Tag 09Y6 makes V(P+IB) nonempty and connected. The preimage_comap_zeroLocus identity identifies its inverse image with C intersect p^{-1}(V(I)).",
    "uses": [
-    "lem-weil-pbc-integral-over-henselian-pair"
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lem-weil-pbc-henselian-pair-prime-connected"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the degree-zero henselian comparison to the proper identity of Spec B and the ideal J. Restriction to Spec(B/J) is an isomorphism.",
+   "text": "The quotient-fibre immersion is closed and its range is p^{-1}(V(I)), by the Cartesian image-preimage identity and the quotient spectrum range formula. For each finite cover q:Xprime to X, q composed with p remains integral. Apply the preceding connectedness argument to every irreducible closed subset of Xprime. The finite-cover connected-intersection criterion gives invertibility of restriction for module sheaves. Apply this with I the maximal ideal of the strictly henselian local base.",
    "uses": [
-    "lemma-weil-pbc-etale-degree-zero"
+    "lem-weil-pbc-etale-module-h0-finite-connected-criterion"
    ],
    "elementary": false
   },
   {
-   "text": "The closed-image condition gives kernel m_A for A→Ω, hence a factorization through the separably closed residue field k=A/m_A. Pullback pasting identifies Z′ with the base change of Spec(B/J) to Ω. The field-extension section theorem gives a set bijection; the module/set comparison, including its unit equation, transports this to the module restriction.",
+   "text": "Take the actual ring map phi=Spec.preimage(t). The closed-point condition implies ker(phi) is the maximal ideal. Establish IsLocalHom phi and define the unique residue-field lift psi; its composition with residue equals phi. This factors t as t1 followed by t0, where t0 is the residue map. The residue field is separably closed. Apply the existing public set-section field-extension theorem to the forgotten residue-fibre sheaf. Use a general helper for any scheme morphism with a bijective set-valued unit at the identity object: take the adjoint c of the forgotten module unit; the module/set comparison proves c is an isomorphism. The adjunction hom-equivalence formula evaluated on the identity etale object expresses the forgotten module unit as the set unit followed by c. The field-extension theorem makes the set unit bijective. Hence the module unit is bijective and invertible. Naturality along the terminal-object isomorphism and the definition of globalSectionsUpperStarMap give the desired field-extension restriction.",
    "uses": [
     "lem-weil-pbc-sections-base-field-extension",
     "lem-sc-etale-module-set-pullback-comparison"
@@ -36,7 +37,7 @@
    "elementary": false
   },
   {
-   "text": "Composition of inverse-image units and the global-section composition formula identify the composite of these two restrictions with the displayed map, up to the canonical isomorphisms. A bijective module homomorphism is invertible. The same argument includes B=0 and Λ=0.",
+   "text": "Use pullbackLeftPullbackSndIso to identify the iterated residue and extension fibre with the canonical pullback along t. The global-section composition formula and cancellation of mapped upperStarComp isomorphisms give invertibility first along this identification and then for the composite restriction. Finally use sq.isoPullback to change from the canonical model to the supplied Cartesian square, applying the same composition formula and cancellation. All auxiliary constructions are canonical, and there is no properness, finite-type, or algebraicity assumption on the extension field.",
    "uses": [
     "lemma-weil-pbc-finite-pullback-composition"
    ],
@@ -45,15 +46,16 @@
  ],
  "proof_deps": [
   "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-etale-module-h0-finite-connected-criterion",
+  "lem-weil-pbc-henselian-pair-prime-connected",
   "lem-weil-pbc-integral-over-henselian-pair",
   "lem-weil-pbc-sections-base-field-extension",
-  "lemma-weil-pbc-etale-degree-zero",
   "lemma-weil-pbc-finite-pullback-composition"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 09XK, 09ZH and 0A3I; canonical inverse-image composition"
+  "place": "K3 stage-3 Lean proof: Tags 09ZF/09ZG via integral affine connectedness (09XK and 09Y6), then 0A3I and canonical module/set-unit and pullback-composition formulas. Source tags read on the Stacks website because the literature checkout is absent locally. Repair of the duplicate private field-extension helper: generalized the local transfer lemma to arbitrary scheme morphisms with bijective set-valued unit, and apply the existing public field-extension theorem at its call site."
  },
  "mathlib_searches": [
   {
@@ -119,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T194118-L-457477",
-  "kind": "interface",
+  "landing": "20261012T214710-L-1271074",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
