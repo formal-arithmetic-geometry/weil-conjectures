@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-field-pullback-rank-one-trivial",
+ "kind": "statement",
+ "title": "Triviality over a field detected by a nonempty invertible pullback",
+ "statement": "Let $K$ be a field and let $Y$ be a nonempty scheme [def-pc-scheme]. Let $p:Y\\to\\operatorname{Spec}(K)$ be a morphism and let $N$ be a finite locally free module [def-sc-finite-locally-free-sheaf] on $\\operatorname{Spec}(K)$. If the tensor pullback $p^*N$ [def-pc-module-pullback] is invertible [def-sc-invertible-module], then $N\\cong\\mathcal O_{\\operatorname{Spec}(K)}$. Here finite locally free means a Zariski open cover with finite free restrictions; no rank is fixed in advance.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "More on Morphisms, Tag 0BF0 (lemma-get-a-closed), generic-field step in its use of Tag 0BDP; Modules, Tag 01C6 (definition-locally-free)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Finite local freeness gives a neighbourhood U of the unique point of Spec K and a finite type I with N restricted to U isomorphic to the free module on I (Scheme.Modules.exists_mem_over_iso_free). Since U contains that point it is top. overIsoFreeEquiv and isoFreeOfRestrictIso turn the restriction isomorphism into N ≅ O_K^I. These are proved source-library declarations; the top-open inclusion is an isomorphism.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uniqueness of left adjoints identifies tensor pullback with Scheme.Modules.pullback. Choose a point y of Y and an invertible trivialization on an open V containing y. pullbackComp and pullbackFreeIso show that N pulled back along V→Y→Spec K is both O_V and the free module on I. No stalk or residue-field comparison is needed.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "V is nonempty, hence Γ(V,O_V) is a nontrivial commutative ring (Scheme.component_nontrivial). Apply appLinearEquivOfIso and freeSectionsEquiv to the two isomorphisms. Mathlib supplies the strong rank condition through the retained proof imports, so Module.finrank_fintype_fun_eq_card and Module.finrank_self identify card I with 1. Fintype.card_eq_one_iff supplies a Unique instance on I, and coproductUniqueIso identifies the free module on I with O_K. Compose with the global presentation of N.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 0BF0 generic-field step, made explicit by local free presentations and the strong rank condition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally free module on spectrum of field with invertible pullback to nonempty scheme is trivial",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally free sheaf over a field rank one when pullback is invertible",
+   "results": "8 hits including SheafOfModules.pullbackObjFreeIso and Module.rankAtStalk_eq_finrank_of_free; no exact statement",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFree\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isInvertible_of|rank.*pullback|rank.*one",
+   "results": "25 Mathlib hits, mainly unrelated number-theory rank-one results; direct rg of the source library found exists_mem_over_iso_free, pullbackFreeIso and freeSectionsEquiv, used in the proof",
+   "date": "2026-10-13",
+   "verdict": "no exact match; source-library ingredients used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardLocusClosedValuativeFactorization",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: the universal Picard pullback locus is closed by Tag 0BF0; generic-field triviality in the valuative argument",
+   "via": [
+    "lem-sc-picard-locus-closed-valuative-factorization",
+    "lem-sc-picard-locus-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldPullbackRankOneTrivial.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_of_invertible_field_pullback",
+  "statement": "theorem nonempty_iso_unit_of_invertible_field_pullback\n    (K : Type u) [Field K] {Y : Scheme.{u}} [Nonempty Y]\n    (p : Y ⟶ Spec (CommRingCat.of K))\n    (N : (Spec (CommRingCat.of K)).Modules) [N.IsFiniteLocallyFree]\n    [((tensorPullback p).obj N).IsInvertible] :\n    Nonempty (N ≅ SheafOfModules.unit _)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T184247-L-3998742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T184247-L-3998742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

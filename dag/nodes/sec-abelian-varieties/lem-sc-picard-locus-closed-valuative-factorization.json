@@ -29,33 +29,49 @@
  ],
  "proof": [
   {
-   "text": "Base change f and E to A = sq.R. Flatness, properness, finite presentation and geometric integrality persist. The adjunction-unit hypothesis gives H⁰(X_K,O)=K. The square and the universal factorization equivalence give a finite locally free N over Spec K pulling back to L_K. Nonemptiness of X_K and invertibility of L_K force N to have rank one, so N and L_K are trivial.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Tag 0BF0"
-   }
+   "text": "Base change f and E along a = sq.i₂, putting p = pullback.snd f a and L = tensorPullback(pullback.fst f a)(E). Uniqueness of left adjoints identifies tensor pullback with the existing pullback and transfers invertibility. Flatness, properness, local finite presentation and geometric integrality are inferred under base change. Apply pullback_of_geometrically over the residue field sq.R/maximalIdeal to obtain the integral closed fibre.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-invertible-pullback-invertible"
+   ],
+   "elementary": true
   },
   {
-   "text": "The valuation-ring triviality theorem gives a trivialization over Spec sq.R. Taking the finite locally free module O on Spec sq.R in the universal property of j yields the required lift l and its commutativity.",
+   "text": "Set t = Spec(algebraMap sq.R sq.K) and g = t≫a. Apply hO to g. tensorPullbackObjUnitToUnit_isIso identifies its unit composite with the canonical structure-sheaf map, which is therefore an isomorphism. Evaluate at top and use ConcreteCategory.isIso_iff_bijective to get IsIso (pullback.snd f g).appTop. pullbackLeftPullbackSndIso and Hom.comp_appTop transport this to IsIso (pullback.snd p t).appTop.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The square commutativity gives sq.i₁≫j = g. Evaluate hj g to obtain finite locally free N with tensor pullback isomorphic to the pullback of E. This latter module is invertible and the generic fibre is nonempty by geometric integrality. Apply lem-sc-field-pullback-rank-one-trivial to get N ≅ O_K, then map this isomorphism under tensor pullback and use the structure-module comparison to trivialize the pullback of E. The pasting isomorphism pullbackLeftPullbackSndIso and two nonempty_tensorPullbackComp comparisons transport this trivialization to the generic pullback of L.",
+   "uses": [
+    "lem-sc-field-pullback-rank-one-trivial",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply generic_fibre_triviality_over_valuation_ring to p and L with the integral closed fibre, canonical global-sections isomorphism and generic trivialization from the preceding steps. This gives L ≅ O. The unit module on Spec sq.R is finite locally free; tensor pullback of it is O. Composing these isomorphisms gives the right side of hj sq.i₂. Its reverse implication yields the lift and its commutativity.",
    "uses": [
     "lem-sc-picard-locus-closed-valuation-triviality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "More on Morphisms, Tag 0BF0"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-field-pullback-rank-one-trivial",
   "lem-sc-picard-locus-closed-valuation-triviality"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "D2",
+  "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "More on Morphisms, Tag 0BF0"
+  "place": "Tag 0BF0 via Tag 0EX8; Lean base-change glue, with the generic-field rank step proved in FieldPullbackRankOneTrivial"
  },
  "mathlib_searches": [
   {
@@ -142,9 +158,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T135303-L-1686121",
+  "landing": "20261012T184247-L-3998742",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

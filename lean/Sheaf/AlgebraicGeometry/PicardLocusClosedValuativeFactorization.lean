@@ -8,6 +8,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import Sheaf.AlgebraicGeometry.PicardLocusClosedValuationTriviality
+import Sheaf.AlgebraicGeometry.FieldPullbackRankOneTrivial
+import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! The valuative factorization step in the proof of Tag 0BF0. -/
 
@@ -19,6 +21,29 @@ open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
+
+private noncomputable def tensorIsoPullback {A B : Scheme.{u}} (g : A ⟶ B) :
+    Modules.tensorPullback g ≅ Modules.pullback g :=
+  (Modules.nonempty_tensorPullbackAdjunction g).some.leftAdjointUniq
+    (Modules.pullbackPushforwardAdjunction g)
+
+private theorem tensor_invertible {A B : Scheme.{u}} (g : A ⟶ B)
+    (M : B.Modules) [M.IsInvertible] :
+    ((Modules.tensorPullback g).obj M).IsInvertible :=
+  Modules.IsInvertible.of_iso ((tensorIsoPullback g).app M).symm
+
+private theorem appTop_isIso_of_tensor_unit {A B : Scheme.{u}} (g : A ⟶ B)
+    (h : IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction g)).unit.app
+      (SheafOfModules.unit B.ringCatSheaf))) : IsIso g.appTop := by
+  have := h
+  have := (Modules.tensorPullbackObjUnitToUnit_isIso g).1
+  have hs : IsIso (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom) := by
+    rw [← (Modules.tensorPullbackObjUnitToUnit_isIso g).2]
+    infer_instance
+  have happ := Functor.map_isIso (SheafOfModules.evaluation B.ringCatSheaf
+    (Opposite.op ⊤)) (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom)
+  rw [ConcreteCategory.isIso_iff_bijective] at happ ⊢
+  exact happ
 
 /--
 (blueprint: lem-sc-picard-locus-closed-valuative-factorization)
@@ -66,6 +91,65 @@ theorem picard_valuative_factorization {X S : Scheme.{u}} (f : X ⟶ S)
               ((Scheme.Modules.tensorPullback (pullback.snd f g)).obj N)))
     [GeometricallyIntegral f] (sq : ValuativeCommSq j) :
     ∃ l : Spec (CommRingCat.of sq.R) ⟶ Z, l ≫ j = sq.i₂ := by
-  sorry
+  classical
+  let a := sq.i₂
+  let t := Spec.map (CommRingCat.ofHom (algebraMap sq.R sq.K))
+  let g := t ≫ a
+  let q := pullback.fst f a
+  let p := pullback.snd f a
+  let L := (Modules.tensorPullback q).obj E
+  have : L.IsInvertible := tensor_invertible q E
+  let : Field (sq.R ⧸ IsLocalRing.maximalIdeal sq.R) :=
+    Ideal.Quotient.field (IsLocalRing.maximalIdeal sq.R)
+  have hX₀ : IsIntegral (pullback p (Spec.map
+      (CommRingCat.ofHom (Ideal.Quotient.mk (IsLocalRing.maximalIdeal sq.R))))) := by
+    exact pullback_of_geometrically
+      (GeometricallyIntegral.geometrically_isIntegral (f := p))
+      (sq.R ⧸ IsLocalRing.maximalIdeal sq.R) _
+  have hglobal : IsIso (pullback.snd p t).appTop := by
+    let b := pullbackLeftPullbackSndIso f a t
+    have hg : IsIso (pullback.snd f g).appTop :=
+      appTop_isIso_of_tensor_unit _ (hO g)
+    have hb : b.hom ≫ pullback.snd f g = pullback.snd p t :=
+      pullbackLeftPullbackSndIso_hom_snd f a t
+    rw [← hb, Hom.comp_appTop]
+    infer_instance
+  obtain ⟨N, hN, ⟨e⟩⟩ := (hj g).mp ⟨sq.i₁, sq.commSq.w⟩
+  have : ((Modules.tensorPullback (pullback.fst f g)).obj E).IsInvertible :=
+    tensor_invertible _ E
+  have : ((Modules.tensorPullback (pullback.snd f g)).obj N).IsInvertible :=
+    Modules.IsInvertible.of_iso e
+  have : Nonempty (CategoryTheory.Limits.pullback f g : Scheme.{u}) := by
+    have := pullback_of_geometrically
+      (GeometricallyIntegral.geometrically_isIntegral (f := f)) sq.K g
+    exact inferInstance
+  obtain ⟨eN⟩ := Modules.nonempty_iso_unit_of_invertible_field_pullback sq.K
+    (pullback.snd f g) N
+  let eK : (Modules.tensorPullback (pullback.fst f g)).obj E ≅
+      SheafOfModules.unit _ :=
+    e ≪≫ (Modules.tensorPullback (pullback.snd f g)).mapIso eN ≪≫
+      (tensorIsoPullback _).app _ ≪≫ Modules.pullbackObjUnitIso _
+  have htriv : Nonempty ((Modules.tensorPullback (pullback.fst p t)).obj L ≅
+      SheafOfModules.unit _) := by
+    let b := pullbackLeftPullbackSndIso f a t
+    let r := pullback.fst p t
+    obtain ⟨c₁⟩ := Modules.nonempty_tensorPullbackComp r q
+    obtain ⟨c₂⟩ := Modules.nonempty_tensorPullbackComp b.hom (pullback.fst f g)
+    have hb : b.hom ≫ pullback.fst f g = r ≫ q :=
+      pullbackLeftPullbackSndIso_hom_fst f a t
+    let d : (Modules.tensorPullback (r ≫ q)).obj E ≅
+        (Modules.tensorPullback (b.hom ≫ pullback.fst f g)).obj E :=
+      eqToIso (congrArg (fun k ↦ (Modules.tensorPullback k).obj E) hb.symm)
+    exact ⟨c₁.symm.app E ≪≫ d ≪≫ c₂.app E ≪≫
+      (Modules.tensorPullback b.hom).mapIso eK ≪≫
+      (tensorIsoPullback b.hom).app _ ≪≫ Modules.pullbackObjUnitIso _⟩
+  obtain ⟨eA⟩ := generic_fibre_triviality_over_valuation_ring sq.R sq.K
+    (pullback f a) p L hX₀ hglobal htriv
+  let eunit : (Modules.tensorPullback p).obj
+      (SheafOfModules.unit (Spec (CommRingCat.of sq.R)).ringCatSheaf) ≅
+      SheafOfModules.unit _ :=
+    (tensorIsoPullback p).app _ ≪≫ Modules.pullbackObjUnitIso p
+  exact (hj a).mpr ⟨SheafOfModules.unit _,
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _, ⟨eA ≪≫ eunit.symm⟩⟩
 
 end AlgebraicGeometry.Scheme
