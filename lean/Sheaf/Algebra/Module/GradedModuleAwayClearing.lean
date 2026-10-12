@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+import Sheaf.Algebra.Module.GradedModuleAwayClearingModule
+import Sheaf.Algebra.Module.GradedModuleAwayClearingRing
 
 /-!
 # GradedModuleAwayClearing
@@ -92,6 +94,10 @@ theorem gradedModuleAwayClearing
       (∀ y : Z g, ∃ (n : ℕ) (x : Z f),
         (rhoS f g p (U f g)) ^ n • y = rho f g p x) ∧
       (∀ y : R g, ∃ (n : ℕ) (x : R f),
-        (rhoS f g p (U f g)) ^ n * y = rhoS f g p x) := by sorry
+        (rhoS f g p (U f g)) ^ n * y = rhoS f g p x) := by
+  dsimp
+  intro Z hZ lambda lambdaS rho rhoS U h f g p
+  exact ⟨gradedModuleAwayClearingModule 𝒜 𝓜 h𝓜 hsmul Z hZ lambda lambdaS rho rhoS U h f g p,
+    gradedModuleAwayClearingRing 𝒜 𝓜 h𝓜 hsmul Z hZ lambda lambdaS rho rhoS U h f g p⟩
 
 end LocalizedModule
