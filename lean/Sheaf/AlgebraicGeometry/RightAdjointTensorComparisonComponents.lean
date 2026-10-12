@@ -49,5 +49,50 @@ theorem rightAdjointTensorComparison_components
           ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,
             hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
           (ObjectProperty.homMk ((pf K).hom ≫
-            K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) := by sorry
+            K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) := by
+  dsimp only
+  let E := (c.obj ⟨𝟙_ _, hO⟩).obj
+  -- Transpose the pinned inverses to use oplax naturality and tensor interchange.
+  have hinv (K L : schemeDerivedQCohCategory Y) (g : K ⟶ L) :
+      g.hom ▷ (schemeDerivedDirectImage f).obj E ≫ (pf L).inv =
+        (pf K).inv ≫ (schemeDerivedDirectImage f).map
+          ((derivedPullback f).map g.hom ▷ E) := by
+    rw [hpf K, hpf L, ← a.homEquiv_naturality_left,
+      ← a.homEquiv_naturality_right]
+    congr 1
+    simp only [Functor.Monoidal.μIso_inv]
+    rw [← Category.assoc, ← Functor.OplaxMonoidal.δ_natural_left]
+    simp only [Category.assoc]
+    rw [← whisker_exchange]
+    rfl
+  -- Naturality of the inverse family gives naturality of the forward family.
+  have hhom (K L : schemeDerivedQCohCategory Y) (g : K ⟶ L) :
+      (schemeDerivedDirectImage f).map ((derivedPullback f).map g.hom ▷ E) ≫
+          (pf L).hom = (pf K).hom ≫ g.hom ▷ (schemeDerivedDirectImage f).obj E := by
+    rw [← cancel_epi (pf K).inv]
+    simp only [Iso.inv_hom_id_assoc]
+    rw [← Category.assoc, ← hinv K L g]
+    simp
+  -- The component formula is natural after transposition along the right adjunction.
+  refine ⟨?_, ?_⟩
+  · refine
+      { app := fun K ↦ by
+          exact (adj.homEquiv
+            ⟨((derivedPullback f).obj K.obj) ⊗ E, hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
+            (ObjectProperty.homMk ((pf K).hom ≫
+              K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))
+        naturality := ?_ }
+    intro K L g
+    apply adj.homEquiv_naturality_left_square
+    ext
+    change (schemeDerivedDirectImage f).map ((derivedPullback f).map g.hom ▷ E) ≫
+        ((pf L).hom ≫ L.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ L.obj).hom) =
+      ((pf K).hom ≫ K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom) ≫ g.hom
+    rw [← Category.assoc, hhom K L g]
+    simp only [Category.assoc]
+    rw [← whisker_exchange_assoc]
+    dsimp only [Functor.id_obj]
+    rw [rightUnitor_naturality]
+  · intro K
+    rfl
 end AlgebraicGeometry
