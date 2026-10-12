@@ -13,8 +13,9 @@ import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
-import Sheaf.CategoryTheory.CompactObject
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
+import Sheaf.AlgebraicGeometry.DerivedQCohCompactGenerationCore
 
 /-! # Compact generation of the quasi-coherent derived category
 
@@ -61,6 +62,17 @@ theorem schemeDerivedQCoh_compactlyGenerated (X : Scheme.{u})
       ∃ hsums : HasCoproducts.{u} (schemeDerivedQCohCategory X),
         letI := hsums
         IsCompactlyGeneratedTriangulated.{u} (schemeDerivedQCohCategory X) := by
-  sorry
+  let := Classical.choice (nonempty_derivedOpenLocalization X)
+  have htri : (schemeDerivedQCohProperty X).IsTriangulated := by
+    have hs := (supported_perfect_generator X Set.univ isClosed_univ (by simp)).1
+    simpa using hs
+  refine ⟨htri, ?_⟩
+  let := htri
+  let := derivedQCohDirectSums X
+  obtain ⟨I, P, hperfect, hrepresentatives⟩ := Scheme.exists_perfectComplex_representatives X
+  refine ⟨derivedQCohDirectSums X, I, P, ?_, ?_⟩
+  · exact fun i ↦ perfectObjectCompact X (P i) (hperfect i)
+  · exact schemeDerivedQCoh_representatives_generate X htri P hrepresentatives
+      (derivedQCohPerfectGeneration X)
 
 end AlgebraicGeometry

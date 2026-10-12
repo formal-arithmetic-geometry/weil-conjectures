@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-derived-qcoh-representatives-generate",
+ "kind": "statement",
+ "title": "Perfect representatives weakly generate",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with chosen derived localizations of $\\mathcal O_X$-modules and of the modules on every open, in one Hom universe. Give $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category] its inherited triangulated structure. Suppose its perfect localizing closure [def-pc-perfect-localizing-closure] is the whole category. Let $(P_i)_{i\\in I}$ be a family indexed by a set in the scheme universe, such that every perfect object [def-pc-perfect-complex] is isomorphic to some $P_i$. With the coproducts provided by lem-pc-derived-qcoh-direct-sums, this family is generating [def-pc-generators]: its coproduct is a weak generator. Compactness of the $P_i$ is not assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-localizing-closure",
+  "def-pc-perfect-complex",
+  "def-pc-generators"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+  "place": "Tag 09IS; orthogonal-class reduction in lem-pc-derived-qcoh-compact-generation, proof step 2"
+ },
+ "proof": [
+  {
+   "text": "Use the supplied coproducts. If every map from the coproduct into every shift of K is zero, extend a map on an individual summand using zero maps on the other summands. The representative isomorphisms give the same vanishing for every perfect object. Shift adjunction converts target-shift vanishing to source-shift vanishing.",
+   "uses": [
+    "lem-pc-derived-qcoh-direct-sums",
+    "def-pc-generators"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The class of objects A for which every map A[m] to K is zero is isomorphism-invariant, shift-closed, retract-closed, and sum-closed by the coproduct universal property and preservation of sums by shifts. For a cone, exactness of Hom makes its map to K factor through the shift of the first triangle term, so it vanishes. This class contains every perfect object and hence contains their localizing closure. The supplied equality with top puts K in it. Its identity is zero, so K is zero, including the empty-family case.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-pc-perfect-localizing-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-generators",
+  "def-pc-perfect-localizing-closure",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+  "place": "Tag 09IS; orthogonal-class reduction in lem-pc-derived-qcoh-compact-generation, proof step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Perfect representatives whose localizing closure is the whole derived category have a coproduct which is a weak generator",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A set of representatives of objects generating a localizing subcategory has coproduct a weak generator of the triangulated category",
+   "results": "CategoryTheory.ObjectProperty.isLocal_trW; CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated; CategoryTheory.ObjectProperty.instHasRightCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated; CategoryTheory.ObjectProperty.isColocal_trW; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Pretriangulated.instHasFiniteCoproducts; CategoryTheory.Triangulated.Subcategory.W_iff'; CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal|generat",
+   "results": "Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean; Mathlib/CategoryTheory/Triangulated/Orthogonal.lean; Mathlib/CategoryTheory/Triangulated/Orthogonal.lean; Mathlib/CategoryTheory/Triangulated/Orthogonal.lean; Mathlib/CategoryTheory/Triangulated/Orthogonal.lean; Mathlib/CategoryTheory/Triangulated/Orthogonal.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: compare the dualizing sheaves of the source and target under the finite morphism; orthogonal-class argument in compact generation",
+   "via": [
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedQCohCompactGenerationCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedQCohCompactGenerationCore.lean",
+  "declaration": "AlgebraicGeometry.schemeDerivedQCoh_representatives_generate",
+  "statement": "theorem schemeDerivedQCoh_representatives_generate (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (htri : (schemeDerivedQCohProperty X).IsTriangulated) {I : Type u} (P : I → schemeDerivedQCohCategory X) (hrepresentatives : ∀ E : schemeDerivedQCohCategory X, Scheme.IsPerfect X E.obj → ∃ i : I, Nonempty (E ≅ P i)) (hclosure : perfectLocalizingClosure X = (⊤ : ObjectProperty (schemeDerivedQCohCategory X))) : letI := htri letI := derivedQCohDirectSums X IsTriangulatedGeneratingFamily P",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915684",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

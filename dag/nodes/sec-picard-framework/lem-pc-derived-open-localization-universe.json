@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-derived-open-localization-universe",
+ "kind": "statement",
+ "title": "Derived localizations on opens in the ambient Hom universe",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], and suppose the localization defining $D(\\mathcal O_X)$ [def-pc-derived-category] has morphisms in universe $w$. Then there exists a dependent family, over all open subsets $U$ of $X$, of chosen localizations of complexes of $\\mathcal O_X|_U$-modules at quasi-isomorphisms whose morphisms also lie in universe $w$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BT, exact extension-by-zero/restriction derived adjunction; Mathlib HasDerivedCategory.standard and localization universal property"
+ },
+ "proof": [
+  {
+   "text": "First choose the standard derived localizations with their unrestricted Hom universe. Exact extension by zero and restriction induce a derived adjunction. The unit is an isomorphism because restriction of extension by zero is the identity, checked on stalks. Thus derived extension by zero is fully faithful.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the ambient standard localization to the given ambient localization by the localization universal property. Full faithfulness identifies each Hom on U with a Hom in the given ambient category, hence makes it w-small. Replace each Hom by a w-small model and transport composition and identities along these bijections. Compose the standard localization functor with the resulting equivalence; it remains a localization. Choose these localizations simultaneously over all opens.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BT, exact extension-by-zero/restriction derived adjunction; Mathlib HasDerivedCategory.standard and localization universal property"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact fully faithful functor with exact adjoint induces a fully faithful functor on unbounded derived categories",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "MorphismProperty.HasLocalization",
+   "results": "loogle: unknown identifier 'MorphismProperty.HasLocalization'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasLocalization|fullyFaithful",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; Mathlib/Algebra/Homology/DerivedCategory/Basic.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Plus.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: compare the dualizing sheaves of the source and target under the finite morphism; open localizations needed by the perfect-generation and compactness interfaces",
+   "via": [
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenLocalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenLocalization.lean",
+  "declaration": "AlgebraicGeometry.nonempty_derivedOpenLocalization",
+  "statement": "theorem nonempty_derivedOpenLocalization (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] : Nonempty (∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915684",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915684",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
