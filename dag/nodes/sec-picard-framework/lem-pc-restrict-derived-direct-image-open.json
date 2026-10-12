@@ -25,25 +25,34 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective resolution E \\to I^\\bullet on X. Since U=f^{-1}(V) is open in X, [lem-sc-derived-k-injective-restrict-open] says that I^\\bullet|_U is K-injective on U, so it computes Rg_*(E|_U).",
+   "text": "Restriction over U=f^{-1}(V) preserves K-injective complexes by [lem-sc-derived-k-injective-restrict-open]. Transport this through Scheme.Modules.overEquiv U, whose functor is an additive equivalence and hence preserves K-injective complexes. Use Functor.preservesKInjectiveComplexes_comp to obtain the same property for the full restriction functor from modules on X to modules on the open subscheme U. Both restriction functors are exact (finite limits and colimits are preserved).",
    "uses": [
     "lem-sc-derived-k-injective-restrict-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 08BS, used in the proof of Lemma 08FE"
+    "place": "Tag 08BS, as used in the proof of Tag 08FE"
    }
   },
   {
-   "text": "By the K-injective construction of derived direct image [def-pc-ringed-spaces-derived-direct-image], Rf_*E is represented by f_*I^\\bullet and Rg_*(E|_U) by g_*(I^\\bullet|_U). For every open W\\subseteq V, (g_*I^\\bullet|_U)(W)=I^\\bullet(f^{-1}(W))=(f_*I^\\bullet)(W), so these complexes are canonically identical after restricting f_*I^\\bullet to V. The componentwise identifications commute with differentials and are natural in E, giving the canonical derived isomorphism.",
+   "text": "Construct the underived natural isomorphism f_* followed by restriction to V is isomorphic to restriction to U followed by g_*. Transport both restrictions to Scheme.Modules.restrictFunctor using Scheme.Modules.overFunctorEquiv. Compose the pushforwards with SheafOfModules.pushforwardComp. The inverse-image opens agree by image_morphismRestrict_preimage; use the corresponding eqToIso as a natural isomorphism of indexing functors. The scalar-action morphisms agree by morphismRestrict_app (and Opens.ι_appIso). SheafOfModules.pushforwardCongr₂ supplies the natural module-sheaf isomorphism. This is the sectionwise identity M(f^{-1}W) on every open W of V, including the empty open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08FE, last sentence of proof; implemented using Mathlib.AlgebraicGeometry.Restrict and Mathlib.AlgebraicGeometry.Modules.Sheaf"
+   }
+  },
+  {
+   "text": "The derived direct images [def-pc-ringed-spaces-derived-direct-image] are moduleDirectImage.rightDerivedFunctor. For arbitrary additive F and exact G, Functor.rightDerivedFunctorCompMapDerivedCategoryIso identifies R(F composed with G) with RF followed by G.mapDerivedCategory, so apply its inverse to f_* and restriction on Y. Derive the underived isomorphism of step 2 with Functor.rightDerivedFunctorNatIso. Then Functor.rightDerivedFunctorCompIso identifies the right-hand composite using K-injective preservation from step 1. Finally replace the right derived restriction on X by levelwise restriction with rightDerivedFunctorIsoMapDerivedCategory and whisker by Rg_*. Composing these four natural isomorphisms gives the required functor isomorphism, with the four derived-category universe levels explicitly retained. All generic derived-functor isomorphisms used here are already proved in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp and .MapDerivedCategory.",
    "uses": [
     "def-pc-ringed-spaces-derived-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 08FE, proof after reduction to a K-injective complex"
+    "place": "Tag 08FE, K-injective computation and termwise comparison; the generic derivation glue is the proved source-library API"
    }
   }
  ],
@@ -54,7 +63,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 08FE, using Lemma 08BS"
+  "place": "Tag 08FE using Tag 08BS; naturality and derivation assembled with the proved source-library RightDerivedFunctor.Comp, MapDerivedCategory and FullyFaithful APIs"
  },
  "mathlib_searches": [
   {
@@ -151,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T063518-L-3158984",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

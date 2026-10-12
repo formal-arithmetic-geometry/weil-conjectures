@@ -6510,3 +6510,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Curve.ModuleSheafUnderlyingPreservesColimit (stage 3; reviewer PASS; first push; landing 20261012T063517-L-3158508 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.Curve.PrimeBiproductUnconditional (stage 3; reviewer PASS; first push; landing 20261012T063518-L-3158640 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/R1/Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantCore (stage 3; reviewer PASS; first push; landing 20261012T063518-L-3158798 (proof); batch 20261012T063502; modules 1; new nodes 0)
+- 06:35 L: merged deliver/R1/Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction (stage 3; reviewer PASS; first push; landing 20261012T063518-L-3158984 (proof); batch 20261012T063502; modules 1; new nodes 0)
