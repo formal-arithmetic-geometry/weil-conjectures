@@ -64,8 +64,9 @@ lemma transitionId_inv_shift (k : ι) (h : k ≤ k) (n : ℤ) (K : F.obj ⟨k⟩
   rw [Functor.commShiftIso_id_hom_app] at e
   erw [comp_id] at e
   rw [← cancel_epi (((F.transitionId k h).hom.app K)⟦n⟧'), ← Functor.map_comp_assoc,
-    Iso.hom_inv_id_app, Functor.map_id, id_comp, e, assoc, Iso.hom_inv_id_app, comp_id,
-    Iso.hom_inv_id_app]
+    Iso.hom_inv_id_app, Functor.map_id, id_comp,
+    ← cancel_epi (((F.transition h).commShiftIso n).hom.app K), Iso.hom_inv_id_app,
+    reassoc_of% e, Iso.hom_inv_id_app]
 
 end ShiftUnit
 
@@ -95,32 +96,32 @@ variable {k m : ι} (h : k ≤ m) (S : Triangle (F.obj ⟨k⟩))
 @[simp]
 lemma inclMapTriangleTransIso_hom_app_hom₁ :
     ((inclMapTriangleTransIso F h).hom.app S).hom₁ = (inclTransIso F h).hom.app S.obj₁ := by
-  simp [inclMapTriangleTransIso]
+  simp [inclMapTriangleTransIso] <;> first | exact comp_id _ | exact id_comp _
 
 @[simp]
 lemma inclMapTriangleTransIso_hom_app_hom₂ :
     ((inclMapTriangleTransIso F h).hom.app S).hom₂ = (inclTransIso F h).hom.app S.obj₂ := by
-  simp [inclMapTriangleTransIso]
+  simp [inclMapTriangleTransIso] <;> first | exact comp_id _ | exact id_comp _
 
 @[simp]
 lemma inclMapTriangleTransIso_hom_app_hom₃ :
     ((inclMapTriangleTransIso F h).hom.app S).hom₃ = (inclTransIso F h).hom.app S.obj₃ := by
-  simp [inclMapTriangleTransIso]
+  simp [inclMapTriangleTransIso] <;> first | exact comp_id _ | exact id_comp _
 
 @[simp]
 lemma inclMapTriangleTransIso_inv_app_hom₁ :
     ((inclMapTriangleTransIso F h).inv.app S).hom₁ = (inclTransIso F h).inv.app S.obj₁ := by
-  simp [inclMapTriangleTransIso]
+  simp [inclMapTriangleTransIso] <;> first | exact comp_id _ | exact id_comp _
 
 @[simp]
 lemma inclMapTriangleTransIso_inv_app_hom₂ :
     ((inclMapTriangleTransIso F h).inv.app S).hom₂ = (inclTransIso F h).inv.app S.obj₂ := by
-  simp [inclMapTriangleTransIso]
+  simp [inclMapTriangleTransIso] <;> first | exact comp_id _ | exact id_comp _
 
 @[simp]
 lemma inclMapTriangleTransIso_inv_app_hom₃ :
     ((inclMapTriangleTransIso F h).inv.app S).hom₃ = (inclTransIso F h).inv.app S.obj₃ := by
-  simp [inclMapTriangleTransIso]
+  simp [inclMapTriangleTransIso] <;> first | exact comp_id _ | exact id_comp _
 
 end
 

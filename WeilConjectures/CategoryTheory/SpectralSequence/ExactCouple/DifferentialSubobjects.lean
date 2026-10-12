@@ -39,6 +39,12 @@ lemma imageSubobject_epi_comp {A B Z : C} (e : A ⟶ B) [Epi e] (u : B ⟶ Z) :
       kernel.condition_assoc, zero_comp, zero_comp]
   · rw [← cancel_epi e, Abelian.comp_epiDesc_assoc, imageSubobject_arrow_comp]
 
+/-- Equal subobjects have equal images under a morphism. -/
+lemma imageSubobject_arrow_comp_congr {B Z : C} {S T : Subobject B} (h : S = T) (g : B ⟶ Z) :
+    imageSubobject (S.arrow ≫ g) = imageSubobject (T.arrow ≫ g) := by
+  subst h
+  rfl
+
 /-- The kernel of a composite is the pullback of the kernel of the second map. -/
 lemma kernelSubobject_comp_eq_pullback {A B Z : C} (u : A ⟶ B) (v : B ⟶ Z) :
     kernelSubobject (u ≫ v) = (Subobject.pullback u).obj (kernelSubobject v) := by
@@ -86,9 +92,9 @@ lemma imageSubobject_d_eq_image_kernelSubobject_α (p q p' q' a b : ℤ) (hp : p
     imageSubobject (X.d p q p' q' hp hq) =
       imageSubobject ((kernelSubobject (X.α a b (a - 1) (b + 1) (by lia) (by lia))).arrow ≫
         X.g a b p' q' (by lia) (by lia)) := by
-  rw [X.imageSubobject_d p q p' q' a b hp hq ha hb,
-    ShortComplex.exact_iff_image_eq_kernel.1
-      (X.exact_f_α p q a b (a - 1) (b + 1) ha hb (by lia) (by lia))]
+  rw [X.imageSubobject_d p q p' q' a b hp hq ha hb]
+  exact imageSubobject_arrow_comp_congr (ShortComplex.exact_iff_image_eq_kernel.1
+    (X.exact_f_α p q a b (a - 1) (b + 1) ha hb (by lia) (by lia))) _
 
 end ExactCouple
 

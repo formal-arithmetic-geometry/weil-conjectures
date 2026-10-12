@@ -40,7 +40,11 @@ noncomputable def functorEquivalenceInverseCompMapHomologicalComplexLim
     (functorEquivalence C c J).inverse ⋙ lim.mapHomologicalComplex c ≅ lim :=
   NatIso.ofComponents (fun F ↦
     (Hom.isoOfComponents (fun i ↦ IsLimit.conePointUniqueUpToIso (limit.isLimit _)
-        (isLimitOfPreserves (eval C c i) (limit.isLimit F))) (by aesop_cat))) (by
+        (isLimitOfPreserves (eval C c i) (limit.isLimit F))) (fun i j _ ↦
+          (isLimitOfPreserves (eval C c j) (limit.isLimit F)).hom_ext fun k ↦ by
+            simp only [Category.assoc]
+            erw [IsLimit.conePointUniqueUpToIso_hom_comp]
+            simp [← comp_f]))) (by
           intro F G f
           ext i
           dsimp

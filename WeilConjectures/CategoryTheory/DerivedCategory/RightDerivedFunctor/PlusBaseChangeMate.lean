@@ -67,7 +67,7 @@ theorem rightDerivedFunctorPlusBaseChange_mateEquiv (adj : L ⊣ R) (adj' : L' �
       G.mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom)
     (HomotopyCategory.Plus.quasiIso C₁) _ _ _ ?_
   rw [Functor.rightDerivedFunctorPlusBaseChange_fac]
-  ext K
+  refine NatTrans.ext (funext fun K ↦ ?_)
   have h := derivedPlus_mateEquiv_app_fac adj adj' σ θ hθ K
   simp only [Functor.rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,

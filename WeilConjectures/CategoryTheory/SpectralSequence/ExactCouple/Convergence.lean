@@ -285,9 +285,9 @@ noncomputable def abutmentStepIsoIter (n j : ℤ) (k : ℕ) (u v : ℤ) (hj : 0 
   have := h.isIso_abutmentStepToIter n j k u v hj hu hv hu0
   asIso (X.abutmentStepToIter n j k u v hj hu hv hu0)
 
+omit h in
 /-- The short complex `D_{k+2}^{p-k+1,q+k-1} ⟶ D_{k+2}^{p-k,q+k} ⟶ E_{k+2}^{p,q}` given by
 `α_{k+2}` and `g_{k+2}`. -/
-omit h in
 noncomputable abbrev αgSc (X : ExactCouple C 0) (k : ℕ) (p q : ℤ) : ShortComplex C :=
   ShortComplex.mk _ _ ((X.iter k).α_g (p - k + 1) (q + k - 1) (p - k) (q + k) p q)
 
@@ -313,7 +313,8 @@ noncomputable def grIsoIterE (k : ℕ) (p q n : ℤ) (hn : p + q = n) (hp : 0 �
       (h.abutmentStepIsoIter n p k (p - k) (q + k) hp (by lia) (by lia) (by lia))
       (X.abutmentFiltration_incl_stepToIter n p k (p - k) (q + k) hp (by lia) (by lia)
         (by lia)) ≪≫
-    IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel _) (h.αgSc_exact k p q).gIsCokernel
+    IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel _)
+      (αgSc_exact (X := X) k p q).gIsCokernel
 
 @[reassoc]
 lemma grπ_grIsoIterE_hom (k : ℕ) (p q n : ℤ) (hn : p + q = n) (hp : 0 ≤ p)
