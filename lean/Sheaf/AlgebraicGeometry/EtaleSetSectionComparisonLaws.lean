@@ -6,7 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSectionComparison
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonIdentity
+import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonComposition
 
 /-! # An intermediate step in continuity of étale sections
 Source: Stacks Project, Tag 09YQ. -/
@@ -57,6 +58,24 @@ theorem etaleSetSectionComparisonLaws
           (etaleSetSectionComparison (c.π.app k.left) (D.map k.hom)
           (c.π.app (op i₀)) (c.w k.hom) G W₀) =
         (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom)
-          (c.π.app (op i₀)) (c.w j.hom) G W₀)) := by sorry
+          (c.π.app (op i₀)) (c.w j.hom) G W₀)) := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro j
+    simpa only [Over.id_left, D.map_id] using
+      etaleSetSectionComparisonIdentity (D.map j.hom) G W₀
+  · intro j k l a b
+    simpa only [Over.comp_left, D.map_comp] using
+      etaleSetSectionComparisonComposition (D.map a.left) (D.map b.left)
+        (D.map j.hom) (D.map k.hom) (D.map l.hom)
+        ((D.map_comp a.left j.hom).symm.trans
+          (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w))
+        ((D.map_comp b.left k.hom).symm.trans
+          (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) b.w)) G W₀
+  · intro j k a
+    have h := etaleSetSectionComparisonComposition (D.map a.left) (c.π.app k.left)
+      (D.map j.hom) (D.map k.hom) (c.π.app (op i₀))
+      ((D.map_comp a.left j.hom).symm.trans
+        (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) a.w)) (c.w k.hom) G W₀
+    simpa only [c.w a.left] using h
 
 end AlgebraicGeometry

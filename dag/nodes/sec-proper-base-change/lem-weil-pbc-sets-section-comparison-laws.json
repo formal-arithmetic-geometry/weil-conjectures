@@ -12,20 +12,36 @@
  ],
  "proof": [
   {
-   "text": "Expand the section comparison into unit, composition comparison, equality transport and restriction along pullback pasting. Unit naturality moves restrictions through units. The unit-compatible composition comparison is unique, and its associativity clause identifies the two routes for a triple composite. For an identity transition, compare with the identity-base-change adjunction; the unit equation and uniqueness make the composite act as the identity. Pullback pasting morphisms agree by their projections. For cone legs use the same composite calculation and cone naturality. This gives the identity, transition-composition and cone-leg equations, without a limit or qcqs assumptions.",
+   "text": "Specialize the scheme-level identity calculation to D(j.hom). Over.id_left and functorial preservation of identities identify the transition morphism with the identity. Proof irrelevance identifies the triangle witnesses.",
    "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-sets-section-comparison-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the scheme-level composition calculation to D(a.left), D(b.left), D(j.hom), D(k.hom), D(l.hom). Over.comp_left and D.map_comp identify the composite transition with D((b≫a).left).",
+   "uses": [
+    "lem-weil-pbc-sets-section-comparison-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same composition calculation to D(a.left) and the cone projection at k.left. Cone naturality c.w a.left identifies their composite with the projection at j.left. This proves compatibility of the transition and cone-leg maps.",
+   "uses": [
+    "lem-weil-pbc-sets-section-comparison-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+  "lem-weil-pbc-sets-section-comparison-identity",
+  "lem-weil-pbc-sets-section-comparison-composition"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem Tag 09YQ (theorem-colimit), degree zero for sheaves of sets; proof via Tags 0EYL, 04HR, 09YN and the finite affine-cover reduction for qcqs schemes; concrete section formulation and finite-cover argument written by T1"
+  "by": "agent",
+  "agent": "B2 stage-3 worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 03CC: scheme-level identity and composition specialize by functor and cone naturality; same route as the previous proof, split into reusable calculations"
  },
  "mathlib_searches": [
   {
@@ -94,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-fcc6f",
-  "group": "T1",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T053955-L-2646381",
+  "landing": "20261012T070527-L-3465970",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, Lean declarations, DAG nodes, report, relocation record, and clean compilation match the stage-3 review requirements."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
