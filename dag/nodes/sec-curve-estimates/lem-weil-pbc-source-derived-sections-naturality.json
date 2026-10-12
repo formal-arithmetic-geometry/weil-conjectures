@@ -1,0 +1,205 @@
+{
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "status": "split",
+ "id": "lem-weil-pbc-source-derived-sections-naturality",
+ "kind": "statement",
+ "title": "Naturality of derived Hom to sections",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 03Q9"
+ },
+ "statement": "For any site with sheafification and a derived category of abelian sheaves, any bounded-below derived object K, a K-injective integer cochain complex L, an isomorphism q : K.obj ≅ Q(L), any integer n, and any arrow a : U → V of the site, the explicitly constructed composite sourcePlusHomIso ≪≫ sourceClassDerivedHomIso.symm ≪≫ leftHomologyData.homologyIso.symm ≪≫ homology.mapIso(sourceFreeSectionsComplexIso) intertwines precomposition by the free-sheaf single-complex map of a with homology of the sections restriction along a. The named comparison constructions are those of [def-weil-pbc-strict-local-injective-source-comparison].",
+ "proof": [
+  {
+   "text": "For each W, use the single complex on the free sheaf of W. Precomposition\nby the free-sheaf map of a sends a cocycle to its precomposition and respects\nboundaries. The Hom-complex cohomology isomorphism intertwines this operation\nwith the homology map of the precomposition chain map: check after the surjection\nfrom cocycles, where both maps are the class of that cocycle. The equivalence\nfrom classes to homotopy maps sends it to precomposition by the single-complex\nmap, by equivHomShift_symm_precomp and functoriality of the homotopy quotient.\nApplying Qh preserves this equality. Its map is bijective into the shifted\nK-injective L; therefore its inverse also respects precomposition. Naturality of\nquotientCompQhIso and singleFunctorIsoCompQ cancels the two localization\ncomparisons. The fully faithful inclusion of D+ and transport by q respect\nprecomposition by functoriality and associativity. Finally, evaluating the free\nsheaf generator after precomposition is restriction of the section, by naturality\nof the sheafification, free abelian group, and Yoneda adjunctions. This gives an\nequality of chain maps under sourceFreeSectionsComplexIso. Taking homology and\ncomposing the preceding squares gives the displayed equality. Identity arrows\nact identically; zero L gives zero groups; the argument uses any integer degree,\nwithout an assumption that n is nonnegative.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SourceDerivedSectionsNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SourceDerivedSectionsNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.sourceDerivedSections_naturality",
+  "statement": "theorem sourceDerivedSections_naturality\n    {C : Type (v + 1)} [Category.{v} C]\n    {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]\n    [HasDerivedCategory.{v + 1} (Sheaf T AddCommGrpCat.{v + 1})]\n    (K : DerivedCategory.Plus (Sheaf T AddCommGrpCat.{v + 1}))\n    (L : CochainComplex (Sheaf T AddCommGrpCat.{v + 1}) ℤ) [L.IsKInjective]\n    (q : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) {U V : C} (a : U ⟶ V) :\n    let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n\n    let e := fun W : C ↦\n      sourcePlusHomIso ((strictLocalFreeSheaf T).obj W) K L q n ≪≫\n      (sourceClassDerivedHomIso ((strictLocalFreeSheaf T).obj W) L n).symm ≪≫\n      (leftHomologyData ((CochainComplex.singleFunctor _ 0).obj\n        ((strictLocalFreeSheaf T).obj W)) L n).homologyIso.symm ≪≫\n      H.mapIso (sourceFreeSectionsComplexIso W L)\n    AddCommGrpCat.ofHom (Preadditive.leftComp (K⟦n⟧)\n      ((DerivedCategory.Plus.singleFunctor _ 0).map ((strictLocalFreeSheaf T).map a))) ≫\n        (e U).hom =\n      (e V).hom ≫ H.map\n        ((NatTrans.mapHomologicalComplex\n          ((sheafSections T AddCommGrpCat.{v + 1}).map a.op) (.up ℤ)).app L)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent following document",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 03Q9, injective-complex computation"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceTransition",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 final paragraph: computing f_*J and restricting its sections on each neighbourhood",
+   "via": [
+    "lem-weil-pbc-strict-local-injective-source-sections",
+    "lem-weil-pbc-strict-local-mate-projection-formulas",
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived Hom into a K injective complex under precomposition and identification with Hom complex cohomology",
+   "results": [
+    "CategoryTheory.InjectiveResolution.extMk_hom",
+    "CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
+    "CategoryTheory.InjectiveResolution.extMk_comp_mk₀",
+    "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+    "CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc",
+    "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+    "CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom",
+    "CategoryTheory.InjectiveResolution.mk₀_comp_extMk"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Related generic infrastructure; no equality for this constructed comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+   "results": [
+    "CochainComplex.HomComplex.CohomologyClass.homAddEquiv",
+    "CochainComplex.HomComplex.CohomologyClass.homAddEquiv_apply"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Related generic infrastructure; no equality for this constructed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceStageSectionsIso|sourceClassDerivedHomIso|homologyIso.*naturality",
+   "results": [
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/Homology.lean"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Related generic infrastructure; no equality for this constructed comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of cohomology of a Hom complex under precomposition",
+   "results": [
+    "groupCohomology.cochainsMap_comp",
+    "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply",
+    "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁",
+    "CochainComplex.HomComplex.Cocycle.toSingleMk_precomp",
+    "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc",
+    "CochainComplex.HomComplex.Cocycle.precomp_coe",
+    "groupCohomology.cochainsMap_comp_assoc",
+    "groupCohomology.cochainsMap_f_2_comp_cochainsIso₂"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Related generic infrastructure; no equality for this constructed comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.naturality",
+   "results": [],
+   "date": "2026-10-13",
+   "verdict": "Related generic infrastructure; no equality for this constructed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyIso.*naturality|equivHomShift.*precomp|localization.*restriction",
+   "results": [
+    "Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean",
+    "Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean",
+    "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+    "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+    "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+    "Mathlib/RingTheory/LocalProperties/Basic.lean",
+    "Mathlib/RingTheory/LocalProperties/Basic.lean",
+    "Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Related generic infrastructure; no equality for this constructed comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology of sections of a K injective complex is natural under restriction to objects of a site",
+   "results": [],
+   "date": "2026-10-13",
+   "verdict": "Service unavailable; recorded attempt, no mathematical verdict."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaf sections and naturality of comparison with inverse image under etale localization",
+   "results": [
+    "CategoryTheory.Sheaf.ΓRes_map",
+    "AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+    "AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+    "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality",
+    "AlgebraicGeometry.Scheme.ofRestrict_app",
+    "CategoryTheory.Sheaf.ΓRes_map_assoc",
+    "AlgebraicGeometry.Scheme.Hom.map_appLE'",
+    "AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Related generic infrastructure; no equality for this constructed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarIsoLocalizationRestriction|localization.*unit",
+   "results": [
+    "Mathlib/LinearAlgebra/Dimension/Localization.lean",
+    "Mathlib/GroupTheory/MonoidLocalization/Maps.lean",
+    "Mathlib/GroupTheory/MonoidLocalization/Maps.lean",
+    "Mathlib/GroupTheory/MonoidLocalization/Maps.lean",
+    "Mathlib/GroupTheory/MonoidLocalization/Maps.lean",
+    "Mathlib/GroupTheory/MonoidLocalization/Basic.lean",
+    "Mathlib/GroupTheory/MonoidLocalization/Basic.lean",
+    "Mathlib/GroupTheory/MonoidLocalization/Basic.lean"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Related generic infrastructure; no equality for this constructed comparison."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T194141-L-465286",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T194141-L-465286",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
