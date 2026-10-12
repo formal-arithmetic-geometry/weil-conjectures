@@ -9508,3 +9508,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:56 L: merged deliver/F2/Sheaf.AlgebraicGeometry.FiniteEquationsOfClosedAffine (stage 3; reviewer PASS; first push; landing 20261012T205629-L-932112 (interface); batch 20261012T205626; modules 2; new nodes 1)
 - 20:56 L: merged deliver/G2/Sheaf.RingTheory.ImprovePresentationSmoothConormalFree (stage 3; reviewer PASS; first push; landing 20261012T205630-L-932222 (interface); batch 20261012T205626; modules 2; new nodes 1)
 - 20:56 L: merged deliver/G2/Sheaf.RingTheory.PopescuLiftingWitness (stage 3; reviewer PASS; first push; landing 20261012T205630-L-932323 (interface); batch 20261012T205626; modules 2; new nodes 1)
+- 20:56 L: merged deliver/K3/Sheaf.CategoryTheory.SmallCechFreeExact (stage 3; reviewer PASS; first push; landing 20261012T205630-L-932489 (proof); batch 20261012T205626; modules 1; new nodes 0)

@@ -10,17 +10,17 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Evaluate at any object Z and partition the degree-n basis by the common composite Z -> X. The product universal property identifies each fibre with (n+1)-tuples of lifts of that composite to the family. Projections delete entries, preserving the fibre. All basis sets are v-small.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For each nonempty lift set choose one lift and prepend it to every tuple. The first face of this insertion is the identity; its remaining faces are insertions after deleting an entry, with opposite signs. Extending to the free abelian group proves d h + h d = id in positive degrees. Empty lift sets give zero chain groups. This is the explicit homotopy argument in Stacks 03AT.",
+   "text": "Evaluate at Z. Write the degree-p basis as pairs (t,a), where t : Fin(p+1) -> I and a : Z -> (product of Over.mk(pi(t(k)))).left. The product projections have the same composite to X by Over.w. The zeroth projection witnesses a lift of this composite. Select a lift depending only on this composite, then prefix it to the projection maps. Construct the prefixed tuple explicitly with Pi.lift in Over X. The projection equations Pi.lift_π characterize it uniquely.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "The free group on the disjoint union is the direct sum of its fibre groups. A cycle has finite support, so the fibrewise primitives combine to a primitive in that direct sum. Kernels and cokernels of abelian presheaves are computed objectwise; therefore the evaluated exactness proves exactness of K at q+1.",
+   "text": "Deletion is the map induced by the product projections. It preserves the composite to X and hence the selected lift. Product uniqueness and the Fin.succAbove identities prove that deleting coordinate zero after prefixing is the identity, and deleting coordinate i+1 commutes with prefixing after deleting coordinate i. Apply AddCommGrpCat.free to these equalities. Evaluation is additive, so the alternating differential is the signed sum of these free deletion maps. Split that sum into its zeroth term and successor terms; the zeroth term is the identity and the successor terms cancel the second composite. Thus the explicitly constructed prefix maps satisfy h d + d k = id in each positive degree. Empty families have no basis elements, so no lift of an absent element is ever requested.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a cycle x at degree q+1, the contraction identity gives d(h(x))=x because the other summand is k(0)=0. ShortComplex.ab_exact_iff gives exactness of each evaluated short complex. Evaluation preserves homology: its mapHomologyIso identifies evaluated homology with homology of the evaluated complex, which is zero. The identity of the presheaf homology therefore vanishes at every object, hence vanishes by NatTrans.ext. IsZero.iff_id_eq_zero and exact_iff_isZero_homology give exactness of the presheaf short complex, and HomologicalComplex.exactAt_iff' gives the claimed ExactAt(q+1).",
    "uses": [],
    "elementary": false
   }
@@ -29,7 +29,7 @@
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/03AT",
-  "place": "Proof of Tag 03AT"
+  "place": "Proof of Tag 03AT, fibrewise prefix contraction; explicit product-lift implementation and objectwise homology reflection in Lean."
  },
  "mathlib_searches": [
   {
@@ -119,10 +119,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T184343-L-4019714",
-  "kind": "interface",
+  "landing": "20261012T205630-L-932489",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
