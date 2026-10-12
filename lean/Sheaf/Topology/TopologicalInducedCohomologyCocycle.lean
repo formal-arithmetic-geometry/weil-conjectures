@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+import Sheaf.Topology.TopologicalInducedEdgeAndMap
+import Sheaf.Topology.TopologicalInducedCocycleFormula
 
 /-! # The induced topological cohomology map on cocycles -/
 
@@ -97,6 +99,10 @@ theorem exists_topological_induced_cohomology_cocycle
             ((eqToHom (congrArg (fun Q ↦ Q.obj
               ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
               (J.extMk s (p + 1) rfl hs))) =
-            I.extMk z (p + 1) rfl hz) := by sorry
+            I.extMk z (p + 1) rfl hz) := by
+  obtain ⟨edge, a, ha⟩ :=
+    exists_topological_induced_edge_and_map f HX HZ hX hZ
+  exact ⟨edge, a, ha,
+    topological_induced_cocycle_formula f HX HZ hX hZ edge a ha⟩
 
 end CategoryTheory
