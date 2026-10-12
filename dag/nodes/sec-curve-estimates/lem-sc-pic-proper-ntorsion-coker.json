@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-pic-proper-ntorsion-coker",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "component of the target statement",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pic proper curve cokernel component",
+ "statement": "Let C be a proper smooth connected dimension-one curve over an algebraically closed field k [def-sc-curves], with genus g [def-sc-genus], Picard group Pic(C) [def-sc-picard-group], and degree-zero subgroup Pic⁰(C) [def-sc-pic0]. Let n be a natural number whose image in k is nonzero. Then Pic(C) modulo the image of multiplication by n is isomorphic as a group to ℤ/nℤ.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+  "place": "node lem-sc-pic-proper-ntorsion, order 1023"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-picard-group",
+  "def-sc-pic0",
+  "def-sc-genus"
+ ],
+ "proof": [
+  {
+   "text": "Use the Picard decomposition Pic(C) ≃ ℤ × P0 with underlying set of P0 equal to Pic⁰(C). The divisibility component makes the nth-power map on P0 surjective.",
+   "uses": [
+    "lem-sc-pic-proper-decomposition",
+    "lem-sc-pic-proper-ntorsion-div"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the integer coordinate modulo n. Integer cast is surjective (ZMod.intCast_surjective). The kernel is the nth-power image: n-th powers vanish modulo n; for the converse write the integer coordinate as n*z using ZMod.intCast_zmod_eq_zero_iff_dvd and take an nth root of the P0 coordinate. Apply the inverse decomposition. The first isomorphism theorem (QuotientGroup.quotientKerEquivOfSurjective), after changing the subgroup by equality, identifies the quotient with Multiplicative (ZMod n).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-pic-proper-decomposition",
+  "lem-sc-pic-proper-ntorsion-div"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+  "place": "Blueprint Jacobian argument; second reading expands the full component proof and formalizes the cokernel calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Picard group degree zero of smooth proper connected curve is divisible",
+   "results": "Service unavailable: Internal Server Error (second reading, 2026-10-12).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of multiplication on Picard group of proper curve prime to characteristic",
+   "results": "8 hits: FunctionField.classNumber and WeierstrassCurve.Affine.Point class-group results; none for general proper-curve Picard torsion or divisibility.",
+   "date": "2026-10-12",
+   "verdict": "No matching geometric theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"powMonoidHom\"",
+   "results": "Found QuotientGroup.mulEquivPiModRangePowMonoidHom and MulEquiv.map_range_powMonoidHom; no matching geometric theorem.",
+   "date": "2026-10-12",
+   "verdict": "Related general group APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "rg picZero|picardZero|exists_mulEquiv_prod in lean/Sheaf and lean/WeilConjectures; rg quotientKerEquivOfSurjective and intCast_zmod_eq_zero_iff_dvd in local Mathlib source",
+   "results": "Existing Picard decomposition, Jacobian representability and abelianVariety_estimate_of_isAlgClosed found; no duplicate of either remaining component. Cokernel now uses Mathlib first-isomorphism and integer-cast APIs.",
+   "date": "2026-10-12",
+   "verdict": "Use existing decomposition and Mathlib APIs for cokernel; geometric torsion/divisibility still require the stated bridge."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicProperNTorsionCoker.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.pic_proper_ntorsion_coker",
+  "statement": "theorem Scheme.Hom.pic_proper_ntorsion_coker\n    {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]\n    (n : ℕ) (_hn : (n : k) ≠ 0) :\n    Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃*\n      Multiplicative (ZMod n))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T060747-L-2912244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T060747-L-2912244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

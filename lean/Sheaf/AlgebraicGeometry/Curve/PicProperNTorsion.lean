@@ -11,17 +11,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.QuotientGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
-import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
-import Sheaf.AlgebraicGeometry.Curve.ProperProjective
-import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
-import Sheaf.AlgebraicGeometry.Variety
-import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
-import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
-import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
-import WeilConjectures.AlgebraicGeometry.DensePoints
-import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
-import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-import WeilConjectures.AlgebraicGeometry.Regular
+import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionTorsion
+import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionCoker
+import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionDiv
 
 /-!
 # Torsion and divisibility of the Picard group of a proper curve
@@ -73,7 +65,10 @@ theorem Scheme.Hom.pic_proper_ntorsion
     Nonempty ((powMonoidHom n : C.Pic →* C.Pic).ker ≃*
       Multiplicative (Fin (2 * f.genus) → ZMod n)) ∧
     Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃* Multiplicative (ZMod n)) ∧
-    (∀ L : C.Pic, L ∈ f.picZero → ∃ M : C.Pic, M ∈ f.picZero ∧ M ^ n = L) :=
-  sorry
+    (∀ L : C.Pic, L ∈ f.picZero → ∃ M : C.Pic, M ∈ f.picZero ∧ M ^ n = L) := by
+  have ht := Scheme.Hom.pic_proper_ntorsion_torsion f n _hn
+  have hc := Scheme.Hom.pic_proper_ntorsion_coker f n _hn
+  have hd := Scheme.Hom.pic_proper_ntorsion_div f n _hn
+  exact ⟨ht, hc, hd⟩
 
 end AlgebraicGeometry
