@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-hom-complex-single-naturality",
+ "kind": "statement",
+ "title": "Naturality of single-source internal Hom complexes",
+ "status": "split",
+ "statement": "For a scheme Y, O_Y-module sheaves P,Q and a morphism k:Q → P, the single-source comparison [lem-sc-hom-complex-single] can be chosen as natural isomorphisms b_P:Hom(P[0],−) ≅ Hom(P,−) applied degreewise and b_Q:Hom(Q[0],−) ≅ Hom(Q,−) applied degreewise. Under these isomorphisms precomposition by k[0] agrees with degreewise precomposition by k. The Hom complexes are those of [def-pur-hom-complex].",
+ "stmt_deps": [
+  "lem-sc-hom-complex-single",
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, Hom-complex product and functoriality formulas"
+ },
+ "proof": [
+  {
+   "text": "For each sheaf P and complex I, project the product defining Hom(P[0],I)\nto its degree-zero source factor. All other factors are zero, because P[0]^p\nis zero for p different from zero. The inverse is the product lift with this\ncomponent and zero elsewhere. The product universal property gives both inverse\nidentities. The differential formula reduces to postcomposition by d_I, as the\nsource differential vanishes. Naturality in I follows from the postcomposition\nformula for the product projections. For k:Q → P, the precomposition formula for\nthose same projections identifies Hom(k[0],I) with degreewise internal Hom(k,I).\nThese arguments apply to unbounded I, zero P or Q, and the empty scheme.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, Hom-complex product and functoriality formulas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom complex from a sheaf in degree zero; naturality in the source",
+   "results": "Generic Mathlib cochain fromSingleEquiv results; no internal sheaf Hom natural comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObjUnitIso",
+   "results": "Unknown identifier in Mathlib search service; upstream has the unit-Hom isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplexSingle|homObjUnitIso",
+   "results": "HomComplexSingle proves pointwise existence, not simultaneous naturality. InternalHomFree proves canonical unit-Hom evaluation, not the restricted algebra counit comparison.",
+   "date": "2026-10-13",
+   "verdict": "related statements, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal sheaf Hom complex from a single sheaf in degree zero naturally agrees with termwise sheaf Hom and respects precomposition",
+   "results": "Service unavailable: Internal Server Error. No search verdict available.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineHomComplexEvaluationD",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-hom-complex-evaluation-d-components",
+   "place": "degreewise affine comparison decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HomComplexSingleNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/HomComplexSingleNaturality.lean",
+  "declaration": "AlgebraicGeometry.homComplex_single_precomposition_iso",
+  "statement": "theorem homComplex_single_precomposition_iso (Y : Scheme.{u}) (P Q : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (k : Q ⟶ P) [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op P)).Additive] [((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op Q)).Additive] : ∃ bP : (homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).obj (op ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj P)) ≅ ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op P)).mapHomologicalComplex (.up ℤ), ∃ bQ : (homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).obj (op ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj Q)) ≅ ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).obj (op Q)).mapHomologicalComplex (.up ℤ), ∀ I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ, ((homComplexFunctor.{u, u, u, u} (R := Y.sheaf)).map ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map k).op).app I ≫ bQ.hom.app I = bP.hom.app I ≫ (NatTrans.mapHomologicalComplex ((SheafOfModules.homFunctor.{u, u, u, u} Y.sheaf).map k.op) (.up ℤ)).app I",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T225310-L-1805579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T225310-L-1805579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

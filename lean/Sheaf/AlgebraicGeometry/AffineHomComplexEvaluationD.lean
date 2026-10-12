@@ -5,11 +5,45 @@ public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
+import Sheaf.AlgebraicGeometry.HomComplexSingleNaturality
+import Sheaf.AlgebraicGeometry.UnderivedAffineHomCounit
+
 @[expose] public section
 universe u
 open CategoryTheory Opposite AlgebraicGeometry
 namespace AlgebraicGeometry
 
+private noncomputable def unitHomIso (Y : Scheme.{u}) :
+    (SheafOfModules.homFunctor Y.sheaf).obj
+      (op (SheafOfModules.unit Y.ringCatSheaf)) ≅
+        𝟭 (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+  NatIso.ofComponents (fun F ↦ SheafOfModules.homObjUnitIso (R := Y.sheaf) F) (by
+    intro F G g
+    apply SheafOfModules.hom_ext
+    ext U φ
+    rfl)
+
+private theorem adjustComparison {C : Type*} [Category C] {K : C ⥤ C}
+    (e₀ e : K ≅ 𝟭 C) {A I B : C} (d₀ : A ≅ B) (p : B ⟶ K.obj I) (c : A ⟶ I)
+    (hc : d₀.hom ≫ p ≫ e₀.hom.app I = c) :
+    ∃ d : A ≅ B, d.hom ≫ p ≫ e.hom.app I = c := by
+  let a : 𝟭 C ≅ 𝟭 C := e₀.symm ≪≫ e
+  have he : e.hom.app I = e₀.hom.app I ≫ a.hom.app I := by
+    change e.hom.app I = e₀.hom.app I ≫ e₀.inv.app I ≫ e.hom.app I
+    simp only [Iso.hom_inv_id_app_assoc]
+  refine ⟨a.symm.app A ≪≫ d₀, ?_⟩
+  change (a.inv.app A ≫ d₀.hom) ≫ p ≫ e.hom.app I = c
+  rw [he]
+  simp only [Category.assoc]
+  rw [← Category.assoc p (e₀.hom.app I) (a.hom.app I),
+    ← Category.assoc d₀.hom (p ≫ e₀.hom.app I) (a.hom.app I), hc]
+  have hn : c ≫ a.inv.app I = a.inv.app A ≫ c := a.inv.naturality c
+  rw [← Category.assoc, ← hn]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 800000 in
+-- Unfold the sheaf carrier encodings in the two comparison isomorphisms.
 /-- Degreewise affine Hom comparison data.
 
 This is the termwise part of the chain-map comparison; the chain-map
@@ -60,7 +94,55 @@ theorem affine_hom_complex_d_components
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map
               (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op)).app I).f n ≫
             (e.hom.app I).f n =
-            ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I).f n := by sorry
+            ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I).f n := by
+  classical
+  let B := (Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)
+  let k := SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom
+  let j : H ⋙ SheafOfModules.restrictScalars
+      (R := moduleRings Y.toRingedSpace)
+      (R' := moduleRings (directImageAlgebraSpace f))
+      ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ≅
+        (SheafOfModules.homFunctor Y.sheaf).obj (op B) := iH
+  have hj := underived_affine_hom_counit f H iH adj₀ h_eval
+  let instB : ((SheafOfModules.homFunctor Y.sheaf).obj (op B)).Additive :=
+    Functor.additive_of_iso j
+  let instO : ((SheafOfModules.homFunctor Y.sheaf).obj
+      (op (SheafOfModules.unit Y.ringCatSheaf))).Additive :=
+    Functor.additive_of_iso (unitHomIso Y).symm
+  obtain ⟨bB, bO, hb⟩ := @homComplex_single_precomposition_iso Y B
+    (SheafOfModules.unit Y.ringCatSheaf) k instB instO
+  let t := unitHomIso Y
+  let e₀ := bO ≪≫ NatIso.mapHomologicalComplex t (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso _ (.up ℤ)
+  intro I
+  let d₀ := ((Functor.mapHomologicalComplexCompIso j (.up ℤ)).app I) ≪≫
+    (bB.app I).symm
+  have hc : d₀.hom ≫
+      ((homComplexFunctor (R := Y.sheaf)).map
+        ((CochainComplex.singleFunctor _ 0).map k).op).app I ≫ e₀.hom.app I =
+      (NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I := by
+    change (Functor.mapHomologicalComplexCompIso j (.up ℤ)).hom.app I ≫
+      bB.inv.app I ≫
+      ((homComplexFunctor (R := Y.sheaf)).map
+        ((CochainComplex.singleFunctor _ 0).map k).op).app I ≫
+      bO.hom.app I ≫ (NatIso.mapHomologicalComplex t (.up ℤ)).hom.app I ≫
+      (Functor.mapHomologicalComplexIdIso _ (.up ℤ)).hom.app I = _
+    rw [← Category.assoc _ (bO.hom.app I) _, hb I]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+    apply HomologicalComplex.hom_ext
+    intro n
+    change j.hom.app (I.X n) ≫
+      ((SheafOfModules.homFunctor Y.sheaf).map k.op).app (I.X n) ≫
+      t.hom.app (I.X n) ≫ 𝟙 _ = adj₀.counit.app (I.X n)
+    rw [Category.comp_id]
+    exact hj (I.X n)
+  obtain ⟨d, hd⟩ := adjustComparison e₀ e d₀
+    (((homComplexFunctor (R := Y.sheaf)).map
+      ((CochainComplex.singleFunctor _ 0).map k).op).app I)
+    ((NatTrans.mapHomologicalComplex adj₀.counit (.up ℤ)).app I) hc
+  refine ⟨d, ?_⟩
+  intro n
+  exact congrArg (fun g ↦ g.f n) hd
 
 theorem affine_hom_complex_d
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]

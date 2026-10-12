@@ -13,22 +13,33 @@
  },
  "proof": [
   {
-   "text": "Construct the affine Hom comparison degree by degree using the product projection to source degree zero, identify the restricted direct-image unit with the pushforward structure sheaf, and apply the sectionwise counit evaluation.",
+   "text": "Apply the proved underived affine Hom comparison and counit equality. Derive the two needed additive instances from this isomorphism and the canonical unit-Hom isomorphism, then lift the affine comparison naturally to complexes.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-sc-direct-image-algebra-derived-category"
+    "lem-sc-underived-affine-hom-counit"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use natural single-source isomorphisms for the pushed-forward structure sheaf and the unit. Their compatibility with precomposition turns the canonical complex evaluation composite into the mapped underived counit; complex extensionality and its degreewise equation prove this equality.",
+   "uses": [
+    "lem-sc-hom-complex-single-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare canonical evaluation e0 with the supplied e by the natural identity automorphism a=e0 inverse composed with e. Precompose the comparison with a inverse at its source. Naturality of a inverse with respect to the counit cancels a inverse and a, yielding the equality for e. Take the degree components of this chain-map equality. This categorical adjustment is proved by the private helper adjustComparison.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
-  "def-sc-direct-image-algebra-derived-category"
+  "lem-sc-hom-complex-single-naturality",
+  "lem-sc-underived-affine-hom-counit"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0BUZ, 0BV0, and 0AX3"
+  "place": "Tags 0BUZ, 0BV0, and 0AX3; degreewise comparison, with naturality adjustment for the chosen unit-Hom isomorphism"
  },
  "mathlib_searches": [
   {
@@ -95,10 +106,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T184316-L-4009004",
-  "kind": "proof",
+  "landing": "20261012T225310-L-1805579",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-underived-affine-hom-counit",
+ "kind": "statement",
+ "title": "Underived affine Hom comparison and evaluation counit",
+ "status": "split",
+ "statement": "Let f:X → Y be affine and A=f_*O_X be its direct-image algebra [def-sc-direct-image-algebra-derived-category]. Write T for restriction along O_Y → A, H for an additive right adjoint of T, and iH:T∘H ≅ Hom(T(A),−). Suppose its adjunction counit evaluates iH at 1 sectionwise. Since T(A) is definitionally the pushforward structure sheaf, iH followed by precomposition with O_Y → f_*O_X and canonical evaluation Hom(O_Y,F) ≅ F equals the adjunction counit for every sheaf F.",
+ "stmt_deps": [
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0BUZ, 0BV0, and 0AX3; sectionwise affine Hom evaluation"
+ },
+ "proof": [
+  {
+   "text": "The restricted direct-image algebra unit and the pushed-forward structure sheaf are definitionally equal, including their module structures, so use iH for j. On every open and section, unfold precomposition and the canonical unit-Hom evaluation. The value is iH of that section applied to the ring-map image of 1. The ring map preserves 1, and h_eval supplies precisely the counit value. Extensionality on opens and sections proves the equality; no finiteness, nonemptiness or nonzero ring hypothesis is used.",
+   "uses": [
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0BUZ, 0BV0, and 0AX3; sectionwise affine Hom evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom complex from a sheaf in degree zero; naturality in the source",
+   "results": "Generic Mathlib cochain fromSingleEquiv results; no internal sheaf Hom natural comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObjUnitIso",
+   "results": "Unknown identifier in Mathlib search service; upstream has the unit-Hom isomorphism.",
+   "date": "2026-10-13",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplexSingle|homObjUnitIso",
+   "results": "HomComplexSingle proves pointwise existence, not simultaneous naturality. InternalHomFree proves canonical unit-Hom evaluation, not the restricted algebra counit comparison.",
+   "date": "2026-10-13",
+   "verdict": "related statements, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of the direct image algebra unit equals the pushforward structure sheaf and its internal Hom evaluation counit evaluates at one",
+   "results": "Service unavailable: Internal Server Error. No search verdict available.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineHomComplexEvaluationD",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-hom-complex-evaluation-d-components",
+   "place": "degreewise affine comparison decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnderivedAffineHomCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnderivedAffineHomCounit.lean",
+  "declaration": "AlgebraicGeometry.underived_affine_hom_counit",
+  "statement": "theorem underived_affine_hom_counit {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) [H.Additive] (iH : H ⋙ SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ≅ (SheafOfModules.homFunctor Y.sheaf).obj (op ((SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).obj (SheafOfModules.unit (moduleRings (directImageAlgebraSpace f)))))) (adj₀ : SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ ⊣ H) (h_eval : ∀ (F : SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (U : Y.Opens) (φ : (H.obj F).val.obj (op U)), ((adj₀.counit.app F).val.app (op U)).hom φ = ((((iH.hom.app F).val.app (op U)).hom φ).app (op (Over.mk (𝟙 U)))).hom (1 : (moduleRings (directImageAlgebraSpace f)).obj.obj (op U))) : ∀ F : SheafOfModules.{u} (moduleRings Y.toRingedSpace), iH.hom.app F ≫ ((SheafOfModules.homFunctor Y.sheaf).map (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom).op).app F ≫ (SheafOfModules.homObjUnitIso (R := Y.sheaf) F).hom = adj₀.counit.app F",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T225310-L-1805579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T225310-L-1805579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
