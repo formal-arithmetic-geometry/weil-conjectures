@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-local-tensor-quotient-base-ideal-detection",
+ "kind": "statement",
+ "title": "Tensor quotient detection modulo extended base-ideal powers",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $S$ a commutative $R$-algebra finite as an $R$-module [def-weil-finitely-generated-module], and $p$ a prime ideal of $R$. Set $A=R_p$ [def-weil-pbc-localization-at-prime], $m$ its maximal ideal, and $Q$ the primes $q$ of $S$ contracting to $p$. Let $\\varphi_q:A\\to S_q$ be the canonical localized homomorphism. For every integer $n>0$, index set $\\iota$, finite subset $t\\subset\\iota$, and families $r_i\\in A$ and $s_i\\in S$, if $\\sum_{i\\in t}\\varphi_q(r_i)(s_i/1)\\in(m^n)S_q$ for every $q\\in Q$, then $\\sum_{i\\in t}(r_i\\bmod m^n)\\otimes s_i=0$ in $(A/m^n)\\otimes_R S$ [def-weil-module-base-change].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, quotient-product argument; Tags 00JA, 00CT and the cofinal-power argument in 0394"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "For A=R_p and B=A tensor_R S, localization and finite base change make B a finite Noetherian A-algebra. The ring A/m^n is Artinian for n>0: its nilpotent maximal ideal has finite-dimensional successive quotients. Thus B/m^n B is Artinian and has finite discrete spectrum.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization prime correspondence identifies the primes of B/m^n B with Q. The Artinian product decomposition and localization/quotient equivalence identify B/m^n B with the product of S_q/(m^n)S_q.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify B/m^n B with (A/m^n) tensor_R S using tensor quotient and base-change cancellation. The q-component of the image of a pure tensor r tensor s is phi_q(r)*(s/1) modulo (m^n)S_q.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hypothesis kills each component of the finite sum. Injectivity of the product map kills the sum itself. Empty sums are zero; if Q is empty the Artinian quotient has no primes and is the zero ring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-tensor-quotient-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, quotient-product argument; Tags 00JA, 00CT and the cofinal-power argument in 0394"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tensor quotient of a finite algebra over a local ring is detected by its images in localizations modulo the extended base maximal ideal power",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "toPiLocalizationEquiv|quotIdealMapEquivTensorQuot|cancelBaseChange",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients only; no exact match; source signatures checked"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product quotient by ideal of base local ring injective into product localizations of finite algebra at primes above maximal ideal",
+   "results": "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway, Ideal.Fiber.exists_smul_eq_one_tmul, injective_of_isLocalization_isMaximal, Ideal.ResidueField.exists_smul_eq_tmul_one, TensorProduct.toIntegralClosure_injective_of_flat, PrimeSpectrum.toPiLocalization_injective",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients only; no exact match; source signatures checked"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.quotIdealMapEquivTensorQuot",
+   "results": "Algebra.TensorProduct.quotIdealMapEquivTensorQuot, Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients only; no exact match; source signatures checked"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LocalTensorQuotientDetection",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, essential-surjectivity paragraphs), via Tag 07N9: injective direction of the completion product comparison; Tag 07N9, quotient-product argument; Tags 00JA, 00CT and the cofinal-power argument in 0394; base-ideal quotient detection",
+   "via": [
+    "lem-weil-pbc-local-tensor-quotient-detection",
+    "lem-weil-pbc-completion-tensor-local-maps-injective",
+    "lem-weil-pbc-completion-finite-extension-decomposition",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalTensorQuotientBaseIdealDetection",
+  "file": "lean/Sheaf/RingTheory/LocalTensorQuotientBaseIdealDetection.lean",
+  "declaration": "AdicCompletion.local_tensor_quotient_base_ideal_detection",
+  "statement": "theorem local_tensor_quotient_base_ideal_detection\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime]\n    (n : ℕ) (hn : 0 < n) :\n    let A := Localization.AtPrime p\n    let m := IsLocalRing.maximalIdeal A\n    ∀ (ι : Type w) (t : Finset ι) (r : ι → A) (s : ι → S),\n      (∀ q : p.primesOver S,\n        (∑ i ∈ t, Localization.localRingHom p q.1 (algebraMap R S)\n          (Ideal.LiesOver.over (P := q.1) (p := p)) (r i) *\n          algebraMap S (Localization.AtPrime q.1) (s i)) ∈\n            (m ^ n).map (Localization.localRingHom p q.1 (algebraMap R S)\n              (Ideal.LiesOver.over (P := q.1) (p := p)))) →\n      (∑ i ∈ t, (Ideal.Quotient.mk (m ^ n) (r i)) ⊗ₜ[R] s i) = 0",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f94fd",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T225328-L-1812457",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f94fd",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T225328-L-1812457",
+  "kind": "interface",
+  "note": "independent Codex review: Packet delivery matched against its files, repository declarations, lcompile results, axiom probes, and direct-importer compilation; all checks passed."
+ }
+}

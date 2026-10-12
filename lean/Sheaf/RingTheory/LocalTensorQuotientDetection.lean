@@ -5,11 +5,12 @@ Authors: SHEAF group G3
 -/
 module
 
-public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
-public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.RingTheory.LocalTensorQuotientPowerBound
+import Sheaf.RingTheory.LocalTensorQuotientBaseIdealDetection
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
@@ -55,6 +56,42 @@ theorem local_tensor_quotient_detection
           (Localization.localRingHom p q.1 (algebraMap R S)
             (Ideal.LiesOver.over (P := q.1) (p := p)) (r i) *
             algebraMap S (Localization.AtPrime q.1) (s i)) = 0) →
-      (∑ i ∈ t, (Ideal.Quotient.mk (m ^ n) (r i)) ⊗ₜ[R] s i) = 0 := by sorry
+      (∑ i ∈ t, (Ideal.Quotient.mk (m ^ n) (r i)) ⊗ₜ[R] s i) = 0 := by
+  dsimp
+  by_cases hn : n = 0
+  · subst n
+    refine ⟨0, le_rfl, ?_⟩
+    intro ι t r s _h
+    apply Finset.sum_eq_zero
+    intro i _hi
+    rw [pow_zero]
+    rw [show Ideal.Quotient.mk (1 : Ideal (Localization.AtPrime p)) (r i) = 0 by
+      apply (Ideal.Quotient.eq_zero_iff_mem).2
+      simp]
+    exact TensorProduct.zero_tmul _ _
+  · obtain ⟨c, hc, hbound⟩ := local_tensor_quotient_power_bound R S p
+    refine ⟨n * c, ?_, ?_⟩
+    · calc
+        n = n * 1 := (Nat.mul_one n).symm
+        _ ≤ n * c := Nat.mul_le_mul_left n hc
+    · intro ι t r s h
+      apply local_tensor_quotient_base_ideal_detection R S p n (Nat.pos_of_ne_zero hn)
+        ι t r s
+      intro q
+      have hmem := (Ideal.Quotient.eq_zero_iff_mem).mp
+        (show Ideal.Quotient.mk
+          ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ (n * c))
+          (∑ i ∈ t, Localization.localRingHom p q.1 (algebraMap R S)
+            (Ideal.LiesOver.over (P := q.1) (p := p)) (r i) *
+            algebraMap S (Localization.AtPrime q.1) (s i)) = 0 by
+          simpa only [map_sum] using h q)
+      have hpow : (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ (n * c) ≤
+          (IsLocalRing.maximalIdeal (Localization.AtPrime p) ^ n).map
+            (Localization.localRingHom p q.1 (algebraMap R S)
+              (Ideal.LiesOver.over (P := q.1) (p := p))) := by
+        rw [Nat.mul_comm n c, pow_mul, Ideal.map_pow]
+        exact Ideal.pow_right_mono (hbound q) n
+      exact hpow hmem
+
 
 end AdicCompletion
