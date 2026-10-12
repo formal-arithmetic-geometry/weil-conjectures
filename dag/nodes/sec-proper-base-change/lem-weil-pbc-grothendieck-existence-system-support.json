@@ -20,139 +20,65 @@
  ],
  "proof": [
   {
-   "text": "Finite type over Noetherian $A$ makes $X$ Noetherian [pqf-lem-locnoeth-lft]. The dictionary [lem-weil-pbc-thickening-systems-dictionary] turns the given system into a coherent formal module for $I\\mathcal O_X$ whose first support is proper over $S$. Its annihilation by a closed subscheme is the sectionwise annihilation of all the pushed terms. In the following formal-module argument use the source indexing: the formal term $\\mathcal F_r$ for $r\\geq1$ is $j_{r-1,*}F_{r-1}$, and put $\\mathcal I=I\\mathcal O_X$. Claim $(*)$ means that a formal module is annihilated by the ideal of one closed subscheme of $X$ proper over $S$.",
+   "text": "Package the coherent terms and transitions as CoherentThickeningSystem. The dictionary supplies X Noetherian, a coherent formal module, the evaluation isomorphisms with the pushed terms, and the proper first support equivalence.",
    "uses": [
-    "pqf-lem-locnoeth-lft",
     "lem-weil-pbc-thickening-systems-dictionary",
     "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   },
   {
-   "text": "(Noetherian induction.) Let $\\Xi$ be the set of quasi-coherent ideals $\\mathcal K\\subseteq\\mathcal O_X$ such that $(*)$ holds for every object of $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$ annihilated by $\\mathcal K$ ($\\mathcal O_X\\in\\Xi$: such objects are $0$). We show $(0)\\in\\Xi$, which is $(*)$. If not, by [lem-weil-pbc-noetherian-acc-quasi-coherent] there is a quasi-coherent ideal $\\mathcal K$ maximal among those not in $\\Xi$. Let $X'=V(\\mathcal K)$ be the closed subscheme it defines; $X'$ is separated and of finite type over $A$. By [lem-weil-pbc-closed-immersion-coherent-equivalence] (2), the objects of $\\mathit{Coh}(X,\\mathcal I)$ annihilated by $\\mathcal K$ are the $i_*$ of the objects of $\\mathit{Coh}(X',\\mathcal I\\mathcal O_{X'})$, with the same supports, and an object annihilated by an ideal $\\mathcal K'\\supseteq\\mathcal K$ corresponds to one annihilated by $\\mathcal K'/\\mathcal K\\subseteq\\mathcal O_{X'}$; a closed subset of $X'$ is proper over $S$ as a subset of $X'$ iff it is as a subset of $X$ (same reduced induced subscheme, [lem-weil-pbc-closed-subset-proper-over-base-properties] (1)), and closed subschemes of $X'$ are closed subschemes of $X$. Every quasi-coherent ideal of $\\mathcal O_X$ strictly containing $\\mathcal K$ lies in $\\Xi$. So, renaming $X'$ as $X$, it suffices to prove $(*)$ for $X$ under the hypothesis (H): every nonzero quasi-coherent ideal of $\\mathcal O_X$ lies in $\\Xi$; this then shows $\\mathcal K\\in\\Xi$, a contradiction. We may assume $X\\ne\\emptyset$. Fix an object $(\\mathcal F_n)$ of $\\mathit{Coh}_{\\text{support proper over }S}(X,\\mathcal I)$.",
+   "text": "For a formal module define P to mean annihilation by a proper closed subscheme and R to mean proper first support. Both predicates are Serre classes. Every term is quasi-coherent by coherence on the Noetherian scheme. Applying the affine-cover ideal-product vanishing criterion at exponent one to the zero ideal proves that the zero ideal annihilates every term.",
    "uses": [
-    "lem-weil-pbc-noetherian-acc-quasi-coherent",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-formal-systems-proper-support-serre",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-ideal-power-product-zero-affine-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, second paragraph (the collection Xi, Lemma 01Y8 lemma-acc-coherent, replacing X by the closed subscheme of K), as in the proof of Proposition 088C"
-   }
+   "elementary": false
   },
   {
-   "text": "(Chow's lemma and a projective compactification.) By [lem-weil-pbc-chow-noetherian] applied to $X\\to S$ there are a proper surjective $f:Y\\to X$, a dense open $U\\subseteq X$ with $f^{-1}(U)\\to U$ an isomorphism, and an immersion $Y\\to\\mathbf P^n_A$ over $A$. $Y$ is of finite type over $A$, hence Noetherian, in particular quasi-compact. By [lem-chow-closed-model] (with the affine base $\\operatorname{Spec}A$) the scheme-theoretic closure $Y'\\subseteq\\mathbf P^n_A$ of $Y$ is a closed subscheme of $\\mathbf P^n_A$, $Y\\to Y'$ is an open immersion $j$, and $p':Y'\\to\\operatorname{Spec}A$ is proper. (Stacks phrases this as: $Y$ is H-quasi-projective over $A$ and $j:Y\\to Y'$ is an open immersion into an H-projective $Y'$, Morphisms Lemma 01WA.)",
+   "text": "If P fails for the given R-object, the set S of ideals killing an R-object for which P fails contains the zero ideal. Apply the maximal-ideal clause of noetherian_quasicoherent_submodules to obtain K maximal in S and T killed by K with R(T) and not P(T). Use the coherent first term of the given system as the ambient coherent module in that theorem.",
    "uses": [
-    "lem-weil-pbc-chow-noetherian",
-    "lem-chow-closed-model"
+    "lem-weil-pbc-noetherian-acc-quasi-coherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, third paragraph (Lemma 0200 lemma-chow-Noetherian; Morphisms Lemma 01WA lemma-H-quasi-projective-open-H-projective)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Pulling back and extending the system.) By [lem-weil-pbc-formal-systems-pullback], $(f^*\\mathcal F_n)$ is an object of $\\mathit{Coh}(Y,I\\mathcal O_Y)$ (note $f^{-1}\\mathcal I\\cdot\\mathcal O_Y=I\\mathcal O_Y$). For each $n$, $\\mathcal F_1=\\mathcal F_n/\\mathcal I\\mathcal F_n$, and $\\operatorname{Supp}\\mathcal F_n\\subseteq V(\\mathcal I)$ as $\\mathcal I^n\\mathcal F_n=0$; by [lem-weil-pbc-support-pullback-finite-type] (2) (at $x\\in V(\\mathcal I)$, $\\mathcal I_x\\subseteq\\mathfrak m_x$, so $(\\mathcal F_n/\\mathcal I\\mathcal F_n)_x\\otimes\\kappa(x)=\\mathcal F_{n,x}\\otimes\\kappa(x)$) we get $\\operatorname{Supp}\\mathcal F_n=\\operatorname{Supp}\\mathcal F_1$. Hence by [lem-weil-pbc-support-pullback-finite-type] (3), $\\operatorname{Supp}(f^*\\mathcal F_n)=f^{-1}\\operatorname{Supp}(\\mathcal F_1)$, which is a closed subset of $Y$ proper over $S$ by [lem-weil-pbc-closed-subset-proper-over-base-union-preimage] (2). Since $Y'$ is separated over $S$, $T:=j(f^{-1}\\operatorname{Supp}\\mathcal F_1)$ is a closed subset of $Y'$ (proper over $S$) [lem-weil-pbc-closed-subset-proper-over-base-properties] (3), contained in $j(Y)$. So $\\mathcal F'_n:=j_*f^*\\mathcal F_n$ is a coherent $\\mathcal O_{Y'}$-module [lem-weil-pbc-pushforward-coherent-on-open], equal to $f^*\\mathcal F_n$ on $j(Y)$ and to $0$ on $Y'\\setminus T$. The conditions defining $\\mathit{Coh}(Y',I\\mathcal O_{Y'})$ [def-weil-pbc-coherent-formal-module] are local on $Y'$ and hold on both opens of the cover $Y'=j(Y)\\cup(Y'\\setminus T)$, so $(\\mathcal F'_n)$ is an object of $\\mathit{Coh}(Y',I\\mathcal O_{Y'})$ with $(\\mathcal F'_n)|_{j(Y)}=(f^*\\mathcal F_n)$.",
+   "text": "The Chow comparison supplies N with P(N), alpha:T -> N, and J>K killing kernel alpha. Serre subobject closure gives R(kernel alpha). If P failed for the kernel then J would belong to S, contradicting maximality of K. Hence P(kernel alpha). Apply the Serre-class exact-sequence lemma to kernel alpha -> T -> N, which is exact by the kernel universal property, to conclude P(T), a contradiction. The cokernel is never needed. Normalize the zero-morphism structure by its uniqueness in the generic categorical helper.",
    "uses": [
-    "lem-weil-pbc-formal-systems-pullback",
-    "lem-weil-pbc-support-pullback-finite-type",
-    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-pushforward-coherent-on-open",
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, third paragraph (Morphisms Lemma 056J; Lemma 0CYQ parts (3) and (1); Lemma 0CYJ lemma-pushforward-coherent-on-open; Lemma 0887)"
-   }
-  },
-  {
-   "text": "(Projective case and the support of the algebraization.) $Y'$ is a closed subscheme of $\\mathbf P^n_A$, so by [lem-weil-pbc-grothendieck-existence-projective] there is a coherent $\\mathcal O_{Y'}$-module $\\mathcal F'$ with $\\mathcal F'^\\wedge\\cong(\\mathcal F'_n)$. Then $\\mathcal F'/I\\mathcal F'\\cong\\mathcal F'_1$, so as in the previous step $\\operatorname{Supp}(\\mathcal F')\\cap V(I\\mathcal O_{Y'})=\\operatorname{Supp}(\\mathcal F'_1)=T\\subseteq j(Y)$ [lem-weil-pbc-support-pullback-finite-type] (2). $\\operatorname{Supp}\\mathcal F'$ is closed [lem-weil-pbc-support-pullback-finite-type] (1), so $\\operatorname{Supp}(\\mathcal F')\\setminus j(Y)$ is closed in $Y'$ and its image $W$ under the proper, hence closed [def-weil-proper-morphism], map $p'$ is closed in $\\operatorname{Spec}A$. If $W\\ne\\emptyset$ it meets $V(I)$ [lem-weil-pbc-adic-complete-jacobson-radical], giving a point of $\\operatorname{Supp}(\\mathcal F')\\setminus j(Y)$ in $p'^{-1}V(I)=V(I\\mathcal O_{Y'})$, which contradicts the displayed equality. Hence $\\operatorname{Supp}\\mathcal F'\\subseteq j(Y)$. Put $\\mathcal G=j^*\\mathcal F'=\\mathcal F'|_Y$, a coherent $\\mathcal O_Y$-module. $\\operatorname{Supp}\\mathcal F'$ is a closed subset of $Y'$, proper over $S$ since $Y'\\to S$ is proper [lem-weil-pbc-closed-subset-proper-over-base-properties] (1),(2); it lies in the open $j(Y)$, so its reduced induced subscheme is the same in $Y$ and in $Y'$, and $Z':=\\operatorname{Supp}\\mathcal G$ is a closed subset of $Y$ proper over $S$. Finally $\\mathcal G^\\wedge=(\\mathcal F'^\\wedge)|_Y\\cong(\\mathcal F'_n)|_Y=(f^*\\mathcal F_n)$ [lem-weil-pbc-formal-systems-pullback] (2); call this isomorphism $\\beta$.",
-   "uses": [
-    "lem-weil-pbc-grothendieck-existence-projective",
-    "lem-weil-pbc-support-pullback-finite-type",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-adic-complete-jacobson-radical",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-formal-systems-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, third paragraph (Lemma 0885 lemma-existence-projective; Algebra Lemma 05GI lemma-radical-completion)"
-   }
-  },
-  {
-   "text": "(Comparison with a proper pushforward.) Let $\\mathcal K\\subseteq\\mathcal O_X$ be the ideal sheaf of the reduced induced closed subscheme on $X\\setminus U$ [lem-weil-pbc-reduced-induced-closed-subscheme]; then $V(\\mathcal K)=X\\setminus U$, and $f$ is an isomorphism over $X\\setminus V(\\mathcal K)=U$. Put $\\mathcal H:=f_*\\mathcal G$. By [lem-weil-pbc-formal-systems-push-pull] (with its $Y,\\mathcal J,X,\\mathcal F,(\\mathcal G_n)$ being our $X,\\mathcal I,Y,\\mathcal G,(\\mathcal F_n)$, and $\\beta$ of the previous step) $\\mathcal H$ is a coherent $\\mathcal O_X$-module ($f$ proper, $X$ Noetherian; Stacks Proposition 02O5, which that lemma's statement includes) and there are a morphism $\\alpha:(\\mathcal F_n)\\to\\mathcal H^\\wedge$ in $\\mathit{Coh}(X,\\mathcal I)$ and $t\\ge1$ such that $\\operatorname{Ker}\\alpha$ and $\\operatorname{Coker}\\alpha$, taken in the abelian category $\\mathit{Coh}(X,\\mathcal I)$ [lem-weil-pbc-coherent-formal-modules-abelian], are annihilated by $\\mathcal K^t$.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-formal-systems-push-pull",
-    "lem-weil-pbc-coherent-formal-modules-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, fourth paragraph (Proposition 02O5 proposition-proper-pushforward-coherent; Lemma 088B lemma-inverse-systems-push-pull)"
-   }
-  },
-  {
-   "text": "(Support of $\\mathcal H$.) $f$ is proper, hence closed [def-weil-proper-morphism], so $f(Z')$ is closed; on the open $X\\setminus f(Z')$ one has $\\mathcal H=f_*(\\mathcal G|_{f^{-1}(X\\setminus f(Z'))})=0$, so $\\operatorname{Supp}\\mathcal H\\subseteq f(Z')$. As $X$ is separated over $S$, $f(Z')$ is a closed subset of $X$ proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties] (3), hence so is $\\operatorname{Supp}\\mathcal H$ (closed by [lem-weil-pbc-module-support-proper-over-base] (1); proper by [lem-weil-pbc-closed-subset-proper-over-base-properties] (2)). By [lem-weil-pbc-module-support-proper-over-base] (2) the scheme-theoretic support $Z_0$ of $\\mathcal H$ is a closed subscheme with $Z_0\\to S$ proper and $\\mathcal I_{Z_0}\\mathcal H=0$; hence $\\mathcal I_{Z_0}$ kills every $\\mathcal H/\\mathcal I^n\\mathcal H$, so $\\mathcal H^\\wedge$ lies in the subcategory (2) of [lem-weil-pbc-formal-systems-proper-support-serre], and also in its subcategory (1) since $\\operatorname{Supp}(\\mathcal H/\\mathcal I\\mathcal H)\\subseteq\\operatorname{Supp}\\mathcal H$.",
-   "uses": [
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-grothendieck-existence-chow-comparison",
     "lem-weil-pbc-formal-systems-proper-support-serre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, fourth paragraph ('If Z_0 is the scheme theoretic support of H, then ... Z_0 is proper over A by Lemma 0CYN and Lemma 0CYQ part (2)'; we use 0CYQ part (1), X being separated over A)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Conclusion.) In the abelian category $\\mathit{Coh}(X,\\mathcal I)$ [lem-weil-pbc-coherent-formal-modules-abelian] there are exact sequences $0\\to\\operatorname{Ker}\\alpha\\to(\\mathcal F_n)\\to\\operatorname{Im}\\alpha\\to0$ and $0\\to\\operatorname{Im}\\alpha\\to\\mathcal H^\\wedge\\to\\operatorname{Coker}\\alpha\\to0$. As $(\\mathcal F_n)$ and $\\mathcal H^\\wedge$ lie in the Serre subcategory (1) of [lem-weil-pbc-formal-systems-proper-support-serre], so do $\\operatorname{Ker}\\alpha$, $\\operatorname{Im}\\alpha$ and $\\operatorname{Coker}\\alpha$. $\\mathcal K^t\\neq0$, since $U\\neq\\emptyset$ ($U$ is dense in $X\\ne\\emptyset$) and $\\mathcal K^t|_U=\\mathcal O_U$. By (H), $\\mathcal K^t\\in\\Xi$; as $\\operatorname{Ker}\\alpha$ and $\\operatorname{Coker}\\alpha$ are annihilated by $\\mathcal K^t$, they satisfy $(*)$, i.e. lie in the subcategory (2). This is a Serre subcategory, so $\\operatorname{Im}\\alpha\\subseteq\\mathcal H^\\wedge$ lies in (2), and then so does the extension $(\\mathcal F_n)$ of $\\operatorname{Im}\\alpha$ by $\\operatorname{Ker}\\alpha$. This is $(*)$ for $(\\mathcal F_n)$ [def-weil-pbc-coherent-formal-module] (3), which completes the induction, and proves the support claim. Translate its annihilation through the dictionary to obtain the sectionwise equations on every pushed thickening term.",
+   "text": "For each term supported on the proper closed subscheme, apply coherent closed-immersion equivalence and its counit to identify it with a pushed coherent module on that subscheme. Closed pushforward is sectionwise annihilated by the ideal. Compose this identification with the dictionary evaluation isomorphism. Linearity, the inverse-isomorphism identity on sections, and preservation of zero transfer the scalar equation to the original pushed thickening term on every open.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-abelian",
-    "lem-weil-pbc-formal-systems-proper-support-serre",
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-thickening-systems-dictionary",
+    "pqf-lem-locnoeth-lft"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Theorem 088E (theorem-grothendieck-existence), proof, fourth paragraph (exact sequence, Lemma 0CYV parts (1) and (2), induction hypothesis for K^t)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-coherent-formal-module",
-  "def-weil-proper-morphism",
-  "lem-chow-closed-model",
-  "lem-weil-pbc-adic-complete-jacobson-radical",
-  "lem-weil-pbc-chow-noetherian",
   "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-weil-pbc-closed-subset-proper-over-base-properties",
-  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
-  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
   "lem-weil-pbc-formal-systems-proper-support-serre",
-  "lem-weil-pbc-formal-systems-pullback",
-  "lem-weil-pbc-formal-systems-push-pull",
-  "lem-weil-pbc-grothendieck-existence-projective",
-  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-grothendieck-existence-chow-comparison",
+  "lem-weil-pbc-ideal-power-product-zero-affine-cover",
   "lem-weil-pbc-noetherian-acc-quasi-coherent",
-  "lem-weil-pbc-pushforward-coherent-on-open",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-support-pullback-finite-type",
   "lem-weil-pbc-thickening-systems-dictionary",
+  "pqf-lem-coherent-ft-locnoeth",
   "pqf-lem-locnoeth-lft"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Theorem 088E and Remark 088F; the dictionary and natural comparison details are expanded as in the parent proof."
+  "place": "Theorem 088E and Remark 088F. Formalized maximal failing-ideal argument and dictionary transfer; the geometric comparison is split off. Serre closure applied directly to the exact kernel sequence eliminates the cokernel branch."
  },
  "mathlib_searches": [
   {
@@ -225,9 +151,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T085240-L-15135",
+  "landing": "20261012T144054-L-2089157",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

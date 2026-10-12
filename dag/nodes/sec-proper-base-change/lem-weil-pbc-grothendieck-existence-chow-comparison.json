@@ -1,0 +1,189 @@
+{
+ "id": "lem-weil-pbc-grothendieck-existence-chow-comparison",
+ "kind": "statement",
+ "title": "Chow comparison with kernel killed by a larger ideal on a closed quotient",
+ "statement": "Let A be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], I an ideal for which A is I-adically complete [def-weil-pbc-adically-complete-ring], and f:X\\to\\operatorname{Spec} A separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism], with X Noetherian. Put Q=I\\mathcal O_X. In the coherent formal category \\mathit{Coh}(X,Q) [def-weil-pbc-coherent-formal-module], choose any Abelian structure [lem-weil-pbc-coherent-formal-modules-abelian]. Let K be a quasi-coherent ideal sheaf [def-sbc-closed-immersion-ideal-sheaf] and M an object annihilated by K, whose first support is proper over A [def-weil-pbc-closed-subset-proper-over-base]. Assume that no closed immersion j:Z\\to X [def-weil-closed-immersion] with Z proper over A has ideal j.ker annihilating all terms of M. Then there exist a coherent formal module N, a morphism \\alpha:M\\to N, and a quasi-coherent ideal J strictly containing K, such that J annihilates the formal kernel of \\alpha, and N is annihilated by the ideal of one closed subscheme of X proper over A. Annihilation is termwise vanishing of the shared ideal-module product [def-weil-pbc-coherent-formal-module].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4 (closed quotient, Chow modification, projective algebraization and proper push-pull comparison); verified at https://stacks.math.columbia.edu/tag/088E"
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "For the ideal K and formal module M annihilated by it, replace X by V(K) using the coherent-formal closed-immersion equivalence. Properness of first support is unchanged, since the supports and their reduced induced subschemes are identified. V(K) is nonempty: on the empty quotient the formal module is zero, hence supported on the empty proper closed subscheme, contradicting the hypothesis that no such support exists.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Chow's lemma to V(K) over Spec A. Its modification q:Y -> V(K) is proper, isomorphic over a nonempty dense open U, and has an immersion e into a finite projective space. Y is quasi-compact and the projective space is quasi-separated, so e is quasi-compact. The scheme-theoretic image Y'=e.image has a closed inclusion e.imageι into the projective space and e.toImage:Y -> Y' is an open immersion. This directly supplies the projective compactification, without applying the affine-only ProperClosedModel theorem to Y.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the formal module to Y. Nakayama on V(I) identifies each term support with the first support, and tensor pullback gives its inverse image under q. This support is proper over A; its image in the separated Y' is closed. Extension by zero to Y' is coherent and satisfies the formal quotient conditions on the open cover by Y and the complement of that closed support. Projective existence algebraizes the extended system. Its algebraization has support inside Y: a nonempty closed support outside Y has nonempty closed image in Spec A under the proper projection, so meets V(I) since I lies in the Jacobson radical. Reduction modulo I and Nakayama identify that intersection with the first support, already inside Y, a contradiction. Restrict the algebraization to Y; completion agrees with the pulled system.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-pushforward-coherent-on-open",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Proper pushforward of the restricted algebraization gives a coherent H on V(K). Its support is contained in the image of the proper support on Y, and so is proper over A. The scheme-theoretic support of H is proper and its ideal kills H and every quotient in its completion. Push that completion to X and call the resulting formal module N. Composing its supporting closed immersion with V(K) -> X shows that N is annihilated by a closed subscheme of X proper over A.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-push-pull",
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The push-pull comparison on V(K) gives alpha to the completion of H with kernel killed by L^t for t at least one, where L cuts out the reduced complement of U. Since U is nonempty, L^t is nonzero: it restricts to the unit ideal on U. Its inverse image J under O_X -> O_V(K) strictly contains K. The closed-pushforward equivalence preserves kernels: objects annihilated by K are closed under kernels in the ambient formal category, and the universal properties identify the two kernels. Thus the pushed comparison M -> N has kernel annihilated by J. This produces the asserted N, alpha and J, without any induction hypothesis.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-formal-systems-push-pull",
+  "lem-weil-pbc-grothendieck-existence-projective",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-pushforward-coherent-on-open",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, paragraphs 2--4; closed-quotient kernel transport made explicit; no Noetherian induction in this lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent formal module with proper first support admits a morphism to a completion of a proper pushforward whose kernel is killed by a nonzero ideal",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent adic formal module annihilated by K maps to the completion of a proper pushforward with kernel annihilated by a strictly larger ideal",
+   "results": "Eight results about AdicCompletion, IsAdicComplete, their maps and Hausdorffification; none supplies a geometric comparison of formal modules.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.prop_X₂_of_exact",
+   "results": "Found the general Serre-class exact-sequence lemma used to combine the geometric comparison with maximality. It does not supply the geometric comparison.",
+   "verdict": "glue only",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieckExistence|formalSystems.*properSupport|chow_comparison",
+   "results": "No Mathlib hits. Library search found the existing dictionary, projective existence, Serre-class and push-pull modules, but no comparison on an arbitrary closed quotient with a strictly larger annihilator. Whole-blueprint search for 088E returned no imported node; maximal failing/Chow comparison search found no duplicate.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceSystemSupport",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite-etale lifting: geometric comparison in the proof of Theorem 088E, paragraphs 2--4, before the Noetherian induction conclusion.",
+   "via": [
+    "lem-weil-pbc-grothendieck-existence-system-support",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceChowComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceChowComparison.lean",
+  "declaration": "AlgebraicGeometry.grothendieckExistence_chow_comparison",
+  "statement": "theorem grothendieckExistence_chow_comparison\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) [IsAdicComplete I A]\n    {X : Scheme.{u}} [IsNoetherian X] (f : X ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :\n    let Q := (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f\n    ∀ [Abelian (CoherentFormalModule X Q)] (K : X.IdealSheafData)\n      (M : CoherentFormalModule X Q),\n      AnnihilatedBy Q K M →\n      Scheme.Modules.HasSupportProperOver f (M.obj.obj (op 0)) →\n      (¬ ∃ (Z : Scheme.{u}) (j : Z ⟶ X) (_ : IsClosedImmersion j),\n        IsProper (j ≫ f) ∧ AnnihilatedBy Q j.ker M) →\n      ∃ (N : CoherentFormalModule X Q) (α : M ⟶ N) (J : X.IdealSheafData),\n        K < J ∧ AnnihilatedBy Q J (kernel α) ∧\n        ∃ (Z : Scheme.{u}) (j : Z ⟶ X) (_ : IsClosedImmersion j),\n          IsProper (j ≫ f) ∧ AnnihilatedBy Q j.ker N",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T144054-L-2089157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T144054-L-2089157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
