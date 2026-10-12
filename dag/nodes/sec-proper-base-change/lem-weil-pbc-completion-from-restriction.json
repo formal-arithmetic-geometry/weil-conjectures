@@ -22,38 +22,35 @@
  ],
  "proof": [
   {
-   "text": "For every F,n apply closedImmersion_unit_quotient to j_n. The identification ker(j_n)=J^(n+1), and associativity of ideal multiplication (or the affine product calculation), identify its cokernel with formalModuleQuotient J (n+1) F. Transport the canonical adjunction to aj_n by leftAdjointUniq, preserving the unit equation. This gives a natural termwise isomorphism from the quotient to j_(n,*)j_n^*F.",
+   "text": "For each coherent F and n apply closedImmersion_power_quotient to j_n with ker(j_n)=J^(n+1) and the supplied adjunction aj_n. Compose this quotient isomorphism with the inverse pushforward of r_n and inverse beta_n to define e(F,n). Its composite with beta_n and pushed r_n sends the quotient projection to aj_n.unit.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "def-sbc-ideal-sheaf-powers",
-    "def-pc-module-pullback",
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-closed-immersion-power-quotient"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
     "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence); equation 0880 (equation-completion-functor)"
    }
   },
   {
-   "text": "Compose the termwise quotient isomorphism with the inverse of the pushforward of r_n and the inverse of beta_n at R(F). Apply the transition equation for Phi, the supplied equation for R comparisons, and the supplied normalized unit equation. After precomposing with the epi quotient projection from F, the adjacent transition squares commute; cancel that projection. Induction on the difference of two natural-number indices gives all transition squares.",
+   "text": "Prove restriction_transition as a private general categorical lemma: use naturality of the composition pushforward isomorphism, adjunction units, and the supplied comparison equation hr to transport the pushed adjoint comparison to the composite normalized unit. Apply hc. Cancel beta_n followed by pushed r_n to obtain compatibility of quotient projections with adjacent transitions. Cancel the epi quotient projection and induct on b <= a to get every transition square.",
    "uses": [
     "def-weil-pbc-coherent-thickening-system",
     "def-weil-pbc-coherent-formal-module",
     "def-pc-module-pullback"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
     "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence); equation 0880 (equation-completion-functor)"
    }
   },
   {
-   "text": "Naturality in F follows by precomposing with the quotient projection and using naturality of the units, beta and r; cancel the epi projection. Assemble the termwise isomorphisms by NatIso.ofComponents, with inverses natural because the hom is natural. The coherent formal category is a full subcategory, so lift the isomorphism to it. The defining termwise quotient equation gives the claimed final normalization.",
+   "text": "For a coherent module map, cancel the source cokernel projection and the target beta/r isomorphism. Naturality of beta, r and the adjunction unit proves the component naturality equation. Assemble the level isomorphisms by NatIso.ofComponents, lift them using ObjectProperty.isoMk, and assemble the natural isomorphism of functors by NatIso.ofComponents again. The previously proved normalized component equation is exactly the conclusion.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
     "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence); equation 0880 (equation-completion-functor)"
@@ -62,16 +59,15 @@
  ],
  "proof_deps": [
   "def-pc-module-pullback",
-  "def-sbc-ideal-sheaf-powers",
   "def-weil-pbc-coherent-formal-module",
   "def-weil-pbc-coherent-thickening-system",
-  "lem-weil-pbc-closed-immersion-unit-quotient"
+  "lem-weil-pbc-closed-immersion-power-quotient"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
   "place": "Remark 088F (remark-reformulate-existence-theorem), Lemma 087T (lemma-i-star-equivalence); equation 0880 (equation-completion-functor)",
-  "note": "Categorical assembly of the quotient identifications in Stacks 087T and 0880; supplied normalized restriction data remove steps 1--3 of the parent."
+  "note": "Lean proof by V3: the single-immersion quotient step is split off; all transition compatibility, naturality, induction and full-subcategory assembly are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -155,9 +151,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T202231-L-701542",
+  "landing": "20261012T220528-L-1396355",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
