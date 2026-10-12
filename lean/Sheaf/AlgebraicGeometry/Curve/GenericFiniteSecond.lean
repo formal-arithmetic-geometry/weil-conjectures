@@ -23,6 +23,7 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.AlgebraicGeometry.NormalGenericConstant
+import Sheaf.AlgebraicGeometry.Curve.GenericFiniteSecondReduction
 
 /-! # Finite generic sheaves and second cohomology
 
@@ -79,6 +80,7 @@ theorem subsingleton_sheafH_two_lowerStar_of_finite_stalk
           (A := AddCommGrpCat.{u + 1})).obj M)) :
     Subsingleton
       (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M) 2) := by
-  sorry
+  obtain ⟨N, j, hj, hN⟩ := finite_stalk_second_cohomology_retraction f hmodel hconstant M hM hfinite
+  exact subsingleton_of_injective j hj hN
 
 end AlgebraicGeometry.IsConnectedCurve
