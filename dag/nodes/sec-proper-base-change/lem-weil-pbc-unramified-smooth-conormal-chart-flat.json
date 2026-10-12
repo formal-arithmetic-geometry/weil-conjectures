@@ -1,0 +1,206 @@
+{
+ "id": "lem-weil-pbc-unramified-smooth-conormal-chart-flat",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof of Lemma 07CH: Fibrewise flatness of an unramified smooth chart",
+   "via": [
+    "lem-weil-pbc-smooth-conormal-basis-etale-polynomial-chart-core",
+    "lem-weil-pbc-smooth-conormal-basis-etale-polynomial-chart",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fibrewise flatness of an unramified smooth chart",
+ "statement": "Let R be a commutative ring, n,c natural numbers, f_j in P=R[x_1,...,x_n], J=(f_j) and C=P/J [def-weil-pbc-mv-polynomial-ring]. Assume C is smooth over R [def-weil-pbc-smooth-ring-map] and J/J^2 has a C-basis indexed by Fin c. For every g in D=C[y_1,...,y_c] and every R-algebra map theta:P -> D_g [def-weil-ring-localization-away], if D_g is formally unramified over P through theta [def-weil-pbc-kahler-differentials], then it is flat over P through that same theta [def-weil-pbc-flat-ring-map]. No prescribed values for the conormal basis or theta are assumed.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The split conormal injection and the given rank-c basis identify Omega(C/R) plus C^c with C^n. Polynomial extension and localization give smoothness of B=D_g over R and rank n for Omega(B/R) at every prime. This uses the same split injection of Mathlib FormallySmooth.iff_split_injection, without the principal-localization conormal lemma.",
+   "uses": [
+    "lem-weil-pbc-presentation-split-conormal-smooth",
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-kahler-differentials-polynomial-extension",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-ring-map-principal-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+   }
+  },
+  {
+   "text": "For a residue field k of R put T=B tensor_R k. Smoothness and differentials commute with base change, so T is smooth over k with differential rank n. Formal unramifiedness of P -> B also survives base change to k[z] -> T. At a maximal m of T, its contraction p in k[z] is maximal by Zariski lemma: the image k[z]/p is a finite-dimensional domain inside T/m. The two local rings are regular of dimension n, using the smooth differential-rank and closed-point dimension results.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-weil-pbc-smooth-fibre-regular-local",
+    "lem-weil-pbc-smooth-over-field-dimension-differentials",
+    "lem-weil-pbc-closed-point-dimension-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+   }
+  },
+  {
+   "text": "The unramified fibre over p is a finite product of finite separable fields. Its localization at m is a field, so T_m/p T_m has dimension zero. The regular local target has depth at least n because its maximal ideal generators form a regular sequence. Miracle flatness gives flatness of k[z]_p -> T_m. Localizing from maximal to arbitrary primes and applying the local flatness criterion makes T flat over k[z].",
+   "uses": [
+    "lem-weil-pbc-unramified-algebra-over-field-product",
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-miracle-flatness",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-flat-map-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+   }
+  },
+  {
+   "text": "At Q in Spec B with contractions q in P and p in R, use the fibrewise flatness criterion on R_p -> P_q -> B_Q with M=B_Q. The rings are localizations of finitely presented R_p-algebras; M is finite free of rank one over B_Q and nonzero. Smoothness of B over R gives R_p-flatness. The closed fibre map is a localization of the flat k[z] -> T. Thus B_Q is P_q-flat. The local flatness criterion proves flatness through theta globally.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-flat-map-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-point-dimension-local-ring",
+  "lem-weil-pbc-criterion-flatness-fibre",
+  "lem-weil-pbc-fibre-ring-localization-quotient",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-map-local-criterion",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-presentation-split-conormal-smooth",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-smooth-over-field-dimension-differentials",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-unramified-algebra-over-field-product",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unramified map between smooth algebras same relative dimension flat",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unramified map between smooth algebras same relative dimension flat",
+   "results": "RingHom.etale_iff_formallyUnramified_and_smooth; Algebra.IsStandardSmoothOfRelativeDimension; no rank-based flatness result",
+   "date": "2026-10-13",
+   "verdict": "No exact match; these are ingredients, not the corrected-coordinate localization or dimension-based flatness assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "rg flat.*(rank|dimension)|unramified.*flat in Mathlib/RingTheory",
+   "results": "Algebra.Etale.of_formallyUnramified_of_flat needs flatness as a hypothesis; flatness rank lemmas concern modules, not this ring-map conclusion.",
+   "date": "2026-10-13",
+   "verdict": "No matching combined statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothConormalBasisEtalePolynomialChart",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.UnramifiedSmoothConormalChartFlat",
+  "file": "lean/Sheaf/RingTheory/UnramifiedSmoothConormalChartFlat.lean",
+  "declaration": "Algebra.flat_of_unramified_smooth_conormal_chart",
+  "statement": "theorem flat_of_unramified_smooth_conormal_chart (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))] (b : Module.Basis (Fin c) (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)) (Ideal.span (Set.range f)).Cotangent) (g : MvPolynomial (Fin c) (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (θ : MvPolynomial (Fin n) R →ₐ[R] Localization.Away g) : letI := θ.toRingHom.toAlgebra letI : Module (MvPolynomial (Fin n) R) (Localization.Away g) := θ.toRingHom.toAlgebra.toModule FormallyUnramified (MvPolynomial (Fin n) R) (Localization.Away g) → Module.Flat (MvPolynomial (Fin n) R) (Localization.Away g)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T213849-L-1208203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T213849-L-1208203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

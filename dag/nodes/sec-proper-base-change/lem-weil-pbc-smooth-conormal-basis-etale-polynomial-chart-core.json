@@ -24,16 +24,54 @@
  ],
  "proof": [
   {
-   "text": "Carry out the split conormal sequence, Nakayama localization, and fibrewise flatness argument of the source proof, retaining the canonical constants equation.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply Mathlib FormallySmooth.iff_split_injection to P -> C. Transport its kernel cotangent module to J.Cotangent and extend the retraction to C scalars. With the base-changed polynomial differential basis d_i define a_ik=b.repr(l(d_i))(k). Applying the retraction to df_j and taking b-coordinates, using hb, proves sum_i (partial_i f_j mod J) a_ik=delta_jk. This is the proved private helper exists_conormal_matrix.",
+   "uses": [
+    "lem-weil-pbc-presentation-split-conormal-smooth",
+    "lem-weil-pbc-polynomial-ring-kahler-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+   }
+  },
+  {
+   "text": "Apply the unramified corrected-coordinate localization lemma to that matrix. Define theta_0 explicitly by polynomial evaluation on x_i-sum_j a_ij y_j, and theta as its composite with D -> D_g. The lemma supplies constantCoeff g=1 and formal unramifiedness through this exact theta.",
+   "uses": [
+    "lem-weil-pbc-conormal-chart-unramified-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+   }
+  },
+  {
+   "text": "Apply the dimension-based flatness lemma to g, theta, smooth C and the conormal basis. D_g is finitely presented over R by polynomial extension and principal localization; restrict the scalar base to P through theta using Mathlib FinitePresentation.of_restrict_scalars_finitePresentation. Mathlib Etale.of_formallyUnramified_of_flat combines these facts. Finally theta.comp_algebraMap supplies the canonical-constants equation.",
+   "uses": [
+    "lem-weil-pbc-unramified-smooth-conormal-chart-flat",
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-local-flat-unramified-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-conormal-chart-unramified-localization",
+  "lem-weil-pbc-local-flat-unramified-etale",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-presentation-split-conormal-smooth",
+  "lem-weil-pbc-unramified-smooth-conormal-chart-flat"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Proof of Lemma 07CH, lines 606--671: split conormal matrix, B prime, Nakayama localization, and fibrewise flatness"
+  "place": "Proof of Lemma 07CH, corrected coordinates, Nakayama localization and fibrewise flatness; read at https://stacks.math.columbia.edu/tag/07CH"
  },
  "mathlib_searches": [
   {
@@ -101,10 +139,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T202259-L-711047",
-  "kind": "proof",
+  "landing": "20261012T213849-L-1208203",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
