@@ -1,0 +1,127 @@
+{
+ "id": "lem-pd-relative-smooth-dimension-codescent",
+ "kind": "statement",
+ "title": "Fixed relative smooth dimension descends under faithfully flat ring base change",
+ "statement": "Fix $n\\in\\mathbb N$. For maps of commutative rings $R\\to S$ and $R\\to T$, with $R\\to T$ faithfully flat [def-weil-pbc-faithfully-flat-ring-map], suppose $T\\to T\\otimes_R S$ is locally standard smooth of relative dimension $n$: its spectrum has a covering by principal opens with standard smooth presentations [def-weil-pbc-standard-smooth-algebra] of dimension $n$. Then $R\\to S$ is locally standard smooth of relative dimension $n$. Equivalently, this property codescends along faithfully flat maps.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Descent, Tag 02VL; Morphisms, Tag 02G1; Algebra, Tag 00T7 (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Descend smoothness by the affine faithfully-flat smooth-descent theorem (Mathlib RingHom.Smooth.codescendsAlong_faithfullyFlat, the affine argument behind 02VL). Choose a standard smooth chart around each prime downstairs. Its differentials are free, with rank the dimension of the presentation.",
+   "uses": [
+    "lem-weil-pbc-smooth-locally-standard-smooth",
+    "lem-weil-pbc-standard-smooth-kahler-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a prime upstairs over the given prime by faithful flatness. Differentials commute with tensor base change. The fibre of the differentials at the upstairs prime is scalar extension of the downstairs fibre, so its vector-space dimension is unchanged. The upstairs hypothesis says that dimension is n. Thus the standard smooth chart downstairs has presentation dimension n. The zero target ring is handled by the empty principal-open cover.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Descent, Tag 02VL; Morphisms, Tag 02G1; Algebra, Tag 00T7 (2); the proof is the indicated affine/transport specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally standard smooth of relative dimension n descends along faithfully flat ring maps",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict assigned.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally standard smooth of relative dimension n descends along faithfully flat ring maps",
+   "results": "HasRingHomProperty for SmoothOfRelativeDimension, and stability under base change; none proves codescent. Loogle CodescendsAlong found the generic interface, and Smooth.codescendsAlong_faithfullyFlat only proves smoothness.",
+   "date": "2026-10-12",
+   "verdict": "No exact existing declaration; checked the reported signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "codescendsAlong.*[Ss]mooth; SmoothOfRelativeDimension in Mathlib and both library roots",
+   "results": "Searched pinned Mathlib and both library roots. No theorem of the required statement. The relevant existing interfaces are recorded in the proof steps.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.EffectiveDescent",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-fpqc-local-properties",
+   "place": "stage-3 Lean proof reduction",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RelativeSmoothDimensionDescent",
+  "file": "lean/Sheaf/RingTheory/RelativeSmoothDimensionDescent.lean",
+  "declaration": "RingHom.locally_standardSmoothOfRelativeDimension_codescendsAlong_faithfullyFlat",
+  "statement": "theorem locally_standardSmoothOfRelativeDimension_codescendsAlong_faithfullyFlat (n : ℕ) : CodescendsAlong (Locally (IsStandardSmoothOfRelativeDimension n)) FaithfullyFlat",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

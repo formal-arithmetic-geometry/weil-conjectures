@@ -1,0 +1,129 @@
+{
+ "id": "lem-pd-comm-monoid-operations-descent",
+ "kind": "statement",
+ "title": "The multiplication and unit descend before the inverse",
+ "statement": "Let $p:X\\to Y$ be flat, surjective and quasi-compact, $V$ a commutative monoid scheme over $X$ (the multiplication, unit, associativity, unit laws and commutativity part of [def-sc-group-scheme]), and $D$ a transport descent datum [def-pd-descent-datum]. Let $q:V\\to V_0$ exhibit an effective projection: its square over $p$ is cartesian [def-pc-base-change] and it is transport-invariant. If transport preserves multiplication and unit, then $V_0$ admits a commutative monoid structure. For every $T\\to X$, the induced map from $V(T)$ to $V_0(T)$ preserves products and unit. This statement constructs no inverse.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/lem-pd-group-scheme-descent.md",
+  "place": "multiplication and unit descent step, via Stacks Tag 02W0"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-pd-descent-datum",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Base change commutes with products and terminal objects. Put componentwise transport on V times_X V. The hypotheses say multiplication and unit are morphisms of descent data. Apply full faithfulness of fpqc base change to descend these maps. Their factorization equations give the pointwise product and unit identities.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pd-descent-datum",
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The associativity, unit and commutativity equations become the corresponding equations on V after base change. Faithfulness proves them downstairs, giving MonObj V0 and IsCommMonObj V0. The inverse operation is not included in this assertion.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-morphisms-descend",
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/lem-pd-group-scheme-descent.md",
+  "place": "multiplication and unit descent step, via Stacks Tag 02W0; the proof is the indicated affine/transport specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "commutative monoid structure descends from compatible multiplication and unit along faithfully flat schemes",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict assigned.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative monoid structure descends from compatible multiplication and unit along faithfully flat schemes",
+   "results": "Only flat-map interfaces; Loogle MonObj gives the internal monoid constructors, no descent theorem. Repository search found the original group descent theorem, which includes the inverse and cannot be imported cyclically.",
+   "date": "2026-10-12",
+   "verdict": "No exact existing declaration; checked the reported signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "CommMon.*descend|descend.*CommMon; group descent in lean/Sheaf and lean/WeilConjectures",
+   "results": "Searched pinned Mathlib and both library roots. No theorem of the required statement. The relevant existing interfaces are recorded in the proof steps.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.EffectiveDescent",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-group-scheme-descent",
+   "place": "stage-3 Lean proof reduction",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CommMonoidDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommMonoidDescent.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.exists_commMonObj_of_effective_projection",
+  "statement": "theorem exists_commMonObj_of_effective_projection {X Y : Scheme.{u}} {p : X ⟶ Y} [Flat p] [Surjective p] [QuasiCompact p] {V : Over X} [MonObj V] [IsCommMonObj V] (D : Over.DescentDatum p V) {V₀ : Over Y} (qV : V.left ⟶ V₀.left) (hqV : IsPullback qV V.hom V₀.hom p) (hDV : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V), (D.transport f₁ f₂ h a).left ≫ qV = a.left ≫ qV) (hμ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a b : Over.mk f₁ ⟶ V), D.transport f₁ f₂ h (lift a b ≫ μ[V]) = lift (D.transport f₁ f₂ h a) (D.transport f₁ f₂ h b) ≫ μ[V]) (hη : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p), D.transport f₁ f₂ h (toUnit _ ≫ η[V]) = toUnit _ ≫ η[V]) : ∃ M : MonObj V₀, letI := M; IsCommMonObj V₀ ∧ (∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V), (lift a b ≫ μ[V]).left ≫ qV = (lift (Over.homMk (a.left ≫ qV) (by simp only [Over.mk_hom, Category.assoc, hqV.w] rw [← Category.assoc, Over.w a] rfl) : Over.mk (f ≫ p) ⟶ V₀) (Over.homMk (b.left ≫ qV) (by simp only [Over.mk_hom, Category.assoc, hqV.w] rw [← Category.assoc, Over.w b] rfl) : Over.mk (f ≫ p) ⟶ V₀) ≫ μ[V₀]).left) ∧ (∀ {T : Scheme.{u}} (f : T ⟶ X), (toUnit (Over.mk f) ≫ η[V]).left ≫ qV = (toUnit (Over.mk (f ≫ p)) ≫ η[V₀]).left)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

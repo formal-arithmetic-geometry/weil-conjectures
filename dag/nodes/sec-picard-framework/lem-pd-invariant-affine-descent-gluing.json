@@ -1,0 +1,131 @@
+{
+ "id": "lem-pd-invariant-affine-descent-gluing",
+ "kind": "statement",
+ "title": "Effective affine descents glue on invariant open neighbourhoods",
+ "statement": "Let $p:X\\to Y$ be finite, flat and surjective and $D$ a transport descent datum [def-pd-descent-datum] on $V\\to X$. Suppose every point of $V$ has a transport-invariant affine neighbourhood $U$, contained in the inverse image of an affine open $B\\subseteq Y$. Here invariant means that any test-scheme point whose image is in $U$ remains in $U$ after transport. Then $D$ is effective: there is $V_0\\to Y$ and a transport-invariant projection $q:V\\to V_0$ whose square over $p$ is cartesian [def-pc-base-change]. No finite-subset affine-neighbourhood hypothesis is used here.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Descent, Tags 0AP4 and 0245; Groupoid Schemes, proof of Tag 0H8K"
+ },
+ "stmt_deps": [
+  "def-pd-descent-datum",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The neighbourhoods form an invariant open cover. Invariance in the reverse direction follows from inverse transport. Above each chosen affine B, the scheme X_B is affine because p is finite. Thus U to X_B is affine. Apply affine fpqc effectiveness to the restricted datum and view its descended model as a scheme over Y through B.",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-base-change",
+    "lem-galois-fpqc-affine-descent-effective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Intersections are invariant opens. Fpqc descent of opens identifies their models as open subschemes on both sides. Full faithfulness supplies unique transition isomorphisms and proves their cocycle. Scheme gluing gives V0 over Y; the local effective projections glue to q. Pullback and transport invariance hold locally on the cover, hence globally. Glue the empty cover to the empty Y-scheme when V is empty.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "lem-galois-fpqc-morphisms-descend",
+    "def-pc-base-change",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pd-descent-datum",
+  "def-pc-base-change",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-galois-fpqc-morphisms-descend"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Descent, Tags 0AP4 and 0245; Groupoid Schemes, proof of Tag 0H8K; the proof is the indicated affine/transport specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "effective descent of a scheme by gluing invariant affine open subschemes",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict assigned.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective descent of a scheme by gluing invariant affine open subschemes",
+   "results": "Scheme.GlueData.gluedScheme and RelativeGluingData.glued give the gluing construction, but not effectiveness from invariant affine opens. Repository search found affine effectiveness, which applies to each neighbourhood only.",
+   "date": "2026-10-12",
+   "verdict": "No exact existing declaration; checked the reported signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEffective; invariant.*affine|affine.*invariant in Mathlib and both roots",
+   "results": "Searched pinned Mathlib and both library roots. No theorem of the required statement. The relevant existing interfaces are recorded in the proof steps.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.EffectiveDescent",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-effective-descent",
+   "place": "stage-3 Lean proof reduction",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InvariantAffineDescentGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantAffineDescentGluing.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.isEffective_of_invariant_affine_neighbourhoods",
+  "statement": "theorem isEffective_of_invariant_affine_neighbourhoods {X Y : Scheme.{u}} {p : X ⟶ Y} [IsFinite p] [Flat p] [Surjective p] {V : Over X} (D : Over.DescentDatum p V) (hcover : ∀ v : V.left, ∃ U : V.left.Opens, v ∈ U ∧ IsAffineOpen U ∧ (∃ B : Y.Opens, IsAffineOpen B ∧ U ≤ (V.hom ≫ p) ⁻¹ᵁ B) ∧ ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V), Set.range a.left ⊆ U → Set.range (D.transport f₁ f₂ h a).left ⊆ U) : D.IsEffective",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

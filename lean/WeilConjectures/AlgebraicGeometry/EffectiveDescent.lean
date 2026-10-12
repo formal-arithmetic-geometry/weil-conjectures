@@ -10,12 +10,17 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+import Sheaf.FieldTheory.CommonExtensionFields
+import Sheaf.RingTheory.RelativeSmoothDimensionDescent
+import Sheaf.AlgebraicGeometry.InvariantAffineNeighbourhoods
+import Sheaf.AlgebraicGeometry.InvariantAffineDescentGluing
+import Sheaf.AlgebraicGeometry.CommMonoidDescent
+import Sheaf.AlgebraicGeometry.IsProperOfFieldBaseChange
+import Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.Morphisms.Projective
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Effective descent for schemes
@@ -64,8 +69,11 @@ one needed there, which only asks it of the finite sets of points lying over one
 theorem isEffective_of_isFinite [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] {V : Over X}
     (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)
-    (D : Over.DescentDatum p V) : D.IsEffective :=
-  sorry
+    (D : Over.DescentDatum p V) : D.IsEffective := by
+  apply isEffective_of_invariant_affine_neighbourhoods D
+  intro v
+  obtain ⟨U, hv, hU, hB, hstable⟩ := exists_invariant_affine_neighbourhood hV D v
+  exact ⟨U, hv, hU, hB, hstable⟩
 
 /-- **Morphisms descend.** Let `p : X ⟶ Y` be faithfully flat and quasi-compact, and let `V`, `W`
 be schemes over `X` with descent data `D`, `E` that are effective, with descended schemes `V₀`,
@@ -147,12 +155,149 @@ theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p]
       D.transport f₁ f₂ h (toUnit _ ≫ η[V]) = toUnit _ ≫ η[V]) :
     ∃ _ : CommGrpObj V₀, ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
       descendPoint hqV (lift a b ≫ μ[V]) =
-        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] :=
-  sorry
+        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
+  obtain ⟨M, hcomm, hprod, hunit⟩ :=
+    exists_commMonObj_of_effective_projection D qV hqV hDV hμ hη
+  let : MonObj V₀ := M
+  have : IsCommMonObj V₀ := hcomm
+  have hinv : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p)
+      (a : Over.mk f₁ ⟶ V),
+      D.transport f₁ f₂ h (a ≫ ι[V]) = D.transport f₁ f₂ h a ≫ ι[V] := by
+    intro T f₁ f₂ h a
+    let F : (Over.mk f₁ ⟶ V) →* (Over.mk f₂ ⟶ V) :=
+      { toFun := D.transport f₁ f₂ h
+        map_one' := hη f₁ f₂ h
+        map_mul' := hμ f₁ f₂ h }
+    exact F.map_inv a
+  obtain ⟨i₀, hi₀, _⟩ := existsUnique_hom_of_isPullback D D qV hqV hDV
+    qV hqV hDV ι[V] hinv
+  let a : Over.mk V.hom ⟶ V := Over.homMk (𝟙 V.left)
+  let q₀ := descendPoint hqV a
+  have hia : descendPoint hqV (a ≫ ι[V]) = q₀ ≫ i₀ := by
+    ext : 1
+    simpa [a, q₀, descendPoint] using hi₀
+  have hleft : lift (q₀ ≫ i₀) q₀ ≫ μ[V₀] = toUnit _ ≫ η[V₀] := by
+    rw [← hia]
+    calc
+      lift (descendPoint hqV (a ≫ ι[V])) (descendPoint hqV a) ≫ μ[V₀] =
+          descendPoint hqV (lift (a ≫ ι[V]) a ≫ μ[V]) := by
+        ext : 1
+        exact (hprod V.hom (a ≫ ι[V]) a).symm
+      _ = descendPoint hqV (toUnit _ ≫ η[V]) := by
+        congr 1
+        simp [a]
+      _ = toUnit _ ≫ η[V₀] := by
+        ext : 1
+        exact hunit V.hom
+  have hright : lift q₀ (q₀ ≫ i₀) ≫ μ[V₀] = toUnit _ ≫ η[V₀] := by
+    rw [← hia]
+    calc
+      lift (descendPoint hqV a) (descendPoint hqV (a ≫ ι[V])) ≫ μ[V₀] =
+          descendPoint hqV (lift a (a ≫ ι[V]) ≫ μ[V]) := by
+        ext : 1
+        exact (hprod V.hom a (a ≫ ι[V])).symm
+      _ = descendPoint hqV (toUnit _ ≫ η[V]) := by
+        congr 1
+        simp [a]
+      _ = toUnit _ ≫ η[V₀] := by
+        ext : 1
+        exact hunit V.hom
+  have : Flat qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have : Surjective qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have : QuasiCompact qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  let G : GrpObj V₀ :=
+    { M with
+      inv := i₀
+      left_inv := by
+        ext : 1
+        apply (cancel_epi qV).1
+        have hh : q₀ ≫ (lift i₀ (𝟙 V₀) ≫ μ[V₀]) =
+            q₀ ≫ (toUnit V₀ ≫ η[V₀]) := by
+          simpa only [← Category.assoc, comp_lift, Category.comp_id,
+            comp_toUnit] using hleft
+        have hq₀ : q₀.left = qV := by simp [q₀, a, descendPoint]
+        simpa only [Over.comp_left, hq₀] using congrArg Over.Hom.left hh
+      right_inv := by
+        ext : 1
+        apply (cancel_epi qV).1
+        have hh : q₀ ≫ (lift (𝟙 V₀) i₀ ≫ μ[V₀]) =
+            q₀ ≫ (toUnit V₀ ≫ η[V₀]) := by
+          simpa only [← Category.assoc, comp_lift, Category.comp_id,
+            comp_toUnit] using hright
+        have hq₀ : q₀.left = qV := by simp [q₀, a, descendPoint]
+        simpa only [Over.comp_left, hq₀] using congrArg Over.Hom.left hh }
+  let : GrpObj V₀ := G
+  refine ⟨inferInstance, ?_⟩
+  intro T f a b
+  ext : 1
+  exact hprod f a b
 
 end CategoryTheory.Over.DescentDatum
 
 namespace AlgebraicGeometry
+
+private theorem integral_of_flat_surjective {A B : Scheme.{u}} (f : A ⟶ B)
+    [Flat f] [Surjective f] [IsIntegral A] : IsIntegral B := by
+  have : IrreducibleSpace B := f.surjective.irreducibleSpace f.continuous
+  have (b : B) : _root_.IsReduced (B.presheaf.stalk b) := by
+    obtain ⟨a, rfl⟩ := f.surjective b
+    let φ := (f.stalkMap a).hom
+    let := φ.toAlgebra
+    have : IsLocalHom (algebraMap (B.presheaf.stalk (f a)) (A.presheaf.stalk a)) :=
+      inferInstanceAs (IsLocalHom (f.stalkMap a).hom)
+    have : Module.Flat (B.presheaf.stalk (f a)) (A.presheaf.stalk a) := Flat.stalkMap f a
+    have : Module.FaithfullyFlat (B.presheaf.stalk (f a)) (A.presheaf.stalk a) :=
+      Module.FaithfullyFlat.of_flat_of_isLocalHom
+    exact isReduced_of_injective φ (FaithfulSMul.algebraMap_injective
+      (B.presheaf.stalk (f a)) (A.presheaf.stalk a))
+  have : IsReduced B := isReduced_of_isReduced_stalk B
+  exact isIntegral_of_irreducibleSpace_of_isReduced B
+
+private theorem geometricallyIntegral_of_field_pullback {k K : Type u}
+    [Field k] [Field K] [Algebra k K] {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k))
+    (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
+    (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+    [GeometricallyIntegral z'] : GeometricallyIntegral z := by
+  rw [GeometricallyIntegral.eq_geometrically]
+  rw [geometrically_iff_of_commRing]
+  intro L _ _ A a b hs
+  obtain ⟨M, hM, hMk, i, j, _, _⟩ := Field.exists_common_extension k K L
+  let im := Spec.map (CommRingCat.ofHom i.toRingHom)
+  let jm := Spec.map (CommRingCat.ofHom j.toRingHom)
+  let pk := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  let pl := Spec.map (CommRingCat.ofHom (algebraMap k L))
+  have hij : im ≫ pk = jm ≫ pl := by
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+    ext x
+    exact (i.commutes x).trans (j.commutes x).symm
+  let W := pullback z' im
+  let w₁ : W ⟶ Z' := pullback.fst z' im
+  let w₂ : W ⟶ Spec (.of M) := pullback.snd z' im
+  have hw : IsPullback w₁ w₂ z' im := .of_hasPullback z' im
+  have hi : IsIntegral W := GeometricallyIntegral.geometrically_isIntegral
+    im w₁ w₂ hw
+  have ht : IsPullback (w₁ ≫ q) w₂ z (jm ≫ pl) := by
+    rw [← hij]
+    exact hw.paste_horiz h
+  let r : W ⟶ A := hs.lift (w₁ ≫ q) (w₂ ≫ jm) (by
+    simpa only [Category.assoc] using ht.w)
+  have hra : r ≫ a = w₁ ≫ q := by simp [r]
+  have hrb : r ≫ b = w₂ ≫ jm := by simp [r]
+  have hr : IsPullback r w₂ b jm := by
+    apply IsPullback.of_right (h₁₂ := a) (v₁₃ := z) (h₂₂ := pl)
+    · simpa only [hra] using ht
+    · exact hrb
+    · exact hs
+  have : Flat jm := by
+    dsimp [jm]
+    infer_instance
+  have : Surjective jm := by
+    dsimp [jm]
+    infer_instance
+  have : Flat r := MorphismProperty.of_isPullback hr.flip inferInstance
+  have : Surjective r := MorphismProperty.of_isPullback hr.flip inferInstance
+  exact integral_of_flat_surjective r
 
 /-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
 field extension and let `Z` be a scheme over `k` whose base change `Z_K` is proper, smooth of
@@ -174,7 +319,34 @@ theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback {
     (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
     (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (n : ℕ)
     [IsProper z'] [SmoothOfRelativeDimension n z'] [GeometricallyIntegral z'] :
-    IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z :=
-  sorry
+    IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z := by
+  let p := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  have hp : (Surjective p ∧ Flat p) ∧ QuasiCompact p := by
+    dsimp [p]
+    exact ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
+  let : MorphismProperty.IsStableUnderBaseChange (@SmoothOfRelativeDimension n) :=
+    smoothOfRelativeDimension_isStableUnderBaseChange n
+  let : MorphismProperty.DescendsAlong (@SmoothOfRelativeDimension n)
+      (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=
+    HasRingHomProperty.descendsAlong_flat
+      (RingHom.locally_standardSmoothOfRelativeDimension_codescendsAlong_faithfullyFlat n)
+  have hdim : SmoothOfRelativeDimension n z :=
+    MorphismProperty.of_isPullback_of_descendsAlong
+      (P := @SmoothOfRelativeDimension n)
+      (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) h.flip hp inferInstance
+  have : Smooth z := SmoothOfRelativeDimension.smooth n z
+  have hqc' : QuasiCompact (pullback.snd z p) := by
+    have heq : pullback.snd z p = h.isoPullback.inv ≫ z' := by
+      simp [p]
+    rw [heq]
+    infer_instance
+  have hqc : QuasiCompact z := quasiCompact_of_fpqc_baseChange p z
+  have hproper' : IsProper (pullback.snd z p) := by
+    have heq : pullback.snd z p = h.isoPullback.inv ≫ z' := by
+      simp [p]
+    rw [heq]
+    infer_instance
+  have hproper : IsProper z := isProper_of_field_baseChange (K := K) z
+  exact ⟨hproper, hdim, geometricallyIntegral_of_field_pullback z z' q h⟩
 
 end AlgebraicGeometry

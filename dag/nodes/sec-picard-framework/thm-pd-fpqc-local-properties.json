@@ -37,39 +37,44 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "A finite field extension $k\\subseteq K$ makes $\\Spec(K)\\to\\Spec(k)$ a\nsurjective [def-pc-finite-locally-free]\nmorphism, in particular faithfully flat, quasi-compact, and locally of finite\npresentation, so it is an fpqc covering of $\\Spec(k)$ in the sense of Stacks\nProject, Descent, Section 35.23, Tag\n[02YJ](https://stacks.math.columbia.edu/tag/02YJ); the scheme $Z_K$ is the\nbase change of [def-pc-base-change], and smoothness and properness are the\nnotions of [def-pc-morphism-conventions].",
+   "text": "Spec K to Spec k is surjective, flat and quasi-compact by existing Mathlib instances. Apply HasRingHomProperty.descendsAlong_flat to the ring codescent theorem for fixed n, then of_isPullback_of_descendsAlong to h.flip. Obtain SmoothOfRelativeDimension n z and hence Smooth z.",
    "uses": [
-    "def-pc-finite-locally-free",
     "def-pc-base-change",
-    "def-pc-morphism-conventions"
+    "lem-pd-relative-smooth-dimension-codescent"
    ],
    "elementary": false
   },
   {
-   "text": "*Being of finite type and smooth.* The morphism $Z_K\\to\\Spec(K)$ is\nlocally of finite presentation, and $Z_K\\to Z$ is surjective flat and of finite\npresentation, so $Z\\to\\Spec(k)$ is locally of finite presentation by Lemma\n35.14.3, Tag [02KL](https://stacks.math.columbia.edu/tag/02KL); since\n$Z_K$ is quasi-compact over $K$ and $Z_K\\to Z$ is surjective, $Z$ is\nquasi-compact, hence of finite type. Smoothness of $Z\\to\\Spec(k)$ then follows\nfrom smoothness of $Z_K\\to\\Spec(K)$ by Lemma 35.14.5, Tag\n[05B5](https://stacks.math.columbia.edu/tag/05B5), applied to the\nsurjective flat locally finitely presented morphism $Z_K\\to Z$; this is the\nsame lemma that Stacks Project, Lemma 39.9.4, Tag\n[0BFC](https://stacks.math.columbia.edu/tag/0BFC), invokes for abelian\nvarieties, there in the form Lemma 35.23.29, Tag\n[02VL](https://stacks.math.columbia.edu/tag/02VL).",
-   "uses": [],
-   "elementary": null
+   "text": "The supplied pullback square identifies the canonical base change with Z-prime up to an isomorphism. Transfer quasi-compactness and properness across this isomorphism. Descend quasi-compactness, and apply isProper_of_field_baseChange; its local-finite-type hypothesis follows from the smoothness just obtained.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "lem-pc-proper-descends-field",
+    "def-pc-base-change"
+   ],
+   "elementary": false
   },
   {
-   "text": "*Properness.* This is one of the properties of morphisms proved to be\nlocal in the fpqc topology on the target in Stacks Project, Descent, Section\n35.23, Tag [02YJ](https://stacks.math.columbia.edu/tag/02YJ):\nseparatedness and universal closedness are separated in the list of that\nsection, and properness is their conjunction together with being of finite\ntype, which was settled above.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "*Connectedness.* The morphism $Z_K\\to Z$ is the base change of the\nsurjective morphism $\\Spec(K)\\to\\Spec(k)$, hence surjective. The image of a\nconnected space under a continuous map is connected, so $Z$ is connected\nbecause $Z_K$ is.",
-   "uses": [],
-   "elementary": null
+   "text": "For any extension L of k, choose a common extension M of K and L. Base-change Z-prime to M; it is integral by geometric integrality. Paste its pullback square with h and use the universal property to get its projection to the arbitrary L-base change. Pullback pasting identifies this projection as the base change of Spec M to Spec L, hence it is flat and surjective. Reducedness descends because flat local stalk maps are faithfully flat and injective; irreducibility descends along the continuous surjection. Thus every L-base change is integral. Combine the three properties.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "def-pc-base-change",
+    "def-pc-morphism-conventions"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-finite-locally-free",
   "def-pc-base-change",
+  "lem-pd-relative-smooth-dimension-codescent",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "lem-pc-proper-descends-field",
+  "lem-weil-common-extension-fields",
   "def-pc-morphism-conventions"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/thm-pd-fpqc-local-properties.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/EffectiveDescent.lean",
+  "place": "G2 stage-3 reduction, compiled 2026-10-12; same unit route and unchanged Lean statements"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -128,22 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-77546",
-  "group": "T1",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T034515-L-1528473",
+  "landing": "20261012T044744-L-2035220",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered files against the packet, node, repository, and scratch compilation: clean compile, unchanged target and existing signatures, valid proof axioms, consistent imports/change record/report, and matching DAG proof metadata.",
-  "sorry_before": [
-   "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.isEffective_of_isFinite"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.isEffective_of_isFinite"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

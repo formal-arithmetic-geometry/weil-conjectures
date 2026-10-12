@@ -1,0 +1,129 @@
+{
+ "id": "lem-pd-invariant-affine-neighbourhoods",
+ "kind": "statement",
+ "title": "Finite locally free descent admits invariant affine neighbourhoods",
+ "statement": "Let $p:X\\to Y$ be finite, flat, locally of finite presentation and surjective [def-pc-finite-locally-free], and let $V\\to X$ have a transport descent datum $D$ [def-pd-descent-datum]. Suppose every finite subset of $V$ lies in an affine open. Every point $v$ lies in an affine open $U\\subseteq V$ contained in the inverse image of an affine open $B\\subseteq Y$, and $U$ is transport-invariant: for every $T$, $f_1,f_2:T\\to X$ with equal composites to $Y$, and $a:T\\to V$ over $f_1$, if the image of $a$ lies in $U$, then the image of its transport to $f_2$ lies in $U$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Groupoid Schemes, Tags 0H8K and 03JE; Algebra, Tag 00DS"
+ },
+ "stmt_deps": [
+  "def-pc-finite-locally-free",
+  "def-pd-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to an affine neighbourhood B of the image of v in Y. The descent datum gives a scheme groupoid on V with finite locally free source and target maps, by base change of p. The orbit of v is finite. Place it in an affine open using the finite-subset assumption and shrink by finite prime avoidance into the inverse image of B.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-pd-descent-datum",
+    "def-pc-base-change",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the norm construction of Tag 03JE on this restricted groupoid: remove the closed saturation of the complement, choose a function nonzero on the orbit and take the nonvanishing locus of its norm along the finite locally free source map. This gives an invariant affine open U containing v. Naturality identifies universal groupoid invariance with the displayed transport condition for arbitrary test schemes. No bound on the degree over all of Y is needed.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-pd-descent-datum",
+  "def-pc-base-change",
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Groupoid Schemes, Tags 0H8K and 03JE; Algebra, Tag 00DS; the proof is the indicated affine/transport specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite flat scheme groupoid invariant affine neighbourhood of a finite orbit",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict assigned.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite flat scheme groupoid invariant affine neighbourhood of a finite orbit",
+   "results": "Affine-cover and finite-morphism interfaces only; no invariant-neighbourhood theorem. Loogle DescentDatum.IsEffective was unavailable to the Mathlib-only index.",
+   "date": "2026-10-12",
+   "verdict": "No exact existing declaration; checked the reported signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*affine|affine.*invariant; groupoid and invariant neighbourhood searches in both roots",
+   "results": "Searched pinned Mathlib and both library roots. No theorem of the required statement. The relevant existing interfaces are recorded in the proof steps.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.EffectiveDescent",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pd-effective-descent",
+   "place": "stage-3 Lean proof reduction",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InvariantAffineNeighbourhoods",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantAffineNeighbourhoods.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.exists_invariant_affine_neighbourhood",
+  "statement": "theorem exists_invariant_affine_neighbourhood {X Y : Scheme.{u}} {p : X ⟶ Y} [IsFinite p] [Flat p] [LocallyOfFinitePresentation p] [Surjective p] {V : Over X} (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U) (D : Over.DescentDatum p V) (v : V.left) : ∃ U : V.left.Opens, v ∈ U ∧ IsAffineOpen U ∧ (∃ B : Y.Opens, IsAffineOpen B ∧ U ≤ (V.hom ≫ p) ⁻¹ᵁ B) ∧ ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V), Set.range a.left ⊆ U → Set.range (D.transport f₁ f₂ h a).left ⊆ U",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035220",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035220",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

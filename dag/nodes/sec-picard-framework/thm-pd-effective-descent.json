@@ -41,28 +41,28 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This is Stacks Project, Groupoid Schemes, Lemma 39.25.3, Tag\n[0CCJ](https://stacks.math.columbia.edu/tag/0CCJ). In the notation of\n[def-pd-descent-datum] and [def-pc-morphism-conventions] we recall\nwhy projectivity ([def-pc-projective-morphism]) is exactly the hypothesis\nthat makes the descent effective, since that is the point at which the\nprojectivity of $J_K$ of [cor-pd-finite-level] is used. In loc. cit. the effectiveness is deduced from Lemma 39.25.2, Tag\n[0CCI](https://stacks.math.columbia.edu/tag/0CCI), which states that a\ndescent datum on $V/X/Y$ is effective as soon as every finite set of points of\n$V$ lying over one point of $Y$ is contained in an affine open of $V$; that\ncriterion in turn is Lemma 39.25.1, Tag\n[0H8K](https://stacks.math.columbia.edu/tag/0H8K), proved by producing a\n$\\varphi$-invariant affine open neighbourhood of each point (Constructions,\nLemma 27.2.1, Tag [01LH](https://stacks.math.columbia.edu/tag/01LH), for\nthe reduction to $Y$ affine, and Lemma 39.24.1, Tag\n[03JE](https://stacks.math.columbia.edu/tag/03JE), for the invariant\nneighbourhood) and glueing along the resulting covering. A projective $V\\to X$ has an $X$-very ample invertible sheaf, and for an ample invertible sheaf\nfinitely many points lie in an affine open (Properties, Lemma 28.30.5, Tag\n[01ZY](https://stacks.math.columbia.edu/tag/01ZY)), which is the\ncondition of Lemma 39.25.2; this is the verification carried out in the proof\nof Stacks Project, Lemma 39.25.3, Tag\n[0CCJ](https://stacks.math.columbia.edu/tag/0CCJ), cases (1), (2) and\n(4). The hypothesis that $X\\to Y$ be\n[def-pc-finite-locally-free] is what makes the fibres of the two\nprojections finite and hence the orbits of Lemma 39.25.1 finite.",
+   "text": "For every v, apply exists_invariant_affine_neighbourhood to hV and D and unpack its affine, base-affine and transport-invariance witnesses.",
    "uses": [
-    "def-pd-descent-datum",
-    "def-pc-morphism-conventions",
-    "def-pc-projective-morphism",
-    "cor-pd-finite-level",
-    "def-pc-finite-locally-free"
+    "lem-pd-invariant-affine-neighbourhoods"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isEffective_of_invariant_affine_neighbourhoods to this cover. This is the affine-effectiveness and gluing step of the original Stacks route.",
+   "uses": [
+    "lem-pd-invariant-affine-descent-gluing"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pd-descent-datum",
-  "def-pc-morphism-conventions",
-  "def-pc-projective-morphism",
-  "cor-pd-finite-level",
-  "def-pc-finite-locally-free"
+  "lem-pd-invariant-affine-neighbourhoods",
+  "lem-pd-invariant-affine-descent-gluing"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/thm-pd-effective-descent.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/EffectiveDescent.lean",
+  "place": "G2 stage-3 reduction, compiled 2026-10-12; same unit route and unchanged Lean statements"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -123,22 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-77546",
-  "group": "T1",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T034515-L-1528473",
+  "landing": "20261012T044744-L-2035220",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered files against the packet, node, repository, and scratch compilation: clean compile, unchanged target and existing signatures, valid proof axioms, consistent imports/change record/report, and matching DAG proof metadata.",
-  "sorry_before": [
-   "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.isEffective_of_isFinite"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.isEffective_of_isFinite"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

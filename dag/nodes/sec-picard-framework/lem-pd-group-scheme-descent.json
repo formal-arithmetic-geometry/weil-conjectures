@@ -15,26 +15,42 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "A group scheme structure on $J_K$ over $K$ is a triple of morphisms\n$m_K:J_K\\times_KJ_K\\to J_K$, $e_K:\\Spec(K)\\to J_K$ and\n$i_K:J_K\\to J_K$ satisfying the group axioms, which are equalities between\nmorphisms built from $m_K,e_K,i_K$ by composition and projection; this is the\n$K$-group scheme structure of [def-sc-group-scheme], and all fibre\nproducts below are the base changes of [def-pc-base-change]. Base\nchange to $K$ commutes with fibre products, so\n$(J\\times_kJ)\\times_kK=J_K\\times_KJ_K$, and the\n[def-pd-descent-datum] on $J_K$ induces\none on $J_K\\times_KJ_K$; the morphism $m_K$ is compatible with these data\nbecause the descent datum was constructed from the functor\n$\\operatorname{Pic}^0_{C/k}$ and the group law on the functor is defined over\n$k$. Applying [lem-pd-morphisms-descend] to $m_K$, to $e_K$ and to\n$i_K$ produces morphisms $m,e,i$ over $k$; the group axioms for $m,e,i$\nfollow from those for $m_K,e_K,i_K$ because base change along the faithfully\nflat morphism $\\Spec(K)\\to\\Spec(k)$ is injective on morphisms, and the\nresulting structure is a $k$-group scheme structure in the sense of\n[def-sc-group-scheme]. Uniqueness follows from the same injectivity.",
+   "text": "Use exists_commMonObj_of_effective_projection to obtain a commutative monoid structure on V0 and its product/unit point identities.",
+   "uses": [
+    "lem-pd-comm-monoid-operations-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each pair of test-scheme base points, the transport is a monoid homomorphism by hμ and hη. MonoidHom.map_inv proves inverse compatibility. Apply the already proved existsUnique_hom_of_isPullback to the inverse morphism, obtaining i0 and its factorization equation.",
    "uses": [
     "def-sc-group-scheme",
-    "def-pc-base-change",
     "def-pd-descent-datum",
     "lem-pd-morphisms-descend"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the product/unit identities at the universal point a=id V, with one input a composed with the inverse. Together with the factorization equation, these give both inverse laws after precomposition with qV. Its flat, surjective, quasi-compact base-change properties make it an EffectiveEpi, so cancel qV. Construct GrpObj V0 extending the descended MonObj and use its commutativity to construct CommGrpObj V0. The requested product identity is the previously obtained point identity.",
+   "uses": [
+    "def-pc-base-change",
+    "def-sc-group-scheme",
+    "lem-pd-comm-monoid-operations-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pd-comm-monoid-operations-descent",
   "def-sc-group-scheme",
-  "def-pc-base-change",
   "def-pd-descent-datum",
-  "lem-pd-morphisms-descend"
+  "lem-pd-morphisms-descend",
+  "def-pc-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/lem-pd-group-scheme-descent.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/EffectiveDescent.lean",
+  "place": "G2 stage-3 reduction, compiled 2026-10-12; same unit route and unchanged Lean statements"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -92,22 +108,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-77546",
-  "group": "T1",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T034515-L-1528473",
+  "landing": "20261012T044744-L-2035220",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered files against the packet, node, repository, and scratch compilation: clean compile, unchanged target and existing signatures, valid proof axioms, consistent imports/change record/report, and matching DAG proof metadata.",
-  "sorry_before": [
-   "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.isEffective_of_isFinite"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback",
-   "CategoryTheory.Over.DescentDatum.isEffective_of_isFinite"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
