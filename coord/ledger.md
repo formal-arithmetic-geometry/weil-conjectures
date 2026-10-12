@@ -10134,3 +10134,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/H4/Sheaf.RingTheory.IsRegularOfDimensionDrop (stage 3; reviewer PASS; first push; landing 20261012T234219-L-2125163 (proof); batch 20261012T234214; modules 1; new nodes 0)
 - 23:42 L: merged deliver/J3/Sheaf.RingTheory.KoszulExtDualHomology (stage 3; reviewer PASS; first push; landing 20261012T234219-L-2125260 (interface); batch 20261012T234214; modules 3; new nodes 2)
 - 23:42 L: merged deliver/J4/Sheaf.RingTheory.ProjectiveResolutionExtDegree (stage 3; reviewer PASS; first push; landing 20261012T234220-L-2125360 (proof); batch 20261012T234214; modules 1; new nodes 0)
+- 23:42 L: merged deliver/K1/Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCore (stage 3; reviewer PASS; first push; landing 20261012T234220-L-2125469 (interface); batch 20261012T234214; modules 3; new nodes 2)

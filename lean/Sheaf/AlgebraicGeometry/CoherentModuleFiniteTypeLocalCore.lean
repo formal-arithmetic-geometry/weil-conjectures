@@ -4,6 +4,9 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Restrict
 
+import Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalRestrict
+import Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCover
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
@@ -35,5 +38,9 @@ theorem coherent_module_finite_type_local_core
         (Scheme.Modules.restrictFunctor W.ι).obj F |>.IsFiniteType) ∧
       ((∀ (i : I), RingedSpace.IsCoherent (U i).toScheme.toRingedSpace
           ((Scheme.Modules.restrictFunctor (U i).ι).obj F)) → F.IsFiniteType) := by
-  sorry
+  constructor
+  · intro hF W
+    exact coherent_module_finite_type_local_restrict X F hF W
+  · intro hF
+    exact coherent_module_finite_type_local_cover X F I U hU hF
 end AlgebraicGeometry
