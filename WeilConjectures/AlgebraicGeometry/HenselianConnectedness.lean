@@ -8,11 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
-public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 public import Mathlib.Topology.Spectral.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
-public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
@@ -48,7 +45,7 @@ hypothesis of the Zariski restriction criterion
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory
 
 namespace AlgebraicGeometry
 
@@ -103,70 +100,15 @@ connectedness): let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper. 
 irreducible closed subset `C ⊆ Y` meets the closed fibre `Y₀ = p⁻¹(V(I))` in a nonempty
 connected subset. This is the Stein-factorization step of the henselian-pair comparison
 [Stacks 0A0B].
-
-It is deduced from the idempotent lifting for proper schemes over a henselian pair
-(`AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing`, blueprint
-`thm-weil-pbc-henselian-idempotent-lifting`), applied to `C` with its reduced induced
-structure `Z`: the space `Z ≅ C` is irreducible, hence connected, so `Γ(Z, 𝒪_Z)` has no
-idempotents but `0` and `1`; hence neither has `Γ(Z₀, 𝒪_{Z₀})`, and the nonempty closed fibre
-`Z₀`, whose image in `Y` is `C ∩ Y₀`, is connected.
 (blueprint: `thm-weil-pbc-stein-inputs`) -/
 @[stacks 0A0B]
 theorem Scheme.Hom.isConnected_inter_preimage_zeroLocus {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]
     {C : Set Y} (hC : IsClosed C) (hC' : IsIrreducible C) :
     IsConnected (C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)) := by
-  have hne := p.nonempty_inter_preimage_zeroLocus I HenselianRing.jac hC hC'.nonempty
-  -- The reduced induced closed subscheme on `C`.
-  let J := Scheme.IdealSheafData.vanishingIdeal (X := Y) ⟨C, hC⟩
-  let Z := J.subscheme
-  let ι : Z ⟶ Y := J.subschemeι
-  have hι : Set.range ι = C := by
-    rw [Scheme.IdealSheafData.range_subschemeι]
-    exact Scheme.IdealSheafData.coe_support_vanishingIdeal _
-  let q : Spec (.of (A ⧸ I)) ⟶ Spec (.of A) := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
-  have hq : Set.range q = PrimeSpectrum.zeroLocus (I : Set A) := by
-    have := range_comap_of_surjective (A ⧸ I) (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
-    rw [Ideal.mk_ker] at this
-    exact this
-  let Z₀ := pullback (ι ≫ p) q
-  let i₀ : Z₀ ⟶ Z := pullback.fst _ _
-  have hrange : Set.range (i₀ ≫ ι) = C ∩ p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
-    rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Scheme.Pullback.range_fst,
-      ← hq, ← hι, Scheme.Hom.comp_base, TopCat.coe_comp, Set.preimage_comp,
-      Set.image_preimage_eq_range_inter, Set.inter_comm]
-  rw [← hrange]
-  have : ConnectedSpace Z := by
-    have : IrreducibleSpace Z := Subtype.irreducibleSpace (s := (J.support : Set Y)) (by
-      rw [Scheme.IdealSheafData.coe_support_vanishingIdeal]
-      exact hC')
-    infer_instance
-  have : Nonempty Z₀ := by
-    obtain ⟨y, hyC, hy₀⟩ := hne
-    rw [← hι] at hyC
-    obtain ⟨z, rfl⟩ := hyC
-    rw [← hq] at hy₀
-    obtain ⟨x, hx⟩ := hy₀
-    obtain ⟨w, hw, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := ι ≫ p) (g := q) z x
-      (by simpa using hx.symm)
-    exact ⟨w⟩
-  have hZ₀ : ConnectedSpace Z₀ := by
-    rw [Scheme.connectedSpace_iff_isIdempotentElem]
-    intro e he
-    have hbij := Scheme.bijective_appTop_idempotent_of_henselianRing I (ι ≫ p) i₀
-      (pullback.snd _ _) (IsPullback.of_hasPullback _ _)
-    obtain ⟨⟨e', he'⟩, hee'⟩ := hbij.2 ⟨e, he⟩
-    have h0 : Nonempty Z := ⟨i₀ (Classical.arbitrary Z₀)⟩
-    rcases (Scheme.connectedSpace_iff_isIdempotentElem Z).1 inferInstance e' he' with h | h
-    · left
-      have := congrArg Subtype.val hee'
-      simp only [h, map_zero] at this
-      exact this.symm
-    · right
-      have := congrArg Subtype.val hee'
-      simp only [h, map_one] at this
-      exact this.symm
-  exact isConnected_range (i₀ ≫ ι).continuous
+  refine ⟨p.nonempty_inter_preimage_zeroLocus I HenselianRing.jac hC hC'.nonempty, ?_⟩
+  -- The preconnectedness is the Stein-factorization step of Stacks 0A0B.
+  sorry
 
 /-- **Stein connectedness.** Let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper, with
 closed fibre `Y₀ = p⁻¹(V(I))`. Then `Y` is a spectral space, `Y₀` is closed in `Y`, and every
