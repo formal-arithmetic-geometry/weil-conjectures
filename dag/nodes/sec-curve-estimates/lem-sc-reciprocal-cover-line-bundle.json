@@ -15,35 +15,37 @@
  ],
  "proof": [
   {
-   "text": "On U intersect V, g is a unit with inverse f. Use g as the frame transition e_U = g e_V, inverse on the reversed overlap, and identity on the equal-index overlaps. The Cech identities follow by cancellation. Glue to an invertible module L and free frames e_U,e_V using the transition-cocycle theorem.",
+   "text": "Index the two opens by Bool. On U intersect V form the unit with value the restriction of g and inverse the restriction of f, using fg=1 and commutativity. Set the same-index transitions to 1 and the reversed transition to the transported inverse unit. Restriction functoriality checks both inverse identities and all eight triple-index cocycle identities. Apply the Cech transition theorem to obtain invertible L and free frames eU,eV with eU=g eV on the overlap.",
    "uses": [
-    "lem-sc-glue-component-transition-cocycle"
+    "lem-sc-glue-component-transition-cocycle",
+    "def-sc-local-free-generator"
    ],
    "elementary": false
   },
   {
-   "text": "The local pairs (e_U,g e_V) and (f e_U,e_V) agree on the overlap because e_U = g e_V and fg = 1. The sheaf axiom glues them to global s,t. Restriction to every open gives compatible sections s,t in L.sections.",
+   "text": "The pair (eU,g eV) agrees by the frame transition; the pair (f eU,eV) agrees by restriction compatibility with scalar multiplication and fg=1. Apply Mathlib TopCat.Sheaf.existsUnique_gluing' to each Bool-indexed family, checking reversed-overlap compatibility by restriction along the intersection commutativity isomorphism. Obtain global sections sigma,tau with the specified restrictions. Define their compatible sections by restriction from the top open to each open, proving naturality by presheaf functoriality; their top evaluations equal sigma,tau.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "A free local frame identifies the stalk with its local ring and the maximal-ideal multiple of the stalk with the maximal ideal. Therefore a section c e is nonvanishing at x precisely when the germ of c is a unit. On U, s=e_U is nonvanishing; on V, s=g e_V has locus D(g)=U intersect V. The cover yields X_s=U. On V, t=e_V is nonvanishing, so V is contained in X_t. Empty charts are harmless.",
+   "text": "Use the proved nonvanishing iff GeneratesAt criterion. Every point of U is a generation point for sigma because its U-restriction is the free frame eU. Conversely, if sigma generates at x, the cover puts x in U or V. In V the local coefficient criterion for g eV gives x in D(g)=U intersect V, hence x in U. This proves the exact set equality X_sigma=U. The V-restriction of tau is the free frame eV, so every point of V is a generation point and hence a nonvanishing point of tau. The argument never requires inhabited charts and includes the empty scheme.",
    "uses": [
-    "def-sc-invertible-module",
-    "def-weil-pbc-ample-invertible-module"
+    "lem-sc-nonvanishing-iff-generates-at",
+    "def-sc-section-generating-locus"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-glue-component-transition-cocycle",
-  "def-sc-invertible-module",
-  "def-weil-pbc-ample-invertible-module"
+  "def-sc-local-free-generator",
+  "lem-sc-nonvanishing-iff-generates-at",
+  "def-sc-section-generating-locus"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NB (varieties-lemma-find-globally-generated), proof, cocycle, two sections, and locus calculation"
+  "place": "Varieties Lemma 09NB (varieties-lemma-find-globally-generated), proof, cocycle, two sections, and locus calculation; Lean implementation by J2: Bool-indexed Cech gluing and Mathlib unique gluing; nonvanishing reduced to the existing local generation criterion"
  },
  "mathlib_searches": [
   {
@@ -116,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "X-af9e6",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T110320-L-622476",
+  "landing": "20261012T144121-L-2099318",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem with its node and the proof with its recorded dependencies; delivery and sole direct importer Sheaf.AlgebraicGeometry.FindGloballyGenerated compile cleanly; axiom checks confirm only standard axioms plus the reported upstream sorryAx dependency."
  }
 }
