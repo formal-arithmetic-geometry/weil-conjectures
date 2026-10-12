@@ -1,6 +1,6 @@
 # Work queue
 
-61 items; claim with `tools/claim.py next <group> [--stage N]`.
+59 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -22,7 +22,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (53)
+## Stage 3: modules to prove (51)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -48,7 +48,6 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
-| `Sheaf.Paper.InverseImageStalkGerm` | 4 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction` | 5 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleColimitCocone` | 5 | 1 | proof |
@@ -57,7 +56,6 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange` | 5 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleExactSegment` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk` | 5 | 1 | proof |
 | `Sheaf.RingTheory.StrictlyHenselianOfDimensionZero` | 5 | 1 | proof |
