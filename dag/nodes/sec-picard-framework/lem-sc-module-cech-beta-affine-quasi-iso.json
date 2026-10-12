@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-module-cech-beta-affine-quasi-iso",
+ "kind": "statement",
+ "title": "Affine intersection acyclicity makes the module Cech beta augmentation a quasi-isomorphism",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $I$ be an index set, and let $U_i$ be a family of opens such that every intersection $U_{i_0} \\cap \\cdots \\cap U_{i_n}$ is affine for $n\\geq 0$. No covering condition is assumed. Let $F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], and let $F\\to J^\\bullet$ be any injective resolution [def-sp-injective-resolutions]. Form the module-valued Cech complex and the double complex with resolution degree first as in [def-sc-module-cech-comparison]. Then the explicitly constructed augmentation $\\beta:C^\\bullet(U,F)\\to\\operatorname{Tot}(C^\\bullet(U,J^\\bullet))$ of that construction is a quasi-isomorphism: its homology map is an isomorphism in every nonnegative degree.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01XD",
+  "place": "Affine vanishing input to Tag 01ET; beta of Tag 01EQ, proof, with first-quadrant column filtration as in Homology Lemma 12.25.4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sp-injective-resolutions",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-ringed-space-restrict-injective-resolution], restrict the prescribed injective resolution to each finite intersection. Evaluation of this resolution computes the cohomology of F on that open. Its degree-zero augmentation identifies sections of F with the kernel of the first differential by left exactness; positive-degree cohomology vanishes by [pqf-lem-affine-vanishing]. Thus every augmented intersection-section complex is exact.",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed Cech degree n, take the product over all tuples Fin(n+1) to the cover index type. Products of exact complexes of modules are exact: kernels are coordinatewise, and a preimage under a product of surjections is obtained by choosing one preimage in each coordinate. Restriction of scalars along the global ring map changes no underlying exactness. Naturality of restriction makes these products the augmented resolution-direction columns of the double complex of [def-sc-module-cech-comparison].",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The cone of beta is the total complex of these augmented columns with the appropriate shift and signs. Its resolution degree is bounded below by -1 and its Cech degree by 0, so shifting resolution degree by one makes it first quadrant. Transpose the shifted augmented bicomplex, using the standard sign isomorphism of total complexes, so the resolution direction is the inner homology direction. Filter by Cech degree and use [thm-sp-double-complex-spectral-sequences]: the column cohomology is zero, hence all pages vanish, and the finite filtration on every total cohomology group has zero graded pieces. Induction along that finite filtration makes total cohomology zero. The cone is acyclic, so beta is a quasi-isomorphism. The map is precisely the defined moduleCechBeta since its degree-n component uses I.ι.f 0 on each n-tuple followed by the (0,n) total inclusion.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "pqf-lem-affine-vanishing",
+  "def-sc-module-cech-comparison",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ET",
+  "place": "Column-acyclicity argument underlying degeneration; applied to the concrete beta augmentation of 01EQ; source pages read by K2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*comparison|comparison.*cech|quasiIso.*total|total.*quasiIso",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmentation from Cech complex to total Cech complex of an injective resolution is a quasi-isomorphism if higher cohomology vanishes on finite intersections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instQuasiIsoInt\\u03b9'\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CochainComplex.cm5b\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.isKInjective_iff_of_iso\"]}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; only general quasi-isomorphism and injective-resolution lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmentation from the Cech complex into the total double complex of an injective resolution is a quasi-isomorphism when higher cohomology vanishes on all finite intersections",
+   "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": []}",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"QuasiIso\", \"HomotopyEquiv.quasiIso_hom\", \"HomotopyEquiv.quasiIso_inv\", \"QuasiIso.quasiIsoAt\", \"quasiIso_iff\", \"quasiIso_of_isIso\", \"QuasiIso.mk\", \"HomologicalComplex.mem_quasiIso_iff\"]}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; only general quasi-isomorphism and injective-resolution lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Proof Step 1: canonical affine-cover Cech identification, affine acyclicity of the beta augmentation",
+   "via": [
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-sc-cech-comparison-natural",
+    "lem-sc-p1-ext-locally-free-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechBetaAffineQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCechBeta_quasiIso_of_affine",
+  "statement": "theorem moduleCechBeta_quasiIso_of_affine {X : Scheme.{u}} {ι : Type u}\n    (U : ι → X.Opens)\n    (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]\n    (I : InjectiveResolution F) : QuasiIso (moduleCechBeta U I)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T095912-L-320200",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T095912-L-320200",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
