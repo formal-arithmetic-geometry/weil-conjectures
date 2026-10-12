@@ -43,16 +43,16 @@
    }
   },
   {
-   "text": "*(Kernels of small extensions.)* Let $\\varphi:B'\\to B$ be a small extension, $\\mathfrak m'$ the maximal ideal of $B'$ and $I=\\ker\\varphi$. Since $I$ has length $1$ it is a simple $B'$-module, so $I=B'x$ for any $x\\in I\\setminus0$ and $b\\mapsto bx$ induces $B'/\\operatorname{ann}(x)\\cong I$ with $\\operatorname{ann}(x)$ a maximal ideal, i.e. $\\operatorname{ann}(x)=\\mathfrak m'$; hence $\\mathfrak m'I=0$. As $B\\neq0$ (it is local), $I\\neq B'$, so $I\\subseteq\\mathfrak m'$ and $I^2\\subseteq\\mathfrak m'I=0$. Also $\\varphi^{-1}(\\mathfrak m_B)=\\mathfrak m'$ ($\\varphi^{-1}(\\mathfrak m_B)$ is a maximal ideal since $\\varphi$ is surjective), and $\\varphi$ induces an isomorphism $\\bar\\varphi:B'/I\\to B$.",
+   "text": "Let I be the kernel of the given surjection B' -> B. Since B is a nonzero local ring, I is proper (RingHom.ker_ne_top), hence I is contained in the unique maximal ideal (IsLocalRing.le_maximalIdeal). By IsArtinianRing.isNilpotent_jacobson_bot the Jacobson radical of B' is nilpotent; IsLocalRing.jacobson_eq_maximalIdeal identifies it with the maximal ideal. Monotonicity of ideal powers proves that I is nilpotent. This replaces the more specialized length-one square-zero argument; the length-one hypothesis is unnecessary for this implication.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, remark after Definition Tag 02HS (definition-small-extension, line 38937): 'Clearly this means that I^2 = 0 and that I = (x) for some x in B' such that m'x = 0'; Lemma Tag 00J3 (lemma-simple-pieces) (3)"
+    "place": "Algebra, Lemma 02HT, proof of (1) implies (2), using the nilpotent-kernel formal-smoothness formulation; Artinian radical nilpotence, Lemma 00J8"
    }
   },
   {
-   "text": "*((1) implies (2).)* Assume (1); by step 1 there is $g\\in A\\setminus\\mathfrak q$ with $R\\to A_g$ smooth [def-weil-pbc-smooth-ring-map]. Let $\\varphi:B'\\to B$, $\\rho$, $a$ be as in (2), $I=\\ker\\varphi$. Since $g\\notin\\mathfrak q=a^{-1}(\\mathfrak m_B)$, $a(g)\\notin\\mathfrak m_B$ is a unit of the local ring $B$, so by the universal property of localization $a=a_g\\circ\\ell$ for a unique ring map $a_g:A_g\\to B$, $\\ell:A\\to A_g$ the localization map. Regard $B'$ as an $R$-algebra via $\\rho$ and $B'/I$ via $R\\to B'\\to B'/I$; then $g_0=\\bar\\varphi^{-1}\\circ a_g:A_g\\to B'/I$ is a homomorphism of $R$-algebras, because $a_g\\circ\\ell\\circ\\varphi_0=a\\circ\\varphi_0=\\varphi\\circ\\rho$. By step 2, $I^2=0$, so [lem-weil-pbc-smooth-ring-map-square-zero-lifting] (with $A:=R$, $B:=A_g$, $D:=B'$, $N:=I$) gives a homomorphism of $R$-algebras $f:A_g\\to B'$ with $f\\bmod I=g_0$, i.e. $\\varphi\\circ f=a_g$ and $f\\circ\\ell\\circ\\varphi_0=\\rho$. Then $a'=f\\circ\\ell$ satisfies $\\varphi\\circ a'=a_g\\circ\\ell=a$ and $a'\\circ\\varphi_0=\\rho$.",
+   "text": "Use the smooth localization from step 1. Since g is not in q = a^{-1}(m_B), a(g) is a unit. IsLocalization.Away.lift factors a through A_g. Equip A_g, B', and B with the R-algebra structures induced by (A -> A_g) composed with phi_0, rho, and phi composed with rho, respectively. Compatibility of the diagram makes A_g -> B and phi into R-algebra maps. Smoothness implies formal smoothness [def-weil-pbc-smooth-ring-map]. Apply Algebra.FormallySmooth.liftOfSurjective to these maps and the nilpotence from step 2; this is the iterated nilpotent-kernel formulation of [lem-weil-pbc-smooth-ring-map-square-zero-lifting]. Compose the resulting R-algebra map with A -> A_g. Algebra.FormallySmooth.liftOfSurjective_apply gives phi composed with a' = a, and the algebra-homomorphism commutation law gives a' composed with phi_0 = rho.",
    "uses": [
     "def-weil-pbc-smooth-ring-map",
     "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
@@ -78,7 +78,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 02HT (lemma-smooth-test-artinian), (1) implies (3), via (2)"
+  "place": "Algebra, Lemma 02HT (lemma-smooth-test-artinian), (1) implies (3), via (2); step 2 shortened using Artinian radical nilpotence (Tag 00J8), and Mathlib nilpotent-kernel lifting"
  },
  "mathlib_searches": [
   {
@@ -148,10 +148,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T194058-L-451141",
-  "kind": "interface",
+  "landing": "20261012T213850-L-1208821",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
