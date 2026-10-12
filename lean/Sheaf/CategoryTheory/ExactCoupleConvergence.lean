@@ -8,6 +8,8 @@ module
 public import Sheaf.CategoryTheory.ExactCouple
 public import Sheaf.CategoryTheory.Filtration
 
+import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+
 /-!
 # Convergence of bigraded exact couples
 
@@ -130,7 +132,17 @@ earlier cycles. The universal properties of the union and intersection give the 
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
 theorem limitBoundary_le_cycle (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
     (p q : ℤ) : L.B p q ≤ L.Z p q := by
-  sorry
+  let T := X.cycleBoundaryTower
+  have hB : Monotone (fun r ↦ T.B r p q) :=
+    monotone_nat_of_le_succ (fun r ↦ T.B_increasing r p q)
+  have hZ : Antitone (fun r ↦ T.Z r p q) :=
+    antitone_nat_of_succ_le (fun r ↦ T.Z_decreasing r p q)
+  apply (L.Z_glb p q).2
+  rintro _ ⟨r, rfl⟩
+  apply (L.B_lub p q).2
+  rintro _ ⟨s, rfl⟩
+  exact (hB (Nat.le_max_left s r)).trans
+    ((T.B_le_Z (max s r) p q).trans (hZ (Nat.le_max_right s r)))
 
 /-- The infinite page is the quotient of limiting cycles by limiting boundaries.
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
@@ -155,7 +167,63 @@ Source: blueprint def-sp-convergence; Stacks Section 12.21
 (blueprint: def-sp-convergence). -/
 theorem g_factors_limitCycles (X : BigradedExactCouple C 0) (L : LimitSubobjects X)
     (p q : ℤ) : (L.Z p q).Factors (X.initialG p q) := by
-  sorry
+  let T := X.cycleBoundaryTower
+  have hfinite : ∀ r : ℕ, ∃ a : X.D p q ⟶ (T.Z r p q : C),
+      a ≫ (T.Z r p q).arrow = X.initialG p q ∧
+      a ≫ T.projection r p q ≫ (X.pageCouple r).f p q = 0 := by
+    intro r
+    induction r with
+    | zero =>
+      have hfac : (T.Z 0 p q).Factors (X.initialG p q) := by
+        rw [T.Z_zero]
+        exact Subobject.top_factors _
+      refine ⟨(T.Z 0 p q).factorThru _ hfac, by simp, ?_⟩
+      rw [T.projection_zero, ← Category.assoc, Subobject.factorThru_arrow]
+      change X.initialG p q ≫ X.f p q = 0
+      rw [initialG, Category.assoc,
+        ← eqToHom_naturality (fun pq : ℤ × ℤ ↦ X.f pq.1 pq.2)
+          (show (p + (0 : ℕ), q - (0 : ℕ)) = (p, q) by ext <;> simp),
+        ← Category.assoc, X.f_g_zero, zero_comp]
+    | succ r ih =>
+      obtain ⟨a, ha, hf⟩ := ih
+      let P := (Subobject.pullback (T.projection r p q)).obj
+        (kernelSubobject ((X.pageCouple r).d p q))
+      have hpa : P.Factors a := by
+        apply pullback_factors
+        apply kernelSubobject_factors
+        simpa only [d, Category.assoc, zero_comp] using
+          congrArg (fun z ↦ z ≫ (X.pageCouple r).g (p + 2) (q - 1)) hf
+      have hfac : (T.Z (r + 1) p q).Factors (X.initialG p q) := by
+        rw [T.Z_succ, Subobject.exists_obj_eq_imageSubobject]
+        rw [← ha, ← P.factorThru_arrow a hpa, Category.assoc]
+        exact imageSubobject_factors_comp_self _ _
+      let b := (T.Z (r + 1) p q).factorThru (X.initialG p q) hfac
+      have hb : b ≫ Subobject.ofLE _ _ (T.Z_decreasing r p q) = a := by
+        apply (cancel_mono (T.Z r p q).arrow).mp
+        simp [b, ha, Category.assoc]
+      refine ⟨b, by simp [b], ?_⟩
+      let Y := X.pageCouple r
+      let M := Classical.choice Y.derivedMaps_exists
+      have hmono : Mono (Y.derivedDInclusion (p + 2) (q - 1)) := by
+        dsimp [derivedDInclusion]
+        infer_instance
+      let := hmono
+      apply (cancel_mono (Y.derivedDInclusion (p + 2) (q - 1))).mp
+      change (b ≫ T.projection (r + 1) p q ≫ M.f p q) ≫
+        Y.derivedDInclusion (p + 2) (q - 1) = _
+      rw [Category.assoc]
+      rw [T.projection_succ, Category.assoc, Category.assoc, M.f_comm, zero_comp]
+      change b ≫ T.cycleLift r p q ≫
+        kernel.ι ((X.pageCouple r).d p q) ≫ (X.pageCouple r).f p q = _
+      rw [← Category.assoc (T.cycleLift r p q), T.cycleLift_comm]
+      simp only [← Category.assoc]
+      rw [hb]
+      simpa only [Category.assoc] using hf
+  apply (Subobject.imageSubobject_le_iff _ _).mp
+  apply (L.Z_glb p q).2
+  rintro _ ⟨r, rfl⟩
+  obtain ⟨a, ha, _⟩ := hfinite r
+  exact imageSubobject_le _ a ha
 
 /-- The canonical map from `D` to the infinite page, induced by `g`.
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
@@ -188,7 +256,10 @@ this inclusion a finite number of times proves antitonicity for arbitrary intege
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
 theorem imageFiltration_antitone (X : BigradedExactCouple C 0) (n : ℤ)
     (A : AlphaColimit X n) : Antitone (fun p ↦ imageSubobject (A.ι p)) := by
-  sorry
+  apply antitone_int_of_succ_le
+  intro p
+  rw [← A.comm p]
+  exact imageSubobject_comp_le _ _
 
 /-- The decreasing filtration on the alpha-colimit by images of its canonical maps.
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
@@ -223,7 +294,34 @@ theorem weakConvergence_comparison (X : BigradedExactCouple C 0) (L : LimitSubob
     ∃! e : X.pageInfinity L p q ≅
       (X.imageFiltration (p + q) (A (p + q))).gradedPiece p,
       X.toPageInfinity L p q ≫ e.hom = X.toGradedPiece A p q := by
-  sorry
+  let f := X.toPageInfinity L p q
+  let g := X.toGradedPiece A p q
+  obtain ⟨hf, hg, hk⟩ := h p q
+  let : Epi f := hf
+  let : Epi g := hg
+  have hfg : kernel.ι f ≫ g = 0 := by
+    apply (kernelSubobject_factors_iff g _).mp
+    rw [← hk]
+    exact kernelSubobject_factors f _ (kernel.condition f)
+  have hgf : kernel.ι g ≫ f = 0 := by
+    apply (kernelSubobject_factors_iff f _).mp
+    rw [hk]
+    exact kernelSubobject_factors g _ (kernel.condition g)
+  let e : X.pageInfinity L p q ≅
+      (X.imageFiltration (p + q) (A (p + q))).gradedPiece p :=
+    { hom := Abelian.epiDesc f g hfg
+      inv := Abelian.epiDesc g f hgf
+      hom_inv_id := by
+        apply (cancel_epi f).1
+        simp
+      inv_hom_id := by
+        apply (cancel_epi g).1
+        simp }
+  refine ⟨e, Abelian.comp_epiDesc f g hfg, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply (cancel_epi f).1
+  exact he'.trans (Abelian.comp_epiDesc f g hfg).symm
 
 /-- Abutting means weak convergence and separated, exhaustive image filtrations.
 Source: blueprint def-sp-convergence; Stacks Tag 012U (blueprint: def-sp-convergence). -/
@@ -237,7 +335,8 @@ through the earlier step, whose composite with its cokernel projection is zero.
 Source: blueprint def-sp-convergence, inverse-limit clause (blueprint: def-sp-convergence). -/
 theorem filtrationStep_comp_quotient_zero {T : C} (F : DecreasingFiltration T) (p : ℤ) :
     (F.step (p + 1)).arrow ≫ cokernel.π (F.step p).arrow = 0 := by
-  sorry
+  rw [← Subobject.ofLE_arrow (F.antitone_step (show p ≤ p + 1 by omega)), Category.assoc]
+  simp
 
 /-- The transition `A/F^{p+1} → A/F^p` of the inverse system of quotients.
 Source: blueprint def-sp-convergence; Stacks Tag 012U (blueprint: def-sp-convergence). -/
