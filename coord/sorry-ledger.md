@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **2656**, closure **1910**, holes in definitions **9**, definitions with undetermined data **10** (closure **8**).
+Holes now: library **2406**, closure **1616**, holes in definitions **9**, definitions with undetermined data **8** (closure **6**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -21,81 +21,99 @@ Definitions with holes (def/instance/structure field):
 Definitions with undetermined data (class-1 exceptions in `coord/hollow-definitions.md`):
 
 - `Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap::AlgebraicGeometry.affineDerivedExtensionAdjunction` (line 117), chosen from `AlgebraicGeometry.exists_affineDerivedExtension`
-- `Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap::AlgebraicGeometry.canonicalPullbackAdjunction` (line 127), chosen from `AlgebraicGeometry.exists_derivedPullbackComposition`, `AlgebraicGeometry.exists_schemeDerivedAdjunction`
-- `Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap::AlgebraicGeometry.dualityEquationBaseChangeMap` (line 49), chosen from `AlgebraicGeometry.exists_derivedPullbackComposition`, `AlgebraicGeometry.exists_schemeDerivedAdjunction`
-- `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso::AlgebraicGeometry.schemeHomPullbackAdjunction` (line 105), chosen from `AlgebraicGeometry.exists_derivedPullbackComposition`, `AlgebraicGeometry.exists_schemeDerivedAdjunction`
+- `Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap::AlgebraicGeometry.canonicalPullbackAdjunction` (line 127), chosen from `AlgebraicGeometry.exists_schemeDerivedAdjunction`
+- `Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap::AlgebraicGeometry.dualityEquationBaseChangeMap` (line 49), chosen from `AlgebraicGeometry.exists_schemeDerivedAdjunction`
+- `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso::AlgebraicGeometry.schemeHomPullbackAdjunction` (line 105), chosen from `AlgebraicGeometry.exists_schemeDerivedAdjunction`
 - `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso::AlgebraicGeometry.schemeHomTensorPullbackIso` (line 128), chosen from `AlgebraicGeometry.exists_schemeHomTensorPullbackIso`
-- `Sheaf.AlgebraicGeometry.PerfectDescendMorphisms::AlgebraicGeometry.perfectDescentComparison` (line 44), chosen from `AlgebraicGeometry.exists_derivedPullbackComposition`
-- `Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap::AlgebraicGeometry.schemeDerivedBaseChangeMap` (line 89), chosen from `AlgebraicGeometry.exists_derivedPullbackComposition`, `AlgebraicGeometry.exists_schemeDerivedAdjunction`
-- `Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition::AlgebraicGeometry.SingleComplexBaseChange.counit` (line 46), chosen from `AlgebraicGeometry.exists_derivedPullbackComposition`
+- `Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap::AlgebraicGeometry.schemeDerivedBaseChangeMap` (line 89), chosen from `AlgebraicGeometry.exists_schemeDerivedAdjunction`
 - `Sheaf.Paper.LisseAdicFiberFunctors::AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor` (line 144), chosen from `AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_exists`
 - `Sheaf.Paper.LisseAdicSheaves::AlgebraicGeometry.Scheme.lisseCoefficientDiagramData` (line 527), chosen from `AlgebraicGeometry.Scheme.lisseCoefficientDiagram_exists`
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 2392 | 1863 |
-| WeilConjectures | 264 | 47 |
+| Sheaf | 2146 | 1573 |
+| WeilConjectures | 260 | 43 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 617 | 344 | 273 | 0 | 1 |
-| 660345513 (Application of proof-dependency imports) | library | 541 | 324 | 217 | 0 | 1 |
-| 660345513 (Application of proof-dependency imports) | closure | 534 | 310 | 224 | 0 | 1 |
+| 889327369 (Queue at the start of stage 3) | library | 900 | 377 | 523 | 0 | 0 |
+| 660345513 (Application of proof-dependency imports) | library | 824 | 357 | 467 | 0 | 0 |
+| 660345513 (Application of proof-dependency imports) | closure | 813 | 338 | 475 | 0 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 383 |
-| decomposed | 4 |
-| moved | 396 |
-| pruned | 20 |
-| other | 3 |
+| proved | 637 |
+| decomposed | 6 |
+| moved | 554 |
+| pruned | 30 |
+| other | 4 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
-| A2 | 15 | 15 | 9 | 6 | 8/15 (53.3%) |
-| A3 | 14 | 17 | 17 | 0 | 9/14 (64.3%) |
-| B2 | 14 | 14 | 14 | 0 | 10/14 (71.4%) |
-| B3 | 24 | 26 | 16 | 10 | 10/24 (41.7%) |
-| C1 | 28 | 32 | 27 | 5 | 18/28 (64.3%) |
-| C2 | 13 | 13 | 11 | 2 | 7/13 (53.8%) |
-| D2 | 17 | 20 | 12 | 8 | 10/17 (58.8%) |
-| E1 | 31 | 39 | 19 | 20 | 14/31 (45.2%) |
-| E2 | 19 | 18 | 17 | 1 | 11/19 (57.9%) |
-| F1 | 25 | 28 | 21 | 7 | 12/25 (48.0%) |
-| F2 | 16 | 20 | 11 | 9 | 8/16 (50.0%) |
-| G1 | 22 | 25 | 19 | 6 | 11/22 (50.0%) |
-| G2 | 15 | 18 | 19 | -1 | 10/15 (66.7%) |
-| H1 | 20 | 21 | 12 | 9 | 8/20 (40.0%) |
-| H2 | 16 | 18 | 13 | 5 | 10/16 (62.5%) |
-| J1 | 26 | 33 | 16 | 17 | 12/26 (46.2%) |
-| J2 | 16 | 17 | 18 | -1 | 11/16 (68.8%) |
-| K1 | 24 | 28 | 23 | 5 | 14/24 (58.3%) |
-| K2 | 21 | 23 | 19 | 4 | 14/21 (66.7%) |
-| M1 | 23 | 28 | 15 | 13 | 9/23 (39.1%) |
-| M2 | 17 | 23 | 12 | 11 | 7/17 (41.2%) |
-| N1 | 23 | 24 | 20 | 4 | 13/23 (56.5%) |
-| N2 | 14 | 14 | 5 | 9 | 4/14 (28.6%) |
-| P1 | 27 | 44 | 23 | 21 | 15/27 (55.6%) |
-| P2 | 24 | 25 | 14 | 11 | 5/24 (20.8%) |
-| Q1 | 20 | 22 | 16 | 6 | 11/20 (55.0%) |
-| Q2 | 13 | 13 | 6 | 7 | 4/13 (30.8%) |
-| R1 | 25 | 35 | 18 | 17 | 11/25 (44.0%) |
-| R2 | 17 | 18 | 12 | 6 | 8/17 (47.1%) |
-| S1 | 21 | 25 | 21 | 4 | 12/21 (57.1%) |
-| S2 | 19 | 20 | 17 | 3 | 10/19 (52.6%) |
-| T1 | 24 | 25 | 20 | 5 | 11/24 (45.8%) |
-| T2 | 20 | 26 | 12 | 14 | 7/20 (35.0%) |
-| U1 | 26 | 32 | 23 | 9 | 15/26 (57.7%) |
-| U2 | 21 | 21 | 15 | 6 | 10/21 (47.6%) |
-| V1 | 24 | 23 | 12 | 11 | 9/24 (37.5%) |
-| V2 | 18 | 19 | 14 | 5 | 8/18 (44.4%) |
-| W2 | 18 | 20 | 8 | 12 | 6/18 (33.3%) |
-| X2 | 18 | 18 | 16 | 2 | 8/18 (44.4%) |
-| Y2 | 17 | 19 | 10 | 9 | 6/17 (35.3%) |
+| A2 | 25 | 25 | 16 | 9 | 14/25 (56.0%) |
+| A3 | 21 | 24 | 19 | 5 | 10/21 (47.6%) |
+| B2 | 21 | 22 | 15 | 7 | 11/21 (52.4%) |
+| B3 | 32 | 36 | 19 | 17 | 12/32 (37.5%) |
+| C1 | 35 | 39 | 29 | 10 | 20/35 (57.1%) |
+| C2 | 21 | 21 | 17 | 4 | 12/21 (57.1%) |
+| C3 | 7 | 7 | 5 | 2 | 4/7 (57.1%) |
+| D2 | 27 | 31 | 20 | 11 | 14/27 (51.9%) |
+| D3 | 7 | 7 | 1 | 6 | 1/7 (14.3%) |
+| E1 | 37 | 47 | 23 | 24 | 17/37 (45.9%) |
+| E2 | 29 | 28 | 26 | 2 | 17/29 (58.6%) |
+| E3 | 5 | 5 | 0 | 5 | 0/5 (0.0%) |
+| F1 | 33 | 37 | 25 | 12 | 14/33 (42.4%) |
+| F2 | 21 | 36 | 12 | 24 | 9/21 (42.9%) |
+| F3 | 6 | 10 | 2 | 8 | 1/6 (16.7%) |
+| G1 | 30 | 33 | 30 | 3 | 16/30 (53.3%) |
+| G2 | 22 | 25 | 23 | 2 | 12/22 (54.5%) |
+| G3 | 6 | 6 | 4 | 2 | 3/6 (50.0%) |
+| H1 | 25 | 26 | 17 | 9 | 12/25 (48.0%) |
+| H2 | 24 | 26 | 18 | 8 | 14/24 (58.3%) |
+| H3 | 9 | 17 | 3 | 14 | 2/9 (22.2%) |
+| J1 | 30 | 37 | 17 | 20 | 13/30 (43.3%) |
+| J2 | 23 | 24 | 22 | 2 | 14/23 (60.9%) |
+| J3 | 7 | 7 | 2 | 5 | 2/7 (28.6%) |
+| K1 | 32 | 36 | 27 | 9 | 17/32 (53.1%) |
+| K2 | 31 | 34 | 24 | 10 | 18/31 (58.1%) |
+| K3 | 7 | 7 | 0 | 7 | 0/7 (0.0%) |
+| M1 | 30 | 35 | 19 | 16 | 11/30 (36.7%) |
+| M2 | 23 | 30 | 15 | 15 | 8/23 (34.8%) |
+| M3 | 7 | 8 | 1 | 7 | 1/7 (14.3%) |
+| N1 | 32 | 33 | 24 | 9 | 17/32 (53.1%) |
+| N2 | 21 | 27 | 9 | 18 | 8/21 (38.1%) |
+| N3 | 8 | 8 | 5 | 3 | 3/8 (37.5%) |
+| P1 | 32 | 49 | 24 | 25 | 16/32 (50.0%) |
+| P2 | 29 | 30 | 17 | 13 | 8/29 (27.6%) |
+| P3 | 8 | 8 | 11 | -3 | 5/8 (62.5%) |
+| Q1 | 24 | 26 | 16 | 10 | 11/24 (45.8%) |
+| Q2 | 22 | 22 | 15 | 7 | 10/22 (45.5%) |
+| Q3 | 8 | 8 | 6 | 2 | 4/8 (50.0%) |
+| R1 | 31 | 41 | 21 | 20 | 13/31 (41.9%) |
+| R2 | 26 | 29 | 19 | 10 | 13/26 (50.0%) |
+| R3 | 8 | 11 | 0 | 11 | 0/8 (0.0%) |
+| S1 | 29 | 32 | 27 | 5 | 16/29 (55.2%) |
+| S2 | 26 | 27 | 20 | 7 | 13/26 (50.0%) |
+| S3 | 8 | 10 | 2 | 8 | 2/8 (25.0%) |
+| T1 | 34 | 35 | 27 | 8 | 16/34 (47.1%) |
+| T2 | 24 | 34 | 14 | 20 | 9/24 (37.5%) |
+| T3 | 6 | 6 | 4 | 2 | 2/6 (33.3%) |
+| U1 | 34 | 40 | 31 | 9 | 20/34 (58.8%) |
+| U2 | 30 | 30 | 16 | 14 | 11/30 (36.7%) |
+| U3 | 6 | 6 | 3 | 3 | 2/6 (33.3%) |
+| V1 | 32 | 31 | 13 | 18 | 10/32 (31.2%) |
+| V2 | 23 | 24 | 18 | 6 | 11/23 (47.8%) |
+| V3 | 8 | 9 | 5 | 4 | 3/8 (37.5%) |
+| W2 | 25 | 27 | 10 | 17 | 8/25 (32.0%) |
+| W3 | 7 | 7 | 1 | 6 | 1/7 (14.3%) |
+| X2 | 26 | 26 | 24 | 2 | 13/26 (50.0%) |
+| X3 | 4 | 5 | 3 | 2 | 1/4 (25.0%) |
+| Y2 | 23 | 25 | 12 | 13 | 8/23 (34.8%) |
+| Y3 | 3 | 4 | 1 | 3 | 1/3 (33.3%) |
 | Z2 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
@@ -105,23 +123,23 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty | 0 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine | 0 | 1 | ORCHESTRA |
 | WeilConjectures.AlgebraicGeometry.Curve.Reductions | 1 | 1 | A2 |
-| Sheaf.AlgebraicGeometry.Curve.NormalizationMonoProperties | 2 | 1 | D2 |
 | Sheaf.AlgebraicGeometry.ProperGeometricPointExchange | 2 | 1 | ORCHESTRA |
 | WeilConjectures.SixFunctors.Etale.Gabber | 2 | 2 | S2 |
-| Sheaf.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit | 3 | 1 | D2 |
+| Sheaf.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant | 3 | 1 | T2 |
+| Sheaf.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus | 3 | 1 | — |
 | Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion | 3 | 1 | ORCHESTRA |
 | Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension | 3 | 1 | ORCHESTRA |
 | WeilConjectures.AlgebraicGeometry.HenselianConnectedness | 3 | 1 | ORCHESTRA |
 | WeilConjectures.ConstructibleSheaf.FinitePushforward | 3 | 4 | — |
-| Sheaf.AlgebraicGeometry.CofilteredFixedBaseCohomologyContinuity | 4 | 1 | H1 |
-| Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechNaturality | 4 | 1 | D2 |
-| Sheaf.AlgebraicGeometry.Curve.DenseOpenBaseChangeComparison | 4 | 1 | G2 |
-| Sheaf.AlgebraicGeometry.Curve.DenseOpenRestrictionComparison | 4 | 1 | N2 |
 | Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore | 4 | 1 | V1 |
-| Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientConstructibilityTransfer | 4 | 1 | U2 |
-| Sheaf.AlgebraicGeometry.DerivedExchangeBoundedComparison | 4 | 1 | P1 |
-| Sheaf.AlgebraicGeometry.EtaleConstantRingInverseImageComparison | 4 | 1 | F1 |
-| Sheaf.AlgebraicGeometry.EtaleModuleInverseImageTransport | 4 | 1 | F1 |
+| Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres | 4 | 1 | ORCHESTRA |
+| Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore | 4 | 2 | R2 |
+| Sheaf.AlgebraicGeometry.StrictHenselization | 4 | 2 | H2 |
+| Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime | 4 | 1 | ORCHESTRA |
+| Sheaf.Paper.StrictHenselizationPointedMap | 4 | 2 | U2 |
+| Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles | 5 | 1 | T2 |
+| Sheaf.AlgebraicGeometry.ConstantExtensionCokernelAux | 5 | 2 | W2 |
+| Sheaf.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit | 5 | 1 | U2 |
 
 Modules pruned since the imports baseline:
 
@@ -137,10 +155,10 @@ Modules pruned since the imports baseline:
 - `Sheaf.Algebra.Module.ProjDegreeZeroLocalizationExact`
 - `Sheaf.AlgebraicGeometry.AffineFibreProductTransition`
 - `Sheaf.AlgebraicGeometry.AssociatedSectionsLocalize`
+- `Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints`
 - `Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial`
 - `Sheaf.AlgebraicGeometry.ConstantSubsheafGeneric`
-- `Sheaf.AlgebraicGeometry.Curve.ProperProjective`
 - `Sheaf.AlgebraicGeometry.DescendQCOpenFGSubalgebra`
 - `Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity`
 - `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear`
@@ -151,6 +169,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FieldDiscreteModules`
 - `Sheaf.AlgebraicGeometry.FiniteAffineFibreSections`
 - `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen`
+- `Sheaf.AlgebraicGeometry.FiniteDiscreteSeparatedAffine`
 - `Sheaf.AlgebraicGeometry.FiniteLocallyFreeStructureSheaf`
 - `Sheaf.AlgebraicGeometry.FiniteSeparableMultiplicationEtale`
 - `Sheaf.AlgebraicGeometry.FirstOrderThickeningBaseChange`
@@ -164,6 +183,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement`
 - `Sheaf.AlgebraicGeometry.FpqcFinerThanEtale`
 - `Sheaf.AlgebraicGeometry.FpqcTensorSections`
+- `Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence`
+- `Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer`
 - `Sheaf.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends`
 - `Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends`
 - `Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection`
@@ -172,6 +193,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTest`
 - `Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting`
 - `Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex`
+- `Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite`
 - `Sheaf.AlgebraicGeometry.LimitFibreProducts`
 - `Sheaf.AlgebraicGeometry.LimitResidueField`
 - `Sheaf.AlgebraicGeometry.MLSetsTowerLimitNonempty`
@@ -179,12 +201,15 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.Morphisms.FpqcIntegralDescent`
 - `Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover`
 - `Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent`
+- `Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope`
+- `Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage`
 - `Sheaf.AlgebraicGeometry.NilpotentBaseChangeIdempotents`
 - `Sheaf.AlgebraicGeometry.NormalizationProperties`
 - `Sheaf.AlgebraicGeometry.ProperFibreIdempotentImage`
 - `Sheaf.AlgebraicGeometry.ProperGlobalSectionsFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.ProperNormalizedFibres`
 - `Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember`
+- `Sheaf.AlgebraicGeometry.SchemeTheoreticUnion`
 - `Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing`
 - `Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence`
 - `Sheaf.AlgebraicGeometry.SemiRepresentableObject`
@@ -213,19 +238,27 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicTopology.GlueSimplex`
 - `Sheaf.AlgebraicTopology.SetCechNerveFreeResolution`
 - `Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial`
+- `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
 - `Sheaf.CategoryTheory.BoundedSubobjectSize`
 - `Sheaf.CategoryTheory.BoundedSubobjectSurjection`
 - `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
+- `Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification`
+- `Sheaf.CategoryTheory.DiscreteModulesAbelian`
 - `Sheaf.CategoryTheory.EdgeCollapse`
 - `Sheaf.CategoryTheory.EssentiallyConstantSplitting`
 - `Sheaf.CategoryTheory.EssentiallyConstantSystem`
+- `Sheaf.CategoryTheory.Galois.AbstractEquivalence`
+- `Sheaf.CategoryTheory.Galois.CoproductMorphismComponents`
 - `Sheaf.CategoryTheory.Galois.GaloisTransitive`
+- `Sheaf.CategoryTheory.Galois.StacksGaloisAxioms`
+- `Sheaf.CategoryTheory.Galois.StacksGaloisCategory`
 - `Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.AcyclicQuotientComplexesBoundedSize`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.FunctorialInjectiveComplexEmbedding`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveCriterion`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.ObjectsSmall`
+- `Sheaf.CategoryTheory.HalfPlaneGradedCanonical`
 - `Sheaf.CategoryTheory.HomotopyHomExactOfInjective`
 - `Sheaf.CategoryTheory.HomotopyLimitVanishing`
 - `Sheaf.CategoryTheory.InjectiveIffExtendsSubobjectGenerator`
@@ -235,13 +268,20 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.ProperFaceMatchingObject`
 - `Sheaf.CategoryTheory.SimplicialMatchingObject`
 - `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement`
+- `Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension`
+- `Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension`
 - `Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem`
 - `Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf`
+- `Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation`
+- `Sheaf.CategoryTheory.SpectralSequenceComparison`
+- `Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension`
 - `Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits`
 - `Sheaf.CategoryTheory.TruncationCoupleExact`
 - `Sheaf.CategoryTheory.TruncationDescends`
 - `Sheaf.CategoryTheory.TruncationTriangle`
 - `Sheaf.FieldTheory.TensorFieldExtensionGaloisInvariants`
+- `Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings`
+- `Sheaf.LinearAlgebra.IdempotentEndomorphismCharpolyField`
 - `Sheaf.NumberTheory.Padics.AdicLimitFiniteModules`
 - `Sheaf.NumberTheory.Padics.CoefficientExtension`
 - `Sheaf.NumberTheory.Padics.ExtensionIntegersDvr`
@@ -266,7 +306,9 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.LisseAdicFiberFunctors`
 - `Sheaf.Paper.LisseAdicSheaves`
 - `Sheaf.Paper.LisseTensorScalarExtension`
+- `Sheaf.Paper.NormalLocusOpen`
 - `Sheaf.Paper.PlusConstructionFunctorial`
+- `Sheaf.Paper.SheavesKilledByNZmodModules`
 - `Sheaf.Paper.SimplicialSetAddSimplices`
 - `Sheaf.Paper.SiteCoveringMorphismsSameH0Map`
 - `Sheaf.Paper.SitePlusInjectiveSeparated`
@@ -275,16 +317,56 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.SitePlusSeparated`
 - `Sheaf.Paper.TrivialKanHomotopyEquivalence`
 - `Sheaf.Paper.ZariskiH0ProperHenselianPair`
+- `Sheaf.RepresentationTheory.CoinducedContinuousAcyclic`
+- `Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding`
+- `Sheaf.RepresentationTheory.CoinducedHomotopyContinuous`
+- `Sheaf.RepresentationTheory.CoinducedHomotopyIdentity`
+- `Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants`
+- `Sheaf.RepresentationTheory.ContinuousCochainsShortExact`
+- `Sheaf.RepresentationTheory.DiscreteContinuousCohomology`
+- `Sheaf.RepresentationTheory.DiscreteContinuousFunctorialInjectives`
+- `Sheaf.RepresentationTheory.DiscreteContinuousInjectives`
+- `Sheaf.RepresentationTheory.DiscreteRep`
 - `Sheaf.RepresentationTheory.LAdic`
+- `Sheaf.RepresentationTheory.OpenStabilizerAdjunction`
 - `Sheaf.RepresentationTheory.ProfiniteStableLattice`
+- `Sheaf.RingTheory.AnalyticallyUnramified`
+- `Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion`
+- `Sheaf.RingTheory.AnnihilatorAssociatedPrimes`
+- `Sheaf.RingTheory.AnnihilatorAssociatedPrimesExactSequence`
+- `Sheaf.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange`
+- `Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime`
+- `Sheaf.RingTheory.CodimensionOneAnalyticallyUnramified`
 - `Sheaf.RingTheory.FlatModuleCompletion`
+- `Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes`
+- `Sheaf.RingTheory.GradedAlgebra.ShortExactGradedComponent`
 - `Sheaf.RingTheory.HenselianPairPrimeConnected`
+- `Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes`
+- `Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing`
+- `Sheaf.RingTheory.IsN1AdjoinSingleton`
+- `Sheaf.RingTheory.IsN1OfFiniteDomainExtension`
+- `Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified`
+- `Sheaf.RingTheory.IsN1OfLocalCharacterization`
+- `Sheaf.RingTheory.IsN2OfFiniteExtension`
 - `Sheaf.RingTheory.LimitFlatModules`
+- `Sheaf.RingTheory.LocalizationJapaneseDomain`
 - `Sheaf.RingTheory.MapIntoHenselianColimit`
+- `Sheaf.RingTheory.NagataLocalization`
+- `Sheaf.RingTheory.NagataOfCompleteLocal`
+- `Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight`
+- `Sheaf.RingTheory.PowerSeriesN2`
+- `Sheaf.RingTheory.PowerSeriesNormalDomain`
+- `Sheaf.RingTheory.PrincipalMaximalDimOneRegular`
+- `Sheaf.RingTheory.QuasiFiniteIntegralClosureOpen`
+- `Sheaf.RingTheory.RegularLocalDimOneIffNormal`
+- `Sheaf.RingTheory.TateN2CompletePrincipal`
 - `Sheaf.RingTheory.TorStrictlyProZero`
 - `Sheaf.RingTheory.UniversalFirstOrderThickening`
+- `Sheaf.RingTheory.ValuationRingNormal`
 - `Sheaf.Topology.ClosedPushforwardConstantRestriction`
+- `Sheaf.Topology.ContinuousOpenNormalStabilizer`
 - `Sheaf.Topology.ExistsUniqueIsGenericPointOfFinite`
+- `Sheaf.Topology.FilteredInjectiveCechAcyclic`
 - `Sheaf.Topology.InverseImageClosedPushforwardConstant`
 - `Sheaf.Topology.SetsExtensionByEmpty`
 - `Sheaf.Topology.SetsExtensionByEmptyAdjunction`
