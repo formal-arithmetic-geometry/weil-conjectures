@@ -626,6 +626,7 @@ public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
 public import WeilConjectures.CategoryTheory.Sites.ConstantForget
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
+public import WeilConjectures.CategoryTheory.Sites.FlatExtendScalars
 public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
 public import WeilConjectures.CategoryTheory.Sites.MonObj
@@ -642,6 +643,7 @@ public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
+public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
 public import WeilConjectures.CategoryTheory.Sites.SigmaPresheaf
 public import WeilConjectures.CategoryTheory.Sites.Torsor
@@ -1454,6 +1456,7 @@ public import WeilConjectures.Mathlib.Topology.Spectral.Basic
 public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import WeilConjectures.NumberTheory.Padics.Logarithm
 public import WeilConjectures.NumberTheory.TateModule
@@ -1832,6 +1835,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShr
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Perfect
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormulaExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Shift
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
@@ -1860,6 +1865,8 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mon
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
