@@ -29,152 +29,28 @@
  ],
  "proof": [
   {
-   "text": "*A proper finitely presented envelope.* Since $f$ is proper and $S$ is quasi-compact and quasi-separated, by [lem-weil-pbc-proper-closed-in-proper-fp] $X=\\varprojlim_{k\\in K}X_k$ with every $X_k\\to S$ proper and of finite presentation and every $X\\to X_k$ a closed immersion. Fix one $k_0\\in K$ ($K$ is nonempty) and put $Y=X_{k_0}$, $g:Y\\to S$ its structure morphism and $\\iota:X\\to Y$ the closed immersion; thus $g\\circ\\iota=f$, $g$ is proper and of finite presentation. (Stacks uses the whole system $(X_k)_k$; the construction below needs only this one envelope, see step 5.)",
+   "text": "Apply the core inverse-system construction theorem to obtain the index, systems, limits, transition properties, proper stage maps, finite-type base maps, and commuting equations.",
    "uses": [
-    "lem-weil-pbc-proper-closed-in-proper-fp"
+    "lem-weil-pbc-proper-limit-noetherian-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof, first sentence (Lemma 09ZR)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Absolute Noetherian approximation of $S$.* By [prop-nagata-noetherian-inverse-system] (Stacks Proposition 01ZA; Lean closed) $S$ admits a Noetherian approximation [def-nagata-noetherian-inverse-system]: a small cofiltered category, a diagram of schemes of finite type over $\\operatorname{Spec}\\mathbf Z$ with affine transition morphisms, and a limit cone with vertex $S$. By [lem-weil-pbc-cofiltered-limit-directed-reindex] it is re-indexed by a nonempty directed set $J$: an inverse system $(S_j,s_{jj'})_{j\\in J}$ of schemes of finite type over $\\mathbf Z$ [def-weil-finite-type-morphism] with affine transition morphisms $s_{j'j}:S_{j'}\\to S_j$ ($j'\\ge j$) [pqf-def-affine-morphism] and projections $q_j:S\\to S_j$ exhibiting $S=\\varprojlim_jS_j$. Each $S_j$ is quasi-compact (finite type) and Noetherian (finite type over the Noetherian ring $\\mathbf Z$), hence quasi-separated; each $q_j$ and each $s_{j'j}$ is affine [lem-weil-pbc-limit-affine-transition]. If $S=\\operatorname{Spec}A$ is affine, use instead [lemma-nagata-noetherian-inverse-system-affine] (Lean closed): $J$ is the set of finitely generated subrings $A_j\\subseteq A$ ordered by inclusion (a directed set: $A_j,A_{j'}\\subseteq A_j[A_{j'}]$), $S_j=\\operatorname{Spec}A_j$, transitions induced by the inclusions, and $\\operatorname{Spec}A=\\varprojlim_j\\operatorname{Spec}A_j$.",
+   "text": "For an affine base, apply the affine refinement theorem to the systems and their two limit cones, obtaining affine finite-type base stages and the global-sections colimit.",
    "uses": [
-    "prop-nagata-noetherian-inverse-system",
-    "def-nagata-noetherian-inverse-system",
-    "lem-weil-pbc-cofiltered-limit-directed-reindex",
-    "def-weil-finite-type-morphism",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-limit-affine-transition",
-    "lemma-nagata-noetherian-inverse-system-affine"
+    "lem-weil-pbc-proper-limit-noetherian-affine-clause"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof, second sentence (Proposition 01ZA, proof of 01ZA for the affine case)"
-   }
-  },
-  {
-   "text": "*Descending the envelope.* $g:Y\\to S$ is of finite presentation and the $S_j$ are quasi-compact and quasi-separated with affine transitions, so by [thm-pd-spreading-out] (1) (Stacks Lemma 01ZM; the source repository's sorry-free AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation) there are $j_0\\in J$, a morphism of finite presentation $g_{j_0}:Y_{j_0}\\to S_{j_0}$ and an isomorphism $Y\\cong Y_{j_0}\\times_{S_{j_0}}S$ over $S$ [def-pc-fibre-product]; transport $\\iota$ along it. For $j\\ge j_0$ put $Y_j=Y_{j_0}\\times_{S_{j_0}}S_j$ with $g_j:Y_j\\to S_j$ the projection; then $Y=Y_j\\times_{S_j}S$ (transitivity of fibre products), with projection $t_j:Y\\to Y_j$, and for $j'\\ge j\\ge j_0$ the transition $y_{j'j}:Y_{j'}=Y_j\\times_{S_j}S_{j'}\\to Y_j$ is the base change of $s_{j'j}$, hence affine; likewise $t_j$ is the base change of the affine $q_j$, hence affine [pqf-def-affine-morphism]. $Y_{j_0}$ is quasi-compact and quasi-separated: $g_{j_0}$ is quasi-compact and quasi-separated (finite presentation) and $S_{j_0}$ is.",
-   "uses": [
-    "thm-pd-spreading-out",
-    "def-pc-fibre-product",
-    "pqf-def-affine-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof, third sentence (Lemma 01ZM)"
-   }
-  },
-  {
-   "text": "*Making the model proper.* Apply [lem-weil-pbc-eventually-proper] (Stacks Lemma 081F) to the system $(S_j)_{j\\ge j_0}$ (directed, affine transitions, limit $S$ by [lem-weil-pbc-colimit-initial-full-subcategory], the subset $\\{j\\ge j_0\\}$ being cofinal), with $0=j_0$, $X_0=Y_{j_0}$, $Y_0=S_{j_0}$ and $f_0=g_{j_0}$: $S_{j_0}$, $Y_{j_0}$ are quasi-compact and quasi-separated (steps 2, 3), $g_{j_0}$ is locally of finite type (it is of finite presentation), and its base change to $S$ is $g$, which is proper. So $g_{j_1}$ is proper for some $j_1\\ge j_0$; replace $j_0$ by $j_1$. Then for every $j\\ge j_0$ the morphism $g_j$, a base change of $g_{j_0}$, is proper [lem-weil-pbc-proper-base-change].",
-   "uses": [
-    "lem-weil-pbc-eventually-proper",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-proper-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof, fourth sentence (Lemma 081F)"
-   }
-  },
-  {
-   "text": "*The stages: scheme-theoretic images of $X$.* (This step and the next two fill in the construction of the system that Stacks leaves out ('Some details omitted'); Stacks indexes the system by pairs $(k,j)$ with $X_{k,j}$ a descended model of $X_k$; here, written by the agent, the stages are the scheme-theoretic images of $X$ in the proper models $Y_j$ of the single envelope $Y$, which needs no choices of compatible descents.) Let $\\Lambda=\\{j\\in J: j\\ge j_0\\}$, a directed set, cofinal in $J$. For $j\\in\\Lambda$ let $h_j=t_j\\circ\\iota:X\\to Y_j$; it is affine (a closed immersion followed by the affine $t_j$), hence quasi-compact. Let $Z_j\\subseteq Y_j$ be its scheme-theoretic image [lem-weil-pbc-scheme-image-qc-kernel], with closed immersion $\\iota_j:Z_j\\to Y_j$ and $p_j:X\\to Z_j$, $\\iota_j\\circ p_j=h_j$; for every affine open $U\\subseteq Y_j$ the ideal of $Z_j$ on $U$ is $K_j(U)=\\ker(\\mathcal O(U)\\to\\mathcal O(h_j^{-1}U))$. Put $f_j=g_j\\circ\\iota_j:Z_j\\to S_j$: a closed immersion followed by the proper $g_j$ (step 4), hence proper [lem-weil-pbc-closed-immersion-proper].",
-   "uses": [
-    "lem-weil-pbc-scheme-image-qc-kernel",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-closed-immersion-proper"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof, 'The set I will consist of these pairs (k,j) ... Some details omitted' (construction replaced, written by the agent)"
-   }
-  },
-  {
-   "text": "*Transition morphisms.* Let $j'\\ge j$ in $\\Lambda$ and $c=y_{j'j}\\circ\\iota_{j'}:Z_{j'}\\to Y_j$ (affine: a closed immersion followed by an affine morphism, so quasi-compact). For an affine open $U\\subseteq Y_j$, $V=y_{j'j}^{-1}U$ is affine, $h_{j'}^{-1}V=h_j^{-1}U$ (since $y_{j'j}\\circ h_{j'}=h_j$), and $\\mathcal O(U)\\to\\mathcal O(h_j^{-1}U)$ factors as $\\mathcal O(U)\\to\\mathcal O(V)\\to\\mathcal O(V)/K_{j'}(V)=\\mathcal O(Z_{j'}\\cap V)\\to\\mathcal O(h_{j'}^{-1}V)$, the last map injective by the description of $K_{j'}(V)$ as a kernel; so $\\ker(\\mathcal O(U)\\to\\mathcal O(c^{-1}U))=K_j(U)$. By the universal property of [lem-weil-pbc-scheme-image-qc-kernel] (2) applied to the quasi-compact morphism $c$ (whose image ideal is $K_j$, not smaller) and the closed immersion $\\iota_j$, there is a unique $u_{j'j}:Z_{j'}\\to Z_j$ with $\\iota_j\\circ u_{j'j}=y_{j'j}\\circ\\iota_{j'}$. Since $\\iota_j$ is a monomorphism, $u_{jj}=\\mathrm{id}$, $u_{j'j}\\circ u_{j''j'}=u_{j''j}$, $u_{j'j}\\circ p_{j'}=p_j$ (both composed with $\\iota_j$ give $h_j$), and $f_j\\circ u_{j'j}=g_j\\circ y_{j'j}\\circ\\iota_{j'}=s_{j'j}\\circ f_{j'}$. So $(f_j:Z_j\\to S_j)_{j\\in\\Lambda}$ is an inverse system of morphisms and $(p_j)$, $(q_j)$ are compatible cones with $f_j\\circ p_j=g_j\\circ t_j\\circ\\iota=q_j\\circ g\\circ\\iota=q_j\\circ f$. The transition $u_{j'j}$ is affine: it factors as $Z_{j'}\\to Z_j\\times_{S_j}S_{j'}\\to Z_j$, where the first map $r=(u_{j'j},f_{j'})$ composed with the closed immersion $e=\\iota_j\\times_{S_j}S_{j'}:Z_j\\times_{S_j}S_{j'}\\to Y_j\\times_{S_j}S_{j'}=Y_{j'}$ is $\\iota_{j'}$, a closed immersion, and $e$ is separated (a closed immersion), so $r$ is a closed immersion [lem-weil-pbc-closed-immersion-from-composite], and the second is the base change of the affine $s_{j'j}$; closed immersions are affine and composites of affine morphisms are affine [pqf-def-affine-morphism]. The transitions $s_{j'j}$ of $(S_j)_{j\\in\\Lambda}$ are affine by step 2.",
-   "uses": [
-    "lem-weil-pbc-scheme-image-qc-kernel",
-    "lem-weil-pbc-closed-immersion-from-composite",
-    "pqf-def-affine-morphism",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof, 'For every k' >= k we can find a j' >= j and a morphism ... These morphisms form the transition morphisms of the system' (agent's version)"
-   }
-  },
-  {
-   "text": "*$X$ is the limit of the $Z_j$.* By [lem-weil-pbc-limit-affine-transition] the limit $L=\\varprojlim_{j\\in\\Lambda}Z_j$ exists (affine transitions, step 6); the cone $(p_j)$ gives $\\varphi:X\\to L$. Cover $Y_{j_0}$ by affine opens $W=\\operatorname{Spec}B$ each mapping into an affine open $U=\\operatorname{Spec}R_0\\subseteq S_{j_0}$. For $j\\in\\Lambda$ the preimage $U_j$ of $U$ in $S_j$ is affine, $U_j=\\operatorname{Spec}R_j$ (transitions affine), and the preimage of $U$ in $S$ is $\\varprojlim_jU_j=\\operatorname{Spec}R$ with $R=\\varinjlim_jR_j$ (open-preimage and affine clauses of [lem-weil-pbc-limit-affine-transition], [lem-weil-pbc-spec-colimit-limit]). The preimages of $W$ are $W_j=W\\times_UU_j=\\operatorname{Spec}(B\\otimes_{R_0}R_j)$ in $Y_j$ and $W_S=\\operatorname{Spec}(B\\otimes_{R_0}R)$ in $Y$ [def-pc-fibre-product], and $B\\otimes_{R_0}R=\\varinjlim_j B\\otimes_{R_0}R_j$ (tensor products commute with colimits) [def-weil-pbc-category-colimit]. $X\\cap W_S=\\iota^{-1}W_S=\\operatorname{Spec}((B\\otimes R)/\\mathfrak a)$ for an ideal $\\mathfrak a$ (a closed subscheme of an affine scheme), and $h_j^{-1}W_j=X\\cap W_S$, so by step 5 $Z_j\\cap W_j=\\operatorname{Spec}(C_j)$, $C_j=(B\\otimes R_j)/K_j$ with $K_j=\\ker(B\\otimes R_j\\to(B\\otimes R)/\\mathfrak a)$. The induced map $\\varinjlim_jC_j\\to(B\\otimes R)/\\mathfrak a$ is injective (a filtered colimit of injective maps $C_j\\hookrightarrow(B\\otimes R)/\\mathfrak a$) and surjective (every element of $B\\otimes R$ comes from some $B\\otimes R_j$), hence an isomorphism. The preimage of the open $\\iota_{j_0}^{-1}W\\subseteq Z_{j_0}$ in $Z_j$ is $Z_j\\cap W_j$, so by the open-preimage clause of [lem-weil-pbc-limit-affine-transition] and [lem-weil-pbc-spec-colimit-limit] its preimage in $L$ is $\\varprojlim_j(Z_j\\cap W_j)=\\operatorname{Spec}(\\varinjlim_jC_j)$, and $\\varphi$ restricted to $X\\cap W_S$ is $\\operatorname{Spec}$ of the isomorphism above. These opens cover $X$ and $L$ ($W$ runs over a cover of $Y_{j_0}$), so $\\varphi$ is an isomorphism: $X=\\varprojlim_{j\\in\\Lambda}Z_j$.",
-   "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-spec-colimit-limit",
-    "def-pc-fibre-product",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-scheme-image-qc-kernel"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof, '(X -> S) = lim (X_i -> S_i)' (written out by the agent)"
-   }
-  },
-  {
-   "text": "*Conclusion.* Index by $\\Lambda$: $X_\\lambda=Z_\\lambda$, $S_\\lambda=S_\\lambda$, $f_\\lambda$ as in step 5. The transition morphisms of both systems are affine (steps 2, 6), every $f_\\lambda$ is proper (step 5), every $S_\\lambda$ is of finite type over $\\mathbf Z$ (step 2), $X=\\varprojlim_\\lambda X_\\lambda$ (step 7), $S=\\varprojlim_{\\lambda\\in\\Lambda}S_\\lambda$ (restriction to the cofinal $\\Lambda$, [lem-weil-pbc-colimit-initial-full-subcategory]), and $f$ is the limit of the $f_\\lambda$: it is the unique morphism $X\\to S$ with $q_\\lambda\\circ f=f_\\lambda\\circ p_\\lambda$ for all $\\lambda$ (step 6).",
-   "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof, last sentences"
-   }
-  },
-  {
-   "text": "*Affine case.* If $S=\\operatorname{Spec}A$, step 2 used the finitely generated subrings $A_j\\subseteq A$, so every $S_\\lambda=\\operatorname{Spec}A_\\lambda$ ($\\lambda\\in\\Lambda$) is affine with $A_\\lambda$ a finitely generated $\\mathbf Z$-algebra. $A$ is the directed union of its finitely generated subrings (each $a\\in A$ lies in $\\mathbf Z[a]$), i.e. $A=\\varinjlim_{j\\in J}A_j$ with the inclusions as coprojections [def-weil-pbc-category-colimit] (in the source repository: CommRingCat.isColimitFgSubalgebraCocone, sorry-free), and restricting to the cofinal $\\Lambda$ gives $A=\\varinjlim_{\\lambda\\in\\Lambda}A_\\lambda$ [lem-weil-pbc-colimit-initial-full-subcategory]; the identification $\\operatorname{Spec}A=\\varprojlim_\\lambda\\operatorname{Spec}A_\\lambda$ of step 8 is the one of [lem-weil-pbc-spec-colimit-limit].",
-   "uses": [
-    "lemma-nagata-noetherian-inverse-system-affine",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-spec-colimit-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346), proof; proof of Proposition 01ZA (affine case, line ~1255) and Fundamental Groups, proof of Lemma 0GS2 (pione.tex, 'General case'), which cites 0A0P in this affine form"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proper-closed-in-proper-fp",
-  "prop-nagata-noetherian-inverse-system",
-  "def-nagata-noetherian-inverse-system",
-  "lem-weil-pbc-cofiltered-limit-directed-reindex",
-  "def-weil-finite-type-morphism",
-  "pqf-def-affine-morphism",
-  "lem-weil-pbc-limit-affine-transition",
-  "lemma-nagata-noetherian-inverse-system-affine",
-  "thm-pd-spreading-out",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-eventually-proper",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-scheme-image-qc-kernel",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-closed-immersion-from-composite",
-  "lem-weil-pbc-spec-colimit-limit",
-  "def-weil-pbc-category-colimit"
+  "lem-weil-pbc-proper-limit-noetherian-core",
+  "lem-weil-pbc-proper-limit-noetherian-affine-clause"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma Tag 0A0P (lemma-proper-limit-of-proper-finite-presentation-noetherian, line 3346) and its proof; steps 5-7 fill in the construction Stacks omits ('Some details omitted') by an agent-written variant (scheme-theoretic images of X in the descended proper models of one finitely presented envelope instead of descended models of every X_k)",
-  "note": "steps 5-7 written by the agent"
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/ProperLimitNoetherianCore.lean",
+  "place": "Stage 3 reduction of the Tag 0A0P target to the core construction and affine refinement theorems"
  },
  "mathlib_searches": [
   {
@@ -283,5 +159,15 @@
   "group": "K1",
   "result": "fix",
   "note": "f proper, S qc+qs instances; Λ : Type u Preorder+Nonempty+IsDirected; X/S limits as IsLimit (Cone.mk X πX)/(Cone.mk S πS) (G1 4d583e21e form, replaced cX.pt = X eqToHom); affine transitions both systems; f_λ proper; S_λ finite type over Spec ULift ℤ as LFT+QuasiCompact of terminal map; πX ≫ f_λ = f ≫ πS; affine clause as IsAffine S → affine stages, Γ f.g. over ℤ, Γ-cocone of the S cone colimit (unused A/CommRing/iso binders removed)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T053957-L-2647625",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -12,6 +12,7 @@ public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.ProperFinitePresentationClosedLimit
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.ProperLimitNoetherianCore
 
 /-! # Proper morphisms as limits of proper finite-type models
 
@@ -77,6 +78,11 @@ theorem exists_proper_limit_noetherian
         (∀ i : Λᵒᵖ, IsAffine (Ss.obj i) ∧
           RingHom.FiniteType (algebraMap ℤ (Scheme.Γ.obj (Opposite.op (Ss.obj i))))) ∧
         Nonempty (IsColimit (Scheme.Γ.mapCocone (Cone.mk S πS).op))) := by
-  sorry
+  obtain ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, πX, πS, hlimX, hlimS,
+    htrans, hproper, hfinite, hcomm⟩ := exists_proper_limit_noetherian_core f
+  refine ⟨Λ, hpre, hne, hdir, Xs, Ss, fs, πX, πS, hlimX, hlimS,
+    htrans, hproper, hfinite, hcomm, ?_⟩
+  intro hS
+  exact proper_limit_noetherian_affine_clause f hS Λ hpre hne hdir Xs Ss fs πX πS hlimX hlimS
 
 end AlgebraicGeometry
