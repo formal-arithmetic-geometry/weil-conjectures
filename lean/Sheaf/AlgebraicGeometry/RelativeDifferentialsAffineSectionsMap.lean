@@ -23,6 +23,15 @@ theorem relativeDifferentials_affine_sections_map (f : X ⟶ S)
         Γ(f.relativeDifferentials, U.1),
       ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =
         f.relativeDifferentialsDerivation.d (X := op U.1) a := by
-  sorry
+  let D : (f.relativeDifferentials.val.obj (op U.1)).Derivation
+      (f.appLE V.1 U.1 hUV) :=
+    ModuleCat.Derivation.mk
+      (fun a ↦ f.relativeDifferentialsDerivation.d (X := op U.1) a)
+      (fun a b ↦ map_add _ a b)
+      (fun a b ↦ f.relativeDifferentialsDerivation.d_mul a b)
+      (fun a ↦ by
+        rw [Scheme.Hom.appLE_eq_pullbackPresheafToPresheaf_app]
+        exact PresheafOfModules.Derivation'.d_app _ _)
+  exact ⟨D.desc.hom, fun a ↦ D.desc_d a⟩
 
 end AlgebraicGeometry

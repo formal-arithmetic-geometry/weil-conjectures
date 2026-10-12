@@ -9959,3 +9959,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/T3/Sheaf.AlgebraicGeometry.PicardPullbackLocalRanks (stage 3; reviewer PASS; first push; landing 20261012T225331-L-1813330 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/T3/Sheaf.RingTheory.CohenMacaulayFreeResolutionMCM (stage 3; reviewer PASS; first push; landing 20261012T225331-L-1813427 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/T3/Sheaf.RingTheory.FormalFiberDegreePQuotient (stage 3; reviewer PASS; first push; landing 20261012T225331-L-1813531 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: merged deliver/T4/Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMap (stage 3; reviewer PASS; first push; landing 20261012T225332-L-1813638 (proof); batch 20261012T225253; modules 1; new nodes 0)
