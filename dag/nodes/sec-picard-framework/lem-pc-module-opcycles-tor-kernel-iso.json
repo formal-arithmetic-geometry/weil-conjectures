@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-module-opcycles-tor-kernel-iso",
+ "kind": "statement",
+ "title": "Tor of opcycles is the tensor image-inclusion kernel",
+ "statement": "Let A be a commutative ring and P a cochain complex of A-modules [def-pc-cochain-complex-modules]. Fix an integer a and assume that P^a is flat [def-weil-pbc-flat-ring-map]. Put K = im(d^{a-1}) and let iota: K \\hookrightarrow P^a be its inclusion. Then the functor N \\mapsto \\operatorname{Tor}_1^A(P^a/\\operatorname{im}(d^{a-1}),N) [def-weil-pbc-tor-modules] is naturally isomorphic to N \\mapsto \\ker(iota \\otimes_A 1_N). The kernel functor means the kernel in the category of A-module-valued functors of the natural transformation iota \\otimes_A -.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Factor the differential through its abelian image. The opcycles projection is its cokernel. Exactness is unchanged on replacing the first map by its image inclusion, so this gives a short exact sequence with middle term P^a.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tor symmetry identifies Tor_1(P^a,N) with Tor_1(N,P^a). Compute the latter using a projective resolution of N. Tensoring the exact short complex in degrees 2,1,0 with the flat module P^a preserves exactness, so its homology in degree 1 is zero.",
+   "uses": [
+    "lem-weil-pbc-tor-symmetry",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the first-variable Tor exact sequence to obtain a boundary from Tor_1(P.opcycles a,N) into K tensor N, natural in N. Its composite with iota tensor N is zero; take its lift to the functor-category kernel.",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The boundary is injective because its preceding Tor term is zero. For an element of the evaluated kernel, its image in K tensor N is killed by iota tensor N. Exactness lifts it along the boundary. The monic evaluated kernel inclusion shows that this lift is a preimage under the lifted map. Thus each component is mono and epi, hence an isomorphism. A natural transformation with isomorphic components is an isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "lem-weil-pbc-tor-symmetry",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-long-exact-first-variable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof; detailed kernel-factorization argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor one of the cokernel of a differential is a quotient of the preceding homology of a tensor complex",
+   "results": "Rep.torIso, CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom, rTensor.inverse_comp_rTensor, CategoryTheory.Tor'_obj_obj, HomologicalComplex.opcyclesIsCokernel, lTensor.inverse_comp_lTensor, groupHomologyIsoTor, CategoryTheory.ShortComplex.π_moduleCatCyclesIso_hom_apply",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "CategoryTheory.Tor, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor_map",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "opcycles.*[Tt]or|[Tt]or.*opcycles",
+   "results": "Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/Opposite.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a complex of modules tensor homology surjects onto the kernel of the tensor of the image inclusion of its differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ff]lat|[Ff]lat.*Tor|kernel.*image.*tensor",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\x27?\\b.*\\bflat\\b|\\bflat\\b.*\\bTor\\x27?\\b|tensor.*image.*kernel|kernel.*image.*tensor",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First Tor of the cokernel of a map into a flat module is naturally isomorphic to the kernel of the tensor of its image inclusion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of a tensor complex surjects onto the kernel of the tensor of the image inclusion of its differential",
+   "results": "lTensor_exact, rTensor_exact, lTensor.inverse_comp_lTensor, rTensor.inverse_comp_rTensor, TensorProduct.map_ker, lTensor.toFun, rTensor.toFun, lTensor.inverse_apply",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.OpcyclesTorSurjection",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0654 truncation argument: the degree-a opcycles are flat by the Tor criterion; identification of Tor with the tensor image kernel",
+   "via": [
+    "lem-pc-module-opcycles-tor-surjection",
+    "lem-pc-module-flat-opcycles-tor-criterion",
+    "lem-pc-module-tor-amplitude-flat-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.OpcyclesTorKernelIso",
+  "file": "lean/Sheaf/CategoryTheory/OpcyclesTorKernelIso.lean",
+  "declaration": "CategoryTheory.nonempty_tor_opcycles_tensor_image_kernel_iso",
+  "statement": "theorem nonempty_tor_opcycles_tensor_image_kernel_iso\n    (A : Type u) [CommRing A] (P : CochainComplex (ModuleCat.{u} A) ℤ)\n    (a : ℤ) (hflat : Module.Flat A (P.X a)) :\n    Nonempty ((Tor' (ModuleCat.{u} A) 1).obj (P.opcycles a) ≅\n      Limits.kernel ((curriedTensor (ModuleCat.{u} A)).map\n        (Abelian.image.ι (P.d (a - 1) a))))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T215157-L-1305002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T215157-L-1305002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

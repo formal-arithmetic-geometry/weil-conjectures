@@ -13,8 +13,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
-import Sheaf.Paper.TorLongExactFirstVariable
+import Sheaf.CategoryTheory.OpcyclesTorKernelIso
+import Sheaf.CategoryTheory.TensorHomologyImageKernelEpi
 
 /-!
 # Tor of an opcycle cokernel
@@ -65,6 +65,11 @@ theorem exists_epi_homology_tensor_to_tor_opcycles
         HomologicalComplex.homologyFunctor (ModuleCat.{u} A) (.up ℤ) (a - 1)) ⟶
         (Tor' (ModuleCat.{u} A) 1).obj (P.opcycles a),
       ∀ N : ModuleCat.{u} A, Epi (τ.app N) := by
-  sorry
+  obtain ⟨e⟩ := nonempty_tor_opcycles_tensor_image_kernel_iso A P a (hflat a)
+  obtain ⟨σ, hσ⟩ := exists_epi_tensor_homology_to_image_kernel A P a
+  refine ⟨σ ≫ e.inv, fun N ↦ ?_⟩
+  have : Epi (σ.app N) := hσ N
+  change Epi (σ.app N ≫ e.inv.app N)
+  infer_instance
 
 end CategoryTheory

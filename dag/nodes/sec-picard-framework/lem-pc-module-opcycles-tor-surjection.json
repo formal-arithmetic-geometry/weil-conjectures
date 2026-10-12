@@ -28,74 +28,33 @@
  ],
  "proof": [
   {
-   "text": "Put $K=\\operatorname{im}(d^{a-1})\\subseteq P^a$ and write $d^{a-1}$ as a surjection $\\pi:P^{a-1}\\to K$ followed by the inclusion $\\iota:K\\hookrightarrow P^a$. The low-degree Tor sequence [lem-weil-pbc-tor-long-exact-first-variable] for $0\\to K\\xrightarrow{\\iota}P^a\\to Q\\to0$ gives an exact segment $\\operatorname{Tor}_1^A(P^a,N)\\to\\operatorname{Tor}_1^A(Q,N)\\xrightarrow{\\delta_N}K\\otimes_AN\\xrightarrow{\\iota\\otimes1}P^a\\otimes_AN$, with $\\delta$ natural in $N$. Next, $\\operatorname{Tor}_1^A(P^a,N)=0$: by [lem-weil-pbc-tor-symmetry] it is isomorphic to $\\operatorname{Tor}_1^A(N,P^a)$, the first homology of $F_\\bullet\\otimes_AP^a$ for a free resolution $F_\\bullet\\to N$ [def-weil-pbc-tor-modules]. With $Z=\\operatorname{im}(F_1\\to F_0)$, the sequence $F_2\\otimes_AP^a\\to F_1\\otimes_AP^a\\to Z\\otimes_AP^a\\to0$ is exact by [lem-weil-pbc-tensor-right-exact], and $Z\\otimes_AP^a\\to F_0\\otimes_AP^a$ is injective because $P^a$ is flat [def-weil-pbc-flat-ring-map]; hence $\\ker(F_1\\otimes_AP^a\\to F_0\\otimes_AP^a)=\\operatorname{im}(F_2\\otimes_AP^a)$. Thus $\\delta_N$ identifies $\\operatorname{Tor}_1^A(Q,N)$, naturally in $N$, with $\\ker(\\iota\\otimes1:K\\otimes_AN\\to P^a\\otimes_AN)$.",
+   "text": "Apply the natural Tor-kernel isomorphism using flatness of P^a.",
    "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-tor-modules",
-    "lem-weil-pbc-tor-long-exact-first-variable",
-    "lem-weil-pbc-tor-symmetry",
-    "lem-weil-pbc-tensor-right-exact"
+    "lem-pc-module-opcycles-tor-kernel-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Regard $N$ as a complex in degree $0$; then the degree-$(a-1)$ differential of $P^\\bullet\\otimes_AN$ [def-pc-tensor-complex-sheaves] is $d^{a-1}\\otimes1=(\\iota\\otimes1)\\circ(\\pi\\otimes1)$, and $\\pi\\otimes1:P^{a-1}\\otimes_AN\\to K\\otimes_AN$ is surjective by right exactness [lem-weil-pbc-tensor-right-exact]. Let $Z^{a-1}=\\ker(d^{a-1}\\otimes1)$, so $H^{a-1}(P^\\bullet\\otimes_AN)=Z^{a-1}/\\operatorname{im}(d^{a-2}\\otimes1)$ [def-pc-acyclic-complex-modules]. For $x\\in Z^{a-1}$ one has $(\\iota\\otimes1)(\\pi\\otimes1)(x)=0$, so $\\pi\\otimes1$ maps $Z^{a-1}$ into $\\ker(\\iota\\otimes1)$; and $(\\pi\\otimes1)\\circ(d^{a-2}\\otimes1)=(\\pi\\circ d^{a-2})\\otimes1=0$ because $\\iota\\circ\\pi\\circ d^{a-2}=d^{a-1}d^{a-2}=0$ and $\\iota$ is injective. Hence $\\pi\\otimes1$ induces an $A$-linear map $\\bar\\pi_N:H^{a-1}(P^\\bullet\\otimes_AN)\\to\\ker(\\iota\\otimes1)$, natural in $N$.",
+   "text": "Obtain a componentwise epimorphic natural map from the preceding tensor homology to the tensor image-inclusion kernel.",
    "uses": [
-    "lem-weil-pbc-tensor-right-exact",
-    "def-pc-acyclic-complex-modules",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-module-tensor-homology-image-kernel-epi"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
-   }
+   "elementary": false
   },
   {
-   "text": "$\\bar\\pi_N$ is surjective: let $y\\in K\\otimes_AN$ with $(\\iota\\otimes1)(y)=0$. By the surjectivity of $\\pi\\otimes1$ from Step 2 choose $x\\in P^{a-1}\\otimes_AN$ with $(\\pi\\otimes1)(x)=y$. Then $(d^{a-1}\\otimes1)(x)=(\\iota\\otimes1)(y)=0$, so $x\\in Z^{a-1}$ and $\\bar\\pi_N[x]=y$.",
-   "uses": [
-    "lem-weil-pbc-tensor-right-exact",
-    "def-pc-acyclic-complex-modules",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
-   }
-  },
-  {
-   "text": "The composite $\\delta_N^{-1}\\circ\\bar\\pi_N:H^{a-1}(P^\\bullet\\otimes_AN)\\to\\operatorname{Tor}_1^A(Q,N)$ of the surjection of Steps 2--3 with the inverse of the isomorphism $\\delta_N$ onto $\\ker(\\iota\\otimes1)$ of Step 1 is an $A$-linear surjection. For $g:N\\to N'$ both $\\bar\\pi$ (induced by $\\pi\\otimes1$) and $\\delta$ (by the naturality in [lem-weil-pbc-tor-long-exact-first-variable], with Tor functorial as in [def-weil-pbc-tor-modules]) commute with the maps induced by $g$, so the surjection is natural in $N$.",
-   "uses": [
-    "lem-weil-pbc-tor-long-exact-first-variable",
-    "def-weil-pbc-tor-modules",
-    "def-pc-acyclic-complex-modules",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
-   }
+   "text": "Compose that natural map with the inverse natural Tor-kernel isomorphism. Each component is a composite of epimorphisms, hence an epimorphism. This is exactly the required natural surjection.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-tor-modules",
-  "lem-weil-pbc-tor-long-exact-first-variable",
-  "lem-weil-pbc-tensor-right-exact",
-  "def-pc-acyclic-complex-modules",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-tor-symmetry"
+  "lem-pc-module-opcycles-tor-kernel-iso",
+  "lem-pc-module-tensor-homology-image-kernel-epi"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+  "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof; kernel factorization made into Lean by T2"
  },
  "mathlib_searches": [
   {
@@ -201,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T215157-L-1305002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

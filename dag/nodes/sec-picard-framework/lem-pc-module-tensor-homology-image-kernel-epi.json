@@ -1,0 +1,162 @@
+{
+ "id": "lem-pc-module-tensor-homology-image-kernel-epi",
+ "kind": "statement",
+ "title": "Tensor homology surjects onto the tensor image-inclusion kernel",
+ "statement": "Let A be a commutative ring and P a cochain complex of A-modules [def-pc-cochain-complex-modules], with no flatness assumption. Fix an integer a. Put K = im(d^{a-1}) and let iota: K \\hookrightarrow P^a be its inclusion. There exists a natural transformation H^{a-1}(P \\otimes_A -) [def-pc-tensor-complex-sheaves, def-pc-acyclic-complex-modules] \\longrightarrow (N \\mapsto \\ker(iota \\otimes_A 1_N)) whose component at every A-module is surjective. The kernel functor is the functor-category kernel of iota \\otimes_A -.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-acyclic-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Factor d^{a-1} as pi followed by the monic abelian image inclusion iota. Tensor right exactness makes pi tensor N surjective. Use CochainComplex.mapBifunctorSingle₂Iso from WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle to identify the total tensor complex with termwise tensoring. Its inverse is natural in N: expand it in each degree, apply ι_mapBifunctorMap, and the degree-zero single-functor map formula. Tensor functoriality and inverse-hom cancellation give the comparison square.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the monic iota in the composite of any preceding differential with pi and iota to show that pi kills boundaries. In the short complex at degree a-1 of the termwise tensor complex, descend the composite of the cycle inclusion with pi tensor N to homology using descHomology. Transport across the tensor-complex comparison. Naturality follows by cancelling the epimorphism homologyπ, applying homologyπ_naturality and cyclesMap_i, then tensor whisker exchange. The composite with iota tensor N is zero by the cycle equation, so lift the resulting natural transformation to the functor-category kernel.",
+   "uses": [
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an element y of the evaluated functor kernel, its kernel inclusion z is killed by iota tensor N. Tensor-surjectivity of pi lifts z to an element x. The differential of x is zero by the factorization d=pi followed by iota. The concrete cycles isomorphism identifies x with a categorical cycle xc. Take its homology class and transport it back along the inverse tensor-complex comparison. The descHomology formula shows that its image under the lifted natural map has kernel inclusion z. Cancel that monic inclusion to conclude that its image is y. Therefore every component is surjective, hence epimorphic.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-right-exact",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-acyclic-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof; detailed kernel-factorization argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor one of the cokernel of a differential is a quotient of the preceding homology of a tensor complex",
+   "results": "Rep.torIso, CategoryTheory.ShortComplex.pOpcycles_comp_moduleCatOpcyclesIso_hom, rTensor.inverse_comp_rTensor, CategoryTheory.Tor'_obj_obj, HomologicalComplex.opcyclesIsCokernel, lTensor.inverse_comp_lTensor, groupHomologyIsoTor, CategoryTheory.ShortComplex.π_moduleCatCyclesIso_hom_apply",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "CategoryTheory.Tor, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor_map",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "opcycles.*[Tt]or|[Tt]or.*opcycles",
+   "results": "Mathlib/CategoryTheory/Abelian/LeftDerived.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/Opposite.lean, Mathlib/Algebra/Homology/Opposite.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a complex of modules tensor homology surjects onto the kernel of the tensor of the image inclusion of its differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ff]lat|[Ff]lat.*Tor|kernel.*image.*tensor",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Limits/Preserves/Basic.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean, Mathlib/CategoryTheory/Functor/TypeValuedFlat.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTor\\x27?\\b.*\\bflat\\b|\\bflat\\b.*\\bTor\\x27?\\b|tensor.*image.*kernel|kernel.*image.*tensor",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First Tor of the cokernel of a map into a flat module is naturally isomorphic to the kernel of the tensor of its image inclusion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of a tensor complex surjects onto the kernel of the tensor of the image inclusion of its differential",
+   "results": "lTensor_exact, rTensor_exact, lTensor.inverse_comp_lTensor, rTensor.inverse_comp_rTensor, TensorProduct.map_ker, lTensor.toFun, rTensor.toFun, lTensor.inverse_apply",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.OpcyclesTorSurjection",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0654 truncation argument: the degree-a opcycles are flat by the Tor criterion; surjection from preceding tensor homology onto the image-inclusion kernel",
+   "via": [
+    "lem-pc-module-opcycles-tor-surjection",
+    "lem-pc-module-flat-opcycles-tor-criterion",
+    "lem-pc-module-tor-amplitude-flat-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TensorHomologyImageKernelEpi",
+  "file": "lean/Sheaf/CategoryTheory/TensorHomologyImageKernelEpi.lean",
+  "declaration": "CategoryTheory.exists_epi_tensor_homology_to_image_kernel",
+  "statement": "theorem exists_epi_tensor_homology_to_image_kernel\n    (A : Type u) [CommRing A] (P : CochainComplex (ModuleCat.{u} A) ℤ) (a : ℤ) :\n    ∃ σ : (CochainComplex.singleFunctor (ModuleCat.{u} A) 0 ⋙\n        ((curriedTensor (ModuleCat.{u} A)).map₂CochainComplex).obj P ⋙\n        HomologicalComplex.homologyFunctor (ModuleCat.{u} A) (.up ℤ) (a - 1)) ⟶\n      Limits.kernel ((curriedTensor (ModuleCat.{u} A)).map\n        (Abelian.image.ι (P.d (a - 1) a))),\n      ∀ N : ModuleCat.{u} A, Epi (σ.app N)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T215157-L-1305002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T215157-L-1305002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

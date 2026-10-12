@@ -9696,3 +9696,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:51 L: merged deliver/P3/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparisonC0 (stage 3; reviewer PASS; first push; landing 20261012T215156-L-1304635 (proof); batch 20261012T215151; modules 1; new nodes 0)
 - 21:51 L: merged deliver/R1/Sheaf.RingTheory.FsAdicClosedFiberModel (stage 3; reviewer PASS; first push; landing 20261012T215156-L-1304785 (interface); batch 20261012T215151; modules 3; new nodes 2)
 - 21:51 L: merged deliver/T2/Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlockData (stage 3; reviewer PASS; first push; landing 20261012T215156-L-1304901 (proof); batch 20261012T215151; modules 1; new nodes 0)
+- 21:51 L: merged deliver/T2/Sheaf.CategoryTheory.OpcyclesTorSurjection (stage 3; reviewer PASS; first push; landing 20261012T215157-L-1305002 (interface); batch 20261012T215151; modules 3; new nodes 2)
