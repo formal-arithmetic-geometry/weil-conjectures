@@ -29,6 +29,7 @@ hold as soon as `X` has a `k`-rational point `σ`.  Consequently the `σ`-normal
   `lem-pc-rational-hyp`).
 - `AlgebraicGeometry.nonempty_picardFunctorNormalized_iso_picardFunctor`: for a smooth projective
   curve with a rational point `σ`, `Pic_{X/k,σ} ≅ Pic_{X/k}` (blueprint `cor-pc-sigma-pic-iso`).
+- `AlgebraicGeometry.isSheaf_fpqc_picardFunctor`: for such a curve `Pic_{X/k}` is an fpqc sheaf.
 
 ## Implementation notes
 
@@ -141,5 +142,19 @@ theorem nonempty_picardFunctorNormalized_iso_picardFunctor
       isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral T.unop
   exact ⟨asIso ((picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).ι ≫
     toPicardFunctor (X ↘ Spec (.of k)))⟩
+
+/-- **`Pic_{X/k}` is an fpqc sheaf when `X` has a rational point.** Let `X` be a smooth projective
+curve over a field `k` with a `k`-rational point `σ`. Then the relative Picard functor `Pic_{X/k}`
+is a sheaf for the fpqc topology on `k`-schemes, since it is isomorphic to `Pic_{X/k,σ}`
+(`AlgebraicGeometry.nonempty_picardFunctorNormalized_iso_picardFunctor`), which is an fpqc sheaf
+(`AlgebraicGeometry.isSheaf_fpqc_picardFunctorNormalized`). -/
+theorem isSheaf_fpqc_picardFunctor
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [GeometricallyIntegral (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
+    (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) :
+    Presheaf.IsSheaf (fpqcTopology.over (Spec (.of k))) (picardFunctor (X ↘ Spec (.of k))).obj :=
+  have ⟨e⟩ := nonempty_picardFunctorNormalized_iso_picardFunctor σ hσ
+  (Presheaf.isSheaf_of_iso_iff e).1 (isSheaf_fpqc_picardFunctorNormalized _ σ hσ
+    isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral)
 
 end AlgebraicGeometry
