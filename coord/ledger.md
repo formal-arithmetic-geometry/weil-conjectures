@@ -6771,3 +6771,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/C3/Sheaf.AlgebraicGeometry.EtaleQcoherentCohomologyULift (stage 3; reviewer PASS; first push; landing 20261012T085220-L-6311 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/C3/Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact (stage 3; reviewer PASS; first push; landing 20261012T085221-L-6419 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/C3/Sheaf.AlgebraicGeometry.GlobalSectionsLimitComparison (stage 3; reviewer PASS; first push; landing 20261012T085221-L-6515 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/C3/Sheaf.AlgebraicGeometry.HigherDirectImageAffineContinuity (stage 3; reviewer PASS; first push; landing 20261012T085221-L-6622 (interface); batch 20261012T085205; modules 3; new nodes 2)

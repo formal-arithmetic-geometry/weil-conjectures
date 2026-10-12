@@ -1,0 +1,149 @@
+{
+ "id": "sbc-lem-higher-image-affine-class-descent",
+ "kind": "statement",
+ "title": "Stage representatives for affine higher-image sections",
+ "statement": "Let Λ be an arbitrary commutative ring, k:W→S a scheme morphism and G a Λ-module sheaf on W_et [def-weil-pbc-scheme-conventions], [def-weil-pbc-etale-sheaves], [def-weil-pbc-etale-site]. Let I be a small cofiltered category, D:I→Over W an inverse system with affine transitions and qcqs composite structure maps to S, and c a cone whose underlying scheme cone is limiting, with qcqs composite structure map to S. Fix q∈ℤ and an affine etale object V→S. Write G_i=D(i)^*G and G_c=c.pt^*G [def-weil-pbc-inverse-image]; write t for the canonical higher-image transition of [def-sbc-module-higher-image-transitions], using higher images as in [def-weil-pbc-direct-image]. For every x∈(R^q(c.pt→S)_*G_c)(V), there exist i∈I and y∈(R^q(D(i)→S)_*G_i)(V) with t(c_i)(V)(y)=x. No conclusion about equality or uniqueness of representatives is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09Z1 (proof), 03Q8, 0EZM, 03FD; Tag 0738(4), surjectivity argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-sbc-module-higher-image-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Choose a small directed final presentation of I^op. Its opposite is initial, so reindexing preserves the underlying scheme limit. After base change to an affine etale U over S, the stage schemes and limit are qcqs and the transitions affine. The coefficient diagram on the limit is canonically constant with value the pullback of G, by inverse-image composition, and its colimit is that value since I^op is nonempty and connected.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use an injective module resolution and its underlying abelian-section acyclicity to compute abelian cohomology after forgetting scalars (03FD), without ring flatness. Apply continuity for degree-zero sheaves as complexes (0EZM) to each system of the preceding step. This gives cohomology-presheaf continuity on the affine basis; all maps are the canonical derived-unit maps, hence commute with restrictions and agree with t. The higher-image presheaf description (03Q8) and sheafification of presheaf colimits identify the limit higher image with the sheaf colimit of the stage higher images. For q<0 the resolutions have zero cohomology.",
+   "uses": [
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-sheaves-colimit-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the given limit section locally by stage sections. Refine its cover to a finite affine cover of V with quasi-compact pairwise fibre products. On each overlap, matching in the sheaf colimit is locally witnessed by equality at later stages. Quasi-compactness gives finitely many witnesses per overlap, and there are finitely many overlaps. Filteredness supplies one stage for every representative and matching equality. The stage sheaf condition glues the representatives on V, and their limit image equals the original section on the cover, hence on V. This is the surjectivity argument in 0738(4).",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reindexed stage is already an original stage. Naturality of the presheaf comparison identifies its section map with t(c_i). Thus the representative has the required displayed image.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-sheaves-colimit-sheafification",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Specialization of 09Z1 and the surjectivity part of 0738 to constant-ring module sheaves; affine section assembly by C3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every section of a higher direct image over an affine etale scheme descends to a stage of an inverse scheme limit",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of etale module sheaves commute with evaluation on affine schemes",
+   "results": "Results concern module-sheaf colimit constructions, not varying schemes or higher-image sections.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*(affine|rep|eq_zero)|higher.*[Ii]mage.*(descent|vanishing)",
+   "results": "No Mathlib source hits for higher-image section continuity. Second reading with rg on both library roots and the source checkout also found AlgebraicGeometry.Etale.exists_higherDirectImage_affine_section_eq_zero in HigherDirectImageAffineSectionVanishing. It is an abelian-sheaf theorem for a directed preorder, nonnegative degree, and varying coefficients, not the general module-valued canonical-transition statement here. Its use would require reindexing and a natural module/abelian comparison. Abelian stalk analogues likewise do not directly match.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageAffineContinuity",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Proof: higher-image sheafification and cohomology continuity on qcqs etale objects; stage section existence via finite-cover gluing",
+   "via": [
+    "sbc-lem-higher-image-affine-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageAffineClassDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_higher_image_affine_class_rep",
+  "statement": "theorem exists_higher_image_affine_class_rep (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i, QuasiCompact ((D.obj i).hom ≫ k)] [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)] (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c)) [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)] (V : S.Etale) [IsAffine V.left] (x : (higherDirectImage Λ (c.pt.hom ≫ k) q (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G)).obj.obj (op V)) : ∃ (i : I) (y : (higherDirectImage Λ ((D.obj i).hom ≫ k) q ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G)).obj.obj (op V)), ((higherDirectImageOverMap Λ k G q (c.π.app i)).hom.app (op V)) y = x",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T085221-L-6622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T085221-L-6622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

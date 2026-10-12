@@ -17,61 +17,33 @@
  ],
  "proof": [
   {
-   "text": "An injective module resolution computes underlying abelian section cohomology on every etale object because its terms are abelian-section-acyclic (03FD). Forgetting scalars is exact and conservative; all the canonical maps are linear. This transports the abelian cohomology and higher-image descriptions to module sheaves without assuming that Λ is flat over ℤ.",
+   "text": "Use affine-section class descent for the actual limit higher image. Map a section of B.pt across eB, descend it to a stage, and map its representative back across eK_i. The displayed hB equation and inverse-isomorphism cancellation show that the resulting B coprojection sends it to the original section.",
    "uses": [
-    "lem-weil-pbc-injective-module-abelian-acyclic",
-    "sbc-lem-higher-direct-image-presheaf"
+    "sbc-lem-higher-image-affine-class-descent"
    ],
    "elementary": false
   },
   {
-   "text": "If needed replace I^op by a small directed final category. The opposite presentation is initial, so it computes the same scheme limit. For an affine etale object U→S base change gives qcqs schemes U×_S D(i) and U×_S c.pt, affine transitions, and a limiting cone. The pulled-back sheaves on the limit canonically identify with the pullback of G and have identity transition maps under those identifications. Since I^op is nonempty and connected, this is their colimit.",
+   "text": "For two same-stage sections whose B images coincide, their difference has zero B image. Apply eB and use hB to obtain zero canonical limit image for the difference transported by eK_i. Affine-section eventual vanishing supplies f:j→i killing this transported difference. Use hK and eK_j inverse to conclude equality of the two transitioned K sections.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "lem-weil-pbc-inverse-image-composition"
+    "sbc-lem-higher-image-affine-class-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "Regard the sheaves as complexes in degree zero, with common lower bound zero. Continuity for systems of complexes gives the canonical cohomology colimit comparison on each affine etale U. Its maps are derived adjunction units and commute with restriction. For q<0 use the vanishing of cohomology of a sheaf resolution in negative degrees.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "By the higher-image presheaf description the objects are sheafifications of the restricted cohomology presheaves. The comparisons in the preceding step are isomorphisms on the affine basis. Sheafification commutes with colimits, so these local comparisons yield the higher-image sheaf colimit comparison. The specified hK and hB identify its arrows and legs with those of B.",
-   "uses": [
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-sheaves-colimit-sheafification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Every covering of affine V admits a finite affine refinement with quasi-compact overlaps. Filtered colimits of modules commute with the finite products and equalizers in the sheaf condition. Equivalently apply Sites 0738(4) to sections and use exact forgetting of module operations. Hence evaluation on V preserves filtered colimits. Evaluate the comparison from the preceding step to obtain precisely the universal property stated here.",
-   "uses": [
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
-   ],
-   "elementary": false
+   "text": "Mathlib Types.FilteredColimit.isColimitOf' constructs the colimit from joint surjectivity and eventual equality at a common stage. Forgetting modules preserves filtered colimits (ModuleCat.FilteredColimits) and reflects isomorphisms, hence reflects this colimit. Apply isColimitOfReflects to obtain the displayed module-cocone colimit.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "lem-weil-pbc-sheaves-colimit-sheafification",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+  "sbc-lem-higher-image-affine-class-descent",
+  "sbc-lem-higher-image-affine-class-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 09Z1, proof steps on qcqs etale objects; Tags 03Q8, 09YQ, 0EZM, 03FD, 0738(4); formal assembly by G1"
+  "document": "Stacks Project and Mathlib",
+  "place": "09Z1 with 0738 split into section descent and eventual vanishing; Types.FilteredColimit.isColimitOf' and module-forgetful reflection; Lean assembly by C3"
  },
  "mathlib_searches": [
   {
@@ -145,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-1b606",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T053932-L-2635421",
+  "landing": "20261012T085221-L-6622",
   "kind": "interface",
-  "note": "independent Codex review: Matched all delivered declarations with their nodes and source arguments; relocated definitions and existing theorem signature are byte-identical. All five modules compile cleanly; axiom checks show only permitted axioms plus sorryAx for the two documented open lemmas and their dependent theorem."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

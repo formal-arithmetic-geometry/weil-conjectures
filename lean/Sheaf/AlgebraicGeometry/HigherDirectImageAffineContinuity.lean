@@ -6,11 +6,9 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassDescent
+import Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassVanishing
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Affine sections of higher images under inverse limits
 
@@ -78,6 +76,55 @@ theorem nonempty_isColimit_higher_image_affine
     (V : S.Etale) [IsAffine V.left] :
     Nonempty (IsColimit
       ((sheafToPresheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
-        (evaluation S.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj (op V)).mapCocone B)) := by sorry
+        (evaluation S.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj (op V)).mapCocone B)) := by
+  classical
+  let E := sheafToPresheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
+    (evaluation S.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj (op V)
+  have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
+    (forget (ModuleCat.{u + 1} Λ))
+  have := reflectsColimit_of_reflectsIsomorphisms (K ⋙ E) (forget (ModuleCat.{u + 1} Λ))
+  refine ⟨isColimitOfReflects (forget (ModuleCat.{u + 1} Λ)) ?_⟩
+  apply Types.FilteredColimit.isColimitOf'
+  · intro x
+    obtain ⟨i, y, hy⟩ := exists_higher_image_affine_class_rep Λ k G q D c hc V
+      ((eB.hom.hom.app (op V)) x)
+    refine ⟨op i, ((eK i).inv.hom.app (op V)) y, ?_⟩
+    change x = ((B.ι.app (op i)).hom.app (op V)) _
+    rw [hB]
+    change x = (E.map eB.inv) ((E.map (higherDirectImageOverMap Λ k G q
+      (c.π.app i))) ((E.map (eK i).hom) ((E.map (eK i).inv) y)))
+    have hei : (E.map (eK i).hom) ((E.map (eK i).inv) y) = y := by
+      rw [← ModuleCat.comp_apply, ← E.map_comp, Iso.inv_hom_id, E.map_id,
+        ModuleCat.id_apply]
+    rw [hei]
+    change (E.map (higherDirectImageOverMap Λ k G q (c.π.app i))) y =
+      (E.map eB.hom) x at hy
+    rw [hy, ← ModuleCat.comp_apply, ← E.map_comp, Iso.hom_inv_id, E.map_id,
+      ModuleCat.id_apply]
+  · intro i x y hxy
+    change ((B.ι.app i).hom.app (op V)) x =
+      ((B.ι.app i).hom.app (op V)) y at hxy
+    have hz : ((B.ι.app i).hom.app (op V)) (x - y) = 0 := by
+      rw [map_sub, hxy, sub_self]
+    have hcanon : ((higherDirectImageOverMap Λ k G q (c.π.app i.unop)).hom.app
+        (op V)) (((eK i.unop).hom.hom.app (op V)) (x - y)) = 0 := by
+      have h := congrArg (fun z ↦ (E.map eB.hom) z) hz
+      rw [hB i.unop] at h
+      change (E.map eB.hom) ((E.map eB.inv)
+        ((E.map (higherDirectImageOverMap Λ k G q (c.π.app i.unop)))
+          ((E.map (eK i.unop).hom) (x - y)))) = (E.map eB.hom) 0 at h
+      have he : ∀ z, (E.map eB.hom) ((E.map eB.inv) z) = z := by
+        intro z
+        rw [← ModuleCat.comp_apply, ← E.map_comp, Iso.inv_hom_id, E.map_id,
+          ModuleCat.id_apply]
+      rw [he, map_zero] at h
+      exact h
+    obtain ⟨j, f, hf⟩ := exists_higher_image_affine_class_eq_zero Λ k G q D c hc V
+      i.unop _ hcanon
+    refine ⟨op j, f.op, ?_⟩
+    change ((K.map f.op).hom.app (op V)) x = ((K.map f.op).hom.app (op V)) y
+    apply sub_eq_zero.mp
+    rw [← map_sub, hK]
+    simpa using congrArg (fun z ↦ (((eK j).inv.hom.app (op V)) z)) hf
 
 end AlgebraicGeometry.Etale
