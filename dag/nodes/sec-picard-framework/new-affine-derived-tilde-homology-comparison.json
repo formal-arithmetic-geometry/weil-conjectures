@@ -1,0 +1,126 @@
+{
+ "id": "new-affine-derived-tilde-homology-comparison",
+ "kind": "statement",
+ "title": "Derived associated sheaf commutes naturally with cohomology",
+ "statement": "Let A be a commutative ring and choose derived categories of A-modules and of sheaves on Spec A [def-pc-derived-category]. Let F : D(A) → D_QCoh(Spec A) have a natural isomorphism Q ⋙ F ⋙ inclusion ≅ termwise tilde ⋙ Q, for the associated-sheaf functor [lem-weil-pbc-affine-tilde-gamma-adjunction]. For every integer n there is a natural isomorphism (F ⋙ inclusion) ⋙ H^n ≅ H^n ⋙ tilde.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.3, Lemma 36.3.5 (Tag 06Z0), proof"
+ },
+ "proof": [
+  {
+   "text": "For a map f of modules, the kernel k of tilde(f) is quasi-coherent. Its ordinary counit tilde(Γ k) → k is invertible. Use full faithfulness of tilde to lift this kernel fork to modules; the image fork is isomorphic to the kernel fork, and full faithfulness reflects its limit property. Thus tilde preserves kernels.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The left adjoint tilde preserves colimits and is additive (preservation of biproducts). Together with kernel preservation, Functor.preservesFiniteLimits_of_preservesKernels supplies exactness. Apply Localization.liftNatIso to the given comparison and mapDerivedCategoryFactors to get F ⋙ inclusion ≅ tilde.mapDerivedCategory. Compose its whiskering with the inverse of the existing source-library Functor.mapDerivedCategoryHomologyFunctorIso n; this is the required natural comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0, exact associated sheaf and the cohomology calculation for the counit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact associated sheaf functor commutes with derived cohomology and the derived affine counit induces the ordinary tilde global sections counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor commutes with cohomology of its induced derived functor",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-12",
+   "verdict": "Partial tools; no exact affine derived counit statement. The source library exact-functor homology comparison is used in the proved tilde comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso|isIso_fromTildeΓ_of_isQuasicoherent|tilde.functor",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-12",
+   "verdict": "Partial tools; no exact affine derived counit statement. The source library exact-functor homology comparison is used in the proved tilde comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineQCohDerivedAdjunctionUnitCounit",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "Proof step (2), affine derived equivalence used to identify D_QCoh(Spec A) with D(A): Tag 06Z0, cohomology of associated sheaf and the counit.",
+   "via": [
+    "new-affine-qcoh-derived-adjunction-unit-counit",
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDerivedTildeHomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.affineDerivedTilde_homology_comparison",
+  "statement": "theorem affineDerivedTilde_homology_comparison (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] (F : DerivedCategory (ModuleCat.{u} A) ⥤ schemeDerivedQCohCategory (Spec (.of A))) (hF : Nonempty (DerivedCategory.Q ⋙ F ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι ≅ @Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ) ⋙ DerivedCategory.Q)) (n : ℤ) : Nonempty ((F ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) n ≅ DerivedCategory.homologyFunctor (ModuleCat.{u} A) n ⋙ tilde.functor (.of A))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085308-L-27115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085308-L-27115",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
