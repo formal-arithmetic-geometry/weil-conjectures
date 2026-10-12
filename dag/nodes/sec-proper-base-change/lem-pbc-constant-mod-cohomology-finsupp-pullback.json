@@ -1,0 +1,119 @@
+{
+ "id": "lem-pbc-constant-mod-cohomology-finsupp-pullback",
+ "kind": "lemma",
+ "title": "Functorial Finsupp coordinates for constant coefficients modulo p",
+ "statement": "Let X and Y be qcqs schemes [def-weil-pbc-scheme-conventions], g:Y→X any scheme morphism, Λ any commutative ring in Type(u+1), p a prime and q any natural number. There exist an index type I in Type(u+1) and additive equivalences identifying H^q(X,constant Λ/(p)) [def-sc-constant-sheaves, def-weil-pbc-etale-cohomology] with I→₀H^q(X,constant Z/p), and H^q(Y,g^*constant Λ/(p)) with I→₀H^q(Y,g^*constant Z/p). Under these equivalences the cohomology pullback acts on each coordinate by the pullback for constant Z/p. There is no field, characteristic, smoothness, connectedness or properness hypothesis, and no Frobenius model in this statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q5",
+  "place": "filtered-colimit continuity, with Tag 0739 and the explicit basis construction of lem-sc-constant-mod-charp-finite-sum-colimit"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical ULift(ZMod p)-module structure on Λ/(p) and choose a basis I. Repeat the explicit basis and finite-subcoproduct construction in the proof of the coefficient presentation theorem, retaining the chosen summand inclusions. This identifies the underlying constant sheaf with an I-indexed coproduct of X.constantZMod p. Pullback preserves this coproduct and its finite-subcoproduct diagram.",
+   "uses": [
+    "lem-sc-constant-mod-charp-finite-sum-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply large-universe filtered-colimit continuity to X and Y and additive preservation of finite biproducts by Sheaf.functorH. The colimit of the finite sums of cohomology groups is their Finsupp direct sum, giving a and b for the same I.",
+   "uses": [
+    "lem-pbc-u2-sheafH-large-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of Etale.cohomologyMap with respect to each summand inclusion gives the equation on single-coordinate classes. Every Finsupp is a finite sum of these classes, so additivity proves the equation for all x and i. An empty basis makes both direct sums zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-u2-sheafH-large-filtered-colimit",
+  "lem-sc-constant-mod-charp-finite-sum-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03Q5",
+  "place": "F1 stage-3 decomposition of steps 3 of lem-sc-artin-schreier-base-change-model, expanded to record naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology direct sum constant sheaves Frobenius",
+   "results": "HTTP search service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of constant sheaves with arbitrary prime torsion coefficients as finitely supported sums, natural in pullback",
+   "results": "Eight hits include Sheaf.H and cohomologyPresheaf, but none supplies the functorial direct-sum identification.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.H|constantZMod|constantModSheaf|functorH.*coproduct",
+   "results": "Mathlib gives Sheaf.H and Finsupp.mapRange.addEquiv, but not this comparison. Library and blueprint searches found no existing declaration for this step.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierBaseChangeModel",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "characteristic-p Artin--Schreier comparison: extension from prime coefficients to arbitrary Λ/(p)",
+   "via": [
+    "lem-sc-artin-schreier-base-change-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ConstantModCohomologyFinsuppPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ConstantModCohomologyFinsuppPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_constantModSheaf_cohomology_finsupp_pullback",
+  "statement": "theorem exists_constantModSheaf_cohomology_finsupp_pullback (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (g : Y ⟶ X) (p : ℕ) [Fact p.Prime] (q : ℕ) : ∃ (I : Type (u + 1)) (a : Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj (constantModSheaf Λ X p)) q ≃+ (I →₀ Sheaf.H (X.constantZMod p) q)) (b : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} g).obj ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj (constantModSheaf Λ X p))) q ≃+ (I →₀ Sheaf.H ((upperStar AddCommGrpCat.{u + 1} g).obj (X.constantZMod p)) q)), ∀ x i, b (cohomologyMap g ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj (constantModSheaf Λ X p)) q x) i = cohomologyMap g (X.constantZMod p) q (a x i)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T232140-L-1992650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T232140-L-1992650",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,6 +7,9 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 
+import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierPrimeBaseChangeModel
+import Sheaf.AlgebraicGeometry.Curve.ConstantModCohomologyFinsuppPullback
+
 @[expose] public section
 
 universe u
@@ -62,6 +65,22 @@ theorem exists_constantModSheaf_one_frobenius_baseChange_model
           rw [LinearMap.Frobenius.mem_fixedPoints, hF',
             LinearMap.Frobenius.mem_fixedPoints.mp (e x i).2]⟩ :
           LinearMap.Frobenius.fixedPoints F') := by
-  sorry
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace C := quasiSeparatedSpace_of_quasiSeparated f
+  have : IsProper f' := MorphismProperty.of_isPullback h inferInstance
+  have : CompactSpace C' := QuasiCompact.compactSpace_of_compactSpace f'
+  have : QuasiSeparatedSpace C' := quasiSeparatedSpace_of_quasiSeparated f'
+  obtain ⟨V, hd, F, F', hF', e, e', he⟩ :=
+    exists_constantZMod_one_frobenius_baseChange_model f p h
+  obtain ⟨I, a, b, hab⟩ :=
+    Etale.exists_constantModSheaf_cohomology_finsupp_pullback Λ ι' p 1
+  refine ⟨V, hd, F, F', hF', I,
+    a.trans (Finsupp.mapRange.addEquiv e),
+    b.trans (Finsupp.mapRange.addEquiv e'), ?_⟩
+  intro x i
+  simp only [AddEquiv.trans_apply, Finsupp.mapRange.addEquiv_apply,
+    Finsupp.mapRange_apply]
+  rw [hab]
+  exact he (a x i)
 
 end AlgebraicGeometry.IsCurve

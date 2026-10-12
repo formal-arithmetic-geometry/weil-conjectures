@@ -14,44 +14,33 @@
  ],
  "proof": [
   {
-   "text": "Use the Artin--Schreier sequence and proper degree-zero surjectivity to identify H¹(C,Z/p) with the fixed subgroup of Frobenius on the finite-dimensional coherent H¹(C,O_C). The Ext/derived comparison transfers the sequence to the cohomology convention in the statement. In dimension zero both degree-one groups vanish.",
+   "text": "Establish qcqs hypotheses on C using its curve structure and on C' using stability of properness under the supplied pullback. Apply the prime-coefficient Frobenius model to obtain V,F,F' and compatible equivalences e,e'.",
    "uses": [
-    "lem-sc-as-sequence",
-    "lemma-weil-pbc-smooth-curve-artin-schreier-proper-degree-zero",
-    "lem-sc-additive-cohomology-finite-scalar-model",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
+    "lem-pbc-artin-schreier-prime-base-change-model"
    ],
    "elementary": false
   },
   {
-   "text": "Apply flat coherent base change (Stacks 02KH) to H¹(O_C). Functoriality of powers identifies the pulled-back Frobenius with its semilinear tensor extension F′ and gives F′(1 tensor v)=1 tensor F(v). Naturality of Artin--Schreier identifies the map on the two kernels. This step constructs and identifies the comparison; it does not prove that the fixed-point map is bijective.",
+   "text": "Apply the arbitrary-coefficient Finsupp pullback comparison in degree one, obtaining one index I and compatible coordinate equivalences a,b.",
    "uses": [
-    "lem-sc-flat-base-change-coherent"
+    "lem-pbc-constant-mod-cohomology-finsupp-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a prime-field basis of Λ/(p). The finite-sum colimit presentation and large-universe cohomology continuity identify H¹ of its constant sheaf with finitely supported families of H¹(C,Z/p). Apply the same presentation after inverse image; naturality yields the displayed coordinate identity. The empty basis handles Λ/(p)=0.",
-   "uses": [
-    "lem-sc-constant-mod-charp-finite-sum-colimit",
-    "lem-pbc-u2-sheafH-large-filtered-colimit"
-   ],
-   "elementary": false
+   "text": "Compose a with Finsupp.mapRange.addEquiv e and b with Finsupp.mapRange.addEquiv e'. Evaluate each coordinate, rewrite by the coefficient naturality equation, and apply prime-coefficient compatibility. This is the complete Lean proof of the original unchanged statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pbc-u2-sheafH-large-filtered-colimit",
-  "lem-sc-additive-cohomology-finite-scalar-model",
-  "lem-sc-as-sequence",
-  "lem-sc-constant-mod-charp-finite-sum-colimit",
-  "lem-sc-flat-base-change-coherent",
-  "lem-weil-pbc-sheafH-ext-derived-comparison",
-  "lemma-weil-pbc-smooth-curve-artin-schreier-proper-degree-zero"
+  "lem-pbc-artin-schreier-prime-base-change-model",
+  "lem-pbc-constant-mod-cohomology-finsupp-pullback"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/0A3P",
-  "place": "proof, expanded with arbitrary coefficient direct sums in the second reading"
+  "place": "F1 stage-3 composition of prime-coefficient model and functorial coefficient direct sums; Tags 02KH, 03Q5, 0739"
  },
  "mathlib_searches": [
   {
@@ -115,9 +104,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T223414-L-1639886",
+  "landing": "20261012T232140-L-1992650",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

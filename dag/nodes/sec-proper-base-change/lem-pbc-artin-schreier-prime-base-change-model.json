@@ -1,0 +1,127 @@
+{
+ "id": "lem-pbc-artin-schreier-prime-base-change-model",
+ "kind": "lemma",
+ "title": "Prime-coefficient Artin--Schreier base-change model",
+ "statement": "Let f:C→Spec(k) be a smooth proper connected curve of dimension at most one [def-sc-curves, def-weil-proper-morphism], with k⊆k' algebraically closed of characteristic p>0, and let C' be its base change. There exist a finite-dimensional k-module V and p-semilinear maps F:V→V and F':k'⊗_k V→k'⊗_k V with F'(1⊗v)=1⊗F(v), and additive equivalences from H¹(C,constant Z/p) [def-sc-constant-sheaves, def-weil-pbc-etale-cohomology] to V^F and from H¹(C',inverse image of constant Z/p) to (k'⊗V)^{F'}. Under these equivalences the canonical cohomology pullback takes v to 1⊗v. No arbitrary coefficient ring or direct-sum indexing type occurs, and no bijectivity of the fixed-point map is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A3P",
+  "place": "proof: Artin--Schreier kernels, coherent finiteness, and flat base change (02KH)"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-proper-morphism",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "In dimension one, the additive scalar model identifies H¹(C,O_C) with a finite-dimensional k-module; in dimension zero a smooth proper connected scheme over the algebraically closed field is Spec k, so H¹ is zero. Sectionwise Frobenius induces a p-semilinear map F, since (cx)^p=c^p x^p.",
+   "uses": [
+    "lem-sc-additive-cohomology-finite-scalar-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Artin--Schreier short exact sequence and proper degree-zero surjectivity identify H¹(C,Z/p) with ker(F-1). Transfer the identification naturally to Sheaf.H using the Ext/derived comparison.",
+   "uses": [
+    "lem-sc-as-sequence",
+    "lemma-weil-pbc-smooth-curve-artin-schreier-proper-degree-zero",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flat coherent base change identifies H¹(C',O_C') with k' tensor V. Transport Frobenius to F'; functoriality of p-th powers gives F'(1 tensor v)=1 tensor F(v). Naturality of the short exact sequence and the comparison of cohomology gives the displayed equality on kernels. This does not use invariance of the fixed-point subgroup.",
+   "uses": [
+    "lem-sc-flat-base-change-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-additive-cohomology-finite-scalar-model",
+  "lem-sc-as-sequence",
+  "lem-sc-flat-base-change-coherent",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lemma-weil-pbc-smooth-curve-artin-schreier-proper-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A3P",
+  "place": "F1 stage-3 decomposition of steps 1--2 of lem-sc-artin-schreier-base-change-model, expanded to record naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology direct sum constant sheaves Frobenius",
+   "results": "HTTP search service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier first etale cohomology Frobenius fixed points flat base change",
+   "results": "Eight hits concern field-theoretic Frobenius or Hilbert 90; none supplies an étale cohomology kernel model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.H|constantZMod|fixedPoints|semilinear.*cohomology",
+   "results": "Mathlib gives Sheaf.H and Finsupp.mapRange.addEquiv, but not this comparison. Library and blueprint searches found no existing declaration for this step.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierBaseChangeModel",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "characteristic-p Artin--Schreier comparison: prime-coefficient kernel and flat base change",
+   "via": [
+    "lem-sc-artin-schreier-base-change-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ArtinSchreierPrimeBaseChangeModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ArtinSchreierPrimeBaseChangeModel.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_constantZMod_one_frobenius_baseChange_model",
+  "statement": "theorem exists_constantZMod_one_frobenius_baseChange_model {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k'] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f] [ConnectedSpace C] [IsProper f] (p : ℕ) [Fact p.Prime] [CharP k p] [CharP k' p] {C' : Scheme.{u}} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) : ∃ (V : ModuleCat.{u + 1} k) (_ : FiniteDimensional k V) (F : V →ₛₗ[frobenius k p] V) (F' : (k' ⊗[k] V) →ₛₗ[frobenius k' p] (k' ⊗[k] V)) (hF' : ∀ v : V, F' (1 ⊗ₜ[k] v) = 1 ⊗ₜ[k] F v) (e : Sheaf.H (C.constantZMod p) 1 ≃+ LinearMap.Frobenius.fixedPoints F) (e' : Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} ι').obj (C.constantZMod p)) 1 ≃+ LinearMap.Frobenius.fixedPoints F'), ∀ x, e' (Etale.cohomologyMap ι' (C.constantZMod p) 1 x) = (⟨1 ⊗ₜ[k] (e x : V), by rw [LinearMap.Frobenius.mem_fixedPoints, hF', LinearMap.Frobenius.mem_fixedPoints.mp (e x).2]⟩ : LinearMap.Frobenius.fixedPoints F')",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T232140-L-1992650",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T232140-L-1992650",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
