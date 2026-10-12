@@ -1,0 +1,113 @@
+{
+ "id": "lem-pc-open-embedding-sheaf-pullback-injectives",
+ "kind": "statement",
+ "title": "Open embedding sheaf pullback preserves injectives",
+ "statement": "Let X and Y be topological spaces and f : X → Y an open embedding. Pullback of abelian sheaves along f preserves injective objects.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/03DJ",
+  "place": "Exact extension by zero is left adjoint to restriction along an open embedding, and restriction preserves injectives."
+ },
+ "proof": [
+  {
+   "text": "Construct extension by zero as the sheafified left Kan extension along the open embedding.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The extension by zero preserves monomorphisms; apply the adjunction criterion that a right adjoint to a mono-preserving functor preserves injectives.",
+   "uses": [
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03DI; https://stacks.math.columbia.edu/tag/03DJ",
+  "place": "Extension by zero adjunction and exactness for open embeddings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of abelian sheaves along an open immersion preserves injective objects",
+   "date": "2026-10-13",
+   "results": "8 hits, all locally-injective morphism APIs; none proves the required functor property.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesInjectiveObjects",
+   "date": "2026-10-13",
+   "results": "12 hits including preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms and equivalence preservation.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms|zariski_open_restriction_injectives",
+   "date": "2026-10-13",
+   "results": "2 Mathlib hits in CategoryTheory/Preadditive/Injective/Preserves.lean. Repository search also found the existing sectionwise-open restriction theorem, read in full; it is a different functor presentation.",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along an open immersion preserves injective abelian sheaves",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.OpenImmersionInverseImageInjectives",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-open-inverse-image-injectives",
+   "place": "Generic topological form of the open immersion argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackInjectives",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/OpenEmbeddingSheafPullbackInjectives.lean",
+  "declaration": "Topology.isOpenEmbedding_sheafPullback_preservesInjectiveObjects",
+  "statement": "theorem Topology.isOpenEmbedding_sheafPullback_preservesInjectiveObjects {X Y : TopCat.{u}} (f : X ⟶ Y) (hf : Topology.IsOpenEmbedding f) :\n    (TopCat.Sheaf.pullback AddCommGrpCat.{u} f).PreservesInjectiveObjects",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T225336-L-1815429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T225336-L-1815429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

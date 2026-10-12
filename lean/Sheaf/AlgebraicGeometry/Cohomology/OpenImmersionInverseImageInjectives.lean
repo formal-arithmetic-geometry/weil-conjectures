@@ -5,8 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import Sheaf.AlgebraicGeometry.ZariskiOpenRestrictionInjectives
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackInjectives
 /-! # Open inverse image preserves injectives
 
 Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
@@ -21,16 +20,14 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 Source: Stacks Project, Tags 03DI and 03DJ.
 (blueprint: lem-pc-open-inverse-image-injectives)
 
-Proof: Identify inverse image along j with sectionwise restriction to its image open.
-Exact extension by zero is left adjoint to this restriction. A right adjoint to a
-functor preserving monomorphisms preserves injective objects: extend the adjoint
-of a morphism across the image of a monomorphism and transpose back. The exact
-extension preserves monomorphisms, giving the assertion. Identification with the
-image open uses the isomorphism of an open immersion onto its image. For an empty
-image the restricted category has only zero objects, which are injective; for
-an isomorphism this is invariance of injectivity under an equivalence.
+Proof: By definition, inverse image is the sheaf pullback along the underlying
+continuous map. The underlying map of an open immersion is an open embedding.
+Apply `Topology.isOpenEmbedding_sheafPullback_preservesInjectiveObjects`.
 -/
 theorem invImage_preservesInjectiveObjects_of_openImmersion {X Y : Scheme.{u}}
-    (j : Y ⟶ X) [IsOpenImmersion j] : (invImage j).PreservesInjectiveObjects  := by sorry
+    (j : Y ⟶ X) [IsOpenImmersion j] : (invImage j).PreservesInjectiveObjects := by
+  change (TopCat.Sheaf.pullback AddCommGrpCat.{u} j.base).PreservesInjectiveObjects
+  exact Topology.isOpenEmbedding_sheafPullback_preservesInjectiveObjects
+    j.base j.isOpenEmbedding
 
 end AlgebraicGeometry.Scheme.Modules
