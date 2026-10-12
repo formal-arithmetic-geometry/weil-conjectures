@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimit
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 
@@ -63,6 +64,12 @@ lemma constSheafHomEquiv_comp {G G' : Sheaf T.smallEtaleTopology (ModuleCat.{u +
   simp only [constSheafHomEquiv, Equiv.trans_apply, Adjunction.homEquiv_naturality_right]
   rfl
 
+
+lemma constSheafHomEquiv_apply {G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (φ : SemiSimplicialObject.constSheaf T.smallEtaleTopology Λ ⟶ G) :
+    constSheafHomEquiv Λ G φ = φ.hom.app _ (Etale.constSheafOne Λ (Etale.finalObject T)) := by
+  simp only [constSheafHomEquiv, Equiv.trans_apply, Adjunction.homEquiv_unit]
+  rfl
 end GlobalSections
 
 section Restrict
@@ -147,6 +154,99 @@ lemma cohomologyPresheafRestrict_map {T : Scheme.{u}} (t : T ⟶ X) {V V' : S.Et
   rw [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀, ← Ext.comp_assoc_of_second_deg_zero,
     Ext.mk₀_comp_mk₀]
   exact congrArg (fun φ ↦ (Ext.mk₀ φ).comp _ (zero_add q)) hσ
+
+
+/-- **Composition**: restricting along `h : T' ⟶ T` the restriction of a section of the
+cohomology presheaf to a `T`-point `b` is its restriction to the `T'`-point `h ≫ b`. -/
+lemma cohomologyPresheafRestrict_comp {T T' : Scheme.{u}} (t : T ⟶ X) (h : T' ⟶ T) (V : S.Etale)
+    (b : T ⟶ V.left) (hb : b ≫ V.hom = t ≫ f)
+    (p : (Etale.higherDirectImagePresheaf Λ f q
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V)) :
+    cohomologyPresheafRestrict Λ f F q (h ≫ t) V (h ≫ b)
+        (by rw [Category.assoc, hb, Category.assoc]) p =
+      cohomologyRestrictOver Λ (h ≫ t) t h rfl F q
+        (cohomologyPresheafRestrict Λ f F q t V b hb p) := by
+  let A := (f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ S).obj V)
+  let τ := Etale.upperStarComp (ModuleCat.{u + 1} Λ) h t (h ≫ t) rfl
+  let c := (Etale.constantSheafCompUpperStarIso Λ h).app (ModuleCat.of Λ Λ)
+  have hι : h ≫ (Etale.finalObject T).hom = (Etale.finalObject T').hom ≫ h :=
+    (Category.comp_id h).trans (Category.id_comp h).symm
+  let ι : Etale.finalObject T' ⟶
+      (MorphismProperty.Over.pullback @Etale ⊤ h).obj (Etale.finalObject T) :=
+    homToPullback h h hι
+  have KE : freeSheafPullbackMap Λ f (h ≫ t) V (h ≫ b)
+      (by rw [Category.assoc, hb, Category.assoc]) ≫ τ.hom.app A =
+      c.inv ≫ (h)^*[ModuleCat.{u + 1} Λ].map (freeSheafPullbackMap Λ f t V b hb) := by
+    apply (constSheafHomEquiv Λ _).injective
+    rw [constSheafHomEquiv_comp, constSheafHomEquiv_comp, constSheafHomEquiv_apply Λ c.inv]
+    have hσ₁ : constSheafHomEquiv Λ _ (freeSheafPullbackMap Λ f (h ≫ t) V (h ≫ b)
+        (by rw [Category.assoc, hb, Category.assoc])) = freeSheafPullbackSection Λ f (h ≫ t) V
+          (h ≫ b) (by rw [Category.assoc, hb, Category.assoc]) :=
+      Equiv.apply_symm_apply _ _
+    have hσ₂ : (freeSheafPullbackMap Λ f t V b hb).hom.app _
+        (Etale.constSheafOne Λ (Etale.finalObject T)) = freeSheafPullbackSection Λ f t V b hb := by
+      rw [← constSheafHomEquiv_apply, freeSheafPullbackMap, Equiv.apply_symm_apply]
+    have e1 : c.inv.hom.app (op (Etale.finalObject T'))
+        (Etale.constSheafOne Λ (Etale.finalObject T')) =
+        ((h)^*[ModuleCat.{u + 1} Λ].obj
+          (SemiSimplicialObject.constSheaf T.smallEtaleTopology Λ)).obj.map ι.op
+          (Etale.pullbackSection Λ h _ (Etale.finalObject T)
+            (Etale.constSheafOne Λ (Etale.finalObject T))) := by
+      rw [← Etale.constSheafOne_map Λ ι, ← Etale.constantSheafCompUpperStarIso_inv_one]
+      exact NatTrans.naturality_apply c.inv.hom ι.op _
+    have R1 : ((h)^*[ModuleCat.{u + 1} Λ].map (freeSheafPullbackMap Λ f t V b hb)).hom.app
+        (op (Etale.finalObject T')) (c.inv.hom.app (op (Etale.finalObject T'))
+          (Etale.constSheafOne Λ (Etale.finalObject T'))) =
+        ((h)^*[ModuleCat.{u + 1} Λ].obj ((t)^*[ModuleCat.{u + 1} Λ].obj A)).obj.map ι.op
+          (Etale.pullbackSection Λ h _ (Etale.finalObject T)
+            (freeSheafPullbackSection Λ f t V b hb)) := by
+      rw [e1]
+      refine (NatTrans.naturality_apply
+        ((h)^*[ModuleCat.{u + 1} Λ].map (freeSheafPullbackMap Λ f t V b hb)).hom ι.op _).trans ?_
+      rw [Etale.pullbackSection_naturality, hσ₂]
+    have e2 : freeSheafPullbackSection Λ f (h ≫ t) V (h ≫ b)
+        (by rw [Category.assoc, hb, Category.assoc]) =
+        ModuleSheaf.restrictAlong t A h (h ≫ t) rfl (V := Etale.finalObject T)
+          (V' := Etale.finalObject T') h hι (freeSheafPullbackSection Λ f t V b hb) := by
+      simp only [freeSheafPullbackSection]
+      rw [ModuleSheaf.restrictAlong_pullSection]
+      exact ModuleSheaf.pullSection_congr _ _ _ (by apply pullback.hom_ext <;> simp) _
+    have R2 : ModuleSheaf.restrictAlong t A h (h ≫ t) rfl (V := Etale.finalObject T)
+        (V' := Etale.finalObject T') h hι (freeSheafPullbackSection Λ f t V b hb) =
+        (τ.inv.app A).hom.app (op (Etale.finalObject T'))
+          (((h)^*[ModuleCat.{u + 1} Λ].obj ((t)^*[ModuleCat.{u + 1} Λ].obj A)).obj.map ι.op
+            (Etale.pullbackSection Λ h _ (Etale.finalObject T)
+              (freeSheafPullbackSection Λ f t V b hb))) :=
+      (NatTrans.naturality_apply (τ.inv.app A).hom ι.op _).symm
+    rw [hσ₁]
+    refine Eq.trans ?_ R1.symm
+    rw [e2, R2]
+    exact ConcreteCategory.congr_hom
+      (congrArg (fun k ↦ k.hom.app (op (Etale.finalObject T'))) (τ.inv_hom_id_app A)) _
+  simp only [cohomologyPresheafRestrict, AddMonoidHom.coe_comp, Function.comp_apply,
+    AddEquiv.coe_toAddMonoidHom, Functor.mapExtPrecomp_apply]
+  suffices key : ∀ x : Ext A F q,
+      (Ext.mk₀ (freeSheafPullbackMap Λ f (h ≫ t) V (h ≫ b)
+        (by rw [Category.assoc, hb, Category.assoc]))).comp
+        (x.mapExactFunctor ((h ≫ t)^*[ModuleCat.{u + 1} Λ])) (zero_add q) =
+      cohomologyRestrictOver Λ (h ≫ t) t h rfl F q ((Ext.mk₀ (freeSheafPullbackMap Λ f t V b hb)).comp
+        (x.mapExactFunctor (t)^*[ModuleCat.{u + 1} Λ]) (zero_add q)) from key _
+  intro x
+  have M := Ext.mapExactFunctor_comp_mk₀_eq (t)^*[ModuleCat.{u + 1} Λ]
+    (h)^*[ModuleCat.{u + 1} Λ] ((h ≫ t)^*[ModuleCat.{u + 1} Λ]) τ q x
+  have M' : x.mapExactFunctor ((h ≫ t)^*[ModuleCat.{u + 1} Λ]) =
+      ((Ext.mk₀ (τ.hom.app A)).comp ((x.mapExactFunctor (t)^*[ModuleCat.{u + 1} Λ]).mapExactFunctor
+        (h)^*[ModuleCat.{u + 1} Λ]) (zero_add q)).comp (Ext.mk₀ (τ.inv.app F)) (add_zero q) := by
+    rw [← M, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀, Iso.hom_inv_id_app,
+      Ext.comp_mk₀_id]
+  have hR (y : Ext (SemiSimplicialObject.constSheaf T.smallEtaleTopology Λ)
+      ((t)^*[ModuleCat.{u + 1} Λ].obj F) q) :
+      cohomologyRestrictOver Λ (h ≫ t) t h rfl F q y =
+        ((Ext.mk₀ c.inv).comp (y.mapExactFunctor (h)^*[ModuleCat.{u + 1} Λ]) (zero_add q)).comp
+          (Ext.mk₀ (τ.inv.app F)) (add_zero q) := rfl
+  rw [hR, M', Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀]
+  rw [← Ext.comp_assoc_of_third_deg_zero]
+  simp only [← Ext.comp_assoc_of_second_deg_zero, Ext.mk₀_comp_mk₀, KE]
 
 end Restrict
 
