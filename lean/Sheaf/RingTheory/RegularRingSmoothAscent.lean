@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Mathlib.RingTheory.Smooth.Flat
 import Sheaf.RingTheory.RegularityRkGoesUp
 import Sheaf.RingTheory.SmoothFibreRegularLocal
 
@@ -47,6 +48,24 @@ Proof:
 theorem isRegularRing_of_smooth
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [Smooth R S] [IsRegularRing R] : IsRegularRing S := by
-  sorry
+  have : IsNoetherianRing S := FiniteType.isNoetherianRing R S
+  have hS (k : ℕ) : Ring.IsSerreR S k := by
+    apply RingHom.regularity_rk_goes_up k
+      (RingHom.flat_algebraMap_iff.mpr (Smooth.flat R S))
+    · intro p hp
+      obtain ⟨hsmooth, hregular⟩ :=
+        smooth_fibre_regular_local (R := R) (S := S) ⟨p, hp⟩
+      have : Smooth p.ResidueField (p.Fiber S) := hsmooth
+      have : IsNoetherianRing (p.Fiber S) :=
+        FiniteType.isNoetherianRing p.ResidueField (p.Fiber S)
+      refine ⟨inferInstance, ?_⟩
+      intro Q hQ _
+      exact hregular ⟨Q, hQ⟩
+    · intro p hp _
+      infer_instance
+  apply isRegularRing_iff.mpr
+  intro q hq
+  exact hS q.height.toNat q (le_of_eq
+    (ENat.natCast_toNat q.height_ne_top_of_isPrime).symm)
 
 end Algebra
