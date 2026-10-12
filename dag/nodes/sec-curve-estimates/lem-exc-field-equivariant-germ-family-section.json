@@ -1,0 +1,134 @@
+{
+ "id": "lem-exc-field-equivariant-germ-family-section",
+ "kind": "statement",
+ "title": "Equivariant families of geometric germs are sections over a field",
+ "statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible embeddings $K\\to K_s\\to\\Omega$, where $K_s$ is a separable closure of $K$ [def-pd-separable-closure] and $\\Omega$ is algebraically closed. Put $S=\\operatorname{Spec}K$, $G=\\operatorname{Gal}(K_s/K)$, and $w=\\max(u+1,v)$. Let $F$ be a sheaf with values in $\\mathrm{Type}\\,w$ on the small etale site of $S$ [def-weil-pbc-etale-sheaf-of-sets], and let $p$ be the geometric point defined by $K\\to\\Omega$, with stalk $p^*F$ and germ maps $\\gamma_{Y,y}:F(Y)\\to p^*F$ [def-weil-pbc-geometric-stalks]. Suppose $\\rho:G\\to(p^*F\\to p^*F)$ satisfies $\\rho(g)(\\gamma_{Y,y}(z))=\\gamma_{Y,y^{\\prime}}(z)$ whenever $\\tau:\\Omega\\simeq_K\\Omega$ extends $g$ and $y^{\\prime}=\\operatorname{Spec}(\\tau)\\circ y$. No action laws for $\\rho$ need be assumed separately. For any etale $K$-scheme $X$ and function $f:p(X)\\to p^*F$ satisfying $f(x^{\\prime})=\\rho(g)(f(x))$ whenever $\\tau$ extends $g$ and $x^{\\prime}=\\operatorname{Spec}(\\tau)\\circ x$, there exists $z\\in F(X)$ such that $\\gamma_{X,x}(z)=f(x)$ for every lift $x\\in p(X)$. The assertion includes empty $X$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JM, direct proof of lemma-global-sections-point; Tag 03QW, section-galois-action-stalks, including nonalgebraic geometric points"
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Let A be the subfield of Omega algebraic over K. A polynomial over A has coefficients algebraic over K, so every root in Omega is again algebraic over K; thus A is algebraically closed. The residue field at each point of an etale K-scheme is finite separable by [lem-weil-pbc-etale-fibre-discrete-separable-points]. Consequently every lift from Spec Omega factors uniquely through Spec A, naturally in the etale object. These lift bijections identify the categories of pointed neighbourhoods, hence their stalk colimits and germ maps [def-weil-pbc-geometric-stalks]. Extend each K-automorphism of Ks first to A, then to Omega by fixing a transcendence basis and extending the resulting automorphism of the rational-function field through its algebraic closure Omega. The canonical germ formula determines rho on every stalk element, since every element has a representative; it therefore agrees with the action of [lem-exc-field-sections-stalk-invariants] under this identification.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-pbc-geometric-stalks",
+    "lem-exc-field-sections-stalk-invariants"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each open singleton component of X is the spectrum of a finite separable field, by [lem-weil-pbc-etale-fibre-discrete-separable-points] applied over the unique base point and the identification of this fibre with X. Choose one geometric lift on a component, identifying its field with a finite intermediate field L of Ks. For g fixing L, every compatible extension tau fixes that lift. Covariance therefore makes the value of f invariant under the subgroup fixing L. The invariant-section bijection [lem-exc-field-sections-stalk-invariants], transported in step 1, gives a section on this component with that germ. Every embedding of its field into Ks extends to a K-automorphism of Ks; extend it to Omega as in step 1. Thus every other lift is obtained by precomposition, and covariance of f and the canonical germ formula imply that all germs of this section have the prescribed values.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-exc-field-sections-stalk-invariants"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open singleton components form an etale covering of X with pairwise empty intersections. The sheaf axiom [def-weil-pbc-etale-sheaf-of-sets] identifies sections over X with the product of sections on these components: there is exactly one section over an empty intersection, so compatibility is automatic. Glue the sections from step 2. Every lift lies in one component, so the glued section has germ f(x) at every lift x. For empty X the empty covering gives its unique section, realizing the unique empty family.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks",
+  "lem-exc-field-sections-stalk-invariants",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JM, direct proof of lemma-global-sections-point; Tag 03QW, section-galois-action-stalks, including nonalgebraic geometric points"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an etale sheaf over a field are equivariant functions from geometric points to the stalk",
+   "results": "AlgebraicGeometry.Scheme.evaluation, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.LocallyRingedSpace.evaluation, ModuleCat.Tilde.toOpen_germ_apply, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, ModuleCat.Tilde.stalkToFiberLinearMap_germ, AlgebraicGeometry.Scheme.stalkClosedPointTo, AlgebraicGeometry.LocallyRingedSpace.Γevaluation",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toPresheafFiber\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.toPresheafFiberNatTrans, CategoryTheory.GrothendieckTopology.Point.toPresheafFiberNatTrans_app, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_naturality, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_jointly_surjective, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_naturality_assoc, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberDesc",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber.*injective|equivariant.*section|section.*equivariant",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant functions from the geometric points of an etale scheme over a field to a sheaf stalk are sections",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisStalkActionFull",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof: reconstruction of morphisms from invariant sections, local existence on each etale object",
+   "via": [
+    "lem-exc-galois-stalk-action-full",
+    "lem-exc-galois-stalk-action-fully-faithful"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FieldEquivariantGermFamilySection",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldEquivariantGermFamilySection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.field_equivariant_germ_family_section",
+  "statement": "theorem field_equivariant_germ_family_section\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))) :\n    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    ∀ (ρ : Gal(Ks/K) → p.sheafFiber.obj F → p.sheafFiber.obj F),\n      (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n        (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n          τ.toRingHom.comp (algebraMap Ks Ω))\n        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)\n        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)\n        (z : F.obj.obj (op Y)),\n        ρ g (p.toPresheafFiber Y y F.obj z) = p.toPresheafFiber Y y' F.obj z) →\n      ∀ (X : (Spec (.of K)).Etale) (f : p.fiber.obj X → p.sheafFiber.obj F),\n        (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n          (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n            τ.toRingHom.comp (algebraMap Ks Ω))\n          (x x' : p.fiber.obj X)\n          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left),\n          f x' = ρ g (f x)) →\n        ∃ z : F.obj.obj (op X), ∀ x : p.fiber.obj X,\n          p.toPresheafFiber X x F.obj z = f x",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-887fd",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-887fd",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T112837-L-766871",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivered modules and the direct importer compiled cleanly, with only permitted sorryAx from the documented helper."
+ }
+}

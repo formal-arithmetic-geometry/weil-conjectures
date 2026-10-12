@@ -17,22 +17,35 @@
  "statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible algebra structures $K\\to K_s\\to\\Omega$, $K_s$ a separable closure of $K$ [def-pd-separable-closure], and $\\Omega$ algebraically closed. Let $J$ be the small etale topology on $\\operatorname{Spec}K$ [def-weil-pbc-etale-sheaves], let $p$ be the point defined by $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$, and let $p^*$ be its set-valued geometric stalk functor [def-weil-pbc-geometric-stalks]. Put $G=\\operatorname{Gal}(K_s/K)$ with the Krull topology and $w=\\max(u+1,v)$. Let $U$ be the forgetful functor from discrete continuous $G$-sets in $\\mathrm{Type}\\,w$ to sets. Let $T:\\operatorname{Sh}(J,\\mathrm{Type}\\,w)\\to\\operatorname{DiscreteContAction}(\\mathrm{Type}\\,w,G)$ be a functor, and $j:T\\circ U\\cong p^*$ a natural isomorphism satisfying the canonical germ formula. The canonical germ formula is: for a sheaf $F$, $g\\in G$, a $K$-automorphism $\\tau$ of $\\Omega$ with $\\tau\\circ i=i\\circ g$ for the embedding $i:K_s\\to\\Omega$, an etale $K$-scheme $X$, lifts $x,x^{\\prime}:\\operatorname{Spec}\\Omega\\to X$ over $K$ with $x^{\\prime}=x\\circ\\operatorname{Spec}\\tau$, and $z\\in F(X)$, $j_F(g\\cdot j_F^{-1}(\\operatorname{germ}_x z))=\\operatorname{germ}_{x^{\\prime}}z$. Then $T$ is full.",
  "proof": [
   {
-   "text": "Let A be the subfield of Omega algebraic over K. It is algebraically closed and every pointed etale neighbourhood factors uniquely through Spec A by finite separability of its residue field. The resulting natural identifications of germs transport the invariant-section bijections to Omega. The canonical germ formula identifies the action transported by j with this action. Over every finite separable intermediate field, an equivariant map restricts to a map of invariant sets, hence to a map of sections. Embedding compatibility makes these maps natural. Every etale scheme is a disjoint union of finite separable components; the sheaf condition extends these maps uniquely to the product of their section sets. These section maps constitute a sheaf morphism. Every germ has a representative on a component, so the stalk map is the specified equivariant map. Naturality of j then identifies its T image with that map, giving fullness. Empty schemes use the empty product.",
+   "text": "Given a morphism a:T(F)->T(F'), transport its underlying function through j to q:p^*F->p^*F'. For every etale object X and section z of F(X), the family x |-> q(germ_x z) satisfies the covariance hypothesis of [lem-exc-field-equivariant-germ-family-section], by the canonical germ formula for F and F' and equivariance of a. Apply that lemma to obtain a section of F'(X) with precisely these germs.",
    "uses": [
-    "lem-exc-field-sections-stalk-invariants",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+    "lem-exc-field-equivariant-germ-family-section"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove directly that sections over an etale K-scheme are determined by their germs at lifts to Omega. For each underlying point, Mathlib Scheme.exists_fac_of_etale_of_isSepClosed supplies such a lift. Equal germs agree on a pointed refinement by Point.toPresheafFiber_eq_iff'. Thus the section equalizer sieve covers every underlying point. The criterion Scheme.ofArrows_mem_smallEtaleTopology_iff makes it covering, and Sheaf.isSeparated gives equality, including for the empty scheme. This is the private proved helper field_section_germ_ext, adapting the existing faithfulness argument.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The local section from step 1 is unique by step 2; explicitly establish ExistsUnique before choosing it. The chosen sections therefore carry no arbitrary unproved data. Naturality of their germs under restriction is Point.toPresheafFiber_w_apply. Both possible section restrictions have the same germs, so step 2 proves that the section functions form a natural transformation, hence a sheaf morphism phi.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Point.presheafFiber_hom_ext and Point.toPresheafFiber_naturality_apply show that the stalk map of phi equals q: the equality holds on every section germ by construction. Naturality of j and its inverse identities then give equality between the underlying functions of T(phi) and a. The forgetful functor through the two full subcategory inclusions and Action.forget is faithful, so T(phi)=a. This provides a preimage of every morphism and proves T.Full.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-exc-field-sections-stalk-invariants",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+  "lem-exc-field-equivariant-germ-family-section"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03QT and 04JM, theorem-equivalence-sheaves-point and direct proof of lemma-global-sections-point"
+  "place": "Tags 03QT and 04JM: F2 local reconstruction followed by proved section-germ separation, naturality, and stalk comparison"
  },
  "mathlib_searches": [
   {
@@ -106,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "X-887fd",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T095857-L-314664",
+  "landing": "20261012T112837-L-766871",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivered modules and the direct importer compiled cleanly, with only permitted sorryAx from the documented helper."
  }
 }
