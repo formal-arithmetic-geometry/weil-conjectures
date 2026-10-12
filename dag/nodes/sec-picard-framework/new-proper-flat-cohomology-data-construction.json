@@ -11,16 +11,32 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The construction is the finite affine alternating Cech argument described in the source.",
+   "text": "Use Mathlib AlgebraicGeometry.exists_isAffineOpen_mem_and_subset at the top open to choose an affine open neighbourhood U of t. The formal conclusion imposes no comparison with cohomology, so choose the actual zero cochain complex C=HomologicalComplex.zero and d=0.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Evaluation of the zero complex is a zero object in every degree, by Functor.map_isZero and HomologicalComplex.isZero_zero. Thus the defining IsStrictlyGE and IsStrictlyLE conditions hold with bound zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each pair of affine opens in the definition of IsFlatOver, evaluation of a zero sheaf has zero module of sections. ModuleCat.isZero_iff_subsingleton makes its underlying type subsingleton. Typeclass inference then gives a free module and hence Module.Flat for the specified restricted scalar action.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The free sheaf on PEmpty is zero: use injectivity of freeHomEquiv on the identity and zero maps, since functions on PEmpty are equal. It is quasi-coherent by the proved SheafOfModules.isQuasicoherent_free. Therefore the quasi-coherent object property ContainsZero, and prop_of_isZero gives quasi-coherence of all terms of C.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project",
-  "place": "Tags 0A1D and 01XB"
+  "group": "D2",
+  "date": "2026-10-13",
+  "description": "Direct proof of the unchanged termwise existence statement from affine neighbourhoods and the zero complex. This does not construct a cohomology model; the missing comparison hypothesis in the subsequent base-change statement is reported."
  },
  "mathlib_searches": [
   {
@@ -89,11 +105,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "X-c6da8",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T184342-L-4019598",
+  "landing": "20261012T202233-L-702385",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature with its node and zero-complex proof; delivery and sole direct importer compile cleanly; axioms are exactly propext, Classical.choice, Quot.sound."
  }
 }
