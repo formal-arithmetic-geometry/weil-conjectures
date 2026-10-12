@@ -16,22 +16,38 @@
  ],
  "proof": [
   {
-   "text": "Use `derivedCohomologyPullback_eq_derivedUnit` to replace Γ of the derived\nadjunction unit followed by Leray by the derived pullback of sections. Its defining\nright-derived descent formula, precomposed with Γ_X's unit, is the localized section\nunit, followed by Γ_X' on the homotopy category and the inverse g'^* factorization.\nMove that inverse across the target germ by naturality. Expand the target derived\ngerm: the Leray unit compatibility and the right-derived natural-transformation unit\ncompatibility turn Γ_X' followed by its germ into the localized inverse terminal\nsection identification and underived germ. The exact stalk comparison contributes the\ninverse stalk factorization followed by the stalk image of the f'_* unit.\nCombine localized maps using functoriality; the underived map is precisely b and the\nremaining three comparisons, in their order, are c.",
+   "text": "Work with abstract additive functors L, R, H, H′, F′, T, S, an exact L left adjoint to R, an exact S, and the two underived Leray identifications e:R⋙H≅H′ and e′:F′⋙T≅H′. Use derivedPlus_unit_app_fac to expand the derived adjunction unit as the localized homotopy adjunction unit, the R derived unit and R of the inverse L localization factor. Move this last factor through the R/H Leray comparison by naturality. Naturality of H's derived unit and rightDerivedFunctorPlusCompIso'_fac replace the preceding composite by H of the homotopy adjunction unit, Qh of e.hom, and H′'s derived unit. Move the inverse L factor through the target germ by naturality.",
    "uses": [
-    "def-weil-pbc-derived-global-germ",
-    "lem-weil-pbc-cohomology-pullback-derived-unit"
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-global-germ"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the target germ using its definition. Cancel the target Leray comparison against its inverse and apply rightDerivedFunctorPlusCompIso'_fac; this replaces H′'s unit followed by inverse Leray with Qh of e′.inv followed by the composite F′/T derived unit. Move the F′ derived unit through the composite of the derived germ and exact-S comparison by naturality. Apply rightDerivedFunctorPlusNatTrans_app and rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac. The resulting tail is exactly the three maps defining c.",
+   "uses": [
+    "def-weil-pbc-derived-global-germ"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the four Qh maps by functoriality. Through the faithful inclusion K⁺(A)→K(A), present M as the quotient of a complex K and apply the homotopy adjunction unit formula on quotient objects. All four maps become images of complex maps. Their degree-n components are H(η_Kn), e.hom at L(Kn), e′.inv at L(Kn), and the underived germ at F′(L(Kn)); expansion of b gives exactly these maps, with unitor and associator identity factors. Thus their composite is mapHomotopyCategoryPlus(b).app M. Instantiate the fully proved private abstract lemma with the small-etale functors; the canonical derivedGlobalGerm is definitionally the abstract target germ.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-global-germ"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-derived-global-germ",
-  "lem-weil-pbc-cohomology-pullback-derived-unit"
+  "prop-weil-pbc-derived-inverse-image-adjunction"
  ],
  "proof_origin": {
-  "by": "T3 stage-3 worker, repaired by independent second reader",
-  "document": "Stacks Project and the library derived-functor unit formulas",
-  "place": "Categorical expansion of the canonical comparisons; full proof in the Lean docstring"
+  "by": "E1 stage-3 worker",
+  "date": "2026-10-12",
+  "document": "Stacks Project and proved library bounded below derived comparison formulas",
+  "place": "Tags 01EZ, 01F8, 08J6; direct categorical expansion using derivedPlus_unit_app_fac, rightDerivedFunctorPlusCompIso'_fac, rightDerivedFunctorPlusNatTrans_app and exact stalk unit compatibility."
  },
  "mathlib_searches": [
   {
@@ -105,9 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T132339-L-1432371",
-  "kind": "interface"
+  "landing": "20261012T160825-L-2610193",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
