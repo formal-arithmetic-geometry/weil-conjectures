@@ -8422,3 +8422,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:50 L: returned deliver/J1/Sheaf.AlgebraicGeometry.EtaleCoproductEmbeddingPoints (reviewer RETURN: (reviewer X-c188e, head c188e79a7) F (review completeness), brief point 2: coord/changes/EtaleCoproductEmbeddingPoints-i)
 - 15:56 L: returned deliver/E3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-5eb1a, head 5eb1a0f72) E3 (incorrect mathematical explanation): In lean/Sheaf/AlgebraicGeometry/GluedEffecti)
 - 15:59 L: returned deliver/F3/Sheaf.AlgebraicGeometry.ComplexTermCohomologyColimit (reviewer RETURN: (reviewer X-63f1e, head 63f1e05d9) D2: ComplexTermCohomologyDescIso.lean:80 leaves the entire original obligation in a n)
+- 16:01 L: returned deliver/A2/Sheaf.Algebra.Homology.ZigzagBoundaryReduction (reviewer RETURN: (the landing tools, head 245511a29) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
