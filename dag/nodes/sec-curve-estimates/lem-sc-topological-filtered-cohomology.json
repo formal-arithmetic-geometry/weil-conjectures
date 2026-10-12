@@ -24,96 +24,38 @@
  ],
  "proof": [
   {
-   "text": "Regard the system as a diagram over the directed set I of the statement. Its colimit F=colim_i F_i in the category of abelian sheaves on X exists by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact] (open site of X). Abelian sheaves on X are the sheaves of modules over the constant sheaf of rings Z on X (same objects and morphisms), so by [lem-weil-pbc-module-directed-colimit-underlying-sets] (ringed space (X, Z)) the underlying sheaf of sets of F, with the underlying maps of the c_i, is a colimit of the underlying sheaves of sets of the F_i in sheaves of sets on X. Hypothesis (2) of [lem-weil-pbc-sheaves-directed-colimit-sections] holds for every quasi-compact open V (Topology 0069(3), elementary): given an open covering of V, each point of V lies in a quasi-compact open contained in some member (quasi-compact opens form a basis); finitely many of these cover V since V is quasi-compact, they refine the given covering, and their pairwise intersections are quasi-compact by hypothesis. Hence [lem-weil-pbc-sheaves-directed-colimit-sections] (1),(2), applied to the underlying system of sheaves of sets, show that for every quasi-compact open V the canonical map colim_i F_i(V) \\to F(V) is bijective; it is a homomorphism, so an isomorphism of abelian groups (a directed colimit of abelian groups has as underlying set the directed colimit of the underlying sets). The same applies to any system of abelian sheaves over I, in particular to (I_i) and (Q_i) of Step 2.",
+   "text": "The compact-open abelian section theorem gives preservation of I-colimits by Gamma(U,-). Its proof works directly with abelian stalk colimits and finite gluing; no equivalence with constant-Z-module sheaves is used.",
    "uses": [
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-module-directed-colimit-underlying-sets",
-    "lem-weil-pbc-sheaves-directed-colimit-sections"
+    "lem-sc-topological-abelian-sections-filtered-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Lemma 009F, parts (2) and (4); topology.tex Lemma 0069(3)"
-   }
+   "elementary": false
   },
   {
-   "text": "Using functorial injective embeddings in the Grothendieck abelian category of sheaves on X (the Mathlib sheaf Grothendieck instance), choose a natural monomorphism F_i \\to I_i into a filtered diagram of injective sheaves, and let Q_i be the cokernel. The transition maps induce a diagram of short exact sequences 0 \\to F_i \\to I_i \\to Q_i \\to 0.",
+   "text": "Induct on n to prove R^n Gamma(U,-) preserves I-colimits. At zero, use Mathlib rightDerivedZeroIsoSelf. For the successor apply the existing general right-derived filtered-colimit successor theorem. Its injective-colimit acyclicity premise is supplied by the compact-open acyclicity theorem.",
    "uses": [
-    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-    "def-sc-topological-abelian-cohomology"
+    "lem-weil-pbc-right-derived-filtered-colimit-successor",
+    "lem-sc-directed-injective-derived-sections-acyclic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01FF proof, lines 3222-3240"
-   }
+   "elementary": false
   },
   {
-   "text": "The open-site category of abelian sheaves has colimits and exact filtered colimits. Applying this directly to the short exact sequences in Step 2 gives 0 \\to F \\to I \\to Q \\to 0, where F=colim_i F_i, I=colim_i I_i, and Q=colim_i Q_i.",
+   "text": "Use the natural isomorphism between evaluated cohomologyPresheafFunctor and derived sections. Transport the colimit universal property along the isomorphism using IsColimit.mapCoconeEquiv, then nonempty_isColimit_iff_isIso_desc gives exactly the canonical map in the unchanged statement.",
    "uses": [
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+    "lem-sc-site-cohomology-right-derived-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01FF proof, paragraph beginning 'We claim that the sequence'"
-   }
-  },
-  {
-   "text": "For every finite covering of a quasi-compact open by quasi-compact opens, each Cech term of I is a finite product of sections. Step 1 identifies these terms with filtered colimits of the corresponding terms for I_i; exactness of filtered colimits therefore carries the exact Cech complexes of the injectives I_i to an exact Cech complex for I. The filtered-injective Cech-acyclicity statement and the general Cech-to-derived-cohomology criterion then give H^q(V,I)=0 for q>0.",
-   "uses": [
-    "lem-sc-topological-filtered-injective-cech-acyclic",
-    "lem-weil-pbc-site-cech-vanishing-criterion",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01FF proof, lines 3255-3303; Lemma 01EW"
-   }
-  },
-  {
-   "text": "Induct on q. Degree zero is Step 1 together with H^0(V,G)=G(V). For n=q+1>1, the long exact sequences and the vanishing of positive cohomology of I_i and I identify H^n(V,F_i) and H^n(V,F) with the kernels/cokernels in the natural connecting-map segments H^{n-1}(V,Q_i) \\to H^n(V,F_i) \\to H^n(V,I_i) and H^{n-1}(V,Q) \\to H^n(V,F) \\to H^n(V,I). Given a class in H^n(V,F), exactness first supplies a preimage in H^{n-1}(V,Q); the induction isomorphism for Q lifts that preimage to some stage i, and naturality of the connecting maps gives a class in H^n(V,F_i) mapping to the original class. If a class from H^n(V,F_i) maps to zero, its image in H^{n-1}(V,Q_i) maps to zero in H^{n-1}(V,Q); the induction injectivity makes it zero at a later stage, and exactness then makes the original class zero at that later stage. For n=1, use the exact segments H^0(V,I_i) \\to H^0(V,Q_i) \\to H^1(V,F_i) \\to 0 and the corresponding segment for F; Step 1 identifies the first terms with the filtered colimits of sections, and exactness of filtered colimits of abelian groups gives the same surjectivity and eventual-zero argument. Here H^q(V,-) is R^q Gamma(V,-) on the open-site abelian-sheaf category as specified by [def-weil-pbc-sites-and-cohomology].",
-   "uses": [
-    "def-sc-topological-abelian-cohomology",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-weil-pbc-derived-functor-injective-vanishing",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01FF proof, paragraph beginning 'The result is true for q = 0' and the displayed diagram"
-   }
-  },
-  {
-   "text": "Thus, for every q and every quasi-compact open U, every class in H^q(U,F) comes from some H^q(U,F_i), and a class from H^q(U,F_i) that maps to zero becomes zero at a later index. These are exactly surjectivity and injectivity of the canonical map colim_i H^q(U,F_i) \\to H^q(U,F).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01FF statement and conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheaves-directed-colimit-sections",
-  "lem-weil-pbc-module-directed-colimit-underlying-sets",
-  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
-  "def-sc-topological-abelian-cohomology",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-sc-topological-filtered-injective-cech-acyclic",
-  "lem-weil-pbc-site-cech-vanishing-criterion",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-weil-pbc-derived-functor-injective-vanishing"
+  "lem-sc-directed-injective-derived-sections-acyclic",
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-sc-topological-abelian-sections-filtered-colimit",
+  "lem-weil-pbc-right-derived-filtered-colimit-successor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 01FF and its proof, with Lemma 01EW"
+  "place": "Lemma 01FF; degree-zero stalk/gluing proof and generic derived-functor successor induction"
  },
  "mathlib_searches": [
   {
@@ -222,5 +164,15 @@
   "group": "V1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

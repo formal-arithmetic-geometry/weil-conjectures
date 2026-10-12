@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-directed-injective-derived-sections-acyclic",
+ "kind": "statement",
+ "title": "Directed colimits of injectives are derived-section acyclic on compact opens",
+ "statement": "Let X have a basis of compact opens and compact pairwise intersections of compact opens. Let I be a nonempty directed preorder and J a diagram of injective abelian sheaves on the open site of X. For every compact open U and every n >= 0, R^{n+1} Gamma(U,-) applied to colim J is zero. Derived sections are as in [def-weil-pbc-sites-and-cohomology]. The diagram is over I itself, not Discrete I.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01FF, final acyclicity claim and its proof using Lemma 01EW"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Take B to be the compact opens and Cov the finite coverings by compact opens. Every cover of a member of B has such a refinement by the basis and compactness. Every nonempty finite intersection of the covering opens is compact by induction using the intersection hypothesis. Empty covers occur only over the empty open.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Sections on each intersection commute with the directed colimit. Each Cech term is a finite product of these sections. Finite products of abelian groups commute with filtered colimits, so the Cech complex of colim J is the termwise colimit of the Cech complexes of J_i.",
+   "uses": [
+    "lem-sc-topological-abelian-sections-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each injective J_i has zero positive Cech cohomology. Exact filtered colimits of abelian groups commute with homology, so colim J is Cech-acyclic for all covers in Cov. Use the site injective Cech theorem only with the coefficient and Ext universes equal.",
+   "uses": [
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The site Cech vanishing criterion applied to B and Cov gives zero positive object cohomology over every compact open. The natural comparison of object cohomology with derived sections gives the stated vanishing. The empty open has zero sections; the empty Cech products are zero groups.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "lem-sc-site-cohomology-right-derived-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-site-cohomology-right-derived-sections",
+  "lem-sc-topological-abelian-sections-filtered-colimit",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-site-injective-cech-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01FF, final acyclicity claim and its proof using Lemma 01EW; proof elaborated by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of injective sheaves is acyclic for sections on quasi compact open subsets",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of injective sheaves is acyclic for sections on quasi compact open subsets",
+   "results": "Sheaf.instIsGrothendieckAbelian, Sheaf.ab5ofSize and CochainComplex.isKInjective_of_injective; none states the compact-open acyclicity",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*colimit|colimit.*injective",
+   "results": "No result for derived sections of filtered colimits of injective sheaves",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalFilteredCohomology",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the cohomology-colimit reduction used in the proof of Lemma 02UX",
+   "via": [
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-topological-filtered-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic",
+  "file": "lean/Sheaf/Topology/DirectedInjectiveDerivedSectionsAcyclic.lean",
+  "declaration": "TopCat.directedInjective_isZero_rightDerived_sections",
+  "statement": "theorem directedInjective_isZero_rightDerived_sections\n    (X : Type u) [TopologicalSpace X]\n    (hbas : ∀ (V : Set X), IsOpen V → ∀ x ∈ V, ∃ W : Set X, IsOpen W ∧\n      IsCompact W ∧ x ∈ W ∧ W ⊆ V)\n    (hint : ∀ (V W : Set X), IsOpen V → IsOpen W → IsCompact V → IsCompact W →\n      IsCompact (V ∩ W))\n    (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (J : I ⥤ CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})\n    (hJ : ∀ i : I, Injective (J.obj i))\n    (U : Opens X) (hU : IsCompact (U : Set X)) (n : ℕ) :\n    IsZero (((sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙\n      (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived\n        (n + 1)).obj (colimit J))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

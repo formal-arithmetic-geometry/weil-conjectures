@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-topological-abelian-sections-filtered-colimit",
+ "kind": "statement",
+ "title": "Sections of abelian sheaves preserve directed colimits on compact opens",
+ "statement": "Let X be a topological space whose compact open subsets form a basis and whose compact opens are closed under binary intersections. Let I be a nonempty directed preorder. For every compact open U, the section functor Gamma(U,-) from abelian sheaves on the open site of X to abelian groups preserves colimits of shape I. Sections and the open site are as in [def-weil-pbc-sites-and-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 009F(4); cohomology.tex Lemma 01FF, degree zero"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use preservation of colimits by the abelian sheaf stalk functor, Mathlib Concrete.isColimit_rep_eq_iff_exists, and the germ equality criterion. Equality of two colimit sections is locally equality at a common stage.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compactness replaces these local equalities by finitely many neighborhoods. Directedness gives one common stage for the neighborhoods, and sheaf separation gives equality over the whole compact open. This proves injectivity of the canonical section comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every colimit section locally lifts to a stage, using Concrete.isColimit_exists_rep on the stalk colimit and the germ representation theorem. Refine the local covering to a finite covering by compact opens, using the compact-open basis and compactness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose one upper stage for finitely many lifts. Their images agree on each compact pairwise overlap, so the preceding eventual equality gives another common stage where all overlaps agree. Glue there, and use separation to identify its image with the original section. The canonical comparison is bijective, hence an isomorphism in AddCommGrpCat. Apply preservesColimit_of_isIso_post and quantify over diagrams.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Lemma 009F(4); cohomology.tex Lemma 01FF, degree zero; proof elaborated by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sections of abelian sheaves commute with directed colimits on compact open subsets",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of abelian sheaves commute with directed colimits on compact open subsets",
+   "results": "Condensed.isColimitLocallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheaf, and related condensed locally-constant presheaf colimit declarations; none treats sections of arbitrary abelian sheaves on compact opens.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*sections|sections.*colimit (msearch grep over Mathlib)",
+   "results": "Mathlib/Topology/Sheaves/Stalks.lean:518 (a stalk separation comment); Mathlib/CategoryTheory/Sites/LocalSite.lean:146 (global sections on locally small local sites); no compact-open directed-colimit theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalFilteredCohomology",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the cohomology-colimit reduction used in the proof of Lemma 02UX",
+   "via": [
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-topological-filtered-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.AbelianSectionsFilteredColimit",
+  "file": "lean/Sheaf/Topology/AbelianSectionsFilteredColimit.lean",
+  "declaration": "TopCat.abelianSections_preservesDirectedColimits",
+  "statement": "theorem abelianSections_preservesDirectedColimits\n    (X : Type u) [TopologicalSpace X]\n    (hbas : ∀ (V : Set X), IsOpen V → ∀ x ∈ V, ∃ W : Set X, IsOpen W ∧\n      IsCompact W ∧ x ∈ W ∧ W ⊆ V)\n    (hint : ∀ (V W : Set X), IsOpen V → IsOpen W → IsCompact V → IsCompact W →\n      IsCompact (V ∩ W))\n    (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (U : Opens X) (hU : IsCompact (U : Set X)) :\n    PreservesColimitsOfShape I\n      ((sheafSections (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (op U))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "id": "lem-sc-site-cohomology-right-derived-sections",
+ "kind": "statement",
+ "title": "Object cohomology is naturally the right derived section functor",
+ "statement": "Let C be a small category, J a Grothendieck topology with sheafification for abelian groups, U an object of C, and q a natural number. Assume HasExt for the category of abelian sheaves, with all category and coefficient universes equal. The functor F -> H^q(U,F), obtained by evaluating the cohomology presheaf functor of [def-weil-pbc-sites-and-cohomology] at U, is naturally isomorphic to the q-th right derived functor of F -> F(U).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 01FT, definition of cohomology and cohomology over an object"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Sheafification adjunction, the free-abelian/forgetful adjunction, and additive Yoneda give a natural additive isomorphism from Hom out of the sheafified free abelian representable at U to evaluation of sections at U.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this isomorphism degreewise to an injective resolution of F. Ext from the representing sheaf and the right derived sections are the homology of the two isomorphic complexes. Mathlib InjectiveResolution.extAddEquivCohomologyClass supplies the Ext computation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Comparison maps lifting sheaf morphisms commute with the degreewise isomorphisms. Independence from the comparison lift follows because homotopic maps have equal maps on cohomology. This produces a natural isomorphism, with no compactness assumption on U.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 01FT, definition of cohomology and cohomology over an object; proof elaborated by E2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology Ext of free abelian representable naturally isomorphic right derived sections",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology Ext of free abelian representable naturally isomorphic right derived sections",
+   "results": "InjectiveResolution.extAddEquivCohomologyClass; Sheaf.H and H' definitions only",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheafFunctor|rightDerived Mathlib/CategoryTheory/Sites/SheafCohomology",
+   "results": "Basic.lean defines cohomologyPresheafFunctor using Ext; no natural derived-section comparison",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.TopologicalFilteredCohomology",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the cohomology-colimit reduction used in the proof of Lemma 02UX",
+   "via": [
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-topological-filtered-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CohomologyRightDerivedSections.lean",
+  "declaration": "CategoryTheory.Sheaf.nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived",
+  "statement": "theorem nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{u}]\n    [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]\n    (U : C) (q : ℕ) :\n    Nonempty ((cohomologyPresheafFunctor J q ⋙\n      (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)) ≅\n      (sheafToPresheaf J AddCommGrpCat.{u} ⋙\n        (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

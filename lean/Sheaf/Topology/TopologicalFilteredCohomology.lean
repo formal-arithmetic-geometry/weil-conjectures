@@ -4,11 +4,10 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Topology.Compactness.Compact
-import Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.Topology.FilteredInjectiveCechAcyclic
-import Sheaf.Topology.SheavesDirectedColimitSections
+import Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
+import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
+import Sheaf.Topology.AbelianSectionsFilteredColimit
+import Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic
 
 @[expose] public section
 
@@ -29,35 +28,17 @@ lemma-quasi-separated-cohomology-colimit (abelian sheaves: constant ring sheaf �
 (blueprint: lem-sc-topological-filtered-cohomology).
 
 Proof:
-1. The colimit exists by lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact.
-   View abelian sheaves as modules over the constant ring sheaf ℤ. By
-   lem-weil-pbc-module-directed-colimit-underlying-sets their underlying set sheaves
-   form a colimit. Every covering of a quasi-compact open admits a finite refinement
-   by quasi-compact opens, with quasi-compact intersections. Apply
-   lem-weil-pbc-sheaves-directed-colimit-sections to identify sections of the colimit
-   with the colimit of sections, for every such open and every diagram.
-2. By lem-weil-pbc-grothendieck-functorial-injective-embedding embed the diagram
-   naturally into a diagram of injective sheaves Iᵢ. Let Qᵢ be the cokernels, giving
-   a diagram of short exact sequences 0 → Fᵢ → Iᵢ → Qᵢ → 0.
-3. Exact filtered colimits (lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact)
-   give the short exact sequence 0 → colim Fᵢ → colim Iᵢ → colim Qᵢ → 0.
-4. For finite covers by quasi-compact opens, Step 1 identifies the Cech terms of
-   colim Iᵢ with colimits of the corresponding finite products of sections of Iᵢ.
-   Exact filtered colimits of abelian groups preserve the acyclic Cech complexes.
-   Apply lem-sc-topological-filtered-injective-cech-acyclic and
-   lem-weil-pbc-site-cech-vanishing-criterion: positive cohomology of colim Iᵢ vanishes
-   on every quasi-compact open.
-5. Induct on q simultaneously for all quasi-compact opens. Degree zero is Step 1
-   and H⁰(U,G) = G(U) (def-sc-topological-abelian-cohomology and
-   def-weil-pbc-sites-and-cohomology). The natural long exact sequences from
-   lem-weil-pbc-right-derived-universal-delta-functor, injective vanishing from
-   lem-weil-pbc-derived-functor-injective-vanishing, and Step 4 identify the next
-   degree as the cokernel of the preceding Iᵢ → Qᵢ cohomology maps. Exactness from
-   lem-weil-pbc-filtered-colimit-abelian-groups-exact and the induction isomorphisms
-   give the next comparison isomorphism, including degree one via sections.
-6. Equivalently, each class comes from a stage and a stage class mapping to zero
-   becomes zero at a later stage. These give surjectivity and injectivity of the
-   canonical comparison map displayed below. -/
+1. `abelianSections_preservesDirectedColimits` proves degree-zero preservation by
+   stalk colimits, finite compact refinements, eventual equality, and sheaf gluing.
+2. Induct on the derived degree. At zero use `rightDerivedZeroIsoSelf`. At the
+   successor use `preservesColimitsOfShape_rightDerived_succ`, which packages
+   functorial injective embeddings, exact filtered colimits, and the natural long
+   exact sequences. Its acyclicity premise is precisely
+   `directedInjective_isZero_rightDerived_sections` on the compact open in question.
+3. `nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived` identifies the evaluated
+   Ext cohomology functor naturally with derived sections. Transport the colimit
+   universal property along this isomorphism and identify the resulting universal
+   comparison with the canonical map in the statement. -/
 theorem topological_filtered_cohomology
     (X : Type u) [TopologicalSpace X]
     (hbas : ∀ (U : Set X), IsOpen U → ∀ x ∈ U, ∃ V : Set X, IsOpen V ∧
@@ -78,6 +59,24 @@ theorem topological_filtered_cohomology
         (Opens.grothendieckTopology X) q ⋙
         (evaluation (Opens X)ᵒᵖ (AddCommGrpCat.{u})).obj (op U)).mapCocone
         (colimit.cocone F))) := by
-  sorry
+  let Γ := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
+    (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op U)
+  have hΓ : PreservesColimitsOfShape I Γ :=
+    abelianSections_preservesDirectedColimits X hbas hint I U hU
+  have hderived (n : ℕ) : PreservesColimitsOfShape I (Γ.rightDerived n) := by
+    induction n with
+    | zero =>
+        exact preservesColimitsOfShape_of_natIso Γ.rightDerivedZeroIsoSelf.symm
+    | succ n hn =>
+        let := hn
+        apply Γ.preservesColimitsOfShape_rightDerived_succ I n
+        intro J hJ
+        exact directedInjective_isZero_rightDerived_sections X hbas hint I J hJ U hU n
+  let := hderived q
+  obtain ⟨e⟩ := Sheaf.nonempty_cohomologyPresheafFunctor_eval_iso_rightDerived
+    (Opens.grothendieckTopology X) U q
+  have hc := IsColimit.mapCoconeEquiv e.symm
+    (isColimitOfPreserves (Γ.rightDerived q) (colimit.isColimit F))
+  exact (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.mp ⟨hc⟩
 
 end TopCat
