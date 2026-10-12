@@ -725,16 +725,6 @@ theorem connectedSpace_subgroupScheme (h : IsConnected I) :
   rw [Set.image_univ, hr]
   exact isPreconnected_connectedComponentIn
 
-/-- The reduced centre `Z(G)` of a reduced `G = V(I)` over an algebraically closed field is
-central scheme-theoretically: its points commute with all points of `G`.
-
-Proof sketch (not formalised): the condition that a point `z` of `Z(G)` commutes with a point `g`
-of `G` is cut out by equations on `Z(G) × G`; they vanish on the rational points, which are dense
-in the reduced scheme `Z(G) × G`, hence everywhere. (blueprint: `sk-p-comparison`) -/
-theorem central_subgroupSchemeHom_le_center [IsAlgClosed k] (hI : I.IsRadical)
-    {X : Over (Spec (.of k))} (a : X ⟶ subgroupScheme (center I)) (b : X ⟶ subgroupScheme I) :
-    (a ≫ subgroupSchemeHom (le_center I)) * b = b * (a ≫ subgroupSchemeHom (le_center I)) := by
-  sorry
 
 end Geometry
 
