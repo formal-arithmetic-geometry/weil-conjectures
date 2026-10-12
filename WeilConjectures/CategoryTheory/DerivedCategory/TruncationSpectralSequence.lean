@@ -29,6 +29,10 @@ injectives), the `E`-terms are `E₂^{p,q} ≅ R^p v (H^q(K))`
 `lem-sp-shift-identification`), and the spectral sequence
 `E₂^{p,q} = R^p v (H^q(K)) ⇒ H^{p+q}(R⁺v K)` converges (`thm-sp-truncation-e2`,
 `DerivedCategory.Plus.rightDerivedTruncationCouple_e₂`).
+
+The exactness of the truncation couple comes from the long exact cohomology sequence of a
+distinguished triangle in the derived category (blueprint `lem-sf-derived-homology-long-exact`,
+Mathlib's `DerivedCategory.HomologySequence.exact₂`, `exact₁`, `exact₃`).
 -/
 
 @[expose] public section

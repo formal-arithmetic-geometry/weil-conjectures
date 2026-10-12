@@ -108,16 +108,16 @@ the derived tensor products `Q X ⊗ᴸ Q Pₙ`, as an isomorphism of functors o
 noncomputable def reductionTowerIsoAux (P : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
     TensorCommShift₂.LKFlat A ⋙ reductionTower P ⋙ towerFunctor A ≅
       TensorCommShift₂.LKFlat A ⋙ reductionSystem P :=
-  isoWhiskerRight (Localization.Lifting.iso (TensorCommShift₂.LKFlat A) (kFlatQuasiIso A)
+  Functor.isoWhiskerRight (Localization.Lifting.iso (TensorCommShift₂.LKFlat A) (kFlatQuasiIso A)
       (tensorTowerFunctorKFlat P) (reductionTower P)) (towerFunctor A) ≪≫
-    isoWhiskerLeft (CochainComplex.ιKFlat A ⋙ tensorTowerFunctor P) (towerFunctorQIso A) ≪≫
-    isoWhiskerLeft (CochainComplex.ιKFlat A ⋙ curriedTensor (CochainComplex A ℤ) ⋙
+    Functor.isoWhiskerLeft (CochainComplex.ιKFlat A ⋙ tensorTowerFunctor P) (towerFunctorQIso A) ≪≫
+    Functor.isoWhiskerLeft (CochainComplex.ιKFlat A ⋙ curriedTensor (CochainComplex A ℤ) ⋙
         (Functor.whiskeringLeft _ _ _).obj P)
       ((Functor.whiskeringRight _ _ _).mapIso (quotientCompQhIso A).symm) ≪≫
-    isoWhiskerRight (asIso (TensorCommShift₂.liftingIsoHom A)).symm
+    Functor.isoWhiskerRight (asIso (TensorCommShift₂.liftingIsoHom A)).symm
       ((Functor.whiskeringLeft _ _ _).obj P) ≪≫
-    isoWhiskerLeft (TensorCommShift₂.LKFlat A ⋙ curriedTensor (DerivedCategory A))
-      ((Functor.whiskeringLeft _ _ _).mapIso (isoWhiskerLeft P (quotientCompQhIso A)))
+    Functor.isoWhiskerLeft (TensorCommShift₂.LKFlat A ⋙ curriedTensor (DerivedCategory A))
+      ((Functor.whiskeringLeft _ _ _).mapIso (Functor.isoWhiskerLeft P (quotientCompQhIso A)))
 
 /-- The underlying inverse system `(evₙ K_•)ₙ` of the reduction tower `K_•` of `K` is the
 system of derived tensor products `K ⊗ᴸ Pₙ`, naturally in `K`. -/

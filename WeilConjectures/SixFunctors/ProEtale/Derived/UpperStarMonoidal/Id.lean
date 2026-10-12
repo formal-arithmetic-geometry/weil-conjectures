@@ -105,7 +105,8 @@ lemma mapHomotopyCategoryCompHom_upperStarComp_id_left (t : X ⟶ Y)
         (Functor.mapHomotopyCategoryIdIso _ (.up ℤ)).hom.app _ =
       (NatTrans.mapHomotopyCategory (upperStarCongr A (Category.id_comp t)).hom (.up ℤ)).app K := by
   obtain ⟨C, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-  rw [Functor.mapHomotopyCategoryIdIso_hom_app_eq_id, Category.comp_id]
+  rw [Functor.mapHomotopyCategoryIdIso_hom_app_eq_id]
+  erw [Category.comp_id]
   have h₁ : (Functor.mapHomotopyCategoryCompIso (Iso.refl ((t)^*[A] ⋙ (𝟙 X)^*[A]))
       (.up ℤ)).inv.app ((HomotopyCategory.quotient _ _).obj C) = 𝟙 _ := by
     rw [← cancel_mono ((Functor.mapHomotopyCategoryCompIso (Iso.refl ((t)^*[A] ⋙ (𝟙 X)^*[A]))
@@ -115,7 +116,7 @@ lemma mapHomotopyCategoryCompHom_upperStarComp_id_left (t : X ⟶ Y)
     NatTrans.mapHomotopyCategory_app]
   rw [← Functor.map_comp]
   congr 1
-  ext n
+  ext n : 1
   simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f]
   exact upperStarComp_hom_app_comp_upperStarId_hom_app A t _
 
@@ -156,8 +157,11 @@ lemma leftDerivedUpperStarComp_hom_app_comp_leftDerivedUpperStarId_hom_app (t : 
   have hn := (leftDerivedUpperStarId A X).hom.naturality ((t)^*[A].leftDerivedFunctorCounit.app K)
   simp only [Functor.id_map] at hn
   simp only [α, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
-    Category.comp_id, Category.assoc]
-  rw [← hn, leftDerivedUpperStarId_hom_app_Qh_obj,
+    Category.assoc]
+  erw [Category.id_comp ((t)^*[A].leftDerivedFunctorCounit.app K)]
+  erw [← hn]
+  erw [leftDerivedUpperStarId_hom_app_Qh_obj]
+  rw [
     leftDerivedUpperStarComp_hom_app_Qh_obj_comp_counit_assoc, ← Functor.map_comp,
     ← mapHomotopyCategoryCompHom_upperStarComp_id_left]
 
@@ -189,7 +193,8 @@ private lemma leftDerivedUpperStarTensorComparison_id_comp_aux
         (leftDerivedUpperStarCongr A (Category.id_comp (𝟙 X))).hom.app Z ≫
           (leftDerivedUpperStarId A X).inv.app (L((𝟙 X)^*[A]).obj Z) := by
     rw [← leftDerivedUpperStarComp_hom_app_comp_leftDerivedUpperStarId_hom_app, Category.assoc,
-      Iso.hom_inv_id_app, Category.comp_id]
+      Iso.hom_inv_id_app]
+    exact (Category.comp_id _).symm
   have h₁ := leftDerivedUpperStarTensorComparison_comp A (𝟙 X) (𝟙 X) a b
   have h₃ := leftDerivedUpperStarCongr_hom_tensor' A (Category.id_comp (𝟙 X)) a b
   rw [hκ, hκ, hκ, ← tensorHom_comp_tensorHom, reassoc_of% h₃, Category.assoc,
@@ -197,7 +202,8 @@ private lemma leftDerivedUpperStarTensorComparison_id_comp_aux
   have hn := (leftDerivedUpperStarId A X).inv.naturality
     (((leftDerivedUpperStarTensorComparison A (𝟙 X)).app a).app b)
   simp only [Functor.id_map] at hn
-  rw [← reassoc_of% hn, cancel_epi] at h₁
+  erw [← reassoc_of% hn] at h₁
+  rw [cancel_epi] at h₁
   exact h₁
 
 /-- **The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` is monoidal**: it commutes with the tensor
@@ -222,13 +228,14 @@ lemma leftDerivedUpperStarTensorComparison_id_comp
     rw [← cancel_epi ((leftDerivedUpperStarId A X).inv.app
       (L((𝟙 X)^*[A]).obj a ⊗ L((𝟙 X)^*[A]).obj b)), Iso.inv_hom_id_app,
       ← reassoc_of% (leftDerivedUpperStarTensorComparison_id_comp_aux A a b),
-      tensorHom_comp_tensorHom, Iso.inv_hom_id_app, Iso.inv_hom_id_app, id_tensorHom_id]
+      tensorHom_comp_tensorHom, Iso.inv_hom_id_app, Iso.inv_hom_id_app]
+    exact id_tensorHom_id _ _
   -- then transport along `λ⁻¹ : a ≅ L(𝟙 X)^*a`
   have hn := leftDerivedUpperStarTensorComparison_naturality A (𝟙 X)
     ((leftDerivedUpperStarId A X).inv.app a) ((leftDerivedUpperStarId A X).inv.app b)
-  have hλ := (leftDerivedUpperStarId A X).hom.naturality
+  have hlam := (leftDerivedUpperStarId A X).hom.naturality
     ((leftDerivedUpperStarId A X).inv.app a ⊗ₘ (leftDerivedUpperStarId A X).inv.app b)
-  simp only [Functor.id_map, Functor.id_obj] at hλ
+  simp only [Functor.id_map, Functor.id_obj] at hlam
   have e (z : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
       L((𝟙 X)^*[A]).map ((leftDerivedUpperStarId A X).inv.app z) ≫
         (leftDerivedUpperStarId A X).hom.app (L((𝟙 X)^*[A]).obj z) = 𝟙 _ := by
@@ -236,8 +243,10 @@ lemma leftDerivedUpperStarTensorComparison_id_comp
     simp
   rw [← cancel_mono ((leftDerivedUpperStarId A X).inv.app a ⊗ₘ
     (leftDerivedUpperStarId A X).inv.app b), Category.assoc, tensorHom_comp_tensorHom,
-    Iso.hom_inv_id_app, Iso.hom_inv_id_app, id_tensorHom_id, Category.comp_id, ← hλ,
-    ← key, ← reassoc_of% hn, tensorHom_comp_tensorHom, e, e, id_tensorHom_id, Category.comp_id]
+    Iso.hom_inv_id_app, Iso.hom_inv_id_app]
+  erw [id_tensorHom_id, Category.comp_id]
+  rw [← hlam, ← key, ← reassoc_of% hn, tensorHom_comp_tensorHom]
+  erw [e, e, id_tensorHom_id, Category.comp_id]
 
 end ProEtale
 

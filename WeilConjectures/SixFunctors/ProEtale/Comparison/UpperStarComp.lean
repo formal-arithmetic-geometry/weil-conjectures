@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
+public import WeilConjectures.SixFunctors.BaseChange.Square
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
 
 /-!
 # The comparison of pullbacks is compatible with composition
@@ -112,55 +114,46 @@ end Comp
 
 section Square
 
-/-- The comparisons `σ_h` are compatible with equalities of morphisms. -/
+variable {T S R : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+
+/-- The componentwise form of `comparisonUpperStarCompUpperStarIso_comp` for the composition
+isomorphism `Etale.upperStarComp` along a morphism `h₁₂` equal to `h₁ ≫ h₂`. -/
 @[reassoc]
-lemma comparisonUpperStarCompUpperStarIso_inv_app_congr {Y X : Scheme.{u}} {h h' : Y ⟶ X}
-    (e : h = h') (M : Sheaf X.smallEtaleTopology A) :
-    (comparisonUpperStar A Y).map ((eqToIso (congrArg (Etale.upperStar A) e)).hom.app M) ≫
-        (comparisonUpperStarCompUpperStarIso A h').inv.app M =
-      (comparisonUpperStarCompUpperStarIso A h).inv.app M ≫
-        (eqToIso (congrArg (ProEtale.upperStar A) e)).hom.app ((comparisonUpperStar A X).obj M) := by
-  subst e
-  simp
+lemma comparisonUpperStarCompUpperStarIso_comp_inv_app' (h₁₂ : T ⟶ R)
+    (hh₁₂ : h₁₂ = h₁ ≫ h₂) (M : Sheaf R.smallEtaleTopology A) :
+    (comparisonUpperStar A T).map ((Etale.upperStarComp A h₁ h₂ h₁₂ hh₁₂).hom.app M) ≫
+        (comparisonUpperStarCompUpperStarIso A h₁).inv.app ((Etale.upperStar A h₂).obj M) ≫
+        (ProEtale.upperStar A h₁).map ((comparisonUpperStarCompUpperStarIso A h₂).inv.app M) =
+      (comparisonUpperStarCompUpperStarIso A h₁₂).inv.app M ≫
+        eqToHom (by rw [hh₁₂]) ≫
+        (ProEtale.upperStarComp A h₁ h₂).hom.app ((comparisonUpperStar A R).obj M) := by
+  subst hh₁₂
+  simpa using comparisonUpperStarCompUpperStarIso_comp_inv_app A h₁ h₂ M
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The isomorphism `g^* f'^* ≅ (f' ≫ g)^* = (g' ≫ f)^* ≅ f^* g'^*` of pullbacks of étale
-sheaves attached to a commutative square. -/
-noncomputable def _root_.AlgebraicGeometry.Etale.upperStarSquareIso (sq : CommSq g' f' f g) :
-    Etale.upperStar A g ⋙ Etale.upperStar A f' ≅ Etale.upperStar A f ⋙ Etale.upperStar A g' :=
-  (Etale.upperStarComp A f' g).symm ≪≫ eqToIso (congrArg (Etale.upperStar A) sq.w.symm) ≪≫
-    Etale.upperStarComp A g' f
-
-/-- The isomorphism `g^* f'^* ≅ (f' ≫ g)^* = (g' ≫ f)^* ≅ f^* g'^*` of pullbacks of pro-étale
-sheaves attached to a commutative square. -/
-noncomputable def upperStarSquareIso (sq : CommSq g' f' f g) :
-    ProEtale.upperStar A g ⋙ ProEtale.upperStar A f' ≅
-      ProEtale.upperStar A f ⋙ ProEtale.upperStar A g' :=
-  (ProEtale.upperStarComp A f' g).symm ≪≫ eqToIso (congrArg (ProEtale.upperStar A) sq.w.symm) ≪≫
-    ProEtale.upperStarComp A g' f
-
 /-- Blueprint `lem-weil-pbc-comparison-pullback` (compatibility with the cartesian
 identification): around a commutative square, the comparisons `σ` of the four sides are
-compatible with the identifications `g^* f'^* ≅ f^* g'^*` of the pullbacks of étale and of
-pro-étale sheaves. -/
+compatible with the identifications `g^* f'^* ≅ f^* g'^*` of the pullbacks of étale
+(`AlgebraicGeometry.Etale.squareUpperStarIso`) and of pro-étale sheaves
+(`AlgebraicGeometry.ProEtale.upperStarCompIso`). -/
 lemma comparisonUpperStarCompUpperStarIso_square (sq : CommSq g' f' f g)
     (M : Sheaf Y.smallEtaleTopology A) :
-    (comparisonUpperStar A X').map ((Etale.upperStarSquareIso A sq).hom.app M) ≫
+    (comparisonUpperStar A X').map ((Etale.squareUpperStarIso A sq).hom.app M) ≫
         (comparisonUpperStarCompUpperStarIso A g').inv.app ((Etale.upperStar A f).obj M) ≫
         (ProEtale.upperStar A g').map ((comparisonUpperStarCompUpperStarIso A f).inv.app M) =
       (comparisonUpperStarCompUpperStarIso A f').inv.app ((Etale.upperStar A g).obj M) ≫
         (ProEtale.upperStar A f').map ((comparisonUpperStarCompUpperStarIso A g).inv.app M) ≫
-        (upperStarSquareIso A sq).hom.app ((comparisonUpperStar A Y).obj M) := by
-  have h₁ := comparisonUpperStarCompUpperStarIso_comp_inv_app A g' f M
-  have h₂ := comparisonUpperStarCompUpperStarIso_comp_inv_app A f' g M
-  have h₃ := comparisonUpperStarCompUpperStarIso_inv_app_congr A sq.w.symm M
-  simp only [Etale.upperStarSquareIso, upperStarSquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Functor.map_comp, Category.assoc]
-  rw [h₁, reassoc_of% h₃]
-  rw [← cancel_epi ((comparisonUpperStar A X').map ((Etale.upperStarComp A f' g).hom.app M))]
-  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id, Category.id_comp,
-    reassoc_of% h₂, Iso.hom_inv_id_app_assoc]
+        (ProEtale.upperStarCompIso A sq.w.symm).hom.app ((comparisonUpperStar A Y).obj M) := by
+  have h₁ := comparisonUpperStarCompUpperStarIso_comp_inv_app' A g' f (g' ≫ f) rfl M
+  have h₂ := comparisonUpperStarCompUpperStarIso_comp_inv_app' A f' g (g' ≫ f) sq.w M
+  simp only [Etale.squareUpperStarIso, ProEtale.upperStarCompIso, ProEtale.upperStarCongr,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc,
+    eqToIso.hom, eqToHom_app]
+  rw [h₁, ← cancel_epi ((comparisonUpperStar A X').map
+    ((Etale.upperStarComp A f' g (g' ≫ f) sq.w).hom.app M)), ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app, Functor.map_id, Category.id_comp, reassoc_of% h₂]
+  simp
 
 end Square
 

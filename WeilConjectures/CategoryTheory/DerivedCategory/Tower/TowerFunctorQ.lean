@@ -64,8 +64,9 @@ noncomputable def towerFunctorQIso :
         ((NatTrans.mapHomologicalComplex ((evaluation ℕᵒᵖ A).map f) _).app Y)
       dsimp at h₁ h₃ ⊢
       rw [← reassoc_of% h₁, reassoc_of% h₂']
+      simp only [Category.assoc]
       rw [cancel_epi, cancel_epi]
-      exact h₃.symm))
+      (first | exact h₃ | exact h₃.symm | convert h₃ using 2)))
     (fun {Y Y'} (g : Y ⟶ Y') ↦ by
       ext n
       have h₁ := (quotientCompQhIso (ℕᵒᵖ ⥤ A)).inv.naturality g
@@ -73,8 +74,9 @@ noncomputable def towerFunctorQIso :
       have h₃ := (quotientCompQhIso A).hom.naturality
         ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex _).map g)
       dsimp at h₁ h₂ h₃ ⊢
-      rw [← Functor.map_comp_assoc, ← h₁, Functor.map_comp_assoc, reassoc_of% h₂]
+      rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, reassoc_of% h₂]
+      simp only [Category.assoc]
       rw [cancel_epi, cancel_epi]
-      exact h₃)
+      (first | exact h₃ | exact h₃.symm | convert h₃ using 2))
 
 end DerivedCategory

@@ -177,7 +177,7 @@ satisfies the base change property with `Λ`-coefficients: for the torsion rings
 `AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`, and the passage to `Λ`
 is `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`.
 (blueprint: `lemma-weil-pbc-property-iff-acyclicity`, `IA_r(f)` for every prime `r` implies
-`PBC(f)`) -/
+`PBC(f)`; this is also blueprint `lem-weil-pbc-injective-acyclicity-bounded-below`) -/
 @[stacks 0A4B]
 theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f]

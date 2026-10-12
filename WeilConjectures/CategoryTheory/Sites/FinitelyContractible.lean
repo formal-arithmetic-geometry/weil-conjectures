@@ -69,7 +69,7 @@ structure IsFiniteDisjointCover {X : C} {ι : Type} (Y : ι → C) (f : ∀ i, Y
 
 /-- An object `X` is finitely contractible if every covering sieve of `X` contains the members
 of a finite disjoint cover of `X`. -/
-def IsFinitelyContractible (X : C) : Prop :=
+def IsFinitelyContractible : ObjectProperty C := fun X ↦
   ∀ S ∈ J X, ∃ (ι : Type) (Y : ι → C) (f : ∀ i, Y i ⟶ X), J.IsFiniteDisjointCover Y f ∧
     ∀ i, S (f i)
 
@@ -187,6 +187,8 @@ section Cokernel
 
 variable {A : Type u'} [Category.{w} A] [Abelian A]
 
+attribute [local instance] Abelian.hasFiniteBiproducts
+
 /-- Let `φ : F ⟶ G` be a morphism of sheaves and `π : G ⟶ K` a morphism of presheaves which is
 objectwise a cokernel of `φ`. Then `K` turns finite disjoint covers into products. -/
 lemma IsFiniteDisjointCover.bijective_of_cokernel {F G K : Cᵒᵖ ⥤ A}
@@ -222,8 +224,8 @@ lemma IsFiniteDisjointCover.bijective_of_cokernel {F G K : Cᵒᵖ ⥤ A}
   have hc := isColimitBiproductMapCokernelCofork (fun i ↦ φ.app (op (Y i)))
     (fun i ↦ π.app (op (Y i))) (fun i ↦ by rw [← NatTrans.comp_app, w]; rfl) fun i ↦ hπ _
   have hzero : biproduct.map (fun i ↦ φ.app (op (Y i))) ≫ inv (α G) ≫ π.app (op X) = 0 := by
-    rw [← cancel_epi (α F), ← Category.assoc, ← Category.assoc, ← hα, Category.assoc,
-      IsIso.hom_inv_id_assoc, ← NatTrans.comp_app, w, comp_zero]
+    rw [← cancel_epi (α F), comp_zero, ← Category.assoc, ← hα, Category.assoc,
+      IsIso.hom_inv_id_assoc, ← NatTrans.comp_app, w]
     rfl
   let β : (⨁ fun i ↦ K.obj (op (Y i))) ⟶ K.obj (op X) :=
     hc.desc (CokernelCofork.ofπ _ hzero)
@@ -231,10 +233,10 @@ lemma IsFiniteDisjointCover.bijective_of_cokernel {F G K : Cᵒᵖ ⥤ A}
     hc.fac _ WalkingParallelPair.one
   have hαK : IsIso (α K) := by
     refine ⟨β, ?_, ?_⟩
-    · refine (CokernelCofork.IsColimit.isColimit_π_epi (hπ (op X))).left_cancellation _ _ ?_
+    · refine (Cofork.IsColimit.epi (hπ (op X))).left_cancellation _ _ ?_
       dsimp only [Cofork.ofπ_pt, Cofork.π_ofπ]
       rw [reassoc_of% (hα π), hβ, IsIso.hom_inv_id_assoc, Category.comp_id]
-    · refine (CokernelCofork.IsColimit.isColimit_π_epi hc).left_cancellation _ _ ?_
+    · refine (Cofork.IsColimit.epi hc).left_cancellation _ _ ?_
       dsimp only [Cofork.ofπ_pt, Cofork.π_ofπ]
       rw [reassoc_of% hβ, hα π, IsIso.inv_hom_id_assoc, Category.comp_id]
   -- conclude with the universal property of the biproduct
@@ -266,6 +268,7 @@ instance locallyCoverDense_isFinitelyContractible :
     obtain ⟨ι, Y, f, hf, hfT⟩ := X.property T.1 T.2
     refine J.superset_covering ?_ hf.mem
     rintro Z _ ⟨W, a, _, ⟨i⟩, rfl⟩
+    trace_state
     refine ⟨⟨Y i, X.property.of_isFiniteDisjointCover hf i⟩, ObjectProperty.homMk (f i), a,
       ?_, rfl⟩
     exact hfT i
@@ -303,7 +306,7 @@ lemma isSheaf_restrictedTopology_of_cokernel {F G K : Cᵒᵖ ⥤ A}
   have ht' (k : κ) : t ≫ K.map (f k).op = x (f' k) (hf'T k) := congrFun ht k
   refine ⟨t, fun V g hg ↦ ?_, fun t' ht'' ↦ (hprod hf E).1 ?_⟩
   · -- check on a finite disjoint cover of `V` refining the pullback of `f` along `g`
-    obtain ⟨λ', Z, z, hz, hzR⟩ := V.property _ (J.pullback_stable g.hom hf.mem)
+    obtain ⟨κ', Z, z, hz, hzR⟩ := V.property _ (J.pullback_stable g.hom hf.mem)
     refine (hprod hz E).1 (funext fun l ↦ ?_)
     obtain ⟨_, c, _, ⟨k⟩, hc⟩ := hzR l
     let z' : (⟨Z l, V.property.of_isFiniteDisjointCover hz l⟩ :
@@ -313,22 +316,19 @@ lemma isSheaf_restrictedTopology_of_cokernel {F G K : Cᵒᵖ ⥤ A}
     have hzc : z' ≫ g = c' ≫ f' k := by
       ext
       exact hc.symm
-    have h₁ := hxs g z' hg
-    have h₂ := hxs (f' k) c' (hf'T k)
+    have h₁ : x (z' ≫ g) (T.downward_closed hg z') = x g hg ≫ K.map (z l).op :=
+      hxs g z' hg
+    have h₂ : x (c' ≫ f' k) (T.downward_closed (hf'T k) c') =
+        x (f' k) (hf'T k) ≫ K.map c.op :=
+      hxs (f' k) c' (hf'T k)
     have h₃ : x (z' ≫ g) (T.downward_closed hg z') = x (c' ≫ f' k)
         (T.downward_closed (hf'T k) c') := by
       congr 1
-    simp only [Functor.comp_obj, Functor.op_obj, coyoneda_obj_obj, Functor.comp_map,
-      Functor.op_map, coyoneda_obj_map] at h₁ h₂ ⊢
     change (t ≫ K.map g.hom.op) ≫ K.map (z l).op = x g hg ≫ K.map (z l).op
-    rw [← h₁] at h₃
-    rw [h₃, h₂, ← ht' k, Category.assoc, Category.assoc, ← K.map_comp, ← K.map_comp, ← op_comp,
-      ← op_comp]
-    change t ≫ K.map (z l ≫ g.hom).op = t ≫ K.map (c ≫ f k).op
-    rw [hc]
+    rw [← h₁, h₃, h₂, ← ht' k, Category.assoc, Category.assoc, ← K.map_comp, ← K.map_comp,
+      ← op_comp, ← op_comp, hc]
   · funext k
-    rw [ht' k]
-    exact ht'' (f' k) (hf'T k)
+    exact (ht'' (f' k) (hf'T k)).trans (ht' k).symm
 
 variable [HasLimitsOfSize.{v, max u v} A]
 
@@ -341,7 +341,7 @@ theorem epi_app_of_isFinitelyContractible {F G : Sheaf J A} (φ : F ⟶ G) [Epi 
   let K := cokernel φ.hom
   let π : G.obj ⟶ K := cokernel.π φ.hom
   have w : φ.hom ≫ π = 0 := cokernel.condition _
-  have hπ (V : Cᵒᵖ) : IsColimit (CokernelCofork.ofπ (f := φ.app V) (π.app V)
+  have hπ (V : Cᵒᵖ) : IsColimit (CokernelCofork.ofπ (f := φ.hom.app V) (π.app V)
       (by rw [← NatTrans.comp_app, w]; rfl)) :=
     CokernelCofork.mapIsColimit _ (cokernelIsCokernel φ.hom) ((evaluation _ A).obj V)
   -- the right Kan extension of the restriction of `K` to finitely contractible objects
@@ -350,7 +350,7 @@ theorem epi_app_of_isFinitelyContractible {F G : Sheaf J A} (φ : F ⟶ G) [Epi 
       ι.op.HasPointwiseRightKanExtension P := fun _ _ ↦ inferInstance
   let H : Cᵒᵖ ⥤ A := ι.op.ran.obj (ι.op ⋙ K)
   have hH : Presheaf.IsSheaf J H :=
-    ι.ran_isSheaf_of_isCocontinuous _ J ⟨ι.op ⋙ K, hK⟩
+    ran_isSheaf_of_isCocontinuous (G := ι) J ⟨ι.op ⋙ K, hK⟩
   let u : K ⟶ H := (ι.op.ranAdjunction A).unit.app K
   -- the unit `K ⟶ H` vanishes, since `φ` is an epimorphism of sheaves
   have hu : u = 0 := by
@@ -364,7 +364,7 @@ theorem epi_app_of_isFinitelyContractible {F G : Sheaf J A} (φ : F ⟶ G) [Epi 
     exact (cancel_epi π).1 h'
   -- but it is a split monomorphism on sections over `X`
   have hsplit := ι.op.ranCounit_app_app_ranAdjunction_unit_app_app K (op ⟨X, hX⟩)
-  rw [hu] at hsplit
+  rw [show (ι.op.ranAdjunction A).unit.app K = 0 from hu] at hsplit
   have hz : IsZero (K.obj (op X)) := by
     rw [IsZero.iff_id_eq_zero]
     exact hsplit.symm.trans (by simp)

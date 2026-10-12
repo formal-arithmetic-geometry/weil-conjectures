@@ -99,11 +99,13 @@ lemma mapDerivedCategorySquareIso_hom_app_Q_obj (τ : F₁ ⋙ F₂ ≅ G₁ ⋙
     𝟙 _ := rfl
   have hG₀ : (mapHomologicalComplexCompIso (Iso.refl (G₁ ⋙ G₂)) (ComplexShape.up ℤ)).hom.app K =
     𝟙 _ := rfl
-  rw [hF₀, CategoryTheory.Functor.map_id, Category.comp_id] at hF
-  rw [hG₀, CategoryTheory.Functor.map_id, Category.comp_id] at hG
+  rw [hF₀] at hF
+  rw [hG₀] at hG
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hF hG
   simp only [mapDerivedCategoryFactors₂, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Category.assoc]
-  rw [hG, he, ← hF, Iso.inv_hom_id_app_assoc]
+  rw [hG, he, ← hF]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
 
 variable {F₀ : C₄ ⥤ C₀} [F₀.Additive] [PreservesFiniteLimits F₀] [PreservesFiniteColimits F₀]
   {H : C₂ ⥤ C₄} [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
@@ -119,7 +121,8 @@ lemma map_mapDerivedCategorySquareIso_hom_app_Q_obj (τ : F₁ ⋙ F₂ ≅ G₁
           ((NatTrans.mapHomologicalComplex τ.hom _).app K)) := by
   simp only [mapDerivedCategoryFactors₃, Category.assoc]
   rw [← Functor.map_comp_assoc, mapDerivedCategorySquareIso_hom_app_Q_obj, Functor.map_comp,
-    Category.assoc, mapDerivedCategoryFactors_hom_naturality]
+    Category.assoc]
+  erw [mapDerivedCategoryFactors_hom_naturality]
 
 /-- The square induced by `τ`, preceded by an inner functor `D(F₀)`, on the image of a
 complex. -/
@@ -142,15 +145,15 @@ end Factors
 
 section Cube
 
-variable {Y Y' X X' Ỹ Ỹ' X̃ X̃' : Type*} [Category* Y] [Category* Y'] [Category* X]
-  [Category* X'] [Category* Ỹ] [Category* Ỹ'] [Category* X̃] [Category* X̃']
-  [Abelian Y] [Abelian Y'] [Abelian X] [Abelian X'] [Abelian Ỹ] [Abelian Ỹ'] [Abelian X̃]
-  [Abelian X̃'] [HasDerivedCategory Y] [HasDerivedCategory Y'] [HasDerivedCategory X]
-  [HasDerivedCategory X'] [HasDerivedCategory Ỹ] [HasDerivedCategory Ỹ'] [HasDerivedCategory X̃]
-  [HasDerivedCategory X̃']
+variable {Y Y' X X' Z Z' W W' : Type*} [Category* Y] [Category* Y'] [Category* X]
+  [Category* X'] [Category* Z] [Category* Z'] [Category* W] [Category* W']
+  [Abelian Y] [Abelian Y'] [Abelian X] [Abelian X'] [Abelian Z] [Abelian Z'] [Abelian W]
+  [Abelian W'] [HasDerivedCategory Y] [HasDerivedCategory Y'] [HasDerivedCategory X]
+  [HasDerivedCategory X'] [HasDerivedCategory Z] [HasDerivedCategory Z'] [HasDerivedCategory W]
+  [HasDerivedCategory W']
   {a : Y ⥤ Y'} {b : Y' ⥤ X'} {c : Y ⥤ X} {e : X ⥤ X'}
-  {a' : Ỹ ⥤ Ỹ'} {b' : Ỹ' ⥤ X̃'} {c' : Ỹ ⥤ X̃} {e' : X̃ ⥤ X̃'}
-  {νY : Y ⥤ Ỹ} {νY' : Y' ⥤ Ỹ'} {νX : X ⥤ X̃} {νX' : X' ⥤ X̃'}
+  {a' : Z ⥤ Z'} {b' : Z' ⥤ W'} {c' : Z ⥤ W} {e' : W ⥤ W'}
+  {νY : Y ⥤ Z} {νY' : Y' ⥤ Z'} {νX : X ⥤ W} {νX' : X' ⥤ W'}
   [a.Additive] [PreservesFiniteLimits a] [PreservesFiniteColimits a]
   [b.Additive] [PreservesFiniteLimits b] [PreservesFiniteColimits b]
   [c.Additive] [PreservesFiniteLimits c] [PreservesFiniteColimits c]
@@ -202,7 +205,7 @@ lemma mapDerivedCategorySquareIso_cube (θ : a ⋙ b ≅ c ⋙ e) (θ' : a' ⋙ 
   refine Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso Y (.up ℤ))
     (fun k ↦ ?_)
   rw [← cancel_mono (mapDerivedCategoryFactors₃ νY c' e' k)]
-  have hk : νX'.mapHomologicalComplex _ |>.map
+  have hk : (νX'.mapHomologicalComplex _).map
         ((NatTrans.mapHomologicalComplex θ.hom _).app k) ≫
       (NatTrans.mapHomologicalComplex τe.hom _).app ((c.mapHomologicalComplex _).obj k) ≫
       (e'.mapHomologicalComplex _).map ((NatTrans.mapHomologicalComplex τc.hom _).app k) =
@@ -210,7 +213,9 @@ lemma mapDerivedCategorySquareIso_cube (θ : a ⋙ b ≅ c ⋙ e) (θ' : a' ⋙ 
       (b'.mapHomologicalComplex _).map ((NatTrans.mapHomologicalComplex τa.hom _).app k) ≫
       (NatTrans.mapHomologicalComplex θ'.hom _).app ((νY.mapHomologicalComplex _).obj k) := by
     ext i
-    simpa using h (k.X i)
+    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+      NatTrans.mapHomologicalComplex_app_f]
+    exact h (k.X i)
   simp only [lhs, rhs, NatTrans.comp_app, Functor.associator_hom_app,
     Functor.associator_inv_app, whiskerRight_app, whiskerLeft_app, Category.id_comp,
     Category.assoc]

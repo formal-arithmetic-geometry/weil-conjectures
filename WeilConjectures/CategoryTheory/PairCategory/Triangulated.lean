@@ -262,9 +262,12 @@ lemma complete_morphism_incl {k : ι} {S₁ S₂ : Triangle (F.obj ⟨k⟩)}
     ∃ c, ((incl F k).mapTriangle.obj S₁).mor₂ ≫ c = b ≫ ((incl F k).mapTriangle.obj S₂).mor₂ ∧
       ((incl F k).mapTriangle.obj S₁).mor₃ ≫ a⟦(1 : ℤ)⟧' =
         c ≫ ((incl F k).mapTriangle.obj S₂).mor₃ := by
+  revert hcomm
   obtain ⟨m₁, -, h₁, -, a₁, rfl⟩ := exists_homMk_ge a k
   obtain ⟨m, hm, h₂, -, b₁, rfl⟩ := exists_homMk_ge b m₁
-  rw [← homMk_trHom hm h₁ h₁ h₂ h₂ a₁] at hcomm ⊢
+  intro hcomm
+  rw [← homMk_trHom (X := (incl F k).obj S₁.obj₁) (Y := (incl F k).obj S₂.obj₁) hm h₁ h₁ h₂ h₂
+    a₁] at hcomm ⊢
   set a₂ := trHom (X := (incl F k).obj S₁.obj₁) (Y := (incl F k).obj S₂.obj₁) hm h₁ h₁ h₂ h₂ a₁
   change (incl F k).map S₁.mor₁ ≫ _ = _ ≫ (incl F k).map S₂.mor₁ at hcomm
   rw [incl_map_eq_homMk h₂, incl_map_eq_homMk h₂, homMk_comp_homMk, homMk_comp_homMk,

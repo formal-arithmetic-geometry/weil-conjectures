@@ -7,7 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.ProEtale.ConstantCoefficients
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-!
 # Cohomology sheaves of a pro-étale derived complex

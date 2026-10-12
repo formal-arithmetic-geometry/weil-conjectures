@@ -64,6 +64,7 @@ omit [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulat
 lemma proZeroTerm_zero (n : ℕ) : proZeroTerm (P := P) n 0 = P.proj n := by
   have : F.map (homOfLE (Nat.le_add_right n 0)).op = 𝟙 _ := F.map_id _
   rw [proZeroTerm, this, comp_id]
+  rfl
 
 omit [HasZeroObject C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] in
 lemma proZeroTerm_succ_left (n k : ℕ) :
@@ -78,7 +79,7 @@ lemma sub_towerShift_comp_proZeroTerm (n k : ℕ) :
       proZeroTerm (P := P) n k - proZeroTerm (P := P) n (k + 1) := by
   simp only [proZeroTerm, Preadditive.sub_comp, id_comp, towerShift_proj_assoc, ← F.map_comp]
   congr 1
-  exact proj_comp_map_eq_of_eq (by omega) _ _
+  all_goals exact proj_comp_map_eq_of_eq (by omega) _ _
 
 lemma proZeroTerm_eq_zero {n m : ℕ} (h : n ≤ m) (hm : F.map (homOfLE h).op = 0) (k : ℕ)
     (hk : m ≤ n + k) : proZeroTerm (P := P) n k = 0 := by

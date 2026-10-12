@@ -65,8 +65,9 @@ for every `K ∈ D⁺(X_ét, Λ)`.
 This is blueprint `cor-weil-pbc-geometric-fiber-finite` (first assertion). -/
 theorem Etale.isIso_derivedBaseChangeMapPlus_geometricFiber [Finite Λ] :
     IsIso (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ)
-      (IsPullback.of_hasPullback f y).toCommSq) :=
-  Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite
+      (IsPullback.of_hasPullback f y).toCommSq) := by
+  rw [← Etale.baseChange_eq_derivedBaseChangeMapPlus]
+  exact Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite
     (IsPullback.of_hasPullback f y)
 
 /-- **Finite-coefficient geometric fibre formula, stalk form**: for a proper morphism

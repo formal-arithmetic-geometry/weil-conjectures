@@ -65,7 +65,8 @@ lemma exchange_id {upperF : 𝒴 ⥤ 𝒳} {lowerF : 𝒳 ⥤ 𝒴} (adj : upper
   change (mateEquiv adj adj (TwoSquare.mk (𝟭 𝒴) upperF upperF (𝟭 𝒳)
     ((Functor.leftUnitor upperF).hom ≫ (Functor.rightUnitor upperF).inv))).natTrans.app K = _
   rw [mateEquiv_unitors]
-  simp <;> rfl
+  simp
+  rfl
 
 variable {𝒳'' : Type u₅} {𝒴'' : Type u₆} [Category.{v₅} 𝒳''] [Category.{v₆} 𝒴'']
 
