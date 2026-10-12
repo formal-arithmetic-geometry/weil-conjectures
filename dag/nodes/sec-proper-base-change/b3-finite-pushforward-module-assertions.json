@@ -1,0 +1,126 @@
+{
+ "id": "b3-finite-pushforward-module-assertions",
+ "kind": "statement",
+ "title": "Finite pushforward of module assertions",
+ "statement": "Let k be algebraically closed, Λ a commutative ring, g:Y → Spec k a separated finite-type curve of dimension at most one [def-weil-pbc-curve-setting], f:X → Y finite, and F an étale sheaf of Λ-modules on X. If the eight conditional assertions [def-weil-pbc-eight-curve-assertions], with module constructibility [def-weil-pbc-etale-constructible-sheaf], hold for (f ≫ g,F), they hold for (g,f_*F). No torsion hypothesis on F or Noetherian hypothesis on Λ is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Lemma 0A5D (finite pushforward statements)"
+ },
+ "proof": [
+  {
+   "text": "Finite direct image is exact, and the cohomology edge map identifies the\ncohomology of F with that of its direct image. The finite geometric-stalk formula\nexpresses each direct-image stalk as the finite product of source stalks; each\nsource stalk is a direct factor. Thus primary torsion, invertible torsion orders,\nimply the respective source torsion conditions. For constructibility use the\nepimorphic counit f^* f_* F → F and constructibility of\nquotients of constructible sheaves. This holds for arbitrary coefficient rings.\nThe edge isomorphism transfers C1. A finite scheme over an affine is affine, giving\nC2; the stalk conditions give C3 and C4. A finite scheme over a proper scheme is\nproper, giving C5. For C6 and C7 form the cartesian square over the field extension.\nFinite base change identifies the inverse image of the direct image with the\ndirect image on the base changed source, and the edge maps commute with pullback.\nThe resulting square has horizontal isomorphisms and a bijective source vertical\nmap by H, so the target vertical map is bijective. Use the stalk condition for C6\nand properness for C7. For C8 repeat the square with any open immersion into Y;\nits inverse image is open in X. Transport a class through the edge isomorphism,\nlift by H.C8 on X, then transport back. Commutativity and injectivity of the edge\nisomorphism verify the lift. Empty finite fibres give zero factors throughout.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Lemma 0A5D (finite pushforward statements); module coefficient adaptation by B3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite direct image transfers the eight curve cohomology assertions for module sheaves",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf, SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFiniteType, CategoryTheory.Sheaf.H, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.H",
+   "results": "loogle: unknown identifier 'Sheaf.H'",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek_constantModSheaf_of_finite",
+   "results": "No hits",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Curve cohomology assertions descend along a monomorphism with cokernel supported on finitely many points",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphism pushforward reflects constructibility of module sheaves and preserves cohomology",
+   "results": "Eight general sheaf/module results; no curve-assertion transfer.",
+   "verdict": "No exact match; second reading B3.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "ShortExact, exact, epi_g, mono_f, splitting lemmas; no finite-support assertion transfer.",
+   "verdict": "No exact match; second reading B3.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "finite support; local rg finite_pushforward, cokernel, Assertions",
+   "results": "Existing finite_pushforward_assertions is specialized to CurveCoefficientPair and ULift Z. DenseOpenPrimeAssertions requires a finite whole coefficient ring, reduced X, and the canonical open-extension inclusion. UnderlyingAbelianAssertions requires constructibility of both coefficient sheaves. None directly supplies either new statement.",
+   "verdict": "No exact match; second reading B3.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-normalization-constant",
+   "place": "finite direct image and normalization comparison steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FinitePushforwardModuleAssertions.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.Assertions.of_finite_pushforward_module",
+  "statement": "theorem IsCurve.Assertions.of_finite_pushforward_module {k : Type u} [Field k]\n    [IsAlgClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Spec (.of k))\n    [IsCurve g] [IsFinite f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (H : IsCurve.Assertions Λ (f ≫ g) F) :\n    IsCurve.Assertions Λ g ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T144055-L-2089534",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T144055-L-2089534",
+  "kind": "interface"
+ }
+}

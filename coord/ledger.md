@@ -8041,3 +8041,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/B3/Sheaf.AlgebraicGeometry.GrothendieckExistenceSystemSupport (stage 3; reviewer PASS; first push; landing 20261012T144054-L-2089157 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:40 L: merged deliver/B3/Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData (stage 3; reviewer PASS; first push; landing 20261012T144054-L-2089255 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:40 L: merged deliver/B3/Sheaf.RingTheory.PolynomialCompleteLocalNonzeroFibreCharZeroReduction (stage 3; reviewer PASS; first push; landing 20261012T144054-L-2089353 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:40 L: merged deliver/B3/WeilConjectures.AlgebraicGeometry.Curve.Reductions (stage 3; reviewer PASS; first push; landing 20261012T144055-L-2089534 (interface); batch 20261012T144049; modules 3; new nodes 2)

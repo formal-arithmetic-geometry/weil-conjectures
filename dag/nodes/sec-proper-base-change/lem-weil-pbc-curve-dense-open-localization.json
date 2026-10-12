@@ -1,189 +1,186 @@
 {
-  "id": "lem-weil-pbc-curve-dense-open-localization",
-  "blueprint": {
-    "is": "lem-weil-pbc-curve-dense-open-localization",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Dense-open localization",
-  "statement": "Let $k$ be an algebraically closed field and let $C$ be a reduced separated scheme of finite type over $k$ with $\\dim C\\le1$ (a reduced curve, as in [def-weil-pbc-curve-setting]). Let $r$ be a prime number and let $F$ be a sheaf of $\\mathbf F_r$-modules on $C_{\\Et}$, i.e. an abelian sheaf [def-weil-pbc-abelian-etale-sheaves] with $rF=0$, which is constructible [def-weil-pbc-constructible-torsion]; in particular $(C,F)$ is a curve coefficient pair. Then:\n\n1. There is a dense open subscheme $j:U\\hookrightarrow C$ which is a finite disjoint union $U=\\coprod_{a=1}^nU_a$ of irreducible open subschemes $U_a$ (each a reduced irreducible separated $k$-scheme of finite type of dimension $\\le1$), such that $j^{-1}F$ [def-weil-pbc-inverse-image] is finite locally constant [def-constructible-finite-locally-constant].\n2. The closed complement $Z=C\\setminus U$, with its reduced induced structure and closed immersion $i:Z\\hookrightarrow C$ [def-weil-scheme-morphism-properties], is zero-dimensional (a finite, possibly empty, set of closed points), and the sequence\n$$\n 0\\to j_!j^{-1}F\\to F\\to i_*i^{-1}F\\to0\n$$\nof extension by zero [def-weil-pbc-extension-by-zero], direct image [def-weil-pbc-direct-image] and inverse image, whose maps are the counit of $j_!\\dashv j^{-1}$ and the unit of $i^{-1}\\dashv i_*$, is exact.\n3. Let $j_a:U_a\\hookrightarrow C$ be the composite open immersion. Then\n$$\n \\mathcal C(C,F)\\quad\\Longleftrightarrow\\quad\n \\mathcal C(C,j_{a,!}(F|_{U_a}))\\text{ for every }a,\n$$\nwhere, for a curve coefficient pair $(C,G)$, $\\mathcal C(C,G)$ is the conjunction of the eight assertions $\\mathcal C_1(C,G),\\dots,\\mathcal C_8(C,G)$ of [def-weil-pbc-eight-curve-assertions], each an implication that is true when its hypotheses (on $C$: affine, proper; on $G$: constructible, prime to $\\operatorname{char}k$, $p$-primary) fail, as in Stacks, Situation 0A52.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-curve-dense-open-localization.md",
-    "place": "node lem-weil-pbc-curve-dense-open-localization, order 1171"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-curve-setting",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-constructible-torsion",
-    "def-constructible-finite-locally-constant",
-    "def-weil-pbc-inverse-image",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-eight-curve-assertions"
-  ],
-  "proof": [
-    {
-      "text": "Apply the existing generic-constancy theorem to obtain a dense open V on which F is finite locally constant. Shrink V by the proved dense irreducible-opens theorem. This yields finitely many disjoint irreducible opens U_a, their dense union W, zero-dimensional complement, and irreducible connected components in W. Finite local constancy of each restriction and of the restriction to W follows from upperStar_of_range_subset because U_a and W lie inside V.",
-      "uses": [
-        "prop-constructible-generic-constancy",
-        "lem-pbc-q1-dense-irreducible-opens"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the dense-open prime-coefficient assertion equivalence to W to identify assertions for F with those for extension by zero of its restriction to W.",
-      "uses": [
-        "lem-pbc-q1-dense-open-prime-assertions"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Compose the preceding equivalence with the finite-disjoint-open assertion equivalence. Together with the geometric data and restriction witnesses this gives the required existential componentwise conclusion.",
-      "uses": [
-        "lem-pbc-q1-disjoint-open-prime-assertions"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-pbc-q1-dense-irreducible-opens",
-    "lem-pbc-q1-dense-open-prime-assertions",
-    "lem-pbc-q1-disjoint-open-prime-assertions",
-    "prop-constructible-generic-constancy"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem 03SC, proof, third and fourth paragraphs; Lemma 0GJA; module-valued glue proved by Q1"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "constructible etale sheaf is locally constant on a dense open subscheme of a curve",
-      "results": "StructureSheaf.locally_const_basicOpen (Mathlib.AlgebraicGeometry.StructureSheaf), IsLocallyConstant, LocallyConstant (Mathlib.Topology.LocallyConstant.Basic), Sheaf.isConstant_iff_of_equivalence, Sheaf.IsConstant, Sheaf.isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf): constant sheaves on a site only, no constructible or locally constant etale sheaves",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "dense open subset of a noetherian scheme on which a sheaf is locally constant, complement finite set of closed points in dimension one",
-      "results": "exists_of_res_zero_of_qcqs_of_top, exists_of_res_zero_of_qcqs, exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, exists_of_res_eq_of_qcqs(_of_top) (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated), exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact (Morphisms.QuasiCompact): structure-sheaf sections only",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "for a sheaf F on a space X, open U with closed complement Z, exact sequence 0 -> j_! j^* F -> F -> i_* i^* F -> 0",
-      "results": "GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, TopCat.Sheaf.objSupIsoProdEqLocus (Mathlib.Topology.Sheaves.CommRingCat): no extension by zero",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.ShortComplex.ShortExact",
-      "results": "none",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'extensionByZero\\|lowerShriek\\|IsLocallyConstantSheaf\\|LocallyConstantSheaf' Mathlib/; grep -rn 'j_!\\|extension by zero\\|locally constant\\|constructible' Mathlib/AlgebraicGeometry/Sites/; grep -rn 'finite_irreducibleComponents' Mathlib/Topology",
-      "results": "no extension by zero, no locally constant or constructible etale sheaves, no curve assertions; Mathlib/AlgebraicGeometry/Sites/ has only the small etale site, its points and constant sheaves. Used ingredient: TopologicalSpace.NoetherianSpace.finite_irreducibleComponents (Mathlib/Topology/NoetherianSpace.lean:193)",
-      "date": "2026-10-09",
-      "verdict": "no match (only the finiteness of irreducible components, used in step 2)"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1171,
-  "blueprint_uses": [
-    "def-constructible-constructible",
-    "def-constructible-stratification",
-    "def-weil-pbc-curve-setting",
-    "def-weil-pbc-eight-curve-assertions",
-    "def-weil-pbc-etale-sheaves",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-zero-dimensional-field-extension",
-    "lemma-weil-pbc-eight-curve-devissage",
+ "id": "lem-weil-pbc-curve-dense-open-localization",
+ "blueprint": {
+  "is": "lem-weil-pbc-curve-dense-open-localization",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Dense-open localization",
+ "statement": "Let $k$ be an algebraically closed field and let $C$ be a reduced separated scheme of finite type over $k$ with $\\dim C\\le1$ (a reduced curve, as in [def-weil-pbc-curve-setting]). Let $r$ be a prime number and let $F$ be a sheaf of $\\mathbf F_r$-modules on $C_{\\Et}$, i.e. an abelian sheaf [def-weil-pbc-abelian-etale-sheaves] with $rF=0$, which is constructible [def-weil-pbc-constructible-torsion]; in particular $(C,F)$ is a curve coefficient pair. Then:\n\n1. There is a dense open subscheme $j:U\\hookrightarrow C$ which is a finite disjoint union $U=\\coprod_{a=1}^nU_a$ of irreducible open subschemes $U_a$ (each a reduced irreducible separated $k$-scheme of finite type of dimension $\\le1$), such that $j^{-1}F$ [def-weil-pbc-inverse-image] is finite locally constant [def-constructible-finite-locally-constant].\n2. The closed complement $Z=C\\setminus U$, with its reduced induced structure and closed immersion $i:Z\\hookrightarrow C$ [def-weil-scheme-morphism-properties], is zero-dimensional (a finite, possibly empty, set of closed points), and the sequence\n$$\n 0\\to j_!j^{-1}F\\to F\\to i_*i^{-1}F\\to0\n$$\nof extension by zero [def-weil-pbc-extension-by-zero], direct image [def-weil-pbc-direct-image] and inverse image, whose maps are the counit of $j_!\\dashv j^{-1}$ and the unit of $i^{-1}\\dashv i_*$, is exact.\n3. Let $j_a:U_a\\hookrightarrow C$ be the composite open immersion. Then\n$$\n \\mathcal C(C,F)\\quad\\Longleftrightarrow\\quad\n \\mathcal C(C,j_{a,!}(F|_{U_a}))\\text{ for every }a,\n$$\nwhere, for a curve coefficient pair $(C,G)$, $\\mathcal C(C,G)$ is the conjunction of the eight assertions $\\mathcal C_1(C,G),\\dots,\\mathcal C_8(C,G)$ of [def-weil-pbc-eight-curve-assertions], each an implication that is true when its hypotheses (on $C$: affine, proper; on $G$: constructible, prime to $\\operatorname{char}k$, $p$-primary) fail, as in Stacks, Situation 0A52.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-curve-dense-open-localization.md",
+  "place": "node lem-weil-pbc-curve-dense-open-localization, order 1171"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constructible-torsion",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-inverse-image",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-eight-curve-assertions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing generic-constancy theorem to obtain a dense open V on which F is finite locally constant. Shrink V by the proved dense irreducible-opens theorem. This yields finitely many disjoint irreducible opens U_a, their dense union W, zero-dimensional complement, and irreducible connected components in W. Finite local constancy of each restriction and of the restriction to W follows from upperStar_of_range_subset because U_a and W lie inside V.",
+   "uses": [
     "prop-constructible-generic-constancy",
-    "prop-weil-pbc-geometric-stalks-exact"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-curve-setting",
-    "def-weil-pbc-etale-sheaves",
-    "prop-weil-pbc-geometric-stalks-exact"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            212,
-            232
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+    "lem-pbc-q1-dense-irreducible-opens"
+   ],
+   "elementary": false
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lem-weil-pbc-curve-dense-open-localization",
-    "worker": "stage1",
-    "summary": "Rewrote the statement to introduce its objects (k algebraically closed, C reduced separated finite type of dim <=1, r prime, F constructible F_r-sheaf), split into three parts, and said what C(C,G) means (conjunction of the eight, each an implication, as in Stacks 0A52). Replaced the one-paragraph blueprint proof by eight steps following Stacks Theorem 03SC proof (paragraphs 3-4), Lemma 0GJA and Lemma 095L: constructible bridge + generic constancy (constructible-chapter nodes, Lean closed: tools), shrinking to disjoint irreducible pieces, Z zero-dimensional, the 095L sequence (new node lem-weil-pbc-open-closed-short-exact), the 0GJA equivalence (sibling node lem-weil-pbc-curve-assertions-dense-open, created by the worker of prop-weil-pbc-algebraically-closed-extension), the direct-sum decomposition of j_!j^{-1}F by stalks, and the per-assertion direct-sum equivalence. Dropped as pointers: lemma-weil-pbc-eight-curve-devissage, lem-weil-pbc-zero-dimensional-cohomology, lem-weil-pbc-zero-dimensional-field-extension (they belong to the proof of the 0GJA node), prop-weil-pbc-geometric-stalks-exact (stalks only used via conservativity). Repointed def-weil-pbc-etale-sheaves to def-weil-pbc-abelian-etale-sheaves and def-weil-pbc-constructible-torsion. Per assertion: the equivalence holds for each C_j separately (steps 5 and 7), in particular C7; the node states the conjunction, which is what its user needs."
+  {
+   "text": "Apply the dense-open prime-coefficient assertion equivalence to W to identify assertions for F with those for extension by zero of its restriction to W.",
+   "uses": [
+    "lem-pbc-q1-dense-open-prime-assertions"
+   ],
+   "elementary": false
   },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "statement made precise in three parts; Stacks 03SC paragraphs 3-4 with 0GJA and 095L; the eight assertions handled as a conjunction, which the parent needs; 1 new node; lemma-weil-pbc-curve-dense-open-reduction is a duplicate for stage 3"
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-    "declaration": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek",
-    "branch": "slopmaster2",
-    "line": 212,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-bd1bc",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261012T112828-L-763717",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered finite-quotient signature, node record, change record, report, and Lean source matched each other and the repository; delivered module and downstream caller compiled cleanly.",
-    "sorry_before": [
-      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-    ],
-    "sorry_after": [
-      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-    ]
+  {
+   "text": "Compose the preceding equivalence with the finite-disjoint-open assertion equivalence. Together with the geometric data and restriction witnesses this gives the required existential componentwise conclusion.",
+   "uses": [
+    "lem-pbc-q1-disjoint-open-prime-assertions"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pbc-q1-dense-irreducible-opens",
+  "lem-pbc-q1-dense-open-prime-assertions",
+  "lem-pbc-q1-disjoint-open-prime-assertions",
+  "prop-constructible-generic-constancy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, third and fourth paragraphs; Lemma 0GJA; module-valued glue proved by Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constructible etale sheaf is locally constant on a dense open subscheme of a curve",
+   "results": "StructureSheaf.locally_const_basicOpen (Mathlib.AlgebraicGeometry.StructureSheaf), IsLocallyConstant, LocallyConstant (Mathlib.Topology.LocallyConstant.Basic), Sheaf.isConstant_iff_of_equivalence, Sheaf.IsConstant, Sheaf.isConstant_iff_mem_essImage (Mathlib.CategoryTheory.Sites.ConstantSheaf): constant sheaves on a site only, no constructible or locally constant etale sheaves",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dense open subset of a noetherian scheme on which a sheaf is locally constant, complement finite set of closed points in dimension one",
+   "results": "exists_of_res_zero_of_qcqs_of_top, exists_of_res_zero_of_qcqs, exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, exists_of_res_eq_of_qcqs(_of_top) (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated), exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact (Morphisms.QuasiCompact): structure-sheaf sections only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a sheaf F on a space X, open U with closed complement Z, exact sequence 0 -> j_! j^* F -> F -> i_* i^* F -> 0",
+   "results": "GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, TopCat.Sheaf.objSupIsoProdEqLocus (Mathlib.Topology.Sheaves.CommRingCat): no extension by zero",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.ShortComplex.ShortExact",
+   "results": "none",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'extensionByZero\\|lowerShriek\\|IsLocallyConstantSheaf\\|LocallyConstantSheaf' Mathlib/; grep -rn 'j_!\\|extension by zero\\|locally constant\\|constructible' Mathlib/AlgebraicGeometry/Sites/; grep -rn 'finite_irreducibleComponents' Mathlib/Topology",
+   "results": "no extension by zero, no locally constant or constructible etale sheaves, no curve assertions; Mathlib/AlgebraicGeometry/Sites/ has only the small etale site, its points and constant sheaves. Used ingredient: TopologicalSpace.NoetherianSpace.finite_irreducibleComponents (Mathlib/Topology/NoetherianSpace.lean:193)",
+   "date": "2026-10-09",
+   "verdict": "no match (only the finiteness of irreducible components, used in step 2)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1171,
+ "blueprint_uses": [
+  "def-constructible-constructible",
+  "def-constructible-stratification",
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lem-weil-pbc-zero-dimensional-field-extension",
+  "lemma-weil-pbc-eight-curve-devissage",
+  "prop-constructible-generic-constancy",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-etale-sheaves",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      212,
+      232
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-curve-dense-open-localization",
+  "worker": "stage1",
+  "summary": "Rewrote the statement to introduce its objects (k algebraically closed, C reduced separated finite type of dim <=1, r prime, F constructible F_r-sheaf), split into three parts, and said what C(C,G) means (conjunction of the eight, each an implication, as in Stacks 0A52). Replaced the one-paragraph blueprint proof by eight steps following Stacks Theorem 03SC proof (paragraphs 3-4), Lemma 0GJA and Lemma 095L: constructible bridge + generic constancy (constructible-chapter nodes, Lean closed: tools), shrinking to disjoint irreducible pieces, Z zero-dimensional, the 095L sequence (new node lem-weil-pbc-open-closed-short-exact), the 0GJA equivalence (sibling node lem-weil-pbc-curve-assertions-dense-open, created by the worker of prop-weil-pbc-algebraically-closed-extension), the direct-sum decomposition of j_!j^{-1}F by stalks, and the per-assertion direct-sum equivalence. Dropped as pointers: lemma-weil-pbc-eight-curve-devissage, lem-weil-pbc-zero-dimensional-cohomology, lem-weil-pbc-zero-dimensional-field-extension (they belong to the proof of the 0GJA node), prop-weil-pbc-geometric-stalks-exact (stalks only used via conservativity). Repointed def-weil-pbc-etale-sheaves to def-weil-pbc-abelian-etale-sheaves and def-weil-pbc-constructible-torsion. Per assertion: the equivalence holds for each C_j separately (steps 5 and 7), in particular C7; the node states the conjunction, which is what its user needs."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "statement made precise in three parts; Stacks 03SC paragraphs 3-4 with 0GJA and 095L; the eight assertions handled as a conjunction, which the parent needs; 1 new node; lemma-weil-pbc-curve-dense-open-reduction is a duplicate for stage 3"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek",
+  "branch": "slopmaster2",
+  "line": 212,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_forall_lowerShriek"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T144055-L-2089534",
+  "kind": "interface",
+  "sorry_before": [
+   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+  ],
+  "sorry_after": []
+ }
 }
