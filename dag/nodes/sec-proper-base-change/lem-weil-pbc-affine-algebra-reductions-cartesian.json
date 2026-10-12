@@ -16,31 +16,28 @@
  ],
  "proof": [
   {
-   "text": "For affine U in X, both Y over U and Yn over j_n inverse U are affine. The component b_n(U), using the isomorphism B(U) = O_Y(g inverse U), defines a morphism from Yn over U to Y over U. Because b_n is a morphism of O_X-algebras it is over U, and naturality of b_n on restrictions makes these local morphisms compatible. The affine structure-algebra correspondence therefore glues them to u_n over X.",
+   "text": "Compose alpha inverse with each b_n. Apply affine_algebra_local_maps, glue the compatible maps over inverse images of the affine basis, and cancel top-section isomorphisms to recover the prescribed section maps. This constructs u_n over X without selecting data from any unproved existence theorem. The generalized private helper unique_over_map_of_algebra also proves uniqueness among over-X morphisms with those section maps; its uniqueness clause is used directly in step 3.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec"
+    "lem-weil-pbc-affine-algebra-local-maps"
    ],
    "elementary": false
   },
   {
-   "text": "Write j_n inverse U = Spec(R/J_n). The hypotheses give O_Yn(r_n inverse U) = B(U)/J_n B(U) by the first isomorphism theorem for rings. This is B(U) tensor_R (R/J_n), the coordinate ring of the base change of Y to Xn. Thus the square is cartesian on every affine chart, and hence globally.",
+   "text": "On each affine U, the ring square formed by j.app, the algebra structure map, f.appLE and b.app is a pushout: descend any compatible pair via the surjective b.app; its kernel is the extended kernel of j.app, and surjectivity of j.app proves the other factorization. Transport this pushout by alpha and the top-section isomorphisms, apply Spec, and identify all four affine schemes via isoSpec. Paste with the restriction square for j and use Scheme.isPullback_of_openCover on the inverse images of the affine basis in Y. These are the proved private helpers quotient_pushout, affine_pullback_of_pushout and affine_algebra_quotient_isPullback.",
    "uses": [
     "def-sbc-closed-immersion-ideal-sheaf",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-affine-morphism-relative-spec"
+    "def-pc-fibre-product"
    ],
    "elementary": false
   },
   {
-   "text": "The equality b_(n+1)(U) followed by gn sharp = b_n(U), on every affine chart, identifies the algebra maps induced by gn followed by u_(n+1) and u_n. Faithfulness of the affine correspondence gives equality on each chart. Morphisms agree globally since these charts cover the source.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec"
-   ],
-   "elementary": false
+   "text": "For gn followed by u_(n+1), composition of appLE and hcompat give the prescribed section maps of alpha inverse followed by b_n. Apply the uniqueness clause of unique_over_map_of_algebra. That clause is proved by comparing resLE maps into affine inverse images under g using ext_of_isAffine and top-section transport, then Scheme.hom_ext_of_forall.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-algebra-local-maps",
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-pc-fibre-product"
  ],
@@ -48,7 +45,7 @@
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
   "place": "Lemma 09ZT, last sentence, recovery of Y_n; Morphisms 01S8/01SA, affine correspondence",
-  "note": "Grouped steps of the existing 09ZT proof plan; ring-sheaf quotient characterization and chart compatibility written out by X3 from Stacks 09ZT, 088F, 0CYS and 01S8."
+  "note": "A2 formalized all three steps. Uses the proved local-map correspondence instead of the full relative-spectrum anti-equivalence; the quotient pushout, affine transport and global pullback assembly are proved directly from Mathlib. Repair after the duplicate-helper return: replaced affine_over_ext and exists_over_map_of_algebra by one generalized existence-and-uniqueness helper and used its uniqueness clause. The existing copies in AffineStructureAlgebraFullyFaithful are private and cannot be imported by their source names."
  },
  "mathlib_searches": [
   {
@@ -119,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X3",
+  "reviewer": "X-fba54",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T085403-L-49234",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135213-L-1654065",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged Lean signature and complete proof with the node; only proof fields changed. Delivery and direct importer Sheaf.Paper.AlgebraizeFiniteOverProper compile cleanly; all five axiom probes use only the three permitted axioms."
  }
 }

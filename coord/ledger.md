@@ -7739,3 +7739,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: returned deliver/X3/Sheaf.CategoryTheory.SiteInjectiveCechAcyclic (reviewer RETURN: (the landing tools, head 1707f242f) the delivery did not land: (d) user Sheaf.Topology.DirectedInjectiveDerivedSectionsA)
 - 13:52 L: merged deliver/A2/Sheaf.Algebra.Homology.RelativeFlatExtension (stage 3; reviewer PASS; first push; landing 20261012T135213-L-1653842 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/A2/Sheaf.Algebra.Homology.TotalFreeFiltrationQuotients (stage 3; reviewer PASS; first push; landing 20261012T135213-L-1653960 (interface); batch 20261012T135212; modules 4; new nodes 3)
+- 13:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.AffineAlgebraReductionsCartesian (stage 3; reviewer PASS; after a return; landing 20261012T135213-L-1654065 (proof); batch 20261012T135212; modules 1; new nodes 0)
