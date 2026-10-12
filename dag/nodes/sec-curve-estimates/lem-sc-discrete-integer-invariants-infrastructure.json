@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-discrete-integer-invariants-infrastructure",
+ "kind": "statement",
+ "title": "Enough injectives and left exact invariants after an equivalence to discrete integer representations",
+ "statement": "Let $G$ be a topological group in universe $u$, let $r=\\max(u,s)$, and let $\\mathcal A$ be any category with an equivalence $E:\\mathcal A\\simeq\\operatorname{DiscreteRep}_{\\mathbf Z}(G)$ [def-exc-discrete-modules-category], with representation carriers in universe $r$. Then $\\mathcal A$ has enough injectives [def-sp-injective-resolutions], and the functor sending $M$ to the underlying additive group of $E(M)^G$ preserves finite limits [def-sp-left-exact-additive]. No compactness or abelian-category hypothesis on $\\mathcal A$ is required.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 04JF, functorial injective embeddings; Mathlib Rep.invariantsAdjunction and Adjunction.restrictFullyFaithful for left exactness"
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Apply the arbitrary-ring functorial embedding theorem with R=Z and carrier universe max(u,s). For every M the component M to J(M) is monic and J(M) is injective. These give injective presentations; Mathlib EnoughInjectives.of_equivalence transports them along E.",
+   "uses": [
+    "lem-exc-rg-discrete-modules-functorial-injective-embeddings",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The trivial representation on any integer module has open stabilizers because every stabilizer is the whole group. Lift the trivial-action functor to the full discrete subcategory. Restrict Rep.invariantsAdjunction along its fully faithful inclusion and the identity on integer modules, using Adjunction.restrictFullyFaithful. This makes the restricted invariants functor a right adjoint. Compose it with E and the underlying additive-group functor; all three preserve limits, so the composite preserves finite limits.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-rg-discrete-modules-functorial-injective-embeddings",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 04JF, functorial injective embeddings; Mathlib Rep.invariantsAdjunction and Adjunction.restrictFullyFaithful for left exactness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Discrete integer representations of a profinite group have enough injectives and invariants preserve finite limits",
+   "results": "Service unavailable: Internal Server Error. No conclusion from this search.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial injective embeddings of discrete representations for arbitrary rings and invariants as right adjoint to trivial representations",
+   "results": "Rep.invariantsAdjunction; Rep.instIsRightAdjointModuleCatInvariantsFunctor. The library also contains Rep.discreteContinuousRep_functorialInjectiveEmbeddings_of_topologicalGroup.",
+   "date": "2026-10-13",
+   "verdict": "Use the library embedding theorem, restrict the Mathlib adjunction, and compose limit-preserving functors."
+  },
+  {
+   "tool": "grep",
+   "query": "invariantsAdjunction|discreteContinuousRep_functorialInjectiveEmbeddings_of_topologicalGroup",
+   "results": "Mathlib/RepresentationTheory/Invariants.lean: invariantsAdjunction. Library arbitrary-ring embedding theorem in DiscreteContinuousFunctorialInjectives.lean. Blueprint searches discrete injectives and locally constant cochains: no matching blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "No single Mathlib statement; the infrastructure is proved from existing statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "Parent step 1 (enough injectives) and step 4 (left exact invariants).",
+   "via": [
+    "lem-sc-discrete-resolution-inhomogeneous-cohomology",
+    "lem-sc-discrete-resolution-continuous-cohomology",
+    "lem-sc-discrete-invariants-continuous-comparison",
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure",
+  "file": "lean/Sheaf/RepresentationTheory/DiscreteIntegerInvariantsInfrastructure.lean",
+  "declaration": "Rep.discreteInteger_invariants_infrastructure",
+  "statement": "theorem discreteInteger_invariants_infrastructure\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    (A : Type v) [Category.{w} A]\n    (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G)\n    : EnoughInjectives A ∧ PreservesFiniteLimits\n    (E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙\n      forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T235556-L-2201828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T235556-L-2201828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,7 +11,8 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.Topology.Connected.TotallyDisconnected
-import Sheaf.CategoryTheory.DeltaFunctor
+import Sheaf.RepresentationTheory.DiscreteIntegerInvariantsInfrastructure
+import Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable
 import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
@@ -30,6 +31,41 @@ universe u v w s
 open CategoryTheory
 
 namespace Rep
+
+private theorem universalDeltaFunctor_iso_all
+    {C D : Type*} [Category C] [Abelian C] [Category D] [Abelian D]
+    (T R : CohomologicalDeltaFunctor C D) (hT : T.IsUniversal) (hR : R.IsUniversal)
+    (e : T.F 0 ≅ R.F 0) : ∀ q : ℕ, Nonempty (T.F q ≅ R.F q) := by
+  intro q
+  obtain ⟨α, hα, _⟩ := hT R e.hom
+  obtain ⟨β, hβ, _⟩ := hR T e.inv
+  let idT : CohomologicalDeltaFunctor.Hom T T :=
+    ⟨fun n ↦ 𝟙 (T.F n), by intros; simp⟩
+  let idR : CohomologicalDeltaFunctor.Hom R R :=
+    ⟨fun n ↦ 𝟙 (R.F n), by intros; simp⟩
+  let αβ : CohomologicalDeltaFunctor.Hom T T :=
+    ⟨fun n ↦ α.app n ≫ β.app n, by
+      intro S hS n
+      simp only [NatTrans.comp_app, ← Category.assoc]
+      rw [α.naturality S hS n]
+      simp only [Category.assoc]
+      rw [β.naturality S hS n]⟩
+  let βα : CohomologicalDeltaFunctor.Hom R R :=
+    ⟨fun n ↦ β.app n ≫ α.app n, by
+      intro S hS n
+      simp only [NatTrans.comp_app, ← Category.assoc]
+      rw [β.naturality S hS n]
+      simp only [Category.assoc]
+      rw [α.naturality S hS n]⟩
+  have hαβ : αβ = idT := (hT T (𝟙 (T.F 0))).unique
+    (by change α.app 0 ≫ β.app 0 = _; rw [hα, hβ]; exact e.hom_inv_id)
+    rfl
+  have hβα : βα = idR := (hR R (𝟙 (R.F 0))).unique
+    (by change β.app 0 ≫ α.app 0 = _; rw [hβ, hα]; exact e.inv_hom_id)
+    rfl
+  refine ⟨⟨α.app q, β.app q, ?_, ?_⟩⟩
+  · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom T T ↦ f.app q) hαβ
+  · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom R R ↦ f.app q) hβα
 
 /-- Any complex with the locally constant inhomogeneous terms and differential computes
 invariants of an injective resolution transported through an abelian equivalence.
@@ -87,6 +123,46 @@ theorem nonempty_equiv_invariantResolution_inhomogeneous
     (q : ℕ) :
     Nonempty (((((E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
       forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat).mapHomologicalComplex
-        (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃ K.homology q) := by sorry
+        (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃ K.homology q) := by
+  classical
+  let V := E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙
+    forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat
+  obtain ⟨hI, hV⟩ := discreteInteger_invariants_infrastructure G A E
+  let : EnoughInjectives A := hI
+  let : CategoryTheory.Limits.PreservesFiniteLimits V := hV
+  obtain ⟨C, e, _hmap, hd, T, hTF, ⟨hTzero⟩, heff⟩ :=
+    exists_locallyConstantCochains_effaceable G A E
+  have hT : T.IsUniversal := effaceable_deltaFunctor_isUniversal T heff
+  obtain ⟨R, hRF, hR, ⟨hRzero⟩⟩ := V.exists_universal_rightDerived_deltaFunctor
+  have hRzero' : R.F 0 ≅ V := by
+    rw [hRF]
+    exact hRzero
+  obtain ⟨comparison⟩ := universalDeltaFunctor_iso_all R T hR hT
+    (hRzero' ≪≫ hTzero.symm) q
+  rw [hRF, hTF] at comparison
+  let coord : ∀ n : ℕ, (C.obj F).X n ≅ K.X n :=
+    fun n ↦ ((e F n).trans (t n).symm).toAddCommGrpIso
+  have hcoord : ∀ (n : ℕ) (x : (C.obj F).X n),
+      (coord n).hom x = (t n).symm (e F n x) := by
+    intros
+    rfl
+  let iso : C.obj F ≅ K := HomologicalComplex.Hom.isoOfComponents coord (by
+    intro i j hij
+    have hj : i + 1 = j := hij
+    subst j
+    ext x
+    apply (t (i + 1)).injective
+    apply LocallyConstant.ext
+    intro g
+    change t (i + 1) (K.d i (i + 1) ((coord i).hom x)) g =
+      t (i + 1) ((coord (i + 1)).hom ((C.obj F).d i (i + 1) x)) g
+    rw [ht, hcoord, hcoord]
+    simp only [AddEquiv.apply_symm_apply]
+    exact (hd F i x g).symm)
+  let h : (((V.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).homology q)
+      ≅ K.homology q :=
+    (I.isoRightDerivedObj V q).symm ≪≫ comparison.app F ≪≫
+      (HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.up ℕ) q).mapIso iso
+  exact ⟨h.addCommGroupIsoToAddEquiv.toEquiv⟩
 
 end Rep
