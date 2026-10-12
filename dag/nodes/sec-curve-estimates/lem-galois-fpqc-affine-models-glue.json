@@ -1,0 +1,171 @@
+{
+ "id": "lem-galois-fpqc-affine-models-glue",
+ "kind": "statement",
+ "title": "Gluing affine effective models with locally invariant projection",
+ "statement": "Let $f:X\\to S$ be a singleton fpqc covering [def-weil-pbc-fpqc-covering] of schemes [def-pc-scheme], and let $D$ be a descent datum on $V\\to X$ [def-pd-descent-datum]. For each affine open $U\\subset S$, set $X_U=X\\times_S U$ and $V_U=V\\times_X X_U$, using the chosen fibre products [def-pc-fibre-product]. Suppose $V_U$ has an effective datum $E_U$ for $X_U\\to U$, and projection $V_U\\to V$ intertwines its transport with that of $D$ for pairs of points of $X_U$ with the same image in $U$. There exist $W\\to S$ and $q:V\\to W$ exhibiting $V$ as the pullback of $W$ along $f$, such that for every $U$ and pair of test points $a,b:T\\to X_U$ with equal image in $U$, transport by $D$ of a point of $V_U$ projected to $V$ leaves its composite with $q$ unchanged.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Compare local effective models on nested affine opens by their common transport-compatible pullback. Unique fpqc descent of morphisms produces transition isomorphisms; uniqueness proves the functor laws and the transition squares are pullbacks.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  },
+  {
+   "text": "Relative gluing along the directed affine cover gives W over S. Glue compatible pullback identifications and their inverses to obtain the global pullback projection q.",
+   "uses": [
+    "lem-weil-pbc-relative-glueing-affine-opens",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  },
+  {
+   "text": "Over U the composite with q agrees with the effective projection for E_U. Its transport invariance and the assumed compatibility yield the displayed local invariance.",
+   "uses": [
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-fpqc-morphisms-descend",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent datum effective locally on an open cover of the base scheme",
+   "results": "['AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S', 'AlgebraicGeometry.Scheme.Cover.gluedCover', 'CategoryTheory.Pseudofunctor.isEquivalence_toDescentData', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀', 'AlgebraicGeometry.Scheme.GlueData.openCover', 'AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover', 'CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq', 'CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced']; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic gluing APIs inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "DescentDatum.*(restrict|pullback)|isEffective.*local",
+   "results": "[]; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic gluing APIs inspected"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A descent datum for schemes is effective if its restrictions to affine opens of the base are effective",
+   "results": "[]; service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEffective|DescentDatum|glueMorphismsOfLocallyDirected",
+   "results": "['Mathlib/CategoryTheory/EquivalenceRelation.lean', 'Mathlib/AlgebraicGeometry/Cover/Directed.lean', 'Mathlib/AlgebraicGeometry/Cover/Directed.lean', 'Mathlib/AlgebraicGeometry/Cover/Directed.lean', 'Mathlib/AlgebraicGeometry/Cover/Directed.lean', 'Mathlib/AlgebraicGeometry/Cover/Directed.lean', 'Mathlib/AlgebraicGeometry/Normalization.lean', 'Mathlib/AlgebraicGeometry/Normalization.lean']; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic gluing APIs inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeGluingData|isEffective",
+   "results": "[]; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic gluing APIs inspected"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative gluing of schemes over affine open cover",
+   "results": "['AlgebraicGeometry.Scheme.GlueData.gluedScheme', 'AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued', 'AlgebraicGeometry.Scheme.Cover.RelativeGluingData', 'AlgebraicGeometry.Scheme.Cover.gluedCover', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S', 'AlgebraicGeometry.Scheme.GlueData.glued', 'AlgebraicGeometry.Scheme.GlueData', 'AlgebraicGeometry.Scheme.Cover.fromGlued']; ",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic gluing APIs inspected"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FpqcEffectivityAffineBaseGluing",
+  "group": "Y3",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 2 ('effectivity ... By [lem-galois-glue] the P_i glue to a Y-scheme P'), replaced by Stacks 0245 for the fpqc covering {Y' -> Y}: the first sentence of the proof of 0245, 'Hence Lemma 02W3 applies and it suffices to prove the statement ... in case the fpqc-covering is given by a single {X -> S} flat surjective morphism of affines'",
+   "via": [
+    "lem-galois-fpqc-effectivity-affine-base-gluing",
+    "lem-galois-fpqc-descending-types-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcAffineModelsGlue",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcAffineModelsGlue.lean",
+  "declaration": "AlgebraicGeometry.fpqc_affine_effective_models_glue",
+  "statement": "theorem fpqc_affine_effective_models_glue {X S : Scheme.{u}} (f : X ⟶ S) (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S) {V : Over X} (D : Over.DescentDatum f V) (hlocal : ∀ U : S.affineOpens, ∃ E : Over.DescentDatum (pullback.snd f U.1.ι) (Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))), E.IsEffective ∧ ∀ {T : Scheme.{u}} (a b : T ⟶ pullback f U.1.ι) (hab : a ≫ pullback.snd f U.1.ι = b ≫ pullback.snd f U.1.ι) (x : Over.mk a ⟶ Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))), (D.transport (a ≫ pullback.fst f U.1.ι) (b ≫ pullback.fst f U.1.ι) (by simp only [Category.assoc, pullback.condition]; rw [← Category.assoc, ← Category.assoc, hab]) (Over.homMk (x.left ≫ pullback.fst V.hom (pullback.fst f U.1.ι)) (by simpa [Category.assoc, pullback.condition] using congrArg (fun z ↦ z ≫ pullback.fst f U.1.ι) (Over.w x)))).left = (E.transport a b hab x).left ≫ pullback.fst V.hom (pullback.fst f U.1.ι)) : ∃ (W : Over S) (q : V.left ⟶ W.left), IsPullback q V.hom W.hom f ∧ ∀ (U : S.affineOpens) {T : Scheme.{u}} (a b : T ⟶ pullback f U.1.ι) (hab : a ≫ pullback.snd f U.1.ι = b ≫ pullback.snd f U.1.ι) (x : Over.mk a ⟶ Over.mk (pullback.snd V.hom (pullback.fst f U.1.ι))), (D.transport (a ≫ pullback.fst f U.1.ι) (b ≫ pullback.fst f U.1.ι) (by simp only [Category.assoc, pullback.condition]; rw [← Category.assoc, ← Category.assoc, hab]) (Over.homMk (x.left ≫ pullback.fst V.hom (pullback.fst f U.1.ι)) (by simpa [Category.assoc, pullback.condition] using congrArg (fun z ↦ z ≫ pullback.fst f U.1.ι) (Over.w x)))).left ≫ q = x.left ≫ pullback.fst V.hom (pullback.fst f U.1.ι) ≫ q",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T095933-L-328556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T095933-L-328556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

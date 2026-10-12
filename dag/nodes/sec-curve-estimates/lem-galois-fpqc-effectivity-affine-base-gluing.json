@@ -15,39 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Pull back the covering and datum to each affine open A of S. The covering stays fpqc and P is preserved; the affine-base hypothesis produces an effective object W_A.",
+   "text": "Restrict to each affine open U by pulling back X and V. Use the canonical pullback datum along X_U to X, then restrict its transport to pairs with equal image in U. The transport laws follow from those of the canonical datum.",
    "uses": [
-    "lem-galois-fpqc-covering-base-change",
-    "def-pc-fibre-product",
-    "def-pd-descent-datum"
+    "lem-galois-fpqc-canonical-pullback-datum",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/descent.tex",
     "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
    }
   },
   {
-   "text": "For B contained in A compare the effective objects over B through their canonical identifications after fpqc pullback. Unique descent of morphisms gives inverse transition maps; uniqueness proves composition and identity, and identifies each transition square as a pullback.",
+   "text": "Base-change stability of the fpqc precoverage gives the cover of U; hbase gives P of the restricted projection. Apply hlocal to produce the effective restriction.",
    "uses": [
-    "lem-galois-fpqc-morphisms-descend",
-    "def-pc-fibre-product",
-    "def-pd-descent-datum"
+    "lem-galois-fpqc-covering-base-change"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/descent.tex",
     "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
    }
   },
   {
-   "text": "Relative gluing on the directed affine cover constructs W over S. Glue the compatible local identifications of W times_S X with V and their inverses. Their transport equations hold locally and hence globally, giving an invariant pullback projection V to W.",
+   "text": "Apply the affine-open restriction criterion with the constructed effective data and canonical projection compatibility.",
    "uses": [
-    "lem-weil-pbc-relative-glueing-affine-opens",
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "def-pd-descent-datum"
+    "lem-galois-fpqc-effectivity-open-local"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/descent.tex",
     "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
@@ -55,12 +51,11 @@
   }
  ],
  "proof_deps": [
-  "lem-galois-fpqc-covering-base-change",
-  "def-pc-fibre-product",
+  "lem-galois-fpqc-canonical-pullback-datum",
   "def-pd-descent-datum",
-  "lem-galois-fpqc-morphisms-descend",
-  "lem-weil-pbc-relative-glueing-affine-opens",
-  "lem-weil-pbc-scheme-morphism-gluing"
+  "def-pc-fibre-product",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-galois-fpqc-effectivity-open-local"
  ],
  "proof_origin": {
   "by": "document",
@@ -142,9 +137,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261012T060754-L-2915290",
+  "landing": "20261012T095933-L-328556",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
