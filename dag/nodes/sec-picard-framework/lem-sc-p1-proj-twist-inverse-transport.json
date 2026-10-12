@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-p1-proj-twist-inverse-transport",
+ "kind": "statement",
+ "title": "Transport of one Proj twist along any chart comparison",
+ "statement": "Let $k$ be a field, let $S=k[x_0,x_1]$ carry its total-degree grading, let $P=\\operatorname{Proj}S$ [def-nagata-affine-proj], and let $C:P\\cong\\mathbf P^1_k$ be a chart-compatible scheme isomorphism [def-sc-p1-proj-chart-isomorphism], with the standard chart convention of [def-sc-p1-standard]. For every integer $d$, the inverse pullback of the associated Proj twist [def-weil-pbc-proj-twisting-sheaf] satisfies $(C^{-1})^*\\operatorname{Proj.twist}(d)\\cong\\operatorname{ProjectiveSpace.twist}(d)$, where the latter is the inverse image of the integral-model twist [def-pc-projective-space-twist]. This assertion concerns one rank-one twist and assumes no auxiliary graded module, basis or supplied sheaf.",
+ "source": {
+  "document": "Stacks Project, Constructions of Schemes; Weil conjectures blueprint",
+  "place": "Tags 01M6, 01M7, 01MN and Section 01MM; lem-sc-p1-graded-resolution, shifted-free clause",
+  "url": "https://stacks.math.columbia.edu/tag/01MN"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-sc-p1-proj-chart-isomorphism",
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "On D(x_i) the degree-d part of the localized polynomial ring is free on x_i^d, for every integer d: multiplication by x_i^(-d) identifies it with the degree-zero part. The twist restriction is therefore free of rank one. On the overlap x_0^d=t^(-d)x_1^d. This follows from the local fraction definition of the twist and the standard chart ratio t=x_1/x_0.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The chart equations of C identify the transported generators with generators on the standard projective-line opens. The projective-space twist is pulled back from the integral Proj model. On each integral chart its trivialization is free on x_i^d; extension of scalars to k preserves that free module and maps the overlap coefficient (x_i/x_j)^d to the same ratio over k. Hence both transported and projective-space twists have the same two generators and transition relation, including negative d and d=0.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-sc-p1-proj-chart-isomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These rank-one chart data give TwistData on both modules. Apply the uniqueness of the glued twist to identify them: the local maps send generator to generator, agree on the overlap by the transition relation, and their similarly glued inverses give identity composites.",
+   "uses": [
+    "lem-sc-p1-twist-exists"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-sc-p1-proj-chart-isomorphism",
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-twist-exists"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Basis and chart-generator argument expanding the shifted-free clause of lem-sc-p1-graded-resolution"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback polynomial Proj twist along projective line chart isomorphism",
+   "results": "HTTP 500 Internal Server Error; service unavailable.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback polynomial Proj twist along projective line chart isomorphism",
+   "results": "Found Proj.pullbackAwayιIso and its projection formulas, concerning scheme chart intersections; no comparison of twisting modules.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*basis.*twist|twist.*inverse.*transport|PreservesCoproduct.iso",
+   "results": "No homogeneous basis or transported-twist theorem. Found PreservesCoproduct.iso, used for the coproduct step of the parent.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre O(d) on polynomial projective spectrum agrees with the pullback of the integral twisting sheaf after extending the coefficient ring",
+   "results": "Returned chart morphisms and pullbackAwayιIso scheme comparisons; none compares twisting sheaves.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*([Bb]ase[Cc]hange|[Tt]ransport)|([Bb]ase[Cc]hange|[Tt]ransport).*twist|finite.*graded.*free",
+   "results": "Mathlib grep returned no hits. Separate rg over lean/ found existing degree-one chart comparisons and projective-space twist base change, not either new statement.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisSheafTwists",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "Proof, final clause: each sheafified finite graded free module is a finite sum of twists",
+   "via": [
+    "lem-sc-p1-homogeneous-basis-sheaf-twists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjTwistInverseTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/ProjTwistInverseTransport.lean",
+  "declaration": "AlgebraicGeometry.Proj.proj_twist_inverse_transport",
+  "statement": "theorem proj_twist_inverse_transport (k : Type u) [Field k]\n    (C : ProjectiveLine.ProjChartIsomorphism k) (d : ℤ) :\n    Nonempty ((Scheme.Modules.pullback C.iso.inv).obj\n      (twist (homogeneousSubmodule (Fin 2) k) d) ≅\n        ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T060800-L-2918698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T060800-L-2918698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

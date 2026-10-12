@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-p1-homogeneous-basis-proj-coproduct",
+ "kind": "statement",
+ "title": "Homogeneous basis comparison on polynomial Proj",
+ "statement": "Let $k$ be a field, $S=k[x_0,x_1]$ with total-degree grading and $P=\\operatorname{Proj}S$ [def-nagata-affine-proj]. Let $M=\\bigoplus_{j\\in\\mathbf Z}M_j$ be an internally graded $S$-module satisfying $S_nM_j\\subseteq M_{n+j}$ for all $n\\ge0$. Let $r\\ge0$, let $d:\\operatorname{Fin}(r)\\to\\mathbf Z$, and let $b_a$ be an $S$-basis with $b_a\\in M_{-d_a}$. Let $F$ be an $\\mathcal O_P$-module equipped, on each positive homogeneous standard open $D_+(f)$, with an injective additive map $\\alpha_f$ into $M_f$, whose image is exactly the degree-zero fractions [def-weil-pbc-proj-twisting-sheaf]. Assume $\\alpha_f$ is linear over $S_{(f)}$ via the chart ring map, and that restriction along $D_+(g)\\subseteq D_+(f)$ sends $y/f^m$ to $a^my/g^{em}$ whenever $e>0$, $a$ is homogeneous and $g^e=af$. Then $F\\cong\\bigoplus_{a\\in\\operatorname{Fin}(r)}\\operatorname{Proj.twist}(d_a)$. No chart comparison to projective space or pullback occurs in this statement.",
+ "source": {
+  "document": "Stacks Project, Constructions of Schemes; Weil conjectures blueprint",
+  "place": "Tags 01M6, 01M7, 01MN and Section 01MM; lem-sc-p1-graded-resolution, shifted-free clause",
+  "url": "https://stacks.math.columbia.edu/tag/01MN"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use the coordinate equivalence of the finite basis. Decompose every coordinate polynomial into homogeneous parts. Its degree-n part times b_a lies in M_(n-d_a). Uniqueness of the internal direct-sum decomposition shows that the inverse coordinate map sends M_j exactly to the tuples with coordinate a in S_(d_a+j), with zero coordinate for negative d_a+j. The forward implication follows by decomposing the finite sum and comparing distinct degrees; the reverse implication follows directly from scalar compatibility. This also covers the empty basis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite-coproduct clause of proj_shifted_free_is_twist to the degree family d. Its chart maps identify the coproduct of Proj twists with the degree-zero fractions of the shifted coordinate module. Localize the coordinate equivalence from the previous step and restrict to degree zero. Compose with alpha_f and the inverse canonical chart maps to get mutually inverse linear maps on each positive homogeneous standard open.",
+   "uses": [
+    "lem-sc-p1-proj-shifted-free-twist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any inclusion D_+(g) subset D_+(f), standardOpenProperties supplies e>0 and homogeneous a with g^e=af. The restriction formulas for both associated sheaves send y/f^m to a^my/g^(em). The coordinate equivalence is S-linear, so the local maps commute with these restrictions. The standard opens are a basis, closed under intersections, with finite refinements. Apply the uniqueness clause of exists_sheafOfModules_from_basis to the two extensions of this common basis presheaf to obtain the isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-sheaf-of-modules-from-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-proj-shifted-free-twist",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-of-modules-from-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Basis and chart-generator argument expanding the shifted-free clause of lem-sc-p1-graded-resolution"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associated sheaf of graded module homogeneous basis direct sum twists Proj",
+   "results": "HTTP 500 Internal Server Error; service unavailable.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf of homogeneous free basis is a direct sum of twists on Proj",
+   "results": "Found free sheaf constructions and Proj.structureSheaf; no homogeneous-basis comparison.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*basis.*twist|twist.*inverse.*transport|PreservesCoproduct.iso",
+   "results": "No homogeneous basis or transported-twist theorem. Found PreservesCoproduct.iso, used for the coproduct step of the parent.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf on Proj of a finite graded free module decomposes into Serre twisting sheaves",
+   "results": "Returned Proj structure-sheaf definitions and section extensionality; none compares graded free module sheaves to twists.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*([Bb]ase[Cc]hange|[Tt]ransport)|([Bb]ase[Cc]hange|[Tt]ransport).*twist|finite.*graded.*free",
+   "results": "Mathlib grep returned no hits. Separate rg over lean/ found existing degree-one chart comparisons and projective-space twist base change, not either new statement.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisSheafTwists",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "Proof, final clause: each sheafified finite graded free module is a finite sum of twists",
+   "via": [
+    "lem-sc-p1-homogeneous-basis-sheaf-twists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/HomogeneousBasisProjCoproduct.lean",
+  "declaration": "AlgebraicGeometry.Proj.homogeneous_basis_proj_coproduct",
+  "statement": "theorem homogeneous_basis_proj_coproduct (k : Type u) [Field k]\n    (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M),\n      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (F : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f M)\n    (halpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (alpha f d hd hf) ∧\n        Set.range (alpha f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f))\n    (hscalar : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • alpha f d hd hf s)\n    (hres : ∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : M)\n          (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          alpha g b hb hg (F.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))\n    (r : ℕ) (d : Fin r → ℤ)\n    (b : Module.Basis (Fin r) (MvPolynomial (Fin 2) k) M)\n    (hb : ∀ a : Fin r, b a ∈ 𝓜 (-(d a))) :\n    Nonempty (F ≅ ∐ (fun a ↦ twist (homogeneousSubmodule (Fin 2) k) (d a)))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T060800-L-2918698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T060800-L-2918698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

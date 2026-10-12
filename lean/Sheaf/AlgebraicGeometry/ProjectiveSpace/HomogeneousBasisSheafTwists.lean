@@ -10,12 +10,9 @@ public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
-import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
-import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
-import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjTwistInverseTransport
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-!
 # Homogeneous bases give finite sums of twists
@@ -103,6 +100,12 @@ theorem homogeneous_basis_sheaf_twists (k : Type u) [Field k]
     (hb : ∀ a : Fin r, b a ∈ 𝓜 (-(d a))) :
     Nonempty ((Scheme.Modules.pullback C.iso.inv).obj F ≅
       ∐ (fun a ↦ ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) (d a))) := by
-  sorry
+  classical
+  obtain ⟨e⟩ := homogeneous_basis_proj_coproduct k M 𝓜 h𝓜 hsmul F
+    alpha halpha hscalar hres r d b hb
+  let P := Scheme.Modules.pullback C.iso.inv
+  let T := fun a : Fin r ↦ twist (homogeneousSubmodule (Fin 2) k) (d a)
+  let t := fun a : Fin r ↦ (proj_twist_inverse_transport k C (d a)).some
+  exact ⟨P.mapIso e ≪≫ PreservesCoproduct.iso P T ≪≫ Sigma.mapIso t⟩
 
 end AlgebraicGeometry.Proj
