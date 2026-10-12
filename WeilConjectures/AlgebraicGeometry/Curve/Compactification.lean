@@ -242,14 +242,79 @@ theorem exists_smooth_projectiveCompactification [PerfectField K] (p : U ⟶ Spe
   exact ⟨c, hcurve, hsm, hconn, ⟨n, hn, j ≫ ι, inferInstance, by simpa using hcomm⟩, hdense,
     hfin⟩
 
+attribute [local instance] MvPolynomial.gradedAlgebra in
 /-- **Smooth curves are quasi-projective.** A smooth curve `U` over a field `K` (separated, of
 finite type, of dimension at most one) admits an immersion into a projective space over `K`.
-The proof glues embeddings of the members of a finite affine cover one at a time, using
-sections of line bundles separating the finitely many points outside the overlap (Stacks
-`0A25`). (blueprint: `lem-sc-curves-quasi-projective`) -/
+
+Each of the finitely many connected components of `U` is an integral curve, hence a dense open
+subscheme of a closed subscheme of a projective space
+(`AlgebraicGeometry.IsCurve.exists_projectiveClosure`), so it has a coordinate cover by affine
+charts (`AlgebraicGeometry.exists_isAffineOpen_preimage_of_isImmersion`). These glue to a
+coordinate cover of `U` by affine charts (`AlgebraicGeometry.Scheme.CoordinateCover.sigma`), which
+gives an immersion into projective space
+(`AlgebraicGeometry.Scheme.CoordinateCover.exists_isImmersion`). The blueprint instead glues
+embeddings of the members of an affine cover one at a time (Stacks `0A25`).
+(blueprint: `lem-sc-curves-quasi-projective`) -/
 theorem IsCurve.isQuasiProjective (p : U ⟶ Spec (.of K)) [IsCurve p] [Smooth p] :
-    IsQuasiProjective p :=
-  sorry
+    IsQuasiProjective p := by
+  classical
+  have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian p
+  have : CompactSpace U := (quasiCompact_iff_compactSpace p).mp inferInstance
+  have : IsNoetherian U := ⟨⟩
+  have : IsRegular U := IsRegular.of_smooth p
+  -- the connected components `V c` of `U`
+  choose x hx using ConnectedComponents.surjective_coe (α := U)
+  let V (c : ConnectedComponents U) : U.Opens :=
+    ⟨connectedComponent (x c), TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _⟩
+  have hVx (y : U) : y ∈ V y := by
+    change y ∈ connectedComponent (x y)
+    rw [ConnectedComponents.coe_eq_coe.mp (hx y)]
+    exact mem_connectedComponent
+  have hV : Pairwise (Function.onFun Disjoint V) := by
+    intro c d hcd
+    have h : Disjoint (V c : Set U) (V d : Set U) := by
+      refine Set.disjoint_left.mpr fun y (hyc : y ∈ connectedComponent (x c))
+        (hyd : y ∈ connectedComponent (x d)) ↦ hcd ?_
+      rw [← hx c, ← hx d, ConnectedComponents.coe_eq_coe,
+        connectedComponent_eq hyc, connectedComponent_eq hyd]
+    exact disjoint_iff.mpr (SetLike.coe_injective
+      (by simpa using Set.disjoint_iff_inter_eq_empty.mp h))
+  have hcov : ⨆ c, V c = ⊤ :=
+    eq_top_iff.mpr fun y _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨y, hVx y⟩
+  -- each component has a coordinate cover by affine charts
+  have key (c : ConnectedComponents U) : ∃ (β : Type u) (_ : Finite β)
+      (𝒟 : (V c).toScheme.CoordinateCover β), ∀ b, IsAffineOpen (𝒟.U b) := by
+    have : ConnectedSpace (V c) :=
+      isConnected_iff_connectedSpace.mp isConnected_connectedComponent
+    have : IsCurve ((V c).ι ≫ p) :=
+      { krullDim_le_one :=
+          (topologicalKrullDim_subspace_le U (V c)).trans (IsCurve.krullDim_le_one p) }
+    have : IsRegular (V c) := IsRegular.of_smooth ((V c).ι ≫ p)
+    have : IrreducibleSpace (V c) := IsRegular.irreducibleSpace _
+    have : IsReduced (V c) := isReduced_of_isReduced_stalk _
+    have : IsIntegral (V c) := isIntegral_of_irreducibleSpace_of_isReduced _
+    have : CompactSpace (V c) :=
+      isCompact_iff_compactSpace.mp (isClosed_connectedComponent (x := x c)).isCompact
+    obtain ⟨n, _, X, ι, j, hι, hj, -, -, hcomm⟩ := IsCurve.exists_projectiveClosure ((V c).ι ≫ p)
+    have : IsImmersion (j ≫ ι) := inferInstance
+    have : IsLocallyNoetherian ℙ(n; Spec (.of K)) :=
+      LocallyOfFiniteType.isLocallyNoetherian (ℙ(n; Spec (.of K)) ↘ Spec (.of K))
+    have : QuasiCompact (j ≫ ι) := quasiCompact_of_compactSpace _
+    obtain ⟨β, hβ, ψ, -, hψ⟩ := exists_isAffineOpen_preimage_of_isImmersion (j ≫ ι)
+    let ρ := ψ ≫ ProjectiveSpace.toProjInt β (Spec (.of K))
+    have hX (b : β) : MvPolynomial.X b ∈
+        MvPolynomial.homogeneousSubmodule β (ULift.{u} ℤ) 1 :=
+      MvPolynomial.X_mem_homogeneousSubmodule_one _ b
+    have hpre (b : β) : ρ ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule β (ULift.{u} ℤ))
+        (MvPolynomial.X b) = ψ ⁻¹ᵁ ProjectiveSpace.standardOpen β (Spec (.of K)) b := rfl
+    have hcovψ : ⨆ b, ρ ⁻¹ᵁ Proj.basicOpen (MvPolynomial.homogeneousSubmodule β (ULift.{u} ℤ))
+        (MvPolynomial.X b) = ⊤ := by
+      simp only [hpre]
+      rw [← Scheme.Hom.preimage_iSup, ProjectiveSpace.iSup_standardOpen, Scheme.Hom.preimage_top]
+    exact ⟨β, hβ, Scheme.CoordinateCover.ofProj _ ρ one_pos _ hX hcovψ, fun b ↦ hψ b⟩
+  choose β hβ 𝒟 h𝒟 using key
+  let 𝒟' := Scheme.CoordinateCover.sigma V 𝒟 hV hcov
+  exact 𝒟'.exists_isImmersion p fun a ↦ (h𝒟 a.1 a.2).image_of_isOpenImmersion (V a.1).ι
 
 /-- **Compactification of a smooth curve.** A smooth connected curve `U` over an algebraically
 closed field `K` admits a compactification `c` whose ambient scheme `c.Z` is a smooth proper
@@ -280,6 +345,16 @@ theorem IsConnectedCurve.exists_smooth_properCompactification [IsAlgClosed K]
       connectedSpace := inferInstance
       krullDim_eq_one := (smoothOfRelativeDimension_iff_topologicalKrullDim_eq c.g 1).mp hsm }
   exact ⟨c, hconn, inferInstance, hfin, hclosed⟩
+
+/-- A smooth connected curve is smooth of relative dimension one. -/
+lemma IsConnectedCurve.smoothOfRelativeDimension_one {C : Scheme.{u}} (f : C ⟶ Spec (.of K))
+    [IsConnectedCurve f] [Smooth f] : SmoothOfRelativeDimension 1 f := by
+  have := IsConnectedCurve.connectedSpace' f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  exact (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
+    (IsConnectedCurve.krullDim_eq_one (f := f))
 
 /-- **Open subschemes of a proper curve are affine.** Let `C` be a smooth proper connected curve
 over an algebraically closed field `K`. Every open subscheme `V ≠ C` is affine: its complement
