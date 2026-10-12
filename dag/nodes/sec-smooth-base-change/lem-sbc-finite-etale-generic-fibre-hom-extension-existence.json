@@ -15,18 +15,37 @@
  ],
  "proof": [
   {
-   "text": "If C is empty then X and Y are empty, and there is a unique morphism\nbetween them. Otherwise smoothness over the normal base makes C normal (034F).\nIts nonempty smooth geometrically connected fibres are geometrically integral\n(056T: geometric regularity implies geometric normality and reducedness; a\nconnected normal scheme over a field is integral). Smoothness is open (01UA),\nso the image of C contains the generic point of S. Flatness makes the generic\nfibre dense, and its integrality makes C irreducible and hence integral.\nThe generic point of C belongs to Cη, which is normal integral as well.\nRestrict fη to that point. Fullness of finite étale restriction for the normal\nintegral C (0BQM) extends the resulting morphism to f over C. The pullback\nuniversal property gives a restriction of f to Cη. It and fη agree at the\ncommon generic point; faithfulness for the normal integral Cη (0BQM) makes\nthem equal. Composing with ψY gives the required compatibility equation.\nNo connectedness of X or Y is used: 0BQM is a result about all finite étale\ncovers. Uniqueness of f is not asserted by this lemma.",
-   "uses": [],
+   "text": "GeometricallyConnected c implies c is surjective in Mathlib. Choose a point of C over the generic point of S to establish Nonempty C. Apply the smooth connected generic geometry theorem to obtain IsIntegral C, IsIntegral Cη, their normal stalks, and the compatible field-spectrum isomorphism e.",
+   "uses": [
+    "lem-sbc-smooth-connected-generic-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put k=e.hom;Cη.fromSpecStalk(η_Cη). Take Xg=Xη×[Cη]Spec K(C) and Yg=Yη×[Cη]Spec K(C). The pullback universal property restricts fη to fg:Xg→Yg over Spec K(C). Paste each given restriction square with the new pullback square; k;j=C.fromSpecStalk(η_C) identifies Xg and Yg with generic restrictions of X and Y. Apply generic-point fullness over the normal integral C to fg, producing f over C.",
+   "uses": [
+    "lem-sbc-normal-integral-generic-hom-full"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change preserves finiteness and etaleness, so Xη,Yη are finite etale over Cη. Since e.hom is an isomorphism, the same Xg,Yg are generic restrictions over Cη with projections composed with e.hom. Use hY.lift to restrict f to f′:Xη→Yη. The two projection equations of hY and the generic compatibility of f show a;f′=fg;b. Also a;fη=fg;b by the defining equation of fg. Uniqueness in generic-point full faithfulness for the normal integral Cη gives f′=fη. Composing this equality with ψY gives ψX;f=fη;ψY.",
+   "uses": [
+    "lem-sbc-normal-integral-generic-hom-full"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-smooth-connected-generic-geometry",
+  "lem-sbc-normal-integral-generic-hom-full"
+ ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "M2",
+  "by": "Y2",
   "document": "Stacks Project",
-  "place": "Tag 0BQM, fullness and faithfulness in the proof; Tags 034F, 056T, 01UA",
-  "note": "Expanded the source argument; mathematical input not yet formalized."
+  "place": "Tag 0BQM, full faithfulness in the proof; Tags 034F, 056T, 01UA",
+  "note": "Compiled Lean realization: concrete iterated pullbacks and their universal properties, generic extension over C, and generic uniqueness over Cη."
  },
  "mathlib_searches": [
   {
@@ -97,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T095914-L-320964",
+  "landing": "20261012T112855-L-773730",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

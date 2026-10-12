@@ -1,0 +1,111 @@
+{
+ "id": "lem-sbc-normal-integral-generic-hom-full",
+ "kind": "statement",
+ "title": "Generic-point full faithfulness for finite etale covers of a normal integral scheme",
+ "statement": "Let B be an integral scheme with integrally closed local rings [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois]. For finite etale πX:X → B and πY:Y → B, let Xη and Yη be any cartesian restrictions to Spec K(B), with projections πXη, πYη and comparison maps ψX, ψY [def-pc-fibre-product]. Every morphism fη:Xη → Yη satisfying fη;πYη=πXη admits a unique f:X → Y such that f;πY=πX and ψX;f=fη;ψY. The covers may be empty or disconnected. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BQM, full faithfulness in the proof; Tag 0BQL, normalization of finite etale covers"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "On a nonempty affine open Spec A of B, A is an integrally closed domain. Finite etale covers correspond to finite etale A-algebras, which are normal and are the integral closures of A in their generic finite products of separable field extensions (0BQL, componentwise). A generic A-algebra homomorphism preserves integrality over A, so it restricts to a homomorphism of these finite etale A-algebras, with the contravariant direction appropriate for scheme morphisms. This constructs the extension on every affine chart.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Finite etale A-algebras are flat, hence torsion free over the domain A, and embed into their generic algebras. Any two local extensions with the same generic restriction therefore coincide. Restricting affine-chart maps to a common affine refinement of an overlap gives equality, so the maps glue. The same injectivity proves global uniqueness. Arbitrary cartesian presentations of the generic restrictions are identified by their unique pullback isomorphisms, giving the displayed comparison equation. The zero algebra handles empty covers.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "Y2",
+  "document": "Stacks Project",
+  "place": "Tag 0BQM, full faithfulness in the proof; Tag 0BQL, normalization of finite etale covers",
+  "note": "Detailed mathematical input split from the existence proof; the new theorem remains to be formalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers of a normal integral scheme restrict fully faithfully to its generic point",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers of a normal integral scheme restrict fully faithfully to its generic point",
+   "results": "LeanFinder returned Etale.forgetFullyFaithful, fully faithful inclusion of etale schemes into Over B; it concerns forgetting structure, not restriction to the generic point. No generic-point extension match.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(hom|Hom)|fullyFaithful.*generic|0BQM",
+   "results": "Mathlib and WeilConjectures have no matching generic-point full faithfulness theorem. The Sheaf generic-fibre extension is the parent being proved and cannot be used. The Noetherian etale normal-components node assumes extra hypotheses and does not assert extension.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtensionExistence",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Extension of the generic-fibre group action: Generic-point full faithfulness for finite etale covers of a normal integral scheme",
+   "via": [
+    "lem-sbc-finite-etale-generic-fibre-hom-extension-existence",
+    "lem-sbc-finite-etale-generic-fibre-hom-extension",
+    "lem-sbc-generic-fibre-action-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalIntegralGenericHomFull.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_normalIntegral_generic_hom_full",
+  "statement": "theorem finiteEtale_normalIntegral_generic_hom_full {B : Scheme.{u}} [IsIntegral B] (hB : ∀ x : B, IsIntegrallyClosed (B.presheaf.stalk x)) {X Y Xη Yη : Scheme.{u}} (πX : X ⟶ B) (πY : Y ⟶ B) [IsFinite πX] [Etale πX] [IsFinite πY] [Etale πY] (πXη : Xη ⟶ Spec B.functionField) (πYη : Yη ⟶ Spec B.functionField) (ψX : Xη ⟶ X) (ψY : Yη ⟶ Y) (hX : IsPullback ψX πXη πX (B.fromSpecStalk (genericPoint B))) (hY : IsPullback ψY πYη πY (B.fromSpecStalk (genericPoint B))) (fη : Xη ⟶ Yη) (hfη : fη ≫ πYη = πXη) : ∃! f : X ⟶ Y, f ≫ πY = πX ∧ ψX ≫ f = fη ≫ ψY",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T112855-L-773730",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T112855-L-773730",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
