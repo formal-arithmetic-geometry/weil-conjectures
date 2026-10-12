@@ -31,118 +31,31 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the system of residue fields and the cocone).* A directed set is nonempty (Stacks, Categories, Definition 00D3), so $I\\neq\\emptyset$. For $i'\\ge i$ the cone identity $f_{i'i}\\circ f_{i'}=f_i$ gives $f_{i'i}(s_{i'})=s_i$, so $f_{i'i}$ induces a field map $r_{i'i}:\\kappa(s_i)\\to\\kappa(s_{i'})$ and $f_i$ induces $\\rho_i:\\kappa(s_i)\\to\\kappa(s)$ [def-weil-residue-field]. The residue map of a composite of morphisms is the composite of the residue maps and that of an identity is the identity (the residue maps are induced by the stalk maps, which compose), so $r_{ii}=\\mathrm{id}$, $r_{i''i'}\\circ r_{i'i}=r_{i''i}$ for $i''\\ge i'\\ge i$, and $\\rho_{i'}\\circ r_{i'i}=\\rho_i$ (from $f_{i'i}\\circ f_{i'}=f_i$). Thus $i\\mapsto\\kappa(s_i)$ is a diagram of commutative rings over the directed set $I$ (viewed as a filtered category) and $(\\kappa(s),(\\rho_i))$ is a cocone on it [def-weil-pbc-category-colimit]. The claim is that this cocone is a colimit.",
-   "uses": [
-    "def-weil-residue-field",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 0CUG (lemma-inverse-limit-irreducibles, line 332), proof, first paragraph (reduction to the affine case)"
-   }
+   "text": "Construct the residue-field diagram and cocone by transporting the canonical residue maps along the cone identities. Scheme.residueFieldMap_id and Scheme.residueFieldMap_comp prove the laws. The transported maps are heterogeneously equal to the original maps.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "*Step 2 (reduction to $I_{\\ge0}$).* Choose $0\\in I$. Every $i\\in I$ has some $j\\in I_{\\ge0}$ with $j\\ge i$ ($I$ directed). By [lem-weil-pbc-colimit-initial-full-subcategory](1), applied with $\\mathcal C$ = commutative rings, $\\mathcal I$ the cofiltered category of $I$ ($\\operatorname{Hom}(j,i)=\\{*\\}$ iff $j\\ge i$), $\\mathcal J=I_{\\ge0}$ and $D:i\\mapsto\\kappa(s_i)$: if the restricted diagram $(\\kappa(s_i))_{i\\ge0}$ has a colimit then so has $D$, and the canonical map $c:\\varinjlim_{i\\ge0}\\kappa(s_i)\\to\\varinjlim_{i\\in I}\\kappa(s_i)$ is an isomorphism. Suppose $(\\kappa(s),(\\rho_i)_{i\\ge0})$ is a colimit of the restricted diagram. The cocone $(\\kappa(s),(\\rho_i)_{i\\in I})$ of step 1 induces $u:\\varinjlim_I\\kappa(s_i)\\to\\kappa(s)$ with $u\\circ\\iota_i=\\rho_i$; then $u\\circ c$ is the map $\\kappa(s)\\to\\kappa(s)$ compatible with the $\\rho_i$, $i\\ge0$, i.e. the identity, so $u=c^{-1}$ is an isomorphism and $(\\kappa(s),(\\rho_i)_{i\\in I})$ is a colimit of $D$ [def-weil-pbc-category-colimit]. So it suffices to prove that $(\\kappa(s),(\\rho_i)_{i\\ge0})$ is a colimit of $(\\kappa(s_i))_{i\\ge0}$.",
-   "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 0CUG (lemma-inverse-limit-irreducibles, line 332), proof, first paragraph (reduction to the affine case)"
-   }
+   "text": "Lift a residue element through Scheme.residue_surjective to the stalk. Mathlib isBasis_preimage_isAffineOpen and TopCat.Presheaf.exists_mem_germ_eq_of_isBasis represent it by a section on an inverse image of an affine open of a stage. The restricted diagram is affine and limiting by isLimitOpensCone. Apply exists_appTop_π_eq_of_isAffine_of_isLimit to descend the section to a later stage, using the canonical topIso maps on the open subschemes. Evaluation naturality shows that its stage residue maps to the prescribed residue element. This implements the affine-neighbourhood reduction of Stacks 0CUG using the existing Mathlib section-descent API.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "*Step 3 (reduction to an affine neighbourhood).* Choose an affine open $U_0\\subseteq S_0$ containing $s_0$ (every point of a scheme has an affine open neighbourhood [def-pc-scheme]); put $U_i=f_{i0}^{-1}(U_0)\\subseteq S_i$ ($i\\ge0$) and $U=f_0^{-1}(U_0)\\subseteq S$, open subschemes. Then $s\\in U$ and $s_i\\in U_i$, as $f_{i0}(s_i)=f_0(s)=s_0\\in U_0$. Each $U_i$ is affine, being the preimage of the affine open $U_0$ under the affine morphism $f_{i0}$ [pqf-def-affine-morphism] ($f_{00}=\\mathrm{id}$). By [lem-weil-pbc-limit-affine-transition] (the clause on an open $U_0$ of $S_0$), $(U_i)_{i\\ge0}$ with the restricted transition morphisms is an inverse system with affine transition morphisms over the directed set $I_{\\ge0}$, and $U$ with the restricted projections $f_i|_U:U\\to U_i$ is its limit. Let $u:U\\to S$, $u_i:U_i\\to S_i$ be the open immersions; then $f_i\\circ u=u_i\\circ f_i|_U$ and $f_{i'i}\\circ u_{i'}=u_i\\circ f_{i'i}|_{U_{i'}}$. By [lem-weil-pbc-residue-field-point-naturality] the residue maps $\\kappa_S(s)\\to\\kappa_U(s)$ and $\\kappa_{S_i}(s_i)\\to\\kappa_{U_i}(s_i)$ induced by $u$, $u_i$ are isomorphisms, and by functoriality of residue maps (step 1) the two commutative squares turn them into an isomorphism from the diagram $(\\kappa_{S_i}(s_i))_{i\\ge0}$ with cocone $(\\kappa_S(s),(\\rho_i))$ onto the diagram $(\\kappa_{U_i}(s_i))_{i\\ge0}$ with the cocone of residue maps of the $f_i|_U$. A cocone isomorphic to a colimit cocone is a colimit cocone [def-weil-pbc-category-colimit]. Hence it suffices to prove the statement for the system $(U_i)_{i\\ge0}$, its limit $U$ and the point $s\\in U$: i.e. we may assume that $0$ is the least element of $I$ and that $S_0$ and hence all $S_i$ are affine.",
-   "uses": [
-    "def-pc-scheme",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-residue-field-point-naturality",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 0CUG (lemma-inverse-limit-irreducibles, line 332), proof, first paragraph (reduction to the affine case)"
-   }
+   "text": "The canonical cocone maps are injective ring maps from fields. Types.FilteredColimit.isColimitOf' therefore recognizes the underlying cocone as a colimit: the images cover by the preceding step and equality at one stage already follows by injectivity. The forgetful functor from commutative rings preserves filtered colimits and reflects isomorphisms, so reflectsColimit_of_reflectsIsomorphisms and isColimitOfReflects give the ring colimit.",
+   "uses": [],
+   "elementary": false
   },
   {
-   "text": "*Step 4 (the affine case: translation to rings).* Assume all $S_i$ affine. Put $A_i=\\Gamma(S_i,\\mathcal O_{S_i})$, with $\\varphi_{ii'}=f_{ii'}^\\sharp:A_{i'}\\to A_i$ for $i\\ge i'$, and $A=\\Gamma(S,\\mathcal O_S)$ with $\\iota_i=f_i^\\sharp:A_i\\to A$; so $\\iota_i\\circ\\varphi_{ii'}=\\iota_{i'}$. By [lem-weil-pbc-limit-affine-transition] (affine case) $S\\cong\\operatorname{Spec}(\\varinjlim_iA_i)$ is affine. An affine scheme $X$ is canonically isomorphic to $\\operatorname{Spec}\\Gamma(X,\\mathcal O_X)$ and morphisms between them are $\\operatorname{Spec}$ of their maps on global sections [def-weil-affine-spectrum]; so after these identifications $S_i=\\operatorname{Spec}A_i$, $S=\\operatorname{Spec}A$, $f_{ii'}=\\operatorname{Spec}\\varphi_{ii'}$, $f_i=\\operatorname{Spec}\\iota_i$ (isomorphisms of schemes compatible with all morphisms induce, by functoriality of residue maps, an isomorphism of the diagrams of residue fields and of the cocones, as in step 3). By [lem-weil-pbc-limit-global-sections-colimit] (the $S_i$ are affine, hence quasi-compact and quasi-separated) $(A,(\\iota_i))$ is a colimit of $(A_i,\\varphi_{ii'})$ in commutative rings. Let $\\mathfrak p\\subset A$ be the prime ideal $s$. By [lem-weil-pbc-spec-map-residue-field-naturality](1), $s_i=\\operatorname{Spec}(\\iota_i)(\\mathfrak p)=\\mathfrak p_i:=\\iota_i^{-1}(\\mathfrak p)$, and $\\varphi_{ii'}^{-1}(\\mathfrak p_i)=\\mathfrak p_{i'}$. By part (2) of the same node, the isomorphisms $e_A:\\kappa_S(s)\\cong\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ and $e_{A_i}:\\kappa_{S_i}(s_i)\\cong\\kappa(\\mathfrak p_i)$ carry $\\rho_i$ to $\\kappa(\\iota_i):\\kappa(\\mathfrak p_i)\\to\\kappa(\\mathfrak p)$ and $r_{ii'}$ to $\\kappa(\\varphi_{ii'})$ (the maps $x/t\\mapsto\\iota_i(x)/\\iota_i(t)$, resp. $\\varphi_{ii'}(x)/\\varphi_{ii'}(t)$, modulo the maximal ideals). By step 3's remark on isomorphic cocones it remains to show: $(\\kappa(\\mathfrak p),(\\kappa(\\iota_i)))$ is a colimit of $(\\kappa(\\mathfrak p_i),\\kappa(\\varphi_{ii'}))$ in commutative rings (steps 5-6).",
-   "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-limit-global-sections-colimit",
-    "lem-weil-pbc-spec-map-residue-field-naturality",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 0CUG (lemma-inverse-limit-irreducibles, line 332), proof, second paragraph (A = colim A_i, p_i = phi_i^{-1}(p), kappa(p) = colim kappa(p_i))"
-   }
-  },
-  {
-   "text": "*Step 5 (algebra: every element of $\\kappa(\\mathfrak p)$ comes from a stage, and the maps are injective).* Put $\\bar\\iota_i=\\kappa(\\iota_i)$, $\\bar\\varphi_{ii'}=\\kappa(\\varphi_{ii'})$. (a) Cocone: for $i\\ge i'$, $\\bar\\iota_i\\circ\\bar\\varphi_{ii'}$ sends the class of $x/t$ to the class of $\\iota_i\\varphi_{ii'}(x)/\\iota_i\\varphi_{ii'}(t)=\\iota_{i'}(x)/\\iota_{i'}(t)$, so $\\bar\\iota_i\\circ\\bar\\varphi_{ii'}=\\bar\\iota_{i'}$; similarly $\\bar\\varphi$ is functorial. (b) By [lem-weil-pbc-filtered-colimit-localization-at-prime](2) (the directed set $I$ is a small filtered category [def-weil-pbc-category-colimit]), $A_{\\mathfrak p}$ with the maps $\\kappa_i:(A_i)_{\\mathfrak p_i}\\to A_{\\mathfrak p}$, $x/t\\mapsto\\iota_i(x)/\\iota_i(t)$, is a colimit of $i\\mapsto(A_i)_{\\mathfrak p_i}$ in commutative rings; commutative rings being commutative $\\mathbf Z$-algebras, [lem-weil-pbc-filtered-colimit-algebras-elementwise](2) shows that every element of $A_{\\mathfrak p}$ is $\\kappa_i(w)$ for some $i$ and $w\\in(A_i)_{\\mathfrak p_i}$ [def-weil-pbc-localization-at-prime]. Since $A_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$ is surjective and the class of $\\kappa_i(w)$ is $\\bar\\iota_i$ of the class of $w$, every element of $\\kappa(\\mathfrak p)$ is $\\bar\\iota_i(a)$ for some $i$ and $a\\in\\kappa(\\mathfrak p_i)$. (c) Each $\\bar\\iota_i$ is a ring homomorphism between fields, hence injective (its kernel is an ideal of the field $\\kappa(\\mathfrak p_i)$ not containing $1$).",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-localization-at-prime",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 0CUG (lemma-inverse-limit-irreducibles, line 332), proof, second paragraph (A = colim A_i, p_i = phi_i^{-1}(p), kappa(p) = colim kappa(p_i))"
-   }
-  },
-  {
-   "text": "*Step 6 (algebra: universal property).* Let $(T,(g_i:\\kappa(\\mathfrak p_i)\\to T))$ be a cocone of commutative rings on $(\\kappa(\\mathfrak p_i),\\bar\\varphi_{ii'})$. For $z\\in\\kappa(\\mathfrak p)$ write $z=\\bar\\iota_i(a)$ (step 5(b)) and set $g(z)=g_i(a)$. Well defined: if $\\bar\\iota_i(a)=\\bar\\iota_j(b)$, choose $k\\ge i,j$ ($I$ directed) and put $a'=\\bar\\varphi_{ki}(a)$, $b'=\\bar\\varphi_{kj}(b)$; by step 5(a) $\\bar\\iota_k(a')=\\bar\\iota_k(b')$, so $a'=b'$ by step 5(c), and $g_i(a)=g_k(a')=g_k(b')=g_j(b)$. Ring map: two elements $z,z'$ are, after moving to a common $k\\ge i,j$ as above, $\\bar\\iota_k(a),\\bar\\iota_k(a')$, so $g(z+z')=g_k(a+a')=g(z)+g(z')$, $g(zz')=g(z)g(z')$, and $g(1)=g_i(1)=1$. By construction $g\\circ\\bar\\iota_i=g_i$; any $h$ with $h\\circ\\bar\\iota_i=g_i$ for all $i$ equals $g$ because the images of the $\\bar\\iota_i$ cover $\\kappa(\\mathfrak p)$ (step 5(b)). Hence $(\\kappa(\\mathfrak p),(\\bar\\iota_i))$ is a colimit [def-weil-pbc-category-colimit], which with steps 2-4 proves $\\kappa(s)=\\varinjlim_i\\kappa(s_i)$ via the maps $\\rho_i$, for the original system over $I$.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 0CUG (lemma-inverse-limit-irreducibles, line 332), proof, second paragraph (A = colim A_i, p_i = phi_i^{-1}(p), kappa(p) = colim kappa(p_i))"
-   }
-  },
-  {
-   "text": "*Step 7 (the scheme-theoretic form).* By steps 1-6, $(\\kappa(s),(\\rho_i))$ is the colimit of the directed system of commutative rings $(\\kappa(s_i),r_{i'i})$ over $I$. By [lem-weil-pbc-spec-colimit-limit], $\\operatorname{Spec}\\kappa(s)$ with the morphisms $\\operatorname{Spec}(\\rho_i):\\operatorname{Spec}\\kappa(s)\\to\\operatorname{Spec}\\kappa(s_i)$ is the limit in the category of schemes of the inverse system $(\\operatorname{Spec}\\kappa(s_i),\\operatorname{Spec}(r_{i'i}))$, whose transition morphisms are affine (morphisms between affine schemes) [def-weil-affine-spectrum]. Compatibility: let $j_s:\\operatorname{Spec}\\kappa(s)\\to S$ and $j_{s_i}:\\operatorname{Spec}\\kappa(s_i)\\to S_i$ be the canonical morphisms; [lem-weil-pbc-residue-field-point-naturality] applied to $f_i$ at $s$ and to $f_{i'i}$ at $s_{i'}$ gives $f_i\\circ j_s=j_{s_i}\\circ\\operatorname{Spec}(\\rho_i)$ and $f_{i'i}\\circ j_{s_{i'}}=j_{s_i}\\circ\\operatorname{Spec}(r_{i'i})$, i.e. the morphisms $j_{s_i}$ form a morphism of inverse systems $(\\operatorname{Spec}\\kappa(s_i))\\to(S_i)$ whose limit is $j_s$.",
-   "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-residue-field-point-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 0CUG (line 332), part (1) 's = lim s_i as schemes', with Lemma 01YW (line 42) for the limit of spectra"
-   }
+   "text": "The spectrum functor preserves limits; map the opposite ring cocone to obtain the limiting scheme cone. All spectrum transition maps are affine. Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField proves each projection and transition compatibility equation.",
+   "uses": [],
+   "elementary": false
   }
  ],
- "proof_deps": [
-  "def-weil-residue-field",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "def-pc-scheme",
-  "pqf-def-affine-morphism",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-residue-field-point-naturality",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-limit-global-sections-colimit",
-  "lem-weil-pbc-spec-map-residue-field-naturality",
-  "lem-weil-pbc-filtered-colimit-localization-at-prime",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-spec-colimit-limit"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma 0CUG (lemma-inverse-limit-irreducibles, line 332), part (1), and its proof; the colimit of residue fields, which Stacks says 'follows from the statement as well', is written out via the localization at a prime"
+  "place": "Lemma 0CUG (1), affine-neighbourhood reduction; K2 implements the element descent via Mathlib isBasis_preimage_isAffineOpen, isLimitOpensCone, and exists_appTop_π_eq_of_isAffine_of_isLimit rather than explicit localization at contracted primes. Source read at https://stacks.math.columbia.edu/tag/0CUG on 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -261,5 +174,15 @@
   "group": "M1",
   "result": "fix",
   "note": "directed preorder+Nonempty I (now Type u); D : Iᵒᵖ ⥤ Scheme.{u} with IsAffineHom transitions; given Cone+IsLimit; s : c.pt, s_i = c.π.app (op i) s; R objects/maps pinned to residueField/residueFieldMap via =/HEq; cocone on κ(s) with IsColimit in CommRingCat; Spec cone IsLimit with affine transitions; fromSpecResidueField compatibility on projections and transitions"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T144124-L-2100342",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
