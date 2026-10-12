@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-exists-glued-invertible",
+ "kind": "statement",
+ "title": "Existence of glued invertible module",
+ "statement": "Let Y be a reduced scheme [def-pc-scheme, def-pc-reduced-scheme] with a finite family of closed immersions i a : Z a → Y [def-weil-closed-immersion] whose underlying images cover Y. Assume each intersection of distinct images is discrete. Let M a be an invertible module on Z a [def-sc-invertible-module]. There is an invertible module N on Y and, for every a, an isomorphism tensorPullback (i a) N ≅ M a [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE"
+ },
+ "proof": [
+  {
+   "text": "Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NE, proof.\n\nProof: Let T be the finite union of pairwise intersections. It is closed and discrete.\nOff T the reduced closed cover is a disjoint open scheme cover. Around each t in T\nchoose a neighborhood meeting T only at t, exclude components not containing t, and\nshrink to trivialize each component module. Cover the complement of T by trivializing\nopens contained in individual components. Every overlap between different neighborhoods\nlies off T. The reduced-cover section identity identifies the component frame changes\nwith units on these overlaps. Their cocycle identities hold componentwise, hence on Y.\nGlue the rank-one trivial modules using these units. The local component frames give\nisomorphisms of its pullbacks with the prescribed modules. These frames also prove\ninvertibility. With an empty index family the covering hypothesis forces Y empty and\nits unique module is locally free of rank one vacuously.\n(blueprint: lem-sc-exists-glued-invertible)",
+   "uses": [
+    "lem-sc-glue-component-reduced-cover-sections",
+    "lem-sc-glue-component-transition-cocycle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-glue-component-reduced-cover-sections",
+  "lem-sc-glue-component-transition-cocycle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NE"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlueComponentLineBundles",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-glue-component-line-bundles",
+   "place": "first assertion"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ExistsGluedInvertible",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExistsGluedInvertible.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.existsGluedInvertible",
+  "statement": "theorem existsGluedInvertible\n    {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]\n    (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]\n    (hcover : (⋃ a : ι, Set.range (i a)) = Set.univ)\n    (hdiscrete : ∀ a b : ι, a ≠ b →\n      DiscreteTopology ↥(Set.range (i a) ∩ Set.range (i b)))\n    (M : ∀ a : ι, (Z a).Modules) [∀ a : ι, (M a).IsInvertible] :\n    ∃ N : Y.Modules, N.IsInvertible ∧\n      ∀ a : ι, Nonempty ((tensorPullback (i a)).obj N ≅ M a)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "glue invertible sheaves and global sections on reduced components",
+   "results": "LeanSearch HTTP 500 (service unavailable); no declaration returned",
+   "date": "2026-10-10",
+   "verdict": "service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue invertible modules on closed components with discrete intersections",
+   "results": "Generic scheme and sheaf gluing only",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsInvertible",
+   "results": "Unknown identifier, no hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "glue.*[Ii]nvertible|[Ii]nvertible.*glue",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rank one locally free sheaves descend across a finite closed cover of a reduced scheme with isolated intersections",
+   "results": "Eight hits on open-cover sections, reducedness, and localization; none constructs this module or prescribed section.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DiscreteTopology, IsClosedImmersion",
+   "results": "Unknown identifier IsClosedImmersion; no hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech|transition|IsInvertible",
+   "results": "Scheme gluing and affine transition results; no module closed-cover gluing statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085240-L-15002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085240-L-15002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

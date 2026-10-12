@@ -1,0 +1,24 @@
+## What changed
+Added `existsGluedInvertible` and `existsGluedSection` intermediate theorems, each recording one conclusion of Stacks Varieties Lemma 09NE, and proved `glueComponentLineBundles` by combining them after unfolding its `let`.
+
+## Proved and sorry left
+The hole in `glueComponentLineBundles` is closed by decomposition, not a completed proof: one hole closed and two added. The intermediate declarations `existsGluedInvertible` and `existsGluedSection` remain sorry and are new DAG nodes.
+
+## No longer needed
+Removed the direct proof imports `Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections` and `Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle` from the item module. Neither old proof-dependency node is globally no longer needed: both remain imported by the split modules and in their proof plans. No module is pruned from the import closure. The item node now uses only `lem-sc-exists-glued-invertible` and `lem-sc-exists-glued-section`.
+
+## Where the brief, the DAG or earlier work was wrong
+The complete geometric Cech construction is not represented by executable Lean declarations, so the target was decomposed into the two independent conclusions while preserving the original statement exactly.
+
+## New nodes
+`lem-sc-exists-glued-invertible` and `lem-sc-exists-glued-section` under `dag/nodes/sec-curve-estimates/`.
+
+
+## Second reading by G1
+1. Compared every delivered module with the repository. The two helper modules are new; the existing `glueComponentLineBundles` signature is byte for byte unchanged. No definition or target changed, and no change record is required. Kept the first worker's mathematically equivalent docstring wording 'sheaf condition': deliver3's lexical forbidden-token scan rejects the original prose line beginning 'axiom'.
+2. Compiled all three modules with lcompile, without errors or non-sorry warnings. Scratch copies with `#print axioms` for all three declarations report exactly `propext`, `Classical.choice`, `Quot.sound`, and `sorryAx`. There are exactly two sorry occurrences, both the reported public named helper theorems. No forbidden declaration or data construction was added. The existing canonical-adjunction restriction expression is preserved verbatim.
+3. Read both new statements and docstring arguments against [Stacks 09NE](https://stacks.math.columbia.edu/tag/09NE). Each is one proper conjunct of the original theorem; neither restates the whole theorem. They have the original hypotheses, and the section assertion allows a separately chosen module as the source requires. Checked empty family (cover forces empty Y), singleton family (a full-support closed immersion into a reduced scheme is an isomorphism), empty intersection locus, repeated components with discrete support, and sections that vanish away from intersections. All are consistent. Independent leanfinder, loogle, and grep searches with new wording, and rg over both Lean roots, found no matching theorem. Existing reduced-cover and Cech results do not supply the missing frame-cover construction or prescribed-section compatibility directly. No hole could be closed in a few minutes. This is a decomposition with net minus one hole, not a completed geometric proof.
+4. Read the original two proof-dependency declarations and the unit `sk-thm-curveestimate` realized record. Neither dependency realizes the unit statement or a unit step; the unit route and its realized record are unchanged. Removed unused direct imports from the main module, retaining both dependencies under the helper modules for their documented construction. The new invertible helper imports the invertibility definition and tensor pullback directly rather than the unused ample/adjunction APIs. No public import of the existing module was changed. No globally pruned module is claimed.
+5. Checked Lean declarations against all three node records. The main node's two dependencies match conjunction introduction in Lean. Made the new node statements self-contained, removed unused statement dependencies from the invertible node, and added the reduced-cover dependency missing from the section node. Added the independent searches to both nodes; their source, provenance, creation, blueprint, chapter, unit and verbatim Lean signature records are present. Both new nodes remain split, matching their sorry bodies.
+
+Second reading changed imports, node statement/dependency/search metadata, retained the mechanically required docstring wording, and completed this review report. Holes closed: `AlgebraicGeometry.Scheme.Modules.glueComponentLineBundles` (by decomposition). Holes added and still open: `AlgebraicGeometry.Scheme.Modules.existsGluedInvertible` (`lem-sc-exists-glued-invertible`) and `AlgebraicGeometry.Scheme.Modules.existsGluedSection` (`lem-sc-exists-glued-section`).

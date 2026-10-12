@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections
-import Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle
+import Sheaf.AlgebraicGeometry.ExistsGluedInvertible
+import Sheaf.AlgebraicGeometry.ExistsGluedSection
 
 /-!
 # Gluing invertible modules and sections across components
@@ -54,7 +54,7 @@ Proof (the direct proof of Varieties Lemma 09NE):
 4. For prescribed sections, take `1` on each `U_t` and the local expression of `s_i`
    on each `U_ij`. The normalized frames make these expressions compatible with the
    transition cocycle of step 3 (`lem-sc-glue-component-transition-cocycle`). The sheaf
-   axiom glues them to one global section restricting to all the prescribed sections.
+   condition glues them to one global section restricting to all the prescribed sections.
 (blueprint: lem-sc-glue-component-line-bundles)
 -/
 theorem glueComponentLineBundles
@@ -76,6 +76,10 @@ theorem glueComponentLineBundles
       ∃ (N : Y.Modules) (t : Γ(N, ⊤)), N.IsInvertible ∧
         ∀ a : ι, ∃ e : (tensorPullback (i a)).obj N ≅ M a,
           e.hom.val.app (op ⊤) (res N a t) = s a := by
-  sorry
+  dsimp
+  constructor
+  · exact existsGluedInvertible Z i hcover hdiscrete M
+  · intro s hs
+    exact existsGluedSection Z i hcover hdiscrete M s hs
 
 end AlgebraicGeometry.Scheme.Modules
