@@ -32,94 +32,17 @@
  ],
  "proof": [
   {
-   "text": "(Setup.) As $S$ is a finite type $k$-algebra [def-weil-pbc-finite-type-algebra] there are $n\\ge0$ and a surjective $k$-algebra map $\\pi:P=k[x_1,\\dots,x_n]\\to S$ from the polynomial ring [def-weil-pbc-mv-polynomial-ring]. Let $\\mathfrak p=\\ker\\pi$; since $P/\\mathfrak p\\cong S$ is an integral domain, $\\mathfrak p$ is a prime ideal of $P$. Correspondence of ideals: $Q\\mapsto\\pi(Q)$ and $\\mathfrak q\\mapsto\\pi^{-1}(\\mathfrak q)$ are mutually inverse inclusion-preserving bijections between the ideals of $P$ containing $\\mathfrak p$ and the ideals of $S$, and $P/Q\\cong S/\\pi(Q)$, so $Q$ is prime (resp. maximal) iff $\\pi(Q)$ is. In particular a chain of primes $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_t$ of $S$ gives the chain $\\pi^{-1}(\\mathfrak q_0)\\subsetneq\\cdots\\subsetneq\\pi^{-1}(\\mathfrak q_t)$ of primes of $P$ of the same length, all containing $\\mathfrak p$. Since $S$ is a domain, $S\\neq0$ and $(0)$ is a prime ideal of $S$, contained in every prime ideal of $S$.",
+   "text": "Apply the localization and common-chain-length component theorems and combine their conclusions by conjunction.",
    "uses": [
-    "def-weil-pbc-finite-type-algebra",
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00OS (lemma-dimension-spell-it-out, line 27763), proof, first sentence 'Write S = k[x_1, ..., x_n]/p'"
-   }
-  },
-  {
-   "text": "(Bounds.) Every chain $Q_0\\subsetneq\\cdots\\subsetneq Q_t$ of prime ideals of $P$ has $t\\le n$: $Q_t\\neq P$, so $Q_t\\subseteq M$ for a maximal ideal $M$ of $P$ [lem-weil-pbc-proper-ideal-contained-in-maximal]; by [lem-weil-pbc-localization-dimension-chains-below-prime] $t\\le\\dim(P_M)$ [def-weil-pbc-localization-at-prime, def-weil-pbc-krull-dimension-ring], and $\\dim(P_M)=n$ by [lem-weil-pbc-polynomial-ring-maximal-localization-dimension]. By step 1 every chain of prime ideals of $S$ therefore has length $\\le n$; in particular $0\\le\\dim S\\le n$ ($S$ has the prime $(0)$), and for each prime $\\mathfrak q$ of $S$ the lengths of the chains of primes of $S$ ending inside $\\mathfrak q$ are bounded by $n$.",
-   "uses": [
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Proposition 00OQ (proposition-finite-gl-dim-polynomial-ring, line 27723: the localizations at maximal ideals have dimension n), via Lemma 00OP (lemma-dim-affine-space, line 27660), as used in the proof of Lemma 00OS"
-   }
-  },
-  {
-   "text": "(Height of a maximal ideal of $P$.) Let $\\operatorname{ht}$ be the height of [lem-weil-pbc-polynomial-ring-maximal-chain-height-difference]: the supremum of the lengths of chains of primes of $P$ ending inside the given prime. For a maximal ideal $M$ of $P$, [lem-weil-pbc-localization-dimension-chains-below-prime] says that this supremum is $\\dim(P_M)$, which is $n$ by [lem-weil-pbc-polynomial-ring-maximal-localization-dimension]: $\\operatorname{ht}(M)=n$. Also $\\operatorname{ht}(\\mathfrak p)\\le n$ is an integer by [lem-weil-pbc-polynomial-ring-maximal-chain-height-difference].",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Proposition 00OQ (line 27723) and Lemma 00OR (line 27737), as used in the proof of Lemma 00OS"
-   }
-  },
-  {
-   "text": "($\\dim(S_{\\mathfrak m})=n-\\operatorname{ht}(\\mathfrak p)$ for every maximal $\\mathfrak m$.) Let $\\mathfrak m\\subset S$ be maximal and $M=\\pi^{-1}(\\mathfrak m)$, a maximal ideal of $P$ containing $\\mathfrak p$ (step 1). By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim(S_{\\mathfrak m})$ [def-weil-pbc-localization-at-prime, def-weil-pbc-krull-dimension-ring] is the supremum of the lengths of chains of primes of $S$ ending inside $\\mathfrak m$; these lengths are bounded by $n$ (step 2) and the chain $\\mathfrak m$ of length $0$ is one of them, so the supremum $d=\\dim(S_{\\mathfrak m})$ is attained by a chain $C:\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_d\\subseteq\\mathfrak m$. Because no such chain is longer than $C$: $\\mathfrak q_0=(0)$ (otherwise prepend the prime $(0)\\subsetneq\\mathfrak q_0$, step 1); $\\mathfrak q_d=\\mathfrak m$ (otherwise append $\\mathfrak m$); and no prime $\\mathfrak r$ of $S$ satisfies $\\mathfrak q_{i-1}\\subsetneq\\mathfrak r\\subsetneq\\mathfrak q_i$ (otherwise insert it). Put $Q_i=\\pi^{-1}(\\mathfrak q_i)$. Then $\\mathfrak p=Q_0\\subsetneq\\cdots\\subsetneq Q_d=M$ is a chain of primes of $P$, and no prime $R'$ of $P$ satisfies $Q_{i-1}\\subsetneq R'\\subsetneq Q_i$: such an $R'$ contains $\\mathfrak p$, and $\\pi(R')$ would be a prime of $S$ strictly between $\\mathfrak q_{i-1}$ and $\\mathfrak q_i$ (step 1). So it is a maximal chain of primes between $\\mathfrak p$ and $M$, and by [lem-weil-pbc-polynomial-ring-maximal-chain-height-difference] and step 3, $d=\\operatorname{ht}(M)-\\operatorname{ht}(\\mathfrak p)=n-\\operatorname{ht}(\\mathfrak p)$. In particular $\\dim(S_{\\mathfrak m})=n-\\operatorname{ht}(\\mathfrak p)$ does not depend on $\\mathfrak m$, and $S$ has a chain of primes of this length.",
-   "uses": [
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00OS (line 27763), proof: 'all the maximal chains of primes in S (which necessarily end with a maximal ideal) have length n - height(p). Thus this number is ... the dimension of S_m'"
-   }
-  },
-  {
-   "text": "($\\dim S=\\dim(S_{\\mathfrak m})$.) $S\\neq0$, so $S$ has a maximal ideal [lem-weil-pbc-proper-ideal-contained-in-maximal], and by step 4 $S$ has a chain of primes of length $n-\\operatorname{ht}(\\mathfrak p)$; hence $\\dim S\\ge n-\\operatorname{ht}(\\mathfrak p)$ [def-weil-pbc-krull-dimension-ring]. Conversely let $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_t$ be any chain of primes of $S$. The prime $\\mathfrak q_t$ lies in a maximal ideal $\\mathfrak m'$ [lem-weil-pbc-proper-ideal-contained-in-maximal], so $t\\le\\dim(S_{\\mathfrak m'})$ by [lem-weil-pbc-localization-dimension-chains-below-prime], and $\\dim(S_{\\mathfrak m'})=n-\\operatorname{ht}(\\mathfrak p)$ by step 4. Thus $\\dim S=n-\\operatorname{ht}(\\mathfrak p)$, a non-negative integer, and $\\dim(S_{\\mathfrak m})=\\dim S$ for every maximal ideal $\\mathfrak m$ of $S$ by step 4.",
-   "uses": [
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-localization-dimension-chains-below-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00OS (line 27763), proof, last sentence 'Thus this number is the dimension of S and of S_m for any maximal ideal m of S'"
-   }
-  },
-  {
-   "text": "(Maximal chains.) Let $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_t$ be a maximal chain of primes of $S$ in the sense of the statement. Then $\\mathfrak q_0=(0)$ (else prepend $(0)$, step 1); $\\mathfrak q_t$ is a maximal ideal $\\mathfrak m$ (it lies in a maximal ideal [lem-weil-pbc-proper-ideal-contained-in-maximal], which would otherwise be appended); and no prime lies strictly between consecutive members. As in step 4, the preimages $\\pi^{-1}(\\mathfrak q_i)$ form a maximal chain of primes of $P$ between $\\mathfrak p$ and the maximal ideal $M=\\pi^{-1}(\\mathfrak m)$, so $t=\\operatorname{ht}(M)-\\operatorname{ht}(\\mathfrak p)=n-\\operatorname{ht}(\\mathfrak p)=\\dim S$ by [lem-weil-pbc-polynomial-ring-maximal-chain-height-difference], step 3 and step 5. Conversely, if every maximal chain has length $\\dim S$, then for a maximal ideal $\\mathfrak m$ the chain of step 4 is maximal and has length $\\dim(S_{\\mathfrak m})$, giving $\\dim(S_{\\mathfrak m})=\\dim S$; so the two formulations are equivalent.",
-   "uses": [
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
-    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00OS (line 27763), statement 'In words: every maximal chain of primes has length equal to the dimension of S', and proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-type-algebra",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal",
-  "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-  "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains"
  ],
  "proof_origin": {
   "by": "document",
@@ -279,5 +202,15 @@
   "group": "K1",
   "result": "pass",
   "note": "field k, CommRing S, Algebra k S, Algebra.FiniteType, IsDomain; forall maximal m: ringKrullDim (Localization.AtPrime m) = ringKrullDim S; exists d:N with ringKrullDim S = d and every LTSeries with IsMaxChain (<=) range has length d (= no insertion before/between/after); no Mathlib/project equivalent found (grep Mathlib FiniteType+ringKrullDim, IsMaxChain in RingTheory)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T184349-L-4021911",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -10,8 +10,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.Order.Preorder.Chain
 public import Mathlib.Order.RelSeries
-import Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference
-import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRingLocalization
+import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRingChains
 
 /-!
 # Dimension of local rings of finite type domains over fields
@@ -73,4 +73,5 @@ theorem finiteTypeDomain_ringKrullDim_localizationAtMaximal
       ∀ (p : LTSeries (PrimeSpectrum S)),
         IsMaxChain (fun q r : PrimeSpectrum S ↦ q ≤ r) (Set.range p) →
           p.length = d) := by
-  sorry
+  exact ⟨finiteTypeDomain_ringKrullDim_localizationAtMaximal_localization (k := k) (S := S),
+    finiteTypeDomain_ringKrullDim_localizationAtMaximal_chains (k := k) (S := S)⟩
