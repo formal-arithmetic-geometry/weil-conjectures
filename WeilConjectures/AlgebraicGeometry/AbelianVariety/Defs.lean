@@ -48,7 +48,12 @@ variable {K : Type u} [Field K]
 
 An *abelian variety* over a field `K` is a group scheme over `K` which is proper, smooth and
 connected; its *dimension* is `AlgebraicGeometry.IsAbelianVariety.dim`, the Krull dimension of
-its underlying space. -/
+its underlying space.
+
+This is also blueprint `def-sc-abelian-variety`. As blueprint `rem-ptr-sc-abelian-variety-1`
+records, that these are exactly the complete group varieties is
+`AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral` (blueprint
+`lem-sc-abelian-variety-characterization`). -/
 class IsAbelianVariety (A : Over (Spec (.of K))) : Prop
     extends IsProper A.hom, Smooth A.hom, ConnectedSpace A.left
 

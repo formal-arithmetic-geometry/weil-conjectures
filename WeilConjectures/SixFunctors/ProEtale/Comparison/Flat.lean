@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
+public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.Sites.PullbackFlat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 
@@ -64,5 +65,13 @@ theorem flat_comparisonUpperStar_obj {F : Sheaf X.smallEtaleTopology (ModuleCat.
     (hF : ObjectProperty.flat F) :
     ObjectProperty.flat ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F) :=
   flat_sheafPullback_obj (coverPreserving_toProEt X) hF
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- as for `flat_comparisonUpperStar_obj`
+/-- The comparison pullback `ν^*` preserves flat sheaves of `Λ`-modules, for a Noetherian ring
+`Λ` (`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). -/
+instance preservesFlat_comparisonUpperStar :
+    (ν^*(X)[ModuleCat.{u + 1} Λ]).PreservesFlat :=
+  ⟨fun hF ↦ flat_comparisonUpperStar_obj hF⟩
 
 end AlgebraicGeometry.ProEtale

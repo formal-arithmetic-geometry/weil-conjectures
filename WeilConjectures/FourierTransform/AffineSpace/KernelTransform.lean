@@ -142,6 +142,7 @@ private lemma kt_sky₃ [Finite Λ] (z' : V' ⟶ P) [HasCompactification z'] (hz
       𝟙_ _) := by
   let A := ModuleCat.{u + 1} Λ
   have : HasCompactification (z' ≫ q₂) := .of_eq hz.symm
+  have : QuasiCompact (z' ≫ q₂) := by rw [hz]; infer_instance
   obtain ⟨pid⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar A (𝟙 V')
   obtain ⟨c⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ z' q₂
   have hcongr {X Y : Scheme.{u}} {f f' : X ⟶ Y} [HasCompactification f]
