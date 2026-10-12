@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-finite-rooted-extension",
+ "kind": "statement",
+ "title": "Finite purely inseparable constant and variable root construction",
+ "statement": "Let k→K be fields in one universe [def-pc-field-extension], s a finite subset algebraically independent over k [def-weil-pbc-transcendence-basis], p prime with char(k)=p, and C a finite subset of k. There exist compatible extensions k→l→L and k→K→L with l/k and L/K finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension], a finite subset t of L independent over l, and a compatible embedding k(s)→l(t). Each c∈C has a p-th root in l, each generator x∈s mapped to l(t) has a p-th root in l(t), and K together with l(t) generates L.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 04KM, coefficient-root construction in the induction step"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "In the algebraic closure Ω of K, choose the unique p-th root rt(z) of each z. Let U be the finite image of C under c ↦ rt(c), and V the finite image of s under x ↦ rt(x). Define actual intermediate fields l=k(U) and L=K(U∪V) in Ω. These types have the same universe as K.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-ring-frobenius",
+    "def-pc-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each generator has its p-th power in the appropriate base field. Apply IntermediateField.isPurelyInseparable_adjoin_iff_pow_mem with exponent 1 to prove l/k and L/K purely inseparable. The generators satisfy the monic polynomials X^p-c. Apply the finite algebraic-generators lemma to U and U∪V to prove both extensions finite.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-algebraic-element",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generators of l lie in L, so adjoin_le_iff gives l⊆L. Define the algebra l→L by this inclusion; its composite with L→Ω is the original inclusion. For x∈s let r(x) be rt(x) as an element of L and define t as its finite range. The equations r(x)^p=x hold by the root construction.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map the independence of s from K to Ω. Since l/k is finite and therefore algebraic, apply AlgebraicIndependent.extendScalars to obtain independence of the images of s over l. Frobenius on Ω sends the tuple r to those images. Naturality of Frobenius and injectivity of Frobenius on l allow AlgebraicIndependent.of_ringHom_of_comp_eq to deduce independence of r over l. Passing to its range gives independence of t.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-algebraic-element",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write E=k(s), E₁=l(t). Every image of an element of s is r(x)^p and hence belongs to E₁. Induction on membership in the adjoin, with cases generators, constants, addition, inverse and multiplication, proves the image of every element of E lies in E₁. Restrict the canonical ring homomorphism E→L to E₁ to obtain the asserted algebra and tower. Constants in C have roots in l and the original generators have roots in E₁ by construction.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-ring-frobenius",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let B be the intermediate field in L generated over E₁ by the range of K→L. Induct on membership in L=K(U∪V). Constant roots belong to l and hence E₁; variable roots belong to t and hence E₁; images of K belong to B by definition. Addition, inverse and multiplication preserve B. Thus every element of L lies in B, giving B=top.",
+   "uses": [
+    "def-pc-field-extension",
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-ring-frobenius",
+  "lem-weil-pbc-algebraic-generators-finite-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "A3 stage-3 worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 04KM, finite constant-root and variable-root construction; omitted details formalized directly using Mathlib"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite purely inseparable extension rooting a finite set of constants and algebraically independent variables",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite purely inseparable extension rooting a finite set of constants and algebraically independent variables",
+   "results": "IsPurelyInseparable.elemReduct, IsPurelyInseparable.pow_mem, IntermediateField.isPurelyInseparable_adjoin_iff_pow_mem, isPurelyInseparable_iff_pow_mem, IntermediateField.isPurelyInseparable_adjoin_simple_iff_pow_mem, perfectClosure.isPurelyInseparable, Field.isAlgebraic_of_adjoin_eq_adjoin, IsPurelyInseparable.hasExponent_of_finiteDimensional",
+   "date": "2026-10-13",
+   "verdict": "No exact packaged finite constant-and-variable-root construction; constituent Mathlib results are used in the completed proof."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finiteDimensional_pow_eq|isPurelyInseparable_adjoin_iff_pow_mem",
+   "results": "Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact packaged finite constant-and-variable-root construction; constituent Mathlib results are used in the completed proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.CoefficientRootExtension",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-make-separably-generated",
+   "place": "steps 5–7: constructing finite constant roots, variable roots, and their compositum before the coefficient calculation",
+   "via": [
+    "lem-weil-pbc-coefficient-root-extension",
+    "lem-weil-pbc-inseparable-degree-drop"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.FiniteRootedExtension",
+  "file": "lean/Sheaf/FieldTheory/FiniteRootedExtension.lean",
+  "declaration": "FieldExtension.exists_finiteRooted_extension",
+  "statement": "theorem exists_finiteRooted_extension\n    (k K : Type w) [Field k] [Field K] [Algebra k K]\n    (s : Finset K) (hs : AlgebraicIndependent k ((↑) : s → K))\n    (p : ℕ) [Fact p.Prime] [CharP k p] (C : Finset k) :\n    ∃ (l : Type w) (_hl : Field l) (_akl : Algebra k l)\n      (L : Type w) (_hL : Field L) (_aKL : Algebra K L) (_alL : Algebra l L)\n      (_akL : Algebra k L) (_htl : IsScalarTower k l L) (_htK : IsScalarTower k K L),\n      Module.Finite k l ∧ IsPurelyInseparable k l ∧\n      Module.Finite K L ∧ IsPurelyInseparable K L ∧\n      ∃ t : Finset L, AlgebraicIndependent l ((↑) : t → L) ∧\n        ∃ (_a : Algebra (IntermediateField.adjoin k (s : Set K))\n            (IntermediateField.adjoin l (t : Set L))),\n          IsScalarTower (IntermediateField.adjoin k (s : Set K))\n            (IntermediateField.adjoin l (t : Set L)) L ∧\n          (∀ c ∈ C, ∃ b : l, algebraMap k l c = b ^ p) ∧\n          (∀ x (hx : x ∈ s), ∃ b : IntermediateField.adjoin l (t : Set L),\n            algebraMap (IntermediateField.adjoin k (s : Set K))\n              (IntermediateField.adjoin l (t : Set L))\n              ⟨x, IntermediateField.subset_adjoin k (s : Set K) hx⟩ = b ^ p) ∧\n          IntermediateField.adjoin (IntermediateField.adjoin l (t : Set L))\n            (Set.range (algebraMap K L)) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T184240-L-3995194",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T184240-L-3995194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

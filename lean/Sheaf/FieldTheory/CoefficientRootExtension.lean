@@ -6,6 +6,7 @@ Authors: SHEAF group M2
 module
 
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Sheaf.FieldTheory.FiniteRootedExtension
 
 /-!
 # Finite coefficient-root extensions of rational function fields
@@ -20,6 +21,75 @@ universe w
 open Polynomial
 namespace FieldExtension
 
+private theorem finiteConstants_for_element
+    (k K : Type w) [Field k] [Field K] [Algebra k K]
+    (s : Finset K) (p : ℕ) [Fact p.Prime]
+    (x : IntermediateField.adjoin k (s : Set K)) :
+    ∃ C : Finset k, ∀ (F : Type w) [Field F] [CharP F p]
+      (f : IntermediateField.adjoin k (s : Set K) →+* F),
+      (∀ c ∈ C, ∃ b : F, f (algebraMap k _ c) = b ^ p) →
+      (∀ y (hy : y ∈ s), ∃ b : F,
+        f ⟨y, IntermediateField.subset_adjoin k (s : Set K) hy⟩ = b ^ p) →
+      ∃ b : F, f x = b ^ p := by
+  classical
+  rcases x with ⟨x, hx⟩
+  induction hx using IntermediateField.adjoin_induction with
+  | mem y hy =>
+      exact ⟨∅, fun F _ _ f _ ht ↦ ht y hy⟩
+  | algebraMap c =>
+      exact ⟨{c}, fun F _ _ f hc _ ↦ hc c (Finset.mem_singleton_self c)⟩
+  | add y z hy hz ihy ihz =>
+      obtain ⟨Cy, hCy⟩ := ihy
+      obtain ⟨Cz, hCz⟩ := ihz
+      refine ⟨Cy ∪ Cz, ?_⟩
+      intro F _ _ f hc ht
+      obtain ⟨a, ha⟩ := hCy F f (fun c h ↦ hc c (Finset.mem_union_left _ h)) ht
+      obtain ⟨b, hb⟩ := hCz F f (fun c h ↦ hc c (Finset.mem_union_right _ h)) ht
+      refine ⟨a + b, ?_⟩
+      change f (⟨y, hy⟩ + ⟨z, hz⟩) = _
+      rw [map_add, ha, hb, add_pow_char]
+  | inv y hy ih =>
+      obtain ⟨C, hC⟩ := ih
+      refine ⟨C, ?_⟩
+      intro F _ _ f hc ht
+      obtain ⟨a, ha⟩ := hC F f hc ht
+      refine ⟨a⁻¹, ?_⟩
+      change f (⟨y, hy⟩⁻¹) = _
+      rw [map_inv₀, ha, inv_pow]
+  | mul y z hy hz ihy ihz =>
+      obtain ⟨Cy, hCy⟩ := ihy
+      obtain ⟨Cz, hCz⟩ := ihz
+      refine ⟨Cy ∪ Cz, ?_⟩
+      intro F _ _ f hc ht
+      obtain ⟨a, ha⟩ := hCy F f (fun c h ↦ hc c (Finset.mem_union_left _ h)) ht
+      obtain ⟨b, hb⟩ := hCz F f (fun c h ↦ hc c (Finset.mem_union_right _ h)) ht
+      refine ⟨a * b, ?_⟩
+      change f (⟨y, hy⟩ * ⟨z, hz⟩) = _
+      rw [map_mul, ha, hb, mul_pow]
+
+private theorem finiteConstants_for_finset
+    (k K : Type w) [Field k] [Field K] [Algebra k K]
+    (s : Finset K) (p : ℕ) [Fact p.Prime]
+    (S : Finset (IntermediateField.adjoin k (s : Set K))) :
+    ∃ C : Finset k, ∀ (F : Type w) [Field F] [CharP F p]
+      (f : IntermediateField.adjoin k (s : Set K) →+* F),
+      (∀ c ∈ C, ∃ b : F, f (algebraMap k _ c) = b ^ p) →
+      (∀ y (hy : y ∈ s), ∃ b : F,
+        f ⟨y, IntermediateField.subset_adjoin k (s : Set K) hy⟩ = b ^ p) →
+      ∀ x ∈ S, ∃ b : F, f x = b ^ p := by
+  classical
+  induction S using Finset.induction_on with
+  | empty => exact ⟨∅, by simp⟩
+  | @insert x S hx ih =>
+      obtain ⟨Cx, hCx⟩ := finiteConstants_for_element k K s p x
+      obtain ⟨CS, hCS⟩ := ih
+      refine ⟨Cx ∪ CS, ?_⟩
+      intro F _ _ f hc ht y hy
+      rcases Finset.mem_insert.mp hy with rfl | hy
+      · exact hCx F f (fun c h ↦ hc c (Finset.mem_union_left _ h)) ht
+      · exact hCS F f (fun c h ↦ hc c (Finset.mem_union_right _ h)) ht y hy
+
+set_option linter.unusedVariables false in
 /-- A polynomial over a finitely generated rational function field acquires p-th-power
 coefficients after extending the constants and rooting an algebraically independent tuple.
 Source: Stacks Project, Algebra, Tag 04KM, the construction of k' and L.
@@ -65,6 +135,41 @@ theorem exists_coefficientRoot_extension
             algebraMap (IntermediateField.adjoin k (s : Set K))
               (IntermediateField.adjoin l (t : Set L)) (P.coeff n) = b ^ p) ∧
           IntermediateField.adjoin (IntermediateField.adjoin l (t : Set L))
-            (Set.range (algebraMap K L)) = ⊤ := by sorry
+            (Set.range (algebraMap K L)) = ⊤ := by
+  classical
+  obtain ⟨C, hC⟩ := finiteConstants_for_finset k K s p P.coeffs
+  obtain ⟨l, hl, akl, L, hL, aKL, alL, akL, htl, htK, hfinl, hpil, hfinL, hpiL,
+    t, ht, a, hTower, hconst, hvar, hgen⟩ :=
+    exists_finiteRooted_extension k K s hs p C
+  let := hl
+  let := akl
+  let := hL
+  let := aKL
+  let := alL
+  let := akL
+  let := htl
+  let := htK
+  let := a
+  let := hTower
+  let E := IntermediateField.adjoin k (s : Set K)
+  let E₁ := IntermediateField.adjoin l (t : Set L)
+  have : CharP l p := charP_of_injective_algebraMap (algebraMap k l).injective p
+  have : CharP E₁ p := charP_of_injective_algebraMap (algebraMap l E₁).injective p
+  have hcomm (c : k) :
+      algebraMap E E₁ (algebraMap k E c) = algebraMap l E₁ (algebraMap k l c) := by
+    apply (algebraMap E₁ L).injective
+    rw [← IsScalarTower.algebraMap_apply E E₁ L,
+      ← IsScalarTower.algebraMap_apply k E L,
+      ← IsScalarTower.algebraMap_apply l E₁ L,
+      ← IsScalarTower.algebraMap_apply k l L]
+  have hcoeff := hC E₁ (algebraMap E E₁) (fun c hc ↦ ?_) hvar
+  · refine ⟨l, hl, akl, L, hL, aKL, alL, akL, htl, htK, hfinl, hpil, hfinL, hpiL,
+      t, ht, a, hTower, ?_, hgen⟩
+    intro n
+    by_cases hn : P.coeff n = 0
+    · exact ⟨0, by simp [hn, (Fact.out : p.Prime).pos.ne']⟩
+    · exact hcoeff (P.coeff n) (by simpa using P.coeff_mem_coeffs hn)
+  · obtain ⟨b, hb⟩ := hconst c hc
+    exact ⟨algebraMap l E₁ b, by rw [hcomm, hb, map_pow]⟩
 
 end FieldExtension
