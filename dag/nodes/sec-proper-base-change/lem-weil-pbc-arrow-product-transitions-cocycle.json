@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-arrow-product-transitions-cocycle",
+ "kind": "statement",
+ "title": "Canonical arrow-indexed product transitions and cocycle",
+ "statement": "Let J be a small category, F : J → Cat a functor, T_j topologies with every F(a) continuous [def-weil-pbc-sites-and-cohomology], and A_j abelian sheaves. Put R_a = F(a)_* and B_j = ∏_{t:j→l} R_t A_l. Let c_ab : R_a R_b ≅ R_ab be the canonical comparison induced by F.map_comp. There are maps q_a : B_j → R_a B_k such that q_a R_a(π_t) = π_(a≫t) c_(a,t)^(-1) for every outgoing t from k, and q_(a≫b) = q_a R_a(q_b) c_ab for every composable a,b. No sheaves Fs, augmentation maps, or compatibility with them are assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 0EXZ proof, canonical transition components, adjoint form"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Continuous pushforward R_a preserves products: it is a right adjoint, since abelian-group sheaves on small sites admit sheafification. Use the preserved product universal property to define q_a with the prescribed projections. These equations determine q_a uniquely.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composable a,b, test both sides of the cocycle after each mapped projection. Naturality of c_ab moves the projection through the comparison. Both composites select the factor indexed by a≫b≫t; associativity identifies the indices. The comparison maps agree because they are transports along F.map_comp and both underlying presheaf maps transport along the same equality of composite functors. Thus the preserved product universal property gives the cocycle.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0EXZ product transition construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "piComparison|isLimitOfHasProductOfPreservesLimit|sheafPushforwardContinuousComp",
+   "results": "Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Preadditive/Biproducts.lean; Mathlib/CategoryTheory/Triangulated/Basic.lean; Mathlib/CategoryTheory/Triangulated/Basic.lean; Mathlib/CategoryTheory/Triangulated/Basic.lean; Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean",
+   "date": "2026-10-12",
+   "verdict": "Generic product and precomposition tools only; no exact arrow-system theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.isLimitOfHasProductOfPreservesLimit",
+   "results": "CategoryTheory.Limits.isLimitOfHasProductOfPreservesLimit",
+   "date": "2026-10-12",
+   "verdict": "Generic product and precomposition tools only; no exact arrow-system theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous pushforward preserves products; outgoing arrow indexed products have reindexing transition maps satisfying composition",
+   "results": "CategoryTheory.Limits.SequentialProduct.functorMap_commSq_aux; CategoryTheory.Limits.SequentialProduct.functorMap_commSq_succ; CategoryTheory.Limits.SequentialProduct.functorMap_commSq; CategoryTheory.Limits.SequentialProduct.functorMap; CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_neg_assoc; CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_neg; CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_pos_assoc; CategoryTheory.Limits.SequentialProduct.cone_π_app_comp_Pi_π_pos",
+   "date": "2026-10-12",
+   "verdict": "Generic product and precomposition tools only; no exact arrow-system theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Product of pushforward sheaves indexed by outgoing arrows admits canonical compatible transition maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSystemArrowProductTransitions",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-arrow-product-compatible-transitions",
+   "place": "product transition proof"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ArrowProductTransitionsCocycle",
+  "file": "lean/Sheaf/CategoryTheory/ArrowProductTransitionsCocycle.lean",
+  "declaration": "CategoryTheory.exists_arrow_product_transitions_cocycle",
+  "statement": "theorem exists_arrow_product_transitions_cocycle\n    {J : Type u} [SmallCategory J]\n    (F : J ⥤ Cat.{u, u}) (T : ∀ j : J, GrothendieckTopology (F.obj j))\n    [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (T j) (T k)]\n    (A : ∀ j : J, Sheaf (T j) AddCommGrpCat.{u}) :\n    let R := fun {j k : J} (a : j ⟶ k) ↦\n      (F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (T j) (T k)\n    let B := fun j ↦ ∏ᶜ fun t : Σ k : J, j ⟶ k ↦ (R t.2).obj (A t.1)\n    ∃ (q : ∀ {j k : J} (a : j ⟶ k), B j ⟶ (R a).obj (B k)),\n      (∀ {j k : J} (a : j ⟶ k) (t : Σ l : J, k ⟶ l),\n        q a ≫ (R a).map (Pi.π _ t) =\n          Pi.π _ ⟨t.1, a ≫ t.2⟩ ≫\n            (Functor.sheafPushforwardContinuousComp'\n              (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a t.2).symm))\n              AddCommGrpCat.{u} (T j) (T k) (T t.1)).inv.app (A t.1)) ∧\n      (∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l),\n        q (a ≫ b) = q a ≫ (R a).map (q b) ≫\n          (Functor.sheafPushforwardContinuousComp'\n            (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a b).symm))\n            AddCommGrpCat.{u} (T j) (T k) (T l)).hom.app (B l))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T135321-L-1694453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T135321-L-1694453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
