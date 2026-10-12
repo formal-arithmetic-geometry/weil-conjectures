@@ -244,6 +244,31 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_upperStar_higherLo
     (e₅.app _).symm ≪≫ (WeilComplex.derivedLowerShriekCongr (comp_over f' _)).app _
   exact ⟨WeilSheaf.globalSectionsEquivOfIso ((WeilComplex.homologySheaf 0).mapIso E')⟩
 
+/-- **Base change for the degree-zero direct image with compact support of a quasi-finite
+morphism.** For a cartesian square `X' = X ×_Y Y'` of `k₀`-schemes with `f : X ⟶ Y` separated and
+quasi-finite, `h^*(f₀!F) ≅ f'₀!(g^*F)`: `Rf₀!F = f₀!F` is concentrated in degree zero and
+`h^* Rf₀! ≅ Rf'₀! g^*`. -/
+theorem WeilSheaf.nonempty_upperStar_higherLowerShriek_zero_iso
+    (hH : IsPullback g f' f h) (F : WeilSheaf k₀ l X) :
+    Nonempty ((WeilSheaf.upperStar h).obj ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F) ≅
+      (WeilSheaf.higherLowerShriek k₀ l f' 0).obj ((WeilSheaf.upperStar g).obj F)) := by
+  obtain ⟨e₂⟩ := WeilComplex.nonempty_iso_toComplex_homologySheaf_zero
+    ((WeilComplex.derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj F)) fun b hb ↦ by
+      rcases lt_or_gt_of_ne hb with hb | hb
+      · exact WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg F hb
+      · obtain ⟨n, rfl⟩ : ∃ n : ℕ, b = n := ⟨b.toNat, (Int.toNat_of_nonneg hb.le).symm⟩
+        exact isZero_higherLowerShriek_of_quasiFinite f n (by exact_mod_cast hb) F
+  obtain ⟨e₃⟩ := WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hH
+  let E : WeilSheaf.toComplex.obj ((WeilSheaf.upperStar h).obj
+      ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F)) ≅
+      (WeilComplex.derivedLowerShriek k₀ l f').obj
+        (WeilSheaf.toComplex.obj ((WeilSheaf.upperStar g).obj F)) :=
+    (WeilComplex.upperStarToComplexIso h _).symm ≪≫
+      (WeilComplex.upperStar h).mapIso e₂.symm ≪≫ e₃.app _ ≪≫
+      (WeilComplex.derivedLowerShriek k₀ l f').mapIso (WeilComplex.upperStarToComplexIso g F)
+  exact ⟨(WeilSheaf.toComplexCompHomologySheafIso.app _).symm ≪≫
+    (WeilComplex.homologySheaf 0).mapIso E⟩
+
 end Fibre
 
 section StalkFormula
