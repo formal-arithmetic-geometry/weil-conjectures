@@ -21,96 +21,55 @@
  ],
  "proof": [
   {
-   "text": "Finite presentation on a Noetherian scheme gives coherence, quasi-coherence and finite type. Use coherent-kernel-cokernel stability and the closedness of support. Stalk exactness implies support containment for subobjects and quotients; stalk detection makes a module with empty support zero, with the length-zero chain.",
+   "text": "Convert finite presentation to coherence using the Noetherian coherence equivalence. A coherent module has closed support. Prove the stronger integral-ideal filtration assertion locally by well-founded induction on closed support; this proof does not import the stronger theorem module.",
    "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-finite-type-module-support-closed",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-module-iso-on-stalks"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "If the nonempty closed support S is reducible, express it as the union of two proper closed subsets. Apply the support-union exact sequence. Its coherent submodule and quotient have proper support in S. The two-step subobject chain of F is the desired coarse chain: both quotients are unresolved finitely presented smaller-support factors. No inductive filtration is chosen.",
-   "uses": [
-    "def-weil-irreducible-components",
-    "lem-weil-pbc-coherent-support-union-exact-sequence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For irreducible S, form its reduced induced integral closed subscheme i:Z to X. Its defining ideal J has zero locus S. At the generic point of S, J is the ambient maximal ideal: one inclusion follows from evaluation, and the reverse follows because the closed zero locus of a section containing the generic point contains S. Use the sober scheme and reduced-induced-structure lemmas and the basic-open and ideal-stalk formulas.",
-   "uses": [
-    "lem-weil-pbc-scheme-sober",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-closed-immersion",
-    "def-pc-integral-scheme",
-    "lem-weil-pbc-ideal-module-product-stalk",
-    "lem-weil-pbc-basic-open-function"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A power of J kills F by the support-power-killing lemma. Use the ascending J-adic subobject chain, from J^n F=0 to F. Its quotients Q are coherent, supported in S, and killed by J, by the affine and stalk ideal-product formulas. Retain any Q with proper support as an unresolved factor. For a Q with support equal to S, its generic stalk is killed by the ambient maximal ideal; proceed to the next step. No replacement by a nongood factor and no support-minimality assumption are used.",
-   "uses": [
-    "lem-weil-pbc-coherent-support-power-ideal-kills",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-ideal-module-product-stalk",
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For each J-adic quotient Q with full support S, apply the generic-point ideal-inclusion lemma to i:Z to X. It gives a mono from the pushforward of a finite sum of a coherent ideal into Q, isomorphic near the generic point. Closed pushforward and finite-sum stability give a coherent image; the cokernel is coherent. The image is filtered by the first k summands, with each consecutive quotient the pushforward of the ideal. Stalk exactness and the generic-point isomorphism give zero generic stalk for the cokernel, so its support is proper in S. Keep this cokernel unresolved, rather than filtering it by induction.",
-   "uses": [
-    "lem-weil-pbc-ideal-module-product-stalk",
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "lem-weil-pbc-immersion-base-change-lft",
-    "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-closed-pushforward-stalks"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For each full-support Q use its image chain followed by its smaller-support cokernel; for a proper-support Q use its one-step chain. Apply the categorical refinement lemma to the J-adic filtration, with predicate: an ideal-pushforward factor or a finitely presented factor with support closure properly contained in S. This predicate is invariant under isomorphism. The resulting chain has precisely the required alternatives. Coherence gives finite presentation for unresolved factors and closed support, so strict support containment agrees with strict containment of closures.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-s3-finite-filtration-refinement",
     "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-finite-type-module-support-closed"
    ],
    "elementary": false
+  },
+  {
+   "text": "For empty support, use the public sheaf stalk-detection theorem and faithfulness of the module-to-sheaf forgetful functor to prove that the module is zero. On any scheme, subobjects of a zero module are subsingleton, so the constant bottom chain of length zero has bottom and top endpoints. Transport coherence from the zero object to the bottom subobject using the public coherent-kernel-cokernel-sum theorem. This needs neither local Noetherianity nor coherence of the ambient module.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For reducible support, the closed-union characterization of preirreducibility gives two proper closed subsets covering the support. The support-union exact sequence gives coherent submodule and cokernel with support contained in those subsets. Apply the strict-support induction hypothesis to both and concatenate their filtrations using the extension lemma.",
+   "uses": [
+    "lem-pc-s3-coherent-reducible-support-exact-sequence",
+    "lem-weil-pbc-coherent-integral-filtration-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonempty irreducible support, sobriety supplies a generic point. Apply the irreducible-support step with the strict-support induction hypothesis. Its J-adic and generic-inclusion argument constructs the filtration without importing cyclic argument-step modules.",
+   "uses": [
+    "lem-pc-s3-irreducible-support-filtration-step",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the local induction assertion to F and its closed support. Retain the same chain and endpoints, forget coherence of its subobjects and the nonzero/coherence conditions on its ideals, and inject every integral-ideal quotient into the first disjunct. No assertion about the smaller-support disjunct is required.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-integral-scheme",
-  "def-weil-closed-immersion",
-  "def-weil-irreducible-components",
-  "lem-pc-s3-finite-filtration-refinement",
-  "lem-weil-pbc-basic-open-function",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-coherent-support-power-ideal-kills",
-  "lem-weil-pbc-coherent-support-union-exact-sequence",
+  "lem-pc-s3-coherent-reducible-support-exact-sequence",
+  "lem-pc-s3-irreducible-support-filtration-step",
+  "lem-weil-pbc-coherent-integral-filtration-extension",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
   "lem-weil-pbc-finite-type-module-support-closed",
-  "lem-weil-pbc-ideal-module-product-stalk",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "lem-weil-pbc-module-iso-on-stalks",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
   "lem-weil-pbc-scheme-sober",
-  "pqf-lem-coherent-ft-locnoeth",
-  "pqf-lem-locnoeth-lft"
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 01YF, coherent.tex, label lemma-coherent-filter, proof before support minimality is applied; Tag 01YE, label lemma-prepare-filter-irreducible; S3 formal decomposition"
+  "place": "Tag 01YF support induction: empty, reducible, and irreducible cases; the irreducible step explicitly takes the smaller-support induction hypothesis. Cyclic J-adic and generic-step imports are kept only as the split node proof plan."
  },
  "mathlib_searches": [
   {
@@ -219,9 +178,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T184343-L-4019999",
+  "landing": "20261012T223411-L-1639003",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
