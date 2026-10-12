@@ -335,6 +335,7 @@ public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalizationChart
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximationFamily
+public import WeilConjectures.AlgebraicGeometry.NoetherianComponents
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineSpaceRigidity
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
@@ -775,12 +776,16 @@ public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.AffineStratification
 public import WeilConjectures.ConstructibleSheaf.Biproduct
 public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.Devissage
 public import WeilConjectures.ConstructibleSheaf.EtaleDescent
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriek
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriekAffine
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriekNoetherian
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriekQcqs
+public import WeilConjectures.ConstructibleSheaf.ExtensionByZero
+public import WeilConjectures.ConstructibleSheaf.FiniteDerived
 public import WeilConjectures.ConstructibleSheaf.FiniteEtalePushforward
+public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.FiniteSubsum
@@ -794,6 +799,8 @@ public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.LocallyConstantReduction
 public import WeilConjectures.ConstructibleSheaf.Monoidal
+public import WeilConjectures.ConstructibleSheaf.Noetherian
+public import WeilConjectures.ConstructibleSheaf.NormalGenericConstant
 public import WeilConjectures.ConstructibleSheaf.OfForget
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
@@ -1878,6 +1885,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Finite.ConstantSheafEnd
+public import WeilConjectures.SixFunctors.Finite.Counit
 public import WeilConjectures.SixFunctors.Finite.Descent
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.Finite.GlobalSections

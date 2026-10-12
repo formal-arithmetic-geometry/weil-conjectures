@@ -47,6 +47,17 @@ initiality of base change on pointed étale neighbourhoods enters.
 - `AlgebraicGeometry.Etale.fullyFaithfulLowerStar`, with the corresponding `Full` and
   `Faithful` instances: the pushforward along a closed immersion is fully faithful.
 
+## Why not the dense-subsite route
+
+Blueprint `rmk-openclosed-no-dense-subsite`: it is tempting to deduce full faithfulness from
+the base-change functor `X_ét ⥤ Z_ét` exhibiting `Z_ét` as a dense subsite. That functor is
+cover-dense (blueprint `lemma-openclosed-etale-lifts-locally`,
+`AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`), but it is neither locally
+full nor locally faithful: two morphisms `V ⟶ V'` of étale `X`-schemes agreeing after base
+change to `Z` need only agree on an open subscheme of `V` containing the preimage of `Z`, which
+is not a covering of `V` in general. The stalk computation above replaces the formal argument,
+since there this open subscheme may shrink, a stalk being a colimit over neighbourhoods.
+
 -/
 
 @[expose] public section
@@ -238,14 +249,16 @@ instance Etale.isIso_upperStarLowerStarAdjunction_counit_app
     Etale.isIso_uliftSheafFiber_map_upperStarLowerStarAdjunction_counit_app A i _ H)
 
 include hJ in
-/-- **The counit of `i^* ⊣ i_*` is an isomorphism**, for a closed immersion `i : Z ⟶ X`,
+/-- Blueprint `prop-openclosed-lowerstar-fully-faithful`: **The counit of `i^* ⊣ i_*` is an
+isomorphism**, for a closed immersion `i : Z ⟶ X`,
 that is, `i^* i_* H ≅ H` naturally in the sheaf `H` on `Z`. -/
 instance Etale.isIso_upperStarLowerStarAdjunction_counit :
     IsIso (Etale.upperStarLowerStarAdjunction A i).counit :=
   NatIso.isIso_of_isIso_app _
 
 include hJ in
-/-- **The pushforward along a closed immersion is fully faithful.** -/
+/-- Blueprint `prop-openclosed-lowerstar-fully-faithful`: **The pushforward along a closed
+immersion is fully faithful.** -/
 noncomputable def Etale.fullyFaithfulLowerStar : (i)_*[A].FullyFaithful :=
   (Etale.upperStarLowerStarAdjunction A i).fullyFaithfulROfIsIsoCounit
 

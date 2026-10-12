@@ -416,7 +416,8 @@ private theorem exists_map_comp_eq_pointSmallEtaleElementsBaseChange
       (FormallyUnramified.eqLocus W.hom σ.val.left σ'.val.left hab).ι _ hmr,
       Category.assoc, Category.assoc, FormallyUnramified.eqLocus_ι_comp_eq]
 
-/-- **Base change along a closed immersion is initial on pointed étale neighbourhoods.** For
+/-- Blueprint `lemma-openclosed-stalk-lowerstar`, first assertion: **Base change along a closed
+immersion is initial on pointed étale neighbourhoods.** For
 a closed immersion `i : Z ⟶ X` and a geometric point `s` of `Z`, every pointed étale
 neighbourhood of `s` in `Z` is dominated by one of the form `V ×_X Z`, and two maps out of
 such a `V ×_X Z` are equalised after shrinking `V`; the categories of pointed étale
