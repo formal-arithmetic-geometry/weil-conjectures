@@ -6,7 +6,8 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
+import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 
 /-! # Two nonvanishing loci represented in a common tensor degree
 
@@ -21,6 +22,34 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
 universe u
+
+private theorem nonvanishingLocus_app_one {X : Scheme.{u}} (M : X.Modules)
+    [M.IsInvertible] (a : MonoidalCategory.tensorUnit X.Modules ⟶ M) :
+    nonvanishingLocus M (a.app ⊤ (unitSectionsEquiv ⊤ 1)) =
+      ((Hom.zeroLocus a).support.compl : Set X) := by
+  have h : homOfGlobalSection M (a.app ⊤ (unitSectionsEquiv ⊤ 1)) = a := by
+    refine (SheafOfModules.unitHomEquiv M).injective (Subtype.ext (funext fun U ↦ ?_))
+    change Hom.app (homOfGlobalSection M (a.app ⊤ (unitSectionsEquiv ⊤ 1)))
+      U.unop (1 : Γ(X, U.unop)) = Hom.app a U.unop (1 : Γ(X, U.unop))
+    rw [homOfGlobalSection_app_one, ← Hom.app_presheaf_map]
+    exact congrArg (Hom.app a U.unop)
+      (map_one (X.presheaf.map (homOfLE (le_top : U.unop ≤ ⊤)).op).hom :)
+  rw [nonvanishingLocus_eq_compl_support_zeroLocus, h]
+
+private theorem nonvanishingLocus_power_transport {X : Scheme.{u}} {N M : X.Modules}
+    [N.IsInvertible] [M.IsInvertible] (s : Γ(N, ⊤)) (k : ℕ) (hk : 0 < k)
+    (e : N.tensorPow k ≅ M) :
+    nonvanishingLocus M
+      ((tensorPowSection (homOfGlobalSection N s) k ≫ e.hom).app ⊤
+        (unitSectionsEquiv ⊤ 1)) = nonvanishingLocus N s := by
+  have := IsInvertible.sheafOfModules_isInvertible M
+  have := IsInvertible.sheafOfModules_isInvertible (N.tensorPow k)
+  rw [nonvanishingLocus_app_one, nonvanishingLocus_eq_compl_support_zeroLocus]
+  have he := Hom.zeroLocus_eq_of_arrowIso
+    (tensorPowSection (homOfGlobalSection N s) k)
+    (tensorPowSection (homOfGlobalSection N s) k ≫ e.hom)
+    (Arrow.isoMk (Iso.refl _) e (by simp))
+  rw [← he, compl_support_zeroLocus_tensorPowSection N _ hk]
 
 /-- Two sections of positive tensor powers can be replaced by sections of one invertible
 module without changing either nonvanishing locus.
@@ -46,6 +75,17 @@ theorem exists_common_degree_nonvanishing {X : Scheme.{u}} (L : X.Modules)
     ∃ M : X.Modules, M.IsInvertible ∧
       ∃ s' t' : M.val.presheaf.obj (Opposite.op ⊤),
         nonvanishingLocus M s' = nonvanishingLocus (L.tensorPow p) s ∧
-        nonvanishingLocus M t' = nonvanishingLocus (L.tensorPow q) t := by sorry
+        nonvanishingLocus M t' = nonvanishingLocus (L.tensorPow q) t := by
+  let M := L.tensorPow (p * q)
+  let e : (L.tensorPow p).tensorPow q ≅ M := (L.tensorPowMulIso p q).symm
+  let f : (L.tensorPow q).tensorPow p ≅ M :=
+    (L.tensorPowMulIso q p).symm ≪≫ eqToIso (congrArg L.tensorPow (Nat.mul_comm q p))
+  refine ⟨M, inferInstance,
+    (tensorPowSection (homOfGlobalSection (L.tensorPow p) s) q ≫ e.hom).app ⊤
+      (unitSectionsEquiv ⊤ 1),
+    (tensorPowSection (homOfGlobalSection (L.tensorPow q) t) p ≫ f.hom).app ⊤
+      (unitSectionsEquiv ⊤ 1), ?_, ?_⟩
+  · exact nonvanishingLocus_power_transport s q hq e
+  · exact nonvanishingLocus_power_transport t p hp f
 
 end AlgebraicGeometry.Scheme.Modules

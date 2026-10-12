@@ -7256,3 +7256,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/P1/Sheaf.RingTheory.NormalLocalDepthTwo (stage 3; reviewer PASS; first push; landing 20261012T095917-L-322230 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/P1/Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres (stage 3; reviewer PASS; first push; landing 20261012T095917-L-322327 (interface); batch 20261012T095846; modules 4; new nodes 3)
 - 09:59 L: merged deliver/P2/Sheaf.Algebra.Homology.DerivedInternalHom (stage 3; reviewer PASS; first push; landing 20261012T095918-L-322426 (interface); batch 20261012T095846; modules 1; new nodes 0; change records: coord/changes/DerivedInternalHomImports.md)
+- 09:59 L: merged deliver/P2/Sheaf.AlgebraicGeometry.NonvanishingCommonDegree (stage 3; reviewer PASS; first push; landing 20261012T095918-L-322522 (proof); batch 20261012T095846; modules 1; new nodes 0)

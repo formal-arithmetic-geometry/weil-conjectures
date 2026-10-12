@@ -14,29 +14,25 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-invertible-pullback-tensor], set $\\mathcal M=\\mathcal L^{\\otimes pq}$, which is invertible, and use the exponent-law isomorphisms to transport $s^{\\otimes q}$ and $t^{\\otimes p}$ into sections $s\\prime,t\\prime$ of $\\mathcal M$.",
-   "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ],
-   "elementary": false
+   "text": "Set M = L.tensorPow (p*q), which is invertible by the existing tensorPow instance. Use tensorPowMulIso and Nat.mul_comm to identify (L.tensorPow p).tensorPow q and (L.tensorPow q).tensorPow p with M. Define the two section morphisms by tensorPowSection followed by these isomorphisms, and evaluate at one.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The same lemma identifies fibre values of tensor sections with tensors of fibre values, in one-dimensional residue-field vector spaces. Choose bases: a positive power of the scalar coordinate is nonzero exactly when that scalar is nonzero. The canonical isomorphisms preserve nonzero fibre values. The nonvanishing predicate of [def-weil-pbc-ample-invertible-module] is precisely nonzero fibre value. Hence $X_{s\\prime}=X_s$ and $X_{t\\prime}=X_t$.",
+   "text": "Apply [lem-weil-pbc-section-nonvanishing-zero-locus] to convert section nonvanishing to the complement of its zero-locus support. The proved private helper nonvanishingLocus_app_one identifies homOfGlobalSection of evaluation at one with the original section morphism, by unitHomEquiv injectivity and naturality. The existing proved tool Hom.zeroLocus_eq_of_arrowIso removes the isomorphism transport, and the existing proved tool compl_support_zeroLocus_tensorPowSection in WeilConjectures.AlgebraicGeometry.Modules.AffineComplement identifies each positive tensor-power locus with the original one. Apply this with powers q and p respectively.",
    "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "def-weil-pbc-ample-invertible-module"
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "def-weil-pbc-ample-invertible-module"
+  "lem-weil-pbc-section-nonvanishing-zero-locus"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, proof of Lemma 01PY (lemma-affine-s-opens-cover-quasi-separated), second paragraph; Lemma 01PT (lemma-ample-power), proof; extracted local step of lem-weil-pbc-ample-scheme-separated"
+  "place": "Properties, proof of Lemma 01PY and Lemma 01PT; same tensor-power route using existing zero-locus tools instead of residue fibres"
  },
  "mathlib_searches": [
   {
@@ -113,10 +109,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T085215-L-3729",
-  "kind": "interface",
+  "landing": "20261012T095918-L-322522",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
