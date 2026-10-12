@@ -16,10 +16,9 @@
  },
  "proof": [
   {
-   "text": "The underived direct-image and terminal-section comparisons associate. Both composites are evaluation on an iterated versus a composite base change of the terminal object. The comparison isomorphisms commute with the projections, so the pullback universal property identifies the two maps.",
+   "text": "The private helper lowerStarCompGlobalSectionsIso_comp_comp proves the underived composition equation in the specialized case h = f ≫ g and hh = rfl. Cancel the terminal-evaluation isomorphism on the right, use its naturality, and expand lowerStarCompSheafSectionsTerminalIso and lowerStarComp. The remaining equality is between maps into the iterated pullback of the terminal object; terminalIsTerminal.hom_ext identifies them. This is the same terminal-section argument as the proved private helper in Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange, specialized without any stalk or base-change hypotheses.",
    "uses": [
     "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-etale-cohomology",
     "lem-weil-pbc-inverse-image-composition"
@@ -31,10 +30,9 @@
    }
   },
   {
-   "text": "The underived direct-image composition is the mate of inverse-image composition. Right deriving preserves this conjugacy under the adjunctions with exact left adjoint, so its right-derived composition agrees with the isomorphism D defined by conjugateIsoEquiv.",
+   "text": "The private helper derived_comp_eq applies the proved source theorem Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv to the three inverse-image/direct-image adjunctions and lowerStarComp. Its hypothesis is precisely conjugateIsoEquiv_upperStarComp. Unfolding rightDerivedLowerStarComp identifies its hom with Functor.rightDerivedFunctorCompIso' applied to lowerStarComp. The helper comp_fac then gives the equation obtained by precomposing each such derived comparison with rightDerivedFunctorCompUnit, using rightDerivedUnique and rightDerivedNatTrans_fac.",
    "uses": [
     "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-etale-cohomology",
     "lem-weil-pbc-inverse-image-composition"
@@ -46,10 +44,9 @@
    }
   },
   {
-   "text": "Direct image preserves K-injective complexes because its left adjoint is exact. Hence the composite right-derived direct images followed by right-derived global sections satisfy the universal property with the composite unit. After precomposition with that unit, either side is the localization of the underived equality from step 1. The uniqueness clause of the right-derived universal property identifies the natural transformations. Evaluate at M.",
+   "text": "Write F=g_*, G=f_*, H=Gamma_X, K=(g≫f)_*, J=Gamma_Y and L=Gamma_Z. F, G and F⋙G preserve K-injectives. Transport the right-derived structure of R(F⋙G)⋙RH along rightDerivedFunctorCompIso F G whiskered by RH. Its unit alpha at a homotopy object T is the H-derived unit at G(F(T)), followed by RH applied to the F,G composite unit. Apply Functor.rightDerived_ext with alpha. On the left, comp_fac for F,G converts the direct-image comparison, naturality of the H-derived unit moves the underived direct-image comparison to the front, and comp_fac for K,H gives Qh(H(e_T);c_T) followed by the L-derived unit. On the right, naturality of the G,H comparison at the F-derived unit, then comp_fac for G,H and F,J, gives Qh(a_F(T);b_T) followed by the same L-derived unit. The equation of step 1 lifts degreewise to cochain complexes and then through the homotopy quotient and Qh, identifying these expressions. Evaluate the resulting natural-transformation equation at M.",
    "uses": [
     "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-etale-cohomology",
     "lem-weil-pbc-inverse-image-composition"
@@ -63,7 +60,6 @@
  ],
  "proof_deps": [
   "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-etale-cohomology",
   "lem-weil-pbc-inverse-image-composition"
@@ -71,7 +67,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05T2 and 015M."
+  "place": "Tags 05T2 and 015M; plan realized in Lean by C2 using the proved source derived-composition/mate interfaces and Mathlib rightDerived_ext. Terminal-section calculation follows the proved helper in Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange. Repair specializes the local underived helper to h = f ≫ g to avoid duplicating the existing private theorem statement."
  },
  "mathlib_searches": [
   {
@@ -152,10 +148,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T144200-L-2112780",
-  "kind": "interface",
+  "landing": "20261012T202232-L-702033",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

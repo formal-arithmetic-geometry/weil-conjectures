@@ -9347,3 +9347,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/C1/Sheaf.RingTheory.RegularLocalFibreFinrankComparison (stage 3; reviewer PASS; first push; landing 20261012T202231-L-701687 (proof); batch 20261012T202227; modules 1; new nodes 1)
 - 20:22 L: merged deliver/C1/Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescent (stage 3; reviewer PASS; first push; landing 20261012T202231-L-701806 (interface); batch 20261012T202227; modules 2; new nodes 1)
 - 20:22 L: merged deliver/C2/Sheaf.AlgebraicGeometry.LocalSectionQuotientFiniteFree (stage 3; reviewer PASS; first push; landing 20261012T202232-L-701922 (interface); batch 20261012T202227; modules 1; new nodes 0; change records: coord/changes/local-section-quotient-composition.md)
+- 20:22 L: merged deliver/C2/Sheaf.Paper.DerivedLerayComp (stage 3; reviewer PASS; after a return; landing 20261012T202232-L-702033 (proof); batch 20261012T202227; modules 1; new nodes 0)
