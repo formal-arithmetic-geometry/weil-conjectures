@@ -19,60 +19,52 @@
  ],
  "proof": [
   {
-   "text": "If I is zero, its module and closed pushforward are zero. Otherwise ideals on the locally Noetherian W are coherent, as are their closed pushforwards.",
+   "text": "Split on whether i_*I is zero. In the zero case take the first disjunct. Otherwise the common-submodule construction supplies monomorphisms a and d with coherent canonical cokernels whose supports are strict subsets of i(W).",
+   "uses": [
+    "lem-pc-a2-integral-ideal-common-submodule"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical cokernel projection for each monomorphism. Mathlib ShortComplex.exact_cokernel, together with the mono inclusion and epi cokernel projection, gives the two short exact sequences.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_finitePresentation_integral_filtration to each finitely presented cokernel Q. Its ideal factors can be zero. Define P to mean being an integral closed pushforward of a nonzero ideal. This property is invariant under isomorphism. The module of the zero ideal is zero: each stalk germ restricts to an affine neighborhood, where the ideal inclusion has zero image and is injective, so that germ vanishes; stalks detect zero objects. Pushforward preserves zero objects. Replace every zero-ideal factor by its empty filtration; every other factor already has P. Apply finite_filtration_refinement to obtain a chain with only nonzero ideal factors. This proves the private nonzero-filtration helper without an additional hole.",
+   "uses": [
+    "lem-pc-e2-finite-presentation-integral-filtration",
+    "lem-pc-s3-finite-filtration-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove locally in Lean that an integral-ideal subquotient j_*J of Q has image j(Wprime) contained in Supp Q. Coherence gives a closed support by the coherent/finite-type equivalence and finite_type_module_support_closed. At the image of the generic point the ideal stalk is nontrivial, as is its pushforward stalk by closedImmersion_pushforward_stalks. The forgetful functor from module sheaves preserves finite limits and colimits, as does the abelian-group sheaf stalk functor of Mathlib.Topology.Sheaves.Abelian. If Q had zero stalk there, injectivity of the subobject stalk inclusion and surjectivity of the stalk cokernel projection would make the subquotient stalk zero, contradicting the factor isomorphism. The generic point therefore belongs to Supp Q. Continuity of j and genericPoint_specializes put every point of j(Wprime) in this closed support. Transitivity with Supp Q strictly contained in i(W) gives the required strict image containment.",
    "uses": [
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-pc-closed-immersion-coherent-cohomology"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the generic-point ideal inclusion to G on i(W). It produces an inclusion from a finite sum of pushforwards of a nonzero ideal J, isomorphically near the generic point. The residue-field-line hypothesis and the generic stalk of a nonzero ideal force one summand.",
-   "uses": [
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The quasi-coherent intersection J cap I is nonzero: on a nonempty affine open in the integral W, a product of nonzero sections lies nontrivially in the intersection. Set K = i_*(J cap I). The inclusions into G and i_*I are monomorphisms with coherent cokernels Q1,Q2. Their generic stalk maps are isomorphisms, so the cokernel supports miss the generic point and are proper closed subsets of i(W). Take the cokernel short exact sequences.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-intersection",
+    "lem-weil-pbc-finite-type-module-support-closed",
     "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
     "lem-weil-pbc-closed-pushforward-stalks",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-finite-type-module-support-closed"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Filter each coherent cokernel by integral-ideal factors. Stalk exactness confines all factor supports to the cokernel support; a nonzero integral ideal has full integral support. Thus each integral closed image in these filtrations is strictly smaller than i(W). Use the empty filtration for zero cokernels.",
-   "uses": [
-    "lem-weil-pbc-coherent-filtration-integral-subschemes",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pc-a2-integral-ideal-common-submodule",
+  "lem-pc-e2-finite-presentation-integral-filtration",
+  "lem-pc-s3-finite-filtration-refinement",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-  "lem-weil-pbc-quasi-coherent-ideal-intersection",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "lem-weil-pbc-module-stalk-exact",
   "lem-weil-pbc-finite-type-module-support-closed",
-  "lem-weil-pbc-coherent-filtration-integral-subschemes"
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "A2",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tags 01YH and 01YF, lemma-property-irreducible and lemma-coherent-filter"
+  "place": "Tags 01YH and 01YF; A2 makes the subquotient support argument explicit using the generic point and closedness"
  },
  "mathlib_searches": [
   {
@@ -180,9 +172,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T184353-L-4023465",
+  "landing": "20261012T212206-L-1096684",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
