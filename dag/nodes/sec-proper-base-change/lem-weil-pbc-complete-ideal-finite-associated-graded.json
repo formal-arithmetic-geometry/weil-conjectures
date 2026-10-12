@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-complete-ideal-finite-associated-graded",
+ "kind": "statement",
+ "title": "Finite generation of ideals lifted in an adically complete ring",
+ "statement": "Let $A$ be a commutative ring, $J,K\\subseteq A$ ideals. Suppose $A$ is $J$-adically complete [def-weil-pbc-adically-complete-ring] and $\\operatorname{gr}_J(A)$ [def-weil-pbc-associated-graded-ring] is Noetherian [def-weil-pbc-noetherian-ring]. Then $K$ is finitely generated.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 05GH (lemma-completion-Noetherian, lines 23022–23063), steps 3–6 (approximation, iteration and convergence)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Obtain finitely many h_i in K with degrees d_i and one-step approximation for K ∩ J^n from the initial-form approximation theorem.",
+   "uses": [
+    "lem-weil-pbc-associated-graded-ideal-approximation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in K recursively subtract one-step approximations. Let r_n belong to K ∩ J^n and c_i(n) belong to J^(n-d_i). Put s_i(N)=sum_{n<N} c_i(n). Induction gives x-sum_i s_i(N) h_i=r_N.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Put D=max_i d_i, with D=0 for an empty family. Induct on N≥M to show s_i(N)-s_i(M) lies in J^k whenever M≥k+d_i. Thus k↦s_i(k+D) is an adic Cauchy sequence. Precompleteness supplies L_i with s_i(k+D)-L_i in J^k for every k.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The telescoping remainder r_(k+D) lies in J^k; so does sum_i (s_i(k+D)-L_i)h_i. Therefore x-sum_i L_i h_i lies in J^k for every k. Separatedness gives x=sum_i L_i h_i. Since all h_i lie in K, their finite range spans exactly K.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-associated-graded-ideal-approximation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 05GH, proof of lemma-completion-Noetherian, steps 3–6 (approximation, iteration and convergence)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complete ring with Noetherian associated graded ring has every ideal finitely generated",
+   "results": "HTTP Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian associated graded implies Noetherian complete ring",
+   "results": "GradedRing.GradeZero.isNoetherianRing (reverse direction); reesAlgebra Noetherian and finite-type instances (assume Noetherian base); AdicCompletion.flat_of_isNoetherian; PowerSeries.instIsNoetherianRing; IsNoetherianRing.of_prime/of_finite; no complete filtered-ring lifting theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]oetherian.*[Gg]raded|[Gg]raded.*[Nn]oetherian",
+   "results": "Polynomial/HilbertPoly.lean:40 documentation; GradedAlgebra/Noetherian.lean:12,28, grade-zero ring inherits Noetherianity; no filtered-ring lifting theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdicCompletionNoetherianOfQuotient",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Parent split, steps 3–6 (approximation, iteration and convergence); source: Algebra Tag 05GH, proof of lemma-completion-Noetherian",
+   "via": [
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-cohen-rings-exist",
+    "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompleteIdealFiniteOfAssociatedGraded",
+  "file": "lean/Sheaf/RingTheory/CompleteIdealFiniteOfAssociatedGraded.lean",
+  "declaration": "Ideal.fg_of_isAdicComplete_of_associatedGraded",
+  "statement": "theorem fg_of_isAdicComplete_of_associatedGraded {A : Type u} [CommRing A]\n    (J K : Ideal A) [IsAdicComplete J A] [IsNoetherianRing (associatedGraded J)] :\n    K.FG",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T204509-L-869734",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T204509-L-869734",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,7 +7,9 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.RingTheory.AssociatedGradedRing
+import Mathlib.RingTheory.AdicCompletion.Completeness
+import Sheaf.RingTheory.AssociatedGradedFiniteType
+import Sheaf.RingTheory.CompleteIdealFiniteOfAssociatedGraded
 
 /-!
 # Noetherian completion from a Noetherian quotient
@@ -60,6 +62,24 @@ theorem isNoetherianRing_and_isAdicComplete_of_quotient {R : Type u} [CommRing R
     (I : Ideal R) [IsNoetherianRing (R ⧸ I)] (hI : I.FG) :
     IsNoetherianRing (AdicCompletion I R) ∧
       IsAdicComplete (I.map (algebraMap R (AdicCompletion I R))) (AdicCompletion I R) := by
-  sorry
+  let A := AdicCompletion I R
+  let J := I.map (algebraMap R A)
+  have hJ : J.FG := hI.map _
+  have hcomplete : IsAdicComplete J A :=
+    (IsAdicComplete.map_algebraMap_iff I A).mpr (AdicCompletion.isAdicComplete hI)
+  have hquotient : IsNoetherianRing (A ⧸ J) := by
+    have hker := AdicCompletion.ker_evalOneₐ_eq_map I hI
+    change IsNoetherianRing (AdicCompletion I R ⧸ I.map (algebraMap R A))
+    rw [← hker]
+    exact isNoetherianRing_of_ringEquiv (R ⧸ I)
+      ((AdicCompletion.evalOneₐ I).toRingHom.quotientKerEquivOfSurjective
+        (AdicCompletion.evalOneₐ_surjective I)).symm
+  have hfinite : Algebra.FiniteType (A ⧸ J) (Ideal.associatedGraded J) :=
+    Ideal.associatedGraded_finiteType J hJ
+  have hgraded : IsNoetherianRing (Ideal.associatedGraded J) :=
+    Algebra.FiniteType.isNoetherianRing (A ⧸ J) (Ideal.associatedGraded J)
+  refine ⟨(isNoetherianRing_iff_ideal_fg A).mpr ?_, hcomplete⟩
+  intro K
+  exact Ideal.fg_of_isAdicComplete_of_associatedGraded J K
 
 end AdicCompletion

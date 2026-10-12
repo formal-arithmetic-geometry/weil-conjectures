@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-associated-graded-ideal-approximation",
+ "kind": "statement",
+ "title": "Finite homogeneous initial forms give one-step ideal approximation",
+ "statement": "Let $A$ be a commutative ring, $J,K\\subseteq A$ ideals, and suppose $\\operatorname{gr}_J(A)$ [def-weil-pbc-associated-graded-ring] is Noetherian [def-weil-pbc-noetherian-ring]. There exist $t\\geq 0$, degrees $d_i\\geq 0$ and elements $h_i\\in K\\cap J^{d_i}$ for $i\\in\\{1,\\ldots,t\\}$ such that for every $n\\geq 0$ and $x\\in K\\cap J^n$, there are $a_i\\in J^{\\max(0,n-d_i)}$ with $x-\\sum_i a_i h_i\\in K\\cap J^{n+1}$. No completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 05GH (lemma-completion-Noetherian, lines 23022–23063), steps 3–4 (homogeneous initial ideal generators and one-step approximation)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "The images of K ∩ J^n in J^n/J^(n+1), summed over n, form a homogeneous ideal of the associated graded. Indeed multiplying representatives preserves K and adds their J-power degrees.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Noetherianity gives a finite generating set for this ideal. Replace each generator by all its homogeneous components. Homogeneity puts these components in the ideal; their sums recover the original generators, so they still generate. Lift the components to h_i in K ∩ J^{d_i}.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Express the degree-n initial form of x in these generators and project onto degree n. Coefficient components in degree n-d_i are represented by a_i in J^(n-d_i). For d_i>n set a_i=0. By the homogeneous product formula, the difference has vanishing degree-n class, hence lies in J^(n+1). It lies in K since x and h_i do.",
+   "uses": [
+    "def-weil-pbc-associated-graded-ring",
+    "lem-weil-pbc-associated-graded-ring-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-associated-graded-ring-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 05GH, proof of lemma-completion-Noetherian, steps 3–4 (homogeneous initial ideal generators and one-step approximation)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous initial ideal generators allow approximation in an ideal modulo the next power with coefficients of complementary degree",
+   "results": "HTTP Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a ring with Noetherian associated graded ring every ideal has finitely many initial form generators with approximation modulo ideal powers",
+   "results": "Ideal.is_fg_degreeLE; reesAlgebra.fg; reesAlgebra Noetherian/finite-type instances; localCohomology.ideal_powers_initial; PowerSeries.exist_eq_span_eq_ncard_of_X_notMem; Ideal.exists_pow_inf_eq_pow_smul (requires base Noetherian); IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime; no initial-form approximation theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "initial[Ii]deal|initial.*[Gg]raded|homogeneous.*generat",
+   "results": "4 unrelated hits: CategoryTheory/GradedObject/Monoidal.lean:481, ModelTheory/Fraisse.lean:270, GradedAlgebra/AlgHom.lean:88, GradedAlgebra/RingHom.lean:91",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdicCompletionNoetherianOfQuotient",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Parent split, steps 3–4 (homogeneous initial ideal generators and one-step approximation); source: Algebra Tag 05GH, proof of lemma-completion-Noetherian",
+   "via": [
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-cohen-rings-exist",
+    "lem-weil-pbc-cohen-coefficient-ring-exists",
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AssociatedGradedIdealApproximation",
+  "file": "lean/Sheaf/RingTheory/AssociatedGradedIdealApproximation.lean",
+  "declaration": "Ideal.exists_associatedGraded_ideal_approximation",
+  "statement": "theorem exists_associatedGraded_ideal_approximation {A : Type u} [CommRing A]\n    (J K : Ideal A) [IsNoetherianRing (associatedGraded J)] :\n    ∃ (t : ℕ) (d : Fin t → ℕ) (h : Fin t → A),\n      (∀ i, h i ∈ K) ∧ (∀ i, h i ∈ J ^ (d i)) ∧\n      ∀ (n : ℕ) (x : A), x ∈ K → x ∈ J ^ n →\n        ∃ a : Fin t → A, (∀ i, a i ∈ J ^ (n - d i)) ∧\n          x - ∑ i, a i * h i ∈ K ∧ x - ∑ i, a i * h i ∈ J ^ (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T204509-L-869734",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T204509-L-869734",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
