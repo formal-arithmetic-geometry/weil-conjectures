@@ -25,63 +25,36 @@
  ],
  "proof": [
   {
-   "text": "Write $X=\\overline C$ and $X'=\\overline C'$. By [lem-sc-pic-affine-base-change-compatibility] (1), $X'$ is a smooth proper connected compactification of $C'$ whose boundary is $S'=\\{P':P\\in S\\}$, where each $P\\in S$ (a $k$-rational closed point, $k$ being algebraically closed) pulls back to a single $k'$-point $P'$. Hence $P\\mapsto P'$ is a bijection $S\\to S'$, and it induces the canonical identification $\\iota:\\bigoplus_{P\\in S}\\mathbf Z[P]\\xrightarrow{\\sim}\\bigoplus_{P'\\in S'}\\mathbf Z[P']$.",
+   "text": "Base change preserves smooth connected curves [lem-sc-base-change-curve]. A smooth connected curve is regular, integral and Noetherian, so construct the required instance witnesses for both compactifications.",
    "uses": [
-    "lem-sc-pic-affine-base-change-compatibility",
-    "lem-sc-compactification",
-    "def-sc-field-extension"
+    "lem-sc-base-change-curve"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, compactification and boundary setup"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $u\\in\\mathcal O_C(C)^\\times$ and view $u$ as a nonzero rational function on the proper curve $X$. At each $P\\in S$ the coefficient of $[P]$ in $\\operatorname{div}(u)$ is the normalized order $v_P(u)$ [def-sc-divisor]. By [lem-sc-local-dvr-base-change] the pullback $u'$ has $v_{P'}(u')=v_P(u)$. Hence the boundary part of $\\operatorname{div}(u')$ is $\\iota$ of the boundary part of $\\operatorname{div}(u)$.",
+   "text": "Obtain germ-compatible rational maps, the unique-fibre boundary equivalence, and the forward order comparison from [lem-sc-affine-unit-divisor-base-change-core]. A transported divisor of a unit belongs to the target range, witnessed by the pulled-back unit.",
    "uses": [
-    "lem-sc-local-dvr-base-change",
-    "def-sc-divisor"
+    "lem-sc-affine-unit-divisor-base-change-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, unit quotient paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $L$ and $L'$ be the subgroups of boundary divisors of units on $C$ and on $C'$. Step 2 gives $\\iota(L)\\subseteq L'$. Conversely let $D'=\\sum_{P\\in S}n_P[P']\\in L'$ and $D=\\sum_{P\\in S}n_P[P]$ on $X$. Since $D'$ is the divisor of a unit on $C'$, it is principal on $X'$, so $\\mathcal O_{X'}(D')$ is trivial [lem-sc-divisor-class-curve], and $\\deg D=\\deg D'=0$ [lem-sc-deg-principal-zero]. Since $\\mathcal O_X(P)$ pulls back to $\\mathcal O_{X'}(P')$ for each $P\\in S$ [lem-sc-pic-affine-base-change-compatibility] (1), $\\mathcal O_X(D)$ pulls back to $\\mathcal O_{X'}(D')$, so the class of $\\mathcal O_X(D)$ in $\\operatorname{Pic}^0(X)$ maps to $0$ in $\\operatorname{Pic}^0(X')$. By [lem-sc-pic-affine-base-change-compatibility] (3) this pullback is the Jacobian base-change map $J_X(k)\\to J_{X'}(k')=J_X(k')$ [lem-sc-genus-invariant], [thm-sc-jacobian-representability], which is injective because $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is an epimorphism (so $Y(k)\\to Y(k')$ is injective for every $k$-scheme $Y$). Hence $\\mathcal O_X(D)$ is trivial, and $D=\\operatorname{div}(f)$ for some $f\\in k(X)^*$ [lem-sc-divisor-class-curve]. Then $v_Q(f)=0$ at every closed point $Q\\in C$, so $f\\in\\mathcal O_C(C)^\\times$ by exactness of $0\\to\\mathbf G_m\\to j_*\\mathbf G_{m,\\eta}\\xrightarrow{\\operatorname{div}}\\bigoplus_x i_{x*}\\mathbf Z$ on sections over $C$ [lem-sc-divisor-sequence-general], and $D\\in L$. Thus $L'=\\iota(L)$.",
+   "text": "Use [lem-sc-affine-boundary-unit-divisor-descent] for reverse inclusion, then set antisymmetry to conclude equality. Package the witnesses and both comparisons.",
    "uses": [
-    "lem-sc-pic-affine-base-change-compatibility",
-    "lem-sc-divisor-class-curve",
-    "lem-sc-deg-principal-zero",
-    "thm-sc-jacobian-representability",
-    "lem-sc-genus-invariant",
-    "lem-sc-divisor-sequence-general"
+    "lem-sc-affine-boundary-unit-divisor-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, unit quotient paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-pic-affine-base-change-compatibility",
-  "lem-sc-compactification",
-  "def-sc-field-extension",
-  "lem-sc-local-dvr-base-change",
-  "def-sc-divisor",
-  "lem-sc-divisor-class-curve",
-  "lem-sc-deg-principal-zero",
-  "thm-sc-jacobian-representability",
-  "lem-sc-genus-invariant",
-  "lem-sc-divisor-sequence-general"
+  "lem-sc-base-change-curve",
+  "lem-sc-affine-unit-divisor-base-change-core",
+  "lem-sc-affine-boundary-unit-divisor-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-  "place": "Affine-case proof, unit quotient paragraph"
+  "place": "Affine-case unit quotient paragraph, Lean decomposition by N2"
  },
  "mathlib_searches": [
   {
@@ -168,5 +141,15 @@
   "group": "R1",
   "result": "fix",
   "note": "Correction reverted (H7: named a Lean error, weakened node to arbitrary X', iota, rho, L, L'). Restated: k,k' alg closed; C smooth affine connected; c smooth proper connected compactification; X'=c.baseChange t, C'=pullback f t; S,S' boundaries with tied bijection e (unique point over P); iota=Finsupp.domCongr e; unit clause via div of u and appTop-pullback u' (phi, phi' tied to germs); iota maps unit-boundary set onto the C' one.; reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-18226",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T144130-L-2102545",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and delivered proof matched the node; both new lemmas matched their records; all three modules and direct importer Sheaf.AlgebraicGeometry.Curve.UnitsQuotientBaseChange compiled cleanly; axioms were standard plus sorryAx from the reported open lemmas."
  }
 }
