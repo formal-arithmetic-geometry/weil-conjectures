@@ -15,24 +15,38 @@
  ],
  "proof": [
   {
-   "text": "For every open U, form the abelian group L_A(U) of locally constant maps U → A, with pointwise addition and restriction by precomposition. The set-valued sheaf condition [lem-weil-pbc-locally-constant-maps-sheaf] gives pointwise gluing. The glued map is locally constant, addition commutes with gluing, and therefore L_A is an abelian sheaf.",
-   "uses": [
-    "lem-weil-pbc-locally-constant-maps-sheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Let P be the constant presheaf with value A and let c:P → L_A send a to its constant map. For an abelian sheaf G and a morphism phi:P → G, choose a cover on which any f in L_A(U) is constant, with values a_i. The sections phi(a_i) agree on overlaps: on nonempty overlaps the values are equal, and on empty overlaps the sheaf has a unique section. Glue them. Comparison on common refinements proves independence of the cover. Addition and restriction commute with the glued sections, by checking them locally. This defines an additive natural morphism psi:L_A → G with psi c = phi. This uses the sheaf gluing and uniqueness condition in [def-weil-pbc-sites-and-cohomology]. Concretely take the open fibres f^{-1}(a) as the cover. To check addition compare f, g and f+g on the common cover f^{-1}(a) ∩ g^{-1}(b), where additivity of phi gives phi(a+b)=phi(a)+phi(b); uniqueness of gluing gives the global identity. For restriction to V use the fibres V ∩ f^{-1}(a), and use uniqueness again.",
+   "text": "Extract the underlying sheaf of sets from the abelian sheaf using the corepresentability of the forgetful functor by ULift Z. Prove elementwise local separation and arbitrary-index open-cover gluing for this underlying sheaf directly from the sheaf condition [def-weil-pbc-sites-and-cohomology]. These are the proved private helpers abelian_underlying_isSheaf, abelian_section_ext and abelian_gluing.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Any other extension of phi agrees with psi on constant maps and hence on every locally constant f on a cover where f is constant. The uniqueness of sheaf gluing gives global equality. Thus (L_A,c) has the sheafification universal property [def-weil-pbc-sheafification]. Uniqueness of left adjoints identifies it with the constant sheaf [def-weil-pbc-constant-sheaf]. The resulting component maps are additive equivalences and naturality gives the pointwise restriction identity in the statement, including for empty opens.",
+   "text": "Inside the constant sheaf [def-weil-pbc-constant-sheaf], take on each open the subgroup of sections which locally lie in the image of its unit. Restriction preserves this property; addition uses intersections of representative neighbourhoods and negation uses the negative representative. Compatible sections glue in the ambient sheaf, and the glued section is locally represented because each point is in a cover member. Thus the subpresheaf is a sheaf. Factor the constant-presheaf unit through it and lift by [def-weil-pbc-sheafification]. The lift composed with the inclusion is the identity by sheafification uniqueness. Every ambient section therefore has a local constant representative. All of this is proved in constantSheaf_unit_localSurj.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a point x and coefficient group A, the skyscraper presheaf taking A on opens containing x and the terminal group otherwise satisfies the sheaf condition: if x lies in the covered open, choose a member containing it and use compatibility to transport its value to every other member containing x; otherwise all values are unique. The natural map from the constant presheaf to this sheaf factors through sheafification [def-weil-pbc-sheafification]. On every open containing x its component is an isomorphism, so the constant-presheaf unit is injective there. The private helpers skyscraper_abelian_isSheaf and unit_inj prove these assertions without universe identifications.",
    "uses": [
     "def-weil-pbc-sheafification",
-    "def-weil-pbc-constant-sheaf"
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a section s over U and point x in U, choose a local representative a. Two choices agree on a neighbourhood intersection by the unit injectivity of the preceding step. This gives a locally constant function, constant on every representative neighbourhood. Naturality of the unit and common intersections show that the evaluation maps commute with restriction and addition, and send zero to zero. Equality of evaluations implies local equality of representatives, hence equality of sections by separation.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a locally constant function f, its fibres are opens in U. The constant sections with value a on the fibre of a are compatible: on overlaps containing a point the values agree, and on empty overlaps separation gives equality. Glue the sections using abelian_gluing. The representative-value calculation proves that the glued section evaluates to f. Thus the additive evaluation maps are bijective; apply AddEquiv.ofBijective and the already proved pointwise restriction identity. Empty opens require no exception.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false
   }
@@ -40,13 +54,12 @@
  "proof_deps": [
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-locally-constant-maps-sheaf"
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Expanded gluing and universal-property argument in step 2 of lem-sc-irreducible-constant-sections, following Definition 006W and Example 0081"
+  "place": "Tags 006W, 007B and 0081; direct unit-local-representative argument formalized by P3, using sheafification uniqueness for local surjectivity and a skyscraper factorization for injectivity."
  },
  "mathlib_searches": [
   {
@@ -136,10 +149,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T035258-L-1579790",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T085320-L-32106",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
