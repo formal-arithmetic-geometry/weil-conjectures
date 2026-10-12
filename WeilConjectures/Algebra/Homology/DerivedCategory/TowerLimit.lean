@@ -286,7 +286,11 @@ theorem isHomotopyLimit_mapCone_Q_of_epi {T : ℕᵒᵖ ⥤ CochainComplex (Modu
     exact (Fan.IsLimit.fac hQ (fun n ↦ Q.map (c.π.app (op n))) n).trans (congrArg Q.map
       (Fan.IsLimit.fac hP (fun n ↦ c.π.app (op n)) n).symm |>.trans (Q.map_comp _ _))
   · refine Fan.IsLimit.hom_ext hQ _ _ fun n ↦ ?_
-    simp [triangleOfSES, S, P, towerShift, ← Functor.map_comp, Preadditive.sub_comp]
+    simp only [Functor.mapCone_pt, Functor.comp_obj, Fan.mk_pt, Functor.mapCone_π_app,
+      towerShift, fan_mk_proj, Nat.succ_eq_add_one, homOfLE_leOfHom, Functor.comp_map,
+      triangleOfSES, Triangle.mk_mor₂, ← Functor.map_comp, Iso.refl_hom, comp_id,
+      Preadditive.sub_comp, Functor.map_sub, CategoryTheory.Functor.map_id,
+      Preadditive.comp_sub, id_comp, sub_right_inj, S, P]
     exact (Fan.IsLimit.fac hQ _ n).trans (congrArg Q.map (ht n).symm)
   · simp [triangleOfSES]
 
