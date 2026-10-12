@@ -6992,3 +6992,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/Q2/Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf (stage 3; reviewer PASS; first push; landing 20261012T085322-L-33209 (interface); batch 20261012T085205; modules 1; new nodes 0; change records: coord/changes/site-higher-direct-image-imports.md)
 - 08:53 L: merged deliver/Q2/Sheaf.RingTheory.DepthInSES (stage 3; reviewer PASS; first push; landing 20261012T085323-L-33306 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/Q2/Sheaf.RingTheory.JacobiZariskiQuotientSmooth (stage 3; reviewer PASS; first push; landing 20261012T085323-L-33446 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/Q2/Sheaf.RingTheory.KollarLocalDichotomy (stage 3; reviewer PASS; first push; landing 20261012T085323-L-33543 (interface); batch 20261012T085205; modules 2; new nodes 1)
