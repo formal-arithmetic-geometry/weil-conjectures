@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.WeilSheaf.LowerStarTensorPow
 public import WeilConjectures.WeilSheaf.OpenImmersion
-public import WeilConjectures.WeilSheaf.TensorPower
 
 /-!
 # Boundary stalks of middle extensions of lisse Weil sheaves
@@ -19,6 +19,11 @@ module of inertia invariants of the geometric generic stalk `F_η̄`, Frobenius-
 local Frobenius on `(j_* F)_x̄`, then `v ^ {⊗ k}` is an inertia invariant eigenvector of
 `F^{⊗ k}`, so the `k`-th powers of the boundary eigenvalues of `j_* F` are boundary eigenvalues
 of `j_* (F^{⊗ k})`.
+
+The proof avoids inertia groups: it is the case of an open immersion of
+`AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalkAt_lowerStar_tensorPow`, which builds the
+eigenvector `v^{⊗ k}` from Frobenius-compatible pairings `j_* F ⊗ j_* F^{⊗ k} ⟶ j_* F^{⊗ (k + 1)}`
+and shows that it is nonzero by a germ computation.
 
 ## Main statements
 
@@ -41,9 +46,12 @@ immersion into a smooth curve over `k₀`, `F` a lisse Weil sheaf on `U₀` and 
 of `C₀`. If `α` is an eigenvalue of the local Frobenius on the stalk `(j_* F)_x̄`, then `α ^ k`
 is an eigenvalue of the local Frobenius on `(j_* (F^{⊗ k}))_x̄` for every `k ≥ 1`.
 
-By `lem-wf-boundary-stalk-invariants` the stalk `(j_* F)_x̄` is `F_η̄ ^ {I_x}` with the action of
-a residue Frobenius lift; an eigenvector `v` has the inertia invariant eigenvector `v ^ {⊗ k}` in
-`(F_η̄) ^ {⊗ k} = (F^{⊗ k})_η̄`. (blueprint: `lem-wf-boundary-semicontinuity`, Step 4) -/
+The eigenvector `v ^ {⊗ k}` is built from the pairings `j_* F ⊗ j_* F^{⊗ k} ⟶ j_* F^{⊗ (k + 1)}`
+and is nonzero since `v` is the germ of a section `σ` of the lisse sheaf `F` over a pro-étale
+neighbourhood, whose tensor powers do not vanish
+(`AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalkAt_lowerStar_tensorPow`). The density of `j`,
+the smoothness of `C₀` and `k ≠ 0` are not needed. (blueprint: `lem-wf-boundary-semicontinuity`,
+Step 4) -/
 theorem hasEigenvalue_stalk_directImage_tensorPow {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -54,6 +62,6 @@ theorem hasEigenvalue_stalk_directImage_tensorPow {U C : Scheme.{u}}
     (hα : (((directImage j).obj F).stalk x).frobeniusEnd.HasEigenvalue α) {k : ℕ}
     (hk : k ≠ 0) :
     (((directImage j).obj (F.tensorPow hF k)).stalk x).frobeniusEnd.HasEigenvalue (α ^ k) :=
-  sorry
+  hasEigenvalue_stalkAt_lowerStar_tensorPow j _ hF _ _ hα k
 
 end AlgebraicGeometry.WeilSheaf

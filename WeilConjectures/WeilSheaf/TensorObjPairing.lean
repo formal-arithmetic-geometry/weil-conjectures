@@ -99,7 +99,8 @@ theorem toIhomDual_str (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) :
   have hq := Functor.tensorHom_comp_braiding_comp_associator_inv_comp Fr F.obj.str.hom.hom
     G.obj.str.hom.hom (F.dual hF).obj.str.hom.hom (adicConstant k₀ l X).obj.str.hom.hom
     (Mod.evaluation F.obj.carrier (adicConstant k₀ l X).obj.carrier)
-    (Mod.act (A := adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) G.obj.carrier.X) (dual_evaluation_str F hF) (act_str G)
+    (Mod.act (A := adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      G.obj.carrier.X) (dual_evaluation_str F hF) (act_str G)
   have he := ProEtaleWeilSheaf.ihom_evaluation_str (F.dual hF).obj G.obj
   apply Mod.hom_ext_of_evaluation (D := (F.dual hF).obj.carrier)
   rw [← cancel_epi ((Fr.obj F.obj.carrier.X ⊗ Fr.obj G.obj.carrier.X) ◁
@@ -121,7 +122,8 @@ theorem toIhomDual_str (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) :
         μ Fr (F.obj.carrier.X ⊗ G.obj.carrier.X) (F.dual hF).obj.carrier.X ≫
         Fr.map (Mod.toIhomDualAux F.obj.carrier G.obj.carrier) ≫ G.obj.str.hom.hom := by
     rw [reassoc_of% hμ, ← Fr.map_comp_assoc]
-    exact congrArg (fun f ↦ μ Fr F.obj.carrier.X G.obj.carrier.X ▷ Fr.obj (F.dual hF).obj.carrier.X ≫
+    exact congrArg (fun f ↦ μ Fr F.obj.carrier.X G.obj.carrier.X ▷
+      Fr.obj (F.dual hF).obj.carrier.X ≫
       μ Fr (F.obj.carrier.X ⊗ G.obj.carrier.X) (F.dual hF).obj.carrier.X ≫ Fr.map f ≫
         G.obj.str.hom.hom) (Mod.toIhomDual_evaluation F.obj.carrier G.obj.carrier)
   exact key.symm

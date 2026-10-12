@@ -45,6 +45,7 @@ noncomputable def toIhomDualAux :
   (β_ (M.X ⊗ N.X) ((ihom M).obj (regular A)).X).hom ≫ (α_ _ M.X N.X).inv ≫
     evaluation M (regular A) ▷ N.X ≫ act (A := A) N.X
 
+/-- The morphism `(m ⊗ n) ⊗ φ ↦ φ(m) n` is `A`-linear in `φ`. -/
 lemma isLinearRight_toIhomDualAux : IsLinearRight (toIhomDualAux M N) := by
   unfold IsLinearRight toIhomDualAux
   rw [BraidedCategory.braiding_naturality_right_assoc, associator_inv_naturality_left_assoc,
@@ -60,6 +61,7 @@ noncomputable def toIhomDual :
     M.X ⊗ N.X ⟶ ((ihom ((ihom M).obj (regular A))).obj N).X :=
   curry (toIhomDualAux M N) (isLinearRight_toIhomDualAux M N)
 
+/-- The uncurried form of `M ⊗ N ⟶ Hom_A(M^∨, N)` is `(m ⊗ n) ⊗ φ ↦ φ(m) n`. -/
 lemma toIhomDual_evaluation :
     toIhomDual M N ▷ ((ihom M).obj (regular A)).X ≫ evaluation ((ihom M).obj (regular A)) N =
       toIhomDualAux M N :=

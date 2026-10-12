@@ -27,7 +27,8 @@ pro-étale neighbourhoods `(V, t)`:
 
 Both follow from the description of `g^* P` as the sheafification of a left Kan extension, a
 filtered colimit, and from the fact that every covering sieve of the terminal object of
-`(Spec K)_proét` is the maximal sieve (`AlgebraicGeometry.Scheme.ProEt.id_mem_of_mem_topology_of_iso`),
+`(Spec K)_proét` is the maximal sieve
+(`AlgebraicGeometry.Scheme.ProEt.id_mem_of_mem_topology_of_iso`),
 so that sheafification does not change the sections over `Spec K`.
 -/
 
@@ -175,8 +176,8 @@ lemma exists_germ_eq (a : ToType ((Sheaf.Γ _ _).obj ((g)^*[ModuleCat.{u + 1} R]
       (op (ProEt.mk (𝟙 (Spec (.of K)))))) :=
     IsFiltered.of_equivalence (structuredArrowOpEquivalence _ _)
   obtain ⟨j, σ, hσ⟩ := Concrete.isColimit_exists_rep _
-    ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.isPointwiseLeftKanExtensionLeftKanExtensionUnit
-      P.obj (op (ProEt.mk (𝟙 _)))) c
+    (Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op P.obj (op (ProEt.mk (𝟙 _)))) c
   refine ⟨j.left.unop, j.hom.unop, σ, ?_⟩
   rw [Functor.LeftExtension.coconeAt_ι_app, ConcreteCategory.comp_apply] at hσ
   rw [germ_eq]

@@ -124,11 +124,10 @@ lemma germ_unit {V : Y.ProEt}
   rw [Functor.LaxMonoidal.comp_ε, ε_Γ, germ, ε_app_comp_unit_app_tensorUnit_hom_app_assoc]
   simp only [Category.assoc]
   erw [← n₃, ← reassoc_of% n₂, ← reassoc_of% n₁]
-  simp only [Monoidal.tensorUnit_map, Category.id_comp]
+  simp only [Monoidal.tensorUnit_map]
   rfl
 
 variable (g) in
-
 /-- The lax monoidal functor `Γ(Z, g^* -)` is compatible with the braidings: `g^*` is braided,
 being the strong monoidal left adjoint of the lax braided `g_*`, and taking sections is lax
 braided. -/

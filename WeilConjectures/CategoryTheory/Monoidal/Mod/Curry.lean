@@ -108,6 +108,10 @@ noncomputable def curryAux : (tensorRight A D.X).obj ((free A).obj X) ⟶ N :=
     simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
     monoidal)
 
+omit [Abelian C] [MonoidalPreadditive C] [IsGrothendieckAbelian.{v} C]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
+  [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)] in
+/-- The morphism `curryAux q` coequalizes the two actions of `A` defining `(A ⊗ X) ⊗_A D`. -/
 lemma curryAux_condition (hq : IsLinearRight q) :
     (tensorRightMap A (act D.X)).app ((free A).obj X) ≫ curryAux q =
       (tensorRightRightAct A D.X).app ((free A).obj X) ≫ curryAux q := by
@@ -131,6 +135,7 @@ noncomputable def curryTensorLeft (hq : IsLinearRight q) :
   colimit.desc _ ((Cocone.precompose (diagramIsoParallelPair _).hom).obj
     (Cofork.ofπ (curryAux q) (curryAux_condition q hq)))
 
+/-- The morphism `(A ⊗ X) ⊗_A D ⟶ N` induced by `q` on the quotient map. -/
 lemma tensorπ_curryTensorLeft (hq : IsLinearRight q) :
     tensorπ ((free A).obj X) D ≫ (curryTensorLeft q hq).hom =
       (α_ A X D.X).hom ≫ A ◁ q ≫ act N.X := by
@@ -143,6 +148,7 @@ lemma tensorπ_curryTensorLeft (hq : IsLinearRight q) :
 noncomputable def curry (hq : IsLinearRight q) : X ⟶ ((ihom D).obj N).X :=
   (λ_ X).inv ≫ η[A] ▷ X ≫ ((ihomAdjunction D).homEquiv _ _ (curryTensorLeft q hq)).hom
 
+/-- The uncurried form of `curry q` is `q`. -/
 lemma curry_evaluation (hq : IsLinearRight q) : curry q hq ▷ D.X ≫ evaluation D N = q := by
   have h₁ := tensorπ_map D ((ihomAdjunction D).homEquiv _ _ (curryTensorLeft q hq))
   have h₂ : (tensorLeft D).map ((ihomAdjunction D).homEquiv _ _ (curryTensorLeft q hq)) ≫

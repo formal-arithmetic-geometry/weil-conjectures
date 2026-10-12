@@ -19,7 +19,8 @@ powers of sections of Weil sheaves. Its formation commutes with restriction
 image of the tensor product of the germs (`AlgebraicGeometry.ProEtale.germ_toIhomDualSection`).
 For `F` lisse it is nonzero at a geometric point as soon as the germs of `σ` and `τ` are
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.germ_toIhomDualSection_ne_zero`). The germ of the
-unit section `1` of `ℚ̄_ℓ,Y` is the unit of the stalk (`AlgebraicGeometry.ProEtale.germ_adicUnitSection`).
+unit section `1` of `ℚ̄_ℓ,Y` is the unit of the stalk
+(`AlgebraicGeometry.ProEtale.germ_adicUnitSection`).
 -/
 
 @[expose] public section
@@ -80,8 +81,7 @@ lemma map_toIhomDualSection {F N : AdicSheaf l Y} {W W' : Y.ProEt} (f : W' ⟶ W
         N.X).naturality f.op)]
     rfl
   have := congrArg (fun φ ↦ φ.hom (σ ⊗ₜ τ)) e
-  simp only [ModuleCat.hom_comp, LinearMap.comp_apply,
-    ModuleCat.MonoidalCategory.tensorHom_tmul] at this
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at this
   exact this
 
 variable {K : Type u} [Field K]
@@ -106,7 +106,8 @@ lemma germ_toIhomDualSection {F N : AdicSheaf l Y} (s : Spec (.of K) ⟶ Y) {W :
     germ (WeilCoefficients.{u} l) s
       ((Mod.ihom ((Mod.ihom F).obj (AdicSheaf.unit l Y))).obj N).X t (toIhomDualSection σ τ) =
       ((stalkFunctor l s).map (Mod.toIhomDual F N)).hom
-        ((μ (stalkFunctor l s) F.X N.X).hom (germ (WeilCoefficients.{u} l) s F.X t σ ⊗ₜ germ (WeilCoefficients.{u} l) s N.X t τ)) := by
+        ((μ (stalkFunctor l s) F.X N.X).hom (germ (WeilCoefficients.{u} l) s F.X t σ ⊗ₜ
+          germ (WeilCoefficients.{u} l) s N.X t τ)) := by
   have h₁ := congrArg (fun f ↦ f.hom (σ ⊗ₜ τ)) (germ_tensor F.X N.X t)
   have h₂ := congrArg (fun f ↦ f.hom ((μ (sheafToPresheaf (ProEt.topology Y)
     (WeilCoefficients.{u} l)) F.X N.X).app (op W) (σ ⊗ₜ τ)))
@@ -125,9 +126,10 @@ lemma IsAdicLisseSheaf.germ_toIhomDualSection_ne_zero {F : AdicSheaf l Y}
     (hF : IsAdicLisseSheaf F) {N : AdicSheaf l Y} (s : Spec (.of K) ⟶ Y) {W : Y.ProEt}
     (t : ProEt.mk (𝟙 _) ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ s).obj W)
     {σ : ToType (F.X.obj.obj (op W))} {τ : ToType (N.X.obj.obj (op W))}
-    (hσ : germ (WeilCoefficients.{u} l) s F.X t σ ≠ 0) (hτ : germ (WeilCoefficients.{u} l) s N.X t τ ≠ 0) :
-    germ (WeilCoefficients.{u} l) s
-      ((Mod.ihom ((Mod.ihom F).obj (AdicSheaf.unit l Y))).obj N).X t (toIhomDualSection σ τ) ≠ 0 := by
+    (hσ : germ (WeilCoefficients.{u} l) s F.X t σ ≠ 0)
+    (hτ : germ (WeilCoefficients.{u} l) s N.X t τ ≠ 0) :
+    germ (WeilCoefficients.{u} l) s ((Mod.ihom ((Mod.ihom F).obj (AdicSheaf.unit l Y))).obj N).X
+      t (toIhomDualSection σ τ) ≠ 0 := by
   rw [germ_toIhomDualSection]
   exact hF.toIhomDual_stalk_ne_zero N s hσ hτ
 

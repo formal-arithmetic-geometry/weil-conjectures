@@ -143,6 +143,20 @@ theorem eq_zero_of_tensorPowSection_eq_zero (F : WeilSheaf k₀ l X) (hF : F.IsL
 
 end TensorPowSection
 
+/-- Bilinearity of a morphism out of a tensor product, for the `ℚ̄_ℓ`-structures of the underlying
+`ℚ̄_ℓ`-vector spaces. -/
+lemma smul_tmul_smul_map {M N L L' : WeilCoefficients.{u} l} (f : M ⊗ N ⟶ L) (g : L ⟶ L')
+    (a b : PadicAlgCl l) (x : (WeilCoefficients.toModuleCat l).obj M)
+    (y : (WeilCoefficients.toModuleCat l).obj N) :
+    g.hom (f.hom ((a • x) ⊗ₜ (b • y))) =
+      (ULift.up (a * b) : ULift.{u + 1} (PadicAlgCl l)) • g.hom (f.hom (x ⊗ₜ y)) := by
+  have h := TensorProduct.smul_tmul_smul (R := ULift.{u + 1} (PadicAlgCl l))
+    (ULift.up a) (ULift.up b) (show M from x) (show N from y)
+  have h' := congrArg (fun z ↦ g.hom (f.hom z)) h
+  simp only [map_smul] at h'
+  exact h'
+
+
 section Main
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -153,6 +167,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   {V : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber.ProEt}
   (t : Scheme.ProEt.mk (𝟙 _) ⟶ (MorphismProperty.Over.pullback @WeaklyEtale ⊤ s).obj V)
 
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] [QuasiCompact φ] [QuasiSeparated φ]
+  [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- The germ of the unit section of `φ_* ℚ̄_ℓ` is the image of `1` under the unit of the
 pushforward. -/
 lemma germ_lowerStar_adicUnitSection :
@@ -163,7 +179,8 @@ lemma germ_lowerStar_adicUnitSection :
       ((stalkSheafFunctor k₀ l Y s).map
         (ε (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[WeilCoefficients.{u} l] ≫
           (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].map
-            (MonObj.one (X := adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)))).hom
+            (MonObj.one (X := adicConstantSheaf l
+              (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)))).hom
         ((ε (stalkSheafFunctor k₀ l Y s)).hom (1 : ULift.{u + 1} (PadicAlgCl l))) := by
   have e : (ε (sheafToPresheaf (Scheme.ProEt.topology _) (WeilCoefficients.{u} l))).app
       (op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤
@@ -175,16 +192,21 @@ lemma germ_lowerStar_adicUnitSection :
       ε (stalkSheafFunctor k₀ l Y s) ≫ (stalkSheafFunctor k₀ l Y s).map
         (ε (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[WeilCoefficients.{u} l] ≫
           (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].map
-            (MonObj.one (X := adicConstantSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))) := by
-    rw [germ_unit (l := l) t, Category.assoc, ← germ_naturality]
-    simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
+            (MonObj.one (X := adicConstantSheaf l
+              (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))) := by
+    rw [germ_unit (l := l) t, Category.assoc]
+    erw [← germ_naturality]
+    simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, Category.assoc]
     rw [ε_sheafToPresheaf_app_comp_ε_lowerStar_app_assoc]
     rfl
   exact congrArg (fun f ↦ f.hom (1 : ULift.{u + 1} (PadicAlgCl l))) e
 
+omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] [QuasiCompact φ] [QuasiSeparated φ]
+  [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 /-- The germ of `σ ⊗ τ` at `s`, for sections of `φ_* F` and `φ_* N` over `V`, is the pairing of the
 germs under `φ_* F ⊗ φ_* N ⟶ φ_* (F ⊗ N) ⟶ φ_* 𝓗om(F^∨, N)`. -/
-lemma germ_lowerStar_toIhomDualSection (F N : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+lemma germ_lowerStar_toIhomDualSection
+    (F N : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (σ : ToType (((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj F.X).obj.obj (op V)))
     (τ : ToType (((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj N.X).obj.obj (op V))) :
     germ (WeilCoefficients.{u} l) s
@@ -209,12 +231,16 @@ lemma germ_lowerStar_toIhomDualSection (F N : AdicSheaf l (X ↘ Spec (CommRingC
         (Mod.toIhomDual F N).hom.app _ ≫ germ (WeilCoefficients.{u} l) s
           ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj
             ((Mod.ihom ((Mod.ihom F).obj (AdicSheaf.unit l _))).obj N).X) t := by
-    rw [germ_tensor_assoc, ← germ_naturality]
-    simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
+    rw [germ_tensor_assoc]
+    erw [← germ_naturality]
+    simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, Category.assoc]
     rw [μ_sheafToPresheaf_app_comp_μ_lowerStar_app_assoc]
     rfl
   exact (congrArg (fun f ↦ f.hom (σ ⊗ₜ τ)) e).symm
 
+set_option maxRecDepth 10000 in
+set_option maxHeartbeats 1000000 in
+-- unifying the stalks of `φ_* (F^{⊗ (k + 1)})` and of `φ̄_* 𝓗om(F^∨, F^{⊗ k})` unfolds deeply
 /-- **Powers of eigenvalues on stalks of pushforwards of tensor powers.** If `α` is an eigenvalue
 of the local Frobenius on the stalk `(φ_* F)_s` of the pushforward of a lisse Weil sheaf `F`, then
 `α ^ k` is an eigenvalue of the local Frobenius on `(φ_* (F^{⊗ k}))_s`. -/
@@ -238,26 +264,32 @@ theorem hasEigenvalue_stalkAt_lowerStar_tensorPow {F : WeilSheaf k₀ l X} (hF :
       (α ^ k) • w k := by
     induction k with
     | zero =>
-      have h := stalkAt_unit_frobenius s m hs ((lowerStar φ).obj (F.tensorPow hF 0)) _
-        (lowerStar_unit_str φ (adicConstant k₀ l X) _ adicConstant_unit_str)
-      have hw : w 0 = _ := germ_lowerStar_adicUnitSection φ s t
-      rw [hw, pow_zero, one_smul]
-      exact h
+      have h := stalkAt_unit_frobenius (k₀ := k₀) (l := l) s m hs
+        ((lowerStar φ).obj (F.tensorPow hF 0)) _ (lowerStar_unit_str φ (adicConstant k₀ l X) _
+          (adicConstant_unit_str (k₀ := k₀) (l := l) (X := X)))
+      have hw := germ_lowerStar_adicUnitSection (l := l) φ s t
+      calc _ = _ := congrArg (((lowerStar φ).obj (F.tensorPow hF 0)).stalkAt s m hs).frobenius hw
+        _ = _ := h
+        _ = (α ^ 0) • w 0 := by rw [pow_zero, one_smul]; exact hw.symm
     | succ k ih =>
-      have h := stalkAt_pairing_frobenius s m hs ((lowerStar φ).obj F)
+      let v₀ : (((lowerStar φ).obj F).stalkAt s m hs).carrier := germ (WeilCoefficients.{u} l) s
+        ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj F.obj.carrier.X) t σ
+      have hv₁ : (((lowerStar φ).obj F).stalkAt s m hs).frobenius v₀ = α • v₀ := by
+        rw [show v₀ = v from hσv]; exact hv.1
+      have h := stalkAt_pairing_frobenius (k₀ := k₀) (l := l) s m hs ((lowerStar φ).obj F)
         ((lowerStar φ).obj (F.tensorPow hF k)) ((lowerStar φ).obj (F.tensorPow hF (k + 1))) _
         (lowerStar_pairing_str φ F (F.tensorPow hF k) (F.tensorPow hF (k + 1)) _
-          (toIhomDual_str F (F.tensorPow hF k) hF)) v (w k)
-      have hw : w (k + 1) = _ := germ_lowerStar_toIhomDualSection φ s t F.obj.carrier
+          (toIhomDual_str F (F.tensorPow hF k) hF)) v₀ (w k)
+      rw [hv₁, ih, smul_tmul_smul_map] at h
+      have hw := germ_lowerStar_toIhomDualSection φ s t F.obj.carrier
         (F.tensorPow hF k).obj.carrier σ (tensorPowSection F hF σ k)
-      have hv₁ : (((lowerStar φ).obj F).stalkAt s m hs).frobenius v = α • v := hv.1
-      rw [hw, ← hσv, ← h]
-      erw [hσv, hv₁, ih]
-      change _ = (ULift.up (α ^ (k + 1)) : ULift.{u + 1} (PadicAlgCl l)) • _
-      rw [← TensorProduct.smul_tmul_smul]
-      erw [map_smul, map_smul]
-      congr 1
-      exact congrArg ULift.up (pow_succ' α k).symm
+      calc _ = _ :=
+          congrArg (((lowerStar φ).obj (F.tensorPow hF (k + 1))).stalkAt s m hs).frobenius hw
+        _ = _ := h.symm
+        _ = (α ^ (k + 1)) • w (k + 1) := by
+          rw [← pow_succ']
+          exact congrArg (fun z ↦ (ULift.up (α ^ (k + 1)) : ULift.{u + 1} (PadicAlgCl l)) • z)
+            hw.symm
   have hne (k : ℕ) : w k ≠ 0 := by
     intro h
     obtain ⟨V', f, t', ht', hf⟩ := exists_map_eq_zero_of_germ_eq_zero s _ t _ h

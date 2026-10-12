@@ -57,10 +57,9 @@ powers `ℱ^{⊗ k}`, whose boundary eigenvalues include the `k`-th powers of th
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`: boundary semicontinuity of
   weights on a smooth geometrically connected affine curve.
 
-## TODO
-
-Remove the hypothesis that `C₀` is affine (Step 0 of the blueprint proof), which needs the
-compatibility of `j_*` with restriction to an affine open neighbourhood of a boundary point.
+The case of a separated, not necessarily affine, curve (Step 0 of the blueprint proof) is
+`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage_of_isSeparated`
+(`WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity`).
 -/
 
 @[expose] public section
