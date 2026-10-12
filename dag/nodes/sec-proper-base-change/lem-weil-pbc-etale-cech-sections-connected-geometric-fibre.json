@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-etale-cech-sections-connected-geometric-fibre",
+ "kind": "lemma",
+ "title": "Cech sections agree over one connected geometric fibre",
+ "statement": "Let f:T\\to S be a scheme morphism [def-pc-scheme], let \\Omega be an algebraically closed field and q:\\operatorname{Spec}\\Omega\\to S a geometric point [def-weil-geometric-point]. Assume U=T\\times_S\\operatorname{Spec}\\Omega [def-weil-geometric-fibre] is connected [def-weil-connected-scheme]. For a sheaf F of sets on S_{et} [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets] and a global section a of f^{-1}F, set D=T\\times_S T, g=\\operatorname{pr}_1\\circ f and E=D\\times_S\\operatorname{Spec}\\Omega [def-pc-fibre-product]. The two Cech pullbacks of a, identified as sections of g^{-1}F by the unit-compatible composition comparisons and the pullback-condition equality [lem-weil-pbc-sets-etale-inverse-image-composition-units], have equal inverse-image restrictions along E\\to D. Restrictions use the adjunction unit and the canonical terminal-object pullback lift. Only U is assumed connected; no global compatibility on D is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-fibre",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-geometric-point"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H (lemma-sections-upstairs), final paragraph, compatibility before fpqc descent; https://stacks.math.columbia.edu/tag/0A3H"
+ },
+ "proof": [
+  {
+   "text": "Put p:U -> T and h:U -> Spec Omega. Pull a back by the inverse-image unit along p. The unit-compatible composition comparisons and p followed by f = h followed by q identify its terminal section with a section of (h followed by q)^-1 F. Since U is connected, the bijective constant-section map gives a unique e in F_q representing this section.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-geometric-fibre-constant-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two maps E -> U are the pullback lifts pairing d followed by pr_i with the common projection v:E -> Spec Omega. Their composites with h are v. Pullback uniqueness identifies E with U times_(Spec Omega) U. Naturality of inverse-image units moves the terminal lifts through the two restrictions. Associativity of the chosen inverse-image composition comparisons identifies each restricted Cech section with the corresponding pullback of the section in the preceding step; the maps of terminal pullbacks agree because both their projections agree.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The naturality clause of the geometric-fibre constant-section theorem identifies both pullbacks with the constant section of e on E. Its comparison is an isomorphism, so transport back gives the claimed equality. No connectedness or nonemptiness of E is needed; nonempty connected U is the sole connectedness assumption.",
+   "uses": [
+    "lem-weil-pbc-etale-geometric-fibre-constant-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H (lemma-sections-upstairs), final paragraph, compatibility before fpqc descent; https://stacks.math.columbia.edu/tag/0A3H"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullbacks of a section along both Cech projections agree after restriction to a connected geometric fibre",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A global section of an inverse image etale sheaf has equal restrictions along two maps over the base if geometric fibres are connected",
+   "results": "Eight hits, all Scheme.Hom.appLE or Scheme.congr_app identities; none compares Cech sections on a connected geometric fibre.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "connected.*[Ff]ib.*section|section.*connected.*[Ff]ib; etaleSetSection; geometric.*fibre in Mathlib/AlgebraicGeometry and lean/WeilConjectures and lean/Sheaf",
+   "results": "No Mathlib statement for this fibre-local Cech equality. Existing EtaleGeometricFibreConstantSections provides the constant sections and their naturality, but not their identification with the two restricted Cech sections. Existing EtaleConnectedFibresSectionCompatible is the global theorem, not the local statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image sections on a connected scheme over an algebraically closed field come from a single stalk element, and their pullbacks agree",
+   "results": "Second reader: eight hits about structure-sheaf germs, residue-field maps, SpecToEquivOfField and affine-space morphisms; none states the etale set-sheaf Cech equality. Local rg search found only the global item and the existing constant-section theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleConnectedFibresSectionCompatible",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Proof paragraph beginning 'The base Y_(ybar) is strictly henselian local': geometric-fibre section comparison, specifically Tag 0A3H's compatibility of the two projections before applying descent.",
+   "via": [
+    "lem-weil-pbc-etale-connected-fibres-section-compatible",
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+    "lem-weil-pbc-sections-base-field-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCechSectionsConnectedGeometricFibre",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCechSectionsConnectedGeometricFibre.lean",
+  "declaration": "AlgebraicGeometry.etaleSet_cech_sections_agree_on_connected_geometric_fibre",
+  "statement": "theorem etaleSet_cech_sections_agree_on_connected_geometric_fibre\n    {S T : Scheme.{u}} (f : T ⟶ S)\n    (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (q : Spec (.of Ω) ⟶ S)\n    [ConnectedSpace (pullback f q : Scheme.{u})]\n    (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n    (a : ((L f).obj F).obj.obj (op I[T])) :\n    let D := pullback f f\n    let g := pullback.fst f f ≫ f\n    let E := pullback g q\n    let d := pullback.fst g q\n    let G := (L g).obj F\n    R[D,E,d,G]\n      (((Classical.choose etaleSetInverseImageCompositionUnits.2.2\n          S T (pullback f f) f (pullback.fst f f)).hom.app F).hom.app\n        (op (Scheme.Etale.mk (𝟙 (pullback f f))))\n        (((Scheme.etaleSetPullback (pullback.fst f f)).obj\n            ((Scheme.etaleSetPullback f).obj F)).obj.map\n          (MorphismProperty.Over.homMk\n            (pullback.lift (pullback.fst f f) (𝟙 (pullback f f))\n              ((Category.comp_id _).trans (Category.id_comp _).symm))\n            (by simp) :\n            Scheme.Etale.mk (𝟙 (pullback f f)) ⟶\n              (MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst f f)).obj\n                (Scheme.Etale.mk (𝟙 T))).op\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst f f)) _\n            (T.smallGrothendieckTopology @Etale)\n            ((pullback f f).smallGrothendieckTopology @Etale)).unit.app\n              ((Scheme.etaleSetPullback f).obj F)).hom.app\n            (op (Scheme.Etale.mk (𝟙 T))) a))) =\n    R[D,E,d,G]\n      (Eq.mp (congrArg (fun k : pullback f f ⟶ S ↦\n          ((Scheme.etaleSetPullback k).obj F).obj.obj\n            (op (Scheme.Etale.mk (𝟙 (pullback f f)))))\n          (pullback.condition (f := f) (g := f)).symm)\n        (((Classical.choose etaleSetInverseImageCompositionUnits.2.2\n            S T (pullback f f) f (pullback.snd f f)).hom.app F).hom.app\n          (op (Scheme.Etale.mk (𝟙 (pullback f f))))\n          (((Scheme.etaleSetPullback (pullback.snd f f)).obj\n              ((Scheme.etaleSetPullback f).obj F)).obj.map\n            (MorphismProperty.Over.homMk\n              (pullback.lift (pullback.snd f f) (𝟙 (pullback f f))\n                ((Category.comp_id _).trans (Category.id_comp _).symm))\n              (by simp) :\n              Scheme.Etale.mk (𝟙 (pullback f f)) ⟶\n                (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd f f)).obj\n                  (Scheme.Etale.mk (𝟙 T))).op\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd f f)) _\n              (T.smallGrothendieckTopology @Etale)\n              ((pullback f f).smallGrothendieckTopology @Etale)).unit.app\n                ((Scheme.etaleSetPullback f).obj F)).hom.app\n              (op (Scheme.Etale.mk (𝟙 T))) a))))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-geometric-fibre-constant-sections",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T153011-L-2351044",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T153011-L-2351044",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

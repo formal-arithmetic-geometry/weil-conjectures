@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenExistence
+import Sheaf.AlgebraicGeometry.EtaleCechSectionsConnectedGeometricFibre
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 
@@ -24,6 +25,109 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+private abbrev idEtale (X : Scheme.{u}) : X.Etale := Scheme.Etale.mk (𝟙 X)
+
+private noncomputable abbrev setUnit {X Y : Scheme.{u}} (e : Y ⟶ X) :=
+  (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ e) (Type (u + 1))
+    (X.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).unit
+
+private noncomputable def resGlobal {X Y : Scheme.{u}} (e : Y ⟶ X)
+    (G : Sheaf X.smallEtaleTopology (Type (u + 1))) :
+    G.obj.obj (op (idEtale X)) ⟶
+      ((Scheme.etaleSetPullback e).obj G).obj.obj (op (idEtale Y)) :=
+  ((setUnit e).app G).hom.app (op (idEtale X)) ≫
+    ((Scheme.etaleSetPullback e).obj G).obj.map
+      (MorphismProperty.Over.homMk
+        (pullback.lift e (𝟙 Y)
+          ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp) :
+        idEtale Y ⟶
+          (MorphismProperty.Over.pullback @Etale ⊤ e).obj (idEtale X)).op
+
+private theorem global_eq_of_identity_pullback (X : Scheme.{u})
+    (G : Sheaf X.smallEtaleTopology (Type (u + 1)))
+    (a b : G.obj.obj (op (idEtale X)))
+    (hab : (resGlobal (𝟙 X) G) a = (resGlobal (𝟙 X) G) b) : a = b := by
+  apply etaleSetSection_ext_of_geometric_germs X G (idEtale X)
+  intro Ω _ _ x z
+  have hz : z = Over.homMk x (Category.comp_id x) := by
+    apply Over.OverMorphism.ext
+    simpa using Over.w z
+  rw [hz]
+  obtain ⟨c, _, hunit, _⟩ := etaleSetInverseImageStalkGerm X X (𝟙 X) G Ω x
+  let j : idEtale X ⟶
+      (MorphismProperty.Over.pullback @Etale ⊤ (𝟙 X)).obj (idEtale X) :=
+    MorphismProperty.Over.homMk
+      (pullback.lift (𝟙 X) (𝟙 X)
+        ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp)
+  have hp : (Scheme.pointSmallEtale x).fiber.map j
+      (Over.homMk x (Category.comp_id x)) =
+      Over.homMk (pullback.lift x x (by simp)) (pullback.lift_snd _ _ _) := by
+    apply Over.OverMorphism.ext
+    change x ≫ pullback.lift (𝟙 X) (𝟙 X) _ = pullback.lift x x _
+    apply pullback.hom_ext <;> simp
+  have heq (t : G.obj.obj (op (idEtale X))) :
+      c ((Scheme.pointSmallEtale x).toPresheafFiber (idEtale X)
+        (Over.homMk x (Category.comp_id x)) ((Scheme.etaleSetPullback (𝟙 X)).obj G).obj
+          ((resGlobal (𝟙 X) G) t)) =
+      (Scheme.pointSmallEtale (x ≫ 𝟙 X)).toPresheafFiber (idEtale X)
+        (Over.homMk x (by simp)) G.obj t := by
+    have hn := ConcreteCategory.congr_hom
+      ((Scheme.pointSmallEtale x).toPresheafFiber_w j
+        (Over.homMk x (Category.comp_id x)) ((Scheme.etaleSetPullback (𝟙 X)).obj G).obj)
+      (((setUnit (𝟙 X)).app G).hom.app (op (idEtale X)) t)
+    simp only [types_comp_apply] at hn
+    rw [hp] at hn
+    exact (congrArg c hn).trans (hunit (idEtale X) (Over.homMk x (by simp)) t)
+  have h := congrArg
+    (fun t ↦ c ((Scheme.pointSmallEtale x).toPresheafFiber (idEtale X)
+      (Over.homMk x (Category.comp_id x)) ((Scheme.etaleSetPullback (𝟙 X)).obj G).obj t)) hab
+  rw [heq a, heq b] at h
+  have transport (y : Spec (.of Ω) ⟶ X) (hy : x ≫ 𝟙 X = y) :
+      (Scheme.pointSmallEtale y).toPresheafFiber (idEtale X)
+        (Over.homMk x (by simpa using hy)) G.obj a =
+      (Scheme.pointSmallEtale y).toPresheafFiber (idEtale X)
+        (Over.homMk x (by simpa using hy)) G.obj b := by
+    subst y
+    exact h
+  exact transport x (Category.comp_id x)
+
+private theorem global_eq_of_jointly_surjective
+    {X : Scheme.{u}} {J : Type u} (Y : J → Scheme.{u}) (e : ∀ j, Y j ⟶ X)
+    (hcover : ∀ x : X, ∃ j, x ∈ Set.range (e j))
+    (G : Sheaf X.smallEtaleTopology (Type (u + 1)))
+    (a b : G.obj.obj (op (idEtale X)))
+    (hab : ∀ j, (resGlobal (e j) G) a = (resGlobal (e j) G) b) : a = b := by
+  obtain ⟨W, hW⟩ := exists_etaleSections_equal_open X G (idEtale X) a b
+  have hfac (j : J) : ∃ k : Y j ⟶ W.toScheme, k ≫ W.ι = e j := by
+    apply (hW (Y j) (e j)).mpr
+    change (resGlobal (e j ≫ 𝟙 X) G) a = (resGlobal (e j ≫ 𝟙 X) G) b
+    have transport (e' : Y j ⟶ X) (he : e' = e j) :
+        (resGlobal (e') G) a = (resGlobal (e') G) b := by
+      subst e'
+      exact hab j
+    exact transport _ (Category.comp_id _)
+  have htop : W = ⊤ := by
+    apply top_unique
+    intro x _
+    obtain ⟨j, y, rfl⟩ := hcover x
+    obtain ⟨k, hk⟩ := hfac j
+    have hx := congrArg (fun t : Y j ⟶ X ↦ t y) hk
+    rw [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply] at hx
+    rw [← hx]
+    exact (k y).property
+  have hid := (hW X (𝟙 X)).mp
+    ⟨IsOpenImmersion.lift W.ι (𝟙 X) (by simp [Scheme.Opens.range_ι, htop]),
+      IsOpenImmersion.lift_fac W.ι (𝟙 X) _⟩
+  apply global_eq_of_identity_pullback X G a b
+  change (resGlobal (𝟙 X ≫ 𝟙 X) G) a = (resGlobal (𝟙 X ≫ 𝟙 X) G) b at hid
+  have transport (e' : X ⟶ X) (he : e' = 𝟙 X) :
+      (resGlobal e' G) a = (resGlobal e' G) b →
+        (resGlobal (𝟙 X) G) a = (resGlobal (𝟙 X) G) b := by
+    subst e'
+    exact id
+  exact transport _ (Category.comp_id _) hid
+
 /-- Every section of an etale inverse image along a morphism with connected
 geometric fibres has equal pullbacks along the two Cech projections. The comparisons
 are the unit-compatible composition comparisons, evaluated at the terminal etale
@@ -33,24 +137,18 @@ Source: Stacks Project, Etale Cohomology, Tag 0A3H, final paragraph.
 (blueprint: lem-weil-pbc-etale-connected-fibres-section-compatible).
 
 Proof:
-1. For s in S, take the algebraic closure Omega of its residue field and the
-   geometric point q : Spec Omega -> S. On U = T times_S Spec Omega, transport
-   the section through the composition comparison, using the pullback condition.
-   By etaleGeometricFibreConstantSections and connectedness of U, the transported
-   section is the constant section of a unique element of the geometric stalk F_q.
-2. Put D = T times_S T. On D times_S Spec Omega the two projection restrictions
-   are the pullbacks of this same constant section. The naturality clause of
-   etaleGeometricFibreConstantSections identifies both with the constant section
-   of the same stalk element; associativity of etaleSetInverseImageCompositionUnits
-   identifies the iterated pullback comparisons. This does not require the product
-   fibre to be connected.
-3. Any geometric point of D has image s in S and its algebraically closed field
-   contains an embedding of the chosen algebraic closure of kappa(s). Thus it lifts
-   to D times_S Spec Omega. Step 2 and etaleSetInverseImageStalkGerm give equal
-   germs of the two displayed sections there, and hence at the original geometric
-   point. Apply etaleSetSection_ext_of_geometric_germs to obtain their equality.
-   Terminal-object identifications are the canonical pullback lifts and projections.
-   If S is empty, T and D are empty and the empty sheaf covering gives equality. -/
+1. For each point s of S choose the canonical geometric point q from the algebraic
+   closure of its residue field. The maps D ×_S Spec Ω → D jointly cover D:
+   the pullback range formula and the residue-field point show that the fibre
+   indexed by g(x) contains each x in D, where g = pr₁ ≫ f.
+2. Apply etaleSet_cech_sections_agree_on_connected_geometric_fibre at each q.
+   Its connectedness hypothesis is exactly hconn s. Thus the restrictions of the
+   two displayed sections agree on every member of this jointly surjective family.
+3. The agreement-open universal property factors all these maps through an open
+   W of D. Joint surjectivity implies W = top, hence the two sections have equal
+   identity pullbacks. Inverse-image stalk comparison and germ naturality recover
+   equality of their original germs; geometric-germ extensionality gives equality
+   of the sections. The argument also applies to empty D. -/
 theorem etaleSet_section_compatible_of_connected_geometricFibres
     {S T : Scheme.{u}} (f : T ⟶ S)
     (hconn : ∀ s : S, ConnectedSpace
@@ -100,6 +198,25 @@ theorem etaleSet_section_compatible_of_connected_geometricFibres
               (T.smallGrothendieckTopology @Etale)
               ((pullback f f).smallGrothendieckTopology @Etale)).unit.app
                 ((Scheme.etaleSetPullback f).obj F)).hom.app
-              (op (Scheme.Etale.mk (𝟙 T))) a))) := by sorry
+              (op (Scheme.Etale.mk (𝟙 T))) a))) := by
+  classical
+  let q (s : S) : Spec (.of (AlgebraicClosure (S.residueField s))) ⟶ S :=
+    Spec.map (CommRingCat.ofHom
+      (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫
+        S.fromSpecResidueField s
+  let g := pullback.fst f f ≫ f
+  have hcover : ∀ x : (pullback f f : Scheme.{u}),
+      ∃ s : S, x ∈ Set.range (pullback.fst g (q s)) := by
+    intro x
+    refine ⟨g x, ?_⟩
+    rw [Scheme.Pullback.range_fst]
+    refine ⟨default, ?_⟩
+    exact S.fromSpecResidueField_apply (g x) _
+  apply global_eq_of_jointly_surjective
+    (fun s : S ↦ pullback g (q s)) (fun s ↦ pullback.fst g (q s)) hcover
+  intro s
+  have : ConnectedSpace (pullback f (q s) : Scheme.{u}) := hconn s
+  exact etaleSet_cech_sections_agree_on_connected_geometric_fibre f
+    (AlgebraicClosure (S.residueField s)) (q s) F a
 
 end AlgebraicGeometry
