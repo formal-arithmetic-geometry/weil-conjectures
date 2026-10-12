@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-derived-internal-hom-unit-iso",
+ "kind": "statement",
+ "title": "Derived internal Hom from the structure sheaf is the identity",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], and assume its unbounded derived category $D(\\mathcal O_Y)$ exists [def-pc-derived-category]. There is a natural isomorphism $R\\mathcal H om_{\\mathcal O_Y}(\\mathcal O_Y[0],-)\\simeq\\mathrm{Id}_{D(\\mathcal O_Y)}$, for the shared derived internal Hom [def-pur-derived-internal-hom].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 08J7: derived internal Hom; specialization to O_Y[0] and evaluation at one"
+ },
+ "proof": [
+  {
+   "text": "Evaluate an O_Y-linear map out of O_Y at one on every open. The inverse sends x to (r -> r*x); linearity and restriction compatibility give a natural sheaf isomorphism.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For Hom^bullet(O_Y[0], I), all product factors except p=0 are zero; evaluation identifies its differential with the differential of I.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply derivedInternalHom_comparison to the functorial K-injective resolution and compose evaluation with the inverse of the localized resolution map.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the natural isomorphism through Q using fully faithful precomposition with a localization functor.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 08J7: derived internal Hom; specialization to O_Y[0] and evaluation at one"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived internal Hom from unit sheaf is identity evaluation at one and restriction scalars derived adjunction",
+   "date": "2026-10-12",
+   "results": "8 hits; top results: SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv, LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.pushforwardSections_unitHomEquiv, LightCondensed.ihomPoints_symm_apply; no exact derived evaluation/unit-Hom match.",
+   "verdict": "No exact match; use existing adjunction and localization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom.*unit|rightDerivedFunctor.*iso|unitHomEquiv",
+   "date": "2026-10-12",
+   "results": "25 hits; top results: Mathlib/AlgebraicTopology/SimplicialCategory/Basic.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; no exact derived evaluation/unit-Hom match.",
+   "verdict": "No exact match; use existing adjunction and localization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "date": "2026-10-12",
+   "results": "12 hits; top results: SheafOfModules.unit, SheafOfModules.unitHomEquiv, SheafOfModules.unit_val, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.freeCofan, SheafOfModules.ιFree; no exact derived evaluation/unit-Hom match.",
+   "verdict": "No exact match; use existing adjunction and localization APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "RHom of the structure sheaf is naturally isomorphic to the identity functor on the unbounded derived category",
+   "date": "2026-10-12",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Modules.restrictFunctorId, AlgebraicGeometry.LocallyRingedSpace.SpecΓIdentity, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id, DerivedCategory.singleFunctorsPostcompQIso_hom_hom, AlgebraicGeometry.structurePresheafCompForget, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app, AlgebraicGeometry.ΓSpec.left_triangle; no exact derived evaluation/unit-Hom match.",
+   "verdict": "No exact match; use existing adjunction and localization APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom from the structure sheaf is the identity and the derived affine adjunction counit evaluates at one",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedHomEvaluationCounit",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, finite duality comparison and counit evaluation",
+   "via": [
+    "lem-sc-affine-derived-hom-evaluation-counit",
+    "lem-sc-finite-duality-derived-hom",
+    "lem-sc-finite-flat-duality-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedInternalHomUnitIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedInternalHomUnitIso.lean",
+  "declaration": "AlgebraicGeometry.derivedInternalHom_unit_iso",
+  "statement": "theorem derivedInternalHom_unit_iso (Y : Scheme.{u}) [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] : Nonempty ((Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit Y.ringCatSheaf))) ≅ 𝟭 _)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085401-L-48282",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085401-L-48282",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
