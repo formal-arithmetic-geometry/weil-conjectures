@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-coherent-integral-filtration-ideal-sum-succ",
+ "kind": "statement",
+ "title": "Successor step for the summand filtration",
+ "statement": "Let X be locally Noetherian, i : Z → X a closed immersion with integral source, and I a nonzero coherent ideal on Z. If the pushforward of its r-fold direct sum has a coherent integral-ideal filtration [def-weil-pbc-coherent-integral-filtration], then the pushforward of its (r+1)-fold direct sum has one.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YF, final paragraph of lemma-coherent-filter; split-sum successor step"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-integral-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Finite pushforward coherence makes A = i_*I coherent, and sectionwise pushforward identifies the (r+1)-fold sum with B ⊕ A, for B the r-fold pushforward sum. Compose the supplied filtration of B with the split inclusion and append the full object. Old stages and quotients are isomorphic to the supplied ones; the final quotient is A with witness Z,i,I. Finite-sum closure and isomorphism invariance give coherence, including the case of a zero-length supplied chain.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YF, final paragraph of lemma-coherent-filter; split-sum successor step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtration of finite direct sum obtained by appending a summand split exact sequence",
+   "results": "IsModuleFiltration.mk_int; IsModuleFiltration.toIsFiltration; Ideal.Filtration.Stable.bounded_difference; Ideal.Filtration.Stable.exists_forall_le; IsModuleFiltration; IsRingFiltration.mk_int; Ideal.Filtration.Stable; IsRingFiltration.toGradedMonoid",
+   "date": "2026-10-13",
+   "verdict": "components only; no exact scheme filtration theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernelBiproduct|coproduct.*(Succ|succ)",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean; Mathlib/CategoryTheory/Limits/Shapes/Biproducts.lean",
+   "date": "2026-10-13",
+   "verdict": "components only; no exact scheme filtration theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite direct sum of a coherent ideal pushforward admits a filtration by its summands",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cokernelBiproduct\"",
+   "results": "CategoryTheory.Limits.cokernelBiproductιIso; CategoryTheory.Limits.cokernelBiproductFromSubtypeIso; CategoryTheory.Limits.cokernelBiproductιIso_hom; CategoryTheory.Limits.cokernelBiproductιIso_inv; CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_hom; CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_inv",
+   "date": "2026-10-13",
+   "verdict": "components only; no exact scheme filtration theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSum",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-integral-filtration-ideal-sum",
+   "place": "append the last summand in the induction step r to r+1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumStep",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIntegralFiltrationIdealSumStep.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherentIntegralFiltration_ideal_sum_succ",
+  "statement": "theorem coherentIntegralFiltration_ideal_sum_succ\n    {X Z : Scheme.{u}} [IsLocallyNoetherian X]\n    (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]\n    (r : ℕ) (I : Z.IdealSheafData) (hne : I ≠ ⊥)\n    (hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules)\n    (hprev : HasCoherentIntegralFiltration\n      ((pushforward i).obj (∐ fun _ : Fin r => I.toModules))) :\n    HasCoherentIntegralFiltration\n      ((pushforward i).obj (∐ fun _ : Fin (r + 1) => I.toModules))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T220520-L-1393277",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T220520-L-1393277",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

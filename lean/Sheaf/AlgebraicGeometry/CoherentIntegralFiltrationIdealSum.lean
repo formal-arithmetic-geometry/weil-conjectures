@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumZero
+import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumStep
 
 /-! # Filtering a finite sum of an integral ideal pushforward
 
@@ -45,6 +47,9 @@ theorem coherentIntegralFiltration_ideal_sum
     (r : ℕ) (I : Z.IdealSheafData) (hne : I ≠ ⊥)
     (hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules) :
     HasCoherentIntegralFiltration
-      ((pushforward i).obj (∐ fun _ : Fin r => I.toModules)) := by sorry
+      ((pushforward i).obj (∐ fun _ : Fin r => I.toModules)) := by
+  induction r with
+  | zero => exact coherentIntegralFiltration_ideal_sum_zero i I
+  | succ r ih => exact coherentIntegralFiltration_ideal_sum_succ i r I hne hI ih
 
 end AlgebraicGeometry.Scheme.Modules
