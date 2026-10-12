@@ -1,6 +1,6 @@
 # Work queue
 
-1831 items; claim with `tools/claim.py next <group> [--stage N]`.
+1830 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (14)
 
@@ -21,11 +21,8 @@
 | `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
 | `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
 
-## Stage 2: nodes to state (1)
+## Stage 2: nodes to state (0)
 
-| node | distance to Mathlib | kind | blockers |
-|---|---|---|---|
-| `lem-weil-matrix-rank-field-extension` | 1 | state | 0 |
 
 Not open yet: 47 nodes that wait for stage 1.
 
@@ -62,7 +59,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteCoverKillsConstantCohomology` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues` | 3 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.GeometricStalkColimits` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModulePullbackAffineSections` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization` | 3 | 2 | proof |
@@ -1076,6 +1072,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.ModuleCechVanishingBasis` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit` | 10 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Modules.ConstantRankComplexHomology` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives` | 10 | 1 | proof |
@@ -1850,11 +1847,10 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.RingTheory.FiniteMaximalsOverElement` | 20 | 1 | proof |
 | `Sheaf.RingTheory.Flat.LocalizationPreservesFlatness` | 20 | 1 | proof |
 
-Waiting, not claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
+Waiting, not claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 4 |
 | `WeilConjectures.AlgebraicGeometry.Picard.Jacobian` | 7 | 2 |
 | `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 9 | 1 |
-| `Sheaf.AlgebraicGeometry.Modules.ConstantRankComplexHomology` | 10 | 1 |
