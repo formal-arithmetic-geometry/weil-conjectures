@@ -162,6 +162,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.GenericRestriction
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+public import WeilConjectures.AlgebraicGeometry.Curve.LocalCommensurable
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Curve.ResidueSequence
