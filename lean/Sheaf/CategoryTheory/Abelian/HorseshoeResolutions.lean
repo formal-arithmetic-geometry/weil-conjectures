@@ -6,6 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+import Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions
 
 /-!
 # Compatible injective resolutions of a short exact sequence
@@ -66,7 +67,11 @@ theorem exists_horseshoe_resolutions
         ((ShortComplex.mk α β hαβ).map
           (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact ∧
         ∃ e : IB.cocomplex.X n ≅ IA.cocomplex.X n ⊞ IC.cocomplex.X n,
-          α.f n ≫ e.hom = biprod.inl ∧ β.f n = e.hom ≫ biprod.snd := by
-  sorry
+        α.f n ≫ e.hom = biprod.inl ∧ β.f n = e.hom ≫ biprod.snd := by
+  let IA : InjectiveResolution S.X₁ := InjectiveResolution.of S.X₁
+  let IC : InjectiveResolution S.X₃ := InjectiveResolution.of S.X₃
+  obtain ⟨IB, α, β, hα, hβ, hrows⟩ :=
+    InjectiveResolution.exists_horseshoe_prescribed_resolutions S hS IA IC
+  exact ⟨IA, IB, IC, α, β, hα, hβ, hrows⟩
 
 end CategoryTheory.InjectiveResolution

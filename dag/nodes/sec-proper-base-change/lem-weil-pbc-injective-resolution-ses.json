@@ -27,59 +27,24 @@
  ],
  "proof": [
   {
-   "text": "Choose a monomorphism $A\\hookrightarrow I_A^0$ with $I_A^0$ injective. Form the pushout $P^0=B\\amalg_A I_A^0$. The pushout square and the given short exact sequence give an exact sequence $0\\to I_A^0\\to P^0\\to C\\to0$: the first map is monic because pushout of a monomorphism along a map into an injective is monic in an abelian category, and the cokernel is unchanged by the pushout. Embed $C$ in an injective $I_C^0$ and push out the epimorphism $P^0\\twoheadrightarrow C$ along this monomorphism. The resulting object is canonically $I_A^0\\oplus I_C^0$; it contains $B$ and fits into a commutative diagram with exact rows $0\\to A\\to B\\to C\\to0$ and $0\\to I_A^0\\to I_B^0\\to I_C^0\\to0$, with the vertical maps extending the given maps at degree zero.",
+   "text": "Choose the canonical injective resolutions of S.X₁ and S.X₃ supplied by InjectiveResolution.of. Apply the stronger prescribed-endpoint horseshoe theorem to S and these resolutions. Its resulting middle resolution, complex maps, augmentation equalities, degreewise short exactness, and biproduct identifications are exactly the witnesses required here.",
    "uses": [
-    "def-sp-abelian",
-    "def-sp-injective-resolutions"
+    "lem-sp-horseshoe-prescribed-resolutions"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 013T, proof Step 1 (pushout along A -> I and then along the quotient into an injective)"
-   }
-  },
-  {
-   "text": "Let $Q_A^0=\\operatorname{coker}(A\\to I_A^0)$ and $Q_C^0=\\operatorname{coker}(C\\to I_C^0)$. The commutative degree-zero diagram induces a short exact sequence $0\\to Q_A^0\\to Q_B^0\\to Q_C^0\\to0$, where $Q_B^0=\\operatorname{coker}(B\\to I_B^0)$. Apply the same pushout construction to this short exact sequence: choose $Q_A^0\\hookrightarrow I_A^1$ and $Q_C^0\\hookrightarrow I_C^1$, form $I_B^1=I_A^1\\oplus I_C^1$, and lift the quotient maps to maps $I_A^0\\to I_A^1$, $I_C^0\\to I_C^1$, and $I_B^0\\to I_B^1$. The lift exists by injectivity of $I_A^1$ and $I_C^1$, and the two lifts agree with the quotient maps on the embedded cokernels, so they define a morphism of the degree-zero short exact rows.",
-   "uses": [
-    "def-sp-abelian",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 013T, proof Step 2 (induction on cokernels and termwise split rows)"
-   }
-  },
-  {
-   "text": "Iterating the preceding step gives injectives $I_A^n,I_B^n=I_A^n\\oplus I_C^n,I_C^n$ and maps $\\alpha^n:I_A^n\\to I_B^n$, $\\beta^n:I_B^n\\to I_C^n$ for every $n\\ge0$. The lift construction makes the squares with the differentials commute, hence $\\alpha$ and $\\beta$ are morphisms of complexes; the degree-zero squares commute with $f$ and $g$ by construction. At each degree the displayed row is split exact, with $\\alpha^n$ the first summand inclusion and $\\beta^n$ the second summand projection. Taking the induced cokernel maps at every induction step shows that each of the three augmented complexes is exact in positive degrees and has the original object as its degree-zero kernel. Thus they are injective resolutions, all terms in negative degrees being zero, and all asserted compatibilities hold.",
-   "uses": [
-    "def-sp-abelian",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 013T, proof Step 2 and conclusion (termwise split injective resolutions)"
-   }
-  },
-  {
-   "text": "The construction is functorial in the given short exact sequence up to the choices of injective embeddings, and no further hypothesis on the abelian category is used beyond enough injectives. This proves the stated horseshoe resolution and its degreewise short exact sequence.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 013T, conclusion"
+    "document": "lean/Sheaf/CategoryTheory/Abelian/HorseshoePrescribedResolutions.lean",
+    "place": "theorem exists_horseshoe_prescribed_resolutions"
    }
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "def-sp-injective-resolutions"
+  "lem-sp-horseshoe-prescribed-resolutions"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tag 013T, parts (2) and (3), proof Steps 1-2"
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/Abelian/HorseshoePrescribedResolutions.lean",
+  "place": "application of exists_horseshoe_prescribed_resolutions with InjectiveResolution.of"
  },
  "mathlib_searches": [
   {
@@ -163,5 +128,15 @@
   "group": "M1",
   "result": "pass",
   "note": "abelian C [Abelian C], enough injectives [EnoughInjectives C], SES S+hS; existential IA/IB/IC InjectiveResolution (N-indexed = zero below 0), alpha/beta complex maps, single0 augmentation squares, degreewise ShortExact for all n:N, biproduct iso with inl/snd; spellings identical to landed exists_horseshoe_prescribed_resolutions; no hollow binders, universes u v both used"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T044742-L-2034407",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
