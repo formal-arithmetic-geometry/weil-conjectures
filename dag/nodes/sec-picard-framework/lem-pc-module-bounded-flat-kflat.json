@@ -24,26 +24,21 @@
  ],
  "proof": [
   {
-   "text": "Apply the first clause of [lem-pc-kflat-closure] to the one-point site whose unique sheaf of rings is R. Sheaves of modules on this site are exactly R-modules, and complexes, tensor products, acyclicity, and K-flatness identify with the corresponding module constructions. Thus a bounded-above complex P^\\bullet of flat R-modules is K-flat, which by [def-pc-kflat-complex] says that Tot(L^\\bullet \\otimes_R P^\\bullet) is acyclic for every acyclic L^\\bullet.",
+   "text": "Convert the explicit upper bound to IsStrictlyLE and termwise Module.Flat to ObjectProperty.flat using ModuleCat.flat_iff_flat. Modules have exact filtered colimits (transport the AB5 instance along AsSmall.equiv) and tensor-right preserves colimits by the braided closed structure. Apply the proved upstream CochainComplex.kFlat_of_isStrictlyLE_of_flat. Use HomotopyCategory.kFlat_quotient_obj_iff and kFlat_iff_preserves_acyclic to tensor an arbitrary acyclic L on the right with P. The quotient_obj_mem_subcategoryAcyclic_iff_acyclic equivalence identifies the result with acyclicity of mapBifunctor L P. The upstream theorems are closed generic tools, and no unit-level argument is replaced.",
    "uses": [
-    "lem-pc-kflat-closure",
-    "def-pc-kflat-complex"
+    "def-pc-module-kflat-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064K, More on Algebra Lemma 15.59.1 (more-algebra-lemma-derived-tor-quasi-isomorphism)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-closure",
-  "def-pc-kflat-complex"
+  "def-pc-module-kflat-complex"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 064K, More on Algebra Lemma 15.59.1 (more-algebra-lemma-derived-tor-quasi-isomorphism)"
+  "by": "agent",
+  "group": "S2",
+  "date": "2026-10-13",
+  "note": "Specialization of closed upstream generic K-flat theorems to ModuleCat; source mathematical assertion remains Stacks Tag 064K."
  },
  "mathlib_searches": [
   {
@@ -183,5 +178,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T160831-L-2612694",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
