@@ -17,11 +17,9 @@
  ],
  "proof": [
   {
-   "text": "The quotient A → A/I is surjective. Base change its closed immersion of spectra to obtain j : Y_0 → Y and set J = ker(j). On affine Spec R in Y its ideal is IR. Extension of ideals commutes with products, giving J^(n+1) = I^(n+1)R on that affine. The quotient algebras identify the corresponding closed subscheme with Y_n; the canonical quotient identifications commute with restriction and hence glue.",
+   "text": "Let j be the quotient base-change projection for I and j_n the projection for I^(n+1). Apply quotientBaseChange_closedImmersion_ideal for both ideals to obtain closed immersions and identify their kernels with the extended ideals. The power clause of quotientBaseChange_extendedIdeal_mul_pow gives j.ker^(n+1) = j_n.ker.",
    "uses": [
-    "def-pc-base-change",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
     "def-sbc-closed-immersion-ideal-sheaf",
     "def-sbc-ideal-sheaf-powers",
     "def-weil-affine-spectrum"
@@ -29,22 +27,29 @@
    "elementary": false
   },
   {
-   "text": "Transport the etale hypotheses along these isomorphisms and apply etale_on_open_of_etale_infinitesimal_neighbourhoods with g, j, J and hJ = rfl. The required locally Noetherian and finite type assumptions are precisely the stated ones.",
+   "text": "Mathlib makes j_n.toImage an isomorphism for the closed immersion j_n. Its target inclusion is j_n.ker.subschemeι and j_n.toImage followed by that inclusion is j_n. The pullback.map with identity maps on X and Y and j_n.toImage on the other factor is an isomorphism. Its second projection is pullback.snd g j_n followed by j_n.toImage. Compose the given etale restriction with this isomorphism, cancel precomposition by the pullback isomorphism using MorphismProperty.cancel_left_of_respectsIso, and rewrite the kernel-power equality. This gives all the infinitesimal-neighborhood hypotheses.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply etale_on_open_of_etale_infinitesimal_neighbourhoods with g, j, J = j.ker, hJ = rfl, and the transported hypotheses. All locally Noetherian and finite type assumptions are unchanged; its conclusion has precisely the required range containment and etale restriction.",
    "uses": [
     "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
     "pqf-def-locnoeth",
     "def-weil-finite-type-morphism"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
   "def-sbc-closed-immersion-ideal-sheaf",
   "def-sbc-ideal-sheaf-powers",
   "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
   "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
   "pqf-def-locnoeth",
   "def-weil-finite-type-morphism"
@@ -52,7 +57,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0GS2"
+  "place": "Tag 0GS2, essential-surjectivity proof; existing quotient-base-change ideal formulas and Mathlib scheme-theoretic image isomorphisms implement the identifications (P3, 2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -128,10 +133,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T060737-L-2907256",
-  "kind": "interface",
+  "landing": "20261012T085318-L-31317",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
