@@ -15,55 +15,24 @@
  ],
  "proof": [
   {
-   "text": "*Step 2 (the unit $\\eta_G$ is $\\mathcal O$-linear; Stacks 03D3, proof).* $\\eta_G:G\\to RLG$ is additive, being the abelian unit (notation above). Linearity is $\\eta_G\\circ\\mu_G=\\mu_{RLG}\\circ(\\mathrm{id}_{\\mathcal O}\\times\\eta_G)$ with $\\mu_{RLG}=R(L(\\mu_G)\\circ\\lambda^{-1})\\circ(\\eta_{\\mathcal O}\\times\\mathrm{id})$. First, $R(\\lambda)\\circ\\eta_{\\mathcal O\\times G}=\\eta_{\\mathcal O}\\times\\eta_G$ as maps $\\mathcal O\\times G\\to R(L\\mathcal O\\times LG)=RL\\mathcal O\\times RLG$: composing with $\\mathrm{pr}_i=R(\\mathrm{pr}_i)$ gives $R(L\\mathrm{pr}_i)\\circ\\eta_{\\mathcal O\\times G}=\\eta\\circ\\mathrm{pr}_i$ by naturality of $\\eta$. Then, by naturality of $\\eta$ at $\\mu_G$, $\\eta_G\\circ\\mu_G=RL(\\mu_G)\\circ\\eta_{\\mathcal O\\times G}=R(L(\\mu_G)\\circ\\lambda^{-1})\\circ R(\\lambda)\\circ\\eta_{\\mathcal O\\times G}=R(L(\\mu_G)\\circ\\lambda^{-1})\\circ(\\eta_{\\mathcal O}\\times\\eta_G)=\\mu_{RLG}\\circ(\\mathrm{id}\\times\\eta_G)$. This is the commutative square of the source ($\\mathcal O\\times G\\to f_*f^{-1}(\\mathcal O\\times G)\\to f_*f^{-1}G$ against $\\mathcal O\\times G\\to G\\to f_*f^{-1}G$).",
+   "text": "Obtain the transported unit lift k_G and the transported counit lift h_F. Given a lift h of alpha, take k_G followed by R_M(h); forgetting and homEquiv naturality show this lifts a(alpha). Conversely given a lift k of a(alpha), take L_M(k) followed by h_F; naturality of e and the adjunct-counit identity show this lifts alpha. All compositions are module morphisms by the functor laws.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03D3 (lemma-adjoint-push-pull-modules), proof: the square showing the adjunction map G -> f_*f^{-1}G is O-linear"
-   }
-  },
-  {
-   "text": "*Step 3 (the counit $\\varepsilon_F$ is $u^{-1}\\mathcal O$-linear; omitted in the source, written here).* $\\varepsilon_F:LRF\\to F$ is additive, being the abelian counit. Linearity is $\\varepsilon_F\\circ L(\\mu_{RF})\\circ\\lambda^{-1}=\\mu_F\\circ(\\mathrm{id}_{L\\mathcal O}\\times\\varepsilon_F)$, i.e. (composing with the isomorphism $\\lambda$) $\\varepsilon_F\\circ L(\\mu_{RF})=\\mu_F\\circ(\\mathrm{id}\\times\\varepsilon_F)\\circ\\lambda$ as maps $L(\\mathcal O\\times RF)\\to F$. By naturality of $\\varepsilon$ at $\\mu_F$, $\\varepsilon_F\\circ L(\\mu_{RF})=\\varepsilon_F\\circ LR(\\mu_F)\\circ L(\\eta_{\\mathcal O}\\times\\mathrm{id})=\\mu_F\\circ\\varepsilon_{L\\mathcal O\\times F}\\circ L(\\eta_{\\mathcal O}\\times\\mathrm{id}_{RF})$. It remains to see $\\varepsilon_{L\\mathcal O\\times F}\\circ L(\\eta_{\\mathcal O}\\times\\mathrm{id})=(\\mathrm{id}\\times\\varepsilon_F)\\circ\\lambda$ as maps into the product $L\\mathcal O\\times F$, i.e. after each projection. First projection: by naturality of $\\varepsilon$, $\\mathrm{pr}_1\\circ\\varepsilon_{L\\mathcal O\\times F}=\\varepsilon_{L\\mathcal O}\\circ LR(\\mathrm{pr}_1)$, and $R(\\mathrm{pr}_1)\\circ(\\eta_{\\mathcal O}\\times\\mathrm{id})=\\eta_{\\mathcal O}\\circ\\mathrm{pr}_1$, so the left side gives $\\varepsilon_{L\\mathcal O}\\circ L(\\eta_{\\mathcal O})\\circ L(\\mathrm{pr}_1)=L(\\mathrm{pr}_1)$ by the triangle identity $\\varepsilon_{LX}\\circ L(\\eta_X)=\\mathrm{id}$; the right side gives $\\mathrm{pr}_1\\circ\\lambda=L(\\mathrm{pr}_1)$. Second projection: likewise $\\mathrm{pr}_2\\circ\\varepsilon_{L\\mathcal O\\times F}\\circ L(\\eta_{\\mathcal O}\\times\\mathrm{id})=\\varepsilon_F\\circ L(R(\\mathrm{pr}_2)\\circ(\\eta_{\\mathcal O}\\times\\mathrm{id}))=\\varepsilon_F\\circ L(\\mathrm{pr}_2)$, and $\\mathrm{pr}_2\\circ(\\mathrm{id}\\times\\varepsilon_F)\\circ\\lambda=\\varepsilon_F\\circ\\mathrm{pr}_2\\circ\\lambda=\\varepsilon_F\\circ L(\\mathrm{pr}_2)$. Hence $\\varepsilon_F$ is $L\\mathcal O$-linear.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03D3, proof (the implication 'beta linear => alpha linear' is omitted there; this step and step 4(ii) supply it, written by an agent)"
-   }
-  },
-  {
-   "text": "*Step 4 (the two implications).* Let $\\alpha:LG\\to F$ be a morphism of abelian sheaves and $\\beta=R(\\alpha)\\circ\\eta_G$ its abelian adjoint; then $\\alpha=\\varepsilon_F\\circ L(\\beta)$ [lem-weil-pbc-adjunct-counit-identity] (a Mathlib leaf). (i) (Stacks) If $\\alpha$ is $L\\mathcal O$-linear, $R(\\alpha):RLG\\to RF$ is $\\mathcal O$-linear by sectionwise restriction of scalars along the ring unit and $\\eta_G$ is $\\mathcal O$-linear by step 2, so their composite $\\beta$ is $\\mathcal O$-linear (a composite of linear maps is linear). (ii) (omitted in the source) If $\\beta:G\\to RF$ is $\\mathcal O$-linear, $L(\\beta):LG\\to LRF$ is $L\\mathcal O$-linear by the transported-action hypothesis and functoriality of LM (the module structure of $LRF$ being the one of the transported-action hypothesis and functoriality of LM applied to the $\\mathcal O$-module $RF$ of sectionwise restriction of scalars along the ring unit) and $\\varepsilon_F$ is $L\\mathcal O$-linear by step 3, so $\\alpha=\\varepsilon_F\\circ L(\\beta)$ is $L\\mathcal O$-linear.",
-   "uses": [
+    "lem-weil-pbc-inverse-image-module-unit-linear-lift",
+    "lem-weil-pbc-inverse-image-module-counit-linear-lift",
     "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 03D3, proof ('suppose alpha is f^{-1}O-linear, then clearly f_*alpha is ... O-linear. Hence it suffices to prove that the adjunction map is O-linear'); (ii) written by an agent"
-   }
-  },
-  {
-   "text": "A module map gives the underlying abelian map satisfying the scalar identity, by [def-weil-sheaf-of-modules-category]. Conversely scalar compatibility of an abelian map defines its sectionwise linear maps and hence a module morphism. Conjugating by e gives precisely the left-hand existential lift condition; applying the fixed abelian adjunction gives the right-hand condition. The preceding two implications establish the equivalence.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-adjunct-counit-identity",
-  "def-weil-sheaf-of-modules-category"
+  "lem-weil-pbc-inverse-image-module-unit-linear-lift",
+  "lem-weil-pbc-inverse-image-module-counit-linear-lift",
+  "lem-weil-pbc-adjunct-counit-identity"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03D3 (lemma-adjoint-push-pull-modules); parent steps 2--4, including the omitted converse; the counit converse is the explicit agent-written calculation of the parent node"
+  "place": "Tag 03D3; steps 2 and 3 split into unit and counit lifts, step 4 combined in Lean using functoriality and adjunction naturality."
  },
  "mathlib_searches": [
   {
@@ -147,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T053942-L-2639579",
+  "landing": "20261012T063503-L-3152189",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

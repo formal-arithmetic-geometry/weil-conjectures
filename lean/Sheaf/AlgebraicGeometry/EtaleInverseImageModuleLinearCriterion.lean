@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleUnitLinearLift
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleCounitLinearLift
 /-! # Linearity under the etale abelian adjunction
 
 Source: Stacks Project, Tag 03D3
@@ -112,6 +114,27 @@ theorem etaleInverseImageModuleLinearCriterion (U V : Scheme.{u}) (f : U ⟶ V)
       (∀ (G : SheafOfModules.{u + 1} OV) (F : SheafOfModules.{u + 1} OR)
           (alpha : La.obj (FV.obj G) ⟶ FU.obj F),
         (∃ h : LM.obj G ⟶ F, FU.map h = e.hom.app G ≫ alpha) ↔
-          ∃ k : G ⟶ RM.obj F, FV.map k = a.homEquiv (FV.obj G) (FU.obj F) alpha) := by sorry
+          ∃ k : G ⟶ RM.obj F, FV.map k = a.homEquiv (FV.obj G) (FU.obj F) alpha) := by
+  intro L La a FaU FaV FrU FrV b aS Rr Lr ar er OR OV eta RM FV FU ea LM e H G F alpha
+  obtain ⟨kG, hkG⟩ := etaleInverseImageModuleUnitLinearLift U V f O Lr ar er ea LM e H G
+  obtain ⟨hF, hhF⟩ := etaleInverseImageModuleCounitLinearLift U V f O Lr ar er ea LM e H F
+  constructor
+  · rintro ⟨h, hh⟩
+    refine ⟨kG ≫ RM.map h, ?_⟩
+    rw [FV.map_comp, hkG]
+    change a.homEquiv _ _ (e.inv.app G) ≫ (Etale.lowerStar _ f).map (FU.map h) = _
+    rw [← a.homEquiv_naturality_right, hh]
+    simp
+  · rintro ⟨k, hk⟩
+    refine ⟨LM.map k ≫ hF, ?_⟩
+    rw [FU.map_comp, hhF]
+    change (LM ⋙ FU).map k ≫ e.hom.app (RM.obj F) ≫
+      a.counit.app (FU.obj F) = _
+    rw [← Category.assoc, e.hom.naturality k, Category.assoc]
+    change e.hom.app G ≫ La.map (FV.map k) ≫ a.counit.app (FU.obj F) = _
+    rw [hk]
+    congr 1
+    exact (a.homEquiv (FV.obj G) (FU.obj F)).symm_apply_apply alpha
+
 
 end AlgebraicGeometry
