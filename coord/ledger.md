@@ -9015,3 +9015,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/N2/Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts (stage 3; reviewer PASS; first push; landing 20261012T184324-L-4012113 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/N2/Sheaf.RingTheory.PopescuSolutionModulo (stage 3; reviewer PASS; first push; landing 20261012T184324-L-4012255 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/N3/Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineChartComparison (stage 3; reviewer PASS; first push; landing 20261012T184325-L-4012384 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:43 L: merged deliver/N3/Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel (stage 3; reviewer PASS; first push; landing 20261012T184325-L-4012551 (interface); batch 20261012T184234; modules 3; new nodes 2)

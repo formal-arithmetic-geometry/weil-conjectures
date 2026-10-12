@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-unit-epi",
+ "kind": "statement",
+ "title": "Closed immersion pullback unit is epi",
+ "statement": "Let i:Z -> Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion] and F an O_Y-module. The unit at F of the chosen tensor-pullback/pushforward adjunction [def-pc-module-pullback] is an epimorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 08KS (lemma-i-star-equivalence), stalkwise argument; Sheaves, Lemmas 0098 and 00AE. Read at https://stacks.math.columbia.edu/tag/08KS because the literature checkout is not present on this machine."
+ },
+ "proof": [
+  {
+   "text": "Choose the canonical adjunction. At x=i(z), compose the closed-pushforward stalk map with the tensor-pullback stalk isomorphism. Their germ formulas send the unit applied to a germ m to 1 tensor m. The ring map on stalks is surjective for a closed immersion. Mathlib TensorProduct.mk_surjective then gives surjectivity of this composite; both comparison maps are injective, so the unit stalk map is surjective.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Outside the closed image the target stalk is a subsingleton, hence the stalk map is surjective.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two maps a,b out of the pushforward pullback with equal composites with the unit, surjectivity of each unit stalk makes the stalk maps of a,b equal. Mathlib TopCat.Presheaf.section_ext makes a,b equal on sections, so the unit is epi. Adjunction.unit_leftAdjointUniq_hom_app expresses the chosen unit as the canonical unit followed by the pushforward of an isomorphism; epi_comp finishes.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 08KS, with the explicit local tensor quotient calculation and adjunction transport written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "surjective extension of scalars unit of a quotient ring map module tensor product",
+   "results": "TensorProduct.mk_surjective (Mathlib/RingTheory/TensorProduct/Basic); no closed-immersion module-unit theorem.",
+   "date": "2026-10-13",
+   "verdict": "Local algebra surjectivity found and used; no direct geometric match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"stalkMap\"",
+   "results": [],
+   "date": "2026-10-13",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*(epi|surject)|[Ee]pi.*unit in lean/Sheaf, lean/WeilConjectures and Mathlib/AlgebraicGeometry",
+   "results": "WeilConjectures.ConstructibleSheaf.FreeLifting.epi_upperStarLowerStarAdjunction_unit_app concerns etale sheaves with constant coefficients, not O_Y-modules. ClosedPushforwardStalks and Modules.TensorPullbackStalk provide the required comparisons.",
+   "date": "2026-10-13",
+   "verdict": "No direct match; use the comparison declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of schemes the adjunction unit from an arbitrary module to pushforward of tensor pullback is epi",
+   "results": "Service unavailable: Internal Server Error (msearch.py).",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-closed-immersion-unit-kernel",
+   "place": "Stalkwise argument, steps 2–5; below the unit level.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionUnitEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionUnitEpi.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_unit_epi",
+  "statement": "theorem closedImmersion_unit_epi {Y Z : Scheme.{w}} (i : Z ⟶ Y)\n    [IsClosedImmersion i] (F : Y.Modules) :\n    Epi ((Classical.choice (nonempty_tensorPullbackAdjunction i)).unit.app F)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T184325-L-4012551",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T184325-L-4012551",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

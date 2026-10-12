@@ -16,98 +16,52 @@
  },
  "proof": [
   {
-   "text": "The unit $\\eta_{\\mathcal F}:\\mathcal F\\to i_*i^*\\mathcal F$ is a morphism of \\mathcal O_Y-modules by the adjunction in [def-pc-module-pullback]. To identify its kernel and image it is enough to compute its stalk maps and then use the stalkwise criteria for sheaf maps.",
+   "text": "Apply closedImmersion_unit_epi to obtain the epi part, proved from the canonical stalk comparisons and Mathlib tensor surjectivity.",
    "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-iso-on-stalks",
-    "lem-weil-pbc-locally-surjective-iff-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Morphisms of Spaces, Lemma 04CJ, with the sheaf-theoretic stalk criteria used in the proof of Modules, Lemma 08KS"
-   }
-  },
-  {
-   "text": "Let $x\\in Y\\setminus i(Z)$. By [lem-weil-pbc-closed-pushforward-stalks](1), $(i_*i^*\\mathcal F)_x=0$. Since $i(Z)$ is closed, choose an open neighbourhood $V$ of $x$ disjoint from $i(Z)$. The kernel definition of $\\mathcal J$ in [def-sbc-closed-immersion-ideal-sheaf] gives $\\mathcal J(V)=\\mathcal O_Y(V)$, so $1\\in\\mathcal J(V)$ and every germ of $\\mathcal F$ at $x$ lies in $(\\mathcal J\\mathcal F)_x$. Thus the stalk of $\\eta_{\\mathcal F}$ is the zero map with kernel $(\\mathcal J\\mathcal F)_x$ and is surjective.",
-   "uses": [
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "def-weil-closed-immersion",
-    "def-sbc-closed-immersion-ideal-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS, proof of the case outside the closed subset; the pushforward stalk calculation is Sheaves, Lemma 00AE"
-   }
-  },
-  {
-   "text": "Now let $z\\in Z$ and $x=i(z)$. Write $R=\\mathcal O_{Y,x}$, $S=\\mathcal O_{Z,z}$, and let $\\varphi:R\\to S$ be the local-ring map induced by $i$. The sheaf map $\\mathcal O_Y\\to i_*\\mathcal O_Z$ is surjective for a closed immersion [def-weil-closed-immersion], and [lem-weil-pbc-closed-pushforward-stalks](2) identifies its target stalk with $S$. Hence $\\varphi$ is surjective. Its kernel is the stalk $K=\\mathcal J_x$: taking stalks preserves the kernel in the definition of $\\mathcal J$ [def-sbc-closed-immersion-ideal-sheaf].",
-   "uses": [
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "def-sbc-closed-immersion-ideal-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-morphisms.tex",
-    "place": "Morphisms of Spaces, Lemma 04CJ; the local-ring description is the stalkwise argument of Modules, Lemma 08KS"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-module-stalk-pullback], $(i^*\\mathcal F)_z$ is naturally $\\mathcal F_x\\otimes_R S$, and [lem-weil-pbc-closed-pushforward-stalks](2) identifies $(i_*i^*\\mathcal F)_x$ with this tensor product. Under these identifications the stalk of the adjunction unit sends $m\\in\\mathcal F_x$ to $m\\otimes1$: this is exactly the germ description of the pullback unit in [def-pc-module-pullback].",
-   "uses": [
-    "lem-weil-pbc-module-stalk-pullback",
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS, proof at a point of the closed subscheme, using Sheaves, Lemmas 0098 and 00AE"
-   }
-  },
-  {
-   "text": "For a surjective ring map $R\\to S$ with kernel $K$ and an $R$-module $M$, the canonical map $M\\to M\\otimes_R S$, $m\\mapsto m\\otimes1$, is surjective with kernel $KM$: identify $S$ with $R/K$, use the relations $m\\otimes\\bar r=rm\\otimes1$, and define the inverse of $M/KM\\to M\\otimes_RR/K$ by $m\\otimes\\bar r\\mapsto rm+KM$. Applying this with $M=\\mathcal F_x$ and $K=\\mathcal J_x$, and observing from the image definition [def-pur-sheaf-tensor-product] that $(\\mathcal J\\mathcal F)_x=\\mathcal J_x\\mathcal F_x$, shows that the stalk of $\\eta_{\\mathcal F}$ at $x$ is surjective with kernel $(\\mathcal J\\mathcal F)_x$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 08KS, proof of the local algebra fact $G_x\\to G_x\\otimes_{\\mathcal O_{X,x}}\\mathcal O_{Z,z}$"
-   }
-  },
-  {
-   "text": "The stalk surjectivity gives an epimorphism by [lem-weil-pbc-locally-surjective-iff-stalks]. The multiplication image maps to the kernel, and this comparison is an isomorphism on every stalk by the two cases just computed. It is an isomorphism of sheaves by [lem-weil-pbc-module-iso-on-stalks], so transport of the kernel universal property gives the required limit fork.",
-   "uses": [
-    "lem-weil-pbc-locally-surjective-iff-stalks",
-    "lem-weil-pbc-module-iso-on-stalks"
+    "lem-weil-pbc-closed-immersion-unit-epi"
    ],
    "elementary": false
   },
   {
-   "text": "The germ computation is stated for the canonical adjunction. For the chosen adjunction of [def-pc-module-pullback], uniqueness of a left adjoint identifies its unit with the canonical unit followed by the pushforward of a natural isomorphism. Postcomposition with an isomorphism preserves the epi property and the kernel universal property.",
+   "text": "Define mu and the chosen unit. module_stalk_exact identifies the range of the abelian image inclusion with range(mu_x). Transport through Abelian.imageIsoImage and its stalk isomorphism: precomposition with a surjective linear map leaves the range unchanged. closedImmersion_unit_stalk_kernel then gives range((image.ι mu)_x)=ker(eta_x).",
    "uses": [
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-module-stalk-functor",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-closed-immersion-unit-stalk-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The range-kernel equality makes the composite zero on every stalk. Represent a section germ, apply the stalk range containment, and use TopCat.Presheaf.section_ext to conclude that image.ι mu composed with eta is zero on sections.",
+   "uses": [
+    "def-pc-module-stalk-functor"
    ],
    "elementary": true
+  },
+  {
+   "text": "Form the resulting ShortComplex. moduleCat_exact_iff_range_eq_ker gives exactness on every stalk, and module_stalk_exact detects global exactness. The image inclusion is mono, so ShortComplex.Exact.fIsKernel gives the limiting kernel fork.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-closed-immersion-unit-epi",
   "def-pc-module-pullback",
-  "lem-weil-pbc-module-iso-on-stalks",
-  "lem-weil-pbc-locally-surjective-iff-stalks",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "def-weil-closed-immersion",
+  "def-pur-sheaf-tensor-product",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-module-stalk-pullback",
-  "def-pur-sheaf-tensor-product"
+  "def-pc-module-stalk-functor",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-closed-immersion-unit-stalk-kernel"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/spaces-morphisms.tex",
-  "place": "Morphisms of Spaces, Lemma 04CJ (spaces-morphisms-lemma-i-star-equivalence) part (1), with the stalkwise local algebra proof in Modules, Lemma 08KS (modules-lemma-i-star-equivalence)"
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 08KS stalkwise route: formal epi proof and global range-to-kernel-fork reduction, with one remaining local range calculation; the related quotient statement is 04CJ(1)."
  },
  "mathlib_searches": [
   {
@@ -198,9 +152,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261012T151912-L-2289877",
+  "landing": "20261012T184325-L-4012551",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
