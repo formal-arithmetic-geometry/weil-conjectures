@@ -14,37 +14,36 @@
  },
  "proof": [
   {
-   "text": "Put W=union_{c_i=b+1} A_i. The bound on the labels gives U=W union V. For two top-labelled indices the images of their sections in C agree on the intersection by naturality of the constant-sheaf unit. The component of a sheaf monomorphism is injective, so their restrictions in K agree as well. Their images under pi form a compatible family.",
+   "text": "Let V be the union of the lower-labelled opens. For every W contained in V, any two sections of Q(W) have equal germs, since all stalks there are zero. Mathlib TopCat.Presheaf.section_ext therefore makes Q(W) subsingleton. The bound c_i <= b+1 implies every index not top-labelled has A_i contained in V.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On each A_i choose pi(s_i) when c_i=b+1 and zero otherwise. On intersections of two top-labelled opens, naturality of the constant-sheaf unit and hvalue give equal images under iota followed by isoC. This composite is mono, its components are injective, and hence the sections in K agree. Naturality of pi gives equality in Q. If either index is lower-labelled the intersection lies in V and step 1 gives compatibility. Apply Mathlib TopCat.Sheaf.existsUnique_gluing once to this family to obtain t in Q(union A_i), with the prescribed values. Empty covers and absent top layers are included.",
    "uses": [
     "def-weil-pbc-constant-sheaf"
    ],
    "elementary": false
   },
   {
-   "text": "Use Mathlib TopCat.Sheaf.existsUnique_gluing to glue these images to t_W in Q(W). The restriction of Q to V has all stalks zero, so Mathlib TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero makes it zero. In particular t_W restricts to zero on W intersect V. Glue t_W with zero on V to a section t in Q(U).",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On the open subspace U send the integer generator to t, using the constant-sheaf adjunction (the presheaf map sends an integer m to m times the restriction of t, and factors through sheafification). To extend it by zero, send each summand of abelianOpenExtensionPresheaf U to the corresponding restriction of t and use sheafifyLift. Naturality of restrictions ensures this is a presheaf map. The sheafification unit equation gives the displayed value of q on every top-labelled unit section. Empty families are handled by the empty-cover gluing axiom.",
+   "text": "Construct the morphism from the constant integer presheaf on U to Q restricted to U by sending m to m times the restriction of t to the image open in X. Restriction laws prove naturality. Factor through sheafification using sheafifyLift, apply abelianOpenExtensionByZero to this morphism, and compose with abelianOpenCounit. Import all Sheaf.Topology.AbelianSheafLocalIntegerGenerator and apply its existing private TopCat.extensionSection_naturality and TopCat.extensionSection_counit identities, rather than proving them again. Together with toSheafify_sheafifyLift these identify the image of the canonical integer-one section on every V contained in U with the restriction of t. Apply this for V=A_i and use the gluing equation from step 2.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
-    "def-sc-abelian-open-extension-by-zero"
+    "def-sc-abelian-open-extension-by-zero",
+    "lem-sc-abelian-sheaf-local-integer-generator"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-abelian-open-extension-by-zero",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-module-stalk"
+  "def-sc-abelian-open-extension-by-zero",
+  "lem-sc-abelian-sheaf-local-integer-generator"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0A38",
-  "place": "Expanded gluing and generator argument in the final filtration paragraph; source read online because the local cohomology.tex is absent."
+  "place": "Final filtration paragraph. V3 realizes the gluing in one cover and constructs the generator morphism by sheafification and the explicit extension counit. Repair of return at head 989c5ce08: reuse the existing private extension-section identities from Sheaf.Topology.AbelianSheafLocalIntegerGenerator through a proof-only import all; neither identity is restated or reproved."
  },
  "mathlib_searches": [
   {
@@ -125,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T110303-L-615444",
-  "kind": "interface",
+  "landing": "20261012T144155-L-2110903",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
