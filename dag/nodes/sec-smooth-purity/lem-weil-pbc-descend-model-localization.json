@@ -15,12 +15,27 @@
  ],
  "proof": [
   {
-   "text": "The nonzero t is integral over S0 because A0 is finite over S0. Choose a monic integral equation of least degree. Its constant coefficient a is nonzero, since otherwise cancel t to obtain a monic equation of smaller degree. Evaluating the equation makes the image s of a in A0 a multiple of t. Write a = b/c0^n with b nonzero in A and set c = c0*b. Localizing S0 at a is the same as localizing A at c. Thus A0[1/s] is the base change along this localization and remains finite etale and surjective on spectra. It is a domain with fraction field K prime because s is nonzero.",
+   "text": "Apply IsIntegral.of_finite to t, pass to IsIntegral.isAlgebraic, and use IsAlgebraic.exists_nonzero_dvd with t in the nonZeroDivisors of the domain A0. Obtain a nonzero a in S0 with t dividing algebraMap S0 A0 a. The subalgebra embeddings into K prime and the scalar tower imply algebraMap S0 A0 is injective, so s = algebraMap S0 A0 a is nonzero.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "The localized model is finite over A[1/c], a ring in the universe of A, so it has a small finite-module presentation. Transport the ring, algebra, localization and fraction-ring structures to a ring A prime in Type u. Transport the spectrum surjectivity too. The maps from A0, A and A[1/c], and the map to K prime, commute by construction and give the displayed scalar towers.",
+   "text": "Set S = Localization.Away a and T = Localization.Away s. Give T its S-algebra structure by IsLocalization.Away.map and verify IsScalarTower S0 S T by IsLocalization.map_eq. Module.Finite.of_isLocalization proves T finite over S. The domain structure follows from Localization.Away.isDomain. Define T to K prime using IsLocalization.Away.lift of the canonical map A0 to K prime, and prove its scalar tower by lift_comp. IsFractionRing.isFractionRing_of_isDomain_of_isLocalization gives fraction field K prime.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Let b be the numerator from IsLocalization.Away.sec c0 a and c = c0*b. associated_sec_fst shows algebraMap A S0 b is associated to a; hence b is nonzero and mul_of_associated makes S a localization of A at c. Use IsLocalization.algEquiv to identify S with R = Localization.Away c. Define the R-algebra structure on T by composing the inverse equivalence with S to T; verify scalar towers and transport Module.Finite using of_equiv_equiv. Algebra.Etale.of_isLocalizationAway, comp, and of_restrictScalars prove T etale over R.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Module.Finite.small over the Type u ring R proves Small.{u} T. Take the concrete ring A prime = Shrink.{u} T, with its transported algebra structures. Define A prime to K prime by the shrink ring equivalence followed by T to K prime. Verify the scalar towers through the shrink algebra equivalences. Transport localization using IsLocalization.isLocalization_of_algEquiv, finiteness by its Shrink instance, etaleness by Algebra.Etale.of_equiv, and the fraction-field structure by IsFractionRing.isFractionRing_iff_of_base_ringEquiv.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The localization map S to T is injective by IsLocalization.Away.map_injective_iff and injectivity of S0 to A0. Composing with the base localization equivalence and the shrink equivalence proves the R to A prime map injective. Hence it is a faithful finite algebra; Algebra.IsIntegral.comap_surjective gives spectrum surjectivity. Assemble s, its divisibility and nonvanishing, c, and the concrete A prime with all these structures.",
    "uses": [],
    "elementary": false
   }
@@ -29,7 +44,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "proof steps 4--9: torsion killing, spreading coordinate idempotents, and descending their denominators; extracted from the existing embedding node and its docstring"
+  "place": "proof steps 4--9, instantiated in Lean by worker E2 using Mathlib localization, finite-module smallness, Shrink, and integral lying over"
  },
  "mathlib_searches": [
   {
@@ -127,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T160132-L-2562639",
-  "kind": "interface",
+  "landing": "20261012T173817-L-3293033",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
