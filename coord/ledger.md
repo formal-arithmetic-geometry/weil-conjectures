@@ -8777,3 +8777,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/M3/Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineComplexPresentation (stage 3; reviewer PASS; first push; landing 20261012T173843-L-3300559 (interface); batch 20261012T173801; modules 4; new nodes 3)
 - 17:38 L: merged deliver/M3/Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso (stage 3; reviewer PASS; first push; landing 20261012T173844-L-3300735 (proof); batch 20261012T173801; modules 1; new nodes 2)
 - 17:38 L: merged deliver/N1/Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIndependence (stage 3; reviewer PASS; first push; landing 20261012T173844-L-3300884 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:38 L: merged deliver/N2/Sheaf.Algebra.Homology.FreeComplexCover (stage 3; reviewer PASS; first push; landing 20261012T173845-L-3301007 (interface); batch 20261012T173801; modules 2; new nodes 1)

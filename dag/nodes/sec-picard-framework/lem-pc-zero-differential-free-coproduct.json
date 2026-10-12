@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-zero-differential-free-coproduct",
+ "kind": "statement",
+ "title": "Zero-differential free graded modules are coproducts of single complexes",
+ "statement": "Let $A$ be a commutative ring and let $K^\\bullet$ be a cochain complex of $A$-modules [def-pc-cochain-complex-modules] with all differentials zero. Let $B_n$ be a set for each integer $n$, and suppose specified $A$-linear isomorphisms $e_n:K^n\\simeq A^{(B_n)}$ are given. Then $K^\\bullet$ is isomorphic, in the category of cochain complexes, to the coproduct indexed by pairs $(n,b)$ with $b\\in B_n$ of the single complex consisting of $A$ in degree $n$. Empty basis sets and the zero ring are allowed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KN, proof: the upper and lower free graded modules are direct sums of shifts of A"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "For each pair (n,b), define an inclusion from the single complex A in degree n to K. In that degree, send a to e_n inverse applied to the finitely supported vector with coefficient a at b. In other degrees the source is zero. These maps commute with differentials because all differentials of K are zero. The fully proved helper freeBasisIn constructs these maps, and freeBasisCofan collects them into a cocone.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate this cocone at a fixed degree m. To descend a cocone with target T, send x in K^m to the finite linear combination, with coefficients e_m(x), of the images of 1 under the legs indexed by (m,b). For a leg indexed by (n,b) with n != m, its source is zero, so the factorization equation holds uniquely. For n=m, cancellation of the single-term self isomorphism and the single-vector formula for linear combinations prove factorization. Any other descent agrees on every basis vector by the same factorization equations; Finsupp.lhom_ext proves equality on the free module and the inverse identity for e_m proves equality on K^m. These arguments are implemented without sorry in freeBasisEvalIsColimit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib HomologicalComplex.isColimitOfEval to the degreewise colimit witnesses. Hence the explicit basis cocone is a colimit cocone of complexes. Its cocone point is K; compare it with the chosen categorical coproduct using IsColimit.coconePointUniqueUpToIso. This gives the claimed isomorphism. No nontriviality, nonempty basis, finite basis, or degree bound is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KN, proof: the upper and lower free graded modules are direct sums of shifts of A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complex with zero differential and a free basis in every degree is isomorphic to the coproduct of single complexes on the ring indexed by those basis vectors",
+   "date": "2026-10-12",
+   "results": "8 hits; HomologicalComplex.singleObjXSelf; ChainComplex.single₀ObjXSelf; AlgebraicTopology.DoldKan.Γ₀NondegComplexIso; HomologicalComplex.singleObjXIsoOfEq; HomologicalComplex.singleCompEvalIsoSelf_hom_app; HomologicalComplex.singleObjCyclesSelfIso; HomologicalComplex.tensorUnitIso; HomologicalComplex.singleMapHomologicalComplex",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.single, CategoryTheory.Limits.IsColimit",
+   "date": "2026-10-12",
+   "results": "0 hits; ",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*coproduct|coproduct.*single|finsuppCoconeIsColimit|isColimitOfEval",
+   "date": "2026-10-12",
+   "results": "12 hits; Mathlib/Algebra/Homology/HomologicalComplexLimits.lean; Mathlib/Algebra/Homology/HomologicalComplexLimits.lean; Mathlib/Algebra/Homology/HomologicalComplexLimits.lean; Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/CategoryTheory/Limits/Shapes/Products.lean; Mathlib/CategoryTheory/Limits/Shapes/Products.lean",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cochain complex with zero differentials and free modules in all degrees is a coproduct of single complexes of the ring indexed by a basis in every degree",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FreeComplexCover",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): the free two-term covers used to construct the filtered free resolution; identification of the upper and lower zero-differential graded free modules",
+   "via": [
+    "lem-pc-derived-free-complex-cover",
+    "lem-pc-derived-filtered-free-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ZeroDifferentialFreeCoproduct",
+  "file": "lean/Sheaf/Algebra/Homology/ZeroDifferentialFreeCoproduct.lean",
+  "declaration": "CochainComplex.nonempty_iso_coproduct_single_of_zero_d",
+  "statement": "theorem nonempty_iso_coproduct_single_of_zero_d\n    {A : Type u} [CommRing A] (K : CochainComplex (ModuleCat.{u} A) ℤ)\n    (B : ℤ → Type u) (e : ∀ n : ℤ, K.X n ≃ₗ[A] (B n →₀ A))\n    (hd : ∀ i j : ℤ, K.d i j = 0) :\n    Nonempty (K ≅ ∐ (fun i : Σ n : ℤ, B n ↦\n      (HomologicalComplex.single (ModuleCat.{u} A) (ComplexShape.up ℤ) i.1).obj\n        (ModuleCat.of A A)))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T173845-L-3301007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T173845-L-3301007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

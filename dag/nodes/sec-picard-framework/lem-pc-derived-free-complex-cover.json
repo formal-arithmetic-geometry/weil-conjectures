@@ -23,38 +23,30 @@
  ],
  "proof": [
   {
-   "text": "For every degree n and every element m of M^n, take a copy T(n,m) of the two-term complex A[−n] → A[−n−1] (free of rank one in degrees n and n+1, with the shift convention N[k]^j=N^{j+k}) whose differential is the identity, and map its lower generator (degree n) to m and its upper generator (degree n+1) to d_M(m). These maps define a morphism T(n,m) → M because d_M^2=0. Let Q_0 be the termwise direct sum of all T(n,m), over all n and m, with the map to M given summand by summand. The resulting map Q_0 → M is degreewise surjective, since the lower generator indexed by any m maps to m.",
+   "text": "Construct the degree-n lower free module L_n = (M^n ->_0 A), and the degree-n upper module U_n = (M^(n-1) ->_0 A) times (Z^n(M) ->_0 A). Set Q^n=U_n times L_n. Its differential sends the lower factor into the first upper factor in degree n+1, using the canonical index equality (n+1)-1=n, and is zero on all upper factors. The next differential kills this image, so the square is zero. Send lower basis vectors to the elements indexing them, upper basis vectors to their differential in M, and cocycle basis vectors to the cocycles indexing them. The equalities d_M squared=0 and d_M(z)=0 prove that this evaluation commutes with differentials. The lower basis vector indexed by any element z in M^n proves degreewise surjectivity. These constructions and proofs are the private CoverLower, CoverUpper, coverD, coverD_sq, coverQ, coverUpperEval, coverEval, coverEval_comm and coverMap declarations.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof"
-   }
+   "elementary": true
   },
   {
-   "text": "For every degree n and every cocycle z in Z^n(M)=ker(d_M:M^n→M^{n+1}), add a copy S(n,z) of the zero-differential shift A[−n] (A concentrated in degree n), mapped to M by sending its generator to z; this is a morphism of complexes because d_M(z)=0. Let Q be the termwise direct sum Q_0 ⊕ (⊕ S(n,z)), with the induced map to M. The generator of S(n,z) is a cocycle of Q mapping to z, so Z^n(Q) → Z^n(M) is surjective for every n, while degreewise surjectivity is retained from Q_0.",
+   "text": "For a cocycle z in degree n, take in Q^n the vector whose cocycle component is the single vector indexed by (z, d_M(z)=0), with coefficient 1, and whose other components are zero. The explicit cover differential kills it, and evaluation sends it to z. This proves surjectivity on cocycles by a real Lean calculation, retaining the degreewise surjectivity already proved.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof"
-   }
+   "elementary": true
   },
   {
-   "text": "Let Q' be the direct sum of all upper terms A[−n−1] in the T(n,m), together with all S(n,z), and let Q'' be the direct sum of all lower terms A[−n] in the T(n,m). The upper terms and the S(n,z) are subcomplexes of Q (their differentials are zero), so Q' → Q is an inclusion of complexes, and Q'' = Q/Q' carries the zero differential. Degreewise Q = Q' ⊕ Q'' as modules, so 0 → Q' → Q → Q'' → 0 is a degreewise split short exact sequence of complexes, and Q', Q'' are direct sums of shifts A[k] with zero differential, as required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof"
-   }
+   "text": "Define zero-differential complexes Qprime^n=U_n and Qdoubleprime^n=L_n. The first-factor inclusion Qprime -> Q and second-factor projection Q -> Qdoubleprime are maps of complexes whose composite is zero. In each degree their projection and inclusion maps give a splitting; coverSplitting verifies the three splitting identities. Splitting.shortExact and HomologicalComplex.shortExact_of_degreewise_shortExact prove the resulting short complex short exact. Apply lem-pc-zero-differential-free-coproduct to the two endpoints: for U_n use the inverse of Finsupp.sumFinsuppLEquivProdFinsupp, giving basis M^(n-1) disjoint union Z^n(M), and for L_n use the identity free basis. The indices are sigma types of degree and basis element, with degree map Sigma.fst. This proves both coproduct descriptions with their prescribed universe.",
+   "uses": [
+    "lem-pc-zero-differential-free-coproduct"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-zero-differential-free-coproduct"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/dga.tex",
-  "place": "Differential Graded Algebra, Lemma 15.60.8 (Tag 09KN), proof"
+  "place": "Tag 09KN, proof; explicit degreewise Finsupp construction and free-basis coproduct universal property"
  },
  "mathlib_searches": [
   {
@@ -162,5 +154,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T173845-L-3301007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
