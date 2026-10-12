@@ -1,0 +1,156 @@
+{
+ "id": "new-s3-koszul-conormal-comparison-quasi-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof of the diagonal Koszul calculation, affine calculation of the dual Koszul complex: show that the normalized comparison induces the top cohomology isomorphism",
+   "via": [
+    "lem-sc-koszul-conormal-comparison-existence",
+    "lem-sc-koszul-regular-sequence-dual-complex",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quasi-isomorphism of a normalized dual Koszul comparison",
+ "statement": "For a commutative ring A, ideal I, and finite Koszul-regular sequence f indexed by Fin r generating I [def-weil-pbc-koszul-regular-sequence], every A-linear cochain map from the signed dual Koszul complex [def-sc-koszul-dual-complex] to wedge^r_(A/I) Hom_(A/I)(I/I^2,A/I) concentrated in degree r that satisfies [def-sc-koszul-conormal-comparison] induces isomorphisms on cohomology in every degree.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, lemma-regular-immersion-ext, local Koszul-complex computation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sc-koszul-dual-complex",
+  "def-sc-koszul-conormal-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Complementary basis wedges identify Hom_A(wedge^n E,A) with wedge^(r-n) E for n <= r; the terms vanish for n > r. Evaluate contraction on basis wedges to identify the signed dual differential with the reversed Koszul differential up to degree signs; recursively rescale by units +1 or -1. Koszul-regularity then gives vanishing cohomology outside r.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-sc-koszul-dual-complex",
+    "def-weil-pbc-koszul-regular-sequence",
+    "lem-sc-exterior-power-dual-pairing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The top dual term is rank one on evaluation at e_top. The incoming image is exactly I times this generator, since the complementary coordinate functionals extract the coefficients +f_i or -f_i of d_r(e_top). Thus the top cokernel is A/I. For r=0 the incoming image is zero and I=0.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-sc-koszul-dual-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The conormal basis makes the normal determinant rank one on the ordered dual wedge. Test the given normalization on the standard basis of E: its top component is quotient evaluation times the unit (-1)^(r*(r-1)/2). It induces an isomorphism on top cohomology, while every other homology map is between zero objects. Hence the given map is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-exterior-power-dual-pairing",
+    "def-sc-koszul-conormal-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-sc-koszul-dual-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-sc-exterior-power-dual-pairing",
+  "lem-sc-koszul-conormal-basis",
+  "def-sc-koszul-conormal-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, local Koszul-complex computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "chain map from the dual exterior Koszul resolution to determinant of normal module",
+   "results": "8 hits: exteriorPower.alternatingMapToDual, exteriorPower.pairingDual_ιMulti_ιMulti, exteriorPower.alternatingMapLinearEquiv, exteriorPower.presentation.relationsSolutionEquiv, exteriorPower.alternatingMapToDual_apply_ιMulti, ModuleCat.exteriorPower.desc, exteriorPower.presentation.isPresentationCore, ExteriorAlgebra.liftAlternatingEquiv. No normalized dual Koszul comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, HomologicalComplex.single",
+   "results": "0 hits: . No normalized dual Koszul comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "3 hits: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/Regular/RegularSequence.lean. No normalized dual Koszul comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalized top degree map from dual Koszul complex is a quasi-isomorphism",
+   "results": "Service unavailable; no search conclusion drawn.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulConormalComparisonExistence",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulConormalComparisonQuasiIso",
+  "declaration": "ExteriorAlgebra.koszul_conormal_comparison_is_quasiIso",
+  "declarations": [
+   "ExteriorAlgebra.koszul_conormal_comparison_is_quasiIso"
+  ],
+  "file": "lean/Sheaf/RingTheory/KoszulConormalComparisonQuasiIso.lean",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13",
+  "existing": false,
+  "statement": "theorem koszul_conormal_comparison_is_quasiIso\n    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)\n    (φ : koszulDualComplex A r f ⟶\n      (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj\n        (koszulNormalDeterminant A I r))\n    (hφ : IsKoszulConormalComparison A I r f hf φ) : QuasiIso φ"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184344-L-4020328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184344-L-4020328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

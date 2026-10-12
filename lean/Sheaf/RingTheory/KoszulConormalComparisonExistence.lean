@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.KoszulConormalComparison
 public import Sheaf.RingTheory.KoszulRegularSequence
+import Sheaf.RingTheory.KoszulConormalComparisonMap
+import Sheaf.RingTheory.KoszulConormalComparisonQuasiIso
 
 /-!
 # Existence of the determinant-normalized dual Koszul comparison
@@ -56,6 +58,8 @@ theorem exists_koszul_conormal_comparison
     ∃ φ : koszulDualComplex A r f ⟶
         (HomologicalComplex.single (ModuleCat A) (ComplexShape.up ℕ) r).obj
           (koszulNormalDeterminant A I r),
-      IsKoszulConormalComparison A I r f hf φ ∧ QuasiIso φ := by sorry
+      IsKoszulConormalComparison A I r f hf φ ∧ QuasiIso φ := by
+  obtain ⟨φ, hφ⟩ := exists_koszul_conormal_comparison_map A I r f hreg hf
+  exact ⟨φ, hφ, koszul_conormal_comparison_is_quasiIso A I r f hreg hf φ hφ⟩
 
 end ExteriorAlgebra

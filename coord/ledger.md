@@ -9070,3 +9070,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/S3/Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration (stage 3; reviewer PASS; first push; landing 20261012T184343-L-4019999 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/S3/Sheaf.AlgebraicGeometry.NormalizedComponentSectionCover (stage 3; reviewer PASS; first push; landing 20261012T184344-L-4020117 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/S3/Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceRestriction (stage 3; reviewer PASS; first push; landing 20261012T184344-L-4020224 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:43 L: merged deliver/S3/Sheaf.RingTheory.KoszulConormalComparisonExistence (stage 3; reviewer PASS; first push; landing 20261012T184344-L-4020328 (interface); batch 20261012T184234; modules 3; new nodes 2)
