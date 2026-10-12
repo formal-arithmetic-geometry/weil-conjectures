@@ -9226,3 +9226,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/M2/Sheaf.RingTheory.Derivation.DetectNonPthPower (stage 3; reviewer PASS; first push; landing 20261012T194125-L-459635 (proof); batch 20261012T194054; modules 1; new nodes 2)
 - 19:41 L: merged deliver/M3/Sheaf.AlgebraicGeometry.Curve.ProperConstantBaseChangeZero (stage 3; reviewer PASS; first push; landing 20261012T194125-L-459763 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/M3/Sheaf.AlgebraicGeometry.EtaleSmallGeneratorSectionsAux (stage 3; reviewer PASS; first push; landing 20261012T194125-L-459889 (proof); batch 20261012T194054; modules 1; new nodes 0)
+- 19:41 L: merged deliver/M3/Sheaf.AlgebraicGeometry.SmoothStageAffineModel (stage 3; reviewer PASS; first push; landing 20261012T194126-L-460043 (proof); batch 20261012T194054; modules 1; new nodes 0)
