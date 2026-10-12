@@ -10,14 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 import Sheaf.Paper.TorLongExactFirstVariable
-import Sheaf.Algebra.Homology.FreeResolutionSesSplit
-
-/-!
-# The Tor boundary for kernels, natural in presentations
-
-Source: Stacks Project, Algebra, Tag 00M0 and Section 00LY.
-(blueprint: lem-sc-p1-tor-kernel-boundary-natural)
--/
+import Sheaf.RingTheory.TorKernelBoundaryExact
+import Sheaf.RingTheory.TorKernelBoundaryNaturalityOf
 
 @[expose] public section
 
@@ -27,6 +21,13 @@ open CategoryTheory
 open scoped TensorProduct
 
 namespace CategoryTheory
+
+/-!
+# The Tor boundary for kernels, natural in presentations
+
+Source: Stacks Project, Algebra, Tag 00M0 and Section 00LY.
+(blueprint: lem-sc-p1-tor-kernel-boundary-natural)
+-/
 
 /-- Choose the low-degree boundary simultaneously for all surjective presentations,
 with exactness at Tor one and at the tensor of the kernel, and naturality in the
@@ -70,6 +71,9 @@ theorem exists_tor_kernel_boundary_natural
         ∀ t : (((Tor' (ModuleCat.{u} R) 1).obj N).obj M),
           δ F' N' q' hq' ((((Tor' (ModuleCat.{u} R) 1).map
             (ModuleCat.ofHom b)).app M).hom t) =
-          c.rTensor M (δ F N q hq t)) := by sorry
+          c.rTensor M (δ F N q hq t)) := by
+  obtain ⟨δ, hδ⟩ := exists_tor_kernel_boundary_exact R M
+  refine ⟨δ, hδ, ?_⟩
+  exact tor_kernel_boundary_naturality_of R M δ hδ
 
 end CategoryTheory

@@ -1,0 +1,108 @@
+{
+ "id": "lem-sc-p1-tor-kernel-boundary-naturality-of",
+ "kind": "statement",
+ "title": "lem-sc-p1-tor-kernel-boundary-naturality-of",
+ "statement": "Let R be a commutative ring, M an R-module, and δ a family assigning to every surjective R-linear map q:F → N an R-linear map δ_q : Tor₁^R(N,M) → ker(q) ⊗_R M. Assume each pair (Tor₁(q,M),δ_q) and (δ_q, ker(q) inclusion ⊗ 1_M) is exact. For commuting squares of surjections q,q′ with maps a,b and a kernel map c compatible with the inclusions, δ_{q′} ∘ Tor₁(b,M) = (c ⊗ 1_M) ∘ δ_q.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section 00LY, Tags 00M0 (Tor exact sequence), 00LZ (resolution functoriality), 00M3 (Tor symmetry); https://stacks.math.columbia.edu/tag/00LY"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Lift each compatible square of short exact kernel sequences to a morphism between the chosen degreewise split free resolutions. Naturality of the homology connecting morphism, together with the Tor and tensor augmentation identifications, yields the displayed equality; the exactness hypothesis is carried along from the family δ.",
+   "uses": [
+    "lem-sc-p1-tor-kernel-boundary-natural"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-tor-kernel-boundary-natural"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "N2",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Section 00LY",
+  "note": "Intermediate decomposition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor connecting homomorphism natural in morphisms of short exact sequences of modules",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor connecting homomorphism natural in morphisms of short exact sequences of modules",
+   "date": "2026-10-12",
+   "results": "SnakeLemma.δ_eq, CategoryTheory.ShortComplex.ShortExact.δ_apply', CategoryTheory.ShortComplex.ShortExact.δ_apply, SnakeLemma.δ'_eq, SnakeLemma.δ', SnakeLemma.δ, SnakeLemma.δ_aux, CategoryTheory.ShortComplex.ShortExact.δ_eq'",
+   "verdict": "No complete Tor boundary naturality theorem; found only Tor definitions, vanishing, or homology boundary components."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor'",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Tor', CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app",
+   "verdict": "No complete Tor boundary naturality theorem; found only Tor definitions, vanishing, or homology boundary components."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor'.*(exact|natur)|tor.*connecting",
+   "date": "2026-10-12",
+   "results": "No matching declaration",
+   "verdict": "No complete Tor boundary naturality theorem; found only Tor definitions, vanishing, or homology boundary components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorKernelBoundaryNaturality",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-tor-kernel-boundary-natural",
+   "place": "intermediate step"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorKernelBoundaryNaturalityOf",
+  "file": "lean/Sheaf/RingTheory/TorKernelBoundaryNaturalityOf.lean",
+  "declaration": "CategoryTheory.tor_kernel_boundary_naturality_of",
+  "statement": "theorem tor_kernel_boundary_naturality_of\n    (R : Type u) [CommRing R] (M : ModuleCat.{u} R)\n    (δ : ∀ (F N : ModuleCat.{u} R) (q : F →ₗ[R] N),\n      Function.Surjective q →\n        (((Tor' (ModuleCat.{u} R) 1).obj N).obj M) →ₗ[R]\n          (LinearMap.ker q ⊗[R] M)) :\n    (∀ (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q),\n      Function.Exact (((Tor' (ModuleCat.{u} R) 1).map\n        (ModuleCat.ofHom q)).app M).hom (δ F N q hq) ∧\n      Function.Exact (δ F N q hq) ((LinearMap.ker q).subtype.rTensor M)) →\n    ∀ (F N F' N' : ModuleCat.{u} R) (q : F →ₗ[R] N) (q' : F' →ₗ[R] N')\n        (hq : Function.Surjective q) (hq' : Function.Surjective q')\n        (a : F →ₗ[R] F') (b : N →ₗ[R] N')\n        (c : LinearMap.ker q →ₗ[R] LinearMap.ker q'),\n      q'.comp a = b.comp q →\n      (∀ x : LinearMap.ker q, (c x : F') = a (x : F)) →\n      ∀ t : (((Tor' (ModuleCat.{u} R) 1).obj N).obj M),\n        δ F' N' q' hq' ((((Tor' (ModuleCat.{u} R) 1).map\n          (ModuleCat.ofHom b)).app M).hom t) =\n        c.rTensor M (δ F N q hq t)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T112846-L-770148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T112846-L-770148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
