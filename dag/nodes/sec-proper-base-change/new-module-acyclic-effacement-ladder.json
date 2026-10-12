@@ -1,0 +1,157 @@
+{
+ "id": "new-module-acyclic-effacement-ladder",
+ "kind": "statement",
+ "title": "Injective effacement gives a right exact pullback ladder",
+ "statement": "Let i:Y→X be a scheme morphism [def-weil-pbc-scheme-conventions] and r a natural number. Let U send module-valued etale sheaves on X to abelian sheaves [def-weil-pbc-etale-sheaves], [def-weil-pbc-abelian-etale-sheaves], and V=i^* on abelian sheaves [def-weil-pbc-inverse-image]. Assume H^n(Y,U(i^*I)) is trivial for every injective module-valued sheaf I on X and every n>0 [def-weil-pbc-etale-cohomology]. For every module sheaf M and q≥0, there exist module sheaves J,Q, a map g:J→Q, and additive maps δX:H^q(X,U(Q))→H^{q+1}(X,U(M)) and δY:H^q(Y,VU(Q))→H^{q+1}(Y,VU(M)). The sequences H^q(U(J))→H^q(U(Q))→H^{q+1}(U(M))→0 and H^q(VU(J))→H^q(VU(Q))→H^{q+1}(VU(M))→0 are right exact, where the first maps are induced by U(g) and VU(g). The boundary square commutes with the canonical cohomology pullbacks [def-weil-pbc-cohomology-pullback]. There is no global-sections comparison assumption.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/095T",
+  "place": "Dimension shifting form of Tag 095T paragraph 2, using Tag 03FD and the natural delta functor of Tag 010S"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-finite-section-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the equivalence between module-valued sheaves and modules over the constant ring sheaf to obtain enough injectives. Embed M into an injective J and take its cokernel Q and quotient g. This is the first step of an injective resolution.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget coefficients and apply exact inverse image to obtain two short exact sequences. Apply the existing pullback long exact ladder to obtain δX and δY with exactness and the canonical commuting boundary square.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-ring module equivalence preserves injectives and underlying abelian sheaves, so Tag 03FD kills H^{q+1}(U(J)). Commuting forgetting with inverse image identifies VU(J) with U(i^*J), whose cohomology vanishes by the hypothesis. Exactness now gives both surjectivities, also at q=0.",
+   "uses": [
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "def-sp-injective-resolutions",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project Tags 095T, 03FD and 010S",
+  "place": "Dimension shifting form of Tag 095T paragraph 2, using Tag 03FD and the natural delta functor of Tag 010S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cohomologyMap_zero|dimension.?shift|efface",
+   "results": "4 hits: Mathlib/Algebra/Category/ModuleCat/InjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean, Mathlib/Algebra/Category/ModuleCat/Ext/DimensionShifting.lean, Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact site-specific comparison or effacement-ladder theorem. Mathlib right-exact five lemma is used in the main proof; sheafification/forgetful comparison primitives remain to be assembled."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural morphism of cohomological delta functors bijective in degree zero and vanishing on injectives dimension shifting",
+   "results": "8 hits: CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.isKInjective_of_injective_aux, CochainComplex.IsKInjective.Qh_map_bijective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.IsKInjective, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective",
+   "date": "2026-10-12",
+   "verdict": "No exact site-specific comparison or effacement-ladder theorem. Mathlib right-exact five lemma is used in the main proof; sheafification/forgetful comparison primitives remain to be assembled."
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, Function.Bijective",
+   "results": "11 hits: AddMonoidHom.exact_iff_of_surjective_of_bijective_of_injective, LinearMap.exact_iff_of_surjective_of_bijective_of_injective, AddMonoidHom.bijective_of_bijective_of_injective_of_left_exact, AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact, LinearMap.bijective_of_bijective_of_injective_of_left_exact, LinearMap.bijective_of_surjective_of_bijective_of_right_exact, AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective, LinearMap.bijective_of_surjective_of_bijective_of_bijective_of_injective",
+   "date": "2026-10-12",
+   "verdict": "No exact site-specific comparison or effacement-ladder theorem. Mathlib right-exact five lemma is used in the main proof; sheafification/forgetful comparison primitives remain to be assembled."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sequences of cohomology after embedding a sheaf of modules into an injective and forgetting coefficients commute with pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafifyCompIso|sheafCompose.*preserves|forget.*globalSections",
+   "results": "12 hits: Mathlib/CategoryTheory/Sites/CompatibleSheafification.lean, Mathlib/CategoryTheory/Sites/CompatibleSheafification.lean, Mathlib/CategoryTheory/Sites/CompatibleSheafification.lean, Mathlib/CategoryTheory/Sites/CompatibleSheafification.lean, Mathlib/CategoryTheory/Sites/CompatibleSheafification.lean, Mathlib/CategoryTheory/Sites/Whiskering.lean, Mathlib/CategoryTheory/Sites/Whiskering.lean, Mathlib/CategoryTheory/Sites/Whiskering.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact site-specific comparison or effacement-ladder theorem. Mathlib right-exact five lemma is used in the main proof; sheafification/forgetful comparison primitives remain to be assembled."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting module coefficients preserves bijectivity of the inverse image global sections restriction map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting coefficients of a sheaf of modules commutes with inverse image and global sections and preserves bijective restriction maps",
+   "results": "8 hits: SheafOfModules.toSheafCompSheafToPresheafIso, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply, SheafOfModules.forgetToSheafModuleCat_map_val, PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.homEquivOfIsLocallyBijective, SheafOfModules.fullyFaithfulForget_preimage_val, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-12",
+   "verdict": "No exact site-specific comparison or effacement-ladder theorem. Mathlib right-exact five lemma is used in the main proof; sheafification/forgetful comparison primitives remain to be assembled."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-acyclic-cohomology-comparison",
+   "place": "Dimension shifting form of Tag 095T paragraph 2, using Tag 03FD and the natural delta functor of Tag 010S",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleAcyclicEffacementLadder",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAcyclicEffacementLadder.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_module_acyclic_effacement_ladder",
+  "statement": "theorem Etale.exists_module_acyclic_effacement_ladder\n    {X Y : Scheme.{u}} (i : Y ⟶ X) (r : ℕ)\n    (hacyclic : ∀ (J : Sheaf X.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective J]\n        (q : ℕ), 0 < q →\n      Subsingleton (Sheaf.H\n        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))\n          AddCommGrpCat.{u + 1})).obj\n            ((i)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))].obj J)) q))\n    (M : Sheaf X.smallEtaleTopology\n      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) (q : ℕ) :\n    let U := sheafCompose X.smallEtaleTopology\n      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) AddCommGrpCat.{u + 1})\n    let V := (i)^*[AddCommGrpCat.{u + 1}]\n    ∃ (J Q : Sheaf X.smallEtaleTopology\n        (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) (g : J ⟶ Q),\n    ∃ δX : Sheaf.H (U.obj Q) q →+ Sheaf.H (U.obj M) (q + 1),\n    ∃ δY : Sheaf.H (V.obj (U.obj Q)) q →+ Sheaf.H (V.obj (U.obj M)) (q + 1),\n      Function.Exact (Sheaf.H.map (U.map g) q) δX ∧\n      Function.Exact (Sheaf.H.map (V.map (U.map g)) q) δY ∧\n      Function.Surjective δX ∧ Function.Surjective δY ∧\n      δY.comp (cohomologyMap i (U.obj Q) q) =\n        (cohomologyMap i (U.obj M) (q + 1)).comp δX",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7028e",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T014425-L-880897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7028e",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T014425-L-880897",
+  "kind": "interface",
+  "note": "independent Codex review: All four Lean signatures match their nodes; the unchanged item follows the recorded degree-zero and induction route. All modules compile cleanly, and axiom checks show only permitted axioms plus sorryAx from documented open obligations."
+ }
+}

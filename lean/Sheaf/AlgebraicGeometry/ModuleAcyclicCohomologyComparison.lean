@@ -1,6 +1,9 @@
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+import Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero
+import Sheaf.AlgebraicGeometry.ModuleAcyclicEffacementLadder
+import Mathlib.Algebra.FiveLemma
 
 @[expose] public section
 universe u
@@ -46,6 +49,21 @@ theorem Etale.bijective_cohomologyMap_of_module_acyclic
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap i
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
-        AddCommGrpCat.{u + 1})).obj M) q) := by sorry
+        AddCommGrpCat.{u + 1})).obj M) q) := by
+  induction q generalizing M with
+  | zero =>
+    exact Etale.bijective_cohomologyMap_of_module_acyclic_zero i r hzero M
+  | succ q ih =>
+    let U := sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) AddCommGrpCat.{u + 1})
+    let V := (i)^*[AddCommGrpCat.{u + 1}]
+    obtain ⟨J, Q, g, δX, δY, hX, hY, hsX, hsY, hδ⟩ :=
+      Etale.exists_module_acyclic_effacement_ladder i r hacyclic M q
+    exact AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact
+      (Sheaf.H.map (U.map g) q) δX (Sheaf.H.map (V.map (U.map g)) q) δY
+      (cohomologyMap i (U.obj J) q) (cohomologyMap i (U.obj Q) q)
+      (cohomologyMap i (U.obj M) (q + 1))
+      (AddMonoidHom.ext fun x ↦ (cohomologyMap_map i q (U.map g) x).symm)
+      hδ hX hY (ih J).2 (ih Q) hsX hsY
 
 end AlgebraicGeometry

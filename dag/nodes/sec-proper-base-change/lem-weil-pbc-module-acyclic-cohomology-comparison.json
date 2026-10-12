@@ -18,37 +18,32 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective resolution of the given module-valued sheaf; forgetting coefficients is exact. Its underlying terms are acyclic on X by 03FD. Exact inverse image, commuting with forgetting, gives a resolution with acyclic terms on Y by the hypothesis. Leray computes both abelian cohomologies from their section complexes. Enough injectives for ModuleCat-valued etale sheaves is available from the Grothendieck abelian instances; no conversion of an arbitrary annihilated sheaf is part of this statement.",
+   "text": "In degree zero apply the strengthened comparison theorem, proved using the canonical degree-zero pullback formula.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-injective-module-abelian-acyclic",
-    "prop-weil-pbc-inverse-image-exact",
-    "lemma-weil-pbc-leray-acyclicity"
+    "new-module-acyclic-comparison-zero"
    ],
    "elementary": false
   },
   {
-   "text": "The degree-zero assumption makes the section-complex restriction an isomorphism termwise, so its homology maps are bijective, including degree zero. Compare with abelian injective resolutions on X and Y. Naturality gives the commuting square of section complexes, and homotopy uniqueness identifies its map with the canonical Ext pullback cohomologyMap, including the constant-integer-sheaf comparison. No K-injective or unbounded resolution is necessary.",
+   "text": "Induct on q, simultaneously for all module sheaves M. The injective effacement ladder gives J,Q and right exact rows in degrees q and q+1. The induction hypothesis makes the first two vertical maps bijective. Naturality of cohomologyMap gives the first commuting square and the ladder gives the second. Apply Mathlib AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact to conclude bijectivity for M in degree q+1.",
    "uses": [
+    "new-module-acyclic-effacement-ladder",
     "def-weil-pbc-cohomology-pullback",
-    "lemma-weil-pbc-leray-acyclicity"
+    "lem-weil-pbc-five-lemma"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "prop-weil-pbc-inverse-image-exact",
-  "lemma-weil-pbc-leray-acyclicity",
-  "def-weil-pbc-cohomology-pullback"
+  "new-module-acyclic-comparison-zero",
+  "new-module-acyclic-effacement-ladder",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-five-lemma"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Tags 095T and 03FD; Mathlib Algebra.Module.ZMod",
-  "place": "Second and third steps of the parent proof; Tag 095T second paragraph and Tag 03FD"
+  "by": "F1 second reader",
+  "document": "Stacks Project Tags 095T, 03FD, 010S; Mathlib.Algebra.FiveLemma",
+  "place": "Dimension-shifting induction from right exact ladders; no full resolution comparison needed"
  },
  "mathlib_searches": [
   {
@@ -122,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-079e0",
-  "group": "U1",
+  "reviewer": "X-7028e",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T010707-L-731415",
+  "landing": "20261012T014425-L-880897",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean files, node metadata, report, and target signatures match the stage-3 brief; compilation succeeds with only the documented intermediate sorry."
+  "note": "independent Codex review: All four Lean signatures match their nodes; the unchanged item follows the recorded degree-zero and induction route. All modules compile cleanly, and axiom checks show only permitted axioms plus sorryAx from documented open obligations."
  }
 }
