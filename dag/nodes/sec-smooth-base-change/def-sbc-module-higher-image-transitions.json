@@ -1,0 +1,104 @@
+{
+ "id": "def-sbc-module-higher-image-transitions",
+ "kind": "definition",
+ "title": "Canonical derived and higher-image transitions for module sheaves",
+ "statement": "Let Λ be a commutative ring and a:Y'→Y, h:Y→X, h':Y'→X be morphisms of schemes [def-weil-pbc-scheme-conventions] with a≫h=h'. For a bounded-below derived module sheaf K [def-weil-pbc-etale-sheaves], define Rh_*K→Rh'_*a^*K by the unit for h', inverse-image composition, and a^* of the counit for h [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. For a module sheaf F and q∈ℤ define its higher-image transition by degree-q homology at F[0], followed by a^*F[0]≅(a^*F)[0]. For k:W→S, G on W, and φ:U→V in Over W, define the transition from the higher image of V^*G to that of U^*G by this map followed by φ^*V^*G≅U^*G. All sites are the small etale sites [def-weil-pbc-etale-site]. These are the three source definitions, relocated verbatim with their full names and types unchanged.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, canonical transition maps; Tag 03Q8"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical higher direct image transition composition via derived adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image derived adjunction unit transition higher direct image functoriality",
+   "results": "CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val; CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.sheafComposeIso_inv_fac; CategoryTheory.sheafComposeNatTrans",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarPlusTransition|higherDirectImageOverMap",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1, canonical transition maps; Tag 03Q8; specialization to fixed pulled-back module sheaves",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageTransitions",
+  "declaration": "AlgebraicGeometry.Etale.lowerStarPlusTransition",
+  "statement": "def Etale.lowerStarPlusTransition (a : Y' ⟶ Y) (h : Y ⟶ X) (h' : Y' ⟶ X) (w : a ≫ h = h') (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : R+((h)_*[ModuleCat.{u + 1} Λ]).obj K ⟶ R+((h')_*[ModuleCat.{u + 1} Λ]).obj (D+((a)^*[ModuleCat.{u + 1} Λ]).obj K)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageTransitions.lean",
+  "declarations": [
+   "AlgebraicGeometry.Etale.lowerStarPlusTransition",
+   "AlgebraicGeometry.Etale.higherDirectImageTransition",
+   "AlgebraicGeometry.Etale.higherDirectImageOverMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all delivered declarations with their nodes and source arguments; relocated definitions and existing theorem signature are byte-identical. All five modules compile cleanly; axiom checks show only permitted axioms plus sorryAx for the two documented open lemmas and their dependent theorem."
+ }
+}

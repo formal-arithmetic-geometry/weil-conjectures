@@ -1,0 +1,128 @@
+{
+ "id": "sbc-lem-higher-image-pulledback-stalk-continuity",
+ "kind": "statement",
+ "title": "Stalk continuity for fixed pulled-back module sheaves",
+ "statement": "For a commutative ring Λ, k:W→S, G∈Sh(W_et,Λ), a small cofiltered D:I→Over W with affine transitions and qcqs structure maps to S, and a scheme-limit cone c with qcqs structure map to S, let g_i and g be the structure maps and G_i,G_c the pullbacks of G [def-weil-pbc-scheme-conventions], [def-weil-pbc-etale-sheaves], [def-weil-pbc-etale-site], [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. Fix q∈ℤ and a geometric stalk given by S.uliftPointSmallEtale(s). Every element of (R^qg_*G_c)_s is the image under the canonical transition [def-sbc-module-higher-image-transitions] of some element of (R^qg_i,*G_i)_s. If an element at i maps to zero at the limit, there exist j and f:j→i such that its transition along D(f) is zero at j. This is the unchanged source theorem higherDirectImage_limit, the pulled-back module-sheaf case of Tag 09Z1.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, proof and canonical maps; Mathlib filtered module colimit element criteria"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-sbc-module-higher-image-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Use canonical transition coherence to define the functor K:I^op→Sh(S_et,Λ) with the specified higher-image objects, and define its cocone B with the limit higher image as vertex and the canonical projection transitions as legs. The identity and composition equations prove the functor laws; cone naturality and composition coherence prove cocone naturality.",
+   "uses": [
+    "sbc-lem-higher-image-over-transition-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each affine etale V, apply affine continuity with identity presentation isomorphisms to K and B. Apply affine-basis colimit detection to assemble an IsColimit B from all these evaluated universal properties.",
+   "uses": [
+    "sbc-lem-higher-image-affine-continuity",
+    "sbc-lem-small-etale-affine-colimit-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The geometric sheafFiber is a left adjoint to the skyscraper functor, so it preserves the colimit. The module forgetful functor preserves filtered colimits of this small shape by the universe-shrink lemma. Mathlib Concrete.isColimit_exists_rep gives an element at a stage representing each element at the limit. To detect zero, compare the given stage element with zero at the same stage and apply Concrete.isColimit_exists_of_rep_eq. The resulting common stage and its arrow give the required j→i; module maps take zero to zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-image-over-transition-coherence",
+  "sbc-lem-higher-image-affine-continuity",
+  "sbc-lem-small-etale-affine-colimit-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, proof and canonical maps; Mathlib filtered module colimit element criteria; formal assembly by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct images affine sections inverse scheme limit continuity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image sheaf sections continuity affine etale objects inverse limits",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*limit|higherDirectImage.*affine",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1, proof and canonical maps; Mathlib filtered module colimit element criteria; specialization to fixed pulled-back module sheaves",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImage_limit",
+  "statement": "theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i, QuasiCompact ((D.obj i).hom ≫ k)] [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)] (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c)) [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)] (q : ℤ) (s : S) : (∀ y : ((S.uliftPointSmallEtale s).sheafFiber.obj (Etale.higherDirectImage Λ (c.pt.hom ≫ k) q (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) : ModuleCat.{u + 1} Λ), ∃ (i : I) (y' : ((S.uliftPointSmallEtale s).sheafFiber.obj (Etale.higherDirectImage Λ ((D.obj i).hom ≫ k) q (((D.obj i).hom)^*[ModuleCat.{u + 1} Λ].obj G)) : ModuleCat.{u + 1} Λ)), ((S.uliftPointSmallEtale s).sheafFiber.map (Etale.higherDirectImageOverMap Λ k G q (c.π.app i))).hom y' = y) ∧ ∀ (i : I) y', ((S.uliftPointSmallEtale s).sheafFiber.map (Etale.higherDirectImageOverMap Λ k G q (c.π.app i))).hom y' = 0 → ∃ (j : I) (f : j ⟶ i), ((S.uliftPointSmallEtale s).sheafFiber.map (Etale.higherDirectImageOverMap Λ k G q (D.map f))).hom y' = 0",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": true
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all delivered declarations with their nodes and source arguments; relocated definitions and existing theorem signature are byte-identical. All five modules compile cleanly; axiom checks show only permitted axioms plus sorryAx for the two documented open lemmas and their dependent theorem."
+ }
+}

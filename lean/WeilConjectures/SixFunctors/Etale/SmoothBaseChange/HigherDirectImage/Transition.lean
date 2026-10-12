@@ -5,9 +5,10 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
+import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
+import Sheaf.AlgebraicGeometry.HigherDirectImageAffineContinuity
+import Sheaf.AlgebraicGeometry.SmallEtaleAffineColimitDetection
 
 /-!
 # Transition maps of higher direct images
@@ -47,57 +48,6 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-section Transition
-
-variable {X Y Y' : Scheme.{u}}
-
-/-- The transition map `Rh_* K ⟶ Rh'_* (a^* K)` attached to a commutative triangle
-`a ≫ h = h'`: the unit of `Lh'^* ⊣ Rh'_*` at `Rh_* K`, followed by `Rh'_*` applied to the
-composition isomorphism `Lh'^* ≅ Lh^* ⋙ La^*` and to `La^*` of the counit of
-`Lh^* ⊣ Rh_*` at `K`. -/
-noncomputable def Etale.lowerStarPlusTransition (a : Y' ⟶ Y) (h : Y ⟶ X) (h' : Y' ⟶ X)
-    (w : a ≫ h = h') (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    R+((h)_*[ModuleCat.{u + 1} Λ]).obj K ⟶
-      R+((h')_*[ModuleCat.{u + 1} Λ]).obj (D+((a)^*[ModuleCat.{u + 1} Λ]).obj K) :=
-  (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h').unit.app _ ≫
-    R+((h')_*[ModuleCat.{u + 1} Λ]).map
-      ((eqToIso (by rw [← w]) ≪≫ Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) a h).hom.app _ ≫
-        D+((a)^*[ModuleCat.{u + 1} Λ]).map
-          ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).counit.app K))
-
-/-- The transition map `R^q h_* F ⟶ R^q h'_* a^* F` of higher direct images attached to a
-commutative triangle `a ≫ h = h'`: the degree-`q` homology of
-`AlgebraicGeometry.Etale.lowerStarPlusTransition` at `F` placed in degree `0`, followed by the
-identification `a^*(F[0]) ≅ (a^* F)[0]`. -/
-noncomputable def Etale.higherDirectImageTransition (a : Y' ⟶ Y) (h : Y ⟶ X) (h' : Y' ⟶ X)
-    (w : a ≫ h = h') (q : ℤ) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    Etale.higherDirectImage Λ h q F ⟶
-      Etale.higherDirectImage Λ h' q (((a)^*[ModuleCat.{u + 1} Λ]).obj F) :=
-  (DerivedCategory.Plus.homologyFunctor _ q).map
-    (Etale.lowerStarPlusTransition Λ a h h' w _ ≫
-      R+((h')_*[ModuleCat.{u + 1} Λ]).map
-        ((((a)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F))
-
-/-- The transition map of higher direct images along a morphism `φ : U ⟶ V` of schemes over
-`W`, for the sheaves pulled back from a fixed sheaf `G` on `W` and the structure morphisms
-composed with `k : W ⟶ S`:
-`R^q (V → S)_* (G|_V) ⟶ R^q (U → S)_* (G|_U)`. It is
-`AlgebraicGeometry.Etale.higherDirectImageTransition` followed by the identification
-`φ^*(G|_V) ≅ G|_U`. -/
-noncomputable def Etale.higherDirectImageOverMap {W S : Scheme.{u}} (k : W ⟶ S)
-    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {U V : Over W}
-    (φ : U ⟶ V) :
-    Etale.higherDirectImage Λ (V.hom ≫ k) q (((V.hom)^*[ModuleCat.{u + 1} Λ]).obj G) ⟶
-      Etale.higherDirectImage Λ (U.hom ≫ k) q (((U.hom)^*[ModuleCat.{u + 1} Λ]).obj G) :=
-  Etale.higherDirectImageTransition Λ φ.left (V.hom ≫ k) (U.hom ≫ k)
-      (by rw [← Category.assoc, Over.w]) q _ ≫
-    (DerivedCategory.Plus.homologyFunctor _ q).map (R+((U.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).map
-      ((DerivedCategory.Plus.singleFunctor _ 0).map
-        ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) φ.left V.hom U.hom (Over.w φ).symm).inv.app
-          G)))
-
-end Transition
-
 /-- Blueprint `sbc-lem-higher-direct-image-limit`: Higher direct images and limits of schemes.
 
 Let `W ⟶ S` be a morphism of schemes, `G` a sheaf of `Λ`-modules on `W_ét`, and
@@ -126,6 +76,61 @@ theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)
         (Etale.higherDirectImageOverMap Λ k G q (c.π.app i))).hom y' = 0 →
       ∃ (j : I) (f : j ⟶ i), ((S.uliftPointSmallEtale s).sheafFiber.map
         (Etale.higherDirectImageOverMap Λ k G q (D.map f))).hom y' = 0 :=
-  sorry
+  by
+    let t := fun {U V : Over W} (φ : U ⟶ V) ↦
+      Etale.higherDirectImageOverMap Λ k G q φ
+    obtain ⟨hid, hcomp⟩ := Etale.higher_image_over_transition_coherence Λ k G q
+    let K : Iᵒᵖ ⥤ Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+      { obj := fun i ↦ Etale.higherDirectImage Λ ((D.obj i.unop).hom ≫ k) q
+          ((((D.obj i.unop).hom)^*[ModuleCat.{u + 1} Λ]).obj G)
+        map := fun f ↦ t (D.map f.unop)
+        map_id := fun i ↦ by
+          change t (D.map (𝟙 i.unop)) = 𝟙 _
+          rw [D.map_id]
+          exact hid _
+        map_comp := fun f g ↦ by
+          change t (D.map (g.unop ≫ f.unop)) = t (D.map f.unop) ≫ t (D.map g.unop)
+          rw [D.map_comp]
+          exact hcomp _ _ }
+    let B : Cocone K :=
+      { pt := Etale.higherDirectImage Λ (c.pt.hom ≫ k) q
+          (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G)
+        ι :=
+          { app := fun i ↦ t (c.π.app i.unop)
+            naturality := fun i j f ↦ by
+              change t (D.map f.unop) ≫ t (c.π.app j.unop) =
+                t (c.π.app i.unop) ≫ 𝟙 _
+              rw [← hcomp, c.w, Category.comp_id] } }
+    have hB : Nonempty (IsColimit B) :=
+      Etale.nonempty_isColimit_of_affine_etale Λ S K B (fun V ↦
+        Etale.nonempty_isColimit_higher_image_affine Λ k G q D c hc K
+          (fun _ ↦ Iso.refl _) (fun _ ↦ by
+            simp only [K, t, Iso.refl_hom, Iso.refl_inv, Category.id_comp, Category.comp_id]
+            rfl)
+          B (Iso.refl _)
+          (fun _ ↦ by
+            simp only [B, t, Iso.refl_hom, Iso.refl_inv, Category.id_comp]
+            exact (Category.comp_id _).symm) V)
+    let fiber := (S.uliftPointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)
+    let M := K ⋙ fiber
+    let C := fiber.mapCocone B
+    have hC : IsColimit C := isColimitOfPreserves fiber hB.some
+    have : PreservesFilteredColimitsOfSize.{u, u}
+        (forget (ModuleCat.{u + 1} Λ)) :=
+      preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} (forget (ModuleCat.{u + 1} Λ))
+    constructor
+    · intro y
+      obtain ⟨i, y', hy⟩ := Concrete.isColimit_exists_rep M hC y
+      exact ⟨i.unop, y', hy⟩
+    · intro i y' hy
+      have hz : C.ι.app (Opposite.op i) y' = C.ι.app (Opposite.op i) 0 := by
+        change (fiber.map (t (c.π.app i))).hom y' = (fiber.map (t (c.π.app i))).hom 0
+        simpa only [map_zero] using hy
+      obtain ⟨j, f, g, hfg⟩ :=
+        Concrete.isColimit_exists_of_rep_eq M hC y' 0 hz
+      refine ⟨j.unop, f.unop, ?_⟩
+      change (fiber.map (t (D.map f.unop))).hom y' =
+        (fiber.map (t (D.map g.unop))).hom 0 at hfg
+      simpa only [map_zero] using hfg
 
 end AlgebraicGeometry

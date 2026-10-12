@@ -1,0 +1,132 @@
+{
+ "id": "sbc-lem-higher-image-over-transition-coherence",
+ "kind": "statement",
+ "title": "Coherence of canonical higher-image transitions over a fixed scheme",
+ "statement": "Let Λ be any commutative ring, k:W→S a morphism of schemes [def-weil-pbc-scheme-conventions], G a sheaf of Λ-modules on W_et [def-weil-pbc-etale-sheaves], [def-weil-pbc-etale-site], and q∈ℤ. For φ:U→V in Over W let t(φ):R^q(V→S)_*V^*G→R^q(U→S)_*U^*G be the canonical transition of [def-sbc-module-higher-image-transitions], using inverse and direct image [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. Then t(id_U)=id, and t(φ≫ψ)=t(ψ)≫t(φ) for every composable φ:U→V and ψ:V→Z.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, canonical transitions; derived inverse-image adjunction composition and its triangle identities"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-sbc-module-higher-image-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Expand the derived transition as the adjoint of a^* of the counit, transported along the inverse-image composition isomorphism. For an identity morphism the composition comparison is the identity comparison; the adjunction triangle identity reduces the transition to the identity.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two composable arrows expand the unit for their composite using the composite adjunction. By naturality move the intervening unit past the counit. Cancel that unit-counit pair by the triangle identity. Associativity of the inverse-image composition comparisons makes the factors left exactly the adjoint of the counit for the composite. The equalities of structure maps in Over W only contribute proof-irrelevant equality transports.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-q homology. Its map preserves identities and composition. Naturality of the inverse-image comparison with singleFunctor moves the degree-zero identification through the composite. The ordinary inverse-image associativity comparison identifies φ^*ψ^*Z^*G with U^*G in the same way as the one-step arrow, giving the stated coherence.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, canonical transitions; derived inverse-image adjunction composition and its triangle identities; formal assembly by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical higher direct image transition composition via derived adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image derived adjunction unit transition higher direct image functoriality",
+   "results": "CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val; CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.sheafComposeIso_inv_fac; CategoryTheory.sheafComposeNatTrans",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarPlusTransition|higherDirectImageOverMap",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1, canonical transitions; derived inverse-image adjunction composition and its triangle identities; specialization to fixed pulled-back module sheaves",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence",
+  "declaration": "AlgebraicGeometry.Etale.higher_image_over_transition_coherence",
+  "statement": "theorem higher_image_over_transition_coherence (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) : (∀ U : Over W, higherDirectImageOverMap Λ k G q (𝟙 U) = 𝟙 _) ∧ (∀ {U V Z : Over W} (φ : U ⟶ V) (ψ : V ⟶ Z), higherDirectImageOverMap Λ k G q (φ ≫ ψ) = higherDirectImageOverMap Λ k G q ψ ≫ higherDirectImageOverMap Λ k G q φ)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageOverCoherence.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all delivered declarations with their nodes and source arguments; relocated definitions and existing theorem signature are byte-identical. All five modules compile cleanly; axiom checks show only permitted axioms plus sorryAx for the two documented open lemmas and their dependent theorem."
+ }
+}

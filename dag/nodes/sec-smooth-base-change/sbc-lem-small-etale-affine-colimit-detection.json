@@ -1,0 +1,112 @@
+{
+ "id": "sbc-lem-small-etale-affine-colimit-detection",
+ "kind": "statement",
+ "title": "Affine etale evaluations jointly detect sheaf colimits",
+ "statement": "Let Λ be a commutative ring and S a scheme [def-weil-pbc-scheme-conventions]. Let J be any small category, K:J→Sh(S_et,Λ) a diagram of module sheaves [def-weil-pbc-etale-sheaves], [def-weil-pbc-etale-site], and B a cocone on K. Assume evaluation of B on every affine object V of S_et is a colimit cocone of Λ-modules. Then B is a colimit cocone of sheaves. No filteredness is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, affine-basis sheafification step; comparison lemma for dense subsites (03A0), Mathlib AffineEtale and FunctorCategory.Basic"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Restrict B to Mathlib Scheme.AffineEtale using its Spec functor. This is a dense subsite of S_et; restriction is an equivalence for complete module coefficients. Use the u-sized hypercover density and u-sized module limits, both available in Mathlib. Every image object has affine domain, so its evaluation cocone is colimiting by the hypothesis.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib evaluationJointlyReflectsColimits to get a colimit of the restricted presheaf cocone. Reflect through the fully faithful sheaf-to-presheaf functor and then through the affine-site restriction equivalence, using isColimitOfReflects twice. These operations construct IsColimit B; they do not require any preservation assumption for evaluation or any filteredness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, affine-basis sheafification step; comparison lemma for dense subsites (03A0), Mathlib AffineEtale and FunctorCategory.Basic; formal assembly by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit sheaves detected by evaluation affine etale basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "evaluation on affine etale objects preserves filtered colimits of sheaves",
+   "results": "AlgebraicGeometry.preservesColimit_Γ; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.AffineScheme.hasColimits; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*affine|affine.*isColimit",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1, affine-basis sheafification step; comparison lemma for dense subsites (03A0), Mathlib AffineEtale and FunctorCategory.Basic; specialization to fixed pulled-back module sheaves",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmallEtaleAffineColimitDetection",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_isColimit_of_affine_etale",
+  "statement": "theorem nonempty_isColimit_of_affine_etale (Λ : Type (u + 1)) [CommRing Λ] (S : Scheme.{u}) {J : Type u} [Category.{u} J] (K : J ⥤ Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (B : Cocone K) (h : ∀ (V : S.Etale) [IsAffine V.left], Nonempty (IsColimit ((sheafToPresheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ (evaluation S.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj (op V)).mapCocone B))) : Nonempty (IsColimit B)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/SmallEtaleAffineColimitDetection.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all delivered declarations with their nodes and source arguments; relocated definitions and existing theorem signature are byte-identical. All five modules compile cleanly; axiom checks show only permitted axioms plus sorryAx for the two documented open lemmas and their dependent theorem."
+ }
+}

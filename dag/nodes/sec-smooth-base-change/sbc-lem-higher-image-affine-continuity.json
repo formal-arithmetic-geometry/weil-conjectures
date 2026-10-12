@@ -1,0 +1,155 @@
+{
+ "id": "sbc-lem-higher-image-affine-continuity",
+ "kind": "statement",
+ "title": "Affine evaluation of the higher-image limit cocone",
+ "statement": "Let Λ be any commutative ring, k:W→S and G a Λ-module sheaf on W_et [def-weil-pbc-scheme-conventions], [def-weil-pbc-etale-sheaves], [def-weil-pbc-etale-site]. Let I be a small cofiltered category and D:I→Over W have affine transition morphisms and qcqs structure maps to S. Let c be a cone whose underlying cone of schemes is limiting, with qcqs structure map to S. Fix q∈ℤ. Let K:I^op→Sh(S_et,Λ) be presented by isomorphisms eK_i:K(i)≅R^qg_i,*G_i, where g_i:D(i)→S and G_i=D(i)^*G, and require its arrows to be eK_i≫t(D(f))≫eK_j^-1, for the canonical transitions of [def-sbc-module-higher-image-transitions]. Let B be a cocone presented by eB:B.pt≅R^qg_*G_c and legs eK_i≫t(c_i)≫eB^-1. For every affine etale object V→S, evaluation of B on V is a colimit cocone in Λ-modules. Inverse images and higher direct images are as in [def-weil-pbc-inverse-image] and [def-weil-pbc-direct-image].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, proof steps on qcqs etale objects; Tags 03Q8, 09YQ, 0EZM, 03FD, 0738(4)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-site",
+  "def-sbc-module-higher-image-transitions"
+ ],
+ "proof": [
+  {
+   "text": "An injective module resolution computes underlying abelian section cohomology on every etale object because its terms are abelian-section-acyclic (03FD). Forgetting scalars is exact and conservative; all the canonical maps are linear. This transports the abelian cohomology and higher-image descriptions to module sheaves without assuming that Λ is flat over ℤ.",
+   "uses": [
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If needed replace I^op by a small directed final category. The opposite presentation is initial, so it computes the same scheme limit. For an affine etale object U→S base change gives qcqs schemes U×_S D(i) and U×_S c.pt, affine transitions, and a limiting cone. The pulled-back sheaves on the limit canonically identify with the pullback of G and have identity transition maps under those identifications. Since I^op is nonempty and connected, this is their colimit.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regard the sheaves as complexes in degree zero, with common lower bound zero. Continuity for systems of complexes gives the canonical cohomology colimit comparison on each affine etale U. Its maps are derived adjunction units and commute with restriction. For q<0 use the vanishing of cohomology of a sheaf resolution in negative degrees.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By the higher-image presheaf description the objects are sheafifications of the restricted cohomology presheaves. The comparisons in the preceding step are isomorphisms on the affine basis. Sheafification commutes with colimits, so these local comparisons yield the higher-image sheaf colimit comparison. The specified hK and hB identify its arrows and legs with those of B.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-sheaves-colimit-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every covering of affine V admits a finite affine refinement with quasi-compact overlaps. Filtered colimits of modules commute with the finite products and equalizers in the sheaf condition. Equivalently apply Sites 0738(4) to sections and use exact forgetting of module operations. Hence evaluation on V preserves filtered colimits. Evaluate the comparison from the preceding step to obtain precisely the universal property stated here.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+  "lem-weil-pbc-sheaves-colimit-sheafification",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, proof steps on qcqs etale objects; Tags 03Q8, 09YQ, 0EZM, 03FD, 0738(4); formal assembly by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct images affine sections inverse scheme limit continuity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image sheaf sections continuity affine etale objects inverse limits",
+   "results": "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram; AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.isLocallyDirected",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*limit|higherDirectImage.*affine",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1, proof steps on qcqs etale objects; Tags 03Q8, 09YQ, 0EZM, 03FD, 0738(4); specialization to fixed pulled-back module sheaves",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageAffineContinuity",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_isColimit_higher_image_affine",
+  "statement": "theorem nonempty_isColimit_higher_image_affine (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i, QuasiCompact ((D.obj i).hom ≫ k)] [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)] (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c)) [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)] (K : Iᵒᵖ ⥤ Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (eK : ∀ i : I, K.obj (op i) ≅ higherDirectImage Λ ((D.obj i).hom ≫ k) q ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G)) (hK : ∀ {i j : I} (f : j ⟶ i), K.map f.op = (eK i).hom ≫ higherDirectImageOverMap Λ k G q (D.map f) ≫ (eK j).inv) (B : Cocone K) (eB : B.pt ≅ higherDirectImage Λ (c.pt.hom ≫ k) q (((c.pt.hom)^*[ModuleCat.{u + 1} Λ]).obj G)) (hB : ∀ i : I, B.ι.app (op i) = (eK i).hom ≫ higherDirectImageOverMap Λ k G q (c.π.app i) ≫ eB.inv) (V : S.Etale) [IsAffine V.left] : Nonempty (IsColimit ((sheafToPresheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ (evaluation S.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj (op V)).mapCocone B))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageAffineContinuity.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b606",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T053932-L-2635421",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all delivered declarations with their nodes and source arguments; relocated definitions and existing theorem signature are byte-identical. All five modules compile cleanly; axiom checks show only permitted axioms plus sorryAx for the two documented open lemmas and their dependent theorem."
+ }
+}
