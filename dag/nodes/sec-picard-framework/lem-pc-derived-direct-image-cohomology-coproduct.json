@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-derived-direct-image-cohomology-coproduct",
+ "kind": "statement",
+ "title": "Fixed-degree coproduct comparison for derived direct image",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme]. Let $(E_i)_{i\\in I}$ be any set-indexed family in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category]. Let $S\\in D(\\mathcal O_X)$ with coprojections $\\iota_i:E_i\\to S$ satisfying the ambient coproduct universal property. For each fixed integer $q$, the morphism of module sheaves $\\bigoplus_i H^q(Rf_*E_i)\\to H^q(Rf_*S)$ [def-pc-derived-direct-image] induced by the $H^q(Rf_*\\iota_i)$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DZ, proof: cohomology comparison, with Tag 08D5(2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pc-derived-ambient-direct-sums] to identify the cohomology of the given ambient coproduct with the direct sum of the quasi-coherent cohomology sheaves of its summands. Express this sum as the directed colimit of finite sums: [lem-weil-pbc-quasi-coherent-module-direct-sum] and [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections] give quasi-coherence, including the empty sum.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the comparison locally over an affine open V of Y. Exact restriction preserves sums; [lem-sc-derived-k-injective-restrict-open] identifies restricted derived direct image with direct image along the restriction of f. Choose the uniform upper cohomological bound from [lem-pc-derived-direct-image-uniform-truncation-bound] over V, and use the truncation triangle to replace each summand and its sum by the same lower truncation without changing degree-q direct-image cohomology. Exact sums commute with these canonical truncations. This uses the uniform upper-bound clause, not an interchange of the quantifiers in its separate objectwise truncation clause.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "lem-pc-derived-direct-image-uniform-truncation-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the uniformly bounded-below family, use [thm-sp-truncation-e2]. Its second page is R^p f_* H^r. The schemes over affine opens of V are qcqs. Apply [lem-weil-pbc-qcqs-cohomology-direct-sum] to H^r on those schemes, then [lem-weil-pbc-higher-direct-image-presheaf] and [lem-weil-pbc-module-sheaves-colimits-forgetful] to identify the sheafified comparison with the higher-direct-image coproduct comparison. This identifies the second pages. Exact sums identify kernels and images, hence all later pages. In total degree q the lower bound a leaves only 0 <= p <= q-a, so the convergent filtrations are finite; induction on their short exact sequences identifies the abutments. For q<a both abutments vanish. Naturality identifies the resulting map with the stated Sigma.desc. Undo the truncation and glue the affine-local isomorphisms.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "lem-sc-derived-k-injective-restrict-open",
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "thm-sp-truncation-e2",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DZ proof, interpreted in arbitrary fixed total degree q"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of derived pushforward commutes with coproducts of complexes with quasi-coherent cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism in the derived category is an isomorphism if every cohomology map is an isomorphism",
+   "results": "DerivedCategory isomorphism criteria found; no pushforward cohomology-coproduct comparison. Loogle confirmed DerivedCategory.isIso_iff.",
+   "date": "2026-10-12",
+   "verdict": "generic detection tool, no match for this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Cc]oproduct|[Pp]ushforward.*[Dd]irect[Ss]um, plus rg in lean/Sheaf and lean/WeilConjectures",
+   "results": "Existing target and ambient coproduct theorem found; no fixed-degree derived direct-image comparison.",
+   "date": "2026-10-12",
+   "verdict": "no existing fixed-degree comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums",
+  "group": "Q1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "fixed-degree cohomology comparison in the derived direct-sums argument",
+   "via": [
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageCohomologyCoproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageCohomologyCoproduct.lean",
+  "declaration": "AlgebraicGeometry.derivedDirectImage_cohomology_coproduct",
+  "statement": "theorem derivedDirectImage_cohomology_coproduct {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₂} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))] (I : Type u₁) (E : I → schemeDerivedQCohCategory X) (S : schemeDerivedCategory X) (ι : ∀ i, (E i).obj ⟶ S) (hc : IsColimit (Cofan.mk S ι)) (q : ℤ) : IsIso (Sigma.desc (fun i ↦ (schemeHigherDirectImage f q).map (ι i)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T060750-L-2913354",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T060750-L-2913354",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
