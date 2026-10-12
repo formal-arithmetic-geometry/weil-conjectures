@@ -7017,3 +7017,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/R2/Sheaf.RingTheory.DepthOverQuotientRing (stage 3; reviewer PASS; first push; landing 20261012T085329-L-35814 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/R2/Sheaf.RingTheory.LocalizationPrimeResidueFieldIso (stage 3; reviewer PASS; first push; landing 20261012T085330-L-35909 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/R3/Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact (stage 3; reviewer PASS; first push; landing 20261012T085330-L-36004 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/R3/Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonIdentity (stage 3; reviewer PASS; first push; landing 20261012T085330-L-36104 (proof); batch 20261012T085205; modules 1; new nodes 0)

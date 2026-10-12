@@ -12,11 +12,21 @@
  ],
  "proof": [
   {
-   "text": "identify base change by the identity of `S` with the identity functor using\n`MorphismProperty.Over.pullbackId`. Restriction along this isomorphism identifies the\nright adjoint with the identity. Uniqueness of left adjoints therefore identifies\ninverse image by the identity with the identity, compatibly with its adjunction unit.\nFor the fixed sheaf `G`, the composition of this identification on the inverse image\nby `f` with the inverse-image composition isomorphism has the same unit equation as\nthe identity morphism of that inverse image: naturality of the identity identification\nmoves the `f`-unit through it, and the two identity fibre-product identifications cancel.\nThe fixed-sheaf uniqueness clause of `etaleSetInverseImageCompositionUnits` identifies\nthese sheaf morphisms. Evaluate at the base change of `U` by `f`. In the definition of\n`etaleSetSectionComparison`, the remaining unit and restriction along the identity\npasting isomorphism cancel by the unit-compatible identity adjunction. Equality\ntransport is independent of its proof. Thus the resulting section map is the identity.\nThis argument also works for an empty scheme or a sheaf with no sections: it is an\nidentity of sheaf morphisms, evaluated at an arbitrary site object.",
+   "text": "Let F be the inverse image of G by f. Restriction along base change by the identity has the natural identity isomorphism pushId obtained from Functor.sheafPushforwardContinuousId' and MorphismProperty.Over.pullbackId. Let t be the chosen inverse-image composition component for (f,id), followed by equality transport along id_comp f. The identity adjunction unit followed by the identity pushforward of t and by pushId.hom defines a sheaf endomorphism p of F.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply injectivity of the f inverse-image adjunction homEquiv to compare p and the identity. Their images are unit_f followed by push_f applied to the endomorphisms. Evaluate at any etale object V and section s of G. The composition unit clause of etaleSetInverseImageCompositionUnits identifies c(unit_id(unit_f(s))) with restriction of unit_f(s) along the inverse fibre-product pasting. MorphismProperty.Over.pullbackComp_id_left identifies that pasting map with pullbackId.hom. Restriction along pullbackId.inv cancels it by functoriality, so the two adjunction transposes agree. This proves p = id without any local generation or sections-existence assumption.",
    "uses": [
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": false
+  },
+  {
+   "text": "Evaluate p = id at the base change of U by f. Unfold p and etaleSetSectionComparison. By MorphismProperty.Over.pullbackComp_id_left, the final restriction in the section comparison is exactly pushId.hom evaluated at that object. Equality transport along id_comp f reduces to the identity, and proof irrelevance identifies its witnesses. Thus the evaluated endomorphism is precisely the required section comparison.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -24,9 +34,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "B2 stage-3 worker",
+  "agent": "R3 stage-3 worker",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Expansion of the omitted identity calculation from Tags 03CB and 03CC and the original coherence node proof; official online tags read on 2026-10-12"
+  "place": "Tags 03CB and 03CC: the adjunction-unit characterization of inverse image. The identity calculation uses the existing composition unit equation and injectivity of the f adjunction homEquiv; implemented and compiled on 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -111,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T070527-L-3465970",
-  "kind": "interface",
+  "landing": "20261012T085330-L-36104",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
