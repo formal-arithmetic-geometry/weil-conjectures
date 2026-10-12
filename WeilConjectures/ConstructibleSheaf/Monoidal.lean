@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 
@@ -48,7 +49,7 @@ constructible without finiteness hypotheses on `X`: for an open immersion `j` it
 
 ## TODO
 
-Prove `IsConstructibleSheaf.isFiniteSheaf`, `IsFiniteLocallyConstantSheaf.tensorObj` and
+Prove `IsFiniteLocallyConstantSheaf.tensorObj` and
 `IsFiniteLocallyConstantSheaf.ihom_unit`.
 -/
 
@@ -75,12 +76,22 @@ theorem IsFiniteLocallyConstantSheaf.isConstructibleSheaf (hF : IsFiniteLocallyC
     IsConstructibleSheaf F :=
   ⟨Stratification.trivial X, fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar (𝟙 X) F⟩
 
+omit [HasSmallSiteSheafify A] in
 /-- A constructible sheaf is finite: a geometric point of `X` lies in a stratum, through whose
 immersion it factors, and the stalk of `F` there is the stalk of the finite locally constant
 pullback of `F` to the stratum. -/
-theorem IsConstructibleSheaf.isFiniteSheaf (hF : IsConstructibleSheaf F) : IsFiniteSheaf F :=
-  sorry
+theorem IsConstructibleSheaf.isFiniteSheaf (hF : IsConstructibleSheaf F) : IsFiniteSheaf F where
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
+    obtain ⟨S, hS⟩ := hF.exists_stratification
+    have hx : s (IsLocalRing.closedPoint _) ∈ ⋃ i, S.stratum i := by
+      rw [S.iUnion_stratum_eq_univ]; trivial
+    obtain ⟨i, hi⟩ := Set.mem_iUnion.1 hx
+    rw [← S.range_immersion i] at hi
+    obtain ⟨s', rfl⟩ := exists_comp_eq_of_mem_range (S.immersion i) s hi
+    exact ((hS i).isFinitelyGenerated_sheafFiber Ω s').of_iso
+      ((Etale.upperStarCompSheafFiberIso A (S.immersion i) s').app F)
 
+omit [HasSmallSiteSheafify A] in
 /-- A constructible locally constant sheaf is finite locally constant. -/
 theorem IsConstructibleSheaf.isFiniteLocallyConstantSheaf (hF : IsConstructibleSheaf F)
     (hF' : IsLocallyConstantSheaf F) :
