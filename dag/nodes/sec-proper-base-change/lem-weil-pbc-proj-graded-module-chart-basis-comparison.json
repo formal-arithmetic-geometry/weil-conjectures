@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-proj-graded-module-chart-basis-comparison",
+ "kind": "statement",
+ "title": "Compatible principal-open section equivalences from homogeneous-chart localization comparisons",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, let $M$ be an $S$-module, and set $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Index charts by pairs $f=(a,d)$ with $d>0$ and $a\\in S_d$. Put $D_f=D_+(a)$, $R_f=S_{(a)}$ [def-nagata-homogeneous-localization-degree-zero], $N_f=M_a$, and let $Z_f\\subseteq N_f$ be $R_f$-submodules, where the scalar action on $N_f$ is restricted from $S_a$. For each inclusion $D_g\\subseteq D_f$, suppose ring maps $\\rho^S_{f,g}:R_f\\to R_g$ and additive maps $\\rho_{f,g}:Z_f\\to Z_g$ are given. Let $U_{f,g}\\in R_f$ have image $g^{\\deg f}/f^{\\deg g}$ in $S_f$. Suppose additive equivalences $\\theta_{f,g}:(Z_f)_{U_{f,g}}\\cong Z_g$ and ring equivalences $\\theta^S_{f,g}:(R_f)_{U_{f,g}}\\cong R_g$ are given for all these inclusions, with $\\theta_{f,g}(q/1)=\\rho_{f,g}(q)$, $\\theta^S_{f,g}(r/1)=\\rho^S_{f,g}(r)$ and $\\theta_{f,g}(tq)=\\theta^S_{f,g}(t)\\theta_{f,g}(q)$. Assume every $\\rho^S_{f,g}$ is induced by an $S$-algebra map $S_f\\to S_g$. Let $F$ be an $\\mathcal O_X$-module sheaf [def-weil-sheaf-of-modules-category] with additive equivalences $\\alpha_f:F(D_f)\\cong Z_f$, compatible with scalar multiplication via awayToSection and with restriction via $\\rho$. Fix $f$, let $e_f:D_f\\cong\\operatorname{Spec}R_f$ be the canonical chart isomorphism [lem-weil-pbc-proj-basic-open-intersection], and set $E=F|_{D_f}$ and $G=e_f^*(\\widetilde{Z_f})$ [lem-weil-pbc-spec-module-tilde-sections], using restriction along the open immersion $e_f$. For the set $B=\\{e_f^{-1}(D(r)):r\\in R_f\\}$ of principal chart opens, there are $\\mathcal O_{D_f}(U)$-linear equivalences $l_U:E(U)\\cong G(U)$ for all $U\\in B$, and $l_V(s|_V)=l_U(s)|_V$ for every inclusion $V\\subseteq U$ in $B$ and every $s\\in E(U)$. No global sheaf morphism or isomorphism is asserted.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01MB (lemma-proj-scheme), last paragraph and its displayed affine tilde comparison; Lemma 01M4 (lemma-standard-open) (1)(e),(g),(h); Lemma 01M7 (lemma-proj-sheaves) (2),(3); Lemma 01MA (lemma-standard-open-proj)"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-proj-basic-open-intersection"
+ ],
+ "proof": [
+  {
+   "text": "Fix f of degree d>0 and represent r in R_f by a/f^n with a homogeneous of degree n*d. Put h=f*a, of degree (n+1)*d. The canonical chart preimage formula gives e_f^{-1}(D(r))=D_+(h) inside D_f, since the principal localization element h^d/f^((n+1)*d) is r^d and D(r^d)=D(r). This includes r=0 and nilpotent denominators.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed U_{f,h} equals r^d by hU and injectivity of homogeneous localization into the ordinary localization. The supplied theta and thetaS identify Z_h and R_h with localization of Z_f and R_f at r^d. This is the same localization as at r: invert r by r^(d-1)/r^d. The identities htheta identify the canonical maps on unlocalized elements with rho and rhoS; hcanonical identifies rhoS with the canonical structure-sheaf restriction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On the open e_f^{-1}(D(r)), compose alpha_h with theta_{f,h}^{-1} and the principal-open tilde section identification. The restriction-section isomorphisms for D_f into X and for e_f identify the resulting domain and codomain with E(U) and G(U). hscalar and theta semilinearity give linearity over the actual ring of sections on U. For nested principal opens, hrestriction and the uniqueness of maps out of module localizations give compatibility: both maps agree on Z_f and therefore agree on every localized fraction. Choosing a presentation of each open U in the range B defines l_U. Compatibility identifies maps from different presentations of the same open. Empty principal opens have zero sections on both sides. This proves only a compatible family on B, with no sheaf extension.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F1",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01MB, last paragraph, using Lemmas 01M4 and 01M7",
+  "note": "Steps 1 and 3 of the parent plan, after the parent has obtained and aligned the localization comparisons. Stacks pages 01MB, 01M4 and 01M7 were read online because the literature checkout is absent on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible linear equivalences between graded module sheaf and tilde sections on principal opens of a Proj chart",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local module localization comparisons on homogeneous charts give compatible linear equivalences with tilde sections on a principal open basis",
+   "results": "Hits: ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.const_apply, ModuleCat.Tilde.const, ModuleCat.Tilde.exists_const, ModuleCat.Tilde.localizationToStalk_mk, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, AlgebraicGeometry.homogeneousLocalizationToStalk_stalkToFiberRingHom, ModuleCat.Tilde.stalkIso",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModule.*[Tt]ilde|gradedModule.*basisComparison",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartTildeComparison",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-finite",
+   "place": "Steps 2 and 9 of the symmetric-product-finiteness proof: principal-open section comparisons in the affine graded-module chart argument of Stacks 01MB",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-chart-tilde-comparison",
+    "lem-weil-pbc-proj-graded-module-chart-quasicoherent",
+    "lem-weil-pbc-proj-graded-module-sheaf-extension",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleChartBasisComparison.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleChart_basisComparison",
+  "statement": "theorem gradedModuleChart_basisComparison (Z : ∀ f : Fidx, Submodule R[f] N[f]) (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g]) (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g) (U : ∀ (f g : Fidx), R[f]) (hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2) (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1)) (theta : ∀ (f g : Fidx), D[g] ≤ D[f] → LocalizedModule.Away (U f g) (Z f) ≃+ Z g) (thetaS : ∀ (f g : Fidx), D[g] ≤ D[f] → Localization.Away (U f g) ≃+* R[g]) (htheta : ∀ (f g : Fidx) (i : D[g] ≤ D[f]), (∀ r : R[f], thetaS f g i (algebraMap R[f] (Localization.Away (U f g)) r) = rhoS f g i r) ∧ (∀ q : Z f, theta f g i (mk q 1) = rho f g i q) ∧ (∀ (r : Localization.Away (U f g)) (q : LocalizedModule.Away (U f g) (Z f)), theta f g i (r • q) = thetaS f g i r • theta f g i q)) (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]), ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1, (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) = algebraMap S (Localization.Away g.val.1) a) ∧ ∀ r : R[f], (rhoS f g i r).val = l r.val) (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f) (hscalar : ∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])), alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s) (hrestriction : ∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : F.val.obj (op D[f])), alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s)) : ∀ f : Fidx, let e := basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1 let E := Scheme.Modules.restrict F D[f].ι let G := Scheme.Modules.restrict (tilde (ModuleCat.of R[f] (Z f))) e.hom let B := Set.range (fun r : R[f] ↦ e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r) ∃ l : ∀ U : B, E.val.obj (op U.val) ≃ₗ[ D[f].toScheme.ringCatSheaf.obj.obj (op U.val)] G.val.obj (op U.val), ∀ (U V : B) (i : V.val ≤ U.val) (s : E.val.obj (op U.val)), l V (E.val.map (homOfLE i).op s) = G.val.map (homOfLE i).op (l U s)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T154830-L-2472768",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T154830-L-2472768",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

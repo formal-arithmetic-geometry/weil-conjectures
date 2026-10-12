@@ -9,8 +9,9 @@ public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.ProjGradedModuleChartBasisComparison
 import Sheaf.Algebra.Module.GradedModuleAwayRestriction
-import Sheaf.Topology.SheafOfModulesFromBasis
+import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-!
 # Tilde comparison on a single graded-module chart
@@ -47,6 +48,61 @@ local notation "R[" f "]" => HomogeneousLocalization.Away 𝒜 (f).val.1
 local notation "N[" f "]" => LocalizedModule.Away (f).val.1 M
 local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
+
+private theorem chart_iso_of_basis
+    {X : TopCat.{u}} {B : Set (Opens X)} (hB : Opens.IsBasis B)
+    {R : TopCat.Sheaf RingCat.{u} X} (E G : SheafOfModules.{u} R)
+    (l : ∀ U : B, E.val.obj (op U.val) ≃ₗ[R.obj.obj (op U.val)]
+      G.val.obj (op U.val))
+    (hl : ∀ (U V : B) (h : V.val ≤ U.val) (s : E.val.obj (op U.val)),
+      l V (E.val.map (homOfLE h).op s) = G.val.map (homOfLE h).op (l U s)) :
+    Nonempty (E ≅ G) := by
+  classical
+  let β : (inducedFunctor (fun U : B ↦ U.val)).op ⋙ E.val.presheaf ⟶
+      (inducedFunctor (fun U : B ↦ U.val)).op ⋙ G.val.presheaf :=
+    { app := fun U ↦ AddCommGrpCat.ofHom (l U.unop).toAddMonoidHom
+      naturality := by
+        intro U V f
+        ext s
+        exact hl U.unop V.unop f.unop.hom.le s }
+  have hb : Opens.IsBasis (Set.range (fun U : B ↦ U.val)) := by
+    simpa only [Subtype.range_coe] using hB
+  let γ : E.val.presheaf ⟶ G.val.presheaf := TopCat.Sheaf.restrictHomEquivHom E.val.presheaf
+    ((SheafOfModules.toSheaf R).obj G) hb β
+  have hγ (U : B) (s : E.val.obj (op U.val)) : γ.app (op U.val) s = l U s := by
+    change (TopCat.Sheaf.restrictHomEquivHom E.val.presheaf
+      ((SheafOfModules.toSheaf R).obj G) hb β).app (op U.val) s = _
+    rw [TopCat.Sheaf.extend_hom_app]
+    rfl
+  have hlin (W : (Opens X)ᵒᵖ) (a : R.obj.obj W) (s : E.val.obj W) :
+      γ.app W (a • s) = a • (γ.app W s : G.val.obj W) := by
+    apply TopCat.Presheaf.section_ext ((SheafOfModules.toSheaf R).obj G) W.unop
+    intro x hx
+    obtain ⟨_, ⟨U, hU, rfl⟩, hxU, hUW⟩ := hB.exists_subset_of_mem_open hx W.unop.isOpen
+    change TopCat.Presheaf.germ G.val.presheaf W.unop x hx (γ.app W (a • s)) =
+      TopCat.Presheaf.germ G.val.presheaf W.unop x hx (a • γ.app W s)
+    rw [← TopCat.Presheaf.germ_res_apply G.val.presheaf (homOfLE hUW) x hxU,
+      ← TopCat.Presheaf.germ_res_apply G.val.presheaf (homOfLE hUW) x hxU]
+    congr 1
+    have hn (t : E.val.obj W) :
+        G.val.map (homOfLE hUW).op (γ.app W t) =
+          γ.app (op U) (E.val.map (homOfLE hUW).op t) :=
+      (CategoryTheory.congr_fun (γ.naturality (homOfLE hUW).op) t).symm
+    change G.val.map (homOfLE hUW).op (γ.app W (a • s)) =
+      G.val.map (homOfLE hUW).op (a • γ.app W s)
+    rw [hn, E.val.map_smul, G.val.map_smul, hn, hγ ⟨U, hU⟩, hγ ⟨U, hU⟩, map_smul]
+  let f : E ⟶ G := ⟨PresheafOfModules.homMk γ hlin⟩
+  have : IsIso ((SheafOfModules.toSheaf R).map f) := by
+    apply TopCat.Sheaf.isIso_iff_isIso_basis (B := fun U : B ↦ U.val) hb
+    intro U
+    apply (ConcreteCategory.isIso_iff_bijective _).mpr
+    change Function.Bijective (fun s : E.val.obj (op U.val) ↦ γ.app (op U.val) s)
+    have hh : (fun s : E.val.obj (op U.val) ↦ γ.app (op U.val) s) =
+        fun s ↦ l U s := funext (hγ U)
+    rw [hh]
+    exact (l U).bijective
+  have : IsIso f := isIso_of_reflects_iso f (SheafOfModules.toSheaf R)
+  exact ⟨asIso f⟩
 
 /-- On each positive homogeneous chart the given sheaf is the tilde of its degree-zero
 module, transported along the canonical affine chart isomorphism.
@@ -122,7 +178,72 @@ theorem gradedModuleChart_tildeComparison
     ∀ f : Fidx, Nonempty
       (Scheme.Modules.restrict F D[f].ι ≅
         Scheme.Modules.restrict (tilde (ModuleCat.of R[f] (Z f)))
-          (basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1).hom) := by sorry
+          (basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1).hom) := by
+  intro f
+  let e := basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1
+  let B := Set.range (fun r : R[f] ↦ e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)
+  have hB : Opens.IsBasis B := by
+    have hb := PrimeSpectrum.isBasis_basic_opens (R := R[f]) |>.of_isInducing
+      (Scheme.homeoOfIso e).isInducing
+    convert hb using 1
+    ext U
+    simp only [B, Set.mem_range, Set.mem_ofPred_eq]
+    constructor
+    · rintro ⟨r, rfl⟩
+      exact ⟨PrimeSpectrum.basicOpen r, ⟨r, rfl⟩, rfl⟩
+    · rintro ⟨V, ⟨r, rfl⟩, rfl⟩
+      exact ⟨r, rfl⟩
+  obtain ⟨Z', hZ', lambda, lambdaS, rho', rhoS', U, hU, hpair, _, _, _,
+      theta, thetaS, htheta, _⟩ := gradedModuleAwayRestriction 𝒜 𝓜 h𝓜 hsmul
+  have hZZ : Z' = Z := by
+    funext f
+    apply SetLike.coe_injective
+    exact (hZ' f).trans (hZ f).symm
+  subst Z'
+  have hr (f g : Fidx) (i : D[g] ≤ D[f])
+      (p : ∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1)
+      (q : Z f) : rho' f g p q = rho f g i q := by
+    obtain ⟨e, k, a, he, ha, heq⟩ := (hlaws.1 f g i).1
+    rcases hpair f g p with ⟨_, _, _, _, _, hformula, _, _, hrestrict, _, _, _⟩
+    have hrep : ∃ (y : M) (s : Submonoid.powers f.val.1), (q : N[f]) = mk y s := by
+      induction (q : N[f]) using LocalizedModule.induction_on with
+      | _ y s => exact ⟨y, s, rfl⟩
+    obtain ⟨y, s, hq⟩ := hrep
+    obtain ⟨n, hn⟩ := s.property
+    have hs : s = (⟨f.val.1 ^ n, ⟨n, rfl⟩⟩ : Submonoid.powers f.val.1) :=
+      Subtype.ext hn.symm
+    subst s
+    apply Subtype.ext
+    rw [hrestrict, hq, hformula e k a he ha heq y n]
+    exact ((hlaws.1 f g i).2.2 e k a he ha heq n y q hq).symm
+  have hrS (f g : Fidx) (i : D[g] ≤ D[f])
+      (p : ∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1)
+      (r : R[f]) : rhoS' f g p r = rhoS f g i r := by
+    rcases hpair f g p with ⟨_, _, _, _, _, _, hS, _, _, hrestrictS, _, _⟩
+    obtain ⟨l, hl, hlr⟩ := hcanonical f g i
+    have hSl : l = lambdaS f g p := by
+      apply IsLocalization.ringHom_ext (Submonoid.powers f.val.1)
+      ext a
+      exact (hl a).trans (hS a).symm
+    apply HomogeneousLocalization.val_injective
+    rw [hrestrictS, hlr, hSl]
+  let rel (f g : Fidx) (i : D[g] ≤ D[f]) := (hlaws.1 f g i).1
+  have ht (f g : Fidx) (i : D[g] ≤ D[f]) :
+      (∀ r : R[f], thetaS f g (rel f g i)
+        (algebraMap R[f] (Localization.Away (U f g)) r) = rhoS f g i r) ∧
+      (∀ q : Z f, theta f g (rel f g i) (mk q 1) = rho f g i q) ∧
+      (∀ (r : Localization.Away (U f g)) (q : LocalizedModule.Away (U f g) (Z f)),
+        theta f g (rel f g i) (r • q) = thetaS f g (rel f g i) r •
+          theta f g (rel f g i) q) := by
+    refine ⟨?_, ?_, (htheta f g (rel f g i)).2.2.2⟩
+    · intro r
+      exact ((htheta f g (rel f g i)).1 r).trans (hrS f g i _ r)
+    · intro q
+      exact ((htheta f g (rel f g i)).2.1 q).trans (hr f g i _ q)
+  obtain ⟨l, hl⟩ := gradedModuleChart_basisComparison 𝒜 Z rhoS rho U hU
+    (fun f g i ↦ theta f g (rel f g i)) (fun f g i ↦ thetaS f g (rel f g i)) ht
+    hcanonical F alpha hscalar hrestriction f
+  exact chart_iso_of_basis hB _ _ l hl
 
 
 end AlgebraicGeometry.Proj

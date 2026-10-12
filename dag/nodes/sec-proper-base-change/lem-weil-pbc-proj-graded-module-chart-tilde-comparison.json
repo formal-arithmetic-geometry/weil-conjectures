@@ -19,32 +19,30 @@
  ],
  "proof": [
   {
-   "text": "Fix f of degree d>0 and represent r in S_(f) by a/f^n with a homogeneous of degree n*d. Set h=f*a, of positive degree (n+1)*d. The chart preimage formula identifies D_+(h) with D(r^d)=D(r). Localization at r^d equals localization at r since d>0; the inverse to r is r^(d-1)/r^d. These opens realize every principal open on Spec S_(f), including the empty open when r=0.",
+   "text": "Pull back the principal-open basis of Spec R_f through basicOpenIsoSpec. PrimeSpectrum.isBasis_basic_opens and the induced homeomorphism prove that these opens form a basis of D_f, including an empty chart.",
    "uses": [
     "lem-weil-pbc-proj-basic-open-intersection"
    ],
    "elementary": false
   },
   {
-   "text": "Apply gradedModuleAwayRestriction. Identify its submodules with Z using the carrier equalities hZ. For D_+(g) contained in D_+(f), the given and constructed restrictions agree: choose the homogeneous relation g^e=b*f from hlaws and represent an arbitrary section by y/f^m. Both restrictions send it to b^m*y/g^(e*m), by their stated fraction formulas, and the target submodule inclusion is injective. For ring maps, hcanonical and uniqueness of maps out of S_f identify the ambient maps and injectivity of S_(g) into S_g identifies the degree-zero maps. Thus theta induces the canonical localization comparison for the specified Z and rho.",
+   "text": "Apply gradedModuleAwayRestriction to obtain its submodules and localization comparisons. Equality of the carriers from hZ identifies the constructed submodules with the specified Z. For each chart inclusion choose the homogeneous relation from hlaws. Represent an arbitrary localized module element as y/f^n and compare the two fraction formulas; subtype injectivity proves rho agrees with the constructed restriction. hcanonical and IsLocalization.ringHom_ext identify the ambient ring map with lambdaS; val_injective identifies rhoS. These equalities give the theta and thetaS hypotheses of the sectionwise comparison theorem.",
    "uses": [
     "lem-weil-pbc-graded-module-away-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Compose alpha with these localization comparisons and the tilde.toOpen identifications of principal-open sections. Scalar compatibility follows from hscalar and the agreement of the ring maps. Restriction compatibility follows from hrestriction and the comparison composition law: on a nested principal localization the two maps agree on Z_f, and localization uniqueness makes them equal everywhere. The ring chart is basicOpenIsoSpec, so these are linear equivalences for the actual structure sheaf.",
+   "text": "Apply gradedModuleChart_basisComparison to the aligned theta and thetaS, the canonical ring maps, and alpha with its scalar and restriction compatibility. This gives compatible linear equivalences between the restricted module sheaves on the principal-open basis.",
    "uses": [
-    "lem-weil-pbc-graded-module-away-restriction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-proj-basic-open-intersection"
+    "lem-weil-pbc-proj-graded-module-chart-basis-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Extend the compatible linear equivalences and their inverses off the principal-open basis by the basis-extension universal property. Their composites restrict to identities on each basis open, hence are identities by uniqueness. Transport along basicOpenIsoSpec to obtain the stated isomorphism on D_f. Nilpotent denominators give empty charts and zero localized modules, so no nonemptiness assumption is needed.",
+   "text": "Extend the additive maps on the basis using restrictHomEquivHom. To check linearity on any open, restrict the two scalar expressions to a basis neighbourhood of each point. Naturality and linearity on that neighbourhood make the expressions equal; section_ext concludes global equality. Form a sheaf-of-modules morphism with homMk. Its underlying additive-sheaf map is an isomorphism since every basis component is bijective, by isIso_iff_isIso_basis. The forgetful functor reflects isomorphisms, giving the desired module-sheaf isomorphism.",
    "uses": [
-    "lem-weil-pbc-sheaf-of-modules-from-basis"
+    "lem-weil-pbc-sheaf-morphism-on-basis"
    ],
    "elementary": false
   }
@@ -52,16 +50,16 @@
  "proof_deps": [
   "lem-weil-pbc-proj-basic-open-intersection",
   "lem-weil-pbc-graded-module-away-restriction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-sheaf-of-modules-from-basis"
+  "lem-weil-pbc-proj-graded-module-chart-basis-comparison",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R2",
+  "group": "F1",
   "date": "2026-10-12",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Lemma 01MB (lemma-proj-scheme), last paragraph",
-  "note": "Read in the local Stacks source copy. This isolates steps 1--3 of the parent plan; the parent proves the global locality step in Lean."
+  "place": "Lemma 01MB, last paragraph; Sheaves on Spaces, 009T and 009U",
+  "note": "The Lean proof closes alignment of the constructed localization restrictions and the global gluing step. Only compatible principal-open section equivalences are split off. The module extension construction and its finite-refinement hypothesis are unnecessary."
  },
  "mathlib_searches": [
   {
@@ -134,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-1b1c4",
-  "group": "R2",
+  "reviewer": "COMPILER",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T135309-L-1689297",
+  "landing": "20261012T154830-L-2472768",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures and proof route matched both DAG nodes, cited dependencies, Stacks 01MB, report accounting, axiom checks, and clean delivery/direct-importer compilation."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

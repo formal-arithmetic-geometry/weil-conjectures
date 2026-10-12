@@ -8400,3 +8400,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:48 L: merged deliver/E1/Sheaf.Algebra.Homology.FirstQuadrantTotalComparison (stage 3; reviewer PASS; first push; landing 20261012T154828-L-2472313 (interface); batch 20261012T154824; modules 2; new nodes 1)
 - 15:48 L: merged deliver/E1/Sheaf.Topology.RingedModuleSkyscraper (stage 3; reviewer PASS; first push; landing 20261012T154829-L-2472491 (proof); batch 20261012T154824; modules 1; new nodes 0)
 - 15:48 L: merged deliver/E3/Sheaf.RingTheory.AdjoinRootCRTRootBlock (stage 3; reviewer PASS; first push; landing 20261012T154829-L-2472654 (interface); batch 20261012T154824; modules 2; new nodes 2)
+- 15:48 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ProjGradedModuleChartTildeComparison (stage 3; reviewer PASS; first push; landing 20261012T154830-L-2472768 (interface); batch 20261012T154824; modules 2; new nodes 1)
