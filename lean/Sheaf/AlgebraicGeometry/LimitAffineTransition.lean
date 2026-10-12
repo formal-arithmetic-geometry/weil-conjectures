@@ -54,7 +54,21 @@ theorem limit_affine_transition_affine_comparison
     ∃ e : c.pt ≅ Spec (colimit (D.op ⋙ Scheme.Γ)),
       ∀ i : Iᵒᵖ, e.hom ≫ Spec.map (colimit.ι (D.op ⋙ Scheme.Γ) (op i)) =
         c.π.app i ≫ (ΓSpec.adjunction.unit.app (D.obj i)) := by
-  sorry
+  let (i : Iᵒᵖ) : IsAffine (D.obj i) := ha i
+  let : IsAffine c.pt := Scheme.isAffine_of_isLimit c hc
+  let (i : Iᵒᵖᵒᵖ) : IsAffine (D.op.obj i).unop := ha i.unop
+  let hΓ := isColimitOfPreserves Scheme.Γ hc.op
+  let eΓ := hΓ.coconePointUniqueUpToIso (colimit.isColimit (D.op ⋙ Scheme.Γ))
+  refine ⟨c.pt.isoSpec ≪≫ Scheme.Spec.mapIso eΓ.symm.op, ?_⟩
+  intro i
+  change c.pt.isoSpec.hom ≫ Spec.map eΓ.inv ≫
+    Spec.map (colimit.ι (D.op ⋙ Scheme.Γ) (op i)) = _
+  rw [← Spec.map_comp]
+  have hι := hΓ.comp_coconePointUniqueUpToIso_inv
+    (colimit.isColimit (D.op ⋙ Scheme.Γ)) (op i)
+  change colimit.ι (D.op ⋙ Scheme.Γ) (op i) ≫ eΓ.inv = (c.π.app i).appTop at hι
+  rw [hι]
+  exact Scheme.isoSpec_hom_naturality (X := c.pt) (Y := D.obj i) (c.π.app i)
 
 /-- An inverse system over a directed set with affine transition morphisms has a limit,
 its projections are affine, and inverse images of arbitrary opens of any stage are limits

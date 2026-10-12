@@ -6438,3 +6438,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/V2/Sheaf.AlgebraicGeometry.IrreducibleLisseRefinement (stage 3; reviewer PASS; first push; landing 20261012T060758-L-2918185 (interface); batch 20261012T060728; modules 3; new nodes 2)
 - 06:07 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum (stage 3; reviewer PASS; first push; landing 20261012T060759-L-2918321 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:07 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Morphisms.FpqcOpenImmersionDescent (stage 3; reviewer PASS; first push; landing 20261012T060759-L-2918452 (proof); batch 20261012T060728; modules 1; new nodes 0)
+- 06:07 L: merged deliver/X2/Sheaf.AlgebraicGeometry.LimitAffineTransition (stage 3; reviewer PASS; first push; landing 20261012T060759-L-2918593 (proof); batch 20261012T060728; modules 1; new nodes 0)
