@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Restrict
+import Sheaf.AlgebraicGeometry.CoherentKernelConditionRestriction
+import Sheaf.AlgebraicGeometry.CoherentKernelConditionDescent
+import Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCore
 
 /-! # Coherence of a module is local on an open covering
 
@@ -57,6 +60,14 @@ theorem coherent_module_local_on_open_cover
           RingedSpace.IsCoherent (U i).toScheme.toRingedSpace
             ((Scheme.Modules.restrictFunctor (U i).ι).obj F)) →
         RingedSpace.IsCoherent X.toRingedSpace F) := by
-  sorry
+  obtain ⟨hFT_restrict, hFT_cover⟩ :=
+    coherent_module_finite_type_local_core X F I U hU
+  constructor
+  · intro hF W
+    exact ⟨hFT_restrict hF W,
+      coherent_kernel_condition_restriction X F hF.2 W⟩
+  · intro hF
+    exact ⟨hFT_cover hF,
+      coherent_kernel_condition_descent X F I U hU (fun i ↦ (hF i).2)⟩
 
 end AlgebraicGeometry

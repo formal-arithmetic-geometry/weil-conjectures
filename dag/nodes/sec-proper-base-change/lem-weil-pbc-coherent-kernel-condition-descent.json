@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-coherent-kernel-condition-descent",
+ "kind": "statement",
+ "title": "Finite type of a kernel from kernel conditions on an open cover",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], and $(U_i)_{i\\in I}$ an open cover of $X$. Restriction is as in [lem-weil-pbc-module-restriction-open-immersion-colimits]. Suppose that for every $i$, every open $V\\subseteq U_i$, every $n\\in\\mathbb N$ and every map $\\mathcal O_V^{\\oplus n}\\to (F|_{U_i})|_V$, the kernel is of finite type in the sense of [pqf-def-coherent]. For any open $W\\subseteq X$, any $n\\in\\mathbb N$ and any map $f:\\mathcal O_W^{\\oplus n}\\to F|_W$, the kernel of $f$ is of finite type. No finite-type hypothesis on $F$ or surjectivity hypothesis on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Definitions 01BV (definition-coherent), 01B5 (definition-finite-type), and Section 01AF (section-kernels); read at the official Stacks tag pages"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Put W_i = W intersect U_i. They cover W. On W_i, restriction of f has free source of rank n since restriction preserves the unit and finite coproducts. Its target identifies with the restriction of F restricted to U_i, by transitivity of restriction.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local kernel condition makes the kernel of this restricted map finite type. Kernels are computed sectionwise, so it is isomorphic to the restriction of kernel f; finite type transfers through an isomorphism by composing generating epimorphisms with it.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each point of W choose an i containing it and a finite-generating neighbourhood for this restricted kernel in W_i. This is an open neighbourhood in W; transitivity gives finite generators of kernel f there. Hence kernel f is finite type. When I is empty X and W are empty and the condition is vacuous; rank zero is included.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-def-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Definitions 01BV (definition-coherent), 01B5 (definition-finite-type), and Section 01AF (section-kernels); read at the official Stacks tag pages; specialization of the parent proof: Steps 1, 4 and 5 of the parent: restrict one kernel to the intersections and glue its finite type."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf modules finite type kernel restriction open subset",
+   "results": "Service returned Internal Server Error; no mathematical result.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of morphism finite free sheaf to coherent sheaf finite type under restriction and gluing on an open cover",
+   "results": "IsFiniteType, exists_localGeneratorsData, LocalGeneratorsData.IsFiniteType, GeneratingSections.IsFiniteType, IsFinitePresentation and Presentation.IsFinite; no finite-type kernel restriction or descent theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoherent|coherent_kernel|isCoherent",
+   "results": "msearch returned unrelated IsCoherentWith results. Scoped rg in Mathlib/Algebra/Category/ModuleCat/Sheaf found no matches. blueprint_refs search coherent kernel found no blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Steps 1, 4 and 5 of the parent: restrict one kernel to the intersections and glue its finite type.",
+   "via": [
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-weil-pbc-pushforward-coherent-on-open",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentKernelConditionDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentKernelConditionDescent.lean",
+  "declaration": "AlgebraicGeometry.coherent_kernel_condition_descent",
+  "statement": "theorem coherent_kernel_condition_descent (X : Scheme.{u}) (F : X.Modules) (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤) (hK : ∀ (i : I) (V : (U i).toScheme.Opens) (n : ℕ) (f : SheafOfModules.free (R := (U i).toScheme.ringCatSheaf.over V) (ULift.{u} (Fin n)) ⟶ ((Scheme.Modules.restrictFunctor (U i).ι).obj F).over V), (kernel f).IsFiniteType) (W : X.Opens) (n : ℕ) (f : SheafOfModules.free (R := X.ringCatSheaf.over W) (ULift.{u} (Fin n)) ⟶ F.over W) : (kernel f).IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223423-L-1643086",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223423-L-1643086",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

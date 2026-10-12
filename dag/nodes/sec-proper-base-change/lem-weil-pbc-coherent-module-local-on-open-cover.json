@@ -30,79 +30,41 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (restriction to opens).* Throughout, a surjection of $\\mathcal O_W$-modules means an epimorphism of the abelian category $\\Mod(\\mathcal O_W)$ [def-weil-sheaf-of-modules-category], and \"of finite type\" and \"coherent\" are as in [pqf-def-coherent]. For opens $V\\subseteq W\\subseteq X$ of the scheme $X$ [def-pc-scheme]: (a) $\\mathcal O_X|_W=\\mathcal O_W$ and $(\\mathcal G|_W)|_V=\\mathcal G|_V$ for every $\\mathcal O_X$-module $\\mathcal G$, with $(\\alpha|_W)|_V=\\alpha|_V$ for morphisms: by the formula of [lem-weil-pbc-module-restriction-open-immersion-colimits] (for inclusions of open subschemes $f(U)=U$ and $f^\\sharp$ is the identity), both sides have sections $\\mathcal G(V')$ over $V'\\subseteq V$ open, the same restriction maps and the same $\\mathcal O_X(V')$-action. (b) Restriction $\\mathcal G\\mapsto\\mathcal G|_V$, $\\Mod(\\mathcal O_W)\\to\\Mod(\\mathcal O_V)$, is a left adjoint [lem-weil-pbc-module-restriction-open-immersion-colimits](1), so it preserves coproducts, whence $(\\mathcal O_W^{\\oplus n})|_V\\cong\\mathcal O_V^{\\oplus n}$ by (a); and it preserves epimorphisms: if $e$ is an epimorphism and $g\\circ e|_V=h\\circ e|_V$, the adjoint transposes satisfy $g^\\flat\\circ e=h^\\flat\\circ e$, so $g^\\flat=h^\\flat$ and $g=h$. (c) For a morphism $\\varphi:\\mathcal G\\to\\mathcal H$ of $\\mathcal O_W$-modules, $\\Ker(\\varphi)|_V=\\Ker(\\varphi|_V)$: kernels in $\\Mod(\\mathcal O_W)$ and $\\Mod(\\mathcal O_V)$ are computed sectionwise [def-weil-sheaf-of-modules-category], so both have sections $\\ker(\\varphi_{V'}:\\mathcal G(V')\\to\\mathcal H(V'))$ over $V'\\subseteq V$, with the same restriction maps and module structures. (d) Being of finite type is invariant under isomorphism (compose the surjection $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$ with the restricted isomorphism).",
+   "text": "Apply the finite-type locality core to obtain the two finite-type implications. These concern only the finite-type conjunct, not coherence of the restrictions or coherence of F.",
    "uses": [
-    "def-pc-scheme",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "pqf-def-coherent"
+    "lem-weil-pbc-coherent-module-finite-type-local-core"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Stacks, Sheaves of Modules, Definitions 01B5 and 01BV; restriction to an open as the pullback $j^*$ in the proof of Lemma 01B6 (lemma-pullback-finite-type)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 2 (finite type restricts).* Let $\\mathcal G$ be an $\\mathcal O_X$-module of finite type and $W\\subseteq X$ open. For $x\\in W$ choose by [pqf-def-coherent] an open $U\\ni x$ of $X$ and a surjection $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$. Restricting it to the open $U\\cap W$ gives by Step 1(a),(b) a surjection $\\mathcal O_{U\\cap W}^{\\oplus n}\\cong(\\mathcal O_U^{\\oplus n})|_{U\\cap W}\\to\\mathcal G|_{U\\cap W}=(\\mathcal G|_W)|_{U\\cap W}$, and $U\\cap W$ is an open neighbourhood of $x$ in $W$. Hence $\\mathcal G|_W$ is of finite type.",
+   "text": "For coherent F and an open W, the first core implication gives finite type of the restricted module. Project the kernel condition from coherence of F, and apply the kernel-condition restriction theorem. Pair these two conclusions using the definition of coherence.",
    "uses": [
     "pqf-def-coherent",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-coherent-module-finite-type-local-core",
+    "lem-weil-pbc-coherent-kernel-condition-restriction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Stacks, Sheaves of Modules, Definition 01B5 and Lemma 01B6 (lemma-pullback-finite-type) for the open immersion $W\\to X$"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 3 (part (1)).* Let $\\mathcal F$ be coherent and $W\\subseteq X$ open. $\\mathcal F|_W$ is of finite type by Step 2. Let $W'\\subseteq W$ be open and $\\varphi:\\mathcal O_{W'}^{\\oplus n}\\to(\\mathcal F|_W)|_{W'}$ a morphism. By Step 1(a) $(\\mathcal F|_W)|_{W'}=\\mathcal F|_{W'}$, and $W'$ is open in $X$, so the kernel of $\\varphi$ is of finite type by the kernel condition of [pqf-def-coherent] for $\\mathcal F$. Hence $\\mathcal F|_W$ is a coherent $\\mathcal O_W$-module.",
+   "text": "For coherent restrictions on the cover, the second core implication gives finite type of F. Project their kernel conditions and apply single-kernel descent for every open W, rank n and map from the rank-n free module. Pair finite type and these kernel conditions using the definition of coherence.",
    "uses": [
     "pqf-def-coherent",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-coherent-module-finite-type-local-core",
+    "lem-weil-pbc-coherent-kernel-condition-descent"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Stacks, Sheaves of Modules, Definition 01BV (definition-coherent)"
-   }
-  },
-  {
-   "text": "*Step 4 (finite type is local).* Let $W\\subseteq X$ be open, $W=\\bigcup_iW_i$ an open covering and $\\mathcal G$ an $\\mathcal O_W$-module with $\\mathcal G|_{W_i}$ of finite type for every $i$. For $x\\in W$ pick $i$ with $x\\in W_i$; by [pqf-def-coherent] for $\\mathcal G|_{W_i}$ there are an open $V\\ni x$ of $W_i$ and a surjection $\\mathcal O_V^{\\oplus n}\\to(\\mathcal G|_{W_i})|_V=\\mathcal G|_V$ (Step 1(a)). $V$ is open in $W$, so $\\mathcal G$ is of finite type.",
-   "uses": [
-    "pqf-def-coherent",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Stacks, Sheaves of Modules, Definition 01B5 (definition-finite-type): the condition is on a neighbourhood of each point"
-   }
-  },
-  {
-   "text": "*Step 5 (part (2)).* Let $\\mathcal F|_{U_i}$ be coherent for all $i$. $\\mathcal F$ is of finite type by Step 4 (with $W=X$, $W_i=U_i$). Let $W\\subseteq X$ be open and $\\varphi:\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$ a morphism with kernel $\\mathcal K$. Put $W_i=W\\cap U_i$, an open of $U_i$; these cover $W$. By Step 1, $\\mathcal K|_{W_i}=\\Ker(\\varphi|_{W_i})$ and $\\varphi|_{W_i}$ is, up to the isomorphism $\\mathcal O_{W_i}^{\\oplus n}\\cong(\\mathcal O_W^{\\oplus n})|_{W_i}$, a morphism $\\mathcal O_{W_i}^{\\oplus n}\\to\\mathcal F|_{W_i}=(\\mathcal F|_{U_i})|_{W_i}$; composing with an isomorphism of the source replaces the kernel by an isomorphic one. By the kernel condition of [pqf-def-coherent] for the coherent $\\mathcal O_{U_i}$-module $\\mathcal F|_{U_i}$ and its open $W_i$, this kernel is of finite type, hence so is $\\mathcal K|_{W_i}$ (Step 1(d)). By Step 4, $\\mathcal K$ is of finite type. So $\\mathcal F$ satisfies both conditions of [pqf-def-coherent] and is coherent.",
-   "uses": [
-    "pqf-def-coherent",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Stacks, Sheaves of Modules, Definition 01BV (definition-coherent); kernels sectionwise as in Sheaves of Modules, Section 01AF (section-kernels), Lemma 01AG (lemma-abelian)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-coherent-kernel-condition-descent",
+  "lem-weil-pbc-coherent-kernel-condition-restriction",
+  "lem-weil-pbc-coherent-module-finite-type-local-core",
   "pqf-def-coherent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Stacks, Sheaves of Modules, Definitions 01B5 and 01BV and Lemma 01B6; the locality itself is not stated in Stacks (used without statement in Cohomology of Schemes, Lemma 0CYJ), so the steps unwinding the definitions are written by an agent"
+  "place": "Definitions 01BV and 01B5; original restriction/locality argument reduced to three strictly smaller statements. The finite-type core and both kernel-condition lemmas remain open: this is a decomposition, not an axiom-free proof."
  },
  "mathlib_searches": [
   {
@@ -214,5 +176,15 @@
   "group": "J1",
   "result": "fix",
   "note": "X:Scheme.{u}; F:X.Modules; I:Type u, U:I→X.Opens, hU:⨆ U i=⊤ (OPEN COVERS); (1) IsCoherent X.toRingedSpace F → ∀ W, IsCoherent W.toRingedSpace (restrictFunctor W.ι).obj F; (2) ∀ i coherent restriction → IsCoherent F; restriction = Mathlib restrictFunctor along open immersion (node's O_W-module F|_W; .over gives no RingedSpace for IsCoherent); fix: docstring carries node's 5-step proof"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223423-L-1643086",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

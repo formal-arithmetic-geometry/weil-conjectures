@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-coherent-module-finite-type-local-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); finite-type clauses of locality, original proof steps 2 and 4",
+   "via": [
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
+    "lem-weil-pbc-pushforward-coherent-on-open",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite type locality core for coherent modules",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], and $(U_i)_{i\\in I}$ an open cover of $X$. Restriction to open subschemes is as in [lem-weil-pbc-module-restriction-open-immersion-colimits], and coherence and finite type are as in [pqf-def-coherent]. Then (1) coherence of $F$ implies that $F|_W$ is of finite type for every open $W\\subseteq X$, and (2) coherence of $F|_{U_i}$ for every $i$ implies that $F$ is of finite type. No quasi-compactness or finiteness assumption on the cover is required.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Definitions 01BV (coherent), 01B5 (finite type), and Lemma 01B6 (pullback preserves finite type); verified at the official Stacks tag pages"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Project coherence of F to finite type. At each point of W, intersect a finite-generating neighbourhood in X with W. By the explicit open-immersion restriction functor, the finite free epimorphism restricts to one with the same number of generators and target F restricted to that intersection. These neighbourhoods cover W, proving finite type of F restricted to W.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-def-coherent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Project coherence on each U_i to finite type. For x in X choose i with x in U_i using the cover equality. A finite-generating neighbourhood of x in U_i is open in X because U_i is open. The explicit restriction formula identifies the same sections and epimorphism with generators of F there. This proves finite type of F. Empty opens are vacuous; an empty index type forces X empty.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "pqf-def-coherent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Definitions 01BV (coherent), 01B5 (finite type), and Lemma 01B6 (pullback preserves finite type); verified at the official Stacks tag pages"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentModuleFiniteTypeLocalCore.lean",
+  "declaration": "AlgebraicGeometry.coherent_module_finite_type_local_core",
+  "statement": "theorem coherent_module_finite_type_local_core (X : Scheme.{u}) (F : X.Modules) (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤) : (RingedSpace.IsCoherent X.toRingedSpace F → ∀ (W : X.Opens), (Scheme.Modules.restrictFunctor W.ι).obj F |>.IsFiniteType) ∧ ((∀ (i : I), RingedSpace.IsCoherent (U i).toScheme.toRingedSpace ((Scheme.Modules.restrictFunctor (U i).ι).obj F)) → F.IsFiniteType)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules of finite type remains of finite type on open subsets and finite type descends along an open covering",
+   "results": "Service unavailable: Internal Server Error. No search result or mathematical verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generation of a module sheaf can be checked on an open covering, and survives restriction to an open subspace",
+   "results": "Eight hits: IsFiniteType, exists_localGeneratorsData, LocalGeneratorsData.IsFiniteType, GeneratingSections.IsFiniteType and their projections; no restriction or cover-locality theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType",
+   "results": "Four hits: IsFiniteType, exists_localGeneratorsData, mk, instIsFiniteTypeOfIsFinitePresentation. No locality theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFiniteType.*(restrict|cover)|finiteType_of_cover|kernel.*over|over.*kernel",
+   "results": "msearch returned unrelated kernel hits. Scoped rg on Mathlib sheaf modules confirms no finite-type locality theorem. Library rg finds private helpers in QuasicoherentFiniteTypeAffine, not accessible from other modules; ModulePullbackFiniteType gives general pullback preservation but does not prove descent along an open cover. No duplicate of the conjunction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223423-L-1643086",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T223423-L-1643086",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
