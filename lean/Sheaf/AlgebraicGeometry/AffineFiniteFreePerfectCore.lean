@@ -6,6 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.AffineFiniteFreeModelComplex
+import Sheaf.AlgebraicGeometry.AffineFiniteFreeModelBounded
+import Sheaf.AlgebraicGeometry.AffineFiniteFreeModelRetracts
 
 /-! # Strict perfectness of the explicit affine finite free model
 
@@ -43,6 +45,8 @@ theorem affine_finite_free_perfect_core {Y : Scheme.{u}}
     (hfree : ∀ n, Module.Free (Γ(Y, U) : Type u) (K.X n))
     (hfinite : ∀ n, Module.Finite (Γ(Y, U) : Type u) (K.X n))
     (hzero : ∀ n, r < n → IsZero (K.X n)) :
-    Scheme.IsStrictlyPerfect Y U (affineFiniteFreeModelComplex U hU K) := by sorry
+    Scheme.IsStrictlyPerfect Y U (affineFiniteFreeModelComplex U hU K) := by
+  refine ⟨affine_finite_free_model_bounded U hU K r hzero, ?_⟩
+  exact affine_finite_free_model_retracts U hU K hfree hfinite
 
 end AlgebraicGeometry

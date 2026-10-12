@@ -1,0 +1,102 @@
+{
+ "id": "lem-affine-finite-free-model-bounded",
+ "kind": "statement",
+ "title": "Bounded support of the affine finite-free model",
+ "statement": "For the explicit affine finite-free model, if K_n is zero for n > r then the transported cochain complex is zero outside degrees [-r,0].",
+ "source": {
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "Tag 068C, affine finite free resolution argument"
+ },
+ "stmt_deps": [
+  "def-affine-finite-free-model-complex",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the extension and use the zero-object preservation and finite-basis transport described in the theorem docstring.",
+   "uses": [
+    "def-affine-finite-free-model-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-affine-finite-free-model-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "Tag 068C"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded support homological complex extension zero object",
+   "date": "2026-10-12",
+   "results": "no exact project theorem; generic extension APIs only",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extend IsZero",
+   "date": "2026-10-12",
+   "results": "generic extension declarations only",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*IsZero|finite free sheaf retract",
+   "date": "2026-10-12",
+   "results": "no existing theorem matching this statement",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFiniteFreePerfectCore",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-affine-finite-free-perfect-core",
+   "place": "support and finite-basis substeps"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFiniteFreeModelBounded",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFiniteFreeModelBounded.lean",
+  "declaration": "AlgebraicGeometry.affine_finite_free_model_bounded",
+  "statement": "theorem affine_finite_free_model_bounded {Y : Scheme.{u}}\n    (U : Y.Opens) (hU : IsAffineOpen U)\n    (K : ChainComplex (ModuleCat.{u} (Γ(Y, U) : Type u)) ℕ) (r : ℕ)\n    (hzero : ∀ n, r < n → IsZero (K.X n)) :\n    ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n →\n      IsZero ((affineFiniteFreeModelComplex U hU K).X n)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T160833-L-2613376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T160833-L-2613376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
