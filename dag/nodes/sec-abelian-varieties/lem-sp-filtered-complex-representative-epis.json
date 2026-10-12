@@ -1,0 +1,155 @@
+{
+ "id": "lem-sp-filtered-complex-representative-epis",
+ "kind": "statement",
+ "title": "Epimorphic maps from filtered cycle representatives",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], $K$ a cochain complex, and $F$ a decreasing filtration by subcomplexes [def-sp-filtration]. Let $p,n,r\\in\\mathbf Z$ with $p\\le p+r$. Write $R=F^pK^n\\cap d^{-1}(F^{p+r}K^{n+1})$, viewed inside $F^pK^n$, and let $Z_r$ be the cycle subobject of $\\mathrm{gr}^pK^n$ defined in [def-sp-filtered-complex-subquotients]. Put $S=F^pK/F^{p+r}K$. There exist epimorphisms $z:R\\to Z_r$ and $g:R\\to Z^n(S)$ such that $z$ followed by the inclusion in the graded piece is the graded projection restricted to $R$, and $g$ followed by the cycle inclusion is the quotient projection restricted to $R$. There is no hypothesis that $F$ is finite.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation preserves the quotient cokernel: its degree-n projection q is epic, and its kernel is the image of the inclusion of F^{p+r} into F^p. Pullback of kernels and the chain-map equation identify R with the inverse image under q of the cycle kernel of S.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+   }
+  },
+  {
+   "text": "The canonical pullback projection to this cycle kernel is epic by stability of epimorphisms under pullback. Compose the subobject equality isomorphism and the canonical kernel-to-cycles isomorphism to obtain g and its projection equation.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+   }
+  },
+  {
+   "text": "The graded projection kills F^{p+1}. Express the extra summand in the definition of Z_r as the image of its inclusion in F^p; image pushforward preserves sums, and pullback cancels pushforward along the mono F^p to K. Its image under the graded projection is zero. Therefore Z_r is image(R to gr^p), and the image factorization gives the epic z and the required equation.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K",
+  "note": "Categorical expansion of the cycle-boundary formulas; the source webpage was inspected."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a filtered cochain complex the cycle representatives map epimorphically to cycles of the quotient complex and to filtered cycles in the graded piece",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a filtered cochain complex the cycle representatives map epimorphically to cycles of the quotient complex and to filtered cycles in the graded piece",
+   "results": "HomologicalComplex.instEpiHomologyπ; HomologicalComplex.instEpiPOpcycles; CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p; HomologicalComplex.epi_homologyMap_of_epi_of_not_rel; HomologicalComplex.HomologySequence.instEpiMap'ComposableArrows₃OfNatNat; HomologicalComplex.instEpiFRestrictionToTruncGE'; HomologicalComplex.instEpiFπTruncGE; HomologicalComplex.instEpiπTruncGE",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*cycles|filtration.*quotient.*homology|cycle.*representative",
+   "results": "No matching declarations.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Step 3, filtered-complex cycle-boundary calculation: Epimorphic maps from filtered cycle representatives",
+   "via": [
+    "lem-sp-filtered-complex-quotient-image-comparison",
+    "lem-sp-filtered-complex-ZB-description"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredComplexRepresentativeEpis.lean",
+  "declaration": "CategoryTheory.DecreasingFiltration.filteredComplex_representative_epis",
+  "statement": "theorem filteredComplex_representative_epis (F : DecreasingFiltration K)\n    (p n r : ℤ) (hs : p ≤ p + r) :\n    let R := F.complexCycleRepresentatives p n r\n    let Z := F.complexCycles p n r\n    let S := F.complexQuotient p (p + r) hs\n    ∃ (z : (R : C) ⟶ (Z : C)) (g : (R : C) ⟶ S.cycles n),\n      Epi z ∧ Epi g ∧\n      z ≫ Z.arrow = R.arrow ≫\n        (F.complexQuotientπ p (p + 1) (Int.le_add_one (show p ≤ p from le_rfl))).f n ∧\n      g ≫ S.iCycles n = R.arrow ≫ (F.complexQuotientπ p (p + r) hs).f n",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T231632-L-1961315",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T231632-L-1961315",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

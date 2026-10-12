@@ -14,13 +14,46 @@
  ],
  "proof": [
   {
-   "text": "The inequalities p-r+1 ≤ p and p+1 ≤ p+r follow from r ≥ 1. The inclusion F^p → F^{p-r+1}, followed by projection modulo F^{p+1}, kills F^{p+r}, and hence factors through the cokernel S, giving φ with the required projection square. Let R = F^p ∩ d⁻¹(F^{p+r}) inside F^p. Its projection to the graded piece factors through Z by the image universal property, giving z. Its projection to S is killed by the differential, so factors through the kernel S.cycles n, giving g. The composite R → H(S) → H(T) has image image Hφ: R surjects onto the cycles of S, and cycles surject onto H(S). Its kernel consists exactly of representatives dy+f with y in F^{p-r+1} and f in F^{p+1}. Since the representative and f lie in F^p, dy lies in F^p ∩ d(F^{p-r+1}); conversely these boundaries lie in R by d²=0. The map R → Z → Z/B is epic and has the same kernel. The abelian first isomorphism theorem therefore identifies Z/B with image Hφ. Taking this induced isomorphism, rather than any isomorphism, gives the required equality on representatives.",
+   "text": "Prove the index inequalities by integer arithmetic. The inclusion F^p to F^{p-r+1}, composed with projection modulo F^{p+1}, kills F^{p+r}; factor it through the cokernel to construct the quotient map and its square.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration",
     "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": false,
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+   }
+  },
+  {
+   "text": "Apply the epimorphic representative lemma to obtain z and g with both projection equations.",
+   "uses": [
+    "lem-sp-filtered-complex-representative-epis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+   }
+  },
+  {
+   "text": "Apply the representative kernel calculation. Set q=z followed by the projection to Z/B and b=g followed by the homology projection and factorization through image H(phi). The image inclusion is mono, so the kernel calculation gives ker q = ker b. Both q and b are epic.",
+   "uses": [
+    "lem-sp-filtered-complex-representative-kernels"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
+   }
+  },
+  {
+   "text": "In an abelian category, each epi is the cokernel of its kernel. Equality of kernel subobjects gives descents q-target to b-target and back; cancel q and b to show they are inverse. Postcompose the descent equation with the image inclusion to obtain the required representative equation.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
     "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K"
@@ -30,13 +63,15 @@
  "proof_deps": [
   "def-sp-abelian",
   "def-sp-filtration",
-  "def-sp-filtered-complex-subquotients"
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-representative-epis",
+  "lem-sp-filtered-complex-representative-kernels"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/homology.tex",
   "place": "Tag 012K, displayed cycle-boundary formulas and Lemma 12.24.2 (current numbering); https://stacks.math.columbia.edu/tag/012K",
-  "note": "The categorical details of the displayed formulas are expanded by X2; the image-kernel argument is step 3 of the parent node."
+  "note": "The quotient map and categorical assembly are proved in Lean. The representative epimorphisms are proved in a new module; the kernel calculation is isolated as the sole deferred step."
  },
  "mathlib_searches": [
   {
@@ -125,9 +160,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T085400-L-48026",
+  "landing": "20261012T231632-L-1961315",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
