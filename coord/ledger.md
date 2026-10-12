@@ -7651,3 +7651,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:29 L: returned deliver/J2/Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentGermLifts (reviewer RETURN: (reviewer X-2b78b, head 2b78bb08d) B3: In dag/nodes/sec-proper-base-change/lem-weil-pbc-sets-finite-descent-coordinates-)
 - 12:29 L: returned deliver/X2/Sheaf.AlgebraicGeometry.SheafHRightDerivedPullback (reviewer RETURN: (reviewer X-060b4, head 060b4b35c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Sh)
 - 12:29 L: merged deliver/J3/Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree (stage 3; reviewer PASS; first push; landing 20261012T122950-L-1089577 (proof); batch 20261012T120425; modules 1; new nodes 0)
+- 12:30 L: merged deliver/K3/Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre (stage 3; reviewer PASS; first push; landing 20261012T123055-L-1094917 (interface); batch 20261012T120425; modules 2; new nodes 1)
