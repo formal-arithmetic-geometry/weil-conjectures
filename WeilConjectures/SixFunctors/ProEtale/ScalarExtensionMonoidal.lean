@@ -39,6 +39,10 @@ open Scheme
 
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
+-- `GrothendieckTopology.W.monoidal` gives the monoidality of `W` directly; the instance going
+-- through enough points of the site is tried first and makes the search time out.
+attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints
+
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S) (X : Scheme.{u})
 
 /-- Restriction of scalars of pro-étale sheaves is additive. -/

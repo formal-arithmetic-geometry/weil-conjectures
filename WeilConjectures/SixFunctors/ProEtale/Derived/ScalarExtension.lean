@@ -160,7 +160,8 @@ lemma comparisonCompatible_leftDerivedFunctorCompNatIso :
   rw [leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison,
     leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison,
     asIso_hom, asIso_hom,
-    Functor.map_leftDerivedTensorComparison_comp_eq_of_iso _ _ _ _ τ, tensorHom_def]
+    Functor.map_leftDerivedTensorComparison_comp_eq_of_iso _ _ _ _ τ,
+    MonoidalCategory.tensorHom_def]
   rfl
 
 end General
