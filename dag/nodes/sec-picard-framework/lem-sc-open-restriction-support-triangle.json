@@ -26,65 +26,75 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective representative I of K. Restriction to V preserves K-injectivity by [lem-sc-derived-k-injective-restrict-open], so Lj^*K is represented by j^{-1}I. By [def-pc-ringed-spaces-derived-direct-image], Rj_*Lj^*K is represented by j_*j^{-1}I. The derived direct-image preservation theorem [lem-pc-derived-direct-image-preserves-qcoh] applies because j is quasi-compact (V is quasi-compact) and Y is quasi-separated, and j^{-1} preserves quasi-coherence on an open subscheme. The adjunction unit is represented by I \\to j_*j^{-1}I. Complete it to its mapping-cone triangle; by [def-weil-abstract-derived-category] this gives K \\to Rj_*Lj^*K \\to Q \\to K[1]. The cone cohomology sheaves are quasi-coherent: the long exact cohomology sequence expresses each as an extension of a kernel and a cokernel, and quasi-coherent modules are closed under these operations by [lem-weil-pbc-quasi-coherent-module-kernel], [lem-weil-pbc-quasi-coherent-module-cokernel-image], and [lem-pc-quasi-coherent-extension]. Thus Q is in D_QCoh(Y).",
+   "text": "Transport Scheme.Modules.restrictAdjunction along Scheme.Modules.overFunctorEquiv. Exact restriction and the existing mapDerivedCategoryRightDerivedAdjunction API produce the adjunction to the same rightDerivedFunctor used by schemeDerivedDirectImage. Its right adjoint preserves K-injective complexes by Adjunction.preservesKInjectiveComplexes. The underived pushforward is fully faithful, hence the proved full_rightDerivedFunctor and faithful_rightDerivedFunctor instances make its derived functor fully faithful.",
    "uses": [
-    "lem-sc-derived-k-injective-restrict-open",
-    "def-pc-ringed-spaces-derived-direct-image",
-    "lem-pc-derived-direct-image-preserves-qcoh",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-pc-quasi-coherent-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G (Lemma 48.4.3), proof, first paragraph; Derived Categories of Schemes, Lemma 36.4.1"
-   }
-  },
-  {
-   "text": "Applying Lj^* to this triangle gives Lj^*K \\to Lj^*Rj_*Lj^*K \\to Lj^*Q \\to Lj^*K[1]. Exactness of underived restriction, supplied by [lem-sc-derived-open-restriction-adjunction-exact], identifies Lj^* with termwise j^{-1}, so this is the image of the cone triangle of j^{-1}I \\to j^{-1}j_*j^{-1}I. The open restriction compatibility [lem-pc-restrict-derived-direct-image-open], applied to f=j, U=V, and g=\\operatorname{id}_V, identifies Lj^*Rj_*Lj^*K with Lj^*K. Concretely, on the representatives the first arrow is an isomorphism already at the level of complexes: for an open W\\subseteq V one has (j_*j^{-1}I)(W)=I(j^{-1}W)=I(W), so j^{-1}j_*j^{-1}I=j^{-1}I and the restricted unit j^{-1}I\\to j^{-1}j_*j^{-1}I is the identity (Stacks Tag 01LH). Hence Lj^*Q, the cone of an isomorphism, is 0. The cohomology long exact sequence gives j^{-1}H^n(Q)=0 for every n, which is exactly that every cohomology sheaf of Q is supported on the closed complement Y\\setminus V.",
-   "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-pc-restrict-derived-direct-image-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Definition 36.6.1"
-   }
-  },
-  {
-   "text": "If K is in D_QCoh^+(Y), with H^n(K)=0 for n<a, replace K by its truncation \\tau_{\\ge a}K, a quasi-isomorphic complex with terms zero below a. The category of \\mathcal O_Y-modules has enough injectives (Stacks Tag 01DH), so [lem-sc-bounded-below-injective-resolution-existence] gives a quasi-isomorphism to a bounded-below complex I of injective \\mathcal O_Y-modules with I^n=0 for n<a; such I is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so it may serve as the representative I of Step 1. Then j^{-1}I is termwise zero below a and K-injective (Step 1), and [def-pc-ringed-spaces-derived-direct-image] represents Rj_*Lj^*K by j_*j^{-1}I, which is zero in every degree below a because direct image is applied termwise. The mapping cone of I \\to j_*j^{-1}I from Step 1 has terms (j_*j^{-1}I)^n\\oplus I^{n+1}, zero for n<a-1, so H^n(Q)=0 for n<a-1. Thus Q belongs to D_QCoh^+(Y).",
-   "uses": [
-    "lem-sc-bounded-below-injective-resolution-existence",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
     "def-pc-ringed-spaces-derived-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemma 36.4.1"
+    "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemmas 36.4.1 and Definition 36.6.1"
+   }
+  },
+  {
+   "text": "Use schemeDerivedQCoh_openRestriction_iff and isQuasicoherent_over to prove quasi-coherence after exact restriction. Compactness of V and quasi-separatedness of Y give QuasiCompact V.ι; an open immersion is separated. Apply schemeDerivedDirectImage_preserves_QCoh. Specialize supported_qcoh_isTriangulated to the support subset Set.univ, so its property is just quasi-coherent cohomology. ObjectProperty.distinguished_cocone_triangle completes the derived unit with a quasi-coherent third vertex.",
+   "uses": [
+    "lem-pc-derived-open-restriction-qcoh-iff",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-supported-qcoh-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemmas 36.4.1 and Definition 36.6.1"
+   }
+  },
+  {
+   "text": "The fully faithful right adjoint has invertible counit. By the left triangle identity and isIso_of_comp_hom_eq_id the image of the unit under derived restriction is invertible. map_distinguished and Triangle.isZero₃_of_isIso₁ show the restriction of Q is zero. mapDerivedCategoryHomologyFunctorIso makes the restriction of each cohomology sheaf zero. Transport to Scheme.Modules.restrictFunctor by overFunctorEquiv, apply the additive stalk functor at (x,hx), and use restrictStalkNatIso and AddCommGrpCat.subsingleton_of_isZero to obtain the required vanishing stalk on V.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemmas 36.4.1 and Definition 36.6.1"
+   }
+  },
+  {
+   "text": "Exact restriction preserves a lower bound by Functor.isGE_mapDerivedCategory_obj. Put the restricted object in DerivedCategory.Plus and apply rightDerivedFunctorPlusCompatibility: the object R.rightDerivedFunctorPlus.obj E already has a bounded-below certificate, which is transported to unbounded derived direct image. The canonical t-structure plus property is triangulated, so ext_of_isTriangulatedClosed₃ proves bounded-below cohomology of Q from that of the first two vertices.",
+   "uses": [
+    "src-right-derived-functor-plus-compatibility",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemmas 36.4.1 and Definition 36.6.1"
    }
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-k-injective-restrict-open",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-derived-open-restriction-qcoh-iff",
   "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-supported-qcoh-triangulated",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-pc-quasi-coherent-extension",
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "lem-pc-restrict-derived-direct-image-open",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "lem-sc-bounded-below-injective-resolution-existence"
+  "def-pc-derived-open-restriction-maps",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "C1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemmas 36.4.1 and Definition 36.6.1"
+  "place": "Tag 0E4G (Lemma 48.4.3), proof; Derived Categories of Schemes, Lemmas 36.4.1 and Definition 36.6.1",
+  "note": "Existing Lean APIs implement the support-triangle argument, without new intermediate statements or new sorries."
  },
  "mathlib_searches": [
   {
@@ -184,5 +194,15 @@
   "reviewer": "R-ors",
   "group": "U1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T194102-L-452121",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
