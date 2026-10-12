@@ -241,7 +241,8 @@ lemma bijective_of_henselianLocalRing [HenselianLocalRing R]
     rw [← hx, ← htri, RingHom.comp_apply]
 
 /-- If `R → S` is a local homomorphism of local rings, `R` is strictly henselian and `S` is
-weakly étale over `R`, then `R → S` is an isomorphism. -/
+weakly étale over `R`, then `R → S` is an isomorphism.
+Blueprint `thm-weil-pbc-weak-etale-strict-local`. -/
 lemma bijective_of_isStrictlyHenselianLocalRing [IsStrictlyHenselianLocalRing R]
     [Algebra.WeaklyEtale R S] :
     Function.Bijective (algebraMap R S) :=
