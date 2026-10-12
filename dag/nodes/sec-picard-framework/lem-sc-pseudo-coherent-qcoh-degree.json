@@ -23,26 +23,35 @@
  ],
  "proof": [
   {
-   "text": "Choose around each point a bounded-above finite-free model supplied by pseudo-coherence. In the chosen degree, its cohomology is the quotient of the kernel of one differential by the image of the preceding differential. Finite free terms are quasi-coherent, and the kernel and cokernel/image closure results make this quotient quasi-coherent; the local identifications glue by locality of quasi-coherence.",
+   "text": "Unpack IsPseudoCoherent to choose, for every point y, an open U(y) containing y and a finite-free complex P(y) representing E restricted to U(y). These opens cover Y. Only the finite-free terms and the representing isomorphism are needed; the upper bound is not used for this conclusion.",
    "uses": [
-    "def-pur-pseudo-coherent-complex",
-    "pqf-def-coherent",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each chosen open U, apply Scheme.Modules.overEquiv U to P. The equivalence preserves free sheaves (mapFreeIso with overEquivFunctorObjUnitIso), so every term on U.toScheme is quasi-coherent. For its short complex in degree n, isQuasicoherent_kernel makes the kernel of the outgoing differential quasi-coherent. isQuasicoherent_cokernel then makes the cokernel of the preceding term into that kernel quasi-coherent. ShortComplex.homologyIsoCokernelLift identifies this cokernel with homology. Transport back along the exact equivalence, using mapHomologicalComplexHomologyIso and quasi-coherence preservation by the inverse site equivalence (isQuasicoherent_pushforward_of_isLeftAdjoint). All transport steps are proved in the private Lean helpers qc_over_inverse, qc_homology, and qc_local_free_homology.",
+   "uses": [
     "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
    ],
    "elementary": false
+  },
+  {
+   "text": "Exact restriction commutes with derived cohomology by mapDerivedCategoryHomologyFunctorIso. Apply homology to the representing isomorphism, then use homologyFunctorFactors to identify the result with P(y).homology n. Quasi-coherence is invariant under these isomorphisms. Apply SheafOfModules.IsQuasicoherent.of_coversTop to the cover U(y), using Opens.coversTop_iff and membership of y in U(y), to obtain quasi-coherence of H^n(E).",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-pseudo-coherent-complex",
-  "pqf-def-coherent",
   "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08E5, proof of Lemma 36.13.5"
+  "place": "Tag 08E5, local-model proof; written in Lean by X3 using the existing kernel and cokernel theorems"
  },
  "mathlib_searches": [
   {
@@ -108,10 +117,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T223408-L-1637842",
-  "kind": "interface",
+  "landing": "20261012T235559-L-2202849",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
