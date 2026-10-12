@@ -14,10 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 public import Mathlib.GroupTheory.PGroup
 
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.RepresentationTheory.SylowModuleFiltration
-import Sheaf.FieldTheory.OpenSubgroupFixedField
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
+import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseFiltrationData
+import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseTraceMaps
 
 /-!
 # A primary generic filtration and its sheaf-level trace retraction
@@ -108,6 +106,15 @@ theorem exists_generic_primary_coarse_trace_retraction
           (b : (Etale.lowerStar AddCommGrpCat.{u + 1} π).obj
               ((Etale.lowerStar AddCommGrpCat.{u + 1} D.fromSpecFunctionField).obj (F n)) ⟶
             (Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M),
-          a ≫ b = 𝟙 _ := by sorry
+          a ≫ b = 𝟙 _ := by
+  obtain ⟨D, π, hπ, hconn, hsmooth, haff, hIntegral, n, F, hzero, hchain,
+    q, hsquare, hqetale, d, hdegree, hcop, e, hkill, ⟨eterm⟩⟩ :=
+    exists_generic_primary_coarse_filtration_data f hmodel M ℓ hℓ hfinite hprimary
+  let : IsIntegral D := hIntegral
+  let : Etale q := hqetale
+  let : q.IsFiniteLocallyFreeOfDegree d := hdegree
+  refine ⟨D, π, hπ, hconn, hsmooth, haff, hIntegral, n, F, hzero, hchain, ?_⟩
+  exact exists_generic_primary_coarse_trace_maps π q hsquare d (ℓ ^ e)
+    (hcop.pow_right e) M hkill (F n) eterm
 
 end AlgebraicGeometry.IsConnectedCurve

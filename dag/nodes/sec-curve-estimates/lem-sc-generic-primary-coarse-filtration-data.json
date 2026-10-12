@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-generic-primary-coarse-filtration-data",
+ "kind": "statement",
+ "title": "Generic primary filtration and compatible finite etale cover",
+ "statement": "With the original curve, normalization-model and finite ell-primary stalk hypotheses of lem-sc-generic-primary-coarse-trace-retraction, there are D, pi, an integral structure, n and F with zero initial sheaf and the same finite constant Z/ell biproduct short-exact successor quotients. In addition there is a finite etale generic morphism q:Spec D.functionField -> Spec C.functionField, commuting with pi and both generic-point morphisms, of constant degree d coprime to ell. A power ell^e annihilates the identity of M, and q^* M is isomorphic to F(n). The statement does not assert a retraction.",
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-fin-normalization-extension",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-pc-finite-locally-free"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraphs 1--2"
+ },
+ "proof": [
+  {
+   "text": "Use the abelian stalk/Galois-module equivalence and Sylow filtration to obtain an open subgroup H of prime-to-ell index and a full invariant chain with trivial quotients killed by ell.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-sc-sylow-module-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the finite separable fixed field L of H, with degree equal to its index. Transport restriction and the full chain to Spec L; choose finite ZMod ell bases of its trivial quotients. Extend F constantly after n.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-fixed-field",
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply hmodel to L and normalize C in L. Use its generic-point isomorphism to transport the chain and terminal identification; define q using its inverse. The normalization diagram gives the commuting square. Finiteness, etaleness, and degree of Spec L -> Spec K are preserved by that isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take a maximum of the ell-power annihilators of the finite stalk elements. Faithfulness of the abelian stalk equivalence gives ell^e times id M equal to zero. The zero stalk admits n=0 and exponent zero.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-etale-open-subgroup-fixed-field",
+  "lem-sc-sylow-module-filtration"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraphs 1--2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite primary etale sheaf becomes filtered with constant mod prime quotients over a finite separable extension of coprime degree",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite primary Galois representation filtration trivial subquotients finite separable restriction",
+   "date": "2026-10-12",
+   "results": "IsArithFrobAt.exists_of_isInvariant; Ideal.Quotient.finite_of_isInvariant; arithFrobAt; IsArithFrobAt.arithFrobAt; galBasis; Ideal.ncard_primesOver_mul_card_inertia_mul_finrank; AlgHom.IsArithFrobAt.finite_quotient; IsArithFrobAt.mul_inv_mem_inertia",
+   "verdict": "No full construction or trace-conjugation theorem found; use the existing ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "filtration.*primary|primary.*filtration",
+   "date": "2026-10-12",
+   "results": "No matches.",
+   "verdict": "No full construction or trace-conjugation theorem found; use the existing ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseTraceRetraction",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-generic-primary-coarse-trace-retraction",
+   "place": "proof paragraphs 1--2"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseFiltrationData",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/GenericPrimaryCoarseFiltrationData.lean",
+  "declaration": "AlgebraicGeometry.IsConnectedCurve.exists_generic_primary_coarse_filtration_data",
+  "statement": "theorem exists_generic_primary_coarse_filtration_data {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsIntegral C] (hmodel : ∀ (L : Type u) [Field L] [Algebra C.functionField L] [FiniteDimensional C.functionField L], IsFinite (C.fromNormalizationIn L) ∧ IsAffine (C.normalizationIn L) ∧ IsConnectedCurve (C.fromNormalizationIn L ≫ f) ∧ Smooth (C.fromNormalizationIn L ≫ f) ∧ ∃ e : Spec (.of L) ≅ Spec (C.normalizationIn L).functionField, e.hom ≫ (C.normalizationIn L).fromSpecFunctionField = (C.fromSpecOfAlgebraFunctionField L).toNormalization) (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1}) (ℓ : ℕ) (hℓ : ℓ.Prime) (hfinite : Finite (((Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap C.functionField (AlgebraicClosure C.functionField))))).sheafFiber (A := AddCommGrpCat.{u + 1})).obj M)) (hprimary : IsPGroup ℓ (Multiplicative (((Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap C.functionField (AlgebraicClosure C.functionField))))).sheafFiber (A := AddCommGrpCat.{u + 1})).obj M))) : ∃ (D : Scheme.{u}) (π : D ⟶ C), IsFinite π ∧ IsConnectedCurve (π ≫ f) ∧ Smooth (π ≫ f) ∧ IsAffine D ∧ ∃ hIntegral : IsIntegral D, letI : IsIntegral D := hIntegral; ∃ (n : ℕ) (F : ℕ → Sheaf (Spec D.functionField).smallEtaleTopology AddCommGrpCat.{u + 1}), IsZero (F 0) ∧ (∀ (a : ℕ), a < n → ∃ (S : ShortComplex (Sheaf (Spec D.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})) (d : ℕ), S.ShortExact ∧ Nonempty (S.X₁ ≅ F a) ∧ Nonempty (S.X₂ ≅ F (a + 1)) ∧ Nonempty (S.X₃ ≅ Nat.rec (0 : _) (fun _ A ↦ A ⊞ (Spec D.functionField).constantZMod ℓ) d)) ∧ ∃ (q : Spec D.functionField ⟶ Spec C.functionField), q ≫ C.fromSpecFunctionField = D.fromSpecFunctionField ≫ π ∧ Etale q ∧ ∃ (d : ℕ), q.IsFiniteLocallyFreeOfDegree d ∧ d.Coprime ℓ ∧ ∃ (e : ℕ), (ℓ ^ e) • 𝟙 M = 0 ∧ Nonempty ((Etale.upperStar AddCommGrpCat.{u + 1} q).obj M ≅ F n)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T135332-L-1699300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T135332-L-1699300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
