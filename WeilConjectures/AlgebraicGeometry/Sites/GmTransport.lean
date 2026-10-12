@@ -14,11 +14,13 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 Let `f : X ⟶ Y` be an étale monomorphism, for instance an isomorphism, and `R` the restriction
 of étale sheaves along `f` (`AlgebraicGeometry.Scheme.etaleRestriction`). Then `R 𝔾ₘ = 𝔾ₘ`
-(definitionally), `R μₙ ≅ μₙ` (`AlgebraicGeometry.Scheme.rootsOfUnityRestrictionIso`), and the
-induced maps on cohomology `H^q(Y, -) ⟶ H^q(X, -)` commute with the Kummer maps
-(`AlgebraicGeometry.Scheme.kummerδ₁_etaleRestrictionH`) and with the identification
-`Pic = H¹(-, 𝔾ₘ)`, under which they are the pullback of line bundles
-(`AlgebraicGeometry.Scheme.etaleRestrictionH_toCohomologicalPicardGroup`).
+(definitionally), `R μₙ ≅ μₙ` (`AlgebraicGeometry.Scheme.rootsOfUnityRestrictionIso`), the
+Kummer sequence of `Y` restricts to that of `X`
+(`AlgebraicGeometry.Scheme.kummerSequenceRestriction`), and the restriction of the `𝔾ₘ`-torsor
+`Isom(𝒪_Y, L)` is `Isom(𝒪_X, f^* L)`
+(`AlgebraicGeometry.Scheme.Modules.etaleIsoTorsor_restrict_equiv`). Hence under the
+identification `Pic = H¹(-, 𝔾ₘ)` the induced map `H¹(Y, 𝔾ₘ) ⟶ H¹(X, 𝔾ₘ)` is the pullback of
+line bundles (`AlgebraicGeometry.Scheme.etaleRestrictionH_toCohomologicalPicardGroup`).
 -/
 
 @[expose] public section
