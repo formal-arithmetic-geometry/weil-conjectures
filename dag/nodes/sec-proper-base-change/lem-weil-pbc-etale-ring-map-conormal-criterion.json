@@ -26,67 +26,49 @@
  ],
  "proof": [
   {
-   "text": "*$\\mathrm d$ is well defined and $S$-linear.* The map $D:P\\to\\bigoplus_kS\\,\\mathrm dx_k$, $D(g)=\\sum_k\\alpha(\\partial g/\\partial x_k)\\,\\mathrm dx_k$, is additive and satisfies $D(hg)=\\alpha(h)D(g)+\\alpha(g)D(h)$ by the Leibniz rule for each $\\partial/\\partial x_k$. For $g\\in J$ and $h\\in P$ this gives $D(hg)=\\alpha(h)D(g)$ since $\\alpha(g)=0$; in particular $D(J^2)=0$ (take $h\\in J$, so $\\alpha(h)=0$). Hence $D|_J$ factors through $J/J^2$, and the resulting map $\\mathrm d$ is linear for the $S=P/J$-module structure of $J/J^2$ ($\\bar h\\cdot(g\\bmod J^2)=hg\\bmod J^2$).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, text before Lemma Tag 00S1 (the complex NL(alpha): the class of f in I/I^2 maps to df (x) 1), line ~35190"
-   }
+   "text": "Set P = MvPolynomial (Fin n) R and give S its P-algebra structure using alpha. Transport the quotient action on J.Cotangent along e.symm. The identity e.symm(alpha(p)) = mk J p gives IsScalarTower P S J.Cotangent. Mathlib KaehlerDifferential.kerCotangentToTensor constructs the P-linear conormal map c and LinearMap.extendScalarsOfSurjective makes it S-linear without changing its underlying function.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true
   },
   {
-   "text": "*The polynomial ring.* By [lem-weil-pbc-polynomial-ring-kahler-basis], $\\Omega_{P/R}$ is free with basis $\\mathrm dx_1,\\dots,\\mathrm dx_n$, in particular a projective $P$-module, and $\\mathrm dg=\\sum_k(\\partial g/\\partial x_k)\\,\\mathrm dx_k$ for $g\\in P$; by [lem-weil-pbc-polynomial-ring-h1-cotangent-vanishing], $H_1(L_{P/R})=0$ [def-weil-pbc-smooth-ring-map]. Consequently $S\\otimes_P\\Omega_{P/R}$ is the free $S$-module with basis $1\\otimes\\mathrm dx_k$, and the $S$-linear isomorphism $\\iota:S\\otimes_P\\Omega_{P/R}\\to\\bigoplus_kS\\,\\mathrm dx_k$, $1\\otimes\\mathrm dx_k\\mapsto\\mathrm dx_k$, sends $1\\otimes\\mathrm dg=\\sum_k\\alpha(\\partial g/\\partial x_k)\\,(1\\otimes\\mathrm dx_k)$ to $\\sum_k\\alpha(\\partial g/\\partial x_k)\\,\\mathrm dx_k$.",
+   "text": "Use KaehlerDifferential.mvPolynomialBasis and its scalar extension b to identify S tensor Omega[P/R] with Fin n -> S via b.repr and Finsupp.linearEquivFunOnFinite. Set d = t composed with c. The definition of c on toCotangent, Basis.baseChange_repr_tmul, and mvPolynomialBasis_repr_apply give d(g mod J^2)(i) = alpha(pderiv i g).",
    "uses": [
-    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-polynomial-ring-kahler-basis"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "P is formally smooth by the polynomial instance. Mathlib Algebra.FormallySmooth.kerCotangentToTensor_injective_iff h_alpha identifies injectivity of c with Subsingleton (H1Cotangent R S), directly using presentation independence rather than the project Jacobi-Zariski quotient sequence. Mathlib KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange and mapBaseChange_surjective give surjectivity of c iff Subsingleton Omega[S/R]: in the forward direction every differential is w(c(a)) = 0; in the reverse direction w(x) = 0 so exactness gives a preimage of x under c.",
+   "uses": [
     "lem-weil-pbc-polynomial-ring-h1-cotangent-vanishing",
     "def-weil-pbc-smooth-ring-map",
     "def-weil-pbc-kahler-differentials"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00RX (lemma-differentials-polynomial-ring, line 34306) and Lemma Tag 08Q1 (lemma-NL-polynomial-algebra, line 35391)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Kernel and cokernel of $\\mathrm d$.* Apply [lem-weil-pbc-jacobi-zariski-quotient-smooth] with $A=R$, $B=P$ (its hypotheses $H_1(L_{P/R})=0$ and $\\Omega_{P/R}$ projective hold by the previous step), $\\mathfrak a=J$ and $C=P/J=S$ (with the $R$-algebra structure $R\\to P\\to S$, which is the given one since $\\alpha$ is a homomorphism of $R$-algebras). It gives an exact sequence of $S$-modules $0\\to H_1(L_{S/R})\\to J/J^2\\xrightarrow{\\delta}S\\otimes_P\\Omega_{P/R}\\xrightarrow{w}\\Omega_{S/R}\\to0$ with $\\delta(g\\bmod J^2)=1\\otimes\\mathrm dg$. By the previous step $\\iota\\circ\\delta=\\mathrm d$ with $\\iota$ an isomorphism. Hence $\\ker\\mathrm d\\cong H_1(L_{S/R})$ and $\\operatorname{coker}\\mathrm d\\cong\\Omega_{S/R}$, so $\\mathrm d$ is bijective if and only if $H_1(L_{S/R})=0$ and $\\Omega_{S/R}=0$.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-quotient-smooth",
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL, Jacobi-Zariski sequence, line 35412) for R -> P -> S, with Lemma Tag 07BP (lemma-NL-surjection) and Lemma Tag 00RU (lemma-differential-seq, line 34103); this replaces the appeal to Lemma Tag 00S1 (lemma-NL-homotopy) in the proof of Lemma Tag 00U9 (lemma-etale-standard-smooth, line 39265: 'As R -> S is etale we know that d : I/I^2 -> (+) S dx_i is an isomorphism')"
-   }
-  },
-  {
-   "text": "*Conclusion.* $S\\cong P/J=R[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$ for generators $g_1,\\dots,g_m$ of the finitely generated ideal $J$, so $S$ is a finitely presented $R$-algebra. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is etale [def-weil-etale-morphism] if and only if $S$ is finitely presented over $R$, $H_1(L_{S/R})=0$ and $\\Omega_{S/R}=0$; the first condition holds, and by the previous step the other two together are equivalent to bijectivity of $\\mathrm d$.",
+   "text": "The finite presentation instance is supplied directly by n, alpha, h_alpha and h_fg. Apply HasRingHomProperty.Spec_iff, RingHom.etale_algebraMap, Algebra.etale_iff and Algebra.formallyEtale_iff. Since t is a linear equivalence, d is bijective iff c is bijective. Substitute the two preceding equivalences and rearrange the conjunction to conclude.",
    "uses": [
     "lem-weil-pbc-etale-ring-map-iff-etale-affine",
     "def-weil-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Definition Tag 00U1 (definition-etale, line 39245); literature/stacks-project/morphisms.tex Lemma Tag 02GJ (lemma-etale-characterize, line 8090) with Definition Tag 02GI, via [lem-weil-pbc-etale-ring-map-iff-etale-affine]"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
   "lem-weil-pbc-polynomial-ring-kahler-basis",
   "lem-weil-pbc-polynomial-ring-h1-cotangent-vanishing",
   "def-weil-pbc-smooth-ring-map",
-  "def-weil-pbc-kahler-differentials",
-  "lem-weil-pbc-jacobi-zariski-quotient-smooth",
   "lem-weil-pbc-etale-ring-map-iff-etale-affine",
   "def-weil-etale-morphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "Y2 stage 3",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Definition Tag 00U1 and the argument in the proof of Lemma Tag 00U9 (d : I/I^2 -> (+) S dx_i is an isomorphism for etale R -> S), with kernel and cokernel of d computed by the Jacobi-Zariski sequence Lemma Tag 00S2 for R -> R[x_1..x_n] -> S (polynomial ring: Lemmas Tag 00RX, 08Q1) instead of Lemma Tag 00S1; scheme side Morphisms Lemma Tag 02GJ"
+  "place": "Tags 00U1, 00U9, 00RU and presentation independence before 00S1; direct Mathlib conormal kernel/cokernel APIs replace the project Jacobi-Zariski sequence. Scheme comparison: morphisms.tex Tag 02GJ."
  },
  "mathlib_searches": [
   {
@@ -191,5 +173,15 @@
   "group": "G1",
   "result": "fix",
   "note": "R,S comm rings + R-algebra; n, P=MvPolynomial (Fin n) R; alpha surjective R-alg hom, ker FG; J/J^2 = Ideal.Cotangent with S-action transported along quotientKerEquivOfSurjective; free module Fin n -> S; d exists, S-linear, pderiv coordinate formula (unique by toCotangent surjectivity); FIX: etaleness of Spec S -> Spec R stated as AlgebraicGeometry.Etale (Spec.map (CommRingCat.ofHom (algebraMap R S))) per def-weil-etale-morphism / STATE ETALE RING MAPS (node speaks of the scheme morphism), R S in one universe"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T085405-L-49962",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
