@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.DerivedPullbackCompositionIsIso
+import Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCoherence
 
 /-!
 # Composition and coherence of derived pullbacks
@@ -28,6 +28,28 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
+
+private theorem tensorDerivedCounit {X Y : Scheme.{u₁}} (f : X ⟶ Y)
+    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace))] :
+    ∃ (_ : (Scheme.Modules.tensorPullback f).Additive)
+      (ε : DerivedCategory.Qh ⋙ derivedPullback f ⟶
+        (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+          DerivedCategory.Qh
+            (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace))),
+      (derivedPullback f).IsLeftDerivedFunctor ε
+        (HomotopyCategory.quasiIso
+          (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) ∧
+      ∀ P : CochainComplex (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) ℤ,
+        CochainComplex.IsKFlat (R := Y.sheaf) P →
+          IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+    E, hE, hEmap, hEadd, ε, hL, htri, hK⟩ :=
+      Classical.choose_spec (exists_derivedPullback f)
+  have h : E = Scheme.Modules.tensorPullback f :=
+    CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
+  subst E
+  exact ⟨hEadd, ε, hL, hK⟩
 
 /-- The canonical composition comparisons `c f g : Lf^* ∘ Lg^* ≅ L(g ∘ f)^*` of derived
 pullbacks, together with identity comparisons `i X : L(id_X)^* ≅ id`, both unit laws and
@@ -106,6 +128,46 @@ theorem exists_derivedPullbackComposition
               Functor.isoWhiskerLeft (derivedPullback g) (c h f) ≪≫ c (h ≫ f) g ≪≫
                 eqToIso (congrArg (fun k : W ⟶ Z => derivedPullback k)
                   (Category.assoc h f g))) := by
-  sorry
+  classical
+  let a : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y),
+      (Scheme.Modules.tensorPullback f).Additive := fun f ↦
+    Classical.choose (tensorDerivedCounit f)
+  let ε : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y),
+      DerivedCategory.Qh ⋙ derivedPullback f ⟶
+        (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+          DerivedCategory.Qh (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)) :=
+    fun f ↦ Classical.choose (Classical.choose_spec (tensorDerivedCounit f))
+  have hL := fun {X Y : Scheme.{u₁}} (f : X ⟶ Y) ↦
+    (Classical.choose_spec (Classical.choose_spec (tensorDerivedCounit f))).1
+  have hK := fun {X Y : Scheme.{u₁}} (f : X ⟶ Y) ↦
+    (Classical.choose_spec (Classical.choose_spec (tensorDerivedCounit f))).2
+  let c : ∀ {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z),
+      derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) := fun {X Y Z} f g ↦ by
+    have := isIso_derivedPullbackCompositionLift a ε hL hK f g
+    exact asIso ((derivedPullback (f ≫ g)).leftDerivedLift (ε (f ≫ g))
+            (HomotopyCategory.quasiIso
+              (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ))
+            (derivedPullback g ⋙ derivedPullback f)
+            ((Functor.associator DerivedCategory.Qh (derivedPullback g)
+                (derivedPullback f)).inv ≫
+              Functor.whiskerRight (ε g) (derivedPullback f) ≫
+              (Functor.associator _ DerivedCategory.Qh (derivedPullback f)).hom ≫
+              Functor.whiskerLeft _ (ε f) ≫
+              (Functor.associator _ _
+                (DerivedCategory.Qh (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)))).inv ≫
+              Functor.whiskerRight
+                (Functor.mapHomotopyCategoryCompIso
+                  ((conjugateIsoEquiv
+                    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g)))
+                    ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
+                      (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm
+                    (Scheme.Modules.pushforwardComp f g).symm)
+                  (ComplexShape.up ℤ)).hom
+                (DerivedCategory.Qh
+                (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)))))
+  refine ⟨a, ε, hL, c, ?_, ?_⟩
+  · intro X Y Z f g
+    rfl
+  · exact derivedPullbackComposition_coherence a ε hL hK c (fun _ _ ↦ rfl)
 
 end AlgebraicGeometry
