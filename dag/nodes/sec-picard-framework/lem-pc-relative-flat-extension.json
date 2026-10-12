@@ -14,27 +14,40 @@
  ],
  "proof": [
   {
-   "text": "The prescribed map r:Q -> Cone(f), followed by Cone(f) -> E[1], determines a distinguished triangle E -> F -> Q -> E[1]. Realize F by the shifted cone of this composite; the inclusion E -> F is degreewise split and F^i is isomorphic to E^i plus Q^i. A common bound for E and Q bounds F, and finite coproduct flatness makes its terms flat.",
+   "text": "Write the components of r as a^i:Q^i → E^{i+1} and b^i:Q^i → H^i using mappingCone.fst and mappingCone.snd. The chain map identity for r gives a^i d_E + d_Q a^{i+1}=0 and d_Q b^{i+1}=a^i f^{i+1}+b^i d_H. Construct F with F^i=E^i ⊞ Q^i and differential matrix ((d_E,-a),(0,d_Q)). The first identity proves the differential squares to zero. The inclusion t of E and the map g=(f,b) are chain maps, and t followed by g equals f strictly by the biproduct identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose the maximum of the given bounds for E and Q. Above it both summands are zero, so F is zero. Apply finite coproduct flatness to the ULift WalkingPair family of the two terms, and transport its exact tensor functor along the canonical isomorphism of that coproduct with the binary biproduct. Thus every F^i is flat.",
    "uses": [
     "lem-pc-sites-modules-coproduct-flat"
    ],
    "elementary": false
   },
   {
-   "text": "The identity on E and r extend to a morphism from this triangle to the cone triangle E -> H -> Cone(f) -> E[1]. Its middle map g:F -> H is quasi-isomorphic by the long exact cohomology sequences, since identity on E and r are quasi-isomorphisms. The square with E initially commutes up to homotopy. Extend that homotopy to F by precomposing each component with the degreewise retraction F^i -> E^i and subtract its homotopy differential from g. The new g is a chain map, has the same cohomology maps, and satisfies t followed by g equals f strictly.",
+   "text": "The summands of Cone(g)^i are E^{i+1}, Q^{i+1}, H^i, whereas Cone(r)^i has summands Q^{i+1}, E^{i+1}, H^i. Define a degreewise isomorphism permuting the first two summands. Verify its inverse using the cone inclusions and projections. Check differential compatibility by projecting to the three summands: the Q coordinate uses d_F followed by snd = snd followed by d_Q; the E coordinate uses d_F followed by fst = fst followed by d_E minus snd followed by a; the H coordinate uses g=(f,b). These are the defining matrix identities.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "Apply the cone acyclicity criterion [lem-pur-quasi-iso-cone-acyclic] to r and g. The hypothesis hr makes Cone(r) acyclic. The explicit complex isomorphism transfers vanishing of its homology to Cone(g); the criterion then gives QuasiIso g. This is the existing sorry-free source-library theorem, used as a tool, not a different unit route.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-sites-modules-coproduct-flat"
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pur-quasi-iso-cone-acyclic"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "V2",
+  "group": "A2",
   "date": "2026-10-12",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; https://stacks.math.columbia.edu/tag/06XX; separated triangle realization and generalized the source disk addition to every degree below the bound"
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), triangle construction in the induction step; direct signed matrix realization and cone-coordinate permutation verified in Lean. https://stacks.math.columbia.edu/tag/06XX"
  },
  "mathlib_searches": [
   {
@@ -103,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "X-da0fb",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T110323-L-623448",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135213-L-1653842",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged Lean signature to the node and the proof to its recorded dependencies; delivery and sole direct importer compile cleanly, and both proved declarations use only permitted axioms."
  }
 }
