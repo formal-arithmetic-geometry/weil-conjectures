@@ -6,10 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.PseudoCoherentQCohDegree
 
 /-! # Quasi-coherent cohomology of pseudo-coherent complexes
 
@@ -45,6 +42,7 @@ theorem schemeDerivedQCohProperty_of_isPseudoCoherent (Y : Scheme.{u})
       HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]
     (E : schemeDerivedCategory Y) (hE : IsPseudoCoherent Y E) :
     schemeDerivedQCohProperty Y E := by
-  sorry
+  intro n
+  exact schemeDerivedQCohProperty_of_isPseudoCoherent_degree Y E hE n
 
 end AlgebraicGeometry.Scheme

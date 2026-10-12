@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-pseudo-coherent-qcoh-degree",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pseudo-coherent-qcoh",
+   "place": "degreewise reduction of Tag 08E5 proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A fixed pseudo-coherent cohomology sheaf is quasi-coherent",
+ "statement": "Let Y be a scheme and E a pseudo-coherent object of D(O_Y). For every integer n, the n-th cohomology sheaf of E is quasi-coherent.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E5, proof of Lemma 36.13.5"
+ },
+ "stmt_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-derived-category",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose around each point a bounded-above finite-free model supplied by pseudo-coherence. In the chosen degree, its cohomology is the quotient of the kernel of one differential by the image of the preceding differential. Finite free terms are quasi-coherent, and the kernel and cokernel/image closure results make this quotient quasi-coherent; the local identifications glue by locality of quasi-coherence.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E5, proof of Lemma 36.13.5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology sheaf of a pseudo-coherent complex is quasi-coherent",
+   "results": "No exact declaration found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fixed degree homology pseudo-coherent quasi-coherent sheaf",
+   "results": "No exact declaration found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPseudoCoherent IsQuasicoherent homologyFunctor",
+   "results": "No exact declaration found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor.*IsQuasicoherent pseudo coherent",
+   "results": "No exact declaration found",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PseudoCoherentQCoh",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentQCohDegree",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentQCohDegree.lean",
+  "declaration": "AlgebraicGeometry.Scheme.schemeDerivedQCohProperty_of_isPseudoCoherent_degree",
+  "statement": "theorem schemeDerivedQCohProperty_of_isPseudoCoherent_degree (Y : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (E : schemeDerivedCategory Y) (hE : IsPseudoCoherent Y E) (n : ℤ) : ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) n).obj E).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T223408-L-1637842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T223408-L-1637842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
