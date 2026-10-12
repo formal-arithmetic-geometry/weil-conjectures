@@ -163,7 +163,7 @@ Not open yet: 41 nodes that wait for stage 1.
 | `Sheaf.Paper.ZariskiEtaleResolutionMap` | 9 | 1 | proof |
 | `Sheaf.RingTheory.GradedNakayamaFree` | 9 | 1 | proof |
 | `Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic` | 9 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket` | 9 | 5 | proof |
+| `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket` | 9 | 9 | proof |
 | `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv` | 9 | 1 | proof |
 | `Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyAction` | 10 | 1 | proof |
 | `Sheaf.Algebra.Homology.DerivedInternalHomSingleComparison` | 10 | 1 | proof |
