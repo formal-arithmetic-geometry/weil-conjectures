@@ -31,66 +31,41 @@
  ],
  "proof": [
   {
-   "text": "For a G-torsor T, the canonical bijection of [lem-sc-torsor-h1] is represented by the short exact sequence $0\\to G\\to E_T\\to\\mathbf Z_X\\to0$ and sends [T] to the connecting image of 1. Pulling this sequence back along u and using [lem-sc-etale-torsor-inverse-image-extension] identifies the pulled-back extension with E_{u^{-1}T}, whose fibre over 1 is u^{-1}T.",
+   "text": "Use injectiveSequence_shortExact and exists_equiv_lifts from [lem-sc-torsor-h1] to choose a global quotient section s and an equivariant identification of T with its lifting torsor. Use [lem-sc-etale-inverse-image-lifting-torsor] to identify the set inverse image with the lifts of the pulled-back section; this supplies the required sheaf isomorphism and its equivariance.",
    "uses": [
     "lem-sc-torsor-h1",
-    "lem-sc-etale-torsor-inverse-image-extension"
+    "lem-sc-etale-inverse-image-lifting-torsor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 03AJ, construction by the extension E_T and functoriality under inverse image"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sc-etale-torsor-inverse-image-extension], $0\\to u^{-1}G\\to u^{-1}E_T\\to\\mathbf Z_Y\\to0$ is the inverse image of $0\\to G\\to E_T\\to\\mathbf Z_X\\to0$ and is the extension $E_{u^{-1}T}$. Clause 3 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder] (the pullback maps $u^*$ commute with the connecting maps, $u^*\\circ\\delta^0_X=\\delta^0_Y\\circ u^*$) gives $u^*(\\delta_{E_T}(1))=\\delta_{E_{u^{-1}T}}(u^*1)$, and $u^*1=1$ in $H^0(Y_{\\mathrm{Et}},\\mathbf Z_Y)$ since in degree zero $u^*$ is pullback of global sections [lem-weil-pbc-cohomology-pullback-degree-zero]. By the representative description in [lem-sc-torsor-h1], $\\delta_{E_T}(1)=[T]$ and $\\delta_{E_{u^{-1}T}}(1)=[u^{-1}T]$, proving clause (1).",
+   "text": "Rewrite both classes with classH1_lifts and H.delta_apply from [lem-sc-torsor-h1]. Expand cohomologyMap as exact-functor transport of Ext. Mathlib Ext.mapExactFunctor_comp and Ext.mapExactFunctor_extClass transport the boundary extension. The degree-zero identity [lem-weil-pbc-cohomology-pullback-degree-zero] identifies the initial Ext-zero class with the pulled-back quotient section. Ext.comp_assoc now gives the pullback equality.",
    "uses": [
-    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-    "lem-weil-pbc-cohomology-pullback-degree-zero",
     "lem-sc-torsor-h1",
-    "lem-sc-etale-torsor-inverse-image-extension"
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 03AJ, functoriality of the boundary class under inverse image"
-   }
+   "elementary": false
   },
   {
-   "text": "For a morphism $\\varphi:G\\to G'$ on S, represent [T] by the extension E_T from [lem-sc-torsor-h1]. By [lem-sc-etale-torsor-pushout-extension], its pushout along $\\varphi$ is a short exact sequence with fibre T wedge^G G'.",
+   "text": "Choose the contracted-product torsor and its presentation by [lem-sc-etale-contracted-product-exists]. The map t to q(t,0) is natural by quotient_natural. Substituting h=phi(g) in quotient_invariant and then using quotient_vadd with h=0 proves q(g+ t,0)=phi(g)+q(t,0).",
    "uses": [
-    "lem-sc-torsor-h1",
-    "lem-sc-etale-torsor-pushout-extension"
+    "lem-sc-etale-contracted-product-exists"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 03AJ, pushout of E_T along phi and identification of its fibre"
-   }
+   "elementary": false
   },
   {
-   "text": "The canonical map $E_T\\to E_T\\wedge^GG'$ together with $\\varphi$ and $\\mathrm{id}_{\\mathbf Z_S}$ is a morphism from $0\\to G\\to E_T\\to\\mathbf Z_S\\to0$ to the pushout sequence of [lem-sc-etale-torsor-pushout-extension]. Etale cohomology $H^q(S_{\\mathrm{Et}},-)$ is the right derived functor of the left exact functor $\\Gamma(S,-)$ on $\\Ab(S_{\\mathrm{Et}})$ (which has enough injectives), so by [lem-weil-pbc-right-derived-universal-delta-functor] it is a $\\delta$-functor, whose connecting maps commute with morphisms of short exact sequences: $H^1(\\varphi)(\\delta_{E_T}(1))=\\delta_{E_T\\wedge^GG'}(\\mathrm{id}(1))=\\delta_{E_T\\wedge^GG'}(1)$, with $H^1(\\varphi)$ the map of [lem-weil-pbc-cohomology-pullback-functorial]. The representative description of [lem-sc-torsor-h1], applied to the $G'$-torsor $T\\wedge^GG'$ (the fibre over $1$ of the pushout sequence), therefore identifies $H^1(\\varphi)([T])$ with $[T\\wedge^GG']$, proving clause (2).",
+   "text": "Apply the already proved classH1_eq_map_of_equivariant from [lem-sc-torsor-h1] to this map. Symmetry yields the coefficient-change equality.",
    "uses": [
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-sc-torsor-h1",
-    "lem-sc-etale-torsor-pushout-extension"
+    "lem-sc-torsor-h1"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 03AJ, naturality of the boundary class under change of coefficients"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-etale-contracted-product-exists",
+  "lem-sc-etale-inverse-image-lifting-torsor",
   "lem-sc-torsor-h1",
-  "lem-sc-etale-torsor-inverse-image-extension",
-  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-  "lem-weil-pbc-cohomology-pullback-degree-zero",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-sc-etale-torsor-pushout-extension"
+  "lem-weil-pbc-cohomology-pullback-degree-zero"
  ],
  "mathlib_searches": [
   {
@@ -126,9 +101,10 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-ext-invariance",
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 03AJ and functoriality of the torsor extension"
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-12",
+  "note": "Lean reduction using the already proved lifting-torsor classification and equivariant-map naturality, and Ext exact-functor boundary transport; two strictly geometric construction lemmas remain."
  },
  "split_report": {
   "date": "2026-10-11",
@@ -201,5 +177,15 @@
   "reviewer": "R-thf",
   "group": "J1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085356-L-46288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

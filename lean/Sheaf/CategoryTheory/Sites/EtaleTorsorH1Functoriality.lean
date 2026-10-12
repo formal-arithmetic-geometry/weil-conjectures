@@ -10,11 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension
-import Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension
+import Sheaf.CategoryTheory.Sites.EtaleInverseImageLiftingTorsor
+import Sheaf.CategoryTheory.Sites.EtaleContractedProductExists
 
 /-!
 # Functoriality of the étale torsor classification of H¹
@@ -83,6 +80,47 @@ theorem etale_torsor_h1_functoriality :
       ∃ T' : Torsor G', Nonempty (ContractedProductPresentation.{u, u} S φ T T') ∧
         H.map φ 1 (classH1 G terminalIsTerminal ⟦T⟧) =
           classH1 G' terminalIsTerminal ⟦T'⟧) := by
-  sorry
+  constructor
+  · intro X Y f G T
+    let S := injectiveSequence G
+    have hS := injectiveSequence_shortExact G
+    obtain ⟨s, hs⟩ := exists_equiv_lifts terminalIsTerminal hS T
+    let U := Etale.upperStar AddCommGrpCat.{u + 1} f
+    have hY := hS.map_of_exact U
+    let g := (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}
+      terminalIsTerminal).inv.app S.X₃ s
+    let s' := (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}
+      terminalIsTerminal).hom.app (U.obj S.X₃)
+      (Etale.globalSectionsUpperStarMap AddCommGrpCat.{u + 1} f S.X₃ g)
+    let T' := lifts terminalIsTerminal hY s'
+    obtain ⟨eT, heT⟩ := etale_inverse_image_lifting_torsor X Y f S hS s T hs
+    refine ⟨T', eT, heT, ?_⟩
+    rw [_root_.Quotient.sound hs, classH1_lifts, classH1_lifts]
+    rw [H.δ_apply, H.δ_apply, Etale.cohomologyMap_apply,
+      Abelian.Ext.mapExactFunctor_comp, Abelian.Ext.mapExactFunctor_extClass]
+    have hz := Etale.cohomologyMap_zero_eq_globalSectionsUpperStarMap f S.X₃ g
+    have hg : (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}
+        terminalIsTerminal).hom.app S.X₃ g = s := by
+      exact ConcreteCategory.congr_hom
+        ((Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}
+          terminalIsTerminal).inv_hom_id_app S.X₃) s
+    rw [hg, Etale.cohomologyMap_apply] at hz
+    change _ = ((H.equiv₀ (U.obj S.X₃) terminalIsTerminal).symm s').comp hY.extClass _
+    rw [← hz]
+    exact (Abelian.Ext.comp_assoc _ _ _ (zero_add 0) (zero_add 1) (by omega)).symm
+  · intro S G G' φ T
+    obtain ⟨T', ⟨q⟩⟩ := etale_contracted_product_exists S φ T
+    refine ⟨T', ⟨q⟩, ?_⟩
+    apply (classH1_eq_map_of_equivariant terminalIsTerminal φ T T'
+      (fun U t ↦ q.quotient U t 0) ?_ ?_).symm
+    · intro U V f t
+      simpa using q.quotient_natural f t 0
+    · intro U a t
+      have h := q.quotient_invariant U a t (φ.hom.app U a)
+      calc
+        q.quotient U (T.vadd U a t) 0 = q.quotient U t (φ.hom.app U a) := by
+          simpa using h
+        _ = T'.vadd U (φ.hom.app U a) (q.quotient U t 0) := by
+          simpa using q.quotient_vadd U t 0 (φ.hom.app U a)
 
 end CategoryTheory.Sheaf.Torsor

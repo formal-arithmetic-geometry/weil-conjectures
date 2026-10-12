@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-etale-contracted-product-exists",
+ "kind": "statement",
+ "title": "Existence of the contracted product of an etale torsor",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\varphi:G\\to G^{\\prime}$ a morphism of abelian sheaves [def-weil-pbc-abelian-etale-sheaves] on its small etale site, and $T$ a $G$-torsor [def-sc-gm-torsor]. There exists a $G^{\\prime}$-torsor $T^{\\prime}$ carrying a contracted-product presentation [def-sc-contracted-product-presentation]: it is the sheafification of the sectionwise orbit presheaf of $T\\times G^{\\prime}$ for $(g,t,h)\\mapsto(g+ t,h-\\varphi(g))$, with the natural invariant quotient map, translation by $G^{\\prime}$ on the second factor, and the universal property against every sheaf of sets.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, label lemma-torsors-h1, fibre-of-a-section construction; contracted-product construction from lem-sc-etale-torsor-pushout-extension step 2; torsors as in Tag 03AH"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-gm-torsor",
+  "def-sc-contracted-product-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Form the sectionwise orbit presheaf and sheafify it using [def-weil-pbc-sheafification]. Restriction respects the antidiagonal relation; the quotient map is natural and invariant. Translation in the second factor commutes with the relation and descends, then extends through sheafification.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-sc-contracted-product-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a covering where T has a section t0, each orbit has a unique representative (t0,h). This identifies the quotient sheaf locally with G prime and identifies its action with translation. Local nonemptiness and simple transitivity give the torsor axioms. This also applies to the zero group, zero coefficient map, and empty scheme.",
+   "uses": [
+    "def-sc-gm-torsor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A natural invariant map to a sheaf F factors uniquely through the orbit presheaf, by the set quotient universal property, and then uniquely through its sheafification, by [def-weil-pbc-sheafification]. These factorizations, the invariant quotient map and its translation equation are exactly [def-sc-contracted-product-presentation].",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-sc-contracted-product-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-contracted-product-presentation",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-12",
+  "note": "Detailed argument specialized from the existing node proof and Stacks 03AJ, read at https://stacks.math.columbia.edu/tag/03AJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsor|contracted.product",
+   "results": "0 hits: ; none states this geometric construction",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The contracted product of a torsor under an abelian sheaf G along a map G to G prime exists as the sheafification of the orbit quotient",
+   "results": "8 hits: CategoryTheory.typesGlue, PresheafOfModules.Sheafify.SMulCandidate.mk', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.Sheaf.H, PresheafOfModules.Sheafify.instNonemptySMulCandidate, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightCondAb.ofSheafLightProfinite; none states this geometric construction",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheafified contracted product of a sheaf torsor and a group sheaf along a group sheaf homomorphism exists and is a torsor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"quotient\"",
+   "results": "0 hits; no contracted-product torsor existence theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Proper and affine cases: compatibility of the Kummer/Picard torsor-class identifications with pullback; geometric contracted-product construction for coefficient change",
+   "via": [
+    "lem-sc-etale-torsor-h1-functoriality",
+    "lem-sc-h1-gm-pic-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.EtaleContractedProductExists",
+  "file": "lean/Sheaf/CategoryTheory/Sites/EtaleContractedProductExists.lean",
+  "declaration": "CategoryTheory.Sheaf.Torsor.etale_contracted_product_exists",
+  "statement": "theorem etale_contracted_product_exists (S : Scheme.{u}) {G G' : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : G ⟶ G') (T : Torsor G) : ∃ T' : Torsor G', Nonempty (ContractedProductPresentation.{u, u} S φ T T')",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085356-L-46288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085356-L-46288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
