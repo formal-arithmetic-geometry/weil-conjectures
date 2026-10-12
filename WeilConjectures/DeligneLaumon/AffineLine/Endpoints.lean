@@ -215,7 +215,8 @@ theorem nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le
   have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   set A := (WeilSheaf.directImage j).obj F
   set B := (WeilSheaf.upperStar i).obj A
-  obtain ⟨α, β, γ, hT⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_openClosed j i hij
+  obtain ⟨α, β, γ, hT⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_structure_openClosed j i
+    hij
     (WeilSheaf.toComplex.obj A)
   set T := Triangle.mk α β γ
   have hA : A = (WeilSheaf.lowerStar j).obj F := rfl

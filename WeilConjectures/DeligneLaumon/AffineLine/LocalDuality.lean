@@ -151,7 +151,8 @@ theorem exists_exact_compactlySupportedCohomology_boundary
   have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := inferInstance
   -- the open–closed triangle `RΓ_c(U, j^*K) → RΓ_c(C, K) → RΓ_c(Z, i^*K) →` for `K = j_*F`
-  obtain ⟨α, β, γ, hT⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_openClosed j i hij
+  obtain ⟨α, β, γ, hT⟩ := WeilComplex.exists_distTriang_derivedLowerShriek_structure_openClosed j i
+    hij
     (WeilSheaf.toComplex.obj A)
   set T := Triangle.mk α β γ
   -- identification of the outer terms
