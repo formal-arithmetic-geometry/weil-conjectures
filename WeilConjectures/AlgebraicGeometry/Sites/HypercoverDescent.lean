@@ -175,6 +175,20 @@ instance [CompactSpace X] [QuasiSeparatedSpace X] (J : Type) [SmallCategory J] [
     preservesFiniteLimits_of_preservesTerminal_and_pullbacks _
   exact (qcqs X).isClosedUnderLimitsOfShape_of_preservesLimitsOfShape_ι _
 
+/-- Base change of quasi-compact quasi-separated étale schemes to a quasi-compact quasi-separated
+scheme. -/
+lemma qcqs_baseChange {Y : Scheme.{u}} (f : X ⟶ Y) [CompactSpace X] [QuasiSeparatedSpace Y]
+    [QuasiSeparatedSpace X] {A : Y.Etale} (hA : qcqs Y A) :
+    qcqs X ((baseChangeFunctor f).obj A) := by
+  obtain ⟨_, _⟩ := hA
+  have : CompactSpace ((𝟭 Scheme).obj A.left) := inferInstanceAs (CompactSpace A.left)
+  have : QuasiSeparatedSpace ((𝟭 Scheme).obj A.left) := inferInstanceAs (QuasiSeparatedSpace A.left)
+  have : QuasiSeparatedSpace ((Functor.fromPUnit Y).obj A.right) :=
+    inferInstanceAs (QuasiSeparatedSpace Y)
+  have : QuasiCompact A.hom := quasiCompact_of_compactSpace _
+  exact ⟨inferInstanceAs (CompactSpace ↥(pullback A.hom f)),
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd A.hom f)⟩
+
 /-- Matching objects of quasi-compact quasi-separated étale schemes over a quasi-compact
 quasi-separated scheme are quasi-compact and quasi-separated. -/
 lemma qcqs_matching [CompactSpace X] [QuasiSeparatedSpace X] (V : SemiSimplicialObject X.Etale)
@@ -251,9 +265,9 @@ lemma exists_hom_descent_stage {k : I} {A B : (D.obj k).Etale} [CompactSpace A.l
     [QuasiSeparatedSpace A.left] {V : c.pt.Etale} {mA : V.left ⟶ A.left}
     (hA : IsPullback mA V.hom A.hom (c.π.app k)) (φ : V.left ⟶ B.left)
     (hφ : φ ≫ B.hom = V.hom ≫ c.π.app k) :
-    ∃ (k' : I) (g : k' ⟶ k), ∀ (k'' : I) (g' : k'' ⟶ k'),
-      ∃ ψ : (MorphismProperty.Over.pullback @Etale ⊤ (D.map (g' ≫ g))).obj A ⟶
-          (MorphismProperty.Over.pullback @Etale ⊤ (D.map (g' ≫ g))).obj B,
+    ∃ (k' : I) (g : k' ⟶ k), ∀ (k'' : I) (g' : k'' ⟶ k') (h : k'' ⟶ k), g' ≫ g = h →
+      ∃ ψ : (MorphismProperty.Over.pullback @Etale ⊤ (D.map h)).obj A ⟶
+          (MorphismProperty.Over.pullback @Etale ⊤ (D.map h)).obj B,
         pullback.lift mA (V.hom ≫ c.π.app k'') (by rw [hA.w, Category.assoc, c.w]) ≫
           ψ.left ≫ pullback.fst _ _ = φ := by
   have : CompactSpace ((𝟭 Scheme).obj A.left) := inferInstanceAs (CompactSpace A.left)
@@ -264,7 +278,8 @@ lemma exists_hom_descent_stage {k : I} {A B : (D.obj k).Etale} [CompactSpace A.l
     (c.whisker (Over.forget k)) (isLimitOverStage hc k) (overStageπ k) (k := Over.mk (𝟙 k))
     A.hom B.hom (hA.isoPullback.inv ≫ φ) (by
       simp [hφ, IsPullback.isoPullback_inv_snd_assoc])
-  refine ⟨k'.left, f.left, fun k'' g' ↦ ?_⟩
+  refine ⟨k'.left, f.left, fun k'' g' _ hg ↦ ?_⟩
+  subst hg
   have hfk : f.left = k'.hom := by simpa using Over.w f
   let ψ' : pullback A.hom (D.map (g' ≫ f.left)) ⟶ B.left :=
     pullback.map A.hom (D.map (g' ≫ f.left)) A.hom (D.map f.left) (𝟙 _) (D.map g') (𝟙 _)
@@ -413,17 +428,7 @@ variable [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] 
 /-- Moving a descent datum to a later stage, by base change. -/
 noncomputable def baseChange {k' : I} (g : k' ⟶ k) : TruncatedDescent c U N k' where
   T := d.T.map (MorphismProperty.Over.pullback @Etale ⊤ (D.map g))
-  qcqs n h := by
-    obtain ⟨_, _⟩ := d.qcqs n h
-    have : CompactSpace ((𝟭 Scheme).obj (d.T.obj n h).left) :=
-      inferInstanceAs (CompactSpace (d.T.obj n h).left)
-    have : QuasiSeparatedSpace ((𝟭 Scheme).obj (d.T.obj n h).left) :=
-      inferInstanceAs (QuasiSeparatedSpace (d.T.obj n h).left)
-    have : QuasiSeparatedSpace ((Functor.fromPUnit (D.obj k)).obj (d.T.obj n h).right) :=
-      inferInstanceAs (QuasiSeparatedSpace (D.obj k))
-    have : QuasiCompact (d.T.obj n h).hom := quasiCompact_of_compactSpace _
-    exact ⟨inferInstanceAs (CompactSpace ↥(pullback (d.T.obj n h).hom (D.map g))),
-      quasiSeparatedSpace_of_quasiSeparated (pullback.snd (d.T.obj n h).hom (D.map g))⟩
+  qcqs n h := Scheme.Etale.qcqs_baseChange (D.map g) (d.qcqs n h)
   m n h := pullback.lift (d.m n h) ((U.obj n).hom ≫ c.π.app k')
     (by rw [(d.isPullback n h).w, Category.assoc, c.w g])
   isPullback n h := isPullback_lift_of_isPullback g (d.isPullback n h)
@@ -544,6 +549,111 @@ theorem exists_isHypercover (hc : IsLimit c) (hU : U.IsHypercover c.pt.smallEtal
 end Hypercover
 
 end TruncatedDescent
+
+section Existence
+
+variable [IsCofiltered I] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
+  [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)]
+
+/-- **Truncations of semi-simplicial qcqs étale schemes descend** to a stage (blueprint
+`lemma-weil-pbc-finite-hypercover-descent`): if all terms of `U` are quasi-compact and
+quasi-separated, its truncation in degrees `≤ N` is the base change of an `N`-truncated
+semi-simplicial object of the small étale site of some stage `Dₖ`. The finitely many terms, face
+maps and simplicial identities descend by `AlgebraicGeometry.exists_isPullback_etale`,
+`AlgebraicGeometry.exists_hom_descent_stage` and `AlgebraicGeometry.exists_eq_descent_stage`. -/
+theorem exists_truncatedDescent (hc : IsLimit c) (U : SemiSimplicialObject c.pt.Etale)
+    (hU : ∀ n, Scheme.Etale.qcqs _ (U.obj n)) (N : ℕ) :
+    ∃ k : I, Nonempty (TruncatedDescent c U N k) := by
+  classical
+  -- the terms descend
+  have hobj (n : Fin (N + 1)) := by
+    obtain ⟨_, _⟩ := hU n
+    exact exists_isPullback_etale hc (U.obj n)
+  choose j Y hY₁ hY₂ m₀ hm₀ using hobj
+  obtain ⟨K₁, hK₁⟩ := IsCofiltered.inf_objs_exists (Finset.univ.image j)
+  let a (n : Fin (N + 1)) : K₁ ⟶ j n := (hK₁ (Finset.mem_image_of_mem _ (Finset.mem_univ n))).some
+  let A (n : Fin (N + 1)) : (D.obj K₁).Etale :=
+    (Scheme.Etale.baseChangeFunctor (D.map (a n))).obj (Y n)
+  have hA (n : Fin (N + 1)) : Scheme.Etale.qcqs _ (A n) :=
+    Scheme.Etale.qcqs_baseChange _ ⟨hY₁ n, hY₂ n⟩
+  let m₁ (n : Fin (N + 1)) : (U.obj n).left ⟶ (A n).left :=
+    pullback.lift (m₀ n) ((U.obj n).hom ≫ c.π.app K₁) (by rw [(hm₀ n).w, Category.assoc, c.w])
+  have hm₁ (n : Fin (N + 1)) : IsPullback (m₁ n) (U.obj n).hom (A n).hom (c.π.app K₁) :=
+    isPullback_lift_of_isPullback (a n) (hm₀ n)
+  -- the face maps descend
+  have hface (p : Σ n : Fin N, Fin (n + 2)) := by
+    obtain ⟨_, _⟩ := hA p.1.succ
+    exact exists_hom_descent_stage hc (hm₁ p.1.succ)
+      ((U.δ p.1 p.2).left ≫ m₁ p.1.castSucc) (by
+        rw [Category.assoc, (hm₁ _).w, ← Category.assoc]
+        exact congrArg (· ≫ c.π.app K₁) (MorphismProperty.Over.w (U.δ p.1 p.2)))
+  choose kF gF hF using hface
+  obtain ⟨K₂, h₂, bF, hbF⟩ := IsCofiltered.exists_comp_eq_of_finite kF gF
+  let B (n : Fin (N + 1)) : (D.obj K₂).Etale :=
+    (Scheme.Etale.baseChangeFunctor (D.map h₂)).obj (A n)
+  have hB (n : Fin (N + 1)) : Scheme.Etale.qcqs _ (B n) := Scheme.Etale.qcqs_baseChange _ (hA n)
+  let m₂ (n : Fin (N + 1)) : (U.obj n).left ⟶ (B n).left :=
+    pullback.lift (m₁ n) ((U.obj n).hom ≫ c.π.app K₂) (by rw [(hm₁ n).w, Category.assoc, c.w])
+  have hm₂ (n : Fin (N + 1)) : IsPullback (m₂ n) (U.obj n).hom (B n).hom (c.π.app K₂) :=
+    isPullback_lift_of_isPullback h₂ (hm₁ n)
+  have hψ₀ (p : Σ n : Fin N, Fin (n + 2)) : ∃ ψ : B p.1.succ ⟶ B p.1.castSucc,
+      m₂ p.1.succ ≫ ψ.left ≫ pullback.fst _ _ = (U.δ p.1 p.2).left ≫ m₁ p.1.castSucc := by
+    exact hF p K₂ (bF p) h₂ (hbF p)
+  choose ψ hψ using hψ₀
+  have hψ' (p : Σ n : Fin N, Fin (n + 2)) :
+      m₂ p.1.succ ≫ (ψ p).left = (U.δ p.1 p.2).left ≫ m₂ p.1.castSucc := by
+    apply pullback.hom_ext
+    · simpa [m₂] using hψ p
+    · have h1 : (ψ p).left ≫ pullback.snd _ _ = pullback.snd _ _ := MorphismProperty.Over.w (ψ p)
+      rw [Category.assoc, h1, Category.assoc]
+      simp only [m₂, pullback.lift_snd]
+      exact (congrArg (· ≫ c.π.app K₂) (MorphismProperty.Over.w (U.δ p.1 p.2))).symm.trans
+        (Category.assoc _ _ _)
+  -- reindex by natural numbers
+  let B' (n : ℕ) (h : n ≤ N) : (D.obj K₂).Etale := B ⟨n, Nat.lt_succ_of_le h⟩
+  let m₂' (n : ℕ) (h : n ≤ N) : (U.obj n).left ⟶ (B' n h).left := m₂ ⟨n, Nat.lt_succ_of_le h⟩
+  let ψ' (n : ℕ) (h : n < N) (i : Fin (n + 2)) : B' (n + 1) h ⟶ B' n h.le := ψ ⟨⟨n, h⟩, i⟩
+  have hψ'' (n : ℕ) (h : n < N) (i : Fin (n + 2)) :
+      m₂' (n + 1) h ≫ (ψ' n h i).left = (U.δ n i).left ≫ m₂' n h.le :=
+    hψ' ⟨⟨n, h⟩, i⟩
+  -- the simplicial identities descend
+  have hid (q : Σ n : Fin N, MatchingIndex n) : ∃ (k' : I) (g : k' ⟶ K₂),
+      ∀ (k'' : I) (g' : k'' ⟶ k') (hq : q.1.1 + 1 < N),
+        (Scheme.Etale.baseChangeFunctor (D.map (g' ≫ g))).map
+            (ψ' (q.1 + 1) hq q.2.1.2.succ ≫ ψ' q.1 q.1.2 q.2.1.1) =
+          (Scheme.Etale.baseChangeFunctor (D.map (g' ≫ g))).map
+            (ψ' (q.1 + 1) hq q.2.1.1.castSucc ≫ ψ' q.1 q.1.2 q.2.1.2) := by
+    by_cases hq : q.1.1 + 1 < N
+    · obtain ⟨_, _⟩ := hB ⟨q.1 + 2, by omega⟩
+      obtain ⟨k', g, H⟩ := exists_eq_descent_stage hc (hm₂ _)
+        (ψ' (q.1 + 1) hq q.2.1.2.succ ≫ ψ' q.1 q.1.2 q.2.1.1)
+        (ψ' (q.1 + 1) hq q.2.1.1.castSucc ≫ ψ' q.1 q.1.2 q.2.1.2) (by
+          change m₂' (q.1 + 2) hq ≫ _ = m₂' (q.1 + 2) hq ≫ _
+          rw [Etale.etale_comp_left, Etale.etale_comp_left, reassoc_of% (hψ'' _ hq _),
+            reassoc_of% (hψ'' _ hq _), hψ'', hψ'', ← Etale.etale_comp_left_assoc,
+            ← Etale.etale_comp_left_assoc, U.δ_comp_δ _ q.2.2])
+      exact ⟨k', g, fun k'' g' _ ↦ H k'' g'⟩
+    · exact ⟨K₂, 𝟙 _, fun _ _ hq' ↦ absurd hq' hq⟩
+  choose kI gI hI using hid
+  obtain ⟨K₃, h₃, bI, hbI⟩ := IsCofiltered.exists_comp_eq_of_finite kI gI
+  refine ⟨K₃, ⟨{
+    T := {
+      obj n h := (Scheme.Etale.baseChangeFunctor (D.map h₃)).obj (B' n h)
+      δ n h i := (Scheme.Etale.baseChangeFunctor (D.map h₃)).map (ψ' n h i)
+      δ_comp_δ n hn i j hij := by
+        have H := hI ⟨⟨n, by omega⟩, ⟨(i, j), hij⟩⟩ K₃ (bI _) hn
+        rw [hbI] at H
+        simpa only [Functor.map_comp] using H }
+    qcqs n h := Scheme.Etale.qcqs_baseChange _ (hB _)
+    m n h := pullback.lift (m₂' n h) ((U.obj n).hom ≫ c.π.app K₃)
+      (by rw [(hm₂ _).w, Category.assoc, c.w])
+    isPullback n h := isPullback_lift_of_isPullback h₃ (hm₂ _)
+    m_δ n h i := by
+      apply pullback.hom_ext
+      · simpa using hψ'' n h i
+      · simp }⟩⟩
+
+end Existence
 
 end Descent
 
