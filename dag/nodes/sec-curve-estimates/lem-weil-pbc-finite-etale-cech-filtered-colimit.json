@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-finite-etale-cech-filtered-colimit",
+ "kind": "statement",
+ "title": "Finite etale Cech cohomology preserves filtered colimits when its sections do",
+ "statement": "Let $X$ be a scheme and $X_{\\mathrm{et}}$ its small etale site [def-weil-pbc-etale-site], with abelian sheaves as in [def-weil-pbc-abelian-etale-sheaves]. Let $U$ be an object, $K$ a finite set and $(f_k:V_k\\to U)_{k\\in K}$ a family of morphisms (not necessarily a covering). Let $I$ be a small filtered category [def-weil-pbc-category-colimit]. Assume for every $q\\geq0$ and $a:\\{0,\\ldots,q\\}\\to K$ that evaluation at $V_{a(0)}\\times_U\\cdots\\times_U V_{a(q)}$ preserves colimits of shape $I$. Then, for every $p\\geq0$, the functor from abelian sheaves to abelian groups taking $F$ to $\\check H^p((V_k\\to U)_{k\\in K},F)$ [def-weil-pbc-cech-complex] preserves colimits of shape $I$. In particular the image of each colimit cocone, with its original induced legs, is a colimit cocone.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739, lemma-colim-works-over-collection, final paragraph: Cech complexes commute with the filtered colimit and exact filtered colimits preserve their positive exactness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of the Cech complex, its degree q consists of evaluations at the iterated fibre products indexed by tuples a in K^(q+1). This is a finite index set, also when K is empty.",
+   "uses": [
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each q, assemble the assumed evaluation functors into a functor to diagrams over the discrete finite tuple type. Evaluation jointly detects colimits, so this diagram-valued functor preserves the colimit. HasBiproductsOfShape.colimIsoLim identifies the finite product functor with the coproduct functor, which preserves colimits. Pi.isoLimit identifies their composite with the degree-q Cech functor; naturality is Pi.map_π. Degreewise evaluation jointly detects colimits of complexes, so the entire Cech complex functor preserves the colimit.",
+   "uses": [
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uncarry a diagram D of short complexes into a short complex S of functors. The exact filtered-colimit functor L preserves homology. The cocone with vertex S.map L is a colimit because its three projections are the original colimit cocones. Objectwise mapHomologyIso identifies the diagram of its homology with S.homology. mapHomologyIso L identifies the homology of its vertex with colimit S.homology, and homologyMap_mapNatTrans verifies equality of the actual coprojection legs. Hence short-complex homology preserves these colimits. The functor taking the three terms adjacent to degree p preserves colimits, since each evaluation does, so complex homology also preserves them. Compose with the Cech complex functor of step 2.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cech-complex",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739, lemma-colim-works-over-collection, final paragraph; the same kernel/image argument also gives degree zero"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite Cech cohomology preserves filtered colimits when evaluation at every Cech nerve object preserves them",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Cech cohomology preserves filtered colimits when evaluation at every Cech nerve object preserves them",
+   "results": "filtered_colim_preservesFiniteLimits and variants; LightCondensed.isColimitLocallyConstantPresheaf; Condensed.isColimitLocallyConstantPresheaf; Profinite.Extend.isColimitCocone; preservesFiniteColimits_liftToFinset. Ingredients only; no Cech homology preservation theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*[Cc]olimit|[Cc]olimit.*cech|homologyFunctor.*[Cc]olimit",
+   "results": "Only Mathlib/AlgebraicTopology/CechNerve.lean:311 (colimit.ι_desc). Source library CohomologyColimit handles direct sums, not this comparison; no duplicate in lean/Sheaf.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFilteredInjectiveAcyclic",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohomology-filtered-colimit",
+   "place": "proof paragraph 2, Cech complexes of a filtered colimit are colimits of Cech complexes (stage-1 refinement step 5)",
+   "via": [
+    "lem-weil-pbc-etale-filtered-injective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleCechFilteredColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleCechFilteredColimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.preservesColimitsOfShape_finiteEtaleCechHomology",
+  "statement": "theorem preservesColimitsOfShape_finiteEtaleCechHomology\n    (X : Scheme.{u}) (U : X.Etale) (K : Type (u + 1)) [Finite K]\n    (V : K → X.Etale) (f : ∀ k : K, V k ⟶ U)\n    (I : Type u) [SmallCategory I] [IsFiltered I]\n    (hsections : ∀ (q : ℕ) (a : Fin (q + 1) → K),\n      PreservesColimitsOfShape I\n        ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n          (op (piObj (fun j : Fin (q + 1) ↦ Over.mk (f (a j)))).left)))\n    (p : ℕ) :\n    PreservesColimitsOfShape I\n      (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n        (Functor.whiskeringLeft (Over U)ᵒᵖ X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj\n          (Over.forget U).op ⋙\n        cechComplexFunctor (fun k : K ↦ Over.mk (f k)) ⋙\n        HomologicalComplex.homologyFunctor AddCommGrpCat.{u + 1} (ComplexShape.up ℕ) p)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T042418-L-1820343",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T042418-L-1820343",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
