@@ -9881,3 +9881,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/D2/Sheaf.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport (stage 3; reviewer PASS; first push; landing 20261012T225302-L-1802516 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/D3/Sheaf.RingTheory.PopescuReductionPresentation (stage 3; reviewer PASS; first push; landing 20261012T225303-L-1802693 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/D4/Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels (stage 3; reviewer PASS; first push; landing 20261012T225303-L-1802796 (interface); batch 20261012T225253; modules 3; new nodes 2)
+- 22:53 L: merged deliver/D4/Sheaf.Algebra.Homology.RestrictedComplementaryTruncationComparison (stage 3; reviewer PASS; first push; landing 20261012T225304-L-1802931 (proof); batch 20261012T225253; modules 1; new nodes 0)
