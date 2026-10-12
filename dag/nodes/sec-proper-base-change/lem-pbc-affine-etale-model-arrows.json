@@ -1,0 +1,116 @@
+{
+ "id": "lem-pbc-affine-etale-model-arrows",
+ "kind": "statement",
+ "title": "Affine étale model arrow descent",
+ "statement": "Let $I$ be a nonempty directed preorder and $D : I^{op} \\to \\mathrm{Scheme}$ a diagram of quasi-compact and quasi-separated schemes with affine transitions [def-pc-scheme, pqf-def-affine-morphism, def-weil-pbc-scheme-conventions]. Let $c$ be a limiting cone. Suppose functors $v_i : \\mathrm{FullAffineEtale}(D_i) \\to \\mathrm{FullAffineEtale}(c.pt)$ and natural transformations $q_i$ on underlying schemes have pullback squares over the cone projections [def-weil-pbc-full-affine-etale-site, def-pc-fibre-product]. Fix a stage $i$, an affine étale target $A_i$, a family $B_{i,a}$ indexed by $\\mathrm{Fin}(n)$, and arrows $g_a : v_i(B_{i,a}) \\to v_i(A_i)$. There exist $j \\ge i$, arrows $f_{j,a}$ between the canonical affine étale base changes of $B_{i,a}$ and $A_i$ to $D_j$ [lem-weil-pbc-affine-etale-site-base-change], and isomorphisms $t$ and $s_a$ from their $v_j$-images to the original $v_i$-images, with $v_j(f_{j,a}) \\circ t = s_a \\circ g_a$ in Lean composition order. The family may be empty.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL, first paragraph (qcqs case); Limits 01ZM(2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-full-affine-etale-site",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-etale-site-base-change",
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Use the q-pullback squares to identify the v-images with canonical pullbacks.\nFor each arrow apply 01ZM(2) to the two fixed affine étale models, which are finitely\npresented over the stage. It gives a later stage and an arrow between their base\nchanges. Take an upper bound for these finitely many stages and the original\nstage, then pull back the arrows to that bound. Affine transition maps ensure that\nthe base-changed models are still affine, and étaleness is preserved by base change.\nTransitivity and uniqueness of pullbacks give comparison isomorphisms from their\nv-images to the original v-images. Naturality of q and pullback uniqueness identify\nthe lifted arrows with the given arrows under those isomorphisms. For no arrows,\ntake the original stage and the identity base-change comparisons.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-etale-site-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-affine-etale-site-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL, first paragraph (qcqs case); Limits 01ZM(2); source read online on 2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite family of affine etale objects over inverse limit descends to a common stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite families of affine etale schemes descend over an inverse limit of schemes",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.isAffineHom_π_app, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'",
+   "date": "2026-10-12",
+   "verdict": "No exact finite affine-etale common-model/arrow-model theorem in returned results."
+  },
+  {
+   "tool": "grep",
+   "query": "affineEtale_common_models|affineEtale_model_arrows|exists_pullback_hom_of_isLimit",
+   "results": "0 hits; top results: none",
+   "date": "2026-10-12",
+   "verdict": "No exact finite affine-etale common-model/arrow-model theorem in returned results."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramDescent",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "passage to cohomology of the limit via 09YQ: finite affine object and arrow descent",
+   "via": [
+    "lem-weil-pbc-affine-etale-finite-diagram-descent",
+    "lem-weil-pbc-affine-etale-descent-data",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramArrows",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleFiniteDiagramArrows.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineEtale_model_arrows",
+  "statement": "theorem affineEtale_model_arrows {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ (i : Iᵒᵖ), CompactSpace (D.obj i)] [∀ (i : Iᵒᵖ), QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (v : ∀ i : I, (D.obj (op i)).FullAffineEtale ⥤ c.pt.FullAffineEtale) (q : ∀ i : I, v i ⋙ fullAffineEtaleInclusion c.pt ⋙ Etale.forget c.pt ⋙ Over.forget c.pt ⟶ fullAffineEtaleInclusion (D.obj (op i)) ⋙ Etale.forget (D.obj (op i)) ⋙ Over.forget (D.obj (op i))) (h2 : (∀ (i : I) (A : (D.obj (op i)).FullAffineEtale), IsPullback ((q i).app A) ((v i).obj A).obj.hom A.obj.hom (c.π.app (op i)))) (i : I) (n : ℕ) (Ai : (D.obj (op i)).FullAffineEtale) (Bi : Fin n → (D.obj (op i)).FullAffineEtale) (g : ∀ a : Fin n, (v i).obj (Bi a) ⟶ (v i).obj Ai) : ∃ (j : I) (h : i ≤ j) (Aj : (D.obj (op j)).FullAffineEtale) (Bj : Fin n → (D.obj (op j)).FullAffineEtale) (fi : ∀ a : Fin n, Bj a ⟶ Aj) (rA : Aj.obj.left ⟶ Ai.obj.left) (rB : ∀ a : Fin n, (Bj a).obj.left ⟶ (Bi a).obj.left), IsPullback rA Aj.obj.hom Ai.obj.hom (D.map (homOfLE h).op) ∧ (∀ a : Fin n, IsPullback (rB a) (Bj a).obj.hom (Bi a).obj.hom (D.map (homOfLE h).op)) ∧ ∃ (t : (v j).obj Aj ≅ (v i).obj Ai) (s : ∀ a : Fin n, (v j).obj (Bj a) ≅ (v i).obj (Bi a)), ∀ a : Fin n, (v j).map (fi a) ≫ t.hom = (s a).hom ≫ g a",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T110253-L-611628",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T110253-L-611628",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

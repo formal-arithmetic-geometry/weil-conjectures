@@ -6,9 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramObjects
+import Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramArrows
 
 /-!
 # Finite affine étale diagram descent
@@ -61,6 +60,34 @@ theorem affineEtale_finite_diagram_descent
         ∃ (i : I) (Ai : (D.obj (op i)).FullAffineEtale)
           (Bi : Fin n → (D.obj (op i)).FullAffineEtale) (fi : ∀ a : Fin n, Bi a ⟶ Ai)
           (t : (v i).obj Ai ≅ A) (s : ∀ a : Fin n, (v i).obj (Bi a) ≅ B a),
-          ∀ a : Fin n, (v i).map (fi a) ≫ t.hom = (s a).hom ≫ f a := by sorry
+          ∀ a : Fin n, (v i).map (fi a) ≫ t.hom = (s a).hom ≫ f a := by
+  classical
+  intro n A B f
+  let X : Fin (n + 1) → c.pt.FullAffineEtale := Fin.cases A B
+  obtain ⟨i, Xi, hXi⟩ := affineEtale_common_models D c hc (n + 1) X
+  have he : ∀ a : Fin (n + 1), Nonempty ((v i).obj (Xi a) ≅ X a) := by
+    intro a
+    obtain ⟨r, hr⟩ := hXi a
+    let e := (h2 i (Xi a)).isoPullback ≪≫ hr.isoPullback.symm
+    refine ⟨ObjectProperty.isoMk _ (MorphismProperty.Over.isoMk e ?_)⟩
+    change ((h2 i (Xi a)).isoPullback.hom ≫ hr.isoPullback.inv) ≫
+      (X a).obj.hom = ((v i).obj (Xi a)).obj.hom
+    rw [Category.assoc, hr.isoPullback_inv_snd, (h2 i (Xi a)).isoPullback_hom_snd]
+  let e := fun a ↦ Classical.choice (he a)
+  let Ai := Xi 0
+  let Bi : Fin n → (D.obj (op i)).FullAffineEtale := fun a ↦ Xi a.succ
+  let t : (v i).obj Ai ≅ A := e 0
+  let s : ∀ a : Fin n, (v i).obj (Bi a) ≅ B a := fun a ↦ e a.succ
+  let g : ∀ a : Fin n, (v i).obj (Bi a) ⟶ (v i).obj Ai :=
+    fun a ↦ (s a).hom ≫ f a ≫ t.inv
+  obtain ⟨j, _, Aj, Bj, fi, _, _, _, _, t', s', heq⟩ :=
+    affineEtale_model_arrows D c hc v q h2 i n Ai Bi g
+  refine ⟨j, Aj, Bj, fi, t' ≪≫ t, (fun a ↦ s' a ≪≫ s a), ?_⟩
+  intro a
+  change (v j).map (fi a) ≫ t'.hom ≫ t.hom =
+    (s' a).hom ≫ (s a).hom ≫ f a
+  rw [← Category.assoc, heq a]
+  simp [g, Category.assoc]
+
 
 end AlgebraicGeometry.Scheme

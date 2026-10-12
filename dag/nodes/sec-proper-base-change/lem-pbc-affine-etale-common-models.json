@@ -1,0 +1,123 @@
+{
+ "id": "lem-pbc-affine-etale-common-models",
+ "kind": "statement",
+ "title": "Common affine étale object models",
+ "statement": "Let $I$ be a nonempty directed preorder and $D : I^{op} \\to \\mathrm{Scheme}$ an inverse system of quasi-compact and quasi-separated schemes with affine transition morphisms [def-pc-scheme, pqf-def-affine-morphism, def-weil-pbc-scheme-conventions]. Let $c$ be a limiting cone. For any $m \\in \\mathbb{N}$ and family $X_a$, $a \\in \\mathrm{Fin}(m)$, of full affine étale objects over $c.pt$ [def-weil-pbc-full-affine-etale-site], there are a stage $i$ and affine étale objects $X_{i,a}$ over $D_i$, with morphisms $r_a : X_a \\to X_{i,a}$ such that the square with structure morphisms to $c.pt$ and $D_i$, and the cone projection, is a pullback [def-pc-fibre-product]. The empty family is allowed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL, first paragraph (qcqs case); Limits 01ZM, 01YZ, 01Z6, 07RP"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-full-affine-etale-site",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Every affine étale object has finitely presented structure morphism because\nits source is quasi-compact and its base is quasi-separated. The limit is qcqs since\nits projections are affine. Apply 01ZM to each structure morphism. Its base-change\ntail has the original object as limit by 01YZ. Apply 01Z6 to obtain an affine stage,\nthen 07RP to obtain an étale stage. Further base changes remain affine and étale.\nDirectedness gives a common upper bound for the finite collection of stages; for\nan empty collection use nonemptiness of I. Transitivity of pullbacks supplies\ncartesian squares from the original objects to the common-stage models.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-limit-affine-stage",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-affine-transition",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-limit-affine-stage",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL, first paragraph (qcqs case); Limits 01ZM, 01YZ, 01Z6, 07RP; source read online on 2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite family of affine etale objects over inverse limit descends to a common stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite families of affine etale schemes descend over an inverse limit of schemes",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.isAffineHom_π_app, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'",
+   "date": "2026-10-12",
+   "verdict": "No exact finite affine-etale common-model/arrow-model theorem in returned results."
+  },
+  {
+   "tool": "grep",
+   "query": "affineEtale_common_models|affineEtale_model_arrows|exists_pullback_hom_of_isLimit",
+   "results": "0 hits; top results: none",
+   "date": "2026-10-12",
+   "verdict": "No exact finite affine-etale common-model/arrow-model theorem in returned results."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramDescent",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "passage to cohomology of the limit via 09YQ: finite affine object and arrow descent",
+   "via": [
+    "lem-weil-pbc-affine-etale-finite-diagram-descent",
+    "lem-weil-pbc-affine-etale-descent-data",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramObjects",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleFiniteDiagramObjects.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineEtale_common_models",
+  "statement": "theorem affineEtale_common_models\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ (i : Iᵒᵖ), CompactSpace (D.obj i)]\n    [∀ (i : Iᵒᵖ), QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c)\n    (m : ℕ) (X : Fin m → c.pt.FullAffineEtale) :\n    ∃ (i : I) (Xi : Fin m → (D.obj (op i)).FullAffineEtale),\n      ∀ a : Fin m, ∃ r : (X a).obj.left ⟶ (Xi a).obj.left,\n        IsPullback r (X a).obj.hom (Xi a).obj.hom (c.π.app (op i))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T110253-L-611628",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T110253-L-611628",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
