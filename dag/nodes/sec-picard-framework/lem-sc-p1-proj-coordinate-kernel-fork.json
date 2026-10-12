@@ -1,0 +1,100 @@
+{
+ "id": "lem-sc-p1-proj-coordinate-kernel-fork",
+ "kind": "statement",
+ "title": "The coordinate map has a kernel fork which is a limit, by the two-chart locally split calculation.",
+ "statement": "Let k be a field, P=Proj k[x_0,x_1] with the standard grading [def-sc-p1-standard], G any O_P-module, and z an integer. With twists and coordinate multiplication as in [def-weil-pbc-proj-twisting-sheaf], there exists f:G(z-1) -> G(z) ⊕ G(z) whose composite with (μ_0(z),μ_1(z)) is zero and whose resulting kernel fork is a limit.",
+ "source": {
+  "document": "dag/nodes/sec-picard-framework/lem-sc-p1-proj-coordinate-short-exact.json",
+  "place": "Two-chart calculation, proof steps 1 and 2 (not an application of the parent theorem)"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Write μ_i(d) for G whiskered with multiplication by x_i from O(d)\nto O(d+1). Define f by its two components -μ_1(z-1) and μ_0(z-1),\ntransporting (z-1)+1 to z. Commutativity of coordinate multiplication implies\nf followed by (μ_0(z), μ_1(z)) is zero. On D+(x_0), multiplication by x_0\nis invertible for every twist, and remains invertible after tensoring with G.\nFor a morphism (a,b) killed by the quotient map, set t=μ_0(z-1)^{-1} b.\nThe equation μ_0(z)a+μ_1(z)b=0 and commutativity give a=-μ_1(z-1)t;\nt is unique because its second component is b. On D+(x_1), instead set\nt=-μ_1(z-1)^{-1} a; the same equation gives b=μ_0(z-1)t, uniquely.\nThese local factorizations agree on overlaps by uniqueness. The sheaf gluing\nproperty therefore gives a unique global factorization for every kernel fork,\nwhich is exactly the universal property IsLimit. No arbitrary witness is\nused to define f: it is the displayed binary biproduct lift. Tensoring needs\nno flatness because the local inverses still exist. The calculation covers\nthe zero module, modules with torsion, characteristic two, and every integer z.\n",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-picard-framework/lem-sc-p1-proj-coordinate-short-exact.json",
+  "place": "Two-chart calculation, proof steps 1 and 2 (not an application of the parent theorem)"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjLineCoordinateShortExact",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-proj-coordinate-short-exact",
+   "place": "categorical decomposition"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjLineCoordinateKernelFork",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjLineCoordinateKernelFork.lean",
+  "declaration": "AlgebraicGeometry.exists_proj_coordinate_kernel_fork",
+  "statement": "theorem exists_proj_coordinate_kernel_fork\n    (k : Type u) [Field k]\n    (G : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Modules) (z : ℤ) :\n    ∃ (f : G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (z - 1) ⟶\n        (G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) z) ⊞\n        (G ⊗ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) z))\n      (h : f ≫ biprod.desc\n        (G ◁ Proj.twistMul z (MvPolynomial.X_mem_homogeneousSubmodule_one k (0 : Fin 2)))\n        (G ◁ Proj.twistMul z (MvPolynomial.X_mem_homogeneousSubmodule_one k (1 : Fin 2))) = 0),\n      Nonempty (IsLimit (KernelFork.ofι f h))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kernel of homogeneous coordinate multiplication on projective line twisting sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epimorphism pair of multiplication maps twisting sheaf Proj standard affine open cover",
+   "results": "8 hits, including Proj.affineOpenCoverOfIrrelevantLESpan and Proj; no matching kernel or tensor-coordinate epimorphism theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "twistMul|koszul_shortExact; isIso_restrict_twistMul; epi_of_surjective_stalk",
+   "results": "msearch grep returned zero hits. Local rg found ProjectiveLine.koszul_shortExact for different projective-space objects, Proj.isIso_restrict_twistMul, and Scheme.Modules.epi_of_surjective_stalk. The last two are used to prove the quotient lemma directly; no exact kernel-fork theorem found.",
+   "date": "2026-10-12",
+   "verdict": "use local isomorphism and stalk interfaces"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T153648-L-2394789",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T153648-L-2394789",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
