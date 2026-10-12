@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-top-comparison",
+ "kind": "statement",
+ "title": "Natural scalar-forgetting comparison at the top open",
+ "statement": "Let X be any ringed space and p a natural number. The functor H^p(X,-) valued in modules over the ring of global sections [def-sc-ringed-space-module-cohomology], followed by forgetting scalars to abelian groups, is naturally isomorphic to the open module cohomology functor at the top open [def-sc-open-module-cohomology]. No compactness or nonemptiness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, cohomology-modules; Mathlib.Algebra.Homology.ShortComplex.PreservesHomology, ShortComplex.homologyFunctorIso; Mathlib.Algebra.Homology.HomotopyCategory, homologyFunctorFactors and mapHomotopyCategoryCompIso."
+ },
+ "stmt_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Global sections followed by forgetting scalars equals top-open sections. Exact scalar forgetting commutes naturally with homology via ShortComplex.homologyFunctorIso. Lift that comparison to the homotopy category with Quotient.natIsoLift and the homologyFunctorFactors comparisons.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology",
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the comparison by global sections on complexes and by the injective-resolution functor. Functor.mapHomotopyCategoryCompIso identifies the composite section functor. This gives the displayed natural isomorphism, including degree zero.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "def-sc-open-module-cohomology",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, cohomology-modules; Mathlib.Algebra.Homology.ShortComplex.PreservesHomology, ShortComplex.homologyFunctorIso; Mathlib.Algebra.Homology.HomotopyCategory, homologyFunctorFactors and mapHomotopyCategoryCompIso.",
+  "note": "Second reader H2: detailed argument in the declaration docstring; follows the cited constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The right derived functor of global sections composed with forgetting module scalars is naturally isomorphic to the right derived abelian group valued sections functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived global sections forgetting scalars naturally isomorphic to right derived abelian group valued sections at the top open",
+   "results": "Hits: CategoryTheory.Sheaf.ΓNatIsoSectionsFunctor, PresheafOfModules.sheafificationCompForgetCompToPresheaf, SheafOfModules.toSheafCompSheafToPresheafIso, CategoryTheory.Sheaf.ΓNatIsoSheafSections, AlgebraicGeometry.structurePresheafCompForget, CategoryTheory.Sheaf.ΓHomEquiv, PresheafOfModules.sheafificationCompToSheaf, CategoryTheory.sheafSectionsNatIsoEvaluation",
+   "date": "2026-10-12",
+   "verdict": "No exact match; section functor comparisons only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "Hits: CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc, CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-12",
+   "verdict": "General localized derived functor and transformation results; not this injective-resolution comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctorIso|mapHomotopyCategoryCompIso|Small.*IsZero",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/Functor.lean",
+   "date": "2026-10-12",
+   "verdict": "Useful parts found: ShortComplex.homologyFunctorIso and mapHomotopyCategoryCompIso. Composed in the Lean proof; no exact statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcqsCohomologyFiniteSubsumRepresentatives",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives",
+   "place": "Categorical finite-subsum presentation and natural scalar-forgetting comparison in the finite-stage representative proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ModuleCohomologyTopComparison",
+  "file": "lean/Sheaf/Topology/ModuleCohomologyTopComparison.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.nonempty_moduleCohomology_top_iso",
+  "statement": "theorem nonempty_moduleCohomology_top_iso (X : RingedSpace.{u}) (p : ℕ) :\n    Nonempty ((moduleCohomology X p ⋙\n      forget₂ (ModuleCat.{u} ((moduleRings X).obj.obj (op ⊤))) AddCommGrpCat.{u}) ≅\n      openModuleCohomology X p ⊤)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T144117-L-2098046",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T144117-L-2098046",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
