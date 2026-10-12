@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-constant-extension-cokernel-presentation",
+ "kind": "statement",
+ "title": "Local cokernel presentation of a constant extension",
+ "statement": "Let X be a scheme and Λ a finite ring, not necessarily commutative. Let S be a short exact sequence of sheaves of left Λ-modules on the small etale site of X [def-weil-pbc-etale-site], with constant outer terms [def-constructible-constant] having finitely generated geometric stalks [def-constructible-finite]. There exists an etale cover (U_i → X) such that, for each i, there are left Λ-modules K_i and L_i, with K_i finitely generated, a morphism φ_i between the constant sheaves (K_i)_(U_i) and (L_i)_(U_i), and an isomorphism from coker φ_i to the pullback of S.X₂ to U_i. The morphism φ_i is an arbitrary sheaf morphism, not assumed induced by a module map. No local constancy of its cokernel is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-constructible-constant",
+  "def-constructible-finite"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, Lemma 18.43.5 extension argument, pushout diagram"
+ },
+ "proof": [
+  {
+   "text": "Discard empty members of covers. On a nonempty member choose constant values M and N for the outer terms. Identify these with a geometric stalk to obtain finitely generated M and N. Choose a surjection P = Λ^m → N. Its kernel K is a finite set since Λ and m are finite, so K is finitely generated.",
+   "uses": [
+    "def-constructible-finite",
+    "def-constructible-constant"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The epimorphism E → N_X is locally surjective on sections. Lift the finitely many generators simultaneously by intersecting their covering sieves. The lifts give r:P_U → E_U lifting P_U → N_U. This uses the local-lifting argument of the cited node for Ring Λ and fixed-coefficient ModuleCat sheaves; its current CommRing SheafOfModules specialization must be bridged or generalized, as the original parent plan already notes.",
+   "uses": [
+    "lem-constructible-shortexact-local-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant presentation 0 → K_U → P_U → N_U → 0 is short exact by constant exactness. The restriction of r to K_U factors uniquely through M_U as g. The map M_U ⊞ P_U → E_U sends (a,v) to a+r(v). It is epi because its image contains M_U and maps onto N_U. Its kernel is the image of (-g,inclusion):K_U → M_U ⊞ P_U: if a+r(v)=0 then v lies in K_U and a=-g(v). Thus E_U is this cokernel. The biproduct M_U ⊞ P_U identifies with the constant sheaf of M ⊞ P. Empty schemes admit the empty cover.",
+   "uses": [
+    "lem-constructible-constant-exact",
+    "lemma-constructible-flc-biproduct"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-finite",
+  "def-constructible-constant",
+  "lem-constructible-shortexact-local-lift",
+  "lem-constructible-constant-exact",
+  "lemma-constructible-flc-biproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093U, Lemma 18.43.5 extension argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An extension of constant module sheaves locally has a cokernel presentation",
+   "results": "service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension of constant module sheaves locally has a cokernel presentation",
+   "results": "no exact match; found unrelated quasicoherent presentations",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*presentation|presentation.*cokernel",
+   "results": "no exact match in project; Mathlib presentations unrelated",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantExtensionCover",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-constructible-flc-serre",
+   "place": "extension paragraph: finite free presentation, simultaneous local lifts, and the pushout diagram of Stacks Tag 093U",
+   "via": [
+    "lem-constructible-constant-extension-cover"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantExtensionCokernelPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantExtensionCokernelPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_constantExtension_cokernelPresentation",
+  "statement": "theorem exists_constantExtension_cokernelPresentation {X : Scheme.{u}}\n    {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]\n    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}\n    (hS : S.ShortExact)\n    [S.X₁.IsConstant X.smallEtaleTopology] [S.X₃.IsConstant X.smallEtaleTopology]\n    [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)\n      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]\n    [IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)\n      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i,\n      ∃ K L : ModuleCat.{u + 1} Λ, Module.Finite Λ K ∧\n        ∃ φ : (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj K ⟶\n          (constantSheaf (𝒰.X i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj L,\n          Nonempty (cokernel φ ≅ (Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj S.X₂)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T042407-L-1815010",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T042407-L-1815010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

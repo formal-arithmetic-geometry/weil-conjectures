@@ -5954,3 +5954,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/F2/Sheaf.AlgebraicGeometry.LocallyConstantFiniteValuesFiniteType (stage 3; reviewer PASS; first push; landing 20261012T042406-L-1814590 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/G1/Sheaf.AlgebraicGeometry.InjectiveModuleSheafHCohomology (stage 3; reviewer PASS; first push; landing 20261012T042407-L-1814756 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/G1/WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale (stage 3; reviewer PASS; first push; landing 20261012T042407-L-1814906 (interface); batch 20261012T042402; modules 3; new nodes 2)
+- 04:24 L: merged deliver/G2/Sheaf.AlgebraicGeometry.ConstantExtensionCover (stage 3; reviewer PASS; first push; landing 20261012T042407-L-1815010 (interface); batch 20261012T042402; modules 2; new nodes 1)

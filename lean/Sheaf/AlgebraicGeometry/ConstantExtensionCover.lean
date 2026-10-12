@@ -7,10 +7,13 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
+import Sheaf.AlgebraicGeometry.ConstantExtensionCokernelPresentation
 import Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact
 import Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift
 import WeilConjectures.ConstructibleSheaf.Biproduct
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-!
 # Local presentations of extensions with finite constant outer terms
@@ -25,6 +28,48 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
+
+noncomputable section
+
+/-- Choose an etale cover from a covering sieve of the final etale object. -/
+private def presentationCover {Y : Scheme.{u}} (R : Sieve (Etale.mk (𝟙 Y)))
+    (hR : R ∈ Y.smallEtaleTopology _) : Cover.{u} etalePrecoverage Y where
+  I₀ := Y
+  X y := ((mem_smallEtaleTopology_iff R).mp hR y).choose.left
+  f y := ((mem_smallEtaleTopology_iff R).mp hR y).choose_spec.choose.left
+  mem₀ := by
+    refine (presieve₀_mem_precoverage_iff _).mpr ⟨fun y ↦ ?_, fun y ↦ inferInstance⟩
+    exact ⟨y, ((mem_smallEtaleTopology_iff R).mp hR y).choose_spec.choose_spec.2⟩
+
+/-- Cokernels of maps out of finitely generated constant module sheaves are locally constant
+when the target is constant. -/
+private theorem exists_constantCokernel_cover {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
+    (K L : ModuleCat.{u + 1} Λ) [Module.Finite Λ K]
+    (φ : (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj K ⟶
+      (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj L) :
+    ∃ 𝒱 : Cover.{u} etalePrecoverage Y, ∀ j,
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒱.f j)).obj (cokernel φ)).IsConstant
+        (𝒱.X j).smallEtaleTopology := by
+  obtain ⟨R, hR, hmem⟩ := exists_mem_forall_exists_constantSheafOverHom_comp_map_eq
+    Y.smallEtaleTopology (T := Etale.mk (𝟙 Y)) K L φ
+  refine ⟨presentationCover R hR, fun y ↦ ?_⟩
+  let V := ((mem_smallEtaleTopology_iff R).mp hR y).choose
+  let a : V ⟶ Etale.mk (𝟙 Y) :=
+    ((mem_smallEtaleTopology_iff R).mp hR y).choose_spec.choose
+  have ha : R a := ((mem_smallEtaleTopology_iff R).mp hR y).choose_spec.choose_spec.1
+  have hV : (⊥ : Sieve V) ∉ Y.smallEtaleTopology V := by
+    intro h
+    obtain ⟨W, b, hb, _⟩ := (mem_smallEtaleTopology_iff _).mp h
+      ((mem_smallEtaleTopology_iff R).mp hR y).choose_spec.choose_spec.2.choose
+    exact hb
+  obtain ⟨f, hf⟩ := hmem a ha hV
+  have hc := Sheaf.isConstant_cokernel_over Y.smallEtaleTopology _ V f φ hf
+  rw [isConstant_over_iff_upperStar] at hc
+  have hw : a.left = V.hom :=
+    (Category.comp_id _).symm.trans (MorphismProperty.Over.w a)
+  change ((Etale.upperStar (ModuleCat.{u + 1} Λ) a.left).obj (cokernel φ)).IsConstant
+    V.left.smallEtaleTopology
+  rwa [hw]
 
 /-- An extension with constant outer terms of finite stalks has a cover on which its middle
 term is constant. Source: Stacks Project, Tags 03RX (3) and 093U.
@@ -53,6 +98,26 @@ theorem exists_constantExtension_cover {X : Scheme.{u}} {Λ : Type (u + 1)} [Rin
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
     ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i,
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj S.X₂).IsConstant
-        (𝒰.X i).smallEtaleTopology := by sorry
+        (𝒰.X i).smallEtaleTopology := by
+  classical
+  have : etalePrecoverage.{u}.IsStableUnderComposition :=
+    inferInstanceAs (precoverage @Etale).IsStableUnderComposition
+  obtain ⟨𝒰, h𝒰⟩ := exists_constantExtension_cokernelPresentation hS
+  have key : ∀ i : 𝒰.I₀, ∃ 𝒱 : Cover.{u} etalePrecoverage (𝒰.X i), ∀ j,
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒱.f j ≫ 𝒰.f i)).obj S.X₂).IsConstant
+        (𝒱.X j).smallEtaleTopology := by
+    intro i
+    obtain ⟨K, L, hK, φ, ⟨e⟩⟩ := h𝒰 i
+    have : Module.Finite Λ K := hK
+    obtain ⟨𝒱, h𝒱⟩ := exists_constantCokernel_cover K L φ
+    refine ⟨𝒱, fun j ↦ ?_⟩
+    have := h𝒱 j
+    exact Sheaf.isConstant_congr _
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒱.f j)).mapIso e ≪≫
+        ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) (𝒱.f j) (𝒰.f i)).app S.X₂).symm)
+  choose 𝒱 h𝒱 using key
+  exact ⟨𝒰.bind 𝒱, fun ⟨i, j⟩ ↦ h𝒱 i j⟩
+
+end
 
 end AlgebraicGeometry.Scheme
