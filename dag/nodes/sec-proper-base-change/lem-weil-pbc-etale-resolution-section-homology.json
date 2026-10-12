@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-etale-resolution-section-homology",
+ "kind": "statement",
+ "title": "Natural Ext identification for single resolution section complexes",
+ "statement": "Let g:Y→X be a scheme morphism, G an abelian étale sheaf on X, I an injective resolution of G and J an injective resolution of g⁻¹G [def-sp-injective-resolutions], [def-weil-pbc-inverse-image]. Suppose α:I→g_*J is a cochain map whose degree-zero augmentation equation is I.ι⁰ α⁰ = η_g,G g_*(J.ι⁰) [def-weil-pbc-direct-image]. Then there exist degreewise additive equivalences eX and eY from the global section complex homology to Sheaf.H, and eOX(W) and eOY(W') for every open on each scheme. They simultaneously commute with whole-to-open restriction, inclusions of opens, the global section transfer of α, and the open section transfers of α [def-weil-pbc-etale-resolution-section-transfer]. The resulting maps on Ext are respectively cohomologyMap, openCohomologyRestriction, and openCohomologyPullback, with their prescribed upperStarComp coefficient transports [def-weil-pbc-cohomology-pullback], [lem-weil-pbc-open-cohomology-whole-restriction-naturality]. No product or morphism of short complexes is asserted; the exact six families of equations are recorded in the Lean signature.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof; Cohomology on Sites Tag 03F3 (restriction preserves injectives and computes open cohomology); agent-written cocycle compatibility in steps 3 and 4 of lem-weil-pbc-etale-mayer-vietoris-section-comparison. Read https://stacks.math.columbia.edu/tag/0A50 and https://stacks.math.columbia.edu/tag/03F3 on 2026-10-12."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-open-cohomology-whole-restriction-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Compute Ext from the constant lifted integer sheaf using each prescribed injective resolution. The constant-sheaf adjunction and evaluation at 1 identify the Hom complex with global sections, naturally and additively. On every open restriction is localization, preserves injectives by the exact extension-by-zero left adjoint, and identifies sections of the restricted resolution with sections of the original resolution on that open. This gives all four families of equivalences without any arbitrary unrelated choices.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On cocycles, restriction from the whole scheme is the adjunction unit. For an inclusion of opens the composition comparison gives exactly the coefficient transport of openCohomologyRestriction. It preserves boundaries and yields both whole-to-open and both inclusion families.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjoint α to a map g⁻¹I→J; the augmentation equation makes it a lift of the identity of g⁻¹G. On a Hom cocycle, inverse image followed by precomposition with the constant-sheaf comparison is the adjunction unit on the section. Composing with the lift computes cohomologyMap. On every open, the restriction-pullback unit identity and the two composition comparisons compute openCohomologyPullback. These calculations use the equivalences constructed in the first step, preserving simultaneity; homotopic lifts induce the same maps. Degree zero is the kernel of the first differential and empty opens give zero groups.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-open-restriction-pullback-unit",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-etale-resolution-section-transfer"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-open-restriction-pullback-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof; Cohomology on Sites Tag 03F3 (restriction preserves injectives and computes open cohomology); agent-written cocycle compatibility in steps 3 and 4 of lem-weil-pbc-etale-mayer-vietoris-section-comparison. Read https://stacks.math.columbia.edu/tag/0A50 and https://stacks.math.columbia.edu/tag/03F3 on 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism between cohomology of sections of an injective sheaf resolution and Ext sheaf cohomology, compatible with inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of sections of an injective resolution is sheaf Ext cohomology naturally in pullback and restriction",
+   "results": "Actual search returned 8 hits: CategoryTheory.Sheaf.H, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+   "date": "2026-10-12",
+   "verdict": "Ext and injective-resolution APIs are available, but no theorem gives the natural fixed-resolution section identification with all prescribed maps, or the explicit scheme section diagram."
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.extAddEquivCohomologyClass",
+   "results": "loogle: unknown identifier 'InjectiveResolution.extAddEquivCohomologyClass'",
+   "date": "2026-10-12",
+   "verdict": "Ext and injective-resolution APIs are available, but no theorem gives the natural fixed-resolution section identification with all prescribed maps, or the explicit scheme section diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap|biprodComparison|descToInjective",
+   "results": "Actual search returned 10 hits: Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Refinements.lean, Mathlib/CategoryTheory/Abelian/Refinements.lean, Mathlib/CategoryTheory/Abelian/Refinements.lean",
+   "date": "2026-10-12",
+   "verdict": "Ext and injective-resolution APIs are available, but no theorem gives the natural fixed-resolution section identification with all prescribed maps, or the explicit scheme section diagram."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisSectionComparison",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Tag 0A50, proof; Cohomology on Sites Tag 03F3 (restriction preserves injectives and computes open cohomology); agent-written cocycle compatibility in steps 3 and 4 of lem-weil-pbc-etale-mayer-vietoris-section-comparison. Read https://stacks.math.columbia.edu/tag/0A50 and https://stacks.math.columbia.edu/tag/03F3 on 2026-10-12.",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-section-comparison",
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResolutionSectionHomology.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_resolutionSection_homology_comparison",
+  "statement": "theorem exists_resolutionSection_homology_comparison {X Y : Scheme.{u}} (g : Y ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G) (J : InjectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)) (α : I.cocomplex ⟶ ((lowerStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℕ)).obj J.cocomplex) (hα : I.ι.f 0 ≫ α.f 0 = (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app G ≫ (lowerStar AddCommGrpCat.{u + 1} g).map (J.ι.f 0)) : ∃ eX : ∀ q : ℕ, (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 X))).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology q ≃+ Sheaf.H G q, ∃ eOX : ∀ (W : X.Opens) (q : ℕ), (((etaleSectionFunctor (Scheme.Etale.mk W.ι)).mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology q ≃+ Sheaf.H ((upperStar AddCommGrpCat.{u + 1} W.ι).obj G) q, ∃ eY : ∀ q : ℕ, (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 Y))).mapHomologicalComplex (.up ℕ)).obj J.cocomplex).homology q ≃+ Sheaf.H ((upperStar AddCommGrpCat.{u + 1} g).obj G) q, ∃ eOY : ∀ (W : Y.Opens) (q : ℕ), (((etaleSectionFunctor (Scheme.Etale.mk W.ι)).mapHomologicalComplex (.up ℕ)).obj J.cocomplex).homology q ≃+ Sheaf.H ((upperStar AddCommGrpCat.{u + 1} W.ι).obj ((upperStar AddCommGrpCat.{u + 1} g).obj G)) q, (∀ W q x, eOX W q (HomologicalComplex.homologyMap (etaleSectionMap (MorphismProperty.Over.homMk W.ι (Category.comp_id _) : Scheme.Etale.mk W.ι ⟶ Scheme.Etale.mk (𝟙 X)) I.cocomplex) q x) = cohomologyMap W.ι G q (eX q x)) ∧ (∀ (A B : X.Opens) (h : A ≤ B) q x, eOX A q (HomologicalComplex.homologyMap (etaleSectionMap (MorphismProperty.Over.homMk (X.homOfLE h) (X.homOfLE_ι _) : Scheme.Etale.mk A.ι ⟶ Scheme.Etale.mk B.ι) I.cocomplex) q x) = openCohomologyRestriction h G q (eOX B q x)) ∧ (∀ W q x, eOY W q (HomologicalComplex.homologyMap (etaleSectionMap (MorphismProperty.Over.homMk W.ι (Category.comp_id _) : Scheme.Etale.mk W.ι ⟶ Scheme.Etale.mk (𝟙 Y)) J.cocomplex) q x) = cohomologyMap W.ι ((upperStar AddCommGrpCat.{u + 1} g).obj G) q (eY q x)) ∧ (∀ (A B : Y.Opens) (h : A ≤ B) q x, eOY A q (HomologicalComplex.homologyMap (etaleSectionMap (MorphismProperty.Over.homMk (Y.homOfLE h) (Y.homOfLE_ι _) : Scheme.Etale.mk A.ι ⟶ Scheme.Etale.mk B.ι) J.cocomplex) q x) = openCohomologyRestriction h ((upperStar AddCommGrpCat.{u + 1} g).obj G) q (eOY B q x)) ∧ (∀ q x, eY q (HomologicalComplex.homologyMap (globalResolutionSectionTransfer g I.cocomplex J.cocomplex α) q x) = cohomologyMap g G q (eX q x)) ∧ (∀ W q x, eOY (g ⁻¹ᵁ W) q (HomologicalComplex.homologyMap (openResolutionSectionTransfer g I.cocomplex J.cocomplex α W) q x) = openCohomologyPullback g W G q (eOX W q x))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67699",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144055-L-2089643",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67699",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T144055-L-2089643",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature, explicit transfer construction, remaining homology statement, proof dependencies, and report against the delivered Lean and DAG nodes; compiled all delivered modules and EtaleMayerVietorisSectionDiagram."
+ }
+}
