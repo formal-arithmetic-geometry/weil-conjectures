@@ -3,12 +3,8 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.Paper.InverseImageStalkGerm
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+import Sheaf.AlgebraicGeometry.ProperStrictLocalFibreSections
+import Sheaf.AlgebraicGeometry.QcqsGeometricExchangeFactorization
 
 /-!
 # Proper exchange over a geometric point
@@ -23,6 +19,50 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
+
+/-- On an algebraically closed field the identity neighbourhood computes the stalk.
+Source: Stacks Project, Tag 03QO.
+(blueprint: lem-weil-pbc-qcqs-geometric-exchange-factorization). -/
+private theorem isIso_geometricPointGlobalGerm
+    (Λ : Type (u + 1)) [CommRing Λ] (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+    (G : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso (geometricPointGlobalGerm Λ Ω G) := by
+  have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (forget (ModuleCat.{u + 1} Λ)) :=
+    CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  let Φ := Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))
+  let T := Scheme.Etale.mk (𝟙 (Spec (.of Ω)))
+  let t : Φ.fiber.obj T := Over.homMk (𝟙 _) (Category.comp_id _)
+  have hsec (U : (Spec (.of Ω)).Etale) (x : Φ.fiber.obj U) :
+      ∃ g : T ⟶ U, Φ.fiber.map g t = x := by
+    refine ⟨MorphismProperty.Over.homMk x.left x.w, ?_⟩
+    apply Over.OverMorphism.ext
+    exact Category.id_comp _
+  have hg : IsIso (Φ.toPresheafFiber T t G.obj) := by
+    apply (ConcreteCategory.isIso_iff_bijective _).2
+    constructor
+    · intro a b hab
+      obtain ⟨U, f, x, _, heq⟩ :=
+        (Φ.toPresheafFiber_eq_iff' (P := G.obj) T t a b).mp hab
+      obtain ⟨g, _⟩ := hsec U x
+      have hgf : g ≫ f = 𝟙 T := by
+        apply MorphismProperty.Over.Hom.ext
+        have hf' : f.left ≫ T.hom = U.hom := f.w
+        have hf : f.left = U.hom := by
+          change f.left ≫ 𝟙 _ = U.hom at hf'
+          simpa only [Category.comp_id] using hf'
+        change g.left ≫ f.left = 𝟙 _
+        rw [hf]
+        exact g.w
+      have h := congrArg (G.obj.map g.op) heq
+      simpa [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, hgf] using h
+    · intro z
+      obtain ⟨U, x, a, rfl⟩ := Φ.toPresheafFiber_jointly_surjective (P := G.obj) z
+      obtain ⟨g, hg⟩ := hsec U x
+      refine ⟨G.obj.map g.op a, ?_⟩
+      rw [Φ.toPresheafFiber_w_apply, hg]
+  unfold geometricPointGlobalGerm
+  exact IsIso.comp_isIso
 
 /-- Proper exchange for base change to an algebraically closed field.
 
@@ -49,6 +89,32 @@ theorem isIso_baseChangeMap_app_of_isProper_geometricPoint
     {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}
     {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsProper f]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) := by sorry
+    IsIso ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) := by
+  let A := ModuleCat.{u + 1} Λ
+  let φ := (baseChangeMap A sq.toCommSq).app F
+  have hi : IsIso ((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map φ) := by
+    obtain ⟨hlocal, hstrict, t, q, ht, sqR, hq, e, he⟩ :=
+      qcqs_geometricExchange_factorization Λ sq F
+    let := hlocal
+    let := hstrict
+    have hrestrict := isIso_globalSectionsUpperStarMap_of_strictLocal_geometricClosedPoint
+      Λ (Scheme.strictHenselizationRing s) t ht sqR
+        ((upperStar A (CategoryTheory.Limits.pullback.fst f
+          (Scheme.strictHenselizationStructuralMap s))).obj F)
+    have hgerm := isIso_geometricPointGlobalGerm Λ Ω
+      ((lowerStar A f').obj ((upperStar A g').obj F))
+    change IsIso ((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).sheafFiber.map
+      ((baseChangeMap A sq.toCommSq).app F))
+    rw [he]
+    infer_instance
+  have hc := Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ
+    (Spec (.of Ω)) (fun _ : PUnit.{u + 1} ↦ 𝟙 (Spec (.of Ω))) (by
+      ext x
+      exact ⟨fun _ ↦ Set.mem_univ x,
+        fun _ ↦ Set.mem_iUnion.mpr ⟨PUnit.unit, ⟨x, rfl⟩⟩⟩)
+  apply ((hc.jointlyReflectIsomorphisms A).isIso_iff φ).2
+  rintro ⟨-, ⟨i⟩⟩
+  rw [NatIso.isIso_map_iff ((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).uliftSheafFiberIso A)]
+  exact hi
 
 end AlgebraicGeometry.Etale
