@@ -7,29 +7,23 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.WeilSheaf.StalkUpperStar
+public import WeilConjectures.WeilSheaf.Stalk
 
 /-!
-# Purity of real lisse Weil sheaves on curves, and lisse loci
+# Purity of real lisse Weil sheaves on curves
 
-This file states, for Weil sheaves on curves over a finite field `k₀`, three results of the
-section on the purity of real sheaves which the Deligne–Laumon estimate on the affine line
-uses:
+Let `C₀` be a smooth geometrically connected curve over a finite field `k₀` and `𝒢₀` an `ι`-real
+lisse Weil sheaf on `C₀`. Every irreducible constituent of `𝒢₀` is punctually `ι`-pure, of its
+determinant weight. This is the main theorem of the blueprint section `sec-purity-real-sheaves`,
+formalised there on the side of representations of the Weil group
+(`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal`); this file states
+it for Weil sheaves, with irreducible constituents rendered as irreducible lisse subquotients
+`𝒢₂ / 𝒢₁` of lisse Weil subsheaves `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`.
 
-- `AlgebraicGeometry.WeilSheaf.exists_isPunctuallyPureOfWeight_of_isReal`: an irreducible
-  constituent of an `ι`-real lisse Weil sheaf on a smooth geometrically connected affine curve
-  is punctually `ι`-pure of some real weight (blueprint `thm-rp-real-lisse-purity-affine`).
-- `AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar`: a Weil sheaf on an irreducible
-  scheme of finite type over `k₀` is lisse on a nonempty open (blueprint
-  `fin2-lem-lisse-dense-open`).
-- `AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`: a lisse Weil
-  sheaf on a smooth geometrically connected curve which is punctually pure of weight `w` on a
-  nonempty open is punctually pure of weight `w` everywhere (blueprint
-  `cor-wf-unramified-boundary-purity`).
+## Main statements
 
-They are nodes of the blueprint subsections `sk-p-real-purity` and `sk-p-real-semi`, whose
-formalisation for Weil sheaves is pending; the representation-theoretic form of the first one
-is `AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine`.
+- `AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`: blueprint
+  `thm-rp-real-lisse-purity-affine` (`sk-p-real-purity`).
 -/
 
 @[expose] public section
@@ -42,48 +36,23 @@ namespace AlgebraicGeometry.WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-section Curve
+/-- **Purity of real lisse sheaves on curves** (blueprint: `thm-rp-real-lisse-purity-affine`,
+`sk-p-real-purity`, of the section `sec-purity-real-sheaves`). Let `C₀` be a smooth geometrically
+connected curve over `k₀` and `𝒢₀` an `ι`-real lisse Weil sheaf on `C₀`. Every irreducible
+constituent of `𝒢₀`, that is, every irreducible lisse quotient `𝒢₂ / 𝒢₁` of lisse Weil subsheaves
+`𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢₀`, is punctually `ι`-pure (of its determinant weight).
 
-variable {V : Scheme.{u}} [V.Over (Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
-  [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
-  [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
-
-/-- **Purity of real lisse sheaves on an affine curve.** Let `G` be an `ι`-real lisse Weil sheaf
-on a smooth geometrically connected affine curve `V` over `k₀`. Every irreducible constituent
-`S` of `G` — an irreducible lisse sheaf which is a quotient of a lisse subsheaf `B` of `G` — is
-punctually `ι`-pure of some real weight (namely its determinant weight).
-(blueprint: `thm-rp-real-lisse-purity-affine`, subsection `sk-p-real-purity`) -/
-theorem exists_isPunctuallyPureOfWeight_of_isReal [IsAffine V] (ι : PadicAlgCl l →+* ℂ)
-    {G : WeilSheaf k₀ l V} (hG : G.IsLisse) (hreal : G.IsReal ι) {S : WeilSheaf k₀ l V}
-    (hS : S.IsIrreducibleLisse) {B : WeilSheaf k₀ l V} (hB : B.IsLisse) (i : B ⟶ G) [Mono i]
-    (p : B ⟶ S) [Epi p] :
-    ∃ v : ℝ, S.IsPunctuallyPureOfWeight ι v :=
-  sorry
-
-/-- **Purity extends over the missing points.** Let `G` be a lisse Weil sheaf on a smooth
-geometrically connected curve `V` over `k₀`, and let `U ⊆ V` be a nonempty open on which `G` is
-punctually `ι`-pure of weight `w`. Then `G` is punctually `ι`-pure of weight `w` on all of `V`:
-at a point of `V ∖ U` the inertia acts trivially on the lisse sheaf `G`, so the stalk is the
-inertia-invariant boundary stalk of the restriction, which is pure of weight `w`.
-(blueprint: `cor-wf-unramified-boundary-purity`, consequence clause, subsection `sk-p-real-semi`)
--/
-theorem IsLisse.isPunctuallyPureOfWeight_of_upperStar (ι : PadicAlgCl l →+* ℂ)
-    {G : WeilSheaf k₀ l V} (hG : G.IsLisse) (U : V.Opens) (hU : (U : Set V).Nonempty) {w : ℝ}
-    (hw : ((WeilSheaf.upperStar U.ι).obj G).IsPunctuallyPureOfWeight ι w) :
-    G.IsPunctuallyPureOfWeight ι w :=
-  sorry
-
-end Curve
-
-/-- **Lisse on a nonempty open.** A Weil sheaf `F` on an irreducible scheme `X` of finite type
-over `k₀` is lisse on a nonempty open `U ⊆ X`.
-(blueprint: `fin2-lem-lisse-dense-open`, subsection `sk-p-real-purity`) -/
-theorem exists_isLisse_upperStar {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IrreducibleSpace X]
-    (F : WeilSheaf k₀ l X) :
-    ∃ U : X.Opens, (U : Set X).Nonempty ∧ ((WeilSheaf.upperStar U.ι).obj F).IsLisse :=
+This is a weakening of the blueprint node: the weight is only asserted to exist, not to be the
+determinant weight `wt_ι(det 𝒢₂/𝒢₁) / rank(𝒢₂/𝒢₁)`. -/
+theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel {ι : PadicAlgCl l →+* ℂ}
+    {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (C ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))] {𝒢 : WeilSheaf k₀ l C} (h𝒢 : 𝒢.IsLisse)
+    (hreal : 𝒢.IsReal ι) {𝒢₁ 𝒢₂ : WeilSheaf k₀ l C} (i : 𝒢₁ ⟶ 𝒢₂) (j : 𝒢₂ ⟶ 𝒢) [Mono i]
+    [Mono j] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse) (hirr : (cokernel i).IsIrreducibleLisse) :
+    ∃ w : ℝ, (cokernel i).IsPunctuallyPureOfWeight ι w :=
   sorry
 
 end AlgebraicGeometry.WeilSheaf
