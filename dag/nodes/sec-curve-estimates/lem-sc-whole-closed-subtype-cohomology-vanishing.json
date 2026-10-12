@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-whole-closed-subtype-cohomology-vanishing",
+ "kind": "statement",
+ "title": "Vanishing transfer from the whole closed subtype",
+ "statement": "Let $X$ be a topological space and $q\\geq0$. If $H^q(Y,G)=0$ for every abelian sheaf $G$ on the subtype $Y=\\{x\\in X\\mid x\\in X\\}$ with its subspace topology [def-sc-topological-abelian-cohomology], then $H^q(X,F)=0$ for every abelian sheaf $F$ on $X$. No Noetherian hypothesis is needed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02UV",
+  "place": "Lemma 02UV (cohomology-lemma-cohomology-closed-immersion), whole-space inclusion specialization"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Let i:Y into X be the subtype inclusion and j:X into Y its continuous inverse. Define G=j_*F. Lemma [lem-sc-cohomology-closed-immersion-pushforward] applies to i, whose image is the whole closed space, giving H^q(Y,G) isomorphic to H^q(X,i_*G).",
+   "uses": [
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The continuous maps satisfy j followed by i equals the identity. The presheaf pushforward composition, equality and identity isomorphisms (Mathlib TopCat.Presheaf.Pushforward.comp, pushforwardEq, Pushforward.id) lift through fullyFaithfulSheafToPresheaf to i_*G isomorphic to F. Apply cohomologyPresheafFunctor.mapIso and evaluate at the terminal open. Transfer subsingletonness between the standard comparison Ext universe and the small statement universe using Mathlib CategoryTheory.Abelian.Ext.chgUniv (Ext/Basic.lean:540). This yields IsZero H^q(X,F).",
+   "uses": [
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-cohomology-closed-immersion-pushforward"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/02UV",
+  "place": "Lemma 02UV (cohomology-lemma-cohomology-closed-immersion), whole-space inclusion specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "vanishing sheaf cohomology on empty space and union of closed subspaces",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H'",
+   "results": "12 hits: CategoryTheory.Sheaf.H', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.δ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.fromBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod_fromBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod_fromBiprod_assoc, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.fromBiprod_δ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.δ_toBiprod",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; reusable primitives only"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_iff_stalkFunctor_obj_isZero|cohomology.*(empty|homeomorph)|presheafEquivOfIso|chgUniv",
+   "results": "25 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; reusable primitives only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invariance of sheaf cohomology under homeomorphism whole space subtype",
+   "results": "8 hits: TopCat.Presheaf.presheafEquivOfIso_functor_obj_obj, TopCat.Presheaf.presheafEquivOfIso, TopCat.Presheaf.presheafEquivOfIso_functor_obj_map, TopCat.Presheaf.presheafEquivOfIso_counitIso_hom_app_app, TopCat.Presheaf.presheafEquivOfIso_functor_map_app, TopCat.Presheaf.presheafEquivOfIso_unitIso_hom_app_app, TopCat.Presheaf.isSheaf_iso_iff, TopologicalSpace.Opens.mapIso",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; primitives reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.FiniteClosedCoverCohomologyVanishing",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proposition 02UZ proof",
+   "via": [
+    "new-node-finite-closed-cover-cohomology-vanishing",
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.WholeSpaceClosedSubtypeCohomologyVanishing",
+  "file": "lean/Sheaf/Topology/WholeSpaceClosedSubtypeCohomologyVanishing.lean",
+  "declaration": "TopCat.cohomology_vanishing_of_whole_closed_subtype",
+  "statement": "theorem cohomology_vanishing_of_whole_closed_subtype\n    (X : Type u) [TopologicalSpace X] (q : ℕ)\n    (h : ∀ G : CategoryTheory.Sheaf (Opens.grothendieckTopology (Set.univ : Set X))\n      AddCommGrpCat.{u}, IsZero (CategoryTheory.Sheaf.H' G q\n        (⊤ : Opens (Set.univ : Set X))))\n    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :\n    IsZero (CategoryTheory.Sheaf.H' F q (⊤ : Opens X))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3a6fe",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T021658-L-1026569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3a6fe",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T021658-L-1026569",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean modules with their node statements, recorded proof dependencies, report, and cited Stacks arguments; existing signatures are unchanged, all modules compile cleanly, and axiom probes show only permitted axioms plus documented sorryAx dependencies."
+ }
+}

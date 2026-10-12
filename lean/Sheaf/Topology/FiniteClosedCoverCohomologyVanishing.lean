@@ -12,6 +12,10 @@ public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.Algebra.Category.Grp.AB
 
+import Sheaf.Topology.EmptySpaceCohomologyVanishing
+import Sheaf.Topology.ClosedUnionCohomologyVanishing
+import Sheaf.Topology.WholeSpaceClosedSubtypeCohomologyVanishing
+
 /-! # Vanishing over a finite closed cover
 
 Source: Stacks Project, Cohomology, Proposition 02UZ, component-reduction paragraph.
@@ -54,6 +58,24 @@ theorem cohomology_vanishing_of_finite_closed_cover
       ∀ G : Sheaf (Opens.grothendieckTopology (Z : Set X)) AddCommGrpCat.{u},
         IsZero (Sheaf.H' G q (⊤ : Opens (Z : Set X))))
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :
-    IsZero (Sheaf.H' F q (⊤ : Opens X)) := by sorry
+    IsZero (Sheaf.H' F q (⊤ : Opens X)) := by
+  classical
+  have hsup : ∀ G : Sheaf (Opens.grothendieckTopology ((S.sup id : Closeds X) : Set X))
+      AddCommGrpCat.{u}, IsZero (Sheaf.H' G q (⊤ : Opens ((S.sup id : Closeds X) : Set X))) := by
+    clear hcover F
+    revert hvanish
+    induction S using Finset.induction_on with
+    | empty =>
+        intro _ G
+        let : IsEmpty ↥(⊥ : Closeds X) := ⟨fun x ↦ x.property⟩
+        exact cohomology_vanishing_of_isEmpty (↑(⊥ : Closeds X)) q G
+    | @insert Z S hZS ih =>
+        intro hvanish
+        rw [Finset.sup_insert]
+        apply cohomology_vanishing_of_closed_union X Z (S.sup id) q
+        · exact hvanish Z (Finset.mem_insert_self Z S)
+        · exact ih (fun W hW ↦ hvanish W (Finset.mem_insert_of_mem hW))
+  rw [hcover] at hsup
+  exact cohomology_vanishing_of_whole_closed_subtype X q hsup F
 
 end TopCat

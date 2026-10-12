@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-empty-space-cohomology-vanishing",
+ "kind": "statement",
+ "title": "Cohomology of an empty topological space",
+ "statement": "Let $X$ be an empty topological space, $q$ a nonnegative integer and $F$ an abelian sheaf on $X$. Then $H^q(X,F)$ [def-sc-topological-abelian-cohomology] is zero, including $q=0$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ, empty-space base case; Mathlib zero-stalk criterion"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The stalkwise zero-object criterion is vacuous because X has no points. Apply Mathlib TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero, Mathlib/Topology/Sheaves/Abelian.lean:90, to obtain IsZero F. The additive Ext functor in its second variable preserves zero objects; its value at the free abelian sheaf on the terminal open is H^q(X,F). This is exactly Functor.map_isZero (extFunctorObj _ q) hF.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ, empty-space base case; Mathlib zero-stalk criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "vanishing sheaf cohomology on empty space and union of closed subspaces",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H'",
+   "results": "12 hits: CategoryTheory.Sheaf.H', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.δ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.fromBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod_fromBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod_fromBiprod_assoc, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.fromBiprod_δ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.δ_toBiprod",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; reusable primitives only"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_iff_stalkFunctor_obj_isZero|cohomology.*(empty|homeomorph)|presheafEquivOfIso|chgUniv",
+   "results": "25 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; reusable primitives only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of an abelian sheaf on an empty topological space is zero",
+   "results": "8 hits: isZero_groupCohomology_succ_of_subsingleton, AlgebraicGeometry.instSubsingletonCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensOfIsEmpty, TopCat.Sheaf.isTerminalOfEqEmpty, TopCat.Sheaf.isTerminalOfEmpty, AlgebraicGeometry.Scheme.empty_presheaf, groupCohomology.coboundaries₁_eq_bot_of_isTrivial, groupCohomology.H1IsoOfIsTrivial, AlgebraicGeometry.LocallyRingedSpace.empty",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; primitives reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.FiniteClosedCoverCohomologyVanishing",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proposition 02UZ proof",
+   "via": [
+    "new-node-finite-closed-cover-cohomology-vanishing",
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.EmptySpaceCohomologyVanishing",
+  "file": "lean/Sheaf/Topology/EmptySpaceCohomologyVanishing.lean",
+  "declaration": "TopCat.cohomology_vanishing_of_isEmpty",
+  "statement": "theorem cohomology_vanishing_of_isEmpty\n    (X : Type u) [TopologicalSpace X] [IsEmpty X] (q : ℕ)\n    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :\n    IsZero (CategoryTheory.Sheaf.H' F q (⊤ : Opens X))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3a6fe",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T021658-L-1026569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3a6fe",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T021658-L-1026569",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean modules with their node statements, recorded proof dependencies, report, and cited Stacks arguments; existing signatures are unchanged, all modules compile cleanly, and axiom probes show only permitted axioms plus documented sorryAx dependencies."
+ }
+}

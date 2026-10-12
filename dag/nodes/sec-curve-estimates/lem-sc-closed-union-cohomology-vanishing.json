@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-closed-union-cohomology-vanishing",
+ "kind": "statement",
+ "title": "Universal cohomology vanishing over a binary closed union",
+ "statement": "Let $X$ be a Noetherian topological space (ascending chains of open subsets stabilize), let $Z,W$ be closed subsets and let $q\\geq0$. Suppose $H^q(Z,G)=0$ for every abelian sheaf $G$ on $Z$ and $H^q(W,G)=0$ for every abelian sheaf $G$ on $W$, with the subspace topologies [def-sc-topological-abelian-cohomology]. Then $H^q(Z\\cup W,F)=0$ for every abelian sheaf $F$ on $Z\\cup W$ with its subspace topology.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ (cohomology-proposition-vanishing-Noetherian), component-reduction paragraph; Lemma 02UV; Modules Lemma 02UT"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Put T=Z union W. The subspace T is Noetherian. The relative closed subsets Z and W have the same intrinsic topologies as the original subsets: both are induced by the inclusion into X. Let U=T minus Z; since Z is closed, U is open.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sc-noetherian-open-closed-cohomology-sequence] on T. The right term is the pushforward of the inverse image of F on Z. The left term is a closed pushforward of a sheaf G from C=closure_T(U).",
+   "uses": [
+    "lem-sc-noetherian-open-closed-cohomology-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "U is contained in W and W is closed, so C is contained in W. Push G forward along C into W. Closed-pushforward comparison [lem-sc-cohomology-closed-immersion-pushforward] and the hypothesis on all sheaves on W kill H^q(C,G). The same comparison and the hypothesis on Z kill the right term. The support comparison in the preceding step kills the left term. The intrinsic subspace topology identifications induce equivalences of the opens sites, so the hypotheses apply to these exact sheaves.",
+   "uses": [
+    "lem-sc-cohomology-closed-immersion-pushforward",
+    "lem-sc-noetherian-open-closed-cohomology-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural long exact sequence for sheaf cohomology recorded in [def-sc-topological-abelian-cohomology]. Exactness between zero outer degree-q groups makes the middle group zero. For q=0 this is the initial left-exact segment. This uses no degree-(q-1) intersection hypothesis.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-noetherian-open-closed-cohomology-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ (cohomology-proposition-vanishing-Noetherian), component-reduction paragraph; Lemma 02UV; Modules Lemma 02UT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "vanishing sheaf cohomology on empty space and union of closed subspaces",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H'",
+   "results": "12 hits: CategoryTheory.Sheaf.H', CategoryTheory.GrothendieckTopology.MayerVietorisSquare.δ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.fromBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod_fromBiprod, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toBiprod_fromBiprod_assoc, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.fromBiprod_δ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.δ_toBiprod",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; reusable primitives only"
+  },
+  {
+   "tool": "grep",
+   "query": "isZero_iff_stalkFunctor_obj_isZero|cohomology.*(empty|homeomorph)|presheafEquivOfIso|chgUniv",
+   "results": "25 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; reusable primitives only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "vanishing cohomology of every abelian sheaf on union of two closed subspaces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.zero_of_zero_cover, TopCat.Sheaf.isProductOfDisjoint, Opens.mayerVietorisSquare, Opens.coe_mayerVietorisSquare_X₄, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf, Opens.mayerVietorisSquare', AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem; primitives reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.FiniteClosedCoverCohomologyVanishing",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proposition 02UZ proof",
+   "via": [
+    "new-node-finite-closed-cover-cohomology-vanishing",
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ClosedUnionCohomologyVanishing",
+  "file": "lean/Sheaf/Topology/ClosedUnionCohomologyVanishing.lean",
+  "declaration": "TopCat.cohomology_vanishing_of_closed_union",
+  "statement": "theorem cohomology_vanishing_of_closed_union\n    (X : Type u) [TopologicalSpace X] [NoetherianSpace X]\n    (Z W : Closeds X) (q : ℕ)\n    (hZ : ∀ G : Sheaf (Opens.grothendieckTopology (Z : Set X)) AddCommGrpCat.{u},\n      IsZero (Sheaf.H' G q (⊤ : Opens (Z : Set X))))\n    (hW : ∀ G : Sheaf (Opens.grothendieckTopology (W : Set X)) AddCommGrpCat.{u},\n      IsZero (Sheaf.H' G q (⊤ : Opens (W : Set X))))\n    (F : Sheaf (Opens.grothendieckTopology ((Z ⊔ W : Closeds X) : Set X))\n      AddCommGrpCat.{u}) :\n    IsZero (Sheaf.H' F q (⊤ : Opens ((Z ⊔ W : Closeds X) : Set X)))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3a6fe",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T021658-L-1026569",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3a6fe",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T021658-L-1026569",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean modules with their node statements, recorded proof dependencies, report, and cited Stacks arguments; existing signatures are unchanged, all modules compile cleanly, and axiom probes show only permitted axioms plus documented sorryAx dependencies."
+ }
+}

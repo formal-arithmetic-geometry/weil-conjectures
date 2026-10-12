@@ -9,7 +9,7 @@
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/02UZ",
-  "place": "Proposition 02UZ proof; finite closed-cover formulation of its component argument"
+  "place": "Component-reduction argument, written as finite-union induction with a binary gluing obligation"
  },
  "mathlib_searches": [
   {
@@ -67,32 +67,31 @@
  "statement": "Let X be a Noetherian topological space, let q be a nonnegative integer, and let S be a finite collection of closed subsets whose union is X. If H^q(Z,G) [def-sc-topological-abelian-cohomology] is zero for every Z in S and every abelian sheaf G on Z with its subspace topology, then H^q(X,F) is zero for every abelian sheaf F on X.",
  "proof": [
   {
-   "text": "Induct on the number of closed cover members. An empty cover forces X empty; the empty-cover sheaf axiom gives zero cohomology in every degree.",
+   "text": "Induct on S before requiring it to cover X, proving universal vanishing on its closed union S.sup id. For S empty the union is empty; apply [lem-sc-empty-space-cohomology-vanishing].",
    "uses": [
-    "def-sc-topological-abelian-cohomology"
+    "lem-sc-empty-space-cohomology-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "For a chosen member Z and the closed union W of the remaining members, let U=X\\Z and apply the open-closed short exact sequence. Since closure(U) is contained in W, its support clause writes the left term as a closed pushforward from W, by composing the inclusion of closure(U) into W.",
+   "text": "For insert Z S, the induction hypothesis gives universal vanishing on S.sup id. The original hypothesis gives universal vanishing on Z. Since the new union is Z sup S.sup id, apply [lem-sc-closed-union-cohomology-vanishing].",
    "uses": [
-    "lem-sc-noetherian-open-closed-cohomology-sequence"
+    "lem-sc-closed-union-cohomology-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "The remaining cover members, regarded as closed subspaces of W, have the same intrinsic topology as before. Induction kills the cohomology of every sheaf on W; the cover hypothesis kills every sheaf on Z. Closed-immersion comparison and the long exact sequence then kill the middle degree-q group. At q=0 use left exactness.",
+   "text": "Rewrite S.sup id as top by hcover. Apply [lem-sc-whole-closed-subtype-cohomology-vanishing] to obtain the conclusion for F on X.",
    "uses": [
-    "lem-sc-cohomology-closed-immersion-pushforward",
-    "def-sc-topological-abelian-cohomology"
+    "lem-sc-whole-closed-subtype-cohomology-vanishing"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-topological-abelian-cohomology",
-  "lem-sc-cohomology-closed-immersion-pushforward",
-  "lem-sc-noetherian-open-closed-cohomology-sequence"
+  "lem-sc-closed-union-cohomology-vanishing",
+  "lem-sc-empty-space-cohomology-vanishing",
+  "lem-sc-whole-closed-subtype-cohomology-vanishing"
  ],
  "lean": {
   "existing": false,
@@ -117,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-aacdc",
+  "reviewer": "X-3a6fe",
   "group": "P1",
   "result": "pass",
-  "landing": "20261012T012259-L-793100",
+  "landing": "20261012T021658-L-1026569",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, node statements/dependencies, proofs, report, and Lean compilation matched the packet and stage-3 requirements; all three modules compiled cleanly."
+  "note": "independent Codex review: Matched all four Lean modules with their node statements, recorded proof dependencies, report, and cited Stacks arguments; existing signatures are unchanged, all modules compile cleanly, and axiom probes show only permitted axioms plus documented sorryAx dependencies."
  }
 }
