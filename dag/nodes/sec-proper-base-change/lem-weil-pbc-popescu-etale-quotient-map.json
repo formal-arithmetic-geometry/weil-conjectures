@@ -31,11 +31,12 @@
    }
   },
   {
-   "text": "The map $P/(pP)^n\\to B$ is the base change of $\\psi$ since $pL=qL$, so it is flat by [lem-weil-pbc-flat-module-base-change]. The admissible inclusion $A\\to B$ is flat and local, hence faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. Apply [lem-weil-pbc-flat-permanence] to obtain flatness of $f$.",
+   "text": "The private proved specialization flat_quotient_map identifies the target quotient with the tensor base change by [lem-weil-pbc-tensor-quotient-base-change]. Flatness follows from [lem-weil-pbc-flat-module-base-change]. The explicit quotient factorization identifies this map with the composite of f and the inclusion. The inclusion is local by maximal-ideal contraction and flat by admissibility; hence it is faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. Apply [lem-weil-pbc-flat-permanence] to descend flatness to f.",
    "uses": [
     "lem-weil-pbc-flat-module-base-change",
     "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-flat-permanence"
+    "lem-weil-pbc-flat-permanence",
+    "lem-weil-pbc-tensor-quotient-base-change"
    ],
    "elementary": false,
    "source": {
@@ -44,10 +45,9 @@
    }
   },
   {
-   "text": "The extensions to $B$ of $pA$ and $\\mathfrak m_A$ both equal $JB$: for the former use $pL=qL$, and for the latter use admissibility. Faithfully flat contraction [lem-weil-pbc-faithfully-flat-ideal-contraction] gives $pA=\\mathfrak m_A$. This is also the image of the maximal ideal of $P/(pP)^n$; the base and target are Artinian local [lem-weil-pbc-noetherian-local-quotient-artinian-local] and admissibility.",
+   "text": "Both quotients are nontrivial and local: their defining prime powers lie in the maximal ideals of the localizations, and quotient maps are surjective. Their maximal ideals are the images of pP and qL. Map the source maximal ideal along f and then into B; compatibility and pL=qL identify its image with JB. Admissibility gives the same image for the maximal ideal of A. Contract both ideals using [lem-weil-pbc-faithfully-flat-ideal-contraction] to obtain m_Q A=m_A. No Artinian property of the source quotient is needed.",
    "uses": [
     "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
     "def-weil-pbc-popescu-admissible-subalgebra"
    ],
    "elementary": false,
@@ -57,7 +57,7 @@
    }
   },
   {
-   "text": "The residue field $F$ of $A$ is finitely generated over $k$, since $A$ is essentially of finite type, and hence over $\\kappa(p)$. The surjection $\\Omega_{F/k}\\to\\Omega_{F/\\kappa(p)}$ [def-weil-pbc-kahler-differentials] kills the differentials of all coordinate residues. These span by hypothesis, so $\\Omega_{F/\\kappa(p)}=0$. The extension is finite separable by [lem-weil-pbc-fg-field-zero-differentials-separable].",
+   "text": "The explicitly constructed f respects k and sends the images of all polynomial variables to the a_j. Put Q=P/(pP)^n and F=A/m_A. Essential finite type over k descends to essential finite type over Q. The surjective map Omega(F/k) to Omega(F/Q) sends every spanning coordinate differential to zero, since each coordinate residue comes from Q. Thus Omega(F/Q)=0. Restricting scalars from Q to its residue field shows that F/kappa(Q) is formally unramified, hence separable and finite by [lem-weil-pbc-fg-field-zero-differentials-separable]. This directly proves the differential step in Lean, without selecting field generators.",
    "uses": [
     "def-weil-pbc-kahler-differentials",
     "lem-weil-pbc-fg-field-zero-differentials-separable",
@@ -70,7 +70,7 @@
    }
   },
   {
-   "text": "The Artinian ring $A$ has residue field finite over $P/(pP)^n$. By [lem-weil-pbc-artinian-finite-over-residue-finite], it is finite over that base, hence finite type. The base is Noetherian (polynomial localization followed by quotient), so [lem-weil-pbc-finite-type-noetherian-finite-presentation] gives finite presentation.",
+   "text": "The finite residue field extension makes F finite as a Q-module, since kappa(Q) is a quotient of Q. The Jacobson radical of the local ring A is its maximal ideal. Admissibility gives IsArtinianRing A, so [lem-weil-pbc-artinian-finite-over-residue-finite], implemented by IsSemiprimaryRing.finite_of_isArtinian, makes A finite over Q. Thus A is of finite type. Polynomial Noetherianity, localization, and quotient give a Noetherian Q; [lem-weil-pbc-finite-type-noetherian-finite-presentation] yields finite presentation.",
    "uses": [
     "lem-weil-pbc-artinian-finite-over-residue-finite",
     "lem-weil-pbc-finite-type-noetherian-finite-presentation",
@@ -84,7 +84,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-local-flat-unramified-etale] to the finitely presented flat local map $f$, using $pA=\\mathfrak m_A$ and the finite separable residue field extension. This gives algebraic étaleness at the unique prime of the Artinian local target, hence everywhere; no comparison to an affine scheme is needed.",
+   "text": "The finite separable residue field extension and m_Q A=m_A give Algebra.FormallyUnramified Q A by Algebra.FormallyUnramified.of_map_maximalIdeal. Together with the proved flatness and finite presentation, apply Algebra.Etale.of_formallyUnramified_of_flat, the Mathlib realization of [lem-weil-pbc-local-flat-unramified-etale]. This criterion directly gives Etale Q A; no passage through the etale locus or uniqueness of the target prime is required.",
    "uses": [
     "lem-weil-pbc-local-flat-unramified-etale"
    ],
@@ -111,12 +111,13 @@
   "lem-weil-pbc-flat-permanence",
   "lem-weil-pbc-local-flat-unramified-etale",
   "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+  "lem-weil-pbc-tensor-quotient-base-change"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH"
+  "place": "Proof of Tag 07FH (lemma-solution-modulo); read at https://stacks.math.columbia.edu/tag/07FH",
+  "note": "B4: complete Lean proof following the source factorization, faithfully flat descent, residue differentials, Hopkins-Levitzki, and the flat unramified etale criterion."
  },
  "mathlib_searches": [
   {
@@ -206,10 +207,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261012T184324-L-4012255",
-  "kind": "interface",
+  "landing": "20261012T225259-L-1801047",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

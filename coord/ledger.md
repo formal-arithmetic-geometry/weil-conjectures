@@ -9867,3 +9867,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:52 L: merged deliver/B3/Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover (stage 3; reviewer PASS; first push; landing 20261012T225258-L-1800701 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:52 L: merged deliver/B4/Sheaf.RingTheory.NagataLocalization (stage 3; reviewer PASS; first push; landing 20261012T225258-L-1800845 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:52 L: merged deliver/B4/Sheaf.RingTheory.NoetherNormalizationOverDomain (stage 3; reviewer PASS; first push; landing 20261012T225258-L-1800943 (interface); batch 20261012T225253; modules 2; new nodes 1)
+- 22:52 L: merged deliver/B4/Sheaf.RingTheory.PopescuEtaleQuotientMap (stage 3; reviewer PASS; first push; landing 20261012T225259-L-1801047 (proof); batch 20261012T225253; modules 1; new nodes 0)
