@@ -7839,3 +7839,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/J2/Sheaf.FieldTheory.MakeSeparablyGenerated (stage 3; reviewer PASS; after a return; landing 20261012T135244-L-1671750 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:52 L: merged deliver/J3/Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree (stage 3; reviewer PASS; first push; landing 20261012T135245-L-1672248 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Curve.BoundaryPointClassBaseChange (stage 3; reviewer PASS; first push; landing 20261012T135245-L-1672625 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Curve.GenericPointedEtaleExtension (stage 3; reviewer PASS; first push; landing 20261012T135245-L-1673004 (proof); batch 20261012T135212; modules 1; new nodes 0)

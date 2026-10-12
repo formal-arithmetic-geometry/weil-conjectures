@@ -15,33 +15,51 @@
  },
  "proof": [
   {
-   "text": "Choose a nonempty affine open Spec A of D. Its fraction field is K. Spec K is the inverse limit of Spec A[1/a] over nonzero a: the ring colimit is the localization at all nonzero elements, namely K.",
+   "text": "Restrict the etale neighbourhood W to an affine open U containing the image of its marking. Spec Omega has a single point, so the whole marking factors through U. The resulting W0 is etale, and its source and target are affine. Consequently its structure map is affine, quasi-compact and quasi-separated, and it is locally of finite presentation by etaleness.",
    "uses": [
-    "lem-sc-integral-function-field-affine-fraction"
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict W to an affine neighbourhood W0 of the marked point. An affine etale scheme over a field is of finite presentation and qcqs. Apply object descent for etale finite-presentation data to the system Spec A[1/a] to obtain an etale finite-presentation scheme V0 over some A[1/a] and an isomorphism of its generic fibre with W0. In standard etale coordinates this is precisely clearing denominators in the finitely many presentation coefficients and in the inverse of the derivative.",
+   "text": "At the generic point the local ring is the function field. Use the already proved source-library implementation Scheme.functionFieldCone and Scheme.isLimitFunctionFieldCone of the affine-neighbourhood limit: the index consists of nonempty affine opens of D, all containing the generic point. Each stage is Spec Gamma(D,U), its map to D is U.fromSpec, and Scheme.fromSpecFunctionField_eq_functionFieldCone_comp identifies every leg followed by this map with the generic inclusion. Reindex by the opposite of the order dual using orderDualEquivalence and opOpEquivalence, and whisker the limit cone. Affine stages are qcqs and the transition maps between them are affine.",
    "uses": [
-    "lem-weil-pbc-etale-finite-data-descent"
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
    ],
    "elementary": false
   },
   {
-   "text": "Compose V0 -> Spec A[1/a] with the open immersion into D. Transport w through the generic-fibre isomorphism, then project to V0 to get v. This satisfies v composed with the structure map = s composed with eta. The fibre-product universal property identifies the base-changed marking (v,s) with the transported marking. Compose the generic-fibre isomorphism with W0 -> W to get the required pointed morphism. An empty W cannot have a marking from Spec Omega, so no empty case is lost.",
+   "text": "Apply only clause (1), object descent, of etale_finite_data_descent to W0 over this limit. Obtain a stage i, an etale finite-presentation V over Spec Gamma(D,i), and an isomorphism alpha from its generic fibre to W0. Compose the structure morphism of V with j = i.fromSpec to obtain an etale morphism q : V -> D.",
+   "uses": [
+    "lem-weil-pbc-etale-finite-data-descent",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write p for the limit leg at i and eta for the generic inclusion, so p followed by j is eta. Let z be the marking of W0 followed by alpha inverse, and let v = z followed by the first pullback projection to V. Since alpha is over Spec K, z followed by the second projection is s. The pullback equation gives v followed by q = s followed by eta. Form the pointed neighbourhood b=(V,v). Define g : V x_D Spec K -> V x_(Spec Gamma(D,i)) Spec K from the two projections; its compatibility equation follows by cancellation of the monomorphism j. The desired underlying morphism is g followed by alpha followed by U -> W. It is over Spec K. Both projections show that the canonical marking of the base change of b followed by g is z. Composing with alpha cancels alpha inverse and recovers the original marking. Thus the underlying map defines a morphism of pointed neighbourhoods.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-etale-finite-data-descent"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "J3",
+  "date": "2026-10-12",
   "document": "Stacks Project",
-  "place": "Tags 02GH, 01ZM, 07RP; elementary specialization to the generic inclusion, and preimmersion equalization"
+  "place": "Tags 01ZM and 07RP, with Tags 0GWT and 01YW for the affine-neighbourhood limit; blueprint lem-sc-affine-generic-second paragraph 3. Lean implementation uses the proved WeilConjectures.AlgebraicGeometry.FunctionFieldLimit, existing etale_finite_data_descent object clause, and pullback equations."
  },
  "mathlib_searches": [
   {
@@ -111,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T110256-L-612654",
-  "kind": "interface",
+  "landing": "20261012T135245-L-1673004",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
