@@ -8,7 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover
+import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Descent of separatedness along a flat surjective quasi-compact morphism
@@ -32,28 +33,29 @@ Source: Stacks Project, Descent, Tag 02KU, with Topologies Tag 03L7 (2).
 
 Proof:
 1. The diagonal of `pullback.snd f g` is a closed immersion by separatedness, hence
-   universally closed (lem-weil-pbc-closed-immersion-integral-separated-uc, clause (d)).
-2. Identify that diagonal with the base change of the diagonal of `f` along the projection
-   `(X ×_S X) ×_S S' → X ×_S X` (lemma-nagata-diagonal-base-change). The square is cartesian
-   by lem-weil-pbc-cartesian-square-pasting; the target identification is an isomorphism,
-   hence universally closed, so the induced diagonal is universally closed as well
-   (lem-weil-pbc-closed-immersion-integral-separated-uc, clauses (d) and (f)).
-3. This projection is flat, surjective and quasi-compact by base change
-   (lem-weil-pbc-flat-morphism-base-change, lem-weil-pbc-surjective-base-change,
-   lem-weil-pbc-qcqs-morphism-permanence, clause (3)). For every affine open of its target,
-   its preimage is quasi-compact and has a finite affine cover whose images cover that open.
-   Thus it forms a one-member fpqc covering (def-weil-pbc-fpqc-covering; Tag 03L7 (2)).
-4. Universal closedness of the diagonal descends along this covering
-   (lem-weil-pbc-fpqc-descend-universally-closed, Tag 02KS). Uniqueness of fibre products
-   identifies the chosen base change with the cartesian square in step 2; compositions
-   with these isomorphisms preserve universal closedness.
-5. The original diagonal therefore has closed image. It is an immersion
-   (lem-weil-pbc-diagonal-immersion, Tag 01KJ), so it is a closed immersion
-   (lem-weil-pbc-immersion-closed-image-closed-immersion, Tag 01IQ). This is separatedness.
+   universally closed by Mathlib's closed-immersion instance (Stacks Tag 01W5).
+2. Apply Mathlib's descent instance for `MorphismProperty.diagonal @UniversallyClosed`
+   along surjective flat quasi-compact morphisms. It combines universal-closedness descent
+   (Tag 02KS) with the canonical base-change identification of diagonals. This gives
+   universal closedness of the diagonal of `f` directly, without constructing an fpqc family.
+3. Every scheme diagonal is an immersion (Tag 01KJ), hence a preimmersion. Universal
+   closedness makes its range closed. `IsClosedImmersion.of_isPreimmersion` (Tag 01IQ)
+   therefore makes the diagonal a closed immersion, which is precisely separatedness.
 -/
 theorem isSeparated_of_flat_surjective_baseChange {X S S' : Scheme.{u}}
     (f : X ⟶ S) (g : S' ⟶ S) [Flat g] [Surjective g] [QuasiCompact g]
     [IsSeparated (pullback.snd f g)] : IsSeparated f := by
-  sorry
+  have hbase : (MorphismProperty.diagonal @UniversallyClosed) (pullback.snd f g) := by
+    rw [MorphismProperty.diagonal_iff]
+    infer_instance
+  have hdiag : (MorphismProperty.diagonal @UniversallyClosed) f :=
+    MorphismProperty.of_pullback_snd_of_descendsAlong
+      (P := MorphismProperty.diagonal @UniversallyClosed)
+      (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact)
+      ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩ hbase
+  have : UniversallyClosed (pullback.diagonal f) :=
+    MorphismProperty.diagonal_iff.mp hdiag
+  exact ⟨IsClosedImmersion.of_isPreimmersion (pullback.diagonal f)
+    (pullback.diagonal f).isClosedMap.isClosed_range⟩
 
 end AlgebraicGeometry
