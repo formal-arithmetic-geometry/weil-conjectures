@@ -6377,3 +6377,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/J2/Sheaf.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion (stage 3; reviewer PASS; first push; landing 20261012T060742-L-2909566 (interface); batch 20261012T060728; modules 5; new nodes 4)
 - 06:07 L: merged deliver/J2/Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluing (stage 3; reviewer PASS; first push; landing 20261012T060742-L-2909666 (interface); batch 20261012T060728; modules 2; new nodes 1)
 - 06:07 L: merged deliver/J2/Sheaf.AlgebraicGeometry.EtaleSubsheafFinalOpen (stage 3; reviewer PASS; first push; landing 20261012T060742-L-2909850 (interface); batch 20261012T060728; modules 3; new nodes 2)
+- 06:07 L: merged deliver/J2/Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree (stage 3; reviewer PASS; first push; landing 20261012T060742-L-2909962 (interface); batch 20261012T060728; modules 2; new nodes 1)

@@ -26,144 +26,59 @@
  ],
  "proof": [
   {
-   "text": "*$f$ is finite locally free.* By [def-weil-pbc-scheme-conventions] $f$ is finite, and etale means locally of finite presentation, flat and unramified [def-weil-etale-morphism]. So $f$ is finite, flat and locally of finite presentation, which is the definition of a finite locally free morphism [def-pc-finite-locally-free] (Stacks Lemma 02KB: equivalently, $f$ is affine and $f_*\\mathcal O_Y$ is a finite locally free $\\mathcal O_X$-module).",
+   "text": "A finite etale f is finite locally free by the definitions: Etale gives flatness and local finite presentation. The locally constant degree theorem gives a locally constant fibre degree function. Since X is connected and nonempty, choose x0 and let d=fiberDegree f x0. IsLocallyConstant.apply_eq_of_preconnectedSpace gives fiberDegree f x=d for every x; this supplies IsFiniteLocallyFreeOfDegree d.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
+    "def-pc-finite-locally-free",
     "def-weil-etale-morphism",
-    "def-pc-finite-locally-free"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Stacks Morphisms, Lemma 02KB (lemma-finite-flat), Definition 02KA"
-   }
-  },
-  {
-   "text": "*Constant degree: assertion (a).* For $x\\in X$ let $\\delta_f(x)=\\dim_{\\kappa(x)}\\Gamma(Y_x,\\mathcal O_{Y_x})$, $Y_x=Y\\times_X\\operatorname{Spec}\\kappa(x)$. By step 1 and [lem-weil-pbc-finite-locally-free-degree-locally-constant], $\\delta_f$ is a locally constant function $X\\to\\mathbf Z_{\\ge0}$. $X$ is connected [def-weil-connected-scheme], in particular nonempty; pick $x_0\\in X$ and put $d=\\delta_f(x_0)\\ge0$. The set $T_1=\\delta_f^{-1}(d)$ is open (every point of it has an open neighbourhood on which $\\delta_f$ is constant, equal to $d$), and so is $T_2=X\\setminus T_1=\\bigcup_{e\\ne d}\\delta_f^{-1}(e)$; thus $X=T_1\\amalg T_2$ with $T_1,T_2$ open and closed, and $x_0\\in T_1$, so $T_2=\\varnothing$ by connectedness. Hence $\\delta_f(x)=d$ for all $x\\in X$, i.e. $f$ is finite locally free of degree $d$ [def-pc-finite-locally-free]. This is (a).",
-   "uses": [
-    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
     "def-weil-connected-scheme",
-    "def-pc-finite-locally-free"
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Stacks Morphisms, Lemma 04MH (lemma-finite-locally-free) and the remark after Definition 02KA ('S is the disjoint union of open and closed subschemes S_d ...'); the connectedness argument is the one-line consequence for connected S"
-   }
+   "elementary": false
   },
   {
-   "text": "*The geometric fibre has degree $d$.* Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-geometric-point] lying over $x\\in X$; it is the composite of $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(x)$ (from a field map $\\kappa(x)\\to\\Omega$) and the canonical $\\operatorname{Spec}\\kappa(x)\\to X$. Choose an affine open $V=\\operatorname{Spec}R\\subseteq X$ containing $x$ [def-weil-affine-spectrum]; since $f$ is finite, $f^{-1}(V)=\\operatorname{Spec}A$ for a finite $R$-algebra $A$ [def-weil-finite-integral-morphism], and $\\bar x$ and $\\operatorname{Spec}\\kappa(x)\\to X$ factor through $V$ via $R\\to\\kappa(x)\\to\\Omega$. By [lem-weil-pbc-open-fibre-product] (the preimage of $V$ in $\\operatorname{Spec}\\Omega$, resp. $\\operatorname{Spec}\\kappa(x)$, is everything) and [lem-weil-pbc-fibre-product-affine-spectra], $Y\\times_X\\operatorname{Spec}\\Omega=f^{-1}(V)\\times_V\\operatorname{Spec}\\Omega=\\operatorname{Spec}(A\\otimes_R\\Omega)$ and $Y_x=\\operatorname{Spec}(A\\otimes_R\\kappa(x))$. Since $A\\otimes_R\\Omega=(A\\otimes_R\\kappa(x))\\otimes_{\\kappa(x)}\\Omega$ and a $\\kappa(x)$-basis of $A\\otimes_R\\kappa(x)$ maps to an $\\Omega$-basis of its base change, $\\dim_\\Omega\\Gamma(Y_{\\bar x},\\mathcal O)=\\dim_{\\kappa(x)}\\Gamma(Y_x,\\mathcal O)=d$ by step 2, where $Y_{\\bar x}=Y\\times_X\\operatorname{Spec}\\Omega$.",
+   "text": "For any algebraically closed Ω and geometric point x, choose the unique point z of Spec Ω. The proved source-library fiberDegree_of_isPullback gives fiberDegree (pullback.snd f x) z = fiberDegree f (x z) = d. The proved source-library fiberDegree_eq_finrankΓ identifies the left side with finrankΓ (pullback.snd f x). Thus its dimension is d. These two existing API lemmas replace the former affine-chart/tensor-product proof.",
    "uses": [
-    "def-weil-geometric-point",
-    "def-weil-affine-spectrum",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "def-pc-finite-locally-free",
+    "def-weil-geometric-point"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Stacks Morphisms, Definition 02KA and Lemma 02KD (lemma-base-change-finite-locally-free); written out by the agent"
-   }
+   "elementary": true
   },
   {
-   "text": "*Assertion (b).* $f$ is finite etale, so $Y$ is an object of $\\mathrm{F\\acute Et}(X)$ [def-galois-categories], and $\\Omega$ is algebraically closed, hence separably closed. By [lem-galois-geometric-fibre] the geometric fibre $Y_{\\bar x}$ is, over $\\operatorname{Spec}\\Omega$, a finite disjoint union $\\coprod_{i=1}^n\\operatorname{Spec}\\Omega$ for some $n\\ge0$. Then $\\Gamma(Y_{\\bar x},\\mathcal O)\\cong\\Omega^n$ as $\\Omega$-algebras, of $\\Omega$-dimension $n$, so $n=d$ by step 3; and $\\coprod_{i=1}^d\\operatorname{Spec}\\Omega$ has exactly $d$ points. This is (b).",
+   "text": "Apply lem-galois-geometric-fibre, whose existing Lean statement gives an index type ι, its finiteness, Nat.card ι = finrankΓ (pullback.snd f x), and the over-isomorphism to ι copies. Hence card ι=d. An equivalence ι ≃ Fin d reindexes the coproduct via Sigma.whiskerEquiv; checking its composite with the codiagonal on each coprojection constructs the over-isomorphism required in (b).",
    "uses": [
-    "def-galois-categories",
     "lem-galois-geometric-fibre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Stacks Morphisms Lemma 02GL (lemma-etale-over-field) / Algebra Lemma 00U3 (an etale algebra over a separably closed field is a finite product of copies of it), as packaged in lem-galois-geometric-fibre; the count is step 3"
-   }
+   "elementary": false
   },
   {
-   "text": "*Etale local splitting with $d$ copies.* Let $x\\in X$. By [lem-weil-pbc-finite-etale-etale-local-split] there are an etale $g_x:U_x\\to X$, a point $u_x\\in U_x$ over $x$, a finite set $J_x$ and a decomposition $Y\\times_XU_x=\\coprod_{j\\in J_x}V_j$ into pairwise disjoint open and closed subschemes such that each $V_j\\to U_x$ (restriction of the projection $f_x:Y\\times_XU_x\\to U_x$) is an isomorphism. We show $\\#J_x=d$. Choose an algebraic closure $\\Omega$ of $\\kappa(u_x)$ [def-weil-algebraic-closure] and let $\\bar u:\\operatorname{Spec}\\Omega\\to U_x$ be the geometric point over $u_x$ [def-weil-geometric-point]; then $\\bar x=g_x\\circ\\bar u$ is a geometric point of $X$ over $x$. By the universal property of fibre products [def-pc-fibre-product] (pasting of two cartesian squares), $Y\\times_X\\operatorname{Spec}\\Omega\\cong(Y\\times_XU_x)\\times_{U_x}\\operatorname{Spec}\\Omega$, and by [lem-weil-pbc-open-fibre-product] the latter is the disjoint union of the open and closed subschemes $V_j\\times_{U_x}\\operatorname{Spec}\\Omega$, $j\\in J_x$, each isomorphic to $\\operatorname{Spec}\\Omega$ because $V_j\\to U_x$ is an isomorphism. So the geometric fibre at $\\bar x$ has $\\#J_x$ points, and by (b) (step 4) $\\#J_x=d$. Number $J_x=\\{1,\\dots,d\\}$ and let $\\sigma_i:U_x\\xrightarrow{\\sim}V_i$ be the inverse of $V_i\\to U_x$. Then $Y\\times_XU_x$ together with the open immersions $\\sigma_i$ (which cover it, with pairwise empty intersections) is a coproduct $\\coprod_{i=1}^dU_x$ in the sense of [lem-weil-pbc-scheme-coproduct-copies] (a morphism out of a scheme covered by disjoint open subschemes is the same as a family of morphisms out of the pieces, by gluing of morphisms), and $f_x$ is the codiagonal: $f_x\\circ\\sigma_i=\\mathrm{id}_{U_x}$ for every $i$.",
+   "text": "The underlying scheme isomorphism and Mathlib sigmaMk identify the points of the fibre with the sigma type of points of its ι summands. Spec Ω has a unique point, so projection identifies this sigma type with ι and then Fin d. Finite.of_equiv and Nat.card_congr give finiteness and cardinality d. This argument covers ι empty and d=0.",
    "uses": [
-    "lem-weil-pbc-finite-etale-etale-local-split",
-    "def-weil-algebraic-closure",
-    "def-weil-geometric-point",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-scheme-coproduct-copies"
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Stacks Etale Morphisms, Lemma 04HN (lemma-finite-etale-etale-local), used as in Etale Cohomology Section 03SH after Definition 03SE ('every finite etale morphism is etale locally on X of the form given in (2) for some integer d'); the count d is written out by the agent"
-   }
+   "elementary": true
   },
   {
-   "text": "*Restriction and trace commute with the localization $g_x$.* Fix $x$, write $g=g_x$, $U=U_x$, $Y'=Y\\times_XU$, $f'=f_x:Y'\\to U$ (a base change of $f$, so finite etale) and $G=g^{-1}F\\in\\Ab(U_{\\Et})$. For an object $W$ of $U_{\\Et}$ (viewed in $X_{\\Et}$ through $g$) one has $W\\times_UY'=W\\times_XY$ with the same projection to $W$ (pasting, [def-pc-fibre-product]). By [lem-weil-pbc-etale-inverse-image-restriction], applied to the etale morphisms $g$, $f$ and $f'$, up to the natural isomorphisms $\\rho$ there: $G(W)=F(W)$; $(f^{-1}F)(V)=F(V)$ and $(f'^{-1}G)(V)=F(V)$ for $V$ etale over $Y$, resp. $Y'$; the unit $\\operatorname{res}_{f,F}=\\eta_f(F)$ [def-weil-pbc-finite-etale-trace] at $W$ is the restriction $F(W)\\to F(W\\times_XY)$ along the projection, and $\\operatorname{res}_{f',G}$ at $W$ is the restriction $G(W)=F(W)\\to F(W\\times_UY')=F(W\\times_XY)$ along the same projection. So $g^{-1}\\operatorname{res}_{f,F}=\\operatorname{res}_{f',G}$ under the canonical identification $g^{-1}f_*f^{-1}F=f'_*f'^{-1}G$ of [lem-weil-pbc-finite-etale-trace-exists](1) (on $W$ both sides are $F(W\\times_XY)$), and by property (1) of [lem-weil-pbc-finite-etale-trace-exists], $g^{-1}\\operatorname{tr}_{f,F}=\\operatorname{tr}_{f',G}$ under the same identification. As $g^{-1}$ is additive, $g^{-1}(\\operatorname{tr}_{f,F}\\circ\\operatorname{res}_{f,F}-d\\cdot\\mathrm{id}_F)=\\operatorname{tr}_{f',G}\\circ\\operatorname{res}_{f',G}-d\\cdot\\mathrm{id}_G$.",
+   "text": "Apply the fixed-degree trace-restriction theorem to f, d and the structure obtained in step 1. Combining it with the geometric assertions gives the unchanged existential conclusion.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-finite-etale-trace",
-    "lem-weil-pbc-finite-etale-trace-exists"
+    "lem-weil-pbc-finite-etale-trace-degree-trace"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Etale Cohomology Section 03SH after Definition 03SE, property (1) of the characterization ('it commutes with etale localization on X'); the compatibility of res is written out by the agent"
-   }
-  },
-  {
-   "text": "*The split case: $\\operatorname{tr}\\circ\\operatorname{res}=d$.* With the notation of step 6 and $Y'=\\coprod_{i=1}^dV_i$, $\\sigma_i:U\\xrightarrow{\\sim}V_i$ (step 5), let $W$ be an object of $U_{\\Et}$. Then $W\\times_UY'$ is the disjoint union of the open and closed subschemes $W_i=W\\times_UV_i$, each mapped isomorphically onto $W$ by the projection $p_i$ (base change of the isomorphism $V_i\\to U$), and these form a covering of $W\\times_UY'$ in $U_{\\Et}$ with empty pairwise fibre products [lem-weil-pbc-scheme-coproduct-copies]. The sheaf condition [def-weil-pbc-abelian-etale-sheaves] (with $G(\\varnothing)=0$, the empty covering) gives $G(W\\times_UY')\\xrightarrow{\\sim}\\prod_{i=1}^dG(W_i)$, $t\\mapsto(t|_{W_i})_i$, and composing with $(p_i^*)^{-1}:G(W_i)\\xrightarrow{\\sim}G(W)$ gives the identification $(f'_*f'^{-1}G)(W)=G(W)^{d}$ of property (2) of [lem-weil-pbc-finite-etale-trace-exists]; by that property ($Y'$ is the disjoint union of $d$ open and closed subschemes each mapped isomorphically onto $U$ by $f'$, i.e. $Y'=\\coprod_{i=1}^dU$ with $f'$ the identity on each summand, via the $\\sigma_i$), $\\operatorname{tr}_{f',G}(W)$ is the sum map $G(W)^d\\to G(W)$. By step 6, $\\operatorname{res}_{f',G}(W)(s)=s|_{W\\times_UY'}$ for $s\\in G(W)$; its $i$-th component is $(p_i^*)^{-1}(s|_{W_i})=(p_i^*)^{-1}(p_i^*s)=s$, since the composite $W_i\\hookrightarrow W\\times_UY'\\to W$ is $p_i$. So $\\operatorname{res}_{f',G}(W)$ is the diagonal $s\\mapsto(s,\\dots,s)$, and $\\operatorname{tr}_{f',G}(\\operatorname{res}_{f',G}(s))=s+\\dots+s=d\\cdot s$. Hence $\\operatorname{tr}_{f',G}\\circ\\operatorname{res}_{f',G}=d\\cdot\\mathrm{id}_G$, and by step 6, $g_x^{-1}(\\operatorname{tr}_{f,F}\\circ\\operatorname{res}_{f,F}-d\\cdot\\mathrm{id}_F)=0$ for every $x\\in X$.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-copies",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-finite-etale-trace-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Etale Cohomology Section 03SH after Definition 03SE, property (2) ('if Y = coprod_{i=1}^d X then the trace map is the sum map') and 'This description shows that if f has constant degree d, then the composition F -> f_*f^{-1}F -> F is multiplication by d'; written out by the agent"
-   }
-  },
-  {
-   "text": "*Assertion (c).* Let $\\varphi=\\operatorname{tr}_{f,F}\\circ\\operatorname{res}_{f,F}-d\\cdot\\mathrm{id}_F:F\\to F$, a morphism in $\\Ab(X_{\\Et})$. Let $W\\to X$ be an object of $X_{\\Et}$ and $s\\in F(W)$. The family $(g_x)_{x\\in X}$ is etale and jointly surjective ($u_x\\mapsto x$), so by [lem-weil-pbc-etale-covering-base-change] the projections $W_x=W\\times_XU_x\\to W$ form a covering of $W$ in $X_{\\Et}$ [def-weil-pbc-etale-site]. Each $W_x$, with its projection to $U_x$, is an object of $(U_x)_{\\Et}$ whose image in $X_{\\Et}$ is $W_x\\to X$; by naturality of $\\varphi$, $\\varphi(s)|_{W_x}=\\varphi_{W_x}(s|_{W_x})$, and $\\varphi_{W_x}$ is the component at $W_x$ of $g_x^{-1}\\varphi$ under [lem-weil-pbc-etale-inverse-image-restriction](1), which is $0$ by step 7. So $\\varphi(s)$ restricts to $0$ on every member of a covering, hence $\\varphi(s)=0$ by the sheaf condition [def-weil-pbc-abelian-etale-sheaves]. Thus $\\varphi=0$, i.e. $\\operatorname{tr}_{f,F}\\circ\\operatorname{res}_{f,F}=d\\cdot\\mathrm{id}_F$. This is (c).",
-   "uses": [
-    "lem-weil-pbc-etale-covering-base-change",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Etale Cohomology Section 03SH after Definition 03SE (the equality is checked etale locally); written out by the agent"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-galois-categories",
-  "def-pc-fibre-product",
   "def-pc-finite-locally-free",
-  "def-weil-affine-spectrum",
-  "def-weil-algebraic-closure",
   "def-weil-connected-scheme",
   "def-weil-etale-morphism",
-  "def-weil-finite-integral-morphism",
   "def-weil-geometric-point",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-finite-etale-trace",
-  "def-weil-pbc-scheme-conventions",
   "lem-galois-geometric-fibre",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-finite-etale-trace-exists",
+  "lem-weil-pbc-finite-etale-trace-degree-trace",
   "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-scheme-coproduct-copies"
+  "lem-weil-pbc-scheme-coproduct-family"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Stacks Etale Cohomology Section 03SH, sentence after Definition 03SE ('This description shows that if f has constant degree d, then the composition ... is multiplication by d'), with Etale Morphisms Lemma 04HN and Morphisms Section 02K9; Stacks gives no proof beyond that sentence, the steps are written out by the agent"
+  "place": "J2 stage 3: constant-degree argument; existing geometric fibre and base-change APIs; trace part split off using Stacks 03SH"
  },
  "mathlib_searches": [
   {
@@ -267,5 +182,15 @@
   "group": "H1",
   "result": "pass",
   "note": "ConnectedSpace X (connected incl. nonempty); f finite etale = IsFinite+Etale; (a) f.IsFiniteLocallyFreeOfDegree d = recorded def-pc-finite-locally-free (fiberDegree = finrank Γ(X_s)); (b) every Ω alg closed in Type u, x : Spec Ω ⟶ X, pullback f x (GEOMETRIC FIBRE line) Finite ∧ Nat.card = d ∧ Over-iso to Fin d-coproduct of Spec Ω; (c) all F : Sheaf X_et Ab, finiteEtaleRestriction ≫ finiteEtaleTrace = d • 𝟙 F with recorded res (unit) and tr; names #check-resolved; d=0 admitted"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909962",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

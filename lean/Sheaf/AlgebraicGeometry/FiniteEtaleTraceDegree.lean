@@ -8,11 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegreeTrace
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
-import Sheaf.AlgebraicGeometry.GaloisCategories
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Degree and trace of a finite étale cover
@@ -81,6 +78,56 @@ theorem exists_finiteEtaleTrace_degree
             Over.mk (Sigma.desc fun _ : Fin d ↦ 𝟙 (Spec (.of Ω))))) ∧
       ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}),
         finiteEtaleRestriction f F ≫ finiteEtaleTrace f F = d • 𝟙 F := by
-  sorry
+  classical
+  let : f.IsFiniteLocallyFree := {}
+  obtain ⟨_, hδ, _⟩ := finiteLocallyFree_fiberDimension_isLocallyConstant f
+  let x₀ : X := Classical.arbitrary X
+  let d := f.fiberDegree x₀
+  have hd (x : X) : f.fiberDegree x = d :=
+    hδ.apply_eq_of_preconnectedSpace x x₀
+  let : f.IsFiniteLocallyFreeOfDegree d := { fiberDegree_eq := hd }
+  refine ⟨d, inferInstance, ?_, finiteEtaleTrace_comp_restriction f d⟩
+  intro Ω _ _ x
+  let z : Spec (.of Ω) := Classical.arbitrary _
+  have hr : (pullback.snd f x).finrankΓ = d := by
+    rw [← fiberDegree_eq_finrankΓ _ z,
+      Scheme.Hom.fiberDegree_of_isPullback f (.of_hasPullback f x)]
+    exact hd _
+  obtain ⟨ι, hι, hcard, ⟨e⟩⟩ := f.exists_overIso_sigma_of_isSepClosed x
+  let := hι
+  let := Fintype.ofFinite ι
+  have hc : Fintype.card ι = d := by simpa using hcard.trans hr
+  let r : ι ≃ Fin d := (Fintype.equivFin ι).trans (finCongr hc)
+  let q : (∐ fun _ : ι ↦ Spec (.of Ω)) ≅
+      (∐ fun _ : Fin d ↦ Spec (.of Ω)) :=
+    Sigma.whiskerEquiv (f := fun _ : ι ↦ Spec (.of Ω))
+      (g := fun _ : Fin d ↦ Spec (.of Ω)) r (fun _ ↦ Iso.refl _)
+  have hq : q.hom ≫ (Sigma.desc fun _ : Fin d ↦ 𝟙 (Spec (.of Ω))) =
+      Sigma.desc fun _ : ι ↦ 𝟙 (Spec (.of Ω)) := by
+    apply Sigma.hom_ext
+    intro j
+    simp [q, Sigma.whiskerEquiv_hom, Sigma.map']
+  let e' : Over.mk (pullback.snd f x) ≅
+      Over.mk (Sigma.desc fun _ : Fin d ↦ 𝟙 (Spec (.of Ω))) :=
+    e ≪≫ Over.isoMk q hq
+  let ep : ↥(pullback f x) ≃ ↥(∐ fun _ : ι ↦ Spec (.of Ω)) :=
+    { toFun := e.hom.left.base
+      invFun := e.inv.left.base
+      left_inv := fun t ↦ by
+        have h := congrArg (fun k ↦ k.left.base t) e.hom_inv_id
+        exact h
+      right_inv := fun t ↦ by
+        have h := congrArg (fun k ↦ k.left.base t) e.inv_hom_id
+        exact h }
+  let es := (sigmaMk (fun _ : ι ↦ Spec (.of Ω))).symm.toEquiv
+  have : Unique (Spec (.of Ω)) := inferInstance
+  let ec : (Σ _ : ι, Spec (.of Ω)) ≃ ι :=
+    { toFun := fun t ↦ t.1
+      invFun := fun j ↦ ⟨j, default⟩
+      left_inv := fun t ↦ by
+        exact Sigma.ext (by rfl) (heq_of_eq (Subsingleton.elim _ _))
+      right_inv := fun _ ↦ rfl }
+  let ee := ep.trans (es.trans (ec.trans r))
+  exact ⟨Finite.of_equiv (Fin d) ee.symm, by simpa using Nat.card_congr ee, ⟨e'⟩⟩
 
 end AlgebraicGeometry.Etale
