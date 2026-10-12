@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Since N is finite, choose a surjection $\\pi:R^n\\twoheadrightarrow N$. The lifting clause of [def-weil-pbc-projective-module] lifts $\\operatorname{id}_N$ along $\\pi$, giving an $R$-linear map $i:N\\to R^n$ with $\\pi\\circ i=\\operatorname{id}_N$. Localizing at $\\mathfrak p$ [def-weil-pbc-module-localization] gives maps $i_{\\mathfrak p}$ and $\\pi_{\\mathfrak p}$ with $\\pi_{\\mathfrak p}\\circ i_{\\mathfrak p}=\\operatorname{id}_{N_{\\mathfrak p}}$.",
+   "text": "Since N is finite, choose a surjection $\\pi:R^n\\twoheadrightarrow N$. The projective lifting clause [def-weil-pbc-projective-module] supplies $i:N\\to R^n$ with $\\pi\\circ i=\\mathrm{id}_N$. Mathlib Module.Finite.exists_comp_eq_id_of_projective supplies both maps and this identity. Localize i at $\\mathfrak p$ [def-weil-pbc-module-localization] using IsLocalizedModule.map and extend scalars with LinearMap.extendScalarsOfIsLocalization. The resulting $R_{\\mathfrak p}$-linear map sends $s/1$ to $i(s)/1$. Only this localized map is needed.",
    "uses": [
     "def-weil-pbc-projective-module",
     "def-weil-pbc-module-localization"
@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "For the forward implication, if $s/1\\in\\mathfrak pN_{\\mathfrak p}$, then applying $i_{\\mathfrak p}$ gives $i(s)/1\\in\\mathfrak p(R^n)_{\\mathfrak p}$ because $i_{\\mathfrak p}$ is $R_{\\mathfrak p}$-linear. By [lem-sc-free-prime-membership], $i(s)\\in\\mathfrak pR^n$; applying $\\pi$ gives $s=\\pi(i(s))\\in\\mathfrak pN$. Conversely, if $s\\in\\mathfrak pN$, the canonical localization map sends this relation to $s/1\\in\\mathfrak pN_{\\mathfrak p}$.",
+   "text": "For the forward implication, apply the localized inclusion to $s/1\\in\\mathfrak pN_{\\mathfrak p}$. Submodule.smul_top_le_comap_smul_top gives $i(s)/1\\in\\mathfrak p(R^n)_{\\mathfrak p}$. Apply the first clause of [lem-sc-free-prime-membership] to get $i(s)\\in\\mathfrak pR^n$. Apply the original projection $\\pi$, again using Submodule.smul_top_le_comap_smul_top, and rewrite $\\pi(i(s))=s$. Conversely, use Submodule.smul_induction_on on $s\\in\\mathfrak pN$: each generator $rx$, with $r\\in\\mathfrak p$, maps to $(r/1)(x/1)$ in the extended ideal times the localized module; sums remain in that submodule.",
    "uses": [
     "def-weil-pbc-projective-module",
     "lem-sc-free-prime-membership"
@@ -137,5 +137,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T194133-L-462544",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

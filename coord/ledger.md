@@ -9248,3 +9248,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/Q2/Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsHasPullbacks (stage 3; reviewer PASS; first push; landing 20261012T194132-L-462186 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/Q2/Sheaf.Topology.TopologicalCocycleObjectwise (stage 3; reviewer PASS; first push; landing 20261012T194133-L-462339 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.AffineChartTotalTensor (stage 3; reviewer PASS; after a return; landing 20261012T194133-L-462446 (proof); batch 20261012T194054; modules 1; new nodes 1)
+- 19:41 L: merged deliver/Q3/Sheaf.RingTheory.AffineFiniteProjectivePrimeMembership (stage 3; reviewer PASS; first push; landing 20261012T194133-L-462544 (proof); batch 20261012T194054; modules 1; new nodes 0)
