@@ -5,10 +5,14 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.EulerProductAux
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.LocalFrobenius
 public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.ZetaFunction.TraceFormula
+public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
+public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
 /-!
 # The Euler-product form of the trace formula for Weil complexes
@@ -67,6 +71,83 @@ models used in the proof, and are not part of the statement.
 universe u
 
 open CategoryTheory Limits PowerSeries
+
+namespace PowerSeries
+
+/-- The logarithmic derivative of the inverse: if `X f' = a f` and `f` is invertible, then
+`X (f⁻¹)' = -a f⁻¹`. -/
+theorem X_mul_derivative_inv {K : Type*} [Field K] {f a : K⟦X⟧} (hf : constantCoeff f ≠ 0)
+    (h : X * derivative K f = a * f) : X * derivative K f⁻¹ = -a * f⁻¹ := by
+  rw [derivative_inv']
+  linear_combination (-(f⁻¹ ^ 2)) * h - (a * f⁻¹) * PowerSeries.mul_inv_cancel f hf
+
+end PowerSeries
+
+namespace LinearMap
+
+variable {K : Type*} [Field K]
+
+/-- The expansion `det (1 - Tᵉ F)`, `e ≠ 0`, has constant coefficient `1`. -/
+theorem constantCoeff_charpolyRev_comp_X_pow {V : Type*} [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V] (F : Module.End K V) {e : ℕ} (he : e ≠ 0) :
+    constantCoeff ((F.charpolyRev.comp (Polynomial.X ^ e) : Polynomial K) : K⟦X⟧) = 1 := by
+  rw [Polynomial.constantCoeff_coe, Polynomial.coeff_zero_eq_eval_zero, Polynomial.eval_comp,
+    Polynomial.eval_pow, Polynomial.eval_X, zero_pow he, eval_charpolyRev]
+
+variable {W : ℤ → Type*} [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)]
+  [∀ i, FiniteDimensional K (W i)]
+
+/-- The alternating determinant `∏ᵢ det (1 - Tᵉ uᵢ)^{(-1)^i}`, `e ≠ 0`, has constant
+coefficient `1`. -/
+theorem constantCoeff_alternatingCharpolyRevProd (s : Finset ℤ) (u : ∀ i, Module.End K (W i))
+    {e : ℕ} (he : e ≠ 0) : constantCoeff (alternatingCharpolyRevProd s u e) = 1 := by
+  rw [alternatingCharpolyRevProd, map_prod]
+  refine Finset.prod_eq_one fun i _ ↦ ?_
+  split_ifs
+  · exact constantCoeff_charpolyRev_comp_X_pow (u i) he
+  · rw [PowerSeries.constantCoeff_inv, constantCoeff_charpolyRev_comp_X_pow (u i) he, inv_one]
+
+/-- The logarithmic derivative of the alternating determinant `∏ᵢ det (1 - Tᵉ uᵢ)^{(-1)^i}`,
+`e ≠ 0`: it is minus the generating series of `e ∑ᵢ (-1)ⁱ tr (uᵢ^{m / e})`, `e ∣ m`, `m ≥ 1`. -/
+theorem X_mul_derivative_alternatingCharpolyRevProd (s : Finset ℤ)
+    (u : ∀ i, Module.End K (W i)) {e : ℕ} (he : e ≠ 0) :
+    X * derivative K (alternatingCharpolyRevProd s u e) =
+      (-PowerSeries.mk fun m ↦ if m ≠ 0 ∧ e ∣ m then
+        (e : K) * ∑ i ∈ s, (i.negOnePow : ℤ) • trace K (W i) (u i ^ (m / e)) else 0) *
+        alternatingCharpolyRevProd s u e := by
+  set H : ℤ → K⟦X⟧ := fun i ↦ PowerSeries.mk fun m ↦
+    if m ≠ 0 ∧ e ∣ m then (e : K) * trace K (W i) (u i ^ (m / e)) else 0 with hH
+  have hP (i : ℤ) : (((u i).charpolyRev.comp (Polynomial.X ^ e) : Polynomial K) : K⟦X⟧) =
+      PowerSeries.expand e he ((u i).charpolyRev : K⟦X⟧) := by
+    rw [← Polynomial.expand_eq_comp_X_pow, coe_expand]
+  have hf : ∀ i ∈ s, X * derivative K
+      (if Even i then (((u i).charpolyRev.comp (Polynomial.X ^ e) : Polynomial K) : K⟦X⟧)
+      else (((u i).charpolyRev.comp (Polynomial.X ^ e) : Polynomial K) : K⟦X⟧)⁻¹) =
+      (-((i.negOnePow : ℤ) • H i)) *
+      (if Even i then (((u i).charpolyRev.comp (Polynomial.X ^ e) : Polynomial K) : K⟦X⟧)
+      else (((u i).charpolyRev.comp (Polynomial.X ^ e) : Polynomial K) : K⟦X⟧)⁻¹) := by
+    intro i _
+    have h1 := constantCoeff_charpolyRev_comp_X_pow (u i) he
+    rw [hP] at h1 ⊢
+    split_ifs with h
+    · rw [Int.negOnePow_even _ h, Units.val_one, one_smul]
+      exact X_mul_derivative_expand_charpolyRev (u i) e he
+    · rw [Int.negOnePow_odd _ (Int.not_even_iff_odd.1 h), Units.val_neg, Units.val_one,
+        neg_smul, one_smul]
+      exact PowerSeries.X_mul_derivative_inv (ne_of_eq_of_ne h1 one_ne_zero)
+        (X_mul_derivative_expand_charpolyRev (u i) e he)
+  rw [alternatingCharpolyRevProd, PowerSeries.X_mul_derivative_prod s hf, Finset.sum_neg_distrib]
+  congr 2
+  ext m
+  rw [map_sum, PowerSeries.coeff_mk]
+  split_ifs with hm
+  · rw [Finset.mul_sum]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    simp only [hH, map_zsmul, PowerSeries.coeff_mk, if_pos hm, mul_smul_comm]
+  · refine Finset.sum_eq_zero fun i _ ↦ ?_
+    simp only [hH, map_zsmul, PowerSeries.coeff_mk, if_neg hm, smul_zero]
+
+end LinearMap
 
 namespace AlgebraicGeometry
 
@@ -169,8 +250,55 @@ theorem coeff_prod_inv_alternatingCharpolyRevProd_stalk (K : WeilComplex k₀ l 
         (fun j ↦ (WeilComplex.stalk K j x).frobeniusEnd)
           ((X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1))⁻¹) =
       coeff n (LinearMap.alternatingCharpolyRevProd S
-        (fun i ↦ (WeilComplex.compactlySupportedCohomology K i).frobeniusEnd) 1)⁻¹ :=
-  sorry
+        (fun i ↦ (WeilComplex.compactlySupportedCohomology K i).frobeniusEnd) 1)⁻¹ := by
+  classical
+  have hd (x : X.finitePoints) : (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ≠ 0 :=
+    (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+  have hL := PowerSeries.X_mul_derivative_prod s fun x _ ↦ PowerSeries.X_mul_derivative_inv
+    (ne_of_eq_of_ne (LinearMap.constantCoeff_alternatingCharpolyRevProd _ _ (hd x)) one_ne_zero)
+    (LinearMap.X_mul_derivative_alternatingCharpolyRevProd T
+      (fun j ↦ (WeilComplex.stalk K j x).frobeniusEnd) (hd x))
+  have hR := PowerSeries.X_mul_derivative_inv
+    (ne_of_eq_of_ne (LinearMap.constantCoeff_alternatingCharpolyRevProd _ _ one_ne_zero)
+      one_ne_zero)
+    (LinearMap.X_mul_derivative_alternatingCharpolyRevProd S
+      (fun i ↦ (WeilComplex.compactlySupportedCohomology K i).frobeniusEnd) one_ne_zero)
+  refine PowerSeries.coeff_eq_of_X_mul_derivative_eq hL hR ?_ ?_ (m := n) ?_ n le_rfl
+  · rw [map_prod, PowerSeries.constantCoeff_inv,
+      LinearMap.constantCoeff_alternatingCharpolyRevProd _ _ one_ne_zero, inv_one]
+    refine Finset.prod_eq_one fun x _ ↦ ?_
+    rw [PowerSeries.constantCoeff_inv,
+      LinearMap.constantCoeff_alternatingCharpolyRevProd _ _ (hd x), inv_one]
+  · simp
+  · intro i hi
+    rcases Nat.eq_zero_or_pos i with rfl | hi0
+    · simp
+    have hsupp : (Function.support fun j : ℤ ↦ (j.negOnePow : ℤ) •
+        LinearMap.trace (PadicAlgCl l) _
+          ((WeilComplex.compactlySupportedCohomology K j).frobeniusEnd ^ i)) ⊆ S := by
+      intro j hj
+      by_contra h
+      have := hS j h
+      have h0 : (WeilComplex.compactlySupportedCohomology K j).frobeniusEnd ^ i = 0 :=
+        LinearMap.ext fun _ ↦ Subsingleton.elim _ _
+      rw [Function.mem_support, h0, map_zero, smul_zero] at hj
+      exact hj rfl
+    have htr := K.finsum_trace_compactlySupportedCohomology_eq hi0
+    rw [finsum_eq_sum_of_support_subset _ hsupp,
+      (X ↘ Spec (CommRingCat.of k₀)).finsum_fieldPoints_eq_sum hi0.ne' _
+        (fun x ↦ ∑ j ∈ T, (j.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
+          ((WeilComplex.stalk K j x).frobeniusEnd ^
+            (i / (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)))
+        (fun y x hx ↦ by
+          rw [K.traceFunction_eq_sum T hT]
+          refine Finset.sum_congr rfl fun j _ ↦ ?_
+          rw [WeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow _ i y x hx]
+          rfl)
+        (fun x hx ↦ hs x ((Nat.le_of_dvd hi0 hx).trans hi))] at htr
+    simp only [neg_neg, map_sum, PowerSeries.coeff_mk]
+    rw [if_pos ⟨hi0.ne', one_dvd i⟩, Nat.cast_one, one_mul, Nat.div_one, htr, Finset.sum_filter]
+    refine Finset.sum_congr rfl fun x _ ↦ ?_
+    simp [hi0.ne', nsmul_eq_mul]
 
 end WeilComplex
 
