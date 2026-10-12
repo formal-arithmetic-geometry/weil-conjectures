@@ -1,0 +1,128 @@
+{
+ "id": "new-affine-algebra-module-counit-iso",
+ "kind": "statement",
+ "title": "Affine algebra adjunction counit isomorphism",
+ "statement": "Let f:X→Y be an affine scheme morphism [def-pc-scheme]. Let g be the canonical morphism to the direct image algebra space (Y,f_* O_X) [def-sc-direct-image-algebra-derived-category], and let G=g_* be module direct image [def-pc-ringed-spaces-derived-direct-image] on module sheaves [def-weil-sheaf-of-modules-category]. Assume G is a right adjoint and use its canonical left adjoint and adjunction. Then the canonical adjunction counit is an isomorphism at every quasi-coherent O_X-module. Quasi-coherence is the property of [lem-weil-pbc-affine-module-correspondence].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-affine-module-correspondence"
+ ],
+ "proof": [
+  {
+   "text": "Identify the canonical left adjoint with tensor pullback for g by its Hom adjunction. Tensor associativity identifies it with the two operations in the affine module correspondence. Its counit is alpha: on pure tensors the evaluation sends a tensor s to a times s, uniquely by the tensor universal property. The correspondence proves alpha invertible on quasi-coherent O_X-modules. Transport it across the adjunction-compatible isomorphism of left adjoints. No surjectivity of f is used; empty schemes and zero modules satisfy the claim.",
+   "uses": [
+    "lem-weil-pbc-affine-module-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-correspondence"
+ ],
+ "proof_origin": {
+  "by": "R2 stage 3",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW proof; Tag 01SB (read online)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback from direct image algebra of affine scheme morphism exact and adjunction maps isomorphisms",
+   "results": "Scheme.Modules.pullbackPushforwardAdjunction and SheafOfModules.pullbackIso; no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq and compatibility equations used by the parent proof",
+   "date": "2026-10-12",
+   "verdict": "generic transport only"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_module_correspondence|pullback.*PreservesFiniteLimits",
+   "results": "AffineModuleCorrespondence provides alpha/beta but not identification with this canonical adjunction; no exactness instance found",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of modules from direct image algebra of affine morphism exact",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionIsos",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-algebra-module-adjunction-isos",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionCounitIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraModuleAdjunctionCounitIso.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_module_adjunction_counit_iso",
+  "statement": "theorem affine_algebra_module_adjunction_counit_iso {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f] [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] : ∀ K : SheafOfModules.{v} (moduleRings X.toRingedSpace), K.IsQuasicoherent → IsIso ((Adjunction.ofIsRightAdjoint (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f))).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "import_flags": [],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T131310-L-1354875",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T131310-L-1354875",
+  "kind": "interface"
+ }
+}
