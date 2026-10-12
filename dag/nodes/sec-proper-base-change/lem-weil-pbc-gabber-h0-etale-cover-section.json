@@ -19,78 +19,38 @@
  ],
  "proof": [
   {
-   "text": "Every nonempty closed subset C of X meets i(Z). If not, the two constant sections of the closed direct image of the constant two-element sheaf have equal inverse-image germs at every point of Z, since these stalks are singletons. They restrict equally by determination by germs, contradicting hZar injectivity.",
+   "text": "Obtain local representing etale X-objects and sections whose unit equations hold on their entire closed base changes and whose images contain i(Z).",
+   "uses": [
+    "lem-weil-pbc-etale-closed-section-local-family"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let W be the open union of their images. For its closed complement C, take the closed pushforward of the constant two-element sheaf and universe-lift its values. Its two constant global sections restrict equally on W. Since i(Z) lies in W, the inverse-image restriction from the top open to W is an isomorphism. Unit naturality and hZar imply equality of the two global sections. Evaluating at any point of C contradicts false != true. Thus W is all of X. No inverse-image stalk comparison is needed.",
    "uses": [
     "lem-weil-pbc-closed-pushforward-constant-stalks",
-    "lem-weil-pbc-sets-inverse-image-stalk",
-    "lem-weil-pbc-sheaf-sections-determined-by-germs"
+    "lem-weil-pbc-etale-morphism-open-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
-   }
+   "elementary": false
   },
   {
-   "text": "Identify the base change of the identity X-object with the identity Z-object. Apply the local description of inverse-image sections to get an etale cover V_j of Z with sections s_j on etale X-schemes U_j and maps V_j to U_j times_X Z on which t and the pulled-back s_j agree.",
+   "text": "Use compactness to extract a finite subcover K of these open images. Reindex sections and unit equations by the subtype of K and apply finite-family disjoint-union assembly. Empty schemes and empty subcovers are included by the same argument.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-section-description",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-etale-finite-family-section-gluing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
-   }
-  },
-  {
-   "text": "The morphism V_j to U_j times_X Z is etale, hence has open image. Extend this open across the closed immersion U_j times_X Z into U_j, and restrict U_j and s_j. This makes V_j surjective onto U_j times_X Z. The sheaf axiom yields equality on that whole base change.",
-   "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-morphism-open-map",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-weil-closed-immersion",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaf-of-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
-   }
-  },
-  {
-   "text": "The union of the open images of U_j contains i(Z); its closed complement is empty by the first step. Compactness of X gives a finite subcover. Form the finite disjoint union U of these U_j. Its structure map q is etale and surjective. The s_j glue over the disjoint union because overlaps are empty; the unit equation follows from naturality and the sheaf axiom after base change. If X is empty use the empty covering and its unique section.",
-   "uses": [
-    "lem-weil-pbc-etale-local-on-source",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-etale-closed-section-local-family",
   "lem-weil-pbc-closed-pushforward-constant-stalks",
-  "lem-weil-pbc-sets-inverse-image-stalk",
-  "lem-weil-pbc-sheaf-sections-determined-by-germs",
-  "lem-weil-pbc-etale-inverse-image-section-description",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "def-weil-closed-immersion",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "lem-weil-pbc-etale-local-on-source"
+  "lem-weil-pbc-etale-finite-family-section-gluing"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+  "place": "Tag 09ZF fourth paragraph; direct restriction/naturality replaces its closed-subset stalk test, and compactness selects a finite subcover before taking the coproduct"
  },
  "mathlib_searches": [
   {
@@ -185,11 +145,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-02903",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T095851-L-312145",
+  "landing": "20261012T112828-L-763499",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered signatures and proof with the nodes and Stacks Tag 09ZF; verified import users, unchanged existing interface, permitted node changes, clean compilation, and axioms containing sorryAx only for the reported decomposition."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

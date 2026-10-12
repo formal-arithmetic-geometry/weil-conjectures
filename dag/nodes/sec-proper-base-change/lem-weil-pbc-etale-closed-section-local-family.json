@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-etale-closed-section-local-family",
+ "kind": "statement",
+ "title": "Local etale representatives around a closed subscheme",
+ "statement": "Let i:Z→X be a closed immersion of schemes [def-weil-closed-immersion]. For a sheaf of sets F on X_et [def-weil-pbc-etale-sheaf-of-sets] and a section t of i_et^*F at the base change of the identity X-object [lem-weil-pbc-etale-inverse-image-algebraic-structures], there are a universe-u index type J, etale X-objects U_j and sections s_j in F(U_j) such that the union of the images of U_j contains i(Z), and i^*s_j equals the restriction of t to U_j times_X Z. No compactness or injectivity hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Identify the base change of the identity X-object with the identity Z-object using the unique isomorphism between terminal objects. Transport t along this isomorphism and use the existing local inverse-image section description to obtain an etale cover V_j of Z, X-objects U_j, maps a_j and representing sections s_j.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-section-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+   }
+  },
+  {
+   "text": "The cover map followed by the identity-object comparison equals the unique map into the base-changed terminal object. Naturality of restriction rewrites the local equation into the hypothesis of the single-representative shrinking lemma. Apply that lemma to every representative.",
+   "uses": [
+    "lem-weil-pbc-etale-closed-section-shrink"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+   }
+  },
+  {
+   "text": "Choose the resulting U_j and s_j. Every z in Z lies in the image of a cover member V_j, and the shrinking lemma places its image i(z) in U_j. Thus their union contains i(Z); the unit equations are those provided by the shrinking lemma.",
+   "uses": [
+    "lem-weil-pbc-etale-closed-section-shrink",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-section-description",
+  "lem-weil-pbc-etale-closed-section-shrink",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf on the small etale site sends a finite disjoint cover to a product of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsSheaf",
+   "results": "Presheaf.IsSheaf, isSheaf_iff_isSheaf_of_type; general sheaf axiom, no scheme-specific shrinking lemma",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local sections of inverse image of a sheaf of sets after a closed immersion have representatives on etale neighborhoods",
+   "results": "IsOpenImmersion.lift, IsClosedImmersion.lift; no exact shrinking/section theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gabber|surjective.*section|closed.*constant; existsUnique.*ofArrows; disjoint.*cover",
+   "results": "EtaleInverseImageSectionDescription, EtaleDisjointCover, scheme sigmaOpenCover, disjoint_opensRange_sigmaι; used existing section-description and disjoint-cover proofs",
+   "date": "2026-10-12",
+   "verdict": "existing ingredients used; no exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0EtaleCoverSection",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Tag 0A0C invokes 09ZF; the fourth paragraph of 09ZF constructs local representing sections before finite refinement",
+   "via": [
+    "lem-weil-pbc-gabber-h0-etale-criterion",
+    "lem-weil-pbc-gabber-h0-finite-lift",
+    "lem-weil-pbc-gabber-h0-finite-section",
+    "lem-weil-pbc-gabber-h0-etale-cover-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleClosedSectionLocalFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClosedSectionLocalFamily.lean",
+  "declaration": "AlgebraicGeometry.etale_closed_section_local_family",
+  "statement": "theorem etale_closed_section_local_family\n    {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (t : ((Scheme.etaleSetPullback i).obj F).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk (𝟙 X))))) :\n    ∃ (J : Type u) (U : J → X.Etale) (s : ∀ j, F.obj.obj (op (U j))),\n      Set.range i ⊆ ⋃ j, Set.range (U j).hom ∧\n      ∀ j, etaleSetDescentUnit i F (U j) (s j) =\n        ((Scheme.etaleSetPullback i).obj F).obj.map\n          ((MorphismProperty.Over.pullback @Etale ⊤ i).map\n            (MorphismProperty.Over.homMk (U j).hom (Category.comp_id _) :\n              U j ⟶ Scheme.Etale.mk (𝟙 X))).op t",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

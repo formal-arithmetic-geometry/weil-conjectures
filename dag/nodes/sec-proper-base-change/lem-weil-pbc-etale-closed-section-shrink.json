@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-etale-closed-section-shrink",
+ "kind": "statement",
+ "title": "Shrinking a single local etale representative across a closed immersion",
+ "statement": "Let i:Z→X be a closed immersion [def-weil-closed-immersion], F a sheaf of sets on X_et, and t a section of i_et^*F at the base change of the identity X-object [def-weil-pbc-etale-sheaf-of-sets, lem-weil-pbc-etale-inverse-image-algebraic-structures]. Let W be an etale Z-object, U an etale X-object, a:W→U times_X Z a morphism over Z, and s in F(U). Suppose t restricted along the unique terminal-object map from W equals i^*s restricted along a. Then there exist an etale X-object U_prime and a section s_prime in F(U_prime) such that the image of W→Z→X lies in the image of U_prime→X and i^*s_prime equals t restricted to U_prime times_X Z. Neither a covering condition on W nor compactness nor Zariski-unit injectivity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The morphism a between etale Z-objects is etale by cancellation. It has open image O in U times_X Z.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+   }
+  },
+  {
+   "text": "The projection U times_X Z→U is a closed immersion. By its inducing topology O is the inverse image of an ambient open U_prime of U. Restrict the structure map and s to that open. Factor a through U_prime times_X Z using the pullback universal property and the open-immersion lifting property. By construction the factor is surjective.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+   }
+  },
+  {
+   "text": "The factor is a singleton etale cover. Naturality of the unit makes the restricted equality precisely the desired equation after this cover. Sheaf separatedness gives equality on the whole base change. The image of W lies in U_prime by its factorization. If W is empty take the empty ambient open and use the empty-cover sheaf axiom.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through surjectivity of the union of local representing etale schemes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf on the small etale site sends a finite disjoint cover to a product of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsSheaf",
+   "results": "Presheaf.IsSheaf, isSheaf_iff_isSheaf_of_type; general sheaf axiom, no scheme-specific shrinking lemma",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local sections of inverse image of a sheaf of sets after a closed immersion have representatives on etale neighborhoods",
+   "results": "IsOpenImmersion.lift, IsClosedImmersion.lift; no exact shrinking/section theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gabber|surjective.*section|closed.*constant; existsUnique.*ofArrows; disjoint.*cover",
+   "results": "EtaleInverseImageSectionDescription, EtaleDisjointCover, scheme sigmaOpenCover, disjoint_opensRange_sigmaι; used existing section-description and disjoint-cover proofs",
+   "date": "2026-10-12",
+   "verdict": "existing ingredients used; no exact statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0EtaleCoverSection",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Tag 0A0C invokes 09ZF; the fourth paragraph of 09ZF constructs local representing sections before finite refinement",
+   "via": [
+    "lem-weil-pbc-gabber-h0-etale-criterion",
+    "lem-weil-pbc-gabber-h0-finite-lift",
+    "lem-weil-pbc-gabber-h0-finite-section",
+    "lem-weil-pbc-gabber-h0-etale-cover-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleClosedSectionShrink",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClosedSectionShrink.lean",
+  "declaration": "AlgebraicGeometry.etale_closed_section_shrink",
+  "statement": "theorem etale_closed_section_shrink\n    {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (t : ((Scheme.etaleSetPullback i).obj F).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk (𝟙 X)))))\n    (W : Z.Etale) (U : X.Etale)\n    (a : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ i).obj U)\n    (s : F.obj.obj (op U))\n    (ht : ((Scheme.etaleSetPullback i).obj F).obj.map\n        (((MorphismProperty.Over.mkIdTerminal @Etale X).isTerminalObj\n          (MorphismProperty.Over.pullback @Etale ⊤ i) (Scheme.Etale.mk (𝟙 X))).from W).op\n        t = ((Scheme.etaleSetPullback i).obj F).obj.map a.op\n          (etaleSetDescentUnit i F U s)) :\n    ∃ (U' : X.Etale) (s' : F.obj.obj (op U')),\n      Set.range (W.hom ≫ i) ⊆ Set.range U'.hom ∧\n      etaleSetDescentUnit i F U' s' =\n        ((Scheme.etaleSetPullback i).obj F).obj.map\n          ((MorphismProperty.Over.pullback @Etale ⊤ i).map\n            (MorphismProperty.Over.homMk U'.hom (Category.comp_id _) :\n              U' ⟶ Scheme.Etale.mk (𝟙 X))).op t",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
