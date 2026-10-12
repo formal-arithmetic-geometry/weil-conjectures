@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-algclosed-finite-type-tensor-domain",
+ "kind": "lemma",
+ "title": "A domain tensored with a finite type domain over an algebraically closed field",
+ "statement": "Let $k$ be an algebraically closed field, $R$ a commutative $k$-algebra which is a domain, and $S$ a commutative $k$-algebra which is a finite type domain. Then $R\\otimes_k S$ is a domain.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00I7, final paragraph; algebraic coordinate version of its closed-fibre argument"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose a k-basis of R. TensorProduct.basis and its coordinate maps identify each tensor element with a finite family of coordinates in S. Naturality of these coordinates under S-algebra maps follows by tensor induction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each maximal ideal m of S, finite_of_finite_type_of_isJacobsonRing makes S/m finite over k. IsAlgClosed.algebraMap_bijective_of_isIntegral identifies S/m with k. Tensor congruence and rid identify R tensor_k (S/m) with R. Thus for xy=0 one specialized tensor element vanishes, so all its coordinates lie in m.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If x and y were nonzero, choose nonzero coordinates a and b. The specialization alternative shows ab belongs to every maximal ideal of S. Since S is Jacobson by isJacobsonRing_of_finiteType [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal], and S is a domain, the Jacobson radical of zero is zero. Hence ab=0 contradicts a,b nonzero.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain makes the tensor product nontrivial. Combined with the preceding absence of zero divisors, this gives IsDomain.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00I7, final paragraph; algebraic coordinate version of its closed-fibre argument",
+  "note": "Lean proof written by F3 from the indicated Stacks argument and Mathlib primitives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of domains over an algebraically closed field is a domain",
+   "results": "Service unavailable: Internal Server Error; no verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a tensor product of domains over an algebraically closed field is a domain",
+   "results": "LinearDisjoint.isDomain and nontrivial_of_algebraMap_injective_of_isDomain found; no direct domain theorem for this hypothesis.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, TensorProduct",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg isDomain.*tensorProduct|tensorProduct.*isDomain; searches of the source library and Sheaf for tensor domain",
+   "results": "Flat/Domain and LinearDisjoint results require additional hypotheses; source idempotent theorem proves only connectedness. No equivalent blueprint node found by tensor domain and 00I7 searches.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "proof: geometric fibres are connected because tensor products of field extensions of a separably closed field are irreducible; Algebra, Lemma 00I7, final paragraph; algebraic coordinate version of its closed-fibre argument",
+   "via": [
+    "lem-weil-pbc-field-tensor-irreducible",
+    "lem-weil-pbc-sections-base-field-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.AlgClosedFiniteTypeTensorDomain",
+  "file": "lean/Sheaf/FieldTheory/AlgClosedFiniteTypeTensorDomain.lean",
+  "declaration": "IsAlgClosed.isDomain_tensorProduct_of_finiteType",
+  "statement": "theorem IsAlgClosed.isDomain_tensorProduct_of_finiteType\n    (k : Type u) [Field k] [IsAlgClosed k]\n    (R : Type v) [CommRing R] [IsDomain R] [Algebra k R]\n    (S : Type w) [CommRing S] [IsDomain S] [Algebra k S] [Algebra.FiniteType k S] :\n    IsDomain (R ⊗[k] S)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144110-L-2094623",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144110-L-2094623",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

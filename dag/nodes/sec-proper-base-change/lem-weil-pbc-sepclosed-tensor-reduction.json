@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-sepclosed-tensor-reduction",
+ "kind": "lemma",
+ "title": "Purely inseparable base change and reduction of the tensor factors",
+ "statement": "Let $k$ be a separably closed field [def-kun-separably-closed], and $K/k,L/k$ field extensions [def-pc-field-extension]. Put $\\Omega=\\overline{k}$, $A=\\Omega\\otimes_k K$, $B=\\Omega\\otimes_k L$, $R=A/\\sqrt{0}$ and $S=B/\\sqrt{0}$. Then $R,S$ are domains and $\\operatorname{Spec}(K\\otimes_k L)$ is homeomorphic to $\\operatorname{Spec}(R\\otimes_\\Omega S)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00I7, first and second paragraphs"
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed makes the algebraic closure purely inseparable. PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, followed by tensor commutation, identifies the spectra of each base-changed field with its original field. Each is irreducible; PrimeSpectrum.irreducibleSpace_iff_isPrime_nilradical makes its nilradical prime. Quotienting by that prime gives a domain.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a nil ideal I, PrimeSpectrum.isHomeomorph_comap applied to the quotient map gives a homeomorphism on spectra: every quotient element is in the image and the kernel lies in the nilradical. The image of a nilradical under includeRight generates a nil ideal, since nilpotence is preserved by ring homomorphisms. tensorQuotientEquiv therefore gives a homeomorphism after reducing the right tensor factor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Purely inseparable base change gives Spec(K tensor_k L) homeomorphic to Spec(Omega tensor_k (K tensor_k L)). cancelBaseChange and assoc identify the latter ring with A tensor_Omega B. Reduce B by the preceding step, commute the tensor factors, reduce A, and commute again. Compose the resulting homeomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00I7, first and second paragraphs",
+  "note": "Lean proof written by F3 from the indicated Stacks argument and Mathlib primitives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "prime spectrum of a tensor product after purely inseparable extension and reduction of its factors",
+   "results": "Service unavailable: Internal Server Error; no verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable",
+   "results": "Exact base-change homeomorphism found in Mathlib.RingTheory.Spectrum.Prime.Homeomorph; used in the proof, but it does not assemble the two reductions.",
+   "date": "2026-10-12",
+   "verdict": "partial match used"
+  },
+  {
+   "tool": "grep",
+   "query": "rg comap.*Homeomorph and IsPurelyInseparable.*tensor; tensorQuotientEquiv; reduction tensor in DAG and source",
+   "results": "Mathlib supplies the base-change homeomorphism and tensor quotient equivalences. No exact combined statement or duplicate blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "partial matches used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectra of tensor products are unchanged by reducing the factors and extending a separably closed base field to its algebraic closure",
+   "results": "Found PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable and its tensorProductMap variant, already used primitives; no assembled two-factor reduction result. Second reader F3.",
+   "date": "2026-10-12",
+   "verdict": "partial matches used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "proof: geometric fibres are connected because tensor products of field extensions of a separably closed field are irreducible; Algebra, Lemma 00I7, first and second paragraphs",
+   "via": [
+    "lem-weil-pbc-field-tensor-irreducible",
+    "lem-weil-pbc-sections-base-field-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.SepClosedTensorReduction",
+  "file": "lean/Sheaf/FieldTheory/SepClosedTensorReduction.lean",
+  "declaration": "IsSepClosed.tensor_reduction_domains_homeomorph",
+  "statement": "theorem IsSepClosed.tensor_reduction_domains_homeomorph\n    (k : Type u) [Field k] [IsSepClosed k]\n    (K : Type v) [Field K] [Algebra k K]\n    (L : Type w) [Field L] [Algebra k L] :\n    let Ω := AlgebraicClosure k\n    let R := (Ω ⊗[k] K) ⧸ nilradical (Ω ⊗[k] K)\n    let S := (Ω ⊗[k] L) ⧸ nilradical (Ω ⊗[k] L)\n    IsDomain R ∧ IsDomain S ∧\n      Nonempty (PrimeSpectrum (K ⊗[k] L) ≃ₜ PrimeSpectrum (R ⊗[Ω] S))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144110-L-2094623",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T144110-L-2094623",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
