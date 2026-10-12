@@ -15,36 +15,33 @@
  },
  "proof": [
   {
-   "text": "Choose an enumeration of the finite index type. Finite free modules and O_X are quasi-coherent. The kernel F of p is quasi-coherent by quasi-coherent kernel closure. For each j, identify F_j with the kernel of the restriction of p to the first j summands, so every F_j is quasi-coherent and F_0=0.",
+   "text": "Apply finite_free_kernel_ideal_filtration to obtain a finite chain F starting at an IsZero object, ending in an object isomorphic to kernel p, and short exact sequences F_j → F_(j+1) → J_j.toModules with each J_j.toModules quasi-coherent. This is the geometric coordinate-filtration part of the source argument, independent of the ideal H¹ hypothesis.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-kernel"
+    "lem-pqf-finite-free-kernel-ideal-filtration"
    ],
    "elementary": false
   },
   {
-   "text": "The projection F_j → O_X to the last coordinate has kernel F_(j-1). Its image J_j is quasi-coherent by quasi-coherent image closure, and is an O_X-submodule of O_X, hence a quasi-coherent ideal sheaf. On affine opens its section ideals commute with localization, and thus give IdealSheafData; its associated toModules is isomorphic to J_j. The first isomorphism theorem gives a short exact sequence 0 → F_(j-1) → F_j → J_j → 0.",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The additive cohomology functor sends F_0=0 to zero. Apply the full long exact cohomology sequence to each preceding short exact sequence. In H¹(F_(j-1)) → H¹(F_j) → H¹(J_j), the left term vanishes inductively and the right term vanishes by the ideal hypothesis, transported along the ideal-module isomorphism. Exactness forces every element of the middle term to be zero. Induct to j=|I|. This also covers an empty index type, when F=0.",
+   "text": "Let H be moduleCohomology X.toRingedSpace 1 and Γ be globalSectionsFunctor. H is additive, so it maps the zero initial object to zero. Induct on j ≤ n. The full long exact sequence for the j-th short exact sequence yields exactness of H(F_j) → H(F_(j+1)) → H(J_j.toModules). The induction hypothesis annihilates the first object, and the given ideal hypothesis annihilates the last. Mathlib ShortComplex.Exact.isZero_of_both_isZero annihilates the middle.",
    "uses": [
     "lem-weil-pbc-derived-functor-long-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "Map the endpoint isomorphism F_n ≅ kernel p by H. Transport the IsZero conclusion along its inverse and apply ModuleCat.subsingleton_of_isZero. The induction includes n = 0 without requiring a nonempty index type or an epimorphic p.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pqf-finite-free-kernel-ideal-filtration",
   "lem-weil-pbc-derived-functor-long-exact"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 01XF, label lemma-quasi-compact-h1-zero-covering, kernel filtration paragraph; its filtration argument does not require the map to be surjective"
+  "place": "Tag 01XF, coordinate-filtration paragraph and following H¹ induction; M2 formalizes the cohomological induction, isolating the geometric chain as its own theorem."
  },
  "mathlib_searches": [
   {
@@ -125,9 +122,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T225259-L-1801145",
+  "landing": "20261012T235112-L-2171999",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
