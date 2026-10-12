@@ -9127,3 +9127,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:48 L: returned deliver/R3/Sheaf.AlgebraicGeometry.Curve.PrimaryModuleFiltrationSheafTransport (reviewer RETURN: (reviewer X-d476b, head d476b2b5e) E2: PrimaryModuleFiltrationSheafTransportTerminal.lean, lines 40–49: the arbitrary F )
 - 18:49 L: returned deliver/V2/Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic (reviewer RETURN: (reviewer X-84fc3, head 84fc3a9a2) B9: In dag/nodes/sec-curve-estimates/lem-weil-pbc-injective-presheaf-module-cech-cocy)
 - 18:49 L: returned deliver/S2/Sheaf.Paper.QuasiCompactH1Zero (reviewer RETURN: (reviewer X-0e2ac, head 0e2aca4f6) H9 (imports; review point 5): The new holed modules omit their recorded proof-depende)
+- 18:50 L: returned deliver/W3/Sheaf.AlgebraicGeometry.ChowPullbackAlgebraization (reviewer RETURN: (reviewer X-85771, head 85771db81) E1/D1: The split loses the projective data needed by its stated proof. In ChowPullbac)
