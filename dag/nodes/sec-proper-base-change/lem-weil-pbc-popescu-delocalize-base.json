@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "(Reduction to $B'$ standard smooth.) By [lem-weil-pbc-smooth-retract-standard-smooth] (Stacks 07CH) applied to the smooth $S^{-1}R$-algebra $B'$ there are a standard smooth $S^{-1}R$-algebra $B''$ [def-weil-pbc-standard-smooth-algebra] and $S^{-1}R$-algebra maps $\\iota:B'\\to B''$, $\\rho:B''\\to B'$ with $\\rho\\circ\\iota=\\mathrm{id}_{B'}$. Then $S^{-1}A\\xrightarrow{\\iota\\beta'}B''\\xrightarrow{\\gamma'\\rho}S^{-1}\\Lambda$ are $S^{-1}R$-algebra maps with $\\gamma'\\rho\\iota\\beta'=\\gamma'\\beta'=S^{-1}\\alpha$. Replacing $(B',\\beta',\\gamma')$ by $(B'',\\iota\\beta',\\gamma'\\rho)$ we may assume that $B'$ is standard smooth over $S^{-1}R$; smoothness of $B'$ is not used again.",
+   "text": "Apply the smooth-retract lemma to B′, obtaining a standard smooth D and maps iota,rho with rho iota=id. Reroute the two maps through D; associativity of algebra-homomorphism composition and the retraction identity prove that their composite remains the localized alpha.",
    "uses": [
     "lem-weil-pbc-smooth-retract-standard-smooth",
     "def-weil-pbc-standard-smooth-algebra",
@@ -39,116 +39,34 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1947-1948 ('We first apply Lemma lemma-smooth-standard-smooth ... Thus we may assume B' is standard smooth')"
+    "place": "Smoothing Ring Maps, Lemma Tag 07F4 (lemma-delocalize-base), proof"
    }
   },
   {
-   "text": "(Generators of $A$ and their images.) Fix a presentation $A\\cong R[x_1,\\dots,x_n]/(g_1,\\dots,g_t)$ [def-weil-pbc-finitely-presented-algebra], let $\\bar x_i\\in A$ be the class of $x_i$ and $\\lambda_i=\\alpha(\\bar x_i)\\in\\Lambda$ for $i=1,\\dots,n$. Since $\\alpha$ is a homomorphism of $R$-algebras, $g_j(\\lambda_1,\\dots,\\lambda_n)=\\alpha(g_j(\\bar x_1,\\dots,\\bar x_n))=\\alpha(0)=0$ for $j=1,\\dots,t$ (evaluation of polynomials commutes with $R$-algebra maps [def-weil-pbc-mv-polynomial-ring]). Moreover $A$ is generated as an $R$-algebra by $\\bar x_1,\\dots,\\bar x_n$, and $S^{-1}A$ is generated as an $S^{-1}R$-algebra by $\\bar x_1/1,\\dots,\\bar x_n/1$, since $a/u=(1/u)\\cdot(a/1)$ and $a$ is a polynomial in the $\\bar x_i$ [def-weil-pbc-module-localization].",
+   "text": "Choose a finite presentation P of A using Presentation.exists_presentation_fin. Apply the prescribed-generator standard-smooth-presentation lemma to D and the images of its generators under the rerouted map, obtaining Q with an initial Jacobian and the required first-variable values.",
    "uses": [
     "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1949-1950 ('Write A = R[x_1..x_n]/(g_1..g_t) and say x_i -> lambda_i in Lambda')"
-   }
-  },
-  {
-   "text": "(A standard smooth presentation of $B'$ containing the generators of $A$.) Put $b_i=\\beta'(\\bar x_i/1)\\in B'$, $i=1,\\dots,n$. By [lem-weil-pbc-standard-smooth-include-generators] (Stacks 07EY) applied to the standard smooth $S^{-1}R$-algebra $B'$ and $b_1,\\dots,b_n$ there are $m\\ge0$, $n\\le c\\le n+m$, $f_1,\\dots,f_c\\in P':=S^{-1}R[x_1,\\dots,x_{n+m}]$ and an isomorphism $B'\\cong P'/(f_1,\\dots,f_c)$ with $\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$ invertible in $B'$ [def-weil-pbc-polynomial-partial-derivative] and the class of $x_i$ equal to $b_i$ for $i\\le n$. Thus $\\beta'$ is the $S^{-1}R$-algebra map with $\\bar x_i/1\\mapsto$ class of $x_i$ ($i\\le n$), determined by these values by Step 2, and $\\gamma'(\\text{class of }x_i)=\\gamma'\\beta'(\\bar x_i/1)=S^{-1}\\alpha(\\bar x_i/1)=\\lambda_i/1$ for $i\\le n$.",
-   "uses": [
-    "lem-weil-pbc-standard-smooth-include-generators",
-    "def-weil-pbc-standard-smooth-algebra",
-    "def-weil-pbc-polynomial-partial-derivative",
-    "def-weil-pbc-module-localization"
+    "lem-weil-pbc-standard-smooth-include-generators"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1950-1954 ('We may write B' = S^{-1}R[x_1..x_{n+m}]/(f_1..f_c) for some c >= n ... A -> B' is given by x_i -> x_i, see Lemma lemma-standard-smooth-include-generators')"
+    "place": "Smoothing Ring Maps, Lemma Tag 07F4 (lemma-delocalize-base), proof"
    }
   },
   {
-   "text": "(Rescaling the extra variables.) For $n<i\\le n+m$ write $\\gamma'(\\text{class of }x_i)=\\mu_i/u_i$ with $\\mu_i\\in\\Lambda$, $u_i\\in S$ [def-weil-pbc-module-localization]; put $u_i=1$ for $i\\le n$. Let $\\theta$ be the $S^{-1}R$-algebra automorphism of $P'$ with $\\theta(x_i)=u_i^{-1}x_i$ (inverse $x_i\\mapsto u_ix_i$) [def-weil-pbc-mv-polynomial-ring]. It maps the ideal $(f_1,\\dots,f_c)$ onto $(\\theta f_1,\\dots,\\theta f_c)$ and so induces $P'/(f)\\cong P'/(\\theta f)$, class of $u_ix_i\\mapsto$ class of $x_i$. Composing, $B'\\cong P'/(\\theta f_1,\\dots,\\theta f_c)$ with the class of $x_i$ corresponding to $u_i$ times the old class of $x_i$; so for $i\\le n$ nothing changes, and for $i>n$ the class of $x_i$ maps under $\\gamma'$ to $u_i\\mu_i/u_i=\\mu_i/1$. By the formula for $\\partial/\\partial x_i$ on monomials [def-weil-pbc-polynomial-partial-derivative], $\\partial(\\theta f_j)/\\partial x_i=u_i^{-1}\\theta(\\partial f_j/\\partial x_i)$, so $\\det(\\partial\\theta f_j/\\partial x_i)_{i,j\\le c}=(\\prod_{i\\le c}u_i^{-1})\\,\\theta(\\det(\\partial f_j/\\partial x_i)_{i,j\\le c})$, which is a unit times the image of an invertible element, hence invertible in $B'$. Replacing $f_j$ by $\\theta f_j$ we may assume that $\\gamma'$ maps the class of $x_i$ to $\\lambda_i/1$ with $\\lambda_i\\in\\Lambda$ for all $i=1,\\dots,n+m$ ($\\lambda_i=\\mu_i$ for $i>n$).",
+   "text": "Apply the polynomial-certificate theorem to P,Q and the rerouted factorization to obtain F,l,s,a_0, the evaluation identities, the Jacobian congruence and the remaining-relation ideal conditions.",
    "uses": [
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-polynomial-partial-derivative"
+    "lem-weil-pbc-popescu-delocalize-certificate"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1955-1957 ('After multiplying x_i, i > n by an element of S and correspondingly modifying the equations f_j we may assume B' -> S^{-1}Lambda maps x_i to lambda_i/1')"
+    "place": "Smoothing Ring Maps, Lemma Tag 07F4 (lemma-delocalize-base), proof"
    }
   },
   {
-   "text": "($P'$ is the localization of $P=R[x_1,\\dots,x_{n+m}]$ at $S$.) Let $\\varphi:P\\to P'$ be the map applying $R\\to S^{-1}R$ to the coefficients. By [lem-weil-pbc-polynomial-scalar-extension] $P'\\cong S^{-1}R\\otimes_RP$ compatibly with $\\varphi$ ($p\\mapsto1\\otimes p$), and by [lem-weil-pbc-localization-base-change] (with $D=P$ and $R\\to S^{-1}R$ the localization at $S$ [def-weil-pbc-module-localization]) $P\\to P\\otimes_RS^{-1}R$ is a localization of $P$ at the image of $S$. Hence: (a) every element of $P'$ is $u^{-1}\\varphi(p)$ with $p\\in P$, $u\\in S$, and finitely many elements have a common denominator (the product of the denominators); (b) $\\varphi(p)=\\varphi(q)$ implies $vp=vq$ for some $v\\in S$; (c) every $u\\in S$ is a unit in $P'$. Moreover (d) $\\varphi$ commutes with each $\\partial/\\partial x_i$ (both sides are computed coefficientwise by the monomial formula [def-weil-pbc-polynomial-partial-derivative]) and hence with Jacobian determinants.",
-   "uses": [
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-localization-base-change",
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1964-1965 ('Since each element of S is invertible in B' we may (by clearing denominators) ...'): the localization facts used there"
-   }
-  },
-  {
-   "text": "(Clearing the denominators of the $f_j$.) By Step 5(a) write $f_j=u_j^{-1}\\varphi(p_j)$ with $p_j\\in P$, $u_j\\in S$. Since $u_j$ is a unit of $P'$ (Step 5(c)), replacing $f_j$ by $u_jf_j=\\varphi(p_j)$ changes neither the ideal $(f_1,\\dots,f_c)$ nor the classes of the $x_i$, hence neither the isomorphism with $B'$ nor $\\beta',\\gamma'$, and it multiplies $\\det(\\partial f_j/\\partial x_i)_{i,j\\le c}$ by the unit $u_1\\cdots u_c$ ($\\partial/\\partial x_i$ is $S^{-1}R$-linear and the determinant is linear in each row [def-weil-pbc-polynomial-partial-derivative]), so it stays invertible in $B'$. Hence we may assume $f_j=\\varphi(f_j^0)$ with $f_j^0\\in P$; we write $f_j$ for $f_j^0\\in P$ from now on, and $\\Delta=\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}\\in P$, so that $\\varphi(\\Delta)$ is the Jacobian determinant of the $\\varphi(f_j)$ (Step 5(d)) and is invertible in $B'=P'/(\\varphi(f_1),\\dots,\\varphi(f_c))$.",
-   "uses": [
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1964-1966 ('we may (by clearing denominators) assume that f_j, a_j in R[x_1..x_{n+m}]')"
-   }
-  },
-  {
-   "text": "(The relation with $s_0$.) Since $\\varphi(\\Delta)$ is invertible in $B'=P'/(\\varphi(f))$ there is $a'_0\\in P'$ with $a'_0\\varphi(\\Delta)-1\\in(\\varphi(f_1),\\dots,\\varphi(f_c))$, i.e. $1=a'_0\\varphi(\\Delta)+\\sum_{j=1}^ca'_j\\varphi(f_j)$ for some $a'_j\\in P'$. By Step 5(a) write $a'_j=u^{-1}\\varphi(a''_j)$ ($j=0,\\dots,c$) with $a''_j\\in P$ and one $u\\in S$; multiplying by $u$ gives $\\varphi(u)=\\varphi(a''_0\\Delta+\\sum_ja''_jf_j)$, so by Step 5(b) $v(u-a''_0\\Delta-\\sum_ja''_jf_j)=0$ in $P$ for some $v\\in S$. With $s_0=vu\\in S$ and $a_j=va''_j\\in P$: $s_0=a_0\\Delta+\\sum_{j=1}^ca_jf_j$ in $P$.",
-   "uses": [
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-localization-base-change",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1957-1971 (choice of the relation 1 = a_0 det + sum a_j f_j and its version s_0 = a_0 det + sum a_j f_j over R)"
-   }
-  },
-  {
-   "text": "(The elements $s_j$, $j=1,\\dots,t$.) The image of $\\varphi(g_j)$ ($g_j\\in R[x_1,\\dots,x_n]\\subset P$) in $B'$ is $g_j$ evaluated at the classes of $x_1,\\dots,x_n$, which is $\\beta'(g_j(\\bar x_1,\\dots,\\bar x_n)/1)=\\beta'(0)=0$ by Step 3 ($\\beta'$ is an $S^{-1}R$-algebra map sending $\\bar x_i/1$ to the class of $x_i$) [def-weil-pbc-mv-polynomial-ring]. So $\\varphi(g_j)=\\sum_kh_k\\varphi(f_k)$ with $h_k\\in P'$; writing $h_k=u^{-1}\\varphi(h'_k)$ (Step 5(a)) gives $\\varphi(ug_j)=\\varphi(\\sum_kh'_kf_k)$, so $v(ug_j-\\sum_kh'_kf_k)=0$ for some $v\\in S$ (Step 5(b)). With $s_j=vu\\in S$: $s_jg_j\\in(f_1,\\dots,f_c)P$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-localization-base-change",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1972-1974 ('Since g_j maps to zero in S^{-1}R[x]/(f) we can find s_j in S such that s_j g_j = 0 in R[x]/(f_1..f_c)')"
-   }
-  },
-  {
-   "text": "(The elements $s'_j$, $j=1,\\dots,c$.) The $R$-algebra maps $P\\xrightarrow{\\varphi}P'\\to B'\\xrightarrow{\\gamma'}S^{-1}\\Lambda$ and $P\\to\\Lambda\\to S^{-1}\\Lambda$ (evaluation at $(\\lambda_1,\\dots,\\lambda_{n+m})$, then $\\lambda\\mapsto\\lambda/1$) agree on every $x_i$ by Steps 3 and 4, hence are equal [def-weil-pbc-mv-polynomial-ring]. Since $\\varphi(f_j)$ maps to $0$ in $B'$, $f_j(\\lambda_1,\\dots,\\lambda_{n+m})/1=0$ in $S^{-1}\\Lambda$, so there is $s'_j\\in S$ with $s'_jf_j(\\lambda_1,\\dots,\\lambda_{n+m})=0$ in $\\Lambda$ [def-weil-pbc-module-localization].",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1975-1977 ('Since f_j maps to zero in S^{-1}Lambda we can find s'_j in S such that s'_j f_j(lambda) = 0')"
-   }
-  },
-  {
-   "text": "(The factorization.) Let $B=P/(s'_1f_1,\\dots,s'_cf_c,g_1,\\dots,g_t)$, an $R$-algebra of finite presentation ($n+m$ variables, $c+t$ relations) [def-weil-pbc-finitely-presented-algebra]. The $R$-algebra map $R[x_1,\\dots,x_n]\\to B$, $x_i\\mapsto$ class of $x_i$, kills each $g_j$, so it induces $\\beta:A\\to B$, $\\bar x_i\\mapsto$ class of $x_i$. The evaluation $P\\to\\Lambda$, $x_i\\mapsto\\lambda_i$, kills $s'_jf_j$ (Step 9) and $g_j$ (Step 2), so it induces $\\gamma:B\\to\\Lambda$ [def-weil-pbc-mv-polynomial-ring]. The $R$-algebra maps $\\gamma\\beta$ and $\\alpha$ agree on the generators $\\bar x_i$ of $A$ ($\\gamma\\beta(\\bar x_i)=\\lambda_i=\\alpha(\\bar x_i)$), so $\\gamma\\circ\\beta=\\alpha$.",
+   "text": "Construct B explicitly as ULift of T/(F), with quotient map q. Its generators are q(X_i); the kernel equality gives a finite presentation PB. Rename the original relations; each is among the F, so q kills them. AlgHom.liftOfSurjective descends q composed with renaming to beta:A->B. Evaluation at l kills (F), so Ideal.Quotient.lift_a gives gamma:B->Lambda. The composite agrees with alpha on the generators of P, and cancellation along its surjective evaluation proves gamma beta=alpha.",
    "uses": [
     "def-weil-pbc-finitely-presented-algebra",
     "def-weil-pbc-mv-polynomial-ring"
@@ -156,20 +74,20 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1978-1982 ('Consider the ring B = R[x_1..x_{n+m}]/(s'_1f_1..s'_cf_c,g_1..g_t) and the factorization A -> B -> Lambda with B -> Lambda given by x_i -> lambda_i')"
+    "place": "Smoothing Ring Maps, Lemma Tag 07F4 (lemma-delocalize-base), proof"
    }
   },
   {
-   "text": "($s$ is elementary standard in $B$ over $R$.) Let $s=s_0s_1\\cdots s_ts'_1\\cdots s'_c\\in S$. Use the presentation of Step 10 with relations $F_j=s'_jf_j$ ($j\\le c$), $F_{c+j}=g_j$ ($j\\le t$) and the integer $c$; $0\\le c\\le\\min(n+m,c+t)$ since $c\\le n+m$ (Step 3). Second condition of [def-weil-pbc-strictly-standard-element](1), lifting the image of $s$ to $s\\in R\\subset P$: by Step 8, $s_jg_j=\\sum_kh_kf_k$ with $h_k\\in P$, so $sg_j=\\bigl(s_0\\prod_{l\\ne j}s_l\\bigr)\\sum_kh_k\\bigl(\\prod_{l\\ne k}s'_l\\bigr)F_k\\in(F_1,\\dots,F_c)\\subset(F_1,\\dots,F_c)+(F_1,\\dots,F_{c+t})^2$. First condition: $\\partial F_j/\\partial x_i=s'_j\\,\\partial f_j/\\partial x_i$ ($R$-linearity of $\\partial/\\partial x_i$ [def-weil-pbc-polynomial-partial-derivative]), so $\\det(\\partial F_j/\\partial x_i)_{i,j\\le c}=s'_1\\cdots s'_c\\Delta$ by multilinearity in the rows. Multiplying the relation of Step 7 by $s'_1\\cdots s'_c$ gives $a_0\\det(\\partial F_j/\\partial x_i)_{i,j\\le c}+\\sum_{j=1}^c\\bigl(\\prod_{l\\ne j}s'_l\\bigr)a_jF_j=s_0s'_1\\cdots s'_c$ in $P$. In $B$ all $F_j$ vanish, so $s_0s'_1\\cdots s'_c=a_0\\det(\\partial F_j/\\partial x_i)_{i,j\\le c}$ and $s=a'\\det(\\partial F_j/\\partial x_i)_{i,j\\le c}$ in $B$ with $a'$ the image of $s_1\\cdots s_ta_0$. Hence the image of $s$ in $B$ is elementary standard in $B$ over $R$, which with Step 10 proves the lemma.",
+   "text": "Evaluate the Jacobian congruence along PB to obtain algebraMap(s)=aeval(a_0) times the initial Jacobian determinant. The lift PB.sigma(algebraMap(s)) differs from C(s) by an element of (F), so multiplying this difference by any remaining relation belongs to (F)^2. Add it to the certificate membership C(s)F_j in the initial ideal. These are precisely the two defining conditions of IsElementaryStandardElement.",
    "uses": [
     "def-weil-pbc-strictly-standard-element",
     "def-weil-pbc-polynomial-partial-derivative",
-    "def-weil-pbc-finitely-presented-algebra"
+    "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F4, lines 1983-1997 ('We claim that s = s_0 s_1...s_t s'_1...s'_c is elementary standard ... s_j g_j in (f) and hence s g_j in (s'_1f_1..s'_cf_c) ... a_0 det(d s'_j f_j/dx_i) + sum (s'_1..^s'_j..s'_c) a_j s'_j f_j = s_0 s'_1...s'_c which divides s')"
+    "place": "Smoothing Ring Maps, Lemma Tag 07F4 (lemma-delocalize-base), proof"
    }
   }
  ],
@@ -178,18 +96,16 @@
   "def-weil-pbc-standard-smooth-algebra",
   "def-weil-pbc-smooth-ring-map",
   "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-module-localization",
   "lem-weil-pbc-standard-smooth-include-generators",
-  "def-weil-pbc-polynomial-partial-derivative",
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-localization-base-change",
-  "def-weil-pbc-strictly-standard-element"
+  "lem-weil-pbc-popescu-delocalize-certificate",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-strictly-standard-element",
+  "def-weil-pbc-polynomial-partial-derivative"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, Lemma Tag 07F4 (lemma-delocalize-base), proof at lines 1946-1997"
+  "place": "Smoothing Ring Maps, Lemma Tag 07F4 (lemma-delocalize-base), proof; steps 4-9 isolated as denominator data, polynomial products and quotient steps proved in Lean by P1"
  },
  "mathlib_searches": [
   {
@@ -265,5 +181,15 @@
   "group": "K1",
   "result": "pass",
   "note": "R,A,Λ CommRing+Algebra R; [FinitePresentation R A]; α:A→ₐ[R]Λ; S:Submonoid R; S⁻¹A,S⁻¹Λ = Localization (algebraMapSubmonoid _ S), S⁻¹α = IsLocalization.mapₐ (=IsLocalization.map α, a/u↦α(a)/u); B' with [Smooth (Localization S) B']; β',γ' Localization S-alg homs, hfactor tied; ∃ B:Type(max u v w x) with CommRing/Algebra/FinitePresentation all used (pp.explicit: x_2 is the instance of IsElementaryStandardElement), β,γ with γ∘β=α, s∈S with algebraMap s elementary standard (part (1)); S∋0 case true via c=0; only lean key changed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T173848-L-3301607",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -8781,3 +8781,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/N2/Sheaf.AlgebraicGeometry.ModuleCohomologyFMapScalarCompatibility (stage 3; reviewer PASS; first push; landing 20261012T173846-L-3301164 (interface); batch 20261012T173801; modules 2; new nodes 1; change records: coord/changes/map-smul-semilinear-proof.md)
 - 17:38 L: merged deliver/N3/Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist (stage 3; reviewer PASS; first push; landing 20261012T173846-L-3301263 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/P1/Sheaf.RingTheory.PopescuCharPPreparationCore (stage 3; reviewer PASS; first push; landing 20261012T173847-L-3301416 (interface); batch 20261012T173801; modules 3; new nodes 3)
+- 17:38 L: merged deliver/P1/Sheaf.RingTheory.PopescuDelocalizeBase (stage 3; reviewer PASS; first push; landing 20261012T173848-L-3301607 (interface); batch 20261012T173801; modules 3; new nodes 2)
