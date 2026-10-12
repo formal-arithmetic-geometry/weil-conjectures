@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-proj-graded-module-sheaf-stalks",
+ "kind": "statement",
+ "title": "Graded-module sheaf on Proj: Stalks",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, and $M$ a $\\mathbb Z$-graded $S$-module with internal grading $\\mathcal M$ compatible with scalar multiplication. Set $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Index charts by pairs $f=(a,d)$ with $d>0$ and $a\\in S_d$, put $D_f=D_+(a)$, $R_f=S_{(a)}$ [def-nagata-homogeneous-localization-degree-zero], and let $Z_f$ be submodules of $M_a$ whose carriers are precisely the equal-degree fractions [def-sc-degree-zero-module-fractions]. Suppose additive maps $\\rho_{f,g}:Z_f\\to Z_g$ and ring maps $\\rho^S_{f,g}:R_f\\to R_g$ are given for every $D_g\\subseteq D_f$. Suppose each inclusion admits a homogeneous relation $g^e=bf$ with $e>0$, each $\\rho$ is semilinear over $\\rho^S$, and for every such relation it sends $y/f^m$ to $b^my/g^{em}$. Assume identities, composition and bijectivity when chart opens coincide. Let $F$ be a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] with additive chart identifications $\\alpha_f:F(D_f)\\cong Z_f$ respecting scalars via awayToSection and restrictions via $\\rho$. For each point $x$ corresponding to a homogeneous prime $\\mathfrak p$, the equal-degree fractions in $(S\\setminus\\mathfrak p)^{-1}M$ form a submodule $Z_{\\mathfrak p}$ over $S_{(\\mathfrak p)}$. There are additive equivalences $F_x\\cong Z_{\\mathfrak p}$ [def-weil-pbc-module-stalk] semilinear over stalkIso, sending the germ of $\\alpha_f^{-1}(y/f^m)$ to $y/f^m$ for every chart containing $x$ and every fraction representation.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3, text before Definition 01M6; Lemma 01M7 (5)"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "1. Positive homogeneous standard opens containing x form a cofinal system of\n   neighbourhoods by standardOpenProperties, directed by multiplying denominators.\n   Sending y/f^m to the same fraction in the prime localization is the ordinary\n   localization map, restricted to Z[f]. This does not depend on a representative,\n   preserves addition, and lands in equal-degree fractions. The given rho commutes\n   with this map by its fraction formula. Germ representatives and equality after\n   shrinking (exists_mem_germ_eq_of_isBasis and germ_eq_of_isBasis) therefore define\n   an additive map on F_x.\n2. Equal-degree fractions at the prime form a submodule over S_(x). For sums of y/t\n   and y'/t', use the numerator t' • y + t • y' and denominator t*t', of equal degrees.\n   Negatives and zero are immediate. For a homogeneous scalar a/b of degree zero use\n   numerator a • y and denominator b*t; the graded scalar law gives the required degree.\n3. For surjectivity choose a positive homogeneous f0 outside the prime, which exists\n   since the prime avoids the irrelevant ideal. Any y/t of equal degree is the image\n   of (f0 • y)/(t*f0) on D_+(t*f0), whose positive degree is deg(t)+deg(f0).\n4. For injectivity choose a representative y/f^m with homogeneous y; hZ ensures every\n   chart element admits such a representative. If it is zero in the prime localization,\n   some c outside the prime annihilates y. Decompose c into homogeneous components.\n   The terms c_k • y lie in distinct graded pieces, so internality of the grading of M\n   forces every c_k • y to be zero. Since the prime is homogeneous and c is outside it,\n   one component c_k is outside it. Write b=c_k and shrink to D_+(f*b), which contains x\n   and has positive degree even when deg(b)=0. The relation f*b=b*f gives restriction\n   b^m • y/(f*b)^m. If m>0 this is zero because b • y=0. If m=0 its fraction y/1 is\n   also zero: the first power of the new denominator f*b annihilates y. Thus the germ\n   is zero. Bijectivity packages the additive map as an additive equivalence.\n5. Represent a scalar and a section germ on a common standard neighbourhood. The chart\n   scalar law and awayToSection_germ identify their product with multiplication of the\n   corresponding prime-localized fractions; this is semilinearity over stalkIso. The\n   defining map sends a homogeneous chart representative to its unchanged fraction.\n   For any other representative of the same chart element, the ordinary localization\n   map also has that formula, so the germ formula holds for every y,f,m and denominator\n   witness appearing in the conclusion, not just for the homogeneous representative\n   used in step 4. If M is zero the equivalence is between zero modules; if X is empty\n   all stalk conclusions are vacuous.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-stalk-germs-on-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-proj-structure-sheaf-standard-sections",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-stalk-germs-on-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3; parent proof step(s) 7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A graded module over a graded commutative ring defines a quasi-coherent sheaf on Proj with degree zero localized sections",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj",
+   "date": "2026-10-12",
+   "verdict": "no match for the module-sheaf statement; ring-only results or no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModuleSheaf|gradedModuleAwayRestriction|degreeZeroFractions",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match for the module-sheaf statement; ring-only results or no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded module defines a sheaf on Proj by degree zero localizations; its stalks are homogeneous localizations and degree zero elements give global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of the sheaf associated to a graded module on Proj is the degree zero homogeneous localization at the prime",
+   "results": "AlgebraicGeometry.homogeneousLocalizationToStalk, AlgebraicGeometry.Proj.stalkIso, AlgebraicGeometry.stalkToFiberRingHom, AlgebraicGeometry.homogeneousLocalizationToStalk_stalkToFiberRingHom, AlgebraicGeometry.Proj.stalkIso', AlgebraicGeometry.stalkToFiberRingHom_homogeneousLocalizationToStalk, AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv, AlgebraicGeometry.Proj.stalkIso'_symm_mk",
+   "date": "2026-10-12",
+   "verdict": "no match for the module-sheaf statement; ring-only results or no hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-finite",
+   "place": "Parent graded-module-sheaf existence proof, step(s) 7",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafStalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleSheafStalks.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleSheaf_stalks",
+  "statement": "theorem gradedModuleSheaf_stalks\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),\n      a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (hZ : (∀ f : Fidx, (Z f : Set N[f]) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M))\n        (Submonoid.powers f.val.1)))\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (hlaws : (∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n        (∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) ∧\n        (∀ (r : R[f]) (q : Z f), rho f g i (r • q) = rhoS f g i r • rho f g i q) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g.val.1 ^ e = a * f.val.1 →\n          ∀ (m : ℕ) (y : M) (q : Z f),\n            (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →\n            (rho f g i q : N[g]) = mk (a ^ m • y)\n              (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1))) ∧\n      (∀ (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f), rho f f i q = q) ∧\n      (∀ (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f),\n        rho g h j (rho f g i q) = rho f h (j.trans i) q) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]), D[f] = D[g] →\n        Function.Bijective (rho f g i)))\n    (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hchart : (∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n        alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : F.val.obj (op D[f])),\n        alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s))) :\n    ∃ (Zp : ∀ x : Proj 𝒜, Submodule Rp[x] Np[x]),\n      (∀ x : Proj 𝒜, (Zp x : Set Np[x]) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) T[x]) ∧\n    ∃ (mu : ∀ x : Proj 𝒜,\n      (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj F ≃+ Zp x),\n      (∀ (x : Proj 𝒜) (r : (Proj 𝒜).presheaf.stalk x)\n        (s : (RingedSpace.moduleStalkFunctor (Proj 𝒜).toRingedSpace x).obj F),\n        mu x (r • s) = (stalkIso 𝒜 x).hom r • mu x s) ∧\n      (∀ (x : Proj 𝒜) (f : Fidx) (hx : x ∈ D[f]) (m : ℕ) (y : M)\n        (q : Z f) (t : T[x]),\n        (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →\n        (t : S) = f.val.1 ^ m →\n        (mu x (TopCat.Presheaf.germ F.val.presheaf D[f] x hx\n          ((alpha f).symm q)) : Np[x]) = mk y t)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085249-L-18897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085249-L-18897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

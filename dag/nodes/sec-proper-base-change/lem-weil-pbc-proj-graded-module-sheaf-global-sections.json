@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-proj-graded-module-sheaf-global-sections",
+ "kind": "statement",
+ "title": "Graded-module sheaf on Proj: GlobalSections",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, and $M$ a $\\mathbb Z$-graded $S$-module with internal grading $\\mathcal M$ compatible with scalar multiplication. Set $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Index charts by pairs $f=(a,d)$ with $d>0$ and $a\\in S_d$, put $D_f=D_+(a)$, $R_f=S_{(a)}$ [def-nagata-homogeneous-localization-degree-zero], and let $Z_f$ be submodules of $M_a$ whose carriers are precisely the equal-degree fractions [def-sc-degree-zero-module-fractions]. Suppose additive maps $\\rho_{f,g}:Z_f\\to Z_g$ and ring maps $\\rho^S_{f,g}:R_f\\to R_g$ are given for every $D_g\\subseteq D_f$. Suppose each inclusion admits a homogeneous relation $g^e=bf$ with $e>0$, each $\\rho$ is semilinear over $\\rho^S$, and for every such relation it sends $y/f^m$ to $b^my/g^{em}$. Assume identities, composition and bijectivity when chart opens coincide. Let $F$ be a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] with additive chart identifications $\\alpha_f:F(D_f)\\cong Z_f$ respecting scalars and restrictions. Assume the ring maps are induced by ambient localization maps commuting with $S$ and agree with structure-sheaf restrictions. Then there are a ring map $\\eta:S_0\\to\\Gamma(X,\\mathcal O_X)$ restricting to fromZeroRingHom on charts, and an additive map $\\gamma:M_0\\to\\Gamma(X,F)$ restricting to $m/1$ on every chart, with $\\gamma(rm)=\\eta(r)\\gamma(m)$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3, text before Definition 01M6; Lemma 01M7 (6)"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "For m in M_0 the fraction m/1 lies in every Z f. The fraction restriction\nformula with exponent zero shows that these fractions are compatible on every inclusion\nand hence on intersections D_+(fg). Mathlib Proj.affineOpenCover (Basic.lean:336--348) supplies positive homogeneous\ncharts covering Proj: its pointwise covers witness and opensRange_awayι give a member\nof the index Fidx at every point. This is also elementary from the definition of Proj:\na prime avoiding the irrelevant ideal must avoid a positive homogeneous component.\nThus the standard opens cover Proj, so the sheaf property\nglues their inverse images under alpha uniquely to a global section. Unique gluing of\nzero and sums makes this an additive map gamma. Apply the same construction to degree-zero\nscalars in the structure sheaf, using fromZeroRingHom and awayToSection; uniqueness of\ngluing proves zero, one, addition and multiplication, giving eta. The chart scalar law\nshows that gamma(r • m) and eta(r) • gamma(m) agree on all charts, proving the scalar\nidentity. Naturality and the chart restriction law give compatibility of restrictions.\nAny other section with these fraction restrictions agrees chartwise and hence globally.\nIf Proj is empty, both sheaves have a unique global section; the same gluing proof works.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Section 01M3; parent proof step(s) 8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A graded module over a graded commutative ring defines a quasi-coherent sheaf on Proj with degree zero localized sections",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj",
+   "date": "2026-10-12",
+   "verdict": "no match for the module-sheaf statement; ring-only results or no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModuleSheaf|gradedModuleAwayRestriction|degreeZeroFractions",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match for the module-sheaf statement; ring-only results or no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded module defines a sheaf on Proj by degree zero localizations; its stalks are homogeneous localizations and degree zero elements give global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of the sheaf associated to a graded module on Proj is the degree zero homogeneous localization at the prime",
+   "results": "AlgebraicGeometry.homogeneousLocalizationToStalk, AlgebraicGeometry.Proj.stalkIso, AlgebraicGeometry.stalkToFiberRingHom, AlgebraicGeometry.homogeneousLocalizationToStalk_stalkToFiberRingHom, AlgebraicGeometry.Proj.stalkIso', AlgebraicGeometry.stalkToFiberRingHom_homogeneousLocalizationToStalk, AlgebraicGeometry.ProjectiveSpectrum.Proj.specStalkEquiv, AlgebraicGeometry.Proj.stalkIso'_symm_mk",
+   "date": "2026-10-12",
+   "verdict": "no match for the module-sheaf statement; ring-only results or no hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-finite",
+   "place": "Parent graded-module-sheaf existence proof, step(s) 8",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleSheafGlobalSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleSheafGlobalSections.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleSheaf_globalSections",
+  "statement": "theorem gradedModuleSheaf_globalSections\n    (𝓜 : ℤ → AddSubgroup M) (_h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),\n      a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z))\n    (Z : ∀ f : Fidx, Submodule R[f] N[f])\n    (hZ : (∀ f : Fidx, (Z f : Set N[f]) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M))\n        (Submonoid.powers f.val.1)))\n    (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])\n    (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)\n    (hlaws : (∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n        (∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) ∧\n        (∀ (r : R[f]) (q : Z f), rho f g i (r • q) = rhoS f g i r • rho f g i q) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g.val.1 ^ e = a * f.val.1 →\n          ∀ (m : ℕ) (y : M) (q : Z f),\n            (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) →\n            (rho f g i q : N[g]) = mk (a ^ m • y)\n              (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1))) ∧\n      (∀ (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f), rho f f i q = q) ∧\n      (∀ (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f),\n        rho g h j (rho f g i q) = rho f h (j.trans i) q) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]), D[f] = D[g] →\n        Function.Bijective (rho f g i)))\n    (F : SheafOfModules.{u} (moduleRings (Proj 𝒜).toRingedSpace))\n    (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f)\n    (hchart : (∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])),\n        alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s) ∧\n      (∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : F.val.obj (op D[f])),\n        alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s)))\n    (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]),\n      ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1,\n        (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) =\n          algebraMap S (Localization.Away g.val.1) a) ∧\n        ∀ r : R[f], (rhoS f g i r).val = l r.val)\n    (hring : ∀ (f g : Fidx) (i : D[g] ≤ D[f]) (r : R[f]),\n      (Proj 𝒜).presheaf.map (homOfLE i).op (awayToSection 𝒜 f.val.1 r) =\n        awayToSection 𝒜 g.val.1 (rhoS f g i r)) :\n    ∃ (eta : 𝒜 0 →+* (Proj 𝒜).presheaf.obj (op ⊤))\n      (gamma : 𝓜 0 →+ F.val.obj (op ⊤)),\n      (∀ (r : 𝒜 0) (f : Fidx),\n        (Proj 𝒜).presheaf.map (homOfLE (le_top : D[f] ≤ ⊤)).op (eta r) =\n          awayToSection 𝒜 f.val.1 (fromZeroRingHom 𝒜 _ r)) ∧\n      (∀ (r : 𝒜 0) (m : 𝓜 0),\n        gamma ⟨(r : S) • (m : M), hsmul 0 0 r m r.property m.property⟩ =\n          eta r • gamma m) ∧\n      (∀ (m : 𝓜 0) (f : Fidx),\n        (alpha f (F.val.map (homOfLE (le_top : D[f] ≤ ⊤)).op (gamma m)) : N[f]) =\n          mk (m : M) 1)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085249-L-18897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085249-L-18897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

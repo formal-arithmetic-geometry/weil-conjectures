@@ -29,122 +29,47 @@
  ],
  "proof": [
   {
-   "text": "*Standard opens.* By [lem-weil-pbc-proj-standard-open-inclusion]: the standard opens $D_+(f)$ ($f$ homogeneous of positive degree) form a basis $\\mathcal B$ of the topology of $X$ with $D_+(f)\\cap D_+(g)=D_+(fg)$ (clause (0)); in particular they cover $X$. $D_+(g)\\subseteq D_+(f)$ iff $g^e=af$ for some $e\\ge1$ and homogeneous $a$ (clause (1)); every open covering of a standard open is refined by a finite covering by standard opens (clause (2)); and $D_+(f)\\subseteq\\bigcup_{i=1}^nD_+(g_i)$ iff the $g_i^{\\deg f}/f^{\\deg g_i}$ generate the unit ideal of $S_{(f)}$ (clause (3)).",
+   "text": "Obtain chart submodules and maps indexed by homogeneous divisibility relations from gradedModuleAwayRestriction. standardOpenProperties converts each open inclusion to such a relation. The fraction formula, semilinearity, identity and composition follow by projecting the supplied laws. For equal opens use the reverse restriction as a two-sided inverse, proving bijectivity. The ambient ring maps commute with S and induce the chosen degree-zero ring maps.",
    "uses": [
+    "lem-weil-pbc-graded-module-away-restriction",
     "lem-weil-pbc-proj-standard-open-inclusion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Section 01M3, paragraph before Lemma 01M4; Lemma 01M4 (1)(b), (2), (3)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Clause (a).* Let $D_+(g)\\subseteq D_+(f)$. By step 1, $g^e=af$ with $e\\ge1$ and $a$ homogeneous. By [lem-weil-pbc-graded-module-away-restriction] (i), $x/f^m\\mapsto a^mx/g^{em}$ is a well-defined map $\\rho_{f,g}:M_{(f)}\\to M_{(g)}$, equal to the restriction of the unique $S$-linear map $M_f\\to M_g$ with $x/1\\mapsto x/1$, hence independent of $(e,a)$, and semilinear over the ring map $\\rho^S_{f,g}:S_{(f)}\\to S_{(g)}$, i.e. $S_{(f)}$-linear for the $S_{(f)}$-module structure of $M_{(g)}$ through $\\rho^S_{f,g}$. By (ii) of that lemma, $\\rho_{f,f}=\\mathrm{id}$ (take $e=1$, $a=1$) and $\\rho_{g,h}\\rho_{f,g}=\\rho_{f,h}$ when $D_+(h)\\subseteq D_+(g)\\subseteq D_+(f)$ (step 1 gives the relations $h^{e'}=a'g$, $g^e=af$). If $D_+(f)=D_+(g)$, both $\\rho_{f,g}$ and $\\rho_{g,f}$ are defined and $\\rho_{g,f}\\rho_{f,g}=\\rho_{f,f}=\\mathrm{id}$, $\\rho_{f,g}\\rho_{g,f}=\\rho_{g,g}=\\mathrm{id}$, so $\\rho_{f,g}$ is an isomorphism (for $M=S$ a ring isomorphism). This is (a).",
+   "text": "Apply the basis-extension lemma to these specific chart maps to obtain F, alpha, the ring restriction compatibility, uniqueness and quasi-coherence.",
    "uses": [
-    "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-weil-pbc-graded-module-away-restriction"
+    "lem-weil-pbc-proj-graded-module-sheaf-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01M4 (1)(c),(d),(g) and its proof; the text before Definition 01M6 ('canonical maps $M_{(f)}\\to M_{(g)}$ and $M_{(g)}\\to M_{(f)}$ which are mutually inverse')"
-   }
+   "elementary": false
   },
   {
-   "text": "*A presheaf of modules on the basis.* For each $U\\in\\mathcal B$ choose $f_U$ homogeneous of positive degree with $U=D_+(f_U)$, and put $F(U)=M_{(f_U)}$, $A(U)=S_{(f_U)}$, and for $V\\subseteq U$ in $\\mathcal B$ $r_{U,V}=\\rho_{f_U,f_V}$, $r^S_{U,V}=\\rho^S_{f_U,f_V}$. By step 2 these satisfy $r_{U,U}=\\mathrm{id}$, $r_{V,W}r_{U,V}=r_{U,W}$, $r_{U,V}(bs)=r^S_{U,V}(b)\\,r_{U,V}(s)$, and for any other $f$ with $D_+(f)=U$ the isomorphisms $\\rho_{f_U,f}$ identify $(M_{(f_U)},r)$ with $(M_{(f)},\\rho)$ compatibly (by transitivity). Now compare $A$ with $\\mathcal O_X$: by [lem-weil-pbc-proj-structure-sheaf-standard-sections] (ii) there are ring isomorphisms $\\theta_f:S_{(f)}\\to\\Gamma(D_+(f),\\mathcal O_X)$ such that, for $x\\in D_+(f)$ with prime $\\mathfrak p$, the germ of $\\theta_f(y/f^m)$ at $x$ corresponds under $\\varphi_x:\\mathcal O_{X,x}\\cong S_{(\\mathfrak p)}$ (clause (i)) to $y/f^m\\in S_{(\\mathfrak p)}$. If $D_+(g)\\subseteq D_+(f)$, $g^e=af$, and $r=y/f^m\\in S_{(f)}$, then for every $x\\in D_+(g)$ (prime $\\mathfrak p\\not\\ni g$) we have $\\rho^S_{f,g}(r)=a^my/g^{em}=y/f^m$ in $S_{(\\mathfrak p)}$, because $a^mf^m=g^{em}$ and $f,g\\notin\\mathfrak p$; so $\\theta_f(r)|_{D_+(g)}$ and $\\theta_g(\\rho^S_{f,g}(r))$ have the same germ at every point of $D_+(g)$ ($\\varphi_x$ is injective and germs commute with restriction), hence are equal ($\\mathcal O_X$ is a sheaf: sections with equal germs everywhere agree locally, hence agree). Thus $\\theta$ identifies $(A,r^S)$ with $\\mathcal O_X|_{\\mathcal B}$ with its restriction maps, and letting $\\mathcal O_X(U)$ act on $F(U)$ through $\\theta_{f_U}^{-1}$ makes $F$ a presheaf of $\\mathcal O_X|_{\\mathcal B}$-modules on $\\mathcal B$: each $F(U)$ an $\\mathcal O_X(U)$-module and $r_{U,V}(bs)=b|_V\\,r_{U,V}(s)$. (This is Stacks' presheaf $\\widetilde M$ on the basis, a presheaf of $\\widetilde S$-modules.)",
+   "text": "Apply the stalk-identification lemma to F and alpha.",
    "uses": [
-    "lem-weil-pbc-graded-module-away-restriction",
-    "lem-weil-pbc-proj-structure-sheaf-standard-sections"
+    "lem-weil-pbc-proj-graded-module-sheaf-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Text before Definition 01M6 (definition of $\\widetilde M$ on the basis of standard opens, 'a presheaf of $\\widetilde S$-modules on the basis of standard opens'); Lemma 01M7 (1),(3) for $M=S$"
-   }
+   "elementary": false
   },
   {
-   "text": "*Sheaf condition on finite standard coverings.* Let $U=D_+(f)=\\bigcup_{i=1}^nD_+(g_i)$ with $g_i$ homogeneous of positive degree. Since $D_+(g_i)\\subseteq D_+(f)$, $D_+(g_i)=D_+(fg_i)$ and $D_+(g_i)\\cap D_+(g_j)=D_+(fg_ig_j)$ (step 1), so via the isomorphisms of step 2 the sheaf sequence for this covering is $0\\to M_{(f)}\\to\\bigoplus_iM_{(fg_i)}\\to\\bigoplus_{i,j}M_{(fg_ig_j)}$ with the maps $\\rho$ (differences in the last arrow). Put $u_i=g_i^{\\deg f}/f^{\\deg g_i}\\in S_{(f)}$. By step 1 (clause (3)) the $u_i$ generate the unit ideal of $S_{(f)}$. Apply [lem-weil-pbc-graded-module-away-restriction] (iii) to the pairs $(f,fg_i)$ (relation $(fg_i)^1=g_i\\cdot f$) and $(f,fg_ig_j)$ (relation $(fg_ig_j)^1=(g_ig_j)f$): the corresponding elements are $(fg_i)^{\\deg f}/f^{\\deg f+\\deg g_i}=u_i$ and $(fg_ig_j)^{\\deg f}/f^{\\deg f+\\deg g_i+\\deg g_j}=u_iu_j$, so $\\theta$ gives isomorphisms $(M_{(f)})_{u_i}\\cong M_{(fg_i)}$ and $(M_{(f)})_{u_iu_j}\\cong M_{(fg_ig_j)}$, and by (iv) of that lemma (with $h=fg_ig_j$, $g=fg_i$, resp. $g=fg_j$; and with $g=f$, where $\\theta_{f,f}$ is the identity of $(M_{(f)})_1=M_{(f)}$) they carry the maps $\\rho_{f,fg_i}$ and $\\rho_{fg_i,fg_ig_j}$, $\\rho_{fg_j,fg_ig_j}$ to the canonical localization maps $M_{(f)}\\to(M_{(f)})_{u_i}\\to(M_{(f)})_{u_iu_j}$ and $(M_{(f)})_{u_j}\\to(M_{(f)})_{u_iu_j}$. Hence the sheaf sequence is isomorphic to $0\\to M'\\to\\bigoplus_iM'_{u_i}\\to\\bigoplus_{i,j}M'_{u_iu_j}$ for the $S_{(f)}$-module $M'=M_{(f)}$, which is exact by [lem-weil-pbc-cover-module-exact] applied to $R=S_{(f)}$, $u_1,\\dots,u_n$. So $F$ satisfies the sheaf condition for every finite covering of a member of $\\mathcal B$ by members of $\\mathcal B$.",
+   "text": "Construct eta and gamma by the proved global-section gluing lemma. Restriction compatibility follows from presheaf composition and the alpha restriction law. standardOpenProperties gives that all positive homogeneous charts cover Proj. Sections with the prescribed fractions coincide on every chart by injectivity of alpha and the submodule inclusion; sheaf separatedness gives global equality, proving the final uniqueness clause.",
    "uses": [
-    "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-weil-pbc-graded-module-away-restriction",
-    "lem-weil-pbc-cover-module-exact"
+    "lem-weil-pbc-proj-graded-module-sheaf-global-sections",
+    "lem-weil-pbc-proj-standard-open-inclusion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Text before Definition 01M6 ('Next, we check the sheaf condition for the standard open coverings ...', applying Algebra Lemma 00EK to $M_{(f)}$ over $S_{(f)}$); Lemma 01M4 (1)(h), (3)"
-   }
-  },
-  {
-   "text": "*Clause (b).* By step 1, $\\mathcal B$ is a basis closed under pairwise intersections ($D_+(f)\\cap D_+(g)=D_+(fg)$), and every covering of a member of $\\mathcal B$ by members of $\\mathcal B$ is refined by a finite one. With the sheaf of rings $\\mathcal O=\\mathcal O_X$ and the presheaf of modules $F$ of step 3, which satisfies the finite sheaf condition by step 4, [lem-weil-pbc-sheaf-of-modules-from-basis] (a) gives a sheaf of $\\mathcal O_X$-modules $\\mathcal F=F^{ext}$ with $\\mathcal O_X(U)$-linear isomorphisms $\\mathcal F(U)\\cong F(U)=M_{(f_U)}$ compatible with the restrictions; composing with the isomorphisms $\\rho_{f_U,f}$ of step 2 gives $\\mathcal F(D_+(f))\\cong M_{(f)}$ for every homogeneous $f$ of positive degree, as $S_{(f)}\\cong\\Gamma(D_+(f),\\mathcal O_X)$-modules (step 3), with restriction maps $\\rho_{f,g}$ (transitivity, step 2). Uniqueness: if $\\mathcal G$ is another sheaf of $\\mathcal O_X$-modules with $S_{(f)}$-linear identifications $\\mathcal G(D_+(f))\\cong M_{(f)}$ compatible with the $\\rho$, the composites $F(U)\\cong\\mathcal G(U)$ are $\\mathcal O_X(U)$-linear, bijective and compatible with restrictions, so by clause (b) of [lem-weil-pbc-sheaf-of-modules-from-basis] there is a unique morphism $\\mathcal F\\to\\mathcal G$ inducing them, and it is an isomorphism; any isomorphism compatible with the identifications induces these maps on $\\mathcal B$, so it is this one. This is (b) (Stacks Definition 01M6 (3), Lemma 01M7 (2),(3)).",
-   "uses": [
-    "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-weil-pbc-sheaf-of-modules-from-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Text before Definition 01M6 ('there exists a unique sheaf of $\\mathcal O_{\\mathrm{Proj}(S)}$-modules $\\mathcal F$ which agrees with $\\widetilde M$ on the standard opens', citing Sheaves Lemma 009T); Definition 01M6 (3); Lemma 01M7 (2),(3)"
-   }
-  },
-  {
-   "text": "*Clause (c), quasi-coherence.* Fix $f$ homogeneous of degree $d>0$ and let $\\iota_f:\\operatorname{Spec}S_{(f)}\\to X$ be the open immersion with image $D_+(f)$ of [lem-weil-pbc-proj-basic-open-intersection], an isomorphism of schemes $\\operatorname{Spec}S_{(f)}\\cong D_+(f)$ inducing $\\theta_f$ on global sections. Let $D(r)\\subseteq\\operatorname{Spec}S_{(f)}$ be a principal open. Write $r=h/f^n$ with $h\\in S_{nd}$; replacing $(h,n)$ by $(hf,n+1)$ we may assume $n\\ge1$, so $h$ is homogeneous of positive degree $nd$. By [lem-weil-pbc-proj-basic-open-intersection] (with $g=h$, $e=nd$), $\\iota_f^{-1}(D_+(h))=D(h^d/f^{nd})=D(r^d)=D(r)$, i.e. $\\iota_f(D(r))=D_+(f)\\cap D_+(h)=D_+(fh)$ (Stacks Lemma 01MA). For the pair $(f,fh)$ (relation $(fh)^1=h\\cdot f$) the element of [lem-weil-pbc-graded-module-away-restriction] (iii) is $(fh)^d/f^{d+nd}=h^d/f^{nd}=r^d$, so $\\mathcal F(D_+(fh))\\cong M_{(fh)}\\cong(M_{(f)})_{r^d}=(M_{(f)})_r$, and for $M=S$, $\\Gamma(D_+(fh),\\mathcal O_X)\\cong S_{(fh)}\\cong(S_{(f)})_r=\\Gamma(D(r),\\mathcal O_{\\operatorname{Spec}S_{(f)}})$. The latter composite agrees with the isomorphism induced by $\\iota_f$: both are $S_{(f)}$-algebra maps $\\Gamma(D_+(fh),\\mathcal O_X)\\to(S_{(f)})_r$ (compatible with restriction from $D_+(f)$, resp. from $\\operatorname{Spec}S_{(f)}$, and $\\theta_f$), and $\\Gamma(D_+(fh),\\mathcal O_X)\\cong(S_{(f)})_r$ is a localization of $S_{(f)}$ at $r$, out of which an $S_{(f)}$-algebra map is unique. By [lem-weil-pbc-spec-module-tilde-sections] (with $R=S_{(f)}$, $N=M_{(f)}$), $\\widetilde{M_{(f)}}(D(r))=(M_{(f)})_r$ as $(S_{(f)})_r$-modules with the canonical localization maps as restrictions; by (iv) of [lem-weil-pbc-graded-module-away-restriction] the isomorphisms $\\mathcal F(D_+(fh))\\cong(M_{(f)})_r$ carry the restrictions $\\rho$ to these localization maps. The principal opens of $\\operatorname{Spec}S_{(f)}$ form a basis closed under intersection ($D(r)\\cap D(r')=D(rr')$) and coverings of a $D(r)$ by principal opens refine to finite ones ($D(r)$ is quasi-compact), so by [lem-weil-pbc-sheaf-of-modules-from-basis] (b), on the space $\\operatorname{Spec}S_{(f)}$ with the sheaf of rings $\\mathcal O_{\\operatorname{Spec}S_{(f)}}$, the family of these isomorphisms extends to an isomorphism of $\\mathcal O_{\\operatorname{Spec}S_{(f)}}$-modules $\\iota_f^*(\\mathcal F|_{D_+(f)})\\cong\\widetilde{M_{(f)}}$. So $\\mathcal F|_{D_+(f)}$ is isomorphic, via the affine scheme $D_+(f)\\cong\\operatorname{Spec}S_{(f)}$, to the sheaf associated to the $S_{(f)}$-module $M_{(f)}$; since the $D_+(f)$ cover $X$ (step 1), $\\mathcal F$ is quasi-coherent [pqf-def-coherent].",
-   "uses": [
-    "lem-weil-pbc-proj-basic-open-intersection",
-    "lem-weil-pbc-graded-module-away-restriction",
-    "lem-weil-pbc-sheaf-of-modules-from-basis",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "pqf-def-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MA (label lemma-standard-open-proj) and Lemma 01MB (label lemma-proj-scheme) with its proof ('$\\widetilde M|_{D_+(f)}\\cong\\varphi^*(\\widetilde{M_{(f)}})$')"
-   }
-  },
-  {
-   "text": "*Clause (c), stalks.* Let $x\\in X$ with homogeneous prime $\\mathfrak p$, and let $T$ be the set of homogeneous elements of $S$ not in $\\mathfrak p$; $M_{(\\mathfrak p)}$ is the set of $y/t$ in $T^{-1}M$ with $t\\in T$, $y\\in M$ homogeneous, $\\deg y=\\deg t$, and $y/t=0$ iff $cy=0$ for some $c\\in T$. By [lem-weil-pbc-sheaf-of-modules-from-basis] (c) and step 5, $\\mathcal F_x$ [def-weil-pbc-module-stalk] is the colimit of $M_{(f)}$ over the homogeneous $f\\notin\\mathfrak p$ of positive degree, preordered by $f\\ge f'$ iff $D_+(f)\\subseteq D_+(f')$, with transition maps $\\rho$ (directed: $ff'\\ge f,f'$). The maps $\\mu_f:M_{(f)}\\to M_{(\\mathfrak p)}$, $x/f^m\\mapsto x/f^m$, are compatible: $\\mu_g(\\rho_{f,g}(x/f^m))=a^mx/g^{em}=x/f^m$ since $a^mf^m=g^{em}$ and $f,g\\in T$. So they induce $\\mu:\\mathcal F_x\\to M_{(\\mathfrak p)}$. Surjective: since $S_+\\not\\subseteq\\mathfrak p$ there is $f_0\\notin\\mathfrak p$ homogeneous of positive degree; for $y/t\\in M_{(\\mathfrak p)}$ put $f=tf_0$ (homogeneous of positive degree, $\\notin\\mathfrak p$); then $y/t=yf_0/f$ with $\\deg(yf_0)=\\deg f$, i.e. $y/t=\\mu_f(yf_0/f^1)$. Injective: if $\\mu_f(x/f^m)=0$, there is $c\\in T$ with $cx=0$; then $fc$ is homogeneous of positive degree, $\\notin\\mathfrak p$, $D_+(fc)\\subseteq D_+(f)$ with $(fc)^1=c\\cdot f$, and $\\rho_{f,fc}(x/f^m)=c^mx/(fc)^m=0$; so the germ of $x/f^m$ is $0$. Hence $\\mathcal F_x\\cong M_{(\\mathfrak p)}$, and this is linear over $\\mathcal O_{X,x}\\cong S_{(\\mathfrak p)}$ ([lem-weil-pbc-proj-structure-sheaf-standard-sections] (i),(ii): $\\mu_f((y/f^k)(x/f^m))=(y/f^k)\\mu_f(x/f^m)$ and the germ of $\\theta_f(y/f^k)$ goes to $y/f^k$).",
-   "uses": [
-    "lem-weil-pbc-sheaf-of-modules-from-basis",
-    "lem-weil-pbc-graded-module-away-restriction",
-    "lem-weil-pbc-proj-structure-sheaf-standard-sections",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Text before Definition 01M6 (computation of the stalk: '$\\widetilde M_x=\\mathrm{colim}\\,M_{(f)}$ ... it follows easily that $\\widetilde M_x=M_{(\\mathfrak p)}$'); Lemma 01M7 (5)"
-   }
-  },
-  {
-   "text": "*Clause (d).* Let $m\\in M_0$. For every $f$, $m/1=m/f^0\\in M_{(f)}$ (degree $0=0\\cdot\\deg f$). If $D_+(g)\\subseteq D_+(f)$, $g^e=af$, then $\\rho_{f,g}(m/f^0)=a^0m/g^0=m/1$ (step 2). The standard opens cover $X$ and $D_+(f)\\cap D_+(g)=D_+(fg)$ (step 1), and under the identifications of step 5 both $m/1\\in\\mathcal F(D_+(f))$ and $m/1\\in\\mathcal F(D_+(g))$ restrict to $m/1\\in\\mathcal F(D_+(fg))$. By the sheaf property of $\\mathcal F$ there is a unique $s_m\\in\\Gamma(X,\\mathcal F)$ with $s_m|_{D_+(f)}=m/1$ for all $f$ (uniqueness: two such sections agree on a covering). The map $m\\mapsto s_m$ is additive ($(m+m')/1=m/1+m'/1$ and uniqueness). For $r\\in S_0$, the same construction for $M=S$ gives the global function $s_r\\in\\Gamma(X,\\mathcal O_X)$ with $s_r|_{D_+(f)}=\\theta_f(r/1)$ (step 3), and $r\\mapsto s_r$ is a ring map $S_0\\to\\Gamma(X,\\mathcal O_X)$; since $(rm)/1=(r/1)(m/1)$ in $M_{(f)}$, $s_rs_m$ and $s_{rm}$ have the same restriction to every $D_+(f)$, so $s_{rm}=s_rs_m$. Hence $M_0\\to\\Gamma(X,\\mathcal F)$, $m\\mapsto s_m$, is $S_0$-linear. This is (d) (Stacks Lemma 01M7 (6)).",
-   "uses": [
-    "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-weil-pbc-graded-module-away-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01M7 (6) and its proof ('there are canonical maps $M_0\\to M_{(f)}$, $x\\mapsto x/1$ compatible with the restriction maps')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proj-standard-open-inclusion",
   "lem-weil-pbc-graded-module-away-restriction",
-  "lem-weil-pbc-proj-structure-sheaf-standard-sections",
-  "lem-weil-pbc-cover-module-exact",
-  "lem-weil-pbc-sheaf-of-modules-from-basis",
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "pqf-def-coherent",
-  "def-weil-pbc-module-stalk"
+  "lem-weil-pbc-proj-graded-module-sheaf-extension",
+  "lem-weil-pbc-proj-graded-module-sheaf-global-sections",
+  "lem-weil-pbc-proj-graded-module-sheaf-stalks",
+  "lem-weil-pbc-proj-standard-open-inclusion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions, Section 01M3: text before Definition 01M6, Lemma 01M4, Definition 01M6 (3), Lemma 01M7 (1)-(6), Lemmas 01MA and 01MB; with Algebra Lemma 00EK (literature/stacks-project/algebra.tex) and Sheaves on Spaces Section 009H (literature/stacks-project/sheaves.tex)"
+  "place": "Section 01M3; Lemmas 01M4, 01M7, 01MB; split into chart construction, extension, stalks and gluing"
  },
  "mathlib_searches": [
   {
@@ -236,5 +161,15 @@
   "group": "K1",
   "result": "fix",
   "note": "S/𝒜 GradedRing, M with ℤ-grading 𝓜 IsInternal + hsmul (landed sibling form); Fidx positive homogeneous; Z f carrier = landed degreeZeroFractions over powers f; (a) relation g^e=af, rho semilinear over rhoS pinned to O_X restriction via awayToSection, formula a^m y/g^(em) for all witnesses, id/comp/bijective; (b) F : SheafOfModules (moduleRings), alpha tied by scalar law (rfl-checked ModuleCat smul) and restrictions, unique compatible iso; IsQuasicoherent; (c) stalk via moduleStalkFunctor ≃+ degreeZeroFractions at primeCompl, semilinear over stalkIso, germ formula (carrier rfl = TopCat stalk); (d) eta/gamma pinned on charts, S_0 law, uniqueness. FIX: 7 'show … from le_top' in statement -> '(le_top : D[f] ≤ ⊤)'."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T085249-L-18897",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
