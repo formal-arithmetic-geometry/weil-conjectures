@@ -9,11 +9,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
 import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover
+import Sheaf.AlgebraicGeometry.AffineModuleTensorUnitSections
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Mathlib.Topology.Sheaves.SheafCondition.Sites
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Affine tensor comparison isomorphisms
 
@@ -74,6 +76,8 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
+set_option maxHeartbeats 400000 in
+-- The adjunction identity compares two definitionally equal scalar-restricted pushforwards.
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
 performs the affine inverse calculation and the passage from affine opens to sheaves.
@@ -145,7 +149,70 @@ theorem affine_module_tensor_comparison_isIso [IsAffineHom f]
               (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G))) :
 (∀ F : U.Modules, F.IsQuasicoherent → IsIso (α.app F)) ∧
             (∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent → IsIso (β.app G)) := by
-  sorry
+  classical
+  have hA : (Scheme.CommAlgebraSheaf.toModule (Under.mk ρ)).IsQuasicoherent := by
+    have := IsSeparated.of_isAffineHom f
+    have := SheafOfModules.isQuasicoherent_unit.{u, u, u} («R» := U.ringCatSheaf)
+    exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f
+      (SheafOfModules.unit U.ringCatSheaf)
+  have hβ (G : SheafOfModules.{u} (𝓡 A)) (hG : G.IsQuasicoherent) :
+      IsIso (β.app G) := by
+    have hBasis : Opens.IsBasis (Set.range (fun V : X.affineOpens ↦ V.1)) := by
+      rw [Subtype.range_coe]
+      exact X.isBasis_affineOpens
+    have : IsIso ((SheafOfModules.toSheaf (𝓡 A)).map (β.app G)) := by
+      apply TopCat.Sheaf.isIso_iff_isIso_basis hBasis
+      intro V
+      apply (ConcreteCategory.isIso_iff_bijective _).mpr
+      exact affine_module_tensor_unit_sections_bijective f B b t ε hring P pobj κ hP
+        H hobj γ hH β hcomp.2 G hG V.1 V.2
+    exact isIso_of_reflects_iso (β.app G) (SheafOfModules.toSheaf (𝓡 A))
+  refine ⟨?_, hβ⟩
+  intro F hF
+  have hF' : ((𝟭 U.Modules).obj F).IsQuasicoherent := hF
+  have := IsSeparated.of_isAffineHom f
+  have hRF : ((R).obj F).IsQuasicoherent := by
+    apply (quasiCoherent_iff_restrictScalars X (Under.mk ρ) hA ((R).obj F)).mpr
+    exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f F
+  have hHF : ((R ⋙ H).obj F).IsQuasicoherent := hH.2.2 ((R).obj F) hRF
+  have htriangle : β.app ((R).obj F) ≫ (R).map (α.app F) = 𝟙 ((R).obj F) := by
+    have hs : (S).map (β.app ((R).obj F) ≫ (R).map (α.app F)) =
+        (S).map (𝟙 ((R).obj F)) := by
+      rw [Functor.map_comp, hcomp.2]
+      change (adj₀).homEquiv _ _ (γ.app ((R).obj F)) ≫
+        (pushforward f).map (α.app F) = 𝟙 _
+      rw [← Adjunction.homEquiv_naturality_right, hcomp.1]
+      rw [← (adj₀).homEquiv_symm_id F]
+      exact Equiv.apply_symm_apply _ _
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro V
+    ext g
+    exact congrArg (fun q ↦ q.val.app V g) hs
+  have := hβ ((R).obj F) hRF
+  have : IsIso (β.app ((R).obj F) ≫ (R).map (α.app F)) := by
+    rw [htriangle]
+    infer_instance
+  have : IsIso ((R).map (α.app F)) :=
+    IsIso.of_isIso_comp_left (β.app ((R).obj F)) ((R).map (α.app F))
+  apply Hom.isIso_of_bijective_on_affine_open_cover (α.app F)
+    (fun V : X.affineOpens ↦ f ⁻¹ᵁ V.1)
+  · apply Opens.ext
+    ext x
+    simp only [Opens.coe_iSup, Set.mem_iUnion]
+    constructor
+    · intro _
+      trivial
+    intro _
+    obtain ⟨V, hV, hxV, _⟩ := Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens
+      (show f.base x ∈ (⊤ : X.Opens) from trivial)
+    exact ⟨⟨V, hV⟩, hxV⟩
+  · intro V
+    exact V.2.preimage f
+  · intro V
+    have hEval : IsIso (((R).map (α.app F)).val.app (op V.1)) :=
+      (SheafOfModules.evaluation (𝓡 A) (op V.1)).map_isIso ((R).map (α.app F))
+    exact ConcreteCategory.bijective_of_isIso (((R).map (α.app F)).val.app (op V.1))
 
 end
 end AlgebraicGeometry.Scheme.Modules

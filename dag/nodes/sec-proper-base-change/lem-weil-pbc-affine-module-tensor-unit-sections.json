@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-affine-module-tensor-unit-sections",
+ "kind": "statement",
+ "title": "Bijectivity of the affine tensor unit on affine base sections",
+ "statement": "Let $f:U\\to X$ be an affine morphism of schemes [pqf-def-affine-morphism, def-pc-scheme]. Write $\\mathcal A=f_*\\mathcal O_U$, let $\\rho:\\mathcal O_X\\to\\mathcal A$ be the structure map, and let $r_0:f^{-1}\\mathcal O_X\\to\\mathcal O_U$, $t_0=f^{-1}\\rho$, and $e:f^{-1}\\mathcal A\\to\\mathcal O_U$ be the structure map, inverse-image map, and ring inverse-image/direct-image counit. Write $R$ for pushforward as an $\\mathcal A$-module, and $S$ for restriction to $\\mathcal O_X$ [def-weil-sheaf-of-modules-category]. Tensor pullback and change of rings are those of [def-pc-module-pullback, def-pur-sheaf-tensor-product], and the adjunction is the canonical one of [lem-pc-module-pullback-adjunction]. Let $B$ be a commutative ring sheaf on $U$, $b:\\mathcal O_U\\to B$, $t:f^{-1}\\mathcal A\\to B$, and $\\epsilon:B\\to\\mathcal O_U$. Let $P:\\operatorname{Mod}(\\mathcal A)\\to\\operatorname{Mod}(B)$ and $H:\\operatorname{Mod}(\\mathcal A)\\to\\operatorname{Mod}(\\mathcal O_U)$ be functors, let $\\kappa:P\\operatorname{res}_b\\simeq Sf^*$, $\\gamma:Sf^*\\to H$, $\\beta:1\\to HR$ be natural maps. Suppose $B,b,t,\\epsilon,P,\\kappa,H,\\gamma,\\beta$ satisfy the pushout, counit, change-of-rings object and map formulas, the formula for $\\kappa$ on pullback units, the formula $\\gamma(p)=1\\otimes p$, preservation of quasi-coherence by $H$, and the equation $S\\beta_G=\\mathrm{adjoint}(\\gamma_G)$. For every quasi-coherent $\\mathcal A$-module $G$ [pqf-def-coherent] and every affine open $V\\subseteq X$, the section map $\\beta_{G,V}:G(V)\\to H(G)(f^{-1}V)$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SB, lemma-affine-equivalence-modules, last two paragraphs and key algebra observation; expanded canonical unit calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open V of X, W=f^{-1}V is affine. Put D=O_X(V), C=O_U(W), N=G(V). The algebra A=f_*O_U is quasi-coherent over O_X by affine qcqs pushforward of the unit module. Scalar restriction therefore makes G quasi-coherent over O_X. The canonical affine pullback section map identifies the sections of tensorPullback(SG) on W with C tensor_D N, sending 1 tensor n to the pullback unit of n.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherence-scalar-restriction",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf pushout describes B as O_U tensor_{f^{-1}O_X} f^{-1}A. Its underlying O_U-module is the pullback of the underlying O_X-module of A, hence quasi-coherent. On W the affine pullback formula identifies B(W) with C tensor_D C; the two factors are b and t composed with the inverse-image unit. The equations b epsilon=id and t epsilon=e identify epsilon on this algebra with multiplication. The isomorphism kappa identifies the underlying P(G) with the pullback of SG, which is quasi-coherent by its affine tilde descriptions. Apply quasi-coherent algebra change of rings with structure maps b and id_{O_U}; its sheafification map on W is bijective. Together with pobj and hobj this identifies H(G)(W) with C tensor_{C tensor_D C}(C tensor_D N).",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-algebra-change-of-rings",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For n in N, write the adjunction Hom equivalence as unit followed by pushforward of gamma. The hypothesis on beta, the kappa-inverse formula on the pullback unit, and the gamma formula then send beta_V(n) to 1 tensor (1 tensor n) under the preceding identifications. The inverse is c tensor (d tensor n) mapped to (cd)n, with C acting on N by its A(V)-module structure. This map respects the C tensor_D C balancing relations: each of the two C factors acts on the inner tensor, one on its scalar factor and the other on N, and multiplication on the outer C gives the same product. Its composite with the unit map is n. Conversely balancing moves d into the outer C and then cd onto n, giving 1 tensor (1 tensor (cd)n). Tensor induction proves the identity for arbitrary tensors. Thus beta_V is bijective.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherence-scalar-restriction",
+  "lem-weil-pbc-quasi-coherent-algebra-change-of-rings",
+  "pqf-def-affine-morphism",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 01SB (https://stacks.math.columbia.edu/tag/01SB)",
+  "place": "Details omitted in the source expanded as canonical section identifications and balancing calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical affine unit section map for modules over the pushforward structure algebra is bijective",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from sections N to C tensor over C tensor R C of C tensor R N is bijective for a quasi coherent algebra module sheaf over an affine morphism",
+   "results": "SheafOfModules.bijective_pushforwardSections and PresheafOfModules.homEquivOfIsLocallyBijective are generic section/sheafification facts. ModuleCat.tilde constructs associated sheaves. None computes this canonical affine tensor unit.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_module_tensor|isIso_iff_isIso_basis|cancelBaseChange",
+   "results": "Mathlib tensor cancellation in LinearAlgebra.TensorProduct.Tower and sheaf basis isomorphism detection in Topology.Sheaves.SheafCondition.Sites. No affine tensor unit section calculation. Repository search found only the parent comparison theorem and its use in AffineModuleCorrespondence.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModuleTensorComparisonIsIso",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module correspondence steps 4–7: affine tensor computation and invertibility; canonical unit map on an affine base open (01SB key algebra observation)",
+   "via": [
+    "lem-weil-pbc-affine-module-tensor-comparison-isIso",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleTensorUnitSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleTensorUnitSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_module_tensor_unit_sections_bijective",
+  "statement": "theorem affine_module_tensor_unit_sections_bijective [IsAffineHom f]\n     (B : U.toTopCat.Sheaf CommRingCat.{u})\n      (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)\n    (hring : IsPushout r₀ t₀ b t ∧ b ≫ ε = 𝟙 U.sheaf ∧ t ≫ ε = e₀)\n     (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))\n        (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G))\n        (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f)\n    (hP : (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),\n          P.map a = eqToHom (pobj G) ≫\n            SheafOfModules.changeOfRingsHom.{u, u, u} t (I G)\n              (TopCat.Sheaf.inverseImageModuleMap f.base A G a) ≫\n            eqToHom (pobj G').symm) ∧\n        (∀ (G : SheafOfModules.{u} (𝓡 A)) (V : (Opens X)ᵒᵖ) (g : G.val.obj V),\n          ((eqToHom (pobj G)).val.app (fV V))\n            ((κ.inv.app G).val.app (fV V)\n              (((adj₀).unit.app ((S).obj G)).val.app V g)) =\n            ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n              (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I G))).app\n                (fV V)\n                ((1 : B.obj.obj (fV V)) ⊗ₜ[(IA).obj.obj (fV V),(t.hom.app (fV V)).hom]\n                  (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n                    (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app\n                      ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g))))\n     (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules)\n          (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G))\n          (γ : S ⋙ tensorPullback f ⟶ H)\n    (hH : (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),\n            H.map a = eqToHom (hobj G) ≫\n              SheafOfModules.changeOfRingsHom.{u, u, u} ε (P.obj G) (P.map a) ≫\n              eqToHom (hobj G').symm) ∧\n          (∀ (G : SheafOfModules.{u} (𝓡 A)) (W : (Opens U)ᵒᵖ)\n              (p : (P.obj G).val.obj W),\n            ((eqToHom (hobj G)).val.app W)\n              ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) =\n              ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app\n                (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W\n                  ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W,(ε.hom.app W).hom] p)) ∧\n          (∀ G : SheafOfModules.{u} (𝓡 A),\n            G.IsQuasicoherent → (H.obj G).IsQuasicoherent))\n     (β : 𝟭 (SheafOfModules.{u} (𝓡 A)) ⟶ H ⋙ R)\n    (hcomp : ∀ G : SheafOfModules.{u} (𝓡 A),\n      (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G))\n    (G : SheafOfModules.{u} (𝓡 A)) (hG : G.IsQuasicoherent)\n    (V : X.Opens) (hV : IsAffineOpen V) :\n    Function.Bijective ((β.app G).val.app (op V))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a5344",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135333-L-1699990",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a5344",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T135333-L-1699990",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures with both nodes, unchanged existing interface with the clone, proof dependencies with the argument, and report with compilation and axiom probes; direct importer AffineModuleCorrespondence compiles against the delivery."
+ }
+}
