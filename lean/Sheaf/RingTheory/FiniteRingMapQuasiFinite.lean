@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Mathlib.RingTheory.QuasiFinite.Basic
 
 /-!
 # Finite ring maps are quasi-finite at every prime
@@ -49,6 +50,9 @@ theorem finiteType_and_isQuasiFiniteAtPrime_of_finite
     ∃ hft : Algebra.FiniteType R T,
       letI := hft
       ∀ q : PrimeSpectrum T, Algebra.IsQuasiFiniteAtPrime R T q := by
-  sorry
+  refine ⟨inferInstance, ?_⟩
+  intro q
+  unfold IsQuasiFiniteAtPrime
+  exact isOpen_discrete _
 
 end Algebra
