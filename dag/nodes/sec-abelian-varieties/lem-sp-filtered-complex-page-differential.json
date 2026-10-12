@@ -1,0 +1,133 @@
+{
+ "id": "lem-sp-filtered-complex-page-differential",
+ "kind": "statement",
+ "title": "Unique differential on one filtered-complex quotient page",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K^\\bullet$ an integer-indexed cochain complex, and $F$ a decreasing filtration by subcomplexes [def-sp-filtration]. Fix $r\\in\\mathbb Z$ with $r\\ge1$. Write $Z_r^{p,q}=F.\\mathrm{complexCycles}(p,p+q,r)$ and $B_r^{p,q}=F.\\mathrm{complexBoundaries}(p,p+q,r)$ [def-sp-filtered-complex-subquotients], and form the actual object $Q_r^{p,q}=\\operatorname{coker}(B_r^{p,q}\\hookrightarrow Z_r^{p,q})$ using [lem-sp-filtered-complex-boundaries-le-cycles]. There is a unique family of morphisms between these quotient objects, zero outside bidegree $(r,1-r)$ [def-sp-spectral-sequence], with square zero and the following representative equation. For any object A, related bidegrees i,j, maps t:A->F^(i.1)K^(i.1+i.2) and tprime:A->F^(j.1)K^(j.1+j.2), and maps x:A->Z_r^i and y:A->Z_r^j, if dt=tprime in K and x,y project respectively to the graded classes of t,tprime, then x followed by the quotient projection and the differential equals y followed by the target quotient projection. This is exactly the data type FilteredComplexPageDifferential; no successor homology is asserted.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-spectral-sequence",
+  "lem-sp-filtered-complex-boundaries-le-cycles"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved boundaries-in-cycles inclusion to construct every Q_r as a cokernel, with its cycles-to-quotient projection.",
+   "uses": [
+    "lem-sp-filtered-complex-boundaries-le-cycles",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict d to R = F^p K^n intersect d-inverse(F^(p+r)K^(n+1)). It lands in F^(p+r)K^(n+1) intersect ker d. Project to the target quotient. If two representatives have the same class in the graded cycles, their difference is in R intersect F^(p+1). Its differential is a target r-boundary, because the incoming filtration degree for that target is (p+r)-r+1 = p+1. Thus the map descends to graded cycles. A source boundary is represented by d of an incoming representative and has zero differential, so it also descends through the source boundary cokernel.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set nonrelated differentials to zero. On related bidegrees, successive differentials vanish by d squared = 0. The equation on representatives holds by construction. The representative projection onto graded cycles is epic: adding F^(p+1) before the graded projection does not change its image. Compose with the epic cycles-to-Q_r projection. This composite is epic and forces uniqueness of the differential on every related pair; nonrelated pairs are zero. Proof irrelevance gives uniqueness of the full data record.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-boundaries-le-cycles"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Differential on the quotient of filtered cycles by filtered boundaries and its homology is the next page",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The differential of a filtered complex descends uniquely to the quotient of r cycles by r boundaries",
+   "results": "8 hits; top names: HomologicalComplex.toCycles_i, HomologicalComplex.p_fromOpcycles, HomologicalComplex.pOpcycles_opcyclesToCycles_iCycles, HomologicalComplex.toCycles_i_assoc, HomologicalComplex.descOpcycles, HomologicalComplex.descOpcycles', HomologicalComplex.fromOpcycles, HomologicalComplex.i_cyclesMk. No theorem for these filtered subquotients.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "complexCycles|complexBoundaries|filteredComplexPage",
+   "results": "0 hits; top names: . No theorem for these filtered subquotients.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexPositivePages",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Step 3 of the Tag 012K filtered-complex page calculation: construct the representative differential on one cycle/boundary quotient, before the homology calculation.",
+   "via": [
+    "lem-sp-filtered-complex-positive-pages",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexPageDifferential",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexPageDifferential.lean",
+  "declaration": "CategoryTheory.filteredComplex_page_differential_exists_unique",
+  "statement": "theorem filteredComplex_page_differential_exists_unique\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r) :\n    ∃! D : FilteredComplexPageDifferential K F r, True",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T144052-L-2088584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T144052-L-2088584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

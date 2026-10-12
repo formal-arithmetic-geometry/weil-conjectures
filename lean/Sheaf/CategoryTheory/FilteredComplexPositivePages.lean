@@ -7,8 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.FilteredComplexPageHomology
 
 /-!
 # Positive pages of a filtered complex
@@ -32,19 +31,18 @@ Source: Stacks Project, Homology, Tag 012K, proof of
 `lemma-spectral-sequence-filtered-complex`, and `remark-differential-object-selfmap`.
 (blueprint: lem-sp-filtered-complex-positive-pages).
 
-Proof. Work in the abelian category of bigraded objects, using componentwise kernels
-and cokernels; no infinite coproducts in C are required. Give
-A(p,q) = F^(p+1) K^(p+1+q) its differential of degree (0,1).
-The filtration inclusions give an injective map A -> A[-1,1] commuting with d.
-The homology long exact sequence of its cokernel gives the shifted exact couple
-of Remark 12.18.2. Derive this couple successively, beginning with its homology
-term E1, to obtain complexes with differential of degree (r,1-r) and isomorphisms
-H(E_r) = E_(r+1). The exact-couple calculation identifies the cycles with the image
-of the inverse image of the r-fold inclusion under d, and the boundaries with the
-image of the inverse image of dA under the (r-1)-fold inclusion. Componentwise these
-are the subobjects complexCycles and complexBoundaries: the sums with F^(p+1)
-ensure that both are subobjects of the graded quotient. The equation d squared = 0
-puts boundaries inside cycles. Their quotient is the corresponding page object.
+Proof. For every positive integer r, form the actual cokernel of the boundary
+inclusion into the cycles, using filteredComplex_boundaries_le_cycles. The latter
+containment is proved directly from d squared = 0 using the image/pullback
+adjunction. The uniquely specified representative differential supplied by
+filteredComplex_page_differential_exists_unique makes these concrete objects
+into an r-page complex. Its differential sends the class of z to the class of dz
+in bidegree (p+r,q+1-r). The calculation filteredComplex_page_homology identifies
+its homology at (p,q) with the corresponding concrete quotient at r+1. Assemble
+these page complexes and homology isomorphisms into Mathlib's SpectralSequence
+structure. The required page comparisons are identity isomorphisms, since the
+page objects were constructed as precisely the stated cokernels. No infinite
+coproducts, arbitrary page objects, or finite-filtration hypothesis are used.
 -/
 theorem filteredComplex_positive_spectralSequence
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) :
@@ -52,6 +50,18 @@ theorem filteredComplex_positive_spectralSequence
       ∀ (p q r : ℤ) (hr : 1 ≤ r),
         ∃ hBZ : F.complexBoundaries p (p + q) r ≤ F.complexCycles p (p + q) r,
           Nonempty ((E.page r).X (p, q) ≅ cokernel (Subobject.ofLE _ _ hBZ)) := by
-  sorry
+  classical
+  have hD (r : ℤ) (hr : 1 ≤ r) : Nonempty (FilteredComplexPageDifferential K F r) := by
+    obtain ⟨D, _, _⟩ := filteredComplex_page_differential_exists_unique K F r hr
+    exact ⟨D⟩
+  let D (r : ℤ) (hr : 1 ≤ r) := Classical.choice (hD r hr)
+  let E : CohomologicalSpectralSequence C 1 :=
+    { page := fun r hr => (D r hr).page
+      iso := fun r r' pq hrr' hr =>
+        (Classical.choice (filteredComplex_page_homology K F r hr (D r hr) pq)) ≪≫
+          eqToIso (congrArg (fun s => filteredComplexPageObject K F s pq) hrr') }
+  refine ⟨E, fun p q r hr => ?_⟩
+  refine ⟨filteredComplex_boundaries_le_cycles K F p (p + q) r, ?_⟩
+  exact ⟨Iso.refl _⟩
 
 end CategoryTheory
