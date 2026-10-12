@@ -8595,3 +8595,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 00:52 L: batch 20261012T163610 dependency take-out
 - 16:52 L: returned deliver/E3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-ab24a, head ab24a0059) E1/E2 (review point 4): the theorem remains a false sorry. In GluedEffectiveModelChar)
+- 16:53 L: returned deliver/C1/Sheaf.ConstructibleSheaf.ConstantFiniteFreeDualNaturality (reviewer RETURN: (reviewer X-63afe, head 63afef96d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.ConstructibleSheaf.C)
