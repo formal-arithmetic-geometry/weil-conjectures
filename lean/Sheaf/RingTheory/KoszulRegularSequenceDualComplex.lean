@@ -229,6 +229,27 @@ theorem koszul_conormal_comparison_cohomology
         HomologicalComplex.cyclesMap_i_assoc]
     exact congrArg (fun k ↦ k z) hh
 
+private theorem koszulBoundary_zero_formula
+    (A : Type uT) [CommRing A] (r : ℕ) (f : Fin r → A)
+    (x : ⋀[A]^1 (Fin r →₀ A)) :
+    exteriorPower.zeroEquiv A (Fin r →₀ A) (koszulBoundary A r f 0 x) =
+      Finsupp.linearCombination A f (exteriorPower.oneEquiv A (Fin r →₀ A) x) := by
+  have he : (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap.comp
+      (koszulBoundary A r f 0) = (Finsupp.linearCombination A f).comp
+        (exteriorPower.oneEquiv A (Fin r →₀ A)).toLinearMap := by
+    apply exteriorPower.linearMap_ext
+    ext v
+    have hg : koszulBoundary A r f 0 (exteriorPower.ιMulti A 1 v) =
+        (exteriorPower.zeroEquiv A (Fin r →₀ A)).symm
+          (Finsupp.linearCombination A f (v 0)) := by
+      apply Subtype.ext
+      simp [koszulBoundary, exteriorPower.zeroEquiv_symm_apply,
+        ExteriorAlgebra.ιMulti_succ_apply, CliffordAlgebra.contractLeft_ι,
+        Algebra.algebraMap_eq_smul_one]
+    simp [hg]
+  exact LinearMap.congr_fun he x
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The Koszul augmentation is a quasi-isomorphism to the quotient in degree zero.
 Source: Stacks Project, Tag 0BQZ
 (blueprint: lem-sc-koszul-regular-sequence-dual-complex).
@@ -249,7 +270,84 @@ theorem exists_koszul_quotient_augmentation
           (ε.f 0 (((koszulComplex A r f).extendXIso
             ComplexShape.embeddingDownNat (i := 0) rfl).inv x)) =
         Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x) := by
-  sorry
+  let K := koszulComplex A r f
+  let q : K.X 0 ⟶ ModuleCat.of A (A ⧸ I) :=
+    ModuleCat.ofHom (I.mkQ.comp (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap)
+  have hq (x : K.X 0) : q x =
+      Ideal.Quotient.mk I (exteriorPower.zeroEquiv A (Fin r →₀ A) x) := rfl
+  have hmem (v : Fin r →₀ A) : Finsupp.linearCombination A f v ∈ I := by
+    rw [← hf, ← Ideal.submodule_span_eq, ← Finsupp.range_linearCombination]
+    exact LinearMap.mem_range_self _ _
+  have hz : K.d 1 0 ≫ q = 0 := by
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    change I.mkQ (exteriorPower.zeroEquiv A (Fin r →₀ A)
+      (koszulBoundary A r f 0 x)) = 0
+    rw [koszulBoundary_zero_formula]
+    exact (Submodule.Quotient.mk_eq_zero I).mpr (hmem _)
+  let ε₀ := (ChainComplex.toSingle₀Equiv K (ModuleCat.of A (A ⧸ I))).symm ⟨q, hz⟩
+  have hε₀ : ε₀.f 0 = q := ChainComplex.toSingle₀Equiv_symm_apply_f_zero q hz
+  have hsurj : Function.Surjective q := by
+    intro y
+    obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective y
+    exact ⟨(exteriorPower.zeroEquiv A (Fin r →₀ A)).symm a, by simp [hq, ha]⟩
+  have hex : (ShortComplex.mk (K.d 1 0) q hz).Exact := by
+    rw [ShortComplex.moduleCat_exact_iff]
+    intro x hx
+    have hxI : exteriorPower.zeroEquiv A (Fin r →₀ A) x ∈ I :=
+      (Submodule.Quotient.mk_eq_zero I).mp hx
+    rw [← hf, ← Ideal.submodule_span_eq, ← Finsupp.range_linearCombination] at hxI
+    obtain ⟨v, hv⟩ := hxI
+    refine ⟨(exteriorPower.oneEquiv A (Fin r →₀ A)).symm v, ?_⟩
+    apply (exteriorPower.zeroEquiv A (Fin r →₀ A)).injective
+    change exteriorPower.zeroEquiv A (Fin r →₀ A)
+      (koszulBoundary A r f 0 _) = _
+    rw [koszulBoundary_zero_formula, LinearEquiv.apply_symm_apply, hv]
+  have hqi : QuasiIso ε₀ := by
+    constructor
+    intro n
+    by_cases hn : n = 0
+    · subst n
+      rw [ChainComplex.quasiIsoAt₀_iff,
+        ShortComplex.quasiIso_iff_isIso_descOpcycles _ (by simp) (by simp) (by simp)]
+      let S := K.sc' 1 0 0
+      have : Epi q := (ModuleCat.epi_iff_surjective q).mpr hsurj
+      let ei := S.isoOpcyclesOfIsColimit hex.gIsCokernel
+      have heq : S.descOpcycles
+          ((HomologicalComplex.shortComplexFunctor' (ModuleCat A)
+            (ComplexShape.down ℕ) 1 0 0).map ε₀).τ₂
+          (by change K.d 1 0 ≫ ε₀.f 0 = 0; rw [hε₀]; exact hz) = ei.inv := by
+        apply (cancel_epi S.pOpcycles).mp
+        simp only [ShortComplex.p_descOpcycles,
+          ShortComplex.pOpcycles_π_isoOpcyclesOfIsColimit_inv, ei]
+        exact hε₀
+      rw [heq]
+      infer_instance
+    · rw [quasiIsoAt_iff_exactAt]
+      · exact HomologicalComplex.exactAt_single_obj _ _ _ _ hn
+      · exact (HomologicalComplex.exactAt_iff_isZero_homology K n).mpr (hreg n hn)
+  let e := HomologicalComplex.extendSingleIso ComplexShape.embeddingDownNat
+    (ModuleCat.of A (A ⧸ I)) 0 (0 : ℤ) rfl
+  let ε := HomologicalComplex.extendMap ε₀ ComplexShape.embeddingDownNat ≫ e.hom
+  have : QuasiIso ε₀ := hqi
+  refine ⟨ε, by dsimp [ε]; infer_instance, ?_⟩
+  intro x
+  simp only [ε, e, K, HomologicalComplex.comp_f, HomologicalComplex.extendMap_f _ _ (show
+    ComplexShape.embeddingDownNat.f 0 = (0 : ℤ) from rfl),
+    HomologicalComplex.extendSingleIso_hom_f, hε₀, ModuleCat.comp_apply,
+    Iso.inv_hom_id_apply,
+    ChainComplex.single₀ObjXSelf, Iso.refl_hom, Category.id_comp]
+  have hi (X Y : ModuleCat A) (e : X ≅ Y) (y : Y) : e.hom (e.inv y) = y := by
+    change (e.inv ≫ e.hom) y = y
+    rw [e.inv_hom_id]
+    rfl
+  change q ((HomologicalComplex.extendXIso K ComplexShape.embeddingDownNat
+    (i := 0) rfl).hom
+      ((HomologicalComplex.extendXIso K ComplexShape.embeddingDownNat
+        (i := 0) rfl).inv x)) = _
+  rw [hi]
+  exact hq x
 
 /-- The intrinsic Ext determinant isomorphism, normalized on every Koszul roof.
 One isomorphism is chosen for the ideal `I`, before quantifying over its generating
