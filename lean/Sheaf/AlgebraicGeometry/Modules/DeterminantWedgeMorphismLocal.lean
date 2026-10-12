@@ -4,6 +4,8 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocalAt
+import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismGlue
 
 @[expose] public section
 
@@ -38,7 +40,8 @@ theorem determinant_wedgeMorphism_local_data {X : Scheme.{v}} (S : ShortComplex 
             (exteriorSheafSection S.X₃ r₃ U b)) =
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
-  sorry
+  intro U
+  exact determinant_wedgeMorphism_local_data_at S hS r₁ r₂ r₃ hr U
 
 /-- A compatible family of local wedge maps glues to a sheaf morphism.
 
@@ -71,6 +74,7 @@ theorem determinant_wedgeMorphism_of_local_data {X : Scheme.{v}} (S : ShortCompl
             (exteriorSheafSection S.X₃ r₃ U b)) =
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
-  sorry
+  choose φU hφU using hlocal
+  exact determinant_wedgeMorphism_glue_family S hS r₁ r₂ r₃ hr φU hφU
 
 end AlgebraicGeometry.Scheme.Modules

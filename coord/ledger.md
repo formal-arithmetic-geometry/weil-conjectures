@@ -8974,3 +8974,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/J3/Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence (stage 3; reviewer PASS; first push; landing 20261012T184310-L-4007145 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/J3/Sheaf.AlgebraicGeometry.ClosedImmersionDisjointIdealTwist (stage 3; reviewer PASS; first push; landing 20261012T184311-L-4007243 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/J3/Sheaf.AlgebraicGeometry.CoherentThickeningSystem (stage 3; reviewer PASS; first push; landing 20261012T184311-L-4007345 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismLocal (stage 3; reviewer PASS; first push; landing 20261012T184311-L-4007442 (interface); batch 20261012T184234; modules 3; new nodes 2)
