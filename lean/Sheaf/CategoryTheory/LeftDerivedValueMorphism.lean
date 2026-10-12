@@ -7,7 +7,6 @@ module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
-import Sheaf.CategoryTheory.RightLocalizationHomColimit
 
 /-! # Morphisms between pointwise left-derived values
 
@@ -74,6 +73,63 @@ theorem leftDerived_value_morphism
           uX.app s ≫ F.map f' = lf ≫ uY.app s' ∧
             (uX.app s ≫ F.map s.hom) ≫ F.map f =
               lf ≫ uY.app s' ≫ F.map s'.hom := by
-  sorry
+  classical
+  let : S.HasRightCalculusOfFractions := hS.1.1.2
+  let Q := S.Q
+  obtain ⟨_, πX, _, hdenX, _⟩ :=
+    leftDerived_defined_pointwiseKan_bridge S Q F X LX hX uX huX
+  obtain ⟨_, πY, ⟨hπY⟩, hdenY, _⟩ :=
+    leftDerived_defined_pointwiseKan_bridge S Q F Y LY hY uY huY
+  let c : Cone (StructuredArrow.proj (Q.obj Y) Q ⋙ F) :=
+    Cone.mk LX
+      { app := fun j ↦ πX.app ((StructuredArrow.map (Q.map f)).obj j)
+        naturality := fun i j g ↦ by
+          simpa using (πX.naturality ((StructuredArrow.map (Q.map f)).map g)) }
+  let lf : LX ⟶ LY := hπY.lift c
+  have hlf (s : S.Over ⊤ X) (s' : S.Over ⊤ Y) (f' : s.left ⟶ s'.left)
+      (hsq : s.hom ≫ f = f' ≫ s'.hom) :
+      uX.app s ≫ F.map f' = lf ≫ uY.app s' := by
+    let i := StructuredArrow.mk (Localization.isoOfHom Q S s.hom s.prop).inv
+    let j := StructuredArrow.mk (Localization.isoOfHom Q S s'.hom s'.prop).inv
+    let g : i ⟶ (StructuredArrow.map (Q.map f)).obj j :=
+      StructuredArrow.homMk f' (by
+        apply (cancel_mono (Localization.isoOfHom Q S s'.hom s'.prop).hom).mp
+        simp only [Category.assoc, Localization.isoOfHom_hom,
+          StructuredArrow.map_obj_hom]
+        rw [← Q.map_comp, ← hsq, Q.map_comp]
+        change (Localization.isoOfHom Q S s.hom s.prop).inv ≫ Q.map s.hom ≫ Q.map f =
+          Q.map f ≫ (Localization.isoOfHom Q S s'.hom s'.prop).inv ≫ Q.map s'.hom
+        simp only [Localization.isoOfHom_inv_hom_id_assoc,
+          Localization.isoOfHom_inv_hom_id]
+        exact (Category.comp_id (Q.map f)).symm)
+    have hn := πX.naturality g
+    change 𝟙 LX ≫ πX.app ((StructuredArrow.map (Q.map f)).obj j) =
+      πX.app i ≫ F.map f' at hn
+    rw [Category.id_comp] at hn
+    have hn' := hn.symm
+    rw [hdenX s] at hn'
+    rw [hn', ← hdenY s']
+    exact (hπY.fac c j).symm
+  refine ⟨lf, ?_, ?_⟩
+  · intro s s' f' hsq
+    refine ⟨hlf s s' f' hsq, ?_⟩
+    calc
+      (uX.app s ≫ F.map s.hom) ≫ F.map f =
+          uX.app s ≫ F.map (s.hom ≫ f) := by rw [F.map_comp, Category.assoc]
+      _ = uX.app s ≫ F.map (f' ≫ s'.hom) := by rw [hsq]
+      _ = lf ≫ uY.app s' ≫ F.map s'.hom := by
+        rw [F.map_comp, ← Category.assoc, hlf s s' f' hsq, Category.assoc]
+  · intro m hm
+    -- One denominator leg suffices: it has the supplied right inverse.
+    obtain ⟨s₀, r, hr, _⟩ := huY
+    obtain ⟨a, ha⟩ :=
+      (MorphismProperty.LeftFraction.mk f s₀.hom s₀.prop).exists_rightFraction
+    let s : S.Over ⊤ X := ⟨Over.mk a.s, a.hs⟩
+    have he : m ≫ uY.app s₀ = lf ≫ uY.app s₀ :=
+      (hm s s₀ a.f ha).1.symm.trans (hlf s s₀ a.f ha)
+    calc
+      m = (m ≫ uY.app s₀) ≫ r := by rw [Category.assoc, hr, Category.comp_id]
+      _ = (lf ≫ uY.app s₀) ≫ r := by rw [he]
+      _ = lf := by rw [Category.assoc, hr, Category.comp_id]
 
 end CategoryTheory.Functor

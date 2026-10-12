@@ -57,27 +57,25 @@
    }
   },
   {
-   "text": "For any (Z',\\varphi:Q(Y)\\to Q(Z')), the localization Hom-colimit bijection represents \\varphi as Q(g)\\circ Q(s')^{-1} for some s':W\\to Y in S and g:W\\to Z'. By the right-multiplicative-system axiom (RMS2), applied to f:X\\to Y and s':W\\to Y, choose t:V\\to X in S and f':V\\to W with f\\circ t=s'\\circ f'. Thus the denominator-square property gives u_{s'}\\circ h=F(f')\\circ u_t for either candidate h:LF(X)\\to LF(Y). The limit cone projection at (Z',\\varphi) is F(g)\\circ u_{s'} (by the bridge statement), so the composites of the two candidates with this projection agree. Since every structured-arrow object has such a denominator representation, all limit projections agree, and the limit universal property gives uniqueness.",
+   "text": "Take the denominator s₀:Y₀→Y and retraction r:F(Y₀)→LY supplied by huY, with uY(s₀) ≫ r = id. Apply the right square-completion axiom of the multiplicative system (Mathlib MorphismProperty.LeftFraction.exists_rightFraction for the left fraction with numerator f and denominator s₀) to obtain a denominator s:V→X and a map f′:V→Y₀ with s ≫ f = f′ ≫ s₀. For any candidate m, its first-square equation gives m ≫ uY(s₀) = uX(s) ≫ F(f′) = LF(f) ≫ uY(s₀). Compose with r and use the retraction identity to conclude m = LF(f). Thus only one denominator projection is needed for uniqueness, and no Hom-colimit theorem is used.",
    "uses": [
-    "lem-pc-right-localization-hom-colimit",
-    "lem-pur-left-derived-defined-pointwise-kan-bridge"
+    "def-pur-saturated-triangulated-localization"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories Remark 05Q4 and Lemma 05SA(2), uniqueness via the localization Hom-colimit description"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SA(2), MS2 square completion and uniqueness using the retraction in Definition 05PU(2)"
    }
   }
  ],
  "proof_deps": [
   "lem-pur-left-derived-defined-pointwise-kan-bridge",
-  "def-pur-saturated-triangulated-localization",
-  "lem-pc-right-localization-hom-colimit"
+  "def-pur-saturated-triangulated-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05SA(2), with the pointwise Kan-extension reformulation and Categories Remark 05Q4"
+  "place": "Lemma 05SA(2), pointwise Kan-extension construction; uniqueness shortened using MS2 and the supplied essential-constancy retraction (Categories Definition 05PU(2))"
  },
  "mathlib_searches": [
   {
@@ -163,5 +161,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T144113-L-2096139",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
