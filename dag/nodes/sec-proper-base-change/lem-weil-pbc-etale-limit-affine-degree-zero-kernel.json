@@ -18,40 +18,39 @@
  ],
  "proof": [
   {
-   "text": "On the cofinal upper tail of i, use the affine etale site colimit comparison (0EYL) and the small-to-affine etale sheaf equivalence (04HR). Compare inverse images by their right adjoints and adjunction units; transport the coefficient system and colimit. This is the geometric comparison part of the named open theorem.",
+   "text": "The limit of affine schemes is affine by Mathlib Scheme.isAffine_of_isLimit. Specialize the existing filtered-cohomology colimit theorem on this limit scheme to degree zero. Transport its cocone first through the natural derived-degree-zero/global-section isomorphism and then through H.equiv₀. The filtered-colimit equality criterion in AddCommGrpCat supplies j and f : i → j at which the representative in H^0(G_i) becomes zero.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-colimit-initial-full-subcategory"
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false
   },
   {
-   "text": "At the terminal affine object, identify degree-zero cohomology with sections. Sites 09YN identifies limit sections with the filtered colimit of stage sections. Detection of equality with zero in a filtered colimit gives the later stage. This is only degree zero and needs no higher-degree continuity.",
+   "text": "Apply H^0((eG_j).hom) to this zero. Expand hG and cancel (eG_i).inv with (eG_i).hom and (eG_j).inv with (eG_j).hom. The composition and coefficient-naturality formulas for cohomological pullback identify the resulting class with p_j^*(y), where y = H^0(phi_f)(D(f.op)^*(x)). Thus p_j^*(y)=0.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-sections",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-cohomology-pullback"
+    "lem-weil-pbc-cohomology-pullback-functorial"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply fixed-coefficient affine degree-zero vanishing to y at j. It supplies k and g : j → k with D(g.op)^*(y)=0. Expand hcomposition for f and g. Pullback composition identifies its first factor with the iterated pullback of x, and coefficient naturality identifies the next factor with pullback of y. The final coefficient map sends zero to zero. Therefore f followed by g is the required arrow.",
+   "uses": [
+    "lem-weil-pbc-fixed-affine-degree-zero-kernel",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-cohomology-filtered-colimit",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-cohomology-pullback"
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-fixed-affine-degree-zero-kernel"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/09YP",
-  "place": "Base case: Sites 09YN, transported through 0EYL and 04HR. Named open theorem; no Lean implementation yet."
+  "document": "https://stacks.math.columbia.edu/tag/09YN",
+  "place": "Factor the formal iterated-colimit argument into fixed-scheme filtered H^0 and fixed-coefficient inverse-limit vanishing. Lean proves the coefficient/composition glue explicitly."
  },
  "mathlib_searches": [
   {
@@ -116,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-6e169",
-  "group": "H2",
+  "reviewer": "COMPILER",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T135239-L-1667651",
+  "landing": "20261012T163624-L-2788805",
   "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean signatures with their nodes, the unchanged item signature with the clone, and proof dependencies with the induction; all delivered modules and direct importer Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineComparison compile cleanly; axioms are standard plus expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

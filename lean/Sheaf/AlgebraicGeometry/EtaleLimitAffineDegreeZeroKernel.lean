@@ -6,6 +6,11 @@ Authors: SHEAF group H2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleFixedAffineDegreeZeroKernel
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.AlgebraicGeometry.Limits
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
@@ -26,6 +31,40 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+private theorem hZeroColimit {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
+    {I : Type u} [SmallCategory I] [IsFiltered I]
+    {G : I ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    {L : Cocone G} (hL : IsColimit L) :
+    Nonempty (IsColimit ((Sheaf.functorH X.smallEtaleTopology 0).mapCocone L)) := by
+  let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let H₀ := DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (0 : ℤ)
+  let e :
+      DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+        0 ⋙ cohomology AddCommGrpCat.{u + 1} X (0 : ℤ) ≅ Γ :=
+    Functor.isoWhiskerLeft
+        (DerivedCategory.Plus.singleFunctor
+          (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0)
+        (Functor.isoWhiskerRight Γ.rightDerivedFunctorPlusCompatibility.symm H₀) ≪≫
+      Γ.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0 ≪≫
+      Γ.rightDerivedZeroIsoSelf
+  have hΓ := IsColimit.mapCoconeEquiv e
+    (Scheme.etaleCohomology_isColimit_of_isFiltered X hL 0).some
+  have hE := IsColimit.mapCoconeEquiv
+    (Sheaf.ΓNatIsoSheafSections _ _ terminalIsTerminal) hΓ
+  exact ⟨IsColimit.mapCoconeEquiv
+    (Sheaf.functorHZeroIso X.smallEtaleTopology terminalIsTerminal).symm hE⟩
+
+private theorem pullback_comp {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
+    (d : X ⟶ Z) (hd : d = a ≫ b)
+    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) (x : Sheaf.H F n) :
+    Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} a b d hd).hom.app F) n
+      (cohomologyMap d F n x) =
+        cohomologyMap a ((upperStar AddCommGrpCat.{u + 1} b).obj F) n
+          (cohomologyMap b F n x) := by
+  subst d
+  exact ((cohomologyPullbackFunctorial a b F n).2.1 x).symm
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Detection of zero for degree-zero affine-stage cohomology.
 
 Source: Stacks Project, Tag 09YP, degree-zero case, using Sites Tag 09YN;
@@ -83,7 +122,53 @@ theorem etale_limit_affine_degree_zero_kernel
     (hx : Sheaf.H.map ((eG i).inv ≫ L.ι.app i) 0
       (cohomologyMap (c.π.app (op i)) (F i) 0 x) = 0) :
     ∃ (j : I) (f : i ⟶ j),
-      Sheaf.H.map (φ f) 0 (cohomologyMap (D.map f.op) (F i) 0 x) = 0 := by sorry
-
+      Sheaf.H.map (φ f) 0 (cohomologyMap (D.map f.op) (F i) 0 x) = 0 := by
+  classical
+  have _ := hidentity
+  have : IsAffine c.pt := Scheme.isAffine_of_isLimit c hc
+  obtain ⟨hC⟩ := hZeroColimit hL
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+  let s : Sheaf.H (G.obj i) 0 :=
+    Sheaf.H.map (eG i).inv 0 (cohomologyMap (c.π.app (op i)) (F i) 0 x)
+  have hs : Sheaf.H.map (L.ι.app i) 0 s = 0 := by
+    dsimp only [s]
+    erw [← Sheaf.H.map_comp_apply]
+    exact hx
+  have hs' : Sheaf.H.map (L.ι.app i) 0 s = Sheaf.H.map (L.ι.app i) 0 0 := by
+    simpa only [map_zero] using hs
+  obtain ⟨j, f, g, hf⟩ := Concrete.isColimit_exists_of_rep_eq
+    (G ⋙ Sheaf.functorH c.pt.smallEtaleTopology 0) hC s (0 : Sheaf.H (G.obj i) 0) hs'
+  have hj : Sheaf.H.map (G.map f) 0 s = 0 := by
+    change Sheaf.H.map (G.map f) 0 s = Sheaf.H.map (G.map g) 0 0 at hf
+    erw [map_zero] at hf
+    exact hf
+  have hy : cohomologyMap (c.π.app (op j)) (F j) 0
+      (Sheaf.H.map (φ f) 0 (cohomologyMap (D.map f.op) (F i) 0 x)) = 0 := by
+    have he : (eG i).inv ≫ G.map f ≫ (eG j).hom =
+        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
+          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫
+        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) := by
+      rw [hG i j f]
+      simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+        Category.comp_id]
+    have ht : Sheaf.H.map (eG j).hom 0 (Sheaf.H.map (G.map f) 0 s) = 0 := by
+      rw [hj, map_zero]
+    have hp := pullback_comp (c.π.app (op j)) (D.map f.op) (c.π.app (op i))
+      (c.w f.op).symm (F i) 0 x
+    have hn := cohomologyMap_map (c.π.app (op j)) 0 (φ f)
+      (cohomologyMap (D.map f.op) (F i) 0 x)
+    dsimp only [s] at ht
+    erw [← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply, he,
+      Sheaf.H.map_comp_apply] at ht
+    erw [hp, ← hn] at ht
+    exact ht
+  obtain ⟨k, g, hg⟩ := fixed_affine_degree_zero_kernel D c hc j (F j)
+    (Sheaf.H.map (φ f) 0 (cohomologyMap (D.map f.op) (F i) 0 x)) hy
+  refine ⟨k, f ≫ g, ?_⟩
+  rw [hcomposition, Sheaf.H.map_comp_apply, Sheaf.H.map_comp_apply]
+  rw [pullback_comp (D.map g.op) (D.map f.op) (D.map (f ≫ g).op)
+    (D.map_comp g.op f.op) (F i) 0 x]
+  erw [← cohomologyMap_map (D.map g.op) 0 (φ f), hg, map_zero]
 
 end AlgebraicGeometry.Etale
