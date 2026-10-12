@@ -17,45 +17,36 @@
  ],
  "proof": [
   {
-   "text": "Choose a small directed final presentation of I^op. Its opposite is initial, so reindexing preserves the underlying scheme limit. After base change to an affine etale U over S, the stage schemes and limit are qcqs and the transitions affine. The coefficient diagram on the limit is canonically constant with value the pullback of G, by inverse-image composition, and its colimit is that value since I^op is nonempty and connected.",
+   "text": "Given two maps a,b from B.pt agreeing after colimit.desc, precompose with each colimit coprojection to obtain equality after every leg B.ι_i. Transport a,b along eB.inv. The equation hB and cancellation of eK_i show that the transported maps agree after each canonical stage-to-limit higherDirectImageOverMap.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "lem-weil-pbc-inverse-image-composition"
+    "def-sbc-module-higher-image-transitions"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compute abelian cohomology from an injective module resolution, using its abelian-section acyclicity, and apply continuity for degree-zero complexes to the affine base changes in step 1. Every limit cohomology class is represented at a stage. Derived-unit naturality identifies the maps with the canonical higherDirectImageOverMap; negative degrees vanish. This is the presheaf local-surjectivity part of the original plan, before finite-cover gluing.",
+   "text": "Apply the affine raw-class representative theorem. Equality after every stage map implies equality after the raw-to-higher-image comparison on affine etale objects. The dense-subsite restrictHomEquivHom of AffineEtale.Spec extends this equality of presheaf morphisms into an abelian sheaf to all objects.",
    "uses": [
-    "lem-weil-pbc-injective-module-abelian-acyclic",
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-    "sbc-lem-higher-direct-image-presheaf"
+    "sbc-lem-higher-image-raw-affine-image-rep"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The higher-image cohomology presheaf comparison and sheafification of presheaf colimits make the canonical stage-colimit comparison locally surjective on the affine etale basis, hence an epimorphism of module sheaves. The compatibility equations on K and B identify the comparison with colimit.desc K B. There is no claim here that local lifts glue on a whole affine object.",
+   "text": "The proved canonical module-valued presheaf comparison is locally surjective. For any limit higher-image section, its image sieve is covering. Restrict to this sieve, lift to raw classes, and use the equality from the preceding step. Separatedness of the target sheaf gives equality on the original section. Faithfulness of the forgetful sheaf functor and cancellation of eB give a=b, establishing Epi(colimit.desc K B).",
    "uses": [
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-sheaves-colimit-sheafification"
+    "sbc-lem-module-higher-image-raw-comparison-locally-bijective"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-sheaves-colimit-sheafification"
+  "def-sbc-module-higher-image-transitions",
+  "sbc-lem-higher-image-raw-affine-image-rep",
+  "sbc-lem-module-higher-image-raw-comparison-locally-bijective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "09Z1 proof, presheaf continuity and sheafification; H2 isolates only the epimorphism conclusion from steps 1–2 of the affine-class-descent plan"
+  "document": "Stacks Project; source-library canonical comparison; Mathlib dense-subsite and separatedness APIs",
+  "place": "V2: affine raw-class descent plus the proved local-surjectivity comparison; direct cancellation proof of the unchanged canonical colimit.desc, without sheafifying colimits"
  },
  "mathlib_searches": [
   {
@@ -123,9 +114,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T095906-L-318074",
+  "landing": "20261012T112852-L-772694",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

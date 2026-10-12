@@ -1,0 +1,108 @@
+{
+ "kind": "statement",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology classes over an affine base descend along an inverse limit of schemes",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale raw cohomology class on affine object descends to stage inverse limit schemes modules",
+   "results": "Eight hits: structure-sheaf section descent, etale locus, and cotangent homology; none is module-valued cohomology continuity.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "raw.*affine|affine.*class.*rep|class.*descen; higherDirectImagePresheafToSheaf",
+   "results": "The abelian raw affine representative requires a directed poset and varying abelian coefficient data. The module-valued CohomologyPresheaf file proves the canonical comparison locally bijective. No existing statement gives the affine raw module-class image equality for this arbitrary cofiltered index.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageColimitComparisonEpi",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Proof: continuity of cohomology presheaves on qcqs etale objects, before sheafification",
+   "via": [
+    "sbc-lem-higher-image-colimit-comparison-epi",
+    "sbc-lem-higher-image-affine-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "id": "sbc-lem-module-higher-image-raw-comparison-locally-bijective",
+ "title": "Canonical raw module-cohomology comparison is locally bijective",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image"
+ ],
+ "statement": "For a commutative ring Λ, any scheme morphism h:Y→X, integer q, and bounded-below derived module-sheaf object K, the canonical morphism higherDirectImagePresheafToSheaf Λ h q K, from raw restricted derived-Hom cohomology classes to the underlying abelian presheaf of H^q(Rh_*K), is both locally injective and locally surjective for the small etale topology [def-weil-pbc-etale-site]. The derived categories and direct images are those of [def-weil-pbc-derived-categories] and [def-weil-pbc-direct-image]. This records an already proved source-library declaration, not a new Lean statement.",
+ "source": {
+  "document": "Stacks Project; source-library CohomologyPresheaf module",
+  "place": "Tag 03Q8; isLocallyBijective_higherDirectImagePresheafToSheaf, lines 504-540"
+ },
+ "proof": [
+  {
+   "text": "Use the source-library derived adjunction isomorphism higherDirectImagePresheafIso. The proved isLocallyBijective_derivedHomToHomology identifies derived maps from free representables locally with homology sections: cycles lift locally, and zero classes lift locally through boundaries. Compose with the invertible homology-shift comparison. The source proof establishes the identity of this composite with higherDirectImagePresheafToSheaf by freeSheafSections_naturality. Local injectivity and local surjectivity are preserved by composition with these isomorphisms.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Source-library CohomologyPresheaf module",
+  "place": "Already proved isLocallyBijective_higherDirectImagePresheafToSheaf; records the exact canonical module-valued comparison used, unlike the abstract abelian isomorphism"
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf",
+  "declaration": "AlgebraicGeometry.Etale.isLocallyBijective_higherDirectImagePresheafToSheaf",
+  "statement": "theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Presheaf.IsLocallyInjective X.smallEtaleTopology (Etale.higherDirectImagePresheafToSheaf Λ h q K) ∧ Presheaf.IsLocallySurjective X.smallEtaleTopology (Etale.higherDirectImagePresheafToSheaf Λ h q K)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T112852-L-772694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T112852-L-772694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
