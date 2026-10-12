@@ -7,12 +7,10 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
-import Sheaf.CategoryTheory.ColimitSiteCechComplex
-import Sheaf.CategoryTheory.ColimitSiteSections
-import Sheaf.CategoryTheory.SiteCechComplex
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
-import Sheaf.Paper.ColimitSitesInjectiveSystem
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+import Sheaf.CategoryTheory.CohomologyColimitSitesClassDescent
+import Sheaf.CategoryTheory.CohomologyColimitSitesEventualVanishing
 
 /-! # Cohomology on a colimit of sites
 
@@ -30,71 +28,19 @@ namespace CategoryTheory
 /-- Source: Stacks Project, Cohomology on Sites, Lemma 09YP, with Lemmas 0EXZ and 0739.
 (blueprint: lem-weil-pbc-cohomology-colimit-of-sites).
 
-Proof:
-1. Use the filtered opposite J of the cofiltered index category. For fixed i and X_i,
-   objects of Under i are the stage presentations of X_i. Define the transition on
-   H^p(u_a(X_i), F_j) by pullback along the next transition functor followed by H^p(phi_b).
-   Naturality and composition of pullback (lem-weil-pbc-site-cohomology-pullback),
-   together with the cocycle equation for phi, identify successive transitions with
-   the transition for the composite. The unit-compatible composition isomorphisms
-   identify inverse images, and F.map_comp identifies the object arguments. This
-   gives the diagram D. On the colimit site, pull back phi and use the same composition
-   isomorphisms to obtain the diagram S of inverse-image sheaves. Let K be its colimit.
-   Define each comparison leg by canonical-site pullback followed by H^p of the
-   coprojection into K.pt. Cocone naturality identifies u_j(u_a(X_i)) with u_i(X_i).
-   Naturality and composition of cohomology pullback, and the coprojection equations,
-   show that these legs commute with the transitions. They therefore induce the
-   comparison colimit.desc D c (def-weil-pbc-category-colimit). Naturality and
-   compatibility with connecting maps make this a comparison of delta functors in
-   compatible systems (def-weil-pbc-sites-and-cohomology).
-2. In degree zero, H^0(U,A) is A(U). The degree-zero adjunction-unit characterization
-   of pullback identifies both the transition maps and the comparison legs with
-   the section maps of lem-weil-pbc-colimit-of-sites-sections (Sites, 09YN).
-   That lemma proves that this comparison is an isomorphism.
-3. Embed the compatible system F into a compatible system G whose stage sheaves
-   are injective, using lem-weil-pbc-colimit-of-sites-injective-system (0EXZ).
-   Form the stage cokernels Q_j of F_j -> G_j. Exactness of inverse image identifies
-   the pullback of each cokernel with the cokernel of the pulled-back monomorphism.
-   Compatibility of F -> G induces transition maps on these cokernels; their
-   cocycle equation follows from that for G by cancelling the cokernel epimorphism.
-   Thus 0 -> F -> G -> Q -> 0 is exact at each stage and is a sequence of systems.
-   Exact inverse images give a filtered system of short exact sequences on the
-   colimit site. Exactness of filtered colimits of abelian sheaves
-   (lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact) makes the sequence of
-   colimit sheaves short exact as well.
-4. For any system G of injectives, its colimit inverse-image sheaf has zero
-   cohomology in positive degrees on every object of the colimit site. Indeed every
-   covering comes from a finite covering at some stage (lem-weil-pbc-colimit-of-sites).
-   Its Cech complex is the filtered colimit of the stage Cech complexes, by
-   lem-weil-pbc-colimit-of-sites-cech-complex, using the degree-zero result on each
-   finite fibre product. The stage complexes are exact in positive degrees because
-   their sheaves are injective (lem-weil-pbc-site-injective-cech-acyclic).
-   Exactness of filtered colimits of abelian groups preserves exactness at each
-   positive term (lem-weil-pbc-filtered-colimit-abelian-groups-exact). Hence every
-   such covering has zero positive Cech cohomology (def-weil-pbc-site-cech-complex).
-   Apply lem-weil-pbc-site-cech-vanishing-criterion with the collection of all
-   objects and all coverings: fibre products remain in this collection, coverings
-   refine themselves, and the required Cech vanishings were just proved.
-5. Induct on p, simultaneously for all compatible systems and all i and X_i.
-   The base is step 2. Apply the long exact sequences of object cohomology to the
-   short exact sequences in step 3 (def-weil-pbc-sites-and-cohomology). At each
-   stage the segment is H^p(G_j) -> H^p(Q_j) -> H^(p+1)(F_j) -> 0 -> 0, since
-   injectives have no positive cohomology (lem-weil-pbc-derived-functor-injective-vanishing).
-   The transition maps give maps of these sequences by naturality and connecting-map
-   compatibility from step 1. Their filtered colimit remains exact by
-   lem-weil-pbc-filtered-colimit-abelian-groups-exact. The analogous exact row on
-   the colimit site ends in zero by step 4. The comparison maps form a commutative
-   diagram between these rows. The first two vertical arrows are isomorphisms by
-   the induction hypothesis for G and Q, and the last two are maps between zero
-   groups. The five lemma (lem-weil-pbc-five-lemma) makes the middle comparison for
-   F in degree p+1 an isomorphism. This proves the assertion in all degrees.
+Proof: split continuity into finite-stage existence and finite-stage detection of zero.
+The two lemmas below retain the source's degree-zero and dimension-shifting argument.
+Every element of the filtered group colimit has a stage representative. If its image
+is zero, eventual vanishing supplies a later transition killing that representative;
+the colimit transition equation then makes the original element zero. Thus the
+comparison has trivial kernel and is injective. Finite-stage existence gives a lift
+of every target element along a coprojection, so the comparison is surjective.
+The forgetful functor on abelian groups reflects isomorphisms, yielding the conclusion.
 
 The equalities in Arrow include endpoint transports. F.map_comp and the relation
 `t.hom ≫ b.right = t'.hom` in Under i identify the endpoints in hDmap;
-V.w t.hom identifies them in hclegs. Thus these equalities constrain the actual
-transported morphisms, not just their names. The unit equations he and heV fix the
-composition isomorphisms, and the three clauses of hpullbackMap and hcanonicalMap
-are precisely the characterization in siteCohomology_pullback.
+V.w t.hom identifies them in hclegs. The unit equations he and heV fix the composition
+isomorphisms; hpullbackMap and hcanonicalMap characterize the cohomology pullbacks.
 -/
 theorem cohomology_colimit_of_sites
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
@@ -274,6 +220,32 @@ theorem cohomology_colimit_of_sites
           (eqToHom (hSobj t.right).symm ≫ K.ι.app t.right)).app
             (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))) :
     IsIso (colimit.desc D c) := by
-  sorry
+  have hlift := cohomology_colimit_sites_class_descent
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback
+      pullbackMap hpullbackMap canonicalMap hcanonicalMap e he eV heV Fs φ hφ
+      S hSobj hSmap K hK i X_i p D hDobj hDmap c hcpt hclegs
+  have hzero := cohomology_colimit_sites_eventual_vanishing
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback
+      pullbackMap hpullbackMap canonicalMap hcanonicalMap e he eV heV Fs φ hφ
+      S hSobj hSmap K hK i X_i p D hDobj hDmap c hcpt hclegs
+  apply (ConcreteCategory.isIso_iff_bijective (colimit.desc D c)).2
+  constructor
+  · apply (injective_iff_map_eq_zero (colimit.desc D c).hom).2
+    intro z hz
+    obtain ⟨t, x, rfl⟩ := Concrete.colimit_exists_rep D z
+    have hx : (c.ι.app t).hom x = 0 := by
+      change (colimit.ι D t ≫ colimit.desc D c).hom x = 0 at hz
+      rwa [colimit.ι_desc] at hz
+    obtain ⟨t', b, hb⟩ := hzero t x hx
+    calc
+      (colimit.ι D t).hom x = (colimit.ι D t').hom ((D.map b).hom x) :=
+        (colimit.w_apply D b x).symm
+      _ = 0 := by rw [hb, map_zero]
+  · intro y
+    obtain ⟨t, x, hx⟩ := hlift y
+    refine ⟨(colimit.ι D t).hom x, ?_⟩
+    change (colimit.ι D t ≫ colimit.desc D c).hom x = y
+    rw [colimit.ι_desc]
+    exact hx
 
 end CategoryTheory
