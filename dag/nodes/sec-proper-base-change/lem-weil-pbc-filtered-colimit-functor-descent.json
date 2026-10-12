@@ -21,12 +21,12 @@
  ],
  "proof": [
   {
-   "text": "Use jointly_surjective_of_isColimit and the filtered equality criterion in Mathlib.CategoryTheory.Limits.Types.Filtered to define object and arrow maps by representatives. Compatibility makes them independent of representatives, including when D has larger universes.",
+   "text": "Apply Mathlib Types.isColimit_iff_coconeTypesIsColimit and Functor.CoconeTypes.IsColimit.exists_desc to the compatible object maps and arrow maps. This gives maps O to D and A to Arrow D with the required representative formulas, without any universe bound on D. Arrow joint surjectivity identifies the endpoints of A with O; conjugating A.hom by these endpoint equalities gives the morphism map M.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Endpoints commute with the representative maps. Lift a composable pair to a common stage and equalize its middle endpoints at a later stage. Functoriality there proves identity and composition preservation. The representative formulas give equality of each restriction with v_j.",
+   "text": "Object joint surjectivity and the representative formula prove that M preserves identities. For composition, jointly_surjective_of_isColimit₂ lifts both arrows to one stage. The middle endpoints have equal images in the object colimit; isColimit_eq_iff' moves them to a later stage where they are equal. Insert eqToHom for that equality to form a composable pair. The cocone equation and equality of arrows under endpoint transport identify its images with the original arrows. Functoriality of the stage functor v proves preservation of composition. Assemble O and M into V and use Functor.hext and the representative formulas to prove the strict restriction equalities.",
    "uses": [],
    "elementary": true
   }
@@ -35,7 +35,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 09YL, first paragraph of proof; universal-property verification written by R2; verifications and specialization written by R2"
+  "place": "Tag 09YL, first paragraph of proof; universal-property verification formalized by F2 using the universe-independent set-colimit universal property and common-stage representatives"
  },
  "mathlib_searches": [
   {
@@ -102,10 +102,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T060752-L-2914721",
-  "kind": "interface",
+  "landing": "20261012T070536-L-3470472",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
