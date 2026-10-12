@@ -1,5 +1,14 @@
 {
  "id": "split-etale-chart-functor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "unspecified",
+   "via": []
+  },
+  "same_as": null
+ },
  "kind": "statement",
  "title": "Affine chart residue triples indexing categories admit an equivalence",
  "statement": "theorem etale_chart_residue_triples_equivalence_functor (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i] (xU : Spec (.of Ω) ⟶ Spec A) : let x := xU ≫ i let p := (SpecToEquivOfField Ω (Spec A) xU).1 let F := (Spec A).residueField p let e := (SpecToEquivOfField Ω (Spec A) xU).2 letI : Algebra F Ω := e.hom.toAlgebra let K := separableClosure F Ω let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K) let Nall := (pointSmallEtale x).fiber.Elements let P : ObjectProperty Nall := fun c ↦ IsAffine c.1.left let N := P.FullSubcategory let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom let NU := Q.FullSubcategory let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙ Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ let DU := Q.ι.op ⋙ D let T := EtaleResidueTriples A p K χ let DT := etaleResidueTriplesRingDiagram A p K χ (∀ (c : NU) (z : c.obj.obj.1.left.residueField (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1), (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) → Nonempty (NUᵒᵖ ≌ T)",
@@ -88,12 +97,6 @@
   "item": "Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence",
   "date": "2026-10-12",
   "group": "R1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-weil-pbc-etale-chart-residue-triples-equivalence"
-  }
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
