@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.CategoryTheory.Sites.Torsor
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
+import Sheaf.AlgebraicGeometry.EtaleInverseImageJointRepresentatives
 
 
 /-!
@@ -65,6 +64,61 @@ theorem scheme_torsor_pullback_equivariant_hom_isIso
             (Y.smallGrothendieckTopology @Etale)
             (Y₀.smallGrothendieckTopology @Etale)).unit.app t.toSheafTorsor.sheaf).hom.app
               (op W) x)))) : IsIso f := by
-  sorry
+  let G := (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+    (AddCommGrpCat.of M)
+  obtain ⟨T, e, he, _⟩ := Sheaf.Torsor.etale_torsor_h1_functoriality.1
+    Y Y₀ i G t.toSheafTorsor
+  let q := e.inv ≫ f
+  have hq : ∀ (U : Y₀.Etaleᵒᵖ)
+      (a : ((upperStar AddCommGrpCat.{u + 1} i).obj G).obj.obj U)
+      (x : T.sheaf.obj.obj U),
+      q.hom.app U (T.vadd U a x) = R.vadd U a (q.hom.app U x) := by
+    intro U a x
+    obtain ⟨S, hS, hrep⟩ := etaleInverseImage_joint_representatives i G
+      t.toSheafTorsor.sheaf U a (e.inv.hom.app U x)
+    apply ((isSheaf_iff_isSheaf_of_type _ _).mp R.sheaf.property _ hS).isSeparatedFor.ext
+    intro V j hj
+    obtain ⟨W, k, g, s, ha, hx⟩ := hrep V j hj
+    let b := MorphismProperty.Over.pullback @Etale ⊤ i
+    let η := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b
+      (Type (u + 1)) (Y.smallGrothendieckTopology @Etale)
+      (Y₀.smallGrothendieckTopology @Etale)).unit.app t.toSheafTorsor.sheaf
+    let ηG := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G
+    have hcancel (Z : Y₀.Etaleᵒᵖ) (z : T.sheaf.obj.obj Z) :
+        e.hom.hom.app Z (e.inv.hom.app Z z) = z := by
+      exact congrArg (fun r ↦ r.hom.app Z z) e.inv_hom_id
+    have hcancel' (Z : Y₀.Etaleᵒᵖ)
+        (z : ((Scheme.etaleSetPullback i).obj t.toSheafTorsor.sheaf).obj.obj Z) :
+        e.inv.hom.app Z (e.hom.hom.app Z z) = z := by
+      exact congrArg (fun r ↦ r.hom.app Z z) e.hom_inv_id
+    have hx' : T.sheaf.obj.map j.op x =
+        T.sheaf.obj.map k.op (e.hom.hom.app (op (b.obj W))
+          (η.hom.app (op W) s)) := by
+      have h := congrArg (e.hom.hom.app (op V)) hx
+      rw [NatTrans.naturality_apply e.hom.hom j.op,
+        NatTrans.naturality_apply e.hom.hom k.op, hcancel] at h
+      exact h
+    have hunit : q.hom.app (op (b.obj W))
+        (T.vadd (op (b.obj W)) (ηG.hom.app (op W) g)
+          (e.hom.hom.app (op (b.obj W)) (η.hom.app (op W) s))) =
+        R.vadd (op (b.obj W)) (ηG.hom.app (op W) g)
+          (q.hom.app (op (b.obj W))
+            (e.hom.hom.app (op (b.obj W)) (η.hom.app (op W) s))) := by
+      change f.hom.app _ (e.inv.hom.app _ _) =
+        R.vadd _ _ (f.hom.app _ (e.inv.hom.app _ _))
+      rw [← he W g s, hcancel', hcancel']
+      exact hf W g s
+    rw [← NatTrans.naturality_apply q.hom j.op, T.map_vadd j.op,
+      R.map_vadd j.op, ← NatTrans.naturality_apply q.hom j.op, ha, hx',
+      ← T.map_vadd k.op, NatTrans.naturality_apply q.hom k.op,
+      hunit, R.map_vadd k.op, ← NatTrans.naturality_apply q.hom k.op]
+  let E := Sheaf.Torsor.Iso.ofHom q hq
+  have : IsIso q := by
+    change IsIso E.iso.hom
+    infer_instance
+  have h : f = e.hom ≫ q := by
+    simp [q]
+  rw [h]
+  infer_instance
 
 end AlgebraicGeometry.Etale
