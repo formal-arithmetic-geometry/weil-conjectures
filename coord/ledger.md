@@ -7685,3 +7685,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:06 L: returned deliver/G2/Sheaf.AlgebraicGeometry.ConstantExtensionCokernelAux (reviewer RETURN: (reviewer X-d9799, head d9799df6c) E2: `finite_cokernelPresentation_of_local_presentation` remains a false theorem state)
 - 13:07 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransportCocycle (stage 3; reviewer PASS; first push; landing 20261012T130705-L-1314603 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 13:07 L: returned deliver/Z2/Sheaf.NumberTheory.Padics.CoefficientExtension (reviewer RETURN: (reviewer X-07d33, head 07d338c35) A3 (forced adaptations): Restore lean/Sheaf/NumberTheory/Padics/ExtensionIntegersDvr.)
+- 13:08 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SplitReductionSpectrumComponents (stage 3; reviewer PASS; first push; landing 20261012T130809-L-1320319 (interface); batch 20261012T120425; modules 2; new nodes 1)
