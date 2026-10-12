@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-polynomial-linear-fibre-quotient",
+ "kind": "statement",
+ "title": "Linear polynomial fibre quotient under arbitrary base change",
+ "statement": "Let A be a commutative integral domain and r a prime ideal of A[X] [def-weil-polynomial-ring], such that its canonical A-algebra residue field κ(r) [def-weil-pbc-localization-at-prime] is a fraction field of A. Let S be any commutative A[X]-algebra, with the induced A-algebra structure. Put K=κ(0_A), R=K tensor over A with S, and let e : κ(r) ≃ₐ[A] K be the canonical isomorphism of fraction fields. Set ξ=e(image of X in κ(r)) and f=1 tensor (image of X in S) - ξ tensor 1. Then R/(f) [def-weil-pbc-algebra-hom-quotient] is ring-isomorphic to κ(r) tensor over A[X] with S. No completion, derivation, Noetherianity, nonzero-fibre, or contraction hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07PU, second paragraph of the proof, displayed linear quotient identification"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Identify κ(r) and K with the canonical A-algebra equivalence IsLocalization.algEquiv for the nonzero-divisor submonoid. This uniquely determined isomorphism uses no existentially chosen algebraic data. Put ξ=e(X), R=K tensor over A with S, I=(1 tensor X - ξ tensor 1), and Q=R/I.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The maps κ(r) → Q given by the composite of e and the left inclusion followed by quotient, and S → Q given by the right inclusion followed by quotient, agree on A by their algebra-map laws and on X by the defining relation I. Polynomial.algHom_ext therefore shows that they agree on A[X]. The tensor universal property yields h : κ(r) tensor over A[X] with S → Q.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the reverse direction, e inverse followed by the left inclusion into the fibre and the right inclusion from S give g : R → κ(r) tensor over A[X] with S. The tensor balancing relation for X shows g(f)=0. The ideal span criterion and quotient universal property give gq : Q → κ(r) tensor over A[X] with S.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a pure tensor k tensor s in R, h(g(k tensor s)) is the quotient class of k tensor s, since e and e inverse cancel and (k tensor 1)(1 tensor s)=k tensor s. Tensor induction and quotient induction give h composed with gq equal to identity. The same pure-tensor calculation in the fibre gives gq composed with h equal to identity. Assemble the ring equivalence. This covers S=0 and all zero fibres because the proof uses no nontriviality of S or the tensors.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PU, second paragraph; universal-property proof of its displayed quotient identification by G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of a polynomial algebra with an evaluation field equals the quotient by X minus the evaluation point",
+   "results": "Service unavailable: Internal Server Error; no search verdict asserted.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of an algebra over a polynomial ring with a field is the quotient of the tensor product over the coefficient ring by X minus its value",
+   "results": "Found polynomial tensor equivalences and presentation tensor models; none directly gives this fibre quotient.",
+   "verdict": "no direct match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.lift",
+   "results": "Found lift, lift_tmul and lift_comp_includeLeft/Right. These implement the universal-property proof but do not state this quotient identification.",
+   "verdict": "tools only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Qq]uot|linear_fiber_quotient",
+   "results": "Found tensor-quotient machinery, but no existing linear_fiber_quotient. Blueprint searches for linear polynomial fibre and 07PU found no matching blueprint statement.",
+   "verdict": "no direct match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialLinearFormalFiberPresentation",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Linear case of Tag 07PU: displayed identification of the fibre as a quotient by x-f",
+   "via": [
+    "lem-weil-pbc-polynomial-linear-formal-fibre-presentation",
+    "lem-weil-pbc-another-helper-g-ring-geometric-component",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialLinearFiberQuotient",
+  "file": "lean/Sheaf/RingTheory/PolynomialLinearFiberQuotient.lean",
+  "declaration": "Polynomial.linear_fiber_quotient",
+  "statement": "theorem linear_fiber_quotient\n    (A : Type u) [CommRing A] [IsDomain A]\n    (r : Ideal (Polynomial A)) [r.IsPrime] [IsFractionRing A r.ResidueField]\n    (S : Type u) [CommRing S] [Algebra (Polynomial A) S] [Algebra A S]\n    [IsScalarTower A (Polynomial A) S] :\n    let K := (⊥ : Ideal A).ResidueField\n    let R := (⊥ : Ideal A).Fiber S\n    let e : r.ResidueField ≃ₐ[A] K :=\n      IsLocalization.algEquiv (nonZeroDivisors A) r.ResidueField K\n    let ξ := e (algebraMap (Polynomial A) r.ResidueField X)\n    let f : R := Algebra.TensorProduct.includeRight (algebraMap (Polynomial A) S X) -\n      Algebra.TensorProduct.includeLeft (S := A) ξ\n    Nonempty ((R ⧸ Ideal.span ({f} : Set R)) ≃+* r.Fiber S)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T184258-L-4002850",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T184258-L-4002850",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
