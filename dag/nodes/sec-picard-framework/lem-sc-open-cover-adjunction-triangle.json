@@ -1,0 +1,161 @@
+{
+ "id": "lem-sc-open-cover-adjunction-triangle",
+ "kind": "statement",
+ "title": "Canonical open-cover triangle expressed as adjunction mates",
+ "statement": "Let X be a ringed space [def-weil-locally-ringed-space-morphism], R its underlying ring sheaf, U,V opens covering X, W=U∩V, and E∈D(R) [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let R_U,R_V,R_W be exact additive derived restriction functors and T_U,T_V the exact derived restrictions from U,V to W. Let c_U:R_U T_U≅R_W and c_V:R_V T_V≅R_W be the canonical composition comparison isomorphisms. For any chosen left adjoints L_U,L_V,L_W with adjunctions α_U,α_V,α_W, define κ_U by transposing c_U(E)⁻¹ T_U(η_U(R_U E)) c_U(L_U R_U E) under α_W, and define κ_V similarly. Then there exists δ:E→(L_W R_W E)[1] such that L_W R_W E → L_U R_U E ⊕ L_V R_V E → E → (L_W R_W E)[1] is distinguished, with arrows (κ_U,-κ_V), (ε_U(E),ε_V(E)),δ. The Lean statement assumes explicitly the exactness, additivity and derived-category instances for these restriction functors.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BU, 08BT and 08BW: lower-shriek triangle and its canonical nested-open maps"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use exact extension by zero and restriction from [lem-pur-site-restriction-module-adjunction-exact]. For a representative complex K of E, construct the nested extension maps sectionwise; their transposes are the nested restriction of the unit, conjugated by c_U and c_V. This termwise identity descends along the exact-functor localization comparisons [lem-weil-pbc-exact-functor-derived-factorization].",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical termwise extension maps and the pair of counits form a short exact sequence. On the intersection their stalk maps are m ↦ (m,-m) and (m,n) ↦ m+n; on one open only, the nonzero map is the identity. Use [lem-sc-module-extension-by-zero-stalk-maps] for these stalk identifications and [lem-weil-pbc-module-stalk-exact] to reflect exactness. The cover excludes other points.",
+   "uses": [
+    "lem-sc-module-extension-by-zero-stalk-maps",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] and transport the resulting triangle along Q K ≅ E and the exact-functor comparison isomorphisms. The previous mate identities identify its first arrow with the displayed difference of mates and its second with the pair of counits. For any chosen adjunctions to the fixed restriction functors, transport along the unique compatible isomorphisms of left adjoints; the unit and counit identities preserve both formulas and distinguishedness.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sc-module-extension-by-zero-stalk-maps",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S3",
+  "date": "2026-10-12",
+  "note": "Geometric step of the original open Hom realization plan; Hom and shift identifications are proved in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|mayer_vietoris|mapDerivedCategory.*adjunction",
+   "results": "Mathlib/Topology/Sheaves/MayerVietoris.lean; Mathlib/Topology/Sheaves/MayerVietoris.lean; Mathlib/Topology/Sheaves/MayerVietoris.lean; Mathlib/Topology/Sheaves/MayerVietoris.lean; Mathlib/Topology/Sheaves/MayerVietoris.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean; Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean",
+   "date": "2026-10-12",
+   "verdict": "no match for the canonical derived geometric triangle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical Mayer Vietoris distinguished triangle from left adjoints to restriction on opens",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf",
+   "date": "2026-10-12",
+   "verdict": "no match for the canonical derived geometric triangle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homAddEquiv",
+   "results": "CategoryTheory.Adjunction.homAddEquiv; CategoryTheory.Adjunction.homAddEquiv_apply; CategoryTheory.Adjunction.homAddEquiv_symm_apply",
+   "date": "2026-10-12",
+   "verdict": "no match for the canonical derived geometric triangle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "distinguished triangle from degreewise short exact sequence of complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero two covering opens canonical counit distinguished triangle derived category",
+   "results": "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CochainComplex.cm5b; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-12",
+   "verdict": "Second reader: no matching geometric triangle; generic adjunction formulas only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"counit\"",
+   "results": "CategoryTheory.Adjunction.CoreHomEquivUnitCounit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_unit; CategoryTheory.Adjunction.homEquiv_counit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv_counit; CategoryTheory.Adjunction.mkOfHomEquiv_counit_app",
+   "date": "2026-10-12",
+   "verdict": "Second reader: no matching geometric triangle; generic adjunction formulas only."
+  },
+  {
+   "tool": "grep",
+   "query": "lower.?shriek|counit.*triangle|open_cover.*triangle",
+   "results": "Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/AlgebraicTopology/SimplicialObject/Coskeletal.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monad/Monadicity.lean",
+   "date": "2026-10-12",
+   "verdict": "Second reader: no matching geometric triangle; generic adjunction formulas only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenHomTriangleRealization",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: Hom Mayer–Vietoris geometric triangle before applying Hom exactness",
+   "via": [
+    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-sc-open-hom-triangle-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenCoverAdjunctionTriangle",
+  "file": "lean/Sheaf/Algebra/Homology/OpenCoverAdjunctionTriangle.lean",
+  "declaration": "SheafOfModules.open_cover_adjunction_triangle",
+  "declarations": [
+   "SheafOfModules.open_cover_adjunction_triangle",
+   "SheafOfModules.openRestrictionComparison"
+  ],
+  "statement": "theorem open_cover_adjunction_triangle (X : AlgebraicGeometry.RingedSpace.{u})\n    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})\n    (hR : R = (sheafCompose (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)\n    (U V : Opens X) (hcover : U ⊔ V = ⊤)\n    [(overFunctor.{u} R U).Additive]\n    [PreservesFiniteLimits (overFunctor.{u} R U)]\n    [PreservesFiniteColimits (overFunctor.{u} R U)]\n    [(overFunctor.{u} R V).Additive]\n    [PreservesFiniteLimits (overFunctor.{u} R V)]\n    [PreservesFiniteColimits (overFunctor.{u} R V)]\n    [(overFunctor.{u} R (U ⊓ V)).Additive]\n    [PreservesFiniteLimits (overFunctor.{u} R (U ⊓ V))]\n    [PreservesFiniteColimits (overFunctor.{u} R (U ⊓ V))]\n    [(overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U)).Additive]\n    [PreservesFiniteLimits (overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U))]\n    [PreservesFiniteColimits (overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U))]\n    [(overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V)).Additive]\n    [PreservesFiniteLimits (overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V))]\n    [PreservesFiniteColimits (overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} R)]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (R.over U))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (R.over V))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (R.over (U ⊓ V)))]\n    (E : DerivedCategory (SheafOfModules.{u} R))\n    (LU : DerivedCategory (SheafOfModules.{u} (R.over U)) ⥤\n      DerivedCategory (SheafOfModules.{u} R))\n    (LV : DerivedCategory (SheafOfModules.{u} (R.over V)) ⥤\n      DerivedCategory (SheafOfModules.{u} R))\n    (LW : DerivedCategory (SheafOfModules.{u} (R.over (U ⊓ V))) ⥤\n      DerivedCategory (SheafOfModules.{u} R))\n    (adjU : LU ⊣ (overFunctor.{u} R U).mapDerivedCategory)\n    (adjV : LV ⊣ (overFunctor.{u} R V).mapDerivedCategory)\n    (adjW : LW ⊣ (overFunctor.{u} R (U ⊓ V)).mapDerivedCategory) :\n    let RU := (overFunctor.{u} R U).mapDerivedCategory\n    let RV := (overFunctor.{u} R V).mapDerivedCategory\n    let RW := (overFunctor.{u} R (U ⊓ V)).mapDerivedCategory\n    let TU := (overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U)).mapDerivedCategory\n    let TV := (overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V)).mapDerivedCategory\n    let cU := openRestrictionComparison R (homOfLE inf_le_left : U ⊓ V ⟶ U)\n    let cV := openRestrictionComparison R (homOfLE inf_le_right : U ⊓ V ⟶ V)\n    let κU := (adjW.homEquiv (RW.obj E) (LU.obj (RU.obj E))).symm\n      (cU.inv.app E ≫ TU.map (adjU.unit.app (RU.obj E)) ≫ cU.hom.app (LU.obj (RU.obj E)))\n    let κV := (adjW.homEquiv (RW.obj E) (LV.obj (RV.obj E))).symm\n      (cV.inv.app E ≫ TV.map (adjV.unit.app (RV.obj E)) ≫ cV.hom.app (LV.obj (RV.obj E)))\n    ∃ δ : E ⟶ (LW.obj (RW.obj E))⟦(1 : ℤ)⟧,\n      Triangle.mk (biprod.lift κU (-κV))\n        (biprod.desc (adjU.counit.app E) (adjV.counit.app E)) δ ∈ distTriang _",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-90cc6",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T135316-L-1692291",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-90cc6",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T135316-L-1692291",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the recorded nodes and repository base; both modules and direct importer compiled cleanly, with unchanged target/signatures and permitted axioms."
+ }
+}
