@@ -54,6 +54,11 @@ theorem isZero_higherDirectImage_of_injective_module
         ((DerivedCategory.Plus.singleFunctor
           (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
           ((SheafOfModules.toSheaf _).obj I)))) := by
-  sorry
+  obtain ⟨e⟩ := higherDirectImageSheafifiedPresheaf p ((SheafOfModules.toSheaf _).obj I) q
+  apply e.isZero_iff.mp
+  apply Functor.map_isZero
+  apply Functor.isZero
+  intro V
+  exact Scheme.isZero_rightDerived_etale_toSheaf_of_injective X R I _ q hq
 
 end AlgebraicGeometry.Etale
