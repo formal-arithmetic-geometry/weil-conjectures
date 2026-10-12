@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineClassRep
 
 /-! # Affine representatives of raw limit cohomology classes
 
@@ -98,6 +97,16 @@ theorem exists_higherDirectImage_limit_affine_class_rep {S : Scheme.{v}}
           (abelianHigherDirectImageMap (c.π.app (op i)).left
             (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i)
             (colimit H) ((eH i).inv ≫ colimit.ι H i)).hom.app (op U) y =
-              ((toSheafify S.smallEtaleTopology P ≫ e.hom.hom).app (op U) z) := by sorry
+              ((toSheafify S.smallEtaleTopology P ≫ e.hom.hom).app (op U) z) := by
+  obtain ⟨e, he⟩ := exists_abelianHigherDirectImage_natural_comparison S p
+  refine ⟨e c.pt.hom (colimit H), ?_⟩
+  intro U _ z
+  obtain ⟨i, t, ht⟩ := exists_higherDirectImage_raw_affine_class_rep
+    D c hc F φ hφid hφcomp H eH hH p U z
+  refine ⟨i, (toSheafify S.smallEtaleTopology
+    (abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)) ≫
+      (e (D.obj (op i)).hom (F i)).hom.hom).app (op U) t, ?_⟩
+  rw [he, ht]
+  rfl
 
 end AlgebraicGeometry.Etale

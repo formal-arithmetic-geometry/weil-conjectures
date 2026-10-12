@@ -7223,3 +7223,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/J1/Sheaf.Paper.FreeCechTupleDifferential (stage 3; reviewer PASS; first push; landing 20261012T095908-L-318736 (proof); batch 20261012T095846; modules 1; new nodes 0)
 - 09:59 L: merged deliver/J1/Sheaf.Paper.GabberPrincipalVanishingIdeal (stage 3; reviewer PASS; after a return; landing 20261012T095908-L-318831 (interface); batch 20261012T095846; modules 2; new nodes 1)
 - 09:59 L: merged deliver/J1/Sheaf.RingTheory.LocalCompletionQuotient (stage 3; reviewer PASS; first push; landing 20261012T095908-L-318970 (proof); batch 20261012T095846; modules 1; new nodes 0)
+- 09:59 L: merged deliver/J2/Sheaf.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep (stage 3; reviewer PASS; first push; landing 20261012T095909-L-319072 (interface); batch 20261012T095846; modules 3; new nodes 2)

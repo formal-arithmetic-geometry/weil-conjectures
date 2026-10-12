@@ -1,0 +1,158 @@
+{
+ "id": "lem-sbc-abelian-higher-direct-image-natural-comparison",
+ "kind": "statement",
+ "title": "A natural abelian higher-direct-image sheafification comparison",
+ "statement": "Fix a scheme $S$ [def-weil-pbc-scheme-conventions] and $p\\in\\mathbb N$. For every $h:Y\\to S$ and abelian etale sheaf $F$ [def-weil-pbc-etale-sheaves], put $P_{h,F}(U)=\\operatorname{Hom}((h^{-1}\\mathbb Z[U])[0],F[0][p])$, using [def-weil-pbc-inverse-image], [def-weil-pbc-sheafification] and [def-weil-pbc-derived-categories]. There is a family $e_{h,F}:P_{h,F}^{\\#}\\simeq R^p h_*F$ [def-weil-pbc-direct-image] with the following compatibility. For $a:Y'\\to Y$, $h':Y'\\to S$, $a\\mathbin{\\gg}h=h'$, and $\\varphi:a^{-1}F\\to F'$, define $b_a:P_{h,F}(U)\\to P_{h',F'}(U)$ by the source pullback-composition comparison, inverse single-functor comparison, derived pullback of the class, pullback-shift comparison, and shifted single-functor comparison followed by $\\varphi[0]$. The canonical map $M=\\operatorname{abelianHigherDirectImageMap}(a,h,h',p,F,F',\\varphi)$ [def-sbc-abelian-higher-direct-image-map] satisfies $M(U)((\\eta\\mathbin{\\gg}e_{h,F})(z))=(\\eta\\mathbin{\\gg}e_{h',F'})(b_a(z))$ for every etale $U\\to S$ and $z\\in P_{h,F}(U)$. The maps $b_a$ are explicitly constructed. No affine, qcqs or limit hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Lemma 59.51.6 natural sheafification comparison; Tag 09Z1 proof canonical cohomology comparison maps"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-sbc-abelian-higher-direct-image-map",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Construct the comparison by derived adjunction, homology, shift comparison and evaluation at the identity generator of the free abelian representable. The locally bijective cycle/boundary argument of the abelian higher-image presheaf theorem proves its sheafification invertible. Use the construction, not a choice from the abstract Nonempty conclusion. This construction is uniform in h and F.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the adjunct of the raw class using the unit. Unit naturality moves the class across pullback, and the triangle identity cancels the intervening counit. Pullback composition and single-functor compatibility leave exactly the factors of the canonical higher-image transition; shift compatibility moves the coefficient map through the class. Apply degree-p homology and identity-generator evaluation to obtain the displayed compatibility.",
+   "uses": [
+    "def-sbc-abelian-higher-direct-image-map",
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-direct-image-presheaf",
+  "def-sbc-abelian-higher-direct-image-map",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Lemma 59.51.6 natural sheafification comparison; Tag 09Z1 proof canonical cohomology comparison maps; explicit derived-Hom and coherence elaboration by J2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology continuity under inverse limits with affine transitions and natural higher direct image comparison",
+   "results": "Service unavailable: Internal Server Error; no search verdict available.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology classes on an affine scheme in an inverse limit with affine transition maps are represented at a stage",
+   "results": "Eight structure-sheaf and geometric affine-limit results; no abelian etale derived-Hom class continuity or natural higher-image comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preadditiveYoneda\"",
+   "results": "Generic preadditive Yoneda facts; no etale continuity or comparison naturality theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*limit|limit.*cohomology|homAddEquiv.*naturality; blueprint_refs.py search 03Q8, 09Z1, natural comparison",
+   "results": "Mathlib has local/group cohomology, no etale inverse-limit theorem. The library has generic complex continuity and an abelian comparison with private construction. The blueprint has the full 03Q8 and 09Z1 assertions, but neither separated assertion here. Module-coefficient affine descent only handles coefficients pulled back from a fixed scheme.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of Ext from free abelian representables is naturally isomorphic to derived direct image cohomology, compatible with pullback",
+   "results": "Sheaf.cohomologyPresheafFunctor and Sheaf.H are definitions; SheafOfModules pullback-free comparisons have module coefficients. Read SheafCohomology/Basic: no higher-image sheafification comparison or varying-site naturality.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An Ext class of a varying abelian etale sheaf on an affine inverse limit comes from some finite stage, for affine transition morphisms",
+   "results": "Eight hits on structure-sheaf affine-transition limits; none handles varying abelian etale coefficients or derived Hom.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyFunctor\", \"presheafToSheaf\"",
+   "results": "Zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(raw|affine).*class|sheafification.*(natural|comparison)|higherDirectImagePresheafToSheaf; rg class_rep and comparison naturality in both Lean roots",
+   "results": "Mathlib generic sheafification naturality only. Read upstream higherDirectImagePresheafToSheaf_naturality: fixed structure map and ModuleCat coefficients only. Read exists_higher_image_affine_class_rep: fixed pullback ModuleCat coefficients only. Complex class descent requires unbounded global-cohomology diagram; still needs base-change and derived-Hom transport. No matching bridge.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1 proof: higher direct images are associated sheaves of restricted cohomology; compatibility with the cohomology colimit maps",
+   "via": [
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianHigherDirectImageNaturalComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_abelianHigherDirectImage_natural_comparison",
+  "statement": "theorem exists_abelianHigherDirectImage_natural_comparison (S : Scheme.{v}) (p : ℕ) : ∃ e : ∀ {Y : Scheme.{v}} (h : Y ⟶ S) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}), (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj (abelianHigherDirectImageRawPresheaf h p F) ≅ (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+((h)_*[AddCommGrpCat.{v + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)), ∀ {Y Y' : Scheme.{v}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ((a)^*[AddCommGrpCat.{v + 1}]).obj F ⟶ F') (U : S.Etale) (z : (abelianHigherDirectImageRawPresheaf h p F).obj (op U)), (abelianHigherDirectImageMap a h h' w p F F' φ).hom.app (op U) ((toSheafify S.smallEtaleTopology (abelianHigherDirectImageRawPresheaf h p F) ≫ (e h F).hom.hom).app (op U) z) = (toSheafify S.smallEtaleTopology (abelianHigherDirectImageRawPresheaf h' p F') ≫ (e h' F').hom.hom).app (op U) (abelianHigherDirectImageRawPullback a h h' w p F F' φ U z)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T095909-L-319072",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T095909-L-319072",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
