@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-regular-local-fibre-finrank-add-fin-fun",
+ "kind": "statement",
+ "title": "Conormal fibre finrank decomposition with a finite function-space summand",
+ "statement": "Under the hypotheses of lem-weil-pbc-regular-local-fibre-finrank-comparison, the fibre differential finrank equals the cotangent-space finrank plus the finrank of the function space (Fin r → residue field).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00TV, conormal exact sequence and separating transcendence basis"
+ },
+ "proof": [
+  {
+   "text": "Use the conormal exact sequence, injectivity from separable residue, localization of differentials, and the basis of residue-field differentials arising from a separating transcendence basis. Add dimensions in the resulting short exact sequence.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-separable-residue-cotangent-injective",
+    "lem-weil-pbc-separably-generated-differentials-dimension",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-separable-residue-cotangent-injective",
+  "lem-weil-pbc-separably-generated-differentials-dimension",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "proof of Lemma Tag 00TV"
+ },
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RegularLocalFibreFinrankComparison",
+  "file": "lean/Sheaf/RingTheory/RegularLocalFibreFinrankComparison.lean",
+  "declaration": "Algebra.fibre_finrank_eq_cotangent_finrank_add_fin_fun",
+  "statement": "theorem fibre_finrank_eq_cotangent_finrank_add_fin_fun\n    (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]\n    [Algebra.FiniteType k S] (q : Ideal S) [q.IsPrime]\n    (hsep : Algebra.IsSeparableExtension k q.ResidueField)\n    (r : ℕ) (hr : Algebra.trdeg k q.ResidueField = (r : Cardinal.{v})) :\n    Module.finrank q.ResidueField (q.ResidueField ⊗[S] KaehlerDifferential k S) =\n      Module.finrank q.ResidueField\n        (IsLocalRing.CotangentSpace (Localization.AtPrime q)) +\n        Module.finrank q.ResidueField (Fin r → q.ResidueField)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "stmt_deps": [
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-separable-residue-cotangent-injective",
+  "lem-weil-pbc-separably-generated-differentials-dimension",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finrank of residue field fibre of Kähler differentials equals cotangent finrank plus transcendence degree",
+   "results": "HTTP Internal Error; no search verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finrank of a finite function space over a field",
+   "results": "No direct match for the full conormal statement; standard finite function-space finrank used in target.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank_fintype_fun_eq_card",
+   "results": "Found Module.finrank_fintype_fun_eq_card.",
+   "date": "2026-10-13",
+   "verdict": "match used in target"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*fintype_fun",
+   "results": "Found Module.finrank_fintype_fun_eq_card in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "match used in target"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularLocalFibreFinrankComparison",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-regular-local-fibre-finrank-comparison",
+   "place": "conormal exact sequence dimension decomposition",
+   "via": [
+    "lem-weil-pbc-regular-local-fibre-finrank-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T202231-L-701687",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T202231-L-701687",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

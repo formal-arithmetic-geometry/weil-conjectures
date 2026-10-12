@@ -19,6 +19,23 @@ universe u v
 
 namespace Algebra
 
+
+/-- Conormal decomposition with an explicit finite function-space summand.
+(blueprint: lem-weil-pbc-regular-local-fibre-finrank-add-fin-fun)
+
+Proof: use the conormal exact sequence, separable residue injectivity, localization,
+and the separating transcendence basis differential basis. -/
+theorem fibre_finrank_eq_cotangent_finrank_add_fin_fun
+    (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]
+    [Algebra.FiniteType k S] (q : Ideal S) [q.IsPrime]
+    (hsep : Algebra.IsSeparableExtension k q.ResidueField)
+    (r : ℕ) (hr : Algebra.trdeg k q.ResidueField = (r : Cardinal.{v})) :
+    Module.finrank q.ResidueField (q.ResidueField ⊗[S] KaehlerDifferential k S) =
+      Module.finrank q.ResidueField
+        (IsLocalRing.CotangentSpace (Localization.AtPrime q)) +
+        Module.finrank q.ResidueField (Fin r → q.ResidueField) := by
+  sorry
+
 /-- The residue-field fibre of the differentials has dimension equal to the embedding
 dimension plus the residue-field transcendence degree.
 Source: Stacks Project, Algebra, proof of Lemma Tag 00TV, using Tag 00TU.
@@ -47,6 +64,7 @@ theorem fibre_finrank_eq_cotangent_finrank_add
     Module.finrank q.ResidueField (q.ResidueField ⊗[S] KaehlerDifferential k S) =
       Module.finrank q.ResidueField
         (IsLocalRing.CotangentSpace (Localization.AtPrime q)) + r := by
-  sorry
+  rw [fibre_finrank_eq_cotangent_finrank_add_fin_fun k S q hsep r hr]
+  simp only [Module.finrank_fintype_fun_eq_card, Fintype.card_fin]
 
 end Algebra
