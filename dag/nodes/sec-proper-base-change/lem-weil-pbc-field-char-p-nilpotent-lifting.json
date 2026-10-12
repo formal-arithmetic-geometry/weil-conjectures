@@ -27,50 +27,32 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*Algebra structures.* Since $K$ has characteristic $p$, its prime subfield is $\\mathbf F_p=\\mathbf Z/p\\mathbf Z\\subseteq K$, and $K$ is an $\\mathbf F_p$-algebra in a unique way. Every ring $E$ with $p\\cdot1_E=0$ (here $D$ and its quotients $D/J^i$, $i\\ge1$) has exactly one ring map $\\mathbf F_p\\to E$, namely $n\\bmod p\\mapsto n\\cdot1_E$, so it is an $\\mathbf F_p$-algebra in exactly one way, and a quotient map $E\\to E/I$ is a map of $\\mathbf F_p$-algebras. A ring homomorphism from $K$ or from such an $E$ to such a ring sends $n\\cdot1$ to $n\\cdot1$, hence is a homomorphism of $\\mathbf F_p$-algebras; conversely every $\\mathbf F_p$-algebra homomorphism is a ring homomorphism. So below 'ring homomorphism' and '$\\mathbf F_p$-algebra homomorphism' between these rings are the same thing.",
+   "text": "*Subsingleton target.* If D is subsingleton, define the unique zero ring homomorphism f : K →+* D; extensionality and subsingleton elimination give (Ideal.Quotient.mk J).comp f = g.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409) applied to K over F_p (the identification of ring maps with F_p-algebra maps is implicit in the citers, Smoothing Ring Maps proof of Lemma Tag 07FG, and Algebra Lemma Tag 0329)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Square-zero case.* By [lem-weil-pbc-field-char-p-h1-cotangent-vanishing], $H_1(L_{K/\\mathbf F_p})=0$ (naive cotangent complex of the canonical presentation $\\mathbf F_p[K]\\to K$). The module of differentials $\\Omega_{K/\\mathbf F_p}$ is a $K$-module, i.e. a $K$-vector space, hence a projective $K$-module by [lem-weil-pbc-vector-space-projective]. So the ring map $\\mathbf F_p\\to K$ satisfies both hypotheses of [lem-weil-pbc-smooth-ring-map-square-zero-lifting] (with $A=\\mathbf F_p$, $B=K$), which gives, with step 1: (*) for every commutative ring $D'$ with $p\\cdot1_{D'}=0$, every ideal $J'\\subseteq D'$ with $J'^2=0$, with quotient map $q':D'\\to D'/J'$, and every ring homomorphism $g':K\\to D'/J'$, there is a ring homomorphism $f':K\\to D'$ with $q'\\circ f'=g'$. (This is the last line of the proof of 0320 (3), '$K/k$ is formally smooth by Lemma 031Z', for $k=\\mathbf F_p$, with 031Z proved as in its source: Proposition 031J and 'a vector space is free (hence projective)'; the vanishing of $H_1$ is the part of the proof of 0320 (3) carried by the cited node, which uses that $K/\\mathbf F_p$ is separable as $\\mathbf F_p$ is perfect, 030Y/030Z.)",
+   "text": "*Formal smoothness in the nontrivial case.* Equip K and D with their canonical ZMod p algebra structures. The characteristic assumptions give CharP D p. The K-module of Kahler differentials is free because K is a field, hence projective; the imported vanishing theorem gives Subsingleton (Algebra.H1Cotangent (ZMod p) K). These are exactly the fields of Algebra.FormallySmooth.mk, so ZMod p → K is formally smooth.",
    "uses": [
-    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-    "lem-weil-pbc-vector-space-projective",
-    "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409) part (3), last sentence; Lemma Tag 031Z (lemma-characterize-formally-smooth-field-extension, line 44397) and its proof (Proposition Tag 031J, proposition-characterize-formally-smooth, line 37986, (6) => (1)); Definition Tag 00TI (definition-formally-smooth, line 37805)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Induction from $J^2=0$ to $J^N=0$.* For $1\\le i\\le N$ let $\\rho_i:D/J^i\\to D/J$ be the canonical surjection ($J^i\\subseteq J$). Claim $P(i)$: there is a ring homomorphism $f_i:K\\to D/J^i$ with $\\rho_i\\circ f_i=g$. $P(1)$ holds with $f_1=g$. Let $1\\le i<N$ and assume $P(i)$. Put $D'=D/J^{i+1}$ and $J'=J^i/J^{i+1}\\subseteq D'$. Then $p\\cdot1_{D'}=0$, and $J'^2$ is the image of $J^{2i}\\subseteq J^{i+1}$ (as $2i\\ge i+1$), so $J'^2=0$. By the third isomorphism theorem $D'/J'\\cong D/J^i$, and under this isomorphism the quotient map $q':D'\\to D'/J'$ becomes the canonical surjection $\\sigma_i:D/J^{i+1}\\to D/J^i$. Applying (*) of step 2 to $g'=f_i$ (composed with this isomorphism) gives a ring homomorphism $f_{i+1}:K\\to D/J^{i+1}$ with $\\sigma_i\\circ f_{i+1}=f_i$; then $\\rho_{i+1}\\circ f_{i+1}=\\rho_i\\circ\\sigma_i\\circ f_{i+1}=\\rho_i\\circ f_i=g$, which is $P(i+1)$. Hence $P(N)$ holds. Since $J^N=0$, $D/J^N=D$ and $\\rho_N=\\pi$, so $f=f_N:K\\to D$ is a ring homomorphism with $\\pi\\circ f=g$ (for $N=1$, $J=0$ and $f=g$).",
+   "text": "*Nilpotent lifting.* Apply Algebra.FormallySmooth.exists_lift to J and ⟨N,hJ⟩ and to the induced ZMod p-algebra homomorphism K →ₐ[ZMod p] D ⧸ J (the commutation condition follows by reducing integer representatives modulo p). Convert the lifted algebra homomorphism to a ring homomorphism and use the equality supplied by exists_lift.",
    "uses": [
-    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-    "lem-weil-pbc-vector-space-projective",
-    "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 07K4 (lemma-smooth-strong-lift, line 38291): 'we can successively lift' along A_0/I_0^{i+1} -> A_0/I_0^i, whose kernels have square zero"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-  "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
-  "lem-weil-pbc-vector-space-projective"
+  "lem-weil-pbc-field-char-p-h1-cotangent-vanishing"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409) part (3) for K/F_p (H_1(L_{K/F_p}) = 0, then formally smooth by Lemma Tag 031Z, line 44397, i.e. Proposition Tag 031J and vector spaces are free); induction along D/J^{i+1} -> D/J^i as in the proof of Lemma Tag 07K4 (lemma-smooth-strong-lift, line 38291)"
+  "by": "mathlib_and_library",
+  "document": "Mathlib/RingTheory/Smooth/Basic.lean",
+  "place": "Algebra.FormallySmooth.exists_lift, with formal smoothness assembled by Algebra.FormallySmooth.mk from the imported characteristic-p H1-cotangent vanishing theorem and Module.Free.of_divisionRing/Module.Projective.of_free"
  },
  "mathlib_searches": [
   {
@@ -177,5 +159,15 @@
   "group": "C1",
   "result": "pass",
   "note": "Field K + CharP K p + 0<p = char p>0 field; CommRing D + (p:D)=0 = p·1_D=0 (no CharP D, zero ring allowed); J^N=⊥ with 1≤N = nilpotent J (same form as landed NilpotentBaseChangeIdempotents); g : K →+* D⧸J, ∃ f, (mk J).comp f = g = π∘f=g; Mathlib FormallySmooth K/F_p only under EssFiniteType (of_perfectField), so existing:false right; #check signature in L sandbox"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T113946-L-820688",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
