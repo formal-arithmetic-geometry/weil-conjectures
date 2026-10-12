@@ -395,18 +395,42 @@ theorem Scheme.bijective_appTop_idempotent_of_henselianRing
     rw [← hinj.mem_set_image, ← hUA]
     exact ⟨fun h ↦ ⟨h, hz⟩, fun h ↦ h.1⟩
 
+/-- **Finite étale schemes over the closed fibre lift.** Let `(A, I)` be a henselian pair,
+`f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`. Every finite étale
+`Y₀`-scheme is the base change of a finite étale `Y`-scheme. This is the object-level half of
+the finite étale lifting `thm-weil-pbc-finite-etale-lifting` (Stacks 0A48, 0A49), which the
+blueprint does not prove beyond the reference: the proof of
+`lemma-weil-pbc-finite-etale-henselian-lifting` algebraizes the formal lift over the completion
+by Grothendieck's existence theorem and descends it to `A` by Artin–Popescu approximation for
+henselian G-rings and a limit argument, none of which is available.
+(blueprint: `thm-weil-pbc-finite-etale-lifting`, essential surjectivity) -/
+@[stacks 0A49]
+theorem Scheme.essSurj_pullback_finiteEtale_of_henselianRing
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
+    (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).EssSurj :=
+  sorry
+
 /-- **Finite étale lifting over a proper scheme over a henselian pair.** Let `(A, I)` be a
 henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
 Then base change along `i` is an equivalence from the category of finite étale `Y`-schemes
 to the category of finite étale `Y₀`-schemes. In particular morphisms, and hence finite
 group actions (finitely many automorphisms subject to finitely many equations), lift
 uniquely.
+
+Full faithfulness is `AlgebraicGeometry.Scheme.full_pullback_finiteEtale_of_henselianRing` and
+`AlgebraicGeometry.Scheme.faithful_pullback_finiteEtale_of_henselianRing`, following the
+blueprint: `Y`-morphisms `V ⟶ W` are the sections of `W ×_Y V ⟶ V`, which correspond to open
+and closed subschemes of `W ×_Y V` by idempotent lifting. Essential surjectivity is
+`AlgebraicGeometry.Scheme.essSurj_pullback_finiteEtale_of_henselianRing`.
 (blueprint: `thm-weil-pbc-finite-etale-lifting`) -/
 @[stacks 0A48]
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing
     (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) :
     (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).IsEquivalence :=
-  sorry
+  have := Scheme.faithful_pullback_finiteEtale_of_henselianRing I f i f₀ h
+  have := Scheme.full_pullback_finiteEtale_of_henselianRing I f i f₀ h
+  have := Scheme.essSurj_pullback_finiteEtale_of_henselianRing I f i f₀ h
+  { }
 
 end Henselian
 
