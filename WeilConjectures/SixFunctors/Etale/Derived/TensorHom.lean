@@ -359,6 +359,26 @@ theorem exists_iso_derivedHom_rightDerivedLowerShriek_commShift :
   ⟨derivedHomRightDerivedLowerShriekIso _ f,
     fun M ↦ commShift_derivedHomRightDerivedLowerShriekIso_app_hom _ f M⟩
 
+/-- Blueprint `prop-asd-internal-adjunction`: Internal ambient adjunction.
+
+For a morphism `f : X ⟶ Y` admitting a compactification and a finite coefficient ring `Λ`,
+there is a canonical isomorphism, natural in `M ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)`,
+
+`Rf_* RHom_X(M, Rf^! K) ≅ RHom_Y(Rf_! M, K)`.
+
+It is the Yoneda transpose of the chain of adjunctions `Lf^* ⊣ Rf_*`, `- ⊗ᴸ - ⊣ RHom`,
+`Rf_! ⊣ Rf^!` and of the projection formula `Rf_!(M ⊗ᴸ Lf^* Q) ≅ Rf_! M ⊗ᴸ Q`
+(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`, `lem-amb-proper-coproducts-projection`),
+that is `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso` at `A = ModuleCat Λ`. The
+blueprint assumes Noetherian schemes; this is not needed here. -/
+noncomputable def derivedHomRightDerivedLowerShriekIsoOfFinite :
+    RHom(X)[ModuleCat.{u + 1} Λ] ⋙
+        (Functor.whiskeringLeft _ _ _).obj R(f)^![ModuleCat.{u + 1} Λ] ⋙
+          (Functor.whiskeringRight _ _ _).obj R((f)_*[ModuleCat.{u + 1} Λ]) ≅
+      (R(f)_![ModuleCat.{u + 1} Λ]).op ⋙ RHom(Y)[ModuleCat.{u + 1} Λ] :=
+  have := isIso_projectionMap_of_finite Λ f
+  derivedHomRightDerivedLowerShriekIso _ f
+
 end TensorHom
 
 section VerdierExchange
