@@ -9,10 +9,13 @@ public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
-public import Mathlib.CategoryTheory.Comma.Over.Basic
+import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.CategoryTheory.ColimitSiteFiniteSectionColimitPresentation
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 /-! # Zero detection for source sections with finite covering axioms
 
@@ -93,6 +96,27 @@ theorem colimit_site_finite_unit_zero_detection
       (P j).toGrothendieck Q.toGrothendieck).unit.app H).hom.app (op X) z = 0) :
     ∃ (k : J) (d : j ⟶ k),
       ((sheafAdjunctionContinuous (F.map d).toFunctor AddCommGrpCat.{u}
-        (P j).toGrothendieck (P k).toGrothendieck).unit.app H).hom.app (op X) z = 0 := by sorry
+        (P j).toGrothendieck (P k).toGrothendieck).unit.app H).hom.app (op X) z = 0 := by
+  obtain ⟨D, e, c, β, α, ⟨hc⟩, hstage, hlimit⟩ :=
+    colimit_site_finite_section_colimit_presentation
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVpullback j H X
+  let i : Under j := Under.mk (𝟙 j)
+  have hrep : c.ι.app i (e.app i z) = c.ι.app i 0 := by
+    apply ((ConcreteCategory.isIso_iff_bijective β.hom).mp inferInstance).1
+    have hu := ConcreteCategory.congr_hom (hlimit i) z
+    change β.hom (c.ι.app i (e.app i z)) = _ at hu
+    rw [map_zero, map_zero]
+    exact hu.trans hz
+  obtain ⟨a, f, hf⟩ := (hc.eq_iff' (e.app i z) 0).mp hrep
+  have hn := ConcreteCategory.congr_hom (e.naturality f) z
+  have he : e.app a z = 0 := by
+    change e.app a z = D.map f (e.app i z) at hn
+    rw [map_zero] at hf
+    exact hn.trans hf
+  refine ⟨a.right, a.hom, ?_⟩
+  have hu := ConcreteCategory.congr_hom (hstage a) z
+  change (α a).hom (e.app a z) = _ at hu
+  rw [he, map_zero] at hu
+  exact hu.symm
 
 end CategoryTheory

@@ -15,59 +15,30 @@
  ],
  "proof": [
   {
-   "text": "Form presentations of a limit object Y by stages reached from i, including arrows from i and stage objects with image Y. Joint surjectivity of the object and arrow colimit legs supplies representatives. Filteredness moves any finite set of representatives to a common stage. Eventual equality in these same two supplied colimit cocones gives equality of endpoints and composites after further refinement, and equalizes parallel refinements. Thus the presentation category is filtered. The category above a fixed presentation is final by the common-refinement and equalizer criterion.",
+   "text": "Apply [lem-weil-pbc-colimit-site-finite-section-colimit-presentation] to obtain the section diagram D over Under j, its natural source-unit map e, the colimit cocone c, and the stage and limit section-group isomorphisms. At the identity object of Under j, the limit unit equation and injectivity of the limit section isomorphism turn the given vanishing into equality of the coprojections of e(z) and zero.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-arrows-functor",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+    "lem-weil-pbc-colimit-site-finite-section-colimit-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Take the filtered colimit of the inverse-image sections on presentations. Lift a restriction arrow to a common stage; eventual equality and naturality of the uniquely unit-characterized transition maps prove independence of the lift and the identity and composition restriction laws. These are a presheaf of abelian groups. Every Q cover lifts by hQ to a finite stage cover, and hVpullback preserves its covering pullbacks. Its sheaf equalizer is the filtered colimit of the finite stage equalizers. Filtered abelian group colimits commute with finite products and equalizers, so the presheaf is a sheaf; the empty-cover condition gives the zero group.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-finite-precoverage",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A map from this constructed sheaf to a sheaf H is a compatible family of stage sheaf maps. Apply each stage adjunction to identify this family with one map from G to restriction of H along V_i. The identity presentation and the unit define the reverse assignment. Adjunct uniqueness and the colimit universal property show the assignments are mutually inverse and natural in H. Uniqueness of the left adjoint therefore identifies the constructed sheaf with the canonical sheafPullback, compatibly with units.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At V(j)(X), presentations carrying X forward are final. Represent z via the inverse-image unit of the identity transition; its coprojection is the V(j) unit by adjunct uniqueness. The zero section has the zero representative, since all maps are additive. The supplied vanishing and the same-stage filtered-colimit equality criterion give d : j to k at which these representatives agree. The unit equations identify the refinement of the identity representative with the F(d) adjunction unit. Hence that unit kills z. This asserts only detection for an existing source section, not eventual equality of arbitrary inverse-image sections or any compatibility of supplied comparison maps.",
+   "text": "Mathlib instance IsFiltered.under (the dual of the over-category clause of [lem-weil-pbc-initial-functor-cofiltered-criterion]) makes Under j filtered. Apply IsColimit.eq_iff' in Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered, implementing clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise], namely the same-stage filtered-colimit equality criterion, after forgetting abelian groups (which preserves filtered colimits), to obtain a refinement f from the identity object to a. Its map sends e(z) to zero. Naturality of e identifies that image with e_a(z); the stage unit equation and additivity of the stage isomorphism imply that the F(a.hom) unit sends z to zero. Return a.right and a.hom.",
    "uses": [
     "lem-weil-pbc-initial-functor-cofiltered-criterion",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-arrows-functor",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-precoverage",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-colimit-site-finite-section-colimit-presentation",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
   "lem-weil-pbc-initial-functor-cofiltered-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, source-section/identity-presentation case of the section formula and adjunction proof; abelian extension via Tag 03CO. Finite indexed covering axioms suffice because all covering presieves are finite."
+  "place": "Tag 0A35, identity source-unit representative case. Lean implements the filtered-colimit equality extraction and unit naturality; the section formula and unit-compatible cocone construction are split into lem-weil-pbc-colimit-site-finite-section-colimit-presentation."
  },
  "mathlib_searches": [
   {
@@ -139,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-0d759",
   "group": "M1",
   "result": "pass",
-  "landing": "20261012T184317-L-4009345",
+  "landing": "20261012T214710-L-1271191",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Lean signatures match both nodes verbatim; existing signature unchanged; proof and dependencies agree. Both delivered modules and the sole direct importer compile cleanly. Axioms are standard plus sorryAx from the documented structural hole. Section formula checked against Stacks https://stacks.math.columbia.edu/tag/0A35 and https://stacks.math.columbia.edu/tag/03CO; accepted as decomposition."
  }
 }
