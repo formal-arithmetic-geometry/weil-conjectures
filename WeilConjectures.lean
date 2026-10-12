@@ -163,6 +163,7 @@ public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
 public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.Frobenius
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPoints
+public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPointsCount
 public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
@@ -1365,6 +1366,7 @@ public import WeilConjectures.Mathlib.Data.Nat.Factorization.Induction
 public import WeilConjectures.Mathlib.Data.Set.Image
 public import WeilConjectures.Mathlib.Data.ZMod.Basic
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
+public import WeilConjectures.Mathlib.FieldTheory.Finite.GaloisField
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
 public import WeilConjectures.Mathlib.FieldTheory.Fixed
 public import WeilConjectures.Mathlib.FieldTheory.Galois.Infinite
@@ -1494,6 +1496,7 @@ public import WeilConjectures.Mathlib.RingTheory.PiTensorProduct
 public import WeilConjectures.Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.Mathlib.RingTheory.Polynomial.Cyclotomic.Basic
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
@@ -2005,6 +2008,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.FixedPoints
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Frobenius
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.GlobalOperator
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.KernelPushforward
@@ -2127,6 +2131,7 @@ public import WeilConjectures.ZetaFunction.WeightSeparation
 public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.ZetaFunction.WeilFactorization
 public import WeilConjectures.ZetaIntegrality
+public import WeilConjectures.ZetaLinearAlgebra.AlternatingEulerProduct
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou

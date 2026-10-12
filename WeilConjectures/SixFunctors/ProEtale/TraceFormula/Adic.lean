@@ -12,7 +12,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.EulerProduct
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.FixedPoints
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
+public import WeilConjectures.ZetaLinearAlgebra.AlternatingEulerProduct
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 
 /-!
@@ -97,8 +99,11 @@ carries the categorical traces of the global Frobenius and of the stalk Frobeniu
 `F^m` and `F_y^{m/e_y}`. The regrouping of the point side — a closed point `y` of degree
 `e_y` contributes `e_y` rational points exactly when `e_y ∣ m` — is part of the assertion.
 The scheme `X₀` is tied to `X` by `hΦ`, which exhibits `X` as its base change along
-`s ⟶ Spec k` and the Frobenius as the base change of that of `X₀`. The passage from the
-trace identity to the product is `LinearMap.inv_charpolyRev_eq_exp`, and the coefficient
+`s ⟶ Spec k` and the Frobenius as the base change of that of `X₀`. The fixed points are
+regrouped by closed points by `WeilComplex.IsModelFrobenius.sum_fixedPoints`, the passage from
+the trace identity to the product is
+`LinearMap.hasProd_inv_alternatingCharpolyRevProd_of_sum_trace_eq` (a comparison of
+logarithmic derivatives, as in `LinearMap.inv_charpolyRev_eq_exp`), and the coefficient
 field carries the discrete topology, so that `HasProd` in `PowerSeries Λ` is exactly
 coefficientwise local finiteness together with the value of the product. Compatibility
 with an embedding `ι : ℚ̄_ℓ ⟶ ℂ` is not stated separately: it is the image of the identity
@@ -333,7 +338,19 @@ theorem hasProd_inv_alternatingCharpolyRevProd [DerivedBraiding A]
     HasProd
       (fun y : X₀.finitePoints ↦
         (LinearMap.alternatingCharpolyRevProd degs (Fst y.1) (f₀.degreeOver y.1))⁻¹)
-      (LinearMap.alternatingCharpolyRevProd degs Fc 1)⁻¹ :=
-  sorry
+      (LinearMap.alternatingCharpolyRevProd degs Fc 1)⁻¹ := by
+  refine LinearMap.hasProd_inv_alternatingCharpolyRevProd_of_sum_trace_eq degs Fc
+    (fun y : X₀.finitePoints ↦ Fst y.1) (fun y ↦ f₀.degreeOver y.1)
+    (fun y ↦ f₀.degreeOver_ne_zero y.2) f₀.finite_setOf_degreeOver_le fun m hm T hT ↦ ?_
+  have hm0 : m ≠ 0 := Nat.one_le_iff_ne_zero.1 hm
+  have := hΦ.finite_fixedPoints hm0
+  let := Fintype.ofFinite
+    {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x}
+  rw [← hHc m hm, trace_globalOperator_eq_sum_trace_stalkFrobenius G W f₀ σ p hΦ hW hctf m hm,
+    map_sum]
+  refine (Finset.sum_congr rfl fun x _ ↦ hSt m hm x
+    ⟨_, (hΦ.mem_finitePoints_of_fixedPoint hm0 x.2).1⟩ ⟨default, rfl⟩).trans ?_
+  exact hΦ.sum_fixedPoints hm0 (fun y : X₀ ↦ ∑ i ∈ degs, (i.negOnePow : ℤ) •
+    LinearMap.trace Λ (St y i) (Fst y i ^ (m / f₀.degreeOver y))) hT
 
 end AlgebraicGeometry.ProEtale
