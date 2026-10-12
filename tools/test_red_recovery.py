@@ -108,10 +108,14 @@ class Repo(unittest.TestCase):
 
 
 class Logic(unittest.TestCase):
+    def test_set_option_in_needs_no_reader(self):
+        old = 'public theorem a : True := by trivial\n'
+        self.assertFalse(s3.reader_risks(old, old + 'set_option maxHeartbeats 100 in\npublic theorem b : True := by trivial\n'))
+
     def test_reader_rules(self):
         old = 'module\npublic import Sheaf.B\npublic theorem a : True := by sorry\n'
         for addition in ('instance myInst : X := x\n', '@[simp] public theorem a : True := by trivial\n',
-                         'attribute [simp] a\n', 'set_option maxHeartbeats 100 in\npublic theorem b : True := by trivial\n'):
+                         'attribute [simp] a\n'):
             new = old + addition if not addition.startswith('@') else old.replace('public theorem a : True := by sorry', addition)
             self.assertTrue(s3.reader_risks(old, new), addition)
         self.assertTrue(s3.reader_risks(old, old.replace('public import', 'import')))
