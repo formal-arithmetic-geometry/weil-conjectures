@@ -14,8 +14,9 @@
  ],
  "proof": [
   {
-   "text": "Let a:X → Spec(ULift ℤ) be the structure morphism. It is quasi-compact and quasi-separated because X is qcqs and the target is affine. By [lem-pc-derived-direct-image-preserves-direct-sums], Ra_* preserves the ambient coproduct of the E_i. Its terms are quasi-coherent by [lem-pc-derived-direct-image-preserves-qcoh].",
+   "text": "Put A = Γ(X,O_X) and a:X → Y=Spec A equal to X.toSpecΓ. Mathlib supplies QuasiCompact a and QuasiSeparated a from the qcqs assumptions. By [lem-pc-derived-qcoh-closed-coproducts], the given ambient colimiting cofan has quasi-coherent apex S. By [lem-pc-derived-direct-image-preserves-direct-sums], Ra_* maps this cofan to a colimiting ambient cofan on Y. By [lem-pc-derived-direct-image-preserves-qcoh], its summands and apex lie in D_QCoh(Y). The full-subcategory inclusion reflects colimits, hence this cofan is also colimiting in D_QCoh(Y).",
    "uses": [
+    "lem-pc-derived-qcoh-closed-coproducts",
     "lem-pc-derived-direct-image-preserves-direct-sums",
     "lem-pc-derived-direct-image-preserves-qcoh"
    ],
@@ -26,11 +27,10 @@
    }
   },
   {
-   "text": "The equivalence [lem-pc-affine-qcoh-derived-equivalence] computes RΓ on Spec(ULift ℤ) by module complexes, and preserves coproducts. Global sections after Ra_* compute RΓ(X,-): underived global sections after a_* are global sections on X with scalar action restricted to ℤ, and K-injective resolutions compute both derived functors as in [def-pc-global-derived-rhom] and [def-pc-ringed-spaces-derived-direct-image]. The coproduct comparison after restricting scalars to ULift ℤ is therefore invertible. Exact restriction of scalars forms module sums on the underlying additive groups and detects quasi-isomorphisms, hence reflects the invertibility of the derived coproduct comparison. The original comparison over Γ(X,O_X) is invertible, yielding the asserted colimiting cofan. This step stops before taking homology.",
+   "text": "Take the affine equivalence of [lem-pc-affine-qcoh-derived-equivalence] for A. Its inverse preserves the cofan just constructed. Its specified natural isomorphism identifies that inverse with derived global sections on Y after transport of scalars along ΓSpecIso.inv. Apply [lem-pc-derived-global-sections-affinization-comparison] to identify Ra_* followed by this functor with RΓ(X,-). IsColimit.mapCoconeEquiv transports the universal property, and Cofan.isColimitMapCoconeEquiv identifies the legs with RΓ(X,ι_i).",
    "uses": [
     "lem-pc-affine-qcoh-derived-equivalence",
-    "def-pc-global-derived-rhom",
-    "def-pc-ringed-spaces-derived-direct-image"
+    "lem-pc-derived-global-sections-affinization-comparison"
    ],
    "elementary": false,
    "source": {
@@ -40,18 +40,18 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-derived-qcoh-closed-coproducts",
   "lem-pc-derived-direct-image-preserves-direct-sums",
   "lem-pc-derived-direct-image-preserves-qcoh",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "def-pc-global-derived-rhom",
-  "def-pc-ringed-spaces-derived-direct-image"
+  "lem-pc-derived-global-sections-affinization-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "H1",
+  "agent": "M1",
   "document": "literature/stacks-project/perfect.tex",
   "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case",
-  "note": "Stage-3 intermediate; the module-homology calculation is fully implemented, the geometric comparison is split off."
+  "note": "Stage-3 Lean reduction: use affinization over Γ(X,O_X) instead of Spec ℤ; the only new hole is the natural derived-global-sections affinization comparison. The colimit combination is complete Lean."
  },
  "mathlib_searches": [
   {
@@ -145,9 +145,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T144116-L-2097585",
+  "landing": "20261012T165520-L-2935849",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
