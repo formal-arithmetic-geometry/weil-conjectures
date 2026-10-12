@@ -16,48 +16,36 @@
  ],
  "proof": [
   {
-   "text": "Work over an affine open of Y containing the image of s. The integral morphism is affine and qcqs, and its strict-henselian base change is Spec B with B integral over A, where A is the strict henselization at s. By [lem-weil-pbc-sets-pushforward-stalk-strict-henselization], the direct-image stalk is sections on Spec B, with every neighbourhood germ sent to its restriction.",
+   "text": "Apply the integral geometric fibre section theorem to obtain an invertible module map Theta with its formula on every neighbourhood germ.",
    "uses": [
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+    "lem-sbc-integral-geometric-fibre-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Let m be the maximal ideal of A. By [lem-weil-pbc-integral-over-henselian-pair], (B,mB) is henselian. Restriction from Spec B to Spec(B/mB) is an isomorphism by the affine special case of [lemma-weil-pbc-etale-degree-zero]: apply its proper morphism hypothesis to the identity of Spec B, not to f. The separably closed residue field kappa of A embeds in Omega. The fibre X' is Spec(B/mB) base changed along kappa -> Omega, and [lem-weil-pbc-sections-base-field-extension] shows that this further restriction is bijective.",
+   "text": "Apply the general geometric fibre exchange germ identity to Theta. Its target comparison b and the inverse-image source comparison a are isomorphisms, so the identity stalk of the actual exchange is an isomorphism by cancellation of b.",
    "uses": [
-    "lem-weil-pbc-integral-over-henselian-pair",
-    "lemma-weil-pbc-etale-degree-zero",
-    "lem-weil-pbc-sections-base-field-extension"
+    "lem-sbc-geometric-fibre-exchange-germs"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "At the identity point of Spec Omega, [lemma-openclosed-stalk-upperstar] identifies the source stalk with (f_*F)_s. The terminal-object germ isomorphism [lem-weil-pbc-strictly-henselian-sections-stalk] identifies the target stalk with sections of g'^*F on X'. Expand [def-weil-pbc-underived-exchange] on a section over a pointed neighbourhood V: the adjunction unit pulls it to X' times_SpecOmega (Spec Omega times_Y V), the square identifies the iterated pullback, and the counit restricts to X'. Hence this is exactly the composite canonical restriction of steps 1 and 2. It is therefore bijective on the identity-point stalk. Forgetting module structure reflects isomorphisms; [lemma-weil-pbc-geometric-stalk-conservative] gives the exchange isomorphism over Spec Omega.",
+   "text": "The identity geometric point covers Spec Omega. The universe-lifted family consisting of this point is conservative. Transport the identity stalk through uliftSheafFiberIso and apply the conservative-family criterion.",
    "uses": [
-    "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-strictly-henselian-sections-stalk",
-    "def-weil-pbc-underived-exchange",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
-  "lem-weil-pbc-integral-over-henselian-pair",
-  "lemma-weil-pbc-etale-degree-zero",
-  "lem-weil-pbc-sections-base-field-extension",
-  "lemma-openclosed-stalk-upperstar",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
-  "def-weil-pbc-underived-exchange",
+  "lem-sbc-integral-geometric-fibre-sections",
+  "lem-sbc-geometric-fibre-exchange-germs",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "Stacks Project, etale-cohomology.tex",
-  "place": "Tag 0EYP (integral direct-image base change); strict-henselian proof via Tags 03Q9, 09XK, 09ZH and 0A3I"
+  "place": "Tag 0EYP; strict henselian section comparison and actual exchange germ calculation, combined by identity-point conservativity"
  },
  "mathlib_searches": [
   {
@@ -156,9 +144,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T042417-L-1820239",
+  "landing": "20261012T110317-L-621116",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,133 @@
+{
+ "id": "lem-sbc-integral-geometric-fibre-sections",
+ "kind": "statement",
+ "title": "Integral geometric fibre sections",
+ "statement": "Let Lambda be a commutative ring and F a sheaf of Lambda-modules on X_et [def-weil-pbc-etale-sheaves]. Let f:X -> Y be integral [def-weil-finite-integral-morphism], s:Spec Omega -> Y a geometric point with Omega algebraically closed [def-weil-geometric-point], and (g',f',f,s) any Cartesian square [def-weil-pbc-cartesian-square]. There exists an invertible module map Theta from the stalk (f_*F)_s to sections of g'^*F on X'. For every pointed etale neighbourhood (V,v) of s and every section z of F on V times_Y X, Theta sends the germ of z to its inverse-image unit under g', restricted along the unique iterated pullback lift whose projections are (f' followed by v,g') and the identity of X'. This restriction is defined independently of the exchange map.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYP, via Tags 03Q9, 09XK, 09ZH and 0A3I"
+ },
+ "proof": [
+  {
+   "text": "Use integral affineness and the direct-image stalk comparison over the strict henselization Spec A to obtain sections on an integral A-algebra Spec B. The comparison is characterized on neighbourhood germs by the unit and restriction formula.",
+   "uses": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral henselian-pair theorem makes (B,mB) henselian. Apply the degree-zero comparison to the proper identity morphism of Spec B, giving restriction to Spec(B/mB).",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lemma-weil-pbc-etale-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The separably closed residue field of A embeds in Omega. The fibre is obtained by extending Spec(B/mB) along this embedding. Field-extension invariance of sections gives a bijection. Compose with the stalk comparison; the maps respect module operations and the composition-of-unit equations identify their restriction on every germ with the specified lift.",
+   "uses": [
+    "lem-weil-pbc-sections-base-field-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lem-weil-pbc-sections-base-field-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral morphism direct image etale sheaf base change geometric point isomorphism",
+   "results": "8 hits, no exact theorem; only generic etale declarations.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, Function.Bijective",
+   "results": "12 generic isomorphism criteria; no fibre comparison.",
+   "date": "2026-10-12",
+   "verdict": "generic criteria only"
+  },
+  {
+   "tool": "grep",
+   "query": "Integral.*baseChange|baseChange.*Integral",
+   "results": "15 hits on integral stability and integral models; no direct-image exchange.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral morphism etale sheaf direct image geometric fibre section comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralGeometricPointExchange",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-integral-base",
+   "place": "Integral direct-image base change in the normalization step; geometric-point calculation",
+   "via": [
+    "lem-sbc-integral-underived-exchange",
+    "lem-sbc-integral-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralGeometricFibreSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralGeometricFibreSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.integralGeometricFibreSections",
+  "statement": "theorem integralGeometricFibreSections\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsIntegralHom f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ∃ Θ : (pointSmallEtale s).sheafFiber.obj ((f)_*[ModuleCat.{u + 1} Λ].obj F) ⟶\n        ((g')^*[ModuleCat.{u + 1} Λ].obj F).obj.obj (op (Scheme.Etale.mk (𝟙 X'))),\n      IsIso Θ ∧ ∀ (V : Y.Etale) (v : (pointSmallEtale s).fiber.obj V)\n        (z : F.obj.obj (op (f.Etale.obj V))),\n        Θ.hom ((pointSmallEtale s).toPresheafFiber V v\n          ((f)_*[ModuleCat.{u + 1} Λ].obj F).obj z) =\n        (geometricFibreSectionRestriction Λ sq.toCommSq F V v).hom z",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-geometric-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T110317-L-621116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T110317-L-621116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

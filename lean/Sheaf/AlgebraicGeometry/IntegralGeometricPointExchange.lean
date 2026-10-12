@@ -8,13 +8,9 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.RingTheory.IntegralOverHenselianPair
+import Sheaf.AlgebraicGeometry.IntegralGeometricFibreSections
+import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Integral exchange over a geometric point
@@ -65,6 +61,26 @@ theorem isIso_baseChangeMap_app_of_isIntegralHom_geometricPoint
     {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}
     {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsIntegralHom f]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) := by sorry
+    IsIso ((baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F)  := by
+  obtain ⟨Θ, hΘ, hGerms⟩ := integralGeometricFibreSections Λ sq F
+  let : IsIso Θ := hΘ
+  obtain ⟨b, hb⟩ := geometricFibreExchange_germs Λ sq F Θ hGerms
+  let φ := (baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F
+  let p := Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))
+  have hφ : IsIso (p.sheafFiber.map φ) := by
+    have hcomp : IsIso (p.sheafFiber.map φ ≫ b.hom) := by
+      rw [hb]
+      infer_instance
+    exact (isIso_comp_right_iff _ b.hom).mp hcomp
+  have hcover : (⋃ _ : PUnit.{u + 1}, Set.range (𝟙 (Spec (.of Ω)))) = Set.univ := by
+    ext x
+    simp
+  have hc := Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ
+    (Spec (.of Ω)) (Ω := fun _ : PUnit.{u + 1} ↦ Ω) (fun _ ↦ 𝟙 _) hcover
+  apply ((hc.jointlyReflectIsomorphisms (ModuleCat.{u + 1} Λ)).isIso_iff φ).2
+  rintro ⟨_, ⟨i⟩⟩
+  rw [NatIso.isIso_map_iff ((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).uliftSheafFiberIso
+    (ModuleCat.{u + 1} Λ))]
+  exact hφ
 
 end AlgebraicGeometry.Etale
