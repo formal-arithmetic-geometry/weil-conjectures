@@ -7,7 +7,11 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Limit
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.LocalVanishing
+-- TEMPORARY (wt-sbc9/presheaf): `LocalVanishing` is being repaired; import its dependencies.
+public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+public import WeilConjectures.AlgebraicGeometry.Sites.InjectiveModuleAcyclic
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.AffineVanishing
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapEtale
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 
 /-!
