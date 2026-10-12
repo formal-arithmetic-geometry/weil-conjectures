@@ -113,7 +113,8 @@ lemma IsFinitelyContractible.of_isFiniteDisjointCover {X : C} (hX : J.IsFinitely
         rw [← cancel_mono (f i), ← hc, Category.assoc, ← (hs ⟨k, hk⟩).2]
       refine J.superset_covering (fun W g _ ↦ ?_) (J.top_mem _)
       rw [Sieve.pullback_apply, hh, ← Category.assoc]
-      exact Sieve.downward_closed _ (Sieve.ofArrows_mk _ _ _) _
+      exact Sieve.downward_closed _
+        (Sieve.ofArrows_mk (fun k : {k // good k} ↦ Z k.1) s ⟨k, hk⟩) _
     · obtain ⟨j, hj, a, ha⟩ := (hzS' k).resolve_left hk
       refine J.superset_covering bot_le (hf.disjoint j i hj T (c ≫ a) h ?_)
       rw [Category.assoc, ← ha, hc]
@@ -173,10 +174,12 @@ noncomputable def isColimitBiproductMapCokernelCofork {ι : Type} [Finite ι]
     ext i
     rw [biproduct.ι_desc]
     refine (h i).hom_ext fun j ↦ ?_
+    have hfac := (h i).fac (CokernelCofork.ofπ (biproduct.ι G i ≫ g)
+      (by rw [← biproduct.ι_map_assoc, hg, comp_zero])) WalkingParallelPair.one
     cases j
-    · simp
-    · simp only [Cofork.ofπ_pt, Cofork.ofπ_ι_app, IsColimit.fac]
-      rw [← hm, biproduct.ι_map_assoc]
+    · simp [reassoc_of% (w i)]
+    · dsimp at hfac ⊢
+      rw [hfac, ← hm, biproduct.ι_map_assoc]
 
 end Biproduct
 
@@ -189,7 +192,8 @@ objectwise a cokernel of `φ`. Then `K` turns finite disjoint covers into produc
 lemma IsFiniteDisjointCover.bijective_of_cokernel {F G K : Cᵒᵖ ⥤ A}
     (hF : Presheaf.IsSheaf J F) (hG : Presheaf.IsSheaf J G) (φ : F ⟶ G) (π : G ⟶ K)
     (w : φ ≫ π = 0)
-    (hπ : ∀ V, IsColimit (CokernelCofork.ofπ (π.app V) (by rw [← NatTrans.comp_app, w]; rfl)))
+    (hπ : ∀ V, IsColimit (CokernelCofork.ofπ (f := φ.app V) (π.app V)
+      (by rw [← NatTrans.comp_app, w]; rfl)))
     {X : C} {ι : Type} {Y : ι → C} {f : ∀ i, Y i ⟶ X} (hf : J.IsFiniteDisjointCover Y f)
     (E : A) :
     Function.Bijective fun (x : E ⟶ K.obj (op X)) (i : ι) ↦ x ≫ K.map (f i).op := by
@@ -271,11 +275,12 @@ objects, is a sheaf for the restricted topology. -/
 lemma isSheaf_restrictedTopology_of_cokernel {F G K : Cᵒᵖ ⥤ A}
     (hF : Presheaf.IsSheaf J F) (hG : Presheaf.IsSheaf J G) (φ : F ⟶ G) (π : G ⟶ K)
     (w : φ ≫ π = 0)
-    (hπ : ∀ V, IsColimit (CokernelCofork.ofπ (π.app V) (by rw [← NatTrans.comp_app, w]; rfl))) :
+    (hπ : ∀ V, IsColimit (CokernelCofork.ofπ (f := φ.app V) (π.app V)
+      (by rw [← NatTrans.comp_app, w]; rfl))) :
     Presheaf.IsSheaf ((ObjectProperty.ι J.IsFinitelyContractible).restrictedTopology J)
       ((ObjectProperty.ι J.IsFinitelyContractible).op ⋙ K) := by
   let ι := ObjectProperty.ι J.IsFinitelyContractible
-  have hΠ := fun {X : C} {κ : Type} {Y : κ → C} {f : ∀ i, Y i ⟶ X}
+  have hprod := fun {X : C} {κ : Type} {Y : κ → C} {f : ∀ i, Y i ⟶ X}
     (hf : J.IsFiniteDisjointCover Y f) (E : A) ↦
     IsFiniteDisjointCover.bijective_of_cokernel hF hG φ π w hπ hf E
   intro E W T hT
@@ -294,12 +299,12 @@ lemma isSheaf_restrictedTopology_of_cokernel {F G K : Cᵒᵖ ⥤ A}
   intro x hx
   have hxs := hx.to_sieveCompatible
   -- the amalgamation, obtained from the product decomposition over the cover `f`
-  obtain ⟨t, ht⟩ := (hΠ hf E).2 fun k ↦ x (f' k) (hf'T k)
+  obtain ⟨t, ht⟩ := (hprod hf E).2 fun k ↦ x (f' k) (hf'T k)
   have ht' (k : κ) : t ≫ K.map (f k).op = x (f' k) (hf'T k) := congrFun ht k
-  refine ⟨t, fun V g hg ↦ ?_, fun t' ht'' ↦ (hΠ hf E).1 ?_⟩
+  refine ⟨t, fun V g hg ↦ ?_, fun t' ht'' ↦ (hprod hf E).1 ?_⟩
   · -- check on a finite disjoint cover of `V` refining the pullback of `f` along `g`
     obtain ⟨λ', Z, z, hz, hzR⟩ := V.property _ (J.pullback_stable g.hom hf.mem)
-    refine (hΠ hz E).1 (funext fun l ↦ ?_)
+    refine (hprod hz E).1 (funext fun l ↦ ?_)
     obtain ⟨_, c, _, ⟨k⟩, hc⟩ := hzR l
     let z' : (⟨Z l, V.property.of_isFiniteDisjointCover hz l⟩ :
       J.IsFinitelyContractible.FullSubcategory) ⟶ V := ObjectProperty.homMk (z l)
@@ -336,7 +341,7 @@ theorem epi_app_of_isFinitelyContractible {F G : Sheaf J A} (φ : F ⟶ G) [Epi 
   let K := cokernel φ.hom
   let π : G.obj ⟶ K := cokernel.π φ.hom
   have w : φ.hom ≫ π = 0 := cokernel.condition _
-  have hπ (V : Cᵒᵖ) : IsColimit (CokernelCofork.ofπ (π.app V)
+  have hπ (V : Cᵒᵖ) : IsColimit (CokernelCofork.ofπ (f := φ.app V) (π.app V)
       (by rw [← NatTrans.comp_app, w]; rfl)) :=
     CokernelCofork.mapIsColimit _ (cokernelIsCokernel φ.hom) ((evaluation _ A).obj V)
   -- the right Kan extension of the restriction of `K` to finitely contractible objects

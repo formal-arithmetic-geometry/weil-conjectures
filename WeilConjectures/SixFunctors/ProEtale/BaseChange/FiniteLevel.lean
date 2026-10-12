@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProperTorsion
-public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.Transport
 
 /-!
 # Finite-level pro-étale proper base change

@@ -67,7 +67,13 @@ noncomputable def cechComplexFunctor : (Cᵒᵖ ⥤ A) ⥤ CochainComplex A ℕ 
   (Functor.whiskeringLeft _ _ _).obj f.cechNerve.rightOp ⋙
     AlgebraicTopology.alternatingCofaceMapComplex A
 
-/-- The Čech complex `Č(f, P)` of a morphism `f` with values in a presheaf `P`. -/
+/-- Blueprint `def-weil-pbc-cover-cech`: Covering Čech complexes.
+
+The Čech complex `Č(f, P)` of a morphism `f` with values in a presheaf `P`: in degree `p` it is
+`P(U ×_V ⋯ ×_V U)` (`p + 1` factors), with the alternating sum of the face maps as differential
+(`CategoryTheory.Arrow.cechComplex_d`). For a finite covering `{V_a ⟶ U}` of a site with finite
+coproducts, the blueprint complex `∏ M(V_{a₀} ×_U ⋯ ×_U V_{a_p})` is the Čech complex of the
+single morphism `∐ V_a ⟶ U`, sheaves turning finite disjoint unions into products. -/
 noncomputable abbrev cechComplex (P : Cᵒᵖ ⥤ A) : CochainComplex A ℕ :=
   f.cechComplexFunctor.obj P
 
@@ -388,8 +394,8 @@ theorem exactAt_cechComplex_of_adjunction {D : Type*} [Category* D] [Abelian D]
     rw [key, map_zero, hφc]
     exact (key' (q + 1) c).symm.trans hc
   have hφ' : L.map (K.d (q + 1 + 1) (q + 1)) ≫ (adj.homEquiv _ _).symm φ = 0 := by
-    rw [← adj.homEquiv_naturality_left_symm, hφ]
-    simp
+    rw [← adj.homEquiv_naturality_left_symm, hφ, Adjunction.homEquiv_counit, Functor.map_zero,
+      zero_comp]
   let ψ' := hK'.descToInjective ((adj.homEquiv _ _).symm φ) hφ'
   have hψ' : L.map (K.d (q + 1) q) ≫ ψ' = (adj.homEquiv _ _).symm φ :=
     hK'.comp_descToInjective _ hφ'

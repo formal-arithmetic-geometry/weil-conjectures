@@ -45,7 +45,6 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 variable {S T Y X : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}

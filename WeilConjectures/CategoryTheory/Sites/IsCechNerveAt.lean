@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicTopology.CechNerve
 public import Mathlib.CategoryTheory.Preadditive.Basic
-public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import WeilConjectures.CategoryTheory.Sites.ArrowCechComplex
 
 /-!
 # Objects identified with the objects of a Čech nerve
@@ -270,7 +270,69 @@ lemma faceD_eq {P' P : D} (h' : IsCechNerveAt g (n + 1) P') (h : IsCechNerveAt g
   congr 1
   rw [face, op_comp, op_comp, Functor.map_comp, Functor.map_comp, Category.assoc]
 
+/-- The alternating sum of the face maps is conjugate to the differential of the Čech
+complex. -/
+lemma faceD_eq_d {P' P : D} (h' : IsCechNerveAt g (n + 1) P') (h : IsCechNerveAt g n P)
+    (F : Dᵒᵖ ⥤ A) :
+    h'.faceD h F = F.map (h.iso.inv.op) ≫ ((Arrow.mk g).cechComplex F).d n (n + 1) ≫
+      F.map (h'.iso.hom.op) := by
+  rw [faceD_eq, Arrow.cechComplex_d]
+
+@[reassoc (attr := simp)]
+lemma faceD_comp_faceD {P₀ P₁ P₂ : D} (h₂ : IsCechNerveAt g (n + 2) P₂)
+    (h₁ : IsCechNerveAt g (n + 1) P₁) (h₀ : IsCechNerveAt g n P₀) (F : Dᵒᵖ ⥤ A) :
+    h₁.faceD h₀ F ≫ h₂.faceD h₁ F = 0 := by
+  simp only [faceD_eq_d, Category.assoc]
+  rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id, F.map_id, Category.id_comp,
+    HomologicalComplex.d_comp_d_assoc, zero_comp, comp_zero]
+
+/-- The short complex of alternating sums of face maps in degrees `n`, `n + 1`, `n + 2`. -/
+@[simps]
+noncomputable def faceDShortComplex {P₀ P₁ P₂ : D} (h₂ : IsCechNerveAt g (n + 2) P₂)
+    (h₁ : IsCechNerveAt g (n + 1) P₁) (h₀ : IsCechNerveAt g n P₀) (F : Dᵒᵖ ⥤ A) :
+    ShortComplex A :=
+  ShortComplex.mk (h₁.faceD h₀ F) (h₂.faceD h₁ F) (faceD_comp_faceD h₂ h₁ h₀ F)
+
+/-- The short complex of alternating sums of face maps is isomorphic to the corresponding short
+complex of the Čech complex. -/
+noncomputable def faceDShortComplexIso {P₀ P₁ P₂ : D} (h₂ : IsCechNerveAt g (n + 2) P₂)
+    (h₁ : IsCechNerveAt g (n + 1) P₁) (h₀ : IsCechNerveAt g n P₀) (F : Dᵒᵖ ⥤ A) :
+    ((Arrow.mk g).cechComplex F).sc' n (n + 1) (n + 2) ≅ faceDShortComplex h₂ h₁ h₀ F :=
+  ShortComplex.isoMk (F.mapIso h₀.iso.op) (F.mapIso h₁.iso.op) (F.mapIso h₂.iso.op)
+    (by
+      simp only [faceDShortComplex_f, faceD_eq_d, Functor.mapIso_hom, Iso.op_hom,
+        HomologicalComplex.shortComplexFunctor'_obj_f]
+      rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id, F.map_id, Category.id_comp])
+    (by
+      simp only [faceDShortComplex_g, faceD_eq_d, Functor.mapIso_hom, Iso.op_hom,
+        HomologicalComplex.shortComplexFunctor'_obj_g]
+      rw [← F.map_comp_assoc, ← op_comp, Iso.inv_hom_id, op_id, F.map_id, Category.id_comp])
+
 end Preadditive
+
+section Abelian
+
+variable {A : Type*} [Category* A] [Abelian A]
+
+/-- If the Čech complex of `F` along `g` is exact in degree `n + 1`, so is the short complex of
+alternating sums of face maps. -/
+lemma exact_faceDShortComplex {P₀ P₁ P₂ : D} (h₂ : IsCechNerveAt g (n + 2) P₂)
+    (h₁ : IsCechNerveAt g (n + 1) P₁) (h₀ : IsCechNerveAt g n P₀) (F : Dᵒᵖ ⥤ A)
+    (hF : ((Arrow.mk g).cechComplex F).ExactAt (n + 1)) :
+    (faceDShortComplex h₂ h₁ h₀ F).Exact := by
+  rw [HomologicalComplex.exactAt_iff' _ n (n + 1) (n + 2) (by simp) (by simp)] at hF
+  exact (ShortComplex.exact_iff_of_iso (faceDShortComplexIso h₂ h₁ h₀ F)).1 hF
+
+/-- Conversely, exactness of the short complex of alternating sums of face maps gives exactness
+of the Čech complex. -/
+lemma exactAt_of_exact_faceDShortComplex {P₀ P₁ P₂ : D} (h₂ : IsCechNerveAt g (n + 2) P₂)
+    (h₁ : IsCechNerveAt g (n + 1) P₁) (h₀ : IsCechNerveAt g n P₀) (F : Dᵒᵖ ⥤ A)
+    (hF : (faceDShortComplex h₂ h₁ h₀ F).Exact) :
+    ((Arrow.mk g).cechComplex F).ExactAt (n + 1) := by
+  rw [HomologicalComplex.exactAt_iff' _ n (n + 1) (n + 2) (by simp) (by simp)]
+  exact (ShortComplex.exact_iff_of_iso (faceDShortComplexIso h₂ h₁ h₀ F)).2 hF
+
+end Abelian
 
 end IsCechNerveAt
 

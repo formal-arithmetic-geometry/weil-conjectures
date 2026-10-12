@@ -49,6 +49,26 @@ namespace CategoryTheory.PairCategory
 variable {ι : Type w} [Preorder ι] [IsDirected ι (· ≤ ·)]
   {F : Pseudofunctor (LocallyDiscrete ι) Cat.{v, u}}
 
+section ShiftUnit
+
+variable [∀ i : ι, HasShift (F.obj ⟨i⟩) ℤ] [∀ ⦃i j : ι⦄ (h : i ≤ j), (F.transition h).CommShift ℤ]
+  [ShiftCompatible F ℤ]
+
+/-- The unit isomorphism `T_{k/k} ≅ 𝟭` commutes with the shifts, in the form used for the
+third arrow of cone triangles. -/
+@[reassoc]
+lemma transitionId_inv_shift (k : ι) (h : k ≤ k) (n : ℤ) (K : F.obj ⟨k⟩) :
+    ((F.transitionId k h).inv.app K)⟦n⟧' ≫ ((F.transition h).commShiftIso n).inv.app K =
+      (F.transitionId k h).inv.app (K⟦n⟧) := by
+  have e := NatTrans.shift_app_comm (F.transitionId k h).hom n K
+  rw [Functor.commShiftIso_id_hom_app] at e
+  erw [comp_id] at e
+  rw [← cancel_epi (((F.transitionId k h).hom.app K)⟦n⟧'), ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app, Functor.map_id, id_comp, e, assoc, Iso.hom_inv_id_app, comp_id,
+    Iso.hom_inv_id_app]
+
+end ShiftUnit
+
 section Transport
 
 variable [∀ i : ι, Preadditive (F.obj ⟨i⟩)] [∀ ⦃i j : ι⦄ (h : i ≤ j), (F.transition h).Additive]
@@ -301,7 +321,8 @@ lemma cone_triangle_distinguished {X Y : PairCategory F} {k : ι} (hX : X.idx �
   · simp [isoToStage, incl, homMk_comp_homMk]
   · dsimp
     simp only [isoToStage, incl, homMk_comp_homMk, comp_id, id_comp, shiftFunctor_map_homMk]
-    sorry
+    congr 1
+    simp only [assoc, Iso.inv_hom_id_app_assoc, transitionId_inv_shift]
 
 /-- Every distinguished triangle of the pair category is isomorphic to a common-stage cone
 triangle. -/

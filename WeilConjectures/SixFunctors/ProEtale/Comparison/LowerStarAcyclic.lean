@@ -14,6 +14,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.CechColimit
+public import WeilConjectures.CategoryTheory.Sites.CechAcyclic
+public import WeilConjectures.AlgebraicGeometry.ProEtale.FinitelyContractible
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Injective
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
@@ -95,6 +98,60 @@ theorem rightAcyclic_lowerStar_of_isZero_rightDerived {U V : Scheme.{u}} (f : U 
 
 section Acyclicity
 
+/-- The pro-étale sheaves whose Čech complexes along the surjections `W ⟶ U` of the affine
+pro-étale site with finitely contractible source are exact in positive degrees. -/
+def IsCechAcyclicAffine (X : Scheme.{u}) : ObjectProperty (Sheaf (ProEt.topology X) A) :=
+  fun G ↦ ∀ ⦃W U : X.AffineProEt⦄ (q : W ⟶ U), Surjective q.left →
+    (ProEt.topology X).IsFinitelyContractible ((AffineProEt.toProEt X).obj W) →
+      ∀ n : ℕ, ((Arrow.mk ((AffineProEt.toProEt X).map q)).cechComplex G.obj).ExactAt (n + 1)
+
+variable {A} in
+/-- In a short exact sequence `0 ⟶ G₁ ⟶ G₂ ⟶ G₃ ⟶ 0` of pro-étale sheaves with `G₁` Čech acyclic
+on the affine pro-étale site, the sections of `G₂ ⟶ G₃` over affine pro-étale objects are
+epimorphisms: lift along a surjection from a finitely contractible object and correct the lift
+by a Čech `1`-cocycle of `G₁`. -/
+lemma epi_app_of_isCechAcyclicAffine {X : Scheme.{u}}
+    {S : ShortComplex (Sheaf (ProEt.topology X) A)} (hS : S.ShortExact)
+    (h₁ : IsCechAcyclicAffine A X S.X₁) (U : X.AffineProEt) :
+    Epi (S.g.hom.app (op ((AffineProEt.toProEt X).obj U))) := by
+  obtain ⟨W, q, hq, hW⟩ := AffineProEt.exists_surjective_isFinitelyContractible U
+  have : HasLimitsOfSize.{u, u + 1} A := hasLimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
+  have := hS.epi_g
+  exact Arrow.epi_app_right_of_exactAt_cechComplex_one
+    (f := Arrow.mk ((AffineProEt.toProEt X).map q))
+    hS (AffineProEt.generate_singleton_toProEt_map_mem q hq) (h₁ q hq hW 0)
+    (GrothendieckTopology.epi_app_of_isFinitelyContractible S.g hW)
+
+variable {A} in
+lemma isCechAcyclicAffine_X₃ {X : Scheme.{u}} {S : ShortComplex (Sheaf (ProEt.topology X) A)}
+    (hS : S.ShortExact) (h₁ : IsCechAcyclicAffine A X S.X₁) (h₂ : IsCechAcyclicAffine A X S.X₂) :
+    IsCechAcyclicAffine A X S.X₃ := by
+  intro W U q hq hW n
+  refine Arrow.exactAt_cechComplex_X₃ hS (fun k ↦ ?_) (h₁ q hq hW) (h₂ q hq hW) n
+  exact epi_app_of_isCechAcyclicAffine hS h₁
+    (AffineProEt.ofProEt _ (AffineProEt.proAffineEtale_cechNerve_hom q k))
+
+lemma isCechAcyclicAffine_of_injective (X : Scheme.{u}) (I : Sheaf (ProEt.topology X) A)
+    [Injective I] : IsCechAcyclicAffine A X I := by
+  intro W U q _ _ n
+  have : (presheafToSheaf (ProEt.topology X) A).PreservesHomology := {}
+  exact Arrow.exactAt_cechComplex_of_adjunction _ (sheafificationAdjunction _ A) I n
+
+lemma isCechAcyclicAffine_comparisonUpperStar_obj (X : Scheme.{u})
+    (I : Sheaf X.smallEtaleTopology A) [Injective I] :
+    IsCechAcyclicAffine A X ((comparisonUpperStar A X).obj I) :=
+  fun _ _ q _ _ n ↦ exactAt_cechComplex_comparisonUpperStar_obj A I q n
+
+variable {A} in
+/-- The restriction `ν_*` sends a short exact sequence `0 ⟶ G₁ ⟶ G₂ ⟶ G₃ ⟶ 0` with `G₁` Čech
+acyclic on the affine pro-étale site to an epimorphism `ν_* G₂ ⟶ ν_* G₃`: it is so on sections
+over affine étale `X`-schemes, which form a dense subsite. -/
+lemma epi_comparisonLowerStar_map_of_isCechAcyclicAffine {X : Scheme.{u}}
+    {S : ShortComplex (Sheaf (ProEt.topology X) A)} (hS : S.ShortExact)
+    (h₁ : IsCechAcyclicAffine A X S.X₁) : Epi ((comparisonLowerStar A X).map S.g) :=
+  Sheaf.epi_of_epi_app_obj (AffineEtale.Spec X) _ fun Y ↦
+    epi_app_of_isCechAcyclicAffine hS h₁ ((AffineEtale.toAffineProEt X).obj Y)
+
 /-- Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
 finite level
 
@@ -107,13 +164,51 @@ and invertibility of the unit `F ⟶ ν_* ν^* F`, are
 theorem rightAcyclic_comparisonUpperStar_obj_of_injective (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology A)
     [Injective I] : ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) :=
-  sorry
+  Functor.rightAcyclic_of_epi_map_g _ (IsCechAcyclicAffine A X)
+    (fun J _ ↦ isCechAcyclicAffine_of_injective A X J)
+    (fun _ hS h₁ h₂ ↦ isCechAcyclicAffine_X₃ hS h₁ h₂)
+    (fun _ hS h₁ ↦ epi_comparisonLowerStar_map_of_isCechAcyclicAffine hS h₁)
+    (isCechAcyclicAffine_comparisonUpperStar_obj A X I)
 
 /-- The global sections functor of the small pro-étale site: the sections over the terminal
 object. -/
 noncomputable abbrev globalSectionsFunctor (X : Scheme.{u}) :
     Sheaf (ProEt.topology X) A ⥤ A :=
   sectionsFunctor A (MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem _ X))
+
+/-- Blueprint `lem-weil-pbc-proetale-restriction-injectives`: Pro-étale localization preserves
+injectives.
+
+For `T` an object of the small pro-étale site of `X`, the derived sections over `T`, computed
+in sheaves on `X_proét`, are the derived global sections on `T_proét` of the pullback: the
+pullback `ProEtale.upperStar A T.hom` is the restriction to the localization `T_proét` of
+`X_proét`, which is exact (`AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction`) and
+preserves injectives, having an exact left adjoint
+(`AlgebraicGeometry.ProEtale.injective_upperStar_obj_of_weaklyEtale`). -/
+noncomputable def sectionsFunctorRightDerivedIso {X : Scheme.{u}} (T : X.ProEt) (q : ℕ) :
+    (sectionsFunctor A T).rightDerived q ≅
+      ProEtale.upperStar A T.hom ⋙ (globalSectionsFunctor A T.left).rightDerived q := by
+  have hT : WeaklyEtale T.hom := T.prop
+  let j := ProEtale.localizationRestriction A T.hom hT
+  -- `T` is the image of the terminal object of `T_proét` under the localization functor
+  let e : T ≅ (MorphismProperty.Over.map ⊤ hT).obj
+      (MorphismProperty.Over.mk ⊤ (𝟙 T.left) (MorphismProperty.id_mem _ T.left)) :=
+    MorphismProperty.Over.isoMk (Iso.refl _) (by exact Category.id_comp _)
+  have : j.Additive := { }
+  let eΓ : sectionsFunctor A T ≅ j ⋙ globalSectionsFunctor A T.left :=
+    NatIso.ofComponents (fun G ↦ G.obj.mapIso e.op) (fun φ ↦ (φ.hom.naturality e.inv.op).symm)
+  let eR : (sectionsFunctor A T).rightDerived q ≅
+      (j ⋙ globalSectionsFunctor A T.left).rightDerived q :=
+    { hom := NatTrans.rightDerived eΓ.hom q
+      inv := NatTrans.rightDerived eΓ.inv q
+      hom_inv_id := by rw [← NatTrans.rightDerived_comp, eΓ.hom_inv_id, NatTrans.rightDerived_id]
+      inv_hom_id := by rw [← NatTrans.rightDerived_comp, eΓ.inv_hom_id, NatTrans.rightDerived_id] }
+  have : PreservesFiniteColimits j :=
+    preservesFiniteColimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
+  have : PreservesFiniteLimits j :=
+    preservesFiniteLimits_of_natIso (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT)
+  exact eR ≪≫ Functor.rightDerivedCompIsoOfExact j (globalSectionsFunctor A T.left) q ≪≫
+    Functor.isoWhiskerRight (ProEtale.upperStarIsoLocalizationRestriction A T.hom hT).symm _
 
 /-- **Derived sections over an object of the pro-étale site.** For `T` an object of the small
 pro-étale site of `X`, the derived sections over `T` of a pro-étale sheaf `G` on `X` are the
@@ -200,6 +295,55 @@ lemma isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar_obj (X : Sch
     ((Etale.sectionsFunctor A X).singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
       q).app M)
   exact h
+
+/-- Blueprint `lem-weil-pbc-cech-criterion`: Injectives and the Čech acyclicity criterion.
+
+Injective pro-étale sheaves have exact Čech complexes in positive degrees
+(`AlgebraicGeometry.ProEtale.isCechAcyclicAffine_of_injective`). Conversely, if the Čech
+complexes of a pro-étale sheaf `G` along all surjections `W ⟶ U` of the affine pro-étale site
+with finitely contractible source are exact in positive degrees (these coverings refine every
+covering of an affine pro-étale object), then `H^q(U, G) = 0` for every object `U` of the affine
+pro-étale site and `q > 0`. The proof is the dimension shifting argument of Stacks 03F9, with
+general coefficients: `Functor.rightAcyclic_of_epi_map_g`. -/
+theorem rightAcyclic_sectionsFunctor_of_isCechAcyclicAffine {X : Scheme.{u}}
+    (G : Sheaf (ProEt.topology X) A) (hG : IsCechAcyclicAffine A X G) (U : X.AffineProEt) :
+    (sectionsFunctor A ((AffineProEt.toProEt X).obj U)).rightAcyclic G :=
+  Functor.rightAcyclic_of_epi_map_g _ (IsCechAcyclicAffine A X)
+    (fun J _ ↦ isCechAcyclicAffine_of_injective A X J)
+    (fun _ hS h₁ h₂ ↦ isCechAcyclicAffine_X₃ hS h₁ h₂)
+    (fun _ hS h₁ ↦ epi_app_of_isCechAcyclicAffine hS h₁ U) hG
+
+/-- Blueprint `lem-weil-pbc-comparison-injective-acyclicity`: Acyclicity of the pulled-back
+étale injectives.
+
+For an injective étale sheaf `I`, the higher derived sections of `ν^* I` over every object `U`
+of the affine pro-étale site vanish. By `AlgebraicGeometry.ProEtale.sectionsFunctorRightDerivedIso`
+these are the higher derived global sections of the restriction of `ν^* I` to `U_proét`. -/
+theorem rightAcyclic_sectionsFunctor_comparisonUpperStar_obj (X : Scheme.{u})
+    (I : Sheaf X.smallEtaleTopology A) [Injective I] (U : X.AffineProEt) :
+    (sectionsFunctor A ((AffineProEt.toProEt X).obj U)).rightAcyclic
+      ((comparisonUpperStar A X).obj I) :=
+  rightAcyclic_sectionsFunctor_of_isCechAcyclicAffine A _
+    (isCechAcyclicAffine_comparisonUpperStar_obj A X I) U
+
+/-- Blueprint `thm-weil-pbc-site-comparison`: Bounded-below site comparison.
+
+The unit `K ⟶ Rν_* ν^* K` of the bounded below derived adjunction `ν^* ⊣ Rν_*` is an
+isomorphism. -/
+theorem isIso_comparisonAdjunction_derivedPlus_unit (X : Scheme.{u}) :
+    IsIso (comparisonAdjunction A X).derivedPlus.unit := by
+  have := isIso_comparisonAdjunction_unit A X
+  rw [NatTrans.isIso_iff_isIso_app]
+  exact (comparisonAdjunction A X).isIso_derivedPlus_unit_app_of_rightAcyclic
+    (fun _ _ ↦ inferInstance) (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A X I)
+
+/-- Blueprint `thm-weil-pbc-site-comparison`: Bounded-below site comparison.
+
+The comparison pullback `ν^* : D⁺(X_ét, A) ⥤ D⁺(X_proét, A)` is fully faithful. -/
+noncomputable def comparisonUpperStarMapDerivedCategoryPlusFullyFaithful (X : Scheme.{u}) :
+    (comparisonUpperStar A X).mapDerivedCategoryPlus.FullyFaithful :=
+  have := isIso_comparisonAdjunction_derivedPlus_unit A X
+  (comparisonAdjunction A X).derivedPlus.fullyFaithfulLOfIsIsoUnit
 
 end Acyclicity
 

@@ -69,7 +69,8 @@ variable {𝔇 : BaseChangeSquare 𝒳 𝒴 𝒳' 𝒴'} {𝔗 : BaseChangeSquar
 
 @[reassoc]
 lemma arrowH_app (K : 𝒳) : ρ.arrowH.app K = 𝔗.upperG.map (ρ.projF.natTrans.app K) := by
-  simp [arrowH]
+  dsimp [arrowH]
+  rw [Category.id_comp, Category.comp_id]
 
 @[reassoc]
 lemma arrowV_app (K : 𝒳) :
@@ -168,14 +169,13 @@ of `H` followed by `V'` (the limits of the projection-formula maps `h_n` and of 
 finite-level exchange maps `v'_n = Ex_{□, K_n}`), followed by the inverse of the
 direct-image/limit commutation. -/
 def completedExchange :
-    𝔇.lowerF ⋙ 𝔠.completedPullback ⟶ 𝔠.completedPullback' ⋙ 𝔇.lowerF' where
-  app K := 𝔠.limY'.rlim.map (𝔠.towerExchange.app K) ≫
-    𝔠.lowerLim.inv.app ((𝔗.upperG').obj (𝔠.ρ.redX.obj K))
-  naturality K L φ := by
-    have h₁ := 𝔠.towerExchange.naturality φ
-    have h₂ := 𝔠.lowerLim.inv.naturality ((𝔗.upperG').map (𝔠.ρ.redX.map φ))
-    dsimp [completedPullback, completedPullback', Reduction.cornerA, Reduction.cornerD] at h₁ h₂ ⊢
-    rw [Category.assoc, ← h₂, ← Functor.map_comp_assoc, ← h₁, Functor.map_comp_assoc]
+    𝔇.lowerF ⋙ 𝔠.completedPullback ⟶ 𝔠.completedPullback' ⋙ 𝔇.lowerF' :=
+  Functor.whiskerRight 𝔠.towerExchange 𝔠.limY'.rlim ≫
+    Functor.whiskerLeft (𝔠.ρ.redX ⋙ 𝔗.upperG') 𝔠.lowerLim.inv
+
+lemma completedExchange_app' (K : 𝒳) :
+    𝔠.completedExchange.app K = 𝔠.limY'.rlim.map (𝔠.towerExchange.app K) ≫
+      𝔠.lowerLim.inv.app ((𝔗.upperG').obj (𝔠.ρ.redX.obj K)) := rfl
 
 /-- The components of the completed base change map: `Ex^comp_K = t ∘ R lim (v' ∘ h)`
 (Blueprint `def-weil-pbc-completed-frobenius-structures`: `Ex^comp = t W s` with `s = 𝟙`,
@@ -184,7 +184,7 @@ lemma completedExchange_app (K : 𝒳) :
     𝔠.completedExchange.app K = 𝔠.limY'.rlim.map (𝔠.ρ.arrowH.app K) ≫
       𝔠.limY'.rlim.map (𝔠.ρ.arrowV'.app K) ≫
         𝔠.lowerLim.inv.app ((𝔗.upperG').obj (𝔠.ρ.redX.obj K)) := by
-  simp [completedExchange, towerExchange]
+  rw [completedExchange_app', towerExchange, NatTrans.comp_app, Functor.map_comp, Category.assoc]
 
 /-- The completed base change map is also the limit of `h' ∘ v` (the limit rectangle
 `V' H = H' V`, Blueprint `lem-weil-pbc-rectangle-derived-limit`). -/
@@ -192,7 +192,8 @@ lemma completedExchange_app_eq (K : 𝒳) :
     𝔠.completedExchange.app K = 𝔠.limY'.rlim.map (𝔠.ρ.arrowV.app K) ≫
       𝔠.limY'.rlim.map (𝔠.ρ.arrowH'.app K) ≫
         𝔠.lowerLim.inv.app ((𝔗.upperG').obj (𝔠.ρ.redX.obj K)) := by
-  simp [completedExchange, towerExchange_eq]
+  rw [completedExchange_app', towerExchange_eq, NatTrans.comp_app, Functor.map_comp,
+    Category.assoc]
 
 /-- **Abstract complete proper base change** (the core of Blueprint
 `thm-weil-pbc-complete-proetale`): if at every level `n` the evaluations of the
@@ -207,7 +208,7 @@ theorem isIso_completedExchange_app_of_forall (K : 𝒳)
       simp only [towerExchange, NatTrans.comp_app, Functor.map_comp]
       have := hH n; have := hV' n
       infer_instance
-  dsimp [completedExchange]
+  rw [completedExchange_app']
   infer_instance
 
 end CompletionDatum
