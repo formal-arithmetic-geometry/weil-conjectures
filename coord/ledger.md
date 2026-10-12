@@ -7702,3 +7702,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:17 L: merged deliver/R3/Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeGeometry (stage 3; reviewer PASS; first push; landing 20261012T131745-L-1392371 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 13:19 L: merged deliver/S1/Sheaf.Paper.ZariskiEtalePushedResolution (stage 3; reviewer PASS; first push; landing 20261012T131917-L-1402366 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 13:20 L: merged deliver/S3/Sheaf.AlgebraicGeometry.AffineEtaleCartesianSheafAdjunction (stage 3; reviewer PASS; first push; landing 20261012T132034-L-1411087 (interface); batch 20261012T120425; modules 2; new nodes 1)
+- 13:21 L: merged deliver/T1/Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic (stage 3; reviewer PASS; after a return; landing 20261012T132138-L-1417565 (interface); batch 20261012T120425; modules 2; new nodes 1)

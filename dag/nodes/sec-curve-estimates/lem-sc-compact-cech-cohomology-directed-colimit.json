@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-compact-cech-cohomology-directed-colimit",
+ "kind": "statement",
+ "title": "Finite compact Cech cohomology preserves directed colimits",
+ "statement": "Let X be a topological space with a basis of compact opens and compact pairwise intersections of compact opens. Let f be a finite family of opens, with maps to an open U, and S a SiteCechComplex for this family as in [def-weil-pbc-site-cech-complex]. Assume every chosen nonempty finite intersection S.W p a is compact. For a nonempty directed preorder I in the same universe as X and any diagram F of abelian sheaves indexed by I itself, the functor taking a sheaf to its degree-p Cech cohomology for S preserves the colimit of F, for every natural p. No covering or injectivity assumption on F is needed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01FF, comparison of finite Cech complexes with directed colimits in its proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "At each compact chosen intersection, apply compact-open section preservation. The space-wide compact basis and intersection assumptions supply the finite compact refinements needed for section gluing.",
+   "uses": [
+    "lem-sc-topological-abelian-sections-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree k the tuple set Fin (k+1) -> T is finite. Finite products commute with filtered colimits of abelian groups. Naturality of section comparisons with restrictions makes these degreewise isomorphisms commute with differentials and the colimit cocone legs. This identifies the Cech complex of the sheaf colimit with the degreewise colimit complex.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Filtered colimits of abelian groups are exact, so homology commutes with this colimit. The isomorphism respects cocone legs and proves preservation of the diagram colimit by Cech cohomology. The empty family gives zero in every degree.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-topological-abelian-sections-filtered-colimit",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01FF; separated termwise comparison and exact-colimit step by T1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite Cech cohomology of sheaves preserves directed colimits when evaluation at intersections preserves colimits",
+   "results": "Sheaf finite colimits and coherent-site pointwise colimits; no compact Cech comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimit, CategoryTheory.Limits.lim",
+   "results": "General preservation and limit API; no compact Cech cohomology theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor.*[Cc]olimit|[Cc]olimit.*homologyFunctor",
+   "results": "No direct Mathlib Cech colimit theorem. HomologicalComplexLimits provides evaluation and degreewise colimits; Grp.AB provides exact filtered colimits.",
+   "date": "2026-10-12",
+   "verdict": "supporting results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite Cech cohomology of sheaves preserves directed colimits when evaluation at intersections preserves colimits",
+   "results": "Service unavailable: Internal Server Error; no search results obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-directed-injective-derived-sections-acyclic",
+   "place": "proof steps 2 and filtered-homology portion of step 3"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.CompactCechDirectedColimit",
+  "file": "lean/Sheaf/Topology/CompactCechDirectedColimit.lean",
+  "declaration": "CategoryTheory.Sheaf.compact_siteCech_cohomology_preserves_directedColimit",
+  "statement": "theorem compact_siteCech_cohomology_preserves_directedColimit\n    (X : Type u) [TopologicalSpace X]\n    (hbas : ∀ (V : Set X), IsOpen V → ∀ x ∈ V, ∃ W : Set X, IsOpen W ∧\n      IsCompact W ∧ x ∈ W ∧ W ⊆ V)\n    (hint : ∀ (V W : Set X), IsOpen V → IsOpen W → IsCompact V → IsCompact W →\n      IsCompact (V ∩ W))\n    {T : Type u} [Finite T] {U : TopologicalSpace.Opens X}\n    {f : T → TopologicalSpace.Opens X} {hom : ∀ t, f t ⟶ U}\n    (S : SiteCechComplex f hom)\n    (hcompact : ∀ (p : ℕ) (a : Fin (p + 1) → T),\n      IsCompact ((S.W p a : TopologicalSpace.Opens X) : Set X))\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})\n    (p : ℕ) :\n    PreservesColimit F\n      (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙\n        S.cohomologyFunctor p)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T132138-L-1417565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T132138-L-1417565",
+  "kind": "interface"
+ }
+}
