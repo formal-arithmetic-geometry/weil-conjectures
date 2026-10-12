@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.Prime
 
+import Mathlib.RingTheory.Ideal.GoingUp
+
 /-!
 # Unique primes in a finite purely inseparable integral extension
 
@@ -48,4 +50,48 @@ theorem purelyInseparable_integral_prime_unique
     [Module.Finite K L] [IsPurelyInseparable K L]
     (p : Ideal A) [p.IsPrime] :
     ∃! q : Ideal B, q.IsPrime ∧ q.comap (algebraMap A B) = p := by
-  sorry
+  have hAB : Function.Injective (algebraMap A B) := by
+    intro a a' haa
+    apply IsFractionRing.injective A K
+    apply (algebraMap K L).injective
+    simpa only [← IsScalarTower.algebraMap_apply A B L,
+      ← IsScalarTower.algebraMap_apply A K L] using
+      congrArg (algebraMap B L) haa
+  have hpowers : ∀ b : B, ∃ n > 0, b ^ n ∈ (algebraMap A B).range := by
+    intro b
+    obtain ⟨e, he⟩ := ExpChar.exists K
+    obtain ⟨n, c, hc⟩ := IsPurelyInseparable.pow_mem K e (algebraMap B L b)
+    have hintL : IsIntegral A (algebraMap K L c) := by
+      rw [hc, ← map_pow]
+      exact (IsIntegral.of_finite A (b ^ e ^ n)).map (IsScalarTower.toAlgHom A B L)
+    have hintK : IsIntegral A c :=
+      (isIntegral_algebraMap_iff (algebraMap K L).injective).mp hintL
+    obtain ⟨a, ha⟩ := IsIntegrallyClosed.isIntegral_iff.mp hintK
+    refine ⟨e ^ n, expChar_pow_pos K e n, a, ?_⟩
+    apply IsFractionRing.injective B L
+    rw [← IsScalarTower.algebraMap_apply A B L, IsScalarTower.algebraMap_apply A K L,
+      ha, hc, map_pow]
+  obtain ⟨q, hq, hqp⟩ :=
+    Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain (S := B) p
+      (by rw [(RingHom.injective_iff_ker_eq_bot _).mp hAB]; exact bot_le)
+  refine ⟨q, ⟨hq, hqp⟩, ?_⟩
+  intro q' hq'
+  apply le_antisymm
+  · intro b hb
+    obtain ⟨n, hn, a, ha⟩ := hpowers b
+    apply (hq.pow_mem_iff_mem n hn).mp
+    rw [← ha]
+    change a ∈ q.comap (algebraMap A B)
+    rw [hqp, ← hq'.2]
+    change algebraMap A B a ∈ q'
+    rw [ha]
+    exact (hq'.1.pow_mem_iff_mem n hn).mpr hb
+  · intro b hb
+    obtain ⟨n, hn, a, ha⟩ := hpowers b
+    apply (hq'.1.pow_mem_iff_mem n hn).mp
+    rw [← ha]
+    change a ∈ q'.comap (algebraMap A B)
+    rw [hq'.2, ← hqp]
+    change algebraMap A B a ∈ q
+    rw [ha]
+    exact (hq.pow_mem_iff_mem n hn).mpr hb
