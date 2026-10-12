@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite
-import Mathlib.RingTheory.Noetherian.Basic
+import Sheaf.Algebra.Module.ReesKernelGenerators
 
 @[expose] public section
 
@@ -58,6 +58,98 @@ theorem cohomology_powers_ideal_kernel_bound
               ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map
             ((RingedSpace.moduleCohomology X.toRingedSpace q).map
               (i n (n - c) (Nat.sub_le n c)))).hom) := by
-  sorry
+  classical
+  let G := fun n ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F
+  let j := fun n ↦ Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F
+  let H := RingedSpace.moduleCohomology X.toRingedSpace q ⋙
+    ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom
+  let M := fun n ↦ (H.obj (G n) : Type v)
+  let t := fun (k n : ℕ) (h : n ≤ k) ↦ (H.map (i k n h)).hom
+  have hj (n : ℕ) : Mono (j n) := by
+    dsimp [j, Scheme.idealModuleProductι]
+    let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+    infer_instance
+  have icomp (k m n : ℕ) (hm : m ≤ k) (hn : n ≤ m) :
+      i k m hm ≫ i m n hn = i k n (hn.trans hm) := by
+    let := hj n
+    apply (cancel_mono (j n)).1
+    change (i k m hm ≫ i m n hn) ≫
+      Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F =
+      i k n (hn.trans hm) ≫
+        Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F
+    rw [Category.assoc, hi, hi, hi]
+  have tcomp (k m n : ℕ) (hm : m ≤ k) (hn : n ≤ m) (x : M k) :
+      t m n hn (t k m hm x) = t k n (hn.trans hm) x := by
+    have he := congrArg H.map (icomp k m n hm hn)
+    rw [H.map_comp] at he
+    exact CategoryTheory.congr_fun he x
+  obtain ⟨lam, hsection, _, mod, hfin, hact⟩ :=
+    cohomology_powers_ideal_rees_finite f I J hJ F hF q
+  let mu := fun (k m : ℕ) (a : A) (ha : a ∈ I ^ k) ↦ (H.map (lam k m a ha)).hom
+  have compat (k m : ℕ) (a : A) (ha : a ∈ I ^ k) :
+      lam k m a ha ≫ i (m + k) (0 + k) (by omega) =
+        i m 0 (Nat.zero_le m) ≫ lam k 0 a ha := by
+    let := hj (0 + k)
+    apply (cancel_mono (j (0 + k))).1
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    ext s
+    have hleft := CategoryTheory.congr_fun
+      (congrArg (fun g ↦ g.val.app U) (hi (m + k) (0 + k) (by omega)))
+      ((lam k m a ha).val.app U s)
+    have hright := CategoryTheory.congr_fun
+      (congrArg (fun g ↦ g.val.app U) (hi m 0 (Nat.zero_le m))) s
+    change (j (0 + k)).val.app U
+      ((i (m + k) (0 + k) _).val.app U ((lam k m a ha).val.app U s)) =
+      (j (0 + k)).val.app U ((lam k 0 a ha).val.app U ((i m 0 (Nat.zero_le m)).val.app U s))
+    change (j (0 + k)).val.app U
+      ((i (m + k) (0 + k) _).val.app U ((lam k m a ha).val.app U s)) =
+      (j (m + k)).val.app U ((lam k m a ha).val.app U s) at hleft
+    change (j 0).val.app U ((i m 0 (Nat.zero_le m)).val.app U s) = (j m).val.app U s at hright
+    rw [hleft]
+    have hl := hsection k m a ha U.unop s
+    have hr := hsection k 0 a ha U.unop ((i m 0 (Nat.zero_le m)).val.app U s)
+    change (j (m + k)).val.app U ((lam k m a ha).val.app U s) =
+      (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.unop le_top).hom a) •
+        (j m).val.app U s at hl
+    change (j (0 + k)).val.app U ((lam k 0 a ha).val.app U
+      ((i m 0 (Nat.zero_le m)).val.app U s)) =
+      (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.unop le_top).hom a) •
+        (j 0).val.app U ((i m 0 (Nat.zero_le m)).val.app U s) at hr
+    rw [hl, hr, hright]
+  have mucompat (k m : ℕ) (a : A) (ha : a ∈ I ^ k) (x : M m) :
+      t (m + k) (0 + k) (by omega) (mu k m a ha x) =
+        mu k 0 a ha (t m 0 (Nat.zero_le m) x) := by
+    have he := congrArg H.map (compat k m a ha)
+    simp only [H.map_comp] at he
+    exact CategoryTheory.congr_fun he x
+  let K := fun n ↦ LinearMap.ker (t n 0 (Nat.zero_le n))
+  have hK (k m : ℕ) (a : A) (ha : a ∈ I ^ k) (y : M m) (hy : y ∈ K m) :
+      mu k m a ha y ∈ K (m + k) := by
+    change t (m + k) 0 _ (mu k m a ha y) = 0
+    rw [← tcomp (m + k) (0 + k) 0 (by omega) (Nat.zero_le (0 + k)), mucompat]
+    change t m 0 _ y = 0 at hy
+    rw [hy, map_zero, map_zero]
+  obtain ⟨c0, hgen⟩ := ReesAlgebra.bounded_generators A I M mu mod hfin hact K hK
+  refine ⟨c0, fun c hc n hn ↦ ?_⟩
+  change K n = LinearMap.ker (t n (n - c) (Nat.sub_le n c))
+  apply le_antisymm
+  · apply le_trans (hgen n)
+    apply Submodule.span_le.mpr
+    intro z hz
+    obtain ⟨d, k, he, hd, a, ha, y, hy, rfl⟩ := hz
+    subst n
+    have htarget : d + k - c ≤ 0 + k := by omega
+    change t (d + k) (d + k - c) _ (mu k d a ha y) = 0
+    rw [← tcomp (d + k) (0 + k) (d + k - c) (by omega) htarget,
+      mucompat]
+    change t d 0 _ y = 0 at hy
+    rw [hy, map_zero, map_zero]
+  · intro x hx
+    change t n 0 _ x = 0
+    rw [← tcomp n (n - c) 0 (Nat.sub_le n c) (Nat.zero_le (n - c))]
+    change t n (n - c) _ x = 0 at hx
+    rw [hx, map_zero]
 
 end AlgebraicGeometry
