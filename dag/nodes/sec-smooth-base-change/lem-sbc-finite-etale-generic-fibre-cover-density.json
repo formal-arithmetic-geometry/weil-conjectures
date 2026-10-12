@@ -1,0 +1,105 @@
+{
+ "id": "lem-sbc-finite-etale-generic-fibre-cover-density",
+ "kind": "statement",
+ "title": "Reducedness and dominance for generic restrictions of smooth covers",
+ "statement": "Let S be an integral scheme, c:C → S smooth, and q:Cη → Spec K, j:Cη → C a cartesian generic fibre, with K the function field of S. For any etale πX:X → C and its cartesian restriction πXη:Xη → Cη with comparison ψX:Xη → X, X is reduced and ψX is dominant. Neither finiteness, normality, nor connectedness is required. The empty case is included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 033B and 01UA"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The composite X → C → S is smooth, hence flat with geometrically reduced\nfibres. On affine charts its ring maps are smooth over reduced rings, so the\nsource rings are reduced by 033B; localizing gives reduced stalks and hence X.\nFor density take any nonempty open subset of X. The smooth composite maps it\nto a nonempty open of S by 01UA, which contains the generic point since S is\nintegral. A point over that generic point lifts to the generic fibre: the\nspectrum of S's generic stalk is the one-point spectrum of its function field,\nand the cartesian pullback has a point over every compatible pair of points.\nPasting the two given squares identifies this fibre with Xη. Hence every\nnonempty open of X meets the image of ψX. This proves dominance, including\nwhen X is empty, where the empty image is dense.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "M2",
+  "document": "Stacks Project",
+  "place": "Tags 033B and 01UA",
+  "note": "Expanded the source argument; mathematical input not yet formalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A smooth scheme over a reduced base is reduced and its generic fibre over an integral base is dense",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme over a reduced base is reduced and its generic fibre over an integral base is dense",
+   "results": "IsIntegral implies IsReduced, and reduced open immersions; no smooth-over-integral-base result.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isReduced.*Smooth|Flat.generalizingMap|range_fst in Mathlib and WeilConjectures",
+   "results": "Flat.generalizingMap and pullback point lifting are present; smooth reducedness only over fields in the source library, not this general base.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtension",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "proof: extension of the group action and faithfulness of the generic-fibre restriction",
+   "via": [
+    "lem-sbc-finite-etale-generic-fibre-hom-extension",
+    "lem-sbc-generic-fibre-action-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GenericFibreCoverDensity",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GenericFibreCoverDensity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.genericFibre_cover_reduced_and_dominant",
+  "statement": "theorem genericFibre_cover_reduced_and_dominant {S C : Scheme.{u}} [IsIntegral S]\n    (c : C ⟶ S) [Smooth c]\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    {X Xη : Scheme.{u}} (πX : X ⟶ C) [Etale πX]\n    (πXη : Xη ⟶ Cη) (ψX : Xη ⟶ X)\n    (hX : IsPullback ψX πXη πX j) : IsReduced X ∧ IsDominant ψX",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T095914-L-320964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T095914-L-320964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

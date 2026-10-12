@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtensionExistence
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreCoverDensity
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Full faithfulness of generic-fibre restriction for finite étale covers
@@ -51,6 +54,16 @@ theorem finiteEtale_genericFibre_hom_extension {S C : Scheme.{u}}
     (πXη : Xη ⟶ Cη) (πYη : Yη ⟶ Cη) (ψX : Xη ⟶ X) (ψY : Yη ⟶ Y)
     (hX : IsPullback ψX πXη πX j) (hY : IsPullback ψY πYη πY j)
     (fη : Xη ⟶ Yη) (hfη : fη ≫ πYη = πXη) :
-    ∃! f : X ⟶ Y, f ≫ πY = πX ∧ ψX ≫ f = fη ≫ ψY := by sorry
+    ∃! f : X ⟶ Y, f ≫ πY = πX ∧ ψX ≫ f = fη ≫ ψY := by
+  obtain ⟨f, hf⟩ := finiteEtale_genericFibre_hom_extension_exists hS c q j hCη
+    πX πY πXη πYη ψX ψY hX hY fη hfη
+  refine ⟨f, hf, ?_⟩
+  intro g hg
+  obtain ⟨hred, hdom⟩ := genericFibre_cover_reduced_and_dominant c q j hCη
+    πX πXη ψX hX
+  let : IsReduced X := hred
+  let : IsDominant ψX := hdom
+  exact AlgebraicGeometry.ext_of_isDominant_of_isSeparated πY (hg.1.trans hf.1.symm)
+    ψX (hg.2.trans hf.2.symm)
 
 end AlgebraicGeometry.Scheme

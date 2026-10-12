@@ -15,23 +15,30 @@
  ],
  "proof": [
   {
-   "text": "If C is empty, all covers and their generic restrictions are empty, and the unique empty-scheme morphism proves the conclusion. Otherwise smoothness over a normal base makes C normal. Smooth geometrically connected nonempty fibres are geometrically integral. Smoothness is open, so the nonempty image of C in the integral base contains its generic point. Thus the generic fibre is nonempty and integral. Flatness over the integral base makes that fibre dense, so C is irreducible, hence integral. Its generic point lies in Cη, which is also normal integral.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply the existence lemma to obtain f over C with the specified compatibility.",
+   "uses": [
+    "lem-sbc-finite-etale-generic-fibre-hom-extension-existence"
+   ],
+   "elementary": true
   },
   {
-   "text": "Restrict the given fη to the generic point of C, which is also the generic point of Cη. Full faithfulness of finite etale restriction to the generic point of a normal integral scheme (0BQM) gives a unique morphism f:X → Y over C. Restrict f to Cη using the cartesian comparison maps. This restricted map and fη have equal restrictions to the generic point, so faithfulness of 0BQM applied to Cη shows equality. This is precisely ψX;f=fη;ψY. The same faithfulness on C proves uniqueness. The category in 0BQM includes disconnected finite etale covers, so no component-connectedness hypothesis is needed.",
-   "uses": [],
-   "elementary": false
+   "text": "For any other extension g, the geometric lemma gives IsReduced X and IsDominant ψX. The finite morphism πY is separated. Apply Mathlib ext_of_isDominant_of_isSeparated to πY and ψX; the two base equations imply g;πY=f;πY, and the compatibility equations imply ψX;g=ψX;f. Thus g=f, providing the uniqueness part of ExistsUnique.",
+   "uses": [
+    "lem-sbc-finite-etale-generic-fibre-cover-density"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-finite-etale-generic-fibre-hom-extension-existence",
+  "lem-sbc-finite-etale-generic-fibre-cover-density"
+ ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "G3",
-  "document": "Stacks Project",
-  "place": "Tag 0BQM, proof; Tag 0EYJ, proof",
-  "note": "Expanded the generic-point full faithfulness argument and wrote the categorical assembly explicitly."
+  "by": "M2",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 0BQM; Mathlib.AlgebraicGeometry.Morphisms.Separated.ext_of_isDominant_of_isSeparated",
+  "note": "Lean assembly of extension existence with reduced-source, dominant-map uniqueness. The main declaration contains no sorry; two strictly partial obligations remain."
  },
  "mathlib_searches": [
   {
@@ -120,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T085243-L-16570",
+  "landing": "20261012T095914-L-320964",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

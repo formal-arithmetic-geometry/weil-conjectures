@@ -1,0 +1,106 @@
+{
+ "id": "lem-sbc-finite-etale-generic-fibre-hom-extension-existence",
+ "kind": "statement",
+ "title": "Existence of morphism extensions from the generic fibre",
+ "statement": "Let S be integral with integrally closed local rings, c:C → S smooth with geometrically connected fibres, and q:Cη → Spec K, j:Cη → C its cartesian generic fibre, where K is the function field of S [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms, def-pc-fibre-product]. Let πX:X → C and πY:Y → C be finite etale morphisms. Let πXη:Xη → Cη, πYη:Yη → Cη and ψX:Xη → X, ψY:Yη → Y exhibit their cartesian restrictions. Every morphism fη:Xη → Yη over Cη extends to a morphism f:X → Y over C, with ψX;f=fη;ψY. Uniqueness is not asserted. No connectedness of X or Y is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0BQM, fullness and faithfulness in the proof; Tags 034F, 056T, 01UA"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "If C is empty then X and Y are empty, and there is a unique morphism\nbetween them. Otherwise smoothness over the normal base makes C normal (034F).\nIts nonempty smooth geometrically connected fibres are geometrically integral\n(056T: geometric regularity implies geometric normality and reducedness; a\nconnected normal scheme over a field is integral). Smoothness is open (01UA),\nso the image of C contains the generic point of S. Flatness makes the generic\nfibre dense, and its integrality makes C irreducible and hence integral.\nThe generic point of C belongs to Cη, which is normal integral as well.\nRestrict fη to that point. Fullness of finite étale restriction for the normal\nintegral C (0BQM) extends the resulting morphism to f over C. The pullback\nuniversal property gives a restriction of f to Cη. It and fη agree at the\ncommon generic point; faithfulness for the normal integral Cη (0BQM) makes\nthem equal. Composing with ψY gives the required compatibility equation.\nNo connectedness of X or Y is used: 0BQM is a result about all finite étale\ncovers. Uniqueness of f is not asserted by this lemma.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "M2",
+  "document": "Stacks Project",
+  "place": "Tag 0BQM, fullness and faithfulness in the proof; Tags 034F, 056T, 01UA",
+  "note": "Expanded the source argument; mathematical input not yet formalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms of finite etale covers extend from the generic fibre over a normal integral scheme",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers of a normal integral scheme restriction to the generic point is fully faithful",
+   "results": "Etale.forgetFullyFaithful is a forgetful functor, not generic restriction; no extension theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*(hom|Hom)|fullyFaithful.*generic|0BQM",
+   "results": "No extension theorem; assigned module remains sorry.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtension",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "proof: extension of the group action and faithfulness of the generic-fibre restriction",
+   "via": [
+    "lem-sbc-finite-etale-generic-fibre-hom-extension",
+    "lem-sbc-generic-fibre-action-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtensionExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GenericFibreHomExtensionExistence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_genericFibre_hom_extension_exists",
+  "statement": "theorem finiteEtale_genericFibre_hom_extension_exists {S C : Scheme.{u}}\n    [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [Smooth c] [GeometricallyConnected c]\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    {X Y Xη Yη : Scheme.{u}} (πX : X ⟶ C) (πY : Y ⟶ C)\n    [IsFinite πX] [Etale πX] [IsFinite πY] [Etale πY]\n    (πXη : Xη ⟶ Cη) (πYη : Yη ⟶ Cη) (ψX : Xη ⟶ X) (ψY : Yη ⟶ Y)\n    (hX : IsPullback ψX πXη πX j) (hY : IsPullback ψY πYη πY j)\n    (fη : Xη ⟶ Yη) (hfη : fη ≫ πYη = πXη) :\n    ∃ f : X ⟶ Y, f ≫ πY = πX ∧ ψX ≫ f = fη ≫ ψY",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T095914-L-320964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T095914-L-320964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
