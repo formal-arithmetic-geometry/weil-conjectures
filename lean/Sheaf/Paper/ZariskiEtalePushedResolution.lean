@@ -12,9 +12,8 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.LocallyInjective
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.CategoryTheory.SiteExtensionByZeroExact
-import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
-import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
+import Sheaf.Paper.ZariskiEtalePushedResolutionFiniteLimits
+import Sheaf.Paper.ZariskiEtalePushedResolutionQuasiIso
 
 /-! # Injective resolutions for the Zariski-etale comparison
 
@@ -77,4 +76,7 @@ theorem zariski_etale_pushed_resolution
           (ComplexShape.up ℕ) 0).inv.app F ≫
           ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
             (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).mapHomologicalComplex
-              (ComplexShape.up ℕ)).map I.ι) := by sorry
+              (ComplexShape.up ℕ)).map I.ι) := by
+  constructor
+  · exact zariski_etale_pushed_resolution_finite_limits i hi_inclusion hi
+  · exact zariski_etale_pushed_resolution_quasi_iso i hi_inclusion hi F hvan
