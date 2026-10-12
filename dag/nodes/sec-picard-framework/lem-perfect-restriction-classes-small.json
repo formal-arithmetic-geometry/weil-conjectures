@@ -15,48 +15,62 @@
  ],
  "proof": [
   {
-   "text": "Compose the inclusion of the inverse-image open with f. Mathlib image_preimage_eq_opensRange_inf and W contained in opensRange show that this open immersion has image W. Apply the small-on-open property after constructing all derived-category structures on this open scheme and its further opens from the localized sites of Y.",
+   "text": "Put A = f⁻¹W. Regard Modules.overEquiv A as an equivalence between the shared module-sheaf categories. Transport the supplied localization on the localized site across its cochain-complex equivalence: composing the complex equivalence with Q is a localization by Functor.IsLocalization.of_equivalence_source. Its target retains morphism universe w. Supply all further localizations on A.toScheme using nonempty_derivedOpenLocalization.",
    "uses": [
-    "def-pc-perfect-classes-small-on-open",
-    "def-pc-derived-category"
+    "def-pc-derived-category",
+    "lem-pc-derived-open-localization-universe"
    ],
    "elementary": false
   },
   {
-   "text": "For each site equivalence use Modules.overEquiv and the induced derived equivalence. A standard localization on the equivalent module category is locally w-small because it is equivalent to the given localization. hasLocalizationOfLocallySmall constructs the localization in w. Further opens correspond to opens of Y contained in the inverse-image open, and iterated over sites are equivalent to the single over site at that further open.",
+   "text": "Mathlib opensRange_comp, opensRange_ι and image_preimage_eq_opensRange_inf identify the image of A.ι ≫ f with W using hW. Apply pW to this open immersion with the constructed localizations. This gives a u-small skeleton of perfect objects inside the quasi-coherent derived category of A.toScheme.",
    "uses": [
-    "def-pc-derived-category"
+    "def-pc-perfect-classes-small-on-open"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For exact restriction followed by Modules.overEquiv, Modules.overFunctorEquiv identifies the module functor with ordinary open restriction. Uniqueness of left adjoints identifies tensor pullback with the same functor. Transport finite-limit and finite-colimit preservation from the exact over functor. The IsLeftDerivedFunctor witness of exists_derivedPullback and Functor.isLeftDerivedFunctor_of_inverts show that derived pullback is isomorphic to the mapDerivedCategory of this exact composite, by leftDerivedUnique. Apply derivedPullback_preserve_perfect to A.ι and transport the perfect local witnesses through the resulting isomorphism.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-derived-pullback-perfect",
+    "def-pc-perfect-complex"
    ],
    "elementary": false
   },
   {
-   "text": "Exact restriction commutes with homology; restriction and the over-site equivalence preserve quasi-coherence. For each strictly perfect neighbourhood of E intersect with the inverse-image open, restrict its differential, boundedness and finite-free retracts, and use nested restriction comparison. Hence the restriction is a perfect quasi-coherent object on the open scheme.",
+   "text": "For a perfect quasi-coherent E, SheafOfModules.isQuasicoherent_over preserves quasi-coherence in every cohomological degree. schemeDerivedQCoh_openRestriction_iff therefore proves quasi-coherence of the exact derived restriction to A.toScheme. The derived composition comparison identifies this restriction with the derived over-equivalence applied to the localized restriction.",
    "uses": [
-    "def-pc-perfect-complex",
-    "def-pc-derived-category"
+    "def-pc-derived-category",
+    "lem-pc-derived-open-restriction-qcoh-iff"
    ],
    "elementary": false
   },
   {
-   "text": "Map the small perfect skeleton of the open scheme back to the ambient localized derived category. Every restriction class belongs to its range. The full inclusion of the restriction family induces an injection on skeletons into that small range; small_of_injective concludes, including the empty-open and identity-open cases.",
+   "text": "An object of the restriction family is isomorphic to the restriction of such an E. Transport the quasi-coherent and perfect properties across that isomorphism, using homologyFunctor.mapIso and restriction.mapIso. Lift the composite of the full inclusion and derived over-equivalence first into the quasi-coherent full subcategory and then into its perfect full subcategory. Both lifts are fully faithful. The induced map on skeletons is injective; small_of_injective into the small skeleton supplied by pW proves the conclusion. All constructions allow A empty or total.",
    "uses": [
-    "def-perfect-gluing-endpoint-properties"
+    "def-perfect-gluing-endpoint-properties",
+    "def-pc-perfect-complex"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-classes-small-on-open",
   "def-pc-derived-category",
+  "lem-pc-derived-open-localization-universe",
+  "def-pc-perfect-classes-small-on-open",
+  "def-pc-derived-pullback",
+  "lem-pc-derived-pullback-perfect",
   "def-pc-perfect-complex",
+  "lem-pc-derived-open-restriction-qcoh-iff",
   "def-perfect-gluing-endpoint-properties"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q3",
-  "date": "2026-10-12",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BV; the original affine/Mayer-Vietoris/08DR route, expressed on localized sites"
+  "group": "V3",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tag 09UA; Mathlib localization and skeleton APIs; the existing Lean proofs of DerivedOpenLocalization and DerivedOpenRestrictionQCoh",
+  "place": "Step 2 of lem-pc-perfect-complexes-compact-set: restriction classes; derived pullback comparison is a formal specialization of uniqueness of left derived functors"
  },
  "mathlib_searches": [
   {
@@ -191,10 +205,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T144139-L-2105290",
-  "kind": "interface",
+  "landing": "20261012T194151-L-468301",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
