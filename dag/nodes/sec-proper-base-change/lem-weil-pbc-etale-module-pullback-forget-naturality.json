@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-etale-module-pullback-forget-naturality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-constructible-approximation",
+   "place": "Part (2), passage to the closed fibre: the natural compatibility of module inverse image with the underlying abelian inverse image, used to identify the map induced by the chosen morphism C -> F.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Naturality of etale module pullback under forgetting coefficients",
+ "statement": "Let X and Y be schemes [def-pc-scheme], f:X→Y a morphism, and Λ a commutative ring. In the categories of constant-coefficient module sheaves [def-weil-pbc-etale-sheaves] and abelian sheaves [def-weil-pbc-abelian-etale-sheaves], let U_X and U_Y forget the module structure. There is a natural isomorphism f⁻¹_Mod ⋙ U_X ≅ U_Y ⋙ f⁻¹_Ab, where inverse image is [def-weil-pbc-inverse-image]. In particular its components commute with every module-sheaf morphism C→F. No finite coefficient, torsion, properness, or henselian hypothesis is required. Unlike an independent choice of objectwise isomorphisms, this single functor isomorphism supplies the commuting square needed on cohomology.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 (lemma-pullback-pushforward-adjoint) and 03D7 (lemma-adjointness): constant-ring module inverse image. Natural form of lemma-weil-pbc-etale-pullback-forget-modules, needed in the first sentence of 09ZE."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The forgetful functor U:ModuleCat Λ→AddCommGrpCat preserves colimits of size u+1, by Mathlib ModuleCat.forget₂PreservesColimitsOfSize. It preserves the limits and covering-sieve colimits in the plus construction, so GrothendieckTopology.instPreservesSheafification gives the sheafification comparison sheafComposeNatIso. All these are natural transformations of functors.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set L equal to the opposite of the small-etale base-change functor. Preservation of comma-category colimits supplies PreservesPointwiseLeftKanExtensionAt at each object. Since these pointwise Kan extensions exist, preservesPointwiseLKEOfHasPointwiseAndPreservesPointwise supplies preservation of left Kan extensions. Mathlib Functor.lanCompIsoOfPreserves now gives the natural isomorphism L.lan ⋙ whiskeringRight(U) ≅ whiskeringRight(U) ⋙ L.lan.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Unfold upperStar as sheafToPresheaf ⋙ L.lan ⋙ presheafToSheaf. Compose the inverse sheafification comparison with the Kan-extension comparison and whisker by sheafToPresheaf. Insert the associativity isomorphisms of functor composition. The remaining source presheaf functors are definitionally equal, closed by Iso.refl. This constructs one natural isomorphism of the two displayed functors, so its naturality holds for every sheaf morphism. Identity maps, zero rings and empty schemes require no separate choices or extra hypotheses.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03D7; complete Lean construction using Mathlib Kan-extension and sheafification natural isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*[Cc]ompose|[Cc]ompose.*sheafPullback|[Uu]pperStar.*forget",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "generic ingredients; no full natural comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafComposeNatIso",
+   "results": "Hits: CategoryTheory.sheafComposeNatIso",
+   "date": "2026-10-12",
+   "verdict": "generic ingredients; no full natural comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a sheaf of modules commutes with forgetting to abelian sheaves; constructible approximation of etale cohomology classes",
+   "results": "Hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-12",
+   "verdict": "generic ingredients; no full natural comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "lanCompIsoOfPreserves|sheafComposeNatIso",
+   "results": "Hits: Mathlib/CategoryTheory/Functor/KanExtension/Preserves.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/PreservesSheafification.lean, Mathlib/CategoryTheory/Sites/Continuous.lean",
+   "date": "2026-10-12",
+   "verdict": "generic ingredients; no full natural comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of modules commutes with forgetting module structure to abelian sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Gabber",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModulePullbackForgetNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_upperStar_forget₂_natIso",
+  "statement": "theorem exists_upperStar_forget₂_natIso (Λ : Type (u + 1)) [CommRing Λ]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    Nonempty ((f)^*[ModuleCat.{u + 1} Λ] ⋙\n      sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) ≅\n      sheafCompose Y.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) ⋙\n        (f)^*[AddCommGrpCat.{u + 1}])",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-bdb12",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T023601-L-1124164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-bdb12",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T023601-L-1124164",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered proofs, naturality signature, node records and report against the unchanged library interfaces; compilation and axiom checks passed."
+ }
+}

@@ -10,6 +10,9 @@ public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 
 /-!
 # Gabber's affine comparison theorem
@@ -191,7 +194,34 @@ theorem exists_isConstructibleSheaf_hom_of_henselianRing [Finite Λ] {A : Type u
         (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))^*[AddCommGrpCat.{u + 1}]).map
           ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map ι)) q c' =
         c :=
-  sorry
+  by
+    let i := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
+    obtain ⟨e⟩ := exists_upperStar_forget₂_natIso Λ i
+    have eH := Functor.isoWhiskerRight e (Sheaf.functorH _ q)
+    obtain ⟨C, hC, ι, c', hc'⟩ := exists_constructible_restriction_class i Λ F q
+      ((eH.inv.app F) c)
+    obtain ⟨S, hS, hCS⟩ := hC
+    have hC' : IsConstructibleSheaf C := by
+      let T : Stratification (Spec (.of A)) :=
+        { toStratification := S.toStratification
+          domain := S.domain
+          immersion := S.immersion
+          isImmersion := S.isImmersion
+          range_immersion := S.range_immersion }
+      refine ⟨⟨T, ?_⟩⟩
+      intro k
+      exact (finite_locally_constant_module_values_iff _).1.mp (hCS k)
+    refine ⟨C, ι, hC', (eH.hom.app C) c', ?_⟩
+    have hn := ConcreteCategory.congr_hom (eH.hom.naturality ι) c'
+    change (eH.hom.app F)
+      (Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
+        AddCommGrpCat.{u + 1})).map ((i)^*[ModuleCat.{u + 1} Λ].map ι)) q c') =
+      Sheaf.H.map ((i)^*[AddCommGrpCat.{u + 1}].map
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
+          AddCommGrpCat.{u + 1})).map ι)) q ((eH.hom.app C) c') at hn
+    rw [← hn, hc']
+    exact ConcreteCategory.congr_hom (eH.inv_hom_id_app F) c
+
 
 /-- **Finite-cover killing.** Let `(A, I)` be a henselian pair, `T = Spec A`,
 `T₀ = Spec (A ⧸ I)` and `C` a constructible sheaf of `Λ`-modules on `T`, for a finite ring `Λ`,
