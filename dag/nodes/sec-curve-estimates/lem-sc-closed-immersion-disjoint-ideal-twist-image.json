@@ -17,36 +17,63 @@
  ],
  "proof": [
   {
-   "text": "Trivialize N=M tensor-power m on an affine basis. For A -> B=A/J and K=I(V), the image of the restriction of the source multiplication image is the quotient ideal (K+J)/J=KB. The adjoint ideal map sends b tensor a to b times the residue of a, so its image is also KB. This does not require K intersection J to vanish. The target product is this ideal times the restricted rank-one module.",
+   "text": "Apply closedSubscheme_baseChange_ideal_image to I.subschemeι and i. The kernel-comap formula and I.ker_subschemeι identify the base-change kernel with I.comap i. Adjoint naturality identifies its image map with φ; Subobject.isoOfMkEqMk gives an isomorphism k from image φ to the extended ideal, commuting with the inclusions.",
    "uses": [
+    "lem-pc-closed-subscheme-base-change-ideal-image",
     "def-sbc-closed-immersion-ideal-sheaf",
-    "def-weil-closed-immersion",
-    "def-pc-module-pullback",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "N=M tensor-power m is invertible and quasi-coherent by the existing source instances IsInvertible.tensorPow and IsInvertible.isQuasicoherent in ProjectionFormula.lean. Apply modulePullbackIdealProductImage i I N to compute the image of the pulled-back source ideal-product inclusion as the multiplication image of I.comap i on the pullback of N.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-ideal-product-image",
     "def-sc-invertible-module",
     "def-pur-sheaf-tensor-product"
    ],
    "elementary": false
   },
   {
-   "text": "The linear isomorphism e carries the product by KB onto the same ideal times its target: apply linearity for one inclusion and linearity of e.inv for the other. Changing adjunction precomposes the adjoint ideal map by an isomorphism and postcomposes the ambient unit by a linear isomorphism; these preserve the ideal image and its product. Quasi-coherent image sections and affine closed-immersion pushforward justify the affine computation. Equality on this basis implies equality of subsheaves by local membership and gluing.",
+   "text": "Tensor k.symm with the given linear isomorphism e. Whisker exchange and left-unitor naturality show that this isomorphism commutes with the two multiplication maps. Postcompose the preceding subobject equality with e.hom using Subobject.exists; precomposition by the tensor isomorphism preserves images. Obtain an isomorphism q between image(T.map(image.ι μ) ≫ e.hom) and image μ₁ commuting with their inclusions.",
    "uses": [
-    "def-pc-module-pullback",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the adjunction unit rewrites the original ambient restriction as the unit on image μ followed by pushforward of T.map(image.ι μ) ≫ e.hom. The closed-immersion unit is epi, hence removing this precomposition leaves the same image.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-epi",
+    "def-pc-module-pullback",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Closed pushforward preserves cokernels, so NormalMonoCategory.preservesEpimorphisms_of_preservesCokernels gives preservation of epis. Push forward the image factorization of T.map(image.ι μ) ≫ e.hom, remove its epic first factor, and substitute q.hom followed by image.ι μ₁. Removing the pushed isomorphism yields the required image equality.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-cokernel"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-closed-subscheme-base-change-ideal-image",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "def-weil-closed-immersion",
   "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-ideal-product-image",
   "def-sc-invertible-module",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-closed-immersion-unit-epi",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-pushforward-cokernel"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Remark remark-conductor, final sentence, and the local trivialization argument used in Lemma lemma-dim-1-noetherian-reduced-separated-has-ample"
+  "place": "Remark remark-conductor, final sentence, and the local trivialization argument used in Lemma lemma-dim-1-noetherian-reduced-separated-has-ample",
+  "note": "Second reader F4 replaces the two inclusion holes with a categorical reduction to the existing ideal pullback-image, base-change ideal-image, closed-immersion unit-epi and pushforward-cokernel declarations. The local product argument is encapsulated by existing tool lemmas, without changing the unit route."
  },
  "mathlib_searches": [
   {
@@ -148,10 +175,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261012T184311-L-4007243",
-  "kind": "interface",
+  "landing": "20261012T230756-L-1908333",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
