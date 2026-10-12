@@ -8,6 +8,9 @@ module
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.CechSheafConstruction
+import Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso
 /-! # The augmented Čech complex of module sheaves
 
 Source: blueprint lem-pc-cech-resolution, proof paragraph 1.
@@ -21,6 +24,47 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+-- A map is invertible when it is invertible on every member of an open cover.
+private theorem isIso_of_restrict {X : Scheme.{u}} {ι : Type u}
+    (U : ι → X.Opens) (hU : iSup U = ⊤) {M N : X.Modules} (f : M ⟶ N)
+    (h : ∀ i, IsIso ((Scheme.Modules.restrictFunctor (U i).ι).map f)) : IsIso f := by
+  have : Mono f := Scheme.Modules.mono_of_restrict f U hU fun i ↦ by
+    have := h i
+    infer_instance
+  have : Epi f := (Preadditive.epi_iff_isZero_cokernel f).2 (by
+    apply Scheme.Modules.isZero_of_iSup_eq_top _ U hU
+    intro i
+    have := h i
+    exact (PreservesCokernel.iso (Scheme.Modules.restrictFunctor (U i).ι) f).isZero_iff.mpr
+      (isZero_cokernel_of_epi _))
+  exact isIso_of_mono_of_epi f
+
+-- Exact restriction identifies local homology maps with the global homology map.
+private theorem quasiIso_of_restrict {X : Scheme.{u}} {ι : Type u}
+    (U : ι → X.Opens) (hU : iSup U = ⊤)
+    {K L : CochainComplex X.Modules ℕ} (f : K ⟶ L)
+    (h : ∀ i, QuasiIso (((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex
+      (ComplexShape.up ℕ)).map f)) : QuasiIso f := by
+  rw [quasiIso_iff]
+  intro n
+  rw [quasiIsoAt_iff, ShortComplex.quasiIso_iff]
+  apply isIso_of_restrict U hU
+  intro i
+  let R := Scheme.Modules.restrictFunctor (U i).ι
+  let φ := (HomologicalComplex.shortComplexFunctor X.Modules (ComplexShape.up ℕ) n).map f
+  have hφ : ShortComplex.QuasiIso (R.mapShortComplex.map φ) := by
+    have := h i
+    exact (quasiIsoAt_iff ((R.mapHomologicalComplex (ComplexShape.up ℕ)).map f) n).mp
+      inferInstance
+  have : IsIso (ShortComplex.homologyMap (R.mapShortComplex.map φ)) :=
+    (ShortComplex.quasiIso_iff _).mp hφ
+  have he := ShortComplex.mapHomologyIso_inv_naturality φ R
+  have : IsIso (R.map (ShortComplex.homologyMap φ) ≫
+      ((L.sc n).mapHomologyIso R).inv) := by
+    rw [he]
+    infer_instance
+  exact (isIso_comp_right_iff _ ((L.sc n).mapHomologyIso R).inv).mp inferInstance
 
 /-- The usual, unnormalized Čech sheaf complex resolves a module on any open cover.
 Source: blueprint lem-pc-cech-resolution, proof paragraph 1, and the term description
@@ -70,6 +114,9 @@ theorem exists_cech_sheaf_resolution
       (∀ p : ℕ, Nonempty (D.X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι =>
         (Scheme.Modules.pushforward (⨅ l, U (y l)).ι).obj (F.restrict (⨅ l, U (y l)).ι))) ∧
       QuasiIso ε := by
-  sorry
+  obtain ⟨D, ε, e, hd, hε, hterms⟩ := exists_augmented_cech_sheaf_complex U F
+  refine ⟨D, ε, e, hd, hε, hterms, ?_⟩
+  exact quasiIso_of_restrict U hU ε fun i ↦
+    augmented_cech_sheaf_quasiIso_restrict U F D ε e hd hε i
 
 end AlgebraicGeometry

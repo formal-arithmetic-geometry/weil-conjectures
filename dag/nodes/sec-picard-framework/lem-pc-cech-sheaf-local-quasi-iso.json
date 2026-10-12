@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-cech-sheaf-local-quasi-iso",
+ "kind": "statement",
+ "title": "Local exactness of a sectionwise Cech augmentation",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U:I\\to\\operatorname{Opens}(X)$ any family of opens, $F$ an $\\mathcal O_X$-module sheaf, $D$ a nonnegative cochain complex of module sheaves, and $\\epsilon:F[0]\\to D$ a chain map. Put $A=\\Gamma(X,\\mathcal O_X)$, $P(W)(V)=F(W\\cap V)$ with restricted $A$-action, and $C^\\bullet=\\check C^\\bullet(U,P)$, the full unnormalized Cech complex. Suppose given natural presheaf isomorphisms $e_p:\\operatorname{forget}(D^p)\\simeq C^p$ with $\\operatorname{forget}(d_D^p)e_{p+1}=e_p d_C^p$ for every $p$. Suppose that on every open $V$, each coordinate of $e_0\\epsilon^0$, indexed by $y:\\operatorname{Fin}(1)\\to I$, is the restriction $F(V)\\to F((\\prod_lU_{y(l)})\\cap V)$. For every $i\\in I$, restriction of $\\epsilon$ to the open subscheme $U_i$ is a quasi-isomorphism. There is no covering assumption, no assertion of global exactness, and no assumption identifying the terms of $D$ with products of open direct images.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix i and restrict to U_i. Every open V of U_i lies inside U_i. Define the degree-lowering homotopy by projecting to tuples with i inserted first, identifying the additional intersection with U_i with V itself. At degree zero project to the singleton i coordinate. These are natural maps of presheaves of global A-modules and hence of underlying abelian sheaves. The given e_p need not respect the full local O_X-action, so transport the homotopy only after forgetting to abelian sheaves.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "In d h+h d the face deleting the inserted first index gives the identity. Every other face cancels the term obtained by deleting the shifted index before insertion, with the opposite sign. The given augmentation formula supplies the degree-zero equation and says that the projection onto i is a left inverse of the augmentation. Transport the identities through e_p; the differential equations identify them with those in D. This yields a homotopy equivalence of the restricted augmentation on underlying abelian sheaves and hence an abelian-sheaf quasi-isomorphism. Forgetting module sheaves to abelian sheaves preserves and reflects exactness (kernels on sections, cokernels by sheafifying sectionwise cokernels), so the module-sheaf augmentation is also a quasi-isomorphism. Empty U_i and the zero module satisfy the same identities; empty I has no i to check. No stalk-product interchange is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct the augmented Cech complex of module sheaves on a family of open subsets",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech augmentation is a quasi-isomorphism after restriction to one cover member by inserting its index",
+   "results": "8 hits, on unrelated quasi-isomorphisms of truncations, extensions and injective resolutions; none gives the module-sheaf construction or local Cech augmentation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor",
+   "results": "CategoryTheory.cechComplexFunctor constructs a complex from an already given opposite-opens functor. It does not construct that module-sheaf functor, its section identifications or its augmentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*cech.*complex|cech.*quasiIso.*restrict|extraDegeneracyCech",
+   "results": "Mathlib FormalCoproduct.extraDegeneracyCech provides an extra degeneracy of a simplicial formal coproduct with a chosen terminal section. It does not provide the cosimplicial module-sheaf comparison or the restricted augmentation. Searches of lean/Sheaf and lean/WeilConjectures found no existing declaration for either intermediate.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CechSheafResolution",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cech-resolution",
+   "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation",
+   "via": [
+    "lem-pc-cech-sheaf-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CechSheafLocalQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/CechSheafLocalQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.augmented_cech_sheaf_quasiIso_restrict",
+  "statement": "theorem augmented_cech_sheaf_quasiIso_restrict\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)\n    (D : CochainComplex X.Modules ℕ)\n    (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D)\n    (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor U).obj\n          ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p)\n    (hd : ∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor U).obj\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1))\n    (hε : ∀ (y : Fin 1 → ι) (V : X.Opens),\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 F).inv ≫ ε.f 0).val ≫\n          (e 0).hom ≫\n            Pi.π (fun y : Fin 1 → ι =>\n              ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n                (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj\n                  (op (∏ᶜ fun l => U (y l)))) y).app (op V) =\n          F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) (i : ι) :\n    QuasiIso (((Scheme.Modules.restrictFunctor (U i).ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).map ε)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T225306-L-1803870",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T225306-L-1803870",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

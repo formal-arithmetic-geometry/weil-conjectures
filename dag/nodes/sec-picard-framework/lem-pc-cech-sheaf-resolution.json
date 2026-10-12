@@ -12,21 +12,33 @@
  ],
  "proof": [
   {
-   "text": "For an open W construct the module sheaf P(W) = j_W,* (F restricted to W). Restrictions on intersections give P(Z) -> P(W) for W contained in Z. Apply the usual Cech complex functor to this opposite-opens functor, and augment by restriction. Products of module sheaves are sheaves. On an open V the equality P(W)(V)=F(W intersection V) and the product universal properties give the stated term, differential and augmentation identifications, including the isomorphism with the products of open direct images.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply the construction theorem, which needs no covering hypothesis, obtaining D, epsilon, the sectionwise isomorphisms, their differential and augmentation laws, and the open-direct-image term isomorphisms.",
+   "uses": [
+    "lem-pc-cech-sheaf-construction"
+   ],
+   "elementary": false
   },
   {
-   "text": "On each cover member U_i, insertion of index i contracts the augmented full Cech complex. Pair the alternating face terms: all cancel except the identity term, giving dh+hd=id including the augmentation degree. Thus the augmentation is a quasi-isomorphism after restriction to every U_i. Homology sheaves vanish locally on a covering if and only if they vanish, so the augmentation is a quasi-isomorphism on X. For an empty cover X is empty and every module sheaf is zero; the same statement holds.",
+   "text": "Apply the local Cech quasi-isomorphism theorem to this D and epsilon, using its differential and augmentation laws, separately for each cover member.",
+   "uses": [
+    "lem-pc-cech-sheaf-local-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Globalize in each homology degree. Restriction preserves limits by the existing proved instance Scheme.Modules.preservesLimitsOfSize_restrictFunctor in WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel; it preserves colimits by the restriction/direct-image adjunction. Hence it commutes with short-complex homology. Naturality of the homology comparison isomorphisms identifies restriction of the global homology map with the local homology maps, which are isomorphisms. A module-sheaf map invertible on the cover is globally invertible: local monomorphisms imply a global monomorphism, while its cokernel restricts to zero and vanishing on an open cover implies that cokernel is zero. Therefore every homology map is invertible and epsilon is a quasi-isomorphism. This argument also works for an empty cover of the empty scheme. The Lean module proves all this globalization explicitly in private helpers.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-cech-sheaf-construction",
+  "lem-pc-cech-sheaf-local-quasi-iso"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
-  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation"
+  "place": "Proof, paragraph 1, together with the displayed Cech term and augmentation; E4 formal reduction with proved local-to-global homology argument"
  },
  "mathlib_searches": [
   {
@@ -86,7 +98,7 @@
   "module": "Sheaf.AlgebraicGeometry.CechSheafResolution",
   "declaration": "AlgebraicGeometry.exists_cech_sheaf_resolution",
   "file": "lean/Sheaf/AlgebraicGeometry/CechSheafResolution.lean",
-  "statement": "theorem exists_cech_sheaf_resolution {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hU : iSup U = ⊤) (F : X.Modules) : ∃ (D : CochainComplex X.Modules ℕ) (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D) (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj (D.X p).val ≅ ((cechComplexFunctor U).obj ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙ (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p), (∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (D.d p (p + 1)).val ≫ (e (p + 1)).hom = (e p).hom ≫ ((cechComplexFunctor U).obj ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙ (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1)) ∧ (∀ (y : Fin 1 → ι) (V : X.Opens), ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 F).inv ≫ ε.f 0).val ≫ (e 0).hom ≫ Pi.π (fun y : Fin 1 → ι => ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙ (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj (op (∏ᶜ fun l => U (y l)))) y).app (op V) = F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) ∧ (∀ p : ℕ, Nonempty (D.X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι => (Scheme.Modules.pushforward (⨅ l, U (y l)).ι).obj (F.restrict (⨅ l, U (y l)).ι))) ∧ QuasiIso ε",
+  "statement": "theorem exists_cech_sheaf_resolution\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hU : iSup U = ⊤)\n    (F : X.Modules) :\n    ∃ (D : CochainComplex X.Modules ℕ)\n      (ε : (CochainComplex.single₀ X.Modules).obj F ⟶ D)\n      (e : ∀ p : ℕ, (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).obj\n          (D.X p).val ≅\n        ((cechComplexFunctor U).obj\n          ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n            (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).X p),\n      (∀ p : ℕ,\n        (PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            (D.d p (p + 1)).val ≫ (e (p + 1)).hom =\n          (e p).hom ≫ ((cechComplexFunctor U).obj\n            ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n              (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat)).d p (p + 1)) ∧\n      (∀ (y : Fin 1 → ι) (V : X.Opens),\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n            ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 F).inv ≫ ε.f 0).val ≫\n          (e 0).hom ≫\n            Pi.π (fun y : Fin 1 → ι =>\n              ((prod.functor (C := X.Opens)).op ⋙ Functor.opHom _ _ ⋙\n                (Functor.whiskeringRight _ _ _).obj F.presheafModuleCat).obj\n                  (op (∏ᶜ fun l => U (y l)))) y).app (op V) =\n          F.presheafModuleCat.map (prod.snd : (∏ᶜ fun l => U (y l)) ⨯ V ⟶ V).op) ∧\n      (∀ p : ℕ, Nonempty (D.X p ≅ ∏ᶜ fun y : Fin (p + 1) → ι =>\n        (Scheme.Modules.pushforward (⨅ l, U (y l)).ι).obj (F.restrict (⨅ l, U (y l)).ι))) ∧\n      QuasiIso ε",
   "branch": "sheaf-dag",
   "by": "F2",
   "date": "2026-10-12",
@@ -106,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261012T151906-L-2287721",
+  "landing": "20261012T225306-L-1803870",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
