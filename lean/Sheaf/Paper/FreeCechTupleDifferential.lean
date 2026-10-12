@@ -2,7 +2,6 @@ module
 
 public import Sheaf.Paper.FreeCechTupleBasis
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
-import Sheaf.Paper.PowerSetComplexContractible
 
 /-! # Differential compatibility of the free Čech tuple map
 
@@ -16,6 +15,51 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem tupleGenerator_face (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale)
+    (U : ι → X.Etale) (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u})
+    (W : X.Etale) (n : ℕ) (φ : W ⟶ U₀)
+    (x : Fin (n + 2) → freeCechLifts X ι U₀ U f W φ) (j : Fin (n + 2)) :
+    (((freeCechModule X ι U₀ U f O).δ j).app (op W))
+      (freeCechTupleGenerator X ι U₀ U f O W (n + 1) φ x) =
+    freeCechTupleGenerator X ι U₀ U f O W n φ
+      (Algebra.powerSetComplexFace _ j x) := by
+  classical
+  let i : Fin (n + 2) → ι := fun a ↦ (x a).1
+  let F (k : ℕ) (i : Fin (k + 1) → ι) :=
+    (PresheafOfModules.free O).obj
+      (yoneda.obj ((∏ᶜ (fun a ↦ Over.mk (f (i a)))).left))
+  let g : Over.mk φ ⟶ ∏ᶜ (fun a ↦ Over.mk (f (i a))) :=
+    Pi.lift (fun a ↦ Over.homMk (x a).2.1 (x a).2.2)
+  let p (i : Fin (n + 2) → ι) :
+      (∏ᶜ (fun a ↦ Over.mk (f (i a)))) ⟶
+        ∏ᶜ (fun a ↦ Over.mk (f (i (j.succAbove a)))) :=
+    Pi.lift (fun a ↦ Pi.π (fun a ↦ Over.mk (f (i a))) (j.succAbove a))
+  change ((Sigma.desc (fun i ↦
+    (PresheafOfModules.free O).map (yoneda.map (p i).left) ≫
+      Sigma.ι (F n) (i ∘ j.succAbove))).app (op W))
+        (((Sigma.ι (F (n + 1)) i).app (op W)) (ModuleCat.freeMk g.left)) = _
+  rw [← ModuleCat.comp_apply, ← PresheafOfModules.comp_app, Sigma.ι_desc]
+  simp only [PresheafOfModules.comp_app, ModuleCat.comp_apply,
+    PresheafOfModules.free_map_app]
+  dsimp only [yoneda_map_app, types_comp_apply]
+  have hfree := ModuleCat.free_map_apply (R := O.obj (op W))
+    (↾fun h : W ⟶ (∏ᶜ (fun a ↦ Over.mk (f (i a)))).left ↦ h ≫ (p i).left) g.left
+  have hfree' := congrArg (((Sigma.ι (F n) (i ∘ j.succAbove)).app (op W))) hfree
+  refine hfree'.trans ?_
+  change ((Sigma.ι (F n) (i ∘ j.succAbove)).app (op W))
+    (ModuleCat.freeMk (g.left ≫ (p i).left)) = _
+  have hg : g ≫ p i = Pi.lift (fun a ↦
+      Over.homMk (x (j.succAbove a)).2.1 (x (j.succAbove a)).2.2) := by
+    apply Pi.hom_ext
+    intro a
+    simp [g, p]
+  change ((Sigma.ι (F n) (i ∘ j.succAbove)).app (op W))
+    (ModuleCat.freeMk (g ≫ p i).left) = _
+  rw [hg]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The tuple map commutes with the alternating differential.
 Source: Stacks Project, Tags 03AT and 03F5, the direct-sum decomposition.
 Proof: Both sides are linear maps on a direct sum of free modules. Check their
@@ -43,6 +87,53 @@ theorem freeCechDifferential_compatibility (X : Scheme.{u}) (ι : Type u) (U₀ 
       (fun φ ↦ Algebra.powerSetComplexDifferential (O.obj (op W))
         (freeCechLifts X ι U₀ U f W φ) n)
     ∀ n, (K.d (n + 1) n).hom.comp (b (n + 1)) = (b n).comp (D n) := by
-  sorry
+  classical
+  dsimp
+  intro n
+  simp only [Functor.mapHomologicalComplex_obj_d,
+    AlgebraicTopology.alternatingFaceMapComplex_obj_d]
+  apply DFinsupp.lhom_ext'
+  intro φ
+  apply Finsupp.lhom_ext'
+  intro x
+  apply LinearMap.ext_ring
+  change (((PresheafOfModules.evaluation O (op W)).map
+    (AlgebraicTopology.AlternatingFaceMapComplex.objD
+      (freeCechModule X ι U₀ U f O) n)).hom) (freeCechTupleMap X ι U₀ U f O W (n + 1)
+    (DFinsupp.single φ (Finsupp.single x 1))) =
+      freeCechTupleMap X ι U₀ U f O W n
+        ((DFinsupp.mapRange.linearMap (fun ψ ↦
+          Algebra.powerSetComplexDifferential (O.obj (op W))
+            (freeCechLifts X ι U₀ U f W ψ) n))
+              (DFinsupp.single φ (Finsupp.single x 1)))
+  rw [freeCechTupleMap_single, one_smul]
+  simp only [AlgebraicTopology.AlternatingFaceMapComplex.objD,
+    Functor.map_sum, Functor.map_zsmul, ModuleCat.hom_sum, ModuleCat.hom_zsmul,
+    LinearMap.sum_apply, LinearMap.smul_apply]
+  have hD : (DFinsupp.mapRange.linearMap (fun ψ ↦
+      Algebra.powerSetComplexDifferential (O.obj (op W))
+        (freeCechLifts X ι U₀ U f W ψ) n))
+        (DFinsupp.single φ (Finsupp.single x 1)) =
+      DFinsupp.single φ (∑ j : Fin (n + 2),
+        ((-1 : O.obj (op W)) ^ (j : ℕ)) •
+          Finsupp.single (Algebra.powerSetComplexFace _ j x) 1) := by
+    change DFinsupp.mapRange _ (fun ψ ↦ LinearMap.map_zero _)
+      (DFinsupp.single φ _) = _
+    rw [DFinsupp.mapRange_single]
+    congr 1
+    simp [Algebra.powerSetComplexDifferential, Finsupp.lift_apply]
+  rw [hD]
+  change _ = ((freeCechTupleMap X ι U₀ U f O W n).comp (DFinsupp.lsingle φ)) _
+  rw [map_sum]
+  apply Finset.sum_congr rfl
+  intro j hj
+  simp only [LinearMap.comp_apply, DFinsupp.lsingle_apply, map_smul,
+    freeCechTupleMap_single, one_smul]
+  change ((-1 : ℤ) ^ (j : ℕ)) •
+    (((freeCechModule X ι U₀ U f O).δ j).app (op W))
+      (freeCechTupleGenerator X ι U₀ U f O W (n + 1) φ x) = _
+  rw [tupleGenerator_face]
+  rw [← Int.cast_smul_eq_zsmul (O.obj (op W))]
+  simp
 
 end AlgebraicGeometry
