@@ -15,6 +15,7 @@ import Sheaf.RingTheory.HenselizationColimit
 import Sheaf.RingTheory.HenselizationPairGRing
 import Sheaf.RingTheory.PairHenselization
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingLimitDescentCore
 
 /-!
 # Reduction of finite étale lifting to henselian G-rings
@@ -89,6 +90,8 @@ theorem exists_finiteEtale_lift_of_henselianPair_of_gRing_lifting
         (Over.mk (pullback.snd U.hom
           (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) ≅
           Over.mk V.hom) := by
-  sorry
+  obtain ⟨U, hU, _⟩ :=
+    exists_finiteEtale_lift_of_henselianPair_of_gRing_lifting_core H I f V
+  exact ⟨U, hU⟩
 
 end AlgebraicGeometry.Scheme
