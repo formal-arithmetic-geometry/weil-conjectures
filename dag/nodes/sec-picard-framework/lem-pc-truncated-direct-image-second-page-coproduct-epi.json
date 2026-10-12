@@ -15,34 +15,32 @@
  ],
  "proof": [
   {
-   "text": "Choose representatives of the E_i and use derivedAmbientDirectSums to identify the given ambient coproduct cofan with the termwise coproduct. Exact sums identify the cohomology cofan after lower truncation with the coproduct cofan: for r >= a this is original cohomology, naturally in the coprojections; for r < a the source and target cohomologies are zero. Quasi-coherence of each cohomology and its sum follows from the definition and the quasi-coherent coproduct theorem.",
+   "text": "Choose representative complexes for the ambient family. Apply derivedAmbientDirectSums and transport its cohomology comparison to the given colimit cofan by coconePointUniqueUpToIso. This proves that ordinary derived cohomology carries the given cofan to a colimit cofan, naturally in the coprojections. For a <= r, the proven natural isomorphism H^r -> H^r tau_GE(a) from the standard t-structure transports this colimit. For r < a, all objects of the cohomology cofan, including its point, are zero, and IsColimit.ofIsZero proves the colimit property. Both private helpers are completely proved in Lean.",
    "uses": [
     "lem-pc-derived-ambient-direct-sums",
-    "lem-pc-quasicoherent-module-coproducts"
+    "def-sbc-standard-tstructure-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "On an affine open V of Y its inverse image is qcqs. Restrict the cohomology coproduct cofan and apply the surjectivity half of the qcqs cohomology direct-sum theorem there. The higher-direct-image presheaf description is natural in coefficient maps and restrictions. Module sheafification preserves sums, so surjectivity on this basis makes the sheafified comparison locally surjective, hence epi. The natural degree-zero comparison of unbounded derived direct image and ordinary right derived direct image is obtained by using an ordinary injective resolution as a bounded-below K-injective complex. It identifies the comparison with the displayed map. Empty sums and r < a give zero cofans.",
+   "text": "Apply the ordinary higher-direct-image coproduct epimorphism theorem to the resulting cohomology cofan. Use the natural comparison supplied by sheafCohomologyAndHigherDirectImages between schemeModuleHigherDirectImage f p and ordinary rightDerived p. Naturality identifies the desired Sigma.desc map with the composite of the coproduct of the comparison isomorphisms, the ordinary comparison epimorphism, and the inverse comparison at the coproduct point. The outside maps are isomorphisms, so the composite is epic.",
    "uses": [
-    "lem-weil-pbc-qcqs-cohomology-direct-sum",
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-pc-module-higher-direct-image-coproduct-epi",
+    "pqf-def-cohomology"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-derived-ambient-direct-sums",
-  "lem-pc-quasicoherent-module-coproducts",
-  "lem-weil-pbc-qcqs-cohomology-direct-sum",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pc-module-higher-direct-image-coproduct-epi",
+  "pqf-def-cohomology"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project, Tag 08DZ",
-  "place": "Agent-written surjectivity expansion of second-page reduction, Tags 07TB and 015J; independently read by X3"
+  "by": "agent",
+  "document": "Stacks Project, Tags 08DZ and 07TB",
+  "place": "V3 Lean reduction: fully proved cohomology/truncation transport; ordinary higher-image surjectivity isolated"
  },
  "mathlib_searches": [
   {
@@ -124,9 +122,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T165541-L-2942588",
+  "landing": "20261012T184354-L-4023672",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-module-higher-direct-image-coproduct-epi",
+ "kind": "statement",
+ "title": "Ordinary higher direct image coproduct comparison is epic",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme]. Let $I$ be a set, let $M_i$ and $N$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and suppose $\\iota_i:M_i\\to N$ is a coproduct cofan in that category [def-weil-pbc-category-colimit]. For every $p\\in\\mathbb N$, let $R^p f_*$ denote ordinary right-derived module direct image [pqf-def-cohomology]. Then the canonical map $\\bigoplus_i R^p f_*M_i\\to R^p f_*N$ whose restrictions are $R^p f_*(\\iota_i)$ is an epimorphism. No quasi-coherence assumption is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/07TB",
+  "place": "Tag 07TB, proof on inverse images of affine opens; Tags 01FF and 01FE"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "On each affine open V of Y, f^{-1}(V) is qcqs. Restriction to that open carries the given coproduct to a coproduct: open restriction is left adjoint to open direct image, so preserves colimits. Apply the qcqs module cohomology direct-sum theorem to the restricted cofan. Every degree-p cohomology class with coefficients in N is a finite sum of images of classes with coefficients in the M_i. The affine opens give a basis of neighborhoods of each point of Y.",
+   "uses": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the injective-resolution higher-direct-image presheaf description for N and for each M_i, including its naturality in coefficient maps. Each germ of the target higher direct image is represented by a class on the inverse image of some affine neighborhood. The finite-sum expression of the first step supplies finitely many source higher-image sections whose images have this germ. Their coproduct injections and sum give a source germ lifting it. Module coproducts are sheafifications of the sectionwise module coproduct presheaves and the underlying abelian sheaf functor preserves these colimits. Thus the comparison is surjective on all stalks, hence epic. Its maps from summands are exactly the functor maps of ordinary rightDerived p by naturality. Empty families give a zero point and p=0 gives the ordinary sections argument.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 07TB",
+  "place": "Surjectivity expansion of the affine-local cohomology argument for module coproducts"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Right derived direct image of module sheaves along a quasi compact quasi separated scheme morphism preserves coproducts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"PreservesColimitsOfShape\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]oproduct|[Cc]oproduct.*rightDerived",
+   "results": "0 hits from msearch Mathlib grep; local source search found etale higherDirectImage filtered-colimit results, which concern a different site and coefficient category",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductEpi",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08DZ second-page reduction to direct sums of module sheaves; Tag 07TB surjectivity half",
+   "via": [
+    "lem-pc-truncated-direct-image-second-page-coproduct-epi",
+    "lem-pc-truncated-direct-image-sheaf-coproduct-epi",
+    "lem-pc-truncated-direct-image-affine-finite-support",
+    "lem-pc-derived-direct-image-truncated-coproduct",
+    "lem-pc-derived-direct-image-cohomology-coproduct",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleHigherDirectImageCoproductEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleHigherDirectImageCoproductEpi.lean",
+  "declaration": "AlgebraicGeometry.moduleHigherDirectImage_coproduct_epi",
+  "statement": "theorem moduleHigherDirectImage_coproduct_epi\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (I : Type u) (M : I → SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (N : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ι : ∀ i, M i ⟶ N)\n    (hc : IsColimit (Cofan.mk N ι)) (p : ℕ) :\n    Epi (Sigma.desc (fun i ↦\n      ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).map (ι i)))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T184354-L-4023672",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T184354-L-4023672",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
