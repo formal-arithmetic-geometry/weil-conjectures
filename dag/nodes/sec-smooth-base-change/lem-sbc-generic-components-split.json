@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-generic-components-split",
+ "kind": "statement",
+ "title": "Finite separable extension splitting the generic components",
+ "statement": "Let k be a field, and let f:X\\to\\operatorname{Spec}k be finite type [def-weil-finite-type-morphism, def-weil-affine-spectrum]. There exist a field extension L/k [def-pc-field-extension] and its spectrum map y:\\operatorname{Spec}L\\to\\operatorname{Spec}k, finite (affine locally its coordinate algebra is a finite module) and etale [def-weil-etale-morphism], such that every irreducible component C [def-weil-irreducible-components] of G=X\\times_k L [def-pc-fibre-product] is geometrically irreducible [def-pc-geometrically-irreducible]: for every field E and morphism z:\\operatorname{Spec}E\\to\\operatorname{Spec}L, the inverse image of C under G\\times_L E\\to G is irreducible and nonempty. No open of any other base and no special-fibre cover is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 054R and 0551, splitting the components over the generic field."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-field-extension",
+  "def-weil-etale-morphism",
+  "def-weil-irreducible-components",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "the scheme is noetherian, since it is finite type over a field. By Tag 054R,\nbase change to a separable algebraic closure. Its finitely many irreducible\ncomponents descend to a finite subextension: on a finite affine cover their defining\nideals have finitely many generators, and only finitely many algebraic coefficients\noccur. Enlarge the subextension for all components simultaneously. The descended\ncomponents are geometrically irreducible, since their base changes to the separable\nclosure are irreducible (purely inseparable extensions do not change the topology).\nThus this is a finite separable extension with the required components. Its spectrum\nmap is finite and etale. For a component C,\ngive C its reduced closed subscheme structure. Geometric irreducibility says that\nevery field base change of this subscheme is irreducible and nonempty. The underlying\nsubset of that base change in the base changed ambient scheme is exactly the inverse\nimage of C under the first pullback projection. Hence that inverse image is\nirreducible. If the scheme is empty, use the identity extension; there are no\ncomponents and the universal assertion is vacuous.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 054R and 0551, splitting the components over the generic field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type scheme over a field admits a finite separable field extension with geometrically irreducible components",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type scheme over field finite separable extension geometrically irreducible component cover",
+   "digest": "696df587f0a2b740",
+   "results": "8 hits: AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.Scheme.instInhabitedOpenCover, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace; no exact component-splitting or incidence-spreading theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(separable|geometrically)|geometrically.*component",
+   "digest": "f0bee549b94ae35e",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; no exact component-splitting or incidence-spreading theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GenericFibreIncidenceSpread",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tags 054R and 0551, splitting the components over the generic field.",
+   "via": [
+    "lem-sbc-generic-fibre-incidence-spread",
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericComponentsSplit",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericComponentsSplit.lean",
+  "declaration": "AlgebraicGeometry.exists_finite_etale_geometric_component_extension",
+  "statement": "theorem exists_finite_etale_geometric_component_extension {k : Type u} [Field k]\n    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))\n    [LocallyOfFiniteType f] [QuasiCompact f] :\n    ∃ (L : Type u) (_ : Field L)\n      (y : Spec (CommRingCat.of L) ⟶ Spec (CommRingCat.of k)),\n      IsFinite y ∧ Etale y ∧\n      ∀ A ∈ irreducibleComponents ↥(pullback f y),\n        ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of L)),\n          IsIrreducible ((pullback.fst (pullback.snd f y) z) ⁻¹' A)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T225333-L-1814183",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T225333-L-1814183",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
