@@ -65,12 +65,35 @@ Proof:
    bounded below and K-injective by `prop-weil-pbc-kinjective-resolutions-exist`;
    thus derived evaluation computes the étale cohomology of
    `def-weil-pbc-etale-cohomology`, which vanishes in every positive degree.
+
+For every `n`, this gives affine acyclicity in degree `n + 1`: the affine Cech
+criterion and faithfully flat Amitsur exactness establish vanishing in every positive
+degree, and the injective K-injective resolution identifies derived evaluation with
+`Sheaf.H`. (blueprint: lem-sc-etale-affine-qcoherent-succ)
+
+Proof: apply the affine Čech vanishing criterion to the affine basis of the small
+étale site. Finite affine refinements are stable under iterated fibre products, and
+the standard disjoint-union cover identifies the Čech complex with the Amitsur
+complex of a faithfully flat algebra. The Amitsur complex is exact in positive
+degrees, so the criterion gives vanishing of derived evaluation at the terminal
+affine object. An injective K-injective resolution identifies that derived
+evaluation with `Sheaf.H`, yielding the stated subsingleton.
 -/
+theorem etale_affine_qcoherent_succ
+    (X : Scheme.{u}) [IsAffine X]
+    (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) :
+    Subsingleton (Sheaf.H
+      (AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf F) (n + 1)) := by
+  sorry
+
 theorem etale_affine_qcoherent
     (X : Scheme.{u}) [IsAffine X]
     (F : X.Modules) [F.IsQuasicoherent] :
     ∀ (q : ℕ), 0 < q →
       Subsingleton (Sheaf.H (AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsSheaf F) q) := by
-  sorry
+  intro q hq
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_add_of_le hq
+  simpa [Nat.add_comm] using
+    etale_affine_qcoherent_succ X F n
 
 end AlgebraicGeometry.Etale

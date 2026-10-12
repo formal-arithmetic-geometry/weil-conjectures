@@ -6287,3 +6287,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/T2/Sheaf.Topology.SetsExtensionByEmpty (stage 3; reviewer PASS; first push; landing 20261012T053956-L-2646846 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/T2/WeilConjectures.AlgebraicGeometry.Curve.Estimate (stage 3; reviewer PASS; first push; landing 20261012T053956-L-2646979 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/U1/Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteEpimorphism (stage 3; reviewer PASS; first push; landing 20261012T053956-L-2647093 (interface); batch 20261012T053916; modules 2; new nodes 1)
+- 05:39 L: merged deliver/U1/Sheaf.AlgebraicGeometry.EtaleAffineQcoherent (stage 3; reviewer PASS; first push; landing 20261012T053957-L-2647219 (proof); batch 20261012T053916; modules 1; new nodes 1)
