@@ -7,14 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.HomTensorTotal
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.RhomGlobalSections
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import Sheaf.AlgebraicGeometry.DerivedTensorSymmetry
 
 /-! # Derived internal-Hom adjunction on a scheme
 
@@ -30,6 +24,56 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
+private theorem tensorHomSymmetryReduction {D : Type*} [Category D]
+    [MonoidalCategory D] (H : Dᵒᵖ × D ⥤ D)
+    (e : ∀ K L M : D, (K ⟶ H.obj (op L, M)) ≃ (K ⊗ L ⟶ M))
+    (hn : (∀ (K K' L L' M M' : D)
+        (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M')
+        (f : K ⟶ H.obj (op L, M)),
+        e K' L' M' (a ≫ f ≫
+          H.map (b.op, c)) =
+          (a ⊗ₘ b) ≫ e K L M f ≫ c))
+    (s : ∀ K L : D, K ⊗ L ≅ L ⊗ K)
+    (hs : (∀ (K K' L L' : D) (a : K ⟶ K') (b : L ⟶ L'),
+        (a ⊗ₘ b) ≫ (s K' L').hom = (s K L).hom ≫ (b ⊗ₘ a))) :
+    ∃ (e : ∀ K L M : D,
+        (K ⟶ H.obj (op L, M)) ≃ (K ⊗ L ⟶ M))
+      (s : ∀ K L : D, K ⊗ L ≅ L ⊗ K)
+      (e' : ∀ K L M : D,
+        (K ⟶ H.obj (op L, M)) ≃ (L ⊗ K ⟶ M)),
+      (∀ (K K' L L' M M' : D)
+        (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M')
+        (f : K ⟶ H.obj (op L, M)),
+        e K' L' M' (a ≫ f ≫
+          H.map (b.op, c)) =
+          (a ⊗ₘ b) ≫ e K L M f ≫ c) ∧
+      (∀ (K K' L L' : D) (a : K ⟶ K') (b : L ⟶ L'),
+        (a ⊗ₘ b) ≫ (s K' L').hom = (s K L).hom ≫ (b ⊗ₘ a)) ∧
+      (∀ (K L M : D)
+        (f : K ⟶ H.obj (op L, M)),
+        e' K L M f = (s K L).inv ≫ e K L M f) ∧
+      (∀ (K K' L L' M M' : D)
+        (a : K' ⟶ K) (b : L' ⟶ L) (c : M ⟶ M')
+        (f : K ⟶ H.obj (op L, M)),
+        e' K' L' M' (a ≫ f ≫
+          H.map (b.op, c)) =
+          (b ⊗ₘ a) ≫ e' K L M f ≫ c) := by
+  let e' (K L M : D) := (e K L M).trans (Iso.homCongr (s K L) (Iso.refl M))
+  refine ⟨e, s, e', hn, hs, ?_, ?_⟩
+  · intro K L M f
+    simp [e', Iso.homCongr]
+  · intro K K' L L' M M' a b c f
+    simp only [e', Equiv.trans_apply, Iso.homCongr_apply, Iso.refl_hom,
+      Category.comp_id]
+    rw [hn]
+    have hi : (s K' L').inv ≫ (a ⊗ₘ b) = (b ⊗ₘ a) ≫ (s K L).inv := by
+      apply (cancel_mono (s K L).hom).1
+      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      rw [hs, Iso.inv_hom_id_assoc]
+    simpa only [Category.assoc] using congrArg (fun g ↦ g ≫ e K L M f ≫ c) hi
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived tensor-internal-Hom bijection and tensor symmetry, natural in all variables.
 The second bijection is obtained from the first by precomposing with the inverse symmetry.
 The tensor is the shared K-flat derived tensor, and RHom is the shared K-injective model.
@@ -86,6 +130,13 @@ theorem scheme_derivedInternalHom_adjunction (X : Scheme.{u})
           (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
             X.toRingedSpace.sheaf).map (b.op, c)) =
           (b ⊗ₘ a) ≫ e' K L M f ≫ c) := by
-  sorry
+  apply Exists.elim (exists_canonicalDerivedTensorHom.{u, w} X)
+  intro e he
+  apply Exists.elim (exists_schemeDerivedTensorSymmetry.{u, w} X)
+  intro s hs
+  exact @tensorHomSymmetryReduction (schemeDerivedCategory X) inferInstance
+    (schemeDerivedTensorMonoidal X)
+    (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+      X.toRingedSpace.sheaf) e he.1 s hs
 
 end AlgebraicGeometry

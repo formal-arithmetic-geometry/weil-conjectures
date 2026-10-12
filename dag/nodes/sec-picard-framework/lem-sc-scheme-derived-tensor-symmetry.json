@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-scheme-derived-tensor-symmetry",
+ "kind": "statement",
+ "title": "Naturality of the shared scheme derived tensor symmetry",
+ "statement": "Let X be a scheme [def-pc-scheme]. The shared K-flat derived tensor on D(O_X) [def-pc-scheme-derived-tensor-structure] admits isomorphisms s(K,L): K tensor^L L to L tensor^L K such that for all derived morphisms a:K to K′ and b:L to L′, (a tensor b);s(K′,L′) = s(K,L);(b tensor a).",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma cohomology-lemma-symmetric-monoidal-derived (Tag 0FPB); Tag 064K"
+ },
+ "proof": [
+  {
+   "text": "Install exactly the underived tensor, symmetric structure, additive and closed propositions of [lem-pc-sheaf-modules-tensor-closed], Grothendieck structure, small colimits and functorial flat-resolution theorem used in [def-pc-scheme-derived-tensor-structure]. The upstream DerivedCategory.hasDerivedMonoidalCategory then supplies the shared localization tensor. Use DerivedMonoidal.braiding for Qh and quasi-isomorphisms; this constructs the isomorphisms rather than choosing arbitrary existence witnesses.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand tensorHom_def, apply DerivedMonoidal.braiding_naturality_right and braiding_naturality_left, reassociate, and use tensorHom_def' to recover the reversed tensor map. This proves simultaneous naturality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0FPB and 064K; specialization of proved upstream DerivedMonoidal.braiding and its two naturality lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor internal Hom adjunction natural in all variables",
+   "results": "Generic internalHomAdjunction2, no statement for the shared scheme derived tensor.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Iso.homCongr",
+   "results": "Loogle reports unknown identifier Iso.homCongr; zero hits. Generic Iso.homCongr was found locally and used in the adjunction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality",
+   "results": "Generic braiding naturality; local upstream DerivedMonoidal.braiding and its naturality lemmas were found and are now used with the shared instances.",
+   "date": "2026-10-12",
+   "verdict": "generic construction reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor product symmetry natural in two variables",
+   "results": "Service unavailable: Internal Server Error (msearch recorded unavailable).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural commutativity isomorphism for tensor products in a braided monoidal category",
+   "results": "Generic braiding and naturality found; use upstream derived braiding with the exact shared tensor instances.",
+   "date": "2026-10-12",
+   "verdict": "generic construction reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "BraidedCategory.braiding_naturality",
+   "results": "Unknown identifier in service; no hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|nonempty_braidedCategory",
+   "results": "Generic braiding naturality; local upstream DerivedMonoidal.braiding_naturality_left and right directly specialize.",
+   "date": "2026-10-12",
+   "verdict": "generic construction reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: transpose a map A tensor^L I to E by the derived tensor-internal-Hom adjunction; symmetry and naturality supporting the reversed tensor order",
+   "via": [
+    "lem-sc-derived-internal-hom-adjunction",
+    "lem-sc-affine-perfect-derived-tensor-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorSymmetry",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorSymmetry.lean",
+  "declaration": "AlgebraicGeometry.exists_schemeDerivedTensorSymmetry",
+  "statement": "theorem exists_schemeDerivedTensorSymmetry (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    ∃ s : ∀ K L : schemeDerivedCategory X, K ⊗ L ≅ L ⊗ K,\n      ∀ (K K' L L' : schemeDerivedCategory X) (a : K ⟶ K') (b : L ⟶ L'),\n        (a ⊗ₘ b) ≫ (s K' L').hom = (s K L).hom ≫ (b ⊗ₘ a)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144143-L-2106890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T144143-L-2106890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
