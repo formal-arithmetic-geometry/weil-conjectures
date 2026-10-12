@@ -16,9 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FiniteLowerStarLift
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapZero
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -93,7 +93,7 @@ theorem Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
     (i : Y₀ ⟶ Y) (f₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
     (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
     (n : ℕ) (U : Fin (n + 1) → Y.Opens) (hU : ∀ j, IsAffineOpen (U j)) (hcov : ⨆ j, U j = ⊤)
-    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] [IsTorsionSheaf J]
+    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] [IsTorsionModuleSheaf J]
     (q : ℕ) (hq : n < q) :
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
@@ -186,7 +186,7 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
       (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
     let Λ := ULift.{u + 1} (ZMod r)
     let fo := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
-    let e := upperStarSheafComposeForget₂Iso ι Λ
+    let e := (asIso (upperStarForget₂ Λ ι).natTrans).symm
     refine ⟨fun c₁ c₂ ↦ ?_⟩
     suffices ∀ c : Sheaf.H ((sheafCompose _ fo).obj ((ι)^*[ModuleCat.{u + 1} Λ].obj I)) 1,
         c = 0 by rw [this c₁, this c₂]
@@ -199,7 +199,7 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
     let β : (sheafCompose _ fo).obj G ≅ ((h j)_*[AddCommGrpCat.{u + 1}]).obj
         ((constantSheaf (V j).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
           (AddCommGrpCat.of (M j))) :=
-      (lowerStarSheafComposeForget₂Iso (h j) Λ).app _ ≪≫
+      (lowerStarCompForget₂Iso Λ (h j)).app _ ≪≫
         ((h j)_*[AddCommGrpCat.{u + 1}]).mapIso
           ((constantSheafSheafComposeForget₂Iso (Y := V j) Λ).app (M j))
     have hS := surjective_cohomologyMap_one_lowerStar_constantSheaf
@@ -250,13 +250,14 @@ theorem Etale.bijective_cohomologyMap_zero_projectiveLine_residueField
     Function.Bijective (Etale.cohomologyMap
       (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) 0) :=
-  Etale.bijective_cohomologyMap_zero_of_isIso_globalSectionsUpperStarMap _ Λ F
-    (Etale.isIso_globalSectionsUpperStarMap_of_henselianRing Λ (IsLocalRing.maximalIdeal A)
-      (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
-      (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
-      (show _ ⟶ Spec (.of (IsLocalRing.ResidueField A)) from
-        ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘ _)
-      (ProjectiveSpace.isPullback_map _ _) F)
+  (Etale.bijective_cohomologyMap_zero_iff _ _).2
+    ((Etale.isIso_globalSectionsUpperStarMap_iff_forget₂ Λ _ F).1
+      (Etale.isIso_globalSectionsUpperStarMap_of_henselianRing Λ (IsLocalRing.maximalIdeal A)
+        (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+        (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
+        (show _ ⟶ Spec (.of (IsLocalRing.ResidueField A)) from
+          ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘ _)
+        (ProjectiveSpace.isPullback_map _ _) F))
 
 open Abelian in
 /-- **The comparison for `ℙ¹` with `𝔽_r`-coefficients.** For a prime `r` and every sheaf `F`
@@ -294,7 +295,7 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ)
       have := Etale.subsingleton_H_projectiveLine_closedFibre_of_injective A r
         (Injective.under F) (n + 1) n.succ_pos
       exact ⟨fun a b ↦ (bijective_sheafHMap_hom
-        ((upperStarSheafComposeForget₂Iso ι Λ).app (Injective.under F)).symm _).1
+        ((asIso (upperStarForget₂ Λ ι).natTrans).app (Injective.under F)) _).1
           (@Subsingleton.elim _ this _ _)⟩
     refine ⟨?_, fun η ↦ ?_⟩
     · rw [injective_iff_map_eq_zero]
@@ -320,7 +321,7 @@ bijective.
 theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
     (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap
       (ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
@@ -336,7 +337,7 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
   have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
     quasiSeparatedSpace_of_quasiSeparated p₀
   refine bijective_cohomologyMap_of_isTorsion _ (fun r hr G hG q ↦ ?_) _
-    ((isTorsionSheaf_iff_isTorsion F).1 inferInstance) q
+    ((isTorsionModuleSheaf_iff_isTorsion F).1 inferInstance) q
   have : Fact r.Prime := ⟨hr⟩
   have : (coindZMod.{u + 1} r).IsRightAdjoint := (forget₂CoindZModAdj r).isRightAdjoint
   have : PreservesLimitsOfSize.{u, u + 1} (coindZMod.{u + 1} r) :=
@@ -393,7 +394,7 @@ should be replaced by it, composed with the restrictions to the closed fibres.
 (blueprint: `prop-weil-pbc-strict-local-exchange`) -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     ∃ (e₁ : ((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
           (A := ModuleCat.{u + 1} Λ)).obj
           ((Etale.baseChangeSourceFunctor Λ (Spec.map (CommRingCat.ofHom φ))
@@ -429,7 +430,7 @@ pullback along the isomorphism `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}` is bijective on c
 theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal
     (hφ : Function.Bijective (IsLocalRing.ResidueField.map φ))
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheaf F] (q : ℕ) :
+    [IsTorsionModuleSheaf F] (q : ℕ) :
     IsIso (((pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))).sheafFiber
       (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ
         (ProjectiveSpace.isPullback_map _ (Spec.map (CommRingCat.ofHom φ))) q F)) := by

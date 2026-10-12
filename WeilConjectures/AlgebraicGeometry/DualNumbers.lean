@@ -175,16 +175,40 @@ theorem mapRingHom_fstHom_comp_mulRingHom :
     (mapRingHom (fstHom R R R).toRingHom).comp mulRingHom =
       (inlHom R R).comp (fstHom R R R).toRingHom := by
   ext x <;> simp [mulRingHom, algebraMap_eq_inl]
+/-- The ring homomorphism `R[ε][δ] → R[ε]`, `ε, δ ↦ ε`: it sends `x + yδ` to `x + y₀ε`, where `y₀`
+is the constant term of `y`. -/
+def foldRingHom : (R[ε])[ε] →+* R[ε] where
+  toFun x := x.fst + inr x.snd.fst
+  map_one' := by ext <;> simp
+  map_mul' x y := by ext <;> simp; ring
+  map_zero' := by ext <;> simp
+  map_add' x y := by ext <;> simp; ring
 
-/-- The map `R[η] → R[ε][δ]`, `η ↦ εδ`, as an `R`-algebra homomorphism. -/
-def mulAlgHom : R[ε] →ₐ[R] (R[ε])[ε] :=
-  { mulRingHom with
-    commutes' := fun r ↦ by ext <;> simp [mulRingHom, algebraMap_eq_inl'] }
+@[simp]
+theorem fst_foldRingHom (x : (R[ε])[ε]) : (foldRingHom x).fst = x.fst.fst := by
+  simp [foldRingHom]
 
-/-- The inclusion `R[δ] → R[ε][δ]`, `a + δb ↦ a + δb`, as an `R`-algebra homomorphism. -/
-def mapInlAlgHom : R[ε] →ₐ[R] (R[ε])[ε] :=
-  { mapRingHom (inlHom R R) with
-    commutes' := fun r ↦ by ext <;> simp [mapRingHom, algebraMap_eq_inl'] }
+@[simp]
+theorem snd_foldRingHom (x : (R[ε])[ε]) : (foldRingHom x).snd = x.fst.snd + x.snd.fst := by
+  simp [foldRingHom]
+
+theorem scale_mapRingHom (f : R →+* S) (c : R) (x : R[ε]) :
+    scale (f c) (mapRingHom f x) = mapRingHom f (scale c x) := by
+  ext <;> simp [map_mul]
+
+/-- Folding the constants in `δ` is the identity: `R[ε] → R[ε][δ] → R[ε]`. -/
+theorem foldRingHom_comp_inlHom : foldRingHom.comp (inlHom R[ε] R[ε]) = RingHom.id R[ε] := by
+  ext x <;> simp
+
+/-- Folding the elements of `R[δ] ⊆ R[ε][δ]` sends `δ` to `ε`. -/
+theorem foldRingHom_comp_mapRingHom_inlHom :
+    foldRingHom.comp (mapRingHom (inlHom R R)) = RingHom.id R[ε] := by
+  ext x <;> simp
+
+theorem foldRingHom_comp_mapRingHom_mapRingHom (f : R →+* S) :
+    foldRingHom.comp (mapRingHom (mapRingHom f)) = (mapRingHom f).comp foldRingHom := by
+  ext x <;> simp
+
 
 end DualNumber
 
@@ -215,6 +239,12 @@ noncomputable def dualNumberFst : dualNumber ⟶ 𝟭 CommRingCat.{u} where
 noncomputable def dualNumberMul : dualNumber ⟶ dualNumber ⋙ dualNumber where
   app _ := ofHom DualNumber.mulRingHom
   naturality _ _ f := hom_ext (DualNumber.mapRingHom_mapRingHom_comp_mulRingHom f.hom).symm
+
+/-- The map `R[ε][δ] → R[ε]`, `ε, δ ↦ ε`, naturally in `R`. -/
+noncomputable def dualNumberFold : dualNumber ⋙ dualNumber ⟶ dualNumber where
+  app _ := ofHom DualNumber.foldRingHom
+  naturality _ _ f := hom_ext (DualNumber.foldRingHom_comp_mapRingHom_mapRingHom f.hom)
+
 
 theorem fst_dualNumber_map {R S : CommRingCat.{u}} (f : R ⟶ S) (x : DualNumber R) :
     (dualNumber.map f x).fst = f x.fst :=
@@ -478,6 +508,37 @@ theorem dualNumbersι_comp_proj : X.dualNumbersι ≫ X.dualNumbersProj = 𝟙 X
   erw [eqToHom_refl, Category.comp_id]
   rfl
 
+/-- The map `X[ε] ⟶ X[ε][δ]`, `ε, δ ↦ ε`: the identity on points, and `x + yδ ↦ x + y₀ε` on
+functions, where `y₀` is the constant term of `y`. Precomposing with it multiplies a point
+`S[ε] ⟶ G` depending on `ε` with one depending on `δ`. -/
+noncomputable def dualNumbersFold : X.dualNumbers ⟶ X.dualNumbers.dualNumbers where
+  base := 𝟙 _
+  c := Functor.whiskerLeft X.presheaf CommRingCat.dualNumberFold ≫
+    (TopCat.Presheaf.Pushforward.id _).inv
+  prop x := by
+    constructor
+    intro s hs
+    obtain ⟨U, hxU, g, rfl⟩ := X.dualNumbers.dualNumbers.presheaf.exists_germ_eq s
+    rw [PresheafedSpace.stalkMap_germ_apply] at hs
+    have h := (X.presheaf.isUnit_germ_dualNumber_iff x _ hxU _).mp hs
+    erw [DualNumber.fst_foldRingHom] at h
+    exact (X.dualNumbers.presheaf.isUnit_germ_dualNumber_iff x U hxU g).mpr
+      ((X.presheaf.isUnit_germ_dualNumber_iff x U hxU g.fst).mpr h)
+
+theorem dualNumbersFold_app (U : X.Opens) (a : Γ(X.dualNumbers.dualNumbers, U)) :
+    X.dualNumbersFold.app U a = DualNumber.foldRingHom a :=
+  rfl
+
+@[reassoc (attr := simp)]
+theorem dualNumbersFold_comp_proj : X.dualNumbersFold ≫ X.dualNumbers.dualNumbersProj = 𝟙 _ := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change DualNumber.foldRingHom (inl a) = a
+  ext <;> simp
+
+
 variable {X} in
 /-- A morphism `X[ε] ⟶ Y` whose functions have no `ε`-part factors through the projection
 `X[ε] ⟶ X`. -/
@@ -575,6 +636,16 @@ theorem Hom.dualNumbers_comp {Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
   ext <;> simp
 
 @[reassoc (attr := simp)]
+theorem dualNumbersFold_comp_proj_dualNumbers (X : Scheme.{u}) :
+    X.dualNumbersFold ≫ X.dualNumbersProj.dualNumbers = 𝟙 _ := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change DualNumber.foldRingHom (DualNumber.mapRingHom (TrivSqZeroExt.inlHom _ _) a) = a
+  ext <;> simp
+
+@[reassoc (attr := simp)]
 theorem dualNumbersMul_comp_proj (X : Scheme.{u}) :
     X.dualNumbersMul ≫ X.dualNumbersProj = X.dualNumbers.dualNumbersProj ≫ X.dualNumbersProj := by
   refine Scheme.Hom.ext rfl fun U ↦ ?_
@@ -612,6 +683,36 @@ theorem Hom.dualNumbers_dualNumbersι_comp_dualNumbersMul (X : Scheme.{u}) :
     Functor.id_obj, Hom.comp_app]
   ext1
   exact DualNumber.mapRingHom_fstHom_comp_mulRingHom
+
+/-- Setting `δ = 0` and then forgetting `ε`: `X[ε] ⟶ X[ε][δ] ⟶ X[δ]` factors through `X`. -/
+@[reassoc]
+theorem dualNumbersι_comp_proj_dualNumbers (X : Scheme.{u}) :
+    X.dualNumbers.dualNumbersι ≫ X.dualNumbersProj.dualNumbers =
+      X.dualNumbersProj ≫ X.dualNumbersι := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change (DualNumber.mapRingHom (TrivSqZeroExt.inlHom Γ(X, U) Γ(X, U)) a).fst = inl a.fst
+  ext <;> simp
+
+/-- Setting `ε = 0` and then forgetting `δ`: `X[δ] ⟶ X[ε][δ] ⟶ X[ε]` factors through `X`. -/
+@[reassoc]
+theorem Hom.dualNumbers_dualNumbersι_comp_proj (X : Scheme.{u}) :
+    X.dualNumbersι.dualNumbers ≫ X.dualNumbers.dualNumbersProj =
+      X.dualNumbersProj ≫ X.dualNumbersι := by
+  refine Scheme.Hom.ext rfl fun U ↦ ?_
+  ext a : 2
+  simp only [eqToHom_op, eqToHom_map, Scheme.Hom.comp_app]
+  erw [eqToHom_refl, Category.comp_id]
+  change DualNumber.mapRingHom (TrivSqZeroExt.fstHom Γ(X, U) Γ(X, U) Γ(X, U)).toRingHom (inl a) =
+    inl a.fst
+  ext <;> simp
+
+@[reassoc (attr := simp)]
+theorem Hom.dualNumbers_dualNumbersι_comp_dualNumbers_proj (X : Scheme.{u}) :
+    X.dualNumbersι.dualNumbers ≫ X.dualNumbersProj.dualNumbers = 𝟙 _ := by
+  rw [← Hom.dualNumbers_comp, dualNumbersι_comp_proj, Hom.dualNumbers_id]
 
 /-! ### Scaling the infinitesimal -/
 
@@ -765,6 +866,52 @@ theorem dualNumbersιδOver_comp_dualNumbersMulOver :
   simpa [dualNumbersιδOver, dualNumbersMulOver, Over.toUnit_left] using
     Hom.dualNumbers_dualNumbersι_comp_dualNumbersMul S
 
+@[reassoc (attr := simp)]
+theorem dualNumbersιεOver_comp_projεOver :
+    dualNumbersιεOver S ≫ dualNumbersProjεOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersιεOver, dualNumbersProjεOver]
+
+@[reassoc (attr := simp)]
+theorem dualNumbersιδOver_comp_projδOver :
+    dualNumbersιδOver S ≫ dualNumbersProjδOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersιδOver, dualNumbersProjδOver]
+
+/-- Setting `δ = 0` and then forgetting `ε` factors through the `S`-point `ε ↦ 0` of `S[δ]`. -/
+@[reassoc]
+theorem dualNumbersιεOver_comp_projδOver :
+    dualNumbersιεOver S ≫ dualNumbersProjδOver S =
+      CartesianMonoidalCategory.toUnit (dualNumbersOver S) ≫ dualNumbersιOver S := by
+  ext1
+  simp [dualNumbersιεOver, dualNumbersProjδOver, Over.toUnit_left,
+    S.dualNumbersι_comp_proj_dualNumbers]
+
+/-- Setting `ε = 0` and then forgetting `δ` factors through the `S`-point `ε ↦ 0` of `S[ε]`. -/
+@[reassoc]
+theorem dualNumbersιδOver_comp_projεOver :
+    dualNumbersιδOver S ≫ dualNumbersProjεOver S =
+      CartesianMonoidalCategory.toUnit (dualNumbersOver S) ≫ dualNumbersιOver S := by
+  ext1
+  simp [dualNumbersιδOver, dualNumbersProjεOver, Over.toUnit_left,
+    Hom.dualNumbers_dualNumbersι_comp_proj S]
+
+/-- The map `S[ε] ⟶ S[ε][δ]`, `ε, δ ↦ ε`, as a morphism over `S`. -/
+noncomputable def dualNumbersFoldOver : dualNumbersOver S ⟶ dualNumbers₂Over S :=
+  Over.homMk S.dualNumbersFold (by simp [dualNumbers₂Over, dualNumbersOver])
+
+@[reassoc (attr := simp)]
+theorem dualNumbersFoldOver_comp_projεOver :
+    dualNumbersFoldOver S ≫ dualNumbersProjεOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersFoldOver, dualNumbersProjεOver]
+
+@[reassoc (attr := simp)]
+theorem dualNumbersFoldOver_comp_projδOver :
+    dualNumbersFoldOver S ≫ dualNumbersProjδOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersFoldOver, dualNumbersProjδOver]
+
 /-- Scaling the infinitesimal by a global section `c` of `𝒪_S`, as an endomorphism of `S[ε]`
 over `S`. -/
 noncomputable def dualNumbersScaleOver (c : Γ(S, ⊤)) : dualNumbersOver S ⟶ dualNumbersOver S :=
@@ -847,107 +994,22 @@ theorem ι_comp_dualNumbersToSpec :
     ((DualNumber.mapRingHom (Scheme.ΓSpecIso R).inv.hom a).fst) = a.fst
   simp
 
-/-! ### The two-parameter thickening of an affine scheme -/
-
-/-- On global sections, `(Spec R)[ε] ⟶ Spec R[ε]` is `R[ε] ≅ Γ(Spec R, ⊤)[ε]`. -/
-theorem dualNumbersToSpec_appTop :
-    (dualNumbersToSpec R).appTop = (ΓSpecIso (CommRingCat.dualNumber.obj R)).hom ≫
-      CommRingCat.dualNumber.map (Scheme.ΓSpecIso R).inv := by
-  simp [dualNumbersToSpec]
-  rfl
-
-/-- Through `(Spec R)[ε] ≅ Spec R[ε]`, scaling the infinitesimal by `c ∈ R` is `Spec` of
-`ε ↦ cε`. -/
+/-- The isomorphism `(Spec R)[ε] ⟶ Spec R[ε]` is compatible with scaling the infinitesimal. -/
 theorem dualNumbersScale_comp_dualNumbersToSpec (c : R) :
     (Spec R).dualNumbersScale ((Scheme.ΓSpecIso R).inv c) ≫ dualNumbersToSpec R =
       dualNumbersToSpec R ≫ Spec.map (CommRingCat.ofHom (DualNumber.scale c).toRingHom) := by
-  refine ext_of_isAffine ?_
-  simp only [Scheme.Hom.comp_appTop, dualNumbersToSpec_appTop, Category.assoc]
-  erw [ΓSpecIso_naturality_assoc]
-  congr 1
-  ext a : 2
+  rw [dualNumbersToSpec, ← Category.assoc, toSpecΓ_naturality, Category.assoc, Category.assoc,
+    ← Spec.map_comp, ← Spec.map_comp]
+  congr 2
+  refine CommRingCat.hom_ext (RingHom.ext fun a ↦ ?_)
+  rw [CommRingCat.hom_comp, CommRingCat.hom_comp, RingHom.comp_apply, RingHom.comp_apply]
   change DualNumber.scale ((Spec R).presheaf.map (homOfLE le_top : (⊤ : (Spec R).Opens) ⟶ ⊤).op
-      ((Scheme.ΓSpecIso R).inv c)) (DualNumber.mapRingHom (Scheme.ΓSpecIso R).inv.hom a) =
-    DualNumber.mapRingHom (Scheme.ΓSpecIso R).inv.hom (DualNumber.scale c a)
-  have : (homOfLE le_top : (⊤ : (Spec R).Opens) ⟶ ⊤) = 𝟙 _ := rfl
-  rw [this, op_id, (Spec R).presheaf.map_id]
-  ext <;> simp
-
-variable {X Y : Scheme.{u}} in
-theorem Hom.dualNumbers_appTop (f : X ⟶ Y) :
-    f.dualNumbers.appTop = CommRingCat.dualNumber.map f.appTop :=
-  rfl
-
-theorem dualNumbersMul_appTop (X : Scheme.{u}) :
-    X.dualNumbersMul.appTop = CommRingCat.dualNumberMul.app Γ(X, ⊤) := by
-  simp [dualNumbersMul, Scheme.Hom.appTop, Scheme.Hom.app]
-
-variable {R} {S : CommRingCat.{u}} in
-/-- The isomorphism `(Spec R)[ε] ⟶ Spec R[ε]` is natural in `R`. -/
-theorem specMap_dualNumbers_comp_dualNumbersToSpec (φ : R ⟶ S) :
-    (Spec.map φ).dualNumbers ≫ dualNumbersToSpec R =
-      dualNumbersToSpec S ≫ Spec.map (CommRingCat.dualNumber.map φ) := by
-  refine ext_of_isAffine ?_
-  simp only [Scheme.Hom.comp_appTop, dualNumbersToSpec_appTop, Hom.dualNumbers_appTop,
-    Category.assoc, ← Functor.map_comp]
-  erw [ΓSpecIso_naturality_assoc, ← ΓSpecIso_inv_naturality, Functor.map_comp]
-
-/-- The canonical morphism `(Spec R)[ε][δ] ⟶ Spec R[ε][δ]`, built from `(Spec R)[ε] ≅ Spec R[ε]`
-twice. It is an isomorphism. -/
-noncomputable def dualNumbers₂ToSpec :
-    (Spec R).dualNumbers.dualNumbers ⟶ Spec (.of (DualNumber (DualNumber R))) :=
-  (dualNumbersToSpec R).dualNumbers ≫ dualNumbersToSpec (.of (DualNumber R))
-
-/-- Through `(Spec R)[ε][δ] ≅ Spec R[ε][δ]`, the map `η ↦ εδ` is `Spec` of `R[η] → R[ε][δ]`. -/
-theorem dualNumbersMul_comp_dualNumbersToSpec :
-    (Spec R).dualNumbersMul ≫ dualNumbersToSpec R =
-      dualNumbers₂ToSpec R ≫ Spec.map (CommRingCat.dualNumberMul.app R) := by
-  refine ext_of_isAffine ?_
-  simp only [dualNumbers₂ToSpec, Scheme.Hom.comp_appTop, dualNumbersToSpec_appTop,
-    Hom.dualNumbers_appTop, dualNumbersMul_appTop, Category.assoc]
-  erw [dualNumbersToSpec_appTop]
-  simp only [Category.assoc]
-  erw [ΓSpecIso_naturality_assoc]
-  congr 1
-  rw [← Functor.map_comp]
-  erw [Iso.inv_hom_id_assoc]
-  exact CommRingCat.dualNumberMul.naturality _
-
-/-- `(Spec R)[ε][δ] ⟶ Spec R[ε][δ]` is an isomorphism, by functoriality of the thickening. -/
-instance isIso_dualNumbers₂ToSpec : IsIso (dualNumbers₂ToSpec R) := by
-  have : IsIso (dualNumbersToSpec R).dualNumbers :=
-    ⟨(inv (dualNumbersToSpec R)).dualNumbers, by
-      rw [← Hom.dualNumbers_comp, IsIso.hom_inv_id, Hom.dualNumbers_id], by
-      rw [← Hom.dualNumbers_comp, IsIso.inv_hom_id, Hom.dualNumbers_id]⟩
-  unfold dualNumbers₂ToSpec
-  infer_instance
-
-/-- Through `(Spec R)[ε][δ] ≅ Spec R[ε][δ]`, forgetting `δ` is `Spec` of `R[ε] → R[ε][δ]`. -/
-theorem dualNumbersProj_comp_dualNumbersToSpec :
-    (Spec R).dualNumbers.dualNumbersProj ≫ dualNumbersToSpec R =
-      dualNumbers₂ToSpec R ≫
-        Spec.map (CommRingCat.ofHom (inlHom (DualNumber R) (DualNumber R))) := by
-  rw [dualNumbers₂ToSpec, Category.assoc, dualNumbersToSpec_comp_specMap]
-  exact (Hom.dualNumbers_comp_proj _).symm
-
-/-- Through `(Spec R)[ε][δ] ≅ Spec R[ε][δ]`, forgetting `ε` is `Spec` of `R[δ] → R[ε][δ]`. -/
-theorem dualNumbers_dualNumbersProj_comp_dualNumbersToSpec :
-    (Spec R).dualNumbersProj.dualNumbers ≫ dualNumbersToSpec R =
-      dualNumbers₂ToSpec R ≫
-        Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom (inlHom R R))) := by
-  rw [← dualNumbersToSpec_comp_specMap, Hom.dualNumbers_comp, Category.assoc,
-    specMap_dualNumbers_comp_dualNumbersToSpec
-      (CommRingCat.ofHom (inlHom R R) : R ⟶ .of (DualNumber R)),
-    dualNumbers₂ToSpec, Category.assoc]
-  rfl
-
-/-- `(Spec R)[ε][δ] ⟶ Spec R[ε][δ]` is a morphism over `Spec R`. -/
-theorem dualNumbers₂ToSpec_comp_specMap :
-    dualNumbers₂ToSpec R ≫ Spec.map (CommRingCat.ofHom (inlHom R R) ≫
-      CommRingCat.ofHom (inlHom (DualNumber R) (DualNumber R))) =
-      (Spec R).dualNumbers.dualNumbersProj ≫ (Spec R).dualNumbersProj := by
-  rw [Spec.map_comp, ← Category.assoc, ← dualNumbersProj_comp_dualNumbersToSpec,
-    Category.assoc, dualNumbersToSpec_comp_specMap]
+    _) _ = _
+  rw [show (homOfLE le_top : (⊤ : (Spec R).Opens) ⟶ ⊤) = 𝟙 _ from rfl, op_id,
+    CategoryTheory.Functor.map_id]
+  simp only [CommRingCat.hom_ofHom, CommRingCat.id_apply, AlgHom.toRingHom_eq_coe,
+    RingHom.coe_coe]
+  exact DualNumber.scale_mapRingHom _ c a
 
 end Scheme
 

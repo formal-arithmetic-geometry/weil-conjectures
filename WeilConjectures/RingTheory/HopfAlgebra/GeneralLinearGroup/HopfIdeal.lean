@@ -734,15 +734,6 @@ theorem isRadical_identityComponent (I : Ideal (CoordinateRing n k)) :
     (identityComponent I).IsRadical :=
   PrimeSpectrum.isRadical_vanishingIdeal _
 
-/-- The closed subset of `Spec k[x_ij, det⁻¹]` cut out by the ideal of the reduced identity
-component of `V(I)` is the connected component of the identity in the closed subset `V(I)`. -/
-theorem zeroLocus_identityComponent_eq_connectedComponentIn (I : Ideal (CoordinateRing n k)) :
-    PrimeSpectrum.zeroLocus (identityComponent I : Set (CoordinateRing n k)) =
-      connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
-        (toPrimeSpectrum 1) := by
-  rw [identityComponent, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure,
-    ((PrimeSpectrum.isClosed_zeroLocus _).isClosed_connectedComponentIn _).closure_eq]
-
 /-- The reduced identity component is monotone in the group: if `V(J) ⊆ V(I)` then
 `V(J)° ⊆ V(I)°`. -/
 theorem identityComponent_mono (I : Ideal (CoordinateRing n k)) {J : Ideal (CoordinateRing n k)}

@@ -8,7 +8,6 @@ module
 public import Mathlib.Algebra.DualNumber
 public import Mathlib.Data.Matrix.Mul
 public import Mathlib.RingTheory.Derivation.Basic
-public import Mathlib.Tactic.NoncommRing
 public import Mathlib.Tactic.LinearCombination
 
 /-!
@@ -27,6 +26,20 @@ open TrivSqZeroExt
 namespace DualNumber
 
 variable {R : Type*} [CommSemiring R]
+
+section LiftElem
+
+variable {A : Type*} [CommSemiring A] [Algebra R A]
+
+/-- The `R`-algebra homomorphism `R[ε] → A`, `ε ↦ m`, for an element `m` of square zero. -/
+def liftElem (m : A) (hm : m * m = 0) : R[ε] →ₐ[R] A :=
+  lift ⟨(Algebra.ofId R A, m), hm, fun _ ↦ Commute.all _ _⟩
+
+theorem liftElem_apply (m : A) (hm : m * m = 0) (x : R[ε]) :
+    liftElem m hm x = algebraMap R A x.fst + algebraMap R A x.snd * m :=
+  rfl
+
+end LiftElem
 
 /-- The `R`-algebra endomorphism `ε ↦ cε` of the dual numbers. -/
 def scale (c : R) : R[ε] →ₐ[R] R[ε] :=
@@ -145,37 +158,6 @@ theorem map_snd_mul_of_map_fst_eq_one {A B : Matrix n n (DualNumber R)}
   have hB' (i j) : (B i j).fst = (1 : Matrix n n R) i j := congr_fun₂ hB i j
   simp [Matrix.mul_apply, TrivSqZeroExt.snd_sum, hA', hB',
     Matrix.one_apply, Finset.sum_add_distrib, add_comm]
-
-variable [Fintype n] in
-/-- The mixed term of the commutator of `1 + εX` and `1 + δY` over `R[ε][δ]` is the commutator
-`XY - YX`: `(1 + εX)(1 + δY)(1 - εX)(1 - δY) = 1 + εδ(XY - YX)`. -/
-theorem map_snd_snd_commutator (X Y : Matrix n n R) :
-    ((1 + X.map (fun a ↦ inl (inr a) : R → DualNumber (DualNumber R))) *
-        (1 + Y.map fun b ↦ inr (inl b)) * (1 - X.map fun a ↦ inl (inr a)) *
-        (1 - Y.map fun b ↦ inr (inl b))).map (fun z ↦ z.snd.snd) = X * Y - Y * X := by
-  set P : Matrix n n (DualNumber (DualNumber R)) := X.map fun a ↦ inl (inr a)
-  set Q : Matrix n n (DualNumber (DualNumber R)) := Y.map fun b ↦ inr (inl b)
-  have hPP : P * P = 0 := by
-    ext i j : 1
-    simp [P, Matrix.mul_apply, inl_mul_inl, inr_mul_inr, -DualNumber.inr_eq_smul_eps]
-  have hQQ : Q * Q = 0 := by
-    ext i j : 1
-    simp [Q, Matrix.mul_apply, inr_mul_inr, -DualNumber.inr_eq_smul_eps]
-  have hPQP : P * Q * P = 0 := by
-    ext i j : 1
-    simp [P, Q, Matrix.mul_apply, Finset.sum_mul, inl_mul_inr, inr_mul_inl, inr_mul_inr,
-      smul_eq_mul, -DualNumber.inr_eq_smul_eps]
-  have hQPQ : Q * P * Q = 0 := by
-    ext i j : 1
-    simp [P, Q, Matrix.mul_apply, Finset.sum_mul, inl_mul_inr, inr_mul_inl, inr_mul_inr,
-      smul_eq_mul, -DualNumber.inr_eq_smul_eps]
-  have h : (1 + P) * (1 + Q) * (1 - P) * (1 - Q) = 1 + P * Q - Q * P - P * P - Q * Q +
-      P * P * Q + Q * P * Q - P * Q * P - P * (Q * Q) + P * Q * P * Q := by
-    noncomm_ring
-  rw [h, hPP, hQQ, hPQP, hQPQ]
-  ext i j
-  simp [P, Q, Matrix.mul_apply, TrivSqZeroExt.snd_sum, Matrix.one_apply, apply_ite snd,
-    -DualNumber.inr_eq_smul_eps]
 
 end Matrix
 

@@ -74,6 +74,48 @@ open Matrix.GeneralLinearGroup
 
 variable {n : Type u} [Fintype n] [DecidableEq n] {k : Type u} [CommRing k]
 
+section AffineFactor
+
+/-- Two morphisms `Spec Γ(X) ⟶ Y` to an affine scheme agreeing after `X ⟶ Spec Γ(X)` agree. -/
+theorem _root_.AlgebraicGeometry.Scheme.toSpecΓ_comp_injective (X : Scheme.{u}) {Y : Scheme.{u}}
+    [IsAffine Y] {g₁ g₂ : Spec Γ(X, ⊤) ⟶ Y} (h : X.toSpecΓ ≫ g₁ = X.toSpecΓ ≫ g₂) : g₁ = g₂ := by
+  apply ext_of_isAffine
+  have := congrArg Scheme.Hom.appTop h
+  rw [Scheme.Hom.comp_appTop, Scheme.Hom.comp_appTop, Scheme.toSpecΓ_appTop] at this
+  exact (cancel_mono _).1 this
+
+/-- Every morphism from a `k`-scheme `X` to the spectrum of a `k`-algebra factors uniquely through
+`X ⟶ Spec Γ(X)`, as a morphism over `Spec k`. -/
+theorem _root_.AlgebraicGeometry.Over.exists_bijective_comp_toSpecΓ (X : Over (Spec (.of k))) :
+    ∃ (R : Type u) (_ : CommRing R) (_ : Algebra k R)
+      (t : X ⟶ (Spec (.of R)).asOver (Spec (.of k))),
+      ∀ (B : Type u) [CommRing B] [Algebra k B], Function.Bijective
+        fun g : (Spec (.of R)).asOver (Spec (.of k)) ⟶ (Spec (.of B)).asOver (Spec (.of k)) ↦
+          t ≫ g := by
+  let : Algebra k Γ(X.left, ⊤) := ((Scheme.ΓSpecIso (.of k)).inv ≫ X.hom.appTop).hom.toAlgebra
+  have hX : X.left.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (algebraMap k Γ(X.left, ⊤))) = X.hom := by
+    change X.left.toSpecΓ ≫ Spec.map ((Scheme.ΓSpecIso (.of k)).inv ≫ X.hom.appTop) = X.hom
+    rw [Spec.map_comp, ← Scheme.toSpecΓ_naturality_assoc, toSpecΓ_SpecMap_ΓSpecIso_inv,
+      Category.comp_id]
+  refine ⟨Γ(X.left, ⊤), inferInstance, inferInstance, Over.homMk X.left.toSpecΓ hX,
+    fun B _ _ ↦ ⟨fun g₁ g₂ h ↦ ?_, fun a ↦ ?_⟩⟩
+  · exact Over.OverMorphism.ext
+      (Scheme.toSpecΓ_comp_injective (Y := Spec (.of B)) X.left (g₁ := g₁.left) (g₂ := g₂.left)
+        (congrArg Over.Hom.left h))
+  · obtain ⟨a', ha'⟩ : ∃ a' : X.left ⟶ Spec (.of B), a' = a.left := ⟨_, rfl⟩
+    have ha := Scheme.toSpecΓ_naturality a'
+    let g : Spec Γ(X.left, ⊤) ⟶ Spec (.of B) :=
+      Spec.map a'.appTop ≫ inv (Spec (.of B)).toSpecΓ
+    have hg : X.left.toSpecΓ ≫ g = a.left := by
+      rw [← Category.assoc, ← ha, Category.assoc, IsIso.hom_inv_id, Category.comp_id, ha']
+    refine ⟨Over.homMk g (Scheme.toSpecΓ_comp_injective (Y := Spec (.of k)) X.left ?_),
+      Over.OverMorphism.ext hg⟩
+    change X.left.toSpecΓ ≫ g ≫ Spec.map _ = X.left.toSpecΓ ≫ Spec.map _
+    rw [reassoc_of% hg, hX]
+    exact Over.w a
+
+end AffineFactor
+
 section SubgroupScheme
 
 /-- The closed subgroup scheme `V(I) = Spec (k[x_ij, det⁻¹] ⧸ I)` of `GL_n` cut out by a Hopf ideal
@@ -245,6 +287,31 @@ instance : IsMonHom (subgroupSchemeHom h) where
 theorem subgroupSchemeHom_refl : subgroupSchemeHom (le_refl I) = 𝟙 (subgroupScheme I) :=
   (cancel_mono (subgroupSchemeι I)).1 (by simp)
 
+theorem mapMulEquiv_comp_subgroupSchemeHom {R : Type u} [CommRing R] [Algebra k R]
+    (ψ : WithConv (CoordinateRing n k ⧸ J →ₐ[k] R)) :
+    Spec.mapMulEquiv ψ ≫ subgroupSchemeHom h =
+      Spec.mapMulEquiv (toConv (ψ.ofConv.comp (Ideal.Quotient.factorₐ k h))) := by
+  apply Over.OverMorphism.ext
+  change Spec.map _ ≫ Spec.map _ = Spec.map _
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+  rfl
+
+include h in
+theorem zeroLocus_le_zeroLocus (R : Type u) [CommRing R] [Algebra k R] :
+    zeroLocus J R ≤ zeroLocus I R :=
+  fun _ hg a ha ↦ hg a (h ha)
+
+theorem zeroLocusMulEquiv_comp_subgroupSchemeHom {R : Type u} [CommRing R] [Algebra k R]
+    (g : zeroLocus J R) :
+    zeroLocusMulEquiv J R g ≫ subgroupSchemeHom h =
+      zeroLocusMulEquiv I R ⟨g, zeroLocus_le_zeroLocus h R g.2⟩ := by
+  apply injective_homMulEquiv_comp I R
+  dsimp only
+  rw [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, homMulEquiv_zeroLocusMulEquiv_comp,
+    homMulEquiv_zeroLocusMulEquiv_comp]
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the group structure on points of the quotient scheme makes instance search slow
 /-- If `V(I)(R)` has its commutators in `V(J)(R)` for every `k`-algebra `R`, then the closed
 immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
 (`AlgebraicGeometry.IsMonHom.ContainsCommutators`).
@@ -257,35 +324,21 @@ theorem containsCommutators_subgroupSchemeHom
       ⁅zeroLocus I R, zeroLocus I R⁆ ≤ zeroLocus J R) :
     IsMonHom.ContainsCommutators (subgroupSchemeHom h) := by
   refine ⟨fun {X} a b ↦ ?_⟩
-  -- Both points factor through the affine scheme `Spec Γ(X)`, so we may assume `X` affine.
-  let adj := algΓAlgSpecAdjunction (.of k)
-  have hfac {Y : (CommAlgCat k)ᵒᵖ} (f : X ⟶ (algSpec (.of k)).obj Y) :
-      ∃ f' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶ (algSpec (.of k)).obj Y,
-        f = adj.unit.app X ≫ f' :=
-    ⟨_, ((adj.homEquiv_unit (f := (adj.homEquiv X Y).symm f)).symm.trans
-      ((adj.homEquiv X Y).apply_symm_apply f)).symm⟩
-  obtain ⟨a, rfl⟩ : ∃ a' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶
-      subgroupScheme I, a = (adj.unit.app X : X ⟶ _) ≫ a' :=
-    hfac (Y := .op (.of k (CoordinateRing n k ⧸ I))) a
-  obtain ⟨b, rfl⟩ : ∃ b' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶
-      subgroupScheme I, b = (adj.unit.app X : X ⟶ _) ≫ b' :=
-    hfac (Y := .op (.of k (CoordinateRing n k ⧸ I))) b
-  -- For `X = Spec R`, the points are matrices over `R`.
-  let R := ((algΓ (.of k)).obj X).unop
-  obtain ⟨g, rfl⟩ := (zeroLocusMulEquiv I R).surjective a
-  obtain ⟨g', rfl⟩ := (zeroLocusMulEquiv I R).surjective b
-  have hc : (g : GL n R) * g' * (g : GL n R)⁻¹ * (g' : GL n R)⁻¹ ∈ zeroLocus J R :=
-    hIJ R (Subgroup.commutator_mem_commutator g.2 g'.2)
-  refine ⟨(adj.unit.app X : X ⟶ _) ≫ zeroLocusMulEquiv J R ⟨_, hc⟩, ?_⟩
-  rw [← GrpObj.comp_inv, ← GrpObj.comp_inv, ← MonObj.comp_mul, ← MonObj.comp_mul,
-    ← MonObj.comp_mul, Category.assoc]
-  refine congrArg _ ?_
-  apply injective_homMulEquiv_comp I R
-  dsimp only
-  rw [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, homMulEquiv_zeroLocusMulEquiv_comp,
-    MonObj.mul_comp, MonObj.mul_comp, MonObj.mul_comp, GrpObj.inv_comp, GrpObj.inv_comp, map_mul,
-    map_mul, map_mul, map_inv, map_inv, homMulEquiv_zeroLocusMulEquiv_comp,
-    homMulEquiv_zeroLocusMulEquiv_comp]
+  obtain ⟨R, _, _, t, ht⟩ := Over.exists_bijective_comp_toSpecΓ X
+  obtain ⟨a', rfl⟩ := (ht _).2 a
+  obtain ⟨b', rfl⟩ := (ht _).2 b
+  set x := (zeroLocusMulEquiv I R).symm a'
+  set y := (zeroLocusMulEquiv I R).symm b'
+  have hmem : ((x * y * x⁻¹ * y⁻¹ : zeroLocus I R) : GL n R) ∈ zeroLocus J R := by
+    apply hIJ R
+    have := Subgroup.commutator_mem_commutator x.2 y.2
+    simpa [commutatorElement_def] using this
+  refine ⟨t ≫ zeroLocusMulEquiv J R ⟨_, hmem⟩, ?_⟩
+  rw [Category.assoc, zeroLocusMulEquiv_comp_subgroupSchemeHom,
+    show (⟨_, zeroLocus_le_zeroLocus h R hmem⟩ : zeroLocus I R) = x * y * x⁻¹ * y⁻¹ from rfl,
+    map_mul, map_mul, map_mul, map_inv, map_inv, MulEquiv.apply_symm_apply,
+    MulEquiv.apply_symm_apply, MonObj.comp_mul, MonObj.comp_mul, MonObj.comp_mul,
+    GrpObj.comp_inv, GrpObj.comp_inv]
 
 end Inclusion
 
@@ -422,12 +475,17 @@ theorem le_derivedIdeal : I ≤ derivedIdeal I :=
   le_sSup ⟨inferInstance, le_refl I,
     IsMonHom.ContainsCommutators.of_eq (subgroupSchemeHom_refl (I := I)).symm⟩
 
-/-- The sum of Hopf ideals is a Hopf ideal, so the derived subgroup is a closed subgroup scheme:
-the counit, comultiplication and antipode conditions are additive
-(`Ideal.IsHopfIdeal.sSup`). -/
-instance : (derivedIdeal I).IsHopfIdeal k :=
-  Ideal.IsHopfIdeal.sSup fun _ ⟨hJ, _, _⟩ ↦ hJ
+/-- The sum of Hopf ideals is a Hopf ideal, so the derived subgroup is a closed subgroup scheme.
 
+Proof sketch (not formalised): if `Δ(a) ∈ J ⊗ A + A ⊗ J` and `Δ(b) ∈ J' ⊗ A + A ⊗ J'`, then
+`Δ(a + b) ∈ (J + J') ⊗ A + A ⊗ (J + J')`; likewise for the counit and the antipode. -/
+instance : (derivedIdeal I).IsHopfIdeal k :=
+  Ideal.isHopfIdeal_sSup fun _ ⟨hJ, _, _⟩ ↦ hJ
+
+set_option synthInstance.maxHeartbeats 400000 in
+-- the group structure on points of the quotient scheme makes instance search slow
+set_option maxHeartbeats 2000000 in
+-- the factorisation through `Spec Γ(X)` and the commutator computation are slow to elaborate
 /-- The derived subgroup contains the commutators of `G`: `G ⧸ [G, G]` is commutative.
 
 Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where they are matrices over
@@ -435,45 +493,43 @@ Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where the
 `derivedIdeal I`, hence those of their sum. (blueprint: `sk-i-restriction`) -/
 instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) := by
   refine ⟨fun {X} a b ↦ ?_⟩
-  -- Both points factor through the affine scheme `Spec Γ(X)`, so we may assume `X` affine.
-  let adj := algΓAlgSpecAdjunction (.of k)
-  have hfac {Y : (CommAlgCat k)ᵒᵖ} (f : X ⟶ (algSpec (.of k)).obj Y) :
-      ∃ f' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶ (algSpec (.of k)).obj Y,
-        f = adj.unit.app X ≫ f' :=
-    ⟨_, ((adj.homEquiv_unit (f := (adj.homEquiv X Y).symm f)).symm.trans
-      ((adj.homEquiv X Y).apply_symm_apply f)).symm⟩
-  obtain ⟨a, rfl⟩ : ∃ a' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶
-      subgroupScheme I, a = (adj.unit.app X : X ⟶ _) ≫ a' :=
-    hfac (Y := .op (.of k (CoordinateRing n k ⧸ I))) a
-  obtain ⟨b, rfl⟩ : ∃ b' : (algSpec (.of k)).obj ((algΓ (.of k)).obj X) ⟶
-      subgroupScheme I, b = (adj.unit.app X : X ⟶ _) ≫ b' :=
-    hfac (Y := .op (.of k (CoordinateRing n k ⧸ I))) b
-  -- For `X = Spec R`, the points are matrices over `R`.
-  let R := ((algΓ (.of k)).obj X).unop
-  obtain ⟨g, rfl⟩ := (zeroLocusMulEquiv I R).surjective a
-  obtain ⟨g', rfl⟩ := (zeroLocusMulEquiv I R).surjective b
-  have hD : (g : GL n R) * g' * (g : GL n R)⁻¹ * (g' : GL n R)⁻¹ ∈
-      zeroLocus (derivedIdeal I) R := fun x hx ↦ by
-    refine (sSup_le fun J ⟨hJ, hIJ, hc⟩ ↦ ?_ : derivedIdeal I ≤ RingHom.ker _) hx
-    obtain ⟨c, hc⟩ := hc.exists_comp_eq_commutator (zeroLocusMulEquiv I R g)
-      (zeroLocusMulEquiv I R g')
-    have h := congrArg (fun z ↦ GeneralLinearGroup.homMulEquiv n k R (z ≫ subgroupSchemeι I)) hc
-    simp only [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, MonObj.mul_comp,
-      GrpObj.inv_comp, map_mul, map_inv, homMulEquiv_zeroLocusMulEquiv_comp] at h
-    have hmem : (g : GL n R) * g' * (g : GL n R)⁻¹ * (g' : GL n R)⁻¹ ∈ zeroLocus J R := by
-      rw [← h, ← SetLike.mem_coe, ← range_homMulEquiv_comp]
-      exact ⟨c, rfl⟩
-    exact fun y hy ↦ hmem y hy
-  refine ⟨(adj.unit.app X : X ⟶ _) ≫ zeroLocusMulEquiv (derivedIdeal I) R ⟨_, hD⟩, ?_⟩
-  rw [← GrpObj.comp_inv, ← GrpObj.comp_inv, ← MonObj.comp_mul, ← MonObj.comp_mul,
-    ← MonObj.comp_mul, Category.assoc]
-  refine congrArg _ ?_
-  apply injective_homMulEquiv_comp I R
-  dsimp only
-  rw [Category.assoc, subgroupSchemeHom_comp_subgroupSchemeι, homMulEquiv_zeroLocusMulEquiv_comp,
-    MonObj.mul_comp, MonObj.mul_comp, MonObj.mul_comp, GrpObj.inv_comp, GrpObj.inv_comp, map_mul,
-    map_mul, map_mul, map_inv, map_inv, homMulEquiv_zeroLocusMulEquiv_comp,
-    homMulEquiv_zeroLocusMulEquiv_comp]
+  obtain ⟨R, _, _, t, ht⟩ := Over.exists_bijective_comp_toSpecΓ X
+  obtain ⟨a', rfl⟩ := (ht _).2 a
+  obtain ⟨b', rfl⟩ := (ht _).2 b
+  have hγ : (t ≫ a') * (t ≫ b') * (t ≫ a')⁻¹ * (t ≫ b')⁻¹ =
+      t ≫ (a' * b' * a'⁻¹ * b'⁻¹) := by
+    rw [MonObj.comp_mul, MonObj.comp_mul, MonObj.comp_mul, GrpObj.comp_inv, GrpObj.comp_inv]
+  obtain ⟨ψ, hψ⟩ := Spec.mapMulEquiv.surjective (a' * b' * a'⁻¹ * b'⁻¹)
+  obtain ⟨ψ, rfl⟩ : ∃ ψ₀, toConv ψ₀ = ψ := ⟨_, toConv_ofConv ψ⟩
+  have hkill (J : Ideal (CoordinateRing n k)) [J.IsHopfIdeal k] (hIJ : I ≤ J)
+      (hc : IsMonHom.ContainsCommutators (subgroupSchemeHom hIJ)) :
+      J ≤ RingHom.ker (ψ.comp (Ideal.Quotient.mkₐ k I)) := by
+    intro j hj
+    obtain ⟨c, hc'⟩ := hc.exists_comp_eq_commutator (t ≫ a') (t ≫ b')
+    obtain ⟨c', rfl⟩ := (ht _).2 c
+    obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective c'
+    have e : Spec.mapMulEquiv χ ≫ subgroupSchemeHom hIJ = a' * b' * a'⁻¹ * b'⁻¹ :=
+      (ht _).1 (by
+        beta_reduce at hc' ⊢
+        rw [← Category.assoc, hc', hγ])
+    rw [mapMulEquiv_comp_subgroupSchemeHom, ← hψ] at e
+    have e' : χ.ofConv.comp (Ideal.Quotient.factorₐ k hIJ) = ψ := by
+      simpa using congrArg ofConv (Spec.mapMulEquiv.injective e)
+    rw [RingHom.mem_ker, AlgHom.comp_apply, ← e']
+    simp [Ideal.Quotient.eq_zero_iff_mem.2 hj]
+  have hker : derivedIdeal I ≤ RingHom.ker (ψ.comp (Ideal.Quotient.mkₐ k I)) :=
+    sSup_le fun J ⟨hJ, hIJ, hc⟩ ↦ hkill J hIJ hc
+  refine ⟨t ≫ Spec.mapMulEquiv (toConv (Ideal.Quotient.liftₐ (derivedIdeal I)
+    (ψ.comp (Ideal.Quotient.mkₐ k I)) fun j hj ↦ hker hj)), ?_⟩
+  rw [Category.assoc, mapMulEquiv_comp_subgroupSchemeHom, hγ]
+  congr 1
+  rw [← hψ]
+  congr 1
+  rw [ofConv_toConv]
+  congr 1
+  apply Ideal.Quotient.algHom_ext
+  ext a
+  rfl
 
 variable {I} {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (h : I ≤ J)
 
@@ -489,32 +545,52 @@ theorem containsCommutators_iff_le_derivedIdeal :
 
 end Derived
 
-section IdentityPoint
+section OnePoint
 
 variable {k : Type u} [Field k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
 
-/-- The closed immersion `V(I) ⟶ GL_n` maps the identity point of `V(I)` to the identity matrix. -/
-theorem subgroupSchemeι_left_base_onePoint :
-    (subgroupSchemeι I).left.base (GrpObj.onePoint (subgroupScheme I)) = toPrimeSpectrum 1 :=
-  rfl
+/-- The identity point of `GL_n` is the maximal ideal `ker(ev_1)` of the coordinate ring. -/
+theorem onePoint_generalLinearGroup : GrpObj.onePoint 𝔾𝕃(n; k) = toPrimeSpectrum 1 := by
+  have h₁ : (1 : (Spec (.of k)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)) =
+      Spec.mapMulEquiv (toConv (evalAlgHom (1 : GL n k))) := by
+    apply (GeneralLinearGroup.homMulEquiv n k k).injective
+    rw [map_one, GeneralLinearGroup.homMulEquiv_mapMulEquiv, ← algHomMulEquiv_symm_apply,
+      MulEquiv.apply_symm_apply]
+  have h₂ : (1 : (Spec (.of k)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)).left
+      (show Spec (.of k) from ⟨⊥, Ideal.isPrime_bot⟩) = GrpObj.onePoint 𝔾𝕃(n; k) := by
+    rw [Hom.one_def, Over.comp_left, Scheme.Hom.comp_apply]
+    exact congrArg _ (Subsingleton.elim (α := PrimeSpectrum k) _ _)
+  rw [← h₂, h₁]
+  apply PrimeSpectrum.ext
+  exact (RingHom.ker_eq_comap_bot _).symm
 
-/-- The image of the closed immersion `V(I) ⟶ GL_n` is the zero locus of `I`. -/
-theorem range_subgroupSchemeι_left_base :
-    Set.range (subgroupSchemeι I).left.base =
-      PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)) := by
-  refine (range_comap_of_surjective _ (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective).trans ?_
-  rw [Ideal.mk_ker]
+/-- The closed immersion `V(I) ⟶ GL_n` maps the identity point to the identity point. -/
+theorem subgroupSchemeι_onePoint :
+    (subgroupSchemeι I).left (GrpObj.onePoint (subgroupScheme I)) = GrpObj.onePoint 𝔾𝕃(n; k) :=
+  congrArg (fun g ↦ g.left (show Spec (.of k) from ⟨⊥, Ideal.isPrime_bot⟩))
+    (IsMonHom.one_hom (subgroupSchemeι I))
 
-/-- The closed immersion `V(I) ⟶ GL_n` maps the connected component of the identity of `V(I)`
-onto the zero locus of the ideal `identityComponent I` of the reduced identity component. -/
-theorem image_connectedComponent_onePoint :
-    (subgroupSchemeι I).left.base '' connectedComponent (GrpObj.onePoint (subgroupScheme I)) =
-      PrimeSpectrum.zeroLocus (identityComponent I : Set (CoordinateRing n k)) := by
-  rw [(subgroupSchemeι I).left.isClosedEmbedding.isInducing.image_connectedComponent,
-    range_subgroupSchemeι_left_base, subgroupSchemeι_left_base_onePoint,
-    zeroLocus_identityComponent_eq_connectedComponentIn]
+theorem range_subgroupSchemeι {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] :
+    Set.range (subgroupSchemeι J).left =
+      PrimeSpectrum.zeroLocus (J : Set (CoordinateRing n k)) := by
+  change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mkₐ k J).toRingHom) = _
+  rw [range_comap_of_surjective (S := CoordinateRing n k ⧸ J) (Ideal.Quotient.mkₐ k J).toRingHom
+    Ideal.Quotient.mk_surjective]
+  exact congrArg _ (congrArg SetLike.coe (Ideal.mk_ker (I := J)))
 
-end IdentityPoint
+omit [I.IsHopfIdeal k] in
+/-- The connected component of the identity point in the zero locus of `I` is closed. -/
+theorem isClosed_connectedComponentIn_zeroLocus :
+    IsClosed (connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+      (toPrimeSpectrum 1)) := by
+  by_cases hx : toPrimeSpectrum 1 ∈ PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))
+  · rw [connectedComponentIn_eq_image hx]
+    exact (PrimeSpectrum.isClosed_zeroLocus _).isClosedEmbedding_subtypeVal.isClosedMap _
+      isClosed_connectedComponent
+  · rw [connectedComponentIn_eq_empty hx]
+    exact isClosed_empty
+
+end OnePoint
 
 section IdentityComponent
 
@@ -527,10 +603,17 @@ identity point. (blueprint: `sk-p-geometry`) -/
 theorem range_subgroupSchemeHom_le_identityComponent :
     Set.range (subgroupSchemeHom (le_identityComponent I)).left.base =
       connectedComponent (GrpObj.onePoint (subgroupScheme I)) := by
-  refine Set.image_injective.2 (subgroupSchemeι I).left.isClosedEmbedding.injective ?_
-  rw [image_connectedComponent_onePoint, ← Set.range_comp, ← TopCat.coe_comp,
-    ← Scheme.Hom.comp_base, ← Over.comp_left, subgroupSchemeHom_comp_subgroupSchemeι,
-    range_subgroupSchemeι_left_base]
+  have hemb := (subgroupSchemeι I).left.isClosedEmbedding
+  apply hemb.injective.image_injective
+  have hcomp : ⇑(subgroupSchemeι I).left ∘ ⇑(subgroupSchemeHom (le_identityComponent I)).left =
+      ⇑(subgroupSchemeι (identityComponent I)).left := by
+    funext x
+    rw [Function.comp_apply, ← Scheme.Hom.comp_apply, ← Over.comp_left,
+      subgroupSchemeHom_comp_subgroupSchemeι]
+  rw [← Set.range_comp, hcomp, hemb.isInducing.image_connectedComponent,
+    subgroupSchemeι_onePoint, onePoint_generalLinearGroup, range_subgroupSchemeι,
+    range_subgroupSchemeι, identityComponent, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
+  exact (isClosed_connectedComponentIn_zeroLocus I).closure_eq
 
 /-- A `k`-point of `V(I)` whose image lies in the connected component of the identity is a
 `k`-point of the identity component: its matrix satisfies the equations `identityComponent I`. -/
@@ -604,9 +687,17 @@ identity component: `V(I)` is then the closure of the connected component of the
 `V(I)`, which is closed. -/
 theorem connectedSpace_subgroupScheme (h : IsConnected I) :
     ConnectedSpace (subgroupScheme I).left := by
-  refine connectedSpace_iff_connectedComponent.2 ⟨GrpObj.onePoint (subgroupScheme I), ?_⟩
-  refine Set.image_injective.2 (subgroupSchemeι I).left.isClosedEmbedding.injective ?_
-  rw [image_connectedComponent_onePoint, h, Set.image_univ, range_subgroupSchemeι_left_base]
+  have hemb := (subgroupSchemeι I).left.isClosedEmbedding
+  have hr : Set.range (subgroupSchemeι I).left = connectedComponentIn
+      (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) (toPrimeSpectrum 1) := by
+    rw [range_subgroupSchemeι]
+    conv_lhs => rw [← h]
+    rw [identityComponent, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure,
+      (isClosed_connectedComponentIn_zeroLocus I).closure_eq]
+  rw [connectedSpace_iff_univ]
+  refine ⟨⟨GrpObj.onePoint _, trivial⟩, hemb.isInducing.isPreconnected_image.1 ?_⟩
+  rw [Set.image_univ, hr]
+  exact isPreconnected_connectedComponentIn
 
 /-- The reduced centre `Z(G)` of a reduced `G = V(I)` over an algebraically closed field is
 central scheme-theoretically: its points commute with all points of `G`.

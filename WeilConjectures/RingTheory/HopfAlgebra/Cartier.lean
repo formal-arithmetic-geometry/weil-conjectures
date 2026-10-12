@@ -19,11 +19,11 @@ public import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.MvPolynomial.EulerIdentity
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.RingTheory.Nakayama
 public import Mathlib.RingTheory.Nilpotent.Defs
 public import WeilConjectures.Mathlib.Algebra.MvPolynomial.PDeriv
 public import WeilConjectures.Mathlib.RingTheory.Derivation.Basic
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Cotangent
-public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
@@ -58,6 +58,8 @@ through the smoothness of the reduced group by the invariant derivations.
   commutative Hopf algebra in characteristic zero form a prime ideal.
 - `HopfAlgebra.isReduced_of_charZero`: Cartier's theorem.
 - `Ideal.IsHopfIdeal.isRadical`: Hopf ideals are radical in characteristic zero.
+- `AlgHom.finrank_cotangent_le_ringKrullDim`, `AlgHom.height_ker_liftEquiv_le`: the cotangent
+  space at a rational point bounds the dimension, and the height of the point after base change.
 - `HopfAlgebra.finrank_cotangent_eq_ringKrullDim`: the cotangent space at the identity has the
   dimension of the group.
 
@@ -84,6 +86,18 @@ namespace AlgHom
 
 variable {k A : Type*} [Field k] [CommRing A] [Algebra k A] {ε : A →ₐ[k] k}
   {ι : Type*} {x : ι → A} (hx : ∀ i, x i ∈ RingHom.ker ε)
+
+include hx in
+/-- If the homogeneous components of `f` of degree `< r` vanish, then `f(x) ∈ I ^ r`. -/
+theorem aeval_mem_pow_of_homogeneousComponent_eq_zero {r : ℕ} {f : MvPolynomial ι k}
+    (hf : ∀ m < r, homogeneousComponent m f = 0) : aeval x f ∈ RingHom.ker ε ^ r := by
+  rw [← sum_homogeneousComponent f, map_sum]
+  refine Ideal.sum_mem _ fun m _ ↦ ?_
+  by_cases hm : m < r
+  · rw [hf m hm, map_zero]
+    exact zero_mem _
+  · exact Ideal.pow_le_pow_right (not_lt.1 hm)
+      ((homogeneousComponent_isHomogeneous m f).aeval_mem_pow hx)
 
 section Spanning
 
@@ -166,6 +180,33 @@ theorem eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ [_root_.Finite ι] {r : �
     rw [eq_comm, nsmul_eq_mul, mul_eq_zero] at h
     exact h.resolve_left (Nat.cast_ne_zero.2 (Nat.succ_ne_zero r))
 
+include hx hD in
+/-- In characteristic zero, the `xᵢ` are algebraically independent modulo `⋂ₙ Iⁿ`: if `f(x)`
+lies in every power of `I`, then by Cartier's lemma every homogeneous component of `f`
+vanishes, by induction on the degree. -/
+theorem algebraicIndependent_mk_iInf_pow_ker [_root_.Finite ι] :
+    AlgebraicIndependent k
+      (fun i ↦ Ideal.Quotient.mkₐ k (⨅ r : ℕ, RingHom.ker ε ^ r) (x i)) := by
+  rw [_root_.algebraicIndependent_iff]
+  intro p hp
+  rw [← MvPolynomial.comp_aeval_apply, Ideal.Quotient.mkₐ_eq_mk,
+    Ideal.Quotient.eq_zero_iff_mem] at hp
+  have hcomp (n : ℕ) : homogeneousComponent n p = 0 := by
+    induction n using Nat.strong_induction_on with
+    | _ n ih =>
+      refine eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ hx hD
+        (homogeneousComponent_isHomogeneous n p) ?_
+      have h1 : aeval x (p - homogeneousComponent n p) ∈ RingHom.ker ε ^ (n + 1) := by
+        refine aeval_mem_pow_of_homogeneousComponent_eq_zero hx fun m hm ↦ ?_
+        rw [map_sub, homogeneousComponent_of_mem (homogeneousComponent_mem n p)]
+        rcases (Nat.lt_succ_iff.1 hm).lt_or_eq with hm | rfl
+        · rw [ih m hm, if_neg hm.ne, sub_zero]
+        · rw [if_pos rfl, sub_self]
+      have h2 := sub_mem (Submodule.mem_iInf _ |>.1 hp (n + 1)) h1
+      rwa [map_sub, sub_sub_cancel] at h2
+  rw [← sum_homogeneousComponent p]
+  exact Finset.sum_eq_zero fun n _ ↦ hcomp n
+
 end Graded
 
 variable [Fintype ι] (hspan : ∀ a ∈ RingHom.ker ε, ∃ c : ι → k,
@@ -236,6 +277,35 @@ theorem finiteDimensional_cotangent [IsNoetherianRing A] :
   have : Submodule.span A (S : Set (RingHom.ker ε).Cotangent) ≤ N :=
     Submodule.span_le.2 fun s hs ↦ Submodule.subset_span hs
   exact this (hS ▸ Submodule.mem_top)
+
+/-- Lifts `xᵢ ∈ I` of a basis of the cotangent space `I / I²` at a `k`-point `ε` span `I` modulo
+`I²`; if every tangent vector at `ε` extends to a derivation, there are moreover derivations
+`Dⱼ` with `ε (Dⱼ xᵢ) = δᵢⱼ`. -/
+theorem exists_spanning_and_derivation [IsNoetherianRing A]
+    (hD : ∀ φ : (RingHom.ker ε).Cotangent →ₗ[k] k, ∃ D : Derivation k A A,
+      ∀ a (ha : a ∈ RingHom.ker ε), ε (D a) = φ ((RingHom.ker ε).toCotangent ⟨a, ha⟩)) :
+    ∃ (x : Fin (Module.finrank k (RingHom.ker ε).Cotangent) → A)
+      (D : Fin (Module.finrank k (RingHom.ker ε).Cotangent) → Derivation k A A),
+      (∀ i, x i ∈ RingHom.ker ε) ∧
+      (∀ a ∈ RingHom.ker ε, ∃ c : Fin (Module.finrank k (RingHom.ker ε).Cotangent) → k,
+        a - ∑ i, algebraMap k A (c i) * x i ∈ RingHom.ker ε ^ 2) ∧
+      ∀ i j, ε (D j (x i)) = if i = j then 1 else 0 := by
+  classical
+  have := ε.finiteDimensional_cotangent
+  set I := RingHom.ker ε
+  let B := Module.finBasis k I.Cotangent
+  choose y hy using fun i ↦ I.toCotangent_surjective (B i)
+  choose D hD' using fun j ↦ hD (B.coord j)
+  refine ⟨fun i ↦ (y i : A), D, fun i ↦ (y i).2,
+    fun a ha ↦ ⟨fun i ↦ B.repr (I.toCotangent ⟨a, ha⟩) i, ?_⟩, fun i j ↦ ?_⟩
+  · have h : I.toCotangent (⟨a, ha⟩ - ∑ i, B.repr (I.toCotangent ⟨a, ha⟩) i • y i) = 0 := by
+      rw [map_sub, map_sum]
+      simp_rw [LinearMap.map_smul_of_tower, hy]
+      rw [B.sum_repr, sub_self]
+    rw [I.toCotangent_eq_zero] at h
+    simpa [Algebra.smul_def] using h
+  · rw [hD' j (y i) (y i).2, hy, Module.Basis.coord_apply, Module.Basis.repr_self,
+      Finsupp.single_apply]
 
 variable {ε} [CharZero k]
 
@@ -362,96 +432,6 @@ theorem mem_iInf_pow_ker_of_forall_exists_derivation [IsNoetherianRing A] {W : S
   exact Submodule.mem_iInf _ |>.2 fun r ↦ Ideal.pow_le_pow_right (Nat.le_succ r) (key r a ha)
 end AlgHom
 
-/-! ### Dimension of the local ring at a `k`-point -/
-
-namespace AlgHom
-
-variable {k A : Type*} [Field k] [CommRing A] [Algebra k A] {ε : A →ₐ[k] k}
-
-section Graded
-
-variable {ι : Type*} {x : ι → A} (hx : ∀ i, x i ∈ RingHom.ker ε)
-
-include hx in
-/-- A polynomial in the `xᵢ ∈ I` whose homogeneous components of degree `< r` vanish takes a
-value in `I ^ r`. -/
-theorem aeval_mem_pow_of_forall_homogeneousComponent_eq_zero {r : ℕ} {f : MvPolynomial ι k}
-    (hf : ∀ n < r, homogeneousComponent n f = 0) : aeval x f ∈ RingHom.ker ε ^ r := by
-  rw [← sum_homogeneousComponent f, map_sum]
-  refine Ideal.sum_mem _ fun n _ ↦ ?_
-  rcases lt_or_ge n r with h | h
-  · rw [hf n h, map_zero]
-    exact zero_mem _
-  · exact Ideal.pow_le_pow_right h ((homogeneousComponent_isHomogeneous n f).aeval_mem_pow hx)
-
-variable [CharZero k] [DecidableEq ι] [_root_.Finite ι] {D : ι → Derivation k A A}
-  (hD : ∀ i j, ε (D j (x i)) = if i = j then 1 else 0)
-
-include hx hD in
-/-- In characteristic zero, the `xᵢ` are algebraically independent modulo `⋂ₙ Iⁿ`: a polynomial
-`f` with `f(x) ∈ ⋂ₙ Iⁿ` is zero, since by Cartier's lemma its homogeneous components vanish one
-after the other. -/
-theorem eq_zero_of_aeval_mem_iInf_pow {f : MvPolynomial ι k}
-    (hf : aeval x f ∈ ⨅ r : ℕ, RingHom.ker ε ^ r) : f = 0 := by
-  have key (r : ℕ) : ∀ n < r, homogeneousComponent n f = 0 := by
-    induction r with
-    | zero => simp
-    | succ r ih =>
-      intro n hn
-      rcases Nat.lt_succ_iff_lt_or_eq.1 hn with hn | rfl
-      · exact ih n hn
-      refine eq_zero_of_isHomogeneous_of_aeval_mem_pow_succ hx hD
-        (homogeneousComponent_isHomogeneous n f) ?_
-      have h₁ : aeval x (f - homogeneousComponent n f) ∈ RingHom.ker ε ^ (n + 1) := by
-        refine aeval_mem_pow_of_forall_homogeneousComponent_eq_zero hx fun m hm ↦ ?_
-        rw [map_sub, homogeneousComponent_of_mem (homogeneousComponent_mem n f)]
-        rcases Nat.lt_succ_iff_lt_or_eq.1 hm with hm | rfl
-        · rw [ih m hm, if_neg hm.ne, sub_zero]
-        · rw [if_pos rfl, sub_self]
-      have h₂ := Submodule.mem_iInf _ |>.1 hf (n + 1)
-      simpa using sub_mem h₂ h₁
-  rw [← sum_homogeneousComponent f]
-  exact Finset.sum_eq_zero fun n _ ↦ key (n + 1) n n.lt_succ_self
-
-end Graded
-
-/-- **Krull's height theorem** at a `k`-point: if `x₁, …, xₙ ∈ I` span `I / I²`, then the ideal
-`I` of the `k`-point `ε` of a Noetherian `k`-algebra has height at most `n`. By Nakayama's lemma
-`I` is a minimal prime over `(x₁, …, xₙ)`. -/
-theorem height_ker_le [IsNoetherianRing A] {n : ℕ} {x : Fin n → A}
-    (hx : ∀ i, x i ∈ RingHom.ker ε) (hspan : ∀ a ∈ RingHom.ker ε, ∃ c : Fin n → k,
-      a - ∑ i, algebraMap k A (c i) * x i ∈ RingHom.ker ε ^ 2) :
-    (RingHom.ker ε).height ≤ n := by
-  classical
-  set I := RingHom.ker ε
-  set J := Ideal.span (Set.range x)
-  have hJI : J ≤ I := Ideal.span_le.2 (Set.range_subset_iff.2 hx)
-  have hle : I ≤ J ⊔ I • I := fun a ha ↦ by
-    obtain ⟨c, hc⟩ := hspan a ha
-    rw [show a = ∑ i, algebraMap k A (c i) * x i + (a - ∑ i, algebraMap k A (c i) * x i) by ring]
-    refine Submodule.add_mem_sup
-      (Ideal.sum_mem _ fun i _ ↦ Ideal.mul_mem_left _ _ (Ideal.subset_span ⟨i, rfl⟩)) ?_
-    rwa [Ideal.smul_eq_mul, ← pow_two]
-  obtain ⟨r, hr, hrI⟩ := Submodule.exists_sub_one_mem_and_smul_le_of_fg_of_le_sup
-    (IsNoetherian.noetherian I) le_rfl hle
-  have hεr : ε r = 1 := by
-    rw [RingHom.mem_ker, map_sub, map_one, sub_eq_zero] at hr
-    exact hr
-  have hmin : I ∈ J.minimalPrimes := by
-    refine ⟨⟨RingHom.ker_isPrime _, hJI⟩, fun Q ⟨hQ, hJQ⟩ hQI a ha ↦ ?_⟩
-    have hrQ : r ∉ Q := fun h ↦ by
-      have := hQI h
-      rw [RingHom.mem_ker, hεr] at this
-      exact one_ne_zero this
-    exact (hQ.mem_or_mem (hJQ (hrI (Submodule.smul_mem_pointwise_smul a r I ha)))).resolve_left
-      hrQ
-  have hJ : J = Ideal.span ((Finset.univ.image x : Finset A) : Set A) := by simp [J]
-  rw [hJ] at hmin
-  refine (Ideal.height_le_card_of_mem_minimalPrimes_span_finset hmin).trans ?_
-  exact_mod_cast Finset.card_image_le.trans (by simp)
-
-end AlgHom
-
 /-! ### Invariant derivations of a bialgebra -/
 
 section Bialgebra
@@ -538,6 +518,159 @@ theorem Bialgebra.isPrime_iInf_pow_ker_counitAlgHom [IsNoetherianRing A] :
 
 end Bialgebra
 
+/-! ### Heights of ideals -/
+
+/-- **Nakayama's lemma**: if a finitely generated prime ideal `p` satisfies `p ≤ J ⊔ p ^ 2` for
+an ideal `J ≤ p`, then `p` is a minimal prime of `J`. -/
+theorem Ideal.mem_minimalPrimes_of_le_sup_sq {R : Type*} [CommRing R] {p J : Ideal R}
+    [hp : p.IsPrime] (hfg : p.FG) (hJp : J ≤ p) (hle : p ≤ J ⊔ p ^ 2) :
+    p ∈ J.minimalPrimes := by
+  obtain ⟨r, hr, hrp⟩ := Submodule.exists_sub_one_mem_and_smul_le_of_fg_of_le_sup (I := p)
+    (N := J) (N' := p) (P := p) hfg le_rfl (by rwa [Ideal.smul_eq_mul, ← sq])
+  have hr' : r ∉ p := fun h ↦ hp.ne_top ((Ideal.eq_top_iff_one _).2 (by simpa using sub_mem h hr))
+  refine ⟨⟨hp, hJp⟩, fun q ⟨hq, hJq⟩ hqp a ha ↦ ?_⟩
+  have h := hJq (hrp (Submodule.smul_mem_pointwise_smul a r p ha))
+  rw [smul_eq_mul] at h
+  exact (hq.mem_or_mem h).resolve_left fun h ↦ hr' (hqp h)
+
+/-- A prime ideal `p` of a Noetherian ring with `p ≤ span s ⊔ p ^ 2` for a finite set `s ⊆ p`
+has height at most `#s` (Nakayama's lemma and Krull's height theorem). -/
+theorem Ideal.height_le_card_of_le_span_sup_sq {R : Type*} [CommRing R] [IsNoetherianRing R]
+    {p : Ideal R} [p.IsPrime] {s : Finset R} (hs : (s : Set R) ⊆ p)
+    (hle : p ≤ Ideal.span s ⊔ p ^ 2) : p.height ≤ s.card :=
+  Ideal.height_le_card_of_mem_minimalPrimes_span_finset
+    (Ideal.mem_minimalPrimes_of_le_sup_sq (IsNoetherian.noetherian p) (Ideal.span_le.2 hs) hle)
+
+/-- A nontrivial finitely generated algebra over a field has finite Krull dimension. -/
+theorem exists_ringKrullDim_eq_natCast_of_finiteType (k R : Type*) [Field k] [CommRing R]
+    [Nontrivial R] [Algebra k R] [Algebra.FiniteType k R] : ∃ n : ℕ, ringKrullDim R = n := by
+  have h1 := ringKrullDim_ne_top_of_finiteType k R
+  have h2 : ringKrullDim R ≠ ⊥ :=
+    ne_bot_of_le_ne_bot WithBot.coe_ne_bot ringKrullDim_nonneg_of_nontrivial
+  induction h : ringKrullDim R using WithBot.recBotCoe with
+  | bot => exact absurd h h2
+  | coe m =>
+    induction m using ENat.recTopCoe with
+    | top => exact absurd h h1
+    | coe m => exact ⟨m, rfl⟩
+
+/-! ### Dimension of the cotangent space at a rational point -/
+
+namespace AlgHom
+
+open scoped TensorProduct
+
+variable {k A : Type*} [Field k] [CommRing A] [Algebra k A] {ε : A →ₐ[k] k}
+
+/-- In characteristic zero, the cotangent space at a `k`-point `ε` of a finitely generated
+`k`-algebra `A` has dimension at most `dim A`, provided every tangent vector at `ε` extends to a
+derivation of `A`: lifts `xᵢ` of a basis of `I / I²` are algebraically independent modulo the
+prime ideal `⋂ₙ Iⁿ` (Cartier's lemma). -/
+theorem finrank_cotangent_le_ringKrullDim [CharZero k] [Algebra.FiniteType k A]
+    (hD : ∀ φ : (RingHom.ker ε).Cotangent →ₗ[k] k, ∃ D : Derivation k A A,
+      ∀ a (ha : a ∈ RingHom.ker ε), ε (D a) = φ ((RingHom.ker ε).toCotangent ⟨a, ha⟩)) :
+    (Module.finrank k (RingHom.ker ε).Cotangent : WithBot ℕ∞) ≤ ringKrullDim A := by
+  classical
+  have := Algebra.FiniteType.isNoetherianRing k A
+  obtain ⟨x, D, hx, -, hD'⟩ := ε.exists_spanning_and_derivation hD
+  set P := ⨅ r : ℕ, RingHom.ker ε ^ r
+  have : P.IsPrime := isPrime_iInf_pow_ker_of_forall_exists_derivation hD
+  have : Algebra.FiniteType k (A ⧸ P) :=
+    Algebra.FiniteType.of_surjective (Ideal.Quotient.mkₐ k P)
+      (Ideal.Quotient.mkₐ_surjective k P)
+  obtain ⟨n, hn⟩ := exists_ringKrullDim_eq_natCast_of_finiteType k (A ⧸ P)
+  have hle := (algebraicIndependent_mk_iInf_pow_ker hx hD').lift_cardinalMk_le_trdeg
+  rw [Algebra.trdeg_eq_of_ringKrullDim_eq k (A ⧸ P) hn] at hle
+  simp only [Cardinal.mk_fintype, Fintype.card_fin, Cardinal.lift_natCast, Nat.cast_le] at hle
+  calc (Module.finrank k (RingHom.ker ε).Cotangent : WithBot ℕ∞) ≤ n := by
+        exact_mod_cast hle
+    _ = ringKrullDim (A ⧸ P) := hn.symm
+    _ ≤ ringKrullDim A := ringKrullDim_quotient_le P
+
+variable (K : Type*) [Field K] [Algebra k K]
+
+/-- The ideal of the base change `K ⊗[k] A → K` of a `k`-point `ε` of `A` is generated by the
+ideal of `ε`. -/
+theorem ker_liftEquiv_le_map :
+    RingHom.ker (liftEquiv k K A K ((Algebra.ofId k K).comp ε)) ≤
+      (RingHom.ker ε).map (Algebra.TensorProduct.includeRight : A →ₐ[k] K ⊗[k] A) := by
+  set ε' := liftEquiv k K A K ((Algebra.ofId k K).comp ε)
+  have key (b : K ⊗[k] A) : b - algebraMap K (K ⊗[k] A) (ε' b) ∈
+      (RingHom.ker ε).map (Algebra.TensorProduct.includeRight : A →ₐ[k] K ⊗[k] A) := by
+    induction b using TensorProduct.induction_on with
+    | zero => simp
+    | add b c hb hc =>
+      rw [map_add, map_add, add_sub_add_comm]
+      exact add_mem hb hc
+    | tmul a y =>
+      have h : a ⊗ₜ[k] y - algebraMap K (K ⊗[k] A) (ε' (a ⊗ₜ y)) =
+          (a ⊗ₜ 1) * Algebra.TensorProduct.includeRight (y - algebraMap k A (ε y)) := by
+        simp [ε', mul_sub, Algebra.TensorProduct.one_def, Algebra.TensorProduct.tmul_mul_tmul,
+          Algebra.algebraMap_eq_smul_one, TensorProduct.tmul_sub, TensorProduct.tmul_smul,
+          TensorProduct.smul_tmul']
+      rw [h]
+      exact Ideal.mul_mem_left _ _ (Ideal.mem_map_of_mem _ (ε.sub_algebraMap_mem_ker y))
+  intro b hb
+  simpa [RingHom.mem_ker.1 hb] using key b
+
+/-- If `xᵢ ∈ I` span the ideal `I` of a `k`-point `ε` of a finitely generated `k`-algebra `A`
+modulo `I²`, then the ideal of the base change `K ⊗[k] A → K` of `ε` has height at most the number
+of the `xᵢ` (Nakayama's lemma and Krull's height theorem). -/
+theorem height_ker_liftEquiv_le_card [Algebra.FiniteType k A] {ι : Type*} [Fintype ι]
+    {x : ι → A} (hx : ∀ i, x i ∈ RingHom.ker ε)
+    (hspan : ∀ a ∈ RingHom.ker ε, ∃ c : ι → k,
+      a - ∑ i, algebraMap k A (c i) * x i ∈ RingHom.ker ε ^ 2) :
+    (RingHom.ker (liftEquiv k K A K ((Algebra.ofId k K).comp ε))).height ≤ Fintype.card ι := by
+  classical
+  have := Algebra.FiniteType.isNoetherianRing K (K ⊗[k] A)
+  set ε' := liftEquiv k K A K ((Algebra.ofId k K).comp ε)
+  have := RingHom.ker_isPrime ε'
+  set f : A →ₐ[k] K ⊗[k] A := Algebra.TensorProduct.includeRight
+  have hf (a : A) (ha : a ∈ RingHom.ker ε) : f a ∈ RingHom.ker ε' := by
+    simp_all [f, ε']
+  have hmap : (RingHom.ker ε).map f ≤ RingHom.ker ε' := Ideal.map_le_iff_le_comap.2 hf
+  refine (Ideal.height_le_card_of_le_span_sup_sq (s := Finset.univ.image fun i ↦ f (x i))
+    ?_ ?_).trans (by exact_mod_cast Finset.card_image_le)
+  · intro b hb
+    obtain ⟨i, -, rfl⟩ := Finset.mem_image.1 hb
+    exact hf _ (hx i)
+  · refine (ker_liftEquiv_le_map K).trans (Ideal.map_le_iff_le_comap.2 fun a ha ↦ ?_)
+    obtain ⟨c, hc⟩ := hspan a ha
+    rw [Ideal.mem_comap, ← sub_add_cancel a (∑ i, algebraMap k A (c i) * x i), map_add,
+      add_comm]
+    refine Submodule.add_mem_sup ?_ ?_
+    · rw [map_sum]
+      refine Ideal.sum_mem _ fun i _ ↦ ?_
+      rw [map_mul]
+      exact Ideal.mul_mem_left _ _
+        (Ideal.subset_span (Finset.mem_coe.2 (Finset.mem_image_of_mem _ (Finset.mem_univ i))))
+    · refine Ideal.pow_right_mono hmap 2 ?_
+      rw [← Ideal.map_pow]
+      exact Ideal.mem_map_of_mem _ hc
+
+/-- The ideal of the base change `K ⊗[k] A → K` of a `k`-point `ε` of a finitely generated
+`k`-algebra `A` has height at most the dimension of the cotangent space of `A` at `ε`. -/
+theorem height_ker_liftEquiv_le [Algebra.FiniteType k A] :
+    (RingHom.ker (liftEquiv k K A K ((Algebra.ofId k K).comp ε))).height ≤
+      Module.finrank k (RingHom.ker ε).Cotangent := by
+  classical
+  have := Algebra.FiniteType.isNoetherianRing k A
+  have := ε.finiteDimensional_cotangent
+  set I := RingHom.ker ε
+  let B := Module.finBasis k I.Cotangent
+  choose y hy using fun i ↦ I.toCotangent_surjective (B i)
+  have h := height_ker_liftEquiv_le_card K (x := fun i ↦ (y i : A)) (fun i ↦ (y i).2)
+    fun a ha ↦ ⟨fun i ↦ B.repr (I.toCotangent ⟨a, ha⟩) i, by
+      have h : I.toCotangent (⟨a, ha⟩ - ∑ i, B.repr (I.toCotangent ⟨a, ha⟩) i • y i) = 0 := by
+        rw [map_sub, map_sum]
+        simp_rw [LinearMap.map_smul_of_tower, hy]
+        rw [B.sum_repr, sub_self]
+      rw [I.toCotangent_eq_zero] at h
+      simpa [Algebra.smul_def] using h⟩
+  rwa [Fintype.card_fin] at h
+
+end AlgHom
+
 /-! ### Cartier's theorem -/
 
 section HopfAlgebra
@@ -594,6 +727,70 @@ theorem HopfAlgebra.exists_algEquiv_comp_eq_counitAlgHom (g : A →ₐ[k] k) :
   refine ⟨AlgEquiv.ofAlgHom _ _ h₁ h₂, ?_⟩
   have h := comp_translation_inv (toConv g)
   rwa [ofConv_toConv] at h
+
+/-- Over an algebraically closed field, the Krull dimension of a finitely generated commutative
+Hopf algebra is at most the height of its augmentation ideal: by the Nullstellensatz every
+maximal ideal is the ideal of a `k`-point, which a translation moves to the identity. -/
+theorem HopfAlgebra.ringKrullDim_le_height_ker_counitAlgHom [IsAlgClosed k]
+    [Algebra.FiniteType k A] : ringKrullDim A ≤ (RingHom.ker (counitAlgHom k A)).height := by
+  rw [ringKrullDim_le_iff_isMaximal_height_le]
+  intro M hM
+  obtain ⟨g, rfl⟩ := exists_algHom_ker_eq_of_isMaximal k A M
+  obtain ⟨τ, hτ⟩ := HopfAlgebra.exists_algEquiv_comp_eq_counitAlgHom g
+  have h : RingHom.ker (counitAlgHom k A) = (RingHom.ker g).comap (τ : A ≃+* A) := by
+    ext a
+    simp [← hτ]
+  rw [h, RingEquiv.height_comap]
+
+/-- The counit of the base change `K ⊗[k] A` of a commutative bialgebra is the base change of the
+counit of `A`. -/
+theorem Bialgebra.counitAlgHom_baseChange_eq_liftEquiv (K : Type*) [Field K] [Algebra k K] :
+    counitAlgHom K (K ⊗[k] A) =
+      AlgHom.liftEquiv k K A K ((Algebra.ofId k K).comp (counitAlgHom k A)) :=
+  Algebra.TensorProduct.ext_ring (AlgHom.ext fun a ↦ by simp)
+
+/-- The augmentation ideal of the base change `K ⊗[k] A` of a commutative Hopf algebra is
+generated by the augmentation ideal of `A`. -/
+theorem HopfAlgebra.ker_counitAlgHom_baseChange_le_map (K : Type*) [Field K] [Algebra k K] :
+    RingHom.ker (counitAlgHom K (K ⊗[k] A)) ≤ (RingHom.ker (counitAlgHom k A)).map
+      (Algebra.TensorProduct.includeRight : A →ₐ[k] K ⊗[k] A) := by
+  rw [Bialgebra.counitAlgHom_baseChange_eq_liftEquiv]
+  exact AlgHom.ker_liftEquiv_le_map K
+
+/-- If `xᵢ ∈ 𝔪` span the augmentation ideal `𝔪` of a commutative Hopf algebra `A` modulo `𝔪²`,
+then the augmentation ideal of a base change `K ⊗[k] A` has height at most the number of
+the `xᵢ`. -/
+theorem HopfAlgebra.height_ker_counitAlgHom_baseChange_le (K : Type*) [Field K] [Algebra k K]
+    [Algebra.FiniteType k A] {ι : Type*} [Fintype ι] {x : ι → A}
+    (hx : ∀ i, x i ∈ RingHom.ker (counitAlgHom k A))
+    (hspan : ∀ a ∈ RingHom.ker (counitAlgHom k A), ∃ c : ι → k,
+      a - ∑ i, algebraMap k A (c i) * x i ∈ RingHom.ker (counitAlgHom k A) ^ 2) :
+    (RingHom.ker (counitAlgHom K (K ⊗[k] A))).height ≤ Fintype.card ι := by
+  rw [Bialgebra.counitAlgHom_baseChange_eq_liftEquiv]
+  exact AlgHom.height_ker_liftEquiv_le_card K hx hspan
+
+variable (k A) in
+/-- The Krull dimension of a finitely generated commutative Hopf algebra is at most the
+dimension of its cotangent space at the identity: this holds after base change to an algebraic
+closure, where translations move every closed point to the identity. -/
+theorem HopfAlgebra.ringKrullDim_le_finrank_cotangent [Algebra.FiniteType k A] :
+    ringKrullDim A ≤
+      (Module.finrank k (RingHom.ker (counitAlgHom k A)).Cotangent : WithBot ℕ∞) := by
+  have := Algebra.FiniteType.isNoetherianRing k A
+  obtain ⟨x, -, hx, hspan, -⟩ := (counitAlgHom k A).exists_spanning_and_derivation
+    (Bialgebra.exists_derivation_of_cotangent k A)
+  let K := AlgebraicClosure k
+  have : FaithfulSMul A (A ⊗[k] K) := (faithfulSMul_iff_algebraMap_injective _ _).2
+    (Algebra.TensorProduct.includeLeft_injective (S := A) (algebraMap k K).injective)
+  calc ringKrullDim A = ringKrullDim (A ⊗[k] K) := (ringKrullDim_eq_of_isIntegral A _).symm
+    _ = ringKrullDim (K ⊗[k] A) :=
+      ringKrullDim_eq_of_ringEquiv (Algebra.TensorProduct.comm k A K).toRingEquiv
+    _ ≤ (RingHom.ker (counitAlgHom K (K ⊗[k] A))).height :=
+      HopfAlgebra.ringKrullDim_le_height_ker_counitAlgHom
+    _ ≤ _ := by
+      have h := HopfAlgebra.height_ker_counitAlgHom_baseChange_le K hx hspan
+      rw [Fintype.card_fin] at h
+      exact_mod_cast h
 
 variable [CharZero k]
 
@@ -676,152 +873,25 @@ theorem Ideal.IsHopfIdeal.isRadical [Algebra.FiniteType k A] (I : Ideal A) [I.Is
   have := HopfAlgebra.isReduced_of_charZero (k := k) (A := A ⧸ I)
   exact (Ideal.isRadical_iff_quotient_reduced I).2 this
 
-omit [CharZero k] in
-/-- Over an algebraically closed field, if `x₁, …, xₙ` span the cotangent space `𝔪 / 𝔪²` at the
-identity of a finitely generated commutative Hopf algebra `A`, then `dim A ≤ n`: every maximal
-ideal is a translate of `𝔪`, which has height at most `n` by Krull's height theorem. -/
-theorem HopfAlgebra.ringKrullDim_le_of_isAlgClosed [IsAlgClosed k] [Algebra.FiniteType k A]
-    {n : ℕ} {x : Fin n → A} (hx : ∀ i, x i ∈ RingHom.ker (counitAlgHom k A))
-    (hspan : ∀ a ∈ RingHom.ker (counitAlgHom k A), ∃ c : Fin n → k,
-      a - ∑ i, algebraMap k A (c i) * x i ∈ RingHom.ker (counitAlgHom k A) ^ 2) :
-    ringKrullDim A ≤ n := by
-  have := Algebra.FiniteType.isNoetherianRing k A
-  rw [ringKrullDim_le_iff_height_le]
-  intro p hp
-  obtain ⟨M, hM, hpM⟩ := p.exists_le_maximal hp.ne_top
-  obtain ⟨g, rfl⟩ := exists_algHom_ker_eq_of_isMaximal k A M
-  obtain ⟨τ, hτ⟩ := HopfAlgebra.exists_algEquiv_comp_eq_counitAlgHom g
-  have h : RingHom.ker (counitAlgHom k A) = (RingHom.ker g).comap (τ : A ≃+* A) := by
-    ext a
-    simp [← hτ]
-  have h2 := AlgHom.height_ker_le hx hspan
-  rw [h, RingEquiv.height_comap] at h2
-  exact_mod_cast (Ideal.height_mono hpM).trans h2
+variable (k A) in
+/-- In characteristic zero, the cotangent space at the identity of a finitely generated
+commutative Hopf algebra `A` has dimension at most `dim A`: lifts `xᵢ` of a basis of `𝔪 / 𝔪²`
+are algebraically independent modulo the prime ideal `⋂ₙ 𝔪ⁿ` (Cartier's lemma). -/
+theorem HopfAlgebra.finrank_cotangent_le_ringKrullDim [Algebra.FiniteType k A] :
+    (Module.finrank k (RingHom.ker (counitAlgHom k A)).Cotangent : WithBot ℕ∞) ≤
+      ringKrullDim A :=
+  AlgHom.finrank_cotangent_le_ringKrullDim (Bialgebra.exists_derivation_of_cotangent k A)
 
 variable (k A) in
 /-- **Dimension of a group scheme in characteristic zero.** For a finitely generated commutative
 Hopf algebra `A` over a field `k` of characteristic zero, the cotangent space `𝔪 / 𝔪²` at the
 identity has dimension `dim A`: the group scheme `Spec A` is smooth, so its tangent space at the
 identity has the dimension of the local ring there, and translations make all its local
-dimensions equal. (blueprint: `lem-wf-same-lie-closed-subgroup`, clause (2))
-
-Let `x₁, …, x_d` lift a basis of `𝔪 / 𝔪²`. By Cartier's lemma the `xᵢ` are algebraically
-independent modulo the prime `⋂ₙ 𝔪ⁿ`, so `d ≤ dim A`. Conversely, after base change to an
-algebraic closure the `1 ⊗ xᵢ` still span the cotangent space at the identity, and every maximal
-ideal there is a translate of the augmentation ideal, of height at most `d` by Krull's height
-theorem. -/
+dimensions equal. (blueprint: `lem-wf-same-lie-closed-subgroup`, clause (2)) -/
 theorem HopfAlgebra.finrank_cotangent_eq_ringKrullDim [Algebra.FiniteType k A] :
     (Module.finrank k (RingHom.ker (counitAlgHom k A)).Cotangent : WithBot ℕ∞) =
-      ringKrullDim A := by
-  classical
-  have := Algebra.FiniteType.isNoetherianRing k A
-  have := (counitAlgHom k A).finiteDimensional_cotangent
-  set I := RingHom.ker (counitAlgHom k A)
-  set d := Module.finrank k I.Cotangent
-  let B := Module.finBasis k I.Cotangent
-  choose y hy using fun i ↦ I.toCotangent_surjective (B i)
-  choose D hD' using fun j ↦ Bialgebra.exists_derivation_of_cotangent k A (B.coord j)
-  set x : Fin d → A := fun i ↦ (y i : A)
-  have hx (i) : x i ∈ I := (y i).2
-  have hspan : ∀ a ∈ I, ∃ c : Fin d → k, a - ∑ i, algebraMap k A (c i) * x i ∈ I ^ 2 :=
-    fun a ha ↦ by
-      refine ⟨fun i ↦ B.repr (I.toCotangent ⟨a, ha⟩) i, ?_⟩
-      have h : I.toCotangent (⟨a, ha⟩ - ∑ i, B.repr (I.toCotangent ⟨a, ha⟩) i • y i) = 0 := by
-        rw [map_sub, map_sum]
-        simp_rw [LinearMap.map_smul_of_tower, hy]
-        rw [B.sum_repr, sub_self]
-      rw [I.toCotangent_eq_zero] at h
-      simpa [Algebra.smul_def] using h
-  have hDx (i j) : counitAlgHom k A (D j (x i)) = if i = j then 1 else 0 := by
-    rw [hD' j (y i) (y i).2, hy, Module.Basis.coord_apply, Module.Basis.repr_self,
-      Finsupp.single_apply]
-  refine le_antisymm ?_ ?_
-  · -- `d ≤ dim A`: the `xᵢ` are algebraically independent modulo `P = ⋂ₙ 𝔪ⁿ`.
-    set P := ⨅ r : ℕ, I ^ r
-    have : P.IsPrime := Bialgebra.isPrime_iInf_pow_ker_counitAlgHom k A
-    have hind : AlgebraicIndependent k (fun i ↦ Ideal.Quotient.mkₐ k P (x i)) := by
-      rw [algebraicIndependent_iff_injective_aeval, injective_iff_map_eq_zero]
-      intro f hf
-      refine AlgHom.eq_zero_of_aeval_mem_iInf_pow hx hDx ?_
-      rw [← Ideal.Quotient.eq_zero_iff_mem, ← Ideal.Quotient.mkₐ_eq_mk k,
-        MvPolynomial.comp_aeval_apply]
-      exact hf
-    obtain ⟨s, g, hinj, hfin⟩ := exists_finite_inj_algHom_of_fg k (A ⧸ P)
-    have hs := ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hinj hfin
-    have hcard := hind.lift_cardinalMk_le_trdeg
-    rw [Algebra.trdeg_eq_of_ringKrullDim_eq k (A ⧸ P) hs, Cardinal.mk_fin, Cardinal.lift_natCast,
-      Cardinal.lift_natCast, Nat.cast_le] at hcard
-    calc (d : WithBot ℕ∞) ≤ s := by exact_mod_cast hcard
-      _ = ringKrullDim (A ⧸ P) := hs.symm
-      _ ≤ ringKrullDim A := ringKrullDim_quotient_le P
-  · -- `dim A ≤ d`, after base change to an algebraic closure `K`.
-    let K := AlgebraicClosure k
-    have hdim : ringKrullDim (K ⊗[k] A) = ringKrullDim A := by
-      rw [ringKrullDim_eq_of_ringEquiv (Algebra.TensorProduct.comm k K A).toRingEquiv]
-      have : FaithfulSMul A (A ⊗[k] K) := (faithfulSMul_iff_algebraMap_injective A (A ⊗[k] K)).2
-        (Algebra.TensorProduct.includeLeft_injective (S := k) (algebraMap k K).injective)
-      exact ringKrullDim_eq_of_isIntegral A (A ⊗[k] K)
-    rw [← hdim]
-    set εK := counitAlgHom K (K ⊗[k] A)
-    have hεK (c : K) (a : A) : εK (c ⊗ₜ a) = algebraMap k K (counitAlgHom k A a) * c := by
-      simp [εK, Algebra.smul_def]
-    set f : A →ₐ[k] K ⊗[k] A := Algebra.TensorProduct.includeRight
-    have hfI : I.map f ≤ RingHom.ker εK := Ideal.map_le_iff_le_comap.2 fun a ha ↦ by
-      simp only [Ideal.mem_comap, RingHom.mem_ker, f, Algebra.TensorProduct.includeRight_apply,
-        hεK, RingHom.mem_ker.1 ha, map_zero, zero_mul]
-    have hsub (b : K ⊗[k] A) : b - algebraMap K _ (εK b) ∈ I.map f := by
-      induction b using TensorProduct.induction_on with
-      | zero => simp
-      | tmul c a =>
-        have h : c ⊗ₜ[k] a - algebraMap K (K ⊗[k] A) (εK (c ⊗ₜ a)) =
-            (c ⊗ₜ[k] (1 : A)) * f (a - algebraMap k A (counitAlgHom k A a)) := by
-          simp only [f, hεK, map_sub, Algebra.TensorProduct.algebraMap_apply,
-            Algebra.TensorProduct.includeRight_apply]
-          rw [mul_sub, Algebra.TensorProduct.tmul_mul_tmul, Algebra.TensorProduct.tmul_mul_tmul]
-          simp only [mul_one, one_mul]
-          rw [Algebra.algebraMap_self, RingHom.id_apply,
-            Algebra.algebraMap_eq_smul_one (A := A), TensorProduct.tmul_smul,
-            TensorProduct.smul_tmul', Algebra.smul_def]
-        rw [h]
-        exact Ideal.mul_mem_left _ _ (Ideal.mem_map_of_mem _ (AlgHom.sub_algebraMap_mem_ker _ a))
-      | add b₁ b₂ h₁ h₂ =>
-        rw [map_add, map_add, add_sub_add_comm]
-        exact add_mem h₁ h₂
-    have hker : RingHom.ker εK = I.map f := by
-      refine le_antisymm (fun b hb ↦ ?_) hfI
-      simpa [RingHom.mem_ker.1 hb] using hsub b
-    refine HopfAlgebra.ringKrullDim_le_of_isAlgClosed (x := fun i ↦ f (x i))
-      (fun i ↦ hfI (Ideal.mem_map_of_mem _ (hx i))) fun b hb ↦ ?_
-    rw [hker] at hb ⊢
-    induction hb using Submodule.span_induction with
-    | mem b hb =>
-      obtain ⟨a, ha, rfl⟩ := hb
-      obtain ⟨c, hc⟩ := hspan a ha
-      refine ⟨fun i ↦ algebraMap k K (c i), ?_⟩
-      have h := Ideal.mem_map_of_mem f hc
-      rw [Ideal.map_pow] at h
-      convert h using 1
-      simp [map_sub, map_sum, map_mul, ← IsScalarTower.algebraMap_apply]
-    | zero => exact ⟨0, by simp⟩
-    | add b₁ b₂ _ _ h₁ h₂ =>
-      obtain ⟨c₁, hc₁⟩ := h₁
-      obtain ⟨c₂, hc₂⟩ := h₂
-      refine ⟨c₁ + c₂, ?_⟩
-      convert add_mem hc₁ hc₂ using 1
-      simp only [Pi.add_apply, map_add, add_mul, Finset.sum_add_distrib]
-      abel
-    | smul a b hb h =>
-      obtain ⟨c, hc⟩ := h
-      rw [pow_two] at hc
-      refine ⟨fun i ↦ εK a * c i, ?_⟩
-      have hb' : b ∈ RingHom.ker εK := hfI hb
-      have ha' : a - algebraMap K _ (εK a) ∈ RingHom.ker εK := hfI (hsub a)
-      rw [hker] at hb' ha'
-      rw [pow_two]
-      convert add_mem (Ideal.mul_mem_mul ha' hb')
-        (Ideal.mul_mem_left _ (algebraMap K _ (εK a)) hc) using 1
-      change a * b - _ = _
-      simp only [map_mul, Finset.mul_sum, mul_sub, sub_mul, mul_assoc]
-      ring
+      ringKrullDim A :=
+  le_antisymm (HopfAlgebra.finrank_cotangent_le_ringKrullDim k A)
+    (HopfAlgebra.ringKrullDim_le_finrank_cotangent k A)
 
 end HopfAlgebra
