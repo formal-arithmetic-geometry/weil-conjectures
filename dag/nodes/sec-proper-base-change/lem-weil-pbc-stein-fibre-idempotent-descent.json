@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "(General case: reduction to $S$ affine.) Let $V\\subseteq S$ be an affine open neighbourhood of $s$ and $f_V:f^{-1}(V)\\to V$ the restriction, the base change of $f$ along the open immersion $V\\to S$, hence proper [lem-weil-pbc-proper-base-change]. The stalk $(f_*\\mathcal O_X)_s$ is the colimit of $\\mathcal O_X(f^{-1}(W))$ over open $W\\ni s$, which may be taken inside $V$, so it equals $(f_{V,*}\\mathcal O_{f^{-1}(V)})_s$; and $\\operatorname{Spec}\\kappa(s)\\to S$ factors through $V$, so $X_s=f^{-1}(V)\\times_V\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre], compatibly with the maps to $H^0(X_s,\\mathcal O_{X_s})$. Hence we may replace $f$ by $f_V$ and assume $S=\\operatorname{Spec}R$ affine.",
+   "text": "Choose an affine open W containing s. Properness of f restricts to f|W by base change [lem-weil-pbc-proper-base-change]. The map from the restricted fibre to the original fibre is the canonical pullback.map. It is an isomorphism: isPullback_fiberToSpecResidueField_of_isPullback identifies it as a base change of the isomorphism on residue-field spectra induced by the open immersion W → S [def-pc-scheme-fibre]. Pull e back along this isomorphism.",
    "uses": [
     "lem-weil-pbc-proper-base-change",
     "def-pc-scheme-fibre"
@@ -23,56 +23,53 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 0G7X, third paragraph, line 8163 ('We may replace S by an affine open neighbourhood of s')"
+    "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case"
    }
   },
   {
-   "text": "(Noetherian approximation.) As $S$ is affine, by [lem-weil-pbc-proper-limit-noetherian] (Limits 0A0P, affine clause) there are a directed set $\\Lambda$ and an inverse system of proper morphisms $f_\\lambda:X_\\lambda\\to S_\\lambda=\\operatorname{Spec}A_\\lambda$ with affine transition morphisms, $A_\\lambda$ a finitely generated $\\mathbf Z$-algebra, such that $X=\\varprojlim X_\\lambda$, $S=\\varprojlim S_\\lambda$ and $f=\\varprojlim f_\\lambda$. Each $A_\\lambda$ is a Noetherian ring [lem-weil-pbc-finite-type-algebra-noetherian] (applied to $\\mathbf Z\\to A_\\lambda$, $\\mathbf Z$ being a principal ideal domain, hence Noetherian), so each $S_\\lambda$ is locally Noetherian [pqf-def-locnoeth] (covered by the single affine open $S_\\lambda$).",
+   "text": "Apply exists_proper_limit_noetherian to f|W [lem-weil-pbc-proper-limit-noetherian], obtaining directed diagrams Xs, Ss, proper stage maps fs, limiting cones, affine transitions, and compatible projections. Each Ss_i is locally of finite type over Spec(ULift Z). The latter is locally Noetherian, because ULift Z is ring-isomorphic to Z; hence Ss_i is locally Noetherian by LocallyOfFiniteType.isLocallyNoetherian [pqf-lem-locnoeth-lft]. No use of the affine-stage clause or the colimit of base global sections is needed.",
    "uses": [
     "lem-weil-pbc-proper-limit-noetherian",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "pqf-def-locnoeth"
+    "pqf-lem-locnoeth-lft"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 0G7X, lines 8165-8168, citing Limits, Lemma 0A0P (limits-lemma-proper-limit-of-proper-finite-presentation-noetherian)"
+    "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case"
    }
   },
   {
-   "text": "(The fibre as a limit.) Let $s_\\lambda\\in S_\\lambda$ be the image of $s$. Then $\\operatorname{Spec}\\kappa(s)=\\varprojlim_\\lambda\\operatorname{Spec}\\kappa(s_\\lambda)$ over the $S_\\lambda$ [lem-weil-pbc-limit-residue-field] (Limits 0CUG, $s=\\lim s_\\lambda$), and therefore the fibres $X_{\\lambda,s_\\lambda}=X_\\lambda\\times_{S_\\lambda}\\operatorname{Spec}\\kappa(s_\\lambda)$ form an inverse system with affine transition morphisms whose limit is $X_s$, with projections the induced morphisms $q_\\lambda:X_s\\to X_{\\lambda,s_\\lambda}$ [lem-weil-pbc-limit-fibre-products] (limits commute with limits, Categories 002M). Each $X_{\\lambda,s_\\lambda}$ is proper over $\\operatorname{Spec}\\kappa(s_\\lambda)$ [lem-weil-pbc-proper-base-change], hence quasi-compact and separated, the base being affine [pqf-lem-proper-basic], hence quasi-compact and quasi-separated (a closed immersion is quasi-compact, so a separated morphism is quasi-separated).",
+   "text": "Apply the fibre clause of limit_fibre_products_of_affine_transition [lem-weil-pbc-limit-fibre-products], taking its auxiliary diagram T to be Ss, its auxiliary transformation to be the identity and its auxiliary limit map to be the identity. This yields a fibre diagram Q with affine transitions, a limiting cone cQ, stage object equalities with the fibres of fs, and the projection compatibility HEq statements. Transport the apex along cQ.pt = (f|W).fiber s. Every stage fibre is compact and quasi-separated by proper base change over a residue-field spectrum [lem-weil-pbc-proper-base-change].",
    "uses": [
-    "lem-weil-pbc-limit-residue-field",
     "lem-weil-pbc-limit-fibre-products",
-    "lem-weil-pbc-proper-base-change",
-    "pqf-lem-proper-basic"
+    "lem-weil-pbc-proper-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 0G7X, lines 8168-8172, citing Limits, Lemma 0CUG (limits-lemma-inverse-limit-irreducibles) and Categories, Lemma 002M (categories-lemma-colimits-commute)"
+    "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case"
    }
   },
   {
-   "text": "(Descending the idempotent.) By [lem-weil-pbc-limit-global-sections-colimit] (Limits 01Z0 for the structure sheaf), applied to the system $(X_{\\lambda,s_\\lambda})_\\lambda$, $\\Gamma(X_s,\\mathcal O_{X_s})=\\varinjlim_\\lambda\\Gamma(X_{\\lambda,s_\\lambda},\\mathcal O)$ via the $q_\\lambda^\\sharp$. So $e=q_\\lambda^\\sharp(a)$ for some $\\lambda$ and $a\\in\\Gamma(X_{\\lambda,s_\\lambda},\\mathcal O)$. Then $q_\\lambda^\\sharp(a^2-a)=e^2-e=0$, so $a^2-a$ restricts to $0$ on $X_{\\mu,s_\\mu}$ for some $\\mu\\ge\\lambda$; the restriction $e_\\mu$ of $a$ to $X_{\\mu,s_\\mu}$ is an idempotent with $q_\\mu^\\sharp(e_\\mu)=e$ (the $q$'s are compatible with the transition morphisms).",
+   "text": "Use Mathlib exists_appTop_π_eq_of_isLimit [lem-weil-pbc-limit-global-sections-colimit] to represent the pulled-back e by a stage section t. Its defect t*t-t pulls back to zero. By exists_appTop_map_eq_zero_of_isLimit there is a later stage where this defect vanishes. The image of t there is idempotent, and the cone equation ensures that its pullback is still e. This argument is the proved private helper descend_idempotent.",
    "uses": [
     "lem-weil-pbc-limit-global-sections-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 0G7X, lines 8172-8174, citing Limits, Lemma 01Z0 (limits-lemma-descend-section)"
+    "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case"
    }
   },
   {
-   "text": "Take Y=X_μ, T=S_μ, g=f_μ and e₀=e_μ. Take p and r to be the limit projections on the chosen affine restriction W. The original fibre factors uniquely through f⁻¹W since its base image is s∈W; this defines a. The induced fibre projection is q. Its compatibility with the fibre embeddings gives q followed by g.fiberι = a followed by p, and the descended section has q*(e₀)=e.",
+   "text": "Select the resulting stage i. Transport its section and fibre projection along the object equality Q.obj i = (fs.app i).fiber (πS.app i s), using the inverse and forward maps of eqToIso. The HEq projection identity gives compatibility with the fibre embeddings. The section stays idempotent under the induced ring homomorphism, and the inverse/forward composite proves that its pullback is the given section. Compose the fibre projection with the inverse of the initial restriction-fibre isomorphism. Take p and r to be the stage projections and a to be that inverse followed by the restricted fibre embedding. The pullback projection identities give all three required scheme-map equalities.",
    "uses": [
     "def-pc-scheme-fibre"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0G7X, general case, construction of the model and its projections"
+    "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case"
    }
   }
  ],
@@ -80,17 +77,14 @@
   "lem-weil-pbc-proper-base-change",
   "def-pc-scheme-fibre",
   "lem-weil-pbc-proper-limit-noetherian",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "pqf-def-locnoeth",
-  "lem-weil-pbc-limit-residue-field",
+  "pqf-lem-locnoeth-lft",
   "lem-weil-pbc-limit-fibre-products",
-  "pqf-lem-proper-basic",
   "lem-weil-pbc-limit-global-sections-colimit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case"
+  "place": "Tag 0G7X, general case, affine restriction, Noetherian approximation, fibre limits and idempotent descent; Lean implementation by M2 using the existing limit declarations and Mathlib section-descent lemmas"
  },
  "mathlib_searches": [
   {
@@ -175,10 +169,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T144135-L-2103938",
-  "kind": "interface",
+  "landing": "20261012T161502-L-2648385",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
