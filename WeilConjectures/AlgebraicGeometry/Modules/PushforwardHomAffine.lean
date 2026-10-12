@@ -27,6 +27,12 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) {N : Y.Modules}
 
+/-- The sections of a pushforward `f_* M` over `V` are a `Γ(Y, V)`-module through `f^♯`. -/
+lemma pushforward_smul_def (M : X.Modules) (V : Y.Opens) (r : Γ(Y, V))
+    (m : Γ((pushforward f).obj M, V)) :
+    r • m = (show Γ(M, f ⁻¹ᵁ V) from (f.app V r) • (show Γ(M, f ⁻¹ᵁ V) from m)) :=
+  rfl
+
 /-- A morphism `(f_* 𝒪_X)|_V ⟶ N|_V`, for `f⁻¹V` affine, is determined over a basic open `D(r)` of
 `V` by its value on the sections over `V`: the sections of `f_* 𝒪_X` over `D(r)` are the
 localization of `Γ(X, f⁻¹V)` at `f^♯ r`, and `r` is a unit over `D(r)`. -/

@@ -130,6 +130,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EffectiveDivisorCount
 public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 public import WeilConjectures.AlgebraicGeometry.Curve.ExtensionInvariance
 public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
+public import WeilConjectures.AlgebraicGeometry.Curve.FiniteDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericRestriction
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing

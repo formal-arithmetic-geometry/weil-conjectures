@@ -14,6 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
+public import WeilConjectures.AlgebraicGeometry.Curve.FiniteDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
@@ -643,23 +644,6 @@ end ProjectiveLine
 section FiniteDuality
 
 variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
-
-/-- **Trace identification along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve
-over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
-`τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that `f_* Ω¹_{X/k} ⟶ Hom(f_* 𝒪_X, Ω¹_{ℙ¹_k/k})`,
-`ω ↦ (a ↦ τ(a ω))`, is an isomorphism: the comparison `φ ↦ τ ∘ f_* φ` for `ℳ = 𝒪_X`. Locally
-over `Spec R ⊆ ℙ¹_k` with `f⁻¹(Spec R) = Spec B` this is `Ω¹_{B/k} ≅ Hom_R(B, Ω¹_{R/k})`, the
-codifferent of the finite flat extension `R ⊆ B` of Dedekind domains, i.e. Grothendieck duality
-`f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for `f`.
-
-(blueprint: `lem-sc-finite-duality`, the trace identification) -/
-theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
-    [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
-    (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
-    ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
-        (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
-      IsIso (Modules.pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf)) :=
-  sorry
 
 /-- **Duality along a finite flat morphism to `ℙ¹`, comparison map.** Let `X` be a smooth curve
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
