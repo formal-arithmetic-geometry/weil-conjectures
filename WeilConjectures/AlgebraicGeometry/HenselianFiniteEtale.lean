@@ -232,6 +232,66 @@ lemma Scheme.isIso_of_isPullback_of_henselianRing
   have : y ∈ U := hU ▸ trivial
   exact this
 
+/-- **Sections lift over a henselian pair.** Let `π : Z ⟶ Y` be finite étale over a proper `Y`
+over a henselian pair, with closed fibre `i : Y₀ ⟶ Y`. Every section `σ₀` of the base change
+`Z ×_Y Y₀ ⟶ Y₀` is the restriction of a section `s` of `π`.
+
+The image of `σ₀` is open and closed, hence the closed fibre of an open and closed `U ⊆ Z`
+(`AlgebraicGeometry.Scheme.exists_isClopen_preimage_eq_of_henselianRing` for the proper scheme
+`Z`); then `U ⟶ Y` is finite étale and an isomorphism over `Y₀`, hence an isomorphism
+(`AlgebraicGeometry.Scheme.isIso_of_isPullback_of_henselianRing`), and its inverse is `s`. -/
+lemma Scheme.exists_section_of_henselianRing
+    (h : IsPullback i f₀ f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
+    {Z : Scheme.{u}} (π : Z ⟶ Y) [IsFinite π] [Etale π] (σ₀ : Y₀ ⟶ pullback π i)
+    (hσ₀ : σ₀ ≫ pullback.snd π i = 𝟙 Y₀) :
+    ∃ s : Y ⟶ Z, s ≫ π = 𝟙 Y ∧ i ≫ s = σ₀ ≫ pullback.fst π i := by
+  have hZ : IsPullback (pullback.fst π i) (pullback.snd π i ≫ f₀) (π ≫ f)
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) :=
+    (IsPullback.of_hasPullback π i).paste_vert h
+  have : IsOpenImmersion σ₀ := IsOpenImmersion.of_section_of_etale (pullback.snd π i) σ₀ hσ₀
+  have : IsClosedImmersion σ₀ :=
+    IsClosedImmersion.of_section_of_isSeparated (pullback.snd π i) σ₀ hσ₀
+  have hcl : IsClopen (Set.range σ₀) :=
+    ⟨σ₀.isClosedEmbedding.isClosed_range, σ₀.isOpenEmbedding.isOpen_range⟩
+  obtain ⟨U, hU, hUpre⟩ := Scheme.exists_isClopen_preimage_eq_of_henselianRing I (π ≫ f)
+    (pullback.fst π i) (pullback.snd π i ≫ f₀) hZ hcl
+  let V : Z.Opens := ⟨U, hU.isOpen⟩
+  have : IsClosedImmersion V.ι := .of_isPreimmersion _ (by rw [V.range_ι]; exact hU.isClosed)
+  let p := V.ι ≫ π
+  let V₀ := pullback.fst π i ⁻¹ᵁ V
+  let p₀ := V₀.ι ≫ pullback.snd π i
+  have hp : IsPullback (pullback.fst π i ∣_ V) p₀ p i :=
+    (isPullback_morphismRestrict (pullback.fst π i) V).paste_vert (IsPullback.of_hasPullback π i)
+  have hσV : Set.range σ₀ ⊆ Set.range V₀.ι := by
+    rw [V₀.range_ι]
+    exact hUpre.symm.subset
+  let σ₀' := IsOpenImmersion.lift V₀.ι σ₀ hσV
+  have hσ₀' : σ₀' ≫ V₀.ι = σ₀ := IsOpenImmersion.lift_fac _ _ _
+  have hσp : σ₀' ≫ p₀ = 𝟙 Y₀ := by
+    rw [← Category.assoc, hσ₀', hσ₀]
+  have : IsIso σ₀' := by
+    rw [isIso_iff_isOpenImmersion_and_surjective]
+    refine ⟨?_, ⟨fun v ↦ ?_⟩⟩
+    · have : IsOpenImmersion (σ₀' ≫ V₀.ι) := by rw [hσ₀']; infer_instance
+      exact IsOpenImmersion.of_comp σ₀' V₀.ι
+    · have hv : V₀.ι v ∈ Set.range σ₀ := by
+        rw [← hUpre]
+        exact v.2
+      obtain ⟨y, hy⟩ := hv
+      refine ⟨y, V₀.ι.isOpenEmbedding.injective ?_⟩
+      rw [← Scheme.Hom.comp_apply, hσ₀', hy]
+  have : IsIso p₀ := by
+    have : IsIso (σ₀' ≫ p₀) := by rw [hσp]; infer_instance
+    exact IsIso.of_isIso_comp_left σ₀' p₀
+  have : IsIso p := Scheme.isIso_of_isPullback_of_henselianRing I f i f₀ h p p₀ _ hp
+  refine ⟨inv p ≫ V.ι, by simp [p], ?_⟩
+  let τ₀ : Y₀ ⟶ V₀ := hp.lift (i ≫ inv p) (𝟙 Y₀) (by simp)
+  have hτ₀ : τ₀ = σ₀' := by
+    rw [← cancel_mono p₀, hσp]
+    exact hp.lift_snd _ _ _
+  have h₁ : i ≫ inv p = τ₀ ≫ (pullback.fst π i ∣_ V) := (hp.lift_fst _ _ _).symm
+  rw [← Category.assoc, h₁, Category.assoc, morphismRestrict_ι, hτ₀, ← Category.assoc, hσ₀']
+
 /-- **Idempotent lifting for the structure sheaf over a henselian pair.** Let `(A, I)` be a
 henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
 Then restriction `Γ(Y, 𝒪_Y) ⟶ Γ(Y₀, 𝒪_{Y₀})` induces a bijection between the idempotents
