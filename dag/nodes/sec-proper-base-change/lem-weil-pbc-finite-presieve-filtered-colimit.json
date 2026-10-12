@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-finite-presieve-filtered-colimit",
+ "kind": "statement",
+ "title": "The sheaf condition for a finite presieve is preserved by filtered presheaf colimits",
+ "statement": "Let C be a small category, Λ a small filtered category, and D : Λ → PSh(C; Sets) a diagram of presheaves of sets [def-weil-pbc-sites-and-cohomology]. Let (P, ι) be any colimit cocone of D in presheaves [def-weil-pbc-category-colimit]. Let X be an object of C and R a presieve on X with finitely many arrows (its uncurried arrow set is finite). Assume every pair of arrows in R has a pullback. If every D(i) satisfies the sheaf condition for R (every compatible family on R has a unique amalgamation), then P satisfies that same condition for R. No covering or global topology hypothesis on R is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0738(4), finite-stage gluing argument, applied directly to presheaf colimits and the sheaf condition of Tag 00VM; Categories Tag 002W explains finite-limit commutation. Sources read online at https://stacks.math.columbia.edu/tag/0738 and https://stacks.math.columbia.edu/tag/00VM."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation of a presheaf colimit at any object is a colimit of sets, by the sectionwise presheaf colimit result. Mathlib Types.jointly_surjective_of_isColimit lifts any element to a diagram stage. For a finite family of objects and sections, choose lifts separately and a cocone over the finite discrete diagram of their stages (IsFiltered.cocone_nonempty); transport all lifts to its vertex. Naturality of the colimit coprojections preserves their images. This also works for an empty family.",
+   "uses": [
+    "lem-weil-pbc-presheaf-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/FinitePresieveFilteredColimit.lean",
+    "place": "finite_sections_lift"
+   }
+  },
+  {
+   "text": "An equality between two elements from the same stage holds in the filtered colimit iff some transition makes them equal (Types.FilteredColimit.isColimit_eq_iff'). For finitely many such equalities, choose their transitions and apply IsFiltered.wideSpan to obtain one transition factoring through all of them. Functoriality transports each equality along the corresponding factor. Empty families are included in wideSpan.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/FinitePresieveFilteredColimit.lean",
+    "place": "finite_sections_equal"
+   }
+  },
+  {
+   "text": "For separatedness, lift two candidate amalgamations over X to a common stage using Types.FilteredColimit.jointly_surjective_of_isColimit₂. Their restrictions agree in the colimit over each arrow of R. Apply finite_sections_equal, indexed by the finite uncurried arrow subtype of R, to make every equality hold at one later stage. Separatedness of that stage identifies the transported sections, and the cocone equations identify their colimit images.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/FinitePresieveFilteredColimit.lean",
+    "place": "finitePresieve_isSheafFor_filteredColimit, hsep"
+   }
+  },
+  {
+   "text": "For existence, lift a compatible family on R to a single stage using finite_sections_lift. Index the pairwise pullbacks by the finite square of the uncurried arrow subtype. Naturality and compatibility of the original family imply that the two restrictions over each pullback have equal colimit images. Apply finite_sections_equal to obtain one later stage where all these equations hold. Presieve.pullbackCompatible_iff makes this a compatible family there, which has an amalgamation by the assumed stagewise sheaf condition. Its image in P is an amalgamation of the original family by naturality and the cocone equations. Together with separatedness, this is the sheaf condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/FinitePresieveFilteredColimit.lean",
+    "place": "finitePresieve_isSheafFor_filteredColimit, existence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Elementwise finite-stage realization of the plan, using the gluing argument in Tag 0738(4) and the condition in Tag 00VM; fully proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of presheaves preserves the sheaf condition for a finite presieve with pairwise pullbacks",
+   "results": "UNAVAILABLE: service returned Internal Server Error, 0 hits.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict inferred"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of sheaves is a sheaf on a site with finite covering families",
+   "results": "Sheaf.hasFilteredColimitsOfSize; isSheaf_pointwiseColimit only for extensive topology; Sheaf.createsColimitOfIsSheaf.",
+   "date": "2026-10-12",
+   "verdict": "No matching finite-presieve theorem among results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presheaf.IsSheaf, CategoryTheory.Limits.colimit",
+   "results": "Only smoothSheaf inclusion/evaluation lemmas.",
+   "date": "2026-10-12",
+   "verdict": "No matching finite-presieve theorem among results."
+  },
+  {
+   "tool": "grep",
+   "query": "isSheaf.*[Cc]olimit|finite.*[Cc]over.*[Cc]olimit|[Cc]olimit.*[Ii]sSheaf",
+   "results": "ExtensiveColimits.isSheaf_pointwiseColimit concerns extensive topology. Sites.Limits.createsColimitOfIsSheaf handles the full-subcategory step. Types.FilteredColimit.isColimit_eq_iff', jointly_surjective_of_isColimit₂ and IsFiltered.wideSpan give the elementary proof ingredients. Blueprint search for finite presieve filtered colimit and filtered colimit sheaf: 0 matches.",
+   "date": "2026-10-12",
+   "verdict": "No existing theorem for one finite presieve found; proved from Mathlib ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presieve IsSheafFor preserved under filtered colimits of functors to Type for a finite set of arrows",
+   "results": "isSheaf_pointwiseColimit (extensive topology), isSheafFor_of_preservesProduct, and sheaf-colimit existence results. No finite-presieve closure result.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no match; inspected nearby upstream Pro/Generating and Pro/Basic results, which concern filtered limits of coverings instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.IsSheafFor",
+   "results": "12 hits: definition, singleton-iso, separatedness, generation, Yoneda condition, amalgamation, iso transport and product-preservation results. No filtered-colimit closure result.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSheafFor.*[Cc]olimit|[Cc]olimit.*IsSheafFor|finitePresieve; rg IsSheafFor|[Ff]inite.*[Pp]resieve|[Pp]resieve.*[Ff]inite lean/Sheaf/CategoryTheory lean/WeilConjectures/CategoryTheory",
+   "results": "msearch found only CoproductSheafCondition singleton result; library rg found Pro/Generating and Pro/Basic limit-of-coverings results, unrelated to colimits of presheaves.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteFilteredColimitSections",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Step 5, the filtered-colimit-of-sections input; specifically step 2 of aux-site-filtered-colimit-sections-inverse, preservation of the finite-cover sheaf condition.",
+   "via": [
+    "aux-site-filtered-colimit-sections-inverse",
+    "lem-weil-pbc-site-filtered-colimit-sections-finite-coverings",
+    "lem-weil-pbc-colimit-of-sites-sections",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FinitePresieveFilteredColimit",
+  "file": "lean/Sheaf/CategoryTheory/FinitePresieveFilteredColimit.lean",
+  "declaration": "CategoryTheory.finitePresieve_isSheafFor_filteredColimit",
+  "statement": "theorem finitePresieve_isSheafFor_filteredColimit\n    {C : Type u} [SmallCategory C]\n    {Λ : Type u} [SmallCategory Λ] [IsFiltered Λ]\n    (D : Λ ⥤ Cᵒᵖ ⥤ Type u) (c : Cocone D) (hc : IsColimit c)\n    {X : C} (R : Presieve X) [R.HasPairwisePullbacks]\n    (hfinite : R.uncurry.Finite)\n    (hD : ∀ i, R.IsSheafFor (D.obj i)) : R.IsSheafFor c.pt",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085356-L-46188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085356-L-46188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

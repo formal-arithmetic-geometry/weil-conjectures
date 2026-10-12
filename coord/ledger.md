@@ -7108,3 +7108,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/V3/Sheaf.AlgebraicGeometry.FiniteLocalCyclicModuleForget (stage 3; reviewer PASS; first push; landing 20261012T085355-L-45893 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/V3/Sheaf.CategoryTheory.CartanEilenbergPageRealization (stage 3; reviewer PASS; first push; landing 20261012T085355-L-45989 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/V3/Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites (stage 3; reviewer PASS; first push; landing 20261012T085355-L-46086 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/V3/Sheaf.CategoryTheory.SiteFilteredColimitSections (stage 3; reviewer PASS; first push; landing 20261012T085356-L-46188 (interface); batch 20261012T085205; modules 2; new nodes 1)

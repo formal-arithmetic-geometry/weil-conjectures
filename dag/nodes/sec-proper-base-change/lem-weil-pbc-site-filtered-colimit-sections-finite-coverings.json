@@ -26,24 +26,66 @@
  ],
  "proof": [
   {
-   "text": "Apply Function.bijective_iff_has_inverse. The auxiliary theorem aux-site-filtered-colimit-sections-inverse supplies a function g whose left- and right-inverse equations are exactly the required equations for the canonical section map, hence the map is bijective.",
+   "text": "For a colimit cocone in set-valued presheaves whose diagram objects are sheaves, apply finitePresieve_isSheafFor_filteredColimit to each covering presieve. The hypothesis J ≤ Precoverage.finite C gives finiteness, and J.HasPullbacks gives the required pairwise pullbacks. Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange says these conditions suffice for the generated topology. Thus the colimit presheaf is a sheaf.",
    "uses": [
-    "aux-site-filtered-colimit-sections-inverse"
+    "lem-weil-pbc-finite-presieve-filtered-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
+    "place": "SiteFilteredColimitSections.isSheaf_filteredColimit_types"
+   }
+  },
+  {
+   "text": "Use Sheaf.createsColimitOfIsSheaf to obtain creation, hence preservation, of the given colimit by sheafToPresheaf. Evaluation preserves presheaf colimits, so the composite sheafSections evaluated at U preserves this colimit. Its image of the given cocone is therefore a colimit cocone.",
+   "uses": [
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
-    "place": "the proof of siteFilteredColimit_sections_bijective"
+    "place": "SiteFilteredColimitSections.siteFilteredColimit_sections_inverse"
+   }
+  },
+  {
+   "text": "IsColimit.nonempty_isColimit_iff_isIso_desc shows that the canonical colimit.desc map is an isomorphism. The inverse of asIso provides the two inverse equations. Function.bijective_iff_has_inverse yields the existing bijective assertion.",
+   "uses": [
+    "aux-site-filtered-colimit-sections-inverse",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
+    "place": "SiteFilteredColimitSections.siteFilteredColimit_sections_inverse and siteFilteredColimit_sections_bijective"
+   }
+  },
+  {
+   "text": "For abelian presheaves, postcompose a presheaf colimit cocone with the forgetful functor to sets. Mathlib AddCommGrpCat.FilteredColimits.forget_preservesFilteredColimits and whiskeringRight_preservesColimitsOfShape make this a colimit cocone. The diagram objects satisfy the underlying set sheaf condition since the forgetful functor preserves limits and reflects isomorphisms (Presheaf.isSheaf_iff_isSheaf_comp). Apply the set-valued finite-presieve result, and reflect the sheaf condition. The preceding creation-and-evaluation argument now proves IsIso of the abelian canonical descent.",
+   "uses": [
+    "lem-weil-pbc-finite-presieve-filtered-colimit",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
+    "place": "SiteFilteredColimitSections.siteFilteredColimit_sections_isIso"
    }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-presieve-filtered-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "def-weil-pbc-category-colimit",
   "aux-site-filtered-colimit-sections-inverse"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
-  "place": "siteFilteredColimit_sections_bijective reduces Function.Bijective to the two-sided inverse supplied by siteFilteredColimit_sections_inverse"
+  "place": "V3: fully proved finite-presieve closure, colimit creation in the full subcategory, evaluation preservation, and canonical-descent isomorphism. Abelian version reduced to sets via the filtered-colimit-preserving forgetful functor."
  },
  "mathlib_searches": [
   {
@@ -156,10 +198,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T053947-L-2642692",
-  "kind": "proof",
+  "landing": "20261012T085356-L-46188",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

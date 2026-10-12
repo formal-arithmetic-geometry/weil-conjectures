@@ -26,63 +26,51 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal A$ for the category of sets (resp. abelian groups) and regard each $\\mathcal G_\\lambda$ as a presheaf with values in $\\mathcal A$. For every object $V$ of $\\mathcal C$ let $\\mathcal P(V)=\\varinjlim_{\\lambda}\\mathcal G_\\lambda(V)$ be the colimit in $\\mathcal A$ with coprojections $\\iota_{\\lambda,V}$, and for $g:V'\\to V$ let $\\mathcal P(g)$ be the map induced by the restriction maps $\\mathcal G_\\lambda(g)$. By [lem-weil-pbc-presheaf-colimits-sectionwise], $\\mathcal P$ is a presheaf, the $\\iota_\\lambda=(\\iota_{\\lambda,V})_V$ are morphisms of presheaves $\\mathcal G_\\lambda\\to\\mathcal P$, and $(\\mathcal P,(\\iota_\\lambda)_\\lambda)$ is a colimit of the diagram $(\\mathcal G_\\lambda)$ in the category of presheaves with values in $\\mathcal A$.",
+   "text": "For a colimit cocone in set-valued presheaves whose diagram objects are sheaves, apply finitePresieve_isSheafFor_filteredColimit to each covering presieve. The hypothesis J ≤ Precoverage.finite C gives finiteness, and J.HasPullbacks gives the required pairwise pullbacks. Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange says these conditions suffice for the generated topology. Thus the colimit presheaf is a sheaf.",
    "uses": [
-    "lem-weil-pbc-presheaf-colimits-sectionwise"
+    "lem-weil-pbc-finite-presieve-filtered-colimit",
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Section Tag 00VB (section-limits-colimits-PSh); abelian: sites-modules.tex Lemma Tag 03CL (lemma-limits-colimits-abelian-presheaves)"
+    "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
+    "place": "SiteFilteredColimitSections.isSheaf_filteredColimit_types"
    }
   },
   {
-   "text": "$\\mathcal P$ is a sheaf. Let $\\{U_j\\to U\\}_{j\\in J}$ be a covering of $\\mathcal C$; by hypothesis $J$ is finite, and the fibre products $U_{jj'}=U_j\\times_UU_{j'}$ exist (site axiom (iii) of [def-weil-pbc-sites-and-cohomology] applied to $U_{j'}\\to U$). Let $\\mathcal J$ be the finite category with objects the elements $j\\in J$ and the pairs $(j,j')\\in J\\times J$, whose non-identity morphisms are, for each pair $(j,j')$, one arrow $p_{jj'}:j\\to(j,j')$ and one arrow $q_{jj'}:j'\\to(j,j')$ (distinct also when $j=j'$; no two non-identity arrows are composable, so $\\mathcal J$ is a category, with finitely many objects and morphisms). For a presheaf $\\mathcal F$ with values in $\\mathcal A$ let $D_{\\mathcal F}:\\mathcal J\\to\\mathcal A$ send $j\\mapsto\\mathcal F(U_j)$, $(j,j')\\mapsto\\mathcal F(U_{jj'})$, $p_{jj'}$ to restriction along the first projection $U_{jj'}\\to U_j$ and $q_{jj'}$ to restriction along the second projection $U_{jj'}\\to U_{j'}$. A limit of $D_{\\mathcal F}$ is the set (group) of families $((s_j)_j,(t_{jj'})_{j,j'})$ with $t_{jj'}=s_j|_{U_{jj'}}=s_{j'}|_{U_{jj'}}$, which projects bijectively onto the equalizer of $\\prod_j\\mathcal F(U_j)\\rightrightarrows\\prod_{j,j'}\\mathcal F(U_{jj'})$; so the sheaf condition of [def-weil-pbc-sites-and-cohomology] (1) for this covering says exactly that the map $r_{\\mathcal F}:\\mathcal F(U)\\to\\lim_{\\mathcal J}D_{\\mathcal F}$, $s\\mapsto((s|_{U_j})_j,(s|_{U_{jj'}})_{j,j'})$, is bijective (for an abelian presheaf this is the same condition on underlying sets, and $r_{\\mathcal F}$ is a homomorphism). Apply this to every $\\mathcal G_\\lambda$: the maps $r_{\\mathcal G_\\lambda}$ are bijective and natural in $\\lambda$, hence induce a bijection $\\varinjlim_\\lambda\\mathcal G_\\lambda(U)\\to\\varinjlim_\\lambda\\lim_{\\mathcal J}D_{\\mathcal G_\\lambda}$. The functor $M:\\Lambda\\times\\mathcal J\\to\\mathcal A$, $(\\lambda,x)\\mapsto D_{\\mathcal G_\\lambda}(x)$, has $\\Lambda$ small filtered and $\\mathcal J$ finite, so by [lem-weil-pbc-filtered-colimits-commute-finite-limits] (set clause, resp. abelian group clause) the canonical map $\\varinjlim_\\lambda\\lim_{\\mathcal J}D_{\\mathcal G_\\lambda}\\to\\lim_{\\mathcal J}\\varinjlim_\\lambda D_{\\mathcal G_\\lambda}=\\lim_{\\mathcal J}D_{\\mathcal P}$ (the last equality because $\\mathcal P$ is computed sectionwise with restriction maps induced by those of the $\\mathcal G_\\lambda$, step 1) is bijective. The composite $\\mathcal P(U)=\\varinjlim_\\lambda\\mathcal G_\\lambda(U)\\to\\lim_{\\mathcal J}D_{\\mathcal P}$ of these two bijections agrees with $r_{\\mathcal P}$ after each coprojection $\\iota_{\\lambda,U}$ (both send $s\\in\\mathcal G_\\lambda(U)$ to the family of the images in $\\mathcal P$ of its restrictions, since $\\mathcal P(g)\\iota_{\\lambda,V}=\\iota_{\\lambda,V'}\\mathcal G_\\lambda(g)$), hence equals $r_{\\mathcal P}$ by the uniqueness in the universal property of the colimit [def-weil-pbc-category-colimit]. So $r_{\\mathcal P}$ is bijective for every covering, and $\\mathcal P$ is a sheaf of sets (resp. an abelian sheaf). This is the only place where the finiteness of the coverings is used.",
+   "text": "Use Sheaf.createsColimitOfIsSheaf to obtain creation, hence preservation, of the given colimit by sheafToPresheaf. Evaluation preserves presheaf colimits, so the composite sheafSections evaluated at U preserves this colimit. Its image of the given cocone is therefore a colimit cocone.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Lemma Tag 002W (lemma-directed-commutes), applied to the sheaf condition of Sites, Definitions Tag 00VM (definition-sheaf-sets) and Tag 00VR (definition-sheaf), as Stacks does for stalks in Sites, Lemma Tag 0F4E (lemma-neighbourhoods-cofiltered)"
-   }
-  },
-  {
-   "text": "$(\\mathcal P,(\\iota_\\lambda)_\\lambda)$ is a colimit of the diagram in $\\Sh(\\mathcal C)$ (resp. $\\textit{Ab}(\\mathcal C)$): by step 2 it lies in this full subcategory of presheaves [def-weil-pbc-sites-and-cohomology], and a cocone in the subcategory is a cocone in presheaves, so the universal property of step 1 [def-weil-pbc-category-colimit] restricts to the subcategory.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Section Tag 00VB with Definitions Tag 00VM, 00VR (sheaves form a full subcategory of presheaves)"
+    "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
+    "place": "SiteFilteredColimitSections.siteFilteredColimit_sections_inverse"
    }
   },
   {
-   "text": "By uniqueness of colimits [def-weil-pbc-category-colimit] there is a unique isomorphism $\\theta:\\mathcal P\\to\\mathcal G$ in $\\Sh(\\mathcal C)$ (resp. $\\textit{Ab}(\\mathcal C)$) with $\\theta\\circ\\iota_\\lambda=c_\\lambda$ for all $\\lambda$, where $c_\\lambda:\\mathcal G_\\lambda\\to\\mathcal G$ are the coprojections of the given colimit. Evaluating at $U$: $\\theta_U\\circ\\iota_{\\lambda,U}=c_{\\lambda,U}$, so $\\theta_U:\\varinjlim_\\lambda\\mathcal G_\\lambda(U)\\to\\mathcal G(U)$ is the canonical map of the statement (the unique map with these composites). As the component of an isomorphism of sheaves, $\\theta_U$ is bijective, resp. an isomorphism of abelian groups.",
+   "text": "IsColimit.nonempty_isColimit_iff_isIso_desc shows that the canonical colimit.desc map is an isomorphism. The inverse of asIso provides the two inverse equations. Function.bijective_iff_has_inverse yields the existing bijective assertion.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Categories, Definition Tag 002F (definition-colimit): a colimit is unique up to unique isomorphism"
+    "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
+    "place": "SiteFilteredColimitSections.siteFilteredColimit_sections_inverse and siteFilteredColimit_sections_bijective"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "lem-weil-pbc-finite-presieve-filtered-colimit",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 0738 (lemma-directed-colimits-sections), part (4), is the statement; its proof in Stacks goes through quasi-compactness (Definition Tag 090H, Lemma Tag 0D05) and the local description of sheafification (Lemma Tag 00WI, Lemma Tag 00WK, Theorem Tag 00WB). Under the stronger hypothesis that every covering is finite the agent's proof shows directly that the sectionwise colimit is a sheaf, by Categories Lemma Tag 002W (lemma-directed-commutes) applied to the sheaf condition, the argument Stacks uses for stalks in Sites Lemma Tag 0F4E (lemma-neighbourhoods-cofiltered), and Sites Section Tag 00VB for presheaf colimits."
+  "document": "lean/Sheaf/CategoryTheory/SiteFilteredColimitSections.lean",
+  "place": "V3: fully proved finite-presieve closure, colimit creation in the full subcategory, evaluation preservation, and canonical-descent isomorphism. Abelian version reduced to sets via the filtered-colimit-preserving forgetful functor."
  },
  "mathlib_searches": [
   {
@@ -196,10 +184,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T053947-L-2642692",
-  "kind": "proof",
+  "landing": "20261012T085356-L-46188",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
