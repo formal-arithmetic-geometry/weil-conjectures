@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-affine-tilde-total-tensor",
+ "kind": "statement",
+ "title": "Tilde commutes with the unbounded total tensor complex",
+ "statement": "For a commutative ring A and arbitrary unbounded cochain complexes P and N of A-modules, localization Q [def-pc-derived-category] of the total tensor complex [def-pc-tensor-complex-sheaves] of their termwise tilde sheaves on Spec(A) is naturally isomorphic, in both factors, to Q of the termwise tilde of the total module tensor complex. No K-flatness is required. Tilde is the associated-sheaf functor [lem-weil-pbc-spec-module-tilde-sections].",
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DX, lemma-quasi-coherence-tensor-product, proof of (2); termwise tensor comparison Tag 01I8"
+ },
+ "proof": [
+  {
+   "text": "the affine tilde tensor comparison of Tag 01I8 identifies, in each bidegree,\n`tilde(P.X p) tensor tilde(N.X q)` with `tilde(P.X p tensor N.X q)`. Its uniqueness\non pure global tensors implies naturality in both factors. Consequently it respects\nboth differentials, including the sign on the second differential. The tilde functor\nis a left adjoint to global sections, and therefore preserves every coproduct indexed\nby the pairs (p,q) with p+q=n, even when the complexes are unbounded. Apply these\ncoproduct comparisons degreewise to obtain mutually inverse chain maps. Checking on\neach summand gives naturality with respect to maps of both input complexes. Apply Q to the natural chain isomorphism to obtain the localized statement.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-tensor",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-tensor",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08DX, lemma-quasi-coherence-tensor-product, proof of (2); termwise tensor comparison Tag 01I8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coproduct preserving tensor functor commutes with the total tensor complex and its derived tensor on K-flat complexes",
+   "results": "HomologicalComplex.HasGoodTensor and tensorObj infrastructure; no affine tilde comparison",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctor\"",
+   "results": "GradedObject.mapBifunctor and related graded-object maps; no tilde comparison or derived K-flat computation",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.*tensor|tensor.*tilde",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated sheaf functor on an affine scheme commutes with the total tensor complex of two unbounded module complexes",
+   "results": "Service unavailable: Internal Server Error. No result or mathematical verdict obtained. Loogle/LeanFinder and local text searches were used instead.",
+   "status": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf functor preserves direct sum totalization of the tensor bicomplex",
+   "results": "HasTensor, HasGoodTensor, tensorObj, and summand maps; no affine tilde totalization comparison",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map₂CochainComplex\"",
+   "results": "10 hits: map₂CochainComplex and its shift instances; no required comparison",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "counit|kFlat; tensor.*tilde; mapBifunctor.*Iso",
+   "results": "Existing categorical counit criterion, singleObjTensorIso special case, and affine_tilde_tensor degreewise theorem; none duplicates the statement",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof steps 1 and 2: affine computation of derived tensor, factored into K-flat computation and underived tilde totalization",
+   "via": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTildeTotalTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTildeTotalTensor.lean",
+  "declaration": "AlgebraicGeometry.affineTilde_totalTensor_natIso",
+  "statement": "theorem affineTilde_totalTensor_natIso (A : Type u) [CommRing A] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] : Nonempty ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)) ⋙ (curriedTensor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))).map₂CochainComplex ⋙ (Functor.whiskeringLeft (CochainComplex (ModuleCat.{u} A) ℤ) (CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)).obj (@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)) ⋙ (Functor.whiskeringRight (CochainComplex (ModuleCat.{u} A) ℤ) (CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (schemeDerivedCategory (Spec (.of A)))).obj DerivedCategory.Q ≅ (curriedTensor (ModuleCat.{u} A)).map₂CochainComplex ⋙ (Functor.whiskeringRight (CochainComplex (ModuleCat.{u} A) ℤ) (CochainComplex (ModuleCat.{u} A) ℤ) (schemeDerivedCategory (Spec (.of A)))).obj ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)) ⋙ DerivedCategory.Q))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T095923-L-324492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T095923-L-324492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
