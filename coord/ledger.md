@@ -8797,3 +8797,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/Q2/Sheaf.FieldTheory.CentralSimpleTensorEnd (stage 3; reviewer PASS; first push; landing 20261012T173856-L-3303458 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.DiagonalBaseChangeLocalDerivedCategories (stage 3; reviewer PASS; first push; landing 20261012T173856-L-3303701 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:38 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.PerfectImmersionStalkwiseTorBounds (stage 3; reviewer PASS; first push; landing 20261012T173857-L-3303842 (interface); batch 20261012T173801; modules 2; new nodes 1)
+- 17:38 L: merged deliver/R1/Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso (stage 3; reviewer PASS; after a return; landing 20261012T173857-L-3303997 (proof); batch 20261012T173801; modules 1; new nodes 0)

@@ -9,28 +9,27 @@
  },
  "proof": [
   {
-   "text": "Use the compatibility of the quotient presentation to identify the morphism over the affine chart with Spec(A/I) → Spec A. For each basic open D(g), its inverse image is D(g mod I). The associated structure sheaf on the quotient has sections (A/I)[1/g], with A[1/g] acting by the localized quotient homomorphism. The associated sheaf of the A-module A/I has the same localized sections and action. This is precisely the pushforward comparison for a spectrum map applied to the A/I-module A/I.",
+   "text": "Apply isIso_fromTildeΓ_pushforward to the structure module on Spec(A/I). Identify its global sections as A/I with restricted scalars using pushforwardSpecMapCompΓIso and tilde.isoTop. Apply tilde to this sections isomorphism and compose with the invertible tilde-Gamma counit. This realizes the affine spectrum pushforward comparison.",
    "uses": [
-    "lem-weil-pbc-pushforward-tilde-spec"
+    "lem-weil-pbc-pushforward-tilde-spec",
+    "lem-weil-pbc-pushforward-spec-global-sections"
    ],
    "elementary": false
   },
   {
-   "text": "These identifications commute with the localization restriction maps. Glue over the basic-open basis and transport along the chart isomorphism. Restricting i_*O_Z to U evaluates on an open V of U as O_Z(i^{-1}V), so it agrees with the pushforward from i^{-1}U. The resulting module-sheaf isomorphism has the claimed source and target.",
-   "uses": [
-    "def-pc-module-pullback"
-   ],
+   "text": "Restriction along a scheme isomorphism is isomorphic to pushforward along its inverse: combine pushforward composition, pushforward identity and the restriction adjunction counit. Apply this to the affine chart and quotient presentation e. The equality he identifies e.hom followed by the quotient spectrum map and the inverse affine chart with i restricted to U. Compose the corresponding pushforward isomorphisms. Finally, identify restriction of i_*O_Z to U with pushforward of O_Z restricted to i^{-1}U using the canonical sectionwise restriction comparison. Its scalar compatibility is morphismRestrict_app; restrictions of structure modules are given by restrictUnitIso.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-pushforward-tilde-spec",
-  "def-pc-module-pullback"
+  "lem-weil-pbc-pushforward-spec-global-sections"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Lemma 26.7.3(2), Tag 01I9 (lemma-widetilde-pullback); specialize to the quotient morphism and transport along the affine chart. This supplies the identification implicit in More on Morphisms, Tag 068C."
+  "place": "Lemma 26.7.3(2), Tag 01I9, specialized to the quotient; canonical categorical transport along the affine chart and restriction to an open."
  },
  "mathlib_searches": [
   {
@@ -117,10 +116,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T144100-L-2091136",
-  "kind": "interface",
+  "landing": "20261012T173857-L-3303997",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
