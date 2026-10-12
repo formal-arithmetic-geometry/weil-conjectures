@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+import Sheaf.AlgebraicGeometry.ModulePullbackTensorCoherence
+public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent
 
 /-! # The canonical monoidal model of derived pullback
 
@@ -26,6 +28,9 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
+attribute [local instance] pullbackDescentModuleTensor moduleSymmetric modulePreadditive
+  moduleClosed moduleGrothendieck moduleResolutions moduleDerivedMonoidal pullbackDescentQLax
+
 /-- A monoidal structure on derived pullback is induced by the recorded module tensor
 comparison when its left-derived counit is compatible with the tensor comparisons.
 The module tensor comparison is pinned to `module_pullback_tensor`;
@@ -36,22 +41,20 @@ def IsDerivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]
     (m : (derivedPullback g).CoreMonoidal) : Prop := by
-  letI := SheafOfModules.monoidalCategory X.sheaf
-  letI := SheafOfModules.monoidalCategory T.sheaf
-  letI := SheafOfModules.symmetricCategory X.sheaf
-  letI := SheafOfModules.symmetricCategory T.sheaf
-  haveI := Classical.choice (SheafOfModules.tensorClosed X.sheaf).1
-  haveI := Classical.choice (SheafOfModules.tensorClosed T.sheaf).1
-  letI := Classical.choice (SheafOfModules.tensorClosed X.sheaf).2.1
-  letI := Classical.choice (SheafOfModules.tensorClosed T.sheaf).2.1
-  haveI := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
-  haveI := SheafOfModules.isGrothendieckAbelian (moduleRings T.toRingedSpace)
-  haveI := schemeModule_hasFunctorialFlatResolution X
-  haveI := schemeModule_hasFunctorialFlatResolution T
-  haveI := DerivedCategory.hasDerivedMonoidalCategory
-    (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))
-  haveI := DerivedCategory.hasDerivedMonoidalCategory
-    (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))
+  letI := pullbackDescentModuleTensor X
+  letI := pullbackDescentModuleTensor T
+  letI := moduleSymmetric X
+  letI := moduleSymmetric T
+  haveI := modulePreadditive X
+  haveI := modulePreadditive T
+  letI := moduleClosed X
+  letI := moduleClosed T
+  haveI := moduleGrothendieck X
+  haveI := moduleGrothendieck T
+  haveI := moduleResolutions X
+  haveI := moduleResolutions T
+  haveI := moduleDerivedMonoidal X
+  haveI := moduleDerivedMonoidal T
   letI := m.toMonoidal
   exact ∃ (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤
       SheafOfModules.{uModel} (moduleRings T.toRingedSpace))
@@ -98,6 +101,13 @@ def IsDerivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X)
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N)
 
+private theorem reassoc_pinned {C : Type*} [Category C] {A B D E G : C}
+    {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ E} {d : E ⟶ G}
+    {t : A ⟶ E} {s : A ⟶ G} (ht : t = a ≫ b ≫ c)
+    (hs : s = a ≫ b ≫ c ≫ d) : s = t ≫ d := by
+  rw [ht]
+  simpa only [Category.assoc] using hs
+
 /-- The canonical module tensor comparison descends to a monoidal model of derived pullback.
 Statements that use the model quantify over every `m` with
 `IsDerivedPullbackMonoidalModel g m` rather than choosing one.
@@ -113,6 +123,18 @@ theorem exists_derivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))] :
     ∃ m : (derivedPullback g).CoreMonoidal, IsDerivedPullbackMonoidalModel g m := by
-  sorry
+  classical
+  obtain ⟨F, hF, hmap, hAdd, ε, hε, φ, hφ, hnatural, hiso⟩ :=
+    derivedPullback_tensorProduct.{uModel, wModel} g
+  have := hAdd
+  obtain ⟨mF, hμ⟩ := modulePullback_tensor_coherent.{uModel} g F hF hmap
+  obtain ⟨m, hm⟩ :=
+    derivedPullback_monoidal_descent.{uModel, wModel}
+      g F hF hmap mF ε hε φ (by
+        intro P N p q n h
+        exact reassoc_pinned (hμ (P.X p) (N.X q)) (hφ P N p q n h)) hnatural hiso
+  refine ⟨m, F, hF, hmap, hAdd, mF, hμ, ε, hε, φ, ?_, hm⟩
+  intro P N p q n h
+  exact reassoc_pinned (hμ (P.X p) (N.X q)) (hφ P N p q n h)
 
 end AlgebraicGeometry

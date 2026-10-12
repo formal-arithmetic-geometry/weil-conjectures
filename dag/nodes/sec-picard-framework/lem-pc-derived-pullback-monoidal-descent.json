@@ -1,0 +1,166 @@
+{
+ "id": "lem-pc-derived-pullback-monoidal-descent",
+ "kind": "statement",
+ "title": "K-flat descent of a supplied coherent module pullback structure",
+ "statement": "Let $g:T\\to X$ be a morphism of schemes [def-pc-scheme], with derived categories [def-pc-derived-category], recorded derived pullback $L=Lg^*$ [def-pc-derived-pullback], and recorded derived tensor [def-pc-scheme-derived-tensor-structure]. Fix an additive functor $F$ identified on objects and arrows with tensor-formula module pullback [def-pc-module-pullback], a strong monoidal structure $m_F$ on F, and a left-derived counit $\\epsilon:Q_hL\\to K(F)Q_h$. Suppose supplied isomorphisms $\\varphi_{P,N}:F\\operatorname{Tot}(P\\otimes N)\\cong\\operatorname{Tot}(FP\\otimes FN)$ [def-pc-tensor-complex-sheaves] are natural in both complexes, act on every summand by the inverse tensorator of $m_F$, and make $\\epsilon_{P\\otimes N};Q(\\varphi_{P,N})$ invertible whenever P,N are K-flat [def-pc-kflat-complex]. Then there is a strong monoidal structure m on L such that for all such P,N, $\\mu_m(QP,QN);L(\\mu_Q(P,N));\\epsilon_{P\\otimes N};Q(\\varphi_{P,N})=(\\epsilon_P\\otimes\\epsilon_N);\\mu_Q(FP,FN)$. All underived coherence, counit, and total-complex comparisons are inputs; the conclusion supplies only their coherent derived descent.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-module-pullback",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Original model docstring: left-derived universal property descends comparisons and laws; unit complex K-flat; Stacks Cohomology 079U and Section 20.27"
+ },
+ "proof": [
+  {
+   "text": "Work first on K-flat representatives. The supplied F is the recorded termwise pullback, so it preserves K-flatness. Tensor products of K-flat complexes are K-flat. The derived counit of any left-derived presentation agrees, up to the unique isomorphism of left-derived functors, with the K-flat computation of the recorded pullback, so its components are invertible on K-flat objects. Localization tensorators are invertible on K-flat pairs in the recorded derived monoidal construction.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
+   }
+  },
+  {
+   "text": "For a K-flat pair set A=L(mu_Q(P,N)), B=epsilon_{P tensor N};Q(phi), and C=(epsilon_P tensor epsilon_N);mu_Q(FP,FN). Define the tensorator by C;B^{-1};A^{-1}; it is invertible and satisfies mu;A;B=C. Replace arbitrary arguments by K-flat resolutions. Naturality of epsilon and phi makes this assignment commute with comparison quasi-isomorphisms, and localization of the resolving class therefore gives a well-defined natural tensorator on all derived objects.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
+   }
+  },
+  {
+   "text": "Resolve three arguments by K-flat complexes. Precompose the two associativity composites by every triple summand inclusion; the given summand formula for phi reduces equality to the associativity law of m_F, so it holds before and after localization. The structure sheaf in degree zero is K-flat, and F sends it to the target unit by m_F. Use the inverse unit counit and that unit isomorphism to give the derived unit. On summands, the two derived unit diagrams are exactly the unit diagrams of m_F. Descend their equality and package the invertible tensorator and unit as CoreMonoidal. The equation remains the defining equation from the K-flat construction.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Original model docstring: left-derived universal property descends comparisons and laws; unit complex K-flat; Stacks Cohomology 079U and Section 20.27",
+  "note": "The cited source is not installed on this machine; the complete coherence argument is written here and in the declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal functor on complexes descends to a monoidal derived functor through K-flat resolutions",
+   "results": "Service unavailable: HTTP Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend a coherent monoidal structure from K-flat complexes to the derived category using a left derived counit",
+   "results": "Eight hits: Tor, Tor prime, and mapDerivedCategoryFactorsh for exact functors. No monoidal K-flat descent theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Mm]onoidal|[Mm]onoidal.*leftDerived|CoreMonoidal in Mathlib and upstream DerivedCategory and Monoidal modules",
+   "results": "Upstream DerivedCategory.LeftDerivedFunctor.Monoidal supplies tensor comparisons under PreservesFiniteLimits and PreservesFiniteColimits. General scheme pullback lacks the former. No theorem descends the supplied coherent K-flat comparison. Blueprint searches tensor coherence and monoidal descent returned zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Original model docstring: left-derived universal property descends comparisons and laws; unit complex K-flat; Stacks Cohomology 079U and Section 20.27",
+   "via": [
+    "def-pc-derived-pullback-monoidal-model",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackMonoidalDescent.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_monoidal_descent",
+  "statement": "theorem derivedPullback_monoidal_descent {T X : Scheme.{uModel}} (g : T ⟶ X) [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))] (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤ SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M) (hmap : ∀ {M N} (a : M ⟶ N), F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫ eqToHom (hF N).symm) [F.Additive] (mF : F.CoreMonoidal) (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) (hε : (derivedPullback g).IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))) (φ : ∀ P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ, (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.mapBifunctor P N (curriedTensor _)) ≅ CochainComplex.mapBifunctor ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) (curriedTensor _)) (hφ : ∀ P N p q n (h : p + q = n), F.map (HomologicalComplex.ιMapBifunctor P N (curriedTensor _) (ComplexShape.up ℤ) p q n h) ≫ (φ P N).hom.f n = (mF.μIso (P.X p) (N.X q)).inv ≫ HomologicalComplex.ιMapBifunctor ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) (curriedTensor _) (ComplexShape.up ℤ) p q n h) (hnatural : ∀ (P P' N N' : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ) (a : P ⟶ P') (b : N ⟶ N'), (F.mapHomologicalComplex (ComplexShape.up ℤ)).map (HomologicalComplex.mapBifunctorMap a b (curriedTensor _) (ComplexShape.up ℤ)) ≫ (φ P' N').hom = (φ P N).hom ≫ HomologicalComplex.mapBifunctorMap ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map a) ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map b) (curriedTensor _) (ComplexShape.up ℤ)) (hiso : ∀ P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ, CochainComplex.IsKFlat (R := X.sheaf) P → CochainComplex.IsKFlat (R := X.sheaf) N → IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫ DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map (φ P N).hom))) : ∃ m : (derivedPullback g).CoreMonoidal, ∀ P N : CochainComplex (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ, CochainComplex.IsKFlat (R := X.sheaf) P → CochainComplex.IsKFlat (R := X.sheaf) N → (m.μIso (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N)).hom ≫ (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫ ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫ DerivedCategory.Q.map (φ P N).hom = (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫ Functor.LaxMonoidal.μ DerivedCategory.Q ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-43026",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T163612-L-2784419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-43026",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T163612-L-2784419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered statements, predicate, proofs and nodes against the originals and cited sources; all three modules and both direct importers compile cleanly; original predicate equality verified by rfl; axiom probes contain only permitted axioms and expected sorryAx."
+ }
+}

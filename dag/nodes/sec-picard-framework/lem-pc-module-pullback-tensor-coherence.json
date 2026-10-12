@@ -1,0 +1,143 @@
+{
+ "id": "lem-pc-module-pullback-tensor-coherence",
+ "kind": "statement",
+ "title": "Coherence of the recorded module pullback tensor comparison",
+ "statement": "Let $g:T\\to X$ be a morphism of schemes [def-pc-scheme]. Equip module sheaves with their sheaf tensor [def-pur-sheaf-tensor-product]. Let $F:\\operatorname{Mod}(O_X)\\to\\operatorname{Mod}(O_T)$ be a functor, with object identifications $h_M:F(M)=g^*M$ and arrow formula $F(a)=h_M;g^*(a);h_N^{-1}$ for the tensor-formula pullback [def-pc-module-pullback]. Write $e_{M,N}:g^*(M\\otimes N)\\cong g^*M\\otimes g^*N$ for Classical.choose of the recorded comparison [lem-weil-pbc-module-pullback-tensor]. Then there exists a strong monoidal structure $m_F$ on $F$ whose inverse tensorator is $h_{M\\otimes N};e_{M,N};(h_M^{-1}\\otimes h_N^{-1})$. This statement concerns module sheaves only, not derived categories.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Original model docstring: associativity and unit laws follow from the tensor formula; Stacks Modules 01CD and Cohomology 079U"
+ },
+ "proof": [
+  {
+   "text": "Identify F with the tensor-formula pullback using the object equalities and the arrow formula. Naturality of the chosen e is part of the recorded comparison theorem. Its section formula identifies the two triple composites with the same pure triple tensor under the associator. Check after adjunction and sheafification, or on stalks where pure tensors generate; hence the associativity diagram commutes.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
+   }
+  },
+  {
+   "text": "Construct the unit comparison by multiplication O_T tensor_{g^{-1}O_X} g^{-1}O_X -> O_T, with inverse a -> a tensor 1. The balanced tensor relations make the maps inverse. The left and right unit diagrams both act as the identity on pure tensors. Thus the inverses of e and this unit comparison give CoreMonoidal. Transport through the specified object equalities yields the asserted eqToHom conjugation.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Original model docstring: associativity and unit laws follow from the tensor formula; Stacks Modules 01CD and Cohomology 079U",
+  "note": "The cited source is not installed on this machine; the complete coherence argument is written here and in the declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor comparison of pullback of sheaves of modules satisfies associativity and unit coherence",
+   "results": "Service unavailable: HTTP Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "Mathlib.CategoryTheory.Monoidal.Functor supplies CoreMonoidal, ofLaxMonoidal and coreMonoidalTransport. None pins tensor-formula module pullback to the recorded section comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*monoidal|monoidal.*pullback in Mathlib/CategoryTheory and Mathlib/AlgebraicGeometry; CoreMonoidal and pullbackMonoidal in lean/WeilConjectures and lean/Sheaf",
+   "results": "Only cartesian slice pullback monoidal structures in Mathlib. Upstream Scheme.Modules.pullbackMonoidal uses a different functor; no pinning equality for tensorPullback. Blueprint search monoidal pullback returned zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Original model docstring: associativity and unit laws follow from the tensor formula; Stacks Modules 01CD and Cohomology 079U",
+   "via": [
+    "def-pc-derived-pullback-monoidal-model",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackTensorCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackTensorCoherence.lean",
+  "declaration": "AlgebraicGeometry.modulePullback_tensor_coherent",
+  "statement": "theorem modulePullback_tensor_coherent {T X : Scheme.{uModel}} (g : T ⟶ X) (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤ SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M) (hmap : ∀ {M N} (a : M ⟶ N), F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫ eqToHom (hF N).symm) : ∃ mF : F.CoreMonoidal, ∀ M N, (mF.μIso M N).inv = eqToHom (hF _) ≫ ((Classical.choose (Scheme.Modules.module_pullback_tensor g)) M N).hom ≫ (eqToHom (hF M).symm ⊗ₘ eqToHom (hF N).symm)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-43026",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T163612-L-2784419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-43026",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T163612-L-2784419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered statements, predicate, proofs and nodes against the originals and cited sources; all three modules and both direct importers compile cleanly; original predicate equality verified by rfl; axiom probes contain only permitted axioms and expected sorryAx."
+ }
+}

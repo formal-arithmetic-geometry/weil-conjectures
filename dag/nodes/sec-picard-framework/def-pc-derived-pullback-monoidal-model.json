@@ -19,9 +19,51 @@
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; unit from termwise tensor pullback and monoidal unit laws"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use derivedPullback_tensorProduct to obtain the additive functor F with its recorded object and arrow formulas, the left-derived counit epsilon, the natural total-complex isomorphisms phi, the module comparison formula on summands, and invertibility on K-flat pairs.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
+   }
+  },
+  {
+   "text": "Obtain a coherent module structure m_F from modulePullback_tensor_coherent. Rewrite its inverse tensorator by the pinning equality, and reassociate compositions. The summand formula supplied by the preceding theorem is now exactly the summand formula in terms of m_F.",
+   "uses": [
+    "lem-pc-module-pullback-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
+   }
+  },
+  {
+   "text": "Apply derivedPullback_monoidal_descent to this same F, m_F, epsilon and phi, using the supplied naturality and invertibility. It gives m and its K-flat compatibility equation. Combine the witnesses and their proofs to inhabit the unchanged IsDerivedPullbackMonoidalModel predicate.",
+   "uses": [
+    "lem-pc-derived-pullback-monoidal-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-pullback-monoidal-descent",
+  "lem-pc-derived-pullback-tensor-product",
+  "lem-pc-module-pullback-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lean assembly of the recorded tensor-product comparison, module coherence, and K-flat monoidal descent"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -108,5 +150,15 @@
   "group": "C1",
   "result": "fix",
   "note": "H5 fix: derivedPullbackMonoidalModel (Classical.choose of sorried exists) removed, item quantifies over every m with IsDerivedPullbackMonoidalModel g m; Classical.choose of scheme_derivedInternalHom_adjunction replaced by bound adj/adj'/adjT tied by their naturality equations (0f5459d94 pattern; bidual via the symmetric form adj'); X, QCoh K M, IsPerfect K, Kdual=RHom(K,O) QCoh+perfect, ev, comparison for M and K, bidual, unique eta, ExactPairing with ev/eta, base change for every g matched"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-43026",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T163612-L-2784419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered statements, predicate, proofs and nodes against the originals and cited sources; all three modules and both direct importers compile cleanly; original predicate equality verified by rfl; axiom probes contain only permitted axioms and expected sorryAx."
  }
 }
