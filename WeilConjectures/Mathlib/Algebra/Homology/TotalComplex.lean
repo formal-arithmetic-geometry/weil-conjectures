@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
-public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 /-!
 # Total complexes of first quadrant double complexes
@@ -15,15 +14,12 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 A double complex `K : HomologicalComplex₂ C (up ℕ) (up ℕ)` in a category with finite coproducts
 has a total complex: the objects `K.X p q` with `p + q = n` form a finite family.
 
-When `C` is abelian, filtering the total complex `Tot K` by the columns `p' ≥ p` gives a first
-quadrant cohomological spectral sequence with `E₁^{p, q} = H^q(K^{p, •})`, the differential `d₁`
-being induced by the horizontal differential `d_I`, hence `E₂^{p, q} = H^p_I H^q_{II}(K)`,
-abutting to `H^{p + q}(Tot K)` with the image filtration.
+The total complex shape of `ComplexShape.up ℕ` also has a symmetry, with the signs
+`σ p q = (-1) ^ (p * q)`, so that the total complex of the transpose `K.flip` of a first quadrant
+double complex is isomorphic to that of `K` (`HomologicalComplex₂.totalFlipIso`).
 
-## Main statements
-
-- `HomologicalComplex₂.exists_spectralSequence`: the first spectral sequence of a first quadrant
-  double complex.
+The spectral sequences of a first quadrant double complex are constructed in
+`WeilConjectures/Algebra/Homology/ExactCouple/DoubleComplex.lean`.
 -/
 
 @[expose] public section
@@ -44,23 +40,25 @@ instance hasTotal_up_nat (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (Com
     omega
   infer_instance
 
-/-- **The first spectral sequence of a first quadrant double complex.** For a first quadrant
-double complex `K` in an abelian category, the filtration of the total complex by the columns
-gives a first quadrant cohomological spectral sequence with
-`E₂^{p, q} ≅ H^p_I H^q_{II}(K)` — the `p`-th cohomology of the complex
-`p ↦ H^q(K^{p, •})` whose differential is induced by the horizontal differential of `K` —
-abutting to the cohomology `H^{p + q}(Tot K)` of the total complex.
-
-This is the first of the two spectral sequences of a double complex.
-
-(blueprint: `thm-sp-double-complex-spectral-sequences`) -/
-theorem exists_spectralSequence {C : Type*} [Category* C] [Abelian C]
-    (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)) :
-    ∃ E : E₂CohomologicalSpectralSequenceNat C,
-      (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅
-        (((HomologicalComplex.homologyFunctor C (ComplexShape.up ℕ) q).mapHomologicalComplex
-          (ComplexShape.up ℕ)).obj K).homology p)) ∧
-      E.AbutsTo fun n ↦ (K.total (ComplexShape.up ℕ)).homology n :=
-  sorry
-
 end HomologicalComplex₂
+
+namespace ComplexShape
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The symmetry of the total complex shape of `ComplexShape.up ℕ`, with the signs
+`σ p q = (-1) ^ (p * q)`: it identifies the total complex of a first quadrant double complex
+with that of its transpose. -/
+instance : TotalComplexShapeSymmetry (up ℕ) (up ℕ) (up ℕ) where
+  symm p q := add_comm q p
+  σ p q := (-1 : ℤˣ) ^ (p * q)
+  σ_ε₁ := by
+    rintro p _ rfl q
+    dsimp
+    rw [mul_one, add_mul, one_mul, pow_add, mul_comm ((-1 : ℤˣ) ^ q), mul_assoc, ← pow_add,
+      ← two_mul, pow_mul (-1 : ℤˣ) 2 q, Int.units_sq, one_pow, mul_one]
+  σ_ε₂ := by
+    rintro p q _ rfl
+    dsimp
+    rw [one_mul, ← pow_add, mul_add, mul_one]
+
+end ComplexShape
