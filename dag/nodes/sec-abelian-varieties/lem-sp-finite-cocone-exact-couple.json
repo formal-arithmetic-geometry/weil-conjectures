@@ -1,0 +1,140 @@
+{
+ "id": "lem-sp-finite-cocone-exact-couple",
+ "kind": "statement",
+ "title": "Stationary weak convergence from finite diagonal cocone tails",
+ "statement": "Let $C$ be an abelian category, let $X$ be a type-zero bigraded exact couple [def-sp-exact-couple], and let $A_n$ be diagonal alpha-colimits with structure maps $i_n(P):D^{P,n-P}\\to A_n$ [def-sp-convergence]. Suppose that for every $n\\in\\mathbf Z$ there are integers $a_n,b_n$ such that $i_n(P)$ is an isomorphism for $P\\le a_n$ and $D^{P,n-P}$ is zero for $P\\ge b_n$. Then there exist limiting subobjects $L$ of the canonical cycle-boundary tower; the couple is regular, and it weakly converges to $L,A$. Explicitly, the canonical maps from $D^{p,q}$ to $E_\\infty^{p,q}$ and to $\\operatorname{gr}^p A_{p+q}$ are epimorphisms with equal kernel subobjects. No cohomology object, page identification, separatedness, exhaustiveness, or inverse-limit conclusion is asserted.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012W, lemma-biregular-ss-converges; exact-couple specialization of its finite-tail proof"
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "For sufficiently low consecutive indices on each diagonal, the cocone equation and invertibility of the two cocone maps imply invertibility of alpha. Every sufficiently high diagonal source is zero. Thus each incoming alpha image is eventually zero and each outgoing alpha-iterate kernel is eventually the kernel of the cocone map: take the iterate long enough that its target cocone map is an isomorphism.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on the canonical derived-couple and cycle-boundary recursions. The r-th initial-page cycles are the inverse image under f(p,q) of the incoming r-fold alpha image at D(p+2,q-1); the r-th boundaries are the initial-g image of the kernel of the outgoing r-fold alpha iterate at D(p,q), with the type shifts transported. For r=0 these are the whole page and zero. The successor formulas follow from derived-couple exactness and the defining cycle lifts and quotient projections. In particular the canonical maps, not merely isomorphism classes of subquotients, are respected. The preceding finite tails imply eventual constancy, with eventual cycles ker f and eventual boundaries g(ker i_(p+q)(p)). The exactness and restriction equations are fields of the canonical DerivedMaps in ExactCouple, via derivedMaps_exists; no separate DerivedCoupleExact or pageCouple_image theorem is needed.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define L.Z and L.B to be the stationary subobjects. Decreasing cycles and increasing boundaries show these are respectively the greatest lower bound and least upper bound of all stages, independently of the chosen sufficiently large stage. Eventual constancy of cycles proves regularity.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exactness identifies ker f with image g, so D surjects onto L.Z, and then onto its quotient by L.B. The kernel of this composite is ker g plus ker i, by the abelian subobject image/preimage calculus. For the canonical graded-image quotient, the next image is the image of alpha followed by the present cocone map. Its preimage in D is image alpha plus ker i. Exactness identifies image alpha with ker g. Thus the two canonical maps are epi with the same kernel, as required.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-exact-couple"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012W, lemma-biregular-ss-converges; exact-couple specialization of its finite-tail proof; details supplied by K1, with Lean proof where complete"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ExactCouple|AlphaColimit|CycleBoundaryTower|WeaklyConvergesTo",
+   "results": "0 hits: . No declaration states the finite diagonal exact-couple result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact couple finite diagonal cocone stationary cycles boundaries weak convergence",
+   "results": "8 hits: HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.exact_iff_degreewise_exact, CochainComplex.exactAt_of_isLE, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, HomologicalComplex.shortExact_of_degreewise_shortExact, CategoryTheory.Limits.colim.exact_mapShortComplex, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CochainComplex.exactAt_of_isGE. No declaration states the finite diagonal exact-couple result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact couple finite diagonal cocone stationary cycles boundaries weak convergence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BoundedFilteredCoupleAbutment",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields-canonical-pages",
+   "place": "Finite-filtration convergence step 5: stationary exact-couple cycles, boundaries, and canonical quotient comparison",
+   "via": [
+    "lem-sp-bounded-filtered-couple-abutment",
+    "lem-sp-bounded-filtered-page-core"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteCoconeExactCouple",
+  "file": "lean/Sheaf/CategoryTheory/FiniteCoconeExactCouple.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.finiteCocone_weakConvergence",
+  "statement": "theorem finiteCocone_weakConvergence {C : Type u} [Category.{v} C] [Abelian C] (X : BigradedExactCouple C 0) (A : ∀ n : ℤ, X.AlphaColimit n) (hA : ∀ n : ℤ, ∃ a b : ℤ, (∀ P : ℤ, P ≤ a → IsIso ((A n).ι P)) ∧ (∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P)))) : ∃ L : X.LimitSubobjects, X.IsRegular ∧ X.WeaklyConvergesTo L A",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T213436-L-1178094",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T213436-L-1178094",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

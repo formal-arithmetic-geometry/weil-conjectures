@@ -1,0 +1,139 @@
+{
+ "id": "lem-sp-filtered-cohomology-diagonal-colimit",
+ "kind": "statement",
+ "title": "Cohomology inclusion colimit of a finite filtered exact-couple diagonal",
+ "statement": "Let $C$ be an abelian category, let $U=(K,F)$ be a cochain complex with a finite decreasing filtration [def-sp-filtration, def-sp-filtered-complex-subquotients], and let $X$ be a type-zero bigraded exact couple [def-sp-exact-couple]. Let $e_D^{P,Q}:D^{P,Q}\\cong H^{P+Q}(F^{-Q}K)$ be isomorphisms carrying alpha to the homology maps of filtration inclusions, with the degree transports. Define $i_n(P):D^{P,n-P}\\to H^n(K)$ by $e_D$, the degree transport, and the inclusion $H^n(F^{P-n}K)\\to H^n(K)$. Then $\\alpha_n(P)i_n(P)=i_n(P+1)$, where $\\alpha_n(P):D^{P+1,n-P-1}\\to D^{P,n-P}$ is the diagonal alpha transition of [def-sp-convergence]. For every object $T$ and compatible family $f(P):D^{P,n-P}\\to T$, there exists a unique $h:H^n(K)\\to T$ with $i_n(P)h=f(P)$ for all $P$. Thus these explicit maps, with this explicit object, are a diagonal colimit.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012W, lemma-biregular-ss-converges; exact-couple specialization of its finite-tail proof"
+ },
+ "stmt_deps": [
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose the alpha comparison with the homology inclusion. Naturality of equality transports for eD and for homology maps moves the transports through the comparison. Homology preserves composition, and the subobject inclusion followed by its arrow is the smaller step arrow. This is exactly the diagonal cocone equation.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a whole filtration step a. Antitonicity implies F^(P-n) is whole for P <= a+n. Its arrow, its homology map, and therefore i_n(P), are isomorphisms at those indices.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a compatible cocone f, put h=i_n(a+n)^(-1) followed by f(a+n). Prove i_n(P)h=f(P) by integer induction about a+n. The upward step follows by composing the equation at P with alpha_n(P). The downward step cancels alpha_n(P-1), an isomorphism since both lower cocone maps are isomorphisms. Uniqueness follows by cancelling i_n(a+n). The Lean helper diagonalCocone_isColimit gives this induction for arbitrary integer chains.",
+   "uses": [
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012W, lemma-biregular-ss-converges; exact-couple specialization of its finite-tail proof; details supplied by K1, with Lean proof where complete"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "filteredCohomology|alphaDiagonal|finite.*colimit|colimit.*finite",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean. No declaration states the finite diagonal exact-couple result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology is colimit of finite filtered complex exact couple diagonal inclusion maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology is colimit of finite filtered complex exact couple diagonal inclusion maps",
+   "results": "8 hits: HomologicalComplex.isColimitOfEval, HomologicalComplex.coconeOfHasColimitEval_pt_d, HomologicalComplex.coconeOfHasColimitEval_ι_app_f, HomologicalComplex.coconeOfHasColimitEval, HomologicalComplex.isColimitCoconeOfHasColimitEval, HomologicalComplex.coconeOfHasColimitEval_pt_X, HomologicalComplex.extend.leftHomologyData.isColimitCokernelCofork, HomologicalComplex.extend.rightHomologyData.isColimitCokernelCofork. No declaration states the finite diagonal exact-couple result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BoundedFilteredCoupleAbutment",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields-canonical-pages",
+   "place": "Finite-filtration convergence step 5: construction and compatibility of the diagonal alpha-colimit",
+   "via": [
+    "lem-sp-bounded-filtered-couple-abutment",
+    "lem-sp-bounded-filtered-page-core"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredCohomologyDiagonalColimit",
+  "file": "lean/Sheaf/CategoryTheory/FilteredCohomologyDiagonalColimit.lean",
+  "declaration": "CategoryTheory.filteredCohomologyDiagonal_isColimit",
+  "statement": "theorem filteredCohomologyDiagonal_isColimit (U : FilteredObject (CochainComplex C ℤ)) (hU : U.filtration.IsFinite) (X : BigradedExactCouple C 0) (eD : ∀ P Q : ℤ, X.D P Q ≅ (U.filtration.step (-Q) : CochainComplex C ℤ).homology (P + Q)) (hα : ∀ P Q : ℤ, X.alpha P Q ≫ (eD (P - 1) (Q + 1)).hom = (eD P Q).hom ≫ HomologicalComplex.homologyMap (Subobject.ofLE (U.filtration.step (-Q)) (U.filtration.step (-(Q + 1))) (U.filtration.antitone_step (by omega))) (P + Q) ≫ eqToHom (by rw [show P - 1 + (Q + 1) = P + Q by omega])) : (∀ n P : ℤ, X.alphaDiagonal n P ≫ filteredCohomologyDiagonalMap U X eD n P = filteredCohomologyDiagonalMap U X eD n (P + 1)) ∧ (∀ (n : ℤ) (T : C) (f : ∀ P : ℤ, X.D P (n - P) ⟶ T), (∀ P, X.alphaDiagonal n P ≫ f P = f (P + 1)) → ∃! h : U.obj.homology n ⟶ T, ∀ P, filteredCohomologyDiagonalMap U X eD n P ≫ h = f P)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.filteredCohomologyDiagonalMap",
+   "CategoryTheory.filteredCohomologyDiagonal_isColimit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T213436-L-1178094",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T213436-L-1178094",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
