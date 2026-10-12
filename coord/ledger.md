@@ -7668,7 +7668,9 @@ One line per change that needs a reason: date, node or file, what changed, why.
 
 - 20:59 L: batch 20261012T120425 bisection test completed
 - 13:00 L: returned deliver/D3/Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact (reviewer RETURN: (reviewer X-fb06e, head fb06e28ce) E2 (review point 4): The reopened CategoryTheory.injective_module_cech_cohomology_isZ)
-- 13:01 L: merged deliver/P1/Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups (stage 3; reviewer PASS; first push; landing 20261012T130132-L-1275607 (interface); batch 20261012T120425; modules 2; new nodes 1; change records: coord/changes/DerivedLimitRoosAbelianGroups-imports.md)
 - 13:01 L: returned deliver/N2/Sheaf.AlgebraicGeometry.AffineUnitDivisorBaseChange (reviewer RETURN: (reviewer X-3ace5, head 3ace542e5) B9: Correct both new blueprint records. In dag/nodes/sec-curve-estimates/lem-sc-affin)
 - 13:01 L: returned deliver/N3/Sheaf.Algebra.Homology.KInjectiveRestrictLocalized (reviewer RETURN: (reviewer X-bbb80, head bbb80d590) C1: target node proof step omits the non-elementary dependency lem-weil-pbc-right-adj)
 - 13:01 L: returned deliver/G3/Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore (reviewer RETURN: (reviewer X-b2c99, head b2c99b9bf) A3: Non-forced edit in the unclaimed caller. In lean/Sheaf/AlgebraicGeometry/Projecti)
+
+- 21:02 L: error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.lean:103:11: overloaded, errors 
+error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
