@@ -4,6 +4,8 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCore
+import Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCurve
 
 @[expose] public section
 
@@ -39,6 +41,10 @@ theorem sepClosed_geometric_comparison
       (j : Spec (.of K') ⟶ Spec (.of K)) (a : D' ⟶ D) (p : D ⟶ C) (p' : D' ⟶ C'),
       IsCurve b ∧ IsProper b ∧ IsPullback a b' b j ∧
         IsUniversalHomeomorphism p ∧ IsUniversalHomeomorphism p' ∧ p' ≫ ι' = a ≫ p := by
-  sorry
+  obtain ⟨K, hK, hKa, K', hK', hK'a, D, D', b, b', j, a, p, p', t, ht, hs, hp, hp', hcomm⟩ :=
+    exists_sepClosed_comparison_core f h
+  have : IsUniversalHomeomorphism p := hp
+  obtain ⟨hb, hbp⟩ := isCurve_isProper_of_sepClosed_comparison_core f b p t ht
+  exact ⟨K, hK, hKa, K', hK', hK'a, D, D', b, b', j, a, p, p', hb, hbp, hs, hp, hp', hcomm⟩
 
 end AlgebraicGeometry.IsCurve

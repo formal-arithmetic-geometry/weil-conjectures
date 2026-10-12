@@ -5786,3 +5786,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:14 L: returned deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (reviewer RETURN: (reviewer X-de254, head de254d0c2) C1/C2: FlatCohomologyComparison.lean publicly adds `invImage_preservesFiniteLimits` a)
 - 01:14 L: returned deliver/K1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial (reviewer RETURN: (reviewer X-a9a96, head a9a96f81c) D1: `cohomologyPullbackComposition` and `cohomologyPullbackIdentity` are exact restat)
 - 01:15 L: merged deliver/G1/Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image (stage 3; reviewer PASS; after a return; landing 20261012T011430-L-757597 (interface); modules 3; new nodes 2)
+- 01:17 L: merged deliver/J1/Sheaf.AlgebraicGeometry.Curve.SepClosedComparison (stage 3; reviewer PASS; after a return; landing 20261012T011600-L-764037 (interface); modules 3; new nodes 2)

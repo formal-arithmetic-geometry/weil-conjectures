@@ -1,0 +1,143 @@
+{
+ "id": "lemma-weil-pbc-curve-separably-closed-passage-curve",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-separably-closed-passage-comparison",
+   "place": "proof, decomposition into geometric data and curve properties",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Curve properties after comparison base change",
+ "statement": "Let k and K be fields, f : C -> Spec k a proper curve [def-weil-scheme-over-base, def-weil-affine-spectrum, def-weil-proper-morphism, def-kun-topological-krull-dimension], b : D -> Spec K, p : D -> C a universal homeomorphism [def-weil-universal-homeomorphism], and t : Spec K -> Spec k. If (p,b,f,t) is a cartesian square [def-pc-base-change], then b is a proper curve. No separable-closedness or algebraic-closedness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0A5E, proof: compatible algebraic closures, universal-homeomorphism vertical maps, and the bottom comparison arrow"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply MorphismProperty.of_isPullback to preserve properness. Its component properties supply separatedness, local finite type and quasi-compactness.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal homeomorphism p induces a homeomorphism of spaces. IsHomeomorph.topologicalKrullDim_eq transfers the dimension bound from C to D, including dimension bottom for the empty scheme. Combine with the inherited morphism properties.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-universal-homeomorphism",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5E, compatible-closure construction; detailed implementation and missing-pullback repair by J1 second reader, 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric comparison square for a curve over separably closed fields using compatible algebraic closures",
+   "results": "Service unavailable: HTTP response Internal Server Error. No no-match verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper curve pulled back along a field extension remains a curve if the projection is a homeomorphism",
+   "results": "Only elliptic-curve base-change results; no exact theorem about IsCurve. The helper is proved using generic Mathlib ingredients.",
+   "date": "2026-10-12",
+   "verdict": "ingredient matches only; no exact combined theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsHomeomorph, topologicalKrullDim",
+   "results": "Exact dimension ingredient IsHomeomorph.topologicalKrullDim_eq.",
+   "date": "2026-10-12",
+   "verdict": "ingredient matches only; no exact combined theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim_eq|of_isPullback|sepClosed_geometric_comparison",
+   "results": "Exact generic Mathlib ingredients. Library baseChange_curve assumes algebraically closed fields and is still sorry; it does not subsume this general helper.",
+   "date": "2026-10-12",
+   "verdict": "ingredient matches only; no exact combined theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1148,
+ "blueprint_uses": [],
+ "uses_not_cited": [],
+ "proof_split_by": "paragraphs",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCurve",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SepClosedComparisonCurve.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.isCurve_isProper_of_sepClosed_comparison_core",
+  "branch": "sheaf-dag",
+  "statement": "theorem isCurve_isProper_of_sepClosed_comparison_core {k K : Type u} [Field k] [Field K] {C D : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] (b : D ⟶ Spec (.of K)) (p : D ⟶ C) [IsUniversalHomeomorphism p] (t : Spec (.of K) ⟶ Spec (.of k)) (h : IsPullback p b f t) : IsCurve b ∧ IsProper b",
+  "by": "J1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.SepClosedComparison",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-699e7",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T011600-L-764037",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-699e7",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T011600-L-764037",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target signature, node records, proofs, remaining named sorry, imports, and report satisfy the stage-3 review brief."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

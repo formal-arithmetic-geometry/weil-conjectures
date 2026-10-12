@@ -1,0 +1,155 @@
+{
+ "id": "lemma-weil-pbc-curve-separably-closed-passage-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-separably-closed-passage-comparison",
+   "place": "proof, decomposition into geometric data and curve properties",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Core geometric comparison data",
+ "statement": "Let k and k' be separably closed fields [def-pc-separably-closed], f : C -> Spec k a proper curve [def-weil-scheme-over-base, def-weil-affine-spectrum, def-weil-proper-morphism, def-kun-topological-krull-dimension], and (iota', f', f, iota) a cartesian square [def-pc-base-change]. There exist algebraically closed fields K and K' [def-weil-algebraic-closure], schemes D and D', maps b : D -> Spec K, b' : D' -> Spec K', j : Spec K' -> Spec K, a : D' -> D, p : D -> C, p' : D' -> C', and t : Spec K -> Spec k, such that both (p,b,f,t) and (a,b',b,j) are cartesian, p and p' are universal homeomorphisms [def-weil-universal-homeomorphism], and p' followed by iota' equals a followed by p. No assertion that b is a proper curve is part of the conclusion.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0A5E, proof: compatible algebraic closures, universal-homeomorphism vertical maps, and the bottom comparison arrow"
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-weil-scheme-over-base",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change",
+  "def-weil-algebraic-closure",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose K' an algebraic closure of k' and K the relative algebraic closure of k in K'; K is algebraically closed and the embeddings commute. Since the ground fields are separably closed, K/k and K'/k' are purely inseparable algebraic extensions.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-relative-algebraic-closure-algclosed",
+    "lem-pc-kbar-pure-insep"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Recover the ground-field embedding by full faithfulness of Spec. Form the two base changes D and D'; record their first pullback square. Pure inseparability gives the universal-homeomorphism spectrum maps, and their base changes p and p' retain that property. Pullback pasting gives a, the comparison square, and the projection identity.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-pc-spec-pure-insep-integral-radicial-surjective",
+    "def-weil-universal-homeomorphism",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-relative-algebraic-closure-algclosed",
+  "lem-pc-kbar-pure-insep",
+  "def-weil-affine-spectrum",
+  "lem-pc-spec-pure-insep-integral-radicial-surjective",
+  "def-weil-universal-homeomorphism",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5E, compatible-closure construction; detailed implementation and missing-pullback repair by J1 second reader, 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric comparison square for a curve over separably closed fields using compatible algebraic closures",
+   "results": "Service unavailable: HTTP response Internal Server Error. No no-match verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible algebraic closures of an embedding of separably closed fields give universal homeomorphisms on spectra and a cartesian comparison diagram of schemes",
+   "results": "Found PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable and Scheme.SpecToEquivOfField, but no exact comparison diagram theorem.",
+   "date": "2026-10-12",
+   "verdict": "ingredient matches only; no exact combined theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, IsPurelyInseparable",
+   "results": "Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed supplies the field ingredient, not the scheme diagram.",
+   "date": "2026-10-12",
+   "verdict": "ingredient matches only; no exact combined theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim_eq|of_isPullback|sepClosed_geometric_comparison",
+   "results": "Mathlib has the generic pullback ingredients; rg on both library roots and upstream finds no existing comparison theorem beyond the item.",
+   "date": "2026-10-12",
+   "verdict": "ingredient matches only; no exact combined theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1148,
+ "blueprint_uses": [],
+ "uses_not_cited": [],
+ "proof_split_by": "paragraphs",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SepClosedComparisonCore.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_sepClosed_comparison_core",
+  "branch": "sheaf-dag",
+  "statement": "theorem exists_sepClosed_comparison_core {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι) : ∃ (K : Type u) (_ : Field K) (_ : IsAlgClosed K) (K' : Type u) (_ : Field K') (_ : IsAlgClosed K') (D D' : Scheme.{u}) (b : D ⟶ Spec (.of K)) (b' : D' ⟶ Spec (.of K')) (j : Spec (.of K') ⟶ Spec (.of K)) (a : D' ⟶ D) (p : D ⟶ C) (p' : D' ⟶ C') (t : Spec (.of K) ⟶ Spec (.of k)), IsPullback p b f t ∧ IsPullback a b' b j ∧ IsUniversalHomeomorphism p ∧ IsUniversalHomeomorphism p' ∧ p' ≫ ι' = a ≫ p",
+  "by": "J1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.SepClosedComparison",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-699e7",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T011600-L-764037",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-699e7",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T011600-L-764037",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; target signature, node records, proofs, remaining named sorry, imports, and report satisfy the stage-3 review brief."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
