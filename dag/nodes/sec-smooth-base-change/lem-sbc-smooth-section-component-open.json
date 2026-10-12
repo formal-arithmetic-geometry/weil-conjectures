@@ -12,21 +12,33 @@
  ],
  "proof": [
   {
-   "text": "Smoothness implies flatness and geometrically reduced fibres. Quasi-compactness and quasi-separatedness, together with local finite presentation, imply finite presentation. Apply the neighbourhood argument of Stacks 055Q locally on the base: descend the morphism, its section and flatness to a noetherian model. The component containing the rational section point is geometrically connected, so its locus commutes with base change.",
-   "uses": [],
+   "text": "Apply local constructibility of the relative section component (Stacks 055P). Smoothness supplies the locally finite presentation instance required by that theorem.",
+   "uses": [
+    "lem-sbc-section-component-locally-constructible"
+   ],
    "elementary": false
   },
   {
-   "text": "On the noetherian model, test the neighbourhood criterion along an irreducible closed subset through a point of the component locus. A trait joining that point to the generic point reduces the criterion to a flat family over a discrete valuation ring with geometrically reduced special fibre. Delete the special-fibre components not meeting the section and retain the connected component of the total space containing it. The resulting connected special fibre implies a connected generic fibre by the connectedness lemma used in Stacks 055Q. Hence the generic point is in the locus. This proves the neighbourhood criterion at each point of the locus, and the union of those neighbourhoods is the locus itself.",
-   "uses": [],
+   "text": "Apply stability under generalization of the smooth section component, the generic-point part of Stacks 055Q.",
+   "uses": [
+    "lem-sbc-smooth-section-component-generalization"
+   ],
    "elementary": false
+  },
+  {
+   "text": "For a point p choose its affine-cover chart j and a preimage q. Pull local constructibility and generalization stability back along j. The chart is a quasi-compact, quasi-separated prespectral space, so its locally constructible subset is constructible. Apply Mathlib PrimeSpectrum.isOpen_of_stableUnderGeneralization_of_isConstructible. The open immersion j maps this open preimage to an open neighbourhood of p contained in the component locus. The neighbourhood criterion for openness finishes the proof.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-section-component-locally-constructible",
+  "lem-sbc-smooth-section-component-generalization"
+ ],
  "proof_origin": {
   "document": "Stacks Project",
-  "place": "Tags 055R (openness), 055Q (neighbourhood proof), and 055L (component locus)",
-  "note": "Source argument translated to Lean by B3; openness remains to be formalized."
+  "place": "Tags 055P and 055Q; affine topological criterion Tag 00I0",
+  "note": "Q3 decomposes the algebraic argument into local constructibility and generalization stability; the complete Lean combination uses affine-cover neighbourhoods and Mathlib. The unit still uses the relative connected component open in the slicing construction."
  },
  "mathlib_searches": [
   {
@@ -97,10 +109,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T035647-L-1600045",
+  "landing": "20261012T085324-L-33937",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
