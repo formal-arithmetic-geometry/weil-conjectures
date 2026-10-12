@@ -16,22 +16,26 @@
  ],
  "proof": [
   {
-   "text": "a nonempty open subset of an integral scheme contains its generic point. Hence the\nopen immersion of the connected smooth curve into its integral compactification identifies\nboth generic stalks, and thus both function fields. Transport the given unit through the\ninverse of this field isomorphism to a unit b on Z. At Q and its image P the open immersion\nidentifies local rings and the maps into the common function field. The discrete valuation\nrings therefore have identical normalized valuations: a uniformizer maps to a uniformizer,\nand units map to units. Applying this to the given rational function yields the displayed\ncoefficient equality. No choice of a divisor or trivial Picard class is used, and no boundary\norder is prescribed. For a constant unit all retained orders vanish; an empty boundary\nsimply makes the equality hold at every ambient closed point.",
-   "uses": [
-    "def-sc-function-field",
-    "def-sc-divisor"
-   ],
-   "elementary": false
+   "text": "By Mathlib genericPoint_eq_of_isOpenImmersion, c.i maps the generic point of C to that of c.Z. Compose stalkCongr for this equality with asIso of the open-immersion generic stalk map, obtaining an explicit ring equivalence e from c.Z.functionField to C.functionField. Set b to Units.map e.symm applied to a. This is a real construction; no existence theorem is used to choose data.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At Q use the stalk isomorphism of c.i. The stalkSpecializes_stalkMap_apply naturality theorem proves that this local-ring equivalence commutes with e and the algebra maps into the function fields. The open embedding preserves coheight by IsOpenEmbedding.coheight_eq.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The proved private helpers establish order invariance: Module.length_quotient expresses Ring.ord as coheight of a principal ideal; Submodule.orderIsoMapComap of the semilinear ring equivalence identifies the principal ideals, and Order.coheight_orderIso gives equal lengths. Thus ordMonoidWithZeroHom agrees. IsFractionRing.div_surjective expresses a nonzero rational function as a quotient with nonzero numerator and denominator; ordFrac_eq_ord and map_div₀ give fraction-order compatibility. In coheight one, ord_eq_ordHom_of_coheight_eq_one converts this into equality of scheme orders; at any other coheight both orders are zero. Apply this compatibility to e.symm a, then rewrite Scheme.div_apply and the point equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "def-sc-function-field",
-  "def-sc-divisor"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
+  "by": "P2 stage 3 worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
-  "place": "Proof: first paragraph, restriction and boundary divisors"
+  "place": "Proof: first paragraph, restriction and boundary divisors; generic-stalk and order transport, implemented using Mathlib module length and fraction-order definitions"
  },
  "mathlib_searches": [
   {
@@ -129,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
+  "reviewer": "X-66038",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T095855-L-313768",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135300-L-1683058",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, node, report, compilation, axioms, and direct importer checks match the stage-3 brief."
  }
 }
