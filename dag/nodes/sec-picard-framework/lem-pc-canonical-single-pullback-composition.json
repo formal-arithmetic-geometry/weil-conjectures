@@ -1,0 +1,131 @@
+{
+ "id": "lem-pc-canonical-single-pullback-composition",
+ "kind": "statement",
+ "title": "Single pullback comparison respects composition of two morphisms",
+ "statement": "Choose shared derived categories [def-pc-derived-category]. Let $f:X\\to Y$ and $g:Y\\to Z$ be arbitrary scheme morphisms [def-pc-scheme], and let $N$ be an $\\mathcal O_Z$-module [def-pc-module-pullback]. Write $p_b$ for canonicalSinglePullbackMap [lem-pc-canonical-single-pullback-comparison], and $c_{f,g}$ for the chosen derived composition isomorphism [lem-pc-ringed-spaces-derived-pullback-composition], pinned by its leftDerivedLift factorization. With $E=N[0]$ and $P_{f,g}=\\operatorname{pullbackComp}(f,g)$ [def-pc-module-pullback], the following equality of morphisms into $((f\\gg g)^*N)[0]$ holds: $c_{f,g}(E).\\mathrm{hom}\\gg p_{f\\gg g}(N)=Lf^*(p_g(N))\\gg p_f(g^*N)\\gg(P_{f,g}(N).\\mathrm{hom})[0]$. No flatness hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 0D5S; defining leftDerivedLift factorization in exists_derivedPullbackComposition and Mathlib Functor.leftDerived_fac_app"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate Functor.leftDerived_fac_app at the homotopy single complex of N, using the chosen composition hom equation and the chosen IsLeftDerivedFunctor witness. This identifies c(f,g).hom followed by ε_(f≫g) with Lf*(ε_g), then ε_f at the termwise g-pullback, then the mapped tensor composition mate. Postcompose by the single-complex comparison for f≫g and the single embedding of the unique tensor-to-ordinary left-adjoint isomorphism.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of ε_f moves the single-complex comparison for g through ε_f. At degree zero the single-complex comparison is the canonical degree-zero identification, and at every other degree the source or target is zero. Componentwise naturality of tensor composition therefore identifies the mapped tensor-composition path with the two successive single-complex comparisons and the single embedding of the underived tensor composition.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write t_b for the unique adjunction-preserving tensorPullback b ≅ pullback b. Compare the two underived morphisms T_f(t_g(N)) ≫ t_f(pullback_g(N)) ≫ pullbackComp(f,g).hom.app N and tensorComp(f,g).hom.app N ≫ t_(f≫g)(N). Conjugate them under the composite tensor-pullback adjunction and the ordinary composite-morphism pullback adjunction. The leftAdjointUniq counit equations identify t_b with the mate of the identity pushforward. ConjugateEquiv_pullbackComp_inv identifies ordinary composition with the mate of pushforward composition. The tensor composition is defined by the same mate, so both conjugates equal the same pushforward comparison. Injectivity proves equality. Apply the single functor and substitute in the counit equation of the first two steps. No p_b is inverted, and no flatness or nonemptiness is used.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 0D5S; defining leftDerivedLift factorization in exists_derivedPullbackComposition and Mathlib Functor.leftDerived_fac_app"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.singleMapHomologicalComplex",
+   "results": "Actual hits: HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.singleMapHomologicalComplex_hom_app_self, HomologicalComplex.singleMapHomologicalComplex_inv_app_self, HomologicalComplex.singleMapHomologicalComplex_hom_app_ne, HomologicalComplex.singleMapHomologicalComplex_inv_app_ne, HomologicalComplex.singleMapHomologicalComplex_id_hom_app, HomologicalComplex.singleMapHomologicalComplex_id_inv_app, HomologicalComplex.natTransMapHomologicalComplex_app_single_obj. No theorem pins the chosen scheme single-module composition identity.",
+   "date": "2026-10-12",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical comparison between derived pullback of a single module and single ordinary pullback compatible with composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived_fac_app|conjugateEquiv_pullbackComp_inv|singleMapHomologicalComplex",
+   "results": "Actual hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean. No theorem pins the chosen scheme single-module composition identity.",
+   "date": "2026-10-12",
+   "verdict": "generic tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackSquare",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of lem-pc-canonical-single-pullback-square, first two sentences: evaluate the leftDerivedLift factorization at N[0] for a pair of morphisms, before comparing the two square paths.",
+   "via": [
+    "lem-pc-canonical-single-pullback-square",
+    "lem-pc-canonical-degree-zero-mate-square",
+    "lem-pc-counit-base-change-degree-zero-comparison",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalSinglePullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalSinglePullbackComposition",
+  "statement": "theorem canonicalSinglePullbackComposition\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Z.Modules) :\n    ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) f g).hom.app\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj N) ≫\n      canonicalSinglePullbackMap (f ≫ g) N =\n    (derivedPullback f).map (canonicalSinglePullbackMap g N) ≫\n      canonicalSinglePullbackMap f ((pullback g).obj N) ≫\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map\n          ((pullbackComp f g).hom.app N)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T184350-L-4022388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T184350-L-4022388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

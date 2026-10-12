@@ -17,24 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the defining `leftDerivedLift` factorization for the selected\ncomposition isomorphisms on N[0]. It identifies successive left-derived counits\nwith the counit for the composite followed by underived tensor composition.\nApply this identity to (f', g) and (g', f), transport along h, and cancel the\ninvertible derived composition comparison to obtain the square for N.\nTransport tensor pullback to ordinary pullback by the unique left-adjoint\nisomorphisms. Their counit laws identify tensor composition, defined as the mate\nof pushforward composition, with `pullbackComp`; transport along h becomes\n`pullbackCongr h`. Thus the ordinary square comparison is c.inv. Finally,\nnaturality of the left-derived counit and of the single-map comparisons for the\nmorphism a moves a across the g' comparison, yielding the displayed formula.\nNo comparison on a single module is inverted. The argument covers h reflexive,\nidentity morphisms, zero a, zero modules and empty schemes without extra assumptions.",
+   "text": "Prove naturality of canonicalSinglePullbackMap by applying naturality to each of its three factors: the chosen derived counit on homotopy singles, the chain-level singleMapHomologicalComplex comparison followed by quotient and Qh, and the single embedding of the tensor-to-ordinary leftAdjointUniq comparison. Compose these three equalities without inverting any single comparison.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-canonical-single-pullback-comparison"
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the two-morphism composition identity to (g′,f). Precompose by its inverse derived composition and postcompose by the single map of inverse ordinary composition; cancel these composition isomorphisms. Transport canonicalSinglePullbackMap along h by equality elimination. Apply composition compatibility to (f′,g). Reassociate and combine the single functor maps, obtaining the square identity for N before the module morphism a.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-composition",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the derived pullback of canonicalSinglePullbackMap f N followed by a[0] using Functor.map_comp. Apply the proved naturality identity for g′ and a, substitute the square identity of the previous step, and combine the final single functor maps. The inverse ordinary square comparison is b′.hom followed by pullbackCongr(h).inv followed by b.inv, exactly the inverse of the displayed c.",
+   "uses": [
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-pc-canonical-single-pullback-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-canonical-single-pullback-comparison",
   "lem-pc-module-pullback-adjunction",
-  "lem-pc-canonical-single-pullback-comparison"
+  "lem-pc-canonical-single-pullback-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Cohomology",
-  "place": "Tag 0D5S and defining leftDerivedLift factorization of exists_derivedPullbackComposition; explicit canonical-interface calculation by U3"
+  "place": "Tag 0D5S; Lean reduction by U3 to pairwise composition, with naturality and equality transport proved directly"
  },
  "mathlib_searches": [
   {
@@ -109,7 +125,7 @@
   "reviewer": "COMPILER",
   "group": "U3",
   "result": "pass",
-  "landing": "20261012T163622-L-2788292",
+  "landing": "20261012T184350-L-4022388",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
