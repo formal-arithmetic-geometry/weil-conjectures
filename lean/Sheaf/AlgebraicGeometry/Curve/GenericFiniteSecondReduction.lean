@@ -9,22 +9,11 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
-import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.RepresentationTheory.SylowModuleFiltration
-import Sheaf.FieldTheory.OpenSubgroupFixedField
-import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
-import WeilConjectures.SixFunctors.Finite.GlobalSections
-import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.AlgebraicGeometry.NormalGenericConstant
+
+import Sheaf.AlgebraicGeometry.Curve.GenericFiniteTraceFiltrationData
+import Sheaf.AlgebraicGeometry.Curve.GenericPrimeFiltrationStep
 
 /-! Finite trace and filtration reduction for generic second cohomology.
 
@@ -38,6 +27,15 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.IsConnectedCurve
+
+private theorem subsingleton_H_of_iso {X : Scheme.{u}}
+    {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (e : A ≅ B)
+    (hB : Subsingleton (Sheaf.H B 2)) : Subsingleton (Sheaf.H A 2) := by
+  let := hB
+  apply Function.Injective.subsingleton (f := Sheaf.H.map e.hom 2)
+  intro x y hxy
+  have h := congrArg (Sheaf.H.map e.inv 2) hxy
+  simpa only [← Sheaf.H.map_comp_apply, e.hom_inv_id, Sheaf.H.map_id_apply] using h
 
 /-- A map into a second-cohomology object with subsingleton codomain is enough to
 deduce subsingletonness of the source. -/
@@ -80,6 +78,33 @@ theorem finite_stalk_second_cohomology_retraction
     ∃ (N : Type (u + 1))
       (j : Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField).obj M) 2 → N),
       Function.Injective j ∧ Subsingleton N := by
-  sorry
+  obtain ⟨r, D, g, hg, hsmooth, haffine, hintegral, n, F, hzero, hstep, j, hj⟩ :=
+    exists_generic_finite_trace_filtration_data f hmodel M hM hfinite
+  let : ∀ i, IsIntegral (D i) := hintegral
+  have hvanish (i : Fin r) (a : ℕ) (ha : a ≤ n i) : Subsingleton
+      (Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} (D i).fromSpecFunctionField).obj
+        (F i a)) 2) := by
+    let := hg i
+    let := hsmooth i
+    let := haffine i
+    let := hintegral i
+    induction a with
+    | zero =>
+      exact Sheaf.subsingleton_H_of_isZero
+        (Functor.map_isZero _ (hzero i)) 2
+    | succ a ih =>
+      obtain ⟨S, ℓ, hℓ, hS, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := hstep i a (by omega)
+      let : Fact ℓ.Prime := ⟨hℓ⟩
+      let T := Etale.lowerStar AddCommGrpCat.{u + 1} (D i).fromSpecFunctionField
+      have hprev := ih (by omega)
+      have hfirst : Subsingleton (Sheaf.H (T.obj S.X₁) 2) :=
+        subsingleton_H_of_iso (T.mapIso e₁) hprev
+      have hnext := subsingleton_generic_prime_filtration_step (g i) S hS ℓ hℓ e₃
+        (hconstant (g i) ℓ) hfirst
+      exact subsingleton_H_of_iso (T.mapIso e₂).symm hnext
+  let : ∀ i, Subsingleton (Sheaf.H
+      ((Etale.lowerStar AddCommGrpCat.{u + 1} (D i).fromSpecFunctionField).obj
+        (F i (n i))) 2) := fun i ↦ hvanish i (n i) le_rfl
+  exact ⟨_, j, hj, inferInstance⟩
 
 end AlgebraicGeometry.IsConnectedCurve

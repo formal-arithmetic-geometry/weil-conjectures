@@ -1,0 +1,161 @@
+{
+ "id": "lem-sc-generic-prime-filtration-step",
+ "kind": "statement",
+ "title": "Generic prime-constant filtration step in second cohomology",
+ "statement": "Let k be algebraically closed and D/k a smooth integral affine connected curve [def-sc-curves], with generic inclusion eta:Spec k(D) to D [def-sc-function-field]. Let S be a short exact sequence of generic abelian etale sheaves, with third term isomorphic to the constant Z/ell sheaf [def-sc-constant-sheaves] for a prime ell. If H²(D,Z/ell) and H²(D,eta_*S.X_1) are subsingleton [def-weil-pbc-etale-cohomology], then H²(D,eta_*S.X_2) is subsingleton. No finiteness hypothesis on the first or second term is needed.",
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraph 3"
+ },
+ "proof": [
+  {
+   "text": "Write G_j for the generic direct images, I for the image of G_2 to G_3, and Q for its cokernel. Left exactness gives the short exact sequences 0 to G_1 to G_2 to I to 0 and 0 to I to G_3 to Q to 0.",
+   "uses": [
+    "lem-weil-pbc-direct-image-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+    "place": "proof paragraph 3"
+   }
+  },
+  {
+   "text": "The generic pullback/pushforward counit is invertible by stalk comparison. Exact inverse image identifies the generic restriction of Q with the cokernel of S.g, hence zero. G_3 and Q are killed by ell because the third generic term is constant Z/ell. Thus Q is torsion and generically zero. Continuity of sections at the generic-point limit makes each section of Q vanish locally on a nonempty affine open, which is the hypothesis of generic acyclicity. Generic acyclicity gives H¹(Q)=H²(Q)=0.",
+   "uses": [
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sc-zero-generic-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+    "place": "proof paragraph 3"
+   }
+  },
+  {
+   "text": "Smoothness over a field implies normality, and finite type implies Noetherianity. Normal generic constant comparison identifies G_3 with D.constantZMod ell, after transporting along the canonical generic residue-field/function-field identification. hconstant gives H²(G_3)=0.",
+   "uses": [
+    "lem-fin-normal-generic-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+    "place": "proof paragraph 3"
+   }
+  },
+  {
+   "text": "The long exact sequence for I,G_3,Q identifies H²(I) with H²(G_3), using H¹(Q)=H²(Q)=0. In the sequence for G_1,G_2,I, both groups flanking H²(G_2) vanish, by hfirst and H²(I)=0, so H²(G_2)=0.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+    "place": "proof paragraph 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-direct-image-left-exact",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sc-zero-generic-acyclic",
+  "lem-fin-normal-generic-constant",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraph 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite torsion Galois module filtration trivial prime quotients trace restriction cohomology",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error; no result obtained.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "second etale cohomology generic pushforward finite torsion sheaf affine curve vanishes",
+   "date": "2026-10-12",
+   "results": "Eight hits including cotangent cohomology and Hilbert 90. None treats generic direct image on a curve.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*filtration|trace.*filtration|subsingleton.*lowerStar in Mathlib AlgebraicGeometry and CategoryTheory/Sites",
+   "date": "2026-10-12",
+   "results": "No matching theorem. Existing project lemmas give Sylow filtrations and normal generic constants, but not this construction or step.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.GenericFiniteSecondReduction",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-generic-second",
+   "place": "proof paragraph 3",
+   "via": [
+    "lem-sc-affine-generic-finite-second-retraction",
+    "lem-sc-affine-generic-finite-second"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.GenericPrimeFiltrationStep",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/GenericPrimeFiltrationStep.lean",
+  "declaration": "AlgebraicGeometry.IsConnectedCurve.subsingleton_generic_prime_filtration_step",
+  "statement": "theorem subsingleton_generic_prime_filtration_step\n    {k : Type u} [Field k] [IsAlgClosed k] {D : Scheme.{u}}\n    (g : D ⟶ Spec (.of k)) [IsConnectedCurve g] [Smooth g] [IsAffine D] [IsIntegral D]\n    (S : ShortComplex (Sheaf (Spec D.functionField).smallEtaleTopology\n      AddCommGrpCat.{u + 1})) (hS : S.ShortExact) (ℓ : ℕ) (hℓ : ℓ.Prime)\n    (e : S.X₃ ≅ (Spec D.functionField).constantZMod ℓ)\n    (hconstant : Subsingleton (Sheaf.H (D.constantZMod ℓ) 2))\n    (hfirst : Subsingleton (Sheaf.H\n      ((Etale.lowerStar AddCommGrpCat.{u + 1} D.fromSpecFunctionField).obj S.X₁) 2)) :\n    Subsingleton (Sheaf.H\n      ((Etale.lowerStar AddCommGrpCat.{u + 1} D.fromSpecFunctionField).obj S.X₂) 2)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T070542-L-3473708",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T070542-L-3473708",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
