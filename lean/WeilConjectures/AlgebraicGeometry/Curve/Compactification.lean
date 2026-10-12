@@ -19,6 +19,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+
+import Sheaf.AlgebraicGeometry.DimOneQuasiProjective
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 
 /-!
@@ -87,8 +89,44 @@ The input is that `U` has an ample invertible sheaf (Stacks `0A25`). -/
 theorem IsCurve.exists_projectiveClosure (p : U ⟶ Spec (.of K)) [IsCurve p] [IsIntegral U] :
     ∃ (n : Type u) (_ : Finite n) (X : Scheme.{u}) (ι : X ⟶ ℙ(n; Spec (.of K))) (j : U ⟶ X),
       IsClosedImmersion ι ∧ IsOpenImmersion j ∧ IsIntegral X ∧ DenseRange j.base ∧
-      j ≫ ι ≫ (ℙ(n; Spec (.of K)) ↘ Spec (.of K)) = p :=
-  sorry
+      j ≫ ι ≫ (ℙ(n; Spec (.of K)) ↘ Spec (.of K)) = p := by
+  have hdim : U.dim ≤ 1 := by
+    rw [Scheme.dim_eq_topologicalKrullDim]
+    exact IsCurve.krullDim_le_one (f := p)
+  obtain ⟨N, V, g, i, j, hi, hj, hig, hjg⟩ :=
+    exists_closed_open_immersion_projectiveSpace_of_dim_le_one p hdim
+  let a := i ≫ j
+  have : IsImmersion a := inferInstance
+  have : IsLocallyNoetherian ℙ(ULift.{u} (Fin (N + 1)); Spec (.of K)) :=
+    LocallyOfFiniteType.isLocallyNoetherian
+      (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of K)) ↘ Spec (.of K))
+  have : QuasiCompact a := by
+    rw [← a.liftCoborder_ι]
+    infer_instance
+  have : IrreducibleSpace a.image := by
+    apply (irreducibleSpace_def _).mpr
+    have h := (IrreducibleSpace.isIrreducible_univ U).image a.toImage.base
+      a.toImage.continuous.continuousOn
+    rw [Set.image_univ] at h
+    simpa [a.toImage.denseRange.closure_eq] using h.closure
+  have : IsReduced a.image := by
+    refine ⟨fun W ↦ ⟨fun s hs ↦ ?_⟩⟩
+    refine a.image.IsSheaf.section_ext fun x hx ↦ ?_
+    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVW⟩ :=
+      ((ℙ(ULift.{u} (Fin (N + 1)); Spec (.of K))).isBasis_affineOpens.of_isInducing
+        a.imageι.isEmbedding.isInducing).exists_subset_of_mem_open hx W.isOpen
+    obtain ⟨V, hV, rfl⟩ := hV
+    change a.imageι ⁻¹ᵁ V ≤ W at hVW
+    refine ⟨a.imageι ⁻¹ᵁ V, hVW, hxV, ?_⟩
+    have : _root_.IsReduced Γ(a.image, a.imageι ⁻¹ᵁ V) :=
+      isReduced_of_injective _ (a.toImage_app_injective ⟨V, hV⟩)
+    simpa using (hs.map (a.image.presheaf.map (homOfLE hVW).op).hom).eq_zero
+  have : IsIntegral a.image := isIntegral_of_irreducibleSpace_of_isReduced _
+  refine ⟨ULift.{u} (Fin (N + 1)), inferInstance, a.image, a.imageι, a.toImage,
+    inferInstance, inferInstance, inferInstance, a.toImage.denseRange, ?_⟩
+  rw [← Category.assoc, a.toImage_imageι]
+  change (i ≫ j) ≫ _ = p
+  rw [Category.assoc, hjg, hig]
 
 /-- The smooth proper completion of a smooth geometrically connected curve `U` over a perfect
 field `K`: there is a compactification `c` of `p : U ⟶ Spec K` whose ambient scheme `c.Z` is an
@@ -225,8 +263,14 @@ The proof glues embeddings of the members of a finite affine cover one at a time
 sections of line bundles separating the finitely many points outside the overlap (Stacks
 `0A25`). (blueprint: `lem-sc-curves-quasi-projective`) -/
 theorem IsCurve.isQuasiProjective (p : U ⟶ Spec (.of K)) [IsCurve p] [Smooth p] :
-    IsQuasiProjective p :=
-  sorry
+    IsQuasiProjective p := by
+  have hdim : U.dim ≤ 1 := by
+    rw [Scheme.dim_eq_topologicalKrullDim]
+    exact IsCurve.krullDim_le_one (f := p)
+  obtain ⟨N, V, g, i, j, hi, hj, hig, hjg⟩ :=
+    exists_closed_open_immersion_projectiveSpace_of_dim_le_one p hdim
+  refine ⟨ULift.{u} (Fin (N + 1)), inferInstance, i ≫ j, inferInstance, ?_⟩
+  rw [Category.assoc, hjg, hig]
 
 /-- **Compactification of a smooth curve.** A smooth connected curve `U` over an algebraically
 closed field `K` admits a compactification `c` whose ambient scheme `c.Z` is a smooth proper

@@ -5968,3 +5968,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/J2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv (stage 3; reviewer PASS; first push; landing 20261012T042410-L-1816473 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/K1/Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteStalks (stage 3; reviewer PASS; first push; landing 20261012T042410-L-1816651 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/K1/Sheaf.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful (stage 3; reviewer PASS; first push; landing 20261012T042411-L-1816810 (interface); batch 20261012T042402; modules 4; new nodes 3)
+- 04:24 L: merged deliver/K1/WeilConjectures.AlgebraicGeometry.Curve.Compactification (stage 3; reviewer PASS; first push; landing 20261012T042411-L-1816945 (proof); batch 20261012T042402; modules 1; new nodes 0)
