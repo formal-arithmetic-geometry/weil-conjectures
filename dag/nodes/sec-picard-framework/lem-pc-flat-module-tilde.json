@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-flat-module-tilde",
+ "kind": "statement",
+ "title": "The associated sheaf of a flat module is tensor-flat",
+ "statement": "Let $A$ be a commutative ring and $M$ an $A$-module. Suppose $M$ is flat (tensoring $A$-modules with $M$ preserves exact sequences). Let $\\widetilde M$ be the associated sheaf on $\\operatorname{Spec}(A)$ [lem-weil-pbc-spec-module-tilde-sections]. Then $\\widetilde M$ is tensor-flat [def-pc-flat-sheaf-modules]: right tensoring with it on sheaves of structure-sheaf modules preserves finite limits and finite colimits. No finiteness or nonzero-ring hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project, Schemes and Sheaves of Modules",
+  "place": "Tag 01HV (lemma-spec-sheaves), items (6)--(7); Tag 05NE (lemma-flat-stalks-flat), stalk-flat implies sheaf-flat direction; https://stacks.math.columbia.edu/tag/01HV and https://stacks.math.columbia.edu/tag/05NE"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "At each prime x of A, the structure-sheaf stalk is the localization A_x and the associated-sheaf stalk is the localization M_x [lem-weil-pbc-spec-tilde-stalk-localization]. In Lean the scalar-tower compatibility is reflexive on the moduleStructurePresheaf presentation. Apply Mathlib Module.Flat.of_isLocalizedModule to the germ map StructureSheaf.toStalkₗ. This proves that M_x is flat over A_x, including M = 0; when A is the zero ring there are no primes to check.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any exact short complex C of structure-sheaf modules, its stalk complex at x is exact by [lem-weil-pbc-module-stalk-exact]. Tensor that complex with M_x; Mathlib Module.Flat.rTensor_shortComplex_exact preserves exactness. The natural stalk-tensor isomorphisms [lem-pc-ringed-space-module-stalk-tensor] give an isomorphism from the stalk of the sheaf-tensored complex to this exact module complex. Naturality gives both commuting squares of the short-complex isomorphism. Transport exactness back and detect it stalkwise using [lem-weil-pbc-module-stalk-exact]. Thus right tensoring with the associated sheaf preserves exact short complexes.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor functor is additive by the monoidal-preadditive clause of [lem-pc-sheaf-modules-tensor-closed]. Apply Mathlib Functor.preservesHomology_of_map_exact, then Functor.preservesFiniteLimits_of_preservesHomology and Functor.preservesFiniteColimits_of_preservesHomology. Their conjunction is precisely SheafOfModules.IsFlat [def-pc-flat-sheaf-modules].",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "agent S1",
+  "document": "Stacks Project, Schemes and Sheaves of Modules",
+  "place": "Tag 01HV (lemma-spec-sheaves), items (6)--(7); Tag 05NE (lemma-flat-stalks-flat), stalk-flat implies sheaf-flat direction; https://stacks.math.columbia.edu/tag/01HV and https://stacks.math.columbia.edu/tag/05NE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tilde.*flat|flat.*tilde|IsFlat.*iso",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated sheaf of a flat module on Spec is tensor flat",
+   "results": "Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct, Module.flat_iff_of_isLocalization, Module.Flat.of_isLocalizedModule, Module.FaithfullyFlat.instTensorProduct, Module.Flat.instTensorProduct, RingHom.flat_algebraMap_iff, Module.Flat.baseChange",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "associated sheaf of flat module is flat",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlternatingCechModelFlat",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Proof, derived pullback of the flat Cech complex: each associated-sheaf term is flat because its stalks are localizations of the flat A-module.",
+   "via": [
+    "lem-pc-affine-alternating-cech-model-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatModuleTilde",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModuleTilde.lean",
+  "declaration": "AlgebraicGeometry.isFlat_tilde",
+  "statement": "theorem isFlat_tilde (A : CommRingCat.{u}) (M : ModuleCat.{u} A)\n    (hflat : Module.Flat A M) : SheafOfModules.IsFlat ((tilde.functor A).obj M)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T194138-L-464131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T194138-L-464131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
