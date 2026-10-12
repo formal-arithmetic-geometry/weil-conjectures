@@ -28,51 +28,42 @@
  ],
  "proof": [
   {
-   "text": "The underlying topological space $|Y|$ is Noetherian (every nonempty set of closed subsets has a minimal element) by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. By [lem-weil-pbc-locally-noetherian-quasi-separated], $Y$ is quasi-separated; therefore [lem-weil-pbc-qcqs-scheme-spectral] applies to the quasi-compact scheme $Y$ and gives that $|Y|$ is spectral, in particular sober [def-weil-spectral-space]. A sober space is $T_0$: if $x\\ne y$ lay in exactly the same open subsets, then $\\overline{\\{x\\}}=\\overline{\\{y\\}}$ would be an irreducible closed subset with two generic points $x$ and $y$, contradicting uniqueness.",
-   "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "def-weil-spectral-space"
-   ],
+   "text": "Instantiate the Noetherian and T0 structures on the scheme underlying space. Local Noetherianity together with compactness supplies the Noetherian-space instance, and schemes have the required T0 instance.",
+   "uses": [],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0), proof"
+    "document": "Mathlib/AlgebraicGeometry/Noetherian.lean",
+    "place": "instances for compact locally Noetherian schemes"
    }
   },
   {
-   "text": "Apply [lem-sc-zero-dim-noetherian-closed-finite] to the closed subset $Z=|Y|$ of the T0 Noetherian space $|Y|$. The hypothesis $\\dim Y\\le0$ is exactly the required bound on $\\dim Z$, so $|Y|$ is finite and every singleton is closed.",
+   "text": "Apply IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero to the closed subset Z = univ. Its dimension is equal to that of Y by the homeomorphism between Y and Set.univ, so hdim gives the required bound. This yields a finite univ subtype and closed singletons.",
    "uses": [
     "lem-sc-zero-dim-noetherian-closed-finite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0), proof and conclusion"
+    "place": "Properties Lemma 0AAX, zero-dimensional closed-subset argument"
    }
   },
   {
-   "text": "A finite space in which every singleton is closed is discrete: for any point $y$, the complement of $\\{y\\}$ is a finite union of closed singletons and hence closed, so $\\{y\\}$ is open. The empty space satisfies the same conclusion vacuously.",
+   "text": "Transfer finiteness from the univ subtype to Y by the injective inclusion y ↦ ⟨y, mem_univ y⟩. The closed-singleton result gives a T1 instance on Y; a finite T1 space is discrete, yielding DiscreteTopology Y.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0), conclusion"
+    "place": "Properties Lemma 0AAX, conclusion"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "def-weil-spectral-space",
   "lem-sc-zero-dim-noetherian-closed-finite"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Properties Lemma 0AAX (properties-lemma-locally-Noetherian-dimension-0): statement only; the route (Noetherian T0 space, zero-dimensional closed subset finite with closed points) is the topological one of the slopmaster2 declaration, not the Artinian-ring proof of 0AAX"
+  "document": "Mathlib/AlgebraicGeometry/Noetherian.lean; WeilConjectures/Mathlib/Topology/KrullDimension.lean",
+  "place": "specialized application of the existing closed zero-dimensional finiteness theorem to the universal closed subset; the previous spectral-space route is unnecessary because the needed Noetherian and T0 instances are available directly"
  },
  "mathlib_searches": [
   {
@@ -152,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7938d",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T113946-L-820369",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean module, node proof metadata, change record, and report matched against the packet; compilation and direct-importer checks passed, with allowed axioms only."
  }
 }
