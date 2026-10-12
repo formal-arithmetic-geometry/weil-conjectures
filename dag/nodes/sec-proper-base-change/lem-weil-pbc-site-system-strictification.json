@@ -26,89 +26,36 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the categories $\\mathcal C'_i$ and the equivalences).* Fix $i$. Let $\\mathcal C'_i$ have as objects the pairs $(j,V)$ with $j\\le i$ and $V\\in\\operatorname{Ob}(\\mathcal C_j)$ (a set: a disjoint union of the sets $\\operatorname{Ob}(\\mathcal C_j)$, $j\\le i$), with $\\operatorname{Hom}_{\\mathcal C'_i}((j,V),(k,W))=\\operatorname{Hom}_{\\mathcal C_i}(u_{ij}V,u_{ik}W)$, identities $\\mathrm{id}_{u_{ij}V}$ and the composition of $\\mathcal C_i$; associativity and the unit laws are those of $\\mathcal C_i$, and the morphisms form a set. This is the fibre over $i$ of the category $\\mathcal S'$ in the proof of Stacks Categories 004A, the pullback $f^*x$ along $f:i\\to j$ in $I^{\\mathrm{op}}$ being $u_{ij}x$. Let $p_i:\\mathcal C'_i\\to\\mathcal C_i$, $(j,V)\\mapsto u_{ij}V$, $f\\mapsto f$: a functor, bijective on each Hom set by definition. Let $e_i:\\mathcal C_i\\to\\mathcal C'_i$, $V\\mapsto(i,V)$, $f\\mapsto f$ (legitimate as $u_{ii}=\\mathrm{id}$, so $\\operatorname{Hom}((i,V),(i,W))=\\operatorname{Hom}_{\\mathcal C_i}(V,W)$): a functor with $p_i\\circ e_i=\\mathrm{id}_{\\mathcal C_i}$. For $(j,V)$ let $\\varepsilon_{(j,V)}:(j,V)\\to(i,u_{ij}V)=e_ip_i(j,V)$ be the element $\\mathrm{id}_{u_{ij}V}$ of $\\operatorname{Hom}_{\\mathcal C_i}(u_{ij}V,u_{ii}u_{ij}V)$; it is an isomorphism (its inverse is the same identity read in the other Hom set), and for $f:(j,V)\\to(k,W)$ both $\\varepsilon_{(k,W)}\\circ f$ and $e_ip_i(f)\\circ\\varepsilon_{(j,V)}$ are $f$ computed in $\\mathcal C_i$, so $\\varepsilon:\\mathrm{id}\\Rightarrow e_ip_i$ is a natural isomorphism. Hence $e_i$ is an equivalence with quasi-inverse $p_i$; in particular $e_i$ is fully faithful and every object of $\\mathcal C'_i$ is isomorphic to one $e_i(V)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma Tag 004A (lemma-fibred-strict, line 7747) and its proof (the category S' of pairs (x, f) with pullbacks g^*(x,f)=(x,f∘g), 'we omit the verifications'), applied to the fibres; the pseudo-functor data and coherence are those of Lemma Tag 02XO (lemma-fibred, line 6420) and Definition Tag 003N (definition-functor-into-2-category, line 5252)"
-   }
-  },
-  {
-   "text": "*Step 2 (the coverings of $\\mathcal C'_i$).* Let $\\operatorname{Cov}(\\mathcal C'_i)$ be the set of families $\\{\\varphi_a:X_a\\to X\\}_{a\\in A}$ of morphisms of $\\mathcal C'_i$ such that $\\{p_i\\varphi_a:p_iX_a\\to p_iX\\}_{a\\in A}\\in\\operatorname{Cov}(\\mathcal C_i)$ (a set: the index sets are those of the set $\\operatorname{Cov}(\\mathcal C_i)$, and over each covering of $\\mathcal C_i$ the families are given by choices of preimages of the objects in the set $\\operatorname{Ob}(\\mathcal C'_i)$, the morphisms being the same elements of the Hom sets). All index sets are finite. Fibre products: since $p_i$ is surjective on objects ($p_i(i,V)=V$) and $\\operatorname{Hom}_{\\mathcal C'_i}(Z,Z')=\\operatorname{Hom}_{\\mathcal C_i}(p_iZ,p_iZ')$ with the same composition, a commutative square of $\\mathcal C'_i$ is a fibre product square if and only if its image under $p_i$ is one in $\\mathcal C_i$ (the universal properties quantify over the same test objects and the same morphisms); and if $P$ with projections is a fibre product of $p_iX_a\\to p_iX\\leftarrow p_iY$ in $\\mathcal C_i$, then $(i,P)$ with the same projections is a fibre product of $X_a\\to X\\leftarrow Y$ in $\\mathcal C'_i$. Axioms of [def-weil-pbc-sites-and-cohomology](1) (Sites 00VH): (i) if $\\varphi$ is an isomorphism of $\\mathcal C'_i$ then $p_i\\varphi$ is one, so $\\{\\varphi\\}$ is a covering; (ii) $p_i$ preserves composition, so a composite of coverings maps to a composite of coverings of $\\mathcal C_i$; (iii) for a covering $\\{X_a\\to X\\}$ and $Y\\to X$ the fibre products $X_a\\times_XY$ exist in $\\mathcal C'_i$ by the above, and $p_i$ maps the family $\\{X_a\\times_XY\\to Y\\}$ (for any choice of the fibre products) to a family of base changes of the covering $\\{p_iX_a\\to p_iX\\}$ along $p_iY\\to p_iX$, a covering of $\\mathcal C_i$ (it is isomorphic over $p_iY$ to the chosen one, and a covering composed with isomorphisms of the members is a covering by (i), (ii)). So $\\mathcal C'_i$ is a site with finite coverings. As $p_ie_i=\\mathrm{id}$, a family of $\\mathcal C_i$ is a covering iff its image under $e_i$ is one. If $\\{\\varphi_a:X_a\\to X\\}$ is a covering of $\\mathcal C'_i$, then $\\{p_i\\varphi_a\\}$ is a covering of $\\mathcal C_i$ and the isomorphisms $\\varepsilon_{X_a}$, $\\varepsilon_X$ of step 1 (naturality: $\\varepsilon_X\\circ\\varphi_a=e_ip_i(\\varphi_a)\\circ\\varepsilon_{X_a}$) identify $\\{\\varphi_a\\}$ with its image $e_i\\{p_i\\varphi_a\\}$, by isomorphisms of the members over an isomorphism of the targets. Thus $p_i$ and $e_i$ both preserve and reflect coverings.",
+   "text": "Obtain the strict site-system and coefficient-functor data without a colimit.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-site-system-strictification-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Sites, Definitions 00VH (line 679), 00WV (line 2524), 00X1 (line 2687)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (the strict functors $u'_{i'i}$).* For $i\\le i'$ define $u'_{i'i}:\\mathcal C'_i\\to\\mathcal C'_{i'}$ by $u'_{i'i}(j,V)=(j,V)$ (note $j\\le i\\le i'$) and, for $f\\in\\operatorname{Hom}_{\\mathcal C_i}(u_{ij}V,u_{ik}W)$, $u'_{i'i}(f)=\\gamma_{i'ik}(W)\\circ u_{i'i}(f)\\circ\\gamma_{i'ij}(V)^{-1}\\in\\operatorname{Hom}_{\\mathcal C_{i'}}(u_{i'j}V,u_{i'k}W)$. It is a functor, being the functor $u_{i'i}$ conjugated by the isomorphisms $\\gamma_{i'ij}(V)$ (the inner $\\gamma$'s cancel in a composite; identities go to identities). $u'_{ii}=\\mathrm{id}$: $u_{ii}=\\mathrm{id}$ and $\\gamma_{iij}=\\mathrm{id}$ (case $i''=i'$). Strictness, for $i\\le i'\\le i''$ and $f$ as above: $u'_{i''i'}u'_{i'i}(f)=\\gamma_{i''i'k}(W)\\circ u_{i''i'}(\\gamma_{i'ik}(W))\\circ u_{i''i'}u_{i'i}(f)\\circ u_{i''i'}(\\gamma_{i'ij}(V))^{-1}\\circ\\gamma_{i''i'j}(V)^{-1}$. The cocycle condition for $k\\le i\\le i'\\le i''$, evaluated at $W$, reads $\\gamma_{i''ik}(W)\\circ\\gamma_{i''i'i}(u_{ik}W)=\\gamma_{i''i'k}(W)\\circ u_{i''i'}(\\gamma_{i'ik}(W))$, and likewise at $V$ for $j\\le i\\le i'\\le i''$. Substituting, $u'_{i''i'}u'_{i'i}(f)=\\gamma_{i''ik}(W)\\circ\\gamma_{i''i'i}(u_{ik}W)\\circ u_{i''i'}u_{i'i}(f)\\circ\\gamma_{i''i'i}(u_{ij}V)^{-1}\\circ\\gamma_{i''ij}(V)^{-1}$, and naturality of $\\gamma_{i''i'i}$ at $f:u_{ij}V\\to u_{ik}W$ gives $\\gamma_{i''i'i}(u_{ik}W)\\circ u_{i''i'}u_{i'i}(f)=u_{i''i}(f)\\circ\\gamma_{i''i'i}(u_{ij}V)$; hence $u'_{i''i'}u'_{i'i}(f)=\\gamma_{i''ik}(W)\\circ u_{i''i}(f)\\circ\\gamma_{i''ij}(V)^{-1}=u'_{i''i}(f)$. On objects both sides are $(j,V)\\mapsto(j,V)$. So $u'_{i''i'}\\circ u'_{i'i}=u'_{i''i}$ as functors. (This is the identity $g_1^*\\circ g_2^*=(g_2\\circ g_1)^*$ of the proof of Categories 004A, written out.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma Tag 004A (lemma-fibred-strict, line 7747) and its proof (the category S' of pairs (x, f) with pullbacks g^*(x,f)=(x,f∘g), 'we omit the verifications'), applied to the fibres; the pseudo-functor data and coherence are those of Lemma Tag 02XO (lemma-fibred, line 6420) and Definition Tag 003N (definition-functor-into-2-category, line 5252)"
-   }
-  },
-  {
-   "text": "*Step 4 (comparison isomorphisms).* (a) For $i\\le i'$ and $V\\in\\mathcal C_i$ let $\\theta_{i'i}(V):u'_{i'i}e_i(V)=(i,V)\\to(i',u_{i'i}V)=e_{i'}u_{i'i}(V)$ be the element $\\mathrm{id}_{u_{i'i}V}$ of $\\operatorname{Hom}_{\\mathcal C_{i'}}(u_{i'i}V,u_{i'i'}u_{i'i}V)$, an isomorphism of $\\mathcal C'_{i'}$. For $f:V\\to W$ in $\\mathcal C_i$, $u'_{i'i}e_i(f)=\\gamma_{i'ii}(W)\\circ u_{i'i}(f)\\circ\\gamma_{i'ii}(V)^{-1}=u_{i'i}(f)$ ($\\gamma_{i'ii}=\\mathrm{id}$, case $i'=i$ of the indices) and $e_{i'}u_{i'i}(f)=u_{i'i}(f)$, both read in $\\operatorname{Hom}_{\\mathcal C_{i'}}(u_{i'i}V,u_{i'i}W)$; so $\\theta_{i'i}$ is natural: $\\theta_{i'i}:u'_{i'i}\\circ e_i\\Rightarrow e_{i'}\\circ u_{i'i}$ is a natural isomorphism. (b) For $(j,V)\\in\\mathcal C'_i$, $p_{i'}u'_{i'i}(j,V)=u_{i'j}V$ and $u_{i'i}p_i(j,V)=u_{i'i}u_{ij}V$; by the definition of $u'_{i'i}$ on morphisms, $p_{i'}u'_{i'i}(f)\\circ\\gamma_{i'ij}(V)=\\gamma_{i'ik}(W)\\circ u_{i'i}p_i(f)$, so $\\gamma_{i'i\\bullet}:u_{i'i}\\circ p_i\\Rightarrow p_{i'}\\circ u'_{i'i}$, $(j,V)\\mapsto\\gamma_{i'ij}(V)$, is a natural isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Sites, Definitions 00VH (line 679), 00WV (line 2524), 00X1 (line 2687)"
-   }
-  },
-  {
-   "text": "*Step 5 (continuity and morphisms of sites).* Apply [lem-weil-pbc-site-equivalence-morphism-transport] with $\\mathcal A=\\mathcal C'_i$, $\\mathcal B=\\mathcal C'_{i'}$, $\\mathcal C=\\mathcal C_i$, $\\mathcal D=\\mathcal C_{i'}$, $p=p_i$, $q=p_{i'}$ (equivalences preserving and reflecting coverings, steps 1 and 2), $u=u_{i'i}$ (continuous, defining a morphism of sites $\\mathcal C_{i'}\\to\\mathcal C_i$, by hypothesis [def-weil-pbc-sites-and-cohomology](3)), $u'=u'_{i'i}$ and the natural isomorphism $p_{i'}\\circ u'_{i'i}\\cong u_{i'i}\\circ p_i$ of step 4(b): $u'_{i'i}$ is continuous and defines a morphism of sites $\\mathcal C'_{i'}\\to\\mathcal C'_i$.",
+   "text": "Convert homOfLE-indexed properties to all preorder arrows and apply exists_colimit_site to construct L and its object and arrow set-colimit witnesses.",
    "uses": [
-    "lem-weil-pbc-site-equivalence-morphism-transport",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-colimit-of-sites"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Sites, Definitions 00VH (line 679), 00WV (line 2524), 00X1 (line 2687)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 6 (the functors $v'_i$).* Define $v'_i:\\mathcal C'_i\\to\\mathcal D$ by $v'_i(j,V)=v_j(V)$ and, for $f\\in\\operatorname{Hom}_{\\mathcal C_i}(u_{ij}V,u_{ik}W)$, $v'_i(f)=\\delta_{ik}(W)\\circ v_i(f)\\circ\\delta_{ij}(V)^{-1}:v_jV\\to v_kW$ (with $\\delta_{ij}(V):v_iu_{ij}V\\to v_jV$); a functor, being $v_i\\circ p_i$ conjugated by the isomorphisms $\\delta_{ij}(V)$. (a) $v'_i\\circ e_i=v_i$: on objects $v'_i(i,V)=v_iV$, on morphisms $\\delta_{ii}(W)\\circ v_i(f)\\circ\\delta_{ii}(V)^{-1}=v_i(f)$ as $\\delta_{ii}=\\mathrm{id}$. (b) $v'_{i'}\\circ u'_{i'i}=v'_i$ for $i\\le i'$: on objects both give $v_jV$; on $f$ as above, $v'_{i'}u'_{i'i}(f)=\\delta_{i'k}(W)\\circ v_{i'}(\\gamma_{i'ik}(W))\\circ v_{i'}u_{i'i}(f)\\circ v_{i'}(\\gamma_{i'ij}(V))^{-1}\\circ\\delta_{i'j}(V)^{-1}$; the hypothesis on $\\delta$ for $k\\le i\\le i'$ at $W$ gives $\\delta_{i'k}(W)\\circ v_{i'}(\\gamma_{i'ik}(W))=\\delta_{ik}(W)\\circ\\delta_{i'i}(u_{ik}W)$, likewise at $V$, and naturality of $\\delta_{i'i}$ at $f$ gives $\\delta_{i'i}(u_{ik}W)\\circ v_{i'}u_{i'i}(f)=v_i(f)\\circ\\delta_{i'i}(u_{ij}V)$; so $v'_{i'}u'_{i'i}(f)=\\delta_{ik}(W)\\circ v_i(f)\\circ\\delta_{ij}(V)^{-1}=v'_i(f)$. (c) $v'_{i'}(\\theta_{i'i}(V))$, for the morphism $\\theta_{i'i}(V)=\\mathrm{id}_{u_{i'i}V}:(i,V)\\to(i',u_{i'i}V)$ of step 4, is $\\delta_{i'i'}(u_{i'i}V)\\circ v_{i'}(\\mathrm{id})\\circ\\delta_{i'i}(V)^{-1}=\\delta_{i'i}(V)^{-1}$, so $v'_{i'}\\theta_{i'i}=\\delta_{i'i}^{-1}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent; notions of Sites, Definitions 00VH (line 679), 00WV (line 2524), 00X1 (line 2687)"
-   }
-  },
-  {
-   "text": "*Step 7 (the strict system and the induced functor).* $I^{\\mathrm{op}}$ (one arrow $a:i'\\to i$ for each $i\\le i'$) is a category, cofiltered since $I$ is directed and nonempty and has at most one arrow between two objects. For $a:i'\\to i$ put $u_a=u'_{i'i}:\\mathcal C'_i\\to\\mathcal C'_{i'}$, defining the morphism of sites $f_a:\\mathcal C'_{i'}\\to\\mathcal C'_i$ (step 5); for $c=a\\circ b$ with $b:i''\\to i'$, $u_b\\circ u_a=u'_{i''i'}u'_{i'i}=u'_{i''i}=u_c$ (step 3), and $u_{\\mathrm{id}_i}=u'_{ii}=\\mathrm{id}$; the $\\mathcal C'_i$ are sites with finite coverings (step 2). So $(\\mathcal C'_i,u'_{i'i})$ is a system as in Situation 0A34 of [lem-weil-pbc-colimit-of-sites], with colimit category $\\mathcal C'=\\varinjlim\\mathcal C'_i$, $\\operatorname{Ob}(\\mathcal C')=\\varinjlim\\operatorname{Ob}(\\mathcal C'_i)$, $\\operatorname{Arrows}(\\mathcal C')=\\varinjlim\\operatorname{Arrows}(\\mathcal C'_i)$, and canonical functors $c_i$ [lem-weil-pbc-filtered-colimit-categories](1). By step 6(b) the maps $\\operatorname{Ob}(\\mathcal C'_i)\\to\\operatorname{Ob}(\\mathcal D)$ and $\\operatorname{Arrows}(\\mathcal C'_i)\\to\\operatorname{Arrows}(\\mathcal D)$ given by $v'_i$ are compatible with the transition maps, so they induce maps $V$ on $\\operatorname{Ob}(\\mathcal C')$ and $\\operatorname{Arrows}(\\mathcal C')$ with $V\\circ c_i=v'_i$ (universal property of the colimits of sets [def-weil-pbc-category-colimit]). $V$ respects sources, targets, identities and composition: a pair of composable arrows of $\\mathcal C'$, resp. an object, comes from a composable pair, resp. an object, of some $\\mathcal C'_i$ [lem-weil-pbc-filtered-colimit-categories](2), where these are respected by the functor $v'_i$, and $c_i$ respects them. So $V:\\mathcal C'\\to\\mathcal D$ is a functor with $V\\circ c_i=v'_i$.",
+   "text": "Descend v′ along L and assemble the original existential conclusion.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "lem-weil-pbc-filtered-colimit-categories",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-filtered-colimit-functor-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Situation Tag 0A34 (situation-inverse-limit-sites, line 3770) and the proof of Lemma Tag 09YL (lemma-colimit-sites)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-equivalence-morphism-transport",
+  "lem-weil-pbc-site-system-strictification-data",
   "lem-weil-pbc-colimit-of-sites",
-  "lem-weil-pbc-filtered-colimit-categories",
-  "def-weil-pbc-category-colimit"
+  "lem-weil-pbc-filtered-colimit-functor-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/categories.tex",
-  "place": "construction of Lemma Tag 004A (lemma-fibred-strict, line 7747), whose verifications Stacks omits, applied fibrewise to the pseudo-functor i -> C_i (Definition Tag 003N); the site clauses, the transport of continuity and the functors v'_i are written by an agent: no document in literature/ states the lemma (Stacks passes over the non-strictness in the proof of Etale Cohomology Lemma Tag 0EYL, etale-cohomology.tex line 7336)"
+  "document": "literature/stacks-project/categories.tex and literature/stacks-project/sites.tex",
+  "place": "Tags 004A and 09YL; R2 separates pre-colimit strictification from compatible-functor descent and uses the existing colimit-of-sites theorem"
  },
  "mathlib_searches": [
   {
@@ -219,5 +166,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914721",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

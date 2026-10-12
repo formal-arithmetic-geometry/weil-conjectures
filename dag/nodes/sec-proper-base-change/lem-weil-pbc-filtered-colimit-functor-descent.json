@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-functor-descent",
+ "kind": "statement",
+ "title": "Descent of compatible functors from an object-and-arrow filtered colimit",
+ "statement": "Let J be a small filtered category, F : J → Cat of small categories, and L a cocone such that Cat.objects.mapCocone L and Cat.arrows.mapCocone L are colimits of sets. For any category D (with arbitrary object and hom universes), a strictly compatible family v_j : F.obj j → D descends to a functor V : L.pt → D with (L.ι.app j).toFunctor ⋙ V = v_j for every j. Arrows are as in def-weil-pbc-arrows-functor.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, first paragraph of proof; universal-property verification written by R2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use jointly_surjective_of_isColimit and the filtered equality criterion in Mathlib.CategoryTheory.Limits.Types.Filtered to define object and arrow maps by representatives. Compatibility makes them independent of representatives, including when D has larger universes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Endpoints commute with the representative maps. Lift a composable pair to a common stage and equalize its middle endpoints at a later stage. Functoriality there proves identity and composition preservation. The representative formulas give equality of each restriction with v_j.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, first paragraph of proof; universal-property verification written by R2; verifications and specialization written by R2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of small categories functor out compatible family objects arrows colimit",
+   "results": "CategoryTheory.Limits.ColimitPresentation.Total.exists_hom_of_hom; CategoryTheory.NonemptyParallelPairPresentationAux.isColimit₁; CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered; CategoryTheory.NonemptyParallelPairPresentationAux.isColimit₂; CategoryTheory.Limits.IndObjectPresentation.ofCocone_ℐ; CategoryTheory.Functor.ιColimitType_eq_iff_of_isFiltered'; CategoryTheory.Limits.Types.FilteredColimit.jointly_surjective_of_isColimit₂; CategoryTheory.Limits.IndObjectPresentation.hI",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; use only the listed component lemmas where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Limits.IsColimit",
+   "results": "CategoryTheory.Limits.IsColimit; CategoryTheory.Limits.IsColimit.subsingleton; CategoryTheory.Limits.IsColimit.ofCorepresentableBy; CategoryTheory.Limits.IsColimit.corepresentableBy; CategoryTheory.Limits.IsColimit.desc; CategoryTheory.Limits.IsColimit.ofIsoColimit; CategoryTheory.Limits.IsColimit.uniqueUpToIso; CategoryTheory.Limits.IsColimit.equivIsoColimit",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; use only the listed component lemmas where applicable"
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|rectif|colimit.*functor|exists_filteredColimit_category",
+   "results": "Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Light/Sequence.lean; Mathlib/Condensed/AB.lean; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean; Mathlib/RepresentationTheory/Rep/Res.lean; Mathlib/RepresentationTheory/Rep/Res.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; use only the listed component lemmas where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible family of functors descends from a filtered colimit of objects and arrows to an arbitrary category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null,
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteSystemStrictification",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-site-system-strictification",
+   "place": "step 7, descent of the compatible coefficient functors"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredColimitFunctorDescent",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitFunctorDescent.lean",
+  "declaration": "CategoryTheory.exists_filteredColimit_functor_descent",
+  "statement": "theorem exists_filteredColimit_functor_descent\n    (J : Type u) [SmallCategory J] [IsFiltered J]\n    (F : J ⥤ Cat.{u, u}) (L : Cocone F)\n    (hobjects : Nonempty (IsColimit (Cat.objects.mapCocone L)))\n    (harrows : Nonempty (IsColimit (Cat.arrows.mapCocone L)))\n    (D : Type v) [Category.{w} D] (v : ∀ j : J, F.obj j ⥤ D)\n    (hcompat : ∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor ⋙ v k = v j) :\n    ∃ V : L.pt ⥤ D, ∀ j : J, (L.ι.app j).toFunctor ⋙ V = v j",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914721",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914721",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

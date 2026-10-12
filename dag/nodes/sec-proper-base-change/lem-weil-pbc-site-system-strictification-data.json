@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-site-system-strictification-data",
+ "kind": "statement",
+ "title": "Strict site-system and coefficient-functor data before taking the colimit",
+ "statement": "Under all the hypotheses of lem-weil-pbc-site-system-strictification, there exist F, Q, e, theta and v′ with every asserted site, equivalence, transition and coefficient compatibility property. This statement omits the existence of L and V and every colimit assertion. Definitions of precoverages and morphisms of sites are those of def-weil-pbc-sites-and-cohomology.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 004A; categorical construction applied fibrewise, site clauses as in the original strictification proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Form the pair categories, evaluation equivalences and transitions conjugated by gamma. Naturality, normalization and the cocycle give a strict functor F.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Declare finite presieves covering precisely when their evaluation-images cover in P. Check site axioms and both equivalence covering clauses using full faithfulness. Finiteness must be imposed explicitly, since evaluation can identify distinct arrows.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the comparison between evaluation and transitions to transport continuity and exactness of sheaf pullbacks.",
+   "uses": [
+    "lem-weil-pbc-site-equivalence-morphism-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate v_i on arrows with delta and take v_j on an object (j,X); normalization, naturality and the cocycle prove strict compatibility and the theta Arrow equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-equivalence-morphism-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 004A; categorical construction applied fibrewise, site clauses as in the original strictification proof; verifications and specialization written by R2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "replace coherent system of sites by strictly composable transition functors preserving covering families",
+   "results": "CategoryTheory.CompatiblePreserving; CategoryTheory.CompatiblePreserving.compatible; CategoryTheory.Functor.IsCoverDense.compatiblePreserving; CategoryTheory.Meq.refine; CategoryTheory.Functor.IsLocallyFaithful; CategoryTheory.Functor.IsCocontinuous; CategoryTheory.GrothendieckTopology.diagramFunctor; CategoryTheory.Functor.isContinuous_of_coverPreserving",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; use only the listed component lemmas where applicable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StrictPseudofunctor",
+   "results": "CategoryTheory.StrictPseudofunctor; CategoryTheory.StrictPseudofunctor.id; CategoryTheory.StrictPseudofunctor.mk'; CategoryTheory.StrictPseudofunctor.toStrictlyUnitaryPseudofunctor; CategoryTheory.StrictPseudofunctor.mk''; CategoryTheory.StrictPseudofunctor.comp; CategoryTheory.StrictPseudofunctor.toFunctor; CategoryTheory.StrictPseudofunctor.toFunctor_obj",
+   "date": "2026-10-12",
+   "verdict": "StrictPseudofunctor constructors, not a site strictification existence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "strictification|strictif|rectif",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; use only the listed component lemmas where applicable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strictify a coherent directed system of sites with compatible coefficient functors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null,
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteSystemStrictification",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-site-system-strictification",
+   "place": "steps 1–6"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteSystemStrictificationData",
+  "file": "lean/Sheaf/CategoryTheory/SiteSystemStrictificationData.lean",
+  "declaration": "CategoryTheory.exists_site_system_strictification_data",
+  "statement": "theorem exists_site_system_strictification_data\n    (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (C : I → Cat.{u, u}) (P : ∀ i : I, Precoverage (C i))\n    [∀ i, (P i).HasIsos] [∀ i, (P i).IsStableUnderComposition]\n    [∀ i, (P i).IsStableUnderBaseChange] [∀ i, (P i).HasPullbacks]\n    (hfinite : ∀ (i : I) (X : C i) (R : Presieve X), R ∈ P i X → Finite R.uncurry)\n    (U : ∀ (i j : I), i ≤ j → C i ⥤ C j)\n    (hUid : ∀ i : I, U i i le_rfl = 𝟭 (C i))\n    (gamma : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k),\n      U i j h ⋙ U j k h' ≅ U i k (h.trans h'))\n    (hgammaLeft : ∀ (i k : I) (h : i ≤ k),\n      HEq (gamma i i k le_rfl h) (Iso.refl (U i k h)))\n    (hgammaRight : ∀ (i k : I) (h : i ≤ k),\n      HEq (gamma i k k h le_rfl) (Iso.refl (U i k h)))\n    (hgamma : ∀ (i j k l : I) (h : i ≤ j) (h' : j ≤ k) (h'' : k ≤ l) (X : C i),\n      (gamma j k l h' h'').hom.app ((U i j h).obj X) ≫\n          (gamma i j l h (h'.trans h'')).hom.app X =\n        (U k l h'').map ((gamma i j k h h').hom.app X) ≫\n          (gamma i k l (h.trans h') h'').hom.app X)\n    (hcover : ∀ (i j : I) (h : i ≤ j) (X : C i) (R : Presieve X),\n      R ∈ P i X → R.map (U i j h) ∈ P j ((U i j h).obj X))\n    (hpullback : ∀ (i j : I) (h : i ≤ j) (X Y Z : C i) (R : Presieve X),\n      R ∈ P i X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (U i j h))\n    [∀ (i j : I) (h : i ≤ j), (U i j h).IsContinuous\n      (P i).toGrothendieck (P j).toGrothendieck]\n    [∀ (i j : I) (h : i ≤ j), PreservesFiniteLimits\n      (sheafPullback (U i j h) (Type u) (P i).toGrothendieck (P j).toGrothendieck)]\n    [∀ (i j : I) (h : i ≤ j), PreservesFiniteColimits\n      (sheafPullback (U i j h) (Type u) (P i).toGrothendieck (P j).toGrothendieck)]\n    (D : Type v) [Category.{w} D] (v : ∀ i : I, C i ⥤ D)\n    (delta : ∀ (i j : I) (h : i ≤ j), U i j h ⋙ v j ≅ v i)\n    (hdeltaId : ∀ i : I, HEq (delta i i le_rfl) (Iso.refl (v i)))\n    (hdelta : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k) (X : C i),\n      (v k).map ((gamma i j k h h').hom.app X) ≫\n          (delta i k (h.trans h')).hom.app X =\n        (delta j k h').hom.app ((U i j h).obj X) ≫ (delta i j h).hom.app X)\n    :\n    ∃ (F : I ⥤ Cat.{u, u}) (Q : ∀ i : I, Precoverage (F.obj i))\n      (e : ∀ i : I, C i ⥤ F.obj i),\n      (∀ i : I, (e i).IsEquivalence) ∧\n      (∃ (_ : ∀ i, (Q i).HasIsos) (_ : ∀ i, (Q i).IsStableUnderComposition)\n        (_ : ∀ i, (Q i).IsStableUnderBaseChange) (_ : ∀ i, (Q i).HasPullbacks),\n        (∀ (i : I) (X : F.obj i) (R : Presieve X), R ∈ Q i X → Finite R.uncurry) ∧\n        (∀ (i : I) (X : C i) (R : Presieve X),\n          R ∈ P i X ↔ R.map (e i) ∈ Q i ((e i).obj X)) ∧\n        (∀ (i : I) (X : F.obj i) (K : Type u) (A : K → F.obj i)\n          (f : ∀ a : K, A a ⟶ X), Presieve.ofArrows A f ∈ Q i X →\n          ∃ (Y : C i) (B : K → C i) (g : ∀ a : K, B a ⟶ Y)\n            (t : (e i).obj Y ≅ X) (s : ∀ a : K, (e i).obj (B a) ≅ A a),\n            Presieve.ofArrows B g ∈ P i Y ∧\n              ∀ a : K, (e i).map (g a) ≫ t.hom = (s a).hom ≫ f a) ∧\n        (∀ (i j : I) (h : i ≤ j) (X : F.obj i) (R : Presieve X), R ∈ Q i X →\n          R.map (F.map (homOfLE h)).toFunctor ∈\n            Q j ((F.map (homOfLE h)).toFunctor.obj X)) ∧\n        (∀ (i j : I) (h : i ≤ j) (X Y Z : F.obj i) (R : Presieve X), R ∈ Q i X →\n          ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n            PreservesLimit (cospan f g) (F.map (homOfLE h)).toFunctor) ∧\n        ∃ (_ : ∀ (i j : I) (h : i ≤ j), (F.map (homOfLE h)).toFunctor.IsContinuous\n            (Q i).toGrothendieck (Q j).toGrothendieck),\n          (∀ (i j : I) (h : i ≤ j), Nonempty (PreservesFiniteLimits\n            (sheafPullback (F.map (homOfLE h)).toFunctor (Type u)\n              (Q i).toGrothendieck (Q j).toGrothendieck))) ∧\n          (∀ (i j : I) (h : i ≤ j), Nonempty (PreservesFiniteColimits\n            (sheafPullback (F.map (homOfLE h)).toFunctor (Type u)\n              (Q i).toGrothendieck (Q j).toGrothendieck))) ∧\n          ∃ (theta : ∀ (i j : I) (h : i ≤ j),\n              e i ⋙ (F.map (homOfLE h)).toFunctor ≅ U i j h ⋙ e j)\n            (v' : ∀ i : I, F.obj i ⥤ D),\n            (∀ (i j : I) (h : i ≤ j), (F.map (homOfLE h)).toFunctor ⋙ v' j = v' i) ∧\n            (∀ i : I, e i ⋙ v' i = v i) ∧\n            (∀ (i j : I) (h : i ≤ j) (X : C i),\n              Arrow.mk ((v' j).map ((theta i j h).hom.app X)) =\n                Arrow.mk ((delta i j h).inv.app X)))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914721",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T060752-L-2914721",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

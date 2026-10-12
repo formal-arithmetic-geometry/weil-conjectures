@@ -7,8 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Category.Preorder
-import Sheaf.CategoryTheory.FilteredColimitCategories
-import Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport
+import Sheaf.CategoryTheory.SiteSystemStrictificationData
+import Sheaf.CategoryTheory.FilteredColimitFunctorDescent
 
 /-!
 # Strictification of a directed system of sites
@@ -130,6 +130,60 @@ theorem exists_site_system_strictification
               Nonempty (IsColimit (Cat.objects.mapCocone L)) ∧
               Nonempty (IsColimit (Cat.arrows.mapCocone L)) ∧
               ∀ i : I, (L.ι.app i).toFunctor ⋙ V = v' i) := by
-  sorry
+  obtain ⟨F, Q, e, he, hQ⟩ := exists_site_system_strictification_data
+    (I := I) (C := C) (P := P) (hfinite := hfinite) (U := U) (hUid := hUid)
+    (gamma := gamma) (hgammaLeft := hgammaLeft) (hgammaRight := hgammaRight)
+    (hgamma := hgamma) (hcover := hcover) (hpullback := hpullback)
+    (D := D) (v := v) (delta := delta) (hdeltaId := hdeltaId) (hdelta := hdelta)
+  obtain ⟨hiso, hcomp, hbase, hpull, hfin, hecover, heimage, hcov, hpb, hcont,
+    hlim, hcolim, theta, v', hvcompat, hecompat, htheta⟩ := hQ
+  let := hiso
+  let := hcomp
+  let := hbase
+  let := hpull
+  have hcov' : ∀ (i j : I) (a : i ⟶ j) (X : F.obj i) (R : Presieve X),
+      R ∈ Q i X → R.map (F.map a).toFunctor ∈ Q j ((F.map a).toFunctor.obj X) := by
+    intro i j a
+    have ha : a = homOfLE (leOfHom a) := Subsingleton.elim _ _
+    rw [ha]
+    exact hcov i j (leOfHom a)
+  have hpb' : ∀ (i j : I) (a : i ⟶ j) (X Y Z : F.obj i) (R : Presieve X),
+      R ∈ Q i X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
+        PreservesLimit (cospan f g) (F.map a).toFunctor := by
+    intro i j a
+    have ha : a = homOfLE (leOfHom a) := Subsingleton.elim _ _
+    rw [ha]
+    exact hpb i j (leOfHom a)
+  let : ∀ (i j : I) (a : i ⟶ j), (F.map a).toFunctor.IsContinuous
+      (Q i).toGrothendieck (Q j).toGrothendieck := by
+    intro i j a
+    have ha : a = homOfLE (leOfHom a) := Subsingleton.elim _ _
+    rw [ha]
+    exact hcont i j (leOfHom a)
+  let : ∀ (i j : I) (a : i ⟶ j), PreservesFiniteLimits
+      (sheafPullback (F.map a).toFunctor (Type u)
+        (Q i).toGrothendieck (Q j).toGrothendieck) := by
+    intro i j a
+    have ha : a = homOfLE (leOfHom a) := Subsingleton.elim _ _
+    rw [ha]
+    exact (hlim i j (leOfHom a)).some
+  let : ∀ (i j : I) (a : i ⟶ j), PreservesFiniteColimits
+      (sheafPullback (F.map a).toFunctor (Type u)
+        (Q i).toGrothendieck (Q j).toGrothendieck) := by
+    intro i j a
+    have ha : a = homOfLE (leOfHom a) := Subsingleton.elim _ _
+    rw [ha]
+    exact (hcolim i j (leOfHom a)).some
+  obtain ⟨L, hobjects, harrows, _⟩ := exists_colimit_site I F Q hfin hcov' hpb'
+  have hvcompat' : ∀ (i j : I) (a : i ⟶ j), (F.map a).toFunctor ⋙ v' j = v' i := by
+    intro i j a
+    have ha : a = homOfLE (leOfHom a) := Subsingleton.elim _ _
+    rw [ha]
+    exact hvcompat i j (leOfHom a)
+  obtain ⟨V, hV⟩ := exists_filteredColimit_functor_descent I F L hobjects harrows D v'
+    hvcompat'
+  exact ⟨F, Q, e, he, hiso, hcomp, hbase, hpull, hfin, hecover, heimage, hcov, hpb,
+    hcont, hlim, hcolim, theta, v', hvcompat, hecompat, htheta, L, V,
+    hobjects, harrows, hV⟩
 
 end CategoryTheory
