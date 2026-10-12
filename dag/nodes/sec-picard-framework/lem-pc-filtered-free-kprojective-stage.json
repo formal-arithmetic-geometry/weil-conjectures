@@ -10,16 +10,25 @@
  },
  "proof": [
   {
-   "text": "The finite-stage induction / telescope exact sequence and Hom vanishing argument from the Stacks proof.",
+   "text": "Induct on n. At n = 0, IsZero.eq_of_src shows every map from F 0 is zero; Homotopy.ofEq gives the required null homotopy.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At n + 1, apply the split-extension theorem to step n, the induction hypothesis, the degreewise retractions hsplit n, and the cokernel decomposition hquot n.",
+   "uses": [
+    "lem-pc-filtered-free-kprojective-step"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-filtered-free-kprojective-step"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/dga.tex",
-  "place": "Tags 09KL--09KM"
+  "by": "worker",
+  "document": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjective.lean",
+  "place": "F1: direct zero case and induction using the split-extension step of Stacks Tag 09KM."
  },
  "mathlib_searches": [
   {
@@ -91,11 +100,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
+  "reviewer": "X-5bc94",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T184247-L-3998471",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T205629-L-931775",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, DAG nodes, change record, and report match the stated proof/interface changes; all modules and the direct importer compile cleanly."
  }
 }
