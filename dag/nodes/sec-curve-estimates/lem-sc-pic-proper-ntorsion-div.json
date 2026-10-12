@@ -24,60 +24,62 @@
  ],
  "proof": [
   {
-   "text": "The proper curve $C$ has dimension one by [def-sc-curves], so it is projective by [lem-sc-proper-dim-one-projective]. By [lem-sc-smooth-regular], all its local rings are domains. Hence distinct irreducible components cannot meet. The field spectrum is Noetherian, so finite type of $C$ over $k$ and [lem-weil-pbc-finite-type-over-noetherian] make $C$ Noetherian. Its finitely many irreducible components are then also open; connectedness leaves exactly one. Thus $C$ is integral and is a curve in the sense of [def-pc-curve], projective and smooth in the sense of [def-pc-smooth-projective-curve]. As $C$ is nonempty and smooth over the separably closed field $k$, [lem-pc-rational-points-dense] gives $P\\in C(k)$; [prop-pc-xk-integral] applied to $(C,P)$ now makes $C$ geometrically integral. Therefore [thm-sc-jacobian-representability] applies and identifies $\\operatorname{Pic}^0(C)$ of [def-sc-pic0] with $J_C(k)$ for an abelian variety $J_C$ of dimension $g$: the genus in its statement agrees with [def-sc-genus] by [lem-pc-genus-agrees-sc].",
+   "text": "Install the k-scheme structure with structure morphism f. Connectedness and dimension one follow from [def-sc-curves]. Local finite type gives local Noetherianity by [lem-weil-pbc-finite-type-over-noetherian]; smoothness gives regularity by [lem-sc-smooth-regular], and [lem-sc-regular-connected-integral] gives integrality. The irreducible smooth scheme of dimension one has smooth relative dimension one (smoothOfRelativeDimension_iff_topologicalKrullDim_eq, the T = Spec k case of [lem-sc-curve-base-change-relative-dimension-one]). Connectedness over the separably closed field gives geometric connectedness by [lem-weil-separably-closed-geometrically-connected]. Every geometric fibre is again connected, smooth, locally Noetherian and regular; applying the same regular-connected-integral argument to these fibres gives geometric integrality. In Lean this is GeometricallyIrreducible.of_smooth_of_geometricallyConnected and GeometricallyIntegral.of_geometricallyReduced_of_geometricallyIrreducible, with the smooth geometric-reducedness instance [sbc-lem-smooth-geometrically-reduced].",
    "uses": [
     "def-sc-curves",
-    "lem-sc-proper-dim-one-projective",
-    "lem-sc-smooth-regular",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-pc-curve",
-    "def-pc-smooth-projective-curve",
-    "lem-pc-rational-points-dense",
-    "prop-pc-xk-integral",
-    "def-sc-pic0",
-    "def-sc-jacobian",
-    "thm-sc-jacobian-representability",
-    "def-sc-genus",
-    "lem-pc-genus-agrees-sc"
+    "lem-sc-smooth-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "lem-weil-separably-closed-geometrically-connected",
+    "sbc-lem-smooth-geometrically-reduced"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
-    "place": "## Proof, first sentence; projectivity input Stacks Project Varieties Lemma 0A26 (varieties-lemma-dim-1-proper-projective)"
+    "place": "node lem-sc-pic-proper-ntorsion, order 1023"
    }
   },
   {
-   "text": "The image of n in k is nonzero, so n>0. Transport clause (d) of thm-av-final along the group equivalence between Pic⁰(C) and the Jacobian rational points from step 1. Given L, choose an nth root in the Jacobian and transport it back; the homomorphism law and injectivity prove M^n=L. The result stays in Pic⁰(C).",
+   "text": "Apply [thm-sc-jacobian-representability] in its existing exists_jacobian form, which requires smooth relative dimension one, properness, and geometric integrality. It supplies a representing commutative group scheme J, proper and geometrically integral, smooth of relative dimension the arithmetic genus, and a group equivalence e from picardZero k C to J(k). These geometric properties give IsAbelianVariety J. The subgroup picardZero k C is the kernel of the degree homomorphism, with underlying set f.picZero by Scheme.coe_ker_picDegreeHom [def-sc-pic0]. No dimension or genus comparison is needed to use divisibility.",
+   "uses": [
+    "thm-sc-jacobian-representability",
+    "def-sc-pic0"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+    "place": "node lem-sc-pic-proper-ntorsion, order 1023"
+   }
+  },
+  {
+   "text": "The nonzero image of n in k implies n > 0, since n = 0 has zero image. Clause (d) of [thm-av-final], formally the third conjunct of abelianVariety_estimate_of_isAlgClosed at p = ringChar k, is surjectivity of the nth power map on J(k). Given L in f.picZero, regard it as an element of picardZero k C and choose a with a^n = e(L). Take M to be the underlying Picard class of e.symm(a). Its subtype property gives membership in f.picZero. The homomorphism identity e((e.symm(a))^n) = a^n and injectivity of e give the equality in the subgroup; congrArg Subtype.val gives M^n = L in C.Pic.",
    "uses": [
     "thm-av-final"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
-    "place": "## Proof, first two sentences"
+    "place": "node lem-sc-pic-proper-ntorsion, order 1023"
    }
   }
  ],
  "proof_deps": [
   "def-sc-curves",
-  "lem-sc-proper-dim-one-projective",
-  "lem-sc-smooth-regular",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "def-pc-curve",
-  "def-pc-smooth-projective-curve",
-  "lem-pc-rational-points-dense",
-  "prop-pc-xk-integral",
-  "def-sc-pic0",
-  "def-sc-jacobian",
+  "lem-sc-smooth-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-weil-separably-closed-geometrically-connected",
+  "sbc-lem-smooth-geometrically-reduced",
   "thm-sc-jacobian-representability",
-  "def-sc-genus",
-  "lem-pc-genus-agrees-sc",
+  "def-sc-pic0",
   "thm-av-final"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
-  "place": "Blueprint Jacobian argument; second reading expands the full component proof and formalizes the cokernel calculation."
+  "place": "Jacobian identification and clause (d) of thm-av-final; geometric integrality via geometric connectedness over a separably closed field. Formal proof by W2."
  },
  "mathlib_searches": [
   {
@@ -143,10 +145,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T060747-L-2912244",
-  "kind": "interface",
+  "landing": "20261012T070558-L-3480158",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
