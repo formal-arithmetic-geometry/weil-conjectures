@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-affine-free-etale-family-models",
+ "kind": "statement",
+ "title": "Common-stage models of two finite affine etale free families",
+ "statement": "Let $I$ be a nonempty directed preorder and $D:I^{op}\\to\\mathrm{Scheme}$ an inverse system of qcqs schemes with affine transitions, with limit cone $(X,\\pi)$ [def-pc-scheme], [def-weil-pbc-scheme-conventions], [pqf-def-affine-morphism]. Let $\\Lambda$ be a finite commutative ring and let $U_1,\\ldots,U_n$, $V_1,\\ldots,V_m$ be two finite families of affine etale objects of $X$ [def-weil-pbc-etale-site]. Let $P_X(Z)$ be the sheafification of $T\\mapsto\\Lambda[\\mathrm{Hom}_X(T,Z)]$ [lem-weil-pbc-free-yoneda-presheaf-module], [def-weil-presheaf-modules-sheafification]. Then there exist a stage $i$ and affine etale objects $W^U_k,W^V_l$ of $D_i$ such that, writing $Q_i(W)=j_{W!}\\underline\\Lambda_W$ [def-weil-pbc-etale-sum-extension], [def-weil-pbc-constant-sheaf], there are isomorphisms $\\pi_i^{-1}(\\bigoplus_k Q_i(W^U_k))\\cong\\bigoplus_kP_X(U_k)$ and $\\pi_i^{-1}(\\bigoplus_lQ_i(W^V_l))\\cong\\bigoplus_lP_X(V_l)$ [def-weil-pbc-inverse-image]. Empty families are permitted. No assertion about morphisms between the two sums is made.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YU (3), proof via the fully faithful and essentially surjective arguments and Tag 095N; verified at https://stacks.math.columbia.edu/tag/09YU."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Extract the base-change functors T, v, their cartesian projection squares, their delta comparisons and the essential-surjectivity clause from exists_affineEtaleSite_colimit. Apply the latter to the combined finite family indexed by Fin n plus Fin m. Choose one upper bound for the finite image of its stage-index function, using Finset.exists_le. Move each model to that stage using T. Delta followed by the original descent isomorphism gives a full-affine-site isomorphism to the original object.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cartesian square for v identifies the canonical pullback of each common-stage model with v applied to it. Compose with the isomorphism from step 1 and apply the inclusion of the full affine etale site to obtain eW. Prove that the sheafified free presheaf and j_! of the constant rank-one module each represent sections, exposing shriekEvalEquiv and its naturality shriekEvalEquiv_comp for reuse by the eventual-Hom-lift module: use sheafification, free-module, constant-sheaf and shriek adjunctions and ulift Yoneda. Prove naturality and compare each to Sheaf.freeYoneda by Coyoneda.ext. Apply the source-library upperStarFreeYonedaIso and freeYonedaMapIso to eW. This gives the comparison of each summand.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-modulecat-upperstar-free-yoneda"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use PreservesCoproduct.iso for inverse image, which is a left adjoint, followed by Sigma.mapIso of the summand comparisons. Restrict the combined family to each side of Fin n plus Fin m. Its models belong to the full affine etale subcategory, hence their domains are affine. Nonemptiness supplies a stage even when both families are empty.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-modulecat-upperstar-free-yoneda",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YU (3), proof via the fully faithful and essentially surjective arguments and Tag 095N; verified at https://stacks.math.columbia.edu/tag/09YU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite families of affine etale free module sheaves descend to a common stage of an inverse limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the free etale sheaf on an etale scheme is the free sheaf on its base change",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, StandardEtalePair.homEquiv_symm_apply, RingHom.formallyEtale_algebraMap",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib statement; use the source-library declarations and adjunctions.",
+   "digest": "5584e8505ad94d7e"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarFreeYonedaIso|freeYoneda.*pullback|pullback.*freeYoneda",
+   "results": "No matching declaration in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib statement; use the source-library declarations and adjunctions.",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "H1 constructible representation, descent of finite presentations; parent arrow-descent proof steps 1 and 2 (object models).",
+   "via": [
+    "lem-weil-pbc-affine-free-etale-module-arrow-descent",
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-constructible-module-noetherian-descent",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_free_etaleModule_family_models",
+  "statement": "theorem exists_affine_free_etaleModule_family_models\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c)\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (n m : ℕ) (U : Fin n → c.pt.Etale) (V : Fin m → c.pt.Etale)\n    (hU : ∀ k : Fin n, IsAffine (U k).left)\n    (hV : ∀ k : Fin m, IsAffine (V k).left) :\n    let P : c.pt.Etale → Sheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=\n      fun W ↦ (presheafToSheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n        (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ)\n    ∃ (i : I) (WU : Fin n → (D.obj (op i)).Etale)\n      (WV : Fin m → (D.obj (op i)).Etale),\n      let Q : (D.obj (op i)).Etale →\n          Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=\n        fun W ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) W.hom inferInstance).obj\n          ((constantSheaf W.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n            (ModuleCat.of Λ Λ))\n      (∀ k, IsAffine (WU k).left) ∧ (∀ k, IsAffine (WV k).left) ∧\n      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj\n        (∐ fun k : Fin n ↦ Q (WU k)) ≅ (∐ fun k : Fin n ↦ P (U k))) ∧\n      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj\n        (∐ fun k : Fin m ↦ Q (WV k)) ≅ (∐ fun k : Fin m ↦ P (V k)))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeEtaleModuleFamilyModels.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644052",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644052",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

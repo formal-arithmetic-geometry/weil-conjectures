@@ -8,14 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleFamilyModels
+import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
-import Sheaf.AlgebraicGeometry.LimitPullbackSectionsColimit
-import Sheaf.Paper.InverseImageFreeEtaleModule
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.ConstructibleSheaf.Monoidal
+import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
 
 /-!
 # Descent of arrows between finite sums of affine etale free module sheaves
@@ -82,6 +80,62 @@ theorem exists_affine_free_etaleModule_arrow_descent
           (eB : (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj B ≅
             (∐ fun k : Fin n => P (U k))),
           (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).map a ≫ eB.hom =
-            eA.hom ≫ f := by sorry
+            eA.hom ≫ f := by
+  classical
+  intro P f
+  obtain ⟨i, WU, WV, hWU, hWV, ⟨eB⟩, ⟨eA⟩⟩ :=
+    exists_affine_free_etaleModule_family_models D c hc Λ n m U V hU hV
+  let Q : (D.obj (op i)).Etale →
+      Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+    fun W ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) W.hom inferInstance).obj
+      ((constantSheaf W.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (ModuleCat.of Λ Λ))
+  let A₀ := ∐ fun k : Fin m ↦ Q (WV k)
+  let B₀ := ∐ fun k : Fin n ↦ Q (WU k)
+  obtain ⟨j, h, a, ha⟩ := exists_affine_free_etaleModule_eventual_hom_lift
+    D c hc Λ i m WV hWV B₀ (eA.hom ≫ f ≫ eB.inv)
+  let t := Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)
+  let E := Etale.upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op j))
+    (D.map (homOfLE h).op) (c.π.app (op i)) (c.w (homOfLE h).op).symm
+  have : ∀ k, IsAffine (WU k).left := hWU
+  have : ∀ k, IsAffine (WV k).left := hWV
+  have hQ (W : (D.obj (op i)).Etale) [IsAffine W.left] :
+      IsConstructibleEtaleModuleSheaf (Q W) :=
+    isConstructibleEtaleModuleSheaf_etaleLowerShriek_constant
+      (X := D.obj (op i)) (U := W.left) W.hom (ModuleCat.of Λ Λ)
+  have hQA (k : Fin m) : IsConstructibleSheaf (Q (WV k)) :=
+    (isConstructibleEtaleModuleSheaf_iff _).mp (hQ (WV k))
+  have hQB (k : Fin n) : IsConstructibleSheaf (Q (WU k)) :=
+    (isConstructibleEtaleModuleSheaf_iff _).mp (hQ (WU k))
+  have : HasFiniteBiproducts
+      (Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    Abelian.hasFiniteBiproducts
+  have : IsConstructibleSheaf (⨁ fun k : Fin m ↦ Q (WV k)) :=
+    IsConstructibleSheaf.biproduct _
+  have : IsConstructibleSheaf (⨁ fun k : Fin n ↦ Q (WU k)) :=
+    IsConstructibleSheaf.biproduct _
+  have hA₀ : IsConstructibleSheaf
+      (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) A₀ :=
+    IsConstructibleSheaf.of_iso (biproduct.isoCoproduct _)
+      (F := ⨁ fun k : Fin m ↦ Q (WV k))
+  have hB₀ : IsConstructibleSheaf
+      (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) B₀ :=
+    IsConstructibleSheaf.of_iso (biproduct.isoCoproduct _)
+      (F := ⨁ fun k : Fin n ↦ Q (WU k))
+  have hAj : IsConstructibleEtaleModuleSheaf (t.obj A₀) :=
+    (isConstructibleEtaleModuleSheaf_iff _).mpr
+      (IsConstructibleSheaf.upperStar (D.map (homOfLE h).op) A₀)
+  have hBj : IsConstructibleEtaleModuleSheaf (t.obj B₀) :=
+    (isConstructibleEtaleModuleSheaf_iff _).mpr
+      (IsConstructibleSheaf.upperStar (D.map (homOfLE h).op) B₀)
+  refine ⟨j, t.obj A₀, t.obj B₀, a, hAj, hBj,
+    (E.app A₀).symm ≪≫ eA, (E.app B₀).symm ≪≫ eB, ?_⟩
+  change _ ≫ (E.inv.app B₀ ≫ eB.hom) = (E.inv.app A₀ ≫ eA.hom) ≫ f
+  rw [← Category.assoc, ha]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rfl
+
 
 end AlgebraicGeometry.Scheme

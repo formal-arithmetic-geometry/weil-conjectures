@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-affine-free-etale-module-eventual-hom-lift",
+ "kind": "statement",
+ "title": "Eventual lifting of morphisms from fixed finite affine free families",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{op}\\to\\mathrm{Scheme}$ an inverse system of qcqs schemes with affine transitions, and $(X,\\pi)$ a limit cone [def-pc-scheme], [def-weil-pbc-scheme-conventions], [pqf-def-affine-morphism]. Let $\\Lambda$ be any commutative ring, fix $i\\in I$, an etale module sheaf $G$ on $D_i$ [def-weil-pbc-etale-sheaves], and a finite family of affine etale objects $W_1,\\ldots,W_m$ of $D_i$ [def-weil-pbc-etale-site]. Put $A=\\bigoplus_k j_{W_k!}\\underline\\Lambda_{W_k}$ [def-weil-pbc-etale-sum-extension], [def-weil-pbc-constant-sheaf]. For every $f:\\pi_i^{-1}A\\to\\pi_i^{-1}G$ [def-weil-pbc-inverse-image] there exist $j\\ge i$ and $a:t_{ji}^{-1}A\\to t_{ji}^{-1}G$, where $t_{ji}:D_j\\to D_i$ is the transition, such that $\\pi_j^{-1}(a)\\circ C_G^{-1}=C_A^{-1}\\circ f$. Here $C:\\pi_i^{-1}\\xrightarrow{\\sim}\\pi_j^{-1}t_{ji}^{-1}$ is the canonical inverse-image composition isomorphism of [lem-weil-pbc-inverse-image-composition]. The family may be empty. No constructibility or finiteness condition on $G$ or $\\Lambda$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YU (3), fully faithful argument on finitely many free generators, and Tag 09YQ in degree zero; Tag 03S6. Verified at https://stacks.math.columbia.edu/tag/09YU and /tag/09YQ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Import shriekEvalEquiv and shriekEvalEquiv_comp from AffineFreeEtaleModuleFamilyModels, where the section equivalence and its postcomposition naturality are proved once using the shriek/pullback, constant-sheaf and rank-one-module adjunctions. Reuse this equivalence on each summand; do not reconstruct it in this module.",
+   "uses": [
+    "lem-weil-pbc-affine-free-etale-family-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transpose each inverse-image coprojection followed by f along the projection adjunction and use shriekEvalEquiv to obtain a generating section z_k of lowerStar upperStar G at W_k. Apply the surjectivity clause of limit_pullback_sections_colimit to z_k. Bound the finite set of resulting stages, together with i, using Finset.exists_le. Apply the theorem's transition section maps tau to move each section to this upper bound; its cocone identity proves that rho maps the resulting section to z_k.",
+   "uses": [
+    "lem-weil-pbc-limit-pullback-sections-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse of shriekEvalEquiv to turn these sections into arrows b_k from the original summands to the direct image of the stage-j pullback of G. Form Sigma.desc b and transpose it through the transition adjunction to obtain a.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the private transpose_comp_pullback identity for arbitrary A and G: expand homEquiv using the unit, apply upperStarComp_hom_app_unit_app, and commute the morphism using naturality of lowerStarComp and of the upperStar unit. The expression on the right is precisely the section map rho. Precompose the requested square by C_A.hom and transpose through the projection adjunction. Use Sigma.hom_ext; each summand reduces by shriekEvalEquiv naturality and homEquiv_naturality_left to the rho-section equation of step 2. Cancel C_A.hom to finish.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-free-etale-family-models",
+  "lem-weil-pbc-limit-pullback-sections-colimit",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YU (3), fully faithful argument on finitely many free generators, and Tag 09YQ in degree zero; Tag 03S6. Verified at https://stacks.math.columbia.edu/tag/09YU and /tag/09YQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a finite sum of affine etale free sheaves to a pulled back module sheaf descends to a later stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the free etale sheaf on an etale scheme is the free sheaf on its base change",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, StandardEtalePair.homEquiv_symm_apply, RingHom.formallyEtale_algebraMap",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib statement; use the source-library declarations and adjunctions.",
+   "digest": "5584e8505ad94d7e"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarFreeYonedaIso|freeYoneda.*pullback|pullback.*freeYoneda",
+   "results": "No matching declaration in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib statement; use the source-library declarations and adjunctions.",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "H1 constructible representation, descent of arrows in finite free presentations; parent arrow-descent proof steps 3 and 4.",
+   "via": [
+    "lem-weil-pbc-affine-free-etale-module-arrow-descent",
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-constructible-module-noetherian-descent",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleEventualHomLift",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_free_etaleModule_eventual_hom_lift",
+  "statement": "theorem exists_affine_free_etaleModule_eventual_hom_lift\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c)\n    (Λ : Type (u + 1)) [CommRing Λ]\n    (i : I) (m : ℕ) (W : Fin m → (D.obj (op i)).Etale)\n    (hW : ∀ k, IsAffine (W k).left)\n    (G : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    let Q : (D.obj (op i)).Etale →\n        Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=\n      fun Z ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) Z.hom inferInstance).obj\n        ((constantSheaf Z.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n          (ModuleCat.of Λ Λ))\n    let A := ∐ fun k : Fin m ↦ Q (W k)\n    ∀ f : (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj A ⟶\n        (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj G,\n      ∃ (j : I) (h : i ≤ j)\n        (a : (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)).obj A ⟶\n          (Etale.upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE h).op)).obj G),\n        (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op j))).map a ≫\n          (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op j))\n            (D.map (homOfLE h).op) (c.π.app (op i))\n            (c.w (homOfLE h).op).symm).inv.app G =\n        (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op j))\n          (D.map (homOfLE h).op) (c.π.app (op i))\n          (c.w (homOfLE h).op).symm).inv.app A ≫ f",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeEtaleModuleEventualHomLift.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644052",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644052",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

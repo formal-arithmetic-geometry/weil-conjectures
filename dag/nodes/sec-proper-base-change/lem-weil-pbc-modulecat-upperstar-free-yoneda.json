@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-modulecat-upperstar-free-yoneda",
+ "kind": "statement",
+ "title": "Base change of free Yoneda etale module sheaves (source-library model)",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], $g:Y\\to X$ a morphism, $\\Lambda$ a commutative ring and $W\\to X$ an etale object [def-weil-pbc-etale-site]. Write $\\Lambda[W]$ for the sheafification of the presheaf $V\\mapsto\\bigoplus_{\\phi:V\\to W}\\Lambda$, with restriction reindexing by composition [lem-weil-pbc-free-yoneda-presheaf-module], [def-weil-presheaf-modules-sheafification]. Using module-valued etale sheaves [def-weil-pbc-etale-sheaves] and inverse image [def-weil-pbc-inverse-image], there is an isomorphism $g^{-1}\\Lambda[W]\\cong\\Lambda[W\\times_XY]$. In the source library the free sheaf is $\\mathrm{Sheaf.freeYoneda}(X_{\\mathrm{Et}},W,\\Lambda)$, and the asserted isomorphism is $\\mathrm{Etale.upperStarFreeYonedaIso}(g,W)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6 (lemma-shriek-base-change), rank-one free-sheaf case; existing proof in lean/WeilConjectures/ConstructibleSheaf/FreeLifting.lean, lines 229-261."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "The upperStar/lowerStar adjunction followed by free-Yoneda evaluation identifies Hom(g^{-1}Lambda[W],F) with Hom(Lambda,(g_*F)(W)). By the definition of lowerStar this is Hom(Lambda,F(W times_X Y)), which is Hom(Lambda[W times_X Y],F). The equivalences are natural by homEquiv_naturality_right and freeYonedaHomEquiv_comp. Coyoneda.ext gives the isomorphism. This is the existing proved source-library definition at FreeLifting.lean:234-261.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-free-yoneda-presheaf-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6 (lemma-shriek-base-change), rank-one free-sheaf case; existing proof in lean/WeilConjectures/ConstructibleSheaf/FreeLifting.lean, lines 229-261."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of the free etale sheaf on an etale scheme is the free sheaf on its base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the free etale sheaf on an etale scheme is the free sheaf on its base change",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, StandardEtalePair.homEquiv_symm_apply, RingHom.formallyEtale_algebraMap",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib statement; use the source-library declarations and adjunctions.",
+   "digest": "5584e8505ad94d7e"
+  },
+  {
+   "tool": "grep",
+   "query": "upperStarFreeYonedaIso|freeYoneda.*pullback|pullback.*freeYoneda",
+   "results": "No matching declaration in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib statement; use the source-library declarations and adjunctions.",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "H1 constructible representation, descent of finite free presentations: base change of the free generators.",
+   "via": [
+    "lem-weil-pbc-affine-free-etale-module-arrow-descent",
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-constructible-module-noetherian-descent",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.ConstructibleSheaf.FreeLifting",
+  "declaration": "AlgebraicGeometry.Etale.upperStarFreeYonedaIso",
+  "statement": "noncomputable def upperStarFreeYonedaIso {Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Etale) :\n    (Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj\n        (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) ≅\n      Sheaf.freeYoneda Y.smallEtaleTopology (g.Etale.obj W) (ModuleCat.of Λ Λ)",
+  "branch": "slopmaster2",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644052",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644052",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
