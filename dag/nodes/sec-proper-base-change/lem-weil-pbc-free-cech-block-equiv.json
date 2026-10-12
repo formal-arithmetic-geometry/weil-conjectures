@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-free-cech-block-equiv",
+ "kind": "statement",
+ "title": "Degreewise tuple-block equivalence for the evaluated free Cech complex",
+ "statement": "For a scheme X, a family f_i:U_i -> U_0 in its small etale site [def-weil-pbc-etale-site], a presheaf of rings O, and W, let K be the evaluated alternating free representable Cech chain complex [def-weil-presheaf-modules-sheafification]. Put S_phi = Sigma i, {g:W -> U_i | g followed by f_i = phi}. There exist O(W)-linear equivalences e_n:K_n -> direct sum over phi:W -> U_0 of O(W)[S_phi^(n+1)] for every natural n, and d_tuple,n composed with e_(n+1) equals e_n composed with d_K,n, where d_tuple is the blockwise alternating deletion differential [lem-weil-pbc-power-set-complex-contractible]. No exactness or contractibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation preserves coproducts, and the evaluated free representable is the free O(W)-module on maps from W. The degree n basis is therefore pairs of indices and a map to the corresponding fibre product.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Project a basis map to each factor and record its common composite phi. The fibre product universal property gives the inverse from an (n+1)-tuple in S_phi. Extend this basis bijection linearly and regroup the finite support as a dependent finitely supported family. Deletion preserves phi and removes the same entry, so the alternating differentials commute with these linear equivalences. This proves an isomorphism of graded modules with compatible differentials, without any exactness assertion.",
+   "uses": [
+    "lem-weil-pbc-power-set-complex-contractible"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The evaluated free Cech complex has a degreewise linear equivalence with the direct sum of free modules on tuples of lifts, commuting with alternating deletion differentials",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable (no verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear isomorphism between evaluation of the free representable Cech nerve and finitely supported families of tuple modules over maps to the base",
+   "results": "AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂, classifyingSpaceUniversalCover.cechNerveTerminalFromIsoCompForget, Rep.standardComplex.compForgetAugmentedIso, CategoryTheory.SimplicialObject.cechNerveEquiv, classifyingSpaceUniversalCover.cechNerveTerminalFromIso, CategoryTheory.SimplicialObject.cechNerveEquiv_symm_apply, Rep.standardComplex.xIso, CategoryTheory.CechNerveTerminalFrom.iso; inspected: no evaluated free-presheaf tuple-block equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*iso|iso.*cech|free.*representable",
+   "results": "Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean; inspected: no evaluated free-presheaf tuple-block equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FreeCechComplexDecomposition",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-free-cech-complex-fibre-comparison",
+   "place": "degreewise basis identification and differential compatibility",
+   "via": [
+    "lem-weil-pbc-free-cech-complex-exact",
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-weil-pbc-injective-module-direct-image-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FreeCechComplexBlockEquiv",
+  "file": "lean/Sheaf/Paper/FreeCechComplexBlockEquiv.lean",
+  "declaration": "AlgebraicGeometry.freeCechComplex_block_equiv",
+  "statement": "theorem freeCechComplex_block_equiv (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale) (U : ι → X.Etale) (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u}) (W : X.Etale) : let K := (((PresheafOfModules.evaluation O (op W)).mapHomologicalComplex _).obj ((AlgebraicTopology.alternatingFaceMapComplex (PresheafOfModules.{u} O)).obj ((FormalCoproduct.mk ι fun i ↦ Over.mk (f i)).cech ⋙ (FormalCoproduct.eval (Over U₀) (PresheafOfModules.{u} O)).obj (Over.forget U₀ ⋙ yoneda ⋙ PresheafOfModules.free O)))) let S := fun φ : W ⟶ U₀ => Σ i : ι, {g : W ⟶ U i // g ≫ f i = φ} ∃ e : ∀ n : ℕ, K.X n ≃ₗ[O.obj (op W)] (Π₀ φ : W ⟶ U₀, Algebra.powerSetComplexObject (O.obj (op W)) (S φ) n), ∀ n : ℕ, (DFinsupp.mapRange.linearMap (fun φ => Algebra.powerSetComplexDifferential (O.obj (op W)) (S φ) n)).comp (e (n + 1)).toLinearMap = (e n).toLinearMap.comp (K.d (n + 1) n).hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T053922-L-2631157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T053922-L-2631157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

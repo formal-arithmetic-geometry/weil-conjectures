@@ -27,49 +27,30 @@
  ],
  "proof": [
   {
-   "text": "Evaluate at W. The degree n term is the free O(W)-module on pairs (indices i_0,...,i_n; a morphism W to their fibre product over U_0). Evaluation commutes with coproducts of presheaf modules and the free representable module has the indicated basis.",
+   "text": "Obtain degreewise linear equivalences with the finitely supported tuple blocks, commuting with both adjacent differentials.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-etale-site"
+    "lem-weil-pbc-free-cech-block-equiv"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
-   }
+   "elementary": false
   },
   {
-   "text": "Send a basis pair to its common composite phi:W->U_0 and the tuple of its projections. The universal property of the fibre product gives an inverse from a tuple in S_phi=the disjoint union over i of {g:W->U_i | g followed by f_i=phi}. These inverse bijections identify each degree with the direct sum over phi of O(W)[S_phi^(n+1)]. Deleting a factor preserves phi and deletes the same tuple coordinate, hence the identifications intertwine the alternating differential with the blockwise powerSetComplexDifferential, including its signs.",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-power-set-complex-contractible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
-   }
-  },
-  {
-   "text": "For a block diagonal differential, the kernel consists of finitely supported families in the individual kernels and its image of finitely supported families in the individual images. If the block ranges equal their kernels, choose preimages only on the finite support of a kernel element. Conversely, embed a single block kernel in the sum and project any preimage to that block. Thus range/kernel equality at degree p+1 is equivalent to equality in every block. Categorical exactness for modules is range/kernel equality; transport it along the degreewise linear identifications. No exactness or contracting homotopy of the blocks is used in this comparison.",
+   "text": "Use Mathlib HomologicalComplex.exactAt_iff', ShortComplex.moduleCat_exact_iff_range_eq_ker and Function.Exact.iff_of_ladder_linearEquiv to transport exactness to range/kernel equality of the block maps.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For the forward implication embed a single block range or kernel using DFinsupp.single and project a preimage to the same coordinate. For the reverse implication rewrite with DFinsupp.range_mapRangeLinearMap and DFinsupp.ker_mapRangeLinearMap, then substitute the block equalities.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-power-set-complex-contractible"
+  "lem-weil-pbc-free-cech-block-equiv"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
+  "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5); categorical transport and block comparison implemented using the Mathlib ModuleCat, Exact and DFinsupp APIs."
  },
  "mathlib_searches": [
   {
@@ -146,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T044737-L-2031582",
+  "landing": "20261012T053922-L-2631157",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
