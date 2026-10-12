@@ -25,6 +25,10 @@ functor `G` up to isomorphism and on `u` up to precomposition.
 - `CategoryTheory.Abelian.Ext.mk₀_comp_mapExactFunctor_comp_eq_zero_iff`: the class pushed
   forward along `G₁` and then along `G₂` vanishes exactly when it vanishes pushed forward
   along any functor isomorphic to `G₁ ⋙ G₂`.
+- `CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_app`,
+  `CategoryTheory.Abelian.Ext.mapExactFunctor_mapExactFunctor`,
+  `CategoryTheory.Abelian.Ext.mapExactFunctor_id`: pushing `Ext`-classes forward along exact
+  functors is natural in the functor and compatible with composition and identities.
 -/
 
 @[expose] public section
@@ -109,5 +113,79 @@ lemma mk₀_comp_mapExactFunctor_comp_eq_zero_iff (G₁ : C ⥤ D) [G₁.Additiv
     refine ⟨u₂ ≫ G₂.map u₁ ≫ τ.inv.app A ≫ inv u ≫ c ≫ τ.hom.app S.X₂, ?_⟩
     simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← reassoc_of% hc,
       IsIso.inv_hom_id_assoc]
+
+section Functoriality
+
+omit [HasExt.{w} C] [HasExt.{w'} D] in
+/-- The short exact sequence `0 ⟶ B ⟶ I ⟶ Q ⟶ 0` given by the chosen injective presentation
+`B ⟶ I` of `B`. -/
+lemma shortExact_injectivePresentation (B : C) :
+    (ShortComplex.mk (Injective.ι B) (cokernel.π (Injective.ι B))
+      (cokernel.condition _)).ShortExact :=
+  { exact := ShortComplex.exact_cokernel _ }
+
+/-- A class of `Ext^{n+1}(A, B)` is a class of `Ext^n(A, Q)` composed with the extension class
+of the short exact sequence `0 ⟶ B ⟶ I ⟶ Q ⟶ 0`, where `B ⟶ I` is the chosen injective
+presentation of `B`. -/
+lemma exists_comp_extClass_injective {A B : C} {n : ℕ} (x : Ext A B (n + 1)) :
+    ∃ y : Ext A (cokernel (Injective.ι B)) n,
+      y.comp (shortExact_injectivePresentation B).extClass rfl = x :=
+  covariant_sequence_exact₁ A (shortExact_injectivePresentation B) x (eq_zero_of_injective _) rfl
+
+variable (F G : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+
+/-- Pushing `Ext`-classes forward along exact functors is natural in the functor: for a
+natural transformation `α : F ⟶ G`, `F(x) ∘ α_B = α_A ∘ G(x)`. -/
+lemma mapExactFunctor_comp_mk₀_app (α : F ⟶ G) {A B : C} {n : ℕ} (x : Ext A B n) :
+    (x.mapExactFunctor F).comp (mk₀ (α.app B)) (add_zero n) =
+      (mk₀ (α.app A)).comp (x.mapExactFunctor G) (zero_add n) := by
+  induction n generalizing B with
+  | zero =>
+    obtain ⟨g, rfl⟩ := (mk₀_bijective A B).2 x
+    rw [mapExactFunctor_mk₀, mapExactFunctor_mk₀, mk₀_comp_mk₀, mk₀_comp_mk₀, α.naturality]
+  | succ n ih =>
+    obtain ⟨y, rfl⟩ := exists_comp_extClass_injective x
+    have key := ShortComplex.ShortExact.extClass_naturality
+      ((shortExact_injectivePresentation B).map_of_exact F)
+      ((shortExact_injectivePresentation B).map_of_exact G) (ShortComplex.mapNatTrans _ α)
+    rw [mapExactFunctor_comp, mapExactFunctor_comp, mapExactFunctor_extClass,
+      mapExactFunctor_extClass, comp_assoc_of_third_deg_zero]
+    erw [key]
+    rw [← comp_assoc_of_second_deg_zero]
+    erw [ih y]
+    exact comp_assoc _ _ _ _ _ (by lia)
+
+variable {E : Type u''} [Category.{v''} E] [Abelian E] [HasExt.{w''} E]
+
+/-- Pushing `Ext`-classes forward along `F` and then along `G` is pushing them forward along
+`F ⋙ G`. -/
+lemma mapExactFunctor_mapExactFunctor (G : D ⥤ E) [G.Additive] [PreservesFiniteLimits G]
+    [PreservesFiniteColimits G] [PreservesFiniteLimits (F ⋙ G)] [PreservesFiniteColimits (F ⋙ G)]
+    {A B : C} {n : ℕ} (x : Ext A B n) :
+    (x.mapExactFunctor F).mapExactFunctor G = x.mapExactFunctor (F ⋙ G) := by
+  induction n generalizing B with
+  | zero =>
+    obtain ⟨g, rfl⟩ := (mk₀_bijective A B).2 x
+    rw [mapExactFunctor_mk₀, mapExactFunctor_mk₀, mapExactFunctor_mk₀]
+    rfl
+  | succ n ih =>
+    obtain ⟨y, rfl⟩ := exists_comp_extClass_injective x
+    rw [mapExactFunctor_comp, mapExactFunctor_comp, mapExactFunctor_comp, ih,
+      mapExactFunctor_extClass, mapExactFunctor_extClass, mapExactFunctor_extClass]
+
+/-- Pushing `Ext`-classes forward along the identity functor is the identity. -/
+lemma mapExactFunctor_id {A B : C} {n : ℕ} (x : Ext.{w} A B n) :
+    x.mapExactFunctor (𝟭 C) = x := by
+  induction n generalizing B with
+  | zero =>
+    obtain ⟨g, rfl⟩ := (mk₀_bijective A B).2 x
+    rw [mapExactFunctor_mk₀]
+    rfl
+  | succ n ih =>
+    obtain ⟨y, rfl⟩ := exists_comp_extClass_injective x
+    rw [mapExactFunctor_comp, ih, mapExactFunctor_extClass]
+
+end Functoriality
 
 end CategoryTheory.Abelian.Ext
