@@ -21,59 +21,39 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Work over an affine open $S_0=\\operatorname{Spec}A\\subset S$ and put\n$X_0=f^{-1}(S_0)$. By quasi-compactness in\n[def-weil-pbc-scheme-conventions], choose finitely many affine\nopens $U_i=\\operatorname{Spec}B_i$ covering $X_0$, small enough that\n$\\mathcal F|_{U_i}=\\widetilde{M_i}$ as in\n[pqf-def-coherent]. For each pair $i,j$, the intersection\n$U_i\\cap U_j$ is quasi-compact: it is the inverse image of the affine\n$U_i\\times_{S_0}U_j=\\operatorname{Spec}(B_i\\otimes_AB_j)$ under the diagonal $X_0\\to X_0\\times_{S_0}X_0$, which is quasi-compact because $f$ is quasi-separated [def-weil-pbc-scheme-conventions].\nSince the principal opens $D(g)$, $g\\in B_i$, form a basis of $U_i$, choose a finite cover of $U_i\\cap U_j$ by principal opens $W_{ijk}=D(g_{ijk})=\\operatorname{Spec}C_{ijk}$ of $U_i$ contained in $U_i\\cap U_j$, where $C_{ijk}=(B_i)_{g_{ijk}}$. On them\n$\\mathcal F|_{W_{ijk}}=\\widetilde{M_i}|_{D(g_{ijk})}=\\widetilde{N_{ijk}}$ with $N_{ijk}=(M_i)_{g_{ijk}}$; on sections this is [pqf-lem-associated-sections-localize] for $A=B=B_i$ and $a=g_{ijk}$, and the identification of sheaves is the standard restriction of an associated sheaf to a principal open.",
+   "text": "Apply the existing principal-open quasi-coherence criterion to f_*F. Fix an affine open W of S and a section a of O_S on W. By quasi-compactness of f, V=f^{-1}W is quasi-compact. By quasi-separatedness of f and affineness of W, V is quasi-separated. In Lean these two statements are f.isCompact_preimage hW.isCompact and f.isQuasiSeparated_preimage hW.isQuasiSeparated. Also f^{-1}D_W(a)=D_V(f.app W a), by f.preimage_basicOpen.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "pqf-def-coherent",
-    "pqf-lem-associated-sections-localize"
+    "pqf-lem-qcoh-principal-open-criterion",
+    "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 26.24.1, Tag 01LC (proof), reduction to an affine target and finite affine covers"
-   }
+   "elementary": true
   },
   {
-   "text": "The sheaf gluing axiom gives an exact sequence at its first two terms\n\n$$\n0\\longrightarrow\\Gamma(X_0,\\mathcal F)\n\\longrightarrow\\prod_i M_i\n\\xrightarrow{\\delta}\\prod_{i,j,k}N_{ijk},\n$$\n\nwhere $\\delta$ is the difference of the two restrictions. Indeed, a tuple of sections on the $U_i$ glues precisely when its restrictions agree on every member $W_{ijk}$ covering every overlap.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01LA (section-quasi-coherent), sheaf gluing over an affine cover"
-   }
+   "text": "For a section s of f_*F on D_W(a), identify it with a section of F on D_V(f.app W a). Apply the qcqs-open section-extension theorem to obtain n and t on V whose restriction is (f.app W a)^n times s. Naturality of the scheme structure map identifies the restricted scalar with the pullback of a|D_W(a); the scalar action in pushforward is restriction of scalars. Thus t is the extension required by the first condition of the criterion.",
+   "uses": [
+    "pqf-lem-qcoh-qcqs-section-power-extension"
+   ],
+   "elementary": false
   },
   {
-   "text": "For $a\\in A$, pull these two finite covers back to $D(a)$. The same\ngluing axiom computes $\\Gamma(f^{-1}(D(a)),\\mathcal F)$ as the kernel\nof the resulting restriction-difference map. By\n[pqf-lem-associated-sections-localize], its two terms and its\nmap are obtained from the displayed sequence by $-\\otimes_AA_a$.\nLocalization is exact and commutes with finite products, hence\n\n$$\n\\Gamma(f^{-1}(D(a)),\\mathcal F)\n\\cong\\Gamma(X_0,\\mathcal F)\\otimes_AA_a.\n$$",
+   "text": "For a section t of f_*F on W vanishing on D_W(a), identify it with a section on V vanishing on D_V(f.app W a). The compact-open power-torsion theorem gives (f.app W a)^n t=0. By the scalar action of pushforward this is a^n t=0, the second condition of the criterion. The existing criterion now gives quasi-coherence of f_*F.",
    "uses": [
-    "pqf-lem-associated-sections-localize"
+    "pqf-lem-qcoh-compact-section-power-torsion",
+    "pqf-lem-qcoh-principal-open-criterion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01LC (proof), localization of the equalizer sequence"
-   }
-  },
-  {
-   "text": "These isomorphisms commute with further principal localization,\nsince every map used is restriction of sections. Thus on the basis\nof principal opens of $S_0$, the sheaf $f_*\\mathcal F$ agrees with\n$\\widetilde{\\Gamma(X_0,\\mathcal F)}$. It is quasi-coherent on $S_0$\nby [pqf-def-coherent]; varying $S_0$ proves the assertion.",
-   "uses": [
-    "pqf-def-coherent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01LC (proof), quasi-coherence checked on the principal-open basis"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "pqf-lem-qcoh-principal-open-criterion",
   "def-weil-pbc-scheme-conventions",
-  "pqf-def-coherent",
-  "pqf-lem-associated-sections-localize"
+  "pqf-lem-qcoh-qcqs-section-power-extension",
+  "pqf-lem-qcoh-compact-section-power-torsion"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-pushforward-qcoh.md",
-  "place": "## Proof"
+  "document": "Stacks Project, Tag 01LC; WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel",
+  "place": "elementwise finite affine localization and principal-open criterion, fully realized in Lean by A2"
  },
  "mathlib_searches": [
   {
@@ -171,5 +151,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T053917-L-2628469",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

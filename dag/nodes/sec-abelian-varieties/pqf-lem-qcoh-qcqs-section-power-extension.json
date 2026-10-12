@@ -1,0 +1,141 @@
+{
+ "id": "pqf-lem-qcoh-qcqs-section-power-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "pqf-lem-pushforward-qcoh",
+   "place": "original proof steps 1-3, surjectivity of principal localization via finite affine covers and overlap gluing",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Extending principal-open sections on a qcqs open after a power",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category, pqf-def-coherent], and $W\\subseteq X$ a quasi-compact, quasi-separated open. Here quasi-separated means that intersections of quasi-compact opens contained in $W$ are quasi-compact. Let $a\\in\\Gamma(W,\\mathcal O_X)$ and $s\\in\\Gamma(D_W(a),\\mathcal F)$, where $D_W(a)$ is the open locus on which the germ of $a$ is invertible. There are $n\\geq0$ and $t\\in\\Gamma(W,\\mathcal F)$ with $t|_{D_W(a)}=(a|_{D_W(a)})^n s$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01LC, proof; original proof steps 1-3, surjectivity of principal localization via finite affine covers and overlap gluing",
+  "external": [
+   {
+    "document": "https://stacks.math.columbia.edu/tag/01LC",
+    "place": "proof"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine cover U_i of W. Put b_i=a|U_i and D_i=D_W(a) cap U_i=D(b_i). The affine localization results give n_i and t_i on U_i with t_i|D_i=b_i^n_i s|D_i. Take N=max_i n_i and v_i=b_i^(N-n_i)t_i, so v_i|D_i=a^N s|D_i. This uses the existing exists_map_eq_pow_smul_of_isAffineOpen and functoriality of restriction.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Quasi-separatedness of W makes each U_i cap U_j quasi-compact. On that overlap let c_ij=a|overlap and d_ij=v_i|overlap-v_j|overlap. Both v_i and v_j restrict to a^N s on overlap cap D_W(a), hence d_ij vanishes on D(c_ij). Apply the compact-open power-torsion theorem to obtain k_ij with c_ij^k_ij d_ij=0. The quasi-separatedness hypothesis is the compact-intersection condition used directly in Lean.",
+   "uses": [
+    "pqf-lem-qcoh-compact-section-power-torsion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take K=max_(i,j) k_ij. The local sections z_i=b_i^K v_i agree on every overlap, since c_ij^K d_ij=0. Glue them to z on W by the sheaf axiom. On every D_i the restriction of z is a^(K+N)s; these D_i cover D_W(a), so uniqueness gives z|D_W(a)=a^(K+N)s. The finite maxima and sheaf uniqueness also cover empty W and empty principal opens.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-lem-qcoh-compact-section-power-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 01LC; Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact and QuasiSeparated",
+  "place": "elementwise form of finite affine gluing and localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent sheaf sections on quasi compact quasi separated open localization powers extension vanishing",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherent sheaf section on quasi compact open vanishing on principal open killed by power and section extends after multiplying power",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact and exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, for the structure sheaf only. Source grep found affine module variants in WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde, but no general module variant.",
+   "date": "2026-10-12",
+   "verdict": "partial match: structure sheaf only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_pow\", \"IsCompact\"",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, structure sheaf only.",
+   "date": "2026-10-12",
+   "verdict": "partial match: structure sheaf only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_map_eq_pow_smul|exists_pow_smul_eq_zero|exists_eq_pow_mul_of_isCompact",
+   "results": "Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated:318,409, structure sheaf only. Direct rg of lean/WeilConjectures found the affine module variants in Mathlib/AlgebraicGeometry/Modules/Tilde.lean:112,150; the source ClearDenominators theorem requires separatedness, stronger than quasi-separatedness.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasicoherentSectionPowerExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasicoherentSectionPowerExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_map_eq_pow_smul_of_isCompact_of_isQuasiSeparated",
+  "statement": "theorem exists_map_eq_pow_smul_of_isCompact_of_isQuasiSeparated\n    {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoherent]\n    {W : X.Opens} (hW : IsCompact (W : Set X)) (hqs : IsQuasiSeparated (W : Set X))\n    (a : Γ(X, W)) (s₀ : Γ(F, X.basicOpen a)) :\n    ∃ (n : ℕ) (t : Γ(F, W)),\n      F.presheaf.map (homOfLE (X.basicOpen_le a)).op t =\n        X.presheaf.map (homOfLE (X.basicOpen_le a)).op a ^ n • s₀",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T053917-L-2628469",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T053917-L-2628469",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

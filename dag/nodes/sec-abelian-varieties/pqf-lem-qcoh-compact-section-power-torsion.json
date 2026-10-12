@@ -1,0 +1,133 @@
+{
+ "id": "pqf-lem-qcoh-compact-section-power-torsion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "pqf-lem-pushforward-qcoh",
+   "place": "original proof steps 2-3, injectivity of principal localization of the finite section equalizer",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Vanishing on a principal open gives power torsion on a compact open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category, pqf-def-coherent], and $W\\subseteq X$ a quasi-compact open. Let $a\\in\\Gamma(W,\\mathcal O_X)$ and $t\\in\\Gamma(W,\\mathcal F)$. Write $D_W(a)$ for the open of $W$ on which the germ of $a$ is invertible. If $t|_{D_W(a)}=0$, then $a^n t=0$ for some integer $n\\geq0$. No quasi-separatedness assumption is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01LC, proof; original proof steps 2-3, injectivity of principal localization of the finite section equalizer",
+  "external": [
+   {
+    "document": "https://stacks.math.columbia.edu/tag/01LC",
+    "place": "proof"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Choose finitely many affine opens U_i covering W by quasi-compactness and the affine-open basis. Restrict a and t to U_i. By affine quasi-coherent/tilde correspondence and principal-open localization, the restriction of t to D(a|U_i) is zero, so some power of a|U_i kills t|U_i. The equality D(a|U_i)=U_i cap D(a) and composition of restrictions transfer the given vanishing. In Lean the already proved affine result is exists_pow_smul_eq_zero_of_isAffineOpen.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the maximum N of the finitely many exponents (N=0 for an empty cover). For every i, multiply the local zero equality by the remaining power a^(N-n_i). Then (a^N t)|U_i=0. The uniqueness part of the sheaf axiom gives a^N t=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 01LC; Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact and QuasiSeparated",
+  "place": "elementwise form of finite affine gluing and localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent sheaf sections on quasi compact quasi separated open localization powers extension vanishing",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherent sheaf section on quasi compact open vanishing on principal open killed by power and section extends after multiplying power",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact and exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, for the structure sheaf only. Source grep found affine module variants in WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde, but no general module variant.",
+   "date": "2026-10-12",
+   "verdict": "partial match: structure sheaf only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_pow\", \"IsCompact\"",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, structure sheaf only.",
+   "date": "2026-10-12",
+   "verdict": "partial match: structure sheaf only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_map_eq_pow_smul|exists_pow_smul_eq_zero|exists_eq_pow_mul_of_isCompact",
+   "results": "Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated:318,409, structure sheaf only. Direct rg of lean/WeilConjectures found the affine module variants in Mathlib/AlgebraicGeometry/Modules/Tilde.lean:112,150; the source ClearDenominators theorem requires separatedness, stronger than quasi-separatedness.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasicoherentSectionPowerTorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasicoherentSectionPowerTorsion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_pow_smul_eq_zero_of_isCompact",
+  "statement": "theorem exists_pow_smul_eq_zero_of_isCompact\n    {X : Scheme.{u}} (F : X.Modules) [F.IsQuasicoherent]\n    {W : X.Opens} (hW : IsCompact (W : Set X)) (a : Γ(X, W)) (t : Γ(F, W))\n    (ht : F.presheaf.map (homOfLE (X.basicOpen_le a)).op t = 0) :\n    ∃ n : ℕ, a ^ n • t = 0",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T053917-L-2628469",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T053917-L-2628469",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
