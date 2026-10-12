@@ -109,7 +109,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- The pullback of étale sheaves along `f : X ⟶ Y` sends constant sheaves to constant
 sheaves: `constantSheaf ⋙ f^*` and `constantSheaf` are both left adjoint to global
 sections of the pushforward, since base change preserves the terminal object of the
-small étale site (`X ×_Y Y ≅ X`). -/
+small étale site (`X ×_Y Y ≅ X`). (blueprint: `lemma-constructible-pullback-constant`) -/
 def upperStarConstantSheafIso (f : X ⟶ Y) :
     constantSheaf Y.smallEtaleTopology A ⋙ Etale.upperStar A f ≅
       constantSheaf X.smallEtaleTopology A :=
@@ -135,7 +135,8 @@ abbrev Cover.etalePrecoverageToEtale (𝒰 : Cover.{u} etalePrecoverage X) (i : 
 cover of `X` — a jointly surjective family of étale maps, a cover in
 `Scheme.etalePrecoverage` — such that the restriction of `F` to the site localized at
 each member of the cover is constant in the sense of `CategoryTheory.Sheaf.IsConstant`.
-`F` is locally constant if such a datum exists, see `IsLocallyConstantSheaf`. -/
+`F` is locally constant if such a datum exists, see `IsLocallyConstantSheaf`.
+(blueprint: `def-constructible-locally-constant`) -/
 structure LocallyConstantDatum (F : Sheaf X.smallEtaleTopology A) where
   /-- The trivializing étale cover. -/
   cover : Cover.{u} etalePrecoverage X
@@ -146,7 +147,8 @@ structure LocallyConstantDatum (F : Sheaf X.smallEtaleTopology A) where
 
 /-- A sheaf `F` on the small étale site of `X` is *locally constant* if there is an étale
 cover of `X` trivializing `F`, i.e. a `LocallyConstantDatum`. Applies to sheaves of
-abelian groups (`A = Ab.{u + 1}`), of `Λ`-modules (`A = ModuleCat.{u + 1} Λ`), etc. -/
+abelian groups (`A = Ab.{u + 1}`), of `Λ`-modules (`A = ModuleCat.{u + 1} Λ`), etc.
+(blueprint: `def-constructible-locally-constant`) -/
 class IsLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   nonempty_locallyConstantDatum : Nonempty (LocallyConstantDatum F)
 
@@ -189,7 +191,7 @@ they are finite sets (`CategoryTheory.ConcreteCategory.isFinitelyGenerated_iff_f
 finite ring `Λ` this says that the stalks are finite. A geometric point `Spec Ω ⟶ X`, with `Ω` a
 separably closed field, induces a point of the small étale site (`Scheme.pointSmallEtale`), and
 the stalk of `F` is its fiber `CategoryTheory.GrothendieckTopology.Point.sheafFiber` at this
-point. -/
+point. (blueprint: `def-constructible-finite`) -/
 class IsFiniteSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   isFinitelyGenerated_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ X) :
@@ -208,7 +210,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 *finite locally constant* if it is locally constant and finite, that is, with finitely
 generated stalks (`IsFiniteSheaf`). For sheaves of sets,
 equivalently (not proved here), `F` is representable by a scheme finite étale over
-`X`. -/
+`X`. (blueprint: `def-constructible-finite-locally-constant`) -/
 class IsFiniteLocallyConstantSheaf (F : Sheaf X.smallEtaleTopology A) : Prop
     extends IsLocallyConstantSheaf F, IsFiniteSheaf F
 
@@ -229,7 +231,8 @@ the definition of a constructible sheaf [Stacks 03RW, 095E]: without it, on a no
 quasi-compact `X` with a non-quasi-compact open `U`, the extension by zero of the constant sheaf
 on `U` would be constructible, and on `X = Spec ∏ 𝔽₂` the skyscraper sheaf at a closed non-open
 point would be. On a noetherian scheme every locally closed subset is constructible, and
-`Stratification.ofNoetherianSpace` builds a stratification from locally closed strata alone. -/
+`Stratification.ofNoetherianSpace` builds a stratification from locally closed strata alone.
+(blueprint: `def-constructible-stratification`) -/
 structure Stratification (X : Scheme.{u}) extends Topology.Stratification X where
   /-- The schemes underlying the strata. -/
   domain : Fin n → Scheme.{u}
@@ -317,7 +320,7 @@ project. In the `ℓ`-adic formalism it is applied with `A = ModuleCat Λ` for t
 stages `Λ` of `def-sf-setting`.
 
 Over a scheme with Noetherian underlying space the constructibility of the strata is automatic,
-see `IsConstructibleSheaf.of_noetherianSpace`. -/
+see `IsConstructibleSheaf.of_noetherianSpace`. (blueprint: `def-constructible-constructible`) -/
 class IsConstructibleSheaf (F : Sheaf X.smallEtaleTopology A) : Prop where
   exists_stratification : ∃ S : Stratification X, ∀ i : Fin S.n,
     IsFiniteLocallyConstantSheaf ((Etale.upperStar A (S.immersion i)).obj F)

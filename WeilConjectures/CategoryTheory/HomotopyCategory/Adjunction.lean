@@ -74,7 +74,7 @@ variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
 
 /-- An adjunction `G ⊣ F` of additive functors induces an adjunction
 `G.mapHomologicalComplex c ⊣ F.mapHomologicalComplex c` between the induced functors on
-categories of homological complexes. -/
+categories of homological complexes. (blueprint: `lem-weil-pbc-termwise-adjunction-homotopy`) -/
 noncomputable def Adjunction.mapHomologicalComplex {G : D ⥤ C} {F : C ⥤ D} (adj : G ⊣ F)
     [G.Additive] [F.Additive] :
     G.mapHomologicalComplex c ⊣ F.mapHomologicalComplex c where
@@ -103,7 +103,8 @@ noncomputable def Adjunction.mapHomologicalComplex {G : D ⥤ C} {F : C ⥤ D} (
 `G.mapHomotopyCategory c ⊣ F.mapHomotopyCategory c` between the induced functors on the
 homotopy categories: both induced functors factor the corresponding functors on complexes
 through the quotient functors, which are localization functors for the homotopy
-equivalences, so `Adjunction.mapHomologicalComplex` descends. -/
+equivalences, so `Adjunction.mapHomologicalComplex` descends.
+(blueprint: `lem-weil-pbc-termwise-adjunction-homotopy`) -/
 noncomputable def Adjunction.mapHomotopyCategory {G : D ⥤ C} {F : C ⥤ D} (adj : G ⊣ F)
     [G.Additive] [F.Additive]
     [(HomotopyCategory.quotient C c).IsLocalization
@@ -126,7 +127,7 @@ noncomputable def Adjunction.mapHomotopyCategory {G : D ⥤ C} {F : C ⥤ D} (ad
 `G.mapHomotopyCategoryPlus ⊣ F.mapHomotopyCategoryPlus` between the bounded below homotopy
 categories: both functors are restrictions of the corresponding functors on the ambient
 homotopy categories along the fully faithful inclusions of the bounded below
-subcategories. -/
+subcategories. (blueprint: `lem-weil-pbc-termwise-adjunction-homotopy`) -/
 noncomputable def Adjunction.mapHomotopyCategoryPlus [Limits.HasBinaryBiproducts C]
     [Limits.HasBinaryBiproducts D] {G : D ⥤ C} {F : C ⥤ D} (adj : G ⊣ F)
     [G.Additive] [F.Additive] :

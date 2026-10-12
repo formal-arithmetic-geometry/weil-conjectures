@@ -57,7 +57,7 @@ transformation `AlgebraicGeometry.Etale.baseChange` of the same type as
 `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`. The two agree
 (`AlgebraicGeometry.Etale.baseChange_eq_derivedBaseChangeMapPlus`). The base change machinery —
 the pasting lemmas, the underived-to-derived bridge, and the finite case — is stated for
-`derivedBaseChangeMapPlus`, which is also the blueprint's `def:weil-pbc-derived-exchange`, and
+`derivedBaseChangeMapPlus`, which is also the blueprint's `def-weil-pbc-derived-exchange`, and
 the statements below use it as well.
 
 ## Main statements

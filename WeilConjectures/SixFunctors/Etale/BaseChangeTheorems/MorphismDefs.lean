@@ -238,7 +238,7 @@ the counit contraction.
 
 Proper base change and smooth base change assert that this single morphism is an
 isomorphism under two different sets of geometric hypotheses; no such hypothesis is
-built into the definition. -/
+built into the definition. (blueprint: `sk-def-exchange`) -/
 @[no_expose]
 noncomputable def Etale.baseChange (sq : CommSq g' f' f g) :
     R+((f)_*[A]) ⋙ D+((g)^*[A]) ⟶ D+((g')^*[A]) ⋙ R+((f')_*[A]) :=
