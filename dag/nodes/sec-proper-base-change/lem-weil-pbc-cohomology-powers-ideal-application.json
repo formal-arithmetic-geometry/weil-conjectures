@@ -34,98 +34,36 @@
  ],
  "proof": [
   {
-   "text": "(Setup: the products and their compatibilities.) Apply [lem-weil-pbc-cohomology-powers-ideal-rees-finite] to $A,I,f,\\mathcal F,q$ (the same hypotheses, the same $\\mathcal I^n\\mathcal F$ and the same $M_n$): for $k,m\\ge0$, $a\\in I^k$ and $x\\in M_m$ we have $a\\star x=H^q(X,\\lambda^{(m)}_a)(x)\\in M_{m+k}$, where $\\lambda^{(m)}_a:\\mathcal I^m\\mathcal F\\to\\mathcal I^{m+k}\\mathcal F$ is multiplication by $f^\\sharp(a)$; by its (1) $M=\\bigoplus_nM_n$ is a $B$-module, $B=\\bigoplus_kI^kt^k\\subseteq A[t]$, with $\\big(\\sum_ka_kt^k\\big)\\cdot(x_m)_m=\\big(\\sum_{k+m=n}a_k\\star x_m\\big)_n$, and by its (2) $M$ is a finitely generated $B$-module. Since $H^q(X,-)$ is a functor on $\\mathcal O_X$-modules [pqf-def-cohomology], equal composites of $\\mathcal O_X$-linear maps give equal maps on $H^q$; this gives: (i) $\\mu_{k,n}=\\mu_{l,n}\\circ\\mu_{k,l}$ for $k\\ge l\\ge n\\ge0$, the inclusions $\\mathcal I^k\\mathcal F\\subseteq\\mathcal I^l\\mathcal F\\subseteq\\mathcal I^n\\mathcal F$ [def-weil-pbc-coherent-formal-module] (0) composing to the inclusion. (ii) For $k\\ge0$, $a\\in I^k$, $m\\ge m'\\ge0$ and $x\\in M_m$: $\\mu_{m+k,m'+k}(a\\star x)=a\\star\\mu_{m,m'}(x)$, because both $\\mathcal I^m\\mathcal F\\xrightarrow{\\lambda^{(m)}_a}\\mathcal I^{m+k}\\mathcal F\\subseteq\\mathcal I^{m'+k}\\mathcal F$ and $\\mathcal I^m\\mathcal F\\subseteq\\mathcal I^{m'}\\mathcal F\\xrightarrow{\\lambda^{(m')}_a}\\mathcal I^{m'+k}\\mathcal F$ are the map $s\\mapsto f^\\sharp(a)s$. (iii) For $k,n\\ge0$, $a\\in I^k$ and $w\\in M_n$: $\\mu_{n+k,n}(a\\star w)=aw$, the product of the $A$-module $M_n$: the composite $\\mathcal I^n\\mathcal F\\xrightarrow{\\lambda^{(n)}_a}\\mathcal I^{n+k}\\mathcal F\\subseteq\\mathcal I^n\\mathcal F$ is $s\\mapsto f^\\sharp(a)s$, which is $\\lambda^{(n)}_a$ for $a$ viewed in $I^0=A$, and by (1) of [lem-weil-pbc-cohomology-powers-ideal-rees-finite] $H^q$ of the latter is multiplication by $a$ in the $A$-module $M_n$. (iv) For $x\\in M_m$, $a,a''\\in I^k$, $a'\\in I^{k'}$: $(aa')\\star x=a\\star(a'\\star x)$, $(a+a'')\\star x=a\\star x+a''\\star x$, and $x\\mapsto a\\star x$ is additive (so $a\\star0=0$): these are the $B$-module axioms of (1) applied to $at^k,a't^{k'},a''t^k\\in B$, with $(at^k)(a't^{k'})=aa't^{k+k'}$, and to $x$ placed in degree $m$.",
+   "text": "Construct the family of transition maps and its inclusion factorization by [lem-weil-pbc-cohomology-powers-ideal-application-transition-maps].",
    "uses": [
-    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
-    "pqf-def-cohomology",
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-cohomology-powers-ideal-application-transition-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), lines 5465-5481 (M is a finite graded B-module by Lemma 02O8; the products B_n (x) M_m -> M_{n+m} are compatible with the transition maps)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Generation of $M$ in bounded degree.) By step 1, $M$ is generated as a $B$-module by finitely many elements $z_1,\\dots,z_s$. Each $z_j$ is the finite sum of its homogeneous components $(z_j)_n\\in M_n\\subseteq M$, so the finitely many nonzero components, call them $x_1,\\dots,x_t$ with $x_i\\in M_{d_i}$, also generate $M$. Put $c_1=\\max_id_i$ ($c_1=0$ if $t=0$). Claim: for every integer $c\\ge c_1$, every $n\\ge c$ and every $x\\in M_n$, $x$ is a finite sum of elements $u\\star z$ with $u\\in I^{n-c}$ and $z\\in M_c$. Indeed, viewing $x$ as an element of $M$ concentrated in degree $n$, $x=\\sum_i\\beta_i\\cdot x_i$ with $\\beta_i=\\sum_kb_{i,k}t^k\\in B$ ($b_{i,k}\\in I^k$); comparing the components of degree $n$ by the product formula of step 1, $x=\\sum_ib_{i,n-d_i}\\star x_i$ with $b_{i,n-d_i}\\in I^{n-d_i}$ (here $n\\ge c\\ge d_i$). Since $I^{n-d_i}=I^{n-c}I^{c-d_i}$, write $b_{i,n-d_i}=\\sum_lu_lv_l$ with $u_l\\in I^{n-c}$, $v_l\\in I^{c-d_i}$; by step 1 (iv), $b_{i,n-d_i}\\star x_i=\\sum_lu_l\\star(v_l\\star x_i)$ with $v_l\\star x_i\\in M_{d_i+c-d_i}=M_c$.",
+   "text": "Apply [lem-weil-pbc-cohomology-powers-ideal-application-image] and [lem-weil-pbc-cohomology-powers-ideal-application-kernel] to that family to obtain the two thresholds c1 and c2.",
    "uses": [
-    "lem-weil-pbc-cohomology-powers-ideal-rees-finite"
+    "lem-weil-pbc-cohomology-powers-ideal-application-image",
+    "lem-weil-pbc-cohomology-powers-ideal-application-kernel"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), line 5483-5487, proof of (1): generators x_i in M_{d_i}; B_{n-c} M_c = M_n for n >= c >= max d_i"
-   }
+   "elementary": false
   },
   {
-   "text": "(The kernels form a graded $B$-submodule.) For $n\\ge0$ let $K_n=\\operatorname{Ker}(\\mu_{n,0})\\subseteq M_n$ and $K=\\bigoplus_nK_n\\subseteq M$. For $k,m\\ge0$, $a\\in I^k$ and $y\\in K_m$: by step 1 (i) and (ii) (with $m'=0$), $\\mu_{m+k,0}(a\\star y)=\\mu_{k,0}(\\mu_{m+k,k}(a\\star y))=\\mu_{k,0}(a\\star\\mu_{m,0}(y))=\\mu_{k,0}(a\\star0)=0$, so $a\\star y\\in K_{m+k}$. By the product formula of step 1, $\\beta\\cdot y\\in K$ for $\\beta\\in B$, $y\\in K$; $K$ is closed under addition. So $K$ is a $B$-submodule of $M$, and an element of $M$ lies in $K$ if and only if each of its homogeneous components does.",
+   "text": "Take c=max(c1,c2). The inequalities c1<=c and c2<=c allow both estimates to be specialized to c. Package the family, factorization, and the two conclusions into the original existential conjunction.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), lines 5499-5501: K = (+) K_n is a graded B-submodule by the compatibility of products with transition maps"
-   }
-  },
-  {
-   "text": "(Generation of $K$ in bounded degree.) The ring $B$ is Noetherian by [lem-weil-pbc-rees-algebra-noetherian] ($A$ Noetherian), and $M$ is a finitely generated $B$-module (step 1), so its $B$-submodule $K$ (step 3) is a finitely generated $B$-module by [lem-weil-pbc-noetherian-submodule-finite] applied to the Noetherian ring $B$. As in step 2, the finitely many nonzero homogeneous components of a finite set of generators of $K$ lie in $K$ (step 3) and generate $K$; call them $y_1,\\dots,y_{t'}$, $y_i\\in K_{d'_i}$, and put $c_2=\\max_id'_i$ ($c_2=0$ if $t'=0$). Comparing degree-$n$ components as in step 2, every $x\\in K_n$ ($n\\ge0$) is $x=\\sum_{i:\\,d'_i\\le n}b_i\\star y_i$ with $b_i\\in I^{n-d'_i}$.",
-   "uses": [
-    "lem-weil-pbc-rees-algebra-noetherian",
-    "lem-weil-pbc-noetherian-submodule-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), lines 5502-5505: as B is Noetherian and M is finitely generated, K is finitely generated; generators y_i in K_{d'_i}"
-   }
-  },
-  {
-   "text": "(The constant.) Put $c=\\max(c_1,c_2)\\ge0$, with $c_1$ from step 2 and $c_2$ from step 4. Then $c\\ge c_1$, so the claim of step 2 holds for this $c$, and $c\\ge d'_i$ for every generator $y_i$ of step 4.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), lines 5489 and 5506: c as in the proof of (1), resp. c = max of the degrees d'_i; one c for both by taking the maximum"
-   }
-  },
-  {
-   "text": "(Part (a) when $n\\ge c$.) Let $n\\ge c$ and $m\\ge0$; then $e=0$. Let $x\\in M_{n+m}$. As $n+m\\ge c$, step 2 writes $x$ as a sum of elements $u\\star z$ with $u\\in I^{n+m-c}$, $z\\in M_c$. Since $I^{n+m-c}=I^mI^{n-c}$, write $u=\\sum_ju'_ju''_j$ with $u'_j\\in I^m$, $u''_j\\in I^{n-c}$; by step 1 (iv), $u\\star z=\\sum_ju'_j\\star w_j$ with $w_j=u''_j\\star z\\in M_n$. By step 1 (iii) (with $k=m$), $\\mu_{n+m,n}(u'_j\\star w_j)=u'_jw_j\\in I^mM_n$. As $\\mu_{n+m,n}$ is additive, $\\mu_{n+m,n}(M_{n+m})\\subseteq I^mM_n=I^{m-e}M_n$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), lines 5494-5496, proof of (2), case c <= n: M_{n+m} = B_m B_{n-c} M_c = B_m M_n"
-   }
-  },
-  {
-   "text": "(Part (a) when $n<c$.) Let $0\\le n<c$ and $m\\ge0$ with $n+m\\ge c$; then $e=c-n$ and $k:=m-e=n+m-c\\ge0$. Let $x\\in M_{n+m}=M_{c+k}$. By step 2 (degree $n+m\\ge c$), $x$ is a sum of elements $u\\star z$ with $u\\in I^k$, $z\\in M_c$. By step 1 (i), $\\mu_{c+k,n}=\\mu_{n+k,n}\\circ\\mu_{c+k,n+k}$ ($c+k\\ge n+k\\ge n$); by step 1 (ii) (with $m=c\\ge m'=n$), $\\mu_{c+k,n+k}(u\\star z)=u\\star\\mu_{c,n}(z)$; by step 1 (iii), $\\mu_{n+k,n}(u\\star\\mu_{c,n}(z))=u\\,\\mu_{c,n}(z)\\in I^kM_n$. Hence $\\mu_{n+m,n}(M_{n+m})\\subseteq I^{m-e}M_n$. With step 6 this proves (a) for all $n,m\\ge0$ with $n+m\\ge c$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), lines 5490-5493, proof of (2), case c > n: use M_c -> M_n and the compatibility of products with transition maps; image in I^{n+m-c}M_n"
-   }
-  },
-  {
-   "text": "(Part (b).) Let $n\\ge c$. By step 1 (i), $\\mu_{n,0}=\\mu_{n-c,0}\\circ\\mu_{n,n-c}$, so $\\operatorname{Ker}(\\mu_{n,n-c})\\subseteq\\operatorname{Ker}(\\mu_{n,0})=K_n$. Conversely let $x\\in K_n$. By step 4, $x=\\sum_ib_i\\star y_i$ with $b_i\\in I^{n-d'_i}$, $y_i\\in K_{d'_i}$, $d'_i\\le n$. By step 1 (ii) (with $k=n-d'_i$, $m=d'_i$, $m'=0$) and (iv), $\\mu_{n,n-d'_i}(b_i\\star y_i)=b_i\\star\\mu_{d'_i,0}(y_i)=b_i\\star0=0$. Since $d'_i\\le c$ (step 5), $n-d'_i\\ge n-c$, and by step 1 (i) $\\mu_{n,n-c}=\\mu_{n-d'_i,n-c}\\circ\\mu_{n,n-d'_i}$ kills $b_i\\star y_i$. Hence $\\mu_{n,n-c}(x)=0$. So $\\operatorname{Ker}(\\mu_{n,0})=\\operatorname{Ker}(\\mu_{n,n-c})$ for all $n\\ge c$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), lines 5506-5509, proof of (3): B_n y_i lies in Ker(M_{n+d'_i} -> M_n), hence K_n = Ker(M_n -> M_{n-c}) for n >= c"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
-  "pqf-def-cohomology",
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-rees-algebra-noetherian",
-  "lem-weil-pbc-noetherian-submodule-finite"
+  "lem-weil-pbc-cohomology-powers-ideal-application-transition-maps",
+  "lem-weil-pbc-cohomology-powers-ideal-application-image",
+  "lem-weil-pbc-cohomology-powers-ideal-application-kernel"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 02OA (lemma-cohomology-powers-ideal-application, line 5424), proof of parts (2) and (3), lines 5463-5509"
+  "by": "agent",
+  "agent": "N1 second reader",
+  "date": "2026-10-12",
+  "source": "Stacks Project, Lemma 02OA; separate threshold estimates combined by max."
  },
  "mathlib_searches": [
   {
@@ -179,7 +117,7 @@
   },
   {
    "tool": "loogle",
-   "query": "Module.Finite \u21a5(reesAlgebra _) _",
+   "query": "Module.Finite ↥(reesAlgebra _) _",
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
@@ -233,7 +171,7 @@
    "AlgebraicGeometry.cohomology_powers_ideal_application"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CohomologyPowersIdealApplication.lean",
-  "statement": "theorem cohomology_powers_ideal_application (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}} (I : Ideal A) (f : X \u27f6 Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData) (hJ : J = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.\u0393SpecIso (CommRingCat.of A)).inv.hom)).comap f) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : \u2115) : \u2203 i : \u2200 (k n : \u2115), n \u2264 k \u2192 (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModules\u03b9 k).2 F \u27f6 Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModules\u03b9 n).2 F), (\u2200 (k n : \u2115) (h : n \u2264 k), i k n h \u226b Scheme.idealModuleProduct\u03b9 (Scheme.idealSheafPower J.toModules\u03b9 n).2 F = Scheme.idealModuleProduct\u03b9 (Scheme.idealSheafPower J.toModules\u03b9 k).2 F) \u2227 \u2203 c : \u2115, (\u2200 (n m : \u2115), c \u2264 n + m \u2192 LinearMap.range ((ModuleCat.restrictScalars ((Scheme.\u0393SpecIso (CommRingCat.of A)).inv \u226b f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i (n + m) n (Nat.le_add_right n m)))).hom \u2264 I ^ (m - (c - n)) \u2022 (\u22a4 : Submodule A ((ModuleCat.restrictScalars ((Scheme.\u0393SpecIso (CommRingCat.of A)).inv \u226b f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModules\u03b9 n).2 F))))) \u2227 (\u2200 n : \u2115, c \u2264 n \u2192 LinearMap.ker ((ModuleCat.restrictScalars ((Scheme.\u0393SpecIso (CommRingCat.of A)).inv \u226b f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i n 0 (Nat.zero_le n)))).hom = LinearMap.ker ((ModuleCat.restrictScalars ((Scheme.\u0393SpecIso (CommRingCat.of A)).inv \u226b f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i n (n - c) (Nat.sub_le n c)))).hom)",
+  "statement": "theorem cohomology_powers_ideal_application (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}} (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData) (hJ : J = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : ℕ) : ∃ i : ∀ (k n : ℕ), n ≤ k → (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι k).2 F ⟶ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F), (∀ (k n : ℕ) (h : n ≤ k), i k n h ≫ Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F = Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι k).2 F) ∧ ∃ c : ℕ, (∀ (n m : ℕ), c ≤ n + m → LinearMap.range ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i (n + m) n (Nat.le_add_right n m)))).hom ≤ I ^ (m - (c - n)) • (⊤ : Submodule A ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))))) ∧ (∀ n : ℕ, c ≤ n → LinearMap.ker ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i n 0 (Nat.zero_le n)))).hom = LinearMap.ker ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i n (n - c) (Nat.sub_le n c)))).hom)",
   "branch": "sheaf-dag",
   "by": "J1",
   "date": "2026-10-11",
@@ -247,5 +185,15 @@
   "reviewer": "R-cpi",
   "group": "J1",
   "result": "fix"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

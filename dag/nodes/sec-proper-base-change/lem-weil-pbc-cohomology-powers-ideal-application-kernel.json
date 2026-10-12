@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-cohomology-powers-ideal-application-kernel",
+ "kind": "statement",
+ "title": "Uniform eventual kernel equality for ideal-power cohomology",
+ "statement": "Let A be a Noetherian ring [def-weil-pbc-noetherian-ring], I an ideal of A, f: X -> Spec A a proper morphism [def-weil-proper-morphism], J=I O_X the extended ideal [def-nagata-extended-ideal], and F a coherent O_X-module [pqf-def-coherent]. Fix q >= 0. Let M_n=H^q(X,J^n F) as an A-module by restriction along A -> Gamma(X,O_X), with the image products of [def-weil-pbc-coherent-formal-module] and cohomology of [pqf-def-cohomology]. Suppose i_(k,n): J^k F -> J^n F is any family for n<=k whose composite into F is the inclusion of J^k F. Write mu_(k,n) for the induced A-linear cohomology maps. Then there exists c0 >= 0 such that for every c >= c0 and every n >= c, ker(mu_(n,0))=ker(mu_(n,n-c)).",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02OA, proof of (3); independently read at https://stacks.math.columbia.edu/tag/02OA"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-cohomology-powers-ideal-rees-finite] and monic inclusions into F to obtain finite graded M over B=Rees(I), composition of transitions, and compatibility with scalar-induced homogeneous products. Thus K=sum ker(M_n -> M_0) is a graded B-submodule.",
+   "uses": [
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "B is Noetherian by [lem-weil-pbc-rees-algebra-noetherian], so K is finite by [lem-weil-pbc-noetherian-submodule-finite]. Replace finite generators by their homogeneous components y_j in K_(d_j); let c0 bound their degrees, with zero for an empty generating set.",
+   "uses": [
+    "lem-weil-pbc-rees-algebra-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For c>=c0 and n>=c, comparison of degree-n components expresses every element of K_n as a sum b_j*y_j, b_j in I^(n-d_j). Each term vanishes after transition to n-d_j because y_j maps to zero in M_0; as d_j<=c, composition makes it vanish at n-c too. Conversely a class vanishing at n-c vanishes at 0 by composition. This gives equality of the kernels for every such c.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-rees-algebra-noetherian",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02OA, proof of (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "graded.*generat|generat.*degree|reesAlgebra",
+   "date": "2026-10-12",
+   "results": "Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean, Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean, Mathlib/FieldTheory/RatFunc/Luroth.lean, Mathlib/FieldTheory/RatFunc/Luroth.lean, Mathlib/FieldTheory/RatFunc/Luroth.lean, Mathlib/FieldTheory/RatFunc/Luroth.lean, Mathlib/FieldTheory/RatFunc/Luroth.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "verdict": "No exact existing ideal-power cohomology bound; categorical image lemmas used for transition maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology inverse system of powers of an ideal image bound and eventual equality of kernels via finite Rees module",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "graded finite Rees module homogeneous generators bounds transition map images and kernels",
+   "date": "2026-10-12",
+   "results": "HomogeneousLocalization.Away.span_mk_prod_pow_eq_top, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, Ideal.Filtration.submodule, Ideal.Filtration.submodule_span_single, Ideal.span_pow_eq_map_homogeneousSubmodule, HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top, Ideal.Filtration.mem_submodule",
+   "verdict": "No exact existing ideal-power cohomology bound; categorical image lemmas used for transition maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtration\"",
+   "date": "2026-10-12",
+   "results": "Ideal.Filtration, Ideal.Filtration.Stable, Ideal.Filtration.instBot, Ideal.Filtration.instCompleteLattice, Ideal.Filtration.instInfSet, Ideal.Filtration.instInhabited, Ideal.Filtration.instMax, Ideal.Filtration.instMin",
+   "verdict": "Filtrations are submodules of one fixed module; the cohomology M_n here varies with n, so these declarations do not directly prove this estimate."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealApplication",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); subordinate ideal-power cohomology argument, Lemma 02OA, proof of (3)",
+   "via": [
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealKernelBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohomologyPowersIdealKernelBound.lean",
+  "declaration": "AlgebraicGeometry.cohomology_powers_ideal_kernel_bound",
+  "statement": "theorem cohomology_powers_ideal_kernel_bound\n    (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}}\n    (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData)\n    (hJ : J = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (q : ℕ)\n    (i : ∀ (k n : ℕ), n ≤ k →\n      (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι k).2 F ⟶\n        Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))\n    (hi : ∀ (k n : ℕ) (h : n ≤ k),\n      i k n h ≫ Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F =\n        Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι k).2 F) :\n    ∃ c0 : ℕ, ∀ c : ℕ, c0 ≤ c →\n(∀ n : ℕ, c ≤ n →\n          LinearMap.ker ((ModuleCat.restrictScalars\n              ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map\n            ((RingedSpace.moduleCohomology X.toRingedSpace q).map (i n 0 (Nat.zero_le n)))).hom =\n          LinearMap.ker ((ModuleCat.restrictScalars\n              ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map\n            ((RingedSpace.moduleCohomology X.toRingedSpace q).map\n              (i n (n - c) (Nat.sub_le n c)))).hom)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

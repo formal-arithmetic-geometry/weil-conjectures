@@ -8314,3 +8314,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/M1/Sheaf.CategoryTheory.VaryingSiteInverseImageZeroDetection (stage 3; reviewer PASS; after a return; landing 20261012T151909-L-2288903 (interface); batch 20261012T151904; modules 3; new nodes 2)
 - 15:19 L: merged deliver/M3/Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernel (stage 3; reviewer PASS; first push; landing 20261012T151910-L-2289101 (interface); batch 20261012T151904; modules 2; new nodes 1)
 - 15:19 L: merged deliver/N1/Sheaf.Algebra.FiniteTorsionExtensionInduction (stage 3; reviewer PASS; first push; landing 20261012T151910-L-2289205 (interface); batch 20261012T151904; modules 2; new nodes 1)
+- 15:19 L: merged deliver/N1/Sheaf.AlgebraicGeometry.CohomologyPowersIdealApplication (stage 3; reviewer PASS; first push; landing 20261012T151910-L-2289338 (interface); batch 20261012T151904; modules 4; new nodes 3)

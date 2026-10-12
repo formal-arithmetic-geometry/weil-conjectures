@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-cohomology-powers-ideal-application-transition-maps",
+ "kind": "statement",
+ "title": "Transition maps for powers times a module",
+ "statement": "Let X be any scheme, J an ideal sheaf on X, and F any O_X-module. Use the powers and image products of [lem-weil-pbc-ideal-module-product-stalk], with J^0 = O_X. There is a family i_(k,n): J^k F -> J^n F for all n <= k, whose composite with the image inclusion J^n F -> F equals the image inclusion J^k F -> F.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02OA, inverse-system setup before proof of (1); independently read at https://stacks.math.columbia.edu/tag/02OA"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Use the recursive powers and their image inclusions from the construction of [lem-weil-pbc-ideal-module-product-stalk], not its still-open stalk theorem. The successor inclusion J^(k+1) -> J^k is J -> O_X at k=0 and J J^k -> J^k otherwise. Compose by induction, with identity when k=n.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor each inclusion J^k -> J^n over O_X with F. Apply Mathlib image.map to the square of multiplication maps with identity right edge; image.map_ι gives the asserted factorization. Choose these already-proved maps for the existential family.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 02OA, inverse-system setup before proof of (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "image.map_homMk|idealSheafPower|idealModuleProduct",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/Images.lean",
+   "verdict": "No existing ideal-power transition theorem; image.map and image.map_ι used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"image.map\"",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Limits.image.map, CategoryTheory.Limits.image.map_id, CategoryTheory.Limits.image.map_ι, CategoryTheory.Limits.image.map_comp, CategoryTheory.Limits.image.map_homMk'_ι, PartialEquiv.IsImage.mapsTo, OpenPartialHomeomorph.IsImage.mapsTo, OpenPartialHomeomorph.IsImage.map_nhdsWithin_eq",
+   "verdict": "No existing ideal-power transition theorem; image.map and image.map_ι used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps between images of tensor multiplication induced by inclusions of ideal sheaf powers",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of categorical images gives maps between ideal sheaf powers times a module",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.map_comp, AlgebraicGeometry.Scheme.IdealSheafData.map_ideal', AlgebraicGeometry.Scheme.IdealSheafData.map_ideal, AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap, AlgebraicGeometry.Scheme.IdealSheafData.inclusion_comp, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_map, AlgebraicGeometry.Scheme.IdealSheafData.map",
+   "verdict": "No existing ideal-power transition theorem; image.map and image.map_ι used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealApplication",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); subordinate ideal-power cohomology argument, Lemma 02OA, inverse-system setup before proof of (1)",
+   "via": [
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealTransitionMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/CohomologyPowersIdealTransitionMaps.lean",
+  "declaration": "AlgebraicGeometry.cohomology_powers_ideal_transition_maps",
+  "statement": "theorem cohomology_powers_ideal_transition_maps\n    {X : Scheme.{v}} (J : X.IdealSheafData) (F : X.Modules) :\n    ∃ i : ∀ (k n : ℕ), n ≤ k →\n        (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι k).2 F ⟶\n          Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F),\n      (∀ (k n : ℕ) (h : n ≤ k),\n        i k n h ≫ Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F =\n          Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι k).2 F)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T151910-L-2289338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

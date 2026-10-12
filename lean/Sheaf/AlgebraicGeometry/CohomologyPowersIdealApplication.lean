@@ -10,8 +10,9 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite
-import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.CohomologyPowersIdealTransitionMaps
+import Sheaf.AlgebraicGeometry.CohomologyPowersIdealImageBound
+import Sheaf.AlgebraicGeometry.CohomologyPowersIdealKernelBound
 
 /-! # Image and kernel bounds for cohomology of ideal powers
 
@@ -58,7 +59,8 @@ Together steps 6 and 7 give (a), with e = max(0,c-n).
 8. For n ≥ c, composition gives Ker(M_n → M_(n-c)) ⊆ K_n. Each generator term
 b_i y_i of K_n maps to zero in M_(n-d_i), since y_i maps to zero in M_0.
 As d_i ≤ c, its further image in M_(n-c) is zero. This gives the reverse containment
-and proves (b). These steps are the node's eight proof steps, following Stacks 02OA. -/
+and proves (b). The image and kernel estimates below carry these arguments separately;
+the Lean proof constructs the transitions and combines their thresholds by taking a maximum. -/
 theorem cohomology_powers_ideal_application
     (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}}
     (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData)
@@ -89,6 +91,9 @@ theorem cohomology_powers_ideal_application
               ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map
             ((RingedSpace.moduleCohomology X.toRingedSpace q).map
               (i n (n - c) (Nat.sub_le n c)))).hom) := by
-  sorry
+  obtain ⟨i, hi⟩ := cohomology_powers_ideal_transition_maps J F
+  obtain ⟨c₁, hc₁⟩ := cohomology_powers_ideal_image_bound A I f J hJ F hF q i hi
+  obtain ⟨c₂, hc₂⟩ := cohomology_powers_ideal_kernel_bound A I f J hJ F hF q i hi
+  exact ⟨i, hi, max c₁ c₂, hc₁ _ (le_max_left _ _), hc₂ _ (le_max_right _ _)⟩
 
 end AlgebraicGeometry
