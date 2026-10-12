@@ -9317,3 +9317,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit (stage 3; reviewer PASS; first push; landing 20261012T194157-L-470696 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.ThickeningSystemsEquivalence (stage 3; reviewer PASS; first push; landing 20261012T194157-L-470857 (interface); batch 20261012T194054; modules 4; new nodes 3)
 - 19:41 L: merged deliver/Y2/Sheaf.CategoryTheory.DerivedCoupleExact (stage 3; reviewer PASS; first push; landing 20261012T194158-L-470988 (interface); batch 20261012T194054; modules 4; new nodes 3)
+- 19:41 L: merged deliver/Y2/Sheaf.Paper.ZariskiEtaleResolutionCocycleEquivalences (stage 3; reviewer PASS; first push; landing 20261012T194158-L-471140 (proof); batch 20261012T194054; modules 1; new nodes 0)

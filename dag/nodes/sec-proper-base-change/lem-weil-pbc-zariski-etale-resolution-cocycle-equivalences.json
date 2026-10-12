@@ -12,16 +12,25 @@
  },
  "proof": [
   {
-   "text": "This is the corresponding termwise Ext and homology argument from the source proof, isolated as an intermediate component.",
-   "uses": [],
+   "text": "Evaluate objectCohomologyPresheaf_resolution at an object and turn its component isomorphism into an additive equivalence. Compose with AddEquiv.ulift on both sides to remove the universe lifts. Exact evaluation commutes with homology by ShortComplex.mapHomologyIso; compose with its inverse. This proves the private generic helper objectResolutionEquiv.",
+   "uses": [
+    "lem-weil-pbc-object-cohomology-presheaf-resolution"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply objectResolutionEquiv to the supplied Zariski resolution R at V, obtaining e₁, and to the supplied étale resolution I at i(V), obtaining e₂. The étale evaluation complex is definitionally equal to the Zariski evaluation complex of the continuous pushforward, including its differentials. Return both equivalences with True.intro. The supplied comparison b imposes no condition on these equivalences.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-object-cohomology-presheaf-resolution"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
-  "place": "sites-cohomology.tex Section 01FT, equation-cohomology-object-site; derived.tex Tag 06XR (1), lemma-compute-ext-resolutions. The corresponding original .tex sections were fetched into the sandbox scratchpad and read."
+  "place": "Section 01FT, equation-cohomology-object-site; Tag 06XR (1), lemma-compute-ext-resolutions. Read online at https://stacks.math.columbia.edu/tag/01FT and https://stacks.math.columbia.edu/tag/06XR. Lean proof uses the existing object-cohomology resolution comparison and exact evaluation."
  },
  "mathlib_searches": [
   {
@@ -97,10 +106,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T184326-L-4012997",
-  "kind": "interface",
+  "landing": "20261012T194158-L-471140",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
