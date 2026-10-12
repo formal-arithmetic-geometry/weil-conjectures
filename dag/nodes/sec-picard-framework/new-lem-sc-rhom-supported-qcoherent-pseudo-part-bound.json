@@ -1,0 +1,106 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPart",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-rhom-supported-qcoherent-pseudo-part",
+   "place": "split of Tag 0A6H clause (1)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo coherent derived Hom bounded below",
+   "results": "no existing theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "schemeDerivedQCohProperty derivedInternalHom IsGE",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pseudo coherent internal Hom locally bounded below quasi coherent",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom pseudo coherent quasi coherent locally bounded below",
+   "results": "service unavailable; no result",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "id": "new-lem-sc-rhom-supported-qcoherent-pseudo-part-bound",
+ "title": "Local lower-bound component of pseudo-coherent RHom",
+ "statement": "The local lower-bound conjunct of lem-sc-rhom-supported-qcoherent-pseudo-part.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H, clause (1)"
+ },
+ "proof": [
+  {
+   "text": "On a bounded-above finite-free source and a bounded-below target, the Hom complex is zero below the difference of the bounds; restriction identifies this with the sheaf RHom locally.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker A2",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H, clause (1)"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/RHomSupportedQuasiCoherentPseudoPartBound.lean",
+  "declaration": "AlgebraicGeometry.rhom_supported_quasiCoherent_pseudo_part_bound",
+  "statement": "theorem rhom_supported_quasiCoherent_pseudo_part_bound\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K L : schemeDerivedCategory X)\n    (hL : schemeDerivedQCohProperty X L)\n    (hK : Scheme.IsPseudoCoherent X K) (hGE : ∃ a : ℤ, L.IsGE a) :\n    ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ ∃ a : ℤ, ∀ n : ℤ, n < a →\n      IsZero ((SheafOfModules.overFunctor (moduleRings X.toRingedSpace) U).obj\n        ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj\n            ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n              X.toRingedSpace.sheaf).obj (op K, L))))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T223357-L-1633991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T223357-L-1633991",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -3,9 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQC
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartBound
 
 /-! # PseudoPart of derived internal Hom
 
@@ -53,6 +52,7 @@ theorem rhom_supported_quasiCoherent_pseudo_part
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj
               ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
                 X.toRingedSpace.sheaf).obj (op K, L)))) := by
-  sorry
+  exact ⟨rhom_supported_quasiCoherent_pseudo_part_qc X K L hL hK hGE,
+    rhom_supported_quasiCoherent_pseudo_part_bound X K L hL hK hGE⟩
 
 end AlgebraicGeometry
