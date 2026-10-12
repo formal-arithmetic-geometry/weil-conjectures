@@ -6128,3 +6128,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:48 L: returned deliver/C1/Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance (reviewer RETURN: (reviewer X-de843, head de84367e3) D1/D4/6: The four split nodes restate the parent item in their top-level `statement`,)
 - 04:51 L: returned deliver/N2/Sheaf.Topology.ClosedPushforwardConstantRestriction (reviewer RETURN: (reviewer X-6fa15, head 6fa15d7b9) H8 (stage-3 point 4): the new theorem's docstring says only “The comparison map is co)
 - 04:56 L: returned deliver/H2/Sheaf.AlgebraicGeometry.DescendSurjective (reviewer RETURN: (reviewer X-a5e69, head a5e697c3d) F: Correct the downstream account. In coord/changes/H2-descend-surjective-prune-limit)
+- 04:56 L: returned deliver/Y2/Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange (reviewer RETURN: (reviewer X-33e22, head 33e22864b) D1 (review points 4 and 6): The three new sorry theorems repeat, verbatim, the three )
