@@ -8,6 +8,7 @@ module
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Polynomial.GaussLemma
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 
 /-!
 # Normal local domains with separably closed fraction field are strictly henselian
@@ -316,5 +317,53 @@ lemma residue_atPrimeMap_of_mem_inertia {g : G} (hg : g ∈ Q.inertia G)
   exact RingHom.congr_fun this x
 
 end Action
+
+section Galois
+
+open scoped Pointwise
+
+variable {K : Type*} [Field K] [Algebra R K] [Algebra K Ω] [IsScalarTower R K Ω] [IsGalois K Ω]
+  [IsIntegrallyClosedIn R K] (P : Ideal R) [Q.IsMaximal] [Q.LiesOver P]
+
+include P in
+/-- Every automorphism of the residue field of `B_Q` fixing the image of `R` is induced by an
+element of the decomposition group of `Q` in `Gal(Ω / K)`. -/
+theorem exists_residueField_map_atPrimeMap_eq
+    (φ : IsLocalRing.ResidueField (Localization.AtPrime Q) ≃+*
+      IsLocalRing.ResidueField (Localization.AtPrime Q))
+    (hφ : ∀ r : R, φ (algebraMap R _ r) = algebraMap R _ r) :
+    ∃ (σ : Gal(Ω/K)) (hσ : σ ∈ MulAction.stabilizer Gal(Ω/K) Q),
+      ∀ x, IsLocalRing.ResidueField.map (atPrimeMap Q σ hσ) x = φ x := by
+  let e : (integralClosure R Ω ⧸ Q) ≃+* IsLocalRing.ResidueField (Localization.AtPrime Q) :=
+    IsLocalization.AtPrime.equivQuotMaximalIdeal Q (Localization.AtPrime Q)
+  have he (b : integralClosure R Ω) :
+      e (Ideal.Quotient.mk Q b) = IsLocalRing.residue _ (algebraMap _ _ b) := rfl
+  let ψ₀ : (integralClosure R Ω ⧸ Q) ≃+* (integralClosure R Ω ⧸ Q) := (e.trans φ).trans e.symm
+  have hψ₀ (x : R ⧸ P) : ψ₀ (algebraMap (R ⧸ P) _ x) = algebraMap (R ⧸ P) _ x := by
+    obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective x
+    have h1 : e (algebraMap (R ⧸ P) _ (Ideal.Quotient.mk P r)) =
+        algebraMap R (IsLocalRing.ResidueField (Localization.AtPrime Q)) r := by
+      rw [Ideal.Quotient.algebraMap_mk_of_liesOver, he,
+        ← IsScalarTower.algebraMap_apply R (integralClosure R Ω) (Localization.AtPrime Q),
+        IsScalarTower.algebraMap_apply R (Localization.AtPrime Q)
+          (IsLocalRing.ResidueField (Localization.AtPrime Q))]
+      rfl
+    change e.symm (φ (e _)) = _
+    rw [h1, hφ, ← h1, RingEquiv.symm_apply_apply]
+  let ψ : (integralClosure R Ω ⧸ Q) ≃ₐ[R ⧸ P] (integralClosure R Ω ⧸ Q) :=
+    AlgEquiv.ofRingEquiv hψ₀
+  obtain ⟨⟨σ, hσ⟩, hσψ⟩ := Ideal.Quotient.stabilizerHom_surjective_integralClosure (K := K) P Q ψ
+  refine ⟨σ, hσ, fun x ↦ ?_⟩
+  obtain ⟨b, rfl⟩ : ∃ b, e (Ideal.Quotient.mk Q b) = x := by
+    obtain ⟨y, rfl⟩ := e.surjective x
+    obtain ⟨b, rfl⟩ := Ideal.Quotient.mk_surjective y
+    exact ⟨b, rfl⟩
+  have h2 : Ideal.Quotient.mk Q (σ • b) = ψ (Ideal.Quotient.mk Q b) := by
+    rw [← hσψ]
+    rfl
+  rw [he, IsLocalRing.ResidueField.map_residue, atPrimeMap_algebraMap, ← he, h2]
+  exact e.apply_symm_apply _
+
+end Galois
 
 end Ideal
