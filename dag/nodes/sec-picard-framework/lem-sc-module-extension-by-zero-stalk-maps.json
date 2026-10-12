@@ -28,53 +28,24 @@
  ],
  "proof": [
   {
-   "text": "For an $\\mathcal O_X|_W$-module $G$ let $P_G$ be the presheaf of $\\mathcal O_X$-modules with $P_G(V)=G(V)$ for opens $V\\subseteq W$ and $P_G(V)=0$ otherwise, restriction maps those of $G$ between opens inside $W$ and zero otherwise, $\\mathcal O_X(V)=(\\mathcal O_X|_W)(V)$ acting through $G$ when $V\\subseteq W$. Let $\\theta_G:P_G\\to P_G^\\#$ be its sheafification as a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification]; its underlying abelian sheaf is the abelian sheafification of $P_G$. For an $\\mathcal O_X$-module $H$, a morphism of presheaves of $\\mathcal O_X$-modules $P_G\\to H$ is the same as a morphism $G\\to H|_W$ (its components on opens $V\\subseteq W$; the other components are zero, and compatibility with restriction from $V\\not\\subseteq W$ holds because $P_G(V)=0$). With the universal property of $\\theta_G$ this gives bijections $\\operatorname{Hom}(P_G^\\#,H)\\cong\\operatorname{Hom}(G,H|_W)$, natural in $G$ and $H$; so $G\\mapsto P_G^\\#$ is a left adjoint of restriction, and by uniqueness of left adjoints up to a unique natural isomorphism compatible with the adjunction bijections, $j_{W,!}G\\cong P_G^\\#$ for the left adjoint of [lem-sc-derived-open-restriction-adjunction-exact]. Under this isomorphism the counit $j_{W,!}(H|_W)\\to H$ is the morphism induced by the presheaf map $P_{H|_W}\\to H$ that is the identity on opens $V\\subseteq W$ and zero otherwise. The underlying abelian presheaf of $P_G$ is the presheaf $j_{p!}G$ of [lem-sc-topological-extension-by-zero-stalks], so that lemma gives $(j_{W,!}G)_x=0$ for $x\\notin W$ and, for $x\\in W$, the isomorphism $G_x\\cong(j_{W,!}G)_x$, $s_x\\mapsto\\theta_G(s)_x$, natural in $G$. This isomorphism is induced by the $\\mathcal O_X$-linear maps $G(V)=P_G(V)\\to P_G^\\#(V)$ for opens $x\\in V\\subseteq W$, which are cofinal among the neighbourhoods of $x$, so it is $\\mathcal O_{X,x}$-linear by the module structure on stalks in [def-weil-pbc-module-stalk].",
+   "text": "Assemble outside stalk vanishing, the natural inside comparison with its germ formula, and the transition/counit laws as the three conjuncts.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "lem-sc-topological-extension-by-zero-stalks",
-    "def-weil-pbc-module-stalk"
+    "lem-sc-module-extension-by-zero-stalk-maps-outside",
+    "lem-sc-module-extension-by-zero-stalk-maps-inside",
+    "lem-sc-module-extension-by-zero-stalk-maps-transitions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves Lemma 00A7 (lemma-j-shriek-modules), clauses (2)-(3), with Definition 00A4 and the stalk calculation in Lemma 00A5"
-   }
-  },
-  {
-   "text": "Write $\\eta^{W'}:F|_{W'}\\to(j_{W',!}(F|_{W'}))|_{W'}$ for the unit of $j_{W',!}\\dashv(-)|_{W'}$ [lem-sc-derived-open-restriction-adjunction-exact], with $j_{X,!}$ the identity functor and $\\eta^X=\\mathrm{id}_F$. For a morphism $g:F|_W\\to H|_W$ of $\\mathcal O_X|_W$-modules let $g^\\flat:j_{W,!}(F|_W)\\to H$ be its transpose, the unique morphism with $(g^\\flat)|_W\\circ\\eta^W=g$. By definition $\\iota_{W,W'}=(\\eta^{W'}|_W)^\\flat$. For $W'=X$ this is $(\\mathrm{id}_{F|_W})^\\flat$, the counit. For $W'=W$, the identity satisfies $\\mathrm{id}|_W\\circ\\eta^W=\\eta^W$, so $\\iota_{W,W}=\\mathrm{id}$. For $W\\subseteq W'\\subseteq W''$, restricting the defining identities $(\\iota_{W,W'})|_W\\circ\\eta^W=\\eta^{W'}|_W$ and $(\\iota_{W',W''})|_{W'}\\circ\\eta^{W'}=\\eta^{W''}|_{W'}$ to $W$ gives $(\\iota_{W',W''}\\circ\\iota_{W,W'})|_W\\circ\\eta^W=\\eta^{W''}|_W$, so $\\iota_{W',W''}\\circ\\iota_{W,W'}$ and $\\iota_{W,W''}$ are both transposes of $\\eta^{W''}|_W$ and are equal by uniqueness of transposes.",
-   "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves Lemma 00A7 (lemma-j-shriek-modules), clause (2), and the adjunction identities"
-   }
-  },
-  {
-   "text": "Let $x\\in W\\subseteq W'$. By Step 1 the counit $\\iota_{W,X}:j_{W,!}(F|_W)\\to F$ is induced by the presheaf map that is the identity on opens inside $W$ and zero otherwise, so the adjunction-map clause of [lem-sc-topological-extension-by-zero-stalks] (for the open $W$ and the underlying abelian sheaf of $F$) identifies $(\\iota_{W,X})_x$ with $\\mathrm{id}_{F_x}$ under the isomorphism of (1); likewise $(\\iota_{W',X})_x=\\mathrm{id}_{F_x}$ since $x\\in W'$. By Step 2, $\\iota_{W',X}\\circ\\iota_{W,W'}=\\iota_{W,X}$, and stalk maps are functorial [def-weil-pbc-module-stalk], so $(\\iota_{W',X})_x\\circ(\\iota_{W,W'})_x=(\\iota_{W,X})_x$; hence $(\\iota_{W,W'})_x=\\mathrm{id}_{F_x}$ under the isomorphisms of (1) for $F|_W$ and $F|_{W'}$. Stalk maps of morphisms of $\\mathcal O_X$-modules are $\\mathcal O_{X,x}$-linear [def-weil-pbc-module-stalk], so this is an equality of $\\mathcal O_{X,x}$-linear maps.",
-   "uses": [
-    "lem-sc-topological-extension-by-zero-stalks",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves Lemma 00A5 (lemma-j-shriek-abelian), clauses (2), (3), (5), applied to the presheaf map defining the adjunction morphism"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-sc-topological-extension-by-zero-stalks",
-  "def-weil-pbc-module-stalk"
+  "lem-sc-module-extension-by-zero-stalk-maps-outside",
+  "lem-sc-module-extension-by-zero-stalk-maps-inside",
+  "lem-sc-module-extension-by-zero-stalk-maps-transitions"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves Lemma 00A7 and Lemma 00A5"
+  "place": "Sheaves Lemmas 00A7 and 00A5; conjunct decomposition by R3"
  },
  "mathlib_searches": [
   {
@@ -156,5 +127,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T121303-L-1001429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

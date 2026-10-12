@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-module-extension-by-zero-stalk-maps-transitions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-module-extension-by-zero-stalk-maps",
+   "place": "transitions conjunct"
+  }
+ },
+ "kind": "statement",
+ "title": "Intermediate Transitions clause for module extension by zero stalk maps",
+ "statement": "For a ringed space X and global module sheaf F, the counit at the top open is an isomorphism. There are maps iota(W,W') from the sheafified extension of F restricted to W to the sheafified extension of F restricted to W', for W contained in W'. Their adjunction transposes are the restrictions of the W' unit transported by overFunctorMap; iota(W,W) is identity, composites are iota(W,W''), and iota(W,top) followed by the top counit is the W counit. For x in W there is an isomorphism from F_x to the W extension stalk whose inverse is the stalk of the W counit; these isomorphisms intertwine the transition stalk maps.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves Tag 00A7"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-module-stalk-functor",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Use the inside-open stalk calculation and adjunction triangle identities to see that the counit for F restricted to W induces an isomorphism at every x in W: the restriction-stalk comparison identifies its composition with the unit with identity. For W=top this proves the counit is an isomorphism of sheaves by the stalk criterion. For W <= W', define iota as the inverse homEquiv image of the displayed transported restriction of the W' unit. This gives the first equation by inverse cancellation. At W=W', the restriction transport is identity, so homEquiv sends both iota and identity to the W unit; injectivity proves their equality. For W <= W' <= W'', restrict the transpose equations to W and use naturality of the units and coherence of overFunctorMap. Their composite is the restriction of the W'' unit; homEquiv injectivity gives composition. Applying counits to the same equations and using the triangle identities gives iota(W,W') followed by the W' counit equals the W counit; specialize W'=top. Finally take e(W,x) to be the inverse of the counit's stalk isomorphism already obtained. Functoriality on stalks applied to that counit compatibility says iota_x followed by e(W',x).inv equals e(W,x).inv. Cancel these isomorphisms to get the final equation. This construction works for independently chosen adjunctions because only their own units, counits and triangle identities are used. Source: Stacks Project, Sheaves Lemma 00A7 (2)-(4) and Lemma 00A5.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sc-topological-extension-by-zero-stalks",
+    "def-pc-module-stalk-functor",
+    "lem-sc-module-extension-by-zero-stalk-maps-inside"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sc-topological-extension-by-zero-stalks",
+  "def-pc-module-stalk-functor",
+  "lem-sc-module-extension-by-zero-stalk-maps-inside"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves Tag 00A7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|stalkFunctor_map_unit_toSheafify_isIso",
+   "date": "2026-10-12",
+   "results": "Mathlib/Topology/Sheaves/Sheafify.lean",
+   "verdict": "No full match; sheafification stalk lemma is used for outside. Restriction of schemes is insufficient for arbitrary ringed spaces.",
+   "digest": "fb3a928e3a128ae7"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of sheafification of a presheaf of modules is unchanged and extension by zero has zero stalk outside the open subset",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of modules on an open subset, extension by zero has zero stalks outside the open and the unit is an isomorphism on stalks inside; transitions between nested opens are compatible with counits",
+   "date": "2026-10-12",
+   "results": "ModuleCat.Tilde.toOpen_germ_apply, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk_to_skyscraper, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, StalkSkyscraperPresheafAdjunctionAuxs.to_skyscraper_fromStalk, ModuleCat.Tilde.toOpen_germ, ModuleCat.Tilde.toStalk, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app, ModuleCat.Tilde.toOpen_germ_assoc",
+   "verdict": "No full match; sheafification stalk lemma is used for outside. Restriction of schemes is insufficient for arbitrary ringed spaces.",
+   "digest": "3f05ad9c2f561699"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkTransitions",
+  "file": "lean/Sheaf/Algebra/Homology/ModuleExtensionByZeroStalkTransitions.lean",
+  "declaration": "AlgebraicGeometry.ModuleExtensionByZeroStalkTransitions",
+  "statement": "theorem ModuleExtensionByZeroStalkTransitions (X : RingedSpace.{u}) : (∀ F : SheafOfModules.{u} (moduleRings X), IsIso ((Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F) ∧ ∃ iota : (∀ (W W' : Opens X), W ≤ W' → ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W).obj F) ⟶ (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W' ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F))), (∀ (W W' : Opens X) (h : W ≤ W'), (Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).homEquiv _ _ (iota W W' h) = (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).inv.app F ≫ (SheafOfModules.overMap (moduleRings X) (homOfLE h)).map ((Classical.choice (open_restriction_adjunction_exact X W').2.2.2.2).unit.app ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F)) ≫ (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).hom.app ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W' ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F))) ∧ (∀ W : Opens X, iota W W le_rfl = 𝟙 _) ∧ (∀ (W W' W'' : Opens X) (h : W ≤ W') (h' : W' ≤ W''), iota W W' h ≫ iota W' W'' h' = iota W W'' (h.trans h')) ∧ (∀ W : Opens X, iota W ⊤ le_top ≫ (Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F = (Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).counit.app F) ∧ ∃ e : (∀ (W : Opens X) (x : X), x ∈ W → ((RingedSpace.moduleStalkFunctor X x).obj F ≅ (RingedSpace.moduleStalkFunctor X x).obj ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W).obj F)))), (∀ (W : Opens X) (x : X) (hx : x ∈ W), (e W x hx).inv = (RingedSpace.moduleStalkFunctor X x).map ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).counit.app F)) ∧ (∀ (W W' : Opens X) (h : W ≤ W') (x : X) (hx : x ∈ W), (e W x hx).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (iota W W' h) = (e W' x (h hx)).hom))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T121303-L-1001429",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T121303-L-1001429",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
