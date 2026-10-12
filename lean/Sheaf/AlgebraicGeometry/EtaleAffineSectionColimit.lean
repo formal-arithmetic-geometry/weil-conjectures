@@ -8,14 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleStageSectionCocone
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleSetSectionComparisonLaws
-import Sheaf.CategoryTheory.ColimitSiteSections
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.CategoryTheory.Limits.Connected
-import Mathlib.CategoryTheory.Sites.Equivalence
+import Sheaf.AlgebraicGeometry.EtaleSetSectionLiftAffine
+import Sheaf.AlgebraicGeometry.EtaleAffineSectionSameStageEquality
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # The canonical cocone of affine étale section sets
 Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN. -/
@@ -55,6 +51,16 @@ theorem etaleStageSectionCocone_isColimit
     (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))
     (W₀ : (D.obj (op i₀)).Etale) [QuasiCompact W₀.hom] [QuasiSeparated W₀.hom]
     [IsAffine W₀.left] : Nonempty (IsColimit (etaleStageSectionCocone D c i₀ G W₀)) := by
-  sorry
+  classical
+  let F := etaleStageSectionDiagram D c i₀ G W₀
+  let C := etaleStageSectionCocone D c i₀ G W₀
+  refine ⟨Types.FilteredColimit.isColimitOf' F C ?_ ?_⟩
+  · intro t
+    obtain ⟨j, s, hs⟩ := etaleSetSectionLift_affine D c hc i₀ G W₀ t
+    exact ⟨op j, s, hs.symm⟩
+  · intro j s t hst
+    obtain ⟨k, a, ha⟩ := etaleAffineSection_sameStageEquality D c hc i₀ G W₀
+      j.unop s t hst
+    exact ⟨op k, a.op, ha⟩
 
 end AlgebraicGeometry

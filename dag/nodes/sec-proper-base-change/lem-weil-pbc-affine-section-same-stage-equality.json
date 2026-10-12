@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-affine-section-same-stage-equality",
+ "kind": "statement",
+ "title": "Same-stage equality detection for affine etale sections",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{op}\\to Scheme$ a system of quasi-compact quasi-separated schemes with affine transition maps, and $c$ a limit cone. Fix $i_0$, a sheaf of sets $G$ on the small etale site of $D(i_0)$, and an affine etale object $W_0$ with quasi-compact quasi-separated structure map. In the stage section diagram [def-weil-pbc-affine-section-diagram], let $s,t$ be two sections at the SAME object $j$ of $Over(i_0^{op})$. If their images under the canonical limit cocone [def-weil-pbc-affine-section-cocone] agree, then there exist $k$ and ONE arrow $a:k\\to j$ such that the transition map associated to $a$ sends $s$ and $t$ to the same section. No assertion of existence of stage representatives for arbitrary limit sections is made.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites.tex",
+  "place": "Tag 09YQ degree-zero affine argument; Tag 09YN filtered-colimit section formula, using 0EYL and 04HR"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-affine-section-diagram",
+  "def-weil-pbc-affine-section-cocone",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the cofinal directed upper tail. Apply the affine etale limit-site presentation. Transport inverse-image sheaves along the restriction equivalences and unit-compatible comparisons. Composition identifies their limit inverse images with a constant connected system.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+    "lem-weil-pbc-site-equivalence-sheaf-transport",
+    "lem-weil-pbc-colimit-constant-connected-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the varying-site section formula of Sites 09YN on the base changes of W_0. Its map compatibility identifies the images of s and t with their canonical limit comparisons. Equality of those images makes the representatives equal in the filtered colimit of sets. The current fixed-site ColimitSiteSections interface alone does not supply these varying-site identifications.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-sections",
+    "lem-weil-pbc-sets-section-comparison-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The elementwise equality criterion gives a common later stage and two arrows out of j. Thinness of the opposite of Over of a preorder identifies the arrows. Thus their transition maps agree, giving the conclusion with one arrow. Empty affine objects have singleton sections, so the identity arrow handles this edge case.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+  "lem-weil-pbc-sets-section-comparison-laws",
+  "lem-weil-pbc-site-equivalence-sheaf-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N2",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites.tex",
+  "place": "09YQ affine degree-zero argument and equality part of the 09YN section formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two sections of a set valued etale sheaf pulled back to an inverse limit agree at a later stage if their limit images agree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two sections of an inverse image etale sheaf at the same stage become equal at a later stage when they agree on the inverse limit",
+   "results": "Actual search returned 8 hits: TopCat.Presheaf.section_ext, TopCat.Presheaf.IsSheaf.section_ext, AlgebraicGeometry.Scheme.OpenCover.ext_elem, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Sheaf.existsUnique_gluing', StandardEtalePair.hom_ext_iff, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, CategoryTheory.GrothendieckTopology.CoversTop.sections_ext. None states equality detection for arbitrary set-valued inverse-image étale sections at inverse scheme limits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimitOf|sheaf.*[Ee]qual|[Ee]qual.*sheaf",
+   "results": "Actual search returned 11 hits: Mathlib/CategoryTheory/Limits/Types/Products.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Multicoequalizer.lean, Mathlib/CategoryTheory/Limits/Types/Filtered.lean, Mathlib/CategoryTheory/Limits/Types/Filtered.lean. None states equality detection for arbitrary set-valued inverse-image étale sections at inverse scheme limits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSectionColimit",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "degree-zero continuity used for the strict henselian pushforward stalk comparison: equality detection in affine sections",
+   "via": [
+    "lem-weil-pbc-affine-section-cocone-colimit",
+    "lem-weil-pbc-sets-section-affine-eventual-equality",
+    "lem-weil-pbc-sets-section-eventual-equality",
+    "lem-weil-pbc-sets-etale-section-continuity",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSectionSameStageEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSectionSameStageEquality.lean",
+  "declaration": "AlgebraicGeometry.etaleAffineSection_sameStageEquality",
+  "statement": "theorem etaleAffineSection_sameStageEquality\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))\n    (W₀ : (D.obj (op i₀)).Etale) [QuasiCompact W₀.hom] [QuasiSeparated W₀.hom]\n    [IsAffine W₀.left]\n    (j : Over (op i₀))\n    (s t : (etaleStageSectionDiagram D c i₀ G W₀).obj (op j))\n    (hst : (etaleStageSectionCocone D c i₀ G W₀).ι.app (op j) s =\n      (etaleStageSectionCocone D c i₀ G W₀).ι.app (op j) t) :\n    ∃ (k : Over (op i₀)) (a : k ⟶ j),\n      (etaleStageSectionDiagram D c i₀ G W₀).map a.op s =\n        (etaleStageSectionDiagram D c i₀ G W₀).map a.op t",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T110313-L-619524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T110313-L-619524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
