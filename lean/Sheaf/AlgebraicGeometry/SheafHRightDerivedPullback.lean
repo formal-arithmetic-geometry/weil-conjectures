@@ -6,9 +6,12 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+
+import all Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux
+import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
+import Sheaf.AlgebraicGeometry.ExtPullbackResolutionSections
+import Sheaf.AlgebraicGeometry.ClassicalPullbackResolutionSections
 
 /-! # Ext compatibility with classical derived pullback
 
@@ -23,6 +26,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Scheme Etale
 
+set_option backward.isDefEq.respectTransparency false in
 /-- There exist Ext/classical comparisons on the two schemes that identify the
 classical right-derived section map with the Ext pullback map.
 
@@ -53,6 +57,31 @@ theorem sheafHRightDerivedIso_pullback {X X' : Scheme.{u}} (g' : X' ⟶ X)
         (Γ'.rightDerived q).obj (L.obj G)),
       r.hom ≫ (Functor.rightDerivedBaseChange e q).app G =
         AddCommGrpCat.ofHom (cohomologyMap g' G q) ≫ r'.hom := by
-  sorry
+  dsimp
+  let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let L := upperStar AddCommGrpCat.{u + 1} g'
+  let RI := injectiveResolution G
+  let RJ := injectiveResolution (L.obj G)
+  have : RJ.cochainComplex.IsKInjective :=
+    CochainComplex.isKInjective_of_injective RJ.cochainComplex 0
+  obtain ⟨φ, _, hφ⟩ := Etale.exists_resolution_comparison
+    (C := Sheaf X'.smallEtaleTopology AddCommGrpCat.{u + 1})
+    ((L.mapHomologicalComplex (.up ℤ)).map RI.ι')
+    ((HomologicalComplex.singleMapHomologicalComplex L (.up ℤ) 0).hom.app G ≫ RJ.ι')
+  let r := SheafPullbackResolution.extSectionsIso X G q ≪≫
+    (RI.isoRightDerivedObjCochainComplex Γ q).symm
+  let r' := SheafPullbackResolution.extSectionsIso X' (L.obj G) q ≪≫
+    (RJ.isoRightDerivedObjCochainComplex Γ' q).symm
+  refine ⟨r, r', ?_⟩
+  have he := extPullback_resolution_sections g' G q φ hφ
+  have hc := classicalPullback_resolution_sections g' G q φ hφ
+  dsimp only at he hc
+  dsimp only [r, r']
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
+  rw [← cancel_mono ((RJ.isoRightDerivedObjCochainComplex Γ' q).hom)]
+  simp only [Category.assoc, Iso.inv_hom_id]
+  rw [← hc]
+  simpa only [RI, Γ, Category.comp_id, Iso.inv_hom_id_assoc] using he
 
 end AlgebraicGeometry

@@ -20,35 +20,35 @@
  ],
  "proof": [
   {
-   "text": "Choose the injective resolutions of G and LG, apply exact inverse image to the first, and lift the resulting augmentation into the second using the K-injective comparison theorem.",
+   "text": "Apply exact inverse image to the chosen resolution augmentation. Reuse AlgebraicGeometry.Etale.exists_resolution_comparison from Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux via a proof-only import all: it constructs a comparison into the chosen K-injective resolution of LG and a homotopy over the augmentation. The existing helper uses the localization bijection into K-injective complexes; no duplicate theorem is declared.",
    "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-cohomology-pullback-degree-zero-iso-factor",
+    "prop-weil-pbc-inverse-image-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Compute Ext in these resolutions. Evaluation at 1 identifies the inverse-image Ext cocycle map with the section-unit map followed by the lift, term by term. The evaluations commute with differentials, so the induced homology maps agree. Construct r and r prime by composing the Ext/resolution equivalence, the homology of evaluation-at-1 equivalence, and the classical right-derived/resolution equivalence.",
+   "text": "Use the explicit Ext-to-resolution-sections comparisons a and canonical classical comparisons c. Set r=a;c inverse on X and r prime analogously on X prime. The Ext computation gives a;H(b)=cohomologyMap;a prime; the classical computation gives c;H(b)=rightDerivedBaseChange;c prime. Cancel c and c prime to obtain the desired equality.",
    "uses": [
-    "lem-weil-pbc-ext-via-injective-resolution",
-    "lem-weil-pbc-sheafH-ext-derived-comparison",
-    "def-weil-pbc-cohomology-pullback"
+    "def-weil-pbc-ext-resolution-sections-iso",
+    "lem-weil-pbc-ext-pullback-resolution-sections",
+    "lem-weil-pbc-classical-pullback-resolution-sections"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-ext-via-injective-resolution",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "def-weil-pbc-ext-resolution-sections-iso",
+  "lem-weil-pbc-classical-pullback-resolution-sections",
+  "lem-weil-pbc-cohomology-pullback-degree-zero-iso-factor",
+  "lem-weil-pbc-ext-pullback-resolution-sections",
   "prop-weil-pbc-inverse-image-exact"
  ],
  "proof_origin": {
-  "by": "M1 stage-3 worker",
+  "by": "X2 stage-3 worker",
   "document": "https://stacks.math.columbia.edu/tag/01F8",
-  "place": "Unit construction of cohomology pullback, equations 01F9 and 01FA.",
-  "note": "Specific interface comparison; not compatibility of arbitrary additive equivalences."
+  "place": "Equations 01F9 and 01FA; explicit chosen injective resolution maps.",
+  "note": "A decomposition into two strictly smaller computations using one common sections-complex map. The lift reuses the existing private resolution comparison via import all; composition and cancellation are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -100,7 +100,7 @@
   "module": "Sheaf.AlgebraicGeometry.SheafHRightDerivedPullback",
   "file": "lean/Sheaf/AlgebraicGeometry/SheafHRightDerivedPullback.lean",
   "declaration": "AlgebraicGeometry.sheafHRightDerivedIso_pullback",
-  "statement": "theorem sheafHRightDerivedIso_pullback {X X' : Scheme.{u}} (g' : X' ⟶ X)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}\n    let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1}\n    let L := upperStar AddCommGrpCat.{u + 1} g'\n    let e : Γ ⋙ 𝟭 _ ⟶ L ⋙ Γ' :=\n      (Functor.rightUnitor Γ).hom ≫ (Functor.leftUnitor Γ).inv ≫\n        Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').unit Γ ≫\n        (Functor.associator _ _ _).hom ≫\n        Functor.whiskerLeft L (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g').hom\n    ∃ (r : (Sheaf.functorH.{u + 1} X.smallEtaleTopology q).obj G ≅\n        (Γ.rightDerived q).obj G)\n      (r' : (Sheaf.functorH.{u + 1} X'.smallEtaleTopology q).obj (L.obj G) ≅\n        (Γ'.rightDerived q).obj (L.obj G)),\n      r.hom ≫ (Functor.rightDerivedBaseChange e q).app G =\n        AddCommGrpCat.ofHom (cohomologyMap g' G q) ≫ r'.hom",
+  "statement": "theorem sheafHRightDerivedIso_pullback {X X' : Scheme.{u}} (g' : X' ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1} let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1} let L := upperStar AddCommGrpCat.{u + 1} g' let e : Γ ⋙ 𝟭 _ ⟶ L ⋙ Γ' := (Functor.rightUnitor Γ).hom ≫ (Functor.leftUnitor Γ).inv ≫ Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').unit Γ ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft L (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g').hom ∃ (r : (Sheaf.functorH.{u + 1} X.smallEtaleTopology q).obj G ≅ (Γ.rightDerived q).obj G) (r' : (Sheaf.functorH.{u + 1} X'.smallEtaleTopology q).obj (L.obj G) ≅ (Γ'.rightDerived q).obj (L.obj G)), r.hom ≫ (Functor.rightDerivedBaseChange e q).app G = AddCommGrpCat.ofHom (cohomologyMap g' G q) ≫ r'.hom",
   "branch": "sheaf-dag",
   "by": "M1",
   "date": "2026-10-12"
@@ -119,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T085303-L-24797",
+  "landing": "20261012T144159-L-2112121",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

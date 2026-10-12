@@ -1,0 +1,136 @@
+{
+ "id": "def-weil-pbc-ext-resolution-sections-iso",
+ "kind": "definition",
+ "title": "Ext to resolution sections comparison",
+ "statement": "For a scheme $X$ [def-pc-scheme], an abelian sheaf $G$ on its small etale site [def-weil-pbc-abelian-etale-sheaves], and $q\\in\\mathbb N$, let $G[0]\\to I_G$ be the chosen injective resolution [def-sp-injective-resolutions]. Define $a_{X,G,q}:H^q(X,G)\\xrightarrow{\\sim}H^q(\\Gamma(X,I_G))$ [def-weil-pbc-etale-cohomology] as the Ext/resolution equivalence from the constant integer sheaf, followed by the homology isomorphism of the chain map which evaluates a morphism from the constant integer sheaf at $1$. In Lean this is SheafPullbackResolution.extSectionsIso, whose data are the explicit composite extAddEquivCohomologyClass.toAddCommGrpIso and classSectionsIso.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06XR",
+  "place": "Derived Categories, lemma-compute-ext-resolutions, part (1), with Hom from the constant integer sheaf evaluated at 1; cohomology.tex equation-functorial and equation-functorial-derived (Tags 01FA and 01F9)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "X2 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "equations 01F9 and 01FA",
+  "note": "Explicit Ext/resolution and evaluation construction. The chain-map proof applies Mathlib Adjunction.homEquiv_naturality_right directly; the duplicate private sectionsEquiv_naturality helper is removed in the landing repair."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext cohomology computed by an injective resolution compatibility with exact functor pullback",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
+   "verdict": "Candidates inspected; no pullback comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedBaseChange|extAddEquivCohomologyClass",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "verdict": "Candidates inspected; no pullback comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "classical right derived base change computed by comparison of injective resolutions",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "verdict": "Candidates inspected; no pullback comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext sheaf cohomology pullback computed on injective resolutions",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|extMk_comp|rightDerivedFunctorPlusBaseChange_fac",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObjCochainComplex",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObjCochainComplex'",
+   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived natural transformation evaluated on injective complexes via unit compatibility",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SheafHRightDerivedPullback",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "Proof: compute the stalk of exchange termwise before closed-fibre comparison; identify the cohomology pullback map.",
+   "via": [
+    "lem-weil-pbc-sheafH-right-derived-pullback",
+    "lem-weil-pbc-abelian-derived-global-ext-pullback",
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafHExtResolutionSectionsIso.lean",
+  "declaration": "AlgebraicGeometry.SheafPullbackResolution.extSectionsIso",
+  "statement": "def extSectionsIso (X : Scheme.{u}) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : (Sheaf.functorH.{u + 1} X.smallEtaleTopology q).obj G ≅ (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex (.up ℤ)).obj (injectiveResolution G).cochainComplex).homology (q : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.SheafPullbackResolution.ZSheaf",
+   "AlgebraicGeometry.SheafPullbackResolution.sectionsEquiv",
+   "AlgebraicGeometry.SheafPullbackResolution.complexSectionsIso",
+   "AlgebraicGeometry.SheafPullbackResolution.classSectionsIso",
+   "AlgebraicGeometry.SheafPullbackResolution.extSectionsIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T144159-L-2112121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T144159-L-2112121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-classical-pullback-resolution-sections",
+ "kind": "statement",
+ "title": "Classical derived pullback on chosen resolution sections",
+ "statement": "Let $g:X^{\\prime}\\to X$ be a morphism of schemes [def-pc-scheme], $G$ an abelian sheaf on $X_{\\mathrm{et}}$ [def-weil-pbc-abelian-etale-sheaves], and $q\\in\\mathbb N$. Let $L=g^{-1}$ [def-weil-pbc-derived-inverse-image], $\\Gamma=\\Gamma(X,-)$, and $\\Gamma^{\\prime}=\\Gamma(X^{\\prime},-)$ [def-weil-pbc-etale-cohomology]. Write $s:G[0]\\to I$ and $t:(LG)[0]\\to J$ for the chosen injective resolutions [def-sp-injective-resolutions]. Let $\\varphi:LI\\to J$ be a chain map with $L(s);\\varphi$ homotopic to the composite of the canonical single-complex isomorphism $L(G[0])\\cong (LG)[0]$ and $t$. Let $\\eta:\\Gamma\\to L\\Gamma^{\\prime}$ be the unit section map followed by $\\Gamma(X,g_*(-))\\cong\\Gamma(X^{\\prime},-)$, and let $b=\\eta(I);\\Gamma^{\\prime}(\\varphi)$. Let $c_{X,G,q}:R^q\\Gamma(G)\\xrightarrow{\\sim}H^q(\\Gamma(I))$ be the canonical InjectiveResolution.isoRightDerivedObjCochainComplex comparison, and similarly $c_{X^{\\prime},LG,q}$. Set $e:\\Gamma\\circ\\mathrm{id}\\to L\\Gamma^{\\prime}$ equal to the right unitor followed by $\\eta$. Then $c_{X,G,q};H^q(b)=\\operatorname{rightDerivedBaseChange}(e,q)_G;c_{X^{\\prime},LG,q}$. This computes just the classical map and contains no Ext comparison or Ext pullback assertion.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "cohomology.tex lemma-functoriality and equation-functorial-derived (01F9), whose resolution representative is the underived map followed by the target injective resolution; sites-cohomology.tex remark-before-Leray (08J6)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "On the bounded below injective complex I, the defining compatibility of rightDerivedFunctorPlusBaseChange with the right-derived functor units identifies its component with the unit section map η(I) followed by the Γ′ derived unit on LI. Naturality of that unit along φ, whose augmentation homotopy represents the identity of LG after localization, replaces LI by the injective resolution J. The unit is invertible on J, so the resulting representative is Γ′(φ) after η(I).",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply degree-q homology and transport through the single-complex right-derived comparisons. Expand their definition using the chosen resolutions I and J. The identifications on their resolution homology are exactly isoRightDerivedObjCochainComplex, and cancellation of the invertible units gives the stated formula. An additive functor preserves homotopies, so the supplied homotopy yields equality on homology.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "X2 stage-3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01F8",
+  "place": "equations 01F9 and 01FA",
+  "note": "strictly smaller resolution-level interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext cohomology computed by an injective resolution compatibility with exact functor pullback",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
+   "verdict": "Candidates inspected; no pullback comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedBaseChange|extAddEquivCohomologyClass",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "verdict": "Candidates inspected; no pullback comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "classical right derived base change computed by comparison of injective resolutions",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "verdict": "Candidates inspected; no pullback comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext sheaf cohomology pullback computed on injective resolutions",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|extMk_comp|rightDerivedFunctorPlusBaseChange_fac",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObjCochainComplex",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObjCochainComplex'",
+   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived natural transformation evaluated on injective complexes via unit compatibility",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SheafHRightDerivedPullback",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "Proof: compute the stalk of exchange termwise before closed-fibre comparison; identify the cohomology pullback map.",
+   "via": [
+    "lem-weil-pbc-sheafH-right-derived-pullback",
+    "lem-weil-pbc-abelian-derived-global-ext-pullback",
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClassicalPullbackResolutionSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClassicalPullbackResolutionSections.lean",
+  "declaration": "AlgebraicGeometry.classicalPullback_resolution_sections",
+  "statement": "theorem classicalPullback_resolution_sections {X X' : Scheme.{u}} (g' : X' ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (φ : ((upperStar AddCommGrpCat.{u + 1} g').mapHomologicalComplex (.up ℤ)).obj (injectiveResolution G).cochainComplex ⟶ (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g').obj G)).cochainComplex) (hφ : Nonempty (Homotopy (((upperStar AddCommGrpCat.{u + 1} g').mapHomologicalComplex (.up ℤ)).map (injectiveResolution G).ι' ≫ φ) ((HomologicalComplex.singleMapHomologicalComplex (upperStar AddCommGrpCat.{u + 1} g') (.up ℤ) 0).hom.app G ≫ (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g').obj G)).ι'))) : let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1} let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1} let L := upperStar AddCommGrpCat.{u + 1} g' let η : Γ ⟶ L ⋙ Γ' := (Functor.leftUnitor Γ).inv ≫ Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').unit Γ ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft L (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g').hom let b := (NatTrans.mapHomologicalComplex η (.up ℤ)).app (injectiveResolution G).cochainComplex ≫ (Γ'.mapHomologicalComplex (.up ℤ)).map φ let e : Γ ⋙ 𝟭 _ ⟶ L ⋙ Γ' := (Functor.rightUnitor Γ).hom ≫ η ((injectiveResolution G).isoRightDerivedObjCochainComplex Γ q).hom ≫ HomologicalComplex.homologyMap b (q : ℤ) = (Functor.rightDerivedBaseChange e q).app G ≫ ((injectiveResolution (L.obj G)).isoRightDerivedObjCochainComplex Γ' q).hom",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T144159-L-2112121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T144159-L-2112121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
