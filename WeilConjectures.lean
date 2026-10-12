@@ -33,6 +33,7 @@ public import WeilConjectures.Algebra.Homology.ExtFlatBaseChange
 public import WeilConjectures.Algebra.Homology.FlatComplex
 public import WeilConjectures.Algebra.Homology.FlatComplexBaseChange
 public import WeilConjectures.Algebra.Homology.HomologyBaseChange
+public import WeilConjectures.Algebra.Homology.HomologyBaseChangeReduced
 public import WeilConjectures.Algebra.Homology.HomologyPiAb
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
