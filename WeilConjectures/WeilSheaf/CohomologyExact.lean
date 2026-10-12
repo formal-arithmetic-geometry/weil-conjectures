@@ -137,7 +137,8 @@ theorem exact_compactlySupportedCohomologyMap {S : ShortComplex (WeilSheaf k₀ 
     (hS : S.ShortExact) (r : ℤ) :
     Function.Exact (WeilComplex.compactlySupportedCohomologyMap (toComplex.map S.f) r)
       (WeilComplex.compactlySupportedCohomologyMap (toComplex.map S.g) r) :=
-  WeilComplex.exact_compactlySupportedCohomologyMap _ r (singleTriangle_distinguished hS)
+  WeilComplex.exact_compactlySupportedCohomologyMap (singleTriangle hS) r
+    (singleTriangle_distinguished hS)
 
 end WeilSheaf
 

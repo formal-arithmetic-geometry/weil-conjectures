@@ -166,9 +166,9 @@ theorem traceFunction_eq_of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G) (n : �
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     F.traceFunction n y = G.traceFunction n y := by
   rw [traceFunction_eq_trace, traceFunction_eq_trace]
-  obtain ⟨e'⟩ := nonempty_equiv_stalkAt_of_iso _ _ _ e
+  obtain ⟨e'⟩ := nonempty_equiv_stalkAt_of_iso _ _
     (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
-      (X ↘ Spec (CommRingCat.of k₀)) (finitePointOfFieldPoint y))
+      (X ↘ Spec (CommRingCat.of k₀)) (finitePointOfFieldPoint y)) e
   exact (e'.trace_frobeniusEnd_pow _).symm
 
 section UpperStar
