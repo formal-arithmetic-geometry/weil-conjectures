@@ -10,20 +10,35 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the direct-sum presheaf over arrows V → U, with scalar action on each summand and restrictions into the composite-arrow summand. Sheafify it to obtain an additive functor G. A map from the localized sheaf to restriction gives a map from each summand, and conversely precomposition with each summand inclusion recovers such a map. These operations are inverse and natural, so module sheafification gives the adjunction. Monomorphisms are sectionwise injections, direct sums preserve injections, and exact module sheafification preserves monomorphisms by lem-weil-pbc-sheafification-exact. The additive left adjoint G is right exact and preserves monomorphisms, hence exact; it preserves kernels and finite biproducts, hence finite limits, and its adjunction gives finite colimits.",
+   "text": "Use SheafOfModules.extensionByZeroPresheaf for the actual direct-sum presheaf, at module universe max u v. Its restriction formula on a generator follows from DirectSum.toAddMonoid_of. Construct mutually inverse maps between presheaf morphisms out of this presheaf and module-sheaf morphisms into localized restriction: sum the components in one direction and compose with DirectSum.lof in the other. Prove naturality and the inverse laws on generators. Compose this Hom equivalence with PresheafOfModules.sheafificationHomEquiv and its naturality to construct the adjunction for the sheafified functor G.",
    "uses": [
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of module sheaves preserves finite limits, so it takes a monomorphism to a monomorphism of section modules, hence an injective linear map by ModuleCat.mono_iff_injective. Apply DirectSum.lmap_injective on every object and PresheafOfModules.mono_of_injective to show the direct-sum presheaf functor preserves monomorphisms. Exact module sheafification (Mathlib PresheafOfModules.sheafification, whose preservation of finite limits is reflected through the underlying abelian sheaf functor) preserves monomorphisms, so the composite G does too.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
     "lem-weil-pbc-sheafification-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "Restriction is additive by its sectionwise formula. Adjunction.left_adjoint_additive makes G additive, while Adjunction.leftAdjoint_preservesColimits gives finite-colimit preservation. Functor.preservesHomology_of_preservesMonos_and_cokernels then gives preservation of homology from the proved preservation of monomorphisms and cokernels. Functor.preservesFiniteLimits_of_preservesHomology gives preservation of finite limits. Package G, these two preservation witnesses, and the constructed adjunction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-extension-by-zero-presheaf",
   "lem-weil-pbc-sheafification-exact"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 08FI"
+  "group": "U3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03DI and 03DJ; explicit Lean Hom equivalence adapted from proved private helpers in Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact"
  },
  "mathlib_searches": [
   {
@@ -118,10 +133,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T184331-L-4015071",
-  "kind": "interface",
+  "landing": "20261012T231642-L-1964295",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
