@@ -26,9 +26,49 @@
   "prop-pur-kinjective-resolutions-exist",
   "lem-pur-rhom-well-defined"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a pair (t.op,s) of quasi-isomorphisms, naturality of eta and two-out-of-three show that I(s) is a quasi-isomorphism. Both I-targets are K-injective. Apply quasiIso_homComplex_map to I(s) and t, then DerivedCategory.isIso_Q_map_iff_quasiIso. This proves derivedInternalHom_inverts and permits Localization.lift.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "def-pc-quasi-iso-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the source-library functorial K-injective resolution I0 and its map eta0 in the Grothendieck abelian module category. Localization.fac computes the lifted bifunctor on pairs of complexes. For an arbitrary replacement I, compare I0 and I through the composite M ↦ I(I0(M)): eta at I0(M) gives I0(M) to I(I0(M)), while I(eta0 at M) gives I(M) to I(I0(M)). Both are quasi-isomorphisms between K-injective targets, the latter by naturality and two-out-of-three. Applying Hom-complex followed by Q makes both natural transformations isomorphisms. Compose the factorization isomorphism with the first and the inverse of the second to prove derivedInternalHom_comparison.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pur-rhom-well-defined",
+    "def-weil-abstract-derived-category",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a K-injective representative Ic, eta0 at Ic is a quasi-isomorphism between K-injective complexes. Applying Hom(Lc,-) and Q gives an isomorphism from Q Hom(Lc,Ic) to Q Hom(Lc,I0(Ic)). Evaluate the canonical comparison at (op Lc,Ic), compose with the inverse of this isomorphism, and transport along the given representative isomorphisms via derivedInternalHom.mapIso. This proves derivedInternalHom_obj_iso without lifting any morphism from the derived category to a chain map.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rhom-well-defined",
+  "def-pc-quasi-iso-modules",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "P2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 08J7 and Lemma 0A95; natural comparison through the composite resolution written by P2"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -102,5 +142,15 @@
   "group": "H1",
   "result": "fix",
   "note": "small site C/J, commutative R, SheafOfModules over sheafCompose forget₂, D(O) via HasDerivedCategory.{w}, D^op×D⥤D via Localization.lift over Q.op.prod Q of (L,M)↦Q Hom^•(L,I(M)) with upstream kInjectiveResolutionFunctor, homComplexFunctor of def-pur-hom-complex, qis-invariance from lem-pur-rhom-well-defined, comparison for any functorial K-inj replacement, representative independence"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c4240",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T095918-L-322426",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four declaration signatures and the unchanged definition against the clone, the three proofs against the node, and import changes against all 24 direct importers; compilation and axiom checks passed."
  }
 }
