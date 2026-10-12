@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
@@ -328,7 +329,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_of_etale {U X : Scheme.{u}} (u : U 
     Nonempty (R(u)^![ModuleCat.{u + 1} Λ] ≅ L((u)^*[ModuleCat.{u + 1} Λ])) := by
   obtain ⟨ι⟩ := nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale Λ u
     (𝟙 X) u (Category.comp_id u)
-  exact ⟨ι.symm ≪≫ Functor.isoWhiskerRight (rightDerivedUpperShriekIdIso Λ X) _ ≪≫
+  exact ⟨ι.symm ≪≫
+    Functor.isoWhiskerRight (rightDerivedUpperShriekIdIso (ModuleCat.{u + 1} Λ) X) _ ≪≫
     Functor.leftUnitor _⟩
 
 /-- For a separated quasi-compact étale `u : U ⟶ X` admitting a compactification, `ω_u ≅ Λ_U`. -/

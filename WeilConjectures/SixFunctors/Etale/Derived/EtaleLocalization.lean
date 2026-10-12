@@ -27,7 +27,6 @@ Two facts about a surjective or arbitrary étale morphism `u : U ⟶ X` and the 
 
 - `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map_of_surjective`
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale`
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekIdIso`
 -/
 
 @[expose] public section
@@ -95,15 +94,6 @@ theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((u)^*[ModuleCat.{u + 1} Λ]) ≅
       R(h)^![ModuleCat.{u + 1} Λ]) :=
   sorry
-
-/-- The exceptional inverse image along the identity is the identity, `R(𝟙 X)^! ≅ 𝟭`: the
-identity is a quasi-compact open immersion, for which `Rj^! ≅ D(j^*)`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`), and `(𝟙 X)^* ≅ 𝟭`. -/
-noncomputable def rightDerivedUpperShriekIdIso (X : Scheme.{u}) :
-    R(𝟙 X)^![ModuleCat.{u + 1} Λ] ≅ 𝟭 _ :=
-  rightDerivedUpperShriekIsoOfIsOpenImmersion Λ (𝟙 X) ≪≫
-    Functor.mapDerivedCategoryNatIso (Etale.upperStarId _ X) ≪≫
-    Functor.mapDerivedCategoryIdIso _
 
 end Etale
 
