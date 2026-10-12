@@ -27,72 +27,85 @@
  ],
  "proof": [
   {
-   "text": "For a finite Galois extension $E/L$ with group $Q$, an etale $\\operatorname{Spec}L$-scheme is an etale $\\operatorname{Spec}K$-scheme by composition [lem-weil-pbc-etale-covering-composition]; coverings in $(\\operatorname{Spec}L)_{\\mathrm{et}}$ are coverings in $(\\operatorname{Spec}K)_{\\mathrm{et}}$. Thus $V\\mapsto F(V)$ is a sheaf on $(\\operatorname{Spec}L)_{\\mathrm{et}}$ with the same sections, and [lem-exc-finite-galois-sections-descent] identifies $F(\\operatorname{Spec}L)$ with the $Q$-invariant sections over $E$.",
+   "text": "Construct the canonical lifts by Spec of L into Ks into Omega. Choose the extension to Omega of each g using the proved Galois automorphism extension theorem. This extension is unique: Omega/Ks is algebraic and Ks is separably closed, hence purely inseparable, and IsPurelyInseparable.injective_comp_algebraMap gives uniqueness. This uniqueness proves that extension preserves identity and multiplication.",
    "uses": [
-    "lem-weil-pbc-etale-covering-composition",
-    "lem-exc-finite-galois-sections-descent"
+    "lem-exc-galois-automorphism-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JM, Lemma lemma-global-sections-point, direct proof after the formal proof"
+    "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM"
    }
   },
   {
-   "text": "Passing through the filtered-colimit definition of the geometric stalk [def-weil-pbc-geometric-stalks], shrink an etale neighbourhood to the connected open containing the image of the lift. With $S=\\operatorname{Spec}K$ and $X=U$, [lem-weil-pbc-etale-fibre-discrete-separable-points] says this open is $\\operatorname{Spec}$ of a finite separable extension embedded in $K^{\\rm sep}$; [lem-weil-pbc-finite-galois-receiving-separable-extensions] enlarges it to a finite Galois $E/L$. The germ map $F(\\operatorname{Spec}E)\\to M$ is injective: the index category is cofiltered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], and every morphism of pointed neighbourhoods $(U',\\bar u')\\to(\\operatorname{Spec}E,\\bar e)$ is etale and surjective (the target has one point and $U'$ is nonempty), hence a covering; restriction is injective by the sheaf equalizer condition [def-weil-pbc-etale-sheaf-of-sets]. For $q\\in Q=\\operatorname{Gal}(E/L)$, lift $q$ to $\\tau\\in H_L$; the germ of $q^*t$ at the chosen lift is the germ of $t$ at the lift moved by $\\tau$, namely $\\tau\\cdot m=m$, so $q^*t=t$ by injectivity. Hence an $H_L$-invariant stalk element is represented by a $Q$-invariant section and finite Galois descent gives a unique section over $L$. Conversely, restriction of a section over $L$ is fixed by $H_L$. This proves the bijection with $M^{H_L}$.",
+   "text": "Changing a lift by Spec of the extended automorphism defines a compatible cocone with values in the stalk. Point.presheafFiberDesc constructs its map. On a germ it is exactly the changed lift, by toPresheafFiber_presheafFiberDesc. Prove identity and multiplication on every germ using joint surjectivity and the contravariant Spec composition formula. These maps define the actual MulAction; no unproved existence theorem is used to choose its data.",
    "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-exc-finite-galois-sections-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JM, Lemma lemma-global-sections-point, direct proof after the formal proof"
-   }
-  },
-  {
-   "text": "For a $K$-embedding $j:L\\to L'$ and an extension $\\sigma\\in G$ of $j$, pullback of sections is restriction along $\\operatorname{Spec}L'\\to\\operatorname{Spec}L$. The naturality in the representing object from [lem-galois-yoneda-hom-bijection] and the action on geometric stalks from [def-weil-pbc-geometric-stalks] show that the germ of the pulled-back section at the chosen lift of $L'$ is $\\sigma\\cdot m$ when the original germ is $m\\in M^{H_L}$. Since $\\sigma(L)=j(L)\\subseteq L'$, we have $\\sigma^{-1}H_{L'}\\sigma\\subseteq H_L$, so for $h\\in H_{L'}$, $h\\sigma m=\\sigma(\\sigma^{-1}h\\sigma)m=\\sigma m$; hence $\\sigma m\\in M^{H_{L'}}$. The formula is compatible with composition.",
-   "uses": [
-    "lem-galois-yoneda-hom-bijection",
     "def-weil-pbc-geometric-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QW, section-galois-action-stalks"
+    "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM"
    }
   },
   {
-   "text": "If $\\sigma'$ is another extension of $j$, then $\\sigma'^{-1}\\sigma$ fixes $L$, hence belongs to $H_L$; therefore $\\sigma'\\cdot m=\\sigma\\cdot m$ for $m\\in M^{H_L}$. Naturality in a morphism of sheaves follows from the naturality in the presheaf of the Yoneda bijection and functoriality of stalks.",
+   "text": "Prove injectivity of each finite-field germ map directly. Point.toPresheafFiber_eq_iff' supplies a pointed refinement. Its underlying map to Spec L is surjective since Spec L has one point and the refinement has the geometric lift. Its singleton sieve is covering. Presieve.isSeparatedFor_singleton applied to F.property makes restriction injective.",
    "uses": [
-    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM"
+   }
+  },
+  {
+   "text": "If g fixes L, its extension fixes the canonical lift through Spec L. The lift-change formula therefore puts every section germ in the H_L-fixed subset. The new invariant-germ representative theorem proves surjectivity onto that subset. Combining this with germ injectivity gives Set.BijOn.",
+   "uses": [
+    "lem-exc-field-invariant-germ-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM"
+   }
+  },
+  {
+   "text": "For j:L to L' extended by g, compute the moved lift as the canonical lift of L' composed with etaleSpecMap j, using the equations for g and its extension to Omega. The colimit relation toPresheafFiber_w_apply gives embedding compatibility. Represent a fixed m by a section using surjectivity; applying compatibility for g and g' gives equal germs over L', fixed by H_L' by the mapsTo clause. This proves subgroup invariance and choice-independence without a separate conjugation lemma.",
+   "uses": [
+    "lem-exc-galois-automorphism-extension",
     "def-weil-pbc-geometric-stalks"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QW, section-galois-action-stalks"
+    "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM"
+   }
+  },
+  {
+   "text": "Section-germ naturality is Point.toPresheafFiber_naturality_apply. For action equivariance, represent any stalk element by a germ, apply the constructed changeGerm formula on both sheaves, and apply that same naturality identity.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM"
    }
   }
  ],
  "proof_deps": [
-  "lem-galois-yoneda-hom-bijection",
-  "lem-weil-pbc-etale-covering-composition",
-  "lem-exc-finite-galois-sections-descent",
+  "lem-exc-galois-automorphism-extension",
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
   "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "def-weil-pbc-etale-sheaf-of-sets"
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-exc-field-invariant-germ-representative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04JM and 03QW"
+  "place": "Tags 03QW and 04JM; read at https://stacks.math.columbia.edu/tag/03QW and https://stacks.math.columbia.edu/tag/04JM; X2 constructs the action by presheafFiberDesc and proves the combination in Lean"
  },
  "mathlib_searches": [
   {
@@ -200,5 +213,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T202258-L-710694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
