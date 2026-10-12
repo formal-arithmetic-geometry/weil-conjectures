@@ -6,7 +6,7 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-!
 # A localization of a regular ring is regular
@@ -26,15 +26,16 @@ namespace RingTheory
 Source: Stacks Project, Algebra, proof of Lemma Tag 0381, Step 3
 (blueprint: lem-weil-pbc-localization-of-regular-ring).
 
-The proof first obtains Noetherianity from the localization theorem, then identifies each
-localization at a prime of `R'` with the corresponding localization of `R` at its inverse-image
-prime.  The inverse-image prime is disjoint from `M`. Regularity of `R` makes its localization at
-that prime regular local. The isomorphism preserves Noetherianity, the unique maximal ideal,
-Krull dimension and a generating set of that ideal, so the localization of `R'` is regular
-local. Together with Noetherianity, this proves `IsRegularRing R'` at every prime.  It uses
-`lem-weil-pbc-localization-noetherian`,
-`lem-weil-pbc-localization-prime-residue-field-iso`, and
-`def-weil-pbc-localization-at-prime`.
+Give `R'` the algebra structure induced by `φ`. The three hypotheses imply
+`IsLocalization M R'`: the fraction presentation gives surjectivity after multiplying by the
+denominator, and applying `hzero` to `x - y` gives the equality criterion. First prove that the
+canonical localization `Localization M` is regular. It is Noetherian by localization, and
+Mathlib's `IsLocalization.localizationLocalizationAtPrimeIsoLocalization` identifies its
+localization at any prime with the localization of `R` at the contracted prime. Transport
+regular localness along this isomorphism. Finally, uniqueness of localization gives
+`Localization M ≃ₐ[R] R'`, and `IsRegularRing.of_ringEquiv` transports regularity to `R'`.
+This uses `lem-weil-pbc-localization-noetherian`,
+`lem-weil-pbc-localization-of-localization`, and the Mathlib ring-equivalence transport lemmas.
 -/
 theorem isRegularRing_of_localization
     (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [IsRegularRing R]
@@ -44,6 +45,23 @@ theorem isRegularRing_of_localization
       IsUnit u ∧ φ s.1 * u = 1 ∧ y = φ r * u)
     (hzero : ∀ r : R, φ r = 0 → ∃ s : M, s.1 * r = 0) :
     IsRegularRing R' := by
-  sorry
+  let : Algebra R R' := φ.toAlgebra
+  have : IsLocalization M R' := by
+    refine (isLocalization_iff M R').mpr ⟨hunit, ?_, ?_⟩
+    · intro y
+      obtain ⟨r, s, u, _, hu, hy⟩ := hsurj y
+      refine ⟨(r, s), ?_⟩
+      change y * φ s.1 = φ r
+      rw [hy, mul_assoc, mul_comm u, hu, mul_one]
+    · intro x y hxy
+      change φ x = φ y at hxy
+      obtain ⟨s, hs⟩ := hzero (x - y) (by simpa using sub_eq_zero.mpr hxy)
+      exact ⟨s, sub_eq_zero.mp (by simpa only [mul_sub] using hs)⟩
+  have : IsRegularRing (Localization M) := by
+    apply isRegularRing_iff.mpr
+    intro p hp
+    exact IsRegularLocalRing.of_ringEquiv
+      (IsLocalization.localizationLocalizationAtPrimeIsoLocalization M p).toRingEquiv
+  exact IsRegularRing.of_ringEquiv (IsLocalization.algEquiv M (Localization M) R').toRingEquiv
 
 end RingTheory
