@@ -67,22 +67,23 @@
    }
   },
   {
-   "text": "(Part (2), `if'.) Let $i:Z\\to X$ be a closed immersion with ideal sheaf $\\mathcal I_Z$ [def-sbc-closed-immersion-ideal-sheaf], $Z\\to S$ proper and $\\mathcal I_Z\\mathcal F=0$. First, $\\operatorname{Supp}(\\mathcal F)\\subseteq i(Z)$: $i(Z)$ is closed ($i$ is a closed immersion [def-weil-closed-immersion]), so $U=X\\setminus i(Z)$ is open with $i^{-1}(U)=\\emptyset$; hence $\\mathcal O_Z(i^{-1}U)=0$ and $\\mathcal I_Z(U)=\\ker(\\mathcal O_X(U)\\to\\mathcal O_Z(\\emptyset))=\\mathcal O_X(U)\\ni1$. For $x\\in U$ and any germ $s_x\\in\\mathcal F_x$ [def-weil-pbc-module-stalk], with $s\\in\\mathcal F(V)$, $x\\in V\\subseteq U$, we get $s=1|_V\\,s=0$ because $1|_V\\in\\mathcal I_Z(V)$ and $\\mathcal I_Z\\mathcal F=0$; so $\\mathcal F_x=0$ and $x\\notin\\operatorname{Supp}(\\mathcal F)$. Next, $Z$ is a closed subscheme structure on the closed subset $i(Z)$ with $Z\\to S$ proper, so $i(Z)$ is proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties](1). Since $\\operatorname{Supp}(\\mathcal F)$ is closed (step 1) and contained in $i(Z)$, it is proper over $S$ [lem-weil-pbc-closed-subset-proper-over-base-properties](2), [def-weil-pbc-closed-subset-proper-over-base](1).",
+   "text": "For the reverse implication take the given finite type quasi-coherent G and isomorphism F ≅ i_*G. Let D be the closed range of i, and C the closed support from step 1. At a point outside D, the pushforward stalk is subsingleton by lem-weil-pbc-closed-pushforward-stalks (1). The composite of the forgetful functor, the abelian presheaf functor and the stalk functor maps the given module isomorphism to an isomorphism of abelian groups. Its hom is injective, so the stalk of F is also subsingleton. This proves C ⊆ D. Properness of i followed by f makes D proper over S by lem-weil-pbc-closed-subset-proper-over-base-properties (1), and its part (2) then makes C proper over S. The supplied pushforward isomorphism thus replaces the sectionwise complementary-open annihilation calculation.",
    "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
     "def-weil-closed-immersion",
     "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "def-pc-module-pullback",
     "def-weil-pbc-closed-subset-proper-over-base"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0CYS, (3)=>(1): Supp(F) is contained in Z, then Lemma 0CYN (lemma-closed-closed-proper-over-base); the inclusion Supp(F) in Z, stated there without proof, is written out here"
+    "place": "Proof of Lemma 0CYS, implication (3) => (1), with Sheaves Lemma 00AE for vanishing of pushforward stalks off a closed image"
    }
   },
   {
-   "text": "(The reformulation $\\mathcal I_Z\\mathcal F=0\\iff\\mathcal F\\cong i_*\\mathcal G$.) Let $i:Z\\to X$ be a closed immersion with ideal sheaf $\\mathcal I_Z$. If $\\mathcal I_Z\\mathcal F=0$, put $\\mathcal G=i^*\\mathcal F$ [def-pc-module-pullback]: it is a quasi-coherent $\\mathcal O_Z$-module of finite type and the unit $\\mathcal F\\to i_*\\mathcal G$ is an isomorphism [lem-weil-pbc-closed-immersion-pushforward-annihilated](2). Conversely, if $\\mathcal F\\cong i_*\\mathcal G$ for a quasi-coherent $\\mathcal O_Z$-module $\\mathcal G$ (of finite type or not), then $\\mathcal I_Z(i_*\\mathcal G)=0$ [lem-weil-pbc-closed-immersion-pushforward-annihilated](1), and this property passes to $\\mathcal F$ along the $\\mathcal O_X$-linear isomorphism ($a\\varphi(s)=\\varphi(as)$). Hence in part (2) the condition $\\mathcal I_Z\\mathcal F=0$ may equivalently be read as $\\mathcal F=i_*\\mathcal G$ with $\\mathcal G$ a finite type quasi-coherent $\\mathcal O_Z$-module, which is condition (3) of Stacks' lemma.",
+   "text": "For the scheme-theoretic support immersion i from step 2, use hker to express its sectionwise annihilation as membership in i.ker.idealOfOpens. Apply part (2) of lem-weil-pbc-closed-immersion-pushforward-annihilated: the explicitly constructed module G = (tensorPullback i).obj F is quasi-coherent and finite type, and the fixed canonical adjunction unit is invertible. Its asIso yields F ≅ i_*G. This supplies the pushforward witness both for the forward direction of the characterization and for the final conjunct. The reverse direction uses the pushforward isomorphism supplied in its hypothesis, as in step 4; it does not use part (1) of the annihilation theorem.",
    "uses": [
     "lem-weil-pbc-closed-immersion-pushforward-annihilated",
     "def-pc-module-pullback"
@@ -100,15 +101,16 @@
   "lem-weil-pbc-scheme-theoretic-support",
   "def-sbc-closed-immersion-ideal-sheaf",
   "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-closed-pushforward-stalks",
   "def-weil-closed-immersion",
   "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0CYS (coherent-lemma-module-support-proper-over-base) and its proof; closedness of the support from Morphisms Lemma 056J (morphisms-lemma-support-finite-type); scheme-theoretic support Morphisms Lemma 05JU / Definition 05JV"
+  "place": "Cohomology of Schemes, Lemma 0CYS (coherent-lemma-module-support-proper-over-base) and its proof; closedness of the support from Morphisms Lemma 056J (morphisms-lemma-support-finite-type); scheme-theoretic support Morphisms Lemma 05JU / Definition 05JV; reverse implication implemented from the given pushforward isomorphism and Sheaves Lemma 00AE rather than repeating the complementary-open annihilation calculation"
  },
  "mathlib_searches": [
   {
@@ -184,5 +186,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-48960",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T135253-L-1677435",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean signature and proof with the node, unchanged repository interface, dependency statements, change record, report, and all eight direct-importer compiles."
  }
 }
