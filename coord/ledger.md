@@ -10151,3 +10151,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/U3/Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComponentEpi (stage 3; reviewer PASS; first push; landing 20261012T234225-L-2127077 (proof); batch 20261012T234214; modules 1; new nodes 0)
 - 23:42 L: merged deliver/V2/Sheaf.RingTheory.ResidueFieldTowerSystem (stage 3; reviewer PASS; first push; landing 20261012T234226-L-2127186 (interface); batch 20261012T234214; modules 3; new nodes 2)
 - 23:42 L: merged deliver/W4/Sheaf.AlgebraicGeometry.EtaleResolutionSectionOpenTransferExt (stage 3; reviewer PASS; first push; landing 20261012T234226-L-2127286 (interface); batch 20261012T234214; modules 4; new nodes 3)
+- 23:42 L: returned deliver/V2/Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneral (reviewer RETURN: (reviewer X-51bab, head 51bab203f) R7: Correct the inaccurate `## No longer needed` report text. Replace `Removed the pr)
