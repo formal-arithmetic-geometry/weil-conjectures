@@ -27,23 +27,22 @@
  ],
  "proof": [
   {
-   "text": "The module units are locally bijective on underlying sets, by the underlying-sheafification comparison and module-sheafification interface. Given a pair of sections, intersect their covering image sieves and choose both lifts on each arrow.",
+   "text": "Use the Mathlib module sheafification units to obtain covering image sieves and covering equalizer sieves. For a pair of sheafified sections choose local lifts on the intersection of their image sieves. Local injectivity and separatedness of H make beta independent of lifts, and beta naturality proves compatibility.",
    "uses": [
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-pc-sites-module-sheafification-interface"
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false
   },
   {
-   "text": "Apply β to the lifts. Different lifts agree locally by local injectivity of the units, hence their β-values agree by separatedness of H. Naturality of β gives compatibility on overlaps. The sheaf property of H glues these local values into a unique value on the original pair. Uniqueness of gluing gives naturality and the unit equation. Equivalently this is factorization through the locally bijective product map into the sheaf H, via the sheafification universal property.",
+   "text": "Glue the compatible family using the sheaf condition of H. The amalgamation equation and lift independence yield its value on arbitrary lifts; separatedness on covering image sieves gives naturality, and the identity arrow gives the unit equation. This uses Presieve.IsSheafFor.amalgamate and valid_glue directly, rather than comparison of underlying set sheafifications.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-pc-sites-sheafification-underlying-sets"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false
   },
   {
-   "text": "Lift x,x′,y on a common cover to verify first-variable additivity; lift x,y,y′ for the second variable. Naturality and the unit equation reduce both identities to additivity of β, and separatedness descends them. Lift a scalar along α as well to verify each scalar identity using the compatible module actions and O-linearity of β. Package these identities as curried R-linear maps.",
+   "text": "On triple intersections of covering image sieves lift the sections needed for either additivity equation. For scalar equations also lift the scalar along alpha. Mathlib Sheafify.map_smul_eq identifies the scalar product of the lifted sections. Bilinearity of beta gives the local equations, separatedness of H descends them, and the four equations define the two curried linear maps.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface"
    ],
@@ -52,13 +51,12 @@
  ],
  "proof_deps": [
   "def-weil-pbc-sheafification",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-sheafification-underlying-sets"
+  "lem-pc-sites-module-sheafification-interface"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 0GMW, sheafification step in the construction of tensor products"
+  "place": "Tag 0GMW, expanded local gluing proof of its sheafification step; G3 second reading"
  },
  "mathlib_searches": [
   {
@@ -125,10 +123,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T135219-L-1656536",
-  "kind": "interface",
+  "landing": "20261012T184300-L-4003562",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
