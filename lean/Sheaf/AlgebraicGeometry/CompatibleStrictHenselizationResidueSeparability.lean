@@ -12,6 +12,17 @@ open CategoryTheory
 namespace AlgebraicGeometry
 open Scheme Etale
 
+/- STATEMENT-DISPUTED: the arbitrary Algebra (IsLocalRing.ResidueField B) k' is not
+required to have algebraMap equal to (Spec.preimage ρB).hom. The conclusion can therefore
+use a different embedding from all the geometric hypotheses. For an algebraically closed
+field F of positive transcendence degree and an algebraically closed extension L, choose
+embeddings b, a : F →+* L such that a(x) is transcendental over b(F). Take S = T = Spec F,
+A = B = F, k = k' = Ω = L, g = ι = ν = identity, and σ = τ = Spec.map a. The strict
+henselizations are F, and ρA = ρB are induced by a after the canonical residue-field
+identification. All geometric hypotheses hold. Use b for the displayed Algebra instance;
+the conclusion falsely asserts that a(x) is separable over b(F). See report.md for the
+construction and a compiled algebraic counterexample. No signature has been changed. -/
+
 /-- The residue-field element induced by a compatible strict-henselization
 point is separable over the second residue field.  This is the residue-field
 comparison step from Stacks Tags 04HX and 095T; it is isolated here so that
