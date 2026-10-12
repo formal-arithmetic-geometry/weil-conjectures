@@ -1,8 +1,8 @@
 module
 
 public import Sheaf.RingTheory.GRing
-import Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange
-import Sheaf.RingTheory.FlatPermanence
+import Mathlib.RingTheory.RingHom.FaithfullyFlat
+import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.RingTheory.GeometricallyRegularDescent
 
 /-!
@@ -23,10 +23,13 @@ Source: Stacks Project, More on Algebra, Lemma Tag 07NT; proof via Algebra Lemma
 (blueprint: lem-weil-pbc-regular-permanence).
 
 Proof: Since `B → C` is flat and its prime-spectrum map is surjective, it is faithfully flat.
-Flat-permanence descends flatness of `A → B` from the regular composite. For each prime of `A`,
-flat base change preserves flatness and spectrum-surjectivity, making the induced map on fibres
-faithfully flat. Geometric regularity and Noetherianity descend along this map, so every fibre
-of `A → B` is geometrically regular and Noetherian, hence `A → B` is regular.
+The already proved `Module.Flat.of_flat_of_faithfullyFlat` descends flatness of `A → B`.
+For each prime `p` of `A`, tensor cancellation identifies `p.Fiber C` with
+`(p.Fiber B) ⊗[B] C`, compatibly with the fibre map `1 ⊗ (B → C)`.
+Mathlib's faithfully flat base-change instance makes this a faithfully flat extension
+of `p.Fiber B`. Geometric regularity, including Noetherianity, descends along this map
+by `Algebra.isGeometricallyRegular_of_faithfullyFlat`. Together with flatness, this
+is exactly regularity of `A → B`.
 -/
 theorem isRegular_of_isRegular_comp
     {A : Type u} {B : Type v} {C : Type w}
@@ -36,6 +39,27 @@ theorem isRegular_of_isRegular_comp
     (hflat : (algebraMap B C).Flat)
     (hsurj : Function.Surjective (PrimeSpectrum.comap (algebraMap B C))) :
     (algebraMap A B).IsRegular := by
-  sorry
+  have hBC : Module.FaithfullyFlat B C :=
+    (faithfullyFlat_algebraMap_iff).mp
+      (FaithfullyFlat.iff_flat_and_comap_surjective.mpr ⟨hflat, hsurj⟩)
+  rw [IsRegular, toAlgebra_algebraMap] at hcomp ⊢
+  refine ⟨?_, ?_⟩
+  · have : Module.Flat A C := flat_algebraMap_iff.mp hcomp.1
+    exact flat_algebraMap_iff.mpr (Module.Flat.of_flat_of_faithfullyFlat (C := C))
+  · intro p hp
+    let f : p.Fiber B →ₐ[p.ResidueField] p.Fiber C :=
+      Algebra.TensorProduct.lTensor p.ResidueField (IsScalarTower.toAlgHom A B C)
+    let : Algebra (p.Fiber B) (p.Fiber C) := f.toRingHom.toAlgebra
+    have : IsScalarTower p.ResidueField (p.Fiber B) (p.Fiber C) :=
+      IsScalarTower.of_algebraMap_eq' f.comp_algebraMap.symm
+    have : Module.FaithfullyFlat (p.Fiber B) (p.Fiber C) := by
+      let : Algebra B (p.Fiber B) := Algebra.TensorProduct.rightAlgebra
+      let e : p.Fiber C ≃ₐ[p.Fiber B] TensorProduct B (p.Fiber B) C :=
+        { __ := (Algebra.IsPushout.cancelBaseChangeAlg A p.ResidueField B (p.Fiber B) C).symm,
+          commutes' x := congr($(Algebra.IsPushout.cancelBaseChange_symm_comp_lTensor
+            A B C p.ResidueField) x) }
+      exact Module.FaithfullyFlat.of_linearEquiv _ _ e.toLinearEquiv
+    exact Algebra.isGeometricallyRegular_of_faithfullyFlat
+      p.ResidueField (p.Fiber B) (p.Fiber C) (hcomp.2 p)
 
 end RingHom

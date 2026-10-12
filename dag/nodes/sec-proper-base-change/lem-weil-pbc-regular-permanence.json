@@ -27,11 +27,11 @@
  ],
  "proof": [
   {
-   "text": "Because $B\\to C$ is flat and surjective on spectra, it is faithfully flat by the public descent criterion [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat]. Since the composite $A\\to C$ is regular, $C$ is flat as an $A$-module by [def-weil-pbc-g-ring]. Apply the flat-permanence lemma [lem-weil-pbc-flat-permanence] with $R=A$, $S=B$, and the $B$-module $M=C$: $M$ is flat over $A$ and faithfully flat over $B$, so $A\\to B$ is flat.",
+   "text": "Since B → C is flat and surjective on prime spectra, Mathlib's faithfully-flat criterion [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] gives Module.FaithfullyFlat B C. Unfold regularity [def-weil-pbc-g-ring] to get flatness of C over A. Apply the already proved source-library algebra special case [lem-weil-pbc-flat-algebra-faithfully-flat-descent], Module.Flat.of_flat_of_faithfullyFlat, to obtain flatness of B over A.",
    "uses": [
     "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
     "def-weil-pbc-g-ring",
-    "lem-weil-pbc-flat-permanence"
+    "lem-weil-pbc-flat-algebra-faithfully-flat-descent"
    ],
    "elementary": false,
    "source": {
@@ -40,11 +40,10 @@
    }
   },
   {
-   "text": "Fix a prime $\\mathfrak p\\subset A$. Base changing the flat map $B\\to C$ along $A\\to\\kappa(\\mathfrak p)$ gives a flat map $B\\otimes_A\\kappa(\\mathfrak p)\\to C\\otimes_A\\kappa(\\mathfrak p)$ by flat base change [lem-weil-pbc-flat-module-base-change]. The original map on spectra is surjective, so its base change is surjective by [lem-weil-pbc-spec-surjective-base-change]. It is therefore faithfully flat by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat]. The target fibre $C\\otimes_A\\kappa(\\mathfrak p)$ is geometrically regular over $\\kappa(\\mathfrak p)$ because $A\\to C$ is regular [def-weil-pbc-g-ring]. Geometric regularity descends through this faithfully flat map by [lem-weil-pbc-geometrically-regular-descent], so the fibre $B\\otimes_A\\kappa(\\mathfrak p)$ is geometrically regular.",
+   "text": "Fix a prime p of A. Let f : p.Fiber B →ₐ[κ(p)] p.Fiber C be Algebra.TensorProduct.lTensor κ(p) (IsScalarTower.toAlgHom A B C); give p.Fiber C the algebra structure induced by f. Mathlib's Algebra.IsPushout.cancelBaseChangeAlg and cancelBaseChange_symm_comp_lTensor give an equivalence p.Fiber C ≃ₐ[p.Fiber B] (p.Fiber B) ⊗[B] C. Tensor cancellation [lem-weil-pbc-tensor-cancel-base-change] thus identifies the fibre map with base change of B → C. Faithful flatness under arbitrary base change [lem-weil-pbc-faithfully-flat-base-change] and transport through this linear equivalence give Module.FaithfullyFlat (p.Fiber B) (p.Fiber C). The composite's regularity supplies geometric regularity of p.Fiber C [def-weil-pbc-g-ring]. Apply Algebra.isGeometricallyRegular_of_faithfullyFlat [lem-weil-pbc-geometrically-regular-descent] to obtain geometric regularity of p.Fiber B.",
    "uses": [
-    "lem-weil-pbc-flat-module-base-change",
-    "lem-weil-pbc-spec-surjective-base-change",
-    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-faithfully-flat-base-change",
     "def-weil-pbc-g-ring",
     "lem-weil-pbc-geometrically-regular-descent"
    ],
@@ -70,15 +69,15 @@
  "proof_deps": [
   "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
   "def-weil-pbc-g-ring",
-  "lem-weil-pbc-flat-permanence",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-spec-surjective-base-change",
+  "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-faithfully-flat-base-change",
   "lem-weil-pbc-geometrically-regular-descent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07NT (lemma-regular-permanence), proof"
+  "place": "Tag 07NT, proof; implemented by E3 with the proved source-library algebra special case of 039V and Mathlib faithfully flat base change plus tensor cancellation"
  },
  "mathlib_searches": [
   {
@@ -163,5 +162,15 @@
   "group": "G1",
   "result": "fix",
   "note": "node unchanged (diff adds lean only); A,B,C comm rings; composite A->C regular = (algebraMap A C).IsRegular with IsScalarTower; B->C flat = RingHom.Flat; Spec C->Spec B surjective = Surjective (PrimeSpectrum.comap); conclusion (algebraMap A B).IsRegular; no added hypotheses; bare f/g.comp form restated to the landed algebraMap+IsScalarTower form"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085233-L-11902",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

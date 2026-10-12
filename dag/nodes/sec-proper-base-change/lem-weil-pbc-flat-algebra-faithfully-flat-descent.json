@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+ "kind": "statement",
+ "title": "Flatness of an algebra descends through a faithfully flat algebra",
+ "statement": "Let $A\\to B\\to C$ be compatible homomorphisms of commutative rings. If $C$ is faithfully flat over $B$ [def-weil-pbc-faithfully-flat-ring-map] and flat over $A$ [def-weil-pbc-flat-ring-map], then $B$ is flat over $A$ [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 039V, special case M = C; source-library proof in WeilConjectures/Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean, Module.Flat.of_flat_of_faithfullyFlat"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "For an injective A-linear map u : N → P, flatness of C over A makes C ⊗[A] u injective. The flatness criterion reduces flatness of B over A to injectivity of B ⊗[A] u.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The natural tensor-cancellation equivalences C ⊗[B] (B ⊗[A] N) ≃ C ⊗[A] N and the corresponding equivalence for P intertwine C ⊗[B] (B ⊗[A] u) with C ⊗[A] u. Hence the former is injective.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-cancel-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Faithful flatness of C over B reflects injectivity after tensoring, so B ⊗[A] u is injective. Since u was arbitrary, B is flat over A. The existing Lean theorem proves exactly this argument without sorry.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-module-tensor-cancel-base-change",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 039V, proof, with M = C; already formalized in Module.Flat.of_flat_of_faithfullyFlat"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If C is faithfully flat over B and flat over A then B is flat over A",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Module.FaithfullyFlat",
+   "results": "Module.Flat.of_flat_tensorProduct and iff_flat_tensorProduct descend flatness along a base-ring extension; no direct matching theorem. The exact result was found by rg in the proved source library.",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg of_flat_of_faithfullyFlat|of_flat_tensorProduct Mathlib/RingTheory/Flat; rg of_flat_of_faithfullyFlat lean/WeilConjectures dag/nodes",
+   "results": "Mathlib has only of_flat_tensorProduct (a different descent statement). The source library has the exact proved algebra case Module.Flat.of_flat_of_faithfullyFlat; no DAG node names it. Existing lem-weil-pbc-flat-permanence states the strictly more general module case with a sorry.",
+   "date": "2026-10-12",
+   "verdict": "exact proved source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularPermanence",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, regular permanence: flatness descent, special case of 039V",
+   "via": [
+    "lem-weil-pbc-regular-permanence",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic",
+  "declaration": "Module.Flat.of_flat_of_faithfullyFlat",
+  "statement": "theorem of_flat_of_faithfullyFlat {A B C : Type*} [CommRing A] [CommRing B]\n    [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C]\n    [Module.FaithfullyFlat B C] [Module.Flat A C] : Module.Flat A B",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085233-L-11902",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085233-L-11902",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
