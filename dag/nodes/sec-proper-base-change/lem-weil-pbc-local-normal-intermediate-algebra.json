@@ -5,9 +5,12 @@
   "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), lines 45482-45539, implication (1)+(2) => N-1"
  },
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), lines 45482-45539, proof of the implication (1)+(2) => N-1 (second half of the proof)"
+  "by": "agent",
+  "based_on": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), lines 45482-45539, implication (1)+(2) => N-1"
+  },
+  "note": "E3, 2026-10-13: the Stacks 0333 local approximation argument, with its final normal-localization step proved directly by two denominator clearings in K. All steps are closed Lean proofs from Mathlib."
  },
  "mathlib_searches": [
   {
@@ -77,39 +80,50 @@
  ],
  "proof": [
   {
-   "text": "Identify the fraction field of A_m with K, using the unique fraction-field isomorphism fixing A_m. The N-1 hypothesis gives finitely many module generators of its integral closure. By commutation of integral closure with localization, write each as x_j/s_j with x_j integral over A and s_j outside m.",
+   "text": "Put Rm = A_m and identify its fraction field with K by the unique localization equivalence. Transfer the finite-module hypothesis IsN1 Rm (FractionRing Rm) along the induced equivalence of integral closures. The localization maps and fraction field structures are the universal maps on fractions (Mathlib Localization.mapToFractionRing, IsFractionRing.isFractionRing_of_isDomain_of_isLocalization and IsLocalization.algEquiv). Choose a finite Rm-module generating family g_i of integralClosure Rm K.",
    "uses": [
     "def-weil-pbc-japanese-domain",
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Clear the integral equation of each g_i over A_m: Mathlib IsIntegral.exists_multiple_integral_of_isLocalization, the numerator direction of integral closure commuting with localization, gives t_i outside m with t_i*g_i integral over A. Set B = A[t_i*g_i]. The generators are integral, so B is contained in integralClosure A K and is finite over A by Algebra.finite_adjoin_of_finite_of_isIntegral.",
+   "uses": [
     "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-finite-of-integral-generators",
     "def-weil-pbc-integral-closure"
    ],
    "elementary": false
   },
   {
-   "text": "Set B = A[x_1,...,x_n]. It is finite over A, and contained in the integral closure. After localization outside m it contains all the module generators, so it equals the integral closure of A_m in K, a normal domain.",
+   "text": "Prove by induction on the Rm-module span of the g_i that every z in integralClosure Rm K has s*z in B for some s outside m. For g_i take t_i, and for zero take 1. For z+w multiply their two denominators. For r*z, write r=b/s in A_m and multiply s by the denominator for z; then this multiple is b times the numerator already in B. These equalities are the localization relation and the subalgebra closure under addition and A-scalar multiplication; all four cases are written in Lean.",
    "uses": [
-    "lem-weil-pbc-finite-of-integral-generators",
-    "lem-weil-pbc-integral-closure-algebraic-extension-normal"
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-integral-closure"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "If q contracts to m, all elements of A outside m avoid q. Thus B_q is a further localization of this normal domain, hence is integrally closed.",
+   "text": "Fix q of B with contraction m. Use the fraction field K of B_q to test integral closedness. If x in K is integral over B_q, clear a q-denominator t so t*x is integral over B. Integrality is transitive since B is integral over A, hence t*x is integral over A and therefore over A_m. The preceding span argument gives s outside m with s*t*x in B. The image of s in B avoids q by the contraction equation, so s*t avoids q. The fraction (s*t*x)/(s*t) in B_q maps to x. Mathlib isIntegrallyClosed_iff then gives IsIntegrallyClosed B_q directly, without constructing the normal ring S^{-1}B or invoking normality of integral closures or preservation of normality under localization.",
    "uses": [
-    "lem-weil-pbc-localization-normal-domain",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-integral-transitive",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-normal-ring"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-japanese-domain",
-  "lem-weil-pbc-integral-closure-commutes-localization",
   "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-integral-closure-commutes-localization",
   "lem-weil-pbc-finite-of-integral-generators",
-  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-  "lem-weil-pbc-localization-normal-domain",
-  "def-weil-pbc-localization-at-prime"
+  "lem-weil-pbc-integral-transitive",
+  "def-weil-pbc-normal-ring"
  ],
  "lean": {
   "existing": false,
@@ -135,10 +149,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T212207-L-1097300",
-  "kind": "interface",
+  "landing": "20261012T225305-L-1803527",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
