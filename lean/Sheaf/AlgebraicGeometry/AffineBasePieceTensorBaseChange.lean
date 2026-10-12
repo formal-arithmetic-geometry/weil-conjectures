@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.AlgebraicGeometry.AffineBasePieceTensorBaseChangeInstance
 
 /-!
 # Base change of a compatible spectrum model of an affine base piece
@@ -75,6 +76,9 @@ theorem affine_base_piece_tensor_base_change
               (Arrow.mk ((((Over.pullback (t ≫ d)).map f₀).left) ∣_
                 ((pullback.fst Y₀.hom (t ≫ d)) ⁻¹ᵁ V)) ≅
                 Arrow.mk (Spec.map (CommRingCat.ofHom
-                  (Algebra.TensorProduct.map (AlgHom.id R A) φ).toRingHom))) := by sorry
+                  (Algebra.TensorProduct.map (AlgHom.id R A) φ).toRingHom))) := by
+      intro φ hB hC L t A aA e he
+      exact affine_base_piece_tensor_base_change_instance d X₀ Y₀ f₀ V W R B C aB aC e0 q hq eB eC
+        φ hB hC L t A aA e he
 
 end AlgebraicGeometry

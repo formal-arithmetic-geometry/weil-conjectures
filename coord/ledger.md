@@ -7324,3 +7324,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:02 L: returned deliver/X3/Sheaf.AlgebraicGeometry.DescentNormAffineShrinking (reviewer RETURN: (the landing tools, head 87b2e01b3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 11:02 L: merged deliver/A2/Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionIsos (stage 3; reviewer PASS; first push; landing 20261012T110253-L-611484 (interface); batch 20261012T110249; modules 4; new nodes 3)
 - 11:02 L: merged deliver/B2/Sheaf.AlgebraicGeometry.AffineEtaleFiniteDiagramDescent (stage 3; reviewer PASS; first push; landing 20261012T110253-L-611628 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:02 L: merged deliver/B3/Sheaf.AlgebraicGeometry.AffineBasePieceTensorBaseChange (stage 3; reviewer PASS; first push; landing 20261012T110254-L-611753 (interface); batch 20261012T110249; modules 2; new nodes 1)
