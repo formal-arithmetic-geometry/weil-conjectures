@@ -15,28 +15,47 @@
  ],
  "proof": [
   {
-   "text": "Construct the quotient map and quotient prime by the universal property and ideal correspondence; finite presentation follows from quotient tensor base change. Identify each preceding-tail quotient and the final tail quotient with the corresponding original quotient via the third isomorphism theorem. Transport the annihilator equalities on representatives, and strict standardness by Lemma 07CC and the tensor quotient equivalence. Transport the final resolution along these algebra equivalences, preserving finite presentation, singular ideals, radical extensions and prime membership. No induction hypothesis is used. The complete construction and transport argument is given in the Lean docstring.",
+   "text": "Construct J, its extensions, the quotient algebra map using Ideal.quotientMapₐ and extension of scalars along the surjective base projection, and the prime as the image of q. Show the first power belongs to q, use quotient ideal correspondence for the prime compatibility, and tensor quotient base change for finite presentation. Membership of each tail element follows from the prime compatibility.",
+   "uses": [
+    "def-weil-pbc-popescu-lift-induction",
+    "lem-weil-pbc-tensor-quotient-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each tail index split the original preceding-power span into the first-power span and the preceding-tail span, by Fin.cases. Under the surjective first projection the inverse image of the tail span is therefore the original preceding span, using comap_map_of_surjective. On double quotient representatives each annihilator equivalence is exactly the original equivalence at the successor index; scalar tower identities give the Λ version. These calculations are proved by the private prefix_span_succ, prefix_comap and tail_annihilator lemmas.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply strict standard base change to each remaining original parameter and the quotient base. Use the quotient-tensor equivalence and transport the presentation along the inverse algebra equivalence. The private strictlyStandard_equiv proof keeps the relations and polynomial section, maps the coefficients of the minors, and uses functoriality of polynomial evaluation and determinants.",
+   "uses": [
+    "lem-weil-pbc-strictly-standard-base-change",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "def-weil-pbc-strictly-standard-element"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Show that the tail-power span is the image of the original total span, since the first generator vanishes. The third isomorphism theorem then constructs commuting ring equivalences on the base, source and target between the nested quotients and the original total quotients. Conjugate the original final map and pull back its prime. Transport the original resolution with the proved private resolution_semi lemma: change the base action on the same intermediate carrier along the inverse base isomorphism, conjugate the factorization maps, and transport finite presentation using RingHom.FinitePresentation composition. The private singular_semi_le and singular_semi_eq lemmas identify singular ideals by identifying principal localizations and composing smooth ring maps with isomorphisms; popescuIdeal_semi_eq then identifies radical extensions. Map the original ideal inclusion and use the prime compatibility for noncontainment. Finally check the map and prime compatibilities on quotient representatives.",
    "uses": [
     "def-weil-pbc-popescu-resolution",
-    "def-weil-pbc-strictly-standard-element",
-    "def-weil-pbc-popescu-lift-induction",
-    "lem-weil-pbc-strictly-standard-base-change",
-    "lem-weil-pbc-tensor-quotient-base-change"
+    "def-weil-pbc-popescu-lift-induction"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-popescu-resolution",
-  "def-weil-pbc-strictly-standard-element",
   "def-weil-pbc-popescu-lift-induction",
+  "lem-weil-pbc-tensor-quotient-base-change",
   "lem-weil-pbc-strictly-standard-base-change",
-  "lem-weil-pbc-tensor-quotient-base-change"
+  "def-weil-pbc-strictly-standard-element",
+  "def-weil-pbc-popescu-resolution"
  ],
  "proof_origin": {
-  "by": "R3 second reader",
+  "by": "W2 stage 3 worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma 07F8 final paragraph; quotient-data part preceding application of induction, expanded from quotient universal properties"
+  "place": "Lemma 07F8 final paragraph; quotient identifications and isomorphism transport expanded and proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -123,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T160142-L-2566502",
-  "kind": "interface",
+  "landing": "20261012T184355-L-4024107",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
