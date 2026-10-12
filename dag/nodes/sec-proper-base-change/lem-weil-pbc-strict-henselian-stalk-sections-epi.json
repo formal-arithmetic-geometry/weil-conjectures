@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+ "kind": "statement",
+ "title": "Stalkwise etale sections preserve epimorphisms at a strictly henselian point",
+ "statement": "Let X be a scheme in universe u+1 [def-pc-scheme], i : X.Opens -> X.Etale a functor [def-sc-zariski-site] [def-weil-pbc-etale-site] whose underlying scheme functor equals X.restrictFunctor. Let x be a point whose local ring O_X,x is strictly henselian [def-weil-pbc-henselian-terminology]. Define E on abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves] by E(G)=colim over Zariski neighbourhoods U of x of G(i(U)), using the canonical restriction maps. Then E preserves epimorphisms. No assumption is made on local rings at other points and no cohomology or injective resolution occurs in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q6, degree zero (local-ring continuity on affine neighbourhoods); Tag 03QO, proof (sections at the closed point); Tag 09AX, proof, local-ring step. Read from the local Stacks source mirror and https://stacks.math.columbia.edu/tag/03QO."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Restrict sheaves first to the etale object i(top). The equality of underlying scheme functors identifies its scheme with X and all i(U) with the corresponding open restrictions. It does not force the structural arrow i(top)->X to be the identity. The faithful forgetful functor ensures that these identifications also respect every restriction arrow.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the neighbourhood diagram to affine opens containing x, which are cofinal under reverse inclusion. They have limit Spec(O_X,x). The degree-zero section-continuity argument of 03Q6 identifies E with sections on this limit after inverse image of the sheaf restricted to i(top), naturally in the sheaf. Use the same coefficient universe throughout; this is the section-level argument, not an application of the incompatible higher-cohomology encoding.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction to the etale object and inverse image preserve epimorphisms. On Spec(O_X,x), a covering of the terminal object has a member meeting the closed point; strict henselianity supplies a section, so the covering sieve contains the identity. Local surjectivity of an epi of abelian sheaves thus becomes actual surjectivity on terminal sections, hence an epi of abelian groups. This is the exactness part of 03QO, with the argument carried out in the coefficient universe of E.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport preservation of epimorphisms through the natural degree-zero section comparison. The conclusion involves only the actual functor E, no choice of a resolution and no positive-degree cohomology.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-cohomology-local-ring-colimit",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q6, degree zero (local-ring continuity on affine neighbourhoods); Tag 03QO, proof (sections at the closed point); Tag 09AX, proof, local-ring step. Read from the local Stacks source mirror and https://stacks.math.columbia.edu/tag/03QO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stalkwise etale sections over a strictly henselian local ring form an exact functor",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections over Zariski neighbourhoods of a strictly henselian point give an exact functor on etale sheaves",
+   "results": "Returned Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.etaleTopology, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.instFormallyEtaleRing; no complete comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg on Mathlib and both library roots: cohomologyPresheaf, stalk, strictlyHenselian, mapHomologyIso; blueprint_refs.py search stalk and object cohomology",
+   "results": "Mathlib has exact geometric stalks but no comparison with this Zariski-neighbourhood section functor. WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian proves terminal-section surjectivity, requiring a degree-zero continuity comparison here; its default coefficient universe and the existing derived-cohomology module differ from the present one. No blueprint duplicate of this section-functor statement was found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselianCohomologyLocallyZero",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Injective-resolution and strictly henselian local-ring argument in Tag 09AX, as used in the ancestor effacement proof; Stalkwise etale sections preserve epimorphisms at a strictly henselian point",
+   "via": [
+    "lem-weil-pbc-strict-henselian-cohomology-locally-zero",
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictHenselianStalkSectionsEpi",
+  "file": "lean/Sheaf/Paper/StrictHenselianStalkSectionsEpi.lean",
+  "declaration": "strictHenselian_stalkSections_preservesEpimorphisms",
+  "statement": "theorem strictHenselian_stalkSections_preservesEpimorphisms\n    {X : Scheme.{u + 1}} (i : X.Opens ⥤ X.Etale)\n    (hi_inclusion : i ⋙ Scheme.Etale.forget X = X.restrictFunctor)\n    (x : X) (hx : IsStrictlyHenselianLocalRing (X.presheaf.stalk x)) :\n    (etaleObjectStalkSections X i x).PreservesEpimorphisms",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-adb8e",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T135312-L-1690456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-adb8e",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T135312-L-1690456",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, report, target signature, and direct importer compiled and matched; no mechanical or interface violations found."
+ }
+}

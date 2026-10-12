@@ -7921,3 +7921,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/R3/Sheaf.AlgebraicGeometry.SerreSectionModuleAction (stage 3; reviewer PASS; first push; landing 20261012T135311-L-1690027 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/R3/Sheaf.AlgebraicGeometry.SerreSectionModuleFractionEquality (stage 3; reviewer PASS; first push; landing 20261012T135311-L-1690157 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/R3/Sheaf.Paper.LisseModuleSheaves (stage 3; reviewer PASS; first push; landing 20261012T135312-L-1690278 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:53 L: merged deliver/R3/Sheaf.Paper.StrictHenselianCohomologyLocallyZero (stage 3; reviewer PASS; first push; landing 20261012T135312-L-1690456 (interface); batch 20261012T135212; modules 3; new nodes 2; change records: coord/changes/strictHenselian_cohomology_locally_zero_commands.md)

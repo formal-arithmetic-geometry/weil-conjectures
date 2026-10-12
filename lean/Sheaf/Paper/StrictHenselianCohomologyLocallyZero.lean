@@ -9,9 +9,11 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLocalRingColimit
-import Sheaf.Paper.StrictlyHenselianEtaleAcyclic
-import Sheaf.CategoryTheory.KInjectiveComputes
+import Sheaf.Paper.StrictHenselianStalkSectionsEpi
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Mathlib.CategoryTheory.Limits.ExactFunctor
 
 /-! # Positive étale cohomology classes are Zariski locally zero
 
@@ -21,8 +23,15 @@ Source: Stacks Project, Étale Cohomology, Tag 09AX, proof, Tags 03Q6 and 03QO.
 
 @[expose] public section
 
-universe u
-open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
+universe u v w
+open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
+
+private theorem forget_preserves_small_filtered_colimits
+    {J : Type v} [SmallCategory J] [IsFiltered J] [UnivLE.{v, w}]
+    (D : J ⥤ AddCommGrpCat.{w}) : PreservesColimit D (forget AddCommGrpCat.{w}) := by
+  have : PreservesFilteredColimitsOfSize.{v, v} (forget AddCommGrpCat.{w}) :=
+    preservesFilteredColimitsOfSize_of_univLE _
+  infer_instance
 
 /-- Every positive-degree class on an open becomes zero near each point when all
 local rings are strictly henselian.
@@ -31,27 +40,24 @@ Source: literature/stacks-project/etale-cohomology.tex, Tag 09AX, proof,
 third and fourth sentences; Tags 03Q6 and 03QO.
 (blueprint: lem-weil-pbc-strict-henselian-cohomology-locally-zero)
 
-Proof: Evaluate an injective resolution on each etale object `i(U)`. The free
-abelian sheaf on the representable represents this evaluation, so its Ext groups
-are the cohomology of that section complex. Comparison of resolutions makes this
-identification natural in `U`, including the restriction maps. Restriction to an
-etale object preserves injectives because its extension-by-zero left adjoint is
-exact. Thus these groups are also cohomology of the restricted sheaf on `U`.
-The equality `hi_inclusion` identifies the underlying schemes and restriction
-arrows with the open subschemes and their inclusions. It need not identify the
-structural arrow of `i(⊤)` with the identity. First restrict `F` to that etale
-object, whose underlying scheme is `X`; all `i(U)` are its open restrictions.
-For a point `x` of `U`, the filtered colimit of these groups over neighbourhoods
-of `x` is cohomology on `Spec (X.presheaf.stalk x)` of this restricted sheaf's
-pullback (03Q6). Use a bounded-below injective resolution, which is K-injective,
-to compare this description with the derived-cohomology vanishing of 03QO.
-This group is zero in positive degree: sections on a strictly henselian local
-scheme are evaluation at its closed geometric point and hence exact (03QO).
-Thus the image of the given class in the colimit is zero. In a filtered colimit
-of abelian groups this means its restriction is zero at a later index. Intersect
-that neighbourhood with `U` to obtain the required smaller neighbourhood. All
-identifications here preserve the canonical restriction maps, not just the groups.
-The empty open has no points, and degree zero is deliberately excluded. -/
+Proof: Compare the filtered colimit of object cohomology over neighbourhoods
+of x with homology of stalkwise sections of an injective resolution, using
+etaleObjectCohomology_stalk_complex. This comparison holds for arbitrary i,
+without any henselian hypothesis. Apply strictHenselian_stalkSections_preservesEpimorphisms
+at x to see that the section functor preserves epimorphisms. It preserves
+finite limits already, since sheaf inclusion, restriction of presheaves and
+filtered colimits of abelian groups do so. It therefore preserves homology.
+The resolution is exact in degree n+1, so
+its image has zero homology there. The comparison makes the colimit a
+subsingleton. The class xi and zero consequently have the same coprojection.
+The forgetful functor preserves filtered colimits at the neighbourhood
+universe; the elementwise equality criterion supplies a later neighbourhood
+V with a transition map from U killing xi. That map is the opposite of the
+inclusion V into U, so V is contained in U and contains x. Remove the universe
+lift from the equality to obtain exactly the required restriction equality.
+The empty open has no x, and q=0 is excluded. No data-valued definition chooses
+an injective resolution or an equivalence: the existential comparison theorem
+is eliminated only within this proof. -/
 theorem strictHenselian_cohomology_locally_zero
     {X : Scheme.{u + 1}}
     (hX : ∀ x : X, IsStrictlyHenselianLocalRing (X.presheaf.stalk x))
@@ -64,4 +70,37 @@ theorem strictHenselian_cohomology_locally_zero
     (ξ : (i.op ⋙ Sheaf.cohomologyPresheaf F q).obj (op U))
     (x : X) (hx : x ∈ U) :
     ∃ (V : X.Opens) (hVU : V ≤ U), x ∈ V ∧
-      (i.op ⋙ Sheaf.cohomologyPresheaf F q).map (homOfLE hVU).op ξ = 0 := by sorry
+      (i.op ⋙ Sheaf.cohomologyPresheaf F q).map (homOfLE hVU).op ξ = 0 := by
+  classical
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hq)
+  obtain ⟨I, ⟨e⟩⟩ := etaleObjectCohomology_stalk_complex i F (n + 1) x
+  have : PreservesFiniteLimits (etaleObjectStalkSections X i x) := inferInstance
+  let E := etaleObjectStalkSections X i x
+  have : E.PreservesEpimorphisms :=
+    strictHenselian_stalkSections_preservesEpimorphisms i hi_inclusion x (hX x)
+  have : E.PreservesHomology :=
+    Functor.preservesHomology_of_preservesEpis_and_kernels E
+  have hz : IsZero (((E.mapHomologicalComplex (.up ℕ)).obj I.cocomplex).homology
+      (n + 1)) :=
+    (E.map_isZero (I.cocomplex_exactAt_succ n).isZero_homology).of_iso
+      ((I.cocomplex.sc (n + 1)).mapHomologyIso E)
+  let D : (OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x)ᵒᵖ ⥤
+      AddCommGrpCat :=
+    ((OpenNhds.inclusion (X := X.toLocallyRingedSpace.toTopCat) x) ⋙ i).op ⋙
+    Sheaf.cohomologyPresheaf F (n + 1) ⋙ AddCommGrpCat.uliftFunctor.{u + 2}
+  let A : OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x := ⟨U, hx⟩
+  have hs := AddCommGrpCat.subsingleton_of_isZero hz
+  have hzero : colimit.ι D (op A) (ULift.up ξ) = colimit.ι D (op A) 0 := by
+    apply e.injective
+    exact hs.allEq _ _
+  have : PreservesColimit D (forget AddCommGrpCat) :=
+    forget_preserves_small_filtered_colimits D
+  obtain ⟨V, f, _, hf⟩ :=
+    Concrete.isColimit_exists_of_rep_eq D (i := op A) (j := op A)
+      (colimit.isColimit D) (ULift.up ξ) 0 hzero
+  refine ⟨V.unop.1, f.unop.le, V.unop.2, ?_⟩
+  rw [map_zero] at hf
+  change ULift.up ((i.op ⋙ Sheaf.cohomologyPresheaf F (n + 1)).map
+    ((OpenNhds.inclusion x).map f.unop).op ξ) = 0 at hf
+  have hh := congrArg ULift.down hf
+  exact hh

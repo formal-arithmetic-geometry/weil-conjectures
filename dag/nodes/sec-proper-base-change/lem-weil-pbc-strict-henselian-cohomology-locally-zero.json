@@ -17,47 +17,47 @@
  ],
  "proof": [
   {
-   "text": "The free abelian sheaf on a representable represents evaluation on that object. Apply Hom from it to an injective resolution of F: Ext is the cohomology of the resulting section complex. Functoriality in the representable identifies restriction maps, so this is an identification of presheaves, not just of their values. Restriction to an etale object preserves injectives by its exact extension-by-zero left adjoint. Restrict first to i(top), whose underlying scheme is X. The underlying functor equality identifies every i(U) with its open restriction. Bounded-below injective complexes are K-injective, so this Ext description agrees with derived etale cohomology.",
+   "text": "Write q=n+1. Apply the object-cohomology stalk-complex comparison, obtaining an injective resolution I of F and an additive equivalence e between the lifted cohomology colimit and H^(n+1)(E(I)).",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-etale-cohomology-local-ring-colimit",
-    "lem-sp-kinjective-computes"
+    "lem-weil-pbc-etale-object-cohomology-stalk-complex"
    ],
    "elementary": false
   },
   {
-   "text": "For x in U, apply the local-ring colimit theorem to the sheaf restricted to i(top). Its canonical pullback legs identify the colimit over Zariski neighbourhoods with cohomology on Spec(O_X,x). Work with section complexes in a sufficiently large universe and transport along their natural Ext comparison; this is required because the existing colimit declaration uses uliftYoneda and coefficients one universe above the scheme.",
+   "text": "Mathlib supplies preservation of finite limits by E. Apply the strictly henselian section-epimorphism theorem at x. Preservation of epimorphisms and kernels implies preservation of homology. Since I is exact in degree n+1, its image under E has zero homology in that degree.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+    "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-sp-injective-resolutions"
    ],
    "elementary": false
   },
   {
-   "text": "O_X,x is strictly henselian, so exactness of sections at the closed geometric point annihilates every positive cohomology group of the pulled-back sheaf. By the K-injective comparison this also annihilates the section-complex cohomology used in the previous step.",
-   "uses": [
-    "lem-weil-pbc-strictly-henselian-etale-acyclic",
-    "lem-sp-kinjective-computes"
-   ],
-   "elementary": false
+   "text": "The target of e is a zero abelian group, hence a subsingleton. Its injectivity shows that the coprojections of the given lifted class and zero at the neighbourhood (U,hx) are equal.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The class xi therefore has zero image in that colimit. The elementwise zero-detection clause of the local-ring colimit theorem gives a smaller neighbourhood on which its restriction is zero. Transport back through the natural object-cohomology comparison. Empty U gives no x and q=0 is excluded.",
+   "text": "The forgetful functor on abelian groups preserves filtered colimits. Shrink this preservation to the neighbourhood universe, without fixing the implicit Ext universe. The concrete filtered-colimit equality criterion gives a common later object V and a map from U killing the class. V is contained in U and contains x; apply ULift.down to get the original restriction equality.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+    "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-etale-cohomology-local-ring-colimit",
-  "lem-sp-kinjective-computes",
-  "lem-weil-pbc-strictly-henselian-etale-acyclic"
+  "lem-weil-pbc-etale-object-cohomology-stalk-complex",
+  "lem-weil-pbc-strict-henselian-stalk-sections-epi",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09AX (lemma-local-rings-strictly-henselian), proof, third and fourth sentences; Tags 03Q6 and 03QO, with the section-complex/Ext comparison in Cohomology on Sites 03F3."
+  "place": "Tag 09AX, proof; Tags 03Q6 and 03QO, implemented by a section-complex comparison and degree-zero local lifting, followed by Mathlib exactness and concrete filtered-colimit lemmas."
  },
  "mathlib_searches": [
   {
@@ -138,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H2",
+  "reviewer": "X-adb8e",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T085247-L-18079",
+  "landing": "20261012T135312-L-1690456",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Packet, delivered files, DAG records, report, target signature, and direct importer compiled and matched; no mechanical or interface violations found."
  }
 }

@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-etale-object-cohomology-stalk-complex",
+ "kind": "statement",
+ "title": "Object cohomology stalks are homology of stalkwise sections",
+ "statement": "Let X be a scheme in universe u+1 [def-pc-scheme], i : X.Opens -> X.Etale any functor between the Zariski open category [def-sc-zariski-site] and the etale site [def-weil-pbc-etale-site], F an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves], x a point and q a natural number. Assume HasSheafify with coefficients AddCommGrpCat in universe u+1 and HasExt in arbitrary universe w [def-weil-pbc-sites-and-cohomology]. Define E on a sheaf G to be colim over open neighbourhoods U of x of G(i(U)), with the actual restriction maps. There exists an injective resolution I of F [def-sp-injective-resolutions] and an additive equivalence from colim of the object cohomology presheaf H^q(i(U),F), lifted into universe max(u+2,w), to H^q(E(I)).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 01FT (cohomology over an object); Tag 03F3, proof (evaluation of an injective resolution); etale-cohomology.tex, Tags 03XA and 09AX. Read from the local Stacks source mirror and https://stacks.math.columbia.edu/tag/03F3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Define E(F) as the filtered colimit of F(i(U)) over open neighbourhoods U of x. This is a real composite of sheaf inclusion, restriction of presheaves, and colim; it does not choose an unknown object.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sc-zariski-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the dense small affine etale subsite: over each affine open of X choose finite-presentation algebras and their morphisms, a set in universe u+1. Its objects cover every etale object. Abelian sheaves on this small site have enough injectives. The sheaf equivalence preserves injectives and exactness, so transport an injective resolution of F back to the original site. Only an existential proposition is asserted; no data-valued definition chooses this resolution.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheafified free abelian representable corepresents evaluation, by the sheafification and free-abelian adjunctions and Yoneda. The Ext-versus-resolution comparison identifies object cohomology with homology of the evaluation complex, naturally in each object and its morphisms. Compare Ext universes through their defining localization equivalences; this does not change the coefficient sheaves.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Filtered colimits of abelian groups preserve homology. Take their colimit in the natural evaluation comparison. Lift the left diagram into universe max(u+2,w); universe lift preserves colimits of these diagrams and homology. Remove the lift on the section-homology group with the additive ULift equivalence. This gives the asserted additive equivalence. No henselianity or condition on i is used, and degree zero is included.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sc-zariski-site",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 01FT (cohomology over an object); Tag 03F3, proof (evaluation of an injective resolution); etale-cohomology.tex, Tags 03XA and 09AX. Read from the local Stacks source mirror and https://stacks.math.columbia.edu/tag/03F3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stalk of the etale object cohomology presheaf is homology of stalkwise sections of an injective resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale object cohomology stalk is homology of stalkwise sections of an injective resolution",
+   "results": "Returned TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, CategoryTheory.InjectiveResolution.hasHomology, TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, Algebra.basicOpen_subset_etaleLocus_iff, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, TopCat.Presheaf.stalkFunctor_map_injective_of_app_injective, CochainComplex.isKInjective_of_injective; no complete comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg on Mathlib and both library roots: cohomologyPresheaf, stalk, strictlyHenselian, mapHomologyIso; blueprint_refs.py search stalk and object cohomology",
+   "results": "Mathlib has InjectiveResolution.extAddEquivCohomologyClass, exact filtered colimits, and mapHomologyIso separately; no natural etale object comparison in these universes. Existing local-ring-colimit bridge uses coefficients one universe higher than this statement. Blueprint search found no duplicate object-cohomology stalk-complex statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselianCohomologyLocallyZero",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Injective-resolution and strictly henselian local-ring argument in Tag 09AX, as used in the ancestor effacement proof; Object cohomology stalks are homology of stalkwise sections",
+   "via": [
+    "lem-weil-pbc-strict-henselian-cohomology-locally-zero",
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleObjectCohomologyStalkComplex",
+  "file": "lean/Sheaf/Paper/EtaleObjectCohomologyStalkComplex.lean",
+  "declaration": "etaleObjectCohomology_stalk_complex",
+  "statement": "theorem etaleObjectCohomology_stalk_complex\n    {X : Scheme.{u + 1}} (i : X.Opens ⥤ X.Etale)\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]\n    [HasExt.{w} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (x : X) :\n    ∃ I : InjectiveResolution F,\n      Nonempty\n        (↑(colimit\n          (((OpenNhds.inclusion (X := X.toLocallyRingedSpace.toTopCat) x) ⋙ i).op ⋙\n            Sheaf.cohomologyPresheaf F q ⋙ AddCommGrpCat.uliftFunctor.{u + 2, w})) ≃+\n          (((etaleObjectStalkSections X i x).mapHomologicalComplex (.up ℕ)).obj\n            I.cocomplex).homology q)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12",
+  "declarations": [
+   "etaleObjectStalkSections",
+   "etaleObjectCohomology_stalk_complex"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-adb8e",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T135312-L-1690456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-adb8e",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T135312-L-1690456",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, report, target signature, and direct importer compiled and matched; no mechanical or interface violations found."
+ }
+}
