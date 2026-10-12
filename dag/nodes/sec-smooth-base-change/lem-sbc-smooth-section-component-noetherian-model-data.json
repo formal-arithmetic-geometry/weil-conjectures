@@ -10,8 +10,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 055Q, first two paragraphs; Tag 01ZM(1)-(3); Tag 0C0C",
-  "note": "Source read online. Lean component proof adapted from the proved source library."
+  "place": "Tags 055Q, 01ZM and 0C0C",
+  "note": "H2: complete local restriction and section descent proof, adapted from the proved SectionNoetherianDescent argument; only eventual smoothness of a pre-existing model is split off."
  },
  "mathlib_match": null,
  "created": {
@@ -47,12 +47,38 @@
  ],
  "proof": [
   {
-   "text": "choose an affine open V containing g(x), and set W = g⁻¹(V). The restriction\nq : W → V is smooth and finitely presented: smoothness gives local finite presentation,\nand quasi-compactness and quasi-separatedness give finite presentation. Its section τ\nis the restriction of σ, so τ≫W.ι = V.ι≫σ. Express the coordinate ring of V as the\nfiltered union of its finite-type ℤ-subalgebras. Tag 01ZM(1) descends q to a finitely\npresented g₀ over one such subalgebra. Tag 01ZM(2) descends τ, and clause (3) permits\nincreasing the index until its section identity holds. Tag 0C0C permits another\nincrease so that g₀ is smooth. The affine base T₀ is noetherian because its ring is\nfinite type over ℤ. Finite presentation of g₀ supplies quasi-compactness and\nquasi-separatedness. The base-change isomorphism supplies a and b and the second\ncartesian square, with τ≫a = b≫σ₀. The first square is cartesian by the construction\nW = g⁻¹(V). Every later increase of the index preserves these identities.",
+   "text": "Choose an affine open V containing g(x), put W=g inverse image V, and q=g restricted to V. Construct the restricted section as the pullback lift of V.ι≫σ and the identity. The two lift identities give τ≫q=id and τ≫W.ι=V.ι≫σ. Smoothness and qcqs of q follow by base change.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let N be Scheme.NoetherianApproximation.ofIsAffine V. Descend q by finite-presentation descent to q₁:Y₁→N_i with comparison a₁. Apply eventual smoothness to obtain a later stage j₁→i where the pullback of q₁ is smooth. Its comparison is the lift of a₁ and q≫π_j₁; cancellation of the stage pullback square proves it is cartesian.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lemma-nagata-finite-presentation-descends",
+    "lem-sbc-noetherian-approximation-smooth-stage"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Restrict N to Over j₁ and descend τ composed with this new comparison as a morphism to the smooth source model over N_j₁. The finite-presentation morphism-factorization theorem gives a stage j and a map t:N_j→Y over N_j₁, with π_j≫t equal to that composite. Lift t and id to Y×N_j. The projection identities prove the section equation and compatibility, with the first equation by the descended map identity and the second by τ≫q=id.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take P₀=Y×N_j, T₀=N_j, g₀=the second projection, σ₀=the constructed section, and a=the comparison pullback lift. IsPullback.of_right proves the model square is cartesian. Base change preserves smoothness and qcqs; T₀ is a noetherian approximation stage. Return these data together with W,V,q,τ and their already proved identities.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lemma-nagata-finite-presentation-descends",
+  "lem-sbc-noetherian-approximation-smooth-stage",
+  "thm-pd-spreading-out"
+ ],
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -125,9 +151,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T135313-L-1691067",
+  "landing": "20261012T160136-L-2564152",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
