@@ -93,7 +93,9 @@ ring map. Restriction of scalars changes neither the functions nor their composi
 the same equalities give this compatibility. -/
 theorem scalarRestriction_id (F : (SheafOfModules.{u} X.ringCatSheaf)) (U : (Opens X)ᵒᵖ) :
     scalarRestriction f F (𝟙 U) = 𝟙 (scalarObj f F U) := by
-  sorry
+  ext x
+  change (F.val.map (𝟙 U)).hom x = x
+  simp
 /-- scalar Restriction comp.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -103,7 +105,9 @@ the same equalities give this compatibility. -/
 theorem scalarRestriction_comp (F : (SheafOfModules.{u} X.ringCatSheaf)) {U V W : (Opens X)ᵒᵖ}
     (i : U ⟶ V) (j : V ⟶ W) :
     scalarRestriction f F (i ≫ j) = scalarRestriction f F i ≫ scalarRestriction f F j := by
-  sorry
+  ext x
+  change (F.val.map (i ≫ j)).hom x = (F.val.map j).hom ((F.val.map i).hom x)
+  simp
 /-- scalar Presheaf.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -139,7 +143,8 @@ theorem scalarHom_linear {F G : SheafOfModules.{u} X.ringCatSheaf}
           (Module.compHom _ (scalarMap f U.unop)).toSMul r x) : scalarObj f G U) =
         @SMul.smul k (G.val.obj U) (Module.compHom _ (scalarMap f U.unop)).toSMul r
         ((a.val.app U).hom.toAddMonoidHom x) := by
-  sorry
+  intro r x
+  exact (a.val.app U).hom.map_smul (scalarMap f U.unop r) x
 /-- scalar Hom App.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -161,7 +166,8 @@ theorem scalarHom_naturality {F G : (SheafOfModules.{u} X.ringCatSheaf)} (a : F 
     {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) :
     scalarRestriction f F i ≫ scalarHomApp f a V =
       scalarHomApp f a U ≫ scalarRestriction f G i := by
-  sorry
+  ext x
+  exact PresheafOfModules.naturality_apply a.val i x
 /-- scalar Hom.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -176,7 +182,8 @@ ring map. Restriction of scalars changes neither the functions nor their composi
 the same equalities give this compatibility. -/
 theorem scalarHom_id (F : SheafOfModules.{u} X.ringCatSheaf) :
     scalarHom f (𝟙 F) = 𝟙 (scalarSheaf f F) := by
-  sorry
+  ext U x
+  rfl
 /-- scalar Hom comp.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
@@ -185,7 +192,8 @@ ring map. Restriction of scalars changes neither the functions nor their composi
 the same equalities give this compatibility. -/
 theorem scalarHom_comp {F G H : (SheafOfModules.{u} X.ringCatSheaf)} (a : F ⟶ G) (b : G ⟶ H) :
     scalarHom f (a ≫ b) = scalarHom f a ≫ scalarHom f b := by
-  sorry
+  ext U x
+  rfl
 /-- scalar Functor.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations). -/
@@ -201,7 +209,10 @@ Proof: Use the corresponding sectionwise module-map law and naturality of the st
 ring map. Restriction of scalars changes neither the functions nor their compositions;
 the same equalities give this compatibility. -/
 @[instance] theorem scalarFunctor_additive : (scalarFunctor f).Additive := by
-  sorry
+  constructor
+  intro X Y f g
+  ext U x
+  rfl
 /-- scalar Functor preserves Finite Limits.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
 (blueprint: def-sc-field-linear-module-cohomology-operations).
