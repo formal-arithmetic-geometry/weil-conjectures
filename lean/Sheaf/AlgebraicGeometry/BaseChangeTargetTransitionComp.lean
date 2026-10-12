@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
+import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 
 /-! # Composition of target transitions
 

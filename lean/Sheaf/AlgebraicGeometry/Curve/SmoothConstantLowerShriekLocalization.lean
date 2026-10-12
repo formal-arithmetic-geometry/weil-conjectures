@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
+import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions
+import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-! # Localization of smooth constant-coefficient curve assertions
 

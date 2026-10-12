@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-! # Continuity of Ext cohomology for large filtered diagrams -/
 

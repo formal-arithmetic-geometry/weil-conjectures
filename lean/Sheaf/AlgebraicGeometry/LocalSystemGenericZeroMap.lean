@@ -6,6 +6,7 @@ Authors: SHEAF group K2
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Generic detection of maps into a local system -/
 

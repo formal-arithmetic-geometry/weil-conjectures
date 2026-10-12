@@ -12,6 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
 import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
+import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Homogeneous bases give finite sums of twists

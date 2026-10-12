@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Functorial maps between direct images of constant modules

@@ -8,6 +8,15 @@ module
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
+import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteStalks
+import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.FreeEtaleModuleShriekComparison
+import Sheaf.Topology.SpectralConstructibleFiniteIntersection
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Finite affine free covers of constructible module sheaves

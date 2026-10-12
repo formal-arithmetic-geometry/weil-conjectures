@@ -6,6 +6,8 @@ Authors: SHEAF group Q2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-! # Prime devissage for constructible module sheaves
 

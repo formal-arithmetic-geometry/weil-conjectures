@@ -9,6 +9,13 @@ public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.ConstructibleSheaf.FinitePushforward
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Normalized generic trivialization data

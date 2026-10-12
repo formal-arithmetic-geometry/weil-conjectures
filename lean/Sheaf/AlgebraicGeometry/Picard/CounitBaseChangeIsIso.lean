@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.AlgebraicGeometry.BaseChangeMapCech
+import Sheaf.AlgebraicGeometry.DegreeZeroCohomology
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChange
 
 /-!
 # Degree-zero base change for an invertible direct image

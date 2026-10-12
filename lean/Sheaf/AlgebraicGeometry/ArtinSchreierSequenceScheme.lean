@@ -6,6 +6,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
+import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Artin–Schreier exactness for schemes of characteristic p

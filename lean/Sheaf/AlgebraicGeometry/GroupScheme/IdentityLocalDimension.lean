@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 
 /-!
 # The dimension of a finite type group scheme at the identity

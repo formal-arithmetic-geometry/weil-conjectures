@@ -8,6 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import WeilConjectures.SixFunctors.Finite.Exact
 
 /-! # Brauer pullback along finite modifications of reduced curves
 

@@ -6,6 +6,11 @@ Authors: SHEAF group Q2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+import Sheaf.AlgebraicGeometry.ConstructibleGenerationFiniteType
+import Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-! # Constructible approximation for the eight assertions
 

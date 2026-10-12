@@ -6,6 +6,10 @@ Authors: SHEAF group T2
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # The curve assertions for finite sums with a common prime annihilator

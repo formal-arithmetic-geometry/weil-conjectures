@@ -9,6 +9,10 @@ public import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.AbelianSheafShortExactStalkwise
+import Sheaf.Topology.ClosedPushforwardAbelianStalks
+import Sheaf.Topology.InverseImageStalk
 
 /-! # Exactness for the slice-site open extension
 

@@ -6,6 +6,8 @@ Authors: SHEAF group W2
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-!
 # The degree-zero unit equation for derived base change

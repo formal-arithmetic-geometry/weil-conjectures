@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantStalk
+import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
 
 /-! # Finite local trivializations of finite étale representable sheaves
 

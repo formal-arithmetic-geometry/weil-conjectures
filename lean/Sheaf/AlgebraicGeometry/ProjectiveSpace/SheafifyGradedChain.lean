@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 
 import Sheaf.AlgebraicGeometry.ProjSheafificationExact
+import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Exactness of an associated graded chain on the projective line

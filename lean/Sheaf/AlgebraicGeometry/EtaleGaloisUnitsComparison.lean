@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 
 /-!
 # Degree-two comparison for the multiplicative sheaf over a field

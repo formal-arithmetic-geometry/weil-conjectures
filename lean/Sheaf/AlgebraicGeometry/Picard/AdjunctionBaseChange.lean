@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.Picard.ArrowIsoTensorPullbackCounit
 import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 
 /-!
 # Compatibility of the Picard adjunction morphism with base change

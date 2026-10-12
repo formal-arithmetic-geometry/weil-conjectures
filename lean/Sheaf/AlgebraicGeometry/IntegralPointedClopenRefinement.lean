@@ -6,6 +6,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.SixFunctors.Finite.Stalk
+import Sheaf.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent
+import Sheaf.AlgebraicGeometry.IntegralAlgebraDirectedColimitFinite
+import Sheaf.Paper.EtaleFiniteDataDescent
+import Sheaf.RingTheory.FiniteOverHenselianLocalProduct
+import Sheaf.RingTheory.HenselianEtaleRetraction
 
 /-!
 # Pointed clopen refinements for integral morphisms

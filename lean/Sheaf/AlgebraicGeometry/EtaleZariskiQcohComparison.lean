@@ -19,6 +19,7 @@ import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
 import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
 
 /-! # Étale and Zariski cohomology of quasi-coherent modules
 

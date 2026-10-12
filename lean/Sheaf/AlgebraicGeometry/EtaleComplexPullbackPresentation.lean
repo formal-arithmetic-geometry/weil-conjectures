@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import Mathlib.CategoryTheory.Filtered.Basic
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Complex presentation of canonical derived pullback cocones
 

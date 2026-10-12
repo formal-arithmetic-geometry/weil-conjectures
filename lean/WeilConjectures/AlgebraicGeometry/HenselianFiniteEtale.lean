@@ -15,6 +15,10 @@ import Sheaf.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful
 import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity
 import Sheaf.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations
 import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
+import Sheaf.AlgebraicGeometry.GaloisCategories
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair

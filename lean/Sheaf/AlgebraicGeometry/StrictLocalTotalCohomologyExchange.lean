@@ -9,6 +9,13 @@ public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-!
 # Exchange on total-space cohomology over strictly henselian bases

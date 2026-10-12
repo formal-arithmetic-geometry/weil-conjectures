@@ -21,6 +21,7 @@ import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 import WeilConjectures.LinearAlgebra.SemilinearFrobenius
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
 
 /-!
 # Artin–Schreier vanishing on a smooth connected curve

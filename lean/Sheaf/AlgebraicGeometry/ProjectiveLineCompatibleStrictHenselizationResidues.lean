@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-! # Compatible strict henselizations and geometric residue maps
 

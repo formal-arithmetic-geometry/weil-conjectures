@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Sheaf
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-! # Eventual vanishing in filtered etale sheaf colimits
 

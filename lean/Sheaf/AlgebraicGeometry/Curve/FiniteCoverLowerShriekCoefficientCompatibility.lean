@@ -7,6 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Conditional coefficient hypotheses after a finite cover
 

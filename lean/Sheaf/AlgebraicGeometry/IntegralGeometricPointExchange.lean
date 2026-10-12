@@ -8,6 +8,13 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
+import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import Sheaf.RingTheory.IntegralOverHenselianPair
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Integral exchange over a geometric point

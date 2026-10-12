@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
+import Sheaf.Paper.InverseImageStalkGerm
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-! # Stalk exchange under compatible strict localization
 

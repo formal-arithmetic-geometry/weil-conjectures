@@ -10,6 +10,15 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.EtaleStandardCoverCech
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Affine quasi-coherent acyclicity with lifted coefficients
