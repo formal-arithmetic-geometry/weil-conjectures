@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-relative-spectrum-structure-algebra",
+ "kind": "statement",
+ "title": "Structure algebra from compatible affine spectral charts",
+ "statement": "Let S be a scheme [def-pc-scheme], A a sheaf of commutative O_S-algebras [def-weil-pbc-comm-algebra-sheaf], and f : X → S a morphism of schemes. For every affine open U of S suppose given k_U : Spec A(U) → X [def-weil-affine-spectrum]. Assume the square with top map Spec(O_S(U) → A(U)) followed by the canonical affine identification Spec O_S(U) → U, left-to-right bottom maps U → S and X → S, and remaining map k_U is cartesian [def-pc-fibre-product]. Assume for affine U ⊆ V that Spec(A(V) → A(U)) followed by k_V equals k_U. Then A is isomorphic as an O_S-algebra sheaf to f_* O_X. No quasi-coherence or affineness assumption on f is necessary.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Proof of Lemma 01LV, first paragraph (compatible isomorphisms of rings on affine opens extend to an algebra-sheaf isomorphism); Lemma 01LX (3). Read at https://stacks.math.columbia.edu/tag/01LV and /tag/01LX."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The cartesian chart square makes k_U a base change of the open inclusion U → S, hence an open immersion with image f^{-1}(U). Thus its sections map γ_U : O_X(f^{-1} U) → Γ(Spec A(U)) is invertible. In Lean, use MorphismProperty.of_isPullback, Scheme.image_preimage_eq_of_isPullback and Scheme.Hom.isIso_app. This is the open-preimage fibre-product identification [lem-weil-pbc-open-preimage-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose γ_U with the canonical spectrum sections isomorphism Γ(Spec A(U)) → A(U) [def-weil-affine-spectrum], obtaining β_U. For U ⊆ V use Scheme.Hom.map_appLE, Scheme.Hom.appLE_comp_appLE and the assumed chart compatibility to identify restriction followed by γ_U with γ_V followed by the sections map of Spec(A(V) → A(U)). Scheme.ΓSpecIso_naturality then proves naturality of β_U.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine opens form a basis. Extend β to b : f_* O_X → A using TopCat.Sheaf.restrictHomEquivHom. Its affine components are β_U by extend_hom_app, and are isomorphisms, so b is an isomorphism by TopCat.Sheaf.isIso_iff_isIso_basis [lem-weil-pbc-sheaf-morphism-on-basis].",
+   "uses": [
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To verify algebra compatibility it suffices to check on the affine basis [lem-weil-pbc-sheaf-morphism-on-basis]. Apply sections to the commuting chart square and use Scheme.Hom.appLE_comp_appLE. On global sections the inverse affine chart is U.topIso.hom followed by the inverse of ΓSpecIso O_S(U) [def-weil-affine-spectrum]. Naturality of ΓSpecIso and cancellation of U.topIso and ΓSpecIso show that f-sharp followed by β_U is precisely the given algebra structure map O_S(U) → A(U). Thus b is an isomorphism in Under S.sheaf; invert it. Empty opens and zero rings require no exception.",
+   "uses": [
+    "lem-weil-pbc-sheaf-morphism-on-basis",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Proof of Lemma 01LV, first paragraph; the reverse sections maps are used in Lean and inverted at the end."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible spectral charts over affine opens identify an algebra sheaf with the direct image of the structure sheaf",
+   "results": "Service unavailable: Internal Server Error; no absence is inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of sheaves of rings is determined by its components on affine opens, and is an isomorphism if the components are isomorphisms",
+   "results": "Scheme.Modules.Hom.isIso_iff_isIso_app and affine spectrum sections lemmas; no packaged algebra-sheaf comparison from compatible spectral charts.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg restrictHomEquivHom|extend_hom_app|hom_ext|isIso_iff_isIso_basis in Mathlib/Topology/Sheaves/SheafCondition/Sites.lean; rg ΓSpecIso_naturality|appLE_comp_appLE in Mathlib/AlgebraicGeometry; blueprint_refs search structure algebra and 01LV",
+   "results": "Basis extension and isomorphism detection exist in Sites.lean; spectrum naturality and composition of sections maps in Scheme.lean. These supply the proof but not this theorem. No blueprint duplicate found.",
+   "date": "2026-10-12",
+   "verdict": "no packaged match; proved by composition of the listed Mathlib lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of the ancestor split, relative spectrum construction: the compatible affine section maps in Step 4 of lem-weil-pbc-relative-spectrum-affine-realization",
+   "via": [
+    "lem-weil-pbc-relative-spectrum-affine-realization",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeSpectrumStructureAlgebra",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeSpectrumStructureAlgebra.lean",
+  "declaration": "AlgebraicGeometry.structure_algebra_iso_of_affine_spectral_charts",
+  "statement": "theorem structure_algebra_iso_of_affine_spectral_charts\n    (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (X : Scheme.{u}) (f : X ⟶ S)\n    (k : ∀ U : S.affineOpens, Spec (A.right.obj.obj (op U.1)) ⟶ X)\n    (hk : ∀ U : S.affineOpens,\n      IsPullback (Spec.map (A.hom.hom.app (op U.1)) ≫ U.2.isoSpec.inv)\n        (k U) U.1.ι f)\n    (hres : ∀ (U V : S.affineOpens) (hUV : U.1 ≤ V.1),\n      Spec.map (A.right.obj.map (homOfLE hUV).op) ≫ k V = k U) :\n    Nonempty (A ≅ 𝒪⁎ f)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T085321-L-32576",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T085321-L-32576",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
