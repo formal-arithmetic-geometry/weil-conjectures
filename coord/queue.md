@@ -64,10 +64,10 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.Topology.NoetherianExtensionByZeroReduction` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullback` | 7 | 1 | proof |
-| `Sheaf.Topology.AbelianOpenExtensionByZero` | 7 | 3 | proof |
+| `Sheaf.Topology.AbelianOpenExtensionByZero` | 7 | 1 | proof |
 | `Sheaf.Topology.AbelianOpenExtensionByZeroStalks` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf` | 8 | 6 | proof |
-| `Sheaf.CategoryTheory.ExtensionByZeroPresheaf` | 9 | 8 | proof |
+| `Sheaf.CategoryTheory.ExtensionByZeroPresheaf` | 9 | 7 | proof |
 
 Waiting, not claimable: 1 modules whose proof uses a node that has no Lean declaration yet.
 
