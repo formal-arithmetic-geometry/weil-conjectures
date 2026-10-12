@@ -98,7 +98,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistGluedIdentification` | 10 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket` | 10 | 8 | proof |
+| `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket` | 10 | 9 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf` | 10 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleComplexCoherentFiltrations` | 11 | 1 | proof |
