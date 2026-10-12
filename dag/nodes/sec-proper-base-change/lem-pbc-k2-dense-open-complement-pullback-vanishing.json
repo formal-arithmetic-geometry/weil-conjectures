@@ -18,49 +18,38 @@
  ],
  "proof": [
   {
-   "text": "X is Noetherian by finite type over k. Density of the open U places all generic points of the finitely many irreducible components in U. If the closed complement contained a strict specialization chain of length one, a generic point of X generalizing its upper point would lie outside the complement and extend the chain to length two, contradicting dim X <= 1. The complement is therefore zero-dimensional. The closed immersion i identifies Z topologically with this complement. Z is finite type over k and Noetherian; its finitely many irreducible components are single closed points. Their residue fields are k.",
+   "text": "Apply dense_open_finite_complement to U. Set V = a inverse-image U. Injectivity of the open immersion a makes the inverse image of the finite complement finite. For each point x outside V, injectivity identifies the inverse image of the singleton {a(x)} with {x}, so continuity gives closedness. The residue-field map of an open immersion is an isomorphism, transporting separable closedness to the residue field at x.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-weil-pbc-closed-point-residue-field-base",
-    "lem-weil-pbc-closed-immersion-finite"
+    "lem-sc-dense-open-finite-complement"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Form the pullback Z_W = W times_X Z. Its projection to Z is an open immersion, so it is an open subset of a finite zero-dimensional space. It is again separated finite type over k and zero-dimensional. The other projection i_W is a closed immersion, hence finite. Finite direct image commutes with pullback by the finite-exchange theorem. Forgetting module structure commutes with direct image sectionwise, and the module-pullback/forget natural isomorphism identifies the displayed object with i_W,* of the underlying abelian sheaf G restricted to Z_W.",
+   "text": "The composite V -> W -> X has range in U, disjoint from the range of i. Thus its module inverse image of i_*G is zero by open-closed vanishing. Apply the coefficient-forgetting functor, which is additive sectionwise and hence preserves zero objects. The natural inverse-image/forget isomorphism and the inverse-image composition isomorphism identify this zero object with the restriction to V of the displayed abelian sheaf on W.",
    "uses": [
-    "lemma-weil-pbc-finite-exchange",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-openclosed-vanishing-lowerstar",
     "lem-weil-pbc-etale-module-pullback-forget-naturality"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Finite direct image does not change cohomology, by the bijective finite edge map. Positive cohomology on the zero-dimensional finite-type scheme Z_W vanishes. Equivalently, reduction is a finite union of spectra of the algebraically closed field k and its etale site has exact global sections. Transport the resulting Subsingleton instance across the comparison bijection in each positive degree. This includes empty Z_W and arbitrary module coefficients, with no torsion or constructibility assumption.",
+   "text": "Write every positive q as n+1 and apply the existing finite-support acyclicity theorem on W to V and the displayed sheaf. Its hypotheses are exactly the finite complement, closedness, separably closed residue fields, and zero restriction obtained above. This treats empty opens and complements and arbitrary commutative coefficient rings without a torsion assumption.",
    "uses": [
-    "lem-weil-pbc-finite-pushforward-cohomology",
-    "lem-weil-pbc-zero-dimensional-cohomology"
+    "lem-sc-finite-support-acyclic"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lemma-weil-pbc-finite-exchange",
-  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sc-dense-open-finite-complement",
+  "lemma-openclosed-vanishing-lowerstar",
   "lem-weil-pbc-etale-module-pullback-forget-naturality",
-  "lem-weil-pbc-finite-pushforward-cohomology",
-  "lem-weil-pbc-zero-dimensional-cohomology"
+  "lem-sc-finite-support-acyclic"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "Q1 stage 3 worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJA (lemma-restrict-to-open), proof, closed-complement vanishing and remark (d)"
+  "place": "Tag 0GJA, closed-complement vanishing and remark (d); finite-support route using the existing proved library theorem"
  },
  "mathlib_searches": [
   {
@@ -137,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T063514-L-3156808",
-  "kind": "interface",
+  "landing": "20261012T085320-L-32462",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
