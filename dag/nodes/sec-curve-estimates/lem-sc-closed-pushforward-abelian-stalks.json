@@ -25,66 +25,38 @@
  ],
  "proof": [
   {
-   "text": "For an open V subset X, the definition gives (i_*F)(V)=F(V intersect Z), with restriction maps induced by restriction in F. Thus a germ of i_*F at x is represented by a section of F on V intersect Z, and a morphism of sheaves induces the corresponding map on these germ representatives.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, setup and definition of the direct image"
-   }
-  },
-  {
-   "text": "If x is not in Z, the open complement X\\Z is a neighborhood of x and its intersection with Z is empty. Hence (i_*F)(X\\Z)=F(empty)=0 for an abelian sheaf. Every germ at x restricts to this neighborhood, so the stalk (i_*F)_x is zero.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, proof: point outside the closed subset"
-   }
-  },
-  {
-   "text": "Fix z in Z. The neighborhoods V intersected with Z, as V ranges over open neighborhoods of z in X, are cofinal among the open neighborhoods of z in the subspace Z: if W is open in Z and contains z, write W=U intersect Z with U open in X and replace U by U union (X\\Z). Conversely V intersect Z is a neighborhood of z. This is the neighborhood comparison used in the proof of Lemma 00AE.",
+   "text": "Outside C, use TopCat.Presheaf.exists_le_germ_eq to represent any stalk element on an open V contained in the open complement of C. The inverse image of V under the inclusion is empty. TopCat.Sheaf.isTerminalOfEqEmpty and IsTerminal.isZero show that its section group is zero; its germ is therefore zero. AddCommGrpCat.isZero_iff_subsingleton turns this into IsZero of the stalk.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, proof: every neighborhood in Z is Z intersected with an open neighborhood in X"
+    "place": "Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward), abelian-sheaf clause"
    }
   },
   {
-   "text": "By this cofinality, the directed colimit defining (i_*F)_z is the same colimit as the one defining F_z. The canonical germ map sends the class of a section s in F(V intersect Z) to its class s_z, so it is well defined and bijective; equality is detected after restriction to a smaller neighborhood, and surjectivity and injectivity follow from the cofinal indexing systems.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
+   "text": "On C, apply Mathlib TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing to Topology.IsInducing.subtypeVal. This is the cofinal-neighborhood comparison of the source, already proved in Mathlib for all presheaves.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, proof: stalk over a point of the closed subset"
+    "place": "Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward), abelian-sheaf clause"
    }
   },
   {
-   "text": "The canonical map is an isomorphism of abelian groups because it is induced by the same section representatives and the germ maps preserve addition. For a morphism phi of abelian sheaves on Z, applying i_*phi to a representative s and then taking its germ agrees with first taking s_z and then applying phi_z; hence the isomorphisms are compatible with morphisms.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
+   "text": "For naturality, apply TopCat.Presheaf.stalk_hom_ext. Precompose each composite with a germ, then rewrite using stalkFunctor_map_germ_assoc, stalkPushforward_germ and stalkFunctor_map_germ. Both sides become the component of the original sheaf morphism on the inverse-image open followed by its germ, definitionally equal.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AE, abelian-sheaf clause and functoriality of germs"
+    "place": "Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward), abelian-sheaf clause"
    }
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-module-stalk"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward), proof"
+  "place": "Sheaves, Lemma 00AE (lemma-stalks-closed-pushforward), proof; realized directly using Mathlib stalk, empty-section and inducing-map APIs by U1, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -163,5 +135,15 @@
   "group": "U1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T070554-L-3478825",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
