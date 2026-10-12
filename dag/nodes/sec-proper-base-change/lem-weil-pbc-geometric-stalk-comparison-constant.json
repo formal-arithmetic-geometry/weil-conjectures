@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Let x be the common image. Using the field-spectrum/residue-field description of the geometric points, embed a separable closure K of kappa(x) into both separably closed fields (Mathlib IsSepClosed.lift). Both geometric points factor through Spec K over X.",
+   "text": "Use SpecToEquivOfField to express both geometric points by their common image x and residue-field embeddings. Choose the actual field SeparableClosure of kappa(x), and use IsSepClosed.lift to extend both embeddings. The algebra-hom commutes equations prove that both geometric points factor through the resulting point r: Spec K -> X.",
    "uses": [
     "lem-weil-pbc-morphism-from-spec-field",
     "def-pd-separable-closure"
@@ -23,7 +23,7 @@
    "elementary": false
   },
   {
-   "text": "Precomposition along either factor induces a bijection on pointed etale lifts. A lift into an etale neighbourhood is a residue-field embedding of a finite separable extension of kappa(x). Its image lies in the embedded separable closure K, and thus it factors uniquely through K. These bijections commute with maps of etale neighbourhoods, giving natural isomorphisms of the point fibre functors. This is the separably closed version of the pointed-neighbourhood argument of Stacks Tag 04FN.",
+   "text": "Precomposition with each field embedding gives a natural transformation of the point fibre functors, with naturality given by associativity. Its components are bijections: Scheme.SpecMap_comp_injective gives injectivity, and the already proved Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed in WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts gives surjectivity, including compatibility of the factored lift over X. This library lemma implements precisely the separable residue-field factorization in the planned step. Use isIso_iff_bijective and NatTrans.isIso_iff_isIso_app to obtain the two fibre-functor isomorphisms.",
    "uses": [
     "lem-weil-pbc-etale-residue-field-extension-separable",
     "lem-weil-pbc-morphism-from-spec-field"
@@ -31,7 +31,7 @@
    "elementary": false
   },
   {
-   "text": "Apply the colimit description of geometric stalks to these fibre-functor isomorphisms and compose one comparison with the inverse of the other. Naturality in module sheaves follows from naturality of the colimit coprojections. Each comparison preserves germs of constant sections. The stalk of the constant presheaf is its value, and sheafification does not change stalks. Consequently the composite is identity on the value of every constant module sheaf under the canonical constant-stalk isomorphisms.",
+   "text": "Compose the inverse of the first fibre-functor isomorphism with the second, and apply Point.isoMk and Point.sheafFiberIso. For normalization prove the stronger elementary compatibility of any morphism of site points with the constant-stalk isomorphisms. Cancel the isomorphism induced by toSheafify, commute the point morphism with this map by naturality, and cancel its inverse in the explicit formula for sheafFiberConstantSheafIso. Apply presheafFiber_hom_ext: on each germ the induced point morphism merely changes the lift, while toPresheafFiber_presheafFiberConstIso_hom is identity on the constant value. Apply this compatibility to the inverse morphism of the constructed point isomorphism.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
     "def-constructible-constant",
@@ -53,7 +53,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 04FN and Tag 09BH (3); extending the indicated pointed-neighbourhood comparison to separably closed fields and module coefficients"
+  "place": "Tag 04FN and Tag 09BH (3); original separable-closure route implemented by P3 using the proved library geometric-lift factorization and the explicit constant-sheaf stalk isomorphism."
  },
  "mathlib_searches": [
   {
@@ -161,10 +161,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T085321-L-32684",
-  "kind": "interface",
+  "landing": "20261012T095919-L-322919",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
