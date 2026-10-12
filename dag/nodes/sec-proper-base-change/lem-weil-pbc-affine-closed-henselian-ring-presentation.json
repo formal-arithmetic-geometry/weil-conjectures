@@ -18,22 +18,35 @@
  },
  "proof": [
   {
-   "text": "Write the affine X as Spec B. A closed immersion into an affine scheme has\nan affine source, and its surjective map on global sections presents Z as Spec(B/L),\nwhere L is the kernel. Apply pair_henselization to B and L. Its category of etale\nB-algebras trivial modulo L is essentially small and filtered. Replace it by a\nsmall skeleton and then by a cofinal directed preorder (Stacks, Tag 0032).\nFor the latter, first multiply the small category by the natural-number order;\nprojection is final. Consider finitely generated subcategories with a unique\nterminal object, ordered by inclusion, and map each to its terminal object.\nA finite collection of generators admits a cocone by filteredness. Increasing\nits natural-number coordinate makes the apex new, so adjoining the cocone\nproduces such a subcategory. Applying this to the union of two finite sets of\ngenerators proves directedness. Every object occurs in a subcategory; every\narrow can be added to the generators, which proves finality. The generators\nform a finite subset of the small category's morphisms, so the resulting index\nhas universe u. Restrict the ring diagram to this preorder. Finality preserves\nits colimit A and its structure map B to A. Put K = LA. Pair henselization gives\nhenselianness and the quotient isomorphism B/L to A/K. Composing its spectrum with\nthe affine presentation of Z gives e. The quotient map followed by the structure\nmap is the original immersion because the corresponding ring maps agree.\nThe stage structure maps v are etale, and their compatibility and the compatibility\nof t with the colimit coprojections are the defining equations of the diagram\nof B-algebras. These arguments allow L = 0 and L = B; in the latter case the\nhenselization is the zero ring and the closed fibre is empty.",
+   "text": "Set B = Γ(X, top) and x = X.isoSpec. Apply Mathlib IsClosedImmersion.Spec_iff to i composed with x.hom, obtaining an ideal L, an isomorphism z : Z ≅ Spec(B/L), and its exact factorization equation. Apply RingTheory.pair_henselization B L to obtain the essentially small filtered full category P of etale B-algebras with unchanged quotient and its colimit cocone c0 in Under B, with henselian vertex and bijective quotient map.",
    "uses": [
-    "lem-weil-pbc-pair-henselization",
-    "lem-weil-pbc-colimit-initial-full-subcategory"
+    "lem-weil-pbc-pair-henselization"
    ],
    "elementary": false
+  },
+  {
+   "text": "Pass to J = SmallModel P.FullSubcategory, using equivSmallModel and IsFiltered.of_equivalence. Mathlib IsFiltered.exists_directed gives a nonempty directed partial order I : Type u and a final F : I → J. Compose with the inverse equivalence E to get a final G : I → P.FullSubcategory. Map c0 through Under.forget B; Mathlib Limits.Preserves.Over supplies preservation of filtered colimits. Whisker this ring cocone c along G and use Functor.Final.isColimitWhiskerEquiv to retain its vertex and colimit property. Take the underlying preorder of I.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put K = L.map c0.pt.hom.hom, t = Spec.map c0.pt.hom composed with x.inv, and q equal to the canonical quotientMap. Convert its bijectivity to the ring isomorphism eq : B/L ≅ c0.pt.right/K, and take e = z followed by Spec of eq inverse. For every b in B, quotientMap_mk gives mk_K(eta(b)) = eq(mk_L(b)). Thus eta followed by mk_K followed by eq.inv equals mk_L. Contravariant functoriality of Spec, the equation from Spec_iff, and cancellation of x prove the required factorization of i. Define v(a) = Spec.map (G.obj a).obj.hom followed by x.inv. Under-morphism commutativity for G.map f and c0.ι.app (G.obj a) proves both compatibility equations after applying Spec.map_comp. Etaleness is the defining property of each object of P followed by an isomorphism. No argument requires L to be proper or nonzero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-pair-henselization",
-  "lem-weil-pbc-colimit-initial-full-subcategory"
+  "lem-weil-pbc-filtered-category-exists-directed-final"
  ],
  "proof_origin": {
+  "by": "worker",
+  "group": "F1",
+  "date": "2026-10-12",
   "document": "https://stacks.math.columbia.edu/tag/0A51",
-  "place": "the affine construction of the henselization and its etale presentation; Tag 0032, construction of a directed final index",
-  "by": "worker"
+  "place": "Affine henselization construction, using Tag 0A02 and Mathlib implementation of Tag 0032; quotient and Under-category coherence proved directly in Lean."
  },
  "mathlib_searches": [
   {
@@ -111,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T053920-L-2629817",
-  "kind": "interface",
+  "landing": "20261012T063508-L-3154434",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
