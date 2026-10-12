@@ -672,6 +672,7 @@ public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Basi
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Cohomology
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Cone
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.FreeResolution
+public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Map
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Refinement
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
