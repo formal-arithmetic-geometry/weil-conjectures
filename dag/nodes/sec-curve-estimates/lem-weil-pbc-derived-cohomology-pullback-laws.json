@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-derived-cohomology-pullback-laws",
+ "kind": "statement",
+ "title": "Identity and composition for canonical derived étale cohomology pullback",
+ "statement": "For schemes $X,Y,Z$ [def-weil-pbc-scheme-conventions], let $f:Y\\to X$ and $g:Z\\to Y$. Let $K,L,N$ be bounded-below complexes of abelian etale sheaves on $X,Y,Z$, respectively [def-weil-pbc-etale-sheaves]. Let $u:f^{-1}K\\to L$ and $v:g^{-1}L\\to N$ be complex morphisms [def-weil-pbc-inverse-image]. Define $P_{f,u}^n:H^n(X,K)\\to H^n(Y,L)$ [def-weil-pbc-etale-cohomology] as $H^n$ of the composite $R\\Gamma_X(K)\\xrightarrow{R\\Gamma_X(\\eta_f)}R\\Gamma_X Rf_* f^{-1}K\\xrightarrow{\\lambda_f}R\\Gamma_Y(f^{-1}K)\\xrightarrow{R\\Gamma_Y(u)}R\\Gamma_Y(L)$, where $\\lambda_f$ is the canonical Leray comparison. Under the inverse-image identity and composition isomorphisms [lem-weil-pbc-inverse-image-composition], $P_{\\mathrm{id}_X,e_K}^n=\\mathrm{id}$ and $P_{f\\circ g,\\,v\\circ g^{-1}(u)\\circ c^{-1}}^n=P_{g,v}^n\\circ P_{f,u}^n$ for every integer $n$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015J (lemma-two-ss-complex-functor), Remark Tag 015K; etale-cohomology.tex Lemma Tag 0EZM (lemma-colimit-variant-complexes)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "For the identity, [lem-weil-pbc-inverse-image-composition] identifies the unit followed by the direct-image identity and inverse-image identity comparisons with the identity. The Leray comparison is the derived global-section image of the direct-image comparison, by uniqueness of right-derived comparisons in [def-weil-pbc-etale-cohomology]. Apply homology to obtain the identity law.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015J (lemma-two-ss-complex-functor), Remark Tag 015K; etale-cohomology.tex Lemma Tag 0EZM (lemma-colimit-variant-complexes)"
+   }
+  },
+  {
+   "text": "For composition, move the second unit past the first complex map by naturality. The composite-unit equation of [lem-weil-pbc-inverse-image-composition] turns these two units into the unit for the composite. The Leray comparisons agree with the derived direct-image composition comparison because they are induced by the same underived global-section comparisons; uniqueness of right-derived comparison transformations [def-weil-pbc-etale-cohomology] gives their equality. Naturality of the complex-to-derived comparison combines u and v into v composed with g-inverse-image of u and the inverse of the inverse-image composition comparison. Apply global sections and homology, both of which preserve composition.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015J (lemma-two-ss-complex-functor), Remark Tag 015K; etale-cohomology.tex Lemma Tag 0EZM (lemma-colimit-variant-complexes)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 015J (lemma-two-ss-complex-functor), Remark Tag 015K; etale-cohomology.tex Lemma Tag 0EZM (lemma-colimit-variant-complexes)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functorial maps on termwise hypercohomology spectral sequences and derived abutment filtrations",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedLowerStarCompRightDerivedGlobalSectionsIso|derivedEtaleCohomology_pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "identity composition of derived cohomology pullback unit Leray inverse image",
+   "results": "8 hits: SheafOfModules.pullback_id_comp, SheafOfModules.pullback_comp_id, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.GrothendieckTopology.overMapPullback_id_comp_assoc, PresheafOfModules.pullback_comp_id, CategoryTheory.GrothendieckTopology.overMapPullback_comp_id_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, PresheafOfModules.pullback_id_comp",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the naturality of the complex-continuity input to the sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'",
+   "via": [
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedEtaleCohomologyPullbackLaws",
+  "file": "lean/Sheaf/Paper/DerivedEtaleCohomologyPullbackLaws.lean",
+  "declaration": "AlgebraicGeometry.Etale.derivedEtaleCohomology_pullback_laws",
+  "statement": "theorem derivedEtaleCohomology_pullback_laws (P : ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X) (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ) (L : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ) (_ : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ L) (n : ℤ), (cohomology AddCommGrpCat.{uNatural + 1} X n).obj (DerivedCategory.Q.obj K) ⟶ (cohomology AddCommGrpCat.{uNatural + 1} Y n).obj (DerivedCategory.Q.obj L)) (hP : ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X) (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ) (L : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ) (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ L) (n : ℤ), P f K L v n = (DerivedCategory.homologyFunctor AddCommGrpCat.{uNatural + 1} n).map ((rightDerivedGlobalSections AddCommGrpCat.{uNatural + 1} X).map ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{uNatural + 1} f).unit.app (DerivedCategory.Q.obj K)) ≫ (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso AddCommGrpCat.{uNatural + 1} f).hom.app ((upperStar AddCommGrpCat.{uNatural + 1} f).mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫ (rightDerivedGlobalSections AddCommGrpCat.{uNatural + 1} Y).map ((upperStar AddCommGrpCat.{uNatural + 1} f).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map v))) : (∀ (X : Scheme.{uNatural}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})), ∀ n : ℤ, P (𝟙 X) K.obj K.obj ((NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{uNatural + 1} X) (ComplexShape.up ℤ) ≪≫ Functor.mapHomologicalComplexIdIso (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) (ComplexShape.up ℤ)).hom.app K.obj) n = 𝟙 _) ∧ (∀ {X Y Z : Scheme.{uNatural}} (f : Y ⟶ X) (g : Z ⟶ Y) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (N : CochainComplex.Plus (Sheaf Z.smallEtaleTopology AddCommGrpCat.{uNatural + 1})) (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (w : ((upperStar AddCommGrpCat.{uNatural + 1} g).mapHomologicalComplex (ComplexShape.up ℤ)).obj L.obj ⟶ N.obj), ∀ n : ℤ, P (g ≫ f) K.obj N.obj ((Functor.mapHomologicalComplexCompIso (upperStarComp AddCommGrpCat.{uNatural + 1} g f).symm (ComplexShape.up ℤ)).inv.app K.obj ≫ ((upperStar AddCommGrpCat.{uNatural + 1} g).mapHomologicalComplex (ComplexShape.up ℤ)).map v ≫ w) n = P f K.obj L.obj v n ≫ P g L.obj N.obj w n)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T070543-L-3474152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T070543-L-3474152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

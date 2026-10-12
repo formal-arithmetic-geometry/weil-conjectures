@@ -9,14 +9,8 @@ public import Sheaf.Paper.EtaleTermwiseHypercohomology
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.KInjectiveResolutions
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.CartanEilenbergFunctorial
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.EtaleHypercohomologyPullbackMaps
+import Sheaf.Paper.DerivedEtaleCohomologyPullbackLaws
 
 /-! # Pullback naturality of the termwise hypercohomology spectral sequence
 
@@ -36,6 +30,23 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+private theorem spectralSequence_ext_first
+    {C : Type*} [Category C] [Abelian C] {κ : Type*}
+    {c : ℤ → ComplexShape κ} {r₀ : ℤ} {E E' : SpectralSequence C c r₀}
+    {f g : E ⟶ E'} (h : f.hom r₀ le_rfl = g.hom r₀ le_rfl) : f = g := by
+  apply SpectralSequence.hom_ext
+  intro r hr
+  induction r, hr using Int.leInduction with
+  | base => exact h
+  | succ r hr ih =>
+    apply HomologicalComplex.hom_ext
+    intro pq
+    apply (cancel_epi (E.iso r (r + 1) pq rfl hr).hom).mp
+    rw [← f.comm r (r + 1) pq rfl hr, ← g.comm r (r + 1) pq rfl hr, ih]
+
+-- Some named existential binders are intentionally unused in their own types.
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
 -- Elaborating the dependent family of presentations and all its compatibility equations.
 /-- Pullback and a map of bounded-below complexes induce compatible maps of first
@@ -178,6 +189,64 @@ theorem exists_etaleHypercohomology_pullback_functorial
                 (ComplexShape.up ℤ)).map v ≫ w) n =
             P f K.obj L.obj v n ≫
               P g L.obj N.obj w n) := by
-  sorry
+  obtain ⟨D, M, R, eInf, hE, hA⟩ := exists_etaleHypercohomology_pullback_maps P hP
+  obtain ⟨hPid, hPcomp⟩ := derivedEtaleCohomology_pullback_laws P hP
+  refine ⟨D, (fun f K L v ↦ M f K L v), (fun X K q n ↦ R X K q n),
+    (fun X K q n r hr hR ↦ eInf X K q n r hr hR), hE, ?_, ?_, ?_⟩
+  · intro X Y f K L v n
+    obtain ⟨t, ht, hc, hs⟩ := hA f K L v n
+    exact ⟨t, (fun q ↦ ht q), hc, hs⟩
+  · intro X K
+    refine ⟨?_, hPid X K⟩
+    apply spectralSequence_ext_first
+    apply HomologicalComplex.hom_ext
+    rintro ⟨q, p⟩
+    by_cases hp : 0 ≤ p
+    · lift p to ℕ using hp
+      apply (cancel_mono ((D X K).firstPageIso p q).hom).mp
+      rw [hE]
+      simp only [SpectralSequence.id_hom, HomologicalComplex.id_f, Category.id_comp]
+      have hid := (cohomologyPullbackFunctorial (𝟙 X) (𝟙 X) (K.obj.X q) p).2.2
+      suffices h : AddCommGrpCat.ofHom
+          ((Sheaf.H.map _ p).comp (cohomologyMap (𝟙 X) (K.obj.X q) p)) = 𝟙 _ by
+        simpa using congrArg (((D X K).firstPageIso p q).hom ≫ ·) h
+      apply AddCommGrpCat.hom_ext
+      apply AddMonoidHom.ext
+      intro x
+      change Sheaf.H.map
+        ((upperStarId AddCommGrpCat.{uNatural + 1} X).hom.app (K.obj.X q) ≫ 𝟙 _) p
+          (cohomologyMap (𝟙 X) (K.obj.X q) p x) = x
+      simpa only [Category.comp_id] using hid x
+    · exact ((D X K).negative q p (by omega)).eq_of_src _ _
+  · intro X Y Z f g K L N v w
+    refine ⟨?_, hPcomp f g K L N v w⟩
+    apply spectralSequence_ext_first
+    apply HomologicalComplex.hom_ext
+    rintro ⟨q, p⟩
+    by_cases hp : 0 ≤ p
+    · lift p to ℕ using hp
+      apply (cancel_mono ((D Z N).firstPageIso p q).hom).mp
+      simp only [SpectralSequence.comp_hom, HomologicalComplex.comp_f, Category.assoc]
+      rw [hE, hE]
+      simp only [← Category.assoc]
+      rw [hE]
+      simp only [Category.assoc]
+      apply congrArg (((D X K).firstPageIso p q).hom ≫ ·)
+      apply AddCommGrpCat.hom_ext
+      apply AddMonoidHom.ext
+      intro x
+      have hcomp := (cohomologyPullbackFunctorial g f (K.obj.X q) p).2.1 x
+      have hnat := cohomologyMap_map g p (v.f q)
+        (cohomologyMap f (K.obj.X q) p x)
+      change Sheaf.H.map
+        (((upperStarComp AddCommGrpCat.{uNatural + 1} g f).hom.app (K.obj.X q) ≫
+          (upperStar AddCommGrpCat.{uNatural + 1} g).map (v.f q)) ≫ w.f q) p
+          (cohomologyMap (g ≫ f) (K.obj.X q) p x) =
+        Sheaf.H.map (w.f q) p (cohomologyMap g (L.obj.X q) p
+          (Sheaf.H.map (v.f q) p (cohomologyMap f (K.obj.X q) p x)))
+      simp only [Sheaf.H.map_comp_apply]
+      rw [← hcomp]
+      exact congrArg (Sheaf.H.map (w.f q) p) hnat.symm
+    · exact ((D X K).negative q p (by omega)).eq_of_src _ _
 
 end AlgebraicGeometry.Etale

@@ -31,73 +31,36 @@
  ],
  "proof": [
   {
-   "text": "Choose Cartan--Eilenberg resolutions $I_K$ and $J_L$. Put $F=f^{-1}$, which is exact by [prop-weil-pbc-inverse-image-exact], and let $\\phi:F(I_K)\\to J_L$ be the lift of $u$ supplied by [lem-weil-pbc-cartesian-eilenberg-functorial]. The filtered complexes whose spectral sequences occur in [thm-sp-if-e1] are $\\Gamma(X,\\operatorname{Tot} I_K)$ and $\\Gamma(Y,\\operatorname{Tot} J_L)$. The termwise unit from [def-weil-pbc-inverse-image] gives $\\Gamma(X,\\operatorname{Tot} I_K)\\to\\Gamma(X,f_*f^{-1}\\operatorname{Tot} I_K)=\\Gamma(Y,f^{-1}\\operatorname{Tot} I_K)$, and then $\\Gamma(Y,\\operatorname{Tot}\\phi)$ gives a map to $\\Gamma(Y,\\operatorname{Tot}J_L)$. Both maps preserve the filtration by $q$ because they are termwise maps of the double complexes. Applying (c) of [thm-sp-spectral-object-yields] and the identifications of [thm-sp-if-e1] produces the required morphism of spectral sequences.",
+   "text": "Obtain presentations D, spectral-sequence maps M, stable-page bounds R and isomorphisms eInf together with the first-page and filtered abutment equations from [lem-weil-pbc-hypercohomology-pullback-maps]. Obtain canonical derived abutment identity and composition laws from [lem-weil-pbc-derived-cohomology-pullback-laws].",
    "uses": [
-    "lem-weil-pbc-cartesian-eilenberg-functorial",
-    "thm-sp-spectral-object-yields",
-    "thm-sp-if-e1",
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-cohomology-pullback"
+    "lem-weil-pbc-hypercohomology-pullback-maps",
+    "lem-weil-pbc-derived-cohomology-pullback-laws"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 015J and Remark Tag 015K; filtered-complex functoriality"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $q$, the $q$-th row of a Cartan--Eilenberg resolution is an injective resolution of $K^q$ by [thm-sp-if-e1], and a bounded-below complex of injectives is K-injective by [prop-weil-pbc-kinjective-resolutions-exist]. Thus the $q$-graded piece of the global-section map in step 1 is $\\Gamma(X,I^q)\\to\\Gamma(Y,f^{-1}I^q)\\to\\Gamma(Y,J^q)$. In the pullback recipe [def-weil-pbc-cohomology-pullback], choose a K-injective resolution $r:f^{-1}I^q\\to J'$ and a map $\\psi:J'\\to J^q$ such that $\\psi\\circ r$ is homotopic to the row map; this is possible because $J^q$ is K-injective by [def-weil-pbc-kinjective-resolutions]. The map $\\psi$ is a lift of $u^q$ in the sense of $H^p(\\phi)$ in [lem-weil-pbc-cohomology-pullback-functorial]. Therefore the $E_1^{p,q}$ map is $H^p(u^q)\\circ f^*$, with the displayed source and target identified by [thm-sp-if-e1] and [def-weil-pbc-etale-cohomology].",
+   "text": "Two spectral-sequence morphisms agreeing on E1 agree on every page: induction using the homology comparison equation of [def-sp-spectral-sequence] and cancellation of its isomorphism. For the identity pair, cancel the firstPageIso and use the ordinary identity law in [lem-weil-pbc-cohomology-pullback-functorial]. For composition, use its ordinary composition law and cohomologyMap_map naturality, plus functoriality of Sheaf.H.map. The complex comparison component is the upperStarComp component. Terms in negative resolution degree are zero by the negative field of [def-weil-pbc-termwise-hypercohomology-presentation], so the page-one equality holds there too. Apply the page induction, and assemble all four clauses using the supplied witnesses.",
    "uses": [
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-cartesian-eilenberg-functorial",
-    "thm-sp-if-e1",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-weil-pbc-kinjective-resolutions",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EZM, proof via the two spectral sequences"
-   }
-  },
-  {
-   "text": "By (b) and (c) of [thm-sp-spectral-object-yields] and [def-weil-pbc-etale-cohomology], the abutment is derived global sections, the map is the canonical map on $H^n$, the finite filtration is preserved, and the identifications $E_\\infty^{p,q}\\cong\\operatorname{gr}^qH^{p+q}$ commute. For identity pairs this construction is the identity by the unit identity in [lem-weil-pbc-cohomology-pullback-functorial]. For successive pairs $(f,u)$ and $(g,v)$, the composite of the maps from step 1 is, by naturality of the unit $\\eta_g$ and clause 2 of [lem-weil-pbc-inverse-image-composition], the map constructed for the composite pair using the lift $\\psi\\circ g^{-1}\\phi\\circ c^{-1}$. The abutment map is independent of the chosen lift because two lifts into the K-injective total complex agree up to homotopy after the quasi-isomorphism $f^{-1}K\\to f^{-1}\\operatorname{Tot}I_K$. Finally, a morphism of spectral sequences is determined from its $E_1$ map by $E_{r+1}=H(E_r)$ in [def-sp-spectral-sequence], so identity and composition on every $E_r$ follow from step 2 and clauses 3--4 of [lem-weil-pbc-cohomology-pullback-functorial] applied to the sheaves $K^q$.",
-   "uses": [
-    "thm-sp-if-e1",
-    "def-weil-pbc-etale-cohomology",
-    "thm-sp-spectral-object-yields",
-    "lem-weil-pbc-inverse-image-composition",
+    "def-sp-spectral-sequence",
     "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-sp-spectral-sequence"
+    "def-weil-pbc-termwise-hypercohomology-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 015J and Remark Tag 015K; filtered-complex functoriality"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cartesian-eilenberg-functorial",
-  "thm-sp-spectral-object-yields",
-  "thm-sp-if-e1",
-  "prop-weil-pbc-inverse-image-exact",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-etale-cohomology",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-hypercohomology-pullback-maps",
+  "lem-weil-pbc-derived-cohomology-pullback-laws",
+  "def-sp-spectral-sequence",
   "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-sp-spectral-sequence"
+  "def-weil-pbc-termwise-hypercohomology-presentation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "M2 stage-3 worker",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 015H, 015I, 015J and Remark 015K; literature/stacks-project/etale-cohomology.tex Tag 0EZM"
+  "place": "Tags 015J and 015K; explicit page-induction reduction of the original plan"
  },
  "mathlib_searches": [
   {
@@ -205,5 +168,15 @@
   "group": "S1",
   "result": "fix",
   "note": "R-hpf: new node def-weil-pbc-termwise-hypercohomology-presentation kept: it packages the witnesses of thm-sp-if-e1 (first/termwise sequence E1^{p,q}=H^p(X,K^q), stupid filtration); the landed hypercohomologyCouple/imageFiltration/TruncationCouple family is the canonical-truncation (second) sequence and does not give it; no Classical.choose. Fixed: def-weil-pbc-cohomology-pullback's existing record (Etale.cohomologyMap, existing: true) had been re-pointed to a new module -> reverted (STATE ETALE COHOMOLOGY PULLBACK); its module DerivedEtaleCohomologyPullback dropped; the derived abutment map is now a binder P tied by hP (RΓ of the unit of mapDerivedUpperStarLowerStarAdjunction, rightDerivedLowerStarCompRightDerivedGlobalSectionsIso, RΓ(v)), the N1 inline form; resolutionEtaleCohomologyIso moved into the new node's module. E1 clause uses Etale.cohomologyMap; identity/composition via upperStarId/upperStarComp. check_dag clean on the new node. Compiled (combined) green.; reverted the delivery's change of existing node(s) def-weil-pbc-cohomology-pullback (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/Paper/DerivedEtaleCohomologyPullback.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T070543-L-3474152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
