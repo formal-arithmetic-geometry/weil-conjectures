@@ -15,38 +15,37 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective embedding of the system using Sites 0EXZ (transpose via adjunction). Take its compatible cokernel Rs, using exact inverse image and cancellation of cokernel epimorphisms for the cocycle. Apply exact filtered colimits to obtain a short exact sequence on the colimit site.",
+   "text": "Apply the exact-ladder theorem in continuation form to obtain the compatible cokernel and middle systems, their canonical diagrams, the natural connecting map delta with surjective components, the zero consecutive composite, the two squares, and target exactness.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-injective-system",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-colimit-sites-exact-ladder"
    ],
    "elementary": false
   },
   {
-   "text": "The stage connecting maps form delta:E→D by naturality. Injective stage acyclicity lifts x to z. Target exactness lifts the comparison image of z back to degree n cohomology of the injective colimit sheaf; no target acyclicity is needed for exactness at this spot. Use degree n class descent for that system to represent this correction at a stage. Move both representatives to a common stage and subtract. The corrected z has zero comparison image, and delta(z) remains the transitioned x because consecutive long exact sequence arrows compose to zero.",
+   "text": "For x killed by its comparison leg, choose z with delta(z)=x. The connecting comparison square shows beta(d(z))=0. Target exactness supplies w with alpha0(w)=d(z). Apply class descent in degree n to the middle system and its canonical cocone to represent w by v at an index s.",
    "uses": [
-    "lem-weil-pbc-derived-functor-injective-vanishing",
-    "lem-weil-pbc-site-cohomology-pullback",
-    "lem-weil-pbc-colimit-sites-class-descent",
+    "lem-weil-pbc-colimit-sites-exact-ladder",
+    "lem-weil-pbc-colimit-sites-class-descent"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a common successor r of t and s in Under(i), with arrows f and g. Set zprime=E(f)(z)-alpha(r)(B(g)(v)). The cocone laws and alpha comparison square give d(zprime)=d(z)-alpha0(w)=0. Naturality of delta gives delta(E(f)(z))=D(f)(x), and the zero composite gives delta(alpha(r)(B(g)(v)))=0. Additivity gives delta(zprime)=D(f)(x). This algebra is proved in the private corrected_lift_of_exact_ladder helper.",
+   "uses": [
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-of-sites-injective-system",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-derived-functor-injective-vanishing",
-  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-colimit-sites-exact-ladder",
   "lem-weil-pbc-colimit-sites-class-descent",
   "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 09YP, using Sites 09YN and the right-exact diagram of Tag 0739"
+  "place": "Tags 09YP and 0739; explicit finite-stage subtraction chase by R2"
  },
  "mathlib_searches": [
   {
@@ -134,9 +133,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T063509-L-3154669",
+  "landing": "20261012T085328-L-35426",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -7,8 +7,9 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Mathlib.CategoryTheory.Filtered.Final
+import Sheaf.CategoryTheory.CohomologyColimitSitesExactLadder
 import Sheaf.CategoryTheory.CohomologyColimitSitesClassDescent
-import Sheaf.Paper.ColimitSitesInjectiveSystem
 
 /-! # Corrected lifts for dimension shifting
 
@@ -22,6 +23,59 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
+private theorem corrected_lift_of_exact_ladder
+    {I : Type u} [SmallCategory I] [IsFiltered I]
+    (D E B : I ⥤ AddCommGrpCat.{u}) (c : Cocone D) (d : Cocone E) (b : Cocone B)
+    (δ : E ⟶ D) (α : B ⟶ E) (α₀ : b.pt ⟶ d.pt) (β : d.pt ⟶ c.pt)
+    (hsurj : ∀ t : I, Function.Surjective (δ.app t).hom)
+    (hzero : ∀ t : I, α.app t ≫ δ.app t = 0)
+    (hδsquare : ∀ t : I, δ.app t ≫ c.ι.app t = d.ι.app t ≫ β)
+    (hαsquare : ∀ t : I, α.app t ≫ d.ι.app t = b.ι.app t ≫ α₀)
+    (hexact : ∀ y : d.pt, β.hom y = 0 → ∃ w : b.pt, α₀.hom w = y)
+    (hdescent : ∀ w : b.pt, ∃ (s : I) (v : B.obj s), (b.ι.app s).hom v = w) :
+    ∀ (t : I) (x : D.obj t), (c.ι.app t).hom x = 0 →
+      ∃ (r : I) (f : t ⟶ r) (z : E.obj r),
+        (d.ι.app r).hom z = 0 ∧ (δ.app r).hom z = (D.map f).hom x := by
+  classical
+  intro t x hx
+  obtain ⟨z, hz⟩ := hsurj t x
+  have hβz : β.hom ((d.ι.app t).hom z) = 0 := by
+    calc
+      β.hom ((d.ι.app t).hom z) = (c.ι.app t).hom ((δ.app t).hom z) :=
+        (ConcreteCategory.congr_hom (hδsquare t) z).symm
+      _ = 0 := by rw [hz, hx]
+  obtain ⟨w, hw⟩ := hexact _ hβz
+  obtain ⟨s, v, hv⟩ := hdescent w
+  let r := IsFiltered.max t s
+  let f : t ⟶ r := IsFiltered.leftToMax t s
+  let g : s ⟶ r := IsFiltered.rightToMax t s
+  let v' := (B.map g).hom v
+  refine ⟨r, f, (E.map f).hom z - (α.app r).hom v', ?_, ?_⟩
+  · rw [map_sub]
+    have hz' : (d.ι.app r).hom ((E.map f).hom z) = (d.ι.app t).hom z :=
+      ConcreteCategory.congr_hom (d.w f) z
+    have hv' : (b.ι.app r).hom v' = w := by
+      calc
+        (b.ι.app r).hom v' = (b.ι.app s).hom v :=
+          ConcreteCategory.congr_hom (b.w g) v
+        _ = w := hv
+    have hαv : (d.ι.app r).hom ((α.app r).hom v') =
+        α₀.hom ((b.ι.app r).hom v') :=
+      ConcreteCategory.congr_hom (hαsquare r) v'
+    rw [hz', hαv, hv', hw, sub_self]
+  · rw [map_sub]
+    have hδz : (δ.app r).hom ((E.map f).hom z) = (D.map f).hom x := by
+      calc
+        (δ.app r).hom ((E.map f).hom z) = (D.map f).hom ((δ.app t).hom z) :=
+          ConcreteCategory.congr_hom (δ.naturality f) z
+        _ = (D.map f).hom x := by rw [hz]
+    have hδv : (δ.app r).hom ((α.app r).hom v') = 0 := by
+      simpa using ConcreteCategory.congr_hom (hzero r) v'
+    rw [hδz, hδv, sub_zero]
+
+
+-- Preserve the named existential proof binders of the original statement.
+set_option linter.unusedVariables false in
 /-- A zero class in positive degree has a corrected, target-zero lift in the
 preceding cohomological degree of a compatible auxiliary sheaf system.
 
@@ -268,6 +322,21 @@ theorem cohomology_colimit_sites_corrected_lift (n : ℕ)
             (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))) (δ : E ⟶ D),
       ∀ (t : Under i) (x : D.obj t), (c.ι.app t).hom x = 0 →
         ∃ (t' : Under i) (b : t ⟶ t') (z : E.obj t'),
-          (d.ι.app t').hom z = 0 ∧ (δ.app t').hom z = (D.map b).hom x := by sorry
+          (d.ι.app t').hom z = 0 ∧ (δ.app t').hom z = (D.map b).hom x := by
+  classical
+  refine cohomology_colimit_sites_exact_ladder n
+    J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback
+    pullbackMap hpullbackMap canonicalMap hcanonicalMap e he eV heV
+    Fs φ hφ S hSobj hSmap K hK i X_i D hDobj hDmap c hcpt hclegs _ ?_
+  intro Rs ρ hρ T hTobj hTmap L hL E hEobj hEmap d hdpt hdlegs δ
+    Gs ψ hψ U hUobj hUmap M hM B hBobj hBmap b hbpt hblegs α α₀ β hrow
+  obtain ⟨hsurj, hzero, hδsquare, hαsquare, hexact⟩ := hrow
+  refine ⟨Rs, ρ, hρ, T, hTobj, hTmap, L, hL, E, hEobj, hEmap, d, hdpt, hdlegs, δ, ?_⟩
+  exact corrected_lift_of_exact_ladder D E B c d b δ α α₀ β
+    hsurj hzero hδsquare hαsquare hexact
+    (cohomology_colimit_sites_class_descent
+      J F P hfinite hcover hpullback V hobjects harrows Q hQ hVcover hVpullback
+      pullbackMap hpullbackMap canonicalMap hcanonicalMap e he eV heV
+      Gs ψ hψ U hUobj hUmap M hM i X_i n B hBobj hBmap b hbpt hblegs)
 
 end CategoryTheory

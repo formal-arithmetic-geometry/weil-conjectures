@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-colimit-sites-exact-ladder",
+ "kind": "statement",
+ "title": "Exact cohomology ladder before finite-stage correction",
+ "statement": "Let J be a small filtered category and F:J to Cat a diagram of small sites with precoverages P, finite coverings, continuous cover-preserving transition functors preserving covering pullbacks, and exact inverse images on sets and abelian sheaves [lem-weil-pbc-colimit-of-sites], [lem-weil-pbc-site-pullback-abelian-exact]. Let V be a cocone whose objects and arrows are colimits and Q its precoverage consisting precisely of transported stage coverings. Let Fs be a compatible abelian coefficient system, S its inverse-image diagram on Q, K a colimit cocone, i an index, X_i a stage object, n a natural number, D the degree n+1 cohomology diagram on Under(i), and c its canonical cocone into the cohomology of K [def-weil-pbc-sites-and-cohomology], [def-weil-pbc-category-colimit]. Supply pullback and canonical maps natural in coefficients, compatible with connecting maps and degree-zero units [lem-weil-pbc-site-cohomology-pullback], and composition isomorphisms compatible with the adjunction units. Then there exist two compatible systems Rs and Gs with inverse-image diagrams T and U, colimit cocones L and M, degree n diagrams E and B and canonical cocones d and b, all with the endpoint and arrow equations in the Lean statement. There are natural transformations delta:E to D and alpha:B to E and homomorphisms alpha0:b.pt to d.pt and beta:d.pt to c.pt. Every delta component is surjective, alpha followed by delta is zero, both comparison squares commute, and every y in d.pt killed by beta is alpha0(w) for some w in b.pt. No finite-stage representative or corrected-lift assertion is part of this statement. The witnesses are presented equivalently in continuation form: for every proposition result, any implication from the listed witnesses and row properties to result yields result.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 09YP (lemma-colim-sites-cohomology) and 0739 (lemma-colim-works-over-collection), the two-row exact diagram; 0EXZ (lemma-colim-sites-injective)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-of-sites",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-site-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Normalize identity coefficient actions by splitting their idempotents. The identity laws of the supplied diagrams identify their inverse-image and positive-degree cohomology diagrams with the normalized ones. Transpose transitions through adjunction and use unit coherence to apply the compatible injective-system embedding; transpose back.",
+   "uses": [
+    "lem-weil-pbc-colimit-of-sites-injective-system",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take compatible cokernels using exact inverse image, and cancel cokernel epimorphisms for the transition cocycle. Form the two inverse-image diagrams and their colimits. Exact filtered colimits give a short exact sequence with first term the original colimit sheaf.",
+   "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the degree-n diagrams of the middle and cokernel systems and their canonical cocones. Uniqueness and composition of the site pullback maps identify the supplied maps with actual pullbacks and verify the functor and cocone laws. The stage and target long exact sequences give alpha, delta, alpha0 and beta. Stage injective vanishing gives surjectivity of delta; exactness gives alpha followed by delta equal to zero and the target kernel-image assertion.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality in coefficients and the connecting compatibility of the canonical and transition pullbacks to obtain natural transformations and the two comparison squares; transport endpoints along the specified equalities. This needs no target acyclicity and no class descent.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-of-sites-injective-system",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-derived-functor-injective-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 09YP and 0739, construction of the right-exact diagram using 0EXZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Long exact cohomology sequence of a compatible injective system on filtered colimit sites, surjective stage boundary and exact target row",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Abelian.Ext.covariantSequence_exact, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.Abelian.Ext.contravariantSequence_exact, groupCohomology.mapShortComplex₃_exact, groupCohomology.mapShortComplex₁_exact",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Abelian.Ext.covariant_sequence_exact₃",
+   "date": "2026-10-12",
+   "results": "; loogle: unknown identifier 'Abelian.Ext.covariant_sequence_exact₃'",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology_colimit_sites.*ladder|covariant_sequence_exact₃",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean, Mathlib/RingTheory/Regular/ProjectiveDimension.lean",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact cohomology ladder for a compatible injective embedding over a filtered colimit of sites",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CohomologyColimitSitesCorrectedLift",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Dimension shifting: compatible injective embedding, cokernel and exact cohomology ladder, before correcting a lift",
+   "via": [
+    "lem-weil-pbc-colimit-sites-eventual-vanishing",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CohomologyColimitSitesExactLadder",
+  "file": "lean/Sheaf/CategoryTheory/CohomologyColimitSitesExactLadder.lean",
+  "declaration": "CategoryTheory.cohomology_colimit_sites_exact_ladder",
+  "statement": "theorem cohomology_colimit_sites_exact_ladder (n : ℕ)\n    (J : Type u)\n    [SmallCategory J]\n    [IsFiltered J]\n    (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos]\n    [∀ j, (P j).IsStableUnderComposition]\n    [∀ j, (P j).IsStableUnderBaseChange]\n    [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits\n      (sheafPullback (F.map a).toFunctor (Type u)\n        (P j).toGrothendieck (P k).toGrothendieck)]\n    [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits\n      (sheafPullback (F.map a).toFunctor (Type u)\n        (P j).toGrothendieck (P k).toGrothendieck)]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [Q.HasIsos]\n    [Q.IsStableUnderComposition]\n    [Q.IsStableUnderBaseChange]\n    [Q.HasPullbacks]\n    (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n      ∃ (j : J) (X : F.obj j) (S : Presieve X)\n        (h : (V.ι.app j).toFunctor.obj X = Y),\n        S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)\n    (hVcover : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      R.map (V.ι.app j).toFunctor ∈ Q ((V.ι.app j).toFunctor.obj X))\n    (hVpullback : ∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →\n      ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (V.ι.app j).toFunctor)\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    [∀ j : J, PreservesFiniteLimits (sheafPullback (V.ι.app j).toFunctor (Type u)\n      (P j).toGrothendieck Q.toGrothendieck)]\n    [∀ j : J, PreservesFiniteColimits (sheafPullback (V.ι.app j).toFunctor (Type u)\n      (P j).toGrothendieck Q.toGrothendieck)]\n    [∀ (j k : J) (a : j ⟶ k),\n      (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck (P k).toGrothendieck).Additive]\n    [∀ j : J, (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n      (P j).toGrothendieck Q.toGrothendieck).Additive]\n    [∀ j : J, HasExt.{u} (Sheaf (P j).toGrothendieck AddCommGrpCat.{u})]\n    [HasExt.{u} (Sheaf Q.toGrothendieck AddCommGrpCat.{u})]\n    (pullbackMap : ∀ {j k : J} (a : j ⟶ k) (q : ℕ) (X : F.obj j)\n      (A : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}),\n      Sheaf.H' A q X ⟶ Sheaf.H' ((sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck (P k).toGrothendieck).obj A) q ((F.map a).toFunctor.obj X))\n    (hpullbackMap : ∀ {j k : J} (a : j ⟶ k),\n      (∀ (p : ℕ) (X : F.obj j) (A A' : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (φ : A ⟶ A'),\n        ((Sheaf.cohomologyPresheafFunctor (P j).toGrothendieck p).map φ).app (op X) ≫\n            pullbackMap a p X A' =\n          pullbackMap a p X A ≫\n            ((Sheaf.cohomologyPresheafFunctor (P k).toGrothendieck p).map\n              ((sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}\n                (P j).toGrothendieck (P k).toGrothendieck).map φ)).app (op ((F.map\n                  a).toFunctor.obj X))) ∧\n      (∀ (S : ShortComplex (Sheaf (P j).toGrothendieck AddCommGrpCat.{u})) (hS : S.ShortExact)\n        (hS' : (S.map (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}\n          (P j).toGrothendieck (P k).toGrothendieck)).ShortExact)\n        (p : ℕ) (X : F.obj j) (x : Sheaf.H' S.X₃ p X),\n        (pullbackMap a (p + 1) X S.X₁).hom (Abelian.Ext.comp x hS.extClass rfl) =\n          Abelian.Ext.comp ((pullbackMap a p X S.X₃).hom x) hS'.extClass rfl) ∧\n      (∀ (X : F.obj j) (A : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (x : Sheaf.H' A 0 X),\n        ((Abelian.Ext.addEquiv₀ ((pullbackMap a 0 X A).hom x)).hom.app (op ((F.map\n          a).toFunctor.obj X))).hom\n            (((toSheafify (P k).toGrothendieck\n              (yoneda.obj ((F.map a).toFunctor.obj X) ⋙ AddCommGrpCat.free)).app (op ((F.map\n                a).toFunctor.obj X))).hom\n                (FreeAbelianGroup.of (𝟙 ((F.map a).toFunctor.obj X)))) =\n          (((sheafAdjunctionContinuous (F.map a).toFunctor AddCommGrpCat.{u}\n            (P j).toGrothendieck (P k).toGrothendieck).unit.app A).hom.app (op X)).hom\n            (((Abelian.Ext.addEquiv₀ x).hom.app (op X)).hom\n              (((toSheafify (P j).toGrothendieck\n                (yoneda.obj X ⋙ AddCommGrpCat.free)).app (op X)).hom\n                  (FreeAbelianGroup.of (𝟙 X))))))\n    (canonicalMap : ∀ (j : J) (q : ℕ) (X : F.obj j)\n      (A : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}),\n      Sheaf.H' A q X ⟶ Sheaf.H' ((sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck Q.toGrothendieck).obj A) q ((V.ι.app j).toFunctor.obj X))\n    (hcanonicalMap : ∀ (j : J),\n      (∀ (p : ℕ) (X : F.obj j) (A A' : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (φ : A ⟶ A'),\n        ((Sheaf.cohomologyPresheafFunctor (P j).toGrothendieck p).map φ).app (op X) ≫\n            canonicalMap j p X A' =\n          canonicalMap j p X A ≫\n            ((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck p).map\n              ((sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n                (P j).toGrothendieck Q.toGrothendieck).map φ)).app (op ((V.ι.app j).toFunctor.obj\n                  X))) ∧\n      (∀ (S : ShortComplex (Sheaf (P j).toGrothendieck AddCommGrpCat.{u})) (hS : S.ShortExact)\n        (hS' : (S.map (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n          (P j).toGrothendieck Q.toGrothendieck)).ShortExact)\n        (p : ℕ) (X : F.obj j) (x : Sheaf.H' S.X₃ p X),\n        (canonicalMap j (p + 1) X S.X₁).hom (Abelian.Ext.comp x hS.extClass rfl) =\n          Abelian.Ext.comp ((canonicalMap j p X S.X₃).hom x) hS'.extClass rfl) ∧\n      (∀ (X : F.obj j) (A : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (x : Sheaf.H' A 0 X),\n        ((Abelian.Ext.addEquiv₀ ((canonicalMap j 0 X A).hom x)).hom.app (op ((V.ι.app\n          j).toFunctor.obj X))).hom\n            (((toSheafify Q.toGrothendieck\n              (yoneda.obj ((V.ι.app j).toFunctor.obj X) ⋙ AddCommGrpCat.free)).app (op ((V.ι.app\n                j).toFunctor.obj X))).hom\n                (FreeAbelianGroup.of (𝟙 ((V.ι.app j).toFunctor.obj X)))) =\n          (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u}\n            (P j).toGrothendieck Q.toGrothendieck).unit.app A).hom.app (op X)).hom\n            (((Abelian.Ext.addEquiv₀ x).hom.app (op X)).hom\n              (((toSheafify (P j).toGrothendieck\n                (yoneda.obj X ⋙ AddCommGrpCat.free)).app (op X)).hom\n                  (FreeAbelianGroup.of (𝟙 X))))))\n    (e : ∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l),\n      (sheafPullback (F.map (a ≫ b)).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck (P\n        l).toGrothendieck) ≅ (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck (P k).toGrothendieck) ⋙ (sheafPullback (F.map b).toFunctor\n        AddCommGrpCat.{u} (P k).toGrothendieck (P l).toGrothendieck))\n    (he : ∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l)\n      (G : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (X : F.obj j),\n      Arrow.mk (((sheafAdjunctionContinuous (F.map (a ≫ b)).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck (P l).toGrothendieck).unit.app G).hom.app (op X) ≫\n        ((e a b).hom.app G).hom.app (op ((F.map (a ≫ b)).toFunctor.obj X))) =\n      Arrow.mk (((sheafAdjunctionContinuous (F.map a).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck (P k).toGrothendieck).unit.app G).hom.app (op X) ≫\n        ((sheafAdjunctionContinuous (F.map b).toFunctor AddCommGrpCat.{u} (P k).toGrothendieck (P\n          l).toGrothendieck).unit.app ((sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P\n          j).toGrothendieck (P k).toGrothendieck).obj G)).hom.app (op ((F.map a).toFunctor.obj\n          X))))\n    (eV : ∀ {j k : J} (a : j ⟶ k),\n      (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u} (P j).toGrothendieck\n        Q.toGrothendieck) ≅ (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck (P k).toGrothendieck) ⋙ (sheafPullback (V.ι.app k).toFunctor\n        AddCommGrpCat.{u} (P k).toGrothendieck Q.toGrothendieck))\n    (heV : ∀ {j k : J} (a : j ⟶ k)\n      (G : Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (X : F.obj j),\n      Arrow.mk (((sheafAdjunctionContinuous (V.ι.app j).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X) ≫\n        ((eV a).hom.app G).hom.app (op ((V.ι.app j).toFunctor.obj X))) =\n      Arrow.mk (((sheafAdjunctionContinuous (F.map a).toFunctor AddCommGrpCat.{u} (P\n        j).toGrothendieck (P k).toGrothendieck).unit.app G).hom.app (op X) ≫\n        ((sheafAdjunctionContinuous (V.ι.app k).toFunctor AddCommGrpCat.{u} (P k).toGrothendieck\n          Q.toGrothendieck).unit.app ((sheafPullback (F.map a).toFunctor AddCommGrpCat.{u} (P\n          j).toGrothendieck (P k).toGrothendieck).obj G)).hom.app (op ((F.map a).toFunctor.obj\n          X))))\n    (Fs : ∀ j : J, Sheaf (P j).toGrothendieck AddCommGrpCat.{u})\n    (φ : ∀ {j k : J} (a : j ⟶ k),\n      (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck (P k).toGrothendieck).obj (Fs j) ⟶ Fs k)\n    (hφ : ∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l),\n      φ (a ≫ b) = (e a b).hom.app (Fs j) ≫\n        (sheafPullback (F.map b).toFunctor AddCommGrpCat.{u}\n          (P k).toGrothendieck (P l).toGrothendieck).map (φ a) ≫ φ b)\n    (S : J ⥤ Sheaf Q.toGrothendieck AddCommGrpCat.{u})\n    (hSobj : ∀ j : J, S.obj j =\n      (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck Q.toGrothendieck).obj (Fs j))\n    (hSmap : ∀ {j k : J} (a : j ⟶ k),\n      Arrow.mk (S.map a) = Arrow.mk ((eV a).hom.app (Fs j) ≫\n        (sheafPullback (V.ι.app k).toFunctor AddCommGrpCat.{u}\n          (P k).toGrothendieck Q.toGrothendieck).map (φ a)))\n    (K : Cocone S)\n    (hK : IsColimit K)\n    (i : J)\n    (X_i : F.obj i)\n    (D : Under i ⥤ AddCommGrpCat.{u})\n    (hDobj : ∀ t : Under i,\n      D.obj t = Sheaf.H' (Fs t.right) (n + 1) ((F.map t.hom).toFunctor.obj X_i))\n    (hDmap : ∀ {t t' : Under i} (b : t ⟶ t'),\n      Arrow.mk (D.map b) = Arrow.mk\n        (pullbackMap b.right (n + 1) ((F.map t.hom).toFunctor.obj X_i) (Fs t.right) ≫\n          ((Sheaf.cohomologyPresheafFunctor (P t'.right).toGrothendieck (n + 1)).map\n            (φ b.right)).app\n              (op ((F.map b.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i)))))\n    (c : Cocone D)\n    (hcpt : c.pt = Sheaf.H' K.pt (n + 1) ((V.ι.app i).toFunctor.obj X_i))\n    (hclegs : ∀ t : Under i, Arrow.mk (c.ι.app t) = Arrow.mk\n      (canonicalMap t.right (n + 1) ((F.map t.hom).toFunctor.obj X_i) (Fs t.right) ≫\n        ((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck (n + 1)).map\n          (eqToHom (hSobj t.right).symm ≫ K.ι.app t.right)).app\n            (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))) :\n    ∀ (result : Prop),\n      (∀ (Rs : ∀ j : J, Sheaf (P j).toGrothendieck AddCommGrpCat.{u})\n      (ρ : ∀ {j k : J} (a : j ⟶ k),\n      (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck (P k).toGrothendieck).obj (Rs j) ⟶ Rs k)\n      (hρ : ∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l),\n      ρ (a ≫ b) = (e a b).hom.app (Rs j) ≫\n        (sheafPullback (F.map b).toFunctor AddCommGrpCat.{u}\n          (P k).toGrothendieck (P l).toGrothendieck).map (ρ a) ≫ ρ b)\n      (T : J ⥤ Sheaf Q.toGrothendieck AddCommGrpCat.{u})\n      (hTobj : ∀ j : J, T.obj j =\n      (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck Q.toGrothendieck).obj (Rs j))\n      (hTmap : ∀ {j k : J} (a : j ⟶ k),\n      Arrow.mk (T.map a) = Arrow.mk ((eV a).hom.app (Rs j) ≫\n        (sheafPullback (V.ι.app k).toFunctor AddCommGrpCat.{u}\n          (P k).toGrothendieck Q.toGrothendieck).map (ρ a)))\n      (L : Cocone T)\n      (hL : IsColimit L)\n      (E : Under i ⥤ AddCommGrpCat.{u})\n      (hEobj : ∀ t : Under i,\n      E.obj t = Sheaf.H' (Rs t.right) n ((F.map t.hom).toFunctor.obj X_i))\n      (hEmap : ∀ {t t' : Under i} (b : t ⟶ t'),\n      Arrow.mk (E.map b) = Arrow.mk\n        (pullbackMap b.right n ((F.map t.hom).toFunctor.obj X_i) (Rs t.right) ≫\n          ((Sheaf.cohomologyPresheafFunctor (P t'.right).toGrothendieck n).map\n            (ρ b.right)).app\n              (op ((F.map b.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i)))))\n      (d : Cocone E)\n      (hdpt : d.pt = Sheaf.H' L.pt n ((V.ι.app i).toFunctor.obj X_i))\n      (hdlegs : ∀ t : Under i, Arrow.mk (d.ι.app t) = Arrow.mk\n      (canonicalMap t.right n ((F.map t.hom).toFunctor.obj X_i) (Rs t.right) ≫\n        ((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck n).map\n          (eqToHom (hTobj t.right).symm ≫ L.ι.app t.right)).app\n            (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i))))) (δ : E ⟶ D)\n      (Gs : ∀ j : J, Sheaf (P j).toGrothendieck AddCommGrpCat.{u})\n      (ψ : ∀ {j k : J} (a : j ⟶ k),\n      (sheafPullback (F.map a).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck (P k).toGrothendieck).obj (Gs j) ⟶ Gs k)\n      (hψ : ∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l),\n      ψ (a ≫ b) = (e a b).hom.app (Gs j) ≫\n        (sheafPullback (F.map b).toFunctor AddCommGrpCat.{u}\n          (P k).toGrothendieck (P l).toGrothendieck).map (ψ a) ≫ ψ b)\n      (U : J ⥤ Sheaf Q.toGrothendieck AddCommGrpCat.{u})\n      (hUobj : ∀ j : J, U.obj j =\n      (sheafPullback (V.ι.app j).toFunctor AddCommGrpCat.{u}\n        (P j).toGrothendieck Q.toGrothendieck).obj (Gs j))\n      (hUmap : ∀ {j k : J} (a : j ⟶ k),\n      Arrow.mk (U.map a) = Arrow.mk ((eV a).hom.app (Gs j) ≫\n        (sheafPullback (V.ι.app k).toFunctor AddCommGrpCat.{u}\n          (P k).toGrothendieck Q.toGrothendieck).map (ψ a)))\n      (M : Cocone U)\n      (hM : IsColimit M)\n      (B : Under i ⥤ AddCommGrpCat.{u})\n      (hBobj : ∀ t : Under i,\n      B.obj t = Sheaf.H' (Gs t.right) n ((F.map t.hom).toFunctor.obj X_i))\n      (hBmap : ∀ {t t' : Under i} (b : t ⟶ t'),\n      Arrow.mk (B.map b) = Arrow.mk\n        (pullbackMap b.right n ((F.map t.hom).toFunctor.obj X_i) (Gs t.right) ≫\n          ((Sheaf.cohomologyPresheafFunctor (P t'.right).toGrothendieck n).map\n            (ψ b.right)).app\n              (op ((F.map b.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i)))))\n      (b : Cocone B)\n      (hbpt : b.pt = Sheaf.H' M.pt n ((V.ι.app i).toFunctor.obj X_i))\n      (hblegs : ∀ t : Under i, Arrow.mk (b.ι.app t) = Arrow.mk\n      (canonicalMap t.right n ((F.map t.hom).toFunctor.obj X_i) (Gs t.right) ≫\n        ((Sheaf.cohomologyPresheafFunctor Q.toGrothendieck n).map\n          (eqToHom (hUobj t.right).symm ≫ M.ι.app t.right)).app\n            (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj X_i)))))\n      (α : B ⟶ E) (α₀ : b.pt ⟶ d.pt) (β : d.pt ⟶ c.pt),\n        (∀ t : Under i, Function.Surjective (δ.app t).hom) ∧\n        (∀ t : Under i, α.app t ≫ δ.app t = 0) ∧\n        (∀ t : Under i, δ.app t ≫ c.ι.app t = d.ι.app t ≫ β) ∧\n        (∀ t : Under i, α.app t ≫ d.ι.app t = b.ι.app t ≫ α₀) ∧\n        (∀ y : d.pt, β.hom y = 0 → ∃ w : b.pt, α₀.hom w = y) → result) → result",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35426",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
