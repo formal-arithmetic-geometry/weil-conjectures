@@ -6,6 +6,7 @@ Authors: SHEAF group J3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenToOpenCycle
 
 /-!
 # Open-to-open restriction of normalized resolution comparisons
@@ -58,5 +59,23 @@ theorem resolutionSection_canonical_open_to_open {X : Scheme.{u}}
       c.openEquiv A q (HomologicalComplex.homologyMap (etaleSectionMap
         (MorphismProperty.Over.homMk (X.homOfLE h) (X.homOfLE_ι _) :
           Scheme.Etale.mk A.ι ⟶ Scheme.Etale.mk B.ι) I.cocomplex) q x) =
-        openCohomologyRestriction h G q (c.openEquiv B q x) := by sorry
+        openCohomologyRestriction h G q (c.openEquiv B q x) := by
+  intro A B h q x
+  let K := (((etaleSectionFunctor (Scheme.Etale.mk B.ι)).mapHomologicalComplex
+    (.up ℕ)).obj I.cocomplex)
+  let L := (((etaleSectionFunctor (Scheme.Etale.mk A.ι)).mapHomologicalComplex
+    (.up ℕ)).obj I.cocomplex)
+  let φ := etaleSectionMap
+    (MorphismProperty.Over.homMk (P := @Etale) (Q := ⊤)
+      (X := X) (A := Scheme.Etale.mk A.ι) (B := Scheme.Etale.mk B.ι)
+      (X.homOfLE h) (X.homOfLE_ι h) trivial) I.cocomplex
+  have hs : Function.Surjective (K.homologyπ q) :=
+    (AddCommGrpCat.epi_iff_surjective (K.homologyπ q)).mp inferInstance
+  obtain ⟨z, rfl⟩ := hs x
+  have hmap : HomologicalComplex.homologyMap φ q (K.homologyπ q z) =
+      L.homologyπ q ((HomologicalComplex.cyclesMap φ q) z) := by
+    have hn := HomologicalComplex.homologyπ_naturality φ q
+    exact congrArg (fun f => f z) hn
+  rw [hmap]
+  exact resolutionSection_canonical_open_to_open_cycle G I c A B h q z
 end AlgebraicGeometry.Etale

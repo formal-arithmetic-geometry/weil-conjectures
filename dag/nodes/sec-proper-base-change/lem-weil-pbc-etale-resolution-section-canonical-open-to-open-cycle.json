@@ -1,0 +1,111 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50 and Tag 03F3 (2), the normalized cocycle restriction calculation."
+ },
+ "proof_origin": {
+  "by": "M2 stage 3 decomposition",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Cocycle-level part of the open-to-open restriction computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homologyπ naturality cyclesMap homologyMap",
+   "results": "Found HomologicalComplex.homologyπ_naturality, which supplies the target-level passage from cycles.",
+   "date": "2026-10-13",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ_naturality",
+   "results": "Found exact Mathlib declaration HomologicalComplex.homologyπ_naturality.",
+   "date": "2026-10-13",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyπ_naturality",
+   "results": "Found Mathlib.CategoryTheory.Homology.Homotopy and local uses.",
+   "date": "2026-10-13",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-resolution-section-canonical-open-to-open",
+   "place": "The cocycle calculation preceding surjectivity of homologyπ.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-etale-resolution-section-canonical-open-to-open-cycle",
+ "title": "Cocycle-level canonical open-to-open restriction",
+ "statement": "For a normalized resolution-section comparison c, nested opens A ≤ B, degree q, and a q-cycle z in the section complex over B, c.openEquiv A q applied to the homology class of the cyclesMap of z equals openCohomologyRestriction h G q applied to c.openEquiv B q of the homology class of z.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "lem-weil-pbc-open-cohomology-whole-restriction-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Expand c.open_cocycle at A and B. Rewrite the restricted Ext class with InjectiveResolution.mk₀_comp_extMk, then use etaleOpenFreeSheafUnit_coherence and exact inverse-image composition comparison to identify the resulting Ext morphisms. This proves the equality for the given cycle z.",
+   "uses": [
+    "def-weil-pbc-etale-resolution-section-canonical-comparison",
+    "def-weil-pbc-etale-open-comparison-data",
+    "def-weil-pbc-etale-open-object-cohomology-map",
+    "lem-weil-pbc-etale-open-free-sheaf-unit-coherence",
+    "lem-weil-pbc-ext-exact-functor-composition-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-open-comparison-data",
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "lem-weil-pbc-etale-open-free-sheaf-unit-coherence",
+  "lem-weil-pbc-ext-exact-functor-composition-comparison"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenToOpen",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenToOpenCycle",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResolutionSectionCanonicalOpenToOpenCycle.lean",
+  "declaration": "AlgebraicGeometry.Etale.resolutionSection_canonical_open_to_open_cycle",
+  "statement": "theorem resolutionSection_canonical_open_to_open_cycle {X : Scheme.{u}}\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (I : InjectiveResolution G) (c : ResolutionSectionCanonicalComparison G I)\n    (A B : X.Opens) (h : A ≤ B) (q : ℕ)\n    (z : (((etaleSectionFunctor (Scheme.Etale.mk B.ι)).mapHomologicalComplex\n      (.up ℕ)).obj I.cocomplex).cycles q) :\n    let K := (((etaleSectionFunctor (Scheme.Etale.mk A.ι)).mapHomologicalComplex\n      (.up ℕ)).obj I.cocomplex)\n    let L := (((etaleSectionFunctor (Scheme.Etale.mk B.ι)).mapHomologicalComplex\n      (.up ℕ)).obj I.cocomplex)\n    let φ := etaleSectionMap\n      (MorphismProperty.Over.homMk (X.homOfLE h) (X.homOfLE_ι _) :\n        Scheme.Etale.mk A.ι ⟶ Scheme.Etale.mk B.ι) I.cocomplex\n    c.openEquiv A q (K.homologyπ q ((HomologicalComplex.cyclesMap φ q) z)) =\n      openCohomologyRestriction h G q (c.openEquiv B q (L.homologyπ q z))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T215155-L-1304481",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T215155-L-1304481",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
