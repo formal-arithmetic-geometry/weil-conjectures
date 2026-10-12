@@ -1,0 +1,99 @@
+{
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "status": "split",
+ "id": "lem-weil-pbc-source-derived-sections-naturality-core",
+ "kind": "statement",
+ "title": "Naturality of localization derived Hom",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 03Q9"
+ },
+ "statement": "Naturality of sourcePlusHomIso under precomposition, after transport to maps into Q(L).",
+ "proof": [
+  {
+   "text": "Pasting and functoriality of the named comparison maps; the cocycle and Yoneda calculations establish the compatibility.",
+   "uses": [
+    "def-weil-pbc-strict-local-injective-source-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent following document",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 03Q9"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SourceDerivedSectionsNaturality",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-source-derived-sections-naturality",
+   "place": "03Q8 naturality computation"
+  }
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-injective-source-comparison"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SourceDerivedSectionsNaturalityCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/SourceDerivedSectionsNaturalityCore.lean",
+  "declaration": "AlgebraicGeometry.Etale.sourceDerivedSections_naturality_core",
+  "statement": "theorem sourceDerivedSections_naturality_core\n    {C : Type (v + 1)} [Category.{v} C]\n    {T : GrothendieckTopology C} [HasSheafify T AddCommGrpCat.{v + 1}]\n    [HasDerivedCategory.{v + 1} (Sheaf T AddCommGrpCat.{v + 1})]\n    (K : DerivedCategory.Plus (Sheaf T AddCommGrpCat.{v + 1}))\n    (L : CochainComplex (Sheaf T AddCommGrpCat.{v + 1}) ℤ) [L.IsKInjective]\n    (q : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) {U V : C} (a : U ⟶ V) :\n    let e₀ := fun W : C ↦\n      sourcePlusHomIso ((strictLocalFreeSheaf T).obj W) K L q n\n    AddCommGrpCat.ofHom (Preadditive.leftComp (K⟦n⟧)\n      ((DerivedCategory.Plus.singleFunctor _ 0).map ((strictLocalFreeSheaf T).map a))) ≫\n        (e₀ U).hom =\n      (e₀ V).hom ≫ AddCommGrpCat.ofHom (Preadditive.leftComp ((DerivedCategory.Q.obj L)⟦n⟧)\n        ((DerivedCategory.singleFunctor _ 0).map ((strictLocalFreeSheaf T).map a)))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sourceDerivedSections_naturality_core",
+   "results": "No exact match; theorem is project-specific.",
+   "date": "2026-10-13",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "sourceDerivedSections_naturality_core",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceDerivedSections_naturality_core",
+   "results": "No existing declaration outside this module.",
+   "date": "2026-10-13",
+   "verdict": "no exact match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T235114-L-2172563",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T235114-L-2172563",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

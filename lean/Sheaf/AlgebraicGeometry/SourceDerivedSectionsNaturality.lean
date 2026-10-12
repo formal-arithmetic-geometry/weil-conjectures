@@ -6,6 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+import Sheaf.AlgebraicGeometry.SourceDerivedSectionsNaturalityCore
 
 /-! # Naturality of the derived Hom to sections comparison
 
@@ -63,6 +64,9 @@ theorem sourceDerivedSections_naturality
         (e U).hom =
       (e V).hom ≫ H.map
         ((NatTrans.mapHomologicalComplex
-          ((sheafSections T AddCommGrpCat.{v + 1}).map a.op) (.up ℤ)).app L) := by sorry
+          ((sheafSections T AddCommGrpCat.{v + 1}).map a.op) (.up ℤ)).app L) := by
+  simpa only [Iso.trans_hom, Category.assoc] using
+    (sourceDerivedSections_naturality_compose K L q n a)
+
 
 end AlgebraicGeometry.Etale
