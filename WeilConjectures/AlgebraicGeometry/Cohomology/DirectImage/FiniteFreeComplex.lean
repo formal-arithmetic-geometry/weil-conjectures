@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 
 /-!
@@ -76,23 +77,6 @@ theorem exists_isFiniteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
           (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) :=
-  sorry
-
-/-- **Finiteness of the cohomology of a proper morphism over a Noetherian affine base.** With
-`f : X ⟶ T` proper, `T` affine with Noetherian ring of global sections `Γ(T, ⊤)` and `ℱ` a coherent
-`𝒪_X`-module, the global sections `Γ(T, R^q f_* ℱ) = H^q(X, ℱ)` of the higher direct image form a
-finite `Γ(T, ⊤)`-module for every `q` [Stacks, Tag 02O6], [EGA III₁, 3.2.1].
-
-This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`; for a general proper `f`
-the blueprint discharges it by the cited classical input (Chow's lemma and the projective case,
-Stacks 02O5/02O6). It is the only input to
-`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` beyond the formal
-properties of the higher direct images.
-
-(blueprint: `lem-pc-coherent-hi`) -/
-theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
-    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
-    Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) :=
   sorry
 
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With

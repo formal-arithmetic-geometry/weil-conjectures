@@ -80,4 +80,16 @@ noncomputable def compRightDerivedObjIso (E : C' ⥤ C) (F : C ⥤ D) [E.Additiv
     (F.rightDerivedObjIsoOfResolution (E.mapResolution (injectiveResolution X).ι)
       (fun n ↦ hE ((injectiveResolution X).cocomplex.X n)) q).symm
 
+/-- **Right derived functors of a composite at an acyclic object.** Let `E : C' ⥤ C` be a left
+exact functor sending injective objects to `F`-acyclic objects, for a left exact `F : C ⥤ D`,
+and let `X` be `E`-acyclic. Then `R^q (E ⋙ F) X ≅ R^q F (E X)`: for an injective resolution `I`
+of `X`, the complex `E I` is a resolution of `E X`, its cohomology being `R^q E X`, which
+vanishes for `q > 0`, by `F`-acyclic objects. This is the degenerate case of the Grothendieck
+spectral sequence. -/
+theorem nonempty_compRightDerivedObjIso_of_rightAcyclic (E : C' ⥤ C) (F : C ⥤ D) [E.Additive]
+    [F.Additive] [PreservesFiniteLimits E] [PreservesFiniteLimits F]
+    (hE : ∀ (I : C') [Injective I], F.rightAcyclic (E.obj I)) (X : C') (hX : E.rightAcyclic X)
+    (q : ℕ) : Nonempty (((E ⋙ F).rightDerived q).obj X ≅ (F.rightDerived q).obj (E.obj X)) :=
+  sorry
+
 end CategoryTheory.Functor
