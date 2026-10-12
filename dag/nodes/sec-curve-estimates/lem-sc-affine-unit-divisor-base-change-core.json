@@ -16,15 +16,19 @@
  },
  "proof": [
   {
-   "text": "Construct both restriction maps using the inverse open-immersion section isomorphism followed by germToFunctionField on the nonempty image open. Naturality of germs proves compatibility and determines the maps uniquely. The compactification [lem-sc-compactification] has finite closed complement. At each rational closed boundary point, [lem-sc-local-dvr-base-change] supplies the unique rational closed point above it. The cartesian open-immersion square identifies the new boundary with these fibres, giving the equivalence, including an empty boundary.",
+   "text": "Construct both restriction ring homomorphisms with the inverse open-immersion appIso followed by germToFunctionField. Naturality of germs and injectivity of each stalk map prove all the compatibility clauses. Nonemptiness of the base-changed source follows from surjectivity of the first projection, since the map between the spectra of the fields is surjective. These are the proved private helper exists_open_restriction and the initial part of the main Lean proof.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For the given compactification [lem-sc-compactification], the complement of the nonempty image open consists of closed points by dimension one. Scheme.range_snd_of_isPullback identifies the new complement with its inverse image. Mathlib pointOfClosedPoint and the proved library baseChangeFieldPoint construct a closed rational point above every old closed point. baseChangeFieldPoint_eq_of_fst_eq gives uniqueness among all points in that fibre. The explicitly defined first-projection map on boundary points is bijective; its inverse gives the required equivalence and the two asserted fibre properties. No enumeration or finiteness of the boundary is needed.",
    "uses": [
-    "lem-sc-compactification",
-    "lem-sc-local-dvr-base-change"
+    "lem-sc-compactification"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the rational pullback and order comparison of [lem-sc-local-dvr-base-change]. Compatibility of the two restriction maps with rational pullback follows by comparing germs on the nonempty open. Use the coefficient formula for the principal divisor [def-sc-divisor] and extensionality of finitely supported functions to prove the forward equality.",
+   "text": "At each matching boundary pair apply [lem-sc-local-dvr-base-change] and use fibre uniqueness to identify its point with the boundary equivalence. In rational_pullback_germ, dominance identifies the generic points and stalk-specialization naturality gives the canonical function-field map. IsFractionRing.ringHom_ext identifies that map with the supplied map from the boundary stalk. Germ naturality then gives its action on open sections. In open_restriction_natural, appLE composition through the commutative square and appIso_inv_appLE identify the pulled-back restriction with the restriction of the pulled-back section. Apply the local order comparison to the unit mapped by the first restriction. Scheme.div_apply [def-sc-divisor], subtypeDomain_apply, equivMapDomain_apply and Finsupp.ext turn the pointwise equality into the required divisor transport equality, also for an empty boundary.",
    "uses": [
     "lem-sc-local-dvr-base-change",
     "def-sc-divisor"
@@ -40,7 +44,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-  "place": "Affine-case proof, unit quotient paragraph"
+  "place": "Affine-case proof, unit quotient paragraph; Lean proof by N1 using germ naturality, rational-point base change, and fraction-field uniqueness"
  },
  "mathlib_searches": [
   {
@@ -159,10 +163,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-18226",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T150954-L-2231133",
-  "kind": "interface"
+  "landing": "20261012T160139-L-2565199",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
