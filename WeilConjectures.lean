@@ -396,6 +396,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuityColimi
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimitModule
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimit
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimitAux
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
@@ -678,6 +679,7 @@ public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlatModel
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Basic
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Cohomology
+public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.CohomologyTruncated
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Cone
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.FreeResolution
 public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Map
