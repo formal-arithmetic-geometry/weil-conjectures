@@ -16,7 +16,15 @@
  ],
  "proof": [
   {
-   "text": "The structural map to Spec k makes p vanish in all section rings and local rings. At each point of an etale object U, apply [lem-sc-local-ring-artin-schreier-kernel] to the germ of a section satisfying x^p=x. There is a unique prime-field constant with that germ. Equality of germs supplies an open neighborhood on which the section equals the constant. These neighborhoods are etale over C because open immersions are etale and etale morphisms compose. The restriction formula for a and the constant-section formula for iota identify these equalities with equalities in G.",
+   "text": "The composite of the constant-presheaf sheafification unit with iota is locally injective. On a nonempty etale object U, a germ map to a nontrivial stalk makes Gamma(U,O) nontrivial. The structural map U -> C -> Spec k implies p=0 in that section ring. By hiota, equality of the images of two constants is equality of their canonical ZMod casts; Mathlib ZMod.castHom_injective proves the constants equal. On an empty object the empty sieve covers (Scheme.Etale.bot_mem_smallEtaleTopology). Mathlib local surjectivity of toSheafify transfers local injectivity of the composite to iota; Sheaf.isLocallyInjective_iff_injective supplies sectionwise injectivity by separatedness.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a root x and each point z of U, use the structural map and the germ ring homomorphism to make p vanish in the stalk. The germ satisfies its pth-power equation; apply [lem-sc-local-ring-artin-schreier-kernel] to obtain a prime-field constant c. TopCat.Presheaf.germ_eq gives an open neighborhood W of z on which x restricts to c.val. The open immersion W -> U is etale, and W -> U -> C is etale by composition. Regard W as an object of C.Etale. The formulas hiota and hrestr, transported by W.topIso, exhibit the restriction of x as the image of the sheafification-unit section represented by c. Therefore the image sieve of x contains an arrow covering each point. Scheme.mem_smallEtaleTopology_iff proves that this image sieve covers; for empty U its pointwise condition is vacuous.",
    "uses": [
     "lem-sc-local-ring-artin-schreier-kernel",
     "lem-weil-pbc-open-immersion-etale",
@@ -25,16 +33,7 @@
    "elementary": false
   },
   {
-   "text": "The sheafification unit of the constant abelian presheaf is locally surjective (Mathlib Presheaf.isLocallySurjective_toSheafify, applied on the small etale site with AddCommGrpCat at the displayed universe). Thus a pair of constant-sheaf sections with equal images under iota has a common covering sieve where both sections are represented by constants. At each point, uniqueness in [lem-sc-local-ring-artin-schreier-kernel] makes the two constants equal. For any nonempty object in that cover, choosing a point therefore makes the represented sections equal; on an empty object the sheaf has its unique section. Separatedness gives equality of the original sections.",
-   "uses": [
-    "lem-sc-local-ring-artin-schreier-kernel",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a root x, take the open cover furnished by the first step, and on each member take the constant-sheaf section represented by its unique constant. Its image is the restriction of x. The injectivity from the second step makes these sections compatible on overlaps. The sheaf condition glues them uniquely to y, and separatedness in G gives iota(y)=x. On the empty object the empty cover yields its unique section. This proves precisely the injectivity and root-lifting clauses.",
+   "text": "Apply the proved private helper lift_of_imageSieve_mem to the underlying Type-valued sheaf map. Choose one local preimage on every arrow of the covering image sieve. Their images are restrictions of x, so naturality and sectionwise injectivity make this family compatible. The source sheaf condition glues the family to y. Naturality shows iota(y) is an amalgamation of the image family, and x is another; target separatedness gives iota(y)=x. This includes empty covers and does not require a single globally constant representative.",
    "uses": [
     "def-weil-pbc-abelian-etale-sheaves"
    ],
@@ -42,16 +41,16 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-abelian-etale-sheaves",
   "lem-sc-local-ring-artin-schreier-kernel",
   "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-sheafification",
-  "def-weil-pbc-abelian-etale-sheaves"
+  "lem-weil-pbc-etale-composition-cancellation"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-as-sequence.md",
-  "place": "Proof, first sentence: the kernel of wp is the constant prime-field sheaf; local-ring calculation and sheaf descent"
+  "place": "Proof, first sentence: prime-field kernel; Q1 Lean proof uses local casts, germ neighborhoods, and sheaf gluing"
  },
  "mathlib_searches": [
   {
@@ -127,10 +126,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T070530-L-3467773",
-  "kind": "interface",
+  "landing": "20261012T085320-L-32203",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
