@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
+public import WeilConjectures.SixFunctors.ProEtale.Derived.RestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 
 /-!
@@ -144,6 +145,34 @@ lemma compactCoefficientIso_hom_app {s : Scheme.{u}} (aX : X ⟶ s) [HasCompacti
     Functor.whiskerLeft_app, Category.comp_id, Category.id_comp]
   exact Category.id_comp _
 
+/-- The comparison `Res ∘ (-)_x̄ ≅ (-)_x̄ ∘ Res` for the geometric stalk `RΓ(s, Lx̄^* -)`,
+assembled from the canonical identification `Lx̄^* ∘ Res ≅ Res ∘ Lx̄^*`
+(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarRestrictScalarsIso`) and a comparison
+`αs : Res ∘ RΓ(s, -) ≅ RΓ(s, -) ∘ Res` for the point identification. -/
+noncomputable def stalkCoefficientIso {s : Scheme.{u}} (x : s ⟶ X)
+    (αs : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ ⋙
+        rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s ≅
+      rightDerivedGlobalSections (ModuleCat.{u + 1} Λ') s ⋙ ModuleCat.derivedRestrictScalars ρ) :
+    Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ ⋙ geometricStalk Λ x ≅
+      geometricStalk Λ' x ⋙ ModuleCat.derivedRestrictScalars ρ :=
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (leftDerivedUpperStarRestrictScalarsIso ρ x) _ ≪≫
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ αs ≪≫ (Functor.associator _ _ _).symm
+
+lemma stalkCoefficientIso_hom_app {s : Scheme.{u}} (x : s ⟶ X)
+    (αs : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ ⋙
+        rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s ≅
+      rightDerivedGlobalSections (ModuleCat.{u + 1} Λ') s ⋙ ModuleCat.derivedRestrictScalars ρ)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ'))) :
+    (stalkCoefficientIso ρ x αs).hom.app K =
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s).map
+          ((leftDerivedUpperStarRestrictScalarsIso ρ x).hom.app K) ≫
+        αs.hom.app (((upperStar (ModuleCat.{u + 1} Λ') x).leftDerivedFunctor).obj K) := by
+  simp only [stalkCoefficientIso, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.associator_inv_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
+    Category.comp_id, Category.id_comp]
+
 variable {k : Type u} [Field k] [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [IsGeometric aX]
   [HasCompactification aX]
 
@@ -182,7 +211,8 @@ the coefficient comparison `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is an
 theorem exists_isCoefficientChange_stalk [Finite Λ] [Finite Λ']
     [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ)
     (x : Spec (.of k) ⟶ X) (hx : x ≫ aX = 𝟙 _) :
-    ∃ α, IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x) α :=
+    ∃ αs, IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x)
+      (stalkCoefficientIso ρ x αs) :=
   sorry
 
 end CoefficientChange
@@ -283,8 +313,9 @@ theorem isPerfect_and_exists_isDerivedBaseChange (n : ℕ) :
   · obtain ⟨δ, αs, hα⟩ := exists_isCoefficientChange_compactlySupportedGlobalSections _ aX hsurj
     exact ⟨(compactCoefficientIso _ aX δ αs).app _,
       hα _ (S.constructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
-  · obtain ⟨α, hα⟩ := exists_isCoefficientChange_stalk _ aX hsurj x hx
-    exact ⟨α.app _, hα _ (S.constructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
+  · obtain ⟨αs, hα⟩ := exists_isCoefficientChange_stalk _ aX hsurj x hx
+    exact ⟨(stalkCoefficientIso _ x αs).app _,
+      hα _ (S.constructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
 
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (1): the normalized tower of perfect
 complexes `P_n = RΓ_c(X, L_n)` over the local rings `A_n = R ⧸ Iⁿ`, `n ≥ 1`, with transitions
