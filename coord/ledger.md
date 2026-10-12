@@ -9174,3 +9174,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/D2/Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale (stage 3; reviewer PASS; first push; landing 20261012T194106-L-453292 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/D3/Sheaf.AlgebraicGeometry.EtaleTensorUnitSectionsNatural (stage 3; reviewer PASS; first push; landing 20261012T194106-L-453392 (interface); batch 20261012T194054; modules 2; new nodes 1)
 - 19:41 L: merged deliver/D3/Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkModelDescent (stage 3; reviewer PASS; after a return; landing 20261012T194106-L-453506 (proof); batch 20261012T194054; modules 1; new nodes 0)
+- 19:41 L: merged deliver/D3/Sheaf.RingTheory.ExtendedCompletionModuleReduction (stage 3; reviewer PASS; first push; landing 20261012T194107-L-453627 (proof); batch 20261012T194054; modules 1; new nodes 0)
