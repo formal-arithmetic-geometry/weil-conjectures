@@ -3,6 +3,7 @@ module
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCCohomology
 
 @[expose] public section
 
@@ -30,6 +31,7 @@ theorem rhom_supported_quasiCoherent_pseudo_part_qc
     schemeDerivedQCohProperty X
       ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
         X.toRingedSpace.sheaf).obj (op K, L)) := by
-  sorry
+  intro n
+  exact rhom_supported_quasiCoherent_pseudo_part_qc_cohomology X K L hL hK hGE n
 
 end AlgebraicGeometry

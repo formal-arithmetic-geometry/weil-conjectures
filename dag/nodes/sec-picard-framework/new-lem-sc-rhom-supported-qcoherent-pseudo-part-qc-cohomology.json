@@ -1,0 +1,98 @@
+{
+ "id": "new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc-cohomology",
+ "kind": "statement",
+ "title": "Degreewise quasi-coherence of pseudo-coherent RHom",
+ "statement": "For a pseudo-coherent K and bounded-below quasi-coherent L, the n-th cohomology sheaf of RHom(K,L) is quasi-coherent for every integer n.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H, clause (1), affine-local finite-free calculation"
+ },
+ "stmt_deps": [
+  "def-pur-pseudo-coherent-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood with a bounded-above finite-free model for K, represent L by a module complex, apply the affine pseudo-coherent RHom calculation in degree n, and transport quasi-coherence through the restriction and affine equivalence.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H, clause (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "degreewise quasi-coherence derived internal Hom pseudo-coherent",
+   "results": "No existing theorem matching the global scheme statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsQuasicoherent homologyFunctor derivedInternalHom",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pseudo-coherent RHom quasi-coherent cohomology degree",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQC",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc",
+   "place": "degreewise decomposition",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/RHomSupportedQuasiCoherentPseudoPartQCCohomology.lean",
+  "declaration": "AlgebraicGeometry.rhom_supported_quasiCoherent_pseudo_part_qc_cohomology",
+  "statement": "theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K L : schemeDerivedCategory X)\n    (hL : schemeDerivedQCohProperty X L)\n    (hK : Scheme.IsPseudoCoherent X K) (hGE : ∃ a : ℤ, L.IsGE a)\n    (n : ℤ) :\n    ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj\n      ((derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)\n        X.toRingedSpace.sheaf).obj (op K, L))).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T232858-L-2041420",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T232858-L-2041420",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
