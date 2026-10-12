@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-ind-smooth-finite-presentation-factorization",
+ "kind": "statement",
+ "title": "Smooth-stage factorization with independent carrier universes",
+ "statement": "Let $R$ be a commutative ring, $A$ a finitely presented commutative $R$-algebra, $L$ a commutative $R$-algebra, and $f:A\\to L$ an $R$-algebra map. Suppose $L$ is a filtered colimit of smooth $R$-algebras [def-weil-pbc-filtered-colimit-smooth-algebras], with stages and small filtered index in the joint universe of $R,A,L$. Then there exist a commutative $R$-algebra $B$ in that joint universe, smooth over $R$ [def-weil-pbc-smooth-ring-map], and $R$-algebra maps $\\beta:A\\to B$ and $\\delta:B\\to L$ with $\\delta\\beta=f$. The carrier universes of $R$ and $A$ may be strictly smaller than that of $L$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 00QO (lemma-characterize-finite-presentation), (1) implies (3), and Lemma 07C3 (lemma-when-colimit), (1) implies (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-filtered-colimit-smooth-algebras",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Lift R to R′=ULift R in the target universe. Construct the equivalence CommAlgCat R ≌ Under(CommRingCat.of R′) explicitly: the forward map uses the structure map composed with ULift.down, and the inverse uses ULift.up. Their composites are naturally isomorphic to identity by the identity ring equivalence. Filtered categories are connected, so the underlying-ring forgetful functor preserves the given colimit.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift A to A′ in the target universe. R′→R is an algebra equivalence, so finite presentation of A/R gives finite presentation of A′/R′ by composition and equivalence. Apply RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit to the ring colimit with the compatible R′ structure maps. This gives a stage and a map g′ from A′ with the required composite equality.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The structure-map equality at ULift.up r makes g′ an R-algebra map. Compose g′ with ULift.up on A and take the coprojection as the target map. Evaluate the factorization equality on ULift.up a to prove the algebra-homomorphism composite equality. The stage is smooth by the ind-smooth presentation.",
+   "uses": [
+    "def-weil-pbc-filtered-colimit-smooth-algebras"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "def-weil-pbc-filtered-colimit-smooth-algebras"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 00QO (lemma-characterize-finite-presentation), (1) implies (3), and Lemma 07C3 (lemma-when-colimit), (1) implies (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Maps from finitely presented algebras into filtered colimits of smooth algebras factor through a smooth algebra",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no negative search verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit",
+   "date": "2026-10-12",
+   "results": "1 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit",
+   "verdict": "Exact underlying-ring factorization ingredient; requires algebra-category colimit and universe glue"
+  },
+  {
+   "tool": "grep",
+   "query": "isNilpotent_iff_le_nilradical|exists_eq_comp_ι_app_of_isColimit|flat_of_regular_parameters",
+   "date": "2026-10-12",
+   "results": "7 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/RingTheory/HopkinsLevitzki.lean, Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/RingTheory/Finiteness/NilpotentKer.lean, Mathlib/RingTheory/Noetherian/Nilpotent.lean",
+   "verdict": "Confirmed RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit in Mathlib.Algebra.Category.Ring.FinitePresentation; used in the proved theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuParameterQuotientLocalResolution",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Subsidiary Lemma 07FE, final paragraph: apply Algebra 07C3 to factor the finitely presented local source through a smooth stage",
+   "via": [
+    "lem-weil-pbc-popescu-parameter-quotient-local-resolution",
+    "lem-weil-pbc-popescu-separable-parameter-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.IndSmoothFinitePresentationFactorization",
+  "file": "lean/Sheaf/RingTheory/IndSmoothFinitePresentationFactorization.lean",
+  "declaration": "Algebra.exists_smooth_factorization_of_ind_smooth",
+  "statement": "theorem exists_smooth_factorization_of_ind_smooth {R : Type u} {A : Type v} {L : Type (max u v w)} [CommRing R] [CommRing A] [CommRing L] [Algebra R A] [Algebra R L] [FinitePresentation R A] (f : A →ₐ[R] L) (hind : CategoryTheory.ObjectProperty.ind.{max u v w} (fun B : CommAlgCat.{max u v w} R ↦ Smooth R B) (CommAlgCat.of R L)) : ∃ (B : Type (max u v w)) (_ : CommRing B) (_ : Algebra R B) (_ : Smooth R B) (β : A →ₐ[R] B) (δ : B →ₐ[R] L), δ.comp β = f",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T165529-L-2938954",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T165529-L-2938954",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

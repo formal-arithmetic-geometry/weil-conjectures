@@ -16,48 +16,48 @@
  ],
  "proof": [
   {
-   "text": "At q the d generators are a regular sequence in the d-dimensional regular local ring. The regular-local polynomial-origin ring has the same dimension. The flat-over-regular lemma makes R_p→Λ_q flat; quotient base change makes the reduced local map flat.",
+   "text": "Obtain flatness of the reduced local map and an ind-smooth closed fiber from parameter_quotient_local_flat_fiber_data. This result is independent of C and γ₀.",
    "uses": [
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-weil-pbc-polynomial-ring-origin-regular-local",
-    "lem-weil-pbc-flat-over-regular",
-    "lem-weil-pbc-flat-module-quotient-flat"
+    "lem-weil-pbc-popescu-parameter-quotient-local-flat-fiber-data"
    ],
    "elementary": false
   },
   {
-   "text": "For e=8c, the maximal ideal in R_p/J is nilpotent: degree d(e−1)+1 forces some variable exponent ≥e. Its residue field is k and the target fiber is κ(q). Separability gives that fiber as a filtered colimit of smooth k-algebras. Nilpotent lifting then gives the reduced local target as a filtered colimit of smooth algebras over the reduced local base.",
+   "text": "Prove nilpotence of the base maximal ideal in the private Lean helper powered_parameter_base_nilpotent. The mapped origin ideal is maximal in the powered polynomial quotient and lies in its nilradical because each variable has zero (8c)-th power. Every prime contains the nilradical, so any prime of this quotient equals that mapped origin ideal. Noetherian finite generation gives a nilpotence exponent for this prime, and localization maps its power to zero. Apply popescu_lift_nilpotent to the reduced local map and its maximal ideal.",
    "uses": [
-    "lem-kun-separable-smooth-colimit",
+    "lem-weil-pbc-polynomial-ring-origin-regular-local",
     "lem-weil-pbc-popescu-lift-nilpotent"
    ],
    "elementary": false
   },
   {
-   "text": "Factor the finitely presented reduced local source through a smooth stage. Its singular ideal is the unit ideal, so this is a local resolution.",
+   "text": "Factor the localized tensor-product map through a smooth algebra using the proved independent-universe factorization lemma. Finite type supplies a finite polynomial surjection and hence a representative in Type(max u v). Transport the factorization and smoothness to Shrink of the stage.",
    "uses": [
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "lem-weil-pbc-ind-smooth-finite-presentation-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The smooth stage has singular ideal top: its localization at 1 is smooth, so 1 belongs to the spanning ideal. Its extended radical ideal is consequently top, which contains the starting ideal and is not contained in the local maximal ideal. The composite map equality follows from the stage factorization and the inverse equivalences. This is precisely a Popescu resolution.",
+   "uses": [
     "def-weil-pbc-singular-ideal",
     "def-weil-pbc-popescu-resolution"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-popescu-parameter-quotient-local-flat-fiber-data",
   "lem-weil-pbc-polynomial-ring-origin-regular-local",
-  "lem-weil-pbc-flat-over-regular",
-  "lem-weil-pbc-flat-module-quotient-flat",
-  "lem-kun-separable-smooth-colimit",
   "lem-weil-pbc-popescu-lift-nilpotent",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-ind-smooth-finite-presentation-factorization",
   "def-weil-pbc-singular-ideal",
   "def-weil-pbc-popescu-resolution"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Proof of Lemma 07FE (lemma-resolve-special), final powered-parameter reduction"
+  "place": "Lemma 07FE (lemma-resolve-special), final powered-parameter paragraph; R1 Lean reduction: nilpotence, independent-universe factorization, shrinking and singular-ideal domination proved; only flat/fiber geometry split off"
  },
  "mathlib_searches": [
   {
@@ -133,9 +133,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T135227-L-1659464",
+  "landing": "20261012T165529-L-2938954",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
