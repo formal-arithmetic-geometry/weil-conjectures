@@ -16,11 +16,13 @@
  ],
  "proof": [
   {
-   "text": "For fixed V, take an injective resolution F→J• in S.Modules. Restriction to V is exact and preserves injectives; thus F|V→J•|V is an injective resolution in V.toScheme.Modules.",
+   "text": "Fix V. Obtain EnoughInjectives on S.Modules and V.toScheme.Modules from [lem-weil-pbc-scheme-modules-enough-injectives]. Apply [lem-sc-derived-open-restriction-adjunction-exact] to S.toRingedSpace and V. Its finite-limit/colimit preservation gives exact restriction, and its exact left adjoint gives preservation of injectives by [lem-sp-right-adjoint-preserves-injectives]. Transport these instances across Mathlib overFunctorEquiv V, whose second factor overEquiv V is an equivalence, to restrictFunctor V.ι. From an injective resolution I of F [def-sp-injective-resolutions], construct J of F|V with cocomplex R(I), augmentation singleMapHomologicalComplex.inv followed by R(I.ι), and termwise injectivity. Exact functors preserve the augmentation quasi-isomorphism.",
    "uses": [
     "lem-weil-pbc-scheme-modules-enough-injectives",
     "def-sp-injective-resolutions",
-    "lem-weil-pbc-module-open-restriction-injectives"
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": false,
    "source": {
@@ -29,7 +31,7 @@
    }
   },
   {
-   "text": "Derived evaluation at V is computed by J•(V). Module cohomology of the restricted F is computed by global sections of J•|V. Restricted sections equal the original sections on V, naturally in every term and differential. The canonical identification of rings O_V(V)≅O_S(V) transports these module complexes and their cohomology by a scalar equivalence.",
+   "text": "Write E for evaluation at V and G for global sections on V.toScheme. Their images of I and J compute the corresponding right derived objects by InjectiveResolution.isoRightDerivedObj [def-sp-left-exact-additive], with moduleCohomology as defined in [pqf-def-cohomology]. After forgetting scalar actions, construct an isomorphism of complexes from Mathlib restrictAppIso V.ι at top followed by the presheaf map of the equality V.ι_image_top [lem-weil-pbc-module-restriction-open-immersion-colimits]. The differential compatibility is exactly naturality of each differential viewed as a map of abelian presheaves. Forgetful functors from modules to abelian groups preserve homology; use ShortComplex.mapHomologyIso to identify homology of these underlying complexes with underlying groups of module homology.",
    "uses": [
     "pqf-def-cohomology",
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
@@ -42,7 +44,7 @@
    }
   },
   {
-   "text": "Equivalences reflect zero objects. Apply the assumed vanishing with p=q+1, for every natural q. This is precisely rightAcyclic for sections on V. Quantify over V.",
+   "text": "Apply hcoh V (q+1). Transport the zero object to H^(q+1)(G(J)) by the resolution comparison, then forget to abelian groups. Transfer vanishing across the complex isomorphism and the forgetful homology comparisons. ModuleCat.isZero_iff_subsingleton and AddCommGrpCat.isZero_iff_subsingleton reflect this vanishing back to H^(q+1)(E(I)). Finally transport along I.isoRightDerivedObj E (q+1); quantify over q and V, which is [def-sp-acyclic].",
    "uses": [
     "def-sp-acyclic"
    ],
@@ -56,16 +58,17 @@
  "proof_deps": [
   "lem-weil-pbc-scheme-modules-enough-injectives",
   "def-sp-injective-resolutions",
-  "lem-weil-pbc-module-open-restriction-injectives",
-  "pqf-def-cohomology",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "pqf-def-cohomology",
   "def-sp-left-exact-additive",
   "def-sp-acyclic"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01E1 (2), proof; Tag 01EX final reformulation"
+  "place": "Tag 01E1 (2), proof; Tag 01EX final reformulation. K2: concrete restricted resolution and comparison after forgetting scalar actions, using the existing exact restriction adjunction tool."
  },
  "mathlib_searches": [
   {
@@ -150,10 +153,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T060757-L-2917450",
-  "kind": "interface",
+  "landing": "20261012T085259-L-23181",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
