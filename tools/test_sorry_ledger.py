@@ -1,5 +1,10 @@
 """Source-only regression tests: no Lean invocation."""
 import unittest
+import json
+import pathlib
+import subprocess
+import tempfile
+from unittest.mock import patch
 import sorry_ledger as sl
 
 
@@ -70,6 +75,39 @@ end N
         b=self.state('')
         self.assertEqual(sl.delta(a,b)['closed'],[])
         self.assertEqual(len(sl.delta(a,b)['deleted']),1)
+
+
+class PostBuild(unittest.TestCase):
+    def test_green_pin_noop_and_unrelated_index(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=pathlib.Path(tmp)
+            def git(*args):
+                return subprocess.check_output(['git','-C',tmp,*args],stderr=subprocess.DEVNULL).decode().strip()
+            git('init','-q'); git('config','user.name','Ledger test')
+            git('config','user.email','test@localhost')
+            (root/'lean/Sheaf').mkdir(parents=True)
+            (root/'coord').mkdir(); (root/'local/builds').mkdir(parents=True)
+            (root/'lean/TargetsCheck.lean').write_text('import Sheaf.X\n')
+            (root/'lean/Sheaf/X.lean').write_text('theorem t : True := by sorry\n')
+            git('add','lean'); git('commit','-qm','baseline')
+            baseline=git('rev-parse','HEAD')
+            (root/'local/builds/last.json').write_text(json.dumps(dict(result='green',commit=baseline)))
+            (root/'unrelated').write_text('keep staged'); git('add','unrelated')
+            with patch.object(sl,'ROOT',root), patch.object(sl,'BASELINES',[(baseline,'test stage'),(baseline,'test imports')]):
+                sl.blob.cache_clear()
+                try:
+                    self.assertTrue(sl.post_build()['changed'])
+                    self.assertEqual(git('diff','--cached','--name-only'),'unrelated')
+                    self.assertEqual(git('show','--format=','--name-only','HEAD'),
+                                     'coord/sorry-ledger.md\ncoord/sorry-ledger.tsv')
+                    self.assertFalse(sl.post_build()['changed'])
+                    (root/'local/builds/last.json').write_text('{"result":"red"}')
+                    self.assertIn('skipped',sl.post_build())
+                finally:
+                    if sl._CAT is not None:
+                        sl._CAT.stdin.close(); sl._CAT.wait()
+                        sl._CAT.stdout.close(); sl._CAT=None
+                    sl.blob.cache_clear()
 
 
 if __name__=='__main__': unittest.main()
