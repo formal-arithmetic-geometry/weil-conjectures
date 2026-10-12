@@ -7,8 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineColimitComparisonInjective
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 /-! # Affine restrictions of raw classes eventually vanish
 
@@ -24,6 +25,30 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency true in
+/-- An injective cocone comparison detects zero at a later stage.
+Source: Mathlib `IsColimit.eq_iff'`, applied to x and zero. -/
+private theorem exists_addCommGrp_stage_eq_zero {I : Type v} [Preorder I]
+    [IsDirected I (· ≤ ·)] [Nonempty I] (K : I ⥤ AddCommGrpCat.{v + 1})
+    (B : Cocone K) (hinj : Function.Injective (colimit.desc K B))
+    (i : I) (x : K.obj i) (h : B.ι.app i x = 0) :
+    ∃ (j : I) (f : i ⟶ j), K.map f x = 0 := by
+  have : PreservesFilteredColimitsOfSize.{v, v} (forget AddCommGrpCat.{v + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{v, v + 1, v, v + 1} _
+  change (B.ι.app i : K.obj i ⟶ B.pt).hom x = 0 at h
+  have hx : colimit.ι K i x = colimit.ι K i 0 := by
+    apply hinj
+    change (colimit.ι K i ≫ colimit.desc K B) x =
+      (colimit.ι K i ≫ colimit.desc K B) 0
+    rw [colimit.ι_desc]
+    change (B.ι.app i : K.obj i ⟶ B.pt).hom x =
+      (B.ι.app i : K.obj i ⟶ B.pt).hom 0
+    exact h.trans (map_zero _).symm
+  obtain ⟨j, f, hf⟩ := ((colimit.isColimit K).eq_iff' x 0).mp hx
+  exact ⟨j, f, by simpa only [map_zero] using hf⟩
+
+
+set_option backward.isDefEq.respectTransparency true in
 /-- On an affine etale test object a zero raw limit class dies at a later stage.
 Source: Stacks Project, Tags 09Z1 and 0EZM.
 (blueprint: lem-sbc-higher-direct-image-raw-affine-restriction-vanishing).
@@ -84,6 +109,36 @@ theorem exists_higherDirectImage_raw_affine_restriction_eq_zero {S : Scheme.{v}}
       abelianHigherDirectImageRawPullback (D.map f.op).left (D.obj (op i)).hom
         (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) V
           ((abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)).map
-            (a ≫ q).op z) = 0 := by sorry
+            (a ≫ q).op z) = 0 := by
+  classical
+  let P := abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)
+  let Q := abelianHigherDirectImageRawPresheaf c.pt.hom p (colimit H)
+  let t := P.map q.op z
+  obtain ⟨d⟩ :=
+    exists_raw_affine_colimit_comparison_injective D c hc F φ hφid hφcomp H eH hH p W
+  have ht : (d.β i).app (op W) t = 0 := by
+    have hn := congrArg (fun g => g z) ((d.β i).naturality q.op)
+    change (d.β i).app (op W) (P.map q.op z) = Q.map q.op ((d.β i).app (op U) z) at hn
+    rw [d.hβ i U z] at hn
+    exact hn.trans hz
+  have hx : d.B.ι.app i ((d.eStage i).hom t) = 0 := by
+    rw [d.hleg i t, ht, map_zero]
+  obtain ⟨j, f, hf⟩ := exists_addCommGrp_stage_eq_zero d.K d.B d.hinj i
+    ((d.eStage i).hom t) hx
+  have hzero : (d.eStage j).hom ((d.τ f).app (op W) t) = 0 := by
+    rw [← d.htrans f t]
+    exact hf
+  have hraw := congrArg (d.eStage j).inv hzero
+  simp only [Iso.hom_inv_id_apply, map_zero] at hraw
+  refine ⟨j, f, ?_⟩
+  intro V a
+  rw [← d.hτ f V]
+  have hn := congrArg (fun g => g t) ((d.τ f).naturality a.op)
+  change (d.τ f).app (op V) (P.map a.op t) =
+    (abelianHigherDirectImageRawPresheaf (D.obj (op j)).hom p (F j)).map a.op
+      ((d.τ f).app (op W) t) at hn
+  simp only [op_comp, Functor.map_comp, AddCommGrpCat.comp_apply]
+  change (d.τ f).app (op V) (P.map a.op t) = 0
+  rw [hn, hraw, map_zero]
 
 end AlgebraicGeometry.Etale

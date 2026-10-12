@@ -16,35 +16,34 @@
  ],
  "proof": [
   {
-   "text": "Naturality of inverse-image composition and the single-functor comparison makes raw pullback commute with the restriction along q. Thus the restricted stage class has zero raw limit image on the affine object W.",
+   "text": "Restrict z along q to t. Apply the raw affine comparison theorem on W. It supplies the canonical raw stage and limit maps as natural transformations tau and beta, constrained pointwise to equal the explicit raw pullbacks. Evaluate the naturality square of beta_i at z and use its component equation on U and hz; beta_i(W)(t) is zero.",
    "uses": [
-    "lem-sbc-abelian-higher-direct-image-natural-comparison"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Base change D and c along W → S. The schemes at every stage are qcqs because W is affine and their maps to W are qcqs; affine transitions and the scheme limit are preserved. Restrict the coefficient sheaves and their coherent transition maps. Inverse image preserves the coefficient colimit. Put these sheaves in degree-zero complexes, uniformly bounded below by zero. Derived adjunction for etale restriction and its exact left adjoint identifies the raw derived Hom groups with the cohomology groups on these base changes, naturally in coefficients and pullback. Apply complex cohomology continuity to obtain an injective canonical colimit comparison.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-    "sbc-lem-higher-direct-image-presheaf"
+    "lem-sbc-raw-affine-colimit-comparison-injective"
    ],
    "elementary": false
   },
   {
-   "text": "The equality criterion for a filtered colimit of abelian groups gives j and f : i → j killing the restricted class. The single and shift comparisons identify the colimit transition with the explicit raw pullback. Naturality with further restriction and preservation of zero imply that this same j and f kill all restrictions along V → W. In degree zero use section continuity; the empty affine object has zero group.",
-   "uses": [],
+   "text": "The cocone-leg equation and additivity give B_i(e_i(t))=0. The proved private additive-group lemma applies injectivity of colimit.desc K B and colimit.ι_desc to identify the colimit images of e_i(t) and zero. Shrink the universe of filtered-colimit preservation by the abelian-group forgetful functor, and apply Mathlib IsColimit.eq_iff' to find j and f:i to j with K(f)(e_i(t))=0. The prescribed stage equation gives e_j(tau_f(W)(t))=0. Apply e_j inverse and use the isomorphism and zero identities; tau_f(W)(t)=0.",
+   "uses": [
+    "lem-sbc-raw-affine-colimit-comparison-injective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every a:V to W, evaluate the naturality square of tau_f at t. It says tau_f(V)(P_i(a)(t))=P_j(a)(tau_f(W)(t))=0, because restriction is additive. Presheaf functoriality identifies P_i(a)(t) with restriction of z along a composed with q. The component equation for tau_f identifies its value with the explicit raw stage pullback in the conclusion. Thus the same j and f work on all further restrictions.",
+   "uses": [
+    "lem-sbc-raw-affine-colimit-comparison-injective"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-abelian-higher-direct-image-natural-comparison",
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "sbc-lem-higher-direct-image-presheaf"
+  "lem-sbc-raw-affine-colimit-comparison-injective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Tags 09Z1 and 0EZM; derived-Hom specialization and naturality of restriction"
+  "place": "Tags 09Z1 and 0EZM; canonical raw natural transformations, affine cohomology comparison injectivity, Mathlib filtered-colimit equality, and naturality under restriction"
  },
  "mathlib_searches": [
   {
@@ -136,7 +135,7 @@
   "reviewer": "COMPILER",
   "group": "R1",
   "result": "pass",
-  "landing": "20261012T154834-L-2474210",
+  "landing": "20261012T213853-L-1209537",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
