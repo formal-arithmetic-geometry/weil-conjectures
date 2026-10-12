@@ -19,42 +19,47 @@
  ],
  "proof": [
   {
-   "text": "Use the equivalence between module-valued sheaves and modules over the constant ring sheaf to obtain enough injectives. Embed M into an injective J and take its cokernel Q and quotient g. This is the first step of an injective resolution.",
+   "text": "Use the existing Grothendieck-abelian and enough-injectives instances for the actual module-valued sheaf category. Set J = Injective.under M, use Injective.ι M, and let Q be its cokernel and g the quotient. ShortComplex.exact_cokernel and ShortExact.mk' give the short exact sequence.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
     "def-sp-injective-resolutions"
    ],
    "elementary": false
   },
   {
-   "text": "Forget coefficients and apply exact inverse image to obtain two short exact sequences. Apply the existing pullback long exact ladder to obtain δX and δY with exactness and the canonical commuting boundary square.",
+   "text": "The proved private helper exactForget shows coefficient forgetting preserves finite limits and colimits. For limits, compose with the fully faithful inclusion in presheaves and reflect the preserved limits. For colimits, ModuleCat.forget₂PreservesColimitsOfSize and sheafComposeNatIso identify the composite with sheafification with a colimit-preserving functor; Adjunction.preservesColimitsOfSize_iff descends preservation across the reflective sheafification adjunction. Thus ShortExact.map_of_exact gives the forgotten short exact sequence. Apply pullbackCohomology_longExact_ladder to obtain both exact sequences and the canonical boundary square.",
    "uses": [
-    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-sheafification",
     "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
    ],
    "elementary": false
   },
   {
-   "text": "The constant-ring module equivalence preserves injectives and underlying abelian sheaves, so Tag 03FD kills H^{q+1}(U(J)). Commuting forgetting with inverse image identifies VU(J) with U(i^*J), whose cohomology vanishes by the hypothesis. Exactness now gives both surjectivities, also at q=0.",
+   "text": "Apply moduleValued_injective_cohomology_comparison to J. Its injective constant-ring module representative has zero positive right-derived abelian evaluation by isZero_rightDerived_etale_toSheaf_of_injective, with base coefficient ring ULift ZMod(r). Transport this vanishing through the supplied additive equivalence to H^(q+1)(U(J)). Apply pullback_forget_modules_iso and the given acyclicity assumption to kill H^(q+1)(VU(J)); functoriality of H makes the induced map from the isomorphism injective.",
    "uses": [
+    "new-module-valued-injective-cohomology-comparison",
     "lem-weil-pbc-injective-module-abelian-acyclic",
-    "def-weil-pbc-inverse-image"
+    "lemma-weil-pbc-etale-pullback-forget-modules"
    ],
    "elementary": false
+  },
+  {
+   "text": "Exactness at H^(q+1)(U(M)) and H^(q+1)(VU(M)), with zero target under each following map, gives a preimage of every class. Therefore both connecting homomorphisms are surjective. Specialize the ladder boundary identity to q and apply AddMonoidHom.ext. Only q+1 > 0 is used, covering q = 0.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-enough-injectives",
   "def-sp-injective-resolutions",
-  "prop-weil-pbc-inverse-image-exact",
+  "def-weil-pbc-sheafification",
   "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "new-module-valued-injective-cohomology-comparison",
   "lem-weil-pbc-injective-module-abelian-acyclic",
-  "def-weil-pbc-inverse-image"
+  "lemma-weil-pbc-etale-pullback-forget-modules"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project Tags 095T, 03FD and 010S",
-  "place": "Dimension shifting form of Tag 095T paragraph 2, using Tag 03FD and the natural delta functor of Tag 010S"
+  "document": "Stacks Project Tags 095T, 03FD and 010S; Mathlib sheafification and exactness primitives",
+  "place": "Injective effacement and the natural long exact ladder; the implemented proof uses the two existing encodings through the new comparison bridge"
  },
  "mathlib_searches": [
   {
@@ -147,11 +152,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-7028e",
-  "group": "F1",
+  "reviewer": "X-3b847",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T014425-L-880897",
+  "landing": "20261012T021211-L-1003999",
   "kind": "interface",
-  "note": "independent Codex review: All four Lean signatures match their nodes; the unchanged item follows the recorded degree-zero and induction route. All modules compile cleanly, and axiom checks show only permitted axioms plus sorryAx from documented open obligations."
+  "note": "independent Codex review: Delivered Lean signatures match both node records; the unchanged item follows its revised proof dependencies, both modules compile cleanly, and axiom checks match the documented open obligations."
  }
 }

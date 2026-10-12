@@ -1,0 +1,169 @@
+{
+ "id": "new-module-valued-injective-cohomology-comparison",
+ "kind": "statement",
+ "title": "Compare injective module-valued sheaves with constant-ring modules and derived evaluation",
+ "statement": "Let X be a scheme [def-weil-pbc-scheme-conventions], r a natural number, and J an injective sheaf valued in modules over Z/rZ on its small etale site [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves], [def-sp-injective-resolutions]. Here Z/0Z means Z, and universe lifts do not change the coefficient ring. There is an injective sheaf I of modules over the constant ring sheaf with value Z/rZ [def-weil-pbc-constant-sheaf], [def-weil-sheaf-of-modules-category], such that for each q >= 0 the abelian cohomology H^q(X,U(J)) [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-etale-cohomology] is additively equivalent to the q-th right-derived evaluation at the terminal etale object of the underlying abelian sheaf of I [def-weil-pbc-global-sections-functor]. This asserts comparison of encodings, not vanishing or pullback comparison.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03FD",
+  "place": "Cohomology on Sites, Lemma 03FD, proof: comparison of module and abelian cohomology; the constant-ring specialization and the definition of cohomology via injective resolutions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof": [
+  {
+   "text": "Put R = ULift ZMod(r) in the scheme universe. The single and double lifts of ZMod(r) are canonically isomorphic rings. A module-valued sheaf has an action of the constant ring presheaf; extend it uniquely to the constant ring sheaf by locally representing a scalar by a constant scalar, acting on the restricted section, and gluing. The module laws hold locally and hence globally. Conversely restrict along the sheafification unit. On morphisms both constructions retain the underlying abelian morphism and linearity is checked locally. These inverse constructions give an equivalence commuting with the underlying abelian sheaf.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let I be the image of J under this equivalence. Given a monomorphism and a map into I, transport them to the module-valued category, extend the map by injectivity of J, and transport the extension back. Thus I is injective. The underlying abelian sheaf of I is isomorphic to the forgotten J.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The terminal object of the small etale site is X with its identity map. By the constant-sheaf adjunction, maps from the constant integer sheaf to any abelian sheaf identify additively and naturally with its sections at X. Apply this identification termwise to an abelian-sheaf injective resolution. Its Hom complex computes Ext from the constant integer sheaf, and its evaluation complex computes right-derived evaluation. Taking cohomology gives an additive equivalence in each degree. Compose with the underlying-sheaf isomorphism from the preceding step. No vanishing theorem is used in this comparison.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-etale-cohomology",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03FD",
+  "place": "Cohomology on Sites, Lemma 03FD, proof: comparison of module and abelian cohomology; the constant-ring specialization and the definition of cohomology via injective resolutions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(Ext|cohomology)|equiv.*(constantSheaf|SheafOfModules)|constantSheaf.*equiv",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean",
+   "date": "2026-10-12",
+   "verdict": "No comparison covering both encodings. Module forgetful primitives exist; the comparison must be assembled."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Abelian.Ext",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No comparison covering both encodings. Module forgetful primitives exist; the comparison must be assembled."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves valued in modules over a ring are equivalent to sheaves of modules over the constant ring sheaf, preserving underlying abelian sheaves and injectivity",
+   "results": "8 hits: SheafOfModules.forgetToSheafModuleCat, SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.toSheaf, SheafOfModules.toSheaf_obj_val, SheafOfModules.mk.inj, SheafOfModules.forgetToSheafModuleCat_obj_val, SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf, SheafOfModules.forget",
+   "date": "2026-10-12",
+   "verdict": "No comparison covering both encodings. Module forgetful primitives exist; the comparison must be assembled."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare Ext cohomology of underlying module-valued sheaves with right derived evaluation of sheaves of modules over the constant ring sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext from the constant integer sheaf agrees with right derived sections of an abelian sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass",
+   "date": "2026-10-12",
+   "verdict": "Second reading: degree-zero and injective-resolution comparison primitives exist, but no complete encoding and derived-evaluation bridge was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "12 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.subsingleton_H_of_isZero, CategoryTheory.Sheaf.functorH_obj_coe, CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat, CategoryTheory.Sheaf.H.map, CategoryTheory.Sheaf.H.equiv₀, CategoryTheory.Sheaf.functorH_map, CategoryTheory.Sheaf.H.map_id_apply",
+   "date": "2026-10-12",
+   "verdict": "Second reading: degree-zero and injective-resolution comparison primitives exist, but no complete encoding and derived-evaluation bridge was found."
+  },
+  {
+   "tool": "grep",
+   "query": "forgetToSheafModuleCat|extAddEquivCohomologyClass|rightDerivedObjIso",
+   "results": "20 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean",
+   "date": "2026-10-12",
+   "verdict": "Second reading: degree-zero and injective-resolution comparison primitives exist, but no complete encoding and derived-evaluation bridge was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleAcyclicEffacementLadder",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-strict-henselian-comparison",
+   "place": "Proof, second paragraph: injective-module resolution argument; the cohomology encoding comparison needed in step 3 of new-module-acyclic-effacement-ladder",
+   "via": [
+    "new-module-acyclic-effacement-ladder",
+    "lem-weil-pbc-module-acyclic-cohomology-comparison",
+    "lem-weil-pbc-prime-injective-cohomology-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleValuedInjectiveCohomology.lean",
+  "declaration": "AlgebraicGeometry.Etale.moduleValued_injective_cohomology_comparison",
+  "statement": "theorem moduleValued_injective_cohomology_comparison (X : Scheme.{u}) (r : ℕ)\n    (J : Sheaf X.smallEtaleTopology\n      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective J] :\n    ∃ I : SheafOfModules.{u + 1}\n      ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj\n        (RingCat.of (ULift.{u + 1, u} (ULift.{u} (ZMod r))))),\n      Injective I ∧ ∀ q : ℕ, Nonempty\n        (Sheaf.H\n          ((sheafCompose X.smallEtaleTopology\n            (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))\n              AddCommGrpCat.{u + 1})).obj J) q ≃+\n          (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙\n            (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj\n              (Opposite.op (Scheme.Etale.mk (𝟙 X)))).rightDerived q).obj\n            ((SheafOfModules.toSheaf _).obj I)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3b847",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T021211-L-1003999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3b847",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T021211-L-1003999",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures match both node records; the unchanged item follows its revised proof dependencies, both modules compile cleanly, and axiom checks match the documented open obligations."
+ }
+}
