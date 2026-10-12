@@ -6323,3 +6323,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:55 L: returned deliver/K2/Sheaf.RingTheory.HenselianEtaleRetractionUniqueness (reviewer RETURN: (reviewer X-af7fc, head af7fcd7a7) E2: The claimed dual-number counterexample is invalid: with algebraMap ψ, neither σ =)
 - 05:55 L: returned deliver/D2/Sheaf.AlgebraicGeometry.EtaleComplexClassDescent (reviewer RETURN: (reviewer X-49c64, head 49c64260b) C3/C1: In dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-complex-graded-class-desce)
 - 06:01 L: returned deliver/P1/Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility (reviewer RETURN: (reviewer X-a9c0a, head a9c0adbc0) C1: In dag/nodes/sec-curve-estimates/lem-sc-affine-picard-torsion-base-change.json:17)
+- 06:07 L: returned deliver/B2/Sheaf.AlgebraicGeometry.GabberH0FiniteLift (reviewer RETURN: (the landing tools, head 48956e20d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
