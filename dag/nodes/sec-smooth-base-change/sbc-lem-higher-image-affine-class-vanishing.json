@@ -17,54 +17,33 @@
  ],
  "proof": [
   {
-   "text": "Choose a small directed final presentation of I^op. Its opposite is initial, so reindexing preserves the underlying scheme limit. After base change to an affine etale U over S, the stage schemes and limit are qcqs and the transitions affine. The coefficient diagram on the limit is canonically constant with value the pullback of G, by inverse-image composition, and its colimit is that value since I^op is nonempty and connected.",
+   "text": "Apply local eventual vanishing to obtain a covering sieve and an individual later-stage witness for every arrow in it.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "lem-weil-pbc-inverse-image-composition"
+    "sbc-lem-higher-image-local-class-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "Use an injective module resolution and its underlying abelian-section acyclicity to compute abelian cohomology after forgetting scalars (03FD), without ring flatness. Apply continuity for degree-zero sheaves as complexes (0EZM) to each system of the preceding step. This gives cohomology-presheaf continuity on the affine basis; all maps are the canonical derived-unit maps, hence commute with restrictions and agree with t. The higher-image presheaf description (03Q8) and sheafification of presheaf colimits identify the limit higher image with the sheaf colimit of the stage higher images. For q<0 the resolutions have zero cohomology.",
+   "text": "The ranges of covering etale arrows are open and cover the affine object V. Compactness of V extracts a finite subfamily. Apply IsCofiltered.wideCospan to its witnessing arrows j_a→i, obtaining l→i and compatible arrows l→j_a. Transition coherence and naturality then show that the l-stage section restricts to zero on every member.",
    "uses": [
-    "lem-weil-pbc-injective-module-abelian-acyclic",
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-weil-pbc-sheaves-colimit-sheafification"
+    "sbc-lem-higher-image-over-transition-coherence"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Equality of a stage section with zero in the associated sheaf is locally witnessed by equality with zero at later stages. A finite affine refinement of this cover suffices because V is quasi-compact. Choose one later stage for these finitely many witnesses. The transitioned section is zero on every cover member and therefore zero on V by separatedness. This is the injectivity argument of 0738(2), and uses no surjectivity or gluing of new sections.",
-   "uses": [
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For an original stage i, finality gives an arrow from i to a reindexed stage in I^op. Apply the preceding vanishing argument there and compose arrows. In I this is f:j→i. Functoriality of derived units and inverse-image composition identifies its transition with t(D(f)), giving the required zero.",
-   "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final",
-    "lem-weil-pbc-inverse-image-composition"
-   ],
-   "elementary": false
+   "text": "Apply sheaf separatedness on this finite covering. Form the module homomorphism Λ→R^q(D(l)→S)_*G_l(V) sending n to n times the transitioned section. All its restrictions are zero, so sheaf hom_ext_ofArrows makes this homomorphism zero; evaluation at 1 gives the desired zero section.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-injective-module-abelian-acyclic",
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-weil-pbc-sheaves-colimit-sheafification",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings"
+  "sbc-lem-higher-image-local-class-vanishing",
+  "sbc-lem-higher-image-over-transition-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Specialization of 09Z1 and the injectivity part of 0738 to constant-ring module sheaves; affine section assembly by C3"
+  "place": "09Z1 local continuity followed by the finite-cover injectivity argument of 0738(2); assembly proved using Mathlib compactness, wideCospan, and sheaf hom_ext_ofArrows"
  },
  "mathlib_searches": [
   {
@@ -141,9 +120,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T085221-L-6622",
+  "landing": "20261012T110307-L-617079",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
