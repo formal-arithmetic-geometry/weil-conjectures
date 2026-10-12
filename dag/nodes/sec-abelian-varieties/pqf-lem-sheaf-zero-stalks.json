@@ -18,47 +18,36 @@
  ],
  "proof": [
   {
-   "text": "Let $U\\subseteq X$ be open and let $s\\in\\mathcal F(U)$. For each $x\\in U$, the hypothesis gives $s_x=0$ in the stalk $\\mathcal F_x$.",
+   "text": "Forget F to its underlying sheaf of abelian groups using SheafOfModules.toSheaf. At each point, RingedSpace.moduleStalkFunctor has definitionally the same stalk carrier. ModuleCat.isZero_iff_subsingleton and AddCommGrpCat.isZero_iff_subsingleton therefore turn the hypothesis into vanishing of each abelian-group stalk.",
    "uses": [
-    "def-weil-pbc-module-stalk"
+    "def-pc-module-stalk-functor",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md",
-    "place": "## Proof, first sentence"
-   }
+   "elementary": true
   },
   {
-   "text": "By the germ equality criterion in the stalk definition, for each $x\\in U$ there is an open neighbourhood $V_x$ with $x\\in V_x\\subseteq U$ such that $s|_{V_x}=0$.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md",
-    "place": "## Proof, first sentence"
-   }
-  },
-  {
-   "text": "The opens $V_x$ cover $U$, and the restrictions of $s$ to every member of this cover are zero. The separatedness part of the sheaf axiom for the underlying sheaf of abelian groups therefore gives $s=0$. Since this holds for every open $U$ and every section $s$, $\\mathcal F$ is the zero sheaf.",
+   "text": "Apply Mathlib TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero to the underlying abelian-group sheaf. This packages the germ equality and sheaf separatedness argument from the source.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md",
-    "place": "## Proof, second sentence"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The functor SheafOfModules.toSheaf is faithful and additive. The image of the identity of F is zero because its image object is zero. Injectivity on morphisms then gives identity equals zero for F, and IsZero.iff_id_eq_zero concludes.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-module-stalk"
+  "def-pc-module-stalk-functor",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-sheaf-zero-stalks.md",
-  "place": "## Proof"
+  "place": "Original germ/separatedness proof, implemented via Mathlib TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero and faithful additive forgetting (A4, 2026-10-13)."
  },
  "mathlib_searches": [
   {
@@ -150,5 +139,15 @@
   "group": "N1",
   "result": "pass",
   "note": "X : Scheme.{u}, F : X.Modules (def-weil-sheaf-of-modules-category record), hF every point's O_X-module stalk IsZero via RingedSpace.moduleStalkFunctor (STATE MODULE STALKS, same form as landed CoherentLocalIsomorphism), conclusion IsZero F in X.Modules; no extra hypotheses, no let/notation/local instance/tautological conjunct; Mathlib only TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero (fixed coefficient category), not exact, existing:false correct"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261012T231632-L-1961218",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -7,7 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Mathlib.Topology.Sheaves.Abelian
+import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # A sheaf with vanishing stalks is zero
@@ -38,6 +39,16 @@ def-weil-sheaf-of-modules-category. -/
 theorem isZero_of_isZero_stalks (X : Scheme.{u}) (F : X.Modules)
     (hF : ∀ (x : X), IsZero ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)) :
     IsZero F := by
-  sorry
+  let G := SheafOfModules.toSheaf X.ringCatSheaf
+  have hG : IsZero (G.obj F) := by
+    apply (TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero (G.obj F)).mpr
+    intro x
+    apply AddCommGrpCat.isZero_iff_subsingleton.mpr
+    change Subsingleton (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.toTopCat) F.val.presheaf x)
+    exact ModuleCat.isZero_iff_subsingleton.mp (hF x)
+  apply (IsZero.iff_id_eq_zero F).mpr
+  apply G.map_injective
+  rw [G.map_id, G.map_zero]
+  exact (IsZero.iff_id_eq_zero (G.obj F)).mp hG
 
 end AlgebraicGeometry.Scheme.Modules
