@@ -14,42 +14,29 @@
  ],
  "proof": [
   {
-   "text": "Fix x and an affine neighbourhood V. The equal-open identity appLE is the identity, so the hypothesis makes G(V) flat over O(V). Restriction to V preserves quasi-coherence.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
+   "text": "Choose an affine open neighbourhood V of x using exists_isAffineOpen_mem_and_subset. Install the section module structure appearing in hflat and the actual germ algebra O(V) -> O_x. Apply hflat V.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "Identify V with Spec O(V). The quasi-coherent restricted module is the associated sheaf of its section module by the tilde-Gamma counit. Its stalk at x is the localization of G(V) at the prime corresponding to x, as an O_x-module; restriction to the neighbourhood does not change the stalk.",
+   "text": "Module.Flat.baseChange makes O_x tensor_{O(V)} G(V) flat over O_x. The affine tensor-presentation theorem identifies this constructed tensor product with the module stalk over O_x; transport flatness by Module.Flat.of_linearEquiv.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-tilde-stalk-localization",
-    "lem-weil-pbc-affine-open-spec-points"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Under the preceding identifications put A=O(V), B=O_x and M=G(V), so G_x=B tensor_A M. For an injective map N to N-prime of B-modules, restriction of scalars remains injective and flatness of M makes N tensor_A M to N-prime tensor_A M injective. The balanced tensor associativity isomorphisms N tensor_B (B tensor_A M)=N tensor_A M identify these maps. The injective-map criterion for flatness gives flatness of G_x over B. This also handles zero modules and the empty scheme.",
-   "uses": [
+    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
     "lem-weil-pbc-flat-module-base-change"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-spec-tilde-stalk-localization"
+  "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+  "lem-weil-pbc-flat-module-base-change"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "X3",
+  "group": "M1",
   "date": "2026-10-13",
   "document": "Stacks Project, Morphisms of Schemes",
-  "place": "Tag 01U4, implication (2) to (1), specialized to the identity morphism; https://stacks.math.columbia.edu/tag/01U4"
+  "place": "Tag 01U4, (2) to (1), affine localization and flat base change; second reading replaces an equivalent-flat-module restatement by a genuine tensor presentation"
  },
  "mathlib_searches": [
   {
@@ -116,9 +103,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T184359-L-4025179",
+  "landing": "20261012T211615-L-1057470",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

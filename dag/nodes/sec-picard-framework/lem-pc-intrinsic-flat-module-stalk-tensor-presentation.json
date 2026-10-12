@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+ "kind": "statement",
+ "title": "Affine quasi-coherent stalks are tensor products of sections with the stalk ring",
+ "statement": "Let Y be a scheme [def-pc-scheme], G a quasi-coherent O_Y-module [pqf-def-coherent], V an affine open of Y, and x a point of V. Put A=O_Y(V), M=G(V), and B=O_Y,x. Give M the section-module action restricted along the equal-open identity appLE, and B the A-algebra structure induced by the germ homomorphism A -> B. Then B tensor_A M is linearly equivalent over B to the module stalk G_x [def-pc-module-stalk-functor]. No flatness hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project, Schemes",
+  "place": "Tags 01IA (lemma-quasi-coherent-affine) and 01HV (lemma-spec-sheaves), items (6), (7); affine localization step of Tag 01U4 (2) to (1); Tag 00DK (lemma-tensor-localization)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "The equal-open identity appLE is the identity homomorphism (Scheme.id_app and presheaf.map_id); rewrite its restricted Module instance to the ordinary section action. Define the A-linear germ map f into the stalk with its actual germ scalar action. Set S to the complement of the prime of x, using primeIdealOf and fromSpec_primeIdealOf.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The stalk ring is the localization of O(V) at S by IsAffineOpen.isLocalization_stalk, so every s in S has unit germ and acts bijectively on the module stalk.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent a stalk vector by a germ on W and shrink to a basic open D(g) containing x. Use exists_map_eq_pow_smul_of_isAffineOpen to extend the restricted section after multiplying by a power of g. Because x lies in D(g), g belongs to S, giving the surjectivity axiom of IsLocalizedModule. For equal germs shrink their equality to D(g); exists_pow_smul_eq_zero_of_isAffineOpen kills the difference by a power of g, giving the equality axiom.",
+   "uses": [
+    "lem-weil-pbc-affine-module-basic-open-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalk A-module action is restriction along the germ homomorphism, so IsScalarTower A O_x G_x follows by reflexivity on algebraMap scalars. Apply Mathlib IsLocalizedModule.isBaseChange and IsBaseChange.equiv to the proved localization axioms. The equivalence sends b tensor m to b times germ(m); the localization fraction inverse is m/s -> (1/s) tensor m.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M1",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Schemes",
+  "place": "Tags 01IA and 01HV (6), (7); basic-open denominator proof following the proved upstream section-extension and torsion lemmas, adapted from the private localization proof in FiniteTypeModuleSupportClosed.lean, then Mathlib localization base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ii]so|[Ii]so.*stalk|stalk.*[Tt]ensor",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; no exact general affine sheaf-module tensor-stalk comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent module stalk tensor product affine sections germ base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicoherent sheaf stalk on an affine open is the tensor product of its sections with the local ring",
+   "results": "Hits: AlgebraicGeometry.IsAffineOpen.isLocalization_stalk, AlgebraicGeometry.IsAffineOpen.isLocalization_stalk', ModuleCat.Tilde.toStalk, AlgebraicGeometry.StructureSheaf.instAlgebraCarrierStalkCommRingCatObjPresheafTopObjPushforwardTopMapValOpensCarrierTopStructureSheaf, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.localizationToStalk_mk, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux; no exact general affine sheaf-module tensor-stalk comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat.baseChange",
+   "results": "Hits: Module.Flat.baseChange; no exact general affine sheaf-module tensor-stalk comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntrinsicFlatModuleTensorFlatAux",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Affine localization identification in step 2 of lem-pc-intrinsic-flat-module-flat-stalk; its recorded created.item chain ends at a module name, so blueprint_refs.py finds no blueprint ancestor",
+   "via": [
+    "lem-pc-intrinsic-flat-module-flat-stalk"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntrinsicFlatModuleStalkTensorPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntrinsicFlatModuleStalkTensorPresentation.lean",
+  "declaration": "AlgebraicGeometry.affine_sections_stalk_tensor_presentation",
+  "statement": "theorem affine_sections_stalk_tensor_presentation {Y : Scheme.{u}} (G : Y.Modules)\n    [SheafOfModules.IsQuasicoherent.{u} G] (V : Y.affineOpens) (x : Y)\n    (hx : x ∈ V.1) :\n    letI : Module Γ(Y, V.1) Γ(G, V.1) :=\n      Module.compHom _ ((𝟙 Y : Y ⟶ Y).appLE V.1 V.1 (le_rfl)).hom\n    letI : Algebra Γ(Y, V.1) (Y.presheaf.stalk x) :=\n      TopCat.Presheaf.algebra_section_stalk Y.presheaf ⟨x, hx⟩\n    Nonempty (TensorProduct Γ(Y, V.1) (Y.presheaf.stalk x) Γ(G, V.1)\n      ≃ₗ[Y.presheaf.stalk x]\n        (RingedSpace.moduleStalkFunctor Y.toRingedSpace x).obj G)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T211615-L-1057470",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T211615-L-1057470",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
