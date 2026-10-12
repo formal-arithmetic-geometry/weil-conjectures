@@ -25,126 +25,36 @@
  ],
  "proof": [
   {
-   "text": "(Reduction to $R[x]$.) Since $S$ is a finitely generated $R$-algebra, there are $n\\ge0$ and a surjective $R$-algebra map $P_n=R[x_1,\\ldots,x_n]\\to S$, so $S\\cong P_n/J$ for an ideal $J$. By [lem-weil-pbc-g-ring-quotient] it suffices to show that $P_n$ is a G-ring. As $P_0=R$ and $P_k=P_{k-1}[x_k]$ is the polynomial ring in one variable over $P_{k-1}$ [def-weil-polynomial-ring], by induction on $n$ it suffices to prove: (*) if $R$ is a G-ring, then $R[x]$ is a G-ring.",
+   "text": "Use Algebra.FiniteType.isNoetherianRing to obtain the Noetherian component of IsGRing S from the finite type hypothesis.",
    "uses": [
-    "lem-weil-pbc-g-ring-quotient",
-    "def-weil-polynomial-ring"
+    "lem-weil-pbc-finite-type-algebra-noetherian"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552), first paragraph (lines 12555-12560): 'Writing S as a quotient of R[x_1,...,x_n] we see from Lemma 07PP that it suffices to prove that R[x_1,...,x_n] is a G-ring. By induction on n it suffices to prove that R[x] is a G-ring.' (Stacks first reduces 'essentially of finite type' to finite type by localization; for the finite type statement here that reduction is not needed.)"
+    "document": "Mathlib.RingTheory.FiniteType",
+    "place": "Algebra.FiniteType.isNoetherianRing"
    }
   },
   {
-   "text": "(Reduction to maximal ideals.) Let $R$ be a G-ring [def-weil-pbc-g-ring]; it is Noetherian, so $R[x]$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]. By [lem-weil-pbc-g-ring-maximal-ideal-criterion] it suffices to show that for every maximal ideal $\\mathfrak q\\subset R[x]$ the completion map $R[x]_{\\mathfrak q}\\to(R[x]_{\\mathfrak q})^\\wedge$ is a regular ring map [def-weil-pbc-g-ring].",
+   "text": "Apply the formal-fibre theorem for finite type algebras over G-rings to obtain the regular completion-map component for every prime of S.",
    "uses": [
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-g-ring-maximal-ideal-criterion"
+    "lem-weil-pbc-finite-type-over-g-ring-formal-fibres"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552), lines 12560-12566: 'Let q in R[x] be a maximal ideal. By Lemma 07PT it suffices to show that R[x]_q -> R[x]_q^ is regular.'"
-   }
-  },
-  {
-   "text": "(Reduction to a local base.) Fix a maximal ideal $\\mathfrak q\\subset R[x]$ and put $\\mathfrak p=\\mathfrak q\\cap R$, a prime of $R$, $A=R_{\\mathfrak p}$ and $\\mathfrak m=\\mathfrak pA$. By [lem-weil-pbc-flat-local-ring-maps] (applied to the identity of $R$) $A$ is a Noetherian local ring, and by the definition of a G-ring [def-weil-pbc-g-ring] its completion map $A\\to A^\\wedge$ is regular. Let $W=R\\setminus\\mathfrak p$, viewed in $R[x]$; then $A[x]=W^{-1}(R[x])$ [def-weil-pbc-localization-at-prime]. As $W\\cap\\mathfrak q=\\emptyset$, $\\mathfrak Q=\\mathfrak qA[x]$ is a prime of $A[x]$ with $\\mathfrak Q\\cap R[x]=\\mathfrak q$, and $\\mathfrak Q\\cap A=\\mathfrak pA=\\mathfrak m$. Moreover $A[x]/\\mathfrak Q$ is the localization of the field $R[x]/\\mathfrak q$ at the image of $W$, which does not contain $0$, so $A[x]/\\mathfrak Q=R[x]/\\mathfrak q$ is a field and $\\mathfrak Q$ is maximal. Since $W\\subseteq R[x]\\setminus\\mathfrak q$, both $A[x]_{\\mathfrak Q}$ and $R[x]_{\\mathfrak q}$ are the localization of $R[x]$ at $R[x]\\setminus\\mathfrak q$, compatibly with the maximal ideals, hence also $(A[x]_{\\mathfrak Q})^\\wedge=(R[x]_{\\mathfrak q})^\\wedge$. So it suffices to prove: (**) if $(A,\\mathfrak m)$ is a Noetherian local ring whose completion map $A\\to A^\\wedge$ is regular and $\\mathfrak Q\\subset A[x]$ is a maximal ideal with $\\mathfrak Q\\cap A=\\mathfrak m$, then $c:A[x]_{\\mathfrak Q}\\to(A[x]_{\\mathfrak Q})^\\wedge$ is regular.",
-   "uses": [
-    "lem-weil-pbc-flat-local-ring-maps",
-    "def-weil-pbc-g-ring",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552), lines 12566-12569: 'If q lies over p in R, then we may replace R by R_p. Hence we may assume that R is a Noetherian local G-ring with maximal ideal m and that q lies over m.' (Only the regularity of R_p -> R_p^ is used below, so the G-ring property of R_p is not needed.)"
-   }
-  },
-  {
-   "text": "(The prime $\\mathfrak Q'$.) Put $B=A^\\wedge$, the $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion], with $\\iota:A\\to B$. Then $B$ is Noetherian [lem-weil-pbc-adic-completion-noetherian], local with maximal ideal $\\mathfrak mB$ and $A/\\mathfrak m\\xrightarrow{\\sim}B/\\mathfrak mB$ [lem-weil-pbc-local-completion-local-ring], and $\\mathfrak mB$-adically complete [lem-weil-pbc-adic-completion-mod-ideal] ($\\mathfrak m$ is finitely generated); $B[x]$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]. Let $\\iota[x]:A[x]\\to B[x]=B\\otimes_AA[x]$ [def-weil-polynomial-ring]. It induces $A[x]/\\mathfrak mA[x]=(A/\\mathfrak m)[x]\\xrightarrow{\\sim}(B/\\mathfrak mB)[x]=B[x]/\\mathfrak mB[x]$, so contraction along $\\iota[x]$ is a bijection from the primes of $B[x]$ containing $\\mathfrak mB[x]$ onto the primes of $A[x]$ containing $\\mathfrak mA[x]$. Every prime of $B[x]$ over $\\mathfrak Q$ contains $\\mathfrak QB[x]\\supseteq\\mathfrak mB[x]$; hence there is exactly one prime $\\mathfrak Q'\\subset B[x]$ with $\\iota[x]^{-1}(\\mathfrak Q')=\\mathfrak Q$, $B[x]/\\mathfrak Q'\\cong A[x]/\\mathfrak Q$ is a field, so $\\mathfrak Q'$ is maximal, and $\\mathfrak Q'\\cap B\\supseteq\\mathfrak mB$ is the maximal ideal $\\mathfrak mB$ of $B$.",
-   "uses": [
-    "def-weil-pbc-adic-completion",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-adic-completion-mod-ideal",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-weil-polynomial-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552), lines 12569-12571: 'Note that there is a unique prime q' in R^[x] lying over q.' (the argument is not written in Stacks and is written out here)"
-   }
-  },
-  {
-   "text": "(Lower arrow.) $\\iota:A\\to B$ is regular by (**)'s hypothesis and $A\\to A[x]$ is of finite type, so the base change $\\iota[x]:A[x]\\to B\\otimes_AA[x]=B[x]$ is regular [lem-weil-pbc-regular-base-change]. Since $B[x]$ is Noetherian and $\\iota[x]^{-1}(\\mathfrak Q')=\\mathfrak Q$, the induced map of localizations $\\psi:A[x]_{\\mathfrak Q}\\to B[x]_{\\mathfrak Q'}$ is regular by [lem-weil-pbc-regular-local-maximal] ((1)$\\Rightarrow$(2)). In particular $\\psi$ is flat, and it is a local homomorphism of Noetherian local rings [lem-weil-pbc-flat-local-ring-maps].",
-   "uses": [
-    "lem-weil-pbc-regular-base-change",
-    "lem-weil-pbc-regular-local-maximal",
-    "lem-weil-pbc-flat-local-ring-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552), lines 12580-12582: 'Since R is a G-ring the lower horizontal arrow is regular (as a localization of a base change of the regular ring map R -> R^).' Base change: Lemma Tag 07C1; localization: Lemma Tag 07C0."
-   }
-  },
-  {
-   "text": "(Right arrow and composite.) Applying [lem-weil-pbc-polynomial-complete-local-formal-fibres] to the Noetherian complete local ring $(B,\\mathfrak mB)$ and the maximal ideal $\\mathfrak Q'\\subset B[x]$ with $\\mathfrak Q'\\cap B=\\mathfrak mB$ (Step 4), the completion map $c':B[x]_{\\mathfrak Q'}\\to(B[x]_{\\mathfrak Q'})^\\wedge$ is regular. The ring $(B[x]_{\\mathfrak Q'})^\\wedge$ is Noetherian [lem-weil-pbc-adic-completion-noetherian], so all fibre rings of $c'\\circ\\psi$ are Noetherian [lem-weil-pbc-fibre-ring-noetherian], and $c'\\circ\\psi:A[x]_{\\mathfrak Q}\\to(B[x]_{\\mathfrak Q'})^\\wedge$ is regular by [lem-weil-pbc-regular-composition].",
-   "uses": [
-    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-fibre-ring-noetherian",
-    "lem-weil-pbc-regular-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552), lines 12583-12590: 'Suppose we can prove the right vertical arrow is regular. Then it follows that the composition ... is regular' (Lemma Tag 07QI); the right vertical arrow is the complete case, lines 12592-12637."
-   }
-  },
-  {
-   "text": "(Descent to the left arrow.) Let $\\psi^\\wedge:(A[x]_{\\mathfrak Q})^\\wedge\\to(B[x]_{\\mathfrak Q'})^\\wedge$ be the map of completions induced by the flat local homomorphism $\\psi$, so that $\\psi^\\wedge\\circ c=c'\\circ\\psi$; it is flat [lem-weil-pbc-flat-completion]. Both completions are local with maximal ideals generated by the maximal ideals of $A[x]_{\\mathfrak Q}$, $B[x]_{\\mathfrak Q'}$ [lem-weil-pbc-local-completion-local-ring], so $\\psi^\\wedge$ is a flat local homomorphism and $\\operatorname{Spec}$ of it is surjective [lem-weil-pbc-flat-local-hom-faithfully-flat]. Applying [lem-weil-pbc-regular-permanence] to $A[x]_{\\mathfrak Q}\\xrightarrow{c}(A[x]_{\\mathfrak Q})^\\wedge\\xrightarrow{\\psi^\\wedge}(B[x]_{\\mathfrak Q'})^\\wedge$, whose composite $c'\\circ\\psi$ is regular by Step 6, $c$ is regular. This proves (**), hence (*) by Step 3 and Step 2, hence the proposition by Step 1.",
-   "uses": [
-    "lem-weil-pbc-flat-completion",
-    "lem-weil-pbc-local-completion-local-ring",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-regular-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552), lines 12587-12591: '... and hence the left vertical arrow is regular by Lemma 07NT. Hence we see that we may assume R is a Noetherian complete local ring and q a prime lying over the maximal ideal of R.' Flatness and Spec-surjectivity of the map of completions, implicit in Stacks, via Tags 0C4G and 00HR."
+    "place": "More on Algebra, Proposition 07PV; formal-fibre reduction"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-g-ring-quotient",
-  "def-weil-polynomial-ring",
-  "def-weil-pbc-g-ring",
   "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-g-ring-maximal-ideal-criterion",
-  "lem-weil-pbc-flat-local-ring-maps",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-adic-completion",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-local-completion-local-ring",
-  "lem-weil-pbc-adic-completion-mod-ideal",
-  "lem-weil-pbc-regular-base-change",
-  "lem-weil-pbc-regular-local-maximal",
-  "lem-weil-pbc-polynomial-complete-local-formal-fibres",
-  "lem-weil-pbc-fibre-ring-noetherian",
-  "lem-weil-pbc-regular-composition",
-  "lem-weil-pbc-flat-completion",
-  "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-regular-permanence"
+  "lem-weil-pbc-finite-type-over-g-ring-formal-fibres"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Proposition Tag 07PV (proposition-finite-type-over-G-ring, line 12552) and its proof"
+  "by": "document and Mathlib",
+  "document": "literature/stacks-project/more-algebra.tex; Mathlib.RingTheory.FiniteType",
+  "place": "Proposition 07PV together with Algebra.FiniteType.isNoetherianRing"
  },
  "mathlib_searches": [
   {
@@ -241,5 +151,15 @@
   "group": "C1",
   "result": "pass",
   "note": "R,S CommRing independent universes; R->S as [Algebra R S]; hR : IsGRing R (recorded root-namespace def, includes Noetherian); [Algebra.FiniteType R S] = f.g. algebra (MvPolynomial (Fin 2) R and R/I instantiate); conclusion IsGRing S; no hollow or added hypotheses; #check/compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T053925-L-2632336",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

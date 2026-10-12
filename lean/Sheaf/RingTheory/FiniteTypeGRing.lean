@@ -6,16 +6,7 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.FiniteType
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.FlatCompletion
-import Sheaf.RingTheory.GRingMaximalIdealCriterion
-import Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres
-import Sheaf.RingTheory.QuotientGRing
-import Sheaf.RingTheory.RegularBaseChange
-import Sheaf.RingTheory.RegularComposition
-import Sheaf.RingTheory.RegularLocalMaximal
-import Sheaf.RingTheory.RegularPermanence
+import Sheaf.RingTheory.FiniteTypeGRingAux
 
 /-!
 # Finite type algebras over G-rings
@@ -36,4 +27,7 @@ completion maps to the local complete case via base change and faithfully flat d
 -/
 theorem isGRing_of_finiteType {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [Algebra R S] (hR : IsGRing R) [Algebra.FiniteType R S] : IsGRing S := by
-  sorry
+  let _ : IsNoetherianRing R := hR.1
+  let _ : IsNoetherianRing S := Algebra.FiniteType.isNoetherianRing R S
+  refine ⟨inferInstance, ?_⟩
+  exact finiteType_completion_regular hR
