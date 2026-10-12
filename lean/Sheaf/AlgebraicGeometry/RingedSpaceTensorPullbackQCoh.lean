@@ -9,6 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackQCoHLocal
 
 /-! # Quasi-coherence of tensor pullback on ringed spaces
 
@@ -44,6 +45,14 @@ theorem tensorModulePullback_isQuasicoherent
     (SheafOfModules.changeOfRings.{u, u, u}
       (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)
       (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf G)).IsQuasicoherent := by
-  sorry
+  classical
+  let M := SheafOfModules.changeOfRings.{u, u, u}
+    (CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩)
+    (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf G)
+  choose U hU hQU using fun x ↦ tensorModulePullback_isQuasicoherent_local g G hG x
+  have hcov : (Opens.grothendieckTopology X).CoversTop U := by
+    rw [Opens.coversTop_iff]
+    exact eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hU x⟩
+  exact SheafOfModules.IsQuasicoherent.of_coversTop M U hcov
 
 end AlgebraicGeometry.RingedSpace
