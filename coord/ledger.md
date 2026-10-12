@@ -6669,3 +6669,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/U1/Sheaf.Topology.ClosedPushforwardAbelianStalks (stage 3; reviewer PASS; first push; landing 20261012T070554-L-3478825 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/U2/Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy (stage 3; reviewer PASS; first push; landing 20261012T070555-L-3478925 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/U2/Sheaf.ConstructibleSheaf.ConnectedTorsorModuleDescent (stage 3; reviewer PASS; first push; landing 20261012T070555-L-3479025 (interface); batch 20261012T070523; modules 2; new nodes 1)
+- 07:05 L: merged deliver/U2/Sheaf.ConstructibleSheaf.ConnectedTorsorSubgroupQuotient (stage 3; reviewer PASS; first push; landing 20261012T070555-L-3479121 (proof); batch 20261012T070523; modules 1; new nodes 0)
