@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-local-first-order-coordinates",
+ "kind": "statement",
+ "title": "Square-zero coordinates on a local ring with a residue section",
+ "statement": "Let A be a Noetherian local ring [def-weil-pbc-noetherian-ring], with maximal ideal m and residue field K. Suppose s:K -> A is a ring map whose composite with reduction is the identity. Put d=m.spanFinrank. There exists a ring isomorphism e:A/m^2 -> K plus K^d, the trivial square-zero extension [def-sc-trivial-square-zero-extension], such that the first coordinate of e(a mod m^2) is the residue of a for every a in A.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07EI, construction of f_1; coefficient field from Algebra Tag 032A"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-trivial-square-zero-extension"
+ ],
+ "proof": [
+  {
+   "text": "Nakayama identifies the dimension of V=m/m^2 over K with d=m.spanFinrank. Choose a basis indexed by Fin d, giving a linear equivalence V = K^d. In Lean use IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace and Module.finBasisOfFinrankEq.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section s defines a K-algebra structure on A and A/m^2. The canonical injection j:V -> A/m^2 is K-linear: the action of s(c) on V equals multiplication by its residue c. The image of j has square zero, since products of elements of m vanish modulo m^2.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the universal lift of the trivial square-zero extension to define F(c,v)=s(c)+j(v), using the chosen coordinates. Reduction of F(c,v) is c. If F(c,v)=F(c_prime,v_prime), reduction gives c=c_prime, and injectivity of j gives v=v_prime.",
+   "uses": [
+    "def-sc-trivial-square-zero-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any a in A, a-s(residue(a)) lies in m. Its cotangent class supplies v such that F(residue(a),v)=a modulo m^2, so F is surjective. Invert this bijective ring map. The first coordinate of the inverse is reduction, as required.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-trivial-square-zero-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07EI, construction of f_1; detailed coefficient argument formalized by N3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local noetherian ring with a section of its residue map modulo its maximal ideal squared is a trivial square zero extension of its residue field by its cotangent space",
+   "results": "Service unavailable: Internal Server Error through msearch.py.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete noetherian local algebra over a field modulo the square of its maximal ideal is a trivial square zero extension of its residue field by its cotangent space",
+   "results": "Cotangent-space finiteness and finrank lemmas, Algebra.Extension.infinitesimal; no split ring equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TrivSqZeroExt|cotangentSpace_eq_spanrank|firstOrder",
+   "results": "TrivSqZeroExt universal lift, Ideal.cotangentToQuotientSquare, and IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace found and used; no existing split first-order coordinates. Also searched blueprint for cotangent: two unrelated nodes.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FirstOrderPowerSeriesComparison",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07EI, construction of f_1: Square-zero coordinates on a local ring with a residue section",
+   "via": [
+    "lem-weil-pbc-first-order-power-series-comparison",
+    "lem-weil-pbc-fs-adic-power-series-comparison-map",
+    "lem-weil-pbc-fs-adic-field-regular-local"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalFirstOrderCoordinates",
+  "file": "lean/Sheaf/RingTheory/LocalFirstOrderCoordinates.lean",
+  "declaration": "IsLocalRing.exists_firstOrder_coordinates",
+  "statement": "theorem exists_firstOrder_coordinates (A : Type u) [CommRing A] [IsLocalRing A]\n    [IsNoetherianRing A] (s : ResidueField A →+* A)\n    (hs : (residue A).comp s = RingHom.id _) :\n    ∃ e : (A ⧸ maximalIdeal A ^ 2) ≃+*\n        TrivSqZeroExt (ResidueField A) (Fin (maximalIdeal A).spanFinrank → ResidueField A),\n      ∀ a : A, (e (Ideal.Quotient.mk (maximalIdeal A ^ 2) a)).fst = residue A a",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T165526-L-2937992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T165526-L-2937992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
