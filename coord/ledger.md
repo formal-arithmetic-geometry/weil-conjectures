@@ -9799,3 +9799,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/P2/Sheaf.Algebra.Homology.ConeHorizontalGradedIso (stage 3; reviewer PASS; first push; landing 20261012T223410-L-1638421 (interface); batch 20261012T223357; modules 4; new nodes 3)
 - 22:34 L: merged deliver/P2/Sheaf.RingTheory.ReducedNoetherianTotalRingFractions (stage 3; reviewer PASS; first push; landing 20261012T223410-L-1638576 (proof); batch 20261012T223357; modules 1; new nodes 0)
 - 22:34 L: merged deliver/P3/Sheaf.AlgebraicGeometry.ClosedImmersionFormalKernelComparison (stage 3; reviewer PASS; first push; landing 20261012T223411-L-1638698 (proof); batch 20261012T223357; modules 1; new nodes 0)
+- 22:34 L: merged deliver/P3/Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated (stage 3; reviewer PASS; first push; landing 20261012T223411-L-1638856 (interface); batch 20261012T223357; modules 3; new nodes 2)

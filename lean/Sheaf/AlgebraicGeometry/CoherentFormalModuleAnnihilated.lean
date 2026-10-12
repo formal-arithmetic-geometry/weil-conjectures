@@ -6,6 +6,8 @@ Authors: SHEAF group M1
 module
 
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleKernel
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilatedDoubleCokernel
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Data.List.TFAE
@@ -119,7 +121,9 @@ theorem coherentFormalModule_annihilated_double (X : Scheme.{u}) [IsNoetherian X
         (kernel (α.hom.app (op n)))) ∧
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (2 * t)).2
         (cokernel (α.hom.app (op n)))) := by
-  sorry
+  intro n
+  exact ⟨coherentFormalModule_annihilated_double_kernel X I K F G α r U t hcover ht h n,
+    coherentFormalModule_annihilated_double_cokernel X I K F G α r U t hcover ht h n⟩
 
 end AlgebraicGeometry
 
