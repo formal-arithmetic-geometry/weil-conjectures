@@ -385,7 +385,7 @@ theorem hasWeightsAtMost_directImage {F : WeilSheaf k₀ l U} (hF : F.IsLisse) {
         k * Real.log ‖ι α‖ ≤ e * ((k * β / 2 + 1) * Real.log (Nat.card k₀)) := by
       have h := norm_le_of_hasEigenvalue_stalk_directImage j ι (isLisse_tensorPow F hF k)
         (hw.tensorPow hF k) x hx
-        (hasEigenvalue_stalk_directImage_tensorPow j j.denseRange hF x hα hk)
+        (hasEigenvalue_stalk_directImage_tensorPow j hF x hα k)
       rw [map_pow, norm_pow] at h
       have := Real.log_le_log (pow_pos ha0 k) h
       rwa [Real.log_pow, Real.log_pow, Real.log_rpow hq0] at this

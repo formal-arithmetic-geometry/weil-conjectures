@@ -49,8 +49,8 @@ local Frobenius on `(j_* (F^{⊗ k}))_x̄` for every `k`.
 The eigenvector `v ^ {⊗ k}` is built from the pairings `j_* F ⊗ j_* F^{⊗ k} ⟶ j_* F^{⊗ (k + 1)}`
 and is nonzero since `v` is the germ of a section `σ` of the lisse sheaf `F` over a pro-étale
 neighbourhood, whose tensor powers do not vanish
-(`AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalkAt_lowerStar_tensorPow`). (blueprint: `lem-wf-boundary-semicontinuity`,
-Step 4) -/
+(`AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalkAt_lowerStar_tensorPow`).
+(blueprint: `lem-wf-boundary-semicontinuity`, Step 4) -/
 theorem hasEigenvalue_stalk_directImage_tensorPow {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
