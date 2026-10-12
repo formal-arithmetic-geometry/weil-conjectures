@@ -235,4 +235,63 @@ lemma twistPolynomialSection_map {a : ℤ} (s : Set n) {c : (n → ℤ) →₀ A
 
 end LaurentSection
 
+section Cech
+
+variable {a b b' : ℤ}
+
+/-- **Multiplication by a polynomial on Čech cochains**: the comparison of the monomial Čech
+complex with the Čech complex of the twisting sheaves on the standard covering intertwines
+multiplication by a polynomial `F` of degree `a` on monomial cochains with the map induced by
+multiplication by the global section of `𝒪(a)` of `F`.
+
+(blueprint: `lem-pc-projective-space-serre-pairing`) -/
+lemma cechComplexFunctor_map_twistMulHom_monomialCechToCechFun
+    (F : AddMonoidAlgebra A (n → ℤ))
+    (hF : F.coeff ∈ Finsupp.supported A A (monomialExponents n a)) (h : a + b = b') (p : ℕ)
+    (c : MonomialCechCochain n A b p) :
+    ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map (presheafModuleCatMap
+        (twistMulHom h (twistPolynomialSection A a F.coeff)))).f p
+        (monomialCechToCechFun A b p c) =
+      monomialCechToCechFun A b' p (monomialCechMulCochain n A F hF h p c) := by
+  subst h
+  refine TopCat.Presheaf.cechComplexFunctor_ext (standardOpen n (Spec (.of A)))
+    (twist n (Spec (.of A)) (a + b)).presheafModuleCat fun σ ↦ ?_
+  have hπ := ConcreteCategory.congr_hom (TopCat.Presheaf.cechComplexFunctor_map_f_π
+    (standardOpen n (Spec (.of A))) (twist n (Spec (.of A)) b).presheafModuleCat
+    (presheafModuleCatMap (twistMulHom rfl (twistPolynomialSection A a F.coeff))) p σ)
+    (monomialCechToCechFun A b p c)
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at hπ
+  rw [hπ, cechComplexFunctorπ_monomialCechToCechFun, cechComplexFunctorπ_monomialCechToCechFun,
+    NatTrans.naturality_apply]
+  congr 1
+  rw [presheafModuleCatMap_app_apply, twistMonomialLinearMap_supportedEquivFinsupp,
+    twistMonomialLinearMap_supportedEquivFinsupp]
+  refine (twistMulHom_app _ _ _).trans ?_
+  rw [twistPolynomialSection_map _ hF]
+  exact twistTensorIso_hom_app_twistLaurentSection (Set.range_nonempty σ)
+    (Finsupp.supported_mono (monomialExponents_subset_laurentExponents _) hF) (c σ).2
+
+/-- **Multiplication by a polynomial on Čech complexes**: the identification
+`cechComplexTwistIso` of the Čech complexes of the twisting sheaves with the monomial Čech
+complexes transports the map induced by multiplication by the global section of `𝒪(a)` of a
+polynomial `F` to multiplication by `F`. -/
+lemma cechComplexTwistIso_hom_comp_monomialCechMul (F : AddMonoidAlgebra A (n → ℤ))
+    (hF : F.coeff ∈ Finsupp.supported A A (monomialExponents n a)) (h : a + b = b') :
+    ((ModuleCat.restrictScalars (structureRingHom (n := n) A)).mapHomologicalComplex _).map
+        ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map
+          (presheafModuleCatMap (twistMulHom h (twistPolynomialSection A a F.coeff)))) ≫
+      (cechComplexTwistIso n A b').hom =
+    (cechComplexTwistIso n A b).hom ≫ monomialCechMul n A F hF h := by
+  have hinv : (cechComplexTwistIso n A b).inv ≫
+      ((ModuleCat.restrictScalars (structureRingHom (n := n) A)).mapHomologicalComplex _).map
+        ((cechComplexFunctor (standardOpen n (Spec (.of A)))).map
+          (presheafModuleCatMap (twistMulHom h (twistPolynomialSection A a F.coeff)))) =
+      monomialCechMul n A F hF h ≫ (cechComplexTwistIso n A b').inv := by
+    ext p c
+    exact cechComplexFunctor_map_twistMulHom_monomialCechToCechFun F hF h p c
+  rw [(Iso.inv_comp_eq _).1 hinv]
+  simp
+
+end Cech
+
 end AlgebraicGeometry.ProjectiveSpace
