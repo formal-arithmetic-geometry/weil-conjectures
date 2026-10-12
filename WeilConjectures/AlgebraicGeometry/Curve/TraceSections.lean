@@ -99,6 +99,34 @@ lemma traceSections_smul (V : Y.Opens) (hV : IsAffineOpen (f ⁻¹ᵁ V)) (hfree
   exact (congrArg _ (algebraMap_smul (M := Ω[Γ(X, f ⁻¹ᵁ V)⁄k]) Γ(X, f ⁻¹ᵁ V) r _)).trans
     (map_smul _ r _)
 
+/-- For `V` and `f⁻¹V` affine, the restriction of a basis of `Γ(X, f⁻¹V)` over `Γ(Y, V)` is a basis
+of `Γ(X, f⁻¹ D(r))` over `Γ(Y, D(r))`: both rings are localizations at `r`. -/
+lemma exists_basis_basicOpen {V : Y.Opens} (hV : IsAffineOpen V) (hV' : IsAffineOpen (f ⁻¹ᵁ V))
+    (r : Γ(Y, V)) {ι : Type*}
+    (b : letI := (f.app V).hom.toAlgebra; Module.Basis ι Γ(Y, V) Γ(X, f ⁻¹ᵁ V)) :
+    letI := (f.app (Y.basicOpen r)).hom.toAlgebra
+    ∃ b' : Module.Basis ι Γ(Y, Y.basicOpen r) Γ(X, f ⁻¹ᵁ Y.basicOpen r),
+      ∀ i, b' i = X.presheaf.map (homOfLE (f.preimage_mono (Y.basicOpen_le r))).op (b i) := by
+  letI := (f.app V).hom.toAlgebra
+  letI := (f.app (Y.basicOpen r)).hom.toAlgebra
+  letI : Algebra Γ(Y, V) Γ(Y, Y.basicOpen r) :=
+    (Y.presheaf.map (homOfLE (Y.basicOpen_le r)).op).hom.toAlgebra
+  letI : Algebra Γ(X, f ⁻¹ᵁ V) Γ(X, f ⁻¹ᵁ Y.basicOpen r) :=
+    (X.presheaf.map (homOfLE (f.preimage_mono (Y.basicOpen_le r))).op).hom.toAlgebra
+  letI : Algebra Γ(Y, V) Γ(X, f ⁻¹ᵁ Y.basicOpen r) :=
+    (f.app V ≫ X.presheaf.map (homOfLE (f.preimage_mono (Y.basicOpen_le r))).op).hom.toAlgebra
+  haveI : IsScalarTower Γ(Y, V) Γ(X, f ⁻¹ᵁ V) Γ(X, f ⁻¹ᵁ Y.basicOpen r) :=
+    .of_algebraMap_eq' rfl
+  haveI : IsScalarTower Γ(Y, V) Γ(Y, Y.basicOpen r) Γ(X, f ⁻¹ᵁ Y.basicOpen r) :=
+    .of_algebraMap_eq' (congrArg CommRingCat.Hom.hom (f.naturality _)).symm
+  haveI : IsLocalization.Away r Γ(Y, Y.basicOpen r) := hV.isLocalization_basicOpen r
+  haveI : IsLocalization (Algebra.algebraMapSubmonoid Γ(X, f ⁻¹ᵁ V) (Submonoid.powers r))
+      Γ(X, f ⁻¹ᵁ Y.basicOpen r) := by
+    rw [Algebra.algebraMapSubmonoid, Submonoid.map_powers]
+    exact hV'.isLocalization_of_eq_basicOpen _ _ (f.preimage_basicOpen r)
+  exact ⟨b.localizationLocalization Γ(Y, Y.basicOpen r) (Submonoid.powers r) _,
+    b.localizationLocalization_apply _ _ _⟩
+
 /-- Finiteness and freeness of `Γ(X, f⁻¹V)` over `Γ(Y, V)` pass to basic opens of `V`. -/
 lemma free_finite_basicOpen {V : Y.Opens} (hV : IsAffineOpen V) (hV' : IsAffineOpen (f ⁻¹ᵁ V))
     (hfree : letI := (f.app V).hom.toAlgebra; Module.Free Γ(Y, V) Γ(X, f ⁻¹ᵁ V))
@@ -107,8 +135,11 @@ lemma free_finite_basicOpen {V : Y.Opens} (hV : IsAffineOpen V) (hV' : IsAffineO
     (letI := (f.app (Y.basicOpen r)).hom.toAlgebra;
       Module.Free Γ(Y, Y.basicOpen r) Γ(X, f ⁻¹ᵁ Y.basicOpen r)) ∧
     (letI := (f.app (Y.basicOpen r)).hom.toAlgebra;
-      Module.Finite Γ(Y, Y.basicOpen r) Γ(X, f ⁻¹ᵁ Y.basicOpen r)) :=
-  sorry
+      Module.Finite Γ(Y, Y.basicOpen r) Γ(X, f ⁻¹ᵁ Y.basicOpen r)) := by
+  letI := (f.app V).hom.toAlgebra
+  obtain ⟨b', -⟩ := exists_basis_basicOpen hV hV' r (Module.Free.chooseBasis Γ(Y, V) Γ(X, f ⁻¹ᵁ V))
+  letI := (f.app (Y.basicOpen r)).hom.toAlgebra
+  exact ⟨.of_basis b', .of_basis b'⟩
 
 /-- **The trace of differentials on sections is compatible with restriction to basic opens.** -/
 lemma traceSections_restrict {V : Y.Opens} (hV : IsAffineOpen V) (hV' : IsAffineOpen (f ⁻¹ᵁ V))
