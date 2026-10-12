@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Polynomial.Basic
 public import Mathlib.RingTheory.Coprime.Basic
 import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
+import Sheaf.RingTheory.LiftMonicCoprimeFactorizationEtaleCore
 
 /-!
 # Lifting monic coprime factorizations after an étale extension
@@ -62,6 +63,13 @@ theorem exists_etale_lift_monic_coprime_factorization
         ∃ g' h' : A'[X], g'.Monic ∧ h'.Monic ∧ f.map φ = g' * h' ∧
           g'.map (Ideal.Quotient.mk J) = g₀.map α ∧
           h'.map (Ideal.Quotient.mk J) = h₀.map α := by
-  sorry
+  obtain ⟨A', _, φ, hE, hbij, g', h', hg', hh', hfac, hgred⟩ :=
+    exists_etale_lift_monic_coprime_factorization_core I f hf g₀ h₀ hg₀ hh₀
+      hfactor hcoprime
+  let J : Ideal A' := I.map φ
+  let α : A ⧸ I →+* A' ⧸ J := Ideal.quotientMap J φ Ideal.le_comap_map
+  have hhred := lift_monic_coprime_factorization_h_reduction I f g₀ h₀ hg₀ hh₀ hfactor
+    A' φ g' h' hfac hgred
+  exact ⟨A', inferInstance, φ, hE, hbij, g', h', hg', hh', hfac, hgred, hhred⟩
 
 end Polynomial

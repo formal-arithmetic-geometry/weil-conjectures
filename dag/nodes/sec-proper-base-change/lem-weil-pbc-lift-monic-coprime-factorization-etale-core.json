@@ -1,0 +1,117 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0ALH proof"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Decompose the six-step Tag 0ALH argument at this intermediate conclusion.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0ALH proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal coprime factorization ring etale",
+   "results": "Polynomial.UniversalCoprimeFactorizationRing",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monic polynomial factorization quotient etale",
+   "results": "UniversalCoprimeFactorizationRing",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.UniversalCoprimeFactorizationRing",
+   "results": "factor₁ factor₂ homEquiv",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversalCoprimeFactorizationRing",
+   "results": "Mathlib source declarations",
+   "date": "2026-10-12",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LiftMonicCoprimeFactorizationEtale",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-weil-pbc-lift-monic-coprime-factorization-etale-core",
+ "title": "Core étale lifting with one reduction",
+ "statement": "A monic coprime factorization lifts to an étale extension with quotient bijection and the first prescribed reduction.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LiftMonicCoprimeFactorizationEtaleCore",
+  "file": "lean/Sheaf/RingTheory/LiftMonicCoprimeFactorizationEtaleCore.lean",
+  "declaration": "Polynomial.exists_etale_lift_monic_coprime_factorization_core",
+  "statement": "theorem exists_etale_lift_monic_coprime_factorization_core\n    {A : Type u} [CommRing A] (I : Ideal A) (f : A[X]) (hf : f.Monic)\n    (g₀ h₀ : (A ⧸ I)[X]) (hg₀ : g₀.Monic) (hh₀ : h₀.Monic)\n    (hfactor : f.map (Ideal.Quotient.mk I) = g₀ * h₀)\n    (hcoprime : IsCoprime g₀ h₀) :\n    ∃ (A' : Type u) (_ : CommRing A') (φ : A →+* A'),\n      let J : Ideal A' := I.map φ\n      let α : A ⧸ I →+* A' ⧸ J := Ideal.quotientMap J φ Ideal.le_comap_map\n      AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom φ)) ∧\n        Function.Bijective α ∧\n        ∃ g' h' : A'[X], g'.Monic ∧ h'.Monic ∧ f.map φ = g' * h' ∧\n          g'.map (Ideal.Quotient.mk J) = g₀.map α",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lift-monic-coprime-factorization-etale",
+   "place": "decomposition of Tag 0ALH proof",
+   "via": [
+    "lem-weil-pbc-lift-monic-coprime-factorization-etale"
+   ]
+  },
+  "same_as": null
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T113945-L-820245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T113945-L-820245",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
