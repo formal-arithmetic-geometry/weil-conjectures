@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
 /-!
-# Pullback along an étale morphism commutes with internal homs
+# Pullback along a étale morphism commutes with internal homs
 
 Let `g : V ⟶ X` be étale and let `A` be a symmetric monoidal closed Grothendieck abelian
 coefficient category. The pullback `g^*` of étale sheaves is monoidal, so it has a comparison
@@ -22,7 +22,7 @@ isomorphism (`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar`): the inte
 sheaves is local.
 
 The proof identifies `g^*` with the restriction along the localization functor
-`V_ét ⥤ X_ét` (`AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction`), as
+`V_proét ⥤ X_proét` (`AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction`), as
 monoidal functors: both monoidal structures are determined by the adjunctions with `g_*`, and the
 units of the adjunction `j_g^* ⊣ g_*` are computed sectionwise
 (`AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction_unit_app_tensor`). The
@@ -42,6 +42,13 @@ open CategoryTheory Limits MonoidalCategory Functor.LaxMonoidal Opposite
 namespace AlgebraicGeometry
 
 open Scheme Etale
+
+/-- The localization functor along an étale morphism is continuous for the small étale
+topologies, written with `Scheme.smallEtaleTopology`. -/
+local instance {V X : Scheme.{u}} {g : V ⟶ X} (h : Etale g) :
+    (MorphismProperty.Over.map ⊤ h).IsContinuous V.smallEtaleTopology X.smallEtaleTopology :=
+  inferInstanceAs ((MorphismProperty.Over.map ⊤ h).IsContinuous
+    (V.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale))
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [BraidedCategory A]
@@ -71,7 +78,7 @@ lemma Etale.localizationRestrictionLowerStarAdjunction_unit_app_tensor
       ((localizationRestrictionLowerStarAdjunction A g h).unit.app P ⊗ₘ
         (localizationRestrictionLowerStarAdjunction A g h).unit.app Q) ≫
         μ (g)_*[A] _ _ ≫ (g)_*[A].map (μ ((MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous
-          A (V.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale)) P Q) := by
+          A V.smallEtaleTopology X.smallEtaleTopology) P Q) := by
   apply Sheaf.tensor_hom_ext
   rw [Functor.map_comp, ← μ_natural_assoc]
   ext U : 2
@@ -87,7 +94,7 @@ lemma Etale.localizationRestrictionLowerStarAdjunction_unit_app_tensor
 lemma Etale.localizationRestrictionLowerStarAdjunction_unit_app_unit :
     (localizationRestrictionLowerStarAdjunction A g h).unit.app (𝟙_ _) =
       ε (g)_*[A] ≫ (g)_*[A].map (ε ((MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous
-          A (V.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale))) := by
+          A V.smallEtaleTopology X.smallEtaleTopology)) := by
   apply Sheaf.hom_ext_of_ε_comp
   ext U : 2
   simp only [NatTrans.comp_app, Functor.map_comp,
@@ -105,14 +112,14 @@ variable [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
 
 open Functor.OplaxMonoidal
 
-/-- The identification of the pullback along an étale morphism with the restriction,
+/-- The identification of the pullback along a étale morphism with the restriction,
 as a functor to the pushforward. -/
 noncomputable abbrev Etale.upperStarIsoSheafPushforward :
     (g)^*[A] ≅ (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
-      (V.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale) :=
+      V.smallEtaleTopology X.smallEtaleTopology :=
   upperStarIsoLocalizationRestriction A g h
 
-/-- The identification of the pullback along an étale morphism with the restriction is a
+/-- The identification of the pullback along a étale morphism with the restriction is a
 monoidal natural isomorphism. -/
 instance : NatTrans.IsMonoidal (Etale.upperStarIsoSheafPushforward A g h).hom where
   unit := by
@@ -151,36 +158,41 @@ open scoped MonoidalClosed.FunctorCategory
 
 omit [(X.smallEtaleTopology.W (A := A)).IsMonoidal]
   [(V.smallEtaleTopology.W (A := A)).IsMonoidal] in
-/-- **Pullback along an étale morphism commutes with internal homs**: the comparison map
+/-- **Pullback along a étale morphism commutes with internal homs**: the comparison map
 `g^* [P, Q] ⟶ [g^* P, g^* Q]` is an isomorphism. -/
 theorem Etale.isIso_ihomComparison_upperStar (P : Sheaf X.smallEtaleTopology A) :
     IsIso (ihomComparison (g)^*[A] P).natTrans := by
   let h : Etale g := hg
   let R := (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
-    (V.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale)
+    V.smallEtaleTopology X.smallEtaleTopology
   let W := (Functor.whiskeringLeft _ _ A).obj (MorphismProperty.Over.map ⊤ h).op
   have : ∀ k : V.Etaleᵒᵖ, (Under.post (MorphismProperty.Over.map ⊤ h).op (X := k)).IsEquivalence :=
     fun k ↦ MorphismProperty.Over.isEquivalence_post_map_op h k.unop
-  let τ := Functor.sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
-    (MorphismProperty.Over.map ⊤ h) A (V.smallGrothendieckTopology @Etale)
-      (X.smallGrothendieckTopology @Etale)
-  have : NatTrans.IsMonoidal τ.symm.hom := inferInstanceAs (NatTrans.IsMonoidal τ.inv)
-  have h2 : IsIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P).natTrans := by
-    refine @isIso_ihomComparison_of_iso _ _ _ _ _ _ _ _ _ _ _ _ τ.symm _ P ?_
+  have hW : IsIso (ihomComparison W ((sheafToPresheaf _ A).obj P)).natTrans := inferInstance
+  have hι : ∀ Y : Sheaf X.smallEtaleTopology A,
+      IsIso (ihomComparison (sheafToPresheaf _ A) Y).natTrans :=
+    Monoidal.Reflective.isIso_ihomComparison
+      (sheafificationAdjunction X.smallEtaleTopology A)
+  have hιV : ∀ Y : Sheaf V.smallEtaleTopology A,
+      IsIso (ihomComparison (sheafToPresheaf _ A) Y).natTrans :=
+    Monoidal.Reflective.isIso_ihomComparison
+      (sheafificationAdjunction V.smallEtaleTopology A)
+  have h1 : IsIso (ihomComparison (sheafToPresheaf _ A ⋙ W) P).natTrans := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro Q
     rw [ihomComparison_comp_app]
-    have := Monoidal.Reflective.isIso_ihomComparison
-      (sheafificationAdjunction (X.smallGrothendieckTopology @Etale) A) P
-    have : IsIso (ihomComparison W
-      ((sheafToPresheaf (X.smallGrothendieckTopology @Etale) A).obj P)).natTrans := inferInstance
     infer_instance
+  let τ := Functor.sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
+    (MorphismProperty.Over.map ⊤ h) A V.smallEtaleTopology
+    X.smallEtaleTopology
+  have : NatTrans.IsMonoidal τ.symm.hom := inferInstanceAs (NatTrans.IsMonoidal τ.inv)
+  have h2 : IsIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P).natTrans :=
+    isIso_ihomComparison_of_iso τ.symm P
   have hR : IsIso (ihomComparison R P).natTrans := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro Q
     have := NatIso.isIso_app_of_isIso (ihomComparison (R ⋙ sheafToPresheaf _ A) P).natTrans Q
     rw [ihomComparison_comp_app] at this
-    have := Monoidal.Reflective.isIso_ihomComparison (sheafificationAdjunction _ A) (R.obj P)
     have := IsIso.of_isIso_comp_right ((sheafToPresheaf _ A).map
       ((ihomComparison R P).natTrans.app Q))
       ((ihomComparison (sheafToPresheaf _ A) (R.obj P)).natTrans.app (R.obj Q))
@@ -188,5 +200,30 @@ theorem Etale.isIso_ihomComparison_upperStar (P : Sheaf X.smallEtaleTopology A) 
   exact isIso_ihomComparison_of_iso (upperStarIsoSheafPushforward A g h) P
 
 end Closed
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+open Scheme Etale
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [BraidedCategory A]
+  [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
+  {V X : Scheme.{u}} (g : V ⟶ X) [hg : Etale g]
+  [(X.smallEtaleTopology.W (A := A)).IsMonoidal]
+  [(V.smallEtaleTopology.W (A := A)).IsMonoidal]
+
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
+
+/-- The pullback along a étale morphism is braided: it is identified, as a monoidal
+functor, with the restriction along the localization functor, which is lax braided. -/
+noncomputable instance Etale.laxBraided_upperStar : (g)^*[A].LaxBraided where
+  braided P Q := by
+    let τ := Etale.upperStarIsoSheafPushforward A g hg
+    rw [← cancel_mono (τ.hom.app (Q ⊗ P)), Category.assoc, NatTrans.naturality,
+      ← Category.assoc, NatTrans.IsMonoidal.tensor, Category.assoc,
+      Functor.LaxBraided.braided, Category.assoc, NatTrans.IsMonoidal.tensor,
+      ← BraidedCategory.braiding_naturality_assoc]
 
 end AlgebraicGeometry

@@ -76,7 +76,9 @@ that `T` has sections locally, i.e. every object is covered by objects over whic
 section. Equivalently, `T` is locally isomorphic to `G` with its translation action.
 (blueprint: `def-sc-gm-torsor`, for a general abelian sheaf `G` on a general site; the étale
 `𝔾ₘ`-torsors and the Zariski `𝒪ˣ`-torsors of the blueprint are the cases
-`G = AlgebraicGeometry.Scheme.gmSheaf X` and `G = AlgebraicGeometry.Scheme.unitsSheaf X`) -/
+`G = AlgebraicGeometry.Scheme.gmSheaf X` and `G = AlgebraicGeometry.Scheme.unitsSheaf X`).
+For `G` the constant sheaf of a finite abelian group on a small étale site these are the finite
+torsors of blueprint `def-weil-pbc-finite-torsors`. -/
 structure Torsor (G : Sheaf J AddCommGrpCat.{w}) where
   /-- The underlying sheaf of sets. -/
   sheaf : Sheaf J (Type w)
@@ -922,7 +924,15 @@ omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
   [EnoughInjectives (Sheaf J AddCommGrpCat.{w})] in
 /-- The connecting homomorphism `Γ(Q) → H¹(G)` is natural: for a morphism `(φ, χ, ψ)` from a
 short exact sequence `0 → G → I → Q → 0` to `0 → G' → I' → Q' → 0`, the image of `δ(s)` under
-`φ` is `δ'(ψ(s))`. -/
+`φ` is `δ'(ψ(s))`:
+```
+  0 --> G --ι--> I --d--> Q --> 0          Γ(T, Q) --δ--> H¹(T, G)
+        |        |        |                   |               |
+        φ        χ        ψ                   ψ           H¹(φ)
+        v        v        v                   v               v
+  0 --> G' -ι'-> I' -d'-> Q' --> 0         Γ(T, Q') --δ'--> H¹(T, G')
+```
+The squares on the left commute by `h₁` and `h₂`; the square on the right is the claim. -/
 lemma map_δ_of_comp_eq {G' I Q I' Q' : Sheaf J AddCommGrpCat.{w}} {ι : G ⟶ I} {d : I ⟶ Q}
     {w : ι ≫ d = 0} (hS : (ShortComplex.mk ι d w).ShortExact) {ι' : G' ⟶ I'} {d' : I' ⟶ Q'}
     {w' : ι' ≫ d' = 0} (hS' : (ShortComplex.mk ι' d' w').ShortExact) (φ : G ⟶ G')
@@ -945,7 +955,15 @@ lemma map_δ_of_comp_eq {G' I Q I' Q' : Sheaf J AddCommGrpCat.{w}} {ι : G ⟶ I
 `G`-torsor and `P'` a `G'`-torsor, and let `σ : P ⟶ P'` be a natural map which is equivariant
 along `φ`: `σ(a • x) = φ(a) • σ(x)`. Then the class of `P'` in `H¹(G')` is the image under `φ`
 of the class of `P`: `P'` is the torsor `P ∧^G G'` obtained from `P` by extension of the
-structure group along `φ`. -/
+structure group along `φ`.
+```
+  G × P --•--> P              [P] ∈ H¹(T, G)
+    |          |                  |
+  φ × σ        σ                H¹(φ)
+    v          v                  v
+  G' × P' -•-> P'            [P'] ∈ H¹(T, G')
+```
+-/
 theorem classH1_eq_map_of_equivariant {G' : Sheaf J AddCommGrpCat.{w}} (φ : G ⟶ G')
     (P : Torsor G) (P' : Torsor G') (σ : ∀ U, P.sheaf.obj.obj U → P'.sheaf.obj.obj U)
     (hσ : ∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (x : P.sheaf.obj.obj U),

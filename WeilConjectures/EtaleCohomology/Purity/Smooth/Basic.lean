@@ -419,6 +419,7 @@ theorem nonempty_iso_dualizingComplex_comp [HasTateTwist.IsNormalized Λ]
 section BaseChange
 
 variable {X' Y' : Scheme.{u}} {g : X' ⟶ X} {f' : X' ⟶ Y'} {v : Y' ⟶ Y}
+  [HasInvertibleExponent Λ X']
 
 variable (d) in
 /-- The base-change identification of the source of the purity map: for a commutative square
@@ -473,7 +474,7 @@ noncomputable def smoothPullbackExchange (sq : IsPullback g f' f v)
     leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq.toCommSq K ≪≫
       smoothPurityIso Λ f' _ θ' φ'
 
-omit [IsSeparated f] [SmoothOfRelativeDimension d f] [HasInvertibleExponent Λ X] in
+omit [IsSeparated f] [SmoothOfRelativeDimension d f] in
 /-- Blueprint `thm-pur-smooth-base-change-coherence`: Smooth base-change coherence
 
 For a cartesian square `g ≫ f = f' ≫ v` with `f` smooth of relative dimension `d`, the pullback
