@@ -27,38 +27,69 @@
  ],
  "proof": [
   {
-   "text": "Conditions (1)-(3) of Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV) hold, as in Tag 0B6G where (1),(2) are called immediate and (3) local. Because f is proper [def-weil-proper-morphism], it is of finite type, hence locally of finite type, X is Noetherian, and X is proper over Y; the support of every cohomology sheaf of P is closed in X, hence proper over Y (a closed immersion followed by f). Locally P is represented by a bounded strictly perfect complex [def-pc-perfect-complex]; on the Noetherian scheme X its cohomology sheaves are coherent, and since X is quasi-compact finitely many opens suffice, so P is bounded with coherent cohomology. The perfect-morphism hypothesis says that O_X has finite Tor dimension over f^{-1}O_Y; each term of a local bounded strictly perfect representative of P is a direct summand of a finite free O_U-module, so the representative has finite Tor dimension over f^{-1}O_Y, and by quasi-compactness of X the bound is uniform, so P has finite Tor dimension over f^{-1}O_Y.",
+   "text": "Properness supplies local finite type and quasi-compactness [def-weil-proper-morphism]. The proved library theorem isNoetherian_of_locallyOfFiniteType gives a Noetherian source. Apply [lem-pc-perfect-noetherian-cohomology] to P to obtain global cohomological bounds and coherence of every cohomology sheaf.",
    "uses": [
     "def-weil-proper-morphism",
+    "lem-pc-perfect-noetherian-cohomology",
     "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G)"
+   }
+  },
+  {
+   "text": "For each cohomology sheaf F, [pqf-lem-coherent-ft-locnoeth] gives quasi-coherence and finite type. By [lem-weil-pbc-finite-type-module-support-closed] its nonzero-stalk locus is closed. Equip this locus with its reduced induced closed subscheme [def-weil-pbc-closed-subset-proper-over-base]. Its closed immersion is proper, and composition with f is proper. This gives HasSupportProperOver f F directly, with no choice of arbitrary subscheme.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "def-weil-proper-morphism"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma 37.61.13 (Tag 0B6G), proof: conditions (1)--(3) for Lemma 36.27.1"
+    "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G)"
    }
   },
   {
-   "text": "Apply [lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect] with S=Y and E=P. Its hypotheses (Y Noetherian, f locally of finite type, P bounded with coherent cohomology, supports proper over Y, finite Tor dimension over f^{-1}O_Y) are exactly the conclusions of step 1, so Rf_*P is perfect on Y.",
+   "text": "Apply [lem-pc-perfect-relative-finite-tor] using compactness of X, local finite type of f, the Noetherian base, stalkwise finite Tor dimension and perfection of P. This gives HasFiniteTorDimensionOver f P.",
+   "uses": [
+    "lem-pc-perfect-relative-finite-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect] to the bounds, coherence, proper supports and relative finite Tor dimension constructed above. It yields exactly that the derived direct image of P is perfect on Y.",
    "uses": [
     "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Lemma 37.61.13 (Tag 0B6G), final application of Lemma 36.27.1"
+    "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-proper-morphism",
   "def-pc-perfect-complex",
-  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-proper-morphism",
+  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+  "lem-pc-perfect-noetherian-cohomology",
+  "lem-pc-perfect-relative-finite-tor",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Lemma 37.61.13 (Tag 0B6G)"
+  "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G)"
  },
  "mathlib_searches": [
   {
@@ -137,5 +168,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194108-L-454138",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

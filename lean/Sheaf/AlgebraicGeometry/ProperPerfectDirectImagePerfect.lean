@@ -11,6 +11,11 @@ public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
+import Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology
+import Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Perfect direct image along a proper perfect morphism
 
@@ -53,6 +58,25 @@ theorem proper_perfect_directImage_perfect
     [IsNoetherian Y] (f : X ⟶ Y) [IsProper f] (hperfect : HasStalkwiseFiniteTorDimension f)
     (P : schemeDerivedCategory X) (hP : Scheme.IsPerfect X P) :
     Scheme.IsPerfect Y ((schemeDerivedDirectImage f).obj P) := by
-  sorry
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  obtain ⟨hbounded, hcoherent⟩ := Scheme.perfect_bounded_coherent_cohomology X P hP
+  have hsupport : ∀ i : ℤ, Scheme.Modules.HasSupportProperOver f
+      ((DerivedCategory.homologyFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj P) := by
+    intro i
+    let F : X.Modules := (DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj P
+    obtain ⟨hq, ht⟩ :=
+      (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp (hcoherent i)
+    have : F.IsQuasicoherent := hq
+    have : F.IsFiniteType := ht
+    let Z : TopologicalSpace.Closeds X :=
+      ⟨{x : X | ¬ Subsingleton (F.presheaf.stalk x)},
+        (Scheme.Modules.finite_type_module_support_closed X F).2.2.2⟩
+    refine ⟨Z, rfl, ?_⟩
+    change IsProper ((Scheme.IdealSheafData.vanishingIdeal Z).subschemeι ≫ f)
+    infer_instance
+  exact Scheme.isPerfect_schemeDerivedDirectImage_of_bounded_coherent_finiteTor
+    f P hbounded hcoherent hsupport (Scheme.perfect_hasFiniteTorDimensionOver f hperfect P hP)
 
 end AlgebraicGeometry

@@ -9178,3 +9178,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ExtPullbackResolutionSections (stage 3; reviewer PASS; after a return; landing 20261012T194107-L-453772 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/E1/Sheaf.RingTheory.CohenMacaulayFreeResolution (stage 3; reviewer PASS; first push; landing 20261012T194107-L-453882 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/E2/Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality (stage 3; reviewer PASS; first push; landing 20261012T194108-L-453988 (interface); batch 20261012T194054; modules 3; new nodes 4)
+- 19:41 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect (stage 3; reviewer PASS; first push; landing 20261012T194108-L-454138 (interface); batch 20261012T194054; modules 3; new nodes 2)

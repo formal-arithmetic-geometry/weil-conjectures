@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-perfect-relative-finite-tor",
+ "kind": "statement",
+ "title": "Relative finite Tor dimension of a perfect complex",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], with $X$ quasi-compact (every open cover has a finite subcover) and $Y$ Noetherian [pqf-def-locnoeth] (locally Noetherian and quasi-compact). Let $f:X\\to Y$ be locally of finite type (on affine charts the coordinate algebra is finitely generated over the base coordinate ring), and assume that every stalk $\\mathcal O_{X,x}$ has finite Tor dimension as an $\\mathcal O_{Y,f(x)}$-module through the stalk map of $f$ [def-pc-perfect-morphism]. If $E\\in D(\\mathcal O_X)$ [def-pc-derived-category] is perfect [def-pc-perfect-complex], then $E$ has finite Tor dimension over $f^{-1}\\mathcal O_Y$ [def-pc-finite-tor-dimension-over].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G), condition (3), and lemma-check-perfect-stalks (Tag 069C)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-derived-category",
+  "def-pc-perfect-morphism",
+  "def-pc-perfect-complex",
+  "def-pc-finite-tor-dimension-over"
+ ],
+ "proof": [
+  {
+   "text": "Local finite type over a Noetherian base implies pseudo-coherence of f. Apply the stalk criterion for perfect morphisms (Tag 069C, lemma-check-perfect-stalks, (3) implies (2)) to [def-pc-perfect-morphism]. This gives neighbourhoods where the structure sheaf has finite Tor amplitude over the inverse-image structure sheaf. The pseudo-coherence hypothesis is essential: compactness alone does not bound pointwise Tor dimensions.",
+   "uses": [
+    "def-pc-perfect-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G), condition (3), and lemma-check-perfect-stalks (Tag 069C)"
+   }
+  },
+  {
+   "text": "Intersect these neighbourhoods with the strictly perfect neighbourhoods of E [def-pc-perfect-complex]. If the local model has terms in [r,s] and the structure sheaf has amplitude [-d,0], finite free terms and their retracts have amplitude [-d,0]. Filter the bounded complex by its terms and use the long exact sequences of derived tensor cohomology to obtain amplitude [r-d,s]. Choose a finite subcover of X and enclose these intervals in one interval [a,b], with a≤b. A global representative and a K-flat resolution of its scalar restriction then compute every relative tensor product; its cohomology outside [a,b] vanishes locally and hence globally. These are precisely the witnesses in [def-pc-finite-tor-dimension-over]. Empty X and the zero complex permit [0,0].",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-finite-tor-dimension-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G), condition (3), and lemma-check-perfect-stalks (Tag 069C)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-tor-dimension-over",
+  "def-pc-perfect-complex",
+  "def-pc-perfect-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G), condition (3), and lemma-check-perfect-stalks (Tag 069C)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex on a finite type quasi compact morphism with stalkwise finite Tor dimension has finite Tor dimension over the inverse image structure sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on a finite type quasi compact morphism with stalkwise finite Tor dimension has finite Tor dimension over the inverse image structure sheaf",
+   "results": "No matching theorem; returned AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, SheafOfModules.IsFiniteType, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorDimension|finite.*tor.*dimension",
+   "results": "No matching theorem; returned no results.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "right adjoint commutes with direct sums: proper perfect pushforward, checking relative finite Tor dimension in condition (3) of Tag 08EV",
+   "via": [
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectRelativeFiniteTor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_hasFiniteTorDimensionOver",
+  "statement": "theorem perfect_hasFiniteTorDimensionOver\n    {X Y : Scheme.{u}} [CompactSpace X] [IsNoetherian Y]\n    (f : X ⟶ Y) [LocallyOfFiniteType f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (hperfect : HasStalkwiseFiniteTorDimension f)\n    (E : schemeDerivedCategory X) (hE : IsPerfect X E) :\n    HasFiniteTorDimensionOver f E",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194108-L-454138",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194108-L-454138",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-perfect-noetherian-cohomology",
+ "kind": "statement",
+ "title": "Bounded coherent cohomology of a perfect complex on a Noetherian scheme",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] (locally Noetherian and quasi-compact), and $E$ an object of $D(\\mathcal O_X)$ [def-pc-derived-category]. If $E$ is perfect [def-pc-perfect-complex], then there exist integers $a,b$ such that $H^i(E)=0$ for $i<a$ or $i>b$, and every $H^i(E)$ is coherent [pqf-def-coherent].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma perfect-lemma-perfect-on-noetherian (Tag 0FXU), part (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Choose the strictly perfect neighbourhoods supplied by [def-pc-perfect-complex]. Refine by affine opens and by finite free trivializations of the finitely many projective terms. Over these Noetherian affine rings kernels, images and quotients of the finite module terms are finite. Exact restriction computes the local cohomology as these subquotients. Thus each local cohomology sheaf is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth]. Coherence glues by [lem-weil-pbc-coherent-module-local-on-open-cover].",
+   "uses": [
+    "def-pc-perfect-complex",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-module-local-on-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma perfect-lemma-perfect-on-noetherian (Tag 0FXU), part (1)"
+   }
+  },
+  {
+   "text": "Quasi-compactness selects a finite subcover. Take a minimum of the lower term bounds and a maximum of the upper term bounds, using 0,0 for an empty cover. Outside this interval each restricted cohomology sheaf is zero. Sheaf section extensionality makes the global cohomology sheaf zero. This gives the claimed bounds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma perfect-lemma-perfect-on-noetherian (Tag 0FXU), part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma perfect-lemma-perfect-on-noetherian (Tag 0FXU), part (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex on a Noetherian scheme has bounded coherent quasi coherent cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex on a Noetherian scheme has bounded coherent quasi coherent cohomology",
+   "results": "No matching theorem; returned DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isZero_of_isGE, CochainComplex.IsKInjective.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*coherent|perfect.*bounded",
+   "results": "No matching theorem; returned no results.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "right adjoint commutes with direct sums: proper perfect pushforward, checking bounded coherent cohomology in condition (1) of Tag 08EV",
+   "via": [
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectNoetherianCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_bounded_coherent_cohomology",
+  "statement": "theorem perfect_bounded_coherent_cohomology (X : Scheme.{u}) [IsNoetherian X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (E : schemeDerivedCategory X) (hE : IsPerfect X E) :\n    (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i →\n      IsZero ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) ∧\n    (∀ i : ℤ, RingedSpace.IsCoherent X.toRingedSpace\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194108-L-454138",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194108-L-454138",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
