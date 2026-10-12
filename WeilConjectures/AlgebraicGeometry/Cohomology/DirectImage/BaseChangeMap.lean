@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.HomologyBaseChangeReduced
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechPerfect
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect
 
 /-!
 # The base change maps of the higher direct images
@@ -35,8 +35,8 @@ spectrum of the residue field `κ(t)` of a point `t` it is the base change map
 
 - `AlgebraicGeometry.Scheme.Modules.bijective_cechBaseChangeMap_of_forall_specializes`
   (Grauert): for `f` proper of finite presentation, `ℱ` of finite presentation and flat over `S`,
-  and `S` reduced, the base change map at a point `t` is bijective as soon as the fibre dimension
-  `h^q` is the same at `t` and at all its generisations.
+  and `S` reduced and noetherian, the base change map at a point `t` is bijective as soon as the
+  fibre dimension `h^q` is the same at `t` and at all its generisations.
 -/
 
 @[expose] public section
@@ -81,7 +81,8 @@ end Map
 section Perfect
 
 variable {X S : Scheme.{u}} (f : X ⟶ S) (ℱ : X.Modules) {ι : Type u} (U : ι → X.Opens)
-  [IsAffine S] [IsProper f] [LocallyOfFinitePresentation f] [ℱ.IsFinitePresentation]
+  [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] [IsProper f] [LocallyOfFinitePresentation f]
+  [ℱ.IsFinitePresentation]
   [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] [Finite ι] [Nonempty ι]
   (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤)
 
@@ -95,7 +96,7 @@ lemma exists_quasiIso_cechModuleComplex (hℱ : ℱ.IsFlatOver f) :
       QuasiIso φ ∧ ∀ (B : Type u) [CommRing B] [Algebra Γ(S, ⊤) B],
         QuasiIso (((ModuleCat.baseChange Γ(S, ⊤) B).mapHomologicalComplex _).map φ) := by
   have := Fintype.ofFinite ι
-  have hC := isPerfect_Q_cechModuleComplex_of_isProper f ℱ hℱ U hU hU'
+  have hC := isPerfect_Q_cechModuleComplex_of_isNoetherianRing f ℱ U hU hU' hℱ
   obtain ⟨e₀⟩ := nonempty_Q_cechModuleComplexTrunc_iso f ℱ U hU hU'
   obtain ⟨P, a', b', _, _, hPfin, ⟨e⟩⟩ := hC.of_iso e₀.symm
   have : ∀ n, Projective (P.X n) := fun n ↦
@@ -227,12 +228,13 @@ lemma fieldPoint_appTop (L : Type u) [Field L] [Algebra Γ(S, ⊤) L] (a : Γ(S,
 
 include hU hU' in
 /-- **Grauert's theorem for the Čech complex over an affine base.** Let `f : X ⟶ S` be proper of
-finite presentation over a reduced affine scheme `S = Spec A`, `ℱ` a quasi-coherent
+finite presentation over a reduced noetherian affine scheme `S = Spec A`, `ℱ` a quasi-coherent
 `𝒪_X`-module of finite presentation, flat over `S`, and `U` a finite cover of `X` by affine
 opens. Let `g : Spec K ⟶ S` be a field point, through a point `s = g x`. If the fibre dimension
 `h^q` takes the same value at all generisations of `s` as at `s`, then the base change map
 `Γ(Spec K, ⊤) ⊗[A] H^q(Č(U, ℱ)) ⟶ H^q(Č(g'⁻¹ U, g'^* ℱ))` is bijective. -/
 theorem bijective_cechBaseChangeMap_of_forall_specializes [IsReduced S]
+    [IsNoetherianRing Γ(S, ⊤)]
     [LocallyOfFinitePresentation f] [Nonempty ι] (hℱ : ℱ.IsFlatOver f) (K : Type u) [Field K]
     (g : Spec (.of K) ⟶ S) [Algebra Γ(S, ⊤) Γ(Spec (.of K), ⊤)]
     (hg : algebraMap Γ(S, ⊤) Γ(Spec (.of K), ⊤) = g.appTop.hom) (q : ℕ) (x : Spec (.of K))
