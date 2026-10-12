@@ -7,6 +7,7 @@ module
 
 public import Sheaf.FieldTheory.GaloisUnitsTwoCocycles
 import Sheaf.FieldTheory.GaloisUnitsCohomology
+import Sheaf.FieldTheory.GaloisUnitsHomogeneousCocycleDescent
 
 /-!
 # Homogeneous and inhomogeneous continuous unit cohomology
@@ -52,6 +53,8 @@ Source: Stacks Project, Section 0DVG, inhomogeneous differential; the homogeneou
 change of variables and its compatibility are the explicit argument above.
 (blueprint: lem-sc-galois-units-homogeneous-comparison). -/
 theorem nonempty_equiv_galoisUnitsH2_twoCocycleClasses (K : Type u) [Field K] :
-    Nonempty (GaloisUnitsH2 K ≃ GaloisUnitsTwoCocycleClasses K) := by sorry
+    Nonempty (GaloisUnitsH2 K ≃ GaloisUnitsTwoCocycleClasses K)  := by
+  apply nonempty_equiv_galoisUnitsH2_twoCocycleClasses_of_cocycle_equiv K
+  exact nonempty_equiv_galoisUnitsHomogeneousCocycles_twoCocycle K
 
 end Field
