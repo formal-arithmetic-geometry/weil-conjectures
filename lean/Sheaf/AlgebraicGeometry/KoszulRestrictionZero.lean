@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Paper.KoszulComplex
+import Sheaf.AlgebraicGeometry.KoszulRestrictionZeroBase
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
@@ -53,6 +54,18 @@ theorem isZero_restrict_shift_koszul
             _ _ _ _ (tilde.functor (.of A))
             ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj
             ((ExteriorAlgebra.koszulComplex A r f).extend
-              ComplexShape.embeddingDownNat)))⟦n⟧)) := by sorry
+              ComplexShape.embeddingDownNat)))⟦n⟧)) := by
+  let L := (SheafOfModules.overFunctor.{u}
+    (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory
+  let K : DerivedCategory (SheafOfModules.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace)) :=
+    (DerivedCategory.Q.obj
+      ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)
+        (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+        _ _ _ _ (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩
+        (ComplexShape.up ℤ)).obj
+        ((ExteriorAlgebra.koszulComplex A r f).extend ComplexShape.embeddingDownNat)))
+  have hz : IsZero (L.obj K) := isZero_restrict_koszul_base A r f U hU
+  exact (Functor.map_isZero (shiftFunctor _ n) hz).of_iso ((L.commShiftIso n).app K)
 
 end AlgebraicGeometry
