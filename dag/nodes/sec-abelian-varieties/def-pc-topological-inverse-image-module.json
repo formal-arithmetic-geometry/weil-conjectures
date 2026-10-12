@@ -12,9 +12,41 @@
   "document": "Stacks Project",
   "place": "Tag 008X, Lemma 6.24.6 (canonical inverse-image module structure); Tag 008Y (semilinear unit)"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use lem-pc-inverse-image-presheaf-module to put a module structure on the actual Lan abelian presheaf over the actual Lan ring presheaf, with semilinear restrictions and unit. Package it with PresheafOfModules.ofPresheaf.",
+   "uses": [
+    "lem-pc-inverse-image-presheaf-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker the commutative-ring sheafification unit with forget to RingCat. Its local injectivity and surjectivity follow from the corresponding properties before forgetting. The abelian sheafification unit is also locally bijective. PresheafOfModules.Sheafify.module gives the required section module instances; Sheafify.map_smul proves restriction compatibility. The map PresheafOfModules.toSheafify is semilinear, so composing its scalar-product identity with the Lan unit identity proves semilinearity of the inverse-image unit. This proves exists_inverseImageModuleInstances.",
+   "uses": [
+    "lem-pc-presheaf-module-sheafification-ring",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a module map a, compare alpha(r,m)=(inverse image a)(r*m) and beta(r,m)=r*(inverse image a)(m). Naturality of the abelian inverse-image map and the chosen restriction laws give the two restriction compatibilities. On unit images, rewrite with the chosen semilinear unit laws, adjunction unit naturality, and the original linearity of a. Apply lem-pc-inverse-image-operation-ext to conclude inverseImageMap_smul.",
+   "uses": [
+    "lem-pc-inverse-image-operation-ext"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "lem-pc-inverse-image-operation-ext",
+  "lem-pc-inverse-image-presheaf-module",
+  "lem-pc-presheaf-module-sheafification-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008T, 008X, 0089, 008Y: presheaf inverse image followed by module sheafification; linearity checked on unit representatives"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -105,5 +137,15 @@
   "group": "H1",
   "result": "pass",
   "note": "schemes g:X->Y (Scheme.{w}); ring map g^-1 O_Y -> O_X = homEquiv.symm of g.c in the explicit sheafPullbackConstruction CommRingCat adjunction; M : Y.Modules (Zariski); g^-1 M = explicit Lan+sheafify abelian inverse image with 008X module structure (new node def-pc-topological-inverse-image-module, instances chosen from a named existence theorem whose restriction+unit semilinearity pin them uniquely); object = landed SheafOfModules.changeOfRings (reuse); maps = sheafified extendScalars.map of g^-1 a; functor, left adjoint to Scheme.Modules.pushforward, id/comp isos as the node states; combined compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ea12e",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T010114-L-707596",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, node records, report, declarations, and clean --all compilation satisfy all stage-3 review points."
  }
 }

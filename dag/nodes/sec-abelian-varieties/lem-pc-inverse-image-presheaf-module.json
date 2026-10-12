@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-inverse-image-presheaf-module",
+ "kind": "lemma",
+ "title": "Transport of concrete presheaf pullback module instances",
+ "statement": "Let $f:X\\to Y$ be continuous, $R$ a sheaf of commutative rings on $Y$ and $M$ a sheaf of $R$-modules [def-weil-sheaf-of-modules-category]. Write $f_p$ for presheaf left Kan extension along inverse image of opens, and $i$ for its unit [def-weil-pbc-topological-inverse-image]. There exist module structures of $(f_pR)(U)$ on the actual abelian groups $(f_pM)(U)$ for all opens $U\\subseteq X$ such that every restriction is semilinear and $i_M(rm)=i_R(r)i_M(m)$ on $f^{-1}V$ for all opens $V\\subseteq Y$, $r\\in R(V)$ and $m\\in M(V)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008T, lemma-pullback-presheaf-module; transport of clause (1) of lem-pc-presheaf-module-inverse-image-adjunction along its recorded underlying abelian-presheaf isomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply PresheafOfModules.topologicalPullbackAdjunction to obtain a concrete module presheaf pullback functor P, a natural isomorphism of its underlying abelian presheaf with the Lan, and the coprojection scalar-product formula.",
+   "uses": [
+    "lem-pc-presheaf-module-inverse-image-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each open take the inverse of the underlying abelian-presheaf isomorphism as an additive equivalence t from the Lan carrier to the P carrier. AddEquiv.module transports the section module structure. The formula t(r*m)=r*t(m), naturality of t, and the semilinearity of P restrictions show semilinearity of the transported restrictions, using injectivity of t.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At the inverse image of V, the coprojection formula from the first step has final restriction the identity. Apply injectivity of t and its scalar-product formula to obtain semilinearity of the Lan unit. This uses no nonemptiness hypothesis on V or its inverse image.",
+   "uses": [
+    "lem-pc-presheaf-module-inverse-image-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-presheaf-module-inverse-image-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008T, lemma-pullback-presheaf-module; transport of clause (1) of lem-pc-presheaf-module-inverse-image-adjunction along its recorded underlying abelian-presheaf isomorphism"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presheaf module pullback concrete colimit ring action",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "presheaf inverse image module structure filtered colimits of rings and modules",
+   "results": "8 hits: PresheafOfModules.colimitPresheafOfModules, PresheafOfModules.ofPresheaf, PresheafOfModules.ofPresheaf_obj_isModule, PresheafOfModules.colimitPresheafOfModules_obj, PresheafOfModules.unit, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.instModuleCarrierObjOppositeRingCatCarrierAbPresheaf, PresheafOfModules.pushforward₀_obj_obj_isModule",
+   "date": "2026-10-12",
+   "verdict": "No exact standalone match; the recorded results supply ingredients used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Mm]odule.*[Ll]an|[Ll]an.*[Mm]odule|def sheafify : SheafOfModules",
+   "results": "18 hits: Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/RootSystem/Irreducible.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact standalone match; the recorded results supply ingredients used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.InverseImageModule",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "statement, module base-change clause F_{T'} = g_X^* F; the canonical inverse-image module action and linearity needed by the tensor formula",
+   "via": [
+    "def-pc-topological-inverse-image-module",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.InverseImagePresheafModule",
+  "file": "lean/Sheaf/Topology/InverseImagePresheafModule.lean",
+  "declaration": "TopCat.Sheaf.exists_inverseImagePresheafModuleInstances",
+  "statement": "theorem exists_inverseImagePresheafModuleInstances (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u}) (M : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) : ∃ d : ∀ U : (Opens X)ᵒᵖ, Module (((L CommRingCat.{u}).obj R.obj).obj U) (((L AddCommGrpCat.{u}).obj M.val.presheaf).obj U), (letI := d ∀ {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) r m, ((L AddCommGrpCat.{u}).obj M.val.presheaf).map i (r • m) = ((L CommRingCat.{u}).obj R.obj).map i r • ((L AddCommGrpCat.{u}).obj M.val.presheaf).map i m) ∧ (letI := d ∀ (V : (Opens Y)ᵒᵖ) (r : R.obj.obj V) (m : M.val.obj V), (((Opens.map f).op.lanAdjunction AddCommGrpCat.{u}).unit.app M.val.presheaf).app V (r • m) = @SMul.smul _ _ (d ((Opens.map f).op.obj V)).toSMul ((((Opens.map f).op.lanAdjunction CommRingCat.{u}).unit.app R.obj).app V r) ((((Opens.map f).op.lanAdjunction AddCommGrpCat.{u}).unit.app M.val.presheaf).app V m))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ea12e",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T010114-L-707596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ea12e",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T010114-L-707596",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, node records, report, declarations, and clean --all compilation satisfy all stage-3 review points."
+ }
+}

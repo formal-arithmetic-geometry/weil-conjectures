@@ -8,6 +8,9 @@ module
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.Ring.Colimits
+import Sheaf.Topology.InverseImageOperationExt
+import Sheaf.Topology.InverseImagePresheafModule
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify
 
 /-!
 # Module structure on the topological inverse image
@@ -88,7 +91,42 @@ theorem exists_inverseImageModuleInstances :
            (Opens.map f) AddCommGrpCat.{u}
            (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).unit.app
              ((SheafOfModules.toSheaf (𝓡 R)).obj M)).hom.app V m)) := by
-  sorry
+  let J := Opens.grothendieckTopology X
+  let R₀ := (Opens.map f).op.lan.obj R.obj
+  let A₀ := (Opens.map f).op.lan.obj M.val.presheaf
+  obtain ⟨d, hd, hu⟩ := exists_inverseImagePresheafModuleInstances f R M
+  let P₀ : PresheafOfModules.{u} (R₀ ⋙ forget₂ CommRingCat.{u} RingCat.{u}) :=
+    @PresheafOfModules.ofPresheaf _ _ _ A₀ d (fun {_ _} i r m ↦ hd i r m)
+  let S := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj
+    (inverseImageRing f R)
+  let θ : (R₀ ⋙ forget₂ CommRingCat.{u} RingCat.{u}) ⟶ S.obj :=
+    Functor.whiskerRight (toSheafify J R₀) (forget₂ CommRingCat.{u} RingCat.{u})
+  let φ : P₀.presheaf ⟶ (inverseImageAb f R M).obj := toSheafify J A₀
+  have : Presheaf.IsLocallyInjective J θ := by
+    constructor
+    intro U x y h
+    exact Presheaf.equalizerSieve_mem J (toSheafify J R₀) x y h
+  have : Presheaf.IsLocallySurjective J θ := by
+    constructor
+    intro U s
+    exact Presheaf.imageSieve_mem J (toSheafify J R₀) s
+  have : Presheaf.IsLocallyInjective J φ := by
+    change Presheaf.IsLocallyInjective J (toSheafify J A₀)
+    infer_instance
+  have : Presheaf.IsLocallySurjective J φ := by
+    change Presheaf.IsLocallySurjective J (toSheafify J A₀)
+    infer_instance
+  refine ⟨fun U ↦ PresheafOfModules.Sheafify.module θ φ (X := U), ?_, ?_⟩
+  · intro U V i r m
+    exact PresheafOfModules.Sheafify.map_smul θ φ U i r m
+  · intro V r m
+    have hs (W : (Opens X)ᵒᵖ) (a : R₀.obj W) (x : P₀.obj W) :
+        φ.app W (a • x) =
+          @SMul.smul _ _ (PresheafOfModules.Sheafify.module θ φ (X := W)).toSMul
+            (θ.app W a) (φ.app W x) := by
+      exact ((PresheafOfModules.toSheafify θ φ).app W).hom.map_smul a x
+    have hh := congrArg (φ.app ((Opens.map f).op.obj V)) (hu V r m)
+    exact hh.trans (hs _ _ _)
 
 /-- Canonical section module instances, supplied by the preceding existence theorem.
 Source: Stacks, Tag 008X (blueprint: def-pc-topological-inverse-image-module). -/
@@ -123,7 +161,45 @@ theorem inverseImageMap_smul {N : SheafOfModules.{u} (𝓡 R)} (a : M ⟶ N)
     @SMul.smul _ _ (inverseImageModuleInstances f R N U).toSMul r
       (((inverseImageConstruction f AddCommGrpCat.{u}).map
       ((SheafOfModules.toSheaf (𝓡 R)).map a)).hom.app U m) := by
-  sorry
+  let q := ((inverseImageConstruction f AddCommGrpCat.{u}).map
+    ((SheafOfModules.toSheaf (𝓡 R)).map a)).hom
+  have hq {V W : (Opens X)ᵒᵖ} (i : V ⟶ W) (x : (inverseImageAb f R M).obj.obj V) :
+      (inverseImageAb f R N).obj.map i (q.app V x) =
+        q.app W ((inverseImageAb f R M).obj.map i x) := by
+    exact (NatTrans.naturality_apply q i x).symm
+  have hM := @(Classical.choose_spec (exists_inverseImageModuleInstances f R M)).1
+  have hN := @(Classical.choose_spec (exists_inverseImageModuleInstances f R N)).1
+  apply inverseImageOperation_ext f R ((SheafOfModules.toSheaf (𝓡 R)).obj M)
+    (inverseImageAb f R N)
+    (fun V r x ↦ q.app V
+      (@SMul.smul _ _ (inverseImageModuleInstances f R M V).toSMul r x))
+    (fun V r x ↦ @SMul.smul _ _ (inverseImageModuleInstances f R N V).toSMul
+      r (q.app V x))
+    (by
+      intro V W i r x
+      exact (hq i _).trans (congrArg (q.app W) (hM i r x)))
+    (by
+      intro V W i r x
+      exact (hN i r _).trans (congrArg
+        (fun z ↦ @SMul.smul _ _ (inverseImageModuleInstances f R N W).toSMul
+          ((inverseImageRing f R).obj.map i r) z) (hq i x)))
+    (by
+      intro V r x
+      have huM := (Classical.choose_spec (exists_inverseImageModuleInstances f R M)).2
+      have huN := (Classical.choose_spec (exists_inverseImageModuleInstances f R N)).2
+      rw [← huM]
+      let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map f) AddCommGrpCat.{u}
+        (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
+      have hn (z : M.val.obj V) :
+          q.app ((Opens.map f).op.obj V)
+            ((adj.unit.app ((SheafOfModules.toSheaf (𝓡 R)).obj M)).hom.app V z) =
+          (adj.unit.app ((SheafOfModules.toSheaf (𝓡 R)).obj N)).hom.app V
+            (a.val.app V z) := by
+        exact congrArg (fun t ↦ t.hom.app V z)
+          (adj.unit_naturality ((SheafOfModules.toSheaf (𝓡 R)).map a))
+      rw [hn, hn, (a.val.app V).hom.map_smul, huN])
+    U r m
 
 /-- Inverse image on module morphisms, using the inverse image on abelian sheaves.
 Source: Stacks, Tag 008X (blueprint: def-pc-topological-inverse-image-module). -/

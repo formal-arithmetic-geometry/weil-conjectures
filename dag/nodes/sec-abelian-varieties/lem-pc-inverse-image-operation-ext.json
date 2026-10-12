@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-inverse-image-operation-ext",
+ "kind": "lemma",
+ "title": "Local extensionality of operations on inverse-image sheaves",
+ "statement": "Let $f:X\\to Y$ be continuous, $R$ a sheaf of commutative rings and $F$ a sheaf of abelian groups on $Y$, and $H$ a sheaf of abelian groups on $X$. Write $f^{-1}$ for presheaf left Kan extension followed by sheafification, with unit $\\eta$ [def-weil-pbc-topological-inverse-image]. Suppose $\\alpha_U,\\beta_U:(f^{-1}R)(U)\\times(f^{-1}F)(U)\\to H(U)$ are functions for each open $U\\subseteq X$, and both commute with every restriction. If for every open $V\\subseteq Y$ and $r\\in R(V)$, $m\\in F(V)$ one has $\\alpha_{f^{-1}V}(\\eta_R(r),\\eta_F(m))=\\beta_{f^{-1}V}(\\eta_R(r),\\eta_F(m))$, then $\\alpha_U(r,m)=\\beta_U(r,m)$ for all $U,r,m$. No additivity or module structure is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008X, lemma-pullback-sheaf-module (inverse image as sheafified presheaf inverse image); Section 007X (local representatives in sheafification); Section 0078, Lemma 6.11.1 (injectivity into stalks)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The units from the presheaf inverse images to their sheafifications are locally surjective (Mathlib Presheaf.isLocallySurjective_toSheafify'). The intersection of the two image sieves is covering. Separatedness of H reduces equality to this sieve; on each member choose preimages of both input sections. This is the local-representative argument of Stacks 007X and the uniqueness part of the sheaf condition in 0078.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each Lan value is a colimit of the diagram over CostructuredArrow (Opens.map f).op U, by Functor.isPointwiseLeftKanExtensionLeftKanExtensionUnit. Concrete.isColimit_exists_rep and preservation of filtered colimits by the ring and abelian-group forgetful functors give a representative for each preimage. The index category is filtered; take IsFiltered.max of the two indices. Naturality of the colimit coprojections moves both representatives to this common index.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the sheafification units identifies the two sheaf sections on this sieve member with restrictions of the inverse-image units at the common index. Restrict the assumed unit equality to this member, and use the two restriction laws for alpha and beta. Separatedness gives the desired global equality, including on the empty open. This calculation is implemented using NatTrans.naturality_apply and congrArg.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008X, lemma-pullback-sheaf-module (inverse image as sheafified presheaf inverse image); Section 007X (local representatives in sheafification); Section 0078, Lemma 6.11.1 (injectivity into stalks)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image sheaf binary operation equality local representatives",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image sheaf sections locally represented by sections before pullback",
+   "results": "8 hits: TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, TopCat.Presheaf.pullbackObjObjOfImageOpen, CategoryTheory.Presheaf.app_localPreimage, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply, TopCat.Sheaf.restrictHomEquivHom, CategoryTheory.Presheaf.localPreimage",
+   "date": "2026-10-12",
+   "verdict": "No exact standalone match; the recorded results supply ingredients used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_obj_obj_ext|app_localPreimage|isLocallySurjective_sheafification",
+   "results": "9 hits: Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean, Mathlib/CategoryTheory/Sites/LocallySurjective.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact standalone match; the recorded results supply ingredients used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.InverseImageModule",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "statement, module base-change clause F_{T'} = g_X^* F; the canonical inverse-image module action and linearity needed by the tensor formula",
+   "via": [
+    "def-pc-topological-inverse-image-module",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.InverseImageOperationExt",
+  "file": "lean/Sheaf/Topology/InverseImageOperationExt.lean",
+  "declaration": "TopCat.Sheaf.inverseImageOperation_ext",
+  "statement": "theorem inverseImageOperation_ext (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u}) (F : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u}) (H : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (α β : ∀ U : (Opens X)ᵒᵖ, ((P CommRingCat.{u}).obj R).obj.obj U → ((P AddCommGrpCat.{u}).obj F).obj.obj U → H.obj.obj U) (hα : ∀ {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) r m, H.obj.map i (α U r m) = α V (((P CommRingCat.{u}).obj R).obj.map i r) (((P AddCommGrpCat.{u}).obj F).obj.map i m)) (hβ : ∀ {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) r m, H.obj.map i (β U r m) = β V (((P CommRingCat.{u}).obj R).obj.map i r) (((P AddCommGrpCat.{u}).obj F).obj.map i m)) (hη : ∀ (V : (Opens Y)ᵒᵖ) (r : R.obj.obj V) (m : F.obj.obj V), α ((Opens.map f).op.obj V) (((η CommRingCat.{u}).app R).hom.app V r) (((η AddCommGrpCat.{u}).app F).hom.app V m) = β ((Opens.map f).op.obj V) (((η CommRingCat.{u}).app R).hom.app V r) (((η AddCommGrpCat.{u}).app F).hom.app V m)) : ∀ U r m, α U r m = β U r m",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ea12e",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T010114-L-707596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ea12e",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T010114-L-707596",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean files, node records, report, declarations, and clean --all compilation satisfy all stage-3 review points."
+ }
+}
