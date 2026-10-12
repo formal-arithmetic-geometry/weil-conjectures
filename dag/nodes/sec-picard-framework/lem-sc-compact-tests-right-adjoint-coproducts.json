@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-compact-tests-right-adjoint-coproducts",
+ "kind": "statement",
+ "title": "Compact isomorphism tests imply preservation by a right adjoint",
+ "statement": "Let C and D be preadditive categories [def-weil-additive-category] with universe-u coproducts, and assume D is locally u-small [def-weil-size-convention]. Let R:C→D and c:D→C be adjoint, R left and c right, meaning Hom_D(R(A),B) is naturally isomorphic to Hom_C(A,c(B)). Let S be a universe-u set and G:S→C such that G_s and R(G_s) are compact [def-pc-compact-object] for every s. Assume that for every g:A→B in C, bijectivity of postcomposition Hom_C(G_s,A)→Hom_C(G_s,B) for every s implies that g is an isomorphism. Then c preserves every existing set-indexed coproduct, in every indexing universe.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9R, adjunction Hom calculation; generalized to preadditive categories with explicit isomorphism tests"
+ },
+ "stmt_deps": [
+  "def-weil-additive-category",
+  "def-pc-compact-object",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Initial objects supplied by empty coproducts are zero objects in preadditive categories. Each adjoint is additive: the left adjoint preserves finite coproducts, the right preserves finite products, and both finite shapes are biproducts.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For K indexed by Type u form the canonical comparison ⊕c(K_i)→c(⊕K_i). For each s, compactness of G_s and R(G_s), with the additive Hom equivalence of the adjunction between them, makes postcomposition by this comparison a bijection. Check the identity on each direct-sum summand: adjunction naturality carries composition with a coprojection to composition with its c-image, exactly the definition of the comparison. The detection assumption makes the comparison invertible, which is equivalent to preservation of the discrete colimit.",
+   "uses": [
+    "def-pc-compact-object"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any larger family with an existing coproduct B in D, its nonzero indices inject into End(B). For each i, the coproduct universal property gives π_i:B→K_i equal to the identity after the i-th coprojection and zero after the others. The idempotent ι_iπ_i is nonzero if K_i is nonzero, and is distinct from ι_jπ_j for i≠j, as is seen by precomposition with ι_i and postcomposition with π_i. Local u-smallness of D makes the nonzero support u-small. Shrink this support to Type u and delete the zero summands. The universal property identifies its coproduct with B. The right adjoint c preserves zero objects because they are terminal, so the same deletion applies to the image family. Apply the Type u case and undo the reindexing and zero insertions. The empty family is included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "N2",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9R, adjunction Hom calculation; generalized to preadditive categories with explicit isomorphism tests",
+  "note": "Extracted from Tag 0A9R; model transport and the indexing-universe argument are written out by N2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A small family of compact objects detecting isomorphisms and sent to compact objects by a left adjoint makes the right adjoint preserve coproducts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right adjoint preserves arbitrary coproducts if its left adjoint sends compact generators to compact objects",
+   "results": "CategoryTheory.Adjunction.leftAdjoint_preservesColimits, CategoryTheory.Adjunction.hasCardinalFilteredGenerator, CategoryTheory.isLeftAdjoint_of_preservesColimits_of_isSeparating, CategoryTheory.Functor.instPreservesColimitsOfSizeOfIsLeftAdjoint, CategoryTheory.Adjunction.isCardinalFilteredGenerator, CategoryTheory.Functor.instPreservesColimitsOfShapeOfIsLeftAdjoint, CategoryTheory.isRightAdjoint_of_preservesLimits_of_isCoseparating, CategoryTheory.Adjunction.isCardinalPresentable_leftAdjoint_obj",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*generat|generat.*compact|coproduct.*adjoint|adjoint.*coproduct",
+   "results": "Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "right adjoint commutes with direct sums: Compact isomorphism tests imply preservation by a right adjoint",
+   "via": [
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts",
+  "file": "lean/Sheaf/CategoryTheory/CompactTestsRightAdjointCoproducts.lean",
+  "declaration": "CategoryTheory.compactTests_rightAdjoint_preservesCoproducts",
+  "statement": "theorem compactTests_rightAdjoint_preservesCoproducts\n    {C : Type uC} [Category.{wC} C] [Preadditive C] [HasCoproducts.{u} C]\n    {D : Type uD} [Category.{wD} D] [Preadditive D] [HasCoproducts.{u} D]\n    [LocallySmall.{u} D]\n    (R : C ⥤ D) (c : D ⥤ C) (adj : R ⊣ c)\n    (S : Type u) (G : S → C)\n    (hcompact : ∀ s, IsCompactObject (G s) ∧ IsCompactObject (R.obj (G s)))\n    (hdetect : ∀ (A B : C) (g : A ⟶ B),\n      (∀ s, Function.Bijective (fun a : G s ⟶ A ↦ a ≫ g)) → IsIso g) :\n    ∀ I : Type v, PreservesColimitsOfShape (Discrete I) c",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184324-L-4012113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184324-L-4012113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

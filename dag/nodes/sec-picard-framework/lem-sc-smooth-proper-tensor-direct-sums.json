@@ -27,51 +27,33 @@
  ],
  "proof": [
   {
-   "text": "Let P be a perfect object on X. By the perfect-direct-image statement, Rf_*P is perfect on Y, and therefore it is compact in D_{\\mathrm{QCoh}}(\\mathcal O_Y) by the perfect-compactness statement (Y is Noetherian, hence quasi-compact and quasi-separated). Hence for every family (K_j) in D_{\\mathrm{QCoh}}(\\mathcal O_Y) the canonical map \\bigoplus_j \\operatorname{Hom}(Rf_*P,K_j)\\to\\operatorname{Hom}(Rf_*P,\\bigoplus_j K_j) is an isomorphism.",
+   "text": "Install the coproducts on X and Y and obtain the small compact test family and compact direct images from properPerfect_compactTests.",
    "uses": [
-    "lem-pc-proper-perfect-direct-image-perfect",
-    "lem-pc-perfect-object-compact"
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-sc-proper-perfect-compact-tests"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9R, proof lines 24-26"
-   }
+   "elementary": false
   },
   {
-   "text": "Adjunction identifies \\operatorname{Hom}(P,c(\\bigoplus_j K_j)) with \\operatorname{Hom}(Rf_*P,\\bigoplus_j K_j), and each \\operatorname{Hom}(Rf_*P,K_j) with \\operatorname{Hom}(P,c(K_j)); by compactness of P on X, \\operatorname{Hom}(P,\\bigoplus_j c(K_j))=\\bigoplus_j\\operatorname{Hom}(P,c(K_j)). Under these identifications, the map induced by the canonical morphism \\bigoplus_j c(K_j)\\to c(\\bigoplus_j K_j) is the direct-sum isomorphism from step 1, so \\operatorname{Hom}(P,-) of it is an isomorphism for every perfect P.",
+   "text": "The target category is locally u-small by DerivedCategory.locallySmall and the full-subcategory instance. Apply compactTests_rightAdjoint_preservesCoproducts to R ⊣ c with the family, the two compactness assertions and its isomorphism-detection property.",
    "uses": [
-    "lem-pc-proper-perfect-direct-image-perfect",
-    "lem-pc-perfect-object-compact"
+    "lem-pc-derived-category-locally-small",
+    "lem-sc-compact-tests-right-adjoint-coproducts"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9R, proof display"
-   }
-  },
-  {
-   "text": "Fix the family (K_j) and let u:\\bigoplus_j c(K_j)\\to c(\\bigoplus_j K_j) be the canonical map, with cone C in D_{\\mathrm{QCoh}}(\\mathcal O_X). By step 2, \\operatorname{Hom}(P,u) is an isomorphism for every perfect P on X; since every shift P[n] is again perfect, the long exact Hom sequence of the triangle gives \\operatorname{Hom}(P[n],C)=0 for all n\\in\\mathbb Z. The class of objects A with \\operatorname{Hom}(A[n],C)=0 for all n\\in\\mathbb Z is closed under shifts, cones (long exact sequence), retracts, and arbitrary direct sums (\\operatorname{Hom}(\\bigoplus_i A_i,C)=\\prod_i\\operatorname{Hom}(A_i,C)). It contains every perfect complex, so perfect generation implies it is all of D_{\\mathrm{QCoh}}(\\mathcal O_X). Taking A=C gives \\operatorname{id}_C=0, so C=0 and u is an isomorphism. Since the family was arbitrary, c commutes with all set-indexed direct sums.",
-   "uses": [
-    "lem-pc-perfect-object-compact",
-    "lem-pc-derived-qcoh-perfect-generation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Lemma lemma-proper-flat-noetherian (Tag 0A9R), conclusion after the Hom calculation"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-proper-perfect-direct-image-perfect",
-  "lem-pc-perfect-object-compact",
-  "lem-pc-derived-qcoh-perfect-generation"
+  "lem-pc-derived-category-locally-small",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-sc-compact-tests-right-adjoint-coproducts",
+  "lem-sc-proper-perfect-compact-tests"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "N2",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9R"
+  "place": "Tag 0A9R: separate geometric compact tests from categorical adjunction calculation"
  },
  "mathlib_searches": [
   {
@@ -150,5 +132,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T184324-L-4012113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

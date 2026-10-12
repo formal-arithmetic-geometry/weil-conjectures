@@ -13,9 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
-import Sheaf.AlgebraicGeometry.PerfectObjectCompact
-import Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect
+import Sheaf.AlgebraicGeometry.ProperPerfectCompactTests
+import Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # Right adjoints of proper perfect pushforward preserve coproducts
 
@@ -71,6 +71,9 @@ theorem properPerfect_rightAdjoint_preservesCoproducts
     (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)
     (adj : R ⊣ c) :
     ∀ I : Type v, PreservesColimitsOfShape (Discrete I) c := by
-  sorry
+  let : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+  let : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y
+  obtain ⟨S, G, hcompact, hdetect⟩ := properPerfect_compactTests f hTor R eR
+  exact compactTests_rightAdjoint_preservesCoproducts R c adj S G hcompact hdetect
 
 end AlgebraicGeometry
