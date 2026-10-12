@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-finite-constant-label-subgroup-neighborhood",
+ "kind": "statement",
+ "title": "Finite label sections form a subgroup on an etale neighborhood",
+ "statement": "Let $Y$ be a scheme [def-weil-pbc-scheme-conventions], $G$ an abelian sheaf [def-weil-pbc-abelian-etale-sheaves], $U$ an etale object [def-weil-pbc-etale-sheaves], $S$ a finite set, and $e:|G|_U\\simeq\\underline S$ a constant set-sheaf chart [def-weil-pbc-constant-sheaf]. Given $x\\in U$, there exist an etale $V\\to U$, $v\\in V$ mapping to $x$, and a set-sheaf isomorphism $e_S:\\underline S\\simeq |G|_V$ on the localized small etale site at the composite $A=(V\\to Y)$. Let $t:S\\to G(V)$ be the component at the terminal object of the constant-presheaf sheafification unit [def-weil-pbc-sheafification] followed by $e_S$. Then $t$ is injective, some label maps to zero, for each $a,b\\in S$ some label maps to $t(a)+t(b)$, and for each $a\\in S$ some label maps to $-t(a)$. The conclusion specifies no group structure on $S$ and no natural transformation of abelian presheaves.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Sites/ConstantSheafSections.lean",
+  "place": "Finite-family lifting and label injectivity; agent-formulated application to the zero, pairwise sum and negative sections of the original finite constant abelian neighborhood argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Use the inverse set chart to obtain label sections at the terminal object of the localized site at U. Form the finite family indexed by Unit plus (S times S) plus S: zero, all pairwise sums, and all negatives. Map them into the constant set sheaf using the chart. Apply the finite-family section lifting theorem to obtain a single covering sieve. Its lift equations, the inverse chart identities and naturality show that the label image on every nondegenerate covering member contains zero and is closed under addition and negation. The label-injectivity clause gives injectivity on each such member.",
+   "uses": [
+    "lem-weil-pbc-finite-constant-set-sections-cover",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Translate that covering sieve from Over U to the small etale site using Sieve.overEquiv and mem_over_iff. The small etale topology definition gives a jointly surjective cover inside it. Choose a member V and a point v above x. Its composite object A over Y lies in the sieve; if its empty sieve were covering, the jointly surjective cover inside that empty sieve would have a member over v, a contradiction.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the inverse original set chart along Over.map(A to U). The canonical sheafification restriction isomorphism identifies its source with the constant sheaf at the same set S. Compose with pushforwardOverMapIso to identify the target with the underlying set sheaf of G restricted directly to A. The unit-compatibility identity, evaluated at the terminal object over A, identifies its label map with the map on the covering member already treated. Transfer injectivity and the three image-closure properties along this equality.",
+   "uses": [
+    "lem-weil-pbc-set-sheafification-localization-compatible",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-finite-constant-set-sections-cover",
+  "lem-weil-pbc-set-sheafification-localization-compatible"
+ ],
+ "proof_origin": {
+  "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Sites/ConstantSheafSections.lean",
+  "place": "Finite-family lifting and label injectivity; agent-formulated application to the zero, pairwise sum and negative sections of the original finite constant abelian neighborhood argument.",
+  "by": "F1 stage-3 worker; checked against the cited proved Lean tools"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely many sections of a constant sheaf are constant on a common covering sieve, and the labels inject over a nonempty object",
+   "date": "2026-10-12",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many constant sheaf sections are locally constant on a common covering sieve",
+   "date": "2026-10-12",
+   "results": "Eight hits including Sheaf.isConstant_iff_forget and IsConstant; none supplies the finite-section or label-closure assertion.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_mem_forall_exists_toSheafify_const_app_eq|toSheafify_const_app_injective|pushforwardContinuousSheafificationCompatibility|toSheafify_pullbackSheafificationCompatibility|pushforwardOverMapIso",
+   "date": "2026-10-12",
+   "results": "Remote grep found nine Mathlib hits, including CoverLifting.lean:382,391 and Over.lean:520. Local source reads found ConstantSheafSections.lean:71 and :89, with complete proofs. These give finite-section local lifting and label injectivity; the Mathlib declarations give restriction and unit compatibility.",
+   "verdict": "tools used in the complete proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteConstantAbelianNeighborhood",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-constructible-complexes",
+   "place": "Finite abelian local comparison in the constructibility definition: the finite-operation neighborhood step, before abelian sheafification.",
+   "via": [
+    "lem-weil-pbc-finite-constant-abelian-neighborhood",
+    "lem-weil-pbc-finite-constant-abelian-refinement",
+    "lem-weil-pbc-finite-local-abelian-forget",
+    "lem-weil-pbc-constructible-torsion-modules-agree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantLabelSubgroupNeighborhood",
+  "declaration": "AlgebraicGeometry.Scheme.finite_constant_label_subgroup_neighborhood",
+  "statement": "theorem finite_constant_label_subgroup_neighborhood {Y : Scheme.{u}} (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : Y.Etale) (S : Type (u + 1)) [Finite S] (e : ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G).over U ≅ (constantSheaf (Y.smallEtaleTopology.over U) (Type (u + 1))).obj S) (x : U.left) : ∃ (V : U.left.Etale) (v : V.left), V.hom v = x ∧ ∃ e' : (constantSheaf (Y.smallEtaleTopology.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)) (Type (u + 1))).obj S ≅ (sheafCompose (Y.smallEtaleTopology.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj (G.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)), let β := toSheafify (Y.smallEtaleTopology.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)) ((Functor.const (Over ((MorphismProperty.Over.map ⊤ U.prop).obj V))ᵒᵖ).obj S) ≫ e'.hom.hom let T := (G.over ((MorphismProperty.Over.map ⊤ U.prop).obj V)).obj.obj (op (Over.mk (𝟙 ((MorphismProperty.Over.map ⊤ U.prop).obj V)))) let t : S → T := fun s ↦ β.app (op (Over.mk (𝟙 ((MorphismProperty.Over.map ⊤ U.prop).obj V)))) s Function.Injective t ∧ (∃ s, t s = 0) ∧ (∀ a b, ∃ c, t c = t a + t b) ∧ (∀ a, ∃ b, t b = -t a)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantLabelSubgroupNeighborhood.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T112836-L-766571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T112836-L-766571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-set-sheafification-localization-compatible",
+ "kind": "statement",
+ "title": "Set sheafification commutes with localization compatibly with its unit",
+ "statement": "Let $Y$ be a scheme [def-weil-pbc-scheme-conventions], $A,U$ etale objects [def-weil-pbc-etale-sheaves], $f:A\\to U$ a morphism in the small etale site, and $J=Y_{\\mathrm{Et}}$. Put $L=\\operatorname{Over.map}(f):\\operatorname{Over}(A)\\to\\operatorname{Over}(U)$. For every set presheaf $P$ on $\\operatorname{Over}(U)$ there is a canonical sheaf isomorphism between the sheafification [def-weil-pbc-sheafification] of $L^{\\mathrm{op}}P$ on $J/A$ and the restriction along $L$ of the sheafification of $P$ on $J/U$. The unit on $J/A$ followed by its underlying presheaf map equals the restriction of the unit on $J/U$. In particular this identifies the restriction of the constant set sheaf at $S$ [def-weil-pbc-constant-sheaf] with the constant sheaf at $S$ on $J/A$. For any set sheaf $H$ on $J$, the restriction along $L$ of $H|_U$ is canonically isomorphic to $H|_A$, with identity maps on each section set.",
+ "source": {
+  "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+  "place": "Functor.pushforwardContinuousSheafificationCompatibility, lines 382--386, and toSheafify_pullbackSheafificationCompatibility, lines 391--411; Mathlib/CategoryTheory/Sites/Over.lean:520--524 gives Sheaf.pushforwardOverMapIso."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Over.map f is continuous and cocontinuous for the over topologies (Over.lean instances at lines 323 and 328). Apply pushforwardContinuousSheafificationCompatibility to Type-valued presheaves; all Kan extensions and sheafification instances are supplied by the existing site instances. Its unit formula is toSheafify_pullbackSheafificationCompatibility. Specializing to a constant presheaf gives the constant-sheaf case. The final restriction identification is Sheaf.pushforwardOverMapIso, whose components are identity isomorphisms.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+  "place": "Functor.pushforwardContinuousSheafificationCompatibility, lines 382--386, and toSheafify_pullbackSheafificationCompatibility, lines 391--411; Mathlib/CategoryTheory/Sites/Over.lean:520--524 gives Sheaf.pushforwardOverMapIso.",
+  "by": "F1 stage-3 worker; checked against the cited proved Lean tools"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely many sections of a constant sheaf are constant on a common covering sieve, and the labels inject over a nonempty object",
+   "date": "2026-10-12",
+   "results": "Internal Server Error; service unavailable.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many constant sheaf sections are locally constant on a common covering sieve",
+   "date": "2026-10-12",
+   "results": "Eight hits including Sheaf.isConstant_iff_forget and IsConstant; none supplies the finite-section or label-closure assertion.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_mem_forall_exists_toSheafify_const_app_eq|toSheafify_const_app_injective|pushforwardContinuousSheafificationCompatibility|toSheafify_pullbackSheafificationCompatibility|pushforwardOverMapIso",
+   "date": "2026-10-12",
+   "results": "Remote grep found nine Mathlib hits, including CoverLifting.lean:382,391 and Over.lean:520. Local source reads found ConstantSheafSections.lean:71 and :89, with complete proofs. These give finite-section local lifting and label injectivity; the Mathlib declarations give restriction and unit compatibility.",
+   "verdict": "tools used in the complete proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteConstantAbelianNeighborhood",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-constructible-complexes",
+   "place": "Finite abelian local comparison in the constructibility definition: the finite-operation neighborhood step, before abelian sheafification.",
+   "via": [
+    "lem-weil-pbc-finite-constant-abelian-neighborhood",
+    "lem-weil-pbc-finite-constant-abelian-refinement",
+    "lem-weil-pbc-finite-local-abelian-forget",
+    "lem-weil-pbc-constructible-torsion-modules-agree"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.CategoryTheory.Sites.CoverLifting",
+  "declaration": "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility",
+  "statement": "def pushforwardContinuousSheafificationCompatibility : (whiskeringLeft _ _ A).obj G.op ⋙ presheafToSheaf J A ≅ presheafToSheaf K A ⋙ G.sheafPushforwardContinuous A J K",
+  "branch": "mathlib",
+  "by": "F1",
+  "date": "2026-10-12",
+  "declarations": [
+   "CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility",
+   "CategoryTheory.Sheaf.pushforwardOverMapIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T112836-L-766571",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T112836-L-766571",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
