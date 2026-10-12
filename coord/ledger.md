@@ -9891,3 +9891,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/E4/Sheaf.AlgebraicGeometry.AmpleTwistGlobalGeneration (stage 3; reviewer PASS; first push; landing 20261012T225306-L-1803729 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/E4/Sheaf.AlgebraicGeometry.CechSheafResolution (stage 3; reviewer PASS; first push; landing 20261012T225306-L-1803870 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/F1/Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisImage (stage 3; reviewer PASS; first push; landing 20261012T225307-L-1803993 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: merged deliver/F1/Sheaf.Topology.TopologicalInducedEdgeAndMap (stage 3; reviewer PASS; first push; landing 20261012T225307-L-1804190 (interface); batch 20261012T225253; modules 1; new nodes 0; change records: coord/changes/topological-induced-edge-imports.md)

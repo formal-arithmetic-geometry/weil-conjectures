@@ -13,32 +13,44 @@
  ],
  "proof": [
   {
-   "text": "Use the exact inverse-image/direct-image adjunction on abelian sheaves. The free abelian sheaf on the terminal representable represents global sections. Sectionwise equality of terminal sections identifies inverse image of KX with KZ. The adjunction unit under this identification constructs a. By the free/sheafification adjunction it sends each generator h to inverse image of h composed with the terminal-open equality, exactly as stated, and this rule uniquely determines a.",
+   "text": "Use the sheafPullbackConstruction adjunction L ⊣ P for Opens.map f. Additivity of L follows from adj.left_adjoint_additive and the assumed additivity of P. The left adjoint preserves colimits. Mathlib lan_preservesFiniteLimits_of_flat and instPreservesFiniteLimitsSheafSheafPullback supply preservation of finite limits, so L is exact.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The composite of sheafificationAdjunction.homEquiv, the whiskered AddCommGrpCat.adj.homEquiv, and yonedaEquiv represents sections by the sheafified free representable. Apply the unit KX -> P(L(KX)) to the universal terminal generator; restrict along the equality Opens.map_top f to obtain a terminal section of L(KX), and apply the inverse representing equivalence to construct b:KZ -> L(KX). These are actual adjunction constructions, with no witness chosen from a mere existence theorem.",
    "uses": [
     "def-weil-pbc-topological-inverse-image",
     "def-sc-topological-abelian-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply the exact inverse-image functor to Ext(KX,f_*F), identify the inverse image of KX with KZ, and compose with the derived counit to F. This defines natural additive maps on Ext, and hence edge on the recorded H-prime functors. Compute on injective resolutions J and I: direct image of each I^n is injective, and a comparison phi over f_*F induces the same map on global-section cohomology. Source resolution exactness and target termwise injectivity imply that any two such comparisons are homotopic, so the computation is independent of them. Chain maps preserve cycles and boundaries; if a composed with f_*z equals s composed with phi, the image of the cocycle class represented by s is the class represented by z. Use the Ext computation by InjectiveResolution.extMk and transport through hX,hZ. The zero sheaf gives zero maps; the identity map gives the identity; degree zero gives the usual terminal-section map.",
+   "text": "Construct edge_p on Ext by L.mapExtAddHom, precomposition with Ext.mk₀ b, and postcomposition with Ext.mk₀ of the counit L(P(F)) -> F. Its naturality follows by mapExactFunctor_comp, mapExactFunctor_mk₀, the degree-zero Ext associativity lemmas, mk₀_comp_mk₀, and counit naturality. Rewrite HX and HZ by funext hX and funext hZ to give the required functors. This proves the existing Lean conclusion, which does not contain the resolution-cocycle compatibility clause of the natural-language node.",
    "uses": [
-    "lem-sc-topological-pushforward-injective",
     "def-sc-topological-abelian-cohomology",
     "def-weil-pbc-topological-inverse-image"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Define the representable presheaf transformation h ↦ (Opens.map f).map h composed with eqToHom(Opens.map_top f). Naturality holds because Opens is a thin category. Whisker with AddCommGrpCat.free, then compose with the inverse-image restriction of toSheafify on Z. Use sheafifyLift on X to obtain a:KX -> P(KZ). Evaluating toSheafify_sheafifyLift on each generator proves exactly the required generator formula. No injective-resolution comparison or spectral-sequence lemma is required by this existential conclusion.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-topological-abelian-cohomology",
-  "def-weil-pbc-topological-inverse-image",
-  "lem-sc-topological-pushforward-injective"
+  "def-weil-pbc-topological-inverse-image"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "source construction specialized to abelian sheaves",
-  "place": "decomposition of target proof"
+  "document": "Stacks Project Cohomology of Sheaves, Sections 01DZ and 20.13; construction in Mathlib exact-functor Ext and sheafification adjunction APIs",
+  "place": "F1: direct exact-inverse-image construction of the existing Lean existential conclusion, without an injective-resolution computation"
  },
  "mathlib_searches": [
   {
@@ -108,10 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y2",
+  "reviewer": "X-9794a",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T132613-L-1449099",
-  "kind": "interface"
+  "landing": "20261012T225307-L-1804190",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and sole direct importer compile cleanly; theorem signature is unchanged byte-for-byte and axioms are allowed."
  }
 }
