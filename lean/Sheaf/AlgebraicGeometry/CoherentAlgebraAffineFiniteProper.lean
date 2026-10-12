@@ -15,7 +15,6 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 
 /-! # Finite affine realizations of coherent algebras with proper support
@@ -38,6 +37,11 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
+set_option maxHeartbeats 600000 in
+-- Transporting finite generators through iterated slice sites needs extra elaboration heartbeats.
+set_option synthInstance.maxHeartbeats 200000 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.defeqAttrib.useBackward true in
 /-- An affine realization of a coherent algebra is finite, and proper over the base
 when its underlying module has proper support.
 Source: Stacks Project, Lemma 09ZT, final sentence, and Lemma 0CYS (3).
@@ -57,6 +61,101 @@ theorem coherent_algebra_affine_finite_proper
     (B : X.CommAlgebraSheaf) (α : B ≅ 𝒪⁎g)
     (hB : RingedSpace.IsCoherent X.toRingedSpace B.toModule)
     (hp : Scheme.Modules.HasSupportProperOver f B.toModule) :
-    IsFinite g ∧ IsProper (g ≫ f) := by sorry
+    IsFinite g ∧ IsProper (g ≫ f) := by
+  obtain ⟨hq, ht⟩ :=
+    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X B.toModule).mp hB
+  have : B.toModule.IsQuasicoherent := hq
+  have : B.toModule.IsFiniteType := ht
+  have hfinite_over (X : Scheme.{u}) (F : X.Modules) [F.IsFiniteType]
+      (U : X.Opens) : (F.over U).IsFiniteType := by
+    classical
+    obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
+    let G := Over.forget U
+    let J := Opens.grothendieckTopology X
+    let K := J.over U
+    let S := X.ringCatSheaf.over U
+    let φ : S ⟶ (G.sheafPushforwardContinuous RingCat.{u} K J).obj X.ringCatSheaf := 𝟙 _
+    let d : (F.over U).LocalGeneratorsData :=
+      { I := Σ (V : Over U) (i : q.I), G.obj V ⟶ q.X i
+        X := fun i ↦ i.1
+        coversTop := fun V ↦ by
+          refine K.superset_covering ?_ (G.cover_lift K _ (q.coversTop (G.obj V)))
+          intro W g ⟨i, ⟨v⟩⟩
+          exact ⟨⟨W, i, v⟩, ⟨𝟙 _⟩⟩
+        generators := fun i ↦ by
+          let G' := Over.post (X := i.1) G ⋙ Over.map i.2.2
+          have : G'.IsContinuous (K.over i.1) (J.over (q.X i.2.1)) :=
+            Functor.isContinuous_comp _ _ _ (J.over _) _
+          have : G'.IsCocontinuous (K.over i.1) (J.over (q.X i.2.1)) :=
+            isCocontinuous_comp _ _ _ (J.over _)
+          let ψ : S.over i.1 ⟶
+              (G'.sheafPushforwardContinuous RingCat.{u} (K.over i.1)
+                (J.over (q.X i.2.1))).obj (X.ringCatSheaf.over (q.X i.2.1)) :=
+            ((Over.forget i.1).sheafPushforwardContinuous RingCat.{u} (K.over i.1) K).map φ
+          have : (SheafOfModules.pushforward.{u} ψ).IsLeftAdjoint :=
+            SheafOfModules.isLeftAdjoint_pushforward_of_isIso.{u} ψ
+          exact (q.generators i.2.1).map (SheafOfModules.pushforward.{u} ψ) (Iso.refl _) }
+    apply SheafOfModules.IsFiniteType.mk (R := X.ringCatSheaf.over U)
+    refine ⟨d, ?_⟩
+    refine SheafOfModules.LocalGeneratorsData.IsFiniteType.mk (p := d) (fun i ↦ ?_)
+    have := hq.isFiniteType i.2.1
+    dsimp only [d]
+    infer_instance
+  have hg : IsFinite g := by
+    refine (isFinite_iff g).mpr ⟨inferInstance, ?_⟩
+    intro U hU
+    have hf : Module.Finite Γ(X, U) Γ(B.toModule, U) :=
+      (((Scheme.Modules.quasicoherent_finite_type_affine.{u, u} X).2 B.toModule hq).1 U hU).1.mp
+        (hfinite_over X B.toModule U)
+    let e : B.right.obj.obj (op U) ⟶ Γ(Y, g ⁻¹ᵁ U) := α.hom.right.hom.app (op U)
+    let ei := α.inv.right.hom.app (op U)
+    let φ : Γ(B.toModule, U) →ₗ[Γ(X, U)]
+        (ModuleCat.restrictScalars (g.app U).hom).obj
+          (ModuleCat.of Γ(Y, g ⁻¹ᵁ U) Γ(Y, g ⁻¹ᵁ U)) :=
+      { toFun := e
+        map_add' := e.hom.map_add
+        map_smul' := fun a b ↦ by
+          change B.right.obj.obj (op U) at b
+          change e.hom (B.hom.hom.app (op U) a * b) = (g.app U).hom a * e.hom b
+          rw [map_mul]
+          congr 1
+          exact ConcreteCategory.congr_hom
+            (congrArg (fun k ↦ k.hom.app (op U)) α.hom.w) a }
+    have : Module.Finite Γ(X, U)
+        ((ModuleCat.restrictScalars (g.app U).hom).obj
+          (ModuleCat.of Γ(Y, g ⁻¹ᵁ U) Γ(Y, g ⁻¹ᵁ U))) :=
+      Module.Finite.of_surjective φ (by
+        intro y
+        refine ⟨ei y, ?_⟩
+        have h := congrArg (fun k ↦ k.right.hom.app (op U)) α.inv_hom_id
+        exact ConcreteCategory.congr_hom h y)
+    exact this
+  refine ⟨hg, ?_⟩
+  have : IsFinite g := hg
+  obtain ⟨Z, i, hi, hip, hkill, _⟩ :=
+    (Scheme.Modules.module_support_proper_over_base f B.toModule).2.1.mp hp
+  have : IsClosedImmersion i := hi
+  have : IsProper (i ≫ f) := hip
+  have hker : i.ker ≤ g.ker := by
+    apply Scheme.IdealSheafData.le_ofIdeals_iff.mpr
+    intro U a ha
+    have ha' : a ∈ i.ker.idealOfOpens U.1 := by simpa using ha
+    have hz := hkill U.1 a ha' (1 : B.right.obj.obj (op U.1))
+    change B.hom.hom.app (op U.1) a * 1 = 0 at hz
+    rw [mul_one] at hz
+    change g.app U.1 a = 0
+    have hw := ConcreteCategory.congr_hom
+      (congrArg (fun k ↦ k.hom.app (op U.1)) α.hom.w) a
+    change α.hom.right.hom.app (op U.1) (B.hom.hom.app (op U.1) a) =
+      g.app U.1 a at hw
+    rw [← hw, hz]
+    exact map_zero _
+  let l := IsClosedImmersion.lift i g hker
+  have hl : l ≫ i = g := IsClosedImmersion.lift_fac i g hker
+  have : IsFinite (l ≫ i) := hl.symm ▸ hg
+  have : IsFinite l := IsFinite.of_comp l i
+  have : IsProper (l ≫ (i ≫ f)) := inferInstance
+  simpa only [← Category.assoc, hl] using this
+
 
 end AlgebraicGeometry

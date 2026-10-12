@@ -7765,3 +7765,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/C1/Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage (stage 3; reviewer PASS; first push; landing 20261012T135221-L-1657061 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/C1/Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups (stage 3; reviewer PASS; first push; landing 20261012T135221-L-1657192 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:52 L: merged deliver/C2/Sheaf.AlgebraicGeometry.AffineAlgebraStalkFlat (stage 3; reviewer PASS; first push; landing 20261012T135221-L-1657293 (interface); batch 20261012T135212; modules 2; new nodes 1)
+- 13:52 L: merged deliver/C2/Sheaf.AlgebraicGeometry.CoherentAlgebraAffineFiniteProper (stage 3; reviewer PASS; after a return; landing 20261012T135222-L-1657397 (proof); batch 20261012T135212; modules 1; new nodes 0)
