@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-singular-ideal-localization-smooth-radical-span",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-singular-ideal-localization-smooth",
+   "place": "stage 3 reduction",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "lemma",
+ "title": "Localization smoothness from a radical span",
+ "statement": "For commutative rings R and A with an R-algebra structure, if f^n belongs to the ideal span of elements g whose principal localizations A_g are smooth over R, then A_f is smooth over R.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07EU and Algebra Lemma 00TC"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite principal-cover argument: after localizing at f, the smooth elements generate the unit ideal; localizations at them are smooth by localization and commuting principal localizations; apply smoothness local on a finite principal cover.",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "proof of Lemma 07EU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smoothness from localization span target",
+   "results": "RingHom.Smooth.ofLocalizationSpanTarget",
+   "date": "2026-10-12",
+   "verdict": "universe-homogeneous theorem found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth localization span",
+   "results": "RingHom.Smooth.ofLocalizationSpanTarget",
+   "date": "2026-10-12",
+   "verdict": "no universe-polymorphic match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofLocalizationSpanTarget",
+   "results": "Mathlib RingTheory RingHom Smooth",
+   "date": "2026-10-12",
+   "verdict": "homogeneous declaration only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SingularIdealLocalizationSmooth",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SingularIdealLocalizationSmooth",
+  "file": "lean/Sheaf/RingTheory/SingularIdealLocalizationSmooth.lean",
+  "declaration": "Algebra.smooth_localization_span_from_radical",
+  "statement": "theorem smooth_localization_span_from_radical (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] (f : A) (n : ℕ) (hn : f ^ n ∈ Ideal.span (smoothElements R A)) : Smooth R (Localization.Away f)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T113946-L-820474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T113946-L-820474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
