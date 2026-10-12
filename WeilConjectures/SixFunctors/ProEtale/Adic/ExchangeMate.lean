@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
 
@@ -48,11 +49,12 @@ section Sections
 
 variable (A : Type u') [Category.{u + 1} A]
 
+set_option maxHeartbeats 1000000 in
+-- The section-wise comparison of the iterated base changes is a long `simp` computation.
 /-- The unit of the Frobenius equivalences, pushed forward along `J`, followed by the
 composition isomorphisms of pushforwards along `Fr_X ≫ J = J ≫ Fr_Y`, agrees with the unit
 followed by the pushforward of the exchange isomorphism of `J_*` with `Fr^* = (Fr⁻¹)_*`. Both are
 restriction maps along canonical isomorphisms of iterated base changes. -/
-set_option maxHeartbeats 1000000 in
 lemma lowerStar_map_unit_comp_lowerStarComp {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y ≅ Y)
     (b : X ≅ X) (c : a.hom ≫ J = J ≫ b.hom) (c' : J ≫ b.inv = a.inv ≫ J)
     (M : Sheaf (Scheme.ProEt.topology Y) A) :
@@ -80,13 +82,16 @@ lemma lowerStar_map_unit_comp_lowerStarComp {X Y : Scheme.{u}} (J : Y ⟶ X) (a 
   · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
       MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullbackId]
-    trace_state
-    sorry
-  · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+  · simp only [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
       MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
-      MorphismProperty.Over.pullbackId]
-    trace_state
-    sorry
+      MorphismProperty.Over.pullbackId, Functor.comp_obj, Functor.id_obj, Functor.const_obj_obj,
+      Functor.map_comp, Category.assoc, MorphismProperty.Comma.comp_hom, Comma.comp_left,
+      MorphismProperty.Over.pullback_map_left, MorphismProperty.Over.pullbackComp_inv_app_left,
+      pullback.map_id, Category.comp_id, MorphismProperty.Over.pullbackComp_hom_app_left,
+      Category.id_comp, MorphismProperty.Over.pullbackId_hom_app_left, limit.lift_π,
+      PullbackCone.mk_π_app]
+    rw [pullback.condition_assoc]
+    simp
 
 end Sections
 
@@ -142,22 +147,72 @@ lemma conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
     ← conjugateEquiv_comp _ (adicUpperStarLowerStarAdjunction l (a.hom ≫ j)) _,
     ← conjugateEquiv_comp _ (adj.comp (adicUpperStarLowerStarAdjunction l a.hom)) _]
   rw [h₁, h₂, h₃, h₄, h₅, Functor.whiskerRight_id', Functor.whiskerLeft_id']
-  simp only [Category.id_comp, Category.comp_id, Category.assoc]
+  simp only [Category.comp_id, Category.assoc]
+  rw [Category.id_comp]
 
-/-- The exchange isomorphism `AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso`
-of the pushforwards is the mate, under the Frobenius equivalences, of the composition
-isomorphism `(Fr_X)_* ⋙ φ̄_* ≅ φ̄_* ⋙ (Fr_Y)_*` of pushforwards. -/
+set_option maxHeartbeats 2000000 in
+-- The kernel needs more time to unfold the composite `(Fr⁻¹)_* ⋙ Fr_*` in the unit of the
+-- Frobenius equivalence.
+/-- The composition isomorphism `J_* ⋙ (b⁻¹)_* ≅ (a⁻¹)_* ⋙ J_*` of pushforwards along the two
+sides of `J ≫ b⁻¹ = a⁻¹ ≫ J` is the mate, under the equivalences `(a⁻¹)_* ⊣ a_*` and
+`(b⁻¹)_* ⊣ b_*`, of the composition isomorphism along the two sides of `a ≫ J = J ≫ b`. -/
+lemma mateEquiv_adicLowerStarComp_hom {X Y : Scheme.{u}} (J : Y ⟶ X) (a : Y ≅ Y) (b : X ≅ X)
+    (c : a.hom ≫ J = J ≫ b.hom) (c' : J ≫ b.inv = a.inv ≫ J) :
+    (mateEquiv (adicLowerStarEquivalence l a).symm.toAdjunction
+        (adicLowerStarEquivalence l b).symm.toAdjunction
+        (TwoSquare.mk _ _ _ _ (adicLowerStarComp l J b.inv ≪≫ adicLowerStarCongr l c' ≪≫
+          (adicLowerStarComp l a.inv J).symm).hom)).natTrans =
+    (adicLowerStarComp l a.hom J).hom ≫ (adicLowerStarCongr l c).hom ≫
+      (adicLowerStarComp l J b.hom).inv := by
+  refine congrArg TwoSquare.natTrans (mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _ _)
+    fun M ↦ Mod.hom_ext _ _ ?_)
+  have key := lowerStar_map_unit_comp_lowerStarComp (WeilCoefficients.{u} l) J a b c c' M.X
+  have hu (X : Scheme.{u}) (e : X ≅ X) (N : AdicSheaf l X) :
+      ((adicLowerStarEquivalence l e).symm.toAdjunction.unit.app N).hom =
+        (lowerStarId _ X).inv.app N.X ≫ (lowerStarCongr _ e.inv_hom_id.symm).hom.app N.X ≫
+          (lowerStarComp _ e.inv e.hom).inv.app N.X :=
+    adicLowerStarEquivalence_counitIso_inv_app_hom e N
+  simp only [Mod.comp_hom', adicLowerStar_map_hom, hu, NatTrans.comp_app,
+    adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom,
+    Iso.trans_hom, Iso.symm_hom, Functor.map_comp, Category.assoc] at key ⊢
+  exact key
+
+/-- The exchange isomorphism
+`AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso` of the pushforwards
+is the mate, under the Frobenius equivalences, of the composition isomorphism
+`(Fr_X)_* ⋙ φ̄_* ≅ φ̄_* ⋙ (Fr_Y)_*` of pushforwards. -/
 lemma mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom :
     (mateEquiv (adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction
         (adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction
-        (TwoSquare.mk _ _ _ _ (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom)).natTrans =
+        (TwoSquare.mk _ _ _ _
+          (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom)).natTrans =
     (adicLowerStarComp l f.geometricGaloisFrobenius.hom (Scheme.Hom.geometricFiberMap φ h)).hom ≫
       (adicLowerStarCongr l
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom ≫
       (adicLowerStarComp l (Scheme.Hom.geometricFiberMap φ h)
-        g.geometricGaloisFrobenius.hom).inv := by
-  refine congrArg TwoSquare.natTrans (mateEquiv_eq_of_unit _ _ _ (TwoSquare.mk _ _ _ _ _)
-    fun M ↦ Mod.hom_ext _ _ ?_)
-  exact lowerStar_map_unit_comp_lowerStarComp _ (Scheme.Hom.geometricFiberMap φ h) _ _ _ _ M.X
+        g.geometricGaloisFrobenius.hom).inv :=
+  mateEquiv_adicLowerStarComp_hom l _ _ _ _ _
+
+/-- **The Frobenius exchange isomorphisms of `φ̄^*` and `φ̄_*` are mates**: under the adjunction
+`φ̄^* ⊣ φ̄_*`, the mate of the inverse of the exchange isomorphism
+`AlgebraicGeometry.ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso` of the pullbacks is
+the exchange isomorphism `AlgebraicGeometry.ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso`
+of the pushforwards. Both iterated mates under the Frobenius equivalences are the composition
+isomorphism `(Fr_X)_* ⋙ φ̄_* ≅ φ̄_* ⋙ (Fr_Y)_*`. -/
+lemma mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv :
+    (mateEquiv (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
+        (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
+        (TwoSquare.mk _ _ _ _
+          (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)).natTrans =
+      (adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h).hom := by
+  have h₁ := iterated_mateEquiv_conjugateEquiv
+    (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
+    (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap φ h))
+    (adicLowerStarEquivalence l g.geometricGaloisFrobenius).symm.toAdjunction
+    (adicLowerStarEquivalence l f.geometricGaloisFrobenius).symm.toAdjunction
+    (TwoSquare.mk _ _ _ _ (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).inv)
+  rw [conjugateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv,
+    ← mateEquiv_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom] at h₁
+  exact congrArg TwoSquare.natTrans ((mateEquiv _ _).injective h₁)
 
 end AlgebraicGeometry.ProEtale
