@@ -122,6 +122,53 @@ lemma freeAbSheafHomEquiv_eq (W : X.Etale)
 
 end FreeSheaf
 
+section SectionZ
+
+variable {X Z : Scheme.{u}} (P : Z ⟶ X)
+
+/-- The constant sheaf `ℤ`, so that `Extᵠ(ℤ, -)` is `Sheaf.H`. -/
+noncomputable abbrev constantZ (X : Scheme.{u}) : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
+  (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))
+
+/-- The terminal object `X ×_X Z` of the small étale site of `Z`, for `P : Z ⟶ X`. -/
+noncomputable abbrev terminalBaseChange : Z.Etale :=
+  P.Etale.obj (Scheme.Etale.mk (𝟙 X))
+
+/-- The base change of `X` is terminal. -/
+noncomputable def isTerminal_terminalBaseChange : IsTerminal (terminalBaseChange P) :=
+  IsTerminal.isTerminalObj _ _ (MorphismProperty.Over.mkIdTerminal _ X)
+
+variable {P} {V : X.Etale} (φ : (terminalBaseChange P).left ⟶ V.left)
+  (hφ : φ ≫ V.hom = (terminalBaseChange P).hom ≫ P)
+
+/-- The morphism `ℤ ⟶ P^* ℤ[V]` on `Z` attached to a morphism `φ : X ×_X Z ⟶ V` over `X`: the
+global section of `P^* ℤ[V]` given by the pullback of the generator of `ℤ[V]` along `φ`. -/
+noncomputable def sectionZ : constantZ Z ⟶ (P)^*[AddCommGrpCat.{u + 1}].obj ((freeAbSheaf X).obj V) :=
+  Abelian.Ext.homEquiv₀ ((Sheaf.H.equiv₀ _ (isTerminal_terminalBaseChange P)).symm
+    (pullSection P _ φ hφ (freeAbSheafGenerator _)))
+
+lemma equiv₀_mk₀_sectionZ_comp {F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+    (ψ : (freeAbSheaf X).obj V ⟶ F) :
+    Sheaf.H.equiv₀ _ (isTerminal_terminalBaseChange P) (Abelian.Ext.mk₀ (sectionZ φ hφ ≫
+      (P)^*[AddCommGrpCat.{u + 1}].map ψ)) = pullSection P F φ hφ (freeAbSheafHomEquiv _ F ψ) := by
+  rw [← Abelian.Ext.mk₀_comp_mk₀, ← Sheaf.H.map_apply, ← Sheaf.H.equiv₀_naturality,
+    sectionZ, Abelian.Ext.mk₀_homEquiv₀_apply, AddEquiv.apply_symm_apply,
+    pullSection_naturality, freeAbSheafHomEquiv_eq]
+
+/-- The morphisms `ℤ ⟶ P^* ℤ[V]` are compatible with morphisms of étale `X`-schemes. -/
+lemma sectionZ_comp_map {V' : X.Etale} (a : V' ⟶ V) (φ' : (terminalBaseChange P).left ⟶ V'.left)
+    (hφ' : φ' ≫ V'.hom = (terminalBaseChange P).hom ≫ P) (h : φ' ≫ a.left = φ) :
+    sectionZ φ' hφ' ≫ (P)^*[AddCommGrpCat.{u + 1}].map ((freeAbSheaf X).map a) =
+      sectionZ φ hφ := by
+  apply (Abelian.Ext.mk₀_bijective _ _).1
+  apply (Sheaf.H.equiv₀ _ (isTerminal_terminalBaseChange P)).injective
+  rw [equiv₀_mk₀_sectionZ_comp, sectionZ, Abelian.Ext.mk₀_homEquiv₀_apply,
+    AddEquiv.apply_symm_apply, ← Category.comp_id ((freeAbSheaf X).map a),
+    freeAbSheafHomEquiv_map, ← pullSection_comp]
+  exact pullSection_congr _ _ _ h _
+
+end SectionZ
+
 section Continuity
 
 variable {S : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
@@ -143,17 +190,14 @@ variable (c : Cone D)
 
 /-- The terminal object `S ×_S X` of the small étale site of the limit `X`. -/
 noncomputable abbrev limitTerminal : c.pt.left.Etale :=
-  (c.pt.hom).Etale.obj (Scheme.Etale.mk (𝟙 S))
-
-/-- The base change of `S` is terminal. -/
-noncomputable def isTerminal_limitTerminal : IsTerminal (limitTerminal D c) :=
-  IsTerminal.isTerminalObj _ _ (MorphismProperty.Over.mkIdTerminal _ S)
+  terminalBaseChange c.pt.hom
 
 /-- The projection `S ×_S X ⟶ Dᵢ`. -/
 noncomputable abbrev limitTerminalToStage (i : I) :
     (limitTerminal D c).left ⟶ ((stageEtale D).obj i).left :=
   pullback.snd (𝟙 S) c.pt.hom ≫ (c.π.app i).left
 
+omit [IsCofiltered I] in
 lemma limitTerminalToStage_comp (i : I) :
     limitTerminalToStage D c i ≫ ((stageEtale D).obj i).hom =
       (limitTerminal D c).hom ≫ c.pt.hom := by
@@ -161,36 +205,27 @@ lemma limitTerminalToStage_comp (i : I) :
   rw [Over.w (c.π.app i)]
   rfl
 
-/-- The constant sheaf `ℤ` on the limit, so that `Extᵠ(ℤ, -)` is `Sheaf.H`. -/
-noncomputable abbrev constantZ (X : Scheme.{u}) : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
-  (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))
-
 /-- The canonical morphism `ℤ ⟶ P^* ℤ[Dᵢ]` on the limit `X`, for `P : X ⟶ S`: the global
 section of `P^* ℤ[Dᵢ]` given by the pullback of the generator of `ℤ[Dᵢ]` along `X ⟶ Dᵢ`. -/
-noncomputable def limitSectionZ (i : I) :
+noncomputable abbrev limitSectionZ (i : I) :
     constantZ c.pt.left ⟶ (c.pt.hom)^*[AddCommGrpCat.{u + 1}].obj
       ((stageEtale D ⋙ freeAbSheaf S).obj i) :=
-  Abelian.Ext.homEquiv₀ ((Sheaf.H.equiv₀ _ (isTerminal_limitTerminal D c)).symm
-    (pullSection c.pt.hom _ (limitTerminalToStage D c i) (limitTerminalToStage_comp D c i)
-      (freeAbSheafGenerator _)))
-
-lemma equiv₀_mk₀_limitSectionZ_comp (i : I) {F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}}
-    (ψ : (stageEtale D ⋙ freeAbSheaf S).obj i ⟶ F) :
-    Sheaf.H.equiv₀ _ (isTerminal_limitTerminal D c) (Abelian.Ext.mk₀ (limitSectionZ D c i ≫
-      (c.pt.hom)^*[AddCommGrpCat.{u + 1}].map ψ)) =
-      pullSection c.pt.hom F (limitTerminalToStage D c i) (limitTerminalToStage_comp D c i)
-        (freeAbSheafHomEquiv _ F ψ) := by
-  rw [← Abelian.Ext.mk₀_comp_mk₀, ← Sheaf.H.map_apply, ← Sheaf.H.equiv₀_naturality,
-    limitSectionZ, Abelian.Ext.mk₀_homEquiv₀_apply, AddEquiv.apply_symm_apply,
-    pullSection_naturality, freeAbSheafHomEquiv_eq]
-  rfl
-
+  sectionZ (limitTerminalToStage D c i) (limitTerminalToStage_comp D c i)
 
 /-- The structure morphisms `Dᵢ ⟶ S` of a system of `S`-schemes. -/
 @[simps]
 noncomputable def stageStructure : D ⋙ Over.forget S ⟶ (Functor.const I).obj S where
   app i := (D.obj i).hom
   naturality i j g := by simp
+
+/-- The comparison morphisms `ℤ ⟶ P^* ℤ[Dᵢ]` are compatible with the transition maps. -/
+lemma limitSectionZ_comp_map {i j : I} (f : i ⟶ j) :
+    limitSectionZ D c i ≫ (c.pt.hom)^*[AddCommGrpCat.{u + 1}].map
+      ((stageEtale D ⋙ freeAbSheaf S).map f) = limitSectionZ D c j := by
+  refine sectionZ_comp_map _ _ ((stageEtale D).map f) _ _ ?_
+  have := congrArg CommaMorphism.left (c.w f)
+  simp only [Over.comp_left] at this
+  simp [limitTerminalToStage, this]
 
 variable [∀ i, CompactSpace (D.obj i).left] [∀ i, QuasiSeparatedSpace (D.obj i).left]
   [∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g).left]
@@ -244,17 +279,18 @@ theorem commutesWithLimit_zero_of_isLimit [CompactSpace S] [QuasiSeparatedSpace 
     rw [← pullSection_comp]
     exact pullSection_congr _ _ _ (by exact pullback.lift_snd _ _ _) _
   refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
-  · obtain ⟨i, σ, hσ⟩ := hsc.1 (Sheaf.H.equiv₀ _ (isTerminal_limitTerminal D c) x)
+  · obtain ⟨i, σ, hσ⟩ := hsc.1 (Sheaf.H.equiv₀ _ (isTerminal_terminalBaseChange c.pt.hom) x)
     obtain ⟨g, rfl⟩ := (hbij i).2 σ
     refine ⟨i, Abelian.Ext.mk₀ ((freeAbSheafHomEquiv _ F).symm g), ?_⟩
-    apply (Sheaf.H.equiv₀ _ (isTerminal_limitTerminal D c)).injective
+    apply (Sheaf.H.equiv₀ _ (isTerminal_terminalBaseChange c.pt.hom)).injective
     rw [Abelian.Ext.limitComparison_apply, Abelian.Ext.mapExactFunctor_mk₀,
-      Abelian.Ext.mk₀_comp_mk₀, equiv₀_mk₀_limitSectionZ_comp, Equiv.apply_symm_apply, ← key]
+      Abelian.Ext.mk₀_comp_mk₀, equiv₀_mk₀_sectionZ_comp, Equiv.apply_symm_apply, ← key]
     exact hσ
   · obtain ⟨ψ, rfl⟩ := (Abelian.Ext.mk₀_bijective _ _).2 y
     rw [Abelian.Ext.limitComparison_apply, Abelian.Ext.mapExactFunctor_mk₀,
       Abelian.Ext.mk₀_comp_mk₀] at hy
-    have h₁ := equiv₀_mk₀_limitSectionZ_comp D c i ψ
+    have h₁ := equiv₀_mk₀_sectionZ_comp (limitTerminalToStage D c i)
+      (limitTerminalToStage_comp D c i) ψ
     rw [hy, map_zero, ← key] at h₁
     obtain ⟨k, f, hf⟩ := hsc.2 i _ h₁.symm
     refine ⟨k, f, ?_⟩
@@ -269,20 +305,6 @@ theorem commutesWithLimit_zero_of_isLimit [CompactSpace S] [QuasiSeparatedSpace 
       rw [h₂, freeAbSheafHomEquiv_eq]
       rfl
     rw [Abelian.Ext.mk₀_comp_mk₀, h₃, Abelian.Ext.mk₀_zero]
-
-/-- The comparison morphisms `ℤ ⟶ P^* ℤ[Dᵢ]` are compatible with the transition maps. -/
-lemma limitSectionZ_comp_map {i j : I} (f : i ⟶ j) :
-    limitSectionZ D c i ≫ (c.pt.hom)^*[AddCommGrpCat.{u + 1}].map
-      ((stageEtale D ⋙ freeAbSheaf S).map f) = limitSectionZ D c j := by
-  apply (Abelian.Ext.mk₀_bijective _ _).1
-  apply (Sheaf.H.equiv₀ _ (isTerminal_limitTerminal D c)).injective
-  rw [equiv₀_mk₀_limitSectionZ_comp, limitSectionZ, Abelian.Ext.mk₀_homEquiv₀_apply,
-    AddEquiv.apply_symm_apply, Functor.comp_map, ← Category.comp_id ((freeAbSheaf S).map _),
-    freeAbSheafHomEquiv_map, ← pullSection_comp]
-  refine pullSection_congr _ _ _ ?_ _
-  have := congrArg CommaMorphism.left (c.w f)
-  simp only [Over.comp_left] at this
-  simp [limitTerminalToStage, this]
 
 /-- **Continuity of étale cohomology at a cofiltered limit of étale schemes.** Let `S` be a
 quasi-compact quasi-separated scheme, `(Dᵢ)` a cofiltered system of quasi-compact
