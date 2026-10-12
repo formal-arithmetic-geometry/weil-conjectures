@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-clopen-rank-strata-homology-lift",
+ "kind": "statement",
+ "title": "Lifting a single-degree map on one clopen rank stratum",
+ "statement": "Let i: Z → Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], and put A = i_*O_Z with module direct image g_* [def-sc-direct-image-algebra-derived-category, def-pc-ringed-spaces-derived-direct-image]. Let r: Z → ℕ be locally constant, with rank strata U_q [def-sc-locally-ranked-exterior-complex]. For arbitrary module sheaves E_q on U_q, let T^m = j_{m,*}E_m for nonnegative m and T^m = 0 for negative m. Choose D(A) [def-pc-derived-category]. Fix K in D(A) and n in ℤ. Assume only that H^m(K) is isomorphic as an A-module to g_*T^m for every m different from n. For every A-module map a: g_*T^n → H^n(K), there exists f: (g_*T^n)[-n] → K whose map on degree-n homology equals a under the canonical identification H^n((g_*T^n)[-n]) = g_*T^n. No finite-image assumption on r, and no specified H^n(K) or isomorphism assumption on a, are required.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Agent-written expansion of original reconstruction steps 1--2 (motivated by Tag 0BQZ); supporting algebra.tex Tag 00EE and homology.tex Tag 0118; perfect.tex Tag 0AVW for the direct-image algebra setup."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-derived-category",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "If n is negative, T n and its direct image are zero; the zero morphism is the required lift. Otherwise the rank-q stratum, q = n.toNat, is clopen. Glue 1 on it and 0 on its complement to obtain the characteristic idempotent e of O_Z. Regard this global section as a section of i_*O_Z.",
+   "uses": [
+    "def-sc-locally-ranked-exterior-complex",
+    "lem-weil-pbc-scheme-clopen-idempotent",
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent K by a cochain complex. Multiplication by the restrictions of e is a module-linear chain idempotent. Its termwise image and the termwise image of 1-e split the complex, because every module section x equals ex+(1-e)x and these images intersect trivially. The image construction is an exact summand functor, so its homology is the e-image of the original homology. For every m different from n, use hother to identify H^m(K) with g_*T^m. The idempotent acts as zero there: negative T^m is zero, and the rank-m stratum is disjoint from the rank-n stratum otherwise.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image complex therefore has homology only in degree n. Canonical truncations identify it in the derived category with its n-th homology placed in degree n. Since e acts as the identity on g_*T^n, module-linearity forces the map a into the e-image of H^n(K). Apply the single functor to this factorization and compose with the inverse truncation isomorphism and the image inclusion into K. Naturality of the single-complex homology identification gives the displayed equality. Empty strata give zero source and the same argument remains valid without finite image of r.",
+   "uses": [
+    "lem-sf-derived-concentrated-single",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-locally-ranked-exterior-complex",
+  "lem-weil-pbc-scheme-clopen-idempotent",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sf-derived-concentrated-single",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V3",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Agent-written expansion of original reconstruction steps 1--2 (motivated by Tag 0BQZ); supporting algebra.tex Tag 00EE and homology.tex Tag 0118; perfect.tex Tag 0AVW for the direct-image algebra setup."
+  },
+  "note": "Agent-written explicit component of the existing rank-stratum argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lift a map from a module on a clopen stratum into homology of a complex when the other homology degrees have disjoint support",
+   "results": "8 hits: ComplexShape.Embedding.AreComplementary.hom_ext, ComplexShape.Embedding.AreComplementary.hom_ext', HomologicalComplex.restrictionToTruncGE'_hasLift, ComplexShape.Embedding.HasLift, HomologicalComplex.liftCycles_i, HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff', HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff, HomologicalComplex.homologyπ_restrictionHomologyIso_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact match; supporting declarations used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "results": "1 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-13",
+   "verdict": "No exact match; supporting declarations used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Ll]ift|[Hh]omology.*[Ii]dempotent|[Ii]dempotent.*[Hh]omology",
+   "results": "3 hits: Mathlib/Topology/Category/Profinite/Basic.lean, Mathlib/Topology/Category/Stonean/Basic.lean, Mathlib/Topology/Category/LightProfinite/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; supporting declarations used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a module supported on a clopen rank stratum into the homology of a complex lifts to a derived morphism if the other homology degrees have disjoint support",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClopenRankStrataFormality",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Original reconstruction proof steps 1--2: a single rank-idempotent image and canonical single-degree truncations, with a prescribed map on that degree.",
+   "via": [
+    "lem-sc-clopen-rank-strata-formality",
+    "lem-sc-closed-immersion-ranked-cohomology-reconstruction",
+    "lem-sc-koszul-regular-immersion-algebra-dual",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenRankStrataHomologyLift.lean",
+  "declaration": "AlgebraicGeometry.clopenRankStrata_homology_lift",
+  "statement": "theorem clopenRankStrata_homology_lift\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u}\n      (moduleRings (directImageAlgebraSpace i)))]\n    (r : LocallyConstant Z ℕ)\n    (E : ∀ n : ℕ, (Scheme.Modules.exteriorRankOpen r n).toScheme.Modules)\n    (T : ℤ → Z.Modules)\n    (hT : ∀ n : ℤ, T n = if 0 ≤ n then\n      (Scheme.Modules.pushforward (Scheme.Modules.exteriorRankOpen r n.toNat).ι).obj\n        (E n.toNat) else 0)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n    (n : ℤ)\n    (hother : ∀ m : ℤ, m ≠ n → Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) m).obj K ≅\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T m)))\n    (a : (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n) ⟶\n      (DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K) :\n    ∃ f : (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj\n          ((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n)) ⟶ K,\n      (DerivedCategory.singleFunctorCompHomologyFunctorIso\n        (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).inv.app\n          ((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj (T n)) ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).map f = a",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T194151-L-468181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T194151-L-468181",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

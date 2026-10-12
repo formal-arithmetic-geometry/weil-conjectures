@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-finite-zero-differential-assembly",
+ "kind": "statement",
+ "title": "Finite-sum assembly of single-degree homology isomorphisms",
+ "statement": "Let C be any abelian category, choose its derived category D(C) [def-weil-abstract-derived-category], and let Q be the localization from cochain complexes. Let P be an integer-indexed cochain complex all of whose differentials vanish. Let s be a finite set of integers such that P.X n is a zero object for n outside s. Let K be an object of D(C), with H^n(K) a zero object for n outside s. Suppose for each n in s there exists a derived morphism f_n: Q(single_n(P.X n)) → K inducing an isomorphism on degree-n homology. Then Q(P) is isomorphic to K. The isomorphism is obtained by summing Q of the degree projections followed by the given f_n.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05RU (localization at quasi-isomorphisms); agent-written finite-sum assembly for original clopen rank-stratum reconstruction step 3."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For each n, construct the cochain projection p_n from P to the single complex with P.X n in degree n by mkHomToSingle of the identity. This is a cochain map because P has zero differentials. On degree-n homology it is an isomorphism: ShortComplex.LeftHomologyMapData.ofZeros identifies its homology map with its identity degree-n component. Transfer this to D(C) using homologyFunctorFactors.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n in the finite set s choose the given derived map f_n. Construct g = sum over n in s of Q(p_n) followed by f_n. Additivity of the homology functor carries this finite sum to the sum of the homology maps. In degree n in s, all summands indexed by m different from n factor through the zero degree-n homology of a degree-m single complex. The remaining summand is the composite of two isomorphisms, H^n(Q(p_n)) and H^n(f_n).",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For n outside s, the source homology vanishes because P.X n is zero and the target homology vanishes by hypothesis, so H^n(g) is an isomorphism between zero objects. Apply DerivedCategory.isIso_iff to all integer degrees and take asIso g. This includes an empty finite set: the empty sum is a morphism between two acyclic derived objects.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "V3",
+  "based_on": {
+   "document": "literature/stacks-project/derived.tex",
+   "place": "Tag 05RU (localization at quasi-isomorphisms); agent-written finite-sum assembly for original clopen rank-stratum reconstruction step 3."
+  },
+  "note": "Agent-written explicit component of the existing rank-stratum argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Maps from the single degree terms of a finite zero differential complex assemble to an isomorphism in a derived category when they induce homology isomorphisms",
+   "results": "8 hits: DerivedCategory.isIso_Q_map_iff_quasiIso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, DerivedCategory.instIsIsoMapCochainComplexIntQ, CochainComplex.quasiIsoAt₀_iff, DerivedCategory.singleFunctorCompHomologyFunctorIso, HomotopyCategory.homologyFunctor_inverts_quasiIso, HomologicalComplex.homologyFunctorSingleIso_hom_app, DerivedCategory.isIso_Qh_map_iff",
+   "date": "2026-10-13",
+   "verdict": "No exact match; supporting declarations used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mkHomToSingle",
+   "results": "2 hits: HomologicalComplex.mkHomToSingle, HomologicalComplex.mkHomToSingle_f",
+   "date": "2026-10-13",
+   "verdict": "No exact match; supporting declarations used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteZeroDifferential|zeroDifferential.*[Ii]so|single.*[Aa]ssembly",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact match; supporting declarations used where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a derived category, maps from each single term of a finite zero differential complex assemble into an isomorphism if they induce homology isomorphisms",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClopenRankStrataFormality",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Original reconstruction proof step 3: finite assembly of the degreewise maps, proved for an arbitrary abelian category.",
+   "via": [
+    "lem-sc-clopen-rank-strata-formality",
+    "lem-sc-closed-immersion-ranked-cohomology-reconstruction",
+    "lem-sc-koszul-regular-immersion-algebra-dual",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteZeroDifferentialAssembly",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteZeroDifferentialAssembly.lean",
+  "declaration": "DerivedCategory.finiteZeroDifferentialAssembly",
+  "statement": "theorem finiteZeroDifferentialAssembly\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    (P : CochainComplex C ℤ) (hd : ∀ a b, P.d a b = 0)\n    (s : Finset ℤ) (hP : ∀ n, n ∉ s → IsZero (P.X n))\n    (K : DerivedCategory C)\n    (hK : ∀ n, n ∉ s → IsZero ((homologyFunctor C n).obj K))\n    (hlift : ∀ n, n ∈ s → ∃ f : Q.obj\n      ((HomologicalComplex.single C (ComplexShape.up ℤ) n).obj (P.X n)) ⟶ K,\n      IsIso ((homologyFunctor C n).map f)) :\n    Nonempty (Q.obj P ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T194151-L-468181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T194151-L-468181",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

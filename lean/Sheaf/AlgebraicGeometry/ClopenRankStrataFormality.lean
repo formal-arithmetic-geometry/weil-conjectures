@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+import Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift
+import Sheaf.AlgebraicGeometry.FiniteZeroDifferentialAssembly
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Formality of modules on disjoint clopen rank strata
@@ -68,6 +71,41 @@ theorem clopenRankStrata_formality
     Nonempty (DerivedCategory.Q.obj
       (((RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj
-          (CochainComplex.of T (fun _ => 0) (fun _ => zero_comp))) ≅ K) := by sorry
+          (CochainComplex.of T (fun _ => 0) (fun _ => zero_comp))) ≅ K) := by
+  classical
+  let C := SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))
+  let F := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)
+  let P := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+    (CochainComplex.of T (fun _ => 0) (fun _ => zero_comp))
+  let s : Finset ℤ := hfinite.toFinset.image (fun n : ℕ => (n : ℤ))
+  have hzero (n : ℤ) (hn : n ∉ s) : IsZero (F.obj (T n)) := by
+    rw [hT n]
+    split_ifs with hnonneg
+    · have hnot : n.toNat ∉ Set.range r := by
+        intro hmem
+        apply hn
+        exact Finset.mem_image.mpr
+          ⟨n.toNat, hfinite.mem_toFinset.mpr hmem, Int.toNat_of_nonneg hnonneg⟩
+      have : IsEmpty (Scheme.Modules.exteriorRankOpen r n.toNat).toScheme :=
+        ⟨fun x => hnot ⟨x.1, x.2⟩⟩
+      exact F.map_isZero ((Scheme.Modules.pushforward
+        (Scheme.Modules.exteriorRankOpen r n.toNat).ι).map_isZero
+          (Scheme.Modules.isZero_of_isEmpty (E n.toNat)))
+    · exact F.map_isZero (isZero_zero _)
+  apply DerivedCategory.finiteZeroDifferentialAssembly P
+    (fun a b => by simp [P, CochainComplex.of.d]) s
+    (fun n hn => hzero n hn) K
+    (fun n hn => (hzero n hn).of_iso (hK n).some)
+  intro n hn
+  obtain ⟨f, hf⟩ := clopenRankStrata_homology_lift i r E T hT K n
+    (fun m _ => hK m) (hK n).some.inv
+  refine ⟨f, ?_⟩
+  have hiso : IsIso
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.app (F.obj (T n)) ≫
+        (DerivedCategory.homologyFunctor C n).map f) := by
+    rw [hf]
+    infer_instance
+  exact IsIso.of_isIso_comp_left
+    ((DerivedCategory.singleFunctorCompHomologyFunctorIso C n).inv.app (F.obj (T n))) _
 
 end AlgebraicGeometry

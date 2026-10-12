@@ -17,44 +17,43 @@
  ],
  "proof": [
   {
-   "text": "Glue 1 on a clopen fiber U_m and 0 on its complement. Push these sections to i_*O_Z. Their multiplication endomorphisms are orthogonal idempotents with finite sum 1. They split every representative complex termwise into image subcomplexes, preserving differentials, homology and quasi-isomorphisms.",
+   "text": "Let s be the integer image of the finite set range(r). For n outside s, use hT. For negative n its term is zero. For nonnegative n its rank stratum is empty, since n.toNat is not in range(r). Scheme.Modules.isZero_of_isEmpty makes E_n zero and additive pushforward, then module direct image, preserve that zero object. Thus the mapped comparison complex has zero terms outside s. Use hK in EVERY integer degree to deduce that K also has zero homology outside s.",
    "uses": [
-    "def-sc-direct-image-algebra-derived-category",
-    "def-sc-locally-ranked-exterior-complex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The direct image of E_m is supported on the rank-m summand. The algebra-linear homology isomorphisms commute with multiplication by the characteristic idempotents. Each summand of K therefore has homology in its assigned single degree only. Canonical truncations identify it with that homology sheaf placed in that degree. Perform the same truncation on the termwise pushed-forward zero-differential complex.",
-   "uses": [
-    "def-pc-derived-category",
+    "def-sc-locally-ranked-exterior-complex",
     "def-pc-ringed-spaces-derived-direct-image"
    ],
    "elementary": false
   },
   {
-   "text": "Sum the finitely many single-degree isomorphisms and compose with the termwise splitting isomorphisms. Off the closed image the algebra is zero, so all its module sheaves vanish. The empty source gives zero on both sides; rank zero gives degree zero. The argument never requires the rank strata to be clopen in Y.",
+   "text": "For n in s, apply the single-stratum homology-lifting lemma to the inverse of the given isomorphism H^n(K) ≅ g_*T^n, using hK for every other integer degree. The lifted morphism has an isomorphism on degree-n homology, since its composite with the canonical single-complex homology identification is precisely that inverse.",
    "uses": [
-    "def-weil-closed-immersion"
+    "lem-sc-clopen-rank-strata-homology-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison complex has zero differentials since module direct image is additive. Apply the proved finite-zero-differential assembly theorem to the finite support s, the zero homology outside it, and these lifted morphisms. Its concrete finite sum has isomorphisms on all homology degrees, hence is an isomorphism Q(g_*C) ≅ K.",
+   "uses": [
+    "lem-sc-finite-zero-differential-assembly",
+    "def-pc-ringed-spaces-derived-direct-image"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-direct-image-algebra-derived-category",
   "def-sc-locally-ranked-exterior-complex",
-  "def-pc-derived-category",
   "def-pc-ringed-spaces-derived-direct-image",
-  "def-weil-closed-immersion"
+  "lem-sc-clopen-rank-strata-homology-lift",
+  "lem-sc-finite-zero-differential-assembly"
  ],
  "proof_origin": {
   "by": "worker",
-  "agent": "K2",
+  "agent": "V3",
   "based_on": {
    "document": "literature/stacks-project/duality.tex",
    "place": "Parent reconstruction proof steps 2--4: finite rank-idempotent splitting and single-degree truncation; Tag 0BQZ, with the direct-image-algebra setup of Tag 0AVW"
   },
-  "note": "Strict component of the existing reconstruction argument; no target signature changed."
+  "note": "Explicit finite-support proof and finite-sum assembly; only the one-stratum Hom-to-homology lifting remains split off. All integer-degree hK hypotheses are retained. No target signature or unit route changed."
  },
  "mathlib_searches": [
   {
@@ -133,9 +132,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T165518-L-2935012",
+  "landing": "20261012T194151-L-468181",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
