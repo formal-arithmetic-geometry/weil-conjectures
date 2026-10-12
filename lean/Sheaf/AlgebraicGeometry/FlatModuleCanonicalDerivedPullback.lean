@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullbackAux
+import Sheaf.AlgebraicGeometry.IntrinsicFlatModuleTensorFlat
 
 /-! # The canonical derived pullback comparison at a flat module
 
@@ -53,6 +54,11 @@ theorem isIso_modulePullbackComparison_of_isFlatOver_identity
         (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
             ((Scheme.Modules.tensorPullback a).obj G))
-    (hc : IsDerivedModulePullbackComparison a G c) : IsIso c := by sorry
+    (hc : IsDerivedModulePullbackComparison a G c) : IsIso c := by
+  obtain ⟨ε, hε, hc⟩ := hc
+  rw [hc]
+  have := isIso_flat_single_derived_counit a G
+    (isFlat_of_isFlatOver_identity G hflat) ε hε
+  infer_instance
 
 end AlgebraicGeometry

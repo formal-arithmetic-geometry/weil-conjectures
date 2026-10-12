@@ -8187,3 +8187,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/R2/Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension (stage 3; reviewer PASS; first push; landing 20261012T144140-L-2105813 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/R2/Sheaf.CategoryTheory.LocalizationHomColimit (stage 3; reviewer PASS; first push; landing 20261012T144141-L-2105911 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/R2/Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension (stage 3; reviewer PASS; first push; landing 20261012T144141-L-2106018 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/R3/Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback (stage 3; reviewer PASS; first push; landing 20261012T144141-L-2106120 (interface); batch 20261012T144049; modules 3; new nodes 2)

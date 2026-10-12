@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 06YD and 06YJ: bounded-above flat complexes are K-flat and compute derived pullback; single-complex specialization"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "id": "lem-pc-flat-single-derived-counit",
+ "title": "FlatModuleCanonicalDerivedPullbackAux",
+ "statement": "Choose shared derived-category localizations [def-pc-derived-category]. Let a:X → Y be any scheme morphism [def-pc-scheme] with additive tensorPullback a [def-pc-module-pullback]. Let G be a tensor-flat structure-sheaf module [def-pc-flat-sheaf-modules]. For every natural transformation ε:Qh ⋙ derivedPullback a → tensorPullback a on the homotopy category followed by Qh, making derivedPullback a a left-derived functor [def-pc-derived-pullback], the component ε at the homotopy single complex G[0] is invertible.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Prove that the single complex is bounded above and termwise flat using the single-term isomorphism and flatness of zero objects. Apply flatComplexDerivedPullback. Identify its functor with tensorPullback via Functor.ext. The resulting counit is invertible by its equality with an isomorphism inverse. Mathlib leftDerived_fac_app expresses the given counit as the composite of this counit and leftDerivedLift; the lift is invertible by isLeftDerivedFunctor_iff_isIso_leftDerivedLift. Compose the two isomorphisms.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 06YD and 06YJ: bounded-above flat complexes are K-flat and compute derived pullback; single-complex specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left derived functor counit invertible on flat single complex",
+   "results": "Eight hits: leftDerivedZeroIsoSelf and exact-functor comparisons; none states this unbounded flat-single computation.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLeftDerivedFunctor",
+   "results": "Unknown identifier on service. Local source supplies leftDerived_fac_app and isLeftDerivedFunctor_iff_isIso_leftDerivedLift, used in the proof.",
+   "date": "2026-10-12",
+   "verdict": "local tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlatOver|flat.*stalk|flat.*single",
+   "results": "Scheme morphism flat-stalk results and ring-module flatness results; no flat sheaf criterion. Local flatComplexDerivedPullback supplies the derived computation.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent flat module implies exact tensor functor on sheaves of modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-module-canonical-derived-pullback",
+   "place": "Flat single complex and counit uniqueness"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullbackAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModuleCanonicalDerivedPullbackAux.lean",
+  "declaration": "AlgebraicGeometry.isIso_flat_single_derived_counit",
+  "statement": "theorem isIso_flat_single_derived_counit\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (a : X ⟶ Y) [(Scheme.Modules.tensorPullback a).Additive]\n    (G : Y.Modules) (hflat : SheafOfModules.IsFlat G)\n    (ε : DerivedCategory.Qh ⋙ derivedPullback a ⟶\n      (Scheme.Modules.tensorPullback a).mapHomotopyCategory (ComplexShape.up ℤ) ⋙\n        DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))\n    (hε : (derivedPullback a).IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))) :\n    IsIso (ε.app ((HomotopyCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (0 : ℤ)).obj G))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144141-L-2106120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144141-L-2106120",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
