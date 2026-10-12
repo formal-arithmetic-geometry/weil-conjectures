@@ -19,20 +19,50 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The construction is the induced filtration / adic reduction / generic-point argument described in the declaration docstring.",
-   "uses": [],
+   "text": "Define an isomorphism-invariant object property requiring coherence and an isomorphism to the pushforward of a nonzero coherent ideal sheaf on an integral closed subscheme. Convert each given coherent integral filtration to membership in the property filtrationClosure, using coherent cokernel closure and the endpoint isomorphisms.",
+   "uses": [
+    "def-weil-pbc-coherent-integral-filtration",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YF proof"
+    "place": "Cohomology of Schemes, Lemma 01YF, induced filtration in the reducible-support paragraph"
+   }
+  },
+  {
+   "text": "Apply the proved extension-closure instance for filtrationClosure to the short exact sequence and the two converted filtrations. Import all Sheaf.CategoryTheory.FiniteFiltrationRefinement to reuse its existing private theorem CategoryTheory.subobject_filtration_of_closure, which realizes closure membership as a finite subobject chain with quotients satisfying P. Its zero-object and mono-step constructions, and their cokernel comparisons, are reused without duplicating them.",
+   "uses": [
+    "lem-pc-s3-finite-filtration-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YF, induced filtration in extensions"
+   }
+  },
+  {
+   "text": "Induct along the resulting subobject chain to prove coherence of every term, using coherent zero and coherent short exact extension closure. Retain the transported integral-ideal isomorphisms as the quotient witnesses.",
+   "uses": [
+    "def-weil-pbc-coherent-integral-filtration",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01YF, final filtration conclusion"
    }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-coherent-integral-filtration",
+  "lem-pc-s3-finite-filtration-refinement",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 01YF proof"
+  "place": "Cohomology of Schemes, Lemma 01YF, proof; formalized via filtrationClosure extension closure and the existing finite-filtration realization helper"
  },
  "mathlib_searches": [
   {
@@ -94,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T184321-L-4010987",
-  "kind": "interface",
+  "landing": "20261012T212210-L-1098217",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
