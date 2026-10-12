@@ -27,61 +27,35 @@
  ],
  "proof": [
   {
-   "text": "By pqf-lem-proper-basic applied to the proper structure morphisms X→Spec(k) and Y→Spec(k) (with affine base Spec(k)), X and Y are quasi-compact and separated. Separatedness means the diagonals are closed immersions, and closed immersions are affine morphisms, so X and Y have affine diagonals. Thus the hypotheses of lem-sc-picard-kunneth-qcoh apply to the structure sheaves.",
+   "text": "Express each product H1 class as a sum of the two projection pullbacks, using the existence-only spanning theorem. This keeps the Kunneth route and the scalar-global-function hypotheses.",
    "uses": [
-    "pqf-lem-proper-basic",
-    "lem-sc-picard-kunneth-qcoh"
+    "lem-sc-picard-h1-product-spanning"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, Tag 0BED"
-   }
+   "elementary": true
   },
   {
-   "text": "Specializing the Kunneth isomorphism to F=O_X, G=O_Y and n=1 gives H^1(X ×_{Spec(k)} Y,O) ≅ (H^1(X,O) ⊗_k H^0(Y,O)) ⊕ (H^0(X,O) ⊗_k H^1(Y,O)), since the only pairs of nonnegative degrees summing to 1 are (1,0) and (0,1). Using H^0(X,O)=k=H^0(Y,O), this identifies H^1(X ×_{Spec(k)} Y,O) with H^1(X,O) ⊕ H^1(Y,O).",
+   "text": "Use the identity and composition laws for structure-sheaf cohomology pullback and the pullback.lift projection equations. Pulling the X projection back to the X slice is the identity, and similarly for Y. The cross composites are f followed by y and g followed by x. Their cohomology maps factor through H1(Spec k,O)=0, obtained from affine-scheme vanishing applied to the quasi-coherent unit sheaf. Its underlying abelian cohomology is definitionally the structureSheafAb cohomology.",
    "uses": [
-    "lem-sc-picard-kunneth-qcoh"
+    "lem-sc-structure-sheaf-cohomology-pullback-functorial",
+    "lem-pc-affine-vanishing"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, Tag 0BED, degree n=1"
-   }
+   "elementary": true
   },
   {
-   "text": "Under this decomposition, the functoriality of the canonical cup-product map in lem-sc-picard-kunneth-qcoh shows that pullback along the slice (1,y):X→X×_{Spec(k)}Y is the identity on the H^1(X,O) summand, because pr_1∘(1,y)=id_X and pr_2^*1=1, and is zero on the H^1(Y,O) summand, because pr_2∘(1,y) factors as X→Spec(k)→Y through the k-rational point y [def-pc-rational-point], so its pullback on H^1 factors through H^1(Spec(k),O_{Spec(k)}), which is 0 by pqf-lem-affine-vanishing (Spec(k) is affine). Similarly, pullback along (x,1):Y→X×_{Spec(k)}Y is zero on the first summand and the identity on the second.",
-   "uses": [
-    "lem-sc-picard-kunneth-qcoh",
-    "pqf-lem-affine-vanishing"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, Tag 0BED, proof description of the cup-product maps and functoriality"
-   }
-  },
-  {
-   "text": "Therefore the homomorphism obtained by the two slice pullbacks is the identity map on H^1(X,O)⊕H^1(Y,O) after the displayed identification, and is consequently injective.",
-   "uses": [
-    "lem-sc-picard-kunneth-qcoh"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, Tag 0BED, degree n=1"
-   }
+   "text": "Apply the proved private additive-group lemma injective_pair_of_spanning. If two classes have equal slice pairs, both slices kill their difference c-d. Express c-d=p_X^*a+p_Y^*b using spanning. Additivity and the four composite calculations show that its X slice is a and its Y slice is b, so a=b=0. Projection pullbacks preserve zero, hence c-d=0 and c=d.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-picard-kunneth-qcoh",
-  "pqf-lem-proper-basic",
-  "pqf-lem-affine-vanishing"
+  "lem-sc-picard-h1-product-spanning",
+  "lem-sc-structure-sheaf-cohomology-pullback-functorial",
+  "lem-pc-affine-vanishing"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties, Lemma varieties-lemma-kunneth, Tag 0BED"
+  "place": "Tag 0BED, degree one; E3 stage 3: projection spanning, canonical pullback laws, affine vanishing, then additive congruence"
  },
  "mathlib_searches": [
   {
@@ -173,5 +147,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T184252-L-4000765",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

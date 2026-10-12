@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-structure-sheaf-cohomology-pullback-functorial",
+ "kind": "statement",
+ "title": "Identity and composition laws for structure-sheaf cohomology pullback",
+ "statement": "For every scheme $X$ [def-pc-scheme] and every $n\\geq0$, the canonical map on structure-sheaf cohomology [def-sc-structure-sheaf-cohomology-pullback] satisfies $(\\operatorname{id}_X)^*=\\operatorname{id}_{H^n(X,\\mathcal O_X)}$. For any morphisms of schemes $f:X\\to Y$ and $g:Y\\to Z$ [def-pc-scheme], one has $(g\\circ f)^*=f^*\\circ g^*$ as additive homomorphisms $H^n(Z,\\mathcal O_Z)\\to H^n(X,\\mathcal O_X)$ for every $n\\geq0$. No field, properness or rational-point hypotheses are required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7 (section-functoriality), equation-functorial and Remark 01FB (remark-functoriality)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the functorial construction of cohomology pullback on the small Zariski sites. At the terminal open, the free abelian representable is the constant integer sheaf. Under this identification the exact-inverse-image Ext map is the map used in structureSheafCohomologyPullback, followed by the adjoint of the structure-sheaf ring map.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity structure map is the identity and the identity lift on a resolution induces the identity on cohomology. For composable scheme morphisms, the structure ring map of the composite is the composite of the two structure maps after direct image. The site pullback composition comparison is compatible with adjunction units. Naturality of the adjunction and constant-sheaf comparison therefore cancel that comparison in the Ext map with coefficients, giving (g o f)^*=f^* o g^*. Equivalently compose resolution lifts; homotopy uniqueness identifies this lift with the lift of the composite.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-cohomology-pullback",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section 01F7 (section-functoriality), equation-functorial and Remark 01FB (remark-functoriality)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structureSheafCohomologyPullback|kunneth",
+   "results": "0 hits: ; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf cohomology pullback is functorial for composition and identities",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of structure sheaf cohomology along identity and composition of scheme morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc, AlgebraicGeometry.Scheme.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.comp_app_assoc, AlgebraicGeometry.Scheme.Hom.comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc, AlgebraicGeometry.Scheme.Hom.appLE_map'_assoc; no exact match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\"",
+   "results": "12 cochain HomComplex cohomology-class declarations; no scheme projection spanning or structure-sheaf pullback identity/composition result. Independent second-reader search.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1ProductInjective",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof of Tag 0BF3, Kunneth slice computation: identity and composition laws used in step 3 of lem-sc-picard-h1-product-injective",
+   "via": [
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullbackFunctorial",
+  "file": "lean/Sheaf/AlgebraicGeometry/StructureSheafCohomologyPullbackFunctorial.lean",
+  "declaration": "AlgebraicGeometry.Scheme.structureSheafCohomologyPullback_functorial",
+  "statement": "theorem structureSheafCohomologyPullback_functorial : (∀ (X : Scheme.{u}) (n : ℕ), structureSheafCohomologyPullback (𝟙 X) n = AddMonoidHom.id (Sheaf.H (structureSheafAb X) n)) ∧ (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ), structureSheafCohomologyPullback (f ≫ g) n = (structureSheafCohomologyPullback f n).comp (structureSheafCohomologyPullback g n))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T184252-L-4000765",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T184252-L-4000765",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
