@@ -12,24 +12,31 @@
  ],
  "proof": [
   {
-   "text": "Apply the uniform projective resolution bound in the definition of finite global dimension to the residue field module.",
+   "text": "Choose the uniform bound n from finite global dimension and apply it to ULift of the residue field, in the module universe max u v. Use the all-degrees clause of the bounded-resolution/Ext characterization to obtain Mathlib HasProjectiveDimensionLE for this lifted module.",
    "uses": [
-    "def-weil-pbc-finite-global-dimension"
+    "def-weil-pbc-finite-global-dimension",
+    "lem-weil-pbc-projective-dimension-ext-characterization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Proposition Tag 00OC"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Transport Mathlib HasProjectiveDimensionLE along ULift.moduleEquiv to the residue field in universe u using the linear-equivalence theorem. Apply the reverse all-degrees clause of the bounded-resolution/Ext characterization in universe u and retain the same bound n. This yields finite projective dimension.",
+   "uses": [
+    "lem-weil-pbc-projective-dimension-linear-equiv",
+    "lem-weil-pbc-projective-dimension-ext-characterization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-global-dimension"
+  "def-weil-pbc-finite-global-dimension",
+  "lem-weil-pbc-projective-dimension-ext-characterization",
+  "lem-weil-pbc-projective-dimension-linear-equiv"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Proposition Tag 00OC"
+  "place": "Algebra, Proposition Tag 00OC, implication (2) => (1); Lean universe transport via the existing 065R characterization and Mathlib linear-equivalence invariance"
  },
  "status": "split",
  "lean": {
@@ -113,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T184329-L-4014064",
-  "kind": "interface",
+  "landing": "20261012T202254-L-709277",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

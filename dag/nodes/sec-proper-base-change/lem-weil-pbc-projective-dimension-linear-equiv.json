@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-projective-dimension-linear-equiv",
+ "kind": "statement",
+ "title": "Ext-defined projective dimension is invariant under linear equivalence between universes",
+ "statement": "Let $R$ be a ring small in each of two module universes, let $M$ and $N$ be $R$-modules in these universes, and let $e:M\\simeq_R N$ be a linear equivalence. If $\\operatorname{Ext}^i_R(M,Y)=0$ for every module $Y$ in the universe of $M$ and every $i\\ge n+1$, then $\\operatorname{Ext}^i_R(N,Z)=0$ for every module $Z$ in the universe of $N$ and every $i\\ge n+1$. Here Ext and HasProjectiveDimensionLE are Mathlib's categorical notions [def-pc-ext].",
+ "source": {
+  "document": "Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean",
+  "place": "hasProjectiveDimensionLE_of_linearEquiv, lines 110-120; the cross-universe induction is hasProjectiveDimensionLE_of_semiLinearEquiv, lines 51-85"
+ },
+ "stmt_deps": [
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib ModuleCat.hasProjectiveDimensionLE_of_linearEquiv to e and n. Its source proof inducts on n using canonical free surjections and dimension shifting; at n=0 projectivity is invariant under linear equivalence, and the induction step identifies the kernels of the two free surjections under the induced equivalence. Smallness of the ring in both universes ensures that these free modules exist in the required universes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean",
+  "place": "lines 51-85 and 110-120"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ModuleCat.hasProjectiveDimensionLE_of_linearEquiv",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.hasProjectiveDimensionLE_of_linearEquiv",
+   "results": "Exact declaration found with Small R in both module universes and a linear equivalence.",
+   "date": "2026-10-13",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "hasProjectiveDimensionLE_of_linearEquiv",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean:115 declares the lemma; read lines 110-120 and its source cross-universe induction at 51-85.",
+   "date": "2026-10-13",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ModuleCat.hasProjectiveDimensionLE_of_linearEquiv",
+  "file": "Mathlib/Algebra/Category/ModuleCat/ProjectiveDimension.lean",
+  "line": 115,
+  "how": "Exactly the statement after unfolding HasProjectiveDimensionLE and HasProjectiveDimensionLT; lines 110-120."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ResidueFieldFiniteProjectiveDimensionOfGlobalDimension",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the residue-field finite projective dimension step of 00OC, transport between Lean module universes",
+   "via": [
+    "lem-weil-pbc-residue-field-finite-projective-dimension",
+    "lem-weil-pbc-finite-gl-dim-regular-local",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Algebra.Category.ModuleCat.ProjectiveDimension",
+  "declaration": "ModuleCat.hasProjectiveDimensionLE_of_linearEquiv",
+  "statement": "lemma hasProjectiveDimensionLE_of_linearEquiv (e : M ≃ₗ[R] N) (n : ℕ) [HasProjectiveDimensionLE M n] : HasProjectiveDimensionLE N n",
+  "branch": "mathlib",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T202254-L-709277",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T202254-L-709277",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
