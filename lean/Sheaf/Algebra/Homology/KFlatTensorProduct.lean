@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Geometry.RingedSpace.SheafedSpace
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Mathlib.Algebra.Homology.Monoidal
 
 /-!
 # Tensor products of K-flat complexes
@@ -46,7 +48,11 @@ theorem IsKFlat.mapBifunctor
         (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) ℤ)
     (hK : K.IsKFlat) (hL : L.IsKFlat) :
     (mapBifunctor K L (curriedTensor _)).IsKFlat := by
-  sorry
+  let := SheafOfModules.symmetricCategory X.sheaf
+  let := (SheafOfModules.tensorClosed X.sheaf).1.some
+  let := (SheafOfModules.tensorClosed X.sheaf).2.1.some
+  intro M hM i
+  exact (hL _ (hK M hM) i).of_iso (HomologicalComplex.associator M K L)
 
 end
 

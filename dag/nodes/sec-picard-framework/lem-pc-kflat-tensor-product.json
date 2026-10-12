@@ -34,10 +34,11 @@
    }
   },
   {
-   "text": "Apply K-flatness of $\\mathcal L^\\bullet$ to the acyclic complex from Step 1. The definition of the total tensor complex [def-pc-tensor-complex-sheaves] gives the canonical associativity isomorphism $\\operatorname{Tot}(\\mathcal M^\\bullet\\otimes_{\\mathcal O_X}\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O_X}\\mathcal L^\\bullet))\\cong\\operatorname{Tot}(\\operatorname{Tot}(\\mathcal M^\\bullet\\otimes_{\\mathcal O_X}\\mathcal K^\\bullet)\\otimes_{\\mathcal O_X}\\mathcal L^\\bullet)$, with the Koszul signs agreeing. The right-hand side is acyclic, so the left-hand side is acyclic. As this holds for every acyclic $\\mathcal M^\\bullet$, the displayed total tensor complex is K-flat by [def-pc-kflat-complex].",
+   "text": "Apply K-flatness of $\\mathcal L^\\bullet$ to the acyclic complex from Step 1. The definition of the total tensor complex [def-pc-tensor-complex-sheaves] gives the canonical associativity isomorphism $\\operatorname{Tot}(\\mathcal M^\\bullet\\otimes_{\\mathcal O_X}\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O_X}\\mathcal L^\\bullet))\\cong\\operatorname{Tot}(\\operatorname{Tot}(\\mathcal M^\\bullet\\otimes_{\\mathcal O_X}\\mathcal K^\\bullet)\\otimes_{\\mathcal O_X}\\mathcal L^\\bullet)$, with the Koszul signs agreeing. The right-hand side is acyclic, so the left-hand side is acyclic. As this holds for every acyclic $\\mathcal M^\\bullet$, the displayed total tensor complex is K-flat by [def-pc-kflat-complex]. In Lean, install the additive and closed tensor structures from [lem-pc-sheaf-modules-tensor-closed]; monoidal closure and symmetry ensure tensoring preserves the coproducts in the total complexes. Use Mathlib HomologicalComplex.associator M K L for the canonical isomorphism, and HomologicalComplex.ExactAt.of_iso in every degree to transport acyclicity.",
    "uses": [
     "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": true,
    "source": {
@@ -48,7 +49,8 @@
  ],
  "proof_deps": [
   "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "document",
@@ -140,5 +142,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184331-L-4014925",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
