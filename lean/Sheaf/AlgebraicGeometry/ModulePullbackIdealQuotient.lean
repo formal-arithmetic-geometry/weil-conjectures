@@ -3,12 +3,10 @@ module
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
+import Sheaf.AlgebraicGeometry.ModulePullbackIdealProductImage
+import Mathlib.CategoryTheory.Abelian.Basic
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-! # Pullback and quotients by extended ideals
 
@@ -68,7 +66,84 @@ theorem modulePullbackIdealQuotient {X Y : Scheme.{v}} (f : X ⟶ Y)
             (formalModuleQuotientMap J u (Nat.le_refl 1)) =
           formalModuleQuotientMap (J.comap f)
               ((Scheme.Modules.tensorPullback f).map u) (Nat.le_refl 1) ≫ (σ G' hG').hom := by
-  sorry
+  classical
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction f
+  let := adj.isLeftAdjoint
+  let T := Scheme.Modules.tensorPullback f
+  let i (G : Y.Modules) := Scheme.idealModuleProductι J.toModulesι G
+  let k (G : Y.Modules) := Scheme.idealModuleProductι (J.comap f).toModulesι (T.obj G)
+  let (G : Y.Modules) : Mono (k G) := by
+    dsimp [k, Scheme.idealModuleProductι]
+    infer_instance
+  have he (G : Y.Modules) (hG : G.IsQuasicoherent) :
+      Subobject.mk (k G) = Subobject.mk (image.ι (T.map (i G))) := by
+    rw [← imageSubobject_mono (k G)]
+    exact (modulePullbackIdealProductImage f J G hG).symm
+  let σ (G : Y.Modules) (hG : G.IsQuasicoherent) :
+      formalModuleQuotient (J.comap f) 1 (T.obj G) ≅
+        T.obj (formalModuleQuotient J 1 G) :=
+    let e := Subobject.isoOfMkEqMk (k G) (image.ι (T.map (i G))) (he G hG)
+    cokernel.mapIso (k G) (image.ι (T.map (i G))) e (Iso.refl _) (by
+      simp [e]) ≪≫ cokernelImageι (T.map (i G)) ≪≫ (PreservesCokernel.iso T (i G)).symm
+  have hσ (G : Y.Modules) (hG : G.IsQuasicoherent) :
+      formalModuleQuotientπ (J.comap f) 1 (T.obj G) ≫ (σ G hG).hom =
+        T.map (formalModuleQuotientπ J 1 G) := by
+    change cokernel.π (k G) ≫ (σ G hG).hom = T.map (cokernel.π (i G))
+    dsimp only [σ, Iso.trans_hom, Iso.symm_hom]
+    rw [PreservesCokernel.iso_inv]
+    simp [cokernel.mapIso, cokernelImageι]
+  refine ⟨?_, ?_, ?_, σ, hσ, ?_⟩
+  · intro V U hUV
+    exact Scheme.IdealSheafData.ideal_comap_appLE J f V U hUV
+  · intro n _
+    let ι := Σ' (V : Y.affineOpens) (U : X.affineOpens), U.1 ≤ f ⁻¹ᵁ V.1
+    refine Scheme.IdealSheafData.ext_of_iSup_eq_top (ι := ι) (fun a ↦ a.2.1) ?_
+      fun ⟨V, U, hUV⟩ ↦ ?_
+    · rw [eq_top_iff]
+      intro x _
+      obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ :=
+        Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ
+      obtain ⟨_, ⟨U, hU, rfl⟩, hxU, hUV⟩ :=
+        X.isBasis_affineOpens.exists_subset_of_mem_open (a := x) (ou := (f ⁻¹ᵁ V).2) hxV
+      exact Opens.mem_iSup.mpr ⟨⟨⟨V, hV⟩, ⟨U, hU⟩, hUV⟩, hxU⟩
+    · rw [Scheme.IdealSheafData.ideal_comap_appLE, Scheme.IdealSheafData.ideal_pow,
+        Pi.pow_apply, Ideal.map_pow, Scheme.IdealSheafData.ideal_pow, Pi.pow_apply,
+        Scheme.IdealSheafData.ideal_comap_appLE J f V U hUV]
+  · intro G hG
+    have : Epi (formalModuleQuotientπ (J.comap f) 1 (T.obj G)) := by
+      dsimp [formalModuleQuotientπ]
+      infer_instance
+    have : Epi (T.map (formalModuleQuotientπ J 1 G)) := by
+      rw [← hσ G hG]
+      infer_instance
+    refine ⟨inferInstance, ?_⟩
+    have w : k G ≫ T.map (formalModuleQuotientπ J 1 G) = 0 := by
+      rw [← hσ G hG, ← Category.assoc]
+      change (k G ≫ cokernel.π (k G)) ≫ _ = 0
+      rw [cokernel.condition, zero_comp]
+    refine ⟨w, ⟨?_⟩⟩
+    let c := CokernelCofork.ofπ (T.map (formalModuleQuotientπ J 1 G)) w
+    have hc : IsColimit c := by
+      apply IsColimit.ofIsoColimit (cokernelIsCokernel (k G))
+      exact Cofork.ext (σ G hG) (hσ G hG)
+    exact Abelian.monoIsKernelOfCokernel c hc
+  · intro G G' hG hG' u
+    have hq {Z : Scheme.{v}} (K : Z.IdealSheafData) {A B : Z.Modules} (a : A ⟶ B) :
+        formalModuleQuotientπ K 1 A ≫ formalModuleQuotientMap K a (Nat.le_refl 1) =
+          a ≫ formalModuleQuotientπ K 1 B := by
+      exact cokernel.π_desc _ _ _
+    apply (cancel_epi (cokernel.π (k G))).1
+    change formalModuleQuotientπ (J.comap f) 1 (T.obj G) ≫ _ =
+      formalModuleQuotientπ (J.comap f) 1 (T.obj G) ≫ _
+    calc
+      _ = T.map (formalModuleQuotientπ J 1 G) ≫
+          T.map (formalModuleQuotientMap J u (Nat.le_refl 1)) := by
+        rw [← Category.assoc, hσ G hG]
+      _ = T.map u ≫ T.map (formalModuleQuotientπ J 1 G') := by
+        rw [← T.map_comp, hq J u, T.map_comp]
+      _ = T.map u ≫ formalModuleQuotientπ (J.comap f) 1 (T.obj G') ≫
+          (σ G' hG').hom := by rw [hσ G' hG']
+      _ = _ := by rw [← Category.assoc, ← hq (J.comap f) (T.map u), Category.assoc]
 
 end
 end AlgebraicGeometry

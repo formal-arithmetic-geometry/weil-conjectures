@@ -32,107 +32,56 @@
  ],
  "proof": [
   {
-   "text": "(Notation and a basis.) For affine opens $V\\subseteq Y$ and $U\\subseteq f^{-1}(V)$ put $A=\\mathcal O_Y(V)$, $B=\\mathcal O_X(U)$ and $\\rho=\\rho_{V,U}:A\\to B$, $\\rho(a)=f^\\sharp_V(a)|_U$; for an $\\mathcal O_Y$-module $\\mathcal H$, an open $W\\subseteq Y$ and $s\\in\\mathcal H(W)$ write $f^*s=\\eta_{\\mathcal H}(s)\\in(f^*\\mathcal H)(f^{-1}W)$, $\\eta$ the unit of $f^*\\dashv f_*$ [def-pc-module-pullback]. Let $\\mathfrak B$ be the set of affine opens $U\\subseteq X$ with $f(U)\\subseteq V$ for some affine open $V\\subseteq Y$. It is a basis of the topology of $X$: for $x\\in W\\subseteq X$ open choose an affine open $V\\ni f(x)$ of $Y$ and then an affine open $U\\ni x$ inside $W\\cap f^{-1}(V)$ (affine opens form a basis of a scheme [def-pc-scheme]). Two facts about $\\mathfrak B$ are used below. (a) Two sub-$\\mathcal O_X$-modules $\\mathcal S,\\mathcal S'$ of a sheaf $\\mathcal F$ with $\\mathcal S(U)=\\mathcal S'(U)$ for all $U\\in\\mathfrak B$ are equal: for $s\\in\\mathcal S(W)$ cover $W$ by members $U_k$ of $\\mathfrak B$; then $s|_{U_k}\\in\\mathcal S'(U_k)$, these agree on overlaps and glue in the sheaf $\\mathcal S'$ to $t\\in\\mathcal S'(W)$ with $t|_{U_k}=s|_{U_k}$, so $t=s$ in $\\mathcal F$; symmetrically. (b) A morphism of sheaves bijective on every member of $\\mathfrak B$ is an isomorphism [lem-weil-pbc-sheaf-morphism-on-basis] (b). Finally $\\mathcal O_X$ is a quasi-coherent $\\mathcal O_X$-module: on an affine open $U$ with $B=\\mathcal O_X(U)$, $\\mathcal O_X|_U=\\mathcal O_{\\operatorname{Spec}B}$ and $\\widetilde B$ both have the sections $B_r$ on $D(r)$, compatibly with restrictions [lem-weil-pbc-spec-module-tilde-sections], so they are isomorphic by [lem-weil-pbc-sheaf-morphism-on-basis] (applied to the basis of the $D(r)$) and $\\mathcal O_X|_U\\cong\\widetilde B$ [pqf-def-coherent]; likewise for $\\mathcal O_Y$.",
+   "text": "Clause (1) is exactly the attached source theorem Scheme.IdealSheafData.ideal_comap_appLE, applied to J, f, V, U and hUV.",
+   "uses": [
+    "lem-pc-ideal-sheaf-comap-affine-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For clause (2), use affine opens U of X lying over affine opens V of Y. They cover X: choose an affine neighborhood V of f(x), then an affine neighborhood U of x inside its preimage. On each such U, apply the affine ideal formula to J and J^n. The formula ideal_pow and the ring identity Ideal.map_pow make the two ideals equal. Scheme.IdealSheafData.ext_of_iSup_eq_top glues the equality on this cover.",
+   "uses": [
+    "lem-pc-ideal-sheaf-comap-affine-extension",
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let T = tensorPullback f, i_G be the inclusion JG -> G and k_G the inclusion (J.comap f)(TG) -> TG. Apply the image equality [lem-weil-pbc-module-pullback-ideal-product-image]. The inclusion k_G is mono because it is an image inclusion. Equality of the two subobjects gives an isomorphism of their domains commuting with the inclusions. Apply cokernel.mapIso, then cokernelImageι, then the inverse of PreservesCokernel.iso T i_G. T is a left adjoint by nonempty_tensorPullbackAdjunction, hence preserves cokernels and zero morphisms. This gives sigma_G: coker(k_G) -> T(coker(i_G)) as an isomorphism. The cokernel projection equations prove p_G >> sigma_G = T(q_G). Powers at one reduce definitionally to J and J.comap f, so these are precisely the requested quotients.",
    "uses": [
     "def-pc-module-pullback",
-    "def-pc-scheme",
-    "lem-weil-pbc-sheaf-morphism-on-basis",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "pqf-def-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 01HR (section-affine-schemes: O_{Spec R}(D(f)) = R_f) and Lemma 01IA (lemma-quasi-coherent-affine); sheaves on a basis, Sheaves, Section 009H (section-bases-sheaves), sheaves.tex"
-   }
-  },
-  {
-   "text": "(Clause (1).) Let $\\iota:\\mathcal J\\to\\mathcal O_Y$ be the inclusion, $\\epsilon:f^*\\mathcal O_Y\\to\\mathcal O_X$ the morphism adjoint to $f^\\sharp$, characterized by $\\epsilon(f^*a)=f^\\sharp_W(a)$ for $a\\in\\mathcal O_Y(W)$ [lem-weil-pbc-module-pullback-structure-sheaf], and $\\varphi=\\epsilon\\circ f^*\\iota:f^*\\mathcal J\\to\\mathcal O_X$; by [def-nagata-extended-ideal] $\\mathcal I=\\operatorname{Im}\\varphi$, the sub-$\\mathcal O_X$-module of local sections locally in the image of $\\varphi$, which is contained in $\\mathcal O_X$, i.e. a sheaf of ideals. $f^*\\mathcal J$ is quasi-coherent because $\\mathcal J$ is [lem-weil-pbc-module-pullback-quasi-coherent], and $\\mathcal O_X$ is quasi-coherent (step 1), so by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (2), (3) $\\mathcal I$ is quasi-coherent and $\\mathcal I(U)=\\varphi_U((f^*\\mathcal J)(U))$ for every affine open $U$. Now let $V\\subseteq Y$, $U\\subseteq f^{-1}(V)$ be affine opens. By [lem-weil-pbc-module-pullback-affine-sections] (surjectivity of $c_{\\mathcal J}$) every element of $(f^*\\mathcal J)(U)$ is a finite sum $\\sum_kb_k(f^*s_k)|_U$ with $s_k\\in\\mathcal J(V)$, $b_k\\in B$. For $s\\in\\mathcal J(V)$, naturality of the unit gives $(f^*\\iota)(f^*s)=f^*(\\iota(s))$, hence $\\varphi(f^*s)=\\epsilon(f^*s)=f^\\sharp_V(s)$ in $\\mathcal O_X(f^{-1}V)$, and as $\\varphi$ is $\\mathcal O_X$-linear and commutes with restriction, $\\varphi_U(\\sum_kb_k(f^*s_k)|_U)=\\sum_kb_k\\rho(s_k)$. Therefore $\\mathcal I(U)=\\{\\sum_kb_k\\rho(s_k)\\}=\\rho(\\mathcal J(V))B$, the ideal of $B$ generated by the image of $\\mathcal J(V)$ under $f^\\sharp$. This is (1).",
-   "uses": [
-    "def-nagata-extended-ideal",
-    "lem-weil-pbc-module-pullback-structure-sheaf",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01IC (lemma-kernel-cokernel-quasi-coherent) and Lemma 01I9 (lemma-widetilde-pullback); Modules, Lemma 01BG (lemma-pullback-quasi-coherent), modules.tex"
-   }
-  },
-  {
-   "text": "(Clause (2).) Fix $n\\ge1$. By [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (1), (2) on $Y$, $\\mathcal J^n$ is a quasi-coherent sheaf of ideals with $\\mathcal J^n(V)=\\mathcal J(V)^n$ for affine $V$; so step 2 applies to $\\mathcal J^n$: $\\mathcal J^n\\mathcal O_X$ is a quasi-coherent ideal with $(\\mathcal J^n\\mathcal O_X)(U)=\\rho(\\mathcal J(V)^n)B$ for $U\\in\\mathfrak B$ over $V$. By step 2, $\\mathcal I$ is a quasi-coherent ideal of $\\mathcal O_X$, so by the same node on $X$, $\\mathcal I^n$ is a quasi-coherent ideal with $\\mathcal I^n(U)=\\mathcal I(U)^n=(\\rho(\\mathcal J(V))B)^n$. For a ring map $\\rho:A\\to B$ and an ideal $\\mathfrak a\\subseteq A$, $(\\rho(\\mathfrak a)B)^n=\\rho(\\mathfrak a^n)B$: $(\\rho(\\mathfrak a)B)^n$ is generated by the products $\\rho(a_1)\\cdots\\rho(a_n)=\\rho(a_1\\cdots a_n)$, $a_i\\in\\mathfrak a$, and $\\mathfrak a^n$ is additively generated by the $a_1\\cdots a_n$, so both ideals have the same generators. Hence $(\\mathcal J^n\\mathcal O_X)(U)=\\mathcal I^n(U)$ for all $U\\in\\mathfrak B$, and the two sub-$\\mathcal O_X$-modules of $\\mathcal O_X$ are equal by step 1 (a): $\\mathcal J^n\\mathcal O_X=\\mathcal I^n$.",
-   "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0887, the last equality f^{-1}I^n f^*G = J^n f^*G of the displayed computation (letters as in Stacks), not argued there"
-   }
-  },
-  {
-   "text": "(Clause (3) on affine opens.) Let $\\mathcal G$ be quasi-coherent, $q=q_{\\mathcal G}$, and put $\\mathcal K=\\mathcal I\\cdot f^*\\mathcal G$ with quotient map $p=p_{\\mathcal G}:f^*\\mathcal G\\to f^*\\mathcal G/\\mathcal K$ [def-weil-pbc-coherent-formal-module] (0). By [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (1), (2) on $Y$, $\\mathcal G/\\mathcal J\\mathcal G$ is quasi-coherent and, for affine $V$ with $\\mathfrak a=\\mathcal J(V)$, $M=\\mathcal G(V)$, $q_V:M\\to(\\mathcal G/\\mathcal J\\mathcal G)(V)$ is surjective with kernel $\\mathfrak aM$. $f^*\\mathcal G$ and $f^*(\\mathcal G/\\mathcal J\\mathcal G)$ are quasi-coherent [lem-weil-pbc-module-pullback-quasi-coherent], and $\\mathcal I$ is a quasi-coherent ideal (step 2), so by the same node on $X$, $\\mathcal K$ is quasi-coherent and for $U\\in\\mathfrak B$ over $V$: $\\mathcal K(U)=\\mathcal I(U)(f^*\\mathcal G)(U)=\\rho(\\mathfrak a)B\\cdot(f^*\\mathcal G)(U)$ (step 2) and $p_U$ is surjective with kernel $\\mathcal K(U)$. By [lem-weil-pbc-module-pullback-affine-sections] there are $B$-linear isomorphisms $c_{\\mathcal G}:M\\otimes_AB\\to(f^*\\mathcal G)(U)$ and $c_{\\mathcal G/\\mathcal J\\mathcal G}:(\\mathcal G/\\mathcal J\\mathcal G)(V)\\otimes_AB\\to(f^*(\\mathcal G/\\mathcal J\\mathcal G))(U)$ with $(f^*q)_U\\circ c_{\\mathcal G}=c_{\\mathcal G/\\mathcal J\\mathcal G}\\circ(q_V\\otimes1_B)$. Applying [lem-weil-pbc-tensor-right-exact] to the exact sequence $\\mathfrak aM\\to M\\xrightarrow{q_V}(\\mathcal G/\\mathcal J\\mathcal G)(V)\\to0$ and $B$: $q_V\\otimes1$ is surjective and its kernel is the image of $\\mathfrak aM\\otimes_AB$, the subgroup generated by the elements $am\\otimes b=\\rho(a)\\cdot(m\\otimes b)$ ($a\\in\\mathfrak a$, $m\\in M$, $b\\in B$), which is the $B$-submodule $\\rho(\\mathfrak a)B\\cdot(M\\otimes_AB)$. Transporting along the $B$-linear isomorphisms $c$: $(f^*q)_U$ is surjective with kernel $c_{\\mathcal G}(\\rho(\\mathfrak a)B\\cdot(M\\otimes_AB))=\\rho(\\mathfrak a)B\\cdot(f^*\\mathcal G)(U)=\\mathcal K(U)$, for every $U\\in\\mathfrak B$.",
-   "uses": [
     "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-tensor-right-exact"
+    "lem-weil-pbc-module-pullback-ideal-product-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00DF (lemma-tensor-product-exact)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Clause (3): $\\sigma_{\\mathcal G}$, epimorphism, kernel.) The sectionwise kernel $\\ker(f^*q)$ is a sub-$\\mathcal O_X$-module of $f^*\\mathcal G$ with $\\ker(f^*q)(U)=\\mathcal K(U)$ for all $U\\in\\mathfrak B$ (step 4), so $\\ker(f^*q)=\\mathcal K$ by step 1 (a); in particular $f^*q$ vanishes on $\\mathcal K$. As $p$ is the cokernel of the inclusion $\\mathcal K\\to f^*\\mathcal G$ [def-weil-pbc-coherent-formal-module] (0), there is a unique $\\mathcal O_X$-linear $\\sigma_{\\mathcal G}:f^*\\mathcal G/\\mathcal K\\to f^*(\\mathcal G/\\mathcal J\\mathcal G)$ with $\\sigma_{\\mathcal G}\\circ p=f^*q$; uniqueness also follows from $p$ being an epimorphism [lem-weil-pbc-quasi-coherent-module-cokernel-image] (1). For $U\\in\\mathfrak B$, $p_U$ and $(f^*q)_U$ are both surjective with kernel $\\mathcal K(U)$ (step 4), so $\\sigma_{\\mathcal G,U}$ is bijective; by step 1 (b), $\\sigma_{\\mathcal G}$ is an isomorphism. Hence $f^*q=\\sigma_{\\mathcal G}\\circ p$ is an epimorphism (composite of an epimorphism and an isomorphism), with kernel $\\mathcal K=\\mathcal I\\cdot f^*\\mathcal G$.",
+   "text": "The projection p_G is epi, and the comparison sigma_G is an isomorphism, so T(q_G) is epi by its factorization. k_G >> T(q_G)=0 follows from the cokernel equation. Transport cokernelIsCokernel k_G across sigma_G using Cofork.ext and IsColimit.ofIsoColimit. Abelian.monoIsKernelOfCokernel then gives the requested limit kernel fork for k_G and T(q_G).",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-sheaf-morphism-on-basis"
+    "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AJ (lemma-exactness-pushforward-pullback): f^* is right exact; the cokernel computation in Mod(O_X) as in Lemma 01AH (lemma-limits-colimits)"
-   }
+   "elementary": true
   },
   {
-   "text": "(Naturality.) Let $u:\\mathcal G\\to\\mathcal G'$ be $\\mathcal O_Y$-linear between quasi-coherent modules. Since $u$ commutes with the multiplication maps ($u\\circ m_{\\mathcal G}=m_{\\mathcal G'}\\circ(1_{\\mathcal J}\\otimes u)$ for $m:\\mathcal J\\otimes\\mathcal G\\to\\mathcal G$), it maps $\\mathcal J\\mathcal G$ into $\\mathcal J\\mathcal G'$ and induces a unique $\\bar u$ with $\\bar u\\circ q_{\\mathcal G}=q_{\\mathcal G'}\\circ u$; likewise $f^*u$ maps $\\mathcal If^*\\mathcal G$ into $\\mathcal If^*\\mathcal G'$ and induces $\\overline{f^*u}$ with $\\overline{f^*u}\\circ p_{\\mathcal G}=p_{\\mathcal G'}\\circ f^*u$ [def-weil-pbc-coherent-formal-module] (0). By functoriality of $f^*$ [def-pc-module-pullback] and step 5: $\\sigma_{\\mathcal G'}\\circ\\overline{f^*u}\\circ p_{\\mathcal G}=\\sigma_{\\mathcal G'}\\circ p_{\\mathcal G'}\\circ f^*u=f^*q_{\\mathcal G'}\\circ f^*u=f^*(q_{\\mathcal G'}\\circ u)=f^*(\\bar u\\circ q_{\\mathcal G})=f^*\\bar u\\circ f^*q_{\\mathcal G}=f^*\\bar u\\circ\\sigma_{\\mathcal G}\\circ p_{\\mathcal G}$, and $p_{\\mathcal G}$ is an epimorphism, so $\\sigma_{\\mathcal G'}\\circ\\overline{f^*u}=f^*(\\bar u)\\circ\\sigma_{\\mathcal G}$.",
+   "text": "For u:G -> Gprime, the defining cokernel.desc equation gives q_G >> quotientMap(u) = u >> q_Gprime, and likewise on X. Precompose the desired naturality equality with p_G, use the factorization equations for sigma_G and sigma_Gprime, use T.map_comp and those two quotientMap equations, then cancel the epimorphism p_G. This is the Lean calc proof, with no remaining hole.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0887 (lemma-inverse-systems-pullback), the displayed computation f^*G_n = f^*(G_{n+1}/I^nG_{n+1}) = f^*G_{n+1}/f^{-1}I^n f^*G_{n+1} (Stacks swaps the letters I and J there)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
   "def-pc-scheme",
-  "lem-weil-pbc-sheaf-morphism-on-basis",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "pqf-def-coherent",
-  "def-nagata-extended-ideal",
-  "lem-weil-pbc-module-pullback-structure-sheaf",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "def-pc-module-pullback",
   "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-weil-pbc-module-pullback-ideal-product-image"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "J2 stage 3",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, proof of Lemma 0887 (lemma-inverse-systems-pullback), the displayed computation, which states the result with a one-line appeal to the right exactness of f^* (Modules, Lemma 01AJ); the reduction to affine opens (Schemes, Lemmas 01I9, 01IC; Algebra, Lemma 00DF; Modules, Lemma 01BG) was written out by the agent"
+  "place": "Lemma 0887 (lemma-inverse-systems-pullback), displayed quotient calculation; uses the existing affine ideal implementation and reduces the module calculation to the image equality, then Mathlib cokernel and abelian-category universal properties"
  },
  "mathlib_searches": [
   {
@@ -209,5 +158,15 @@
   "group": "U1",
   "result": "fix",
   "note": "f, J IdealSheafData; ext ideal = landed J.comap f; (1) affine ideal formula; (2) powers n>=1; (3) qc G: Epi, kernel fork of idealModuleProductι, one σ family with p≫σ=f^*q for all G, naturality; reverted the delivery's change of existing node(s) def-nagata-extended-ideal (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/ExtendedIdeal.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T144120-L-2099219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

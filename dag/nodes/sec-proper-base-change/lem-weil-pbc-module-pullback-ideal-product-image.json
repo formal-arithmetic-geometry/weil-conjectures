@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-module-pullback-ideal-product-image",
+ "kind": "statement",
+ "title": "Image of a pulled-back ideal-module product inclusion",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], $\\mathcal J$ a quasi-coherent ideal sheaf on $Y$, and $\\mathcal G$ a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. Let $T=f^*$ be module pullback [def-pc-module-pullback], $\\mathcal I=\\mathcal J\\mathcal O_X=\\mathcal J.\\mathrm{comap}(f)$ the extended ideal [def-nagata-extended-ideal], and let $i:\\mathcal J\\mathcal G\\to\\mathcal G$ and $k:\\mathcal I(T\\mathcal G)\\to T\\mathcal G$ be the canonical product inclusions [def-weil-pbc-coherent-formal-module]. Then $\\operatorname{Im}(T i)=\\operatorname{Im}(k)$ as subobjects of $T\\mathcal G$ (images in the abelian category of module sheaves).",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 0887 (lemma-inverse-systems-pullback), displayed quotient calculation; the image calculation in its right-exactness argument, expanded using Modules 01BG (lemma-pullback-quasi-coherent) and Schemes 01IC (lemma-kernel-cokernel-quasi-coherent)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-nagata-extended-ideal",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix f:X -> Y, J and a quasi-coherent G. Affine opens U of X over affine opens V of Y form a basis: for x in an open W choose affine V containing f(x), then affine U containing x inside W intersect f^{-1}(V).",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ideal-product theorem makes JG quasi-coherent. Tensor pullback is naturally isomorphic to the standard pullback by uniqueness of left adjoints to module pushforward (both adjunctions are the recorded module pullback adjunction); transport the standard pullback quasi-coherence instance. Thus TG and T(JG) are quasi-coherent. Apply the quasi-coherent image theorem to T(i_G): its image is quasi-coherent and, on an affine U, its sections inside TG(U) are exactly the range of T(i_G)_U. The same ideal-product theorem identifies the image of k_G on U with I(U) TG(U), where I=J.comap f.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put A=O_Y(V), B=O_X(U), rho=f.appLE, a=J(V) and M=G(V). The ideal-product formula identifies the range of i_G on V with aM. The affine pullback section comparison, natural for i_G, identifies the range of T(i_G) on U with the image of aM tensor_A B -> M tensor_A B. The section comparison is B-linear by its scalar compatibility clause and bijective, so transports submodules and images.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor map image is exactly (a.map rho)(M tensor_A B). Indeed an element of aM is a finite sum of a_j m_j with a_j in a; its pure tensor with b maps to the sum of m_j tensor rho(a_j)b, so the image is contained in this ideal product. Conversely rho(a)(m tensor b)=(am) tensor b lies in the image for each a in a, and pure tensors generate the tensor product, while the elements rho(a) generate the extended ideal. These inclusions give equality. The affine ideal extension theorem identifies a.map rho with I(U). Transport the equality by the B-linear section comparison.",
+   "uses": [
+    "lem-pc-ideal-sheaf-comap-affine-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The two images therefore have identical sections as submodules of TG on every member of the basis. On any open W, a section of either image restricts to a section of the other on a covering by these basis opens. The lifts agree on overlaps since the inclusions are monomorphisms; the sheaf axiom glues them to a lift over W. Hence the subsheaves are equal and the two image subobjects coincide.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-ideal-sheaf-comap-affine-extension",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "J2 worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proof of Lemma 0887, image calculation expanded on the affine basis; elementary tensor generator and sheaf gluing arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of pullback ideal module product equals extended ideal times pullback module",
+   "results": "Service returned Internal Server Error; no usable results.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism f and an ideal sheaf J, imageSubobject of f star (J G inclusion into G) equals imageSubobject of (J.comap f) times f star G inclusion",
+   "results": "Eight hits, including IdealSheafData.le_map_comap, comap_map_le, map_gc, map_ideal and Scheme.Hom.toImage_app. None computes images of pulled-back module-product inclusions.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "idealModuleProduct|imageSubobject.*pullback|pullback.*imageSubobject",
+   "results": "Mathlib search returned zero hits. Local searches of lean/Sheaf and lean/WeilConjectures found the existing product definitions, affine product formula, affine pullback comparison and quasi-coherent image theorem; no theorem of the new image equality.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of the finite-etale lifting split: pullback of coherent formal systems in the essential-surjectivity argument; specifically the ideal-product image calculation underlying the displayed computation in Stacks 0887",
+   "via": [
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-formal-systems-pullback",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackIdealProductImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackIdealProductImage.lean",
+  "declaration": "AlgebraicGeometry.modulePullbackIdealProductImage",
+  "statement": "theorem modulePullbackIdealProductImage {X Y : Scheme.{v}} (f : X ⟶ Y)\n    (J : Y.IdealSheafData) (G : Y.Modules) (hG : G.IsQuasicoherent) :\n    imageSubobject ((Scheme.Modules.tensorPullback f).map\n      (Scheme.idealModuleProductι J.toModulesι G)) =\n      imageSubobject (Scheme.idealModuleProductι (J.comap f).toModulesι\n        ((Scheme.Modules.tensorPullback f).obj G))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T144120-L-2099219",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T144120-L-2099219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
