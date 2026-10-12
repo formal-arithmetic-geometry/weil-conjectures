@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+import Sheaf.Algebra.Module.GradedModuleAwayMaps
+import Sheaf.Algebra.Module.GradedModuleAwayComparison
 
 /-!
 # Restriction maps between degree-zero graded module localizations
@@ -22,6 +24,9 @@ universe u v
 
 namespace LocalizedModule
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the nested localization scalar actions needs more than the default heartbeats.
+set_option linter.unusedVariables false in
 /-- Restriction maps, their principal localization comparisons, and compatibility.
 The positive homogeneous elements are indexed by `F`; `Rel f g` records a homogeneous
 relation `g ^ e = a * f`. The submodules `Z f` have exactly the equal-degree fractions
@@ -126,6 +131,144 @@ theorem gradedModuleAwayRestriction
             (∀ x : Z f, K (mk x 1) = mk x 1) → K = kappa) ∧
           (∀ x : LocalizedModule.Away (U f g) (Z f),
             rho g h q (theta f g p x) = theta f h t (kappa x))) := by
-  sorry
+  classical
+  dsimp only
+  obtain ⟨Z, hZ, lambda, lambdaS, rho, rhoS, U, hU, hpair⟩ :=
+    gradedModuleAwayMaps 𝒜 𝓜 h𝓜 hsmul
+  let F := {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}
+  let Rel := fun f g : F ↦ ∃ (e k : ℕ) (a : S),
+    0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1
+  have hrel (f g h : F) (p : Rel f g) (q : Rel g h) : Rel f h := by
+    obtain ⟨e, k, a, he, ha, hfg⟩ := p
+    obtain ⟨e', k', a', he', ha', hgh⟩ := q
+    refine ⟨e * e', e * k' + k, a' ^ e * a, Nat.mul_pos he he', ?_, ?_⟩
+    · simpa [Nat.mul_comm] using
+        SetLike.mul_mem_graded (SetLike.pow_mem_graded e ha') ha
+    · rw [mul_comm e e', pow_mul, hgh, mul_pow, hfg, mul_assoc]
+  have hcomp (f g h : F) (p : Rel f g) (q : Rel g h) (t : Rel f h) :
+      (∀ x : Z f, rho g h q (rho f g p x) = rho f h t x) ∧
+      (∀ r : HomogeneousLocalization.Away 𝒜 f.val.1,
+        rhoS g h q (rhoS f g p r) = rhoS f h t r) := by
+    rcases hpair f g p with ⟨_, _, _, hfg, _, _, hSfg, _, hrfg, hRSfg, _, _⟩
+    rcases hpair g h q with ⟨_, _, _, hgh, _, _, hSgh, _, hrgh, hRSgh, _, _⟩
+    rcases hpair f h t with ⟨_, _, _, _, huniq, _, hSfh, _, hrfh, hRSfh, _, _⟩
+    have hl : (lambda g h q).comp (lambda f g p) = lambda f h t := by
+      apply huniq
+      intro x
+      simp only [LinearMap.comp_apply, hfg, hgh]
+    have hs : (lambdaS g h q).comp (lambdaS f g p) = lambdaS f h t := by
+      apply IsLocalization.ringHom_ext (Submonoid.powers f.val.1)
+      ext x
+      simp only [RingHom.comp_apply, hSfg, hSgh, hSfh]
+    constructor
+    · intro x
+      apply Subtype.ext
+      rw [hrgh, hrfg, hrfh]
+      exact LinearMap.congr_fun hl x
+    · intro r
+      apply HomogeneousLocalization.val_injective
+      rw [hRSgh, hRSfg, hRSfh]
+      exact RingHom.congr_fun hs r.val
+  have hid (f : F) (p : Rel f f) :
+      (∀ x : Z f, rho f f p x = x) ∧
+      (∀ r : HomogeneousLocalization.Away 𝒜 f.val.1, rhoS f f p r = r) := by
+    rcases hpair f f p with ⟨_, _, _, _, huniq, _, hS, _, hr, hRS, _, _⟩
+    have hl : LinearMap.id = lambda f f p := huniq LinearMap.id (fun _ ↦ rfl)
+    have hs : RingHom.id _ = lambdaS f f p := by
+      apply IsLocalization.ringHom_ext (Submonoid.powers f.val.1)
+      ext x
+      exact (hS x).symm
+    constructor
+    · intro x
+      apply Subtype.ext
+      rw [hr, ← hl]
+      rfl
+    · intro r
+      apply HomogeneousLocalization.val_injective
+      rw [hRS, ← hs]
+      rfl
+  obtain ⟨theta, thetaS, htheta⟩ :=
+    gradedModuleAwayComparison 𝒜 𝓜 h𝓜 hsmul Z hZ lambda lambdaS rho rhoS U
+      ⟨hU, hpair⟩
+  have htheta_smul (f g : F) (p : Rel f g)
+      (r : HomogeneousLocalization.Away 𝒜 f.val.1)
+      (x : LocalizedModule.Away (U f g) (Z f)) :
+      theta f g p (r • x) = rhoS f g p r • theta f g p x := by
+    have hh := (htheta f g p).2.2.2
+      (algebraMap _ (Localization.Away (U f g)) r) x
+    rw [(htheta f g p).1] at hh
+    simpa only [algebraMap_smul] using hh
+  have hkappa (f g h : F) (p : Rel f g) (q : Rel g h) (t : Rel f h) :
+      IsUnit (algebraMap _ (Localization.Away (U f h)) (U f g)) ∧
+      ∃ kappa : LocalizedModule.Away (U f g) (Z f) →ₗ[HomogeneousLocalization.Away 𝒜 f.val.1]
+        LocalizedModule.Away (U f h) (Z f),
+        (∀ x : Z f, kappa (mk x 1) = mk x 1) ∧
+        (∀ K : LocalizedModule.Away (U f g) (Z f) →ₗ[HomogeneousLocalization.Away 𝒜 f.val.1]
+          LocalizedModule.Away (U f h) (Z f),
+          (∀ x : Z f, K (mk x 1) = mk x 1) → K = kappa) ∧
+        (∀ x : LocalizedModule.Away (U f g) (Z f),
+          rho g h q (theta f g p x) = theta f h t (kappa x)) := by
+    let nu : Localization.Away (U f g) →+* Localization.Away (U f h) :=
+      (thetaS f h t).symm.toRingHom.comp
+        ((rhoS g h q).comp (thetaS f g p).toRingHom)
+    have hnu (r : HomogeneousLocalization.Away 𝒜 f.val.1) :
+        nu (algebraMap _ (Localization.Away (U f g)) r) =
+          algebraMap _ (Localization.Away (U f h)) r := by
+      change (thetaS f h t).symm (rhoS g h q
+        (thetaS f g p (algebraMap _ (Localization.Away (U f g)) r))) = _
+      rw [(htheta f g p).1, (hcomp f g h p q t).2,
+        ← (htheta f h t).1]
+      exact (thetaS f h t).symm_apply_apply _
+    have hu : IsUnit (algebraMap _ (Localization.Away (U f h)) (U f g)) := by
+      rw [← hnu]
+      exact (IsLocalization.Away.algebraMap_isUnit
+        (S := Localization.Away (U f g)) (U f g)).map nu
+    let ka : LocalizedModule.Away (U f g) (Z f) →+ LocalizedModule.Away (U f h) (Z f) :=
+      (theta f h t).symm.toAddMonoidHom.comp
+        ((rho g h q).comp (theta f g p).toAddMonoidHom)
+    have hka (x : LocalizedModule.Away (U f g) (Z f)) :
+        theta f h t (ka x) = rho g h q (theta f g p x) := by
+      exact (theta f h t).apply_symm_apply _
+    let kappa : LocalizedModule.Away (U f g) (Z f) →ₗ[HomogeneousLocalization.Away 𝒜 f.val.1]
+        LocalizedModule.Away (U f h) (Z f) :=
+      { ka with
+        map_smul' := by
+          intro r x
+          apply (theta f h t).injective
+          change theta f h t (ka (r • x)) = theta f h t (r • ka x)
+          rw [hka, htheta_smul, (hpair g h q).2.2.2.2.2.2.2.2.2.2.1,
+            (hcomp f g h p q t).2, htheta_smul]
+          rw [hka] }
+    have hkone (x : Z f) : kappa (mk x 1) = mk x 1 := by
+      apply (theta f h t).injective
+      change theta f h t (ka (mk x 1)) = _
+      rw [hka, (htheta f g p).2.1, (hcomp f g h p q t).1,
+        (htheta f h t).2.1]
+    refine ⟨hu, kappa, hkone, ?_, fun x ↦ (hka x).symm⟩
+    intro K hK
+    refine IsLocalizedModule.ext (Submonoid.powers (U f g))
+      (mkLinearMap (Submonoid.powers (U f g)) (Z f)) ?_ ?_
+    · intro s
+      obtain ⟨n, hn⟩ := s.property
+      have hs : IsUnit (algebraMap _ (Localization.Away (U f h)) 
+          (s : HomogeneousLocalization.Away 𝒜 f.val.1)) := by
+        rw [← hn, map_pow]
+        exact hu.pow n
+      rw [Module.End.isUnit_iff]
+      change Function.Bijective (fun x : LocalizedModule.Away (U f h) (Z f) ↦
+        (s : HomogeneousLocalization.Away 𝒜 f.val.1) • x)
+      simpa only [Module.algebraMap_end_apply, algebraMap_smul] using
+        (hs.smul_bijective : Function.Bijective
+          (fun x : LocalizedModule.Away (U f h) (Z f) ↦
+            algebraMap _ (Localization.Away (U f h))
+              (s : HomogeneousLocalization.Away 𝒜 f.val.1) • x))
+    · ext x
+      exact (hK x).trans (hkone x).symm
+  refine ⟨Z, hZ, lambda, lambdaS, rho, rhoS, U, hU, hpair, hid, ?_, ?_,
+    theta, thetaS, htheta, hkappa⟩
+  · intro f g h e e' a a' hfg hgh
+    rw [mul_comm e e', pow_mul, hgh, mul_pow, hfg, mul_assoc]
+  · intro f g h p q
+    exact ⟨hrel f g h p q, hcomp f g h p q⟩
 
 end LocalizedModule

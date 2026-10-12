@@ -1,0 +1,192 @@
+{
+ "id": "lem-weil-pbc-graded-module-away-maps",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-finite",
+   "place": "step 2, 9 of its split (source: Lemma (Tag 01NE) via Lemma (Tag 01NA, label lemma-apply)); restriction lemma steps 1–4, 6",
+   "via": [
+    "lem-weil-pbc-graded-module-away-restriction",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degree-zero restriction maps and their fraction formulas",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be a commutative graded ring and $M=\\bigoplus_{z\\in\\mathbf Z}M_z$ an $S$-module with $S_nM_z\\subset M_{n+z}$. Let $F$ consist of pairs $(f,d)$ with $d>0$ and $f\\in S_d$, and write $R_f=S_{(f)}$, $L_f=S_f$, $N_f=M_f$ [def-nagata-homogeneous-localization-degree-zero, def-weil-ring-localization-away, def-weil-pbc-module-localization-away]. Put $f\\preceq g$ if $g^e=af$ for $e>0$ and homogeneous $a$. There exist submodules $Z_f\\subset N_f$ over $R_f$ whose carriers are the equal-degree fractions [def-sc-degree-zero-module-fractions], and for every $f\\preceq g$ maps $\\lambda:N_f\\to N_g$, $\\lambda^S:L_f\\to L_g$, $\\rho:Z_f\\to Z_g$, $\\rho^S:R_f\\to R_g$, and elements $U_{f,g}\\in R_f$ as follows. The element $f/1$ in $L_g$ is a unit, multiplication by $f$ on $N_g$ is bijective, and for every relation witness $g^e=af$ its inverse is $a/g^e$. The map $\\lambda$ is the unique $S$-linear map preserving $x/1$, with formula $x/f^m\\mapsto a^mx/g^{em}$. The ring map $\\lambda^S$ preserves elements of $S$, and $\\lambda$ is semilinear over it. The maps $\\rho,\\rho^S$ restrict these maps to degree zero and $\\rho$ is semilinear over $\\rho^S$. Finally $U_{f,g}=g^{\\deg f}/f^{\\deg g}$ and $\\rho^S(U_{f,g})$ is a unit. No identity, composition or further-localization comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+ },
+ "stmt_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "*Conventions and the degenerate case.* Write $d=\\deg f\\ge1$, $\\delta=\\deg g\\ge1$. All fractions are taken in $M_f$, $M_g$ (localizations of the $S$-module $M$ at the powers of $f$, resp. $g$ [def-weil-pbc-module-localization-away]: $x/g^n=0$ iff $g^kx=0$ for some $k$), and in the rings $S_f$, $S_g$ [def-weil-ring-localization-away], over which $M_f$, $M_g$ are modules by $(b/f^n)(x/f^m)=bx/f^{n+m}$. $M_{(f)}=\\{x/f^m:x\\in M_{md}\\}$ is an $S_{(f)}$-submodule of $M_f$ ($S_{(f)}$ the ring of [def-nagata-homogeneous-localization-degree-zero]): $x/f^m+y/f^n=(f^nx+f^my)/f^{m+n}$ with $f^nx+f^my\\in M_{(m+n)d}$, and $(b/f^n)(x/f^m)=bx/f^{n+m}$ with $bx\\in M_{(n+m)d}$ for $b\\in S_{nd}$. If $g$ is nilpotent, $g^N=0$, then $M_g=0$ (every $x/g^n=g^Nx/g^{n+N}=0$), $S_g=0$, $M_{(g)}=0$, $S_{(g)}=0$. If $g$ is not nilpotent, then $af=g^e\\neq0$ is homogeneous of degree $e\\delta$, and $a,f$ homogeneous with $af\\ne0$ force $\\deg a=e\\delta-d$ (in particular $e\\delta\\ge d$).",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+   }
+  },
+  {
+   "text": "*(i) The map $\\lambda_{f,g}$, its formula, independence.* In $S_g$, $(f/1)(a/g^e)=af/g^e=g^e/g^e=1$, so $f/1$ is a unit of $S_g$ with inverse $a/g^e$; hence multiplication by $f$ on the $S_g$-module $M_g$ (which is multiplication by $f/1$) is bijective, with inverse multiplication by $a/g^e$. The localization map $M\\to M_g$, $x\\mapsto x/1$, is $S$-linear, so by the universal property of $M\\to M_f$ [def-weil-pbc-module-localization-away] (an $S$-linear map from $M$ to a module on which $f$ acts bijectively factors uniquely through $M_f$) there is a unique $S$-linear $\\lambda=\\lambda_{f,g}:M_f\\to M_g$ with $\\lambda(x/1)=x/1$. Formula: $f^m\\cdot(x/f^m)=x/1$ in $M_f$, so $f^m\\lambda(x/f^m)=\\lambda(x/1)=x/1$ and therefore $\\lambda(x/f^m)=(a/g^e)^m(x/1)=a^mx/g^{em}$. Since $\\lambda$ was characterized without reference to $(e,a)$, the right-hand side is the same for every admissible pair $(e,a)$: this is the independence of the choice.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+   }
+  },
+  {
+   "text": "*(i) Semilinearity.* For $M=S$ step 2 gives the $S$-linear $\\lambda^S=\\lambda^S_{f,g}:S_f\\to S_g$, $b/f^n\\mapsto a^nb/g^{en}$. It is a ring homomorphism: $\\lambda^S(1)=\\lambda^S(1/1)=1/1$, and $\\lambda^S((b/f^n)(c/f^m))=\\lambda^S(bc/f^{n+m})=a^{n+m}bc/g^{e(n+m)}=(a^nb/g^{en})(a^mc/g^{em})$; additivity is $S$-linearity. $\\lambda$ is $\\lambda^S$-semilinear: for $s=b/f^n\\in S_f$ and $z=x/f^m\\in M_f$, $\\lambda(sz)=\\lambda(bx/f^{n+m})=a^{n+m}bx/g^{e(n+m)}=(a^nb/g^{en})(a^mx/g^{em})=\\lambda^S(s)\\lambda(z)$ (every element of $S_f$, $M_f$ has such a form).",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+   }
+  },
+  {
+   "text": "*(i) Degree zero parts; $\\rho$ and $\\rho^S$.* Let $x/f^m\\in M_{(f)}$ with $x\\in M_{md}$. If $g$ is nilpotent, $\\lambda(x/f^m)\\in M_g=0=M_{(g)}$ (step 1). Otherwise $\\deg a=e\\delta-d$ (step 1), so $a^mx\\in M_{m(e\\delta-d)+md}=M_{me\\delta}$ and $\\lambda(x/f^m)=a^mx/g^{em}\\in M_{(g)}$. Thus $\\lambda$ maps $M_{(f)}$ into $M_{(g)}$; let $\\rho=\\rho_{f,g}$ be the restriction. For $M=S$ the same computation shows that $\\lambda^S$ maps the subring $S_{(f)}$ into the subring $S_{(g)}$, and the restriction $\\rho^S$ is a ring homomorphism (step 3). By step 3, $\\rho(rz)=\\rho^S(r)\\rho(z)$ for $r\\in S_{(f)}$, $z\\in M_{(f)}$, and $\\rho$ is additive: $\\rho$ is semilinear over $\\rho^S$.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+   }
+  },
+  {
+   "text": "*(iii) $u\\in S_{(f)}$ and $\\rho^S(u)$ is a unit.* $g^d\\in S_{\\delta d}=S_{d\\delta}$, so $u=g^d/f^\\delta\\in S_{(f)}$, and $v=f^\\delta/g^d\\in S_{(g)}$ ($f^\\delta\\in S_{d\\delta}$). Since $\\lambda^S$ is a ring homomorphism with $\\lambda^S(f/1)=f/1$ and $\\lambda^S(g/1)=g/1$, and $u\\cdot(f/1)^\\delta=g^d/1$ in $S_f$, we get $\\rho^S(u)\\,(f/1)^\\delta=g^d/1$ in $S_g$, hence $\\rho^S(u)\\cdot v=\\rho^S(u)(f/1)^\\delta\\cdot(1/g^d)=g^d/g^d=1$. So $\\rho^S(u)$ is a unit of $S_{(g)}$ with inverse $v=f^\\delta/g^d$. (In $S_g$, $\\rho^S(u)=a^\\delta g^d/g^{e\\delta}$; the inverse is $v$, not a fraction with $a$ in the denominator.)",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M4 (label lemma-standard-open) (1)(a),(c),(d),(e),(g),(h) and its proof (the formula $x/f^n\\mapsto a^nx/g^{ne}$; 'the statements writing $S_{(g)}$ resp. $M_{(g)}$ as principal localizations of $S_{(f)}$ resp. $M_{(f)}$ are clear from the formulas above'); Algebra Section 00JL (label section-proj) for $M_{(f)}$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01M4 (lemma-standard-open), fraction formulas; degree bookkeeping and bijectivity expanded as in the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction maps and principal localization isomorphisms for degree zero localizations of graded modules",
+   "results": "AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.Proj.basicOpenToSpec_app_top, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Proj.basicOpenIsoAway_hom, IsLocalizedModule.iso_symm_comp, AlgebraicGeometry.Proj.awayMap_awayToSection, IsLocalizedModule.iso_mk_one, IsLocalizedModule.lift_iso",
+   "date": "2026-10-12",
+   "verdict": "No exact graded-module statement; supporting localization API only"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModule|degreeZeroFractions|ringHom_ext",
+   "results": "Mathlib/RingTheory/GradedAlgebra/Homogeneous/Submodule.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact graded-module statement; supporting localization API only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.ringHom_ext",
+   "results": "IsLocalization.ringHom_ext",
+   "date": "2026-10-12",
+   "verdict": "No exact graded-module statement; supporting localization API only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree zero restriction maps of a graded module localization and principal localization comparison isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Module.GradedModuleAwayRestriction",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Module.GradedModuleAwayMaps",
+  "file": "lean/Sheaf/Algebra/Module/GradedModuleAwayMaps.lean",
+  "declaration": "LocalizedModule.gradedModuleAwayMaps",
+  "statement": "theorem gradedModuleAwayMaps\n    {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]\n    (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]\n    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)\n    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (x : M),\n      a ∈ 𝒜 n → x ∈ 𝓜 z → a • x ∈ 𝓜 (n + z)) :\n    let F := {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}\n    let R := fun f : F ↦ HomogeneousLocalization.Away 𝒜 f.val.1\n    let L := fun f : F ↦ Localization.Away f.val.1\n    let N := fun f : F ↦ LocalizedModule.Away f.val.1 M\n    let Rel := fun f g : F ↦ ∃ (e k : ℕ) (a : S),\n      0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1\n    letI : ∀ f : F, Module (R f) (N f) :=\n      fun f ↦ Module.compHom (N f) (algebraMap (R f) (L f))\n    ∃ (Z : ∀ f : F, Submodule (R f) (N f)),\n      (∀ f : F, (Z f : Set (N f)) = degreeZeroFractions\n        (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M))\n        (Submonoid.powers f.val.1)) ∧\n    ∃ (lambda : ∀ (f g : F), Rel f g → N f →ₗ[S] N g)\n      (lambdaS : ∀ (f g : F), Rel f g → L f →+* L g)\n      (rho : ∀ (f g : F), Rel f g → Z f →+ Z g)\n      (rhoS : ∀ (f g : F), Rel f g → R f →+* R g)\n      (U : ∀ (f g : F), R f),\n      (∀ (f g : F), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)\n        (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1)) ∧\n      (∀ (f g : F) (p : Rel f g),\n        IsUnit (algebraMap S (L g) f.val.1) ∧\n        Function.Bijective (fun x : N g ↦ f.val.1 • x) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k →\n          g.val.1 ^ e = a * f.val.1 →\n          algebraMap S (L g) f.val.1 * Localization.mk a\n            (⟨g.val.1 ^ e, ⟨e, rfl⟩⟩ : Submonoid.powers g.val.1) = 1) ∧\n        (∀ x : M, lambda f g p (mk x 1) = mk x 1) ∧\n        (∀ T : N f →ₗ[S] N g,\n          (∀ x : M, T (mk x 1) = mk x 1) → T = lambda f g p) ∧\n        (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k →\n          g.val.1 ^ e = a * f.val.1 → ∀ (x : M) (m : ℕ),\n          lambda f g p (mk x (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1)) =\n            mk (a ^ m • x)\n              (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1)) ∧\n        (∀ r : S, lambdaS f g p (algebraMap S (L f) r) = algebraMap S (L g) r) ∧\n        (∀ (r : L f) (x : N f),\n          lambda f g p (r • x) = lambdaS f g p r • lambda f g p x) ∧\n        (∀ x : Z f, (rho f g p x : N g) = lambda f g p (x : N f)) ∧\n        (∀ r : R f, (rhoS f g p r).val = lambdaS f g p r.val) ∧\n        (∀ (r : R f) (x : Z f), rho f g p (r • x) = rhoS f g p r • rho f g p x) ∧\n        IsUnit (rhoS f g p (U f g)))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085344-L-41644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T085344-L-41644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
