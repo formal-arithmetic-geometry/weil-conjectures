@@ -1,0 +1,172 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0BQ5 (limits-lemma-glueing-near-point), proof, and 0EY3 (limits-lemma-glueing-near-point-properties), proof, relative to C"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 0BQ5 and 0EY3, proofs; relative base change and finite-presentation descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite etale scheme over the spectrum of a stalk descends to an open neighbourhood with isomorphism",
+   "results": "8 hits: Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.fromSpecStalk",
+   "results": "12 hits: AlgebraicGeometry.instIsPreimmersionFromSpecStalk, AlgebraicGeometry.Scheme.fromSpecStalk, AlgebraicGeometry.Spec.fromSpecStalk_eq', AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq_fromSpecStalk, AlgebraicGeometry.over_def, AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_ι, AlgebraicGeometry.Spec_stalkClosedPointIso, AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_ι_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk.*FiniteEtale|FiniteEtale.*fromSpecStalk|glueing.near.point",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale cover of a scheme over a stalk extends to an open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "isomorphisms between finitely presented schemes descend along an inverse limit of schemes with affine transition maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism between finite etale covers on two open subschemes descends from a stalk to the intersection with an open neighbourhood",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued, AlgebraicGeometry.Scheme.Hom.resLEStalkMap, AlgebraicGeometry.morphismRestrictStalkMap, AlgebraicGeometry.Scheme.Opens.stalkIso_inv, AlgebraicGeometry.Scheme.stalkMap_hom_inv, AlgebraicGeometry.Scheme.Opens.stalkIso, AlgebraicGeometry.Scheme.Hom.stalkMap_hom_inv, AlgebraicGeometry.Scheme.stalkMap_inv_hom",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_of_isPullback|exists_neighbourhood_comparison|FiniteEtale.*stalk|stalk.*FiniteEtale",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkNeighbourhoodSpreading",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-sbc-finite-etale-stalk-model-descent",
+ "title": "Descent of the underlying finite etale stalk model",
+ "statement": "Let S be a Noetherian quasi-separated scheme and c:C\\to S a quasi-compact quasi-separated morphism locally of finite presentation [def-weil-pbc-scheme-conventions, def-sbc-locally-finite-presentation]. Let s\\in S and let Q be a finite etale cover of C_s^{loc}=C\\times_S Spec O_{S,s} [def-sbc-normal-dominant-galois, def-pc-fibre-product]. There exist an open neighbourhood W of s, a finite etale cover R of C_W=c^{-1}(W), and a map l:C_s^{loc}\\to C_W such that l followed by the open inclusion equals the canonical projection C_s^{loc}\\to C, and l^*R is isomorphic to Q. No cover on another open and no comparison on an overlap are part of this conclusion.",
+ "proof": [
+  {
+   "text": "Express Spec O(S,s) as the inverse limit of affine open neighbourhoods of s. Base change by c. The stages C_W are qcqs because c is qcqs and W is affine. Inclusions between affine neighbourhoods are affine, so their base changes are affine. The resulting limit is the local family C_s^loc.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-kun-fibre-product-limits",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite etale cover Q is quasi-compact, separated and locally of finite presentation. Descend the underlying scheme and its structure map to a finitely presented morphism over one stage C_W. Descend finiteness and etaleness to later stages and pass to a common refinement; both properties persist under base change.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-etale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the finite etale morphism at that stage as R. The limit projection to C_W is l; its composite with the open inclusion is the projection to C by the cone equations. The cartesian comparison from descent is an isomorphism l^*R with Q in the finite etale category.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-fibre-product-limits",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-open-fibre-product",
+  "thm-pd-spreading-out"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Proof, maximal-open extension step: \"Spreading Y' out over a slightly larger open of S (0BQ5, 0EY3)\"; object and property descent",
+   "via": [
+    "lem-sbc-finite-etale-stalk-neighbourhood-spreading",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkModelDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteEtaleStalkModelDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.exists_stalk_neighbourhood_model",
+  "statement": "theorem FiniteEtale.exists_stalk_neighbourhood_model {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S]\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [LocallyOfFinitePresentation c]\n    (s : S) (Q : (Limits.pullback c (S.fromSpecStalk s)).FiniteEtale) :\n    ∃ (W : S.Opens), s ∈ W ∧\n      ∃ (R : (c ⁻¹ᵁ W).toScheme.FiniteEtale)\n        (l : Limits.pullback c (S.fromSpecStalk s) ⟶ (c ⁻¹ᵁ W).toScheme),\n        l ≫ (c ⁻¹ᵁ W).ι = pullback.fst c (S.fromSpecStalk s) ∧\n          Nonempty ((FiniteEtale.pullback l).obj R ≅ Q)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173908-L-3307011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T173908-L-3307011",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

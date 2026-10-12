@@ -10,9 +10,8 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
-import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkModelDescent
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleStalkComparisonDescent
 
 /-!
 # Spreading a finite etale stalk model and its comparison
@@ -65,6 +64,18 @@ theorem FiniteEtale.exists_neighbourhood_model_of_stalk {S C : Scheme.{u}}
         Nonempty ((FiniteEtale.pullback
           (C.homOfLE (inf_le_left : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ U))).obj PA ≅
           (FiniteEtale.pullback
-          (C.homOfLE (inf_le_right : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ W))).obj R) := by sorry
+          (C.homOfLE (inf_le_right : (c ⁻¹ᵁ U) ⊓ (c ⁻¹ᵁ W) ≤ c ⁻¹ᵁ W))).obj R) := by
+  by_cases hsU : s ∈ U
+  · exact ⟨U, hsU, PA, ⟨Iso.refl _⟩⟩
+  obtain ⟨W, hsW, R, l, hl, ⟨a⟩⟩ :=
+    FiniteEtale.exists_stalk_neighbourhood_model c s Q
+  obtain ⟨e⟩ := e
+  let F := FiniteEtale.pullback
+    (pullback.snd (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s)))
+  have comparison : Nonempty (_ ≅ F.obj ((FiniteEtale.pullback l).obj R)) :=
+    ⟨e ≪≫ (F.mapIso a).symm⟩
+  obtain ⟨V, hVW, hsV, hV⟩ :=
+    FiniteEtale.exists_neighbourhood_comparison_of_stalk c U W PA s hsW R l hl comparison
+  exact ⟨V, hsV, (FiniteEtale.pullback (C.homOfLE (c.preimage_mono hVW))).obj R, hV⟩
 
 end AlgebraicGeometry.Scheme

@@ -15,37 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Express Spec O(S,s) as the inverse limit of affine open neighbourhoods W of s, using the stalk limit theorem. Base change by c; C_W is qcqs and has affine transitions. Its limit is the local family.",
-   "uses": [
-    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Descend Q, a finitely presented scheme over the local family, to C_W by finite-presentation limit descent, as in the proof of Tag 0BQ5. After shrinking W its morphism is finite and etale by the property descent results underlying Tag 0EY3.",
-   "uses": [
-    "lem-weil-pbc-descend-finite",
-    "lem-weil-pbc-descend-etale"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Noetherianity makes U retrocompact, so C_(U intersect W) is qcqs and forms a system with the local overlap as limit. Descend the comparison and its inverse by finite-presentation morphism descent in Tag 0BQ5. Descend their two identity equations after a common further shrinking; this gives an isomorphism on the intersection. The two projections identify with the canonical open inclusions. Return that W and its finite etale cover; no gluing is needed.",
+   "text": "If s belongs to U, choose W=U and R=P. The two inclusions of C_U intersect C_U into C_U agree, so the identity isomorphism proves the conclusion.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Descend Q alone to a neighbourhood W, obtaining the fixed finite etale model R, its local-family map l, and an isomorphism a:l^*R isomorphic to Q.",
+   "uses": [
+    "lem-sbc-finite-etale-stalk-model-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull a back along the local-overlap projection. Compose the given comparison with the inverse of that pullback isomorphism to compare P with the local restriction of R.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply comparison descent to these two existing models. It supplies a smaller neighbourhood V contained in W and an isomorphism between P and R|C_V on C_U intersect C_V. Return V and the actual pullback of R along C_V into C_W.",
+   "uses": [
+    "lem-sbc-finite-etale-stalk-comparison-descent"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-descend-etale",
-  "lem-weil-pbc-descend-finite",
-  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+  "lem-sbc-finite-etale-stalk-model-descent",
+  "lem-sbc-finite-etale-stalk-comparison-descent"
  ],
  "proof_origin": {
-  "kind": "from-document",
-  "by": "F2",
+  "by": "document",
   "document": "Stacks Project",
-  "place": "Tags 0BQ5 (limits-lemma-glueing-near-point) and 0EY3 (limits-lemma-glueing-near-point-properties), relative finite-presentation descent with comparison",
-  "note": "Intermediate step of the local extension argument, prior to gluing; written from the local Stacks source."
+  "place": "Tags 0BQ5 and 0EY3, proofs; split into object descent and comparison descent, assembled in Lean by T3",
+  "note": "The case s in U is proved directly. Otherwise functorial pullback of the descended-model isomorphism transports the original comparison to a comparison of two fixed models."
  },
  "mathlib_searches": [
   {
@@ -130,9 +132,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T153009-L-2350123",
+  "landing": "20261012T173908-L-3307011",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
