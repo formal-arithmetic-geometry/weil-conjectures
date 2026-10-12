@@ -6783,3 +6783,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/D2/Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange (stage 3; reviewer PASS; first push; landing 20261012T085224-L-7917 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/D2/Sheaf.AlgebraicGeometry.UniversalHomeomorphismPullback (stage 3; reviewer PASS; first push; landing 20261012T085224-L-8035 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/D2/Sheaf.Paper.FreeCechTupleBasis (stage 3; reviewer PASS; first push; landing 20261012T085224-L-8137 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/D2/Sheaf.RingTheory.EtalePolynomialCertificateColimit (stage 3; reviewer PASS; first push; landing 20261012T085225-L-8247 (interface); batch 20261012T085205; modules 2; new nodes 1)
