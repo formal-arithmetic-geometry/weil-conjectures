@@ -1,0 +1,115 @@
+{
+ "id": "lem-ag-smooth-lie-local-dimension",
+ "kind": "statement",
+ "title": "Lie dimension equals local dimension at a smooth identity",
+ "statement": "Let $k$ be a field and $G$ a smooth $k$-group scheme [def-sc-group-scheme]. Let $e\\in G$ be the image of the unique point of $\\operatorname{Spec}k$ under its identity section. For the Lie algebra $\\operatorname{Lie}(G)$ [def-wf-lie-algebra-derivation], $\\dim_k\\operatorname{Lie}(G)=\\dim\\mathcal O_{G,e}$. Dimensions are interpreted in $\\{-\\infty,0,1,\\ldots,\\infty\\}$, with the left side the cast of its finite vector-space dimension.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "Dimension paragraph; sk-i-cartier third proof paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "The identity section makes e rational. On an affine neighbourhood, identify the fibre of the relative cotangent sheaf with m/m² at e by the conormal sequence and its splitting over k. Its dual computes Lie(G); use rational tangent-cotangent duality to identify the two descriptions.",
+   "uses": [
+    "lem-sc-rational-tangent-cotangent-duality",
+    "def-wf-lie-algebra-derivation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The smooth affine algebra has regular local ring at e. Its cotangent space is finite dimensional. Duality preserves finite dimension, and regularity equates cotangent dimension to local Krull dimension.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra-derivation",
+  "lem-sc-rational-tangent-cotangent-duality",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-smooth-over-field-regular-local"
+ ],
+ "proof_origin": {
+  "by": "G2 stage 3",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+  "place": "Dimension paragraph; sk-i-cartier third proof paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a smooth group scheme over a field the dimension of its Lie algebra is the Krull dimension of the local ring at the identity",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth group scheme over a field the dimension of its Lie algebra is the Krull dimension of the local ring at the identity",
+   "results": "LieAlgebra.rank; IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential; no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*(cotangent|tangent)|ringKrullDim.*(identity|unitSection)|topologicalKrullDim.*group",
+   "results": "IsRegularLocalRing.iff_finrank_cotangentSpace; no scheme identity dimension match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Field",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-same-lie-closed-subgroup",
+   "place": "Dimension paragraph: Lie dimension equals local dimension at a smooth identity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-i-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LieLocalDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LieLocalDimension.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.finrank_lie_eq_localKrullDim_of_smooth",
+  "statement": "theorem finrank_lie_eq_localKrullDim_of_smooth {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] : (Module.finrank k (Lie G) : WithBot ℕ∞) = ringKrullDim (G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T042408-L-1815281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T042408-L-1815281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
+import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
+import Sheaf.AlgebraicGeometry.GroupScheme.LieLocalDimension
+import Sheaf.AlgebraicGeometry.GroupScheme.IdentityLocalDimension
 
 /-!
 # The Lie algebra of a group scheme of finite type over a field
@@ -37,7 +41,26 @@ and such a point is a `k`-point of `X` over `y`. -/
 theorem exists_points_comp_eq_of_surjective [IsAlgClosed k] {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] (f : X ⟶ Y) (hf : Function.Surjective f.left.base)
     (y : points Y k) : ∃ x : points X k, x ≫ f = y := by
-  sorry
+  have : Surjective f.left := ⟨hf⟩
+  have : LocallyOfFiniteType f.left := by
+    have : LocallyOfFiniteType (f.left ≫ Y.hom) := by
+      simpa only [Over.w] using (inferInstance : LocallyOfFiniteType X.hom)
+    exact locallyOfFiniteType_of_comp f.left Y.hom
+  let Z := Limits.pullback f.left y.left
+  let p : Z ⟶ Spec (.of k) := Limits.pullback.snd f.left y.left
+  have : Nonempty Z := ⟨(p.surjective (IsLocalRing.closedPoint k)).choose⟩
+  have : JacobsonSpace Z := LocallyOfFiniteType.jacobsonSpace p
+  obtain ⟨z, -, hz⟩ :=
+    nonempty_inter_closedPoints (X := Z) Set.univ_nonempty isClosed_univ.isLocallyClosed
+  let s := pointOfClosedPoint p z hz
+  have hs : s ≫ p = 𝟙 _ := pointOfClosedPoint_comp p z hz
+  have hlift : (s ≫ Limits.pullback.fst f.left y.left) ≫ f.left = y.left := by
+    rw [Category.assoc, Limits.pullback.condition, ← Category.assoc, hs, Category.id_comp]
+  refine ⟨Over.homMk (s ≫ Limits.pullback.fst f.left y.left) ?_, ?_⟩
+  · rw [← Over.w f, ← Category.assoc, hlift]
+    exact y.w
+  · exact Over.OverMorphism.ext hlift
+
 
 namespace GrpObj
 
@@ -65,7 +88,10 @@ of `G` are translates of `G°` after base change to the algebraic closure.
 (blueprint: `sk-i-cartier`) -/
 theorem finrank_lie_eq_topologicalKrullDim [CharZero k] :
     (Module.finrank k (Lie G) : WithBot ℕ∞) = topologicalKrullDim G.left := by
-  sorry
+  let : GrpObj (Over.mk G.hom) := inferInstanceAs (GrpObj G)
+  have : Smooth G.hom := smooth_of_grpObj_of_charZero G.hom
+  exact (finrank_lie_eq_localKrullDim_of_smooth G).trans
+    (localKrullDim_identity_eq_topologicalKrullDim G)
 
 end GrpObj
 

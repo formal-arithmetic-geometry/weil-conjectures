@@ -55,6 +55,14 @@
    "text": "*Multiplication.* The tangent space at the identity is the space of\n$X$ with $1+\\varepsilon X\\in K(k[\\varepsilon]/\\varepsilon^2)$ lying\nover the identity. Points of a product with values in\n$k[\\varepsilon]/\\varepsilon^2$ are pairs of such points, so the tangent\nspace of $K\\times K$ at $(1,1)$ is\n$\\operatorname{Lie}(K)\\oplus\\operatorname{Lie}(K)$. Multiplication\nsends the pair $(1+\\varepsilon X,1+\\varepsilon Y)$ to\n\n$$\n(1+\\varepsilon X)(1+\\varepsilon Y)=1+\\varepsilon(X+Y),\n$$\n\nsince $\\varepsilon^2=0$. Hence its differential at $(1,1)$ is\n$(X,Y)\\mapsto X+Y$, which proves (4).",
    "uses": [],
    "elementary": null
+  },
+  {
+   "text": "For AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim: apply the existing Cartier smoothness theorem to G.hom. Apply the smooth Lie-local dimension equality, then compose with the identity local-global dimension equality. Existing steps for the other declarations of this node are retained.",
+   "uses": [
+    "lem-ag-smooth-lie-local-dimension",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -62,12 +70,14 @@
   "def-wf-lie-algebra-derivation",
   "lem-sc-translation-automorphism",
   "def-wf-algebraic-components",
-  "lem-ag-equal-dimension-subgroup"
+  "lem-ag-equal-dimension-subgroup",
+  "lem-ag-smooth-lie-local-dimension",
+  "lem-ag-group-identity-local-dimension"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "G2 stage 3",
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-  "place": "## Proof"
+  "place": "Dimension paragraph; existing routes retained for declarations outside Lie.Field"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -242,5 +252,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T042408-L-1815281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
