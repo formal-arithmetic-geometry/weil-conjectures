@@ -12,9 +12,8 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
 
 /-!
 # Exact inverse image on abelian sheaves
@@ -97,6 +96,49 @@ theorem sitePullback_abelian_exact
         S.Exact →
           (S.map (sheafPullback U AddCommGrpCat.{u}
             J.toGrothendieck K.toGrothendieck)).Exact) := by
-  sorry
+  have _ := hcover
+  have _ := hpullback
+  let F := sheafPullback U AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck
+  let V := sheafCompose K.toGrothendieck (forget AddCommGrpCat.{u})
+  let adj := sheafAdjunctionContinuous U AddCommGrpCat.{u}
+    J.toGrothendieck K.toGrothendieck
+  let : (U.sheafPushforwardContinuous AddCommGrpCat.{u}
+      J.toGrothendieck K.toGrothendieck).Additive := ⟨by
+    intro X Y f g
+    ext W
+    rfl⟩
+  let : F.Additive := adj.left_adjoint_additive
+  let : PreservesColimitsOfSize.{0, 0} F := adj.leftAdjoint_preservesColimits
+  let : PreservesFiniteColimits F := inferInstance
+  have forget_preserves (T : GrothendieckTopology C) :
+      PreservesFiniteLimits (sheafCompose T (forget AddCommGrpCat.{u})) := by
+    let : PreservesFiniteLimits
+        (sheafCompose T (forget AddCommGrpCat.{u}) ⋙ sheafToPresheaf T (Type u)) :=
+      show PreservesFiniteLimits (sheafToPresheaf T AddCommGrpCat.{u} ⋙
+        (Functor.whiskeringRight _ _ _).obj (forget AddCommGrpCat.{u})) from
+          comp_preservesFiniteLimits _ _
+    exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf T (Type u))
+  let := forget_preserves J.toGrothendieck
+  obtain ⟨e⟩ := sitePullback_abelian_underlying J.toGrothendieck K.toGrothendieck U
+  let : PreservesFiniteLimits
+      (sheafCompose J.toGrothendieck (forget AddCommGrpCat.{u}) ⋙
+        sheafPullback U (Type u) J.toGrothendieck K.toGrothendieck) :=
+    comp_preservesFiniteLimits _ _
+  let : PreservesFiniteLimits (F ⋙ V) :=
+    preservesFiniteLimits_of_natIso e.symm
+  let : PreservesLimitsOfSize.{0, 0} V := by
+    let : PreservesLimitsOfSize.{0, 0} (V ⋙ sheafToPresheaf K.toGrothendieck (Type u)) :=
+      show PreservesLimitsOfSize.{0, 0} (sheafToPresheaf K.toGrothendieck AddCommGrpCat.{u} ⋙
+        (Functor.whiskeringRight _ _ _).obj (forget AddCommGrpCat.{u})) from
+          inferInstance
+    exact preservesLimits_of_reflects_of_preserves _
+      (sheafToPresheaf K.toGrothendieck (Type u))
+  let : ReflectsLimitsOfSize.{0, 0} V := reflectsLimits_of_reflectsIsomorphisms
+  let : PreservesFiniteLimits F := preservesFiniteLimits_of_reflects_of_preserves F V
+  refine ⟨inferInstance, inferInstance, inferInstance, ?_, ?_⟩
+  · intro S hS
+    exact hS.map_of_exact F
+  · intro S hS
+    exact hS.map F
 
 end CategoryTheory
