@@ -15,9 +15,9 @@
  ],
  "proof": [
   {
-   "text": "Choose finite bases for P and transport them through the two restrictions using restrictFunctorIsoPullback and pullbackFreeIso. Outside [0,d], K has zero terms, so any component difference of a and b is zero. In the remaining finitely many degrees each component difference is a finite matrix of structure-sheaf sections on U.",
+   "text": "For each degree n, choose the finite free isomorphism of P.X n, restrict it twice, and compose with restrictFreeIso at each restriction and its inverse along U.ι. This identifies the degree-n source of the twice-restricted complex with the restriction to U of a finite free module on Y. Extract degree n from the equality of pulled-back chain maps. Apply exists_restrict_eq_of_pullback_eq with both its opens equal to U, obtaining a neighborhood on which a.f n and b.f n agree.",
    "uses": [
-    "def-weil-pbc-free-module",
+    "lem-pc-finite-free-stalk-map-eq-shrink",
     "lem-weil-pbc-open-immersion-module-pullback-restriction"
    ],
    "elementary": false,
@@ -27,18 +27,16 @@
    }
   },
   {
-   "text": "The equality of the termwise stalk pullbacks makes each coefficient germ of the matrices zero: freeMatrix_pullback computes the pulled-back matrix by applying the map on global sections, which for fromSpecStalkOfMem is the structure-sheaf germ, up to the canonical Spec/stalk and restriction comparisons. For each of the finitely many entries apply the germ equality criterion and take the intersection with U. The resulting W contains y, lies in U, and all restricted entries vanish.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
+   "text": "Induct on a finite set of degrees. For the empty set use U. For insertion intersect the previously obtained neighborhood with the new degree neighborhood. Equality persists after shrinking: restrictFunctorCongr and restrictFunctorComp identify direct restriction with iterated restriction, and naturality transports the equality.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
     "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix homotopy identities after shrinking"
    }
   },
   {
-   "text": "All component differences of the restricted maps are zero: use the vanishing entries within [0,d], and the zero source objects outside that interval. Extensionality of morphisms of homological complexes gives equality of the restricted chain maps. If there are no entries, take W=U. This also covers zero rank, the zero complex and d=0.",
+   "text": "Apply the finite-set result to the integer interval [0,d]. Outside this interval the source terms are zero by the strict support hypotheses and preservation of strict support by restriction. Maps from zero objects agree, and restricting their equality gives equality of components. Within the interval use the finite-set result. HomologicalComplex.hom_ext assembles the component equalities into equality of chain maps.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -48,14 +46,13 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-module-stalk",
+  "lem-pc-finite-free-stalk-map-eq-shrink",
   "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Expansion of lem-pc-finite-free-stalk-homotopy-p-only, step 3; finite matrix argument, with equations separated from lifting."
+  "place": "Finite calculation near a point, using the existing finite-free-source map equality theorem; finite-degree intersection and zero-term assembly written in Lean by X3."
  },
  "mathlib_searches": [
   {
@@ -141,10 +138,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T210029-L-953536",
-  "kind": "interface",
+  "landing": "20261012T214714-L-1272916",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
