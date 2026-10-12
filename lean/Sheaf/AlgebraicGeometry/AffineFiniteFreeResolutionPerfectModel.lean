@@ -8,7 +8,8 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Single
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.AffineFiniteFreePerfectCore
+import Sheaf.AlgebraicGeometry.AffineFiniteFreePerfectComparison
 
 /-!
 # Local strictly perfect models from bounded finite free resolutions
@@ -68,6 +69,9 @@ theorem exists_affine_finite_free_perfect_model {Y : Scheme.{u}}
         (moduleRings Y.toRingedSpace) U).mapDerivedCategory.obj
           ((DerivedCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M) ≅
-              DerivedCategory.Q.obj L) := by sorry
+              DerivedCategory.Q.obj L) := by
+  refine ⟨affineFiniteFreeModelComplex U hU K, ?_, ?_⟩
+  · exact affine_finite_free_perfect_core U hU K r hfree hfinite hzero
+  · exact affine_finite_free_perfect_comparison U hU M K q
 
 end AlgebraicGeometry
