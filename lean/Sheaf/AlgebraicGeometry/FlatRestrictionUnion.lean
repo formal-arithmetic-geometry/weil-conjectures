@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
+import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 
 /-! # Flatness on a union of finite locally free loci
 
@@ -45,6 +45,42 @@ and every tensor functor is exact; rank-zero modules are also covered. -/
 theorem isFlat_restrict_iSup_of_finiteLocallyFree
     {T : Scheme.{u}} (M : T.Modules) {ι : Type v} (U : ι → T.Opens)
     (hU : ∀ a, ∃ r : ℕ, ((restrictFunctor (U a).ι).obj M).IsFiniteLocallyFreeOfRank r) :
-    SheafOfModules.IsFlat ((restrictFunctor (⨆ a, U a).ι).obj M) := by sorry
+    SheafOfModules.IsFlat ((restrictFunctor (⨆ a, U a).ι).obj M) := by
+  classical
+  let W : T.Opens := ⨆ a, U a
+  let N : W.toScheme.Modules := (restrictFunctor W.ι).obj M
+  have hx (x : W) : ∃ a, x.val ∈ U a :=
+    TopologicalSpace.Opens.mem_iSup.mp x.property
+  let a : W → ι := fun x ↦ (hx x).choose
+  let f (x : W) : (U (a x)).toScheme ⟶ W.toScheme :=
+    T.homOfLE (le_iSup U (a x))
+  have hf : ⨆ x, (f x).opensRange = ⊤ := by
+    apply eq_top_iff.mpr
+    intro x _
+    apply TopologicalSpace.Opens.mem_iSup.mpr
+    refine ⟨x, ?_⟩
+    change x ∈ (T.homOfLE (le_iSup U (a x))).opensRange
+    rw [Scheme.opensRange_homOfLE]
+    exact (hx x).choose_spec
+  have hN : N.IsFiniteLocallyFree := by
+    apply isFiniteLocallyFree_of_isOpenImmersion N f hf
+    intro x
+    obtain ⟨r, hr⟩ := hU (a x)
+    have := hr
+    have := SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree
+      ((restrictFunctor (U (a x)).ι).obj M) r
+    let e : ((pullback (f x)).obj N) ≅ (restrictFunctor (U (a x)).ι).obj M :=
+      ((restrictFunctorIsoPullback (f x)).app N).symm ≪≫
+        ((restrictFunctorComp (f x) W.ι).app M).symm ≪≫
+        (restrictFunctorCongr (T.homOfLE_ι (le_iSup U (a x)))).app M
+    exact SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u} e.symm
+  have := hN
+  have h := finiteLocallyFree_tensorLeft_exact N
+  have := h.1
+  have := h.2
+  change exactFunctor _ _ (MonoidalCategory.tensorRight N)
+  exact ⟨preservesFiniteLimits_of_natIso
+    (BraidedCategory.tensorLeftIsoTensorRight N),
+    preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight N)⟩
 
 end AlgebraicGeometry.Scheme.Modules

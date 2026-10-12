@@ -15,30 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Refine each U(a) by finite free trivializing opens using [def-pc-finite-locally-free]. These opens cover W, the union of U(a); ranks may vary between members of the cover.",
+   "text": "Put W = the union of U(a) and N = M restricted to W. For each point x of W, choose a(x) with x in U(a(x)), and let f(x): U(a(x)) -> W be Scheme.homOfLE. Its open range contains x, so these open immersions cover W. This reindexes the cover by W:Type u, even when the original index type lies in an arbitrary universe. Empty W has an empty covering.",
    "uses": [
-    "def-pc-finite-locally-free"
+    "def-pc-scheme"
    ],
    "elementary": true
   },
   {
-   "text": "Tensor products commute with open restriction [def-pc-module-pullback]. On a trivializing open, right tensoring with M is a finite direct sum of the identity functor, so is exact. Kernels and exactness of module sheaf sequences are local on an open cover: equivalently apply the exact stalk functors and use their conservativity. Hence right tensoring with M|W is exact. An additive exact functor of abelian categories preserves finite limits and finite colimits, which is the definition [def-pc-flat-sheaf-modules]. If the indexing family is empty then W is empty, its module category is zero and the same exactness assertion holds. Rank zero also gives the zero tensor functor.",
+   "text": "Each M restricted to U(a(x)) is finite locally free with the rank forgotten. The restriction-composition isomorphism and restrictFunctorIsoPullback identify it with f(x)^* N. Apply the already proved source theorem AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFree_of_isOpenImmersion (WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent) to conclude that N is finite locally free with varying rank. This theorem glues finite free trivializations and imposes no common rank.",
    "uses": [
-    "def-pc-module-pullback",
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply finiteLocallyFree_tensorLeft_exact, the declaration of lem-sc-ext-tensor-exact, to N. Transport both finite-limit and finite-colimit preservation from tensorLeft N to tensorRight N via BraidedCategory.tensorLeftIsoTensorRight N. The resulting pair is definitionally SheafOfModules.IsFlat N.",
+   "uses": [
+    "lem-sc-ext-tensor-exact",
     "def-pc-flat-sheaf-modules"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-finite-locally-free",
-  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-sc-ext-tensor-exact",
   "def-pc-flat-sheaf-modules"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof third paragraph: finite local freeness makes tensoring exact on the open locus; step 2 of lem-pc-derived-single-open-locus"
+  "by": "H3",
+  "document": "lean/Sheaf/AlgebraicGeometry/FlatRestrictionUnion.lean",
+  "place": "Point-indexed covering and existing finite-local-freeness descent, followed by finiteLocallyFree_tensorLeft_exact and braided tensor comparison (2026-10-12)."
  },
  "mathlib_searches": [
   {
@@ -116,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T112843-L-769139",
-  "kind": "interface",
+  "landing": "20261012T135241-L-1668318",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
