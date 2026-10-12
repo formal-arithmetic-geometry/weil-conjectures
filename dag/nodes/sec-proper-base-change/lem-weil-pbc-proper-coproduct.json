@@ -73,77 +73,40 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (part (1)).* Apply [lem-weil-pbc-scheme-coproduct-family] to the family $(W_1,W_2)$ indexed by $I=\\{1,2\\}$: the coproduct $W=W_1\\amalg W_2$ exists, the coprojections $\\iota_1,\\iota_2$ are open immersions [def-weil-open-immersion], $\\iota_1(W_1)\\cap\\iota_2(W_2)=\\emptyset$ and $\\iota_1(W_1)\\cup\\iota_2(W_2)=W$. This is (1). Write $U_k=\\iota_k(W_k)$; $U_1,U_2$ are open, and each is closed as the complement of the other. Since $\\iota_k$ is an open immersion, it is a homeomorphism of $W_k$ onto $U_k$ and an isomorphism of schemes $W_k\\to U_k$ onto the open subscheme $U_k$; as $p\\circ\\iota_k=p_k$, this isomorphism is one over $S$ (with $p|_{U_k}$ on $U_k$). For (2) assume $p_1,p_2$ proper [def-weil-proper-morphism], i.e. separated, of finite type and universally closed; Steps 2 to 4 show that $p$ has these three properties, which by definition [def-weil-proper-morphism] is (2).",
+   "text": "The two coprojections are open immersions and have complementary ranges by the binary instances and isCompl_range_inl_inr in Mathlib.AlgebraicGeometry.Limits (the binary specialization of [lem-weil-pbc-scheme-coproduct-family]). This gives the first three conjuncts.",
    "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "def-weil-open-immersion",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 01JA (section-glueing-schemes): the disjoint union is the glueing with empty overlaps U_{12}=U_{21}=\\emptyset; Mathlib Limits.lean:344-351 (IsOpenImmersion coprod.inl/coprod.inr, isCompl_range_inl_inr)"
-   }
-  },
-  {
-   "text": "*Step 2 ($p$ is of finite type).* Let $V=\\operatorname{Spec}A\\subseteq S$ be an affine open. Since $W=U_1\\cup U_2$ and $p\\circ\\iota_k=p_k$, we have $p^{-1}(V)=\\iota_1(p_1^{-1}(V))\\cup\\iota_2(p_2^{-1}(V))$. As $p_k$ is of finite type [def-weil-finite-type-morphism], $p_k^{-1}(V)$ is covered by finitely many affine opens $V_{k,j}=\\operatorname{Spec}B_{k,j}$ ($j=1,\\dots,n_k$) with $B_{k,j}$ a finitely generated $A$-algebra via $p_k$. By Step 1, $\\iota_k$ maps $V_{k,j}$ isomorphically onto the open subscheme $\\iota_k(V_{k,j})$ of $W$ [def-weil-open-immersion], so $\\iota_k(V_{k,j})$ is an affine open of $W$ with ring $B_{k,j}$, and since $p\\circ\\iota_k=p_k$ its $A$-algebra structure via $p$ is the one via $p_k$. The finitely many affine opens $\\iota_k(V_{k,j})$ ($k=1,2$, $j\\le n_k$) cover $p^{-1}(V)$ and are spectra of finitely generated $A$-algebras; hence $p$ is locally of finite type, $p^{-1}(V)$ is quasi-compact (a finite union of quasi-compact sets), and $p$ is of finite type by [def-weil-finite-type-morphism] (its 'equivalently, finite affine cover' clause).",
-   "uses": [
-    "def-weil-finite-type-morphism",
-    "def-weil-open-immersion",
     "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Definition 01T1 (morphism of finite type) and Section 01T0; written out by the worker, no Stacks statement for the disjoint union"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 ($p$ is universally closed).* Let $g:T\\to S$ be a morphism of schemes, $W_T=W\\times_ST$ [def-pc-fibre-product] with projections $q:W_T\\to W$ and $p_T:W_T\\to T$, and $W_{k,T}=W_k\\times_ST$ with projection $p_{k,T}:W_{k,T}\\to T$. By [lem-weil-pbc-open-fibre-product] (with $X=W$, $Y=T$, $V=U_k$, $W=T$, $U=S$) the canonical morphism $U_k\\times_ST\\to W_T$ is an open immersion with image $q^{-1}(U_k)$, compatibly with the projections to $T$; composing with the isomorphism $W_{k,T}\\to U_k\\times_ST$ induced by the isomorphism $W_k\\cong U_k$ over $S$ of Step 1 gives an open immersion $j_k:W_{k,T}\\to W_T$ with image $q^{-1}(U_k)$ and $p_T\\circ j_k=p_{k,T}$. Since $U_1,U_2$ partition $W$, the opens $q^{-1}(U_1),q^{-1}(U_2)$ partition $W_T$. Let $Z\\subseteq W_T$ be closed. Then $Z=(Z\\cap q^{-1}(U_1))\\cup(Z\\cap q^{-1}(U_2))$ and $p_T(Z\\cap q^{-1}(U_k))=p_T(j_k(j_k^{-1}(Z)))=p_{k,T}(j_k^{-1}(Z))$. The set $j_k^{-1}(Z)$ is closed in $W_{k,T}$ ($j_k$ continuous), and $p_{k,T}$ is a closed map because $p_k$ is universally closed [def-weil-proper-morphism]. Hence $p_T(Z)=p_{1,T}(j_1^{-1}Z)\\cup p_{2,T}(j_2^{-1}Z)$ is closed in $T$, so $p_T$ is closed for every $T\\to S$, i.e. $p$ is universally closed.",
+   "text": "Assume both component maps proper [def-weil-proper-morphism]. Mathlib IsProper is Zariski-local at the target. Apply IsZariskiLocalAtTarget.coprodMap to p1 and p2: the map W1 coproduct W2 to S coproduct S is proper, since its restrictions over the two complementary target opens are the two given proper maps. The locality instance is in Morphisms/Proper.lean:77 and coprodMap in Morphisms/Basic.lean:207.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-open-immersion",
     "def-weil-proper-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Definition 01KB (universally closed) and Morphisms, Definition 01W1 (proper); Schemes, Lemma 01JR (open subschemes of fibre products); written out by the worker"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 4 ($p$ is separated).* Let $\\mathrm{pr}_1,\\mathrm{pr}_2:W\\times_SW\\to W$ be the projections [def-pc-fibre-product] and $A_{kl}=\\mathrm{pr}_1^{-1}(U_k)\\cap\\mathrm{pr}_2^{-1}(U_l)$ ($k,l\\in\\{1,2\\}$). As $U_1,U_2$ partition $W$, the four opens $A_{kl}$ partition $W\\times_SW$, so each is also closed (its complement is the union of the other three). By [lem-weil-pbc-open-fibre-product] (with $X=Y=W$, $V=W=U_k$, $U=S$), $U_k\\times_SU_k\\to W\\times_SW$ is an open immersion with image $A_{kk}$; composed with the isomorphism $W_k\\times_SW_k\\cong U_k\\times_SU_k$ from Step 1 this gives an open immersion $m_k=\\iota_k\\times_S\\iota_k:W_k\\times_SW_k\\to W\\times_SW$ with image $A_{kk}$, a homeomorphism onto $A_{kk}$. Both $\\Delta_p\\circ\\iota_k$ and $m_k\\circ\\Delta_{p_k}$ have both projections equal to $\\iota_k$, so $\\Delta_p\\circ\\iota_k=m_k\\circ\\Delta_{p_k}$ by the universal property of the fibre product, and $\\Delta_p(W)=m_1(\\Delta_{p_1}(W_1))\\cup m_2(\\Delta_{p_2}(W_2))$. Since $p_k$ is separated, $\\Delta_{p_k}$ is a closed immersion [def-weil-proper-morphism], [def-weil-closed-immersion], so $\\Delta_{p_k}(W_k)$ is closed in $W_k\\times_SW_k$; its image under the homeomorphism $m_k$ onto $A_{kk}$ is closed in $A_{kk}$, hence closed in $W\\times_SW$ because $A_{kk}$ is closed. So $\\Delta_p(W)$ is closed, a union of two closed sets. The diagonal $\\Delta_p$ is an immersion [lem-weil-pbc-diagonal-immersion] with closed image, hence a closed immersion [lem-weil-pbc-immersion-closed-image-closed-immersion], i.e. $p$ is separated [def-weil-proper-morphism].",
+   "text": "The identities of S are finite. By [lem-weil-pbc-finite-coproduct], the fold map coprod.desc (identity S) (identity S) from S coproduct S to S is finite, hence proper by [lem-weil-pbc-finite-proper]. Compose it with the proper coproduct map using [lem-weil-pbc-proper-composition]. The composite equals coprod.desc p1 p2 by coproduct extensionality and the coprojection equations, finishing the last conjunct.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-closed-immersion",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-diagonal-immersion",
-    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+    "lem-weil-pbc-finite-coproduct",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Definition 01KK and the remark after it ('By Lemmas 01KJ and 01IQ, Delta_{X/S} is a closed immersion iff Delta_{X/S}(X) is closed'); Lemma 01JR (open subschemes of fibre products); written out by the worker"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-scheme-coproduct-family",
-  "def-weil-open-immersion",
   "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-diagonal-immersion",
-  "lem-weil-pbc-immersion-closed-image-closed-immersion"
+  "lem-weil-pbc-finite-coproduct",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Written by the worker: Stacks Cohomology of Schemes, proof of Lemma 0CYR uses the statement without proof; assembled from Schemes Section 01JA (disjoint union as glueing with empty overlaps), Definition 01KK with Lemmas 01KJ and 01IQ (separated iff closed diagonal image), Lemma 01JR (open subschemes of fibre products), Schemes Definition 01KB, Morphisms Definitions 01T1 and 01W1"
+  "document": "Mathlib.AlgebraicGeometry.Morphisms.Basic; Mathlib.AlgebraicGeometry.Morphisms.Proper; Mathlib.AlgebraicGeometry.Morphisms.Finite",
+  "place": "Factor through S coproduct S; Basic.lean:207 coprodMap, Proper.lean:77 target locality, Finite.lean:159 finite coproduct desc, Proper.lean:69 finite implies proper and :67 proper composition. This is below the unit level; no unit realization is bypassed."
  },
  "mathlib_match": null,
  "status": "split",
@@ -196,5 +159,15 @@
   "group": "H1",
   "result": "pass",
   "note": "S,W1,W2 : Scheme.{u} one universe, p1 p2 explicit; W = Mathlib W1 ⨿ W2, ι = coprod.inl/inr, p = coprod.desc p1 p2 (p∘ι_k = p_k by inl_desc/inr_desc); (1) IsOpenImmersion inl, inr + IsCompl of ranges = disjoint union of point sets; (2) ∀ [IsProper p1] [IsProper p2], IsProper (coprod.desc) — binary node so no index type; no let, no hollow hyp, node unchanged beyond lean record"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T165524-L-2937225",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

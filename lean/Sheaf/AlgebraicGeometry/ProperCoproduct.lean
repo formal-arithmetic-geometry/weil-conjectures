@@ -67,6 +67,14 @@ theorem proper_coproduct_two
         (Set.range (coprod.inr : W₂ ⟶ W₁ ⨿ W₂)) ∧
       (∀ [IsProper p₁] [IsProper p₂],
         IsProper (coprod.desc p₁ p₂ : W₁ ⨿ W₂ ⟶ S)) := by
-  sorry
+  refine ⟨inferInstance, inferInstance, isCompl_range_inl_inr W₁ W₂, ?_⟩
+  intro _ _
+  have : IsProper (coprod.map p₁ p₂) :=
+    IsZariskiLocalAtTarget.coprodMap (P := @IsProper) p₁ p₂ inferInstance inferInstance
+  have : IsProper (coprod.desc (𝟙 S) (𝟙 S)) := inferInstance
+  have h : coprod.map p₁ p₂ ≫ coprod.desc (𝟙 S) (𝟙 S) = coprod.desc p₁ p₂ := by
+    ext <;> simp
+  rw [← h]
+  infer_instance
 
 end AlgebraicGeometry
