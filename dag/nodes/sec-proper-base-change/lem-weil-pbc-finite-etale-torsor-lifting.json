@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-finite-etale-torsor-lifting",
+ "kind": "statement",
+ "title": "Finite étale equivalence and torsor lifting",
+ "statement": "Let i:Y₀ → Y be a morphism of schemes [def-weil-pbc-scheme-conventions] inducing an equivalence of finite étale categories [def-weil-pbc-finite-etale-category]. Let M be a finite abelian group, G its constant abelian sheaf on Y [def-weil-pbc-constant-sheaf], and G₀=i⁻¹G [def-weil-pbc-inverse-image]. Let τ send G-torsors [def-sc-gm-torsor] to G₀-torsors. Suppose for each T there is an isomorphism e_T from the set-sheaf inverse image of T.sheaf to (τT).sheaf, such that for every étale W over Y, g∈G(W), t∈T(W), one has e_T(η_T(g+ᵥt))=η_G(g)+ᵥe_T(η_T(t)) over W×_Y Y₀. Here η_T and η_G are the units of the respective set and abelian inverse-image/direct-image adjunctions. For every G₀-torsor R there is a G-torsor T such that τT is isomorphic to R. No connectedness, nonemptiness or surjectivity assumption on i is made.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-sc-gm-torsor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5G, final paragraph, with Tag 03RV; read online at https://stacks.math.columbia.edu/tag/0A5G and https://stacks.math.columbia.edu/tag/03RV because the local literature mirror is absent"
+ },
+ "proof": [
+  {
+   "text": "Identify the inverse image of the constant abelian sheaf M with the constant\nsheaf M on Y₀. Tag 03RV represents a torsor R by a finite étale surjective scheme W.\nEssential surjectivity lifts W to a finite étale scheme P over Y. Fullness lifts all\nM-action endomorphisms; faithfulness proves the zero, addition and inverse equations.\nThe simple-transitivity map from the finite disjoint union of copies of P to P ×_Y P\nis a map between finite étale schemes. Its base change is an isomorphism, so the\npullback equivalence reflects that it is an isomorphism. The image U of P → Y is open\n(étale maps are open) and closed (finite maps are closed). Its inclusion U → Y is\nfinite étale. Its base change is an isomorphism because W → Y₀ is surjective; reflection\nof isomorphisms proves U = Y. Thus P is surjective and its representable sheaf with\nthis action is a torsor T. For each m in M, the displayed equation says that the\ntwo translation maps on the inverse-image sheaf agree after the adjunction unit\non every T(W). The\nadjunction bijection makes these maps equal. Sections of the constant coefficient\nsheaf are locally constant, so naturality and the sheaf condition imply agreement\nfor all coefficient sections. The representative isomorphism downstairs is thus\nequivariant for τ T, hence τ T is isomorphic to R. This works on an\nempty base and for the trivial group, without assuming i surjective.",
+   "uses": [
+    "def-sc-gm-torsor",
+    "lem-weil-pbc-finite-locally-constant-sets-representability",
+    "lem-galois-inverse-image-representable",
+    "def-weil-pbc-finite-etale-category",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5G, final paragraph, with Tag 03RV; read online at https://stacks.math.columbia.edu/tag/0A5G and https://stacks.math.columbia.edu/tag/03RV because the local literature mirror is absent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-torsor",
+  "lem-weil-pbc-finite-locally-constant-sets-representability",
+  "lem-galois-inverse-image-representable",
+  "def-weil-pbc-finite-etale-category",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-finite-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Categorical implication of Tag 0A5G, with the action and clopen-image details written out; second reading E2 makes determination of the action by the adjunction-unit equation explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "query": "Every torsor under a finite constant abelian sheaf lifts along a morphism inducing an equivalence on finite etale schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "date": "2026-10-12",
+   "verdict": "no usable match",
+   "query": "Every torsor under a finite constant abelian sheaf lifts along a morphism inducing an equivalence on finite etale schemes",
+   "results": "Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, IsEtale.of_comp, PreGaloisCategory.exists_lift_of_continuous; none states torsor lifting for arbitrary schemes with the displayed inverse-image action."
+  },
+  {
+   "tool": "grep",
+   "query": "Torsor|torsor|finiteEtale in Mathlib/CategoryTheory/Sites and Mathlib/AlgebraicGeometry; torsor transport and torsor lifting in blueprint",
+   "results": "No Mathlib torsor transport theorem; no blueprint match for the isolated reflection or lifting statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleEquivalenceH1",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-torsor-comparison",
+   "place": "proof steps 3 and 4: lift action, simple transitivity, and surjectivity using the clopen image",
+   "via": [
+    "lem-weil-pbc-finite-etale-equivalence-h1"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTorsorLifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTorsorLifting.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtale_lifts_torsor_transport",
+  "statement": "theorem finiteEtale_lifts_torsor_transport\n    [(@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange]\n    {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)\n    (hFE : (MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ i).IsEquivalence)\n    (M : Type (u + 1)) [AddCommGroup M] [Finite M]\n    (τ : Sheaf.Torsor\n        ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) →\n      Sheaf.Torsor ((upperStar AddCommGrpCat.{u + 1} i).obj\n        ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))))\n    (hτ : ∀ T : Sheaf.Torsor\n        ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n          (AddCommGrpCat.of M)), ∃ eT : (Scheme.etaleSetPullback i).obj T.sheaf ≅ (τ T).sheaf,\n      let G := (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of M)\n      (∀ (W : Y.Etale) (g : G.obj.obj (op W)) (t : T.sheaf.obj.obj (op W)),\n      eT.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W))\n        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (u + 1))\n          (Y.smallGrothendieckTopology @Etale)\n          (Y₀.smallGrothendieckTopology @Etale)).unit.app T.sheaf).hom.app (op W)\n            (T.vadd (op W) g t)) =\n      (τ T).vadd (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W))\n        (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit.app G).hom.app\n          (op W) g)\n        (eT.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (u + 1))\n            (Y.smallGrothendieckTopology @Etale)\n            (Y₀.smallGrothendieckTopology @Etale)).unit.app T.sheaf).hom.app (op W) t))))\n    (R : Sheaf.Torsor ((upperStar AddCommGrpCat.{u + 1} i).obj\n      ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)))) :\n    ∃ T, τ T ≈ R",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T070534-L-3469761",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T070534-L-3469761",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

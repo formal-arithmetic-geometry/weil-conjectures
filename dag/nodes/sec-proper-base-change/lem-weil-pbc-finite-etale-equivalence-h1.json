@@ -15,59 +15,41 @@
  },
  "proof": [
   {
-   "text": "By [thm-galois-torsor-h1] finite constant H1 classes are naturally torsor isomorphism classes. By [thm-galois-lc-etale], a torsor under finite M is represented by a finite etale surjective scheme with an M-action and an isomorphism M x P = P x_Y P. This dictionary commutes with pullback. The coefficient identification of [lemma-constructible-pullback-constant] is an isomorphism; remember it when interpreting [def-weil-pbc-cohomology-pullback].",
+   "text": "Choose inverse-image torsors τT with their sheaf isomorphisms and action equations by [lem-sc-etale-torsor-h1-functoriality]. The same theorem gives cohomologyMap i (classH1 T) = classH1 (τT). The source and target canonical classH1 maps are equivalences by [thm-galois-torsor-h1].",
    "uses": [
-    "thm-galois-torsor-h1",
-    "thm-galois-lc-etale",
-    "lemma-constructible-pullback-constant",
-    "def-weil-pbc-cohomology-pullback"
+    "lem-sc-etale-torsor-h1-functoriality",
+    "thm-galois-torsor-h1"
    ],
    "elementary": false
   },
   {
-   "text": "Full faithfulness of the given finite etale pullback equivalence lifts an equivariant isomorphism of restricted torsors uniquely. Faithfulness proves equivariance, and lifts inverse equations. Hence restriction is injective on torsor isomorphism classes.",
+   "text": "Write two source cohomology classes as classH1 of quotient representatives. If their pullbacks agree, naturality and injectivity of target classH1 identify the transported torsor quotient classes. Apply [lem-weil-pbc-finite-etale-torsor-reflection] to reflect the resulting torsor isomorphism. Source classH1 then gives equality of the source classes.",
    "uses": [
-    "def-weil-pbc-finite-etale-category"
+    "thm-galois-torsor-h1",
+    "lem-weil-pbc-finite-etale-torsor-reflection"
    ],
    "elementary": true
   },
   {
-   "text": "Essential surjectivity lifts the underlying finite etale scheme of a torsor. Fullness lifts its action maps, and faithfulness lifts the identity, addition, and inverse equations. Finite coproducts and fibre products stay finite etale; the simple-transitivity map between these objects restricts to an isomorphism, so reflection of isomorphisms proves simple transitivity upstairs.",
-   "uses": [
-    "def-weil-pbc-finite-etale-category"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The lifted finite etale structure morphism has open image by [lem-weil-pbc-flat-lfp-open] and closed image by [lem-weil-pbc-finite-proper]. Its clopen image U defines a finite etale inclusion U into Y. The inclusion restricts to an isomorphism because the original torsor is surjective. Reflection of isomorphisms gives U=Y, so the lift is surjective and is a torsor. This proves surjectivity on classes without any surjectivity assumption on i.",
-   "uses": [
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-finite-proper"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Naturality of [thm-galois-torsor-h1] identifies the bijection of classes with H1 of the constant-sheaf pullback isomorphism after cohomologyMap i. H1 of an isomorphism is bijective, hence so is cohomologyMap i itself. Its codomain is the inverse-image sheaf, not a silently substituted constant sheaf.",
+   "text": "Write a target cohomology class as classH1 of a target torsor R. Apply [lem-weil-pbc-finite-etale-torsor-lifting] to find T with τT isomorphic to R. Its source class is a preimage by naturality and equality of the target torsor quotient classes. The codomain throughout is the inverse-image coefficient sheaf.",
    "uses": [
     "thm-galois-torsor-h1",
-    "lemma-constructible-pullback-constant"
+    "lem-weil-pbc-finite-etale-torsor-lifting",
+    "lem-sc-etale-torsor-h1-functoriality"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-etale-torsor-h1-functoriality",
   "thm-galois-torsor-h1",
-  "thm-galois-lc-etale",
-  "lemma-constructible-pullback-constant",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-finite-etale-category",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-finite-proper"
+  "lem-weil-pbc-finite-etale-torsor-reflection",
+  "lem-weil-pbc-finite-etale-torsor-lifting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A5G, last paragraph; action, simple transitivity, surjectivity and coefficient-codomain details written out by K1"
+  "place": "Tag 0A5G final paragraph; geometric reflection and lifting split off, with the cohomology assembly proved using the existing sheaf torsor classification and inverse-image functoriality"
  },
  "mathlib_searches": [
   {
@@ -141,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T060743-L-2910299",
+  "landing": "20261012T070534-L-3469761",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
