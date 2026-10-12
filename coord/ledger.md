@@ -8922,3 +8922,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/E3/Sheaf.RingTheory.TwoTermKernelBaseChange (stage 3; reviewer PASS; first push; landing 20261012T184253-L-4001019 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/F1/Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat (stage 3; reviewer PASS; first push; landing 20261012T184253-L-4001209 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/F1/Sheaf.AlgebraicGeometry.AffineModuleTensorHomBijective (stage 3; reviewer PASS; first push; landing 20261012T184254-L-4001342 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:42 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence (stage 3; reviewer PASS; first push; landing 20261012T184254-L-4001469 (interface); batch 20261012T184234; modules 3; new nodes 2)

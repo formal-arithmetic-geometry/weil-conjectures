@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
 import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceTermwise
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceCompletion
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Coherent modules and adic systems on a closed subscheme
@@ -213,6 +215,8 @@ theorem closedImmersion_coherentFormal_equivalence {Z X : Scheme.{u}} (i : Z ⟶
           (θ.hom.app G).app (op n) =
         (Scheme.Modules.pushforward i).map (formalModuleQuotientπ (I.comap i) (n + 1) G.obj))
     := by
-  sorry
+  refine ⟨?_, ?_⟩
+  · exact closedImmersion_coherentFormal_equivalence_termwise i I
+  · exact closedImmersion_coherentFormal_equivalence_completion i I
 
 end AlgebraicGeometry

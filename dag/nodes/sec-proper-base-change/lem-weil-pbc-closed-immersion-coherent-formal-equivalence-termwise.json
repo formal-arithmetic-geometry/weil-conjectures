@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-coherent-formal-equivalence-termwise",
+ "kind": "statement",
+ "title": "Termwise coherent formal equivalence for a closed immersion",
+ "statement": "theorem closedImmersion_coherentFormal_equivalence_termwise {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData) : ∃ E : @CoherentFormalModule Z (isNoetherian_of_locallyOfFiniteType i) (I.comap i) ≌ ObjectProperty.FullSubcategory (fun M : CoherentFormalModule X I ↦ SupportedOn I M i), Nonempty (E.functor ⋙ ObjectProperty.ι (fun M : CoherentFormalModule X I ↦ SupportedOn I M i) ⋙ ObjectProperty.ι (IsCoherentFormalModule I) ≅ ObjectProperty.ι (IsCoherentFormalModule (I.comap i)) ⋙ (Functor.whiskeringRight ℕᵒᵖ Z.Modules X.Modules).obj (Scheme.Modules.pushforward i))",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Tags 087T, 088A and equation 0880"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-pbc-coherent-formal-module",
+  "def-nagata-extended-ideal",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Construct the restricted pushforward functor on coherent formal modules levelwise. Coherence and annihilation make it land in the supported subcategory; ideal-power quotient comparison gives the formal-system conditions. Full faithfulness and essential surjectivity follow levelwise from the closed-immersion module equivalence, and assemble into an equivalence.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "pqf-def-locnoeth",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-nagata-extended-ideal",
+    "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-closed-immersion-pushforward-fully-faithful",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "def-nagata-extended-ideal",
+  "lem-weil-pbc-closed-immersion-pushforward-ideal-powers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 087T, 088A, 0880"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushforward along closed immersion is an equivalence between modules on the closed subscheme and modules annihilated by the ideal sheaf",
+   "results": "IsClosedImmersion.instIsIsoSchemeToImage, IsClosedImmersion.overEquivIdealSheafData (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion; closed immersions <-> ideal sheaves, not modules), Scheme.Modules.restrictFunctorAdjCounitIso, Scheme.Modules.instFaithfulPushforward (open immersions only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion: quasi-coherent modules on closed subscheme equivalent to modules killed by ideal sheaf via pushforward",
+   "results": "IsClosedImmersion.overEquivIdealSheafData, IdealSheafData.subschemeObjIso, instIsClosedImmersionInclusion, Scheme.IdealSheafData, Scheme.Modules.restrict: nothing on modules over a closed subscheme",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'Coherent|coherent' / 'Chow' / 'formal function|FormalFunction|Grothendieck existence|existence theorem' / 'Supp|support' / 'Serre' / 'ProperOver|proper over' / 'IsQuasicoherent' / 'annihilat' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules",
+   "results": "AlgebraicGeometry/Modules has only Presheaf.lean, Sheaf.lean, Tilde.lean (sheaves of modules, pullback/pushforward, tilde, IsQuasicoherent of tilde); 'coherent' only in comments of Tilde.lean and IdealSheaf/Basic.lean; no coherent modules, no Chow, no formal functions or existence theorem, no support of a sheaf of modules (only IdealSheafData.support), no Serre subcategories in AlgebraicGeometry, no 'proper over' for closed subsets",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def pushforward' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; loogle AlgebraicGeometry.Scheme.Modules.pushforward",
+   "results": "PresheafOfModules.pushforward (Algebra/Category/ModuleCat/Presheaf/Pushforward.lean:89), SheafOfModules.pushforward (Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean), AlgebraicGeometry.Scheme.Modules.pushforward (AlgebraicGeometry/Modules/Sheaf.lean:166) with Scheme.Modules.pullbackPushforwardAdjunction for any morphism; Full/Faithful instances only for open immersions; no coherent modules, no closed-immersion results for modules",
+   "date": "2026-10-10",
+   "verdict": "no match: the pushforward functor i_* exists (Scheme.Modules.pushforward), the equivalence does not"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-closed-immersion-coherent-equivalence",
+   "place": "strict conjunct decomposition of the formal equivalence target",
+   "via": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceTermwise",
+  "declaration": "AlgebraicGeometry.closedImmersion_coherentFormal_equivalence_termwise",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionCoherentEquivalenceTermwise.lean",
+  "statement": "theorem closedImmersion_coherentFormal_equivalence_termwise {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData) : ∃ E : @CoherentFormalModule Z (isNoetherian_of_locallyOfFiniteType i) (I.comap i) ≌ ObjectProperty.FullSubcategory (fun M : CoherentFormalModule X I ↦ SupportedOn I M i), Nonempty (E.functor ⋙ ObjectProperty.ι (fun M : CoherentFormalModule X I ↦ SupportedOn I M i) ⋙ ObjectProperty.ι (IsCoherentFormalModule I) ≅ ObjectProperty.ι (IsCoherentFormalModule (I.comap i)) ⋙ (Functor.whiskeringRight ℕᵒᵖ Z.Modules X.Modules).obj (Scheme.Modules.pushforward i))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184254-L-4001469",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T184254-L-4001469",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
