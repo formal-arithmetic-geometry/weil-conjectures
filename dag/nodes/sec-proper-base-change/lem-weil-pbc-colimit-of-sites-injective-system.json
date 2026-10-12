@@ -25,67 +25,48 @@
  ],
  "proof": [
   {
-   "text": "For each index $i$, the enough-injectives hypothesis on $\\operatorname{Ab}(\\mathcal C_i)$ supplies an injective embedding $\\gamma_i^0:\\mathcal F_i\\hookrightarrow\\mathcal A_i$. For every arrow $b:k\\to i$, compose the transition map $\\varphi_b:f_b^{-1}\\mathcal F_i\\to\\mathcal F_k$ with $\\gamma_k^0$ and take its adjoint under $f_b^{-1}\\dashv f_{b*}$; this gives a map $\\mathcal F_i\\to f_{b*}\\mathcal A_k$. The family of these maps defines $\\gamma_i:\\mathcal F_i\\to\\mathcal G_i$, where $\\mathcal G_i:=\\prod_{b:k\\to i}f_{b*}\\mathcal A_k$.",
+   "text": "Use Mathlib enough injectives to take A_j=Injective.under(Fs j) and its monic inclusion i_j. Construct explicitly B_j as the product of R_t A_k over t:j→k and G_j=A_j×B_j.",
    "uses": [
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-colimit-of-sites",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-site-sheaves-enough-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0EXZ proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $f_{b*}\\mathcal A_k$ is injective: $f_b^{-1}$ is exact by the definition of a morphism of sites, and the right-adjoint criterion for exact functors applies to $f_b^{-1}\\dashv f_{b*}$. Hence $\\mathcal G_i$, a set-indexed product of injectives, is injective by the product-of-injectives lemma.",
+   "text": "Apply exactness of abelian inverse image to each transition functor and the right-adjoint injective preservation theorem. Every factor R_t A_k is injective, so B_j and its binary product with A_j are injective.",
    "uses": [
+    "lem-weil-pbc-site-pullback-abelian-exact",
     "lem-sp-right-adjoint-preserves-injectives",
-    "lem-weil-pbc-product-injectives",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-product-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0EXZ proof, final sentence; Homology Tags 0137 and 015Z"
-   }
+   "elementary": false
   },
   {
-   "text": "For an arrow $a:j\\to i$, define $\\psi_a:f_a^{-1}\\mathcal G_i\\to\\mathcal G_j$ componentwise: the component indexed by $b:k\\to j$ is the canonical map from $f_a^{-1}f_{a\\circ b,*}\\mathcal A_k$ to $f_{b,*}\\mathcal A_k$, obtained from the composition identity for the inverse-image functors and the adjunctions. Reindexing by composition shows $\\psi_{a\\circ b}=\\psi_b\\circ f_b^{-1}\\psi_a$.",
+   "text": "Apply the product transition construction to obtain ψ and its cocycle and compatibility with γ_j=((1-e_j)i_j,d_j). The objects G_j and embeddings γ_j are the explicit products and lifts defined in the proof. The existential transition statement is used only to prove the existential target; no library definition chooses arbitrary data from it.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-colimit-system-product-transitions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0EXZ proof, displayed definition of psi_a"
-   }
+   "elementary": false
   },
   {
-   "text": "The maps $\\gamma_i$ form a map of systems by adjunction naturality and the cocycle identity $\\varphi_{a\\circ b}=\\varphi_b\\circ f_b^{-1}\\varphi_a$. The component indexed by $\\operatorname{id}_i:i\\to i$ is the chosen monomorphism $\\gamma_i^0$, so each $\\gamma_i$ is a monomorphism. Thus $(\\mathcal F_i,\\varphi_a)$ embeds into the system $(\\mathcal G_i,\\psi_a)$ of injective sheaves.",
+   "text": "Define r_j:G_j→A_j as first projection plus second projection followed by the identity-arrow projection and E_j at A_j. Product projection equations and naturality of E_j give γ_j r_j=(1-e_j)i_j+e_j i_j=i_j. Since i_j is mono, γ_j is mono by mono_of_mono_fac. Combine injectivity, monicity, cocycle and compatibility.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites",
     "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 0EXZ proof, concluding sentence"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lem-weil-pbc-colimit-of-sites",
-  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-pullback-abelian-exact",
   "lem-sp-right-adjoint-preserves-injectives",
-  "lem-weil-pbc-product-injectives"
+  "lem-weil-pbc-product-injectives",
+  "lem-weil-pbc-colimit-system-product-transitions",
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 0EXZ (lemma-colim-sites-injective)"
+  "place": "Tag 0EXZ; X3 Lean product construction with extra-factor correction for nonunital transitions"
  },
  "mathlib_searches": [
   {
@@ -165,5 +146,15 @@
   "group": "F1",
   "result": "pass",
   "note": "independent Codex review: Matched J = Iᵒᵖ, finite-cover sites and site-morphism hypotheses, abelian sheaves, adjunction-transposed transitions and cocycles, injective targets, monic embeddings, and system compatibility to the TeX node; earlier return repaired, node differs only in lean, and packet compile is clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T095932-L-327868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

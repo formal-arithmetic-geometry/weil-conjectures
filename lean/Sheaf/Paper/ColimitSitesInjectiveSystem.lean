@@ -7,6 +7,11 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.CategoryTheory.ColimitSystemProductTransitions
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Injective systems on a filtered colimit of sites
@@ -107,6 +112,58 @@ theorem exists_compatible_injective_system
             ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u}
               (P j).toGrothendieck (P k).toGrothendieck).map (γ k) =
           γ j ≫ ψ a) := by
-  sorry
+  classical
+  have _ := hfinite
+  let A := fun j ↦ Injective.under (Fs j)
+  let ι := fun j ↦ Injective.ι (Fs j)
+  let R := fun {j k : J} (a : j ⟶ k) ↦
+    (F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u}
+      (P j).toGrothendieck (P k).toGrothendieck
+  let E := fun j ↦ Functor.sheafPushforwardContinuousId'
+    (eqToIso (congrArg Cat.Hom.toFunctor (F.map_id j)))
+    AddCommGrpCat.{u} (P j).toGrothendieck
+  let B := fun j ↦ ∏ᶜ fun t : Σ k : J, j ⟶ k ↦ (R t.2).obj (A t.1)
+  let Gs := fun j ↦ A j ⨯ B j
+  let γ := fun j ↦ prod.lift
+    ((𝟙 (Fs j) - (φ (𝟙 j) ≫ (E j).hom.app (Fs j) : Fs j ⟶ Fs j)) ≫ ι j)
+    (Pi.lift fun t : Σ k : J, j ⟶ k ↦ φ t.2 ≫ (R t.2).map (ι t.1))
+  obtain ⟨ψ, hψ, hγ⟩ := exists_colimitSystem_product_transitions
+    F (fun j ↦ (P j).toGrothendieck) Fs φ hφ A ι
+  refine ⟨Gs, ψ, γ, ?_, ?_, hψ, hγ⟩
+  · intro j
+    have factors_injective (t : Σ k : J, j ⟶ k) : Injective ((R t.2).obj (A t.1)) := by
+      obtain ⟨_, hlim, _⟩ := sitePullback_abelian_exact
+        (P j) (P t.1) (F.map t.2).toFunctor
+        (hcover j t.1 t.2) (hpullback j t.1 t.2)
+      let := hlim
+      let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (F.map t.2).toFunctor AddCommGrpCat.{u}
+        (P j).toGrothendieck (P t.1).toGrothendieck
+      let := adj.preservesInjectiveObjects_of_preservesFiniteLimits
+      exact Functor.injective_obj (R t.2) (A t.1)
+    let := factors_injective
+    dsimp [Gs, B]
+    infer_instance
+  · intro j
+    let r : Gs j ⟶ A j := prod.fst +
+      prod.snd ≫ Pi.π (fun t : Σ k : J, j ⟶ k ↦ (R t.2).obj (A t.1)) ⟨j, 𝟙 j⟩ ≫
+        (E j).hom.app (A j)
+    have hr : γ j ≫ r = ι j := by
+      dsimp only [γ, r, Gs, B, A, R, ι]
+      rw [Preadditive.comp_add]
+      have hf : γ j ≫ (prod.fst : Gs j ⟶ A j) =
+          (𝟙 (Fs j) - (φ (𝟙 j) ≫ (E j).hom.app (Fs j) : Fs j ⟶ Fs j)) ≫ ι j := by
+        exact prod.lift_fst _ _
+      change γ j ≫ (prod.fst : Gs j ⟶ A j) +
+        (γ j ≫ prod.snd ≫ Pi.π _ ⟨j, 𝟙 j⟩ ≫
+          (E j).hom.app (A j) : Fs j ⟶ A j) = ι j
+      rw [hf]
+      dsimp only [γ]
+      rw [prod.lift_snd_assoc, Pi.lift_π_assoc]
+      rw [Category.assoc, (E j).hom.naturality (ι j)]
+      simp only [Preadditive.sub_comp, Category.id_comp, Category.assoc, Functor.id_map]
+      abel
+    have : Mono (ι j) := inferInstance
+    exact mono_of_mono_fac hr
 
 end CategoryTheory
