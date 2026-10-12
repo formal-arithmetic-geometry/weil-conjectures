@@ -1825,6 +1825,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Derived.AlgClosedField
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Biduality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClopenIdempotent
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ClosedImmersionUpperShriek
