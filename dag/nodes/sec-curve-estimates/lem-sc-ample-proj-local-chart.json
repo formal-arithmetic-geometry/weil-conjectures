@@ -52,9 +52,9 @@
    }
   },
   {
-   "text": "Fix a positive-degree homogeneous $s\\in S$ of degree $d>0$ with $X_s$ affine. Regard $s$ as a degree-one section of the invertible module $\\mathcal L^{\\otimes d}$. Applying [lem-sc-invert-s-cohomology] with $p=0$, $F=\\mathcal O_X$, and $\\mathcal L^{\\otimes d}$ gives an isomorphism $\\Gamma_*(X,\\mathcal L^{\\otimes d})_{(s)}\\xrightarrow{\\sim}\\Gamma(X_s,\\mathcal O_X)$ sending $\\xi/s^n$ to $s^{-n}\\xi$. The degree-zero part of the localization of the Veronese section ring $\\Gamma_*(X,\\mathcal L^{\\otimes d})$ at $s$ is the same ring $S_{(s)}$ (elementary reindexing of degrees), so this is $S_{(s)}\\xrightarrow{\\sim}\\Gamma(X_s,\\mathcal O_X)$.",
+   "text": "Apply lem-sc-section-ring-localization-bijective to the ring map Proj.awayToSection followed by f.app on the chart. The inverse-image identity and fraction formula of step 1 verify its hypotheses. Step 2 supplies compactness and quasi-separatedness. This gives bijectivity of the functions comparison without assuming affineness.",
    "uses": [
-    "lem-sc-invert-s-cohomology"
+    "lem-sc-section-ring-localization-bijective"
    ],
    "elementary": false,
    "source": {
@@ -63,12 +63,11 @@
    }
   },
   {
-   "text": "By [def-pc-proj], $D_+(s)=\\operatorname{Spec}(S_{(s)})$. By the additional clause of [lem-sc-ample-proj-canonical-map], the ring map induced by $f|_{X_s}:X_s\\to D_+(s)$ is exactly $S_{(s)}\\to\\Gamma(X_s,\\mathcal O_X)$, $\\xi/s^n\\mapsto s^{-n}\\xi$; hence it is an isomorphism by step 3.",
+   "text": "The Proj basic-open ring isomorphism identifies awayToSection with an isomorphism. Since its composite with f.app is bijective, this composite is an isomorphism of commutative rings. Cancel awayToSection to get that f.app is an isomorphism. The appTop of the restricted scheme morphism is f.app followed by the restriction along an equality of opens; this latter map is an isomorphism.",
    "uses": [
-    "def-pc-proj",
-    "lem-sc-ample-proj-canonical-map"
+    "def-pc-proj"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/properties.tex",
     "place": "Properties Lemma 01Q1, localization paragraph; Lemma 01PZ (3) and Constructions Lemma 01N8"
@@ -90,14 +89,14 @@
   "lem-sc-ample-proj-canonical-map",
   "def-weil-pbc-ample-invertible-module",
   "lem-weil-pbc-ample-scheme-separated",
-  "lem-sc-invert-s-cohomology",
+  "lem-sc-section-ring-localization-bijective",
   "def-pc-proj",
   "lem-sc-affine-global-sections-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties Lemmas 01PZ and 01Q1"
+  "place": "Lemmas 01PZ and 01Q1; localization steps split as lem-sc-section-ring-localization-bijective by R3 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -187,5 +186,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T184339-L-4018644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

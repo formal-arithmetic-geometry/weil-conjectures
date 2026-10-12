@@ -10,7 +10,8 @@ public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap
 import Sheaf.AlgebraicGeometry.AmpleSeparated
-import Sheaf.AlgebraicGeometry.InvertSCOhomology
+import Sheaf.AlgebraicGeometry.SectionRingLocalizationBijective
+import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 
 /-! # Affine charts of the canonical section-ring morphism
 
@@ -76,6 +77,43 @@ theorem exists_sectionRing_proj_affine_charts (X : Scheme.{u}) (L : X.Modules)
         (IsAmple X L → ∀ U : X.Opens,
           (U : Set X) = nonvanishingLocus (L.tensorPow d) (s.val d) → IsAffineOpen U →
           IsIso (f ∣_ Proj.basicOpen (sectionRingGrade L) s.val)) := by
-  sorry
+  obtain ⟨f, hf⟩ := exists_sectionRing_proj_morphism X L hcover
+  refine ⟨f, ?_⟩
+  intro d hd s
+  obtain ⟨hpre, hformula⟩ := hf d hd s
+  refine ⟨hpre, hformula, ?_⟩
+  intro hL U hU hAffine
+  have : CompactSpace X := hL.1
+  have : X.IsSeparated := isSeparated_of_isAmple X L hL
+  have hsource : IsAffineOpen (f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val) := by
+    have heq : f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val = U := by
+      apply SetLike.coe_injective
+      exact hpre.trans hU.symm
+    exact heq.symm ▸ hAffine
+  have hbij := sectionRing_localization_bijective X L d hd s
+    (f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val) hpre
+    (Proj.awayToSection (sectionRingGrade L) s.val ≫
+      f.app (Proj.basicOpen (sectionRingGrade L) s.val)) hformula
+  have haway : IsIso (Proj.awayToSection (sectionRingGrade L) s.val) := by
+    rw [← Proj.basicOpenIsoAway_hom (sectionRingGrade L) s.val s.property hd]
+    infer_instance
+  have hcomp : IsIso (Proj.awayToSection (sectionRingGrade L) s.val ≫
+      f.app (Proj.basicOpen (sectionRingGrade L) s.val)) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr hbij
+  have happ : IsIso (f.app (Proj.basicOpen (sectionRingGrade L) s.val)) := by
+    exact (isIso_comp_left_iff _ _).mp hcomp
+  have : IsAffine (f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val).toScheme := hsource
+  have : IsAffine (Proj.basicOpen (sectionRingGrade L) s.val).toScheme :=
+    Proj.isAffineOpen_basicOpen (sectionRingGrade L) s.val s.property hd
+  have : IsIso (f ∣_ Proj.basicOpen (sectionRingGrade L) s.val).appTop := by
+    rw [morphismRestrict_appTop]
+    have happ' (V : (Proj (sectionRingGrade L)).Opens)
+        (hV : V = Proj.basicOpen (sectionRingGrade L) s.val) : IsIso (f.app V) := by
+      subst V
+      exact happ
+    have := happ' _ (Scheme.Opens.ι_image_top _)
+    infer_instance
+  exact (HasAffineProperty.iff_of_isAffine
+    (P := MorphismProperty.isomorphisms Scheme)).mpr ⟨inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.Scheme.Modules
