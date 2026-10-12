@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-etale-object-sections-base-change",
+ "kind": "statement",
+ "title": "Compatibility of etale evaluation with a base-change unit",
+ "statement": "Let R, X and Y be schemes [def-pc-scheme], W→R an etale object [def-weil-pbc-etale-site], and H an abelian sheaf on Y [def-weil-pbc-abelian-etale-sheaves]. Let h:X→Y, f:Y→R, g:X→R satisfy g=h f. Put Vf=W×_R Y and Vg=W×_R X [def-pc-fibre-product], with etale projections p:Vf→Y and q:Vg→X. Let m:Vg→Vf preserve the W-projection and satisfy m p=q h. Define E_V:H(V)≅Γ(V,V^{-1}H) by identity-object evaluation, inverse-image/restriction comparison [lem-weil-pbc-etale-inverse-image-restriction], and terminal evaluation. Then the W-component of f_* of the h-unit followed by f_*h_*≅g_* [def-weil-pbc-direct-image], then E_Vg for h^{-1}H, equals E_Vf followed by global pullback along m and Γ of c_{m,p}^{-1} c_{q,h}; these are the explicitly specified upperStarComp components for common composite m p=q h [lem-weil-pbc-inverse-image-composition]. This is unit compatibility for arbitrary H, before any transport from h^{-1}f^{-1}G to g^{-1}G.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CF and 03EF, localization/unit compatibility; literature/stacks-project/etale-cohomology.tex Tag 03S2, restriction formula after Definition 03S3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Set Vf=W×_R Y, Vg=W×_R X, p=Vf→Y and q=Vg→X. Construct i:Vg→Vf×_Y X as the pullback lift of m and q. Construct its inverse from the projection Vf×_Y X→Vf→W and its projection to X. The universal property and hm, hm' and g=h f verify the two inverse identities. Thus the square (h,p,m,q) is cartesian.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply etale_restriction_pullback_unit with this i to H. Cancel its two invertible restriction comparisons, and compose with the terminal-evaluation/global-sections isomorphisms. The resulting outside components are exactly etaleObjectSectionsIso Vf and etaleObjectSectionsIso Vg.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-pullback-unit",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify theta with the inverse terminal pullback comparison by its two projections. Identify the composite h-unit and restriction along i with the W-component of lowerStar f of the unit followed by lowerStarComp, using the canonical pullback-pasting isomorphism. Move the composition comparison past terminal evaluation by naturality. These identifications give precisely the asserted equality of homomorphisms.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-restriction-pullback-unit",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "M3 second reader stage 3",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CF and 03EF, specialized to etale projections and terminal evaluation; explicit Lean coherence identifications described in the theorem docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"unit\", \"sections\"",
+   "results": "12 hits: SheafOfModules.pushforwardSections_unitHomEquiv, CategoryTheory.Over.toOverSectionsAdj_counit_app, CategoryTheory.Over.toOverSectionsAdj_unit_app, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso_inv_app_hom, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivUnitIso, TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso_hom_app_hom",
+   "date": "2026-10-12",
+   "verdict": "No exact match. The source etale_restriction_pullback_unit is the restriction-level input, without these terminal-evaluation/pasting identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of inverse image on an etale object agrees with the pullback of global sections on its cartesian base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.monObjAsOverPullback_one, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-12",
+   "verdict": "No exact match. The source etale_restriction_pullback_unit is the restriction-level input, without these terminal-evaluation/pasting identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale object V of Y and an arbitrary morphism X to Y, evaluation on V is compatible with the inverse-image adjunction unit and global-section pullback on the cartesian base change of V.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*(unit|sections)|(unit|sections).*localiz",
+   "sub": "CategoryTheory/Sites",
+   "results": "0 hits in Mathlib/CategoryTheory/Sites. Project rg found etale_restriction_pullback_unit, which is the restriction-level input, and the private sections_naturality, which supplies only global-pullback naturality. Neither states this evaluation/base-change equality.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; both project results are accounted for in the reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PullbackSectionsComparison",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pullback-sections-comparison",
+   "place": "proof step 2, evaluation/unit compatibility before inverse-image composition coherence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleObjectSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleObjectSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleObjectSections_baseChange",
+  "statement": "theorem etaleObjectSections_baseChange {R X Y : Scheme.{u}} (W : R.Etale)\n    (h : X ⟶ Y) (f : Y ⟶ R) (g : X ⟶ R) (w : g = h ≫ f)\n    (m : pullback W.hom g ⟶ pullback W.hom f)\n    (hm : m ≫ pullback.fst W.hom f = pullback.fst W.hom g)\n    (hm' : m ≫ pullback.snd W.hom f = pullback.snd W.hom g ≫ h)\n    (H : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    let A := AddCommGrpCat.{u + 1}\n    let Vf := (MorphismProperty.Over.pullback @Etale ⊤ f).obj W\n    let Vg := (MorphismProperty.Over.pullback @Etale ⊤ g).obj W\n    (((lowerStar A f).map ((upperStarLowerStarAdjunction A h).unit.app H) ≫\n        (lowerStarComp A h f g w).hom.app _).hom.app (op W)) ≫\n        (etaleObjectSectionsIso Vg).hom.app ((upperStar A h).obj H) =\n      (etaleObjectSectionsIso Vf).hom.app H ≫\n        globalSectionsUpperStarMap A m ((upperStar A Vf.hom).obj H) ≫\n        (Sheaf.Γ Vg.left.smallEtaleTopology A).map\n          ((upperStarComp A m Vf.hom (m ≫ Vf.hom) rfl).inv.app H ≫\n            (upperStarComp A Vg.hom h (m ≫ Vf.hom) hm').hom.app H)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-90728",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T135255-L-1678600",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-90728",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T135255-L-1678600",
+  "kind": "interface",
+  "note": "independent Codex review: Existing signatures and definition preserved; delivered Lean matches both nodes and reported decomposition; both modules and both direct importers compile cleanly; axioms are standard plus sorryAx only for the documented lower hole and its dependent theorem."
+ }
+}

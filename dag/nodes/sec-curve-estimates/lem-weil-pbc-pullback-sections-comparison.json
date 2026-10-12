@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the additive equivalence by evaluation of direct image on the base-changed etale object; its canonical identification with the localization of the identity object, the inverse of the etale restriction comparison, the terminal-evaluation/global-sections isomorphism, and the inverse-image composition isomorphism. This construction is implemented without sorry in pullbackSectionsEquiv.",
+   "text": "Keep the original explicit pullbackSectionsEquiv construction. The definitional helper pullbackSectionsEquiv_apply expresses it as etaleObjectSectionsIso followed by Γ of the inverse-image composition comparison.",
    "uses": [
     "def-weil-pbc-direct-image",
     "lem-weil-pbc-etale-inverse-image-restriction",
@@ -28,19 +28,18 @@
    "elementary": false
   },
   {
-   "text": "The two projection equations identify m with the canonical cartesian map. Apply the etale-restriction/pullback-unit identity to the square with h and the etale projection V_f to Y. It rewrites the unit on V_f-sections as the unit on global sections after restriction.",
+   "text": "Apply etaleObjectSections_baseChange to H=f^*G. Naturality of etaleObjectSectionsIso moves the final comparison h^*f^*G to g^*G through evaluation. This isolates the strictly smaller unit/evaluation compatibility from the remaining composition coherence.",
    "uses": [
-    "lem-weil-pbc-etale-restriction-pullback-unit",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-etale-object-sections-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "Move the source and target composition isomorphisms past the restriction comparisons by naturality. Move the source composition map past the pullback unit by unit naturality. The associativity law for inverse-image composition identifies the two resulting composites, using v_g = m v_f. Conjugating by terminal evaluation gives exactly e_g rho = sigma e_f.",
+   "text": "Apply the proved source component associativity lemma upperStarComp_hom_app_map_upperStarComp_inv_app to (q,h,f) and (m,p,f), with b=m p=q h. Cancel the adjacent comparison isomorphisms. Naturality of globalSectionsUpperStarMap, proved locally from unit naturality, sheaf-map naturality, and terminal evaluation naturality, moves the source comparison past global pullback. Evaluate the resulting equality of additive-group morphisms at s.",
    "uses": [
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-inverse-image"
+    "def-pc-fibre-product",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
   }
@@ -49,15 +48,14 @@
   "def-pc-fibre-product",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-derived-inverse-image-composition",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-restriction-pullback-unit",
+  "lem-weil-pbc-etale-object-sections-base-change",
   "lem-weil-pbc-inverse-image-composition"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "M3 second reader stage 3",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 03CF (lemma-localize-morphism) and 03EF (lemma-localize-morphism-strong), unit-side compatibility; restriction on the small etale site in etale-cohomology.tex Tag 03S2, paragraph after Definition 03S3.; specialization and comparison to the existing Lean interfaces by P1."
+  "place": "Tags 03CF and 03EF; specialize evaluation/unit compatibility and finish inverse-image composition coherence using existing proved component lemmas."
  },
  "mathlib_searches": [
   {
@@ -126,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "X-90728",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T044750-L-2038147",
+  "landing": "20261012T135255-L-1678600",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Existing signatures and definition preserved; delivered Lean matches both nodes and reported decomposition; both modules and both direct importers compile cleanly; axioms are standard plus sorryAx only for the documented lower hole and its dependent theorem."
  }
 }
