@@ -10,16 +10,53 @@
  },
  "proof": [
   {
-   "text": "Apply the unbounded affine sections comparison on affine opens and glue the resulting algebra-linear maps.",
+   "text": "Use scalar restriction T from f_*O_X to O_Y. Its composite with the underlying sheaf functor is definitionally unchanged; Mathlib reflection and preservation lemmas make T exact and conservative. The source-library exact-functor derived-composition isomorphism identifies Rg_* followed by RT with Rf_*; all comparisons are natural.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply affine higher-direct-image vanishing to quasi-coherent modules. Convert positive integer degrees to natural degrees and use bounded-below/unbounded single-object compatibility to obtain the hacyc hypothesis of the natural unbounded scheme-pushforward comparison.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For E=Q(I), homologyFunctorFactors transports hI to quasi-coherent derived cohomology. Lower truncation E prime at n also has quasi-coherent cohomology, by the source-library homologyProperty_truncGE theorem. The natural comparison from lem-sc-qcoh-acyclic-derived-pushforward-cohomology sends the lower-truncation projection to ordinary pushforward of its degree-n homology isomorphism. Hence its derived scheme pushforward is invertible on degree-n homology. Transport through the natural scalar-restriction comparison and use conservativity of T to prove that H^n(Rg_*(E -> E prime)) is invertible over f_*O_X.",
+   "uses": [
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module direct image is left exact: underlying module presheaves are precomposed with the inverse-image-open functor, which preserves limits. Supply enough injectives from lem-sc-ringed-space-module-sheaves-enough-injectives and apply the general left-exact bottom-cohomology comparison to E prime. Compose with the truncation isomorphism to obtain H^n(Rg_*E) isomorphic to g_*H^n(E).",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "new-qcoh-sections-left-exact-bottom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity quasi-isomorphism on the K-injective I computes Rg_*(Q(I)) as Q(g_*I), by derivedModuleDirectImage_computed_by_resolution. Apply homology and compose the two homologyFunctorFactors isomorphisms with the preceding comparison. Pair the resulting algebra-module isomorphism with True.intro.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-affine-morphism-hi",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "new-qcoh-sections-left-exact-bottom",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "affine sections calculation"
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraKInjectiveCohomologyComparison.lean",
+  "place": "P3 second reading: exact conservative scalar restriction, natural affine comparison, lower truncation and left-exact bottom cohomology; uses the existing Stacks 0AVW/08D4 route."
  },
  "mathlib_searches": [
   {
@@ -85,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T184243-L-3996684",
-  "kind": "interface",
+  "landing": "20261012T232903-L-2042895",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
