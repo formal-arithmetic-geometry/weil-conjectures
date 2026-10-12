@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceOverField
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection

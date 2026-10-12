@@ -18,6 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Seesaw
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.Slices
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 
 /-!
 # The cross ideal of `X × Y` and the twisted module on `X × Y × Z`

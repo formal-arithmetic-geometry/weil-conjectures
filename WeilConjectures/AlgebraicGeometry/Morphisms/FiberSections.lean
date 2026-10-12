@@ -22,6 +22,10 @@ global sections of the scheme-theoretic fibre `X_y = f.fiber y` is the base chan
   `Γ(Y, V) → Γ(X, f⁻¹ V), κ(y) → Γ(X_y, ⊤)` is a pushout.
 - `AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_tensorProduct_fiber`: the canonical map
   `κ(y) ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V) → Γ(X_y, ⊤)` is a ring isomorphism.
+- `AlgebraicGeometry.Scheme.Hom.isLocalization_stalk_pushforward`: `(f_* 𝒪_X)_y` is the
+  localization of `Γ(X, f⁻¹ V)` at `y`.
+- `AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_stalk_pushforward_tensorProduct_fiber`: the
+  canonical map `(f_* 𝒪_X)_y ⊗_{𝒪_{Y,y}} κ(y) → Γ(X_y, ⊤)` is a ring isomorphism.
 -/
 
 @[expose] public section
@@ -112,5 +116,131 @@ theorem Scheme.Hom.exists_ringEquiv_tensorProduct_fiber (f : X ⟶ Y) [IsAffineH
   refine ⟨e.commRingCatIsoToRingEquiv, fun a b ↦ ?_⟩
   rw [← mul_one a, ← one_mul b, ← Algebra.TensorProduct.tmul_mul_tmul, map_mul, mul_one, one_mul]
   exact congr($(hl).hom a * $(hr).hom b)
+
+/-- **Stalks of the pushforward of the structure sheaf.** Let `f : X ⟶ Y` be a morphism, `V ⊆ Y`
+an affine open with affine preimage `f⁻¹ V`, and `y ∈ V` corresponding to the prime `𝔭` of
+`Γ(Y, V)`. Then the stalk `(f_* 𝒪_X)_y` is the localization of `Γ(X, f⁻¹ V)` at the image of
+`Γ(Y, V) \ 𝔭`, through the germ map.
+
+(blueprint: `lem-pc-flf-properties`) -/
+theorem Scheme.Hom.isLocalization_stalk_pushforward (f : X ⟶ Y) {V : Y.Opens}
+    (hV : IsAffineOpen V) (hfV : IsAffineOpen (f ⁻¹ᵁ V)) (y : Y) (hy : y ∈ V) :
+    letI := (f.app V).hom.toAlgebra
+    letI : Algebra Γ(X, f ⁻¹ᵁ V) ((f.base _* X.presheaf).stalk y) :=
+      ((f.base _* X.presheaf).germ V y hy).hom.toAlgebra
+    IsLocalization (Algebra.algebraMapSubmonoid Γ(X, f ⁻¹ᵁ V)
+      (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl) ((f.base _* X.presheaf).stalk y) := by
+  let := (f.app V).hom.toAlgebra
+  let : Algebra Γ(X, f ⁻¹ᵁ V) ((f.base _* X.presheaf).stalk y) :=
+    ((f.base _* X.presheaf).germ V y hy).hom.toAlgebra
+  let := Y.presheaf.algebra_section_stalk ⟨y, hy⟩
+  have := hV.isLocalization_stalk ⟨y, hy⟩
+  have hM (g : Γ(Y, V)) :
+      g ∈ (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl ↔ y ∈ Y.basicOpen g := by
+    rw [← IsLocalization.AtPrime.isUnit_to_map_iff (Y.presheaf.stalk y), Y.mem_basicOpen _ y hy]
+    rfl
+  -- restriction to `f⁻¹ D(g)` is a localization, compatible with germs
+  let alg (g : Γ(Y, V)) : Algebra Γ(X, f ⁻¹ᵁ V) Γ(X, f ⁻¹ᵁ Y.basicOpen g) :=
+    (X.presheaf.map (homOfLE (f.preimage_mono (Y.basicOpen_le g))).op).hom.toAlgebra
+  have hloc (g : Γ(Y, V)) : @IsLocalization.Away _ _ (f.app V g) Γ(X, f ⁻¹ᵁ Y.basicOpen g) _
+      (alg g) :=
+    hfV.isLocalization_of_eq_basicOpen (f.app V g) _ (Scheme.preimage_basicOpen f g)
+  have hres {U W : Y.Opens} (i : U ⟶ W) (hU : y ∈ U) (s : Γ(X, f ⁻¹ᵁ W)) :
+      (f.base _* X.presheaf).germ U y hU (X.presheaf.map (homOfLE (f.preimage_mono i.le)).op s) =
+        (f.base _* X.presheaf).germ W y (i.le hU) s :=
+    (f.base _* X.presheaf).germ_res_apply i y hU s
+  rw [isLocalization_iff]
+  refine ⟨?_, fun s ↦ ?_, fun {b₁ b₂} h ↦ ?_⟩
+  · rintro ⟨_, g, hg, rfl⟩
+    have h₁ := ((Y.mem_basicOpen _ y hy).1 ((hM g).1 hg)).map
+      (ConcreteCategory.hom ((TopCat.Presheaf.stalkFunctor CommRingCat y).map f.c))
+    obtain ⟨u, hu⟩ := h₁
+    exact ⟨u, hu.trans (TopCat.Presheaf.stalkFunctor_map_germ_apply V y hy f.c g)⟩
+  · obtain ⟨U, hUV, hyU, t, rfl⟩ := (f.base _* X.presheaf).exists_le_germ_eq s hy
+    obtain ⟨g, hgU, hyg⟩ := hV.exists_basicOpen_le ⟨y, hyU⟩ hy
+    let := alg g
+    have := hloc g
+    obtain ⟨⟨b, _, n, rfl⟩, hb⟩ := IsLocalization.surj (Submonoid.powers (f.app V g))
+      (X.presheaf.map (homOfLE (f.preimage_mono hgU)).op t)
+    refine ⟨⟨b, f.app V g ^ n, g ^ n, pow_mem ((hM g).2 hyg) n, map_pow _ _ _⟩, ?_⟩
+    have key (c : Γ(X, f ⁻¹ᵁ V)) : (f.base _* X.presheaf).germ _ y hyg
+        (algebraMap _ Γ(X, f ⁻¹ᵁ Y.basicOpen g) c) = algebraMap _ _ c :=
+      hres (homOfLE (Y.basicOpen_le g)) hyg c
+    rw [← hres (homOfLE hgU) hyg, ← key, ← key, ← map_mul]
+    exact congrArg _ hb
+  · obtain ⟨W, hyW, i₁, i₂, e⟩ := (f.base _* X.presheaf).germ_eq y hy hy b₁ b₂ h
+    obtain ⟨g, hgW, hyg⟩ := hV.exists_basicOpen_le ⟨y, hyW⟩ hy
+    let := alg g
+    have := hloc g
+    have e' : algebraMap _ Γ(X, f ⁻¹ᵁ Y.basicOpen g) b₁ = algebraMap _ _ b₂ := by
+      have := congr((f.base _* X.presheaf).map (homOfLE hgW).op $e)
+      rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
+        ← Functor.map_comp] at this
+      exact this
+    obtain ⟨⟨_, n, rfl⟩, hc⟩ := IsLocalization.exists_of_eq (M := .powers (f.app V g)) e'
+    refine ⟨⟨f.app V g ^ n, g ^ n, pow_mem ((hM g).2 hyg) n, map_pow _ _ _⟩, hc⟩
+
+open TensorProduct in
+/-- **Fibres of an affine morphism via stalks.** For an affine morphism `f : X ⟶ Y` (e.g. `f`
+finite locally free) and `y ∈ Y`, the canonical map
+`(f_* 𝒪_X)_y ⊗_{𝒪_{Y,y}} κ(y) → Γ(X_y, 𝒪_{X_y})` is a ring isomorphism. On an affine open
+`V ∋ y` it sends `germ_y(b) ⊗ a` to `b|_{X_y} · a`; it is obtained from
+`AlgebraicGeometry.Scheme.Hom.exists_ringEquiv_tensorProduct_fiber`, since
+`(f_* 𝒪_X)_y = 𝒪_{Y,y} ⊗_{Γ(Y, V)} Γ(X, f⁻¹ V)`
+(`AlgebraicGeometry.Scheme.Hom.isLocalization_stalk_pushforward`).
+
+(blueprint: `lem-pc-flf-properties`) -/
+theorem Scheme.Hom.exists_ringEquiv_stalk_pushforward_tensorProduct_fiber (f : X ⟶ Y)
+    [IsAffineHom f] {V : Y.Opens} (hV : IsAffineOpen V) (y : Y) (hy : y ∈ V) :
+    letI : Algebra (Y.presheaf.stalk y) ((f.base _* X.presheaf).stalk y) :=
+      ((TopCat.Presheaf.stalkFunctor CommRingCat y).map f.c).hom.toAlgebra
+    letI := (Y.residue y).hom.toAlgebra
+    ∃ e : (f.base _* X.presheaf).stalk y ⊗[Y.presheaf.stalk y] Y.residueField y ≃+*
+        Γ(f.fiber y, ⊤),
+      ∀ (b : Γ(X, f ⁻¹ᵁ V)) (a : Y.residueField y),
+        e ((f.base _* X.presheaf).germ V y hy b ⊗ₜ a) =
+          (f.fiberι y).appLE (f ⁻¹ᵁ V) ⊤ (f.preimage_fiberι_preimage y V hy).ge b *
+            ((Scheme.ΓSpecIso _).inv ≫ (f.fiberToSpecResidueField y).appTop) a := by
+  let : Algebra (Y.presheaf.stalk y) ((f.base _* X.presheaf).stalk y) :=
+    ((TopCat.Presheaf.stalkFunctor CommRingCat y).map f.c).hom.toAlgebra
+  let := (Y.residue y).hom.toAlgebra
+  let := (f.app V).hom.toAlgebra
+  let : Algebra Γ(X, f ⁻¹ᵁ V) ((f.base _* X.presheaf).stalk y) :=
+    ((f.base _* X.presheaf).germ V y hy).hom.toAlgebra
+  let := Y.presheaf.algebra_section_stalk ⟨y, hy⟩
+  let := (Y.evaluation V y hy).hom.toAlgebra
+  let : Algebra Γ(Y, V) ((f.base _* X.presheaf).stalk y) :=
+    (f.app V ≫ (f.base _* X.presheaf).germ V y hy).hom.toAlgebra
+  have : IsScalarTower Γ(Y, V) Γ(X, f ⁻¹ᵁ V) ((f.base _* X.presheaf).stalk y) :=
+    .of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower Γ(Y, V) (Y.presheaf.stalk y) ((f.base _* X.presheaf).stalk y) :=
+    .of_algebraMap_eq fun g ↦ (TopCat.Presheaf.stalkFunctor_map_germ_apply V y hy f.c g).symm
+  have : IsScalarTower Γ(Y, V) (Y.presheaf.stalk y) (Y.residueField y) :=
+    .of_algebraMap_eq fun _ ↦ rfl
+  have := hV.isLocalization_stalk ⟨y, hy⟩
+  have := f.isLocalization_stalk_pushforward hV (hV.preimage f) y hy
+  have := (Algebra.isPushout_of_isLocalization (hV.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl
+    (Y.presheaf.stalk y) Γ(X, f ⁻¹ᵁ V) ((f.base _* X.presheaf).stalk y)).symm
+  obtain ⟨e₀, he₀⟩ := f.exists_ringEquiv_tensorProduct_fiber hV y hy
+  -- `(f_* 𝒪_X)_y ⊗ κ(y) ≅ κ(y) ⊗ (𝒪_{Y,y} ⊗ Γ(X, f⁻¹ V)) ≅ κ(y) ⊗ Γ(X, f⁻¹ V)`
+  let e₁ := Algebra.TensorProduct.comm (Y.presheaf.stalk y) ((f.base _* X.presheaf).stalk y)
+    (Y.residueField y)
+  let e₂ := Algebra.TensorProduct.congr
+    (AlgEquiv.refl (R := Y.presheaf.stalk y) (A₁ := Y.residueField y))
+    (Algebra.IsPushout.equiv Γ(Y, V) (Y.presheaf.stalk y) Γ(X, f ⁻¹ᵁ V)
+      ((f.base _* X.presheaf).stalk y)).symm
+  let e₃ := Algebra.TensorProduct.cancelBaseChange Γ(Y, V) (Y.presheaf.stalk y)
+    (Y.presheaf.stalk y) (Y.residueField y) Γ(X, f ⁻¹ᵁ V)
+  refine ⟨e₁.toRingEquiv.trans (e₂.toRingEquiv.trans (e₃.toRingEquiv.trans e₀)), fun b a ↦ ?_⟩
+  have h₁ : e₁ ((f.base _* X.presheaf).germ V y hy b ⊗ₜ a) =
+      a ⊗ₜ algebraMap Γ(X, f ⁻¹ᵁ V) ((f.base _* X.presheaf).stalk y) b :=
+    Algebra.TensorProduct.comm_tmul ..
+  have h₂ : e₂ (a ⊗ₜ algebraMap Γ(X, f ⁻¹ᵁ V) ((f.base _* X.presheaf).stalk y) b) =
+      a ⊗ₜ ((1 : Y.presheaf.stalk y) ⊗ₜ b) :=
+    congrArg (a ⊗ₜ ·) (Algebra.IsPushout.equiv_symm_algebraMap_right ..)
+  have h₃ : e₃ (a ⊗ₜ ((1 : Y.presheaf.stalk y) ⊗ₜ b)) = a ⊗ₜ b := by
+    simp only [e₃, Algebra.TensorProduct.cancelBaseChange_tmul, one_smul]
+  refine (congrArg e₀ ((congrArg e₃ ((congrArg e₂ h₁).trans h₂)).trans h₃)).trans ?_
+  rw [he₀, mul_comm]
 
 end AlgebraicGeometry

@@ -5,368 +5,307 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.IsSheafFor
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.CategoryTheory.Sites.IsSheafFor
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
-# Descending a representing object along a morphism
+# Descending a representing object
 
-Let `p : X ⟶ Y` be a morphism in a category with pullbacks, let `F` be a presheaf on `Over Y` and
-let `V` represent the restriction of `F` to `Over X`, so that `V` carries the canonical descent
-datum `CategoryTheory.Functor.RepresentableBy.overDescentDatum`. If `J` is an object over `Y`
-with `V ≅ J ×_Y X` through a morphism `q : V ⟶ J` which is invariant under the canonical
-transport, and if both `F` and the functor of points of `J` satisfy the sheaf condition for the
-base changes `T ×_Y X ⟶ T` of `p`, then `J` represents `F`
-(`CategoryTheory.Functor.RepresentableBy.exists_representableBy_of_isPullback`).
+Let `p : X ⟶ Y` be a morphism, `F` a presheaf on `Over Y`, and `V` an object over `X`
+representing the restriction of `F` to `Over X`. Let `V₀` be an object over `Y` with
+`V ≅ V₀ ×_Y X` through `q : V ⟶ V₀`, such that `q` is invariant under the canonical descent
+datum of `V`. If the base changes `T ×_Y X ⟶ T` of `p` are epimorphisms along which the points
+of `V₀` descend and for which `F` satisfies the sheaf condition, then `V₀` represents `F`.
 
-The representation is compatible with the one of `V`: a point `a` of `V` over `f : T ⟶ X` and
-its image `q ∘ a` in `J` correspond to the same element of `F`.
+## Main statements
+
+- `CategoryTheory.Functor.RepresentableBy.nonempty_representableBy_of_descent`.
 -/
 
 @[expose] public section
 
 universe w v u
 
-namespace CategoryTheory
+namespace CategoryTheory.Functor.RepresentableBy
 
 open Limits Opposite
 
-namespace Over
+variable {C : Type u} [Category.{v} C] [HasPullbacks C] {X Y : C} {p : X ⟶ Y}
+  {F : (Over Y)ᵒᵖ ⥤ Type w}
 
-variable {C : Type u} [Category.{v} C] {X Y : C} (p : X ⟶ Y)
+/-- The base change `T ×_Y X` of `p` along `T ⟶ Y`, as an object over `Y`. -/
+noncomputable abbrev descentCover (p : X ⟶ Y) (T : Over Y) : Over Y :=
+  Over.mk (pullback.snd T.hom p ≫ p)
 
-/-- The base change `T ×_Y X ⟶ T` of `p : X ⟶ Y` along an object `T` over `Y`, as a morphism in
-`Over Y` whose source is the image under `Over.map p` of `T ×_Y X` over `X`. -/
-noncomputable abbrev baseChangeπ [HasPullbacks C] (T : Over Y) :
-    (Over.map p).obj (Over.mk (pullback.snd T.hom p)) ⟶ T :=
+/-- The projection `T ×_Y X ⟶ T`, as a morphism over `Y`. -/
+noncomputable abbrev descentCoverπ (p : X ⟶ Y) (T : Over Y) : descentCover p T ⟶ T :=
   Over.homMk (pullback.fst T.hom p) pullback.condition
 
-end Over
+/-- The fibre product `(T ×_Y X) ×_T (T ×_Y X)`, as an object over `Y`. -/
+noncomputable abbrev descentCover₂ (p : X ⟶ Y) (T : Over Y) : Over Y :=
+  Over.mk (pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ pullback.fst T.hom p ≫
+    T.hom)
 
-namespace Functor.RepresentableBy
+/-- The two projections `(T ×_Y X) ×_T (T ×_Y X) ⟶ T ×_Y X`, as morphisms over `Y`. -/
+noncomputable abbrev descentCoverPr₁ (p : X ⟶ Y) (T : Over Y) :
+    descentCover₂ p T ⟶ descentCover p T :=
+  Over.homMk (pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p)) (by
+    simp only [Over.mk_hom]
+    rw [pullback.condition])
 
-variable {C : Type u} [Category.{v} C] {X Y : C} {p : X ⟶ Y} {F : (Over Y)ᵒᵖ ⥤ Type w}
-  {V : Over X} (r : ((Over.map p).op ⋙ F).RepresentableBy V)
-
-/-- The identity of `Z.left`, viewed as a morphism from `Z` to `Over.mk (g ≫ p)` when
-`Z.hom = g ≫ p`. -/
-abbrev overHomMkIdOfEq {Z : Over Y} {g : Z.left ⟶ X} (h : g ≫ p = Z.hom) :
-    Z ⟶ (Over.map p).obj (Over.mk g) :=
-  Over.homMk (𝟙 Z.left) (by simp [h])
-
-/-- The canonical transport only depends on the morphisms `f₁`, `f₂` and on the underlying
-morphism of the point, not on how they are written. -/
-lemma overTransport_left_congr {T : C} {f₁ f₂ f₁' f₂' : T ⟶ X} (h : f₁ ≫ p = f₂ ≫ p)
-    (h' : f₁' ≫ p = f₂' ≫ p) (e₁ : f₁ = f₁') (e₂ : f₂ = f₂') (a : Over.mk f₁ ⟶ V)
-    (a' : Over.mk f₁' ⟶ V) (ha : a.left = a'.left) :
-    (r.overTransport f₁ f₂ h a).left = (r.overTransport f₁' f₂' h' a').left := by
-  subst e₁ e₂
-  obtain rfl : a = a' := Over.OverMorphism.ext ha
-  rfl
-
-/-- The canonical transport along two equal morphisms is the identity. -/
-lemma overTransport_left_of_eq {T : C} {f₁ f₂ : T ⟶ X} (h : f₁ ≫ p = f₂ ≫ p) (e : f₁ = f₂)
-    (a : Over.mk f₁ ⟶ V) : (r.overTransport f₁ f₂ h a).left = a.left := by
-  subst e
-  rw [overTransport_self]
-
-/-- Two points `a₁`, `a₂` of `V` over `g₁`, `g₂ : Z ⟶ X`, with `g₁ ≫ p = g₂ ≫ p = Z.hom`, whose
-elements of `F(Z)` agree, are related by the canonical transport. -/
-lemma eq_overTransport_of_map_eq {Z : Over Y} {g₁ g₂ : Z.left ⟶ X} (hg₁ : g₁ ≫ p = Z.hom)
-    (hg₂ : g₂ ≫ p = Z.hom) (a₁ : Over.mk g₁ ⟶ V) (a₂ : Over.mk g₂ ⟶ V)
-    (ha : F.map (overHomMkIdOfEq hg₁).op (r.homEquiv a₁) =
-      F.map (overHomMkIdOfEq hg₂).op (r.homEquiv a₂)) :
-    a₂ = r.overTransport g₁ g₂ (hg₁.trans hg₂.symm) a₁ := by
-  let j : (Over.map p).obj (Over.mk g₂) ⟶ Z := Over.homMk (𝟙 Z.left) (by simp [hg₂])
-  have h₁ : j ≫ overHomMkIdOfEq hg₁ = overMapHomMkId g₁ g₂ (hg₁.trans hg₂.symm) := by
-    ext
-    simp [j]
-  have h₂ : j ≫ overHomMkIdOfEq hg₂ = 𝟙 _ := by
-    ext
-    simp [j]
-  rw [overTransport, ← h₁, op_comp, Functor.map_comp_apply, ha, ← Functor.map_comp_apply,
-    ← op_comp, h₂, op_id, Functor.map_id_apply]
-  exact (r.homEquiv.symm_apply_apply a₂).symm
-
-lemma overHomMkIdOfEq_comp_map_homMk {W : Over X} {Z : Over Y}
-    (i : Z ⟶ (Over.map p).obj W) :
-    overHomMkIdOfEq (g := i.left ≫ W.hom) (by rw [Category.assoc]; exact Over.w i) ≫
-      (Over.map p).map (Over.homMk i.left : Over.mk (i.left ≫ W.hom) ⟶ W) = i := by
-  ext
-  simp
-
-/-- If two morphisms `p₁ p₂ : Z ⟶ (Over.map p).obj W` pull the element of a point `b` of `V`
-over `W` back to the same element, then the two restrictions of `b` are related by the canonical
-transport. -/
-lemma overTransport_homMk_comp_of_map_eq {W : Over X} (b : W ⟶ V) {Z : Over Y}
-    (p₁ p₂ : Z ⟶ (Over.map p).obj W)
-    (hx : F.map p₁.op (r.homEquiv b) = F.map p₂.op (r.homEquiv b)) :
-    r.overTransport (p₁.left ≫ W.hom) (p₂.left ≫ W.hom)
-        (by rw [Category.assoc, Category.assoc]; exact (Over.w p₁).trans (Over.w p₂).symm)
-        ((Over.homMk p₁.left : Over.mk (p₁.left ≫ W.hom) ⟶ W) ≫ b) =
-      (Over.homMk p₂.left : Over.mk (p₂.left ≫ W.hom) ⟶ W) ≫ b := by
-  refine (r.eq_overTransport_of_map_eq (by rw [Category.assoc]; exact Over.w p₁)
-    (by rw [Category.assoc]; exact Over.w p₂) _ _ ?_).symm
-  rw [r.homEquiv_comp, r.homEquiv_comp]
-  simp only [Functor.comp_map, Functor.op_map, Quiver.Hom.unop_op]
-  erw [← Functor.map_comp_apply F, ← Functor.map_comp_apply F]
-  simp only [← op_comp,
-    overHomMkIdOfEq_comp_map_homMk]
-  exact hx
-
-/-- Conversely to `eq_overTransport_of_map_eq`, a point and its canonical transport have the same
-element of `F(Z)`. -/
-lemma map_overHomMkIdOfEq_overTransport {Z : Over Y} {g₁ g₂ : Z.left ⟶ X}
-    (hg₁ : g₁ ≫ p = Z.hom) (hg₂ : g₂ ≫ p = Z.hom) (a₁ : Over.mk g₁ ⟶ V) :
-    F.map (overHomMkIdOfEq hg₂).op
-        (r.homEquiv (r.overTransport g₁ g₂ (hg₁.trans hg₂.symm) a₁)) =
-      F.map (overHomMkIdOfEq hg₁).op (r.homEquiv a₁) := by
-  erw [homEquiv_overTransport]
-  erw [← Functor.map_comp_apply F]
-  have e : overHomMkIdOfEq hg₂ ≫ overMapHomMkId g₁ g₂ (hg₁.trans hg₂.symm) =
-      overHomMkIdOfEq hg₁ := by
-    ext
-    simp
-  rw [← op_comp, e]
-
-section Descent
-
-variable {J : Over Y} {q : V.left ⟶ J.left}
-
-/-- A point of `J` over `T` lifts to a point of `V ≅ J ×_Y X` over `T ×_Y X`. -/
-noncomputable def liftPoint [HasPullbacks C] (hq : IsPullback q V.hom J.hom p)
-    (T : Over Y) (b : T ⟶ J) :
-    Over.mk (pullback.snd T.hom p) ⟶ V :=
-  Over.homMk (hq.lift (pullback.fst T.hom p ≫ b.left) (pullback.snd T.hom p)
-    (by rw [Category.assoc, Over.w b, pullback.condition])) (by simp)
-
-@[reassoc (attr := simp)]
-lemma liftPoint_left_comp [HasPullbacks C] (hq : IsPullback q V.hom J.hom p)
-    (T : Over Y) (b : T ⟶ J) :
-    (liftPoint hq T b).left ≫ q = pullback.fst T.hom p ≫ b.left :=
-  hq.lift_fst _ _ _
+/-- The second projection of the fibre product, as a morphism over `Y`. -/
+noncomputable abbrev descentCoverPr₂ (p : X ⟶ Y) (T : Over Y) :
+    descentCover₂ p T ⟶ descentCover p T :=
+  Over.homMk (pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p)) (by
+    simp only [Over.mk_hom]
+    rw [pullback.condition_assoc, pullback.condition])
 
 
-/-- Two points of `V` over the same morphism with the same image in `J` are equal. -/
-lemma hom_ext_of_isPullback (hq : IsPullback q V.hom J.hom p) {T : C} {f : T ⟶ X}
-    {a a' : Over.mk f ⟶ V} (h : a.left ≫ q = a'.left ≫ q) : a = a' := by
-  ext
-  exact hq.hom_ext h (by rw [Over.w a, Over.w a'])
+variable {V : Over X} (r : ((Over.map p).op ⋙ F).RepresentableBy V) {V₀ : Over Y}
+  (q : V.left ⟶ V₀.left)
+  (hq : IsPullback q V.hom V₀.hom p)
+  (hinv : ∀ {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+    (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q)
 
-variable [HasPullbacks C]
-
-/-- The invariance of `q` under the canonical transport of `r`. -/
-def IsTransportInvariant (q : V.left ⟶ J.left) : Prop :=
-  ∀ {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
-    (r.overTransport f₁ f₂ h a).left ≫ q = a.left ≫ q
-
-/-- The image `q ∘ a` in `J` of the point `a` of `V` corresponding to the restriction of a section
-`s ∈ F(T)` to `T ×_Y X`. -/
-noncomputable def descendSection (q : V.left ⟶ J.left) (hq : IsPullback q V.hom J.hom p)
-    (T : Over Y) (s : F.obj (op T)) :
-    (Over.map p).obj (Over.mk (pullback.snd T.hom p)) ⟶ J :=
-  Over.homMk ((r.homEquiv.symm (F.map (Over.baseChangeπ p T).op s)).left ≫ q) (by
-    simp only [Over.map_obj_hom, Over.mk_hom, Category.assoc, hq.w]
-    rw [← Category.assoc, Over.w (r.homEquiv.symm (F.map (Over.baseChangeπ p T).op s))])
-
-variable {r}
-
-lemma compatible_homEquiv_liftPoint (hq : IsPullback q V.hom J.hom p)
-    (hinv : r.IsTransportInvariant q) (T : Over Y) (b : T ⟶ J) {Z : Over Y}
-    (p₁ p₂ : Z ⟶ (Over.map p).obj (Over.mk (pullback.snd T.hom p)))
-    (h : p₁ ≫ Over.baseChangeπ p T = p₂ ≫ Over.baseChangeπ p T) :
-    F.map p₁.op (r.homEquiv (liftPoint hq T b)) = F.map p₂.op (r.homEquiv (liftPoint hq T b)) := by
-  have hl : p₁.left ≫ pullback.fst T.hom p = p₂.left ≫ pullback.fst T.hom p :=
-    congrArg CommaMorphism.left h
-  let W : Over X := Over.mk (pullback.snd T.hom p)
-  let a (i : Z ⟶ (Over.map p).obj W) : Over.mk (i.left ≫ W.hom) ⟶ V :=
-    (Over.homMk i.left : Over.mk (i.left ≫ W.hom) ⟶ W) ≫ liftPoint hq T b
-  have hw (i : Z ⟶ (Over.map p).obj W) : (i.left ≫ W.hom) ≫ p = Z.hom := by
-    rw [Category.assoc]
-    exact Over.w i
-  have hF (i : Z ⟶ (Over.map p).obj W) :
-      F.map i.op (r.homEquiv (liftPoint hq T b)) =
-        F.map (overHomMkIdOfEq (hw i)).op (r.homEquiv (a i)) := by
-    rw [r.homEquiv_comp]
-    erw [← Functor.map_comp_apply F]
-    exact congrArg (fun φ ↦ F.map φ.op _) (overHomMkIdOfEq_comp_map_homMk i).symm
-  have ha : a p₂ = r.overTransport _ _ ((hw p₁).trans (hw p₂).symm) (a p₁) :=
-    hom_ext_of_isPullback hq (by
-      rw [hinv]
-      simp [a, W, reassoc_of% hl])
-  rw [hF, hF, ha, map_overHomMkIdOfEq_overTransport]
-
-lemma compatible_descendSection (hq : IsPullback q V.hom J.hom p)
-    (hinv : r.IsTransportInvariant q) (T : Over Y) (s : F.obj (op T)) {Z : Over Y}
-    (p₁ p₂ : Z ⟶ (Over.map p).obj (Over.mk (pullback.snd T.hom p)))
-    (h : p₁ ≫ Over.baseChangeπ p T = p₂ ≫ Over.baseChangeπ p T) :
-    p₁ ≫ r.descendSection q hq T s = p₂ ≫ r.descendSection q hq T s := by
-  let a := r.homEquiv.symm (F.map (Over.baseChangeπ p T).op s)
-  have hx : F.map p₁.op (r.homEquiv a) = F.map p₂.op (r.homEquiv a) := by
-    simp only [a, Equiv.apply_symm_apply]
-    erw [← Functor.map_comp_apply F, ← Functor.map_comp_apply F]
-    rw [← op_comp, ← op_comp, h]
-  have ht := r.overTransport_homMk_comp_of_map_eq a p₁ p₂ hx
-  have := congrArg (fun c ↦ c.left ≫ q) ht
-  rw [hinv] at this
-  ext
-  simpa [descendSection, a] using this
-
-/-- **A representing object descends.** Let `p : X ⟶ Y`, let `F` be a presheaf on `Over Y` and let
-`r` exhibit `V` as a representing object of the restriction of `F` to `Over X`. Let `J` be an
-object over `Y` and `q : V ⟶ J` exhibit `V` as `J ×_Y X`, invariant under the canonical
-transport of `r`. If `F` and the functor of points of `J` satisfy the sheaf condition for every
-base change `T ×_Y X ⟶ T` of `p`, then `J` represents `F`, compatibly with `r`: a point `a` of
-`V` over `f : T ⟶ X` and its image `q ∘ a` in `J` correspond to the same element of `F`. -/
-theorem exists_representableBy_of_isPullback (hq : IsPullback q V.hom J.hom p)
-    (hinv : r.IsTransportInvariant q)
-    (hF : ∀ T : Over Y, Presieve.IsSheafFor F (.singleton (Over.baseChangeπ p T)))
-    (hJ : ∀ T : Over Y, Presieve.IsSheafFor (yoneda.obj J) (.singleton (Over.baseChangeπ p T))) :
-    ∃ e : F.RepresentableBy J, ∀ {T : C} (f : T ⟶ X) (a : Over.mk f ⟶ V),
-      e.homEquiv (Over.homMk (a.left ≫ q) (by
-          rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl) :
-        Over.mk (f ≫ p) ⟶ J) = r.homEquiv a := by
-  have hψ (T : Over Y) (b : T ⟶ J) := Presieve.isSheafFor_singleton.1 (hF T)
-    (r.homEquiv (liftPoint hq T b)) (compatible_homEquiv_liftPoint hq hinv T b)
-  have hφ (T : Over Y) (s : F.obj (op T)) := Presieve.isSheafFor_singleton.1 (hJ T)
-    (r.descendSection q hq T s) (compatible_descendSection hq hinv T s)
-  let ψ (T : Over Y) (b : T ⟶ J) : F.obj (op T) := (hψ T b).exists.choose
-  let φ (T : Over Y) (s : F.obj (op T)) : T ⟶ J := (hφ T s).exists.choose
-  have hψs (T : Over Y) (b : T ⟶ J) :
-      F.map (Over.baseChangeπ p T).op (ψ T b) = r.homEquiv (liftPoint hq T b) :=
-    (hψ T b).exists.choose_spec
-  have hφs (T : Over Y) (s : F.obj (op T)) :
-      Over.baseChangeπ p T ≫ φ T s = r.descendSection q hq T s :=
-    (hφ T s).exists.choose_spec
-  have hψu (T : Over Y) (b : T ⟶ J) (y : F.obj (op T))
-      (hy : F.map (Over.baseChangeπ p T).op y = r.homEquiv (liftPoint hq T b)) : y = ψ T b :=
-    (hψ T b).unique hy (hψs T b)
-  have hφu (T : Over Y) (s : F.obj (op T)) (g : T ⟶ J)
-      (hg : Over.baseChangeπ p T ≫ g = r.descendSection q hq T s) : g = φ T s :=
-    (hφ T s).unique hg (hφs T s)
-  -- the two constructions are inverse to each other
-  have hlift (T : Over Y) (s : F.obj (op T)) :
-      liftPoint hq T (φ T s) = r.homEquiv.symm (F.map (Over.baseChangeπ p T).op s) :=
-    hom_ext_of_isPullback hq (by
-      rw [liftPoint_left_comp]
-      exact congrArg CommaMorphism.left (hφs T s))
-  have hφψ (T : Over Y) (b : T ⟶ J) : φ T (ψ T b) = b := by
-    refine (hφu T _ b ?_).symm
-    ext
-    simp only [descendSection, Over.comp_left, Over.homMk_left]
-    erw [hψs, Equiv.symm_apply_apply, liftPoint_left_comp]
-  have hψφ (T : Over Y) (s : F.obj (op T)) : ψ T (φ T s) = s :=
-    (hψu T _ s (by rw [hlift]; exact (r.homEquiv.apply_symm_apply _).symm)).symm
-  refine ⟨{ homEquiv := fun {T} ↦ ⟨ψ T, φ T, hφψ T, hψφ T⟩
-            homEquiv_comp := fun {T₁ T₂} g b ↦ ?_ }, fun {T} f a ↦ ?_⟩
-  · -- naturality
-    let h : Over.mk (pullback.snd T₁.hom p) ⟶ Over.mk (pullback.snd T₂.hom p) :=
-      Over.homMk (pullback.map _ _ _ _ g.left (𝟙 X) (𝟙 Y) (by simp) (by simp)) (by simp)
-    have e : Over.baseChangeπ p T₁ ≫ g = (Over.map p).map h ≫ Over.baseChangeπ p T₂ := by
-      ext
-      simp [h]
-    have e' : h ≫ liftPoint hq T₂ b = liftPoint hq T₁ (g ≫ b) :=
-      hom_ext_of_isPullback hq (by simp [h])
-    refine (hψu T₁ _ _ ?_).symm
-    erw [← Functor.map_comp_apply F]
-    rw [← op_comp, e, op_comp]
-    erw [Functor.map_comp_apply F]
-    erw [hψs]
-    rw [← e']
-    exact (r.homEquiv_comp h _).symm
-  · -- compatibility with `r`
-    let T₀ : Over Y := Over.mk (f ≫ p)
-    have hg₁ : (pullback.fst T₀.hom p ≫ f) ≫ p = pullback.snd T₀.hom p ≫ p := by
-      rw [Category.assoc]
-      exact pullback.condition
-    let a₁ : Over.mk (pullback.fst T₀.hom p ≫ f) ⟶ V :=
-      (Over.homMk (pullback.fst T₀.hom p) : Over.mk (pullback.fst T₀.hom p ≫ f) ⟶ Over.mk f) ≫ a
-    have hπ : Over.baseChangeπ p T₀ = overHomMkIdOfEq (Z := (Over.map p).obj
-        (Over.mk (pullback.snd T₀.hom p))) hg₁ ≫ (Over.map p).map
-          (Over.homMk (pullback.fst T₀.hom p) :
-            Over.mk (pullback.fst T₀.hom p ≫ f) ⟶ Over.mk f) := by
-      ext
-      simp
-    have hid : overHomMkIdOfEq (Z := (Over.map p).obj (Over.mk (pullback.snd T₀.hom p)))
-        (g := pullback.snd T₀.hom p) rfl = 𝟙 _ := by
-      ext
-      simp
-    have ht : liftPoint hq T₀ (Over.homMk (a.left ≫ q) (by
-          rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl) : Over.mk (f ≫ p) ⟶ J) =
-        r.overTransport _ _ (hg₁.trans rfl) a₁ :=
-      hom_ext_of_isPullback hq (by
-        rw [hinv, liftPoint_left_comp]
-        simp [a₁])
-    refine (hψu T₀ _ _ ?_).symm
-    have hm := r.map_overHomMkIdOfEq_overTransport
-      (Z := (Over.map p).obj (Over.mk (pullback.snd T₀.hom p)))
-      (g₁ := pullback.fst T₀.hom p ≫ f) (g₂ := pullback.snd T₀.hom p) hg₁ rfl a₁
-    rw [hid, op_id, Functor.map_id_apply, ← ht] at hm
-    erw [hm, r.homEquiv_comp]
-    rw [hπ, op_comp]
-    erw [Functor.map_comp_apply F]
+include hq hinv in
+/-- A point of `V` over `T ×_Y X` lies in the descent equaliser for `F` exactly when its image
+in `V₀` lies in the descent equaliser for `V₀`. -/
+lemma map_descentCoverPr_eq_iff (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) :
+    F.map (descentCoverPr₁ p T).op (r.homEquiv a) =
+        F.map (descentCoverPr₂ p T).op (r.homEquiv a) ↔
+      pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a.left ≫ q =
+        pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a.left ≫ q := by
+  let π := pullback.fst T.hom p
+  let s := pullback.snd T.hom p
+  let fst₂ := pullback.fst π π
+  let snd₂ := pullback.snd π π
+  have hc : π ≫ T.hom = s ≫ p := pullback.condition
+  have hc₂ : fst₂ ≫ π = snd₂ ≫ π := pullback.condition
+  have h : (fst₂ ≫ s) ≫ p = (snd₂ ≫ s) ≫ p := by
+    simp only [Category.assoc]
+    rw [← hc, ← Category.assoc, hc₂, Category.assoc]
+  let a₁ : Over.mk (fst₂ ≫ s) ⟶ V :=
+    (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) ≫ a
+  let a₂ : Over.mk (snd₂ ≫ s) ⟶ V :=
+    (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) ≫ a
+  have w₁ : 𝟙 _ ≫ (fst₂ ≫ s) ≫ p = fst₂ ≫ π ≫ T.hom := by
+    rw [Category.id_comp, Category.assoc, hc]
+  have w₂ : 𝟙 _ ≫ (snd₂ ≫ s) ≫ p = fst₂ ≫ π ≫ T.hom := by
+    rw [w₁.symm, Category.id_comp, Category.id_comp, h]
+  let e₁ : descentCover₂ p T ⟶ (Over.map p).obj (Over.mk (fst₂ ≫ s)) := Over.homMk (𝟙 _) w₁
+  let e₂ : descentCover₂ p T ⟶ (Over.map p).obj (Over.mk (snd₂ ≫ s)) := Over.homMk (𝟙 _) w₂
+  have he₂ : IsIso e₂ := ⟨Over.homMk (𝟙 _) (by
+      rw [Category.id_comp]
+      exact (Category.id_comp _).symm.trans w₂ |>.symm), by ext; simp [e₂],
+    by ext; simp [e₂]⟩
+  have hPr₁ : descentCoverPr₁ p T =
+      e₁ ≫ (Over.map p).map (Over.homMk (U := Over.mk (fst₂ ≫ s)) (V := Over.mk s) fst₂ rfl) := by
+    ext; simp [e₁, fst₂, π]
+  have hPr₂ : descentCoverPr₂ p T =
+      e₂ ≫ (Over.map p).map (Over.homMk (U := Over.mk (snd₂ ≫ s)) (V := Over.mk s) snd₂ rfl) := by
+    ext; simp [e₂, snd₂, π]
+  have he : e₁ = e₂ ≫ overMapHomMkId (fst₂ ≫ s) (snd₂ ≫ s) h := by
+    ext; simp [e₁, e₂]
+  have hF₁ : F.map (descentCoverPr₁ p T).op (r.homEquiv a) =
+      F.map e₂.op (r.homEquiv (r.overTransport _ _ h a₁)) := by
+    erw [homEquiv_overTransport]
+    rw [r.homEquiv_comp, hPr₁, he]
+    simp only [Functor.comp_map, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
     rfl
+  have hF₂ : F.map (descentCoverPr₂ p T).op (r.homEquiv a) = F.map e₂.op (r.homEquiv a₂) := by
+    rw [r.homEquiv_comp, hPr₂]
+    simp only [Functor.comp_map, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
+    rfl
+  have hinj : Function.Injective (F.map e₂.op) := by
+    have : IsIso (F.map e₂.op) := inferInstance
+    exact (isIso_iff_bijective _).1 this |>.1
+  rw [hF₁, hF₂, hinj.eq_iff, r.homEquiv.injective.eq_iff]
+  constructor
+  · intro hta
+    have := hinv _ _ h a₁
+    rw [hta] at this
+    simpa [a₁, a₂, fst₂, snd₂, π] using this.symm
+  · intro hla
+    refine Over.OverMorphism.ext (hq.hom_ext ?_ ?_)
+    · rw [hinv]
+      simpa [a₁, a₂, fst₂, snd₂, π] using hla
+    · simp only [Over.w]
 
-end Descent
+include hq hinv in
+/-- **Descending a representing object.** Let `V` represent the restriction of `F` to `Over X`,
+and let `q : V ⟶ V₀` exhibit `V` as `V₀ ×_Y X` compatibly with the canonical descent datum of
+`V`:
+```
+  V ---q---> V₀
+  |          |
+  v          v
+  X ---p---> Y
+```
+For `T` over `Y` consider the base change `π : T ×_Y X ⟶ T` of `p` and the two projections
+```
+                         pr₁
+  (T ×_Y X) ×_T (T ×_Y X) ====> T ×_Y X --π--> T
+                         pr₂
+```
+If every such `π` is an epimorphism along which the points of `V₀` descend (a point of `V₀` over
+`T ×_Y X` whose two pullbacks along `pr₁`, `pr₂` agree comes from `T`), and `F` satisfies the
+sheaf condition for the covering `π`, then `V₀` represents `F`. -/
+theorem exists_representableBy_of_descent
+    (hepi : ∀ T : Over Y, Epi (pullback.fst T.hom p))
+    (hV₀ : ∀ (T : Over Y) (a : pullback T.hom p ⟶ V₀.left),
+      pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a =
+        pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a →
+      ∃ b : T.left ⟶ V₀.left, pullback.fst T.hom p ≫ b = a)
+    (hF : ∀ T : Over Y, Presieve.IsSheafFor F (.singleton (descentCoverπ p T))) :
+    ∃ e : F.RepresentableBy V₀, ∀ (T : Over Y) (b : T ⟶ V₀),
+      F.map (descentCoverπ p T).op (e.homEquiv b) =
+        r.homEquiv (Over.homMk (hq.lift (pullback.fst T.hom p ≫ b.left) (pullback.snd T.hom p)
+          (by rw [Category.assoc, Over.w b, pullback.condition])) (hq.lift_snd _ _ _) :
+            Over.mk (pullback.snd T.hom p) ⟶ V) := by
+  have hFinj (T : Over Y) (x₁ x₂ : F.obj (op T))
+      (h : F.map (descentCoverπ p T).op x₁ = F.map (descentCoverπ p T).op x₂) : x₁ = x₂ :=
+    (Presieve.isSheafFor_singleton.1 (hF T) _ fun p₁ p₂ hp ↦ by
+      simp only [← Functor.map_comp_apply, ← op_comp, hp]).unique rfl h.symm
+  have hFglue (T : Over Y) (y : F.obj (op (descentCover p T)))
+      (hy : F.map (descentCoverPr₁ p T).op y = F.map (descentCoverPr₂ p T).op y) :
+      ∃ x, F.map (descentCoverπ p T).op x = y := by
+    refine (Presieve.isSheafFor_singleton.1 (hF T) y fun {Z} p₁ p₂ hp ↦ ?_).exists
+    let c : Z ⟶ descentCover₂ p T := Over.homMk (pullback.lift p₁.left p₂.left
+      (congrArg CommaMorphism.left hp)) (by
+        simp only [Over.mk_hom, pullback.lift_fst_assoc]
+        rw [pullback.condition, ← Category.assoc]
+        exact (Category.assoc _ _ _).trans (Over.w p₁))
+    have h₁ : p₁ = c ≫ descentCoverPr₁ p T := by
+      ext
+      simp [c]
+    have h₂ : p₂ = c ≫ descentCoverPr₂ p T := by
+      ext
+      simp [c]
+    rw [h₁, h₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply,
+      hy]
+  -- the point of `V` over `T ×_Y X` attached to a point `b` of `V₀` over `T`
+  let lift (T : Over Y) (b : T ⟶ V₀) : Over.mk (pullback.snd T.hom p) ⟶ V :=
+    Over.homMk (hq.lift (pullback.fst T.hom p ≫ b.left) (pullback.snd T.hom p) (by
+      rw [Category.assoc, Over.w b, pullback.condition])) (hq.lift_snd _ _ _)
+  have hlift (T : Over Y) (b : T ⟶ V₀) :
+      (lift T b).left ≫ q = pullback.fst T.hom p ≫ b.left := hq.lift_fst _ _ _
+  have hdesc (T : Over Y) (b : T ⟶ V₀) :
+      F.map (descentCoverPr₁ p T).op (r.homEquiv (lift T b)) =
+        F.map (descentCoverPr₂ p T).op (r.homEquiv (lift T b)) := by
+    rw [map_descentCoverPr_eq_iff r q hq hinv, hlift, ← Category.assoc, pullback.condition,
+      Category.assoc]
+  let toPt (T : Over Y) (y : F.obj (op (descentCover p T))) :
+      Over.mk (pullback.snd T.hom p) ⟶ V := r.homEquiv.symm y
+  -- the point of `V₀` over `T` attached to a section of `F` over `T`
+  have hpt (T : Over Y) (x : F.obj (op T)) : ∃ b : T ⟶ V₀,
+      (toPt T (F.map (descentCoverπ p T).op x)).left ≫ q =
+        pullback.fst T.hom p ≫ b.left := by
+    let a := toPt T (F.map (descentCoverπ p T).op x)
+    have ha : F.map (descentCoverPr₁ p T).op (r.homEquiv a) =
+        F.map (descentCoverPr₂ p T).op (r.homEquiv a) := by
+      have hpr : descentCoverPr₁ p T ≫ descentCoverπ p T =
+          descentCoverPr₂ p T ≫ descentCoverπ p T := by
+        ext
+        exact pullback.condition
+      simp only [a, toPt, Equiv.apply_symm_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
+        ← op_comp, hpr]
+    obtain ⟨b, hb⟩ := hV₀ T (a.left ≫ q) ((map_descentCoverPr_eq_iff r q hq hinv T a).1 ha)
+    have := hepi T
+    refine ⟨Over.homMk b ?_, hb.symm⟩
+    rw [← cancel_epi (pullback.fst T.hom p), ← Category.assoc, hb, Category.assoc, hq.w,
+      ← Category.assoc, Over.w a, pullback.condition]
+    rfl
+  choose Φ hΦ using hpt
+  have hlift_eq (T : Over Y) (a : Over.mk (pullback.snd T.hom p) ⟶ V) (b : T ⟶ V₀)
+      (hab : a.left ≫ q = pullback.fst T.hom p ≫ b.left) : a = lift T b := by
+    refine Over.OverMorphism.ext (hq.hom_ext ?_ ?_)
+    · rw [hab, hlift]
+    · rw [Over.w a, Over.w (lift T b)]
+  have hΦ_eq (T : Over Y) (x : F.obj (op T)) :
+      F.map (descentCoverπ p T).op x = r.homEquiv (lift T (Φ T x)) := by
+    rw [← hlift_eq T _ _ (hΦ T x)]
+    exact (Equiv.apply_symm_apply _ _).symm
+  refine ⟨{ homEquiv {T} := { toFun b := (hFglue T _ (hdesc T b)).choose
+                              invFun x := Φ T x
+                              left_inv b := ?_
+                              right_inv x := ?_ }
+            homEquiv_comp {T' T} c b := ?_ }, fun T b ↦ (hFglue T _ (hdesc T b)).choose_spec⟩
+  · have := hepi T
+    have h₁ := (hFglue T _ (hdesc T b)).choose_spec
+    refine Over.OverMorphism.ext ((cancel_epi (pullback.fst T.hom p)).1 ?_)
+    rw [← hΦ, h₁]
+    change (r.homEquiv.symm (r.homEquiv (lift T b))).left ≫ q = _
+    rw [Equiv.symm_apply_apply, hlift]
+  · apply hFinj
+    rw [(hFglue T _ (hdesc T (Φ T x))).choose_spec, hΦ_eq]
+  · apply hFinj
+    change F.map (descentCoverπ p T').op (hFglue T' _ (hdesc T' (c ≫ b))).choose =
+      F.map (descentCoverπ p T').op (F.map c.op (hFglue T _ (hdesc T b)).choose)
+    rw [(hFglue T' _ (hdesc T' (c ≫ b))).choose_spec, ← ConcreteCategory.comp_apply,
+      ← Functor.map_comp, ← op_comp]
+    let cc : Over.mk (pullback.snd T'.hom p) ⟶ Over.mk (pullback.snd T.hom p) :=
+      Over.homMk (pullback.map _ _ _ _ c.left (𝟙 X) (𝟙 Y) (by simp) (by simp))
+        ((pullback.lift_snd _ _ _).trans (Category.comp_id _))
+    have hcc : descentCoverπ p T' ≫ c = (Over.map p).map cc ≫ descentCoverπ p T := by
+      ext
+      simp only [Over.comp_left, Over.homMk_left, Over.map_map_left, cc]
+      exact (pullback.lift_fst _ _ _).symm
+    rw [hcc, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
+    erw [(hFglue T _ (hdesc T b)).choose_spec]
+    change _ = ((Over.map p).op ⋙ F).map cc.op (r.homEquiv (lift T b))
+    rw [← r.homEquiv_comp]
+    congr 1
+    refine (hlift_eq T' _ _ ?_).symm
+    simp only [Over.comp_left, Category.assoc, hlift, cc, Over.homMk_left]
+    rw [pullback.lift_fst_assoc, Category.assoc]
 
-section OverMapComp
+include hq hinv in
+/-- **Descending a representing object**, without the compatibility of
+`CategoryTheory.Functor.RepresentableBy.exists_representableBy_of_descent`. -/
+theorem nonempty_representableBy_of_descent
+    (hepi : ∀ T : Over Y, Epi (pullback.fst T.hom p))
+    (hV₀ : ∀ (T : Over Y) (a : pullback T.hom p ⟶ V₀.left),
+      pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a =
+        pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a →
+      ∃ b : T.left ⟶ V₀.left, pullback.fst T.hom p ≫ b = a)
+    (hF : ∀ T : Over Y, Presieve.IsSheafFor F (.singleton (descentCoverπ p T))) :
+    Nonempty (F.RepresentableBy V₀) :=
+  ⟨(exists_representableBy_of_descent r q hq hinv hepi hV₀ hF).choose⟩
 
-variable {C : Type u} [Category.{v} C] {X Y Z : C} {p : X ⟶ Y} {p' : Y ⟶ Z} {p'' : X ⟶ Z}
-  {G : (Over Z)ᵒᵖ ⥤ Type w} {V : Over X}
 
-/-- The identity of `T`, from `(T, (T.hom ≫ p) ≫ p')` to `(T, T.hom ≫ p'')`. -/
-abbrev overMapCompHom (hp : p ≫ p' = p'') (T : Over X) :
-    (Over.map p').obj ((Over.map p).obj T) ⟶ (Over.map p'').obj T :=
-  Over.homMk (𝟙 T.left) (by simp [← hp])
+omit [HasPullbacks C] in
+/-- **The sheaf condition for a single morphism transfers along `Over.map g`.** If `P` satisfies the
+sheaf condition for the image of `π : T' ⟶ T` under `Over.map g`, then `(Over.map g).op ⋙ P`
+satisfies it for `π`: an object over `X'` with a morphism to `(Over.map g).obj T'` is an
+object over `X`. -/
+lemma isSheafFor_singleton_overMap {X' : C} (g : X ⟶ X') {G : (Over X')ᵒᵖ ⥤ Type w}
+    {T T' : Over X} (π : T' ⟶ T)
+    (h : Presieve.IsSheafFor G (.singleton ((Over.map g).map π))) :
+    Presieve.IsSheafFor ((Over.map g).op ⋙ G) (.singleton π) := by
+  rw [Presieve.isSheafFor_singleton] at h ⊢
+  intro y hy
+  -- an object `Z'` over `X'` with a morphism `a` to `T'` is an object over `X`
+  let lift {Z' : Over X'} (a : Z' ⟶ (Over.map g).obj T') : Over X := Over.mk (a.left ≫ T'.hom)
+  let e {Z' : Over X'} (a : Z' ⟶ (Over.map g).obj T') : Z' ⟶ (Over.map g).obj (lift a) :=
+    Over.homMk (𝟙 _) (by simp [lift, ← Over.w a])
+  obtain ⟨x, hx, hxu⟩ := h y fun {Z'} p₁ p₂ hp ↦ by
+    have hl : p₂.left ≫ T'.hom = p₁.left ≫ T'.hom := by
+      rw [← Over.w π]
+      simpa using congrArg (fun φ ↦ φ.left ≫ T.hom) hp.symm
+    let q₁ : lift p₁ ⟶ T' := Over.homMk p₁.left rfl
+    let q₂ : lift p₁ ⟶ T' := Over.homMk p₂.left hl
+    have hq : q₁ ≫ π = q₂ ≫ π := by
+      ext
+      simpa [q₁, q₂] using congrArg CommaMorphism.left hp
+    have h₁ : p₁ = e p₁ ≫ (Over.map g).map q₁ := by
+      ext
+      simp [e, q₁]
+    have h₂ : p₂ = e p₁ ≫ (Over.map g).map q₂ := by
+      ext
+      simp [e, q₂]
+    rw [h₁, h₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply]
+    exact congrArg (G.map (e p₁).op) (hy q₁ q₂ hq)
+  exact ⟨x, hx, fun x' hx' ↦ hxu x' hx'⟩
 
-/-- The identity of `T`, from `(T, T.hom ≫ p'')` to `(T, (T.hom ≫ p) ≫ p')`. -/
-abbrev overMapCompInv (hp : p ≫ p' = p'') (T : Over X) :
-    (Over.map p'').obj T ⟶ (Over.map p').obj ((Over.map p).obj T) :=
-  Over.homMk (𝟙 T.left) (by simp [← hp])
-
-/-- A representing object of the restriction of `G` along `p'' = p ≫ p'` also represents the
-restriction in two steps, along `p'` and then along `p`. -/
-noncomputable def overMapComp (r : ((Over.map p'').op ⋙ G).RepresentableBy V) (hp : p ≫ p' = p'') :
-    ((Over.map p).op ⋙ (Over.map p').op ⋙ G).RepresentableBy V where
-  homEquiv {T} :=
-    { toFun a := G.map (overMapCompHom hp T).op (r.homEquiv a)
-      invFun x := r.homEquiv.symm (G.map (overMapCompInv hp T).op x)
-      left_inv a := by
-        dsimp only
-        rw [← Functor.map_comp_apply, ← op_comp]
-        rw [show overMapCompInv hp T ≫ overMapCompHom hp T = 𝟙 _ by ext; simp, op_id,
-          Functor.map_id_apply, Equiv.symm_apply_apply]
-      right_inv x := by
-        dsimp only
-        rw [Equiv.apply_symm_apply, ← Functor.map_comp_apply, ← op_comp]
-        rw [show overMapCompHom hp T ≫ overMapCompInv hp T = 𝟙 _ by ext; simp, op_id,
-          Functor.map_id_apply] }
-  homEquiv_comp {T T'} g b := by
-    simp only [Equiv.coe_fn_mk]
-    rw [r.homEquiv_comp]
-    erw [← Functor.map_comp_apply G, ← Functor.map_comp_apply G]
-    exact congrArg (fun φ ↦ G.map φ _) (Quiver.Hom.unop_inj (by ext; simp))
-
-lemma overMapComp_homEquiv (r : ((Over.map p'').op ⋙ G).RepresentableBy V) (hp : p ≫ p' = p'')
-    {T : Over X} (a : T ⟶ V) :
-    (r.overMapComp hp).homEquiv a = G.map (overMapCompHom hp T).op (r.homEquiv a) :=
-  rfl
-
-/-- The canonical transport of `overMapComp` is the canonical transport of the original
-representation. -/
-lemma overTransport_overMapComp (r : ((Over.map p'').op ⋙ G).RepresentableBy V)
-    (hp : p ≫ p' = p'') {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V) :
-    (r.overMapComp hp).overTransport f₁ f₂ h a =
-      r.overTransport f₁ f₂ (by rw [← hp, reassoc_of% h]) a := by
-  apply (r.overMapComp hp).homEquiv.injective
-  rw [homEquiv_overTransport, overMapComp_homEquiv, overMapComp_homEquiv]
-  erw [homEquiv_overTransport]
-  erw [← Functor.map_comp_apply G, ← Functor.map_comp_apply G]
-  exact congrArg (fun φ ↦ G.map φ _) (Quiver.Hom.unop_inj (by ext; simp))
-
-end OverMapComp
-
-end Functor.RepresentableBy
-
-end CategoryTheory
+end CategoryTheory.Functor.RepresentableBy

@@ -18,8 +18,9 @@ datum on a scheme `V` over `X` relative to `p`. Write `P = V ×_Y X`, with first
 `fst : P ⟶ V` and universal transport `φ = D.univ : P ⟶ V`. Two points `w, w'` of `V` are in the
 same *orbit* if `w = fst z` and `w' = φ z` for some point `z` of `P`.
 
-If every finite set of points of `V` lies in an affine open, then every point of `V` has an
-affine open neighbourhood which is invariant under `D` (Stacks 03JE, 0H8K). The proof:
+If every finite set of points of `V` lying over one point of `Y` lies in an affine open, then
+every point of `V` has an affine open neighbourhood which is invariant under `D` (Stacks 03JE,
+0H8K). The proof:
 
 1. For an open `T` of `V`, the set `S(T)` of points whose whole orbit lies in `T` is open (as
    `fst` is a closed map) and invariant (the orbit relation is transitive, by the cocycle
@@ -32,7 +33,8 @@ affine open neighbourhood which is invariant under `D` (Stacks 03JE, 0H8K). The 
 
 ## Main statements
 
-- `CategoryTheory.Over.DescentDatum.exists_isInvariant_isAffineOpen`: invariant affine
+- `CategoryTheory.Over.DescentDatum.exists_isInvariant_isAffineOpen_of_fibre`,
+  `CategoryTheory.Over.DescentDatum.exists_isInvariant_isAffineOpen`: invariant affine
   neighbourhoods.
 -/
 
@@ -98,7 +100,7 @@ lemma lift_fst_snd_univ {T : Scheme.{u}} (a b : T ⟶ Limits.pullback (V.hom ≫
     refine (congrArg (· ≫ D.univ) ?_).trans hab
     ext <;> simp [α]
   have e₃ := D.transport_left_eq _ _ (h₁₂.trans h₂₃) α
-  rw [← D.transport_transport _ _ _ h₁₂ h₂₃, D.transport_left_congr h₂₃ h₂₃ rfl rfl β _ e₂,
+  rw [← D.transport_transport _ _ _ h₁₂ h₂₃, D.transport_left_congr' h₂₃ h₂₃ rfl rfl β _ e₂,
     D.transport_left_eq] at e₃
   refine e₃.symm.trans ?_
   congr 1
@@ -141,13 +143,15 @@ lemma isOpen_setOf_forall_univ_mem [IsFinite p] {T : Set V.left} (hT : IsOpen T)
 
 /-- **Invariant affine neighbourhoods** (Stacks 03JE, 0H8K). Let `p : X ⟶ Y` be finite, flat and
 locally of finite presentation and `D` a descent datum on `V` relative to `p`. If every finite set
-of points of `V` lies in an affine open, then every point `v` of `V` has an affine open
-neighbourhood `U` which is invariant under `D` and lies over an affine open of `Y`.
+of points of `V` lying over one point of `Y` lies in an affine open (the hypothesis of Stacks
+0CCI), then every point `v` of `V` has an affine open neighbourhood `U` which is invariant under
+`D` and lies over an affine open of `Y`.
 
 (blueprint: `thm-pd-effective-descent`, a step of the proof) -/
-theorem exists_isInvariant_isAffineOpen [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
-    (D : DescentDatum p V)
-    (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)
+theorem exists_isInvariant_isAffineOpen_of_fibre [IsFinite p] [Flat p]
+    [LocallyOfFinitePresentation p] (D : DescentDatum p V)
+    (hV : ∀ (y : Y) (s : Set V.left), s.Finite → (∀ x ∈ s, (V.hom ≫ p) x = y) →
+      ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)
     (v : V.left) :
     ∃ U : V.left.Opens, v ∈ U ∧ D.IsInvariant U ∧ IsAffineOpen U ∧
       ∃ W : Y.Opens, IsAffineOpen W ∧ U ≤ (V.hom ≫ p) ⁻¹ᵁ W := by
@@ -156,7 +160,9 @@ theorem exists_isInvariant_isAffineOpen [IsFinite p] [Flat p] [LocallyOfFinitePr
   let O := D.univ '' (pullback.fst (V.hom ≫ p) p ⁻¹' {v})
   have hOfin : O.Finite :=
     ((pullback.fst (V.hom ≫ p) p).finite_preimage_singleton v).image _
-  obtain ⟨A, hA, hOA⟩ := hV O hOfin
+  obtain ⟨A, hA, hOA⟩ := hV ((V.hom ≫ p) v) O hOfin (by
+    rintro _ ⟨z, hz, rfl⟩
+    rw [D.univ_apply_hom_comp, Set.mem_singleton_iff.mp hz])
   let G : V.left.Opens := ⟨_, D.isOpen_setOf_forall_univ_mem (A ⊓ (V.hom ≫ p) ⁻¹ᵁ W).isOpen⟩
   have hGle : G ≤ A ⊓ (V.hom ≫ p) ⁻¹ᵁ W := fun w hw ↦ by
     obtain ⟨z, hz₁, hz₂⟩ := D.exists_fst_eq_univ_eq w
@@ -199,5 +205,19 @@ theorem exists_isInvariant_isAffineOpen [IsFinite p] [Flat p] [LocallyOfFinitePr
   exact ⟨V.left.basicOpen g, (key v).mpr fun z hz ↦ hOf ⟨z, hz, rfl⟩,
     D.isInvariant_of_forall_mem_iff _ _ key, (hA.basicOpen f).basicOpen g, W, hW,
     (V.left.basicOpen_le g).trans hfW⟩
+
+/-- **Invariant affine neighbourhoods** (Stacks 03JE, 0H8K). Let `p : X ⟶ Y` be finite, flat and
+locally of finite presentation and `D` a descent datum on `V` relative to `p`. If every finite set
+of points of `V` lies in an affine open, then every point `v` of `V` has an affine open
+neighbourhood `U` which is invariant under `D` and lies over an affine open of `Y`.
+
+(blueprint: `thm-pd-effective-descent`, a step of the proof) -/
+theorem exists_isInvariant_isAffineOpen [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
+    (D : DescentDatum p V)
+    (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)
+    (v : V.left) :
+    ∃ U : V.left.Opens, v ∈ U ∧ D.IsInvariant U ∧ IsAffineOpen U ∧
+      ∃ W : Y.Opens, IsAffineOpen W ∧ U ≤ (V.hom ≫ p) ⁻¹ᵁ W :=
+  D.exists_isInvariant_isAffineOpen_of_fibre (fun _ s hs _ ↦ hV s hs) v
 
 end CategoryTheory.Over.DescentDatum

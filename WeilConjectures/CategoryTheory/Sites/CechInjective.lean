@@ -14,11 +14,12 @@ public import WeilConjectures.CategoryTheory.Sites.CechFreeResolution
 # Čech complexes of injective presheaves
 
 Let `X` be an object of a category `C` and `U : ι → Over X` a family of objects over `X`
-(with `ι : Type v`). For a presheaf of abelian groups `P` on `C`, the Čech cochains of degree `n`
-of `(Over.forget X).op ⋙ P` with respect to `U` (Mathlib's `CategoryTheory.cechComplexFunctor`)
-are the morphisms `ℤ_𝔘[n] ⟶ P` from the free presheaf `CategoryTheory.Presheaf.cechFree U n`,
-compatibly with the differentials. As the complex `ℤ_𝔘[•]` is exact, the Čech complex of an
-injective presheaf is exact in positive degrees.
+(with `ι : Type w`). For a presheaf `P : Cᵒᵖ ⥤ AddCommGrpCat.{max v w}`, the Čech cochains of
+degree `n` of `(Over.forget X).op ⋙ P` with respect to `U` (Mathlib's
+`CategoryTheory.cechComplexFunctor`) are the morphisms `ℤ_𝔘[n] ⟶ P` from the
+free presheaf `CategoryTheory.Presheaf.cechFree U n`, compatibly with the differentials.
+As the complex `ℤ_𝔘[•]` is exact, the Čech complex of an injective presheaf is exact in
+positive degrees.
 
 ## Main definitions
 
@@ -34,21 +35,21 @@ injective presheaf is exact in positive degrees.
 
 @[expose] public section
 
-universe v u
+universe w v u
 
 open CategoryTheory Limits Opposite Simplicial
 
 namespace CategoryTheory.Presheaf
 
-variable {C : Type u} [Category.{v} C] {X : C} [HasFiniteProducts (Over X)] {ι : Type v}
-  (U : ι → Over X) (P : Cᵒᵖ ⥤ AddCommGrpCat.{v})
+variable {C : Type u} [Category.{v} C] {X : C} [HasFiniteProducts (Over X)] {ι : Type w}
+  (U : ι → Over X) (P : Cᵒᵖ ⥤ AddCommGrpCat.{max v w})
 
 /-- The factor `P(U (y 0) ×_X ⋯ ×_X U (y n))` of the Čech cochains of degree `n`. -/
-noncomputable abbrev cechFactor (n : ℕ) (y : Fin (n + 1) → ι) : AddCommGrpCat.{v} :=
+noncomputable abbrev cechFactor (n : ℕ) (y : Fin (n + 1) → ι) : AddCommGrpCat.{max v w} :=
   P.obj (op (cechNerveObj U y).left)
 
 /-- The Čech complex of `(Over.forget X).op ⋙ P` with respect to `U`. -/
-noncomputable abbrev cechOver : CochainComplex AddCommGrpCat.{v} ℕ :=
+noncomputable abbrev cechOver : CochainComplex AddCommGrpCat.{max v w} ℕ :=
   (cechComplexFunctor U).obj ((Over.forget X).op ⋙ P)
 
 lemma cechOver_X (n : ℕ) : (cechOver U P).X n = ∏ᶜ cechFactor U P n :=

@@ -18,6 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Gluing
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Neighbourhood
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 
 /-!
 # Effective descent for schemes
@@ -33,10 +34,18 @@ finite separable extension of the base field.
   free morphism, descent data on schemes in which every finite set of points lies in an affine open
   (for instance projective schemes over a field) are effective (blueprint
   `thm-pd-effective-descent`).
+- `CategoryTheory.Over.DescentDatum.isEffective_of_isClosedImmersion`: along a surjective finite
+  locally free morphism with affine source `X`, descent data on projective schemes over `X` are
+  effective (blueprint `thm-pd-effective-descent`).
 - `CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback`: compatible morphisms descend
   (blueprint `lem-pd-morphisms-descend`).
-- `CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`: compatible group scheme
-  structures descend (blueprint `lem-pd-group-scheme-descent`).
+- `CategoryTheory.Over.DescentDatum.existsUnique_grpObj_of_isPullback`: compatible group scheme
+  structures descend, uniquely (blueprint `lem-pd-group-scheme-descent`).
+- `CategoryTheory.Over.DescentDatum.exists_commGrpObj_of_isPullback`: compatible commutative group
+  scheme structures descend (blueprint `lem-pd-group-scheme-descent`).
+- `AlgebraicGeometry.locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback`:
+  finite type, smoothness, properness and connectedness descend along a field extension (blueprint
+  `thm-pd-fpqc-local-properties`).
 - `AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback`:
   properness, smoothness of relative dimension `n` and geometric integrality descend along a field
   extension (blueprint `thm-pd-fpqc-local-properties`).
@@ -71,6 +80,34 @@ theorem isEffective_of_isFinite [IsFinite p] [Flat p] [LocallyOfFinitePresentati
   obtain ⟨U, hv, hU, hUa, W, hW, hUW⟩ := D.exists_isInvariant_isAffineOpen hV v
   exact ⟨U, hU, hv, D.isEffective_restrict_of_isAffineOpen hU hUa hW hUW⟩
 
+/-- **Effective descent for projective schemes.** Let `p : X ⟶ Y` be a surjective finite locally
+free morphism with `X` affine, and let `V` be a scheme over `X` such that `V ⟶ X` is projective:
+there is a closed immersion `i : V ⟶ ℙ(α; X)`, with `α` finite, whose composition with the
+projection `ℙ(α; X) ⟶ X` is the structure morphism of `V`. Then every descent datum on `V`
+relative to `p` is effective.
+
+This is Stacks 0CCJ: finitely many points of `V` lie in an affine open (Stacks 01ZY,
+`exists_isAffineOpen_superset_of_isImmersion_of_isAffine`), which is the hypothesis of
+`isEffective_of_isFinite`. The blueprint states this for an arbitrary base; here `X`, hence the
+projective space `ℙ(α; X)`, is assumed affine, which covers the case of a finite extension of
+fields used for the Jacobian. The general case is
+`CategoryTheory.Over.DescentDatum.isEffective_of_isHProjective`.
+
+(blueprint: `thm-pd-effective-descent`) -/
+theorem isEffective_of_isClosedImmersion [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
+    [Surjective p] [IsAffine X] {V : Over X} {α : Type u} [Finite α] (i : V.left ⟶ ℙ(α; X))
+    [IsClosedImmersion i] (hi : i ≫ ℙ(α; X) ↘ X = V.hom) (D : Over.DescentDatum p V) :
+    D.IsEffective := by
+  have : CompactSpace ℙ(α; X) := QuasiCompact.compactSpace_of_compactSpace (ℙ(α; X) ↘ X)
+  have : CompactSpace V.left := QuasiCompact.compactSpace_of_compactSpace i
+  have : QuasiSeparated V.hom := by
+    rw [← hi]
+    infer_instance
+  have : QuasiSeparatedSpace V.left := quasiSeparatedSpace_of_quasiSeparated V.hom
+  exact D.isEffective_of_isFinite fun s hs ↦
+    exists_isAffineOpen_superset_of_isImmersion_of_isAffine i s hs
+
+
 /-- **Morphisms descend.** Let `p : X ⟶ Y` be faithfully flat and quasi-compact, and let `V`, `W`
 be schemes over `X` with descent data `D`, `E` that are effective, with descended schemes `V₀`,
 `W₀` over `Y` and projections `qV`, `qW`. Then every morphism `ψ : V ⟶ W` over `X` compatible with
@@ -103,22 +140,51 @@ theorem existsUnique_hom_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] 
   ext
   exact hu _ hψ₀.symm
 
-/-- The point `qV ∘ a` of `V₀` over `Y` induced by a point `a` of `V` over `f`, for a projection
-`qV : V ⟶ V₀` exhibiting `V` as the base change of `V₀` along `p`. -/
-abbrev descendPoint {V : Over X} {V₀ : Over Y} {qV : V.left ⟶ V₀.left}
-    (hqV : IsPullback qV V.hom V₀.hom p) {T : Scheme.{u}} {f : T ⟶ X} (a : Over.mk f ⟶ V) :
-    Over.mk (f ≫ p) ⟶ V₀ :=
-  Over.homMk (a.left ≫ qV) (by
-    simp only [Over.mk_hom, Category.assoc, hqV.w]
-    rw [← Category.assoc, Over.w a]
-    rfl)
-
 /-- **The descended scheme is a group scheme.** Let `p : X ⟶ Y` be faithfully flat and
 quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`, with descended
-scheme `V₀` and projection `qV`, and let `V` carry a commutative group scheme structure whose
-multiplication and unit are compatible with `D`. Then `V₀` carries a commutative group scheme
-structure over `Y` whose base change is the given one: `qV` maps products of points of `V` to
-products of points of `V₀`. Such a structure is unique, by the same token.
+scheme `V₀` and projection `qV`, and let `V` carry a group scheme structure whose multiplication
+and unit are compatible with `D`. Then `V₀` carries a unique group scheme structure over `Y`
+whose base change is the given one, in the sense that `qV` maps products of points of `V` to
+products of points of `V₀`.
+
+Existence comes from the Yoneda lemma applied to the invariant points of `V`; uniqueness from
+the injectivity of base change on morphisms (`liftPoint_injective`).
+
+(blueprint: `lem-pd-group-scheme-descent`) -/
+theorem existsUnique_grpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
+    [GrpObj V] (D : Over.DescentDatum p V) {V₀ : Over Y} (qV : V.left ⟶ V₀.left)
+    (hqV : IsPullback qV V.hom V₀.hom p)
+    (hDV : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+      (D.transport f₁ f₂ h a).left ≫ qV = a.left ≫ qV)
+    (hμ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a b : Over.mk f₁ ⟶ V),
+      D.transport f₁ f₂ h (lift a b ≫ μ[V]) =
+        lift (D.transport f₁ f₂ h a) (D.transport f₁ f₂ h b) ≫ μ[V])
+    (hη : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p),
+      D.transport f₁ f₂ h (toUnit _ ≫ η[V]) = toUnit _ ≫ η[V]) :
+    ∃! _ : GrpObj V₀, ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
+      descendPoint hqV (lift a b ≫ μ[V]) =
+        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
+  let G := GrpObj.ofRepresentableBy V₀ (D.descendedPresheaf hqV hDV hμ hη)
+    (D.descendedRepresentableBy hqV hDV hμ hη)
+  have hG {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V) :
+      descendPoint hqV (lift a b ≫ μ[V]) =
+        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
+    have hmul (x y : Over.mk (f ≫ p) ⟶ V₀) :
+        lift x y ≫ μ[V₀] = (D.homGroup hqV hDV hμ hη _).mul x y :=
+      (((D.descendedPresheaf hqV hDV hμ hη).map (lift x y).op).hom.map_mul
+        (fst V₀ V₀) (snd V₀ V₀)).trans
+        (congrArg₂ (D.homGroup hqV hDV hμ hη _).mul (lift_fst x y) (lift_snd x y))
+    exact (D.descendPoint_mul hqV hDV hμ hη a b).trans (hmul _ _).symm
+  exact ⟨G, hG, fun G' hG' ↦ GrpObj.ext_of_mul_eq
+    (mul_eq_of_descendPoint_mul hqV G'.toMonObj G.toMonObj hG' hG)⟩
+
+/-- **The descended scheme is a commutative group scheme.** Let `p : X ⟶ Y` be faithfully flat
+and quasi-compact, let `V` be a scheme over `X` with an effective descent datum `D`, with
+descended scheme `V₀` and projection `qV`, and let `V` carry a commutative group scheme structure
+whose multiplication and unit are compatible with `D`. Then `V₀` carries a commutative group
+scheme structure over `Y` whose base change is the given one: `qV` maps products of points of `V`
+to products of points of `V₀`. Such a structure is unique by
+`existsUnique_grpObj_of_isPullback`.
 
 (blueprint: `lem-pd-group-scheme-descent`) -/
 theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] {V : Over X}
@@ -134,15 +200,12 @@ theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p]
     ∃ _ : CommGrpObj V₀, ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
       descendPoint hqV (lift a b ≫ μ[V]) =
         lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
-  let := CommGrpObj.ofRepresentableBy V₀ (D.descendedPresheaf hqV hDV hμ hη)
-    (D.descendedRepresentableBy hqV hDV hμ hη)
-  refine ⟨this, fun f a b ↦ ?_⟩
-  have hmul (x y : Over.mk (f ≫ p) ⟶ V₀) :
-      lift x y ≫ μ[V₀] = (D.homCommGroup hqV hDV hμ hη _).mul x y :=
-    (((D.descendedPresheaf hqV hDV hμ hη).map (lift x y).op).hom.map_mul
-      (fst V₀ V₀) (snd V₀ V₀)).trans
-      (congrArg₂ (D.homCommGroup hqV hDV hμ hη _).mul (lift_fst x y) (lift_snd x y))
-  exact (D.descendPoint'_mul hqV hDV hμ hη a b).trans (hmul _ _).symm
+  obtain ⟨G, hG, -⟩ := D.existsUnique_grpObj_of_isPullback qV hqV hDV hμ hη
+  have : IsCommMonObj V₀ := (isCommMonObj_iff_isMulCommutative V₀).2 fun T ↦
+    ⟨⟨fun x y ↦ liftPoint_injective hqV (by
+      rw [liftPoint_mul_of_descendPoint_mul hqV hG, liftPoint_mul_of_descendPoint_mul hqV hG,
+        mul_comm])⟩⟩
+  exact ⟨{ }, hG⟩
 
 end CategoryTheory.Over.DescentDatum
 
@@ -170,5 +233,26 @@ theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback {
     [IsProper z'] [SmoothOfRelativeDimension n z'] [GeometricallyIntegral z'] :
     IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z :=
   isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux z z' q h n
+
+/-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
+field extension and let `Z` be a scheme over `k` whose base change `Z_K` is smooth (in particular
+locally of finite type) and proper over `K`, and connected. Then `Z` is of finite type, smooth and
+proper over `k`, and connected.
+
+This is the statement of the blueprint, where `K / k` is finite; finiteness is not needed.
+Smoothness, being locally of finite type and properness descend along the faithfully flat
+quasi-compact morphism `Spec K ⟶ Spec k` (Stacks 02KL, 05B5, 02YJ), and `Z` is connected as the
+image of `Z_K` under the surjection `Z_K ⟶ Z`.
+
+(blueprint: `thm-pd-fpqc-local-properties`) -/
+theorem locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback
+    {k K : Type u} [Field k] [Field K] [Algebra k K] {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k))
+    (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)
+    (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K)))) [Smooth z']
+    [IsProper z'] [ConnectedSpace Z'] :
+    LocallyOfFiniteType z ∧ QuasiCompact z ∧ Smooth z ∧ IsProper z ∧ ConnectedSpace Z := by
+  have : IsProper z := of_isPullback_Spec_map_algebraMap @IsProper h ‹_›
+  exact ⟨inferInstance, inferInstance, of_isPullback_Spec_map_algebraMap @Smooth h ‹_›, this,
+    connectedSpace_of_isPullback_Spec_map_algebraMap h⟩
 
 end AlgebraicGeometry

@@ -55,10 +55,11 @@ The blueprint states `IA` for injective sheaves of `𝐅_r`-modules and one prim
 time, and reaches a general torsion coefficient ring by dévissage: `𝐅_r`-modules, then
 `n`-torsion sheaves by induction on the number of prime factors of `n`, then all torsion
 sheaves as a filtered colimit. The sheaf-level dévissage is
-`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage`; its extension to complexes
-with torsion cohomology is not formalised. Accordingly the equivalence below is stated for a
-coefficient ring `Λ` which is torsion as an additive group — the case `Λ = ℤ/ℓⁿℤ` of the
-`ℓ`-adic formalism — where every sheaf of `Λ`-modules is torsion and no dévissage is needed.
+`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage`, and the passage from the
+rings `Λ ⧸ pΛ` to `Λ` is in `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients`.
+The equivalence below is stated for a coefficient ring `Λ` which is torsion as an additive
+group — the case `Λ = ℤ/ℓⁿℤ` of the `ℓ`-adic formalism — where every sheaf of
+`Λ`-modules is torsion and no dévissage is needed.
 
 ## Proof of the equivalence
 
@@ -84,8 +85,6 @@ is the termwise underived base change map `g^* f_* I ⟶ f'_* g'^* I`, an isomor
   proper morphism `f` and a torsion coefficient ring.
 - `AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`:
   `PBC(f) ↔ IA(f)` for a proper morphism `f` and a torsion coefficient ring.
-- `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity`:
-  `IA(f) ⇒ PBC(f)` for a proper morphism `f` and an arbitrary coefficient ring.
 
 ## References
 
@@ -130,8 +129,8 @@ imposed on `g`, and none on `f`: the proper base change theorem says that `PBC(f
 whenever `f` is proper.
 
 This is the restriction to torsion cohomology of `AlgebraicGeometry.Etale.IsBaseChangeIso`,
-which is the declaration realising the blueprint's `def:weil-pbc-property`; see the module
-docstring. -/
+which is the declaration realising the blueprint's `def-weil-pbc-property`; see the module
+docstring. (blueprint: `sk-def-pbc`) -/
 def Etale.HasTorsionBaseChange (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
@@ -183,7 +182,8 @@ For a torsion `Λ` — the case in which the two properties are compared below �
 This is the form in which the proper base change theorem is actually proved: it is a
 vanishing statement about a single sheaf, it composes, it cancels along proper surjections,
 and it can be checked on geometric stalks.
-(blueprint: `def:weil-pbc-injective-acyclicity-property`) -/
+(blueprint: `sk-def-ia`, `def-weil-pbc-injective-acyclicity-property`; the property `IA_r(f)`
+of the latter is the case `Λ = 𝐅_r`, where every sheaf is torsion) -/
 def Etale.HasInjectiveAcyclicity (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (_sq : IsPullback g' f' f g)
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), IsTorsionSheaf I → Injective I →
@@ -230,21 +230,22 @@ lemma Etale.HasInjectiveAcyclicity.rightAcyclic {f : X ⟶ Y} (hf : Etale.HasInj
     ((f')_*[ModuleCat.{u + 1} Λ].homologyRightDerivedFunctorPlusObjSingleFunctorIso
       ((g')^*[ModuleCat.{u + 1} Λ].obj I) (q + 1)).symm
 
-/-- **`IA ⇒ PBC` for a torsion coefficient ring**: if `Λ` is torsion as an additive group and
-`f` is proper with injective acyclicity, then the derived base change map is an isomorphism on
-all of `D⁺(X_ét, Λ)`. Represent `K` by a bounded below complex `I` of injectives. The
-derived base change map at `I` is computed by the underived base change map
-`g^* f_* I ⟶ f'_* g'^* I`, which is a termwise isomorphism since `f` is proper
-(`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isProper`), followed by the unit
-`f'_* g'^* I ⟶ Rf'_*(g'^* I)`, which is an isomorphism because the terms of `g'^* I` are
-`f'_*`-acyclic by injective acyclicity
+/-- **`IA ⇒ PBC` given the underived exchange**: if `Λ` is torsion as an additive group, `f` has
+injective acyclicity, and the underived base change map `g^* f_* ⟶ f'_* g'^*` is an isomorphism
+for every cartesian square over `f`, then the derived base change map is an isomorphism on all
+of `D⁺(X_ét, Λ)`. Represent `K` by a bounded below complex `I` of injectives. The derived base
+change map at `I` is computed by the underived base change map `g^* f_* I ⟶ f'_* g'^* I`, a
+termwise isomorphism by hypothesis, followed by the unit `f'_* g'^* I ⟶ Rf'_*(g'^* I)`, which is
+an isomorphism because the terms of `g'^* I` are `f'_*`-acyclic by injective acyclicity
 (`CategoryTheory.Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic`).
 (blueprint: `lemma-weil-pbc-property-iff-acyclicity`) -/
-theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
-    [IsProper f] (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f := by
+theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap
+    (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
+    (hex : ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄
+      (sq : IsPullback g' f' f g), IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq))
+    (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f := by
   intro Y' X' g f' g' sq K _
-  have : IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-    Etale.isIso_baseChangeMap_of_isProper Λ sq
+  have : IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := hex sq
   obtain ⟨n, hn⟩ := K.2
   have : K.IsGE n := (K.isGE_ι_obj_iff n).1 hn
   obtain ⟨L, _, ⟨e⟩⟩ := DerivedCategory.Plus.exists_injective_nonempty_iso K n
@@ -276,6 +277,18 @@ theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange (hΛ : IsAddTorsion Λ
   exact IsIso.of_isIso_comp_left (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
       ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P)) _
 
+/-- **`IA ⇒ PBC` for a proper morphism and a torsion coefficient ring**: if `Λ` is torsion as an
+additive group and `f` is proper with injective acyclicity, then the derived base change map is
+an isomorphism on all of `D⁺(X_ét, Λ)`. This is
+`AlgebraicGeometry.Etale.HasInjectiveAcyclicity.hasTorsionBaseChange_of_isIso_baseChangeMap`, the
+underived base change map being an isomorphism since `f` is proper
+(`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isProper`).
+(blueprint: `lemma-weil-pbc-property-iff-acyclicity`) -/
+theorem Etale.HasInjectiveAcyclicity.hasTorsionBaseChange (hΛ : IsAddTorsion Λ) (f : X ⟶ Y)
+    [IsProper f] (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f :=
+  hf.hasTorsionBaseChange_of_isIso_baseChangeMap Λ hΛ f fun _ _ _ _ _ sq ↦
+    Etale.isIso_baseChangeMap_of_isProper Λ sq
+
 /-- **The base change property is injective acyclicity**: for a proper morphism `f : X ⟶ Y`
 and a coefficient ring `Λ` which is torsion as an additive group, the two properties of the
 preceding definitions agree. That is, for every cartesian square
@@ -305,21 +318,5 @@ theorem Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity (hΛ : IsAddTorsio
     Etale.HasTorsionBaseChange Λ f ↔ Etale.HasInjectiveAcyclicity Λ f :=
   ⟨Etale.HasTorsionBaseChange.hasInjectiveAcyclicity Λ f,
     Etale.HasInjectiveAcyclicity.hasTorsionBaseChange Λ hΛ f⟩
-
-/-- **Injective acyclicity implies the base change property**, over an arbitrary coefficient
-ring: if a proper morphism `f : X ⟶ Y` has injective acyclicity, then it satisfies the base
-change property for torsion coefficients. This is the converse direction of
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity` without the
-hypothesis that `Λ` be torsion: an object of `D⁺` with torsion cohomology is reached from
-the sheaves of `𝐅_r`-modules by the coefficient dévissage described in the module docstring
-(prime-torsion sheaves, then `n`-torsion sheaves by induction on the number of prime factors
-of `n`, then all torsion sheaves as filtered colimits), and for a sheaf of `𝐅_r`-modules one
-resolves by injectives, which stay `f'_*`-acyclic after base change by `IA(f)`, and compares
-termwise by the underived exchange morphism of the proper morphism `f`.
-(blueprint: `lemma-weil-pbc-property-iff-acyclicity`) -/
-@[stacks 0A4B]
-theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity (f : X ⟶ Y) [IsProper f]
-    (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f :=
-  sorry
 
 end AlgebraicGeometry

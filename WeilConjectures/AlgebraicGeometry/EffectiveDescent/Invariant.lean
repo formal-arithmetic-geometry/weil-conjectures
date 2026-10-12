@@ -150,7 +150,7 @@ noncomputable def restrict (U : V.left.Opens) (hU : D.IsInvariant U) :
   transport_transport f₁ f₂ f₃ h₁₂ h₂₃ a := by
     refine Over.OverMorphism.ext ((cancel_mono U.ι).mp ?_)
     refine (restrictTransportHom_left_ι hU _ _ _ _).trans ?_
-    refine (D.transport_left_congr h₂₃ h₂₃ rfl rfl
+    refine (D.transport_left_congr' h₂₃ h₂₃ rfl rfl
       (D.transport f₁ f₂ h₁₂ (Over.homMk (a.left ≫ U.ι) (by simpa using Over.w a))) _
       (restrictTransportHom_left_ι hU f₁ f₂ h₁₂ a)).trans ?_
     rw [D.transport_transport, restrictTransportHom_left_ι]

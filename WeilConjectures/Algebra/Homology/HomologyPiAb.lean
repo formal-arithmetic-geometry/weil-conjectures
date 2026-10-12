@@ -28,7 +28,7 @@ and a family of boundaries of the factors is a boundary of the product.
 
 @[expose] public section
 
-universe u
+universe w u
 
 open CategoryTheory Limits
 
@@ -73,7 +73,7 @@ lemma ab_homologyπ_surjective (i : ι) : Function.Surjective (M.homologyπ i) :
 lemma ab_iCycles_injective (i : ι) : Function.Injective (M.iCycles i) :=
   (AddCommGrpCat.mono_iff_injective _).1 inferInstance
 
-variable {κ : Type u} (K : κ → HomologicalComplex AddCommGrpCat.{u} c)
+variable {κ : Type w} (K : κ → HomologicalComplex AddCommGrpCat.{max u w} c)
 
 lemma ab_pi_X_ext (i : ι) {x x' : (∏ᶜ K).X i}
     (h : ∀ j, (Pi.π K j).f i x = (Pi.π K j).f i x') : x = x' := by
@@ -90,16 +90,16 @@ lemma ab_pi_X_exists (i : ι) (y : ∀ j, (K j).X i) :
     (AddCommGrpCat.epi_iff_surjective _).1 inferInstance
   obtain ⟨x, hx⟩ := hsurj ((Concrete.productEquiv _).symm y)
   refine ⟨x, fun j ↦ ?_⟩
-  have := congrArg (Pi.π (fun b ↦ (eval AddCommGrpCat.{u} c i).obj (K b)) j) hx
+  have := congrArg (Pi.π (fun b ↦ (eval AddCommGrpCat.{max u w} c i).obj (K b)) j) hx
   erw [Concrete.productEquiv_symm_apply_π] at this
   rw [← ConcreteCategory.comp_apply, piComparison_comp_π] at this
   exact this
 
 lemma ab_bijective_piComparison_homologyFunctor (i : ι) :
-    Function.Bijective (piComparison (homologyFunctor AddCommGrpCat.{u} c i) K) := by
-  have hπ (j : κ) (h : (homologyFunctor AddCommGrpCat.{u} c i).obj (∏ᶜ K)) :
-      Pi.π (fun b ↦ (homologyFunctor AddCommGrpCat.{u} c i).obj (K b)) j
-        (piComparison (homologyFunctor AddCommGrpCat.{u} c i) K h) =
+    Function.Bijective (piComparison (homologyFunctor AddCommGrpCat.{max u w} c i) K) := by
+  have hπ (j : κ) (h : (homologyFunctor AddCommGrpCat.{max u w} c i).obj (∏ᶜ K)) :
+      Pi.π (fun b ↦ (homologyFunctor AddCommGrpCat.{max u w} c i).obj (K b)) j
+        (piComparison (homologyFunctor AddCommGrpCat.{max u w} c i) K h) =
         homologyMap (Pi.π K j) i h := by
     rw [← ConcreteCategory.comp_apply, piComparison_comp_π]
     rfl
@@ -131,7 +131,7 @@ lemma ab_bijective_piComparison_homologyFunctor (i : ι) :
       _ = _ := by rw [hy, hi]
   · intro w
     have (j : κ) := ab_homologyπ_surjective _ i
-      (Pi.π (fun b ↦ (homologyFunctor AddCommGrpCat.{u} c i).obj (K b)) j w)
+      (Pi.π (fun b ↦ (homologyFunctor AddCommGrpCat.{max u w} c i).obj (K b)) j w)
     choose z hz using this
     obtain ⟨X, hX⟩ := ab_pi_X_exists K i fun j ↦ (K j).iCycles i (z j)
     obtain ⟨Z, hZ⟩ := ab_exists_iCycles_eq _ i X (ab_pi_X_ext K _ fun j ↦ by
@@ -145,14 +145,15 @@ lemma ab_bijective_piComparison_homologyFunctor (i : ι) :
     apply ab_iCycles_injective
     rw [hi, hZ, hX]
 
-instance (i : ι) : PreservesLimit (Discrete.functor K) (homologyFunctor AddCommGrpCat.{u} c i) :=
-  have : IsIso (piComparison (homologyFunctor AddCommGrpCat.{u} c i) K) :=
+instance (i : ι) :
+    PreservesLimit (Discrete.functor K) (homologyFunctor AddCommGrpCat.{max u w} c i) :=
+  have : IsIso (piComparison (homologyFunctor AddCommGrpCat.{max u w} c i) K) :=
     (ConcreteCategory.isIso_iff_bijective _).2 (ab_bijective_piComparison_homologyFunctor K i)
   PreservesProduct.of_iso_comparison _ _
 
 /-- **Homology commutes with products of complexes of abelian groups.** -/
 instance preservesLimitsOfShape_discrete_homologyFunctor_ab (i : ι) :
-    PreservesLimitsOfShape (Discrete κ) (homologyFunctor AddCommGrpCat.{u} c i) :=
+    PreservesLimitsOfShape (Discrete κ) (homologyFunctor AddCommGrpCat.{max u w} c i) :=
   preservesLimitsOfShape_of_discrete _
 
 end HomologicalComplex

@@ -155,12 +155,13 @@ lemma _root_.SheafOfModules.IsInvertible.fromSkeleton_toSkeleton (M : Y.Modules)
     [M.IsInvertible] : ((fromSkeleton Y.Modules).obj (toSkeleton M)).IsInvertible :=
   SheafOfModules.IsInvertible.of_iso.{u, u, u} (fromSkeletonToSkeletonIso M).symm
 
--- TODO(unify): sk-def-av-pic
--- The blueprint home of the Picard group of a scheme is the abelian-varieties block, so this
--- may need unifying with that block's version later.
 variable (Y) in
 /-- The Picard group of a scheme `Y`: the set of isomorphism classes of invertible sheaves
 of `𝒪_Y`-modules, realized as the invertible classes inside the skeleton of `Y.Modules`.
+Its group law, induced by the tensor product with the dual as inverse, is
+`AlgebraicGeometry.Scheme.Pic.instCommGroup`.
+
+(blueprint: `def-sc-picard-group`, `sk-def-av-pic`)
 
 This lives in `Type (u + 1)` rather than `Type u`; see the implementation notes of this
 module. -/

@@ -17,6 +17,8 @@ all its fibres are smooth over the residue fields.
 
 - `AlgebraicGeometry.smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField`:
   the fibrewise criterion for smoothness.
+- `AlgebraicGeometry.smooth_iff_flat_and_smooth_fiber`: the same criterion for `f` locally of
+  finite presentation.
 - `AlgebraicGeometry.Scheme.Hom.fiberι_mem_smoothLocus`: the pointwise fibrewise criterion: a
   flat morphism, locally of finite presentation, is smooth at every point at which its fibre is
   smooth.
@@ -58,6 +60,17 @@ theorem smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueFie
   ⟨fun _ ↦ ⟨inferInstance, inferInstance, fun _ ↦
     inferInstanceAs (Smooth (Limits.pullback.snd _ _))⟩,
     fun ⟨_, _, h⟩ ↦ .of_smooth_fiberToSpecResidueField f h⟩
+
+/-- **Smoothness versus flatness.** A morphism `f : X ⟶ Y` locally of finite presentation is
+smooth if and only if it is flat and every fibre `X_y ⟶ Spec κ(y)` is smooth.
+
+(blueprint: `lem-pc-smooth-characterization`) -/
+@[stacks 01V8]
+theorem smooth_iff_flat_and_smooth_fiber {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [LocallyOfFinitePresentation f] :
+    Smooth f ↔ Flat f ∧ ∀ y, Smooth (f.fiberToSpecResidueField y) := by
+  rw [smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField]
+  exact ⟨fun ⟨h₁, _, h₃⟩ ↦ ⟨h₁, h₃⟩, fun ⟨h₁, h₃⟩ ↦ ⟨h₁, ‹_›, h₃⟩⟩
 
 /-- The fibres of a morphism locally of finite presentation are locally of finite
 presentation. -/

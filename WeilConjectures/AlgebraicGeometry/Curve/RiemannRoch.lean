@@ -182,6 +182,20 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
     IsIso.inv_eq_of_hom_inv_id]
   rw [← Category.assoc, Hom.toImage_imageι, hx]
 
+/-- **Duals of invertible modules.** For an invertible `𝒪_X`-module `M`, the dual `Mᵛ` is
+invertible, the evaluation `ev : M ⊗ Mᵛ ⟶ 𝒪_X`, `x ⊗ φ ↦ φ(x)`, is an isomorphism, and the
+canonical biduality morphism `M ⟶ Mᵛᵛ` is an isomorphism.
+
+(blueprint: `lem-sc-invertible-dual`) -/
+theorem Modules.isInvertible_dual_and_isIso_dualEvaluation_and_isIso_bidual {X : Scheme.{u}}
+    (M : X.Modules) [M.IsInvertible] :
+    Mᵛ.IsInvertible ∧ IsIso (Modules.dualEvaluation M) ∧
+      IsIso (SheafOfModules.bidual (R := X.sheaf) M) := by
+  have := Modules.IsInvertible.sheafOfModules_isInvertible M
+  have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} M :=
+    SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+  exact ⟨inferInstance, inferInstance, SheafOfModules.isIso_bidual (R := X.sheaf) M⟩
+
 end Sections
 
 
@@ -914,6 +928,75 @@ theorem serreDuality_zero [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
     f.unop.hom x
   rw [Modules.H.zeroLinearEquiv_map]
   exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
+
+/-- **Serre duality in dimension `0`, with the trace formula.** Let `X` be smooth and proper of
+relative dimension `0` over `k`, so `X = Spec A` with `A = Γ(X, ⊤)` finite étale over `k`. There
+is an isomorphism `e : (ℱ ↦ H^0(X, ℱ)^∨) ≅ (ℱ ↦ H^0(X, ℱᵛ))` of contravariant functors on finite
+locally free `ℱ` whose inverse is the trace pairing: a global section `x` of `ℱᵛ`, i.e. a
+morphism `ℱ ⟶ 𝒪_X`, is sent to the functional `m ↦ Tr_{A/k}(x(m))` on `H^0(X, ℱ)`. That is,
+the duality morphism `t_X : H^0(X, 𝒪_X) = A → k` is the trace `Tr_{A/k}`.
+
+(blueprint: `sk-thm-picard-duality`, case `n = 0`) -/
+theorem exists_serreDuality_zero_iso_trace [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
+    [IsProper (X ↘ Spec (.of k))] :
+    letI := (globalSectionsRingHom k (X := X)).toAlgebra
+    ∃ e : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
+        (Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅
+      (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
+        Modules.cohomologyFunctor k 0,
+      ∀ (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategoryᵒᵖ)
+        (x : Modules.H (ℱ.unop.obj : X.Modules)ᵛ 0)
+        (m : Modules.H (ℱ.unop.obj : X.Modules) 0),
+        DFunLike.coe (F := Module.Dual k (Modules.H (ℱ.unop.obj : X.Modules) 0))
+          ((e.inv.app ℱ).hom x) m =
+        Algebra.trace k Γ(X, ⊤) ((Modules.homObjHZeroAddEquiv ℱ.unop.obj
+          (SheafOfModules.unit _) x).app ⊤ (Modules.H.zeroLinearEquiv ℱ.unop.obj m)) := by
+  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
+  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
+  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
+  have hX : (globalSectionsRingHom k (X := X)).Etale := by
+    have h := (HasRingHomProperty.iff_of_isAffine (P := @Etale)
+      (f := X ↘ Spec (.of k))).mp inferInstance
+    rw [globalSectionsRingHom, CommRingCat.hom_comp]
+    exact RingHom.Etale.stableUnderComposition _ _
+      (.of_bijective (ConcreteCategory.bijective_of_isIso _)) h
+  have he (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory) :=
+    have : ℱ.obj.IsFiniteLocallyFree := ℱ.property
+    have : ℱ.obj.IsQuasicoherent := inferInstance
+    exists_linearEquiv_dual_H_zero_of_etale hX ℱ.obj
+  choose e he using he
+  refine ⟨(NatIso.ofComponents (fun ℱ ↦ (e ℱ.unop).toModuleIso) fun {ℱ 𝒢} f ↦ ?_).symm,
+    fun ℱ x m ↦ ?_⟩
+  · ext x
+    refine LinearMap.ext fun m ↦ ?_
+    change e 𝒢.unop (Modules.H.map (Modules.dualMap f.unop.hom) 0 x) m =
+      e ℱ.unop x (Modules.H.map f.unop.hom 0 m)
+    let := (globalSectionsRingHom k (X := X)).toAlgebra
+    refine (he 𝒢.unop _ m).trans (Eq.trans (congrArg (Algebra.trace k Γ(X, ⊤)) ?_)
+      (he ℱ.unop x _).symm)
+    have h := Modules.homObjHZeroAddEquiv_map (N := SheafOfModules.unit X.ringCatSheaf)
+      f.unop.hom x
+    rw [Modules.H.zeroLinearEquiv_map]
+    exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
+  · exact he ℱ.unop x m
+
+/-- **Serre duality in dimension `0`, positive degrees.** Let `X` be smooth and proper of
+relative dimension `0` over `k`, so `X` is affine (finite étale over `k`). Then for every finite
+locally free `ℱ` and every `q > 0`, both sides of Serre duality vanish:
+`H^q(X, ℱ) = 0` and `H^q(X, ℱᵛ) = 0` (here `ω_X = 𝒪_X`, so `ℱᵛ ⊗ ω_X ≅ ℱᵛ`).
+
+(blueprint: `sk-thm-picard-duality`, case `n = 0`) -/
+theorem subsingleton_H_and_dual_of_smoothOfRelativeDimension_zero
+    [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] {q : ℕ} (hq : 0 < q) :
+    Subsingleton (ℱ.H q) ∧ Subsingleton (ℱᵛ.H q) := by
+  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
+  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
+  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
+  have : ℱᵛ.IsFiniteLocallyFree := Modules.IsFiniteLocallyFree.dual ℱ
+  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hq.ne'
+  exact ⟨Modules.subsingleton_H_succ_of_isAffine ℱ q,
+    Modules.subsingleton_H_succ_of_isAffine ℱᵛ q⟩
 
 /-- **`h⁰(Ω¹) = h¹(𝒪_X)`.** On a smooth proper curve over `k`,
 `dim_k H⁰(X, Ω¹_{X/k}) = dim_k H¹(X, 𝒪_X)`. -/

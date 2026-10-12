@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
@@ -136,7 +137,9 @@ theorem bijective_cohomologyMap_zero_of_henselianRing {A : Type u} [CommRing A] 
     [HenselianRing A I] (G : Sheaf (Spec (.of A)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
     Function.Bijective
       (cohomologyMap (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) G 0) :=
-  sorry
+  (bijective_cohomologyMap_zero_iff _ G).2
+    ((isIso_globalSectionsUpperStarMap_iff_bijective_pullSection _ G).2
+      (bijective_pullSection_of_henselianRing I (𝟙 _) _ (𝟙 _) IsPullback.of_id_snd G))
 
 end Auxiliary
 

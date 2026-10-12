@@ -208,7 +208,7 @@ theorem nonempty [SmoothOfRelativeDimension 1 p] : Nonempty (JacobianTorsionDatu
   have : GeometricallyConnected (C ↘ Spec (.of K)) := .of_geometricallyIrreducible p
   have : SmoothOfRelativeDimension 1 (C ↘ Spec (.of K)) := ‹SmoothOfRelativeDimension 1 p›
   have : IsProper (C ↘ Spec (.of K)) := ‹IsProper p›
-  obtain ⟨J₀, _, r, hP, hS, hG, -, -, e₀, he⟩ := exists_jacobian_descent K (AlgebraicClosure K)
+  obtain ⟨J₀, _, r, hP, hS, hG, -, -, e₀, -, he⟩ := exists_jacobian_descent K (AlgebraicClosure K)
     (AlgebraicClosure K) C _ rfl p.geometricFiber p.geometricFiberProj
     (IsPullback.of_hasPullback _ _)
   have : Smooth J₀.hom := SmoothOfRelativeDimension.smooth (Scheme.arithmeticGenus K C) _

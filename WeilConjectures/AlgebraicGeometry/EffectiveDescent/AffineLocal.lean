@@ -85,7 +85,7 @@ noncomputable def restrictBase (hUW : U ≤ (V.hom ≫ p) ⁻¹ᵁ W) :
     exact this
   transport_transport f₁ f₂ f₃ h₁₂ h₂₃ a := by
     refine Over.OverMorphism.ext ?_
-    refine ((D.restrict U hU).transport_left_congr (comp_ι_comp_eq h₂₃) (comp_ι_comp_eq h₂₃)
+    refine ((D.restrict U hU).transport_left_congr' (comp_ι_comp_eq h₂₃) (comp_ι_comp_eq h₂₃)
       rfl rfl ((D.restrict U hU).transport _ _ (comp_ι_comp_eq h₁₂) (pointOfPreimage hUW a)) _
       rfl).trans ?_
     exact congrArg CommaMorphism.left ((D.restrict U hU).transport_transport _ _ _
@@ -125,7 +125,7 @@ theorem isEffective_restrict_of_isAffineOpen [IsAffineHom p] [Flat p] [Surjectiv
       rw [← cancel_mono W.ι]
       simp only [Category.assoc, morphismRestrict_ι]
       rw [reassoc_of% hf₁, reassoc_of% hf₂', h]
-    have e := (D.restrict U hU).transport_left_congr h (comp_ι_comp_eq h') hf₁ hf₂' a
+    have e := (D.restrict U hU).transport_left_congr' h (comp_ι_comp_eq h') hf₁ hf₂' a
       (pointOfPreimage hUW (Over.homMk a.left rfl)) rfl
     rw [← e]
     exact hinv (a.left ≫ homToPreimage hUW) f₂' h' (Over.homMk a.left rfl)
