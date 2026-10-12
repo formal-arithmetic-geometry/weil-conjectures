@@ -15,21 +15,31 @@
  },
  "proof": [
   {
-   "text": "Set H(a) to the cohomology of the inverse image of G along v(a).\nFor f : a to b, pull cohomology back along Spec(R(f)) and then apply the inverse\nof the inverse-image composition isomorphism, using the given equation wv.\nNaturality of pullback on cohomology and the composition coherence of inverse\nimage show that these maps compose. The identity coherence gives the identity\nlaw. For the cocone vertex take the cohomology of the inverse image along vLimit.\nDefine the leg at a by pullback along Spec(c.ι(a)) followed by the inverse\ncomposition isomorphism for wLimit(a). The cocone identity for c and the same\ncomposition coherence prove naturality of these legs. Take eH and eB to be\nidentity isomorphisms. This construction does not use the colimit property of c,\nfilteredness, henselianness, or torsion; these are needed only by subsequent\ncontinuity applications. It works for the zero ring and in degree zero.",
+   "text": "Let D be R.op followed by Scheme.Spec, and let d be Scheme.Spec.mapCone c.op. Define H.obj i as H^p of the pullback of G along v i, and H.map f as the bundled cohomologyTriangleMap for D.map f.op and wv i j f. The identity and composition parts of cohomologyTriangleMap_laws, together with D.map_id and D.map_comp, give the functor laws.",
    "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-weil-pbc-etale-cohomology-triangle-laws"
    ],
    "elementary": false
+  },
+  {
+   "text": "Define B.pt as H^p of the pullback along vLimit, and its leg at i as the bundled triangle map for d.pi.app (op i) and wLimit i. The composition part of the triangle laws identifies H.map f followed by the leg at j with the triangle map along d.pi.app (op j) followed by D.map f.op. The cone equation d.w f.op identifies this composite with the leg at i, proving cocone naturality.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-triangle-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose identity isomorphisms for eH and eB. Unfold only the triangle map and use AddCommGrpCat.ofHom_comp and the identity composition laws to obtain exactly the two requested equations. The colimit property, directedness and nonemptiness are not mathematically used in this construction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-etale-cohomology-triangle-laws"
  ],
  "proof_origin": {
   "document": "https://stacks.math.columbia.edu/tag/09YQ",
-  "place": "Canonical cohomology diagram and comparison maps; inverse-image and cohomology pullback functoriality",
+  "place": "Canonical cohomology diagram and comparison maps; assembled from the existing commuting-triangle laws (Stacks Tag 01F7)",
   "by": "worker"
  },
  "mathlib_searches": [
@@ -108,10 +118,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T053920-L-2629817",
-  "kind": "interface",
+  "landing": "20261012T063511-L-3155589",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -6,8 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleCohomologyTriangleLaws
 
 /-! # The canonical cohomology diagram of a ring system
 
@@ -67,6 +66,69 @@ theorem exists_spec_ring_cohomology_diagram
           ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map
           ((upperStarComp AddCommGrpCat.{u + 1} (Spec.map (c.ι.app i)) (v i)
-            vLimit (wLimit i)).inv.app G) p)) := by sorry
+            vLimit (wLimit i)).inv.app G) p)) := by
+  have _ := hc
+  have laws := cohomologyTriangleMap_laws T G p
+  let D : Iᵒᵖ ⥤ Scheme.{u} := R.op ⋙ Scheme.Spec
+  let d : Cone D := Scheme.Spec.mapCone c.op
+  let H : I ⥤ AddCommGrpCat.{u + 1} :=
+    { obj := fun i ↦ AddCommGrpCat.of
+        (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (v i)).obj G) p)
+      map := fun {i j} f ↦ AddCommGrpCat.ofHom
+        (cohomologyTriangleMap (D.map f.op) (v i) (v j) (wv i j f) G p)
+      map_id := by
+        intro i
+        change AddCommGrpCat.ofHom
+          (cohomologyTriangleMap (D.map (𝟙 (.op i))) (v i) (v i) _ G p) = 𝟙 _
+        simp only [D.map_id]
+        exact (congrArg AddCommGrpCat.ofHom
+          (laws.1 (D.obj (.op i)) (v i))).trans AddCommGrpCat.ofHom_id
+      map_comp := by
+        intro i j k f g
+        change AddCommGrpCat.ofHom
+          (cohomologyTriangleMap (D.map (g.op ≫ f.op)) (v i) (v k) _ G p) =
+            AddCommGrpCat.ofHom
+              (cohomologyTriangleMap (D.map f.op) (v i) (v j) _ G p) ≫
+            AddCommGrpCat.ofHom
+              (cohomologyTriangleMap (D.map g.op) (v j) (v k) _ G p)
+        simp only [D.map_comp]
+        exact (congrArg AddCommGrpCat.ofHom
+          (laws.2 (D.obj (.op k)) (D.obj (.op j)) (D.obj (.op i))
+            (D.map g.op) (D.map f.op) (v i) (v j) (v k)
+            (wv i j f) (wv j k g))).trans (AddCommGrpCat.ofHom_comp _ _) }
+  let B : Cocone H :=
+    { pt := AddCommGrpCat.of
+        (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} vLimit).obj G) p)
+      ι :=
+        { app := fun i ↦ AddCommGrpCat.ofHom
+            (cohomologyTriangleMap (d.π.app (.op i)) (v i) vLimit (wLimit i) G p)
+          naturality := by
+            intro i j f
+            change AddCommGrpCat.ofHom
+              (cohomologyTriangleMap (D.map f.op) (v i) (v j) _ G p) ≫
+              AddCommGrpCat.ofHom
+                (cohomologyTriangleMap (d.π.app (.op j)) (v j) vLimit _ G p) =
+              AddCommGrpCat.ofHom
+                (cohomologyTriangleMap (d.π.app (.op i)) (v i) vLimit _ G p) ≫ 𝟙 _
+            simp only [Category.comp_id]
+            have h := laws.2 d.pt (D.obj (.op j)) (D.obj (.op i))
+              (d.π.app (.op j)) (D.map f.op) (v i) (v j)
+              vLimit (wv i j f) (wLimit j)
+            simp only [d.w f.op] at h
+            exact (AddCommGrpCat.ofHom_comp _ _).symm.trans
+              (congrArg AddCommGrpCat.ofHom h).symm } }
+  refine ⟨H, fun _ ↦ Iso.refl _, ?_, B, Iso.refl _, ?_⟩
+  · intro i j f
+    change AddCommGrpCat.ofHom (cohomologyTriangleMap
+      (Spec.map (R.map f)) (v i) (v j) (wv i j f) G p) =
+        𝟙 _ ≫ _ ≫ _ ≫ 𝟙 _
+    simp only [Category.id_comp, Category.comp_id]
+    exact AddCommGrpCat.ofHom_comp _ _
+  · intro i
+    change AddCommGrpCat.ofHom (cohomologyTriangleMap
+      (Spec.map (c.ι.app i)) (v i) vLimit (wLimit i) G p) ≫ 𝟙 _ = 𝟙 _ ≫ _ ≫ _
+    simp only [Category.id_comp, Category.comp_id]
+    exact AddCommGrpCat.ofHom_comp _ _
+
 
 end AlgebraicGeometry.Etale
