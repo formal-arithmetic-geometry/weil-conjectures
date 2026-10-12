@@ -1,0 +1,115 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-chow-algebraization-data",
+   "place": "split of the projective algebraization step",
+   "via": [
+    "new-chow-algebraization-data"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, support of H paragraph, using Tags 02O5, 0CYQ (1), and 0CYN; https://stacks.math.columbia.edu/tag/088E"
+ },
+ "stmt_deps": [
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowAlgebraizationData",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, support of H paragraph, using Tags 02O5, 0CYQ (1), and 0CYN; https://stacks.math.columbia.edu/tag/088E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper direct image coherent module support contained image",
+   "results": "Second-reader search: 8 hits;  inspected hits do not prove this statement. Library searches checked projective existence, formal pullback, proper higher direct images and support properties, which supply only parts of the argument.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pushforward",
+   "results": "Second-reader search: 12 hits;  inspected hits do not prove this statement. Library searches checked projective existence, formal pullback, proper higher direct images and support properties, which supply only parts of the argument.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*pushforward|pushforward.*support",
+   "results": "Second-reader search: 0 hits;  inspected hits do not prove this statement. Library searches checked projective existence, formal pullback, proper higher direct images and support properties, which supply only parts of the argument.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent module proper pushforward support and formal algebraization on quasi-projective schemes",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn. LeanFinder/Loogle and source grep were used instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "id": "new-chow-algebraization-support",
+ "title": "Proper support after fixed Chow algebraization",
+ "statement": "Let Z be Noetherian, f : Z → S separated and locally of finite type, q : Y → Z proper, and F a coherent module on Y whose support is proper over S via q ≫ f. Then the support of q_*F is proper over S via f.",
+ "proof": [
+  {
+   "text": "Let C be the closed support of F, proper over S by hF. The image q(C) is\nclosed and proper over S because f is separated (Tag 0CYQ (1)). Proper coherent\npushforward (Tag 02O5) makes q_*F coherent on the Noetherian Z, hence its support D\nis closed. Outside q(C), the preimage of the open complement has only zero stalks\nof F. The sheaf axiom implies its sections on every open are zero, so q_*F has\nzero stalks outside q(C). Thus D is a closed subset of q(C). Tag 0CYN implies\nthat D is proper over S, which is precisely the asserted support condition.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-weil-pbc-module-support-proper-over-base",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-module-support-proper-over-base",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowAlgebraizationSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowAlgebraizationSupport.lean",
+  "declaration": "AlgebraicGeometry.chow_algebraization_pushforward_support",
+  "statement": "theorem chow_algebraization_pushforward_support\n    {S Z Y : Scheme.{u}} [IsNoetherian Z]\n    (f : Z ⟶ S) [IsSeparated f] [LocallyOfFiniteType f]\n    (q : Y ⟶ Z) [IsProper q] (F : CoherentModules Y)\n    (hF : Scheme.Modules.HasSupportProperOver (q ≫ f) F.obj) :\n    Scheme.Modules.HasSupportProperOver f ((Scheme.Modules.pushforward q).obj F.obj)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T214714-L-1272622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T214714-L-1272622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

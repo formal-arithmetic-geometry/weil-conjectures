@@ -1,0 +1,132 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-chow-algebraization-data",
+   "place": "split of the projective algebraization step",
+   "via": [
+    "new-chow-algebraization-data"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, compactification and algebraization through the assertion of proper support on Y; https://stacks.math.columbia.edu/tag/088E"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "pqf-def-coherent"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowAlgebraizationData",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, compactification and algebraization through the assertion of proper support on Y; https://stacks.math.columbia.edu/tag/088E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "algebraiz|formal.*coherent|coherent.*formal",
+   "results": "Second-reader search: 25 hits;  inspected hits do not prove this statement. Library searches checked projective existence, formal pullback, proper higher direct images and support properties, which supply only parts of the argument.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\", \"EssentiallySurjective\"",
+   "results": "Second-reader search: 0 hits;  inspected hits do not prove this statement. Library searches checked projective existence, formal pullback, proper higher direct images and support properties, which supply only parts of the argument.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "algebraize coherent formal module on open subscheme of projective scheme with proper support",
+   "results": "Second-reader search: 8 hits;  inspected hits do not prove this statement. Library searches checked projective existence, formal pullback, proper higher direct images and support properties, which supply only parts of the argument.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent module proper pushforward support and formal algebraization on quasi-projective schemes",
+   "results": "Service unavailable: Internal Server Error. No absence verdict drawn. LeanFinder/Loogle and source grep were used instead.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "id": "new-chow-algebraization-core",
+ "title": "Core coherent algebraization on a fixed projective modification",
+ "statement": "Let A be a commutative Noetherian ring complete for an ideal I, Z a Noetherian scheme, and f : Z → Spec A separated and of finite type. Let Q = I O_Z and G a coherent formal Q-module with degree-zero support proper over A. Given a proper q : Y → Z, n : ℕ, an immersion e of Y into P^n_A, and equality of its projection with q ≫ f, there exists a coherent module F on Y whose Q.comap q completion is isomorphic to the tensor pullback of G and whose support is proper over Spec A.",
+ "proof": [
+  {
+   "text": "Properness of q makes Y Noetherian. Factor the quasi-compact immersion e as\nan open immersion j into its scheme-theoretic image Y', a closed subscheme of the\nsupplied projective space. Pull G back using exists_formalSystemsPullback. Nakayama and\ncompatibility of successive quotients identify the supports of all pulled terms with\nthe inverse image of the degree-zero support. By hR and properness of q this set is\nproper over A. Its image under j is closed in Y'. Extend the pulled terms by j_*;\ncoherence follows from pushforward_coherent_on_open. On j(Y) quotient compatibility\nis unchanged, and off the closed support all terms vanish, so the extended terms\nform a coherent formal system. Projective existence algebraizes it to F' on Y'.\nNakayama identifies its support over V(I) with the degree-zero support. The boundary\npart of Supp(F') is closed in the proper Y', so its image in Spec A is closed. If\nnonempty it meets V(I), since I is in the Jacobson radical of the complete ring A,\ncontradicting the degree-zero support calculation. Thus Supp(F') lies inside j(Y).\nRestrict F' to Y. Its completion is the pulled system by the restriction/completion\ncomparison; its support is the transport of the proper closed support of F'.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-pushforward-coherent-on-open",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "def-nagata-scheme-theoretic-image",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-pushforward-coherent-on-open",
+  "lem-weil-pbc-grothendieck-existence-projective",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowAlgebraizationCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowAlgebraizationCore.lean",
+  "declaration": "AlgebraicGeometry.exists_chow_algebraization_core",
+  "statement": "theorem exists_chow_algebraization_core\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) [IsAdicComplete I A]\n    {Z : Scheme.{u}} [IsNoetherian Z] (f : Z ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (Q : Z.IdealSheafData)\n    (hQ : Q = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (G : CoherentFormalModule Z Q)\n    (hR : Scheme.Modules.HasSupportProperOver f (G.obj.obj (op 0)))\n    (Y : Scheme.{u}) (q : Y ⟶ Z) [IsProper q] (n : ℕ)\n    (e : Y ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A)))\n    [IsImmersion e]\n    (he : e ≫ (ProjectiveSpace (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ↘ Spec (.of A)) =\n      q ≫ f) :\n    ∃ F : CoherentModules Y,\n      Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅\n        formalCompletionSystem (Q.comap q) F.obj) ∧\n      Scheme.Modules.HasSupportProperOver (q ≫ f) F.obj",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T214714-L-1272622",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T214714-L-1272622",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

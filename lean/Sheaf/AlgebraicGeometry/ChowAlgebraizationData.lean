@@ -11,13 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.PushforwardCoherentOnOpen
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
-import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import Sheaf.AlgebraicGeometry.ChowAlgebraizationCore
+import Sheaf.AlgebraicGeometry.ChowAlgebraizationSupport
 
 /-! # Algebraization on a quasi-projective proper modification
 
@@ -88,6 +83,11 @@ theorem exists_chow_algebraization_data
     ∃ F : CoherentModules Y,
       Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅
         formalCompletionSystem (Q.comap q) F.obj) ∧
-      Scheme.Modules.HasSupportProperOver f ((Scheme.Modules.pushforward q).obj F.obj) := by sorry
+      Scheme.Modules.HasSupportProperOver f ((Scheme.Modules.pushforward q).obj F.obj) := by
+  have := hL
+  have := hIso
+  obtain ⟨F, hF, hproper⟩ := exists_chow_algebraization_core A I f Q hQ G hR Y q n e he
+  refine ⟨F, hF, ?_⟩
+  exact chow_algebraization_pushforward_support f q F hproper
 
 end AlgebraicGeometry
