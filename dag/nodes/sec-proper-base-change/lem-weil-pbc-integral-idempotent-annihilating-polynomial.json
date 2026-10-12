@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "*An equation for $z$ over $I$.* Since $B$ is integral over $A$ and $z\\in IB$, there is a monic $g=x^e+\\sum_{j<e}a_jx^j\\in A[x]$ with $a_j\\in I$ for $j<e$ and $g(z)=0$ [lem-weil-pbc-integral-extended-ideal-element-monic]. If $e=0$, then $g=1$ and $1=g(z)=0$ in $B$, so $B=0$; in that case replace $g$ by $xg=x$, which is monic of degree $1$ with constant coefficient $0\\in I$ and $(xg)(z)=0$. So we may take $g$ monic of degree $d\\ge1$, $g=x^d+\\sum_{j<d}a_jx^j$, $a_j\\in I$, $g(z)=0$. (Stacks writes degree $d$ without the case $d=0$; this case is added by the agent.)",
+   "text": "Apply Mathlib Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map to z = b^2 - b to obtain monic g with g(z) = 0 and every non-leading coefficient in I. Coefficientwise reduction gives g.map (Ideal.Quotient.mk I) = X^g.natDegree. Set h = X*g and d = g.natDegree + 1, so d is positive and h is monic, h(z) = 0, and h reduces to X^d. This also handles degree-zero g without a separate case.",
    "uses": [
     "lem-weil-pbc-integral-extended-ideal-element-monic"
    ],
@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "*The polynomial $f(x)=g(x^2-x)$.* Put $f=g\\circ(x^2-x)=(x^2-x)^d+\\sum_{j<d}a_j(x^2-x)^j\\in A[x]$. (i) $f$ is monic of degree $2d$: $(x^2-x)^d$ is monic of degree $2d$ and each $a_j(x^2-x)^j$ with $j<d$ has degree $\\le2j<2d$ (in Mathlib: Polynomial.Monic.comp, since $x^2-x$ is monic of degree $2\\ne0$). (ii) $f(b)=g(b^2-b)=g(z)=0$, because evaluation at $b$ is a ring map and $f$ is the composite (Polynomial.aeval_comp). (iii) Reducing coefficients modulo $I$ is a ring map $A[x]\\to(A/I)[x]$ commuting with composition (Polynomial.map_comp); it sends $a_j\\in I$ to $0$, so $\\bar f=(x^2-x)^d=x^d(x-1)^d$ in $(A/I)[x]$. Hence $d\\ge1$ and $f$ are as required.",
+   "text": "For nontrivial A, put q = X*(X-1) and f = (X*g).comp q. The product q is monic with positive degree; Polynomial.Monic.comp makes f monic. Polynomial.aeval_comp and q(b) = b^2-b show f(b) = 0. Polynomial.map_comp and the reduction of g show f modulo I equals q^d = X^d*(X-1)^d. If A is the zero ring, B is also the zero ring via its algebra map; choose d = 1 and f = 1, and all equalities follow from subsingleton elimination.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -58,7 +58,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 09XG (lemma-helper-integral), proof"
+  "place": "More on Algebra, Lemma Tag 09XG (lemma-helper-integral), proof; Lean implementation multiplies g by X to guarantee a positive exponent uniformly and handles the zero base ring separately."
  },
  "mathlib_searches": [
   {
@@ -162,5 +162,15 @@
   "group": "G1",
   "result": "pass",
   "note": "CommRing A,B + Algebra A B = ring map; Algebra.IsIntegral A B = B integral; hb IsIdempotentElem of Ideal.Quotient.mk (I.map algebraMap) b = image in B/IB idempotent; ∃ d≥1, f Monic, aeval b f = 0, f.map (Quotient.mk I) = X^d*(X-1)^d as polynomial equality; edge cases zero rings, I=⊤, d=0 excluded; no hollow hyps, no universe quantification"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6ccd1",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T112832-L-764975",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and importer compiled without warnings; theorem signature and target statement unchanged; proof uses only allowed axioms; import visibility change is documented and independently verified."
  }
 }
