@@ -26,38 +26,57 @@
  ],
  "proof": [
   {
-   "text": "At a point $x$ of $X$, each fibre $\\mathcal L_i(x)$ is one-dimensional over $\\kappa(x)$. By [lem-weil-pbc-invertible-pullback-tensor], the tensor product is invertible and the value of $\\tau$ in its fibre is $t_1(x)\\otimes\\cdots\\otimes t_n(x)$. A pure tensor of vectors in one-dimensional vector spaces over a field is nonzero exactly when every factor is nonzero: choose a basis in each fibre and multiply the scalar coordinates. By [lem-weil-pbc-nonvanishing-section-trivializes], nonzero fibre value is exactly membership in the nonvanishing locus. Thus $x\\in X_\\tau$ iff $x\\in X_{t_i}$ for every $i$, proving the equality of opens.",
+   "text": "The elementary helper nonvanishing_iff_residueValue_ne_zero identifies the kernel of the residue-value map with the maximal ideal times the stalk module, using Mathlib TensorProduct.quotTensorEquivQuotSMul and Submodule.Quotient.mk_eq_zero. Negating gives precisely membership in nonvanishingLocus. This uses the actual stalk predicate, without the trivialization theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CY, fibre criterion for the nonvanishing locus; the quotient description of the residue-field fibre"
+   }
+  },
+  {
+   "text": "For two factors apply the tensor-fibre isomorphism and section-value formula of lem-weil-pbc-invertible-pullback-tensor, with f the identity. An isomorphism preserves nonzero values. Over a field, singleton families consisting of nonzero vectors are linearly independent; Mathlib LinearIndependent.tmul_of_flat_left makes their tensor family linearly independent, hence its single tensor nonzero. Conversely a zero factor gives a zero tensor. Thus the two-factor locus is the intersection. This does not need rank-one bases.",
    "uses": [
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-weil-pbc-nonvanishing-section-trivializes"
+    "lem-weil-pbc-invertible-pullback-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01CT (tensor products of invertible modules), Lemma 01CB (fibre tensor identity), and Lemma 01CY (fibre criterion for nonvanishing)"
+    "place": "Modules, Lemma 01CB (stalk of tensor product); elementary vector-space tensor calculation"
    }
   },
   {
-   "text": "Suppose $X_{t_j}$ is affine for some index $j$. Starting with $U=X_{t_j}$, intersect successively with each of the finitely many remaining opens $X_{t_i}$. At every stage $U$ is an affine open of $X$, so [lem-sc-affine-cap-section-open], applied to $\\mathcal L_i$ and $t_i$, says $U\\cap X_{t_i}$ is affine. After the last intersection, the resulting affine open is $\\bigcap_i X_{t_i}=X_\\tau$ by step 1.",
+   "text": "Induct on n for the left-associated positiveTensorFamily with n+1 factors. The one-factor case is immediate. Tensor invertibility from lem-weil-pbc-invertible-pullback-tensor supplies the instance for the initial segment. Unfold the recursive family and section, apply the two-factor equality and the induction hypothesis, and split Fin(n+2) into castSucc indices and its last index using Fin.lastCases.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 09NC proof, tensor sections tau_J"
+   }
+  },
+  {
+   "text": "Given an affine factor locus U=X_{t_j}, use Finset.induction_on to intersect U with any finite set of factor loci. The empty set leaves U; insertion applies the first clause of lem-sc-affine-cap-section-open to the previously obtained affine open and the inserted factor section. Apply this to Finset.univ. The extra U condition is redundant since every point in all factor loci is in X_{t_j}=U. Combine with the previously proved tensor-locus equality.",
    "uses": [
     "lem-sc-affine-cap-section-open"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 09NC (lemma-enough-globally-generated-ample), proof, sentence invoking Properties Lemma 01PV (lemma-affine-cap-s-open)"
+    "place": "Varieties, Lemma 09NC proof, sentence invoking Properties Lemma 01PV"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-nonvanishing-section-trivializes",
   "lem-sc-affine-cap-section-open"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "R3",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties, Lemma 09NC proof, sentence invoking Properties Lemma 01PV; fibre calculation from Modules Lemmas 01CT, 01CB and 01CY"
+  "place": "Lemma 09NC proof, invoking Properties Lemma 01PV; Modules Lemma 01CB tensor-fibre formula and the 01CY fibre criterion, with the latter proved directly using Mathlib quotient-tensor equivalence."
  },
  "mathlib_searches": [
   {
@@ -150,5 +169,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcfb2",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144142-L-2106351",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and sole direct importer compiled cleanly; theorem signature, node statement, proof metadata, and report match the stage-3 requirements."
  }
 }
