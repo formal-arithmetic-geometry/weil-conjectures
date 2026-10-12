@@ -1,0 +1,176 @@
+{
+ "id": "lem-weil-pbc-affine-etale-rank-one-separating",
+ "kind": "statement",
+ "title": "Affine etale rank-one extensions separate module-valued sheaves",
+ "statement": "Let $X$ be a scheme, $X_{\\mathrm{Et}}$ its small etale site [def-weil-pbc-etale-site], and $\\Lambda$ a commutative ring. In the category of sheaves valued in $\\mathrm{Mod}(\\Lambda)$ [def-weil-pbc-etale-sheaves], the family $G_U=j_{U!}\\underline{\\Lambda}_U$, indexed by all affine objects $j_U:U\\to X$ of this site, is separating: for every $f,g:F\\to F^{\\prime}$, if $f\\circ h=g\\circ h$ for every $U$ and every $h:G_U\\to F$, then $f=g$. Here extension by zero is [def-weil-pbc-etale-sum-extension] and the constant sheaf is [def-weil-pbc-constant-sheaf]. The site, index family, coefficients and Hom sets use universe $u+1$ above the base-scheme universe $u$. No quasi-compactness, quasi-separatedness or finiteness of the ring is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EW, proof of (3), detection by the maps associated to sections; Tag 04HR in topologies.tex, cover density of affine etale objects. This is step 1 of lem-weil-pbc-constructible-generation in the ModuleCat-valued formulation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "For each affine etale U, compose the constant-sheaf/terminal-evaluation adjunction with etaleLowerShriekUpperStarAdjunction transported along upperStarIsoLocalizationRestriction. This identifies maps from the rank-one extension to F with linear maps from Lambda to F(U), naturally in F. The localized terminal object maps to U (proved by ext and rfl).",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If f and g agree after all maps from the rank-one extension at U, apply this Hom equivalence to the inverse image of each linear map Lambda -> F(U). Naturality yields a composed equality. Use the linear map r |-> r*x and evaluate at 1 to obtain f_U(x)=g_U(x), for every x. ModuleCat.hom_ext gives equality of components.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The Spec functor from the affine etale site is cover-dense and full, by the affine-etale Mathlib leaf. Mathlib Functor.whiskerLeft_obj_map_bijective_of_isCoverDense makes restriction of morphisms into a sheaf injective. The preceding equality holds on all its affine source objects, so restriction of f and g agrees. Injectivity and Sheaf.hom_ext prove f=g.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-affine-etale-essentially-small-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EW proof of (3), with Tag 04HR; Lean proof written by M1 using the two adjunctions and the Mathlib dense-subsite restriction theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isSeparating|freeYonedaHomEquiv|constantSheafAdj",
+   "ok": true,
+   "n_hits": 25,
+   "note": "",
+   "top": [
+    "Mathlib/CategoryTheory/Generator/StrongGenerator.lean",
+    "Mathlib/CategoryTheory/Generator/StrongGenerator.lean",
+    "Mathlib/CategoryTheory/Generator/StrongGenerator.lean",
+    "Mathlib/CategoryTheory/Generator/StrongGenerator.lean",
+    "Mathlib/CategoryTheory/Generator/StrongGenerator.lean",
+    "Mathlib/CategoryTheory/Generator/Indization.lean",
+    "Mathlib/CategoryTheory/Generator/Indization.lean",
+    "Mathlib/CategoryTheory/Generator/Indization.lean"
+   ],
+   "digest": "dc841356b36ad2ff",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Generator/StrongGenerator.lean; Mathlib/CategoryTheory/Generator/StrongGenerator.lean; Mathlib/CategoryTheory/Generator/StrongGenerator.lean; Mathlib/CategoryTheory/Generator/StrongGenerator.lean; Mathlib/CategoryTheory/Generator/StrongGenerator.lean; Mathlib/CategoryTheory/Generator/Indization.lean; Mathlib/CategoryTheory/Generator/Indization.lean; Mathlib/CategoryTheory/Generator/Indization.lean",
+   "verdict": "Related generic sheaf-generator or Hom-adjunction results; none states the affine etale rank-one extension family in this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+   "ok": true,
+   "n_hits": 1,
+   "note": "",
+   "top": [
+    "CategoryTheory.Sheaf.freeYonedaHomEquiv"
+   ],
+   "digest": "9ee3288dbd5af362",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+   "verdict": "Related generic sheaf-generator or Hom-adjunction results; none states the affine etale rank-one extension family in this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extensions by zero of constant rank one module sheaves on affine etale objects are a separating family of sheaves of modules",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CategoryTheory.Sheaf.isSeparating",
+    "PresheafOfModules.freeYoneda.isSeparating",
+    "CategoryTheory.Sheaf.isSeparator",
+    "CategoryTheory.Sheaf.hasSeparator",
+    "Algebra.etaleLocus_eq_compl_support",
+    "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+    "Algebra.FormallyEtale.of_isSeparable_aux",
+    "SheafOfModules.GeneratingSections.mk.inj"
+   ],
+   "digest": "5b3b027a82bb3503",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Sheaf.isSeparating; PresheafOfModules.freeYoneda.isSeparating; CategoryTheory.Sheaf.isSeparator; CategoryTheory.Sheaf.hasSeparator; Algebra.etaleLocus_eq_compl_support; Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.of_isSeparable_aux; SheafOfModules.GeneratingSections.mk.inj",
+   "verdict": "Related generic sheaf-generator or Hom-adjunction results; none states the affine etale rank-one extension family in this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine etale extensions by zero of constant rank one module sheaves form a separating family",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+   "results": "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+   "date": "2026-10-12",
+   "verdict": "Related free-Yoneda sheaf Hom equivalence; not the etaleLowerShriek family."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleSheafGeneration",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Constructible-generation argument, step 1: affine extensions form a separating family",
+   "via": [
+    "lem-weil-pbc-constructible-generation"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleRankOneSeparating",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleRankOneSeparating.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affine_etale_rankOne_isSeparating",
+  "statement": "theorem affine_etale_rankOne_isSeparating\n    (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :\n    ObjectProperty.IsSeparating (ObjectProperty.ofObj\n      (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n      (fun U : { U : X.Etale // IsAffine U.left } ↦\n        (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) U.val.hom inferInstance).obj\n          ((constantSheaf U.val.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n            (ModuleCat.of Λ Λ))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T044748-L-2036993",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T044748-L-2036993",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
