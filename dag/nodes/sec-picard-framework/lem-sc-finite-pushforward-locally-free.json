@@ -27,38 +27,30 @@
  ],
  "proof": [
   {
-   "text": "By the definition [def-pc-finite-locally-free], $f$ is finite locally free (it is finite, flat and locally of finite presentation). Applying [lem-weil-pbc-finite-locally-free-degree-locally-constant] to $f:X\\to Y$ (with the roles of the letters $X,Y$ there exchanged) gives a decomposition $Y=\\coprod_{d\\ge0}Y_d$ into open and closed subsets $Y_d$ such that, with $X_d=f^{-1}(Y_d)$, the restriction $f_d:X_d\\to Y_d$ is finite locally free of degree $d$.",
+   "text": "The unit sheaf is finite locally free by the existing instances. Apply the finite-flat pushforward theorem.",
    "uses": [
-    "def-pc-finite-locally-free",
-    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+    "lem-pc-finite-flat-pushforward-locally-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 04MH, lemma-finite-locally-free"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $d$, [lem-pc-flf-properties] applied to $f_d$ shows that $(f_d)_*\\mathcal O_{X_d}$ is a locally free $\\mathcal O_{Y_d}$-module of rank $d$, i.e. $Y_d$ has an open cover on which it is isomorphic to $\\mathcal O^{\\oplus d}$. Since $Y_d$ is open in $Y$ and $X_d=f^{-1}(Y_d)$, the definition of the direct image gives $(f_*\\mathcal O_X)|_{Y_d}=(f_d)_*\\mathcal O_{X_d}$ (both have sections $\\mathcal O_X(f^{-1}(V))$ over $V\\subset Y_d$). The open sets of these covers, over all $d$, cover $Y$, and on each of them $f_*\\mathcal O_X\\cong\\mathcal O_Y^{\\oplus d}$; the rank is constant equal to $d$ on the open and closed piece $Y_d$, hence locally constant on $Y$. (For $d=0$, $Y_0$ is the open and closed set over which $X$ is empty and $f_*\\mathcal O_X|_{Y_0}=0$.)",
+   "text": "Choose d = f.finrank. Mathlib gives local constancy; on each open where d = n, apply the intermediate rank-on-open theorem.",
    "uses": [
-    "lem-pc-flf-properties"
+    "lem-weil-pbc-finite-flat-rank-iso",
+    "lem-sc-finite-pushforward-rank-on-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02KB, lemma-finite-flat, and Tag 04MH, lemma-finite-locally-free"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-finite-locally-free",
-  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
-  "lem-pc-flf-properties"
+  "lem-pc-finite-flat-pushforward-locally-free",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-sc-finite-pushforward-rank-on-open"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 04MH (lemma-finite-locally-free: S = coprod S_d with f of degree d over S_d) and Tag 02KB (lemma-finite-flat: f_*O_X finite locally free)"
+  "place": "Tags 02KB and 04MH"
  },
  "mathlib_searches": [
   {
@@ -154,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T060744-L-2910411",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

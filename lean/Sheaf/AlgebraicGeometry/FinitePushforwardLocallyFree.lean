@@ -11,9 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Topology.LocallyConstant.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
-import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStructureSheaf
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import Sheaf.AlgebraicGeometry.PushforwardRankOnOpen
+import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 
 /-!
 # Finite flat pushforwards are locally free of locally constant rank
@@ -56,6 +55,14 @@ theorem isFiniteLocallyFree_pushforward_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
       ∃ d : Y → ℕ, IsLocallyConstant d ∧ ∀ (U : Y.Opens) (n : ℕ), (∀ y ∈ U, d y = n) →
         SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
           (((pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).over U) n := by
-  sorry
+  constructor
+  · have : (SheafOfModules.unit X.ringCatSheaf).IsFiniteLocallyFree := by
+      have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+      refine isFiniteLocallyFree_of_isAffineOpen _ fun U hU ↦ ?_
+      change Module.FinitePresentation Γ(X, U) Γ(X, U) ∧ Module.Flat Γ(X, U) Γ(X, U)
+      exact ⟨inferInstance, inferInstance⟩
+    exact isFiniteLocallyFree_pushforward f (SheafOfModules.unit X.ringCatSheaf)
+  · exact ⟨f.finrank, f.isLocallyConstant_finrank, fun U n h ↦
+      isFiniteLocallyFreeOfRank_pushforward_unit_over f U n h⟩
 
 end AlgebraicGeometry.Scheme.Modules
