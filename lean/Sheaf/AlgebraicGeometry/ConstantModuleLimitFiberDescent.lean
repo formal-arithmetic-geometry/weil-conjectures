@@ -7,11 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem
-import Mathlib.CategoryTheory.Presentable.Directed
-import Mathlib.CategoryTheory.Limits.Connected
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.ConstantModuleLimitAffineSectionDescent
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Descent of constant-module direct-image germs
 
@@ -71,6 +68,37 @@ theorem exists_constantModule_limit_fiber_rep
       ((lowerStar (ModuleCat.{u + 1} Λ) (p i)).obj
         ((constantSheaf (D.obj i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))),
       (((X.uliftPointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map
-        (constantModulePushforwardMap Λ M _ _ (π.app i) (hπ i))) y = x := by sorry
+        (constantModulePushforwardMap Λ M _ _ (π.app i) (hπ i))) y = x := by
+  classical
+  let Φ := X.uliftPointSmallEtale s
+  let B := (lowerStar (ModuleCat.{u + 1} Λ) ν).obj
+    ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u, u + 1}
+  obtain ⟨U, u, z, hz⟩ := Φ.toPresheafFiber_jointly_surjective (P := B.obj) x
+  let G := Scheme.AffineEtale.Spec X
+  obtain ⟨V, f, ⟨a⟩, v, hv⟩ := Φ.jointly_surjective (Sieve.coverByImage G U)
+    (G.is_cover_of_isCoverDense X.smallEtaleTopology U) u
+  let w := Φ.fiber.map a.lift v
+  let z' := B.obj.map a.map.op z
+  have : IsAffine (G.obj a.obj).left := by
+    change IsAffine (Scheme.Spec.obj a.obj.left)
+    infer_instance
+  obtain ⟨i, y, hy⟩ := exists_constantModule_limit_affine_section_rep
+    Λ M D p hp ν π hπ hc (G.obj a.obj) z'
+  let A := (lowerStar (ModuleCat.{u + 1} Λ) (p i)).obj
+    ((constantSheaf (D.obj i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)
+  refine ⟨i, Φ.toPresheafFiber (G.obj a.obj) w A.obj y, ?_⟩
+  change Φ.presheafFiber.map
+    (constantModulePushforwardMap Λ M _ _ (π.app i) (hπ i)).hom
+      (Φ.toPresheafFiber (G.obj a.obj) w A.obj y) = x
+  rw [Φ.toPresheafFiber_naturality_apply, hy]
+  change Φ.toPresheafFiber (G.obj a.obj) w B.obj (B.obj.map a.map.op z) = x
+  rw [Φ.toPresheafFiber_w_apply]
+  have hw : Φ.fiber.map a.map w = u := by
+    dsimp [w]
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, a.fac]
+    exact hv
+  rw [hw]
+  exact hz
 
 end AlgebraicGeometry.Etale

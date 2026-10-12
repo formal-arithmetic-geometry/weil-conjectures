@@ -18,44 +18,31 @@
  ],
  "proof": [
   {
-   "text": "Replace the opposite of the small cofiltered category by a final functor from a nonempty directed partial order. Its opposite is initial, and the restricted cone is still limiting; a representative at a restricted stage is also a representative at an original stage.",
+   "text": "Represent the given module-valued fiber element by a section z on an etale object U, using Point.toPresheafFiber_jointly_surjective. The affine-etale Spec functor is cover dense. Apply Point.jointly_surjective to its coverByImage sieve. The factorization of the covering arrow through an affine-etale object gives a lifted geometric point w and a restricted section z prime on that affine object. The factorization equation shows its point maps back to the original point of U.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_constantModule_limit_affine_section_rep to z prime. It supplies a stage i, a section y there, and equality of its image under the canonical comparison component with z prime.",
    "uses": [
-    "lem-weil-pbc-filtered-category-exists-directed-final"
+    "lem-weil-pbc-constant-module-limit-affine-section-descent"
    ],
    "elementary": false
   },
   {
-   "text": "The inverse image on the limit of each constant M-sheaf is constant M. The pullback identity/composition and unit equations identify the transitions with identities. The colimit of this nonempty connected constant diagram is constant M.",
-   "uses": [
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-constant-module-pushforward-functoriality",
-    "lem-weil-pbc-colimit-constant-connected-diagram"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Represent the target fiber germ over an affine etale neighborhood U. Base change preserves the inverse limit, affine transitions and qcqs hypotheses. Apply the stated degree-zero higher direct image continuity isomorphism to the underlying abelian constant sheaves after reindexing. Identify degree-zero higher direct image with ordinary direct image and the colimit of the pulled-back constant diagram with the constant sheaf. The adjunction units and constant pullback and direct-image composition identifications make its components constantModulePushforwardMap. Apply the geometric fiber, which preserves filtered colimits. The underlying filtered colimit of abelian groups has a stage representative for every element. The module-to-abelian forgetful functor identifies the underlying elements of the source and target fibers and commutes with these canonical maps, so this stage representative and equality also give a module germ. This uses the continuity theorem statement, not a stronger representative assertion extracted from its proof. No preservation of module-sheaf colimits is required.",
-   "uses": [
-    "sbc-lem-higher-direct-image-limit",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-constant-module-pushforward-functoriality"
-   ],
-   "elementary": false
+   "text": "Take the germ of y at w. Point.toPresheafFiber_naturality_apply identifies its comparison image with the germ of z prime. Point.toPresheafFiber_w_apply identifies this with the germ of z at the image point. Functor.map_comp and the coverByImage factorization give the original point; the initial representative equality gives the required x. This is a complete Lean proof from the section-descent theorem, without coefficient comparison at the fiber level.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-constant-module-pushforward-functoriality",
-  "lem-weil-pbc-filtered-category-exists-directed-final",
-  "lemma-constructible-pullback-constant",
-  "sbc-lem-higher-direct-image-limit"
+  "lem-weil-pbc-constant-module-limit-affine-section-descent"
  ],
  "proof_origin": {
+  "by": "worker V3",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09Z1, proof on affine etale neighborhoods, p = 0; Tag 09Z6, finite approximation paragraph",
-  "by": "agent",
-  "note": "Degree-zero specialization with a single germ representative, source read online 2026-10-12; the coefficient/comparison identifications remain to be formalized."
+  "place": "Tag 09Z1 (lemma-higher-direct-image-limit), proof, displayed cohomology colimit on qcqs etale objects, degree zero; Tag 09YQ (theorem-colimit), degree zero",
+  "note": "Affine-test section descent is split off; Mathlib point representatives, affine-etale cover density and naturality prove the entire passage to germs. No higher-direct-image comparison or directed reindexing is used in the parent proof."
  },
  "mathlib_searches": [
   {
@@ -133,9 +120,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T085311-L-28184",
+  "landing": "20261012T095929-L-326574",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-constant-module-limit-affine-section-descent",
+ "kind": "statement",
+ "title": "Descent of constant-module sections on affine etale test objects",
+ "statement": "Fix a universe $u$, a commutative ring $\\Lambda$ and a $\\Lambda$-module $M$ in universe $u+1$ [def-weil-pbc-etale-sheaves], schemes $X,Y$ in universe $u$ [def-weil-pbc-scheme-conventions], and a small cofiltered category $I$ in universe $u$. Let $D:I\\to\\mathrm{Sch}$ have affine transition maps, and let $p_i:D_i\\to X$ be qcqs with $D(g)p_j=p_i$ for every $g:i\\to j$. Let $\\nu:Y\\to X$ be qcqs and $\\pi:\\mathrm{const}(Y)\\to D$ a limiting cone with $\\pi_i p_i=\\nu$. For an affine etale object $U\\to X$ [def-weil-pbc-etale-site], put $A_i=p_{i,*}M_{D_i}$ and $B=\\nu_*M_Y$, using the constant sheaves [def-weil-pbc-constant-sheaf] and direct images [def-weil-pbc-direct-image]. For every section $x\\in B(U)$ there are $i\\in I$ and $y\\in A_i(U)$ such that the component on $U$ of $\\mathrm{constantModulePushforwardMap}(\\Lambda,M,p_i,\\nu,\\pi_i)$ [lem-weil-pbc-constant-module-pushforward-functoriality] sends $y$ to $x$. No point of $X$, germ, or geometric fiber occurs in this statement.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z1 (lemma-higher-direct-image-limit), proof, displayed cohomology colimit on qcqs etale objects, degree zero; Tag 09YQ (theorem-colimit), degree zero"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-constant-module-pushforward-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Define E_i = U times_X D_i with transition maps pullback.map, c with vertex U times_X Y and the projection pullback.map maps, and beta:E -> D with second projections. Prove each functor and cone law by pullback.hom_ext and pi.naturality. Cofilteredness makes I connected; isLimitOfIsPullbackOfIsConnected and isPullback_pullback_map transport hc to IsLimit c. The first projections form q:E -> const U. Affineness of E transitions follows from MorphismProperty.of_isPullback. Qcqs of E_i follows from the qcqs first projections to affine U. All these facts are proved in Lean using the existing scheme instances, independently of any sheaf comparison.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_constantModule_pullback_section_comparison to Lambda, M and U. This gives additive equivalences e between the original module sections and abelian global sections of pullbacks of the constant abelian sheaf G on U, together with the compatibility equation for every cartesian map. In particular it applies to every leg of the base-changed cone.",
+   "uses": [
+    "lem-weil-pbc-constant-module-pullback-section-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the surjectivity clause of globalSections_limit_comparison to E, q, c, the first projection P, its cone equations, hlimit and G. For e(Y,nu)(x), obtain i and y with the abelian leg equality. Use the inverse of e(D_i,p_i) on y for the desired module section. Injectivity of e(Y,nu), the cartesian compatibility from step 2, and AddEquiv.apply_symm_apply transfer this equality back to the displayed constantModulePushforwardMap component. This combination is fully proved in Lean.",
+   "uses": [
+    "lem-weil-pbc-global-sections-limit-comparison",
+    "lem-weil-pbc-constant-module-pullback-section-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-constant-module-pullback-section-comparison",
+  "lem-weil-pbc-global-sections-limit-comparison"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z1 (lemma-higher-direct-image-limit), proof, displayed cohomology colimit on qcqs etale objects, degree zero; Tag 09YQ (theorem-colimit), degree zero",
+  "by": "worker",
+  "note": "The affine-section theorem is proved in Lean: base-change limit, qcqs and affine hypotheses, application of existing abelian continuity, and transport through the independent single-square comparison. Only that comparison remains sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of a constant module sheaf over an affine etale neighborhood of the base of an inverse limit descend to a stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a constant module sheaf over an affine etale neighborhood of the base of an inverse limit descend to a stage",
+   "results": "8 hits, including exists_appTop_π_eq_of_isLimit and its affine specialization, other AffineTransitionLimit structure-sheaf section lemmas, ModuleCat.Tilde.exists_const, and exists_lift_of_germInjective. These concern structure sheaves or Zariski module sheaves, not constant module sheaves on the etale site.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffine\", \"constantSheaf\"",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ss]ection.*(limit|[Ll]ift)|[Ss]ection.*constant.*(limit|[Ll]ift)",
+   "results": "2 hits in Mathlib/Condensed/Discrete/Colimit.lean, lines 31 and 326, LocallyConstantAsColimit; different site. Source SectionContinuity and library GlobalSectionsLimitComparison found by rg, but their abelian pullback-section interfaces require base change and coefficient comparisons.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing continuity tool used in proof plan"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantModuleLimitFiberDescent",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Tag 09Z6 finite approximation paragraph: use degree-zero Tag 09Z1 continuity for constant-module direct images; the surjectivity step on affine etale test objects before passing to germs",
+   "via": [
+    "lem-weil-pbc-constant-module-limit-fiber-descent",
+    "lem-weil-pbc-constant-module-pushforward-limit-surjectivity",
+    "lem-weil-pbc-constant-module-pushforward-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantModuleLimitAffineSectionDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantModuleLimitAffineSectionDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_constantModule_limit_affine_section_rep",
+  "statement": "theorem exists_constantModule_limit_affine_section_rep\n    (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)\n    {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u}) (p : ∀ i, D.obj i ⟶ X)\n    (hp : ∀ {i j : I} (g : i ⟶ j), D.map g ≫ p j = p i)\n    [∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g)]\n    [∀ i : I, QuasiCompact (p i)] [∀ i : I, QuasiSeparated (p i)]\n    {Y : Scheme.{u}} (ν : Y ⟶ X)\n    (π : (Functor.const I).obj Y ⟶ D) (hπ : ∀ i, π.app i ≫ p i = ν)\n    [QuasiCompact ν] [QuasiSeparated ν]\n    (hc : IsLimit (Cone.mk Y π))\n    (U : X.Etale) [IsAffine U.left]\n    (x : ((lowerStar (ModuleCat.{u + 1} Λ) ν).obj\n      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)).obj.obj\n        (op U)) :\n    ∃ (i : I) (y : ((lowerStar (ModuleCat.{u + 1} Λ) (p i)).obj\n      ((constantSheaf (D.obj i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)).obj.obj\n        (op U)),\n      (constantModulePushforwardMap Λ M _ _ (π.app i) (hπ i)).hom.app (op U) y = x",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T095929-L-326574",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T095929-L-326574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
