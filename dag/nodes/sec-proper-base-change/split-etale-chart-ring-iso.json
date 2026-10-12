@@ -11,54 +11,42 @@
  },
  "kind": "statement",
  "title": "Affine chart equivalence carries global sections to triple rings",
- "statement": "theorem etale_chart_residue_triples_equivalence_ring_iso (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i] (xU : Spec (.of Ω) ⟶ Spec A) : let x := xU ≫ i let p := (SpecToEquivOfField Ω (Spec A) xU).1 let F := (Spec A).residueField p let e := (SpecToEquivOfField Ω (Spec A) xU).2 letI : Algebra F Ω := e.hom.toAlgebra let K := separableClosure F Ω let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K) let Nall := (pointSmallEtale x).fiber.Elements let P : ObjectProperty Nall := fun c ↦ IsAffine c.1.left let N := P.FullSubcategory let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom let NU := Q.FullSubcategory let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙ Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ let DU := Q.ι.op ⋙ D let T := EtaleResidueTriples A p K χ let DT := etaleResidueTriplesRingDiagram A p K χ (∀ (c : NU) (z : c.obj.obj.1.left.residueField (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1), (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) → ∀ (E : NUᵒᵖ ≌ T), ∃ (δ : DU ≅ E.functor ⋙ DT), ∀ c : NU, let t := E.functor.obj (op c) (∀ g : c.obj.obj.1.left ⟶ Spec A, g ≫ i = c.obj.obj.1.hom → (ΓSpecIso A).inv ≫ g.appTop ≫ δ.hom.app (op c) = t.α) ∧ c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ = Spec.map (CommRingCat.ofHom K.subtype) ≫ Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫ Spec.map (δ.hom.app (op c))",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], let $\\bar x:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point [def-weil-geometric-point] lying over $y\\in Y$, and let $\\kappa(\\bar x)\\subset\\Omega$ be the separable algebraic closure [def-weil-pbc-relative-separable-closure] of the residue field $\\kappa(y)$ [def-weil-residue-field] in $\\Omega$ (with $\\kappa(y)\\to\\Omega$ given by $\\bar x$). Let $U=\\operatorname{Spec}A\\subset Y$ be an affine open containing $y$ and $\\mathfrak p\\subset A$ the prime ideal of $y$, so that $\\kappa(\\mathfrak p)=\\kappa(y)$. Let $\\mathcal N$ be the category of affine pointed etale neighbourhoods $(V=\\operatorname{Spec}A_V,\\bar v)$ of $\\bar x$ [def-weil-pbc-pointed-etale-neighbourhoods] (a morphism $(V',\\bar v')\\to(V,\\bar v)$ is a $Y$-morphism $V'\\to V$ carrying $\\bar v'$ to $\\bar v$), and let $\\mathcal T$ be the category of triples $(B,\\mathfrak q,\\phi)$ where $A\\to B$ is a ring map with $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ etale [def-weil-etale-morphism], $\\mathfrak q\\subset B$ is a prime lying over $\\mathfrak p$, and $\\phi:\\kappa(\\mathfrak q)\\to\\kappa(\\bar x)$ is a homomorphism of $\\kappa(\\mathfrak p)$-algebras; a morphism $(B,\\mathfrak q,\\phi)\\to(B',\\mathfrak q',\\phi')$ is an $A$-algebra map $\\beta:B\\to B'$ with $\\beta^{-1}(\\mathfrak q')=\\mathfrak q$ and $\\phi'\\circ\\kappa(\\beta)=\\phi$. Let $\\mathcal N_U$ be the full subcategory of $\\mathcal N$ whose structure map factors through the given open immersion $i:U\\to Y$. Assume that every residue embedding $\\kappa(v)\\to\\Omega$ of an object in $\\mathcal N_U$ has image in $K=\\kappa(\\bar x)$. Let $D_U:\\mathcal N_U^{op}\\to\\mathrm{CommRing}$ send $(V,\\bar v)$ to $\\Gamma(V)$, and let $D_T:\\mathcal T\\to\\mathrm{CommRing}$ be the forgetful ring diagram [def-weil-pbc-etale-residue-triples]. There are an equivalence $E:\\mathcal N_U^{op}\\simeq\\mathcal T$ and a natural ring isomorphism $\\delta:D_U\\cong E\\circ D_T$. For $c=(V,\\bar v)$ write $t=E(c)$. For every chart factorization $g:V\\to\\operatorname{Spec}A$, the induced map $A\\to\\Gamma(V)$ followed by $\\delta_c:\\Gamma(V)\\to B_t$ equals $\\alpha_t$. Moreover $\\bar v$ followed by $V\\to\\operatorname{Spec}\\Gamma(V)$ is the spectrum map of $B_t\\to\\kappa(q_t)\\to K\\to\\Omega$ followed by $\\operatorname{Spec}(\\delta_c)$.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Proof of Lemma Tag 04HX (lemma-describe-etale-local-ring), first paragraph; Remark Tag 04HT (remark-etale-neighbourhoods)"
  },
  "stmt_deps": [
-  "def-weil-open-immersion",
-  "def-weil-affine-spectrum",
-  "def-weil-residue-field",
+  "def-pc-scheme",
   "def-weil-geometric-point",
   "def-weil-pbc-relative-separable-closure",
-  "def-weil-pbc-etale-residue-triples",
-  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-residue-field",
   "def-weil-pbc-pointed-etale-neighbourhoods",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-residue-triples",
+  "def-weil-open-immersion"
  ],
  "proof": [
   {
-   "text": "For the equivalence supplied by the preceding construction, global sections identify naturally with the triple rings; affine spectrum and residue-field evaluation establish the two displayed compatibility formulas.",
+   "text": "Use the existing compatible chart equivalence theorem: it constructs an equivalence together with the natural ring isomorphism and both formulas. No arbitrary equivalence is asserted to preserve these diagrams.",
    "uses": [
-    "def-weil-open-immersion",
-    "def-weil-affine-spectrum",
-    "def-weil-residue-field",
-    "def-weil-geometric-point",
-    "def-weil-pbc-relative-separable-closure",
-    "def-weil-pbc-etale-residue-triples",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-pointed-etale-neighbourhoods",
-    "def-weil-etale-morphism"
+    "lem-weil-pbc-etale-chart-residue-triples-equivalence"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-open-immersion",
-  "def-weil-affine-spectrum",
-  "def-weil-residue-field",
-  "def-weil-geometric-point",
-  "def-weil-pbc-relative-separable-closure",
-  "def-weil-pbc-etale-residue-triples",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-pointed-etale-neighbourhoods",
-  "def-weil-etale-morphism"
+  "lem-weil-pbc-etale-chart-residue-triples-equivalence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "F1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Proof of Lemma Tag 04HX (lemma-describe-etale-local-ring), first paragraph; Remark Tag 04HT (remark-etale-neighbourhoods)"
+  "place": "Proof of Lemma Tag 04HX (lemma-describe-etale-local-ring), first paragraph; Remark Tag 04HT (remark-etale-neighbourhoods)",
+  "note": "Retire the unused false universal assertion and attach the source-correct existential claim to the already proved combined equivalence theorem."
  },
  "mathlib_searches": [
   {
@@ -104,10 +92,10 @@
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence",
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartResidueTriplesEquivalence.lean",
-  "declaration": "AlgebraicGeometry.Scheme.etale_chart_residue_triples_equivalence_ring_iso",
-  "statement": "theorem etale_chart_residue_triples_equivalence_ring_iso (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i] (xU : Spec (.of Ω) ⟶ Spec A) : let x := xU ≫ i let p := (SpecToEquivOfField Ω (Spec A) xU).1 let F := (Spec A).residueField p let e := (SpecToEquivOfField Ω (Spec A) xU).2 letI : Algebra F Ω := e.hom.toAlgebra let K := separableClosure F Ω let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K) let Nall := (pointSmallEtale x).fiber.Elements let P : ObjectProperty Nall := fun c ↦ IsAffine c.1.left let N := P.FullSubcategory let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom let NU := Q.FullSubcategory let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙ Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ let DU := Q.ι.op ⋙ D let T := EtaleResidueTriples A p K χ let DT := etaleResidueTriplesRingDiagram A p K χ (∀ (c : NU) (z : c.obj.obj.1.left.residueField (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1), (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) → ∀ (E : NUᵒᵖ ≌ T), ∃ (δ : DU ≅ E.functor ⋙ DT), ∀ c : NU, let t := E.functor.obj (op c) (∀ g : c.obj.obj.1.left ⟶ Spec A, g ≫ i = c.obj.obj.1.hom → (ΓSpecIso A).inv ≫ g.appTop ≫ δ.hom.app (op c) = t.α) ∧ c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ = Spec.map (CommRingCat.ofHom K.subtype) ≫ Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫ Spec.map (δ.hom.app (op c))",
+  "declaration": "AlgebraicGeometry.Scheme.etale_chart_residue_triples_equivalence",
+  "statement": "theorem etale_chart_residue_triples_equivalence (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i] (xU : Spec (.of Ω) ⟶ Spec A) : let x := xU ≫ i let p := (SpecToEquivOfField Ω (Spec A) xU).1 let F := (Spec A).residueField p let e := (SpecToEquivOfField Ω (Spec A) xU).2 letI : Algebra F Ω := e.hom.toAlgebra let K := separableClosure F Ω let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K) let Nall := (pointSmallEtale x).fiber.Elements let P : ObjectProperty Nall := fun c ↦ IsAffine c.1.left let N := P.FullSubcategory let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom let NU := Q.FullSubcategory let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙ Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ let DU := Q.ι.op ⋙ D let T := EtaleResidueTriples A p K χ let DT := etaleResidueTriplesRingDiagram A p K χ (∀ (c : NU) (z : c.obj.obj.1.left.residueField (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1), (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) → ∃ (E : NUᵒᵖ ≌ T) (δ : DU ≅ E.functor ⋙ DT), (∀ c : NU, let t := E.functor.obj (op c) (∀ g : c.obj.obj.1.left ⟶ Spec A, g ≫ i = c.obj.obj.1.hom → (ΓSpecIso A).inv ≫ g.appTop ≫ δ.hom.app (op c) = t.α) ∧ c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ = Spec.map (CommRingCat.ofHom K.subtype) ≫ Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫ Spec.map (δ.hom.app (op c)))",
   "branch": "sheaf-dag",
-  "by": "R1",
+  "by": "P1",
   "date": "2026-10-12"
  },
  "reviewed": {
@@ -123,18 +111,61 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2b129",
-  "group": "H2",
+  "reviewer": "X-87cdf",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T135239-L-1667531",
+  "landing": "20261012T173821-L-3294203",
   "kind": "interface",
-  "note": "independent Codex review: Existing signatures preserved; three new Lean statements match their nodes; proof assembly, dependencies and report agree. All four delivered modules and direct importer Sheaf.AlgebraicGeometry.EtaleLocalRingTriples compile cleanly; axioms are as expected for this decomposition.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.etale_chart_residue_triples_equivalence_functor",
-   "AlgebraicGeometry.Scheme.etale_chart_residue_triples_equivalence_ring_iso"
+  "note": "independent Codex review: Corrected node matches the existing existential equivalence theorem and Stacks 04HX/04HT; retirement counterexample is valid, signatures match the change record, delivery and sole direct importer compile cleanly, and retained proofs use only permitted axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "F1 stage 2",
+  "old_statement": "theorem etale_chart_residue_triples_equivalence_ring_iso (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i] (xU : Spec (.of Ω) ⟶ Spec A) : let x := xU ≫ i let p := (SpecToEquivOfField Ω (Spec A) xU).1 let F := (Spec A).residueField p let e := (SpecToEquivOfField Ω (Spec A) xU).2 letI : Algebra F Ω := e.hom.toAlgebra let K := separableClosure F Ω let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K) let Nall := (pointSmallEtale x).fiber.Elements let P : ObjectProperty Nall := fun c ↦ IsAffine c.1.left let N := P.FullSubcategory let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom let NU := Q.FullSubcategory let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙ Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ let DU := Q.ι.op ⋙ D let T := EtaleResidueTriples A p K χ let DT := etaleResidueTriplesRingDiagram A p K χ (∀ (c : NU) (z : c.obj.obj.1.left.residueField (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1), (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) → ∀ (E : NUᵒᵖ ≌ T), ∃ (δ : DU ≅ E.functor ⋙ DT), ∀ c : NU, let t := E.functor.obj (op c) (∀ g : c.obj.obj.1.left ⟶ Spec A, g ≫ i = c.obj.obj.1.hom → (ΓSpecIso A).inv ≫ g.appTop ≫ δ.hom.app (op c) = t.α) ∧ c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ = Spec.map (CommRingCat.ofHom K.subtype) ≫ Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫ Spec.map (δ.hom.app (op c))",
+  "what": "The source constructs one compatible equivalence; it does not claim compatibility for every abstract equivalence. Retire the unused false Lean declaration and attach the corrected existential statement to the existing combined theorem.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Proof of Lemma Tag 04HX (lemma-describe-etale-local-ring), first paragraph; Remark Tag 04HT (remark-etale-neighbourhoods)"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-weil-open-immersion",
+   "def-weil-affine-spectrum",
+   "def-weil-residue-field",
+   "def-weil-geometric-point",
+   "def-weil-pbc-relative-separable-closure",
+   "def-weil-pbc-etale-residue-triples",
+   "lem-weil-pbc-etale-composition-cancellation",
+   "def-weil-pbc-pointed-etale-neighbourhoods",
+   "def-weil-etale-morphism"
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.etale_chart_residue_triples_equivalence_ring_iso"
+  "old_proof": [
+   {
+    "text": "For the equivalence supplied by the preceding construction, global sections identify naturally with the triple rings; affine spectrum and residue-field evaluation establish the two displayed compatibility formulas.",
+    "uses": [
+     "def-weil-open-immersion",
+     "def-weil-affine-spectrum",
+     "def-weil-residue-field",
+     "def-weil-geometric-point",
+     "def-weil-pbc-relative-separable-closure",
+     "def-weil-pbc-etale-residue-triples",
+     "lem-weil-pbc-etale-composition-cancellation",
+     "def-weil-pbc-pointed-etale-neighbourhoods",
+     "def-weil-etale-morphism"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-open-immersion",
+   "def-weil-affine-spectrum",
+   "def-weil-residue-field",
+   "def-weil-geometric-point",
+   "def-weil-pbc-relative-separable-closure",
+   "def-weil-pbc-etale-residue-triples",
+   "lem-weil-pbc-etale-composition-cancellation",
+   "def-weil-pbc-pointed-etale-neighbourhoods",
+   "def-weil-etale-morphism"
   ]
  }
 }
