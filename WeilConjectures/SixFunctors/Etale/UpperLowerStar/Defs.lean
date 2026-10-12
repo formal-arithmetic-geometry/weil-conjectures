@@ -249,7 +249,8 @@ scoped notation "(" g ")^*[" A "]" =>
 end Etale
 
 /-- The adjunction `g^* ⊣ g_*` on sheaves for the small étale sites.
-(blueprint: `prop-weil-pbc-inverse-image-modules-exact`, `lem-weil-pbc-inverse-image-module-adjunction`) -/
+(blueprint: `prop-weil-pbc-inverse-image-modules-exact`,
+`lem-weil-pbc-inverse-image-module-adjunction`) -/
 noncomputable def Etale.upperStarLowerStarAdjunction : (g)^*[A] ⊣ (g)_*[A] :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @Etale ⊤ g) A
