@@ -46,7 +46,7 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal F\\xrightarrow{a}\\mathcal G\\xrightarrow{b}\\mathcal H$ be any exact complex of $\\mathcal O_Z$-modules, and fix $t\\in T$, with $z=h(t)$. By [lem-weil-pbc-module-stalk-exact] the complex $\\mathcal F_z\\xrightarrow{a_z}\\mathcal G_z\\xrightarrow{b_z}\\mathcal H_z$ is exact. By [lem-weil-pbc-module-stalk-pullback], naturally in the module, the stalk complex of $h^*\\mathcal F\\to h^*\\mathcal G\\to h^*\\mathcal H$ at $t$ identifies with $\\mathcal F_z\\otimes_{\\mathcal O_{Z,z}}\\mathcal O_{T,t}\\xrightarrow{a_z\\otimes1}\\mathcal G_z\\otimes_{\\mathcal O_{Z,z}}\\mathcal O_{T,t}\\xrightarrow{b_z\\otimes1}\\mathcal H_z\\otimes_{\\mathcal O_{Z,z}}\\mathcal O_{T,t}$. Naturality of the cited isomorphism is what identifies the two differentials with these tensor maps.",
+   "text": "For an exact short complex S of module sheaves on Y, apply clause (5) of [lem-weil-pbc-module-stalk-exact] to obtain exactness of S at the stalk h(x). The natural functor isomorphism of [lem-weil-pbc-module-stalk-pullback] identifies the stalk of tensorPullback h applied to S with the extension of scalars of this stalk complex along h.stalkMap x. In Lean this identification is S.mapNatIso e; its naturality supplies both commuting squares, so no additional compatibility lemma is needed.",
    "uses": [
     "lem-weil-pbc-module-stalk-exact",
     "lem-weil-pbc-module-stalk-pullback"
@@ -58,7 +58,7 @@
    }
   },
   {
-   "text": "Flatness of $h$ means that $\\mathcal O_{T,t}$ is flat over $\\mathcal O_{Z,z}$ for every $t$ [def-weil-flat-morphism]. Apply [lem-weil-pbc-flat-tensor-exact] to $R=\\mathcal O_{Z,z}$, $M=\\mathcal O_{T,t}$ and the exact stalk complex from step 1. The tensor complex in step 1 is exact. Thus the pulled-back complex is exact at every stalk; [lem-weil-pbc-module-stalk-exact] implies it is exact as a complex of $\\mathcal O_T$-modules.",
+   "text": "By [def-weil-flat-morphism], Flat.iff_flat_stalkMap makes (h.stalkMap x).hom flat. The flat tensor exactness of [lem-weil-pbc-flat-tensor-exact] is used in its extension-of-scalars categorical form, Mathlib ModuleCat.preservesFiniteLimits_extendScalars_of_flat. Extension of scalars is a left adjoint, hence also preserves finite colimits and zero morphisms. ShortComplex.Exact.map therefore sends the exact stalk complex to an exact tensor complex. Transport exactness through the natural isomorphism from step 1 using ShortComplex.exact_of_iso. Clause (5) of [lem-weil-pbc-module-stalk-exact] now detects exactness of the pulled-back sheaf complex.",
    "uses": [
     "def-weil-flat-morphism",
     "lem-weil-pbc-flat-tensor-exact",
@@ -71,7 +71,7 @@
    }
   },
   {
-   "text": "The functor $h^*$ is additive: in its defining inverse-image-and-tensor construction [def-pc-module-pullback], inverse image carries the sectionwise sum of morphisms to the sum, and $(a+a\\prime)\\otimes1=(a\\otimes1)+(a\\prime\\otimes1)$ on pure tensors and hence on the sheafification. It sends the zero module to zero by the same construction. Steps 1 and 2 apply also to the complexes at the two ends of any short exact sequence, so $h^*$ preserves short exact sequences and is exact. By [def-pc-module-pullback] it is left adjoint to the module direct image $h_*$. To prove that $h_*\\mathcal I$ is injective whenever $\\mathcal I$ is injective [def-sp-injective-resolutions], for a monomorphism $M\\hookrightarrow N$, exactness makes $h^*M\\hookrightarrow h^*N$ a monomorphism; a map $M\\to h_*\\mathcal I$ corresponds under the adjunction to $h^*M\\to\\mathcal I$, extends to $h^*N\\to\\mathcal I$ by injectivity, and its adjoint $N\\to h_*\\mathcal I$ extends the original map by naturality.",
+   "text": "The adjunction in [def-pc-module-pullback], as nonempty_tensorPullbackAdjunction, gives tensorPullback h a left-adjoint instance and therefore preservation of finite colimits. Module pushforward is additive, so Adjunction.left_adjoint_additive makes tensorPullback h additive. Steps 1 and 2 show that it preserves every exact short complex. Functor.preservesHomology_of_map_exact and Functor.preservesFiniteLimits_of_preservesHomology yield preservation of finite limits. Finally, Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms applies the adjunction and the resulting monomorphism preservation: this is the extension argument for injective objects of [def-sp-injective-resolutions], with adjunction naturality supplied by Mathlib.",
    "uses": [
     "def-pc-module-pullback",
     "def-sp-injective-resolutions"
@@ -94,7 +94,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex; literature/stacks-project/cohomology.tex",
-  "place": "Modules 02N4 (lemma-pullback-flat), expanded using 05NE (lemma-flat-stalks-flat) and Sheaves 0098 (lemma-stalk-pullback-modules); Cohomology 02N5 (lemma-pushforward-injective-flat)"
+  "place": "Modules 02N4 (lemma-pullback-flat), expanded using 05NE (lemma-flat-stalks-flat) and Sheaves 0098 (lemma-stalk-pullback-modules); Cohomology 02N5 (lemma-pushforward-injective-flat); Lean realization by Q2: natural ShortComplex.mapNatIso transport, flat extension-of-scalars finite limits, additive left adjoint, and Mathlib exact-functor/adjunction criteria (2026-10-12)"
  },
  "status": "split",
  "merged_into": null,
@@ -160,5 +160,15 @@
   "group": "G1",
   "result": "pass",
   "note": "schemes X Y + h : X ⟶ Y = T,Z,h; [Flat h] (Mathlib, stalkwise via Flat.iff_flat_stalkMap) = def-weil-flat-morphism; exactness of h^* = PreservesFiniteLimits ∧ PreservesFiniteColimits of recorded Scheme.Modules.tensorPullback h; injectives = (Scheme.Modules.pushforward h).PreservesInjectiveObjects, the right adjoint of the recorded adjunction (#check: Mathlib Scheme.Modules.pushforward); not existing: Adjunction.preservesInjectiveObjects_of_preservesFiniteLimits needs the exactness clause as input; universe u single, no extra hypotheses"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T144138-L-2105090",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

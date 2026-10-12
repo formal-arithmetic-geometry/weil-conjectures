@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Mathlib.Algebra.Category.ModuleCat.Descent
+import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 
@@ -59,6 +61,40 @@ theorem flat_module_pullback_exact_pushforward_injective
     (PreservesFiniteLimits (Scheme.Modules.tensorPullback h) ∧
       PreservesFiniteColimits (Scheme.Modules.tensorPullback h)) ∧
       (Scheme.Modules.pushforward h).PreservesInjectiveObjects := by
-  sorry
+  let adj := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction h)
+  have : (Scheme.Modules.tensorPullback h).IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
+  have : PreservesFiniteColimits (Scheme.Modules.tensorPullback h) := inferInstance
+  have : (Scheme.Modules.tensorPullback h).Additive := adj.left_adjoint_additive
+  have hex : ∀ S : ShortComplex Y.Modules,
+      S.Exact → (S.map (Scheme.Modules.tensorPullback h)).Exact := by
+    intro S hS
+    apply ((RingedSpace.module_stalk_exact X.toRingedSpace
+      ((Scheme.Modules.tensorPullback h).map S.f)).2.2.2.2
+      _ _ _ _).mpr
+    intro x
+    have : PreservesFiniteLimits (ModuleCat.extendScalars (h.stalkMap x).hom) :=
+      ModuleCat.preservesFiniteLimits_extendScalars_of_flat
+        ((Flat.iff_flat_stalkMap h).mp inferInstance x)
+    have : (ModuleCat.extendScalars (h.stalkMap x).hom).PreservesZeroMorphisms :=
+      inferInstance
+    have : (RingedSpace.moduleStalkFunctor Y.toRingedSpace (h x)).PreservesZeroMorphisms :=
+      inferInstance
+    have hy := ((RingedSpace.module_stalk_exact Y.toRingedSpace S.f).2.2.2.2
+      _ _ _ _).mp hS (h x)
+    have : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).PreservesZeroMorphisms :=
+      inferInstance
+    have : (Scheme.Modules.tensorPullback h).PreservesZeroMorphisms := inferInstance
+    have : (Scheme.Modules.tensorPullback h ⋙
+        RingedSpace.moduleStalkFunctor X.toRingedSpace x).PreservesZeroMorphisms :=
+      Functor.preservesZeroMorphisms_comp _ _
+    obtain ⟨e, _⟩ := Scheme.Modules.exists_tensorPullback_stalk_iso h x
+    exact ShortComplex.exact_of_iso (S.mapNatIso e.symm)
+      (hy.map (ModuleCat.extendScalars (h.stalkMap x).hom))
+  have : (Scheme.Modules.tensorPullback h).PreservesHomology :=
+    Functor.preservesHomology_of_map_exact (Scheme.Modules.tensorPullback h) hex
+  have : PreservesFiniteLimits (Scheme.Modules.tensorPullback h) :=
+    Functor.preservesFiniteLimits_of_preservesHomology (Scheme.Modules.tensorPullback h)
+  exact ⟨⟨inferInstance, inferInstance⟩,
+    Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms adj⟩
 
 end AlgebraicGeometry
