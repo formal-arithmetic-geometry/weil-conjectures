@@ -36,6 +36,10 @@ into an injective object.
   object `I`.
 - `CategoryTheory.Adjunction.mapExtCounit_bijective`: it is bijective in every degree if `R` is
   exact as well, so that `Ext A (R G) n ≃ Ext (L A) G n`.
+- `CategoryTheory.Adjunction.mapExtCounit_bijective_of_forall`: it is bijective on a class of
+  objects which are acyclic for `R` and stable under cokernels of injective envelopes.
+- `CategoryTheory.Functor.mapExt_bijective_of_subsingleton`: an exact functor is bijective on
+  `Ext` out of `X` if it maps injective objects to objects without higher `Ext` from `F X`.
 -/
 
 @[expose] public section
@@ -239,4 +243,106 @@ noncomputable def extAddEquiv [R.Additive] [PreservesFiniteLimits R]
     Ext A (R.obj G) n ≃+ Ext (L.obj A) G n :=
   AddEquiv.ofBijective (adj.mapExtCounit A G n) (adj.mapExtCounit_bijective A G n)
 
+/-- **The `Ext`-adjunction on a class of objects.** Let `L ⊣ R` be an adjunction with exact left
+adjoint, and `P` a class of objects of `D` such that for every short exact sequence
+`0 → G → I → Q → 0` with `P G` and `I` injective, `Q` again satisfies `P` and `R` maps the
+sequence to a short exact sequence. Then `Ext A (R G) n ⟶ Ext (L A) G n` is bijective for every
+`G` satisfying `P`. This is the case of objects which are acyclic for `R` of
+`CategoryTheory.Adjunction.mapExtCounit_bijective`. -/
+theorem mapExtCounit_bijective_of_forall [R.Additive] (P : D → Prop)
+    (hP : ∀ {S : ShortComplex D}, S.ShortExact → Injective S.X₂ → P S.X₁ →
+      P S.X₃ ∧ (S.map R).ShortExact) (A : C) (n : ℕ) :
+    ∀ G : D, P G → Function.Bijective (adj.mapExtCounit A G n) := by
+  have := adj.isRightAdjoint
+  have : L.PreservesMonomorphisms := inferInstance
+  have hR := Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms adj
+  have h₀ (G : D) : Function.Bijective (adj.mapExtCounit A G 0) := by
+    refine ⟨fun x y hxy ↦ ?_, fun z ↦ ?_⟩
+    · obtain ⟨x, rfl⟩ := (Ext.mk₀_bijective _ _).2 x
+      obtain ⟨y, rfl⟩ := (Ext.mk₀_bijective _ _).2 y
+      rw [mapExtCounit_mk₀, mapExtCounit_mk₀] at hxy
+      rw [(adj.homEquiv _ _).symm.injective ((Ext.mk₀_bijective _ _).1 hxy)]
+    · obtain ⟨z, rfl⟩ := (Ext.mk₀_bijective _ _).2 z
+      exact ⟨Ext.mk₀ (adj.homEquiv _ _ z), by rw [mapExtCounit_mk₀, Equiv.symm_apply_apply]⟩
+  -- the map is bijective on injective objects
+  have hI (I : D) [Injective I] (n : ℕ) : Function.Bijective (adj.mapExtCounit A I n) := by
+    rcases n with _ | n
+    · exact h₀ I
+    · have : Injective (R.obj I) := Functor.injective_obj R I
+      exact ⟨fun x y _ ↦ (Ext.eq_zero_of_injective x).trans (Ext.eq_zero_of_injective y).symm,
+        fun z ↦ ⟨0, (map_zero _).trans (Ext.eq_zero_of_injective z).symm⟩⟩
+  induction n with
+  | zero => exact fun G _ ↦ h₀ G
+  | succ n hn =>
+    intro G hG
+    let I : InjectivePresentation G := Classical.arbitrary _
+    have := I.injective
+    let T := ShortComplex.mk I.f (cokernel.π I.f) (cokernel.condition I.f)
+    have hT : T.ShortExact := { exact := ShortComplex.exact_cokernel I.f }
+    obtain ⟨hQ, hS⟩ := hP hT I.injective hG
+    let φ : (T.map R).map L ⟶ T :=
+      { τ₁ := adj.counit.app G
+        τ₂ := adj.counit.app I.J
+        τ₃ := adj.counit.app T.X₃
+        comm₁₂ := (adj.counit.naturality I.f).symm
+        comm₂₃ := (adj.counit.naturality T.g).symm }
+    have : Injective (R.obj I.J) := Functor.injective_obj R I.J
+    exact AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact
+      ((Ext.mk₀ (R.map T.g)).postcomp A (add_zero n)) (hS.extClass.postcomp A rfl)
+      ((Ext.mk₀ T.g).postcomp (L.obj A) (add_zero n)) (hT.extClass.postcomp (L.obj A) rfl)
+      (adj.mapExtCounit A I.J n) (adj.mapExtCounit A T.X₃ n) (adj.mapExtCounit A G (n + 1))
+      (AddMonoidHom.ext fun x ↦ (adj.mapExtCounit_comp_mk₀ A T.g x).symm)
+      (AddMonoidHom.ext fun y ↦ (mapExactFunctor_comp_extClass_comp_mk₀ hS hT φ y).symm)
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' A hS n (n + 1) rfl))
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' (L.obj A) hT n (n + 1) rfl))
+      (hI I.J n).2 (hn T.X₃ hQ)
+      (fun x ↦ Ext.covariant_sequence_exact₁ _ hS x
+        (Ext.eq_zero_of_injective (I := R.obj I.J) _) rfl)
+      (fun y ↦ Ext.covariant_sequence_exact₁ _ hT y
+        (Ext.eq_zero_of_injective (I := I.J) _) rfl)
+
 end CategoryTheory.Adjunction
+
+namespace CategoryTheory.Functor
+
+open Limits Abelian
+
+variable {C : Type u} [Category.{v} C] [Abelian C] {D : Type u'} [Category.{v'} D] [Abelian D]
+  [HasExt.{w} C] [HasExt.{w'} D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
+  [PreservesFiniteColimits F] [EnoughInjectives C]
+
+attribute [local simp] Ext.mapExactFunctor_comp Ext.mapExactFunctor_mk₀
+  Ext.mapExactFunctor_extClass
+
+attribute [local instance] Ext.subsingleton_of_injective in
+/-- **`Ext` along an exact functor with acyclic images of injectives.** Let `F` be an exact
+functor which is bijective on morphisms out of `X`, and such that `Ext^{n + 1}(F X, F I) = 0` for
+every injective `I`. Then `F : Ext X Y n ⟶ Ext (F X) (F Y) n` is bijective for all `Y` and
+`n`. -/
+lemma mapExt_bijective_of_subsingleton (X : C)
+    (h₀ : ∀ Y : C, Function.Bijective (fun f : X ⟶ Y ↦ F.map f))
+    (hI : ∀ (I : C) [Injective I] (n : ℕ), Subsingleton (Ext (F.obj X) (F.obj I) (n + 1)))
+    (Y : C) (n : ℕ) : Function.Bijective (F.mapExtAddHom X Y n) := by
+  induction n generalizing Y with
+  | zero => simpa [Ext.mapExactFunctor₀] using h₀ Y
+  | succ n hn =>
+    let I : InjectivePresentation Y := Classical.arbitrary _
+    let S := ShortComplex.mk _ _ (cokernel.condition I.f)
+    have := I.injective
+    have := hI I.J n
+    have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel I.f }
+    exact AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact _ _ _ _
+      (F.mapExtAddHom X S.X₂ n) (F.mapExtAddHom X S.X₃ n) (F.mapExtAddHom X S.X₁ (n + 1))
+      (by cat_disch) (by cat_disch)
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' X hS n (n + 1) rfl))
+      ((ShortComplex.ab_exact_iff_function_exact _).mp
+        (Ext.covariant_sequence_exact₃' (F.obj X) (hS.map F) n (n + 1) rfl))
+      (hn _).surjective (hn _)
+      (fun x₁ ↦ Ext.covariant_sequence_exact₁ _ hS x₁ (by subsingleton) rfl)
+      (fun y₁ ↦ Ext.covariant_sequence_exact₁ _ (hS.map F) y₁
+        (Subsingleton.elim (h := hI I.J n) _ _) rfl)
+
+end CategoryTheory.Functor
