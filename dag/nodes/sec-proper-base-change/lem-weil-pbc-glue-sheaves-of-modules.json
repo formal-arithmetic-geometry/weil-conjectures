@@ -63,57 +63,25 @@
    }
   },
   {
-   "text": "*Step 4 ((2): the module $\\mathcal F$).* Following the first proof of 00AL and the proof of 00AM. First, $\\varphi_{ii}=\\mathrm{id}$: the cocycle condition with $i=j=k$ gives $\\varphi_{ii}=\\varphi_{ii}\\circ\\varphi_{ii}$, and composing with $\\varphi_{ii}^{-1}$ gives $\\varphi_{ii}=\\mathrm{id}_{\\mathcal F_i}$. For an open $W\\subseteq X$ let $\\mathcal F(W)$ be the set of families $(s_i)_{i\\in I}$ with $s_i\\in\\mathcal F_i(W\\cap U_i)$ and $(\\varphi_{ij})_{W\\cap U_{ij}}(s_i|_{W\\cap U_{ij}})=s_j|_{W\\cap U_{ij}}$ for all $i,j\\in I$. The product $\\prod_i\\mathcal F_i(W\\cap U_i)$ is an $\\mathcal O_X(W)$-module, $a\\in\\mathcal O_X(W)$ acting on the $i$-th factor through $a|_{W\\cap U_i}$; since the restriction maps of the $\\mathcal F_i$ are additive and semilinear and $\\varphi_{ij}$ is $\\mathcal O_{U_{ij}}$-linear, the defining equations are preserved by sums and by this action, so $\\mathcal F(W)$ is an $\\mathcal O_X(W)$-submodule (it is the equalizer of the two maps $\\prod_i\\mathcal F_i(W\\cap U_i)\\rightrightarrows\\prod_{i,j}\\mathcal F_j(W\\cap U_{ij})$ of 00AM). For opens $W'\\subseteq W$ let $\\mathcal F(W)\\to\\mathcal F(W')$ restrict each $s_i$ to $W'\\cap U_i$; the family stays in $\\mathcal F(W')$ by naturality of $\\varphi_{ij}$, and the map is additive, semilinear over $\\mathcal O_X(W)\\to\\mathcal O_X(W')$ and functorial, because these hold componentwise in the $\\mathcal F_i$ [def-weil-sheaf-of-modules-category]. So $\\mathcal F$ is a presheaf of $\\mathcal O_X$-modules.",
+   "text": "Apply [lem-weil-pbc-module-object-open-descent] to obtain the module sheaf and its compatible local isomorphisms (the original steps 4-7). Combine this with the fully proved morphism-gluing and locality clauses.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-module-object-open-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AL (lemma-glue-sheaves, line 5192), first proof (lines 5214-5240); Sheaves, Lemma 00AM (lemma-glue-sheaves-structures, line 5253) and its proof (lines 5265-5281)"
-   }
-  },
-  {
-   "text": "*Step 5 ((2): $\\mathcal F$ is a sheaf).* (00AL: the sheaf condition for $\\mathcal F$ follows from that of the $\\mathcal F_i$.) Let $W=\\bigcup_{a\\in A}W_a$ be an open covering and $\\sigma^a=(s^a_i)_i\\in\\mathcal F(W_a)$ with $\\sigma^a|_{W_a\\cap W_b}=\\sigma^b|_{W_a\\cap W_b}$ for all $a,b$. Fix $i$. The sections $s^a_i\\in\\mathcal F_i(W_a\\cap U_i)$ agree on $W_a\\cap W_b\\cap U_i$, and $W\\cap U_i=\\bigcup_a(W_a\\cap U_i)$ is an open covering in $U_i$, so since $\\mathcal F_i$ is a sheaf on $U_i$ [def-weil-sheaf-of-modules-category] there is a unique $s_i\\in\\mathcal F_i(W\\cap U_i)$ with $s_i|_{W_a\\cap U_i}=s^a_i$ for all $a$. The family $(s_i)_i$ lies in $\\mathcal F(W)$: for $i,j$ the two sections $(\\varphi_{ij})_{W\\cap U_{ij}}(s_i|_{W\\cap U_{ij}})$ and $s_j|_{W\\cap U_{ij}}$ of $\\mathcal F_j$ have restrictions $(\\varphi_{ij})_{W_a\\cap U_{ij}}(s^a_i|_{W_a\\cap U_{ij}})$ and $s^a_j|_{W_a\\cap U_{ij}}$ to $W_a\\cap U_{ij}$ (naturality of $\\varphi_{ij}$), which are equal because $\\sigma^a\\in\\mathcal F(W_a)$; as the $W_a\\cap U_{ij}$ cover $W\\cap U_{ij}$, the two sections are equal (separation for $\\mathcal F_j$). It restricts to $\\sigma^a$ on each $W_a$ by construction, and it is the only such element of $\\mathcal F(W)$ because each component $s_i$ is unique. Hence $\\mathcal F$ satisfies the sheaf condition for open coverings; it is a statement about the underlying sets, so the presheaf of abelian groups underlying $\\mathcal F$ is a sheaf, and with Step 4 $\\mathcal F$ is an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category].",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AL (lemma-glue-sheaves, line 5192), first proof (lines 5214-5240)"
-   }
-  },
-  {
-   "text": "*Step 6 ((2): the isomorphisms $\\varphi_i$).* Following 00AL (second paragraph of the first proof). Fix $i$. For an open $W\\subseteq U_i$ define $(\\varphi_i)_W:\\mathcal F(W)\\to\\mathcal F_i(W)$, $(s_j)_j\\mapsto s_i$ (here $W\\cap U_i=W$). It is $\\mathcal O_X(W)$-linear (projection to a factor) and compatible with restrictions (restriction is componentwise), so $\\varphi_i:\\mathcal F|_{U_i}\\to\\mathcal F_i$ is $\\mathcal O_{U_i}$-linear. It is injective: for $(s_j)_j\\in\\mathcal F(W)$ the defining equation for the pair $(i,j)$ reads $s_j=(\\varphi_{ij})_{W\\cap U_j}(s_i|_{W\\cap U_j})$ (as $W\\cap U_{ij}=W\\cap U_j$), so the family is determined by $s_i$. It is surjective: given $s\\in\\mathcal F_i(W)$ put $s_j=(\\varphi_{ij})_{W\\cap U_j}(s|_{W\\cap U_j})\\in\\mathcal F_j(W\\cap U_j)$; then $s_i=s$ because $\\varphi_{ii}=\\mathrm{id}$ (Step 4), and for $j,k$, using $W\\cap U_{jk}=W\\cap U_{ijk}$, naturality and the cocycle condition, $(\\varphi_{jk})(s_j|_{W\\cap U_{jk}})=\\varphi_{jk}(\\varphi_{ij}(s|_{W\\cap U_{ijk}}))=\\varphi_{ik}(s|_{W\\cap U_{ijk}})=s_k|_{W\\cap U_{jk}}$, so $(s_j)_j\\in\\mathcal F(W)$ and maps to $s$. Hence every component of $\\varphi_i$ is a bijective linear map; the inverse maps are linear and compatible with restrictions (they are inverse to compatible maps), so they form an $\\mathcal O_{U_i}$-linear inverse and $\\varphi_i$ is an isomorphism of $\\mathcal O_{U_i}$-modules [def-weil-sheaf-of-modules-category].",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AL (lemma-glue-sheaves, line 5192), first proof (lines 5214-5240)"
-   }
-  },
-  {
-   "text": "*Step 7 ((2): compatibility with the $\\varphi_{ij}$).* The commutative square of 00AL. For an open $W\\subseteq U_{ij}$ and $(s_k)_k\\in\\mathcal F(W)$ we have $W\\cap U_i=W\\cap U_j=W\\cap U_{ij}=W$, and the defining equation of $\\mathcal F(W)$ for the pair $(i,j)$ gives $(\\varphi_{ij})_W((\\varphi_i)_W((s_k)_k))=(\\varphi_{ij})_W(s_i)=s_j=(\\varphi_j)_W((s_k)_k)$. So $\\varphi_{ij}\\circ\\varphi_i|_{U_{ij}}$ and $\\varphi_j|_{U_{ij}}$ have the same components and are equal.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00AL (lemma-glue-sheaves, line 5192), first proof (lines 5214-5240)"
+    "place": "Sheaves, Section 00AK, Lemma 00AL (first proof) and Lemma 00AM; read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM. Universe-small subcover argument supplied by N3."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-object-open-descent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma 04TN (lemma-glue-maps, line 5078) with its proof for (1), the O-linearity of the glued map checked on the U_i; Lemma 00AL (lemma-glue-sheaves, line 5192), first proof, and Lemma 00AM (lemma-glue-sheaves-structures, line 5253) for (2)"
+  "place": "Sheaves, Lemma 04TN (lemma-glue-maps, line 5078) with its proof for (1), the O-linearity of the glued map checked on the U_i; Lemma 00AL (lemma-glue-sheaves, line 5192), first proof, and Lemma 00AM (lemma-glue-sheaves-structures, line 5253) for (2); morphism steps implemented via Mathlib unique section gluing; object steps isolated as lem-weil-pbc-module-object-open-descent."
  },
  "mathlib_searches": [
   {
@@ -243,5 +211,15 @@
   "group": "C1",
   "result": "fix",
   "note": "cover hcover -> ⨆ i, U i = ⊤ (OPEN COVERS); X RingedSpace/moduleRings shared; (1) φ_i on F.over (U i), overlap agreement componentwise at every W≤U_i,U_j = φ_i|U_ij=φ_j|U_ij, ∃! ψ with ψ.over (U i)=φ i; in-particular clause separate; (2) Fi local modules over (moduleRings X).over (U i), φij iso via Mathlib overMap incl. i=j, cocycle at every W≤U_ijk, H with H.over (U i)≅Fi i and φi≫φij=φj on U_ij; overMap/over/Hom.over are Mathlib (#check); modules max u v, I : Type w"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T095916-L-321846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

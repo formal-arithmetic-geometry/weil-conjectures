@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-module-object-open-descent",
+ "kind": "statement",
+ "title": "Effectivity of open-cover descent for module sheaves",
+ "statement": "Let X be a ringed space with structure sheaf O, and let (U_i) indexed by an arbitrary type I be an open cover. Let Fi_i be sheaves of modules over O restricted to U_i [def-weil-sheaf-of-modules-category]. Suppose phi_ij are linear isomorphisms between their restrictions to U_i intersect U_j, for all i,j including equal indices, with phi_ik = phi_jk composed with phi_ij on every triple overlap. Then there exists an O-module sheaf H and isomorphisms e_i from H restricted to U_i to Fi_i such that phi_ij composed with e_i equals e_j on every overlap. The modules of sections of H live in the same universe max u v as the local modules, even if I lives in a larger universe.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 00AK, Lemma 00AL (first proof) and Lemma 00AM; read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM. Universe-small subcover argument supplied by N3."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof": [
+  {
+   "text": "Choose for each point of X a cover member containing it. The resulting family is indexed in universe u and covers X; this handles I in an arbitrary universe w. Construct at each W the O(W)-submodule of the product of the local sections over W intersected with this small cover, cut out by the overlap compatibility equations. Restrictions act componentwise and preserve the equations by naturality. Functoriality and semilinearity are inherited from the local modules.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 00AK, Lemma 00AL (first proof) and Lemma 00AM; read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM. Universe-small subcover argument supplied by N3."
+   }
+  },
+  {
+   "text": "Glue a matching family componentwise using each local sheaf axiom. Apply separation on every overlap to show the glued components satisfy the compatibility equations. Uniqueness follows componentwise. Thus the explicitly constructed presheaf is a module sheaf H.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 00AK, Lemma 00AL (first proof) and Lemma 00AM; read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM. Universe-small subcover argument supplied by N3."
+   }
+  },
+  {
+   "text": "For any original index i and W contained in U_i, send a compatible family to the section of Fi_i(W) glued from its components transported to Fi_i on the small covering of W. Conversely, restrict a section of Fi_i and transport it by phi_ij to each small-cover component. The cocycle and the diagonal identity (deduced from invertibility and the diagonal cocycle) show these are inverse linear maps. Uniqueness of gluing proves naturality. The cocycle, checked on the small cover, gives the overlap compatibility of the resulting local isomorphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 00AK, Lemma 00AL (first proof) and Lemma 00AM; read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM. Universe-small subcover argument supplied by N3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 00AK, Lemma 00AL (first proof) and Lemma 00AM; read at https://stacks.math.columbia.edu/tag/00AL and https://stacks.math.columbia.edu/tag/00AM. Universe-small subcover argument supplied by N3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "gluing sheaves of modules from isomorphisms on overlaps satisfying a cocycle",
+   "results": "Service unavailable (Internal Server Error); no verdict from this attempt. Parent node records earlier LeanSearch results: sections and schemes only.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glue morphisms of sheaves of modules from compatible restrictions on an open cover",
+   "results": "TopCat.Sheaf.existsUnique_gluing and existsUnique_gluing'; Scheme.GlueData.sheafValGluedMk; PresheafedSpace.GlueData formulas. No sheaf-of-modules object descent theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"glue\"",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "glue.*[Mm]odule|[Mm]odule.*glue; rg descentGlue, gluing and glue_sheaves_of_modules in Mathlib and both project roots; blueprint_refs.py search 00AL and 00AM",
+   "results": "Mathlib only module colimits and unrelated geometry. Source Scheme.Modules.descentGlue constructs a scheme descent object, limited to schemes and universe u. SheafOfModulesFromBasis assumes finite refinements and one universe, not arbitrary ringed-space covers. No imported blueprint node matches 00AL or 00AM; existing parent bundles this object clause with morphism gluing.",
+   "date": "2026-10-12",
+   "verdict": "no applicable existing theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.GlueSheavesOfModules",
+  "date": "2026-10-12",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Object gluing part of lem-weil-pbc-glue-sheaves-of-modules, steps 4-7, used in finite-etale lifting essential surjectivity",
+   "via": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ModuleObjectOpenDescent",
+  "file": "lean/Sheaf/Topology/ModuleObjectOpenDescent.lean",
+  "declaration": "AlgebraicGeometry.module_object_open_descent",
+  "statement": "theorem module_object_open_descent (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X) (hcover : ⨆ i, U i = ⊤) : ∀ (Fi : ∀ i : I, SheafOfModules.{max u v} ((moduleRings X).over (U i))) (φij : ∀ i j : I, (SheafOfModules.overMap (moduleRings X) (homOfLE inf_le_left : U i ⊓ U j ⟶ U i)).obj (Fi i) ≅ (SheafOfModules.overMap (moduleRings X) (homOfLE inf_le_right : U i ⊓ U j ⟶ U j)).obj (Fi j)), (∀ (i j k : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j) (hk : W ≤ U k), (φij i k).hom.val.app (op (Over.mk (homOfLE (le_inf hi hk)))) = (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) ≫ (φij j k).hom.val.app (op (Over.mk (homOfLE (le_inf hj hk))))) → ∃ (H : SheafOfModules.{max u v} (moduleRings X)) (φi : ∀ i : I, H.over (U i) ≅ Fi i), ∀ (i j : I) (W : Opens X) (hi : W ≤ U i) (hj : W ≤ U j), (φi i).hom.val.app (op (Over.mk (homOfLE hi))) ≫ (φij i j).hom.val.app (op (Over.mk (homOfLE (le_inf hi hj)))) = (φi j).hom.val.app (op (Over.mk (homOfLE hj)))",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T095916-L-321846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T095916-L-321846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
