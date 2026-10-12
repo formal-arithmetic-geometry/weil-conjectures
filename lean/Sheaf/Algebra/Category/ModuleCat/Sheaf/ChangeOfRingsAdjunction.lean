@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.CategoryTheory.PresheafChangeOfRingsAdjunction
 
 /-!
 # The tensor change-of-rings adjunction on sheaves of modules
@@ -65,6 +66,60 @@ theorem exists_changeOfRingsAdjunction :
         ((adj.homEquiv M N) (eqToHom (h M) ≫ f)).val.app U m =
           f.val.app U ((η M).app U
             ((1 : B.presheaf.obj U) ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] m)) := by
-  sorry
+  classical
+  obtain ⟨T, q, e, hres, _, he, _, _, _⟩ :=
+    PresheafOfModules.changeOfRingsAdjunction.{u, u, u} X A B α
+  let hp (M : SheafOfModules.{u} (𝓡 A)) :
+      changeOfRingsPresheaf.{u, u, u} (J := 𝓙) α M ≅ T.obj M.val := by
+    refine PresheafOfModules.isoMk (q M.val) ?_
+    intro U V i
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    change (q M.val V).hom (changeOfRingsMap.{u, u, u} (J := 𝓙) α M i _) = _
+    rw [show changeOfRingsMap.{u, u, u} (J := 𝓙) α M i
+        ((1 : B.presheaf.obj U) ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] m) =
+        (B.presheaf.map i 1) ⊗ₜ[A.presheaf.obj V, (α.hom.app V).hom]
+          (M.val.map i m) from
+      Classical.choose_spec (exists_changeOfRingsMap.{u, u, u} (J := 𝓙) α M i) 1 m]
+    exact (hres M.val U V i 1 m).symm
+  let es (M : SheafOfModules.{u} (𝓡 A)) (N : SheafOfModules.{u} (𝓡 B)) :
+      ((𝓣 M) ⟶ N) ≃ (M ⟶ (restrictScalars 𝓪).obj N) :=
+    (PresheafOfModules.sheafificationHomEquiv (𝟙 (𝓡 B).obj)).trans
+      (((Iso.homCongr (hp M) (Iso.refl N.val)).trans (e M.val N.val)).trans
+        { toFun := fun g ↦ ⟨g⟩
+          invFun := fun g ↦ g.val
+          left_inv := fun _ ↦ rfl
+          right_inv := fun _ ↦ rfl })
+  have hes (M : SheafOfModules.{u} (𝓡 A)) (N : SheafOfModules.{u} (𝓡 B))
+      (f : (𝓣 M) ⟶ N) (U : (Opens X)ᵒᵖ) (m : M.val.obj U) :
+      (es M N f).val.app U m =
+        f.val.app U ((η M).app U
+          ((1 : B.presheaf.obj U) ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] m)) := by
+    change (e M.val N.val
+      ((hp M).inv ≫ PresheafOfModules.sheafificationHomEquiv (𝟙 (𝓡 B).obj) f)).app
+        U m = _
+    rw [he]
+    change (PresheafOfModules.sheafificationHomEquiv (𝟙 (𝓡 B).obj) f).app U
+      ((hp M).inv.app U ((q M.val U).hom _)) = _
+    change (PresheafOfModules.sheafificationHomEquiv (𝟙 (𝓡 B).obj) f).app U
+      ((q M.val U).inv ((q M.val U).hom _)) = _
+    have hc (x : (ModuleCat.extendScalars (α.hom.app U).hom).obj (M.val.obj U)) :
+        (q M.val U).inv ((q M.val U).hom x) = x :=
+      ConcreteCategory.congr_hom (q M.val U).hom_inv_id x
+    rw [hc]
+    rfl
+  have hn : ∀ M N N' (g : N ⟶ N') (f : (𝓣 M) ⟶ N),
+      es M N' (f ≫ g) = es M N f ≫ (restrictScalars 𝓪).map g := by
+    intro M N N' g f
+    ext U m
+    rw [hes]
+    change g.val.app U (f.val.app U _) = g.val.app U ((es M N f).val.app U m)
+    rw [hes]
+  refine ⟨Adjunction.leftAdjointOfEquiv es hn, fun _ ↦ rfl,
+    Adjunction.adjunctionOfEquivLeft es hn, ?_⟩
+  intro M N f U m
+  simp only [eqToHom_refl, Category.id_comp, Adjunction.adjunctionOfEquivLeft,
+    Adjunction.mkOfHomEquiv_homEquiv]
+  exact hes M N f U m
 
 end SheafOfModules

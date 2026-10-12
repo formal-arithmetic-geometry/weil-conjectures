@@ -5890,3 +5890,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:13 L: merged deliver/Z2/def-nagata-relative-gluing-valid-stage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataRelativeGluingValidStage AlgebraicGeometry.nagataRelativeGluingValidStage; statement corrected (2 citers))
 - 03:13 L: merged deliver/C1/Sheaf.AlgebraicGeometry.ModuleSubobjectGenericConstancy (stage 3; reviewer PASS; first push; landing 20261012T031311-L-1334105 (interface); modules 2; new nodes 1)
 - 03:15 L: merged deliver/C1/Sheaf.Topology.ClosedImmersionPushforwardCohomology (stage 3; reviewer PASS; first push; landing 20261012T031507-L-1344750 (proof); modules 1; new nodes 0)
+- 03:17 L: merged deliver/D2/Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction (stage 3; reviewer PASS; first push; landing 20261012T031645-L-1352802 (proof); modules 1; new nodes 0)
