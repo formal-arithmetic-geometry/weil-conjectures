@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 public import Sheaf.CategoryTheory.CanonicalResolutionDerivedIso
+import Sheaf.CategoryTheory.GrothendieckBottomEdgeSingleUnit
+import Sheaf.CategoryTheory.ResolutionDerivedSingleUnitAugmentation
 
 /-! # The bottom interval and an augmented comparison
 
@@ -70,6 +72,9 @@ theorem grothendieckBottomEdge_augmentation
         (DerivedCategory.Plus.homologyFunctor C n).map
           (G.rightDerivedFunctorPlus.map (resolutionAugmentationIso J).hom) ≫
         (DerivedCategory.Plus.homologyFunctor C n).map
-          (G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map f)) := by sorry
+          (G.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Q.map f)) := by
+  rw [← Category.assoc, grothendieckBottomEdge_singleUnit F G X n]
+  simp only [Category.assoc, ← Functor.map_comp]
+  rw [resolutionDerivedSingleUnit_augmentation F X I J φ hφ]
 
 end CategoryTheory
