@@ -6,10 +6,10 @@ module
 
 public import Sheaf.Paper.FiniteSplitEtaleHypercover
 public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting
-import Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember
 import Sheaf.Paper.EtaleHypercoverProduct
+import Sheaf.Paper.FiniteSplitHypercoverExistence
+import Sheaf.Paper.FiniteSplitHypercoverReplacement
+import Sheaf.Paper.EtaleHypercoverHomotopyEqualizer
 
 /-!
 # Finite refinements and local lifting
@@ -55,7 +55,21 @@ theorem exists_and_cofiltered (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedS
       (∀ (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V),
         ∃ (W : FiniteSplitEtaleHypercover X) (c : W.Refinement U),
           isRefinementHomotopic (c ≫ a) (c ≫ b)) := by
-  sorry
+  have hypercover (U : FiniteSplitEtaleHypercover X) : IsEtaleHypercover U.simplicial := by
+    intro n
+    exact ⟨U.matching n, U.projection n, U.matchingMap n,
+      U.projection_naturality n, U.matching_universal n,
+      U.matchingMap_projection n, U.matching_cover n⟩
+  refine ⟨exists_finite_split_hypercover X, ?_, ?_⟩
+  · intro U V
+    obtain ⟨W, ⟨c⟩⟩ := exists_finite_split_replacement (U.simplicial ⨯ V.simplicial)
+      (isEtaleHypercover_prod X U.simplicial V.simplicial (hypercover U) (hypercover V))
+    exact ⟨W, ⟨c ≫ prod.fst⟩, ⟨c ≫ prod.snd⟩⟩
+  · intro U V a b
+    obtain ⟨K, hK, c, ⟨H⟩⟩ := exists_etale_hypercover_homotopy_equalizer U V a b
+    obtain ⟨W, ⟨d⟩⟩ := exists_finite_split_replacement K hK
+    refine ⟨W, d ≫ c, Relation.EqvGen.rel _ _ ?_⟩
+    exact ⟨by simpa only [Category.assoc] using H.precomp d⟩
 
 /-- A finite family of locally solvable requirements is solved on finite constituent
 pieces after refinement. Each sieve consists of maps on which the corresponding lift

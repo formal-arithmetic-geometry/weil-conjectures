@@ -6108,3 +6108,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/T2/WeilConjectures.RingTheory.HopfAlgebra.Cartier (stage 3; reviewer PASS; first push; landing 20261012T044755-L-2040876 (interface); batch 20261012T044734; modules 3; new nodes 2)
 - 04:47 L: merged deliver/U1/Sheaf.AlgebraicGeometry.ConstructibleCurveSubQuotient (stage 3; reviewer PASS; first push; landing 20261012T044756-L-2041041 (interface); batch 20261012T044734; modules 3; new nodes 2)
 - 04:47 L: merged deliver/U1/Sheaf.AlgebraicGeometry.EtaleMayerVietoris (stage 3; reviewer PASS; first push; landing 20261012T044756-L-2041165 (interface); batch 20261012T044734; modules 3; new nodes 2)
+- 04:47 L: merged deliver/U1/Sheaf.Paper.FiniteSplitHypercoverRefinement (stage 3; reviewer PASS; first push; landing 20261012T044756-L-2041303 (interface); batch 20261012T044734; modules 4; new nodes 3)

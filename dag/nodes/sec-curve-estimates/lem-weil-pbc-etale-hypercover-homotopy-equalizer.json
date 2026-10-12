@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-etale-hypercover-homotopy-equalizer",
+ "kind": "statement",
+ "title": "EtaleHypercoverHomotopyEqualizer",
+ "statement": "For quasi-compact quasi-separated $X$, finite split étale hypercovers $U,V$ [def-weil-pbc-finite-split-hypercover], and two simplicial maps $a,b:U\\to V$, there is an étale hypercover $K$ [def-weil-pbc-etale-hypercover], a simplicial map $c:K\\to U$, and an elementary simplicial homotopy from $ca$ to $cb$. No splitting or finiteness is asserted for $K$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-weil-pbc-hypercover-refinement.md",
+  "place": "node lem-weil-pbc-hypercover-refinement, order 947"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-etale-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "In degree n represent maps from the finite simplicial set Delta[1] times Delta[n] to V by the finite limit of V's terms indexed by its nondegenerate simplices and face relations. These limits exist in the etale site and remain limits after forgetting to schemes over X. Restriction along simplicial operators defines the endpoint path object of V. Pull its endpoint map back along (a,b) from U. Its projection c to U carries the universal simplicial homotopy between c followed by a and c followed by b. To verify the hypercover condition, the relative matching maps are restrictions from the whole prism to the endpoint simplices together with its boundary. The inclusion adds finitely many nondegenerate simplices. Finite simplex lifting makes these restrictions covering; base change preserves the covers. The singleton matching comparison identifies this covering condition with the scheme matching condition. In degree zero the relative arrow is a pullback of V_1 to V_0 times_X V_0. In each higher degree compose the relative covering arrow with the base change of U's matching cover to obtain K's absolute matching cover. The resulting K need not be finite or split; finite replacement is a separate step.",
+   "uses": [
+    "lem-weil-pbc-hypercover-finite-simplex-lifting",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-sr-matching-object-one-member",
+    "def-weil-pbc-etale-hypercover",
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemmas 01GI (lemma-product-hypercoverings) and 01GS (lemma-homotopy), proof with the endpoint mapping object, using Lemma 01GN (lemma-add-simplices); Lemma 094K for the finite split replacement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-hypercover",
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-hypercover-finite-simplex-lifting",
+  "lem-weil-pbc-sr-matching-object-one-member"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemmas 0DAV, 094K, 01GS; finite split construction and endpoint path object"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Existence and cofilteredness of finite split etale hypercovers",
+   "results": "HOneHypercover.isCofiltered_of_hasPullbacks applies to one-step hypercovers only; no all-degree finite split result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Splitting",
+   "results": "0 hits; unknown identifier 'SimplicialObject.Splitting'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|Hypercover",
+   "results": "25 hits concerning zero and one-step hypercovers, including Sites/Hypercover/Zero and One; no finite split all-degree construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence and cofilteredness of finite split etale hypercovers",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial hypercover refinement path object homotopy finite affine cover",
+   "results": "8 hits, all zero/one-step hypercovers; OneHypercover.exists_nonempty_homotopy is not the all-degree simplicial statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match (second reading)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Homotopy",
+   "results": "Service does not know the identifier; checked the local Homotopy and Split modules instead. They provide precomp and the splitting structure, not these existence constructions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match (second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_nonempty_homotopy|hypercover.*refine|Hypercover.*refine",
+   "results": "11 Mathlib hits for zero/one-step hypercovers; local search of lean/Sheaf and lean/WeilConjectures found no duplicate all-degree construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match (second reading)"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSplitHypercoverRefinement",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 5: endpoint path object before finite replacement",
+   "via": []
+  },
+  "same_as": []
+ },
+ "unit": "sk-prop-h2",
+ "chapter": "sec-curve-estimates",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleHypercoverHomotopyEqualizer",
+  "file": "lean/Sheaf/Paper/EtaleHypercoverHomotopyEqualizer.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_etale_hypercover_homotopy_equalizer",
+  "statement": "theorem exists_etale_hypercover_homotopy_equalizer\n    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (U V : FiniteSplitEtaleHypercover X) (a b : U.Refinement V) :\n    ∃ (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)\n      (c : K ⟶ U.simplicial), Nonempty (SimplicialObject.Homotopy (c ≫ a) (c ≫ b))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041303",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041303",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

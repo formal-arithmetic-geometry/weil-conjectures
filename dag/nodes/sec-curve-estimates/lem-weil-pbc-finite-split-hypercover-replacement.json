@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-finite-split-hypercover-replacement",
+ "kind": "statement",
+ "title": "FiniteSplitHypercoverReplacement",
+ "statement": "Let $X$ be quasi-compact and quasi-separated and let $K$ be an étale hypercover [def-weil-pbc-etale-hypercover]. There is a finite split étale hypercover $V$ [def-weil-pbc-finite-split-hypercover] and a morphism of simplicial étale $X$-schemes $V\\to K$ in all degrees.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-weil-pbc-hypercover-refinement.md",
+  "place": "node lem-weil-pbc-hypercover-refinement, order 947"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-etale-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "Fix the full subsite of quasi-compact quasi-separated etale $X$-schemes. It contains $X$ and is closed under the finite limits used to form matching objects: fibre products are etale over $X$ by [def-weil-pbc-etale-site], and their quasi-compactness and quasi-separatedness follow by applying [lem-weil-pbc-qcqs-morphism-permanence] to the projections and composites; equalizers are pullbacks of diagonals of quasi-separated etale objects. Hence when the terms through degree $n-1$ are finite unions of such objects, every component $T$ of $M_n(U)$ is quasi-compact and quasi-separated. Cover $T$ by finitely many affine opens using [lem-weil-pbc-qcqs-finite-affine-open-cover]. Restrict any etale covering of $T$ to each of those opens using [lem-weil-pbc-etale-covering-base-change], then refine each restricted cover by finitely many affine opens of its members using [lem-weil-pbc-etale-covering-affine-refinement]. Taking the union over the finite affine cover of $T$ gives a finite affine etale refinement of the original covering. Each chosen affine member is etale and of finite presentation over $X$ by [lem-weil-pbc-qcqs-morphism-permanence](1).",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-covering-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 094K (lemma-w-contractible), proof (a),(b), together with Lemma 0DAV (lemma-hypercovering-object), construction of the next matching cover; Topologies Lemma 021D for finite limits"
+   }
+  },
+  {
+   "text": "Inductively construct a split V and a map to K in every degree. In degree zero refine the cover K_0 to X by finitely many affine pieces. Suppose V and its map have been constructed below n. Finite limits of qcqs etale X-schemes are qcqs etale, so M_n(V) is qcqs, and the matching limits are universal among all schemes over X. The relative target is M_n(V) times_{M_n(K)} K_n. Its projection to M_n(V) is a base change of the surjective etale matching arrow of K. Cover M_n(V) by finitely many affine opens and refine this relative cover over each by affine opens of its members. Their images are open and cover a quasi-compact space, so finitely many suffice. These pieces are qcqs and of finite presentation over X with quasi-compact, quasi-separated structure maps. No quasi-compactness of K_n is needed. Let N_n be their finite disjoint union. Adjoin to N_n the prescribed copies of earlier nondegenerate summands indexed by surjections [n] to [m], m < n. On N_n the map to the relative target supplies both matching faces in V and the map to K_n; on a degenerate copy the latter is the old map followed by the corresponding degeneracy of K. The pullback equation gives compatibility of all proper faces with the map to K. Define simplicial operators by factoring composites as a surjection followed by an injection. Uniqueness of this factorization and the matching face equations give the simplicial identities and naturality of V to K. The canonical degeneracy cofans are coproduct cofans, giving the required splitting. N_n covers the entire matching object, so V's matching arrow is surjective. Repeat without a degree bound; dependent choice gives compatible skeletons in all degrees and hence the stated full refinement.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "def-weil-pbc-finite-split-hypercover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GJ (lemma-covering), statement and relative-cover construction; Lemma 0DAV, split extension; Lemma 094K, finiteness of each degree"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemmas 0DAV, 094K, 01GS; finite split construction and endpoint path object"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Existence and cofilteredness of finite split etale hypercovers",
+   "results": "HOneHypercover.isCofiltered_of_hasPullbacks applies to one-step hypercovers only; no all-degree finite split result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Splitting",
+   "results": "0 hits; unknown identifier 'SimplicialObject.Splitting'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercover|Hypercover",
+   "results": "25 hits concerning zero and one-step hypercovers, including Sites/Hypercover/Zero and One; no finite split all-degree construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence and cofilteredness of finite split etale hypercovers",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial hypercover refinement path object homotopy finite affine cover",
+   "results": "8 hits, all zero/one-step hypercovers; OneHypercover.exists_nonempty_homotopy is not the all-degree simplicial statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match (second reading)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplicialObject.Homotopy",
+   "results": "Service does not know the identifier; checked the local Homotopy and Split modules instead. They provide precomp and the splitting structure, not these existence constructions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match (second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_nonempty_homotopy|hypercover.*refine|Hypercover.*refine",
+   "results": "11 Mathlib hits for zero/one-step hypercovers; local search of lean/Sheaf and lean/WeilConjectures found no duplicate all-degree construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match (second reading)"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSplitHypercoverRefinement",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "Proof step 4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "unit": "sk-prop-h2",
+ "chapter": "sec-curve-estimates",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSplitHypercoverReplacement",
+  "file": "lean/Sheaf/Paper/FiniteSplitHypercoverReplacement.lean",
+  "declaration": "AlgebraicGeometry.FiniteSplitEtaleHypercover.exists_finite_split_replacement",
+  "statement": "theorem exists_finite_split_replacement\n    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]\n    (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K) :\n    ∃ V : FiniteSplitEtaleHypercover X, Nonempty (V.simplicial ⟶ K)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041303",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T044756-L-2041303",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
