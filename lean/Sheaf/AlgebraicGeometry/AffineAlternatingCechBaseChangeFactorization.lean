@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.AffineAlternatingCechModel
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.AlgebraicGeometry.CechResolution
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.AffineAlternatingCechPinnedMate
+import Sheaf.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism
 
 /-! # Identification of the canonical map on the explicit alternating Čech model
 
@@ -99,6 +99,37 @@ theorem affineAlternatingCech_baseChange_factorization
           (derivedPullback g).map e.hom ≫
             ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
               (affineAlternatingCechModel f U G)) ≫ t.hom := by
-  sorry
+  classical
+  let a := fun {Y Z : Scheme.{u}} (k : Y ⟶ Z) ↦
+    (Classical.choose exists_derivedPullbackComposition.{u, w}) k
+  let := a g
+  let := a (pullback.fst f g)
+  let δ := fun {Y Z : Scheme.{u}} (k : Y ⟶ Z) ↦
+    (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
+  let hδ := fun {Y Z : Scheme.{u}} (k : Y ⟶ Z) ↦
+    (Classical.choose (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) k
+  let c₀ := (δ (pullback.fst f g)).app ((HomotopyCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex
+        (Scheme.Modules.tensorPullback (pullback.fst f g))
+        (ComplexShape.up ℤ) 0).hom.app G))
+  have hc₀ : IsDerivedModulePullbackComparison (pullback.fst f g) G c₀ :=
+    ⟨δ (pullback.fst f g), hδ (pullback.fst f g), rfl⟩
+  obtain ⟨e, t, he⟩ := affineAlternatingCech_pinned_mate f g U hU haffine G
+  obtain ⟨α, hα⟩ :=
+    modulePullbackComparison_target_automorphism (pullback.fst f g) G c₀ c hc₀ hc
+  refine ⟨Scheme.Modules.tensorPullback g, (fun _ ↦ rfl), ?_, inferInstance,
+    δ g, hδ g, e,
+    t ≪≫ (schemeDerivedDirectImage (pullback.snd f g)).mapIso
+      ((DerivedCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) 0).mapIso α), ?_⟩
+  · intro M N b
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  · rw [hα, Functor.map_comp, ← Category.assoc, he]
+    simp only [Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
+    rfl
 
 end AlgebraicGeometry

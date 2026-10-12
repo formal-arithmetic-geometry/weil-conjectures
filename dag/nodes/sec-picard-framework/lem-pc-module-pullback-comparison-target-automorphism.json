@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-module-pullback-comparison-target-automorphism",
+ "kind": "statement",
+ "title": "Two module pullback comparisons differ by an ordinary target automorphism",
+ "statement": "Fix shared derived categories [def-pc-derived-category], schemes X,Y, a morphism a:X -> Y whose tensor pullback is additive, and an arbitrary O_Y-module G. Let c0,c:La*(G[0]) -> (a*G)[0] both satisfy [def-pc-derived-module-base-change-map] IsDerivedModulePullbackComparison. Then there exists an O_X-module isomorphism alpha:a*G -> a*G such that c = c0 followed by alpha[0]. No flatness, quasi-coherence, direct image, cover or base-change square is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Steps 2--5, independence of comparison; Step 4 of lem-pc-affine-alternating-cech-base-change-factorization; Stacks Tag 06YJ (derived pullback via K-flat complexes), and standard truncation argument written by Q1"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-module-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Compare the witnessing derived counits by right Kan extension uniqueness. Construct the standard comparison using a flat resolution of G concentrated in nonpositive degrees. Its tensor pullback is nonpositive and right exactness identifies H0 with a*G. The other counit differs by an invertible natural automorphism of La*, so both c0 and c induce isomorphisms on H0.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-derived-module-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the truncation triangle tau_le_minus_one E -> E -> H0(E)[0], for E=La*(G[0]), orthogonality kills maps from both the negative truncation and its shift by one to (a*G)[0]. Therefore every map from E to this single module factors uniquely through H0(E)[0]. Take alpha to be H0(c) after the inverse of H0(c0), transported through the canonical single-functor H0 isomorphism. It is invertible. Full faithfulness of the single functor and uniqueness of the factorization give c=c0 followed by alpha[0]. The zero module and empty schemes are included.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Steps 2--5, independence of comparison; Step 4 of lem-pc-affine-alternating-cech-base-change-factorization; Stacks Tag 06YJ (derived pullback via K-flat complexes), and standard truncation argument written by Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "two derived pullback counits on a module differ by an automorphism of its ordinary pullback",
+   "results": "PresheafOfModules.pullback_comp_id, PresheafOfModules.pullback_id_comp, CategoryTheory.ChosenPullbacksAlong.iso_mapPullbackAdj_counit_app, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ChosenPullbacksAlong.isoInv_mapPullbackAdj_counit_app_left, CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit, CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_hom_app_fst_app, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUnique\"",
+   "results": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback single module degree zero homology comparison counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech|baseChangeMap_cech|target_automorphism",
+   "results": "",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlternatingCechBaseChangeFactorization",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Steps 2--5, independence of comparison; Step 4 of lem-pc-affine-alternating-cech-base-change-factorization; Stacks Tag 06YJ (derived pullback via K-flat complexes), and standard truncation argument written by Q1",
+   "via": [
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackComparisonTargetAutomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackComparisonTargetAutomorphism.lean",
+  "declaration": "AlgebraicGeometry.modulePullbackComparison_target_automorphism",
+  "statement": "theorem modulePullbackComparison_target_automorphism\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X Y : Scheme.{u}} (a : X ⟶ Y) [(Scheme.Modules.tensorPullback a).Additive]\n    (G : Y.Modules)\n    (c₀ c : (derivedPullback a).obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj\n            ((Scheme.Modules.tensorPullback a).obj G))\n    (hc₀ : IsDerivedModulePullbackComparison a G c₀)\n    (hc : IsDerivedModulePullbackComparison a G c) :\n    ∃ α : (Scheme.Modules.tensorPullback a).obj G ≅\n        (Scheme.Modules.tensorPullback a).obj G,\n      c = c₀ ≫ (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).map α.hom",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184331-L-4015232",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T184331-L-4015232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
