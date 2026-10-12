@@ -287,7 +287,8 @@ lemma nonempty_iso_rightDerivedLowerShriek_fourierKernel_affineFourierTransform
       leftDerivedUpperStarUnitIso _ _) (derivedTensorLeftUnitor _ _ _) (Fintype.card n : ℤ)
 
 /-- `δ₀(-r)[-r][-r] ≅ z_* Λ(-r)[-2r]`, by the projection formula for the zero section `z`. -/
-lemma nonempty_iso_shiftFunctor_tateTwist_skyscraperZero [Finite Λ] [HasTateTwist Λ] :
+lemma nonempty_iso_shiftFunctor_tateTwist_skyscraperZero [Finite Λ] [HasTateTwist Λ]
+    [HasInvertibleExponent Λ S] :
     Nonempty ((shiftFunctor _ (-(Fintype.card n : ℤ))).obj
           ((shiftFunctor _ (-(Fintype.card n : ℤ))).obj
             ((tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))).obj (skyscraperZero Λ n S))) ≅
@@ -341,7 +342,8 @@ theorem nonempty_iso_leftDerivedUpperStar_sub [Finite Λ] (a : ℤ)
 
 /-- `sub^* (z_* Λ(-r)[-2r]) ≅ Δ_* Λ(-r)[-2r]`, `r = #n`: the diagonal is the fibre of the
 subtraction over the zero section. -/
-theorem nonempty_iso_leftDerivedUpperStar_sub_tateObject [Finite Λ] [HasTateTwist Λ] :
+theorem nonempty_iso_leftDerivedUpperStar_sub_tateObject [Finite Λ] [HasTateTwist Λ]
+    [HasInvertibleExponent Λ S] :
     Nonempty ((L((sub n S)^*[ModuleCat.{u + 1} Λ])).obj
         ((shiftFunctor _ (2 * -(Fintype.card n : ℤ))).obj
           ((R((zeroSection n S)_*[ModuleCat.{u + 1} Λ])).obj
@@ -349,6 +351,7 @@ theorem nonempty_iso_leftDerivedUpperStar_sub_tateObject [Finite Λ] [HasTateTwi
       (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj
         ((R((pullback.diagonal (𝔸(n; S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
           (tateObject Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))))) := by
+  have := HasInvertibleExponent.of_hom (Λ := Λ) (𝔸(n; S) ↘ S)
   obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_sub Λ n S (2 * -(Fintype.card n : ℤ))
     (tateObject Λ S (-(Fintype.card n : ℤ)))
   exact ⟨e ≪≫ (shiftFunctor _ _).mapIso

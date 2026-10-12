@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkUpperStar
+public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 
 /-!
 # Trace functions of Weil complexes under the operations
@@ -100,7 +101,7 @@ namespace WeilSheaf
 
 omit [Y.Over (Spec (CommRingCat.of k₀))] in
 /-- The trace of the Frobenius of the stalk at a geometric point only depends on the point. -/
-theorem trace_frobeniusEnd_stalkAt_congr (F : WeilSheaf k₀ l X)
+theorem trace_frobeniusEnd_stalkAt_eq_of_eq (F : WeilSheaf k₀ l X)
     {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     (h : s = s') (m : ℕ)
     (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
@@ -112,69 +113,6 @@ theorem trace_frobeniusEnd_stalkAt_congr (F : WeilSheaf k₀ l X)
   subst h
   rfl
 
-omit [Y.Over (Spec (CommRingCat.of k₀))] in
-theorem stalkAtMap_inv_hom {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (y : (G.stalkAt s m hs).carrier) :
-    stalkAtMap s m hs e.hom (stalkAtMap s m hs e.inv y) = y := by
-  rw [← stalkAtMap_comp, e.inv_hom_id, stalkAtMap_id]
-
-omit [Y.Over (Spec (CommRingCat.of k₀))] in
-theorem stalkAtMap_hom_inv {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (y : (F.stalkAt s m hs).carrier) :
-    stalkAtMap s m hs e.inv (stalkAtMap s m hs e.hom y) = y := by
-  rw [← stalkAtMap_comp, e.hom_inv_id, stalkAtMap_id]
-
-/-- The linear isomorphism of stalks induced by an isomorphism of Weil sheaves. -/
-noncomputable def stalkAtLinearEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    (F.stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier :=
-  LinearEquiv.ofLinearMap (stalkAtMap s m hs e.hom) (stalkAtMap s m hs e.inv)
-    (LinearMap.ext (stalkAtMap_inv_hom e s m hs)) (LinearMap.ext (stalkAtMap_hom_inv e s m hs))
-
-omit [Y.Over (Spec (CommRingCat.of k₀))] in
-theorem stalkAtLinearEquivOfIso_apply {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (y : (F.stalkAt s m hs).carrier) :
-    stalkAtLinearEquivOfIso e s m hs y = stalkAtMap s m hs e.hom y :=
-  rfl
-
-omit [Y.Over (Spec (CommRingCat.of k₀))] in
-/-- The linear isomorphism of stalks induced by an isomorphism of Weil sheaves commutes with the
-Frobenius. -/
-theorem stalkAtLinearEquivOfIso_frobenius {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (x : (F.stalkAt s m hs).carrier) :
-    stalkAtLinearEquivOfIso e s m hs ((F.stalkAt s m hs).frobenius x) =
-      (G.stalkAt s m hs).frobenius (stalkAtLinearEquivOfIso e s m hs x) :=
-  (stalkAtLinearEquivOfIso_apply e s m hs _).trans ((stalkAtMap_frobenius s m hs e.hom x).trans
-    (congrArg (G.stalkAt s m hs).frobenius (stalkAtLinearEquivOfIso_apply e s m hs x).symm))
-
-/-- The isomorphism of stalks with their Frobenius induced by an isomorphism of Weil sheaves.
--/
-noncomputable def stalkAtEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    (F.stalkAt s m hs).Equiv (G.stalkAt s m hs) :=
-  ⟨stalkAtLinearEquivOfIso e s m hs, stalkAtLinearEquivOfIso_frobenius e s m hs⟩
-
-omit [Y.Over (Spec (CommRingCat.of k₀))] in
-/-- Isomorphic Weil sheaves have the same trace function: an isomorphism induces isomorphisms
-of the stalks compatible with the Frobenius. -/
-theorem traceFunction_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G) (n : ℕ)
-    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    F.traceFunction n x = G.traceFunction n x :=
-  (stalkAtEquivOfIso e _ n _).trace_frobeniusEnd.symm
-
-omit [Y.Over (Spec (CommRingCat.of k₀))] in
 /-- The trace function at a rational point only depends on the image point: at points with the
 same image the stalks are taken at geometric points over the same point of `X`
 (`AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`). -/
@@ -225,7 +163,7 @@ theorem traceFunction_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of 
     (Y ↘ Spec (CommRingCat.of k₀)) n IsAlgClosed.lift (φ.mapFieldPoints _ x)
   have hc := Scheme.Hom.geometricFiberPoint_comp_geometricFiberMap φ IsAlgClosed.lift x
   exact (trace_frobeniusEnd_stalkAt_upperStar φ F _ n ht (hc ▸ ht')).trans
-    (F.trace_frobeniusEnd_stalkAt_congr hc n _ ht')
+    (F.trace_frobeniusEnd_stalkAt_eq_of_eq hc n _ ht')
 
 end WeilSheaf
 

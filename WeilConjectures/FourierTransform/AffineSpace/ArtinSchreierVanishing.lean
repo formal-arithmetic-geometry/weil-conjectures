@@ -123,6 +123,7 @@ variable (Λ) in
 /-- Tensoring with a Tate twisting object and shifting reflects vanishing: the twisting objects
 are tensor invertible, `Λ_X(d) ⊗ Λ_X(-d) ≅ Λ_X`. -/
 theorem isZero_of_isZero_shift_derivedTensorRight_tateObject [HasTateTwist Λ] {X : Scheme.{u}}
+    [HasInvertibleExponent Λ X]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (d a : ℤ)
     (h : IsZero ((shiftFunctor _ a).obj
       ((derivedTensorRight _ X (tateObject Λ X d)).obj K))) :

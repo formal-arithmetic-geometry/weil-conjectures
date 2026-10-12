@@ -5,11 +5,12 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 public import Mathlib.RingTheory.Trace.Basic
 
 /-!
-# Additive characters induced along the trace
+# Additive characters induced along the trace and nontrivial additive characters
 
 Let `L / K` be a finite separable field extension and `ψ` an additive character of `K`. The
 *induced character* `ψ_L = ψ ∘ Tr_{L/K}` is an additive character of `L`, nontrivial if `ψ` is,
@@ -32,6 +33,10 @@ otherwise.
 - `AddChar.compTrace_compTrace`: transitivity, `(ψ_L)_M = ψ_M`.
 - `AddChar.sum_const_mul_eq_ite`: orthogonality of an additive character.
 - `AddChar.sum_compTrace_sub_mul`: additive orthogonality over `L`.
+- `AddChar.exists_ne_one_of_isAlgClosed`: a finite field `F` has a nontrivial additive
+  character with values in any algebraically closed field `K` whose characteristic differs
+  from that of `F`: the primitive character `AddChar.FiniteField.primitiveChar`, with values in
+  a cyclotomic extension of `K`, followed by a `K`-embedding of that extension into `K`.
 -/
 
 @[expose] public section
@@ -115,5 +120,20 @@ theorem sum_compTrace_sub_mul [Algebra K L] [FiniteDimensional K L] [Algebra.IsS
   simp [sub_eq_zero]
 
 end Orthogonality
+
+/-- A finite field `F` has a nontrivial additive character with values in an algebraically
+closed field `K` of characteristic different from that of `F`. -/
+theorem exists_ne_one_of_isAlgClosed (F K : Type*) [Field F] [Finite F] [Field K]
+    [IsAlgClosed K] (h : ringChar K ≠ ringChar F) : ∃ ψ : AddChar F K, ψ ≠ 1 := by
+  let ψ := FiniteField.primitiveChar F K h
+  have : Algebra.IsAlgebraic K (CyclotomicField ψ.n K) :=
+    inferInstanceAs (Algebra.IsAlgebraic K (Polynomial.cyclotomic ψ.n K).SplittingField)
+  let φ : CyclotomicField ψ.n K →ₐ[K] K := IsAlgClosed.lift
+  refine ⟨(φ : CyclotomicField ψ.n K →* K).compAddChar ψ.char, fun h1 ↦ ?_⟩
+  refine ψ.prim one_ne_zero ?_
+  ext a
+  apply φ.injective
+  have := DFunLike.congr_fun h1 a
+  simpa [mulShift_apply] using this
 
 end AddChar

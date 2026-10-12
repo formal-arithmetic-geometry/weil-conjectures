@@ -5,12 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TracePow
 public import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 
 /-!
@@ -125,34 +126,6 @@ end QuasiFiniteCohomology
 
 section Helpers
 
-/-- Equivalent Frobenius modules have the same traces of powers of the Frobenius. -/
-theorem _root_.FrobeniusModule.Equiv.trace_frobeniusEnd_pow {K : Type} [Field K]
-    {M N : FrobeniusModule.{u + 1, 0} K} (e : M.Equiv N) (m : ℕ) :
-    LinearMap.trace K N.carrier (N.frobeniusEnd ^ m) =
-      LinearMap.trace K M.carrier (M.frobeniusEnd ^ m) := by
-  have hpow : ∀ n : ℕ, (e.toLinearEquiv.conj M.frobeniusEnd) ^ n =
-      e.toLinearEquiv.conj (M.frobeniusEnd ^ n) := by
-    intro n
-    induction n with
-    | zero => simp only [pow_zero, Module.End.one_eq_id, LinearEquiv.conj_id]
-    | succ n ih => rw [pow_succ, pow_succ, ih, Module.End.mul_eq_comp, Module.End.mul_eq_comp,
-        LinearEquiv.conj_comp]
-  rw [e.frobeniusEnd_eq_conj, hpow, LinearMap.trace_conj']
-
-/-- Over an algebraically closed field, endomorphisms with the same characteristic polynomial
-have the same traces of powers. -/
-theorem _root_.LinearMap.trace_pow_eq_of_charpoly_eq {K V W : Type*} [Field K] [IsAlgClosed K]
-    [AddCommGroup V] [Module K V] [FiniteDimensional K V] [AddCommGroup W] [Module K W]
-    [FiniteDimensional K W] {A : Module.End K V} {B : Module.End K W}
-    (h : A.charpoly = B.charpoly) (m : ℕ) :
-    LinearMap.trace K V (A ^ m) = LinearMap.trace K W (B ^ m) := by
-  classical
-  rw [LinearMap.trace_eq_matrix_trace K (Module.finBasis K V),
-    LinearMap.trace_eq_matrix_trace K (Module.finBasis K W), ← LinearMap.toMatrix_pow,
-    ← LinearMap.toMatrix_pow, Matrix.trace_pow_eq_sum_pow_roots_charpoly,
-    Matrix.trace_pow_eq_sum_pow_roots_charpoly, LinearMap.charpoly_toMatrix,
-    LinearMap.charpoly_toMatrix, h]
-
 /-- The trace bookkeeping behind the Frobenius at a point of a quasi-finite direct image: if the
 traces of the powers of `H₁ ≃ H₂` are `d tr (A^{m / d})` (for `d ∣ m`) on the one hand and
 `∑ₓ dₓ tr (Bₓ^{m / dₓ})` (for `dₓ ∣ m`) on the other, with `dₓ = d eₓ`, then
@@ -224,7 +197,7 @@ noncomputable def WeilComplex.derivedLowerShriekCongr {X Y : Scheme.{u}}
   exact Iso.refl _
 
 variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
   [X'.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
   {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyQuasiFinite f]
   [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
@@ -271,6 +244,34 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_upperStar_higherLo
     (e₅.app _).symm ≪≫ (WeilComplex.derivedLowerShriekCongr (comp_over f' _)).app _
   exact ⟨WeilSheaf.globalSectionsEquivOfIso ((WeilComplex.homologySheaf 0).mapIso E')⟩
 
+omit [IsSeparated (X' ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X' ↘ Spec (CommRingCat.of k₀))] in
+/-- **Base change for the degree-zero direct image with compact support of a quasi-finite
+morphism.** For a cartesian square `X' = X ×_Y Y'` of `k₀`-schemes with `f : X ⟶ Y` separated and
+quasi-finite, `h^*(f₀!F) ≅ f'₀!(g^*F)`: `Rf₀!F = f₀!F` is concentrated in degree zero and
+`h^* Rf₀! ≅ Rf'₀! g^*`. -/
+theorem WeilSheaf.nonempty_upperStar_higherLowerShriek_zero_iso
+    (hH : IsPullback g f' f h) (F : WeilSheaf k₀ l X) :
+    Nonempty ((WeilSheaf.upperStar h).obj ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F) ≅
+      (WeilSheaf.higherLowerShriek k₀ l f' 0).obj ((WeilSheaf.upperStar g).obj F)) := by
+  obtain ⟨e₂⟩ := WeilComplex.nonempty_iso_toComplex_homologySheaf_zero
+    ((WeilComplex.derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj F)) fun b hb ↦ by
+      rcases lt_or_gt_of_ne hb with hb | hb
+      · exact WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg F hb
+      · obtain ⟨n, rfl⟩ : ∃ n : ℕ, b = n := ⟨b.toNat, (Int.toNat_of_nonneg hb.le).symm⟩
+        exact isZero_higherLowerShriek_of_quasiFinite f n (by exact_mod_cast hb) F
+  obtain ⟨e₃⟩ := WeilComplex.nonempty_upperStar_derivedLowerShriek_iso (k₀ := k₀) (l := l) hH
+  let E : WeilSheaf.toComplex.obj ((WeilSheaf.upperStar h).obj
+      ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F)) ≅
+      (WeilComplex.derivedLowerShriek k₀ l f').obj
+        (WeilSheaf.toComplex.obj ((WeilSheaf.upperStar g).obj F)) :=
+    (WeilComplex.upperStarToComplexIso h _).symm ≪≫
+      (WeilComplex.upperStar h).mapIso e₂.symm ≪≫ e₃.app _ ≪≫
+      (WeilComplex.derivedLowerShriek k₀ l f').mapIso (WeilComplex.upperStarToComplexIso g F)
+  exact ⟨(WeilSheaf.toComplexCompHomologySheafIso.app _).symm ≪≫
+    (WeilComplex.homologySheaf 0).mapIso E⟩
+
 end Fibre
 
 section StalkFormula
@@ -287,8 +288,7 @@ theorem Scheme.Hom.degreeOver_dvd_of_isOver {x : X} (hx : x ∈ X.finitePoints) 
   have := Scheme.Hom.degreeOver_dvd_degreeOver_comp f (Y ↘ Spec (CommRingCat.of k₀)) hx
   rwa [comp_over] at this
 
-variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCompact f]
+variable [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCompact f]
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]

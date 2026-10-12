@@ -30,14 +30,13 @@ from the shift `[1]`, the classical Fourier transform of the trace function of `
 `t_{FT_ψ(K)}(y) = -∑_{x ∈ 𝔽_{qⁿ}} t_K(x) ψ(Tr_{𝔽_{qⁿ}/k₀}(x y))`.
 
 The two numerical identities of the transform follow from the corresponding identities of the
-classical transform: *Plancherel*,
+classical transform: *Plancherel* (deduced in `WeilConjectures.WeilSheaf.FourierPlancherel`),
 `∑_y |ι t_{FT_ψ(K)}(y)|² = qⁿ ∑_x |ι t_K(x)|²`, and *trace-level inversion*,
 `t_{FT_{ψ⁻¹} FT_ψ(K)}(y) = qⁿ t_K(y)`.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.traceFunction_fourierTransform`: the Fourier trace formula.
-- `AlgebraicGeometry.WeilComplex.sum_norm_sq_traceFunction_fourierTransform`: Plancherel.
 - `AlgebraicGeometry.WeilComplex.traceFunction_fourierTransform_inv_fourierTransform`:
   trace-level Fourier inversion.
 
@@ -62,14 +61,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 noncomputable def affineLineTraceFunction (K : WeilComplex k₀ l (affineLine k₀)) (n : ℕ)
     (x : FiniteField.galoisExtension k₀ n) : PadicAlgCl l :=
   K.traceFunction n ((AffineSpace.fieldPointsEquiv k₀ _).symm x)
-
-/-- Isomorphic Weil complexes have the same trace function: an isomorphism induces isomorphisms
-of the cohomology sheaves. -/
-theorem traceFunction_eq_of_iso {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    {K K' : WeilComplex k₀ l X} (e : K ≅ K') (n : ℕ)
-    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    K.traceFunction n x = K'.traceFunction n x :=
-  finsum_congr fun j ↦ by rw [WeilSheaf.traceFunction_congr ((homologySheaf j).mapIso e)]
 
 /-- The Grothendieck–Lefschetz formula, relative form: for a morphism `f : P ⟶ T` of separated
 `k₀`-schemes of finite type and a Weil complex `M` on `P`, the sums of the trace functions of
@@ -200,7 +191,7 @@ theorem traceFunction_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
   have key : n • ((derivedLowerShriek k₀ l (affinePlane.snd k₀)).obj
       (fourierIntegrand ψ K)).traceFunction n yp =
       n • FiniteField.fourierTransform ψ (K.affineLineTraceFunction n) y := by
-    rw [← hτ, ← traceFunction_upperStar, traceFunction_eq_of_iso he,
+    rw [← hτ, ← traceFunction_upperStar, traceFunction_congr he,
       ← specOver.finsum_fieldPoints_eq_nsmul k₀ hn _
         fun σ x ↦ traceFunction_fieldPointsCongr _ n σ x,
       finsum_traceFunction_derivedLowerShriek _ _ hn,
@@ -217,24 +208,6 @@ private lemma card_galoisExtension_eq {n : ℕ} (hn : n ≠ 0)
     [Fintype (FiniteField.galoisExtension k₀ n)] :
     (Fintype.card (FiniteField.galoisExtension k₀ n) : ℕ) = Nat.card k₀ ^ n := by
   rw [← Nat.card_eq_fintype_card, FiniteField.nat_card_galoisExtension k₀ n hn]
-
-/-- **Plancherel.** For a nontrivial additive character `ψ` of `k₀`, a field embedding
-`ι : ℚ̄_ℓ ⟶ ℂ`, a Weil complex `K` on the affine line and `n ≥ 1`,
-
-`∑_{y ∈ 𝔽_{qⁿ}} |ι t_{FT_ψ(K)}(y)|² = qⁿ ∑_{x ∈ 𝔽_{qⁿ}} |ι t_K(x)|²`.
-
-It is the classical Plancherel identity (`FiniteField.sum_norm_sq_fourierTransform`) for the
-Fourier sum of the trace formula; no weight enters.
-(sketch blueprint: `sk-cor-plancherel`; blueprint: `cor-fd-plancherel`) -/
-theorem sum_norm_sq_traceFunction_fourierTransform (ι : PadicAlgCl l →+* ℂ)
-    {ψ : AddChar k₀ (PadicAlgCl l)} (hψ : ψ ≠ 1) (K : WeilComplex k₀ l (affineLine k₀))
-    {n : ℕ} (hn : n ≠ 0) [Fintype (FiniteField.galoisExtension k₀ n)] :
-    ∑ y, ‖ι (((fourierTransform ψ).obj K).affineLineTraceFunction n y)‖ ^ 2 =
-      (Nat.card k₀ : ℝ) ^ n * ∑ x, ‖ι (K.affineLineTraceFunction n x)‖ ^ 2 := by
-  simp_rw [traceFunction_fourierTransform ψ K hn, map_neg, norm_neg]
-  rw [FiniteField.sum_norm_sq_fourierTransform ι hψ, card_galoisExtension_eq hn]
-  push_cast
-  rfl
 
 /-- **Trace-level Fourier inversion.** For a nontrivial additive character `ψ` of `k₀`, a Weil
 complex `K` on the affine line, `n ≥ 1` and `y ∈ 𝔽_{qⁿ}`,
