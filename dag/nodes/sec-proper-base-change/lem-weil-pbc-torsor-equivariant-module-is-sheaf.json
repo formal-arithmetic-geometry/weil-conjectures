@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-torsor-equivariant-module-is-sheaf",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsor-associated-module-full",
+   "place": "The proof requires gluing equivariant module sections.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Gluing equivariant module sections",
+ "statement": "theorem equivariantModulePresheaf_isSheaf\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)\n    (N : Rep.{u + 1} (ZMod ℓ) P) :\n    Presheaf.IsSheaf V.smallEtaleTopology (c.equivariantModulePresheaf ℓ N)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Let a matching family of equivariant sections be given on an etale cover\nof an etale object W. Base change this cover along the torsor to obtain an etale\nsurjective cover of W times_V c.P. Etale maps are open, so matching locally\nconstant functions on this cover glue uniquely to a locally constant function:\ndefine its value at a point using any lift, with independence given by matching\non the fibre products. Surjectivity of the maps from the fibre products to the\ncorresponding products of geometric fibres gives independence for arbitrary\nscheme points too. Openness gives local constancy of the glued function.\nApply the same uniqueness to the pullback by each group action and the function\nobtained by applying the representation action. They agree on the cover by\nlocal equivariance, hence agree globally. Gluing is linear since addition and\nscalar multiplication are pointwise. Thus every matching family in the module\npresheaf has a unique amalgamation, proving the module-valued sheaf condition.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Gluing equivariant module sections",
+   "results": "No exact torsor-specific declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing equivariant module sections",
+   "results": "No exact torsor-specific declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "equivariantModulePresheaf_isSheaf",
+   "results": "No exact declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant sections torsor sheaf",
+   "results": "No exact match in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.TorsorAssociatedModuleFull",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf",
+  "file": "lean/Sheaf/ConstructibleSheaf/TorsorEquivariantModuleIsSheaf.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_isSheaf",
+  "statement": "theorem equivariantModulePresheaf_isSheaf\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)\n    (N : Rep.{u + 1} (ZMod ℓ) P) :\n    Presheaf.IsSheaf V.smallEtaleTopology (c.equivariantModulePresheaf ℓ N)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9cf2f",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135257-L-1679505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9cf2f",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135257-L-1679505",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged fullness signature and implemented proof with its node, all three helper signatures and proofs in words with their nodes, and the earlier repairs; all four delivered modules and the sole direct importer compile cleanly, with only allowed axioms and expected sorryAx."
+ }
+}

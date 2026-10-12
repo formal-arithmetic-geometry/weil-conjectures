@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsor-associated-module-full",
+   "place": "The proof requires surjectivity of diagonal evaluation of torsor sections.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Surjectivity of diagonal evaluation of torsor sections",
+ "statement": "theorem equivariantSections_diagonalEvaluation_surjective\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)\n    (N : Rep.{u + 1} (ZMod ℓ) P) (x : c.P) :\n    letI := c.etale\n    Function.Surjective (fun s : c.equivariantSections ℓ N (Etale.mk c.π) ↦\n      s.val ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x))",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof": [
+  {
+   "text": "Proof: Compose the torsor isomorphism with interchange of the two factors.\nThis identifies c.P times_V c.P with the disjoint union, indexed by the group,\nof copies of c.P, whose g-th component is (identity, g times identity). Given a\nvalue n, prescribe on this component the constant value rho(g)n. These\nfunctions are locally constant on the disjoint union; transport them across the\nisomorphism to the double overlap. The second factor action by h carries\ncomponent g to component hg. The representation identity rho(hg)n =\nrho(h)(rho(g)n) proves equivariance. On the identity component, which is the\ndiagonal, the value is rho(1)n = n. Thus the section has the requested value at\nthe diagonal point. No connectedness or nonzero module hypothesis is needed,\nand the construction works for the trivial group.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-torsor-associated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of diagonal evaluation of torsor sections",
+   "results": "No exact torsor-specific declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of diagonal evaluation of torsor sections",
+   "results": "No exact torsor-specific declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "equivariantSections_diagonalEvaluation_surjective",
+   "results": "No exact declaration found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant sections torsor sheaf",
+   "results": "No exact match in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.TorsorAssociatedModuleFull",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.TorsorEquivariantModuleDiagonalEvaluation",
+  "file": "lean/Sheaf/ConstructibleSheaf/TorsorEquivariantModuleDiagonalEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.equivariantSections_diagonalEvaluation_surjective",
+  "statement": "theorem equivariantSections_diagonalEvaluation_surjective\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)\n    (N : Rep.{u + 1} (ZMod ℓ) P) (x : c.P) :\n    letI := c.etale\n    Function.Surjective (fun s : c.equivariantSections ℓ N (Etale.mk c.π) ↦\n      s.val ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9cf2f",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135257-L-1679505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9cf2f",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135257-L-1679505",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged fullness signature and implemented proof with its node, all three helper signatures and proofs in words with their nodes, and the earlier repairs; all four delivered modules and the sole direct importer compile cleanly, with only allowed axioms and expected sorryAx."
+ }
+}

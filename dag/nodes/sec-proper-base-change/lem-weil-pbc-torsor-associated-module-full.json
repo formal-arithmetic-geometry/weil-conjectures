@@ -15,21 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Pull a sheaf map back to the torsor and use evaluation at the diagonal to identify\nboth associated sheaves with constant module sheaves. On a nonempty connected\nscheme a map between constant module sheaves is induced by a unique linear map\nof values: the image of each constant section is locally constant and hence\nconstant, and arbitrary locally constant sections are locally constant sections\nof this form. Commutation with the canonical descent isomorphism on each group\ncomponent of the double overlap says that the recovered linear map intertwines\nthe representation actions. Its pointwise map on equivariant sections descends\nto the original sheaf map, since equality is detected by the etale surjective\ncover. This proves fullness. The zero module and trivial group need no exception;\nno finite-dimensionality is used.",
+   "text": "Recover a unique linear map on values from a natural transformation of equivariant section presheaves using connectedness and diagonal evaluation.",
    "uses": [
+    "lem-weil-pbc-torsor-equivariant-module-recover-linear"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use diagonal evaluation and equivariance of sections to show that the recovered linear map intertwines the representation actions, then construct the representation morphism and identify its pointwise action.",
+   "uses": [
+    "lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation",
     "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivariant presheaves are sheaves; restriction of scalars along the lifted ring equivalence is an equivalence, and the sheafification units are isomorphisms. Fullness of the presheaf functor therefore descends through sheafification.",
+   "uses": [
+    "lem-weil-pbc-torsor-equivariant-module-is-sheaf"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-torsor-equivariant-module-recover-linear",
+  "lem-weil-pbc-torsor-equivariant-module-diagonal-evaluation",
+  "lem-weil-pbc-torsor-equivariant-module-is-sheaf",
   "def-weil-pbc-torsor-associated-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)",
-  "note": "Detailed implementation of the corresponding steps of the parent descent argument; extends fixed finite torsor descent to arbitrary modules."
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex Tags 04TR and 04TS",
+  "note": "Implemented through the three intermediate declarations in this delivery."
  },
  "mathlib_searches": [
   {
@@ -136,11 +154,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-9cf2f",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T085241-L-15409",
+  "landing": "20261012T135257-L-1679505",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged fullness signature and implemented proof with its node, all three helper signatures and proofs in words with their nodes, and the earlier repairs; all four delivered modules and the sole direct importer compile cleanly, with only allowed axioms and expected sorryAx."
  }
 }
