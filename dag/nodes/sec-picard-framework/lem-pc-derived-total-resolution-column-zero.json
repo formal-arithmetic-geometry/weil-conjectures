@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-derived-total-resolution-column-zero",
+ "kind": "statement",
+ "title": "Column-zero representatives in a good total resolution",
+ "statement": "Let $R$ be a ring and let $K$ be a bicomplex of $R$-modules, with both differentials raising their integer index [def-pc-cochain-complex-modules]. Suppose $K.X(p)$ is zero for $p>0$. Let $T$ be its direct-sum total complex, with the usual signed differential, and let $j:K.X(0)\\to T$ be a chain map whose component in each degree $q$ is the inclusion of the summand $(0,q)$. Assume for every $p<-1$ and every integer $q$ that $H^q(K.X(p))\\to H^q(K.X(p+1))\\to H^q(K.X(p+2))$ is exact, where the maps are induced by the horizontal differentials and homology is cycles modulo boundaries. Then for every integer $n$ the map $H^n(j)$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, lemma-good-resolution-gives-qis, proof, second paragraph (finite-support reduction)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Put A_i = K.X (-i). Represent a total homology class by a cocycle x. The coproduct of modules is their direct sum, so x has finite support. Positive columns vanish, hence x is supported in A_0 through A_r for some natural number r.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "If r > 0, the cocycle equations in columns r and r-1 show that x_r is a vertical cycle whose horizontal image is a vertical boundary. Exactness of the horizontal homology row lifts its class to a class in A_(r+1) in vertical degree n+r. Represent that class by a vertical cycle y; its total degree is n-1.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Subtract the total boundary of y, adjusting by the horizontal unit sign, to turn x_r into a vertical boundary. Choose a primitive t in A_r of vertical degree n+r-1 and subtract its appropriately signed total boundary. This kills x_r; the only other column affected is r-1. Induction on r gives a homologous cocycle supported in column zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The final column-zero component is a vertical cycle. Its homology class maps to the original class by j, since the components of j are the specified total inclusions. If r=0, no modification is needed; the zero class is represented by zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09IZ, proof, second paragraph; the first paragraph is replaced by the exact homology rows as explicit hypotheses"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every cohomology class in the direct sum total complex of a left half-plane bicomplex with exact term and cycle rows has a representative in column zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every cohomology class in the direct sum total complex of a left half-plane bicomplex with exact term and cycle rows has a representative in column zero",
+   "results": "8 hits: CochainComplex.HomComplex.Cocycle.fromSingleMk_mem_coboundaries_iff, CochainComplex.HomComplex.Cocycle.toSingleMk_mem_coboundaries_iff, CochainComplex.HomComplex.leftHomologyData', CochainComplex.HomComplex.Cocycle.toSingleMk_surjective, CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective, CochainComplex.HomComplex.leftHomologyData'_H_coe, CochainComplex.isKInjective_of_injective_aux, CochainComplex.HomComplex.mem_coboundaries_iff; none states the column-zero representative theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*(surjective|epi)|homology.*row|row.*homology",
+   "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/BrownLemma.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; none states the column-zero representative theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedTotalResolutionHomologyInjective",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2), good total resolution: finite-support normalization of total cocycles",
+   "via": [
+    "lem-pc-derived-total-resolution-homology-injective",
+    "lem-pc-derived-total-resolution-quasi-iso",
+    "lem-pc-derived-filtered-free-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedTotalResolutionColumnZero",
+  "file": "lean/Sheaf/Paper/DerivedTotalResolutionColumnZero.lean",
+  "declaration": "WeilConjectures.DerivedTotalResolution.total_resolution_column_zero_surjective",
+  "statement": "theorem total_resolution_column_zero_surjective\n    (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)\n      (ComplexShape.up ℤ))\n    [K.HasTotal (ComplexShape.up ℤ)]\n    (j : K.X 0 ⟶ K.total (ComplexShape.up ℤ))\n    [∀ i, (K.total (ComplexShape.up ℤ)).HasHomology i]\n    [∀ p q, (K.X p).HasHomology q]\n    (n : ℤ)\n    (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))\n    (hj : ∀ q : ℤ, j.f q = K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp))\n    (h_homology : ∀ (p q : ℤ), p < -1 →\n      Function.Exact\n        (HomologicalComplex.homologyMap (K.d p (p + 1)) q).hom\n        (HomologicalComplex.homologyMap (K.d (p + 1) (p + 2)) q).hom) :\n    Function.Surjective (HomologicalComplex.homologyMap j n).hom",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T163616-L-2785994",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T163616-L-2785994",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

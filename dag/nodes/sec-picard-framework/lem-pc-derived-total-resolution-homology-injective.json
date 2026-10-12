@@ -13,16 +13,35 @@
  ],
  "proof": [
   {
-   "text": "Write A_i = K.X (-i). The short exact sequences of cycles, terms and\nimages, together with exactness of the term and cycle rows, give exact image\nrows. Applying the same argument to boundaries, cycles and homology gives\nexact homology rows. Represent a class in the kernel by a total cocycle x,\nwhose components x_i in A_i^(n+i) have finite support. If its largest index\nr is positive, the cocycle equation says x_r is a vertical cycle and its\nhorizontal image is a vertical boundary. Exactness of the homology row\nlifts its class to a vertical cycle y in A_(r+1)^(n+r). Subtract the total\nboundary of y, which has degree n-1, to make x_r a vertical boundary.\nSubtract the appropriately signed total boundary of a primitive in\nA_r^(n+r-1). Its other component has index r-1, so this kills x_r without\ncreating any component at a larger index. Induction on the finite support\nreduces x to a cycle x_0 in A_0^n. Its augmentation is a boundary d_M m.\nLift m through the surjective term map A_0^(n-1) to M^(n-1), obtaining t.\nThen x_0-d t is a cycle with augmentation zero. Exactness of the augmented\ncycle row lifts it to a cycle b in A_1^n. The total boundary of b is its\nhorizontal image, and that of t is d t since the positive columns vanish.\nThus x is a total boundary. A linear map with zero kernel is injective.",
+   "text": "Prove horizontal homology exactness by a boundary-lifting diagram chase. For each interior row, lift the next horizontal image of a boundary primitive through the cycle row, subtract its cycle lift, then lift through the term row. Subtract that primitive differential from the original cycle and use cycle exactness. The p=-2 case uses surjectivity of augmented cycles, the p=-3 case uses augmented cycle exactness, and lower columns use the interior cycle rows. At column zero, lift primitives directly by surjectivity on terms. These chases are fully proved as private Lean helpers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the column-zero inclusion j as a chain map, using vanishing of the positive columns. Its composite with ε is a. Apply the column-zero representative theorem with the exact horizontal homology rows just proved to obtain surjectivity of H(j).",
+   "uses": [
+    "lem-pc-derived-total-resolution-column-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Construct the explicit null-homotopy of K.d(-1,0) composed with j: in degree q the homotopy is the inclusion from bidegree (-1,q) into total degree q-1. The vertical differential has sign -1, so it cancels the source differential. Thus H(K.d(-1,0)) composed with H(j) is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x in the kernel of H(ε), choose y with H(j)y=x. Then H(a)y=0. The augmented homology exactness already proved lifts y to H(K.X(-1)); the null-homotopy forces x=0. Apply the linear-map zero-kernel criterion for injectivity.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-derived-total-resolution-column-zero"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 09IZ, proof, finite-support reduction and final kernel argument"
+  "place": "Tag 09IZ, lemma-good-resolution-gives-qis, proof; K1 Lean diagram chases and explicit null-homotopy, with finite-support normalization split off"
  },
  "mathlib_searches": [
   {
@@ -93,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-aba2f",
-  "group": "S2",
+  "reviewer": "COMPILER",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T135315-L-1691860",
+  "landing": "20261012T163616-L-2785994",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, proofs and dependencies with their DAG nodes, unchanged library interface, and Tag 09IZ; verified compilation and axioms, including the direct importer."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
