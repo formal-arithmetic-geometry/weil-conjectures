@@ -10190,3 +10190,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:55 L: merged deliver/U4/Sheaf.RingTheory.ArtinianSeparableResidueLiftCore (stage 3; reviewer PASS; first push; landing 20261012T235558-L-2202701 (interface); batch 20261012T235552; modules 2; new nodes 1)
 - 23:55 L: merged deliver/X3/Sheaf.AlgebraicGeometry.PseudoCoherentQCohDegree (stage 3; reviewer PASS; first push; landing 20261012T235559-L-2202849 (proof); batch 20261012T235552; modules 1; new nodes 0)
 - 23:55 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.ValuationGenericTrivializingGenerator (stage 3; reviewer PASS; first push; landing 20261012T235559-L-2202947 (interface); batch 20261012T235552; modules 3; new nodes 2)
+- 23:56 L: returned deliver/F1/Sheaf.RingTheory.PopescuReductionPresentationFromFactor (reviewer RETURN: (reviewer X-892fb, head 892fb94fc) E2 / brief point 4: the disputed counterexample does not establish that the displayed)
