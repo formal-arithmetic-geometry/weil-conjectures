@@ -12,20 +12,22 @@
  },
  "proof": [
   {
-   "text": "Compute evaluation of the functor-category kernel and pullback and apply T to the resulting canonical isomorphism.",
+   "text": "Construct canonicalComparison using the proved recursive stage identity, evaluation of the kernel and pullback, and T.mapIso. The evaluated first projection is the original functor-category first projection. Naturality of π moves it across T.map of the comparison. The transported step augmentation is precisely π followed by that first projection. Return the canonical isomorphism and this proved equation. No use of the combined comparison theorem is made.",
    "uses": [
-    "lem-pc-cycle-pullback-tower-comparison-stage3"
+    "def-tower-canonical-comparison-g3",
+    "def-pc-cycle-pullback-tower-data-stage3"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-cycle-pullback-tower-comparison-stage3"
+  "def-tower-canonical-comparison-g3",
+  "def-pc-cycle-pullback-tower-data-stage3"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05T7 (1)"
+  "document": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
+  "place": "G3 repair of reviewer X-6c272: canonical evaluation comparison and projection proofs"
  },
  "mathlib_searches": [
   {
@@ -71,7 +73,11 @@
   "statement": "theorem tower_comparison_first {A : Type u} [Category.{v} A] [Abelian A]\n    {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A)\n    (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) :\n    let d := (differential T π F N (i + 1)).app b\n    let f := (F.obj b).d i (i + 1)\n    let g := kernel.ι d ≫ (augmentation T π F N (i + 1)).app b\n    ∃ (c : (term T π F N i).obj b ≅ T.obj (pullback f g)),\n      c.hom ≫ π.app (pullback f g) ≫ pullback.fst f g =\n        (augmentation T π F N i).app b",
   "branch": "sheaf-dag",
   "by": "R2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "declarations": [
+   "CochainComplex.CyclePullback.tower_comparison_first",
+   "CochainComplex.CyclePullback.tower_comparison_canonical_first"
+  ]
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -86,11 +92,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R2",
+  "reviewer": "X-008d1",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T184337-L-4017780",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T223406-L-1637048",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean constructions and projection proofs against the revised nodes, declared signature correction, original existential signatures, and Stacks 05T7; verified compilation, direct importer, and axioms."
  }
 }

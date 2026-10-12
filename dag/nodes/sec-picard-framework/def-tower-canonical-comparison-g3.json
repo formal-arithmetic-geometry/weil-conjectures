@@ -1,0 +1,101 @@
+{
+ "id": "def-tower-canonical-comparison-g3",
+ "kind": "definition",
+ "title": "Canonical evaluation comparison for the explicit cycle-pullback tower",
+ "statement": "Let A be abelian, B a category, T : A ⥤ A, π : T ⟶ 𝟭 A, F : B ⥤ CochainComplex A ℤ and N ∈ ℤ. For b ∈ B and i ≤ N in the explicit tower [def-pc-cycle-pullback-tower-data-stage3], define P_i in B ⥤ A as the pullback of targetD F i (i+1) and kernel.ι(differential(i+1)) ≫ augmentation(i+1). The proved recursive-stage equality identifies term i with P_i ⋙ T. Define canonicalComparison as evaluation of this equality followed by T.mapIso of the composition of the canonical evaluation/pullback isomorphism and the pullback map induced by the canonical evaluation/kernel isomorphism. Its source is (term i).obj b and its target is T.obj of the pointwise pullback over ker((differential(i+1)).app b). All equality proofs and all isomorphism data are fully proved constructions.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1), descending cycle-pullback step; https://stacks.math.columbia.edu/tag/05T7"
+ },
+ "stmt_deps": [
+  "def-pc-cycle-pullback-tower-data-stage3"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
+  "place": "G3 repair of reviewer X-6c272: canonical evaluation comparison and projection proofs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison between evaluation of a pullback over a kernel and the pullback of evaluated maps",
+   "results": "8 hits, including CategoryTheory.Limits.pullbackComparison_comp_fst; no complete recursive tower comparison.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation functor preserves kernels and pullbacks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKernel.iso|PreservesPullback.iso",
+   "results": "25 hits, including the canonical kernel and pullback comparison definitions and projection equations in Mathlib.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.CyclePullbackTowerComparison",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "Pointwise comparison of the descending cycle-pullback construction, with both projections preserved.",
+   "via": [
+    "lem-pc-cycle-pullback-tower-comparison-stage3",
+    "lem-pc-functorial-cycle-pullback-core-stage3",
+    "lem-pc-functorial-cycle-pullback-construction",
+    "lem-pc-kflat-bounded-flat-replacement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CyclePullbackTowerComparison",
+  "file": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
+  "declaration": "CochainComplex.CyclePullback.canonicalComparison",
+  "declarations": [
+   "CochainComplex.CyclePullback.canonicalComparison",
+   "CochainComplex.CyclePullback.evaluatedPullbackIso",
+   "CochainComplex.CyclePullback.indexedPullback",
+   "CochainComplex.CyclePullback.term_step_eq"
+  ],
+  "statement": "def canonicalComparison (T : A ⥤ A) (π : T ⟶ 𝟭 A) (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) : (term T π F N i).obj b ≅ T.obj (pullback ((F.obj b).d i (i + 1)) (kernel.ι ((differential T π F N (i + 1)).app b) ≫ (augmentation T π F N (i + 1)).app b))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-008d1",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T223406-L-1637048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-008d1",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T223406-L-1637048",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean constructions and projection proofs against the revised nodes, declared signature correction, original existential signatures, and Stacks 05T7; verified compilation, direct importer, and axioms."
+ }
+}

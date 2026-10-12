@@ -2,9 +2,10 @@
  "id": "new-tower-comparison-second",
  "kind": "statement",
  "title": "Second projection of tower comparison",
- "statement": "For the explicit cycle-pullback tower, the comparison isomorphism satisfying the first projection equation also satisfies the differential projection equation.",
+ "statement": "For abelian A, a category B, T : A ⥤ A, π : T ⟶ 𝟭 A, F : B ⥤ CochainComplex A ℤ, N ∈ ℤ, b ∈ B and i ≤ N, the explicitly constructed canonicalComparison [def-tower-canonical-comparison-g3], followed by π, the second pointwise pullback projection and the inclusion of ker((differential T π F N (i+1)).app b), equals (differential T π F N i).app b. This is a property of the canonical comparison, not of arbitrary isomorphisms preserving one projection.",
  "stmt_deps": [
-  "lem-pc-cycle-pullback-tower-comparison-stage3"
+  "def-tower-canonical-comparison-g3",
+  "def-pc-cycle-pullback-tower-data-stage3"
  ],
  "source": {
   "document": "literature/stacks-project/derived.tex",
@@ -12,20 +13,22 @@
  },
  "proof": [
   {
-   "text": "Use the second pullback projection equation and the kernel inclusion equation, transported through the tower definitions.",
+   "text": "Identify indexedStage i with step(indexedStage(i+1)), handling i=N with the initial zero stage and i<N with depth N i = depth N (i+1)+1. Transporting the differential across the proved current-family equality gives π followed by the functor-category second projection and kernel inclusion. Evaluate that equation. The canonical pullback comparison has second projection equal to the evaluated projection followed by the canonical kernel comparison; kernelComparison_comp_ι cancels that kernel comparison against its inclusion. Naturality of π for this specific pullback isomorphism gives the required equation for canonicalComparison.",
    "uses": [
-    "lem-pc-cycle-pullback-tower-comparison-stage3"
+    "def-tower-canonical-comparison-g3",
+    "def-pc-cycle-pullback-tower-data-stage3"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-cycle-pullback-tower-comparison-stage3"
+  "def-tower-canonical-comparison-g3",
+  "def-pc-cycle-pullback-tower-data-stage3"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05T7 (1)"
+  "document": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
+  "place": "G3 repair of reviewer X-6c272: canonical evaluation comparison and projection proofs"
  },
  "mathlib_searches": [
   {
@@ -68,7 +71,7 @@
   "module": "Sheaf.Algebra.Homology.CyclePullbackTowerComparison",
   "file": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
   "declaration": "CochainComplex.CyclePullback.tower_comparison_second",
-  "statement": "theorem tower_comparison_second {A : Type u} [Category.{v} A] [Abelian A]\n    {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A)\n    (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N)\n    (c : (term T π F N i).obj b ≅\n      T.obj (pullback ((F.obj b).d i (i + 1))\n        (kernel.ι ((differential T π F N (i + 1)).app b) ≫\n          (augmentation T π F N (i + 1)).app b)))\n    (h : c.hom ≫ π.app _ ≫ pullback.fst _ _ =\n      (augmentation T π F N i).app b) :\n    c.hom ≫ π.app _ ≫ pullback.snd _ _ ≫\n      kernel.ι ((differential T π F N (i + 1)).app b) =\n      (differential T π F N i).app b",
+  "statement": "theorem tower_comparison_second {A : Type u} [Category.{v} A] [Abelian A] {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A) (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) : (canonicalComparison T π F N b i hi).hom ≫ π.app _ ≫ pullback.snd _ _ ≫ kernel.ι ((differential T π F N (i + 1)).app b) = (differential T π F N i).app b",
   "branch": "sheaf-dag",
   "by": "R2",
   "date": "2026-10-13"
@@ -86,11 +89,43 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R2",
+  "reviewer": "X-008d1",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T184337-L-4017780",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T223406-L-1637048",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean constructions and projection proofs against the revised nodes, declared signature correction, original existential signatures, and Stacks 05T7; verified compilation, direct importer, and axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "G3 stage 2",
+  "old_statement": "For the explicit cycle-pullback tower, the comparison isomorphism satisfying the first projection equation also satisfies the differential projection equation.",
+  "what": "The old universally quantified helper is false: the swapped comparison in the reviewer’s rational-vector-space example preserves the zero first projection but changes the differential projection. Replace the arbitrary c and hypothesis h by the explicitly constructed canonicalComparison; prove this corrected helper and preserve both existing existential comparison signatures.",
+  "source": {
+   "document": "literature/stacks-project/derived.tex",
+   "place": "Lemma 05T7 (1), descending cycle-pullback step; https://stacks.math.columbia.edu/tag/05T7"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-cycle-pullback-tower-comparison-stage3",
+    "holds": true,
+    "note": "Its existential combined comparison statement is unchanged and now proved by taking canonicalComparison and pairing its two projection equations."
+   }
+  ],
+  "old_stmt_deps": [
+   "lem-pc-cycle-pullback-tower-comparison-stage3"
+  ],
+  "old_proof": [
+   {
+    "text": "Use the second pullback projection equation and the kernel inclusion equation, transported through the tower definitions.",
+    "uses": [
+     "lem-pc-cycle-pullback-tower-comparison-stage3"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pc-cycle-pullback-tower-comparison-stage3"
+  ]
  }
 }
