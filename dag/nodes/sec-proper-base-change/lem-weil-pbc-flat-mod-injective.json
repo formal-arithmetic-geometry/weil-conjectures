@@ -30,68 +30,43 @@
  ],
  "proof": [
   {
-   "text": "Put $u_n:N/\\mathfrak m^nN\\to M/\\mathfrak m^nM$. The hypothesis is injectivity of $u_1$. For $n\\ge1$ put $Q_n=\\mathfrak m^n/\\mathfrak m^{n+1}$. Right exactness gives $N\\otimes_R Q_n\\to N/\\mathfrak m^{n+1}N\\to N/\\mathfrak m^nN\\to0$; flatness of $M$ makes the analogous sequence for $M$ exact also at the left. The first arrows are induced by multiplication, and the identifications $N\\otimes_RQ_n\\cong(N/\\mathfrak mN)\\otimes_{R/\\mathfrak m}Q_n$ and $M\\otimes_RQ_n\\cong(M/\\mathfrak mM)\\otimes_{R/\\mathfrak m}Q_n$ respect $u$.",
-   "uses": [
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-tensor-right-exact",
-    "lem-weil-pbc-tensor-over-quotient-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), first paragraph, lines 23436-23454"
-   }
-  },
-  {
-   "text": "Assume $u_n$ injective. Since $R/\\mathfrak m$ is a field, tensoring the injective $u_1$ with the $R/\\mathfrak m$-vector space $Q_n$ is injective. In the diagram of the sequences from the preceding step, if a class $x\\in N/\\mathfrak m^{n+1}N$ maps to zero under $u_{n+1}$, its image under $u_n$ is zero, so $x$ comes from $N\\otimes_RQ_n$. Its image in $M\\otimes_RQ_n$ is zero because the lower first arrow is injective; the left vertical map is injective, hence $x=0$. Thus induction gives injectivity of $u_n$ for every $n\\ge1$.",
+   "text": "For a module X annihilated by the maximal ideal, identify N tensor X and M tensor X with their residue quotients tensor X. Tensoring the injective residue map over the residue field is injective. This is the proved private helper rTensor_injective_of_maximal_annihilates.",
    "uses": [
     "lem-weil-pbc-module-over-field-flat",
-    "lem-weil-pbc-flat-tensor-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), first paragraph, lines 23436-23454"
-   }
-  },
-  {
-   "text": "The ideal $\\mathfrak mS$ lies in the unique maximal ideal of $S$. Since $S$ is Noetherian and $N$ finite over $S$, Krull intersection gives $\\bigcap_{n\\ge1}(\\mathfrak mS)^nN=0$. As $(\\mathfrak mS)^nN=\\mathfrak m^nN$, an element of $\\ker u$ belongs to every $\\mathfrak m^nN$ by injectivity of $u_n$, and therefore is zero.",
-   "uses": [
-    "lem-weil-pbc-krull-intersection-jacobson"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), second paragraph, lines 23456-23462; Krull intersection Tag 00IP"
-   }
-  },
-  {
-   "text": "Let $C=M/u(N)$ and let $I\\subseteq R$ be any ideal. From $0\\to N\\xrightarrow{u}M\\to C\\to0$, the first-variable Tor exact sequence and flatness of $M$ identify $\\operatorname{Tor}_1^R(C,R/I)$ with the kernel of $N\\otimes_RR/I\\to M\\otimes_RR/I$, hence with the kernel of $N/IN\\to M/IM$. The flatness-Tor criterion reduces the conclusion to injectivity of these maps for all $I$.",
-   "uses": [
-    "lem-weil-pbc-tor-long-exact-first-variable",
-    "lem-weil-pbc-flat-tor-ideal-criterion",
     "lem-weil-pbc-tensor-over-quotient-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), third paragraph, lines 23464-23473; Tor criterion Tag 00M5 and exact sequence Tag 00M0"
-   }
+   "elementary": false
   },
   {
-   "text": "If $I=R$, then $N/IN=M/IM=0$. Otherwise $I\\subseteq\\mathfrak m$, so $IS\\subseteq\\mathfrak m_S$. The induced map $R/I\\to S/IS$ is local, $S/IS$ is Noetherian (each ascending chain of its ideals lifts to one in $S$), and $N/IN$ is finite over $S/IS$. The $R/I$-module $M/IM$ is flat, and reduction of $N/IN\\to M/IM$ modulo $\\mathfrak m/I$ is exactly $u_1$, hence injective. Apply the injectivity argument of steps 1-3, with $R/I,S/IS,N/IN,M/IM$ in place of $R,S,N,M$, to obtain injectivity for this $I$. Step 4 now gives flatness of $C$.",
+   "text": "Induct on n for modules annihilated by the nth power. Use the exact sequence mX → X → X/mX → 0, tensor right exactness for N, and injectivity of mX tensor M → X tensor M by flatness. The two tensor maps on mX and X/mX are injective by induction and the preceding step. A diagram chase proves injectivity on X.",
    "uses": [
-    "lem-weil-pbc-quotient-local-structure",
-    "lem-weil-pbc-flat-module-quotient-flat",
-    "lem-weil-pbc-tensor-over-quotient-ring",
-    "lem-weil-pbc-krull-intersection-jacobson",
-    "lem-weil-pbc-flat-tor-ideal-criterion"
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00ME (lemma-mod-injective), final paragraph, lines 23473-23477; case I = R made explicit"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For finite X over R, a kernel element in N tensor X maps to zero after tensoring X → X/m^n X, so lies in m^n(N tensor X) for every n. N tensor X is finite over S, via the base-change tensor equivalence. Transfer membership to (mS)^n(N tensor X) and use Krull intersection because mS lies in the Jacobson radical.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding tensor injectivity to X=R/J (a cyclic R-module) for every ideal J. The tensor-quotient equivalences imply u(x) in JM only if x is in JN. At J=0 this proves injectivity of u.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove flatness of C=M/range u by the ideal tensor criterion, adapting Module.Flat.quotient_range from WeilConjectures.Mathlib.RingTheory.Filtration to distinct domain N and codomain M. Lift z in C tensor J to y in M tensor J. Its multiplication image lies in range u, say u(x); purity gives x in JN, so lift x to yprime in N tensor J. Injectivity of the multiplication map for flat M gives y=u tensor J(yprime). The quotient map kills this image, hence z=0. All these steps are written in the proved private helper flat_quotient_range_of_ideal_preimage.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -99,16 +74,14 @@
   "lem-weil-pbc-module-over-field-flat",
   "lem-weil-pbc-tensor-right-exact",
   "lem-weil-pbc-tensor-over-quotient-ring",
-  "lem-weil-pbc-krull-intersection-jacobson",
-  "lem-weil-pbc-tor-long-exact-first-variable",
-  "lem-weil-pbc-flat-tor-ideal-criterion",
-  "lem-weil-pbc-quotient-local-structure",
-  "lem-weil-pbc-flat-module-quotient-flat"
+  "lem-weil-pbc-krull-intersection-jacobson"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "H3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00ME (lemma-mod-injective), proof lines 23436-23477"
+  "place": "Tag 00ME tensor-power induction and Krull intersection; direct ideal tensor criterion for the cokernel, adapted from WeilConjectures.Mathlib.RingTheory.Filtration"
  },
  "mathlib_searches": [
   {
@@ -194,5 +167,15 @@
   "group": "J1",
   "result": "fix",
   "note": "local R,S with hφ φ(m)⊆m_S, Noetherian S, Module.Finite S N with R-action Module.compHom N φ, Module.Flat R M, u R-linear; hu restated as injectivity of mapQ N/(m•⊤)→M/(m•⊤); conclusion Injective u ∧ Module.Flat R (M ⧸ range u)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T095907-L-318510",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
