@@ -15,41 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Extend I and J by zero. The augmentation J <- F(X)[0] is a quasi-isomorphism. The supplied degree-zero identity says that phi after this augmentation is the canonical map F(X)[0] -> F(I). Cancelling the augmentation in the derived category determines the represented map independently of phi. Use the canonical resolution comparison to identify F(I) with RF(X).",
+   "text": "Apply lem-sc-grothendieck-bottom-augmentation to identify the raw bottom edge, transported by the canonical F-resolution derived isomorphism, with H^n(RG(a_J)) followed by H^n(RG(Q phi)). This isolates only the augmentation/truncation step; it uses no composite acyclicity.",
    "uses": [
+    "lem-sc-grothendieck-bottom-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In private lemma bottom_resolution_map_unit, apply resolution_homology_transport for G and J. Naturality of extension homology and mapExtendIso moves the homology map of G(phi) through the extension comparisons. Naturality of homologyFunctorObjQIso and of the G derived unit then gives the same H^n(RG(a_J))H^n(RG(Q phi)) composite. The G unit on J is invertible because its terms are injective.",
+   "uses": [
+    "lem-pc-canonical-resolution-homology-comparison",
+    "def-pc-canonical-resolution-derived-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the composite-unit transport privately for an arbitrary abelian C: the proof of lem-pc-canonical-resolution-composite-unit-comparison uses no injectives in C. Expand the composition isomorphism unit equation, use its naturality on the resolution augmentation, and cancel the F unit on I. Naturality through the map/extension comparison, followed by resolution_homology_transport for GF, gives bottom_resolution_composite_unit_transport. Cancel the abutment inverse followed by H^n(RG(e_F)), rewrite that transport, and combine the first two equalities. This is the original bottom-edge resolution formula with all hypotheses unchanged.",
+   "uses": [
+    "lem-pc-canonical-resolution-homology-comparison",
     "def-pc-canonical-resolution-derived-iso",
-    "lem-sp-derived-well-defined"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Identify F(X)[0] with the bottom truncation of RF(X) using left exactness and the canonical R^0F comparison. Under the truncation/shift identification defining grothendieckSpectralObjectHIso at q=0, the preceding map is the bottom-interval inclusion. Applying RG and H^n therefore gives the canonical grothendieckBottomEdgeMap.",
-   "uses": [
-    "lem-sp-grothendieck-edge-maps",
-    "lem-sp-derived-well-defined"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The derived G units are invertible on J (injective terms) and F(I) (G-acyclic terms). Naturality of this unit along phi identifies the induced map with H^n(G phi). The composite derived comparison transports the target unit, and the ordinary resolution comparison transports the source unit. Cancelling the extension/homology comparisons gives rho_J followed by H^n(G phi) followed by rho_I inverse, in this order.",
-   "uses": [
-    "lem-pc-canonical-resolution-composite-unit-comparison",
-    "lem-pc-canonical-resolution-homology-comparison"
+    "lem-sp-grothendieck-edge-maps"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-canonical-resolution-derived-iso",
-  "lem-pc-canonical-resolution-composite-unit-comparison",
   "lem-pc-canonical-resolution-homology-comparison",
-  "lem-sp-derived-well-defined",
+  "lem-sc-grothendieck-bottom-augmentation",
   "lem-sp-grothendieck-edge-maps"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Derived Categories; https://stacks.math.columbia.edu/tag/015M",
-  "place": "Tags 015M, 015N and 015J; explicit bottom-interval augmentation and unit naturality in step 2 of the parent augmentation proof"
+  "place": "Tags 015M, 015N and 015J: isolate the bottom-interval augmentation; prove resolution-map and composite-unit transport locally for arbitrary abelian C."
  },
  "mathlib_searches": [
   {
@@ -145,9 +144,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T194117-L-457274",
+  "landing": "20261012T220526-L-1395576",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
