@@ -1,0 +1,98 @@
+{
+ "id": "lem-sc-torsor-h1-functoriality-part-contract",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-torsor-h1-functoriality",
+   "place": "decomposition of the two conjuncts"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Contracted-product clause of torsor H¹ functoriality",
+ "statement": "The corresponding conjunct of lem-sc-torsor-h1-functoriality, with all its displayed hypotheses.",
+ "stmt_deps": [
+  "lem-sc-torsor-h1-functoriality"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemmas 02FQ and 02UV"
+ },
+ "proof": [
+  {
+   "text": "Boundary-of-one representative, pushout/direct-image extension, and naturality identify the stated class.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemmas 02FQ and 02UV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "torsor H1 functoriality",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Torsor H one quotient map",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor_h1_functoriality",
+   "results": "no Mathlib match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.TorsorH1Functoriality",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.TorsorH1FunctorialityParts",
+  "file": "lean/Sheaf/CategoryTheory/Sites/TorsorH1FunctorialityParts.lean",
+  "declaration": "CategoryTheory.Sheaf.torsor_h1_functoriality_contract",
+  "statement": "theorem torsor_h1_functoriality_contract\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasExt.{w} (Sheaf J AddCommGrpCat.{w})] [EnoughInjectives (Sheaf J AddCommGrpCat.{w})]\n    {T : C} (_hT : IsTerminal T)\n    (G G' : Sheaf J AddCommGrpCat.{w}) (φ : G ⟶ G')\n    (eG : H G 1 ≃ _root_.Quotient (Torsor.setoid (G := G)))\n    (eG' : H G' 1 ≃ _root_.Quotient (Torsor.setoid (G := G')))\n    (hφ : H G 1 → H G' 1) (push : Torsor G → Torsor G') :\n    ∀ P : Torsor G, eG' (hφ (eG.symm ⟦P⟧)) = ⟦push P⟧",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T112847-L-770657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T112847-L-770657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

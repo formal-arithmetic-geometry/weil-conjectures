@@ -3,10 +3,7 @@ module
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import Sheaf.Topology.ClosedImmersionPushforwardCohomology
-import Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward
-import Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative
-import Sheaf.CategoryTheory.Sites.ZariskiTorsorExtensionPushout
-import Sheaf.Topology.ClosedPushforwardBoundaryNaturality
+import Sheaf.CategoryTheory.Sites.TorsorH1FunctorialityParts
 
 /-! # Functoriality of the torsor description of H¹
 
@@ -64,6 +61,8 @@ theorem torsor_h1_functoriality
       Torsor ((TopCat.Sheaf.pushforward AddCommGrpCat i).obj F)) :
     (∀ P : Torsor G, eG' (hφ (eG.symm ⟦P⟧)) = ⟦push P⟧) ∧
       (∀ P : Torsor F, eIF (hI (eF.symm ⟦P⟧)) = ⟦direct P⟧) := by
-  sorry
+  constructor
+  · exact torsor_h1_functoriality_contract _hT G G' φ eG eG' hφ push
+  · exact torsor_h1_functoriality_pushforward _hT G G' φ eG eG' hφ push i hi F p eF eIF hI direct
 
 end CategoryTheory.Sheaf
