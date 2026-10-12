@@ -9,24 +9,33 @@
  },
  "proof": [
   {
-   "text": "Construct the comparison by restricting an injective resolution to the localized site, using exactness and preservation of injectives; identify the resulting section complexes and take cohomology.",
+   "text": "Use the proved natural identification of object cohomology with right-derived sections on both the original and slice sites.",
    "uses": [
-    "lem-weil-pbc-site-restriction-injectives",
-    "lem-sp-right-adjoint-preserves-injectives",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-sc-site-cohomology-right-derived-sections"
    ],
    "elementary": false
+  },
+  {
+   "text": "Restriction is additive sectionwise. The continuous and cocontinuous adjunctions give preservation of finite limits and colimits, hence homology. Apply preservation of injective objects to each term of an injective resolution; use singleMapHomologicalComplex for the augmentation and preservation of quasi-isomorphisms to obtain the restricted injective resolution.",
+   "uses": [
+    "new-over-pullback-preserves-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original resolution evaluated at W and its restriction evaluated at Over.mk (identity W) have definitionally identical section complexes. Use isoRightDerivedObj for the two resolutions, apply the homology functor to their identity isomorphism, and compose with the two cohomology/right-derived-sections comparisons. Convert the resulting abelian-group isomorphism to an additive equivalence.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-restriction-injectives",
-  "lem-sp-right-adjoint-preserves-injectives",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-sc-site-cohomology-right-derived-sections",
+  "new-over-pullback-preserves-injectives"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 03F3"
+  "place": "Lemma 03F3 (2), chain-level proof using (1); formalized in the second reading by B2"
  },
  "mathlib_searches": [
   {
@@ -96,9 +105,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T112848-L-771046",
+  "landing": "20261012T144052-L-2088703",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

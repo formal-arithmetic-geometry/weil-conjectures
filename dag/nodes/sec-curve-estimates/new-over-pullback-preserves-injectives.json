@@ -1,0 +1,111 @@
+{
+ "id": "new-over-pullback-preserves-injectives",
+ "kind": "statement",
+ "title": "Restriction to a slice Grothendieck site preserves injective abelian sheaves",
+ "statement": "Let C be a small category and J a Grothendieck topology as in [def-weil-pbc-sites-and-cohomology], with sheafification for abelian groups on C and on C/W. For every W in C, the restriction functor J.overPullback AddCommGrpCat W preserves injective objects. No existence of pullbacks in C, precoverage presentation, or HasExt is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03F3 (1); its proof invokes Modules on Sites, Lemmas 03DI and 03DJ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For a slice sheaf G, construct the presheaf at V as the direct sum of G(V → W) over all arrows V → W. Restriction sends the φ summand through G into the a ≫ φ summand. Sheafify. Sheafification adjunction and the direct-sum universal property identify maps from this sheaf to F with maps G → F|W, naturally on both sides. Thus this is a left adjoint to restriction. This argument works for sieves without pullbacks in C.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Monomorphisms of slice sheaves are sectionwise injective because their kernels are computed sectionwise. Direct sums preserve these injections, even for empty index sets. Exact sheafification preserves the resulting monomorphism, so the constructed left adjoint preserves monomorphisms.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a monomorphism A → B in the slice and a map A → I|W, transpose across the adjunction. Extend the resulting map from the extension of A to I across the monomorphism to the extension of B, using injectivity of I. Transpose back. Naturality of the adjunction gives the required extension to B, proving that I|W is injective.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03F3 (1), with the direct-sum construction and monomorphism argument of Modules on Sites 03DI--03DJ spelled out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of an injective abelian sheaf to a slice Grothendieck site is injective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of abelian sheaves to the localized site over an object preserves injective objects",
+   "results": "PresheafOfModules.instIsLocallyInjectiveToSheafify, CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff, CategoryTheory.Presheaf.isLocallyInjective_of_injective, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.Sheaf.isLocallyInjective_forget, CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff, CategoryTheory.Presheaf.isLocallyInjective_toSheafify', CategoryTheory.Presheaf.isLocallyInjective_forget",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|PreservesInjectiveObjects",
+   "results": "Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/SheafHom.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean, Mathlib/CategoryTheory/Sites/LocalProperties.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalizationAddEquiv",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cohomology-over-object-localization-addEquiv",
+   "place": "preservation of injectives in the restriction of the resolution, Stacks 03F3 (1)",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.OverPullbackPreservesInjectives",
+  "file": "lean/Sheaf/CategoryTheory/Sites/OverPullbackPreservesInjectives.lean",
+  "declaration": "CategoryTheory.overPullback_preservesInjectiveObjects",
+  "statement": "theorem overPullback_preservesInjectiveObjects\n    {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{u}]\n    (W : C) [HasSheafify (J.over W) AddCommGrpCat.{u}] :\n    (J.overPullback AddCommGrpCat.{u} W).PreservesInjectiveObjects",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T144052-L-2088703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T144052-L-2088703",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
