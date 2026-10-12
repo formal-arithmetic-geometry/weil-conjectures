@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
+public import WeilConjectures.SixFunctors.BaseChange.Etale
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
@@ -43,17 +44,14 @@ W  --v---> X
 ```
 with `v` étale, `g^* v_! ≅ v'_! g'^*` on étale sheaves of `Λ`-modules. Both are left adjoint to
 the two sides of the degree-zero base change `v^* g_* ≅ g'_* v'^*`, an isomorphism as `v` is
-étale (`AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_flat`). -/
+étale (`AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`). -/
 noncomputable def Etale.etaleLowerShriekBaseChangeIso (sq : IsPullback v' g' g v) :
     Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v inferInstance ⋙
         (g)^*[ModuleCat.{u + 1} Λ] ≅
       (g')^*[ModuleCat.{u + 1} Λ] ⋙
         Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v' inferInstance :=
-  have : ∀ F, IsIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F) :=
-    fun F ↦
-    Etale.isIso_baseChangeMap_app_of_flat Λ sq F
   have : IsIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) :=
-    NatIso.isIso_of_isIso_app _
+    Etale.isIso_baseChangeMap_flip_of_isPullback _ sq.flip
   (((Etale.etaleLowerShriekUpperStarAdjunction _ v inferInstance).comp
       (Etale.upperStarLowerStarAdjunction _ g)).ofNatIsoRight
       (asIso (Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq))).leftAdjointUniq
