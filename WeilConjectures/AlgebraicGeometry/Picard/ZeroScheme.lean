@@ -90,6 +90,9 @@ the category of `𝒪`-modules on a scheme is Grothendieck abelian
 - `AlgebraicGeometry.injective_invertibleDirectImageToHilbert_app`: `F` is a subfunctor of the
   Hilbert functor (blueprint
   `sk-the-subsheaf-ff-and-its-representability--remark-1`).
+- `AlgebraicGeometry.hilbertToPicardNormalized`: the map `D ↦ 𝒪(D) ⊗ pr_T^* σ_T^* 𝒪(D)^{-1}`,
+  a left inverse of the dictionary
+  (`AlgebraicGeometry.hilbertToPicardNormalized_invertibleDirectImageToHilbert`).
 - `AlgebraicGeometry.zeroLocus_directImageCounit_eq_of_iso`: for `ℒ ≅ 𝒪(D) ⊗ f_T^* 𝒩` in `F(T)`
   the dictionary returns `D` (blueprint `lem-pc-universal-adjoint-section`).
 - `AlgebraicGeometry.isRepresentable_picardFunctorInvertibleDirectImage`: `F` is representable
@@ -799,6 +802,77 @@ theorem exists_injective_natTrans_hilbertPresheaf [IsSepClosed k]
       hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X) ⋙ uliftFunctor.{u + 1, u},
       ∀ T, Function.Injective (Φ.app T) :=
   ⟨_, injective_invertibleDirectImageToHilbert_app σ hσ⟩
+
+/-- The **`σ`-normalization of `𝒪(D)`**: for a closed subscheme `D ⊆ X_T` with ideal sheaf
+`𝒪(-D)`, the module `𝒪(D) ⊗ pr_T^* (σ_T^* 𝒪(D))^{-1}` on `X_T`, where `𝒪(D) = 𝒪(-D)^{-1}` is the
+dual of the ideal sheaf and `σ_T` is the base change of the section `σ`.
+
+(blueprint: `the-subsheaf-ff-and-its-representability--remark-1`) -/
+noncomputable def normalizedDualIdealSheaf
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    (T : Over (Spec (.of k))) (D : (Limits.pullback (X ↘ Spec (.of k)) T.hom).IdealSheafData) :
+    (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules :=
+  D.toModulesᵛ ⊗ (Modules.pullback (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom)).obj
+    ((Modules.pullback (sectionBaseChange _ σ hσ T)).obj D.toModulesᵛ)ᵛ
+
+omit [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))] in
+/-- The `σ`-normalization of `𝒪(D)` of a point `D` of `Hilb^g_{X/k}(T)` is invertible. -/
+lemma isInvertible_normalizedDualIdealSheaf
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    (T : Over (Spec (.of k))) {D : (Limits.pullback (X ↘ Spec (.of k)) T.hom).IdealSheafData}
+    (hD : IsHilbertSubscheme (X ↘ Spec (.of k)) (arithmeticGenus k X) T D) :
+    SheafOfModules.IsInvertible.{u, u, u} (normalizedDualIdealSheaf σ hσ T D) :=
+  have : Modules.IsInvertible D.toModulesᵛ := hD.isInvertible.isInvertible_dual_toModules
+  Modules.IsInvertible.sheafOfModules_isInvertible (D.toModulesᵛ ⊗
+    (Modules.pullback (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom)).obj
+      ((Modules.pullback (sectionBaseChange _ σ hσ T)).obj D.toModulesᵛ)ᵛ)
+
+/-- **The inverse of the zero-scheme dictionary, as a map.** For a point `D` of
+`Hilb^g_{X/k}(T)`, the class of the `σ`-normalization
+`𝒪(D) ⊗ pr_T^* σ_T^* 𝒪(D)^{-1}` (`AlgebraicGeometry.normalizedDualIdealSheaf`) in `Pic(X_T)`;
+it is trivial along `σ_T`, i.e. a point of `Pic_{X/k,σ}(T)`. On the image of the zero-scheme
+dictionary `AlgebraicGeometry.invertibleDirectImageToHilbert` it is its inverse
+(`AlgebraicGeometry.hilbertToPicardNormalized_invertibleDirectImageToHilbert`).
+
+(blueprint: `the-subsheaf-ff-and-its-representability--remark-1`) -/
+noncomputable def hilbertToPicardNormalized
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    (T : Over (Spec (.of k)))
+    (D : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj (op T)) :
+    (picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T) :=
+  have := isInvertible_normalizedDualIdealSheaf σ hσ T D.2
+  ⟨Pic.mk (normalizedDualIdealSheaf σ hσ T D.1), by
+    have : Modules.IsInvertible D.1.toModulesᵛ := D.2.isInvertible.isInvertible_dual_toModules
+    let A := (Modules.pullback (sectionBaseChange _ σ hσ T)).obj D.1.toModulesᵛ
+    obtain ⟨t⟩ := Modules.nonempty_pullback_tensorObj_iso (sectionBaseChange _ σ hσ T)
+      D.1.toModulesᵛ ((Modules.pullback (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom)).obj Aᵛ)
+    obtain ⟨d⟩ := Modules.nonempty_tensorObj_dual_iso_unit A
+    exact Pic.eq_iff_nonempty_iso.2 ⟨fromSkeletonToSkeletonIso _ ≪≫
+      (Modules.pullback _).mapIso (fromSkeletonToSkeletonIso _) ≪≫ t ≪≫
+      whiskerLeftIso A (pullbackSectionBaseChangeSndIso _ σ hσ T _) ≪≫ d ≪≫
+      (fromSkeletonToSkeletonIso _).symm⟩⟩
+
+/-- **The inverse of the zero-scheme dictionary.** For `ℒ ∈ F(T)` with zero scheme
+`D = Z(φ_ℒ)` (`AlgebraicGeometry.invertibleDirectImageToHilbert`), the `σ`-normalization
+`𝒪(D) ⊗ pr_T^* σ_T^* 𝒪(D)^{-1}` of `𝒪(D)` (`AlgebraicGeometry.hilbertToPicardNormalized`) is
+`ℒ`: both are of the form `𝒪(D) ⊗ f_T^* 𝒩` and normalized along `σ_T`
+(`AlgebraicGeometry.picardFunctorNormalized_eq_of_iso_tensorObj`).
+
+(blueprint: `the-subsheaf-ff-and-its-representability--remark-1`) -/
+theorem hilbertToPicardNormalized_invertibleDirectImageToHilbert
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : Over (Spec (.of k)))
+    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T)) :
+    hilbertToPicardNormalized σ hσ T ((invertibleDirectImageToHilbert σ hσ).app (op T) ℒ).down =
+      ℒ.1 := by
+  have := ℒ.1.1.isInvertible
+  have := isInvertible_pullback_pushforward σ hσ T ℒ
+  obtain ⟨eℒ⟩ := Modules.Hom.nonempty_iso_dual_toModules_tensorObj _
+    (isInvertible_zeroLocus_directImageCounit σ hσ T ℒ).1
+  exact picardFunctorNormalized_eq_of_iso_tensorObj _ σ hσ _ _ _ _ _
+    (fromSkeletonToSkeletonIso (normalizedDualIdealSheaf σ hσ T _)) eℒ
 
 /-- **`F` is representable** by an open subscheme of `Hilb^g_{X/k}`: given a `k`-scheme `H`
 representing `Hilb^g_{X/k}`, there are a scheme `W` and an open immersion `j : W ⟶ H` such that
