@@ -83,6 +83,6 @@ theorem IsAdicLisseSheaf.toIhomDual_stalk_ne_zero {F : AdicSheaf l Z} (hF : IsAd
     ((μ (stalkFunctor l s) (adicConstantSheaf l Z) N.X).hom (x ⊗ₜ n))) e₁.symm).trans ?_
   refine key.symm.trans ?_
   erw [h]
-  simp
+  rw [map_zero, LinearMap.zero_apply]
 
 end AlgebraicGeometry.ProEtale

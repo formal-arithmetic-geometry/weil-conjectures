@@ -91,9 +91,10 @@ variable [Fact (ringChar k₀ ≠ l)]
 sheaves is: the forgetful functors reflect isomorphisms. -/
 lemma isIso_of_isIso_hom_hom_f {F G : WeilSheaf k₀ l X} (f : F ⟶ G) [IsIso f.hom.hom.f] :
     IsIso f := by
-  have : IsIso ((ObjectProperty.ι _ ⋙ IsoAlgebra.forget _).map f) :=
-    inferInstanceAs (IsIso f.hom.hom.f)
-  exact isIso_of_reflects_iso f (ObjectProperty.ι _ ⋙ IsoAlgebra.forget _)
+  have : IsIso ((IsoAlgebra.forget _).map f.hom) := inferInstanceAs (IsIso f.hom.hom.f)
+  have : IsIso f.hom := isIso_of_reflects_iso _ (IsoAlgebra.forget _)
+  exact ⟨⟨ObjectProperty.homMk (inv f.hom), ObjectProperty.hom_ext _ (IsIso.hom_inv_id f.hom),
+    ObjectProperty.hom_ext _ (IsIso.inv_hom_id f.hom)⟩⟩
 
 variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact φ] [QuasiSeparated φ]
   [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
@@ -123,24 +124,23 @@ lemma upperStarLowerStarAdjunction_counit_app_hom_hom_f (F : WeilSheaf k₀ l X)
 
 /-- For a quasi-compact open immersion `j`, the counit `j^* j_* F ⟶ F` of Weil sheaves is an
 isomorphism, since the counit of `j̄^* ⊣ j̄_*` is. -/
-instance isIso_upperStarLowerStarAdjunction_counit {U : Scheme.{u}}
+instance isIso_upperStarLowerStarAdjunction_counit_app {U : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
-    [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    IsIso (upperStarLowerStarAdjunction (k₀ := k₀) (l := l) j).counit := by
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro F
+    [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l U) :
+    IsIso ((upperStarLowerStarAdjunction (k₀ := k₀) (l := l) j).counit.app F) := by
   have : IsIso ((upperStarLowerStarAdjunction (k₀ := k₀) (l := l) j).counit.app F).hom.hom.f := by
     rw [upperStarLowerStarAdjunction_counit_app_hom_hom_f]
     infer_instance
   exact isIso_of_isIso_hom_hom_f _
 
-/-- For a quasi-compact open immersion `j`, restricting the direct image recovers the sheaf:
-`j^* j_* F ≅ F`, the counit of `j^* ⊣ j_*`. -/
-noncomputable def upperStarDirectImageIso {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U) :
-    (upperStar j).obj ((directImage j).obj F) ≅ F :=
-  asIso ((upperStarLowerStarAdjunction j).counit.app F)
+/-- For a quasi-compact open immersion `j`, the counit `j^* j_* ⟶ 𝟭` of Weil sheaves is an
+isomorphism. -/
+instance isIso_upperStarLowerStarAdjunction_counit {U : Scheme.{u}}
+    [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    IsIso (upperStarLowerStarAdjunction (k₀ := k₀) (l := l) j).counit :=
+  NatIso.isIso_of_isIso_app _
 
 end WeilSheaf
 
