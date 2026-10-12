@@ -110,9 +110,11 @@ lemma comp_lift {Y Y' : Scheme.{u}} {a b : ι} (g : Y' ⟶ Y) (f₁ : Y ⟶ (ρ 
   rw [← cancel_mono (U a ⊓ U b).ι]
   simp
 
-lemma pullHom_congr {X₁ X₂ : Scheme.{u}} {M₁ : modulesPseudofunctor.obj (.mk (op X₁))} {M₂ : modulesPseudofunctor.obj (.mk (op X₂))}
+lemma pullHom_congr {X₁ X₂ : Scheme.{u}} {M₁ : modulesPseudofunctor.obj (.mk (op X₁))}
+    {M₂ : modulesPseudofunctor.obj (.mk (op X₂))}
     {Y : Scheme.{u}} {f₁ : Y ⟶ X₁} {f₂ : Y ⟶ X₂}
-    (φ : (modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj M₁ ⟶ (modulesPseudofunctor.map f₂.op.toLoc).toFunctor.obj M₂)
+    (φ : (modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj M₁ ⟶
+      (modulesPseudofunctor.map f₂.op.toLoc).toFunctor.obj M₂)
     {Y' : Scheme.{u}} {g g' : Y' ⟶ Y} (e : g = g') (gf₁ : Y' ⟶ X₁) (gf₂ : Y' ⟶ X₂)
     (hgf₁ : g ≫ f₁ = gf₁) (hgf₂ : g ≫ f₂ = gf₂) :
     pullHom φ g gf₁ gf₂ hgf₁ hgf₂ = pullHom φ g' gf₁ gf₂ (e ▸ hgf₁) (e ▸ hgf₂) := by
@@ -123,7 +125,8 @@ lemma pullHom_congr {X₁ X₂ : Scheme.{u}} {M₁ : modulesPseudofunctor.obj (.
 noncomputable def pulledHom ⦃Y : Scheme.{u}⦄ (q : Y ⟶ T) ⦃a b : ι⦄
     (f₁ : Y ⟶ (ρ ⁻¹ᵁ U a).toScheme) (f₂ : Y ⟶ (ρ ⁻¹ᵁ U b).toScheme)
     (hf₁ : f₁ ≫ (ρ ⁻¹ᵁ U a).ι = q) (hf₂ : f₂ ≫ (ρ ⁻¹ᵁ U b).ι = q) :
-    (modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj ((modulesPseudofunctor.map (ρ ∣_ U a).op.toLoc).toFunctor.obj (D.obj a)) ⟶
+    (modulesPseudofunctor.map f₁.op.toLoc).toFunctor.obj
+        ((modulesPseudofunctor.map (ρ ∣_ U a).op.toLoc).toFunctor.obj (D.obj a)) ⟶
       (modulesPseudofunctor.map f₂.op.toLoc).toFunctor.obj
         ((modulesPseudofunctor.map (ρ ∣_ U b).op.toLoc).toFunctor.obj (D.obj b)) :=
   (modulesPseudofunctor.mapComp' (ρ ∣_ U a).op.toLoc f₁.op.toLoc (f₁ ≫ ρ ∣_ U a).op.toLoc
@@ -136,6 +139,8 @@ noncomputable def pulledHom ⦃Y : Scheme.{u}⦄ (q : Y ⟶ T) ⦃a b : ι⦄
       (D.obj b)
 
 set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 1000000 in
+-- the kernel check of the final `rw` unfolds the pseudofunctor coherence isomorphisms
 /-- The pulled back gluing morphisms are compatible with further pullbacks. -/
 lemma pullHom_pulledHom ⦃Y' Y : Scheme.{u}⦄ (g : Y' ⟶ Y) (q : Y ⟶ T) (q' : Y' ⟶ T)
     (hq : g ≫ q = q') ⦃a b : ι⦄ (f₁ : Y ⟶ (ρ ⁻¹ᵁ U a).toScheme)
@@ -151,12 +156,12 @@ lemma pullHom_pulledHom ⦃Y' Y : Scheme.{u}⦄ (g : Y' ⟶ Y) (q : Y ⟶ T) (q'
   rw [pullHom_congr (D.hom a b) e.symm _ _ (lift_fst ρ _ _ _) (lift_snd ρ _ _ _),
     ← pullHom_pullHom (D.hom a b) (lift ρ f₁ f₂ (hf₁.trans hf₂.symm)) (f₁ ≫ ρ ∣_ U a)
       (f₂ ≫ ρ ∣_ U b) g ((g ≫ f₁) ≫ ρ ∣_ U a) ((g ≫ f₂) ≫ ρ ∣_ U b) (lift_fst ρ _ _ _)
-      (lift_snd ρ _ _ _) (by simp [lift_fst]) (by simp [lift_snd])]
+      (lift_snd ρ _ _ _) (by simp) (by simp)]
   dsimp [pullHom]
   simp only [Functor.map_comp, Category.assoc]
-  rw [modulesPseudofunctor.mapComp'₀₁₃_inv_comp_mapComp'₀₂₃_hom_app_assoc _ _ _ _ _ _ _ _ (by cat_disch),
+  rw [modulesPseudofunctor.mapComp'₀₁₃_inv_comp_mapComp'₀₂₃_hom_app_assoc _ _ _ _ _ _ _ _
+      (by cat_disch),
     mapComp'₀₂₃_inv_comp_mapComp'₀₁₃_hom_app _ _ _ _ _ _ _ _ _ (by cat_disch)]
-  simp
 
 end PreDescentData
 

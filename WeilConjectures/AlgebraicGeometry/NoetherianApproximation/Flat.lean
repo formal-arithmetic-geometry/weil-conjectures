@@ -87,7 +87,8 @@ theorem Scheme.Modules.exists_finset_forall_flat_baseChange_sections (V : Scheme
         letI := (((ofIsAffine V).D.map g).appLE ⊤ V'.1 le_top).hom.toAlgebra
         letI : Module Γ((ofIsAffine V).D.obj i, ⊤) Γ(𝒢, W.1) :=
           Module.compHom _ (p.appLE ⊤ W.1 le_top).hom
-        Module.Flat Γ((ofIsAffine V).D.obj k, V'.1) (Γ((ofIsAffine V).D.obj k, V'.1) ⊗[Γ((ofIsAffine V).D.obj i, ⊤)] Γ(𝒢, W.1)) := by
+        Module.Flat Γ((ofIsAffine V).D.obj k, V'.1)
+          (Γ((ofIsAffine V).D.obj k, V'.1) ⊗[Γ((ofIsAffine V).D.obj i, ⊤)] Γ(𝒢, W.1)) := by
   have : IsAffine ((ofIsAffine V).D.obj i) := inferInstanceAs (IsAffine (Spec _))
   have : IsNoetherianRing Γ((ofIsAffine V).D.obj i, ⊤) := by
     have : Algebra.FiniteType ℤ i.unop.1 := (Subalgebra.fg_iff_finiteType _).mp i.unop.2
@@ -96,22 +97,26 @@ theorem Scheme.Modules.exists_finset_forall_flat_baseChange_sections (V : Scheme
       (Scheme.ΓSpecIso (CommRingCat.of i.unop.1)).commRingCatIsoToRingEquiv.symm
   let : Algebra Γ((ofIsAffine V).D.obj i, ⊤) Γ(Y, W.1) := (p.appLE ⊤ W.1 le_top).hom.toAlgebra
   let : Module Γ((ofIsAffine V).D.obj i, ⊤) Γ(𝒢, W.1) := Module.compHom _ (p.appLE ⊤ W.1 le_top).hom
-  have : IsScalarTower Γ((ofIsAffine V).D.obj i, ⊤) Γ(Y, W.1) Γ(𝒢, W.1) := ⟨fun a b m ↦ mul_smul _ _ _⟩
+  have : IsScalarTower Γ((ofIsAffine V).D.obj i, ⊤) Γ(Y, W.1) Γ(𝒢, W.1) :=
+    ⟨fun a b m ↦ mul_smul _ _ _⟩
   have : Algebra.FiniteType Γ((ofIsAffine V).D.obj i, ⊤) Γ(Y, W.1) :=
     HasRingHomProperty.appLE @LocallyOfFiniteType p ‹_› ⟨⊤, isAffineOpen_top _⟩ W le_top
   have := finitePresentation_sections_of_isFinitePresentation 𝒢 W.2
-  let : Algebra Γ((ofIsAffine V).D.obj i, ⊤) Γ(V, ⊤) := (((ofIsAffine V).π.app i).appLE ⊤ ⊤ le_top).hom.toAlgebra
+  let : Algebra Γ((ofIsAffine V).D.obj i, ⊤) Γ(V, ⊤) :=
+    (((ofIsAffine V).π.app i).appLE ⊤ ⊤ le_top).hom.toAlgebra
   have hA := (Module.flat_baseChange_tensorProduct_iff (S₀ := Γ(Y, W.1))).mpr
     (flat_baseChange_of_flat_sections_pullback_fst (Z := V) p ((ofIsAffine V).π.app i) 𝒢 W.2
       (isAffineOpen_top V)
-      (h𝒢 ⟨⊤, isAffineOpen_top V⟩ ⟨_, isAffineOpen_preimage_inf_preimage_pullback p ((ofIsAffine V).π.app i)
-        W.2 (isAffineOpen_top V)⟩ inf_le_right))
+      (h𝒢 ⟨⊤, isAffineOpen_top V⟩ ⟨_, isAffineOpen_preimage_inf_preimage_pullback p
+        ((ofIsAffine V).π.app i) W.2 (isAffineOpen_top V)⟩ inf_le_right))
   obtain ⟨R₁, ⟨t, rfl⟩, hR₁⟩ := Module.exists_fg_forall_flat_baseChange (M₀ := Γ(𝒢, W.1)) hA
   refine ⟨t, fun k g ht V' ↦ ?_⟩
-  let : Algebra Γ((ofIsAffine V).D.obj i, ⊤) Γ((ofIsAffine V).D.obj k, ⊤) := (((ofIsAffine V).D.map g).appLE ⊤ ⊤ le_top).hom.toAlgebra
+  let : Algebra Γ((ofIsAffine V).D.obj i, ⊤) Γ((ofIsAffine V).D.obj k, ⊤) :=
+    (((ofIsAffine V).D.map g).appLE ⊤ ⊤ le_top).hom.toAlgebra
   let : Algebra Γ((ofIsAffine V).D.obj i, ⊤) Γ((ofIsAffine V).D.obj k, V'.1) :=
     (((ofIsAffine V).D.map g).appLE ⊤ V'.1 le_top).hom.toAlgebra
-  have hw : (ofIsAffine V).π.app k ≫ (ofIsAffine V).D.map g = (ofIsAffine V).π.app i := by simpa using ((ofIsAffine V).π.naturality g).symm
+  have hw : (ofIsAffine V).π.app k ≫ (ofIsAffine V).D.map g = (ofIsAffine V).π.app i := by
+    simpa using ((ofIsAffine V).π.naturality g).symm
   -- the inclusion `Aₖ ⟶ Γ(V, ⊤)` as an algebra map over `R₀ = Γ(Spec Aᵢ, ⊤)`
   let ρ : Γ((ofIsAffine V).D.obj k, ⊤) →ₐ[Γ((ofIsAffine V).D.obj i, ⊤)] Γ(V, ⊤) :=
     { ((ofIsAffine V).π.app k).appTop.hom with
@@ -132,10 +137,12 @@ theorem Scheme.Modules.exists_finset_forall_flat_baseChange_sections (V : Scheme
     rw [AlgHom.toRingHom_eq_coe, RingHom.coe_coe, hρ, ← CommRingCat.comp_apply,
       Iso.inv_hom_id, CommRingCat.id_apply]
   -- the restriction `Γ(Spec Aₖ, ⊤) ⟶ Γ(Spec Aₖ, V')` as an algebra map over `R₀`
-  let res : Γ((ofIsAffine V).D.obj k, ⊤) →ₐ[Γ((ofIsAffine V).D.obj i, ⊤)] Γ((ofIsAffine V).D.obj k, V'.1) :=
+  let res : Γ((ofIsAffine V).D.obj k, ⊤) →ₐ[Γ((ofIsAffine V).D.obj i, ⊤)]
+      Γ((ofIsAffine V).D.obj k, V'.1) :=
     { (((ofIsAffine V).D.obj k).presheaf.map (homOfLE le_top).op).hom with
       commutes' r := by
-        change (((ofIsAffine V).D.obj k).presheaf.map (homOfLE le_top).op) (((ofIsAffine V).D.map g).appLE ⊤ ⊤ le_top r) =
+        change (((ofIsAffine V).D.obj k).presheaf.map (homOfLE le_top).op)
+            (((ofIsAffine V).D.map g).appLE ⊤ ⊤ le_top r) =
           ((ofIsAffine V).D.map g).appLE ⊤ V'.1 le_top r
         rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_map] }
   exact Module.Flat.baseChange_of_algHom
@@ -167,12 +174,12 @@ theorem Scheme.Modules.exists_isFlatOver_pullback_ofIsAffine (V : Scheme.{u}) [I
   have hij : i.unop.1 ≤ Algebra.adjoin ℤ (T : Set Γ(V, ⊤)) := by
     rw [← htᵢ]
     exact Algebra.adjoin_mono (by simp [T])
-  refine ⟨.op ⟨_, Subalgebra.fg_adjoin_finset T⟩, (homOfLE (Subtype.coe_le_coe.mp hij)).op,
-    fun k g ↦ ?_⟩
+  let f : (Opposite.op ⟨_, Subalgebra.fg_adjoin_finset T⟩ : (ofIsAffine V).I) ⟶ i :=
+    (homOfLE (Subtype.coe_le_coe.mp hij : i.unop ≤ ⟨_, Subalgebra.fg_adjoin_finset T⟩)).op
+  refine ⟨_, f, fun k g ↦ ?_⟩
   have hjk : Algebra.adjoin ℤ (T : Set Γ(V, ⊤)) ≤ k.unop.1 := leOfHom g.unop
   refine isFlatOver_of_forall_exists_nhds _ _ fun V' x _ ↦ ?_
-  have hx : pullback.fst p ((ofIsAffine V).D.map (g ≫ (homOfLE (Subtype.coe_le_coe.mp hij)).op))
-      x ∈ ⨆ W ∈ s, (W : Y.Opens) := hY ▸ trivial
+  have hx : pullback.fst p ((ofIsAffine V).D.map (g ≫ f)) x ∈ ⨆ W ∈ s, (W : Y.Opens) := hY ▸ trivial
   simp only [TopologicalSpace.Opens.mem_iSup] at hx
   obtain ⟨W, hW, hxW⟩ := hx
   refine ⟨_, hxW, fun U e hUN ↦ flat_sections_pullback_fst_of_flat_baseChange _ _ 𝒢 W.2 V'.2

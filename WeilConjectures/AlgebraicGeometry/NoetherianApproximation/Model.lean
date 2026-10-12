@@ -102,7 +102,7 @@ theorem exists_isNoetherianRing_model_of_isPullback {X V : Scheme.{u}} [IsAffine
       (isPullback_pullback_map p₂ (N.D.map (IsCofiltered.minToLeft j₃ j₄ ≫ f₃)) (N.D.map f₃)
         (N.D.map (IsCofiltered.minToLeft j₃ j₄)) (N.D.map_comp _ _).symm) hp₃
   have hw : N.π.app k ≫ N.D.map t = N.π.app i := (Cone.mk V N.π).w t
-  refine ⟨N.D.obj k, pullback p₂ (N.D.map t), hA k, isNoetherianRing_ofIsAffine_obj V k,
+  refine ⟨N.D.obj k, Limits.pullback p₂ (N.D.map t), hA k, isNoetherianRing_ofIsAffine_obj V k,
     N.π.app k, pullback.snd _ _, inferInstance, inferInstance,
     (Modules.pullback (pullback.fst p₂ (N.D.map t))).obj 𝒢₂, inferInstance,
     pullback.lift h₂ (f ≫ N.π.app k) (by rw [Category.assoc, hw, H₂.w]), hf₄ _ _, ?_,
@@ -135,7 +135,7 @@ theorem exists_isNoetherianRing_model {X V : Scheme.{u}} [IsAffine V] (f : X ⟶
     isSeparated_of_isSeparated_hom (pullback.snd p₁ (N.D.map j.hom))
   have : CompactSpace Y₁ := QuasiCompact.compactSpace_of_compactSpace p₁
   let e₁ := H₁.isoPullback
-  let ℱ₁ : (pullback p₁ (N.π.app i₁)).Modules := (Modules.pullback e₁.inv).obj ℱ
+  let ℱ₁ : (Limits.pullback p₁ (N.π.app i₁)).Modules := (Modules.pullback e₁.inv).obj ℱ
   obtain ⟨j₂, 𝒢₂, h𝒢₂, ⟨e₂⟩⟩ :=
     exists_isFinitePresentation_pullback_iso_of_isLimit
       (isLimitBaseChangeCone N.D (Cone.mk V N.π) p₁ N.isLimit) ℱ₁
@@ -146,11 +146,11 @@ theorem exists_isNoetherianRing_model {X V : Scheme.{u}} [IsAffine V] (f : X ⟶
     have := (IsPullback.of_horiz_isIso (fst := e₁.hom) (snd := f)
       (f := pullback.snd p₁ (N.π.app i₁)) (g := 𝟙 V) ⟨by simp [e₁]⟩).paste_horiz
       (isPullback_baseChangeCone_π N.D (Cone.mk V N.π) p₁ j₂)
-    simpa using this
+    simpa [c] using this
   exact exists_isNoetherianRing_model_of_isPullback f ℱ hℱ _ _ H₂ 𝒢₂
     ((pullbackCompOfEq e₁.hom (c.π.app j₂) _ rfl 𝒢₂).symm ≪≫
       (Modules.pullback e₁.hom).mapIso e₂ ≪≫
-      pullbackCompOfEq e₁.hom e₁.inv (𝟙 X) e₁.hom_inv_id ℱ ≪≫ pullbackId.app ℱ)
+      pullbackCompOfEq e₁.hom e₁.inv (𝟙 X) e₁.hom_inv_id ℱ ≪≫ (pullbackId X).app ℱ)
 
 end Scheme.Modules
 

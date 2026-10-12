@@ -65,13 +65,29 @@ variable {R : Type u} [CommRing R] (B : Type u) [CommRing B] [Algebra R B] {N : 
 
 lemma one_tmul_smul_eq_algebraMap_smul (r : R) (y : N) :
     (1 : B) ⊗ₜ[R] (r • y) = algebraMap R B r • ((1 : B) ⊗ₜ[R] y) := by
-  rw [← TensorProduct.smul_tmul, TensorProduct.smul_tmul']
-  simp only [smul_eq_mul, Algebra.smul_def, mul_one]
+  rw [← TensorProduct.smul_tmul, TensorProduct.smul_tmul',
+    _root_.Algebra.smul_def r, smul_eq_mul]
 
 lemma tmul_smul_eq_mul_algebraMap_smul (c : B) (r : R) (y : N) :
     c ⊗ₜ[R] (r • y) = (c * algebraMap R B r) • ((1 : B) ⊗ₜ[R] y) := by
   rw [← TensorProduct.smul_tmul, TensorProduct.smul_tmul', smul_eq_mul, mul_one,
-    Algebra.smul_def, mul_comm]
+    _root_.Algebra.smul_def r c, mul_comm]
+
+/-- Base change in two steps commutes with `AlgebraTensorModule.cancelBaseChange`. -/
+lemma cancelBaseChange_baseChange_baseChange {A : Type u} [CommRing A] [Algebra A R] [Algebra A B]
+    [IsScalarTower A R B] {M N : Type u} [AddCommGroup M] [Module A M] [AddCommGroup N]
+    [Module A N] (φ : M →ₗ[A] N) (x : B ⊗[R] (R ⊗[A] M)) :
+    AlgebraTensorModule.cancelBaseChange A R B B N ((φ.baseChange R).baseChange B x) =
+      φ.baseChange B (AlgebraTensorModule.cancelBaseChange A R B B M x) := by
+  induction x using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | add x y hx hy => simp only [map_add, hx, hy]
+  | tmul c y =>
+    induction y using TensorProduct.induction_on with
+    | zero => simp only [TensorProduct.tmul_zero, map_zero]
+    | add y y' hy hy' => simp only [TensorProduct.tmul_add, map_add, hy, hy']
+    | tmul r m =>
+      simp only [LinearMap.baseChange_tmul, AlgebraTensorModule.cancelBaseChange_tmul]
 
 end TensorProduct
 
@@ -95,6 +111,18 @@ lemma isAffineHom_ι_comp_of_isPullback [IsAffine S] {V : X.Opens} (hV : IsAffin
   have : IsAffine V := hV
   exact MorphismProperty.of_isPullback (P := @IsAffineHom)
     ((isPullback_morphismRestrict g' V).paste_vert H) inferInstance
+
+/-- The inverse of `sectionsCechResolutionIso` commutes with the differentials. -/
+lemma sectionsCechResolutionIso_inv_f_d {Z : Scheme.{u}} {ι' : Type u} (V : ι' → Z.Opens)
+    (M : Z.Modules) (W : Z.Opens) (k : ℕ) (c) :
+    (sectionsCechResolutionIso V M W).inv.f (k + 1)
+        (((TopCat.Presheaf.cechComplex V).obj
+          (cechPresheaf M ⋙ sectionsModuleFunctor W ⋙ forget₂ _ AddCommGrpCat.{u})).d k (k + 1)
+            c) =
+      Hom.app ((cechResolution V M).d k (k + 1)) W ((sectionsCechResolutionIso V M W).inv.f k c) := by
+  apply (bijective_sectionsCechResolutionIso_hom_f V M W (k + 1)).injective
+  rw [sectionsCechResolutionIso_hom_inv_f_apply, sectionsCechResolutionIso_d,
+    sectionsCechResolutionIso_hom_inv_f_apply]
 
 section Sections
 
@@ -124,7 +152,8 @@ lemma bijective_mumfordSectionsMap [IsAffine S]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] [Finite ι] (hW : IsAffineOpen W)
     (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l))) (k : ℕ) :
     Function.Bijective (mumfordSectionsMap (R := R) H ℱ U W hg k) :=
-  ((ConcreteCategory.bijective_of_isIso _).comp
+  ((ConcreteCategory.bijective_of_isIso ((sectionsCechResolutionIso (fun i ↦ g' ⁻¹ᵁ U i)
+      ((pullback g').obj ℱ) (f' ⁻¹ᵁ W)).inv.f k)).comp
     (bijective_cechSectionsBaseChangeX H ℱ U W hg hW hU k)).comp
       (AlgebraTensorModule.cancelBaseChange Γ(S, ⊤) R Γ(T, W) Γ(T, W) _).bijective
 
@@ -164,20 +193,24 @@ lemma mumfordSectionsMap_d (k : ℕ)
         (mumfordSectionsMap H ℱ U W hg k x) =
       mumfordSectionsMap H ℱ U W hg (k + 1)
         (((((ModuleCat.baseChange Γ(S, ⊤) R).mapHomologicalComplex _).obj
-          (cechModuleComplexNat f ℱ U)).d k (k + 1)).hom.baseChange Γ(T, W) x) :=
-  ConcreteCategory.congr_hom ((mumfordSectionsHom (R := R) H ℱ U W hg).comm k (k + 1)) x
+          (cechModuleComplexNat f ℱ U)).d k (k + 1)).hom.baseChange Γ(T, W) x) := by
+  have h : ((((ModuleCat.baseChange Γ(S, ⊤) R).mapHomologicalComplex _).obj
+      (cechModuleComplexNat f ℱ U)).d k (k + 1)).hom = (cechModuleD f ℱ U k).baseChange R := by
+    rw [Functor.mapHomologicalComplex_obj_d, cechModuleComplexNat_d]
+    rfl
+  rw [h, mumfordSectionsMap_apply, mumfordSectionsMap_apply]
+  erw [TensorProduct.cancelBaseChange_baseChange_baseChange]
+  rw [cechSectionsBaseChangeX_d, sectionsCechResolutionIso_inv_f_d]
+  rfl
 
 /-- `mumfordSectionsHom` is an isomorphism over an affine open. -/
 lemma isIso_mumfordSectionsHom [IsAffine S]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] [Finite ι] (hW : IsAffineOpen W)
     (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l))) :
     IsIso (mumfordSectionsHom (R := R) H ℱ U W hg) := by
-  have : IsIso (cechSectionsBaseChange H ℱ U W hg) := by
-    refine HomologicalComplex.Hom.isIso_of_components _ fun k ↦ ?_
-    exact (ConcreteCategory.isIso_iff_bijective _).2
-      (bijective_cechSectionsBaseChangeX H ℱ U W hg hW hU k)
-  dsimp only [mumfordSectionsHom]
-  infer_instance
+  have (k : ℕ) : IsIso ((mumfordSectionsHom (R := R) H ℱ U W hg).f k) :=
+    (ConcreteCategory.isIso_iff_bijective _).2 (bijective_mumfordSectionsMap H ℱ U W hg hW hU k)
+  exact HomologicalComplex.Hom.isIso_of_components _
 
 /-- `mumfordSectionsMap` is semilinear. -/
 lemma mumfordSectionsMap_smul (k : ℕ) (c : Γ(T, W))
@@ -198,8 +231,8 @@ lemma presheaf_map_mumfordSectionsMap_one_tmul {W' : T.Opens} (hW : W ≤ W')
         (mumfordSectionsMap H ℱ U W' hg' k (1 ⊗ₜ z)) =
       mumfordSectionsMap H ℱ U W hg k (1 ⊗ₜ z) := by
   induction z using TensorProduct.induction_on with
-  | zero => rw [TensorProduct.tmul_zero, map_zero, map_zero, map_zero]
-  | add x y hx hy => rw [TensorProduct.tmul_add, map_add, map_add, map_add, hx, hy]
+  | zero => simp only [TensorProduct.tmul_zero, map_zero]
+  | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
   | tmul r m =>
     have h₁ (B : Type u) [CommRing B] [Algebra R B] :
         (1 : B) ⊗ₜ[R] (r ⊗ₜ[Γ(S, ⊤)] m) =
@@ -230,7 +263,7 @@ noncomputable abbrev freeComplexOfBasis (τ : R →+* Γ(Z, ⊤)) : CochainCompl
 
 /-- The sections over `W` of the free module `𝒪_Z^{(κ n)}` are `Γ(Z, W) ⊗[R] P^n`. -/
 noncomputable def freeSectionsTensorEquiv (W : Z.Opens) [Algebra R Γ(Z, W)] (n : ℤ) :
-    Γ(Z, W) ⊗[R] P.X n ≃ₗ[Γ(Z, W)] Γ(free (R := Z.ringCatSheaf) (κ n), W) :=
+    Γ(Z, W) ⊗[R] P.X n ≃ₗ[Γ(Z, W)] Γ(SheafOfModules.free (R := Z.ringCatSheaf) (κ n), W) :=
   (Algebra.TensorProduct.basis Γ(Z, W) (b n)).equivFun.trans
     (freeSectionsEquivOpens W (κ n)).symm
 
@@ -239,6 +272,25 @@ lemma freeSectionsEquivOpens_freeSectionsTensorEquiv (W : Z.Opens) [Algebra R Γ
     freeSectionsEquivOpens W (κ n) (freeSectionsTensorEquiv P b W n x) =
       (Algebra.TensorProduct.basis Γ(Z, W) (b n)).repr x := by
   simp [freeSectionsTensorEquiv]
+
+/-- The identifications `freeSectionsTensorEquiv` commute with the differentials. -/
+lemma freeSectionsTensorEquiv_d (τ : R →+* Γ(Z, ⊤)) (W : Z.Opens) [Algebra R Γ(Z, W)]
+    (hτ : algebraMap R Γ(Z, W) = (Z.presheaf.map (homOfLE le_top).op).hom.comp τ) {i j : ℤ}
+    (hij : i + 1 = j) (x : Γ(Z, W) ⊗[R] P.X i) :
+    freeSectionsTensorEquiv P b W j ((P.d i j).hom.baseChange Γ(Z, W) x) =
+      Hom.app ((freeComplexOfBasis P b τ).d i j) W (freeSectionsTensorEquiv P b W i x) := by
+  obtain rfl := hij
+  apply (freeSectionsEquivOpens W (κ (i + 1))).injective
+  rw [freeComplex_d]
+  erw [freeSectionsEquivOpens_app]
+  rw [freeMatrix_freeHomOfMatrix,
+    freeSectionsEquivOpens_freeSectionsTensorEquiv,
+    freeSectionsEquivOpens_freeSectionsTensorEquiv,
+    ← LinearMap.toMatrix_mulVec_repr (Algebra.TensorProduct.basis Γ(Z, W) (b i))
+      (Algebra.TensorProduct.basis Γ(Z, W) (b (i + 1))),
+    LinearMap.toMatrix_baseChange Γ(Z, W) (P.d i (i + 1)).hom (b i) (b (i + 1)), Matrix.map_map,
+    hτ]
+  rfl
 
 /-- The identification of the sections over `W` of `freeComplexOfBasis P b τ` (in degrees `≥ 0`)
 with `Γ(Z, W) ⊗[R] P`, as a morphism of complexes of abelian groups. -/
@@ -253,18 +305,8 @@ noncomputable def freeSectionsTensorHom (τ : R →+* Γ(Z, ⊤)) (W : Z.Opens) 
   comm' := by
     rintro k _ rfl
     ext x
-    have h₁ := freeComplex_d_natCast (fun n ↦ (P.dMatrix b n).map τ) (fun n ↦ by
-      rw [← Matrix.map_mul, P.dMatrix_mul, Matrix.map_zero _ (map_zero τ)]) k
-    change freeSectionsTensorEquiv P b W ((k + 1 : ℕ) : ℤ)
-        ((P.d k (k + 1 : ℕ)).hom.baseChange Γ(Z, W) x) =
-      Hom.app ((freeComplexOfBasis P b τ).d k (k + 1 : ℕ)) W (freeSectionsTensorEquiv P b W k x)
-    rw [h₁]
-    apply (freeSectionsEquivOpens W _).injective
-    rw [freeSectionsEquivOpens_app, freeMatrix_freeHomOfMatrix,
-      freeSectionsEquivOpens_freeSectionsTensorEquiv,
-      freeSectionsEquivOpens_freeSectionsTensorEquiv, ← LinearMap.toMatrix_mulVec_repr,
-      LinearMap.toMatrix_baseChange, Matrix.map_map, hτ]
-    rfl
+    exact (freeSectionsTensorEquiv_d P b τ W hτ (i := k) (j := ((k + 1 : ℕ) : ℤ))
+      (by push_cast; rfl) x).symm
 
 lemma freeSectionsTensorHom_f_apply (τ : R →+* Γ(Z, ⊤)) (W : Z.Opens) [Algebra R Γ(Z, W)]
     (hτ : algebraMap R Γ(Z, W) = (Z.presheaf.map (homOfLE le_top).op).hom.comp τ) (k : ℕ) (x) :
@@ -274,8 +316,9 @@ lemma freeSectionsTensorHom_f_apply (τ : R →+* Γ(Z, ⊤)) (W : Z.Opens) [Alg
 instance (τ : R →+* Γ(Z, ⊤)) (W : Z.Opens) [Algebra R Γ(Z, W)]
     (hτ : algebraMap R Γ(Z, W) = (Z.presheaf.map (homOfLE le_top).op).hom.comp τ) :
     IsIso (freeSectionsTensorHom P b τ W hτ) := by
-  refine HomologicalComplex.Hom.isIso_of_components _ fun k ↦ ?_
-  exact (ConcreteCategory.isIso_iff_bijective _).2 (freeSectionsTensorEquiv P b W k).bijective
+  have (k : ℕ) : IsIso ((freeSectionsTensorHom P b τ W hτ).f k) :=
+    (ConcreteCategory.isIso_iff_bijective _).2 (freeSectionsTensorEquiv P b W k).bijective
+  exact HomologicalComplex.Hom.isIso_of_components _
 
 end Free
 
@@ -365,12 +408,12 @@ theorem quasiIso_mumfordFreeHom [IsAffine S]
   obtain ⟨W, hW, hxW, hWV⟩ :=
     (TopologicalSpace.Opens.isBasis_iff_nbhd.1 T.isBasis_affineOpens) hx
   refine ⟨W, hxW, hWV, ?_⟩
-  letI : Algebra R Γ(T, W) :=
+  let : Algebra R Γ(T, W) :=
     ((T.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op).hom.comp (algebraMap R Γ(T, ⊤))).toAlgebra
-  letI : Algebra Γ(S, ⊤) Γ(T, W) :=
+  let : Algebra Γ(S, ⊤) Γ(T, W) :=
     ((T.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op).hom.comp
       (algebraMap Γ(S, ⊤) Γ(T, ⊤))).toAlgebra
-  haveI : IsScalarTower Γ(S, ⊤) R Γ(T, W) := IsScalarTower.of_algebraMap_eq fun a ↦ by
+  have : IsScalarTower Γ(S, ⊤) R Γ(T, W) := IsScalarTower.of_algebraMap_eq fun a ↦ by
     change (T.presheaf.map _).hom _ = (T.presheaf.map _).hom _
     rw [← IsScalarTower.algebraMap_apply]
   have hgW : algebraMap Γ(S, ⊤) Γ(T, W) =
@@ -382,6 +425,7 @@ theorem quasiIso_mumfordFreeHom [IsAffine S]
   rw [← quasiIso_iff_comp_left (freeSectionsTensorHom P b (algebraMap R Γ(T, ⊤)) W rfl), hsq]
   infer_instance
 
+include H hg in
 /-- **The free complex computes the higher direct images.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.quasiIso_mumfordFreeHom`, with `f` separated and `U` a finite
 cover of `X` whose finite intersections are affine, the cohomology of the complex of free

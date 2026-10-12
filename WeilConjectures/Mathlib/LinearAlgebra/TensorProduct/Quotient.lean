@@ -35,7 +35,10 @@ theorem map_mem_span_range {R S : Type*} [CommRing R] [CommRing S] (f : R →+* 
   | mem x hx =>
     obtain ⟨l, rfl⟩ := hx
     exact Submodule.subset_span ⟨l, rfl⟩
-  | zero => simpa using L.zero_mem
+  | zero =>
+    convert L.zero_mem using 1
+    ext
+    simp
   | add x y _ _ hx hy => simpa [Pi.add_def] using L.add_mem hx hy
   | smul r x _ hx =>
     convert L.smul_mem (f r) hx using 1
@@ -59,11 +62,12 @@ theorem exists_tensorQuotientSpanEquiv {R S : Type*} [CommRing R] [CommRing S] [
   have := Fintype.ofFinite ι
   let K := Submodule.span R (Set.range a)
   let L := Submodule.span S (Set.range fun l i ↦ algebraMap R S (a l i))
-  let e₁ := AlgebraTensorModule.tensorQuotientEquiv S R S K
+  let e₁ := AlgebraTensorModule.tensorQuotientEquiv (R := R) S R S K
   let e₂ := TensorProduct.piScalarRight R S S ι
   have he₂ (s : S) (v : ι → R) : e₂ (s ⊗ₜ v) = s • fun i ↦ algebraMap R S (v i) := by
     ext i
-    simp [e₂, Algebra.smul_def, mul_comm]
+    simp only [e₂, piScalarRight_apply, piScalarRightHom_tmul, Pi.smul_apply, smul_eq_mul]
+    rw [_root_.Algebra.smul_def, mul_comm]
   have hK (v : ι → R) (hv : v ∈ K) : (fun i ↦ algebraMap R S (v i)) ∈ L :=
     Submodule.map_mem_span_range (algebraMap R S) a hv
   have h : (LinearMap.range (AlgebraTensorModule.lTensor S S
@@ -79,10 +83,11 @@ theorem exists_tensorQuotientSpanEquiv {R S : Type*} [CommRing R] [CommRing S] [
       | add x y hx hy => simpa using L.add_mem hx hy
     · rw [Submodule.span_le]
       rintro _ ⟨l, rfl⟩
-      refine ⟨(1 : S) ⊗ₜ ⟨a l, Submodule.subset_span ⟨l, rfl⟩⟩, ⟨_, rfl⟩, ?_⟩
+      refine ⟨_, ⟨(1 : S) ⊗ₜ[R] (⟨a l, Submodule.subset_span ⟨l, rfl⟩⟩ : K), rfl⟩, ?_⟩
       simp [he₂]
   refine ⟨e₁.trans (Submodule.Quotient.equiv _ _ e₂ h), fun v ↦ ?_⟩
-  simp [e₁, he₂]
+  rw [LinearEquiv.trans_apply, AlgebraTensorModule.tensorQuotientEquiv_apply_tmul,
+    Submodule.Quotient.equiv_apply, Submodule.mapQ_apply, LinearEquiv.coe_coe, he₂, one_smul]
 
 end TensorProduct
 
@@ -107,3 +112,43 @@ instance quotient_span {R : Type*} [CommRing R] {ι κ : Type*} [Finite ι] [Fin
     (by rw [Submodule.ker_mkQ]; exact Submodule.fg_span (Set.finite_range a))
 
 end Module.FinitePresentation
+
+namespace TensorProduct
+
+/-- If the structure map `B → R` is bijective, then `x ↦ 1 ⊗ x` is a bijection
+`P → R ⊗[B] P`. -/
+theorem bijective_one_tmul_of_bijective_algebraMap {B R P : Type*} [CommRing B] [CommRing R]
+    [Algebra B R] [AddCommGroup P] [Module B P] (h : Function.Bijective (algebraMap B R)) :
+    Function.Bijective fun x : P ↦ (1 : R) ⊗ₜ[B] x := by
+  let e : R ≃ₐ[B] B := (AlgEquiv.ofBijective (Algebra.ofId B R) h).symm
+  let g : R ⊗[B] P →ₗ[B] P := TensorProduct.lift ((LinearMap.lsmul B P).comp e.toLinearMap)
+  have hg (x : P) : g ((1 : R) ⊗ₜ x) = x := by simp [g]
+  refine ⟨fun x y hxy ↦ by simpa [hg] using congrArg g hxy, fun z ↦ ?_⟩
+  induction z using TensorProduct.induction_on with
+  | zero => exact ⟨0, by simp⟩
+  | tmul r p =>
+    obtain ⟨b, rfl⟩ := h.2 r
+    refine ⟨b • p, ?_⟩
+    beta_reduce
+    rw [← TensorProduct.smul_tmul, _root_.Algebra.smul_def, mul_one]
+  | add x y hx hy =>
+    obtain ⟨a, rfl⟩ := hx
+    obtain ⟨b, rfl⟩ := hy
+    exact ⟨a + b, by simp [tmul_add]⟩
+
+end TensorProduct
+
+namespace Submodule.Quotient
+
+/-- A linear map out of a quotient of `Fin n → R` is determined by the images of the classes of
+the standard basis vectors. -/
+theorem linearMap_mk_eq_sum {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M] {n : ℕ}
+    {K : Submodule R (Fin n → R)} (f : ((Fin n → R) ⧸ K) →ₗ[R] M) (w : Fin n → R) :
+    f (Submodule.Quotient.mk w) = ∑ i, w i • f (Submodule.Quotient.mk (Pi.single i 1)) := by
+  have hw : w = ∑ i, w i • Pi.single i 1 := by
+    ext j
+    simp [Finset.sum_apply, Pi.single_apply]
+  conv_lhs => rw [hw, ← Submodule.mkQ_apply, map_sum]
+  simp
+
+end Submodule.Quotient
