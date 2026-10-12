@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-open-restriction-total-tensor",
+ "kind": "statement",
+ "title": "Canonical open restriction commutes with total tensor complexes",
+ "statement": "Let X be a scheme [def-pc-scheme], U an arbitrary open, and P,N any unbounded complexes of O_X-modules [def-weil-sheaf-of-modules-category]. Let R be over-site restriction followed by the canonical over equivalence to O_U-modules [lem-weil-pbc-module-restriction-open-immersion-colimits]. For the sheaf tensor [def-pur-sheaf-tensor-product] and signed direct-sum total tensor [def-pc-tensor-complex-sheaves], R(Tot(P tensor N)) is isomorphic as a complex to Tot(R(P) tensor R(N)). No K-flatness, quasi-coherence or boundedness is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Lemma 36.3.9, proof of (1), locality calculation; Tag 01CD for functorial tensor comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The pure-tensor restriction formula gives a tensor comparison in each bidegree. Naturality follows by testing both module-map composites on pure tensors before sheafification; both send s tensor t to the tensor of the images. Transport this comparison from Scheme.Modules.restrict U.ι to the overFunctor/overEquiv composite using the canonical restriction identification.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction preserves arbitrary coproducts. Apply its coproduct comparison to the sum over all p+q=n and the bidegree tensor comparisons to obtain inverse maps in each degree n. This uses the direct-sum total tensor, including its infinite sums for unbounded inputs.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality intertwines the first and second differentials. Additivity intertwines multiplication by the integer sign (-1)^p on the second differential. The degreewise maps and inverses therefore commute with the total differential and yield the required complex isomorphism. For empty U or a zero input all terms are zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Lemma 36.3.9, proof of (1), locality calculation; Tag 01CD for functorial tensor comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact restriction functor preserves the total tensor complex of two unbounded complexes",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict obtained.",
+   "date": "2026-10-12",
+   "status": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open restriction of sheaves commutes with the signed direct sum total tensor complex",
+   "results": "Only section restriction identities and tilde section restriction; no total complex comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|mapBifunctor.*[Ii]so|[Ii]so.*mapBifunctor in Mathlib/Algebra/Homology and Mathlib/Algebra/Category/ModuleCat/Sheaf; corresponding restriction searches in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib has shift and flip comparisons, no open restriction total comparison or K-flat preservation. Project has KFlatPullback (different explicit inverse-image/change-of-rings complex), KFlatStalkCriterion, and module RestrictionTensorComparison; no theorem for this canonical overFunctor/overEquiv restriction of complexes.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-tensor-qcoh-component",
+   "place": "first step of derived tensor open restriction: Canonical open restriction commutes with total tensor complexes",
+   "via": [
+    "lem-pc-derived-tensor-open-restriction-universes",
+    "lem-pc-derived-tensor-qcoh-component",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictionTotalTensor.lean",
+  "declaration": "AlgebraicGeometry.openRestriction_totalTensor_iso",
+  "statement": "theorem openRestriction_totalTensor_iso (X : Scheme.{u}) (U : X.Opens) (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) : let R := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U) Nonempty ((R.mapHomologicalComplex (.up ℤ)).obj (CochainComplex.mapBifunctor P N (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace)))) ≅ CochainComplex.mapBifunctor ((R.mapHomologicalComplex (.up ℤ)).obj P) ((R.mapHomologicalComplex (.up ℤ)).obj N) (curriedTensor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T160833-L-2613488",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T160833-L-2613488",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

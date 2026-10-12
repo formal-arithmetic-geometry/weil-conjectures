@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
+import Sheaf.AlgebraicGeometry.OpenRestrictionKFlatModel
+import Sheaf.AlgebraicGeometry.OpenRestrictionTotalTensor
 
 /-! # Derived tensor and exact restriction
 
@@ -28,6 +32,22 @@ namespace AlgebraicGeometry
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private noncomputable local instance derivedTensorOpenRestrictionUniversesTensor (X : Scheme.{u}) :
+    MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+  SheafOfModules.monoidalCategory X.sheaf
+
+private theorem tensor_model_iso (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (P N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    Nonempty ((DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≅
+      DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N
+        (curriedTensor (SheafOfModules.{u} (moduleRings X.toRingedSpace))))) := by
+  obtain ⟨e⟩ := kFlat_derivedTensor_comparison_natIso X
+    ((Functor.const (Discrete PUnit.{1})).obj P)
+    ((Functor.const (Discrete PUnit.{1})).obj N) (fun _ ↦ hP)
+  exact ⟨(e.app ⟨PUnit.unit⟩).app ⟨PUnit.unit⟩⟩
 
 /-- Derived tensor commutes with exact open restriction, allowing independent
 localization universes. Source: Stacks Project, Tag 08DX, proof of (1).
@@ -57,6 +77,35 @@ theorem derivedTensor_openRestriction_iso_universes (X : Scheme.{u}) (U : X.Open
           (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
           (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
           (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj F) := by
-  sorry
+  let R :=
+    SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U)
+  let QX := DerivedCategory.Q
+    (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let QU := DerivedCategory.Q
+    (C := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+  let RC := R.mapHomologicalComplex (.up ℤ)
+  let RD := R.mapDerivedCategory
+  let M := QX.objPreimage E
+  let N := QX.objPreimage F
+  obtain ⟨P, s, hP, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution
+    (R := X.sheaf) M
+  have : QuasiIso s := hs
+  let eP : QX.obj P ≅ E := asIso (QX.map s) ≪≫ QX.objObjPreimageIso E
+  let eN : QX.obj N ≅ F := QX.objObjPreimageIso F
+  obtain ⟨a⟩ := tensor_model_iso X P N hP
+  obtain ⟨b⟩ := openRestriction_totalTensor_iso X U P N
+  obtain ⟨c⟩ := tensor_model_iso U.toScheme (RC.obj P) (RC.obj N)
+    (openRestriction_isKFlat X U P hP)
+  let dP : RD.obj (QX.obj P) ≅ QU.obj (RC.obj P) :=
+    R.mapDerivedCategoryFactors.app P
+  let dN : RD.obj (QX.obj N) ≅ QU.obj (RC.obj N) :=
+    R.mapDerivedCategoryFactors.app N
+  exact ⟨RD.mapIso (tensorIso eP eN).symm ≪≫ RD.mapIso a ≪≫
+    R.mapDerivedCategoryFactors.app _ ≪≫ QU.mapIso b ≪≫ c.symm ≪≫
+    (tensorIso dP dN).symm ≪≫ tensorIso (RD.mapIso eP) (RD.mapIso eN)⟩
 
 end AlgebraicGeometry
