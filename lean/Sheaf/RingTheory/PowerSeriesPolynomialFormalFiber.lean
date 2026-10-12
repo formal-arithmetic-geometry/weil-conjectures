@@ -8,21 +8,11 @@ module
 public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 public import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
 public import Sheaf.RingTheory.GRing
-import Sheaf.FieldTheory.PurelyInseparableDegreePIntermediate
+import Mathlib.RingTheory.MvPowerSeries.Equiv
+import Mathlib.RingTheory.Polynomial.Basic
 import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.CompletionFiniteQuotient
-import Sheaf.RingTheory.CompletionRegularLocal
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
-import Sheaf.RingTheory.Derivation.DetectNonPthPower
-import Sheaf.RingTheory.FiniteSubalgebraFractionField
-import Sheaf.RingTheory.HypersurfaceDerivationRegular
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.PurelyInseparableIntegralPrimeUnique
-import Sheaf.RingTheory.RadicialPrimeUniqueDegreeP
-import Sheaf.RingTheory.RegularLocalLocalization
-import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.RingTheory.RegularRingSmoothAscent
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiberGeometricComponent
 
 /-!
 # Generic formal fibres of polynomial rings over power series fields
@@ -86,6 +76,14 @@ theorem formalFiber_polynomial_isGeometricallyRegular
       (Localization.AtPrime q)
     IsNoetherianRing ((⊥ : Ideal A).Fiber C) ∧
       Algebra.IsGeometricallyRegular (⊥ : Ideal A).ResidueField ((⊥ : Ideal A).Fiber C) := by
-  sorry
+  dsimp
+  let R := Localization.AtPrime q
+  let I := IsLocalRing.maximalIdeal R
+  let C := AdicCompletion I R
+  let : IsNoetherianRing R := inferInstance
+  let : IsNoetherianRing C := AdicCompletion.isNoetherianRing I
+  have hnoeth := Ideal.isNoetherianRing_fiber (B := C)
+    (⊥ : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)))
+  exact ⟨hnoeth, hnoeth, formalFiber_polynomial_geometricComponent k p n m q⟩
 
 end MvPowerSeries
