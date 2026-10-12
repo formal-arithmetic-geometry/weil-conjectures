@@ -87,27 +87,24 @@
    }
   },
   {
-   "text": "Part (3), exactness of the limit sequence. Abelian groups are $\\mathbf Z$-modules and homomorphisms are $\\mathbf Z$-linear; with $R=\\mathbf Z$, $(K_n)=(A_i)$, $(B_n)=(B_i)$, $(C_n)=(C_i)$, the first assertion of [lem-weil-pbc-tower-limit-exact-surjective-kernels] (b) (whose limits are the same sets of compatible sequences as here) gives the exactness of $0\\to\\varprojlim_iA_i\\xrightarrow{\\varprojlim u_i}\\varprojlim_iB_i\\xrightarrow{\\varprojlim v_i}\\varprojlim_iC_i$, with no hypothesis on $(A_i)$. Together with Step 5, $0\\to\\varprojlim_iA_i\\to\\varprojlim_iB_i\\to\\varprojlim_iC_i\\to0$ is exact when $(A_i)$ is ML.",
-   "uses": [
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
-   ],
-   "elementary": false,
+   "text": "Part (3), left exactness directly. The first limit map is injective because its composites with every coordinate projection are the injective component maps. For b in the kernel of the second limit map, termwise exactness gives a preimage a_i of each coordinate b_i under u_i. Naturality and injectivity of u_i show that the a_i are compatible, so they define an element of the limit of A mapping to b. Combine this left exactness with the fibre-lifting surjectivity of step 5.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 0598 (lemma-ML-exact-sequence, algebra.tex lines 20770--20815), proof, first sentence ('Taking limits ... is left exact'); Homology, Lemma 02N1 (1) (homology.tex line 7673)"
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma 02N1 (1), direct componentwise proof written out by V3"
    }
   }
  ],
  "proof_deps": [
   "def-weil-inverse-system",
   "def-weil-pbc-mittag-leffler-system",
-  "lem-weil-pbc-ml-sets-tower-limit-nonempty",
-  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+  "lem-weil-pbc-ml-sets-tower-limit-nonempty"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 0598 (lemma-ML-exact-sequence, lines 20770--20815) for (3), with Lemma 0597 (lemma-ML-limit-nonempty, line 20748); part (2) and the left exactness are the exercise of Homology, Lemma 02N1 (homology.tex line 7673), written out by the worker"
+  "place": "Algebra, Lemma 0598, fibre construction and correction argument, with Lemma 0597 for nonempty ML-set limits; Homology, Lemma 02N1 (2) via surjectivity and naturality, and (1) via compatible componentwise preimages. The elementary quotient and left-exactness arguments are written out in Lean by V3."
  },
  "mathlib_searches": [
   {
@@ -207,5 +204,15 @@
   "group": "M1",
   "result": "fix",
   "note": "towers ℕᵒᵖ⥤AddCommGrpCat (n=i-1), termwise SES as ShortComplex+hS evaluation ShortExact (070D form), (2) B ML→C ML via forget IsMittagLeffler, (3) A ML→(S.map lim).ShortExact = injective lim u, exact at lim B, lim v surjective; universe u free; no hollow hyps"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T184354-L-4023772",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
