@@ -15,28 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Take E=Rf_*(F[0]) using the ringed-space derived direct image. Embed an injective resolution of F in nonnegative integer degrees. Bounded-below complexes of injectives are K-injective, so the derived pushforward is computed by applying f_* to it. The degree-q comparison is the right-derived-functor comparison (the existing abstract source-library homologyRightDerivedFunctorObjSingleFunctorIso is a reusable ingredient), and negative cohomology is zero. Transport between the equivalent Scheme.Modules and shared sheaf category constructions.",
+   "text": "Take E=Rf_*(F[0]). Functor.isGE_rightDerivedFunctor_obj_singleFunctor and DerivedCategory.isZero_of_isGE give negative-cohomology vanishing. Functor.homologyRightDerivedFunctorObjSingleFunctorIso computes every natural-degree cohomology as the classical higher direct image. These source-library comparisons apply to the ringed-space module direct image, definitionally the ordinary scheme pushforward.",
    "uses": [
     "def-pc-derived-direct-image"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the derived arbitrary-base-change assertion for relatively flat finitely presented modules. Transport the standard categorical pullback along sq.isoPullback and the ordinary pullback composition comparisons. Taking degree-q cohomology and using the same injective-resolution comparison on X' gives the asserted isomorphism for the chosen square. These are global derived objects and maps, so no gluing of unrelated local trivializations is used.",
+   "text": "For the given cartesian square, construct an additive instance for tensorPullback g′: nonempty_tensorPullbackAdjunction makes it a left adjoint, hence right exact, hence additive by rightExactFunctor_le_additiveFunctor. Properness gives separatedness; finite presentation gives quasi-coherence. Apply exists_isIso_canonicalModuleBaseChange_of_isFlatOver to obtain the invertible composite of schemeDerivedBaseChangeMap with the derived direct image of the canonical module comparison. Convert that composite to an isomorphism with asIso. Uniqueness of left adjoints of pushforward g′ identifies tensorPullback g′ with the ordinary scheme module pullback. Map this identification through the single functor and derived direct image, and compose with the base-change isomorphism. Apply the degree-q homology functor and homologyRightDerivedFunctorObjSingleFunctorIso on X′ to obtain the required classical higher direct image. The canonical dependency already handles arbitrary squares, so no additional transport lemma is used.",
    "uses": [
-    "lem-pc-rf-perfect-base-change"
+    "lem-pc-relatively-flat-canonical-module-base-change",
+    "def-pc-module-pullback",
+    "def-pc-derived-direct-image"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-derived-direct-image",
-  "lem-pc-rf-perfect-base-change"
+  "def-pc-module-pullback",
+  "lem-pc-relatively-flat-canonical-module-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/0B91",
-  "place": "Lemma 36.30.4(2); injective-resolution comparison as in Tag 079V; blueprint lem-pc-flat-rf-open proof, first and final paragraphs"
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Local affine Cech base change and canonical-map identification, via existing lem-pc-relatively-flat-canonical-module-base-change; source-library PlusCompatibility for connectivity and cohomology; adjunction uniqueness and homology composition by P1"
  },
  "mathlib_searches": [
   {
@@ -118,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T040020-L-1617116",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135259-L-1681858",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
