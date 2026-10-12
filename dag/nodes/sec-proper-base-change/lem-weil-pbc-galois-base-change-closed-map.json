@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-galois-base-change-closed-map",
+ "kind": "lemma",
+ "title": "The projection from a Galois field base change is a closed map",
+ "statement": "For fields k and K with an algebra structure and IsGalois k K, and a scheme X over Spec k, the first projection from the pullback of X along Spec K -> Spec k is a closed map.",
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+  "place": "IsIntegralHom.SpecMap_iff and stability of universally closed morphisms under pullback"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The Galois extension is algebraic, hence algebraMap k K is integral. The spectrum map is integral by IsIntegralHom.SpecMap_iff, and integral morphisms are universally closed. Universal closedness is stable under base change, so the pullback projection is a closed map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+  "place": "IsIntegralHom.SpecMap_iff and universally closed pullback stability"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral scheme morphism is closed map pullback projection",
+   "results": "IsIntegralHom.SpecMap_iff; universally closed morphisms",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsClosedMap pullback.fst Spec.map integral algebra",
+   "results": "No direct theorem found; use integral and base-change instances",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegralHom.SpecMap_iff universally closed pullback",
+   "results": "Mathlib AlgebraicGeometry Morphisms Integral and UniversallyClosed APIs",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-galois-invariant-closed-subset-descends",
+   "place": "intermediate theorem split from proof step 1",
+   "via": [
+    "lem-weil-pbc-galois-invariant-closed-subset-descends"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends",
+  "declaration": "AlgebraicGeometry.isClosedMap_pullback_fst_of_isGalois",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisInvariantClosedSubsetDescends.lean",
+  "statement": "theorem isClosedMap_pullback_fst_of_isGalois (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K] (X : Scheme.{u}) [X.Over (Spec (.of k))] : IsClosedMap (pullback.fst (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K))))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

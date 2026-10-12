@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-galois-base-change-fiber-transitivity",
+ "kind": "statement",
+ "title": "Galois transitivity on fibres of any scheme base change",
+ "statement": "Let k and K be fields with a possibly infinite Galois extension K/k. Let X be a scheme [def-pc-scheme] over Spec(k) [def-weil-affine-spectrum], and let p:X_K -> X be the first projection of its base change [def-pc-base-change]. For any points x,y in X_K with p(x)=p(y), there is a k-algebra automorphism sigma of K for which (id_X times Spec(sigma))(x)=y. No closed or invariant subset, finite-type hypothesis or finite-degree assumption is involved.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Affine reduction in Tag 038B and action in equation Tag 038A; cover and equivariance argument written out by A2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Choose the member of the affine cover of X indexed by the common projection. Its open immersion j:U -> X pulls back to m:U_K -> X_K. Scheme.Pullback.range_map identifies its range with the inverse image of range(j), so both points lift through m.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first-projection identity for m and injectivity of j show that the lifted points have equal projections in U. Apply affine Galois-fibre transitivity to U and the composite of j with the structure morphism.",
+   "uses": [
+    "lem-weil-pbc-affine-galois-base-change-fiber-transitivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Galois action commutes with m: apply pullback.hom_ext and simplify its two projection equations. Evaluate this morphism equality at the lifted point, and apply m to the affine equality, obtaining the required equality globally.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-affine-galois-base-change-fiber-transitivity",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Affine reduction in Tag 038B and action in equation Tag 038A; cover and equivariance argument written out by A2; A2 wrote the scheme/tensor transport from the named tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois group acts transitively on points in a fiber of scheme base change along a Galois field extension",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two points in a scheme base change by a Galois field extension with the same projection are related by a Galois automorphism",
+   "results": "Scheme.Pullback.carrierEquiv describes pullback points; Ideal.exists_map_eq_of_isGalois handles finite ring actions. No scheme-level assertion for arbitrary Galois extensions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exists_smul_of_under_eq_of_profinite Mathlib/RingTheory/Invariant; rg Galois and galois in WeilConjectures/AlgebraicGeometry and Sheaf/AlgebraicGeometry; blueprint_refs.py search Galois transitive",
+   "results": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite is the ring tool. No ready-made tensor action or scheme comparison. Blueprint search: zero matches.",
+   "date": "2026-10-12",
+   "verdict": "ring tool found; no exact scheme theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Fibre saturation in Galois-invariant closed-subset descent; affine reduction of Stacks 038B, using profinite prime transitivity in place of the radical-ideal calculation.",
+   "via": [
+    "lem-weil-pbc-galois-invariant-closed-subset-descends",
+    "lem-weil-pbc-geometrically-connected-finite-separable-test",
+    "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisBaseChangeFiberTransitivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisBaseChangeFiberTransitivity.lean",
+  "declaration": "AlgebraicGeometry.exists_galois_map_eq_of_projection_eq",
+  "statement": "theorem exists_galois_map_eq_of_projection_eq (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K] (X : Scheme.{u}) [X.Over (Spec (.of k))] (x y : ↥(pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K))))) (hxy : (pullback.fst (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) x = (pullback.fst (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) y) : ∃ σ : K ≃ₐ[k] K, (baseChangeMap (X ↘ Spec (.of k)) (specAlgEquivOver σ)) x = y",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

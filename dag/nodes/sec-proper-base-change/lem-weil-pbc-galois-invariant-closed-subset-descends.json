@@ -30,146 +30,31 @@
  ],
  "proof": [
   {
-   "text": "The automorphisms $\\sigma_X$. Let $q:X_{\\bar k}\\to\\operatorname{Spec}\\bar k$ be the second projection. For $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$, $\\operatorname{Spec}(\\sigma)$ is a morphism over $\\operatorname{Spec}k$ since $\\sigma$ is a $k$-algebra map, and by functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum] and of base change [def-pc-base-change] (uniqueness in the universal property of the fibre product) $(\\sigma\\circ\\tau)_X=\\tau_X\\circ\\sigma_X$ and $(\\mathrm{id})_X=\\mathrm{id}$; so $\\sigma_X$ is an automorphism with inverse $(\\sigma^{-1})_X$, in particular a bijection of the underlying set. By the definition of $\\sigma_X=\\mathrm{id}_X\\times\\operatorname{Spec}(\\sigma)$ as an induced morphism of fibre products, $p\\circ\\sigma_X=p$ and $q\\circ\\sigma_X=\\operatorname{Spec}(\\sigma)\\circ q$. Since $\\sigma_X$ is bijective and $\\sigma_X(\\bar T)=\\bar T$, also $\\sigma_X^{-1}(\\bar T)=\\bar T$. (This is the action (equation-galois-action-base-change-kbar); the same argument is step 0 of [lem-weil-pbc-galois-base-change-qc-open-descends], written out here.)",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-pc-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Section 'Galois action', lines 844-874 (equation-galois-action-base-change-kbar)"
-   }
-  },
-  {
-   "text": "Affine charts of $X_{\\bar k}$. Let $U\\subseteq X$ be an affine open and $\\iota_U:\\operatorname{Spec}A\\to U$ an isomorphism onto the open subscheme $U$ [def-pc-scheme]; $A$ is a $k$-algebra through the composite $\\operatorname{Spec}A\\to U\\subseteq X\\to\\operatorname{Spec}k$, which is $\\operatorname{Spec}$ of a unique ring map $k\\to A$ [def-weil-affine-spectrum]. Put $\\bar A=A\\otimes_k\\bar k$, $\\iota_A:A\\to\\bar A$, $a\\mapsto a\\otimes1$, and $\\iota_2:\\bar k\\to\\bar A$, $b\\mapsto1\\otimes b$. By [lem-weil-pbc-open-fibre-product] (with $S=\\operatorname{Spec}k$, $V=U$, $W=Y=\\operatorname{Spec}\\bar k$) the canonical morphism $U\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k\\to X_{\\bar k}$ is an open immersion with image $p^{-1}(U)$, compatible with the projections; by functoriality of fibre products [def-pc-fibre-product] $\\iota_U$ induces an isomorphism $\\operatorname{Spec}A\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k\\cong U\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k$, and by [lem-weil-pbc-fibre-product-affine-spectra] $\\operatorname{Spec}A\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k\\cong\\operatorname{Spec}\\bar A$ with projections $\\operatorname{Spec}(\\iota_A)$, $\\operatorname{Spec}(\\iota_2)$. Composing, we get an open immersion $j:\\operatorname{Spec}\\bar A\\to X_{\\bar k}$, a homeomorphism onto the open $p^{-1}(U)$, with $p\\circ j=\\iota_U\\circ\\operatorname{Spec}(\\iota_A)$ and $q\\circ j=\\operatorname{Spec}(\\iota_2)$. For $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$ let $\\varphi_\\sigma=\\mathrm{id}_A\\otimes\\sigma:\\bar A\\to\\bar A$, $a\\otimes b\\mapsto a\\otimes\\sigma(b)$: a ring homomorphism by [lem-weil-pbc-algebra-tensor-map-ring-hom] (applied to $\\sigma$ and $N=A$, through the symmetry $A\\otimes_k\\bar k\\cong\\bar k\\otimes_kA$), with inverse $\\varphi_{\\sigma^{-1}}$, so a ring automorphism; $\\varphi_\\sigma\\circ\\iota_A=\\iota_A$ and $\\varphi_\\sigma\\circ\\iota_2=\\iota_2\\circ\\sigma$. Claim: $\\sigma_X\\circ j=j\\circ\\operatorname{Spec}(\\varphi_\\sigma)$. Both composites with $p$ equal $\\iota_U\\circ\\operatorname{Spec}(\\iota_A)$ (left: $p\\circ\\sigma_X=p$ by step 0; right: $\\operatorname{Spec}(\\iota_A)\\circ\\operatorname{Spec}(\\varphi_\\sigma)=\\operatorname{Spec}(\\varphi_\\sigma\\circ\\iota_A)=\\operatorname{Spec}(\\iota_A)$), and both composites with $q$ equal $\\operatorname{Spec}(\\sigma)\\circ\\operatorname{Spec}(\\iota_2)=\\operatorname{Spec}(\\iota_2\\circ\\sigma)$ (left: $q\\circ\\sigma_X=\\operatorname{Spec}(\\sigma)\\circ q$; right: $\\operatorname{Spec}(\\iota_2)\\circ\\operatorname{Spec}(\\varphi_\\sigma)=\\operatorname{Spec}(\\varphi_\\sigma\\circ\\iota_2)$); by the uniqueness in the universal property of $X_{\\bar k}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k$ [def-pc-fibre-product] they are equal. In this chart $\\sigma_X$ is $\\operatorname{Spec}(\\mathrm{id}_A\\otimes\\sigma)$ and $p$ is $\\operatorname{Spec}(\\iota_A)$, which is the setting of Stacks' affine case $X=\\operatorname{Spec}A$.",
-   "uses": [
-    "def-pc-scheme",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-open-fibre-product",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-algebra-tensor-map-ring-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934 ('This lemma immediately reduces to the case where X = Spec(A) is affine'); the chart is written out by the agent"
-   }
-  },
-  {
-   "text": "The radical ideal $\\bar I$ and its invariance. $\\bar T_U:=j^{-1}(\\bar T)$ is closed in $\\operatorname{Spec}\\bar A$ ($j$ is continuous), so $\\bar T_U=V(J)$ for an ideal $J\\subseteq\\bar A$ by the definition of the Zariski topology [def-weil-affine-spectrum]; $\\bar I:=\\sqrt J$ is a radical ideal with $V(\\bar I)=V(J)=\\bar T_U$, and it is the only radical ideal with this property [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. For a ring homomorphism $\\varphi:R\\to R'$ and an ideal $K\\subseteq R$ one has $\\operatorname{Spec}(\\varphi)^{-1}(V(K))=V(\\varphi(K)R')$, since $\\operatorname{Spec}(\\varphi)(\\mathfrak q)=\\varphi^{-1}(\\mathfrak q)$ and $K\\subseteq\\varphi^{-1}(\\mathfrak q)\\iff\\varphi(K)\\subseteq\\mathfrak q$ $(*)$. For $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$, by step 1 and step 0, $\\operatorname{Spec}(\\varphi_\\sigma)^{-1}(\\bar T_U)=(j\\circ\\operatorname{Spec}(\\varphi_\\sigma))^{-1}(\\bar T)=(\\sigma_X\\circ j)^{-1}(\\bar T)=j^{-1}(\\sigma_X^{-1}(\\bar T))=\\bar T_U$, so by $(*)$ $V(\\varphi_\\sigma(\\bar I))=V(\\bar I)$ ($\\varphi_\\sigma(\\bar I)$ is an ideal as $\\varphi_\\sigma$ is surjective). The image of a radical ideal under a ring automorphism is radical, so $\\varphi_\\sigma(\\bar I)=\\bar I$ by the uniqueness in [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. This is Stacks' 'Assumption (2) implies that $\\sigma(\\bar I)=\\bar I$'.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934, lines 912-914"
-   }
-  },
-  {
-   "text": "A finite Galois subextension. Let $x\\in\\bar I$ and write $x=\\sum_{i=1}^ma_i\\otimes b_i$ with $a_i\\in A$, $b_i\\in\\bar k$. By [lem-weil-pbc-finite-set-in-finite-galois-subextension] applied to $S=\\{b_1,\\dots,b_m\\}$ there is a subfield $k\\subseteq M\\subseteq\\bar k$ containing $S$ with $M/k$ finite Galois. Let $\\psi=\\mathrm{id}_A\\otimes(M\\hookrightarrow\\bar k):A\\otimes_kM\\to\\bar A$, a ring homomorphism [lem-weil-pbc-algebra-tensor-map-ring-hom], with $\\psi(a\\otimes1)=\\iota_A(a)$; then $x=\\psi(x')$ for $x'=\\sum_ia_i\\otimes b_i\\in A\\otimes_kM$. Let $G=\\operatorname{Aut}(M/k)$; by [lem-weil-pbc-finite-galois-fixed-field] $G$ is finite, $d:=|G|=\\dim_kM\\ge1$, and its fixed field is $k$. For $\\tau\\in G$ let $\\varphi'_\\tau=\\mathrm{id}_A\\otimes\\tau$, a ring automorphism of $A\\otimes_kM$ (as in step 1), with $\\varphi'_\\rho\\circ\\varphi'_\\tau=\\varphi'_{\\rho\\circ\\tau}$ (check on $a\\otimes y$).",
-   "uses": [
-    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
-    "lem-weil-pbc-algebra-tensor-map-ring-hom",
-    "lem-weil-pbc-finite-galois-fixed-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934, lines 914-916 ('There exists a finite Galois extension $k'/k$ contained in $\\bar k$ such that $x\\in A\\otimes_kk'$. Set $G=\\mathrm{Gal}(k'/k)$')"
-   }
-  },
-  {
-   "text": "The conjugates of $x$ lie in $\\bar I$. Let $\\tau\\in G$. Since $\\bar k/k$ and $M/k$ are normal, [lem-weil-pbc-normal-subextension-automorphism-extends] gives $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$ with $\\sigma|_M=\\tau$. Then $\\psi\\circ\\varphi'_\\tau=\\varphi_\\sigma\\circ\\psi$ (both send $a\\otimes y$ to $a\\otimes\\tau(y)=a\\otimes\\sigma(y)$, and both are additive), so $\\psi(\\varphi'_\\tau(x'))=\\varphi_\\sigma(x)\\in\\varphi_\\sigma(\\bar I)=\\bar I$ by step 2.",
-   "uses": [
-    "lem-weil-pbc-normal-subextension-automorphism-extends"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934 (implicit in 'Set $P(T)=\\prod_{\\sigma\\in G}(T-\\sigma(x))$': the elements of $\\mathrm{Gal}(k'/k)$ are restrictions of elements of $\\mathrm{Gal}(\\bar k/k)$, Fields 0BME/0BMK)"
-   }
-  },
-  {
-   "text": "The polynomial $P$. Put $P(T)=\\prod_{\\tau\\in G}(T-\\varphi'_\\tau(x'))=T^d+c_1T^{d-1}+\\dots+c_d\\in(A\\otimes_kM)[T]$, monic of degree $d$, with $c_j=(-1)^je_j\\big((\\varphi'_\\tau(x'))_{\\tau\\in G}\\big)$, $e_j$ the $j$-th elementary symmetric polynomial. $P(x')=0$, the factor for $\\tau=\\mathrm{id}$ being $x'-x'$. For $\\rho\\in G$, applying the ring automorphism $\\varphi'_\\rho$ to the coefficients gives $\\prod_\\tau(T-\\varphi'_{\\rho\\circ\\tau}(x'))=P(T)$, since $\\tau\\mapsto\\rho\\circ\\tau$ is a permutation of $G$; so $\\varphi'_\\rho(c_j)=c_j$ for all $\\rho\\in G$ and all $j$. By [lem-weil-pbc-tensor-field-extension-galois-invariants] (for $M/k$, the group $G$ with fixed field $k$, and the $k$-vector space $A$) there are unique $a_j\\in A$ with $c_j=a_j\\otimes1$. So $P\\in A[T]$, Stacks' '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'.",
-   "uses": [
-    "lem-weil-pbc-tensor-field-extension-galois-invariants"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934, lines 916-920"
-   }
-  },
-  {
-   "text": "$\\bar I=\\sqrt{I\\bar A}$. Let $I=\\iota_A^{-1}(\\bar I)$, an ideal of $A$ ('$A\\cap\\bar I$'). $\\psi(c_j)=\\iota_A(a_j)$, and $\\psi(c_j)=(-1)^je_j\\big((\\psi\\varphi'_\\tau(x'))_\\tau\\big)$ is a sum of products of $j\\ge1$ elements of $\\bar I$ (step 4), so lies in $\\bar I$; hence $a_j\\in I$. Applying $\\psi$ to $P(x')=0$ gives $x^d=-\\sum_{j=1}^d\\iota_A(a_j)x^{d-j}\\in I\\bar A$ (the ideal of $\\bar A$ generated by $\\iota_A(I)$), so $x\\in\\sqrt{I\\bar A}$. As $x\\in\\bar I$ was arbitrary, $\\bar I\\subseteq\\sqrt{I\\bar A}$. Conversely $\\iota_A(I)\\subseteq\\bar I$ gives $I\\bar A\\subseteq\\bar I$, and $\\bar I$ is radical, so $\\sqrt{I\\bar A}\\subseteq\\bar I$. Hence $\\bar I=\\sqrt{I\\bar A}$.",
+   "text": "The field extension K/k is integral. IsIntegralHom.SpecMap_iff and algebraMap_isIntegral_iff show that Spec K -> Spec k is integral. Its first pullback projection p:X_K -> X is integral by the base-change instance and hence universally closed. Scheme.Hom.isClosedMap gives that p maps every closed subset to a closed subset.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934, lines 920-929"
-   }
+   "elementary": false
   },
   {
-   "text": "The affine case. By $(*)$ of step 2 for $\\iota_A$, $\\operatorname{Spec}(\\iota_A)^{-1}(V(I))=V(I\\bar A)$, and $V(I\\bar A)=V(\\sqrt{I\\bar A})=V(\\bar I)=\\bar T_U$ by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] and step 6. Let $T_U=\\iota_U(V(I))$, a closed subset of $U$ ($V(I)$ is closed in $\\operatorname{Spec}A$ [def-weil-affine-spectrum] and $\\iota_U$ is a homeomorphism onto $U$). By step 1, $j^{-1}(p^{-1}(T_U))=(p\\circ j)^{-1}(T_U)=\\operatorname{Spec}(\\iota_A)^{-1}(\\iota_U^{-1}(T_U))=\\operatorname{Spec}(\\iota_A)^{-1}(V(I))=\\bar T_U=j^{-1}(\\bar T)$. Since $p^{-1}(T_U)\\subseteq p^{-1}(U)$ and $j$ is a bijection onto $p^{-1}(U)$, $p^{-1}(T_U)=\\bar T\\cap p^{-1}(U)$. (Stacks: 'setting $T=V(I)$ is a solution'.)",
+   "text": "Set T=p(Tbar), which is closed by the closed-map result and hclosed. For y in the inverse image of T, choose x in Tbar with p(x)=p(y). Galois fibre transitivity supplies sigma with sigma_X(x)=y. Image invariance implies y belongs to Tbar.",
    "uses": [
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-    "def-weil-affine-spectrum"
+    "lem-weil-pbc-galois-base-change-fiber-transitivity"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934, lines 929-933"
-   }
+   "elementary": false
   },
   {
-   "text": "$p$ is surjective. $\\operatorname{Spec}\\bar k$ and $\\operatorname{Spec}k$ have one point each [def-weil-affine-spectrum], so $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}k$ is surjective [def-weil-surjective-morphism]. The projection $p:X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\bar k\\to X$ is its base change along $X\\to\\operatorname{Spec}k$, hence surjective by [lem-weil-pbc-surjective-base-change].",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-surjective-morphism",
-    "lem-weil-pbc-surjective-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934 (used in the reduction to the affine case; written out by the agent)"
-   }
-  },
-  {
-   "text": "Reduction to the affine case (gluing). Put $T:=p(\\bar T)\\subseteq X$. For every affine open $U\\subseteq X$, with $T_U$ as in step 7: since $p$ is surjective (step 8), $T_U=p(p^{-1}(T_U))=p(\\bar T\\cap p^{-1}(U))=p(\\bar T)\\cap U=T\\cap U$. The affine opens cover $X$ [def-pc-scheme], and $T\\cap U$ is closed in $U$ for each of them, so $X\\setminus T=\\bigcup_U(U\\setminus(T\\cap U))$ is open and $T$ is closed. Moreover $p^{-1}(T)\\cap p^{-1}(U)=p^{-1}(T\\cap U)=p^{-1}(T_U)=\\bar T\\cap p^{-1}(U)$ for every affine open $U$, and the $p^{-1}(U)$ cover $X_{\\bar k}$, so $p^{-1}(T)=\\bar T$.",
-   "uses": [
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 911-934, line 911 ('This lemma immediately reduces to the case where $X=\\operatorname{Spec}(A)$ is affine'); written out by the agent"
-   }
+   "text": "Every y in Tbar belongs to the inverse image of p(Tbar), using itself as the image witness. Set extensionality combines both inclusions into the required equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-affine-spectrum",
-  "def-pc-base-change",
-  "def-pc-scheme",
-  "lem-weil-pbc-open-fibre-product",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-algebra-tensor-map-ring-hom",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
-  "lem-weil-pbc-finite-galois-fixed-field",
-  "lem-weil-pbc-normal-subextension-automorphism-extends",
-  "lem-weil-pbc-tensor-field-extension-galois-invariants",
-  "def-weil-surjective-morphism",
-  "lem-weil-pbc-surjective-base-change"
+  "lem-weil-pbc-galois-base-change-fiber-transitivity",
+  "lem-weil-pbc-galois-base-change-closed-map"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties, Lemma 038B (lemma-closed-fixed-by-Galois), proof, lines 910-934; the reduction to the affine case (steps 1, 8, 9) and the use of extension of automorphisms (step 4) are written out by the agent"
+  "by": "agent",
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean and Stacks Project, Varieties Tag 038B",
+  "place": "Integral morphisms are closed after base change; fibre transitivity fills the fibre-saturation argument."
  },
  "mathlib_searches": [
   {
@@ -246,5 +131,15 @@
   "group": "H1",
   "result": "pass",
   "note": "k,K Type u fields, Algebra k K, IsGalois k K (no FiniteDimensional: infinite allowed); X.Over Spec k; X_K = pullback (X ↘ Spec k) (Spec.map algebraMap); Tbar closed; image-invariance under baseChangeMap _ (specAlgEquivOver σ) for all σ : K ≃ₐ[k] K (same action spelling as landed F1 7930439e5); ∃ T closed with pullback.fst ⁻¹' T = Tbar"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

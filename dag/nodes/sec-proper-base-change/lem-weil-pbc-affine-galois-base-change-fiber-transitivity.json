@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-affine-galois-base-change-fiber-transitivity",
+ "kind": "statement",
+ "title": "Galois transitivity on fibres of an affine base change",
+ "statement": "Let k and K be fields with a possibly infinite Galois extension K/k. Let X be an affine scheme [def-pc-scheme] with a morphism f:X -> Spec(k) [def-weil-affine-spectrum], and let p:X_K -> X be the first projection of its base change [def-pc-base-change]. For points x,y of X_K with p(x)=p(y), there is a k-algebra automorphism sigma of K for which (id_X times Spec(sigma))(x)=y. This is the action on scheme points, not merely rational points.",
+ "source": {
+  "document": "Mathlib/RingTheory/Invariant/Profinite.lean",
+  "place": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite, transported through tensor invariants and affine spectra; Stacks Tags 0BRI and 038A give the finite prime theorem and scheme action"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Write the affine scheme as `Spec A`, using its canonical `isoSpec`, and give `A` its `k`-algebra structure through the ring map corresponding to `f`. The pullback is `Spec (A ⊗[k] K)`, by `pullbackSpecIso`. The two points correspond to prime ideals with the same contraction to `A`; the action is `Spec (id_A ⊗ σ)`.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-map-ring-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Equip `G = Aut(K/k)` with its Krull topology, which is profinite for any Galois algebraic extension, including an infinite one. Equip `A ⊗[k] K` with the discrete topology and let `G` act on the right tensor factor. Each tensor is a finite sum of pure tensors. The subgroup fixing its finitely many right-hand coefficients is open, so the action is continuous. The action commutes with the `A`-scalars. Exact Mathlib tools: CompactSpace Gal(K/k) in FieldTheory/Galois/Profinite.lean, stabilizer_isOpen_of_isIntegral in KrullTopology.lean, and continuousSMul_iff_stabilizer_isOpen in Topology/Algebra/MulAction.lean. A subgroup containing an open subgroup is open.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-map-ring-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fixed field of `G` is `k`. Apply `TensorProduct.injective_and_range_eq_invariants` with the full automorphism group to the underlying vector space of `A`. Thus the invariant ring of the tensor product is precisely the image of `A`, giving `Algebra.IsInvariant A (A ⊗[k] K) G`. The infinite fixed-field input is InfiniteGalois.mem_range_algebraMap_iff_fixed in FieldTheory/Galois/Infinite.lean, rather than the finite-dimensional theorem of Galois/Basic.lean.",
+   "uses": [
+    "lem-weil-pbc-tensor-field-extension-galois-invariants"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply `Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite` to the two primes. Its ideal action is direct image under the ring automorphism, whereas `Spec` uses inverse image. Replace the supplied automorphism by its inverse. Transport the resulting equality through the affine comparison. This gives exactly the displayed equality of points.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-map-ring-hom",
+  "lem-weil-pbc-tensor-field-extension-galois-invariants"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/RingTheory/Invariant/Profinite.lean",
+  "place": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite, transported through tensor invariants and affine spectra; Stacks Tags 0BRI and 038A give the finite prime theorem and scheme action; A2 wrote the scheme/tensor transport from the named tools."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois group acts transitively on points in a fiber of scheme base change along a Galois field extension",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two points in a scheme base change by a Galois field extension with the same projection are related by a Galois automorphism",
+   "results": "Scheme.Pullback.carrierEquiv describes pullback points; Ideal.exists_map_eq_of_isGalois handles finite ring actions. No scheme-level assertion for arbitrary Galois extensions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exists_smul_of_under_eq_of_profinite Mathlib/RingTheory/Invariant; rg Galois and galois in WeilConjectures/AlgebraicGeometry and Sheaf/AlgebraicGeometry; blueprint_refs.py search Galois transitive",
+   "results": "Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite is the ring tool. No ready-made tensor action or scheme comparison. Blueprint search: zero matches.",
+   "date": "2026-10-12",
+   "verdict": "ring tool found; no exact scheme theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Fibre saturation in Galois-invariant closed-subset descent; affine reduction of Stacks 038B, using profinite prime transitivity in place of the radical-ideal calculation.",
+   "via": [
+    "lem-weil-pbc-galois-invariant-closed-subset-descends",
+    "lem-weil-pbc-geometrically-connected-finite-separable-test",
+    "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineGaloisBaseChangeFiberTransitivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGaloisBaseChangeFiberTransitivity.lean",
+  "declaration": "AlgebraicGeometry.exists_galois_map_eq_of_affine_projection_eq",
+  "statement": "theorem exists_galois_map_eq_of_affine_projection_eq (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K] (X : Scheme.{u}) [IsAffine X] (f : X ⟶ Spec (.of k)) (x y : ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))))) (hxy : (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) x = (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) y) : ∃ σ : K ≃ₐ[k] K, (baseChangeMap f (specAlgEquivOver σ)) x = y",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T154242-L-2434134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

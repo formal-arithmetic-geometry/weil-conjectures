@@ -8,7 +8,8 @@ module
 public import Mathlib.FieldTheory.Galois.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-import Sheaf.FieldTheory.TensorFieldExtensionGaloisInvariants
+import Mathlib.AlgebraicGeometry.Morphisms.Integral
+import Sheaf.AlgebraicGeometry.GaloisBaseChangeFiberTransitivity
 
 /-!
 # Descent of Galois-invariant closed subsets
@@ -29,40 +30,22 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- A closed subset of a Galois base change, invariant under every Galois automorphism,
-is the inverse image of a closed subset of the original scheme. The extension may be infinite.
-Source: Stacks Project, Varieties, Tag 038B
-(blueprint: lem-weil-pbc-galois-invariant-closed-subset-descends).
+/-- The projection of a Galois field base change is a closed map.
+Source: Mathlib, integral morphisms and stability of universal closedness under base change.
+(blueprint: lem-weil-pbc-galois-base-change-closed-map).
+Proof: a Galois extension is algebraic, hence integral; its spectrum map is integral and
+universally closed, and universal closedness is preserved by base change. -/
+theorem isClosedMap_pullback_fst_of_isGalois
+    (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K]
+    (X : Scheme.{u}) [X.Over (Spec (.of k))] :
+    IsClosedMap (pullback.fst (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) := by
+  have : IsIntegralHom (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    IsIntegralHom.SpecMap_iff.mpr
+      (algebraMap_isIntegral_iff.mpr (inferInstance : Algebra.IsIntegral k K))
+  exact (pullback.fst (X ↘ Spec (.of k))
+    (Spec.map (CommRingCat.ofHom (algebraMap k K)))).isClosedMap
 
-Proof:
-1. Functoriality of `Spec` and the fibre product gives automorphisms `σ_X` over `X`,
-   with inverse `(σ⁻¹)_X` and reversed composition (def-weil-affine-spectrum,
-   def-pc-base-change). Image invariance therefore also gives inverse-image invariance.
-2. On an affine open `U = Spec A` of `X`, the base change is `Spec (A ⊗[k] K)`;
-   its action is `Spec (id_A ⊗ σ)` and its projection is induced by `a ↦ a ⊗ 1`
-   (lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra,
-   lem-weil-pbc-algebra-tensor-map-ring-hom, def-pc-fibre-product, def-pc-scheme).
-3. The restricted closed subset has a unique radical ideal `Ibar`. Invariance of its
-   vanishing set implies invariance of `Ibar` under these ring automorphisms
-   (lem-weil-pbc-zero-locus-eq-iff-radical-eq).
-4. Write any `x ∈ Ibar` as a finite sum of pure tensors. Its coefficients lie in a finite
-   Galois subextension `M/k` of `K/k` (lem-weil-pbc-finite-set-in-finite-galois-subextension).
-   Its finite automorphism group `G` has fixed field `k` (lem-weil-pbc-finite-galois-fixed-field).
-5. Every automorphism of `M/k` extends to `K/k`
-   (lem-weil-pbc-normal-subextension-automorphism-extends), so all conjugates of `x` lie in
-   `Ibar` after inclusion into `A ⊗[k] K`.
-6. The monic product `P(T) = ∏ τ ∈ G, (T - τ(x))` vanishes at `x`. Its coefficients are
-   invariant under `G` and hence lie in `A` (lem-weil-pbc-tensor-field-extension-galois-invariants).
-7. All nonleading coefficients of `P` belong to `I = Ibar ∩ A`. The equation `P(x) = 0`
-   shows that a positive power of `x` belongs to the extended ideal `I (A ⊗[k] K)`.
-   Thus `Ibar` is its radical; the reverse inclusion follows from radicality of `Ibar`.
-8. The inverse image of `V(I)` is therefore the given closed subset on this affine chart
-   (lem-weil-pbc-zero-locus-eq-iff-radical-eq, def-weil-affine-spectrum).
-9. The projection is surjective, being the base change of the surjective map of field spectra
-   (def-weil-surjective-morphism, lem-weil-pbc-surjective-base-change).
-10. Set `T = p(Tbar)`. Surjectivity identifies its restriction to every affine open with
-    the closed set constructed in step 8. Affine opens cover `X` (def-pc-scheme), so `T`
-    is closed, and the same local equalities show `p⁻¹(T) = Tbar` globally. -/
 theorem exists_closed_subset_of_galois_invariant
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
@@ -74,6 +57,20 @@ theorem exists_closed_subset_of_galois_invariant
     ∃ T : Set X, IsClosed T ∧
       (pullback.fst (X ↘ Spec (.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⁻¹' T = Tbar := by
-  sorry
+  let p := pullback.fst (X ↘ Spec (.of k))
+    (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  have : IsIntegralHom (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    IsIntegralHom.SpecMap_iff.mpr
+      (algebraMap_isIntegral_iff.mpr (inferInstance : Algebra.IsIntegral k K))
+  have hp : IsClosedMap p := isClosedMap_pullback_fst_of_isGalois k K X
+  refine ⟨p '' Tbar, hp Tbar hclosed, ?_⟩
+  ext y
+  constructor
+  · rintro ⟨x, hx, hxy⟩
+    obtain ⟨σ, hσ⟩ := exists_galois_map_eq_of_projection_eq k K X x y hxy
+    rw [← hinvariant σ]
+    exact ⟨x, hx, hσ⟩
+  · intro hy
+    exact ⟨y, hy, rfl⟩
 
 end AlgebraicGeometry
