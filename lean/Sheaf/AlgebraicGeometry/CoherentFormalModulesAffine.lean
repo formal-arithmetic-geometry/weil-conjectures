@@ -8,13 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
-import Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FiniteModuleComplete
-import Sheaf.RingTheory.NakayamaNilpotent
+
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineLimit
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineComplete
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineReconstruction
 
 /-! # Coherent formal modules on an affine scheme
 
@@ -88,6 +85,15 @@ theorem coherentFormalModules_affine (A : Type u) [CommRing A] [IsNoetherianRing
         (fun N : ModuleCat.{u} (AdicCompletion I A) ↦ Module.Finite (AdicCompletion I A) N) ⋙
       ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A)) ⋙
       tilde.functor (CommRingCat.of A) ⋙ formalCompletionFunctor J) := by
-  sorry
+  obtain ⟨L, p, hlimit, hnatural, hquotient, hscalar⟩ :=
+    coherentFormalModules_affine_limit A I J hJ
+  obtain ⟨ε⟩ := coherentFormalModules_affine_complete A I J hJ L p
+    hlimit hnatural hscalar
+  obtain ⟨η⟩ := coherentFormalModules_affine_reconstruction A I J hJ L p
+    hnatural hquotient
+  let Q := coherentFormalModules_affine_quotientFunctor A I J hJ
+  let E := CategoryTheory.Equivalence.mk L Q η.symm ε
+  refine ⟨E, p, hlimit, hnatural, hquotient, hscalar, ?_⟩
+  exact ⟨Iso.refl _⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-modules-affine-quotient",
+ "kind": "statement",
+ "title": "Affine formal modules: Quotient",
+ "statement": "Let A be a Noetherian commutative ring, I an ideal, B its I-adic completion, X=Spec A, and J the associated ideal sheaf. For each finite B-module N, the canonical sheaf quotient system formalCompletionFunctor J applied to tilde of N restricted to A is a coherent formal J-module. Explicitly, every level n+1 is coherent, annihilated by J^(n+1), and its successive reduction is the quotient by J^(n+1), with the given projection equation. Thus the already constructed quotient-system functor lifts to the full subcategory of coherent formal systems; call this actual lifted functor Q. This is a construction from the fixed quotient functor, not an unspecified choice of an equivalence.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, reduction to compatible finite-module systems and the canonical quotient functor; original node steps 2 and 6; Algebra 05GG"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "For B=completion, finite generation of I gives B/I^(n+1)B=A/I^(n+1), with the canonical scalar map. If N is finite over B, reducing any finite generating family makes N/I^(n+1)N finite over A/I^(n+1), hence finite over A.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine tilde/Gamma equivalence and ideal-product/cokernel formulas identify the nth component of the displayed sheaf completion with tilde of N/I^(n+1)N. It is quasi-coherent and finite type, hence coherent. Its ideal-power product is zero because the corresponding module product is zero.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Since I^(n+2)N is contained in I^(n+1)N, the quotient of N/I^(n+2)N by I^(n+1) is N/I^(n+1)N. Tilde and the cokernel comparison carry the canonical reduction to the transition map in formalCompletionFunctor. This supplies precisely the quotient isomorphism and its projection equation. The three object conditions prove membership in the full subcategory. ObjectProperty.lift then defines Q with unchanged quotient objects and maps.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-completion-complete",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D2",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087W, reduction to compatible finite-module systems and the canonical quotient functor; original node steps 2 and 6; Algebra 05GG; categorical and scalar compatibility details written out by D2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite modules over an adic completion give coherent formal sheaf quotient systems on an affine spectrum",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite modules over an adic completion give coherent formal sheaf quotient systems on an affine spectrum",
+   "results": "8 hits: AdicCompletion.of_apply, AdicCompletion, localCohomology, Hausdorffification, IsAdicComplete, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.mk_apply_coe, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "date": "2026-10-12",
+   "verdict": "No exact match: algebraic or sheaf ingredients only, not this functor/system assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde, Module.Finite",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact match: algebraic or sheaf ingredients only, not this functor/system assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*(adic|quotient)|inverse.system.*finite",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact match: algebraic or sheaf ingredients only, not this functor/system assertion.",
+   "sub": "AlgebraicGeometry"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine",
+  "group": "D2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 087W, reduction to compatible finite-module systems and the canonical quotient functor; original node steps 2 and 6; Algebra 05GG",
+   "via": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesAffineQuotient.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_affine_quotient_coherent",
+  "statement": "theorem coherentFormalModules_affine_quotient_coherent\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)\n    (hJ : J = Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom))\n    (N : ObjectProperty.FullSubcategory\n      (fun N : ModuleCat.{u} (AdicCompletion I A) ↦ Module.Finite (AdicCompletion I A) N)) :\n    IsCoherentFormalModule J ((ObjectProperty.ι\n        (fun N : ModuleCat.{u} (AdicCompletion I A) ↦ Module.Finite (AdicCompletion I A) N) ⋙\n      ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A)) ⋙\n      tilde.functor (CommRingCat.of A) ⋙ formalCompletionFunctor J).obj N)",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.coherentFormalModules_affine_quotient_coherent",
+   "AlgebraicGeometry.coherentFormalModules_affine_quotientFunctor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T204506-L-868375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T204506-L-868375",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

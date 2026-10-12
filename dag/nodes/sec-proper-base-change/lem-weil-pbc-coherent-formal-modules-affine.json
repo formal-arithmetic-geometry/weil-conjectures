@@ -31,123 +31,44 @@
  ],
  "proof": [
   {
-   "text": "(From sheaves to modules.) $X=\\operatorname{Spec}A$ is locally Noetherian [pqf-def-locnoeth] (the affine covering by $X$ itself, $\\mathcal O_X(X)=A$ [def-weil-affine-spectrum]). Write $\\mathrm{Mod}^{fg}_{A,I}$ for the category of inverse systems $(M_n)_{n\\ge1}$ of finitely generated $A$-modules with $I^nM_n=0$ whose transition map induces an isomorphism $M_{n+1}/I^nM_{n+1}\\cong M_n$, with morphisms the compatible families of $A$-linear maps. Let $(\\mathcal F_n)$ be an object of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module] and $M_n=\\Gamma(X,\\mathcal F_n)$. Each $\\mathcal F_n$ is coherent, hence quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth], so $M_n$ is a finitely generated $A$-module [lem-weil-pbc-quasi-coherent-finite-type-affine] (a). The ideal sheaf $\\mathcal I=\\widetilde I$ has $\\mathcal I(X)=I$ (the unit $\\tau_X$ is an isomorphism, [lem-weil-pbc-affine-tilde-gamma-adjunction] (2)), so by [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (2), for every quasi-coherent $\\mathcal G$, $(\\mathcal I^n\\mathcal G)(X)=I^n\\Gamma(X,\\mathcal G)$ and $\\Gamma(X,\\mathcal G)\\to\\Gamma(X,\\mathcal G/\\mathcal I^n\\mathcal G)$ is surjective with kernel $I^n\\Gamma(X,\\mathcal G)$. Hence $\\mathcal I^n\\mathcal F_n=0$ gives $I^nM_n=0$, and applying $\\Gamma(X,-)$ to the isomorphism $\\mathcal F_{n+1}/\\mathcal I^n\\mathcal F_{n+1}\\cong\\mathcal F_n$ gives that $\\Gamma$ of the transition map induces $M_{n+1}/I^nM_{n+1}\\cong M_n$. So $\\Gamma_\\bullet:(\\mathcal F_n)\\mapsto(\\Gamma(X,\\mathcal F_n))$, $(\\alpha_n)\\mapsto(\\Gamma(X,\\alpha_n))$ is a functor $\\mathit{Coh}(X,\\mathcal I)\\to\\mathrm{Mod}^{fg}_{A,I}$, and $E=\\varprojlim\\circ\\,\\Gamma_\\bullet$.",
+   "text": "Construct L and p with the limiting cones, naturality, projection kernels and completed scalar action by the finite-limit construction (original steps 1 and 3-5). This step asserts no equivalence.",
    "uses": [
-    "pqf-def-locnoeth",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-coherent-formal-module",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-coherent-formal-modules-affine-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087W (lemma-inverse-systems-affine), first sentences: 'By the correspondence between coherent sheaves on X and finite A-modules (Lemma 01XZ, lemma-coherent-Noetherian) it suffices to show Mod^fg_{A,I} is equivalent to the category of finite A^-modules'"
-   }
+   "elementary": false
   },
   {
-   "text": "($\\Gamma_\\bullet$ is an equivalence.) Fully faithful: for quasi-coherent $\\mathcal F,\\mathcal G$ on $X$ the map $\\alpha\\mapsto\\Gamma(X,\\alpha)$, $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F,\\mathcal G)\\to\\operatorname{Hom}_A(\\Gamma(X,\\mathcal F),\\Gamma(X,\\mathcal G))$, is bijective: it is the composite of the bijection given by the counit isomorphism $\\varepsilon_{\\mathcal F}:\\widetilde{\\Gamma(X,\\mathcal F)}\\cong\\mathcal F$ ((3) of [lem-weil-pbc-affine-tilde-gamma-adjunction]) and the adjunction bijection (1) there (naturality of the adjunction). Hence a family $(\\alpha_n)$ of $\\mathcal O_X$-linear maps commutes with the transition maps iff the $\\Gamma(X,\\alpha_n)$ do, and $\\Gamma_\\bullet$ is bijective on morphisms. Essentially surjective, with the explicit quasi-inverse $(M_n)\\mapsto(\\widetilde{M_n})$: given $(M_n)$ in $\\mathrm{Mod}^{fg}_{A,I}$, $\\widetilde{M_n}$ is quasi-coherent [lem-weil-pbc-spec-module-tilde-sections] with $\\Gamma(X,\\widetilde{M_n})\\cong M_n$ via $\\tau_X$ ([lem-weil-pbc-affine-tilde-gamma-adjunction] (2)), so it is of finite type [lem-weil-pbc-quasi-coherent-finite-type-affine] (a), hence coherent [pqf-lem-coherent-ft-locnoeth]; the transition maps are $\\widetilde{(\\cdot)}$ of those of $(M_n)$ (functoriality, (1) there). By [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (1),(2), $\\mathcal I^n\\widetilde{M_n}$ is quasi-coherent with global sections $I^nM_n=0$, so it is $0$ (counit isomorphism (3)), and the map $\\widetilde{M_{n+1}}/\\mathcal I^n\\widetilde{M_{n+1}}\\to\\widetilde{M_n}$ is a map of quasi-coherent modules which on global sections is $M_{n+1}/I^nM_{n+1}\\to M_n$, an isomorphism, hence an isomorphism (fully faithfulness just shown). So $(\\widetilde{M_n})\\in\\mathit{Coh}(X,\\mathcal I)$ and $\\tau_X$ gives $\\Gamma_\\bullet((\\widetilde{M_n}))\\cong(M_n)$ naturally. A fully faithful essentially surjective functor is an equivalence; a quasi-inverse is $(M_n)\\mapsto(\\widetilde{M_n})$.",
+   "text": "Use the actual lifted canonical quotient functor Q defined by the quotient-coherence theorem. Apply finite-module completeness to L and p, using the IsLimit, naturality and scalar hypotheses, to obtain epsilon: Q followed by L is naturally isomorphic to identity.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-coherent-formal-modules-affine-quotient",
+    "lem-weil-pbc-coherent-formal-modules-affine-complete"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087W, first sentence (the reduction via Lemma 01XZ, lemma-coherent-Noetherian; Schemes, Lemmas 01I7, 01IA, 01IB for the equivalence of quasi-coherent modules on Spec A with A-modules); the verification is written out by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "(Generators by Nakayama.) Let $(M_n)\\in\\mathrm{Mod}^{fg}_{A,I}$ and $M=\\varprojlim_nM_n$, an $A^\\wedge$-module by $(a_n)_n(x_n)_n=(a_nx_n)_n$, where $A^\\wedge=\\varprojlim A/I^n$ [def-weil-pbc-adic-completion]. Each transition map is surjective (it induces $M_{n+1}/I^nM_{n+1}\\cong M_n$); by induction on $m$, for $m\\ge n$ the composite $M_m\\to M_n$ is surjective and induces $M_m/I^nM_m\\cong M_n$ (as $I^{m-1}\\subseteq I^n$). By [lem-weil-pbc-tower-limit-exact-surjective-kernels] (a) every projection $p_n:M\\to M_n$ is surjective. Pick $x_1,\\dots,x_t\\in M$ whose images generate the finitely generated $A$-module $M_1$, and let $\\varphi_n:(A/I^n)^{\\oplus t}\\to M_n$ send the $i$-th basis vector to $p_n(x_i)$; the $\\varphi_n$ form a morphism of inverse systems. Each $\\varphi_n$ is surjective: $M_n$ is a module over $R=A/I^n$, the ideal $I/I^n$ of $R$ is nilpotent ($(I/I^n)^n=0$), and $M_n/IM_n\\cong M_1$ is generated by the images of the $p_n(x_i)$, i.e. $M_n=\\varphi_n(R^{\\oplus t})+IM_n$; so $\\varphi_n$ is surjective by [lem-weil-pbc-nakayama-nilpotent].",
+   "text": "Apply reconstruction to L and p, using naturality and the surjective ideal-power kernel assertions, to obtain eta: L followed by Q is naturally isomorphic to identity.",
    "uses": [
-    "def-weil-pbc-adic-completion",
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
-    "lem-weil-pbc-nakayama-nilpotent"
+    "lem-weil-pbc-coherent-formal-modules-affine-reconstruction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087W: 'As the transition maps are surjective, we see that M -> M_1 is surjective. Pick x_1, ..., x_t in M which map to generators of M_1. This induces a map of systems (A/I^n)^t -> M_n. By Nakayama's lemma (Algebra, Lemma 00DV, lemma-NAK) these maps are surjective'"
-   }
+   "elementary": false
   },
   {
-   "text": "(The kernels and Mittag-Leffler.) Let $K_n=\\operatorname{Ker}\\varphi_n\\subseteq(A/I^n)^{\\oplus t}$; $(K_n)$ is an inverse system (sub-system of $((A/I^n)^{\\oplus t})$). Its transition maps are surjective: let $k\\in K_n$ and $y\\in(A/I^{n+1})^{\\oplus t}$ a lift. Then $\\varphi_{n+1}(y)$ lies in the kernel of $M_{n+1}\\to M_n$, which is $I^nM_{n+1}=\\varphi_{n+1}(I^n(A/I^{n+1})^{\\oplus t})$ ($\\varphi_{n+1}$ is surjective, step 3); choose $z\\in I^n(A/I^{n+1})^{\\oplus t}$ with $\\varphi_{n+1}(z)=\\varphi_{n+1}(y)$; then $y-z\\in K_{n+1}$ maps to $k$, as $z$ maps to $0$ in $(A/I^n)^{\\oplus t}$. Apply [lem-weil-pbc-tower-limit-exact-surjective-kernels] (b) (over $R=A$) to $0\\to K_n\\to(A/I^n)^{\\oplus t}\\xrightarrow{\\varphi_n}M_n\\to0$: with $K=\\varprojlim K_n$ the sequence $0\\to K\\to\\varprojlim_n(A/I^n)^{\\oplus t}\\to M\\to0$ is exact. Now $\\varprojlim_n(A/I^n)^{\\oplus t}=(A^\\wedge)^{\\oplus t}$ (limits commute with finite direct sums, coordinatewise), and the map $\\varprojlim\\varphi_n:(A^\\wedge)^{\\oplus t}\\to M$ is $(a_1,\\dots,a_t)\\mapsto\\sum_ia_ix_i$, which is $A^\\wedge$-linear for the module structure of step 3 (componentwise computation). Hence $x_1,\\dots,x_t$ generate $M$ over $A^\\wedge$, and $M$ is a finitely generated $A^\\wedge$-module [def-weil-finitely-generated-module].",
-   "uses": [
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
-    "def-weil-pbc-adic-completion",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087W: 'Let K_n be the kernel. Property (2) implies that K_{n+1} -> K_n is surjective, in particular the system (K_n) satisfies the Mittag-Leffler condition. By Homology, Lemma 02N1 (homology-lemma-Mittag-Leffler) we obtain an exact sequence 0 -> K -> (A^)^t -> M -> 0 with K = lim K_n. Hence M is a finite A^-module.'"
-   }
-  },
-  {
-   "text": "($M/I^nM=M_n$.) Fix $n$. The projection $\\pi_n:(A^\\wedge)^{\\oplus t}\\to(A/I^n)^{\\oplus t}$ is surjective with kernel $I^n(A^\\wedge)^{\\oplus t}$ by [lem-weil-pbc-module-completion-complete] (2) for the $A$-module $A$ ($I$ is finitely generated as $A$ is Noetherian [def-weil-pbc-noetherian-ring]), coordinatewise. Since $p_n\\circ\\varprojlim\\varphi=\\varphi_n\\circ\\pi_n$ and both $\\pi_n,\\varphi_n$ are surjective, $p_n$ is surjective (also step 3). As $I^nM_n=0$, $I^nM\\subseteq\\operatorname{Ker}p_n$. Conversely let $p_n(m)=0$, $m=\\varprojlim\\varphi(y)$ with $y\\in(A^\\wedge)^{\\oplus t}$. Then $\\pi_n(y)\\in K_n$, and the projection $K\\to K_n$ is surjective [lem-weil-pbc-tower-limit-exact-surjective-kernels] (a), so there is $k\\in K$ with $\\pi_n(k)=\\pi_n(y)$; then $y-k\\in\\operatorname{Ker}\\pi_n=I^n(A^\\wedge)^{\\oplus t}$ and $m=\\varprojlim\\varphi(y-k)\\in I^nM$. So $\\operatorname{Ker}p_n=I^nM$, where $I^nM$ (the $A$-submodule generated by the $am$, $a\\in I^n$) equals $(IA^\\wedge)^nM$. With step 1 applied to $(\\mathcal F_n)$ this proves (1).",
-   "uses": [
-    "lem-weil-pbc-module-completion-complete",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087W, last sentences: 'As K -> K_n is surjective it follows that M/I^nM = Coker(K -> (A/I^n)^t) = (A/I^n)^t/K_n = M_n' (the identification (A^)^t/I^n(A^)^t = (A/I^n)^t is Algebra, Lemma 05GG, lemma-hathat-finitely-generated)"
-   }
-  },
-  {
-   "text": "(The functor $G$ and completeness of finite $A^\\wedge$-modules.) For a finitely generated $A^\\wedge$-module $N$ put $G(N)=(N/I^nN)_{n\\ge1}$ with the canonical surjections, and $G(f)=(f\\bmod I^n)_n$ for an $A^\\wedge$-linear $f$. By [lem-weil-pbc-module-completion-complete] (2) (for the $A$-module $A$) $A^\\wedge/I^nA^\\wedge\\cong A/I^n$, so $N/I^nN$ is a finitely generated $A/I^n$-module, hence a finitely generated $A$-module; $I^n(N/I^nN)=0$ and $(N/I^{n+1}N)/I^n(N/I^{n+1}N)=N/I^nN$. So $G:\\mathrm{Mod}^{fg}(A^\\wedge)\\to\\mathrm{Mod}^{fg}_{A,I}$ is a functor. The ring $A^\\wedge$ is Noetherian [lem-weil-pbc-adic-completion-noetherian], and it is $J$-adically complete for the ideal $J=IA^\\wedge$ [def-weil-pbc-adically-complete-ring]: $J^n=I^nA^\\wedge$, and $A^\\wedge\\to\\varprojlim A^\\wedge/I^nA^\\wedge$ is bijective by [lem-weil-pbc-module-completion-complete] (1) for the $A$-module $A$. Since $J^nN=I^nN$, [lem-weil-pbc-finite-module-complete-over-complete-noetherian] shows that the canonical map $c_N:N\\to\\varprojlim_nN/I^nN=\\varprojlim G(N)$ is bijective; it is $A^\\wedge$-linear and natural in $N$.",
-   "uses": [
-    "lem-weil-pbc-module-completion-complete",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "def-weil-pbc-adically-complete-ring",
-    "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087W ('it suffices to prove that ... M = lim M_n is a finite A^-module and that M/I^nM = M_n': the other half of the equivalence, that a finite A^-module N is lim N/I^nN, is left implicit there; it is Algebra, Lemma 00MA (lemma-completion-tensor) (3) over the Noetherian ring A^ (Lemma 0316) which is complete (Lemma 05GG))"
-   }
-  },
-  {
-   "text": "(The equivalence.) By steps 3-4, $\\varprojlim:\\mathrm{Mod}^{fg}_{A,I}\\to\\mathrm{Mod}^{fg}(A^\\wedge)$, $(M_n)\\mapsto\\varprojlim M_n$, $(f_n)\\mapsto\\varprojlim f_n$ (which is $A^\\wedge$-linear, componentwise), is a functor. By step 6 $c:\\mathrm{id}\\cong\\varprojlim\\circ G$ is a natural isomorphism, and by step 5 the maps $p_n$ induce isomorphisms $(\\varprojlim M_n)/I^n(\\varprojlim M_n)\\cong M_n$, compatible with the transition maps and natural in $(M_n)$, i.e. a natural isomorphism $G\\circ\\varprojlim\\cong\\mathrm{id}$. So $\\varprojlim$ is an equivalence with quasi-inverse $G$. By step 2, $E=\\varprojlim\\circ\\Gamma_\\bullet$ is a composite of equivalences, hence an equivalence $\\mathit{Coh}(X,\\mathcal I)\\to\\mathrm{Mod}^{fg}(A^\\wedge)$, with quasi-inverse the composite of $G$ and $(M_n)\\mapsto(\\widetilde{M_n})$, i.e. $N\\mapsto((N/I^nN)^\\sim)_{n\\ge1}$ with the canonical surjections (tilde of them). This is (2).",
+   "text": "Apply CategoryTheory.Equivalence.mk to L, Q, eta.symm and epsilon. This adjusts the unit to satisfy the triangle law while keeping the two functors definitionally unchanged. Therefore p and all four of its assertions remain the desired ones for E.functor=L. Since Q is literally ObjectProperty.lift of the canonical sheaf quotient functor, Q followed by the coherent full-subcategory inclusion is definitionally that functor. Iso.refl supplies the last inverse-identification assertion.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087W ('it suffices to show Mod^fg_{A,I} is equivalent to the category of finite A^-modules'); the assembly is written out by the agent"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "pqf-def-locnoeth",
-  "def-weil-affine-spectrum",
-  "def-weil-pbc-coherent-formal-module",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "def-weil-pbc-adic-completion",
-  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
-  "lem-weil-pbc-nakayama-nilpotent",
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-module-completion-complete",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "def-weil-pbc-adically-complete-ring",
-  "lem-weil-pbc-finite-module-complete-over-complete-noetherian"
+  "lem-weil-pbc-coherent-formal-modules-affine-limit",
+  "lem-weil-pbc-coherent-formal-modules-affine-quotient",
+  "lem-weil-pbc-coherent-formal-modules-affine-complete",
+  "lem-weil-pbc-coherent-formal-modules-affine-reconstruction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "D2",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 087W (lemma-inverse-systems-affine, line 6272) and its proof (lines 6281-6310); the parts the proof leaves implicit (the sheaf/module reduction, completeness of finite A^-modules for the quasi-inverse, the assembly of the equivalence) are written out by the agent from Algebra 00MA, 05GG and Schemes 01I7/01IB"
+  "place": "Lemma 087W, original seven-step argument separated into limit construction (1,3-5), quotient coherence (2,6), finite-module completeness (6), reconstruction (2,5,7), and the proved Lean equivalence assembly; no change of unit route."
  },
  "mathlib_searches": [
   {
@@ -230,5 +151,15 @@
   "reviewer": "R-cfa",
   "group": "R1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T204506-L-868375",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
