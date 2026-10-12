@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Group.Idempotent
 public import Mathlib.RingTheory.Jacobson.Ideal
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # Idempotents determined modulo an ideal in the Jacobson radical
@@ -25,20 +26,36 @@ namespace IsIdempotentElem
 Source: Stacks Project, Tag 09XF, with Tag 0ELY
 (blueprint: lem-weil-pbc-idempotents-determined-modulo-radical).
 
-Proof: Localize at any maximal ideal `m`. Since `J` is contained in every maximal ideal,
-the difference of the localized idempotents has zero residue. An idempotent `x` in a local
-ring is zero or one: `x` and `1 - x` sum to one, so one is a unit, and their product is zero.
-The two residue values are distinct, so the localized idempotents agree.
-
-Put `d = e - e'`. Its localization is zero at every maximal ideal. If `d` were nonzero,
-its annihilator would be a proper ideal, contained in some maximal ideal `m`. Vanishing
-in that localization gives `s` outside `m` with `s * d = 0`. Then `s` belongs to the
-annihilator and hence to `m`, a contradiction. Thus `d = 0` and `e = e'` (Stacks Tag 00HN).
+Proof: Put `d = e - e'`. Expanding with `e * e = e` and `e' * e' = e'`
+gives `d * d * d = d`. Since `d` belongs to the Jacobson radical, so does `d * d`,
+and hence `1 - d * d` is a unit by the Jacobson criterion
+`Ideal.isUnit_of_sub_one_mem_jacobson_bot`. The cubic identity gives
+`d * (1 - d * d) = 0`; cancelling this unit gives `d = 0`, hence `e = e'`.
+This is a direct algebraic proof of the cited Stacks statement.
 -/
 theorem eq_of_sub_mem_of_le_jacobson {R : Type u} [CommRing R]
     (J : Ideal R) (hJ : J ≤ Ideal.jacobson (⊥ : Ideal R))
     {e e' : R} (he : IsIdempotentElem e) (he' : IsIdempotentElem e')
     (hee' : e - e' ∈ J) : e = e' := by
-  sorry
+  let d : R := e - e'
+  have hd : d ∈ Ideal.jacobson (⊥ : Ideal R) := hJ hee'
+  have hd2 : d * d ∈ Ideal.jacobson (⊥ : Ideal R) :=
+    (Ideal.jacobson (⊥ : Ideal R)).mul_mem_left d hd
+  have hu : IsUnit (1 - d * d) := by
+    apply Ideal.isUnit_of_sub_one_mem_jacobson_bot
+    have hn : -(d * d) ∈ Ideal.jacobson (⊥ : Ideal R) :=
+      (Ideal.jacobson (⊥ : Ideal R)).neg_mem hd2
+    simpa [sub_eq_add_neg] using hn
+  have hcube : d * d * d = d := by
+    dsimp [d]
+    have heq : e * e = e := he
+    have heq' : e' * e' = e' := he'
+    linear_combination (e + 1 - 3 * e') * heq + (3 * e - e' - 1) * heq'
+  have hzero : d * (1 - d * d) = 0 := by
+    calc
+      d * (1 - d * d) = d - d * d * d := by ring
+      _ = 0 := by rw [hcube, sub_self]
+  have hcancel : d = 0 := hu.mul_right_cancel (by simpa using hzero)
+  exact sub_eq_zero.mp hcancel
 
 end IsIdempotentElem

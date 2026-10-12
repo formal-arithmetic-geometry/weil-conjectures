@@ -22,29 +22,27 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*Localization at a maximal ideal.* Let $\\mathfrak m$ be any maximal ideal of $R$ and localize at $\\mathfrak m$. Since $J$ is contained in the Jacobson radical, which is the intersection of all maximal ideals, the image of $e-e'$ lies in the maximal ideal of the local ring $R_{\\mathfrak m}$. An idempotent in a local ring is either $0$ or $1$: for $x^2=x$, the factors $x$ and $1-x$ multiply to zero and one of them is a unit because their sum is $1$. Their images in the residue field of $R_{\\mathfrak m}$ are therefore the distinct possibilities $0$ and $1$; as $e-e'$ maps to zero in that residue field, the two localized idempotents have the same value, hence $e/1=e'/1$ in $R_{\\mathfrak m}$.",
+   "text": "Put d = e - e′. The idempotency equations e*e=e and e′*e′=e′ imply d*d*d=d by polynomial expansion in the commutative ring. This identity holds without any characteristic restriction.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical), proof via localization at maximal ideals; Algebra Lemma Tag 00HN (lemma-characterize-zero-local)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Equality detected at maximal localizations.* Put $d=e-e'$. Step 1 gives $d/1=0$ in $R_{\\mathfrak m}$ for every maximal ideal $\\mathfrak m$. If $d\\ne0$, its annihilator $\\operatorname{Ann}(d)$ is a proper ideal and is contained in some maximal ideal $\\mathfrak m$. The equality $d/1=0$ in $R_{\\mathfrak m}$ would give an element $s\\notin\\mathfrak m$ with $sd=0$, so $s\\in\\operatorname{Ann}(d)\\subseteq\\mathfrak m$, a contradiction. Thus $d=0$ and $e=e'$.",
+   "text": "The inclusion J ≤ jacobson(0) puts d in the Jacobson radical. Closure under multiplication and negation puts -d*d there, so (1-d*d)-1 lies in the radical. Mathlib Ideal.isUnit_of_sub_one_mem_jacobson_bot shows that 1-d*d is a unit.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical), conclusion from equality after all maximal localizations"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The cubic identity implies d*(1-d*d)=d-d*d*d=0. Cancel the unit 1-d*d using IsUnit.mul_right_cancel to obtain d=0. Thus e=e′ by sub_eq_zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 09XF (lemma-idempotents-determined-modulo-radical) and Algebra Lemma Tag 00HN"
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-12",
+  "note": "Direct cubic-identity proof of Stacks Tag 09XF using Mathlib Ideal.isUnit_of_sub_one_mem_jacobson_bot; replaces the planned maximal-localization argument below the unit level."
  },
  "mathlib_searches": [
   {
@@ -128,5 +126,15 @@
   "group": "G1",
   "result": "pass",
   "note": "CommRing R (no Nontrivial), J : Ideal R, J ≤ Ideal.jacobson ⊥, e e' IsIdempotentElem, e - e' ∈ J ⊢ e = e'; 'that is' injectivity clause = same implication; no hollow hyps, single universe, no Mathlib collision (only nilpotent-kernel version)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T053942-L-2639794",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
