@@ -7649,3 +7649,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:13 L: merged deliver/S1/Sheaf.Paper.ZariskiEtalePushedResolution (stage 3; reviewer PASS; first push; landing 20261012T121335-L-1002994 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 12:13 L: merged deliver/S3/Sheaf.AlgebraicGeometry.AffineEtaleCartesianSheafAdjunction (stage 3; reviewer PASS; first push; landing 20261012T121351-L-1004034 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 12:14 L: merged deliver/T1/Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic (stage 3; reviewer PASS; after a return; landing 20261012T121407-L-1004909 (interface); batch 20261012T120425; modules 2; new nodes 1)
+- 12:14 L: merged deliver/T3/Sheaf.AlgebraicGeometry.DerivedGlobalGermExchange (stage 3; reviewer PASS; first push; landing 20261012T121423-L-1005431 (interface); batch 20261012T120425; modules 4; new nodes 3)
