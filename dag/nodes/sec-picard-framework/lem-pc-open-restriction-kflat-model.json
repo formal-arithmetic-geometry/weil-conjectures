@@ -15,35 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Apply the stalk criterion to P on X to obtain K-flatness of every stalk complex.",
+   "text": "Let T be Scheme.Modules.tensorPullback U.ι. Its adjunction to pushforward, from def-pc-module-pullback, makes T a left adjoint and hence additive. Uniqueness of left adjoints compares T with Scheme.Modules.restrictFunctor U.ι using restrictAdjunction. Mathlib Scheme.Modules.overFunctorEquiv U then identifies the latter with the exact canonical overFunctor followed by overEquiv restriction R in the statement. Transport additivity through this natural isomorphism c:T≅R.",
    "uses": [
-    "lem-pc-kflat-stalk-criterion"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For x in U, neighborhoods in X contained in U are cofinal among neighborhoods of its image. Thus the restriction-section identifications yield a stalk-ring isomorphism and a natural identification of restricted module stalks. Naturality identifies all differentials. Transport modules along the ring isomorphism; this equivalence preserves acyclicity and identifies balanced tensor products, hence their direct-sum total complexes. It therefore transports K-flatness of the original stalk to that of the restricted stalk.",
-   "uses": [
+    "def-pc-module-pullback",
     "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Apply CochainComplex.isKFlat_pullback to the underlying continuous open inclusion U.ι.base, the sheaves U.toScheme.sheaf and X.sheaf, and the structure map ⟨U.ι.c⟩. Its explicit tensorPullbackComplex is definitionally the termwise application of T to P, including the differentials; convert followed by rfl verifies the identification. Thus T(P) is K-flat.",
+   "uses": [
+    "lem-pc-kflat-pullback-preservation"
+   ],
    "elementary": false
   },
   {
-   "text": "Use the stalk criterion on U to conclude. For U empty the quantification over stalks is vacuous.",
+   "text": "Map c to cochain complexes with NatIso.mapHomologicalComplex and evaluate at P. For each acyclic complex F on U, map that complex isomorphism through the functor Tot(F⊗-), implemented by (curriedTensor _).map₂CochainComplex.obj F. K-flatness of T(P) supplies exactness in each degree; HomologicalComplex.ExactAt.of_iso transports it to Tot(F⊗R(P)). This is precisely the definition of K-flatness of R(P). All comparisons also hold for the empty open and unbounded complexes.",
    "uses": [
-    "lem-pc-kflat-stalk-criterion"
+    "def-pc-kflat-complex"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-stalk-criterion",
+  "def-pc-kflat-complex",
+  "def-pc-module-pullback",
+  "lem-pc-kflat-pullback-preservation",
   "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/06YC",
-  "place": "Lemma 20.26.8, specialized to the inclusion of an open; stalk criterion Tag 06YB"
+  "place": "Tag 06YC specialized to the open inclusion; Tag 0096 and uniqueness of left adjoints compare the explicit tensor formula with restriction. Lean proof by K2, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -127,10 +130,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T160833-L-2613488",
-  "kind": "interface",
+  "landing": "20261012T165519-L-2935217",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatStalkCriterion
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # K-flat models under open restriction
 
@@ -58,6 +59,36 @@ theorem openRestriction_isKFlat (X : Scheme.{u}) (U : X.Opens)
         (Scheme.Modules.overEquiv U)
     CochainComplex.IsKFlat (R := U.toScheme.sheaf)
       ((R.mapHomologicalComplex (.up ℤ)).obj P) := by
-  sorry
+  classical
+  -- Tensor pullback and restriction are left adjoints to the same pushforward.
+  let T := Scheme.Modules.tensorPullback U.ι
+  have : T.IsLeftAdjoint := ⟨_, Scheme.Modules.nonempty_tensorPullbackAdjunction U.ι⟩
+  have : T.Additive := CategoryTheory.rightExactFunctor_le_additiveFunctor _ _ _
+    (by rw [CategoryTheory.rightExactFunctor_iff]; infer_instance)
+  let e : T ≅ Scheme.Modules.restrictFunctor U.ι :=
+    (Scheme.Modules.nonempty_tensorPullbackAdjunction U.ι).some.leftAdjointUniq
+      (Scheme.Modules.restrictAdjunction U.ι)
+  let R := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)
+  let c : T ≅ R := e ≪≫ (Scheme.Modules.overFunctorEquiv U).symm
+  have : R.Additive := Functor.additive_of_iso c
+  -- The explicit pullback complex has exactly the termwise tensor-pullback formula.
+  have hT : CochainComplex.IsKFlat (R := U.toScheme.sheaf)
+      ((T.mapHomologicalComplex (.up ℤ)).obj P) := by
+    have h := CochainComplex.isKFlat_pullback U.ι.base U.toScheme.sheaf X.sheaf
+      ⟨U.ι.c⟩ P hP
+    convert h using 1
+    rfl
+  change CochainComplex.IsKFlat (R := U.toScheme.sheaf)
+    ((R.mapHomologicalComplex (.up ℤ)).obj P)
+  let := SheafOfModules.monoidalCategory U.toScheme.sheaf
+  -- Total tensor with any fixed acyclic complex preserves this chain isomorphism.
+  intro F hF i
+  exact (hT F hF i).of_iso
+    (((curriedTensor _).map₂CochainComplex.obj F).mapIso
+      ((NatIso.mapHomologicalComplex c (.up ℤ)).app P))
 
 end AlgebraicGeometry
