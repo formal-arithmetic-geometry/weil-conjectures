@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDual
 
@@ -166,7 +166,8 @@ Let `X` be separated of finite type over `k`, let `p : X ⟶ 𝔸¹_k` be a `k`-
 `g : X_η̄ ⟶ X` be the pullback to the geometric generic fibre of `p`, with structure morphism
 `a_η̄ : X_η̄ ⟶ η̄`. On every affine open `U` of `X`, `g^* ω_U ≅ ω_{U_η̄}(1)[2]`. -/
 theorem nonempty_iso_leftDerivedUpperStar_dualizingComplex_geometricGenericPoint
-    [HasTateTwist Λ] (hp : p ≫ Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k))) = a)
+    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
+    (hp : p ≫ Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k))) = a)
     (U : X.affineOpens) [IsSeparated (U.1.ι ≫ a)] [LocallyOfFiniteType (U.1.ι ≫ a)]
     [QuasiCompact (U.1.ι ≫ a)] [IsSeparated (U.1.ι ≫ p)] [LocallyOfFiniteType (U.1.ι ≫ p)]
     [QuasiCompact (U.1.ι ≫ p)] [HasCompactification (U.1.ι ≫ a)]

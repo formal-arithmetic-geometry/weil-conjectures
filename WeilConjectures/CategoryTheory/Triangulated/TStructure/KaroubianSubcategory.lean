@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
-public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.FullSubcategory
+public import WeilConjectures.CategoryTheory.Idempotents.FullSubcategory
 
 /-!
 # Idempotent completeness of subcategories of bounded objects
