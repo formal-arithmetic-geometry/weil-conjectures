@@ -151,4 +151,48 @@ theorem bijective_homologyBaseChange_cechModuleComplex [_root_.IsReduced Γ(S, �
 
 end Perfect
 
+section Fibre
+
+variable {X S : Scheme.{u}} (f : X ⟶ S) (ℱ : X.Modules) {ι : Type u} (U : ι → X.Opens)
+  [IsAffine S] [IsProper f] [ℱ.IsFinitePresentation]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] [Finite ι]
+  (hU : ∀ i, IsAffineOpen (U i)) (hU' : iSup U = ⊤)
+
+include hU hU' in
+/-- **The fibre dimension from the Čech complex.** For a field point `g : Spec K ⟶ S` and `x` the
+point of `Spec K`, the fibre dimension `h^q` of `ℱ` at `g x` is the dimension of
+`H^q(Γ(Spec K, ⊤) ⊗[A] Č(U, ℱ))`: this is the Čech complex of the pullback of `ℱ` to
+`X ×_S Spec K`, which computes its cohomology. -/
+theorem finrank_homology_cechModuleComplex_baseChange_eq_hFiber (K : Type u) [Field K]
+    (g : Spec (.of K) ⟶ S) [Algebra Γ(S, ⊤) Γ(Spec (.of K), ⊤)]
+    (hg : algebraMap Γ(S, ⊤) Γ(Spec (.of K), ⊤) = g.appTop.hom) (q : ℕ) (x : Spec (.of K)) :
+    finrank Γ(Spec (.of K), ⊤)
+        (((cechModuleComplex f ℱ U).sc q).baseChange Γ(Spec (.of K), ⊤)).homology =
+      ℱ.hFiber f q (g.base x) := by
+  have sq := IsPullback.of_hasPullback f g
+  set f' := pullback.snd f g
+  set g' := pullback.fst f g
+  have : IsSeparated f' := MorphismProperty.of_isPullback sq ‹IsProper f›.toIsSeparated
+  have : QuasiCompact f' := MorphismProperty.of_isPullback sq inferInstance
+  have hUK (i : ι) : IsAffineOpen (g' ⁻¹ᵁ U i) :=
+    isAffineOpen_preimage_of_isPullback sq (isAffineOpen_top S) (by simp) (by simp) (hU i)
+  have hUK' : iSup (fun i ↦ g' ⁻¹ᵁ U i) = ⊤ := by
+    rw [← Scheme.Hom.preimage_iSup, hU', Scheme.Hom.preimage_top]
+  -- the Čech complex of the pullback of `ℱ` is the base change of that of `ℱ`
+  refine ((HomologicalComplex.homologyMapIso (cechModuleComplexBaseChangeIso sq ℱ hg U
+    (isAffineOpen_iInf_of_isSeparated f U hU)) q).toLinearEquiv.finrank_eq).trans ?_
+  obtain ⟨e, he⟩ := exists_homology_cechModuleComplex_equiv_H f' ((pullback g').obj ℱ)
+    (fun i ↦ g' ⁻¹ᵁ U i) hUK hUK' q
+  rw [← hFiber_pullback_of_isPullback f ℱ g g' f' sq q x,
+    hFiber_eq_finrankH f' ((pullback g').obj ℱ) q x]
+  let : (Limits.pullback f g).Over (Spec (.of K)) := ⟨f'⟩
+  refine (congrArg Cardinal.toNat (rank_eq_of_equiv_equiv _ e.symm
+    (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of K)).inv) fun c y ↦ ?_)).symm
+  apply e.injective
+  rw [AddEquiv.apply_symm_apply, he, AddEquiv.apply_symm_apply,
+    smul_H_eq_globalSectionsRingHom_smul]
+  rfl
+
+end Fibre
+
 end AlgebraicGeometry.Scheme.Modules
