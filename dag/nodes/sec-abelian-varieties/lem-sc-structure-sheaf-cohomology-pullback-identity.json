@@ -20,11 +20,25 @@
  },
  "proof": [
   {
-   "text": "Proof: Write L for inverse image along the identity and let alpha : L ≅ Id\nbe the unique left-adjoint comparison with identity direct image, compatible with the\nadjunction unit. The adjoint of the identity structure map is alpha at the additive\nstructure sheaf O. Write c : Z ≅ L(Z) for the constant-integer-sheaf comparison used\nin the definition. Its construction by uniqueness of left adjoints gives\nc.hom ≫ alpha.hom.app Z = id. Naturality of alpha on the derived category identifies\nL(x) followed by alpha at O with alpha at Z followed by x, for every Ext class\nx : Ext Z O n. Unfolding H.mapFunctor and H.map, pullback sends x to the Yoneda\ncomposite c.hom ; L(x) ; alpha at O. Substitution and cancellation give x.\nThus the additive homomorphism is the identity in every degree. In degree zero this\nis the usual identity map on global sections; the argument also applies to the empty\nscheme, where all the cohomology groups are zero.",
+   "text": "For the identity scheme morphism, the functor on opens and its continuous sheaf pushforward are definitionally the identity. Let adj be the chosen sheaf pullback adjunction and let alpha = adj.leftAdjointUniq Adjunction.id. Applying the adjunction hom equivalence shows that the adjoint of the additive identity structure map equals alpha at the structure sheaf. Applying the hom equivalence for the composed constant-sheaf and pullback adjunctions shows that the hom of constantSheafsheafPullbackIso at the integer group equals alpha at the constant integer sheaf. Both equalities are proved by uniqueness of left adjoints, not assumed.",
+   "uses": [
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove Ext naturality for any exact additive endofunctor L and natural transformation alpha : L -> Id in a category with enough injectives. In degree zero, represent an Ext class by an ordinary morphism and apply naturality of alpha. In degree n+1, embed the target B into Injective.obj B and form its cokernel short exact sequence S. Ext vanishing into an injective and covariant_sequence_exact₁ express the class as y composed with S.extClass. Alpha induces a morphism S.map L -> S. Apply the existing, proved Adjunction.mapExactFunctor_comp_extClass_comp_mk₀ to this morphism, use the induction hypothesis on y, and reassociate. This induction is fully proved in the private helper ext_map_to_identity.",
    "uses": [
     "def-sc-structure-sheaf-cohomology-pullback"
    ],
    "elementary": false
+  },
+  {
+   "text": "Unfold structureSheafCohomologyPullback, H.mapFunctor and H.map pointwise. Replace the adjoint structure morphism by alpha at the structure sheaf. Reassociate the Yoneda product, apply the proved Ext naturality helper, and replace alpha at the constant integer sheaf by the hom of the constant-sheaf comparison. Its inverse followed by its hom is the identity; mk₀_comp_mk₀_assoc and mk₀_id_comp therefore return the original Ext class. AddMonoidHom extensionality gives the identity homomorphism in every degree.",
+   "uses": [
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -32,8 +46,10 @@
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "S2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Section 01F7 equation-functorial and Remark 01FB"
+  "place": "Section 01F7 equation-functorial and Remark 01FB; explicit Ext naturality by injective dimension shifting and adjunction uniqueness"
  },
  "mathlib_searches": [
   {
@@ -124,10 +140,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T202245-L-706354",
-  "kind": "interface",
+  "landing": "20261012T225329-L-1812705",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
