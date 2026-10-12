@@ -1,6 +1,6 @@
 # Work queue
 
-107 items; claim with `tools/claim.py next <group> [--stage N]`.
+106 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -19,11 +19,11 @@
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-nagata-finite-presentation-descent` | 3 | state | 3 |
+| `def-nagata-separated-descent-stage` | 3 | state | 2 |
 
-Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement dependency.
+Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (98)
+## Stage 3: modules to prove (97)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -57,7 +57,6 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `Sheaf.ConstructibleSheaf.LocallyConstantRetraction` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalGlobalSectionsExact` | 4 | 1 | proof |
-| `Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleColimitCocone` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleFilteredData` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection` | 5 | 1 | proof |
