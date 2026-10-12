@@ -9,20 +9,64 @@ public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Submodule
 
 /-!
-# Intersections of extended ideals in a tensor product over a field
+# Complements on right exactness of the tensor product
 
-For ideals `I ⊆ A` and `J ⊆ B` of algebras over a field `R`, an element of `A ⊗[R] B` lying in
-both extended ideals `I (A ⊗ B)` and `J (A ⊗ B)` comes from `I ⊗[R] J`; we state this for any
-`C ≅ A ⊗[R] B`.
+* If a sequence stays exact after tensoring with a module `P`, it stays exact after tensoring
+  with every retract `M` of `P`, for instance with `M` when `P = N × M`.
+* For ideals `I ⊆ A` and `J ⊆ B` of algebras over a field `R`, an element of `A ⊗[R] B` lying in
+  both extended ideals `I (A ⊗ B)` and `J (A ⊗ B)` comes from `I ⊗[R] J`; we state this for any
+  `C ≅ A ⊗[R] B`.
 
 ## Main statements
 
+- `Function.Exact.rTensor_of_retract`
 - `Algebra.TensorProduct.exists_map_subtype_eq_of_mem_map_inf_map`
 -/
 
 @[expose] public section
 
 open scoped TensorProduct
+
+namespace Function.Exact
+
+variable {R : Type*} [CommRing R] {C₀ C₁ C₂ M P : Type*} [AddCommGroup C₀] [AddCommGroup C₁]
+  [AddCommGroup C₂] [AddCommGroup M] [AddCommGroup P] [Module R C₀] [Module R C₁] [Module R C₂]
+  [Module R M] [Module R P]
+
+omit [AddCommGroup C₀] [AddCommGroup C₁] [AddCommGroup C₂] [AddCommGroup M] [AddCommGroup P]
+  [Module R C₀] [Module R C₁] [Module R C₂] [Module R M] [Module R P] in
+private lemma lTensor_rTensor_comm {Q Q' D D' : Type*} [AddCommGroup Q] [AddCommGroup Q']
+    [Module R Q] [Module R Q'] (φ : Q →ₗ[R] Q') [AddCommGroup D] [AddCommGroup D'] [Module R D]
+    [Module R D'] (d : D →ₗ[R] D') (x : Q ⊗[R] D) :
+    d.lTensor Q' (φ.rTensor D x) = φ.rTensor D' (d.lTensor Q x) := by
+  rw [← LinearMap.comp_apply, LinearMap.lTensor_comp_rTensor, ← LinearMap.rTensor_comp_lTensor,
+    LinearMap.comp_apply]
+
+/-- **Exactness after tensoring passes to retracts.** If `d₀, d₁` stay exact after tensoring
+with `P` and `M` is a retract of `P`, they stay exact after tensoring with `M`. -/
+lemma rTensor_of_retract {d₀ : C₀ →ₗ[R] C₁} {d₁ : C₁ →ₗ[R] C₂} (i : M →ₗ[R] P)
+    (r : P →ₗ[R] M) (hri : r ∘ₗ i = LinearMap.id)
+    (h : Function.Exact (d₀.lTensor P) (d₁.lTensor P)) :
+    Function.Exact (d₀.lTensor M) (d₁.lTensor M) := by
+  have hr (x : M ⊗[R] C₁) : r.rTensor C₁ (i.rTensor C₁ x) = x := by
+    rw [← LinearMap.comp_apply, ← LinearMap.rTensor_comp, hri, LinearMap.rTensor_id,
+      LinearMap.id_apply]
+  have hr₂ (x : M ⊗[R] C₂) : r.rTensor C₂ (i.rTensor C₂ x) = x := by
+    rw [← LinearMap.comp_apply, ← LinearMap.rTensor_comp, hri, LinearMap.rTensor_id,
+      LinearMap.id_apply]
+  intro x
+  constructor
+  · intro hx
+    obtain ⟨z, hz⟩ := (h (i.rTensor C₁ x)).mp (by rw [lTensor_rTensor_comm, hx, map_zero])
+    refine ⟨r.rTensor C₀ z, ?_⟩
+    rw [lTensor_rTensor_comm, hz, hr]
+  · rintro ⟨z, rfl⟩
+    have h0 : d₁.lTensor P (d₀.lTensor P (i.rTensor C₀ z)) = 0 :=
+      (h _).mpr ⟨_, rfl⟩
+    rw [← hr₂ (d₁.lTensor M (d₀.lTensor M z)), ← lTensor_rTensor_comm i d₁,
+      ← lTensor_rTensor_comm i d₀, h0, map_zero]
+
+end Function.Exact
 
 namespace Algebra.TensorProduct
 

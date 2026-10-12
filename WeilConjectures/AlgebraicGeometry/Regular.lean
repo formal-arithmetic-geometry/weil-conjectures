@@ -195,6 +195,27 @@ theorem Scheme.smooth_fromNormalization_comp {k : Type u} [Field k] [PerfectFiel
     (X.topologicalKrullDim_normalization q ▸ hdim).le
   exact smooth_of_isRegular _
 
+/-- **Properties of the normalization.** Let `X` be an integral scheme of finite type over a
+field `k`, and `ν : X^ν ⟶ X` its normalization in the function field.
+
+* **(a)** `ν` is finite and surjective, and `dim X^ν = dim X`; if `X` is proper over `k`, so is
+  `X^ν`.
+* **(b)** `ν` is an isomorphism over every open of `X` whose local rings are integrally closed.
+* **(c)** If `dim X = 1` and `k` is perfect, then `X^ν` is smooth over `k`.
+(blueprint: `lem-sc-normalization-properties`) -/
+theorem Scheme.normalization_properties {k : Type u} [Field k] {X : Scheme.{u}} [IsIntegral X]
+    (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] :
+    (IsFinite X.fromNormalization ∧ Surjective X.fromNormalization ∧
+      topologicalKrullDim X.normalization = topologicalKrullDim X ∧
+      (IsProper q → IsProper (X.fromNormalization ≫ q))) ∧
+    (∀ U : X.Opens, (∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) →
+      IsIso (X.fromNormalization ∣_ U)) ∧
+    (PerfectField k → topologicalKrullDim X = 1 → Smooth (X.fromNormalization ≫ q)) := by
+  have := X.isFinite_fromNormalization_of_locallyOfFiniteType q
+  exact ⟨⟨this, inferInstance, X.topologicalKrullDim_normalization q, fun _ ↦ inferInstance⟩,
+    fun U hU ↦ X.isIso_fromNormalization_restrict U hU,
+    fun _ hdim ↦ Scheme.smooth_fromNormalization_comp q hdim⟩
+
 /-- The local rings of a regular locally noetherian scheme of dimension at most one are
 integrally closed: each of them is a field or a discrete valuation ring. -/
 theorem isIntegrallyClosed_stalk_of_isRegular {X : Scheme.{u}} [IsRegular X]

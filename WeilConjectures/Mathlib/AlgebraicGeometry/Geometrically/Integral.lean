@@ -5,11 +5,15 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
-# Composites of morphisms with geometrically integral fibres
+# Geometrically integral morphisms
+
+An irreducible space is connected, so a geometrically irreducible morphism, and in particular a
+geometrically integral one, is geometrically connected.
 
 A flat morphism with geometrically reduced (resp. integral) fibres followed by a morphism locally
 of finite type with geometrically reduced (resp. integral) fibres has geometrically reduced
@@ -18,6 +22,7 @@ type over a field is geometrically integral.
 
 ## Main statements
 
+- `AlgebraicGeometry.GeometricallyIntegral.geometricallyConnected`
 - `AlgebraicGeometry.GeometricallyReduced.comp_of_flat`
 - `AlgebraicGeometry.GeometricallyIntegral.comp_of_flat`
 -/
@@ -29,6 +34,27 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
+
+section GeometricallyConnected
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- A geometrically irreducible morphism is geometrically connected: every geometric fibre is
+irreducible, hence connected. -/
+lemma GeometricallyIrreducible.geometricallyConnected [GeometricallyIrreducible f] :
+    GeometricallyConnected f :=
+  ⟨fun _ _ y _ fst snd h ↦
+    haveI := GeometricallyIrreducible.geometrically_irreducibleSpace (f := f) y fst snd h
+    inferInstance⟩
+
+/-- A geometrically integral morphism is geometrically connected. -/
+lemma GeometricallyIntegral.geometricallyConnected [GeometricallyIntegral f] :
+    GeometricallyConnected f :=
+  GeometricallyIrreducible.geometricallyConnected f
+
+end GeometricallyConnected
+
+section Comp
 
 variable {X Y Z : Scheme.{u}}
 
@@ -54,5 +80,7 @@ theorem GeometricallyIntegral.comp_of_flat (f : X ⟶ Y) (g : Y ⟶ Z) [Geometri
   have := GeometricallyReduced.comp_of_flat f g
   have := GeometricallyIrreducible.comp f g
   exact .of_geometricallyReduced_of_geometricallyIrreducible _
+
+end Comp
 
 end AlgebraicGeometry
