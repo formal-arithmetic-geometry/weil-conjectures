@@ -22,36 +22,42 @@
  ],
  "proof": [
   {
-   "text": "Restrict to each affine open of S and base-change the fpqc family. The preimage of the restricted subset in every covering member remains open by continuity. Openness is local on the base, so it suffices to work over Spec R.",
+   "text": "Reduce to the affine open cover of S using isOpenCover_opensRange.isOpen_iff_inter. Package the given family as a Scheme.Cover fpqcPrecoverage and pull it back along each affine-cover map. The pullback equation and continuity show that all inverse images of the restricted subset are open. Fpqc base-change stability supplies the pulled-back covering hypothesis.",
    "uses": [
     "def-weil-pbc-fpqc-covering"
    ],
    "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-fpqc-affine-standard-refinement] to the restricted family to choose finitely many affine opens V_j of its members whose coordinate-ring product is faithfully flat over R. The spectrum map for each factor identifies with V_j mapping to Spec R, so the subset has open inverse image along each factor map.",
+   "text": "For S = Spec R, the qc component of the covering gives QuasiCompactCover of its underlying flat cover, via presieve₀_mem_qcPrecoverage_iff. Apply Mathlib QuasiCompactCover.exists_hom (Cover/QuasiCompact.lean) to obtain a finite affine flat cover F and a morphism e : F.cover → E.forgetQc. This realizes the finite affine refinement required by Definition 022B, without passing to coordinate-ring products.",
    "uses": [
-    "lem-weil-pbc-fpqc-affine-standard-refinement"
+    "def-weil-pbc-fpqc-covering"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-standard-fpqc-quotient-topology] with these finite coordinate rings and their induced R-algebra structures. Faithful flatness of the product gives the required faithfully flat module structure, so the subset is open over Spec R. The affine opens cover S, so the original subset is open.",
+   "text": "Form p = Sigma.desc F.cover.f. Finite index types are small in the scheme universe (Countable.toSmall), so the coproduct exists even when the original index universe is larger. Flatness follows componentwise, and F.cover.iUnion_range gives Surjective.sigmaDesc_of_union_range_eq_univ. The source is a finite coproduct of affine schemes, hence affine, and the target is affine, so p is quasi-compact. On each summand, e.w₀ identifies the structure map with e.h₀ j followed by the original g (e.s₀ j); continuity and hV give open preimages there. The open cover sigmaOpenCover then gives IsOpen (p ⁻¹' V).",
    "uses": [
-    "lem-weil-pbc-standard-fpqc-quotient-topology"
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Flat.isQuotientMap_of_surjective p and its isOpen_preimage equivalence to deduce openness on Spec R. The first local reduction yields openness on S. All finite-coproduct and cover arguments allow an empty family, so the empty-base case is included.",
+   "uses": [
+    "lem-weil-pbc-flat-qc-surjective-quotient-map"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-fpqc-covering",
-  "lem-weil-pbc-fpqc-affine-standard-refinement",
-  "lem-weil-pbc-standard-fpqc-quotient-topology"
+  "lem-weil-pbc-flat-qc-surjective-quotient-map"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Lemma Tag 03N0 proof after the set construction"
+  "place": "Tag 03N0 openness argument, using the finite affine refinement of Topologies Tag 022B and the coproduct quotient-map argument of Morphisms Tag 02JY; implemented directly with Mathlib by U1 on 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -116,10 +122,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T053953-L-2645729",
-  "kind": "interface",
+  "landing": "20261012T063522-L-3160615",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
