@@ -36,7 +36,8 @@ homeomorphisms: if `f : X ⟶ Y` is a universal homeomorphism and `cd_tor(X) ≤
 `cd_tor(Y) ≤ c`, étale cohomology being invariant under universal homeomorphisms
 (`AlgebraicGeometry.Etale.cohomologyMap_bijective`). -/
 lemma HasTorsionCohomologicalDimensionLE.of_isUniversalHomeomorphism {X Y : Scheme.{u}}
-    (f : X ⟶ Y) [IsUniversalHomeomorphism f] {c : ℕ} (h : X.HasTorsionCohomologicalDimensionLE c) :
+    (f : X ⟶ Y) [IsUniversalHomeomorphism f] {c : ℕ}
+    (h : X.HasTorsionCohomologicalDimensionLE c) :
     Y.HasTorsionCohomologicalDimensionLE c := fun F hF q hq ↦
   have := h _ (Etale.isTorsion_upperStar f hF) q hq
   (Etale.cohomologyMap_bijective f F q).injective.subsingleton
