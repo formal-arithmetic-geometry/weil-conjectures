@@ -7,7 +7,8 @@ module
 
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Sheaf.RingTheory.SingularIdeal
-import Sheaf.RingTheory.FiniteProjectivePrimeLocalFree
+import Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescentAux
+
 
 /-!
 # Descent of smoothness at a prime along a field extension
@@ -66,6 +67,13 @@ theorem isSmoothAtPrime_of_fieldExtension
     (qK : PrimeSpectrum (K ⊗[k] S)) (hsmooth : IsSmoothAtPrime K qK) :
     IsSmoothAtPrime k
       (PrimeSpectrum.comap (TensorProduct.includeRight : S →ₐ[k] K ⊗[k] S).toRingHom qK) := by
-  sorry
+  have hfp : FinitePresentation k S := FinitePresentation.of_finiteType.mp inferInstance
+  let q := PrimeSpectrum.comap
+    (TensorProduct.includeRight : S →ₐ[k] K ⊗[k] S).toRingHom qK
+  have hformal : Algebra.IsSmoothAt k q.asIdeal :=
+    formallySmoothAtPrime_of_fieldExtension qK hsmooth
+  obtain ⟨g, hg, hsm⟩ :=
+    @Algebra.IsSmoothAt.exists_notMem_smooth k S _ _ _ hfp q.asIdeal inferInstance hformal
+  exact ⟨g, hg, hsm⟩
 
 end Algebra

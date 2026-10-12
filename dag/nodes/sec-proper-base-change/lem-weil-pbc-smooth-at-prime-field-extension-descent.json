@@ -34,103 +34,24 @@
  ],
  "proof": [
   {
-   "text": "(Finite presentation and the local flat map.) A field is Noetherian (its only ideals are $0$ and the whole field), so the finite type $k$-algebra $S$ is finitely presented [lem-weil-pbc-finite-type-noetherian-finite-presentation]. The tensor symmetry $S\\otimes_kK\\cong K\\otimes_kS$, $s\\otimes\\lambda\\mapsto\\lambda\\otimes s$, carries $s\\mapsto s\\otimes1$ to $j:s\\mapsto1\\otimes s$. Thus [lem-weil-pbc-field-extension-base-change-faithfully-flat] with $D=S$ makes $j:S\\to S_K$ faithfully flat; by [lem-weil-pbc-flat-local-ring-maps] the induced $j_{\\mathfrak q_K}:S_{\\mathfrak q}\\to(S_K)_{\\mathfrak q_K}$ is a flat local map, and by [lem-weil-pbc-flat-local-hom-faithfully-flat] it is faithfully flat. The same field-flatness fact with $D=k$ makes $k\\to K$ flat. Base change of a finite presentation gives a finite presentation of $S_K$ over $K$ [lem-weil-pbc-presentation-base-change], using the same tensor symmetry.",
+   "text": "The auxiliary formal-smoothness descent theorem gives Algebra.IsSmoothAt k at the contracted prime. Mathlib's Algebra.IsSmoothAt.exists_notMem_smooth criterion converts this local formal smoothness into an element outside the prime whose principal localization is smooth, exactly the definition of IsSmoothAtPrime.",
    "uses": [
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-flat-local-ring-maps",
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-presentation-base-change"
+    "lem-weil-pbc-formally-smooth-at-prime-field-extension-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 02UQ (lemma-smooth-field-change-local), reduction to Lemma Tag 00TG (lemma-flat-base-change-locus-smooth), hypotheses of 00TG; Lemmas 00FP, 00HT and 00HR"
-   }
-  },
-  {
-   "text": "(Smoothness upstairs gives local cotangent conditions.) Choose $h\\in S_K\\setminus\\mathfrak q_K$ with $(S_K)_h$ smooth over $K$ by [def-weil-pbc-singular-ideal]. Its naive cotangent homology is zero and its Kähler differentials form a finite projective module by [def-weil-pbc-smooth-ring-map]. Localize this smooth algebra further at the prime corresponding to $\\mathfrak q_K$: [lem-weil-pbc-h1-cotangent-localization] identifies $H_1(L_{S_K/K})_{\\mathfrak q_K}$ with the localization of $H_1(L_{(S_K)_h/K})=0$, and [lem-weil-pbc-kahler-differentials-localization] identifies $(\\Omega_{S_K/K})_{\\mathfrak q_K}$ with the localization of $\\Omega_{(S_K)_h/K}$. The latter is finite free over the local ring $(S_K)_{\\mathfrak q_K}$ by [lem-weil-pbc-finite-projective-prime-local-free] (localizing its free neighbourhood further at $\\mathfrak q_K$).",
-   "uses": [
-    "def-weil-pbc-singular-ideal",
-    "def-weil-pbc-smooth-ring-map",
-    "lem-weil-pbc-h1-cotangent-localization",
-    "lem-weil-pbc-kahler-differentials-localization",
-    "lem-weil-pbc-finite-projective-prime-local-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TG (lemma-flat-base-change-locus-smooth), lines 37731-37739: the vanishing of H_1 and projectivity of differentials upstairs; Lemma Tag 07BU (lemma-smooth-at-point), implication (1) to (2)"
-   }
-  },
-  {
-   "text": "(Compare the two cotangent modules.) Put $B=S_K$, $p=\\mathfrak q$, $Q=\\mathfrak q_K$, $U=S\\setminus p$ and $T=B\\setminus Q$, so $j(U)\\subseteq T$ by $p=j^{-1}(Q)$. Since $k\\to K$ is flat (step 1), [lem-weil-pbc-h1-cotangent-flat-base-change] gives $B\\otimes_SH_1(L_{S/k})\\cong H_1(L_{B/K})$, and [lem-weil-pbc-kahler-differentials-base-change] gives $B\\otimes_S\\Omega_{S/k}\\cong\\Omega_{B/K}$. For either $S$-module $M=H_1(L_{S/k})$ or $M=\\Omega_{S/k}$, first localize $B\\otimes_SM$ at $Q$: [lem-weil-pbc-localization-tensor-over-base] with $R=S$, $A=B$, its $A$-module equal to $B$, its $R$-module equal to $M$, and its multiplicative set equal to $T$ gives $(B\\otimes_SM)_Q\\cong B_Q\\otimes_SM$, $(b\\otimes m)/t\\mapsto(b/t)\\otimes m$. Equivalently this is $B_Q\\otimes_B(B\\otimes_SM)\\cong B_Q\\otimes_SM$ by localization of a module and tensor associativity. Next [lem-weil-pbc-localization-tensor-product] with base ring $S$ and set $U$ applies to $B_Q$ and $M$: $j(U)$ consists of units in $B_Q$, so $B_Q\\to B_Q$ is its own $U$-localization, while $M\\to M_p$ is the other $U$-localization. That node says $B_Q\\otimes_SM\\to B_Q\\otimes_{S_p}M_p$ is a $U$-localization; its source is already $U$-local, so it is an isomorphism, explicitly $b\\otimes m\\mapsto b\\otimes(m/1)$ with inverse $b\\otimes(m/s)\\mapsto b/j(s)\\otimes m$. Thus $(B\\otimes_SM)_Q\\cong B_Q\\otimes_{S_p}M_p$ for each of the two named modules. Localizing the two displayed base-change isomorphisms therefore gives $B_Q\\otimes_{S_p}H_1(L_{S/k})_p\\cong H_1(L_{B/K})_Q=0$ and $B_Q\\otimes_{S_p}(\\Omega_{S/k})_p\\cong(\\Omega_{B/K})_Q$, which is finite free, hence finite projective, by step 2.",
-   "uses": [
-    "lem-weil-pbc-h1-cotangent-flat-base-change",
-    "lem-weil-pbc-kahler-differentials-base-change",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-localization-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TG (lemma-flat-base-change-locus-smooth), first and second paragraphs: Lemma 00S4 (lemma-change-base-NL) and localization of its H_1 and Omega comparisons"
-   }
-  },
-  {
-   "text": "(Descend the two conditions.) Since $S_{\\mathfrak q}\\to(S_K)_{\\mathfrak q_K}$ is faithfully flat (step 1), the zero tensor product in step 3 forces $H_1(L_{S/k})_{\\mathfrak q}=0$: apply exactness reflection in [def-weil-pbc-faithfully-flat-ring-map] to $0\\to H_1(L_{S/k})_{\\mathfrak q}\\to0$. The $S_{\\mathfrak q}$-module $(\\Omega_{S/k})_{\\mathfrak q}$ is finite: choose finitely many algebra generators of $S$ [def-weil-pbc-finite-type-algebra], present it as a quotient of $P=k[x_1,\\dots,x_n]$, and use the surjection $S\\otimes_P\\Omega_{P/k}\\twoheadrightarrow\\Omega_{S/k}$ from [lem-weil-pbc-kahler-differentials-first-exact-sequence] (the quotient has $\\Omega_{S/P}=0$); [lem-weil-pbc-polynomial-ring-kahler-basis] makes the source free of rank $n$. By [lem-weil-pbc-finite-projective-descends-flat-local], this finite module is projective over $S_{\\mathfrak q}$ because its tensor extension is finite projective by step 3; over the local ring $S_{\\mathfrak q}$ it is finite free, as the same node states.",
-   "uses": [
-    "def-weil-pbc-faithfully-flat-ring-map",
-    "def-weil-pbc-finite-type-algebra",
-    "lem-weil-pbc-kahler-differentials-first-exact-sequence",
-    "lem-weil-pbc-polynomial-ring-kahler-basis",
-    "lem-weil-pbc-finite-projective-descends-flat-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TG (lemma-flat-base-change-locus-smooth), lines 37734-37743: faithful-flat descent of H_1 vanishing and Lemma Tag 00O1 for finite projectivity of Omega; finite generation follows from Lemmas 00RS and 00RX"
-   }
-  },
-  {
-   "text": "(Conclude at the contracted prime.) The map $k\\to S$ is finitely presented (step 1), $H_1(L_{S/k})_{\\mathfrak q}=0$ and $(\\Omega_{S/k})_{\\mathfrak q}$ is finite free (step 4). Therefore [lem-weil-pbc-smooth-at-prime-naive-cotangent-criterion] gives $g\\in S\\setminus\\mathfrak q$ with $S_g$ smooth over $k$, exactly the conclusion of [def-weil-pbc-singular-ideal].",
-   "uses": [
-    "lem-weil-pbc-smooth-at-prime-naive-cotangent-criterion",
-    "def-weil-pbc-singular-ideal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TG (lemma-flat-base-change-locus-smooth), last sentence, applying Lemma Tag 07BU (lemma-smooth-at-point); specialization is Lemma Tag 02UQ"
+    "document": "Mathlib/RingTheory/Smooth/Locus.lean",
+    "place": "Algebra.IsSmoothAt.exists_notMem_smooth, after the formal-smoothness descent step"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-flat-local-ring-maps",
-  "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-presentation-base-change",
-  "def-weil-pbc-singular-ideal",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-h1-cotangent-localization",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "lem-weil-pbc-finite-projective-prime-local-free",
-  "lem-weil-pbc-h1-cotangent-flat-base-change",
-  "lem-weil-pbc-kahler-differentials-base-change",
-  "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-localization-tensor-product",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "def-weil-pbc-finite-type-algebra",
-  "lem-weil-pbc-kahler-differentials-first-exact-sequence",
-  "lem-weil-pbc-polynomial-ring-kahler-basis",
-  "lem-weil-pbc-finite-projective-descends-flat-local",
-  "lem-weil-pbc-smooth-at-prime-naive-cotangent-criterion"
+  "lem-weil-pbc-formally-smooth-at-prime-field-extension-descent"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 02UQ (lemma-smooth-field-change-local), via proof of Lemma Tag 00TG (lemma-flat-base-change-locus-smooth), descent direction"
+  "by": "worker",
+  "document": "Mathlib/RingTheory/Smooth/Locus.lean",
+  "place": "Algebra.IsSmoothAt.exists_notMem_smooth, after the formal-smoothness descent step"
  },
  "mathlib_searches": [
   {
@@ -221,5 +142,15 @@
   "reviewer": "R-sfd",
   "group": "F1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T202231-L-701806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
