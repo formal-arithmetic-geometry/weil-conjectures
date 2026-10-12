@@ -1892,6 +1892,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.LocalVanishing
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.ShiftedHomPresheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.StageCohomology
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.StageTransition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionShift
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
