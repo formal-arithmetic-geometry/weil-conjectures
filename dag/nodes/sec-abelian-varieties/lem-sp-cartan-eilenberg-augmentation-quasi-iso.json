@@ -15,51 +15,63 @@
  ],
  "proof": [
   {
-   "text": "Choose b below which I vanishes. Since each a^s is a quasi-isomorphism from K^s in degree zero, K^s is also zero below b. Extend resolution degree by zero and augment each resolution column with K^s in degree -1. Each augmented column is acyclic by the column quasi-isomorphism hypothesis. The augmentation commutes with the complex-degree differential because a is a bicomplex map.",
+   "text": "Choose b from hbelow. For s<b, homology of I.X s is zero. The quasi-isomorphism a.f s identifies its degree-zero homology with that of K^s concentrated in degree zero. HomologicalComplex.singleObjHomologySelfIso identifies the latter with K^s, proving hKbelow.",
    "uses": [
-    "def-sp-cartan-eilenberg-presentation",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exchange the indices and totalize the augmented bicomplex. In degree n its object is Tot(I)^n plus K^{n+1}. The vertical differential on the K summand is exactly aug by the specified component equation, while the complex-degree differential on this summand has sign -1. These identities give an isomorphism from the augmented total to the actual mapping cone of aug. All its diagonals are finite: resolution degree is at least -1 and complex degree at least b.",
-   "uses": [
-    "def-sp-double-complex-total",
     "def-sp-cartan-eilenberg-presentation"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0133",
+    "place": "Homology, Tag 0133, lemma-double-complex-gives-resolution, canonical augmentation and finite-diagonal filtration; augmented-cone form of the argument, with Tag 012W"
+   }
   },
   {
-   "text": "Filter the augmented total by complex degree. Its graded complexes are shifts of the augmented columns, so their homology and the first spectral-sequence page vanish. In any fixed cochain degree choose a page beyond the finitely many filtration bounds in degrees n-1, n and n+1. The cycle and boundary subquotients then stabilize to the graded pieces of total cohomology. Each is zero. Induction on the finite exhaustive separated cohomology filtration gives zero total cohomology. This is the finite-diagonal argument of Stacks 0133 applied to the augmented rows, which pins the result to aug rather than an abstract cohomology identification.",
+   "text": "Apply cartanEilenberg_cone_filtration to the supplied aug and haug, with the common lower bound b. It supplies the actual image-sum subcomplex filtration, the explicit bounds b and n+2 in degree n, and the column-cone graded-cohomology comparisons.",
    "uses": [
-    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
-    "def-sp-filtered-complex-subquotients",
-    "def-sp-filtration"
+    "lem-sp-cartan-eilenberg-cone-filtration"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0133",
+    "place": "Homology, Tag 0133, lemma-double-complex-gives-resolution, canonical augmentation and finite-diagonal filtration; augmented-cone form of the argument, with Tag 012W"
+   }
   },
   {
-   "text": "Thus the mapping cone of aug is acyclic. Apply CochainComplex.mappingCone.quasiIso_iff_acyclic to conclude that aug is a quasi-isomorphism.",
+   "text": "Each extended column augmentation remains a quasi-isomorphism by HomologicalComplex.instQuasiIsoExtendMap. The acyclic-cone criterion therefore makes every column cone acyclic. Transport its zero homology through the graded comparison to prove that every graded complex of the cone filtration is acyclic.",
    "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "lem-sp-cartan-eilenberg-cone-filtration",
     "lem-pur-quasi-iso-cone-acyclic"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0133",
+    "place": "Homology, Tag 0133, lemma-double-complex-gives-resolution, canonical augmentation and finite-diagonal filtration; augmented-cone form of the argument, with Tag 012W"
+   }
+  },
+  {
+   "text": "Apply degreewiseFiltered_acyclic to the cone filtration, using the degreewise bounds and graded acyclicity. Thus the actual mapping cone of aug is acyclic. Apply CochainComplex.mappingCone.quasiIso_iff_acyclic to conclude QuasiIso aug.",
+   "uses": [
+    "lem-sp-degreewise-filtered-acyclic",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0133",
+    "place": "Homology, Tag 0133, lemma-double-complex-gives-resolution, canonical augmentation and finite-diagonal filtration; augmented-cone form of the argument, with Tag 012W"
+   }
   }
  ],
  "proof_deps": [
   "def-sp-cartan-eilenberg-presentation",
-  "def-sp-double-complex-total",
-  "def-sp-filtered-complex-subquotients",
-  "def-sp-filtration",
-  "def-sp-injective-resolutions",
   "lem-pur-quasi-iso-cone-acyclic",
-  "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+  "lem-sp-cartan-eilenberg-cone-filtration",
+  "lem-sp-degreewise-filtered-acyclic"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0133",
-  "place": "Lemma 12.25.4 (lemma-double-complex-gives-resolution), together with Tag 015J, proof remark (3)"
+  "place": "Augmented-cone reduction of lemma-double-complex-gives-resolution; Tag 012W degreewise finite vanishing, compiled by A2"
  },
  "mathlib_searches": [
   {
@@ -141,9 +153,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T095931-L-327283",
+  "landing": "20261012T144050-L-2087906",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

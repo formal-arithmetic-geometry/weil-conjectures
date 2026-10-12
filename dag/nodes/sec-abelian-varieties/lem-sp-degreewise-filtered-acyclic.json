@@ -1,0 +1,160 @@
+{
+ "id": "lem-sp-degreewise-filtered-acyclic",
+ "kind": "statement",
+ "title": "Degreewise finite filtration with acyclic graded complexes is acyclic",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K^\\bullet$ an integer-indexed cochain complex, and $F$ a decreasing filtration of $K^\\bullet$ by subcomplexes [def-sp-filtration]. Write $F^pK^n=\\operatorname{im}((F^pK^\\bullet\\hookrightarrow K^\\bullet)^n)$ as in [def-sp-filtered-complex-subquotients]. Assume that for every $n\\in\\mathbf Z$ there are integers $\\ell_n,h_n$ with $F^{\\ell_n}K^n=K^n$ and $F^{h_n}K^n=0$. If every associated graded complex $\\operatorname{gr}^p_FK$ is acyclic, meaning its cohomology in every degree is zero, then $K$ is acyclic. No global finite bound on the subcomplex filtration is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012W",
+  "place": "Homology, Tag 012W, lemma-biregular-ss-converges, parts (2)--(4), with the zero Serre subcategory"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Use the associated filtered-complex spectral sequence E and its differential-compatible page-zero isomorphisms. At (p,q), form the short-complex isomorphism from page zero in bidegrees (p,q-1),(p,q),(p,q+1) to the graded complex in degrees p+(q-1),p+q,p+(q+1). The differential equations give the two commutative squares. Acyclicity of the graded complex makes page-zero homology vanish, and E.iso identifies it with page one.",
+   "uses": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012W",
+    "place": "Homology, Tag 012W, lemma-biregular-ss-converges, parts (2)--(4), with the zero Serre subcategory"
+   }
+  },
+  {
+   "text": "Induct on the positive page number. A zero page object has zero homology at that bidegree, and the successor-page isomorphism gives a zero object on the next page. Therefore every positive page term is zero.",
+   "uses": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012W",
+    "place": "Homology, Tag 012W, lemma-biregular-ss-converges, parts (2)--(4), with the zero Serre subcategory"
+   }
+  },
+  {
+   "text": "Apply degreewiseFiltered_stable_quotient with Y(n)=H^n(K) and identity comparison. It supplies a finite image filtration H(n) and, for each p,n, a tail page t>=1 whose cycle/boundary quotient is its p-th graded piece. The quotient description of E_t at (p,n-p) identifies this quotient with a zero page term. Proof irrelevance identifies the two B<=Z proofs. Hence every graded piece of H(n) is zero.",
+   "uses": [
+    "lem-sp-degreewise-filtered-stable-quotient",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012W",
+    "place": "Homology, Tag 012W, lemma-biregular-ss-converges, parts (2)--(4), with the zero Serre subcategory"
+   }
+  },
+  {
+   "text": "A zero graded piece is a zero cokernel of the inclusion of successive filtration steps. This inclusion is epic (Preadditive.epi_of_isZero_cokernel) and monic, hence invertible. Subobject.eq_of_comm makes consecutive steps equal. Induct on a natural-number difference to make any two integer-indexed steps equal. The finite top and bottom bounds give top=bottom, which implies the identity of H^n(K) is zero. Thus H^n(K)=0 for every n.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/012W",
+    "place": "Homology, Tag 012W, lemma-biregular-ss-converges, parts (2)--(4), with the zero Serre subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtration",
+  "lem-sp-degreewise-filtered-stable-quotient",
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012W",
+  "place": "Homology, Tag 012W, lemma-biregular-ss-converges, parts (2)--(4), with the zero Serre subcategory"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A degreewise finite filtered cochain complex with acyclic associated graded complexes is acyclic",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise finite filtered cochain complex with acyclic associated graded complexes is acyclic",
+   "results": "HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic; HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt; CochainComplex.IsKInjective; HomotopyCategory.mem_subcategoryAcyclic_iff; CochainComplex.isKInjective_of_injective; CochainComplex.isGE_iff; CochainComplex.IsKProjective; CochainComplex.isLE_iff",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(acyclic.*total|total.*acyclic|filtration.*acyclic|acyclic.*filtration)",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergAugmentationQuasiIso",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Thm-sp-if-e1 proof paragraph 2: finite-diagonal augmentation comparison, the acyclicity of a total whose augmented-column graded complexes are acyclic (Stacks 0133; 015J remark (3)).",
+   "via": [
+    "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+    "lem-sp-cartan-eilenberg-total-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DegreewiseFilteredAcyclic",
+  "file": "lean/Sheaf/CategoryTheory/DegreewiseFilteredAcyclic.lean",
+  "declaration": "CategoryTheory.degreewiseFiltered_acyclic",
+  "statement": "theorem degreewiseFiltered_acyclic\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K)\n    (hfinite : ∀ n : ℤ, ∃ lo hi : ℤ,\n      F.complexStep lo n = ⊤ ∧ F.complexStep hi n = ⊥)\n    (hgraded : ∀ p : ℤ, (F.gradedPiece p).Acyclic) : K.Acyclic",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T144050-L-2087906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T144050-L-2087906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

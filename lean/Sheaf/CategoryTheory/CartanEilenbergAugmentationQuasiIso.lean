@@ -6,11 +6,11 @@ Authors: SHEAF group W3
 module
 
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.CategoryTheory.CartanEilenbergConeFiltration
+import Sheaf.CategoryTheory.DegreewiseFilteredAcyclic
+import Mathlib.Algebra.Homology.SingleHomology
+import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.CategoryTheory.DoubleComplexTotal
 
 /-! # Quasi-isomorphism of the augmented total
 
@@ -71,6 +71,27 @@ theorem cartanEilenberg_augmentation_quasiIso
         ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫
       (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal
         (ComplexShape.up ℤ) 0 n n (zero_add n)) :
-    QuasiIso aug := by sorry
+    QuasiIso aug := by
+  obtain ⟨b, hb⟩ := hbelow
+  have hKbelow (s : ℤ) (hs : s < b) : IsZero (K.X s) := by
+    have : QuasiIso (a.f s) := hrows s
+    have hi : IsZero ((I.X s).homology 0) :=
+      (HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) 0).map_isZero (hb s hs)
+    have hk := (asIso (HomologicalComplex.homologyMap (a.f s) 0)).isZero_iff.mpr hi
+    exact (HomologicalComplex.singleObjHomologySelfIso
+      (ComplexShape.up ℕ) 0 (K.X s)).isZero_iff.mp hk
+  obtain ⟨F, _, hbounds, hgraded⟩ := cartanEilenberg_cone_filtration
+    K I a b hb hKbelow aug haug
+  apply (CochainComplex.mappingCone.quasiIso_iff_acyclic aug).mpr
+  apply degreewiseFiltered_acyclic (CochainComplex.mappingCone aug) F
+    (fun n ↦ ⟨b, n + 2, hbounds n⟩)
+  intro p n
+  obtain ⟨e⟩ := hgraded p n
+  have : QuasiIso (a.f p) := hrows p
+  have hcone := (CochainComplex.mappingCone.quasiIso_iff_acyclic
+    (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).mp
+      (inferInstance : QuasiIso _)
+  exact ((F.gradedPiece p).exactAt_iff_isZero_homology n).mpr
+    (e.isZero_iff.mpr (hcone (n - p)).isZero_homology)
 
 end CategoryTheory.Functor
