@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-etale-restricted-cohomology-neighbourhood-colimit",
+ "kind": "statement",
+ "title": "Continuity for the supplied cocone of restricted cohomology on neighbourhoods",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $x\\in X$, $F$ an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves], and $q\\in\\mathbb N$. Let $D$ be a diagram of abelian groups on the opposite of the inclusion-ordered open neighbourhoods of x. Suppose isomorphisms $e_U:D(U)\\simeq H^q(U_{et},j_U^{-1}F)$ identify its arrows with cohomological pullback along inclusions followed by inverse-image composition [def-weil-pbc-cohomology-pullback], [lem-weil-pbc-inverse-image-composition]. Let $g_U:\\operatorname{Spec}\\mathcal O_{X,x}\\to U$ factor the canonical morphism through $j_U$. Suppose $B$ is a cocone for D and $b:B.pt\\simeq H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{et},g_x^{-1}F)$, with each leg followed by b equal to e_U followed by pullback along g_U and the inverse-image composition comparison. Then B is a colimit cocone [def-weil-pbc-category-colimit]. Neither object cohomology on the original site nor eventual vanishing of classes is part of this statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09AX",
+  "place": "Proof, the stalk colimit identification, citing Tag 03Q6 and Theorem 09YQ; affine neighbourhood limit as in Tag 0GWT. Original item steps 4-6; the Lean proof specializes the existing cofiltered fixed-base continuity theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Let A be the full subcategory of open neighbourhoods of x consisting of affine opens. The affine basis clause of fromSpecStalk_limit_affine_neighbourhoods gives an object of A mapping to every neighbourhood. The fully faithful cofilteredness and initiality criteria therefore show A is cofiltered and its inclusion is initial. On opposites the inclusion is final.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open inclusions define the diagram E:A to schemes and its natural transformation to X. The qcqs and affine-transition clauses of fromSpecStalk_limit_affine_neighbourhoods give its required instances. Cancel each open immersion to compare the supplied g with Mathlib fromSpecStalkOfMem. Transport the universal factorization clause of the same theorem to the cone with projections g; IsLimit.ofExistsUnique gives its limit property.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the supplied D and B with the opposite inclusion. Unfold cohomologyTriangleMap: hD and hB are exactly the transition and leg equations of nonempty_isColimit_cofiltered_fixed_base_cohomology. Apply it to E, its structure maps into X, the limit cone, and F. Final.isColimitWhiskerEquiv transfers this colimit property back to B.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09AX",
+  "place": "Proof, the stalk colimit identification, citing Tag 03Q6 and Theorem 09YQ; affine neighbourhood limit as in Tag 0GWT. Original item steps 4-6; the Lean proof specializes the existing cofiltered fixed-base continuity theorem.; explicit Lean specialization by B2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of a scheme local ring is the colimit of cohomology of restricted sheaves over open neighborhoods",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of inverse image sheaves on open neighborhoods has colimit the cohomology of the spectrum of a stalk",
+   "date": "2026-10-12",
+   "results": "Found: ModuleCat.Tilde.toOpen_germ, ModuleCat.Tilde.toOpen_germ_assoc, ModuleCat.Tilde.toOpen_germ_apply, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, AlgebraicGeometry.StructureSheaf.toOpen_germ, TopCat.stalkToFiber, TopCat.Presheaf.map_germ_eq_Γgerm_assoc. No exact comparison/continuity theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*[Oo]pen|[Oo]pen.*cohomology",
+   "date": "2026-10-12",
+   "results": "Found: Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean, Mathlib/Algebra/Lie/Extension.lean, Mathlib/Algebra/Lie/Extension.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean. No exact comparison/continuity theorem.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyLocalRingColimit",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Proof, step 7: passage from neighbourhood cohomology to local-ring cohomology via Tag 09AX; original item proof steps 4-6, continuity on affine neighbourhoods and cofinality",
+   "via": [
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRestrictedCohomologyNeighbourhoodColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRestrictedCohomologyNeighbourhoodColimit.lean",
+  "declaration": "AlgebraicGeometry.etaleRestrictedCohomology_neighbourhood_colimit",
+  "statement": "theorem etaleRestrictedCohomology_neighbourhood_colimit\n    {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (x : X) (q : ℕ)\n    (D : (OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x)ᵒᵖ ⥤ AddCommGrpCat.{u + 1})\n    (eD : ∀ U : OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x,\n      D.obj (op U) ≅ AddCommGrpCat.of\n        (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} (Scheme.Opens.ι U.1)).obj F) q))\n    (hD : ∀ (U V : OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x) (f : V ⟶ U),\n      D.map f.op = (eD U).hom ≫ AddCommGrpCat.ofHom\n        (Etale.cohomologyMap (X.homOfLE f.le)\n          ((Etale.upperStar AddCommGrpCat.{u + 1} (Scheme.Opens.ι U.1)).obj F) q) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map\n          ((Etale.upperStarComp AddCommGrpCat.{u + 1} (X.homOfLE f.le)\n            (Scheme.Opens.ι U.1) (Scheme.Opens.ι V.1)\n            (X.homOfLE_ι f.le).symm).inv.app F) q) ≫ (eD V).inv)\n    (g : ∀ U : OpenNhds (X := X.toLocallyRingedSpace.toTopCat) x,\n      Spec (X.presheaf.stalk x) ⟶ (Scheme.Opens.toScheme U.1))\n    (hg : ∀ U, X.fromSpecStalk x = g U ≫ (Scheme.Opens.ι U.1))\n    (B : Cocone D)\n    (b : B.pt ≅ AddCommGrpCat.of\n      (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1}\n        (X.fromSpecStalk x)).obj F) q))\n    (hB : ∀ U, B.ι.app (op U) ≫ b.hom =\n      (eD U).hom ≫ AddCommGrpCat.ofHom\n        (Etale.cohomologyMap (g U)\n          ((Etale.upperStar AddCommGrpCat.{u + 1} (Scheme.Opens.ι U.1)).obj F) q) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map\n          ((Etale.upperStarComp AddCommGrpCat.{u + 1} (g U) (Scheme.Opens.ι U.1)\n            (X.fromSpecStalk x) (hg U)).inv.app F) q)) :\n    Nonempty (IsColimit B)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-04b89",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T085212-L-2646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-04b89",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T085212-L-2646",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs, new obligations and node records against the original item, cited sources and unit route; all three modules compile cleanly and axiom checks pass for a partial delivery."
+ }
+}

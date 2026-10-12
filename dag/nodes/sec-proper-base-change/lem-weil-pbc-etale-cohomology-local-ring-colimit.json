@@ -39,138 +39,53 @@
  ],
  "proof": [
   {
-   "text": "*The groups over open subsets and their identification with $H^q(U_{\\Et},j_U^{-1}\\mathcal F)$.* For an open $U\\subseteq X$ the inclusion $j_U:U\\hookrightarrow X$ is etale [lem-weil-pbc-open-immersion-etale], so it is an object of $X_{\\Et}$ [def-weil-pbc-etale-site], and for opens $W\\subseteq U$ the inclusion is a morphism of $X_{\\Et}$. $\\textit{Ab}(X_{\\Et})$ has enough injectives ([def-weil-pbc-sites-and-cohomology] (1)); fix once and for all an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ in $\\textit{Ab}(X_{\\Et})$, so that $H^q(U,\\mathcal F)=H^q(\\mathcal I^\\bullet(U))$ and the restriction $r_{UW}:H^q(U,\\mathcal F)\\to H^q(W,\\mathcal F)$ is $H^q$ of the restriction maps $\\mathcal I^\\bullet(U)\\to\\mathcal I^\\bullet(W)$ ([def-weil-pbc-sites-and-cohomology] (2)). By [lem-weil-pbc-cohomology-pullback-functorial] (5) applied to the etale $u=j_U$, $j_U^{-1}\\mathcal F\\to j_U^{-1}\\mathcal I^\\bullet$ is a resolution of $j_U^{-1}\\mathcal F$ by a bounded below complex of injective abelian sheaves on $U_{\\Et}$, hence a K-injective resolution [prop-weil-pbc-kinjective-resolutions-exist], and $H^q(U_{\\Et},j_U^{-1}\\mathcal F)=\\mathcal H^q(\\Gamma(U,j_U^{-1}\\mathcal I^\\bullet))$ [def-weil-pbc-etale-cohomology]. Let $\\rho^U_{\\mathcal G}:j_U^{-1}\\mathcal G\\xrightarrow{\\sim}\\mathcal G|_U$ be the isomorphism of [lem-weil-pbc-etale-inverse-image-restriction] (1), natural in $\\mathcal G\\in\\textit{Ab}(X_{\\Et})$; its sections over $U$ are isomorphisms $\\rho^U_{\\mathcal I^p}(U):\\Gamma(U,j_U^{-1}\\mathcal I^p)\\xrightarrow{\\sim}\\mathcal I^p|_U(U)=\\mathcal I^p(U)$ which, by naturality in $\\mathcal G$ applied to the differentials $\\mathcal I^p\\to\\mathcal I^{p+1}$, form an isomorphism of complexes $\\Gamma(U,j_U^{-1}\\mathcal I^\\bullet)\\xrightarrow{\\sim}\\mathcal I^\\bullet(U)$. Define $\\iota_U:H^q(U,\\mathcal F)\\xrightarrow{\\sim}H^q(U_{\\Et},j_U^{-1}\\mathcal F)$ as $\\mathcal H^q$ of its inverse. This is the canonical identification of the statement: for a second injective resolution $\\mathcal F\\to\\mathcal I'^\\bullet$ and a morphism of complexes $\\alpha:\\mathcal I^\\bullet\\to\\mathcal I'^\\bullet$ over $\\mathrm{id}_{\\mathcal F}$, $j_U^{-1}\\alpha$ is a morphism of resolutions of $j_U^{-1}\\mathcal F$ over the identity, and naturality of $\\rho^U$ gives $\\rho^U_{\\mathcal I'}(U)\\circ\\Gamma(U,j_U^{-1}\\alpha)=\\alpha(U)\\circ\\rho^U_{\\mathcal I}(U)$; so the two $\\iota_U$ correspond under the identifications $\\mathcal H^q(\\alpha(U))$ and $\\mathcal H^q(\\Gamma(U,j_U^{-1}\\alpha))$ of the groups computed from different resolutions ([def-weil-pbc-sites-and-cohomology] (2), [prop-weil-pbc-cohomology-resolution-independent], and the description of $H^q(\\varphi)$ in [lem-weil-pbc-cohomology-pullback-functorial]).",
+   "text": "Apply etaleOpenObjectCohomology_natural to obtain the natural comparison e of object cohomology with cohomology of restricted sheaves. This is the sole newly split obligation.",
    "uses": [
-    "lem-weil-pbc-open-immersion-etale",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "prop-weil-pbc-cohomology-resolution-independent"
+    "lem-weil-pbc-etale-open-object-cohomology-natural"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03F3 (lemma-cohomology-of-open, line 608), part (2) and its proof (restriction of an injective resolution to U is an injective resolution), for the etale site with $X_{\\etale}/U=U_{\\etale}$ (etale-cohomology.tex Section Tag 03S2, j^{-1} is restriction)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Restrictions are pullbacks along the inclusions.* Let $W\\subseteq U\\subseteq X$ be opens, $j_{WU}:W\\hookrightarrow U$ the inclusion, so $j_W=j_U\\circ j_{WU}$, and let $c$ be the composition isomorphisms of [lem-weil-pbc-inverse-image-composition]. Claim: $\\iota_W\\circ r_{UW}=H^q(c_{j_U,j_{WU},\\mathcal F})\\circ j_{WU}^*\\circ\\iota_U$, with $j_{WU}^*$ the pullback [def-weil-pbc-cohomology-pullback]. (a) *A section identity.* For $\\mathcal G\\in\\textit{Ab}(X_{\\Et})$ we show $\\rho^W_{\\mathcal G}(W)=\\rho^U_{\\mathcal G}(W)\\circ\\rho^{WU}_{j_U^{-1}\\mathcal G}(W)\\circ c_{j_U,j_{WU},\\mathcal G}(W)^{-1}$ as maps $\\Gamma(W,j_W^{-1}\\mathcal G)\\to\\mathcal G(W)$, where $\\rho^{WU}$ is the isomorphism of [lem-weil-pbc-etale-inverse-image-restriction] (1) for $j_{WU}$. Apply [lem-weil-pbc-open-restriction-pullback-unit] to $g=j_U:U\\to X$ and the open $W\\subseteq X$: then $W'=j_U^{-1}(W)=W$, $j_{W'}=j_{WU}$, $g_W=\\mathrm{id}_W$, $h=j_W$, and for $a\\in\\Gamma(W,j_W^{-1}\\mathcal G)$ it gives $\\rho^{WU}_{j_U^{-1}\\mathcal G}(W)\\bigl(c_{j_U,j_{WU}}(W)^{-1}c_{j_W,\\mathrm{id}_W}(W)\\,\\eta_{\\mathrm{id}_W}(W)(a)\\bigr)=\\eta_{j_U,\\mathcal G}(W)\\bigl(\\rho^W_{\\mathcal G}(W)(a)\\bigr)$. Here $c_{j_W,\\mathrm{id}_W}=e_Wj_W^{-1}$ [lem-weil-pbc-derived-inverse-image-composition] (1) and $e_{W,\\mathcal H}\\circ d_{W,\\mathrm{id}^{-1}\\mathcal H}\\circ\\eta_{\\mathrm{id}_W,\\mathcal H}=\\mathrm{id}_{\\mathcal H}$ [lem-weil-pbc-inverse-image-composition] (3), $d_W(W)$ being the identification $W\\times_WW=W$; so $c_{j_W,\\mathrm{id}_W}(W)\\eta_{\\mathrm{id}_W}(W)(a)=a$. On the right, [lem-weil-pbc-etale-inverse-image-restriction] (2) for $j_U$ and the object $W$ of $X_{\\Et}$ says $\\rho^U_{\\mathcal G}(W\\times_XU)\\circ\\eta_{j_U,\\mathcal G}(W)$ is the restriction of $\\mathcal G$ along $W\\times_XU\\to W$, which is the identity of $\\mathcal G(W)$ under $W\\times_XU=W$ ($W\\subseteq U$, [lem-weil-pbc-open-fibre-product]); so $\\eta_{j_U,\\mathcal G}(W)=\\rho^U_{\\mathcal G}(W)^{-1}$. Substituting gives (a). (b) *The claim.* By step 1, $j_U^{-1}\\mathcal I^\\bullet$ is an injective resolution of $j_U^{-1}\\mathcal F$, so [lem-weil-pbc-cohomology-pullback-functorial] (5) for the etale $u=j_{WU}$ computes $j_{WU}^*$ as $\\mathcal H^q$ of the restriction $\\Gamma(U,j_U^{-1}\\mathcal I^\\bullet)\\to(j_U^{-1}\\mathcal I^\\bullet)(W)$ followed by $\\rho^{WU}_{j_U^{-1}\\mathcal I^\\bullet}(W)^{-1}$ into $\\Gamma(W,j_{WU}^{-1}j_U^{-1}\\mathcal I^\\bullet)$; and $H^q(c_{j_U,j_{WU},\\mathcal F})$ is $\\mathcal H^q$ of $\\Gamma(W,c_{j_U,j_{WU},\\mathcal I^\\bullet})$, since $c_{\\mathcal I^\\bullet}$ is a morphism between the injective resolutions $j_{WU}^{-1}j_U^{-1}\\mathcal I^\\bullet$ and $j_W^{-1}\\mathcal I^\\bullet$ (step 1) lying over $c_{\\mathcal F}$ by naturality of $c$ (description of $H^q(\\varphi)$ in [lem-weil-pbc-cohomology-pullback-functorial]). For a cocycle $s\\in\\mathcal I^p(U)$, $\\rho^U_{\\mathcal I^p}$ being a morphism of sheaves on $U_{\\Et}$ commutes with restriction along $W\\to U$, so the right-hand side of the claim sends the class of $s$ to the class of $c(W)\\rho^{WU}(W)^{-1}\\rho^U_{\\mathcal I^p}(W)^{-1}(s|_W)$, which is $\\rho^W_{\\mathcal I^p}(W)^{-1}(s|_W)$ by (a); this is $\\iota_W(r_{UW}[s])$.",
+   "text": "Mathlib Scheme.Opens.fromSpecStalkOfMem and fromSpecStalkOfMem_ι give the maps g and their factorization. Cancel the open immersion into X to prove uniqueness and compatibility with inclusion of neighbourhoods. These are existing Mathlib constructions, not an application of the separate canonical-morphism-properties theorem; only cancellation uses the open-immersion monomorphism node.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-open-restriction-pullback-unit",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-open-immersion-monomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX (lemma-local-rings-strictly-henselian, line 14206), proof, line 14214-14218 (the presheaf $U\\mapsto H^p_{\\etale}(U,\\mathcal F)$ with its restriction maps, compared with the pullbacks of Lemma Tag 03Q6); the compatibility is not written in the source and is supplied here (agent)"
-   }
+   "elementary": false
   },
   {
-   "text": "*The maps $\\theta_U$ and their compatibility with restriction.* For an open $U\\ni x$ the image of $g_x$ lies in $U$ [lem-weil-pbc-spec-local-ring-canonical-morphism] (1), so $g_x=j_U\\circ g_{x,U}$ for a unique $g_{x,U}$ ([lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods] (3); uniqueness also from [lem-weil-pbc-open-immersion-monomorphism]); for $W\\subseteq U$ uniqueness gives $g_{x,U}=j_{WU}\\circ g_{x,W}$. Put $\\theta_U=H^q(c_{j_U,g_{x,U},\\mathcal F})\\circ g_{x,U}^*\\circ\\iota_U:H^q(U,\\mathcal F)\\to H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F)$, the map of the statement ([def-weil-pbc-cohomology-pullback], [lem-weil-pbc-inverse-image-composition]). For $W\\subseteq U$, by step 2, naturality ([lem-weil-pbc-cohomology-pullback-functorial] (3)) and composition ([lem-weil-pbc-cohomology-pullback-functorial] (4): $g_{x,U}^*=H^q(c_{j_{WU},g_{x,W}})\\circ g_{x,W}^*\\circ j_{WU}^*$),\\n$$\\theta_W\\circ r_{UW}=H^q(c_{j_W,g_{x,W}})\\circ H^q(g_{x,W}^{-1}c_{j_U,j_{WU}})\\circ g_{x,W}^*\\circ j_{WU}^*\\circ\\iota_U,$$\\nand the associativity of $c$ [lem-weil-pbc-derived-inverse-image-composition] (1) for $u=j_U$, $v=j_{WU}$, $w=g_{x,W}$ (so $u\\circ v=j_W$, $v\\circ w=g_{x,U}$) reads $c_{j_U,g_{x,U}}\\circ c_{j_{WU},g_{x,W},j_U^{-1}\\mathcal F}=c_{j_W,g_{x,W}}\\circ g_{x,W}^{-1}(c_{j_U,j_{WU}})$; with the functoriality $H^q(\\varphi\\circ\\psi)=H^q(\\varphi)\\circ H^q(\\psi)$ this gives $\\theta_W\\circ r_{UW}=H^q(c_{j_U,g_{x,U}})\\circ g_{x,U}^*\\circ\\iota_U=\\theta_U$. The open neighbourhoods of $x$ ordered by reverse inclusion form a directed set ($U\\cap U'\\ni x$), so the $\\theta_U$ induce a map $\\bar\\theta:\\varinjlim_{U\\ni x}H^q(U,\\mathcal F)\\to H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F)$ [def-weil-pbc-category-colimit].",
+   "text": "Conjugate the diagram maps by d followed by e. Its naturality equation cancels the intermediate inverse comparisons and gives the specified restricted-cohomology transitions. The proved fixed-base triangle laws show that the prescribed maps to local-scheme cohomology commute with these transitions. Construct the cocone B with that cohomology group as its point and b equal to the identity.",
    "uses": [
-    "lem-weil-pbc-spec-local-ring-canonical-morphism",
-    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-    "lem-weil-pbc-open-immersion-monomorphism",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-etale-open-object-cohomology-natural",
+    "lem-weil-pbc-etale-cohomology-triangle-laws"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX (lemma-local-rings-strictly-henselian, line 14206), proof, line 14214-14218 (the maps to $H^p_{\\etale}(\\Spec(\\mathcal O_{X,x}),\\mathcal G_x)$, $\\mathcal G_x$ the pullback of $\\mathcal F$); compatibility written out by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*The limit theorem on the affine neighbourhoods.* Let $N_x$ be the directed set of affine open neighbourhoods of $x$ of [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods]: by its clauses (1)-(3), $(W,j_{W'W})_{W\\in N_x}$ is a directed inverse system of quasi-compact quasi-separated schemes with affine transition morphisms, whose limit is $\\operatorname{Spec}\\mathcal O_{X,x}$ with projections $g_{x,W}$. Put $\\mathcal F_W=j_W^{-1}\\mathcal F$ on $W_{\\Et}$ and $\\varphi_{W'W}=c_{j_W,j_{W'W},\\mathcal F}:j_{W'W}^{-1}j_W^{-1}\\mathcal F\\xrightarrow{\\sim}j_{W'}^{-1}\\mathcal F$ [lem-weil-pbc-inverse-image-composition]. The cocycle condition $\\varphi_{W''W}=\\varphi_{W''W'}\\circ j_{W''W'}^{-1}\\varphi_{W'W}$ for $W''\\subseteq W'\\subseteq W$ (with $j_{W''W}^{-1}$ identified with $j_{W''W'}^{-1}j_{W'W}^{-1}$ through $c_{j_{W'W},j_{W''W'}}$) is the associativity of $c$ [lem-weil-pbc-derived-inverse-image-composition] (1) for $u=j_W$, $v=j_{W'W}$, $w=j_{W''W'}$. So [lem-weil-pbc-etale-cohomology-limit-of-schemes] applies: with $\\mathcal F_\\infty=\\varinjlim_Wg_{x,W}^{-1}\\mathcal F_W$ (transition maps $\\psi_{W'W}=g_{x,W'}^{-1}\\varphi_{W'W}\\circ c_{j_{W'W},g_{x,W'}}^{-1}$, coprojections $\\kappa_W$), the maps $H^q(\\kappa_W)\\circ g_{x,W}^*:H^q(W_{\\Et},j_W^{-1}\\mathcal F)\\to H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},\\mathcal F_\\infty)$ induce an isomorphism from the colimit over $N_x$ of the groups $H^q(W_{\\Et},j_W^{-1}\\mathcal F)$, with transition maps $H^q(\\varphi_{W'W})\\circ j_{W'W}^*$, for every $q\\ge0$.",
+   "text": "Apply etaleRestrictedCohomology_neighbourhood_colimit to the supplied diagram and the constructed cocone. This specialization is proved in the delivery from the affine-neighbourhood scheme limit, existing fixed-base continuity, and cofinality.",
    "uses": [
-    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+    "lem-weil-pbc-etale-restricted-cohomology-neighbourhood-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03Q6 (lemma-directed-colimit-cohomology, line 7464), 'a special case of Theorem Tag 09YQ' (theorem-colimit, line 7400), as cited in the proof of 09AX (line 14214-14218); applied to the affine open neighbourhoods of $x$ as in literature/stacks-project/limits.tex, proof of Lemma Tag 0GWT, line 1561-1564"
-   }
+   "elementary": false
   },
   {
-   "text": "*The colimit sheaf is $g_x^{-1}\\mathcal F$.* Put $\\alpha_W=c_{j_W,g_{x,W},\\mathcal F}:g_{x,W}^{-1}j_W^{-1}\\mathcal F\\xrightarrow{\\sim}g_x^{-1}\\mathcal F$ [lem-weil-pbc-inverse-image-composition]. For $W'\\subseteq W$, the associativity of $c$ [lem-weil-pbc-derived-inverse-image-composition] (1) for $u=j_W$, $v=j_{W'W}$, $w=g_{x,W'}$ (so $u\\circ v=j_{W'}$, $v\\circ w=g_{x,W}$) gives $c_{j_{W'},g_{x,W'}}\\circ g_{x,W'}^{-1}(c_{j_W,j_{W'W}})=c_{j_W,g_{x,W}}\\circ c_{j_{W'W},g_{x,W'}}$, i.e. $\\alpha_{W'}\\circ\\psi_{W'W}=\\alpha_W$. Hence the isomorphisms $\\alpha_W$ carry the system $(g_{x,W}^{-1}\\mathcal F_W,\\psi)$ to the constant system with value $g_x^{-1}\\mathcal F$ and identity transition maps, whose colimit is $g_x^{-1}\\mathcal F$ with identity coprojections ($N_x$ is nonempty and directed, hence connected) [lem-weil-pbc-colimit-constant-connected-diagram]. So the $\\alpha_W$ form a colimit cocone of $(g_{x,W}^{-1}\\mathcal F_W,\\psi)$, and by uniqueness of colimits [def-weil-pbc-category-colimit] there is an isomorphism $\\beta:\\mathcal F_\\infty\\xrightarrow{\\sim}g_x^{-1}\\mathcal F$ with $\\beta\\circ\\kappa_W=\\alpha_W$ for all $W$. Composing the isomorphism of step 4 with $H^q(\\beta)$: the maps $H^q(\\alpha_W)\\circ g_{x,W}^*=H^q(c_{j_W,g_{x,W},\\mathcal F})\\circ g_{x,W}^*$ induce an isomorphism $\\varinjlim_{W\\in N_x}H^q(W_{\\Et},j_W^{-1}\\mathcal F)\\xrightarrow{\\sim}H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F)$.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03Q6 (line 7464): $\\mathcal G=(Y\\to X)^{-1}\\mathcal F$ and $\\mathcal G_i=(Y_i\\to X)^{-1}\\mathcal F$, i.e. the case of Theorem Tag 09YQ where the system of sheaves is pulled back from one sheaf; the identification of the colimit sheaf is written out by the agent as in the ring case of lem-weil-pbc-etale-cohomology-limit-of-schemes"
-   }
-  },
-  {
-   "text": "*Back to $H^q(W,\\mathcal F)$, and cofinality.* By step 2 (for $W'\\subseteq W$ in $N_x$), $\\iota_{W'}\\circ r_{WW'}=H^q(\\varphi_{W'W})\\circ j_{W'W}^*\\circ\\iota_W$, so the isomorphisms $\\iota_W$ of step 1 form an isomorphism of directed systems over $N_x$ from $(H^q(W,\\mathcal F),r)$ to the system of step 4, and $H^q(c_{j_W,g_{x,W}})\\circ g_{x,W}^*\\circ\\iota_W=\\theta_W$ by definition (step 3). Hence, by step 5, the $\\theta_W$ ($W\\in N_x$) induce an isomorphism $\\varinjlim_{W\\in N_x}H^q(W,\\mathcal F)\\xrightarrow{\\sim}H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F)$. Regard the open neighbourhoods of $x$ with the inclusions as morphisms as a cofiltered category $\\mathcal I$ and $N_x$ as a full subcategory; every open $U\\ni x$ contains some $W\\in N_x$ [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods] (1). By [lem-weil-pbc-colimit-initial-full-subcategory] (1), applied to the functor $U\\mapsto H^q(U,\\mathcal F)$ on $\\mathcal I^{\\mathrm{op}}$, the canonical map $\\varinjlim_{W\\in N_x}H^q(W,\\mathcal F)\\to\\varinjlim_{U\\ni x}H^q(U,\\mathcal F)$ induced by the coprojections is an isomorphism. Its composite with $\\bar\\theta$ of step 3 is the map induced by the $\\theta_W$, $W\\in N_x$ (both agree on each coprojection, [def-weil-pbc-category-colimit]), which is an isomorphism; hence $\\bar\\theta$ is an isomorphism for every $q\\ge0$.",
-   "uses": [
-    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX (lemma-local-rings-strictly-henselian, line 14206), proof, line 14214-14218: 'the stalk at x is colim H^p_etale(U, F)' over all open neighbourhoods U, computed on the cofinal affine ones"
-   }
-  },
-  {
-   "text": "*The last assertion.* Let $\\xi\\in H^q(U,\\mathcal F)$ with $\\theta_U(\\xi)=0$ and let $\\lambda_U$ be the coprojection into $\\varinjlim_{U'\\ni x}H^q(U',\\mathcal F)$. Then $\\bar\\theta(\\lambda_U(\\xi))=\\theta_U(\\xi)=0$, and $\\bar\\theta$ is injective (step 6), so $\\lambda_U(\\xi)=0$. The colimit is a filtered colimit of abelian groups ($\\mathbb Z$-modules) over a directed set, so by [lem-weil-pbc-filtered-colimit-modules-elementwise] (2) there is an open $W$ with $x\\in W\\subseteq U$ and $r_{UW}(\\xi)=0$ in $H^q(W,\\mathcal F)$.",
+   "text": "Injectivity of b makes a coprojection of a class with zero image equal to the coprojection of zero. Concrete.isColimit_exists_of_rep_eq gives a common smaller neighbourhood where the class and zero have equal restrictions. Additive maps preserve zero, giving the required eventual vanishing.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 09AX (lemma-local-rings-strictly-henselian, line 14206), proof, line 14214-14218 (used there to see that the higher direct images vanish stalkwise)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-open-immersion-etale",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "prop-weil-pbc-cohomology-resolution-independent",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-open-restriction-pullback-unit",
-  "lem-weil-pbc-derived-inverse-image-composition",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-spec-local-ring-canonical-morphism",
-  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-etale-open-object-cohomology-natural",
   "lem-weil-pbc-open-immersion-monomorphism",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-etale-cohomology-triangle-laws",
+  "lem-weil-pbc-etale-restricted-cohomology-neighbourhood-colimit",
   "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 09AX (lemma-local-rings-strictly-henselian, line 14206), proof, line 14214-14218: 'the stalk at x is colim H^p_etale(U, F) = H^p_etale(Spec(O_{X,x}), G_x) ... see Lemma 03Q6' (Lemma Tag 03Q6, lemma-directed-colimit-cohomology, line 7464, a special case of Theorem Tag 09YQ, theorem-colimit, line 7400), with Spec(O_{X,x}) = lim of the affine open neighbourhoods from literature/stacks-project/limits.tex, proof of Lemma Tag 0GWT (line 1561-1564), and H^q(U,F) = H^q(U_etale, F|_U) from literature/stacks-project/sites-cohomology.tex Lemma Tag 03F3; the compatibilities of steps 2, 3 and 5 are not in the source and were written by the agent"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09AX",
+  "place": "Original seven-step route implemented using one natural-comparison obligation, the existing fixed-base continuity theorem specialized to affine neighbourhoods, proved triangle laws, and Mathlib filtered-colimit equality. Source Tags 03F3, 03Q6 and 09YQ; Lean proof and compatibility calculations by B2, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -274,5 +189,15 @@
   "group": "J1",
   "result": "fix",
   "note": "X, F in AddCommGrpCat.{u+1}, x, q:ℕ; P tied to object cohomology (inline uliftYoneda Ext, def-weil-pbc-sites-and-cohomology record kept as Sheaf.H'); D over (OpenNhds x)ᵒᵖ tied by d/hD; e natural w.r.t. restriction = cohomologyMap+upperStarComp; unique factorization g of fromSpecStalk; cocone legs tied, IsColimit, vanishing clause; reverted the delivery's change of existing node(s) def-weil-pbc-sites-and-cohomology (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-04b89",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T085212-L-2646",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs, new obligations and node records against the original item, cited sources and unit route; all three modules compile cleanly and axiom checks pass for a partial delivery."
  }
 }

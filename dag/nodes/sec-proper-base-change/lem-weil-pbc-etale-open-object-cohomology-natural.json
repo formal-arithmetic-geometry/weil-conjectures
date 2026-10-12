@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-etale-open-object-cohomology-natural",
+ "kind": "statement",
+ "title": "Natural comparison of etale object cohomology with cohomology on open subschemes",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $F$ an abelian sheaf on its small etale site [def-weil-pbc-abelian-etale-sheaves], and $q\\in\\mathbb N$. Let $P$ be the actual degree-$q$ object-cohomology presheaf of $F$ [def-weil-pbc-sites-and-cohomology], whose values are Ext from the sheafified free abelian representables and whose maps are induced by representable morphisms. For every open $U\\subseteq X$ with inclusion $j_U$ [def-weil-open-immersion], there exist isomorphisms $e_U:P(U)\\simeq H^q(U_{et},j_U^{-1}F)$, simultaneously natural for all inclusions $i:V\\hookrightarrow U$: $e_V\\circ P(i)=H^q(c_{i,j_U}^{-1})\\circ i^*\\circ e_U$, with the pullback and composition comparison of [def-weil-pbc-cohomology-pullback] and [lem-weil-pbc-inverse-image-composition]. No point of X, colimit diagram, or local-scheme continuity is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma cohomology-of-open, proof (restriction of an injective resolution); Tag 09AX, proof (object cohomology over neighbourhoods). Naturality is the original item proof steps 1-2, with the unit calculation supplied by the agent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective resolution of the abelian etale sheaf F. Ext from the sheafified free abelian representable at U is cohomology of this resolution evaluated at U, by the free-sheaf and Yoneda adjunctions and Ext via an injective resolution. Restriction to U preserves injectives because it has exact extension by zero as left adjoint. The inverse-image/localization comparison therefore identifies this section complex with the restricted injective resolution on U. Taking cohomology gives the displayed isomorphism e_U. This construction is independent of the chosen injective resolution by the comparison theorem for Ext.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-weil-pbc-site-restriction-injectives",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For V contained in U, the unit identity for open restriction identifies the pullback of a section with its restriction. Apply it with g equal to the inclusion of U into X and W equal to V. The fibre product V times_X U is V; the identity unit cancels with its identity comparison. Thus the two successive restriction isomorphisms, followed by the inverse-image composition comparison, equal the direct restriction isomorphism for V. Apply this identity degreewise to the injective resolution and take cohomology. It gives precisely the naturality equation for e.",
+   "uses": [
+    "lem-weil-pbc-open-restriction-pullback-unit",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-site-restriction-injectives",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-open-immersion-etale",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-open-restriction-pullback-unit",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma cohomology-of-open, proof (restriction of an injective resolution); Tag 09AX, proof (object cohomology over neighbourhoods). Naturality is the original item proof steps 1-2, with the unit calculation supplied by the agent.; explicit Lean specialization by B2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Object cohomology of an abelian sheaf over an open etale object is naturally isomorphic to cohomology of its inverse image on the open subscheme",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the comparison of object cohomology on the small etale site with cohomology of the restricted sheaf on open subschemes",
+   "date": "2026-10-12",
+   "results": "Found: CategoryTheory.Sheaf.ΓRes_naturality, AlgebraicGeometry.Scheme.Hom.naturality_assoc, CategoryTheory.Sheaf.ΓRes_map, AlgebraicGeometry.Scheme.Hom.map_appLE', CategoryTheory.Sheaf.ΓRes_map_assoc, AlgebraicGeometry.Scheme.Hom.naturality, AlgebraicGeometry.Scheme.Hom.appLE_map', AlgebraicGeometry.Scheme.Hom.map_appLE. No exact comparison/continuity theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|cohomology.*restriction",
+   "date": "2026-10-12",
+   "results": "Found: Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean. No exact comparison/continuity theorem.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyLocalRingColimit",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Proof, step 7: passage from neighbourhood cohomology to local-ring cohomology via Tag 09AX; original item proof steps 1-2, the natural object/open cohomology comparison",
+   "via": [
+    "lem-weil-pbc-etale-cohomology-local-ring-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenObjectCohomologyNatural",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenObjectCohomologyNatural.lean",
+  "declaration": "AlgebraicGeometry.etaleOpenObjectCohomology_natural",
+  "statement": "theorem etaleOpenObjectCohomology_natural\n    {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (q : ℕ)\n    (P : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1})\n    (hP : P = (Functor.flip ((uliftYoneda.{u + 1} ⋙\n      (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙\n      presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).op ⋙\n        Abelian.extFunctor q)).obj F)\n :\n    ∃ e : ∀ U : X.Opens, P.obj\n        (op (Scheme.Etale.mk U.ι)) ≅\n        AddCommGrpCat.of (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F) q),\n      (∀ (U V : X.Opens) (h : V ≤ U),\n        P.map\n            (MorphismProperty.Over.homMk (P := @Etale) (Q := ⊤) (X := X)\n              (A := Scheme.Etale.mk V.ι) (B := Scheme.Etale.mk U.ι) (X.homOfLE h)\n              (X.homOfLE_ι h) trivial).op ≫\n            (e V).hom =\n          (e U).hom ≫ AddCommGrpCat.ofHom\n            (Etale.cohomologyMap (X.homOfLE h)\n              ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F) q) ≫\n            AddCommGrpCat.ofHom (Sheaf.H.map\n              ((Etale.upperStarComp AddCommGrpCat.{u + 1} (X.homOfLE h) U.ι V.ι\n                (X.homOfLE_ι h).symm).inv.app F) q))",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-04b89",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T085212-L-2646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-04b89",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T085212-L-2646",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proofs, new obligations and node records against the original item, cited sources and unit route; all three modules compile cleanly and axiom checks pass for a partial delivery."
+ }
+}
