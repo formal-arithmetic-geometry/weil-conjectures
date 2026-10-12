@@ -71,7 +71,8 @@ be perfect over `Λ`, so this is not an instance of
 itself; it holds because at a finite coefficient ring the derived Poincaré pairing is perfect
 for every complex, the Tate twist being invertible
 (`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`). -/
-theorem isPerfectPairing_poincarePairing_reductionModIdeal (γ : TateOrientation Λ a d)
+theorem isPerfectPairing_poincarePairing_reductionModIdeal [HasInvertibleExponent Λ X]
+    (γ : TateOrientation Λ a d)
     (J : Ideal Λ) (K : DerivedCategoryModule Λ X) :
     IsPerfectPairing (γ.poincarePairing ((reductionModIdeal Λ X J).obj K)) :=
   γ.isPerfectPairing_poincarePairing_of_finite _

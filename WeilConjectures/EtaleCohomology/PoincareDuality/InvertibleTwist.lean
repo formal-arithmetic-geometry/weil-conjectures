@@ -205,7 +205,8 @@ finite coefficient ring `Λ`, the derived Poincaré pairing
 `β_K : Ra_! K ⊗ᴸ (Ra_*(K^∨(d)))[2d] ⟶ Λ_Y` of a Tate orientation `γ` is perfect for every
 `K ∈ D(X_ét, Λ)`, the Tate twist `Λ_X(d)` being invertible. For `K` dualizable this is
 `AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`. -/
-theorem isPerfectPairing_poincarePairing_of_finite (γ : TateOrientation Λ a d)
+theorem isPerfectPairing_poincarePairing_of_finite [HasInvertibleExponent Λ X]
+    (γ : TateOrientation Λ a d)
     (K : DerivedCategoryModule Λ X) :
     IsPerfectPairing (γ.poincarePairing K) :=
   Etale.isPerfectPairing_poincarePairing_of_isInvertible a Λ _
