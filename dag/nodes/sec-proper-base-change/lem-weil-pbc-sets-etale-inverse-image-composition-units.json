@@ -30,96 +30,60 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the unit on sections and clause (0)).* For $e:T\\to S$, let $b_e:S_{\\Et}\\to T_{\\Et}$ send $U$ to $U\\times_ST$. By [lem-weil-pbc-etale-inverse-image-algebraic-structures] (1), $e^{-1}$ is the sheafification of the presheaf pullback along $b_e$ and is left adjoint to $e_*=(-)\\circ b_e$ on sheaves of sets. The unit at $G$, evaluated on $U$, sends $s\\in G(U)$ first to the coprojection of $s$ at $(U,\\mathrm{id}_{U\\times_ST})$ in $(e_pG)(U\\times_ST)$ and then to its image under sheafification; this is $e^*s$. For $a:U'\\to U$, naturality of the unit as a morphism of sheaves gives $e^*(G(a)(s))=(e^{-1}G)(b_ea)(e^*s)$, which is the first equation of (0). Naturality of the unit in $G$ gives $e_*(e^{-1}\\psi)_U(e^*s)=e^*(\\psi_U(s))$, the second equation of (0). The equalities also follow directly from the index morphisms $(U',\\mathrm{id})\\to(U,b_ea)$ in the presheaf colimits and functoriality of sheafification.",
+   "text": "Apply naturality of the adjunction unit, first as a morphism of sheaves at a.op and then as a natural transformation at a sheaf morphism. Evaluate both equalities on a section. The adjunction is the existing sheafPullbackConstruction.sheafAdjunctionContinuous along the etale base-change functor; its left functor is definitionally Scheme.etaleSetPullback.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-    "def-weil-pbc-sheafification"
+    "lem-weil-pbc-etale-base-change-continuous"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00VE (lemma-adjoints-u, unit at the identity-indexed coprojection), Lemma Tag 00WX (lemma-adjoint-sheaves), and Lemma Tag 03CB (lemma-composition-morphisms-sites); the two naturality equations are written out here"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (direct images of a composite).* For an object $U\\to X$, the two squares defining $(U\\times_XY)\\times_YW$ are cartesian, so their outer rectangle is cartesian [lem-weil-pbc-cartesian-square-pasting]. The universal property of [def-pc-fibre-product] gives the canonical $W$-isomorphism $\\alpha_U:(U\\times_XY)\\times_YW\\xrightarrow{\\sim}U\\times_XW$, compatible with both projections. For $a:U'\\to U$, both composites from $(U'\\times_XY)\\times_YW$ to $U\\times_XW$ obtained using $\\alpha$ and base change of $a$ have the same two projections, so are equal. For a sheaf $H$ on $W_{\\Et}$, applying the contravariant functor $H$ to $\\alpha_U$ yields $d_{f,g,H}(U):((f\\circ g)_*H)(U)=H(U\\times_XW)\\xrightarrow{\\sim}H((U\\times_XY)\\times_YW)=(f_*g_*H)(U)$; projection compatibility gives compatibility with restrictions, and naturality of a sheaf morphism gives naturality in $H$. Thus $d_{f,g}:(f\\circ g)_*\\xrightarrow{\\sim}f_*g_*$ is an isomorphism of functors on sheaves of sets. For three arrows, the two ways of passing from a triple fibre product to $U\\times_XV$ have the same projections to $U$ and $V$, and hence agree by the same universal property; therefore the corresponding $d$'s obey the associativity equation after applying any sheaf of sets.",
+   "text": "Construct setPushComp with Functor.sheafPushforwardContinuousComp' and the inverse of MorphismProperty.Over.pullbackComp. Thus its inverse component evaluates to restriction along the inverse canonical fibre-product pasting isomorphism. These comparisons are the existing canonical fibre-product maps, not new choices.",
    "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
     "def-pc-fibre-product",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+    "lem-weil-pbc-etale-base-change-continuous"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Lemmas Tag 021I (lemma-morphism-big-small-etale) (2) and Tag 021J (lemma-composition-etale), proof; associativity of the canonical fibre-product comparison is written out here"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 (the composition isomorphism and its unit equation).* Apply [def-weil-pbc-composite-adjunction] to $f^{-1}\\dashv f_*$ and $g^{-1}\\dashv g_*$ of [lem-weil-pbc-etale-inverse-image-algebraic-structures] (1). It gives $L_1=g^{-1}f^{-1}\\dashv R_1=f_*g_*$ with unit at $F$ equal to $f_*(\\eta^g_{f^{-1}F})\\circ\\eta^f_F$. Put $L_2=(f\\circ g)^{-1}\\dashv R_2=(f\\circ g)_*$ and use $d_{f,g}:R_2\\xrightarrow{\\sim}R_1$ from Step 2. By [lem-weil-pbc-conjugate-iso-unit-equation] there is a natural isomorphism $c_{f,g}:L_1\\xrightarrow{\\sim}L_2$, uniquely characterized among natural transformations by $R_1(c_{f,g,F})\\circ f_*(\\eta^g_{f^{-1}F})\\circ\\eta^f_F=d_{f,g,L_2F}\\circ\\eta^{f\\circ g}_F$. At an etale object $U\\to X$, the two sides send $s\\in F(U)$, after identifying $(U\\times_XY)\\times_YW$ with $U\\times_XW$ by $\\alpha_U$, to $c_{f,g,F}(g^*(f^*s))$ and $(f\\circ g)^*s$, respectively, by the unit description in Step 1. This proves the equality in (1), including naturality in $F$ and invertibility of $c_{f,g,F}$.",
+   "text": "Compose the two sheaf-pullback adjunctions with Adjunction.comp. Apply the inverse of conjugateIsoEquiv to setPushComp.symm to construct setPullComp, from iterated to composite inverse image. Mathlib unit_conjugateEquiv_symm gives its unit equation. Evaluate the equation on a site object and a section, and unfold Adjunction.comp_unit_app and the pushforward comparison to obtain exactly the stated section formula.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed sheaf F, apply injectivity of the composite adjunction homEquiv to q and the comparison component. By Adjunction.homEquiv_unit their images are the composites of the iterated unit with the composite right adjoint applied to the two maps. Extensionality on site objects and sections identifies these images: the assumed section equation for q and the proven section equation for setPullComp have the same right hand side. Hence q equals the comparison. This does not require local generation or the sheaf axiom.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove setPullComp_conjugate by the inverse law for conjugateIsoEquiv. Conjugate the desired associativity equality of inverse comparison isomorphisms under the triple adjunction. The proved source-library conjugateIsoEquiv_trans, conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_isoWhiskerRight and conjugateIsoEquiv_associator transport it to Etale.lowerStarComp_assoc, which is stated for any coefficient category and applies to Type (u+1). Take inverse components at F. Finally, prove setPullComp_transport by substituting the equality of scheme arrows; this supplies exactly the eqToHom of Category.assoc in the target statement. All helpers are fully proved, and the arbitrary optional composite arrow allows both bracketings without changing any statement.",
+   "uses": [
     "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-direct-image-composition-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites), proof: the two inverse images are left adjoints of the composite direct image; Definition Tag 03CC (definition-composition-morphisms-sites), sentence after it; unit equation by Categories Lemma Tag 0B65"
-   }
-  },
-  {
-   "text": "*Step 4 (uniqueness for a fixed $F$).* Let $q:g^{-1}f^{-1}F\\to(f\\circ g)^{-1}F$ be any sheaf morphism satisfying the equation of (1) for all $U,s$. Every section of $g^{-1}f^{-1}F$ on an object $V'\\to W$ is locally the image under sheafification of a representative $(A,\\varphi,t)$ with $A\\to Y$ etale, $\\varphi:V'\\to A\\times_YW$, and $t\\in(f^{-1}F)(A)$: this is [lem-weil-pbc-site-sheafification-sections-local] applied to the defining presheaf colimit, whose elements have such representatives. Apply the same local-representation statement to $t$ for $f^{-1}F$: after pulling its covering of $A$ back along $V'\\to A$, each restriction of $t$ is represented by $s\\in F(U)$ and a morphism to $U\\times_XY$. Thus, after the resulting covering of $V'$, the original section is a restriction of $g^*(f^*s)$ along a morphism into $(U\\times_XY)\\times_YW$. Both $q$ and $c_{f,g,F}$ send this section to the same restriction of $(f\\circ g)^*s$ by (1); they commute with restrictions because they are sheaf morphisms. The sheaf condition makes their values equal on $V'$, for every section and every $V'$, hence $q=c_{f,g,F}$. This proves the objectwise uniqueness asserted in (1), which is stronger than uniqueness only among natural transformations.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-weil-pbc-etale-base-change-continuous",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00WK (lemma-sections-sheafification), via Theorem Tag 00WB (theorem-plus), applied twice to the presheaf pullback in Lemma Tag 00WX; the fixed-object uniqueness omitted by Tag 03CB is written out here"
-   }
-  },
-  {
-   "text": "*Step 5 (associativity).* Let $f:X_1\\to X_0$, $g:X_2\\to X_1$, $h:X_3\\to X_2$. Fix $F$ on $(X_0)_{\\Et}$, $U\\to X_0$ etale, and $s\\in F(U)$. By Step 4, applied twice, sections of $h^{-1}g^{-1}f^{-1}F$ are locally restrictions of $h^*g^*f^*s$ (with varying $U,s$), so it suffices to compare the two morphisms in (2) on these sections. For the first composite, naturality of the unit $h^*$ in the sheaf morphism $c_{f,g,F}$ from Step 1 gives $h^{-1}(c_{f,g,F})(h^*g^*f^*s)=h^*(c_{f,g,F}(g^*f^*s))=h^*((f\\circ g)^*s)$; Step 3 for $(f\\circ g,h)$ sends this to $((f\\circ g)\\circ h)^*s$. For the second, Step 3 for $(g,h)$ sends $h^*g^*(f^*s)$ to $(g\\circ h)^*(f^*s)$, and Step 3 for $(f,g\\circ h)$ sends that to $(f\\circ(g\\circ h))^*s$. The two final sections agree under the canonical identification of the triple fibre products: their maps to $U$ and $X_3$ are identical, so the universal property of [def-pc-fibre-product] identifies both with the pullback of $s$ along $f\\circ g\\circ h$ (the associativity of the $d$'s checked in Step 2). The two sheaf morphisms agree locally on every section and hence agree, proving (2). Empty covers and identity arrows cause no exception: the same unit equations and sheaf uniqueness apply.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "def-pc-fibre-product",
-    "def-weil-pbc-etale-sheaf-of-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites) and Definition Tag 03CC (definition-composition-morphisms-sites); associativity of the unit-compatible identifications is written out here, as Stacks treats the inverse-image composites as equalities"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-etale-base-change-continuous",
   "def-pc-fibre-product",
-  "lem-weil-pbc-etale-base-change-finite-limits",
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "lem-weil-pbc-etale-base-change-continuous"
+  "lem-weil-pbc-direct-image-composition-coherence"
  ],
  "tool_uses": [
   "lem-weil-pbc-site-sheafification-sections-local"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 03CB (lemma-composition-morphisms-sites) and Definition Tag 03CC; unit from Tag 00VE and Tag 00WX, local sheafification sections from Tags 00WB/00WK, small-etale direct images from Topologies Tags 021I/021J; the fixed-object uniqueness and associativity calculations omitted there are written out in Steps 4-5"
+  "place": "Tags 03CB/03CC, the uniqueness-of-left-adjoints argument, specialized to the existing set sheafPullbackConstruction adjunctions. Fixed-object uniqueness is the homEquiv injectivity argument of the existing conjugate-iso-unit-equation node. Associativity adapts the fully proved conjugation calculation in WeilConjectures/SixFunctors/UpperLowerStar/Defs.lean, using the coefficient-independent Etale.lowerStarComp_assoc in WeilConjectures/SixFunctors/Etale/UpperLowerStar/Coherence.lean. Written by R1, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -211,5 +175,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7eea3",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038986",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module and node match the baseline statement; proof, imports, metadata, report, and clean compilation/axiom checks satisfy the stage-3 brief."
  }
 }
