@@ -10,11 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Sheaf.AlgebraicGeometry.EtaleQcoherentULiftFiniteCechComparison
+import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
+import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
+import Sheaf.Paper.CechComparisonMapNaturality
+import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Coefficient universe comparison for quasi-coherent étale cohomology
 
@@ -60,6 +60,37 @@ theorem nonempty_etaleTensorSectionsSheaf_cohomology_ulift
     Nonempty (Sheaf.H
       ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
         (etaleTensorSectionsSheaf F)) q ≃+
-      Sheaf.H (etaleTensorSectionsSheaf F) q) := by sorry
+      Sheaf.H (etaleTensorSectionsSheaf F) q) := by
+  cases q with
+  | zero =>
+    exact ⟨(Sheaf.H.equiv₀ _ CategoryTheory.Limits.terminalIsTerminal).trans
+      (AddEquiv.ulift.trans
+        (Sheaf.H.equiv₀ _ CategoryTheory.Limits.terminalIsTerminal).symm)⟩
+  | succ n =>
+    classical
+    let V := X.affineCover.finiteSubcover
+    let U : V.I₀ → X.Opens := fun i ↦ (V.f i).opensRange
+    have hU : ∀ i, IsAffineOpen (U i) := fun i ↦ isAffineOpen_opensRange (V.f i)
+    have hcover : iSup U = ⊤ := V.iSup_opensRange
+    obtain ⟨eL⟩ := nonempty_etaleTensorSectionsSheaf_ulift_finiteCech_succ X U hU hcover F n
+    obtain ⟨c, hc⟩ := ((cechComparisonMapNaturality X U hcover).2 (n + 1)).1 F
+    have hI : ∀ (n : ℕ) (y : Fin (n + 1) → V.I₀), IsAffineOpen (⨅ l, U (y l)) := by
+      intro n y
+      exact IsAffineOpen.iInf (fun l ↦ hU (y l))
+    let := moduleCechComparison_isIso_of_affine X U hI hcover F (n + 1) c hc
+    let K := (cechComplexFunctor U).obj F.presheafModuleCat
+    let T := forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u} ⋙
+      AddCommGrpCat.uliftFunctor.{u + 1, u}
+    let eK := ((K.sc (n + 1)).mapHomologyIso T) ≪≫ T.mapIso (asIso c)
+    obtain ⟨_, _, eZ, _, _⟩ := etale_zariski_qcoh_comparison X
+    let : HasDerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) :=
+      HasDerivedCategory.standard _
+    let : HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) :=
+      HasExt.standard _
+    let eS :=
+      (Abelian.Ext.homAddEquiv.{u + 1, u}.trans
+        Abelian.Ext.homAddEquiv.{u + 1, u + 1}.symm).trans (eZ F (n + 1)).symm
+    exact ⟨eL.trans (eK.addCommGroupIsoToAddEquiv.trans
+      (AddEquiv.ulift.trans eS.symm))⟩
 
 end AlgebraicGeometry.Scheme.Modules

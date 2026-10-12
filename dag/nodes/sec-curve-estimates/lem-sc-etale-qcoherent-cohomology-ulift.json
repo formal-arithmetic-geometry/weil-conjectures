@@ -23,45 +23,43 @@
  },
  "proof": [
   {
-   "text": "Choose a finite affine open cover of the quasi-compact separated scheme X. Finite intersections are affine. Pullback preserves quasi-coherence, and the pullback-composition identifications identify the restriction of the associated sheaf with the sheaf of the restricted module. The same is true after coefficient lift, sectionwise.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-pc-module-pullback-identity-composition"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On each finite affine intersection, apply the small-coefficient affine acyclicity theorem and its lifted-coefficient version. The latter uses faithfully flat Amitsur exactness in the lifted section complex, without assuming that ULift preserves injectives.",
-   "uses": [
-    "lem-sc-etale-affine-qcoherent-succ",
-    "lem-sc-etale-affine-qcoherent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the Cech-to-derived spectral sequence to the open covering, in each coefficient universe. The positive-cohomology rows vanish by step 2, so the sole degree-zero row identifies sheaf cohomology with Cech cohomology in every degree. Identify H at the terminal object with this abutment.",
-   "uses": [
-    "lem-sc-cech-spectral"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The lifted Cech complex identifies with the coefficient lift of the small Cech complex. Indeed each degree has finitely many cover tuples; the finite-product comparison commutes with restriction maps and alternating sums. AddCommGrpCat.uliftFunctor preserves finite limits and colimits, so the short-complex mapHomologyIso identifies their homology groups. Unlift this additive isomorphism and compose with the two comparisons of step 3. At degree zero this is the sectionwise ULift equivalence. The empty cover and zero module give zero complexes, so these boundary cases are included.",
+   "text": "In degree zero use H.equiv₀ on both sides, identify the large terminal section group definitionally with ULift of the small one, and compose with AddEquiv.ulift and the inverse small H.equiv₀. This case needs no affine cover.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "For q=n+1, choose the finite subcover of the canonical affine open cover. Its opensRange family covers X, and IsAffineOpen.iInf proves each nonempty finite intersection affine by separatedness. Apply the positive-degree lifted finite-affine Cech comparison to this concrete cover.",
+   "uses": [
+    "lem-sc-etale-qcoherent-ulift-finite-cech-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the canonical module Cech comparison c supplied by cechComparisonMapNaturality. Its affine-intersection theorem makes c an isomorphism to RingedSpace.moduleCohomology. With K the module Cech complex and T forget-scalars followed by ULift, ShortComplex.mapHomologyIso yields H(TK) isomorphic to T(H(K)); follow it by T.mapIso(asIso c), then unlift.",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-cech-comparison-map-iso-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing etale-Zariski quasi-coherent comparison to identify module cohomology with the small etale cohomology. The comparison uses a standard large Ext model; identify it with the small Ext model through their homAddEquiv maps into one common derived category. Compose this with the lifted Cech and homology equivalences.",
+   "uses": [
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-sc-etale-affine-qcoherent-succ",
-  "lem-sc-etale-affine-qcoherent",
-  "lem-sc-cech-spectral"
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
+  "lem-sc-etale-zariski-qcoh-comparison"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/03P2",
-  "place": "Separated-case proof, applied to a finite affine open cover in each coefficient universe; coefficient lift preserves finite products and homology."
+  "place": "Separated affine-cover Cech argument, composed with the existing 03DW (2) and canonical module Cech comparisons. Degree zero is sectionwise; positive degrees use exactness of forget-scalars and ULift via ShortComplex.mapHomologyIso."
  },
  "mathlib_searches": [
   {
@@ -130,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T070537-L-3471264",
+  "landing": "20261012T085220-L-6311",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
