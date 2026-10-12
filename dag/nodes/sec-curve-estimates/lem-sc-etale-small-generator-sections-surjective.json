@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-etale-small-generator-sections-surjective",
+ "kind": "statement",
+ "title": "Small-model surjection onto etale generator sections",
+ "statement": "For every scheme X in universe u and every U in the opposite of its small etale site, there is a type α : Type u and a surjection α → ((etaleSmallGenerator X).obj.obj U).",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Sheafified free abelian representables and the affine-open covering argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sc-etale-small-generator"
+ ],
+ "proof": [
+  {
+   "text": "Compute sections on the u-small affine model as a u-small coproduct of u-small coefficient groups, transport along the dense-site equivalences, and use restriction to a u-small affine-open covering to obtain a surjection from a Type u onto sections. The empty covering is handled by the singleton domain.",
+   "uses": [
+    "def-sc-etale-small-generator",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-small-generator",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "T2 stage 3",
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Free abelian representable sheaves; universe-explicit affine-model construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "there exists a small type surjecting onto sections of an etale sheaf",
+   "results": "Service unavailable; no exact theorem obtained.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "small_of_surjective",
+   "results": "Generic theorem found; no theorem constructing the required surjection.",
+   "date": "2026-10-13",
+   "verdict": "no exact construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjection from a small type onto sections of a sheaf on etale site",
+   "results": "No exact construction theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda.*Small|sections.*small",
+   "results": "No exact construction theorem in the pinned Mathlib tree.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSmallGeneratorSections",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-small-generator-sections",
+   "place": "Affine-model section-size computation and covering restriction",
+   "via": [
+    "lem-sc-etale-small-generator-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSmallGeneratorSectionsAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSmallGeneratorSectionsAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleSmallGenerator_sections_surjective",
+  "statement": "theorem etaleSmallGenerator_sections_surjective (X : Scheme.{u}) (U : X.Etaleᵒᵖ) : ∃ α : Type u, ∃ f : α → ((etaleSmallGenerator X).obj.obj U), Function.Surjective f",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T165534-L-2940562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T165534-L-2940562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
