@@ -42,7 +42,13 @@ variable (K L : Type*) [Field K] [Fintype K] [Field L] [Algebra K L] [Algebra.Is
 /-- Blueprint `sk-d-ab-field`: Finite fields, Frobenius and abelian varieties.
 
 Fix a finite field `K` with `q` elements and an algebraic extension `L`. The *arithmetic
-Frobenius* is `σ : x ↦ x ^ q`; the *geometric Frobenius* is `F = σ⁻¹`. -/
+Frobenius* is `σ : x ↦ x ^ q`; the *geometric Frobenius* is `F = σ⁻¹`.
+
+This is also blueprint `d-ab-field`; its abelian varieties are
+`AlgebraicGeometry.IsAbelianVariety` (see
+`AlgebraicGeometry.isAbelianVariety_iff_geometricallyConnected`)
+and the action of `Gal(L/K)` on geometric points by coordinates is
+`AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`. -/
 @[simps!]
 noncomputable def geometricFrobeniusAlgEquivOfAlgebraic : Gal(L/K) :=
   (frobeniusAlgEquivOfAlgebraic K L)⁻¹

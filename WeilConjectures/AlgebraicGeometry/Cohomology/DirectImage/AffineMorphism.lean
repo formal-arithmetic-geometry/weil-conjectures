@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
