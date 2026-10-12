@@ -142,55 +142,6 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek {X' Y' : 
         rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f') :=
   sorry
 
-/-! ### The twist reassociation and its compatibility with pullback -/
-
-section Twist
-
-variable (X) in
-/-- Blueprint `def-coefficient-twists-detailed`: the twist reassociation
-
-`M(m)[2m] = (M ⊗ Λ_X(m))[2m] ≅ M ⊗ Λ_X(m)[2m]`,
-
-moving the shift into the twisting factor (`M ⊗ -` commutes with shifts) and reading
-`Λ_X(m)[2m]` as the twist-and-shift of `Λ_X`. All shifts are even, so no sign occurs. -/
-noncomputable def twistShiftObjIso (m : ℤ)
-    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (twistShift Λ X m).obj M ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).obj
-        ((twistShift Λ X m).obj (constantComplex Λ X)) :=
-  ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).commShiftIso (2 * m)).app
-      (tateObject Λ X m)).symm ≪≫
-    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).mapIso (twistShiftConstantComplexIso Λ X m).symm
-
-variable (X) in
-omit [Finite Λ] [HasInvertibleExponent Λ X] in
-/-- The twist reassociation `M(m)[2m] ≅ M ⊗ Λ_X(m)[2m]` is natural in `M`. This rests on the
-naturality of the shift compatibility of `M ⊗ᴸ -` in the fixed factor `M`
-(`AlgebraicGeometry.Etale.derivedTensor_map_app_comp_commShiftIso_hom_app`). -/
-@[reassoc]
-lemma twistShift_map_comp_twistShiftObjIso_hom (m : ℤ)
-    {M M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (g : M ⟶ M') :
-    (twistShift Λ X m).map g ≫ (twistShiftObjIso Λ X m M').hom =
-      (twistShiftObjIso Λ X m M).hom ≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) X).map g).app _ := by
-  have h := derivedTensor_map_app_comp_commShiftIso_hom_app _ g (2 * m) (tateObject Λ X m)
-  have h' : (((derivedTensor (ModuleCat.{u + 1} Λ) X).map g).app (tateObject Λ X m))⟦2 * m⟧' ≫
-      ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M').commShiftIso (2 * m)).inv.app
-        (tateObject Λ X m)) =
-      ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).commShiftIso (2 * m)).inv.app
-        (tateObject Λ X m)) ≫
-        ((derivedTensor (ModuleCat.{u + 1} Λ) X).map g).app ((tateObject Λ X m)⟦2 * m⟧) := by
-    rw [← cancel_epi ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).commShiftIso
-      (2 * m)).hom.app (tateObject Λ X m)), Iso.hom_inv_id_app_assoc, ← reassoc_of% h,
-      Iso.hom_inv_id_app]
-    exact Category.comp_id _
-  dsimp only [twistShiftObjIso, Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Functor.mapIso_hom]
-  rw [Category.assoc, NatTrans.naturality]
-  exact (reassoc_of% h') _
-
-end Twist
-
 /-! ### The diagonal -/
 
 include d in
