@@ -1,0 +1,120 @@
+{
+ "id": "lem-pqf-directed-ideal-module-colimit",
+ "kind": "statement",
+ "title": "Directed unions of ideal modules are colimits",
+ "statement": "Let X be any scheme [def-pc-scheme], I an ideal sheaf [def-nagata-extended-ideal], and S a nonempty set of ideal sheaves directed by inclusion with sSup S = I. Let D : S → Mod(O_X) be a diagram with a cocone τ into I.toModules [def-weil-pbc-category-colimit]. Suppose each stage is identified by e_a : D(a) ≅ a.toModules, and e_a.inv followed by τ_a and the inclusion of I into O_X equals the inclusion of a into O_X. Then the displayed cocone is a colimit.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Properties of Schemes, Lemma 28.23.3, Tag 01PG; Sheaves of Modules, Definition 17.9.1, Tag 01B4",
+  "url": "https://stacks.math.columbia.edu/tag/01PG"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-extended-ideal",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The compatibility equation and the stage isomorphism imply that τ_a is injective on every open. On an affine U, ideal_iSup and the directed-supremum membership lemma identify each section of I with the image of a section of some D(a). These are Mathlib lattice identities plus range_toModulesι_app.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For another cocone s, map an affine section through a chosen stage lift and then through s_a. Compare two lifts in a common upper stage: naturality of τ and its sectionwise injectivity identify them, and naturality of s identifies their images. Comparing sums in a common upper stage and scalar multiples in the same stage proves linearity. Naturality proves compatibility with restrictions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply TopCat.Sheaf.restrictHomEquivHom on the affine basis to extend the additive maps. Check scalar linearity on the same basis using eq_of_locally_eq', so the extension is a module morphism. The basis hom_ext theorem proves the cocone factorization and its uniqueness. IsColimit.ofExistsUnique supplies the colimit proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Expanded the affine generator and union arguments of Tags 01PG and 01B4 into complete Lean proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of ideals whose sections on affine opens are finitely generated is a finite type sheaf of modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type ideal sheaf is a finite type sheaf of modules and a directed union of ideal sheaves is their colimit",
+   "results": "Found IdealSheafData.ofIdeals, ideal_sSup, ideal_iSup and SheafOfModules.IsFiniteType. None states either bridge for IdealSheafData.toModules.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType",
+   "results": "Found IsFiniteType, its constructor and local generator projection, and the finite-presentation instance. Finite-type ideals need not be finitely presented.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofFiniteType.*toModules|toModules.*IsFiniteType|idealOfOpens_mono; directed.*colimit; colimit.*directed",
+   "results": "The source library has toModulesOfLE and its inclusion identity in Curve.DivisorIdealSheaf. Mathlib has directed supremum membership and affine basis morphism extension, but no ideal-module bridge theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTypeIdealDiagram",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pqf-finite-type-ideal-h1-representatives",
+   "place": "Proof of lem-pqf-finite-type-ideal-module-diagram",
+   "via": [
+    "lem-pqf-finite-type-ideal-module-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectedIdealModuleColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectedIdealModuleColimit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.nonempty_isColimit_of_directed_ideal_modules",
+  "statement": "theorem nonempty_isColimit_of_directed_ideal_modules {X : Scheme.{u}}\n    (I : X.IdealSheafData) (S : Set X.IdealSheafData)\n    (hne : S.Nonempty) (hdir : DirectedOn (· ≤ ·) S) (hunion : sSup S = I)\n    (D : S ⥤ X.Modules) (τ : D ⟶ (Functor.const S).obj I.toModules)\n    (e : ∀ a : S, D.obj a ≅ a.val.toModules)\n    (he : ∀ a : S, (e a).inv ≫ τ.app a ≫ I.toModulesι = a.val.toModulesι) :\n    Nonempty (IsColimit (Cocone.mk I.toModules τ))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T210030-L-953803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T210030-L-953803",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

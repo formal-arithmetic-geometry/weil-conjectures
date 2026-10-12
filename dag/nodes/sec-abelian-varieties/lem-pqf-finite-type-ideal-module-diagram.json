@@ -16,36 +16,35 @@
  ],
  "proof": [
   {
-   "text": "Take the subtype of finite-type subideals of I, ordered by inclusion. At K use K.toModules and use the inclusions of ideals as transition maps. On an affine open the range of K.toModulesι is K.ideal; these section maps glue on the affine basis. The monomorphic structure-sheaf inclusions force identity and composition, and give the compatible cocone into I.toModules. The stage isomorphisms are identities. Finite affine generators and their localizations are local generators of K.toModules, proving its finite type.",
+   "text": "Construct D on the subtype of finite-type subideals, with objects K.toModules and maps IdealSheafData.toModulesOfLE. Cancel the monomorphic inclusions into the structure sheaf to prove identity, composition, and cocone naturality. The cocone legs are toModulesOfLE of K ≤ I, and the stage isomorphisms are identities. Reuse the proved inclusion construction from WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Properties, Tag 01PG, applied to ideal sheaves; first sentence of Tag 01XG",
-    "url": "https://stacks.math.columbia.edu/tag/01PG"
-   }
+   "elementary": true
   },
   {
-   "text": "The directed-union theorem supplies an ideal stage containing any given affine section. A compatible cocone on the stages defines an additive, linear map on these sections, independent of the chosen stage because a common upper stage compares any two choices. The maps commute with restrictions and glue uniquely on the affine basis. Every local section is locally in a stage, so this glued map is unique. This proves the colimit universal property. Zero belongs to the index family, including on the empty scheme.",
+   "text": "The index family is nonempty because it contains the zero ideal. Apply directedOn_ofFiniteType_le and sSup_ofFiniteType_le_eq, then nonempty_isColimit_of_directed_ideal_modules with the identity stage isomorphisms and the inclusion compatibility. This produces the required IsColimit.",
    "uses": [
-    "lemma-nagata-ideal-directed-union-finite-type"
+    "lemma-nagata-ideal-directed-union-finite-type",
+    "lem-pqf-directed-ideal-module-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project",
-    "place": "Properties, Tag 01PG, applied to ideal sheaves; first sentence of Tag 01XG",
-    "url": "https://stacks.math.columbia.edu/tag/01PG"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply isFiniteType_toModules to the finite-type proof in each subtype member. Combine this with the identity stage isomorphism and the inclusion equation.",
+   "uses": [
+    "lem-pqf-finite-type-ideal-module"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-nagata-ideal-directed-union-finite-type"
+  "lemma-nagata-ideal-directed-union-finite-type",
+  "lem-pqf-directed-ideal-module-colimit",
+  "lem-pqf-finite-type-ideal-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Properties, Tag 01PG, applied to ideal sheaves; first sentence of Tag 01XG",
-  "url": "https://stacks.math.columbia.edu/tag/01PG"
+  "place": "Tags 01PG and 01B4, realized in Lean by S2; canonical inclusions reuse the source library."
  },
  "mathlib_searches": [
   {
@@ -119,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-65a9e",
-  "group": "E1",
+  "reviewer": "COMPILER",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T184250-L-3999967",
+  "landing": "20261012T210030-L-953803",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proof with both nodes, cited dependencies, source argument, report, clean compilation, and axiom checks."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
