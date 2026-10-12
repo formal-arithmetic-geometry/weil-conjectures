@@ -53,6 +53,55 @@ noncomputable def powerSetComplexAugmentationHomotopy (s : S) :
     A →ₗ[A] powerSetComplexObject A S 0 :=
   Finsupp.lsingle (fun _ => s)
 
+
+/-- Basis computation of d²=0, εd=0, and the empty case.
+Source: Stacks Project, Tag 03AT.
+Proof: compute both compositions on Finsupp basis elements and use sign cancellation;
+when S is empty every tuple type is empty.
+(blueprint: lem-weil-pbc-power-set-complex-basic-identities) -/
+theorem powerSetComplex_basic_identities :
+    (∀ p : ℕ,
+      (powerSetComplexDifferential A S p).comp
+          (powerSetComplexDifferential A S (p + 1)) = 0) ∧
+    (powerSetComplexAugmentation A S).comp
+          (powerSetComplexDifferential A S 0) = 0 ∧
+    (IsEmpty S → ∀ p : ℕ, Subsingleton (powerSetComplexObject A S p)) := by
+  sorry
+
+/-- Exactness from the chosen contracting homotopy.
+Source: Stacks Project, Tag 03AT.
+Proof: for a chosen element of S, prefixing gives a contracting homotopy; the
+standard contracting-homotopy argument identifies each range with the next kernel.
+(blueprint: lem-weil-pbc-power-set-complex-nonempty-contracting) -/
+theorem powerSetComplex_nonempty_contracting :
+    Nonempty S →
+      (∀ p : ℕ,
+        LinearMap.range (powerSetComplexDifferential A S (p + 1)) =
+          LinearMap.ker (powerSetComplexDifferential A S p)) ∧
+      LinearMap.range (powerSetComplexDifferential A S 0) =
+        LinearMap.ker (powerSetComplexAugmentation A S) ∧
+      LinearMap.range (powerSetComplexAugmentation A S) = ⊤ := by
+  sorry
+
+/-- Contracting homotopy identities on basis tuples.
+Source: Stacks Project, Tag 03AT.
+Proof: evaluate the maps on each basis tuple; the first face is the identity and
+the remaining alternating faces are the prefix of the differential.
+(blueprint: lem-weil-pbc-power-set-complex-homotopy-identities) -/
+theorem powerSetComplex_homotopy_identities :
+    ∀ s : S,
+      (powerSetComplexAugmentation A S).comp
+          (powerSetComplexAugmentationHomotopy A S s) = LinearMap.id ∧
+      (powerSetComplexDifferential A S 0).comp (powerSetComplexHomotopy A S s 0) +
+          (powerSetComplexAugmentationHomotopy A S s).comp
+            (powerSetComplexAugmentation A S) = LinearMap.id ∧
+      ∀ p : ℕ,
+        (powerSetComplexDifferential A S (p + 1)).comp
+            (powerSetComplexHomotopy A S s (p + 1)) +
+          (powerSetComplexHomotopy A S s p).comp
+            (powerSetComplexDifferential A S p) = LinearMap.id := by
+  sorry
+
 /-- The tuple complex `C_•(S;A)` with `d ∘ d = 0` and `ε ∘ d = 0`; it is zero when `S` is
 empty; for nonempty `S` the augmented complex `⋯ → C₁ → C₀ → A → 0` is exact in every
 degree (at `C_{p+1}`, at `C₀`, and at `A`: `ε` is surjective), so `H_p = 0` for `p > 0` and
@@ -91,6 +140,9 @@ theorem powerSetComplex_contractible :
             (powerSetComplexHomotopy A S s (p + 1)) +
           (powerSetComplexHomotopy A S s p).comp
             (powerSetComplexDifferential A S p) = LinearMap.id) := by
-  sorry
+  rcases powerSetComplex_basic_identities A S with ⟨hdd, hed, hempty⟩
+  refine ⟨hdd, hed, hempty, ?_, ?_⟩
+  · exact powerSetComplex_nonempty_contracting A S
+  · exact powerSetComplex_homotopy_identities A S
 
 end Algebra
