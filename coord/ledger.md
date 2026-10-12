@@ -6483,3 +6483,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Curve.DenseOpenCohomologyFiniteness (stage 3; reviewer PASS; first push; landing 20261012T063509-L-3155046 (interface); batch 20261012T063502; modules 2; new nodes 1)
 - 06:35 L: merged deliver/H1/Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact (stage 3; reviewer PASS; first push; landing 20261012T063510-L-3155144 (interface); batch 20261012T063502; modules 3; new nodes 2)
 - 06:35 L: merged deliver/H1/Sheaf.AlgebraicGeometry.GenericStalkVanishingPropagation (stage 3; reviewer PASS; first push; landing 20261012T063510-L-3155241 (proof); batch 20261012T063502; modules 1; new nodes 0)
+- 06:35 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom (stage 3; reviewer PASS; first push; landing 20261012T063510-L-3155338 (interface); batch 20261012T063502; modules 3; new nodes 2)

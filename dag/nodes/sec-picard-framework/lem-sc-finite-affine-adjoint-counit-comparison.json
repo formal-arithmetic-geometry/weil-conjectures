@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-finite-affine-adjoint-counit-comparison",
+ "kind": "statement",
+ "title": "Finite affine comparison of geometric and scalar adjunction counits",
+ "statement": "Let f:X -> Y be finite [def-weil-finite-integral-morphism] between Noetherian schemes [def-pc-scheme]. Let A=f_*O_X, g:(X,O_X) -> (Y,A) [def-sc-direct-image-algebra-derived-category], and assume D(O_X), D(O_Y), and D(A) exist [def-pc-derived-category]. Let R:D_QCoh(X) -> D_QCoh(Y), comparison:R followed by inclusion ≅ inclusion followed by Rf_* [def-pc-derived-direct-image], and adj:R ⊣ a be specified. Let rho:D(A) -> D(O_Y) be the chosen right derived scalar restriction and adjA:rho ⊣ rhoR a specified ambient adjunction. For K in D_QCoh(Y), assume both K and a(K) are bounded below. There exist a natural isomorphism c:Rg_* followed by rho ≅ Rf_* on the entire D(O_X) [def-pc-ringed-spaces-derived-direct-image] and an isomorphism phi:Rg_*(a(K)) ≅ rhoR(K) in D(A), such that c_{a(K)}.inv followed by rho(phi.hom) followed by adjA.counit_K equals comparison_{a(K)}.inv followed by the underlying morphism of adj.counit_K. This asserts no internal-Hom identification and no evaluation formula.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AX2: comparison of right adjoints; perfect.tex Tag 0AVW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-weil-finite-integral-morphism",
+  "def-pc-derived-direct-image",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Scalar restriction is exact. The K-injective formula [def-pc-ringed-spaces-derived-direct-image] computes Rg_* and Rf_* by the same pushforward complex, only with different scalar structures. Retain the natural localization comparisons and descend their identity, yielding c on the whole D(O_X).",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pc-derived-direct-image",
+    "def-pc-derived-rhom-algebra-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-sc-finite-affine-derived-equivalence] to identify D_QCoh(X) with D_QCoh(A). Lift comparison to the full quasi-coherent subcategories, and transport R ⊣ a to the scalar-restriction functor. Its counit on K is comparison.inv followed by adj.counit.",
+   "uses": [
+    "lem-sc-finite-affine-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ambient adjunction [lem-sc-finite-sheafhom-affine-adjoint] identifies the scalar right adjoint with algebra-valued derived Hom. The finite pseudo-coherence argument [lem-sc-finite-pushforward-derived-hom-qcoherent] puts its image of bounded-below K in D+_QCoh(A); uniqueness of ambient right adjoints transfers that membership to the specified rhoR. Exact scalar restriction preserves and detects vanishing of cohomology. The affine cohomology formula [lem-sc-affine-derived-cohomology] makes the affine equivalence preserve lower bounds; its inverse, computed by localization pullback on quasi-coherent modules, is exact and preserves lower bounds too. Hence the explicit bound on a(K) puts E(a(K)) in D+_QCoh(A).",
+   "uses": [
+    "lem-sc-finite-sheafhom-affine-adjoint",
+    "lem-sc-finite-pushforward-derived-hom-qcoherent",
+    "lem-sc-affine-derived-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the fixed object K, the given geometric adjunction, affine equivalence, and chosen comparison give natural bijections Hom_A(M,E(a(K))) ≅ Hom_Y(rho(M),K) for M in D+_QCoh(A). The ambient scalar adjunction gives Hom_A(M,rhoR(K)) ≅ Hom_Y(rho(M),K). Both representing objects belong to this full subcategory by Step 3. Yoneda full faithfulness gives their unique comparison isomorphism preserving the represented counit; transport it through the Rg_* comparison to obtain phi. The pointwise right-adjoint uniqueness equation is exactly the asserted equation after insertion of c. Only the single bound on a(K), not any unstated global restriction of a, is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-rhom-algebra-module",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-sc-affine-derived-cohomology",
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-sc-finite-pushforward-derived-hom-qcoherent",
+  "lem-sc-finite-sheafhom-affine-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Section 48.11, Tags 0BV0, 0AX2 and 0AX3; localization glue written by H2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived sheaf Hom restriction scalars adjunction counit evaluation",
+   "results": "Service unavailable: Internal Server Error (msearch.py, 2026-10-12)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of categories transports right adjoint and preserves the counit",
+   "results": "Generic equivalence adjunction instances only; no finite scheme comparison. Adjunction.rightAdjointUniq_hom_app_counit supplies the categorical counit identity.",
+   "date": "2026-10-12",
+   "verdict": "No direct match; generic adjoint uniqueness used by the main proof."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedModuleDirectImage.*restrictScalars|finite_affine_adjoint",
+   "results": "msearch grep returned no hits. Local rg found the planned affine adjunction, affine derived equivalence, and Hom-unit underived isomorphism; none supplies this displayed comparison with counit.",
+   "date": "2026-10-12",
+   "verdict": "No exact existing statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, finite duality comparison and counit evaluation",
+   "via": [
+    "lem-sc-finite-duality-derived-hom",
+    "lem-sc-finite-flat-duality-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineAdjointCounitComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineAdjointCounitComparison.lean",
+  "declaration": "AlgebraicGeometry.finite_affine_adjoint_counit_comparison",
+  "statement": "theorem finite_affine_adjoint_counit_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))] (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (comparison : R ⋙ (schemeDerivedQCohProperty Y).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) (ρR : DerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ⥤ DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))) (adjA : (SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor ⊣ ρR) (K : schemeDerivedQCohCategory Y) (hK : ∃ n : ℤ, K.obj.IsGE n) (haK : ∃ n : ℤ, (a.obj K).obj.IsGE n) : ∃ c : RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f) ⋙ (SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor ≅ schemeDerivedDirectImage f, ∃ φ : (RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)).obj (a.obj K).obj ≅ ρR.obj K.obj, (c.app (a.obj K).obj).inv ≫ (SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor.map φ.hom ≫ adjA.counit.app K.obj = comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T063510-L-3155338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T063510-L-3155338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

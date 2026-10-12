@@ -27,53 +27,35 @@
  ],
  "proof": [
   {
-   "text": "Because $f$ is finite between Noetherian schemes, the finite pseudo-coherence and internal-Hom quasi-coherence argument gives $R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,K)\\in D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$, and hence its image lies in $D^+_{\\mathrm{QCoh}}(Y)$, exactly as stated in [lem-sc-finite-pushforward-derived-hom-qcoherent].",
+   "text": "Apply [lem-sc-affine-derived-hom-evaluation-counit] to get an ambient scalar right adjoint H, its adjunction adjH, iota and the Hom identification dH at K with its evaluation counit. Use the component e of adjA.rightAdjointUniq adjH (from rhoR to H) and define d = rho.mapIso(e) followed by dH. Associativity and the Mathlib rightAdjointUniq_hom_app_counit identity give the required evaluation equation for the specified adjA.",
    "uses": [
-    "lem-sc-finite-pushforward-derived-hom-qcoherent"
+    "lem-sc-affine-derived-hom-evaluation-counit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, lemma-finite-twisted: pseudo-coherence and quasi-coherence paragraphs"
-   }
+   "elementary": false
   },
   {
-   "text": "The finite morphism is affine, and $Rf_*:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y)$ has a right adjoint $f^!$ by [lem-pc-noetherian-derived-direct-image-right-adjoint] ($X,Y$ Noetherian). By [lem-sc-finite-affine-derived-equivalence], $Rf_*$ induces an equivalence $\\Phi:D_{\\mathrm{QCoh}}(X)\\simeq D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$ whose composition with restriction is $Rf_*$; hence $\\Phi\\circ f^!$ is right adjoint to restriction $D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)\\to D_{\\mathrm{QCoh}}(Y)$, with the counit of $Rf_*\\dashv f^!$ as counit. By [lem-sc-finite-twisted-inverse-bounded-below], $f^!K\\in D^+_{\\mathrm{QCoh}}(X)$, so $\\Phi f^!K\\in D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$. By [lem-sc-finite-sheafhom-affine-adjoint], $R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,-)$ is right adjoint to restriction, with counit evaluation at $1$, and by Step 1 it sends $K$ into $D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$. Hence, restricting both adjunctions to the full subcategories $D^+_{\\mathrm{QCoh}}$, uniqueness of right adjoints gives a canonical isomorphism $\\Phi f^!K\\simeq R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,K)$ in $D^+_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$ carrying the counit of $Rf_*\\dashv f^!$ to the evaluation counit. The uniqueness argument is elementary: two right adjoints to the same functor are uniquely isomorphic by composing one unit with the other counit, and the resulting isomorphism is the unique one preserving counits.",
+   "text": "Use [lem-sc-finite-twisted-inverse-bounded-below] with the given adjunction to prove that a(K) is bounded below. Then [lem-sc-finite-affine-adjoint-counit-comparison] gives c, phi and the second counit equation.",
    "uses": [
-    "lem-pc-noetherian-derived-direct-image-right-adjoint",
-    "lem-sc-finite-affine-derived-equivalence",
     "lem-sc-finite-twisted-inverse-bounded-below",
-    "lem-sc-finite-sheafhom-affine-adjoint"
+    "lem-sc-finite-affine-adjoint-counit-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, lemma-finite-twisted: lemma-sheafhom-affine-adjoint, lemma-twisted-inverse-image-bounded-below, and comparison of right adjoints"
-   }
+   "elementary": false
   },
   {
-   "text": "Applying the restriction (forgetful) functor from $D(f_*\\mathcal O_X)$ to $D(\\mathcal O_Y)$, which sends $\\Phi f^!K$ to $Rf_*f^!K$, preserves this canonical comparison and its counit. Therefore the displayed isomorphism $Rf_*f^!K\\simeq R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,K)$ in $D_{\\mathrm{QCoh}}(Y)$ is compatible with the $f_*\\mathcal O_X$-module structure, and its counit is evaluation at $1\\in f_*\\mathcal O_X$ by the counit clause of [lem-sc-finite-sheafhom-affine-adjoint].",
-   "uses": [
-    "lem-sc-finite-sheafhom-affine-adjoint"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX3, remark-trace-map-finite"
-   }
+   "text": "Combine the independently constructed iota,d and c,phi and their two equations into the existential conclusion. No existence theorem for a geometric right adjoint is needed because adj is already an input.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-finite-pushforward-derived-hom-qcoherent",
-  "lem-pc-noetherian-derived-direct-image-right-adjoint",
-  "lem-sc-finite-affine-derived-equivalence",
-  "lem-sc-finite-twisted-inverse-bounded-below",
-  "lem-sc-finite-sheafhom-affine-adjoint"
+  "lem-sc-affine-derived-hom-evaluation-counit",
+  "lem-sc-finite-affine-adjoint-counit-comparison",
+  "lem-sc-finite-twisted-inverse-bounded-below"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0AX2 and 0AX3"
+  "place": "Tags 0BV0, 0AX2 and 0AX3; adjoint uniqueness transport formalized by H2"
  },
  "mathlib_searches": [
   {
@@ -153,5 +135,15 @@
   "group": "T1",
   "result": "fix",
   "note": "reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T063510-L-3155338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

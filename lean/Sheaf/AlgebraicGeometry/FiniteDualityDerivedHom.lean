@@ -7,11 +7,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
-import Sheaf.AlgebraicGeometry.FinitePushforwardDerivedHomQCoherent
-import Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint
 import Sheaf.AlgebraicGeometry.FiniteTwistedInverseBoundedBelow
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import Sheaf.AlgebraicGeometry.AffineDerivedHomEvaluationCounit
+import Sheaf.AlgebraicGeometry.FiniteAffineAdjointCounitComparison
+import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # Finite Grothendieck duality as derived internal Hom
@@ -29,6 +28,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the large existential adjunction type needs additional heartbeats.
 /--
 Source: literature/stacks-project/duality.tex, Tags 0AX2 and 0AX3
 (blueprint: lem-sc-finite-duality-derived-hom).
@@ -104,6 +105,20 @@ theorem finite_duality_derived_hom {X Y : Scheme.{u}}
           ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor.map
             φ.hom ≫ adjA.counit.app K.obj =
         comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom := by
-  sorry
+  obtain ⟨H, adjH, ι, hH⟩ :=
+    exists_affine_derivedHom_evaluation_counit.{u, wY, wA} f
+  obtain ⟨dH, hdH⟩ := hH K.obj
+  have haK := finiteTwistedInverse_boundedBelow f R comparison a adj K hK
+  obtain ⟨c, φ, hφ⟩ :=
+    finite_affine_adjoint_counit_comparison.{u, wX, wY, wA} f R comparison a adj ρR adjA K hK haK
+  let e := (adjA.rightAdjointUniq adjH).app K.obj
+  let ρ := (SheafOfModules.restrictScalars
+    (R := moduleRings Y.toRingedSpace)
+    (R' := moduleRings (directImageAlgebraSpace f))
+    ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor
+  refine ⟨ι, c, φ, ρ.mapIso e ≪≫ dH, ?_, hφ⟩
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Category.assoc]
+  rw [hdH]
+  exact adjA.rightAdjointUniq_hom_app_counit adjH K.obj
 
 end AlgebraicGeometry
