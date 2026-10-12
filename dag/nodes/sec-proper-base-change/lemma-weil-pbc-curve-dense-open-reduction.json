@@ -1,125 +1,122 @@
 {
-  "id": "lemma-weil-pbc-curve-dense-open-reduction",
-  "blueprint": {
-    "is": "lemma-weil-pbc-curve-dense-open-reduction",
-    "from": null,
-    "same_as": null
+ "id": "lemma-weil-pbc-curve-dense-open-reduction",
+ "blueprint": {
+  "is": "lemma-weil-pbc-curve-dense-open-reduction",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Dense-open localization reduction",
+ "statement": "Let $X$ be a reduced curve and $F$ a constructible $\\mathbf F_\\ell$-sheaf.\nThere is a dense open immersion $j:U\\hookrightarrow X$ with\n$U=\\coprod_iU_i$ irreducible and $F|_U$ finite locally constant. If\n$i:Z=X\\setminus U\\hookrightarrow X$, then\n\n$$\n0\\longrightarrow j_!j^{-1}F\\longrightarrow F\n\\longrightarrow i_*i^{-1}F\\longrightarrow0\n$$\n\nreduces extension-invariance to $j_!G$ and to sheaves on the zero-dimensional\nscheme $Z$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-dense-open-reduction.md",
+  "place": "node lemma-weil-pbc-curve-dense-open-reduction, order 1180"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the existing generic-constancy theorem to obtain a dense open V on which F is finite locally constant. Shrink V by the proved dense irreducible-opens theorem. This yields finitely many disjoint irreducible opens U_a, their dense union W, zero-dimensional complement, and irreducible connected components in W. Finite local constancy of each restriction and of the restriction to W follows from upperStar_of_range_subset because U_a and W lie inside V.",
+   "uses": [
+    "prop-constructible-generic-constancy",
+    "lem-pbc-q1-dense-irreducible-opens"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "Dense-open localization reduction",
-  "statement": "Let $X$ be a reduced curve and $F$ a constructible $\\mathbf F_\\ell$-sheaf.\nThere is a dense open immersion $j:U\\hookrightarrow X$ with\n$U=\\coprod_iU_i$ irreducible and $F|_U$ finite locally constant. If\n$i:Z=X\\setminus U\\hookrightarrow X$, then\n\n$$\n0\\longrightarrow j_!j^{-1}F\\longrightarrow F\n\\longrightarrow i_*i^{-1}F\\longrightarrow0\n$$\n\nreduces extension-invariance to $j_!G$ and to sheaves on the zero-dimensional\nscheme $Z$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-dense-open-reduction.md",
-    "place": "node lemma-weil-pbc-curve-dense-open-reduction, order 1180"
+  {
+   "text": "Apply the dense-open prime-coefficient assertion equivalence to W to identify assertions for F with those for extension by zero of its restriction to W.",
+   "uses": [
+    "lem-pbc-q1-dense-open-prime-assertions"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Apply the existing generic-constancy theorem to obtain a dense open V on which F is finite locally constant. Shrink V by the proved dense irreducible-opens theorem. This yields finitely many disjoint irreducible opens U_a, their dense union W, zero-dimensional complement, and irreducible connected components in W. Finite local constancy of each restriction and of the restriction to W follows from upperStar_of_range_subset because U_a and W lie inside V.",
-      "uses": [
-        "prop-constructible-generic-constancy",
-        "lem-pbc-q1-dense-irreducible-opens"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the dense-open prime-coefficient assertion equivalence to W to identify assertions for F with those for extension by zero of its restriction to W.",
-      "uses": [
-        "lem-pbc-q1-dense-open-prime-assertions"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Choose W as the existential witness, using irreducibility of its connected components and finite local constancy established above.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-pbc-q1-dense-irreducible-opens",
-    "lem-pbc-q1-dense-open-prime-assertions",
-    "prop-constructible-generic-constancy"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem 03SC, proof, third and fourth paragraphs; Lemma 0GJA; module-valued glue proved by Q1"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "long_proof_few_deps",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1180,
-  "blueprint_uses": [
-    "def-constructible-constructible",
-    "def-constructible-stratification",
-    "lemma-weil-pbc-curve-constructible-primary-reduction",
-    "lemma-weil-pbc-eight-curve-devissage",
-    "prop-constructible-generic-constancy"
-  ],
-  "uses_not_cited": [
-    "lemma-weil-pbc-curve-constructible-primary-reduction",
-    "lemma-weil-pbc-eight-curve-devissage"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            192,
-            210
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-    "declaration": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek",
-    "branch": "slopmaster2",
-    "line": 192,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-bd1bc",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261012T112828-L-763717",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered finite-quotient signature, node record, change record, report, and Lean source matched each other and the repository; delivered module and downstream caller compiled cleanly.",
-    "sorry_before": [
-      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-    ],
-    "sorry_after": [
-      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-    ]
+  {
+   "text": "Choose W as the existential witness, using irreducibility of its connected components and finite local constancy established above.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-pbc-q1-dense-irreducible-opens",
+  "lem-pbc-q1-dense-open-prime-assertions",
+  "prop-constructible-generic-constancy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, third and fourth paragraphs; Lemma 0GJA; module-valued glue proved by Q1"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1180,
+ "blueprint_uses": [
+  "def-constructible-constructible",
+  "def-constructible-stratification",
+  "lemma-weil-pbc-curve-constructible-primary-reduction",
+  "lemma-weil-pbc-eight-curve-devissage",
+  "prop-constructible-generic-constancy"
+ ],
+ "uses_not_cited": [
+  "lemma-weil-pbc-curve-constructible-primary-reduction",
+  "lemma-weil-pbc-eight-curve-devissage"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      192,
+      210
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "declaration": "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek",
+  "branch": "slopmaster2",
+  "line": 192,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.exists_dense_assertions_iff_lowerShriek"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T150950-L-2229548",
+  "kind": "interface",
+  "sorry_before": [
+   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+  ],
+  "sorry_after": []
+ }
 }

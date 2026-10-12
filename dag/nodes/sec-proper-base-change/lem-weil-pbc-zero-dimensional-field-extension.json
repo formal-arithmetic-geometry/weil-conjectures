@@ -1,184 +1,181 @@
 {
-  "id": "lem-weil-pbc-zero-dimensional-field-extension",
-  "blueprint": {
-    "is": "lem-weil-pbc-zero-dimensional-field-extension",
-    "from": null,
-    "same_as": null
+ "id": "lem-weil-pbc-zero-dimensional-field-extension",
+ "blueprint": {
+  "is": "lem-weil-pbc-zero-dimensional-field-extension",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Field extension in dimension zero",
+ "statement": "Let $k\\subset k'$ be algebraically closed fields, let $C$ be a separated\nfinite-type $k$-scheme of dimension at most zero, and let $F$ be a torsion\netale sheaf on $C$, so that $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting]. The pullback map\n$\\rho^q_{k'/k}(C,F):H^q(C_{\\Et},F)\\to H^q((C_{k'})_{\\Et},\\pi^{-1}F)$ along the projection $\\pi:C_{k'}=C\\times_kk'\\to C$ [def-weil-pbc-extension-pullback], i.e. the map $\\pi^*$ of [def-weil-pbc-cohomology-pullback], is an isomorphism for every $q\\geq0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
+  "place": "node lem-weil-pbc-zero-dimensional-field-extension, order 1152"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-extension-pullback",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For q=0, use bijectivity of the canonical global-sections pullback. Compose Sheaf.H.equiv₀ with ΓNatIsoSheafSections to identify H^0 with Γ on both schemes. cohomologyMap_zero_eq_globalSectionsUpperStarMap identifies the specified cohomology map with the conjugate of the sections map, hence makes it bijective.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-pullback-global-sections",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "Field extension in dimension zero",
-  "statement": "Let $k\\subset k'$ be algebraically closed fields, let $C$ be a separated\nfinite-type $k$-scheme of dimension at most zero, and let $F$ be a torsion\netale sheaf on $C$, so that $(C,F)$ is a curve coefficient pair [def-weil-pbc-curve-setting]. The pullback map\n$\\rho^q_{k'/k}(C,F):H^q(C_{\\Et},F)\\to H^q((C_{k'})_{\\Et},\\pi^{-1}F)$ along the projection $\\pi:C_{k'}=C\\times_kk'\\to C$ [def-weil-pbc-extension-pullback], i.e. the map $\\pi^*$ of [def-weil-pbc-cohomology-pullback], is an isomorphism for every $q\\geq0$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-    "place": "node lem-weil-pbc-zero-dimensional-field-extension, order 1152"
+  {
+   "text": "For q>0 choose the algebraic-closure points C.algClosurePoint. zero_dimensional_etale_cohomology gives subsingleton derived cohomology; evaluate the natural Ext/derived isomorphism on F and use its injectivity to deduce subsingleton Sheaf.H.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-weil-pbc-curve-setting",
-    "def-weil-pbc-extension-pullback",
-    "def-weil-pbc-cohomology-pullback"
-  ],
-  "proof": [
-    {
-      "text": "For q=0, use bijectivity of the canonical global-sections pullback. Compose Sheaf.H.equiv₀ with ΓNatIsoSheafSections to identify H^0 with Γ on both schemes. cohomologyMap_zero_eq_globalSectionsUpperStarMap identifies the specified cohomology map with the conjugate of the sections map, hence makes it bijective.",
-      "uses": [
-        "lem-weil-pbc-zero-dimensional-pullback-global-sections",
-        "lem-weil-pbc-cohomology-pullback-degree-zero"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For q>0 choose the algebraic-closure points C.algClosurePoint. zero_dimensional_etale_cohomology gives subsingleton derived cohomology; evaluate the natural Ext/derived isomorphism on F and use its injectivity to deduce subsingleton Sheaf.H.",
-      "uses": [
-        "lem-weil-pbc-zero-dimensional-cohomology",
-        "lem-weil-pbc-sheafH-ext-derived-comparison"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Write the bottom morphism as Spec.map a and give k′ the algebra structure induced by a. zeroDimensional_baseChange_points gives the dimension bound on the canonical pullback. Transfer it to C′ using h.isoPullback and invariance of topological Krull dimension under a homeomorphism. Separatedness, local finite type and quasi-compactness of f′ follow by stability under base change.",
-      "uses": [
-        "lem-weil-pbc-zero-dimensional-base-change-points",
-        "lem-pod-separated-finite-type-base-change"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the positive-degree vanishing argument to both the original abelian sheaf and its inverse image on C′. A map between two zero abelian groups is injective by Subsingleton.elim and surjective using the zero preimage. The degree-zero and positive-degree cases exhaust all natural numbers.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-cohomology-pullback-degree-zero",
-    "lem-weil-pbc-sheafH-ext-derived-comparison",
+  {
+   "text": "Write the bottom morphism as Spec.map a and give k′ the algebra structure induced by a. zeroDimensional_baseChange_points gives the dimension bound on the canonical pullback. Transfer it to C′ using h.isoPullback and invariance of topological Krull dimension under a homeomorphism. Separatedness, local finite type and quasi-compactness of f′ follow by stability under base change.",
+   "uses": [
     "lem-weil-pbc-zero-dimensional-base-change-points",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-zero-dimensional-pullback-global-sections"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
-    "place": "G1 stage-3 Lean reduction, 2026-10-12; the existing statement and unit route are unchanged."
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "etale cohomology of zero-dimensional scheme invariant under algebraically closed field extension",
-      "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.Scheme.Etale, Scheme.zariskiTopology_le_etaleTopology (Mathlib.AlgebraicGeometry.Morphisms.Etale, Sites.Etale)",
-      "date": "2026-10-09",
-      "verdict": "no match: Mathlib has the small etale site but no etale cohomology of schemes and no pullback map of cohomology"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H.equiv₀",
-      "results": "CategoryTheory.Sheaf.H.equiv₀ (H F 0 ≃+ F(T), T terminal), H.equiv₀_naturality, H.equiv₀_symm_naturality, H.longSequence_equiv₀_exact₃ (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic, ExactSequences)",
-      "date": "2026-10-09",
-      "verdict": "no match: Ext-defined sheaf cohomology on a general site with H^0 = global sections; no map along a morphism of schemes / base change of the ground field"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "pullback map on sheaf cohomology along a morphism of sites, degree zero equals restriction of global sections",
-      "results": "TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, SheafOfModules.pullbackObjUnitToUnit",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rli 'etale cohomology\\|étale cohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
-      "results": "only AlgebraicGeometry/Sites/BigZariski.lean and AlgebraicGeometry/Sites/ElladicCohomology.lean (pro-etale ℓ-adic sheaf, no comparison); SheafCohomology/{Basic,Cech,MayerVietoris}.lean",
-      "date": "2026-10-09",
-      "verdict": "no match: no etale cohomology of schemes in Mathlib"
-    },
-    {
-      "tool": "grep",
-      "query": "source repository grep (not Mathlib): grep -rn 'zeroDimensional\\|dim_eq_zero\\|IsAlgClosed' ~/weil-conjectures-slopmaster2/WeilConjectures/SixFunctors/Etale",
-      "results": "no zeroDimensional / dim_eq_zero anywhere under WeilConjectures; IsAlgClosed only in SmoothBaseChange/AlgClosedExtension.lean (bijective_cohomologyMap_constantZMod, l.53, sorry; bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension, l.77), SmoothBaseChange/CurveTestDatum.lean (l.93-226), SmoothBaseChange/Vanishing.lean (l.89-178), BaseChangeTheorems/ProjectiveLine/GeometricStalk.lean l.191, BaseChangeTheorems/DegreeZero.lean l.8 (import)",
-      "date": "2026-10-09",
-      "verdict": "no Lean declaration for this lemma in the source repository"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1152,
-  "blueprint_uses": [
-    "def-weil-pbc-curve-setting",
-    "def-weil-pbc-eight-curve-assertions",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "uses_not_cited": [
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            108,
-            131
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lem-weil-pbc-zero-dimensional-field-extension",
-    "worker": "stage1",
-    "summary": "Replaced the imported one-paragraph proof by four steps with a direct argument through lem-weil-pbc-zero-dimensional-cohomology (which already handles non-reduced C), not through the universal-homeomorphism reduction to C_red: thm-weil-pbc-universal-homeomorphism-invariance and def-weil-pbc-eight-curve-assertions are no longer used (the latter was cited only for the name of rho). Step 1: C_{k'} separated finite type over k' (Mathlib leaf lem-pod-separated-finite-type-base-change) of dim <= 0 with pi bijective on points (new node lem-weil-pbc-zero-dimensional-base-change-points). Step 2: q>0 by lem-weil-pbc-zero-dimensional-cohomology on both sides. Step 3: rho^0 equals the unit eta_pi(C) on global sections under H^0 = Gamma (new node lem-weil-pbc-cohomology-pullback-degree-zero; lem-weil-pbc-cohomology-pullback-functorial has no degree-0 clause). Step 4: eta_pi(C) is bijective by comparing germ maps F(C) -> prod F_{bar c} (new node lem-weil-pbc-zero-dimensional-sections-stalks, the explicit map behind the 'canonical' H^0 identification of the cohomology lemma) with the stalk isomorphism (pi^{-1}F)_{bar c'} = F_{pi bar c'} compatible with germs of pulled-back sections (new node lem-weil-pbc-inverse-image-stalk-germ; the closed node lemma-openclosed-stalk-upperstar gives the isomorphism but not the germ compatibility). Statement kept; stmt_deps now name def-weil-pbc-extension-pullback and def-weil-pbc-cohomology-pullback (rho is defined there, not in def-weil-pbc-curve-setting). The torsion hypothesis is not used. Searches of three kinds recorded; no Mathlib leaf."
-  },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "four steps (base change: separated finite type, dimension 0, bijection on points; q > 0 by the zero-dimensional vanishing; q = 0 is the unit on global sections through H^0 = Γ; the unit is bijective through the germ maps to the finite products of stalks and the stalk isomorphism of the inverse image compatible with germs); the universal-homeomorphism route of the imported proof dropped; 4 new nodes, no leaves (etale cohomology absent from Mathlib); ρ now attributed to def-weil-pbc-extension-pullback in stmt_deps"
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-    "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero",
-    "branch": "slopmaster2",
-    "line": 108,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-bd1bc",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261012T112828-L-763717",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered finite-quotient signature, node record, change record, report, and Lean source matched each other and the repository; delivered module and downstream caller compiled cleanly.",
-    "sorry_before": [
-      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-    ],
-    "sorry_after": [
-      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-    ]
+  {
+   "text": "Apply the positive-degree vanishing argument to both the original abelian sheaf and its inverse image on C′. A map between two zero abelian groups is injective by Subsingleton.elim and surjective using the zero preimage. The degree-zero and positive-degree cases exhaust all natural numbers.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-weil-pbc-zero-dimensional-base-change-points",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lem-weil-pbc-zero-dimensional-pullback-global-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-zero-dimensional-field-extension.md",
+  "place": "G1 stage-3 Lean reduction, 2026-10-12; the existing statement and unit route are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of zero-dimensional scheme invariant under algebraically closed field extension",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, AlgebraicGeometry.Scheme.Etale, Scheme.zariskiTopology_le_etaleTopology (Mathlib.AlgebraicGeometry.Morphisms.Etale, Sites.Etale)",
+   "date": "2026-10-09",
+   "verdict": "no match: Mathlib has the small etale site but no etale cohomology of schemes and no pullback map of cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.equiv₀",
+   "results": "CategoryTheory.Sheaf.H.equiv₀ (H F 0 ≃+ F(T), T terminal), H.equiv₀_naturality, H.equiv₀_symm_naturality, H.longSequence_equiv₀_exact₃ (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic, ExactSequences)",
+   "date": "2026-10-09",
+   "verdict": "no match: Ext-defined sheaf cohomology on a general site with H^0 = global sections; no map along a morphism of schemes / base change of the ground field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback map on sheaf cohomology along a morphism of sites, degree zero equals restriction of global sections",
+   "results": "TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'etale cohomology\\|étale cohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "only AlgebraicGeometry/Sites/BigZariski.lean and AlgebraicGeometry/Sites/ElladicCohomology.lean (pro-etale ℓ-adic sheaf, no comparison); SheafCohomology/{Basic,Cech,MayerVietoris}.lean",
+   "date": "2026-10-09",
+   "verdict": "no match: no etale cohomology of schemes in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "source repository grep (not Mathlib): grep -rn 'zeroDimensional\\|dim_eq_zero\\|IsAlgClosed' ~/weil-conjectures-slopmaster2/WeilConjectures/SixFunctors/Etale",
+   "results": "no zeroDimensional / dim_eq_zero anywhere under WeilConjectures; IsAlgClosed only in SmoothBaseChange/AlgClosedExtension.lean (bijective_cohomologyMap_constantZMod, l.53, sorry; bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension, l.77), SmoothBaseChange/CurveTestDatum.lean (l.93-226), SmoothBaseChange/Vanishing.lean (l.89-178), BaseChangeTheorems/ProjectiveLine/GeometricStalk.lean l.191, BaseChangeTheorems/DegreeZero.lean l.8 (import)",
+   "date": "2026-10-09",
+   "verdict": "no Lean declaration for this lemma in the source repository"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1152,
+ "blueprint_uses": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-pbc-eight-curve-assertions",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "uses_not_cited": [
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      108,
+      131
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-pbc-zero-dimensional-field-extension",
+  "worker": "stage1",
+  "summary": "Replaced the imported one-paragraph proof by four steps with a direct argument through lem-weil-pbc-zero-dimensional-cohomology (which already handles non-reduced C), not through the universal-homeomorphism reduction to C_red: thm-weil-pbc-universal-homeomorphism-invariance and def-weil-pbc-eight-curve-assertions are no longer used (the latter was cited only for the name of rho). Step 1: C_{k'} separated finite type over k' (Mathlib leaf lem-pod-separated-finite-type-base-change) of dim <= 0 with pi bijective on points (new node lem-weil-pbc-zero-dimensional-base-change-points). Step 2: q>0 by lem-weil-pbc-zero-dimensional-cohomology on both sides. Step 3: rho^0 equals the unit eta_pi(C) on global sections under H^0 = Gamma (new node lem-weil-pbc-cohomology-pullback-degree-zero; lem-weil-pbc-cohomology-pullback-functorial has no degree-0 clause). Step 4: eta_pi(C) is bijective by comparing germ maps F(C) -> prod F_{bar c} (new node lem-weil-pbc-zero-dimensional-sections-stalks, the explicit map behind the 'canonical' H^0 identification of the cohomology lemma) with the stalk isomorphism (pi^{-1}F)_{bar c'} = F_{pi bar c'} compatible with germs of pulled-back sections (new node lem-weil-pbc-inverse-image-stalk-germ; the closed node lemma-openclosed-stalk-upperstar gives the isomorphism but not the germ compatibility). Statement kept; stmt_deps now name def-weil-pbc-extension-pullback and def-weil-pbc-cohomology-pullback (rho is defined there, not in def-weil-pbc-curve-setting). The torsion hypothesis is not used. Searches of three kinds recorded; no Mathlib leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "four steps (base change: separated finite type, dimension 0, bijection on points; q > 0 by the zero-dimensional vanishing; q = 0 is the unit on global sections through H^0 = Γ; the unit is bijective through the germ maps to the finite products of stalks and the stalk isomorphism of the inverse image compatible with germs); the universal-homeomorphism route of the imported proof dropped; 4 new nodes, no leaves (etale cohomology absent from Mathlib); ρ now attributed to def-weil-pbc-extension-pullback in stmt_deps"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "declaration": "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero",
+  "branch": "slopmaster2",
+  "line": 108,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T150950-L-2229548",
+  "kind": "interface",
+  "sorry_before": [
+   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+  ],
+  "sorry_after": []
+ }
 }

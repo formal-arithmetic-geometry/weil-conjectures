@@ -1,111 +1,122 @@
 {
-  "id": "lemma-weil-pbc-curve-normalization-constant",
-  "blueprint": {
-    "is": "lemma-weil-pbc-curve-normalization-constant",
-    "from": null,
-    "same_as": null
+ "id": "lemma-weil-pbc-curve-normalization-constant",
+ "blueprint": {
+  "is": "lemma-weil-pbc-curve-normalization-constant",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Normalization and smooth constant case",
+ "statement": "For a reduced curve, extension-invariance for $j_!\\underline{\\mathbf F_\\ell}$\nreduces through the finite normalization to the corresponding calculation on\na smooth curve, both for proper and affine opens and also when\n$\\ell=\\operatorname{char}k$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-normalization-constant.md",
+  "place": "node lemma-weil-pbc-curve-normalization-constant, order 1181"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Obtain the normalization monomorphism, its constructible cokernel and vanishing over V from exists_mono_lowerShriek_constantModSheaf_lowerStar. The source calculations are already the hypothesis H in this Lean interface.",
+   "uses": [
+    "lemma-weil-pbc-normalization-exact-sequence"
+   ],
+   "elementary": true
   },
-  "kind": "statement",
-  "title": "Normalization and smooth constant case",
-  "statement": "For a reduced curve, extension-invariance for $j_!\\underline{\\mathbf F_\\ell}$\nreduces through the finite normalization to the corresponding calculation on\na smooth curve, both for proper and affine opens and also when\n$\\ell=\\operatorname{char}k$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-normalization-constant.md",
-    "place": "node lemma-weil-pbc-curve-normalization-constant, order 1181"
+  {
+   "text": "Use finite_pushforward_open_constantModSheaf_constructible for the direct-image sheaf G, then of_finite_pushforward_module to obtain its eight assertions from H.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+    "b3-finite-pushforward-module-assertions"
+   ],
+   "elementary": true
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "The normalization $X^\\nu$ is a finite disjoint union of smooth curves and\npoints. On a component disjoint from $U^\\nu$ the extension-by-zero sheaf is\nzero and every assertion is immediate; on every other component $U^\\nu$ is\ndense. The dense-open localization lemma on $X^\\nu$ therefore reduces\n$j^\\nu_!\\underline{\\mathbf F_\\ell}$ to the constant sheaf on each remaining\nsmooth component, with the five-term sequence and all comparison maps\nalready specified there. If $\\ell\\ne\\operatorname{char}k$, apply the Kummer and\nlocalization calculation; if $\\ell=\\operatorname{char}k$, apply the\nArtin–Schreier calculation. Thus all applicable eight assertions hold for\n$j^\\nu_!\\underline{\\mathbf F_\\ell}$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Exact finite direct image transfers them to\n$\\nu_*j^\\nu_!\\underline{\\mathbf F_\\ell}$. The normalization exact sequence\nthen transfers them to $j_!\\underline{\\mathbf F_\\ell}$, including the\nlow-degree comparison maps and assertion (8). Properness is preserved by\nfinite normalization; affineness is preserved because a finite morphism\nover an affine is affine. This completes the normalization, proper/affine\nlocalization, prime-to-characteristic, and characteristic-$\\ell$ branches\nwithout an unnamed smooth-curve calculation.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lemma-weil-pbc-curve-dense-open-reduction",
-    "lemma-weil-pbc-normalization-exact-sequence",
-    "lemma-weil-pbc-smooth-curve-artin-schreier",
-    "lemma-weil-pbc-smooth-curve-kummer-localization"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-curve-normalization-constant.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1181,
-  "blueprint_uses": [
-    "lemma-weil-pbc-curve-dense-open-reduction",
-    "lemma-weil-pbc-normalization-exact-sequence",
-    "lemma-weil-pbc-smooth-curve-artin-schreier",
-    "lemma-weil-pbc-smooth-curve-kummer-localization"
-  ],
-  "uses_not_cited": [
-    "lemma-weil-pbc-curve-dense-open-reduction",
-    "lemma-weil-pbc-normalization-exact-sequence",
-    "lemma-weil-pbc-smooth-curve-artin-schreier",
-    "lemma-weil-pbc-smooth-curve-kummer-localization"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
-          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-          "lines": [
-            267,
-            286
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-    "declaration": "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
-    "branch": "slopmaster2",
-    "line": 267,
-    "declarations": [
-      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); A2 repair E1: finite quotient hypothesis restored; prime-field blueprint statement unchanged.",
-    "statement": "theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite {k : Type u} [Field k]\n    [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]\n    (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] [Smooth (ν ≫ f)] (V : X.Opens)\n    (hV : Dense (V : Set X)) [IsIso (ν ∣_ V)] (j : U ⟶ X) [IsOpenImmersion j]\n    {j' : U' ⟶ X'} [IsOpenImmersion j'] {ν' : U' ⟶ U} (hj : IsPullback j' ν' ν j) (ℓ : ℕ)\n    [Fact ℓ.Prime] [Finite (Λ ⧸ Ideal.span {(ℓ : Λ)})]\n    (H : IsCurve.Assertions Λ (ν ≫ f)\n      ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ))) :\n    IsCurve.Assertions Λ f ((j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ))"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-bd1bc",
-    "group": "A2",
-    "result": "pass",
-    "landing": "20261012T112828-L-763717",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered finite-quotient signature, node record, change record, report, and Lean source matched each other and the repository; delivered module and downstream caller compiled cleanly."
+  {
+   "text": "Prove that the constant quotient sheaf is annihilated by ℓ using Ideal.Quotient.eq_zero_iff_mem. Additivity of extension by zero and direct image gives ℓ • id G = 0. Apply of_finite_support_mono to the normalization monomorphism.",
+   "uses": [
+    "b3-finite-support-mono-assertions"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-normalization-exact-sequence",
+  "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+  "b3-finite-pushforward-module-assertions",
+  "b3-finite-support-mono-assertions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Lemmas 0A5D, 0A3Q and 0GJA; explicit module-valued normalization reduction by B3"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1181,
+ "blueprint_uses": [
+  "lemma-weil-pbc-curve-dense-open-reduction",
+  "lemma-weil-pbc-normalization-exact-sequence",
+  "lemma-weil-pbc-smooth-curve-artin-schreier",
+  "lemma-weil-pbc-smooth-curve-kummer-localization"
+ ],
+ "uses_not_cited": [
+  "lemma-weil-pbc-curve-dense-open-reduction",
+  "lemma-weil-pbc-normalization-exact-sequence",
+  "lemma-weil-pbc-smooth-curve-artin-schreier",
+  "lemma-weil-pbc-smooth-curve-kummer-localization"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+     "lines": [
+      267,
+      286
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+  "declaration": "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite",
+  "branch": "slopmaster2",
+  "line": 267,
+  "declarations": [
+   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+  ],
+  "sorry_free": true,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here); A2 repair E1: finite quotient hypothesis restored; prime-field blueprint statement unchanged.",
+  "statement": "theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite {k : Type u} [Field k]\n    [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]\n    (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] [Smooth (ν ≫ f)] (V : X.Opens)\n    (hV : Dense (V : Set X)) [IsIso (ν ∣_ V)] (j : U ⟶ X) [IsOpenImmersion j]\n    {j' : U' ⟶ X'} [IsOpenImmersion j'] {ν' : U' ⟶ U} (hj : IsPullback j' ν' ν j) (ℓ : ℕ)\n    [Fact ℓ.Prime] [Finite (Λ ⧸ Ideal.span {(ℓ : Λ)})]\n    (H : IsCurve.Assertions Λ (ν ≫ f)\n      ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ))) :\n    IsCurve.Assertions Λ f ((j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ))"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T150950-L-2229548",
+  "kind": "interface"
+ }
 }
