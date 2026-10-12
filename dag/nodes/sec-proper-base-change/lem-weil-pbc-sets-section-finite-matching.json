@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-sets-section-finite-matching",
+ "kind": "statement",
+ "title": "Finite matching equations become effective at a stage",
+ "statement": "Let I be a nonempty directed preorder, D : Iᵒᵖ → Scheme a system of qcqs schemes with affine transition maps, c its limit cone, i₀ a stage, and G a sheaf of sets on D(i₀). Let W be a qcqs étale object, V : Fin n → D(i₀).Etale a finite family of qcqs étale objects, and f_b : V_b → W arrows. Fix a stage j in Over(i₀ᵒᵖ) and stage sections s_b on the base changes of V_b. Write r_d for the transition comparison and q_j for the limit comparison of [def-weil-pbc-sets-section-comparison]. Suppose that for every étale Z over D(i₀), every b,b', and p : Z → V_b, p' : Z → V_b' satisfying p f_b = p' f_b', the limit images q_j(Z)(p_j^*s_b) and q_j(Z)(p'_j^*s_b') agree. There exist a later stage l and an arrow d : l → j such that for every étale Y over D(l), and every a : Y → V_{b,l}, a' : Y → V_{b',l} with a f_{b,l} = a' f_{b',l}, one has a^*(r_d(V_b)s_b) = a'^*(r_d(V_b')s_b'). No affine hypothesis on V, covering hypothesis, affine lifting property, or global limit section is assumed.",
+ "source": {
+  "document": "Stacks Project, Étale Cohomology, Tags 03Q4 and 09YQ",
+  "place": "finite affine-cover overlap reduction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sets-section-comparison",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof": [
+  {
+   "text": "Form Z_{bb′}=V_b ×_W V_{b′} in the base étale category. Cancellation against the qcqs W structure map proves the arrows V_b → W qcqs, so base change and composition show each Z has qcqs structure map. The hypothesis on the two projections gives equality of the limit images of the restrictions. Apply eventual equality on each Z; thinness of Over of the preorder identifies its two arrows back to j.",
+   "uses": [
+    "lem-weil-pbc-sets-section-eventual-equality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a common predecessor of j and the finitely many witness stages with IsCofiltered.inf_objs_exists. Thinness identifies composite arrows with the chosen arrow to j. Comparison composition laws and restriction naturality transport each pairwise equality to the common stage. Base change preserves the fibre product. Any pair of arrows with equal composites factors through that fibre product, and functorial restriction of its equality yields the conclusion. For n=0 choose l=j and the identity; all equations are vacuous.",
+   "uses": [
+    "lem-weil-pbc-sets-section-comparison-laws",
+    "lem-weil-pbc-sets-section-comparison-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-section-comparison-laws",
+  "lem-weil-pbc-sets-section-comparison-naturality",
+  "lem-weil-pbc-sets-section-eventual-equality"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M3",
+  "document": "Stacks Project, Tags 03Q4 and 09YQ",
+  "place": "finite overlap reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite family of eventual equalities common stage",
+   "results": "Service unavailable: Internal Server Error; no mathematical verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a sheaf on an inverse limit of schemes admit compatible finite local representatives at a common stage",
+   "results": "Eight structure-sheaf section lifting and equality results; none concerns arbitrary sheaves of sets.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleSetSection finite matching",
+   "results": "no existing declaration",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetSectionLiftLocalFamily",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-section-lift-local-family",
+   "place": "step 2: eventual matching of the given local representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionFiniteMatching",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionFiniteMatching.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSection_finite_matching",
+  "statement": "theorem etaleSetSection_finite_matching {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1))) (W : (D.obj (op i₀)).Etale) [QuasiCompact W.hom] [QuasiSeparated W.hom] {n : ℕ} (V : Fin n → (D.obj (op i₀)).Etale) (f : ∀ b, V b ⟶ W) (hqc : ∀ b, QuasiCompact (V b).hom) (hqs : ∀ b, QuasiSeparated (V b).hom) (j : Over (op i₀)) (s : ∀ b, ((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj (V b)))) (hmatch : ∀ (Z : (D.obj (op i₀)).Etale) (b b' : Fin n) (p : Z ⟶ V b) (p' : Z ⟶ V b'), p ≫ f b = p' ≫ f b' → (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G Z) (((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.map ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).map p).op (s b)) = (etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G Z) (((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.map ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).map p').op (s b'))) : ∃ (l : Over (op i₀)) (d : l ⟶ j), ∀ (Y : (D.obj l.left).Etale) (b b' : Fin n) (a : Y ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (D.map l.hom)).obj (V b)) (a' : Y ⟶ (MorphismProperty.Over.pullback @Etale ⊤ (D.map l.hom)).obj (V b')), a ≫ (MorphismProperty.Over.pullback @Etale ⊤ (D.map l.hom)).map (f b) = a' ≫ (MorphismProperty.Over.pullback @Etale ⊤ (D.map l.hom)).map (f b') → ((Scheme.etaleSetPullback (D.map l.hom)).obj G).obj.map a.op ((etaleSetSectionComparison (D.map d.left) (D.map j.hom) (D.map l.hom) ((D.map_comp d.left j.hom).symm.trans (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) d.w)) G (V b)) (s b)) = ((Scheme.etaleSetPullback (D.map l.hom)).obj G).obj.map a'.op ((etaleSetSectionComparison (D.map d.left) (D.map j.hom) (D.map l.hom) ((D.map_comp d.left j.hom).symm.trans (congrArg (fun t : l.left ⟶ op i₀ ↦ D.map t) d.w)) G (V b')) (s b'))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T095914-L-321161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T095914-L-321161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

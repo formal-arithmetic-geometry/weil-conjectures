@@ -14,34 +14,30 @@
  ],
  "proof": [
   {
-   "text": "The object W₀ is qcqs by the base hypotheses and its qcqs structure map. Choose a finite affine open cover and finite affine refinements of its pairwise overlaps; reindex the covering by Fin n. The affine objects have qcqs structure maps to the base. Apply the assumed affine lifting property to each restriction of t and use directedness to move all lifts to one common stage. Comparison coherence keeps their limit images equal to the restrictions of t.",
+   "text": "Construct the finite affine open cover directly with W₀.left.affineCover.finiteSubcover and reindex by Fin n. Its arrows cover by the range criterion. The affine sources have qcqs structure maps to the qcqs base. Base-change preservation gives the stage and limit covering clauses. Apply haff to each restriction of t, choose representatives, and use IsCofiltered.inf_objs_exists on their finite set of stages. Transport them with transition comparisons. The cone coherence law proves the required image equation at the common stage.",
    "uses": [
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
     "lem-weil-pbc-sets-section-comparison-laws"
    ],
    "elementary": false
   },
   {
-   "text": "On each member of a finite affine refinement of an overlap, naturality of the section comparison identifies the limit images of the two restricted lifts. Apply eventual equality to these restrictions, then move all the finitely many equalities to a common later stage. Comparison coherence and separatedness on the covering refinements show that the lifted sections agree on every overlap. Pulling back along the map determined by any pair of arrows with equal composites gives the stated compatibility. Base change preserves the covering at this stage and at the limit. The resulting data are a compatible local family only; no global section has been glued. For an empty covering choose any object of the nonempty tail; compatibility and image equations are vacuous.",
+   "text": "Naturality of the comparison is obtained directly from the composite natural transformation defining it. For any base arrows with equal composites into W₀, their restrictions of t agree by functoriality. Naturality and the image equations therefore give the hypothesis of finite matching. Apply the finite-matching theorem to the given family and lifts. Retain the affine objects and cover arrows, and transport their sections to its later stage. Cone coherence retains their images and base-change preservation retains both coverings. This constructs only the compatible family, without gluing. The cofiltered finite-set choice covers n=0 as well.",
    "uses": [
-    "lem-weil-pbc-sets-section-eventual-equality",
-    "lem-weil-pbc-pretopology-sheaf-condition",
+    "lem-weil-pbc-sets-section-finite-matching",
     "lem-weil-pbc-sets-section-comparison-laws"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-pretopology-sheaf-condition",
   "lem-weil-pbc-sets-section-comparison-laws",
-  "lem-weil-pbc-sets-section-eventual-equality"
+  "lem-weil-pbc-sets-section-finite-matching"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C2",
-  "document": "Stacks Project, Tags 09YQ and 09YN",
-  "place": "Set-valued degree-zero adaptation of the stated site-colimit and finite-affine-cover proof; concrete intermediate formulation by C2"
+  "group": "M3",
+  "document": "Stacks Project, Tags 03Q4 and 09YQ",
+  "place": "finite affine-cover construction and common-stage transport in Lean; residual overlap stabilization isolated as finite matching"
  },
  "mathlib_searches": [
   {
@@ -112,9 +108,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T085219-L-5531",
+  "landing": "20261012T095914-L-321161",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
