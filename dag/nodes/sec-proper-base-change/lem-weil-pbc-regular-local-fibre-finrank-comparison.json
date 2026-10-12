@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-regular-local-fibre-finrank-comparison",
+ "kind": "statement",
+ "title": "Additive differential fibre finrank formula",
+ "statement": "For a finite type k-algebra S and a prime q with residue field K separable over k, if trdeg_k K = r is finite, then finrank_K(K tensor_S Omega[S/k]) = finrank_K(CotangentSpace(S_q)) + r.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00TV, lines 38754--38779"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-kahler-differentials",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-regular-local-cotangent-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Use the conormal exact sequence for the localization and its separable-residue injectivity to express the fibre differential finrank as the cotangent-space finrank plus the residue-field transcendence degree.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-separable-residue-cotangent-injective",
+    "lem-weil-pbc-separably-generated-differentials-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize differentials and associate the tensor products to identify the middle term with K tensor_S Omega[S/k]. Add finite dimensions in the short exact conormal sequence; its cotangent term is finite since the local ring is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-separable-residue-cotangent-injective",
+  "lem-weil-pbc-separably-generated-differentials-dimension",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-regular-local-cotangent-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00TV, short exact conormal sequence and additive dimension formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "dimension of differentials at a prime equals embedding dimension plus transcendence degree of the residue field",
+   "results": "Field/DVR cotangent dimensions and standard-smooth differential rank only; no general additive formula.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.finrank",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*cotangent|finrank.*trdeg|cotangent.*finrank",
+   "results": "Regular-local criterion, separably-generated field differential dimension and special cotangent dimensions only; no additive fibre formula.",
+   "date": "2026-10-13",
+   "verdict": "no match",
+   "sub": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of the residue field fibre of Kaehler differentials is the embedding dimension plus the transcendence degree of the residue field",
+   "results": "UNAVAILABLE: Internal Server Error; no mathematical verdict. Independent leanfinder, loogle and grep were used.",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularLocalFibreFinrank",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-regular-local-fibre-finrank",
+   "place": "dimension comparison step",
+   "via": [
+    "lem-weil-pbc-regular-local-fibre-finrank"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RegularLocalFibreFinrankComparison",
+  "file": "lean/Sheaf/RingTheory/RegularLocalFibreFinrankComparison.lean",
+  "declaration": "Algebra.fibre_finrank_eq_cotangent_finrank_add",
+  "statement": "theorem fibre_finrank_eq_cotangent_finrank_add\n    (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]\n    [Algebra.FiniteType k S] (q : Ideal S) [q.IsPrime]\n    (hsep : Algebra.IsSeparableExtension k q.ResidueField)\n    (r : ℕ) (hr : Algebra.trdeg k q.ResidueField = (r : Cardinal.{v})) :\n    Module.finrank q.ResidueField (q.ResidueField ⊗[S] KaehlerDifferential k S) =\n      Module.finrank q.ResidueField\n        (IsLocalRing.CotangentSpace (Localization.AtPrime q)) + r",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T184319-L-4010201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T184319-L-4010201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

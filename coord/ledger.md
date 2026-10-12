@@ -8997,3 +8997,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/M2/Sheaf.AlgebraicGeometry.GenericProductMapDenominators (stage 3; reviewer PASS; first push; landing 20261012T184318-L-4009866 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/M2/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictHomData (stage 3; reviewer PASS; first push; landing 20261012T184318-L-4009965 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/M2/Sheaf.Paper.KoszulDifferential (stage 3; reviewer PASS; first push; landing 20261012T184319-L-4010103 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/M2/Sheaf.RingTheory.RegularLocalFibreFinrank (stage 3; reviewer PASS; first push; landing 20261012T184319-L-4010201 (interface); batch 20261012T184234; modules 2; new nodes 1)

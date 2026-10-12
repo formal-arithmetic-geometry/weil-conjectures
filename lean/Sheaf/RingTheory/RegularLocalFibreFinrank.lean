@@ -5,8 +5,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Sheaf.FieldTheory.SeparableExtension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.FieldTheory.SeparablyGeneratedDifferentialsDimension
-import Sheaf.Paper.SeparableResidueCotangentInjective
+import Sheaf.RingTheory.RegularLocalFibreFinrankComparison
 import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
 
 @[expose] public section
@@ -49,6 +48,11 @@ theorem regularLocal_iff_fibre_finrank_eq_dimension
       (Module.finrank q.ResidueField
         (q.ResidueField ⊗[S] KaehlerDifferential k S) : WithBot ℕ∞) =
         topologicalKrullDimAt (⟨q, inferInstance⟩ : PrimeSpectrum S) := by
-  sorry
+  have : IsNoetherianRing S := Algebra.FiniteType.isNoetherianRing k S
+  obtain ⟨d, r, hd, hr, hpoint⟩ :=
+    AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_add_trdeg (k := k) q
+  rw [IsRegularLocalRing.iff_finrank_cotangentSpace, hd,
+    fibre_finrank_eq_cotangent_finrank_add k S q hsep r hr, hpoint]
+  simp only [Nat.cast_inj, Nat.add_right_cancel_iff]
 
 end Algebra
