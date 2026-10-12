@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-sheaf-tensor-pushout-comparison-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of the fixed tensor comparison over a ring-sheaf pushout",
+ "statement": "Let $T$ be a topological space and $D,C,A,B$ sheaves of commutative rings. Let $r:D\\to C$, $s:D\\to A$, $b:C\\to B$, $t:A\\to B$ form a pushout. For an $A$-module sheaf $M$ [def-weil-sheaf-of-modules-category], let $f:C\\otimes_D\\operatorname{Res}_s M\\to\\operatorname{Res}_b(B\\otimes_A M)$ be a $C$-linear sheaf morphism, using sheafified sectionwise tensors [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification] and scalar restrictions [def-pc-sheaf-restrict-scalars]. Write $\\theta_r,\\theta_t$ for the sheafification units. If $f_W(\\theta_r(1\\otimes m))=\\theta_t(1\\otimes m)$ for every open $W$ and $m\\in M(W)$, then $f$ is an isomorphism. This statement neither constructs $f$ nor asserts its naturality as $M$ varies.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SB, lemma-affine-equivalence-modules, tensor construction and elucidation; the change-of-rings universal property is Tag 008A, sheaves.tex, lemma-adjointness-tensor-restrict; stalk comparison: sheaves.tex, Tag 008B, lemma-stalk-tensor-sheaf-modules"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "C-linearity and the assumed tensor-unit formula give f(theta_r(c tensor m))=theta_t(b(c) tensor m) for every open W, coefficient c, and module section m. In Lean this is comparison_formula, using scalar multiplication on the first tensor factor and linearity of both sheafification units.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ring-sheaf stalk functor is left adjoint to the skyscraper functor (Mathlib.Topology.Sheaves.Skyscraper), so it preserves the pushout. Give all stalk rings their algebra structures via the induced ring maps. The square equation establishes both scalar towers, and CommRingCat.isPushout_iff_isPushout gives the algebra pushout. Restricting module scalars commutes with the stalk scalar action: represent scalar and vector on a common intersection of neighborhoods, use the germ scalar formula, and the sectionwise definition of scalar restriction. This is stalkRestrict_smul.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply stalkChangeOfRingsIso for r with Res_s M and for t with M. Mathlib Algebra.IsPushout.cancelBaseChange, inverted, is an equivalence C_x tensor over D_x with M_x → B_x tensor over A_x with M_x, sending c_x tensor m_x to b_x(c_x) tensor m_x. Represent c_x and m_x on a common neighborhood. The germ formulas of the two stalk comparisons and comparison_formula identify the induced stalk map with this equivalence. Tensor induction proves the equality on all tensors.",
+   "uses": [
+    "lem-weil-pbc-stalk-change-of-rings-tensor",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two tensor-to-stalk comparisons and the algebra cancellation map are bijective, so the stalk map of f is bijective by the comparison equality. Mathlib TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso gives an isomorphism of underlying abelian sheaves. The functor SheafOfModules.toSheaf reflects isomorphisms, giving IsIso f. No flatness, nonzero-ring, or nonempty-space hypothesis enters.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-stalk-change-of-rings-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008A and 008B: canonical tensor map and stalk change-of-rings comparison; invertibility proved in Lean by K3 using Mathlib Algebra.IsPushout.cancelBaseChange and stalk conservativity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A commuting pushout square of sheaves of rings gives an isomorphism from C tensor D M to B tensor A M",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of modules extension of scalars base change pushout tensor cancellation",
+   "results": "Algebra.IsPushout.cancelBaseChange, cancelBaseChange_symm_tmul, and related algebra tensor cancellation results; these concern rings and modules rather than ring sheaves and sheafification.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "cancelBaseChange|sheafificationHomEquiv|sheaf.*Pushout; rg in Mathlib, lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search tensor pushout",
+   "results": "Mathlib algebra cancellation is available. The library has stalkChangeOfRingsIso and the parent sheafTensorPushoutCancellation, but no fixed sheaf comparison invertibility result. No imported blueprint node matches tensor pushout.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SheafTensorPushoutCancellation",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module correspondence step 3: tensor construction and comparison maps; AffineModuleTensorBaseChange; tensor base-change argument: cancellation across a pushout of ring sheaves; tensor pushout cancellation, step 2: fixed comparison invertibility",
+   "via": [
+    "lem-weil-pbc-sheaf-tensor-pushout-cancellation",
+    "lem-weil-pbc-affine-module-tensor-base-change",
+    "lem-weil-pbc-affine-module-tensor-construction",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SheafTensorPushoutComparisonIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafTensorPushoutComparisonIsIso.lean",
+  "declaration": "SheafOfModules.sheafTensorPushoutComparison_isIso",
+  "statement": "theorem sheafTensorPushoutComparison_isIso (r : D ⟶ C) (s : D ⟶ A) (b : C ⟶ B) (t : A ⟶ B) (hp : IsPushout r s b t) (M : SheafOfModules.{u} (𝓡 A)) (f : changeOfRings.{u, u, u} r ((restrictScalars (𝓻 s)).obj M) ⟶ (restrictScalars (𝓻 b)).obj (changeOfRings.{u, u, u} t M)) (hf : ∀ (W : (Opens T)ᵒᵖ) (m : M.val.obj W), f.val.app W (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C).obj)).unit.app (changeOfRingsPresheaf.{u, u, u} r ((restrictScalars (𝓻 s)).obj M))).app W ((1 : C.obj.obj W) ⊗ₜ[D.obj.obj W,(r.hom.app W).hom] m)) = ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app (changeOfRingsPresheaf.{u, u, u} t M)).app W ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W,(t.hom.app W).hom] m)) : IsIso f",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T184315-L-4008795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T184315-L-4008795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,15 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the presheaf ring T(W)=C(W) tensor over D(W) with A(W). For any sheaf ring E, compatible maps C→E and A→E give the sectionwise map c tensor a ↦ u(c)v(a). It respects restrictions and extends uniquely to the sheafification of T. Conversely any map from that sheaf restricts to the compatible pair. Thus the sheafification is a pushout, hence isomorphic to B with its specified maps.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Let L be the sheafification of C tensor over D with Res_s M. The presheaf formula (c tensor a)(c′ tensor m)=cc′ tensor (a m) satisfies the balanced relations and commutes with restriction, so local representatives extend it to a B-action on L; the module laws are checked locally before sheafification. The A-linear map m↦θ(1 tensor m) extends B-linearly to β tensor m↦β·θ(1 tensor m). Its inverse as a C-linear sheaf map is obtained by sheafifying c tensor m↦b(c) tensor m. This map is D-balanced by the pushout-square equation. The first composite fixes c tensor m. Locally a section β of B is a sum of c tensor a; A-balancing identifies b(c)t(a) tensor m with b(c) tensor am, so the other composite fixes β tensor m. Both composites are identities by sheaf separation.",
+   "text": "Construct the reverse comparison for any commuting square. On an open W, extend the D-linear map m ↦ theta_t(1 tensor m) to a C-linear map C(W) tensor over D(W) with Res_s M(W) → Res_b(B tensor over A with M)(W). The square equation proves D-linearity. This map sends c tensor m to theta_t(b(c) tensor m). Restriction compatibility on generators assembles a presheaf morphism; the module sheafification Hom equivalence gives the explicit sheaf morphism f_M.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification",
@@ -32,22 +24,31 @@
    "elementary": false
   },
   {
-   "text": "For a linear morphism M→N both comparisons apply that morphism only to the module tensor factor, so the naturality square commutes on local tensor generators and hence as sheaf maps. The inverse formula on 1 tensor m is θ(b(1) tensor m)=θ(1 tensor m). Zero rings, zero modules and the empty open require no separate nonvanishing assumptions.",
-   "uses": [],
-   "elementary": true
+   "text": "The sheafification universal property and scalar-extension hom extensionality show maps from a tensor sheaf are determined by theta_r(1 tensor m) on all opens. Naturality of the sheafification unit gives the formula for changeOfRingsHom on these generators. Thus f_M is natural in M. Its unit formula follows from b(1)=1. These steps are completely proved by private Lean helpers.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the fixed-comparison invertibility theorem to f_M and the pushout, obtaining IsIso f_M. Set e_M=(asIso f_M).symm. Postcompose the desired naturality square with f_N, use the already proved naturality of f, and cancel the inverse composites. The inverse unit formula is exactly the proved unit formula for f_M.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-pushout-comparison-is-iso"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "def-weil-pbc-sheafification",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
-  "def-pc-sheaf-restrict-scalars"
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-sheaf-tensor-pushout-comparison-is-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 01SB, lemma-affine-equivalence-modules, tensor construction and elucidation; the change-of-rings universal property is Tag 008A, sheaves.tex, lemma-adjointness-tensor-restrict"
+  "place": "Tag 01SB, lemma-affine-equivalence-modules, tensor construction and elucidation; the change-of-rings universal property is Tag 008A, sheaves.tex, lemma-adjointness-tensor-restrict; K3 constructs the comparison and proves naturality and units in Lean, fixed-map invertibility proved on stalks in the accompanying module"
  },
  "mathlib_searches": [
   {
@@ -132,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-1bc79",
-  "group": "E1",
+  "reviewer": "COMPILER",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T135226-L-1659217",
+  "landing": "20261012T184315-L-4008795",
   "kind": "interface",
-  "note": "independent Codex review: Lean signatures match both nodes; existing signature unchanged; proof dependencies match the proof; delivered modules and direct importer compile; axioms match the named remaining sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
