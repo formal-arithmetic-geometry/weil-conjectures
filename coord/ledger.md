@@ -8671,3 +8671,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/T1/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeTargetStalkIso (stage 3; reviewer PASS; after a return; landing 20261012T165533-L-2940415 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/T2/Sheaf.AlgebraicGeometry.EtaleSmallGeneratorSections (stage 3; reviewer PASS; first push; landing 20261012T165534-L-2940562 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/U1/Sheaf.AlgebraicGeometry.AffineGaloisBaseChangeFiberTransitivity (stage 3; reviewer PASS; first push; landing 20261012T165534-L-2940719 (interface); batch 20261012T165503; modules 2; new nodes 1)
+- 16:55 L: merged deliver/U2/Sheaf.Algebra.Module.GradedModuleAwayClearingModule (stage 3; reviewer PASS; first push; landing 20261012T165535-L-2940965 (proof); batch 20261012T165503; modules 1; new nodes 0)
