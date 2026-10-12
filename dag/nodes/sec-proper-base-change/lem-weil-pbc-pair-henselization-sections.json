@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-pair-henselization-sections",
+ "kind": "statement",
+ "title": "Etale sections lift over the pair-neighbourhood colimit",
+ "statement": "Let B be a commutative ring and J an ideal. Let C be the full category of rings under B whose structure map is etale [def-weil-etale-morphism] and whose canonical quotient map B/J to D/JD is bijective. Assume C is essentially small in the universe of B and filtered. Let c be a colimit cocone of its inclusion into rings under B [def-weil-pbc-category-colimit], with vertex B to H, and assume B/J to H/JH is bijective. For every etale H-algebra A in the universe of B and every H-algebra map sigma : A to H/JH, there exists an H-algebra map tau : A to H whose reduction modulo JH is sigma.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A02, paragraph verifying condition (2) of Tag 09XI"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Pass to a small equivalent filtered diagram and its underlying ring colimit. Use the given quotient bijection to identify H/JH with R = B/J. Descend the etale H-algebra A to an etale C-algebra D at a stage C, with A isomorphic to H tensor_C D. Restrict the section modulo JH to D to obtain a C-algebra map s : D to R.",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "lem-weil-pbc-etale-algebra-filtered-colimit-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map s kills JD and induces a section D/JD to R. Base change makes D/JD etale over C/JC = R. Apply idempotent splitting to obtain e with s(e)=1 and localization (D/JD)_e isomorphic to R. Lift e to g in D. Localization D_g is etale over B by composition and localization; its quotient is R since localization commutes with quotients. Thus D_g is a neighbourhood object, and C to D_g is a morphism of the diagram.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-section-idempotent-splitting",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coprojection of D_g to H and the identity of H agree on C, so induce an H-algebra map H tensor_C D to H. Since s(g)=1, s extends to D_g. Any B-algebra map from a neighbourhood object to R factors through its quotient and is uniquely the inverse of its quotient isomorphism. Hence this extension is the reduction of the coprojection. The constructed tensor-product map agrees modulo JH with the original section on D and H, therefore on the tensor product. Transport through the descent isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A02, paragraph verifying condition (2) of Tag 09XI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of etale algebras over a filtered colimit of etale neighborhoods lift from the quotient by an ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of etale neighborhoods of a ring and ideal is a henselian pair with unchanged quotient",
+   "results": "HenselianRing, IsAdicComplete.henselianRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "date": "2026-10-12",
+   "verdict": "No section-lifting theorem for the neighbourhood colimit."
+  },
+  {
+   "tool": "grep",
+   "query": "henselization|Henselization; section in Mathlib/RingTheory/Etale",
+   "results": "No henselization declarations; etale library has no theorem asserting the requested colimit lifting. Searched Sheaf and WeilConjectures too.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate of this lifting step found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra map from an etale algebra to the residue quotient lifts to the filtered colimit of all etale neighbourhoods of a ring ideal pair",
+   "results": "StandardEtalePair.lift, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; no general neighbourhood-colimit section lifting",
+   "date": "2026-10-12",
+   "verdict": "Second reading: the square-zero lifting result does not apply to an arbitrary ideal."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Cocone\"",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "Second reading found no duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*colimit|colimit.*henselian|henselization",
+   "results": "msearch Mathlib: 0 hits; rg in Sheaf and WeilConjectures found the parent and downstream henselization theorems, not an independent proof of this step",
+   "date": "2026-10-12",
+   "verdict": "Downstream henselization results depend on this construction and cannot replace it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PairHenselizationColimit",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pair-henselization-colimit",
+   "place": "section-lifting part of proof, steps 3--5",
+   "via": [
+    "lem-weil-pbc-pair-henselization-colimit"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PairHenselizationSections",
+  "file": "lean/Sheaf/RingTheory/PairHenselizationSections.lean",
+  "declaration": "RingTheory.pair_henselization_sections",
+  "statement": "theorem pair_henselization_sections (B : Type u) [CommRing B] (J : Ideal B) [EssentiallySmall.{u} (ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map))))] [IsFiltered (ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map))))] (c : Cocone (ObjectProperty.ι (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map))))) (hc : IsColimit c) (hq : Function.Bijective (Ideal.quotientMap (J.map c.pt.hom.hom) c.pt.hom.hom (Ideal.le_comap_map))) (A : Type u) [CommRing A] [Algebra c.pt.right A] [Algebra.Etale c.pt.right A] (σ : A →ₐ[c.pt.right] c.pt.right ⧸ J.map c.pt.hom.hom) : ∃ τ : A →ₐ[c.pt.right] c.pt.right, (Ideal.Quotient.mkₐ c.pt.right (J.map c.pt.hom.hom)).comp τ = σ",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063527-L-3163269",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063527-L-3163269",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
