@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
+import Sheaf.AlgebraicGeometry.ProperFlatStructureSheafStalkInjective
+import Sheaf.AlgebraicGeometry.ProperFlatStructureSheafStalkSurjective
 
 /-!
 # A single-fibre criterion for the structure-sheaf unit on a stalk
@@ -60,6 +60,9 @@ theorem bijective_structureSheafMap_stalk_of_proper_flat_fiber
     (hs : IsIso (f.fiberToSpecResidueField s).appTop) :
     Function.Bijective
       (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).unit.app
-        (SheafOfModules.unit S.ringCatSheaf)).stalkLinearMap s) := by sorry
+        (SheafOfModules.unit S.ringCatSheaf)).stalkLinearMap s) := by
+  constructor
+  · exact injective_structureSheafMap_stalk_of_proper_flat_fiber f s hs
+  · exact surjective_structureSheafMap_stalk_of_proper_flat_fiber f s hs
 
 end AlgebraicGeometry

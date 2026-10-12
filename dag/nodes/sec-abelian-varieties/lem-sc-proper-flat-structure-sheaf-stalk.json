@@ -19,38 +19,24 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pc-rf-perfect-base-change] to $\\mathcal O_X$, which is finitely presented and relatively flat since $f$ is flat. This gives a perfect derived image $E=Rf_*\\mathcal O_X$ and identifies its derived fibre at $s$ with $R\\Gamma(X_s,\\mathcal O_{X_s})$. The derived structure map $u:\\mathcal O_S[0]\\to E$ induces the assumed canonical map on degree-zero fibre cohomology. The negative cohomology of the derived fibre is zero because it is derived sections of a sheaf.",
+   "text": "Combine the injective stalk map of [lem-sc-proper-flat-structure-sheaf-stalk-injective] and the surjective stalk map of [lem-sc-proper-flat-structure-sheaf-stalk-surjective] using the two components of Function.Bijective. Both are applied to the same f, s and fibre isomorphism hypothesis.",
    "uses": [
-    "lem-pc-rf-perfect-base-change"
+    "lem-sc-proper-flat-structure-sheaf-stalk-injective",
+    "lem-sc-proper-flat-structure-sheaf-stalk-surjective"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Take the affine bounded finite free residue model from [lem-sc-perfect-finite-free-residue-model] at $s$. Its negative terms have rank zero, and its term in degree zero has rank one. Over the affine neighbourhood, maps from the free module $\\mathcal O[0]$ into this bounded projective model can be represented by chain maps: projectivity of the source makes Hom exact, so it computes derived Hom. Represent $u$ by such a chain map. Its component $u^0$ reduces to an isomorphism at the residue field by the hypothesis. Localizing at $s$, a map between rank-one free modules with invertible residue is multiplication by a unit, hence invertible. The chain-map identity $d^0u^0=0$ forces $d^0=0$ in the local ring. Since there are no negative terms, $H^0(E)_s$ is its degree-zero term and $H^0(u)_s$ is bijective.",
-   "uses": [
-    "lem-sc-perfect-finite-free-residue-model"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The zeroth right-derived direct image of a sheaf is its ordinary direct image: computing by an injective resolution in nonnegative degrees and using left exactness identifies $H^0(Rf_*\\mathcal O_X)$ with $f_*\\mathcal O_X$ and identifies the induced degree-zero structure map with the ordinary structure map. The canonical tensor identification $f^*\\mathcal O_S\\cong\\mathcal O_X$ sends $1\\otimes a$ to the image of $a$. The sectionwise unit formula of [lem-pc-module-pullback-adjunction] thus identifies the chosen unit followed by the pushforward of this identification with the ordinary structure map. The pushforward of an isomorphism is an isomorphism, so bijectivity on the stalk is unchanged and the stated chosen unit is bijective.",
-   "uses": [
-    "lem-pc-module-pullback-adjunction"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "X3",
+  "group": "X2",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tag 0E62 proof; its local argument at s written out using the Tag 0BCD rank-minimal model"
+  "place": "Tag 0E62 localized argument, decomposed into injectivity and surjectivity"
  },
  "proof_deps": [
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-finite-free-residue-model",
-  "lem-pc-module-pullback-adjunction"
+  "lem-sc-proper-flat-structure-sheaf-stalk-injective",
+  "lem-sc-proper-flat-structure-sheaf-stalk-surjective"
  ],
  "mathlib_searches": [
   {
@@ -128,9 +114,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T173917-L-3310137",
+  "landing": "20261012T213855-L-1210585",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
