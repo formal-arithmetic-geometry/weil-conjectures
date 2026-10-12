@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group E1
+Authors: SHEAF groups E1, D3
 -/
 module
 
@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.GeometricallyRegularFieldExtension
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 
 /-!
 # Regular maps and finite type base change
@@ -48,7 +49,7 @@ Proof (the six steps of the node, following Stacks 07C1):
 5. For any finite purely inseparable extension k''/κ(p')
    (def-weil-pbc-finite-purely-inseparable-extension), tensor cancellation identifies
    its base-changed fibre with k'' ⊗[κ(p)] A. This extension of κ(p) is finitely generated:
-   adjoin generators of κ(p')/κ(p) and a finite κ(p')-basis of k''.
+   compose the essentially finite type residue-field extension with the finite extension.
    Apply lem-weil-pbc-geometrically-regular-finitely-generated-extensions again.
    Ring isomorphisms preserve regularity (def-weil-regular-scheme), so the new fibre
    is geometrically regular by def-weil-pbc-g-ring.
@@ -60,6 +61,51 @@ theorem regular_base_change
     [CommRing R] [CommRing Λ] [CommRing R'] [Algebra R Λ] [Algebra R R']
     [Algebra.FiniteType R R'] (hφ : (algebraMap R Λ).IsRegular) :
     (Algebra.TensorProduct.includeRight : R' →ₐ[R] Λ ⊗[R] R').toRingHom.IsRegular := by
-  sorry
+  classical
+  let : Algebra R' (Λ ⊗[R] R') := Algebra.TensorProduct.rightAlgebra
+  change (algebraMap R' (Λ ⊗[R] R')).IsRegular
+  rw [IsRegular, toAlgebra_algebraMap] at hφ ⊢
+  have : Module.Flat R Λ := flat_algebraMap_iff.mp hφ.1
+  refine ⟨?_, ?_⟩
+  · apply flat_algebraMap_iff.mpr
+    exact Module.Flat.of_linearEquiv
+      (Algebra.TensorProduct.commRight R R' Λ).symm.toLinearEquiv
+  · intro q hq
+    let p : Ideal R := q.comap (algebraMap R R')
+    have : p.IsPrime := Ideal.comap_isPrime _ q
+    have : q.LiesOver p := ⟨rfl⟩
+    let : Algebra (Localization.AtPrime p) (Localization.AtPrime q) :=
+      Localization.AtPrime.algebraOfLiesOver p q
+    have : Localization.AtPrime.IsLiesOverAlgebra p q := inferInstance
+    have hp := hφ.2 p
+    let e : q.Fiber (Λ ⊗[R] R') ≃ₐ[q.ResidueField]
+        q.ResidueField ⊗[p.ResidueField] p.Fiber Λ :=
+      (Algebra.TensorProduct.congr (.refl : q.ResidueField ≃ₐ[q.ResidueField] q.ResidueField)
+        (Algebra.TensorProduct.commRight R R' Λ).symm).trans
+        ((Algebra.TensorProduct.cancelBaseChange R R' q.ResidueField q.ResidueField Λ).trans
+          (Algebra.TensorProduct.cancelBaseChange R p.ResidueField
+            q.ResidueField q.ResidueField Λ).symm)
+    have hfg := IntermediateField.fg_top p.ResidueField q.ResidueField
+    have : IsRegularRing (q.ResidueField ⊗[p.ResidueField] p.Fiber Λ) :=
+      Algebra.isRegularRing_tensorProduct_of_isGeometricallyRegular hp q.ResidueField hfg
+    have : IsRegularRing (q.Fiber (Λ ⊗[R] R')) :=
+      IsRegularRing.of_ringEquiv e.symm.toRingEquiv
+    refine ⟨inferInstance, ?_⟩
+    intro K _ _ _ _
+    let : Algebra p.ResidueField K :=
+      (algebraMap q.ResidueField K).comp (algebraMap p.ResidueField q.ResidueField)
+        |>.toAlgebra
+    have : IsScalarTower p.ResidueField q.ResidueField K :=
+      IsScalarTower.of_algebraMap_eq (fun _ ↦ rfl)
+    have : Algebra.EssFiniteType p.ResidueField q.ResidueField := inferInstance
+    have : Algebra.EssFiniteType p.ResidueField K :=
+      Algebra.EssFiniteType.comp p.ResidueField q.ResidueField K
+    have : IsRegularRing (K ⊗[p.ResidueField] p.Fiber Λ) :=
+      Algebra.isRegularRing_tensorProduct_of_isGeometricallyRegular hp K
+        (IntermediateField.fg_top p.ResidueField K)
+    exact IsRegularRing.of_ringEquiv
+      ((Algebra.TensorProduct.congr (.refl : K ≃ₐ[K] K) e).trans
+        (Algebra.TensorProduct.cancelBaseChange p.ResidueField q.ResidueField
+          K K (p.Fiber Λ))).symm.toRingEquiv
 
 end RingHom
