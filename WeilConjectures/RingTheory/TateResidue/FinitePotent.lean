@@ -202,8 +202,7 @@ theorem tateTrace_smul (c : k) (φ : Module.End k V) :
       rintro _ ⟨y, rfl⟩
       refine ⟨(c⁻¹) ^ n • y, ?_⟩
       rw [smul_pow, LinearMap.smul_apply, map_smul, smul_smul, ← mul_pow, mul_inv_cancel₀ hc,
-        one_pow,
-        one_smul]
+        one_pow, one_smul]
     rw [tateTrace, dif_neg this, tateTrace, dif_neg hφ, mul_zero]
 
 theorem tateTrace_neg (φ : Module.End k V) : (-φ).tateTrace = -φ.tateTrace := by
