@@ -7667,3 +7667,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:57 L: batch 20261012T120425 bisection test completed
 
 - 20:59 L: batch 20261012T120425 bisection test completed
+- 13:00 L: returned deliver/D3/Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact (reviewer RETURN: (reviewer X-fb06e, head fb06e28ce) E2 (review point 4): The reopened CategoryTheory.injective_module_cech_cohomology_isZ)
