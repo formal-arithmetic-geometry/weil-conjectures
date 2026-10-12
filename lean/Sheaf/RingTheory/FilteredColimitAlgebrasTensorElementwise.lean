@@ -101,6 +101,19 @@ theorem filteredColimit_tensorProduct_ringHom
     (∀ (i j : I) (u : i ⟶ j),
       ∃ φ : (F.obj i : Type vA) ⊗[R] N →+* (F.obj j : Type vA) ⊗[R] N,
         ∀ t, φ t = LinearMap.rTensor N (F.map u).hom.toLinearMap t) := by
-  sorry
+  constructor
+  · intro i
+    let φ : (F.obj i : Type vA) ⊗[R] N →ₐ[R]
+        (colimit F : CommAlgCat R) ⊗[R] N :=
+      Algebra.TensorProduct.rTensor N (colimit.ι F i).hom
+    refine ⟨φ.toRingHom, ?_⟩
+    intro t
+    rfl
+  · intro i j u
+    let φ : (F.obj i : Type vA) ⊗[R] N →ₐ[R] (F.obj j : Type vA) ⊗[R] N :=
+      Algebra.TensorProduct.rTensor N (F.map u).hom
+    refine ⟨φ.toRingHom, ?_⟩
+    intro t
+    rfl
 
 end CommAlgCat
