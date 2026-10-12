@@ -8641,3 +8641,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/K3/Sheaf.AlgebraicGeometry.PositiveTensorFamily (stage 3; reviewer PASS; first push; landing 20261012T165520-L-2935723 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/M1/Sheaf.AlgebraicGeometry.DerivedGlobalSectionsPreservesCoproducts (stage 3; reviewer PASS; first push; landing 20261012T165520-L-2935849 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/M1/Sheaf.AlgebraicGeometry.InjectiveModuleCechAugmentationZero (stage 3; reviewer PASS; first push; landing 20261012T165521-L-2936027 (proof); batch 20261012T165503; modules 1; new nodes 0)
+- 16:55 L: merged deliver/M2/Sheaf.AlgebraicGeometry.FormalFunctionsLocalDictionary (stage 3; reviewer PASS; first push; landing 20261012T165521-L-2936198 (interface); batch 20261012T165503; modules 3; new nodes 3)

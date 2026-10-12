@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-formal-functions-local-stalk-comparison",
+ "kind": "statement",
+ "title": "Canonical uncompleted local stalk comparison",
+ "statement": "Let f:X→Y be proper, Y locally Noetherian, F coherent, y∈Y and p≥0 [def-weil-proper-morphism, pqf-def-locnoeth, pqf-def-coherent]. Write A=O_(Y,y) and H=H^p(Spec(A)×_Y X,g′*F) as an A-module [def-weil-pbc-formal-functions-local-comparison]. There exists an A-linear equivalence a:(R^p f_*F)_y→H satisfying IsFormalFunctionsLocalComparison [def-weil-pbc-formal-functions-local-comparison], i.e. it sends each germ of a neighbourhood cohomology class to its pullback to the local base change. No quotient system or completed cohomology comparison is asserted.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OD (lemma-formal-functions-stalk), proof before the final application of Theorem 02OC, coherent.tex lines 5759-5798; Tag 02KH (lemma-flat-base-change-cohomology), Tag 01E4 and Tag 089W. The omitted identifications and transition compatibilities are expanded in steps 1-7 of lem-weil-pbc-formal-functions-stalk."
+ },
+ "stmt_deps": [
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-module-stalk",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-formal-functions-local-comparison"
+ ],
+ "proof": [
+  {
+   "text": "(The local ring and the canonical morphism.) Put $A=\\mathcal O_{Y,y}$, $\\mathfrak m=\\mathfrak m_y$. As $Y$ is locally Noetherian [pqf-def-locnoeth], $y$ lies in an affine open $\\operatorname{Spec}R$ with $R$ Noetherian, and $A\\cong R_{\\mathfrak p}$ [lem-weil-pbc-spec-local-ring-canonical-morphism] is Noetherian [lem-weil-pbc-localization-noetherian]; so $Y'=\\operatorname{Spec}A$ is locally Noetherian [pqf-def-locnoeth]. Let $c:Y'\\to Y$ be the canonical morphism and $y'$ the closed point of $Y'$. By [lem-weil-pbc-spec-local-ring-canonical-morphism]: $c$ is flat, $c(y')=y$, $c^{-1}(V)=Y'$ for every open $V\\ni y$, the stalk map $\\mathcal G_y\\to(c^*\\mathcal G)_{y'}$ is an isomorphism for every $\\mathcal O_Y$-module $\\mathcal G$, and $c_n=c\\circ c'_n$ with $c'_n:\\operatorname{Spec}(A/\\mathfrak m^n)\\to Y'$ the closed immersion given by the quotient map (part (5) with $J=\\mathfrak m^n$). This is 'c is a flat morphism as it identifies local rings' and the hint 'the morphisms $c_n$ factor through $c$' of the source. In Lean the Noetherian stalk ring is provided by the Mathlib instance for a locally Noetherian scheme.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk, lines 5759-5800)"
+   }
+  },
+  {
+   "text": "On the locally Noetherian source, coherence gives quasi-coherence and finite type. The canonical local spectrum has Noetherian local ring and the proper base change is locally Noetherian. Pullback is quasi-coherent and finite type, hence coherent; the flat-base-change theorem needs its quasi-coherence, not a finite-level surjectivity assertion.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(The stalk is $H^p(X',\\mathcal F')$.) Define $\\varphi:M\\to H:=H^p(X',\\mathcal F')$ by $\\varphi([\\xi]_V)=(g'_V)^*\\xi$ for $\\xi\\in H^p(f^{-1}(V),\\mathcal F)$, where $g'_V:X'\\to f^{-1}(V)$ is $g'$ (Step 2) and $(g'_V)^*$ the pullback [def-weil-pbc-module-cohomology-fmap] (b) (with $(g'_V)^*(\\mathcal F|_{f^{-1}V})=\\mathcal F'$); it is well defined because pullback commutes with restriction to smaller $V$ [lem-weil-pbc-module-cohomology-fmap-functorial] (2),(3), and $A$-linear, $A=\\mathcal O_{Y,y}$ acting on $H$ through $A=\\Gamma(Y',\\mathcal O_{Y'})\\to\\Gamma(X',\\mathcal O_{X'})$ (linearity in [def-weil-pbc-module-cohomology-fmap], $c^\\sharp$ inducing the identity of $A$ on stalks, Step 1). $\\varphi$ is bijective: let $G=R^pf_*\\mathcal F$ and $G'=R^pf'_*\\mathcal F'$. By flat base change (Stacks Tag 02KH, directly; the current Lean declaration of lem-pc-flat-base-change-cohom is only a field-extension finrank result and does not supply this isomorphism) ($c$ flat, $f$ qcqs, $\\mathcal F$ quasi-coherent) the base change map $\\beta:c^*G\\to G'$ is an isomorphism ($g'$ is flat as a base change of $c$, so the base change map of Stacks 02N7 is defined). By [lem-weil-pbc-flat-base-change-map-sections] its adjoint $\\beta^\\flat=c_*(\\beta)\\circ\\eta_G:G\\to c_*G'$ sends $[\\xi]_V$ to the class of $(g'_V)^*\\xi$ in $G'(c^{-1}V)=G'(Y')$. Take stalks: the composite $G_y\\to(c^*G)_{y'}\\xrightarrow{\\beta_{y'}}G'_{y'}$, whose first arrow is the isomorphism of Step 1 (germ of the unit $\\eta_G$), sends $[\\xi]_V$ to the germ at $y'$ of the class of $(g'_V)^*\\xi$, so it is an isomorphism. Finally $G_y=M$ and $G'_{y'}=\\varinjlim_{W\\ni y'}H^p(f'^{-1}W,\\mathcal F')=H^p(X',\\mathcal F')$ [lem-weil-pbc-higher-direct-image-presheaf], [def-weil-pbc-module-stalk], since $Y'$ is the only open of $Y'$ containing the closed point $y'$ of the local scheme (an open containing $\\mathfrak m$ contains every prime of $A$, all being generalizations of $\\mathfrak m$). Under these identifications the composite is $\\varphi$; hence $\\varphi$ is an isomorphism of $A$-modules (Stacks: $c^*R^pf_*\\mathcal F=R^pf'_*\\mathcal F'$ by 02KH, and $(R^pf'_*\\mathcal F')_{y'}=\\Gamma(Y',R^pf'_*\\mathcal F')=H^p(X',\\mathcal F')$; the stalk route used here avoids the affine-base lemma 01XK). (Linearity and the degree-0 description of these maps: [lem-weil-pbc-module-cohomology-fmap-basic-properties].) This gives the linear equivalence and the canonical local germ comparison predicate, with every resolution and every open comparison choice quantified. No finite quotient system is asserted.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-flat-base-change-map-sections",
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk, lines 5759-5800); Lemma 02KH (lemma-flat-base-change-cohomology) and Cohomology Lemma 02N7 (base change map)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-flat-base-change-map-sections",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OD, expanded local and finite-level identifications; https://stacks.math.columbia.edu/tag/02OD and Tag 02KH read directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image stalk cohomology over local base change and cohomology of infinitesimal fibres",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image stalk cohomology over spectrum of local ring flat base change and infinitesimal fibres",
+   "results": "Flat.stalkMap, StructureSheaf.toPushforwardStalk_comp, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; none identifies the derived stalk or finite quotient system. Loogle Scheme.fromSpecStalk finds the canonical map and its topological properties only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.functions|formalFunctions|infinitesimal.fibre|higher.*direct.*image.*stalk in Mathlib/AlgebraicGeometry; local stalk comparison and finite quotient cohomology in blueprint_refs.py",
+   "results": "No Mathlib or blueprint match for these comparisons. Existing DAG has the unsplit combined dictionary only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsLocalDictionary",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Canonical uncompleted local stalk comparison in the geometric reduction of the formal-functions input to henselian idempotent lifting.",
+   "via": [
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsLocalStalkComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsLocalStalkComparison.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_local_stalk_comparison",
+  "statement": "theorem formalFunctions_local_stalk_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)\n    (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :\n    ∃ a : formalFunctionsStalk f y F p ≃ₗ[Y.presheaf.stalk y]\n      formalFunctionsLocalCohomology f y F p,\n      IsFormalFunctionsLocalComparison f y F p a.toLinearMap",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T165521-L-2936198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T165521-L-2936198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

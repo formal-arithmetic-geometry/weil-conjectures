@@ -1,0 +1,185 @@
+{
+ "id": "lem-weil-pbc-formal-functions-finite-quotient-comparison",
+ "kind": "statement",
+ "title": "Finite quotient and fibre cohomology comparison",
+ "statement": "Let f:X→Y be proper, Y locally Noetherian, F coherent, y∈Y and p≥0 [def-weil-proper-morphism, pqf-def-locnoeth, pqf-def-coherent]. Put A=O_(Y,y), X′=Spec A×_Y X, F′=g′*F, J=m_y O_(X′), C=H^p(X′,-) restricted to A, H=C(F′), M=(R^p f_*F)_y [def-pc-fibre-product, def-pc-module-pullback, def-nagata-extended-ideal, pqf-def-cohomology, def-weil-pbc-formal-functions-local-comparison]. There are an A-linear natural isomorphism b from the inverse system C(F′/J^(n+1)F′) to the infinitesimal fibre cohomology system restricted from the completed local ring [def-weil-pbc-coherent-formal-module, def-weil-pbc-formal-fibre-cohomology], and A-linear maps r_n:H→H^p(X_n,F_n) with r_n(z)=b_n C(q_n)(z). For every A-linear a:M→H satisfying IsFormalFunctionsLocalComparison, (r_n).comp a satisfies IsFormalFunctionsTheta at every n [def-weil-pbc-formal-functions-local-comparison, def-weil-pbc-formal-fibre-cohomology]. This states no existence of a stalk equivalence.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OD (lemma-formal-functions-stalk), proof before the final application of Theorem 02OC, coherent.tex lines 5759-5798; Tag 02KH (lemma-flat-base-change-cohomology), Tag 01E4 and Tag 089W. The omitted identifications and transition compatibilities are expanded in steps 1-7 of lem-weil-pbc-formal-functions-stalk."
+ },
+ "stmt_deps": [
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-module-stalk",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-formal-functions-local-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For n≥0 put A=O_y and X_n=Spec(A/m^(n+1))×_Y X. Pasting the defining pullback squares constructs i′_n:X_n→X′ with g′ i′_n=i_n. The quotient-base-change closed-immersion theorem identifies its ideal with J^(n+1), where J=m O_(X′). It is affine. Composition of tensor pullbacks canonically identifies i′_n*F′ with F_n, which is quasi-coherent. The same universal property gives i′_(n+1) j_n=i′_n for adjacent levels.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "def-nagata-extended-ideal",
+    "pqf-def-affine-morphism",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk, lines 5759-5800)"
+   }
+  },
+  {
+   "text": "The closed-immersion unit u_n:F′→i′_(n*)F_n is epi with kernel J^(n+1)F′. Its induced quotient isomorphism rho_n:F′/J^(n+1)F′→i′_(n*)F_n satisfies rho_n q_n=u_n. Apply H^p and the affine cohomology edge isomorphism to define b_n. Cohomology h-map functoriality identifies b_n H^p(q_n) with pullback along i′_n. Restricting completed scalars along A→A-completion evaluates to Ideal.Quotient.mk on each level, so b_n is A-linear with the scalar actions in the Lean statement.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk, lines 5759-5800); Cohomology of Schemes Lemma 089W (lemma-relative-affine-cohomology) for the Leray step"
+   }
+  },
+  {
+   "text": "For adjacent levels, compare the two sheaf maps from F′/J^(n+2)F′ to i′_(n*)F_n. Precompose with the epimorphic quotient F′→F′/J^(n+2)F′. Both composites are u_n by compatibility of iterated tensor-pullback adjunction units and the defining transition h-map. Cancel the epi. Applying cohomology h-map functoriality proves that b_(n+1) and b_n commute with the adjacent transitions. Every arrow of ℕᵒᵖ is a composite of adjacent arrows, so the b_n assemble into the natural isomorphism b.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk, lines 5759-5800)"
+   }
+  },
+  {
+   "text": "Let r_n be cohomology pullback along i′_n; the scalar compatibility above and linearity of h-maps make it A-linear. The quotient-unit factorization proves r_n(z)=b_n H^p(q_n)(z). Given any a with IsFormalFunctionsLocalComparison, use its germ formula and compose with this pullback. All inverse-image neighbourhoods of y in Spec A are the whole spectrum. Pullback composition and the restriction-unit square therefore give the formula for IsFormalFunctionsTheta. Restricted injective resolutions exist; augmentation-preserving comparison maps induce the same maps on cohomology, so the formula holds for every resolution and every open choice in that predicate. No existence or bijectivity of a is used.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 02OD (lemma-formal-functions-stalk, lines 5759-5800)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OD, expanded local and finite-level identifications; https://stacks.math.columbia.edu/tag/02OD and Tag 02KH read directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image stalk cohomology over local base change and cohomology of infinitesimal fibres",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image stalk cohomology over spectrum of local ring flat base change and infinitesimal fibres",
+   "results": "Flat.stalkMap, StructureSheaf.toPushforwardStalk_comp, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; none identifies the derived stalk or finite quotient system. Loogle Scheme.fromSpecStalk finds the canonical map and its topological properties only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.functions|formalFunctions|infinitesimal.fibre|higher.*direct.*image.*stalk in Mathlib/AlgebraicGeometry; local stalk comparison and finite quotient cohomology in blueprint_refs.py",
+   "results": "No Mathlib or blueprint match for these comparisons. Existing DAG has the unsplit combined dictionary only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsLocalDictionary",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Finite quotient and fibre cohomology comparison in the geometric reduction of the formal-functions input to henselian idempotent lifting.",
+   "via": [
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteQuotientComparison.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_finite_quotient_comparison",
+  "statement": "theorem formalFunctions_finite_quotient_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)\n    (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :\n    let X' := pullback (Y.fromSpecStalk y) f\n    let f' := pullback.fst (Y.fromSpecStalk y) f\n    let F' := (Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F\n    let J := (Scheme.IdealSheafData.ofIdealTop\n      ((maximalIdeal (Y.presheaf.stalk y)).map\n        (Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv.hom)).comap f'\n    let C := RingedSpace.moduleCohomology X'.toRingedSpace p ⋙\n      ModuleCat.restrictScalars\n        ((Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv ≫ f'.appTop).hom\n    ∃ b : formalCompletionSystem J F' ⋙ C ≅\n      formalFibreCohomologySystem f y F p ⋙ ModuleCat.restrictScalars\n        (algebraMap (Y.presheaf.stalk y)\n          (AdicCompletion (maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y))),\n    ∃ r : ∀ n : ℕ, formalFunctionsLocalCohomology f y F p →ₗ[Y.presheaf.stalk y]\n      formalFibreCohomologyLocal f y F p n,\n      (∀ (n : ℕ) (z : formalFunctionsLocalCohomology f y F p),\n        r n z = (b.hom.app (op n)) ((C.map (formalModuleQuotientπ J (n + 1) F')) z)) ∧\n      ∀ a : formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]\n          formalFunctionsLocalCohomology f y F p,\n        IsFormalFunctionsLocalComparison f y F p a →\n          ∀ n : ℕ, IsFormalFunctionsTheta f y F p n ((r n).comp a)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T165521-L-2936198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T165521-L-2936198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
