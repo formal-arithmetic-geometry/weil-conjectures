@@ -6546,3 +6546,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.EtaleSectionColimitEventualZeroAux (stage 3; reviewer PASS; first push; landing 20261012T063527-L-3163368 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.EtaleSectionColimitLocalLifts (stage 3; reviewer PASS; first push; landing 20261012T063528-L-3163501 (interface); batch 20261012T063502; modules 2; new nodes 1)
 - 06:40 L: returned deliver/M2/Sheaf.AlgebraicGeometry.NormalizedGenericDataLifts (reviewer RETURN: (reviewer X-2bba1, head 2bba1522d) E1/E2 (review point 4): normalized_generic_data_lifts remains false. Counterexample: )
+- 06:40 L: returned deliver/N1/Sheaf.AlgebraicGeometry.Curve.PicAffineBaseChangeCompatibility (reviewer RETURN: (reviewer X-1b302, head 1b3026ac6) C1: The new transport node invokes uncited faithfully flat descent of morphisms. In d)
