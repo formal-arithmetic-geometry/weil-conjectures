@@ -25,42 +25,37 @@
  ],
  "proof": [
   {
-   "text": "By the definition of a derived inverse limit, the system has a Roos distinguished triangle $R\\varprojlim_nK_n\\xrightarrow{p}\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\to(R\\varprojlim_nK_n)[1]$. Countable products in $\\operatorname{Ab}$ are exact [lem-pc-abelian-groups-exact-products], so by part (2) of [lem-weil-derived-limit-existence] the product $\\prod_nK_n$ exists in $D(\\operatorname{Ab})$ and $H^i(\\prod_nK_n)\\cong\\prod_nH^i(K_n)$ via the maps $H^i(\\mathrm{pr}_n)$; since $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$, under this identification $H^i(1-s)$ is the map $1-s$ on $\\prod_nH^i(K_n)$ for the inverse system $(H^i(K_n),H^i(f_n))$.",
+   "text": "Construct the right-hand map explicitly: the composite of p and every product projection is compatible with successor transitions, since p(1-s)=0 in a distinguished triangle. Apply cohomology and NatTrans.ofOpSequence to form the cone, then use limit.lift. Set this map to zero on nondistinguished triples. Its projection equations hold by the limit universal property.",
    "uses": [
-    "def-weil-derived-limit",
-    "lem-pc-abelian-groups-exact-products",
-    "lem-weil-derived-limit-existence"
+    "def-weil-derived-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KX, derived-limit distinguished triangle; Tag 07KC, products in the derived category"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the long exact cohomology sequence [lem-sf-derived-homology-long-exact] to the Roos triangle of Step 1; with Step 1 its segment $\\prod_nH^{i-1}(K_n)\\xrightarrow{1-s}\\prod_nH^{i-1}(K_n)\\to H^i(R\\varprojlim_nK_n)\\xrightarrow{H^i(p)}\\prod_nH^i(K_n)\\xrightarrow{1-s}\\prod_nH^i(K_n)$ is exact. By the Roos computation [lem-pc-derived-limit-roos-abelian-groups], applied to the inverse systems of abelian groups $(H^{i-1}(K_n))_n$ and $(H^i(K_n))_n$, the kernel of $1-s$ in degree $i$ is $\\varprojlim_nH^i(K_n)$ and the cokernel of $1-s$ in degree $i-1$ is naturally $R^1\\varprojlim_nH^{i-1}(K_n)$, the first right derived functor of the inverse limit. Exactness therefore gives the short exact sequence $0\\to R^1\\varprojlim_nH^{i-1}(K_n)\\to H^i(R\\varprojlim_nK_n)\\to\\varprojlim_nH^i(K_n)\\to0$.",
+   "text": "The projection-surjectivity lemma makes this chosen map epi. Choose the natural left-hand injection from the connecting-map factorization, mono and exact before the product of cohomology.",
    "uses": [
-    "lem-sf-derived-homology-long-exact",
-    "lem-pc-derived-limit-roos-abelian-groups"
+    "lem-pc-milnor-projection-factorization",
+    "lem-pc-milnor-boundary-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KY, short exact sequence obtained by breaking the long exact cohomology sequence"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The map j from the inverse limit to the product of cohomology is mono by limit extensionality. Its composite with b is H^i(p) followed by the product comparison, by the projection equations. Cancel j to prove ab=0. Use ShortComplex.exact_iff_of_epi_of_isIso_of_mono with identity left and middle components and right component j to transfer middle exactness. Mono a and epi b give ShortExact. The left square is furnished by the boundary lemma; the right square follows from the p square after each limit projection, hence by limit extensionality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-derived-limit",
-  "lem-pc-abelian-groups-exact-products",
-  "lem-weil-derived-limit-existence",
-  "lem-sf-derived-homology-long-exact",
-  "lem-pc-derived-limit-roos-abelian-groups"
+  "lem-pc-milnor-boundary-factorization",
+  "lem-pc-milnor-projection-factorization"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 08D4 and Tag 07KY"
+  "by": "worker",
+  "group": "W3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KY and Tag 07KW, with the projection half implemented and boundary half split off"
  },
  "mathlib_searches": [
   {
@@ -172,5 +167,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T085359-L-47693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

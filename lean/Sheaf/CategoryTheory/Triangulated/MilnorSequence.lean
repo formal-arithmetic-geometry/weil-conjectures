@@ -10,7 +10,9 @@ public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Whiskering
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import Mathlib.CategoryTheory.Functor.OfSequence
+import Sheaf.CategoryTheory.Triangulated.MilnorBoundaryFactorization
+import Sheaf.CategoryTheory.Triangulated.MilnorProjectionFactorization
 
 /-!
 # Milnor exact sequence for a derived inverse limit
@@ -35,6 +37,34 @@ noncomputable section
 
 attribute [local instance] roosTowerEnoughInjectives roosLimitAdditive
 
+
+/-- The cohomology projections of a Roos triangle form a cone over the tower. -/
+private def milnorProjectionCone [HasDerivedCategory.{v} AddCommGrpCat.{u}]
+    (i : ℤ) (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u})
+    [HasProduct (fun n : ℕ => K.obj (Opposite.op n))]
+    (L : DerivedCategory AddCommGrpCat.{u})
+    (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n))
+    (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧)
+    (hT : IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ) :
+    Cone (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) where
+  pt := (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj L
+  π := NatTrans.ofOpSequence
+    (fun n => (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map
+      (p ≫ Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n)) (by
+      intro n
+      simp only [Functor.const_obj_obj, Functor.const_obj_map, Category.id_comp,
+        Functor.comp_map, ← Functor.map_comp]
+      apply congrArg (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map
+      have hzero := Pretriangulated.comp_distTriang_mor_zero₁₂ _ hT
+      have hn := congrArg
+        (fun f => f ≫ Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n) hzero
+      simp only [zero_comp] at hn
+      change (p ≫ towerTransitionEndomorphism
+        (fun n => K.map (homOfLE (Nat.le_succ n)).op)) ≫
+          Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n = 0 at hn
+      simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
+        Category.id_comp, Pi.lift_π, Preadditive.comp_sub, Category.assoc] at hn
+      simpa only [Category.assoc] using (sub_eq_zero.mp hn))
 
 /-- The natural Milnor short exact sequence for every derived inverse limit of abelian groups.
 Source: Stacks Project, Tags 07KY and 08U5; Tag 08D4, proof of (2)
@@ -109,7 +139,101 @@ theorem milnor_shortExact [HasDerivedCategory.{v} AddCommGrpCat.{u}] (i : ℤ) :
           (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map g ≫ b K' L' p' δ' =
             b K L p δ ≫ limMap (Functor.whiskerRight φ (DerivedCategory.homologyFunctor
               AddCommGrpCat.{u} i)) := by
-  sorry
+  obtain ⟨a, ha, hnat⟩ := milnor_boundary_factorization.{u, v} i
+  classical
+  let b : ∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u})
+      [HasProduct (fun n : ℕ => K.obj (Opposite.op n))]
+      (L : DerivedCategory AddCommGrpCat.{u})
+      (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n))
+      (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧),
+      (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj L ⟶
+        limit (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) :=
+    fun K _ L p δ =>
+      if hT : IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ
+      then limit.lift _ (milnorProjectionCone i K L p δ hT)
+      else 0
+  have hb (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u})
+      [HasProduct (fun n : ℕ => K.obj (Opposite.op n))]
+      (L : DerivedCategory AddCommGrpCat.{u})
+      (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n))
+      (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧)
+      (hT : IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ) :
+      Epi (b K L p δ) ∧
+        ∀ n : ℕ, b K L p δ ≫ limit.π
+          (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (Opposite.op n) =
+          (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map
+            (p ≫ Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n) := by
+    have hπ (n : ℕ) : b K L p δ ≫ limit.π
+        (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (Opposite.op n) =
+        (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map
+          (p ≫ Pi.π (fun n : ℕ => K.obj (Opposite.op n)) n) := by
+      simp only [b, dif_pos hT, limit.lift_π, milnorProjectionCone,
+        NatTrans.ofOpSequence_app]
+    exact ⟨milnor_projection_epi i K L p δ hT _ hπ, hπ⟩
+  refine ⟨a, b, ?_, ?_⟩
+  · intro K hP L p δ hT
+    obtain ⟨hm, hz, he⟩ := ha K L p δ hT
+    obtain ⟨hep, hπ⟩ := hb K L p δ hT
+    let j := Pi.lift
+      (f := fun n : ℕ => (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj
+        (K.obj (Opposite.op n))) (fun n : ℕ => limit.π
+      (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (Opposite.op n))
+    have hj : Mono j := ⟨by
+      intro Z f g h
+      apply limit.hom_ext
+      intro n
+      obtain ⟨n⟩ := n
+      have hn := congrArg
+        (fun k => k ≫ Pi.π
+          (fun n : ℕ => (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj
+            (K.obj (Opposite.op n))) n) h
+      dsimp only [Functor.comp_obj] at hn ⊢
+      simpa only [j, Category.assoc, Pi.lift_π] using hn⟩
+    have hbj : b K L p δ ≫ j =
+        (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map p ≫
+          piComparison (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i)
+            (fun n : ℕ => K.obj (Opposite.op n)) := by
+      apply Pi.hom_ext
+      intro n
+      simpa only [j, Category.assoc, Pi.lift_π, piComparison_comp_π,
+        ← Functor.map_comp] using hπ n
+    have hz' : a K L p δ ≫ b K L p δ = 0 := by
+      apply (cancel_mono j).1
+      simpa only [Category.assoc, hbj, zero_comp] using hz
+    refine ⟨⟨hz', ?_⟩, hπ⟩
+    let φ : ShortComplex.mk (a K L p δ) (b K L p δ) hz' ⟶
+        ShortComplex.mk (a K L p δ)
+          ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map p ≫
+            piComparison (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i)
+              (fun n : ℕ => K.obj (Opposite.op n))) hz :=
+      ShortComplex.homMk (𝟙 _) (𝟙 _) j
+        (by simp) (by simpa using hbj.symm)
+    have : Epi φ.τ₁ := by change Epi (𝟙 _); infer_instance
+    have : IsIso φ.τ₂ := by change IsIso (𝟙 _); infer_instance
+    have : Mono φ.τ₃ := hj
+    have hex : (ShortComplex.mk (a K L p δ) (b K L p δ) hz').Exact :=
+      (ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).2 he
+    exact ShortComplex.ShortExact.mk' hex hm hep
+  · intro K K' hP hP' L L' p p' δ δ' hT hT' φ g hp hδ
+    refine ⟨hnat K K' L L' p p' δ δ' hT hT' φ g hp hδ, ?_⟩
+    apply limit.hom_ext
+    intro n
+    obtain ⟨n⟩ := n
+    have hπ := (hb K L p δ hT).2 n
+    have hπ' := (hb K' L' p' δ' hT').2 n
+    have hpπ := congrArg
+      (fun f => f ≫ Pi.π (fun n : ℕ => K'.obj (Opposite.op n)) n) hp
+    simp only [Category.assoc, Pi.map_π] at hpπ
+    rw [Category.assoc, hπ', Category.assoc, limMap_π]
+    change (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map g ≫
+        (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map
+          (p' ≫ Pi.π (fun n : ℕ => K'.obj (Opposite.op n)) n) =
+      b K L p δ ≫ limit.π
+        (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (Opposite.op n) ≫
+        (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map (φ.app (Opposite.op n))
+    rw [← Category.assoc, hπ, ← Functor.map_comp, ← Functor.map_comp]
+    apply congrArg (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map
+    simpa only [Category.assoc] using hpπ.symm
 
 end
 end CategoryTheory
