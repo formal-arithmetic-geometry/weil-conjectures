@@ -1,0 +1,150 @@
+{
+ "id": "lem-sc-generator-tower-normalize",
+ "kind": "statement",
+ "title": "Normalize and map an existing generator telescope",
+ "statement": "Let $C,D$ be triangulated categories [def-weil-triangulated-category], with Hom sets of $C$ in universe $u$, and let $C$ have universe-$u$ coproducts. Let $F:C\\to D$ be additive, commute with integer shifts, and preserve distinguished triangles and universe-$u$ coproducts. Fix $e,q\\in C$, $E,Q\\in D$ and isomorphisms $F(e)\\cong E$, $F(q)\\cong Q$. Suppose a sequence $A_n$ with transitions $t_n$ has $A_0\\cong\\bigoplus_{j\\in J}e[m_j]$ and distinguished triangles $Z_n\\to A_n\\xrightarrow{t_n}A_{n+1}\\to Z_n[1]$, each $Z_n$ a universe-$u$ coproduct of shifts of $e$. Suppose the transition endomorphism $s$ on $\\bigoplus_n A_n$ fits into a distinguished triangle $\\bigoplus_n A_n\\xrightarrow{1-s}\\bigoplus_n A_n\\to q\\to(\\bigoplus_n A_n)[1]$. Then there is a sequence $X_n\\in C$ with $F(X_0)$ zero and transitions $F(X_n)\\to F(X_{n+1})$ whose distinguished triangles have third terms universe-$u$ coproducts of shifts of $E$. There is a naturally indexed colimiting cofan $S$ on $F(X_n)$ and an endomorphism $s_X$ satisfying the transition equations on coprojections, with $S\\xrightarrow{1-s_X}S\\to Q\\to S[1]$ distinguished. Neither compactness nor generation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "The proved private helpers cofan_change_sources and mapped_sum_cofan transport a colimiting cofan along component source isomorphisms and along a coproduct-preserving functor. The descent maps precompose with the inverse isomorphisms; cancellation proves factorization and uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "Set X_0=0, X_(n+1)=A_n, t_0=0 and t_(n+1)=t_n. Map the contractible triangle 0 -> A_0 -> A_0 -> 0[1] for the first transition. Rotate the subsequent triangles once and map them by F. Apply mapped_sum_cofan to F for A_0 and to shiftFunctor(1) followed by F for Z_n. Shift addition, the shift comparison of F, and F(e) isomorphic to E identify the summands with E[m] and E[m+1].",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "Use the old coproduct of the ULift-indexed A_n as the point of a cofan on the naturally indexed X_n. Its zero coprojection is zero and its successor coprojections are the old ones. The old coproduct descent to a target cofan successor injections factors this new cofan. Checking on every old coprojection proves uniqueness, hence the cofan is colimiting.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "Take s to be the old Sigma.desc transition map. At zero the transition equation is zero equals zero; at successors it is Sigma.ι_desc. Reindex the new cofan by ULift, map it using preservation of universe-u coproducts, and reindex back by Equiv.ulift. The image cofan is colimiting; applying F to the component equations proves the required equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "Map the telescope triangle by F. Additivity rewrites the first map as identity minus F(s). Compose the second map with F(q) isomorphic to Q, and precompose the third with its inverse. The triangle isomorphism with identity first and second components and that inverse as third component transports distinguishedness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U1",
+  "date": "2026-10-12",
+  "description": "Complete Lean proof of rotation, coproduct universal properties, zero prepend, reindexing and exact-functor transport; expansion of Tags 09SN and 0E4G."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Prepending a zero object to a sequential telescope and mapping it by an exact coproduct preserving functor preserves its telescope triangle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact generator in a triangulated category constructs every object as a sequential telescope of sums of shifts",
+   "results": "CategoryTheory.Triangulated.TStructure.IsGE; CategoryTheory.Triangulated.TStructure.ge; CategoryTheory.Triangulated.TStructure.le; DerivedCategory.TStructure.t; CategoryTheory.Triangulated.TStructure.IsLE; CategoryTheory.Triangulated.TStructure.exists_triangle; CategoryTheory.Triangulated.TStructure.ge_of_isGE; CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|prepend.*zero|LocallySmall.*DerivedCategory",
+   "results": "No matches",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the direct-sum extension from bounded-below support to all supported complexes; the telescope step after constructing the supported perfect generator",
+   "via": [
+    "lem-sc-supported-derived-generated-perfect-core",
+    "lem-sc-supported-derived-generated-perfect",
+    "lem-sc-right-adjoint-open-support-criterion",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GeneratorTowerNormalize",
+  "file": "lean/Sheaf/CategoryTheory/GeneratorTowerNormalize.lean",
+  "declaration": "CategoryTheory.generator_tower_normalize",
+  "statement": "theorem generator_tower_normalize {C : Type c} {D : Type d} [Category.{u} C] [Category.{v} D] [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ] [Preadditive C] [Preadditive D] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated C] [Pretriangulated D] [IsTriangulated C] [IsTriangulated D] [HasCoproducts.{u} C] (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [F.Additive] (hF : ∀ I : Type u, PreservesColimitsOfShape (Discrete I) F) (e q : C) (E Q : D) (he : F.obj e ≅ E) (hq : F.obj q ≅ Q) (A : ℕ → C) (t : ∀ n : ℕ, A n ⟶ A (n + 1)) (hstart : ∃ (J : Type u) (m : J → ℤ), Nonempty (A 0 ≅ ∐ fun j : J ↦ e⟦m j⟧)) (hsteps : ∃ (Z : ℕ → C) (a : ∀ n : ℕ, Z n ⟶ A n) (b : ∀ n : ℕ, A (n + 1) ⟶ (Z n)⟦(1 : ℤ)⟧), (∀ n : ℕ, ∃ (J : Type u) (m : J → ℤ), Nonempty (Z n ≅ ∐ fun j : J ↦ e⟦m j⟧)) ∧ ∀ n : ℕ, Triangle.mk (a n) (t n) (b n) ∈ distTriang C) (qA : (∐ fun n : ULift.{u} ℕ ↦ A n.down) ⟶ q) (rA : q ⟶ (∐ fun n : ULift.{u} ℕ ↦ A n.down)⟦(1 : ℤ)⟧) (htelescope : Triangle.mk (𝟙 (∐ fun n : ULift.{u} ℕ ↦ A n.down) - Sigma.desc (fun n : ULift.{u} ℕ ↦ t n.down ≫ Sigma.ι (fun k : ULift.{u} ℕ ↦ A k.down) ⟨n.down + 1⟩)) qA rA ∈ distTriang C) : ∃ (X : ℕ → C) (tX : ∀ n : ℕ, F.obj (X n) ⟶ F.obj (X (n + 1))), IsZero (F.obj (X 0)) ∧ (∀ n : ℕ, ∃ (I : Type u) (m : I → ℤ) (B : Cofan (fun i : I ↦ E⟦m i⟧)), Nonempty (IsColimit B) ∧ ∃ (a : F.obj (X (n + 1)) ⟶ B.pt) (b : B.pt ⟶ (F.obj (X n))⟦(1 : ℤ)⟧), Triangle.mk (tX n) a b ∈ distTriang D) ∧ ∃ (S : Cofan (fun n : ℕ ↦ F.obj (X n))), Nonempty (IsColimit S) ∧ ∃ (s : S.pt ⟶ S.pt) (qS : S.pt ⟶ Q) (rS : Q ⟶ S.pt⟦(1 : ℤ)⟧), (∀ n : ℕ, S.inj n ≫ s = tX n ≫ S.inj (n + 1)) ∧ Triangle.mk (𝟙 S.pt - s) qS rS ∈ distTriang D",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144150-L-2108828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144150-L-2108828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

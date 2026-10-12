@@ -1,0 +1,173 @@
+{
+ "id": "lem-sc-supported-compact-detector-model",
+ "kind": "statement",
+ "title": "Small-Hom supported category carrying a given compact detector",
+ "statement": "Let $Y$ be a scheme [def-weil-pbc-scheme-conventions] in universe $u$ and $V\\subseteq Y$ open. Let $E,Q\\in D_{\\mathrm{QCoh}}(Y)$ [def-pc-derived-category] have cohomology stalks zero on $V$. Assume the ambient property of quasi-coherent cohomology and zero stalks on $V$ is triangulated [def-weil-triangulated-category], $E$ is compact [def-pc-compact-object] for universe-$u$ coproducts [lem-pc-derived-qcoh-direct-sums], and every supported $K$ is zero precisely when $\\operatorname{Hom}(E[n],K)=0$ for all integers $n$. There exists a category $C$ with objects in universe $u+1$ and Hom sets in universe $u$, with a triangulated structure and universe-$u$ coproducts, and an additive exact functor $F:C\\to D(\\mathcal O_Y)$ preserving these coproducts, whose image has quasi-coherent cohomology. There exist $e,q\\in C$ with $F(e)\\cong E$, $F(q)\\cong Q$, such that $e$ is compact and the singleton family $e$ generates $C$ [def-pc-generators]. No tower or telescope is asserted.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category",
+  "def-weil-triangulated-category",
+  "def-pc-compact-object",
+  "lem-pc-derived-qcoh-direct-sums",
+  "def-pc-generators"
+ ],
+ "proof": [
+  {
+   "text": "Let P be the ambient property of quasi-coherent complexes with zero cohomology stalks on V. The supplied triangulated hypothesis equips its full subcategory with the inherited triangulated structure. E and Q lie in it by their supplied support properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "Ambient coproducts have coproduct cohomology. Stalks of sheaf coproducts are direct sums of the input stalks, hence zero on V, including empty sums. The ambient quasi-coherent property is closed under these coproducts by schemeDerivedQCohClosedUnderCoproducts; the theorem on direct sums supplies the agreed coproduct structure in D_QCoh. Thus P is closed under universe-u coproducts and its inclusion creates them.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums",
+    "lem-pc-stalk-direct-sums",
+    "lem-pc-derived-qcoh-direct-sums",
+    "lem-pc-derived-qcoh-closed-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "K-injective resolutions identify each derived Hom set with homotopy classes of chain maps into a K-injective representative. Chain maps between universe-u module sheaves form a universe-u-small set; quotients preserve smallness. Hence the supported category is locally u-small. The proved source-library instance DerivedCategory.locallySmall in WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory supplies this conclusion after installing the module-sheaf Grothendieck structure and K-injective resolutions.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Theorem 079P, theorem-K-injective-embedding-grothendieck; derived.tex, K-injective morphisms"
+   }
+  },
+  {
+   "text": "Take ShrinkHoms of this full subcategory, keeping its objects and shrinking Hom sets to universe u. Transport zero, addition, shifts and distinguished triangles along the canonical equivalence using triangulatedEquivalenceTransfer. Equivalences preserve coproducts. Compose the inverse equivalence with the inclusion to obtain F, additive and exact and preserving universe-u coproducts. Each image is quasi-coherent.",
+   "uses": [
+    "lem-pc-triangulated-equivalence-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  },
+  {
+   "text": "The supported objects E and Q give e and q. Full faithfulness and agreement of coproducts identify the compactness comparison with that for E: on every direct-sum summand both send f to f composed with its coprojection. Thus e is compact. The singleton coproduct is e. For any nonzero model object K, shifted-Hom detection gives a nonzero map E[n] to F(K). Applying the inverse shift equivalence rewrites it as a map E to F(K)[-n]. Full faithfulness and the shift comparison give a nonzero map e to K[-n], proving singleton generation.",
+   "uses": [
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-pc-stalk-direct-sums",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-triangulated-equivalence-transfer",
+  "def-pc-generators"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported derived category has small Hom sets and coproducts preserved by inclusion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full supported triangulated subcategory with small Hom sets inherits compactness and a singleton weak generator from ambient shifted Hom detection",
+   "results": "CategoryTheory.Triangulated.Subcategory; CategoryTheory.Triangulated.Subcategory.mk'; CategoryTheory.ObjectProperty.IsTriangulatedClosed₁; CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated; CategoryTheory.ObjectProperty.IsTriangulatedClosed₂; CategoryTheory.Triangulated.Subcategory.W.mk'; CategoryTheory.ObjectProperty.IsTriangulatedClosed₃; CategoryTheory.Triangulated.TStructure.ge",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|prepend.*zero|LocallySmall.*DerivedCategory",
+   "results": "No matches",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the direct-sum extension from bounded-below support to all supported complexes; the telescope step after constructing the supported perfect generator",
+   "via": [
+    "lem-sc-supported-derived-generated-perfect-core",
+    "lem-sc-supported-derived-generated-perfect",
+    "lem-sc-right-adjoint-open-support-criterion",
+    "lem-sc-proper-flat-right-adjoint-restriction-open",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedCompactDetectorModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedCompactDetectorModel.lean",
+  "declaration": "AlgebraicGeometry.supported_compact_detector_model",
+  "statement": "theorem supported_compact_detector_model (Y : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (V : Y.Opens) (E Q : schemeDerivedQCohCategory Y) (htri : ObjectProperty.IsTriangulated (fun K : schemeDerivedCategory Y ↦ schemeDerivedQCohProperty Y K ∧ ∀ (k : ℤ) (y : Y), y ∉ (V : Set Y)ᶜ → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj K).val.presheaf y)))) (hcompact : letI : HasCoproducts.{u} (schemeDerivedQCohCategory Y) := derivedQCohDirectSums Y IsCompactObject E) (hsupport : ∀ (k : ℤ) (y : Y), y ∉ (V : Set Y)ᶜ → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj E.obj).val.presheaf y))) (hgen : ∀ K : schemeDerivedQCohCategory Y, (∀ (k : ℤ) (y : Y), y ∉ (V : Set Y)ᶜ → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj K.obj).val.presheaf y))) → (IsZero K.obj ↔ ∀ n : ℤ, Subsingleton (E.obj⟦n⟧ ⟶ K.obj))) (hQ : ∀ (k : ℤ) (y : Y), y ∉ (V : Set Y)ᶜ → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj).val.presheaf y))) : ∃ (C : Type (u + 1)) (_ : Category.{u} C) (_ : HasZeroObject C) (_ : HasShift C ℤ) (_ : Preadditive C) (_ : ∀ n : ℤ, (shiftFunctor C n).Additive) (_ : Pretriangulated C) (_ : IsTriangulated C) (_ : HasCoproducts.{u} C) (F : C ⥤ schemeDerivedCategory Y) (_ : F.CommShift ℤ), F.IsTriangulated ∧ F.Additive ∧ (∀ I : Type u, PreservesColimitsOfShape (Discrete I) F) ∧ (∀ K : C, schemeDerivedQCohProperty Y (F.obj K)) ∧ ∃ e q : C, Nonempty (F.obj e ≅ E.obj) ∧ Nonempty (F.obj q ≅ Q.obj) ∧ IsCompactObject e ∧ IsTriangulatedGeneratingFamily (fun _ : ULift.{u} Unit ↦ e)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144150-L-2108828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144150-L-2108828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

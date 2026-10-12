@@ -3,13 +3,9 @@ module
 public import Sheaf.CategoryTheory.CompactObject
 public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import Sheaf.AlgebraicGeometry.SupportedCompactDetectorModel
 import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
-import Sheaf.Topology.StalkDirectSums
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.CategoryTheory.EssentiallySmall
-import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import Sheaf.CategoryTheory.GeneratorTowerNormalize
 
 /-! # Telescope construction for a given supported compact detector
 
@@ -97,6 +93,41 @@ theorem supported_derived_generated_perfect_core (Y : Scheme.{u})
             (r : Q.obj ⟶ S.pt⟦(1 : ℤ)⟧),
             (∀ n : ℕ, S.inj n ≫ s = t n ≫ S.inj (n + 1)) ∧
             Triangle.mk (𝟙 S.pt - s) q r ∈ distTriang (schemeDerivedCategory Y) := by
-  sorry
+  intro hQ
+  obtain ⟨C, cat, z, shift, add, shiftAdd, pretri, tri, sums, F, comm,
+    htriF, haddF, hsumF, hqcF, e, q, ⟨he⟩, ⟨hq⟩, hecompact, hegen⟩ :=
+    supported_compact_detector_model Y V E Q htri hcompact hsupport hgen hQ
+  let := cat
+  let := z
+  let := shift
+  let := add
+  let := shiftAdd
+  let := pretri
+  let := tri
+  let := sums
+  let := comm
+  let := htriF
+  let := haddF
+  obtain ⟨A, t, hstart, hsteps, qA, rA, htel⟩ :=
+    compactGenerators_buildObjects.{u, u} (fun _ : ULift.{u} Unit ↦ e)
+      (fun _ ↦ hecompact) hegen q
+  have hstart' : ∃ (J : Type u) (m : J → ℤ),
+      Nonempty (A 0 ≅ ∐ fun j : J ↦ e⟦m j⟧) := by
+    obtain ⟨J, _, m, h⟩ := hstart
+    exact ⟨J, m, h⟩
+  have hsteps' : ∃ (Z : ℕ → C) (a : ∀ n : ℕ, Z n ⟶ A n)
+      (b : ∀ n : ℕ, A (n + 1) ⟶ (Z n)⟦(1 : ℤ)⟧),
+      (∀ n : ℕ, ∃ (J : Type u) (m : J → ℤ),
+        Nonempty (Z n ≅ ∐ fun j : J ↦ e⟦m j⟧)) ∧
+      ∀ n : ℕ, Triangle.mk (a n) (t n) (b n) ∈ distTriang C := by
+    obtain ⟨Z, a, b, hZ, hdist⟩ := hsteps
+    refine ⟨Z, a, b, ?_, hdist⟩
+    intro n
+    obtain ⟨J, _, m, h⟩ := hZ n
+    exact ⟨J, m, h⟩
+  obtain ⟨X, tX, hzero, htrans, hcolim⟩ :=
+    generator_tower_normalize F hsumF e q E.obj Q.obj he hq
+      A t hstart' hsteps' qA rA htel
+  exact ⟨fun n ↦ ⟨F.obj (X n), hqcF (X n)⟩, tX, hzero, htrans, hcolim⟩
 
 end AlgebraicGeometry

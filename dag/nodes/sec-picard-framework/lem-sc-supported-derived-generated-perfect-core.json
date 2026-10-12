@@ -17,20 +17,9 @@
  ],
  "proof": [
   {
-   "text": "Let $P$ be the property of quasi-coherent complexes whose cohomology stalks vanish on $V$. The supplied triangulated-closure hypothesis gives its full subcategory $\\mathcal D$ the inherited triangulated structure, and the supplied support hypotheses put $E$ and $Q$ in $\\mathcal D$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
-   }
-  },
-  {
-   "text": "By [lem-pc-derived-ambient-direct-sums], cohomology of an ambient coproduct is the coproduct of cohomology sheaves. By [lem-pc-stalk-direct-sums], its stalk at a point of $V$ is a direct sum of zero stalks, hence zero. By [lem-pc-derived-qcoh-direct-sums], quasi-coherence is preserved. Thus $\\mathcal D$ has coproducts computed in the ambient derived category and in $D_{\\mathrm{QCoh}}(Y)$.",
+   "text": "Apply the supported-category preparation lemma to obtain a universe-u-Hom triangulated model, an additive exact coproduct-preserving inclusion F with quasi-coherent image, and a compact singleton generator e mapping to E and an object q mapping to Q.",
    "uses": [
-    "lem-pc-derived-ambient-direct-sums",
-    "lem-pc-stalk-direct-sums",
-    "lem-pc-derived-qcoh-direct-sums"
+    "lem-sc-supported-compact-detector-model"
    ],
    "elementary": false,
    "source": {
@@ -39,20 +28,8 @@
    }
   },
   {
-   "text": "The small-site K-injective resolutions of [prop-pur-kinjective-resolutions-exist] apply to the ringed site of opens of $Y$. Represent the source by a complex and resolve the target by a K-injective complex. The localization map from chain maps to derived morphisms is surjective, since morphisms into a K-injective are homotopy classes of chain maps (Mathlib, CochainComplex.IsKInjective.Qh_map_bijective). Chain maps between sheaves of $u$-small modules form a $u$-small set, so each derived Hom is $u$-small as a quotient. Transfer the supported triangulated category to its equivalent model with $u$-small Hom sets before applying the compact-generator theorem in the next step. Its coproducts and resulting indexing sets then have universe $u$, independently of the chosen localization universe.",
+   "text": "Apply compactGenerators_buildObjects to the singleton family indexed by ULift Unit, constantly equal to e, and to q. Its first term and cone terms are sums of shifts of e; discard the unused singleton-label maps from the indexing data.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Theorem 079P (theorem-K-injective-embedding-grothendieck), and derived.tex, K-injective morphisms"
-   }
-  },
-  {
-   "text": "The Hom groups in a full subcategory are the ambient Hom groups, and the coproducts agree. Thus the assumed compactness of $E$ in $D_{\\mathrm{QCoh}}(Y)$ gives compactness in $\\mathcal D$, and the supplied shifted-Hom detection equivalence makes $\\{E\\}$ a generating family [def-pc-generators]. Apply [lem-pc-compact-generators-build-objects] to this singleton family and $Q$. It gives $A_0\\to A_1\\to\\cdots$ with $A_0$ a sum of shifts and triangles $Z_n\\to A_n\\to A_{n+1}\\to Z_n[1]$, with $Z_n$ a sum of shifts, and the telescope triangle ending in $Q$.",
-   "uses": [
-    "def-pc-generators",
     "lem-pc-compact-generators-build-objects"
    ],
    "elementary": false,
@@ -62,16 +39,18 @@
    }
   },
   {
-   "text": "Rotate each transition triangle once to obtain $A_n\\to A_{n+1}\\to Z_n[1]\\to A_n[1]$. The shift equivalence preserves coproducts, so its third object is a sum of $E[m+1]$. Apply the inherited exact inclusion to obtain ambient distinguished triangles and ambient colimiting cofans.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply generator_tower_normalize to the sequence, its triangles, its telescope triangle and the isomorphisms F(e) -> E and F(q) -> Q. The proved rotation and zero-prepending argument gives the ambient cofans and distinguished triangles.",
+   "uses": [
+    "lem-sc-generator-tower-normalize"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
     "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
    }
   },
   {
-   "text": "Set $X_0=0$ and $X_{n+1}=A_n$. For the first transition use $0\\to A_0\\xrightarrow{1}A_0\\to0[1]$. The coproduct of $(X_n)$ is canonically isomorphic to that of $(A_n)$ by deleting the zero summand and relabelling $n+1$ as $n$. Checking on coprojections shows that this isomorphism intertwines the two transition endomorphisms. Transport the telescope triangle along it, and reindex the ULift coproduct by $\\mathbb N$. This gives the stated cofan $S$, the map $s$ satisfying $\\iota_n s=t_n\\iota_{n+1}$, and the triangle with $1-s$.",
+   "text": "Package each F(X_n) with the supplied quasi-coherence proof as an object of schemeDerivedQCohCategory. Its underlying object is definitionally F(X_n), so all the transition, zero, cofan and triangle assertions are exactly those already obtained.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -81,17 +60,15 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-ambient-direct-sums",
-  "lem-pc-stalk-direct-sums",
-  "lem-pc-derived-qcoh-direct-sums",
-  "prop-pur-kinjective-resolutions-exist",
-  "def-pc-generators",
-  "lem-pc-compact-generators-build-objects"
+  "lem-sc-supported-compact-detector-model",
+  "lem-pc-compact-generators-build-objects",
+  "lem-sc-generator-tower-normalize"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Section Tag 0E4G, lemma-when-sheafy, proof of (3); derived.tex, lemma-write-as-colimit (Tag 09SN)"
+  "by": "worker",
+  "group": "U1",
+  "date": "2026-10-12",
+  "description": "Compiled reduction through a supported small-Hom model, the existing compact-generator theorem, and a fully proved generic telescope normalization theorem. Only category preparation is split off."
  },
  "mathlib_searches": [
   {
@@ -183,7 +160,7 @@
   "reviewer": "COMPILER",
   "group": "U1",
   "result": "pass",
-  "landing": "20261012T112850-L-772004",
+  "landing": "20261012T144150-L-2108828",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

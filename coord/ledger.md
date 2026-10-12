@@ -8213,3 +8213,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/U1/Sheaf.AlgebraicGeometry.EtaleSmallInjectiveCriterion (stage 3; reviewer PASS; first push; landing 20261012T144149-L-2108531 (interface); batch 20261012T144049; modules 4; new nodes 3)
 - 14:41 L: merged deliver/U1/Sheaf.AlgebraicGeometry.ExistsGluedSection (stage 3; reviewer PASS; first push; landing 20261012T144149-L-2108631 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/U1/Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial (stage 3; reviewer PASS; first push; landing 20261012T144149-L-2108730 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/U1/Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore (stage 3; reviewer PASS; first push; landing 20261012T144150-L-2108828 (interface); batch 20261012T144049; modules 3; new nodes 2)
