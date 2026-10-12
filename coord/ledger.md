@@ -10095,3 +10095,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:29 L: merged deliver/K3/Sheaf.CategoryTheory.FilteredQuotientComparisons (stage 3; reviewer PASS; first push; landing 20261012T232900-L-2042013 (proof); batch 20261012T232855; modules 1; new nodes 1; change records: coord/changes/filteredQuotient_comparisons.md)
 - 23:29 L: merged deliver/K3/Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth (stage 3; reviewer PASS; first push; landing 20261012T232900-L-2042115 (proof); batch 20261012T232855; modules 1; new nodes 0)
 - 23:29 L: merged deliver/K4/Sheaf.AlgebraicGeometry.ModulePullbackIdealProductImage (stage 3; reviewer PASS; after a return; landing 20261012T232900-L-2042215 (proof); batch 20261012T232855; modules 1; new nodes 0)
+- 23:29 L: merged deliver/K4/Sheaf.RingTheory.LocalizationJapaneseDomain (stage 3; reviewer PASS; first push; landing 20261012T232901-L-2042313 (proof); batch 20261012T232855; modules 1; new nodes 0)
