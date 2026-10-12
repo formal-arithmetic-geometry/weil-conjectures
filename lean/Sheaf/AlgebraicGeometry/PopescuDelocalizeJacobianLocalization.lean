@@ -1,6 +1,7 @@
 module
 
 public import Mathlib.RingTheory.Smooth.StandardSmooth
+import Sheaf.AlgebraicGeometry.PopescuAuxiliarySubmersivePresentation
 
 /-!
 # Standard smoothness of the dehomogenized Jacobian localization
@@ -45,6 +46,7 @@ theorem popescu_auxiliary_isStandardSmooth
       (Ideal.span (Set.range (fun j : Fin c =>
         rename (fun i : Fin N => i.castSucc.succ) (f j))))
       (X (0 : Fin (N + 2)) * X (Fin.last (N + 1)) * C (∏ j : Fin (t + 1), s j)))) := by
-  sorry
+  obtain ⟨P⟩ := popescu_auxiliary_submersivePresentation R N c t hc f s h hs
+  exact P.isStandardSmooth
 
 end Algebra
