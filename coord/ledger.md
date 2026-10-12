@@ -8035,3 +8035,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ProperBasic (stage 3; reviewer PASS; first push; landing 20261012T144052-L-2088487 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:40 L: merged deliver/B2/Sheaf.CategoryTheory.FilteredComplexPositivePages (stage 3; reviewer PASS; first push; landing 20261012T144052-L-2088584 (interface); batch 20261012T144049; modules 4; new nodes 3)
 - 14:40 L: merged deliver/B2/Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalizationAddEquiv (stage 3; reviewer PASS; first push; landing 20261012T144052-L-2088703 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:40 L: merged deliver/B2/Sheaf.FieldTheory.BrauerScalarDefectFaithfulBackward (stage 3; reviewer PASS; first push; landing 20261012T144053-L-2088808 (interface); batch 20261012T144049; modules 3; new nodes 2)

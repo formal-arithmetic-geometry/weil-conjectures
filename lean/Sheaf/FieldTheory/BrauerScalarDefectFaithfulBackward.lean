@@ -1,5 +1,9 @@
 module
 public import Sheaf.FieldTheory.BrauerScalarDefect
+import Mathlib.RingTheory.MatrixAlgebra
+import Mathlib.LinearAlgebra.Matrix.ToLin
+import Sheaf.FieldTheory.CentralSimpleTensorEnd
+import Sheaf.FieldTheory.BrauerScalarDefectTensorSplit
 @[expose] public section
 universe u
 namespace Field
@@ -17,5 +21,22 @@ that of Section 0DVG. (blueprint: lem-sc-brauer-scalar-defect-faithful-backward)
 theorem brauerEquivalent_of_brauerScalarDefect_eq (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y)
-    (h : x = y) : IsBrauerEquivalent A B := by sorry
+    (h : x = y) : IsBrauerEquivalent A B := by
+  classical
+  obtain ⟨n, hn, ⟨eAB⟩⟩ := tensor_opposite_split_of_brauerScalarDefect_eq K A B x y hx hy h
+  let m := Module.finrank K B
+  have hm : m ≠ 0 := ne_of_gt (Module.finrank_pos (R := K) (M := B))
+  let eBB : (TensorProduct K Bᵐᵒᵖ B) ≃ₐ[K] Matrix (Fin m) (Fin m) K :=
+    (Algebra.TensorProduct.comm K Bᵐᵒᵖ B).trans
+      ((AlgEquiv.ofBijective (AlgHom.mulLeftRight K B)
+        (centralSimple_mulLeftRight_bijective K B)).trans
+        (LinearMap.toMatrixAlgEquiv (Module.finBasis K B)))
+  -- M_m(A) ≃ A ⊗ (Bᵐᵒᵖ ⊗ B) ≃ (A ⊗ Bᵐᵒᵖ) ⊗ B ≃ M_n(B).
+  refine ⟨m, n, hm, hn, ⟨?_⟩⟩
+  exact (matrixEquivTensor (Fin m) K A).trans
+    ((Algebra.TensorProduct.congr (AlgEquiv.refl : A ≃ₐ[K] A) eBB.symm).trans
+      ((Algebra.TensorProduct.assoc K K K A Bᵐᵒᵖ B).symm.trans
+        ((Algebra.TensorProduct.congr eAB (AlgEquiv.refl : B ≃ₐ[K] B)).trans
+          ((Algebra.TensorProduct.comm K (Matrix (Fin n) (Fin n) K) B).trans
+            (matrixEquivTensor (Fin n) K B).symm))))
 end Field
