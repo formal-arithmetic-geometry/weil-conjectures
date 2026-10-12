@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-alternating-cech-repeat-central-faces",
+ "kind": "statement",
+ "title": "The three central faces of a duplicated first repeat",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a linearly ordered type, $U:I\\to\\mathrm{Opens}(X)$ an open family [def-sc-zariski-site], $F$ an abelian-group presheaf, and $S$ a chosen terminal-open Čech product complex [def-weil-pbc-site-cech-complex]. Let $p\\ge0$, $s\\in S^{p+1}(F)$, $t:\\{0,\\ldots,p+1\\}\\to I$, and $a\\in\\{0,\\ldots,p+1\\}$ satisfy the first-repeat predicate [def-pc-alternating-cech-sorting-operators]: $t_a=t_{a+1}$ and $t_b<t_{b+1}$ for every $b<a$. Let $q:\\{0,\\ldots,p+2\\}\\to\\{0,\\ldots,p+1\\}$ duplicate position $a$, so $q(k)=k$ for $k\\le a$ and $q(k)=k-1$ otherwise, and let $\\delta_j$ omit position $j$. Write $\\alpha^*$ for the index map of $S$. Then $\\sum_{j=a}^{a+2}(-1)^a(-1)^j F(q^*)F(\\delta_j^*)\\bigl(s_{tq\\delta_j}\\bigr)=s_t$. No monotonicity hypothesis on the rest of $t$ is required.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation-second-homotopy (20.23.6.2), and the verification omitted immediately after it"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "Duplication at the first repeat turns the equal entries at a and a+1 into\nthree equal entries at a,a+1,a+2. Deleting any of them gives t again. The composite\nrestriction is the identity after this tuple equality, since Opens is a thin\ncategory. Thus the three transported sections all equal s(t). Their coefficients\nare (-1)^a times (-1)^a, (-1)^(a+1), and (-1)^(a+2), respectively. The first\nand third are 1 and the middle is -1, so their sum is 1. All other summands\nare excluded by the filter.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation-second-homotopy (20.23.6.2), and the verification omitted immediately after it; Q2 supplied the finite-sum verification omitted by Stacks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cancellation of faces in the Cech contracting homotopy duplicating the first repeated value",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The three central faces after duplicating an adjacent repeated entry have alternating signed sum equal to the original cochain",
+   "results": "Candidates: CochainComplex.ConnectData.d_sub_two_sub_one, CochainComplex.HomComplex.Cochain.δ_single, inhomogeneousCochains.d_hom_apply, AlgebraicTopology.AlternatingCofaceMapComplex.objD, AlgebraicTopology.AlternatingCofaceMapComplex.d_squared, CochainComplex.HomComplex.δ_v, CochainComplex.HomComplex.δ_comp, CochainComplex.HomComplex.Cochain.δ_toSingleMk. None states this filtered Čech face identity.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*repeat|repeat.*cech|tripled|firstRepeat",
+   "results": "No matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSortedContraction",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "Proof of ordered Čech homotopy equivalence: the three central faces of a duplicated first repeat in Stacks 01FM equation-second-homotopy",
+   "via": [
+    "lem-pc-alternating-cech-sorted-contraction",
+    "lem-pc-alternating-cech-second-sorting-identity",
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechRepeatCentralFaces",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechRepeatCentralFaces.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechRepeatCentralFaces",
+  "statement": "theorem cechRepeatCentralFaces (X : Scheme.{u}) {I : Type v} [LinearOrder I] (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w}) (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ) (s : S.cochains F (p + 1)) (t : Fin (p + 2) → I) (a : Fin (p + 2)) (ha : cechFirstRepeat t a) : let q := cechJunction (Equiv.refl _) (Equiv.refl _) a (∑ j : Fin (p + 3), if a.val ≤ j.val ∧ j.val ≤ a.val + 2 then ((-1 : ℤ) ^ a.val * (-1 : ℤ) ^ j.val) • F.map (S.indexMap t q).op (F.map (S.indexMap (t ∘ q) j.succAbove).op (s ((t ∘ q) ∘ j.succAbove))) else 0) = s t",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T184333-L-4016069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T184333-L-4016069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
