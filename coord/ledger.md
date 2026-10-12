@@ -9550,3 +9550,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:16 L: merged deliver/M1/Sheaf.AlgebraicGeometry.IntrinsicFlatModuleTensorFlatAux (stage 3; reviewer PASS; first push; landing 20261012T211615-L-1057470 (interface); batch 20261012T211610; modules 2; new nodes 1)
 - 21:16 L: merged deliver/M2/Sheaf.RingTheory.PowerSeriesRingSubfields (stage 3; reviewer PASS; first push; landing 20261012T211615-L-1057568 (interface); batch 20261012T211610; modules 3; new nodes 2)
 - 21:16 L: merged deliver/M3/Sheaf.AlgebraicGeometry.FractionZeroTensorPower (stage 3; reviewer PASS; first push; landing 20261012T211616-L-1057678 (proof); batch 20261012T211610; modules 1; new nodes 0)
+- 21:16 L: merged deliver/N3/Sheaf.AlgebraicGeometry.SelfProductRightAdjointBaseChangeLocal (stage 3; reviewer PASS; after a return; landing 20261012T211616-L-1057775 (proof); batch 20261012T211610; modules 1; new nodes 0)

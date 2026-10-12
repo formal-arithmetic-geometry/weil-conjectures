@@ -8,6 +8,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChange
+import Sheaf.AlgebraicGeometry.DerivedQCohStandardAdjunction
+import all Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 
 @[expose] public section
 set_option autoImplicit false
@@ -60,6 +62,59 @@ theorem proper_flat_selfProduct_rightAdjoint_baseChange_local
         ((schemeDerivedQCohProperty (Limits.pullback f f)).lift
           ((schemeDerivedQCohProperty X).ι ⋙ derivedPullback (pullback.fst f f))
           hLpr₁).obj (a.obj K)) := by
-  sorry
+  classical
+  let hx : HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let hs : HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) := inferInstance
+  let hp : HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (pullback f f).toRingedSpace)) := inferInstance
+  let d (Z : Scheme.{u}) := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings Z.toRingedSpace))
+  let P := pullback f f
+  let qP := @schemeDerivedQCohProperty P hp
+  let pX := @schemeDerivedQCohProperty X (d X)
+  let pP := @schemeDerivedQCohProperty P (d P)
+  let Lfs := @derivedPullback X S f (d S) (d X)
+  let Lps := @derivedPullback P X (pullback.fst f f) (d X) (d P)
+  obtain ⟨eS, hRfs, aS, ⟨adjAS⟩, ⟨ιS⟩, ⟨α⟩⟩ :=
+    @derivedQCoh_standardAdjunction X S f hx hs hRf a adjA
+  obtain ⟨eX, hRps, bS, ⟨adjBS⟩, ⟨ιX⟩, ⟨γ⟩⟩ :=
+    @derivedQCoh_standardAdjunction P X (pullback.snd f f) hp hx hRpr₂ b adjB
+  obtain ⟨tf⟩ := pullback_transport f hx hs (d X) (d S)
+  obtain ⟨tp⟩ := pullback_transport (pullback.fst f f) hp hx (d P) (d X)
+  let M : @schemeDerivedQCohCategory X hx := ⟨(@derivedPullback X S f hs hx).obj K.obj, hLfK⟩
+  let K' := eS.functor.obj K
+  have hLfs : pX (Lfs.obj K'.obj) := by
+    let := d S
+    let := d X
+    exact (derivedPullback_tensor_preserve_QCoh f).1 K'.obj K'.property
+  let M' : @schemeDerivedQCohCategory X (d X) := ⟨Lfs.obj K'.obj, hLfs⟩
+  let ε : eX.functor.obj M ≅ M' := pX.isoMk
+    (ιX.app M ≪≫ tf.app K.obj ≪≫ Lfs.mapIso (ιS.app K).symm)
+  have hLps : ∀ E : @schemeDerivedQCohCategory X (d X), pP (Lps.obj E.obj) := by
+    let := d X
+    let := d P
+    exact fun E ↦ (derivedPullback_tensor_preserve_QCoh (pullback.fst f f)).1
+      E.obj E.property
+  let LP := pP.lift (pX.ι ⋙ Lps) hLps
+  have η : Nonempty (LP.obj (aS.obj K') ≅ bS.obj M') := by
+    let : ∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1}
+        (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) := d
+    obtain ⟨hβ, hθ⟩ := proper_flat_rightAdjoint_baseChange f f aS bS adjAS adjBS
+    let θ := dualityEquationBaseChangeMap f f aS bS adjAS adjBS hβ K'
+    have : IsIso θ := hθ K'
+    exact ⟨asIso θ⟩
+  obtain ⟨η⟩ := η
+  let N := (qP.lift
+    ((@schemeDerivedQCohProperty X hx).ι ⋙
+      @derivedPullback P X (pullback.fst f f) hx hp)
+      hLpr₁).obj (a.obj K)
+  let ζ : (@schemeDerivedStandardEquivalence P hp).functor.obj (b.obj M).obj ≅
+      (@schemeDerivedStandardEquivalence P hp).functor.obj N.obj :=
+    (γ.app M).symm ≪≫ pP.ι.mapIso (bS.mapIso ε) ≪≫ pP.ι.mapIso η.symm ≪≫
+      Lps.mapIso (α.app K) ≪≫ (tp.app (a.obj K).obj).symm
+  exact ⟨qP.fullyFaithfulι.preimageIso
+    ((@schemeDerivedStandardEquivalence P hp).functor.preimageIso ζ)⟩
 
 end AlgebraicGeometry
