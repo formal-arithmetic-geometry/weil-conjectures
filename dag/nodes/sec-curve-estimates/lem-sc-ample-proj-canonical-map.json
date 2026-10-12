@@ -29,66 +29,36 @@
  ],
  "proof": [
   {
-   "text": "For each positive-degree homogeneous section s of degree d, the nonvanishing open X_s is open and s trivializes L^{tensor d} there by [lem-weil-pbc-nonvanishing-section-trivializes]. On X_s define a ring homomorphism rho_s:S_(s)\\toGamma(X_s,O_X) by rho_s(xi/s^n)=s^{-n}xi, where xi is homogeneous of degree nd; the relation defining graded localization is respected because multiplication by the unit s on X_s is invertible. By [lem-weil-pbc-morphism-into-affine-scheme] and the affine description D_+(s)=Spec(S_(s)) in [def-pc-proj], rho_s determines a morphism f_s:X_s\\toD_+(s).",
+   "text": "Apply lem-sc-ample-proj-canonical-map-chart-formula to the nonvanishing cover, obtaining a morphism f with the homogeneous fraction identities on all its chart inverse images.",
    "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-pc-proj"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 01PZ proof; Constructions Lemma 01N8, construction of psi_(f) on S_(f)"
-   }
-  },
-  {
-   "text": "Let s and t have positive degrees d and e. On X_s the degree-zero chart function t^d/s^e maps under rho_s to the quotient of the two sections of L^{tensor de}; by [lem-weil-pbc-morphism-into-affine-scheme] and [def-pc-proj], the inverse image of D_+(t) inside D_+(s) is the locus where this quotient is invertible. Since s trivializes L^{tensor d}, this is X_s cap X_t: in each residue field t(x)^d is nonzero exactly when t(x) is nonzero. Thus f_s and f_t both map X_s cap X_t to D_+(st). On that overlap define rho_st:S_(st)\\toGamma(X_s cap X_t,O_X) by xi/(st)^n |\\to xi/(st)^n, dividing sections of L^{tensor n(d+e)} by the trivializing section (st)^n. The localization map S_(s)\\toS_(st) sends a/s^k to a t^k/(st)^k, whose image under rho_st is a t^k/(s^k t^k)=a/s^k=rho_s(a/s^k)|_{X_s cap X_t}; similarly S_(t)\\toS_(st) sends b/t^k to b s^k/(st)^k, and rho_st gives rho_t(b/t^k) on the overlap. Thus both restrictions have the same ring map from S_(st), and their morphisms to the affine chart D_+(st)=Spec(S_(st)) agree by [lem-weil-pbc-morphism-into-affine-scheme].",
-   "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-pc-proj"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 01PZ proof and Constructions Lemma 01N8, overlap calculation"
-   }
-  },
-  {
-   "text": "The opens X_s cover X by hypothesis, and the maps f_s agree on pairwise overlaps by Step 2. Therefore [lem-weil-pbc-scheme-morphism-gluing] gives a unique canonical morphism f:X\\toProj(S) restricting to f_s on every X_s.",
-   "uses": [
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 01PZ proof, gluing the local maps constructed from Lemma 01N8"
-   }
-  },
-  {
-   "text": "For any positive-degree homogeneous s, the restriction f|_{X_s}=f_s lands in D_+(s), so X_s is contained in f^{-1}(D_+(s)). Conversely, take x in f^{-1}(D_+(s)) and choose t with x in X_t. Write d=deg(s) and e=deg(t). Within D_+(t), the intersection D_+(s) cap D_+(t) is the principal open of the degree-zero function s^e/t^d. Under rho_t this function becomes the quotient of the two sections of L^{tensor de}. By the inverse-image clause of [lem-weil-pbc-morphism-into-affine-scheme], x lies in this principal open exactly when that quotient is a unit at x. Since t trivializes L^{tensor e} near x by [lem-weil-pbc-nonvanishing-section-trivializes], this holds exactly when s(x)^e is nonzero in the fibre, equivalently x lies in X_s. Hence f^{-1}(D_+(s))=X_s. On this chart the induced map on global sections is, by the definition of rho_s in Step 1 and [def-pc-proj], S_(s)=Gamma(D_+(s),O)\\toGamma(X_s,O_X), xi/s^n |\\to s^{-n}xi.",
-   "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-pc-proj"
+    "lem-sc-ample-proj-canonical-map-chart-formula"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions Lemma 01N8 (lemma-converse-construction), construction of the local map and inverse-image verification; Properties Lemma 01PZ (lemma-map-into-proj), clause (1)"
+    "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)"
+   }
+  },
+  {
+   "text": "Fix a positive-degree homogeneous section s. For every x, the cover hypothesis supplies a nonvanishing positive-degree homogeneous section at x. Apply lem-sc-ample-proj-canonical-map-preimage to f and its fraction identities at x, obtaining f(x) in D_+(s) iff x is in X_s. Set extensionality proves the inverse-image equality. Pair this equality with the already supplied fraction identity.",
+   "uses": [
+    "lem-sc-ample-proj-canonical-map-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-nonvanishing-section-trivializes",
-  "lem-weil-pbc-morphism-into-affine-scheme",
-  "def-pc-proj",
-  "lem-weil-pbc-scheme-morphism-gluing"
+  "lem-sc-ample-proj-canonical-map-chart-formula",
+  "lem-sc-ample-proj-canonical-map-preimage"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/properties.tex",
-  "place": "Properties Lemma 01PZ (lemma-map-into-proj), proof via Constructions Lemma 01N8"
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Properties 01PZ and Constructions 01N8; Lean decomposition into construction with fraction formulas and pointwise inverse-image verification"
  },
  "mathlib_searches": [
   {
@@ -196,5 +166,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T135253-L-1677333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

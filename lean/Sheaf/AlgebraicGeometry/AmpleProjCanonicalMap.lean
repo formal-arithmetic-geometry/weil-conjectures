@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.Paper.NonvanishingSectionTrivializes
+import Sheaf.AlgebraicGeometry.AmpleProjPreimage
+import Sheaf.AlgebraicGeometry.AmpleProjChartFormula
 
 /-!
 # The canonical morphism to Proj of the section ring
@@ -67,6 +68,11 @@ theorem exists_sectionRing_proj_morphism (X : Scheme.{v}) (L : X.Modules) [L.IsI
           (L.tensorPow (n • d)).presheaf.map (homOfLE
               (le_top : f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val ≤ ⊤)).op
             (ξ.val (n • d)) := by
-  sorry
+  obtain ⟨f, hformula⟩ := exists_sectionRing_proj_chart_formula X L hcover
+  refine ⟨f, ?_⟩
+  intro d hd s
+  refine ⟨?_, hformula d hd s⟩
+  ext x
+  exact sectionRing_proj_mem_basicOpen X L f hformula x (hcover x) d hd s
 
 end AlgebraicGeometry.Scheme.Modules
