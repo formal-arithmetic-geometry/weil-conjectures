@@ -6,6 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Mathlib.CategoryTheory.Sites.Continuous
 public import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 
 /-!
@@ -62,6 +63,26 @@ theorem siteContinuous_pushforward_isSheaf
         (Presieve.IsSheafFor (F.op ⋙ G.obj) R ↔ Presieve.IsSheafFor G.obj (R.map F))) ∧
     (∀ G : Sheaf K.toGrothendieck AddCommGrpCat.{w},
       Presheaf.IsSheaf J.toGrothendieck (F.op ⋙ G.obj)) := by
-  sorry
+  let : J.PullbacksPreservedBy F :=
+    { preservesPairwisePullbacks_of_mem := by
+        intro X R hR
+        exact ⟨fun Y Z f g hf hg => hpullback X Y Z R hR f g hf⟩ }
+  let hle : J ≤ K.comap F := by
+    intro X R hR
+    exact hcover X R hR
+  let : Functor.IsContinuous F J.toGrothendieck K.toGrothendieck :=
+    F.isContinuous_toGrothendieck_of_pullbacksPreservedBy J K hle
+  constructor
+  · intro G
+    constructor
+    · rw [isSheaf_iff_isSheaf_of_type]
+      exact F.op_comp_isSheaf_of_types J.toGrothendieck K.toGrothendieck G
+    · intro X R hR
+      have hpair : F.PreservesPairwisePullbacks R :=
+        J.preservesPairwisePullbacks_of_mem hR
+      have hhas : R.HasPairwisePullbacks := J.hasPairwisePullbacks_of_mem hR
+      exact Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks F G.obj R
+  · intro G
+    exact F.op_comp_isSheaf J.toGrothendieck K.toGrothendieck G
 
 end CategoryTheory
