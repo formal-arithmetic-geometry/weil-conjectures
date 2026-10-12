@@ -5,12 +5,15 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.RingTheory.CompletionFiniteExtensionTensorBijective
 
 @[expose] public section
 universe u v
 open scoped TensorProduct
 namespace AdicCompletion
 
+-- The inherited statement binds an unused D; keep its signature unchanged.
+set_option linter.unusedVariables false in
 /-- The completed tensor product is nonempty as an algebra equivalence to the completed
 localized finite algebra. Source: Stacks Project, Algebra, Lemma 10.97.8 (Tag 07N9), step 5.
 (blueprint: lem-weil-pbc-completion-finite-extension-tensor)
@@ -38,5 +41,10 @@ theorem completion_finite_extension_tensor
         (Localization.AtPrime q.1)
     letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)
     Nonempty ((C ⊗[R] S) ≃ₐ[S] AdicCompletion J B) := by
-  sorry
+  intro A m C B J Q D
+  clear D Q
+  let := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)
+  let := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)
+  exact ⟨AlgEquiv.ofBijective (completionFiniteExtensionTensorMap R S p)
+    (completion_finite_extension_tensor_bijective R S p)⟩
 end AdicCompletion

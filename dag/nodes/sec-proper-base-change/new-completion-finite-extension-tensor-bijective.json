@@ -1,0 +1,115 @@
+{
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 07N9, first equality; https://stacks.math.columbia.edu/tag/07N9"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Canonical-map construction and tensor comparison for the first equality of Tag 07N9"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionFiniteExtensionTensor",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completion-finite-extension-tensor",
+   "place": "canonical map and its bijectivity"
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "new-completion-finite-extension-tensor-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of the explicitly constructed completed tensor map",
+ "statement": "Let R and S be commutative rings, S an R-algebra finite as an R-module, R Noetherian, and p a prime ideal of R. The explicitly constructed S-algebra map AdicCompletion.completionFiniteExtensionTensorMap R S p [new-completion-finite-extension-tensor-map] is bijective.",
+ "stmt_deps": [
+  "new-completion-finite-extension-tensor-map"
+ ],
+ "proof": [
+  {
+   "text": "Set A=R_p, m=pA, C=AdicCompletion m A, B=A tensor_R S, J=pB. Localization preserves Noetherianity and base change preserves module finiteness, so A is Noetherian and B is finite over A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the finite-module completion tensor theorem to B over A. If necessary first replace the finite A-module B by a linearly equivalent module in the universe of A. This gives bijectivity of C tensor_A B → the m-adic module completion of B.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor associativity and cancellation identify C tensor_A (A tensor_R S) with C tensor_R S. Since J=mB, extension of ideal powers identifies the submodule m^n B with the underlying A-submodule of J^n for every n. The identity of B induces compatible quotient bijections and hence a bijection of inverse limits from the module completion to AdicCompletion J B. On c tensor s the composite has nth coordinate equal to the image of c_n times the image of 1 tensor s; these are precisely the coordinates of the explicitly constructed map. Pure tensors additively generate, so equality on them proves equality of the maps. Bijectivity follows.",
+   "uses": [
+    "new-completion-finite-extension-tensor-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "new-completion-finite-extension-tensor-map"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite algebra adic completion tensor canonical map bijective",
+   "results": "LeanSearch returned HTTP 500; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from the tensor product of a completed Noetherian local ring with a finite algebra to the completed algebra is bijective",
+   "results": "Found AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AsTensorProduct.lean:320. It is the finite-module step, with a universe restriction; quotient-filtration identification and localization tensor cancellation still need formalization.",
+   "date": "2026-10-13",
+   "verdict": "partial match; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProduct_bijective_of_finite_of_isNoetherian|completionFiniteExtensionTensorMap|completion_finite_extension_tensor",
+   "results": "Confirmed ofTensorProduct_bijective_of_finite_of_isNoetherian at AsTensorProduct.lean:320; no canonical localized algebra tensor map or matching bijectivity theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial match; no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionFiniteExtensionTensorBijective",
+  "file": "lean/Sheaf/RingTheory/CompletionFiniteExtensionTensorBijective.lean",
+  "declaration": "AdicCompletion.completion_finite_extension_tensor_bijective",
+  "statement": "theorem completion_finite_extension_tensor_bijective\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    Function.Bijective (completionFiniteExtensionTensorMap R S p)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T184327-L-4013450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T184327-L-4013450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

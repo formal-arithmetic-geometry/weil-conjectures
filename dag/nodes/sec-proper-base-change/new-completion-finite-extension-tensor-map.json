@@ -1,0 +1,98 @@
+{
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 07N9, first equality; https://stacks.math.columbia.edu/tag/07N9"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Canonical-map construction and tensor comparison for the first equality of Tag 07N9"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionFiniteExtensionTensor",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completion-finite-extension-tensor",
+   "place": "canonical map and its bijectivity"
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "new-completion-finite-extension-tensor-map",
+ "kind": "definition",
+ "title": "Explicit canonical completed localized tensor map",
+ "statement": "Let R and S be commutative rings, with an R-algebra structure on S, and p a prime ideal of R. Put A=R_p, m the maximal ideal of A, C=AdicCompletion m A, B=A tensor_R S, and J=pB. The completion is the inverse limit of the quotients [def-weil-pbc-adic-completion]. Construct the S-algebra map C tensor_R S → AdicCompletion J B as follows. The map A → B, a ↦ a tensor 1, sends m^n into J^n. Compose C → A/m^n with the resulting map to B/J^n and pass to compatible sequences to obtain C → AdicCompletion J B. Extend this map together with S → B → AdicCompletion J B by the tensor universal property. This construction is made without finiteness or Noetherianity assumptions.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Use Localization.AtPrime.map_eq_maximalIdeal and Ideal.map_map to identify the image of m with J. Ideal.map_pow gives all the power-containment conditions. Ideal.quotientMapₐ defines the coordinate maps. Their compatibility follows by quotient induction, together with AdicCompletion.Ideal.mk_eq_mk for Cauchy sequences. AdicCompletion.liftAlgHom gives the completed base map. AlgHom.liftEquiv followed by Algebra.TensorProduct.commRight extends it to the required S-algebra map. All of these constructions and proofs are written in Lean without holes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical map of adic completions induced by algebra homomorphism preserving ideal powers",
+   "results": "LeanSearch returned HTTP 500; unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring homomorphism preserving ideals induces a homomorphism on adic completions",
+   "results": "AdicCompletion.liftRingHom and AdicCompletion.map are building blocks, not this tensor algebra map.",
+   "date": "2026-10-13",
+   "verdict": "partial match; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofTensorProduct_bijective|liftRingHom|map.*completion",
+   "results": "Read AdicCompletion.Algebra and TensorProduct.Maps: liftAlgHom, quotientMapₐ, AlgHom.liftEquiv and commRight construct the map.",
+   "date": "2026-10-13",
+   "verdict": "partial match; no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionFiniteExtensionTensorMap",
+  "file": "lean/Sheaf/RingTheory/CompletionFiniteExtensionTensorMap.lean",
+  "declaration": "AdicCompletion.completionFiniteExtensionTensorMap",
+  "statement": "def completionFiniteExtensionTensorMap\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let C := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let B := A ⊗[R] S\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)\n    let J := p.map (algebraMap R B)\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)\n    (C ⊗[R] S) →ₐ[S] AdicCompletion J B",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T184327-L-4013450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T184327-L-4013450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
