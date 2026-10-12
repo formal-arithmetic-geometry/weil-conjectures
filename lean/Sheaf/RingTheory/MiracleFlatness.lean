@@ -9,11 +9,8 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Sheaf.Paper.FlatLocalCriterionNonzerodivisor
-import Sheaf.RingTheory.DepthQuotientNonzerodivisor
 import Sheaf.RingTheory.IsRegularOfDimensionDrop
-import Sheaf.RingTheory.MaximalChainLengthOfDepth
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.FlatOverRegular
 
 /-!
 # Miracle flatness
@@ -34,41 +31,14 @@ fibre dimension. The finite dimension `e` records Cohen–Macaulayness by the de
 Source: Stacks Project, Algebra, Lemma 10.128.1 (Tag 00R4)
 (blueprint: lem-weil-pbc-miracle-flatness).
 
-Proof, following the node's ten steps:
-1. Induct on `n = dim R`. Regular local rings have finite dimension
-   (def-weil-regular-scheme). The induction assertion quantifies over all maps and targets
-   satisfying the three hypotheses, not just over the given map.
-2. If `n = 0`, the maximal ideal of `R` has zero generators, so `R` is a field.
-   Every module over a field is flat (lem-weil-pbc-module-over-field-flat).
-3. For `n > 0`, the mapped maximal ideal is proper because the map is local. The
-   dimension formula gives positive target dimension and smaller closed fibre dimension.
-   There are finitely many minimal primes `q_i` of `S`
-   (lem-weil-pbc-noetherian-finitely-many-minimal-primes and
-   lem-weil-pbc-prime-contains-minimal-prime). Their inverse images `p_i` lie in `m_R`.
-4. A longest chain above `q_i` is a maximal chain of primes of `S`; Cohen–Macaulayness
-   gives `dim(S/q_i) = dim S` (lem-weil-pbc-cm-local-maximal-chain-length).
-5. If `p_i = m_R`, the closed fibre surjects onto `S/q_i`, contradicting its smaller
-   dimension (def-weil-pbc-krull-dimension-ring). Thus every `p_i` is properly below `m_R`.
-6. The cotangent dimension is `n > 0`, so `m_R` is not contained in its square
-   (lem-weil-pbc-regular-local-cotangent-dimension). Prime avoidance chooses `x` in `m_R`
-   outside its square and all `p_i` (lem-weil-pbc-prime-avoidance). Its image avoids all
-   minimal primes of `S`.
-7. Extend the class of `x` to a cotangent basis. Nakayama lifts it to `n` generators
-   (lem-weil-pbc-nakayama-local-generators). These form a regular sequence; `x` is a
-   nonzerodivisor and `R/xR` is regular of dimension `n - 1`
-   (lem-weil-pbc-regular-local-generators-regular-sequence).
-8. Avoidance of minimal primes drops the target dimension by one
-   (lem-weil-pbc-noetherian-local-dim-drop-outside-minimal-primes). The dimension-drop
-   criterion makes the image of `x` a nonzerodivisor
-   (lem-weil-pbc-cm-local-dimension-drop-regular-sequence), and its quotient is
-   Cohen–Macaulay (lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm).
-9. The induced map `R/xR → S/xS` is local between Noetherian local rings. Its closed
-   fibre agrees with the original closed fibre, since `x` belongs to `m_R`. The two
-   dimension drops preserve the dimension formula. Apply the induction hypothesis.
-10. Apply the local criterion of flatness to the finite `S`-module `S` and `x`
-    (lem-weil-pbc-flat-local-criterion-nonzerodivisor, def-weil-finitely-generated-module).
-    Steps 7 and 8 give both nonzerodivisor conditions and step 9 gives quotient flatness.
-    Hence `S` is flat over `R`, which is `φ.Flat` (def-weil-pbc-flat-ring-map).
+Proof: choose a finite generating set of the source maximal ideal of minimum cardinality,
+using Mathlib's span rank. Regularity identifies its cardinality with the source dimension.
+List these generators as `x`. Since the homomorphism is local, the list `x.map φ` lies in
+the target maximal ideal, and its generated ideal is the mapped source maximal ideal.
+The assumed dimension formula therefore says that quotienting by this list drops the
+target dimension by the length of the list. The Cohen–Macaulay dimension-drop criterion
+(Stacks, Tag 00N6) shows that `x.map φ` is regular. Apply flatness over regular parameters
+(Stacks, Tag 07DY). This route works also for an empty list and source dimension zero.
 -/
 theorem flat_of_regular_of_depth_ge {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] [IsRegularLocalRing R] [IsLocalRing S] [IsNoetherianRing S]
@@ -78,6 +48,27 @@ theorem flat_of_regular_of_depth_ge {R : Type u} {S : Type v}
     (hdim_add : ringKrullDim S =
       ringKrullDim R + ringKrullDim (S ⧸ (IsLocalRing.maximalIdeal R).map φ)) :
     φ.Flat := by
-  sorry
+  classical
+  obtain ⟨s, hs, hspan⟩ :=
+    (IsNoetherian.noetherian (IsLocalRing.maximalIdeal R)).exists_span_finset_card_eq_spanFinrank
+  let d := s.card
+  let x := s.toList
+  have hd : ringKrullDim R = (d : WithBot ℕ∞) := by
+    rw [← IsRegularLocalRing.spanFinrank_maximalIdeal, ← hs]
+  have hx : x.length = d := by simp [x, d]
+  have hgen : Ideal.ofList x = IsLocalRing.maximalIdeal R := by
+    simpa [x, Ideal.ofList] using hspan
+  have hmap : Ideal.ofList (x.map φ) = (IsLocalRing.maximalIdeal R).map φ := by
+    rw [← hgen, Ideal.map_ofList]
+  have hmem : ∀ g ∈ x.map φ, g ∈ IsLocalRing.maximalIdeal S := by
+    intro g hg
+    obtain ⟨r, hr, rfl⟩ := List.mem_map.mp hg
+    exact map_nonunit φ r (hgen ▸ Ideal.subset_span hr)
+  have hdrop : ringKrullDim (S ⧸ Ideal.ofList (x.map φ)) +
+      ((x.map φ).length : WithBot ℕ∞) = (e : WithBot ℕ∞) := by
+    rw [hmap, List.length_map, hx, ← hd, add_comm, ← hdim_add, hdim]
+  have hreg := RingTheory.Sequence.isRegular_of_dimension_drop e hdim hdepth
+    (x.map φ) hmem hdrop
+  exact flat_of_regular_parameters φ d x hd hx hgen hreg
 
 end RingHom
