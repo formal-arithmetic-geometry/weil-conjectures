@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-popescu-standardizer-smooth-opens",
+ "kind": "statement",
+ "title": "Smooth coefficient opens of the explicit polynomial standardizer",
+ "statement": "Let $k$ be a field, $A$ a finitely presented commutative $k$-algebra [def-weil-pbc-finitely-presented-algebra], and $B$ a commutative algebra over $k$ and $A$ with compatible scalar towers. Let $d,s,N$ be natural numbers with $N>0$, and $a:\\operatorname{Fin}(s)\\to A$ satisfy $(a_j)_j=H_{A/k}$, the singular ideal [def-weil-pbc-singular-ideal]. Put $S=k[x_0,\\ldots,x_{d-1}]$ [def-weil-pbc-mv-polynomial-ring], and give $B$ a compatible $S$-algebra structure. Suppose $P$ is an $A$-presentation of $B$ on variables $x_i,z_{ij}$ and relations indexed by $\\operatorname{Fin}(d)$ [def-weil-pbc-algebra-hom-quotient], with $P(x_i)$ the image of $X_i\\in S$ and relations $x_i^{2N}-\\sum_j z_{ij}a_j$. Then for every $j$, $B[1/a_j]$ is smooth over $S$ [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FJ, Ad item-strictly-standard: elimination on the coefficient opens"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The finite presentation of A over k and the finite quotient presentation of B over A imply that B is finite type over k and hence over S=k[x]. Since S is Noetherian, B is finitely presented over S, as is its principal localization L=B[1/a_j]. The generator a_j lies in singularIdeal k A, so A[1/a_j] is smooth over k.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-singular-ideal-localization-smooth",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the square-zero lifting criterion to L over S. For a given map L to T/I with I^2=0, the coefficient map A to T/I extends to A[1/a_j], because a_j maps to a unit. Lift that coefficient map using its smoothness over k. This gives alpha:A to T with alpha(a_j) invertible and the required reduction.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+    "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose lifts z_il in T of the auxiliary generator images. Put epsilon_i = image(X_i)^(2N) - sum_l z_il alpha(a_l). Evaluating the original relation shows epsilon_i maps to zero in T/I. Replace z_ij by z_ij+epsilon_i alpha(a_j)^(-1), leaving every other z_il unchanged. The sum increases by exactly epsilon_i, so all defining relations hold. Every generator still has the original image in T/I. The quotient presentation universal property gives a ring map B to T. It is an S-algebra map because its x_i-images were fixed by S, and extends to L because alpha(a_j) is a unit. Verify the reduction on coefficients and variables, then use the surjectivity of the presentation and localization uniqueness. This completes the lifting property and thus smoothness.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-singular-ideal-localization-smooth",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+  "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FJ, Ad item-strictly-standard; the coefficient elimination is implemented by square-zero lifting and an explicit correction of z_ij"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra polynomial quotient eliminate linear relations with invertible coefficient",
+   "date": "2026-10-13",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a coefficient open a_j invertible eliminate variables z_ij in polynomial quotient x_i^(2N)-sum_j z_ij a_j to obtain smooth algebra over k[x]",
+   "date": "2026-10-13",
+   "results": "Algebra.IsStandardSmooth and Algebra.SubmersivePresentation.isStandardSmooth provide standard smooth criteria, but do not supply the coefficient-open elimination for this presentation.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth.iff_comp_surjective",
+   "date": "2026-10-13",
+   "results": "Algebra.FormallySmooth.iff_comp_surjective is an alternative lifting criterion; the coefficient elimination still has to be constructed.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eliminate|quotient.*linear|linear.*quotient",
+   "date": "2026-10-13",
+   "results": "No matching polynomial quotient elimination theorem in the returned Mathlib hits.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuUniversalStandardizer",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof of Lemma 07FJ, Ad item-strictly-standard: elimination on the coefficient opens",
+   "via": [
+    "lem-weil-pbc-popescu-universal-standardizer",
+    "lem-weil-pbc-popescu-char-p-preparation-global",
+    "popescu-char-p-preparation-core",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuStandardizerSmoothOpens",
+  "file": "lean/Sheaf/RingTheory/PopescuStandardizerSmoothOpens.lean",
+  "declaration": "Algebra.popescu_standardizer_coefficient_smooth",
+  "statement": "theorem popescu_standardizer_coefficient_smooth\n    {k : Type u} {A : Type v} {B : Type t}\n    [Field k] [CommRing A] [CommRing B] [Algebra k A] [Algebra k B]\n    [Algebra A B] [IsScalarTower k A B]\n    [FinitePresentation k A] {d s : ℕ} (N : ℕ) (_hN : 0 < N)\n    (a : Fin s → A) (ha : Ideal.span (Set.range a) = singularIdeal k A)\n    [Algebra (MvPolynomial (Fin d) k) B]\n    [IsScalarTower k (MvPolynomial (Fin d) k) B]\n    (P : Presentation A B (Fin d ⊕ (Fin d × Fin s)) (Fin d))\n    (hval : ∀ i, P.val (Sum.inl i) =\n      algebraMap (MvPolynomial (Fin d) k) B (MvPolynomial.X i))\n    (hrel : ∀ i : Fin d, P.relation i =\n      (MvPolynomial.X (Sum.inl i)) ^ (2 * N) -\n        ∑ j : Fin s, MvPolynomial.X (Sum.inr (i, j)) * MvPolynomial.C (a j)) :\n    ∀ j, Smooth (MvPolynomial (Fin d) k)\n      (Localization.Away (algebraMap A B (a j)))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T225255-L-1799913",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T225255-L-1799913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
