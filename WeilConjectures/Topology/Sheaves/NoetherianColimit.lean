@@ -279,6 +279,8 @@ lemma hColimitProp_zero (D : J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X) : HColimitP
     refine ⟨j', a, (Sheaf.H.equiv₀ _ isTerminalTop).injective ?_⟩
     rw [← Sheaf.H.equiv₀_naturality, map_zero, ha, map_zero]
 
+-- The elaboration of the many cohomology maps between sheaves on `X` is slow.
+set_option maxHeartbeats 1600000 in
 /-- The dimension shifting step: if `Hⁿ` commutes with all filtered colimits, so does `Hⁿ⁺¹`,
 on the first term of a short exact sequence of diagrams whose middle term is pointwise flasque.
 -/
@@ -307,14 +309,14 @@ lemma hColimitProp_succ (n : ℕ) (ih : ∀ D : J ⥤ TopCat.Sheaf AddCommGrpCat
     obtain ⟨j, y', rfl⟩ := (ih S.X₃).1 y
     exact ⟨j, Sheaf.H.δSucc (hSj j) n y', Sheaf.H.map_δSucc (hSj j) hSc (φ j) n y'⟩
   · have := hTj j
-    obtain ⟨z, rfl⟩ := Sheaf.H.δSucc_surjective (hSj j) n y
+    obtain ⟨z, rfl⟩ : ∃ z : Sheaf.H (S.X₃.obj j) n, Sheaf.H.δSucc (hSj j) n z = y :=
+      Sheaf.H.δSucc_surjective (hSj j) n y
     have h1 : Sheaf.H.δSucc hSc n (Sheaf.H.map (colimit.ι S.X₃ j) n z) = 0 :=
       (Sheaf.H.map_δSucc (hSj j) hSc (φ j) n z).symm.trans hy
     obtain ⟨w, hw⟩ := (Sheaf.H.exact_map_δSucc hSc n _).1 h1
     obtain ⟨k, wk, rfl⟩ := (ih S.X₂).1 w
-    let m := IsFiltered.max j k
-    let fj : j ⟶ m := IsFiltered.leftToMax j k
-    let fk : k ⟶ m := IsFiltered.rightToMax j k
+    obtain ⟨m, fj, fk, -⟩ : ∃ (m : J) (_ : j ⟶ m) (_ : k ⟶ m), True :=
+      ⟨_, IsFiltered.leftToMax j k, IsFiltered.rightToMax j k, True.intro⟩
     have e3 : Sheaf.H.map (colimit.ι S.X₃ m) n (Sheaf.H.map (S.X₃.map fj) n z) =
         Sheaf.H.map (colimit.ι S.X₃ j) n z := by
       rw [← Sheaf.H.map_comp_apply, colimit.w S.X₃ fj]
@@ -326,12 +328,17 @@ lemma hColimitProp_succ (n : ℕ) (ih : ∀ D : J ⥤ TopCat.Sheaf AddCommGrpCat
     have e4 : Sheaf.H.map (colimit.ι S.X₃ m) n
           (Sheaf.H.map (S.g.app m) n (Sheaf.H.map (S.X₂.map fk) n wk)) =
         Sheaf.H.map (colimit.ι S.X₃ j) n z := by
-      rw [← hw, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
-        Category.assoc, hmor]
+      calc _ = Sheaf.H.map (S.X₂.map fk ≫ S.g.app m ≫ colimit.ι S.X₃ m) n wk := by
+            rw [Sheaf.H.map_comp_apply, Sheaf.H.map_comp_apply]
+        _ = Sheaf.H.map (colimit.ι S.X₂ k ≫ (S.map colim).g) n wk :=
+          congrArg (fun f ↦ Sheaf.H.map f n wk) hmor
+        _ = _ := by rw [Sheaf.H.map_comp_apply]; exact hw
     have hz' : Sheaf.H.map (colimit.ι S.X₃ m) n (Sheaf.H.map (S.X₃.map fj) n z -
         Sheaf.H.map (S.g.app m) n (Sheaf.H.map (S.X₂.map fk) n wk)) = 0 := by
       rw [map_sub, e3, e4, sub_self]
-    obtain ⟨m', a, ha⟩ := (ih S.X₃).2 m _ hz'
+    have h2 := (ih S.X₃).2 m (Sheaf.H.map (S.X₃.map fj) n z -
+      Sheaf.H.map (S.g.app m) n (Sheaf.H.map (S.X₂.map fk) n wk))
+    obtain ⟨m', a, ha⟩ := h2 hz'
     refine ⟨m', fj ≫ a, ?_⟩
     have e := Sheaf.H.map_δSucc (hSj j) (hSj m')
       (S.mapNatTrans ((evaluation J _).map (fj ≫ a))) n z

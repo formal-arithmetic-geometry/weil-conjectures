@@ -183,7 +183,7 @@ structure Stage where
 variable {Φ K}
 
 /-- The morphisms from the generators to `s.X` that are killed by `s.u`. -/
-def KillIdx (s : Stage Φ K) : Type w := Σ i, {g : G i ⟶ s.X // Φ.map g ≫ s.u = 0}
+abbrev KillIdx (s : Stage Φ K) : Type w := Σ i, {g : G i ⟶ s.X // Φ.map g ≫ s.u = 0}
 
 /-- The morphism `∐ G i ⟶ s.X` from the coproduct of the generators indexed by `KillIdx`. -/
 noncomputable def killMap (s : Stage Φ K) : (∐ fun j : KillIdx G s ↦ G j.1) ⟶ s.X :=
@@ -227,7 +227,7 @@ lemma Stage.killMap_nextMap (s : Stage Φ K) : killMap G s ≫ s.nextMap G = 0 :
 variable (Φ K)
 
 /-- The index type of the first stage: all pairs of a generator and an element of `H`. -/
-def StartIdx : Type w := Σ i, (Φ.obj (G i) ⟶ K)
+abbrev StartIdx : Type w := Σ i, (Φ.obj (G i) ⟶ K)
 
 /-- The first stage: `∐_{(i, x)} G i`, with the universal element `(x)`. -/
 noncomputable def startStage : Stage Φ K :=
@@ -366,16 +366,20 @@ lemma bijective_hocolim (hG : IsCompactFamily G) (i : ι) :
         killMap G (stage Φ G K N) := by simp [killMap, j]
     rw [ι_comp_eq_of_one_sub_seqShift_comp (tower Φ G K) (coproductIsCoproduct _)
       (hocolimπ Φ G K) (one_sub_seqShift_hocolimπ Φ G K) N.le_succ, tower_map_succ]
-    conv_lhs => rw [hj]
-    rw [assoc]
-    erw [Stage.killMap_nextMap_assoc]
-    simp
+    have hg0 : g ≫ (stage Φ G K N).nextMap G = 0 := by
+      have := Sigma.ι (fun j : KillIdx G (stage Φ G K N) ↦ G j.1) j ≫=
+        Stage.killMap_nextMap G (stage Φ G K N)
+      simp only [killMap, j, comp_zero] at this
+      rw [Sigma.ι_desc_assoc] at this
+      exact this
+    exact (assoc _ _ _).symm.trans (by erw [hg0]; exact zero_comp)
   refine ⟨fun f₁ f₂ h ↦ ?_, fun x ↦ ?_⟩
   · rw [← sub_eq_zero]
     exact key _ (by simp only [Φ.map_sub, sub_comp]; exact sub_eq_zero.2 h)
   · refine ⟨Sigma.ι (fun j : StartIdx Φ G K ↦ G j.1) ⟨i, x⟩ ≫ Sigma.ι (tower Φ G K).obj 0 ≫ hocolimπ Φ G K, ?_⟩
     dsimp only
-    rw [Φ.map_comp, assoc, map_ι_hocolimπ_hocolimU]
+    rw [Φ.map_comp, assoc]
+    erw [map_ι_hocolimπ_hocolimU]
     exact map_ι_descOfPreserves Φ (coproductIsCoproduct (fun j : StartIdx Φ G K ↦ G j.1)) _ _
 
 variable {G} in
@@ -540,20 +544,19 @@ theorem exists_bijective (hG : IsCompactFamily G)
     let e : G i ≅ (G j)⟦(1 : ℤ)⟧ :=
       ((shiftFunctorCompIsoId C (-1 : ℤ) 1 (by norm_num)).app (G i)).symm ≪≫
         (shiftFunctor C (1 : ℤ)).mapIso e₀
+    have h0 : h ≫ (shiftFunctor C (1 : ℤ)).map u' = 0 := comp_distTriang_mor_zero₃₁ _ mem
+    have h1 : u' ≫ g = 0 := comp_distTriang_mor_zero₁₂ _ mem
     obtain ⟨a, ha⟩ := (shiftFunctor C (1 : ℤ)).map_surjective (e.inv ≫ f ≫ h)
     have hau : a ≫ u' = 0 := (shiftFunctor C (1 : ℤ)).map_injective (by
-      rw [Functor.map_comp, ha, Functor.map_zero, assoc, assoc]
-      erw [comp_distTriang_mor_zero₃₁ _ mem]
-      rw [comp_zero, comp_zero])
+      rw [Functor.map_comp, ha, Functor.map_zero, assoc, assoc, h0, comp_zero, comp_zero])
     have ha0 : a = 0 := (hu' j).1 (by simpa using hau)
     have hfh : f ≫ h = 0 := by
       rw [← cancel_epi e.inv, comp_zero, ← ha, ha0, Functor.map_zero]
     obtain ⟨b, rfl⟩ := Triangle.coyoneda_exact₃ _ mem f hfh
     obtain ⟨c, rfl⟩ := (hu' i).2 b
     dsimp only
-    rw [assoc]
-    erw [comp_distTriang_mor_zero₁₂ _ mem]
-    exact comp_zero
+    show (c ≫ u') ≫ g = 0
+    rw [assoc, h1, comp_zero]
   have : IsIso u' := (Triangle.isZero₃_iff_isIso₁ _ mem).1 hZ
   exact (hS.of_iso (asIso u') 0).of_iso ((shiftFunctorZero C ℤ).app Y)
 
@@ -601,6 +604,7 @@ theorem isLeftAdjoint_of_isLeftAdjoint_comp {L : C ⥤ C'} {R : C' ⥤ C} (adj :
       have h := adj.left_triangle_components N
       have : L.map (adj.unit.app N) = inv (adj.counit.app (L.obj N)) := by
         rw [← cancel_mono (adj.counit.app (L.obj N)), h, IsIso.inv_hom_id]
+        rfl
       rw [this]
       infer_instance
     have hLM : IsZero (L.obj M) :=
@@ -609,14 +613,14 @@ theorem isLeftAdjoint_of_isLeftAdjoint_comp {L : C ⥤ C'} {R : C' ⥤ C} (adj :
       apply adj₂.homEquiv _ _ |>.symm.injective
       exact (Φ.map_isZero hLM).eq_of_src _ _
     obtain ⟨s, hs⟩ := Triangle.coyoneda_exact₁ _ mem (𝟙 (M⟦(1 : ℤ)⟧)) (by
-      dsimp; rw [ha, Functor.map_zero, comp_zero])
+      subst ha; exact (id_comp _).trans (Functor.map_zero _ _ _))
     have hs₀ : s = 0 := by
       have hz : IsZero (L.obj (M⟦(1 : ℤ)⟧)) :=
         IsZero.of_iso ((shiftFunctor C' (1 : ℤ)).map_isZero hLM) ((L.commShiftIso 1).app M)
-      rw [← (adj.homEquiv _ _).apply_symm_apply s, hz.eq_of_src (adj.homEquiv _ _ |>.symm s) 0,
-        Adjunction.homEquiv_apply, R.map_zero, comp_zero]
+      exact (adj.homEquiv _ (L.obj N)).symm.injective (hz.eq_of_src _ _)
     have hM₁ : IsZero (M⟦(1 : ℤ)⟧) := by
-      rw [IsZero.iff_id_eq_zero, hs, hs₀, zero_comp]
+      rw [IsZero.iff_id_eq_zero, hs, hs₀]
+      exact zero_comp
     have hM : IsZero M := IsZero.of_iso ((shiftFunctor C (-1 : ℤ)).map_isZero hM₁)
       ((shiftFunctorCompIsoId C (1 : ℤ) (-1) (by norm_num)).app M).symm
     exact (Triangle.isZero₁_iff_isIso₂ _ mem).1 hM
@@ -626,9 +630,8 @@ theorem isLeftAdjoint_of_isLeftAdjoint_comp {L : C ⥤ C'} {R : C' ⥤ C} (adj :
       have hL (f : A ⟶ L.obj N) : ∃ h : R.obj A ⟶ N, adj.counit.app A ≫ f = L.map h := by
         refine ⟨adj.homEquiv _ _ (adj.counit.app A ≫ f) ≫ inv (adj.unit.app N), ?_⟩
         apply (adj.homEquiv _ _).injective
-        rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Functor.map_comp,
-          ← adj.unit_naturality_assoc]
-        simp
+        conv_rhs => rw [Adjunction.homEquiv_unit, adj.unit_naturality, assoc,
+          IsIso.inv_hom_id, comp_id]
       obtain ⟨h₁, hh₁⟩ := hL f₁
       obtain ⟨h₂, hh₂⟩ := hL f₂
       have : h₁ = h₂ := by

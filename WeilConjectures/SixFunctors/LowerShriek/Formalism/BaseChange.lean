@@ -104,6 +104,26 @@ def pfBaseChange (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z) (w 
     TwoSquare (F.pf r) (F.pb t) (F.pb b) (F.pf l) :=
   mateEquiv (F.adj r) (F.adj l) (F.sqIso t l r b w).inv
 
+/-- The inverse of the square isomorphism of the square `𝟙 ≫ j = j ≫ 𝟙`. -/
+lemma sqIso_id_horiz_inv {X Y : Scheme.{u}} (j : X ⟶ Y) (w : 𝟙 X ≫ j = j ≫ 𝟙 Y) :
+    (F.sqIso (𝟙 X) j j (𝟙 Y) w).inv =
+      ((TwoSquare.mk (𝟭 _) (F.pb j) (F.pb j) (𝟭 _)
+        ((Functor.leftUnitor _).hom ≫ (Functor.rightUnitor _).inv)).whiskerTop
+          (F.pbId Y).hom).whiskerBottom (F.pbId X).inv := by
+  apply Iso.inv_ext
+  rw [sqIso_id_horiz_hom]
+  ext M
+  simp [← Functor.map_comp]
+
+/-- The base change map of the pushforwards of the square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up
+to `(𝟙)^* ≅ 𝟭`. -/
+lemma pfBaseChange_id_horiz {X Y : Scheme.{u}} (j : X ⟶ Y) (w : 𝟙 X ≫ j = j ≫ 𝟙 Y) :
+    F.pfBaseChange (𝟙 X) j j (𝟙 Y) w =
+      ((TwoSquare.mk (F.pf j) (𝟭 _) (𝟭 _) (F.pf j)
+        ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerRight
+          (F.pbId Y).hom).whiskerLeft (F.pbId X).inv := by
+  rw [pfBaseChange, sqIso_id_horiz_inv, mateEquiv_whiskerTop_whiskerBottom, mateEquiv_unitors]
+
 /-- **Proper base change**: the base change map `b^* r_* ⟶ l_* t^*` of a cartesian square with
 `r` proper is an isomorphism. -/
 class HasProperBaseChange : Prop where
@@ -162,7 +182,17 @@ lemma shriekBaseChange_id (c : Compactification f) (hi : IsPullback (𝟙 X) c.i
     (F.shriekBaseChange c c (𝟙 c.Z) hi hp).natTrans =
       Functor.whiskerLeft (F.shriek c) (F.pbId Y).hom ≫ (Functor.rightUnitor _).hom ≫
         (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (F.pbId X).inv (F.shriek c) := by
-  sorry
+  haveI := HasBaseChange.isIso_baseChange (F := F) hi
+  have key : inv (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hi.w).natTrans =
+      ((TwoSquare.mk (F.sh c.i) (𝟭 _) (𝟭 _) (F.sh c.i)
+        ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerRight
+          (F.pbId c.Z).hom).whiskerLeft (F.pbId X).inv := by
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [F.baseChange_id_horiz c.i hi.w]
+    ext M
+    simp [← Functor.map_comp]
+  ext K
+  simp [shriekBaseChange, key, pfBaseChange_id_horiz, shriek, ← Functor.map_comp]
 
 /-- **Horizontal pasting** of compact-support exchange maps: for two cartesian squares placed
 side by side

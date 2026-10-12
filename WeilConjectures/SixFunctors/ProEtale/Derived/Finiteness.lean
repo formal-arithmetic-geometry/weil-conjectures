@@ -119,6 +119,7 @@ theorem constructibleIn_rightDerivedLowerShriek [HasInvertibleExponent Λ (Spec 
         K).IsGE a := Functor.isGE_mapDerivedCategory_obj _ K a
     exact Functor.isGE_rightDerivedFunctor_obj _ _ a
   · -- the upper bound, transported from the étale site
+    have := HasInvertibleExponent.of_hom (Λ := Λ) aY
     obtain ⟨K', hK', ⟨eK⟩, ⟨e'⟩⟩ := exists_rightDerivedLowerShriek_obj_iso Λ f K hK.1
     have hK'ab : _root_.DerivedCategory.homologyConcentratedIn a b K' :=
       Functor.homologyConcentratedIn_of_homologyConcentratedIn_mapDerivedCategory_obj
