@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-affine-flat-module-tensor-flat",
+ "kind": "statement",
+ "title": "Flat sections on affine subopens imply tensor flatness",
+ "statement": "Let Y be a scheme [def-pc-scheme] and G a sheaf of structure-sheaf modules [def-weil-sheaf-of-modules-category], not assumed quasi-coherent. Suppose that for every pair of affine opens U contained in V, G(U), with scalars restricted along O_Y(V) to O_Y(U), is flat over O_Y(V); this is the full affine condition IsFlatOver G (identity Y) [def-pc-scheme-module-flat-over]. Then tensoring sheaves of modules with G is exact, i.e. G is tensor-flat [def-pc-flat-sheaf-modules].",
+ "source": {
+  "document": "literature/stacks-project",
+  "place": "Modules Tag 05NE; Algebra Section 10.39, Lemma 10.39.3 (Tag 00H9), and localization flatness Tag 00HT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Fix x and an affine neighbourhood V. The affine neighbourhoods U of x contained in V form a filtered neighbourhood basis. The hypothesis makes all G(U) flat O_Y(V)-modules. Their colimit is G_x as an O_Y(V)-module. Filtered colimits of flat modules are flat, so G_x is flat over O_Y(V).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Modules Tag 05NE; Algebra Section 10.39, Lemma 10.39.3 (Tag 00H9), and localization flatness Tag 00HT"
+   }
+  },
+  {
+   "text": "The map O_Y(V) to O_Y,x is localization at the prime of x. The stalk G_x is already a module over this localization; flatness over O_Y(V) is equivalent to flatness over O_Y,x for such a module. Hence G_x is flat over the stalk ring. This uses no identification of G_x with the localization of G(V), and therefore requires no quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Modules Tag 05NE; Algebra Section 10.39, Lemma 10.39.3 (Tag 00H9), and localization flatness Tag 00HT"
+   }
+  },
+  {
+   "text": "Stalks of a tensor product are the tensor products of the stalks, naturally in both inputs. Tensoring a short exact sequence with G is consequently exact on every stalk. Stalks detect exactness, so the sheaf sequence is exact. The additive tensor functor is right exact and preserves all short exact sequences, hence finite limits and finite colimits. On the empty scheme the stalk test is vacuous; the zero module also satisfies the argument.",
+   "uses": [
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Modules Tag 05NE; Algebra Section 10.39, Lemma 10.39.3 (Tag 00H9), and localization flatness Tag 00HT"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project",
+  "place": "Modules Tag 05NE; Algebra Section 10.39, Lemma 10.39.3 (Tag 00H9), and localization flatness Tag 00HT"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-pc-ringed-space-module-stalk-tensor",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules flat if flat sections on all affine open subsets",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a sheaf with flat modules of sections has flat stalks",
+   "results": "Scheme.Flat.stalkMap and iff_flat_stalkMap, Module.flat_iff_of_isLocalization and ring-module localization lemmas; no exact sheaf-module result.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlatOver|flat.*stalk|flat.*sections in Mathlib and both library roots",
+   "results": "IntrinsicFlatModuleTensorFlat.isFlat_of_isFlatOver_identity requires quasi-coherence, absent here. ModuleCat.filteredColimit_flat supplies the colimit step. No exact result for arbitrary sheaves.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatModelFiniteFreeComparison",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-picard-coherence",
+   "place": "Mumford-complex step: bounded flat complexes compute arbitrary base change",
+   "via": [
+    "lem-pc-flat-model-finite-free-shortening-comparison",
+    "lem-pc-flat-model-finite-free-shortening"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFlatModuleTensorFlat.lean",
+  "declaration": "AlgebraicGeometry.isFlat_of_affineFlatOver_identity",
+  "statement": "theorem isFlat_of_affineFlatOver_identity {Y : Scheme.{u}} (G : Y.Modules) (hflat : Scheme.Modules.IsFlatOver G (𝟙 Y)) : SheafOfModules.IsFlat G",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T173916-L-3309641",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T173916-L-3309641",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
