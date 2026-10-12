@@ -12,8 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.ConductorIdealRestriction
-import Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection
+import Sheaf.AlgebraicGeometry.ConductorSectionsRestriction
+import Sheaf.AlgebraicGeometry.ClosedImmersionIdealTensorSections
+import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Extending conductor-supported sections from one component
 
@@ -80,6 +83,62 @@ theorem conductor_sections {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite 
         (∃! t : Γ(N, ⊤), res₁ t = μ₁.app ⊤ s ∧ resZ t = 0) ∧
         ∀ t : Γ(N, ⊤), res₁ t = μ₁.app ⊤ s → resZ t = 0 →
           nonvanishingLocus N t = i a '' nonvanishingLocus N₁ (μ₁.app ⊤ s) := by
-  sorry
+  classical
+  dsimp only
+  obtain ⟨r, hr, hcompat⟩ := conductor_sections_restriction C i hcomponents
+    hdistinct hcover a j hZ M m
+  obtain ⟨_, hkernel⟩ := closedImmersion_ideal_tensor_sections j M m
+  let N₁ := (tensorPullback (i a)).obj (M.tensorPow m)
+  let μ₁ := (j.ker.comap (i a)).toModulesι ▷ N₁ ≫ (λ_ N₁).hom
+  have : N₁.IsInvertible := ((invertible_pullback_tensor (i a)).1 (M.tensorPow m)).2
+  have : Mono μ₁ := inferInstance
+  have hμ₁ : Function.Injective (μ₁.app ⊤) :=
+    (ModuleCat.mono_iff_injective
+      ((SheafOfModules.evaluation (C a).ringCatSheaf (op ⊤)).map μ₁)).mp inferInstance
+  let e := AddEquiv.ofBijective r hr
+  refine ⟨e, hcompat, ?_⟩
+  intro s
+  let q := e.symm s
+  have he : r q = s := e.apply_symm_apply s
+  have hzero :
+      ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
+        (M.tensorPow m)).val.app (op ⊤)
+          ((j.ker.toModulesι ▷ M.tensorPow m ≫ (λ_ (M.tensorPow m)).hom).app ⊤ q) = 0 :=
+    (hkernel _).2 ⟨q, rfl⟩
+  constructor
+  · refine ⟨_, ⟨?_, hzero⟩, ?_⟩
+    · exact (hcompat q).symm.trans (congrArg (μ₁.app ⊤) he)
+    · intro t ht
+      obtain ⟨q', hq'⟩ := (hkernel t).1 ht.2
+      have hq : r q' = r q := by
+        apply hμ₁
+        exact (hcompat q').trans ((congrArg
+          (fun t ↦ ((Classical.choose (exists_tensorPullbackAdjunction (i a))).unit.app
+            (M.tensorPow m)).val.app (op ⊤) t) hq').trans
+              (ht.1.trans (congrArg (μ₁.app ⊤) he.symm)))
+      exact hq'.symm.trans (congrArg _ (hr.1 hq))
+  · intro t ht₁ htZ
+    ext y
+    constructor
+    · intro hy
+      have hyZ : y ∉ Set.range j := by
+        rintro ⟨z, rfl⟩
+        have hz := (nonvanishing_tensorPullback j (M.tensorPow m) t z).2 hy
+        rw [htZ] at hz
+        simp [nonvanishingLocus] at hz
+      have hycover : y ∈ ⋃ b : ι, Set.range (i b) := by rw [hcover]; trivial
+      obtain ⟨b, x, hx⟩ := Set.mem_iUnion.mp hycover
+      have hb : b = a := by
+        by_contra hba
+        apply hyZ
+        rw [hZ]
+        exact Set.mem_iUnion.mpr ⟨b, Set.mem_iUnion.mpr ⟨hba, ⟨x, hx⟩⟩⟩
+      subst b
+      refine ⟨x, ?_, hx⟩
+      rw [← ht₁]
+      exact (nonvanishing_tensorPullback (i a) (M.tensorPow m) t x).2 (hx ▸ hy)
+    · rintro ⟨x, hx, rfl⟩
+      apply (nonvanishing_tensorPullback (i a) (M.tensorPow m) t x).1
+      rwa [ht₁]
 
 end AlgebraicGeometry.Scheme.Modules

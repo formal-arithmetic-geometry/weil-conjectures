@@ -7008,3 +7008,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/R1/Sheaf.RingTheory.AffineBasicSetsDisjointRefinement (stage 3; reviewer PASS; first push; landing 20261012T085327-L-34909 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/R1/Sheaf.RingTheory.SerreSkGoesUp (stage 3; reviewer PASS; first push; landing 20261012T085327-L-35004 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/R2/Sheaf.Algebra.Homology.KFlatPullback (stage 3; reviewer PASS; first push; landing 20261012T085327-L-35102 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:53 L: merged deliver/R2/Sheaf.AlgebraicGeometry.ConductorSections (stage 3; reviewer PASS; first push; landing 20261012T085328-L-35232 (interface); batch 20261012T085205; modules 4; new nodes 3)

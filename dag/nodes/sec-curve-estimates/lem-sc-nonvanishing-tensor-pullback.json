@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-nonvanishing-tensor-pullback",
+ "kind": "statement",
+ "title": "Nonvanishing of a pulled-back invertible section",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], $N$ an invertible module on $Y$ [def-sc-invertible-module], $t$ a global section of $N$, and $x\\in X$. Restrict $t$ with the unit of the canonical tensor-pullback adjunction [def-pc-module-pullback] [lem-pc-module-pullback-adjunction]. Then $x$ belongs to the nonvanishing locus of that pulled-back section if and only if $f(x)$ belongs to the nonvanishing locus of $t$ [def-weil-pbc-ample-invertible-module].",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Sheaves Tag 0098, Properties Section 01PR, residue-value criterion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-module-residue-fiber"
+ ],
+ "proof": [
+  {
+   "text": "The quotient-tensor isomorphism identifies one tensor a germ in the residue-field fibre with its class modulo the maximal ideal times the whole stalk module. Thus residue value zero is equivalent to membership in that submodule; this is the complement of the definition of nonvanishing.",
+   "uses": [
+    "def-weil-pbc-module-residue-fiber",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the fibre comparison clause of [lem-weil-pbc-invertible-pullback-tensor]. It carries the residue value of the pulled-back section to one tensor the original residue value. Extension of scalars between fields is faithfully flat, so one tensor a vector is zero exactly when the vector is zero. Transport this equality through the fibre isomorphism and negate the zero-value equivalence.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-module-residue-fiber",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Sheaves Tag 0098, Properties Section 01PR, residue-value criterion",
+  "note": "Lean reduction written by R2, following the cited existing declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Nonvanishing locus of the pullback of a section of an invertible sheaf is the inverse image of its nonvanishing locus",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonvanishing locus of pullback of a section of a line bundle is the inverse image of the nonvanishing locus",
+   "results": "Hits: AlgebraicGeometry.Scheme.preimage_zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.Scheme.zeroLocus_map, AlgebraicGeometry.Scheme.Hom.preimage_basicOpen, AlgebraicGeometry.Scheme.preimage_basicOpen, AlgebraicGeometry.Scheme.Opens.toSpecΓ_preimage_zeroLocus, AlgebraicGeometry.Scheme.Hom.preimage_basicOpen_top, AlgebraicGeometry.Scheme.preimage_basicOpen_top",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic algebra or scheme lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "range_map_kernel|imageMonoIsoSource|one_tmul_eq_zero_iff|quotTensorEquivQuotSMul",
+   "results": "Hits: Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic algebra or scheme lemmas only."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.tmul, _ = 0",
+   "results": "Hits: TensorProduct.tmul_zero, TensorProduct.zero_tmul, TensorProduct.sum_tmul_basis_left_eq_zero, TensorProduct.sum_tmul_basis_right_eq_zero, Module.FaithfullyFlat.one_tmul_eq_zero_iff, Matrix.kroneckerTMul_zero, Matrix.zero_kroneckerTMul, TensorProduct.sum_tmul_eq_zero_of_vanishesTrivially",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic algebra or scheme lemmas only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConductorSections",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "## Proof, first sentence: the proper curve C must first be shown projective; via Stacks 09NZ and 09NX, 09NX proof, third paragraph: the displayed conductor equality and extension by zero from Z_1",
+   "via": [
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NonvanishingTensorPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/NonvanishingTensorPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonvanishing_tensorPullback",
+  "statement": "theorem nonvanishing_tensorPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (N : Y.Modules) [N.IsInvertible] (t : Γ(N, ⊤)) (x : X) : let adj := Classical.choose (exists_tensorPullbackAdjunction f) let res : Γ((tensorPullback f).obj N, ⊤) := (adj.unit.app N).val.app (op ⊤) t x ∈ nonvanishingLocus ((tensorPullback f).obj N) res ↔ f x ∈ nonvanishingLocus N t",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35232",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

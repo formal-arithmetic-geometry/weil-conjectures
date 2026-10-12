@@ -31,53 +31,42 @@
  ],
  "proof": [
   {
-   "text": "Apply the conductor equality [lem-sc-conductor-ideal-restriction] to the reduced component cover $Y=Z_1\\cup Z$. Tensoring the resulting isomorphism on $Z_1$ with the invertible module $(\\mathcal M|_{Z_1})^{\\otimes m}$ identifies $\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m}$ with the restriction of $\\mathcal I\\mathcal M^{\\otimes m}$; tensoring preserves isomorphisms because $\\mathcal M$ is invertible.",
+   "text": "Use [lem-sc-conductor-sections-restriction] to obtain an additive bijection of ideal tensor sections compatible with the canonical restriction map. Form its additive equivalence using AddEquiv.ofBijective. Tensoring the target ideal inclusion by the invertible pulled-back tensor power is a monomorphism, hence is injective on global sections.",
    "uses": [
-    "lem-sc-conductor-ideal-restriction",
-    "def-sc-invertible-module"
+    "lem-sc-conductor-sections-restriction",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-pc-tensor-dual-invertible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Remark 09NW, conductor equality and its tensor product with an invertible sheaf"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sc-conductor-ideal-zero-intersection], $\\mathcal I\\cap\\mathcal J_1=0$ for the ideal sheaf $\\mathcal J_1$ of $Z_1$ (as $Y$ is reduced and $Y=Z_1\\cup Z$), and restriction along $Z_1\\hookrightarrow Y$ is a bijection $\\Gamma(U,\\mathcal I\\mathcal M^{\\otimes m})\\to\\Gamma(U\\cap Z_1,\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m})$ for every open $U\\subseteq Y$; with $U=Y$ this is the canonical isomorphism $\\Gamma(Y,\\mathcal I\\mathcal M^{\\otimes m})\\cong\\Gamma(Z_1,\\mathcal I_1(\\mathcal M|_{Z_1})^{\\otimes m})$, compatible with the identification of step 1. Thus a section on $Z_1$ has a unique preimage, which is a global section of $\\mathcal I\\mathcal M^{\\otimes m}$ and hence a section of $\\mathcal M^{\\otimes m}$ vanishing on $Z$.",
+   "text": "For a section s on the distinguished component, take its inverse image q under the equivalence and define t to be its image under ideal multiplication. Compatibility proves its required restriction. The kernel characterisation [lem-sc-closed-immersion-ideal-tensor-sections] proves that t vanishes on Z. For any competing t, that characterisation supplies q prime in the ideal tensor sections. Injectivity of the target ideal inclusion implies r(q prime)=s=r(q), and injectivity of r then gives q prime=q and equality of the ambient sections.",
    "uses": [
-    "lem-sc-conductor-ideal-zero-intersection",
-    "def-sbc-closed-immersion-ideal-sheaf"
+    "lem-sc-closed-immersion-ideal-tensor-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX proof, displayed equality of global sections after Remark 09NW"
-   }
+   "elementary": true
   },
   {
-   "text": "Because the extended section lies in the ideal sheaf of $Z$, it vanishes on $Z$. On the complement of $Z$, the reduced scheme $Y$ has only the component $Z_1$, so the extension's nonvanishing locus is exactly the original section's nonvanishing locus on $Z_1$; uniqueness follows from the section isomorphism in the preceding step.",
+   "text": "A section vanishing on Z cannot be nonvanishing at any point of its image, by [lem-sc-nonvanishing-tensor-pullback] and the zero-germ criterion. The component cover and the description of the image of Z therefore put every nonvanishing point in the distinguished component. Apply the same pullback criterion to that component, using the prescribed restricted section, to prove equality of loci in both directions.",
    "uses": [
-    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-sc-nonvanishing-tensor-pullback",
     "def-weil-pbc-ample-invertible-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09NX proof, conductor-supported section conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-conductor-ideal-restriction",
-  "lem-sc-conductor-ideal-zero-intersection",
-  "def-sc-invertible-module",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-tensor-dual-invertible",
+  "lem-sc-closed-immersion-ideal-tensor-sections",
+  "lem-sc-conductor-sections-restriction",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-weil-pbc-invertible-pullback-tensor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Remark 09NW and Lemma 09NX proof"
+  "place": "Varieties Remark 09NW and Lemma 09NX; R2 Lean reduction with explicit inverse, uniqueness, and pointwise nonvanishing proof."
  },
  "mathlib_searches": [
   {
@@ -157,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

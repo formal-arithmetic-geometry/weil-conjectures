@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-closed-immersion-ideal-tensor-sections",
+ "kind": "statement",
+ "title": "Ideal tensor sections are the kernel of closed restriction",
+ "statement": "Let $j:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme] [def-weil-closed-immersion], let $I=j.ker$ be its ideal sheaf [def-sbc-closed-immersion-ideal-sheaf], let $M$ be an invertible module [def-sc-invertible-module], and let $m\\in\\mathbb N$. Write $N=M^{\\otimes m}$, and let $r_Z$ be restriction of global sections given by the canonical tensor-pullback adjunction [def-pc-module-pullback] [lem-pc-module-pullback-adjunction]. The ideal multiplication map $\\mu:I\\otimes N\\to N$ is injective on global sections, and $r_Z(t)=0$ if and only if $t=\\mu(s)$ for some global section $s$ of $I\\otimes N$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Lemma 08KS and Varieties Lemma 09NX, extension by zero"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Tensoring the ideal inclusion by the invertible tensor power preserves monomorphisms. Thus its multiplication map is mono and its categorical image is isomorphic to its source.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient theorem [lem-weil-pbc-closed-immersion-unit-quotient] makes the image inclusion a kernel fork for the chosen pullback unit. Use uniqueness of limits to identify this kernel with the categorical kernel, and compose with the image-source isomorphism. Comparing adjunctions changes the unit by an isomorphism of its target, so does not change which sections it kills.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation on the top open preserves kernels. Transport its concrete range description along the kernel-source isomorphism. This gives both injectivity of the multiplication map and equivalence between zero restriction and being in its range.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-tensor-dual-invertible",
+  "lem-weil-pbc-closed-immersion-unit-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Modules Lemma 08KS and Varieties Lemma 09NX, extension by zero",
+  "note": "Lean reduction written by R2, following the cited existing declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of an ideal tensor an invertible sheaf are exactly the kernel of restriction to a closed subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an ideal tensor an invertible sheaf form the kernel of restriction to a closed subscheme",
+   "results": "Hits: AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.Hom.ideal_ker_le, AlgebraicGeometry.Scheme.Hom.ker",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic algebra or scheme lemmas only."
+  },
+  {
+   "tool": "grep",
+   "query": "range_map_kernel|imageMonoIsoSource|one_tmul_eq_zero_iff|quotTensorEquivQuotSMul",
+   "results": "Hits: Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/Limits.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match; generic algebra or scheme lemmas only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConductorSections",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "## Proof, first sentence: the proper curve C must first be shown projective; via Stacks 09NZ and 09NX, 09NX proof, third paragraph: the displayed conductor equality and extension by zero from Z_1",
+   "via": [
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionIdealTensorSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionIdealTensorSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_ideal_tensor_sections",
+  "statement": "theorem closedImmersion_ideal_tensor_sections {Y Z : Scheme.{u}} (j : Z ⟶ Y) [IsClosedImmersion j] (M : Y.Modules) [M.IsInvertible] (m : ℕ) : let N := M.tensorPow m let adjZ := Classical.choose (exists_tensorPullbackAdjunction j) let resZ : Γ(N, ⊤) → Γ((tensorPullback j).obj N, ⊤) := fun t ↦ (adjZ.unit.app N).val.app (op ⊤) t let μ : j.ker.toModules ⊗ N ⟶ N := j.ker.toModulesι ▷ N ≫ (λ_ N).hom Function.Injective (μ.app ⊤) ∧ ∀ t : Γ(N, ⊤), resZ t = 0 ↔ ∃ s, μ.app ⊤ s = t",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35232",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T085328-L-35232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
