@@ -1,0 +1,155 @@
+{
+ "id": "lem-sc-perfect-finite-free-residue-model-existence",
+ "kind": "statement",
+ "title": "Finite-free model from fibre data",
+ "statement": "Let X be a scheme [def-pc-scheme], E an object of its derived category [def-pc-derived-category], and x a point with a strictly perfect neighbourhood representative [def-pc-perfect-complex]. Assume all derived fibre cohomology spaces at x are finite-dimensional and their Betti numbers d_i [def-sc-derived-fiber-betti] vanish outside an integer interval. There exists an affine open U containing x and a bounded complex K representing E restricted to U, with K^i isomorphic to the free sheaf O_U^{d_i} for every integer i.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma lift-perfect-from-residue-field, Tag 0BCD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-derived-fiber-betti"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the strictly perfect neighbourhood V and restrict it to an affine open\nW = Spec A containing x. The bounded strictly perfect complex has quasi-coherent terms\n(each is a summand of a finite free sheaf). The affine correspondence identifies it with\na bounded complex C of finite projective A-modules. Let p be the prime corresponding to x.\nLocalize C at p. Its terms are finite projective over the local ring A_p, hence finite\nfree. It is consequently pseudo-coherent. Termwise scalar extension computes its derived\nresidue fibre, since C is bounded and flat, and its homology identifies with\n derivedFiberCohomology X E i x. Use hfin and the definition of derivedFiberBetti to supply\nthe finite residue cohomology and rank hypotheses of exists_unique_minimalFreeModel\n(Tag 0BCC). The upper bound in hbound supplies its remaining hypothesis. This gives a\nbounded above finite free complex F representing C_p with terms of ranks d_i. The lower\nbound in hbound makes the remaining terms zero too, so F is bounded.\n\nPresent A_p as the filtered colimit of principal localizations A_f for f outside p\n(Tag 00CM). Descend F as a bounded finite projective complex Q at one such stage by\nexists_finite_projective_model_of_directed_colimit (Tag 0BC7). Its derived isomorphism\nwith C_p and the inverse descend by affine_perfect_hom_colimit (Tag 09RE), applied in\nboth orders. Apply the injectivity clause of that same theorem to descend both inverse\nidentities after further localization. Thus Q and C become isomorphic in the derived\ncategory on a principal neighbourhood of p. For each of the finitely many possibly\nnonzero terms of Q, exists_standardFreeCover_of_finite_projective gives a principal free cover.\nSelect one member containing p and intersect these finitely many principal opens. On\nthis affine neighbourhood all terms are free. Their ranks equal d_i by localization at\np and invariant basis number over the nonzero ring A_p. Outside the bounds use the zero\nmodule, which is free of rank zero. Sheafify Q and the descended isomorphism and transport\nalong the affine-open identification. This produces U, its bounded complex K with terms\nisomorphic to the displayed free sheaves, and the required derived isomorphism.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-sc-perfect-local-pseudocoherent-free-model",
+    "lem-pc-affine-perfect-colimit-descent",
+    "lem-pc-affine-perfect-hom-colimit",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "lem-pc-affine-perfect-colimit-descent",
+  "lem-pc-affine-perfect-hom-colimit",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BCD, local model and spreading paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex admits a bounded finite free model on an affine neighbourhood with ranks equal to residue field cohomology dimensions.",
+   "results": "Service unavailable: Internal Server Error. No search verdict; independent LeanFinder, Loogle and source grep used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology finite dimensional bounded complex vector spaces perfect complex",
+   "results": "8 hits: K-projective/K-injective and derived t-structure bounds; no scheme fibre finiteness or local model statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, HomologicalComplex.homology",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*complex|finite.*homology|homology.*finite",
+   "results": "Mathlib matches concern group cohomology or exact functors. Scheme fibre references in lean/ are definitions, this item, and jump loci; MinimalFreeModel is a local-ring statement, not the scheme spreading statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded perfect complex minimal free model localization at prime spreading to principal open",
+   "results": "8 hits: free locus and bounded derived representatives; none supplies a scheme free model with prescribed residue ranks.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, IsLocalRing, Module.Finite",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalFree|standardFreeCover|finiteFreeResidue",
+   "results": "0 Mathlib hits. Separate local source rg found the existing ring MinimalFreeModel and standard free cover, used in the proof plan.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelExistence",
+  "declaration": "AlgebraicGeometry.Scheme.finiteFreeModel_of_fiberData",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectFiniteFreeResidueModelExistence.lean",
+  "statement": "theorem finiteFreeModel_of_fiberData\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (X.residueField x)).toRingedSpace))]\n    (E : schemeDerivedCategory X) (x : X)\n    (hlocal : ∃ V : X.Opens, x ∈ V ∧\n      ∃ P : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ,\n        IsStrictlyPerfect X V P ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj E ≅\n          DerivedCategory.Q.obj P))\n    (hfin : ∀ i : ℤ, Module.Finite (X.residueField x) (derivedFiberCohomology X E i x))\n    (hbound : ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → derivedFiberBetti X E i x = 0) :\n    ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧\n      ∃ K : CochainComplex\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n        (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (K.X i)) ∧\n        (∀ i : ℤ, Nonempty (K.X i ≅ SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over U)\n          (ULift.{u} (Fin (derivedFiberBetti X E i x))))) ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅\n          DerivedCategory.Q.obj K)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: construct the locally closed loci on which degree-zero direct images are finite locally free",
+   "via": [
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-perfect-h0-locally-closed"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T194100-L-451685",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T194100-L-451685",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

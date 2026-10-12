@@ -7,12 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-import Sheaf.Algebra.Homology.AffinePerfectColimitDescent
-import Sheaf.AlgebraicGeometry.AffinePerfectHomColimit
-import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
-import Sheaf.CategoryTheory.DerivedCategory.PerfectScalarExtension
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
-import Sheaf.RingTheory.MinimalFreeModel
+import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelData
+import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModelExistence
 
 
 /-! # Finite free local models with prescribed residue cohomology ranks
@@ -77,7 +73,10 @@ theorem exists_finiteFreeResidueModel
           Nonempty ((SheafOfModules.overFunctor.{u}
             (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅
             DerivedCategory.Q.obj K) := by
-  sorry
+  obtain ⟨hfin, hbound⟩ := finiteFiberData X E x (hE x)
+  obtain ⟨U, hxU, hUaff, K, hKb, hKrank, hKE⟩ :=
+    finiteFreeModel_of_fiberData X E x (hE x) hfin hbound
+  exact ⟨hfin, hbound, U, hxU, hUaff, K, hKb, hKrank, hKE⟩
 
 end
 end AlgebraicGeometry.Scheme

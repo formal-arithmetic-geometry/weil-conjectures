@@ -27,56 +27,24 @@
  ],
  "proof": [
   {
-   "text": "By the definition of a perfect complex [def-pc-perfect-complex] (with its affine form, Stacks Tag 08EB), choose an affine open neighbourhood $\\operatorname{Spec}(A)$ of $x$ on which $E$ is represented by $\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $A$-modules, and write $\\mathfrak p\\subset A$ for the prime corresponding to $x$; then $Li_x^*E$ is $P^\\bullet\\otimes_A^{\\mathbf L}\\kappa(\\mathfrak p)$. By [lem-sc-perfect-pullback-perfect-residue] this derived fibre is perfect over the field $\\kappa(\\mathfrak p)$, i.e. quasi-isomorphic to a bounded complex of finite-dimensional $\\kappa(\\mathfrak p)$-vector spaces; its cohomology spaces are subquotients of these terms, so the numbers $d_i$ are finite and all but finitely many are zero.",
+   "text": "At the prescribed x use the strictly perfect neighbourhood supplied by hE x. Apply finiteFiberData to obtain finite fibre cohomology and bounded Betti support. Apply finiteFreeModel_of_fiberData to that same local perfectness witness and the two fibre facts. Combine the three conclusions.",
    "uses": [
-    "lem-sc-perfect-pullback-perfect-residue",
+    "lem-sc-perfect-finite-free-residue-model-data",
+    "lem-sc-perfect-finite-free-residue-model-existence",
     "def-pc-perfect-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.19, Tag 0BCD, proof: pull-perfect and the splitting over a field"
-   }
-  },
-  {
-   "text": "Localize at $\\mathfrak p$. The terms of $P^\\bullet_{\\mathfrak p}=P^\\bullet\\otimes_AA_{\\mathfrak p}$ are finite projective modules over a local ring, hence finite free (Stacks Tag 00NZ), so $P^\\bullet_{\\mathfrak p}$ is a bounded complex of finite free modules and in particular pseudo-coherent [def-pur-pseudo-coherent-complex]; and $P^\\bullet_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}^{\\mathbf L}\\kappa(\\mathfrak p)=P^\\bullet\\otimes_A^{\\mathbf L}\\kappa(\\mathfrak p)$ has cohomology dimensions $d_i$. Apply [lem-sc-perfect-local-pseudocoherent-free-model] (Tag 0BCC) to obtain a bounded-above complex $F^\\bullet$ of finite free $A_{\\mathfrak p}$-modules with $F^i=A_{\\mathfrak p}^{\\oplus d_i}$ and an isomorphism $F^\\bullet\\cong P^\\bullet_{\\mathfrak p}$ in $D(A_{\\mathfrak p})$. Since the $d_i$ vanish outside a finite interval by Step 1, $F^\\bullet$ is bounded.",
-   "uses": [
-    "lem-sc-perfect-local-pseudocoherent-free-model",
-    "def-pur-pseudo-coherent-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.19, Tag 0BCD, proof: apply Lemma 0BCC after localizing at the prime"
-   }
-  },
-  {
-   "text": "The local ring is the directed colimit $A_{\\mathfrak p}=\\operatorname{colim}_{f\\notin\\mathfrak p}A_f$ of principal localizations (Stacks Tag 00CM). By [lem-pc-affine-perfect-colimit-descent] applied to $F^\\bullet$, there are $f\\notin\\mathfrak p$ and a bounded complex $Q^\\bullet$ of finite projective $A_f$-modules with $Q^\\bullet\\otimes_{A_f}A_{\\mathfrak p}\\cong F^\\bullet$ as complexes. Now $Q^\\bullet$ and $P^\\bullet_f$ are bounded complexes of finite projective $A_f$-modules whose images over $A_{\\mathfrak p}$ are isomorphic in $D(A_{\\mathfrak p})$ (via $F^\\bullet\\cong P^\\bullet_{\\mathfrak p}$). By [lem-pc-affine-perfect-hom-colimit] (stage $A_f$, both orders of the two complexes, and each complex with itself), this isomorphism and its inverse come from morphisms $\\alpha:Q^\\bullet_g\\to P^\\bullet_g$ and $\\beta:P^\\bullet_g\\to Q^\\bullet_g$ in $D(A_g)$ for some $g\\in fA$, $g\\notin\\mathfrak p$, and since $\\beta\\alpha$ and $\\alpha\\beta$ become identities over $A_{\\mathfrak p}$, the injectivity in the same lemma gives $h\\notin\\mathfrak p$, $h\\in gA$, with $\\alpha_h$ an isomorphism $Q^\\bullet_h\\cong P^\\bullet_h$ in $D(A_h)$. Apply [lem-weil-pbc-finite-projective-standard-free-cover] to each of the finitely many nonzero terms $Q^i_h$: of the elements generating the unit ideal, one lies outside $\\mathfrak p$; let $u$ be $h$ times the product of these choices, so $u\\notin\\mathfrak p$ and every $Q^i_u$ is finite free, of rank $d_i$ because $Q^i_u\\otimes_{A_u}A_{\\mathfrak p}\\cong F^i=A_{\\mathfrak p}^{\\oplus d_i}$ and $A_{\\mathfrak p}\\neq0$. On $U=D(u)\\ni x$, which is affine, $E|_U\\cong\\widetilde{P^\\bullet_u}\\cong\\widetilde{Q^\\bullet_u}$, a bounded complex with terms $\\mathcal O_U^{\\oplus d_i}$.",
-   "uses": [
-    "lem-pc-affine-perfect-colimit-descent",
-    "lem-pc-affine-perfect-hom-colimit",
-    "lem-weil-pbc-finite-projective-standard-free-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.19, Tag 0BCD, proof: $R_{\\mathfrak p}=\\operatorname{colim}R_f$ and Lemma 0BC7"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-perfect-pullback-perfect-residue",
-  "def-pc-perfect-complex",
-  "lem-sc-perfect-local-pseudocoherent-free-model",
-  "def-pur-pseudo-coherent-complex",
-  "lem-pc-affine-perfect-colimit-descent",
-  "lem-pc-affine-perfect-hom-colimit",
-  "lem-weil-pbc-finite-projective-standard-free-cover"
+  "lem-sc-perfect-finite-free-residue-model-data",
+  "lem-sc-perfect-finite-free-residue-model-existence",
+  "def-pc-perfect-complex"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.76.19, Tag 0BCD"
+  "place": "Tag 0BCD, separating fibre finiteness from spreading the local model"
  },
  "mathlib_searches": [
   {
@@ -177,5 +145,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T194100-L-451685",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
