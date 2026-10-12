@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+ "kind": "statement",
+ "title": "Constructibility of finite pushforward of an open quotient constant",
+ "statement": "Let Λ be a commutative ring, ℓ a natural number such that R = Λ/(ℓ) is finite as a set, X a Noetherian scheme, ν:Y→X a finite morphism, and j:U→Y an open immersion. Then ν_*j_! of the constant Λ-module sheaf R on U is constructible [def-constructible-constructible], using direct image [def-weil-pbc-direct-image] and extension by zero [def-weil-pbc-extension-by-zero].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "Proof sketch: cokernel constructibility and vanishing over the isomorphism locus; arbitrary-mono generalization justified by finite stalks"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-constructible-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Y is Noetherian since it is finite over X. The constant quotient module sheaf is finite locally constant since Λ/(ℓ) is cyclic. Extension by zero along the quasi-compact open immersion preserves constructibility.",
+   "uses": [
+    "lem-fin-extension-by-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite pushforward constructibility to the underlying finite abelian sheaf. The resulting sheaf remains killed by ℓ. Its module operations factor through the finite ring R, so on each finite-set constant stratum a refinement trivializes the finitely many R-operations. The resulting finite constant R-modules are finitely generated over Λ. This yields the required constructible module sheaf; no Noetherian ring assumption on Λ is used.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-constructible-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-extension-by-zero",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "Proof sketch: cokernel constructibility and vanishing over the isomorphism locus; arbitrary-mono generalization justified by finite stalks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite pushforward of constructible etale module sheaf is constructible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite direct image extension by zero constant sheaf constructible",
+   "results": "Eight hits, including CategoryTheory.presheafIsGeneratedBy_of_isFinite and condensed constant sheaf constructions; no etale module-sheaf comparison result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf.*lowerStar|isIso.*finite",
+   "results": "Mathlib has no matching etale constructibility or comparison theorem. The project has open extension constructibility and finite base change, but finite-pushforward constructibility is recorded for abelian underlying set sheaves.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image sheaf along finite scheme morphism preserves constructible finite modules and restriction to open isomorphism",
+   "results": "Eight hits about constructible scheme images and finite morphisms; none about constructible module sheaves or the restriction comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; independent second reading"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar.*[Cc]onstruct|[Cc]onstruct.*lowerStar|sheaf.*[Ii]so.*[Oo]pen|[Oo]pen.*[Bb]ase[Cc]hange",
+   "results": "Mathlib hits concern scheme open immersions, constructible sets and topological sheaves, not these small-etale module sheaf statements.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.NormalizationMonoProperties",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normalization-mono-cokernel",
+   "place": "Constructibility of the middle term",
+   "via": [
+    "lem-weil-pbc-normalization-mono-cokernel"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FinitePushforwardOpenQuotientConstant.lean",
+  "declaration": "AlgebraicGeometry.finite_pushforward_open_constantModSheaf_constructible",
+  "statement": "theorem finite_pushforward_open_constantModSheaf_constructible {X Y U : Scheme.{u}} [IsNoetherian X] (ν : Y ⟶ X) [IsFinite ν] (j : U ⟶ Y) [IsOpenImmersion j] (ℓ : ℕ) [Finite (Λ ⧸ Ideal.span {(ℓ : Λ)})] : Scheme.IsConstructibleSheaf ((ν)_*[ModuleCat.{u + 1} Λ].obj ((j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085223-L-7783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085223-L-7783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

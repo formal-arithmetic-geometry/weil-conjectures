@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-normalization-comparison-on-iso-locus",
+ "kind": "statement",
+ "title": "Normalization comparison objects on the isomorphism locus",
+ "statement": "Let Λ be a commutative ring, ℓ any natural number, ν:X′→X a finite morphism of schemes, and V an open of X such that ν restricted over V is an isomorphism. Let j:U→X and j′:U′→X′ be open immersions with ν′:U′→U giving a Cartesian square j′ν = ν′j. Set R = Λ/(ℓ). Then V^*(j_! R_U) and V^*(ν_*j′_!R_U′) are isomorphic as Λ-module sheaves, using inverse image [def-weil-pbc-inverse-image], extension by zero [def-weil-pbc-extension-by-zero], and direct image [def-weil-pbc-direct-image]. No comparison morphism is specified.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "Proof sketch: cokernel constructibility and vanishing over the isomorphism locus; arbitrary-mono generalization justified by finite stalks"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Form W = ν⁻¹(V) and T = U ×_X V. Finite base change identifies restriction of ν_*j′_!R with pushforward along ν_V of the restriction of j′_!R to W. Base change for extension by zero identifies the latter with extension by zero on U′ ×_X V.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Cartesian square and the isomorphism ν_V identify U′ ×_X V with T and identify the two open immersions and constant coefficients. Constant sheaf pullback preserves R. Pushforward along the isomorphism ν_V yields j_T!R; open base change also identifies the restricted source with j_T!R. Compose these isomorphisms. The argument holds for empty opens and zero R, and does not need density or finiteness of R.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-constructible-pullback-constant",
+  "lemma-weil-pbc-finite-exchange",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "Proof sketch: cokernel constructibility and vanishing over the isomorphism locus; arbitrary-mono generalization justified by finite stalks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite pushforward of constructible etale module sheaf is constructible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite direct image extension by zero constant sheaf constructible",
+   "results": "Eight hits, including CategoryTheory.presheafIsGeneratedBy_of_isFinite and condensed constant sheaf constructions; no etale module-sheaf comparison result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf.*lowerStar|isIso.*finite",
+   "results": "Mathlib has no matching etale constructibility or comparison theorem. The project has open extension constructibility and finite base change, but finite-pushforward constructibility is recorded for abelian underlying set sheaves.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image sheaf along finite scheme morphism preserves constructible finite modules and restriction to open isomorphism",
+   "results": "Eight hits about constructible scheme images and finite morphisms; none about constructible module sheaves or the restriction comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; independent second reading"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStar.*[Cc]onstruct|[Cc]onstruct.*lowerStar|sheaf.*[Ii]so.*[Oo]pen|[Oo]pen.*[Bb]ase[Cc]hange",
+   "results": "Mathlib hits concern scheme open immersions, constructible sets and topological sheaves, not these small-etale module sheaf statements.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.NormalizationMonoProperties",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normalization-mono-cokernel",
+   "place": "Identification of the two terms over V",
+   "via": [
+    "lem-weil-pbc-normalization-mono-cokernel"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.NormalizationComparisonOnIsoLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/NormalizationComparisonOnIsoLocus.lean",
+  "declaration": "AlgebraicGeometry.normalization_comparison_on_iso_locus",
+  "statement": "theorem normalization_comparison_on_iso_locus {X X' U U' : Scheme.{u}} (ν : X' ⟶ X) [IsFinite ν] (V : X.Opens) [IsIso (ν ∣_ V)] (j : U ⟶ X) [IsOpenImmersion j] {j' : U' ⟶ X'} [IsOpenImmersion j'] {ν' : U' ⟶ U} (hj : IsPullback j' ν' ν j) (ℓ : ℕ) : Nonempty (((V.ι)^*[ModuleCat.{u + 1} Λ].obj ((j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ))) ≅ ((V.ι)^*[ModuleCat.{u + 1} Λ].obj ((ν)_*[ModuleCat.{u + 1} Λ].obj ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ)))))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085223-L-7783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085223-L-7783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
