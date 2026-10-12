@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-closed-immersion-zariski-units-epi",
+ "kind": "statement",
+ "title": "Restriction of Zariski units along a closed immersion is an epimorphism",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. The canonical restriction $u_i:\\mathcal O_X^\\times\\to i_*\\mathcal O_Z^\\times$ of [def-sc-zariski-units-restriction] is an epimorphism of abelian sheaves on the small Zariski site [def-sc-zariski-site]: every local section of the target lifts after passage to an open covering.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-zariski-units-restriction",
+  "def-sc-zariski-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NY, varieties-lemma-lift-line-bundle-from-reduction-dimension-1, proof, opening short exact sequence; local lifting expanded explicitly"
+ },
+ "proof": [
+  {
+   "text": "At a point i(z), surjectivity of the local ring map lifts the germ of the prescribed unit. Since the ring map is local, the lift is a unit. Represent it on an open A inside the prescribed ambient open and restrict to its basic open B, obtaining an invertible representative. Equality of germs yields an open V in Z on which this representative maps to the prescribed unit.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-zariski-units-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since i is a closed embedding, W = B minus i(Z minus V) is an ambient open neighbourhood of i(z) whose inverse image lies in V. Restrict the invertible representative to W. Naturality of the structure map and functoriality of restriction give the required equality. Off i(Z), use the complement of the closed image; its inverse image is empty, so the target units group is trivial. The local-surjectivity criterion for epimorphisms now concludes.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-zariski-units-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09NY, varieties-lemma-lift-line-bundle-from-reduction-dimension-1, proof, opening short exact sequence; local lifting expanded explicitly",
+  "note": "Expanded and proved in Lean by G3 from the cited source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of units from a scheme to a closed subscheme is an epimorphism of Zariski sheaves",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.to_basicOpen_epi, TopCat.Presheaf.instEpiCommRingCatToTotalQuotientPresheaf, TopCat.Presheaf.epi_toLocalizationPresheaf, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective, AlgebraicGeometry.Scheme.instEpiCommRingCatResidue, SheafOfModules.GeneratingSections.ofEpi_s, SheafOfModules.GeneratingSections.ofEpi_I, AlgebraicGeometry.Scheme.Cover.instEpiTopCatBaseCommRingCatFromGlued",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing components used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalHom, IsUnit",
+   "results": "7 hits: isUnit_of_map_unit, IsLocalHom.map_nonunit, IsLocalHom.mk, IsUnit.of_map, isUnit_map_iff, CommRingCat.Limits.isLocalRing, CommRingCat.Limits.π_isLocalHom",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing components used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.*units|units.*IsClosedImmersion",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing components used in the Lean proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of units along a closed immersion of schemes is an epimorphism of sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardLift",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proof, first sentence: dimension-one quasi-projectivity, expanded through Stacks 09NZ and 09NY; 09NY opening short exact sequence",
+   "via": [
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionUnitsEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionUnitsEpi.lean",
+  "declaration": "AlgebraicGeometry.Scheme.epi_unitsSheafToPushforward_of_isClosedImmersion",
+  "statement": "theorem epi_unitsSheafToPushforward_of_isClosedImmersion\n    {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :\n    Epi (unitsSheafToPushforward i)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

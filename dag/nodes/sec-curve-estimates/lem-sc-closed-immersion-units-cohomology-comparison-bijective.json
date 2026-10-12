@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-closed-immersion-units-cohomology-comparison-bijective",
+ "kind": "statement",
+ "title": "The canonical closed-immersion cohomology comparison for units is bijective",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. For every $p\\in\\mathbb N$, the particular canonical homomorphism $c_i^p:H^p(X,i_*\\mathcal O_Z^\\times)\\to H^p(Z,\\mathcal O_Z^\\times)$ defined by inverse image on Ext, the constant-integer-sheaf identification, and the counit in [def-sc-zariski-units-restriction] is bijective. Here cohomology is that of abelian Zariski sheaves [def-sc-topological-abelian-cohomology, def-sc-zariski-site].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-zariski-units-restriction",
+  "def-sc-topological-abelian-cohomology",
+  "def-sc-zariski-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 02UV, cohomology-lemma-cohomology-and-closed-immersions, proof via exact direct image; canonical map identified using the source library Ext-adjunction theorem"
+ },
+ "proof": [
+  {
+   "text": "Direct image along the closed embedding preserves epimorphisms. Explicitly, an on-image local lift over V extends to the ambient open U minus i(Z minus V); off the image, the inverse-image open is empty. The local-surjectivity criterion proves preservation of epimorphisms. Direct image is additive and left exact, so it is exact. Inverse image is additive and exact as well.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source library Ext-adjunction theorem CategoryTheory.Adjunction.mapExtCounit_bijective to the exact inverse-image/direct-image adjunction, the constant integer sheaf on X, and the units sheaf on Z. It says that applying inverse image to an Ext class and then composing with the counit is bijective. Precomposition by the constant-sheaf pullback isomorphism is an additive equivalence. Associativity of Ext composition identifies their composite with exactly c_i^p of def-sc-zariski-units-restriction. Thus this canonical map is bijective, without choosing an unspecified cohomology isomorphism.",
+   "uses": [
+    "def-sc-zariski-units-restriction",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-zariski-units-restriction",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 02UV, cohomology-lemma-cohomology-and-closed-immersions, proof via exact direct image; canonical map identified using the source library Ext-adjunction theorem",
+  "note": "Expanded and proved in Lean by G3 from the cited source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical pullback counit map on cohomology of the direct image along a closed embedding is bijective",
+   "results": "8 hits: LightCondSet.topCatAdjunctionCounit_bijective, CondensedSet.topCatAdjunctionCounit_bijective, SheafOfModules.bijective_pushforwardSections, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj, TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.Sheaf.isLocallyBijective_iff_isIso",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing components used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext",
+   "results": "12 hits: CategoryTheory.Abelian.Ext, CategoryTheory.Abelian.Ext.instAddCommGroup, CategoryTheory.hasExt_iff_small_ext, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.Abelian.Ext.chgUniv, CategoryTheory.Abelian.Ext.homEquiv₀, CategoryTheory.Abelian.extFunctorObj_obj_coe, CategoryTheory.Abelian.Ext.mk₀_bijective",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing components used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor.*counit|counit.*mapExactFunctor|cohomology.*closed.*immersion",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing components used in the Lean proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf agrees with cohomology of its direct image along a closed embedding via inverse image and counit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardLift",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proof, first sentence: dimension-one quasi-projectivity, expanded through Stacks 09NZ and 09NY; 09NY sentence invoking the canonical comparison of 02UV",
+   "via": [
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionUnitsCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionUnitsCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.bijective_unitsPushforwardCohomologyComparison_of_isClosedImmersion",
+  "statement": "theorem bijective_unitsPushforwardCohomologyComparison_of_isClosedImmersion\n    {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (p : ℕ) :\n    Function.Bijective (unitsPushforwardCohomologyComparison i p)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

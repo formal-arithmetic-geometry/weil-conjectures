@@ -28,64 +28,48 @@
  ],
  "proof": [
   {
-   "text": "Let I be the quasi-coherent ideal sheaf defining the closed immersion i: Z \\to X. The unit sheaves fit into the short exact sequence 0 \\to (1 + I) \\cap O_X^* \\to O_X^* \\to i_*O_Z^* \\to 0, where the last map is restriction of units and the kernel consists exactly of units congruent to 1 modulo I.",
+   "text": "The units restriction f is epi by lem-sc-closed-immersion-zariski-units-epi. Its categorical kernel K gives the short exact sequence K -> O_X^times -> i_* O_Z^times. This is precisely the kernel (1+I) intersect O_X^times from the source, without choosing ideal-sheaf data.",
    "uses": [
-    "def-weil-closed-immersion"
+    "lem-sc-closed-immersion-zariski-units-epi"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Lemma 09NY, proof, opening displayed short exact sequence"
-   }
+   "elementary": true
   },
   {
-   "text": "The underlying space of X is Noetherian and has dimension at most one by hypothesis. Applying [lem-sc-noetherian-cohomology-vanishing-abelian-dim-one] to the abelian sheaf (1 + I) \\cap O_X^* gives H^2(X, (1 + I) \\cap O_X^*) = 0. By [def-sc-topological-abelian-cohomology], the short exact sequence in step 1 has a long exact cohomology sequence, so H^1(X, O_X^*) \\to H^1(X, i_*O_Z^*) is surjective.",
+   "text": "Apply lem-sc-noetherian-cohomology-vanishing-abelian-dim-one to K. Identify H-prime at the top open with H by sheafifying the canonical isomorphism from the free abelian presheaf on the terminal representable to the constant integer presheaf. This gives H^2(X,K)=0. Exactness at H^1(X,i_*O_Z^times) in the kernel sequence therefore makes H^1(f) surjective.",
    "uses": [
     "lem-sc-noetherian-cohomology-vanishing-abelian-dim-one",
     "def-sc-topological-abelian-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Lemma 09NY, proof, sentences beginning 'Since dim(X) <= 1' and 'Hence the map'"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sc-cohomology-closed-immersion-pushforward] with p=1 and the sheaf O_Z^*, H^1(X, i_*O_Z^*) is naturally isomorphic to H^1(Z, O_Z^*). Thus the surjection of step 2 is a surjection H^1(X, O_X^*) \\to H^1(Z, O_Z^*).",
+   "text": "The specific canonical comparison to H^1(Z,O_Z^times) is bijective by lem-sc-closed-immersion-units-cohomology-comparison-bijective. Lift the class of N through this comparison, then through the H^1 surjection from step 2.",
    "uses": [
-    "lem-sc-cohomology-closed-immersion-pushforward"
+    "lem-sc-closed-immersion-units-cohomology-comparison-bijective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Lemma 09NY, proof, sentence beginning 'By Cohomology, Lemma 02UV'"
-   }
+   "elementary": true
   },
   {
-   "text": "The isomorphism between isomorphism classes of invertible modules and H^1 of the sheaf of units from [thm-sc-hilbert-90], applied to X and to Z, identifies H^1(X, O_X^*) and H^1(Z, O_Z^*) with Pic(X) and Pic(Z), respectively. By [lem-sc-picard-h1-restriction-compatibility], these identifications carry the map in step 3 to the pullback map L \\mapsto i^*L. Hence the surjection in step 3 is the asserted surjection Pic(X) \\to Pic(Z), so every invertible O_Z-module is isomorphic to the pullback of an invertible O_X-module.",
+   "text": "The Hilbert-90 equivalence thm-sc-hilbert-90 supplies a Picard class on X representing the lifted H^1 class. Choose its invertible representative L. Lem-sc-picard-h1-restriction-compatibility identifies the compared restriction class with the class of tensorPullback(i,L), and supplies invertibility of this pullback. Injectivity of the Hilbert-90 equivalence gives equality of Picard classes, hence an isomorphism tensorPullback(i,L) with N.",
    "uses": [
     "thm-sc-hilbert-90",
     "lem-sc-picard-h1-restriction-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Lemma 09NY, proof, final sentence 'This proves the lemma by Cohomology, Lemma 09NU'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
+  "lem-sc-closed-immersion-zariski-units-epi",
   "lem-sc-noetherian-cohomology-vanishing-abelian-dim-one",
-  "lem-sc-cohomology-closed-immersion-pushforward",
-  "thm-sc-hilbert-90",
   "def-sc-topological-abelian-cohomology",
+  "lem-sc-closed-immersion-units-cohomology-comparison-bijective",
+  "thm-sc-hilbert-90",
   "lem-sc-picard-h1-restriction-compatibility"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Lemma 09NY (varieties-lemma-lift-line-bundle-from-reduction-dimension-1), proof"
+  "place": "Tag 09NY proof, implemented by G3 using the categorical kernel, canonical Ext-adjunction comparison, and the existing Picard compatibility"
  },
  "mathlib_searches": [
   {
@@ -181,5 +165,15 @@
   "group": "G1",
   "result": "pass",
   "note": "X Z : Scheme; [NoetherianSpace X] = topological Noetherian; (i) [IsClosedImmersion i]; topologicalKrullDim X ≤ 1 (H1 form); ∀ N : Z.Modules, N.IsInvertible → ∃ L : X.Modules, L.IsInvertible ∧ Nonempty ((tensorPullback i).obj L ≅ N); #check confirmed Scheme.Modules.IsInvertible and Scheme.Modules.tensorPullback; Pic clause is the node's 'that is' gloss, no Pic stmt_dep"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085244-L-16790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
