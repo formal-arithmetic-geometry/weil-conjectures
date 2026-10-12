@@ -1,0 +1,153 @@
+{
+ "id": "lem-sp-cartan-eilenberg-second-filtration",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 1: second filtration, signed row identifications and total-cohomology convergence (Stacks 0130 and 0132)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Second-filtration spectral data with the total cohomology image filtration",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be an additive left exact functor between Grothendieck abelian categories [def-sp-left-exact-additive, def-sp-grothendieck-abelian]. Let K be a bounded-below cochain complex in $\\mathcal A$, and let $a:K\\to I$ be a bicomplex augmentation into a double complex with complex degree $s\\in\\mathbf Z$ and resolution degree $r\\in\\mathbf N$. Assume that I vanishes for $s<b$ for some integer b, every $I^{s,r}$ is injective and every row augmentation is a quasi-isomorphism [def-sp-injective-resolutions]. Set $T=\\operatorname{Tot}((F(I)\\text{ extended by zero})^{\\mathrm{flip}})$ using [def-sp-cartan-eilenberg-presentation]. There exist a filtration L of T by subcomplexes [def-sp-filtration], a cohomological spectral sequence E starting at page zero, page-zero identifications with the degreewise graded pieces, and signed identifications $E_1^{s,r}\\cong R^rF(K^s)$. The steps of L equal the second-filtration image sums [def-sp-double-complex-total]. The page-zero differential is that of the graded complex; the terms at every page $t\\ge1$ are the cokernels of the inclusions $B_t\\subseteq Z_t$ [def-sp-filtered-complex-subquotients]. Under the signed first-page identifications, $d_1$ is $R^rF(d_K)$, and $E_1^{p,q}=0$ for $q<0$. For every family of objects $Y^n$ and isomorphisms $c_n:H^n(T)\\cong Y^n$, there is a finite decreasing filtration H on each $Y^n$ whose p-th step is the direct image along $c_n$ of $\\operatorname{im}(H^n(L^pT)\\to H^n(T))$. For each p,n there is $t\\ge1$ such that all page-r terms at $(p,n-p)$ for $r\\ge t$ are isomorphic to $\\operatorname{gr}^pH(Y^n)$. This statement asserts no derived-complex interpretation of $H^n(T)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
+  "place": "Proof paragraph 1: second filtration, signed row identifications and total-cohomology convergence (Stacks 0130 and 0132)"
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Write J for the flipped, extended, F-mapped bicomplex. On each diagonal the only nonzero summands have resolution degree nonnegative and complex degree at least b. The second-filtration step is the sum of inclusions indexed by complex degree in [p,n]. The total differential preserves or raises that degree, hence these subobjects assemble into a decreasing filtration L by subcomplexes. Its steps in degree n are top for $p\\le b$ and bottom for $p>n$, including n<b. This construction does not require one upper filtration bound for the entire complex.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtration",
+    "def-sp-cartan-eilenberg-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-sp-filtered-complex-associated-spectral-sequence-construction] for the filtered total. Its page-zero differential and its $Z_t/B_t$ description give the first two compatibility clauses. The graded complex at complex degree s is the row $F(I^{s,\\bullet})$ placed in total degrees s+r. Its cohomology is zero for r<0; for r nonnegative the injective-resolution comparison with right derived functors identifies it with $R^rF(K^s)$. Naturality of that comparison identifies the map induced by $I^{s,\\bullet}\\to I^{s+1,\\bullet}$ with $R^rF(d_K)$. Stacks 0130 gives the second-filtration sign $(-1)^r$. Multiply the identification at (s,r) by $(-1)^{rs}$; the ratio of the factors at s+1 and s is $(-1)^r$, cancelling the sign.",
+   "uses": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix total degree n. In the cycle and boundary formulas, choose t so large that $p+t>n+1$ and $p-t+1\\le b$. For every $r\\ge t$, $F^{p+r}T^{n+1}=0$ and $F^{p-r+1}T^{n-1}=T^{n-1}$. Thus $Z_r$ is the image of the actual cycles in $F^pT^n$, and $B_r$ the image of the actual boundaries in $F^pT^n$. Their quotient is the cokernel of the successive inclusion in the image filtration on $H^n(T)$. The steps are top at b and bottom at n+1, so this cohomology filtration is finite. This proves degreewise stabilization and the stationary graded-piece comparison, as in Stacks 0132.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given $c_n$, take the direct image of each step of the total-cohomology filtration along $(c_n).\\mathrm{hom}$. Functoriality of subobject direct image gives antitonicity. Since $c_n$ is an isomorphism, this operation preserves top, bottom and cokernels of step inclusions. It therefore gives a finite filtration with the required step formula and carries the stationary graded-piece isomorphisms to Y.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
+  "place": "Proof paragraph 1: second filtration, signed row identifications and total-cohomology convergence (Stacks 0130 and 0132)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The spectral sequence of a bounded below double complex converges to total cohomology with the finite image filtration",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence second filtration double complex cohomology first page and convergence",
+   "results": "CochainComplex.ConnectData.homologyIsoPos; CochainComplex.HomComplex.leftHomologyData'; groupCohomology.isoShortComplexH2; CochainComplex.HomComplex.leftHomologyData'_π; CochainComplex.HomComplex.leftHomologyData'_H_coe; groupCohomology.isoShortComplexH2_hom; groupCohomology.isIso_δ_of_isZero; CochainComplex.ConnectData.homologyIsoNeg",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredComplex|spectralSequence|secondFiltration",
+   "results": "Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean; Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean; Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean; Mathlib/Algebra/Homology/SpectralObject/FirstPage.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HypercohomologyFirstPage",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergSecondFiltration",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergSecondFiltration.lean",
+  "declaration": "CategoryTheory.Functor.cartanEilenberg_second_filtration",
+  "statement": "theorem cartanEilenberg_second_filtration {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ I) (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s)) (hterms : ∀ (s : ℤ) (r : ℕ), Injective ((I.X s).X r)) (hrows : ∀ s : ℤ, QuasiIso (a.f s)) : ∃ (L : DecreasingFiltration ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total (ComplexShape.up ℤ))) (E : CohomologicalSpectralSequence B 0) (e₀ : ∀ p q : ℤ, (E.page 0).X (p, q) ≅ (L.gradedPiece p).X (p + q)) (e₁ : ∀ (r : ℕ) (s : ℤ), (E.page 1).X (s, (r : ℤ)) ≅ (F.rightDerived r).obj (K.obj.X s)), (∀ p n : ℤ, L.complexStep p n = ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step p) ∧ (∀ p q : ℤ, (E.page 0).d (p, q) (p, q + 1) ≫ (e₀ p (q + 1)).hom = (e₀ p q).hom ≫ (L.gradedPiece p).d (p + q) (p + (q + 1))) ∧ (∀ (p q t : ℤ) (ht : 1 ≤ t), ∃ hBZ : L.complexBoundaries p (p + q) t ≤ L.complexCycles p (p + q) t, Nonempty ((E.page t (le_trans (by decide : (0 : ℤ) ≤ 1) ht)).X (p, q) ≅ cokernel (Subobject.ofLE _ _ hBZ))) ∧ (∀ (r : ℕ) (s : ℤ), (E.page 1).d (s, (r : ℤ)) (s + 1, (r : ℤ)) ≫ (e₁ r (s + 1)).hom = (e₁ r s).hom ≫ (F.rightDerived r).map (K.obj.d s (s + 1))) ∧ (∀ p q : ℤ, q < 0 → IsZero ((E.page 1).X (p, q))) ∧ (∀ (Y : ℤ → B) (c : ∀ n : ℤ, ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total (ComplexShape.up ℤ)).homology n ≅ Y n), ∃ H : ∀ n : ℤ, DecreasingFiltration (Y n), (∀ n : ℤ, (H n).IsFinite) ∧ (∀ p n : ℤ, (H n).step p = (Subobject.«exists» (c n).hom).obj (imageSubobject (HomologicalComplex.homologyMap (L.step p).arrow n))) ∧ (∀ p n : ℤ, ∃ (t : ℤ) (ht : 1 ≤ t), ∀ (r : ℤ) (hr : t ≤ r), Nonempty ((E.page r (le_trans (by decide : (0 : ℤ) ≤ 1) (le_trans ht hr))).X (p, n - p) ≅ (H n).gradedPiece p)))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T070551-L-3477347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T070551-L-3477347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,9 +8,9 @@ module
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
 public import Sheaf.CategoryTheory.KInjectiveComputes
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.KInjectiveBridge
+import Sheaf.CategoryTheory.CartanEilenbergSecondFiltration
+import Sheaf.CategoryTheory.CartanEilenbergTotalResolution
+import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
 
 /-! # The first hypercohomology spectral sequence
 
@@ -32,6 +32,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
 
+-- The first spectral sequence uses the term resolutions; retain the CE hypotheses in its API.
+set_option linter.unusedVariables false in
 /-- The second-degree filtration of a Cartan--Eilenberg total complex gives the first
 hypercohomology spectral sequence, with its induced differential and derived abutment.
 Source: Stacks Project, Tags 0130 and 015H; blueprint order 522
@@ -139,6 +141,34 @@ theorem exists_hypercohomology_firstPage
           (∀ p n : ℤ, ∃ (t : ℤ) (ht : 1 ≤ t), ∀ (r : ℤ) (hr : t ≤ r),
             Nonempty ((E.page r (le_trans (by decide : (0 : ℤ) ≤ 1)
               (le_trans ht hr))).X (p, n - p) ≅ (H n).gradedPiece p))) := by
-  sorry
+  classical
+  obtain ⟨L, E, e₀, e₁, hL, hd₀, hBZ, hd₁, hneg, habut⟩ :=
+    cartanEilenberg_second_filtration F K I a hbelow hterms hrows
+  obtain ⟨aug, haug, hq, hki⟩ :=
+    cartanEilenberg_total_resolution K I a hbelow hterms hrows
+  obtain ⟨e, he⟩ := cartanEilenberg_mapped_total_iso F I hbelow
+  refine ⟨L, E, e₀, e₁, hL, hd₀, hBZ, hd₁, hneg, ?_⟩
+  intro ρ
+  let τ : CochainComplex.KInjectiveResolutionChoice K.obj :=
+    ⟨_, aug, hq, hki⟩
+  obtain ⟨u, v, hu, _, huv, hvu, _⟩ := (kInjective_computes F).1 K τ ρ
+  let equiv : HomotopyEquiv τ.complex ρ.complex :=
+    ⟨u, v, huv.some, hvu.some⟩
+  let w := e.hom ≫ (F.mapHomologicalComplex (ComplexShape.up ℤ)).map u
+  let c : ∀ n : ℤ,
+      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total
+        (ComplexShape.up ℤ)).homology n ≅ F.rightDerivedCohomologyWithResolution K ρ n :=
+    fun n ↦ (HomologicalComplex.homologyFunctor B (ComplexShape.up ℤ) n).mapIso e ≪≫
+      (F.mapHomotopyEquiv equiv).toHomologyIso n
+  obtain ⟨H, hfin, hstep, hstab⟩ :=
+    habut (fun n ↦ F.rightDerivedCohomologyWithResolution K ρ n) c
+  refine ⟨aug, u, w, c, H, haug, hu, ?_, ?_, hfin, hstep, hstab⟩
+  · intro m s n h
+    dsimp [w]
+    rw [← Category.assoc, he m s n h, Category.assoc,
+      mapHomologicalComplex_map_f, ← F.map_comp, Category.assoc]
+  · intro n
+    exact (HomologicalComplex.homologyMap_comp e.hom
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map u) n).symm
 
 end CategoryTheory.Functor

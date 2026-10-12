@@ -1,0 +1,136 @@
+{
+ "id": "lem-sp-cartan-eilenberg-mapped-total",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 2: additivity commutes with the finite diagonal sums",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Additive functors commute with the bounded-below finite diagonals",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$ be an additive functor between Grothendieck abelian categories [def-sp-left-exact-additive, def-sp-grothendieck-abelian], and let I be a double complex with degrees $(s,r)\\in\\mathbf Z\\times\\mathbf N$. Suppose that $I^{s,\\bullet}=0$ for s below some integer b. Extend by zero and flip using [def-sp-cartan-eilenberg-presentation]. Write $J=(\\operatorname{mappedFunctor}(1_{\\mathcal A})(I))^{\\mathrm{flip}}$ and $J_F=(\\operatorname{mappedFunctor}(F)(I))^{\\mathrm{flip}}$. There is a complex isomorphism $e:\\operatorname{Tot}(J_F)\\cong F(\\operatorname{Tot}(J))$. On the $(m,s)$ diagonal summand in total degree n=m+s, its forward map composed with the inclusion is the extension identification from the F-mapped row to $F(I^{s,m})$, followed by F of the inverse extension identification and the inclusion into $\\operatorname{Tot}(J)$. No left exactness or injectivity hypotheses are needed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
+  "place": "Proof paragraph 2: additivity commutes with the finite diagonal sums"
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "For J, a summand in degree (r,s) vanishes if r<0 by extension by zero, or s<b by the lower bound. For fixed n define the finite diagonal indexing type $S_n=\\{s\\in\\mathbf Z\\mid b\\le s\\le n\\}$ with maps $s\\mapsto n-s$ and $s\\mapsto s$. Every nonzero diagonal term occurs uniquely in this family. In Lean this is a CoreHasTotal witness. Additivity preserves the finite coproduct on this type, and CoreHasTotal.preserves extends this preservation to the entire diagonal by adding the zero terms. Hence F.PreservesTotalComplex holds for J.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source library HomologicalComplex₂.mapTotalIso to obtain $\\operatorname{Tot}(F(J))\\cong F(\\operatorname{Tot}(J))$. HomologicalComplex.mapExtendIso gives the natural isomorphism between applying F after extension and extending after applying F. Lift it to complexes in the complex degree, flip it, and take its inverse, obtaining $J_F\\cong F(J)$. Totalization of this bicomplex isomorphism followed by mapTotalIso is the required e.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a natural resolution degree m, use the source library ιTotal_map equation and ι_mapTotalXIso_hom. The extension comparison at m is fixed by embeddingUpNat.r_f and mapExtendX_hom_eq. Expanding the two extension isomorphisms leaves composites of equality transports. Functoriality of those transports and eqToHom_trans give exactly the stipulated diagonal equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
+  "place": "Proof paragraph 2: additivity commutes with the finite diagonal sums"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor commutes with total complexes of double complexes with finite diagonals",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapTotalIso\"",
+   "results": "none",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapTotalIso|PreservesTotalComplex",
+   "results": "none",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HypercohomologyFirstPage",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergMappedTotal",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergMappedTotal.lean",
+  "declaration": "CategoryTheory.Functor.cartanEilenberg_mapped_total_iso",
+  "statement": "theorem cartanEilenberg_mapped_total_iso {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B] (F : A ⥤ B) [F.Additive] (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s)) : ∃ e : (((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total (ComplexShape.up ℤ) ≅ (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total (ComplexShape.up ℤ)), (∀ (m : ℕ) (s n : ℤ) (h : (m : ℤ) + s = n), (((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) s n h ≫ e.hom.f n = (HomologicalComplex.extendXIso ((F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)) ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).hom ≫ F.map ((HomologicalComplex.extendXIso (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)) ComplexShape.embeddingUpNat (i := m) (i' := (m : ℤ)) rfl).inv ≫ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal (ComplexShape.up ℤ) (m : ℤ) s n h))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T070551-L-3477347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T070551-L-3477347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

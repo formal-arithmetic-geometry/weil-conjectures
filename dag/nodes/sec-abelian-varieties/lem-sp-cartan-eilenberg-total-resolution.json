@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-cartan-eilenberg-total-resolution",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 2: the finite injective total and its augmented-row quasi-isomorphism (Stacks 0133; 015J, proof remark 3)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The augmented bounded-below injective bicomplex total is a K-injective resolution",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian]. Let $K$ be a bounded-below cochain complex. Let $I^{s,r}$ be a double complex [def-sp-double-complex-total] with complex degree $s\\in\\mathbf Z$ and resolution degree $r\\in\\mathbf N$, and let $a:K\\to I$ be a bicomplex augmentation from $K$ concentrated in resolution degree zero. Assume that there is $b\\in\\mathbf Z$ with $I^{s,\\bullet}=0$ for $s<b$, every $I^{s,r}$ is injective, and each $a^s:K^s[0]\\to I^{s,\\bullet}$ is a quasi-isomorphism [def-sp-injective-resolutions]. Extend resolution degree by zero and flip as in [def-sp-cartan-eilenberg-presentation], obtaining $J$ with indices $(r,s)$. Then there is a quasi-isomorphism $\\epsilon:K\\to\\operatorname{Tot}(J)$ whose degree-$n$ component is $a^{n,0}$ followed by the extension identification and the inclusion of the $(0,n)$ summand. The total complex is K-injective [def-sp-kinjective-bridge]. No conditions on the horizontal cycles, boundaries or cohomology are required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
+  "place": "Proof paragraph 2: the finite injective total and its augmented-row quasi-isomorphism (Stacks 0133; 015J, proof remark 3)"
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-abelian",
+  "def-sp-grothendieck-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-kinjective-bridge"
+ ],
+ "proof": [
+  {
+   "text": "The bicomplex augmentation gives maps $K^n\\to I^{n,0}$. The vertical differential kills these maps because a is a bicomplex map from a complex concentrated in vertical degree zero. The horizontal commutativity of a gives the chain-map identity for the complex-degree differential. After extension and flip the vertical total sign is one in resolution degree zero. Compose these maps with the $(0,n)$ diagonal inclusions. The total differential formula proves that they form a chain map $\\epsilon$ with exactly the claimed components.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose b as in the hypothesis. In total degree n a nonzero diagonal summand must have $0\\le r\\le n-b$ and $s=n-r$. Hence the diagonal is finite and the total vanishes below b. Its terms are finite biproducts of injectives: maps into each factor extend along a monomorphism, and their extensions assemble by the finite biproduct universal property. Thus the total is a bounded-below complex of injectives and is K-injective by [lem-sp-kinjective-computes].",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjoin $K^s$ in vertical degree -1, with augmentation as its outgoing differential. Each augmented row is acyclic since $a^s$ is a quasi-isomorphism. The total of this augmented bicomplex identifies, with the usual cone signs, with the cone of $\\epsilon$. Filter it by complex degree. On each diagonal the filtration is finite; its graded pieces are the shifted augmented rows and their homology is zero. The filtered cycle/boundary formula [def-sp-filtered-complex-subquotients] therefore has zero first page. For fixed total degree, take a page so large that the steps in degrees n-1, n and n+1 have reached their bounds. The cycles and boundaries are then stationary and their quotient is the corresponding graded piece of total cohomology. All these pieces vanish; the finite image filtration on cone cohomology then forces the cohomology itself to vanish. This is the augmented-row argument of Stacks 0133, with the comparison pinned to the actual augmentation. Consequently $\\epsilon$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-injective-resolutions",
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+  "lem-sp-kinjective-computes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
+  "place": "Proof paragraph 2: the finite injective total and its augmented-row quasi-isomorphism (Stacks 0133; 015J, proof remark 3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded below double complex of injectives total complex is an injective resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "total complex of a bounded below double complex of injectives with exact augmented rows is quasi isomorphic to augmentation",
+   "results": "CochainComplex.cm5b.instQuasiIsoIntP; CategoryTheory.InjectiveResolution.instQuasiIsoIntι'; CochainComplex.mappingCone.quasiIso_descShortComplex; CategoryTheory.InjectiveResolution.quasiIso; CochainComplex.cm5b; HomologicalComplex.quasiIsoAt_extendMap_iff; HomologicalComplex.instQuasiIsoExtendMap; HomologicalComplex.isSupported_iff_of_quasiIso",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*injective|injective.*total|quasiIso.*total",
+   "results": "Mathlib/Logic/Function/Basic.lean; Mathlib/Topology/FiberBundle/Basic.lean; Mathlib/Topology/Connected/TotallyDisconnected.lean; Mathlib/Topology/Connected/TotallyDisconnected.lean; Mathlib/Data/Bundle.lean; Mathlib/Testing/Plausible/Functions.lean; Mathlib/CategoryTheory/Presentable/ColimitPresentation.lean; Mathlib/RingTheory/MvPolynomial/Homogeneous.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HypercohomologyFirstPage",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergTotalResolution",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergTotalResolution.lean",
+  "declaration": "CategoryTheory.Functor.cartanEilenberg_total_resolution",
+  "statement": "theorem cartanEilenberg_total_resolution {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] (K : CochainComplex.Plus A) (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K.obj ⟶ I) (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s)) (hterms : ∀ (s : ℤ) (r : ℕ), Injective ((I.X s).X r)) (hrows : ∀ s : ℤ, QuasiIso (a.f s)) : ∃ (aug : K.obj ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total (ComplexShape.up ℤ)), (∀ n : ℤ, aug.f n = (a.f n).f 0 ≫ (HomologicalComplex.extendXIso (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X n)) ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal (ComplexShape.up ℤ) 0 n n (zero_add n)) ∧ QuasiIso aug ∧ CochainComplex.IsKInjective ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total (ComplexShape.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T070551-L-3477347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T070551-L-3477347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
