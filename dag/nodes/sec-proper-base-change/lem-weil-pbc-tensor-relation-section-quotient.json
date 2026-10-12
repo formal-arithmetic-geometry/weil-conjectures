@@ -33,9 +33,10 @@
  ],
  "proof": [
   {
-   "text": "Put R=O_Y(W). The section tensor bijections identify S(W) with C(W) tensor_R P(W), and F(W) with B(W) tensor_R S(W). Pure tensors generate these modules additively. The relation formula identifies range δ_W, pulled back to C(W) tensor_R P(W), with the R-submodule N spanned by c tensor bp - φ(b)c tensor p.",
+   "text": "Apply the cokernel section projection q to the displayed relation. The kernel/range hypothesis implies q δ = 0, so (c,p) ↦ q(τ(c,p)) is B(W)-balanced and additive in both arguments. TensorProduct.liftAddHom constructs g : C(W) tensor_B(W) P(W) → coker(δ)(W) with the required pure-tensor formula.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
    "source": {
@@ -44,9 +45,10 @@
    }
   },
   {
-   "text": "The balancing projection π:C(W) tensor_R P(W) -> C(W) tensor_B(W) P(W) is surjective on pure tensors and kills N. The map (c,p) to the class of c tensor p in the quotient by N is additive in both variables and B(W)-balanced. It therefore induces an inverse to the map from that quotient induced by π; both inverse identities follow on pure tensors and extend by additivity.",
+   "text": "The map (c,p) ↦ c tensor_B(W) p is O_Y(W)-balanced because the algebra morphism φ commutes with both structure maps. Lift it to C(W) tensor_O_Y(W) P(W) and compose with the inverse of the bijective section tensor map to obtain f on S(W). Use the surjective section tensor map of F, then tensor induction on B(W) tensor_O_Y(W) S(W) and on C(W) tensor_O_Y(W) P(W), to prove f δ = 0: the pure-tensor case is precisely B(W)-balancing. The equality ker q = range δ then implies ker q ≤ ker f.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
    "source": {
@@ -55,8 +57,9 @@
    }
   },
   {
-   "text": "By the assumed surjectivity and kernel equality, q_W identifies its target with S(W)/range δ_W. Transporting along the section tensor bijection identifies this quotient with (C(W) tensor_R P(W))/N. Compose with the preceding balanced tensor quotient equivalence. The resulting additive equivalence has the required pure tensor formula.",
+   "text": "Use AddMonoidHom.liftOfSurjective to descend f through q to v, so v q = f. Tensor induction on C(W) tensor_B(W) P(W) proves v g = id. Surjectivity of q, surjectivity of the section tensor map for S, and tensor induction prove g v = id. Package g and v into the additive equivalence; its pure-tensor formula is the defining formula for g. This argument is fully proved in private sectionQuotientAux and specialized to the given section maps.",
    "uses": [
+    "def-pur-sheaf-tensor-product",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
@@ -73,7 +76,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01I8 (schemes-lemma-widetilde-constructions), item (1); Modules, Section 01CA (modules-section-tensor-product); algebra quotient argument of step 5 of lem-weil-pbc-quasi-coherent-algebra-change-of-rings, written by A2"
+  "place": "Schemes, Lemma 01I8 (schemes-lemma-widetilde-constructions), item (1); Modules, Section 01CA (modules-section-tensor-product); algebra quotient argument of step 5 of lem-weil-pbc-quasi-coherent-algebra-change-of-rings, written by A2; direct universal-property implementation by H3, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -152,10 +155,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T144050-L-2087794",
-  "kind": "interface",
+  "landing": "20261012T194117-L-457129",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
