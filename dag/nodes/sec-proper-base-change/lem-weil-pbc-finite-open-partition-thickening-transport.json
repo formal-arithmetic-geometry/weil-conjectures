@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-finite-open-partition-thickening-transport",
+ "kind": "statement",
+ "title": "Transport finite disjoint open partitions across a thickening",
+ "statement": "Let $p:P^\\prime\\to P$ be a surjective closed immersion of schemes. Let $n\\in\\mathbb N$ and $(W_j)_{j\\in\\mathrm{Fin}(n)}$ be pairwise disjoint opens of $P^\\prime$ with union $P^\\prime$. There are pairwise disjoint opens $(V_j)$ covering $P$ such that each inclusion $V_j\\to P$ is finite, and for each j a surjective closed immersion $a_j:W_j\\to V_j$ whose composite with the inclusion into P equals the inclusion of W_j followed by p. The assertion includes n=0.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-surjective-morphism",
+  "def-weil-finite-integral-morphism"
+ ],
+ "source": {
+  "document": "Stacks Project, etale-cohomology.tex and morphisms.tex; finite splitting descent plan",
+  "place": "Tag 04DF (Lemma 29.46.5); parent finite splitting closed immersion descent, step 2"
+ },
+ "proof": [
+  {
+   "text": "The map p is a universal homeomorphism. Apply the order isomorphism on opens induced by its underlying homeomorphism to define V_j. The isomorphism preserves arbitrary suprema, top, infima and bottom, so the V_j form a disjoint covering. The inverse image of V_j is W_j.",
+   "uses": [
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each j, the complement of V_j is the union of V_k for k unequal to j: coverage proves one inclusion and disjointness the other. This union is open, so V_j is closed. Its open inclusion is a preimmersion with closed range, hence a closed immersion, and therefore finite.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the open-subscheme isomorphism W_j ≅ p^{-1}(V_j), followed by the restriction of p to V_j, as a_j. Restrictions preserve closed immersions. Surjectivity is checked by lifting a point of V_j under p. The restriction inclusion equation and the open-subscheme isomorphism inclusion equation prove the required composite equation. No component argument is needed for n=0.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and the parent finite splitting descent proof",
+  "place": "Tag 04DF (Lemma 29.46.5); parent finite splitting closed immersion descent, step 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a disjoint open partition of a scheme through a surjective closed immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homeomorph, TopologicalSpace.Opens",
+   "results": "Homeomorph.opensCongr and opensCongr_symm; no scheme partition transport theorem.",
+   "date": "2026-10-13",
+   "verdict": "Use the opens order isomorphism and restriction of scheme morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "opensCongr|isClopen_of_disjoint_cover_open|partition.*thickening",
+   "results": "Homeomorph.opensCongr; isClopen_of_disjoint_cover_open. No partition transport theorem in the source library or blueprint; blueprint search finite open partition thickening returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "Combine order transport, clopenness and restriction using Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteSplittingClosedImmersionDescent",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-normalization-constant",
+   "place": "Tag 04DF (Lemma 29.46.5); parent finite splitting closed immersion descent, step 2",
+   "via": [
+    "lem-weil-pbc-finite-splitting-closed-immersion-descent",
+    "lem-weil-pbc-generic-finite-noetherian-scheme-splitting",
+    "lem-weil-pbc-finite-module-generic-reflection",
+    "lem-weil-pbc-finite-module-locally-constant-strata",
+    "p2-finite-pushforward-module-constructible-reflection",
+    "b3-finite-pushforward-module-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteOpenPartitionThickeningTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOpenPartitionThickeningTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_open_partition_thickening_transport",
+  "statement": "theorem exists_finite_open_partition_thickening_transport\n    {P' P : Scheme.{u}} (p : P' ⟶ P) [IsClosedImmersion p] [Surjective p]\n    (n : ℕ) (W : Fin n → P'.Opens)\n    (hcover : (⨆ j, W j) = ⊤)\n    (hdisj : Pairwise (fun j k ↦ Disjoint (W j) (W k))) :\n    ∃ V : Fin n → P.Opens,\n      (⨆ j, V j) = ⊤ ∧ Pairwise (fun j k ↦ Disjoint (V j) (V k)) ∧\n      ∀ j, IsFinite (V j).ι ∧\n        ∃ a : (W j).toScheme ⟶ (V j).toScheme,\n          IsClosedImmersion a ∧ Surjective a ∧ a ≫ (V j).ι = (W j).ι ≫ p",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T223406-L-1637158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T223406-L-1637158",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

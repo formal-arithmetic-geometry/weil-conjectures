@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-etale-cover-thickening-lift",
+ "kind": "statement",
+ "title": "Lift an etale cover and its source comparisons across a thickening",
+ "statement": "Let $f:X\\to Y$ be any scheme morphism, $r:R\\to Y$ a surjective closed immersion, and $U\\subseteq Y$ open. Given an etale cover $(T_k\\to r^{-1}U)_k$, there is an etale cover $(S_i\\to U)_i$ and, for every $i$, an old index $k$ with surjective closed immersions $t:T_k\\to S_i$ and $p:T_k\\times_{r^{-1}U}(X\\times_Y R)|_{r^{-1}U}\\to S_i\\times_U X|_U$. These satisfy $p\\circ\\mathrm{pr}_1=\\mathrm{pr}_1\\circ t$ in diagrammatic order, i.e. the new first projection after p equals t after the old first projection. No finiteness condition on f or nonemptiness assumption is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "Stacks Project, etale-cohomology.tex and morphisms.tex; finite splitting descent plan",
+  "place": "Tag 04DZ (Theorem 59.45.2), essential surjectivity; parent finite splitting closed immersion descent, steps 1 and beginning of 2"
+ },
+ "proof": [
+  {
+   "text": "Restrict r to U. The restriction remains a surjective closed immersion; its surjectivity is checked by lifting a point of U to R. It is a universal homeomorphism. Essential surjectivity of etale base change gives an etale lift S_k of each T_k and an isomorphism S_k times_U U_R ≅ T_k over U_R.",
+   "uses": [
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define t_k by the inverse of this isomorphism followed by the first pullback projection. It is a surjective closed immersion. Its composite with S_k -> U equals T_k -> U_R -> U. Given x in U, lift it to U_R and then to a member of the old cover; its image under t_k proves that the S_k cover U. This construction preserves the old index type, including an empty index type.",
+   "uses": [
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the defining pullback square of X times_Y R to the inverse images of U, using Scheme.Hom.isPullback_resLE. For each cover member define p by pullback.lift. Paste the old source pullback square with the restricted square, and cancel the new source pullback square with IsPullback.of_right. This proves p is a base change of t_k, hence a surjective closed immersion, and pullback.lift_fst gives the projection equation.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and the parent finite splitting descent proof",
+  "place": "Tag 04DZ (Theorem 59.45.2), essential surjectivity; parent finite splitting closed immersion descent, steps 1 and beginning of 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lift an etale covering through a surjective closed immersion using topological invariance",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an etale cover along a universal homeomorphism using equivalence of small etale sites",
+   "results": "smallEtaleTopology, etaleTopology, Etale.forget; no exact cover and source-comparison theorem. The source library has Hom.isEquivalence_etale, used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "No exact Mathlib match; assemble essential surjectivity and pullback squares."
+  },
+  {
+   "tool": "grep",
+   "query": "objObjPreimageIso|etale.*Cover|Cover.*etale|isPullback_resLE",
+   "results": "Functor.objObjPreimageIso; Cover.mkOfCovers; Scheme.Hom.isPullback_resLE. No combined lifting theorem. Blueprint search lift etale cover thickening returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "Use the existing equivalence and Mathlib pullback API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteSplittingClosedImmersionDescent",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-normalization-constant",
+   "place": "Tag 04DZ (Theorem 59.45.2), essential surjectivity; parent finite splitting closed immersion descent, steps 1 and beginning of 2",
+   "via": [
+    "lem-weil-pbc-finite-splitting-closed-immersion-descent",
+    "lem-weil-pbc-generic-finite-noetherian-scheme-splitting",
+    "lem-weil-pbc-finite-module-generic-reflection",
+    "lem-weil-pbc-finite-module-locally-constant-strata",
+    "p2-finite-pushforward-module-constructible-reflection",
+    "b3-finite-pushforward-module-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoverThickeningLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoverThickeningLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_cover_thickening_lift",
+  "statement": "theorem exists_etale_cover_thickening_lift\n    {X Y R : Scheme.{u}} (f : X ⟶ Y)\n    (r : R ⟶ Y) [IsClosedImmersion r] [Surjective r] (U : Y.Opens)\n    (𝒯 : Cover.{u} etalePrecoverage (r ⁻¹ᵁ U).toScheme) :\n    ∃ 𝒮 : Cover.{u} etalePrecoverage U.toScheme, ∀ i,\n      ∃ (k : 𝒯.I₀) (t : 𝒯.X k ⟶ 𝒮.X i)\n        (p : pullback (𝒯.f k) (pullback.snd f r ∣_ (r ⁻¹ᵁ U)) ⟶\n          pullback (𝒮.f i) (f ∣_ U)),\n        IsClosedImmersion t ∧ Surjective t ∧\n        IsClosedImmersion p ∧ Surjective p ∧\n        p ≫ pullback.fst (𝒮.f i) (f ∣_ U) =\n          pullback.fst (𝒯.f k) (pullback.snd f r ∣_ (r ⁻¹ᵁ U)) ≫ t",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T223406-L-1637158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T223406-L-1637158",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
