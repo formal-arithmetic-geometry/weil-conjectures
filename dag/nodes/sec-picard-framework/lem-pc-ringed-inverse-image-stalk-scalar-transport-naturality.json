@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality",
+ "kind": "statement",
+ "title": "Natural semilinear inverse-image module stalk comparison",
+ "statement": "For ringed spaces X,Y, continuous f:X→Y and x in X, let k:OY_(f x)→(inverseImageRing f OY)_x be stalkPullbackHom followed by stalk of toSheafify. There exist additive equivalences c_M:M_(f x)≃(inverseImageModule f OY M)_x, simultaneously semilinear c_M(r m)=k(r)c_M(m) and natural c_N(a_(f x)(m))=(inverseImageModuleMap a)_x(c_M(m)). Inverse-image module structures are those of [def-pc-topological-inverse-image-module], source module stalks those of [def-pc-module-stalk-functor], and additive stalk maps those of [def-weil-pbc-module-stalk]. There is no scalar extension, alpha, or beta in this statement.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0098, proof using Tag 008H"
+ },
+ "stmt_deps": [
+  "def-pc-module-stalk-functor",
+  "def-pc-topological-inverse-image-module",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "identify the chosen sheaf pullback with presheaf pullback followed by\nsheafification using uniqueness of left adjoints. Apply the ring and abelian\nstalk comparisons of Tag 008H, transporting them through this identification.\nThe ring map is stalkPullbackHom followed by stalk of toSheafify; both are\nisomorphisms. The analogous abelian map defines c. To verify\nsemilinearity, represent the scalar and vector on neighborhoods of f(x), restrict\nboth to their intersection, and apply the germ formulas for the two comparisons.\nThe semilinearity clause of exists_inverseImageModuleInstances identifies the\nunit of r times m with the product of the two units. The stalk germ scalar law\nthen gives the asserted equation. For naturality, represent m by a germ, use\nnaturality of the abelian inverse-image unit, and use stalkFunctor_map_germ_apply.\nThe map on the right is exactly stalkAddMap of inverseImageModuleMap by definition.\nThe construction applies to zero modules and zero rings; with empty X there is\nno x. No flatness or nonvanishing hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "def-pc-topological-inverse-image-module",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "def-pc-topological-inverse-image-module",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0098, balanced tensor construction and the inverse-image stalk comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "ModuleCat.extendScalarsComp, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric semilinear comparison. TensorProduct.congr supplies tensor transport; the affine Tilde lemmas do not state the ringed-space inverse-image comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "semilinear additive equivalence base change tensor product along ring equivalence",
+   "results": "LinearEquiv.baseChange, IsBaseChange.ofEquiv, LinearEquiv.coe_baseChange, IsBaseChange.of_equiv, LinearEquiv.baseChange_tmul, IsBaseChange.tensorEquiv, IsBaseChange.linearMapRightBaseChangeEquiv, LinearMap.liftBaseChangeEquiv",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric semilinear comparison. TensorProduct.congr supplies tensor transport; the affine Tilde lemmas do not state the ringed-space inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*stalk|TensorProduct.congr",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Map.lean, Mathlib/LinearAlgebra/TensorProduct/Map.lean, Mathlib/LinearAlgebra/TensorProduct/Map.lean, Mathlib/LinearAlgebra/TensorProduct/Map.lean, Mathlib/LinearAlgebra/TensorProduct/Map.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric semilinear comparison. TensorProduct.congr supplies tensor transport; the affine Tilde lemmas do not state the ringed-space inverse-image comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural semilinear comparison inverse image module sheaf stalk at x and module stalk at f x",
+   "results": "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.stalkIso_inv, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric semilinear comparison. TensorProduct.congr supplies tensor transport; the affine Tilde lemmas do not state the ringed-space inverse-image comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "semilinear equivalence of inverse image module stalks and tensor scalar transport",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.InverseImageStalkScalarTransport",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ringed-inverse-image-stalk-scalar-transport",
+   "place": "steps 1–2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.InverseImageStalkScalarTransportNaturality",
+  "file": "lean/Sheaf/Algebra/Homology/InverseImageStalkScalarTransportNaturality.lean",
+  "declaration": "exists_inverseImage_stalk_comparison_natural",
+  "statement": "theorem exists_inverseImage_stalk_comparison_natural\n    (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier) (x : X) :\n    let k : Y.presheaf.stalk (f x) ⟶\n        TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.carrier)\n          (TopCat.Sheaf.inverseImageRing f Y.sheaf).obj x :=\n      TopCat.Presheaf.stalkPullbackHom CommRingCat.{u} f Y.presheaf x ≫\n      (TopCat.Presheaf.stalkFunctor CommRingCat.{u} x).map\n        (toSheafify (Opens.grothendieckTopology X)\n          ((TopCat.Presheaf.pullback CommRingCat.{u} f).obj Y.presheaf))\n    ∃ (c : ∀ M : RingedSpace.Modules Y,\n      (RingedSpace.moduleStalkFunctor Y (f x)).obj M ≃+\n        TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier)\n          (TopCat.Sheaf.inverseImageModule f Y.sheaf M).val.presheaf x),\n      (∀ (M : RingedSpace.Modules Y) (r : Y.presheaf.stalk (f x))\n        (m : (RingedSpace.moduleStalkFunctor Y (f x)).obj M),\n        c M (r • m) = k.hom r • c M m) ∧\n      ∀ (M N : RingedSpace.Modules Y) (a : M ⟶ N)\n      (m : (RingedSpace.moduleStalkFunctor Y (f x)).obj M),\n      c N ((RingedSpace.moduleStalkFunctor Y (f x)).map a m) =\n      PresheafOfModules.stalkAddMap\n          (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a).val (c M m)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T135248-L-1675330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T135248-L-1675330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

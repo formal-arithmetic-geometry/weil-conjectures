@@ -8,7 +8,9 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Topology.InverseImageModule
 public import Sheaf.Topology.PresheafModuleStalkFunctor
-import Sheaf.Topology.InverseImageStalk
+import Mathlib.Topology.Sheaves.Sheafify
+import Sheaf.Algebra.Homology.InverseImageStalkScalarTransportBeta
+import Sheaf.Algebra.Homology.InverseImageStalkScalarTransportNaturality
 
 /-!
 # Scalar transport for inverse-image stalks on ringed spaces
@@ -77,6 +79,27 @@ theorem exists_ringed_inverseImage_stalk_scalar_transport
         (m : (RingedSpace.moduleStalkFunctor Y (f x)).obj M),
         c N ((RingedSpace.moduleStalkFunctor Y (f x)).map a m) =
           PresheafOfModules.stalkAddMap
-            (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a).val (c M m)) := by sorry
+            (TopCat.Sheaf.inverseImageModuleMap f Y.sheaf M a).val (c M m)) := by
+  dsimp
+  obtain ⟨c, hs, hn⟩ := exists_inverseImage_stalk_comparison_natural X Y f x
+  have : IsIso (TopCat.Presheaf.stalkPullbackHom CommRingCat.{u} f Y.presheaf x) :=
+    (TopCat.Presheaf.stalkPullbackIso CommRingCat.{u} f Y.presheaf x).isIso_hom
+  have := TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso x CommRingCat.{u}
+    ((TopCat.Presheaf.pullback CommRingCat.{u} f).obj Y.presheaf)
+  let k : Y.presheaf.stalk (f x) ⟶
+      TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X.carrier)
+        (TopCat.Sheaf.inverseImageRing f Y.sheaf).obj x :=
+    TopCat.Presheaf.stalkPullbackHom CommRingCat.{u} f Y.presheaf x ≫
+      (TopCat.Presheaf.stalkFunctor CommRingCat.{u} x).map
+        (toSheafify (Opens.grothendieckTopology X)
+          ((TopCat.Presheaf.pullback CommRingCat.{u} f).obj Y.presheaf))
+  have hk := ConcreteCategory.bijective_of_isIso k
+  let ψ := ((TopCat.Presheaf.stalkFunctor CommRingCat.{u} x).map α.hom).hom
+  have hβ := fun M ↦ exists_inverseImage_stalk_scalar_transport_beta k.hom hk ψ
+    ((RingedSpace.moduleStalkFunctor Y (f x)).obj M)
+    (ModuleCat.of _ (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier)
+      (TopCat.Sheaf.inverseImageModule f Y.sheaf M).val.presheaf x)) (c M) (hs M)
+  choose β hβ using hβ
+  exact ⟨c, β, hβ, hn⟩
 
 end
