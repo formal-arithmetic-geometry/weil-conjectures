@@ -26,55 +26,38 @@
  ],
  "proof": [
   {
-   "text": "Choose a smooth proper connected compactification $j:C\\hookrightarrow\\overline C$ with finite boundary $S$ by [lem-sc-compactification]. By [lem-sc-base-change-curve], base change gives a smooth proper curve $\\overline C'$ and the base-changed open immersion $C'\\hookrightarrow\\overline C'$; the boundary is $S'=\\overline C'\\setminus C'$. The identification of the free divisor groups supported on $S$ and $S'$ follows from the definitions and the fibre-product base change in [def-sc-field-extension].",
+   "text": "Choose c by IsConnectedCurve.exists_smooth_properCompactification and give C and c.Z after base change their connected-curve and smooth instances using baseChange_curve.",
    "uses": [
     "lem-sc-compactification",
-    "lem-sc-base-change-curve",
-    "def-sc-field-extension"
+    "lem-sc-base-change-curve"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, compactification and boundary setup"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $L$ (respectively $L'$) be the subgroup of divisors supported on $S$ (respectively $S'$) which are boundary divisors of units on $C$ (respectively $C_{k'}$). By [lem-sc-affine-unit-divisor-base-change], the identification $\\iota$ sends $L$ isomorphically onto $L'$ and is compatible with pullback of units: $\\operatorname{div}(\\pi^*u)=\\iota(\\operatorname{div}u)$. The divisor map $\\mathcal O_C(C)^\\times\\to L$ is surjective by definition of $L$, and its kernel is $k^\\times$: taking global sections of the exact sequence $0\\to\\mathbf G_m\\to j_*\\mathbf G_m\\to\\bigoplus_{P\\in S}i_{P*}\\mathbf Z$ of [lem-sc-divisor-exact-sequence] (global sections are left exact) shows that a unit on $C$ with zero boundary divisor is a global unit on $\\overline C$, hence in $H^0(\\overline C,\\mathcal O_{\\overline C})^\\times=k^\\times$ by [lem-sc-global-functions]. The same holds over $k'$ for $C'\\subseteq\\overline C'$ (a proper smooth connected curve by step 1).",
-   "uses": [
-    "lem-sc-affine-unit-divisor-base-change",
-    "lem-sc-divisor-exact-sequence",
-    "lem-sc-global-functions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, divisor map and constants"
-   }
-  },
-  {
-   "text": "Every element of $k^\\times$ and $k'^\\times$ is an $n$-th power because both fields are algebraically closed. Hence the divisor maps identify $\\mathcal O_C(C)^\\times/\\mathcal O_C(C)^\\times{}^{\\,n}$ and $\\mathcal O_{C_{k'}}(C_{k'})^\\times/\\mathcal O_{C_{k'}}(C_{k'})^\\times{}^{\\,n}$ with $L/nL$ and $L'/nL'$, respectively: equality of divisor classes modulo $n$ gives a quotient by an $n$-th power up to a constant, and the constant has an $n$-th root. Since $\\operatorname{div}(\\pi^*u)=\\iota(\\operatorname{div}u)$ and $\\iota(L)=L'$ (step 2), the square formed by pullback, the two divisor maps and $\\iota$ commutes, so pullback $\\mathcal O_C(C)^\\times/n\\to\\mathcal O_{C_{k'}}(C_{k'})^\\times/n$ is identified with the isomorphism $L/nL\\cong L'/nL'$ induced by $\\iota$.",
+   "text": "Apply affine_unit_divisor_base_change to obtain the function-field maps with germ compatibility and the boundary-point bijection e. Its last two clauses give compatibility of boundary divisor maps d,d′ with unit pullback p and equality of their images under Finsupp.domCongr e. Form monoid homomorphisms into the multiplicative type tags of the boundary divisor groups.",
    "uses": [
     "lem-sc-affine-unit-divisor-base-change"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, passage from divisors to n-th-power quotients"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply boundary_divisor_kernel_powers over k and k′ to see that each divisor kernel consists of nth powers. The proved private quotient_powers_equiv constructs the quotient homomorphism induced by p. Injectivity: if p(a)=b^n, choose c with i(d(c))=d′(b) using equality of divisor images; then d(a/c^n)=1, so a/c^n=z^n and a=(zc)^n. Surjectivity: for b choose a with i(d(a))=d′(b); then d′(b/p(a))=1, so b/p(a)=z^n and the classes of b and p(a) agree. MulEquiv.ofBijective supplies the equivalence, whose representative equation is definitional.",
+   "uses": [
+    "lem-sc-boundary-divisor-kernel-powers"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-compactification",
   "lem-sc-base-change-curve",
-  "def-sc-field-extension",
   "lem-sc-affine-unit-divisor-base-change",
-  "lem-sc-divisor-exact-sequence",
-  "lem-sc-global-functions"
+  "lem-sc-boundary-divisor-kernel-powers"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-  "place": "Affine-case proof, unit quotient paragraph"
+  "place": "Affine unit-quotient paragraph, implemented by X2 with an explicit kernel theorem and quotient-map bijectivity proof"
  },
  "mathlib_searches": [
   {
@@ -163,5 +146,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T070559-L-3480530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

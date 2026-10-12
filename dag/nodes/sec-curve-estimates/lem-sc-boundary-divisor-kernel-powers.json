@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-boundary-divisor-kernel-powers",
+ "kind": "statement",
+ "title": "Units with zero boundary divisor are nth powers",
+ "statement": "Let k be an algebraically closed field, f : C → Spec k a smooth connected curve, and c : C ↪ X a smooth proper connected compactification [lem-sc-compactification]. Assume X is integral and Noetherian. Let φ : Γ(C,O_C) → k(X) [def-sc-function-field] be a ring homomorphism such that, whenever a germ y at c.i(x) restricts to the germ of a section s at x, φ(s) is the image of y in k(X). For n ≥ 1 and a unit a of Γ(C,O_C), if the restriction of div(φ(a)) [def-sc-divisor] to the closed points outside C is zero, then there exists a unit b of Γ(C,O_C) with b^n = a.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Affine-case proof, divisor kernel and constants paragraph; expanded using the existing proof of IsConnectedCurve.finite_units_quotient in lean/WeilConjectures/AlgebraicGeometry/Curve/Affine.lean"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "def-sc-divisor",
+  "lem-sc-compactification"
+ ],
+ "proof": [
+  {
+   "text": "Identify φ with the canonical restriction ρ = (c.i.appIso top).inv followed by germToFunctionField on the image open V. Apply germ compatibility at any point x0 of C and the open-immersion germ/appIso identity. Since V is nonempty and c.Z is integral, ρ and therefore φ are injective.",
+   "uses": [
+    "def-sc-function-field"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The rational function φ(a) has zero order at points of V because a is a unit. Outside V, a nonzero order would force the point to be closed on the smooth one-dimensional curve (Scheme.isClosed_of_ord_ne_zero), contrary to the zero boundary-divisor hypothesis. Thus its order is zero everywhere. The local DVR criterion and gluing of regular rational functions give a global unit s on c.Z with germ φ(a); implemented by the proved source lemma Scheme.exists_isUnit_germToFunctionField_eq_of_ord_eq_zero.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-function-field-sections-glue",
+    "def-sc-divisor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "GlobalSectionsBijective.of_isAlgClosed identifies s with a constant a0 in k. Compatibility of restriction with c.i ≫ c.g = f and injectivity of φ identify the original unit with the restriction κ(a0). Choose b in k with b^n = a0. It is nonzero since a is a unit and n is positive. The unit obtained from κ(b) has nth power a by map_pow and extensionality of units.",
+   "uses": [
+    "lem-sc-global-functions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-function-field",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-function-field-sections-glue",
+  "def-sc-divisor",
+  "lem-sc-global-functions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Affine-case proof, divisor kernel and constants paragraph; expanded using the existing proof of IsConnectedCurve.finite_units_quotient in lean/WeilConjectures/AlgebraicGeometry/Curve/Affine.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unit on open smooth proper connected curve with zero boundary divisor is constant",
+   "results": "Only complex manifold constant-function results and unrelated elliptic-curve declarations.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ord, IsUnit",
+   "results": "One hit: Mathlib AlgebraicGeometry.Scheme.ord_of_isUnit. Used in the complete proof; no compactification kernel-powers statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isUnit_germToFunctionField_eq_of_ord_eq_zero|boundary_divisor_kernel|ord_of_isUnit",
+   "results": "Source-library regularity theorem in Curve.DivisorIdealSheaf and the kernel calculation inside Curve.Affine.finite_units_quotient; Mathlib ord_of_isUnit. These are used in the complete proof.",
+   "date": "2026-10-12",
+   "verdict": "components found; exact statement absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unit on a smooth connected curve with zero divisor at the boundary of a proper compactification is a constant and hence an nth power over an algebraically closed field",
+   "results": "Service unavailable: Internal Server Error. The unavailable request is recorded in searches.jsonl; leanfinder, loogle and grep were used instead.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.UnitsQuotientBaseChange",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-units-quotient-base-change",
+   "place": "Proof step 2: kernel is constants; step 3: constants have nth roots",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.BoundaryDivisorKernelPowers",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/BoundaryDivisorKernelPowers.lean",
+  "declaration": "AlgebraicGeometry.boundary_divisor_kernel_powers",
+  "statement": "theorem boundary_divisor_kernel_powers\n    (k : Type u) [Field k] [IsAlgClosed k]\n    (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]\n    (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g]\n    [IsIntegral c.Z] [IsNoetherian c.Z]\n    (φ : Γ(C, ⊤) →+* c.Z.functionField)\n    (hφ : ∀ (x : C) (s : Γ(C, ⊤)) (y : c.Z.presheaf.stalk (c.i.base x)),\n      c.i.stalkMap x y = C.presheaf.germ ⊤ x trivial s →\n        φ s = algebraMap (c.Z.presheaf.stalk (c.i.base x)) c.Z.functionField y)\n    (n : ℕ) (hn : 1 ≤ n) (a : Γ(C, ⊤)ˣ)\n    (ha : Finsupp.subtypeDomain (fun P : closedPoints c.Z ↦\n      P.val ∉ Set.range c.i.base) (c.Z.div (Additive.ofMul (Units.map φ.toMonoidHom a))) = 0) :\n    ∃ b : Γ(C, ⊤)ˣ, b ^ n = a",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T070559-L-3480530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T070559-L-3480530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
