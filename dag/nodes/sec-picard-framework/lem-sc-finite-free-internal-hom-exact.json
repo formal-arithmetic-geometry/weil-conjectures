@@ -24,35 +24,33 @@
  ],
  "proof": [
   {
-   "text": "Use the chosen isomorphism E|_V \\cong O_V^{\\oplus r} on every object V of the site. By the definition of sheaf Hom, restriction to V gives Hom_{O|_V}(E|_V,A|_V), and precomposition with this isomorphism identifies it naturally with Hom_{O|_V}(O_V^{\\oplus r},A|_V) \\cong A(V)^{\\oplus r}. The same construction applies to B and C and is compatible with restriction maps, so it gives sheaf isomorphisms Hom(E,A) \\cong A^{\\oplus r}, Hom(E,B) \\cong B^{\\oplus r}, and Hom(E,C) \\cong C^{\\oplus r}.",
+   "text": "Construct the canonical comparison by mapping the opposite of the inverse of the chosen free-sheaf isomorphism through the internal-Hom functor, composing with the proved source-library SheafOfModules.homObjFreeIso, and then biproduct.isoCoproduct. Unfold the source comparison and its opposite-biproduct construction to prove that composing this comparison with each finite-sum projection equals homObjMap of the corresponding basis inclusion followed by homObjUnitIso. Applying this morphism equality at U and at a section gives exactly the required basis-evaluation equation.",
    "uses": [
     "def-pur-sheaf-hom"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM8 (Lemma 20.51.4), case (2), finite locally free Hom calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "Under these identifications, the maps induced by A \\to B \\to C are the r-fold direct sums of the given maps, because the sheaf-Hom maps act by postcomposition and the identifications use the r coordinate inclusions and projections. The category of sheaves of O-modules is abelian, so kernels and cokernels are computed in that category; finite direct sums are computed coordinatewise. Therefore the direct-sum sequence 0 \\to A^{\\oplus r} \\to B^{\\oplus r} \\to C^{\\oplus r} \\to 0 is exact, including r = 0.",
+   "text": "Prove naturality of the comparison in the target module. Cancel the inverse biproduct-to-coproduct comparison and use biproduct.hom_ext. Each projection reduces to the previous coordinate identity. Sigma.hom_ext shows that coordinate projections commute with Sigma.map. Naturality of homObjUnitIso follows by evaluating a section, and homObjMap_comp_homObjMap combines precomposition and postcomposition. This gives both displayed squares.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove short exactness of the finite-sum sequence using the constant-diagram functor followed by colim over Discrete I, for I = ULift (Fin r). The constant-diagram functor preserves limits and colimits. HasBiproductsOfShape.colimIsoLim identifies finite discrete colimits with limits, so colim preserves finite limits as well as finite colimits. Apply ShortComplex.ShortExact.map_of_exact. Sigma.isoColimit and its inclusion identities supply the natural comparison with the chosen coproducts; transport short exactness via ShortComplex.isoMk and ShortComplex.shortExact_of_iso. This argument needs only Finite I, with no nonemptiness condition, and therefore includes rank zero.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM8 (Lemma 20.51.4), case (2), exactness after finite locally free Hom identification"
-   }
+   "elementary": true
   },
   {
-   "text": "The three sheaf isomorphisms constructed in Step 1 form a commutative diagram from the direct-sum sequence in Step 2 to the displayed internal-Hom sequence, because each vertical map is precomposition with the same chosen isomorphism E \\cong O_U^{\\oplus r} and each horizontal map is postcomposition by A \\to B or B \\to C. Thus the internal-Hom sequence has the same sectionwise kernels and locally surjective epimorphism as the exact direct-sum sequence, and the three vertical maps give the claimed identifications.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM8 (Lemma 20.51.4), case (2), conclusion"
-   }
+   "text": "The composite of the two internal-Hom sequence maps is zero by homObjMap_comp_homObjMap and S.zero, with the remaining zero-postcomposition identity checked on sections. Form the isomorphism of short complexes from the three canonical comparisons and the two naturality squares. ShortComplex.shortExact_of_iso applied to its inverse transports the finite-sum short exactness to the internal-Hom sequence. Return these comparisons together with the basis-evaluation equality proved in the first step.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -60,9 +58,8 @@
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0GM8 (Lemma 20.51.4), case (2)"
+  "by": "agent",
+  "description": "R2 implemented the finite-free comparison/direct-sum route in Lean using the proved source-library homObjFreeIso and Mathlib preservation and short-complex isomorphism APIs. The source pointer 0GM8 is indirect through 0GM7; no statement or unit route changed."
  },
  "mathlib_searches": [
   {
@@ -149,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T235557-L-2202257",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
