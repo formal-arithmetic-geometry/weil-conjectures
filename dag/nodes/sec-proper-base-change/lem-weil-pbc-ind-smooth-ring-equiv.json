@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-ind-smooth-ring-equiv",
+ "kind": "statement",
+ "title": "Ind-smoothness transports across compatible ring isomorphisms",
+ "statement": "Let R and S be commutative rings, A a commutative S-algebra, B a commutative R-algebra, and e : R ≃+* S and f : A ≃+* B ring isomorphisms satisfying f(algebraMap S A (e(r))) = algebraMap R B r for every r. If A is a small filtered colimit of smooth S-algebras [def-weil-pbc-filtered-colimit-smooth-algebras], then B is a small filtered colimit of smooth R-algebras, with the same bound on the universe of the indexing category.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Proposition 07CM, scalar transport in the induction step"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-filtered-colimit-smooth-algebras"
+ ],
+ "proof": [
+  {
+   "text": "Construct the restriction-of-scalars functor using Algebra.compHom and the unchanged ring homomorphisms. Restriction along the inverse ring equivalence is its inverse; identity ring maps supply unit and counit, using the inverse identities to check algebra compatibility.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Map the given filtered colimit presentation through that explicitly constructed equivalence. Equivalences preserve colimits, so the same filtered index category supplies a colimit presentation of the transported vertex. A term remains smooth because its structure map is the composition of the smooth original structure map with the bijective base ring map: apply RingHom.Smooth.of_bijective and RingHom.Smooth.comp.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The given compatibility identifies f as an algebra isomorphism from the transported vertex to B. Apply CommAlgCat.isoMk and ObjectProperty.prop_of_iso to conclude.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B2",
+  "date": "2026-10-12",
+  "note": "Fully proved by the independent second reader; explicit scalar equivalence and Mathlib colimit and smoothness transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ind_smooth_of_ringEquiv, restrictScalarsEquivalence, ind_iff_of_equivalence in lean/Sheaf, lean/WeilConjectures and Mathlib",
+   "results": "No duplicate ind-smooth ring-isomorphism transport theorem. AlgCat.restrictScalarsEquivalenceOfRingEquiv treats noncommutative algebras; ObjectProperty.ind_iff_of_equivalence is a categorical transport lemma. WeilConjectures.RingTheory.ProEtale.Ind relates morphism and object ind-properties in equal universes; it does not give this transport theorem.",
+   "date": "2026-10-12",
+   "verdict": "partial matches only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of smooth algebras restriction of scalars ring equivalence",
+   "results": "Algebra.Smooth.comp and RingHom.smooth_algebraMap; no exact ind-smooth transport theorem.",
+   "date": "2026-10-12",
+   "verdict": "partial matches used in proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Smooth.comp",
+   "results": "RingHom.Smooth.comp, Mathlib.RingTheory.RingHom.Smooth: composition of smooth ring homomorphisms is smooth.",
+   "date": "2026-10-12",
+   "verdict": "match for smoothness step"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind-smooth algebras are preserved by compatible ring isomorphisms and restriction of scalars",
+   "results": "Service unavailable: msearch.py returned an internal error; no verdict from LeanSearch.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.IndSmoothQuotientCompatibility",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ind-smooth-quotient-compatibility",
+   "place": "scalar transport of the filtered smooth presentation",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.IndSmoothRingEquiv",
+  "file": "lean/Sheaf/Algebra/IndSmoothRingEquiv.lean",
+  "declaration": "Algebra.ind_smooth_of_ringEquiv",
+  "statement": "theorem ind_smooth_of_ringEquiv\n    {R S : Type u} [CommRing R] [CommRing S]\n    {A B : Type v} [CommRing A] [CommRing B] [Algebra S A] [Algebra R B]\n    (e : R ≃+* S) (f : A ≃+* B)\n    (hf : ∀ r, f (algebraMap S A (e r)) = algebraMap R B r)\n    (hA : ObjectProperty.ind.{w} (fun C : CommAlgCat.{v} S ↦ Smooth S C)\n      (CommAlgCat.of S A)) :\n    ObjectProperty.ind.{w} (fun C : CommAlgCat.{v} R ↦ Smooth R C)\n      (CommAlgCat.of R B)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135217-L-1655784",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T135217-L-1655784",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.RingTheory.Smooth.Basic
 
+import Sheaf.Algebra.IndSmoothRingEquiv
+
 /-!
 # Ind-smoothness and successive quotients
 
@@ -58,6 +60,28 @@ theorem ind_smooth_quotient_compatibility
     ObjectProperty.ind.{max u v}
       (fun C : CommAlgCat.{max u v} (R' ⧸ I') ↦ Smooth (R' ⧸ I') C)
       (CommAlgCat.of (R' ⧸ I') (Λ' ⧸ I'.map (algebraMap R' Λ'))) := by
-  sorry
+  dsimp
+  let L := K.map (algebraMap R Λ)
+  let J := I.map (algebraMap R Λ)
+  have hLJ : L ≤ J := Ideal.map_mono hKI
+  have hmap : (I.map (Ideal.Quotient.mk K)).map
+      (algebraMap (R ⧸ K) (Λ ⧸ L)) = J.map (Ideal.Quotient.mk L) := by
+    rw [Ideal.map_map, Ideal.map_map]
+    congr 1
+  let e := DoubleQuot.quotQuotEquivQuotOfLE hKI
+  let f : ((Λ ⧸ L) ⧸ (I.map (Ideal.Quotient.mk K)).map
+      (algebraMap (R ⧸ K) (Λ ⧸ L))) ≃+* Λ ⧸ J :=
+    (Ideal.quotientEquivAlgOfEq Λ hmap).toRingEquiv.trans
+      (DoubleQuot.quotQuotEquivQuotOfLE hLJ)
+  apply ind_smooth_of_ringEquiv e f.symm _ hΛ
+  intro r
+  apply f.injective
+  rw [f.apply_symm_apply]
+  induction r using Quotient.inductionOn with
+  | h r =>
+    induction r using Quotient.inductionOn with
+    | h r =>
+      rfl
+
 
 end Algebra
