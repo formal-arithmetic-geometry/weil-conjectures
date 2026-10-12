@@ -31,12 +31,12 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction` | 1 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 7 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero` | 2 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections` | 2 | 1 | proof |
@@ -49,9 +49,9 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 6 | proof |
-| `Sheaf.Topology.NoetherianTopologicalCohomologyVanishing` | 4 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct` | 5 | 4 | proof |
 | `Sheaf.Topology.InverseImageModule` | 5 | 2 | proof |
+| `Sheaf.Topology.NoetherianVanishingByIrreducibleComponents` | 5 | 2 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
 
