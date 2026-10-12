@@ -13,6 +13,10 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.Comma.Over.Basic
+import Sheaf.CategoryTheory.ColimitSiteCoveringConstruction
+import Sheaf.CategoryTheory.ColimitSiteSetInverseImage
+import Sheaf.CategoryTheory.ColimitSiteAbelianInverseImage
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Filtered colimits of sites
 
@@ -85,6 +89,8 @@ theorem filtered_index_nonempty (J : Type u) [SmallCategory J] [IsFiltered J] :
     Nonempty J := by
   exact IsFiltered.nonempty
 
+-- The unchanged hcat signature contains an unused existential binder.
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35
 (blueprint: lem-weil-pbc-colimit-of-sites-reduced).
 
@@ -291,7 +297,65 @@ theorem exists_colimit_site_reduced
                         Arrow.mk ((E t).hom ≫
                           θ.hom.app (op ((F.map t.hom).toFunctor.obj U))) =
                         Arrow.mk (D.map b ≫ (E t').hom)) := by
-  sorry
+  classical
+  obtain ⟨_, _⟩ := hcat
+  obtain ⟨s, L, hObj, hCompat, ⟨a, e, ⟨ha⟩, he⟩, hLift, hEqual, hFinite, hHom,
+    hIso⟩ := exists_filteredColimit_category J F
+  let O := colimit (F ⋙ Cat.objects)
+  let : Category.{u} O := s
+  let V : Cocone F :=
+    { pt := Cat.of O
+      ι :=
+        { app := fun j ↦ (L j).toCatHom
+          naturality := by
+            intro j k f
+            exact congrArg Functor.toCatHom (hCompat j k f) } }
+  have hobjects : IsColimit (Cat.objects.mapCocone V) := by
+    apply (colimit.isColimit (F ⋙ Cat.objects)).ofIsoColimit
+    refine Cocone.ext (Iso.refl _) ?_
+    intro j
+    ext X
+    exact (hObj j X).symm
+  have harrows : IsColimit (Cat.arrows.mapCocone V) := by
+    apply ha.ofIsoColimit
+    refine Cocone.ext e.toIso ?_
+    intro j
+    ext f
+    exact he j f
+  let Q : Precoverage V.pt :=
+    { coverings := fun Y ↦ { R | ∃ (j : J) (X : F.obj j) (S : Presieve X)
+        (h : (V.ι.app j).toFunctor.obj X = Y),
+        S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R } }
+  have hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔
+      ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),
+        S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R := by
+    intro Y R
+    rfl
+  obtain ⟨hisos, hcomp, hbase, hpb, hVpullback, ⟨hcontinuous⟩⟩ :=
+    colimit_site_covering_construction J F P hfinite hcover hpullback V hobjects harrows Q hQ
+  let : Q.HasIsos := hisos
+  let : Q.IsStableUnderFiniteComposition := hcomp
+  let : Q.IsStableUnderFiniteBaseChange := hbase
+  let : Q.HasPullbacks := hpb
+  have hVcover : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →
+      R.map (V.ι.app j).toFunctor ∈ Q ((V.ι.app j).toFunctor.obj X) := by
+    intro j X R hR
+    exact (hQ _ _).mpr ⟨j, X, R, rfl, hR, rfl⟩
+  let : ∀ j : J, (V.ι.app j).toFunctor.IsContinuous
+    (P j).toGrothendieck Q.toGrothendieck := hcontinuous
+  obtain ⟨hlimits, hsets⟩ := colimit_site_set_inverse_image J F P hfinite hcover
+    hpullback V hobjects harrows Q hQ hVpullback
+  have hgroups := colimit_site_abelian_inverse_image J F P hfinite hcover
+    hpullback V hobjects harrows Q hQ hVpullback
+  have hcolimits : ∀ j : J, Nonempty (PreservesFiniteColimits
+      (sheafPullback (V.ι.app j).toFunctor (Type u)
+        (P j).toGrothendieck Q.toGrothendieck)) := by
+    intro j
+    have := (sheafAdjunctionContinuous (V.ι.app j).toFunctor (Type u)
+      (P j).toGrothendieck Q.toGrothendieck).leftAdjoint_preservesColimits
+    exact ⟨inferInstance⟩
+  exact ⟨V, ⟨hobjects⟩, ⟨harrows⟩, hLift, hFinite, Q, hQ, hisos, hcomp, hbase, hpb,
+    hVcover, hVpullback, hcontinuous, hlimits, hcolimits, hsets, hgroups⟩
 
 theorem exists_colimit_site
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
