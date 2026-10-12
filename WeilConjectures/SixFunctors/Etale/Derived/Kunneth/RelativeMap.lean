@@ -48,31 +48,6 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
 
-namespace DerivedCategory
-
-section Braiding
-
-universe w v u₀
-
-variable (C : Type u₀) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
-
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
-
-variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
-  [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
-
-/-- The braiding of `DerivedCategory C` for a braided monoidal closed Grothendieck abelian
-category `C` with functorial flat resolutions: the braiding of `C`, with the Koszul sign rule on
-complexes, descended along K-flat resolutions (`CategoryTheory.DerivedMonoidal.braidedCategory`).
-Its existence is `DerivedCategory.nonempty_braidedCategory`. -/
-@[instance_reducible]
-noncomputable def braidedCategory : BraidedCategory (DerivedCategory C) :=
-  DerivedMonoidal.braidedCategory Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
-
-end Braiding
-
-end DerivedCategory
-
 namespace AlgebraicGeometry
 
 open Scheme
@@ -120,6 +95,10 @@ lemma derivedTensorBraidingIso_hom_naturality_right
 end Braiding
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+-- Search the braiding of `ModuleCat Λ` through its symmetric structure, as in the generic
+-- statements specialised here (as in `LowerShriekProjectionExchange`).
+attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 section Composition
 
@@ -278,9 +257,9 @@ lemma rightDerivedLowerShriekBaseChangeIso_inv_naturality {p : P ⟶ X} {q : P �
         (rightDerivedLowerShriekBaseChangeIso Λ sq K').inv =
       (rightDerivedLowerShriekBaseChangeIso Λ sq K).inv ≫
         (L((g)^*[ModuleCat.{u + 1} Λ])).map ((R(f)_![ModuleCat.{u + 1} Λ]).map φ) := by
-  rw [Iso.comp_inv_eq, Category.assoc, ← Iso.inv_comp_eq]
+  rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp, rightDerivedLowerShriekBaseChangeIso_hom,
+    rightDerivedLowerShriekBaseChangeIso_hom]
   exact ((rightDerivedLowerShriekBaseChangeMap Λ sq).naturality φ).symm
-
 end Components
 
 section Kunneth

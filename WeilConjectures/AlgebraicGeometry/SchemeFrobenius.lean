@@ -6,10 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
-public import Mathlib.FieldTheory.PurelyInseparable.Basic
-public import Mathlib.RingTheory.RingHom.PurelyInseparable
-public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
+public import WeilConjectures.AlgebraicGeometry.Morphisms.AbsoluteFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 
 /-!
@@ -42,7 +40,6 @@ The absolute `q ^ m`-power Frobenius of `X` factors as `Fr^{(q^m)}_X = g_σ^m Φ
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.iterateFrobenius_naturality`: the absolute Frobenius is natural.
 - `AlgebraicGeometry.Scheme.Hom.absoluteFrobenius_geometricFiber_eq_schemeFrobenius_comp`,
   `AlgebraicGeometry.Scheme.Hom.absoluteFrobenius_geometricFiber_eq_comp_schemeFrobenius`:
   `Fr^{(q^m)}_X = g_σ^m Φ^m = Φ^m g_σ^m` (blueprint `prop-trf-frobenius-factorization`).
@@ -62,39 +59,13 @@ namespace Scheme
 
 variable {p : ℕ} (hp : p.Prime)
 
-/-- The absolute Frobenius is natural: `F_X ≫ g = g ≫ F_Y` for every morphism `g : X ⟶ Y` of
-schemes in which `p` vanishes. -/
-@[reassoc]
-lemma iterateFrobenius_naturality {X Y : Scheme.{u}} (g : X ⟶ Y) (hX : (p : Γ(X, ⊤)) = 0)
-    (hY : (p : Γ(Y, ⊤)) = 0) (n : ℕ) :
-    X.iterateFrobenius hp hX n ≫ g = g ≫ Y.iterateFrobenius hp hY n := by
-  refine Scheme.Hom.ext (by simp [Scheme.Hom.comp_base]; rfl) fun U ↦ ?_
-  rw [Scheme.Hom.comp_app, Scheme.Hom.comp_app]
-  ext s
-  simp only [eqToHom_refl, op_id, CommRingCat.comp_apply]
-  erw [X.presheaf.map_id, CommRingCat.id_apply]
-  exact (map_pow (g.app U).hom s _).symm
-
 /-- The `p ^ 0`-power Frobenius is the identity. -/
 @[simp]
 lemma iterateFrobenius_zero (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) :
     X.iterateFrobenius hp hX 0 = 𝟙 X := by
   refine Scheme.Hom.ext rfl fun U ↦ ?_
   ext s
-  simp only [eqToHom_refl, op_id, CommRingCat.comp_apply, Scheme.Hom.id_app]
-  erw [X.presheaf.map_id, CommRingCat.id_apply, CommRingCat.id_apply]
-  exact pow_one s
-
-/-- The Frobenius powers compose: `F^{p^m} ≫ F^{p^n} = F^{p^(m+n)}`. -/
-lemma iterateFrobenius_add (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) (m n : ℕ) :
-    X.iterateFrobenius hp hX (m + n) =
-      X.iterateFrobenius hp hX m ≫ X.iterateFrobenius hp hX n := by
-  refine Scheme.Hom.ext rfl fun U ↦ ?_
-  rw [Scheme.Hom.comp_app]
-  ext s
-  simp only [eqToHom_refl, op_id, CommRingCat.comp_apply]
-  erw [X.presheaf.map_id, CommRingCat.id_apply]
-  exact (by rw [← pow_mul, ← pow_add, add_comm] : s ^ p ^ (m + n) = (s ^ p ^ n) ^ p ^ m)
+  simp [iterateFrobenius_app_apply]
 
 /-- The absolute Frobenius of an affine scheme `Spec R` is `Spec` of the Frobenius of `R`. -/
 lemma iterateFrobenius_Spec (R : CommRingCat.{u}) (hR : (p : R) = 0)
@@ -105,43 +76,6 @@ lemma iterateFrobenius_Spec (R : CommRingCat.{u}) (hR : (p : R) = 0)
   rw [← cancel_mono (ΓSpecIso R).hom, ΓSpecIso_naturality]
   ext s
   exact map_pow (ΓSpecIso R).hom.hom s _
-
-/-- The residue field maps of the absolute Frobenius are the Frobenius of the residue
-fields. -/
-lemma iterateFrobenius_residueFieldMap_apply (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ)
-    (x : X) (a : X.residueField x) :
-    (X.iterateFrobenius hp hX n).residueFieldMap x a = a ^ p ^ n := by
-  obtain ⟨a, rfl⟩ := X.residue_surjective x a
-  obtain ⟨U, hxU, s, rfl⟩ := X.presheaf.exists_germ_eq a
-  have := congr($(Scheme.Hom.residue_residueFieldMap (X.iterateFrobenius hp hX n) x)
-    (X.presheaf.germ U x hxU s))
-  simp only [CommRingCat.comp_apply] at this
-  rw [this, Scheme.Hom.germ_stalkMap_apply, iterateFrobenius_app_apply, map_pow, map_pow]
-  rfl
-
-/-- The absolute Frobenius is radicial (universally injective): it is the identity on points and
-purely inseparable on residue fields. -/
-instance (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ) :
-    UniversallyInjective (X.iterateFrobenius hp hX n) := by
-  refine ((tfae_universallyInjective _).out 0 2).mpr ⟨fun x y h ↦ h, fun x ↦ ?_⟩
-  have hκ : (p : X.residueField x) = 0 := by
-    obtain ⟨U, hxU⟩ : ∃ U : X.Opens, x ∈ U := ⟨⊤, trivial⟩
-    rw [← map_natCast (X.evaluation U x hxU).hom, natCast_eq_zero_of_natCast_top_eq_zero hX,
-      map_zero]
-  have : CharP (X.residueField x) p := (CharP.charP_iff_prime_eq_zero hp).2 hκ
-  have : ExpChar (X.residueField x) p := .prime hp
-  algebraize [((X.iterateFrobenius hp hX n).residueFieldMap x).hom]
-  refine (isPurelyInseparable_iff_pow_mem _ p).mpr fun a ↦ ⟨n, a, ?_⟩
-  exact iterateFrobenius_residueFieldMap_apply hp X hX n x a
-
-/-- The absolute Frobenius is integral: every section `s` is a root of `T ^ (p ^ n) - s ^ (p ^ n)`
-over the image. -/
-instance (X : Scheme.{u}) (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ) :
-    IsIntegralHom (X.iterateFrobenius hp hX n) where
-  isIntegral_app U _ s := by
-    refine ⟨Polynomial.X ^ p ^ n - Polynomial.C s, Polynomial.monic_X_pow_sub_C _
-      (pow_ne_zero _ hp.ne_zero), ?_⟩
-    simp [iterateFrobenius_app_apply]
 
 end Scheme
 
@@ -179,15 +113,25 @@ def absoluteFrobenius (m : ℕ) : X₀ ⟶ X₀ :=
   X₀.iterateFrobenius FiniteField.ringChar_prime f.natCast_ringChar_eq_zero
     (Nat.log (ringChar k) (Nat.card k) * m)
 
+/-- If `#k = p ^ a`, the absolute `q ^ m`-power Frobenius is the `p ^ (a * m)`-power absolute
+Frobenius. -/
 lemma absoluteFrobenius_eq_iterateFrobenius (m : ℕ) {p : ℕ} (hp : p.Prime)
     (hX : (p : Γ(X₀, ⊤)) = 0) (a : ℕ) (hq : Nat.card k = p ^ a) :
     f.absoluteFrobenius m = X₀.iterateFrobenius hp hX (a * m) := by
   have := Fintype.ofFinite k
-  obtain ⟨p', hchar, n, hp', hcard⟩ := FiniteField.card' k
-  rw [← Nat.card_eq_fintype_card, hq] at hcard
-  obtain ⟨rfl, rfl⟩ := Nat.Prime.pow_inj hp hp' hcard
-  obtain rfl : p = ringChar k := (ringChar.eq k p).symm
-  rw [absoluteFrobenius, hq, Nat.log_pow hp.one_lt]
+  have hpk : ringChar k = p := by
+    have h0 : ((p ^ a : ℕ) : k) = 0 := by
+      rw [← hq, Nat.card_eq_fintype_card]
+      exact FiniteField.cast_card_eq_zero k
+    have ha : a ≠ 0 := by
+      rintro rfl
+      have := Finite.one_lt_card (α := k)
+      omega
+    rw [Nat.cast_pow, pow_eq_zero_iff ha] at h0
+    exact (Nat.prime_dvd_prime_iff_eq FiniteField.ringChar_prime hp).1 (ringChar.dvd h0)
+  subst hpk
+  unfold absoluteFrobenius
+  simp only [hq, Nat.log_pow hp.one_lt]
 
 @[simp]
 lemma absoluteFrobenius_apply (m : ℕ) (x : X₀) : f.absoluteFrobenius m x = x :=
@@ -199,26 +143,31 @@ lemma preimage_absoluteFrobenius (m : ℕ) (U : X₀.Opens) : f.absoluteFrobeniu
 
 lemma absoluteFrobenius_app_apply (m : ℕ) (U : X₀.Opens) (s : Γ(X₀, U)) :
     (f.absoluteFrobenius m).app U s = s ^ (Nat.card k ^ m) := by
-  rw [absoluteFrobenius, iterateFrobenius_app_apply, pow_mul, FiniteField.ringChar_pow_log_card]
+  unfold absoluteFrobenius
+  rw [iterateFrobenius_app_apply, pow_mul, FiniteField.ringChar_pow_log_card]
 
 @[simp]
 lemma absoluteFrobenius_zero : f.absoluteFrobenius 0 = 𝟙 X₀ := by
-  simp [absoluteFrobenius]
+  unfold absoluteFrobenius
+  simp
 
 lemma absoluteFrobenius_add (m n : ℕ) :
     f.absoluteFrobenius (m + n) = f.absoluteFrobenius m ≫ f.absoluteFrobenius n := by
-  simp only [absoluteFrobenius, mul_add, iterateFrobenius_add]
+  unfold absoluteFrobenius
+  rw [mul_add, iterateFrobenius_add]
 
 /-- The absolute Frobenius commutes with every morphism of schemes over `k`, or more generally
 with every morphism `g : X₀ ⟶ Y₀` to a `k`-scheme. -/
 @[reassoc]
 lemma absoluteFrobenius_naturality {Y₀ : Scheme.{u}} (g : X₀ ⟶ Y₀) (e : Y₀ ⟶ Spec (.of k))
     (m : ℕ) : (g ≫ e).absoluteFrobenius m ≫ g = g ≫ e.absoluteFrobenius m :=
-  iterateFrobenius_naturality _ _ _ _ _
+  (iterateFrobenius_naturality _ _ g _ _).symm
 
 /-- The absolute `q ^ m`-power Frobenius of `Spec k` is the identity, as `c ^ q = c` on `k`. -/
-lemma absoluteFrobenius_spec (m : ℕ) : (𝟙 (Spec (.of k))).absoluteFrobenius m = 𝟙 _ := by
-  rw [absoluteFrobenius, iterateFrobenius_Spec _ _ ringChar.Nat.cast_ringChar, ← Spec.map_id]
+lemma absoluteFrobenius_spec (m : ℕ) :
+    Scheme.Hom.absoluteFrobenius (𝟙 (Spec (.of k))) m = 𝟙 _ := by
+  unfold absoluteFrobenius
+  rw [iterateFrobenius_Spec _ _ ringChar.Nat.cast_ringChar, ← Spec.map_id]
   congr 1
   ext c
   have := Fintype.ofFinite k
@@ -237,17 +186,20 @@ instance (m : ℕ) : UniversallyInjective (f.absoluteFrobenius m) := by
   unfold absoluteFrobenius
   infer_instance
 
+/-- The absolute Frobenius is integral. -/
+instance (m : ℕ) : IsIntegralHom (f.absoluteFrobenius m) := by
+  unfold absoluteFrobenius
+  infer_instance
+
 /-- The absolute Frobenius of a scheme locally of finite type over `k` is finite: it is
 integral, and locally of finite type as a morphism over `k`. -/
 instance [LocallyOfFiniteType f] (m : ℕ) : IsFinite (f.absoluteFrobenius m) := by
   have : LocallyOfFiniteType (f.absoluteFrobenius m ≫ f) := by
     rw [absoluteFrobenius_comp]
     infer_instance
-  have : LocallyOfFiniteType (f.absoluteFrobenius m) := .of_comp _ f
-  have : IsIntegralHom (f.absoluteFrobenius m) := by
-    unfold absoluteFrobenius
-    infer_instance
-  exact IsFinite.iff_isIntegralHom_and_locallyOfFiniteType.mpr ⟨inferInstance, inferInstance⟩
+  have := locallyOfFiniteType_of_comp (f.absoluteFrobenius m) f
+  rw [IsFinite.iff_isIntegralHom_and_locallyOfFiniteType]
+  exact ⟨inferInstance, this⟩
 
 /-- Blueprint `def-trf-scheme-frobenius`: Scheme and Galois Frobenius of the geometric fiber.
 
@@ -283,7 +235,7 @@ lemma schemeFrobenius_add (m n : ℕ) :
 
 /-- `Φ^m` is the `m`-fold iterate of the scheme Frobenius `Φ = Φ^1`. -/
 lemma schemeFrobenius_eq_pow (m : ℕ) :
-    (f.schemeFrobenius m : End f.geometricFiber) = (f.schemeFrobenius 1 : End _) ^ m := by
+    End.of (f.schemeFrobenius m) = End.of (f.schemeFrobenius 1) ^ m := by
   induction m with
   | zero => exact f.schemeFrobenius_zero
   | succ m ih => rw [pow_succ', End.mul_def, ← ih, ← schemeFrobenius_add]
@@ -328,7 +280,7 @@ lemma specArithmeticFrobenius_eq_inv :
   have h1 := specArithmeticFrobenius_pow_hom (k := k) 1
   have h2 := specGeometricFrobenius_pow_hom k 1
   rw [pow_one] at h1 h2
-  rw [Aut.Aut_mul_def, Iso.trans_hom, h1, h2, ← Spec.map_comp, Aut.one_def, Iso.refl_hom,
+  rw [Aut.Aut_mul_def, Iso.trans_hom, h1, h2, ← Spec.map_comp, Aut.one_hom,
     ← Spec.map_id]
   congr 1
   ext z
@@ -339,7 +291,7 @@ lemma specArithmeticFrobenius_eq_inv :
 lemma specArithmeticFrobenius_hom_comp_specAlgebraicClosure :
     (specArithmeticFrobenius k).hom ≫ (Scheme.specAlgebraicClosure k).hom =
       (Scheme.specAlgebraicClosure k).hom := by
-  rw [specArithmeticFrobenius_eq_inv, Aut.inv_def, Iso.symm_hom, Iso.inv_comp_eq,
+  rw [specArithmeticFrobenius_eq_inv, Aut.inv_hom, Iso.inv_comp_eq,
     specGeometricFrobenius_hom_comp_specAlgebraicClosure]
 
 namespace Scheme.Hom
@@ -371,13 +323,13 @@ lemma arithmeticGaloisFrobenius_eq_inv :
     f.arithmeticGaloisFrobenius = f.geometricGaloisFrobenius⁻¹ := by
   rw [eq_inv_iff_mul_eq_one]
   ext1
-  rw [Aut.Aut_mul_def, Iso.trans_hom, Aut.one_def, Iso.refl_hom]
+  rw [Aut.Aut_mul_def, Iso.trans_hom, Aut.one_hom]
   ext
   · simp
   · simp only [Category.assoc, geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure,
       arithmeticGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure_assoc, Category.id_comp]
     rw [← Iso.trans_hom, ← Aut.Aut_mul_def, specArithmeticFrobenius_eq_inv, inv_mul_cancel,
-      Aut.one_def, Iso.refl_hom, Category.comp_id]
+      Aut.one_hom, Category.comp_id]
 
 @[reassoc (attr := simp)]
 lemma arithmeticGaloisFrobenius_pow_hom_comp_geometricFiberProj (m : ℕ) :
@@ -457,7 +409,7 @@ theorem schemeFrobenius_eq_absoluteFrobenius_comp (m : ℕ) :
       (f.geometricFiberProj ≫ f).absoluteFrobenius m ≫ (f.geometricGaloisFrobenius ^ m).hom := by
   rw [absoluteFrobenius_geometricFiber_eq_schemeFrobenius_comp, Category.assoc, ← Iso.trans_hom,
     ← Aut.Aut_mul_def, arithmeticGaloisFrobenius_eq_inv, ← mul_pow, inv_mul_cancel, one_pow,
-    Aut.one_def, Iso.refl_hom, Category.comp_id]
+    Aut.one_hom, Category.comp_id]
 
 end Scheme.Hom
 

@@ -105,8 +105,6 @@ noncomputable def leftDerivedUpperStarReductionModIdealIso {X Y : Scheme.{u}} (f
         (_root_.DerivedCategory.singleFunctor _ 0).mapIso
           ((upperStarConstantSheafIso _ f).app (ModuleCat.of Λ (Λ ⧸ J))))
 
-variable [Finite Λ]
-
 /-- Blueprint `lem-sf-pullback-tor-amplitude`: Pullback preserves finite Tor amplitude.
 
 Let `f : X ⟶ Y` be a morphism of schemes and `K` a bounded constructible complex on `Y_ét` with
@@ -130,6 +128,8 @@ theorem boundedConstructible_and_torAmplitudeIn_leftDerivedUpperStar {X Y : Sche
 
 /-! ### Open immersions and finite étale morphisms -/
 
+variable [Finite Λ]
+
 /-- If the exceptional inverse image along `f` is the pullback, it preserves the constructible
 intervals and the Tor amplitude, and it commutes with the reduction of coefficients; on
 `Dctf` both sides of the comparison are bounded constructible. -/
@@ -145,10 +145,12 @@ theorem preservation_of_iso_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
         torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b (F.obj K)) ∧
     (∀ K : DerivedCategoryModule Λ Y,
-      Nonempty ((reductionModIdeal Λ X J).obj (F.obj K) ≅ F.obj ((reductionModIdeal Λ Y J).obj K))) ∧
+      Nonempty ((reductionModIdeal Λ X J).obj (F.obj K) ≅
+        F.obj ((reductionModIdeal Λ Y J).obj K))) ∧
     (∀ K : DerivedCategoryModule Λ Y, constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
       boundedConstructible (ModuleCat.{u + 1} Λ) X ((reductionModIdeal Λ X J).obj (F.obj K)) ∧
-        boundedConstructible (ModuleCat.{u + 1} Λ) X (F.obj ((reductionModIdeal Λ Y J).obj K))) := by
+        boundedConstructible (ModuleCat.{u + 1} Λ) X
+          (F.obj ((reductionModIdeal Λ Y J).obj K))) := by
   have : IsNoetherianRing Λ := inferInstance
   have hred (Z : Scheme.{u}) {N : DerivedCategoryModule Λ Z}
       (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z N) :
@@ -322,9 +324,9 @@ theorem preservation_rightDerivedUpperShriek_of_smoothOfRelativeDimension {X Y :
       rw [add_zero, add_zero] at h
       exact h
     obtain ⟨g, l⟩ := h₁
-    have := _root_.DerivedCategory.TStructure.t.isGE_shift _ a (2 * d) (a - 2 * d)
-    have := _root_.DerivedCategory.TStructure.t.isLE_shift _ b (2 * d) (b - 2 * d)
-    exact homologyConcentratedIn_of_iso _ (e K).some.symm ⟨inferInstance, inferInstance⟩
+    exact homologyConcentratedIn_of_iso _ (e K).some.symm
+      ⟨_root_.DerivedCategory.TStructure.t.isGE_shift _ a (2 * d) (a - 2 * d),
+        _root_.DerivedCategory.TStructure.t.isLE_shift _ b (2 * d) (b - 2 * d)⟩
   · obtain ⟨hK, a, b, hKt⟩ := hK
     exact ⟨hbc K hK, _, _, hta a b K hKt⟩
 

@@ -8,7 +8,10 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Explicit
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteEtaleAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 
 /-!
