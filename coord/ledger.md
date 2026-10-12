@@ -9486,3 +9486,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:45 L: merged deliver/R1/Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationGenericStep (stage 3; reviewer PASS; first push; landing 20261012T204510-L-870088 (interface); batch 20261012T204504; modules 3; new nodes 2)
 - 20:45 L: merged deliver/V2/Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower (stage 3; reviewer PASS; first push; landing 20261012T204510-L-870272 (proof); batch 20261012T204504; modules 1; new nodes 0)
 - 20:45 L: merged deliver/V3/Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T204511-L-870458 (interface); batch 20261012T204504; modules 3; new nodes 2)
+- 20:45 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent (stage 3; reviewer PASS; first push; landing 20261012T204511-L-870585 (proof); batch 20261012T204504; modules 1; new nodes 0)
