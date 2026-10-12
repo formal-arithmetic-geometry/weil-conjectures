@@ -11,15 +11,8 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
-import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
-import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import Sheaf.Paper.GradedCohomologyModuleStructure
+import Sheaf.Paper.GradedCohomologyModuleFinite
 
 /-!
 # Cohomology of a finite type graded module
@@ -144,6 +137,10 @@ theorem gradedFinitenessCohomology
         DirectSum.of (fun n => ((RingedSpace.moduleCohomology
           X.toRingedSpace p).obj (G n) : Type u)) (m + k)
           ((RingedSpace.moduleCohomology X.toRingedSpace p).map (mu m k b) x) := by
-  sorry
+  obtain ⟨mod, hact⟩ := gradedCohomologyModuleStructure
+    graded hgrading hunit hmul hscalar f G mu hmu_add hmu_mul hmu_scalar p
+  exact ⟨mod, gradedCohomologyModuleFinite
+    graded hgrading hunit hmul hscalar f G hG mu hmu_add hmu_mul hmu_scalar hfinite p
+    mod hact, hact⟩
 
 end AlgebraicGeometry
