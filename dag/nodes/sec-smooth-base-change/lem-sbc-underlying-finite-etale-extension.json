@@ -15,33 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Over a discrete valuation ring, the special fibre is a regular Cartier divisor.\nRamification indices divide the group order, so the cover is tame. The normalization is\nfinite locally free and has the standard tame local form (0EYG, 0EYH). The rational point\nand the simply transitive action split the fibre over the generic section point. The trait\ncriterion (0EYI) gives étaleness near the special section point, hence at the generic point\nof the irreducible special fibre. Purity (0EYE) extends the cover across that divisor.",
-   "uses": [],
+   "text": "Descend the family, section, group order, generic torsor and rational point to a normal integral Noetherian base. Keep the comparison maps a, k and chi and the pullback square of generic torsors.",
+   "uses": [
+    "lem-sbc-noetherian-spreading-data"
+   ],
    "elementary": false
   },
   {
-   "text": "Over a Noetherian normal base, choose the maximal open carrying an extension. At a\nminimal point of its complement, dimension one is the trait case. In dimension at least\ntwo, normality gives depth at least two, and flatness transfers this to the total space.\nThe depth-two extension (0EY6) is finite and commutes with flat base change. Complete an\naffine neighbourhood along the section: the completion is a power series ring over the\nlocal base. The cover on the punctured section is split, by normality and its split generic\nfibre. The full faithfulness theorem (0EY9) makes the cover over the punctured completion\nsplit too. Its depth-two extension is split, so flat descent gives étaleness at the generic\npoint of the missing fibre; 0EYB gives étaleness everywhere. Spread to a larger open,\ncontradicting maximality. The action needed during this construction extends by normality.",
-   "uses": [],
+   "text": "Apply the Noetherian extension theorem to the descended data, obtaining P0, a finite etale morphism pi0, and its cartesian generic comparison psi0.",
+   "uses": [
+    "lem-sbc-noetherian-finite-etale-extension"
+   ],
    "elementary": false
   },
   {
-   "text": "For a qcqs base, descend the family, section, finite cover, action, rational point and\ninvertibility to a Noetherian normal integral approximation, as in 0EZJ. Descend smoothness\nand replace the family by the open with geometrically connected fibres. Apply step 2 and\npull back its finite étale morphism and the generic-fibre comparison.",
+   "text": "Set P = P0 times_{C0} C and let pi be its projection to C. Finiteness and etaleness are stable under base change. Paste the generic-cover comparison with the descended extension square, rewrite k j0 = j a, and use the universal property of P to construct psi. Cancel the pullback square defining P on the right to prove that psi and j give the required cartesian square (IsPullback.paste_horiz and of_right').",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The family is connected: its smooth map with nonempty geometrically connected fibres\nis open and surjective over a connected base. The image of a finite étale cover is both\nopen and closed; its generic restriction is nonempty, so the image is the entire family.\nThis gives surjectivity. The construction and comparison apply to each connected component\nof the torsor, with its stabilizer subgroup, if the total space is disconnected. The\nstabilizer order divides the group order and the split section fibre meets every component;\ninducing the resulting stabilizer cover back to G recovers the given generic cover.",
+   "text": "The smooth geometrically connected family C over the integral connected base S is connected (GeometricallyConnected.connectedSpace). The map from Spec K obtained by composing the rational point z with psi makes P nonempty. The finite etale projection pi has a closed image because it is finite and an open image because it is flat and locally of finite presentation. A nonempty clopen subset of a connected space is the entire space (IsClopen.eq_univ). Hence pi is surjective, giving all four clauses of the original conclusion.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-noetherian-finite-etale-extension",
+  "lem-sbc-noetherian-spreading-data"
+ ],
  "proof_origin": {
-  "kind": "written-by-agent",
-  "by": "A3",
+  "kind": "from-document",
+  "by": "G3",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ; Tag 0EZJ, proof: construction of the underlying finite etale morphism, before adding its group action",
-  "note": "Grouped intermediate input for stage 3; proof in words follows the cited argument. The disconnected-torsor component reduction is made explicit."
+  "place": "Tag 0EZJ, limit reduction and final pullback; Tag 0EYJ for the Noetherian case",
+  "note": "The Lean proof assembles Noetherian approximation and the Noetherian extension, and proves the pullback comparison and surjectivity directly from Mathlib. The unit route is retained."
  },
  "mathlib_searches": [
   {
@@ -150,10 +157,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T035347-L-1583710",
+  "landing": "20261012T085244-L-16680",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
