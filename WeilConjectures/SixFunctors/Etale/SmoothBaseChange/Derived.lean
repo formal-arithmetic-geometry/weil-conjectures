@@ -81,22 +81,22 @@ def Scheme.invertiblePrimes (S : Scheme.{u}) : Set ℕ :=
 
 /-- A sheaf which is torsion with prime divisors invertible on `S` is torsion of orders
 invertible on `S`. -/
-lemma Scheme.IsTorsionSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes {S T : Scheme.{u}}
+lemma Scheme.IsTorsionModuleSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes {S T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheafOfPrimes S.invertiblePrimes F] : IsTorsionSheafOfInvertibleOrder S F where
+    [IsTorsionModuleSheafOfPrimes S.invertiblePrimes F] : IsTorsionModuleSheafOfInvertibleOrder S F where
   exists_isUnit_nsmul_eq_zero Ω _ _ s x := by
     obtain ⟨n, hn, hP, hx⟩ :=
-      IsTorsionSheafOfPrimes.exists_nsmul_eq_zero (P := S.invertiblePrimes) Ω s x
+      IsTorsionModuleSheafOfPrimes.exists_nsmul_eq_zero (P := S.invertiblePrimes) Ω s x
     exact ⟨n, hn, isUnit_natCast_of_forall_mem_primeFactors n hn fun p hp ↦ (hP p hp).2, hx⟩
 
 /-- Being torsion of orders invertible on `S` is invariant under isomorphisms of sheaves. -/
-lemma Scheme.IsTorsionSheafOfInvertibleOrder.of_iso {S T : Scheme.{u}}
+lemma Scheme.IsTorsionModuleSheafOfInvertibleOrder.of_iso {S T : Scheme.{u}}
     {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ≅ G)
-    [IsTorsionSheafOfInvertibleOrder S F] : IsTorsionSheafOfInvertibleOrder S G where
+    [IsTorsionModuleSheafOfInvertibleOrder S F] : IsTorsionModuleSheafOfInvertibleOrder S G where
   exists_isUnit_nsmul_eq_zero Ω _ _ s x := by
     let ψ := (pointSmallEtale s).sheafFiber.mapIso φ
     obtain ⟨n, hn, hu, hx⟩ :=
-      IsTorsionSheafOfInvertibleOrder.exists_isUnit_nsmul_eq_zero (S := S) (F := F) Ω s
+      IsTorsionModuleSheafOfInvertibleOrder.exists_isUnit_nsmul_eq_zero (S := S) (F := F) Ω s
         (ψ.inv.hom x)
     refine ⟨n, hn, hu, ?_⟩
     have : ψ.hom.hom (ψ.inv.hom x) = x := by
@@ -106,13 +106,13 @@ lemma Scheme.IsTorsionSheafOfInvertibleOrder.of_iso {S T : Scheme.{u}}
 /-- The property of being torsion of orders invertible on `S`, as a property of sheaves. -/
 def Scheme.isTorsionSheafOfInvertibleOrder (S : Scheme.{u}) (T : Scheme.{u}) :
     ObjectProperty (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  fun F ↦ IsTorsionSheafOfInvertibleOrder S F
+  fun F ↦ IsTorsionModuleSheafOfInvertibleOrder S F
 
 instance (S T : Scheme.{u}) :
     (isTorsionSheafOfInvertibleOrder Λ S T).IsClosedUnderIsomorphisms where
   of_iso φ h := by
-    have : IsTorsionSheafOfInvertibleOrder S _ := h
-    exact IsTorsionSheafOfInvertibleOrder.of_iso Λ φ
+    have : IsTorsionModuleSheafOfInvertibleOrder S _ := h
+    exact IsTorsionModuleSheafOfInvertibleOrder.of_iso Λ φ
 
 variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
@@ -210,7 +210,7 @@ is torsion of orders invertible on `S`, placed in degree `0`. -/
 lemma Etale.isIso_baseChange_app_singleFunctor_obj_of_smooth [Smooth p] [QuasiCompact g]
     [QuasiSeparated g] (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsTorsionSheafOfInvertibleOrder S F] :
+    [IsTorsionModuleSheafOfInvertibleOrder S F] :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) :=
   (Etale.isIso_baseChange_app_singleFunctor_obj_iff Λ sq F).2 fun q ↦
@@ -222,11 +222,11 @@ below complex whose cohomology sheaves are torsion of orders invertible on `S`. 
 theorem Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder [Smooth p]
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : ∀ j, IsTorsionSheafOfInvertibleOrder S
+    (hK : ∀ j, IsTorsionModuleSheafOfInvertibleOrder S
       ((DerivedCategory.Plus.homologyFunctor _ j).obj K)) :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
   DerivedCategory.Plus.isIso_app_of_forall_homology _ (isTorsionSheafOfInvertibleOrder Λ S T)
-    (fun F hF ↦ have : IsTorsionSheafOfInvertibleOrder S F := hF
+    (fun F hF ↦ have : IsTorsionModuleSheafOfInvertibleOrder S F := hF
       Etale.isIso_baseChange_app_singleFunctor_obj_of_smooth Λ p sq F)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ p g K n q hq)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ e h K n q hq) K hK
@@ -234,11 +234,11 @@ theorem Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder 
 /-- Blueprint `sbc-def-derived-categories-with-allowable-torsion`, bounded version: the objects of
 `D^b_P-tor(X_ét)`, the bounded complexes of `D⁺(X_ét, Λ)` whose cohomology sheaves have
 `P`-torsion geometric stalks, for a set `P` of primes. The bounded below version is
-`AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomologyOfPrimes`. -/
+`AlgebraicGeometry.Etale.DerivedCategory.Plus.moduleTorsionHomologyOfPrimes`. -/
 noncomputable def Etale.DerivedCategory.Plus.boundedTorsionHomologyOfPrimes (X : Scheme.{u})
     (P : Set ℕ) :
     ObjectProperty (DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
-  t.bounded ⊓ Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P
+  t.bounded ⊓ Etale.DerivedCategory.Plus.moduleTorsionHomologyOfPrimes Λ X P
 
 variable (p) in
 /-- Blueprint `sbc-thm-bounded-allowable-torsion`: for a Cartesian square with `p` smooth and
@@ -253,10 +253,10 @@ theorem Etale.isIso_baseChange_app_of_bounded_of_smooth [Smooth p] [QuasiCompact
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
   obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hK⟩ := hK
   exact DerivedCategory.Plus.isIso_app_of_bounded _ (isTorsionSheafOfInvertibleOrder Λ S T)
-    (fun F hF ↦ have : IsTorsionSheafOfInvertibleOrder S F := hF
+    (fun F hF ↦ have : IsTorsionModuleSheafOfInvertibleOrder S F := hF
       Etale.isIso_baseChange_app_singleFunctor_obj_of_smooth Λ p sq F) K a b fun j ↦
     have := hK j
-    IsTorsionSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes Λ _
+    IsTorsionModuleSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes Λ _
 
 variable (p) in
 /-- Blueprint `sbc-thm-bounded-below-derived-smooth-base-change`: for a Cartesian square with `p`
@@ -266,18 +266,18 @@ the derived base-change map `BC(K) : p^*(Rg_* K) ⟶ Rh_*(e^* K)` is an isomorph
 theorem Etale.isIso_baseChange_app_of_smooth [Smooth p] [QuasiCompact g] [QuasiSeparated g]
     (sq : IsPullback e h g p)
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ T S.invertiblePrimes K) :
+    (hK : Etale.DerivedCategory.Plus.moduleTorsionHomologyOfPrimes Λ T S.invertiblePrimes K) :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
   Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ p sq K fun j ↦
     have := hK j
-    IsTorsionSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes Λ _
+    IsTorsionModuleSheafOfInvertibleOrder.of_isTorsionSheafOfPrimes Λ _
 
 /-- If a nonzero integer `N` kills the coefficient ring `Λ` and is invertible on `S`, then every
 sheaf of `Λ`-modules is torsion of orders invertible on `S`. -/
-lemma Scheme.IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero {S T : Scheme.{u}} (N : ℕ)
+lemma Scheme.IsTorsionModuleSheafOfInvertibleOrder.of_natCast_eq_zero {S T : Scheme.{u}} (N : ℕ)
     (hN₀ : N ≠ 0) (hN : (N : Λ) = 0) (hNS : IsUnit (N : Γ(S, ⊤)))
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsTorsionSheafOfInvertibleOrder S F where
+    IsTorsionModuleSheafOfInvertibleOrder S F where
   exists_isUnit_nsmul_eq_zero Ω _ _ s x :=
     ⟨N, Nat.pos_of_ne_zero hN₀, hNS, by rw [← Nat.cast_smul_eq_nsmul Λ, hN, zero_smul]⟩
 
@@ -295,6 +295,6 @@ theorem Etale.isIso_baseChange_app_of_boundedConstructible_of_smooth [Smooth p]
     (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T K) :
     IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app ⟨K, hK.1.1⟩) :=
   Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ p sq _ fun _ ↦
-    IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ N hN₀ hN hNS _
+    IsTorsionModuleSheafOfInvertibleOrder.of_natCast_eq_zero Λ N hN₀ hN hNS _
 
 end AlgebraicGeometry

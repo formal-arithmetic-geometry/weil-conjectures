@@ -28,7 +28,7 @@ X --p--> S
 
 with `p` **smooth** and `g` quasi-compact quasi-separated. For every sheaf `F` of
 `Λ`-modules on `T_ét` all of whose geometric stalks are torsion of orders invertible on `S`
-— that is, `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder` — the base-change map
+— that is, `AlgebraicGeometry.Scheme.IsTorsionModuleSheafOfInvertibleOrder` — the base-change map
 
 `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F`
 
@@ -62,7 +62,8 @@ The proof is the second, shorter proof of the Stacks Project.
   base change; the proof ends by specialising along `𝟙 S` with
   `AlgebraicGeometry.Etale.UniversalBaseChangeProperty.baseChangeProperty`.
 
-Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`, the proper base change
+Compare `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`,
+the proper base change
 theorem, in which the roles of the two legs of the square are exchanged.
 
 ## Main statements
@@ -194,7 +195,7 @@ the base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` is an isomorphism in
 theorem Etale.isIso_baseChangeHomologyMap_of_smooth (p : X ⟶ S) [Smooth p] (g : T ⟶ S)
     (e : Y ⟶ T) (h : Y ⟶ X) [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
     (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
+    [Scheme.IsTorsionModuleSheafOfInvertibleOrder S F] :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
   obtain hq | hq := lt_or_ge q 0
   · exact Etale.isIso_baseChangeHomologyMap_of_neg Λ sq hq F

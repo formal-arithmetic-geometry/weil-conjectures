@@ -64,24 +64,24 @@ variable {Λ} {Λ' : Type (u + 1)} [CommRing Λ'] (φ : Λ →+* Λ')
 
 /-- A sheaf of `Λ'`-modules is torsion if and only if its restriction of scalars along
 `φ : Λ →+* Λ'` is: both have the same underlying sheaf of abelian groups. -/
-lemma Scheme.isTorsionSheaf_restrictScalars_obj_iff {X : Scheme.{u}}
+lemma Scheme.isTorsionModuleSheaf_restrictScalars_obj_iff {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
-    IsTorsionSheaf ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ↔ IsTorsionSheaf F := by
-  rw [isTorsionSheaf_iff_isTorsion, isTorsionSheaf_iff_isTorsion]
+    IsTorsionModuleSheaf ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ↔ IsTorsionModuleSheaf F := by
+  rw [isTorsionModuleSheaf_iff_isTorsion, isTorsionModuleSheaf_iff_isTorsion]
   rfl
 
 /-- The restriction of scalars of a complex with torsion cohomology has torsion cohomology: its
 cohomology sheaves are the restrictions of scalars of those of the complex. -/
-lemma Etale.DerivedCategory.Plus.torsionHomology_restrictScalars {X : Scheme.{u}}
+lemma Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars {X : Scheme.{u}}
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')))
-    (hK : Etale.DerivedCategory.Plus.torsionHomology Λ' X K) :
-    Etale.DerivedCategory.Plus.torsionHomology Λ X
+    (hK : Etale.DerivedCategory.Plus.moduleTorsionHomology Λ' X K) :
+    Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X
       ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj K) := fun n ↦
   have := hK n
-  have : IsTorsionSheaf ((DerivedCategory.Plus.homologyFunctor _ n ⋙
+  have : IsTorsionModuleSheaf ((DerivedCategory.Plus.homologyFunctor _ n ⋙
       Sheaf.restrictScalars X.smallEtaleTopology φ).obj K) :=
-    (Scheme.isTorsionSheaf_restrictScalars_obj_iff φ _).2 this
-  IsTorsionSheaf.of_epi
+    (Scheme.isTorsionModuleSheaf_restrictScalars_obj_iff φ _).2 this
+  IsTorsionModuleSheaf.of_epi
     ((((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusHomologyFunctorIso
       n).app K).hom)
 
@@ -127,7 +127,7 @@ theorem Etale.HasTorsionBaseChange.quotient {X Y : Scheme.{u}} {f : X ⟶ Y}
   intro Y' X' g f' g' sq K hK
   rw [← Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff
     (Ideal.Quotient.mk (Ideal.span {(N : Λ)})) sq.toCommSq K]
-  exact hf sq _ (Etale.DerivedCategory.Plus.torsionHomology_restrictScalars _ K hK)
+  exact hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars _ K hK)
 
 /-- **Base change property from prime coefficient rings.** Let `f` be quasi-compact and
 quasi-separated. If `f` satisfies the base change property with `Λ ⧸ pΛ`-coefficients for every
@@ -156,16 +156,16 @@ theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶
           (asIso ((Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).counit.app E))
     rw [← NatTrans.isIso_app_iff_of_iso _ e,
       Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff]
-    exact h r hr sq _ (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion _ _
+    exact h r hr sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion _ _
       (isAddTorsion_quotient_span_natCast Λ hr.pos) _)
   let P : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-    fun F ↦ IsTorsionSheaf F
+    fun F ↦ IsTorsionModuleSheaf F
   have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦
-    have : IsTorsionSheaf _ := h
-    IsTorsionSheaf.of_epi e.hom⟩
+    have : IsTorsionModuleSheaf _ := h
+    IsTorsionModuleSheaf.of_epi e.hom⟩
   exact DerivedCategory.Plus.isIso_app_of_forall_homology _ P
     (fun F hF ↦ (Etale.isIso_baseChange_app_singleFunctor_obj_iff Λ sq F).2 fun q ↦
-      have : IsTorsionSheaf F := hF
+      have : IsTorsionModuleSheaf F := hF
       Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf Λ sq hprime F q)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeSource_obj Λ g f K n q hq)
     (fun K n _ q hq ↦ Etale.isZero_homologyFunctor_baseChangeTarget_obj Λ g' f' K n q hq) K hK

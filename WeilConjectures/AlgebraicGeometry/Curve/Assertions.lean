@@ -31,8 +31,8 @@ The proof of proper base change for the projective line rests on eight assertion
 They are bundled in `AlgebraicGeometry.IsCurve.Assertions`. The coefficient sheaf is a
 sheaf of `Λ`-modules and `Hᵠ(X, F)` is the cohomology of its underlying abelian sheaf; the
 torsion conditions are conditions on the geometric stalks
-(`AlgebraicGeometry.Scheme.IsTorsionSheaf`,
-`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`). The field extension in `C₆` and
+(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf`,
+`AlgebraicGeometry.Scheme.IsTorsionModuleSheafOfInvertibleOrder`). The field extension in `C₆` and
 `C₇` is given by an arbitrary cartesian square
 
 ```
@@ -77,7 +77,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 /-- A sheaf `F` of `Λ`-modules on the small étale site of `X` is *`p`-primary torsion* if
 every element of every geometric stalk of `F` is killed by a power of `p`
 (blueprint: `def-weil-pbc-primary-torsion`; the companion condition *prime to `p`* is
-`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder (Spec k)`). -/
+`AlgebraicGeometry.Scheme.IsTorsionModuleSheafOfInvertibleOrder (Spec k)`). -/
 def Scheme.IsPrimaryTorsionSheaf {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (p : ℕ) : Prop :=
   ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
@@ -110,7 +110,7 @@ def VanishingAboveOneOfIsPrimaryTorsionSheaf (k : Type u) [Field k] : Prop :=
 /-- **Assertion `C₄`**: for a field `k`, if `F` is constructible with
 torsion prime to `char k`, then every `Hᵠ(X, F)` is finite. (blueprint: `def-weil-pbc-C4`) -/
 def FiniteOfInvertibleOrder (k : Type u) [Field k] : Prop :=
-  ∀ [Scheme.IsConstructibleSheaf F] [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F]
+  ∀ [Scheme.IsConstructibleSheaf F] [Scheme.IsTorsionModuleSheafOfInvertibleOrder (Spec (.of k)) F]
     (q : ℕ), Finite (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
 
@@ -126,7 +126,7 @@ algebraically closed extension `k'/k`, given by a cartesian square
 `Hᵠ(X, F) ⟶ Hᵠ(X', F|_{X'})` (blueprint: `def-weil-pbc-extension-pullback`) is bijective for
 every `q`. (blueprint: `def-weil-pbc-C6`) -/
 def BaseChangeOfInvertibleOrder : Prop :=
-  ∀ [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F]
+  ∀ [Scheme.IsTorsionModuleSheafOfInvertibleOrder (Spec (.of k)) F]
     (k' : Type u) [Field k'] [IsAlgClosed k'] {X' : Scheme.{u}} {ι : Spec (.of k') ⟶ Spec (.of k)}
     {f' : X' ⟶ Spec (.of k')} {ι' : X' ⟶ X}, IsPullback ι' f' f ι → ∀ q : ℕ,
     Function.Bijective (Etale.cohomologyMap ι'
@@ -175,7 +175,7 @@ structure IsCurve.Assertions {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ 
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
   /-- `C₄`: `Hᵠ(X, F)` is finite when `F` is constructible with torsion prime to `char k`. -/
   finite_of_isTorsionSheafOfInvertibleOrder [Scheme.IsConstructibleSheaf F]
-    [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F] (q : ℕ) :
+    [Scheme.IsTorsionModuleSheafOfInvertibleOrder (Spec (.of k)) F] (q : ℕ) :
     Finite (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
   /-- `C₅`: `Hᵠ(X, F)` is finite when `X` is proper and `F` is constructible. -/
@@ -185,7 +185,7 @@ structure IsCurve.Assertions {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ 
   /-- `C₆`: the pullback `Hᵠ(X, F) ⟶ Hᵠ(X_{k'}, F|)` is bijective for every algebraically
   closed extension `k'/k` when the torsion of `F` is prime to `char k`. -/
   bijective_cohomologyMap_of_isTorsionSheafOfInvertibleOrder
-    [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F]
+    [Scheme.IsTorsionModuleSheafOfInvertibleOrder (Spec (.of k)) F]
     (k' : Type u) [Field k'] [IsAlgClosed k'] {X' : Scheme.{u}} {ι : Spec (.of k') ⟶ Spec (.of k)}
     {f' : X' ⟶ Spec (.of k')} {ι' : X' ⟶ X} (h : IsPullback ι' f' f ι) (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
