@@ -7705,3 +7705,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:21 L: merged deliver/T1/Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic (stage 3; reviewer PASS; after a return; landing 20261012T132138-L-1417565 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 13:23 L: returned deliver/E2/Sheaf.AlgebraicGeometry.FieldEquivariantGermFamilySection (reviewer RETURN: (reviewer X-27111, head 27111c00c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fi)
 - 13:23 L: merged deliver/T3/Sheaf.AlgebraicGeometry.DerivedGlobalGermExchange (stage 3; reviewer PASS; first push; landing 20261012T132339-L-1432371 (interface); batch 20261012T120425; modules 4; new nodes 3)
+- 13:24 L: returned deliver/F2/Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen (reviewer RETURN: (reviewer X-c13ba, head c13bad01b) E5/H3 (brief point 6): The unchanged node requires coefficient naturality, compatibil)
