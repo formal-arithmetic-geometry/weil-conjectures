@@ -66,25 +66,27 @@
  ],
  "proof": [
   {
-   "text": "The product and one-minus-shift triangle represent the derived limit, and the Roos comparison quasi-isomorphism identifies its shifted cone with the degreewise inverse-limit complex. Transport this identification across the representation isomorphism and the supplied limit cone.",
+   "text": "Apply the canonical localized-evaluation-tower triangle theorem to I and c, obtaining the connecting map δ for the fixed product lift of the localized cone projections.",
    "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-pc-ringed-space-product-kinjective",
-    "def-weil-derived-limit",
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-weil-derived-limit-roos-complex"
+    "lem-weil-derived-limit-tower-core-property-triangle"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use Pi.mapIso on the components of the supplied representation e. Naturality of e at every successor transition gives commutation with 1-shift via towerTransitionEndomorphism_natural_backward. The component isomorphisms (identity, product isomorphism, product isomorphism) define a Triangle.isoMk, whose first arrow is p followed by the product isomorphism and whose third arrow is its inverse followed by δ. Mathlib distinguished_iff_of_iso transports distinguishedness. Package these maps as IsDerivedLimit.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-triangulated-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-pc-ringed-space-product-kinjective",
-  "def-weil-derived-limit",
-  "def-weil-abstract-derived-category",
+  "lem-weil-derived-limit-tower-core-property-triangle",
+  "def-weil-tower-transition-endomorphism",
   "def-weil-triangulated-category",
-  "lem-weil-derived-limit-roos-complex"
+  "def-weil-derived-limit"
  ],
  "proof_origin": {
   "by": "worker",
@@ -114,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-89151",
-  "group": "K2",
+  "reviewer": "COMPILER",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T184314-L-4008534",
+  "landing": "20261012T202249-L-707871",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered Lean files, DAG nodes, report, and change record agree; all delivered modules and direct importer compile cleanly, with only the documented property sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

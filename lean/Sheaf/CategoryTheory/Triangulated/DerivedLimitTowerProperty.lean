@@ -7,9 +7,7 @@ public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
-import Sheaf.Algebra.Homology.KInjectiveProducts
-import Sheaf.Algebra.Homology.RoosComplex
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
 
 /-! # Derived-limit property of a tower limit cone
 Source: Stacks Project, Derived Categories, Tags 0BK6, 0BK7 and 070M
@@ -50,6 +48,30 @@ theorem derivedCategory_towerLimit_property
       (_e : I.asFunctor ⋙ DerivedCategory.Q ≅ Functor.ofOpSequence f)
       (c : Cone I.asFunctor), IsLimit c →
       IsDerivedLimit f (DerivedCategory.Q.obj c.pt) := by
-  sorry
+  intro hI I _ K f e c hc
+  let K₀ := fun n : ℕ ↦ DerivedCategory.Q.obj (I.asFunctor.obj (Opposite.op n))
+  let f₀ := fun n : ℕ ↦ DerivedCategory.Q.map
+    (I.asFunctor.map (homOfLE (Nat.le_succ n)).op)
+  let p : DerivedCategory.Q.obj c.pt ⟶ ∏ᶜ K₀ :=
+    Pi.lift (fun n : ℕ ↦ DerivedCategory.Q.map (c.π.app (Opposite.op n)))
+  obtain ⟨δ, h⟩ := derivedCategory_towerLimit_triangle A hP hI I c hc
+  let E : ∏ᶜ K₀ ≅ ∏ᶜ K := Pi.mapIso (fun n ↦ e.app (Opposite.op n))
+  have he (n : ℕ) :
+      (e.app (Opposite.op (n + 1))).hom ≫ f n =
+        f₀ n ≫ (e.app (Opposite.op n)).hom := by
+    simpa [f₀] using (e.hom.naturality (homOfLE (Nat.le_succ n)).op).symm
+  have hE : E.hom ≫ towerTransitionEndomorphism f =
+      towerTransitionEndomorphism f₀ ≫ E.hom := by
+    exact towerTransitionEndomorphism_natural_backward f₀ f
+      (fun n ↦ (e.app (Opposite.op n)).hom) he
+  refine ⟨p ≫ E.hom, E.inv ≫ δ, ?_⟩
+  exact (Pretriangulated.distinguished_iff_of_iso
+    (Pretriangulated.Triangle.isoMk
+      (Pretriangulated.Triangle.mk p (towerTransitionEndomorphism f₀) δ)
+      (Pretriangulated.Triangle.mk (p ≫ E.hom) (towerTransitionEndomorphism f) (E.inv ≫ δ))
+      (Iso.refl _) E E
+      (by simp)
+      hE.symm
+      (by simp))).mp h
 
 end CategoryTheory

@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-derived-limit-tower-core-property-triangle",
+ "kind": "lemma",
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerProperty",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-derived-limit-tower-core-property"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemmas 13.34.3 and 13.34.6, Tags 0BK6, 0BK7 and 070M"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homotopy limit|inverse system|Roos",
+   "results": "16 Mathlib hits: order-theoretic and geometric inverse systems; none constructs a Roos triangle in a derived category. Local rg over lean/Sheaf and lean/WeilConjectures found definitions, downstream users, and the existing K-injective/product/Roos ingredients, but no theorem for the canonical localized evaluation tower.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Pi.map",
+   "results": "12 hits including Pi.map, Pi.map_π, Pi.map_comp_map, Pi.map_isIso; these supply the product transport, not the remaining Roos construction.",
+   "date": "2026-10-13",
+   "verdict": "transport ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "distinguished triangle invariant under an isomorphism of inverse sequences",
+   "results": "8 hits including distinguished_iff_of_iso, isomorphic_distinguished and exists_iso_of_arrow_iso. distinguished_iff_of_iso is used in the caller to prove transport; no canonical evaluation-tower construction found.",
+   "date": "2026-10-13",
+   "verdict": "transport ingredient used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of a K-injective complex of inverse sequences fits in a distinguished triangle with the countable product and one minus the transition shift",
+   "results": "Service unavailable: Internal Server Error; no results obtained.",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "statement": "Let A be an abelian category with exact countable products and enough injectives, and let D(A) and Q be its derived category and localization [def-weil-abstract-derived-category], with any chosen countable products in D(A). Let I be a K-injective cochain complex of inverse systems indexed by the opposite of the natural numbers (every map to I from an acyclic complex of inverse systems is null-homotopic). Let c be a limit cone of the evaluation functor I.asFunctor from the opposite of the natural numbers to complexes of A. Put K_n = Q(I.asFunctor(n)) and f_n = Q(I.asFunctor(n+1 → n)), and let p : Q(c.pt) → ∏ K_n be the product lift of the localized cone projections. There exists δ : ∏ K_n → Q(c.pt)[1] for which Q(c.pt) → ∏ K_n → ∏ K_n → Q(c.pt)[1], with arrows p, 1-shift [def-weil-tower-transition-endomorphism] and δ, is a distinguished triangle [def-weil-derived-limit]. This statement involves only the tower evaluated from I, not an arbitrary isomorphic tower.",
+ "stmt_deps": [
+  "def-weil-derived-limit",
+  "def-weil-abstract-derived-category",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation at n is right adjoint to the exact functor sending X to the tower equal to X at levels at most n and zero above n. Hence each evaluated complex is K-injective. Form the termwise product P; its localized projections give a product in the derived category.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pc-ringed-space-product-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the chain map t = 1-shift on P. Evaluation preserves limits, so the legs of c identify c.pt degreewise with the kernel of t. Construct the canonical map from this kernel complex to the shifted mapping cone; the Roos comparison theorem makes its localized image an isomorphism.",
+   "uses": [
+    "lem-weil-derived-limit-roos-complex",
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the backwards rotated cone triangle and transport it along the comparison isomorphism and the product isomorphism from Q(P) to the chosen product. Checking each projection identifies the middle map with 1-shift and the first map with the product lift of the localized legs of c. This gives δ and the asserted canonical Roos triangle.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-roos-complex",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerTriangle.lean",
+  "place": "theorem derivedCategory_towerLimit_triangle"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerTriangle",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerTriangle.lean",
+  "declaration": "CategoryTheory.derivedCategory_towerLimit_triangle",
+  "statement": "theorem derivedCategory_towerLimit_triangle\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableProducts A] [CountableAB4Star A]\n    (hP : HasCountableProducts (DerivedCategory A)) :\n    letI : HasCountableProducts (DerivedCategory A) := hP\n    ∀ (_ : EnoughInjectives A)\n      (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective]\n      (c : Cone I.asFunctor), IsLimit c →\n      let K₀ := fun n : ℕ ↦ DerivedCategory.Q.obj (I.asFunctor.obj (Opposite.op n))\n      let f₀ := fun n : ℕ ↦ DerivedCategory.Q.map\n        (I.asFunctor.map (homOfLE (Nat.le_succ n)).op)\n      let p := Pi.lift (fun n : ℕ ↦ DerivedCategory.Q.map (c.π.app (Opposite.op n)))\n      ∃ δ : (∏ᶜ K₀) ⟶ (DerivedCategory.Q.obj c.pt)⟦(1 : ℤ)⟧,\n        IsDerivedLimitTriangle f₀ (DerivedCategory.Q.obj c.pt) p δ",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "title": "Canonical Roos triangle of the localized evaluation tower",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T202249-L-707871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T202249-L-707871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
