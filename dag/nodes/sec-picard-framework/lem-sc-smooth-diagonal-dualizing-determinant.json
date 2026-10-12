@@ -22,48 +22,54 @@
  ],
  "proof": [
   {
-   "text": "Properness makes the diagonal closed. X and P are Noetherian by finite type and base change. The smooth diagonal theorem gives Koszul-regular local generators; restrict its affine open neighbourhoods near each diagonal point to give the regularity witness in the Koszul duality theorem.",
+   "text": "Properness makes the diagonal closed. Mathlib gives local Noetherianness and quasi-compactness of X and of the fibre product from the finite type morphisms to the Noetherian base. Apply the smooth-diagonal regular-generators theorem at each diagonal point. Convert its regular list to a Koszul-regular sequence indexed by Fin. In the unit-ideal alternative use the singleton 1: its weak regularity and the tensor-unit comparison give Koszul regularity. Hom.ker_apply identifies the affine section kernel with the ideal used by Koszul duality. No perfectness assertion or derived category on every open is needed.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-proper-base-change",
-    "lem-sc-smooth-proper-diagonal-koszul-regular"
+    "lem-sc-smooth-diagonal-regular-immersion",
+    "lem-weil-pbc-regular-sequence-koszul-regular"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the conormal with relative differentials. The latter is finite locally free of rank d. Stalks therefore have finrank d, so the constant locally constant function d satisfies the rank witness in Koszul duality. Apply that theorem with c and the literal single structure object, transporting O_P along its specified isomorphism.",
+   "text": "The ideal-sheaf conormal comparison provides its isomorphism with relative differentials and its stalk finrank d. Thus the constant locally constant function d supplies the rank witness for Koszul duality.",
    "uses": [
-    "lem-sc-smooth-proper-diagonal-conormal-differentials",
-    "lem-sc-smooth-omega-finite-locally-free",
-    "lem-sc-smooth-proper-diagonal-koszul-dual"
+    "lem-sc-smooth-diagonal-ideal-conormal-rank"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Dualize the conormal isomorphism by precomposition and take its sheafified exterior power. For constant rank d, the rank-d stratum is all of X and the other strata are empty. Their extension-by-zero terms are zero, so the locally ranked exterior complex is isomorphic to the single exterior sheaf in degree d. Its derived image is the degree-zero single shifted by -d. Compose with the inverse Koszul-duality isomorphism. This also works for empty X and d=0.",
+   "text": "Use hOP and quasi-coherence of OP to lift the literal single structure object O into the full subcategory. The same underlying isomorphism gives OP isomorphic to this lift. Repackage hRDelta as the preservation witness on underlying objects and apply koszulRegularImmersion_dualizing to the specified c and adjC at the literal lift. Map the OP isomorphism through c, and forget the resulting full-subcategory isomorphisms.",
    "uses": [
-    "def-sc-locally-ranked-exterior-complex",
-    "def-sc-sheaf-exterior-power",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
     "def-pc-derived-category"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Apply the internal Hom functor contravariantly to the inverse conormal isomorphism, obtaining an isomorphism of the two dual module sheaves. The constant-rank exterior comparison identifies the localized exterior complex with the degree-zero single of the exterior power of the dual differentials shifted by -d. Compose the OP transport, the inverse Koszul duality isomorphism and this comparison.",
+   "uses": [
+    "lem-sc-constant-rank-exterior-derived-comparison",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-proper-base-change",
-  "lem-sc-smooth-proper-diagonal-koszul-regular",
-  "lem-sc-smooth-proper-diagonal-conormal-differentials",
-  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-sc-smooth-diagonal-regular-immersion",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-sc-smooth-diagonal-ideal-conormal-rank",
   "lem-sc-smooth-proper-diagonal-koszul-dual",
-  "def-sc-locally-ranked-exterior-complex",
-  "def-sc-sheaf-exterior-power",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "lem-sc-constant-rank-exterior-derived-comparison",
+  "def-pur-sheaf-hom"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BR0 specialized to the smooth diagonal, Tag 08S2, fourth equality of Tag 0BRT"
+  "place": "Tag 0BR0 specialized to the smooth diagonal, Tag 08S2, fourth equality of Tag 0BRT; Lean reduction using explicit structure-object transport and two smaller comparison statements"
  },
  "mathlib_searches": [
   {
@@ -136,9 +142,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T085324-L-33840",
+  "landing": "20261012T110255-L-612343",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

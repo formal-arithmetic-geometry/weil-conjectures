@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-constant-rank-exterior-derived-comparison",
+ "kind": "statement",
+ "title": "Constant-rank exterior complex as a shifted single exterior sheaf",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $M,N$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and let $e:M\\cong N$ be a module-sheaf isomorphism. Fix $d\\in\\mathbf N$ and the constant locally constant function $r(x)=d$. Let $L(M,r)$ be the locally ranked exterior complex [def-sc-locally-ranked-exterior-complex], and choose the derived category of module sheaves on X [def-pc-derived-category], with localization functor Q. Then $Q(L(M,r))\\cong (\\bigwedge^d N)[-d]$, where the exterior sheaf is the sheafification of sectionwise exterior powers [def-sc-sheaf-exterior-power] and the right side is its degree-zero single shifted by $-d$. No local freeness of M or N is assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BR0, expression wedge^r N[-r] for the locally constant rank function; constant-rank specialization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-derived-category",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "For the constant rank function d, the rank-d open is all of X, and all other rank opens are empty. On an empty scheme the sheaf condition forces every module sheaf to have zero sections on its only open. Pushforward from that open is zero. On the full open, restriction and pushforward along its inclusion compose to the identity, including the exterior-power sheafification. Hence L(M,r) is supported only in degree d, with term exteriorSheaf M d.",
+   "uses": [
+    "def-sc-locally-ranked-exterior-complex",
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On an open U the isomorphism e induces the exterior map sending a pure wedge of m_j to the wedge of e(m_j); e inverse gives the inverse. Compatibility with restrictions follows by checking this formula on pure wedges, which span. Sheafification therefore identifies exteriorSheaf M d with exteriorSheaf N d. Use this isomorphism in degree d and the unique maps between zero objects elsewhere to identify L(M,r) with the single complex in degree d. All differentials are zero, so these component maps and their inverses are complex morphisms.",
+   "uses": [
+    "def-sc-sheaf-exterior-power",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Q to the complex isomorphism. By the definition of the cohomological shift, a single object in degree d is the degree-zero single shifted by -d; use the usual single/shift isomorphism in the derived category. The same calculation holds for d=0 and empty X.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-locally-ranked-exterior-complex",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BR0, expression wedge^r N[-r] for the locally constant rank function; constant-rank specialization; expanded implementation argument from the cited construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant rank exterior complex of a sheaf is the single top exterior power shifted by the negative rank",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant rank exterior sheaf complex is isomorphic in the derived category to its top exterior power shifted by the negative rank",
+   "results": "Returned ModuleCat.exteriorPower.natIso₀, ModuleCat.exteriorPower.natIso₁, ModuleCat.exteriorPower.iso₁, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, ModuleCat.exteriorPower.iso₀, CochainComplex.exists_iso_single, Rep.standardComplex.instQuasiIsoNatεToSingle₀, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyRankedExterior|constantRankExterior|diagonalConormal|finrank.*relativeDifferentials",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0BR0, expression wedge^r N[-r] for the locally constant rank function; constant-rank specialization; smooth-diagonal determinant comparison, constant-rank exterior complex as a shifted single exterior sheaf",
+   "via": [
+    "lem-sc-smooth-diagonal-dualizing-determinant",
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantRankExteriorDerivedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantRankExteriorDerivedComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.constantRankExterior_derived_iso",
+  "statement": "theorem constantRankExterior_derived_iso {X : Scheme.{u}} [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (M N : X.Modules) (d : ℕ) (e : M ≅ N) : Nonempty (((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).obj (locallyRankedExteriorComplex M (LocallyConstant.const X d))) ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (exteriorSheaf N d))⟦-(d : ℤ)⟧)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T110255-L-612343",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T110255-L-612343",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
