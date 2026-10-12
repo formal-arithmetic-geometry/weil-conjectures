@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.NoetherNormalizationOverDomainSurjective
 
 /-!
 # Noether normalization over a domain
@@ -69,6 +70,9 @@ theorem exists_finite_subalgebra_away
               (Localization.Away (algebraMap R S' f))
               (Localization.Away (S'.val (algebraMap R S' f)))
               S'.val.toRingHom (algebraMap R S' f)) := by
-  sorry
+  obtain ⟨d, y, S', hay, h, hfin, f, hf, hsurj⟩ :=
+    exists_finite_subalgebra_away_surjective R S hinj
+  refine ⟨d, y, S', hay, h, hfin, f, hf, ?_⟩
+  refine ⟨IsLocalization.map_injective_of_injective _ _ _ Subtype.val_injective, hsurj⟩
 
 end Algebra.FiniteType

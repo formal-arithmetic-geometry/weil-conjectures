@@ -1,0 +1,103 @@
+{
+ "id": "new-noether-normalization-over-domain-surjective",
+ "kind": "statement",
+ "title": "Noether normalization over a domain, surjective localization part",
+ "statement": "theorem exists_finite_subalgebra_away_surjective (R : Type u) (S : Type v) [CommRing R] [IsDomain R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (hinj : Function.Injective (algebraMap R S)) : ∃ (d : ℕ) (y : Fin d → S) (S' : Subalgebra R S), Function.Injective (MvPolynomial.aeval (R := R) y) ∧ ∃ h : (MvPolynomial.aeval (R := R) y).range ≤ S', (letI := (Subalgebra.inclusion h).toRingHom.toAlgebra Module.Finite (MvPolynomial.aeval (R := R) y).range S') ∧ ∃ f : R, f ≠ 0 ∧ Function.Surjective (IsLocalization.Away.map (Localization.Away (algebraMap R S' f)) (Localization.Away (S'.val (algebraMap R S' f))) S'.val.toRingHom (algebraMap R S' f))",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 07NA, generic-fibre normalization, denominator clearing, and finite subalgebra construction"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-noether-normalization-over-domain"
+ ],
+ "proof": [
+  {
+   "text": "Follow the generic-fibre Noether normalization, clear denominators in the integral equations, and generate S' by the rescaled algebra generators. The resulting localization map is surjective because the rescaled generators generate S after inverting f.",
+   "uses": [
+    "lem-weil-pbc-noether-normalization-over-domain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noether-normalization-over-domain"
+ ],
+ "proof_origin": {
+  "by": "B4 stage 3",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 07NA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjective localization map finite subalgebra noether normalization domain",
+   "results": "no exact match; only field normalization theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective (IsLocalization.Away.map ...) finite subalgebra",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn exists_finite_subalgebra_away Mathlib Sheaf",
+   "results": "only this split theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "B4",
+  "item": "Sheaf.RingTheory.NoetherNormalizationOverDomain",
+  "date": "2026-10-13",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-noether-normalization-over-domain",
+   "place": "split of the localization bijectivity clause",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NoetherNormalizationOverDomainSurjective",
+  "file": "lean/Sheaf/RingTheory/NoetherNormalizationOverDomainSurjective.lean",
+  "declaration": "Algebra.FiniteType.exists_finite_subalgebra_away_surjective",
+  "statement": "theorem exists_finite_subalgebra_away_surjective\n    (R : Type u) (S : Type v) [CommRing R] [IsDomain R] [CommRing S]\n    [Algebra R S] [Algebra.FiniteType R S]\n    (hinj : Function.Injective (algebraMap R S)) :\n    ∃ (d : ℕ) (y : Fin d → S) (S' : Subalgebra R S),\n      Function.Injective (MvPolynomial.aeval (R := R) y) ∧\n      ∃ h : (MvPolynomial.aeval (R := R) y).range ≤ S',\n        (letI := (Subalgebra.inclusion h).toRingHom.toAlgebra\n         Module.Finite (MvPolynomial.aeval (R := R) y).range S') ∧\n        ∃ f : R, f ≠ 0 ∧\n          Function.Surjective\n            (IsLocalization.Away.map\n              (Localization.Away (algebraMap R S' f))\n              (Localization.Away (S'.val (algebraMap R S' f)))\n              S'.val.toRingHom (algebraMap R S' f))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261012T225258-L-1800943",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261012T225258-L-1800943",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
