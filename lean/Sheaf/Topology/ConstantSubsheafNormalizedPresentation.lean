@@ -11,6 +11,7 @@ public import Sheaf.Topology.AbelianOpenExtensionByZero
 import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
 import Sheaf.Topology.ConstantSheafLocallyConstantComparison
 import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.Topology.ConstantSubsheafNormalizedCore
 
 /-! # ConstantSubsheafNormalizedPresentation
 
@@ -82,6 +83,7 @@ theorem constantSubsheaf_normalized_presentation
           (op (A i)) (ULift.up (c i : ℤ))) ∧
           (∀ x : X, x ∈ iSup A →
             ∃ i, x ∈ A i ∧ ∀ j, x ∈ A j → c i ∣ c j) := by
-  sorry
+  obtain ⟨d, _⟩ := constantSubsheaf_normalized_core X K C ι isoC hqc hgen e b hb
+  exact constantSubsheaf_normalized_completion X K C ι isoC hqc hgen e b hb d
 
 end TopCat.Sheaf

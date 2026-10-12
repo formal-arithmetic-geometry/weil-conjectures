@@ -14,23 +14,17 @@
  ],
  "proof": [
   {
-   "text": "Normalize the generating sections using the constant-sheaf identification isoC.\nEach locally constant section on a compact open has finitely many clopen fibres; these\nfibres are compact in X. Restrict to the fibres, delete zero values, and negate sections\nwith negative value. Adjoin the intersections of all nonempty subsets and their positive\ngcd sections. Bezout gives these sections in K. Binary compact-intersection closure\nmakes all these opens compact. At every point the gcd of its active labels is attained,\nand the sections generate the same stalk subgroup as the original epimorphism. Stalk\ncoordinates for isoC and the supplied e differ by an automorphism of the integers,\nhence by sign, so this gcd is at most b+1. Retain only labels at most b+1: an attained\ngcd remains at every nonzero stalk. Thus the retained coproduct map is epi and still has\nthe attained-divisor property. Its sections are the images of the canonical unit 1,\nwhich gives hsection, and their positive constant values give hvalue. Empty families\nare allowed, and give n=0. Mathlib tools: LocallyConstant.range_finite (Topology/LocallyConstant/Basic.lean:323), Nat.gcd_eq_gcd_ab and Int.gcd_eq_gcd_ab (Data/Int/GCD.lean:124,172), iterated over nonempty finite subsets. Stalk epimorphisms are detected by TopCat.Sheaf.isLocallySurjective_iff_epi together with TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks.",
+   "text": "Apply constantSubsheaf_normalized_core to obtain normalized presentation data, then apply constantSubsheaf_normalized_completion to extract the canonical sections and conclude the target.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-sc-abelian-open-extension-by-zero",
-    "def-weil-pbc-module-stalk",
-    "lem-sc-topological-extension-by-zero-stalks",
-    "lem-sc-constant-sheaf-locally-constant-comparison"
+    "lem-sc-constant-subsheaf-normalized-core",
+    "lem-sc-constant-subsheaf-normalized-completion"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constant-sheaf",
-  "def-sc-abelian-open-extension-by-zero",
-  "def-weil-pbc-module-stalk",
-  "lem-sc-topological-extension-by-zero-stalks",
-  "lem-sc-constant-sheaf-locally-constant-comparison"
+  "lem-sc-constant-subsheaf-normalized-core",
+  "lem-sc-constant-subsheaf-normalized-completion"
  ],
  "proof_origin": {
   "by": "document",
@@ -109,9 +103,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T095922-L-324133",
+  "landing": "20261012T112833-L-765404",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
