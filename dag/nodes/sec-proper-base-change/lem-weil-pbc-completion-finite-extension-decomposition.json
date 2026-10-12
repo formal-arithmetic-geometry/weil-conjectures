@@ -10,16 +10,48 @@
  },
  "proof": [
   {
-   "text": "This intermediate theorem packages the cited part of the Stacks proof for use by the target theorem.",
-   "uses": [],
-   "elementary": false
+   "text": "Mathlib Algebra.QuasiFinite.finite_primesOver gives finiteness directly, using the instance that finite algebras are quasi-finite. The finiteness clause is recorded in the finite-spectrum node.",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each localRingHom maps the maximal ideal m into the maximal ideal n_q. Map A/m^k to S_q/n_q^k and compose with evalₐ. Quotient representatives and inverse-limit compatibility show that these ring maps commute with reduction. AdicCompletion.liftRingHom constructs g_q without existential choice; evalₐ_liftRingHom proves its levelwise equation. Extensionality of quotient coordinates proves compatibility with the R-algebra maps.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the product R-algebra map g and Algebra.TensorProduct.lift to construct f. Its value at 1 tensor s is the S-algebra map, so f is an S-algebra homomorphism. Its value at a tensor 1 in component q is g_q(a), proving the final compatibility equation.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the injectivity and surjectivity statements to f and its proved levelwise formula. AlgEquiv.ofBijective constructs e from this bijective canonical map. Package e, g, finiteness, and the two compatibility equations.",
+   "uses": [
+    "lem-weil-pbc-completion-tensor-local-maps-injective",
+    "lem-weil-pbc-completion-tensor-local-maps-surjective"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-completion-tensor-local-maps-injective",
+  "lem-weil-pbc-completion-tensor-local-maps-surjective",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07N9, steps 1--4"
+  "place": "Tag 07N9; E3 constructs canonical maps and reduces detection and interpolation to separate statements, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -87,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261012T144131-L-2102845",
+  "landing": "20261012T184253-L-4000888",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

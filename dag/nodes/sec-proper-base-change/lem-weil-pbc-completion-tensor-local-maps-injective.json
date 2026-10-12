@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-completion-tensor-local-maps-injective",
+ "kind": "statement",
+ "title": "Injectivity of the canonical local completion comparison",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $S$ a commutative $R$-algebra finite as an $R$-module [def-weil-finitely-generated-module], and $\\mathfrak p$ a prime ideal of $R$. Put $A=R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], $\\mathfrak m$ its maximal ideal, $C=\\varprojlim_n A/\\mathfrak m^n$ [def-weil-pbc-adic-completion], $Q=\\{\\mathfrak q\\subset S: \\mathfrak q\\text{ prime},\\ \\mathfrak q\\cap R=\\mathfrak p\\}$, and $D_{\\mathfrak q}=\\varprojlim_n S_{\\mathfrak q}/(\\mathfrak q S_{\\mathfrak q})^n$. Let $\\varphi_{\\mathfrak q}:A\\to S_{\\mathfrak q}$ be the canonical localized map. Let $f:C\\otimes_R S\\to\\prod_{\\mathfrak q\\in Q}D_{\\mathfrak q}$ be an $S$-algebra map (tensor product as in [def-weil-module-base-change]). Assume that for every $\\mathfrak q\\in Q$, $n\\geq0$, $a\\in C$ and $r\\in A$, the equality $a_n=r\\bmod\\mathfrak m^n$ implies $f(a\\otimes1)_{\\mathfrak q,n}=\\varphi_{\\mathfrak q}(r)\\bmod(\\mathfrak q S_{\\mathfrak q})^n$. Then $f$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, lemma-completion-finite-extension, proof: quotient products, finite-after-completion (0394), and completion-tensor (00MA)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put A = R_p and B = A tensor_R S. B is finite over the Noetherian local ring A. Localization identifies the primes of B over its maximal ideal m with Q, and their local rings with S_q. Every B/m^n B for n > 0 is Artinian. Its canonical map to the product of S_q/m^n S_q is an isomorphism by Tags 00JA and 00CT.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-product-of-localizations-at-maximal",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These canonical maps commute with reduction. Thus the map from the m-adic completion of B into the product of the m-adic completions of S_q is injective: if every component is zero, each quotient coordinate is zero by the quotient product isomorphism, and the original compatible sequence is zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "In S_q, the extended ideal m S_q has radical q S_q. Noetherianity gives a power of q S_q contained in m S_q; the converse inclusion is immediate. Tag 0394 identifies the two completions by the identity on S_q. Therefore replacing the factors by the maximal-ideal completions preserves injectivity.",
+   "uses": [
+    "lem-weil-pbc-finite-after-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tag 00MA identifies C tensor_A B with the m-adic completion of B, and tensor cancellation identifies C tensor_A B with C tensor_R S. Under this canonical comparison the resulting map sends a tensor s to the tuple g_q(a) times s. The hypothesis on f determines g_q: choose a representative of each quotient coordinate of a and apply the displayed equation, then use extensionality of compatible sequences. S-linearity and tensor induction identify f with this comparison map. Composing the injections proves the claim. The zero algebra and empty Q are included: B/m^n B and its completion are then zero.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-finite-after-completion",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-product-of-localizations-at-maximal",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, injective direction of the canonical comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adic completion finite algebra decomposes as product of completions at primes",
+   "results": "AdicCompletion.piEquivFin_apply, IsDedekindDomain.HeightOneSpectrum.adicCompletion, AdicCompletion.piEquivOfFintype_apply, AdicCompletion.piEquivFin, IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion, AdicCompletion.piEquivOfFintype, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients; no exact local comparison theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, RingHom",
+   "results": "AdicCompletion.evalOneₐ_comp_algebraMap_eq_mk, AdicCompletion.algebraMap_apply, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ, AdicCompletion.evalOneₐ_of, AdicCompletion.liftRingHom, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.evalₐ_mkₐ, AdicCompletion.evalₐ_of",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients; no exact local comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_primesOver|liftRingHom|completion.*tensor",
+   "results": "Mathlib/RingTheory/Smooth/Flat.lean, Mathlib/RingTheory/MvPowerSeries/Equiv.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean",
+   "date": "2026-10-12",
+   "verdict": "partial ingredients; no exact local comparison theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical map from tensor product with adic completion to product of completions at primes of a finite algebra is injective and surjective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionFiniteExtensionDecomposition",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, essential-surjectivity paragraphs), via Tag 07N9: injective direction of the completion product comparison",
+   "via": [
+    "lem-weil-pbc-completion-finite-extension-decomposition",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionTensorLocalMapsInjective",
+  "file": "lean/Sheaf/RingTheory/CompletionTensorLocalMapsInjective.lean",
+  "declaration": "AdicCompletion.completion_tensor_localMaps_injective",
+  "statement": "theorem completion_tensor_localMaps_injective\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let m := IsLocalRing.maximalIdeal A\n    let C := AdicCompletion m A\n    let Q := p.primesOver S\n    let D := fun q : Q ↦\n      AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))\n        (Localization.AtPrime q.1)\n    letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)\n    ∀ (f : (C ⊗[R] S) →ₐ[S] (∀ q : Q, D q)),\n      (∀ (q : Q) (n : ℕ) (a : C) (r : A),\n        evalₐ m n a = Ideal.Quotient.mk (m ^ n) r →\n        evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n\n            (f (a ⊗ₜ[R] (1 : S)) q) =\n          Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n)\n            (Localization.localRingHom p q.1 (algebraMap R S)\n              (Ideal.LiesOver.over (P := q.1) (p := p)) r)) →\n      Function.Injective f",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T184253-L-4000888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T184253-L-4000888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

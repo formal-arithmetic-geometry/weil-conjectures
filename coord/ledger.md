@@ -8918,3 +8918,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffineFiniteFreeModelRetracts (stage 3; reviewer PASS; first push; landing 20261012T184252-L-4000569 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/E3/Sheaf.AlgebraicGeometry.KoszulRestrictionZero (stage 3; reviewer PASS; first push; landing 20261012T184252-L-4000667 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/E3/Sheaf.AlgebraicGeometry.PicardH1ProductInjective (stage 3; reviewer PASS; first push; landing 20261012T184252-L-4000765 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:42 L: merged deliver/E3/Sheaf.RingTheory.CompletionFiniteExtensionDecomposition (stage 3; reviewer PASS; first push; landing 20261012T184253-L-4000888 (interface); batch 20261012T184234; modules 3; new nodes 2)
