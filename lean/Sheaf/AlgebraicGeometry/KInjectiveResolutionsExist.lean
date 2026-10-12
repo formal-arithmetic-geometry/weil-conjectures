@@ -6,6 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
@@ -66,6 +67,47 @@ theorem etale_kinjective_resolutions_exist (T : Scheme.{u}) (R : Type (u + 1)) [
        Nonempty (HomotopyEquiv I J)) ∧
     (∀ (I : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
        (d : ℤ), I.IsStrictlyGE d → (∀ n : ℤ, Injective (I.X n)) → I.IsKInjective) := by
-  sorry
+  classical
+  let C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)
+  let F := kInjectiveResolutionFunctor.{u + 1} C
+  let η := toKInjectiveResolution.{u + 1} C
+  let q := HomotopyCategory.quotient C (.up ℤ)
+  let := HasDerivedCategory.standard C
+  refine ⟨?_, ?_, ?_⟩
+  · refine ⟨F.obj, η.app, fun f ↦ F.map f, ?_, ?_, ?_, ?_, ?_⟩
+    · intro K
+      exact ⟨(monoQuasiIso_toKInjectiveResolution_app C K).2, inferInstance⟩
+    · intro K
+      exact ⟨Homotopy.ofEq (F.map_id K)⟩
+    · intro K L M f g
+      exact ⟨Homotopy.ofEq (F.map_comp f g)⟩
+    · intro K L f g h
+      apply Nonempty.intro
+      apply HomotopyCategory.homotopyOfEq
+      apply (IsKInjective.Qh_map_bijective (q.obj (F.obj K)) (F.obj L)).injective
+      have : QuasiIso (η.app K) := (monoQuasiIso_toKInjectiveResolution_app C K).2
+      apply (cancel_mono ((DerivedCategory.quotientCompQhIso C).hom.app (F.obj L))).1
+      rw [DerivedCategory.quotientCompQhIso_hom_naturality,
+        DerivedCategory.quotientCompQhIso_hom_naturality]
+      congr 1
+      apply (cancel_epi (DerivedCategory.Q.map (η.app K))).1
+      rw [← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp,
+        ← η.naturality f, ← η.naturality g]
+      simpa only [Functor.id_map, Functor.map_comp] using
+        congrArg (fun a ↦ a ≫ DerivedCategory.Q.map (η.app L))
+          (DerivedCategory.Q_map_eq_of_homotopy C h.some)
+    · intro K L f
+      exact ⟨Homotopy.ofEq (η.naturality f).symm⟩
+  · intro K I J s t hs ht
+    have : QuasiIso s := hs.1
+    have : QuasiIso t := ht.1
+    have : I.IsKInjective := hs.2
+    have : J.IsKInjective := ht.2
+    obtain ⟨e⟩ := IsKInjective.nonempty_iso_quotient_obj s t
+    exact ⟨HomotopyCategory.homotopyEquivOfIso e⟩
+  · intro I d hGE hInj
+    have : I.IsStrictlyGE d := hGE
+    have : ∀ n : ℤ, Injective (I.X n) := hInj
+    exact isKInjective_of_injective I d
 
 end CochainComplex

@@ -6266,3 +6266,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/R1/Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh (stage 3; reviewer PASS; first push; landing 20261012T053950-L-2644151 (interface); batch 20261012T053916; modules 3; new nodes 2)
 - 05:39 L: merged deliver/R1/Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence (stage 3; reviewer PASS; first push; landing 20261012T053950-L-2644281 (proof); batch 20261012T053916; modules 1; new nodes 2)
 - 05:39 L: merged deliver/R1/Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability (stage 3; reviewer PASS; first push; landing 20261012T053951-L-2644380 (interface); batch 20261012T053916; modules 3; new nodes 2)
+- 05:39 L: merged deliver/R1/Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist (stage 3; reviewer PASS; first push; landing 20261012T053951-L-2644535 (proof); batch 20261012T053916; modules 1; new nodes 0)

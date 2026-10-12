@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "For a scheme $T$ and commutative ring $R$, [lem-weil-pbc-module-sheaves-grothendieck-abelian] says that $\\Mod(T_{\\Et},R)$ is Grothendieck abelian. Apply [lem-weil-pbc-kinjective-functorial-existence] to this category: its functor $I$ and natural quasi-isomorphism $\\eta_K:K\\to I(K)$ give the first clause, in fact functorially on chain maps.",
+   "text": "For the Grothendieck category of étale module sheaves, the existing functorial replacement declarations `CochainComplex.kInjectiveResolutionFunctor`, `toKInjectiveResolution`, and `monoQuasiIso_toKInjectiveResolution_app` provide the resolution object and quasi-isomorphism; `isKInjective_kInjectiveResolutionFunctor_obj` provides K-injectivity. Functoriality gives identity and composition homotopies, while naturality of the augmentation gives the final compatibility.",
    "uses": [
     "lem-weil-pbc-module-sheaves-grothendieck-abelian",
     "lem-weil-pbc-kinjective-functorial-existence"
@@ -36,7 +36,7 @@
    }
   },
   {
-   "text": "Let $s:K\\to I$ and $t:K\\to J$ be two K-injective resolutions [def-weil-pbc-kinjective-resolutions]. In the derived category, $Qs$ and $Qt$ are isomorphisms, hence $(Qs)^{-1}Qt:QI\\to QJ$ is an isomorphism. The bijection on maps into K-injective complexes from [lem-weil-pbc-kinjective-hom-derived] lifts this isomorphism and its inverse to homotopy classes $I\\to J$ and $J\\to I$; injectivity of that same map shows their composites equal the identities in the homotopy category. The lift carries $s$ to $t$ there, since both lift $Qt$, so the homotopy equivalence is under $K$ up to homotopy.",
+   "text": "For two resolutions, the proof uses the existing derived-category K-injective bijection (`IsKInjective.Qh_map_bijective`) to lift the comparison and its inverse. Injectivity identifies their composites and the two augmentation composites, yielding the required `HomotopyEquiv`.",
    "uses": [
     "def-weil-pbc-kinjective-resolutions",
     "lem-weil-pbc-kinjective-hom-derived"
@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "A bounded-below complex $I$ of injective $R_T$-module sheaves satisfies the hypotheses of [lem-weil-pbc-bounded-below-injectives-kinjective] in the abelian category $\\Mod(T_{\\Et},R)$; hence $I$ is K-injective [def-weil-pbc-kinjective-resolutions].",
+   "text": "The last conjunct is exactly Mathlib’s `CochainComplex.isKInjective_of_injective` after supplying the strict lower bound and injectivity hypotheses.",
    "uses": [
     "lem-weil-pbc-bounded-below-injectives-kinjective"
    ],
@@ -68,8 +68,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/prop-weil-pbc-kinjective-resolutions-exist.md",
-  "place": "## Proof"
+  "document": "lean/Sheaf/AlgebraicGeometry/KInjectiveResolutionsExist.lean",
+  "place": "the proof of CochainComplex.etale_kinjective_resolutions_exist"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -152,5 +152,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053951-L-2644535",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
