@@ -12,17 +12,33 @@
  ],
  "proof": [
   {
-   "text": "give the closure of `y` its reduced closed subscheme structure `Z`. This is\nintegral with generic point over `y`. Base change `g` to `Z` and pull back the closed\nset `C`. Give this pullback its reduced closed subscheme structure `W`. A closed\nimmersion is locally of finite type and quasi-compact, so `W → Z` is finite type.\nIts generic fibre is empty by `hempty` and the homeomorphism from the scheme-theoretic\nfibre onto the set-theoretic fibre. Tag 054W gives a nonempty open of `Z` over which\n`W` is empty. Every nonempty open of the integral `Z` contains its generic point.\nRepresent this open as `V ∩ closure {y}` with `V` ambient open in `T`; then `y ∈ V`.\nThe base-change projection is a homeomorphism onto the inverse image of the closure\nof `y`, so emptiness of `W` there is exactly the asserted disjointness. If `C` is\nempty the conclusion holds with `V = Set.univ`.",
+   "text": "Put D = C ∩ g⁻¹(closure {y}), a closed subset of P. Construct its reduced induced subscheme W as the subscheme of Scheme.IdealSheafData.vanishingIdeal D. Mathlib IdealSheafData.vanishingIdeal_coe_support and range_subschemeι identify the image of its inclusion i with D; the inclusion is quasi-compact by the existing subschemeι instance. Hence j = i ≫ g is quasi-compact. This constructs W directly; no data is chosen from an unproved existence theorem.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Suppose y lies in closure(range j). Apply lem-sc-picard-closure-specialization, the already proved AlgebraicGeometry.exists_specializes_of_mem_closure_range, to obtain x in W with j(x) specializing to y. Since i(x) belongs to D, j(x) belongs to closure {y}, so y specializes to j(x). The underlying space of T is T0; antisymmetry of specialization therefore gives j(x) = y. But i(x) belongs to C, contradicting g⁻¹({y}) ∩ C = ∅. Thus y is outside closure(range j).",
+   "uses": [
+    "lem-sc-picard-closure-specialization"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Take V = T \\ closure(range j). It is open and contains y. If x belongs to C and g(x) belongs to V ∩ closure {y}, then x belongs to D. The range identity for i supplies z in W with i(z) = x. Consequently g(x) = j(z) belongs to range j and thus its closure, contradicting g(x) in V. This proves the required disjointness, including the empty C and empty D cases without a separate branch.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-picard-closure-specialization"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project",
-  "place": "Tag 054W (Lemma 37.24.1), empty generic fibre; Tag 055N, reduction to the reduced closure of a point",
-  "note": "Specialization to the reduced closure of y; source read online on 2026-10-13."
+  "by": "agent",
+  "group": "W4",
+  "date": "2026-10-13",
+  "document": "WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "place": "exists_specializes_of_mem_closure_range (Stacks Project Tag 02JQ); Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, subschemeι and range_subschemeι",
+  "note": "Shorter proof written by W4 from the existing sorry-free quasi-compact image specialization theorem and Mathlib closed-subscheme construction. The original Tag 054W/055N spreading argument is unnecessary; the original signature and unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -96,10 +112,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261012T223401-L-1635198",
-  "kind": "interface",
+  "landing": "20261012T231643-L-1964625",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
