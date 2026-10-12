@@ -7,7 +7,8 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-!
 # Enough injectives for modules on a ringed space
@@ -34,13 +35,16 @@ Proof: Regard the open subsets of `X`, inclusions, and open covers as a small si
 The structure sheaf is a sheaf of commutative rings on this site, and its module sheaves
 are exactly `SheafOfModules` over its underlying ring sheaf `moduleRings X`
 (`def-weil-locally-ringed-space-morphism`, `def-weil-sheaf-of-modules-category`).
-The first clause of `prop-pur-kinjective-resolutions-exist` says that this module category
-is Grothendieck abelian, hence abelian. By `lem-sp-grothendieck-enough-injectives` it has
+Mathlib supplies the abelian instance. The proved upstream theorem
+`SheafOfModules.isGrothendieckAbelian` supplies the Grothendieck structure.
+By `lem-sp-grothendieck-enough-injectives` it has
 enough injectives: each module sheaf has a monomorphism into an injective object, in the
 sense of `def-sp-injective-resolutions`. -/
 theorem moduleSheaves_abelian_enoughInjectives (X : RingedSpace.{u}) :
     Nonempty (Abelian (SheafOfModules.{u} (moduleRings X))) ∧
     EnoughInjectives (SheafOfModules.{u} (moduleRings X)) := by
-  sorry
+  have : IsGrothendieckAbelian.{u} (SheafOfModules.{u} (moduleRings X)) :=
+    SheafOfModules.isGrothendieckAbelian (moduleRings X)
+  exact ⟨⟨inferInstance⟩, inferInstance⟩
 
 end AlgebraicGeometry.RingedSpace

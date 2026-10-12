@@ -27,26 +27,28 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal C$ be the category of open subsets of $X$ with inclusions and open coverings as coverings; it is small, and $\\mathcal O_X$ is a sheaf of commutative rings on it [def-weil-locally-ringed-space-morphism], so $\\operatorname{Mod}(\\mathcal O_X)$ is the category $\\Mod(\\mathcal O)$ of [def-weil-sheaf-of-modules-category] for this site. By the first clause of [prop-pur-kinjective-resolutions-exist], $\\operatorname{Mod}(\\mathcal O_X)$ is a Grothendieck abelian category, in particular abelian; by [lem-sp-grothendieck-enough-injectives] it has enough injectives, i.e. every $\\mathcal O_X$-module admits a monomorphism into an injective $\\mathcal O_X$-module [def-sp-injective-resolutions].",
+   "text": "Apply the Mathlib abelian instance [lem-pur-ringed-site-module-category-abelian] to the small category of opens of X with its open-cover topology and the underlying ring sheaf moduleRings X. This yields the first conjunct Nonempty (Abelian (Mod(O_X))).",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-ringed-site-module-category-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved upstream theorem SheafOfModules.isGrothendieckAbelian in WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian to moduleRings X. Its small-site and equal-universe hypotheses hold for Opens X. Register the resulting Grothendieck structure as a local instance and apply [lem-sp-grothendieck-enough-injectives] to obtain the second conjunct. Combine the two conjuncts. Neither the localized generator clause nor K-injective resolutions are used.",
+   "uses": [
     "lem-sp-grothendieck-enough-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Lemma 01DI; via Injectives Theorem 079H (Grothendieck abelian categories have enough injectives) and Sites-cohomology Section 07A5 (Mod(O) is Grothendieck abelian)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-ringed-site-module-category-abelian",
   "lem-sp-grothendieck-enough-injectives"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Section 07A5 first paragraph (Mod(O) Grothendieck abelian) with Injectives Theorem 079H, specialised to the site of opens of X; replaces the skyscraper-product proof of Lemma 01DI"
+  "document": "WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+  "place": "SheafOfModules.isGrothendieckAbelian specialized to moduleRings X; Mathlib SheafOfModules.instAbelian and IsGrothendieckAbelian.enoughInjectives. N1 second reading eliminates the open ringed-site Grothendieck and K-injective resolution dependencies."
  },
  "mathlib_searches": [
   {
@@ -140,5 +142,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T063516-L-3157986",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
