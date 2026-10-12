@@ -7215,3 +7215,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/H1/Sheaf.CategoryTheory.HalfPlaneConvergence (stage 3; reviewer PASS; first push; landing 20261012T095906-L-317805 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:59 L: merged deliver/H2/Sheaf.AlgebraicGeometry.FiniteScalarRightAdjointQCoh (stage 3; reviewer PASS; first push; landing 20261012T095906-L-317948 (interface); batch 20261012T095846; modules 2; new nodes 1)
 - 09:59 L: merged deliver/H2/Sheaf.AlgebraicGeometry.HigherDirectImageAffineClassDescent (stage 3; reviewer PASS; first push; landing 20261012T095906-L-318074 (interface); batch 20261012T095846; modules 2; new nodes 1)
+- 09:59 L: merged deliver/H3/Sheaf.AlgebraicGeometry.ClosedImageLimitSystem (stage 3; reviewer PASS; first push; landing 20261012T095906-L-318172 (proof); batch 20261012T095846; modules 1; new nodes 0)

@@ -29,50 +29,48 @@
  ],
  "proof": [
   {
-   "text": "The limit projections are affine by isAffineHom_π_app. Hence i followed by a projection is quasi-compact. For each j take the scheme-theoretic image Z_j with its closed inclusion k_j and factorization of X → D_j. The kernel description on affine opens supplies these images.",
+   "text": "Let I_j = ker(i followed by πY_j), and Z_j = I_j.subscheme. Naturality and map_ker identify I_l with I_j.map(D(a)) for each arrow a:j→l. Use subschemeMap to define the transition maps, subschemeι for k, and toImage for πX. Cancellation by the monomorphic subscheme inclusions proves functor laws and naturality, and toImage_imageι gives the factorization equations.",
    "uses": [
-    "lem-weil-pbc-limit-cone-affine-projections-opens",
     "lem-weil-pbc-scheme-image-qc-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "For an arrow j → l, the composite Z_j → D_j → D_l factors through Z_l: functions in the image ideal at l map to zero on X and hence vanish in the image ring at j. The unique factorization defines Z_j → Z_l. Monicity of k_l proves composition, identities, naturality, and the cone equations. The induced map from Z_j into Z_l × over D_l with D_j is a closed immersion since its composite to D_j is k_j. The projection of this pullback to Z_l is affine, so transitions of Z are affine.",
-   "uses": [
-    "lem-weil-pbc-scheme-image-qc-kernel",
-    "lem-weil-pbc-closed-immersion-from-composite",
-    "lem-weil-pbc-affine-morphism-permanence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Fix an affine open of a stage and restrict to its over category. The affine inverse images have rings B_j with filtered colimit B; X over their limit is Spec(B/I). The image over each stage open is Spec(B_j/ker(B_j → B/I)). Every element of B/I comes from some B_j. If an element of an image ring maps to zero in B/I, it is already zero by the definition of that kernel. Thus these quotient rings have colimit B/I. Spec turns this into a limit, giving the limit property locally on every such affine open.",
+   "text": "Reconstruct ker(i) as the supremum K of I_j.comap(πY_j). The inequality K≤ker(i) is the map/comap Galois connection and map_ker. For the reverse inequality, fix a stage j0 and the affine open cover of D_j0. Projections are affine, so its pullback covers Y by affine opens W. Over an affine open U of D_j0, use the cofinal over-category diagram opensDiagram and its limit opensCone. All of its stages are affine; the section-surjectivity clause of the coordinate-ring colimit theorem, in Mathlib exists_appTop_π_eq_of_isAffine_of_isLimit, lifts any section s of ker(i) on W to a section t on an affine inverse image V in some D_j. Naturality identifies πY_j inverse-image V with W. Since i.app(W)(s)=0, compatibility of appLE with composition and the invertible restriction for this equality of opens show (i followed by πY_j).app(V)(t)=0. Quasi-compactness gives ker_apply, so t belongs to I_j. The Galois connection puts I_j inside K.map(πY_j); ideal_map_of_isAffineHom and restriction of ideals put s inside K(W). IdealSheafData.le_of_iSup_eq_top glues these inclusions. Hence ker(i)=K.",
    "uses": [
     "lem-weil-pbc-limit-cone-affine-projections-opens",
     "lem-weil-pbc-limit-global-sections-colimit",
-    "lem-weil-pbc-scheme-image-qc-kernel",
-    "lem-weil-pbc-spec-colimit-limit"
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-scheme-image-qc-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "The local identifications and factorizations agree on overlaps by uniqueness of the maps into the closed images. They therefore glue. For a test cone, first use the limit property of Y to get its map to Y, and then use these affine local identifications to factor it uniquely through X. This is the IsLimit structure on the displayed cone.",
-   "uses": [],
-   "elementary": true
+   "text": "For a test cone s on Z, compose with k and use hY.lift to obtain m:s.pt→Y. Each I_j is contained in ker(s.π_j followed by k_j) by le_ker_comp and ker_subschemeι. The Galois connection, the cone equations hY.fac, and ker(i)=K therefore give ker(i)≤ker(m). IsClosedImmersion.lift factors m through i. Monicity of k_j proves its cone equations; monicity of i and hY.hom_ext prove uniqueness. This constructs IsLimit (Cone.mk X πX) directly, without constructing a limit of quotient rings.",
+   "uses": [
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a transition a:j→l, its composite with k_l is k_j followed by D(a), which is affine as a composite of affine morphisms. The closed immersion k_l is separated, so Mathlib IsAffineHom.of_comp makes the transition affine. This is the standard separated-target cancellation argument: factor through the graph (a base change of the closed diagonal) followed by the affine base-change projection. The k_j are closed immersions by the subschemeι instance. Together with the constructed limit and factorization equations this proves the stated existential.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-closed-immersion-from-composite",
   "lem-weil-pbc-limit-cone-affine-projections-opens",
   "lem-weil-pbc-limit-global-sections-colimit",
-  "lem-weil-pbc-scheme-image-qc-kernel",
-  "lem-weil-pbc-spec-colimit-limit"
+  "lem-weil-pbc-scheme-image-qc-kernel"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 0A0P approximation goal; alternative closed-image argument written by N2, using Morphisms Tag 01R8 and Limits Tag 01YX; Lean implementation by N2"
+  "place": "Tag 0A0P approximation goal; alternative closed-image argument written by N2, using Morphisms Tag 01R8 and Limits Tag 01YX; H3 stage-3 Lean proof: reconstruct the kernel ideal using affine local section lifts, then construct the universal factorization of test cones"
  },
  "mathlib_searches": [
   {
@@ -166,11 +164,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-877b3",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T085312-L-28775",
-  "kind": "interface",
-  "note": "independent Codex review: Compiled delivery files and checked their declarations, nodes, report, proof dependencies, and disputed affine-clause counterexample against the review brief"
+  "landing": "20261012T095906-L-318172",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
