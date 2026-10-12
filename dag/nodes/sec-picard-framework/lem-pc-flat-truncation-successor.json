@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-flat-truncation-successor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "The K-flat resolution construction: extending a prescribed flat replacement of a good truncation by one stage, before forming the telescope",
+   "via": [
+    "lem-pc-flat-truncation-tower",
+    "lem-pc-kflat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "One compatible extension of a bounded-above flat truncation replacement",
+ "statement": "Let (C,J) be a small site and R a sheaf of commutative rings. Assume that every R-module sheaf M admits an epimorphism P -> M with P flat. Let G be a cochain complex of R-module sheaves [def-pc-cochain-complex-modules], n a natural number, and E a bounded-above complex with flat terms [def-pc-flat-sheaf-modules]. Suppose q:E -> truncLE(n)G is a termwise epimorphic quasi-isomorphism [def-pc-quasi-iso-modules]. There exist a bounded-above complex E' with flat terms, a map t:E -> E', and a termwise epimorphic quasi-isomorphism q':E' -> truncLE(n+1)G such that t followed by q' and the truncation inclusion into G equals q followed by the n-th truncation inclusion into G. The previous complex E and augmentation q are prescribed. This asserts only one extension, not an infinite tower.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; specialization to flat module sheaves as in Cohomology on Sites, Lemma 077J"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Compose the prescribed augmentation q with the inclusion into the next good truncation. Its mapping cone is bounded above because E and the next truncation are bounded above. Apply [lem-pc-kflat-bounded-flat-replacement] at any common upper bound to obtain a termwise epimorphic quasi-isomorphism Q -> C with bounded-above flat Q.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map Q -> C -> E[1] defines the extension triangle E -> E' -> Q -> E[1]. Represent its first map by a degreewise split injection with cokernel Q. The resulting terms of E' are isomorphic to E^i plus Q^i, so [lem-pc-sites-modules-coproduct-flat] gives flatness; their common upper bound gives boundedness. The morphism of triangles to E -> truncLE(n+1)G -> C gives an augmentation f. Extend its augmentation-square homotopy along the degreewise retractions and subtract the homotopy differential from f; this makes the square commute strictly. Long exact cohomology sequences, identity on E, and the quasi-isomorphism Q -> C show that f is a quasi-isomorphism. These are precisely the triangle construction and homotopy correction in 06XX.",
+   "uses": [
+    "lem-pc-sites-modules-coproduct-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Strict commutativity and termwise epimorphy of q make f epic away from degrees n and n+1. Apply the explicitly assumed flat-cover property to G^n and obtain P -> G^n with flat P and epic map. Add its identity disk in degrees n and n+1, with augmentation the cover in degree n and its differential in degree n+1. This disk covers degree n and the boundaries in degree n+1. The epimorphism H^(n+1)(f) supplies the remaining cycles, so the sum augmentation is epic in degree n+1 as well. The disk is contractible, so the new augmentation remains a quasi-isomorphism. The finite direct sums remain flat by [lem-pc-sites-modules-coproduct-flat], and boundedness is preserved. The original E includes through the old summand, so the strict square remains valid. Compose it with the inclusion into G to obtain the asserted equality.",
+   "uses": [
+    "lem-pc-sites-modules-coproduct-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-sites-modules-coproduct-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; specialization to flat module sheaves as in Cohomology on Sites, Lemma 077J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extend a bounded above flat resolution of a good truncation by one stage, preserving the augmentation strictly",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extend a prescribed bounded above flat replacement of a good truncation to the next truncation with a strictly commuting augmentation",
+   "results": "HomologicalComplex.truncGE, HomologicalComplex.stupidTruncMap, ComplexShape.Embedding.truncLEFunctor and related truncation APIs; none constructs a relative flat replacement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone",
+   "results": "CochainComplex.mappingCone, mappingCone.fst, mappingCone.snd, mappingCone.inl, mappingCone.inr, mappingCone.isZero_X_iff; provides cone construction and boundedness tools, but no relative flat replacement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*flat|flat.*successor|special.*direct.*system; also blueprint search for 06XX and truncation",
+   "results": "No matching replacement theorem in Mathlib or project roots. Blueprint search found no 06XX node; truncation matches are different statements. The existing tower node has the induction step in words but no separate Lean declaration.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FlatTruncationTower",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatTruncationSuccessor",
+  "file": "lean/Sheaf/Algebra/Homology/FlatTruncationSuccessor.lean",
+  "declaration": "CochainComplex.exists_flat_truncation_successor",
+  "statement": "theorem exists_flat_truncation_successor\n    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}\n    {R : Sheaf J CommRingCat.{u}}\n    (hcover : ∀ M : SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R),\n      ∃ (P : SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (p : P ⟶ M),\n        SheafOfModules.IsFlat P ∧ Epi p)\n    (G : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (n : ℕ)\n    (E : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (q : E ⟶ G.truncLE (n : ℤ))\n    (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))\n    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i))\n    (hquasi : QuasiIso q) (hepi : ∀ i : ℤ, Epi (q.f i)) :\n    ∃ (E' : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n      (t : E ⟶ E') (q' : E' ⟶ G.truncLE ((n + 1 : ℕ) : ℤ)),\n      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E'.X i)) ∧\n      (∀ i : ℤ, SheafOfModules.IsFlat (E'.X i)) ∧ QuasiIso q' ∧\n      (∀ i : ℤ, Epi (q'.f i)) ∧\n      t ≫ q' ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q ≫ G.ιTruncLE (n : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T095924-L-325018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T095924-L-325018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
