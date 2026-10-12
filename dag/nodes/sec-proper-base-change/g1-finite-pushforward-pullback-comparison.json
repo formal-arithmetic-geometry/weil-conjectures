@@ -1,0 +1,150 @@
+{
+ "id": "g1-finite-pushforward-pullback-comparison",
+ "kind": "statement",
+ "title": "FinitePushforwardPullbackComparison",
+ "statement": "Let $k$ be algebraically closed, $(X,F)$ a torsion curve coefficient pair [def-weil-pbc-curve-setting], $Y$ a curve over $k$, and $f:X\\to Y$ finite over $k$ [def-weil-finite-integral-morphism]. Let $A_X,A_Y$ be the underlying abelian sheaves after converting $F,f_*F$ to $\\operatorname{ULift}\\mathbb Z$-modules. In any cartesian square with upper arrow $b:X\\prime\\to X$, lower arrow $a:Y\\prime\\to Y$ and vertical arrows $f\\prime,f$ [def-weil-pbc-cartesian-square], for every $q\\ge0$ the pullback on $H^q(Y,A_Y)$ along $a$ is bijective (respectively surjective) if and only if the pullback on $H^q(X,A_X)$ along $b$ is bijective (respectively surjective) [def-weil-pbc-cohomology-pullback].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-primary-torsion",
+  "def-weil-pbc-constructible-torsion",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Finite exchange is invertible. Apply bijective_edgeMap_baseChange for the two vertical comparison bijections and cohomology_edgeMap_baseChange for the commuting square.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-edge-map-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
+   }
+  },
+  {
+   "text": "For bijections l and r satisfying v ∘ l = r ∘ w, bijectivity of w is equivalent to that of v. Surjectivity is equivalent too: lift through l in one direction and cancel the injective r in the other.",
+   "uses": [
+    "lem-weil-pbc-edge-map-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
+   }
+  },
+  {
+   "text": "The equivalence counit identifies the converted underlying abelian sheaves with the originals. Naturality of cohomology pullback gives commuting squares whose other maps are the cohomology bijections of these isomorphisms; apply the same elementary argument.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-edge-map-base-change",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A5D; coefficient-category transport made explicit in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of isomorphic sheaves is isomorphic",
+   "results": "Service unavailable: Internal Server Error. No search verdict was inferred.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite pushforward sheaf cohomology edge map is bijective",
+   "results": "Eight hits, including SheafOfModules.bijective_pushforwardSections and generic cohomology-class bijections; none is the finite etale edge comparison. The existing project edge-map theorem is used.",
+   "verdict": "no exact Mathlib match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkIsoPi|isTorsionAbelianSheaf_characterizations|isConstructible_of_finite_pushforward",
+   "results": "msearch grep returned zero hits. Direct rg in lean/ located the existing finite stalk formula, torsion characterization and abelian constructibility descent, whose signatures were read.",
+   "date": "2026-10-12",
+   "verdict": "existing project ingredients used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions",
+  "group": "G1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "Lemma 0A5D in steps 3, 4, 7; FinitePushforwardPullbackComparison",
+   "via": [
+    "lem-weil-pbc-curve-assertions-finite-pushforward"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardPullbackComparison",
+  "declaration": "AlgebraicGeometry.IsCurve.finite_pushforward_pullback_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FinitePushforwardPullbackComparison.lean",
+  "statement": "theorem IsCurve.finite_pushforward_pullback_comparison {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k) {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f] (_hf : f ≫ g = P.toSpec) : let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙ ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom let FX := (sheafCompose P.C.smallEtaleTopology E).obj P.F let G := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F let FY := (sheafCompose Y.smallEtaleTopology E).obj G ∀ {X' Y' : Scheme.{u}} {b : X' ⟶ P.C} {f' : X' ⟶ Y'} {a : Y' ⟶ Y}, IsPullback b f' f a → ∀ q : ℕ, (Function.Bijective (Etale.cohomologyMap a ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).obj FY) q) ↔ Function.Bijective (Etale.cohomologyMap b ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).obj FX) q)) ∧ (Function.Surjective (Etale.cohomologyMap a ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).obj FY) q) ↔ Function.Surjective (Etale.cohomologyMap b ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).obj FX) q))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T044743-L-2034810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T044743-L-2034810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

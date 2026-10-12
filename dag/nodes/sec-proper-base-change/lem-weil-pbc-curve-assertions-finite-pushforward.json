@@ -33,155 +33,78 @@
  ],
  "proof": [
   {
-   "text": "*$f_*F$ is torsion.* Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point. By the finite stalk formula [lemma-weil-pbc-finite-stalk-formula], $(f_*F)_{\\bar y}\\cong\\prod_{\\bar x\\in|X_{\\bar y}|}F_{\\bar x}$, a finite product (= direct sum) of stalks of $F$ at geometric points of $X$. Each $F_{\\bar x}$ is a torsion group because $F$ is torsion ((1)$\\Rightarrow$(3) of [lem-weil-pbc-torsion-sheaf-characterizations]), and a finite direct sum of torsion groups is torsion. So every geometric stalk of $f_*F$ is torsion, and by (3)$\\Rightarrow$(1),(2) of [lem-weil-pbc-torsion-sheaf-characterizations] $f_*F$ is a torsion sheaf (every local section locally killed by a positive integer, the condition of [def-weil-pbc-curve-setting]). As $Y$ is separated of finite type over $k$ with $\\dim Y\\le1$, $(Y,f_*F)$ is a curve coefficient pair. This is part (a).",
+   "text": "Use the finite stalk isomorphism to inject a direct-image stalk into the finite product of source stalks. IsOfFinAddOrder.pi proves torsion of every product element. Apply the torsion characterization in both directions.",
    "uses": [
     "lemma-weil-pbc-finite-stalk-formula",
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "def-weil-pbc-curve-setting"
+    "lem-weil-pbc-torsion-sheaf-characterizations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma 0A5D (the claim that the statements make sense for f_*F, left implicit there), with Proposition 03QP's stalk description"
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
    }
   },
   {
-   "text": "*Torsion type passes from $f_*F$ to $F$.* Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point and $\\bar y=f\\circ\\bar x$. Then $(\\bar x,\\mathrm{id})$ is a geometric point of the fibre $X_{\\bar y}=X\\times_Y\\operatorname{Spec}\\Omega$, so $F_{\\bar x}$ is one of the factors in the finite stalk formula $(f_*F)_{\\bar y}\\cong\\prod_{\\bar x'\\in|X_{\\bar y}|}F_{\\bar x'}$ [lemma-weil-pbc-finite-stalk-formula], hence isomorphic to a direct summand of $(f_*F)_{\\bar y}$. If every element of every geometric stalk of $f_*F$ is killed by a power of $p$ (resp. has finite order prime to $p$), the same holds for every element of $F_{\\bar x}$. So, in the sense of [def-weil-pbc-primary-torsion]: if $f_*F$ is $p$-primary then $F$ is $p$-primary, and if $f_*F$ is prime to $\\operatorname{char}k$ then $F$ is prime to $\\operatorname{char}k$ (no condition in characteristic $0$).",
+   "text": "Extract descent of primary torsion, constructibility and invertible-order torsion for the converted module sheaves.",
    "uses": [
-    "lemma-weil-pbc-finite-stalk-formula",
-    "def-weil-pbc-primary-torsion"
+    "g1-finite-pushforward-coefficient-control"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 0A5D ('primary parts' left implicit), stalks as in Proposition 03QP"
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
    }
   },
   {
-   "text": "*Cohomology of $f_*F$.* By [lem-weil-pbc-finite-pushforward-cohomology] (for the finite $f$), the edge map $e^q_{f,F}=H^q(\\varepsilon_{f,F})\\circ f^*:H^q(Y_{\\Et},f_*F)\\to H^q(X_{\\Et},F)$ is an isomorphism for every $q\\ge0$. In particular $H^q(Y_{\\Et},f_*F)=0$ if and only if $H^q(X_{\\Et},F)=0$, and one is finite if and only if the other is.",
+   "text": "Use the proved coefficient cohomology comparison to transfer subsingleton and finite cohomology groups. Affineness of Y gives affineness of X by isAffine_of_isAffineHom f. Properness transfers along hf by the finite/proper composition instances. This gives C1 through C5.",
    "uses": [
-    "lem-weil-pbc-finite-pushforward-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 0A5D: 'H^q(X,F)=H^q(Y,f_*F) by the vanishing of R^qf_* for q>0 (Proposition 03QP) and the Leray spectral sequence (Cohomology on Sites, Lemma 0733)'"
-   }
-  },
-  {
-   "text": "*Vanishing: $\\mathcal C_1,\\mathcal C_2,\\mathcal C_3$.* ($\\mathcal C_1$, [def-weil-pbc-C1]) For $q>2$, $H^q(Y_{\\Et},f_*F)\\cong H^q(X_{\\Et},F)=0$ by step 3 and $\\mathcal C_1(X,F)$. ($\\mathcal C_2$, [def-weil-pbc-C2]) If $Y$ is affine, then $X$ is affine by (b) of [lem-weil-pbc-finite-morphism-permanence], so for $q>1$, $H^q(Y_{\\Et},f_*F)\\cong H^q(X_{\\Et},F)=0$ by step 3 and $\\mathcal C_2(X,F)$. ($\\mathcal C_3$, [def-weil-pbc-C3]) If $\\operatorname{char}k=p>0$ and $f_*F$ is $p$-primary, then $F$ is $p$-primary by step 2, so for $q>1$, $H^q(Y_{\\Et},f_*F)\\cong H^q(X_{\\Et},F)=0$ by step 3 and $\\mathcal C_3(X,F)$.",
-   "uses": [
-    "def-weil-pbc-C1",
-    "def-weil-pbc-C2",
-    "def-weil-pbc-C3",
+    "g1-finite-pushforward-cohomology-comparison",
     "lem-weil-pbc-finite-morphism-permanence"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements) and its proof"
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
    }
   },
   {
-   "text": "*Finiteness: $\\mathcal C_4,\\mathcal C_5$.* If $f_*F$ is constructible [def-weil-pbc-constructible-torsion], then $F$ is constructible by [lem-weil-pbc-finite-pushforward-constructible-descent]. ($\\mathcal C_4$, [def-weil-pbc-C4]) If $f_*F$ is constructible and prime to $\\operatorname{char}k$, then $F$ is constructible and, by step 2, prime to $\\operatorname{char}k$; by $\\mathcal C_4(X,F)$ every $H^q(X_{\\Et},F)$ is finite, hence so is $H^q(Y_{\\Et},f_*F)$ by step 3. ($\\mathcal C_5$, [def-weil-pbc-C5]) If $Y$ is proper over $k$ and $f_*F$ is constructible, then $X$ is proper over $k$ by (c) of [lem-weil-pbc-finite-morphism-permanence] (its structure morphism is that of $Y$ composed with $f$, as $f$ is a $k$-morphism) and $F$ is constructible; by $\\mathcal C_5(X,F)$ every $H^q(X_{\\Et},F)$ is finite, hence so is $H^q(Y_{\\Et},f_*F)$ by step 3.",
+   "text": "For a field-extension square on Y, pull back f and paste vertically with that square. Rewrite the bottom structure map using hf. C6 or C7 on X and the pullback comparison give C6 or C7 on Y, with coefficient descent for C6 and properness for C7.",
    "uses": [
-    "def-weil-pbc-constructible-torsion",
-    "lem-weil-pbc-finite-pushforward-constructible-descent",
-    "def-weil-pbc-C4",
-    "def-weil-pbc-C5",
+    "g1-finite-pushforward-pullback-comparison",
     "lem-weil-pbc-finite-morphism-permanence"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Lemma 0A5D ('those statements that apply'), with Lemma 095R read in the converse direction (see lem-weil-pbc-finite-pushforward-constructible-descent)"
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
    }
   },
   {
-   "text": "*Base field extension: $\\mathcal C_6,\\mathcal C_7$.* Let $k'/k$ be an algebraically closed extension. Put $Y'=Y_{k'}=Y\\times_kk'$ with projection $\\pi_Y:Y'\\to Y$ [def-pc-base-change], and form the cartesian square [def-weil-pbc-cartesian-square] $X'=X\\times_YY'$, $g'=\\pi_Y$-base change $g':X'\\to X$, $f':X'\\to Y'$, with $\\theta_\\square$ built from the composition isomorphisms as required in [lem-weil-pbc-edge-map-base-change]. By (a) of [lem-weil-pbc-finite-morphism-permanence], $f'$ is finite. By the pasting of fibre products, $X'=X\\times_Y(Y\\times_kk')\\cong X\\times_kk'=X_{k'}$; let $h:X_{k'}\\xrightarrow{\\sim}X'$ be this isomorphism, with $g'\\circ h=\\pi_X$, the projection of [def-weil-pbc-extension-pullback]. (i) By [lemma-weil-pbc-finite-exchange], $\\Ex^0_{\\square,F}:\\pi_Y^{-1}f_*F\\to f'_*g'^{-1}F$ [def-weil-pbc-underived-exchange] is an isomorphism, so $H^q(\\Ex^0_{\\square,F})$ is an isomorphism (functoriality of $H^q$, [lem-weil-pbc-cohomology-pullback-functorial]). (ii) By [lem-weil-pbc-finite-pushforward-cohomology] for $f$ and for $f'$, $e^q_{f,F}$ and $e^q_{f',g'^{-1}F}$ are isomorphisms. (iii) By [lem-weil-pbc-edge-map-base-change], $g'^*\\circ e^q_{f,F}=e^q_{f',g'^{-1}F}\\circ H^q(\\Ex^0_{\\square,F})\\circ\\pi_Y^*$; with (i), (ii) this shows: $\\pi_Y^*:H^q(Y_{\\Et},f_*F)\\to H^q(Y'_{\\Et},\\pi_Y^{-1}f_*F)$, which is $\\rho^q_{k'/k}(Y,f_*F)$ [def-weil-pbc-extension-pullback], is an isomorphism if and only if $g'^*:H^q(X_{\\Et},F)\\to H^q(X'_{\\Et},g'^{-1}F)$ is. (iv) By clause 4 (composition) of [lem-weil-pbc-cohomology-pullback-functorial], $\\pi_X^*=(g'\\circ h)^*=H^q(c_{g',h,F})\\circ h^*\\circ g'^*$, where $c_{g',h}$ is the isomorphism of [lem-weil-pbc-inverse-image-composition]; and $h^*$ is an isomorphism, since by the same clause applied to $h\\circ h^{-1}=\\mathrm{id}_{X'}$ and $h^{-1}\\circ h=\\mathrm{id}_{X_{k'}}$ (with the normalisation $H^q(e)\\circ\\mathrm{id}^*=\\mathrm{id}$) it has a two-sided inverse up to the isomorphisms $H^q(c)$, $H^q(e)$. Hence $\\rho^q_{k'/k}(X,F)=\\pi_X^*$ is an isomorphism if and only if $g'^*$ is, and by (iii) if and only if $\\rho^q_{k'/k}(Y,f_*F)$ is. ($\\mathcal C_6$, [def-weil-pbc-C6]) If $f_*F$ is prime to $\\operatorname{char}k$, then so is $F$ (step 2), $\\mathcal C_6(X,F)$ makes $\\rho^q_{k'/k}(X,F)$ an isomorphism for every $q$, hence $\\rho^q_{k'/k}(Y,f_*F)$ is one. ($\\mathcal C_7$, [def-weil-pbc-C7]) If $Y$ is proper over $k$, then so is $X$ ((c) of [lem-weil-pbc-finite-morphism-permanence]), and $\\mathcal C_7(X,F)$ gives the same conclusion.",
+   "text": "For an open a, pull back f. The other projection b is open. C8 on X gives surjectivity along b, and the same pullback comparison gives surjectivity along a. Finally apply assertions_iff on both sides and the eight individual implications.",
    "uses": [
-    "def-pc-base-change",
-    "def-weil-pbc-cartesian-square",
-    "lem-weil-pbc-edge-map-base-change",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "def-weil-pbc-extension-pullback",
-    "lemma-weil-pbc-finite-exchange",
-    "def-weil-pbc-underived-exchange",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-finite-pushforward-cohomology",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-C6",
-    "def-weil-pbc-C7"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 0A5D: 'use that formation of f_* commutes with arbitrary base change (Lemma 0959, lemma-finite-pushforward-commutes-with-base-change)'"
-   }
-  },
-  {
-   "text": "*Surjectivity: $\\mathcal C_8$* ([def-weil-pbc-C8]). Let $a:U\\hookrightarrow Y$ be an open immersion [def-weil-open-immersion]. Form the cartesian square $V=X\\times_YU$ with $b:V\\to X$ and $f_U:V\\to U$ [def-weil-pbc-cartesian-square]; $b$ is an open immersion (it identifies $V$ with the open subscheme $f^{-1}(a(U))$ of $X$) and $f_U$ is finite by (a) of [lem-weil-pbc-finite-morphism-permanence]. By [lemma-weil-pbc-finite-exchange] the exchange morphism $\\Ex^0:a^{-1}f_*F\\to f_{U*}b^{-1}F$ [def-weil-pbc-underived-exchange] is an isomorphism, and by [lem-weil-pbc-finite-pushforward-cohomology] so are $e^2_{f,F}$ and $e^2_{f_U,b^{-1}F}$; so $\\psi=e^2_{f_U,b^{-1}F}\\circ H^2(\\Ex^0)$ is an isomorphism, and [lem-weil-pbc-edge-map-base-change] gives $b^*\\circ e^2_{f,F}=\\psi\\circ a^*$. Let $y\\in H^2(U_{\\Et},a^{-1}f_*F)$. By $\\mathcal C_8(X,F)$ for the open immersion $b$, there is $x\\in H^2(X_{\\Et},F)$ with $b^*x=\\psi(y)$. Put $w=(e^2_{f,F})^{-1}(x)\\in H^2(Y_{\\Et},f_*F)$. Then $\\psi(a^*w)=b^*e^2_{f,F}(w)=b^*x=\\psi(y)$, and since $\\psi$ is injective, $a^*w=y$. So $a^*:H^2(Y_{\\Et},f_*F)\\to H^2(U_{\\Et},a^{-1}f_*F)$ is surjective. (The restriction map of $\\mathcal C_8$ is the pullback map along $a$, resp. $b$, as in [lem-weil-pbc-cohomology-pullback-functorial], clause 5.)",
-   "uses": [
-    "def-weil-pbc-C8",
-    "def-weil-open-immersion",
-    "def-weil-pbc-cartesian-square",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lemma-weil-pbc-finite-exchange",
-    "def-weil-pbc-underived-exchange",
-    "lem-weil-pbc-finite-pushforward-cohomology",
-    "lem-weil-pbc-edge-map-base-change",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, proof of Lemma 0A5D: 'For (8) use that formation of f_* commutes with arbitrary base change (Lemma 0959)'"
-   }
-  },
-  {
-   "text": "*Conclusion.* Steps 4 to 7 give, for each $j$, $\\mathcal C_j(Y,f_*F)$ from $\\mathcal C_j(X,F)$, which is part (b); with part (a) (step 1), if $\\mathcal C(X,F)$ holds then $\\mathcal C(Y,f_*F)$ holds [def-weil-pbc-eight-curve-assertions].",
-   "uses": [
+    "g1-finite-pushforward-pullback-comparison",
     "def-weil-pbc-eight-curve-assertions"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements) and its proof"
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
    }
   }
  ],
  "proof_deps": [
   "lemma-weil-pbc-finite-stalk-formula",
   "lem-weil-pbc-torsion-sheaf-characterizations",
-  "def-weil-pbc-curve-setting",
-  "def-weil-pbc-primary-torsion",
-  "lem-weil-pbc-finite-pushforward-cohomology",
-  "def-weil-pbc-C1",
-  "def-weil-pbc-C2",
-  "def-weil-pbc-C3",
+  "g1-finite-pushforward-coefficient-control",
+  "g1-finite-pushforward-cohomology-comparison",
   "lem-weil-pbc-finite-morphism-permanence",
-  "def-weil-pbc-constructible-torsion",
-  "lem-weil-pbc-finite-pushforward-constructible-descent",
-  "def-weil-pbc-C4",
-  "def-weil-pbc-C5",
-  "def-pc-base-change",
-  "def-weil-pbc-cartesian-square",
-  "lem-weil-pbc-edge-map-base-change",
-  "def-weil-pbc-extension-pullback",
-  "lemma-weil-pbc-finite-exchange",
-  "def-weil-pbc-underived-exchange",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-C6",
-  "def-weil-pbc-C7",
-  "def-weil-pbc-C8",
-  "def-weil-open-immersion",
+  "g1-finite-pushforward-pullback-comparison",
   "def-weil-pbc-eight-curve-assertions"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A5D (lemma-finite-pushforward-statements) and its proof; the parts Stacks leaves implicit (torsion and primary type of f_*F, the converse constructibility, affineness/properness of X, and the compatibility of the identification H^q(Y,f_*F)=H^q(X,F) with pullbacks) are written out"
+  "place": "Lemma 0A5D, with the finite stalk proof and explicit coefficient round-trip and Cartesian comparison in Lean; only coefficient-hypothesis descent remains as a new intermediate theorem"
  },
  "mathlib_searches": [
   {
@@ -279,5 +202,15 @@
   "group": "E1",
   "result": "pass",
   "note": "k alg closed IsAlgClosed; X,F = recorded abelian CurveCoefficientPair (IsCurve toSpec, torsion F); Y IsCurve g; f IsFinite with f≫g=toSpec (k-morphism); f_*F = recorded Etale.lowerStar Ab; (a) Scheme.IsTorsionAbelianSheaf; C1-C8 and bundle via recorded upstream predicates on Ab≃Mod(ULift ℤ) image, proper/base-change with toSpec vs g"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T044743-L-2034810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

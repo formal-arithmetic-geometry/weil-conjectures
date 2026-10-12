@@ -1,0 +1,140 @@
+{
+ "id": "g1-finite-pushforward-coefficient-control",
+ "kind": "statement",
+ "title": "FinitePushforwardCoefficientControl",
+ "statement": "Let $k$ be algebraically closed and $(X,F)$ a torsion curve coefficient pair [def-weil-pbc-curve-setting]. Let $Y$ be a curve over $k$ and $f:X\\to Y$ a finite $k$-morphism [def-weil-finite-integral-morphism]. View $F$ and $f_*F$ as sheaves of $\\operatorname{ULift}\\mathbb Z$-modules by the canonical equivalence with abelian groups. For every $p\\in\\mathbb N$, $p$-primary torsion of $f_*F$ implies that of $F$; constructibility of $f_*F$ implies that of $F$; and invertible-order torsion of $f_*F$ over $k$ implies that of $F$ [def-weil-pbc-primary-torsion], [def-weil-pbc-constructible-torsion].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-primary-torsion",
+  "def-weil-pbc-constructible-torsion"
+ ],
+ "proof": [
+  {
+   "text": "Project each finite stalk product onto the factor at a specified source point. Lift an element by zero in the remaining factors and retain its annihilating power or invertible integer. Extend separably closed points purely inseparably to algebraic closures without changing geometric stalks.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "def-weil-pbc-primary-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
+   }
+  },
+  {
+   "text": "The standard equivalence Ab with Mod(ULift Z) commutes with inverse image and retains finite local trivializations. Finitely generated torsion Z-modules are finite, so it identifies the module and abelian constructibility predicates on the same strata. Apply the existing abelian constructibility descent; torsion of the direct image follows from finite products and the stalk characterization.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-constructible-descent",
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lemma-weil-pbc-finite-stalk-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-stalk-formula",
+  "def-weil-pbc-primary-torsion",
+  "lem-weil-pbc-finite-pushforward-constructible-descent",
+  "lem-weil-pbc-torsion-sheaf-characterizations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A5D; coefficient-category transport made explicit in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of isomorphic sheaves is isomorphic",
+   "results": "Service unavailable: Internal Server Error. No search verdict was inferred.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite pushforward sheaf cohomology edge map is bijective",
+   "results": "Eight hits, including SheafOfModules.bijective_pushforwardSections and generic cohomology-class bijections; none is the finite etale edge comparison. The existing project edge-map theorem is used.",
+   "verdict": "no exact Mathlib match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkIsoPi|isTorsionAbelianSheaf_characterizations|isConstructible_of_finite_pushforward",
+   "results": "msearch grep returned zero hits. Direct rg in lean/ located the existing finite stalk formula, torsion characterization and abelian constructibility descent, whose signatures were read.",
+   "date": "2026-10-12",
+   "verdict": "existing project ingredients used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions",
+  "group": "G1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "Lemma 0A5D in steps 3, 4, 7; FinitePushforwardCoefficientControl",
+   "via": [
+    "lem-weil-pbc-curve-assertions-finite-pushforward"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardCoefficientControl",
+  "declaration": "AlgebraicGeometry.IsCurve.finite_pushforward_coefficient_control",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/FinitePushforwardCoefficientControl.lean",
+  "statement": "theorem IsCurve.finite_pushforward_coefficient_control {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k) {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g] (f : P.C ⟶ Y) [IsFinite f] (hf : f ≫ g = P.toSpec) : let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙ ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom let FX := (sheafCompose P.C.smallEtaleTopology E).obj P.F let G := (Etale.lowerStar AddCommGrpCat.{u + 1} f).obj P.F let FY := (sheafCompose Y.smallEtaleTopology E).obj G (∀ p : ℕ, Scheme.IsPrimaryTorsionSheaf (ULift.{u + 1} ℤ) FY p → Scheme.IsPrimaryTorsionSheaf (ULift.{u + 1} ℤ) FX p) ∧ (Scheme.IsConstructibleSheaf FY → Scheme.IsConstructibleSheaf FX) ∧ (Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) FY → Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) FX)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T044743-L-2034810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T044743-L-2034810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
