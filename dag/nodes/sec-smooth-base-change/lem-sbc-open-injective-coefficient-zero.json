@@ -1,0 +1,131 @@
+{
+ "id": "lem-sbc-open-injective-coefficient-zero",
+ "kind": "statement",
+ "title": "Open injective coefficients kill a restricted image",
+ "statement": "Let $p:X\\to S$, $g:T\\to S$ be scheme morphisms with $S$ affine, $\\Lambda$ a commutative ring, and $q\\ge1$ an integer. Assume universal base change for $p$ in every degree $q'<q$ [sbc-def-base-change-property]. Let $F$ be a sheaf of $\\Lambda$-modules on $T_{\\mathrm{et}}$, $x\\in X$, and $f:T'\\to T$ with $T'$ quasi-compact and quasi-separated. Use the canonical stalks $B(U)$, maps $b_U$ and restrictions $r_\\varphi$ of [def-sbc-canonical-base-change-stalk-transitions]. Let $V\\subset T'$ be a quasi-compact open, $j:V\\hookrightarrow T'$, and $\\zeta\\in B(T')$ with $r_j(\\zeta)\\in\\operatorname{im}(b_V)$. Put $F'=f^*F$, $J=\\operatorname{Injective.under}(j^*F')$, and let $a:j^*F'\\hookrightarrow J$ be the chosen injection. For $Y'=T'\\times_S X$ with projections $e',h'$, the map on the geometric stalk of $R^q h'_*e'^*F'$ induced by the coefficient map $F'\\to j_*J$ adjoint to $a$ sends $\\zeta$ to zero.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0F07, proof of condition (3): Open injective coefficients kill a restricted image"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-sbc-canonical-base-change-stalk-transitions",
+  "sbc-def-base-change-map",
+  "sbc-def-base-change-property"
+ ],
+ "proof": [
+  {
+   "text": "Naturality sends the assumed base-change image on V to zero after embedding the restricted coefficient in J. The base-change source for J vanishes in positive degree since J is injective. Equivalently, the coefficient map factors through the cokernel comparison of [sbc-lem-bc-injectivity] (3), which kills the base-change image.",
+   "uses": [
+    "sbc-lem-bc-injectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply universal lower-degree base change after the preliminary base change T to the quasi-compact separated open immersion j. In degree zero it identifies e inverse image of j_* J with j'_*(e_V inverse image of J); in degrees 1 through q-1 it makes the latter higher direct images zero, using injectivity of J.",
+   "uses": [
+    "sbc-def-base-change-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the relative Leray spectral sequence for h composed with j', these vanishings force all possible incoming differentials to its (q,0) term to vanish; outgoing differentials have negative second degree. Hence the edge map R^q h_* j'_* (e_V inverse image of J) to R^q(h composed with j')_* (e_V inverse image of J) is injective. This is Stacks 0734 as applied in 0F07. The geometric edge-map and coherence assertions are the remaining part to formalize.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Compatibility of the edge map with the coefficient unit, transition maps, and inverse-image composition identifies the edge image of the coefficient image of zeta with the zero found in the first step. The edge map is monic on geometric stalks, so the coefficient image of zeta is zero. The empty open and q=1 obey the same argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sbc-def-base-change-property",
+  "sbc-lem-bc-injectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0F07, closed–open argument, with its cited 03QP, 0959, and 0734 comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Leray edge map injectivity under vanishing of lower higher direct images open immersion injective coefficient sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If higher direct images of j' vanish in degrees 1 through q-1 the Leray map R^q h_* j'_* J to R^q (j' composed h)_* J is injective",
+   "results": "8 hits: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.isKInjective_of_injective_aux, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective, CategoryTheory.Presheaf.isLocallyInjective_of_injective; no exact geometric comparison",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|leray|edge.*[Ii]nject|[Mm]ono.*edge",
+   "results": "0 hits: ; no exact geometric comparison",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative Leray bottom edge is a monomorphism when intermediate higher direct images vanish in degrees less than q",
+   "results": "8 generic homology and Mayer-Vietoris hits; no relative etale Leray coefficient vanishing",
+   "date": "2026-10-12",
+   "verdict": "no exact match; independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (3), Open injective coefficients kill a restricted image",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeOpenInjectiveCoefficientZero.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChange_open_injective_coefficient_eq_zero",
+  "statement": "theorem baseChange_open_injective_coefficient_eq_zero [IsAffine S] (q : ℤ) (hq : 1 ≤ q) (hprev : ∀ q' < q, UniversalBaseChangeProperty Λ p q') (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X) {T' : Scheme.{u}} (f : T' ⟶ T) [CompactSpace T'] [QuasiSeparatedSpace T'] (ζ : baseChangeTargetStalk Λ p g q F x (Over.mk f)) (V : T'.Opens) (hV : IsCompact (V : Set T')) (hζ : (baseChangeTargetStalkMap Λ p g q F x (Over.homMk V.ι : Over.mk (V.ι ≫ f) ⟶ Over.mk f)).hom ζ ∈ Set.range (baseChangeStalkMap Λ p g q F x (Over.mk (V.ι ≫ f))).hom) : ((X.uliftPointSmallEtale x).sheafFiber.map ((baseChangeTargetFunctor Λ (pullback.fst (f ≫ g) p) (pullback.snd (f ≫ g) p) q).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) V.ι).unit.app (((f)^*[ModuleCat.{u + 1} Λ]).obj F) ≫ ((V.ι)_*[ModuleCat.{u + 1} Λ]).map (Injective.ι (((V.ι)^*[ModuleCat.{u + 1} Λ]).obj (((f)^*[ModuleCat.{u + 1} Λ]).obj F)))))).hom ζ = 0",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T095909-L-319265",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T095909-L-319265",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

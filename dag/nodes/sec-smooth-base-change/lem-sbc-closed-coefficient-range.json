@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-closed-coefficient-range",
+ "kind": "statement",
+ "title": "Closed pushforward compares base-change ranges",
+ "statement": "Let $p:X\\to S$, $g:T\\to S$ be scheme morphisms, $q\\in\\mathbb Z$, $\\Lambda$ a commutative ring, $F$ a sheaf of $\\Lambda$-modules on $T_{\\mathrm{et}}$, and $x\\in X$. Use the canonical source and target stalks $A(U),B(U)$, maps $b_U:A(U)\\to B(U)$, and restrictions $r_\\varphi$ of [def-sbc-canonical-base-change-stalk-transitions]. Let $f:T'\\to T$, let $i:Z\\to T'$ be a closed immersion, and let $\\zeta\\in B(T')$. Write $F'=f^*F$, $Y'=T'\\times_S X$, with projections $e':Y'\\to T'$ and $h':Y'\\to X$. If $r_i(\\zeta)\\in\\operatorname{im}(b_Z)$, then the image of $\\zeta$ under the target-functor coefficient map induced by the unit $F'\\to i_*i^*F'$ belongs to the stalkwise image of the degree-$q$ base-change map for the square $Y'$ and coefficient $i_*i^*F'$ [sbc-def-base-change-map].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0F07, proof of condition (3): Closed pushforward compares base-change ranges"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-sbc-canonical-base-change-stalk-transitions",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Direct image along a closed immersion is exact on etale module sheaves. This follows stalkwise: on the image, the stalk is the original stalk, and off the image it is zero. Consequently the higher direct image is just the ordinary closed pushforward placed in degree zero. The stalk comparison is the one of [lemma-openclosed-stalk-lowerstar].",
+   "uses": [
+    "lemma-openclosed-stalk-lowerstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Closed-immersion base change identifies the inverse image of the closed pushforward with the closed pushforward on Y. Stacks 0959 supplies this comparison, and 03QP supplies exactness. Composition of derived direct images identifies the two sides and the base-change map for coefficients i_* i^* F with those of the square over Z. The units and pasting compatibility identify the coefficient map with the target transition. These are the geometric comparison and coherence assertions to be formalized in this item.",
+   "uses": [
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source identification to a chosen preimage of the restricted class. Naturality of the base-change comparison and the inverse-image composition isomorphism identify its image with the coefficient-unit image of the original class. Thus it is a preimage as required. Empty Z and negative q are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lemma-openclosed-stalk-lowerstar",
+  "sbc-def-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0F07, closed–open argument, with its cited 03QP, 0959, and 0734 comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact closed immersion pushforward identifies the higher direct image base change range with restriction to the closed subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change image under coefficient unit F to i_* i^* F and target transition for closed immersion i",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instFormallyUnramified; no exact geometric comparison",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*mono|mono.*unit|closed.*pushforward",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/Sheafification.lean; no exact geometric comparison",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "closed immersion derived direct image composition and inverse image base change compare the adjunction unit with restriction",
+   "results": "8 scheme-module open-restriction hits; no etale derived closed coefficient range comparison",
+   "date": "2026-10-12",
+   "verdict": "no exact match; independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (3), Closed pushforward compares base-change ranges",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeClosedCoefficientRange.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChange_closed_coefficient_mem_range",
+  "statement": "theorem baseChange_closed_coefficient_mem_range (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X) {T' : Scheme.{u}} (f : T' ⟶ T) (ζ : baseChangeTargetStalk Λ p g q F x (Over.mk f)) {Z : Scheme.{u}} (i : Z ⟶ T') [IsClosedImmersion i] (hζ : (baseChangeTargetStalkMap Λ p g q F x (Over.homMk i : Over.mk (i ≫ f) ⟶ Over.mk f)).hom ζ ∈ Set.range (baseChangeStalkMap Λ p g q F x (Over.mk (i ≫ f))).hom) : ((X.uliftPointSmallEtale x).sheafFiber.map ((baseChangeTargetFunctor Λ (pullback.fst (f ≫ g) p) (pullback.snd (f ≫ g) p) q).map ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app (((f)^*[ModuleCat.{u + 1} Λ]).obj F)))).hom ζ ∈ Set.range ((X.uliftPointSmallEtale x).sheafFiber.map (baseChangeHomologyMap Λ (IsPullback.of_hasPullback (f ≫ g) p) q (((i)_*[ModuleCat.{u + 1} Λ]).obj (((i)^*[ModuleCat.{u + 1} Λ]).obj (((f)^*[ModuleCat.{u + 1} Λ]).obj F))))).hom",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T095909-L-319265",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T095909-L-319265",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -16,6 +16,12 @@ import Sheaf.AlgebraicGeometry.BaseChangeTargetLimitZeroDetection
 import Sheaf.AlgebraicGeometry.BaseChangeTargetStalkRestrictionImage
 import Sheaf.AlgebraicGeometry.BaseChangeStalkTransportComp
 
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Sheaf.AlgebraicGeometry.BaseChangeClosedOpenEmbedding
+import Sheaf.AlgebraicGeometry.BaseChangeClosedCoefficientRange
+import Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero
+
 /-!
 # Survival of a cokernel element under base change
 
@@ -88,6 +94,7 @@ theorem Etale.survivesBaseChange_id (q : ℤ) (sq : IsPullback e h g p)
     (hξ : ξ ∉ Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
       (Etale.baseChangeHomologyMap Λ sq q F)).hom) :
     Etale.SurvivesBaseChange Λ q sq F x ξ (𝟙 T) := by
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
   have hpb := IsPullback.of_hasPullback (𝟙 T ≫ g) p
   let a := sq.lift (pullback.fst (𝟙 T ≫ g) p ≫ 𝟙 T) (pullback.snd (𝟙 T ≫ g) p)
     (by rw [Category.assoc]; exact pullback.condition)
@@ -153,6 +160,7 @@ theorem Etale.survivesBaseChange_comp_iff_of_surjective (q : ℤ) (sq : IsPullba
     {T₁ T₂ : Scheme.{u}} (i : T₁ ⟶ T₂) [IsClosedImmersion i] (hi : Function.Surjective i.base)
     (f₂ : T₂ ⟶ T) :
     Etale.SurvivesBaseChange Λ q sq F x ξ (i ≫ f₂) ↔ Etale.SurvivesBaseChange Λ q sq F x ξ f₂ := by
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
   let e₂ := pullback.fst (f₂ ≫ g) p
   let h₂ := pullback.snd (f₂ ≫ g) p
   let e₁ := pullback.fst ((i ≫ f₂) ≫ g) p
@@ -265,6 +273,7 @@ theorem Etale.survivesBaseChange_of_isLimit [IsAffine S] (q : ℤ) (sq : IsPullb
     (c : Cone D) (hc : IsLimit ((Over.forget T).mapCone c))
     (hD : ∀ i, Etale.SurvivesBaseChange Λ q sq F x ξ (D.obj i).hom) :
     Etale.SurvivesBaseChange Λ q sq F x ξ c.pt.hom := by
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
   rintro ⟨η, hη⟩
   obtain ⟨i, ηi, hi⟩ :=
     Etale.baseChange_source_image_limit_descent Λ p g q F x D c hc η
@@ -290,6 +299,96 @@ theorem Etale.survivesBaseChange_of_isLimit [IsAffine S] (q : ℤ) (sq : IsPullb
   rw [map_sub, hcomp] at hj
   exact hηj.trans (sub_eq_zero.mp hj)
 
+private lemma range_reflect {C : Type*} [Category C] [Abelian C]
+    {Λ : Type u} [CommRing Λ] (W : C ⥤ ModuleCat.{v} Λ)
+    [W.Additive] [PreservesFiniteLimits W] [PreservesFiniteColimits W]
+    {A B A' B' : C} (f : A ⟶ B) (f' : A' ⟶ B') (a : A ⟶ A') (b : B ⟶ B')
+    (w : f ≫ b = a ≫ f') [Mono (cokernel.map f f' a b w)]
+    (ζ : W.obj B) (hζ : (W.map b).hom ζ ∈ Set.range (W.map f').hom) :
+    ζ ∈ Set.range (W.map f).hom := by
+  let c := cokernel.map f f' a b w
+  have hc : W.map (cokernel.π f) ≫ W.map c = W.map b ≫ W.map (cokernel.π f') := by
+    simp only [← W.map_comp, c, cokernel.map, cokernel.π_desc]
+  have hz : (W.map (cokernel.π f')).hom ((W.map b).hom ζ) = 0 := by
+    obtain ⟨η, hη⟩ := hζ
+    rw [← hη]
+    have hzero := congrArg (fun k ↦ (W.map k).hom η) (cokernel.condition f')
+    simpa only [Functor.map_comp, Functor.map_zero, ModuleCat.hom_comp,
+      LinearMap.comp_apply, ModuleCat.hom_zero, LinearMap.zero_apply] using hzero
+  have hcζ := congrArg (fun k ↦ k.hom ζ) hc
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at hcζ
+  have hinj := (ModuleCat.mono_iff_injective (W.map c)).1 inferInstance
+  have hπ : (W.map (cokernel.π f)).hom ζ = 0 := by
+    apply hinj
+    rw [hcζ, hz, map_zero]
+  exact (ShortComplex.moduleCat_exact_iff _).1
+    ((ShortComplex.exact_cokernel f).map W) ζ hπ
+
+private lemma biprod_range_of_fst_zero {C : Type*} [Category C] [Preadditive C]
+    [HasBinaryBiproducts C] {Λ : Type u} [CommRing Λ]
+    (S H : C ⥤ ModuleCat.{v} Λ) [H.Additive] (β : S ⟶ H)
+    (A B : C) (ζ : H.obj (A ⊞ B))
+    (hfst : (H.map biprod.fst).hom ζ = 0)
+    (hsnd : (H.map biprod.snd).hom ζ ∈ Set.range (β.app B).hom) :
+    ζ ∈ Set.range (β.app (A ⊞ B)).hom := by
+  obtain ⟨η, hη⟩ := hsnd
+  refine ⟨(S.map biprod.inr).hom η, ?_⟩
+  have hn := congrArg (fun k ↦ k.hom η) (β.naturality (biprod.inr : B ⟶ A ⊞ B))
+  simp only [ModuleCat.hom_comp, LinearMap.comp_apply] at hn
+  rw [hn, hη]
+  have ht := congrArg (fun k ↦ (H.map k).hom ζ) (biprod.total (X := A) (Y := B))
+  rw [H.map_id] at ht
+  simpa only [Functor.map_add, Functor.map_comp, Functor.map_id, ModuleCat.hom_add,
+    ModuleCat.hom_comp, ModuleCat.hom_id, LinearMap.add_apply, LinearMap.comp_apply,
+    LinearMap.id_apply, hfst, map_zero, zero_add] using ht
+
+private lemma coefficient_range_reflect {C D : Type*} [Category C] [Category D]
+    [Abelian C] [Abelian D] {R : Type*} [CommRing R]
+    (W : D ⥤ ModuleCat R) [W.Additive]
+    [PreservesFiniteLimits W] [PreservesFiniteColimits W]
+    (B H : C ⥤ D) [H.Additive] (τ : B ⟶ H)
+    {F G₁ G₂ : C} (α : F ⟶ G₁) (β : F ⟶ G₂)
+    [Mono (cokernel.map (τ.app F) (τ.app (G₁ ⊞ G₂))
+      (B.map (biprod.lift α β)) (H.map (biprod.lift α β))
+      (τ.naturality (biprod.lift α β)).symm)]
+    (ζ : W.obj (H.obj F)) (hz : (W.map (H.map α)).hom ζ = 0)
+    (hr : (W.map (H.map β)).hom ζ ∈ Set.range (W.map (τ.app G₂)).hom) :
+    ζ ∈ Set.range (W.map (τ.app F)).hom := by
+  let K := H ⋙ W
+  let σ : B ⋙ W ⟶ K := Functor.whiskerRight τ W
+  let δ := biprod.lift α β
+  have hfst : (K.map biprod.fst).hom ((K.map δ).hom ζ) = 0 := by
+    rw [← LinearMap.comp_apply, ← ModuleCat.hom_comp, ← K.map_comp]
+    simpa only [δ, biprod.lift_fst, K, Functor.comp_map, Functor.comp_obj] using hz
+  have hsnd : (K.map biprod.snd).hom ((K.map δ).hom ζ) ∈
+      Set.range (σ.app G₂).hom := by
+    rw [← LinearMap.comp_apply, ← ModuleCat.hom_comp, ← K.map_comp]
+    simpa only [δ, biprod.lift_snd, K, σ, Functor.comp_map,
+      Functor.whiskerRight_app, Functor.comp_obj] using hr
+  have hrG := biprod_range_of_fst_zero (B ⋙ W) K σ G₁ G₂
+    ((K.map δ).hom ζ) hfst hsnd
+  exact range_reflect W (τ.app F) (τ.app (G₁ ⊞ G₂)) (B.map δ) (H.map δ)
+    (τ.naturality δ).symm ζ hrG
+
+private lemma targetFunctor_additive {X T Y : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X)
+    (q : ℤ) : (Etale.baseChangeTargetFunctor Λ e h q).Additive := by
+  dsimp only [Etale.baseChangeTargetFunctor]
+  infer_instance
+
+private lemma survival_stalk_iff (q : ℤ) (sq : IsPullback e h g p)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
+    (ξ : ((X.uliftPointSmallEtale x).sheafFiber.obj
+      ((Etale.baseChangeTargetFunctor Λ e h q).obj F) : ModuleCat.{u + 1} Λ))
+    ⦃T' : Scheme.{u}⦄ (π : T' ⟶ T) :
+    Etale.SurvivesBaseChange Λ q sq F x ξ π ↔
+      (Etale.baseChangeStalkTransport Λ p g q F x sq (Over.mk π)).hom ξ ∉
+        Set.range (Etale.baseChangeStalkMap Λ p g q F x (Over.mk π)).hom := Iff.rfl
+
+private lemma homologyNatTrans_app (sq : IsPullback e h g p) (q : ℤ)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (Etale.baseChangeHomologyNatTrans Λ sq q).app F =
+      Etale.baseChangeHomologyMap Λ sq q F := rfl
+
 /-- Step (3) of blueprint `sbc-lem-bc-failure-field`: if `ξ` survives over a quasi-compact
 quasi-separated `T'` and `Z ⊆ T'` is closed with quasi-compact complement `V`, then `ξ`
 survives over `V` or over `Z`. Embed `π⁻¹ F` into `j_* J ⊕ i_* i⁻¹ π⁻¹ F` with `J` injective
@@ -306,8 +405,70 @@ theorem Etale.survivesBaseChange_or_of_isClosedImmersion [IsAffine S] (q : ℤ) 
     (V : T'.Opens) (hV : IsCompact (V : Set T')) (i : Z ⟶ T') [IsClosedImmersion i]
     (hi : Set.range i.base = (V : Set T')ᶜ) (hf : Etale.SurvivesBaseChange Λ q sq F x ξ f) :
     Etale.SurvivesBaseChange Λ q sq F x ξ (V.ι ≫ f) ∨
-      Etale.SurvivesBaseChange Λ q sq F x ξ (i ≫ f) :=
-  sorry
+      Etale.SurvivesBaseChange Λ q sq F x ξ (i ≫ f) := by
+  classical
+  by_contra hnone
+  obtain ⟨hopen, hclosed⟩ := not_or.mp hnone
+  rw [survival_stalk_iff] at hf
+  simp only [survival_stalk_iff] at hopen hclosed
+  let ζ := (Etale.baseChangeStalkTransport Λ p g q F x sq (Over.mk f)).hom ξ
+  have hrestrict {B : Scheme.{u}} (j : B ⟶ T') :
+      (Etale.baseChangeTargetStalkMap Λ p g q F x
+        (Over.homMk j : Over.mk (j ≫ f) ⟶ Over.mk f)).hom ζ =
+      (Etale.baseChangeStalkTransport Λ p g q F x sq (Over.mk (j ≫ f))).hom ξ := by
+    have ht := congrArg ModuleCat.Hom.hom
+      (Etale.baseChangeStalkTransport_comp Λ p g q F x sq
+        (Over.homMk j : Over.mk (j ≫ f) ⟶ Over.mk f))
+    exact LinearMap.congr_fun ht ξ
+  have hopen' : (Etale.baseChangeTargetStalkMap Λ p g q F x
+      (Over.homMk V.ι : Over.mk (V.ι ≫ f) ⟶ Over.mk f)).hom ζ ∈
+        Set.range (Etale.baseChangeStalkMap Λ p g q F x (Over.mk (V.ι ≫ f))).hom := by
+    rw [hrestrict]
+    exact Classical.not_not.mp hopen
+  have hclosed' : (Etale.baseChangeTargetStalkMap Λ p g q F x
+      (Over.homMk i : Over.mk (i ≫ f) ⟶ Over.mk f)).hom ζ ∈
+        Set.range (Etale.baseChangeStalkMap Λ p g q F x (Over.mk (i ≫ f))).hom := by
+    rw [hrestrict]
+    exact Classical.not_not.mp hclosed
+  let F' := (((f)^*[ModuleCat.{u + 1} Λ]).obj F)
+  let J := Injective.under (((V.ι)^*[ModuleCat.{u + 1} Λ]).obj F')
+  let G₁ := ((V.ι)_*[ModuleCat.{u + 1} Λ]).obj J
+  let G₂ := ((i)_*[ModuleCat.{u + 1} Λ]).obj (((i)^*[ModuleCat.{u + 1} Λ]).obj F')
+  let α : F' ⟶ G₁ :=
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) V.ι).unit.app F' ≫
+      ((V.ι)_*[ModuleCat.{u + 1} Λ]).map (Injective.ι _)
+  let β : F' ⟶ G₂ :=
+    (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app F'
+  let δ := biprod.lift α β
+  have : Mono δ := Etale.mono_closedOpen_coefficient_embedding Λ F' V i hi
+  let e' := pullback.fst (f ≫ g) p
+  let h' := pullback.snd (f ≫ g) p
+  have sq' : IsPullback e' h' (f ≫ g) p := IsPullback.of_hasPullback _ _
+  let W := (X.uliftPointSmallEtale x).sheafFiber (A := ModuleCat.{u + 1} Λ)
+  let B := Etale.baseChangeSourceFunctor Λ p (f ≫ g) q
+  let H := Etale.baseChangeTargetFunctor Λ e' h' q
+  let τ : B ⟶ H := Etale.baseChangeHomologyNatTrans Λ sq' q
+  have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
+  have : W.Additive := (X.uliftPointSmallEtale x).sheafFiber_additive
+  have : H.Additive := targetFunctor_additive e' h' q
+  have hz : (W.map (H.map α)).hom ζ = 0 :=
+    Etale.baseChange_open_injective_coefficient_eq_zero Λ p g q hq hprev F x f ζ V hV
+      hopen'
+  have hr : (W.map (H.map β)).hom ζ ∈ Set.range (W.map (τ.app G₂)).hom :=
+    Etale.baseChange_closed_coefficient_mem_range Λ p g q F x f ζ i hclosed'
+  have : QuasiCompact (f ≫ g) := inferInstance
+  have : QuasiSeparated (f ≫ g) := inferInstance
+  have hm : Mono (cokernel.map (τ.app F') (τ.app (G₁ ⊞ G₂))
+      (B.map δ) (H.map δ) (τ.naturality δ).symm) := by
+    change Mono (cokernel.map ((Etale.baseChangeHomologyNatTrans Λ sq' q).app F')
+      ((Etale.baseChangeHomologyNatTrans Λ sq' q).app (G₁ ⊞ G₂)) _ _ _)
+    simp only [homologyNatTrans_app]
+    exact Etale.mono_cokernelMap Λ q hq
+      ((hprev (q - 1) (sub_lt_self q zero_lt_one)).baseChangeProperty) sq' δ
+  let : Mono (cokernel.map (τ.app F') (τ.app (G₁ ⊞ G₂))
+      (B.map δ) (H.map δ) (τ.naturality δ).symm) := hm
+  have hrF := coefficient_range_reflect W B H τ α β ζ hz hr
+  exact hf hrF
 
 /-- Step (4) of blueprint `sbc-lem-bc-failure-field`: nothing survives over the empty scheme,
 since there the fibre `T' ×_S X` is empty and `R^q h'_* e'⁻¹ π⁻¹ F` vanishes. -/
