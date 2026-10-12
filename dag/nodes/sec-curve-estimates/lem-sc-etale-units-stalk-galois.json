@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-etale-units-stalk-galois",
+ "kind": "lemma",
+ "title": "The stalk of the etale units sheaf is additively equivalent to separable-closure units with the natural Galois action.",
+ "statement": "The stalk of the etale units sheaf is additively equivalent to separable-closure units with the natural Galois action. The precise hypotheses and action-on-germs formula are recorded by the following Lean signature: theorem exists_etale_units_stalk_galois_equiv (K : Type u) [Field K] :\n    let Ks := SeparableClosure K\n    let Ω := AlgebraicClosure K\n    let S := Spec (.of K)\n    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    ∃ c : (p.sheafFiber (A := AddCommGrpCat.{u + 1})).obj S.gmSheaf ≃+ Field.galoisUnitsTopRep K,\n      ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n        (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n          τ.toRingHom.comp (algebraMap Ks Ω))\n        (X : S.Etale) (x x' : p.fiber.obj X)\n        (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n        (z : S.gmSheaf.obj.obj (op X)),\n        c (p.toPresheafFiber X x' S.gmSheaf.obj z) =\n          (Field.galoisUnitsTopRep K).ρ g (c (p.toPresheafFiber X x S.gmSheaf.obj z))",
+ "stmt_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-weil-pbc-geometric-stalks",
+  "def-sc-gm-torsor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QU and Example 03QV (2)"
+ },
+ "proof": [
+  {
+   "text": "Use the separable closure inside the algebraic closure as geometric point.\nAny germ of a unit has a representative on an etale neighbourhood. Shrink to the connected\ncomponent at the given lift, which is the spectrum of a finite separable field extension.\nEvaluation of its functions at that lift gives a unit of the separable closure. Evaluation\ncommutes with restriction, so this defines a map from the stalk. Conversely, any nonzero\nseparable algebraic element belongs to a finite separable field extension, so it and its\ninverse define a unit on that neighbourhood. Two representatives with equal values agree\nafter passing to their common finite separable compositum. These facts prove bijectivity.\nMultiplication of units becomes addition and the canonical universe lift/down maps\npreserve it, giving the additive equivalence `c`.\nReplacing a lift by its composite with an automorphism of the algebraic closure changes\nits evaluated value by that automorphism. Since the evaluated value lies in the separable\nclosure and the automorphism restricts to `g`, this is exactly the action of `g` on units.\nThis proves the displayed formula on every germ. The argument applies to imperfect fields:\nonly separable elements occur in etale neighbourhoods, not all algebraic-closure units.",
+   "uses": [
+    "def-sc-galois-units-cohomology",
+    "def-weil-pbc-geometric-stalks",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03QU and Example 03QV (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous Galois cohomology of units is etale cohomology of the multiplicative group over a field",
+   "results": "groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Field.absoluteGaloisGroupAbelianization, ContinuousCohomology.continuousCohomologyZeroIso, IsDedekindDomain.selmerGroup.fromUnit, groupCohomology.norm_ofAlgebraAutOnUnits_eq, groupCohomology.Hilbert90.aux",
+   "date": "2026-10-12",
+   "verdict": "no direct comparison returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousCohomology",
+   "results": "continuousCohomology, ContinuousCohomology.map_id, ContinuousCohomology.map, ContinuousCohomology.π_map, ContinuousCohomology.map_comp, ContinuousCohomology.π_map_assoc, ContinuousCohomology.map_comp_assoc, ContinuousCohomology.zeroIso",
+   "date": "2026-10-12",
+   "verdict": "no direct comparison returned"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*gmSheaf|gmSheaf.*sheafFiber|continuousCohomology.*[Ee]quiv",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no direct comparison returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale sheaf cohomology field continuous Galois cohomology geometric stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCohomology.*sheaf|sheaf.*continuousCohomology",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no direct comparison returned"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsH2ForwardEmbedding",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-units-h2-forward-embedding",
+   "place": "intermediate comparison",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleUnitsStalkGalois",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleUnitsStalkGalois.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etale_units_stalk_galois_equiv",
+  "statement": "theorem exists_etale_units_stalk_galois_equiv (K : Type u) [Field K] :\n    let Ks := SeparableClosure K\n    let Ω := AlgebraicClosure K\n    let S := Spec (.of K)\n    let p := pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    ∃ c : (p.sheafFiber (A := AddCommGrpCat.{u + 1})).obj S.gmSheaf ≃+ Field.galoisUnitsTopRep K,\n      ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n        (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n          τ.toRingHom.comp (algebraMap Ks Ω))\n        (X : S.Etale) (x x' : p.fiber.obj X)\n        (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n        (z : S.gmSheaf.obj.obj (op X)),\n        c (p.toPresheafFiber X x' S.gmSheaf.obj z) =\n          (Field.galoisUnitsTopRep K).ρ g (c (p.toPresheafFiber X x S.gmSheaf.obj z))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T153300-L-2370590",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T153300-L-2370590",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

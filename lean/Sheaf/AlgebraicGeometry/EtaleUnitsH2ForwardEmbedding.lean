@@ -6,7 +6,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkGalois
+import Sheaf.AlgebraicGeometry.EtaleStalkContinuousCohomology
 
 /-! Directional degree-two comparison over a field. -/
 
@@ -52,6 +53,13 @@ inverse map on classes to this equality. Its composite with the forward map is t
 identity, so the original classes were equal. This proves only injectivity in this direction. -/
 theorem nonempty_embedding_galoisUnitsH2_cohomologicalBrauerGroup (K : Type u) [Field K] :
     Nonempty (Field.GaloisUnitsH2 K ↪ (Spec (.of K)).CohomologicalBrauerGroup) := by
-  sorry
+  obtain ⟨c, hc⟩ := exists_etale_units_stalk_galois_equiv K
+  have : DiscreteTopology (Field.galoisUnitsTopRep K) := by
+    change @DiscreteTopology _ ⊥
+    exact ⟨rfl⟩
+  obtain ⟨e⟩ := nonempty_equiv_etale_cohomology_continuous_stalk
+    K (SeparableClosure K) (AlgebraicClosure K)
+    (Spec (.of K)).gmSheaf (Field.galoisUnitsTopRep K) c hc 2
+  exact ⟨e.symm.toEmbedding⟩
 
 end AlgebraicGeometry.Scheme

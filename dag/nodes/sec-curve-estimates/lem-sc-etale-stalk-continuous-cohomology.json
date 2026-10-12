@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-etale-stalk-continuous-cohomology",
+ "kind": "lemma",
+ "title": "For an abelian etale sheaf on Spec K whose geometric stalk identifies equivariantly with a discrete Galois representation M, its sheaf cohomology in every degree is equivalent to continuous cohomology of M.",
+ "statement": "For an abelian etale sheaf on Spec K whose geometric stalk identifies equivariantly with a discrete Galois representation M, its sheaf cohomology in every degree is equivalent to continuous cohomology of M. The precise hypotheses and action-on-germs formula are recorded by the following Lean signature: theorem nonempty_equiv_etale_cohomology_continuous_stalk\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (M : TopRep.{u} ℤ (Gal(Ks/K))) [DiscreteTopology M]\n    (c : ((pointSmallEtale\n      (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber\n      (A := AddCommGrpCat.{u + 1})).obj F\n      ≃+ M)\n    (hc : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale)\n      (x x' : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)\n      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n      (z : F.obj.obj (op X)),\n      c ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber\n        X x' F.obj z) =\n      M.ρ g (c ((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x F.obj z)))\n    (n : ℕ) :\n    Nonempty (Sheaf.H.{u + 1} F n ≃ continuousCohomology n M)",
+ "stmt_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-cohomology",
+  "def-pd-separable-closure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ and 03QU, Section 0DVG"
+ },
+ "proof": [
+  {
+   "text": "The abelian geometric stalk equivalence of Tag 04JQ carries `F` to a discrete\nGalois module. Every Galois automorphism of the separable closure extends to the algebraic\nclosure, and germs jointly generate the stalk. Thus `hc` says precisely that `c` is an\nisomorphism of coefficient modules. Global sections are the invariant elements (03QU).\nThe equivalence is exact and preserves injectives, so transport an injective resolution\nof `F` to obtain the derived invariants of its stalk.\nFor a profinite group and discrete coefficients, continuous cochains form an exact\ncohomological delta-functor: a cochain has finite image on each compact finite power, so\none can choose finitely many lifts through any surjection. It is effaceable in positive\ndegrees by embedding a module into locally constant functions on the group, with action\nby right translation and embedding the orbit function. Compactness gives a common open\nstabilizer for each such function. Insertion of the first coordinate gives the contracting\nhomotopy, and its continuity follows from the finite clopen partitions. Hence this\nuniversal delta-functor agrees with derived invariants in every degree. This argument\nuses integer modules, with no finiteness hypothesis on the coefficient ring.\nFinally the compact-open exponential law identifies iterated continuous maps with maps on\nfinite powers. Evaluation at `(1, g1, g1*g2, ...)` and the inverse\n`c ↦ ((g0, ..., gn) ↦ g0 • c(g0⁻¹*g1, ..., g(n-1)⁻¹*gn))` identify homogeneous invariant\ncochains with inhomogeneous cochains and commute with differentials. The resulting\ncohomology equivalences, followed by coefficient transport along `c`, give the assertion;\nuniverse lifts are removed using their canonical additive equivariant lift/down maps.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04JQ and 03QU, Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous Galois cohomology of units is etale cohomology of the multiplicative group over a field",
+   "results": "groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, Field.absoluteGaloisGroupAbelianization, ContinuousCohomology.continuousCohomologyZeroIso, IsDedekindDomain.selmerGroup.fromUnit, groupCohomology.norm_ofAlgebraAutOnUnits_eq, groupCohomology.Hilbert90.aux",
+   "date": "2026-10-12",
+   "verdict": "no direct comparison returned"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousCohomology",
+   "results": "continuousCohomology, ContinuousCohomology.map_id, ContinuousCohomology.map, ContinuousCohomology.π_map, ContinuousCohomology.map_comp, ContinuousCohomology.π_map_assoc, ContinuousCohomology.map_comp_assoc, ContinuousCohomology.zeroIso",
+   "date": "2026-10-12",
+   "verdict": "no direct comparison returned"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber.*gmSheaf|gmSheaf.*sheafFiber|continuousCohomology.*[Ee]quiv",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no direct comparison returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale sheaf cohomology field continuous Galois cohomology geometric stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCohomology.*sheaf|sheaf.*continuousCohomology",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no direct comparison returned"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleUnitsH2ForwardEmbedding",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-units-h2-forward-embedding",
+   "place": "intermediate comparison",
+   "via": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleStalkContinuousCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStalkContinuousCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_equiv_etale_cohomology_continuous_stalk",
+  "statement": "theorem nonempty_equiv_etale_cohomology_continuous_stalk\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (M : TopRep.{u} ℤ (Gal(Ks/K))) [DiscreteTopology M]\n    (c : ((pointSmallEtale\n      (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber\n      (A := AddCommGrpCat.{u + 1})).obj F\n      ≃+ M)\n    (hc : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale)\n      (x x' : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)\n      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n      (z : F.obj.obj (op X)),\n      c ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber\n        X x' F.obj z) =\n      M.ρ g (c ((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x F.obj z)))\n    (n : ℕ) :\n    Nonempty (Sheaf.H.{u + 1} F n ≃ continuousCohomology n M)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T153300-L-2370590",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T153300-L-2370590",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
