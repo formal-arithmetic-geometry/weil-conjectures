@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-purely-inseparable-polynomial-cover",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Coefficient-root cover in step 1 of lem-weil-pbc-polynomial-purely-inseparable-closure-finite, serving the positive-characteristic normalization finiteness argument",
+   "via": [
+    "lem-weil-pbc-polynomial-purely-inseparable-closure-finite",
+    "lem-weil-pbc-polynomial-ring-n2",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coefficient-root polynomial cover of a finite purely inseparable extension",
+ "statement": "Let R be an integral domain [def-weil-pbc-normal-ring], let F be Frac(R[X]) [def-weil-polynomial-ring], and assume F has prime characteristic p [def-pc-field-characteristic]. Let L/F be a finite purely inseparable extension [def-weil-pbc-finite-purely-inseparable-extension]. There exists a finite field extension E/Frac(R) [def-weil-finitely-generated-module] with compatible R-algebra structure, a positive integer q, and a field embedding f:L → Frac(A[T]), where A is the integral closure of R in E [def-weil-pbc-integral-closure], such that on R[X] the map is substitution X ↦ T^q and the canonical coefficient map R → A. Equivalently, f(algebraMap R[X] L a) equals the image in Frac(A[T]) of eval₂(C ∘ algebraMap R A, T^q, a) for every a in R[X]. All fields are in the universe of R. No normality, Noetherian or Japanese hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.161.13 (Tag 032O), coefficient-root cover in the second assertion; read at https://stacks.math.columbia.edu/tag/032O"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-polynomial-ring",
+  "def-pc-field-characteristic",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Put K = Frac(R) and F = Frac(R[X]). Clearing coefficient denominators identifies F with K(x): every polynomial over K becomes a polynomial over R after multiplication by a common nonzero denominator. The characteristic of F restricts to K. Take a finite F-basis of L. For each basis element pure inseparability gives a p-power in F; take the largest exponent to obtain a common q = p^e. Write these powers as quotients of polynomials over K.",
+   "uses": [
+    "def-weil-rational-function-field",
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.161.13 (Tag 032O), coefficient-root cover in the second assertion; read at https://stacks.math.columbia.edu/tag/032O"
+   }
+  },
+  {
+   "text": "In an algebraic closure of L choose the unique q-th roots of the finitely many coefficients of the numerator and denominator polynomials. The K-algebra they generate is spanned by monomials with each root exponent below q, because each q-th power is in K. It is finite dimensional and a domain, hence is a field E. Adjoin a root t of t^q=x in the same algebraic closure. For each basis element y, taking coefficient roots in its numerator and denominator produces a quotient z in E(t) with z^q=y^q. Its denominator is nonzero since its q-th power is the original nonzero denominator. Frobenius injectivity gives z=y. Thus all of L embeds in E(t) over F. The field E has the induced compatible R- and K-algebra structures and is finite over K.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-ring-frobenius",
+    "lem-weil-pbc-finite-of-integral-generators",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.161.13 (Tag 032O), coefficient-root cover in the second assertion; read at https://stacks.math.columbia.edu/tag/032O"
+   }
+  },
+  {
+   "text": "The element t is transcendental over E: otherwise, since E/K is finite, t and therefore x=t^q would be algebraic over K. Let A be the integral closure of R in E. The finite-extension fraction-field lemma identifies E with Frac(A), so clearing coefficient denominators identifies Frac(A[T]) with E(T). Evaluation at the transcendental t identifies E(T) with E(t). Compose L into E(t) with the inverse of this evaluation map to obtain f. Its restriction to R[X] sends coefficients to their constant images in A[T] and X to T^q, yielding precisely the displayed ring-map equation. Algebraic closures, their subfields, polynomial rings and fraction fields all preserve the universe u. The trivial extension uses E=K and q=1.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "def-weil-pbc-integral-closure",
+    "def-weil-rational-function-field",
+    "def-weil-algebraic-element",
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.161.13 (Tag 032O), coefficient-root cover in the second assertion; read at https://stacks.math.columbia.edu/tag/032O"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rational-function-field",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-finitely-generated-module",
+  "def-weil-algebraic-closure",
+  "def-weil-ring-frobenius",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "def-weil-pbc-integral-closure",
+  "def-weil-algebraic-element",
+  "lem-weil-pbc-field-degree-multiplicativity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.161.13 (Tag 032O), coefficient-root cover in the second assertion; read at https://stacks.math.columbia.edu/tag/032O; coefficient-root and denominator details omitted by the source expanded by Y3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite purely inseparable extension of K(X) embeds in E(T) for a finite extension E of K with X mapped to a positive power of T",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite purely inseparable extension of rational function field embeds in rational function field over finite coefficient extension",
+   "results": "FunctionField/functionField_iff concern finiteness over RatFunc, not a coefficient-root cover; perfectClosure.isPurelyInseparable and IsPurelyInseparable.instNonemptyAlgHomOfPerfectField do not provide a finite coefficient extension or this substitution. No match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, integralClosure",
+   "results": "Zero hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg exists|pow_mem|lift|algHom Mathlib/FieldTheory/PurelyInseparable; rg coefficient.*root|032O dag/nodes lean/Sheaf lean/WeilConjectures; blueprint_refs.py search purely inseparable polynomial",
+   "results": "Mathlib has pure inseparability power criteria and exponent APIs, not this rational function coefficient cover. Existing Sheaf.FieldTheory.CoefficientRootExtension roots a single polynomial at exponent p; FiniteRootedExtension roots finite constants and a tuple at exponent p. Neither embeds an arbitrary finite purely inseparable extension with the displayed polynomial substitution. Blueprint search found no matching imported statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialPurelyInseparableIntegralClosureFinite",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PurelyInseparablePolynomialCover",
+  "file": "lean/Sheaf/RingTheory/PurelyInseparablePolynomialCover.lean",
+  "declaration": "exists_purelyInseparable_polynomial_cover",
+  "statement": "theorem exists_purelyInseparable_polynomial_cover\n    (R : Type u) [CommRing R] [IsDomain R]\n    (p : ℕ) [Fact p.Prime] [CharP (FractionRing (Polynomial R)) p]\n    (L : Type u) [Field L] [Algebra (FractionRing (Polynomial R)) L]\n    [Algebra (Polynomial R) L] [IsScalarTower (Polynomial R) (FractionRing (Polynomial R)) L]\n    [FiniteDimensional (FractionRing (Polynomial R)) L]\n    [IsPurelyInseparable (FractionRing (Polynomial R)) L] :\n    ∃ (E : Type u) (_ : Field E) (_ : Algebra (FractionRing R) E) (_ : Algebra R E)\n      (_ : IsScalarTower R (FractionRing R) E) (_ : FiniteDimensional (FractionRing R) E),\n    ∃ q : ℕ, 0 < q ∧\n      ∃ f : L →+* FractionRing (Polynomial (integralClosure R E)),\n        ∀ a : Polynomial R,\n          f (algebraMap (Polynomial R) L a) =\n            algebraMap (Polynomial (integralClosure R E))\n              (FractionRing (Polynomial (integralClosure R E)))\n              (Polynomial.eval₂RingHom\n                (Polynomial.C.comp (algebraMap R (integralClosure R E)))\n                (Polynomial.X ^ q) a)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T202301-L-711549",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T202301-L-711549",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
