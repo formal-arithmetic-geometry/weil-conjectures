@@ -5,13 +5,22 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-!
 # Morphisms out of K-projective complexes in the derived category
 
 A morphism `Q(K) ⟶ Q(L)` in the derived category out of a K-projective complex `K` is the
 image of a morphism of complexes (`CochainComplex.IsKProjective.exists_Q_map_eq`).
+
+A projective object placed in a single degree is K-projective
+(`CochainComplex.isKProjective_singleFunctor_obj`). Hence, for a projective object `P` and `K`
+in the derived category, there are no nonzero morphisms `P[0] ⟶ K[n]` if and only if there are
+no nonzero morphisms `P ⟶ H^n(K)`
+(`DerivedCategory.subsingleton_singleFunctor_hom_shift_iff_of_projective`).
 -/
 
 @[expose] public section
@@ -40,4 +49,47 @@ lemma IsKProjective.exists_Q_map_eq (K L : CochainComplex C ℤ) [K.IsKProjectiv
   rw [← cancel_epi ((DerivedCategory.quotientCompQhIso C).hom.app K), ← h, hg']
   simp
 
+omit [HasDerivedCategory.{w} C] in
+/-- A projective object placed in a single degree is a K-projective complex. -/
+instance isKProjective_singleFunctor_obj (P : C) [Projective P] (n : ℤ) :
+    ((singleFunctor C n).obj P).IsKProjective := by
+  have (m : ℤ) : Projective (((singleFunctor C n).obj P).X m) := by
+    by_cases hm : m = n
+    · subst hm
+      exact Projective.of_iso (HomologicalComplex.singleObjXSelf (.up ℤ) m P).symm inferInstance
+    · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hm).projective
+  exact isKProjective_of_projective _ n
+
 end CochainComplex
+
+namespace DerivedCategory
+
+variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
+
+/-- For a projective object `P` and `K` in the derived category, there are no nonzero
+morphisms `P[0] ⟶ K[n]` if and only if there are no nonzero morphisms `P ⟶ H^n(K)`: the
+single complex `P[0]` is K-projective, so the former are the cohomology classes of degree `n`
+from `P[0]` to a representative of `K`. -/
+lemma subsingleton_singleFunctor_hom_shift_iff_of_projective (P : C) [Projective P]
+    (K : DerivedCategory C) (n : ℤ) :
+    Subsingleton ((singleFunctor C 0).obj P ⟶ K⟦n⟧) ↔
+      Subsingleton (P ⟶ (homologyFunctor C n).obj K) := by
+  obtain ⟨L, ⟨e⟩⟩ : ∃ L : CochainComplex C ℤ, Nonempty (Q.obj L ≅ K) :=
+    ⟨_, ⟨Q.objObjPreimageIso K⟩⟩
+  let S := (CochainComplex.singleFunctor C 0).obj P
+  let e₁ : ((singleFunctor C 0).obj P ⟶ K⟦n⟧) ≃
+      ((HomotopyCategory.quotient C _).obj S ⟶ (HomotopyCategory.quotient C _).obj (L⟦n⟧)) :=
+    (Iso.homCongr ((singleFunctorIsoCompQ C 0).app P ≪≫ (quotientCompQhIso C).symm.app S)
+      ((shiftFunctor _ n).mapIso e.symm ≪≫ (Q.commShiftIso n).symm.app L ≪≫
+        (quotientCompQhIso C).symm.app _)).trans
+      (Equiv.ofBijective _ (CochainComplex.IsKProjective.Qh_map_bijective S _)).symm
+  rw [(e₁.trans
+      (CochainComplex.HomComplex.CohomologyClass.homAddEquiv (K := S) (L := L)
+        (n := n)).toEquiv.symm).subsingleton_congr,
+    (Iso.homCongr (Iso.refl P) ((homologyFunctor C n).mapIso e.symm ≪≫
+      (homologyFunctorFactors C n).app L)).subsingleton_congr]
+  exact (CochainComplex.subsingleton_cohomologyClass_singleFunctor_iff P L n).trans
+    (L.subsingleton_hom_homology_iff_of_projective (i := n - 1) (j := n) (k := n + 1)
+      (by simp) (by simp) P).symm
+
+end DerivedCategory

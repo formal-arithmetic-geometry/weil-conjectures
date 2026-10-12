@@ -28,6 +28,14 @@ Over an affine scheme, a covering sieve of the fpqc topology is refined by a fin
 family of flat morphisms from affine schemes
 (`AlgebraicGeometry.Scheme.exists_finite_affine_flat_of_mem_fpqcTopology`).
 
+# Single-morphism coverings over a base
+
+A flat, surjective, quasi-compact morphism over `S` generates an fpqc covering sieve of `Over S`
+(`AlgebraicGeometry.Scheme.singleton_mem_over_fpqcTopology`), and similarly for the fppf topology.
+A presheaf on `Over S` whose restriction along `Over.map g` is an fpqc sheaf satisfies the sheaf
+condition for such morphisms between objects over `S'`
+(`AlgebraicGeometry.Scheme.isSheafFor_singleton_of_isSheaf_overMap`).
+
 # The structure sheaf is a sheaf for subcanonical topologies
 
 The étale topology is coarser than the fppf topology, hence subcanonical. For every
@@ -168,6 +176,82 @@ lemma exists_finite_affine_flat_of_mem_fpqcTopology {V : Scheme.{u}} [IsAffine V
     (IsAffine (Spec _)), fun j ↦ 𝒱.map_prop j, fun j ↦ ?_, Cover.mem_propQCTopology 𝒱.cover⟩
   rw [← φ.w₀ j]
   exact S.downward_closed (hle _ _ (h𝒰 _)) _
+
+/-- A single flat, surjective, quasi-compact morphism `φ : Y₁ ⟶ Y` over `S` generates a covering
+sieve of the fpqc topology on `Over S`. -/
+lemma singleton_mem_over_fpqcTopology {S : Scheme.{u}} {Y Y₁ : Over S} (φ : Y₁ ⟶ Y)
+    [Flat φ.left] [Surjective φ.left] [QuasiCompact φ.left] :
+    Sieve.generate (.singleton φ) ∈ (fpqcTopology.over S) Y := by
+  rw [GrothendieckTopology.mem_over_iff, ← Presieve.ofArrows_pUnit.{0}]
+  change Sieve.overEquiv Y (Sieve.ofArrows _ _) ∈ _
+  rw [Sieve.overEquiv_ofArrows]
+  refine Precoverage.generate_mem_toGrothendieck ?_
+  rw [Presieve.ofArrows_pUnit]
+  exact φ.left.singleton_mem_fpqcPrecoverage
+
+/-- A single flat, surjective morphism `φ : Y₁ ⟶ Y` over `S`, locally of finite presentation,
+generates a covering sieve of the fppf topology on `Over S`. -/
+lemma singleton_mem_over_fppfTopology {S : Scheme.{u}} {Y Y₁ : Over S} (φ : Y₁ ⟶ Y)
+    [Flat φ.left] [Surjective φ.left] [LocallyOfFinitePresentation φ.left] :
+    Sieve.generate (.singleton φ) ∈ (fppfTopology.over S) Y := by
+  rw [GrothendieckTopology.mem_over_iff, ← Presieve.ofArrows_pUnit.{0}]
+  change Sieve.overEquiv Y (Sieve.ofArrows _ _) ∈ _
+  rw [Sieve.overEquiv_ofArrows]
+  refine Precoverage.generate_mem_toGrothendieck ?_
+  rw [Presieve.ofArrows_pUnit]
+  exact φ.left.singleton_mem_fppfPrecoverage
+
+/-- Let `g : S' ⟶ S` be a morphism of schemes and `G` a presheaf on `Over S` whose restriction
+along `Over.map g` is an fpqc sheaf. Then `G` satisfies the sheaf condition for every flat,
+surjective, quasi-compact morphism `φ : Y₁ ⟶ Y` over `S` whose target factors through `g` by some
+`a : Y ⟶ S'`:
+```
+  Y₁ --φ--> Y --a--> S'
+             \       |
+              \      g
+               \     v
+                ---> S
+```
+Indeed `φ` is the image under `Over.map g` of the covering `φ : (Y₁, φ ≫ a) ⟶ (Y, a)` of the fpqc
+site of `S'`. -/
+lemma isSheafFor_singleton_of_isSheaf_overMap {S S' : Scheme.{u}} (g : S' ⟶ S)
+    {G : (Over S)ᵒᵖ ⥤ Type*} (hG : Presheaf.IsSheaf (fpqcTopology.over S') ((Over.map g).op ⋙ G))
+    {Y Y₁ : Over S} (φ : Y₁ ⟶ Y) [Flat φ.left] [Surjective φ.left] [QuasiCompact φ.left]
+    (a : Y.left ⟶ S') (ha : a ≫ g = Y.hom) :
+    Presieve.IsSheafFor G (.singleton φ) := by
+  let φ' : Over.mk (φ.left ≫ a) ⟶ Over.mk a := Over.homMk φ.left
+  have : Flat φ'.left := ‹Flat φ.left›
+  have : Surjective φ'.left := ‹Surjective φ.left›
+  have : QuasiCompact φ'.left := ‹QuasiCompact φ.left›
+  have h' := ((isSheaf_iff_isSheaf_of_type _ _).1 hG).isSheafFor _
+    (singleton_mem_over_fpqcTopology φ')
+  rw [Presieve.isSheafFor_singleton] at h'
+  -- `Y` and `Y₁` are the images of `(Y, a)` and `(Y₁, φ ≫ a)` under `Over.map g`
+  let eY : (Over.map g).obj (Over.mk a) ≅ Y := Over.isoMk (Iso.refl _) (by simp [ha])
+  let eY₁ : (Over.map g).obj (Over.mk (φ.left ≫ a)) ≅ Y₁ :=
+    Over.isoMk (Iso.refl _) (by simp [ha, Over.w φ])
+  have hsq : (Over.map g).map φ' ≫ eY.hom = eY₁.hom ≫ φ := by
+    ext
+    simp [eY, eY₁, φ']
+  have hcomp {A B C : Over S} (f : A ⟶ B) (h : B ⟶ C) (z : G.obj (.op C)) :
+      G.map f.op (G.map h.op z) = G.map (f ≫ h).op z := by
+    simp
+  rw [Presieve.isSheafFor_singleton]
+  intro x hx
+  obtain ⟨y', hy', huniq⟩ := h' (G.map eY₁.hom.op x) fun {Z} p₁ p₂ hp ↦ by
+    simp only [Functor.comp_map, Functor.op_map, Quiver.Hom.unop_op]
+    rw [hcomp, hcomp]
+    refine hx _ _ ?_
+    rw [Category.assoc, Category.assoc, ← hsq, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
+      hp]
+  simp only [Functor.comp_map, Functor.op_map, Quiver.Hom.unop_op] at hy' huniq
+  have h₁ : φ ≫ eY.inv = eY₁.inv ≫ (Over.map g).map φ' := by
+    rw [Iso.comp_inv_eq, Category.assoc, hsq, Iso.inv_hom_id_assoc]
+  refine ⟨G.map eY.inv.op y', ?_, fun z hz ↦ ?_⟩
+  · beta_reduce
+    rw [hcomp, h₁, ← hcomp, hy', hcomp, Iso.inv_hom_id, op_id, Functor.map_id_apply]
+  · have := huniq (G.map eY.hom.op z) (by rw [hcomp, hsq, ← hcomp, hz])
+    rw [← this, hcomp, Iso.inv_hom_id, op_id, Functor.map_id_apply]
 
 /-- Étale coverings are fppf coverings. -/
 lemma etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
