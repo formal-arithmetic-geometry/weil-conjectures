@@ -24,35 +24,23 @@
  ],
  "proof": [
   {
-   "text": "View S as the polynomial ring k[x_1][x_0]. Write b=b_0+x_0b_1 with b_0,b_1 in k[x_1]. Comparing the constant coefficient in the relation a x_0+b x_1=0 gives b_0x_1=0 in k[x_1], hence b_0=0 because k[x_1] is a polynomial ring over the field k and therefore has no zero divisors. Thus b=x_0b_1.",
+   "text": "The relation gives b X_1 = -(a X_0), hence X_0 divides b X_1. Mathlib MvPolynomial.X_dvd_mul_iff implies X_0 divides b or X_0 divides X_1; the latter is impossible by MvPolynomial.X_dvd_X since 0 and 1 are distinct in Fin 2. Write b = X_0 d. These Mathlib lemmas directly implement the variable-divisibility conclusion of the original constant-coefficient argument.",
    "uses": [
     "lem-weil-pbc-polynomial-ring-domain"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof of the Koszul resolution on the regular sequence x_0,x_1: exactness at the middle term"
-   }
+   "elementary": true
   },
   {
-   "text": "Substituting b=x_0b_1 into the relation gives x_0(a+b_1x_1)=0 in S. The ring S=k[x_0,x_1] is an integral domain by [lem-weil-pbc-polynomial-ring-domain], so cancellation of the nonzero element x_0 yields a=-b_1x_1.",
+   "text": "Distributivity and commutativity rewrite the given relation as (a + d X_1) X_0 = 0. The polynomial ring is a domain by lem-weil-pbc-polynomial-ring-domain. Mathlib MvPolynomial.X_ne_zero and mul_eq_zero give a + d X_1 = 0, hence a = -d X_1.",
    "uses": [
     "lem-weil-pbc-polynomial-ring-domain"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof of the Koszul resolution on the regular sequence x_0,x_1: exactness at the middle term"
-   }
+   "elementary": true
   },
   {
-   "text": "Set c=-b_1. Then a=c x_1 and b=-c x_0, which is the required description of every syzygy.",
+   "text": "Choose c = -d. The preceding equality proves a = c X_1, and b = X_0 d gives b = -c X_0 by double negation and commutativity.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof of the Koszul resolution on the regular sequence x_0,x_1: exactness at the middle term"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -61,7 +49,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "proof of the Koszul resolution on the regular sequence x_0,x_1: exactness at the middle term"
+  "place": "proof of the Koszul resolution on the regular sequence x_0,x_1; the elementary two-variable syzygy calculation is expanded here; variable divisibility implemented using Mathlib.Algebra.MvPolynomial.Division by M1"
  },
  "mathlib_searches": [
   {
@@ -148,5 +136,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T085304-L-25373",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
