@@ -1,0 +1,144 @@
+{
+ "id": "new-affine-tilde-derived-sections-unit-isIso",
+ "kind": "statement",
+ "title": "Derived sections comparison on complexes of associated sheaves",
+ "statement": "Let A be a commutative ring, with chosen derived categories of A-modules and module sheaves on X=Spec(A) [def-pc-derived-category]. Let T be the associated-sheaf functor [lem-weil-pbc-affine-tilde-gamma-adjunction], equipped with its additive structure, and let S be global sections with scalars transported along the affine global-sections ring isomorphism [def-sc-ringed-space-module-cohomology]. For every K in the homotopy category of unbounded cochain complexes of A-modules, the canonical comparison Qh(S_h(T_h(K))) -> RS(Qh(T_h(K))) of the total right derived functor [def-pc-ringed-spaces-derived-direct-image] is an isomorphism.",
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0, proof of Lemma 36.3.5: the cohomology calculation for the module unit b; https://stacks.math.columbia.edu/tag/06Z0"
+ },
+ "proof": [
+  {
+   "text": "Let T be tilde and S affine sections with scalar transport. Prove the general categorical kernel lemma: for a fully faithful zero-morphism-preserving functor between categories with zero morphisms, a kernel in the target that is isomorphic to an image object lifts to a kernel fork in the source; full faithfulness reflects its limit property, proving preservation of this kernel. Specialize this proved private lemma to tilde. The kernel of tilde(f) is quasi-coherent, so its invertible ordinary counit supplies the required image-object isomorphism. Since T is a left adjoint preserving biproducts it is additive and exact.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every quasi-coherent sheaf M is S-acyclic. After the exact conservative forgetful functor V to abelian groups, affine vanishing gives zero positive-degree classical derived sections. Use rightDerivedFunctorCompMapDerivedCategoryIso V and the homologyRightDerivedFunctorObjSingleFunctorIso comparisons to identify these zero objects with V(R^q S(M)). Faithfulness of V reflects the vanishing of the identity map, giving R^q S(M)=0.",
+   "uses": [
+    "pqf-lem-affine-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the canonical unbounded adjunction a of exact T with RS. For the bounded-below derived adjunction, the ordinary unit is invertible and T sends injective modules to S-acyclic quasi-coherent sheaves by the previous step. Apply the proved source theorem isIso_derivedPlus_unit_app_of_rightAcyclic. Restrict a along the full inclusions of the bounded-below derived categories, using mapDerivedCategoryPlusCompatibility and rightDerivedFunctorPlusCompatibility. Uniqueness of right adjoints transports the invertible bounded-below unit to this restriction. The restriction unit formula then gives invertibility of a.unit on every bounded-below object.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary derived P and integer n, let pi:P -> truncGE n P. Exactness of T identifies H^i(T(P)) with tilde(H^i(P)), so T(P) has quasi-coherent cohomology. The affine sections truncation theorem makes H^n(RS of the truncation projection of T(P)) invertible. Exactness of T also supplies mapDerivedCategoryTruncGEIso, whose inverse composes with that projection to T(pi). Thus H^n(RS(T(pi))) is invertible. The object truncGE n P is bounded below, hence its unit is invertible by the previous step. H^n(pi) is invertible. Apply H^n to naturality of a.unit for pi and cancel these three isomorphisms to deduce invertibility of H^n(a.unit P). The derived homology criterion proves that a.unit P is invertible.",
+   "uses": [
+    "new-affine-derived-sections-truncation-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derivedη_fac_app to the ordinary homotopy adjunction T_h ⊣ S_h at K. It expresses a.unit(Qh K) followed by RS of mapDerivedCategoryFactorsh as Qh of the ordinary homotopy unit followed by S.rightDerivedFunctorUnit at T_h(K). The left side is invertible by the previous step and the exact-functor comparison. The ordinary homotopy unit is invertible by full faithfulness of T_h. Cancel it to obtain the asserted invertibility of the right-derived-functor comparison.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "new-affine-derived-sections-truncation-iso",
+  "pqf-lem-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0, module-unit calculation, made explicit through bounded-below acyclicity, truncation, and naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The right derived global sections comparison is an isomorphism on an unbounded complex of associated sheaves on an affine scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived global sections comparison is an isomorphism on an unbounded complex of associated sheaves on an affine scheme",
+   "results": "CategoryTheory.instIsIsoFunctorToRightDerivedZero; CategoryTheory.instIsIsoAppToRightDerivedZero; CategoryTheory.instIsIsoAppFromLeftDerivedZero; CategoryTheory.instIsIsoFunctorFromLeftDerivedZero; DerivedCategory.singleFunctorIsoCompQ; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_rightDerivedFunctorUnit",
+   "results": "No hits in Mathlib. Source-library search found only K-injective, exact-functor, and bounded-below acyclic comparison results.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedUnitHomologyIsIso",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "Affine identification in the projection-formula proof: Tag 06Z0, invertibility of the module unit, with the derived-sections comparison separated from the ordinary unit.",
+   "via": [
+    "new-affine-derived-unit-homology-isIso",
+    "lem-pc-affine-derived-unit-isomorphism",
+    "new-affine-derived-counit-homology-factorization",
+    "new-affine-qcoh-derived-adjunction-unit-counit",
+    "new-affine-qcoh-derived-equivalence-core",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTildeDerivedSectionsUnitIsIso.lean",
+  "declaration": "AlgebraicGeometry.affineTildeDerivedSectionsUnit_isIso",
+  "statement": "theorem affineTildeDerivedSectionsUnit_isIso (A : Type u) [CommRing A]\n    [HasDerivedCategory.{wA} (ModuleCat.{u} A)]\n    [HasDerivedCategory.{wY}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [(tilde.functor (.of A)).Additive]\n    (K : HomotopyCategory (ModuleCat.{u} A) (ComplexShape.up ℤ)) :\n    IsIso ((RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙\n      ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctorUnit.app\n        (((tilde.functor (.of A)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T160135-L-2563792",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T160135-L-2563792",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8437,3 +8437,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:01 L: merged deliver/F2/Sheaf.Topology.SkyscraperComplexAcyclic (stage 3; reviewer PASS; first push; landing 20261012T160134-L-2563497 (proof); batch 20261012T160131; modules 1; new nodes 0)
 - 16:01 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffineAlgebraModulePresentation (stage 3; reviewer PASS; after a return; landing 20261012T160135-L-2563594 (interface); batch 20261012T160131; modules 3; new nodes 2)
 - 16:01 L: merged deliver/G1/Sheaf.ConstructibleSheaf.TorsorEquivariantModulePointwiseFromDiagonal (stage 3; reviewer PASS; first push; landing 20261012T160135-L-2563695 (proof); batch 20261012T160131; modules 1; new nodes 0)
+- 16:01 L: merged deliver/G3/Sheaf.AlgebraicGeometry.AffineDerivedUnitHomologyIsIso (stage 3; reviewer PASS; after a return; landing 20261012T160135-L-2563792 (interface); batch 20261012T160131; modules 2; new nodes 1)

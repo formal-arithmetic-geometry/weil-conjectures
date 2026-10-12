@@ -12,24 +12,36 @@
  },
  "proof": [
   {
-   "text": "Use the natural cohomology comparisons for derived global sections and for the derived associated-sheaf functor. Naturality of the right-derived-functor unit identifies the induced map with the ordinary affine module unit followed by the map of a K-injective quasi-isomorphism; the ordinary unit is invertible by full faithfulness of tilde and the resolution map is invertible because it is a quasi-isomorphism. Transport these isomorphisms through hF and hG.",
+   "text": "Prove exactness of tilde by lifting the quasi-coherent kernel of tilde(f) through its invertible ordinary counit. Full faithfulness reflects the lifted limit fork. The left adjoint also preserves colimits and biproducts, hence is additive and exact.",
    "uses": [
-    "lem-pc-affine-derived-tilde-homology-comparison",
-    "lem-pc-affine-derived-sections-homology-comparison",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
     "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Construct the canonical unbounded adjunction of exact tilde with right-derived affine sections using mapDerivedCategoryRightDerivedAdjunction. On Qh(K), derivedη_fac_app factors its unit, followed by the exact-functor comparison, as Qh of the ordinary homotopy unit followed by the sections comparison. The ordinary homotopy unit is invertible by full faithfulness, and the sections comparison is invertible by new-affine-tilde-derived-sections-unit-isIso. Cancel the exact-functor comparison. Essential surjectivity of Qh and naturality give invertibility at every derived module.",
+   "uses": [
+    "new-affine-tilde-derived-sections-unit-isIso",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend hF through Q with Localization.liftNatIso. Restrict the canonical adjunction along identity and the fully faithful inclusion of D_QCoh using this descended comparison and hG. The restriction unit formula expresses its unit as the canonical unit followed by isomorphisms. Uniqueness of right adjoints expresses the unit of adj as that unit followed by a natural isomorphism. Finally homology preserves isomorphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-derived-tilde-homology-comparison",
-  "lem-pc-affine-derived-sections-homology-comparison",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "new-affine-tilde-derived-sections-unit-isIso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 06Z0, module-unit calculation"
+  "place": "Tag 06Z0, module-unit calculation; categorical transport via the exact unbounded derived adjunction and uniqueness of right adjoints"
  },
  "mathlib_searches": [
   {
@@ -99,9 +111,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T110309-L-617849",
+  "landing": "20261012T160135-L-2563792",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
