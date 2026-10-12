@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
 import Sheaf.Paper.DirectImageSplitCoverProduct
 import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.FiniteEtaleModuleTraceData
 
 /-!
 # Coefficient-linear finite étale trace with prescribed degree
@@ -61,6 +62,8 @@ theorem exists_finiteEtaleModuleTrace_degree
       Nat.card (f.GeometricFiber s) = d) :
     ∃ t : (f)_*[ModuleCat.{u + 1} R].obj ((f)^*[ModuleCat.{u + 1} R].obj G) ⟶ G,
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) f).unit.app G ≫ t =
-        (d : R) • 𝟙 G := by sorry
+        (d : R) • 𝟙 G := by
+  obtain ⟨h, _⟩ := finiteEtaleModuleTraceData R f G d hdeg
+  exact h
 
 end AlgebraicGeometry.Etale
