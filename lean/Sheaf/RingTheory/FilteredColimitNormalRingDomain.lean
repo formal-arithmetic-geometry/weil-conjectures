@@ -6,6 +6,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.RingTheory.FilteredColimitIsDomain
 
 @[expose] public section
 
@@ -31,6 +32,14 @@ theorem filtered_colimit_localization_isDomain
       IsDomain (Localization.AtPrime p))
     (p : Ideal ((colimit F : CommRingCat.{u}) : Type u)) [p.IsPrime] :
     IsDomain (Localization.AtPrime p) := by
-  sorry
+  rcases AlgebraicGeometry.filteredColimitLocalizationAtPrime F p with
+    ⟨hpᵢ, _, D, hD, _, c, hc, _, hcol⟩
+  have hDc : ∀ i : I, IsDomain (D.obj i) := by
+    intro i
+    rw [hD i]
+    exact hF i _
+  obtain ⟨hcol⟩ := hcol
+  exact isDomain_of_filtered_colimit_cocone D c hcol hDc hc
+
 
 end CommRingCat

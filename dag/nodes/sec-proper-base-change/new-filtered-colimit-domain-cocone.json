@@ -1,0 +1,92 @@
+{
+ "id": "new-filtered-colimit-domain-cocone",
+ "blueprint": {
+  "is": null,
+  "from": "stage-3 split"
+ },
+ "kind": "statement",
+ "title": "Domain property transported from a filtered colimit cocone",
+ "statement": "For a filtered diagram of commutative rings, if every stage is a domain and a cocone is colimiting, then its vertex is a domain after identifying it with a specified ring.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Stacks Project, Algebra, Tag 037D, common-stage lifting argument"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Represent two elements at stages, lift both to a common stage, use the domain property there, and detect any zero relation at a later stage by filteredness; transport the resulting IsDomain instance along the vertex equality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 037D"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of domains is a domain",
+   "results": "no direct match found",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDomain colimit IsFiltered",
+   "results": "no direct match found",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep IsDomain filtered colimit Mathlib",
+   "results": "no direct match found",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FilteredColimitNormalRingDomain",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FilteredColimitIsDomain",
+  "file": "lean/Sheaf/RingTheory/FilteredColimitIsDomain.lean",
+  "declaration": "CommRingCat.isDomain_of_filtered_colimit_cocone",
+  "statement": "theorem isDomain_of_filtered_colimit_cocone {I : Type u} [SmallCategory I] [IsFiltered I] (D : I ⥤ CommRingCat.{u}) (c : Cocone D) (hc : IsColimit c) (hD : ∀ i : I, IsDomain (D.obj i)) {R : CommRingCat.{u}} (e : c.pt = R) : IsDomain R",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053926-L-2632973",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053926-L-2632973",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
