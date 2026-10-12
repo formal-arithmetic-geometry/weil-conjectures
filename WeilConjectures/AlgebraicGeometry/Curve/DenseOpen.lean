@@ -95,10 +95,10 @@ theorem Dense.exists_isIrreducible_pieces [NoetherianSpace X] {U : Set X} (hU : 
 
 variable [QuasiSober X] [T0Space X]
 
+omit [QuasiSober X] in
 /-- In a noetherian `T₀` space of dimension at most one, every point outside a dense open
 subset `U` is closed: a proper specialization of it, the point itself and the generic point of
 an irreducible component through it (which meets `U`) would form a chain of length two. -/
-omit [QuasiSober X] in
 theorem IsOpen.isClosed_singleton_of_dense [NoetherianSpace X] (h : topologicalKrullDim X ≤ 1)
     {U : Set X} (hU : IsOpen U) (hd : Dense U) {x : X} (hx : x ∉ U) : IsClosed {x} := by
   by_contra hcl
