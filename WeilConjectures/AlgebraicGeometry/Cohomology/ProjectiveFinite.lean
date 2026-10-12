@@ -28,6 +28,9 @@ affine.
 
 ## Main statements
 
+- `AlgebraicGeometry.ProjectiveSpace.subsingleton_H_twist_of_pos_of_lt` and
+  `AlgebraicGeometry.ProjectiveSpace.subsingleton_H_zero_twist_of_neg`: vanishing of
+  `H^q(ℙⁿ_A, 𝒪(m))` for `0 < q < n`, and of `H^0(ℙⁿ_A, 𝒪(m))` for `m < 0`, over any ring `A`.
 - `AlgebraicGeometry.ProjectiveSpace.finite_H`: the cohomology of a coherent sheaf on `ℙⁿ_A` is
   finite over `A`.
 - `AlgebraicGeometry.Scheme.Modules.finite_H_of_isClosedImmersion`: the same for a closed
@@ -268,6 +271,31 @@ lemma subsingleton_H_twist_of_pos_of_commRing (A : Type u) [CommRing A] [Finite 
     have := subsingleton_monomialCechComplex_homology_top (A := A) hd hq.ne' (m := e) (by omega)
     exact e'.toEquiv.subsingleton
   · exact subsingleton_H_of_lt n A (by rwa [Nat.card_eq_fintype_card]) _ hgt
+
+/-- `H^q(ℙᵈ_A, 𝒪(m)) = 0` for `0 < q < d` and every `m`, over any commutative ring `A`, where
+`ℙᵈ_A = ℙ(n; Spec A)` with `n` of cardinality `d + 1`: the middle homology of the monomial Čech
+complex vanishes.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+lemma subsingleton_H_twist_of_pos_of_lt (A : Type u) [CommRing A] [Fintype n] {d : ℕ}
+    (hn : Fintype.card n = d + 1) (m : ℤ) {q : ℕ} (hq : 0 < q) (hqd : q < d) :
+    Subsingleton ((twist n (Spec (.of A)) m).H q) := by
+  obtain ⟨e⟩ := nonempty_H_twist_linearEquiv_monomialCechComplex_homology (n := n) A m q
+  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hq.ne'
+  have := ModuleCat.isZero_iff_subsingleton.1
+    (exactAt_monomialCechComplex n A m hn q hqd).isZero_homology
+  exact e.toEquiv.subsingleton
+
+/-- `H^0(ℙⁿ_A, 𝒪(m)) = 0` for `m < 0` and `n ≥ 1`, over any commutative ring `A`: a global
+section of `𝒪(m)` is a combination of monomials of degree `m` with nonnegative exponents.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+lemma subsingleton_H_zero_twist_of_neg (A : Type u) [CommRing A] [Finite n] [Nontrivial n]
+    {m : ℤ} (hm : m < 0) : Subsingleton ((twist n (Spec (.of A)) m).H 0) := by
+  have := Fintype.ofFinite n
+  obtain ⟨e⟩ := nonempty_H_twist_linearEquiv_monomialCechComplex_homology (n := n) A m 0
+  have := subsingleton_monomialCechComplex_homology_zero n A hm
+  exact e.toEquiv.subsingleton
 
 end ProjectiveSpace
 

@@ -613,15 +613,6 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
     rcases hdimU c with h | h
     · exact (hpos h).le
     · exact (Scheme.Modules.degree_eq_zero_of_topologicalKrullDim_le_zero K h _).ge
-  -- the cohomology of `L` and `𝒪_X` vanishes in large degrees
-  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) L := by
-    have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible L
-    have := SheafOfModules.IsInvertible.isFiniteLocallyFree L
-    have := SheafOfModules.IsFiniteLocallyFree.isFinitePresentation L
-    infer_instance
-  obtain ⟨D₁, hD₁⟩ := Scheme.Modules.exists_forall_subsingleton_H_of_isProper (k := K) L
-  obtain ⟨D₂, hD₂⟩ :=
-    Scheme.Modules.exists_forall_subsingleton_H_of_isProper (k := K) (𝟙_ X.Modules)
   rw [degree_eq_degree_of_topologicalKrullDim_eq_one f hdim,
     Scheme.Modules.degree_eq_sum_of_pairwise_disjoint_of_isQuasicoherent K U hU hcover L]
   refine Finset.sum_pos' (fun c _ ↦ (hdeg c).1) ?_
