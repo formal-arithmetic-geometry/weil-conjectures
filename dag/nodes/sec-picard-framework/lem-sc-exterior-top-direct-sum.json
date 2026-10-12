@@ -25,7 +25,19 @@
  ],
  "proof": [
   {
-   "text": "Choose the displayed bases of $M$ and $N$. By the free-module exterior-power basis statement, the wedges indexed by $r$-element and $s$-element increasing subsets are bases of $\\bigwedge^r M$ and $\\bigwedge^s N$, while the concatenated basis of $M\\oplus N$ gives the corresponding wedge basis of $\\bigwedge^{r+s}(M\\oplus N)$. By the tensor-product product-basis statement, the tensors of the two first bases form a basis of $\\bigwedge^rM\\otimes_R\\bigwedge^sN$.",
+   "text": "Construct the canonical linear map from the tensor product to the (r+s)-th exterior power: apply exterior-power maps of the two inclusions into M × N and multiply in the exterior algebra. The graded multiplication places the product in degree r+s. TensorProduct.lift supplies the linear map. ExteriorAlgebra.ιMulti_mul_ιMulti proves the concatenated-wedge formula for every pair of tuples, without choosing bases.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: top exterior powers"
+   }
+  },
+  {
+   "text": "For a basis indexed by Fin n, reindex its n-th exterior-power basis by Unit: the sole subset of size n is the full set. Its increasing enumeration is the identity, since a strictly increasing endomap of a finite linear order is the identity. Thus the single basis vector is the wedge of the original basis. Reindex the product basis of M × N along finSumFinEquiv to obtain the concatenated basis. Tensor the two one-element exterior-power bases. By the wedge formula, the constructed linear map agrees on this tensor basis with the linear equivalence to the single concatenated wedge basis. It is therefore bijective; its inverse is the required isomorphism.",
    "uses": [
     "lem-weil-pbc-exterior-power-free-basis",
     "lem-sc-tensor-product-free-basis",
@@ -40,21 +52,7 @@
    }
   },
   {
-   "text": "The alternating map in the statement sends each tensor of the source basis to the distinct concatenated wedge in the target basis, with coefficient $+1$. It therefore sends a basis bijectively to a basis and extends uniquely to an $R$-module isomorphism. The construction is the alternating multilinear map induced by the inclusions $M\\to M\\oplus N$ and $N\\to M\\oplus N$, so it is the stated canonical map.",
-   "uses": [
-    "lem-weil-pbc-exterior-power-free-basis",
-    "lem-sc-tensor-product-free-basis",
-    "def-weil-pbc-exterior-algebra",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-    "place": "Proof of (*), determinant paragraph: top exterior powers"
-   }
-  },
-  {
-   "text": "If the bases are changed, the same map is still characterized by sending $m_1\\wedge\\cdots\\wedge m_r$ tensored with $n_1\\wedge\\cdots\\wedge n_s$ to the wedge of their images under the two canonical inclusions: writing each $m_k$ and $n_l$ in the chosen bases and expanding by multilinearity, discarding terms with a repeated factor by alternation and reordering the others with $v\\wedge w=-w\\wedge v$, gives $m_1\\wedge\\cdots\\wedge m_r=c\\,e_1\\wedge\\cdots\\wedge e_r$ in $\\bigwedge^rM$ and $(m_1,0)\\wedge\\cdots\\wedge(m_r,0)=c\\,(e_1,0)\\wedge\\cdots\\wedge(e_r,0)$ in $\\bigwedge^r(M\\oplus N)$ with the same scalar $c\\in R$ (the two expansions are term by term identical), and likewise a common scalar $d$ for the $n_l$; so the basis-defined map sends the given tensor to $cd$ times the target basis vector, which is the stated wedge. Hence the basis calculation describes one basis-independent map; applying module isomorphisms to $M$ and $N$ commutes with these inclusions, tensor products, and exterior powers, proving naturality.",
+   "text": "TensorProduct.ext and two applications of exteriorPower.linearMap_ext show that linear maps out of the tensor product are determined by pure tensors of pure wedges. Apply this to the inverse of any isomorphism with the characterization to prove uniqueness. For naturality, compare exteriorPower.map composed with the first inverse with the second inverse composed with TensorProduct.map. On pure tensors of wedges their equality follows from both characterizations, map_apply_ιMulti, map_tmul, and the fact that the product map commutes with the two inclusions. Extensionality proves equality everywhere. Evaluate at e x and use injectivity of the second inverse to obtain the stated orientation.",
    "uses": [
     "def-weil-pbc-exterior-algebra",
     "def-weil-pbc-module-tensor-product"
@@ -74,7 +72,7 @@
   "def-weil-pbc-module-tensor-product"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "M1 stage 3",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph: top exterior powers"
  },
@@ -160,5 +158,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T194123-L-459040",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
