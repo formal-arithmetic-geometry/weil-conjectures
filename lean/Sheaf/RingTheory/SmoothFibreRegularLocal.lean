@@ -41,6 +41,10 @@ theorem smooth_fibre_regular_local
       Smooth p.asIdeal.ResidueField (p.asIdeal.Fiber S) ∧
         ∀ Q : PrimeSpectrum (p.asIdeal.Fiber S),
           IsRegularLocalRing (Localization.AtPrime Q.asIdeal) := by
-  sorry
+  intro p
+  have hs : Smooth p.asIdeal.ResidueField (p.asIdeal.Fiber S) := inferInstance
+  refine ⟨hs, ?_⟩
+  intro Q
+  exact smooth_over_field_regular_local p.asIdeal.ResidueField (p.asIdeal.Fiber S) Q.asIdeal
 
 end Algebra
