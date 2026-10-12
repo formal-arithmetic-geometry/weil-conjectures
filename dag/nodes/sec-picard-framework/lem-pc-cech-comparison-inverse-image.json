@@ -15,44 +15,28 @@
  },
  "proof": [
   {
-   "text": "Use abelian sheaves, equivalently modules over the constant integer ring sheaf. For a covering and an injective resolution F -> I, form the ordered Cech double complex C^p(U,I^q). The section augmentation alpha is a quasi-isomorphism: each injective row is augmented exact, and the first-quadrant total has finite diagonals. The coefficient augmentation beta defines c^q = H(alpha)^(-1) H(beta) followed by the resolution/Ext identification. Comparison lifts are unique up to homotopy; their alpha and beta squares show independence and naturality. Degree-zero gluing supplies exactly the displayed zero law.",
+   "text": "Choose a normalized Cech comparison system for U and independently one for V using exists_cechComparisonSystem. This step involves no coefficient morphism or inverse-image compatibility.",
    "uses": [
-    "lem-sc-injective-cech-augmentation-quasi-iso",
-    "def-pc-cech-comparison-system"
+    "lem-pc-cech-comparison-system-existence"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For a short exact coefficient sequence surjective on sections over tuple intersections, form its short exact Cech sequence. Choose a horseshoe sequence of resolutions and compare the coefficient and section augmentations. The boundary of a lifted cochain in that diagram is the Cech connecting map, while the resolution boundary identifies with the Yoneda Ext connecting map. This proves c^(q+1) Cech-delta = Ext-delta c^q and gives the required comparison systems on all degrees and all abelian sheaves.",
+   "text": "Apply cechComparison_inverseImage_compatibility to those two systems and the given morphism and coordinate matching condition. Package the resulting equality with the two chosen witnesses.",
    "uses": [
-    "def-pc-cech-comparison-system"
+    "lem-pc-cech-comparison-inverse-image-compatibility"
    ],
-   "elementary": false
-  },
-  {
-   "text": "For phi:M -> g_*N choose injective resolutions on X and Y and an injective resolution of the pushed-forward target resolution, as in Stacks 01FD. Tuplewise restriction gives a double-complex map from the Cech complex of the pushed-forward target resolution on U to that of the target resolution on V. Coefficient lifts make the augmentation pentagon commute; restriction makes the global-section squares commute. Invert the section-augmentation quasi-isomorphisms on cohomology. Matching coordinates identify the images of z and z prime in the coefficient augmentation, so the outer diagram gives equality of their comparison classes.",
-   "uses": [
-    "lem-sc-injective-cech-augmentation-quasi-iso"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Identify the cohomology map in the outer diagram with the map in the statement. The section action in degree zero is the adjoint abelian coefficient map. Exact inverse image transports Yoneda extensions and their connecting maps; precomposing with the inverse constant-integer-sheaf isomorphism fixes the source of Ext, and postcomposing with coeff g phi fixes its target. This is the same derived section map: both are morphisms of delta-functors agreeing in degree zero, and the source sheaf cohomology is effaceable by embeddings into injectives. Thus uniqueness gives the asserted Ext formula. Compose with the explicit scalar-restriction homology transports. For q=0 the argument is gluing; an empty cover implies the corresponding scheme is empty and all these groups are zero.",
-   "uses": [
-    "def-pc-flat-cohomology-comparison"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-cech-comparison-system",
-  "def-pc-flat-cohomology-comparison",
-  "lem-sc-injective-cech-augmentation-quasi-iso"
+  "lem-pc-cech-comparison-system-existence",
+  "lem-pc-cech-comparison-inverse-image-compatibility"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01FD",
-  "place": "Lemma 20.15.1, augmented pentagon and two global-section squares, with Lemma 20.11.2 (01EQ) normalization; explicit Lean dimension shifting for the affine part"
+  "place": "Separated existence of normalized systems (01EQ) from compatibility for prescribed systems (01FD); existential introduction and application implemented in Lean."
  },
  "mathlib_searches": [
   {
@@ -131,7 +115,7 @@
   "reviewer": "COMPILER",
   "group": "B3",
   "result": "pass",
-  "landing": "20261012T163611-L-2784052",
+  "landing": "20261012T173808-L-3290638",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

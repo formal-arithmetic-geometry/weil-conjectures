@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-cech-comparison-system-existence",
+ "kind": "statement",
+ "title": "Existence of normalized additive Cech comparisons",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a set and $U_i$ an open cover of $X$. There exists a normalized additive Cech comparison system [def-pc-cech-comparison-system] on $U$: natural transformations in all abelian sheaves, with the stated degree-zero gluing normalization and connecting-map law for short exact sequences surjective on all tuple intersections.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cech-comparison-system"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, normalization and boundary compatibility of the augmented double-complex map"
+ },
+ "proof": [
+  {
+   "text": "For each abelian sheaf choose an injective resolution and form the ordered Cech double complex. The section augmentation is a quasi-isomorphism: the augmented Cech row of each injective is exact, and totalization has finite diagonals. Compose the coefficient augmentation on homology with the inverse section augmentation and the resolution-to-Ext identification. Comparison lifts between resolutions give commuting augmentation squares. Homotopic lifts induce equal maps on homology, so the resulting comparisons are independent of choices and natural in the sheaf. In degree zero both augmentations are restriction of sections, so their quotient is the gluing isomorphism followed by the sections-to-Ext identification. For a short exact coefficient sequence surjective on all tuple sections, its Cech complexes form a short exact sequence. Choose horseshoe resolutions and compare both augmentations; naturality of homology boundaries gives precisely the connecting law. Package these natural transformations, their zero law, and their connecting law as the required system. Infinite covers cause no convergence issue because total diagonals are finite. An empty cover forces X empty by hcover, and all complexes and section groups are zero.",
+   "uses": [
+    "lem-sc-injective-cech-augmentation-quasi-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-injective-cech-augmentation-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Augmented ordered Cech double-complex construction; full proof in declaration docstring, with relative-effacement uniqueness expanded for arbitrary normalized systems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence and inverse image naturality of normalized Cech to abelian sheaf cohomology comparison",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized Cech comparison sheaf cohomology natural inverse image and connecting morphisms",
+   "results": "Eight hits, all TopCat.Presheaf.SheafConditionEqualizerProducts or SheafConditionPairwiseIntersections transport lemmas; no Cech-to-Ext comparison system.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.cechCohomologyFunctor, Sheaf.functorH",
+   "results": "Unknown identifier TopCat.Sheaf.cechCohomologyFunctor; zero hits.",
+   "date": "2026-10-13",
+   "verdict": "unavailable for the local library identifiers"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(comparison|inverseImage|naturality)",
+   "results": "Zero Mathlib hits. Local source has module-derived comparison naturality on one scheme, not abelian sheaf inverse image comparison.",
+   "date": "2026-10-13",
+   "verdict": "no matching statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImage",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, separated-case Cech paragraph: functoriality of the Cech-to-cohomology comparison before tensor extension. Lemma 20.15.1, augmented pentagon and two global-section squares, with Lemma 20.11.2 (01EQ) normalization; existence of the normalized comparisons",
+   "via": [
+    "lem-pc-cech-comparison-inverse-image",
+    "lem-pc-affine-cech-inverse-image",
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonSystemExistence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cechComparisonSystem",
+  "statement": "theorem exists_cechComparisonSystem\n    {X : Scheme.{u}} {ι : Type u}\n    (U : ι → X.Opens) (hcover : iSup U = ⊤) :\n    Nonempty (CechComparisonSystem U hcover)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T173808-L-3290638",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T173808-L-3290638",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

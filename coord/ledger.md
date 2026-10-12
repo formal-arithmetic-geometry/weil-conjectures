@@ -8718,3 +8718,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/A3/Sheaf.AlgebraicGeometry.GenericProductLocalization (stage 3; reviewer PASS; first push; landing 20261012T173806-L-3289958 (interface); batch 20261012T173801; modules 4; new nodes 3)
 - 17:38 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Morphisms.DominantFunctionFieldLimit (stage 3; reviewer PASS; first push; landing 20261012T173807-L-3290197 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/B2/Sheaf.CategoryTheory.Sites.PresheafFreeExtLocalKilling (stage 3; reviewer PASS; first push; landing 20261012T173808-L-3290344 (interface); batch 20261012T173801; modules 2; new nodes 1)
+- 17:38 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImage (stage 3; reviewer PASS; first push; landing 20261012T173808-L-3290638 (interface); batch 20261012T173801; modules 3; new nodes 2)

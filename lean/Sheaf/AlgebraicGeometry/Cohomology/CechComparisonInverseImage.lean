@@ -6,6 +6,8 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
+import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemExistence
+import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility
 
 /-! # Inverse-image naturality before affine degeneration
 
@@ -68,6 +70,10 @@ theorem exists_cechComparison_inverseImage
           (Sheaf.H.mapFunctor (invImage g) (constIso g).symm
             ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) q
               (c.overMap f M q ((cechOver f U M).homologyπ q z))) := by
-  sorry
+  obtain ⟨c⟩ := exists_cechComparisonSystem U hcover
+  obtain ⟨c'⟩ := exists_cechComparisonSystem V hcover'
+  refine ⟨c, c', ?_⟩
+  exact cechComparison_inverseImage_compatibility g f f' U V hcover hcover'
+    M N φ hinter c c'
 
 end AlgebraicGeometry.Scheme.Modules
