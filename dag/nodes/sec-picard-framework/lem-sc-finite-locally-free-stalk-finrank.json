@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-finite-locally-free-stalk-finrank",
+ "kind": "statement",
+ "title": "Stalk finrank of a finite locally free module of fixed rank",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $M$ an $\\mathcal O_X$-module sheaf [def-weil-sheaf-of-modules-category] finite locally free of constant rank $r\\in\\mathbf N$ [def-amb-finite-locally-free-module]. For each $x\\in X$, let $M_x$ be its module stalk [def-pc-module-stalk-functor], with the canonical action of $\\mathcal O_{X,x}$. Then $\\mathrm{Module.finrank}_{\\mathcal O_{X,x}}M_x=r$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01C6, definition-locally-free, clause (3); coordinate-stalk calculation used in morphisms.tex Tag 02G1, lemma-smooth-omega-finite-locally-free"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose a neighbourhood U of x and a trivialization of M on U by the finite free structure module on Fin r. The coordinate projections and inclusions commute with all restriction maps. Taking germs gives mutually inverse O_{X,x}-linear maps between M_x and (Fin r → O_{X,x}); their composition identities are the germs of the sectionwise coordinate identities. Finite sums commute with germs, including the empty sum when r=0.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The local ring O_{X,x} of a scheme is a nontrivial commutative ring. The coordinate basis of its r-fold finite product has cardinality r, and finrank is unchanged by the linear equivalence of the first step. Empty X has no point x.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-stalk-functor",
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01C6, definition-locally-free (3), expanded coordinate-stalk argument for step 3 of lem-sc-smooth-diagonal-ideal-conormal-rank; fully implemented by S3 using coordinate cocones, stalkLinearMapMk, finite free coordinate identities and LinearEquiv.finrank_eq"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a finite locally free sheaf of rank d has module finrank d",
+   "results": "Module.rankAtStalk_eq_finrank_of_free, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk_self, Module.rankAtStalk, Module.isLocallyConstant_rankAtStalk, Module.rankAtStalk_eq, Module.rankAtStalk_eq_finrank_tensorProduct, Module.rankAtStalk_eq_zero_iff_subsingleton",
+   "date": "2026-10-12",
+   "verdict": "no exact sheaf-stalk finrank match; related module finrank and algebraic rankAtStalk lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank, LinearEquiv",
+   "results": "LinearEquiv.finrank_eq, LinearEquiv.finrank_map_eq, Module.nonempty_linearEquiv_of_finrank_eq_one, Module.nonempty_linearEquiv_iff_finrank_eq_one, LinearEquiv.ofFinrankEq, FiniteDimensional.nonempty_linearEquiv_of_finrank_eq, FiniteDimensional.nonempty_linearEquiv_iff_finrank_eq, LinearEquiv.smul_id_of_finrank_eq_one",
+   "date": "2026-10-12",
+   "verdict": "no exact sheaf-stalk finrank match; related module finrank and algebraic rankAtStalk lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*finrank|finrank.*stalk",
+   "results": "Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean, Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact sheaf-stalk finrank match; related module finrank and algebraic rankAtStalk lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free sheaf of rank r on a scheme has stalk module finrank r at every point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothDiagonalIdealConormalRank",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof: canonical differential sheaf identification on smooth curves, via the smooth diagonal determinant comparison; stalk rank calculation in step 3 of lem-sc-smooth-diagonal-ideal-conormal-rank",
+   "via": [
+    "lem-sc-smooth-diagonal-ideal-conormal-rank",
+    "lem-sc-smooth-diagonal-dualizing-determinant",
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeStalkFinrank.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteLocallyFreeOfRank_stalk_finrank",
+  "statement": "theorem finiteLocallyFreeOfRank_stalk_finrank {X : Scheme.{u}} (M : X.Modules) (r : ℕ)\n    [M.IsFiniteLocallyFreeOfRank r] (x : X) :\n    Module.finrank (X.presheaf.stalk x)\n      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj M) = r",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-087da",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T144145-L-2107425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-087da",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T144145-L-2107425",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all modules and the direct importer compiled cleanly, with no forbidden declarations or statement/signature changes."
+ }
+}

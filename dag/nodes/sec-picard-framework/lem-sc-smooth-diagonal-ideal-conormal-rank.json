@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "For the closed immersion i, its canonical map to the closed subscheme cut out by i.ker is an isomorphism commuting with the inclusions into P. Pushforward along this isomorphism identifies the structure-sheaf maps. Their kernels are therefore isomorphic by the kernel universal property. Tensor pullback identifies C with diagonalConormal f, the pullback of the actual module-sheaf kernel. This uses the closed-immersion hypothesis; no such global ideal comparison is asserted for a nonclosed diagonal.",
+   "text": "Construct the morphism from i.ker.toModules to the actual module-sheaf kernel by kernel.lift. The factorization i.toImage ≫ i.imageι = i makes its composite zero on every open. On every affine open, ker_apply and range_toModulesι_app identify the two ranges inside the structure ring. Injectivity of the kernel inclusion makes the lift bijective on those sections. The affine-basis isomorphism criterion gives an isomorphism; tensorPullback.mapIso then identifies C with diagonalConormal f.",
    "uses": [
     "def-weil-closed-immersion",
     "def-sbc-closed-immersion-ideal-sheaf",
@@ -36,11 +36,11 @@
    "elementary": true
   },
   {
-   "text": "The relative differentials are finite locally free of rank d. On a trivializing neighbourhood of x their stalk is the direct sum of d copies of the nontrivial local ring O_{X,x}. The standard coordinate basis has d members, so its module finrank is d. Stalk functoriality carries the preceding sheaf isomorphism to a linear isomorphism; finrank is invariant under it. For empty X the universal assertion is vacuous, and for d=0 the module is zero.",
+   "text": "Apply isFiniteLocallyFreeOfRank_relativeDifferentials to Omega, and lem-sc-finite-locally-free-stalk-finrank to compute each of its stalk finranks. The isomorphism of step 2 is mapped by moduleStalkFunctor to a module isomorphism. Convert it to a linear equivalence and use LinearEquiv.finrank_eq to transport that equality to C.",
    "uses": [
     "lem-sc-smooth-omega-finite-locally-free",
-    "def-pc-module-stalk-functor",
-    "def-amb-finite-locally-free-module"
+    "lem-sc-finite-locally-free-stalk-finrank",
+    "def-pc-module-stalk-functor"
    ],
    "elementary": true
   }
@@ -52,13 +52,13 @@
   "def-pc-module-pullback",
   "lem-sc-smooth-proper-diagonal-conormal-differentials",
   "lem-sc-smooth-omega-finite-locally-free",
-  "def-pc-module-stalk-functor",
-  "def-amb-finite-locally-free-module"
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "def-pc-module-stalk-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tags 08S2 (lemma-differentials-diagonal) and 02G1 (lemma-smooth-omega-finite-locally-free); expanded implementation argument from the cited construction"
+  "place": "Tags 08S2 (lemma-differentials-diagonal) and 02G1 (lemma-smooth-omega-finite-locally-free); expanded implementation argument from the cited construction; S3: affine-basis kernel comparison and explicit stalk-functor finrank transport; stalk calculation isolated in lem-sc-finite-locally-free-stalk-finrank"
  },
  "mathlib_searches": [
   {
@@ -140,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "X-087da",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T110255-L-612343",
+  "landing": "20261012T144145-L-2107425",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node statements; all modules and the direct importer compiled cleanly, with no forbidden declarations or statement/signature changes."
  }
 }
