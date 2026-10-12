@@ -7,20 +7,28 @@ module
 
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.ConstructibleSheaf.Presentation
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Point
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Finiteness of direct images
@@ -115,22 +123,23 @@ theorem boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType
 finite-type morphisms, the vanishing clause.
 
 Let `f : X ⟶ Y` be a separated finite-type morphism (here: one admitting a compactification)
-between finite-type schemes over a field `k`, let `Λ` be a finite ring annihilated by an integer
-invertible in `k` and let `𝓕` be a constructible sheaf of `Λ`-modules on `X_ét`. If the
-geometric fibres of `f` have dimension at most `e`, then `Rᵠf_! 𝓕 = 0` for `q > 2e`.
+between finite-type schemes over a field `k`, let `Λ` be a finite ring whose exponent is
+invertible on `Y` and let `𝓕` be a sheaf of `Λ`-modules on `X_ét`. If the geometric fibres of
+`f` have dimension at most `e`, then `Rᵠf_! 𝓕 = 0` for `q > 2e`. Constructibility of `𝓕` is
+not needed: the bound only uses the dimensions of the original fibres (blueprint
+`lem-dg-compact-support-amplitude`).
 
 This is a node of the blueprint subsection `sk-prop-sf-cbc`, where it is proved. Its other
 clauses, the bounded constructibility of `Rf_* 𝓕` and of `Rf_! 𝓕`, are the sheaf cases of
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType` and
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`. -/
 theorem isZero_homology_rightDerivedLowerShriek_singleFunctor
-    [HasInvertibleExponent Λ (Spec (.of k))] (f : X ⟶ Y) [HasCompactification f]
+    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX) (e : ℕ)
     (he : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞))
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] (q : ℤ)
-    (hq : (2 * e : ℤ) < q) :
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : (2 * e : ℤ) < q) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
       ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) :=
   sorry
@@ -250,6 +259,46 @@ noncomputable def mapDerivedCategoryUpperStarRightDerivedLowerStarIso (j : X ⟶
     _root_.DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex
       (asIso (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit) _).app I ≪≫
         (Functor.mapHomologicalComplexIdIso _ _).app I) ≪≫ e.symm
+
+omit [Finite Λ] [CommRing Λ] in
+/-- The source of a morphism admitting a compactification, to a quasi-compact scheme locally of
+finite type over a field, is a noetherian space: it is open in the compactification, which is
+of finite type over the field. -/
+lemma noetherianSpace_of_hasCompactification (f : X ⟶ Y) [HasCompactification f]
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] :
+    TopologicalSpace.NoetherianSpace X := by
+  let c := HasCompactification.compactification f
+  have : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aY)
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace (c.g ≫ aY)
+  have : IsNoetherian c.Z := ⟨⟩
+  exact c.i.isOpenEmbedding.isInducing.noetherianSpace
+
+open ZeroObject in
+omit [Finite Λ] in
+/-- An étale sheaf of `Λ`-modules on `Y` whose pullback to every geometric point of `Y` vanishes
+is zero, the geometric points forming a conservative family. -/
+lemma isZero_of_forall_isZero_upperStar (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+      IsZero ((Etale.upperStar (ModuleCat.{u + 1} Λ) s).obj G)) : IsZero G := by
+  have : IsIso (0 : G ⟶ 0) := Scheme.isIso_of_isIso_sheafFiber_map _ fun y ↦ by
+    have : LocallySmall.{u + 1} Y.Etale := locallySmall_max.{u + 1, u}
+    have : LocallySmall.{u + 1} (Spec (.of (AlgebraicClosure (Y.residueField y)))).Etale :=
+      locallySmall_max.{u + 1, u}
+    have : ((Y.uliftPointSmallEtale y).sheafFiber (A := ModuleCat.{u + 1} Λ)).IsLeftAdjoint :=
+      inferInstance
+    have : (((pointSmallEtale (𝟙 (Spec (.of (AlgebraicClosure (Y.residueField y)))))).ulift.{u + 1}
+      ).sheafFiber (A := ModuleCat.{u + 1} Λ)).IsLeftAdjoint := inferInstance
+    have e := (Etale.upperStarCompUliftSheafFiberIso (ModuleCat.{u + 1} Λ) (Y.algClosurePoint y)
+      (𝟙 _)).app G
+    rw [Category.id_comp] at e
+    have hz : IsZero ((Y.uliftPointSmallEtale y).sheafFiber.obj G) := by
+      refine IsZero.of_iso ?_ e.symm
+      exact (((pointSmallEtale (𝟙 _)).ulift.{u + 1}).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).map_isZero (h _ _)
+    exact isIso_of_source_target_iso_zero _ hz.isoZero
+      (((Y.uliftPointSmallEtale y).sheafFiber (A := ModuleCat.{u + 1} Λ)).map_isZero
+        (isZero_zero _)).isoZero
+  exact IsZero.of_iso (isZero_zero _) (asIso (0 : G ⟶ 0))
 
 /-! ### Open immersions -/
 
@@ -386,23 +435,19 @@ theorem boundedConstructible_rightDerivedLowerShriek_padicAlgCl (l : ℕ) [Fact 
 
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility
 
-**The fibre-dimension bound.** Let `f : X ⟶ Y` be a morphism admitting a compactification
-between `k`-schemes locally of finite type, with `Y` quasi-compact. If `e` bounds the dimensions
-of the *geometric* fibres of `f`, then `Rᵠf_! K = 0` for `q > 2e` and every bounded
+**The fibre-dimension bound.** If `e` bounds the dimensions of the *geometric* fibres of a
+separated finite-type `f : X ⟶ Y`, then `R^q f_! K = 0` for `q > 2e` and every bounded
 constructible `K` concentrated in degrees `≤ 0`; for a sheaf `𝓕` placed in degree `0` this is
-the blueprint's `Rᵠf_! 𝓕 = 0`, which is
-`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor`
-(`sbc-thm-finiteness-finite-type`), and the general case follows by dévissage
-(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerShriek_obj`). Some bound on the degrees of `K`
-is needed: for `f = 𝟙` the complex `K = Λ[-1]` has `H^1(Rf_! K) = Λ`.
+the blueprint's `R^q f_! 𝓕 = 0`. Some bound on the degrees of `K` is needed: for `f = 𝟙` the
+complex `K = Λ[-1]` has `H^1(Rf_! K) = Λ`.
 
-The hypothesis `[QuasiCompact aY]` is stronger than needed: the vanishing is local on `Y`, so it
-holds for `Y` locally of finite type, but removing the hypothesis needs a reduction to affine
-opens of `Y` along open immersions, which is not formalised here. -/
+The proof checks the vanishing at the geometric points `s : Spec Ω ⟶ Y`: by compactly
+supported base change the pullback of `Rf_! K` to `s` is `Rf'_!` of the pullback of `K` to the
+geometric fibre `f' : X ×_Y Spec Ω ⟶ Spec Ω`, and there the bound is
+`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor` together
+with the dévissage `DerivedCategory.isLE_obj_of_isLE`. Constructibility of `K` is not used. -/
 theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactification f]
-    [HasInvertibleExponent Λ X] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
-    [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX)
-    (e : ℕ)
+    [HasInvertibleExponent Λ X] (e : ℕ)
     (he : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞))
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -410,33 +455,46 @@ theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactificati
     (hK₀ : _root_.DerivedCategory.TStructure.t.IsLE K 0) (q : ℤ) (hq : (2 * e : ℤ) < q) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
       ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) := by
-  cases isEmpty_or_nonempty X with
-  | inl hX =>
-    exact (_root_.DerivedCategory.homologyFunctor _ q).map_isZero
-      ((R(f)_![ModuleCat.{u + 1} Λ]).map_isZero (isZero_derivedCategory_of_isEmpty _ X K))
-  | inr hX =>
-    have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
-    let c := HasCompactification.compactification f
-    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
-    have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
-    have : IsNoetherian c.Z := { __ := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aY) }
-    have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
-    -- the sheaf case
-    have h (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F) :
-        _root_.DerivedCategory.TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) (2 * e) :=
-      (_root_.DerivedCategory.isLE_iff _ _).2 fun i hi ↦
-        isZero_homology_rightDerivedLowerShriek_singleFunctor Λ f aX aY hf e he F i hi
-    -- the dévissage
-    obtain ⟨⟨a, ha⟩, -⟩ := hK.1
-    have := ha
-    let a' := min a 1
-    have : K.IsGE a' := _root_.DerivedCategory.TStructure.t.isGE_of_ge K a' a (min_le_left _ _)
-    have : K.IsLE (a' + ↑(1 - a').toNat - 1) :=
-      _root_.DerivedCategory.TStructure.t.isLE_of_le K 0 _ (by lia)
-    have := isLE_rightDerivedLowerShriek_obj Λ f (2 * e) h (1 - a').toNat a' K
-      inferInstance this hK.2
-    exact _root_.DerivedCategory.isZero_of_isLE _ (a' + ↑(1 - a').toNat - 1 + 2 * e) q (by lia)
+  refine isZero_of_forall_isZero_upperStar Λ _ fun Ω _ _ s ↦ ?_
+  let f' := pullback.snd f s
+  let g' := pullback.fst f s
+  have sq : IsPullback g' f' f s := IsPullback.of_hasPullback f s
+  have := noetherianSpace_of_hasCompactification f' (𝟙 (Spec (.of Ω)))
+  have : QuasiCompact f' := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+  let K' := ((Etale.upperStar (ModuleCat.{u + 1} Λ) g').mapDerivedCategory).obj K
+  have eK : (Etale.upperStar (ModuleCat.{u + 1} Λ) s).obj
+      ((_root_.DerivedCategory.homologyFunctor _ q).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) ≅
+      (_root_.DerivedCategory.homologyFunctor _ q).obj ((R(f')_![ModuleCat.{u + 1} Λ]).obj K') :=
+    (Functor.mapDerivedCategoryHomologyFunctorIso (Etale.upperStar (ModuleCat.{u + 1} Λ) s) q).app
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) ≪≫
+      (_root_.DerivedCategory.homologyFunctor _ q).mapIso
+        ((leftDerivedUpperStarIsoMapDerivedCategory _ s).symm.app _ ≪≫
+          asIso ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K) ≪≫
+          (R(f')_![ModuleCat.{u + 1} Λ]).mapIso
+            ((leftDerivedUpperStarIsoMapDerivedCategory _ g').app K))
+  refine IsZero.of_iso ?_ eK
+  by_cases hX : IsEmpty (Limits.pullback f s : Scheme.{u})
+  · exact Functor.map_isZero _ (Functor.map_isZero _
+      (isZero_derivedCategory_of_isEmpty (ModuleCat.{u + 1} Λ) _ K'))
+  have : Nonempty (Limits.pullback f s : Scheme.{u}) := not_isEmpty_iff.1 hX
+  have := HasInvertibleExponent.of_hom (Λ := Λ) g'
+  have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) f'
+  have hK' : _root_.DerivedCategory.TStructure.t.bounded K' :=
+    Functor.bounded_mapDerivedCategory_obj _ hK.1
+  have : K'.IsLE 0 := Functor.isLE_mapDerivedCategory_obj _ K 0
+  have hΦ : ∀ F : Sheaf (Limits.pullback f s).smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      ((R(f')_![ModuleCat.{u + 1} Λ]).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).IsLE (2 * e) := fun F ↦ by
+    rw [_root_.DerivedCategory.isLE_iff]
+    refine fun i hi ↦ isZero_homology_rightDerivedLowerShriek_singleFunctor Λ f' f' (𝟙 _)
+      (Category.comp_id _) e (fun Ω' _ _ t ↦ ?_) F i (by lia)
+    rw [IsHomeomorph.topologicalKrullDim_eq _
+      (pullbackLeftPullbackSndIso f s t).hom.homeomorph.isHomeomorph]
+    exact he Ω' (t ≫ s)
+  have := _root_.DerivedCategory.isLE_obj_of_isLE (R(f')_![ModuleCat.{u + 1} Λ]) (2 * e) hΦ
+    K' hK' 0
+  exact (_root_.DerivedCategory.isLE_iff _ _).1 this q (by lia)
 
 end Finiteness
 
