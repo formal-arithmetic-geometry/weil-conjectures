@@ -1,0 +1,153 @@
+{
+ "id": "base-change-dimension",
+ "kind": "statement",
+ "title": "Dimension of a possibly disconnected curve under field extension",
+ "statement": "Let k and k' be algebraically closed fields with a k-algebra structure on k' [def-pc-field-extension], and let f : C → Spec(k) be a curve [def-sc-curves]. Then the topological Krull dimension of C ×[Spec(k)] Spec(k') [def-pc-base-change] equals that of C, including the empty scheme (dimension bottom), zero-dimensional curves, and disconnected curves.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+  "place": "Dimension paragraph; Stacks Tags 00P3 and 04MU",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 00P3"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 04MU"
+   }
+  ]
+ },
+ "proof": [
+  {
+   "text": "Let p be the first projection. If C is empty, so is its pullback, since p maps into C; both dimensions are bottom. Otherwise Spec(k') → Spec(k) is surjective (nonempty source, one-point target), and its base change p is surjective, hence the pullback is nonempty. Surjectivity stability is available directly in Mathlib.",
+   "uses": [
+    "def-pc-base-change",
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose affine opens U_i = Spec(A_i) covering C. The finite type curve structure implies each A_i is a finite type k-algebra. Restricting the pullback to U_i gives the open p⁻¹(U_i), isomorphic to Spec(A_i tensor_k k'); these opens cover the pullback.",
+   "uses": [
+    "def-sc-curves",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The first clause of AlgebraicGeometry.dim_base_change says ringKrullDim(A_i tensor_k k') = ringKrullDim(A_i) for every chart (Stacks 00P3). Apply Scheme.dim_eq_iSup_ringKrullDim_of_affineOpenCover to C and its nonempty pullback. Equality of the chart dimensions yields equality of their suprema. Scheme.dim_eq_topologicalKrullDim then identifies these with the topological dimensions in the statement.",
+   "uses": [
+    "lem-pc-dim-base-change",
+    "lem-pc-dimension-affine-open-cover",
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-surjective-base-change",
+  "def-sc-curves",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-dim-base-change",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-pc-dimension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-base-change-curve.md",
+  "place": "Dimension paragraph, reduction to affine scalar extension (00P3) and open-cover dimension (04MU); expanded by second reader K1"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeCurve",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-base-change-curve",
+   "place": "isolated proof step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeDimension",
+  "declaration": "AlgebraicGeometry.baseChange_dim",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeDimension.lean",
+  "statement": "theorem baseChange_dim {k k' : Type u} {C : Scheme.{u}} [Field k] [Field k']\n    [Algebra k k'] [IsAlgClosed k] [IsAlgClosed k']\n    (f : C ⟶ Spec (.of k)) [IsCurve f] :\n    topologicalKrullDim (pullback f\n      (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{u}) =\n      topologicalKrullDim C",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-sc-curves",
+  "def-pc-base-change"
+ ],
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "krullDim.*(pullback|[Tt]ensor)|([Tt]ensor|pullback).*krullDim",
+   "date": "2026-10-12",
+   "results": "Mathlib/RingTheory/KrullDimension/Polynomial.lean",
+   "verdict": "No scheme dimension-under-field-extension theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, CategoryTheory.Limits.pullback",
+   "date": "2026-10-12",
+   "results": "No hits",
+   "verdict": "No scheme dimension-under-field-extension theorem found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "topological Krull dimension of a finite type scheme over a field is unchanged by extension of scalars",
+   "date": "2026-10-12",
+   "results": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Algebra.IsAlgebraic.finrank_of_isFractionRing, Module.supportDim_self_eq_ringKrullDim, Polynomial.ringKrullDim_le, Algebra.IsAlgebraic.lift_rank_of_isFractionRing, IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.krullDimLE_of_isLocalization_maximal, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial",
+   "verdict": "No scheme dimension-under-field-extension theorem found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of a finite type scheme is preserved under extension of the base field",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T044746-L-2036368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T044746-L-2036368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

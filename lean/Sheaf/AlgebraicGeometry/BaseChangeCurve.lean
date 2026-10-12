@@ -11,9 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.Dimension
-import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
-import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import Sheaf.AlgebraicGeometry.BaseChangeDimension
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-!
@@ -67,6 +66,29 @@ theorem baseChange_curve {k k' : Type u} {C : Scheme.{u}} [Field k] [Field k'] [
         (Spec.map (CommRingCat.ofHom (algebraMap k k'))))) ∧
       (IsConnectedCurve f → IsConnectedCurve (CategoryTheory.Limits.pullback.snd f
         (Spec.map (CommRingCat.ofHom (algebraMap k k'))))) := by
-  sorry
+  have hdim := baseChange_dim (k' := k') f
+  have hcurve : IsCurve (pullback.snd f
+      (Spec.map (CommRingCat.ofHom (algebraMap k k')))) :=
+    { krullDim_le_one := hdim.trans_le (IsCurve.krullDim_le_one (f := f)) }
+  refine ⟨hcurve, hdim, ?_, ?_, ?_, ?_⟩
+  · intro hf
+    exact smooth_isStableUnderBaseChange.of_isPullback
+      (IsPullback.of_hasPullback f _) hf
+  · intro hf
+    exact IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback f _) hf
+  · intro hC
+    let : IsAffine C := hC
+    let : IsAffineHom f := inferInstance
+    infer_instance
+  · intro hf
+    let : IsConnectedCurve f := hf
+    let : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+    let : GeometricallyConnected f :=
+      GeometricallyConnected.of_connectedSpace_of_isSepClosed f
+    exact
+      { toIsCurve := hcurve
+        connectedSpace := GeometricallyConnected.connectedSpace_of_subsingleton
+          (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))
+        krullDim_eq_one := hdim.trans (IsConnectedCurve.krullDim_eq_one (f := f)) }
 
 end AlgebraicGeometry
