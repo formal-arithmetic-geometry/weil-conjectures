@@ -7046,3 +7046,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/S3/Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass (stage 3; reviewer PASS; first push; landing 20261012T085337-L-38820 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/S3/Sheaf.CategoryTheory.ExactCouple (stage 3; reviewer PASS; first push; landing 20261012T085338-L-38917 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/S3/Sheaf.Topology.ConstructibleIsRetrocompact (stage 3; reviewer PASS; first push; landing 20261012T085338-L-39020 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/S3/Sheaf.Topology.FilteredInjectiveCechAcyclic (stage 3; reviewer PASS; first push; landing 20261012T085338-L-39116 (interface); batch 20261012T085205; modules 2; new nodes 1)

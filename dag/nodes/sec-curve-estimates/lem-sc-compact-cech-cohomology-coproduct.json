@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-compact-cech-cohomology-coproduct",
+ "kind": "statement",
+ "title": "Finite compact Cech cohomology preserves existing coproducts",
+ "statement": "Let $X$ be a topological space and let its open site admit sheafification of abelian presheaves [def-weil-pbc-sheafification]. Let $T$ be a finite type, $U$ an open, $(V_t\\to U)_{t\\in T}$ a family of opens, and $S$ a chosen Cech complex [def-weil-pbc-site-cech-complex] for this family. Assume each chosen intersection $S.W(p,a)$ is quasi-compact for every $p\\geq0$ and tuple $a:T^{p+1}$. For any type $I$ and any family $F:\\operatorname{Discrete}(I)\\to\\operatorname{Sh}(X,\\mathrm{Ab})$ with an existing coproduct [def-weil-pbc-category-colimit], the functor taking Cech cohomology in degree $p$ after forgetting to presheaves preserves the colimit of $F$, for every $p\\geq0$. No injectivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FF, Cech-complex comparison; coproduct specialization via finite partial sums, using sheaves.tex Section 009E and algebra.tex Tag 00DB"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "The coproduct sheaf is the sheafification of the pointwise direct sum. Every section on a compact open is locally a finite-support sum. A finite subcover gives a single finite union of supports. Coproduct projections to each summand produce global component sections; outside that finite union they vanish locally and hence globally. The sum of the finitely many global component sections equals the original section locally and hence globally. Conversely projections show injectivity. Thus evaluation at each compact chosen intersection preserves this existing coproduct, naturally in restriction maps. This argument does not require compact overlaps.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree p the Cech term is a product indexed by functions Fin(p+1) to T. That index type is finite, so direct sums commute with this product. The preceding identifications commute with restriction and hence the alternating differential. Thus the Cech complex of the coproduct is the degreewise direct sum of Cech complexes, with the original coprojection maps.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Direct sums of abelian groups are exact: write a direct sum as the directed colimit of the finite partial sums and apply exactness of filtered colimits. Applying this to kernels and images of the Cech differential identifies homology of the sum with the sum of homologies. These canonical identifications preserve the coprojection cocone. Empty covering families and empty coproducts are included.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FF comparison adapted to coproducts; sources read at https://stacks.math.columbia.edu/tag/01FF and /tag/01EW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech cohomology commutes with direct sums of sheaves on a finite cover of compact opens",
+   "results": "Service unavailable: Internal Server Error; no verdict drawn.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of coproduct of injective sheaves on quasi compact opens",
+   "results": "MayerVietorisSquare and local representability results, no Cech coproduct comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesColimit, CategoryTheory.Sheaf",
+   "results": "Unknown identifier PreservesColimit.",
+   "verdict": "no exact match from this query",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Cc]olimit|[Cc]olimit.*Cech",
+   "results": "Mathlib CechNerve only. Upstream CohomologyColimit has an etale finite-support argument; its signatures require a scheme and do not specialize to arbitrary spaces.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf abelian direct sum sections compact open preserves coproduct",
+   "results": "SheafOfModules.isColimitFreeCofan and free construct free-module coproducts; condensed locally constant and scheme coproduct declarations have different sites or objects. No compact-open Cech comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimit",
+   "results": "12 generic colimit preservation declarations, including isColimitOfPreserves and transport by natural isomorphisms. None establishes preservation for compact Cech cohomology.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*[Cc]oproduct|[Cc]oproduct.*preserves; compact/coproduct and Cech/coproduct in lean/",
+   "results": "Mathlib additive functors preserve finite coproducts; this does not handle arbitrary I. Local compact-object and scheme results do not establish the required comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.FilteredInjectiveCechAcyclic",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Cech-complex comparison in the Tag 01FF claim",
+   "via": [
+    "lem-sc-topological-filtered-injective-cech-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.CompactCechCoproduct",
+  "file": "lean/Sheaf/Topology/CompactCechCoproduct.lean",
+  "declaration": "CategoryTheory.Sheaf.compact_siteCech_cohomology_preserves_coproduct",
+  "statement": "theorem compact_siteCech_cohomology_preserves_coproduct {X : Type u} [TopologicalSpace X] [HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u}] {T : Type u} [Finite T] {U : TopologicalSpace.Opens X} {f : T → TopologicalSpace.Opens X} {hom : ∀ t, f t ⟶ U} (S : SiteCechComplex f hom) (hcompact : ∀ (p : ℕ) (a : Fin (p + 1) → T), IsCompact ((S.W p a : TopologicalSpace.Opens X) : Set X)) {I : Type w} (F : Discrete I ⥤ Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) [HasColimit F] (p : ℕ) : PreservesColimit F (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙ S.cohomologyFunctor p)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085338-L-39116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085338-L-39116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

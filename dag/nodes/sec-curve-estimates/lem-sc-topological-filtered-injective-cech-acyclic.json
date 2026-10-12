@@ -28,56 +28,39 @@
  ],
  "proof": [
   {
-   "text": "Fix a finite covering $\\{U_t\\to U\\}_{t\\in T}$ of a quasi-compact open $U$ by quasi-compact opens, with all finite intersections quasi-compact. By [lem-weil-pbc-module-directed-colimit-underlying-sets] (for the constant sheaf of rings $\\mathbf Z$, whose modules are the abelian sheaves) the underlying sheaf of sets of $\\mathcal I$, with the underlying maps of the colimit maps, is the colimit of the underlying sheaves of sets of the $\\mathcal I_i$ in sheaves of sets. For each iterated intersection $W=U_{t_0}\\cap\\cdots\\cap U_{t_p}$ occurring in the Cech terms, the finite coverings of $W$ by quasi-compact basis opens are cofinal among open coverings (refine an arbitrary covering pointwise by basis opens and choose a finite subcover by quasi-compactness of $W$), and their pairwise intersections are quasi-compact by hypothesis. Thus clause (2) of [lem-weil-pbc-sheaves-directed-colimit-sections] gives that $\\varinjlim_i\\mathcal I_i(W)\\to\\mathcal I(W)$ is bijective, hence an isomorphism of abelian groups. For $p\\ge0$ the $p$-th Cech term is the finite product $\\prod_{\\mathbf t\\in T^{p+1}}\\mathcal I(U_{\\mathbf t})$; a directed colimit of abelian groups commutes with finite products (represent a tuple at finitely many stages and pass to a common upper bound), so $\\varinjlim_i\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I_i)\\to\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I)$ is an isomorphism. These isomorphisms commute with the alternating restriction differentials by naturality of restriction, hence identify $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)$ with $\\varinjlim_i\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I_i)$.",
+   "text": "Prove compactness of all chosen intersections. In degree zero use W_zero. In degree p+1 the universal property identifies the chosen product with the intersection of the first open and the product for the tail tuple. Apply the pairwise compact-intersection hypothesis and induction.",
    "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "lem-weil-pbc-module-directed-colimit-underlying-sets",
-    "lem-weil-pbc-sheaves-directed-colimit-sections"
+    "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01FF proof, claim and lines 3255-3275"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $\\mathcal I_i$ is injective, so $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I_i)$ is exact in every positive degree by [lem-weil-pbc-site-injective-cech-acyclic]. A directed set is a filtered category, so by [lem-weil-pbc-filtered-colimit-abelian-groups-exact] the colimit complex is exact in every positive degree as well. By Step 1, $\\check H^p(\\mathcal U,\\mathcal I)=0$ for $p>0$.",
+   "text": "The existing Lean signature indexes F by Discrete I, so its colimit is a coproduct rather than a directed colimit. Apply [lem-sc-compact-cech-cohomology-coproduct] in each degree to preserve this coproduct. Each summand has zero positive Cech cohomology by [lem-weil-pbc-site-injective-cech-acyclic]. A colimit of zero objects is zero (Mathlib IsColimit.isZero_pt), giving the first conjunct. The declared signature is kept unchanged.",
    "uses": [
-    "lem-weil-pbc-site-injective-cech-acyclic",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+    "lem-sc-compact-cech-cohomology-coproduct",
+    "lem-weil-pbc-site-injective-cech-acyclic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01FF proof, lines 3275-3290"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\mathcal B$ be the set of quasi-compact opens of $X$ and $\\mathrm{Cov}$ the set of finite coverings of a member of $\\mathcal B$ by members of $\\mathcal B$ whose finite intersections are quasi-compact. Condition (1) of [lem-weil-pbc-site-cech-vanishing-criterion] holds since fibre products in the open site are intersections, which lie in $\\mathcal B$ by induction on the number of factors. Condition (2): every open covering of $U\\in\\mathcal B$ is refined by a member of $\\mathrm{Cov}$ (refine pointwise by basis opens and take a finite subcover). Step 2 gives condition (3). The criterion yields $H^q(U,\\mathcal I)=0$ for every $q>0$ and $U\\in\\mathcal B$, with $H^q(U,-)=R^q\\Gamma(U,-)$ as in [def-weil-pbc-sites-and-cohomology].",
+   "text": "For the compact basis take all finite compact-open coverings. At each point of a compact U refine the given covering open by a compact basis neighborhood; compactness chooses a finite subcover. This supplies cofinality, including the empty U. Chosen intersections are compact by the first step. Choose their SiteCechComplex by exists_of_covering. Apply [lem-weil-pbc-site-cech-vanishing-criterion] to the first conjunct. Transport the precoverage Grothendieck topology to the usual open topology using the Coverage and Pretopology comparison equalities.",
    "uses": [
     "lem-weil-pbc-site-cech-vanishing-criterion",
-    "def-weil-pbc-sites-and-cohomology"
+    "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01FF proof via Lemma 01EW (Cech vanishing on a basis)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-site-cech-complex",
-  "lem-weil-pbc-module-directed-colimit-underlying-sets",
-  "lem-weil-pbc-sheaves-directed-colimit-sections",
+  "lem-sc-compact-cech-cohomology-coproduct",
   "lem-weil-pbc-site-injective-cech-acyclic",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-site-cech-vanishing-criterion",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-site-cech-vanishing-criterion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 01FF proof, claim and Lemma 01EW"
+  "place": "Tag 01FF claim and Tag 01EW criterion, adapted to unchanged Discrete-indexed Lean signature"
  },
  "mathlib_searches": [
   {
@@ -207,5 +190,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T085338-L-39116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
