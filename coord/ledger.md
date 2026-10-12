@@ -8657,3 +8657,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/P1/Sheaf.Paper.ObjectCohomologyPresheafResolution (stage 3; reviewer PASS; first push; landing 20261012T165527-L-2938275 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.AffinePushforwardBaseChangeIsIsoOnAffine (stage 3; reviewer PASS; first push; landing 20261012T165528-L-2938405 (interface); batch 20261012T165503; modules 2; new nodes 1)
 - 16:55 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.ProperFlatCohomologyModel (stage 3; reviewer PASS; first push; landing 20261012T165528-L-2938530 (interface); batch 20261012T165503; modules 3; new nodes 2)
+- 16:55 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.AffineRelativelyFlatCanonicalModuleBaseChange (stage 3; reviewer PASS; first push; landing 20261012T165529-L-2938695 (interface); batch 20261012T165503; modules 4; new nodes 3)

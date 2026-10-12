@@ -1,0 +1,123 @@
+{
+ "id": "def-pc-affine-alternating-cech-model",
+ "kind": "definition",
+ "title": "Explicit sheafified affine alternating Cech model",
+ "statement": "For a ring A, a scheme map f:X -> Spec A, a finite family U indexed by Fin r, and an O_X-module G, define K by the increasing-tuple alternating section complex [def-sc-alternating-cech-total-complex], restricting scalars along A -> Gamma(X,O_X) and applying the associated-sheaf functor on Spec A, after extension from natural to integer degrees. The action uses GammaSpecIso followed by f.appTop. This specifies the actual complex, not an arbitrary derived representative.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Steps 2--5; Stacks Project Tags 0A1D, 02KH, 08HY"
+ },
+ "stmt_deps": [
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent Q3",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "Steps 2--5; Stacks Project Tags 0A1D, 02KH, 08HY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change relatively flat quasicoherent sheaf bounded flat Cech complex",
+   "results": "CategoryTheory.compatiblePreservingOfFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.of_flat_tensorProduct",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": "CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso, CategoryTheory.Functor.instIsLeftDerivedFunctorCompCompInvAssociatorWhiskerRightOfIsRightAdjoint",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded alternating Cech complex flat modules derived base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech|baseChangeMap_cech|flatComplexDerivedPullback",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUnique\"",
+   "results": "CategoryTheory.Functor.leftDerivedUnique",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafification of bounded alternating Cech complex flat over base canonical derived mate factorization",
+   "results": "CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.lan_flat_of_flat, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, LinearMap.lTensor_injective_of_exact_of_flat, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech|baseChangeMap_cech|flatComplexDerivedPullback|IsFlat.*tilde",
+   "results": "Local sources: explicit increasing-tuple complex exists; baseChangeMap_cech omits a map equation; flatComplexDerivedPullback is the applicable derived counit theorem. No exact flat-model or factorization statement found in Mathlib or source library.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineRelativelyFlatCanonicalModuleBaseChange",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Steps 2--5; Stacks Project Tags 0A1D, 02KH, 08HY",
+   "via": [
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlternatingCechModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlternatingCechModel.lean",
+  "declaration": "AlgebraicGeometry.affineAlternatingCechModel",
+  "statement": "def affineAlternatingCechModel {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) : CochainComplex (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace)) ℤ",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T165529-L-2938695",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T165529-L-2938695",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
