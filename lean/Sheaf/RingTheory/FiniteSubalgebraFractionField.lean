@@ -10,6 +10,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
+import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 
 /-!
 # Finite subalgebras with prescribed fraction field
@@ -30,23 +31,21 @@ field `M`. The scalar tower identifies the structural map `A → M` with `A → 
 Source: Stacks Project, More on Algebra, Tag 07PR, proof, finite algebra model paragraph
 (blueprint: lem-weil-pbc-finite-subalgebra-fraction-field).
 
-Proof (the source asserts the model's existence; the DAG supplies denominator clearing):
-1. Power series over a field have no zero divisors, and polynomials over a domain form a
-   domain (lem-weil-pbc-power-series-domain, lem-weil-pbc-polynomial-ring-domain).
-   Localization at the zero prime therefore gives the fraction field `K`, with injective
-   maps `A → K → M` (def-weil-pbc-localization-at-prime, def-pc-field-extension).
-2. Choose a finite `K`-spanning set `e₁, …, eᵣ` of `M`
-   (def-weil-finitely-generated-module). Each generator satisfies a monic equation over
-   `K` (lem-weil-pbc-finite-algebra-is-integral).
-3. Write all coefficients as fractions over `A`. Their nonzero denominators have a
-   nonzero product `δ`. For an equation of degree `d` with coefficients `cⱼ`, multiplying
-   by `δ^d` gives a monic equation for `fᵢ = δ eᵢ`, with coefficients `δ^j cⱼ` in `A`.
-4. Let `B = A[f₁, …, fᵣ]`. It is a subring containing `A`. Since its finitely many
-   algebra generators are integral, it is finite as an `A`-module
-   (lem-weil-pbc-finite-of-integral-generators, def-weil-polynomial-ring).
-5. Express `z ∈ M` as `∑ kᵢ eᵢ`, and write `kᵢ = aᵢ/tᵢ` with nonzero `tᵢ ∈ A`.
-   Then `s = δ ∏ tᵢ` is nonzero and belongs to `A ⊆ B`, while
-   `s z = ∑ aᵢ (∏_{l ≠ i} tₗ) fᵢ` belongs to `B`. Thus `z = b/s` as claimed. -/
+Proof (the source asserts the model's existence; Mathlib supplies denominator clearing):
+1. The power-series no-zero-divisor instance and polynomial domain instance prove that
+   A is a domain. The complement of the zero prime is the non-zero-divisor submonoid,
+   so the given localization K is its fraction field.
+2. Mathlib's `FiniteDimensional.exists_is_basis_integral` supplies a finite K-basis e
+   of M consisting of elements integral over A. This theorem scales a finite basis by
+   a common nonzero denominator and does not require separability or a Dedekind domain.
+3. Construct B as `Algebra.adjoin A (Set.range e)`. It is finite over A by
+   `Algebra.finite_adjoin_of_finite_of_isIntegral`.
+4. For z in M, `IsLocalization.exist_integer_multiples_of_finite` clears the finite
+   family of coordinates `e.repr z`: there is a nonzero d in A and numerators a_i in A
+   with a_i = d * (e.repr z)_i in K. The basis expansion then gives
+   d * z = sum_i a_i * e_i in B. The scalar tower and the two injective field-fraction
+   maps show that d remains nonzero in M.
+5. Both d * z and d belong to B, and z = (d * z) / d. -/
 theorem exists_finite_subalgebra_fraction_field
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (n m : ℕ)
     (K : Type v) [Field K]
@@ -61,6 +60,38 @@ theorem exists_finite_subalgebra_fraction_field
       ∃ B : Subalgebra (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) M,
         Module.Finite (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)) B ∧
           ∀ z : M, ∃ b s : B, (s : M) ≠ 0 ∧ z = (b : M) / (s : M) := by
-  sorry
+  classical
+  let A := MvPolynomial (Fin m) (MvPowerSeries (Fin n) k)
+  let : IsDomain (MvPowerSeries (Fin n) k) := NoZeroDivisors.to_isDomain _
+  have hA : IsDomain A := inferInstance
+  have : IsFractionRing A K := by
+    simpa only [IsLocalization.AtPrime, Ideal.primeCompl_bot] using
+      (inferInstance : IsLocalization.AtPrime K (⊥ : Ideal A))
+  have _hp := hp
+  refine ⟨hA, ?_⟩
+  obtain ⟨t, e, he⟩ := FiniteDimensional.exists_is_basis_integral A K M
+  let B := Algebra.adjoin A (Set.range e)
+  have hB : Module.Finite A B :=
+    Algebra.finite_adjoin_of_finite_of_isIntegral (Set.finite_range e)
+      (by rintro _ ⟨i, rfl⟩; exact he i)
+  refine ⟨B, hB, ?_⟩
+  intro z
+  obtain ⟨d, hd⟩ := IsLocalization.exist_integer_multiples_of_finite
+    (nonZeroDivisors A) (fun i => e.repr z i)
+  choose a ha using hd
+  have hd0 : (d : A) ≠ 0 := mem_nonZeroDivisors_iff_ne_zero.mp d.property
+  have hdm : algebraMap A M d ≠ 0 := by
+    rw [IsScalarTower.algebraMap_apply A K M]
+    exact (map_ne_zero (algebraMap K M)).mpr
+      ((map_ne_zero_iff (algebraMap A K) (IsFractionRing.injective A K)).mpr hd0)
+  have hdz : (d : A) • z ∈ B := by
+    rw [← e.sum_repr z, Finset.smul_sum]
+    apply B.sum_mem
+    intro i _
+    rw [← smul_assoc, ← ha i, algebraMap_smul]
+    exact B.smul_mem (Algebra.subset_adjoin ⟨i, rfl⟩) (a i)
+  refine ⟨⟨(d : A) • z, hdz⟩, ⟨algebraMap A M d, B.algebraMap_mem d⟩, hdm, ?_⟩
+  change z = ((d : A) • z) / algebraMap A M d
+  rw [Algebra.smul_def, mul_div_cancel_left₀ _ hdm]
 
 end MvPolynomial

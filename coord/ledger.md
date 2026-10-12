@@ -9183,3 +9183,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/F1/Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors (stage 3; reviewer PASS; first push; landing 20261012T194109-L-454392 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/F2/Sheaf.Algebra.Homology.UpperTruncationStepSES (stage 3; reviewer PASS; after a return; landing 20261012T194109-L-454497 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/F2/Sheaf.AlgebraicGeometry.AffineBaseChangeChartCoordinates (stage 3; reviewer PASS; first push; landing 20261012T194110-L-454646 (proof); batch 20261012T194054; modules 1; new nodes 0)
+- 19:41 L: merged deliver/F2/Sheaf.RingTheory.FiniteSubalgebraFractionField (stage 3; reviewer PASS; first push; landing 20261012T194110-L-454747 (proof); batch 20261012T194054; modules 1; new nodes 0)

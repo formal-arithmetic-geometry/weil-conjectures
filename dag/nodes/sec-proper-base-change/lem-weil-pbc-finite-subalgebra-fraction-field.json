@@ -32,80 +32,66 @@
  ],
  "proof": [
   {
-   "text": "($A$ is a domain; the field $K$.) The field $k$ is an integral domain, so $k[[x_1,\\ldots,x_n]]$ is an integral domain [lem-weil-pbc-power-series-domain] (with $d=n$). The ring $A$ is the polynomial ring in the finitely many variables $y_1,\\ldots,y_m$ over this domain (the iterated one-variable polynomial ring [def-weil-polynomial-ring] is the ring of finite linear combinations of monomials in $y_1,\\ldots,y_m$), hence an integral domain [lem-weil-pbc-polynomial-ring-domain]. So $(0)$ is a prime of $A$ and $K=A_{(0)}$ [def-weil-pbc-localization-at-prime] is the ring of fractions $a/s$, $a\\in A$, $s\\in A\\setminus\\{0\\}$, with $a/s=a'/s'$ iff $as'=a's$ (the factor $u\\neq0$ cancels in the domain $A$); it is a field ($a/s\\neq0$ means $a\\neq0$, and then $s/a$ is its inverse) and $A\\to K$, $a\\mapsto a/1$, is injective. The field homomorphism $K\\to M$ is injective [def-pc-field-extension]; we regard $A\\subseteq K\\subseteq M$. From here on only the facts that $A$ is a domain and $K$ is its fraction field are used.",
+   "text": "Use MvPowerSeries.instNoZeroDivisors, NoZeroDivisors.to_isDomain and the MvPolynomial domain instance to prove IsDomain A. Ideal.primeCompl_bot identifies the given zero-prime localization with IsFractionRing A K.",
    "uses": [
     "lem-weil-pbc-power-series-domain",
     "lem-weil-pbc-polynomial-ring-domain",
-    "def-weil-polynomial-ring",
-    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PR, proof, paragraph beginning 'Let B be a finite A-subalgebra of M with fraction field M'; the denominator-clearing construction is written out in sibling split lem-weil-pbc-another-helper-g-ring"
+   }
+  },
+  {
+   "text": "Apply the proved Mathlib theorem FiniteDimensional.exists_is_basis_integral A K M to obtain a finite K-basis e integral over A. Its proof scales a finite basis by a common nonzero integral multiple; no separability, Noetherianity or integrally closed hypothesis is needed. This replaces the explicit monic-equation and denominator-clearing steps.",
+   "uses": [
+    "def-weil-finitely-generated-module",
     "def-pc-field-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, sentence 'Let $B$ be a finite $A$-subalgebra of $M$ with fraction field $M$' (asserted there without proof)"
+    "place": "More on Algebra, Lemma Tag 07PR, proof, paragraph beginning 'Let B be a finite A-subalgebra of M with fraction field M'; the denominator-clearing construction is written out in sibling split lem-weil-pbc-another-helper-g-ring"
    }
   },
   {
-   "text": "(Monic equations over $K$.) $M$ is a finitely generated $K$-module: choose $e_1,\\ldots,e_r\\in M$ with $M=Ke_1+\\dots+Ke_r$ [def-weil-finitely-generated-module]. Applying [lem-weil-pbc-finite-algebra-is-integral] to the ring map $K\\to M$, each $e_i$ is a root of a monic polynomial with coefficients in $K$: $e_i^{d_i}+c_{i1}e_i^{d_i-1}+\\dots+c_{id_i}=0$ with $d_i\\ge1$ and $c_{ij}\\in K$.",
+   "text": "Construct B = Algebra.adjoin A (Set.range e). Set.finite_range and integrality of each basis vector imply Module.Finite A B by Algebra.finite_adjoin_of_finite_of_isIntegral, the Mathlib realization of lem-weil-pbc-finite-of-integral-generators.",
    "uses": [
-    "def-weil-finitely-generated-module",
-    "lem-weil-pbc-finite-algebra-is-integral"
+    "lem-weil-pbc-finite-of-integral-generators"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, sentence 'Let $B$ be a finite $A$-subalgebra of $M$ with fraction field $M$' (asserted there without proof)"
+    "place": "More on Algebra, Lemma Tag 07PR, proof, paragraph beginning 'Let B be a finite A-subalgebra of M with fraction field M'; the denominator-clearing construction is written out in sibling split lem-weil-pbc-another-helper-g-ring"
    }
   },
   {
-   "text": "(Clearing denominators.) Write $c_{ij}=a_{ij}/s_{ij}$ with $a_{ij}\\in A$, $s_{ij}\\in A\\setminus\\{0\\}$ (Step 1), and let $\\delta=\\prod_{i,j}s_{ij}\\in A$; $\\delta\\neq0$ since $A$ is a domain, and $\\delta c_{ij}=a_{ij}\\prod_{(i',j')\\neq(i,j)}s_{i'j'}\\in A$. Put $f_i=\\delta e_i\\in M$ and $d=d_i$. Then $f_i^{d}+(\\delta c_{i1})f_i^{d-1}+\\delta(\\delta c_{i2})f_i^{d-2}+\\dots+\\delta^{d-1}(\\delta c_{id})=\\delta^{d}\\bigl(e_i^{d}+c_{i1}e_i^{d-1}+\\dots+c_{id}\\bigr)=0$, since the coefficient of $f_i^{d-j}$ is $\\delta^{j-1}(\\delta c_{ij})=\\delta^jc_{ij}$ and $\\delta^jc_{ij}f_i^{d-j}=\\delta^dc_{ij}e_i^{d-j}$. The coefficients $\\delta^{j-1}(\\delta c_{ij})$ lie in $A$, so each $f_i$ is a root of a monic polynomial with coefficients in $A$, i.e. integral over $A$.",
+   "text": "For z in M apply IsLocalization.exist_integer_multiples_of_finite to its finite family of basis coordinates. It gives d in nonZeroDivisors A and numerators a_i with algebraMap A K a_i = d smul e.repr z i. The scalar tower, injectivity A to K and injectivity K to M imply algebraMap A M d is nonzero. Rewrite d smul z by e.sum_repr and Finset.smul_sum; each summand is a_i smul e_i in B by subset_adjoin and B.smul_mem, so the sum lies in B. The element algebraMap A M d lies in B by algebraMap_mem. Cancel its nonzero image to conclude z = (d smul z) / algebraMap A M d.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-field-extension"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, sentence 'Let $B$ be a finite $A$-subalgebra of $M$ with fraction field $M$' (asserted there without proof)"
-   }
-  },
-  {
-   "text": "(The ring $B$.) Let $B=A[f_1,\\ldots,f_r]\\subseteq M$ be the set of all values $P(f_1,\\ldots,f_r)$ of polynomials $P$ in $r$ variables with coefficients in $A$ (the image of the evaluation map from the polynomial ring [def-weil-polynomial-ring] over $A$ in $r$ variables to $M$); it is a subring of $M$ containing $A$, a domain as a subring of a field, generated as an $A$-algebra by $f_1,\\ldots,f_r$, each integral over $A$ (Step 3). By [lem-weil-pbc-finite-of-integral-generators] (with $R=A$ and the generators $f_1,\\ldots,f_r$), $B$ is a finitely generated $A$-module [def-weil-finitely-generated-module].",
-   "uses": [
-    "def-weil-polynomial-ring",
-    "lem-weil-pbc-finite-of-integral-generators",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, sentence 'Let $B$ be a finite $A$-subalgebra of $M$ with fraction field $M$' (asserted there without proof)"
-   }
-  },
-  {
-   "text": "(Fraction field.) Let $u\\in M$. By Step 2, $u=\\sum_{i=1}^rk_ie_i$ with $k_i\\in K$; write $k_i=a_i/t_i$ with $a_i\\in A$, $t_i\\in A\\setminus\\{0\\}$ (Step 1). Put $s=\\delta t_1\\cdots t_r\\in A\\setminus\\{0\\}\\subseteq B$ ($A$ a domain), nonzero in $M$ since $A\\to M$ is injective (Step 1). Then $su=\\sum_ia_i\\bigl(\\prod_{l\\neq i}t_l\\bigr)\\delta e_i=\\sum_ia_i\\bigl(\\prod_{l\\neq i}t_l\\bigr)f_i=:b\\in B$, so $u=b/s$ with $b,s\\in B$, $s\\neq0$. Hence $M$ is the fraction field of $B$, and $B$ has all the properties claimed.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, sentence 'Let $B$ be a finite $A$-subalgebra of $M$ with fraction field $M$' (asserted there without proof)"
+    "place": "More on Algebra, Lemma Tag 07PR, proof, paragraph beginning 'Let B be a finite A-subalgebra of M with fraction field M'; the denominator-clearing construction is written out in sibling split lem-weil-pbc-another-helper-g-ring"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-power-series-domain",
   "lem-weil-pbc-polynomial-ring-domain",
-  "def-weil-polynomial-ring",
   "def-weil-pbc-localization-at-prime",
-  "def-pc-field-extension",
   "def-weil-finitely-generated-module",
-  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-pc-field-extension",
   "lem-weil-pbc-finite-of-integral-generators"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof: the existence of B is asserted without proof; the argument written here is the denominator-clearing construction also written out in step 4 of lem-weil-pbc-another-helper-g-ring (for More on Algebra 07PU)"
+  "place": "Tag 07PR finite algebra model paragraph; implemented using the proved Mathlib integral-basis and common-coordinate-denominator theorems, F2 second reading 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -229,5 +215,15 @@
   "group": "K1",
   "result": "pass",
   "note": "k field char p>0 (CharP+0<p); A=MvPolynomial (Fin m) (MvPowerSeries (Fin n) k); IsDomain A as conclusion; K=A_(0) via IsLocalization.AtPrime K ⊥ (satisfiable: FractionRing instance checked); M finite ext Module.Finite K M with IsScalarTower A K M; B : Subalgebra A M, Module.Finite A B, every z=b/s s≠0; no Mathlib lemma states it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T194110-L-454747",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
