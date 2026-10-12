@@ -9,30 +9,43 @@
  },
  "proof": [
   {
-   "text": "Identify the source stalk using the inverse-image comparison. The terminal germ on Spec Omega is invertible by the strict henselian section-stalk comparison. Identify terminal sections of f'_*g'^*F with sections on X' through preservation of the terminal object by base change; their composite gives b.",
+   "text": "At the identity geometric point of Spec Omega, each marked neighbourhood (V,v) has the pointed section v.left itself. The terminal germ map for a ModuleCat-valued sheaf is bijective: equality of terminal germs is witnessed on a common pointed neighbourhood, and restricting along its section recovers equality of the original sections; every germ has a representative, whose restriction along its marked section gives a terminal representative. Use Point.toPresheafFiber_eq_iff', Point.toPresheafFiber_jointly_surjective, and Point.toPresheafFiber_w_apply, with the forgetful functor preserving filtered colimits. This is the elementary identity-point specialization of Stacks Tag 03QO and does not need the general strictly henselian theorem.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the terminal germ isomorphism to P = f'_* g'^* F. Base change preserves the terminal object, so the unique isomorphism e from f'.Etale of the identity object to the identity object of X' identifies its sections. Construct b as the inverse terminal germ isomorphism followed by the sheaf image of e.inv.op. No arbitrary witness is chosen.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand the canonical upperStarCompSheafFiberIso into its three factors. The point-isomorphism germ identity and the comap germ identity identify its inverse with the inverse-image unit followed by the germ at the induced pointed pullback. The constructed-versus-abstract adjunction unit identity finishes the calculation, as in the existing inverseImage_stalk_germ proof, generalized here to ModuleCat. This is Stacks Tag 03Q1.",
    "uses": [
-    "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-strictly-henselian-sections-stalk"
+    "lemma-openclosed-stalk-upperstar"
    ],
    "elementary": false
   },
   {
-   "text": "On a germ represented on (V,v), expand the pushforward-unit identity for the exchange mate. Pulling along v and then restricting to X' gives the inverse-image unit for g' followed by the iterated pullback lift with the specified two projections. The assumed formula for Theta is exactly this expression. Every source germ has a representative, so the equality holds as module maps.",
+   "text": "Cancel the canonical source isomorphism and apply Point.presheafFiber_hom_ext. On (V,v), use germ naturality and unit_map_baseChangeMap_app to replace exchange by the g' unit followed by squareLowerStarIso. The marked point gives a morphism sigma from the terminal object to s.Etale V. The colimit relation replaces its germ by restriction along sigma followed by the terminal germ; composing with b cancels that terminal germ.",
    "uses": [
     "def-weil-pbc-underived-exchange"
    ],
    "elementary": false
+  },
+  {
+   "text": "Expand squareLowerStarIso into the two pullback-composition comparisons c1 and c2. The restriction is the sheaf image of e.inv followed by f'.Etale.map sigma, c2.inv and c1.hom. Check the equality with geometricFibreSectionLift by both iterated-pullback projections: the projection to V is f' followed by v.left, the projection to X is g', and the projection to X' is identity. Pullback pasting and lift projection identities prove these equalities. The assumed hTheta formula now proves equality of the module maps on each representative, hence on the stalk.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lemma-openclosed-stalk-upperstar",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
   "def-weil-pbc-underived-exchange"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EYP"
+  "place": "Tags 0EYP and 03Q1; identity-point specialization of Tag 03QO, proved directly from Point colimit APIs; canonical germ calculation follows the proved Sheaf.Paper.InverseImageStalkGerm argument, with ModuleCat coefficients."
  },
  "mathlib_searches": [
   {
@@ -116,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T110317-L-621116",
-  "kind": "interface",
+  "landing": "20261012T144130-L-2102350",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
