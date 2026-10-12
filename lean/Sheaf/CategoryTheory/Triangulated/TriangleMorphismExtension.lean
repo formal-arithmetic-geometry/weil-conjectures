@@ -6,6 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-!
 # Extension of morphisms between distinguished triangles
@@ -42,9 +43,9 @@ Proof:
    two arrows of `T'` compose to zero (`lem-weil-pbc-hom-into-triangle-exact`, i).
 4. Exactness of Hom out of `T` supplies `h` completing the second square
    (`lem-weil-pbc-hom-out-of-triangle-exact`, i).
-5. TR3 for the second square supplies `f` (`lem-weil-pbc-tr3-second-square`).
-   The second square also implies the vanishing composite since the first two
-   arrows of `T` compose to zero (`lem-weil-pbc-hom-into-triangle-exact`, i).
+5. The second square implies the vanishing composite since the first two arrows
+   of `T` compose to zero (`lem-weil-pbc-hom-into-triangle-exact`, i). Together
+   with steps 1–2, this also yields an extension of the middle component.
 6. For two first-square solutions, subtract them and shift. Exactness of Hom into
    `T'` factors their shifted difference through a map `T.obj₁[1] → T'.obj₃`
    (`lem-weil-pbc-hom-into-triangle-exact`, iii). Hom vanishing kills that map;
@@ -86,6 +87,54 @@ theorem triangle_morphism_extension
     (Subsingleton (T.obj₁⟦(1 : ℤ)⟧ ⟶ T.obj₃) →
       ∀ (x : T.obj₃ ⟶ T.obj₁⟦(1 : ℤ)⟧),
         Triangle.mk T.mor₁ T.mor₂ x ∈ distTriang C → x = T.mor₃) := by
-  sorry
+  have hab : T.mor₁ ≫ g ≫ T'.mor₂ = 0 ↔
+      ∃ f : T.obj₁ ⟶ T'.obj₁, f ≫ T'.mor₁ = T.mor₁ ≫ g := by
+    constructor
+    · intro hz
+      obtain ⟨f, hf⟩ := Triangle.coyoneda_exact₂ T' hT' (T.mor₁ ≫ g) (by
+        simpa [Category.assoc] using hz)
+      exact ⟨f, hf.symm⟩
+    · rintro ⟨f, hf⟩
+      rw [← Category.assoc, ← hf, Category.assoc, comp_distTriang_mor_zero₁₂ _ hT', comp_zero]
+  have hab' : T.mor₁ ≫ g ≫ T'.mor₂ = 0 ↔
+      ∃ h : T.obj₃ ⟶ T'.obj₃, T.mor₂ ≫ h = g ≫ T'.mor₂ := by
+    constructor
+    · intro hz
+      obtain ⟨h, hh⟩ := Triangle.yoneda_exact₂ T hT (g ≫ T'.mor₂) (by
+        simpa [Category.assoc] using hz)
+      exact ⟨h, hh.symm⟩
+    · rintro ⟨h, hh⟩
+      rw [← hh, ← Category.assoc, comp_distTriang_mor_zero₁₂ _ hT, zero_comp]
+  have hac : T.mor₁ ≫ g ≫ T'.mor₂ = 0 ↔ ∃ τ : T ⟶ T', τ.hom₂ = g := by
+    constructor
+    · intro hz
+      exact exists_triangleHom_of_comp_eq_zero hT hT' g hz
+    · rintro ⟨τ, rfl⟩
+      rw [← Category.assoc, τ.comm₁, Category.assoc, comp_distTriang_mor_zero₁₂ _ hT', comp_zero]
+  refine ⟨⟨hab, hab', hac⟩, ?_, ?_⟩
+  · intro hs
+    let : Subsingleton (T.obj₁⟦(1 : ℤ)⟧ ⟶ T'.obj₃) := hs
+    refine ⟨?_, ?_, ?_⟩
+    · intro f₁ f₂ hf₁ hf₂
+      exact Triangle.cancel_mor₁_of_subsingleton hT' (hf₁.trans hf₂.symm)
+    · intro h₁ h₂ hh₁ hh₂
+      exact Triangle.cancel_mor₂_of_subsingleton hT (hh₁.trans hh₂.symm)
+    · intro f h hf hh
+      obtain ⟨c, hc₂, hc₃⟩ :=
+        complete_distinguished_triangle_morphism T T' hT hT' f g hf.symm
+      have hch : c = h := Triangle.cancel_mor₂_of_subsingleton hT (hc₂.trans hh.symm)
+      have hcomm : T.mor₃ ≫ f⟦(1 : ℤ)⟧' = h ≫ T'.mor₃ := by
+        simpa [hch] using hc₃
+      let τ : TriangleMorphism T T' :=
+        { hom₁ := f, hom₂ := g, hom₃ := h,
+          comm₁ := hf.symm, comm₂ := hh, comm₃ := hcomm }
+      exact ⟨τ, ⟨rfl, ⟨rfl, ⟨rfl, hcomm⟩⟩⟩⟩
+  · intro hs x hx
+    let : Subsingleton (T.obj₁⟦(1 : ℤ)⟧ ⟶ T.obj₃) := hs
+    obtain ⟨c, hc₂, hc₃⟩ := complete_distinguished_triangle_morphism
+      T (Triangle.mk T.mor₁ T.mor₂ x) hT hx (𝟙 _) (𝟙 _) (by simp)
+    have hc : c = 𝟙 T.obj₃ := Triangle.cancel_mor₂_of_subsingleton hT (Y := T.obj₃) (by
+      simpa using hc₂)
+    simpa [hc] using hc₃.symm
 
 end CategoryTheory.Pretriangulated
