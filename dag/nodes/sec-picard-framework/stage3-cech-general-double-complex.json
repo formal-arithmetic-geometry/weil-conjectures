@@ -14,22 +14,36 @@
  ],
  "proof": [
   {
-   "text": "Obtain the universe-lifted object and its column comparison, then apply the total comparison theorem.",
+   "text": "OPEN: construct one universe-lifted injective-resolution Cech bicomplex, retaining its resolution and augmentation data. Do not use the split zero-vertical-differential bicomplex supplied by the column-existence theorem. Resolution existence under the stated large-site hypotheses remains disputed.",
    "uses": [
-    "stage3-cech-general-columns",
-    "stage3-cech-general-total"
+    "def-sc-cech-resolution-double-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For that same resolution bicomplex, prove the column comparisons by evaluation of the resolution and compatible universe transports.",
+   "uses": [
+    "lem-sc-cech-resolution-columns"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For that same resolution bicomplex, prove the total comparison using Cech acyclicity of injectives and its augmentation, with compatible universe transports. Combine both comparisons with the constructed object. This entire joint construction is restored as the existing named Lean obligation.",
+   "uses": [
+    "lem-sc-cech-resolution-total"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "stage3-cech-general-columns",
-  "stage3-cech-general-total"
+  "def-sc-cech-resolution-double-complex",
+  "lem-sc-cech-resolution-columns",
+  "lem-sc-cech-resolution-total"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/lem-sc-cech-spectral.md",
-  "place": "Steps 1--2"
+  "place": "Steps 1--2; joint resolution-bicomplex route restored after review X-e14bd, E1 point 4. Lean proof is open, not the invalid column-only reduction."
  },
  "mathlib_searches": [
   {
@@ -98,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-3b657",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T154242-L-2434371",
+  "landing": "20261012T194146-L-466702",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the withdrawal and forced adaptation with the change record, unchanged caller signature, DAG records, report, counterexample, and clean compilation of delivered modules and downstream caller; reproduced the original compiler failures and axiom check."
  }
 }

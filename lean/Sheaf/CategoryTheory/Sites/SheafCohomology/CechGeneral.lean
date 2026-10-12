@@ -4,7 +4,6 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneralTotal
 
 /-! General-universe Cech double complex comparison. -/
 
@@ -30,13 +29,16 @@ Cech-acyclicity argument, with the necessary `ULift` comparisons.
 
 (source: `literature/blueprint/master/blueprint/sec-picard-framework/`
 `sk-thm-picard-cech/lem-sc-cech-spectral.md`, Steps 1--2)
-Proof: choose the universe-lifted injective resolution and form the Cech double complex.
-Transport the equal-universe comparisons along canonical ULift equivalences.
-(blueprint: stage3-cech-general-double-complex) -/
--- STATEMENT-DISPUTED: the cited injective-resolution argument does not establish this
--- large-site statement from HasExt alone. The planned declarations require an explicit
--- InjectiveResolution F and equal coefficient/index universes. No counterexample is claimed;
--- the unresolved obligation is resolution existence in the original sheaf category.
+Proof: construct one universe-lifted injective-resolution Cech bicomplex,
+prove its column comparisons by evaluation and universe transport, prove its
+ total comparison using injective Cech acyclicity and the augmentation, and
+combine those compatible comparisons.  The proof remains an open obligation.
+(blueprint: stage3-cech-general-double-complex)
+STATEMENT-DISPUTED: the cited injective-resolution argument does not establish this
+large-site statement from HasExt alone. The planned declarations require an explicit
+InjectiveResolution F and equal coefficient/index universes. No counterexample is claimed;
+the unresolved obligation is resolution existence in the original sheaf category.
+-/
 theorem Sheaf.exists_cechDoubleComplex_general
     [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]
     (F : Sheaf J AddCommGrpCat.{v}) (X : C)
@@ -47,8 +49,6 @@ theorem Sheaf.exists_cechDoubleComplex_general
           (ComplexShape.up ℕ)).obj D ≅
         (cechComplexFunctor fun i ↦ Over.mk (π i)).obj
           ((Over.forget X).op ⋙ F.cohomologyPresheaf q))) ∧
-      ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X) := by
-  obtain ⟨D, hcol⟩ := Sheaf.exists_cechDoubleComplex_general_columns F X π hπ
-  exact ⟨D, hcol, Sheaf.cechDoubleComplex_general_total F X π hπ D hcol⟩
+      ∀ n : ℕ, Nonempty ((D.total (ComplexShape.up ℕ)).homology n ≅ F.H' n X) := by sorry
 
 end CategoryTheory
