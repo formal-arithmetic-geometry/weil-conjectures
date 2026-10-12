@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-adjoinRoot-crt-matrix-root-block-aux-matrix",
+ "kind": "statement",
+ "title": "CRT matrix coordinate sublemma",
+ "statement": "For a monic polynomial factorization modulo an ideal, (1) the degree index sets admit an equivalence, and (2) for any such equivalence there is a CRT conjugating unit giving the block matrix identity.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI"
+ },
+ "proof": [
+  {
+   "text": "Degree additivity follows from monicity and the factorization.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "CRT and power-basis coordinate calculations produce the conjugating unit and matrix identity.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "name": "Codex",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Fin degree equivalence monic polynomial product",
+   "date": "2026-10-12",
+   "results": "none"
+  },
+  {
+   "tool": "loogle",
+   "query": "Fin equivalence",
+   "date": "2026-10-12",
+   "results": "none"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot CRT matrix",
+   "date": "2026-10-12",
+   "results": "none"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinRootCRTRootBlock",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-adjoinRoot-crt-matrix-root-block"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinRootCRTRootBlockAux",
+  "file": "lean/Sheaf/RingTheory/AdjoinRootCRTRootBlockAux.lean",
+  "declaration": "Polynomial.adjoinRoot_crt_matrix_for_degree_equiv",
+  "statement": "theorem adjoinRoot_crt_matrix_for_degree_equiv {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)] (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X]) (hg : g.Monic) (hh : h.Monic) (hcoprime : IsCoprime g h) (hfactor : f.map (Ideal.Quotient.mk I) = g * h) (d : Fin f.natDegree ≃ (Fin g.natDegree ⊕ Fin h.natDegree)) : ∃ (U : (Matrix (Fin g.natDegree ⊕ Fin h.natDegree) (Fin g.natDegree ⊕ Fin h.natDegree) (A ⧸ I))ˣ), U.val * Matrix.reindex d d ((Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hf).basis (AdjoinRoot.root f)).map (Ideal.Quotient.mk I)) * U⁻¹.val = Matrix.fromBlocks (Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hg).basis (AdjoinRoot.root g)) 0 0 (Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hh).basis (AdjoinRoot.root h))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T154829-L-2472654",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T154829-L-2472654",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

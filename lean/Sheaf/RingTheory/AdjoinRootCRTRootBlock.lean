@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.LinearAlgebra.Matrix.ToLin
+import Sheaf.RingTheory.AdjoinRootCRTRootBlockAux
 
 /-! # Simultaneous CRT coordinates for multiplication matrices
 
@@ -54,6 +55,9 @@ theorem adjoinRoot_crt_matrix_root_block
       (U : (Matrix (Fin g.natDegree ⊕ Fin h.natDegree)
         (Fin g.natDegree ⊕ Fin h.natDegree) (A ⧸ I))ˣ),
       U.val * Matrix.reindex d d (T.map (Ideal.Quotient.mk I)) * U⁻¹.val =
-        Matrix.fromBlocks Tg 0 0 Th := by sorry
+        Matrix.fromBlocks Tg 0 0 Th := by
+  obtain ⟨d⟩ := adjoinRoot_crt_degree_equiv I f hf g h hg hh hfactor
+  obtain ⟨U, hU⟩ := adjoinRoot_crt_matrix_for_degree_equiv I f hf g h hg hh hcoprime hfactor d
+  exact ⟨d, U, hU⟩
 
 end Polynomial
