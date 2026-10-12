@@ -395,6 +395,127 @@ lemma surjective_toMatching_of_hasUniqueLifts {V : SemiSimplicialObject Y.Etale}
 
 end Matching
 
+namespace Etale
+
+section BaseChange
+
+open SemiSimplicialObject
+
+variable {Y Z : Scheme.{u}} (g : Y ⟶ Z) {V : SemiSimplicialObject Z.Etale}
+  {U : SemiSimplicialObject Y.Etale} (φ : U ⟶ V.baseChange g)
+
+/-- The projection `U_n ⟶ V_n` underlying a morphism `φ : U ⟶ V ×_Z Y` of semi-simplicial étale
+schemes. -/
+noncomputable def baseChangeProj (n : ℕ) : (U.obj n).left ⟶ (V.obj n).left :=
+  (φ.app n).left ≫ pullback.fst (V.obj n).hom g
+
+lemma baseChangeProj_eq (n : ℕ) :
+    baseChangeProj g φ n = (φ.app n).left ≫ pullback.fst (V.obj n).hom g := rfl
+
+include φ in
+lemma baseChangeProj_w (n : ℕ) :
+    baseChangeProj g φ n ≫ (V.obj n).hom = (U.obj n).hom ≫ g := by
+  rw [baseChangeProj_eq, Category.assoc, pullback.condition, ← Category.assoc]
+  congr 1
+  exact MorphismProperty.Over.w (φ.app n)
+
+@[reassoc]
+lemma _root_.CategoryTheory.SemiSimplicialObject.baseChange_δ_left_fst (n : ℕ) (i : Fin (n + 2)) :
+    ((V.baseChange g).δ n i).left ≫ pullback.fst (V.obj n).hom g =
+      pullback.fst (V.obj (n + 1)).hom g ≫ (V.δ n i).left :=
+  pullback.lift_fst _ _ _
+
+@[reassoc]
+lemma _root_.CategoryTheory.SemiSimplicialObject.baseChange_δ_left_snd (n : ℕ) (i : Fin (n + 2)) :
+    ((V.baseChange g).δ n i).left ≫ pullback.snd (V.obj n).hom g =
+      pullback.snd (V.obj (n + 1)).hom g :=
+  pullback.lift_snd _ _ _
+
+@[reassoc]
+lemma baseChangeProj_δ (n : ℕ) (i : Fin (n + 2)) :
+    baseChangeProj g φ (n + 1) ≫ (V.δ n i).left = (U.δ n i).left ≫ baseChangeProj g φ n := by
+  have h : (φ.app (n + 1) ≫ (V.baseChange g).δ n i).left ≫ pullback.fst (V.obj n).hom g =
+      (U.δ n i ≫ φ.app n).left ≫ pullback.fst (V.obj n).hom g := by rw [φ.app_δ]
+  rw [MorphismProperty.Comma.comp_left, MorphismProperty.Comma.comp_left, Category.assoc,
+    Category.assoc, baseChange_δ_left_fst] at h
+  simpa only [baseChangeProj_eq, Category.assoc] using h
+
+/-- A morphism `U ⟶ V ×_Z Y` from morphisms `U_n ⟶ V_n` over `g` commuting with the face
+maps. -/
+noncomputable def baseChangeMk (m : ∀ n, (U.obj n).left ⟶ (V.obj n).left)
+    (hm : ∀ n, m n ≫ (V.obj n).hom = (U.obj n).hom ≫ g)
+    (hδ : ∀ n i, m (n + 1) ≫ (V.δ n i).left = (U.δ n i).left ≫ m n) :
+    U ⟶ V.baseChange g where
+  app n := homToPullback g (m n) (hm n)
+  app_δ n i := by
+    apply hom_ext_pullback
+    rw [MorphismProperty.Comma.comp_left, MorphismProperty.Comma.comp_left, Category.assoc,
+      Category.assoc, baseChange_δ_left_fst, homToPullback_left_fst_assoc,
+      homToPullback_left_fst]
+    exact hδ n i
+
+omit φ in
+@[simp]
+lemma baseChangeProj_baseChangeMk (m : ∀ n, (U.obj n).left ⟶ (V.obj n).left)
+    (hm : ∀ n, m n ≫ (V.obj n).hom = (U.obj n).hom ≫ g)
+    (hδ : ∀ n i, m (n + 1) ≫ (V.δ n i).left = (U.δ n i).left ≫ m n) (n : ℕ) :
+    baseChangeProj g (baseChangeMk g m hm hδ) n = m n :=
+  homToPullback_left_fst _ _ _
+
+/-- For a factorisation `g = g' ≫ h`, a morphism `U ⟶ V ×_Z Y` induces a morphism
+`U ⟶ (V ×_Z Z') ×_{Z'} Y`. -/
+noncomputable def baseChangeLift {Z' : Scheme.{u}} (g' : Y ⟶ Z') (h : Z' ⟶ Z)
+    (hgh : g' ≫ h = g) : U ⟶ (V.baseChange h).baseChange g' :=
+  baseChangeMk g' (fun n ↦ pullback.lift (baseChangeProj g φ n) ((U.obj n).hom ≫ g')
+      (by rw [baseChangeProj_w, Category.assoc, hgh]))
+    (fun n ↦ pullback.lift_snd _ _ _) (fun n i ↦ by
+      apply pullback.hom_ext
+      · rw [Category.assoc, baseChange_δ_left_fst, pullback.lift_fst_assoc, Category.assoc,
+          pullback.lift_fst]
+        exact baseChangeProj_δ g φ n i
+      · rw [Category.assoc, baseChange_δ_left_snd, pullback.lift_snd, Category.assoc,
+          pullback.lift_snd, ← Category.assoc, MorphismProperty.Over.w])
+
+lemma baseChangeProj_baseChangeLift {Z' : Scheme.{u}} (g' : Y ⟶ Z') (h : Z' ⟶ Z)
+    (hgh : g' ≫ h = g) (n : ℕ) :
+    baseChangeProj g' (baseChangeLift g φ g' h hgh) n ≫ pullback.fst (V.obj n).hom h =
+      baseChangeProj g φ n := by
+  rw [baseChangeLift, baseChangeProj_baseChangeMk, pullback.lift_fst]
+
+/-- For a factorisation `g' ≫ h`, a morphism `U ⟶ (V ×_Z Z') ×_{Z'} Y` induces a morphism
+`U ⟶ V ×_Z Y`. -/
+noncomputable def baseChangeTrans {Z' : Scheme.{u}} (g' : Y ⟶ Z') (h : Z' ⟶ Z)
+    (ψ : U ⟶ (V.baseChange h).baseChange g') : U ⟶ V.baseChange (g' ≫ h) :=
+  baseChangeMk (g' ≫ h) (fun n ↦ baseChangeProj g' ψ n ≫ pullback.fst _ _)
+    (fun n ↦ by
+      rw [Category.assoc, pullback.condition, ← Category.assoc,
+        show baseChangeProj g' ψ n ≫ pullback.snd _ _ = _ from baseChangeProj_w g' ψ n,
+        Category.assoc])
+    (fun n i ↦ by rw [Category.assoc, ← baseChange_δ_left_fst h, baseChangeProj_δ_assoc])
+
+lemma baseChangeProj_baseChangeTrans {Z' : Scheme.{u}} (g' : Y ⟶ Z') (h : Z' ⟶ Z)
+    (ψ : U ⟶ (V.baseChange h).baseChange g') (n : ℕ) :
+    baseChangeProj (g' ≫ h) (baseChangeTrans g' h ψ) n =
+      baseChangeProj g' ψ n ≫ pullback.fst _ _ :=
+  baseChangeProj_baseChangeMk _ _ _ _ n
+
+/-- A morphism `U ⟶ V ×_Z Y` followed by the base change of a morphism `w : V ⟶ V'`. -/
+noncomputable def baseChangeComp {V' : SemiSimplicialObject Z.Etale} (w : V ⟶ V') :
+    U ⟶ V'.baseChange g :=
+  baseChangeMk g (fun n ↦ baseChangeProj g φ n ≫ (w.app n).left)
+    (fun n ↦ by rw [Category.assoc, MorphismProperty.Over.w, baseChangeProj_w])
+    (fun n i ↦ by
+      rw [Category.assoc, ← MorphismProperty.Comma.comp_left, w.app_δ,
+        MorphismProperty.Comma.comp_left, baseChangeProj_δ_assoc])
+
+lemma baseChangeProj_baseChangeComp {V' : SemiSimplicialObject Z.Etale} (w : V ⟶ V') (n : ℕ) :
+    baseChangeProj g (baseChangeComp g φ w) n = baseChangeProj g φ n ≫ (w.app n).left :=
+  baseChangeProj_baseChangeMk _ _ _ _ n
+
+end BaseChange
+
+end Etale
+
 section Descent
 
 variable {I : Type u} [SmallCategory I] {D : I ⥤ Scheme.{u}} {c : Cone D}

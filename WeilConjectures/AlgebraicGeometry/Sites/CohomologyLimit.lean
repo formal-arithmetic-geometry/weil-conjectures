@@ -67,65 +67,6 @@ variable {Λ} {Y Z : Scheme.{u}} (pY : Y ⟶ S) (pZ : Z ⟶ S) (g : Y ⟶ Z) (hg
   {V : SemiSimplicialObject Z.Etale} {U : SemiSimplicialObject Y.Etale}
   (φ : U ⟶ V.baseChange g)
 
-/-- The projection `U_n ⟶ V_n` underlying a morphism `φ : U ⟶ V ×_Z Y` of semi-simplicial étale
-schemes. -/
-noncomputable abbrev baseChangeProj (n : ℕ) : (U.obj n).left ⟶ (V.obj n).left :=
-  (φ.app n).left ≫ pullback.fst (V.obj n).hom g
-
-include φ in
-lemma baseChangeProj_w (n : ℕ) :
-    baseChangeProj g φ n ≫ (V.obj n).hom = (U.obj n).hom ≫ g := by
-  rw [Category.assoc, pullback.condition, ← Category.assoc]
-  congr 1
-  exact MorphismProperty.Over.w (φ.app n)
-
-@[reassoc]
-lemma _root_.CategoryTheory.SemiSimplicialObject.baseChange_δ_left_fst (n : ℕ) (i : Fin (n + 2)) :
-    ((V.baseChange g).δ n i).left ≫ pullback.fst (V.obj n).hom g =
-      pullback.fst (V.obj (n + 1)).hom g ≫ (V.δ n i).left :=
-  pullback.lift_fst _ _ _
-
-@[reassoc]
-lemma _root_.CategoryTheory.SemiSimplicialObject.baseChange_δ_left_snd (n : ℕ) (i : Fin (n + 2)) :
-    ((V.baseChange g).δ n i).left ≫ pullback.snd (V.obj n).hom g =
-      pullback.snd (V.obj (n + 1)).hom g :=
-  pullback.lift_snd _ _ _
-
-@[reassoc]
-lemma baseChangeProj_δ (n : ℕ) (i : Fin (n + 2)) :
-    baseChangeProj g φ (n + 1) ≫ (V.δ n i).left = (U.δ n i).left ≫ baseChangeProj g φ n := by
-  have h : (φ.app (n + 1) ≫ (V.baseChange g).δ n i).left ≫ pullback.fst (V.obj n).hom g =
-      (U.δ n i ≫ φ.app n).left ≫ pullback.fst (V.obj n).hom g := by rw [φ.app_δ]
-  rw [MorphismProperty.Comma.comp_left, MorphismProperty.Comma.comp_left, Category.assoc,
-    Category.assoc, baseChange_δ_left_fst] at h
-  simpa only [baseChangeProj, Category.assoc] using h
-
-/-- For a factorisation `g = g' ≫ h`, a morphism `U ⟶ V ×_Z Y` induces a morphism
-`U ⟶ (V ×_Z Z') ×_{Z'} Y`. -/
-noncomputable def baseChangeLift {Z' : Scheme.{u}} (g' : Y ⟶ Z') (h : Z' ⟶ Z) (hgh : g' ≫ h = g) :
-    U ⟶ (V.baseChange h).baseChange g' where
-  app n := homToPullback g' (pullback.lift (baseChangeProj g φ n) ((U.obj n).hom ≫ g')
-      (by rw [baseChangeProj_w, Category.assoc, hgh]))
-    (pullback.lift_snd _ _ _)
-  app_δ n i := by
-    apply hom_ext_pullback
-    apply pullback.hom_ext
-    · rw [MorphismProperty.Comma.comp_left, MorphismProperty.Comma.comp_left, Category.assoc,
-        Category.assoc, Category.assoc, Category.assoc, baseChange_δ_left_fst_assoc,
-        homToPullback_left_fst_assoc, homToPullback_left_fst_assoc, baseChange_δ_left_fst,
-        pullback.lift_fst_assoc, pullback.lift_fst]
-      exact baseChangeProj_δ g φ n i
-    · rw [MorphismProperty.Comma.comp_left, MorphismProperty.Comma.comp_left, Category.assoc,
-        Category.assoc, Category.assoc, Category.assoc, baseChange_δ_left_fst_assoc,
-        homToPullback_left_fst_assoc, homToPullback_left_fst_assoc, pullback.lift_snd,
-        baseChange_δ_left_snd, pullback.lift_snd, ← Category.assoc, MorphismProperty.Over.w]
-
-lemma baseChangeProj_baseChangeLift {Z' : Scheme.{u}} (g' : Y ⟶ Z') (h : Z' ⟶ Z)
-    (hgh : g' ≫ h = g) (n : ℕ) :
-    baseChangeProj g' (baseChangeLift g φ g' h hgh) n ≫ pullback.fst (V.obj n).hom h =
-      baseChangeProj g φ n := by
-  simp [baseChangeLift, baseChangeProj]
-
 variable (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
 /-- Restriction of sections of `pZ^* F` over `V_n` to sections of `pY^* F` over `U_n` along a
@@ -177,7 +118,7 @@ theorem cohomologyRestrictOver_cohomologyClass (hV : V.IsHypercover Z.smallEtale
   have : homToPullback g (baseChangeProj g φ q) (baseChangeProj_w g φ q) =
       φ.app q := by
     apply hom_ext_pullback
-    simp
+    simp [baseChangeProj_eq]
   rw [this]
   rfl
 
