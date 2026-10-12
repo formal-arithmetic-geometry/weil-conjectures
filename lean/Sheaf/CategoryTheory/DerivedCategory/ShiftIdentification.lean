@@ -6,7 +6,6 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # Shift identification for bounded below right derived functors
@@ -59,7 +58,18 @@ theorem exists_rightDerived_shift_identification [PreservesFiniteLimits F] (p q 
         e.app K = (H.shift (p + q)).mapIso
             ((RF.commShiftIso (-q)).app (S.obj (Hq.obj K))) ≪≫
           (H.shiftIso (-q) (p + q) p (by omega)).app (RF.obj (S.obj (Hq.obj K))) := by
-  sorry
+  dsimp only
+  let Hq := CochainComplex.Plus.ι C ⋙
+    HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) q
+  let S := DerivedCategory.Plus.singleFunctor C 0
+  let RF := F.rightDerivedFunctorPlus
+  let H := DerivedCategory.Plus.homologyFunctor D 0
+  refine ⟨isoWhiskerLeft (Hq ⋙ S)
+      (isoWhiskerRight (RF.commShiftIso (-q)) (H.shift (p + q))) ≪≫
+    isoWhiskerLeft (Hq ⋙ S ⋙ RF) (H.shiftIso (-q) (p + q) p (by omega)), ?_⟩
+  intro K
+  apply Iso.ext
+  rfl
 
 /-- In nonnegative degree, the same composite followed by the canonical comparison with
 ordinary right derived functors is an isomorphism natural in `K`.
@@ -86,7 +96,17 @@ theorem exists_rightDerived_shift_identification_nonneg [PreservesFiniteLimits F
           (H.shiftIso (-q) ((n : ℤ) + q) n (by omega)).app
             (RF.obj (S.obj (Hq.obj K))) ≪≫
           F.homologyRightDerivedFunctorPlusObjSingleFunctorIso (Hq.obj K) n := by
-  sorry
+  dsimp only
+  let Hq := CochainComplex.Plus.ι C ⋙
+    HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) q
+  obtain ⟨e, he⟩ := F.exists_rightDerived_shift_identification (n : ℤ) q
+  refine ⟨e ≪≫ isoWhiskerLeft Hq
+    (F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso n), ?_⟩
+  intro K
+  rw [NatIso.trans_app, he K]
+  apply Iso.ext
+  simp only [Iso.trans_hom, Category.assoc]
+  rfl
 
 /-- All three objects in the shift identification vanish when `p < 0`. The last term
 spells out the convention `R^p F = 0` for negative `p`, since `Functor.rightDerived` takes
@@ -109,6 +129,18 @@ theorem isZero_rightDerived_shift_identification [PreservesFiniteLimits F]
     IsZero ((DerivedCategory.Plus.homologyFunctor D (p + q)).obj (RF.obj (L⟦-q⟧))) ∧
       IsZero ((DerivedCategory.Plus.homologyFunctor D p).obj (RF.obj L)) ∧
       IsZero (if p < 0 then (0 : D) else (F.rightDerived p.toNat).obj X) := by
-  sorry
+  dsimp only
+  let X := K.obj.homology q
+  let L := (DerivedCategory.Plus.singleFunctor C 0).obj X
+  let RF := F.rightDerivedFunctorPlus
+  have h : IsZero ((DerivedCategory.Plus.homologyFunctor D p).obj (RF.obj L)) :=
+    F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE L 0 hp
+  refine ⟨?_, h, ?_⟩
+  · exact IsZero.of_iso h
+      ((DerivedCategory.Plus.homologyFunctor D (p + q)).mapIso
+        ((RF.commShiftIso (-q)).app L) ≪≫
+        ((DerivedCategory.Plus.homologyFunctor D 0).shiftIso (-q) (p + q) p
+          (by omega)).app (RF.obj L))
+  · simpa only [if_pos hp] using (isZero_zero D)
 
 end CategoryTheory.Functor
