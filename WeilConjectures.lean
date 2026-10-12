@@ -421,6 +421,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistMul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistTensor
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistTransition
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
