@@ -8483,3 +8483,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:08 L: merged deliver/F2/Sheaf.AlgebraicGeometry.GroupScheme.DiagonalDerivationCoefficients (stage 3; reviewer PASS; after a return; landing 20261012T160826-L-2610460 (proof); batch 20261012T160822; modules 1; new nodes 0)
 - 16:08 L: merged deliver/F3/Sheaf.Algebra.Homology.BaseDerivedExtensionLinear (stage 3; reviewer PASS; first push; landing 20261012T160826-L-2610575 (interface); batch 20261012T160822; modules 3; new nodes 2)
 - 16:08 L: merged deliver/F3/Sheaf.AlgebraicGeometry.Curve.FiniteEtaleCoverReducedCompactification (stage 3; reviewer PASS; first push; landing 20261012T160826-L-2610748 (proof); batch 20261012T160822; modules 1; new nodes 0)
+- 16:08 L: merged deliver/G1/Sheaf.AlgebraicGeometry.SupportedDetectorOpenLift (stage 3; reviewer PASS; first push; landing 20261012T160826-L-2610883 (interface); batch 20261012T160822; modules 2; new nodes 1)

@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
-import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
+import Sheaf.AlgebraicGeometry.SupportedDetectorOpenLiftCore
 
 /-! # Lifting the detector from the smaller open
 
@@ -43,7 +42,8 @@ Proof:
    Hom(L(Q[n]), L(K)). Exact restriction commutes with shifts. The retract P of L(Q)
    therefore gives vanishing of Hom(P[n], L(K)). Restriction preserves quasi-coherence
    and support. The detector P gives L(K) zero, and the invertible unit K to R(L(K))
-   makes K zero, since a right adjoint preserves zero objects in these additive categories.
+   makes K zero: the inverse hom equivalence makes the unit zero, and cancellation
+   against this invertible unit gives the identity of K equal to zero.
    Redundant charts and empty U are allowed; the smaller-cover bound still holds. -/
 theorem exists_supported_detector_open_lift
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
@@ -87,6 +87,21 @@ theorem exists_supported_detector_open_lift
               (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K.obj).val.presheaf x))) →
           IsIso (adj.unit.app K.obj) →
           (∀ n : ℤ, Subsingleton (Q.obj⟦n⟧ ⟶ K.obj)) → IsZero K.obj := by
-  sorry
+  obtain ⟨U, V, hU, hUV, R, adj, Q, hQ, hQT, hdetect⟩ :=
+    exists_supported_detector_open_lift_core X s hcover hcard ih T hT hTc
+  refine ⟨U, V, hU, hUV, R, adj, Q, hQ, hQT, ?_⟩
+  intro K hKT hUnit hHom
+  let : IsIso (adj.unit.app K.obj) := hUnit
+  have hres := hdetect K hKT (fun n ↦ ?_)
+  · apply (IsZero.iff_id_eq_zero K.obj).mpr
+    apply (cancel_mono (adj.unit.app K.obj)).mp
+    have heq : adj.unit.app K.obj = 0 := by
+      apply (adj.homEquiv K.obj _).symm.injective
+      exact hres.eq_of_src _ _
+    simp [heq]
+  · refine ⟨fun f g ↦ ?_⟩
+    apply (adj.homEquiv _ _).injective
+    apply (cancel_mono (inv (adj.unit.app K.obj))).mp
+    exact (hHom n).elim _ _
 
 end AlgebraicGeometry
