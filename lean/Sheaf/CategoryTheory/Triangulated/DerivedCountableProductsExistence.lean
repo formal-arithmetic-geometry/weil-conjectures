@@ -1,9 +1,8 @@
 module
 
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-import Sheaf.CategoryTheory.LocalizationHomColimit
+import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsCore
 
 @[expose] public section
 universe w v u
@@ -20,6 +19,14 @@ theorem derivedCategory_hasCountableProducts
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [HasCountableProducts A] [CountableAB4Star A] :
     HasCountableProducts (DerivedCategory A) := by
-  sorry
+  classical
+  refine ⟨fun J _ ↦ ⟨fun F ↦ ?_⟩⟩
+  let C : J → CochainComplex A ℤ := fun j ↦ DerivedCategory.Q.objPreimage (F.obj ⟨j⟩)
+  obtain ⟨h⟩ := derivedCategory_termwiseProduct_isLimit A J C
+  have : HasLimit (Discrete.functor C ⋙ DerivedCategory.Q) :=
+    HasLimit.mk ⟨DerivedCategory.Q.mapCone (limit.cone (Discrete.functor C)), h⟩
+  exact hasLimit_of_iso (Discrete.natIso
+    (F := Discrete.functor C ⋙ DerivedCategory.Q) (G := F)
+    fun j ↦ DerivedCategory.Q.objObjPreimageIso (F.obj j))
 
 end CategoryTheory

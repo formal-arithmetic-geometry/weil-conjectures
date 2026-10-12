@@ -35,26 +35,21 @@
  ],
  "proof": [
   {
-   "text": "Construct products by termwise products of representative complexes and descend their universal property through the derived localization. Exact countable products preserve quasi-isomorphisms, and the localization fraction calculus gives the product cone.",
+   "text": "For a countable discrete diagram F, take C j = Q.objPreimage (F.obj j). The termwise-product theorem proves that Q.mapCone (limit.cone (Discrete.functor C)) is limiting. Package this specific cone as a HasLimit for Discrete.functor C ⋙ Q and transport along the natural isomorphism with components Q.objObjPreimageIso (F.obj j). Package the resulting HasLimit instances as HasCountableProducts.",
    "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pc-left-localization-hom-colimit",
-    "def-weil-abstract-derived-category",
-    "def-weil-category-product"
+    "lem-weil-derived-countable-products-core"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pc-left-localization-hom-colimit",
-  "def-weil-abstract-derived-category",
-  "def-weil-category-product"
+  "lem-weil-derived-countable-products-core"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 13.34.2, Tag 07KC"
+  "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedCountableProductsExistence.lean",
+  "place": "theorem derivedCategory_hasCountableProducts",
+  "note": "A genuine reduction using the specific termwise product cone, essential surjectivity of Q and transport along a natural isomorphism; one hole closed and one strictly intermediate hole added."
  },
  "mathlib_searches": [
   {
@@ -102,11 +97,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K2",
+  "reviewer": "X-b291b",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T154831-L-2473312",
+  "landing": "20261012T184246-L-3998284",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched unchanged existence signature and delivered proof with its node, new termwise-cone theorem with Stacks 07KC, and dependency records with Lean; both delivered modules and sole direct importer DerivedLimitProducts compile cleanly; axioms contain only the permitted three plus expected sorryAx."
  }
 }

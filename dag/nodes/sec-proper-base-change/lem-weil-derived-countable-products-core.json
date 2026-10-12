@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-derived-countable-products-core",
+ "kind": "lemma",
+ "title": "Termwise product cones remain limiting in the derived category",
+ "statement": "Let A be an abelian category with countable products satisfying CountableAB4Star and a chosen derived category. For every countable type J and family C of integer-indexed cochain complexes in A, the image under DerivedCategory.Q of the termwise product limit cone of C is a limit cone. No products in the derived category are assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 13.34.2, Tag 07KC"
+ },
+ "proof": [
+  {
+   "text": "In the homotopy category, termwise products are products: maps and homotopies are componentwise. Exact countable products commute with homology and preserve quasi-isomorphisms. Represent a family of derived morphisms by left fractions L → M j ← C j; the product of denominators and the assembled numerator supply a lift.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness write the difference as L → N ← P, with denominator s and P = ∏ C j. The left Ore condition and fraction equality criterion supply a j : N → M j and quasi-isomorphisms t j : C j → M j with s ≫ a j = π j ≫ t j and f ≫ a j = 0 in the homotopy category. Their product a satisfies s ≫ a = ∏ t j, so a is a quasi-isomorphism by two-out-of-three. Since all components of f ≫ a vanish, f ≫ a = 0; inverting a proves the difference zero. Transfer from Q(L) to an arbitrary vertex by essential surjectivity.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "lem-pc-quasi-isomorphisms-multiplicative-system"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 13.34.2, Tag 07KC"
+ },
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-derived-countable-products-existence"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsExistence",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsCore",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedCountableProductsCore.lean",
+  "declaration": "CategoryTheory.derivedCategory_termwiseProduct_isLimit",
+  "statement": "theorem derivedCategory_termwiseProduct_isLimit\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableProducts A] [CountableAB4Star A]\n    (J : Type) [Countable J] (C : J → CochainComplex A ℤ) :\n    Nonempty (IsLimit (DerivedCategory.Q.mapCone (limit.cone (Discrete.functor C))))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapCone.*limit.cone|termwiseProduct|countableProducts",
+   "results": "msearch grep found Localization.FiniteProducts (finite shapes only). Local rg found derivedCategory_countableProducts_properties, whose termwise-cone clause assumes HasCountableProducts (DerivedCategory A), so using it here would be circular. No unconditional countable theorem found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization preserves termwise products of complexes with exact countable products",
+   "results": "Eight hits, including Localization.hasProductsOfShape and preservesProductsOfShape, both requiring Finite J; these do not handle countable J.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HasLimit, Functor.EssSurj",
+   "results": "Service returned unknown identifier HasLimit; local Mathlib reading found hasLimit_of_iso, Discrete.natIso and Q.EssSurj for the reduction.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived localization functor preserves countable products for abelian categories with exact products",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b291b",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T184246-L-3998284",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-b291b",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T184246-L-3998284",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged existence signature and delivered proof with its node, new termwise-cone theorem with Stacks 07KC, and dependency records with Lean; both delivered modules and sole direct importer DerivedLimitProducts compile cleanly; axioms contain only the permitted three plus expected sorryAx."
+ }
+}
