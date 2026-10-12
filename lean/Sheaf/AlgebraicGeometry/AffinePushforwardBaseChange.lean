@@ -13,11 +13,10 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import Sheaf.AlgebraicGeometry.TensorPullback
 import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 
 /-! # Affine pushforward and arbitrary base change
@@ -150,7 +149,13 @@ theorem affinePushforward_baseChange_algebra {X S X' S' : Scheme.{u}}
           (pushforward f').map (tensorPullbackObjUnitToUnit g')) =
         tensorPullbackObjUnitToUnit g ≫
           SheafOfModules.unitToPushforwardObjUnit f'.toRingCatSheafHom := by
-  sorry
+  obtain ⟨mu, mu', hmu, hmu', _, hmult, hunit⟩ :=
+    moduleBaseChangeMap_algebra f f' g g' sq.w
+  have := SheafOfModules.isQuasicoherent_unit.{u, u, u} (R := X.ringCatSheaf)
+  have := (affinePushforward_baseChange f f' g g' sq
+    (SheafOfModules.unit X.ringCatSheaf)).2
+  have := (tensorPullbackObjUnitToUnit_isIso g').1
+  exact ⟨mu, mu', hmu, hmu', inferInstance, hmult, hunit⟩
 
 /-- Compatibility with a further base change under the canonical composition isomorphisms.
 Source: Stacks Project, Cohomology, Remark 0ATM; node clause (3)
@@ -184,7 +189,7 @@ theorem affinePushforward_baseChange_comp
               (Classical.choose (exists_tensorPullbackAdjunction h')))
             (Classical.choose (exists_tensorPullbackAdjunction (h' ≫ g')))).symm
             (pushforwardComp h' g')).inv.app F) := by
-  sorry
+  exact moduleBaseChangeMap_pasting f f' f'' g g' h h' sq₁.w sq₂.w F
 
 
 end

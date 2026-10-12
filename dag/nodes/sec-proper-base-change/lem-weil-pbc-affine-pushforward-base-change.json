@@ -95,9 +95,8 @@
    }
   },
   {
-   "text": "*Step 5 (part (2): algebras).* Let $\\mathcal A=f_*\\mathcal O_X$, a quasi-coherent $\\mathcal O_S$-algebra [lem-weil-pbc-affine-morphism-relative-spec](1), $\\mathcal A'=f'_*\\mathcal O_{X'}$, and $\\gamma=f'_*(\\epsilon_{g'})\\circ\\beta_{\\mathcal O_X}:g^*\\mathcal A\\to\\mathcal A'$ with $\\epsilon_{g'}:g'^*\\mathcal O_X\\cong\\mathcal O_{X'}$ the isomorphism of [lem-weil-pbc-module-pullback-structure-sheaf]. By (1) (Steps 2-4, for the quasi-coherent module $\\mathcal O_X$) $\\beta_{\\mathcal O_X}$ is an isomorphism, hence so is $\\gamma$. By [lem-weil-pbc-module-base-change-map-algebra](ii) $\\gamma$ respects the multiplications (the one of $g^*\\mathcal A$ being induced through $g^*(\\mathcal A\\otimes\\mathcal A)\\cong g^*\\mathcal A\\otimes g^*\\mathcal A$) and the units (through $g^*\\mathcal O_S\\cong\\mathcal O_{S'}$). A morphism of $\\mathcal O_{S'}$-algebras which is an isomorphism of modules is an isomorphism of algebras (its inverse respects multiplication and unit because $\\gamma$ does and is bijective on sections). So $g^*f_*\\mathcal O_X\\cong f'_*\\mathcal O_{X'}$ as $\\mathcal O_{S'}$-algebras.",
+   "text": "*Step 5 (part (2), realized in Lean).* Apply moduleBaseChangeMap_algebra to the commutative square sq.w, obtaining the canonical multiplications and their multiplication and unit compatibilities. The proved upstream instance SheafOfModules.isQuasicoherent_unit supplies quasi-coherence of O_X. Apply clause (1), affinePushforward_baseChange, to O_X to make beta invertible. The first projection of tensorPullbackObjUnitToUnit_isIso makes epsilon invertible, and functoriality and composition of isomorphisms make gamma invertible. Combine this with the multiplication and unit equations. No relative-Spec theorem is used.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec",
     "lem-weil-pbc-module-pullback-structure-sheaf",
     "lem-weil-pbc-module-base-change-map-algebra"
    ],
@@ -108,11 +107,9 @@
    }
   },
   {
-   "text": "*Step 6 (part (3): composition).* For $h:S''\\to S'$ let $X''=X'\\times_{S'}S''$ with projections $h':X''\\to X'$ and $f'':X''\\to S''$; by [lem-weil-pbc-cartesian-square-pasting] $X''$ with $g'\\circ h'$ and $f''$ is a fibre product $X\\times_SS''$, so the base change map for $g\\circ h$ is that of the rectangle $(f,f'',g\\circ h,g'\\circ h')$. By [lem-weil-pbc-module-base-change-map-pasting] it equals $f''_*(c_{g',h'})\\circ\\beta^{(h)}_{g'^*\\mathcal F}\\circ h^*(\\beta^{(g)}_{\\mathcal F})\\circ c_{g,h}^{-1}$, where $\\beta^{(g)}$ is the base change map for $g$ (applied to $f$ and $\\mathcal F$) and $\\beta^{(h)}$ the one for $h$ (applied to $f'$ and $g'^*\\mathcal F$), which is the assertion of (3) under the composition isomorphisms $(g\\circ h)^*\\cong h^*g^*$, $(g'\\circ h')^*\\cong h'^*g'^*$ of [def-pc-module-pullback].",
+   "text": "*Step 6 (part (3), realized in Lean).* Apply moduleBaseChangeMap_pasting to sq₁.w and sq₂.w and F. Its conclusion is exactly the displayed outer-square base change map and four-arrow composite, with the same explicit commutativity witness and conjugate composition isomorphisms. Only commutativity of the two squares is needed for this equality; no cartesian-square pasting theorem is used.",
    "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-module-base-change-map-pasting",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-module-base-change-map-pasting"
    ],
    "elementary": false,
    "source": {
@@ -139,16 +136,16 @@
   "lem-weil-pbc-pushforward-tilde-spec",
   "lem-weil-pbc-tilde-pullback-base-change",
   "def-pc-module-pullback",
-  "lem-weil-pbc-affine-morphism-relative-spec",
   "lem-weil-pbc-module-pullback-structure-sheaf",
   "lem-weil-pbc-module-base-change-map-algebra",
-  "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-module-base-change-map-pasting"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "D2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change), proof, for (1) (Steps 1-4; the locality claim and the identification of the base change map with the tensor identity are written out by the agent, Steps 2-4); (2) and (3) are not in Stacks: Step 5 is written by an agent, Step 6 follows Cohomology, Remark 0ATM (literature/stacks-project/cohomology.tex)"
+  "place": "Steps 1–4 retain the planned proof of Lemma 02KG and remain unproved in Lean. Steps 5–6 are realized by reductions to moduleBaseChangeMap_algebra and moduleBaseChangeMap_pasting, respectively, with clause (1) and tensorPullbackObjUnitToUnit_isIso supplying invertibility in Step 5. Second reading corrected the dependency record."
  },
  "mathlib_searches": [
   {
@@ -245,5 +242,15 @@
   "group": "F1",
   "result": "fix",
   "note": "f,f',g,g' + IsPullback g' f' f g (fibre product), [IsAffineHom f], F QC via IsQuasicoherent; (1) f_*F QC and IsIso of canonical moduleBaseChangeMap sq.w; affine formula pinned a,b on generators with beta(r⊗m)=(r⊗1)⊗m; (2) mu,mu' tied by section multiplication, gamma=beta;f'_*(tensorPullbackObjUnitToUnit g'), mult via module_pullback_tensor, unit via tensorPullbackObjUnitToUnit g; (3) = pasting composite with conjugateIsoEquiv comparisons; reverted the delivery's change of existing node(s) lem-weil-pbc-module-pullback-structure-sheaf (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085223-L-7454",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
