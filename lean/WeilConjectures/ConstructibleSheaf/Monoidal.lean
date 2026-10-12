@@ -12,6 +12,7 @@ public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
+import Sheaf.ConstructibleSheaf.MonoidalParts
 
 /-!
 # Tensor products and duals of constructible sheaves
@@ -99,8 +100,10 @@ constant: on a common trivialising cover it is the constant sheaf at the tensor 
 finitely generated modules. -/
 theorem IsFiniteLocallyConstantSheaf.tensorObj (hF : IsFiniteLocallyConstantSheaf F)
     (hG : IsFiniteLocallyConstantSheaf G) :
-    IsFiniteLocallyConstantSheaf (F ⊗ G) :=
-  sorry
+    IsFiniteLocallyConstantSheaf (F ⊗ G) where
+  toIsLocallyConstantSheaf :=
+    IsLocallyConstantSheaf.tensorObj_part hF.toIsLocallyConstantSheaf hG.toIsLocallyConstantSheaf
+  toIsFiniteSheaf := IsFiniteSheaf.tensorObj_part hF.toIsFiniteSheaf hG.toIsFiniteSheaf
 
 /-- **The tensor product of two constructible sheaves of modules is constructible**: on the
 common refinement of witnessing stratifications, the pullback of `F ⊗ G` to a stratum is the
@@ -112,7 +115,7 @@ theorem IsConstructibleSheaf.tensorObj (hF : IsConstructibleSheaf F) (hG : IsCon
   refine ⟨S.inter T, fun k ↦ ?_⟩
   have hF' := (S.inter_refines_left T).isFiniteLocallyConstantSheaf_upperStar F hS k
   have hG' := (S.inter_refines_right T).isFiniteLocallyConstantSheaf_upperStar G hT k
-  have := hF'.tensorObj hG'
+  have hFG := hF'.tensorObj hG'
   exact IsFiniteLocallyConstantSheaf.of_iso
     (Functor.Monoidal.μIso (Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)) F G)
 
