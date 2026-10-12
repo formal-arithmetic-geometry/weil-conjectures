@@ -16,59 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Let $F=D/\\mathfrak m_D$, $K=S/\\mathfrak m_S$ and $E=F(b)\\subseteq K$. Since $b$ is separable over $F$, the simple extension $E/F$ is finite separable and therefore finite étale.",
+   "text": "Apply the capture theorem to obtain D' with all required properties except Artinianness. Install its CommRing, Algebra, local, local-hom, Etale, and finite-module instances; IsArtinianRing.of_finite D D' then supplies the missing Artinian instance.",
    "uses": [
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-finite-separable-extension-etale"
+    "lem-weil-pbc-artinian-separable-residue-lift-capture"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
-   }
-  },
-  {
-   "text": "Artinian local rings D and S are Noetherian, have nilpotent maximal ideals and only one prime, hence are henselian. Essential surjectivity of the finite etale equivalence for D lifts E to a finite etale D-algebra D' with D'/m_D D'=E. The ideal m_D D' is nilpotent and the quotient is a field, so D' has only one prime and is local, and D→D' is local. Since D' is a finite module over an Artinian ring, it is Artinian (Mathlib instance IsArtinianRing.of_finite).",
-   "uses": [
-    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
-    "lem-weil-pbc-artinian-local-unique-prime",
-    "lem-weil-pbc-local-dimension-zero-henselian",
-    "lem-weil-pbc-henselian-finite-etale-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
-   }
-  },
-  {
-   "text": "Form the étale $S$-algebra $B=S\\otimes_D D_1$. Its reduction maps onto $K$ using $E\\hookrightarrow K$ and the residue map $S\\to K$; the kernel $Q$ is prime over $\\mathfrak m_S$ and its residue field is $K$. Henselian étale retraction supplies $B\\to S$ reducing to this map. Restriction to $D_1$ gives a map $g_1:D_1\\to S$ factoring $D\\to S$. It is local because $D_1$ has only one prime; it induces the specified embedding $E\\to K$. Lift $b\\in E$ through the quotient map of $D_1$ to an element $d$, so $\\operatorname{res}_S(g_1(d))=b$. Transport the ring, algebra, map and properties through ULift to obtain the requested ambient universe.",
-   "uses": [
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-henselian-etale-retraction",
-    "lem-weil-pbc-artinian-local-unique-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Tag 07FI (lemma-enlarge-solution-modulo), lines 2642–2675"
+    "document": "Mathlib and the delivered capture theorem",
+    "place": "IsArtinianRing.of_finite and ArtinianSeparableResidueLiftCapture"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
-  "lem-weil-pbc-artinian-local-unique-prime",
-  "lem-weil-pbc-local-dimension-zero-henselian",
-  "lem-weil-pbc-henselian-finite-etale-equivalence",
-  "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-henselian-etale-retraction"
+  "lem-weil-pbc-artinian-separable-residue-lift-capture"
  ],
  "proof_origin": {
-  "by": "X2 second reading",
-  "document": "literature/stacks-project/smoothing.tex",
-  "place": "Tag 07FI, finite étale and henselian factorization paragraphs; flatness is not used in these paragraphs"
+  "by": "U4",
+  "document": "Mathlib and delivered capture theorem",
+  "place": "IsArtinianRing.of_finite applied to finite capture data"
  },
  "mathlib_searches": [
   {
@@ -143,9 +108,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261012T212724-L-1131975",
+  "landing": "20261012T235558-L-2202701",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -4,10 +4,8 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.FieldTheory.Separable
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Artinian.Defs
-import Sheaf.RingTheory.HenselianEtaleRetraction
-import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
-import Sheaf.RingTheory.LocalDimensionZeroHenselian
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Mathlib.RingTheory.Artinian.Module
+import Sheaf.RingTheory.ArtinianSeparableResidueLiftCapture
 
 @[expose] public section
 
@@ -52,6 +50,16 @@ theorem exists_finiteEtale_artinian_residue_lift_core
       Etale D D' ∧ Module.Finite D D' ∧
       g'.comp (algebraMap D D') = algebraMap D S ∧
       ∃ d : D', IsLocalRing.residue S (g' d) = b := by
-  sorry
+  obtain ⟨D', hD', hDD', g', hlocal, hmap, hg', het, hfin, hcomp, d, hd⟩ :=
+    exists_finiteEtale_artinian_residue_lift_capture D S b hb
+  let : CommRing D' := hD'
+  let : Algebra D D' := hDD'
+  let : IsLocalRing D' := hlocal
+  let : IsLocalHom (algebraMap D D') := hmap
+  let : IsLocalHom g' := hg'
+  let : Etale D D' := het
+  let : Module.Finite D D' := hfin
+  have hart : IsArtinianRing D' := IsArtinianRing.of_finite D D'
+  exact ⟨D', hD', hDD', g', hlocal, hart, hmap, hg', het, hfin, hcomp, d, hd⟩
 
 end Algebra
