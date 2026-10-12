@@ -20,9 +20,42 @@
   "def-pur-presheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The source monoidalCategory and tensorObjIsoSheafification identify the tensor of sheaves with the sheafification of the sectionwise presheaf tensor. positiveTensorPower recursively uses this tensor, starting at the original sheaf in degree one.",
+   "uses": [
+    "def-pur-presheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For change of rings, exists_changeOfRingsMap asserts the balanced sectionwise restriction map on extension-of-scalars tensors. changeOfRingsMap chooses it. This existence theorem remains open.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "changeOfRingsMap_id is proved by ModuleCat.ExtendScalars.hom_ext: test on 1 tensor m, apply Classical.choose_spec to exists_changeOfRingsMap, simplify the identity restrictions and ModuleCat.restrictScalarsId'App_inv_apply. No new lemma or hypothesis is introduced.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The named composition and morphism-naturality theorems remain open. They supply the proof fields of changeOfRingsPresheaf and changeOfRingsHom; sheafification supplies changeOfRings and its map on morphisms.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-presheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK; stage-3 partial realization by T1: identity restriction via Mathlib extension-of-scalars extensionality; existence, composition and morphism naturality remain open"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -142,5 +175,15 @@
   "group": "F1",
   "result": "pass",
   "note": "return points repaired: terms changeOfRings(adjoint ring map f^-1OY->OX via sheafAdjunctionContinuous, same as H1) of recorded inverseImageModule, differentials inverseImageModuleMap+new changeOfRingsHom in def-pur-sheaf-tensor-product module (H13 ok), stmt_dep added by statement_change (H7 ok, 7 citers hold); binders X Y f OX OY phi(CommRingCat) K hK, IsKFlat both sides, unbounded Z, universe w, no extra hypotheses; no SheafOfModules.pullback"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0b621",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T003034-L-577946",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the delivered Lean and node against the clone: only changeOfRingsMap_id's proof and proof metadata change; compilation is clean, axioms are permitted with sorryAx from the recorded open existence theorem, and the remaining obligations and unit route agree."
  }
 }

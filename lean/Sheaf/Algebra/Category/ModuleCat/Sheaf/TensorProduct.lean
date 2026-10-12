@@ -79,7 +79,12 @@ theorem changeOfRingsMap_id (X : Cᵒᵖ) :
       (ModuleCat.restrictScalarsId' ((𝓡 R₂).obj.map (𝟙 X)).hom
         (congrArg RingCat.Hom.hom ((𝓡 R₂).obj.map_id X))).inv.app
           ((ModuleCat.extendScalars (α.hom.app X).hom).obj (M.val.obj X)) := by
-  sorry
+  apply ModuleCat.ExtendScalars.hom_ext
+  intro m
+  convert (Classical.choose_spec (exists_changeOfRingsMap α M (𝟙 X))
+    (1 : R₂.obj.obj X) m) using 1 <;>
+    simp [changeOfRingsMap, ModuleCat.restrictScalarsId'App_inv_apply]
+  · rfl
 
 /-- Composition of restrictions for change of rings. Source: Stacks, Tag 03EK
 (blueprint: def-pur-sheaf-tensor-product).
