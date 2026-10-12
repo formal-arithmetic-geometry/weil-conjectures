@@ -13,28 +13,30 @@
  ],
  "proof": [
   {
-   "text": "Form the augmented bicomplex whose resolution columns are the mapping cones of the specified column augmentations, with resolution degree shifted by one. Its total identifies, up to the usual shift and total signs, with the cone of b because hb specifies all augmentation components. Extend by zero and transpose to use the resolution direction as inner homology. Every such column is acyclic by the column quasi-isomorphism hypothesis.",
-   "uses": [
-    "def-sp-double-complex-total"
-   ],
+   "text": "Construct S by applying the degree-zero single-complex functor termwise to A, then flipping. Its resolution column n is definitionally A.X n concentrated at zero. Use fromSingle₀Equiv to construct a morphism S.flip→K.flip from the augmentation; the chain-map law at zero is a.comm and at positive resolution degrees follows from zero source objects. Flip it to f:S→K. The hypothesis hcol is definitionally the columnwise quasi-isomorphism hypothesis for f.",
+   "uses": [],
    "elementary": false
   },
   {
-   "text": "Apply the first-quadrant spectral sequence [thm-sp-double-complex-spectral-sequences]. All column homology objects vanish, so its second page and subsequent pages vanish. Each total degree has a finite diagonal filtration; the associated graded pieces of cone homology are all zero, and induction on the filtration makes cone homology zero. Thus b is a quasi-isomorphism. This is also a finite diagonal chase: exactness removes components successively in increasing Cech degree, while the resolution degree decreases until the bound is reached.",
+   "text": "Construct e:A→Tot(S) using the diagonal (0,n) inclusions. Check the chain-map law using the total differential: the resolution differential is zero and the other total sign at resolution zero is +1. Each e.f n has inverse totalDesc, using A.XIsoOfEq on resolution zero and zero elsewhere. Check both inverse equations using the diagonal coproduct universal property and the zero positive-resolution summands. Hence e is an isomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the general column comparison to f. The total inclusion naturality formula and hb show e≫Tot(f)=b, component by component. The composite of the isomorphism e and the quasi-isomorphism Tot(f) is a quasi-isomorphism. All these constructions and equalities are proved in Lean.",
    "uses": [
-    "thm-sp-double-complex-spectral-sequences"
+    "lem-sc-first-quadrant-total-column-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-double-complex-total",
-  "thm-sp-double-complex-spectral-sequences"
+  "lem-sc-first-quadrant-total-column-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0133",
-  "place": "Lemma 12.25.4, variant involving the second variable"
+  "place": "Lemma 12.25.4, finite-diagonal argument, applied to column cones"
  },
  "mathlib_searches": [
   {
@@ -125,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T112844-L-769483",
+  "landing": "20261012T135248-L-1675133",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

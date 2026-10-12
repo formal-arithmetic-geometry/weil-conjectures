@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-first-quadrant-total-column-comparison",
+ "kind": "statement",
+ "title": "Columnwise quasi-isomorphisms induce first-quadrant total quasi-isomorphisms",
+ "statement": "Let C be an abelian category [def-sp-abelian], let K and L be first-quadrant double complexes [def-sp-double-complex-total], and let f:K→L be a double-complex morphism. Suppose for every n the map of resolution columns K.flip.X n→L.flip.X n induced by f is a quasi-isomorphism, that is, it induces isomorphisms on every homology object. Then the canonical total map Tot(f):Tot(K)→Tot(L) is a quasi-isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, finite-diagonal argument, applied to column cones"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Extend both bicomplexes by zero to integer indices. Take the mapping cone of each column map, with its natural differential in the other direction. Each column cone is acyclic by the column quasi-isomorphism hypothesis. The resolution index is bounded below by -1, and the other index by 0.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0133",
+    "place": "Lemma 12.25.4, finite-diagonal argument, applied to column cones"
+   }
+  },
+  {
+   "text": "The total of the column-cone bicomplex is isomorphic to the cone of total.map f: both consist degreewise of the finite target diagonal and the shifted finite source diagonal. The cone differential agrees with the total differential after multiplying the shifted source components by the usual degree-dependent signs. Shift the lower bounds to zero and apply the first-quadrant spectral sequence, using the other direction as filtration. Its first page is the homology of the column cones, hence zero. All stable pages are zero. The finite filtration on homology has zero graded pieces; induction from the final zero step proves zero homology. Thus the total cone is acyclic, and the mapping-cone criterion proves total.map f is a quasi-isomorphism.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/0133",
+    "place": "Lemma 12.25.4, finite-diagonal argument, applied to column cones"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, finite-diagonal argument, applied to column cones"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of first quadrant bicomplexes that is a quasi-isomorphism in each column induces a quasi-isomorphism on total complexes",
+   "results": "Unavailable: service returned Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a cochain complex into a first quadrant double complex totalization is a quasi-isomorphism if each augmented column is a quasi-isomorphism",
+   "results": "Generic QuasiIso lemmas and mappingCone.quasiIso_descShortComplex; no total-comparison theorem. Loogle HomologicalComplex₂.totalMap returned unknown identifier.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*total|total.*quasiIso|column.*exact in Mathlib/Algebra/Homology and lean/WeilConjectures and lean/Sheaf",
+   "results": "WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns has total.quasiIso_map_of_finitely_many_columns and total.quasiIso_map_of_isStrictlyGE_of_isStrictlyLE. Their integer-indexed bounded-above hypotheses do not specialize to arbitrary nonnegative bicomplexes. No matching natural-number theorem or DAG node.",
+   "date": "2026-10-12",
+   "verdict": "No exact match; bounded-above infrastructure may support a future proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FirstQuadrantAugmentation",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Proof Step 1: canonical affine-cover Cech identification, affine acyclicity of the beta augmentation",
+   "via": [
+    "lem-sc-first-quadrant-column-augmentation",
+    "lem-sc-module-cech-beta-affine-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FirstQuadrantTotalComparison",
+  "file": "lean/Sheaf/Algebra/Homology/FirstQuadrantTotalComparison.lean",
+  "declaration": "HomologicalComplex₂.quasiIso_totalMap_of_columns",
+  "statement": "theorem quasiIso_totalMap_of_columns {C : Type u} [Category.{v} C] [Abelian C] {K L : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)} (f : K ⟶ L) (hf : ∀ n : ℕ, QuasiIso (((flipFunctor C (ComplexShape.up ℕ) (ComplexShape.up ℕ)).map f).f n)) : QuasiIso (total.map f (ComplexShape.up ℕ))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T135248-L-1675133",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T135248-L-1675133",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
