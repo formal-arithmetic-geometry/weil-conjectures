@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
+import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 
 /-!
 # The Lie algebra of a group scheme
@@ -74,7 +75,7 @@ noncomputable instance : Module Γ(S, ⊤) (Lie G) :=
 
 /-- The Lie algebra is the module of global sections of the Lie algebra sheaf. -/
 theorem nonempty_lie_equiv_sections : Nonempty (Lie G ≃+ Γ(lieAlgebraSheaf G, ⊤)) := by
-  sorry
+  exact ⟨(Scheme.Modules.ΓHomObjAddEquiv (omega G) (Scheme.Modules.unitModule S)).symm⟩
 
 end GrpObj
 
