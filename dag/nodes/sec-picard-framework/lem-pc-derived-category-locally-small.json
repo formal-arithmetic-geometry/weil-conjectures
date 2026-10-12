@@ -1,0 +1,122 @@
+{
+ "id": "lem-pc-derived-category-locally-small",
+ "kind": "statement",
+ "title": "Local smallness of a derived category with K-injective resolutions",
+ "statement": "Let $A$ be an abelian category [def-sp-abelian] whose Hom sets are equivalent to types in a universe $w$, and suppose $A$ has K-injective resolutions [prop-pur-kinjective-resolutions-exist]. Let $D(A)$ be any chosen derived category [def-weil-abstract-derived-category], with an arbitrary Hom universe. Then every Hom set of $D(A)$ is equivalent to a type in universe $w$.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasDerivedCategory.lean",
+  "place": "Module docstring and DerivedCategory.locallySmall, lines 64-69"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The category of cochain complexes is locally w-small, since a chain map is a countable family of maps satisfying equations. Its homotopy category is locally w-small because quotient Hom types remain small. The full subcategory of K-injectives is therefore locally w-small. HomotopyCategory.KInjectives.Qh is an equivalence when K-injective resolutions exist. Apply locallySmall_congr to this equivalence, exactly as in the existing proof of DerivedCategory.locallySmall.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/GrothendieckAbelian/HasDerivedCategory.lean",
+  "place": "Module docstring and DerivedCategory.locallySmall, lines 64-69"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "locallySmall|LocallySmall",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived category of a locally small abelian category with K injective resolutions is locally small",
+   "results": "CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt; CategoryTheory.hasExt_of_enoughInjectives; CategoryTheory.ShortComplex.ShortExact.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoX₃CochainComplexMapSingleFunctorOfNatX₁; CategoryTheory.IsGrothendieckAbelian.hasExt; CategoryTheory.hasExt_iff; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; CategoryTheory.hasExt_of_hasDerivedCategory; CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocallySmall",
+   "results": "CategoryTheory.LocallySmall; CategoryTheory.locallySmall_max; CategoryTheory.locallySmall_self; CategoryTheory.locallySmall_of_univLE; CategoryTheory.locallySmall_of_essentiallySmall; CategoryTheory.ShrinkHoms.instCategory; CategoryTheory.essentiallySmall_of_small_of_locallySmall; CategoryTheory.instLocallySmallOpposite",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category locally small K injective resolutions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 case (1): existence of the right adjoints on D_QCoh for qcqs morphisms; universe-independent Brown application",
+   "via": [
+    "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory",
+  "declaration": "DerivedCategory.locallySmall",
+  "statement": "instance DerivedCategory.locallySmall [LocallySmall.{w} C] [HasKInjectiveResolutions C] [HasDerivedCategory C] : LocallySmall.{w} (DerivedCategory C)",
+  "branch": "slopmaster2",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "DerivedCategory.locallySmall"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085310-L-27711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085310-L-27711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

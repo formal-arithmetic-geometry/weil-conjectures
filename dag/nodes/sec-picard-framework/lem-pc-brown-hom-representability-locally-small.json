@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-brown-hom-representability-locally-small",
+ "kind": "statement",
+ "title": "Objectwise Brown Hom representability for locally small categories",
+ "statement": "Fix a universe $w$. Let $C,D$ be triangulated categories [def-weil-triangulated-category], with arbitrary object and Hom universes, such that every Hom set is equivalent to a type in universe $w$. Suppose both categories have coproducts indexed by types in universe $w$, and $C$ is compactly generated relative to those coproducts [def-pc-compactly-generated]. Let $F:C\\to D$ be exact and preserve every such coproduct. For any fixed $Y\\in D$, the functor $X\\mapsto\\operatorname{Hom}_D(F(X),Y)$ on $C^{op}$ is representable: there is $G_Y\\in C$ and bijections $\\operatorname{Hom}_C(X,G_Y)\\cong\\operatorname{Hom}_D(F(X),Y)$ natural in $X$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8G, proposition-brown proof; Tag 0A8F, lemma-brown"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compactly-generated"
+ ],
+ "proof": [
+  {
+   "text": "Use ShrinkHoms.equivalence to replace both categories by equivalent categories with Hom types in universe w. Transfer the additive, zero, shift and distinguished-triangle structures. Equivalences preserve coproducts. The natural additive Hom bijections identify the direct-sum-to-Hom maps for each transported generator with the original maps, so compactness is preserved. Their coproduct stays a weak generator because shifts, zero objects and nonzero maps are preserved and reflected. Thus the transported source is compactly generated in universe w.",
+   "uses": [
+    "def-pc-compactly-generated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport F by the inverse source equivalence and target equivalence. This functor is exact and preserves w-indexed coproducts. Apply lem-pc-brown-representability-right-adjoint with its indexing universe and both Hom universes equal to w. The resulting adjunction represents Hom from the transported F into the image of the fixed Y.",
+   "uses": [
+    "lem-pc-brown-representability-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the representing object and its natural Hom bijections back along the equivalences. Composition with the fully faithful equivalences gives the required bijections for the original categories, natural in X.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compactly-generated",
+  "def-weil-triangulated-category",
+  "lem-pc-brown-representability-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8G, proposition-brown proof; Tag 0A8F, lemma-brown"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "brown|compactly.*generat.*represent",
+   "results": "Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability locally small triangulated categories representability of Hom functor for exact coproduct preserving functor with compactly generated source",
+   "results": "CategoryTheory.Pretriangulated.instIsHomologicalOppositeAddCommGrpCatObjFunctorPreadditiveYoneda; CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CategoryTheory.Functor.contractible_mem_essImageDistTriang; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated; CategoryTheory.Functor.essImageDistTriang; CategoryTheory.Triangulated.Localization.isTriangulated_functor; CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRepresentable",
+   "results": "CategoryTheory.Functor.IsRepresentable; CategoryTheory.Functor.reprX; CategoryTheory.Functor.RepresentableBy.isRepresentable; CategoryTheory.Functor.representableBy; CategoryTheory.Functor.IsRepresentable.has_representation; CategoryTheory.Functor.IsRepresentable.mk; CategoryTheory.Functor.instIsRepresentableCompOppositeUliftFunctor; CategoryTheory.Functor.instIsRepresentableObjOppositeTypeUliftYoneda",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Brown representability Hom functor locally small compactly generated triangulated category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 case (1): existence of the right adjoints on D_QCoh for qcqs morphisms; universe-independent Brown application",
+   "via": [
+    "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.BrownRepresentabilityHomLocallySmall",
+  "file": "lean/Sheaf/CategoryTheory/BrownRepresentabilityHomLocallySmall.lean",
+  "declaration": "CategoryTheory.brownHomRepresentabilityLocallySmall",
+  "statement": "theorem brownHomRepresentabilityLocallySmall {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [LocallySmall.{w} C] [LocallySmall.{w} D] [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ] [Preadditive C] [Preadditive D] [∀ n : ℤ, (shiftFunctor C n).Additive] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated C] [Pretriangulated D] [IsTriangulated C] [IsTriangulated D] [HasCoproducts.{w} C] [HasCoproducts.{w} D] (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] (hC : IsCompactlyGeneratedTriangulated.{w} C) (hF : ∀ I : Type w, PreservesColimitsOfShape (Discrete I) F) (Y : D) : (F.op ⋙ yoneda.obj Y).IsRepresentable",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085310-L-27711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085310-L-27711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,12 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
-import Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint
+import Sheaf.CategoryTheory.BrownRepresentabilityHomLocallySmall
+import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-!
@@ -61,6 +62,55 @@ theorem schemeDerivedDirectImage_qcqs_hasRightAdjoint (X Y : Scheme.{u})
       ((schemeDerivedQCohProperty Y).lift
         ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)
         (fun E ↦ hpres E.obj E.property)).IsLeftAdjoint := by
-  sorry
+  let hpres := schemeDerivedDirectImage_preserves_QCoh f
+  refine ⟨hpres, ?_⟩
+  obtain ⟨hX, hXs, hCg⟩ := schemeDerivedQCoh_compactlyGenerated X
+  obtain ⟨hY, hYs, _⟩ := schemeDerivedQCoh_compactlyGenerated Y
+  let := hX
+  let := hY
+  let := hXs
+  let := hYs
+  let F := (schemeDerivedQCohProperty Y).lift
+    ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)
+    (fun E ↦ hpres E.obj E.property)
+  let hshift : F.CommShift ℤ := inferInstance
+  let hambient : (schemeDerivedDirectImage f).IsTriangulated := inferInstance
+  let hcomp : ((schemeDerivedQCohProperty X).ι ⋙
+      schemeDerivedDirectImage f).IsTriangulated := inferInstance
+  let : F.IsTriangulated := by
+    apply ObjectProperty.isTriangulated_lift
+  let : LocallySmall.{u} (schemeDerivedQCohCategory X) := inferInstance
+  let : LocallySmall.{u} (schemeDerivedQCohCategory Y) := inferInstance
+  have hF : ∀ I : Type u, CategoryTheory.Limits.PreservesColimitsOfShape (Discrete I) F := by
+    intro I
+    let : CategoryTheory.Limits.HasCoproducts.{u} (schemeDerivedCategory X) :=
+      derivedAmbientHasCoproducts X
+    let : (schemeDerivedQCohProperty X).IsClosedUnderColimitsOfShape (Discrete I) :=
+      schemeDerivedQCohClosedUnderCoproducts X I
+    constructor
+    intro K
+    let : CategoryTheory.Limits.PreservesColimit (K ⋙ (schemeDerivedQCohProperty X).ι)
+        (schemeDerivedDirectImage f) := by
+      let : CategoryTheory.Limits.PreservesColimit
+          (Discrete.functor ((K ⋙ (schemeDerivedQCohProperty X).ι).obj ∘ Discrete.mk))
+          (schemeDerivedDirectImage f) :=
+        derivedDirectImagePreservesDirectSums f I (fun i ↦ K.obj ⟨i⟩)
+      exact CategoryTheory.Limits.preservesColimit_of_iso_diagram _
+        Discrete.natIsoFunctor.symm
+    let : CategoryTheory.Limits.PreservesColimit K
+        ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) := inferInstance
+    let : CategoryTheory.Limits.PreservesColimit K (F ⋙ (schemeDerivedQCohProperty Y).ι) :=
+      CategoryTheory.Limits.preservesColimit_of_natIso K
+        ((schemeDerivedQCohProperty Y).liftCompιIso _ _).symm
+    exact CategoryTheory.Limits.preservesColimit_of_reflects_of_preserves F
+      (schemeDerivedQCohProperty Y).ι
+  apply Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top
+  funext E
+  apply propext
+  constructor
+  · intro _
+    trivial
+  · intro _
+    exact brownHomRepresentabilityLocallySmall F hCg hF E
 
 end AlgebraicGeometry

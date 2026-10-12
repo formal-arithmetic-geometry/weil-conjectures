@@ -25,81 +25,58 @@
  ],
  "proof": [
   {
-   "text": "Because f is quasi-compact and quasi-separated, [lem-pc-derived-direct-image-preserves-qcoh] says that Rf_* sends D_QCoh(O_X) into D_QCoh(O_Y), so the restricted functor in the statement is well defined.",
+   "text": "Set hpres to schemeDerivedDirectImage_preserves_QCoh f. This gives the first existential witness and defines the restricted full-subcategory lift F.",
    "uses": [
     "lem-pc-derived-direct-image-preserves-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D5, part (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "The categories D_QCoh(O_X) and D_QCoh(O_Y) have all set-indexed direct sums by [lem-pc-derived-qcoh-direct-sums], applied separately to X and Y.",
-   "uses": [
-    "lem-pc-derived-qcoh-direct-sums"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
-    "place": "Lemma perfect-lemma-quasi-coherence-direct-sums"
-   }
-  },
-  {
-   "text": "Since X is a quasi-compact and quasi-separated scheme, [lem-pc-derived-qcoh-compact-generation] gives compact generation of D_QCoh(O_X).",
+   "text": "Apply schemeDerivedQCoh_compactlyGenerated to X and Y. Install the supplied triangulated structures and coproduct instances; retain the compact generation witness for X. Thus the direct sums and source compact generation required by the original unit route are present.",
    "uses": [
     "lem-pc-derived-qcoh-compact-generation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
-    "place": "Theorem perfect-theorem-bondal-van-den-Bergh"
-   }
+   "elementary": false
   },
   {
-   "text": "For a quasi-compact and quasi-separated morphism, [lem-pc-derived-direct-image-preserves-direct-sums] says that the restricted derived direct image Rf_* commutes with all set-indexed direct sums.",
+   "text": "The unbounded right derived functor commutes with shifts and is triangulated by lem-pc-right-derived-functor-triangulated. Its composite with the source inclusion is triangulated, and ObjectProperty.isTriangulated_lift makes F triangulated. The local-smallness instance DerivedCategory.locallySmall, followed by the fully faithful inclusion instance, gives local smallness in the scheme universe for both quasi-coherent categories.",
    "uses": [
-    "lem-pc-derived-direct-image-preserves-direct-sums"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
-    "place": "Lemma perfect-lemma-quasi-coherence-pushforward-direct-sums"
-   }
-  },
-  {
-   "text": "By the definitions of the derived category and total derived direct image [def-pc-derived-category, def-pc-derived-direct-image], and the triangulated right-derived-functor statement [lem-pc-right-derived-functor-triangulated], the restricted derived direct image is an exact functor between triangulated derived categories. Applying [lem-pc-brown-representability-right-adjoint] to the restricted functor, using Steps 2 and 3 for coproducts and compact generation and Step 4 for coproduct preservation, supplies a right adjoint.",
-   "uses": [
-    "def-pc-derived-category",
-    "def-pc-derived-direct-image",
     "lem-pc-right-derived-functor-triangulated",
-    "lem-pc-brown-representability-right-adjoint",
-    "lem-pc-derived-qcoh-direct-sums",
-    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-derived-category-locally-small"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install ambient coproducts using derivedAmbientHasCoproducts X, and closure of quasi-coherent cohomology under the given discrete colimits using schemeDerivedQCohClosedUnderCoproducts X I. Mathlib then gives preservation of these colimits by source inclusion. For each discrete diagram K, derivedDirectImagePreservesDirectSums f gives ambient preservation after identifying K followed by inclusion with its Discrete.functor diagram via Discrete.natIsoFunctor. Composition preserves this colimit. The canonical liftCompιIso identifies F followed by target inclusion with that composite. Target inclusion is fully faithful and reflects colimits, so preservesColimit_of_reflects_of_preserves gives preservation by F.",
+   "uses": [
+    "lem-pc-derived-ambient-has-coproducts",
+    "lem-pc-derived-qcoh-closed-coproducts",
     "lem-pc-derived-direct-image-preserves-direct-sums"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9E, Lemma 48.3.1 proof and Proposition derived-proposition-brown"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For each E in the target quasi-coherent category, apply brownHomRepresentabilityLocallySmall to F, source compact generation, and coproduct preservation. Hence F.rightAdjointObjIsDefined is top, proved by function and proposition extensionality. Mathlib theorem Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top assembles the natural representing Hom bijections into a right adjoint.",
+   "uses": [
+    "lem-pc-brown-hom-representability-locally-small"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-category",
-  "def-pc-derived-direct-image",
   "lem-pc-derived-direct-image-preserves-qcoh",
-  "lem-pc-derived-qcoh-direct-sums",
   "lem-pc-derived-qcoh-compact-generation",
-  "lem-pc-derived-direct-image-preserves-direct-sums",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-pc-brown-representability-right-adjoint"
+  "lem-pc-derived-category-locally-small",
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-brown-hom-representability-locally-small"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9E, Lemma 48.3.1 and its proof"
+  "place": "Tag 0A9E, lemma-twisted-inverse-image proof; Lean full-subcategory and objectwise Brown glue by N1"
  },
  "mathlib_searches": [
   {
@@ -200,5 +177,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T085310-L-27711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
