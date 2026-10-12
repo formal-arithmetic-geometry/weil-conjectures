@@ -6,11 +6,11 @@ Authors: SHEAF group F2
 module
 
 public import Sheaf.RingTheory.RingPseudoCoherent
+import Sheaf.AlgebraicGeometry.ProperFlatCohomologyData
+import Sheaf.AlgebraicGeometry.ProperFlatCohomologyProperties
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import Sheaf.AlgebraicGeometry.ProperBasic
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # Bounded flat complexes computing proper cohomology -/
 
@@ -56,6 +56,16 @@ theorem exists_proper_flat_cohomology_model {X T : Scheme.{u}} (f : X ⟶ T) (F 
       ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by sorry
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by
+  obtain ⟨U, C, d, ht, hU, hCge, hCle, hCflat, hCqc, hcomp⟩ :=
+    exists_proper_flat_cohomology_model_data f F hF t
+  obtain ⟨D, hDge, hDle, hDflat, hDqc, hpc, hDC⟩ :=
+    proper_flat_cohomology_model_properties f F hF t U C d
+      ht hU hCge hCle hCflat hCqc hcomp
+  refine ⟨U, D, d, ht, hU, hDge, hDle, hDflat, hDqc, hpc, ?_⟩
+  intro T' X' g g' f' _ sq q
+  obtain ⟨eDC⟩ := hDC g q
+  obtain ⟨eC⟩ := hcomp g g' f' sq q
+  exact ⟨eDC ≪≫ eC⟩
 
 end AlgebraicGeometry.Scheme.Modules
