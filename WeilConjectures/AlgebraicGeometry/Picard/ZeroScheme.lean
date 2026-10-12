@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.MatesArrow
 
 /-!
 # The zero-scheme dictionary and the representability of `F`
@@ -153,6 +155,7 @@ lemma isInvertible_pullback_pushforward
   (SheafOfModules.IsInvertible.of_iso.{u, u, u}
     ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward _)).app _)).pullback
 
+omit [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The adjunction morphism commutes with base change.** For `ℒ ∈ F(T)` and a morphism
 `i : T' ⟶ T` of `k`-schemes, with base change `i' : X_{T'} ⟶ X_T`, the pullback
 `i'^* φ_ℒ : i'^* f_T^* f_{T,*} ℒ ⟶ i'^* ℒ` of the adjunction morphism of `ℒ` is isomorphic, as
@@ -161,7 +164,12 @@ an arrow, to the adjunction morphism `f_{T'}^* f_{T',*} ℒ_{T'} ⟶ ℒ_{T'}` o
 
 This is cohomology and base change for `F`: since `Rf_{T,*} ℒ ≅ 𝒩[0]` with `𝒩` invertible, the
 base change map `i^* f_{T,*} ℒ ⟶ f_{T',*} i'^* ℒ` is an isomorphism, and it is compatible with the
-two adjunction morphisms by construction (it is the mate of `i'^* f_T^* ≅ f_{T'}^* i^*`). -/
+two adjunction morphisms by construction (it is the mate of `i'^* f_T^* ≅ f_{T'}^* i^*`).
+
+Both sides of the base change map are invertible, so it is an isomorphism once it is nonzero on
+every fibre (`AlgebraicGeometry.Scheme.Modules.Hom.isIso_of_forall_pullback_ne_zero`); on a fibre
+it is nonzero because the adjunction morphism of `ℒ` is
+(`AlgebraicGeometry.pullback_baseChangeMap_map_counit_ne_zero`, by a Čech complex argument). -/
 theorem nonempty_arrowIso_pullback_directImageCounit
     (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
     [∀ T : Over (Spec (.of k)),
@@ -172,8 +180,92 @@ theorem nonempty_arrowIso_pullback_directImageCounit
         (Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1)) ≅
       Arrow.mk (Pic.directImageCounit (X ↘ Spec (.of k)) T'
         (Pic.map (baseChangeMap (X ↘ Spec (.of k)) i) ℒ.1.1))) :=
-  sorry
+  by
+  let sT := Limits.pullback.snd (X ↘ Spec (.of k)) T.hom
+  let sT' := Limits.pullback.snd (X ↘ Spec (.of k)) T'.hom
+  let i' := baseChangeMap (X ↘ Spec (.of k)) i
+  have hw : sT' ≫ i.left = i' ≫ sT := (Limits.pullback.lift_snd _ _ _).symm
+  -- the square `i^* ⋙ f_{T'}^* ≅ f_T^* ⋙ i'^*` of pullbacks
+  let αi : Modules.pullback i.left ⋙ Modules.pullback sT' ≅
+      Modules.pullback sT ⋙ Modules.pullback i' :=
+    Modules.pullbackComp sT' i.left ≪≫ Modules.pullbackCongr hw ≪≫
+      (Modules.pullbackComp i' sT).symm
+  let α : TwoSquare (Modules.pullback i.left) (Modules.pullback sT) (Modules.pullback sT')
+    (Modules.pullback i') := αi.hom
+  let d := (fromSkeleton _).obj ℒ.1.1.val
+  have : IsIso (α.app ((Modules.pushforward sT).obj d)) :=
+    inferInstanceAs (IsIso (αi.app _).hom)
+  -- cohomology and base change for `F`: since `Rf_{T,*} ℒ ≅ 𝒩[0]` with `𝒩` invertible, the base
+  -- change morphism `i^* f_{T,*} ℒ ⟶ f_{T',*} i'^* ℒ`, the mate of `α`, is an isomorphism
+  have : IsIso ((mateEquiv (Modules.pullbackPushforwardAdjunction sT)
+      (Modules.pullbackPushforwardAdjunction sT') α).app d) := by
+    -- Cohomology and base change in degree `0` for the canonical map: both sides are invertible,
+    -- and the map is nonzero on every fibre, since the adjunction morphism of `ℒ` is
+    -- (`AlgebraicGeometry.pullback_baseChangeMap_map_counit_ne_zero`).
+    let adj := Modules.pullbackPushforwardAdjunction sT
+    let adj' := Modules.pullbackPushforwardAdjunction sT'
+    let β := (mateEquiv adj adj' α).app d
+    have hL' := IsInvertibleDirectImage.map_of_isProper (X ↘ Spec (.of k)) i ℒ.2
+    have hN : SheafOfModules.IsInvertible.{u, u, u} ((Modules.pushforward sT).obj d) :=
+      have := ℒ.2.1
+      SheafOfModules.IsInvertible.of_iso.{u, u, u}
+        ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward _)).app _)
+    have : SheafOfModules.IsInvertible.{u, u, u}
+        ((Modules.pushforward sT ⋙ Modules.pullback i.left).obj d) := hN.pullback
+    have : SheafOfModules.IsInvertible.{u, u, u}
+        ((Modules.pullback i' ⋙ Modules.pushforward sT').obj d) :=
+      have : SheafOfModules.IsInvertible.{u, u, u} (((Modules.pushforward sT').rightDerived 0).obj
+          ((fromSkeleton _).obj (toSkeleton ((Modules.pullback i').obj d)))) := hL'.1
+      SheafOfModules.IsInvertible.of_iso.{u, u, u}
+        (((Functor.rightDerivedZeroIsoSelf (Modules.pushforward _)).app _) ≪≫
+          (Modules.pushforward sT').mapIso (fromSkeletonToSkeletonIso _))
+    refine Modules.Hom.isIso_of_forall_pullback_ne_zero β fun t' h0 ↦ ?_
+    obtain ⟨V, htV, -, s, hs⟩ :=
+      Modules.exists_isFreeGenerator ((Modules.pushforward sT).obj d) (x := i.left t')
+        (TopologicalSpace.Opens.mem_top _)
+    let T₀ : Over (Spec (.of k)) := Over.mk (T'.left.fromSpecResidueField t' ≫ T'.hom)
+    let p : T₀ ⟶ T' := Over.homMk (T'.left.fromSpecResidueField t')
+    have hq : ⊤ ≤ (p ≫ i).left ⁻¹ᵁ V.1 := by
+      rintro y -
+      change i.left (T'.left.fromSpecResidueField t' y) ∈ V.1
+      rw [Scheme.fromSpecResidueField_apply]
+      exact htV
+    have : IsAffine T₀.left := inferInstanceAs (IsAffine (Spec _))
+    have : Nontrivial Γ(T₀.left, ⊤) :=
+      (Scheme.ΓSpecIso (T'.left.residueField t')).commRingCatIsoToRingEquiv.nontrivial
+    refine pullback_baseChangeMap_map_counit_ne_zero (X ↘ Spec (.of k)) ℒ.2 V.2 hs (p ≫ i) hq ?_
+    -- the adjunction morphism pulled back to `X_{T₀}` factors through the fibre of `β`
+    let p' := baseChangeMap (X ↘ Spec (.of k)) p
+    have hw : p' ≫ sT' = Limits.pullback.snd (X ↘ Spec (.of k)) T₀.hom ≫ p.left :=
+      (isPullback_baseChangeMap (X ↘ Spec (.of k)) p).w
+    let γ : Modules.pullback sT' ⋙ Modules.pullback p' ≅
+        Modules.pullback p.left ⋙ Modules.pullback
+          (Limits.pullback.snd (X ↘ Spec (.of k)) T₀.hom) :=
+      Modules.pullbackComp p' sT' ≪≫ Modules.pullbackCongr hw ≪≫
+        (Modules.pullbackComp _ p.left).symm
+    have hβ : (Modules.pullback p').map ((Modules.pullback sT').map β) = 0 := by
+      rw [← Functor.comp_map, ← NatIso.naturality_2 γ β, Functor.comp_map]
+      erw [h0]
+      rw [Functor.map_zero, zero_comp, comp_zero]
+    have hc := mateEquiv_counit adj adj' α d
+    have hφ : (Modules.pullback p').map ((Modules.pullback i').map (adj.counit.app d)) = 0 := by
+      have : (Modules.pullback i').map (adj.counit.app d) =
+          inv (α.app ((Modules.pushforward sT).obj d)) ≫
+            (Modules.pullback sT').map β ≫ adj'.counit.app _ := by
+        rw [hc, IsIso.inv_hom_id_assoc]
+      rw [this, Functor.map_comp, Functor.map_comp, hβ, zero_comp, comp_zero]
+    rw [baseChangeMap_comp, ← NatIso.naturality_1 (Modules.pullbackComp p' i'), Functor.comp_map]
+    erw [hφ]
+    rw [zero_comp, comp_zero]
+  -- identify `i'^* ℒ` with the representative of its class
+  let e : (Modules.pullback i').obj d ≅ (fromSkeleton _).obj (Pic.map i' ℒ.1.1).val :=
+    (fromSkeletonToSkeletonIso _).symm
+  let adj := Modules.pullbackPushforwardAdjunction sT'
+  exact ⟨Adjunction.arrowIsoMapCounit (Modules.pullbackPushforwardAdjunction sT) adj α d ≪≫
+    Arrow.isoMk (((Modules.pullback sT').mapIso ((Modules.pushforward sT').mapIso e)))
+      e (adj.counit.naturality e.hom)⟩
 
+omit [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The zero-scheme dictionary is natural.** For `ℒ ∈ F(T)` and `i : T' ⟶ T`, the zero scheme
 of the adjunction morphism of `ℒ_{T'}` is the base change to `X_{T'}` of the zero scheme of the
 adjunction morphism of `ℒ`: `Z(φ_{ℒ_{T'}}) = Z(φ_ℒ) ×_{X_T} X_{T'}`. -/
@@ -193,6 +285,7 @@ theorem comap_zeroLocus_directImageCounit
   exact Modules.Hom.zeroLocus_eq_of_arrowIso _ _
     (nonempty_arrowIso_pullback_directImageCounit σ hσ i ℒ).some
 
+omit [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The fibres of the adjunction section are nonzero.** For `ℒ ∈ F(T)` and a point `t` of `T`,
 the zero scheme of the adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` does not contain the
 fibre `X_t`: the restriction of its ideal to `X_t` is nonzero.

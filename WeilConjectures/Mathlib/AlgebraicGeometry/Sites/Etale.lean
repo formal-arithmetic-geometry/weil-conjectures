@@ -37,6 +37,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
   site has terminal sections over an object whose underlying scheme is empty. This is the
   sheaf condition for the empty covering. Hence every sheaf on the small étale site of an
   empty scheme is zero (`AlgebraicGeometry.Scheme.Etale.isZero_sheaf_of_isEmpty`).
+- `AlgebraicGeometry.Scheme.Etale.isTerminalMkId`: `X`, with the identity, is a terminal object
+  of its small étale site.
 - `AlgebraicGeometry.Scheme.hasWeakSheafify_smallEtaleTopology`: sheafification for the
   localizations of the small étale site at all étale `U ⟶ X` gives sheafification for
   the small étale site itself, by localizing at the terminal object `𝟙 X`.
@@ -238,6 +240,21 @@ lemma Etale.isZero_sheaf_of_isEmpty [Preadditive A] [HasZeroObject A] [IsEmpty X
   exact (Etale.isTerminalSectionsOfIsEmpty G T.unop).isZero.eq_of_src _ _
 
 end EmptyObject
+
+section Terminal
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Morphisms into the terminal étale `X`-scheme `X` are unique. -/
+lemma Etale.hom_ext_mk_id {V : X.Etale} (a b : V ⟶ Etale.mk (𝟙 X)) : a = b :=
+  MorphismProperty.Over.Hom.ext ((Category.comp_id _).symm.trans ((MorphismProperty.Over.w a).trans
+    ((MorphismProperty.Over.w b).symm.trans (Category.comp_id _))))
+
+/-- The scheme `X`, with the identity, is a terminal object of its small étale site. -/
+noncomputable def Etale.isTerminalMkId (X : Scheme.{u}) : IsTerminal (Etale.mk (𝟙 X)) :=
+  IsTerminal.ofUniqueHom (fun V ↦ MorphismProperty.Over.homMk V.hom (Category.comp_id _))
+    (fun _ _ ↦ Etale.hom_ext_mk_id _ _)
+
+end Terminal
 
 section Sheafify
 
