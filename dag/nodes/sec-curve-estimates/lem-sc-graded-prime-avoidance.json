@@ -25,48 +25,48 @@
  ],
  "proof": [
   {
-   "text": "By deleting any $\\mathfrak p_j$ that is contained in another $\\mathfrak p_i$, we may assume that no inclusion $\\mathfrak p_i\\subseteq\\mathfrak p_j$ holds for distinct indices: avoiding the larger prime automatically avoids the smaller one, so the conclusion for the reduced list implies the original conclusion.",
+   "text": "Replace the indexed family by its finite image, removing repetitions. Use strong induction on this finite set. For the empty set take zero, homogeneous of degree one and belonging to I. For a nonempty set choose a minimal prime p with respect to inclusion. For every other prime q in the set, q is not contained in p: otherwise minimality gives p contained in q, hence q=p.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Lemma 00JS, proof, first sentence"
+    "place": "Algebra Lemma 00JS (algebra-lemma-graded-silly), proof; finite induction and minimal-prime selection"
    }
   },
   {
-   "text": "We argue by induction on $r$. For $r=1$, choose a nonzero homogeneous component of an element of $I$ that is outside $\\mathfrak p_1$. Such a component exists because $I$ is graded, $\\mathfrak p_1$ is homogeneous, and $I\\not\\subseteq\\mathfrak p_1$; since $I\\subseteq S_+$, the component has positive degree. It lies in $I$ and outside $\\mathfrak p_1$.",
+   "text": "If homogeneous ideals J and K satisfy J not contained in K, choose an element a of J outside K. At least one homogeneous component of a lies outside K, since K contains a exactly when it contains every component. That component belongs to J. If J is contained in the irrelevant ideal, its nonzero component has positive degree: a degree-zero element of the irrelevant ideal equals its zero-th component, which is zero.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Lemma 00JS, proof, the case r=1"
+    "place": "Algebra Lemma 00JS (algebra-lemma-graded-silly), proof; homogeneous component extraction"
    }
   },
   {
-   "text": "For the induction step, apply the induction hypothesis to obtain a homogeneous $x\\in I$ of positive degree with $x\\notin\\mathfrak p_i$ for $i<r$. If $x\\notin\\mathfrak p_r$, it is the required element. Otherwise $x\\in\\mathfrak p_r$.",
+   "text": "Apply the induction hypothesis to the set with p removed, obtaining a homogeneous g in I of degree d>0 outside every other prime. If g also lies outside p it is the desired element. Otherwise g belongs to p.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Lemma 00JS, proof, induction step"
+    "place": "Algebra Lemma 00JS (algebra-lemma-graded-silly), proof; induction step"
    }
   },
   {
-   "text": "Assume $x\\in\\mathfrak p_r$. The product ideal $I\\mathfrak p_1\\cdots\\mathfrak p_{r-1}$ is not contained in $\\mathfrak p_r$: if it were, choose for each $i<r$ an element $a_i\\in\\mathfrak p_i\\setminus\\mathfrak p_r$, which is possible because the primes are pairwise non-contained; then for every $z\\in I$, $z a_1\\cdots a_{r-1}\\in\\mathfrak p_r$, and primality of $\\mathfrak p_r$ together with $a_1\\cdots a_{r-1}\\notin\\mathfrak p_r$ forces $z\\in\\mathfrak p_r$, contradicting $I\\not\\subseteq\\mathfrak p_r$.",
+   "text": "For each other prime q, choose a homogeneous element a_q in q outside p by the component-extraction argument and q not contained in p. Choose a homogeneous a_0 in I outside p with degree e_0>0. Construct y=a_0 times the product of the a_q, of degree E=e_0 plus the sum of their degrees. Then E>0, y belongs to I and to every other q, and y lies outside p by primality and the finite-product membership criterion.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Lemma 00JS, proof, paragraph beginning \"If I p_1 ... p_{r-1} subset p_r\""
+    "place": "Algebra Lemma 00JS (algebra-lemma-graded-silly), proof; explicit product construction"
    }
   },
   {
-   "text": "Choose a homogeneous $y\\in I\\mathfrak p_1\\cdots\\mathfrak p_{r-1}$ with $y\\notin\\mathfrak p_r$. The product ideal is graded, so such a $y$ may be chosen homogeneous; because $I\\subseteq S_+$, its degree is positive. Put $z=x^{\\deg(y)}+y^{\\deg(x)}$. Both summands have the same positive degree, so $z$ is homogeneous of positive degree. Since $x\\in I$ and $y\\in I\\mathfrak p_1\\cdots\\mathfrak p_{r-1}\\subseteq I$, $z\\in I$. For $i<r$, $y\\in\\mathfrak p_i$ and $x\\notin\\mathfrak p_i$, so primality gives $x^{\\deg(y)}\\notin\\mathfrak p_i$ and hence $z\\notin\\mathfrak p_i$. For $i=r$, $x\\in\\mathfrak p_r$ and $y\\notin\\mathfrak p_r$, so $y^{\\deg(x)}\\notin\\mathfrak p_r$ and hence $z\\notin\\mathfrak p_r$. Thus $z$ has the required property.",
+   "text": "Set z=g^E+y^d. Both summands have degree dE>0 and belong to I, so z is homogeneous of that degree and belongs to I. At p the first summand belongs and the second does not. At any other q the second summand belongs and the first does not. Prime-ideal power membership and additive cancellation therefore show z lies outside every prime. Translate membership in the finite image back to all indices in Fin r.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Lemma 00JS, proof, final paragraph"
+    "place": "Algebra Lemma 00JS (algebra-lemma-graded-silly), proof; homogeneous sum of powers"
    }
   }
  ],
@@ -74,7 +74,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra Lemma 00JS (algebra-lemma-graded-silly), proof"
+  "place": "Algebra Lemma 00JS (algebra-lemma-graded-silly), proof, using minimal-prime finite induction and an explicit homogeneous product as in the proved source-library theorem ProjectiveSpectrum.exists_homogeneous_notMem_of_finset (WeilConjectures/Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean), generalized to the given ideal I."
  },
  "mathlib_searches": [
   {
@@ -153,5 +153,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T144101-L-2091433",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
