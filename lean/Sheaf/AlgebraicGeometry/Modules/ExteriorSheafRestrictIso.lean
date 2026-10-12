@@ -6,6 +6,7 @@ Authors: SHEAF group T3
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictHomData
 
 /-!
 # Exterior sheaves commute with open restriction
@@ -42,6 +43,7 @@ also applies to degree zero and to the empty open subscheme. -/
 theorem exteriorSheaf_restrict_iso {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
     (U : X.Opens) :
     Nonempty ((exteriorSheaf M n).restrict U.ι ≅ exteriorSheaf (M.restrict U.ι) n) := by
-  sorry
+  obtain ⟨e, f, hef, hfe⟩ := exteriorSheaf_restrict_hom_data M n U
+  exact ⟨{ hom := e, inv := f, hom_inv_id := hef, inv_hom_id := hfe }⟩
 
 end AlgebraicGeometry.Scheme.Modules
