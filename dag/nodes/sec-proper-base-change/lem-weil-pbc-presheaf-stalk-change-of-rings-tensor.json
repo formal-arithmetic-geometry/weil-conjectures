@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-presheaf-stalk-change-of-rings-tensor",
+ "kind": "statement",
+ "title": "Presheaf stalk of sectionwise extension of scalars",
+ "statement": "Let $X$ be a topological space, $R_1,R_2$ sheaves of commutative rings, $\\alpha:R_1\\to R_2$ a morphism and $x\\in X$. For each sheaf $F$ of $R_1$-modules, let $P_F$ be the presheaf of $R_2$-modules $U\\mapsto R_2(U)\\otimes_{R_1(U)}F(U)$ with tensor restrictions [def-pur-sheaf-tensor-product]. There exists a family of $R_{2,x}$-linear isomorphisms $\\Psi_F:R_{2,x}\\otimes_{R_{1,x}}F_x\\longrightarrow (P_F)_x$, where the scalar action is induced by $\\alpha_x$ and stalks use [def-weil-pbc-module-stalk], such that $\\Psi_F(a_x\\otimes s_x)=(a\\otimes s)_x$ for every neighborhood $U$ of $x$, $a\\in R_2(U)$ and $s\\in F(U)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 007K, label lemma-stalk-tensor-presheaf-modules; the source omits the proof, supplied here from varying-ring tensor colimits."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "For x in X, restrict the section ring presheaves and module presheaf to the directed poset of neighborhoods of x with reverse inclusion. Put A_U=R₁(U), M_U=R₂(U) with R₁(U)-action through α_U, N_U=F(U), and T_U=M_U tensor over A_U with N_U, the coefficient-first sectionwise change of rings of [def-pur-sheaf-tensor-product]. Restrictions of M are semilinear by naturality of α, those of N by the presheaf module laws. The transition maps of T send pure tensors to tensors of restrictions. The colimit module actions are the stalk actions of [def-weil-pbc-module-stalk]. Their equations on coprojections are exactly the scalar action formula on germs.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-filtered-colimit-tensor-varying-rings] to these systems. Its bijective comparison ψ sends the germ of a coefficient-first pure tensor to the tensor of its two germs. The R₁,x-action on R₂,x is the action via α_x because α_x sends germ(r) to germ(α_U(r)). Thus the tensor carrier is precisely extension of scalars along α_x.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison ψ is R₂,x-linear. For a scalar germ and a germ of a pure tensor choose representatives on one common neighborhood. Scalar multiplication on the section tensor multiplies its coefficient factor, and ψ sends that to multiplication on the stalk coefficient factor. Tensor induction proves this for any section tensor, and every stalk element has a section representative. Hence ψ and its inverse are R₂,x-linear. Invert ψ, regard the resulting linear equivalence as a ModuleCat isomorphism, and obtain the stated germ formula by applying the inverse to the equation for ψ. Choose these isomorphisms for every F; their germ formula determines them uniquely, since pure tensors generate and any pair of germs can be represented on a common neighborhood.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 007K (omitted proof), supplied from the existing varying-ring tensor-colimit theorem; specialization of step 3 of lem-weil-pbc-stalk-change-of-rings-tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of extension of scalars of presheaf of modules equals extension of scalars of its stalk",
+   "results": [
+    "ModuleCat.Tilde.toStalk",
+    "ModuleCat.Tilde.stalkToFiberLinearMap",
+    "ModuleCat.Tilde.stalkIso_hom",
+    "ModuleCat.Tilde.stalkToFiberLinearMap_toStalk",
+    "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+    "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc",
+    "ModuleCat.Tilde.stalkIso",
+    "ModuleCat.Tilde.localizationToStalk"
+   ],
+   "date": "2026-10-12",
+   "verdict": "no exact match; only stalk definitions or Spec R tilde comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalk",
+   "results": [
+    "TopCat.Presheaf.stalk",
+    "TopCat.Presheaf.stalkCongr",
+    "TopCat.Presheaf.stalkFunctor_obj",
+    "TopCat.Presheaf.stalkSpecializes",
+    "TopCat.Presheaf.stalkSpecializes_refl",
+    "TopCat.Presheaf.stalkCongr_hom",
+    "TopCat.Presheaf.stalkCongr_inv",
+    "TopCat.Presheaf.germ"
+   ],
+   "date": "2026-10-12",
+   "verdict": "no exact match; only stalk definitions or Spec R tilde comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ensor|[Tt]ensor.*stalk",
+   "results": [
+    "Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+    "Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "no exact match; only stalk definitions or Spec R tilde comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk of sectionwise extension of scalars of a presheaf of modules is tensor product of stalks over the stalk ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-properties",
+   "place": "step 1, 2, 3, 5 of its split (source: Etale Cohomology, proof of Lemma 0A4F: the F_j are the integer polynomials with prod(x_i t + y_i) = sum F_j t^{n-j} (Stacks indexes in reverse order)); presheaf stalk comparison in step 3 of lem-weil-pbc-stalk-change-of-rings-tensor",
+   "via": [
+    "lem-weil-pbc-stalk-change-of-rings-tensor",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRingsPresheaf",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/StalkChangeOfRingsPresheaf.lean",
+  "declaration": "SheafOfModules.stalkChangeOfRingsPresheafIso",
+  "statement": "theorem stalkChangeOfRingsPresheafIso (X : TopCat.{u})\n    (R₁ R₂ : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})\n    (α : R₁ ⟶ R₂) (x : X) :\n    ∃ Φ : ∀ F : SheafOfModules.{u}\n        ((sheafCompose (Opens.grothendieckTopology X)\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj R₁),\n      (ModuleCat.extendScalars ((TopCat.Presheaf.stalkFunctor CommRingCat x).map α.hom).hom).obj\n        (ModuleCat.of (TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₁.obj x)\n          (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) F.val.presheaf x)) ≅\n      ModuleCat.of (TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₂.obj x)\n        (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) (changeOfRingsPresheaf α F).presheaf x),\n      (∀ (F : SheafOfModules.{u}\n          ((sheafCompose (Opens.grothendieckTopology X)\n            (forget₂ CommRingCat.{u} RingCat.{u})).obj R₁))\n        (U : Opens X) (hx : x ∈ U) (s : F.val.obj (op U)) (a : R₂.obj.obj (op U)),\n        (Φ F).hom\n          (TopCat.Presheaf.germ (C := CommRingCat.{u}) (X := X) R₂.obj U x hx a\n          ⊗ₜ[TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₁.obj x,\n            ((TopCat.Presheaf.stalkFunctor CommRingCat x).map α.hom).hom]\n            TopCat.Presheaf.germ (C := Ab.{u}) (X := X) F.val.presheaf U x hx s) =\n          TopCat.Presheaf.germ (C := Ab.{u}) (X := X) (changeOfRingsPresheaf α F).presheaf U x hx\n            (a ⊗ₜ[R₁.obj.obj (op U), (α.hom.app (op U)).hom] s))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T095928-L-326380",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T095928-L-326380",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
