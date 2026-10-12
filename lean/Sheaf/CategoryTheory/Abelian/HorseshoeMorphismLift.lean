@@ -23,6 +23,60 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.InjectiveResolution
 
+/-! The final defect-correction calculation is independent of the construction of the
+intermediate map.  We record it separately so that the horseshoe argument can use it.
+
+Source: the final calculation in Weibel, Theorem 2.4.6 (and Stacks Project, Tag 015I).
+(blueprint: lem-weil-pbc-horseshoe-correction) -/
+theorem corrected_middle_map
+    {C : Type u} [Category.{v} C] [Abelian C]
+    {X Y Z X' Y' Z' : CochainComplex C ℕ} {U U' : C}
+    (α : X ⟶ Y) (β : Y ⟶ Z) (α' : X' ⟶ Y') (β' : Y' ⟶ Z')
+    (φA : X ⟶ X') (φC : Z ⟶ Z') (χ q : Y ⟶ Y')
+    (ε : (CochainComplex.single₀ C).obj U ⟶ Y)
+    (ε' : (CochainComplex.single₀ C).obj U' ⟶ Y')
+    (b : (CochainComplex.single₀ C).obj U ⟶ (CochainComplex.single₀ C).obj U')
+    (hχα : α ≫ χ = φA ≫ α') (hχβ : χ ≫ β' = β ≫ φC)
+    (hqa : α ≫ q = 0) (hqb : q ≫ β' = 0)
+    (hε : ε ≫ χ - ε ≫ q = b ≫ ε') :
+    ∃ φB : Y ⟶ Y', ε ≫ φB = b ≫ ε' ∧
+      α ≫ φB = φA ≫ α' ∧ φB ≫ β' = β ≫ φC := by
+  refine ⟨χ - q, ?_, ?_, ?_⟩
+  · simpa only [Preadditive.comp_sub] using hε
+  · rw [Preadditive.comp_sub, hχα, hqa, sub_zero]
+  · rw [Preadditive.sub_comp, hχβ, hqb, sub_zero]
+
+/-- The splitting and null-homotopy part of the horseshoe argument produces a preliminary
+middle map and a correction map.  This is the strict intermediate datum used by the
+final correction lemma above.
+
+Source: Weibel, Theorem 2.4.6, Steps 1--3.
+(blueprint: lem-weil-pbc-horseshoe-preliminary-data) -/
+theorem horseshoe_preliminary_data
+    {C : Type u} [Category.{v} C] [Abelian C]
+    (S T : ShortComplex C) (hS : S.ShortExact) (hT : T.ShortExact) (F : S ⟶ T)
+    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)
+    (IC : InjectiveResolution S.X₃) (JA : InjectiveResolution T.X₁)
+    (JB : InjectiveResolution T.X₂) (JC : InjectiveResolution T.X₃)
+    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)
+    (α' : JA.cocomplex ⟶ JB.cocomplex) (β' : JB.cocomplex ⟶ JC.cocomplex)
+    (hαβ : α ≫ β = 0) (hαβ' : α' ≫ β' = 0)
+    (hα : IA.ι ≫ α = (CochainComplex.single₀ C).map S.f ≫ IB.ι)
+    (hβ : IB.ι ≫ β = (CochainComplex.single₀ C).map S.g ≫ IC.ι)
+    (hα' : JA.ι ≫ α' = (CochainComplex.single₀ C).map T.f ≫ JB.ι)
+    (hβ' : JB.ι ≫ β' = (CochainComplex.single₀ C).map T.g ≫ JC.ι)
+    (hexact : ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map
+      (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact)
+    (hexact' : ∀ n : ℕ, ((ShortComplex.mk α' β' hαβ').map
+      (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact)
+    (φA : IA.cocomplex ⟶ JA.cocomplex) (φC : IC.cocomplex ⟶ JC.cocomplex)
+    (hφA : IA.ι ≫ φA = (CochainComplex.single₀ C).map F.τ₁ ≫ JA.ι)
+    (hφC : IC.ι ≫ φC = (CochainComplex.single₀ C).map F.τ₃ ≫ JC.ι) :
+    ∃ χ q : IB.cocomplex ⟶ JB.cocomplex,
+      α ≫ χ = φA ≫ α' ∧ χ ≫ β' = β ≫ φC ∧ α ≫ q = 0 ∧ q ≫ β' = 0 ∧
+      IB.ι ≫ χ - IB.ι ≫ q = (CochainComplex.single₀ C).map F.τ₂ ≫ JB.ι := by
+  sorry
+
 /-- Any prescribed lifts on the outer resolutions extend to a compatible middle lift
 between two horseshoe resolutions of a morphism of short exact sequences.
 Natural-number indexing encodes vanishing in negative degrees. The zero-composite witnesses
@@ -80,6 +134,10 @@ theorem exists_horseshoe_morphism_lift
     ∃ φB : IB.cocomplex ⟶ JB.cocomplex,
       IB.ι ≫ φB = (CochainComplex.single₀ C).map F.τ₂ ≫ JB.ι ∧
       α ≫ φB = φA ≫ α' ∧ φB ≫ β' = β ≫ φC := by
-  sorry
+  obtain ⟨χ, q, hχα, hχβ, hqa, hqb, hε⟩ := horseshoe_preliminary_data
+    S T hS hT F IA IB IC JA JB JC α β α' β' hαβ hαβ' hα hβ hα' hβ'
+    hexact hexact' φA φC hφA hφC
+  exact corrected_middle_map α β α' β' φA φC χ q IB.ι JB.ι
+    ((CochainComplex.single₀ C).map F.τ₂) hχα hχβ hqa hqb hε
 
 end CategoryTheory.InjectiveResolution

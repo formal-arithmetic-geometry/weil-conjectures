@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-horseshoe-correction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-horseshoe-morphism-lift",
+   "place": "Step 4",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The horseshoe defect correction preserves both row squares and the augmentation",
+ "statement": "theorem corrected_middle_map\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {X Y Z X' Y' Z' : CochainComplex C ℕ} {U U' : C}\n    (α : X ⟶ Y) (β : Y ⟶ Z) (α' : X' ⟶ Y') (β' : Y' ⟶ Z')\n    (φA : X ⟶ X') (φC : Z ⟶ Z') (χ q : Y ⟶ Y')\n    (ε : (CochainComplex.single₀ C).obj U ⟶ Y)\n    (ε' : (CochainComplex.single₀ C).obj U' ⟶ Y')\n    (b : (CochainComplex.single₀ C).obj U ⟶ (CochainComplex.single₀ C).obj U')\n    (hχα : α ≫ χ = φA ≫ α') (hχβ : χ ≫ β' = β ≫ φC)\n    (hqa : α ≫ q = 0) (hqb : q ≫ β' = 0)\n    (hε : ε ≫ χ - ε ≫ q = b ≫ ε') :\n    ∃ φB : Y ⟶ Y', ε ≫ φB = b ≫ ε' ∧\n      α ≫ φB = φA ≫ α' ∧ φB ≫ β' = β ≫ φC := by\n  refine ⟨χ - q, ?_, ?_, ?_⟩\n  · simpa only [Preadditive.comp_sub] using hε\n  · rw [Preadditive.comp_sub, hχα, hqa, sub_zero]\n  · rw [Preadditive.sub_comp, hχβ, hqb, sub_zero]",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015I, final correction of the middle map"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Define the corrected map as χ−q and distribute composition over subtraction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015I final correction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "corrected_middle_map",
+   "results": "No direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "corrected_middle_map",
+   "results": "No direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "corrected_middle_map",
+   "results": "No direct match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeMorphismLift.lean",
+  "declaration": "CategoryTheory.InjectiveResolution.corrected_middle_map",
+  "statement": "theorem corrected_middle_map\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {X Y Z X' Y' Z' : CochainComplex C ℕ} {U U' : C}\n    (α : X ⟶ Y) (β : Y ⟶ Z) (α' : X' ⟶ Y') (β' : Y' ⟶ Z')\n    (φA : X ⟶ X') (φC : Z ⟶ Z') (χ q : Y ⟶ Y')\n    (ε : (CochainComplex.single₀ C).obj U ⟶ Y)\n    (ε' : (CochainComplex.single₀ C).obj U' ⟶ Y')\n    (b : (CochainComplex.single₀ C).obj U ⟶ (CochainComplex.single₀ C).obj U')\n    (hχα : α ≫ χ = φA ≫ α') (hχβ : χ ≫ β' = β ≫ φC)\n    (hqa : α ≫ q = 0) (hqb : q ≫ β' = 0)\n    (hε : ε ≫ χ - ε ≫ q = b ≫ ε') :\n    ∃ φB : Y ⟶ Y', ε ≫ φB = b ≫ ε' ∧\n      α ≫ φB = φA ≫ α' ∧ φB ≫ β' = β ≫ φC",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053925-L-2632709",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T053925-L-2632709",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
