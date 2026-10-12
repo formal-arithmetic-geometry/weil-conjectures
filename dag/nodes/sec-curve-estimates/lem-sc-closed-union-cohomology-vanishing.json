@@ -12,19 +12,19 @@
  ],
  "proof": [
   {
-   "text": "Put T=Z union W. The subspace T is Noetherian. The relative closed subsets Z and W have the same intrinsic topologies as the original subsets: both are induced by the inclusion into X. Let U=T minus Z; since Z is closed, U is open.",
+   "text": "Put T = Z union W with its subspace topology and U = T minus the inverse image of Z. The inclusion T into X is a closed embedding, T is Noetherian, and U is open. Write D for the closed complement of U and C for its closure. Since U is contained in the inverse image of W, which is closed, C is contained there too. The double subtype maps D into Z and C into W are closed embeddings: composing with the subtype embeddings of Z and W into X gives the composite of two closed subtype embeddings.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply [lem-sc-noetherian-open-closed-cohomology-sequence] on T. The right term is the pushforward of the inverse image of F on Z. The left term is a closed pushforward of a sheaf G from C=closure_T(U).",
+   "text": "Apply [lem-sc-noetherian-open-closed-cohomology-sequence] to T, U and F. Obtain its short exact sequence S with middle term F, right term the closed pushforward from D of the pullback of F, and left term whose degree-q cohomology is isomorphic to that of a sheaf G on C.",
    "uses": [
     "lem-sc-noetherian-open-closed-cohomology-sequence"
    ],
    "elementary": false
   },
   {
-   "text": "U is contained in W and W is closed, so C is contained in W. Push G forward along C into W. Closed-pushforward comparison [lem-sc-cohomology-closed-immersion-pushforward] and the hypothesis on all sheaves on W kill H^q(C,G). The same comparison and the hypothesis on Z kill the right term. The support comparison in the preceding step kills the left term. The intrinsic subspace topology identifications induce equivalences of the opens sites, so the hypotheses apply to these exact sheaves.",
+   "text": "Push the pullback of F on D along D into Z and apply hZ. Comparison [lem-sc-cohomology-closed-immersion-pushforward] first for D into Z and then for D into T gives zero cohomology for S.X3. Push G along C into W and apply hW; the same comparison gives zero cohomology for G on C. The cohomology isomorphism from the preceding step gives zero cohomology for S.X1. In each comparison transfer subsingletonness between the small Ext model of the hypotheses and the standard model using Mathlib Abelian.Ext.chgUniv.",
    "uses": [
     "lem-sc-cohomology-closed-immersion-pushforward",
     "lem-sc-noetherian-open-closed-cohomology-sequence"
@@ -32,7 +32,7 @@
    "elementary": false
   },
   {
-   "text": "Use the natural long exact sequence for sheaf cohomology recorded in [def-sc-topological-abelian-cohomology]. Exactness between zero outer degree-q groups makes the middle group zero. For q=0 this is the initial left-exact segment. This uses no degree-(q-1) intersection hypothesis.",
+   "text": "For any degree-q Ext class x of F, its image in S.X3 is zero. Mathlib Abelian.Ext.covariant_sequence_exact₂ gives a preimage y in S.X1. That group is zero, so y and then x are zero. Thus the cohomology of F is a subsingleton, hence a zero abelian group. This is the long exact sequence for [def-sc-topological-abelian-cohomology], including degree zero. Transfer the result back to the small Ext model using Abelian.Ext.chgUniv.",
    "uses": [
     "def-sc-topological-abelian-cohomology"
    ],
@@ -124,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-3a6fe",
-  "group": "P1",
+  "reviewer": "COMPILER",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T021658-L-1026569",
-  "kind": "interface",
-  "note": "independent Codex review: Matched all four Lean modules with their node statements, recorded proof dependencies, report, and cited Stacks arguments; existing signatures are unchanged, all modules compile cleanly, and axiom probes show only permitted axioms plus documented sorryAx dependencies."
+  "landing": "20261012T042424-L-1822962",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
