@@ -9,6 +9,8 @@ public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroOutside
+import Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroInside
 
 /-! # A component of extension by zero for modules
 Source: Stacks Project, Sheaves, Lemma 00A7. -/
@@ -74,6 +76,9 @@ theorem module_extensionByZero_unit_stalks (X : Scheme.{u}) (U : X.Opens) :
               ((toPresheaf X).map (L.map α)) =
             (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map
               ((toPresheaf U.toScheme).map ((overEquiv U).functor.map α)) ≫ t F' x)   := by
-  sorry
+  dsimp
+  intro adj
+  exact ⟨module_extensionByZero_outside_stalk X U,
+    module_extensionByZero_inside_stalk X U adj⟩
 
 end AlgebraicGeometry.Scheme.Modules

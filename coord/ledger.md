@@ -8784,3 +8784,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/P1/Sheaf.RingTheory.PopescuDelocalizeBase (stage 3; reviewer PASS; first push; landing 20261012T173848-L-3301607 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:38 L: merged deliver/P2/Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLift (stage 3; reviewer PASS; first push; landing 20261012T173849-L-3301806 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:38 L: merged deliver/P2/Sheaf.AlgebraicGeometry.TwistedSectionsFiniteDimensional (stage 3; reviewer PASS; first push; landing 20261012T173849-L-3301932 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:38 L: merged deliver/P3/Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks (stage 3; reviewer PASS; first push; landing 20261012T173850-L-3302045 (interface); batch 20261012T173801; modules 3; new nodes 2)

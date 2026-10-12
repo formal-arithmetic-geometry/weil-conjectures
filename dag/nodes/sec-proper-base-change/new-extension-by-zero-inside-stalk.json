@@ -1,0 +1,96 @@
+{
+ "id": "new-extension-by-zero-inside-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-extension-by-zero-unit-stalks",
+   "place": "Stage 3 decomposition of the stalk argument",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "ExtensionByZeroInside",
+ "statement": "The corresponding inside/outside stalk property for extension by zero, as stated by the Lean declaration.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 00A7 (3)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This is the corresponding geometric stalk argument: sections vanish outside U, while neighbourhoods in U are cofinal and sheafification preserves stalks inside U. The unit map is then linear and natural.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "P3 stage 3",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 00A7 (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero sheaf stalk vanishes outside open",
+   "results": "No exact match; search returned restriction and skyscraper stalk lemmas only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero sheaf stalk isomorphism open immersion",
+   "results": "No exact match; found PresheafedSpace.restrictStalkIso only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero stalk vanishing",
+   "results": "No matching declaration in Mathlib or WeilConjectures.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroUnitStalks",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroInside",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_extensionByZero_inside_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExtensionByZeroInside.lean",
+  "statement": "theorem module_extensionByZero_inside_stalk (X : Scheme.{u}) (U : X.Opens) :\n    let R := X.ringCatSheaf\n    let P := SheafOfModules.extensionByZeroPresheaf.{u} R U\n    let L := P ⋙ PresheafOfModules.sheafification (𝟙 R.obj)\n    ∀ adj : L ⊣ SheafOfModules.overFunctor R U,\n      let t : ∀ (F : SheafOfModules.{u} (R.over U)) (x : U),\n          (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).obj\n              ((toPresheaf U.toScheme).obj ((overEquiv U).functor.obj F)) ⟶\n            (toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u}\n              (U.ι x)).obj (L.obj F) := fun F x =>\n        (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map\n            ((toPresheaf U.toScheme).map ((overEquiv U).functor.map (adj.unit.app F) ≫\n              (overFunctorEquiv U).hom.app (L.obj F))) ≫\n          (restrictStalkNatIso U.ι x).hom.app (L.obj F)\n      (∀ (F : SheafOfModules.{u} (R.over U)) (x : U),\n        letI : Module (U.toScheme.presheaf.stalk x)\n            (((overEquiv U).functor.obj F).presheaf.stalk x) :=\n          inferInstanceAs (Module (U.toScheme.presheaf.stalk x)\n          ↑(TopCat.Presheaf.stalk ((overEquiv U).functor.obj F).val.presheaf x))\n        letI : Module (X.presheaf.stalk (U.ι x))\n            ((toPresheaf X ⋙ TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u}\n              (U.ι x)).obj (L.obj F)) :=\n          inferInstanceAs (Module (X.presheaf.stalk (U.ι x))\n          ↑(TopCat.Presheaf.stalk (L.obj F).val.presheaf (U.ι x)))\n        IsIso (t F x) ∧\n          ∀ (r : X.presheaf.stalk (U.ι x))\n            (s : ((overEquiv U).functor.obj F).presheaf.stalk x),\n            t F x ((U.ι.stalkMap x) r • s) = r • t F x s) ∧\n      (∀ (F F' : SheafOfModules.{u} (R.over U)) (α : F ⟶ F') (x : U),\n        t F x ≫ (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} (U.ι x)).map\n            ((toPresheaf X).map (L.map α)) =\n          (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map\n            ((toPresheaf U.toScheme).map ((overEquiv U).functor.map α)) ≫ t F' x)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T173850-L-3302045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T173850-L-3302045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
