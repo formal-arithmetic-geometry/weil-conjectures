@@ -35,6 +35,19 @@ theorem localizedModule_of_algebra {R A M : Type*} [CommRing R] [CommRing A]
     [Algebra R A] [AddCommGroup M] [Module R M] [Module A M]
     [IsScalarTower R A M] (S : Submonoid A) (hM : Module.Flat R M) :
     Module.Flat R (LocalizedModule S M) := by
-  sorry
+  rw [Module.Flat.iff_lTensor_injectiveₛ]
+  intro P _ _ N
+  let g : M →ₗ[A] LocalizedModule S M := LocalizedModule.mkLinearMap S M
+  have hinj : Function.Injective (LinearMap.lTensor M N.subtype) :=
+    hM.lTensor_preserves_injective_linearMap N.subtype N.subtype_injective
+  have hinjA : Function.Injective
+      (TensorProduct.AlgebraTensorModule.lTensor A M N.subtype) := by
+    simpa only [TensorProduct.AlgebraTensorModule.coe_lTensor] using hinj
+  have hloc := IsLocalizedModule.map_injective S
+    (TensorProduct.AlgebraTensorModule.rTensor R N g)
+    (TensorProduct.AlgebraTensorModule.rTensor R P g)
+    (TensorProduct.AlgebraTensorModule.lTensor A M N.subtype) hinjA
+  rw [IsLocalizedModule.map_lTensor] at hloc
+  simpa only [TensorProduct.AlgebraTensorModule.coe_lTensor] using hloc
 
 end Module.Flat
