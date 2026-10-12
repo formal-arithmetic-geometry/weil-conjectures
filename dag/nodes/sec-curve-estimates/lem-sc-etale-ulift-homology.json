@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-etale-ulift-homology",
+ "kind": "statement",
+ "title": "Coefficient lift preserves homology of etale abelian sheaves",
+ "statement": "For every scheme X in universe u, with small etale site [def-weil-pbc-etale-site], the coefficient lift functor sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u+1,u} preserves homology. In particular it preserves the homology of each short complex and sends quasi-isomorphisms of cochain complexes to quasi-isomorphisms.",
+ "source": {
+  "document": "dag/nodes/sec-curve-estimates/lem-sc-etale-ulift-injective-resolution.json",
+  "place": "Step 3, exactness of coefficient lift. Formal implementation uses Mathlib CategoryTheory/Sites/EpiMono and CategoryTheory/Abelian/Exact."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient lift is additive: on morphisms its additivity equation is definitional. The inclusion of sheaves into presheaves creates limits, and whiskering by the group ULift functor preserves limits. The composite preserves parallel-pair limits, and reflection of limits by the sheaf inclusion therefore gives preservation of kernels by coefficient lift.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A morphism of abelian sheaves is epi exactly when locally surjective (Mathlib Sheaf.isLocallySurjective_iff_epi'). For a lifted section s, the image sieve of the lifted morphism equals the original image sieve of s.down: witnesses correspond by ULift.up and ULift.down. Thus lift preserves local surjectivity and epimorphisms. Apply Mathlib Functor.preservesHomology_of_preservesEpis_and_kernels. This proof includes the empty scheme and zero sheaf without further hypotheses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "dag/nodes/sec-curve-estimates/lem-sc-etale-ulift-injective-resolution.json",
+  "place": "Step 3, exactness of coefficient lift. Formal implementation uses Mathlib CategoryTheory/Sites/EpiMono and CategoryTheory/Abelian/Exact."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universe lift of abelian sheaves preserves homology and injective objects",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universe lift of an injective abelian sheaf on a small site is injective",
+   "date": "2026-10-12",
+   "results": "ModuleCat.ulift_injective_of_injective is for modules, not sheaves. General Grothendieck-abelian sheaf results do not preserve injective objects across coefficient universes.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafCompose\", \"PreservesHomology\"",
+   "date": "2026-10-12",
+   "results": "0 hits.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ulift.*[Ii]njective|[Ii]njective.*ulift|sheafCompose.*[Pp]reservesHomology",
+   "date": "2026-10-12",
+   "results": "No sheaf coefficient-lift theorem. Mathlib group ULift preserves limits and colimits. Exactness reduces to kernel preservation and local surjectivity.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleULiftInjectiveResolution",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-ulift-injective-resolution",
+   "place": "Step 3, exactness under coefficient lift.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleULiftHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleULiftHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_ulift_preservesHomology",
+  "statement": "theorem etale_ulift_preservesHomology (X : Scheme.{u}) : (sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).PreservesHomology",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095903-L-316701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095903-L-316701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

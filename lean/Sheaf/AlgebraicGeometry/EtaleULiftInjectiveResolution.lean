@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.Algebra.Category.Grp.Ulift
 
+import Sheaf.AlgebraicGeometry.EtaleULiftInjective
+import Sheaf.AlgebraicGeometry.EtaleULiftHomology
+
 /-!
 # Lifting an injective resolution on the small étale site
 
@@ -72,6 +75,18 @@ theorem exists_etale_ulift_injectiveResolution
             (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u}).obj (op U) ⋙
               AddCommGrpCat.uliftFunctor.{u + 1, u}).mapHomologicalComplex
                 (.up ℕ)).obj R.cocomplex) := by
-  sorry
+  let L := sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}
+  have : L.PreservesHomology := etale_ulift_preservesHomology X
+  have : L.Additive := { map_add := fun {_ _ _ _} => rfl }
+  let e := HomologicalComplex.singleMapHomologicalComplex L (.up ℕ) 0
+  let S : InjectiveResolution (L.obj F) :=
+    { cocomplex := (L.mapHomologicalComplex (.up ℕ)).obj R.cocomplex
+      injective := fun n => etale_ulift_injective X (R.cocomplex.X n)
+      ι := (e.app F).inv ≫ (L.mapHomologicalComplex (.up ℕ)).map R.ι
+      quasiIso := by
+        dsimp [e]
+        infer_instance }
+  refine ⟨S, fun U => ⟨?_⟩⟩
+  exact Iso.refl _
 
 end AlgebraicGeometry.Scheme
