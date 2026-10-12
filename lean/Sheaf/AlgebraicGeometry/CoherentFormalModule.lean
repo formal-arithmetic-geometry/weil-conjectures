@@ -11,13 +11,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Coherent formal modules and completion
 
@@ -107,7 +104,9 @@ Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). 
 theorem formalModuleQuotientMap_id {X : Scheme.{u}} (I : X.IdealSheafData)
     (F : X.Modules) (n : ℕ) :
     formalModuleQuotientMap I (𝟙 F) (Nat.le_refl n) = 𝟙 (formalModuleQuotient I n F) := by
-  sorry
+  apply (cancel_epi (cokernel.π
+    (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι _).2 _))).1
+  simp [formalModuleQuotientMap, formalModuleQuotientπ, formalModuleQuotient]
 
 /-- Reduction preserves composition, including transition maps between different levels.
 Proof: node step 6; precompose with the source quotient projection, use the defining
@@ -118,7 +117,9 @@ theorem formalModuleQuotientMap_comp {X : Scheme.{u}} (I : X.IdealSheafData)
     (h₁ : m ≤ l) (h₂ : n ≤ m) :
     formalModuleQuotientMap I (f ≫ g) (Nat.le_trans h₂ h₁) =
       formalModuleQuotientMap I f h₁ ≫ formalModuleQuotientMap I g h₂ := by
-  sorry
+  apply (cancel_epi (cokernel.π
+    (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι _).2 _))).1
+  simp [formalModuleQuotientMap, formalModuleQuotientπ, Category.assoc]
 
 /-- Canonical reductions form an inverse system. Proof: node steps 5--6; quotient
 projections are epi, and both sides of each identity or composition law agree after
@@ -133,7 +134,12 @@ theorem formalCompletionSystem_laws {X : Scheme.{u}} (I : X.IdealSheafData)
       formalModuleQuotientMap I (𝟙 F) (Nat.succ_le_succ (leOfHom (f ≫ g).unop)) =
         formalModuleQuotientMap I (𝟙 F) (Nat.succ_le_succ (leOfHom f.unop)) ≫
           formalModuleQuotientMap I (𝟙 F) (Nat.succ_le_succ (leOfHom g.unop))) := by
-  sorry
+  constructor
+  · intro n
+    exact formalModuleQuotientMap_id I F (n.unop + 1)
+  · intro a b c f g
+    simpa using formalModuleQuotientMap_comp I (𝟙 F) (𝟙 F)
+      (Nat.succ_le_succ (leOfHom f.unop)) (Nat.succ_le_succ (leOfHom g.unop))
 
 /-- The inverse system F/I^(n+1)F, with the canonical surjections.
 Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
@@ -154,7 +160,9 @@ theorem formalCompletionMap_naturality {X : Scheme.{u}} (I : X.IdealSheafData)
       formalModuleQuotientMap I u (Nat.le_refl (b.unop + 1)) =
     formalModuleQuotientMap I u (Nat.le_refl (a.unop + 1)) ≫
       (formalCompletionSystem I G).map f := by
-  sorry
+  dsimp only [formalCompletionSystem]
+  rw [← formalModuleQuotientMap_comp, ← formalModuleQuotientMap_comp]
+  simp
 
 /-- The compatible family of reductions of a module map.
 Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
@@ -184,7 +192,16 @@ theorem formalCompletionMap_laws {X : Scheme.{u}} (I : X.IdealSheafData) :
     (∀ F : X.Modules, formalCompletionMap I (𝟙 F) = 𝟙 (formalCompletionSystem I F)) ∧
     (∀ (F G H : X.Modules) (f : F ⟶ G) (g : G ⟶ H),
       formalCompletionMap I (f ≫ g) = formalCompletionMap I f ≫ formalCompletionMap I g) := by
-  sorry
+  constructor
+  · intro F
+    apply NatTrans.ext
+    funext n
+    exact formalModuleQuotientMap_id I F (n.unop + 1)
+  · intro F G H f g
+    apply NatTrans.ext
+    funext n
+    exact formalModuleQuotientMap_comp I f g (Nat.le_refl (n.unop + 1))
+      (Nat.le_refl (n.unop + 1))
 
 /-- The functor to inverse systems, on objects the quotients and on maps their reductions.
 Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
@@ -273,7 +290,16 @@ theorem formalCompletion_support_subset {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentModules X) :
     {x : X | ¬ Subsingleton ((formalModuleQuotient I 1 F.obj).presheaf.stalk x)} ⊆
       {x : X | ¬ Subsingleton (F.obj.presheaf.stalk x)} := by
-  sorry
+  intro x hx hF
+  let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+  let ι := Scheme.idealModuleProductι I.toModulesι F.obj
+  have : Epi (S.map (cokernel.π ι)) :=
+    ((RingedSpace.module_stalk_exact X.toRingedSpace ι).2.2.1 x).1
+  have : Subsingleton (S.obj F.obj) := hF
+  have hQ : Subsingleton (S.obj (cokernel ι)) :=
+    Function.Surjective.subsingleton
+      ((ModuleCat.epi_iff_surjective (S.map (cokernel.π ι))).mp inferInstance)
+  exact hx hQ
 
 /-- Completion preserves proper support. Proof: node step 8. A coherent module has closed
 support on a Noetherian scheme. The quotient projection is surjective on affine sections,
@@ -286,7 +312,24 @@ theorem formalCompletion_support_proper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData)
     (F : CohModuleSupportProper f) :
     Scheme.Modules.HasSupportProperOver f (((completion X I).obj F.obj).obj.obj (op 0)) := by
-  sorry
+  obtain ⟨Z, hZ, hproper⟩ := F.property
+  have hcoh := ((completion X I).obj F.obj).property.1 0
+  have hft := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X _).mp hcoh
+  let Q := (((completion X I).obj F.obj).obj.obj (op 0))
+  have : Q.IsQuasicoherent := hft.1
+  have : Q.IsFiniteType := hft.2
+  obtain ⟨Y, hY⟩ := (Scheme.Modules.module_support_proper_over_base f Q).1
+  refine ⟨Y, hY, ?_⟩
+  apply (Scheme.closed_subset_proper_over_base_properties f Z).2.2.1 Y _ hproper
+  intro x hx
+  change x ∈ (Z : Set X)
+  rw [hZ]
+  apply formalCompletion_support_subset I F.obj
+  have hxQ : x ∈ {x : X | ¬ Subsingleton (Q.presheaf.stalk x)} := by
+    rw [← hY]
+    exact hx
+  exact hxQ
 
 /-- Restriction of completion to the two proper-support full subcategories.
 Source: Stacks, Section 0CYW, equation 088D
