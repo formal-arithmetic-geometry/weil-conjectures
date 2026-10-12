@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-comparison",
+ "kind": "statement",
+ "title": "Simultaneous homotopy comparison of two module cohomology choice systems",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], $G$ an $\\mathcal O_Y$-module, $F$ an $\\mathcal O_X$-module, and $\\varphi:G\\to h_*F$. Let $C=(I,J,K,\\lambda,\\beta,a)$ and $C\\prime=(I\\prime,J\\prime,K\\prime,\\lambda\\prime,\\beta\\prime,a\\prime)$ be two systems of resolution choices of [def-weil-pbc-module-cohomology-fmap]. Write $\\alpha_I:I\\to I\\prime$ and $\\alpha_J:J\\to J\\prime$ for the identity descent maps between the injective resolutions. Then there exists a morphism of complexes $e:K\\to K\\prime$ with homotopies $e\\circ\\lambda\\simeq\\lambda\\prime\\circ h_*\\alpha_I$ and $e\\circ\\beta\\simeq\\beta\\prime\\circ\\alpha_J$. No assertion about cohomology maps is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+  "place": "Derived Categories Tags 013P (lemma-morphisms-lift, part (1)) and 013S (lemma-morphisms-equal-up-to-homotopy); Cohomology Tag 01FB (remark-explain-arrow). Simultaneous comparison assembled from these arguments by the agent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "Extend natural-indexed complexes by zero to integer indices. A bounded below termwise injective target is K-injective. In the derived category invert alpha, apply surjectivity of Qh_map_bijective into the target, and use fullness of the homotopy quotient and extension to recover a complex map. Injectivity of Qh_map_bijective proves the composite equals gamma in the homotopy category, hence gives a homotopy. This is private lift_nat_quasiIso; it does not require alpha to be monic.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let alphaI and alphaJ be the identity descents between the two resolutions of F and G. Apply the preceding lifting argument to C.lambda and pushforward(alphaI) followed by Cprime.lambda, obtaining e and the first homotopy. The hypotheses on Cprime.K and C.lambda are fields of the supplied choice data.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the augmentation gamma from the single complex of G to h_*C.I by its degree-zero component phi followed by h_*(C.I.augmentation). Its differential is zero by the resolution augmentation equation. Compatibility of the two beta maps and the identity descent augmentation equations identify the composites of both routes in the second square with gamma followed by the two routes of the first square. Precompose the first homotopy with gamma. Extend by zero and apply homotopy uniqueness after precomposition with the quasi-isomorphism C.J.augmentation, then reflect the homotopy to natural indices. This is private unique_nat_quasiIso and the final part of the public comparison proof.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 013P (1) and 013S, applied to the choices of Cohomology Remark 01FB; Lean proof uses extension by zero and Mathlib K-injective localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "precomposition with a quasi-isomorphism bijective on homotopy classes into a bounded below complex of injectives",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.InjectiveResolution.instQuasiIsoIntι', HomotopyEquiv.isKInjective, CochainComplex.IsKProjective.Qh_map_bijective, CategoryTheory.InjectiveResolution.quasiIso, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+   "date": "2026-10-12",
+   "verdict": "supporting Mathlib declarations; no exact comparison theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "results": "CochainComplex.IsKInjective.Qh_map_bijective",
+   "date": "2026-10-12",
+   "verdict": "supporting Mathlib declarations; no exact comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "ModuleCohomologyFMapData_comparison|moduleCohomologyFMapData_comparison",
+   "results": "",
+   "date": "2026-10-12",
+   "verdict": "supporting Mathlib declarations; no exact comparison theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphisms to bounded below complexes of injectives are unique up to homotopy after precomposition by a quasi-isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent)",
+   "via": [
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMapComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMapData_comparison",
+  "statement": "theorem moduleCohomologyFMapData_comparison {X Y : Scheme.{u}} (h : X ⟶ Y)\n    {G : Y.Modules} {F : X.Modules} (φ : G ⟶ (pushforward h).obj F)\n    (C C' : ModuleCohomologyFMapData h G F φ) :\n    ∃ e : C.K ⟶ C'.K,\n      Nonempty (Homotopy (C.lambda ≫ e)\n        (((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).map\n          (InjectiveResolution.desc (𝟙 F) C'.I C.I) ≫ C'.lambda)) ∧\n      Nonempty (Homotopy (C.β ≫ e)\n        (InjectiveResolution.desc (𝟙 G) C'.J C.J ≫ C'.β))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e16b1",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T194150-L-467918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-e16b1",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T194150-L-467918",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered proofs and comparison theorem with their DAG statements and dependencies; existing signatures are unchanged, axioms are permitted, and both delivered modules plus all three direct importers compile cleanly."
+ }
+}

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapComparison
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
 
 /-! # Functoriality of cohomology maps induced by scheme maps
 
@@ -30,6 +32,77 @@ noncomputable section
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+private instance schemeEnoughInjectives (X : Scheme.{u}) : EnoughInjectives X.Modules :=
+  enoughInjectives X
+
+private instance sectionsAdditive (X : Scheme.{u}) :
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive :=
+  inferInstanceAs
+    ((SheafOfModules.forget _ ⋙ PresheafOfModules.evaluation _ (Opposite.op ⊤)).Additive)
+
+private def resolutionSectionsIso {A : Type*} [Category* A] [Abelian A]
+    [EnoughInjectives A] {R : Type u} [Ring R]
+    (Γ : A ⥤ ModuleCat.{u} R) [Γ.Additive] {F : A}
+    (I : InjectiveResolution F) (p : ℕ) :=
+  (forget₂ _ AddCommGrpCat.{u}).mapIso (I.isoRightDerivedObj Γ p) ≪≫
+    ((((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).sc p).mapHomologyIso
+      (forget₂ _ AddCommGrpCat.{u})).symm
+
+private theorem resolutionSectionsIso_naturality {A : Type*} [Category* A] [Abelian A]
+    [EnoughInjectives A] {R : Type u} [Ring R]
+    (Γ : A ⥤ ModuleCat.{u} R) [Γ.Additive] {F : A}
+    (I I' : InjectiveResolution F) (p : ℕ) :
+    (resolutionSectionsIso Γ I p).hom ≫
+      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map
+        (((Γ ⋙ forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).map
+          (InjectiveResolution.desc (𝟙 F) I' I)) =
+      (resolutionSectionsIso Γ I' p).hom := by
+  let U := forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}
+  let α := InjectiveResolution.desc (𝟙 F) I' I
+  let S := ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).sc p
+  let S' := ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj I'.cocomplex).sc p
+  have hn := I.isoRightDerivedObj_hom_naturality (𝟙 F) I' α (by simp [α]) Γ p
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp] at hn
+  have hs := ShortComplex.mapHomologyIso_inv_naturality
+    ((HomologicalComplex.shortComplexFunctor _ (ComplexShape.up ℕ) p).map
+      ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map α)) U
+  change U.map ((Γ.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) p).map α) ≫
+      (S'.mapHomologyIso U).inv =
+    (S.mapHomologyIso U).inv ≫
+      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map
+        (((Γ ⋙ U).mapHomologicalComplex (ComplexShape.up ℕ)).map α) at hs
+  change U.map (I.isoRightDerivedObj Γ p).hom ≫
+      (S.mapHomologyIso U).inv ≫ _ =
+    U.map (I'.isoRightDerivedObj Γ p).hom ≫ (S'.mapHomologyIso U).inv
+  rw [← hs, ← Category.assoc, ← Functor.map_comp]
+  exact congrArg (fun f ↦ U.map f ≫ (S'.mapHomologyIso U).inv) hn.symm
+
+set_option maxHeartbeats 800000 in
+-- The sections square elaborates two scheme-module and complex functor composites.
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem sectionsComparison_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
+    {G : Y.Modules} {F : X.Modules} {φ : G ⟶ (pushforward h).obj F}
+    (C C' : ModuleCohomologyFMapData h G F φ) :
+    C.a.hom ≫
+      (((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
+        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).map
+        (((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).map
+          (InjectiveResolution.desc (𝟙 F) C'.I C.I))) =
+      (((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
+        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).map
+        (InjectiveResolution.desc (𝟙 F) C'.I C.I)) ≫ C'.a.hom := by
+  rw [← cancel_mono C'.a.inv, Category.assoc, Category.assoc,
+    Iso.hom_inv_id, Category.comp_id, ← cancel_epi C.a.inv,
+    Iso.inv_hom_id_assoc]
+  ext1 n
+  rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, C.sections, C'.sections]
+  exact ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map
+    ((InjectiveResolution.desc (𝟙 F) C'.I C.I).f n)).naturality _ |>.symm
+
+set_option maxHeartbeats 800000 in
+-- Resolution transports cross module-valued and additive-group-valued homology.
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Source: Stacks Project, Tags 01F8 and 01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
 
@@ -59,7 +132,66 @@ theorem moduleCohomologyFMap_independent {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G : Y.Modules} {F : X.Modules} (φ : G ⟶ (pushforward h).obj F)
     (C C' : ModuleCohomologyFMapData h G F φ) (p : ℕ) :
     C.map p = C'.map p := by
-  sorry
+  have : (RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive := sectionsAdditive X
+  have : (RingedSpace.globalSectionsFunctor Y.toRingedSpace).Additive := sectionsAdditive Y
+  obtain ⟨e, hl, hb⟩ := moduleCohomologyFMapData_comparison h φ C C'
+  let ΓX := RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
+  let ΓY := RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
+  let HX := ΓX.mapHomologicalComplex (ComplexShape.up ℕ)
+  let HY := ΓY.mapHomologicalComplex (ComplexShape.up ℕ)
+  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
+  let i := H.map (HX.map (InjectiveResolution.desc (𝟙 F) C'.I C.I))
+  let j := H.map (HY.map (InjectiveResolution.desc (𝟙 G) C'.J C.J))
+  let q := H.map (HY.map e)
+  let b := H.map (HY.map C.β)
+  let b' := H.map (HY.map C'.β)
+  let m := H.map (C.a.hom ≫ HY.map C.lambda)
+  let m' := H.map (C'.a.hom ≫ HY.map C'.lambda)
+  have : IsIso m := C.invertible p
+  have : IsIso m' := C'.invertible p
+  have hβ : b ≫ q = j ≫ b' := by
+    have hh := (ΓY.mapHomotopy hb.some).homologyMap_eq p
+    change H.map (HY.map (C.β ≫ e)) =
+      H.map (HY.map (_ ≫ C'.β)) at hh
+    simpa only [Functor.map_comp] using hh
+  have hlambda : m ≫ q = i ≫ m' := by
+    have hh := (ΓY.mapHomotopy hl.some).homologyMap_eq p
+    change H.map (HY.map (C.lambda ≫ e)) =
+      H.map (HY.map (_ ≫ C'.lambda)) at hh
+    dsimp [m, q, i, m']
+    rw [Functor.map_comp, Category.assoc, ← Functor.map_comp, ← HY.map_comp,
+      hh, HY.map_comp, Functor.map_comp, ← Category.assoc, ← Functor.map_comp,
+      sectionsComparison_naturality, Functor.map_comp, Category.assoc]
+    rw [Functor.map_comp]
+  have hi := resolutionSectionsIso_naturality
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C.I C'.I p
+  have hj := resolutionSectionsIso_naturality
+    (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C.J C'.J p
+  change (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C.I p).hom ≫ i =
+    (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C'.I p).hom at hi
+  change (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C.J p).hom ≫ j =
+    (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C'.J p).hom at hj
+  change (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C.J p).hom ≫ b ≫ inv m ≫
+      (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C.I p).inv =
+    (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor Y.toRingedSpace) C'.J p).hom ≫ b' ≫ inv m' ≫
+      (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C'.I p).inv
+  rw [← cancel_mono (resolutionSectionsIso
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace) C'.I p).hom]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [← hi, Iso.inv_hom_id_assoc]
+  have hm : inv m ≫ i ≫ m' = q := by
+    rw [← hlambda, IsIso.inv_hom_id_assoc]
+  rw [← cancel_mono m']
+  simp only [Category.assoc]
+  rw [hm, IsIso.inv_hom_id, Category.comp_id, hβ, ← Category.assoc, hj]
 
 /-- Source: Stacks Project, Tags 01F8 and 01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
@@ -224,6 +356,17 @@ theorem moduleCohomologyPullback_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y 
   rw [moduleCohomologyFMap_target_naturality]
   simp only [Category.assoc, hc]
 
+private theorem moduleCohomologyFMap_congr {X Y : Scheme.{u}}
+    {h k : X ⟶ Y} (e : h = k) {G : Y.Modules} {F : X.Modules}
+    (φ : G ⟶ (pushforward h).obj F) (p : ℕ) :
+    moduleCohomologyFMap h φ p =
+      moduleCohomologyFMap k (φ ≫ (pushforwardCongr e).hom.app F) p := by
+  subst k
+  have hc : (pushforwardCongr (rfl : h = h)).hom.app F = 𝟙 _ := by
+    ext U
+    simp
+  rw [hc, Category.comp_id]
+
 /-- Source: Stacks Project, Tags 01F8 and 01FB
 (blueprint: lem-weil-pbc-module-cohomology-fmap-functorial).
 
@@ -266,6 +409,35 @@ theorem moduleCohomologyFMap_restriction {Y Z : Scheme.{u}} (k : Y ⟶ Z)
         moduleCohomologyRestriction (k ⁻¹ᵁ V) G p =
         moduleCohomologyRestriction V H p ≫
           moduleCohomologyFMap (k.resLE V (k ⁻¹ᵁ V) le_rfl) ψV p := by
-  sorry
+  let W := k ⁻¹ᵁ V
+  let r := k.resLE V W le_rfl
+  let GV := (restrictFunctor W.ι).obj G
+  let a := (pushforwardComp r V.ι).hom.app GV
+  let b := (pushforwardCongr (k.resLE_comp_ι (U := V) (V := W) le_rfl)).hom.app GV
+  let t := ψ ≫ (pushforward k).map ((restrictAdjunction W.ι).unit.app G) ≫
+    (pushforwardComp W.ι k).hom.app GV
+  let ψV := ((restrictAdjunction V.ι).homEquiv H ((pushforward r).obj GV)).symm
+    (t ≫ inv b ≫ inv a)
+  have hv : (restrictAdjunction V.ι).unit.app H ≫ (pushforward V.ι).map ψV =
+      t ≫ inv b ≫ inv a := by
+    exact ((restrictAdjunction V.ι).homEquiv H
+      ((pushforward r).obj GV)).apply_symm_apply _
+  have hs : (restrictAdjunction V.ι).unit.app H ≫ (pushforward V.ι).map ψV ≫
+      a ≫ b = t := by
+    rw [← Category.assoc, ← Category.assoc, hv]
+    simp [Category.assoc]
+  refine ⟨ψV, hs, ?_⟩
+  intro p
+  unfold moduleCohomologyRestriction
+  rw [← moduleCohomologyFMap_comp, ← moduleCohomologyFMap_comp]
+  have he := moduleCohomologyFMap_congr
+    (k.resLE_comp_ι (U := V) (V := W) le_rfl)
+    ((restrictAdjunction V.ι).unit.app H ≫ (pushforward V.ι).map ψV ≫ a) p
+  change moduleCohomologyFMap (W.ι ≫ k) t p =
+    moduleCohomologyFMap (r ≫ V.ι)
+      ((restrictAdjunction V.ι).unit.app H ≫ (pushforward V.ι).map ψV ≫ a) p
+  rw [he]
+  congr 1
+  exact hs.symm
 
 end AlgebraicGeometry.Scheme.Modules
