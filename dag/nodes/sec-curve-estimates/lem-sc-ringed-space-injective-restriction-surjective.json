@@ -25,40 +25,26 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal O_U=\\mathcal O_X|_U$. Let $P_U$ be the presheaf of $\\mathcal O_X$-modules on $X$ with $P_U(V)=\\mathcal O_X(V)$ (acting on itself) for open $V\\subseteq U$ and $P_U(V)=0$ for $V\\not\\subseteq U$, with the restriction maps of $\\mathcal O_X$ between opens contained in $U$ and $0$ otherwise; let $\\theta_U:P_U\\to j_!\\mathcal O_U:=P_U^\\#$ be its sheafification as a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification], whose underlying abelian sheaf is the abelian sheafification of $P_U$. Define $P_{U'}$, $\\theta_{U'}$, $j'_!\\mathcal O_{U'}$ likewise. For every $\\mathcal O_X$-module $\\mathcal F$, the universal property of [def-weil-presheaf-modules-sheafification] gives a bijection $\\operatorname{Hom}_{\\mathcal O_X}(j_!\\mathcal O_U,\\mathcal F)\\to\\operatorname{Hom}(P_U,\\mathcal F)$, $\\psi\\mapsto\\psi\\circ\\theta_U$, onto the $\\mathcal O_X$-linear presheaf maps. Such a presheaf map $\\varphi$ is zero on opens $V\\not\\subseteq U$, and on $V\\subseteq U$ the $\\mathcal O_X(V)$-linear map $\\varphi_V:\\mathcal O_X(V)\\to\\mathcal F(V)$ is $r\\mapsto r\\,\\varphi_V(1)$ with $\\varphi_V(1)=\\varphi_U(1)|_V$ by compatibility with restriction; conversely each $s\\in\\mathcal F(U)$ defines such a map $r\\mapsto r\\,s|_V$. Hence $\\psi\\mapsto(\\psi\\circ\\theta_U)_U(1)$ is a bijection $\\operatorname{Hom}_{\\mathcal O_X}(j_!\\mathcal O_U,\\mathcal F)\\cong\\mathcal F(U)$, and likewise $\\operatorname{Hom}_{\\mathcal O_X}(j'_!\\mathcal O_{U'},\\mathcal F)\\cong\\mathcal F(U')$ (Stacks 01EA proof; the extension by zero $j_!\\mathcal O_U$ of Sheaves 00A4).",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01EA proof, the two Hom identifications"
-   }
-  },
-  {
-   "text": "Let $\\alpha_p:P_{U'}\\to P_U$ be the identity on opens $V\\subseteq U'$ and $0$ on all other opens; it is a map of presheaves of $\\mathcal O_X$-modules, and let $\\alpha:j'_!\\mathcal O_{U'}\\to j_!\\mathcal O_U$ be the induced map with $\\alpha\\circ\\theta_{U'}=\\theta_U\\circ\\alpha_p$ [def-weil-presheaf-modules-sheafification]. Stalks are as in [def-weil-pbc-module-stalk]. For $x\\in X$ the stalk $(P_U)_x$ is $\\mathcal O_{X,x}$ if $x\\in U$ (the neighbourhoods inside $U$ are cofinal) and $0$ if $x\\notin U$ (then no neighbourhood of $x$ lies in $U$); so $(\\alpha_p)_x$ is the identity of $\\mathcal O_{X,x}$ for $x\\in U'$ and has source $0$ for $x\\notin U'$, hence is injective. By [lem-weil-pbc-stalk-sheafification-space] the maps $(\\theta_U)_x$, $(\\theta_{U'})_x$ are isomorphisms, so $\\alpha_x=(\\theta_U)_x(\\alpha_p)_x(\\theta_{U'})_x^{-1}$ is injective for every $x$. By [lem-weil-pbc-module-stalk-exact] (5), applied to $0\\to j'_!\\mathcal O_{U'}\\xrightarrow{\\alpha}j_!\\mathcal O_U$, $\\alpha$ is a monomorphism.",
+   "text": "For each open V, take P_V = O_X[h_V], the free presheaf module on the representable h_V. Since the category of opens is a poset, its sections over T are free on a singleton if T is contained in V and free on the empty set otherwise. This is the extension-by-zero presheaf in the source proof. Set A_V = P_V^# using [def-weil-presheaf-modules-sheafification]. Composing the sheafification adjunction with [lem-weil-pbc-free-yoneda-presheaf-module] gives an equivalence Hom(A_V,I) with I(V). Naturality in V follows by the left naturality equations for the sheafification and free-module adjunctions, followed by yonedaEquiv_naturality; this explicitly identifies precomposition with A_{V\\prime} to A_V with restriction.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-stalk-sheafification-space",
-    "lem-weil-pbc-module-stalk-exact"
+    "lem-weil-pbc-free-yoneda-presheaf-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01EA proof, canonical map and injectivity from stalks"
-   }
+   "elementary": true
   },
   {
-   "text": "Since $\\mathcal I$ is injective, the defining lifting property of [def-sp-injective-resolutions] makes precomposition with the monomorphism $\\alpha$ a surjection $\\operatorname{Hom}_{\\mathcal O_X}(j_!\\mathcal O_U,\\mathcal I)\\twoheadrightarrow\\operatorname{Hom}_{\\mathcal O_X}(j'_!\\mathcal O_{U'},\\mathcal I)$. Under the bijections of Step 1, $\\psi\\circ\\alpha$ corresponds to $(\\psi\\circ\\alpha\\circ\\theta_{U'})_{U'}(1)=(\\psi\\circ\\theta_U)_{U'}((\\alpha_p)_{U'}(1))=(\\psi\\circ\\theta_U)_{U'}(1)=(\\psi\\circ\\theta_U)_U(1)|_{U'}$, so precomposition with $\\alpha$ is the restriction map $\\mathcal I(U)\\to\\mathcal I(U')$, which is therefore surjective.",
+   "text": "For V\\prime contained in V, the inclusion induces P_{V\\prime} to P_V. Its section map is Finsupp.mapDomain on the map Hom(T,V\\prime) to Hom(T,V). This indexing map is injective because its source is a subsingleton. Finsupp.mapDomain_injective and PresheafOfModules.mono_of_injective therefore give a monomorphism of presheaves. Module sheafification preserves finite limits [lem-weil-pbc-ringed-site-module-sheafification-exact]; hence it preserves this monomorphism, giving Mono(A_{V\\prime} to A_V) by typeclass inference. No stalk computations are needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given s in I(V\\prime), use the inverse Hom-section equivalence to obtain A_{V\\prime} to I. Apply Injective.factors [def-sp-injective-resolutions] along the monomorphism A_{V\\prime} to A_V to obtain f:A_V to I. The naturality identity of step 1 and the factorization equation show that the section corresponding to f restricts to s. This proves restriction surjectivity for all inclusions of opens.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01EA proof, injectivity and conclusion"
-   }
+   "elementary": true
   },
   {
    "text": "For open $U,V\\subseteq X$, apply Step 3 to the inclusions $U\\cap V\\subseteq U$ and $U\\cap V\\subseteq V$. Given $c\\in\\mathcal I(U\\cap V)$, choose $a\\in\\mathcal I(U)$ restricting to $c$ and take $b=0\\in\\mathcal I(V)$. Then $(a,b)$ maps to $a|_{U\\cap V}-b|_{U\\cap V}=c$, proving that $\\mathcal I(U)\\oplus\\mathcal I(V)\\to\\mathcal I(U\\cap V)$ is surjective.",
@@ -72,15 +58,14 @@
  ],
  "proof_deps": [
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-stalk-sheafification-space",
-  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
   "def-sp-injective-resolutions"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology, Lemma 01EA (lemma-injective-restriction-surjective) and its proof"
+  "place": "Cohomology, Lemma 01EA proof (extension-by-zero representing sections); monomorphism established sectionwise and preserved by Mathlib left exact module sheafification, instead of computing stalks. B3 stage 3, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -181,5 +166,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T060731-L-2904343",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
