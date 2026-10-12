@@ -17,69 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Let Fprime=h^*F and iPrime=pullback.snd i h. Restrict Fprime along the open-subscheme inclusion to obtain the Zariski sheaf G. The top-open and identity-base-change isomorphisms identify G(Xprime) with the displayed sections of Fprime, defining lift. The open-subscheme inclusion is continuous by the Zariski-etale inclusion morphism of sites, so restriction is a sheaf.",
+   "text": "Apply the local restriction-data theorem, obtaining G,H and the restriction and fibre-product identifications, lift,e,tH, and the local/unit transport equations conditional on a comparison satisfying its unit equation.",
    "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "def-weil-pbc-topological-inverse-image",
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
+    "lem-weil-pbc-gabber-h0-zariski-local-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
-   }
+   "elementary": false
   },
   {
-   "text": "On each W_a pull the representative s back along phi_a; the commuting equation identifies its structure morphism with the restriction of h. The assumed representative equation, unit naturality, and composition comparisons show that its iPrime-pullback is tPrime on the preimage of W_a.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
-   }
-  },
-  {
-   "text": "Apply the injective Zariski-etale comparison for iPrime. The images under the Zariski unit of the local sections agree on overlaps because their comparison images both equal tPrime there. Injectivity makes them equal before comparison. Glue to sigma in the topological inverse image by its sheaf axiom, since the preimages of W_a cover the fibre product.",
+   "text": "The second pullback projection is a closed immersion by base change. Apply the existing Zariski-etale restriction injectivity theorem to h^*F and the supplied identifications. Its characterization of beta, applied to beta itself, gives the unit equation; its other conclusion gives componentwise injectivity. Feed the unit equation to the local transport clause.",
    "uses": [
     "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
-    "def-weil-pbc-topological-inverse-image"
+    "lem-weil-pbc-gabber-zariski-etale-restriction-injective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
-   }
+   "elementary": false
   },
   {
-   "text": "Define compare by the comparison on global sections followed by the unit-compatible etale composition isomorphism and the fibre-product pasting identification. The sheaf axiom gives compare(sigma) equal to the left-hand pullback of t. The comparison-unit equation gives compare(unit(a)) equal to the right-hand pullback of lift(a), transported along pullback.condition. These assertions use neither finiteness of h nor hFinite.",
+   "text": "The private proved helper lift_of_local_lifts applies injectivity on each intersection and naturality to show the local sections sf agree. Mathlib TopCat.Sheaf.existsUnique_gluing' glues them over the covering opens. TopCat.Sheaf.eq_of_locally_eq' and naturality identify the beta image of the glued section with tH. This also handles empty covers.",
    "uses": [
-    "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-pc-fibre-product"
+    "def-weil-pbc-topological-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph through construction of s′ by Zariski gluing, before comparing its projection pullbacks"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Set compare=e composed with the top component of beta and sigma equal to the glued section. Rewrite its beta image as tH and use e(tH)=the pullback of t. The second conjunct is the local restriction-data theorem's unit compatibility. All original binders and the conclusion are unchanged.",
+   "uses": [
+    "lem-weil-pbc-gabber-h0-zariski-local-data"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-weil-pbc-topological-inverse-image",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-gabber-h0-zariski-local-data",
   "lem-weil-pbc-closed-immersion-base-change",
   "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
+  "def-weil-pbc-topological-inverse-image"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph: construction of tPrime and its membership in the Zariski inverse-image subsheaf"
+  "place": "Tag 09ZF fourth paragraph; formal gluing implemented using Mathlib unique gluing and local equality"
  },
  "mathlib_searches": [
   {
@@ -174,11 +150,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-02903",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T095851-L-312145",
+  "landing": "20261012T112832-L-765071",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered signatures and proof with the nodes and Stacks Tag 09ZF; verified import users, unchanged existing interface, permitted node changes, clean compilation, and axioms containing sorryAx only for the reported decomposition."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

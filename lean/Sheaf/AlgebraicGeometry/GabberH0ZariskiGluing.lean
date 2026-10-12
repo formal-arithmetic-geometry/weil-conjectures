@@ -9,9 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.GabberH0ZariskiLocalData
 import Sheaf.Paper.GabberZariskiEtaleRestrictionInjective
-import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
+import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # Zariski gluing after a local refinement of an étale representative
 
@@ -27,6 +27,35 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
+
+private theorem lift_of_local_lifts
+    {Y : TopCat.{u}} (K H : TopCat.Sheaf (Type (u + 1)) Y)
+    (beta : K ⟶ H) (hinj : ∀ V, Function.Injective (beta.hom.app (op V)))
+    (t : H.obj.obj (op (⊤ : Opens Y)))
+    {J : Type} (V : J → Opens Y) (hV : ⨆ a, V a = ⊤)
+    (sf : ∀ a, K.obj.obj (op (V a)))
+    (hsf : ∀ a, beta.hom.app (op (V a)) (sf a) =
+      H.obj.map (homOfLE (show V a ≤ ⊤ from le_top)).op t) :
+    ∃ sigma : K.obj.obj (op (⊤ : Opens Y)), beta.hom.app (op ⊤) sigma = t := by
+  have hnat {A B : Opens Y} (f : A ⟶ B) (x : K.obj.obj (op B)) :
+      beta.hom.app (op A) (K.obj.map f.op x) =
+        H.obj.map f.op (beta.hom.app (op B) x) :=
+    ConcreteCategory.congr_hom (beta.hom.naturality f.op) x
+  have hcompat : TopCat.Presheaf.IsCompatible K.obj V sf := by
+    intro a b
+    apply hinj (V a ⊓ V b)
+    rw [hnat, hnat, hsf, hsf]
+    rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+      ← H.obj.map_comp, ← H.obj.map_comp]
+    rfl
+  obtain ⟨sigma, hσ, -⟩ := K.existsUnique_gluing' V ⊤
+    (fun a ↦ homOfLE (show V a ≤ ⊤ from le_top)) (by rw [hV]) sf hcompat
+  refine ⟨sigma, ?_⟩
+  apply H.eq_of_locally_eq' V ⊤
+    (fun a ↦ homOfLE (show V a ≤ ⊤ from le_top)) (by rw [hV])
+  intro a
+  rw [← hnat, hσ]
+  exact hsf a
 
 /-- Locally factoring a morphism through an étale representative puts the restricted
 section in the Zariski inverse image. The map lift identifies global Zariski
@@ -107,6 +136,16 @@ theorem gabber_h0_zariski_gluing
                 (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm)
             (etaleSetDescentComparison h (pullback.snd i h) F
               (Scheme.Etale.mk (𝟙 X)) (lift a)) := by
-  sorry
+  dsimp
+  obtain ⟨G, lift, H, eX, eZ, a, ha, e, tH, he, hlocal⟩ :=
+    gabber_h0_zariski_local_data i q h F t s hs J W phi hW hphi
+  obtain ⟨beta, hinj, hbeta⟩ := gabber_zariski_etale_restriction_injective.{u, 0}
+    (pullback.snd i h) ((Scheme.etaleSetPullback h).obj F) G eX H eZ a ha
+  obtain ⟨⟨V, sf, hV, hsf⟩, hunit⟩ := hlocal beta ((hbeta beta).mpr rfl)
+  obtain ⟨sigma, hσ⟩ := lift_of_local_lifts _ H beta hinj tH V hV sf hsf
+  refine ⟨G, lift, e ∘ beta.hom.app (op ⊤), sigma, ?_, hunit⟩
+  change e (beta.hom.app (op ⊤) sigma) = _
+  rw [hσ]
+  exact he
 
 end AlgebraicGeometry

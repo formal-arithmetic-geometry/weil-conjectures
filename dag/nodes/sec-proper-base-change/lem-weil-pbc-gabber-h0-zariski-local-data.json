@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-gabber-h0-zariski-local-data",
+ "kind": "statement",
+ "title": "Zariski restriction identifications and local representative transport",
+ "statement": "Let i:Z -> X be a closed immersion, q:U -> X etale, h:Xprime -> X any morphism, F an etale sheaf of sets on X, t a global section of i^*F, and s in F(U). Assume i^*s is the restriction of t to U times_X Z. Suppose a J-indexed open cover W_a of Xprime admits maps phi_a:W_a -> U with phi_a followed by q equal to W_a inclusion followed by h. Put Zprime=Z times_X Xprime and iPrime=pullback.snd i h [def-pc-fibre-product]. There exist Zariski sheaves G on Xprime and H on Zprime, presheaf isomorphisms identifying them with the open-subscheme restrictions of h^*F and iPrime^*h^*F [def-weil-pbc-etale-sheaf-of-sets, lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites], the canonical preimage-open/base-change isomorphisms a with their first-projection equations, a map lift on top sections, a map e from H(Zprime) to the displayed composite etale inverse-image sections, and tH in H(Zprime). The image e(tH) is the composition-compatible pullback of t [lem-weil-pbc-sets-etale-inverse-image-composition-units]. For EVERY sheaf morphism beta:iPrime_Zar^*G -> H satisfying the canonical comparison-unit equation, there is a J-indexed open cover V of Zprime and sections sf_a in (iPrime_Zar^*G)(V_a) whose beta images are the restrictions of tH. In addition e composed with beta on top sections is compatible with the Zariski unit and lift, transported along pullback.condition [def-weil-pbc-topological-inverse-image]. This asserts neither injectivity of beta nor a global preimage of tH.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph: construction of tPrime and its membership in the Zariski inverse-image subsheaf"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
+ ],
+ "proof": [
+  {
+   "text": "Restrict h^*F and iPrime^*h^*F along the canonical open-subscheme inclusions to construct G,H,eX,eZ. Continuity gives the sheaf conditions. Identify preimages of opens with scheme fibre products to obtain a and its projection equation. No witness data is used in a definition.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The top-open/identity-object isomorphisms define lift. Compose the analogous isomorphisms for H with the inverse-image composition comparison and the commuting fibre-product equation to define e. Transport the pullback of t to tH; e(tH) is its displayed composition comparison.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any beta with the unit equation, take V_a=iPrime^{-1}W_a. Pull s along phi_a to h^*F on W_a, then use the topological unit to define sf_a. hphi provides the fibre-product factorization. Naturality, hs and composition-unit coherence identify beta(sf_a) with tH restricted to V_a. The preimages cover. Apply the same unit equation at the top open to obtain the final compatibility, transported along pullback.condition. Empty covers force empty Xprime and Zprime, so all formulas still hold.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph: construction of tPrime and its membership in the Zariski inverse-image subsheaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An injective morphism of sheaves of sets has a global lift of a section if it has local lifts everywhere",
+   "results": "CategoryTheory.Sheaf.isLocallyInjective_iff_injective; CategoryTheory.Sheaf.IsLocallyInjective; CategoryTheory.Presheaf.isLocallyInjective_of_injective; CategoryTheory.Sheaf.locallyInjective; CategoryTheory.Presheaf.isLocallyInjective_iff_injective_of_separated; CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; CategoryTheory.Presheaf.isLocallyInjective_toSheafify",
+   "date": "2026-10-12",
+   "verdict": "No geometric construction match; generic gluing lemmas are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf",
+   "results": "TopCat.Sheaf; TopCat.sheafInhabited; TopCat.instCategorySheaf; TopCat.Sheaf.presheaf; TopCat.Sheaf.forget; TopCat.Sheaf.forgetFaithful; TopCat.Sheaf.forget_full; TopCat.Sheaf.id_app",
+   "date": "2026-10-12",
+   "verdict": "No geometric construction match; generic gluing lemmas are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_gluing|eq_of_locally_eq",
+   "results": "Mathlib/Topology/Sheaves/Flasque.lean; Mathlib/Topology/Sheaves/Flasque.lean; Mathlib/Topology/Sheaves/LocalPredicate.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean; Mathlib/Topology/Sheaves/SheafCondition/UniqueGluing.lean",
+   "date": "2026-10-12",
+   "verdict": "No geometric construction match; generic gluing lemmas are used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction of an etale sheaf to the Zariski site has an injective inverse image comparison and a section represented etale locally has Zariski local lifts after refinement",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0ZariskiGluing",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-gabber-h0-zariski-gluing",
+   "place": "Tag 09ZF fourth paragraph: restriction construction and local representative equations, before gluing"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GabberH0ZariskiLocalData",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiLocalData.lean",
+  "declaration": "AlgebraicGeometry.gabber_h0_zariski_local_data",
+  "statement": "theorem gabber_h0_zariski_local_data\n    {X Z U X' : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (q : U ⟶ X) [Etale q] (h : X' ⟶ X)\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (t : ((Scheme.etaleSetPullback i).obj F).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk (𝟙 X)))))\n    (s : F.obj.obj (op (Scheme.Etale.mk q)))\n    (hs : etaleSetDescentUnit i F (Scheme.Etale.mk q) s =\n      ((Scheme.etaleSetPullback i).obj F).obj.map\n        ((MorphismProperty.Over.pullback @Etale ⊤ i).map\n          (MorphismProperty.Over.homMk q (Category.comp_id q) :\n            Scheme.Etale.mk q ⟶ Scheme.Etale.mk (𝟙 X))).op t)\n    (J : Type) (W : J → X'.Opens) (phi : ∀ a, (W a).toScheme ⟶ U)\n    (hW : ⨆ a, W a = ⊤) (hphi : ∀ a, phi a ≫ q = (W a).ι ≫ h) :\n    let b : CategoryTheory.Functor.{u, u, u, u}\n        X'.Opens (pullback i h : Scheme.{u}).Opens :=\n      Opens.map ((pullback.snd i h : (pullback i h : Scheme.{u}) ⟶ X').base)\n    letI : ∀ P : X'.Opensᵒᵖ ⥤ Type (u + 1), b.op.HasPointwiseLeftKanExtension P :=\n      fun P V ↦\n        @Types.hasColimit.{u, u + 1, u} (CostructuredArrow.{u, u, u, u} b.op V)\n          inferInstance (small_succ.{u} _) (CostructuredArrow.proj b.op V ⋙ P)\n    ∃ (G : TopCat.Sheaf (Type (u + 1)) X'.toTopCat)\n      (lift : G.obj.obj (op (⊤ : X'.Opens)) →\n        ((Scheme.etaleSetPullback h).obj F).obj.obj\n          (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj\n            (Scheme.Etale.mk (𝟙 X)))))\n      (H : TopCat.Sheaf (Type (u + 1)) (pullback i h : Scheme.{u}).toTopCat)\n      (eX : G.obj ≅\n      (MorphismProperty.Comma.lift (P := @Etale) (Q := ⊤) (W := ⊤)\n        X'.restrictFunctor (fun U => (inferInstance : Etale U.ι))\n        (fun _ => trivial)\n        (fun _ => trivial)).op ⋙ ((Scheme.etaleSetPullback h).obj F).obj)\n      (eZ : H.obj ≅\n      (MorphismProperty.Comma.lift (P := @Etale) (Q := ⊤) (W := ⊤)\n        (pullback i h : Scheme.{u}).restrictFunctor (fun U => (inferInstance : Etale U.ι))\n        (fun _ => trivial)\n        (fun _ => trivial)).op ⋙\n      ((Functor.sheafPullbackConstruction.sheafPullback\n        (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd i h)) (Type (u + 1))\n        (X'.smallGrothendieckTopology @Etale)\n        ((pullback i h : Scheme.{u}).smallGrothendieckTopology @Etale)).obj\n          ((Scheme.etaleSetPullback h).obj F)).obj)\n      (a : ∀ W : X'.Opens, Scheme.Etale.mk ((pullback.snd i h) ⁻¹ᵁ W).ι ≅\n      (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd i h)).obj (Scheme.Etale.mk W.ι)),\n      (∀ W : X'.Opens,\n        (a W).hom.left ≫ pullback.fst W.ι (pullback.snd i h) =\n          (pullback.snd i h) ∣_ W) ∧\n      ∃ (e : H.obj.obj (op (⊤ : (pullback i h : Scheme.{u}).Opens)) →\n        ((Scheme.etaleSetPullback (pullback.fst i h ≫ i)).obj F).obj.obj\n          (op ((MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst i h ≫ i)).obj\n            (Scheme.Etale.mk (𝟙 X)))))\n      (tH : H.obj.obj (op (⊤ : (pullback i h : Scheme.{u}).Opens))),\n      e tH = etaleSetDescentComparison i (pullback.fst i h) F (Scheme.Etale.mk (𝟙 X)) t ∧\n      ∀ (beta : ((Functor.sheafPullbackConstruction.sheafPullback b (Type (u + 1))\n          (Opens.grothendieckTopology X')\n          (Opens.grothendieckTopology (pullback i h : Scheme.{u}))).obj G) ⟶ H),\n        (∀ (W : X'.Opens) (s : G.obj.obj (op W)),\n        beta.hom.app (op ((pullback.snd i h) ⁻¹ᵁ W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (Opens.map (pullback.snd i h).base) (Type (u + 1))\n            (Opens.grothendieckTopology X'.carrier)\n            (Opens.grothendieckTopology (pullback i h : Scheme.{u}).carrier)).unit.app G).hom.app\n              (op W) s) =\n        eZ.inv.app (op ((pullback.snd i h) ⁻¹ᵁ W))\n          (((Functor.sheafPullbackConstruction.sheafPullback\n            (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd i h)) (Type (u + 1))\n            (X'.smallGrothendieckTopology @Etale)\n            ((pullback i h : Scheme.{u}).smallGrothendieckTopology @Etale)).obj\n          ((Scheme.etaleSetPullback h).obj F)).obj.map (a W).hom.op\n            (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n              (MorphismProperty.Over.pullback @Etale ⊤ (pullback.snd i h)) (Type (u + 1))\n              (X'.smallGrothendieckTopology @Etale)\n              ((pullback i h : Scheme.{u}).smallGrothendieckTopology @Etale)).unit.app\n                ((Scheme.etaleSetPullback h).obj F)).hom.app\n                (op (Scheme.Etale.mk W.ι)) (eX.hom.app (op W) s)))) →\n      (∃ (V : J → (pullback i h : Scheme.{u}).Opens)\n        (sf : ∀ a, ((Functor.sheafPullbackConstruction.sheafPullback b (Type (u + 1))\n          (Opens.grothendieckTopology X')\n          (Opens.grothendieckTopology (pullback i h : Scheme.{u}))).obj G).obj.obj (op (V a))),\n        (⨆ a, V a = ⊤) ∧ ∀ a,\n          beta.hom.app (op (V a)) (sf a) =\n            H.obj.map (homOfLE (show V a ≤ ⊤ from le_top)).op tH) ∧\n      (∀ a : G.obj.obj (op (⊤ : X'.Opens)),\n        (e ∘ beta.hom.app (op (⊤ : (pullback i h : Scheme.{u}).Opens)))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            b (Type (u + 1)) (Opens.grothendieckTopology X')\n            (Opens.grothendieckTopology (pullback i h : Scheme.{u}))).unit.app G).hom.app\n              (op (⊤ : X'.Opens)) a) =\n          eqToHom (congrArg\n            (fun k : pullback i h ⟶ X ↦ ((Scheme.etaleSetPullback k).obj F).obj.obj\n              (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj\n                (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm)\n            (etaleSetDescentComparison h (pullback.snd i h) F\n              (Scheme.Etale.mk (𝟙 X)) (lift a)))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T112832-L-765071",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T112832-L-765071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
