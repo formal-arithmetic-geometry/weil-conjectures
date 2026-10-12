@@ -7,8 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
-import Sheaf.AlgebraicGeometry.Morphisms.FpqcIntegralDescent
-import Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 /-!
 # Finiteness descends along fpqc covering families
@@ -30,18 +30,19 @@ Source: Stacks Project, Descent, Lemma Tag 02LA and Definition Tag 02KO
 (blueprint: lem-weil-pbc-fpqc-descend-finite).
 
 Proof:
-1. Each second projection is integral and locally of finite type, by
-   `lem-weil-pbc-finite-iff-integral-lft` (Morphisms, Tag 01WJ).
-2. Integrality descends along the given fpqc covering by
-   `lem-weil-pbc-fpqc-descend-integral` (Descent, Tag 02L9), so `f` is integral.
-3. Local finite type descends along the same covering by
-   `lem-weil-pbc-fpqc-descend-locally-finite-type` (Descent, Tag 02KX).
-4. An integral morphism locally of finite type is finite, by the reverse direction of
-   `lem-weil-pbc-finite-iff-integral-lft` (Morphisms, Tag 01WJ). -/
+1. Use the source library's proved descent of finiteness along surjective flat
+   quasi-compact morphisms (Tag 02LA).
+2. The given fpqc precover generates a covering sieve of the fpqc topology.
+3. Apply the source library's covering-family descent theorem to `IsFinite`, using
+   the canonical pullback squares and the hypotheses on their second projections. -/
 theorem isFinite_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v}
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (h : ∀ i, IsFinite (pullback.snd f (g i))) : IsFinite f := by
-  sorry
+  have := IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact
+  exact Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (P := @IsFinite)
+    (Precoverage.generate_mem_toGrothendieck hg) f
+    (fun i ↦ pullback.fst f (g i)) (fun i ↦ pullback.snd f (g i))
+    (fun i ↦ IsPullback.of_hasPullback f (g i)) h
 
 end AlgebraicGeometry

@@ -6114,3 +6114,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/U2/Sheaf.Paper.SiteSheafificationSectionsLocal (stage 3; reviewer PASS; first push; landing 20261012T044757-L-2041863 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:47 L: merged deliver/U2/Sheaf.Topology.SpectralClosedSubspace (stage 3; reviewer PASS; first push; landing 20261012T044757-L-2042035 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:47 L: merged deliver/V1/Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian (stage 3; reviewer PASS; first push; landing 20261012T044757-L-2042203 (proof); batch 20261012T044734; modules 1; new nodes 0)
+- 04:47 L: merged deliver/V2/Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover (stage 3; reviewer PASS; first push; landing 20261012T044758-L-2042364 (proof); batch 20261012T044734; modules 1; new nodes 0)
