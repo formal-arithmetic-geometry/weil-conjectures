@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-unit-stalk-kernel-on-image",
+ "kind": "statement",
+ "title": "The unit kernel at a point on the closed image",
+ "statement": "Let i:Z -> Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], F an O_Y-module, and z a point of Z. For the adjunction chosen by nonempty_tensorPullbackAdjunction [def-pc-module-pullback], let eta_F:F -> i_*i^*F be its unit. Let S be the module stalk functor at i(z) [def-pc-module-stalk-functor]. Then ker(S(eta_F)) = ker(i.stalkMap z) times the whole module F_i(z), as submodules of F_i(z). This concerns only the local ring kernel, not the scheme ideal sheaf or its multiplication map.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 08KS, the last stalk calculation, with Sheaves 0098 and 00AE; right exactness supplies the quotient kernel calculation. Read at https://stacks.math.columbia.edu/tag/08KS; the literature checkout is not present on this machine."
+ },
+ "proof": [
+  {
+   "text": "For a surjective ring map f:R -> T and R-module M, tensor the exact pair ker(f) -> R -> T with M using Mathlib rTensor_exact. Precompose with the inverse left unitor R tensor M -> M. Mathlib Submodule.map_range_rTensor_subtype_lid computes the transported range as ker(f) times M. Thus ker(m -> 1 tensor m) = ker(f) times M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the canonical adjunction, the closed-pushforward stalk map is an isomorphism of abelian groups. Compose it with the tensor pullback stalk comparison. The two germ formulas show on every representative that this additive equivalence sends the unit to m -> 1 tensor m. Its injectivity preserves the kernel. Apply the first step to i.stalkMap z, which is surjective by the closed-immersion hypothesis.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Adjunction.unit_leftAdjointUniq_hom_app expresses the unit of the chosen adjunction as the canonical unit followed by the pushforward of an isomorphism. Applying S preserves that isomorphism; its injectivity leaves the kernel unchanged.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 08KS, the last stalk calculation, with Sheaves 0098 and 00AE; right exactness supplies the quotient kernel calculation. Complete Lean proof by J1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk ideal of closed immersion and kernel of pullback unit on stalks",
+   "results": "Service unavailable: Internal Server Error from msearch.py.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of kernel ideal of a closed immersion equals kernel of ring stalk map; kernel of extension of scalars along a surjective ring homomorphism",
+   "results": "Scheme.Hom.ker, Scheme.Hom.ideal_ker_le, IdealSheafData.ker_subschemeι_app; LinearMap.ker_tensorProductMk and Algebra.TensorProduct.rTensor_ker. No direct geometric stalk theorem.",
+   "date": "2026-10-13",
+   "verdict": "Use the affine section and ring-level lemmas; no duplicate geometric declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.ker, TensorProduct",
+   "results": "rTensor_mkQ, TensorProduct.map_ker, LinearMap.ker_tensorProductMk in Mathlib.LinearAlgebra.TensorProduct.RightExactness.",
+   "date": "2026-10-13",
+   "verdict": "Ring-level exactness only, not a geometric identification of the stalk maps."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*stalk.*ker|stalk.*unit.*ker; range_toModulesι_app, ker_apply, germ_stalkMap_apply; rTensor_exact, map_range_rTensor_subtype_lid; blueprint_refs.py search closed immersion ideal stalk and closed immersion unit",
+   "results": "Only the current parent theorem has the combined geometric equality. Mathlib has the affine ideal/kernel and germ APIs and tensor right exactness. No imported blueprint node matches either new intermediate statement.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; compose the existing APIs in the proved new modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionUnitStalkKernel",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7, essential-surjectivity: the closed-immersion quotient dictionary. This isolates the unit kernel at a point on the closed image.",
+   "via": [
+    "lem-weil-pbc-closed-immersion-unit-stalk-kernel",
+    "lem-weil-pbc-closed-immersion-unit-kernel",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-thickening-systems-dictionary",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionUnitStalkKernelOnImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionUnitStalkKernelOnImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_unit_stalk_kernel_on_image",
+  "statement": "theorem closedImmersion_unit_stalk_kernel_on_image {Y Z : Scheme.{w}} (i : Z ⟶ Y)\n    [IsClosedImmersion i] (F : Y.Modules) (z : Z) :\n    let adj := Classical.choice (nonempty_tensorPullbackAdjunction i)\n    let S := RingedSpace.moduleStalkFunctor Y.toRingedSpace (i.base z)\n    LinearMap.ker (S.map (adj.unit.app F)).hom =\n      RingHom.ker (i.stalkMap z).hom •\n        (⊤ : Submodule (Y.presheaf.stalk (i.base z)) (S.obj F))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T213849-L-1208466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T213849-L-1208466",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
