@@ -107,6 +107,40 @@ noncomputable abbrev geometricStalk (Λ : Type (u + 1)) [CommRing Λ] {s : Schem
   (upperStar (ModuleCat.{u + 1} Λ) x).leftDerivedFunctor ⋙
     rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s
 
+/-- The comparison `Res ∘ RΓ_c(X, -) ≅ RΓ_c(X, -) ∘ Res` assembled from a comparison
+`δ : Res ∘ Ra_{X!} ≅ Ra_{X!} ∘ Res` for compact support with values in `D(s_proét)` and a
+comparison `αs : Res ∘ RΓ(s, -) ≅ RΓ(s, -) ∘ Res` for the point identification. -/
+noncomputable def compactCoefficientIso {s : Scheme.{u}} (aX : X ⟶ s) [HasCompactification aX]
+    (δ : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ ⋙
+        rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) aX ≅
+      rightDerivedLowerShriek (ModuleCat.{u + 1} Λ') aX ⋙
+        Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ)
+    (αs : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ ⋙
+        rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s ≅
+      rightDerivedGlobalSections (ModuleCat.{u + 1} Λ') s ⋙ ModuleCat.derivedRestrictScalars ρ) :
+    Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ ⋙
+        compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX ≅
+      compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') aX ⋙
+        ModuleCat.derivedRestrictScalars ρ :=
+  (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight δ _ ≪≫
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ αs ≪≫ (Functor.associator _ _ _).symm
+
+@[simp]
+lemma compactCoefficientIso_hom_app {s : Scheme.{u}} (aX : X ⟶ s) [HasCompactification aX]
+    (δ : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ ⋙
+        rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) aX ≅
+      rightDerivedLowerShriek (ModuleCat.{u + 1} Λ') aX ⋙
+        Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ)
+    (αs : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology s) ρ ⋙
+        rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s ≅
+      rightDerivedGlobalSections (ModuleCat.{u + 1} Λ') s ⋙ ModuleCat.derivedRestrictScalars ρ)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ'))) :
+    (compactCoefficientIso ρ aX δ αs).hom.app K =
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s).map (δ.hom.app K) ≫
+        αs.hom.app ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ') aX).obj K) := by
+  dsimp [compactCoefficientIso]
+  exact Category.id_comp _
+
 variable {k : Type u} [Field k] [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [IsGeometric aX]
   [HasCompactification aX]
 
@@ -126,12 +160,14 @@ theorem isPerfect_compactlySupportedGlobalSections_obj [Finite Λ]
 /-- Blueprint `lem-fix-compact-support-coefficient-change`, read at the point through
 `def-weil-finite-coefficient-point`: for a surjection `ρ : Λ →+* Λ'` of finite coefficient rings
 whose exponent is invertible on `k` and a separated finite-type `a_X : X ⟶ Spec k`, compact
-cohomology commutes with restriction of scalars along `ρ`, and the canonical coefficient
-comparison `RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')` is an isomorphism for `K ∈ Dᵇctf(X, Λ)`. -/
+support `Ra_{X!}` and the point identification `RΓ(s, -)` commute with restriction of scalars
+along `ρ`, and the resulting canonical coefficient comparison
+`RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')` is an isomorphism for `K ∈ Dᵇctf(X, Λ)`. -/
 theorem exists_isCoefficientChange_compactlySupportedGlobalSections [Finite Λ] [Finite Λ']
     [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ) :
-    ∃ α, IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
-      (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') aX) α :=
+    ∃ δ αs, IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
+      (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') aX)
+      (compactCoefficientIso ρ aX δ αs) :=
   sorry
 
 /-- Blueprint `thm-trf-finite-coefficient-map` (the pullback isomorphism, at a geometric point,
@@ -169,6 +205,17 @@ structure AdicSystem where
   constructibleFiniteTor (n : ℕ) :
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (R ⧸ I ^ n)) X (obj n)
 
+/-- The quotient map `R ⟶ A_{n+1} = R ⧸ Iⁿ⁺¹`, indexing the levels from `1`. -/
+noncomputable abbrev levelπ (I : Ideal R) (n : ℕ) : R →+* R ⧸ I ^ (n + 1) :=
+  Ideal.Quotient.mk (I ^ (n + 1))
+
+/-- The transition `A_{n+2} ⟶ A_{n+1}` between the levels indexed from `1`. -/
+noncomputable abbrev levelρ (I : Ideal R) (n : ℕ) : R ⧸ I ^ (n + 1 + 1) →+* R ⧸ I ^ (n + 1) :=
+  Ideal.Quotient.factor (Ideal.pow_le_pow_right (n + 1).le_succ)
+
+lemma levelπ_eq (I : Ideal R) (n : ℕ) : levelπ I n = (levelρ I n).comp (levelπ I (n + 1)) :=
+  (Ideal.Quotient.factor_comp_mk _).symm
+
 namespace AdicSystem
 
 variable {I X} (S : AdicSystem I X)
@@ -190,17 +237,6 @@ lemma isNormalizedTower_restrict : IsNormalizedTower I S.restrict S.obj :=
     erw [Category.comp_id]
     exact Functor.ofOpSequence_map_homOfLE_succ (C := DerivedCategory
       (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) _ n⟩
-
-/-- The quotient map `R ⟶ A_{n+1} = R ⧸ Iⁿ⁺¹`, indexing the levels from `1`. -/
-noncomputable abbrev levelπ (I : Ideal R) (n : ℕ) : R →+* R ⧸ I ^ (n + 1) :=
-  Ideal.Quotient.mk (I ^ (n + 1))
-
-/-- The transition `A_{n+2} ⟶ A_{n+1}` between the levels indexed from `1`. -/
-noncomputable abbrev levelρ (I : Ideal R) (n : ℕ) : R ⧸ I ^ (n + 1 + 1) →+* R ⧸ I ^ (n + 1) :=
-  Ideal.Quotient.factor (Ideal.pow_le_pow_right (n + 1).le_succ)
-
-lemma levelπ_eq (I : Ideal R) (n : ℕ) : levelπ I n = (levelρ I n).comp (levelπ I (n + 1)) :=
-  (Ideal.Quotient.factor_comp_mk _).symm
 
 section Geometric
 
@@ -241,8 +277,9 @@ theorem isPerfect_and_exists_isDerivedBaseChange (n : ℕ) :
     Ideal.Quotient.factor_surjective _
   have hP := isPerfect_compactlySupportedGlobalSections_obj aX (S.constructibleFiniteTor n)
   refine ⟨hP.1, ?_, fun x hx ↦ ⟨hP.2 x hx, ?_⟩⟩
-  · obtain ⟨α, hα⟩ := exists_isCoefficientChange_compactlySupportedGlobalSections _ aX hsurj
-    exact ⟨α.app _, hα _ (S.constructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
+  · obtain ⟨δ, αs, hα⟩ := exists_isCoefficientChange_compactlySupportedGlobalSections _ aX hsurj
+    exact ⟨(compactCoefficientIso _ aX δ αs).app _,
+      hα _ (S.constructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
   · obtain ⟨α, hα⟩ := exists_isCoefficientChange_stalk _ aX hsurj x hx
     exact ⟨α.app _, hα _ (S.constructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
 
@@ -296,7 +333,7 @@ variable {I} {ϖ : R} (hI : I = Ideal.span {ϖ})
 are local. -/
 lemma isLocalRing_quotient_pow [IsLocalRing R] (hle : I ≤ IsLocalRing.maximalIdeal R)
     (n : ℕ) : IsLocalRing (R ⧸ I ^ (n + 1)) :=
-  have : Nontrivial (R ⧸ I ^ (n + 1)) := Ideal.Quotient.nontrivial fun h ↦
+  have : Nontrivial (R ⧸ I ^ (n + 1)) := Ideal.Quotient.nontrivial_iff.2 fun h ↦
     (IsLocalRing.maximalIdeal.isMaximal R).ne_top
       (top_le_iff.1 (h ▸ (Ideal.pow_le_self n.succ_ne_zero).trans hle))
   IsLocalRing.of_surjective' _ Ideal.Quotient.mk_surjective
