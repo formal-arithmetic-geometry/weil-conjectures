@@ -24,67 +24,40 @@
  ],
  "proof": [
   {
-   "text": "The standard opens $U_i=D_+(x_i)$ for $i=0,1$ cover $P$ by the definition of $\\operatorname{Proj}S$ and [def-sc-p1-standard]. On $U_i$, the associated sheaf of a graded module has sections given by degree-zero homogeneous localization: for $N=\\bigoplus_{m\\in\\mathbf Z}\\Gamma(P,\\mathcal G(m))$, [def-weil-pbc-proj-twisting-sheaf] identifies $\\Gamma(U_i,\\widetilde N)$ with $N_{(x_i)}$.",
+   "text": "Mathlib Proj.toSpecZero is proper and of finite type over Spec S_0. MvPolynomial.homogeneousSubmoduleZeroEquiv identifies S_0 with the field k. Hence P is compact, quasi-separated and locally Noetherian. Apply [pqf-lem-coherent-ft-locnoeth] to obtain quasi-coherence of G. Apply [lem-sc-p1-homogeneous-section-tensor-powers] to L=O(d) and f for invertibility, the locus D_+(f) and compatible tensor-power identifications.",
    "uses": [
-    "def-sc-p1-standard",
-    "def-weil-pbc-proj-twisting-sheaf"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-sc-p1-homogeneous-section-tensor-powers"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Definition 01M6 (associated sheaf on Proj), Lemma 01M7 (2),(3), and Section 01ND for the standard cover"
-   }
+   "elementary": false
   },
   {
-   "text": "The localization $N_{(x_i)}$ is unchanged if $N$ is replaced by its nonnegative truncation $M_{\\ge0}$. Indeed, a homogeneous fraction $t/x_i^r$ of degree zero with $t\\in\\Gamma(P,\\mathcal G(r))$ already lies in $M_{\\ge0}$; if a representative has negative degree, multiplying numerator and denominator by a sufficiently large power of $x_i$ gives an equal representative with nonnegative numerator degree. Thus $\\widetilde{M_{\\ge0}}|_{U_i}$ has the same sections and restriction maps as $\\widetilde N|_{U_i}$.",
+   "text": "Apply [lem-sc-p1-section-clearing-denominators-qcqs] to a section s of G on D_+(f). Obtain r and a global t in G tensor L^tensor r restricting to s tensor f^tensor r. Transport t through G whisker a_r. Naturality of section maps and the first compatibility identity give precisely the first clause.",
    "uses": [
-    "def-weil-pbc-proj-twisting-sheaf"
+    "lem-sc-p1-section-clearing-denominators-qcqs",
+    "lem-sc-p1-homogeneous-section-tensor-powers"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Proposition 0BXD (coherent-proposition-coherent-modules-on-proj), last paragraph of the proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sc-p1-invertible-section-localization] to $X=P$, $\\mathcal L=\\mathcal O_P(1)$, $s=x_i$, and $\\mathcal F=\\mathcal G$. Its hypotheses hold: $P$ is quasi-compact, being the union of the two affine (hence quasi-compact) charts $U_0,U_1$ of [def-sc-p1-standard]; their intersection $U_{01}$ is affine, so by [lem-weil-pbc-quasi-separated-affine-cover-criterion] (2) $P$ is quasi-separated and by (1) of that lemma the intersection of any two affine opens of $P$ is quasi-compact; $\\mathcal O_P(1)$ is invertible and $x_i\\in\\Gamma(P,\\mathcal O_P(1))$ by [lem-sc-p1-twist-multiplication]; and $\\mathcal G$ is quasi-coherent by [pqf-lem-coherent-ft-locnoeth], since $\\mathcal G$ is coherent and $P$ is locally Noetherian (covered by $U_0=\\operatorname{Spec}k[t]$ and $U_1=\\operatorname{Spec}k[s]$). By [lem-sc-p1-twist-multiplication], the non-vanishing locus $P_{x_i}$ is $D_+(x_i)=U_i$, and the isomorphisms $\\mathcal G\\otimes\\mathcal O_P(1)^{\\otimes n}\\cong\\mathcal G(n)$ identify the graded module $\\bigoplus_{n\\in\\mathbf Z}\\Gamma(P,\\mathcal G\\otimes\\mathcal O_P(1)^{\\otimes n})$ of [lem-sc-p1-invertible-section-localization] with $N$, multiplication by $x_i$ corresponding to multiplication by $x_i\\in S_1$. Therefore the canonical degree-zero localization map is an isomorphism $N_{(x_i)}\\cong\\Gamma(U_i,\\mathcal G)$. Under the identification in the preceding step, this is exactly the canonical map $\\Gamma(U_i,\\widetilde{M_{\\ge0}})\\to\\Gamma(U_i,\\mathcal G)$ induced by localization.",
+   "text": "For a restriction-zero t in G tensor O(rd), transport invertibility through a_r from L^tensor r. Source Modules/ProjectionFormula.isQuasicoherent_tensorObj gives quasi-coherence of G tensor O(rd). Apply [lem-sc-p1-section-restriction-s-torsion] to kill t tensor f^tensor n. Apply the associator and G whisker b_rd,n to this zero equality. Associator naturality and the second compatibility identity identify the resulting map with G whisker twistMul(f^n), proving the second clause.",
    "uses": [
-    "lem-sc-p1-invertible-section-localization",
-    "def-sc-p1-standard",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "lem-sc-p1-twist-multiplication",
-    "pqf-lem-coherent-ft-locnoeth"
+    "lem-sc-p1-section-restriction-s-torsion",
+    "lem-sc-p1-homogeneous-section-tensor-powers"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Lemma 01PW (lemma-invert-s-sections), part (2), and coherent.tex Proposition 0BXD proof"
-   }
-  },
-  {
-   "text": "The two local maps agree on $U_0\\cap U_1$: both send a localized homogeneous section to its restriction tensored with the corresponding inverse power of the same section $x_i$, and the localization maps commute with further localization. Hence they glue to the canonical morphism $\\widetilde{M_{\\ge0}}\\to\\mathcal G$ described in the statement. It is an isomorphism because its restriction to each member of the cover $U_0,U_1$ is an isomorphism.",
-   "uses": [
-    "def-weil-pbc-proj-twisting-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Proposition 0BXD proof, final paragraph: the canonical map is an isomorphism after restriction to standard opens"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-p1-standard",
-  "def-weil-pbc-proj-twisting-sheaf",
-  "lem-sc-p1-invertible-section-localization",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "lem-sc-p1-twist-multiplication",
+  "lem-sc-p1-homogeneous-section-tensor-powers",
+  "lem-sc-p1-section-clearing-denominators-qcqs",
+  "lem-sc-p1-section-restriction-s-torsion",
   "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Proposition 0BXD (coherent-proposition-coherent-modules-on-proj), final paragraph of proof, with localization details from Properties Lemma 01PW"
+  "place": "Proposition 0BXD final paragraph, via Properties 01PW and Constructions 01MS/01MU/01MV; section-level Lean proof by M3, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -167,5 +140,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T095915-L-321259",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

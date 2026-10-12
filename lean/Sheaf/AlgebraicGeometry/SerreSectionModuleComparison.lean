@@ -9,10 +9,12 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.InvertibleSectionLocalization
-import Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowers
+import Sheaf.AlgebraicGeometry.SectionClearingDenominatorsQCQS
+import Sheaf.AlgebraicGeometry.SectionRestrictionSTorsion
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper
+import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Serre comparison for the graded section module
@@ -88,6 +90,54 @@ theorem serreSectionModuleComparison
               Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f ⟶ ⊤).op t = 0 →
         ∃ e : ℕ, Scheme.Modules.Hom.app
           (G ◁ Proj.twistMul (0 + ((r • d : ℕ) : ℤ)) (SetLike.pow_mem_graded e hf)) ⊤ t = 0) := by
-  sorry
+  let P := Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)
+  let L := Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + (d : ℤ))
+  let σ := (Proj.unitToTwist hf).app ⊤ (Scheme.Modules.unitSectionsEquiv ⊤ 1)
+  have : CompactSpace P :=
+    QuasiCompact.compactSpace_of_compactSpace (Proj.toSpecZero _)
+  have : QuasiSeparatedSpace P := quasiSeparatedSpace_of_quasiSeparated (Proj.toSpecZero _)
+  have : IsNoetherianRing (MvPolynomial.homogeneousSubmodule (Fin 2) k 0) :=
+    isNoetherianRing_of_ringEquiv k (MvPolynomial.homogeneousSubmoduleZeroEquiv (Fin 2) k)
+  have : IsLocallyNoetherian P :=
+    LocallyOfFiniteType.isLocallyNoetherian (Proj.toSpecZero _)
+  have : G.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType P G).mp hG).1
+  obtain ⟨hL, hU, a, b, ha, hb⟩ := proj_homogeneous_section_tensor_powers k hd hf
+  let : L.IsInvertible := hL
+  constructor
+  · intro s
+    obtain ⟨r, t, ht⟩ := Scheme.Modules.exists_tensorPowSection_eq_restrict_qcqs
+      L σ G _ hU s
+    let e := whiskerLeftIso G (a r)
+    refine ⟨r, e.hom.app ⊤ t, ?_⟩
+    rw [← Scheme.Modules.Hom.app_presheaf_map, ht]
+    rw [← Scheme.Modules.rightUnitor_inv_comp_whiskerLeft_app]
+    rw [← ConcreteCategory.comp_apply, ← Scheme.Modules.Hom.comp_app]
+    change (((ρ_ G).inv ≫ G ◁ Scheme.Modules.tensorPowSection
+      (Scheme.Modules.homOfGlobalSection L σ) r ≫ G ◁ (a r).hom).app _) s = _
+    rw [← MonoidalCategory.whiskerLeft_comp, ha]
+  · intro r t ht
+    have : (L.tensorPow r).IsInvertible := inferInstance
+    have := Scheme.Modules.IsInvertible.of_iso (a r)
+    have := Scheme.Modules.isQuasicoherent_tensorObj (X := P) G
+      (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)
+        (0 + ((r • d : ℕ) : ℤ)))
+    obtain ⟨n, hn⟩ := Scheme.Modules.section_restriction_s_torsion
+      (X := P) L _ σ t _ hU ht
+    refine ⟨n, ?_⟩
+    let T := Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k)
+      (0 + ((r • d : ℕ) : ℤ))
+    have hm :
+        (ρ_ (G ⊗ T)).inv ≫ (G ⊗ T) ◁
+            Scheme.Modules.tensorPowSection (Scheme.Modules.homOfGlobalSection L σ) n ≫
+          (α_ G T (L.tensorPow n)).hom ≫ G ◁ (b (0 + ((r • d : ℕ) : ℤ)) n).hom =
+        G ◁ Proj.twistMul (0 + ((r • d : ℕ) : ℤ))
+          (SetLike.pow_mem_graded n hf) := by
+      rw [← hb, whiskerLeft_comp, whiskerLeft_comp, whiskerLeft_rightUnitor_inv]
+      simp only [Category.assoc]
+      rw [associator_naturality_right_assoc]
+    rw [← hm, ← Category.assoc, Scheme.Modules.Hom.comp_app,
+      ConcreteCategory.comp_apply, Scheme.Modules.rightUnitor_inv_comp_whiskerLeft_app,
+      hn, map_zero]
 
 end AlgebraicGeometry

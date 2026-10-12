@@ -7244,3 +7244,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/M2/Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtension (stage 3; reviewer PASS; first push; landing 20261012T095914-L-320964 (interface); batch 20261012T095846; modules 3; new nodes 2)
 - 09:59 L: merged deliver/M3/Sheaf.AlgebraicGeometry.EtaleSetSectionAffineEventualEquality (stage 3; reviewer PASS; first push; landing 20261012T095914-L-321063 (interface); batch 20261012T095846; modules 4; new nodes 3)
 - 09:59 L: merged deliver/M3/Sheaf.AlgebraicGeometry.EtaleSetSectionLiftLocalFamily (stage 3; reviewer PASS; first push; landing 20261012T095914-L-321161 (interface); batch 20261012T095846; modules 2; new nodes 1)
+- 09:59 L: merged deliver/M3/Sheaf.AlgebraicGeometry.SerreSectionModuleComparison (stage 3; reviewer PASS; first push; landing 20261012T095915-L-321259 (interface); batch 20261012T095846; modules 2; new nodes 1)

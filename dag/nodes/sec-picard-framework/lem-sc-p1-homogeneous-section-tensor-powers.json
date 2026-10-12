@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-p1-homogeneous-section-tensor-powers",
+ "kind": "statement",
+ "title": "Homogeneous section tensor powers and standard-open locus on polynomial Proj",
+ "statement": "Let k be a field and P=Proj k[x_0,x_1] with its standard grading [def-sc-p1-standard]. For d>0 and homogeneous f of degree d, let L=O_P(d) be the twist [def-weil-pbc-proj-twisting-sheaf] and sigma the global section f/1. Then L is invertible [def-sc-invertible-module], sigma has nonvanishing locus [def-weil-pbc-ample-invertible-module] equal to D_+(f), and there are isomorphisms a_n:L^{tensor n} ~= O_P(nd) and b_mn:O_P(m) tensor L^{tensor n} ~= O_P(m+nd) for every n in N and m in Z. The composite sigma^{tensor n} followed by a_n equals the canonical section f^n. The composite O_P(m) ~= O_P(m) tensor O_P -> O_P(m) tensor L^{tensor n} -> O_P(m+nd), using sigma^{tensor n} and b_mn, equals multiplication by f^n.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MS (lemma-when-invertible), 01MU (lemma-where-invertible), 01MV (lemma-principal-open), 01NG (lemma-standard-covering-projective-space); multiplication formula equation-multiply"
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "The coordinate charts [lem-weil-pbc-proj-polynomial-twist-chart] cover P. Multiplication of homogeneous fractions [def-weil-pbc-proj-twisting-sheaf] and [lem-sc-p1-twist-multiplication] identifies O(m) tensor O(n) with O(m+n): the chart bases x_i^m and x_i^n multiply to x_i^(m+n). Iterate these maps, starting with O=O(0), to give a_n:L^tensor n ~= O(nd) and b_mn:O(m) tensor L^tensor n ~= O(m+nd). L=O(d) is invertible on the same cover.",
+   "uses": [
+    "lem-weil-pbc-proj-polynomial-twist-chart",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-sc-p1-twist-multiplication"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section f of O(d) has coefficient f/x_i^d in the local basis x_i^d. Its tensor powers have coefficient (f/x_i^d)^n. Under a_n this is exactly f^n; under b_mn multiplication by this tensor power sends every local section of O(m) to its product with f^n. The n=0 formulas are the unit identities. Equality on the covering charts proves both displayed morphism equalities globally.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The fibre value of f is nonzero on the chart precisely where f/x_i^d is outside the prime ideal, namely D_+(f) intersect D_+(x_i). The charts cover P, so the nonvanishing locus equals D_+(f). For f=0 both loci are empty.",
+   "uses": [
+    "lem-weil-pbc-proj-polynomial-twist-chart"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-twist-multiplication",
+  "lem-weil-pbc-proj-polynomial-twist-chart"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01MS (lemma-when-invertible), 01MU (lemma-where-invertible), 01MV (lemma-principal-open), 01NG (lemma-standard-covering-projective-space); multiplication formula equation-multiply"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor powers of the twisting sheaf on projective spectrum and multiplication by a homogeneous polynomial",
+   "results": "Service unavailable: Internal Server Error; no results.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorPowSection\"",
+   "results": "No matches; tensor powers of sections belong to source library.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a quasicoherent module on a standard open of Proj extends globally after multiplying by a power of the homogeneous polynomial",
+   "results": "Only structure-sheaf/localization declarations; no module twist compatibility theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPow.*twist|twist.*tensorPow; unitToTwist; twistMul",
+   "results": "Mathlib has no Proj twist module API. Source ClearDenominators and Proj/Twist provide the two APIs separately. ProjectiveLineTwistMultiplication has only coordinate degree-one compatibility.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreSectionModuleComparison",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-serre-section-module-comparison",
+   "place": "proof step 3: identify positive tensor powers and homogeneous multiplication",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjHomogeneousSectionTensorPowers",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjHomogeneousSectionTensorPowers.lean",
+  "declaration": "AlgebraicGeometry.proj_homogeneous_section_tensor_powers",
+  "statement": "theorem proj_homogeneous_section_tensor_powers (k : Type u) [Field k] {d : ℕ} (hd : 0 < d) {f : MvPolynomial (Fin 2) k} (hf : f ∈ MvPolynomial.homogeneousSubmodule (Fin 2) k d) : let L := Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + (d : ℤ)) L.IsInvertible ∧ ((Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) f : (Proj (MvPolynomial.homogeneousSubmodule (Fin 2) k)).Opens) : Set _) = nonvanishingLocus L ((Proj.unitToTwist hf).app ⊤ (unitSectionsEquiv ⊤ 1)) ∧ ∃ (a : ∀ n : ℕ, L.tensorPow n ≅ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (0 + ((n • d : ℕ) : ℤ))) (b : ∀ (m : ℤ) (n : ℕ), Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ⊗ L.tensorPow n ≅ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (m + ((n • d : ℕ) : ℤ))), (∀ n : ℕ, tensorPowSection (homOfGlobalSection L ((Proj.unitToTwist hf).app ⊤ (unitSectionsEquiv ⊤ 1))) n ≫ (a n).hom = Proj.unitToTwist (SetLike.pow_mem_graded n hf)) ∧ (∀ (m : ℤ) (n : ℕ), (ρ_ (Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m)).inv ≫ Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) m ◁ tensorPowSection (homOfGlobalSection L ((Proj.unitToTwist hf).app ⊤ (unitSectionsEquiv ⊤ 1))) n ≫ (b m n).hom = Proj.twistMul m (SetLike.pow_mem_graded n hf))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T095915-L-321259",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T095915-L-321259",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
