@@ -8357,3 +8357,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:30 L: merged deliver/W2/Sheaf.AlgebraicGeometry.EtaleFieldPointMapLocal (stage 3; reviewer PASS; first push; landing 20261012T153013-L-2351753 (proof); batch 20261012T153007; modules 1; new nodes 0)
 - 15:30 L: merged deliver/W3/Sheaf.RingTheory.PolynomialFormalFiberGeometric (stage 3; reviewer PASS; first push; landing 20261012T153013-L-2351874 (interface); batch 20261012T153007; modules 3; new nodes 2)
 - 15:30 L: merged deliver/X2/Sheaf.AlgebraicGeometry.PerfectImmersionStandardPerfection (stage 3; reviewer PASS; first push; landing 20261012T153014-L-2352023 (proof); batch 20261012T153007; modules 1; new nodes 0)
+- 15:32 L: returned deliver/G1/Sheaf.AlgebraicGeometry.AffineAlgebraModulePresentation (reviewer RETURN: (the landing tools, head 57448fa35) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
