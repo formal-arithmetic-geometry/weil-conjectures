@@ -57,7 +57,21 @@ identity law in `C`. Stacks Project, 03EJ
 (blueprint: def-weil-pbc-site-extension-by-zero-presheaf). -/
 theorem siteExtensionByZeroRestrict_id (F : (Over W)ᵒᵖ ⥤ AddCommGrpCat.{w}) (V : Cᵒᵖ) :
     siteExtensionByZeroRestrict W F (𝟙 V) = 𝟙 (siteExtensionByZeroSection W F V) := by
-  sorry
+  classical
+  apply AddCommGrpCat.hom_ext
+  dsimp [siteExtensionByZeroRestrict, siteExtensionByZeroSection]
+  apply DirectSum.addHom_ext
+  intro i x
+  simp only [DirectSum.toAddMonoid_of, AddMonoidHom.comp_apply, AddMonoidHom.id_apply]
+  have h (j : V.unop ⟶ W) (hj : j = i)
+      (f : Over.mk j ⟶ Over.mk i) (hf : f.left = 𝟙 V.unop) :
+      DirectSum.of (fun ψ ↦ F.obj (Opposite.op (Over.mk ψ))) j
+        ((F.map f.op).hom x) =
+      DirectSum.of (fun ψ ↦ F.obj (Opposite.op (Over.mk ψ))) i x := by
+    subst j
+    have hf' : f = 𝟙 (Over.mk i) := Over.OverMorphism.ext hf
+    simp [hf']
+  exact h _ (Category.id_comp i) _ rfl
 
 /-- Composition of restrictions: on each injection use `F.map_comp` and associativity
 in `C`; direct-sum extensionality gives the equality. Stacks Project, 03EJ
@@ -66,7 +80,31 @@ theorem siteExtensionByZeroRestrict_comp (F : (Over W)ᵒᵖ ⥤ AddCommGrpCat.{
     {V V' V'' : Cᵒᵖ} (a : V ⟶ V') (b : V' ⟶ V'') :
     siteExtensionByZeroRestrict W F (a ≫ b) =
       siteExtensionByZeroRestrict W F a ≫ siteExtensionByZeroRestrict W F b := by
-  sorry
+  classical
+  apply AddCommGrpCat.hom_ext
+  dsimp [siteExtensionByZeroRestrict, siteExtensionByZeroSection]
+  apply DirectSum.addHom_ext
+  intro i x
+  simp only [AddMonoidHom.comp_apply, DirectSum.toAddMonoid_of]
+  have h (j : V''.unop ⟶ W) (hj : j = b.unop ≫ (a.unop ≫ i))
+      (f : Over.mk j ⟶ Over.mk i) (hf : f.left = b.unop ≫ a.unop) :
+      DirectSum.of (fun ψ ↦ F.obj (Opposite.op (Over.mk ψ))) j
+        ((F.map f.op).hom x) =
+      DirectSum.of (fun ψ ↦ F.obj (Opposite.op (Over.mk ψ)))
+        (b.unop ≫ (a.unop ≫ i))
+        ((F.map (Opposite.op (Over.homMk b.unop :
+          Over.mk (b.unop ≫ (a.unop ≫ i)) ⟶ Over.mk (a.unop ≫ i)))).hom
+          ((F.map (Opposite.op (Over.homMk a.unop :
+            Over.mk (a.unop ≫ i) ⟶ Over.mk i))).hom x)) := by
+    subst j
+    have hf' : f =
+        (Over.homMk b.unop :
+          Over.mk (b.unop ≫ (a.unop ≫ i)) ⟶ Over.mk (a.unop ≫ i)) ≫
+        (Over.homMk a.unop : Over.mk (a.unop ≫ i) ⟶ Over.mk i) :=
+      Over.OverMorphism.ext hf
+    simp [hf', Functor.map_comp]
+    rfl
+  exact h _ (Category.assoc _ _ _) _ rfl
 
 /-- The presheaf with the stated sections and restrictions. Stacks Project, 03DI and 03EJ
 (blueprint: def-weil-pbc-site-extension-by-zero-presheaf). -/
@@ -93,7 +131,16 @@ theorem siteExtensionByZeroHomApp_naturality {F G : (Over W)ᵒᵖ ⥤ AddCommGr
     (α : F ⟶ G) {V V' : Cᵒᵖ} (a : V ⟶ V') :
     siteExtensionByZeroRestrict W F a ≫ siteExtensionByZeroHomApp W α V' =
       siteExtensionByZeroHomApp W α V ≫ siteExtensionByZeroRestrict W G a := by
-  sorry
+  classical
+  apply AddCommGrpCat.hom_ext
+  dsimp [siteExtensionByZeroRestrict, siteExtensionByZeroHomApp,
+    siteExtensionByZeroSection]
+  apply DirectSum.addHom_ext
+  intro i x
+  simp only [AddMonoidHom.comp_apply, DirectSum.toAddMonoid_of]
+  congr 1
+  exact ConcreteCategory.congr_hom (α.naturality
+    (Opposite.op (Over.homMk a.unop : Over.mk (a.unop ≫ i) ⟶ Over.mk i))) x
 
 /-- The induced natural transformation. Stacks Project, 03EJ
 (blueprint: def-weil-pbc-site-extension-by-zero-presheaf). -/
@@ -107,7 +154,15 @@ injections proves the claim. Stacks Project, 03EJ
 (blueprint: def-weil-pbc-site-extension-by-zero-presheaf). -/
 theorem siteExtensionByZeroHom_id (F : (Over W)ᵒᵖ ⥤ AddCommGrpCat.{w}) :
     siteExtensionByZeroHom W (𝟙 F) = 𝟙 (siteExtensionByZeroPresheafObj W F) := by
-  sorry
+  classical
+  apply NatTrans.ext
+  funext V
+  apply AddCommGrpCat.hom_ext
+  dsimp [siteExtensionByZeroHom, siteExtensionByZeroHomApp,
+    siteExtensionByZeroSection, siteExtensionByZeroPresheafObj]
+  apply DirectSum.addHom_ext
+  intro i x
+  simp
 
 /-- Composition acts by the composite component on each summand; use extensionality on
 sections and injections. Stacks Project, 03EJ
@@ -116,7 +171,15 @@ theorem siteExtensionByZeroHom_comp {F G H : (Over W)ᵒᵖ ⥤ AddCommGrpCat.{w
     (α : F ⟶ G) (β : G ⟶ H) :
     siteExtensionByZeroHom W (α ≫ β) =
       siteExtensionByZeroHom W α ≫ siteExtensionByZeroHom W β := by
-  sorry
+  classical
+  apply NatTrans.ext
+  funext V
+  apply AddCommGrpCat.hom_ext
+  dsimp [siteExtensionByZeroHom, siteExtensionByZeroHomApp,
+    siteExtensionByZeroSection, siteExtensionByZeroPresheafObj]
+  apply DirectSum.addHom_ext
+  intro i x
+  simp
 
 /-- Presheaf extension by zero from the slice: direct sums over arrows to `W`, restriction
 by precomposition, and componentwise action on morphisms. Stacks Project, 03DI and 03EJ
@@ -138,7 +201,7 @@ theorem siteExtensionByZeroPresheaf_modules {J : GrothendieckTopology C}
     (siteExtensionByZeroPresheaf W).obj G.val.presheaf =
       (PresheafOfModules.toPresheaf R.obj).obj
         ((SheafOfModules.extensionByZeroPresheaf R W).obj G) := by
-  sorry
+  rfl
 
 end
 

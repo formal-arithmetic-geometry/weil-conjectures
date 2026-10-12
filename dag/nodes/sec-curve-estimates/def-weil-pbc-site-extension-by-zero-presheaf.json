@@ -25,9 +25,33 @@
   "def-weil-pbc-sheafification",
   "def-weil-extension-by-zero-presheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The restriction identity and composition laws are checked on each direct-sum injection using DirectSum.addHom_ext and DirectSum.toAddMonoid_of. Transport the dependent summand index by the identity or associativity law in C; identify the slice morphisms by Over.OverMorphism.ext, and apply the corresponding functor law of F.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the componentwise map reduces on each injection to naturality of the original transformation at the slice morphism. The identity and composition laws for these maps follow on each injection from the component formulas. These laws assemble the stated presheaf functor; compose with the forgetful functor and sheafification to obtain the sheaf functor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The comparison with the underlying abelian presheaf of the ringed-site extension-by-zero construction is definitional: section groups and additive restriction maps coincide; the structure proofs agree by proof irrelevance.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/SiteExtensionByZeroPresheaf.lean",
+  "place": "Six functoriality and comparison theorems; second reading by U1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -126,5 +150,15 @@
   "group": "F1",
   "result": "fix",
   "note": "direct sum over all V->W with summand F(Over.mk phi), restriction a.unop≫phi via F.map (Over.homMk), componentwise morphisms, functor laws as sorried theorems (no sorry data, no Classical.choose); FIX: siteExtensionByZeroSheaf restated on the recorded site form (SmallCategory + Precoverage with HasIsos/IsStableUnderComposition/IsStableUnderBaseChange/HasPullbacks, J.toGrothendieck.over W, AddCommGrpCat.{u}) instead of a bare GrothendieckTopology with a HasWeakSheafify binder; relation clause = equality with toPresheaf of the landed SheafOfModules.extensionByZeroPresheaf; node JSON diff only adds the lean record"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7902e",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T020410-L-970280",
+  "kind": "proof",
+  "note": "independent Codex review: Matched all six proofs with unchanged Lean signatures and the node’s construction; permitted node edits agree with the proofs, compilation is clean, and axioms match the reported upstream sorry dependency."
  }
 }
