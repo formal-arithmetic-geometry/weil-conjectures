@@ -10,16 +10,31 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The opposite algebra is finite-dimensional central simple. By the tensor simplicity result of Stacks Tag 074G, the enveloping algebra A tensor A^op is simple. The kernel of its unital homomorphism to End_K(A) is a two-sided ideal, hence either zero or the whole algebra. It is not the whole algebra because one maps to the identity endomorphism, which is nonzero: its value at one is one in the nonzero algebra A. The kernel is therefore zero; subtracting two elements with equal image gives their equality. This argument proves injectivity without the dimension-comparison step of the parent node.",
+   "text": "Choose a K-basis of the left factor F in F tensor_K B. Use the already proved coordinate multiplication lemmas equivFinsuppOfBasisLeft_one_tmul_mul and equivFinsuppOfBasisLeft_mul_one_tmul from WeilConjectures.Mathlib.Algebra.Central.TensorProduct. An element commuting with every 1 tensor b has central B-coordinates. By centrality of B these coordinates are scalars, and the element lies in the range of F -> F tensor_K B. The private helper mem_left_range_of_forall_commute_one_tmul proves this by the basis expansion.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "For a nonzero two-sided ideal I of F tensor_K B, choose a nonzero element x with minimal coordinate support and a nonzero coordinate j0. The possible j0-coordinates of elements of I supported inside the support of x form a two-sided ideal J of B. Since B is simple and J contains the nonzero j0-coordinate of x, J contains one. Choose z in I with this support bound and j0-coordinate one. A commutator with 1 tensor b is in I, is supported inside the support of x, and vanishes in coordinate j0. If it were nonzero its support would be strictly smaller than that of x. Minimality forces every such commutator to vanish. Also z is nonzero because its j0-coordinate is one. The preceding step puts z in the left-factor range. All ideal closure and support comparisons are proved in the private helper exists_ne_zero_mem_left_range_of_ne_bot.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "If F is also simple, write the nonzero z in I as includeLeft(f); then f is nonzero. The comap of I along includeLeft is a two-sided ideal of F containing f, hence contains one by IsSimpleRing.one_mem_of_ne_zero_mem. Its image says one belongs to I, so I is top. Together with the zero ideal this proves simplicity of F tensor_K B in the private helper simple_tensor_of_central. The tensor product is nontrivial since includeLeft is injective over the field K.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply simple_tensor_of_central with F = A and B = A^op. Mathlib supplies centrality and simplicity of the opposite algebra. The endomorphism ring of the nontrivial algebra A is nontrivial, so RingHom.injective applied to the underlying ring homomorphism of AlgHom.mulLeftRight K A closes the statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Brauer groups",
-  "place": "Tag 074I, Lemma 11.4.10, injectivity argument; tensor simplicity in Tag 074G, Lemma 11.4.8"
+  "document": "Stacks Project, Brauer groups; proved coordinate argument in WeilConjectures.Mathlib.Algebra.Central.TensorProduct",
+  "place": "Tag 074I (lemma-inverse), injectivity via tensor simplicity; Tag 074G (lemma-tensor-central-simple); generalized minimum-support argument from exists_ne_zero_mem_bot_of_ne_bot, replacing the field left factor by a simple algebra"
  },
  "mathlib_searches": [
   {
@@ -87,10 +102,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T173856-L-3303458",
-  "kind": "interface",
+  "landing": "20261012T194104-L-452740",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
