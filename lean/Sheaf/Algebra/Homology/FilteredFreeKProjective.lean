@@ -26,6 +26,43 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
+/-- Finite-stage induction for filtered free complexes.
+(source: Stacks Project, Tag 09KM)
+(blueprint: lem-pc-filtered-free-kprojective-stage)
+
+Proof: shifted free quotients give K-projectivity by the homotopy-category triangle. -/
+theorem isKProjective_of_filtered_free_stage {A : Type u} [CommRing A]
+    (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)
+    (step : ∀ n, F n ⟶ F (n + 1))
+    (hzero : IsZero (F 0))
+    (hsplit : ∀ (n : ℕ) (k : ℤ),
+      ∃ r : (F (n + 1)).X k ⟶ (F n).X k,
+        (step n).f k ≫ r = 𝟙 ((F n).X k))
+    (hquot : ∀ n, ∃ (I : Type (max u v)) (degree : I → ℤ),
+      Nonempty (cokernel (step n) ≅
+        ∐ (fun i : I ↦
+          (HomologicalComplex.single (ModuleCat.{max u v} A) (.up ℤ) (degree i)).obj
+            (ModuleCat.of A (ULift.{v} A))))) :
+    ∀ n, (F n).IsKProjective := by sorry
+
+/-- Telescope assembly for an exhaustive split filtration.
+(source: Stacks Project, Tags 09KL to 09KM)
+(blueprint: lem-pc-filtered-free-kprojective-telescope)
+
+Proof: the telescope is degreewise split and its Hom exact sequence gives K-projectivity. -/
+theorem isKProjective_of_filtered_free_telescope
+    {A : Type u} [CommRing A]
+    (P : CochainComplex (ModuleCat.{max u v} A) ℤ)
+    (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)
+    (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1))
+    (hzero : IsZero (F 0)) (hmono : ∀ n, Mono (ι n))
+    (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n)
+    (hexhaustive : ∀ (k : ℤ) (x : P.X k),
+      ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x)
+    (hstage : ∀ n, (F n).IsKProjective) :
+    P.IsKProjective := by sorry
+
+
 /-- An exhaustive, degreewise split filtration with shifted free quotients is K-projective.
 Source: Stacks Project, Tag 09KM, lemma-property-P-K-projective, specialized to the algebra
 concentrated in degree zero; the larger carrier universe uses the rank-one module `ULift A`.
@@ -64,6 +101,8 @@ theorem isKProjective_of_filtered_free {A : Type u} [CommRing A]
         ∐ (fun i : I ↦
           (HomologicalComplex.single (ModuleCat.{max u v} A) (.up ℤ) (degree i)).obj
             (ModuleCat.of A (ULift.{v} A))))) :
-    P.IsKProjective := by sorry
+    P.IsKProjective := by
+  apply isKProjective_of_filtered_free_telescope P F ι step hzero hmono hcompat hexhaustive
+    (isKProjective_of_filtered_free_stage F step hzero hsplit hquot)
 
 end CochainComplex

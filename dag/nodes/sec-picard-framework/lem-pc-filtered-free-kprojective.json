@@ -12,31 +12,28 @@
  },
  "proof": [
   {
-   "text": "A chain map from a rank-one free module concentrated in degree k to an acyclic N is a cycle of N in degree k. Acyclicity supplies its primitive in degree k-1, giving a null homotopy. On a coproduct choose these primitives on each generator, which defines a homotopy by the coproduct universal property. The same argument works for shifts.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The compatible monomorphisms make each step monic. Its degreewise retractions and the cokernel exact sequence give a degreewise split short exact sequence F_n to F_(n+1) to its quotient. Its homotopy-category triangle and exact Hom sequence show that if F_n and the quotient have no maps to any shifts of acyclic N, the same holds for F_(n+1). Induction starts with F_0 zero. Thus every finite stage and its shifts are left orthogonal to acyclic complexes.",
-   "uses": [],
+   "text": "Apply the finite-stage K-projectivity theorem to the filtration using the degreewise retractions and shifted-free cokernel hypotheses.",
+   "uses": [
+    "lem-pc-filtered-free-kprojective-stage"
+   ],
    "elementary": false
   },
   {
-   "text": "On the direct sum of F_n form a=identity-successor and b induced by iota_n. In each degree a is injective by inspecting components from index zero upward; b is surjective by exhaustion. A finite tuple in ker(b) can be moved modulo im(a) into a single sufficiently large stage; monicity of its inclusion makes that last component zero. Hence ker(b)=im(a). Choose retractions r_n of each step and compose to get r_(j,i):F_j to F_i. On the j-th summand define a left inverse to a with components -r_(j,0),...,-r_(j,j-1),0,...; composing with identity-successor cancels the earlier components and gives the identity in component j. Consequently the telescope sequence is degreewise split.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The degreewise split telescope sequence yields a distinguished triangle in K(A). Maps from either direct sum to an acyclic complex or its shifts are families of zero maps, by the finite-stage result. The exact Hom sequence therefore makes every map from P to an acyclic complex zero in K(A). The homotopy quotient identifies this with a null homotopy of every chain map, which is precisely IsKProjective.",
-   "uses": [],
+   "text": "Apply the telescope assembly theorem to the resulting K-projective stages, using the compatible monomorphisms and exhaustive degreewise union.",
+   "uses": [
+    "lem-pc-filtered-free-kprojective-telescope"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-filtered-free-kprojective-stage",
+  "lem-pc-filtered-free-kprojective-telescope"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/dga.tex",
-  "place": "Tags 09KL and 09KM, telescope exact sequence and its Hom vanishing argument, specialized to ordinary module complexes"
+  "by": "worker",
+  "document": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjective.lean",
+  "place": "The target proof applies the finite-stage and telescope intermediate theorems."
  },
  "mathlib_searches": [
   {
@@ -128,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T173915-L-3309410",
-  "kind": "interface",
+  "landing": "20261012T184247-L-3998471",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
