@@ -10,11 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
-import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
-import WeilConjectures.AlgebraicGeometry.Curve.Brauer
-import WeilConjectures.AlgebraicGeometry.Curve.Kummer
-import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 
 /-!
 # Étale cohomology of a smooth proper connected curve
@@ -57,6 +54,15 @@ theorem IsConnectedCurve.sheafH_constantZMod_of_isProper
       Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) ∧
       Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) ∧
       ∀ q : ℕ, 2 < q → Subsingleton (Sheaf.H (C.constantZMod n) q) := by
-  sorry
+  refine ⟨IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero f n hn,
+    IsCurve.nonempty_addEquiv_sheafH_constantZMod_one f n hn,
+    IsCurve.nonempty_addEquiv_sheafH_constantZMod_two f n hn, ?_⟩
+  intro q hq
+  have hn0 : n ≠ 0 := by
+    intro h
+    subst n
+    simp at hn
+  exact IsCurve.subsingleton_sheafH_of_three_le f _
+    (C.isTorsion_constantZMod hn0) q (by omega)
 
 end AlgebraicGeometry

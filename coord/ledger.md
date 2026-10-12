@@ -6049,3 +6049,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:47 L: merged deliver/D2/Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion (stage 3; reviewer PASS; first push; landing 20261012T044740-L-2033120 (interface); batch 20261012T044734; modules 3; new nodes 2)
 - 04:47 L: merged deliver/D2/Sheaf.Paper.HypercoverCohomology (stage 3; reviewer PASS; first push; landing 20261012T044740-L-2033312 (interface); batch 20261012T044734; modules 3; new nodes 2)
 - 04:47 L: merged deliver/E1/Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit (stage 3; reviewer PASS; first push; landing 20261012T044740-L-2033435 (interface); batch 20261012T044734; modules 4; new nodes 3)
+- 04:47 L: merged deliver/E2/Sheaf.AlgebraicGeometry.Curve.ProperCohomology (stage 3; reviewer PASS; first push; landing 20261012T044741-L-2033560 (proof); batch 20261012T044734; modules 1; new nodes 0)
