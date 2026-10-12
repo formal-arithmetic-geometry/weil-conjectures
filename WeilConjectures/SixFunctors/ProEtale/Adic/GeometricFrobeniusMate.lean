@@ -63,7 +63,7 @@ lemma lowerStar_map_lowerStarUnit_app_comp_lowerStarFactor {X Y : Scheme.{u}} (Ï
   simp only [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
     MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackId,
     MorphismProperty.Comma.comp_left]
-  apply pullback.hom_ext <;> simp [pullback.condition_assoc, ha, hb]
+  apply pullback.hom_ext <;> simp [pullback.condition_assoc, ha]
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The composite of a composition, an identity and a congruence isomorphism of pushforwards

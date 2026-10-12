@@ -94,14 +94,6 @@ theorem hasEigenvalue_inv_of_hasEigenvalue_dual {M : FrobeniusModule K} {α : K}
   change M.frobenius x = α⁻¹ • x
   conv_rhs => rw [hx', inv_smul_smul₀ hα0]
 
-/-- The eigenvalues of the Frobenius, an automorphism, are nonzero. -/
-theorem ne_zero_of_hasEigenvalue {M : FrobeniusModule K} {α : K}
-    (hα : M.frobeniusEnd.HasEigenvalue α) : α ≠ 0 := by
-  rintro rfl
-  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff, zero_smul] at hx
-  exact hx.2 ((LinearEquiv.map_eq_zero_iff M.frobenius).1 hx.1)
-
 end FrobeniusModule
 
 namespace AlgebraicGeometry.WeilSheaf

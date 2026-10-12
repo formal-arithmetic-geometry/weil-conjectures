@@ -837,6 +837,7 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Semicontinuity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
@@ -2027,6 +2028,7 @@ public import WeilConjectures.WeilSheaf.LowerStar
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.LowerStarId
 public import WeilConjectures.WeilSheaf.LowerStarPairing
+public import WeilConjectures.WeilSheaf.LowerStarTensorPow
 public import WeilConjectures.WeilSheaf.MiddleExtension
 public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Operations
