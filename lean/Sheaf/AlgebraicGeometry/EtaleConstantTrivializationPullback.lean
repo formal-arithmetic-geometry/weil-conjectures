@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Sheaf.AlgebraicGeometry.EtaleSetConstantTransportIdentity
+import Sheaf.AlgebraicGeometry.EtaleSetConstantTransportGenerators
 
 /-! # Extending a constant trivialization by inverse image
 
@@ -83,6 +85,34 @@ theorem etaleConstantTrivializationPullback
           ((toSheafify V.smallEtaleTopology
             ((Functor.const V.Etaleᵒᵖ).obj
               (E.obj F))).app
-                (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e) := by sorry
+                (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e) := by
+  let c := Classical.choose etaleSetInverseImageCompositionUnits.2.2
+  let β' : Scheme.etaleSetPullback s ≅
+      E ⋙ constantSheaf P.smallEtaleTopology (Type (u + 1)) :=
+    (eqToIso (congrArg Scheme.etaleSetPullback (Category.id_comp s))).symm ≪≫ β
+  let α : ∀ (U : Scheme.{u}) (h : U ⟶ P),
+      Scheme.etaleSetPullback (h ≫ s) ≅
+        E ⋙ constantSheaf U.smallEtaleTopology (Type (u + 1)) := fun U h ↦
+    (c S P U s h).symm ≪≫
+      Functor.isoWhiskerRight β' (Scheme.etaleSetPullback h) ≪≫
+      Functor.associator E _ _ ≪≫
+      Functor.isoWhiskerLeft E (etaleSetConstantPullbackComparison h)
+  have hα (U : Scheme.{u}) (h : U ⟶ P)
+      (F : Sheaf S.smallEtaleTopology (Type (u + 1))) :
+      (α U h).inv.app F =
+        (etaleSetConstantPullbackComparison h).inv.app (E.obj F) ≫
+          (Scheme.etaleSetPullback h).map (β'.inv.app F) ≫ (c S P U s h).hom.app F := by
+    simp [α]
+  refine ⟨α, ?_, ?_⟩
+  · apply Iso.ext_inv
+    apply NatTrans.ext
+    funext F
+    have hi := etaleSetConstantTransportIdentity S P s F (E.obj F) (β'.inv.app F)
+    rw [hα]
+    simpa [β', c] using hi
+  · intro U V h v F W e
+    rw [hα, hα]
+    exact etaleSetConstantTransportGenerators S P U V s h v F (E.obj F) (β'.inv.app F) W e
+
 
 end AlgebraicGeometry

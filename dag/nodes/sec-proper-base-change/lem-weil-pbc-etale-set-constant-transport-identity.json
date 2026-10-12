@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-etale-set-constant-transport-identity",
+ "kind": "statement",
+ "title": "Identity transport of arbitrary constant-sheaf maps",
+ "statement": "Let S,P be schemes [def-pc-scheme], s:P to S, F a sheaf on S and L its constructed inverse image [def-weil-pbc-etale-sheaves]. Let A be any set in Type (u+1), tau:C_P(A) to L_s(F) any morphism, with C constant sheafification [def-weil-pbc-constant-sheaf]. For gamma [def-weil-pbc-etale-set-constant-pullback-comparison] and c [lem-weil-pbc-sets-etale-inverse-image-composition-units], gamma_id inverse followed by L_id(tau) followed by c_{s,id,F} equals tau followed by the inverse identity-composition transport from L_s(F) to L_{id composed with s}(F). No invertibility of tau is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/categories.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03CB, 03CC (inverse-image composition), 0B65 (comparison of adjoints), 03P5 (constant sheaves), and 0A3H final paragraph (equal-valued generators)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-set-constant-pullback-comparison",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof": [
+  {
+   "text": "Identify the identity inverse-image adjunction with the identity adjunction by restriction along Over.pullbackId. Its unit equation identifies the chosen composition comparison c_{s,id,F} with the identity comparison followed by the identity-composition cast: fixed-sheaf uniqueness applies on twice unit-pulled sections. Use Over.pullbackComp_id_left for the fibre-product unit law.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant comparison gamma_id has the same unit equation as the identity comparison on C_P(A), by its defining adjunction construction. Injectivity of the adjunction hom equivalence identifies them. Naturality with respect to tau cancels the two identity comparisons, leaving exactly the inverse identity-composition cast.",
+   "uses": [
+    "def-weil-pbc-etale-set-constant-pullback-comparison",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-set-constant-pullback-comparison",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/categories.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03CB, 03CC (inverse-image composition), 0B65 (comparison of adjoints), 03P5 (constant sheaves), and 0A3H final paragraph (equal-valued generators)",
+  "note": "Adjunction verification of the cited constant-generator argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf inverse image comparison identity unit coherence",
+   "results": "Service unavailable: Internal Server Error. No result obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a constant sheaf is naturally isomorphic to the constant sheaf preserving generators",
+   "results": "General constant-sheaf and IsConstant lemmas; no comparison for the chosen constructed etale inverse image and composition. Source Functor.constantSheafsheafPullbackIso constructs the analogous comparison for the abstract selected left adjoint.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq and unit_leftAdjointUniq_hom_app supply construction and unit equation; no etale generator transport statement.",
+   "date": "2026-10-12",
+   "verdict": "building blocks"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*Pullback|leftAdjointUniq.*unit; constantSheaf.*[Pp]ullback|[Pp]ullback.*constantSheaf",
+   "results": "Read source ConstantSheaf, UpperLowerStar.Defs and Coherence and Sheaf ConstantPullbackIdentityCoherence/CompositionCoherence. The latter use abelian coefficients and upperStar, not the chosen full-universe set-valued construction c.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleConstantTrivializationPullback",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-constant-trivialization-pullback",
+   "place": "Steps 1 to 4: constant comparison, identity normalization and generator compatibility.",
+   "via": [
+    "lem-weil-pbc-etale-constant-trivialization-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetConstantTransportIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetConstantTransportIdentity.lean",
+  "declaration": "AlgebraicGeometry.etaleSetConstantTransportIdentity",
+  "statement": "theorem etaleSetConstantTransportIdentity\n    (S P : Scheme.{u}) (s : P ⟶ S)\n    (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (A : Type (u + 1))\n    (τ : (constantSheaf P.smallEtaleTopology (Type (u + 1))).obj A ⟶\n      (Scheme.etaleSetPullback s).obj F) :\n    (etaleSetConstantPullbackComparison (𝟙 P)).inv.app A ≫\n        (Scheme.etaleSetPullback (𝟙 P)).map τ ≫\n        ((Classical.choose etaleSetInverseImageCompositionUnits.2.2)\n          S P P s (𝟙 P)).hom.app F =\n      τ ≫ eqToHom (congrArg\n        (fun k : P ⟶ S ↦ (Scheme.etaleSetPullback k).obj F)\n        (Category.id_comp s)).symm",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

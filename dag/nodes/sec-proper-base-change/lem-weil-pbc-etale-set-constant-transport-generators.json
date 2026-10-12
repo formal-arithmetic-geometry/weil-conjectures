@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-etale-set-constant-transport-generators",
+ "kind": "statement",
+ "title": "Compositional transport on constant generators",
+ "statement": "Let S,P,U,V be schemes [def-pc-scheme], s:P to S, h:U to P, v:V to U, F a sheaf on S and L its constructed inverse image [def-weil-pbc-etale-sheaves]. For any A in Type (u+1) and tau:C_P(A) to L_s(F), with C constant sheafification [def-weil-pbc-constant-sheaf], let gamma be [def-weil-pbc-etale-set-constant-pullback-comparison] and c [lem-weil-pbc-sets-etale-inverse-image-composition-units]. Set xi_h=gamma_h inverse followed by L_h(tau) followed by c_{s,h,F}. For every etale W over U and e in A, c_{h composed with s,v,F} sends the v-unit pullback of xi_h(eta_U(e)|W) to xi_{v composed with h}(eta_V(e)|W base changed to V), followed by the associativity transport from L_{(v composed with h) composed with s}(F) to L_{v composed with (h composed with s)}(F). No invertibility of tau is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/categories.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03CB, 03CC (inverse-image composition), 0B65 (comparison of adjoints), 03P5 (constant sheaves), and 0A3H final paragraph (equal-valued generators)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-set-constant-pullback-comparison",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof": [
+  {
+   "text": "The unit equation defining gamma_h sends pulled constant generators to equal-valued generators. Check at the terminal object by the composed adjunction, then restrict to arbitrary W by naturality. Both comparisons for v after h have the same composite unit equation. Injectivity under the composite adjunction and the sheafification universal property identify them.",
+   "uses": [
+    "def-weil-pbc-etale-set-constant-pullback-comparison",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker this equality with tau and move tau past the unit by naturality. Associativity of c pastes c_{s,h} and c_{h composed with s,v} with c_{h,v} and c_{s,v composed with h}. Evaluate at W base changed to V and its constant generator e. The associativity transport has the displayed direction. This reasoning also applies to empty A and empty/disconnected schemes.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-set-constant-pullback-comparison",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V1",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sites.tex; literature/stacks-project/categories.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03CB, 03CC (inverse-image composition), 0B65 (comparison of adjoints), 03P5 (constant sheaves), and 0A3H final paragraph (equal-valued generators)",
+  "note": "Adjunction verification of the cited constant-generator argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf inverse image comparison identity unit coherence",
+   "results": "Service unavailable: Internal Server Error. No result obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a constant sheaf is naturally isomorphic to the constant sheaf preserving generators",
+   "results": "General constant-sheaf and IsConstant lemmas; no comparison for the chosen constructed etale inverse image and composition. Source Functor.constantSheafsheafPullbackIso constructs the analogous comparison for the abstract selected left adjoint.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq and unit_leftAdjointUniq_hom_app supply construction and unit equation; no etale generator transport statement.",
+   "date": "2026-10-12",
+   "verdict": "building blocks"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*Pullback|leftAdjointUniq.*unit; constantSheaf.*[Pp]ullback|[Pp]ullback.*constantSheaf",
+   "results": "Read source ConstantSheaf, UpperLowerStar.Defs and Coherence and Sheaf ConstantPullbackIdentityCoherence/CompositionCoherence. The latter use abelian coefficients and upperStar, not the chosen full-universe set-valued construction c.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleConstantTrivializationPullback",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-constant-trivialization-pullback",
+   "place": "Steps 1 to 4: constant comparison, identity normalization and generator compatibility.",
+   "via": [
+    "lem-weil-pbc-etale-constant-trivialization-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetConstantTransportGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetConstantTransportGenerators.lean",
+  "declaration": "AlgebraicGeometry.etaleSetConstantTransportGenerators",
+  "statement": "theorem etaleSetConstantTransportGenerators\n    (S P U V : Scheme.{u}) (s : P ⟶ S) (h : U ⟶ P) (v : V ⟶ U)\n    (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (A : Type (u + 1))\n    (τ : (constantSheaf P.smallEtaleTopology (Type (u + 1))).obj A ⟶\n      (Scheme.etaleSetPullback s).obj F) (W : U.Etale) (e : A) :\n    (((Classical.choose etaleSetInverseImageCompositionUnits.2.2)\n      S U V (h ≫ s) v).hom.app F).hom.app\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W))\n      (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n        (MorphismProperty.Over.pullback @Etale ⊤ v) (Type (u + 1))\n        (U.smallGrothendieckTopology @Etale)\n        (V.smallGrothendieckTopology @Etale)).unit.app\n          ((Scheme.etaleSetPullback (h ≫ s)).obj F)).hom.app (op W)\n        (((etaleSetConstantPullbackComparison h).inv.app A ≫\n          (Scheme.etaleSetPullback h).map τ ≫\n          ((Classical.choose etaleSetInverseImageCompositionUnits.2.2)\n            S P U s h).hom.app F).hom.app (op W)\n          ((toSheafify U.smallEtaleTopology\n            ((Functor.const U.Etaleᵒᵖ).obj A)).app (op W) e))) =\n      (((etaleSetConstantPullbackComparison (v ≫ h)).inv.app A ≫\n        (Scheme.etaleSetPullback (v ≫ h)).map τ ≫\n        ((Classical.choose etaleSetInverseImageCompositionUnits.2.2)\n          S P V s (v ≫ h)).hom.app F ≫\n        eqToHom (congrArg\n          (fun k : V ⟶ S ↦ (Scheme.etaleSetPullback k).obj F)\n          (Category.assoc v h s))).hom.app\n            (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)))\n        ((toSheafify V.smallEtaleTopology\n          ((Functor.const V.Etaleᵒᵖ).obj A)).app\n            (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T070556-L-3479438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
