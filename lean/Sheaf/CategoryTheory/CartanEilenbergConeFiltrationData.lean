@@ -3,9 +3,8 @@ module
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.Filtration
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.CategoryTheory.CartanEilenbergConeFiltrationSteps
+import Sheaf.CategoryTheory.DegreewiseFiltration
 
 @[expose] public section
 
@@ -50,7 +49,14 @@ theorem cartanEilenberg_cone_filtration_data
           ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotalOrZero
             (ComplexShape.up ℤ) (n - s) s n ≫
               (CochainComplex.mappingCone.inr aug).f n)) := by
-  sorry
+  let S : ℤ → ∀ n : ℤ, Subobject ((CochainComplex.mappingCone aug).X n) :=
+    fun p n ↦ coneFiltrationStep K I aug b p n
+  have hprops := coneFiltrationStep_props K I a b hIbelow hKbelow aug haug
+  obtain ⟨F, hF⟩ := filtration_of_degreewise (CochainComplex.mappingCone aug) S
+    (by simpa [S] using hprops.1) (by simpa [S] using hprops.2)
+  refine ⟨F, ?_⟩
+  intro p n
+  simpa [S, coneFiltrationStep] using hF p n
 
 
 end CategoryTheory.Functor

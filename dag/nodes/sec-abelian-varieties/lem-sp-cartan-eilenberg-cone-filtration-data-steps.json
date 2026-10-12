@@ -1,0 +1,151 @@
+{
+ "id": "lem-sp-cartan-eilenberg-cone-filtration-data-steps",
+ "kind": "statement",
+ "title": "Explicit cone steps are antitone and differential-stable",
+ "statement": "Let A be a Grothendieck abelian category, K an integer-indexed cochain complex, I an (integer,natural)-indexed bicomplex, and a:K[0]→I its augmentation. Let b be an integer and assume I.X(s) and K^s are zero for s<b. Put J=((CartanEilenbergPresentation.mappedFunctor(identity)).obj I).flip [def-sp-cartan-eilenberg-presentation], and let aug:K→Tot(J) [def-sp-double-complex-total] have degree n component a(n,0) followed by the extension identification and the (0,n) diagonal inclusion. Define S(p,n) in Cone(aug)^n as the image of the K^(n+1) inclusion if p≤n+1, or zero otherwise, joined with the finite supremum of the images of J^(n-s,s)→Tot(J)^n→Cone(aug)^n for max(b,p)≤s≤n. Then p↦S(p,n) is antitone for every n, and the inclusion S(p,n)→Cone(aug)^n followed by its differential factors through S(p,n+1) for every p,n.",
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4 augmentation, with Tag 012W total filtration; elementary augmented-cone variant"
+ },
+ "proof": [
+  {
+   "text": "Increasing p shrinks the finite interval and can only remove the K summand; finite-supremum monotonicity proves antitonicity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull the next step back along the cone differential. Its K generator has components minus d_K and aug. The first factors through the next K image. By the augmentation equation the second factors through the diagonal with complex index n+1; when n+1<b its source is zero.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each total generator of complex index s maps to signed terms with complex indices s and s+1, both in the next interval. Mathlib total_d, ι_D₁, ι_D₂, d₁_eq′ and d₂_eq′ give the calculation. Signs and sums preserve factorization.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every generating image lies in the pullback of the next step, hence their supremum does. The pullback universal property gives the differential factorization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Second reader S2; explicit Lean construction using Mathlib. The source supplies the filtration convention and augmentation, not a verbatim theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Subobject.Factors",
+   "results": "loogle: unknown identifier 'Subobject.Factors'",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no public theorem matching this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An antitone family of subobjects of the terms of a cochain complex stable under its differential defines subobjects of the complex",
+   "results": "CochainComplex.IsLE, CochainComplex.IsGE, CochainComplex.isLE_of_le, CochainComplex.IsStrictlyGE, CochainComplex.IsStrictlyLE, CochainComplex.isGE_of_ge, CochainComplex.instIsStrictlyGEObjIntSingleFunctor, CochainComplex.instIsStrictlyLEObjIntSingleFunctor",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no public theorem matching this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "filtration|ιTotalOrZero|inlX_d",
+   "results": "Mathlib/Algebra/Homology/HomotopyCofiber.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean, Mathlib/Algebra/Homology/HomotopyCofiber.lean, Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/TotalComplex.lean, Mathlib/Algebra/Homology/TotalComplex.lean",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no public theorem matching this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mapping cone differential carries finite sums of diagonal images with second index at least p into the next such sum, including the augmentation summand",
+   "results": "CochainComplex.mappingCone.d_fst_v', CochainComplex.mappingCone.d_fst_v, CochainComplex.mappingCone.inl_v_d, CochainComplex.mappingCone.d_snd_v, CochainComplex.mappingCone.d_snd_v', CochainComplex.mappingCone.d_fst_v'_assoc, CochainComplex.mappingCone.inr_f_d, CochainComplex.mappingCone.δ_inl",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no public theorem matching this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, \"mono\"",
+   "results": "HomologicalComplex.mono_of_mono_f, HomologicalComplex.Hom.instIsSplitMonoF, HomologicalComplex.Hom.fAddMonoidHom, HomologicalComplex.Hom.fAddMonoidHom_apply, HomologicalComplex.instMonoICycles, HomologicalComplex.instMonoHomologyι, HomologicalComplex.instMonoCyclesMapOfF, HomologicalComplex.mono_homologyMap_of_mono_of_not_rel",
+   "date": "2026-10-12",
+   "verdict": "building blocks only; no public theorem matching this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degreewise subobjects closed under a cochain differential assemble into a subcomplex, and finite diagonal sums are stable under the mapping cone differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergConeFiltrationData",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cartan-eilenberg-cone-filtration-data",
+   "place": "stage-3 decomposition"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergConeFiltrationSteps",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergConeFiltrationSteps.lean",
+  "declaration": "CategoryTheory.Functor.coneFiltrationStep_props",
+  "statement": "theorem coneFiltrationStep_props\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    (K : CochainComplex A ℤ)\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ I)\n    (b : ℤ) (_hIbelow : ∀ s : ℤ, s < b → IsZero (I.X s))\n    (hKbelow : ∀ s : ℤ, s < b → IsZero (K.X s))\n    (aug : K ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total\n      (ComplexShape.up ℤ))\n    (haug : ∀ n : ℤ, aug.f n = (a.f n).f 0 ≫\n      (HomologicalComplex.extendXIso\n        (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X n))\n        ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫\n      (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal\n        (ComplexShape.up ℤ) 0 n n (zero_add n)) :\n    (∀ n, Antitone (fun p ↦ coneFiltrationStep K I aug b p n)) ∧\n    (∀ p n, (coneFiltrationStep K I aug b p (n + 1)).Factors\n      ((coneFiltrationStep K I aug b p n).arrow ≫\n        (CochainComplex.mappingCone aug).d n (n + 1)))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T225329-L-1812805",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T225329-L-1812805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
