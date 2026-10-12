@@ -7,7 +7,7 @@
  },
  "kind": "definition",
  "title": "Separated descended model used in the final assembly",
- "statement": "Let $S$ be quasi-compact and quasi-separated and let $Y\\to S$ be\nseparated and of finite presentation.\nApply the separated-descent construction to\n$Y\\to S$ relative to $\\mathsf N_f=\\mathsf N(S)$. Define\n\n$$\n\\lambda_Y=\\lambda_{\\mathrm{sep}}(Y/S),\n\\qquad\nY_{\\lambda_Y}\n=Y^{\\mathrm{sep}}_{\\lambda_Y},\n$$\n\nand let\n\n$$\n\\epsilon_Y\\colon\nY_{\\lambda_Y}\n\\times_{S_{\\lambda_Y}}S\n\\longrightarrow Y\n$$\n\nbe the constructed base-change comparison.",
+ "statement": "Let $S$ be quasi-compact and quasi-separated and let $Y\\to S$ be\nseparated and of finite presentation. Retain the supplied\n$N=\\mathsf N_f=\\mathsf N(S)$ of [def-nagata-final-noetherian-base-system].\nPresent this system in the directed-preorder form used by\n[def-nagata-separated-descent-stage]: a nonempty directed preorder $I$,\na diagram $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ with affine transitions,\na limit cone $c$ with vertex $S$, and a functor $F:I^{\\mathrm{op}}\\to N.I$\nwith a natural isomorphism $\\alpha:D\\simeq F\\circ N.D$ such that\n$c_\\lambda\\circ\\alpha_\\lambda=N.\\pi_{F(\\lambda)}$.\nRetain the constructed relative gluing datum, its valid stage, and its\nfinite-presentation gluing model, structure map and comparison, together\nwith the finite-presentation and isomorphism properties needed to apply\nthe separated-descent construction. Define\n$$\\lambda_Y=\\lambda_{\\mathrm{sep}}(Y/S),\\qquad\nY_{\\lambda_Y}=Y^{\\mathrm{sep}}_{\\lambda_Y}.$$\nThe structure map is the selected model's base-change projection.\nLet $\\epsilon_Y:Y_{\\lambda_Y}\\times_{D(\\lambda_Y)}S\\to Y$\nbe the canonical reassociation of this iterated pullback, using the cone\ncompatibility equation, followed by the constructed finite-presentation\ncomparison. The stages $D(\\lambda)$ are identified by $\\alpha$ with\n$N.D(F(\\lambda))$; their Noetherian properties are those of\n[lemma-nagata-final-noetherian-base-system].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-fp/def-nagata-final-descended-model.md",
   "place": "node def-nagata-final-descended-model, order 373"
@@ -74,5 +74,63 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfd2322 (reviewer sub-agent of L); spot-checked: Statement vs blueprint order 373, stmt_deps vs blueprint uses, dependents lemma-nagata-final-descended-model / def-nagata-final-basechanged-compactification (C4), duplicate search over sec-nagata-compactification (no dup; lemma-nagata-separated-eventually is the comparison property, not a definition), no proof steps. FIX more, RETURN less: (1) B3: second reading rewrote the last clause to 'canonical base-change comparison supplied by the separated-descent existence statement', departing from the blueprint and folding the isomorphism claim of lemma-nagata-final-descended-model into the definition; restored blueprint wording 'constructed base-change comparison'. (2) stmt_deps restored to the blueprint's three uses (dropped added lemma-nagata-separated-descent-stage-exists, already reached through def-nagata-separated-descent-stage). (3) blueprint.same_as reverted [] -> null; split_report date corrected to 2026-10-10 (date -u).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataFinalDescendedModel",
+  "declaration": "AlgebraicGeometry.nagataFinalDescendedComparison",
+  "declarations": [
+   "AlgebraicGeometry.NagataFinalBaseSystemIdentification",
+   "AlgebraicGeometry.nagataFinalDescendedStage",
+   "AlgebraicGeometry.nagataFinalDescendedModel",
+   "AlgebraicGeometry.nagataFinalDescendedMap",
+   "AlgebraicGeometry.nagataFinalDescendedComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataFinalDescendedModel.lean",
+  "statement": "def nagataFinalDescendedComparison (Q : NagataFinalBaseSystemIdentification D c) : pullback (nagataFinalDescendedMap D c hc i₀ f R P A G B E Q) (c.π.app (op (nagataFinalDescendedStage D c hc i₀ f R P A G B E Q))) ⟶ X",
+  "branch": "sheaf-dag",
+  "by": "Z2",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "Retains the identification of the directed presentation with the supplied Noetherian approximation. Index, model and map are aliases of the landed separated construction, and the comparison is the explicit canonical pullback reassociation followed by the landed finite-presentation comparison."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "Z2-fdm",
+  "group": "Z2",
+  "result": "pass",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "Z2 stage 2",
+  "old_statement": "Let $S$ be quasi-compact and quasi-separated and let $Y\\to S$ be\nseparated and of finite presentation.\nApply the separated-descent construction to\n$Y\\to S$ relative to $\\mathsf N_f=\\mathsf N(S)$. Define\n\n$$\n\\lambda_Y=\\lambda_{\\mathrm{sep}}(Y/S),\n\\qquad\nY_{\\lambda_Y}\n=Y^{\\mathrm{sep}}_{\\lambda_Y},\n$$\n\nand let\n\n$$\n\\epsilon_Y\\colon\nY_{\\lambda_Y}\n\\times_{S_{\\lambda_Y}}S\n\\longrightarrow Y\n$$\n\nbe the constructed base-change comparison.",
+  "what": "N.I is only a cofiltered small category, not the directed preorder required by the landed separated-descent construction. The original statement also omitted the retained gluing choices and input properties of that construction, and did not specify the constructed comparison after the later base change. Record a directed presentation with its diagram and projection identifications and the existing construction inputs, and specify the comparison as the canonical pullback reassociation composite. No choice is made from an unproved existence theorem.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-fp/def-nagata-final-descended-model.md",
+   "place": "node def-nagata-final-descended-model, order 373"
+  },
+  "citers": [
+   {
+    "id": "def-nagata-final-basechanged-compactification",
+    "holds": true,
+    "note": "The same selected structure map and explicit comparison supply its base change and inverse once isomorphy is proved."
+   },
+   {
+    "id": "lemma-nagata-final-descended-model",
+    "holds": true,
+    "note": "The selected model and comparison are unchanged; stage Noetherianity transfers across the recorded stage isomorphism."
+   },
+   {
+    "id": "def-nagata-final-noetherian-compactification",
+    "holds": true,
+    "note": "The same selected model over the identified Noetherian stage supplies its Noetherian compactification."
+   },
+   {
+    "id": "lemma-weil-pbc-chow-factorization",
+    "holds": true,
+    "note": "Its proof-only citation remains a finite-presentation descent construction; the Chow statement is unchanged."
+   }
+  ]
  }
 }
