@@ -15,30 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Take W to be the union of the open neighbourhoods in the hypothesis. Exactness of open restriction preserves the negative vanishing; the given natural-degree vanishing covers the other degrees. Standard truncations identify E|U with H^i(E)|U placed in degree i. Truncation maps are canonical, so these descriptions agree on overlaps through the cohomology sheaf and identify E|W with H^i(E)|W placed in degree i. This is the cohomology-sheaf gluing step in the perfect-locus proof, and does not require E perfect once the local cohomology hypothesis is given.",
+   "text": "Apply [lem-pc-derived-single-open-locus] to S=range(g), obtaining an open W containing the image, a flat sheaf M=H^i(E)|W, and an isomorphism L(W.ι)^*E≅M placed in degree i. The universal property of an open immersion provides f:T′→W with f≫W.ι=g.",
    "uses": [
-    "def-pc-derived-category"
+    "lem-pc-derived-single-open-locus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the single complex on M in degree i. It is bounded above by i; its degree-i term is flat, and all other terms are zero and flat. The additive monoidal structure from [lem-pc-sheaf-modules-tensor-closed] and ObjectProperty.flat_of_isZero prove the zero-term flatness; exactFunctor is invariant under the single-term isomorphism. Apply [lem-pc-flat-complex-derived-pullback]. Transport its Qh comparison through quotientCompQhIso, mapHomotopyCategoryFactors and singleMapHomologicalComplex. Tensor pullback and ordinary pullback are left adjoints to the same pushforward [def-pc-module-pullback], so left-adjoint uniqueness identifies them. This proves the private helper nonempty_derivedPullback_flat_single_iso, with no new hole.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-module-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Finite local freeness makes H^i(E)|W flat. The shifted single complex therefore computes its derived pullback by ordinary termwise pullback. Since range(g) lies in W, factor g through W, use derived pullback composition and the ordinary pullback composition isomorphism, and take degree-i cohomology. The result is the global isomorphism H^i(Lg^*E)≅g^*H^i(E). The empty open, rank zero, and varying local ranks need no exclusions.",
+   "text": "The comparison of [lem-pc-ringed-spaces-derived-pullback-composition] identifies Lg^*E with Lf^*L(W.ι)^*E. Map the open-locus isomorphism by Lf^*, then compose with the flat-single helper from the second step. Map this isomorphism by H^i and compose with singleFunctorCompHomologyFunctorIso. Finally use restrictFunctorIsoPullback and pullbackComp from [def-pc-module-pullback], and transport along f≫W.ι=g. The resulting composite has exactly the original source and target.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-module-pullback"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-category",
+  "lem-pc-derived-single-open-locus",
   "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-module-pullback",
   "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof, cohomology-sheaf gluing paragraph and termwise pullback paragraph; also Stacks Tag 0B9S and its perfect-locus input"
+  "place": "Y2: open-locus concentration followed by bounded-above flat-single computation and explicit derived/ordinary composition; 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -127,10 +138,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T040020-L-1617116",
+  "landing": "20261012T095932-L-328005",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
