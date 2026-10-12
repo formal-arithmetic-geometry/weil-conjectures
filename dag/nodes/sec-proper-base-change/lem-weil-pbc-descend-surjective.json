@@ -43,20 +43,9 @@
    }
   },
   {
-   "text": "*Step 2 ($f_T$ is the base change of $f_0$ along $Y_T\\to Y_0$).* Let $u:T\\to S_0$ be one of the morphisms $f_{i0}:S_i\\to S_0$ ($i\\ge0$) or the projection $S\\to S_0$, and write $g_0:Y_0\\to S_0$ for the structure morphism of $Y_0$, so that $g_0\\circ f_0$ is that of $X_0$. Put $Y_T=Y_0\\times_{S_0}T$ with projections $q_T:Y_T\\to Y_0$, $g_T:Y_T\\to T$, and $X_T=X_0\\times_{S_0}T$ with projections $p_T:X_T\\to X_0$, $h_T:X_T\\to T$ [def-pc-fibre-product]; the base change $f_T=f_0\\times\\mathrm{id}_T:X_T\\to Y_T$ is the morphism with $q_T\\circ f_T=f_0\\circ p_T$ and $g_T\\circ f_T=h_T$ (so $f_T=f_i$ for $T=S_i$ and $f_T=f$ for $T=S$). In the diagram with upper square $(X_T\\xrightarrow{p_T}X_0,\\ f_T,\\ f_0,\\ Y_T\\xrightarrow{q_T}Y_0)$ and lower square $(Y_T\\xrightarrow{q_T}Y_0,\\ g_T,\\ g_0,\\ T\\xrightarrow{u}S_0)$ both squares commute, the lower square is cartesian by definition of $Y_T$, and the outer rectangle $(X_T\\xrightarrow{p_T}X_0,\\ g_T\\circ f_T=h_T,\\ g_0\\circ f_0,\\ u)$ is cartesian by definition of $X_T$. By [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $(X_T,p_T,f_T)$ is a fibre product of $f_0$ and $q_T$.",
+   "text": "*Step 2 (the base change image, directly).* For any g:T→S₀, identify the left map of Over.pullback(g).map(f₀) with pullback.map(X₀.hom,g,Y₀.hom,g,f₀.left,id_T,id_S₀). The identity map of S₀ is a monomorphism. Mathlib Scheme.Pullback.range_map computes its range as q_T⁻¹(range(f₀.left)) intersected with the inverse image of range(id_T), hence simply q_T⁻¹(E). This is the base-change-image identity of [lem-weil-pbc-base-change-image], obtained without a separate cartesian-square-pasting argument.",
    "uses": [
     "def-pc-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069): 'Since $f_i$ is the base change of $f_0$ by $Y_i\\to Y_0$' (the pasting of fibre products, which the source leaves implicit, written out)"
-   }
-  },
-  {
-   "text": "*Step 3 (the image of $f_T$ is $q_T^{-1}(E)$).* Apply [lem-weil-pbc-base-change-image] to the fibre product $(X_T,p_T,f_T)$ of $f_0:X_0\\to Y_0$ and $q_T:Y_T\\to Y_0$ from Step 2, with $C=X_0$: $f_T(X_T)=f_T(p_T^{-1}(X_0))=q_T^{-1}(f_0(X_0))=q_T^{-1}(E)$. In particular $f_i(X_i)=q_{S_i}^{-1}(E)$ for every $i\\ge0$ and $f(X)=q_S^{-1}(E)$.",
-   "uses": [
     "lem-weil-pbc-base-change-image"
    ],
    "elementary": false,
@@ -66,7 +55,7 @@
    }
   },
   {
-   "text": "*Step 4 ($Y\\to Y_0$ maps into $E$).* Since $f$ is surjective [def-weil-surjective-morphism], Step 3 for $T=S$ gives $Y=f(X)=q_S^{-1}(E)$, i.e. $q_S(Y)\\subseteq E$ for the projection $q_S:Y=Y_0\\times_{S_0}S\\to Y_0$.",
+   "text": "*Step 3 ($Y\\to Y_0$ maps into $E$).* Since $f$ is surjective [def-weil-surjective-morphism], Step 2 for $T=S$ gives $Y=f(X)=q_S^{-1}(E)$, i.e. $q_S(Y)\\subseteq E$ for the projection $q_S:Y=Y_0\\times_{S_0}S\\to Y_0$.",
    "uses": [
     "def-weil-surjective-morphism"
    ],
@@ -77,7 +66,7 @@
    }
   },
   {
-   "text": "*Step 5 ($Y$ is the limit of the system $(Y_i)_{i\\ge0}$ of quasi-compact, quasi-separated schemes with affine transition morphisms).* Write $Y_i=Y_{S_i}=Y_0\\times_{S_0}S_i$ for $i\\ge0$, with transition morphisms $y_{ii'}=\\mathrm{id}_{Y_0}\\times f_{ii'}:Y_i\\to Y_{i'}$ ($i\\ge i'\\ge0$). By [lem-weil-pbc-scheme-over-limit] (with $T=Y_0$ and the structure morphism $g_0$) this is an inverse system over the directed set $I_{\\ge0}=\\{i\\in I: i\\ge0\\}$ with affine transition morphisms, and $Y=Y_0\\times_{S_0}S$ with the morphisms $\\mathrm{id}_{Y_0}\\times f_i:Y\\to Y_i$ is its limit in the category of schemes [def-weil-pbc-category-colimit]. Under the canonical identification $Y_{S_0}=Y_0\\times_{S_0}S_0=Y_0$ (via $q_{S_0}$, an isomorphism since $\\mathrm{id}_{S_0}$ is), the transition morphism $y_{i0}$ is $q_{S_i}$ and the limit projection $Y\\to Y_0$ is $q_S$. Each $q_{S_i}:Y_i\\to Y_0$ is the base change of the affine morphism $f_{i0}$, hence affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence] (1), (3); since $Y_0$ is quasi-compact and quasi-separated, so is $Y_i$ by [lem-weil-pbc-qcqs-morphism-permanence] (2).",
+   "text": "*Step 4 (the upper-tail base change diagram).* Let J={i:I | i₀≤i}, with initial element j₀=i₀. It is directed: a common upper bound of two elements is still above i₀. The functor Jᵒᵖ→Over(op i₀) sending j to its transition arrow is fully faithful by thinness and essentially surjective by reading the source of an arrow; hence it is an equivalence. Whisker baseChangeDiagram D Y₀.hom and baseChangeCone D c Y₀.hom by this functor. By isLimitBaseChangeCone ([lem-weil-pbc-scheme-over-limit]) and invariance of limits under equivalence, this is a limiting cone. Its objects are qcqs and its transitions affine by the existing baseChangeDiagram compactSpace, quasiSeparatedSpace and affine-transition instances, using [lem-weil-pbc-affine-morphism-permanence] and [lem-weil-pbc-qcqs-morphism-permanence].",
    "uses": [
     "lem-weil-pbc-scheme-over-limit",
     "def-weil-pbc-category-colimit",
@@ -91,8 +80,9 @@
    }
   },
   {
-   "text": "*Step 6 (a stage mapping into $E$).* By Step 5 the system $(Y_i,y_{ii'})_{i\\ge0}$ over $I_{\\ge0}$ with limit $(Y,(\\mathrm{id}_{Y_0}\\times f_i)_i)$ satisfies the hypotheses of [lem-weil-pbc-limit-contained-in-constructible]; take its index $0$, the constructible subset $E\\subseteq Y_0$ of Step 1, and the inclusion $q_S(Y)\\subseteq E$ of Step 4. It gives $i_1\\ge0$ with $q_{S_i}(Y_i)=y_{i0}(Y_i)\\subseteq E$ for every $i\\ge i_1$.",
+   "text": "*Step 5 (constructible containment at a stage).* At j₀ let q₀ be the projection from Y₀×_{S₀}S₀ to Y₀; it is the canonical isomorphism. Transport E by q₀⁻¹ (the Lean proof uses Scheme.Hom.isConstructible_preimage). The equality baseChangeCone_π_app_fst proves that the image of the limit projection lies in q₀⁻¹(E). Apply [lem-weil-pbc-limit-contained-in-constructible] to the whiskered diagram at j₀. Choose its supplied stage j and specialize eventual containment at j itself. The equality baseChangeDiagram_map_fst turns this containment into range(q_j)⊆E.",
    "uses": [
+    "def-weil-constructible-subset",
     "lem-weil-pbc-limit-contained-in-constructible"
    ],
    "elementary": false,
@@ -102,7 +92,7 @@
    }
   },
   {
-   "text": "*Step 7 (conclusion).* Let $i=i_1$. By Step 3 and Step 6, $f_i(X_i)=q_{S_i}^{-1}(E)=Y_i$, so $f_i$ is surjective [def-weil-surjective-morphism] (and so is $f_{i'}$ for every $i'\\ge i_1$).",
+   "text": "*Step 6 (conclusion).* Let $i=i_1$. By Step 2 and Step 5, $f_i(X_i)=q_{S_i}^{-1}(E)=Y_i$, so $f_i$ is surjective [def-weil-surjective-morphism] (and so is $f_{i'}$ for every $i'\\ge i_1$).",
    "uses": [
     "def-weil-surjective-morphism"
    ],
@@ -118,7 +108,6 @@
   "lem-weil-pbc-chevalley-constructible-image",
   "def-weil-constructible-subset",
   "def-pc-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-base-change-image",
   "def-weil-surjective-morphism",
   "lem-weil-pbc-scheme-over-limit",
@@ -129,7 +118,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "proof of Lemma Tag 07RR (lemma-descend-surjective, line 2069), with Morphisms Lemma Tag 054J (Chevalley), the identity $q^{-1}(f(Z))=f_{S'}(p^{-1}(Z))$ from the proof of Morphisms Lemma Tag 01S1, Limits Lemma Tag 01YZ and Lemma Tag 05F4; the pasting of fibre products and the qcqs/affine hypotheses of 05F4 for the system $(Y_i)$, which the source leaves implicit, are written out by the agent"
+  "place": "Proof of Lemma Tag 07RR (lemma-descend-surjective), implemented by H2 using Chevalley, Scheme.Pullback.range_map, the existing baseChangeDiagram/baseChangeCone/isLimitBaseChangeCone, the equivalence of the directed upper tail with Over(op i₀), and Lemma 05F4. The separate cartesian-square-pasting step is unnecessary."
  },
  "mathlib_searches": [
   {
@@ -213,5 +202,15 @@
   "group": "M1",
   "result": "fix",
   "note": "directed I : Type u (fixed from Type v), D : Iᵒᵖ ⥤ Scheme.{u} affine transitions, Cone+IsLimit, i₀, qcqs S₀/X₀/Y₀, f₀ : X₀ ⟶ Y₀ in Over S₀, LocallyOfFinitePresentation f₀.left, Surjective of Over.pullback base change to S (rfl = pullback.map) ⇒ ∃ i ≥ i₀ Surjective f_i"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1cecc",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T060738-L-2907852",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean file, node metadata, change record, and report against the packet and repository; compilation and axiom checks passed."
  }
 }
