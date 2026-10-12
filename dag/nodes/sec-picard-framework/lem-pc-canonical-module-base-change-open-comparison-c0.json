@@ -18,17 +18,21 @@
  ],
  "proof": [
   {
-   "text": "Apply the cited open-restriction and derived base-change constructions; the required cartesian and naturality identities give the displayed witness and equality.",
-   "uses": [],
-   "elementary": false
+   "text": "Extract the left-derived counit and its universal property for p from exists_derivedPullback. The recorded object and map equalities identify its underived functor E with Scheme.Modules.tensorPullback p by Functor.ext. Evaluate the counit at the single complex H and compose with the image in the derived category of singleMapHomologicalComplex. This morphism satisfies IsDerivedModulePullbackComparison by its defining existential, using that same counit and reflexivity.",
+   "uses": [
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-derived-pullback"
+ ],
  "proof_origin": {
   "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/08FE",
-  "place": "Tags 08FE, 08HY, 08IB, 0D5U",
-  "note": "Stage-3 decomposition of the parent theorem."
+  "document": "lean/Sheaf/AlgebraicGeometry/DerivedPullback.lean",
+  "place": "exists_derivedPullback; DerivedModuleBaseChangeMap.lean, IsDerivedModulePullbackComparison",
+  "note": "P3 second reading: direct extraction of the left-derived counit; no new lemma or hole."
  },
  "mathlib_searches": [
   {
@@ -106,10 +110,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T202242-L-705179",
-  "kind": "interface",
+  "landing": "20261012T215156-L-1304635",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
