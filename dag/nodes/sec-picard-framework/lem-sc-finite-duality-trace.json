@@ -21,73 +21,49 @@
  ],
  "proof": [
   {
-   "text": "Put $Y=\\mathbf P^1_k$, $g:Y\\to\\operatorname{Spec}k$, and $h=g\\circ f$. The standard projective line is projective over $k$, so [lem-pc-projective-proper] makes $g$ proper. Since $f$ is finite, [lem-weil-pbc-finite-proper] makes $f$ proper, and [lem-weil-pbc-proper-composition] makes $h$ proper. A field is Noetherian; $g$ and $h$ are of finite type because they are proper, so [lem-weil-pbc-finite-type-over-noetherian] makes both $Y$ and $X$ Noetherian. The affine charts $\\operatorname{Spec}k[t]$, $\\operatorname{Spec}k[s]$ of [def-sc-p1-standard] show $g$ is smooth of relative dimension one in the sense of [def-sbc-smooth-morphisms], while smoothness of $h$ is assumed.",
+   "text": "A finite f is proper. Its composite with the proper projective-line structure map is the structure map of X, by the over-k hypothesis. Thus X is proper, and both X and the projective line are Noetherian. Choose standard derived localizations and the restriction R of Rf_* and its right adjoint a via [lem-pc-noetherian-derived-direct-image-right-adjoint]. The comparison of R with Rf_* is the identity inclusion comparison.",
    "uses": [
     "lem-pc-projective-proper",
     "lem-weil-pbc-finite-proper",
     "lem-weil-pbc-proper-composition",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "def-sc-p1-standard",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-smooth-curve-upper-shriek-differentials] to obtain a representative K of Omega_Y[0] and an isomorphism a(K) to Omega_X[0]. The projective line is smooth of relative dimension one and Omega_Y is invertible. Apply [lem-sc-finite-flat-duality-evaluation] to obtain M, its degree-zero identification e0 with a(K), an isomorphism e:f_*M to Hom(f_*O_X,Omega_Y), and an evaluation map epsilon satisfying epsilon(m)=e(m)(1) and e(m)(b)=epsilon(bm). Full faithfulness of the single-complex functor takes e0 followed by the differential identification to a sheaf isomorphism d:M to Omega_X.",
+   "uses": [
+    "lem-sc-smooth-curve-upper-shriek-differentials",
+    "lem-pc-projective-space-canonical",
+    "lem-sc-finite-flat-duality-evaluation",
     "def-sbc-smooth-morphisms"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tags 0BRT and 0ATX, proper and Noetherian hypotheses checked for the application"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sc-smooth-proper-curve-dualizing] to $g$ and $h$: $g^!k\\cong\\Omega^1_{Y/k}[1]$ and $h^!k\\cong\\Omega^1_{X/k}[1]$. Apply [lem-sc-proper-upper-shriek-composition] to $X\\xrightarrow fY\\xrightarrow g\\operatorname{Spec}k$: $f^!(g^!k)\\cong h^!k$. As a derived right adjoint $f^!$ commutes with shifts, so cancelling $[1]$ gives an isomorphism $\\alpha:f^!\\Omega^1_{Y/k}\\cong\\Omega^1_{X/k}$. This is an isomorphism of $\\mathcal O_X$-modules because the right side is concentrated in degree zero.",
-   "uses": [
-    "lem-sc-smooth-proper-curve-dualizing",
-    "lem-sc-proper-upper-shriek-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tags 0BRT and 0ATX, transitivity of dualizing complexes"
-   }
-  },
-  {
-   "text": "The $n=1$ clause of [lem-pc-projective-space-canonical] says $\\Omega^1_{Y/k}$ is invertible. Apply [lem-sc-finite-flat-duality-evaluation] with $L=\\Omega^1_{Y/k}$ and transfer its isomorphism through $f_*\\alpha^{-1}$ from Step 2. This yields an $f_*\\mathcal O_X$-linear isomorphism $\\Phi:f_*\\Omega^1_{X/k}\\xrightarrow{\\sim}\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,\\Omega^1_{Y/k})$.",
-   "uses": [
-    "lem-pc-projective-space-canonical",
-    "lem-sc-finite-flat-duality-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/discriminant.tex",
-    "place": "Tags 0BVI and 0FKW, finite duality with an invertible target"
-   }
-  },
-  {
-   "text": "Define $\\tau(\\omega)=\\Phi(\\omega)(1)$. Evaluation at $1$ is $\\mathcal O_Y$-linear, so $\\tau$ is a morphism of the asserted sheaves. The final clause of [lem-sc-finite-flat-duality-evaluation], or $f_*\\mathcal O_X$-linearity of $\\Phi$, gives $\\Phi(\\omega)(a)=\\Phi(a\\omega)(1)=\\tau(a\\omega)$ on every open. Thus the comparison map displayed in the statement is exactly $\\Phi$, which is an isomorphism by Step 3.",
+   "text": "Define tau=f_*(d inverse) followed by epsilon. Compose f_*Hom(O_X,Omega_X) to f_*Omega_X (evaluation at 1), then f_*d inverse, then e, giving an isomorphism b. To check that b is the library comparison map, work on every open U and smaller open W. A section phi of Hom(O_X,Omega_X) satisfies phi_W(x)=x phi_W(1). Naturality of phi and d inverse identifies d inverse(phi_W(1)) with the restriction of d inverse(phi_U(1)). Naturality of e identifies its evaluations over W with the restriction of e over U. The two evaluation identities of the finite-duality theorem then give tau_W(phi_W(x))=e_W(x d inverse(phi_W(1)))(1)=e_W(d inverse(phi_W(1)))(x)=b_U(phi)_W(x). Extensionality proves the comparison equals b.hom, so it is an isomorphism.",
    "uses": [
     "lem-sc-finite-flat-duality-evaluation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/discriminant.tex",
-    "place": "Tag 0FKW, evaluation-at-one formula"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
   "lem-pc-projective-proper",
-  "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-proper-composition",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-sc-p1-standard",
-  "lem-sc-smooth-proper-curve-dualizing",
-  "lem-sc-proper-upper-shriek-composition",
   "lem-pc-projective-space-canonical",
   "lem-sc-finite-flat-duality-evaluation",
-  "def-sbc-smooth-morphisms"
+  "lem-sc-smooth-curve-upper-shriek-differentials",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0BRT, 0ATX; literature/stacks-project/discriminant.tex, Tags 0BVI and 0FKW"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Curve/SerreDuality.lean",
+  "place": "exists_isIso_pushforwardHomObjComparison_unit: derived differential identification, finite-duality evaluation, sectionwise comparison"
  },
  "mathlib_searches": [
   {
@@ -212,5 +188,15 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T042412-L-1817707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

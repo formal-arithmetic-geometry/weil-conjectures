@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-smooth-curve-upper-shriek-differentials",
+ "kind": "statement",
+ "title": "Upper shriek carries canonical differentials between smooth proper curves",
+ "statement": "Let $k$ be a field, let $X$ and $Y$ be schemes smooth of relative dimension one over $k$ [def-sbc-smooth-morphisms], and assume their structure morphisms are proper [def-weil-proper-morphism]. Let $f:X\\to Y$ be a proper morphism over $k$. Let $D_{\\mathrm{QCoh}}(X)$ and $D_{\\mathrm{QCoh}}(Y)$ denote the full subcategories with quasi-coherent cohomology of the derived categories [def-pc-derived-category] of modules. Suppose $R:D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y)$ is supplied with an isomorphism of its composite with the full inclusion with $Rf_*$ [def-pc-derived-direct-image], and $R\\dashv a$. Write $\\Omega_X$ and $\\Omega_Y$ for their relative Kahler differential sheaves [def-sc-kahler-differentials], and $\\Omega[0]$ for the single complex in degree zero. Then there is an object $K$ of $D_{\\mathrm{QCoh}}(Y)$ and an isomorphism $K\\cong\\Omega_Y[0]$ of underlying derived objects, with an isomorphism $a(K)\\cong\\Omega_X[0]$ of underlying derived objects. The chosen derived localizations may have arbitrary morphism universes.",
+ "source": {
+  "document": "Stacks Project, Duality for Schemes",
+  "place": "Tags 0BRT and 0ATX, applied to X and Y over Spec k and to f followed by the structure map of Y",
+  "url": "https://stacks.math.columbia.edu/tag/0BRT"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-sc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Properness over the field makes X and Y Noetherian: proper implies finite type and quasi-compact, Spec k is Noetherian, and finite type over a Noetherian scheme is locally Noetherian. The same applies to Spec k itself. Choose restrictions of derived direct image for the structure maps and their right adjoints using [lem-pc-noetherian-derived-direct-image-right-adjoint]. The supplied comparison identifies R with the restriction of Rf_*; its right adjoint a is therefore f^!. For O_k, the single complex is quasi-coherent: its homology in degree zero is O_k and in every other degree it is zero. In Lean, the latter is identified with the free module on the empty type, which is quasi-coherent.",
+   "uses": [
+    "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-smooth-proper-curve-dualizing] to the structure maps g of Y and h of X, which are smooth proper of relative dimension one. For O_k in degree zero this gives g^! O_k isomorphic to Omega_Y[1] and h^! O_k isomorphic to Omega_X[1]. The single complex of Omega_Y is an object K of D_QCoh because Omega_Y is locally free (smoothness of relative dimension one) and its homology is Omega_Y in degree zero and zero in other degrees.",
+   "uses": [
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-canonical-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-pc-ringed-spaces-derived-direct-image-composition] on the underlying ringed-space maps to obtain the derived composition isomorphism with its required right-derived-unit formula. Apply [lem-sc-proper-upper-shriek-composition] with that formula and the supplied comparison to obtain an isomorphism from h^! to g^! followed by a. Quasi-coherent derived objects are closed under isomorphisms and shifts: apply each homology functor to an isomorphism, and use its shift-sequence isomorphism to identify the homology of A[n] in degree m with that of A in degree n+m. These are proved private helpers, as is quasi-coherence of single complexes. Hence the full-subcategory inclusion commutes with shifts. The recorded unbounded derived direct image commutes with shifts via its existing right-derived-functor instance. Transfer that structure across comparison to R, and then to a using Adjunction.rightAdjointCommShift. Lift the isomorphism g^! O_k to Omega_Y[1] through the fully faithful inclusion, apply a to its inverse, compose with the inverse upper-shriek composition isomorphism and the isomorphism h^! O_k to Omega_X[1]. This gives a(K)[1] isomorphic to Omega_X[1] in the underlying derived category. The shift functor is an equivalence and is fully faithful, so preimageIso cancels the shift. Finally rewrite h as the structure map of X using the over-k identity.",
+   "uses": [
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-sc-canonical-sheaf",
+  "lem-sc-proper-upper-shriek-composition",
+  "lem-sc-smooth-proper-curve-dualizing",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/SmoothCurveUpperShriekDifferentials.lean",
+  "place": "smoothCurve_upperShriek_differentials, implementing Stacks Tags 0BRT and 0ATX with the recorded ringed-space composition and Mathlib shift-adjunction structures"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right adjoint derived pushforward smooth proper curves canonical differentials",
+   "results": "UNAVAILABLE: service returned Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite flat map smooth curves duality canonical differential sheaf trace",
+   "results": "Smooth ring homomorphism and flatness lemmas only; no upper-shriek identification of canonical modules",
+   "verdict": "no matching theorem",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.RightAdjointCommShift",
+   "results": "Identifier is a namespace, not a searchable declaration; local source Shift/Adjunction.lean constructs adjoint shift compatibility, but says nothing about canonical modules",
+   "verdict": "categorical tool only, not the geometric statement",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek.*differential|differential.*upperShriek; commShift|rightAdjointCommShift",
+   "results": "Project has separate smooth proper dualizing and proper upper-shriek composition statements; Mathlib has shift-compatible adjunctions. No statement combines them into the degree-zero differential identification. Blueprint search for upper shriek differentials found no matching node.",
+   "verdict": "new bridge for step two of the trace node",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.SerreDuality",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Trace identification: step two of lem-sc-finite-duality-trace, upper-shriek transitivity and cancellation of the curve shift",
+   "via": [
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothCurveUpperShriekDifferentials",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveUpperShriekDifferentials.lean",
+  "declaration": "AlgebraicGeometry.smoothCurve_upperShriek_differentials",
+  "statement": "theorem smoothCurve_upperShriek_differentials (k : Type u) [Field k] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [SmoothOfRelativeDimension 1 (Y ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [IsProper (Y ↘ Spec (.of k))] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (comparison : R ⋙ (schemeDerivedQCohProperty Y).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) : ∃ K : schemeDerivedQCohCategory Y, ∃ _eL : K.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (Y ↘ Spec (.of k)).relativeDifferentials, Nonempty ((a.obj K).obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (X ↘ Spec (.of k)).relativeDifferentials)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T042412-L-1817707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T042412-L-1817707",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

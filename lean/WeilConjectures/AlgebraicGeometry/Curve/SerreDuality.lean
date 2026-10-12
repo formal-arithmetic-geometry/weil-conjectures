@@ -28,7 +28,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import WeilConjectures.Mathlib.RingTheory.RamificationInertia.Basic
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+
 import Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation
+import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import Sheaf.AlgebraicGeometry.SmoothCurveUpperShriekDifferentials
 import Sheaf.AlgebraicGeometry.ProperUpperShriekComposition
 import Sheaf.AlgebraicGeometry.SmoothProperCurveDualizing
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
@@ -544,8 +547,108 @@ theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine 
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f] :
     ∃ τ : (Modules.pushforward f).obj (X ↘ Spec (.of k)).relativeDifferentials ⟶
         (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials,
-      IsIso (Modules.pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf)) :=
-  sorry
+      IsIso (Modules.pushforwardHomObjComparison f τ (SheafOfModules.unit X.ringCatSheaf)) := by
+  classical
+  let Y : Scheme.{u} := ProjectiveLine (Spec (.of k))
+  have : IsProper (X ↘ Spec (.of k)) := by
+    have : IsProper (f ≫ (Y ↘ Spec (.of k))) := inferInstance
+    rwa [HomIsOver.comp_over (f := f) (S := Spec (.of k))] at this
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : IsNoetherian Y := ⟨⟩
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+  obtain ⟨h, hR⟩ := noetherian_schemeDerivedDirectImage_has_rightAdjoint f
+  let R := (schemeDerivedQCohProperty Y).lift
+    ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) h
+  let : R.IsLeftAdjoint := hR
+  let a := R.rightAdjoint
+  let adj : R ⊣ a := Adjunction.ofIsLeftAdjoint R
+  let comparison : R ⋙ (schemeDerivedQCohProperty Y).ι ≅
+      (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f := Iso.refl _
+  obtain ⟨K, eL, ⟨α⟩⟩ :=
+    smoothCurve_upperShriek_differentials k f R comparison a adj
+  have := Hom.isInvertible_relativeDifferentials (Y ↘ Spec (.of k))
+  have := Modules.IsInvertible.of_sheafOfModules (Y ↘ Spec (.of k)).relativeDifferentials
+  obtain ⟨M, e₀, c, hc, e, ε, hε, heval, hlinear, hunit⟩ :=
+    finiteFlatDualityEvaluation f (Y ↘ Spec (.of k)).relativeDifferentials
+      R comparison a adj K eL
+  let d : M ≅ (X ↘ Spec (.of k)).relativeDifferentials :=
+    (DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).preimageIso (e₀ ≪≫ α)
+  let τ := (Modules.pushforward f).map d.inv ≫ ε
+  refine ⟨τ, ?_⟩
+  let b := (Modules.pushforward f).mapIso
+    (SheafOfModules.homObjUnitIso (X ↘ Spec (.of k)).relativeDifferentials) ≪≫
+      (Modules.pushforward f).mapIso d.symm ≪≫ e
+  have hb : Modules.pushforwardHomObjComparison f τ
+      (SheafOfModules.unit X.ringCatSheaf) = b.hom := by
+    apply Modules.hom_ext
+    intro U
+    ext φ : 2
+    refine PresheafOfModules.hom_ext fun W ↦ ?_
+    ext x
+    change X.presheaf.obj (op (f ⁻¹ᵁ W.unop.left)) at x
+    let n : Γ((X ↘ Spec (.of k)).relativeDifferentials, f ⁻¹ᵁ U) :=
+      φ.app (op (Over.mk (𝟙 (f ⁻¹ᵁ U))))
+        (1 : X.presheaf.obj (op (f ⁻¹ᵁ U)))
+    let m : Γ(M, f ⁻¹ᵁ U) := d.inv.app (f ⁻¹ᵁ U) n
+    change ε.app W.unop.left
+        (d.inv.app (f ⁻¹ᵁ W.unop.left)
+          (φ.app (op (Over.mk ((TopologicalSpace.Opens.map f.base).map W.unop.hom))) x)) =
+      (e.hom.app U m).app W x
+    let i := (TopologicalSpace.Opens.map f.base).map W.unop.hom
+    have hn : φ.app (op (Over.mk i))
+        (1 : X.presheaf.obj (op (f ⁻¹ᵁ W.unop.left))) =
+        (X ↘ Spec (.of k)).relativeDifferentials.val.map i.op n := by
+      have hn := PresheafOfModules.naturality_apply φ
+        (Over.homMk i (Category.comp_id i) : Over.mk i ⟶ Over.mk (𝟙 (f ⁻¹ᵁ U))).op
+        (1 : X.presheaf.obj (op (f ⁻¹ᵁ U)))
+      change φ.app (op (Over.mk i)) (X.presheaf.map i.op 1) =
+        (X ↘ Spec (.of k)).relativeDifferentials.val.map i.op n at hn
+      simpa only [map_one] using hn
+    have hm : d.inv.app (f ⁻¹ᵁ W.unop.left)
+        (φ.app (op (Over.mk i))
+          (1 : X.presheaf.obj (op (f ⁻¹ᵁ W.unop.left)))) = M.val.map i.op m := by
+      rw [hn]
+      exact PresheafOfModules.naturality_apply d.inv.val i.op n
+    have hx : φ.app (op (Over.mk i)) x = x •
+        φ.app (op (Over.mk i)) (1 : X.presheaf.obj (op (f ⁻¹ᵁ W.unop.left))) := by
+      have hs := (φ.app (op (Over.mk i))).hom.map_smul x
+        (1 : X.presheaf.obj (op (f ⁻¹ᵁ W.unop.left)))
+      change φ.app (op (Over.mk i))
+        (x * (1 : X.presheaf.obj (op (f ⁻¹ᵁ W.unop.left)))) = _ at hs
+      simpa only [mul_one] using hs
+    have he := PresheafOfModules.naturality_apply e.hom.val W.unop.hom.op m
+    have he' := congrArg
+      (fun q ↦ q.app (op (Over.mk (𝟙 W.unop.left))) x) he
+    have he'' : (e.hom.app W.unop.left (M.val.map i.op m)).app
+        (op (Over.mk (𝟙 W.unop.left))) x = (e.hom.app U m).app W x :=
+      he'.trans (PresheafOfModules.restrictOver_hom_app_congr
+        (e.hom.app U m) (Category.id_comp W.unop.hom) x)
+    rw [hx]
+    change ε.app W.unop.left
+      (d.inv.val.app (op (f ⁻¹ᵁ W.unop.left))
+        (x • φ.app (op (Over.mk i))
+          (1 : X.presheaf.obj (op (f ⁻¹ᵁ W.unop.left))))) = _
+    rw [map_smul]
+    change ε.app W.unop.left
+      (x • d.inv.app (f ⁻¹ᵁ W.unop.left)
+        (φ.app (op (Over.mk i))
+          (1 : X.presheaf.obj (op (f ⁻¹ᵁ W.unop.left))))) = _
+    rw [hm, heval, ← hunit]
+    exact he''
+  rw [hb]
+  infer_instance
 
 /-- **Duality along a finite flat morphism to `ℙ¹`, comparison map.** Let `X` be a smooth curve
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
