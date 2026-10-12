@@ -11,6 +11,8 @@ An item of this stage is a module that a target reaches, that contains `sorry`, 
 - A **worker** proves its module (§2).
 - The lead reviews and lands it.
 
+Progress is the ledger’s net (holes closed minus holes added in the targets’ import closure) and the modules pruned, measured by `tools/sorry_ledger.py` against its pinned baselines. Closure figures start after the proof-dependency imports baseline; whole-library figures compare both baselines. Landings are not progress.
+
 ## 2. Pruning
 
 - The proof in the DAG is a plan. Below the unit level an item may be proved by any route, and the shortest is the best: a special case, a Mathlib lemma, a simpler argument. Pruning and shorter routes are allowed only below the unit level (`SETUP.md`, the three levels): the statement of a unit and the steps of its proof, as realized in `dag/units/`, stay; a route that would bypass a unit the chapter's route passes through is not taken.
