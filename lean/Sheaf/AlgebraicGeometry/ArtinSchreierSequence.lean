@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
 import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.ArtinSchreierData
+import Sheaf.AlgebraicGeometry.ArtinSchreierExact
 
 /-!
 # The Artin–Schreier sequence
@@ -80,6 +82,9 @@ theorem artinSchreier_shortExact
               (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =
           (c.val : Γ(U.unop.left, ⊤))) ∧
       ShortComplex.ShortExact (ShortComplex.mk iota wp hzero) := by
-  sorry
+  obtain ⟨G, hG, a, wp, iota, hzero, hrestr, hwp, hiota⟩ :=
+    artinSchreier_data f p hp
+  refine ⟨G, hG, a, wp, iota, hzero, hrestr, hwp, hiota, ?_⟩
+  exact artinSchreier_data_shortExact f p hp G hG a wp iota hzero hrestr hwp hiota
 
 end AlgebraicGeometry
