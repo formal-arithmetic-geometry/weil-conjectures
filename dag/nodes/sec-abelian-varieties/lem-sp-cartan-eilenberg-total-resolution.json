@@ -26,27 +26,27 @@
  ],
  "proof": [
   {
-   "text": "The bicomplex augmentation gives maps $K^n\\to I^{n,0}$. The vertical differential kills these maps because a is a bicomplex map from a complex concentrated in vertical degree zero. The horizontal commutativity of a gives the chain-map identity for the complex-degree differential. After extension and flip the vertical total sign is one in resolution degree zero. Compose these maps with the $(0,n)$ diagonal inclusions. The total differential formula proves that they form a chain map $\\epsilon$ with exactly the claimed components.",
+   "text": "Define f_n to be the specified map into the (0,n) summand. Expand the total differential using ι_D₁, ι_D₂, d₁_eq, and d₂_eq. The resolution term vanishes by (a.f n).comm 0 1, while the complex-degree term equals d_K followed by f_{n+1} by a.comm. Both total signs in resolution degree zero are one. These equations construct the chain map aug with the required components.",
    "uses": [
     "def-sp-cartan-eilenberg-presentation",
     "def-sp-double-complex-total"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Choose b as in the hypothesis. In total degree n a nonzero diagonal summand must have $0\\le r\\le n-b$ and $s=n-r$. Hence the diagonal is finite and the total vanishes below b. Its terms are finite biproducts of injectives: maps into each factor extend along a monomorphism, and their extensions assemble by the finite biproduct universal property. Thus the total is a bounded-below complex of injectives and is K-injective by [lem-sp-kinjective-computes].",
+   "text": "Apply [lem-sp-cartan-eilenberg-augmentation-quasi-iso] to this explicitly constructed aug, its component equation, hbelow and hrows.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "lem-sp-kinjective-computes"
+    "lem-sp-cartan-eilenberg-augmentation-quasi-iso"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Adjoin $K^s$ in vertical degree -1, with augmentation as its outgoing differential. Each augmented row is acyclic since $a^s$ is a quasi-isomorphism. The total of this augmented bicomplex identifies, with the usual cone signs, with the cone of $\\epsilon$. Filter it by complex degree. On each diagonal the filtration is finite; its graded pieces are the shifted augmented rows and their homology is zero. The filtered cycle/boundary formula [def-sp-filtered-complex-subquotients] therefore has zero first page. For fixed total degree, take a page so large that the steps in degrees n-1, n and n+1 have reached their bounds. The cycles and boundaries are then stationary and their quotient is the corresponding graded piece of total cohomology. All these pieces vanish; the finite image filtration on cone cohomology then forces the cohomology itself to vanish. This is the augmented-row argument of Stacks 0133, with the comparison pinned to the actual augmentation. Consequently $\\epsilon$ is a quasi-isomorphism.",
+   "text": "Choose the lower bound b. Extension gives zero summands when r<0, and hbelow gives zero summands when s<b. A diagonal r+s=n below b is therefore all zero; coproduct hom_ext proves strict lower boundedness of the total. In degree n form CoreHasTotal with index set {s in Z | b≤s≤n}, φ₁(s)=n-s and φ₂(s)=s. Every omitted summand is zero. Transfer the given injectivity to each finite summand through extendXIso, then transfer injectivity of its finite biproduct through biproduct.isoCoproduct and the unique colimit-point isomorphism. Apply the Mathlib bounded-below-injectives theorem to this total.",
    "uses": [
-    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
-    "def-sp-filtered-complex-subquotients",
-    "def-sp-filtration"
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
    ],
    "elementary": false
   }
@@ -54,16 +54,14 @@
  "proof_deps": [
   "def-sp-cartan-eilenberg-presentation",
   "def-sp-double-complex-total",
-  "def-sp-filtered-complex-subquotients",
-  "def-sp-filtration",
   "def-sp-injective-resolutions",
-  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
-  "lem-sp-kinjective-computes"
+  "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
-  "place": "Proof paragraph 2: the finite injective total and its augmented-row quasi-isomorphism (Stacks 0133; 015J, proof remark 3)"
+  "place": "Proof paragraph 2, implemented by W3: explicit augmentation and finite injective diagonals; quasi-isomorphism separated as lem-sp-cartan-eilenberg-augmentation-quasi-iso"
  },
  "mathlib_searches": [
   {
@@ -135,9 +133,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T070551-L-3477347",
+  "landing": "20261012T095931-L-327283",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
