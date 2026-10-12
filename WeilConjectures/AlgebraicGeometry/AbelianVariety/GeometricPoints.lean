@@ -183,7 +183,7 @@ prime to `p` and let `K'` be an algebraically closed field extension of `K`. The
 `A(K')` is the group of `K'`-points of the abelian variety `A_{K'}`
 (`AlgebraicGeometry.Scheme.pointsAddEquivBaseChangePoints`), hence divisible. For a prime
 `ℓ ∣ n`, the `ℓ`-torsion of `A(K')` is the set of `K'`-points of `A[ℓ]`
-(`AlgebraicGeometry.torsionByEquivHom`), that is of the finite étale `A[ℓ]_{K'}`, which has
+(`AlgebraicGeometry.torsionByPointsEquiv`), that is of the finite étale `A[ℓ]_{K'}`, which has
 `ℓ ^ (2 * g)` of them (`AlgebraicGeometry.card_points_eq_finrankΓ`); then
 `AddSubgroup.nonempty_addEquiv_torsionBy_of_forall_prime` concludes. -/
 theorem nonempty_addEquiv_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p] (n : ℕ)
@@ -209,7 +209,7 @@ theorem nonempty_addEquiv_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p
     inferInstanceAs (IsFinite (pullback.snd _ _))
   have : Etale ((Over.pullback y).obj (torsionSubgroupScheme A ℓ)).hom :=
     inferInstanceAs (Etale (pullback.snd _ _))
-  rw [Nat.card_congr (torsionByEquivHom A ℓ (Over.mk y))]
+  rw [Nat.card_congr (torsionByPointsEquiv A ℓ (Over.mk y))]
   calc Nat.card (Over.mk y ⟶ torsionSubgroupScheme A ℓ)
       = Nat.card (𝟙_ (Over (Spec (.of K'))) ⟶ (Over.pullback y).obj (torsionSubgroupScheme A ℓ)) :=
         Nat.card_congr (pointsAddEquivBaseChangePoints _ y).toEquiv

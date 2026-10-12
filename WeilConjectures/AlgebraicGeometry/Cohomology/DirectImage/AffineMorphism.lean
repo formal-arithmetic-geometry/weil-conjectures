@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -126,8 +127,8 @@ Coherence is spelled as quasi-coherence together with finite presentation.
 This is the case `T = Spec k` of the finiteness of the higher direct images along a proper
 morphism to a Noetherian affine scheme
 (`AlgebraicGeometry.Scheme.Modules.finite_sections_higherDirectImage`), transported along the
-identification `Γ(Spec k, R^q f_* ℱ) ≅ H^q(X, ℱ)`
-(`AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`).
+identification `Γ(Spec k, R^q f_* ℱ) ≅ H^q(X, ℱ)`, which holds for every morphism to the
+spectrum of a field (`exists_bijective_semilinearMap_sections_higherDirectImage_H_of_field`).
 -/
 @[stacks 02O5]
 theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules)
@@ -138,7 +139,7 @@ theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X
   have := isGrothendieckAbelian X
   have : IsNoetherianRing Γ(Spec (.of k), ⊤) :=
     isNoetherianRing_of_ringEquiv _ (Scheme.ΓSpecIso (.of k)).commRingCatIsoToRingEquiv.symm
-  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H
+  obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H_of_field
     (X ↘ Spec (.of k)) ℱ q
   obtain ⟨s, hs⟩ := (finite_sections_higherDirectImage (X ↘ Spec (.of k)) ℱ q).fg_top
   have key (x) (hx : x ∈ Submodule.span Γ(Spec (.of k), ⊤) (s : Set _)) :
@@ -159,26 +160,6 @@ theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X
   rw [Finset.coe_image]
   exact key x (hs ▸ Submodule.mem_top)
 
-
-/-- **Vanishing of the cohomology in large degrees** of a quasi-coherent module on a proper scheme
-over a field: `H^q(X, ℱ) = Γ(Spec k, R^q f_* ℱ)` (`exists_addEquiv_sections_higherDirectImage_H`),
-and the higher direct images vanish in large degrees
-(`AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage`). -/
-theorem exists_forall_subsingleton_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules)
-    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
-    ∃ D : ℕ, ∀ q, D < q → Subsingleton (ℱ.H q) := by
-  have := isGrothendieckAbelian X
-  obtain ⟨N, hN⟩ := exists_isZero_higherDirectImage (X ↘ Spec (.of k)) ℱ
-  refine ⟨N, fun q hq ↦ ?_⟩
-  obtain ⟨e, -⟩ := exists_addEquiv_sections_higherDirectImage_H (X ↘ Spec (.of k)) q
-  have h0 := (hN q hq.le).eq_of_src (𝟙 _) 0
-  have : Subsingleton Γ((higherDirectImage (X ↘ Spec (.of k)) q).obj ℱ, ⊤) :=
-    ⟨fun a b ↦ by
-      have ha := congrArg (fun φ ↦ (φ.app ⊤) a) h0
-      have hb := congrArg (fun φ ↦ (φ.app ⊤) b) h0
-      simp only [Hom.id_app, Hom.zero_app] at ha hb
-      exact ha.trans hb.symm⟩
-  exact (e ℱ).toEquiv.symm.subsingleton
 end Finiteness
 
 end AlgebraicGeometry.Scheme.Modules
