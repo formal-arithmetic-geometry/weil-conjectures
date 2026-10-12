@@ -7,16 +7,38 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Decompose the six-step Tag 0ALH argument at this intermediate conclusion.",
+   "text": "The identity map A to A is an etale neighbourhood of (A,I): the canonical quotient map is the inverse of the quotient equivalence induced by map_id. If A/I is the zero ring, take A prime=A and the factors f and 1; the reduction identity holds by subsingleton elimination.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If A/I is nonzero, monicity preserves natDegree under the quotient map and adds natDegrees under multiplication. Set m=natDegree(g0), k=natDegree(h0), so natDegree(f)=m+k. Construct p as MonicDegreeEq.mk f hf rfl, and B as UniversalCoprimeFactorizationRing m k hn p with its explicit universal factors G,H. Apply homEquiv inverse to the given coprime factorization to construct the unique A-algebra map s:B to A/I. The forward-inverse identity proves G.map s=g0.",
+   "uses": [
+    "lem-weil-pbc-universal-coprime-factorization-ring"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply etale_section_neighbourhood_refinement to the identity neighbourhood, the etale map A to B, and s. Obtain a neighbourhood N, a map t:B to N, and r:N to A/I, with t compatible with the structure map, r fixing A, and r composed with t equal to s. This packages the quotient section, idempotent localization and quotient-localization steps of Tag 0ALH.",
+   "uses": [
+    "lem-weil-pbc-etale-section-neighbourhood-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put A prime=N and phi its structure map; its etaleness and quotient bijectivity are the neighbourhood properties. The section r kills I.map phi, so quotient lift gives beta:A prime/(I.map phi) to A/I. Check beta composed with alpha is the identity on quotient representatives. Surjectivity of alpha then shows beta injective. Take g prime=G.map t and h prime=H.map t. Monicity and the product identity map to the required factorization, using the Under morphism compatibility. Apply Polynomial.map_injective beta to prove the first reduction: beta composed with the quotient map composed with t is s, while beta composed with alpha is the identity. Thus the universal factor reduction proves the result.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-section-neighbourhood-refinement",
+  "lem-weil-pbc-universal-coprime-factorization-ring"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma Tag 0ALH proof"
+  "place": "Tag 0ALH proof; universal coprime factorization algebra and the existing Tag 0A02 etale section neighbourhood refinement package"
  },
  "mathlib_searches": [
   {
@@ -108,10 +130,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T113945-L-820245",
-  "kind": "interface",
+  "landing": "20261012T144114-L-2096595",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
