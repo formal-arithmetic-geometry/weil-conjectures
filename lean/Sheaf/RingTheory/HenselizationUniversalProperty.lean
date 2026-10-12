@@ -7,10 +7,7 @@ module
 
 public import Sheaf.RingTheory.PairHenselization
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
-import Sheaf.RingTheory.EtaleSectionLiftingOfGabberRoots
-import Sheaf.RingTheory.HenselianFactorizationCriterion
-import Sheaf.RingTheory.IdempotentsDeterminedModuloRadical
+import Sheaf.RingTheory.HenselizationStageMap
 
 /-!
 # Universal property of the henselization of a pair
@@ -70,6 +67,56 @@ theorem henselization_universal_property (B : Type u) [CommRing B] (J : Ideal B)
       RingHom.comp ψ (CommRingCat.Hom.hom c.pt.hom) = φ ∧
         (J.map (CommRingCat.Hom.hom c.pt.hom)).map ψ ≤ I' ∧
         ∀ ψ' : c.pt.right →+* A', RingHom.comp ψ' (CommRingCat.Hom.hom c.pt.hom) = φ → ψ' = ψ := by
-  sorry
+  classical
+  let P := fun C : Under (CommRingCat.of B) ↦
+    AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧
+      Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom
+        (Ideal.le_comap_map))
+  have hs (C : ObjectProperty.FullSubcategory P) :
+      ∃! τ : C.obj.right →+* A', τ.comp C.obj.hom.hom = φ :=
+    existsUnique_henselization_stage_map B J C.obj.right C.obj.hom.hom
+      C.property.1 C.property.2 A' I' φ hφ
+  choose τ hτ huniq using hs
+  let d : Cocone (ObjectProperty.ι P) :=
+    { pt := Under.mk (CommRingCat.ofHom φ)
+      ι :=
+        { app := fun C ↦ Under.homMk (CommRingCat.ofHom (τ C))
+            (by apply CommRingCat.hom_ext; exact hτ C)
+          naturality := by
+            intro C D g
+            apply Under.UnderMorphism.ext
+            apply CommRingCat.hom_ext
+            change (τ D).comp g.hom.right.hom = τ C
+            apply huniq C
+            rw [RingHom.comp_assoc]
+            have hg : g.hom.right.hom.comp C.obj.hom.hom = D.obj.hom.hom :=
+              congrArg CommRingCat.Hom.hom (Under.w g.hom)
+            rw [hg, hτ D] } }
+  let H := hc.some
+  let m := H.desc d
+  have hm : m.right.hom.comp c.pt.hom.hom = φ :=
+    congrArg CommRingCat.Hom.hom (Under.w m)
+  refine ⟨m.right.hom, hm, ?_, ?_⟩
+  · rw [Ideal.map_map, hm]
+    exact hφ
+  · intro ψ' hψ'
+    let m' : c.pt ⟶ d.pt := Under.homMk (CommRingCat.ofHom ψ')
+      (by apply CommRingCat.hom_ext; exact hψ')
+    have heq : m' = m := by
+      apply H.hom_ext
+      intro C
+      apply Under.UnderMorphism.ext
+      apply CommRingCat.hom_ext
+      change ψ'.comp (c.ι.app C).right.hom =
+        m.right.hom.comp (c.ι.app C).right.hom
+      have hstage (q : c.pt.right →+* A') (hq : q.comp c.pt.hom.hom = φ) :
+          q.comp (c.ι.app C).right.hom = τ C := by
+        apply huniq C
+        rw [RingHom.comp_assoc]
+        have hi : (c.ι.app C).right.hom.comp C.obj.hom.hom = c.pt.hom.hom :=
+          congrArg CommRingCat.Hom.hom (Under.w (c.ι.app C))
+        rw [hi, hq]
+      rw [hstage ψ' hψ', hstage m.right.hom hm]
+    exact congrArg (fun q ↦ q.right.hom) heq
 
 end RingTheory

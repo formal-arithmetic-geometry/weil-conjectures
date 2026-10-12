@@ -26,116 +26,22 @@
  ],
  "proof": [
   {
-   "text": "*Set-up: $\\eta$ and the coprojections.* View $A'$ as a $B$-algebra via $\\varphi$. By [lem-weil-pbc-pair-henselization] (1) the category $\\mathcal C$ is essentially small and filtered and $B^h=\\varinjlim_{\\mathcal C}C$ is the colimit in commutative $B$-algebras [def-weil-pbc-category-colimit], with coprojections $\\iota_C:C\\to B^h$ ($B$-algebra maps, $\\iota_{C_2}\\circ\\beta=\\iota_{C_1}$ for every morphism $\\beta:C_1\\to C_2$ of $\\mathcal C$); by [lem-weil-pbc-filtered-colimit-algebras-elementwise] (1) $(B^h,(\\iota_C))$ is also a colimit of the underlying diagram of commutative rings. $B$ with $\\mathrm{id}_B$ is an object of $\\mathcal C$: $\\operatorname{Spec}(\\mathrm{id}_B)$ is an isomorphism, hence an open immersion, hence etale [lem-weil-pbc-etale-composition-cancellation] (1), and $B/J\\to B/J$ is the identity; $\\eta=\\iota_B$. For every object $C$ with structure map $u_C:B\\to C$, $u_C$ is a $B$-algebra map, i.e. a morphism $B\\to C$ of $\\mathcal C$, so $\\iota_C\\circ u_C=\\iota_B=\\eta$ (cocone condition).",
+   "text": "Apply the unique-stage-map lemma to each object. Stagewise uniqueness makes the chosen maps compatible with every diagram morphism, yielding a cocone with point Under.mk φ. Descend it through the supplied colimit in the under category. The under-morphism equation gives the factorization; Ideal.map_map and hφ give ideal inclusion. Any competing factorization is an under morphism; stagewise uniqueness makes its composites with all cocone legs equal to those of the descended map. IsColimit.hom_ext proves equality.",
    "uses": [
-    "lem-weil-pbc-pair-henselization",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'It is nonempty because $\\mathrm{id}:A\\to A$ is an object', '$A^h=\\colim_{B\\in\\mathcal C}B$'; the identification $\\eta=\\iota_B$ and the colimit of rings are implicit in Stacks"
-   }
-  },
-  {
-   "text": "*$(A',I')$: radical and Gabber's root condition.* Since $(A',I')$ is henselian [def-weil-pbc-henselian-terminology], [lem-weil-pbc-henselian-factorization-criterion] ($\\Rightarrow$) gives (i) $I'$ is contained in the Jacobson radical of $A'$, and (ii) every coprime monic factorization modulo $I'$ of a monic polynomial over $A'$ lifts to a factorization into monic polynomials. Gabber's root condition follows: let $h(T)=T^r(T-1)+c_rT^r+\\dots+c_1T+c_0\\in A'[T]$ with $r\\ge1$ and $c_0,\\dots,c_r\\in I'$; then $h$ is monic and $\\bar h=T^r\\cdot(T-1)$ in $(A'/I')[T]$, with $T^r$, $T-1$ monic and generating the unit ideal ($1=T^r-(T-1)(T^{r-1}+\\dots+T+1)$). By (ii) $h=gu$ with $g,u$ monic, $\\bar g=T^r$, $\\bar u=T-1$; $u$ is monic of degree $1$, so $u=T-\\alpha$ with $\\alpha\\in1+I'$, and $h(\\alpha)=g(\\alpha)u(\\alpha)=0$. So $(A',I')$ satisfies hypotheses (a) and (b) of [lem-weil-pbc-gabber-root-criterion-etale-section-lifting]. (This is Stacks' Lemma Tag 09XI (lemma-characterize-henselian-pair), (1)$\\Rightarrow$(5), with the DAG's definition (09XI (3)) converted to (1) by [lem-weil-pbc-henselian-factorization-criterion]; the same argument is step 4 of [lem-weil-pbc-henselian-pair-approximation].)",
-   "uses": [
-    "def-weil-pbc-henselian-terminology",
-    "lem-weil-pbc-henselian-factorization-criterion",
-    "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (1)$\\Rightarrow$(5): 'The factorization of $f \\bmod I$ as $T^n$ times $T-1$ lifts to a factorization $f=gh$ ... $I$ is contained in the Jacobson radical by the definition of a henselian pair'"
-   }
-  },
-  {
-   "text": "*The etale $A'$-algebras $C'$.* For an object $C$ of $\\mathcal C$ put $C'=A'\\otimes_BC$, an $A'$-algebra via $a'\\mapsto a'\\otimes1$, and $\\kappa_C:C\\to C'$, $c\\mapsto1\\otimes c$. Since $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ is etale, $\\operatorname{Spec}C'\\to\\operatorname{Spec}A'$ is etale [lem-weil-pbc-etale-ring-base-change]. Reduction modulo $I'$: as $\\varphi(J)\\subseteq I'$, $J$ acts by $0$ on $A'/I'$, so $C'/I'C'=(A'/I')\\otimes_BC=(A'/I')\\otimes_{B/J}(C/JC)$, and since $B/J\\to C/JC$ is an isomorphism the map $A'/I'\\to C'/I'C'$ is an isomorphism. Hence there is exactly one $A'$-algebra map $\\rho_C:C'\\to A'/I'$: existence, the quotient map followed by the inverse isomorphism; uniqueness, an $A'$-algebra map $C'\\to A'/I'$ kills $I'C'$ and so factors through $C'/I'C'$, every element of which is the image of an element of $A'$.",
-   "uses": [
-    "lem-weil-pbc-etale-ring-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization, line 2980), last paragraph: 'for each $A\\to B$ in $\\mathcal C$ the ring map $A'\\to B'=A'\\otimes_AB$ is \\'etale and induces an isomorphism $A'/I'\\to B'/I'B'$'; the computation modulo $I'$ is written out by the agent"
-   }
-  },
-  {
-   "text": "*Existence of sections $\\sigma_C$.* Let $C$ be an object and $\\pi':A'\\to A'/I'$ the quotient map. Apply [lem-weil-pbc-gabber-root-criterion-etale-section-lifting] to $(A',I')$ (hypotheses (a), (b) by step 2), the etale ring map $A'\\to C'$ (step 3) and the $A'$-algebra map $\\rho_C:C'\\to A'/I'$ (step 3): there is an $A'$-algebra map $\\sigma_C:C'\\to A'$ with $\\pi'\\circ\\sigma_C=\\rho_C$, i.e. a section of $A'\\to C'$.",
-   "uses": [
-    "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization, line 2980), last paragraph: 'Hence there is a section $\\sigma_B:B'\\to A'$ by Lemma \\ref{lemma-characterize-henselian-pair}' (Tag 09XI, (1)$\\Rightarrow$(2), here through (5)$\\Rightarrow$(2))"
-   }
-  },
-  {
-   "text": "*Uniqueness of sections.* Let $C$ be an object and $\\sigma,\\sigma':C'\\to A'$ two $A'$-algebra maps. Put $D=C'\\otimes_{A'}C'$, a $C'$-algebra via $x\\mapsto x\\otimes1$, and let $\\mu:D\\to C'$, $x\\otimes y\\mapsto xy$, a $C'$-algebra map. $\\operatorname{Spec}D\\to\\operatorname{Spec}C'$ is etale, as the base change of the etale $A'\\to C'$ (step 3) along $A'\\to C'$ [lem-weil-pbc-etale-ring-base-change]; so by [lem-weil-pbc-etale-section-idempotent-splitting] (with $R=C'$, $S=D$, $s=\\mu$) there is an idempotent $e\\in D$ with $\\mu(e)=1$ and $\\ker\\mu=(1-e)D$ (this is Algebra Lemma Tag 02FL, lemma-diagonal-unramified, for the etale map $A'\\to C'$: $D=D_e\\times(1-e)D$ with $D_e\\cong C'$). Let $\\theta:D\\to A'$, $x\\otimes y\\mapsto\\sigma(x)\\sigma'(y)$, a ring map, and $f=\\theta(1-e)$, an idempotent of $A'$. Both $\\pi'\\circ\\sigma$ and $\\pi'\\circ\\sigma'$ are $A'$-algebra maps $C'\\to A'/I'$, so both equal $\\rho_C$ (step 3); hence $\\pi'\\circ\\theta=\\pi'\\circ\\sigma\\circ\\mu$ (on $x\\otimes y$: $\\pi'\\sigma(x)\\,\\pi'\\sigma'(y)=\\pi'\\sigma(x)\\,\\pi'\\sigma(y)=\\pi'\\sigma(xy)$), and $\\pi'(f)=\\pi'\\sigma(\\mu(1-e))=0$, i.e. $f\\in I'$. The idempotents $f$ and $0$ of $A'$ differ by an element of $I'$, which lies in the Jacobson radical (step 2), so $f=0$ [lem-weil-pbc-idempotents-determined-modulo-radical] (Stacks: '$e=(\\sigma_B\\otimes\\sigma_B')(0,1)$ is an idempotent contained in $I'$'). Hence $\\theta(e)=1$ and $\\theta$ kills $(1-e)D=\\ker\\mu$. For $x\\in C'$, $x\\otimes1-1\\otimes x\\in\\ker\\mu$, so $\\sigma(x)-\\sigma'(x)=\\theta(x\\otimes1-1\\otimes x)=0$. Thus $\\sigma_C$ is the unique $A'$-algebra map $C'\\to A'$.",
-   "uses": [
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-etale-section-idempotent-splitting",
-    "lem-weil-pbc-idempotents-determined-modulo-radical"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization, line 2980), last paragraph: 'This follows once we prove that for every $B$ in $\\mathcal C$ the section $\\sigma_B$ is the unique $A'$-algebra map $B'\\to A'$. We have $B'\\otimes_{A'}B'=B'\\times R$ for some ring $R$, see Algebra, Lemma 02FL ... We conclude that $e=0$ by Lemma 09XF'; the decomposition of $D$ is obtained from the section $\\mu$ instead of Algebra Lemma Tag 02FL (algebra.tex line 41550), and $\\sigma=\\sigma'$ is deduced from $\\theta(e)=1$ by the agent"
-   }
-  },
-  {
-   "text": "*Compatibility; existence of $\\psi$.* For an object $C$ put $\\psi_C=\\sigma_C\\circ\\kappa_C:C\\to A'$, a ring map; it is a $B$-algebra map, since $\\kappa_C(u_C(b))=1\\otimes u_C(b)=\\varphi(b)\\otimes1$ and $\\sigma_C$ is $A'$-linear, so $\\psi_C(u_C(b))=\\varphi(b)$. Let $\\beta:C_1\\to C_2$ be a morphism of $\\mathcal C$ and $\\beta'=\\mathrm{id}_{A'}\\otimes\\beta:C_1'\\to C_2'$, an $A'$-algebra map with $\\beta'\\circ\\kappa_{C_1}=\\kappa_{C_2}\\circ\\beta$. Then $\\sigma_{C_2}\\circ\\beta'$ is an $A'$-algebra map $C_1'\\to A'$, so it equals $\\sigma_{C_1}$ (step 5), and $\\psi_{C_2}\\circ\\beta=\\sigma_{C_2}\\circ\\beta'\\circ\\kappa_{C_1}=\\psi_{C_1}$. So $(A',(\\psi_C))$ is a cocone of $B$-algebras, and there is a $B$-algebra map $\\psi:B^h\\to A'$ with $\\psi\\circ\\iota_C=\\psi_C$ for all $C$ [def-weil-pbc-category-colimit]. For $C=B$ (step 1), the map $m:B'=A'\\otimes_BB\\to A'$, $a'\\otimes b\\mapsto a'\\varphi(b)$, is an $A'$-algebra map, so $\\sigma_B=m$ (step 5) and $\\psi\\circ\\eta=\\psi\\circ\\iota_B=\\psi_B=m\\circ\\kappa_B=\\varphi$.",
-   "uses": [
+    "lem-weil-pbc-henselization-stage-map",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization, line 2980), last paragraph: 'Given a morphism $B_1\\to B_2$ in $\\mathcal C$ we claim the diagram ... commutes ... Using the commutativity we obtain $A^h=\\colim B\\to\\colim A'\\otimes_AB\\xrightarrow{\\colim\\sigma_B}A'$ as desired'"
-   }
-  },
-  {
-   "text": "*Uniqueness of $\\psi$.* Let $\\psi':B^h\\to A'$ be a ring map with $\\psi'\\circ\\eta=\\varphi$. For an object $C$, $\\chi_C=\\psi'\\circ\\iota_C:C\\to A'$ is a ring map with $\\chi_C\\circ u_C=\\psi'\\circ\\eta=\\varphi$ (step 1), i.e. a $B$-algebra map; by the universal property of the tensor product of commutative $B$-algebras there is an $A'$-algebra map $\\tau_C:C'=A'\\otimes_BC\\to A'$, $a'\\otimes c\\mapsto a'\\chi_C(c)$, with $\\tau_C\\circ\\kappa_C=\\chi_C$. By step 5, $\\tau_C=\\sigma_C$, so $\\psi'\\circ\\iota_C=\\psi_C=\\psi\\circ\\iota_C$ for every object $C$. Since $B^h$ with the $\\iota_C$ is a colimit of the diagram of commutative rings (step 1), the ring maps $\\psi$ and $\\psi'$ agreeing on all coprojections are equal [def-weil-pbc-category-colimit].",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization, line 2980), last paragraph: 'The uniqueness of the maps $\\sigma_B$ also guarantees that this map is unique'; written out by the agent"
-   }
-  },
-  {
-   "text": "*$\\psi(J^h)\\subseteq I'$.* $J^h=JB^h$ consists of the sums $\\sum_k\\eta(j_k)x_k$ with $j_k\\in J$, $x_k\\in B^h$, and $\\psi(\\sum_k\\eta(j_k)x_k)=\\sum_k\\varphi(j_k)\\psi(x_k)\\in I'$ because $\\varphi(J)\\subseteq I'$ and $I'$ is an ideal.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0A02 (lemma-henselization): $(A,I)\\to(A^h,I^h)$ with $I^h=IA^h$ is a morphism of pairs; the inclusion is not written out in Stacks"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-pair-henselization",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-henselian-factorization-criterion",
-  "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
-  "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-etale-section-idempotent-splitting",
-  "lem-weil-pbc-idempotents-determined-modulo-radical"
+  "lem-weil-pbc-henselization-stage-map",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0A02 (lemma-henselization), last paragraph of the proof; the section existence of 09XI (1)=>(2) is realized through the DAG's (3)<=>(1) [lem-weil-pbc-henselian-factorization-criterion], (1)=>(5) (step 2) and (5)=>(2) [lem-weil-pbc-gabber-root-criterion-etale-section-lifting]; the diagonal decomposition of Algebra Lemma Tag 02FL is obtained, for the etale case, from the multiplication section and [lem-weil-pbc-etale-section-idempotent-splitting]; the reduction mod I' (step 3), the identification eta = iota_B (step 1) and the uniqueness of psi (step 7) are written out by the agent"
+  "place": "Tag 0A02, final paragraph: stagewise sections and compatibility followed by colimit descent; under-category descent implemented directly with Mathlib IsColimit.desc and hom_ext"
  },
  "mathlib_searches": [
   {
@@ -218,5 +124,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638200",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
