@@ -24,67 +24,40 @@
  ],
  "proof": [
   {
-   "text": "*The coproduct as a sheafified presheaf direct sum.* Let $\\mathcal P$ be the presheaf of $\\mathcal O_X$-modules with $\\mathcal P(U)=\\bigoplus_{i\\in I}\\mathcal F_i(U)$, the direct sum of $\\mathcal O_X(U)$-modules (families $(s_i)_i$, $s_i\\in\\mathcal F_i(U)$, with $s_i=0$ for all but finitely many $i$), restriction maps $(s_i)_i\\mapsto(s_i|_V)_i$, and inclusions $\\mathrm{in}_j:\\mathcal F_j\\to\\mathcal P$. By [lem-weil-pbc-presheaf-modules-colimits-sectionwise] (for the discrete diagram on $I$) $(\\mathcal P,(\\mathrm{in}_j)_j)$ is a coproduct of the $\\mathcal F_i$ in presheaves of $\\mathcal O_X$-modules. Let $\\theta:\\mathcal P\\to\\mathcal P^\\#$ be its sheafification as a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification] on the site of open subsets of $X$. By [lem-weil-pbc-module-sheaves-colimits-forgetful] (2), $\\mathcal P^\\#$ with the maps $\\iota_j=\\theta\\circ\\mathrm{in}_j$ is a coproduct of the $\\mathcal F_i$ in $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]; since coproducts are unique up to unique isomorphism compatible with the injections, we may take $\\bigoplus_i\\mathcal F_i=\\mathcal P^\\#$ with injections $\\iota_j$. Infinite $I$ is allowed: only sections of $\\mathcal P$, not of $\\mathcal P^\\#$, are finitely supported.",
+   "text": "Let T = SheafOfModules.forget R followed by PresheafOfModules.moduleStalkFunctor R.obj x. Its underlying abelian-group functor is definitionally SheafOfModules.toSheaf R followed by the abelian sheaf stalk functor. The former preserves coproducts by moduleSheaves_colimits_forgetful, applied to Discrete I. The latter is a left adjoint by Mathlib TopCat.stalkSkyscraperSheafAdjunction, so preserves colimits. Therefore T followed by the module-to-abelian-group forgetful functor preserves coproducts. That forgetful functor reflects colimits (Mathlib ModuleCat.Colimits), so T preserves coproducts by preservesColimitsOfShape_of_reflects_of_preserves.",
    "uses": [
-    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-pbc-module-stalk",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Section 009E (section-limits-sheaves), items (3) and (5): colimits of sheaves are sheafified presheaf colimits, and stalks commute with colimits"
-   }
+   "elementary": false
   },
   {
-   "text": "*Sheafification does not change the stalk.* By [def-weil-presheaf-modules-sheafification] the underlying sheaf of abelian groups of $\\mathcal P^\\#$ is the abelian sheafification of $\\mathcal P$, with $\\theta$ as its unit, and $\\theta$ is $\\mathcal O_X$-linear. By [lem-weil-pbc-stalk-sheafification-space] the map $\\theta_x:\\mathcal P_x\\to\\mathcal P^\\#_x$, $p_x\\mapsto\\theta_U(p)_x$, is an isomorphism of abelian groups. It is $\\mathcal O_{X,x}$-linear: for $a=r_x$, $\\xi=p_x$ with $r\\in\\mathcal O_X(U)$, $p\\in\\mathcal P(U)$ (a common neighbourhood exists since the neighbourhoods of $x$ are directed), $\\theta_x(a\\xi)=\\theta_U(rp)_x=(r\\,\\theta_U(p))_x=a\\,\\theta_x(\\xi)$ [def-weil-pbc-module-stalk]. So $\\theta_x$ is an isomorphism of $\\mathcal O_{X,x}$-modules.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-stalk-sheafification-space",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Section 009E (section-limits-sheaves), items (3) and (5): colimits of sheaves are sheafified presheaf colimits, and stalks commute with colimits"
-   }
-  },
-  {
-   "text": "*Stalks of the presheaf direct sum (filtered colimits commute with direct sums).* Define $\\psi:\\mathcal P_x\\to\\bigoplus_i(\\mathcal F_i)_x$ by $\\psi(((s_i)_i)_x)=((s_i)_x)_i$ for $(s_i)_i\\in\\mathcal P(U)$, $x\\in U$; the right side is finitely supported because $(s_i)_i$ is. It is well defined, additive and $\\mathcal O_{X,x}$-linear, since restriction and multiplication by $r\\in\\mathcal O_X(U)$ act componentwise on $\\mathcal P(U)$ and germs satisfy $(s|_W)_x=s_x$, $(rs)_x=r_xs_x$ [def-weil-pbc-module-stalk]. Surjective: an element of $\\bigoplus_i(\\mathcal F_i)_x$ has finitely many nonzero components $(t_j)_x$, $t_j\\in\\mathcal F_j(U_j)$, $j\\in J$ finite; on $U=\\bigcap_{j\\in J}U_j$ the family with components $t_j|_U$ ($j\\in J$) and $0$ elsewhere lies in $\\mathcal P(U)$ and its germ maps to the element. Injective: if $\\psi(((s_i)_i)_x)=0$, the finitely many nonzero $s_j$ ($j\\in J$) have $(s_j)_x=0$, so $s_j|_{W_j}=0$ for neighbourhoods $W_j$ of $x$ [def-weil-pbc-module-stalk]; on $W=\\bigcap_{j\\in J}W_j$ the family restricts to $0$, so its germ is $0$. Hence $\\psi$ is an isomorphism of $\\mathcal O_{X,x}$-modules.",
+   "text": "Compose PreservesCoproduct.iso T F with ModuleCat.coprodIsoDirectSum (fun i => T.obj (F i)). The resulting categorical isomorphism has exactly the requested source and target module carriers. Its toLinearEquiv gives the required linear equivalence. This uses only the universal property of a coproduct, and works also for an empty index set.",
    "uses": [
     "def-weil-pbc-module-stalk"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Section 009E (section-limits-sheaves), items (3) and (5): colimits of sheaves are sheafified presheaf colimits, and stalks commute with colimits"
-   }
+   "elementary": true
   },
   {
-   "text": "*Conclusion.* Put $\\Phi=\\psi\\circ\\theta_x^{-1}:(\\bigoplus_i\\mathcal F_i)_x\\to\\bigoplus_i(\\mathcal F_i)_x$, an isomorphism of $\\mathcal O_{X,x}$-modules by the two preceding steps. For $s\\in\\mathcal F_j(U)$, $\\Phi((\\iota_j)_x(s_x))=\\Phi(\\theta_U(\\mathrm{in}_j s)_x)=\\psi((\\mathrm{in}_j s)_x)$, the family with $s_x$ in slot $j$ and $0$ elsewhere; so $\\Phi\\circ(\\iota_j)_x$ is the $j$-th injection of the module coproduct, i.e. $\\Phi$ is the canonical comparison map induced by the $(\\iota_j)_x$ [def-weil-pbc-module-stalk]. Naturality in the family: for morphisms $f_i:\\mathcal F_i\\to\\mathcal G_i$ both $\\theta_x$ and $\\psi$ commute with the induced maps, by the germ formulas.",
+   "text": "By PreservesCoproduct.inv_hom, the forward comparison is the inverse of sigmaComparison. Apply map_ι_comp_inv_sigmaComparison and ModuleCat.ι_coprodIsoDirectSum_hom to obtain T.map (Sigma.ι F i) followed by the composite isomorphism equals ModuleCat.ofHom (DirectSum.lof _ I _ i). Apply this morphism equality to germ s. By the definition of the module stalk map and Mathlib TopCat.Presheaf.stalkFunctor_map_germ_apply, T.map (Sigma.ι F i) sends germ s to the germ of the sheaf coproduct injection applied to s. This proves precisely the displayed compatibility with germs.",
    "uses": [
     "def-weil-pbc-module-stalk"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Section 009E (section-limits-sheaves), items (3) and (5): colimits of sheaves are sheafified presheaf colimits, and stalks commute with colimits"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-module-stalk",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-stalk-sheafification-space"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Section 009E (section-limits-sheaves), items (3) and (5)"
+  "place": "Section 009E, item (5); categorical implementation using the stalk-skyscraper adjunction and the coproduct universal property"
  },
  "mathlib_searches": [
   {
@@ -180,5 +153,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T225301-L-1801975",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

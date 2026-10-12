@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Mathlib.Topology.Sheaves.Skyscraper
+import Mathlib.Algebra.Category.ModuleCat.Products
 import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
@@ -35,20 +37,19 @@ The equation on germs specifies the canonical comparison in the stated direction
 Sectionwise commutativity makes the structure sheaf a sheaf of commutative rings,
 as required by the ringed-space convention of `def-weil-locally-ringed-space-morphism`.
 
-Proof: form the presheaf direct sum sectionwise, using
-`lem-weil-pbc-presheaf-modules-colimits-sectionwise`. Its sheafification is the sheaf
-coproduct by `lem-weil-pbc-module-sheaves-colimits-forgetful` (2) and
-`def-weil-presheaf-modules-sheafification`. The sheafification unit induces an isomorphism
-on stalks by `lem-weil-pbc-stalk-sheafification-space`; its linearity follows from
-`def-weil-pbc-module-stalk`, representing a scalar and a section on a common neighbourhood.
-The stalk of the presheaf direct sum maps to the direct sum of stalks componentwise.
-For surjectivity, represent the finitely many nonzero germs on a common neighbourhood,
-using the finite intersection of their neighbourhoods. For injectivity, a finitely
-supported section whose component germs vanish restricts to zero on a finite intersection
-of neighbourhoods where those components vanish. This map is linear by the germ formula
-for scalar multiplication. Compose it with the inverse of the sheafification stalk map.
-On the germ of a section in the i-th summand the composite is the i-th direct-sum injection,
-which identifies the canonical map. These formulas also commute with morphisms of families.
+Proof: compose the forgetful functor to presheaf modules with the linear module stalk
+functor of `def-weil-pbc-module-stalk`. After forgetting its target module structure,
+this is definitionally the forgetful functor to abelian sheaves followed by the abelian
+sheaf stalk functor. The former preserves coproducts by
+`lem-weil-pbc-module-sheaves-colimits-forgetful`; the latter preserves colimits by
+Mathlib's stalk-skyscraper adjunction. Since forgetting a module structure reflects
+colimits, the module stalk functor preserves coproducts. Compose its canonical
+coproduct comparison isomorphism with `ModuleCat.coprodIsoDirectSum`, and take the
+associated linear equivalence. The coproduct comparison carries each stalk injection
+to the corresponding categorical injection, and `coprodIsoDirectSum` carries this to
+`DirectSum.lof`. Applying this morphism identity to the germ of a section, and using
+`stalkFunctor_map_germ_apply`, gives the required formula. This argument works for
+arbitrary index sets, including the empty set, and does not require commutativity.
 -/
 theorem exists_stalk_directSum_linearEquiv
     {X : TopCat.{u}} (R : X.Sheaf RingCat.{u}) (I : Type u)
@@ -62,6 +63,45 @@ theorem exists_stalk_directSum_linearEquiv
           DirectSum.lof (stalk (C := RingCat.{u}) (X := X) R.obj x) I
             (fun j : I => ↑(stalk (C := AddCommGrpCat.{u}) (X := X) (F j).val.presheaf x)) i
             (germ (F i).val.presheaf U x hx s) := by
-  sorry
+  classical
+  let T := SheafOfModules.forget R ⋙ PresheafOfModules.moduleStalkFunctor R.obj x
+  -- The underlying abelian stalk functor preserves coproducts.
+  have : PreservesColimitsOfShape (Discrete I) (SheafOfModules.toSheaf R) :=
+    ((moduleSheaves_colimits_forgetful R).2.2.2.2.2 (Discrete I)).2.1
+  have : PreservesColimitsOfShape (Discrete I)
+      (TopCat.Sheaf.forget AddCommGrpCat.{u} X ⋙
+        TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x) :=
+    (stalkSkyscraperSheafAdjunction x).leftAdjoint_preservesColimits
+      |>.preservesColimitsOfShape
+  have : PreservesColimitsOfShape (Discrete I)
+      (T ⋙ forget₂ (ModuleCat.{u} (stalk (C := RingCat.{u}) (X := X) R.obj x)) AddCommGrpCat.{u}) :=
+    inferInstanceAs (PreservesColimitsOfShape (Discrete I)
+      (SheafOfModules.toSheaf R ⋙
+        (TopCat.Sheaf.forget AddCommGrpCat.{u} X ⋙
+          TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x)))
+  -- Forgetting the module structure reflects colimits.
+  have : PreservesColimitsOfShape (Discrete I) T :=
+    preservesColimitsOfShape_of_reflects_of_preserves T
+      (forget₂ (ModuleCat.{u} (stalk (C := RingCat.{u}) (X := X) R.obj x)) AddCommGrpCat.{u})
+  let e := PreservesCoproduct.iso T F ≪≫
+    ModuleCat.coprodIsoDirectSum (fun i => T.obj (F i))
+  refine ⟨e.toLinearEquiv, ?_⟩
+  intro i U hx s
+  -- Both categorical comparisons respect their coproduct injections.
+  have h : T.map (Sigma.ι F i) ≫ e.hom =
+      ModuleCat.ofHom (DirectSum.lof (stalk (C := RingCat.{u}) (X := X) R.obj x) I
+        (fun j => ↑(T.obj (F j))) i) := by
+    dsimp only [e, Iso.trans_hom]
+    rw [← Category.assoc]
+    have hh : (PreservesCoproduct.iso T F).hom = inv (sigmaComparison T F) := by
+      apply (cancel_mono (sigmaComparison T F)).1
+      simp only [← PreservesCoproduct.inv_hom, Iso.hom_inv_id, IsIso.inv_hom_id]
+    rw [hh, map_ι_comp_inv_sigmaComparison, ModuleCat.ι_coprodIsoDirectSum_hom]
+  have hg : (T.map (Sigma.ι F i)).hom (germ (F i).val.presheaf U x hx s) =
+      germ (∐ F).val.presheaf U x hx ((Sigma.ι F i).val.app (op U) s) := by
+    change PresheafOfModules.stalkAddMap (Sigma.ι F i).val _ = _
+    exact TopCat.Presheaf.stalkFunctor_map_germ_apply _ _ _ _ _
+  rw [← hg]
+  exact congrArg (fun f => f.hom (germ (F i).val.presheaf U x hx s)) h
 
 end SheafOfModules
