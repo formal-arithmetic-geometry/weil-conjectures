@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 
 /-!
 # Inverse image of representable sheaves on the small étale site
@@ -58,6 +57,46 @@ theorem nonempty_inverseImage_representable_iso
     Nonempty
       (Y.smallEtaleTopology.uliftYoneda.{v} ⋙ L ≅
         f.Etale ⋙ X.smallEtaleTopology.uliftYoneda.{v}) := by
-  sorry
+  let A := Y.smallEtaleTopology.uliftYoneda.{v} ⋙ L
+  let B := f.Etale ⋙ X.smallEtaleTopology.uliftYoneda.{v}
+  let e (V : Y.Etale) (F : Sheaf X.smallEtaleTopology (Type (max u v))) :
+      (A.obj V ⟶ F) ≃ (B.obj V ⟶ F) :=
+    ((_adj.homEquiv _ _).trans Y.smallEtaleTopology.uliftYonedaEquiv).trans
+      X.smallEtaleTopology.uliftYonedaEquiv.symm
+  have ee (V : Y.Etale) (F : Sheaf X.smallEtaleTopology (Type (max u v)))
+      (a : A.obj V ⟶ F) :
+      X.smallEtaleTopology.uliftYonedaEquiv (e V F a) =
+        Y.smallEtaleTopology.uliftYonedaEquiv (_adj.homEquiv _ _ a) := by
+    exact X.smallEtaleTopology.uliftYonedaEquiv.apply_symm_apply _
+  have er (V : Y.Etale) {F G : Sheaf X.smallEtaleTopology (Type (max u v))}
+      (a : A.obj V ⟶ F) (g : F ⟶ G) : e V G (a ≫ g) = e V F a ≫ g := by
+    apply X.smallEtaleTopology.uliftYonedaEquiv.injective
+    rw [ee, GrothendieckTopology.uliftYonedaEquiv_comp, ee,
+      _adj.homEquiv_naturality_right, GrothendieckTopology.uliftYonedaEquiv_comp]
+    rfl
+  have el {V W : Y.Etale} (g : V ⟶ W)
+      (F : Sheaf X.smallEtaleTopology (Type (max u v))) (a : A.obj W ⟶ F) :
+      e V F (A.map g ≫ a) = B.map g ≫ e W F a := by
+    apply X.smallEtaleTopology.uliftYonedaEquiv.injective
+    rw [ee]
+    change Y.smallEtaleTopology.uliftYonedaEquiv
+      (_adj.homEquiv _ _ (L.map (Y.smallEtaleTopology.uliftYoneda.map g) ≫ a)) =
+        X.smallEtaleTopology.uliftYonedaEquiv
+          (X.smallEtaleTopology.uliftYoneda.map (f.Etale.map g) ≫ e W F a)
+    rw [_adj.homEquiv_naturality_left,
+      ← GrothendieckTopology.uliftYonedaEquiv_naturality,
+      ← GrothendieckTopology.uliftYonedaEquiv_naturality, ee]
+    rfl
+  let E : A.op ⋙ coyoneda ≅ B.op ⋙ coyoneda :=
+    NatIso.ofComponents (fun V ↦
+      NatIso.ofComponents (fun F ↦ (e V.unop F).toIso) (by
+        intro F G g
+        ext a
+        exact er V.unop a g)) (by
+      intro V W g
+      ext F a
+      exact el g.unop F a)
+  exact ⟨(NatIso.removeOp
+    ((Coyoneda.fullyFaithful.whiskeringRight _).preimageIso E)).symm⟩
 
 end AlgebraicGeometry
