@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.EtaleSubsheafFinalOpen
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpenExistence
 
 /-! # The open locus where two étale sheaf sections agree
 
@@ -72,6 +71,25 @@ theorem existsUnique_etaleSections_equal_open (S : Scheme.{u})
             (S.smallGrothendieckTopology @Etale)
             (T.smallGrothendieckTopology @Etale)
             (Etale.isContinuous_overPullback (a ≫ V.hom)) _ _).unit.app F).hom.app (op V) t) := by
-  sorry
+  obtain ⟨W, hW⟩ := exists_etaleSections_equal_open S F V s t
+  refine ⟨W, hW, ?_⟩
+  intro W' hW'
+  apply le_antisymm
+  · obtain ⟨b, hb⟩ := (hW W'.toScheme W'.ι).mpr
+      ((hW' W'.toScheme W'.ι).mp ⟨𝟙 _, Category.id_comp _⟩)
+    intro x hx
+    have heq := congrArg (fun f : W'.toScheme ⟶ V.left ↦ f ⟨x, hx⟩) hb
+    rw [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply, Scheme.Opens.ι_apply] at heq
+    change (b ⟨x, hx⟩).val = x at heq
+    rw [← heq]
+    exact (b ⟨x, hx⟩).property
+  · obtain ⟨b, hb⟩ := (hW' W.toScheme W.ι).mpr
+      ((hW W.toScheme W.ι).mp ⟨𝟙 _, Category.id_comp _⟩)
+    intro x hx
+    have heq := congrArg (fun f : W.toScheme ⟶ V.left ↦ f ⟨x, hx⟩) hb
+    rw [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply, Scheme.Opens.ι_apply] at heq
+    change (b ⟨x, hx⟩).val = x at heq
+    rw [← heq]
+    exact (b ⟨x, hx⟩).property
 
 end AlgebraicGeometry
