@@ -5,12 +5,9 @@ public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
-import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity
-import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit
-import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
+import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
+import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology
 
 /-!
 # Strict-henselization stalk formula
@@ -102,6 +99,14 @@ theorem strictHenselizationStalkFormula
                       (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
                     |>.natTrans.app K)) ≫
             (strictHenselizationLerayHomologyIso s f n _).hom) := by
-  sorry
+  constructor
+  · exact (fun (_ : F.IsTorsion) ↦ unrestricted_strictHenselization_stalk f s F q) hF
+  · intro K _ n
+    obtain ⟨r, hr, _⟩ := existsUnique_strictHenselizationStalkRestriction s
+      ((DerivedCategory.Plus.homologyFunctor _ n).obj
+        ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K))
+    have := isIso_strictHenselizationStalkRestriction s _ r hr
+    have := isIso_strictHenselization_baseChange_globalHomology f s K n
+    exact ⟨r, hr, inferInstance⟩
 
 end AlgebraicGeometry.Etale
