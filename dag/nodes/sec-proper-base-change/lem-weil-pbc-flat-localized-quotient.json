@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-flat-localized-quotient",
+ "kind": "statement",
+ "title": "Flatness descends to localized quotients",
+ "statement": "Let $R\\to S$ be a homomorphism of commutative rings, $J\\subset R$ an ideal, $q_0\\subset S/JS$ a prime, $q$ its inverse image in $S$, $p=q\\cap R$, and $p_0=q_0\\cap(R/J)$. If $R_p\\to S_q$ is flat [def-weil-pbc-flat-ring-map], then $(R/J)_{p_0}\\to(S/JS)_{q_0}$ is flat. All localizations are at the complements of the indicated primes [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FE (lemma-resolve-special), proof, final paragraph: flat local parameter quotients and their separable residue extension"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Localization is flat. Compose R→R_p with the assumed flat local map to get R→S_q flat. The algebraOfLiesOver tower identifies the composite with the canonical map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Identify S_q/JS_q with (R/J)⊗_R S_q by quotIdealMapEquivQuotTensor. Flat base change gives flatness over R/J. The two expressions for JS_q, mapped directly from R and through S, agree by Ideal.map_map and the scalar tower.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-flat-module-quotient-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient localization instance and the prime-complement image identity make S_q/JS_q a localization of S/JS at q₀. IsLocalization.algEquiv identifies it with (S/JS)_{q₀}. Its restriction to R/J is an algebra equivalence, so flatness transports.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module.flat_iff_of_isLocalization converts flatness over R/J to flatness over (R/J)_{p₀}; the canonical lies-over algebra supplies the scalar tower.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "lem-weil-pbc-localization-at-prime-of-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FE (lemma-resolve-special), proof, final paragraph: flat local parameter quotients and their separable residue extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat base change to a quotient ring followed by localization preserves flatness",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no negative search verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.algEquiv",
+   "date": "2026-10-13",
+   "results": "10 hits, including IsLocalization.algEquiv and its formulas on fractions",
+   "verdict": "Used the localization algebra equivalence; no theorem for the combined local quotient map."
+  },
+  {
+   "tool": "grep",
+   "query": "quotIdealMapEquivQuotTensor|map_primeCompl_comap_of_surjective|residueFieldMap_bijective|separable.*filtered_colimit",
+   "date": "2026-10-13",
+   "results": "15 hits, including Algebra.TensorProduct.quotIdealMapEquivQuotTensor, Ideal.map_primeCompl_comap_of_surjective, RingHom.SurjectiveOnStalks.residueFieldMap_bijective",
+   "verdict": "Used quotient tensor and prime-complement identities for flatness; residue-field ingredients do not identify the parameter-generated closed fiber."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuParameterQuotientLocalFlatFiberData",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07FE, final paragraph; Flatness descends to localized quotients",
+   "via": [
+    "lem-weil-pbc-popescu-parameter-quotient-local-resolution",
+    "lem-weil-pbc-popescu-separable-parameter-quotient",
+    "lem-weil-pbc-popescu-parameter-quotient-local-flat-fiber-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FlatLocalizedQuotient",
+  "file": "lean/Sheaf/RingTheory/FlatLocalizedQuotient.lean",
+  "declaration": "RingHom.flat_localized_quotient_of_flat_localRingHom",
+  "statement": "theorem flat_localized_quotient_of_flat_localRingHom\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]\n    (J : Ideal R) (q₀ : PrimeSpectrum (S ⧸ J.map (algebraMap R S)))\n    (hflat : (Localization.localRingHom\n      ((q₀.asIdeal.comap (Ideal.Quotient.mk (J.map (algebraMap R S)))).under R)\n      (q₀.asIdeal.comap (Ideal.Quotient.mk (J.map (algebraMap R S))))\n      (algebraMap R S) rfl).Flat) :\n    letI := Localization.AtPrime.algebraOfLiesOver\n      (q₀.asIdeal.under (R ⧸ J)) q₀.asIdeal\n    RingHom.Flat (algebraMap (Localization.AtPrime (q₀.asIdeal.under (R ⧸ J)))\n      (Localization.AtPrime q₀.asIdeal))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T184312-L-4007694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T184312-L-4007694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

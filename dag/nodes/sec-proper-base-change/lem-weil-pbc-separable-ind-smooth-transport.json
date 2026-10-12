@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-separable-ind-smooth-transport",
+ "kind": "statement",
+ "title": "Ind-smoothness under compatible field identifications",
+ "statement": "Let $k\\to K$ be a separable extension of fields [def-weil-pbc-separable-field-extension], $R\\to S$ a homomorphism of commutative rings, and $e_R:R\\simeq k$, $e_S:S\\simeq K$ ring isomorphisms such that $e_S(r\\cdot1)=\\operatorname{algebraMap}_{k,K}(e_R(r))$ for all $r\\in R$. Assume $k,R$ lie in universe $u$, $K$ in universe $w$, and $S$ in universe $\\max(u,v,w)$. Then $S$ is a filtered colimit of smooth $R$-algebras [def-weil-pbc-filtered-colimit-smooth-algebras], with carriers and index category in universe $\\max(u,v,w)$ and its universal property in commutative $R$-algebras.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FE (lemma-resolve-special), proof, final paragraph: flat local parameter quotients and their separable residue extension"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-filtered-colimit-smooth-algebras"
+ ],
+ "proof": [
+  {
+   "text": "The finitely generated smooth k-subalgebras of K are a nonempty directed cover.",
+   "uses": [
+    "lem-kun-separable-smooth-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back their k-scalar actions along e_R and lift their carriers to the joint universe. Inclusions commute with the R-action. Smoothness follows by composing the smooth isomorphism e_R with the smooth map from k to each lifted subalgebra.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the directed indexing preorder as well. The inclusion cocone to ULift K is a colimit in types: the cover gives surjectivity, and injective inclusions detect equality. Reflect this colimit to commutative rings. Its ring descents commute with the R-action, checked on constants from one nonempty stage, so it is an R-algebra colimit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The compatibility hypothesis makes e_S followed by ULift.up an R-algebra equivalence. Transport the ind-smooth presentation along the inverse equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-separable-smooth-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FE (lemma-resolve-special), proof, final paragraph: flat local parameter quotients and their separable residue extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Separable field extensions are filtered colimits of smooth algebras, compatibly with ring isomorphisms of the base and target",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no negative search verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth.of_equiv",
+   "date": "2026-10-13",
+   "results": "Algebra.Smooth.of_equiv transports smoothness across an algebra equivalence",
+   "verdict": "Used to lift smooth subalgebra carriers; no complete ind-smooth base-and-target transport statement."
+  },
+  {
+   "tool": "grep",
+   "query": "FilteredColimit.isColimitOf|separable_extension_is_filtered_colimit_smooth|ind_iff_of_equivalence",
+   "date": "2026-10-13",
+   "results": "14 Mathlib hits, including Types.FilteredColimit.isColimitOf uses and ObjectProperty.ind_iff_of_equivalence; local Sheaf search found separable_extension_is_filtered_colimit_smooth",
+   "verdict": "Used the existing separable cover and Mathlib type-colimit criterion; the mixed-universe algebra colimit is proved directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuParameterQuotientLocalFlatFiberData",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07FE, final paragraph; Ind-smoothness under compatible field identifications",
+   "via": [
+    "lem-weil-pbc-popescu-parameter-quotient-local-resolution",
+    "lem-weil-pbc-popescu-separable-parameter-quotient",
+    "lem-weil-pbc-popescu-parameter-quotient-local-flat-fiber-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.SeparableIndSmoothTransport",
+  "file": "lean/Sheaf/FieldTheory/SeparableIndSmoothTransport.lean",
+  "declaration": "Algebra.ind_smooth_of_separable_ringEquivs",
+  "statement": "theorem ind_smooth_of_separable_ringEquivs\n    {k : Type u} {K : Type w} [Field k] [Field K] [Algebra k K]\n    {R : Type u} {S : Type (max u v w)}\n    [CommRing R] [CommRing S] [Algebra R S]\n    (hsep : IsSeparableExtension k K) (eR : R ≃+* k) (eS : S ≃+* K)\n    (hcompat : ∀ r : R, eS (algebraMap R S r) = algebraMap k K (eR r)) :\n    ObjectProperty.ind.{max u v w}\n      (fun B : CommAlgCat.{max u v w} R ↦ Smooth R B) (CommAlgCat.of R S)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T184312-L-4007694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T184312-L-4007694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
