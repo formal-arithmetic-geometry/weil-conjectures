@@ -1,6 +1,6 @@
 # Work queue
 
-64 items; claim with `tools/claim.py next <group> [--stage N]`.
+62 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -12,7 +12,7 @@
 | `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
 | `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
 
-## Stage 2: nodes to state (5)
+## Stage 2: nodes to state (4)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -20,11 +20,10 @@
 | `lem-sc-boundary-cech-injective-middle` | 1 | state | 1 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
-| `lem-weil-pbc-locally-constant-zero-locus-clopen` | 1 | state | 0 |
 
 Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (54)
+## Stage 3: modules to prove (53)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -37,7 +36,6 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder` | 2 | 1 | proof |
 | `Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison` | 2 | 1 | proof |
-| `Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.KernelCokernel` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
