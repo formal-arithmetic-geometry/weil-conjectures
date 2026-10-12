@@ -24,17 +24,17 @@
    "elementary": true
   },
   {
-   "text": "The ideal-product theorem makes JG quasi-coherent. Tensor pullback is naturally isomorphic to the standard pullback by uniqueness of left adjoints to module pushforward (both adjunctions are the recorded module pullback adjunction); transport the standard pullback quasi-coherence instance. Thus TG and T(JG) are quasi-coherent. Apply the quasi-coherent image theorem to T(i_G): its image is quasi-coherent and, on an affine U, its sections inside TG(U) are exactly the range of T(i_G)_U. The same ideal-product theorem identifies the image of k_G on U with I(U) TG(U), where I=J.comap f.",
+   "text": "The ideal-product theorem makes JG quasi-coherent. Tensor pullback is naturally isomorphic to the standard pullback by uniqueness of left adjoints to module pushforward (both adjunctions are the recorded module pullback adjunction); transport the standard pullback quasi-coherence instance. Thus TG and T(JG) are quasi-coherent. Apply the quasi-coherent image theorem to T(i_G): its image is quasi-coherent and, on an affine U, its sections inside TG(U) are exactly the range of T(i_G)_U. The same ideal-product theorem identifies the image of k_G on U with I(U) TG(U), where I=J.comap f. Reuse Scheme.image_range_affine, the proved private helper in AffinePushforwardIdealProduct, via a proof-only import all; it transfers the existing abelian image-section formula to chosen images. The affine pushforward theorem itself is not applied.",
    "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
     "lem-weil-pbc-module-pullback-quasi-coherent",
     "def-pc-module-pullback",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-affine-pushforward-ideal-product"
    ],
    "elementary": false
   },
   {
-   "text": "Put A=O_Y(V), B=O_X(U), rho=f.appLE, a=J(V) and M=G(V). The ideal-product formula identifies the range of i_G on V with aM. The affine pullback section comparison, natural for i_G, identifies the range of T(i_G) on U with the image of aM tensor_A B -> M tensor_A B. The section comparison is B-linear by its scalar compatibility clause and bijective, so transports submodules and images.",
+   "text": "Put A=O_Y(V), B=O_X(U), rho=f.appLE, a=J(V) and M=G(V). The ideal-product formula identifies the range of i_G on V with aM. Use the natural A-linear affine pullback section comparisons for JG and G and their surjectivity to reduce the range calculation to pure tensors. The pulled-back morphism itself is B-linear, so its range Q is a B-submodule; the comparison scalar-compatibility clause and injectivity are not needed.",
    "uses": [
     "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
     "lem-weil-pbc-module-pullback-affine-sections"
@@ -42,18 +42,22 @@
    "elementary": false
   },
   {
-   "text": "The tensor map image is exactly (a.map rho)(M tensor_A B). Indeed an element of aM is a finite sum of a_j m_j with a_j in a; its pure tensor with b maps to the sum of m_j tensor rho(a_j)b, so the image is contained in this ideal product. Conversely rho(a)(m tensor b)=(am) tensor b lies in the image for each a in a, and pure tensors generate the tensor product, while the elements rho(a) generate the extended ideal. These inclusions give equality. The affine ideal extension theorem identifies a.map rho with I(U). Transport the equality by the B-linear section comparison.",
+   "text": "Put Q equal to the B-linear range of the pulled-back inclusion on U. Naturality and surjectivity of the affine comparison reduce Q <= I(U) TG(U) to pure tensors of sections of JG. The affine ideal-product formula puts every such section in J(V) G(V); induction on sums of products and the tensor balancing identity put its image in I(U) TG(U). Conversely, for a in J(V) and a section n of TG(U), lift n through the surjective affine comparison and induct on pure tensors. The section a*m is in the range of JG(V) -> G(V); a lift r supplies the preimage c_JG(r tensor b) of rho(a)*c_G(m tensor b). Induct on the ideal span defining Ideal.map to obtain I(U) TG(U) <= Q. The ideal_comap_appLE formula identifies I(U) with Ideal.map rho J(V). No flatness or injectivity of a tensor map is used.",
    "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-pullback-affine-sections",
     "lem-pc-ideal-sheaf-comap-affine-extension"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "The two images therefore have identical sections as submodules of TG on every member of the basis. On any open W, a section of either image restricts to a section of the other on a covering by these basis opens. The lifts agree on overlaps since the inclusions are monomorphisms; the sheaf axiom glues them to a lift over W. Hence the subsheaves are equal and the two image subobjects coincide.",
+   "text": "The existing Scheme.image_range_affine helper transfers the equal section ranges of the two maps to their chosen image inclusions on paired affine opens U <= f^{-1}(V). To show either image subobject is contained in the other, compose its inclusion with the cokernel projection of the other. Its sections vanish on all paired affines by range containment. For any open W these paired affines inside W cover W: choose affine V about f(x), then affine U about x inside W intersect f^{-1}(V). Sheaf separatedness makes the composite vanish on W. Lift the inclusion through the kernel of the other cokernel projection (its abelian image), and invert the image factorization of the other monomorphism. This gives a factorization and therefore a subobject inequality. Antisymmetry gives the required equality.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "def-pc-scheme",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-affine-pushforward-ideal-product"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -61,15 +65,15 @@
   "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
   "lem-weil-pbc-module-pullback-quasi-coherent",
   "def-pc-module-pullback",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-affine-pushforward-ideal-product",
   "lem-weil-pbc-module-pullback-affine-sections",
   "lem-pc-ideal-sheaf-comap-affine-extension",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "J2 worker",
+  "by": "K4 worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Proof of Lemma 0887, image calculation expanded on the affine basis; elementary tensor generator and sheaf gluing arguments"
+  "place": "Proof of Lemma 0887, expanded affine image calculation and sheaf separatedness; implemented with existing affine-section and quasi-coherent-image declarations. Returned-delivery repair: remove the duplicate image_range_affine helper and reuse Scheme.image_range_affine from AffinePushforwardIdealProduct through import all."
  },
  "mathlib_searches": [
   {
@@ -156,10 +160,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261012T144120-L-2099219",
-  "kind": "interface",
+  "landing": "20261012T232900-L-2042215",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
