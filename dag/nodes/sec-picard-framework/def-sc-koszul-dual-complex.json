@@ -11,9 +11,19 @@
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0BQZ, lemma-regular-immersion-ext, local Koszul-complex computation"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Extensionality reduces equality of ModuleCat morphisms to equality on each linear map. Unfolding koszulDualBoundary and simplifying scalar composition yields precomposition by the composite of consecutive Koszul differentials, which is zero by koszulBoundary_comp.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof_origin": "Direct Lean proof by ext and simp using the Koszul differential square-zero theorem.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -105,5 +115,15 @@
   "group": "E1",
   "result": "fix",
   "note": "A comm ring, f:Fin r->A IsKoszulRegular, I=span f, B=A/I, C=I.Cotangent, N=Dual, D=wedge^r N restricted; exists-unique determinant-normalized quasi-iso Hom(K,A)->D[r] (any sign gives a cochain map: x∘d_r(top) in I); H^i=0 i≠r over Z; H^r≅D as B-modules tied to φ; Ext^r iso chosen per I before f, tied on every roof; change of generators via g∘t=f; localization square. New defs: no landed dual Koszul (shiftedKoszulComplex is K itself in degrees ≤0); dual sign matches Mathlib HomComplex δ. FIX: derived iso was bare Nonempty, now IsIso (Q.map (extendMap φ embeddingUpNat))"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0a0ce",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T194120-L-458114",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the proof and unchanged declarations with the node and dependencies; delivery and sole direct importer compile cleanly; sorryAx is inherited from the compiled Koszul dependency."
  }
 }

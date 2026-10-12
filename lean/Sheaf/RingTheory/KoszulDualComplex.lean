@@ -6,7 +6,6 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.Paper.KoszulComplex
-public import Mathlib.CategoryTheory.Linear.Yoneda
 public import Mathlib.Algebra.Homology.Embedding.Extend
 
 /-!
@@ -47,7 +46,11 @@ theorem koszulDualBoundary_comp (A : Type uD) [CommRing A] (r : ℕ) (f : Fin r 
     (n : ℕ) :
     ModuleCat.ofHom (koszulDualBoundary A r n f) ≫
       ModuleCat.ofHom (koszulDualBoundary A r (n + 1) f) = 0 := by
-  sorry
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  change ((koszulDualBoundary A r (n + 1) f) (koszulDualBoundary A r n f x)) = 0
+  simp [koszulDualBoundary, Linear.leftComp]
 
 /-- `Hom_A^•(K_A(f), A)`, indexed in nonnegative cohomological degrees.
 Its differential is `x ↦ (-1)^(n+1) x ∘ d_{n+1}`. Negative degrees are zero by
