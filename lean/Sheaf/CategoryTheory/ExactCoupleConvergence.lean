@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.ExactCouple
 public import Sheaf.CategoryTheory.Filtration
 
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
+import Sheaf.CategoryTheory.CycleBoundaryTowerStep
 
 /-!
 # Convergence of bigraded exact couples
@@ -67,6 +68,32 @@ structure CycleBoundaryTower (X : BigradedExactCouple C 0) where
     projection (r + 1) p q =
       cycleLift r p q ≫ (X.pageCouple r).derivedEProjection p q
 
+private noncomputable def initialCycleBoundaryStage (X : BigradedExactCouple C 0) :
+    CycleBoundaryStage X 0 where
+  Z := fun _ _ ↦ ⊤
+  B := fun _ _ ↦ ⊥
+  B_le_Z := fun _ _ ↦ bot_le
+  projection := fun p q ↦ (⊤ : Subobject (X.E p q)).arrow
+  projection_epi := fun _ _ ↦ inferInstance
+  projection_kernel := fun p q ↦ by
+    apply Eq.trans (b := ⊥)
+    · apply Subobject.mk_eq_bot_iff_zero.mpr
+      apply (cancel_mono (⊤ : Subobject (X.E p q)).arrow).mp
+      simp
+    · symm
+      apply Subobject.mk_eq_bot_iff_zero.mpr
+      apply (cancel_mono (⊤ : Subobject (X.E p q)).arrow).mp
+      simp [Subobject.ofLE_arrow, Subobject.bot_arrow]
+
+private noncomputable def chosenCycleBoundaryStep (X : BigradedExactCouple C 0)
+    (r : ℕ) (T : CycleBoundaryStage X r) : CycleBoundaryStep X r T :=
+  Classical.choice (cycleBoundaryStep_exists X r T)
+
+private noncomputable def recursiveCycleBoundaryStage (X : BigradedExactCouple C 0) :
+    (r : ℕ) → CycleBoundaryStage X r
+  | 0 => initialCycleBoundaryStage X
+  | r + 1 => (chosenCycleBoundaryStep X r (recursiveCycleBoundaryStage X r)).next
+
 /-- The canonical cycle/boundary tower exists. Start with the whole initial page and zero,
 with its identity quotient. Inductively pull back the kernel and image of the differential
 along the quotient, and embed these pullbacks in the initial page. Since the differential
@@ -78,7 +105,25 @@ Source: blueprint def-sp-convergence; Stacks Sections 12.20--12.21
 (blueprint: def-sp-convergence). -/
 theorem cycleBoundaryTower_exists (X : BigradedExactCouple C 0) :
     Nonempty (CycleBoundaryTower X) := by
-  sorry
+  let T := recursiveCycleBoundaryStage X
+  let S := fun r ↦ chosenCycleBoundaryStep X r (T r)
+  exact ⟨{
+    Z := fun r ↦ (T r).Z
+    B := fun r ↦ (T r).B
+    B_le_Z := fun r ↦ (T r).B_le_Z
+    Z_zero := fun _ _ ↦ rfl
+    B_zero := fun _ _ ↦ rfl
+    projection := fun r ↦ (T r).projection
+    projection_epi := fun r ↦ (T r).projection_epi
+    projection_kernel := fun r ↦ (T r).projection_kernel
+    projection_zero := fun _ _ ↦ rfl
+    Z_succ := fun r ↦ (S r).Z_succ
+    B_succ := fun r ↦ (S r).B_succ
+    Z_decreasing := fun r ↦ (S r).Z_decreasing
+    B_increasing := fun r ↦ (S r).B_increasing
+    cycleLift := fun r ↦ (S r).cycleLift
+    cycleLift_comm := fun r ↦ (S r).cycleLift_comm
+    projection_succ := fun r ↦ (S r).projection_succ }⟩
 
 /-- The cycle/boundary tower constructed recursively from the exact couple.
 Source: blueprint def-sp-convergence (blueprint: def-sp-convergence). -/
