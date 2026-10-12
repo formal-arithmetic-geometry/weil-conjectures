@@ -161,7 +161,9 @@ over `K` (Stacks 0AYQ), where `χ` is the Euler characteristic
 `AlgebraicGeometry.Scheme.Modules.degree` of a representative of `L`.
 
 On a smooth projective geometrically integral curve this is the degree of any associated Weil
-divisor, and the Riemann-Roch formula `χ(L) = deg L + 1 - g` holds. -/
+divisor, and the Riemann-Roch formula `χ(L) = deg L + 1 - g` holds.
+
+(blueprint: `def-sc-pic0`) -/
 noncomputable def Scheme.Hom.picDegree (f : C ⟶ Spec (.of K)) (L : C.Pic) : ℤ :=
   letI : C.Over (Spec (.of K)) := ⟨f⟩
   Modules.degree K ((fromSkeleton C.Modules).obj L.val)
@@ -190,7 +192,9 @@ of degree zero, recorded here as the subset `f.picZero` of `C.Pic`.
 
 For a smooth proper curve the degree is the group homomorphism
 `AlgebraicGeometry.Scheme.picDegreeHom`, whose kernel is `picZero`
-(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`). -/
+(`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`).
+
+(blueprint: `def-sc-pic0`) -/
 def Scheme.Hom.picZero (f : C ⟶ Spec (.of K)) : Set C.Pic :=
   {L | f.picDegree L = 0}
 

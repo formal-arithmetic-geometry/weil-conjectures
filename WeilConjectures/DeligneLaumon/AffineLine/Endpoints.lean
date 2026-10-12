@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZeroSpecializes
 public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.CohomologyDegreeZero
 public import WeilConjectures.WeilSheaf.CohomologySequence

@@ -44,11 +44,6 @@ private lemma natTrailingDegree_eq_zero_of_coeff_zero_eq_one {R : Type*} [Semiri
     [Nontrivial R] {p : R[X]} (hp : p.coeff 0 = 1) : p.natTrailingDegree = 0 :=
   natTrailingDegree_eq_zero.2 (.inr (by rw [hp]; exact one_ne_zero))
 
-private lemma monic_reverse_of_coeff_zero_eq_one {R : Type*} [Semiring R] [Nontrivial R]
-    {p : R[X]} (hp : p.coeff 0 = 1) : p.reverse.Monic := by
-  have : p.coeff 0 ≠ 0 := by rw [hp]; exact one_ne_zero
-  rw [Monic, reverse_leadingCoeff, trailingCoeff_eq_coeff_zero this, hp]
-
 /-- A normalized rational divisor of a normalized integer polynomial comes from a normalized
 integer polynomial. Here *normalized* means that the constant coefficient is `1`. -/
 theorem exists_int_of_coeff_zero_eq_one_of_dvd {a : ℤ[X]} (ha : a.coeff 0 = 1) {p : ℚ[X]}
