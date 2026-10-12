@@ -600,6 +600,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
@@ -614,6 +615,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
 public import WeilConjectures.CategoryTheory.MorphismProperty.IndSpreads
+public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
 public import WeilConjectures.CategoryTheory.Pro.Basic
 public import WeilConjectures.CategoryTheory.Pro.Generating
 public import WeilConjectures.CategoryTheory.Pro.HypercoverColimit
@@ -1275,6 +1277,7 @@ public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 public import WeilConjectures.Mathlib.LinearAlgebra.Determinant
+public import WeilConjectures.Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import WeilConjectures.Mathlib.LinearAlgebra.ExteriorPower.Basis
@@ -1462,6 +1465,7 @@ public import WeilConjectures.RingTheory.Bialgebra.Frobenius
 public import WeilConjectures.RingTheory.Dehomogenization
 public import WeilConjectures.RingTheory.Derivation.Localization
 public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
+public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.RingTheory.FaithfullyFlat.FamilyDescent
