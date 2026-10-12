@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-unramified-etale-finite-neighbourhoods",
+ "kind": "statement",
+ "title": "Finite unramified open neighbourhoods after etale localization of finitely many points",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], $s\\in S$, $n\\ge0$, and $x:\\{0,\\ldots,n-1\\}\\to X$ with $f(x_i)=s$. Suppose each $x_i$ has an open neighbourhood $O_i\\subseteq X$ [def-weil-open-immersion] such that $O_i\\to S$ is unramified [def-weil-unramified-morphism]. There exist an etale morphism $g:U\\to S$ [def-weil-etale-morphism], $u\\in U$ with $g(u)=s$, integers $m_i\\ge0$, opens $V_a\\subseteq X\\times_SU$ [def-pc-fibre-product] indexed by $a=(i,j)$ with $j<m_i$, and points $v_a\\in V_a$. For $\\pi_a:V_a\\to U$, each $\\pi_a$ is finite [def-weil-finite-integral-morphism] and unramified, $\\pi_a(v_a)=u$, $v_a$ is its unique point over $u$, and the residue-field extension $\\kappa(\\pi_a(v_a))\\to\\kappa(v_a)$ [def-weil-residue-field] is purely inseparable [def-weil-pbc-finite-purely-inseparable-extension]. The points $v_a$, viewed in the pullback, are pairwise distinct. Every point $p$ of the pullback with $\\mathrm{pr}_2(p)=u$ and $\\mathrm{pr}_1(p)=x_i$ for any $i$ is one of these marked points. No distinctness assumption on $x$ is imposed; no clopen decomposition is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-etale-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 04HH (lemma-unramified-etale-local-technical), used in Tag 04HI, via Tag 02LM (lemma-etale-makes-quasi-finite-finite-multiple-points); stability Tags 02G6 and 02GA"
+ },
+ "proof": [
+  {
+   "text": "Restrict to the finite union of the given unramified opens. Unramifiedness and local finite type are local on the source. Select a distinct enumeration of the listed points, retaining representative original indices.",
+   "uses": [
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The listed points in this restriction are isolated in their fibres. Apply the finite-multiple-points theorem to the distinct enumeration, obtaining finite opens with unique purely inseparable marked points and exhaustion of all lifts.",
+   "uses": [
+    "lem-weil-pbc-unramified-fibre-point-isolated",
+    "lem-weil-pbc-etale-local-finite-multiple-points"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change and open restriction preserve unramifiedness. The pullback of the source open embeds openly in the full pullback. Transport the finite pieces and their residue-field data along this open embedding.",
+   "uses": [
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assign the pieces to representative indices and zero pieces to duplicate indices. This preserves injectivity and exhaustion; repeated original entries have the same lifts. For the empty list use the identity neighbourhood and an empty family.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-fibre-point-isolated",
+  "lem-weil-pbc-etale-local-finite-multiple-points",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 04HH (lemma-unramified-etale-local-technical), used in Tag 04HI, via Tag 02LM (lemma-etale-makes-quasi-finite-finite-multiple-points); stability Tags 02G6 and 02GA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite open neighborhoods of isolated points in the fiber of a scheme morphism after an etale base change with purely inseparable residue fields",
+   "results": "LeanSearch returned HTTP 500; unavailable, not evidence of absence.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many unramified points over a scheme point admit finite unramified open neighborhoods after etale localization with unique purely inseparable fiber points",
+   "results": "Lean Finder returned unramified-locus and formally-unramified API results, not this finite-neighbourhood construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsClosedImmersion",
+   "results": "Loogle returned finite-and-mono criterion for closed immersions, not an etale finite-neighbourhood theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*etale|finite.*unramified|closedImmersion.*unramified|isClosedImmersion.*finite",
+   "results": "Read exists_etale_isCompl_of_quasiFiniteAt in ZariskisMainTheorem: it supplies one finite piece, but not simultaneous unique purely inseparable lifts and exhaustion. No exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnramifiedEtaleLocalDecomposition",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-unramified-etale-local-decomposition",
+   "place": "proof step 1",
+   "via": [
+    "lem-weil-pbc-unramified-etale-local-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedEtaleFiniteNeighbourhoods",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedEtaleFiniteNeighbourhoods.lean",
+  "declaration": "AlgebraicGeometry.exists_etale_finite_unramified_neighbourhoods",
+  "statement": "theorem exists_etale_finite_unramified_neighbourhoods\n    {X S : Scheme.{u}} (f : X ⟶ S) (s : S)\n    (n : ℕ) (x : Fin n → X) (hx : ∀ i, f.base (x i) = s)\n    (hunramified : ∀ i, ∃ O : X.Opens, x i ∈ O ∧\n      LocallyOfFiniteType (O.ι ≫ f) ∧ IsOpenImmersion (pullback.diagonal (O.ι ≫ f))) :\n    ∃ (U : Scheme.{u}) (g : U ⟶ S) (u : U), Etale g ∧ g.base u = s ∧\n      ∃ (m : Fin n → ℕ) (V : (Σ i : Fin n, Fin (m i)) → (pullback f g).Opens)\n        (v : (a : Σ i : Fin n, Fin (m i)) → (V a).toScheme),\n        (∀ a, IsFinite ((V a).ι ≫ pullback.snd f g) ∧\n          (LocallyOfFiniteType ((V a).ι ≫ pullback.snd f g) ∧\n            IsOpenImmersion (pullback.diagonal ((V a).ι ≫ pullback.snd f g))) ∧\n          ((V a).ι ≫ pullback.snd f g) (v a) = u ∧\n          (∀ w : (V a).toScheme,\n            ((V a).ι ≫ pullback.snd f g) w = u → w = v a) ∧\n          (letI : Algebra (U.residueField (((V a).ι ≫ pullback.snd f g) (v a)))\n              ((V a).toScheme.residueField (v a)) :=\n            (((V a).ι ≫ pullback.snd f g).residueFieldMap (v a)).hom.toAlgebra\n           IsPurelyInseparable\n             (U.residueField (((V a).ι ≫ pullback.snd f g) (v a)))\n             ((V a).toScheme.residueField (v a)))) ∧\n        Function.Injective (fun a ↦ (V a).ι (v a)) ∧\n        (∀ (i : Fin n) (p : ↥(pullback f g)),\n          (pullback.snd f g).base p = u → (pullback.fst f g).base p = x i →\n            ∃ a, p = (V a).ι (v a))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-165c5",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156682",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-165c5",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156682",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered theorem and helper signatures with their nodes, geometric constructions with cited sources, imports with public dependency closure, and proofs with compilation and axiom probes."
+ }
+}

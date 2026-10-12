@@ -30,82 +30,38 @@
  ],
  "proof": [
   {
-   "text": "Choose unramified open neighbourhoods $X_i$ of the listed points and replace them by their finite union $X^\\circ=\\bigcup_iX_i$; the restriction $X^\\circ\\to S$ is locally of finite type and unramified at every $x_i$. Apply [lem-weil-pbc-unramified-fibre-point-isolated] and then [lem-weil-pbc-etale-local-finite-multiple-points] to $X^\\circ\\to S$. This gives an etale neighbourhood and finitely many open pieces $V_{i,j}\\subseteq X^\\circ\\times_SU$, finite over the neighbourhood, with the required points and exclusions; their inclusions into $X\\times_SU$ are open. The fact that the restriction remains unramified and that the base-changed morphism is unramified is exactly [lem-weil-pbc-unramified-base-change-open] (Stacks Tags 02G6 and 02GA), applied to the defining unramified neighbourhoods and to $X^\\circ\\to S$.",
+   "text": "Construct finite unramified neighbourhoods with distinct unique purely inseparable marked fibre points and exhaustion of all listed lifts.",
    "uses": [
-    "lem-weil-pbc-unramified-fibre-point-isolated",
-    "lem-weil-pbc-etale-local-finite-multiple-points",
-    "def-weil-unramified-morphism",
-    "lem-weil-pbc-unramified-base-change-open",
+    "lem-weil-pbc-unramified-etale-finite-neighbourhoods"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Shrink the base to refine those finite pieces to pairwise disjoint clopen closed immersions, preserving exhaustion of all listed lifts.",
+   "uses": [
+    "lem-weil-pbc-finite-unramified-neighbourhoods-disjoint-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the resulting open immersion of bases with the etale map. The retained point still maps to s. Define W as the complement of the finite union of the closed pieces. A finite union of closed sets is closed, so W is open; the union is also open, so W is closed. Complement identities give disjointness and covering. Exhaustion excludes every listed lift from W. Pullback commutativity and the fibre-exhaustion hypothesis then make the remainder fibre empty. These topological and pointwise arguments are implemented directly in Lean.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
     "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Stacks Etale Morphisms, proof of Lemma 04HI, lines 1702-1714, using More on Morphisms Lemma 02LM"
-   }
-  },
-  {
-   "text": "Shrink the etale neighbourhood to an affine open and use [lem-weil-pbc-etale-composition-cancellation]. By [lem-weil-pbc-unramified-base-change-open], each $V_{i,j}\\to U$ is still unramified after the base changes and open restrictions. Apply [lem-weil-pbc-finite-unramified-one-point-closed] to each finite unramified piece and intersect the finitely many resulting neighbourhoods. Whenever the base is shrunk from $U$ to an open $U'$, replace every piece by the actual base change $V'_{i,j}:=V_{i,j}\\times_UU'$; [lem-weil-pbc-open-fibre-product] identifies $V'_{i,j}$ with the corresponding inverse-image open in $X\\times_SU'$. The resulting pieces are closed immersions through the chosen point.",
-   "uses": [
-    "lem-weil-pbc-finite-unramified-one-point-closed",
-    "lem-weil-pbc-unramified-base-change-open",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-open-fibre-product",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Stacks Etale Morphisms, proof of Lemma 04HI, lines 1711-1714, and Schemes Lemma 01JR"
-   }
-  },
-  {
-   "text": "The base change of X to U is separated. Each closed immersion piece into U is proper, so [lem-weil-pbc-proper-over-separated] makes its map to the base-changed X proper and therefore closed. Pairwise intersections are closed and have closed images in U; the exclusion clause from [lem-weil-pbc-etale-local-finite-multiple-points] says those images avoid the chosen point.",
-   "uses": [
-    "lem-weil-pbc-proper-over-separated",
-    "lem-weil-pbc-etale-local-finite-multiple-points",
-    "def-weil-proper-morphism",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Stacks Etale Morphisms, proof of Lemma 04HI, lines 1737-1745; Morphisms Lemma 01W6"
-   }
-  },
-  {
-   "text": "Delete the finite union of those closed images from U and again replace every V by its base change along this open, using [lem-weil-pbc-open-fibre-product]. The pieces are now pairwise disjoint. Their finite union is open and closed, so its open-and-closed complement W gives the asserted decomposition and the exclusion over the chosen point.",
-   "uses": [
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-etale-local-finite-multiple-points",
-    "def-weil-open-immersion",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Stacks Etale Morphisms, proof of Lemma 04HI, lines 1743-1749"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-unramified-fibre-point-isolated",
-  "lem-weil-pbc-etale-local-finite-multiple-points",
-  "def-weil-unramified-morphism",
-  "lem-weil-pbc-unramified-base-change-open",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-finite-unramified-one-point-closed",
+  "lem-weil-pbc-unramified-etale-finite-neighbourhoods",
+  "lem-weil-pbc-finite-unramified-neighbourhoods-disjoint-refinement",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-proper-over-separated",
-  "def-weil-proper-morphism",
-  "def-weil-closed-immersion"
+  "def-pc-fibre-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/etale.tex",
-  "place": "Stacks Etale Morphisms, Lemma 04HI, proof at lines 1737-1749"
+  "place": "Tag 04HI; original four-step route retained, finite neighbourhoods and geometric shrinking split off, complement and exclusion proved directly"
  },
  "mathlib_searches": [
   {
@@ -189,5 +145,15 @@
   "group": "F1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-165c5",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156682",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered theorem and helper signatures with their nodes, geometric constructions with cited sources, imports with public dependency closure, and proofs with compilation and axiom probes."
  }
 }

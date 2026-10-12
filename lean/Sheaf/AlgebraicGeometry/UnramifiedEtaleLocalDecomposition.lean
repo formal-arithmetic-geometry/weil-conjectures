@@ -6,12 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints
-import Sheaf.AlgebraicGeometry.FiniteUnramifiedOnePointClosed
-import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
-import Sheaf.AlgebraicGeometry.UnramifiedFibrePointIsolated
+import Sheaf.AlgebraicGeometry.UnramifiedEtaleFiniteNeighbourhoods
+import Sheaf.AlgebraicGeometry.FiniteUnramifiedNeighbourhoodsDisjointRefinement
 
 /-!
 # Étale-local decomposition near unramified fibre points
@@ -76,6 +72,44 @@ theorem exists_etale_closed_immersion_decomposition_of_unramified_at_points
           ∀ i, (pullback.fst f g).base p ≠ x i) ∧
         ((∀ y : X, f.base y = s ↔ ∃ i, y = x i) →
           ∀ p : ↥(pullback f g), p ∈ W → (pullback.snd f g).base p ≠ u) := by
-  sorry
+  obtain ⟨U, g, u, hg, hus, m, V, v, hpieces, hinjective, hexhaust⟩ :=
+    exists_etale_finite_unramified_neighbourhoods f s n x hx hunramified
+  obtain ⟨B, huB, V', hclosed, hdisjoint, himmersions, hcover⟩ :=
+    exists_disjoint_closed_immersion_refinement f g u n x m V v
+      hpieces hinjective hexhaust
+  let : Etale g := hg
+  let g' : B.toScheme ⟶ S := B.ι ≫ g
+  let u' : B.toScheme := ⟨u, huB⟩
+  have hu' : g'.base u' = s := hus
+  have hclosedUnion : IsClosed (⋃ a, (V' a : Set ↥(pullback f g'))) :=
+    isClosed_iUnion_of_finite hclosed
+  let W : (pullback f g').Opens :=
+    ⟨(⋃ a, (V' a : Set ↥(pullback f g')))ᶜ, hclosedUnion.isOpen_compl⟩
+  refine ⟨B.toScheme, g', u', inferInstance, hu', m, W, V', ?_, hclosed,
+    hdisjoint, ?_, ?_, himmersions, ?_, ?_⟩
+  · exact (isOpen_iUnion fun a ↦ (V' a).isOpen).isClosed_compl
+  · intro a
+    rw [disjoint_iff]
+    apply TopologicalSpace.Opens.ext
+    ext p
+    simp only [TopologicalSpace.Opens.coe_inf, TopologicalSpace.Opens.coe_bot,
+      Set.mem_inter_iff, Set.mem_empty_iff_false, iff_false]
+    exact fun ⟨hpW, hpV⟩ ↦ hpW (Set.mem_iUnion.mpr ⟨a, hpV⟩)
+  · apply TopologicalSpace.Opens.ext
+    simp only [TopologicalSpace.Opens.coe_sup, TopologicalSpace.Opens.coe_iSup,
+      TopologicalSpace.Opens.coe_top]
+    exact Set.compl_union_self _
+  · intro p hpW hpu i hpx
+    obtain ⟨a, ha⟩ := hcover i p hpu hpx
+    exact hpW (Set.mem_iUnion.mpr ⟨a, ha⟩)
+  · intro hall p hpW hpu
+    have hcomm := congrArg (fun k : pullback f g' ⟶ S ↦ k.base p)
+      (pullback.condition (f := f) (g := g'))
+    have hfs : f.base ((pullback.fst f g').base p) = s := by
+      simpa only [Scheme.Hom.comp_base, TopCat.hom_comp, ContinuousMap.comp_apply,
+        hpu, hu'] using hcomm
+    obtain ⟨i, hi⟩ := (hall ((pullback.fst f g').base p)).mp hfs
+    obtain ⟨a, ha⟩ := hcover i p hpu hi
+    exact hpW (Set.mem_iUnion.mpr ⟨a, ha⟩)
 
 end AlgebraicGeometry

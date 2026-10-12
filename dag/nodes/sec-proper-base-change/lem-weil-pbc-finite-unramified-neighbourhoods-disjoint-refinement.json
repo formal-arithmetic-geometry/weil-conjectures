@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-finite-unramified-neighbourhoods-disjoint-refinement",
+ "kind": "statement",
+ "title": "Shrinking finite unramified pieces to disjoint clopen closed immersions",
+ "statement": "Let $f:X\\to S$ be separated [def-weil-proper-morphism], $g:U\\to S$ any morphism of schemes [def-pc-scheme], and $u\\in U$. Fix $n\\ge0$, $x:\\{0,\\ldots,n-1\\}\\to X$, integers $m_i\\ge0$, opens $V_a\\subseteq X\\times_SU$ [def-pc-fibre-product, def-weil-open-immersion] indexed by $a=(i,j)$ with $j<m_i$, and points $v_a\\in V_a$. Suppose each $\\pi_a:V_a\\to U$ is finite [def-weil-finite-integral-morphism] and unramified [def-weil-unramified-morphism], has unique point $v_a$ over $u$, and has purely inseparable residue extension $\\kappa(\\pi_a(v_a))\\to\\kappa(v_a)$ [def-weil-residue-field, def-weil-pbc-finite-purely-inseparable-extension]. Assume the marked points are pairwise distinct in the pullback and every point over $u$ mapping to a listed $x_i$ is one of them. There is an open $B\\subseteq U$ containing $u$ and opens $V'_a\\subseteq X\\times_SB$, with the same index set, which are closed and pairwise disjoint. Each $V'_a\\to B$ is a closed immersion [def-weil-closed-immersion] whose image contains the point $u_B=(u\\in B)$. Every point of $X\\times_SB$ over $u_B$ mapping to a listed $x_i$ lies in some $V'_a$. No remainder or covering decomposition is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 04DG (lemma-finite-unramified-one-point), then Tag 04HI (lemma-unramified-etale-local-technical), the pairwise-intersection deletion argument; Tag 01W6 for proper-over-separated"
+ },
+ "proof": [
+  {
+   "text": "Apply the finite unramified one-point closed-immersion theorem to every piece. Intersect its finitely many open neighbourhoods and replace pieces by their base changes. Closed immersions are stable under base change.",
+   "uses": [
+    "lem-weil-pbc-finite-unramified-one-point-closed",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projection of the ambient pullback is separated. Each piece is proper over the base, hence its inclusion into the pullback is proper by the proper-over-separated theorem. Consequently each open piece is closed.",
+   "uses": [
+    "lem-weil-pbc-proper-over-separated",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each pairwise intersection is closed in a finite piece and has closed image in the base. This image avoids the chosen point by the uniqueness and distinctness hypotheses. Delete the finite union of those images.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change all pieces to the remaining open. Identify them as opens of the new pullback. They are disjoint, closed, and closed immersions over the new base. The marked points persist and exhaustion persists since open base change does not change the fibre at the retained point.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-unramified-one-point-closed",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-proper-over-separated",
+  "def-weil-proper-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale.tex",
+  "place": "Tag 04DG (lemma-finite-unramified-one-point), then Tag 04HI (lemma-unramified-etale-local-technical), the pairwise-intersection deletion argument; Tag 01W6 for proper-over-separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated scheme morphism finite unramified open pieces with distinct unique fiber points become disjoint closed immersions on an open neighborhood of the base point",
+   "results": "LeanSearch returned HTTP 500; unavailable, not evidence of absence.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite unramified open subscheme with a unique purely inseparable point in the fibre becomes a clopen closed immersion after shrinking the base",
+   "results": "Lean Finder returned formally-unramified diagonal results and closed-immersion special cases, not this disjoint-refinement result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsClosedImmersion",
+   "results": "Loogle finite-and-mono characterization does not supply the shrinking or pairwise-disjointness construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "purelyInseparable|purely_inseparable|clopen",
+   "results": "Mathlib clopen results concern fibres and open-immersion algebra, not simultaneous closed-immersion refinement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UnramifiedEtaleLocalDecomposition",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-unramified-etale-local-decomposition",
+   "place": "proof steps 2 and 3, and the disjointness part of step 4",
+   "via": [
+    "lem-weil-pbc-unramified-etale-local-decomposition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteUnramifiedNeighbourhoodsDisjointRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteUnramifiedNeighbourhoodsDisjointRefinement.lean",
+  "declaration": "AlgebraicGeometry.exists_disjoint_closed_immersion_refinement",
+  "statement": "theorem exists_disjoint_closed_immersion_refinement\n    {X S U : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] (g : U ⟶ S) (u : U)\n    (n : ℕ) (x : Fin n → X) (m : Fin n → ℕ)\n    (V : (Σ i : Fin n, Fin (m i)) → (pullback f g).Opens)\n    (v : (a : Σ i : Fin n, Fin (m i)) → (V a).toScheme)\n    (hpieces : ∀ a, IsFinite ((V a).ι ≫ pullback.snd f g) ∧\n      (LocallyOfFiniteType ((V a).ι ≫ pullback.snd f g) ∧\n        IsOpenImmersion (pullback.diagonal ((V a).ι ≫ pullback.snd f g))) ∧\n      ((V a).ι ≫ pullback.snd f g) (v a) = u ∧\n      (∀ w : (V a).toScheme, ((V a).ι ≫ pullback.snd f g) w = u → w = v a) ∧\n      (letI : Algebra (U.residueField (((V a).ι ≫ pullback.snd f g) (v a)))\n          ((V a).toScheme.residueField (v a)) :=\n        (((V a).ι ≫ pullback.snd f g).residueFieldMap (v a)).hom.toAlgebra\n       IsPurelyInseparable (U.residueField (((V a).ι ≫ pullback.snd f g) (v a)))\n         ((V a).toScheme.residueField (v a))))\n    (hinjective : Function.Injective (fun a ↦ (V a).ι (v a)))\n    (hexhaust : ∀ (i : Fin n) (p : ↥(pullback f g)),\n      (pullback.snd f g).base p = u → (pullback.fst f g).base p = x i →\n        ∃ a, p = (V a).ι (v a)) :\n    ∃ (B : U.Opens) (huB : u ∈ B),\n      ∃ V' : (Σ i : Fin n, Fin (m i)) → (pullback f (B.ι ≫ g)).Opens,\n        (∀ a, IsClosed (V' a : Set ↥(pullback f (B.ι ≫ g)))) ∧\n        Pairwise (fun a b ↦ Disjoint (V' a) (V' b)) ∧\n        (∀ a, IsClosedImmersion ((V' a).ι ≫ pullback.snd f (B.ι ≫ g)) ∧\n          (⟨u, huB⟩ : B.toScheme) ∈\n            Set.range (((V' a).ι ≫ pullback.snd f (B.ι ≫ g)).base)) ∧\n        (∀ (i : Fin n) (p : ↥(pullback f (B.ι ≫ g))),\n          (pullback.snd f (B.ι ≫ g)).base p = (⟨u, huB⟩ : B.toScheme) →\n          (pullback.fst f (B.ι ≫ g)).base p = x i → ∃ a, p ∈ V' a)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-165c5",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156682",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-165c5",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156682",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered theorem and helper signatures with their nodes, geometric constructions with cited sources, imports with public dependency closure, and proofs with compilation and axiom probes."
+ }
+}
