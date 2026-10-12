@@ -1,0 +1,129 @@
+{
+ "id": "lem-sbc-geometric-point-module-constant",
+ "kind": "statement",
+ "title": "A module sheaf pulled back from an algebraically closed point is constant",
+ "statement": "Let $\\Lambda$ be a commutative ring, $K$ an algebraically closed field, $Y$ a scheme and $e:Y\\to\\operatorname{Spec}K$ a scheme morphism [def-pc-scheme]. For every sheaf $F$ of $\\Lambda$-modules on the small etale site of $\\operatorname{Spec}K$ [def-weil-pbc-etale-sheaves], there is a $\\Lambda$-module $M$ and an isomorphism $e^{-1}F\\cong\\underline M$ on $Y$, with inverse image as in [def-weil-pbc-inverse-image] and constant sheaf as in [def-weil-pbc-constant-sheaf]. No torsion, finiteness, or nonvanishing hypothesis is imposed.",
+ "source": {
+  "document": "Stacks Project; Mathlib.CategoryTheory.Sites.ConstantSheaf",
+  "place": "Tags 03P5 and 0A3H as realized by spec_algClosed_etale_sheaf_constant; constantSheafAdj_counit_w, lines 198-207; pullback of constants via upperStarConstantSheafIso (Tag 03Q1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply the set-valued geometric-point constancy theorem to the module sheaf after forgetting to sets. Its constant-sheaf counit is invertible.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Mathlib constantSheafAdj_counit_w comparison identifies the image of the module-valued counit with the composite of the constant-sheaf comparison isomorphism and the set-valued counit. Forgetting modules reflects isomorphisms, so the module counit is invertible. Its source is constant with value the global sections module M.",
+   "uses": [
+    "lem-weil-pbc-constant-module-sheaf-underlying"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pull back the inverse of the module counit, then compose with upperStarConstantSheafIso applied to M.",
+   "uses": [
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-module-sheaf-underlying",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project; Mathlib.CategoryTheory.Sites.ConstantSheaf",
+  "place": "Tags 03P5 and 0A3H as realized by spec_algClosed_etale_sheaf_constant; constantSheafAdj_counit_w, lines 198-207; pullback of constants via upperStarConstantSheafIso (Tag 03Q1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A module sheaf on the spectrum of an algebraically closed field is constant and pullback preserves constant sheaves",
+   "date": "2026-10-12",
+   "results": "Internal Server Error; service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules on the small etale site of an algebraically closed field is constant and inverse image preserves constant sheaves",
+   "date": "2026-10-12",
+   "results": "Sheaf.isConstant_of_forget, isConstant_iff_forget, mem_essImage_of_isConstant and five related constant-sheaf results",
+   "verdict": "Partial: transfer of constancy exists; use the existing set-valued point theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isConstant_of_forget",
+   "date": "2026-10-12",
+   "results": "One match in Mathlib.CategoryTheory.Sites.ConstantSheaf",
+   "verdict": "Partial; its counit argument specializes without needing to introduce full-faithfulness instances."
+  },
+  {
+   "tool": "grep",
+   "query": "isConstant_of_forget|map_isZero|map_eq_zero_iff",
+   "date": "2026-10-12",
+   "results": "25 hits including map_isZero uses; read ConstantSheaf.lean:198-228 directly, containing constantSheafAdj_counit_w and isConstant_of_forget",
+   "verdict": "Partial: constantSheafAdj_counit_w supplies the required counit comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-universal-test",
+   "place": "Cyclic-coefficient reduction on the geometric point in the proof of the universal test datum",
+   "via": [
+    "lem-sbc-prime-cyclic-detection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothBaseChange.GeometricPointModuleConstant",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothBaseChange/GeometricPointModuleConstant.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_constant_module_upperStar_geometricPoint",
+  "statement": "theorem exists_constant_module_upperStar_geometricPoint\n    (Λ : Type (u + 1)) [CommRing Λ] {K : Type u} [Field K] [IsAlgClosed K]\n    {Y : Scheme.{u}} (e : Y ⟶ Spec (.of K))\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ∃ M : ModuleCat.{u + 1} Λ,\n      Nonempty ((upperStar (ModuleCat.{u + 1} Λ) e).obj F ≅\n        (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33645",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

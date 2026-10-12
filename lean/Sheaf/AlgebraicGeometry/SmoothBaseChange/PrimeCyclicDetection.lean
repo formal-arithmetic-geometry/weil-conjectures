@@ -6,11 +6,11 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
-import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.CoefficientHigherDirectImageZero
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.GeometricPointModuleConstant
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.TorsionConstantPrimeDevissage
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 
 /-!
 # Prime cyclic detection of a geometric-point coefficient
@@ -30,6 +30,55 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Etale
 
+private theorem prime_cyclic_vanishing_in_integer_coefficients
+    {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]
+    (q : ℤ) (r : ℕ)
+    (hz : IsZero (higherDirectImage (ULift.{u + 1} (ZMod r)) h q
+      (constantModSheaf (ULift.{u + 1} (ZMod r)) Y r))) :
+    IsZero (higherDirectImage (ULift.{u + 1} ℤ) h q
+      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).obj
+        (ModuleCat.of.{u + 1} (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod r))))) := by
+  let P := ULift.{u + 1} (ZMod r)
+  let φ : ULift.{u + 1} ℤ →+* P :=
+    (Int.castRingHom P).comp ULift.ringEquiv.toRingHom
+  have : (ModuleCat.restrictScalars.{u + 1} φ).IsLeftAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).isLeftAdjoint
+  have hr : (r : P) = 0 := by
+    apply ULift.ext
+    exact ZMod.natCast_self r
+  have hi : (Ideal.span {(r : P)} : Ideal P) = ⊥ := by simp [hr]
+  let l : ModuleCat.of.{u + 1} P (P ⧸ (Ideal.span {(r : P)} : Ideal P)) ≅
+      ModuleCat.of.{u + 1} P P :=
+    (Submodule.quotEquivOfEqBot _ hi).toModuleIso
+  let c := constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} P)
+  let HP := DerivedCategory.Plus.singleFunctor _ 0 ⋙
+    (lowerStar (ModuleCat.{u + 1} P) h).rightDerivedFunctorPlus ⋙
+    DerivedCategory.Plus.homologyFunctor _ q
+  have hp : IsZero (higherDirectImage P h q (c.obj (ModuleCat.of.{u + 1} P P))) :=
+    (HP.mapIso (c.mapIso l)).isZero_iff.mp hz
+  have hz' := (isZero_higherDirectImage_restrictScalars_iff φ h q
+    (c.obj (ModuleCat.of.{u + 1} P P))).mpr hp
+  let k : (ModuleCat.restrictScalars.{u + 1} φ).obj (ModuleCat.of.{u + 1} P P) ≅
+      ModuleCat.of.{u + 1} (ULift.{u + 1} ℤ) P :=
+    (show (ModuleCat.restrictScalars.{u + 1} φ).obj (ModuleCat.of.{u + 1} P P) ≃ₗ[
+      ULift.{u + 1} ℤ] P from
+      { __ := AddEquiv.refl P
+        map_smul' := by
+          intro z x
+          change (z.down : P) • x = z.down • x
+          exact Int.cast_smul_eq_zsmul P _ _ }).toModuleIso
+  let ci : (Sheaf.restrictScalars Y.smallEtaleTopology φ).obj
+      (c.obj (ModuleCat.of.{u + 1} P P)) ≅
+      (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).obj
+        (ModuleCat.of.{u + 1} (ULift.{u + 1} ℤ) P) :=
+    (constantCommuteCompose Y.smallEtaleTopology
+    (ModuleCat.restrictScalars.{u + 1} φ)).app (ModuleCat.of.{u + 1} P P) ≪≫
+      (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).mapIso k
+  let HZ := DerivedCategory.Plus.singleFunctor _ 0 ⋙
+    (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctorPlus ⋙
+    DerivedCategory.Plus.homologyFunctor _ q
+  exact (HZ.mapIso ci).isZero_iff.mp hz'
+
 /-- Nonvanishing with a geometric-point coefficient detects a prime cyclic abelian
 coefficient, with a prime that is not a unit in the original coefficient ring.
 
@@ -38,29 +87,22 @@ for forgetting coefficients; Tag 0739 for qcqs cohomology and filtered colimits.
 (blueprint: lem-sbc-prime-cyclic-detection)
 
 Proof:
-1. The small etale topos of Spec K is the point topos, since K is algebraically
-closed. Thus F is constant with some Lambda-module M; exact inverse image takes
-it to the constant M-sheaf on Y. The derived inverse image of F[0] is this sheaf
-in degree zero. Forgetting the module structure identifies the underlying
-higher direct image with the abelian higher direct image, by an injective module
-resolution whose underlying abelian terms are acyclic (03FD).
-2. As an abelian group M is killed by the nonzero integer n. Decompose it as a
-sum of primary components and express each component as the filtered union of
-its finitely generated subgroups. Each finite subgroup is a finite sum of cyclic
-prime-power groups Z/r^k, where r divides n. On affine etale objects of X the
-pullbacks of Y are qcqs, so 0739 gives commutation of cohomology with these
-filtered unions; sheafifying gives the same commutation for higher direct images.
-3. If r is a unit in Lambda, its action on M is invertible, so its primary
-component is zero. If every remaining prime cyclic constant sheaf has zero
-higher direct image in degree q, the exact sequences
-0 -> Z/r^(k-1) -> Z/r^k -> Z/r -> 0 and their long exact sequences imply by
-induction that all prime-power cyclic groups have zero image in degree q.
-Finite additivity and step 2 then give zero for M, contradicting the hypothesis.
-4. Choose a remaining prime with nonzero image. The underlying abelian group of
-ULift(ZMod r) is Z/r; its constantModSheaf of order r equals its constant free
-rank-one sheaf, since r = 0 in that ring. The comparison in step 1 and faithful
-forgetting give the stated nonvanishing in prime-field module sheaves. For q < 0
-all higher direct images here are zero, so the premise is impossible. -/
+1. The geometric-point module-constancy theorem supplies a module M and an isomorphism
+between e-star F and the constant M-sheaf on Y. The already-proved
+baseChangeTargetFunctorIso transports the nonvanishing to its higher direct image.
+2. Restrict M along ULift Z -> Lambda. The constant sheaf comparison and
+isZero_higherDirectImage_restrictScalars_iff preserve nonvanishing. The equation n = 0
+in Lambda kills every element of this integer module.
+3. Suppose there is no prime as in the conclusion. Apply
+isZero_higherDirectImage_constant_of_prime_vanishing. For a prime dividing n with
+noninjective multiplication on M, scalar cancellation shows that prime is not a unit
+in Lambda. The assumed absence of a witness forces its prime-field image to vanish.
+4. In P = ULift(ZMod r), r = 0, so its ideal is bottom. The quotient module is P,
+by Submodule.quotEquivOfEqBot. Restricting its scalar action to the integers gives
+the ordinary integer-module P, by Int.cast_smul_eq_zsmul. The higher-direct-image
+coefficient comparison and constantCommuteCompose turn its vanishing into the
+prime-cyclic vanishing required in step 3. The resulting vanishing for M contradicts
+step 2. This also covers negative q, where images of degree-zero sheaves vanish. -/
 theorem exists_prime_cyclic_higherDirectImage
     (Λ : Type (u + 1)) [CommRing Λ] {K : Type u} [Field K] [IsAlgClosed K]
     {X Y : Scheme.{u}} (e : Y ⟶ Spec (.of K)) (h : Y ⟶ X)
@@ -70,6 +112,53 @@ theorem exists_prime_cyclic_higherDirectImage
     (hF : ¬ IsZero ((baseChangeTargetFunctor Λ e h q).obj F)) :
     ∃ r : ℕ, r.Prime ∧ r ∣ n ∧ ¬ IsUnit (r : Λ) ∧
       ¬ IsZero (higherDirectImage (ULift.{u + 1} (ZMod r)) h q
-        (constantModSheaf (ULift.{u + 1} (ZMod r)) Y r)) := by sorry
+        (constantModSheaf (ULift.{u + 1} (ZMod r)) Y r)) := by
+  classical
+  obtain ⟨M, ⟨i⟩⟩ := exists_constant_module_upperStar_geometricPoint Λ e F
+  let HΛ := DerivedCategory.Plus.singleFunctor _ 0 ⋙
+    (lowerStar (ModuleCat.{u + 1} Λ) h).rightDerivedFunctorPlus ⋙
+    DerivedCategory.Plus.homologyFunctor _ q
+  let cΛ := constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  have hconst : ¬ IsZero (higherDirectImage Λ h q (cΛ.obj M)) := by
+    intro hz
+    apply hF
+    exact IsZero.of_iso hz ((baseChangeTargetFunctorIso Λ e h q).app F ≪≫ HΛ.mapIso i)
+  let φ : ULift.{u + 1} ℤ →+* Λ :=
+    (Int.castRingHom Λ).comp ULift.ringEquiv.toRingHom
+  have : (ModuleCat.restrictScalars.{u + 1} φ).IsLeftAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).isLeftAdjoint
+  let MZ := (ModuleCat.restrictScalars.{u + 1} φ).obj M
+  let HZ := DerivedCategory.Plus.singleFunctor _ 0 ⋙
+    (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) h).rightDerivedFunctorPlus ⋙
+    DerivedCategory.Plus.homologyFunctor _ q
+  let cZ := constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
+  have hZ : ¬ IsZero (higherDirectImage (ULift.{u + 1} ℤ) h q (cZ.obj MZ)) := by
+    intro hz
+    apply hconst
+    apply (isZero_higherDirectImage_restrictScalars_iff φ h q (cΛ.obj M)).mp
+    let ci : (Sheaf.restrictScalars Y.smallEtaleTopology φ).obj (cΛ.obj M) ≅ cZ.obj MZ :=
+      (constantCommuteCompose Y.smallEtaleTopology
+        (ModuleCat.restrictScalars.{u + 1} φ)).app M
+    exact IsZero.of_iso hz (HZ.mapIso ci)
+  have hM : ∀ x : MZ, n • x = 0 := by
+    intro x
+    change n • (show M from x) = 0
+    rw [← Nat.cast_smul_eq_nsmul Λ, hΛ, zero_smul]
+  by_contra hnone
+  apply hZ
+  apply isZero_higherDirectImage_constant_of_prime_vanishing h q MZ n hn hM
+  intro r hr hrn hnotinj
+  have hunit : ¬ IsUnit (r : Λ) := by
+    intro hu
+    apply hnotinj
+    intro x y hxy
+    change r • (show M from x) = r • (show M from y) at hxy
+    rw [← Nat.cast_smul_eq_nsmul Λ, ← Nat.cast_smul_eq_nsmul Λ] at hxy
+    exact hu.smul_left_cancel.mp hxy
+  have hz : IsZero (higherDirectImage (ULift.{u + 1} (ZMod r)) h q
+      (constantModSheaf (ULift.{u + 1} (ZMod r)) Y r)) := by
+    by_contra hnonzero
+    exact hnone ⟨r, hr, hrn, hunit, hnonzero⟩
+  exact prime_cyclic_vanishing_in_integer_coefficients h q r hz
 
 end AlgebraicGeometry.Etale

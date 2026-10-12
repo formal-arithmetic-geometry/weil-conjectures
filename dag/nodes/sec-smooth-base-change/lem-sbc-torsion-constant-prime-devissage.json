@@ -1,0 +1,148 @@
+{
+ "id": "lem-sbc-torsion-constant-prime-devissage",
+ "kind": "statement",
+ "title": "Prime-coefficient vanishing for a constant bounded torsion group",
+ "statement": "Let $h:Y\\to X$ be a quasi-compact quasi-separated scheme morphism [def-pc-scheme], $q\\in\\mathbf Z$, $n\\in\\mathbf N$ with $n\\ne0$, and $M$ a module over the universe lift of $\\mathbf Z$, with $nx=0$ for every $x\\in M$. Let $\\underline M$ denote its constant module sheaf on the small etale site of $Y$ [def-weil-pbc-etale-sheaves, def-weil-pbc-constant-sheaf]. Suppose that for every prime $r\\mid n$ such that multiplication by $r$ on $M$ is not injective, the degree-$q$ higher direct image of the constant $\\mathbf Z$-module sheaf with value the universe lift of $\\mathbf Z/r\\mathbf Z$ is zero. Then $R^qh_*\\underline M$ is zero [def-weil-pbc-direct-image].",
+ "source": {
+  "document": "Stacks Project; Mathlib.GroupTheory.FiniteAbelian.Basic",
+  "place": "Tag 0F08, proof of Lemma 59.88.7, cyclic-coefficient paragraph; Tag 0739 (lemma-colimit); Basic.lean:119-166 for finite generation and finite cyclic decomposition; the injective-prime exclusion follows from iterated injectivity"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Factor the nonzero annihilator n into prime powers. The integer Bezout idempotents give the finite internal direct sum of the primary subgroups. If multiplication by r is injective on M, iterated injectivity forces every element killed by a power of r to be zero.",
+   "uses": [
+    "lem-sc-coprime-torsion-decomposition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each remaining primary subgroup is the filtered union of its finitely generated subgroups. Such a subgroup is finite because it is a quotient of a finite sum of Z/r^k for a common exponent k. Use the finite abelian group structure theorem (or equiv_free_prod_directSum_zmod, whose free part is zero for a bounded torsion group) to write it as a finite sum of cyclic prime-power groups. Nonzero cyclic orders involve only its primary prime, which divides n.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing preservesFiniteLimits_constantSheaf and preservesFiniteColimits_constantSheaf instances in WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver make constant sheafification exact over the integers; apply ShortComplex.ShortExact.map_of_exact directly. The finite-ring theorem constantEtaleSheaf_shortExact is not applicable here. Apply higher direct image to the short exact sequences 0 -> Z/r^(j-1) -> Z/r^j -> Z/r -> 0. The exact sequence is exact at the middle degree-q term; if its outer terms are zero, so is that middle term. Induct on j starting from j=0, where the cyclic group is zero. Finite additivity then gives vanishing for each finite subgroup.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constant sheaves preserve colimits. On each affine etale object of X its inverse image under h is qcqs. Apply the filtered-colimit cohomology theorem there, then the sheafified higher-direct-image formula, to commute higher direct image with the subgroup union. This argument must handle the subgroup index universe, not just diagrams in Type 0. Thus each primary subgroup has zero image; finite additivity gives the conclusion. Negative degrees vanish for a sheaf placed in degree zero. If n=1, M=0 and the primary sum is empty.",
+   "uses": [
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-sc-coprime-torsion-decomposition",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project; Mathlib.GroupTheory.FiniteAbelian.Basic",
+  "place": "Tag 0F08, proof of Lemma 59.88.7, cyclic-coefficient paragraph; Tag 0739 (lemma-colimit); Basic.lean:119-166 for finite generation and finite cyclic decomposition; the injective-prime exclusion follows from iterated injectivity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant bounded torsion abelian groups have zero higher direct image if their prime cyclic coefficients vanish",
+   "date": "2026-10-12",
+   "results": "Internal Server Error; service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonzero higher direct image of a constant bounded torsion abelian group detected by prime cyclic coefficients",
+   "date": "2026-10-12",
+   "results": "Eight results including Rep.isZero_Tor_succ_of_projective, DerivedCategory.isZero_of_isLE/isGE and groupCohomology.epi_delta_of_isZero; no constant torsion coefficient devissage",
+   "verdict": "No full match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.equiv_directSum_zmod_of_finite",
+   "date": "2026-10-12",
+   "results": "One result, Mathlib.GroupTheory.FiniteAbelian.Basic",
+   "verdict": "Algebraic ingredient only; not a higher-direct-image vanishing theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "equiv_directSum_zmod_of_finite|finite_of_fg_isAddTorsion",
+   "date": "2026-10-12",
+   "results": "Six hits including FiniteAbelian/Basic.lean:135 and :161; the finite decomposition and finiteness lemmas",
+   "verdict": "Algebraic ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteLimits_constantSheaf|preservesFiniteColimits_constantSheaf",
+   "date": "2026-10-12",
+   "results": "WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver:225,233; arbitrary coefficient category instances. Scratch specialization of ShortComplex.ShortExact.map_of_exact over ULift integers compiled.",
+   "verdict": "Use these exactness instances directly; the finite coefficient ring lemma is unnecessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-universal-test",
+   "place": "Cyclic-coefficient reduction on the geometric point in the proof of the universal test datum",
+   "via": [
+    "lem-sbc-prime-cyclic-detection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothBaseChange.TorsionConstantPrimeDevissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothBaseChange/TorsionConstantPrimeDevissage.lean",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_constant_of_prime_vanishing",
+  "statement": "theorem isZero_higherDirectImage_constant_of_prime_vanishing\n    {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]\n    (q : ℤ) (M : ModuleCat.{u + 1} (ULift.{u + 1} ℤ))\n    (n : ℕ) (hn : n ≠ 0) (hM : ∀ x : M, n • x = 0)\n    (hprime : ∀ r : ℕ, r.Prime → r ∣ n →\n      ¬ Function.Injective (fun x : M ↦ r • x) →\n      IsZero (higherDirectImage (ULift.{u + 1} ℤ) h q\n        ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).obj\n          (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod r)))))) :\n    IsZero (higherDirectImage (ULift.{u + 1} ℤ) h q\n      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))).obj M))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33645",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

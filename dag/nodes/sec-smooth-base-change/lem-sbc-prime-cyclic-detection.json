@@ -16,52 +16,48 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], applied to the underlying sheaf of sets and its additive and scalar operations, $F$ is the constant sheaf of a $\\Lambda$-module $M$. Exact inverse image carries $F[0]$ to the constant $M$-sheaf in degree zero. An injective module resolution is underlying-abelian acyclic by [lem-weil-pbc-injective-module-direct-image-acyclic]. Hence its pushforward computes the abelian derived direct image as well. The underlying constant abelian sheaf is identified by [lem-weil-pbc-constant-module-sheaf-underlying].",
+   "text": "By exists_constant_module_upperStar_geometricPoint choose a Lambda-module M whose constant sheaf on Y identifies with e-star F. Transport the nonvanishing premise through baseChangeTargetFunctorIso and higherDirectImage of this isomorphism.",
    "uses": [
-    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-injective-module-direct-image-acyclic",
+    "lem-sbc-geometric-point-module-constant",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict M along the homomorphism from the universe lift of the integers to Lambda. Constant sheaves commute with restriction of scalars, and isZero_higherDirectImage_restrictScalars_iff gives nonvanishing for its constant integer-module sheaf. The relation n=0 in Lambda implies n times every element of M is zero.",
+   "uses": [
+    "lem-sbc-coefficient-higher-direct-image-zero",
     "lem-weil-pbc-constant-module-sheaf-underlying"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The equation $n=0$ in $\\Lambda$ kills $M$. Its primary components are a finite internal direct sum by [lem-sc-coprime-torsion-decomposition]. Every component is a filtered union of finitely generated subgroups; these are finite because they have bounded exponent (Mathlib AddCommGroup.finite_of_fg_isAddTorsion). The finite abelian group structure theorem (AddCommGroup.equiv_directSum_zmod_of_finite) writes them as finite sums of cyclic prime-power groups. Every prime occurring divides $n$. A component at $r$ is zero if $r$ is a unit in $\\Lambda$, since multiplication by a power of $r$ is both invertible and zero there.",
+   "text": "Assume there is no requested prime. Apply isZero_higherDirectImage_constant_of_prime_vanishing. For any prime r dividing n with noninjective multiplication on M, r cannot be a unit in Lambda: a unit acts injectively, by scalar cancellation. The assumed absence of a witness therefore forces vanishing of the prime-field constantModSheaf.",
    "uses": [
-    "lem-sc-coprime-torsion-decomposition"
+    "lem-sbc-torsion-constant-prime-devissage"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "If every nonunit prime $r\\mid n$ has zero degree-$q$ higher direct image on the constant $\\mathbf F_r$-sheaf, induction using the cyclic short exact sequences $0\\to\\mathbf Z/r^{k-1}\\to\\mathbf Z/r^k\\to\\mathbf Z/r\\to0$ and [lem-weil-pbc-derived-functor-long-exact] shows the same for all prime-power cyclic sheaves. Finite additivity gives the result for each finite subgroup. Higher direct image commutes with their filtered unions by [lemma-weil-pbc-direct-image-filtered-colimit], since $h$ is qcqs. Thus the image for $M$ is zero, contrary to the assumption. Negative degrees vanish for derived direct image of a sheaf.",
+   "text": "In P=ULift(ZMod r), r is zero, hence the ideal it spans is bottom. Submodule.quotEquivOfEqBot identifies the quotient coefficient with P. Transport vanishing through this constant-sheaf isomorphism, then restrict to the integers using isZero_higherDirectImage_restrictScalars_iff. The restricted rank-one P-module is the integer-module P, by Int.cast_smul_eq_zsmul. constantCommuteCompose finishes the comparison. Thus every prime required in the previous step vanishes, making the constant M higher direct image zero, a contradiction.",
    "uses": [
-    "lem-weil-pbc-derived-functor-long-exact",
-    "lemma-weil-pbc-direct-image-filtered-colimit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose a prime witnessing the failure of the previous universal vanishing. In $P_r=\\operatorname{ULift}(\\mathbf F_r)$ the ideal $(r)$ is zero, so the constant sheaf with value $P_r/(r)$ has underlying abelian sheaf $\\mathbf F_r$. Apply the same module/abelian comparison as in step 1 and reflection of zero by forgetting coefficients. This gives the displayed nonvanishing for $P_r$, together with primality, divisibility and noninvertibility.",
-   "uses": [
-    "lem-weil-pbc-injective-module-direct-image-acyclic",
+    "lem-sbc-coefficient-higher-direct-image-zero",
     "lem-weil-pbc-constant-module-sheaf-underlying"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-coprime-torsion-decomposition",
+  "lem-sbc-coefficient-higher-direct-image-zero",
+  "lem-sbc-geometric-point-module-constant",
+  "lem-sbc-torsion-constant-prime-devissage",
   "lem-weil-pbc-constant-module-sheaf-underlying",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-weil-pbc-injective-module-direct-image-acyclic",
-  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-  "lemma-weil-pbc-direct-image-filtered-colimit",
-  "prop-weil-pbc-inverse-image-exact"
+  "sbc-def-base-change-map"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 0F08 and 03FD",
-  "place": "Coefficient step in 0F08, made precise for arbitrary Lambda; abelian/module comparison in 03FD; vector-space retract for the quotient step"
+  "document": "Stacks Project, Tags 0F08, 03FD and 0739",
+  "place": "Cyclic-coefficient reduction, using geometric-point module constancy and the existing restriction-of-scalars base-change comparison; Q3 formalizes all comparison and scalar-cancellation glue and leaves bounded torsion devissage as one separate theorem"
  },
  "mathlib_searches": [
   {
@@ -150,10 +146,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T040945-L-1687428",
+  "landing": "20261012T085324-L-33645",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
