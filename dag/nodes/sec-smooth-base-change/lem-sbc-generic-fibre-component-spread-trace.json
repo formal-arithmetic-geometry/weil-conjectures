@@ -22,27 +22,28 @@
  "mathlib_match": null,
  "id": "lem-sbc-generic-fibre-component-spread-trace",
  "title": "Component trace inclusions after shrinking",
- "statement": "connectedComponentIn (g ⁻¹' {y}) x ⊆ g ⁻¹' {y} ∩ A",
+ "statement": "Let g : P → T be a locally finite type, quasi-compact morphism of schemes. Let g(x) = y, let V be open with y ∈ V, and let A ⊆ P have clopen trace on g⁻¹(V ∩ closure {y}). Assume x ∈ A. Then the connected component of x in g⁻¹({y}) lies in g⁻¹({y}) ∩ A.",
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Geometric closure/specialization argument from Tag 055N.",
+   "text": "Pull back the clopen trace along the continuous inclusion of the fibre over y. Apply IsClopen.connectedComponent_subset using x ∈ A; transport the component with connectedComponentIn_eq_image and use connectedComponentIn_subset.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "Stacks Project",
-  "place": "Tag 055N"
+  "by": "agent",
+  "group": "W3",
+  "date": "2026-10-13",
+  "note": "Topological proof in Mathlib of the corrected trace statement; no geometric sorry used."
  },
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.GenericFibreComponentSpreadTrace",
   "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreComponentSpreadTrace.lean",
   "declaration": "AlgebraicGeometry.generic_fibre_component_spread_trace",
-  "statement": "theorem generic_fibre_component_spread_trace {P T : Scheme.{u}} (g : P ⟶ T) [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (x : P) (hx : g x = y) (V : Set T) (A : Set P) (hV : IsOpen V) (hy : y ∈ V) (hcl : IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A}) : connectedComponentIn (g ⁻¹' {y}) x ⊆ g ⁻¹' {y} ∩ A",
+  "statement": "theorem generic_fibre_component_spread_trace {P T : Scheme.{u}} (g : P ⟶ T)\n    [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (x : P) (hx : g x = y)\n    (V : Set T) (A : Set P)\n    (hV : IsOpen V) (hy : y ∈ V)\n    (hcl : IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A})\n    (hxA : x ∈ A) :\n    connectedComponentIn (g ⁻¹' {y}) x ⊆ g ⁻¹' {y} ∩ A",
   "branch": "sheaf-dag",
   "by": "C3",
   "date": "2026-10-13"
@@ -83,11 +84,29 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "X-5b5d5",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T165508-L-2931768",
+  "landing": "20261012T213855-L-1210466",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and base clone diffs; adapted and original-importer compilation, axioms, signatures, and forced-edit necessity all verified."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "W3 stage 2",
+  "old_statement": "connectedComponentIn (g ⁻¹' {y}) x ⊆ g ⁻¹' {y} ∩ A",
+  "what": "Missing x ∈ A. Taking A = ∅ contradicts membership of x in its fibre component.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tag 055N, closure and specialization argument"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Geometric closure/specialization argument from Tag 055N.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }

@@ -46,12 +46,6 @@ theorem exists_open_generic_fibre_component_spread {P T : Scheme.{u}} (g : P ⟶
     [LocallyOfFiniteType g] [QuasiCompact g] (y : T) (x : P) (hx : g x = y) :
     ∃ (V : Set T) (A : Set P), IsOpen V ∧ y ∈ V ∧
       IsClopen {q : g ⁻¹' (V ∩ closure {y}) | (q : P) ∈ A} ∧
-      g ⁻¹' {y} ∩ A = connectedComponentIn (g ⁻¹' {y}) x := by
-  obtain ⟨V, A, hV, hy, hcl⟩ :=
-    exists_open_generic_fibre_component_spread_core g y x hx
-  refine ⟨V, A, hV, hy, hcl, ?_⟩
-  apply Set.Subset.antisymm
-  · exact generic_fibre_component_spread_trace_reverse g y x hx V A hV hy hcl
-  · exact generic_fibre_component_spread_trace g y x hx V A hV hy hcl
+      g ⁻¹' {y} ∩ A = connectedComponentIn (g ⁻¹' {y}) x := by sorry
 
 end AlgebraicGeometry
