@@ -14,47 +14,30 @@
  ],
  "proof": [
   {
-   "text": "For a coefficient object M choose the canonical nonnegative injective resolution P. In each degree k, the hypotheses apply to the injective object P^k. Naturality of a,b,c,d makes the section maps commute with P differentials, so A(P) → B(P)×D(P) → E(P) is a degreewise short exact sequence of cochain complexes. The termwise zero-composite equation follows from Function.Exact, since every image is in the kernel.",
+   "text": "Construct the concrete pointwise product functor B×D, the pair map from A and the difference map to E. Their components are definitionally the functions in the hypotheses. Apply the three-functor sequence on injectives to obtain natural boundary maps and three exact pairs.",
    "uses": [
-    "def-sp-injective-resolutions"
+    "lem-weil-pbc-right-derived-injective-sequence",
+    "lem-weil-pbc-right-derived-binary-product"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the homology long exact sequence to this short exact sequence of complexes. The three interior exactness assertions are homology_exact₂, homology_exact₃, and homology_exact₁, and its connecting morphism in degrees n,n+1 is δ.",
+   "text": "Use the derived binary product comparison at n and n+1. Its pair and difference equations identify the given restriction maps. Transport the three Function.Exact predicates using bijectivity of the comparison, with injectivity preserving the zero test in the last position.",
    "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Homology of B(P)×D(P) is the product of the two homologies: cycles and boundaries are componentwise, and the quotient of their product by the product of boundaries is the product of the two quotients. The induced projections identify the map from A(P) with the pair of induced maps, and identify the map into E(P) with the difference. Transport all maps and exactness across the canonical isoRightDerivedObj; rightDerived_app_eq identifies the transported natural-transformation components with those in the statement.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-map-via-lift"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For M→N lift it to a cochain map between their canonical injective resolutions. Naturality of a,b,c,d gives a morphism of short exact sequences of evaluated complexes. The homology connecting map is natural, and isoRightDerivedObj_hom_naturality identifies the other sides with the derived functors on M→N. Hence the transported δ components satisfy the naturality equation. Homotopy uniqueness of resolution lifts implies independence of the lift. These components define δ_n, and the transported exactness assertions prove the conclusion.",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "lem-weil-pbc-derived-functor-map-via-lift"
+    "lem-weil-pbc-right-derived-binary-product"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-complex-ses-long-exact-naturality"
+  "lem-weil-pbc-right-derived-injective-sequence",
+  "lem-weil-pbc-right-derived-binary-product"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A50, last paragraph, abstracted to four additive functors; Homology Tag 0117",
-  "note": "F2 Lean reduction of the source argument; proved helpers use the existing Mathlib/source APIs."
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 0A50 and 0117",
+  "note": "Constructed via evaluated injective resolutions, homology connecting morphisms, and product comparison."
  },
  "mathlib_searches": [
   {
@@ -124,11 +107,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-67d67",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T085236-L-13419",
+  "landing": "20261012T110311-L-618632",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five Lean signatures and proofs with their DAG records, source arguments, unchanged existing interface, clean compilation, and axiom results."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

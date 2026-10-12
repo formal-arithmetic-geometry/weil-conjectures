@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-right-derived-binary-product",
+ "kind": "statement",
+ "title": "Binary product comparison for right derived functors",
+ "statement": "In an abelian category C with injective resolutions [def-sp-abelian, def-sp-injective-resolutions], for additive functors A,B,D,E to abelian groups [def-sp-left-exact-additive], transformations a:A→B,b:A→D,c:B→E,d:D→E, object M and degree n, the right derived pointwise Cartesian product B×D is isomorphic to R^n B(M)×R^n D(M). Under this isomorphism the derived pair map (a,b) is (R^n a,R^n b), and the derived difference map c-d is R^n c-R^n d.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, passage from an injective section sequence to the homology long exact sequence; Homology Tag 0117"
+ },
+ "proof": [
+  {
+   "text": "Construct the pointwise Cartesian product functor, its pair and difference transformations, and its projections and inclusions by additive homomorphisms. Check naturality componentwise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compute derived components with rightDerived_app_eq. Additivity of the homology functor shows right derivation preserves addition and zero. Composition and identities are already preserved by Mathlib.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the five projection-inclusion identities. The derived projections yield the forward product comparison and the sum of derived inclusions its inverse. Derive the equations for the pair composed with projections and for the difference written as pc+q(-d).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, passage from an injective section sequence to the homology long exact sequence; Homology Tag 0117",
+  "note": "M1 concrete Lean argument, using the Mathlib resolution and homology APIs."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedPairSequence",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-right-derived-pair-sequence",
+   "place": "intermediate reduction",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedBinaryProduct",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedBinaryProduct.lean",
+  "declaration": "CategoryTheory.rightDerived_binaryProduct_iso",
+  "statement": "theorem rightDerived_binaryProduct_iso\n    [Abelian C] [HasInjectiveResolutions C]\n    (A B D E : C ⥤ AddCommGrpCat.{w})\n    [A.Additive] [B.Additive] [D.Additive] [E.Additive]\n    (a : A ⟶ B) (b : A ⟶ D) (c : B ⟶ E) (d : D ⟶ E)\n    (M : C) (n : ℕ) :\n    ∃ e : ((abBinaryProduct B D).rightDerived n).obj M ≅\n        AddCommGrpCat.of ((B.rightDerived n).obj M × (D.rightDerived n).obj M),\n      (∀ x, e.hom (((abBinaryProductLift a b).rightDerived n).app M x) =\n        ((a.rightDerived n).app M x, (b.rightDerived n).app M x)) ∧\n      (∀ x, ((abBinaryProductDifference c d).rightDerived n).app M x =\n        (c.rightDerived n).app M (e.hom x).1 -\n          (d.rightDerived n).app M (e.hom x).2)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "long exact sequence of additive functors exact on injective objects",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true,
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.rightDerived_app_eq",
+   "results": "Exact match for derived map computation.",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*exact",
+   "results": "No direct existing pair-sequence theorem.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110311-L-618632",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110311-L-618632",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,6 +8,8 @@ module
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.CategoryTheory.RightDerivedInjectiveSequence
+import Sheaf.CategoryTheory.RightDerivedBinaryProduct
 
 /-!
 # Derived sequence from a sequence exact on injectives
@@ -65,6 +67,36 @@ theorem rightDerived_pair_sequence
             ((δ n).app M) ∧
           Function.Exact ((δ n).app M)
             (fun x => ((a.rightDerived (n + 1)).app M x,
-              (b.rightDerived (n + 1)).app M x)) := by sorry
+              (b.rightDerived (n + 1)).app M x)) := by
+  obtain ⟨δ, hδ⟩ := rightDerived_injective_sequence A (abBinaryProduct B D) E
+    (abBinaryProductLift a b) (abBinaryProductDifference c d) hinj hexact hsurj
+  refine ⟨δ, ?_⟩
+  intro M n
+  obtain ⟨e, he₁, he₂⟩ := rightDerived_binaryProduct_iso A B D E a b c d M n
+  obtain ⟨e', he'₁, _⟩ := rightDerived_binaryProduct_iso A B D E a b c d M (n + 1)
+  obtain ⟨h₁, h₂, h₃⟩ := hδ M n
+  have bij := ConcreteCategory.bijective_of_isIso e.hom
+  have inj' := (ConcreteCategory.bijective_of_isIso e'.hom).1
+  refine ⟨?_, ?_, ?_⟩
+  · intro y
+    obtain ⟨x, rfl⟩ := bij.2 y
+    dsimp only
+    rw [← he₂, h₁]
+    constructor
+    · rintro ⟨z, rfl⟩
+      exact ⟨z, (he₁ z).symm⟩
+    · rintro ⟨z, hz⟩
+      exact ⟨z, bij.1 ((he₁ z).trans hz)⟩
+  · intro y
+    rw [h₂]
+    constructor
+    · rintro ⟨x, rfl⟩
+      exact ⟨e.hom x, (he₂ x).symm⟩
+    · rintro ⟨x, hx⟩
+      obtain ⟨z, rfl⟩ := bij.2 x
+      exact ⟨z, (he₂ z).trans hx⟩
+  · intro y
+    dsimp only
+    rw [← he'₁, ← map_zero e'.hom.hom, inj'.eq_iff, h₃]
 
 end CategoryTheory
