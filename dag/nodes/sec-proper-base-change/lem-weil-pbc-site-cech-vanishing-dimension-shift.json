@@ -21,11 +21,66 @@
  ],
  "proof": [
   {
-   "text": "Embed a Čech-acyclic sheaf into an injective, use the short exact section sequences and the long exact sequences of derived functors and Čech complexes. The injective is Čech-acyclic and has vanishing higher derived functors; the degree-one case follows from section surjectivity, and the higher case follows by dimension shifting.",
+   "text": "For a Čech-acyclic sheaf G and any short exact sequence with kernel G, apply surjective_sections_of_site_cech_h1_vanishing over every U in B. Its hypothesis quantifies over all product choices, whereas hcech is given for S: use SiteCechComplex.comparison_exists, whisker the resulting natural isomorphism with degree-one homology, and transport IsZero. This supplies section surjectivity for all such sequences.",
    "uses": [
-    "lem-weil-pbc-site-cech-vanishing-criterion"
+    "lem-weil-pbc-site-ses-cech-h1-surjective",
+    "def-weil-pbc-site-cech-complex"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, injective embedding and dimension-shifting paragraphs"
+   }
+  },
+  {
+   "text": "Prove uniformly for every Čech-acyclic G that H'(G,n+1,U) vanishes for all U in B, by induction on n. Embed G using Mathlib Injective.ι G, and form the actual cokernel with cokernel.π. Mathlib gives enough injectives for the small-site sheaf category, and exact_cokernel makes this a short exact sequence 0 -> G -> I -> Q -> 0. No arbitrary object is chosen from an unproved existence theorem.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, injective embedding and dimension-shifting paragraphs"
+   }
+  },
+  {
+   "text": "For n=0, let X be the sheafification of the free abelian presheaf on yoneda(U). The composed free-forgetful and sheafification adjunctions, followed by yonedaEquiv, identify Hom(X,L) with L(U), naturally in L. Mathlib Ext.covariant_sequence_exact₁ and eq_zero_of_injective express any Ext¹(X,G) class as the boundary of y in Ext⁰(X,Q). Section surjectivity lifts the section corresponding to Ext.homEquiv₀ y to I(U), hence to a morphism a:X->I. Naturality gives a ≫ g = Ext.homEquiv₀ y. Thus y=Ext.mk₀ a composed with Ext.mk₀ g, whose boundary is zero by hE.comp_extClass and Ext.comp_assoc. This proves degree one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, injective embedding and dimension-shifting paragraphs"
+   }
+  },
+  {
+   "text": "For the successor step, I has zero positive Čech cohomology. For a chosen covering K=S(V,T,W,f,h), map the short exact sheaf sequence to K.complexFunctor. Evaluate at each K.W(k,t): preservation of kernels gives exactness and injectivity of the first section map, and the first step gives surjectivity of the second since hB puts that intersection in B. Choose preimages componentwise to prove exactness and surjectivity for the product groups; injectivity follows componentwise. Mathlib shortExact_of_degreewise_shortExact now gives a short exact sequence of the nonnegative Čech complexes, including empty products.",
+   "uses": [
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-weil-pbc-site-ses-cech-h1-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, injective embedding and dimension-shifting paragraphs"
+   }
+  },
+  {
+   "text": "The exact homology segment H^p(K,I) -> H^p(K,Q) -> H^{p+1}(K,G), supplied by hP.homology_exact₃, has zero outer terms for p>0. Exact.isZero_X₂ therefore gives zero Čech cohomology of Q. Apply the uniform induction hypothesis to Q. For X the free representable sheaf over U, Ext.covariant_sequence_exact₁ and injective Ext vanishing show every Ext^{n+2}(X,G) class is the boundary of an Ext^{n+1}(X,Q) class, which is zero by induction. Hence all classes vanish.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, injective embedding and dimension-shifting paragraphs"
+   }
+  },
+  {
+   "text": "Specialize the uniform result to F to obtain H'(F,1,U)=0. Given p>1, write p=n+1 and use the same uniform result for degree p; it supplies the requested implication, even without its antecedent. This preserves the original theorem signature and uses the complete injective/cokernel route of Stacks 03F9.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Lemma Tag 03F9, injective embedding and dimension-shifting paragraphs"
@@ -33,12 +88,17 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-cech-vanishing-criterion"
+  "lem-weil-pbc-site-ses-cech-h1-surjective",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03F9, proof"
+  "place": "Lemma Tag 03F9 (lemma-cech-vanish-collection), proof; realized by N1 using Mathlib Ext exactness and homology exactness, with induction uniform in the Čech-acyclic sheaf"
  },
  "status": "split",
  "created": {
@@ -104,10 +164,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T053942-L-2639696",
-  "kind": "interface",
+  "landing": "20261012T085310-L-27943",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
