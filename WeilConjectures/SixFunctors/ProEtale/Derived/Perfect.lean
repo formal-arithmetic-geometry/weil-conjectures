@@ -676,6 +676,7 @@ theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] {p : ℕ} [Fac
       (_root_.DerivedCategory.singleFunctorObjUnitIso _)
       (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
         (ObjectProperty.flat_of_isDualizable isDualizable_unit))
+  have : IsAlgClosed k := ‹IsAlgClosure (ZMod p) k›.isAlgClosed
   obtain ⟨c⟩ := DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom Λ (p := p) aX
     ⟨hK', a, b, hKt'⟩ hU
   exact DerivedCategory.boundedConstructible_derivedDual_of_iso Λ e c

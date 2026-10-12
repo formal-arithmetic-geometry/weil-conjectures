@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekConstructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
@@ -76,7 +77,7 @@ internal hom carries `Dctf(X, Λ) × Dctf(X, Λ)` into `Dctf(X, Λ)`, for two ar
 This is `AlgebraicGeometry.Etale.boundedConstructible_derivedHom` together with the
 dimension-dependent bound `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`, `X` having
 finite dimension. -/
-theorem constructibleFiniteTor_derivedHom [HasInvertibleExponent Λ X]
+theorem constructibleFiniteTor_derivedHom [IsAlgClosed k] [HasInvertibleExponent Λ X]
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
     (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
@@ -236,8 +237,8 @@ objects, `Rf^! : Dctf(Y) ⥤ Dctf(X)` for every such `f` (no admissibility hypot
 Verdier dual `𝔻_X : Dctf(X) ⥤ Dctf(X)`. The pro-étale internal-Hom cell is
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory`.
 -/
-theorem constructibleFiniteTor_preservation [QuasiCompact f] [HasCompactification f]
-    [IsSeparated aX] [HasCompactification aX] :
+theorem constructibleFiniteTor_preservation [IsAlgClosed k] [QuasiCompact f]
+    [HasCompactification f] [IsSeparated aX] [HasCompactification aX] :
     (∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
         constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
@@ -305,7 +306,7 @@ results come with these intervals:
 The pro-étale and boundary entries are
 `AlgebraicGeometry.ProEtale.DerivedCategory.preservationMatrix_of_isAlgClosure`, and the
 integral entries (item 5) are `AlgebraicGeometry.Etale.preservationMatrix_integral`. -/
-theorem torAmplitudeIn_preservation [QuasiCompact f] [HasCompactification f]
+theorem torAmplitudeIn_preservation [IsAlgClosed k] [QuasiCompact f] [HasCompactification f]
     [IsSeparated aX] [HasCompactification aX] :
     (∀ (a b : ℤ) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K →
@@ -410,6 +411,7 @@ theorem constructibleFiniteTor_derivedHom_mapDerivedCategory {k : Type u} [Field
       (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
         (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
           (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) := by
+  have : IsAlgClosed k := ‹IsAlgClosure (ZMod p) k›.isAlgClosed
   obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_derivedHom Λ (p := p) aX hK hM.1
   exact (constructibleFiniteTor _ X).prop_of_iso e
     (constructibleFiniteTor_mapDerivedCategory Λ
@@ -442,6 +444,7 @@ theorem boundedConstructible_derivedHom_mapDerivedCategory_of_isDualizable {k : 
         (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
           (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
             (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) := by
+  have : IsAlgClosed k := ‹IsAlgClosure (ZMod p) k›.isAlgClosed
   obtain ⟨e⟩ := nonempty_iso_mapDerivedCategory_derivedHom Λ (p := p) aX ⟨hK, a, b, hKt⟩ hM
   exact ⟨(boundedConstructible _ X).prop_of_iso e
       (boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj

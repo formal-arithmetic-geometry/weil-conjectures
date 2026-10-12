@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.Biduality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
 
 /-!

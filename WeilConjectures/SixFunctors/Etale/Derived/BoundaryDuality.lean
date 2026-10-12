@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Biduality
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -195,14 +195,15 @@ theorem hasBoundaryDuality [IsAlgClosed k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.o
 /-- Blueprint `thm-sf-biduality-class`: Verdier biduality on the coefficient class, at the finite
 stages `Λ = A_{E,n}`.
 
-For `X` separated of finite type over a field `k` with `dim X ≤ d` and a finite coefficient ring
-`Λ` whose exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` preserves
-`Dctf(X, Λ)` and the evaluation-defined double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism
-on it, so that `𝔻_X` is an anti-equivalence of `Dctf(X, Λ)`
+For `X` separated of finite type over an algebraically closed field `k` with `dim X ≤ d` and a
+finite coefficient ring `Λ` whose exponent is invertible on `k`, the Verdier dual
+`𝔻_X = RHom(-, ω_X)` preserves `Dctf(X, Λ)` and the evaluation-defined double-dual map
+`δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism on it, so that `𝔻_X` is an anti-equivalence of
+`Dctf(X, Λ)`
 (`AlgebraicGeometry.Etale.verdierDualEquivalence`); an input Tor interval `[a, b]` gives the
 interval `[-b - 2d, -a]` for the dual. -/
-theorem verdierDual_finiteStage {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX]
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX] (d : ℕ)
+theorem verdierDual_finiteStage [IsAlgClosed k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
+    [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX] (d : ℕ)
     (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
     (∀ {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
       constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →

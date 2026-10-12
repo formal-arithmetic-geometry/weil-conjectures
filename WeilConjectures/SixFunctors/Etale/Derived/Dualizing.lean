@@ -28,18 +28,16 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 - `AlgebraicGeometry.Etale.verdierDualEvaluation`, `AlgebraicGeometry.Etale.verdierDualDoubleDual`
   (`lem-weil-duality-pairing`): the evaluation pairing `K ⊗ᴸ 𝔻_X K ⟶ ω_X` and the double-dual
   morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`, its transpose.
-- `AlgebraicGeometry.Etale.verdierDualEquivalence` (`sk-prop-sf-biduality-general`): the
-  anti-equivalence `𝔻_X : Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app` (`sk-prop-sf-biduality-general`):
-  general Verdier biduality, `δ_K` is an isomorphism on `Dctf(X, Λ)`; hence
-  `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`.
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`,
   `AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual` (`lem-weil-verdier-preservation-strata`):
   `𝔻_X` carries `Dctf(X, Λ)` into itself, sending the Tor interval `[a, b]` to
   `[-b - 2d, -a]` when `dim X ≤ d`.
+
+Verdier biduality itself (`sk-prop-sf-biduality-general`) is proved in
+`WeilConjectures.SixFunctors.Etale.Derived.Biduality`.
 
 ## Implementation notes
 
@@ -48,10 +46,10 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
 `Ra_!` is a left adjoint (`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` for
 torsion coefficients).
 
-The two theorems are stated in the setting of the blueprint's `sk-prop-sf-biduality-general`
-and of `sk-def-sf-setting`: `X` is a separated scheme of finite type over a field `k`, and the
-coefficients are a finite ring `Λ` whose exponent is invertible on `k`. Both hypotheses are
-needed. Over a singular base biduality fails already for `a = 𝟙`: on a nodal curve, with
+The preservation theorems are stated in the setting of `sk-def-sf-setting`: `X` is a separated
+scheme of finite type over a field `k`, and the coefficients are a finite ring `Λ` whose
+exponent is invertible on `k`. Both hypotheses are needed. Over a singular base biduality fails
+already for `a = 𝟙`: on a nodal curve, with
 `K = i_* Λ` the skyscraper at the node, `i^! Λ` has rank three, so `𝔻_X 𝔻_X K` has rank nine.
 For `p`-torsion coefficients in characteristic `p` the Verdier dual of `j_! Λ` is `Rj_* Λ`,
 which is not constructible (Artin–Schreier). At a finite stage every object of `Dctf` is
@@ -168,64 +166,6 @@ theorem constructibleFiniteTor_verdierDual
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
       ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)) :=
   sorry
-
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
-
-For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
-exponent is invertible on `k`, the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K`
-(`AlgebraicGeometry.Etale.verdierDualDoubleDual`) is an isomorphism for every `K` in
-`Dctf(X, Λ)`. Over an algebraically closed field this is the finite-stage étale biduality
-`thm-weil-etale-geometric-biduality`. -/
-theorem isIso_verdierDualDoubleDual_app
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
-  sorry
-
-/-- Blueprint `thm-weil-etale-geometric-biduality`: Finite-stage étale Verdier biduality.
-
-For `X` separated of finite type over an algebraically closed field `k` and a finite coefficient
-ring `Λ` whose exponent is invertible on `k`, the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an
-isomorphism for every `K ∈ Dctf(X_ét, Λ)`; the anti-equivalence of `Dctf(X_ét, Λ)` is
-`AlgebraicGeometry.Etale.verdierDualEquivalence`. This is the case of an algebraically closed
-field of the general biduality `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`, which is
-proved over an algebraically closed field by induction on `dim X`, through the geometric generic
-fibres of the maps `X ⟶ 𝔸¹_k` (`lem-weil-geometric-generic-duality`). -/
-theorem isIso_verdierDualDoubleDual_app_of_isAlgClosed [IsAlgClosed k]
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
-  isIso_verdierDualDoubleDual_app Λ a hK
-
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
-
-For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
-exponent is invertible on `k`, the Verdier dual is a contravariant anti-equivalence of
-`Dctf(X, Λ)`: the double-dual morphism `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every object `K`
-of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
-theorem nonempty_iso_verdierDual_verdierDual
-    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
-    Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) a).obj
-      (op ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)))) :=
-  have := isIso_verdierDualDoubleDual_app Λ a hK
-  ⟨asIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K)⟩
-
-/-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
-
-For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
-exponent is invertible on `k`, the Verdier dual `𝔻_X = RHom(-, ω_X)` restricts to a
-contravariant anti-equivalence `Dctf(X, Λ)ᵒᵖ ≌ Dctf(X, Λ)`, with quasi-inverse `𝔻_X` itself:
-`𝔻_X` preserves `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`) and
-the unit and the counit are the double-dual isomorphisms `δ_K : K ≅ 𝔻_X 𝔻_X K`
-(`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
-noncomputable def verdierDualEquivalence :
-    (DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X)ᵒᵖ ≌
-      DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X :=
-  (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).liftDualEquivalence
-    (verdierDual (ModuleCat.{u + 1} Λ) a) (fun _ hK ↦ constructibleFiniteTor_verdierDual Λ a hK)
-    (verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a)
-    (fun _ hK ↦ isIso_verdierDualDoubleDual_app Λ a hK)
 
 end Field
 

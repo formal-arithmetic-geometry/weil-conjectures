@@ -204,8 +204,8 @@ the proof is the assembly. Smooth base change on the unbounded derived categorie
 orientation, which is smooth purity, are not available in this directory and are left open
 here. The Tate twist datum is assumed normalized: for the untwisted datum `Λ_X(m) = Λ_X` the
 orientation clause fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
-theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ (Spec (.of k))]
-    [IsSeparated f] :
+theorem sixOperationsPackage [IsAlgClosed k] [HasTateTwist.IsNormalized Λ]
+    [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
   upperStarLowerStarAdjunction := ⟨derivedUpperStarLowerStarAdjunction _ f⟩
   lowerShriekUpperShriekAdjunction := ⟨rightDerivedUpperShriekAdjunction _ f⟩
