@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-generic-finite-primary-decomposition",
+ "kind": "statement",
+ "title": "Finite primary decomposition of a generic abelian sheaf",
+ "statement": "Let K be a field and M a torsion abelian etale sheaf on Spec K [def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-torsion-etale-sheaf] with finite geometric stalk [def-weil-pbc-geometric-stalks]. There exist r, primes p_i, and sheaves N_i with finite p_i-primary geometric stalk, with maps a_i:M -> N_i and b_i:N_i -> M such that the sum of a_i followed by b_i is the identity of M. The zero sheaf admits r=0.",
+ "stmt_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraphs 1--2"
+ },
+ "proof": [
+  {
+   "text": "Apply the abelian stalk/Galois-module equivalence to obtain a finite continuous abelian Galois module V.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+    "place": "proof paragraphs 1--2"
+   }
+  },
+  {
+   "text": "Take an annihilator N of V. If V is zero take the empty decomposition. Otherwise enumerate the primes dividing N and their powers q_i in N. The kernels of multiplication by q_i are invariant submodules V_i. Chinese remainder supplies integer scalars c_i equal to one modulo q_i and zero modulo the other q_j; multiplication by c_i projects onto V_i, and the sum of these projections is identity. Each V_i is finite and p_i-primary.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+    "place": "proof paragraphs 1--2"
+   }
+  },
+  {
+   "text": "Transport V_i, their inclusions and projections back through the additive equivalence, conjugating by its unit. Additivity gives the sum identity and the stalk comparison gives the finite and primary conditions.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+    "place": "proof paragraphs 1--2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-generic-second.md",
+  "place": "proof paragraphs 1--2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite abelian etale sheaf on a field is a finite direct sum of primary sheaves",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite abelian etale sheaf on a field decomposes into primary summands with projection inclusion sum identity",
+   "date": "2026-10-12",
+   "results": "AdicCompletion.sum_comp_sumInv; AdicCompletion.sumInv_comp_sum; DirectSum.decompose_eq_mul_idempotent; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self; DirectSum.idempotent; AdicCompletion.component_sumInv; Submodule.exists_isInternal_prime_power_torsion",
+   "verdict": "No exact sheaf construction; group and normalization ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "primaryComponent|primary.*[Dd]ecomposition",
+   "date": "2026-10-12",
+   "results": "Mathlib/GroupTheory/Torsion.lean; Mathlib/GroupTheory/Torsion.lean; Mathlib/GroupTheory/Torsion.lean; Mathlib/GroupTheory/Torsion.lean; Mathlib/GroupTheory/Torsion.lean; Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean; Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean; Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean",
+   "verdict": "No exact sheaf construction; group and normalization ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.GenericFiniteCoarseTraceFiltrationData",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-generic-finite-trace-filtration-data",
+   "place": "proof paragraphs 1--2: Finite primary decomposition of a generic abelian sheaf",
+   "via": [
+    "lem-sc-generic-finite-coarse-trace-filtration-data",
+    "lem-sc-affine-generic-finite-second-retraction",
+    "lem-sc-affine-generic-finite-second",
+    "lem-sc-generic-finite-trace-filtration-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd-affine",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/GenericFinitePrimaryDecomposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_primary_sheaf_decomposition",
+  "statement": "theorem exists_finite_primary_sheaf_decomposition\n    (K : Type u) [Field K]\n    (M : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hM : M.IsTorsion)\n    (hfinite : Finite (((pointSmallEtale\n      (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))))).sheafFiber\n        (A := AddCommGrpCat.{u + 1})).obj M)) :\n    ∃ (r : ℕ) (p : Fin r → ℕ)\n      (N : Fin r → Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}),\n      (∀ i, (p i).Prime) ∧\n      (∀ i, Finite (((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))))).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj (N i))) ∧\n      (∀ i, IsPGroup (p i) (Multiplicative (((pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K (AlgebraicClosure K))))).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj (N i)))) ∧\n      ∃ (a : ∀ i, M ⟶ N i) (b : ∀ i, N i ⟶ M),\n        ∑ i, a i ≫ b i = 𝟙 M",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T110257-L-612953",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T110257-L-612953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7335,3 +7335,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:02 L: merged deliver/C2/Sheaf.AlgebraicGeometry.Curve.GenericDirectImageCounit (stage 3; reviewer PASS; first push; landing 20261012T110256-L-612654 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:02 L: merged deliver/C3/Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallGluing (stage 3; reviewer PASS; first push; landing 20261012T110256-L-612752 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:02 L: merged deliver/C3/Sheaf.AlgebraicGeometry.RingedSpacePastedUnitKFlatHom (stage 3; reviewer PASS; first push; landing 20261012T110256-L-612851 (interface); batch 20261012T110249; modules 3; new nodes 2)
+- 11:02 L: merged deliver/D2/Sheaf.AlgebraicGeometry.Curve.GenericFiniteCoarseTraceFiltrationData (stage 3; reviewer PASS; first push; landing 20261012T110257-L-612953 (interface); batch 20261012T110249; modules 3; new nodes 2)

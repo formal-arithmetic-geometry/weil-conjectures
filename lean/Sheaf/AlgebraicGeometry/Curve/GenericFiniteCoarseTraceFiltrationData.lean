@@ -13,13 +13,9 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
-import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
-import Sheaf.RepresentationTheory.SylowModuleFiltration
-import Sheaf.FieldTheory.OpenSubgroupFixedField
-import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
-import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
-import WeilConjectures.SixFunctors.Finite.GlobalSections
-import WeilConjectures.SixFunctors.Finite.Exact
+import Sheaf.AlgebraicGeometry.Curve.GenericFinitePrimaryDecomposition
+import Sheaf.AlgebraicGeometry.Curve.GenericPrimaryCoarseTraceRetraction
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 
 /-!
 # Generic finite trace with unrefined constant-vector-space quotients
@@ -104,6 +100,71 @@ theorem exists_generic_finite_coarse_trace_filtration_data
           ∀ i, Sheaf.H
             ((Etale.lowerStar AddCommGrpCat.{u + 1} (D i).fromSpecFunctionField).obj
               (F i (n i))) 2,
-          Function.Injective j := by sorry
+          Function.Injective j := by
+  classical
+  obtain ⟨r, p, N, hp, hNfinite, hNprimary, a, b, hab⟩ :=
+    Scheme.exists_finite_primary_sheaf_decomposition C.functionField M hM hfinite
+  have hdata (i : Fin r) :=
+    exists_generic_primary_coarse_trace_retraction f hmodel (N i) (p i) (hp i)
+      (hNfinite i) (hNprimary i)
+  choose D π hπ hconn hsmooth haffine hIntegral n F hzero hstep α β hαβ using hdata
+  let : ∀ i, IsIntegral (D i) := hIntegral
+  let : ∀ i, IsFinite (π i) := hπ
+  let P := Etale.lowerStar AddCommGrpCat.{u + 1} C.fromSpecFunctionField
+  let G (i : Fin r) :=
+    (Etale.lowerStar AddCommGrpCat.{u + 1} (D i).fromSpecFunctionField).obj (F i (n i))
+  let edge (i : Fin r) :
+      Sheaf.H ((Etale.lowerStar AddCommGrpCat.{u + 1} (π i)).obj (G i)) 2 →
+        Sheaf.H (G i) 2 :=
+    fun x ↦ Sheaf.H.map
+      ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (π i)).counit.app (G i)) 2
+        (Etale.cohomologyMap (π i) _ 2 x)
+  have hedge (i : Fin r) : Function.Injective (edge i) :=
+    (Etale.bijective_edgeMap_of_isFinite (π i) (G i) 2).injective
+  refine ⟨r, D, fun i ↦ π i ≫ f, hconn, hsmooth, haffine, hIntegral,
+    n, F, hzero, ?_, ?_⟩
+  · intro i t ht
+    obtain ⟨S, d, hS, he₁, he₂, he₃⟩ := hstep i t ht
+    exact ⟨S, p i, d, hp i, hS, he₁, he₂, he₃⟩
+  · refine ⟨fun x i ↦ edge i (Sheaf.H.map (α i) 2 (Sheaf.H.map (P.map (a i)) 2 x)), ?_⟩
+    intro x y hxy
+    have hcomponent (i : Fin r) :
+        Sheaf.H.map (P.map (a i)) 2 x = Sheaf.H.map (P.map (a i)) 2 y := by
+      have hi := hedge i (congrFun hxy i)
+      have hi' := congrArg (Sheaf.H.map (β i) 2) hi
+      simpa only [← Sheaf.H.map_comp_apply, hαβ i, Sheaf.H.map_id_apply] using hi'
+    have hsum : ∑ i, P.map (a i) ≫ P.map (b i) = 𝟙 (P.obj M) := by
+      calc
+        _ = P.map (∑ i, a i ≫ b i) := by
+          rw [P.map_sum]
+          simp_rw [P.map_comp]
+        _ = P.map (𝟙 M) := congrArg P.map hab
+        _ = 𝟙 (P.obj M) := P.map_id M
+    have hR := congrArg (Sheaf.functorH C.smallEtaleTopology 2).map hsum
+    simp only [Functor.map_sum, Functor.map_comp] at hR
+    have hvalue := congrArg (fun z ↦ z x) hR
+    have hvalue' := congrArg (fun z ↦ z y) hR
+    have heval (z : Sheaf.H (P.obj M) 2) :
+        (∑ i, (Sheaf.functorH C.smallEtaleTopology 2).map (P.map (a i)) ≫
+          (Sheaf.functorH C.smallEtaleTopology 2).map (P.map (b i))) z =
+        ∑ i, Sheaf.H.map (P.map (b i)) 2 (Sheaf.H.map (P.map (a i)) 2 z) := by
+      change (AddCommGrpCat.homAddEquiv (∑ i,
+        (Sheaf.functorH C.smallEtaleTopology 2).map (P.map (a i)) ≫
+          (Sheaf.functorH C.smallEtaleTopology 2).map (P.map (b i)))) z = _
+      rw [map_sum]
+      rw [AddMonoidHom.finsetSum_apply]
+      rfl
+    have hx : (∑ i, Sheaf.H.map (P.map (b i)) 2
+        (Sheaf.H.map (P.map (a i)) 2 x)) = x := by
+      rw [← heval]
+      exact hvalue.trans (Sheaf.H.map_id_apply x)
+    have hy : (∑ i, Sheaf.H.map (P.map (b i)) 2
+        (Sheaf.H.map (P.map (a i)) 2 y)) = y := by
+      rw [← heval]
+      exact hvalue'.trans (Sheaf.H.map_id_apply y)
+    rw [← hx, ← hy]
+    apply Finset.sum_congr rfl
+    intro i hi
+    exact congrArg (Sheaf.H.map (P.map (b i)) 2) (hcomponent i)
 
 end AlgebraicGeometry.IsConnectedCurve
