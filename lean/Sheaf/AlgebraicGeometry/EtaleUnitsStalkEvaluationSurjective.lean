@@ -3,8 +3,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Sheaf.FieldTheory.GaloisUnitsCohomology
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.CategoryTheory.Sites.Torsor
-import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Sheaf.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfieldBijective
 
 @[expose] public section
 
@@ -43,6 +42,8 @@ theorem etale_units_stalk_evaluation_surjective (K : Type u) [Field K] :
           (ΓSpecIso (.of Ω)).hom
             (x.left.appTop ((Additive.toMul z.down : Γ(X.left, ⊤)ˣ) : Γ(X.left, ⊤)))) →
       Function.Surjective f := by
-  sorry
+  dsimp only
+  intro f hev
+  exact (etaleUnits_stalk_evaluation_overfield_bijective K (AlgebraicClosure K) f hev).2
 
 end AlgebraicGeometry.Scheme
