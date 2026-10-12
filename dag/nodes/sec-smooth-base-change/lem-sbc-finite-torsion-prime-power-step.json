@@ -1,0 +1,92 @@
+{
+ "id": "lem-sbc-finite-torsion-prime-power-step",
+ "kind": "statement",
+ "title": "Prime power extension induction",
+ "statement": "For a property P of lifted-integer modules that contains zero objects, is invariant under isomorphism, and is closed under short exact extensions, if r is prime and P holds for the lifted module ZMod r, then P holds for the lifted module ZMod (r ^ e) for every natural number e.",
+ "source": {
+  "document": "Stacks Project Tag 0F08",
+  "place": "cyclic coefficient reduction"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "proof": [
+  {
+   "text": "Induct on e. At e = 0 the module is zero. At e + 1 use the canonical short exact sequence with terms ZMod (r ^ e), ZMod (r ^ (e + 1)), and ZMod r; its first map is multiplication by r and its quotient map is reduction modulo r. Apply extension closure to the induction hypothesis and the prime case, transporting across the canonical module isomorphisms.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project Tag 0F08",
+  "place": "cyclic coefficient reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite torsion module induction",
+   "results": "service unavailable (Internal Server Error)",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat ShortExact ZMod",
+   "results": "no hits; Unknown identifier ShortExact",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ZMod.*ShortExact",
+   "results": "no hits",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.FiniteTorsionExtensionInduction",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-finite-torsion-extension-induction",
+   "place": "intermediate proof step"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.FiniteTorsionExtensionInduction",
+  "file": "lean/Sheaf/Algebra/FiniteTorsionExtensionInduction.lean",
+  "declaration": "ModuleCat.finite_torsion_prime_power_step",
+  "statement": "theorem finite_torsion_prime_power_step (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop) (hzero : ∀ A, IsZero A → P A) (hiso : ∀ {A B}, (A ≅ B) → P A → P B) (hext : ∀ (S : ShortComplex (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))), S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂) (r e : ℕ) (hr : r.Prime) (hprime : P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod r)))) : P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod (r ^ e))))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135231-L-1662957",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T135231-L-1662957",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

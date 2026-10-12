@@ -12,20 +12,23 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Decompose the finite underlying abelian group as a finite direct sum of Z/r^e using equiv_directSum_zmod_of_finite. The additive equivalence is automatically integer-linear, also for the lifted integer action. Remove zero summands. In a remaining summand the generator has order r^e, which divides the annihilator n. The nonzero element r^(e-1) is killed by r, giving noninjectivity of multiplication by r on M. Therefore P holds for each relevant prime cyclic module.",
+   "text": "Apply finite_torsion_assemble_prime_powers to reduce P M to the prime-power cyclic modules whose primes divide n and act non-injectively on M.",
    "uses": [
-    "lem-sbc-finitely-generated-abelian-group-structure"
+    "lem-sbc-finite-torsion-assemble-prime-powers"
    ],
    "elementary": false
   },
   {
-   "text": "Induct on e using the short exact sequence Z/r^(e-1) -> Z/r^e -> Z/r. The first map is multiplication by r on residue classes, which is injective; the second is reduction modulo r, which is surjective, with kernel exactly the multiples of r. For e=0 the group is Z/1=0. Extension closure proves P for each prime-power summand. Assemble the finite direct sum inductively using split short exact sequences, starting with zero. Finally use isomorphism invariance. The zero module and n=1 produce no nonzero summands.",
-   "uses": [],
-   "elementary": true
+   "text": "For each prime power, apply finite_torsion_prime_power_step, which inducts on the exponent using the short exact cyclic quotient sequence and extension closure; discharge the prime case with hprime.",
+   "uses": [
+    "lem-sbc-finite-torsion-prime-power-step"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-finitely-generated-abelian-group-structure"
+  "lem-sbc-finite-torsion-assemble-prime-powers",
+  "lem-sbc-finite-torsion-prime-power-step"
  ],
  "proof_origin": {
   "by": "agent",
@@ -107,10 +110,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T110326-L-624937",
-  "kind": "interface",
+  "landing": "20261012T135231-L-1662957",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

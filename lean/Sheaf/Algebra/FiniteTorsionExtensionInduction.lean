@@ -27,31 +27,60 @@ open CategoryTheory Limits
 
 namespace ModuleCat
 
-/-- An isomorphism-invariant property containing zero and closed under extensions holds
-for a finite bounded torsion integer module if it holds for its relevant prime cyclic
-modules.
+/--
+Prime-power induction step in the finite torsion dévissage.
 
-Source: Stacks Project, Tag 0F08, cyclic-coefficient reduction;
-Mathlib.GroupTheory.FiniteAbelian.Basic, `equiv_directSum_zmod_of_finite`.
-(blueprint: lem-sbc-finite-torsion-extension-induction)
+Source: Stacks Project, Tag 0F08, cyclic-coefficient reduction.
 
-Proof:
-1. Decompose the underlying finite abelian group as a finite direct sum of cyclic
-prime-power groups. Transport the additive equivalence to an integer-linear equivalence,
-and then to a module isomorphism; integer scalar multiplication is determined by addition,
-including after lifting the coefficient ring and the cyclic groups to the stated universe.
-2. Omit the zero summands (exponent zero). For each remaining summand Z/r^e, its generator
-has order r^e. Since n annihilates the entire module, r^e divides n, hence r divides n.
-The nonzero element r^(e-1) in that summand is killed by r, so multiplication by r is
-not injective on the original module. The assumed prime clause therefore applies to r.
-3. For each such r, prove the property for Z/r^j by induction on j. At j=0 the group
-Z/1 is zero. For j+1 use the short exact sequence with injection multiplication by r
-from Z/r^j to Z/r^(j+1), and reduction modulo r from Z/r^(j+1) onto Z/r. Its kernel
-is exactly the multiples of r. The extension hypothesis gives the induction step.
-4. Assemble the finitely many summands by induction on their finite index set. The empty
-sum is zero. For an added summand use the split short exact sequence for a binary direct
-sum. Transport the result back through the module isomorphism from step 1.
-This also covers the zero module and n=1; no nonzero cyclic summands occur in those cases. -/
+Proof: Induct on `e`. For `e = 0`, `ZMod (r ^ 0)` is the zero module, so
+`hzero` applies. For the successor, use the standard short exact sequence
+`ZMod (r ^ e) → ZMod (r ^ (e + 1)) → ZMod r`, where the first map is
+multiplication by `r` and the second is reduction modulo `r`. The kernel of the
+second map is the image of the first, and the first map is injective. Apply
+`hext` to the induction hypothesis and `hprime`, transporting along the
+canonical module isomorphisms with `hiso`.
+(blueprint: lem-sbc-finite-torsion-prime-power-step)
+-/
+theorem finite_torsion_prime_power_step
+    (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop)
+    (hzero : ∀ A, IsZero A → P A)
+    (hiso : ∀ {A B}, (A ≅ B) → P A → P B)
+    (hext : ∀ (S : ShortComplex (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))),
+      S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
+    (r e : ℕ) (hr : r.Prime)
+    (hprime : P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod r)))) :
+    P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod (r ^ e)))) := by sorry
+
+/--
+Assemble finitely many prime-power cyclic summands by split short exact
+sequences.
+
+Source: Stacks Project, Tag 0F08, cyclic-coefficient reduction; Mathlib's
+finite abelian group decomposition.
+
+Proof: Decompose the finite underlying additive group of `M` as a finite direct
+sum of cyclic groups of prime-power order. The annihilation hypothesis implies
+each nonzero exponent divides `n`, and hence its prime divides `n`. A generator
+of the corresponding summand yields a nonzero element killed by that prime, so
+multiplication by the prime on `M` is not injective. The hypothesis `hp`, followed
+by `finite_torsion_prime_power_step`, gives `P` for every summand. Induct on the
+finite index set of summands, using the split short exact sequence for adjoining
+a direct summand, and transport the result back to `M` with `hiso`; the empty
+sum is zero and is handled by `hzero`.
+(blueprint: lem-sbc-finite-torsion-assemble-prime-powers)
+-/
+theorem finite_torsion_assemble_prime_powers
+    (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop)
+    (hzero : ∀ A, IsZero A → P A)
+    (hiso : ∀ {A B}, (A ≅ B) → P A → P B)
+    (hext : ∀ (S : ShortComplex (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))),
+      S.ShortExact → P S.X₁ → P S.X₃ → P S.X₂)
+    (M : ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) [Finite M] (n : ℕ) (hn : n ≠ 0)
+    (hM : ∀ x : M, n • x = 0)
+    (hp : ∀ r e : ℕ, r.Prime → r ∣ n →
+      ¬ Function.Injective (fun x : M ↦ r • x) →
+      P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod (r ^ e))))) : P M := by sorry
+
 theorem finite_torsion_property_of_prime
     (P : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) → Prop)
     (hzero : ∀ A, IsZero A → P A)
@@ -63,6 +92,10 @@ theorem finite_torsion_property_of_prime
     (hprime : ∀ r : ℕ, r.Prime → r ∣ n →
       ¬ Function.Injective (fun x : M ↦ r • x) →
       P (ModuleCat.of (ULift.{u + 1} ℤ) (ULift.{u + 1} (ZMod r)))) :
-    P M := by sorry
+    P M := by
+  apply finite_torsion_assemble_prime_powers P hzero hiso hext M n hn hM
+  intro r e hr hdiv hni
+  apply finite_torsion_prime_power_step P hzero hiso hext r e hr
+  exact hprime r hr hdiv hni
 
 end ModuleCat
