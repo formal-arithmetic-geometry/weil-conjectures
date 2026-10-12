@@ -15,54 +15,39 @@
  },
  "proof": [
   {
-   "text": "Reduce the target without changing its etale sheaves. Generic constancy of the constructible direct image permits choosing pairwise disjoint affine integral dense opens of the positive-dimensional components on which it is finite locally constant. The excluded set is a finite set of closed points; zero-dimensional components are included in that excluded set. Write the finite inverse image of each chosen Spec A as Spec B and apply generic finite-algebra splitting after a further principal shrinking.",
+   "text": "Install Noetherianity of Y and X from finite type over k and finiteness of f. Apply constructible generic constancy to f_*F to get a dense open V on which it is finite locally constant. Apply generic finite-module reflection to shrink to a dense U <= V on whose inverse image W the source sheaf is locally constant.",
    "uses": [
-    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-weil-pbc-finite-type-over-noetherian",
     "prop-constructible-generic-constancy",
-    "lem-weil-pbc-generic-finite-algebra-splitting"
+    "lem-weil-pbc-finite-module-generic-reflection"
    ],
    "elementary": false
   },
   {
-   "text": "The surjective finite etale base change supplied by splitting makes the reduced inverse image a finite disjoint union of universal-homeomorphism components over U. Finite exchange and pullback stability identify its direct image with a finite locally constant sheaf on U. The component sheaves, transported through topological invariance, are direct summands of that sheaf.",
+   "text": "The complement of U in the target curve is finite. Mathlib finite_preimage makes the complement of W finite. Let Z be its reduced closed subscheme, with closed immersion i. Its underlying type is finite because i is injective. Z is locally of finite type over k, hence Jacobson; Mathlib makes every finite Jacobson space discrete. The discrete-scheme module lemma gives local constancy of i^*F. No source stalk finiteness is asserted.",
    "uses": [
-    "lemma-weil-pbc-finite-exchange",
-    "lemma-constructible-pullback-locally-constant",
-    "lemma-constructible-pullback-finite",
-    "thm-weil-pbc-universal-homeomorphism-invariance"
+    "lem-sc-dense-open-finite-complement",
+    "lem-weil-pbc-discrete-scheme-module-locally-constant"
    ],
    "elementary": false
   },
   {
-   "text": "Trivialize the ambient finite locally constant module sheaf as M_U for a finitely generated module M. The summand projector is etale-locally induced by a constant endomorphism e, because the images of a finite generating set are simultaneously locally constant. On nonempty cover members evaluation at a geometric point gives e squared equals e. The image sheaf is the constant sheaf at the image of e, by exactness of the constant sheaf functor. Thus each summand is locally constant. Transport through the component universal homeomorphisms and compose the etale trivializing covers to descend local constancy to the inverse image of each chosen target open.",
-   "uses": [
-    "lemma-constructible-hom-constant-locally",
-    "lemma-constructible-universal-homeomorphism-invariance"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For an omitted closed target point, its finite inverse image is artinian with residue fields k. Its reduction is a finite disjoint union of Spec k, whose etale topoi are points. Any module sheaf there is constant; no finite generation assertion is needed. The reduced point immersions and the open inverse images from the preceding step give a finite partition of X into constructible locally closed subsets, since X is Noetherian. Their immersions define S, and their pullbacks are locally constant. Empty fibres contribute no strata, and the empty source uses n = 0.",
-   "uses": [
-    "thm-weil-pbc-universal-homeomorphism-invariance"
-   ],
-   "elementary": false
+   "text": "Construct a two-stratum scheme stratification from W and its complement, using W -> X and Z -> X as immersions. They are disjoint and cover X. They are locally closed and hence constructible on the Noetherian space X. The two local constancy proofs prove the required assertion by cases on Fin 2. Empty members are permitted by Scheme.Stratification, so the same construction covers an empty source and empty boundary without extra assumptions.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-generic-finite-algebra-splitting",
-  "lemma-constructible-hom-constant-locally",
-  "lemma-constructible-pullback-finite",
-  "lemma-constructible-pullback-locally-constant",
-  "lemma-constructible-universal-homeomorphism-invariance",
-  "lemma-weil-pbc-finite-exchange",
-  "prop-constructible-generic-constancy",
-  "thm-weil-pbc-universal-homeomorphism-invariance"
+  "lem-sc-dense-open-finite-complement",
+  "lem-weil-pbc-discrete-scheme-module-locally-constant",
+  "lem-weil-pbc-finite-module-generic-reflection",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-constructible-generic-constancy"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "Stacks Project, Etale Cohomology",
-  "place": "Local constancy portion of the finite-stratification and direct-factor refinement of Tags 095K and 0A5D; uses generic finite-algebra splitting and leaves stalk finiteness to the parent theorem."
+  "by": "agent",
+  "document": "Parent module proof and Stacks Project",
+  "place": "Generic part split off, boundary proved by discrete singleton covers, and the Noetherian two-stratum assembly written explicitly in Lean."
  },
  "mathlib_searches": [
   {
@@ -133,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T173827-L-3296147",
+  "landing": "20261012T184336-L-4017162",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

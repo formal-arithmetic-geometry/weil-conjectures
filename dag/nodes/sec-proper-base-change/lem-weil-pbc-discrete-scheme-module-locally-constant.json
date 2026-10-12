@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-discrete-scheme-module-locally-constant",
+ "kind": "statement",
+ "title": "All module sheaves on a discrete algebraic scheme are locally constant",
+ "statement": "Let $k$ be an algebraically closed field, $\\Lambda$ a commutative ring, and $p:Z\\to\\operatorname{Spec}k$ locally of finite type [def-weil-finite-type-morphism]. Suppose the underlying topology of Z is discrete. Every etale sheaf of $\\Lambda$-modules on Z is locally constant [def-constructible-locally-constant]. Z and the modules need not be finite.",
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-constructible-locally-constant"
+ ],
+ "source": {
+  "document": "Stacks Project, Etale Cohomology and the parent module proof",
+  "place": "Parent step 4; Tags 04DZ and 03P5, together with the Nullstellensatz and the zero-dimensional geometry of Tag 06LH"
+ },
+ "proof": [
+  {
+   "text": "Cover Z by its open singletons T. For its unique point t, Spec kappa(t) -> T is a closed immersion and is surjective, hence a universal homeomorphism. Its residue field is isomorphic to k by the Nullstellensatz because t is closed and T is locally of finite type over k.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every set sheaf on Spec kappa(t) has invertible constant-sheaf counit. The constant-sheaf comparison with forgetting module structure identifies the forgotten module counit with that counit composed with an isomorphism. Since forgetting module structure reflects isomorphisms, the module counit is invertible too. Thus any module sheaf on that spectrum is constant.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding assertion to the pullback of F|T to Spec kappa(t). Constant sheaves are locally constant, and universal-homeomorphism descent gives local constancy on T. Local constancy is etale local, so compose the singleton open cover and its trivializations to prove local constancy on Z. This includes the empty scheme and requires neither a finite cover nor finite generation of modules.",
+   "uses": [
+    "lemma-constructible-universal-homeomorphism-invariance",
+    "prop-constructible-generic-constancy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lemma-constructible-universal-homeomorphism-invariance",
+  "prop-constructible-generic-constancy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and the parent module proof",
+  "place": "Parent step 4; Tags 04DZ and 03P5, together with the Nullstellensatz and the zero-dimensional geometry of Tag 06LH; the module-coefficient argument is written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "any etale sheaf of modules on a discrete scheme locally of finite type over an algebraically closed field is locally constant",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a module sheaf on a discrete algebraic scheme over an algebraically closed field is locally constant",
+   "results": "Eight condensed-module constructions; no matching small-etale theorem.",
+   "date": "2026-10-13",
+   "verdict": "No theorem on the small etale site with this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "DiscreteTopology.*IsLocallyConstantSheaf|IsLocallyConstantSheaf.*DiscreteTopology",
+   "results": "No exact theorem; source library generic constancy, universal-homeomorphism descent, and constant-sheaf counit tools are available.",
+   "date": "2026-10-13",
+   "verdict": "No exact statement; use the existing component tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleLocallyConstantStrata",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-normalization-constant",
+   "place": "Parent step 4; Tags 04DZ and 03P5, together with the Nullstellensatz and the zero-dimensional geometry of Tag 06LH",
+   "via": [
+    "lem-weil-pbc-finite-module-locally-constant-strata",
+    "p2-finite-pushforward-module-constructible-reflection",
+    "b3-finite-pushforward-module-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DiscreteSchemeModuleLocallyConstant",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DiscreteSchemeModuleLocallyConstant.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isLocallyConstantSheaf_of_discrete_finiteType_module",
+  "statement": "theorem isLocallyConstantSheaf_of_discrete_finiteType_module\n    (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsAlgClosed k]\n    {Z : Scheme.{u}} [DiscreteTopology Z]\n    (p : Z ⟶ Spec (.of k)) [LocallyOfFiniteType p]\n    (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    IsLocallyConstantSheaf F",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T184336-L-4017162",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T184336-L-4017162",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
