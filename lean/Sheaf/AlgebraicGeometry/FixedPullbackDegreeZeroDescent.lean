@@ -6,12 +6,9 @@ Authors: SHEAF group E3
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
+import Sheaf.AlgebraicGeometry.EtaleSetSectionLift
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
-import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-! # Descent of degree-zero classes of a fixed inverse-image sheaf
 Source: Stacks Project, Tag 09YQ, via Tags 0EYL, 04HR, 09YN, and 03S2. -/
@@ -56,6 +53,78 @@ theorem fixed_pullback_degree_zero_descent
       cohomologyMap (c.π.app (op j)) _ 0 x =
         Sheaf.H.map
           ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
-            (c.π.app (op i)) (c.w f.op).symm).hom.app F) 0 y := by sorry
+            (c.π.app (op i)) (c.w f.op).symm).hom.app F) 0 y := by
+  classical
+  let eI := Sheaf.H.equiv₀ ((upperStar AddCommGrpCat.{u + 1}
+    (c.π.app (op i))).obj F) terminalIsTerminal
+  let g := (Sheaf.ΓNatIsoSheafSections c.pt.smallEtaleTopology
+    AddCommGrpCat.{u + 1} terminalIsTerminal).inv.app
+      ((upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj F) (eI y)
+  obtain ⟨e, he⟩ := exists_abelianPullbackGlobalSectionsComparison (D.obj (op i)) F
+  have : IsIso (⊤_ (D.obj (op i)).Etale).hom := by
+    let e := terminalIsTerminal.uniqueUpToIso
+      (MorphismProperty.Over.mkIdTerminal (@Etale) (D.obj (op i)))
+    have : IsIso e.hom.left := inferInstance
+    have he : e.hom.left = (⊤_ (D.obj (op i)).Etale).hom := by
+      have hw := e.hom.w
+      change e.hom.left ≫ 𝟙 (D.obj (op i)) = _ at hw
+      exact (Category.comp_id _).symm.trans hw
+    rw [← he]
+    exact this
+  have : QuasiCompact (⊤_ (D.obj (op i)).Etale).hom := inferInstance
+  have : QuasiSeparated (⊤_ (D.obj (op i)).Etale).hom := inferInstance
+  obtain ⟨a, s, hs⟩ := etaleSetSectionLift D c hc i
+    ((sheafForget (D.obj (op i)).smallEtaleTopology).obj F) (⊤_ (D.obj (op i)).Etale)
+    (e c.pt (c.π.app (op i)) g)
+  let j : I := a.left.unop
+  let f : i ⟶ j := a.hom.unop
+  let h := (e (D.obj (op j)) (D.map f.op)).symm s
+  have hh' := he (D.obj a.left) c.pt (c.π.app a.left) (D.map a.hom)
+    (c.π.app (op i)) (c.w a.hom) h
+  have eh : (e (D.obj a.left) (D.map a.hom)) h = s :=
+    (e (D.obj a.left) (D.map a.hom)).apply_symm_apply s
+  rw [eh] at hh'
+  have hh : globalSectionsUpperStarMap AddCommGrpCat.{u + 1} (c.π.app (op j))
+      ((upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj F) h =
+      (Sheaf.Γ c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}).map
+        ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
+          (c.π.app (op i)) (c.w f.op).symm).hom.app F) g := by
+    have ht := (e c.pt (c.π.app (op i))).injective (hh'.trans hs)
+    let α := (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
+      (c.π.app (op i)) (c.w f.op).symm).app F
+    let β := (Sheaf.Γ c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}).mapIso α
+    have ht' := congrArg (fun z ↦ β.hom z) ht
+    change β.hom (β.inv _) = β.hom g at ht'
+    rw [Iso.inv_hom_id_apply] at ht'
+    exact ht'
+  let x := (Sheaf.H.equiv₀ ((upperStar AddCommGrpCat.{u + 1}
+    (D.map f.op)).obj F) terminalIsTerminal).symm
+    ((Sheaf.ΓNatIsoSheafSections (D.obj (op j)).smallEtaleTopology
+      AddCommGrpCat.{u + 1} terminalIsTerminal).hom.app
+      ((upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj F) h)
+  refine ⟨j, f, x, ?_⟩
+  rw [cohomologyMap_zero_eq_globalSectionsUpperStarMap]
+  apply (Sheaf.H.equiv₀ _ terminalIsTerminal).injective
+  rw [AddEquiv.apply_symm_apply]
+  dsimp only [Functor.comp_obj, Functor.const_obj_obj]
+  erw [← Sheaf.H.equiv₀_naturality
+    (hT := terminalIsTerminal (C := c.pt.Etale))
+    ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
+      (c.π.app (op i)) (c.w f.op).symm).hom.app F) y]
+  have hn := ConcreteCategory.congr_hom
+    ((Sheaf.ΓNatIsoSheafSections c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}
+      terminalIsTerminal).hom.naturality
+      ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
+        (c.π.app (op i)) (c.w f.op).symm).hom.app F)) g
+  have hg : (Sheaf.ΓNatIsoSheafSections c.pt.smallEtaleTopology
+      AddCommGrpCat.{u + 1} terminalIsTerminal).hom.app
+      ((upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj F) g = eI y :=
+    Iso.inv_hom_id_apply
+      ((Sheaf.ΓNatIsoSheafSections c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}
+        terminalIsTerminal).app _) (eI y)
+  erw [hh]
+  simp only [ConcreteCategory.comp_apply] at hn
+  erw [hg] at hn
+  exact hn
 
 end AlgebraicGeometry.Etale
