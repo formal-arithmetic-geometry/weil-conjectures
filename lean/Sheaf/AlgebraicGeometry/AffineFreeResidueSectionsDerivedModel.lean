@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.AlgebraicGeometry.AffineFreeTerminalSectionsReconstruction
+import Sheaf.AlgebraicGeometry.AffineResidueScalarTransport
+import Sheaf.AlgebraicGeometry.AffineKFlatResiduePullbackModel
 /-! # Derived residue model from affine free sections
 
 Source: Stacks Project, Tags 064K, 06YB, 06YI, 06YJ and 0098.
@@ -65,5 +68,41 @@ theorem affineFree_residueSections_derivedModel
     (HomologicalComplex.quasiIso (ModuleCat.{v} Γ(W, U)) (.up ℤ)).kFlat P →
     Nonempty ((derivedPullback (W.fromSpecResidueField w)).obj E ≅
       DerivedCategory.Q.obj ((L.mapHomologicalComplex (.up ℤ)).obj C)) := by
-  sorry
+  classical
+  dsimp only
+  intro hP
+  let F : SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U) ⥤
+      ModuleCat.{v} Γ(W, U) :=
+    SheafOfModules.evaluation _ (.op (Over.mk (𝟙 U)))
+  let : F.Additive := inferInstanceAs
+    ((SheafOfModules.forget _ ⋙ PresheafOfModules.evaluation _ _).Additive)
+  let P := (F.mapHomologicalComplex (.up ℤ)).obj K
+  obtain ⟨a⟩ := affineFree_terminalSections_reconstruction W U hU K r hrank
+  obtain ⟨b⟩ := he
+  have hmodel : Nonempty ((SheafOfModules.overFunctor.{v}
+      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj E ≅
+        DerivedCategory.Q.obj
+          (((affinePerfectSheafification W U hU).mapHomologicalComplex (.up ℤ)).obj P)) :=
+    ⟨b ≪≫ DerivedCategory.Q.mapIso a.symm⟩
+  obtain ⟨c⟩ := affine_kFlat_residuePullback_model W E U hU P hP hmodel ⟨w, hwU⟩
+  obtain ⟨δ⟩ := affine_residue_scalar_transport W U hU ⟨w, hwU⟩
+  let T := ModuleCat.extendScalars.{v, v, v} (W.evaluation U w hwU).hom
+  let : T.Additive := (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive
+  let L := tilde.functor (W.residueField w)
+  let : L.PreservesZeroMorphisms := ⟨fun _ _ ↦ tilde.map_zero⟩
+  let S := ModuleCat.extendScalars.{v, v, v}
+    (algebraMap Γ(W, U) (hU.isoSpec.hom ⟨w, hwU⟩).asIdeal.ResidueField)
+  let : S.Additive := (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive
+  let e := asIso (U.ι.residueFieldMap ⟨w, hwU⟩) ≪≫
+    (asIso (hU.isoSpec.hom.residueFieldMap ⟨w, hwU⟩)).symm ≪≫
+      Spec.residueFieldIso Γ(W, U) (hU.isoSpec.hom ⟨w, hwU⟩)
+  let R := ModuleCat.restrictScalars.{v, v, v} e.hom.hom
+  let d : (R.mapHomologicalComplex (.up ℤ)).obj
+      ((S.mapHomologicalComplex (.up ℤ)).obj P) ≅
+      (T.mapHomologicalComplex (.up ℤ)).obj P :=
+    ((Functor.mapHomologicalComplexCompIso (Iso.refl (S ⋙ R)) (.up ℤ)).app P).symm ≪≫
+      (NatIso.mapHomologicalComplex δ (.up ℤ)).app P
+  let q := (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ T)) (.up ℤ)).app K
+  exact ⟨c ≪≫ DerivedCategory.Q.mapIso ((L.mapHomologicalComplex (.up ℤ)).mapIso
+    (d ≪≫ q.symm))⟩
 end AlgebraicGeometry.Scheme

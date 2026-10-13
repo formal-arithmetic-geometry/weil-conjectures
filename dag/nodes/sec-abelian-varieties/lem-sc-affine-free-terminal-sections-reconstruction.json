@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-affine-free-terminal-sections-reconstruction",
+ "kind": "statement",
+ "title": "Finite free slice complex reconstructed from terminal sections",
+ "statement": "Let W be a scheme and U an affine open [def-pc-scheme]. Let K be an integer cochain complex of module sheaves on the localized open site of U [def-pc-cochain-complex-modules]. For r: Z -> N suppose K^j is isomorphic to the free module sheaf indexed by ULift(Fin(r(j))) in each degree [def-pc-perfect-complex]. Let F evaluate at the terminal slice object (U,id). Let A = Gamma(W,U), P = F(K), and S be tilde on Spec(A) followed by restriction along the affine chart hU.isoSpec.hom and the inverse of Modules.overEquiv U [lem-pc-affine-perfect-module-model]. Then S(P) is isomorphic to K as an actual cochain complex. No support bound, K-flatness, derived localization, or point is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-perfect-complex",
+  "lem-pc-affine-perfect-module-model"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01IB (lemma-equivalence-quasi-coherent), natural affine counit, applied termwise"
+ },
+ "proof": [
+  {
+   "text": "Compose chart restriction and inverse slice equivalences to E. The fully faithful tilde left adjoint composed with E.toAdjunction gives F = tilde followed by E.functor left adjoint to H = E.inverse followed by moduleSpecGamma. TildeFinsupp and mapFreeIso identify F of the finite free section module with the slice finite free sheaf, using the transported unit isomorphism. Each K term lies in the essential image of F, so adj.isIso_counit_app_of_iso makes the counit invertible on that term.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of right adjoints identifies inverse chart restriction with chart pushforward. Construct a natural isomorphism from its sections to terminal slice evaluation: isoSpec_hom_appTop cancels GammaSpecIso, and the presheaf map along the isomorphism from (U,id) to the top slice object cancels U.topIso. The module scalar law and presheaf morphism naturality prove this is a module natural isomorphism. Map it and the counit to complexes. The counit is invertible componentwise and commutes with every differential by naturality, giving the stated actual complex isomorphism. The construction works for rank zero, zero rings, empty opens and unbounded complexes.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01IB (lemma-equivalence-quasi-coherent), natural affine counit, applied termwise",
+  "group": "D4",
+  "date": "2026-10-13",
+  "note": "Fully proved by D4 using the tilde adjunction, transported finite free unit, right adjoint uniqueness and explicit terminal section comparison. No affine-sections-complex-counit import is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fromTildeΓ|overEquiv",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. No exact statement; component APIs read.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; components available"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, tilde",
+   "results": "loogle: unknown identifier 'tilde'",
+   "date": "2026-10-13",
+   "verdict": "no exact match; components available"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine free sheaf complex is the sheafification of its global section complex",
+   "results": "8 hits: SheafOfModules.freeFunctor_obj, SheafOfModules.ιFree, SheafOfModules.free, SheafOfModules.freeFunctor, SheafOfModules.freeHomEquiv, SheafOfModules.mapFree, SheafOfModules.freeMap, SheafOfModules.freeSection. No exact statement; component APIs read.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; components available"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of terminal sections reconstructs a finite free complex on an affine open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineFreeResidueSectionsDerivedModel",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Object-level affine residue calculation, before the homology step, in step 1 of the residue differential argument. Finite free slice complex reconstructed from terminal sections.",
+   "via": [
+    "lem-sc-affine-free-residue-sections-derived-model",
+    "lem-sc-affine-free-residue-sections-cohomology",
+    "lem-sc-residue-rank-model-differential",
+    "lem-sc-picard-h1-common-minimal-model",
+    "lem-sc-picard-h1-base-descent-local-model",
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeTerminalSectionsReconstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeTerminalSectionsReconstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineFree_terminalSections_reconstruction",
+  "statement": "theorem affineFree_terminalSections_reconstruction\n    (W : Scheme.{v}) (U : W.Opens) (hU : IsAffineOpen U)\n    (K : CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (r : ℤ → ℕ)\n    (hrank : ∀ j : ℤ, Nonempty (K.X j ≅ SheafOfModules.free\n      (R := (moduleRings W.toRingedSpace).over U) (ULift.{v} (Fin (r j))))) :\n    let F : SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U) ⥤\n        ModuleCat.{v} Γ(W, U) :=\n      SheafOfModules.evaluation _ (.op (Over.mk (𝟙 U)))\n    letI : F.Additive := inferInstanceAs\n      ((SheafOfModules.forget _ ⋙ PresheafOfModules.evaluation _ _).Additive)\n    Nonempty (((affinePerfectSheafification W U hU).mapHomologicalComplex (.up ℤ)).obj\n      ((F.mapHomologicalComplex (.up ℤ)).obj K) ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T142854-L-496586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T142854-L-496586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
