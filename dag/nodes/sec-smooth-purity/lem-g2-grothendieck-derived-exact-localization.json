@@ -2,7 +2,7 @@
  "id": "lem-g2-grothendieck-derived-exact-localization",
  "kind": "statement",
  "title": "Exact localization component",
- "statement": "Exact localization component statement as in Lean",
+ "statement": "theorem grothendieckDerived_exact_localization\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    {S : Type w} [Ring S] [HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S)]\n    (F : ModuleCat.{max w vH} S ⥤ A) (U : A ⥤ ModuleCat.{max w vH} S)\n    (adj₀ : F ⊣ U) [F.Additive] [U.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (hc₀ : IsIso adj₀.counit) :\n    F.mapDerivedCategory.IsTriangulated ∧\n      IsIso adj₀.mapDerivedCategoryRightDerivedAdjunction.counit",
  "stmt_deps": [],
  "source": {
   "document": "https://stacks.math.columbia.edu/tag/0F5V",
@@ -10,18 +10,28 @@
  },
  "proof": [
   {
-   "text": "Extend Gabriel--Popescu by free presentations, prove exactness using injectives and derive termwise.",
+   "text": "Install the invertible abelian counit as an instance. Adjunction.fullyFaithfulROfIsIsoCounit supplies Full and Faithful for U.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Adjunction.preservesKInjectiveComplexes supplies preservation of K-injective complexes from exactness of F. The proved source library instances Functor.full_rightDerivedFunctor and Functor.faithful_rightDerivedFunctor make the actual U.rightDerivedFunctor fully faithful.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the actual adjunction adj₀.mapDerivedCategoryRightDerivedAdjunction. Mathlib gives its invertible counit from full faithfulness of the right functor, and gives F.mapDerivedCategory.IsTriangulated directly. Pair these two instances.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "X2",
+  "group": "C3",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0F5V",
-  "place": "Component split of parent proof"
+  "place": "E2 repair; proved using WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction, .Comp and .FullyFaithful, and Mathlib exact-functor and fully-faithful adjunction APIs"
  },
  "mathlib_searches": [
   {
@@ -68,7 +78,7 @@
   "module": "Sheaf.CategoryTheory.GrothendieckDerivedExactLocalization",
   "file": "lean/Sheaf/CategoryTheory/GrothendieckDerivedExactLocalization.lean",
   "declaration": "CategoryTheory.grothendieckDerived_exact_localization",
-  "statement": "theorem grothendieckDerived_exact_localization\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    [HasCoproducts.{max w vA vH} (DerivedCategory A)]\n    (B : Type (max uA vA ((max w vH) + 1))) (cB : Category.{max w vH} B)\n    (zB : HasZeroObject B) (sB : HasShift B ℤ) (pB : Preadditive B)\n    (aB : ∀ n : ℤ, (shiftFunctor B n).Additive) (tB : Pretriangulated B)\n    (iB : IsTriangulated B) (sumsB : HasCoproducts.{max w vH} B) :\n    letI := cB\n    letI := zB\n    letI := sB\n    letI := pB\n    letI := aB\n    letI := tB\n    letI := iB\n    letI := sumsB\n    ∃ (L : B ⥤ DerivedCategory A) (R : DerivedCategory A ⥤ B)\n      (adj : L ⊣ R) (sL : L.CommShift ℤ),\n    letI := sL\n    L.IsTriangulated ∧ IsIso adj.counit",
+  "statement": "theorem grothendieckDerived_exact_localization\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]\n    {S : Type w} [Ring S] [HasDerivedCategory.{max w vH} (ModuleCat.{max w vH} S)]\n    (F : ModuleCat.{max w vH} S ⥤ A) (U : A ⥤ ModuleCat.{max w vH} S)\n    (adj₀ : F ⊣ U) [F.Additive] [U.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    (hc₀ : IsIso adj₀.counit) :\n    F.mapDerivedCategory.IsTriangulated ∧\n      IsIso adj₀.mapDerivedCategoryRightDerivedAdjunction.counit",
   "branch": "sheaf-dag",
   "by": "X2",
   "date": "2026-10-14"
@@ -86,11 +96,29 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "X-9bf4c",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T181126-L-2608536",
+  "landing": "20261013T201741-L-3966291",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compile cleanly; corrected proof has only permitted axioms, the new sorry is documented and represented by a node, and forced adaptation/signature checks match the change record."
+ },
+ "statement_change": {
+  "date": "2026-10-14",
+  "by": "C3 stage 2",
+  "old_statement": "Exact localization component statement as in Lean",
+  "what": "The old Lean signature allows every triangulated source B, including the zero category. An invertible counit would make its right adjoint faithful, forcing the nonzero target derived category to be thin. Replace it with the derived localization of a fixed exact abelian module adjunction with invertible counit; adapt the parent proof without changing its signature.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/0F5V",
+   "place": "Derived Gabriel–Popescu localization; Tag 0F5X first paragraph"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Extend Gabriel--Popescu by free presentations, prove exactness using injectives and derive termwise.",
+    "uses": [],
+    "elementary": false
+   }
+  ]
  }
 }

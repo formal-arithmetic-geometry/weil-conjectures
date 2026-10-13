@@ -8,8 +8,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Adjunction.Basic
-import Sheaf.CategoryTheory.GrothendieckDerivedCompactSource
+import Sheaf.CategoryTheory.GrothendieckDerivedGabrielPopescuPresentation
 import Sheaf.CategoryTheory.GrothendieckDerivedExactLocalization
+import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # A compactly generated source for derived Gabriel--Popescu localization
 
@@ -83,18 +84,40 @@ theorem grothendieckDerived_compact_localization_model
         (adj : L ⊣ R) (sL : L.CommShift ℤ),
       letI := sL
       L.IsTriangulated ∧ IsIso adj.counit := by
-  obtain ⟨B, cB, zB, sB, pB, aB, tB, iB, sumsB, hB⟩ :=
-    grothendieckDerived_compact_source.{w, uA, vA, vH} (A := A)
-  let _ := cB
-  let _ := zB
-  let _ := sB
-  let _ := pB
-  let _ := aB
-  let _ := tB
-  let _ := iB
-  let _ := sumsB
-  obtain ⟨L, R, adj, sL, hL, hc⟩ :=
-    grothendieckDerived_exact_localization.{w, uA, vA, vH} (A := A) B cB zB sB pB aB tB iB sumsB
-  exact ⟨B, cB, zB, sB, pB, aB, tB, iB, sumsB, hB, L, R, adj, sL, hL, hc⟩
+  obtain ⟨S, rS, hD, F, U, adj₀, addF, limF, colimF, hc₀,
+    B, cB, zB, sB, pB, aB, tB, iB, sumsB, hB, e, se, he⟩ :=
+    grothendieckDerived_gabriel_popescu_presentation.{w, uA, vA, vH} (A := A)
+  let := rS
+  let := hD
+  let := addF
+  let := limF
+  let := colimF
+  let := cB
+  let := zB
+  let := sB
+  let := pB
+  let := aB
+  let := tB
+  let := iB
+  let := sumsB
+  let := se
+  let := he
+  let := adj₀.right_adjoint_additive
+  obtain ⟨hL, hc⟩ := grothendieckDerived_exact_localization F U adj₀ hc₀
+  let RD := U.rightDerivedFunctor
+  let adj := adj₀.mapDerivedCategoryRightDerivedAdjunction
+  let L := e.functor ⋙ F.mapDerivedCategory
+  let R := RD ⋙ e.inverse
+  let adjB : L ⊣ R := e.toAdjunction.comp adj
+  have hcB : IsIso adjB.counit := by
+    let := hc
+    have : ∀ X, IsIso (adjB.counit.app X) := by
+      intro X
+      change IsIso ((e.toAdjunction.comp adj).counit.app X)
+      rw [Adjunction.comp_counit_app]
+      infer_instance
+    exact NatIso.isIso_of_isIso_app _
+  exact ⟨B, cB, zB, sB, pB, aB, tB, iB, sumsB, hB,
+    L, R, adjB, inferInstance, inferInstance, hcB⟩
 
 end CategoryTheory

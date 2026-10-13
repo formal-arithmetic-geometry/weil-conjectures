@@ -13,37 +13,35 @@
  },
  "proof": [
   {
-   "text": "Choose a generator G and shrink its endomorphism ring (with the appropriate opposite) to w. Gabriel-Popescu supplies the small-module exact adjunction F left adjoint to U, with invertible counit. For a larger family A_i, the assumed coproduct P of A_i[0] in D(A) lies in D<=0: Hom(P,Y) is a product of zeros for every Y in D>=1. Truncation identifies Hom(P,X[0]) with Hom(H^0(P),X), making H^0(P) the required coproduct in A. For a larger module M, construct F(M) as the cokernel of the map of coproducts of G induced by its canonical two-step free presentation. This represents Hom(M,U(-)), hence extends the adjunction. It agrees with the original F on small modules, so its counit is invertible. If I is injective in A, U(I) is small-module injective by Gabriel-Popescu; Baer criterion (Stacks 05NU) tests only ideals of the w-sized ring, so its universe lift remains injective among larger modules. Adjunction and enough injectives show that the extended F preserves monomorphisms; right exactness follows from being a left adjoint.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Apply the exact localization termwise to complexes and pass to derived categories. Its shift comparison and preservation of distinguished triangles come from exactness. Compute the right derived adjoint using K-injective representatives. The termwise invertible abelian counit gives an invertible derived counit, as in Tag 0F5V.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The derived category of modules has coproducts indexed in Type max(w,vH). The free rank-one module in degree zero is compact: its shifted Hom groups compute cohomology, which commutes with sums of modules. These groups jointly detect acyclicity, so its shifted copies generate the derived category. Package the singleton family as compact generation.",
+   "text": "Obtain a common ring S, exact abelian Gabriel–Popescu localization F left adjoint to U with invertible counit, and compactly generated B with exact equivalence e to this same derived module category from the presentation theorem. Install its supplied structures.",
    "uses": [
-    "def-pc-compactly-generated"
+    "lem-c3-grothendieck-derived-gabriel-popescu-presentation"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Lift the object universe of the module derived category to max(uA,vA,max(w,vH)+1), leaving its Hom universe max(w,vH). Transport zero objects, shift, additive and triangulated structures, coproducts, compact generation, and the localization adjunction along the lifting equivalence. Package the structures and properties as the existential witnesses.",
+   "text": "Derive U additivity from the abelian adjunction. Apply exact localization to obtain triangulated F.mapDerivedCategory and invertibility of the counit of the specific adjunction to U.rightDerivedFunctor.",
+   "uses": [
+    "lem-g2-grothendieck-derived-exact-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set L=e.functor composed with F.mapDerivedCategory, R=U.rightDerivedFunctor composed with e.inverse, and compose e.toAdjunction with the specific derived adjunction. Shifts and triangulatedness compose. At each X the composite counit is F.mapDerivedCategory.map of the equivalence counit followed by the derived counit; both are invertible. Reassemble the original existential conclusion.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-compactly-generated"
+  "lem-c3-grothendieck-derived-gabriel-popescu-presentation",
+  "lem-g2-grothendieck-derived-exact-localization"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "U1",
+  "by": "worker",
+  "group": "C3",
   "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0F5V",
-  "place": "Derived Gabriel-Popescu; Tag 0F5X first paragraph for module compact generation; explicit universe enlargement and packaging supplied by U1; second reader made the large-coproduct, free-presentation and Baer-criterion arguments explicit"
+  "place": "E2 repair: retain original signature and construct the localization from a common module presentation; no independently chosen arbitrary source"
  },
  "mathlib_searches": [
   {
@@ -119,15 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "X-9bf4c",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261013T181126-L-2608536",
+  "landing": "20261013T201741-L-3966291",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.grothendieckDerived_compact_localization_model"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivered files compile cleanly; corrected proof has only permitted axioms, the new sorry is documented and represented by a node, and forced adaptation/signature checks match the change record."
  }
 }
