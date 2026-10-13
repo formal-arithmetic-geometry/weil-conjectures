@@ -35,32 +35,24 @@
  ],
  "proof": [
   {
-   "text": "The two projection refinements to W followed by the signed Cech cup pairing give a scalar-linear map from tensor-total Cech cochains to product-cover Cech cochains. The Leibniz formula gives the cochain-map equation; coefficient naturality of refinements and cup gives a natural transformation on all modules. Extend the construction to integers by zero.",
+   "text": "Obtain the natural transformation theta, the generator-coordinate equivalence e into tensor Cech homology and the product comparison b from the geometric Cech generator statement. No scalar-total cochain realization is chosen in this step.",
    "uses": [
-    "def-sc-cech-refinement-cochain-map",
-    "def-sc-cech-cup-product",
-    "lem-sc-picard-cech-cup-pullback-compat"
+    "lem-sc-picard-external-cup-left-cech-generators"
    ],
    "elementary": false
   },
   {
-   "text": "For each quasi-coherent F, affine Cech comparison and exact scalar restriction followed by the scalar resolution comparison give b. Product external coefficients are quasi-coherent by pullback quasi-coherence and tensor quasi-coherence. Tensor Kunneth on the Cech and scalar-model factors, with their comparison isomorphisms, gives a in each natural degree.",
+   "text": "For the two scalar models apply tensor_kunneth_nat with their proved negative-term vanishing, obtaining s from the same direct sum to scalar tensor-total homology. Define the required tensor comparison a as e inverse followed by s.",
    "uses": [
-    "lem-sc-cech-comparison-map-iso-affine",
-    "lem-sc-cech-comparison-map-naturality",
-    "lem-sc-picard-kunneth-resolution-model",
     "lem-sc-qcoh-cech-total-tensor-nat-iso",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-pc-module-pullback-adjunction",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-sc-picard-affine-diagonal-intersections"
+    "lem-sc-picard-kunneth-resolution-model"
    ],
    "elementary": false
   },
   {
-   "text": "Lift factor classes along the surjective homology projections. Refinement and cup compatibility identify the theta image of the tensor cycle with externalCup. Normalization of the supplied d identifies its image with the same value. The tensor Kunneth cycle formula and spanning by pure tensors in each direct-sum summand then prove H(theta_F) followed by b equals a followed by H(d). No existence or invertibility of d is assumed beyond the supplied normalized map.",
+   "text": "For every direct-sum summand and pure tensor x tensor y, lift x and y through the epimorphic scalar-model homology projections. Tensor Kunneth supplies a total cycle z and its homology formula. The generator formula for theta and normalization of the given d have the identical externalCup value; cancel the injective product scalarModelEquiv. DirectSum.linearMap_ext and TensorProduct.ext' extend the equality to the whole direct sum. Evaluate at e inverse of an arbitrary tensor-Cech homology class to get H(theta) followed by b equals a followed by H(d).",
    "uses": [
-    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-external-cup-left-cech-generators",
     "lem-sc-picard-external-cup-cochain",
     "lem-sc-qcoh-cech-total-tensor-nat-iso"
    ],
@@ -68,23 +60,15 @@
   }
  ],
  "proof_deps": [
-  "def-sc-cech-cup-product",
-  "def-sc-cech-refinement-cochain-map",
-  "lem-pc-module-pullback-adjunction",
-  "lem-sc-cech-comparison-map-iso-affine",
-  "lem-sc-cech-comparison-map-naturality",
-  "lem-sc-picard-affine-diagonal-intersections",
-  "lem-sc-picard-cech-cup-pullback-compat",
   "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-external-cup-left-cech-generators",
   "lem-sc-picard-kunneth-resolution-model",
-  "lem-sc-qcoh-cech-total-tensor-nat-iso",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  "lem-sc-qcoh-cech-total-tensor-nat-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and the short exact coefficient diagram immediately after it; read online at https://stacks.math.columbia.edu/tag/0BED."
+  "place": "Tag 0BED equation-kunneth-on-cech; J2 implements scalar-total Kunneth comparison, cycle lifts, normalization, direct-sum/tensor extensionality and cancellation, leaving only the geometric Cech generator calculation."
  },
  "blueprint": {
   "is": null,
@@ -153,11 +137,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U3",
+  "reviewer": "X-9db49",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261013T100149-L-2493559",
+  "landing": "20261013T115430-L-3359275",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivered modules and the direct importer compiled cleanly, with only the documented generator sorryAx remaining."
  }
 }
