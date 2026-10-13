@@ -12,29 +12,30 @@
  ],
  "proof": [
   {
-   "text": "Order labels by the strict lexicographic order (t i,i). The stable sort is uniquely the increasing listing in this order. A partial sort is uniquely the prescribed prefix followed by the complementary labels in original-label order. For an outgoing index, q(a)=sigma(a), so the nonjunction condition and r>=a imply r>a. Put k=r-1 and j=tau(k). Since k>=a, j is outside the sorted prefix; since it differs from sigma(a), its stable rank is strictly after a. Remove j from sigma at its stable rank and from tau at k, renumbering surviving labels through the increasing map delta_j. The resulting permutations rho and eta have the same prefix length b=a, which lies in Fin(n-1) because there is a later stable rank. Rho is the stable sort of the restricted tuple, eta has its fixed prefix and increasing complementary tail, and j follows the retained junction in lexicographic order. Thus the incoming filter holds. Restricting tau gives tau composed with delta_k equals delta_j composed with eta. Checking positions up to a and after a separately in the junction formula gives q composed with delta_r equals delta_j composed with the restricted junction.",
+   "text": "Apply the basic labelled-tail deletion correspondence to obtain an equivalence and the rank, restriction, and prefix identities.",
    "uses": [
-    "def-pc-alternating-cech-sorting-operators"
+    "lem-pc-alternating-cech-tail-deletion-basic"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For an incoming index (j,rho,b,eta), the original junction label differs from j. The negated before condition therefore means j is strictly after that junction in lexicographic order. Insert j at its stable rank in the lifted stable sort rho, giving sigma. Lift the prefix of eta through delta_j and insert j into its increasing complementary tail at its original-label rank k, giving tau. Set a=b and r=k+1. The prefix is unchanged, k>=a, and tau(k)=j differs from sigma(a), so the outgoing filter holds. Restriction removes exactly the inserted positions; conversely reinsertion recovers the original stable and tail orders. The two operations are inverse because each order gives a unique insertion rank. This yields e and every asserted identity. When a=n-1 the outgoing filter is empty, since the only unused tail label is the junction. For p=0, the construction involves two original labels and one surviving label. Equal t-values cause no ties in the lexicographic label order; an empty I admits no input tuple.",
+   "text": "Apply the junction identity theorem to the same equivalence and basic identities, then combine the resulting conjunctions.",
    "uses": [
-    "def-pc-alternating-cech-sorting-operators"
+    "lem-pc-alternating-cech-tail-deletion-junction"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-alternating-cech-sorting-operators"
+  "lem-pc-alternating-cech-tail-deletion-basic",
+  "lem-pc-alternating-cech-tail-deletion-junction"
  ],
  "proof_origin": {
   "by": "agent",
   "agent": "S2",
   "document": "Stacks Project, Cohomology of Sheaves",
   "place": "Tag 01FM, equation 20.23.6.1, unsigned part of the omitted verification",
-  "note": "Explicit deletion/insertion proof written by S2; no sign calculation is included."
+  "note": "Stage-3 proof by two strictly simpler labelled-deletion lemmas."
  },
  "mathlib_searches": [
   {
@@ -110,10 +111,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T000047-L-2232313",
-  "kind": "interface",
+  "landing": "20261013T003202-L-2430368",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

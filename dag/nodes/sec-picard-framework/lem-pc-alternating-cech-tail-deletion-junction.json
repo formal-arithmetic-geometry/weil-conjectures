@@ -1,0 +1,102 @@
+{
+ "id": "lem-pc-alternating-cech-tail-deletion-junction",
+ "kind": "lemma",
+ "title": "Junction identity for labelled-tail deletion",
+ "statement": "For every linearly ordered type I, p, t, equivalence e between cechTailOutgoingIndex p t and cechTailIncomingIndex p t, and proof he of the four basic deletion identities for every x, the junction-map equality holds for every x.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy (20.23.6.1), omitted verification; unsigned tail-deletion part; https://stacks.math.columbia.edu/tag/01FM"
+ },
+ "stmt_deps": [
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "Apply the basic deletion identities and check the two defining cases of the junction operator on each finite position.",
+   "uses": [
+    "lem-pc-alternating-cech-tail-deletion-basic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-alternating-cech-tail-deletion-basic"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, cohomology-equation-first-homotopy (20.23.6.1), omitted verification; unsigned tail-deletion part; https://stacks.math.columbia.edu/tag/01FM",
+  "note": "Stage-3 decomposition of the correspondence proof; this identity is a consequence of the basic deletion identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bijection between stable sorting permutations with a deleted tail label and sorting permutations of the remaining labels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bijection between stable sorting permutations with a deleted tail label and sorting permutations of the remaining labels",
+   "results": "Equiv.Perm.decomposeFin, Tuple.sort, Tuple.sort_perm, Tuple.bubble_sort_induction', Tuple.comp_perm_comp_sort_eq_comp_sort, Tuple.graphEquiv₂_apply, Fin.insertNthOrderIso_symm_apply, List.getElem_permutations'Aux",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechStableSort|cechPartialSort|stable.*sort.*delet|sort.*succAbove",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechTailDeletionCorrespondence",
+  "date": "2026-10-13",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-alternating-cech-tail-deletion-correspondence",
+   "place": "Stage-3 decomposition of the labelled deletion correspondence."
+  }
+ },
+ "same_as": [],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechTailDeletionCorrespondence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechTailDeletionCorrespondence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechTailDeletionJunction",
+  "statement": "theorem cechTailDeletionJunction {I : Type v} [LinearOrder I] (p : ℕ)\n    (t : Fin (p + 2) → I) (e : cechTailOutgoingIndex p t ≃ cechTailIncomingIndex p t)\n    (he : ∀ x, ∃ k : Fin (p + 2),\n      k.val + 1 = x.val.2.2.2.val ∧\n      x.val.2.2.1 k = (e x).val.1 ∧\n      (∀ z, x.val.2.2.1 (k.succAbove z) =\n        (e x).val.1.succAbove ((e x).val.2.2.2 z)) ∧\n      x.val.2.1.val = (e x).val.2.2.1.val)\n    (x : cechTailOutgoingIndex p t) :\n    cechJunction x.val.1 x.val.2.2.1 x.val.2.1 ∘ x.val.2.2.2.succAbove =\n      (e x).val.1.succAbove ∘\n        cechJunction (e x).val.2.1 (e x).val.2.2.2 (e x).val.2.2.1",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T003202-L-2430368",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T003202-L-2430368",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
