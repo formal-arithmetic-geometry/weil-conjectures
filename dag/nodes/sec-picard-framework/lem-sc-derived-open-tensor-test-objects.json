@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-derived-open-tensor-test-objects",
+ "kind": "statement",
+ "title": "Tensor-stable test objects for derived open restriction",
+ "statement": "Let X be a scheme [def-pc-scheme], U an arbitrary open, and let all derived categories [def-pc-derived-category] appearing below be supplied in a common Hom universe. Let R:D(O_X)→D(O_U) be exact over restriction followed by Modules.overEquiv U [lem-weil-pbc-module-restriction-open-immersion-colimits], and use the shared derived tensor [def-pc-scheme-derived-tensor-structure]. For every A in D(O_U), there exists B in D(O_X) and an isomorphism A≅R(B) such that restriction on Hom(B,E) is bijective for every E, and restriction on Hom(B tensor L,E) is bijective for every L,E. No internal Hom, tensor comparison, boundedness, or finiteness hypothesis is involved.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BT (derived extension-by-zero adjunction), Tag 06YB (K-flat stalk criterion); sheaves.tex Tag 00A7 (2)-(4)"
+ },
+ "proof": [
+  {
+   "text": "Use exact extension by zero E left adjoint to over restriction, compose with the inverse of Modules.overEquiv U, and derive this adjunction by exact-functor localization. The extension/restriction isomorphism derives to an isomorphism J followed by R to the identity; the derived left adjoint is fully faithful, so its unit is invertible. For A set B=J(A), taking the unit as A≅R(B). The adjunction formula unit_A;R(f) and cancellation by this unit show that R.map on Hom(B,E) is bijective for every E.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-open-extension-restriction-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The stalks of an extended module vanish outside U, and extension is exact, so all cohomology stalks of B vanish there. Represent B by a complex P and L by a K-flat resolution Q. The stalk tensor vanishing theorem says that the cohomology stalks of Tot(P tensor Q) vanish outside U. The K-flat derived tensor comparison (and symmetry to put the K-flat argument first) identifies this object with B tensor L.",
+   "uses": [
+    "lem-sc-open-extension-counit-stalk",
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-derived-tensor-comparison",
+    "lem-sc-derived-tensor-stalk-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any C with zero cohomology stalks outside U, the derived counit J(R(C))→C is invertible. Choose a complex representative of C. The termwise counit is invertible on stalks inside U; outside U its source complex is zero while the target stalk complex is acyclic. Thus its stalk mapping cones are acyclic everywhere. Stalk detection of exactness implies a quasi-isomorphism, which becomes invertible in the derived category. Apply this to C=B tensor L. Conjugating the adjunction Hom(J(R(C)),E)≃Hom(R(C),R(E)) by the counit, its restricted image, and the invertible unit identifies it with R.map:Hom(C,E)→Hom(R(C),R(E)); hence that map is bijective.",
+   "uses": [
+    "lem-sc-open-extension-counit-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-open-extension-restriction-iso",
+  "lem-sc-open-extension-counit-stalk",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-derived-tensor-comparison",
+  "lem-sc-derived-tensor-stalk-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S3",
+  "date": "2026-10-13",
+  "based_on": "Stacks 08BT, 00A7 and 06YB; explicit tensor-stability and Hom-map consequences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction extension by zero derived tensor Hom bijective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction extension by zero derived tensor Hom bijective",
+   "results": "Hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, Module.Invertible.bijective_curry, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, IsTensorProduct, TensorProduct.directSumRight'_restrict, ModuleCat.extendRestrictScalarsAdj_unit_app_apply; no exact tensor-stable derived open test-object theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero",
+   "results": "No hits; no exact tensor-stable derived open test-object theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedRestrictionEvaluationMatePostcompBijective",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "open restriction coherence: extension-by-zero and tensor-stable test objects for the restricted evaluation mate",
+   "via": [
+    "lem-sc-derived-restriction-evaluation-mate-postcomp-bijective",
+    "lem-sc-derived-restriction-evaluation-mate-is-iso",
+    "lem-sc-derived-restriction-tensor-hom-coherence",
+    "lem-sc-tensor-model-restriction-comparisons",
+    "lem-sc-tensor-model-restriction-adjunction",
+    "lem-sc-tensor-roof-transposition",
+    "lem-sc-proper-flat-right-adjoint-open-support",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-affine-perfect-map-lift",
+    "lem-sc-affine-perfect-tensor-roof"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenTensorTestObjects",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenTensorTestObjects.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_derivedOpen_tensorTestObject",
+  "statement": "theorem exists_derivedOpen_tensorTestObject\n    (X : Scheme.{uX}) (U : X.Opens)\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens,\n      HasDerivedCategory.{wD} (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V))]\n    [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))] :\n    let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙\n      Equivalence.functor\n        (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))\n        (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))\n        (Modules.overEquiv U)).mapDerivedCategory\n    ∀ A : schemeDerivedCategory U.toScheme,\n      ∃ B : schemeDerivedCategory X, Nonempty (A ≅ R.obj B) ∧\n        (∀ E : schemeDerivedCategory X,\n          Function.Bijective (fun f : B ⟶ E ↦ R.map f)) ∧\n        (∀ L E : schemeDerivedCategory X,\n          Function.Bijective (fun f : B ⊗ L ⟶ E ↦ R.map f))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T145728-L-752038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261013T145728-L-752038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
