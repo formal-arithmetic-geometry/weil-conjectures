@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Homology.BaseTensorDerivedComparisonModel
 
 /-! # Naturality of localized base-derived tensor comparison
 
@@ -132,6 +133,67 @@ theorem baseDerivedTensor_localized_naturality
     M.localizedComparison i ≫ (scalarExtensionHomologyIso _ L ε P hcP i).inv ≫
         (DerivedCategory.homologyFunctor _ i).map (L.map a.hom) =
       (extendScalars.{u, u, u} (algebraMap (A ⊗[R] B) D)).map e.hom ≫
-        N.localizedComparison i ≫ (scalarExtensionHomologyIso _ L ε Q hcQ i).inv := by sorry
+        N.localizedComparison i ≫ (scalarExtensionHomologyIso _ L ε Q hcQ i).inv := by
+  let _ := M.universal
+  let _ := N.universal
+  let ζ := Functor.leftDerivedNatIso M.derived N.derived M.counit N.counit
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (Iso.refl _)
+  obtain ⟨τ, hτ⟩ := exists_baseTensorDerivedComparison R A B D
+    N.derived N.counit N.universal L ε hL i
+  let sP := scalarExtensionHomologyIso _ L ε P hcP i
+  let sQ := scalarExtensionHomologyIso _ L ε Q hcQ i
+  have hsP : sP.hom = scalarExtensionHomologyMap _ L ε P i := by
+    simp [sP, scalarExtensionHomologyIso, scalarExtensionHomologyMap]
+  have hsQ : sQ.hom = scalarExtensionHomologyMap _ L ε Q i := by
+    simp [sQ, scalarExtensionHomologyIso, scalarExtensionHomologyMap]
+  have hζ : Functor.whiskerLeft DerivedCategory.Qh ζ.hom ≫ N.counit = M.counit := by
+    simp [ζ]
+  have hP := baseTensorDerivedComparison_model R A B D N.derived N.counit L ε i
+    τ hτ P M ζ hζ sP hsP
+  have hQ := baseTensorDerivedComparison_model R A B D N.derived N.counit L ε i
+    τ hτ Q N (Iso.refl _) (by simp) sQ hsQ
+  let adj := extendRestrictScalarsAdj.{u, u, u} (algebraMap (A ⊗[R] B) D)
+  apply (adj.homEquiv _ _).injective
+  change adj.homEquiv _ _ ((M.localizedComparison i ≫ sP.inv) ≫
+    (DerivedCategory.homologyFunctor _ i).map (L.map a.hom)) =
+    adj.homEquiv _ _ ((extendScalars _).map e.hom ≫
+      (N.localizedComparison i ≫ sQ.inv))
+  rw [adj.homEquiv_naturality_right, adj.homEquiv_naturality_left]
+  apply (restrictScalars.{u} Algebra.TensorProduct.includeRight.toRingHom).map_injective
+  simp only [Functor.map_comp]
+  rw [he]
+  rw [show adj.homEquiv _ _ (M.localizedComparison i ≫ sP.inv) =
+    adj.unit.app _ ≫ (restrictScalars _).map (M.localizedComparison i ≫ sP.inv)
+    from rfl]
+  rw [show adj.homEquiv _ _ (N.localizedComparison i ≫ sQ.inv) =
+    adj.unit.app _ ≫ (restrictScalars _).map (N.localizedComparison i ≫ sQ.inv)
+    from rfl]
+  rw [hP, hQ]
+  simp only [Category.assoc]
+  have ht := τ.naturality a.hom
+  simp only [Functor.comp_map] at ht
+  rw [← ht]
+  dsimp only [baseTensorSourceIso]
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
+    Category.assoc, Iso.inv_hom_id_assoc, Iso.refl_hom, Iso.app_hom,
+    NatTrans.id_app]
+  let cP := baseTensorInputIso R A P
+  let cQ := baseTensorInputIso R A Q
+  let f := (restrictScalars.{u} (algebraMap R A)).mapDerivedCategory.map a.hom
+  have hg : M.derived.map cP.hom ≫ ζ.hom.app _ ≫ N.derived.map f =
+      M.derived.map (cP.hom ≫ f ≫ cQ.inv) ≫ ζ.hom.app _ ≫
+        N.derived.map cQ.hom := by
+    rw [← ζ.hom.naturality f, ← ζ.hom.naturality cQ.hom]
+    simp [← Functor.map_comp]
+  change (M.cohomologyIso i).hom ≫
+    (DerivedCategory.homologyFunctor _ i).map (M.derived.map cP.hom ≫ ζ.hom.app _) ≫
+      (DerivedCategory.homologyFunctor _ i).map (N.derived.map f) ≫ τ.app _ =
+    (M.cohomologyIso i).hom ≫
+      (DerivedCategory.homologyFunctor _ i).map
+        (M.derived.map (cP.hom ≫ f ≫ cQ.inv) ≫ ζ.hom.app _) ≫
+      (DerivedCategory.homologyFunctor _ i).map (N.derived.map cQ.hom ≫ 𝟙 _) ≫ τ.app _
+  simpa only [Category.comp_id, Functor.map_comp, Category.assoc] using
+    congrArg (fun k ↦ (M.cohomologyIso i).hom ≫
+      (DerivedCategory.homologyFunctor _ i).map k ≫ τ.app (DerivedCategory.Q.obj Q)) hg
 
 end ModuleCat
