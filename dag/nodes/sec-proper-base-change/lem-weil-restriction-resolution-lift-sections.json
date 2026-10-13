@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-restriction-resolution-lift-sections",
+ "kind": "statement",
+ "title": "Sections of a single-map restriction-adjunction lift",
+ "statement": "Let p:Y→X be any scheme map, I and J injective resolutions of arbitrary modules on X and Y, and t:I→p_*J a complex map. Let U⊆X and W=p⁻¹U. Let A and B be restricted resolution choices of [def-weil-pbc-flat-base-change-open-choices] on U and W. Construct b and its restriction-adjunction lift k as in the Lean let-expression, using the restriction unit on J and the pushforward composition and congruence comparisons. For every section isomorphism a:Γ(W,B)≅Γ(U,h_*B) with inverse equal degreewise to restriction along h⁻¹top=top, one has Γ(U,k)≫a.inv≫B.sections.hom=A.sections.hom≫t(U). This statement concerns only one map p and does not mention a cartesian square, flatness, flatBaseChangeResolutionQ, or transport between the two projection inverse images.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FB and 01E4; restriction-adjunction section calculation in the proof of lem-weil-pbc-restricted-lift-section-formula. Mathlib/AlgebraicGeometry/Modules/Sheaf.lean: restrictAdjunction_unit_app_app and restrictAdjunction_counit_app_app."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof": [
+  {
+   "text": "For an arbitrary scheme map p:Y→X and open U⊆X, set W=p⁻¹U and h=p|W. Use the restriction unit on the target complex, the pushforward composition/congruence comparisons and the inverse target resolution comparison to construct b:I→U.ι_*h_*B. Set k to the restriction adjoint of b precomposed with the source comparison. This is exactly the let-expression in the Lean statement and uses no choice of data.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate k in each degree. The restriction adjunction counit is presheaf restriction along U.ι⁻¹(U.ι(top))=top. Evaluate the unit on the target complex as restriction from p⁻¹(U.ι(top)) to W.ι(W.ι⁻¹(p⁻¹(U.ι(top)))). Pushforward composition comparisons are identities on sections; the congruence comparison restricts along the equality of inverse-image opens furnished by h≫U.ι=W.ι≫p.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality moves B.comparison.inv across the counit restriction and the given a.inv restriction. Expand B.sections.hom using B.components. The inverse and forward target comparison cancel degreewise. Combine the remaining presheaf maps; using U.ι(top)=U and W.ι(top)=W gives the canonical restriction identification. Expand A.components and move t across the source restriction by naturality. Thus Γ(k)≫a.inv≫B.sections.hom=A.sections.hom≫t(U). Degreewise extensionality gives the complex identity. No augmentation or flatness is needed.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W2",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FB and 01E4; restriction-adjunction section calculation in the proof of lem-weil-pbc-restricted-lift-section-formula. Mathlib/AlgebraicGeometry/Modules/Sheaf.lean: restrictAdjunction_unit_app_app and restrictAdjunction_counit_app_app."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open immersion restriction adjunction global sections of a sheaf morphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sections of adjunction restriction to open subscheme counit naturality resolution comparison",
+   "results": "Found restriction unit and counit component formulas and restrictFunctorAdjCounitIso; no resolution comparison section identity.",
+   "date": "2026-10-13",
+   "verdict": "Ingredients only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictAdjunction_counit_app_app\"",
+   "results": "One hit: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app.",
+   "date": "2026-10-13",
+   "verdict": "Counit formula is one ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictAdjunction_counit_app_app|flatBaseChangeRestrictedLift_section_formula; restriction.*section|section.*restriction; blueprint_refs.py search \"restriction adjunction\"",
+   "results": "Mathlib has the component formula; no complete single-map conjugation identity in the source library. No blueprint nodes match restriction adjunction. Existing restricted-lift formula is the parent calculation, not a generic one-map statement.",
+   "date": "2026-10-13",
+   "verdict": "No existing exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSectionsFormula",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Restriction-adjunction and resolution-comparison part of the fixed-lift section calculation (Tags 01FB and 01E4).",
+   "via": [
+    "lem-weil-pbc-restricted-lift-section-formula",
+    "lem-weil-pbc-flat-base-change-restricted-lift-sections",
+    "lem-weil-pbc-flat-base-change-restricted-lift-homology",
+    "lem-weil-pbc-flat-base-change-resolution-sections",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair",
+    "lem-weil-pbc-flat-base-change-map-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictionResolutionLiftSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictionResolutionLiftSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.restrictionResolutionLift_sections",
+  "statement": "theorem restrictionResolutionLift_sections {X Y : Scheme.{uBC}}\n    (p : Y ⟶ X) {M : X.Modules} {N : Y.Modules}\n    (I : InjectiveResolution M) (J : InjectiveResolution N)\n    (t : I.cocomplex ⟶ ((pushforward p).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (U : X.Opens) (A : RestrictedResolutionSections I U)\n    (B : RestrictedResolutionSections J (p ⁻¹ᵁ U)) :\n  let W := p ⁻¹ᵁ U\n  letI : (restrictFunctor U.ι).Additive :=\n    (restrictAdjunction U.ι).left_adjoint_additive\n  let h := p.resLE U W le_rfl\n  let C := B.resolution.cocomplex\n  let P := (pushforward U.ι).mapHomologicalComplex (ComplexShape.up ℕ)\n  let H := (pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)\n  let G := (pushforward p).mapHomologicalComplex (ComplexShape.up ℕ)\n  let e₁ := NatIso.mapHomologicalComplex (pushforwardComp W.ι p)\n    (ComplexShape.up ℕ)\n  let e₂ := NatIso.mapHomologicalComplex\n    (pushforwardCongr (p.resLE_comp_ι (U := U) (V := W) le_rfl))\n    (ComplexShape.up ℕ)\n  let e₃ := NatIso.mapHomologicalComplex (pushforwardComp h U.ι) (ComplexShape.up ℕ)\n  let w := ((restrictAdjunction W.ι).unit.mapHomologicalComplex\n    (ComplexShape.up ℕ)).app J.cocomplex\n  let b : I.cocomplex ⟶ P.obj (H.obj C) :=\n    t ≫ G.map w ≫ e₁.hom.app (((restrictFunctor W.ι).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex) ≫\n      e₂.inv.app (((restrictFunctor W.ι).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj J.cocomplex) ≫\n      e₃.inv.app (((restrictFunctor W.ι).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj J.cocomplex) ≫\n      P.map (H.map B.comparison.inv)\n  let k := A.comparison.hom ≫\n    (((restrictAdjunction U.ι).mapHomologicalComplex (ComplexShape.up ℕ)).homEquiv\n      I.cocomplex (H.obj C)).symm b\n  let ΓS := (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙\n    forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)\n  let ΓT := (RingedSpace.globalSectionsFunctor (p ⁻¹ᵁ U).toScheme.toRingedSpace ⋙\n    forget₂ _ AddCommGrpCat.{uBC}).mapHomologicalComplex (ComplexShape.up ℕ)\n  ∀ (a : ΓT.obj B.resolution.cocomplex ≅ ΓS.obj (H.obj B.resolution.cocomplex)),\n    (∀ n : ℕ, a.inv.f n = (B.resolution.cocomplex.X n).presheaf.map\n      (eqToHom (by simp) : (⊤ : (p ⁻¹ᵁ U).toScheme.Opens) ⟶\n        h ⁻¹ᵁ (⊤ : U.toScheme.Opens)).op) →\n    ΓS.map k ≫ a.inv ≫ B.sections.hom =\n      A.sections.hom ≫\n        ((RingedSpace.openModuleSections X.toRingedSpace U).mapHomologicalComplex\n          (ComplexShape.up ℕ)).map t",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T152020-L-954690",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261013T152020-L-954690",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -6,6 +6,7 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSectionsCore
+import Sheaf.AlgebraicGeometry.RestrictionResolutionLiftSections
 
 /-! # The section formula for the restricted lift
 
@@ -23,6 +24,12 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
+private theorem openSections_map {Y : Scheme.{uBC}} {M N : Y.Modules}
+    (φ : M ⟶ N) (U : Y.Opens) :
+    (RingedSpace.openModuleSections Y.toRingedSpace U).map φ = Hom.app φ U := rfl
+
+set_option maxHeartbeats 800000 in
+-- Elaborating the nested restriction-adjunction lift needs additional fuel.
 /-- The section identity for the explicit restriction-adjunction lift.
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
 (blueprint: lem-weil-pbc-restricted-lift-section-formula).
@@ -67,6 +74,41 @@ theorem flatBaseChangeRestrictedLift_section_formula {X S S' : Scheme.{uBC}}
           ((RingedSpace.openModuleSections
             (Limits.pullback g f).toRingedSpace U).mapHomologicalComplex
               (ComplexShape.up ℕ)).obj J.cocomplex)
-              (flatBaseChangeOpenEquality f g V))).hom := by sorry
+              (flatBaseChangeOpenEquality f g V))).hom := by
+  intro h ΓS ΓT a ha
+  let E := (RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)).mapHomologicalComplex
+    (ComplexShape.up ℕ)
+  let e := eqToIso (congrArg (fun U ↦
+    ((RingedSpace.openModuleSections
+      (Limits.pullback g f).toRingedSpace U).mapHomologicalComplex
+        (ComplexShape.up ℕ)).obj J.cocomplex)
+      (flatBaseChangeOpenEquality f g V))
+  have liftSections : ΓS.map (flatBaseChangeRestrictedLift f g I J t V D) ≫
+      a.inv ≫ D.target.sections.hom = D.source.sections.hom ≫ E.map t := by
+    exact restrictionResolutionLift_sections (pullback.snd g f) I J t
+      (f ⁻¹ᵁ V) D.source D.target a ha
+  have squareSections :
+      ((RingedSpace.openModuleSections S.toRingedSpace V).mapHomologicalComplex
+        (ComplexShape.up ℕ)).map (flatBaseChangeResolutionQ f g I J t) =
+      E.map t ≫ e.hom := by
+    ext n : 1
+    dsimp only [E, e, flatBaseChangeResolutionQ, flatBaseChangePushforwardSquare,
+      Functor.mapHomologicalComplex, NatIso.mapHomologicalComplex,
+      NatTrans.mapHomologicalComplex]
+    simp only [Functor.map_comp, HomologicalComplex.comp_f, Iso.trans_hom, Iso.symm_hom]
+    simp only [openSections_map]
+    simp only [Hom.comp_app, pushforward_map_app, NatTrans.comp_app,
+      pushforwardComp_hom_app_app, pushforwardComp_inv_app_app,
+      pushforwardCongr_hom_app_app, Category.comp_id,
+      eqToHom_op, eqToHom_map]
+    simp only [eqToIso.hom, HomologicalComplex.eqToHom_f]
+    rfl
+  rw [squareSections]
+  change E.map t ≫ e.hom =
+    D.source.sections.inv ≫ ΓS.map (flatBaseChangeRestrictedLift f g I J t V D) ≫
+      a.inv ≫ (D.target.sections ≪≫ e).hom
+  have hl := congrArg (fun z ↦ D.source.sections.inv ≫ z ≫ e.hom) liftSections
+  simpa only [Iso.trans_hom, Category.assoc, Iso.inv_hom_id_assoc] using hl.symm
+
 
 end AlgebraicGeometry.Scheme.Modules

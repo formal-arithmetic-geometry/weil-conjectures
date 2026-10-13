@@ -12962,3 +12962,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:20 L: merged deliver/R1/Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapInjective (stage 3; reviewer PASS; first push; landing 20261013T152019-L-954285 (interface); batch 20261013T152016; modules 4; new nodes 4)
 - 15:20 L: merged deliver/R3/Sheaf.AlgebraicGeometry.DerivedDirectImageSquareMate (stage 3; reviewer PASS; first push; landing 20261013T152019-L-954396 (interface); batch 20261013T152016; modules 2; new nodes 1)
 - 15:20 L: merged deliver/U2/Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic (stage 3; reviewer PASS; first push; landing 20261013T152020-L-954541 (proof); batch 20261013T152016; modules 1; new nodes 1)
+- 15:20 L: merged deliver/W2/Sheaf.AlgebraicGeometry.FlatBaseChangeRestrictedLiftSectionsFormula (stage 3; reviewer PASS; first push; landing 20261013T152020-L-954690 (interface); batch 20261013T152016; modules 2; new nodes 1)
