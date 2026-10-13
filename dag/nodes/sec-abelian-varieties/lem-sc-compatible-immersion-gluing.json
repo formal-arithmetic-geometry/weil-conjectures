@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-compatible-immersion-gluing",
+ "kind": "statement",
+ "title": "Cartesian descent charts for compatible local immersions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. For each point $i$ choose an open neighbourhood $U_i$ containing $i$, a scheme $W_i$, and an immersion $j_i:W_i\\to U_i$. Assume compatibility: for every scheme $T$, points $i,k$, and maps $a:T\\to U_i$, $b:T\\to U_k$ with equal composites to $S$, the map $a$ factors through $j_i$ if and only if $b$ factors through $j_k$. Then there exist a scheme $Z$ and a morphism $q:Z\\to S$ such that for each $i$ there is a morphism $e_i:W_i\\to Z$ making the square with top map $j_i$, left map $e_i$, right map $U_i\\to S$, and bottom map $q$ Cartesian. No global factorization criterion or immersion assertion for $q$ is part of this statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "final paragraph, gluing characterized patches; Schemes Tags 01JB and 01JC"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put q i = j i followed by the inclusion of U i in S. Restrict W i to V(i,k) = the inverse image of U k under q i. Its map to S factors both through U i and through U k. Compatibility with i,k gives a factor of the latter map through j k, hence a map V(i,k) to W k over S. Its image lies in V(k,i), so it factors through that open restriction. Reversing i,k gives the inverse: after composition into S each composite is the original structure map, and q i and q k are monomorphisms. The same cancellation proves uniqueness.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "These unique isomorphisms restrict to the triple intersections and satisfy the cocycle identity, because both composites have the same map to S. The restriction maps V(i,k) to W i are open immersions. Apply scheme gluing (Tags 01JB and 01JC) to obtain Z with open charts e i from W i. The maps q i agree on the overlaps, so open-cover morphism gluing gives a map q from Z to S.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image of e i is the inverse image of U i under q. One inclusion follows from q composed with e i = q i. For the other, choose a chart e k containing a point z whose image under q lies in U i. Its preimage in W k belongs to V(k,i), whose comparison with V(i,k) identifies z with a point in the e i chart. Thus the two open subsets coincide. Since e i and the inclusion of U i are open immersions, this equality and the commutative square give the asserted Cartesian square (the universal property of an open restriction). For empty S the point-indexed family is empty; take the empty scheme for Z and its unique map to S, and the chart assertions are vacuous.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDL",
+  "place": "final paragraph, gluing characterized patches; Schemes Tags 01JB and 01JC",
+  "note": "The source omits the gluing details. This fills in only the geometric chart construction, separately from the predicate argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible immersions on open subsets glue to a scheme over the base with pullback squares",
+   "results": "Service unavailable: Internal Server Error. No absence conclusion inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible immersions over an open cover descend to a scheme with Cartesian charts over each open neighbourhood",
+   "results": "Found Scheme.GlueData and RelativeGluingData, plus LocalRepresentability.glueData. RelativeGluingData.isPullback_natTrans_ι_toBase proves effectivity after a locally directed equifibered diagram is supplied; it does not construct that diagram from factorization compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg compatible immersion, local immersion and gluing immersion throughout Mathlib AlgebraicGeometry, lean/WeilConjectures, lean/Sheaf, and dag/nodes; blueprint_refs search gluing immersions",
+   "results": "Read Scheme.GlueData, Scheme.Cover.RelativeGluingData and Scheme.LocalRepresentability. No theorem has the stated factorization-compatibility interface. Blueprint search found no duplicate; the parent is the predicate-specific gluing theorem, while lem-weil-pbc-glue-schemes requires explicit cocycle data.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalImmersionLocus",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "final proof paragraph: local characterized loci glue; Schemes Tags 01JB and 01JC",
+   "via": [
+    "lem-sc-local-immersion-locus",
+    "lem-sc-picard-universal-single-rank-locus",
+    "lem-sc-picard-universal-rank-match-locus-core-rank",
+    "lem-sc-picard-universal-rank-match-locus-core",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleImmersionGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleImmersionGluing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_gluedCompatibleImmersionCharts",
+  "statement": "theorem exists_gluedCompatibleImmersionCharts (S : Scheme.{u})\n    (U : S → S.Opens) (hU : ∀ s : S, s ∈ U s)\n    (W : S → Scheme.{u}) (j : ∀ s : S, W s ⟶ (U s).toScheme)\n    (hj : ∀ s : S, IsImmersion (j s))\n    (hcompat : ∀ (i k : S) {T : Scheme.{u}}\n      (a : T ⟶ (U i).toScheme) (b : T ⟶ (U k).toScheme),\n      a ≫ (U i).ι = b ≫ (U k).ι →\n      ((∃ h : T ⟶ W i, h ≫ j i = a) ↔ (∃ h : T ⟶ W k, h ≫ j k = b))) :\n    ∃ (Z : Scheme.{u}) (q : Z ⟶ S),\n      ∀ i : S, ∃ e : W i ⟶ Z, IsPullback (j i) e (U i).ι q",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T060421-L-583888",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T060421-L-583888",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
