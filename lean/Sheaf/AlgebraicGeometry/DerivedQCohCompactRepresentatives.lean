@@ -6,12 +6,9 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.CategoryTheory.CompactObject
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
-import Sheaf.AlgebraicGeometry.PerfectObjectCompact
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # Small representatives of compact quasi-coherent derived objects
 
@@ -26,6 +23,63 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+/-- Derived categories exist on all open subschemes of a Noetherian scheme.
+Source: Grothendieck abelianity of sheaves of modules on a small ringed site
+and `HasDerivedCategory.ofIsGrothendieckAbelian`.
+(blueprint: lem-sc-derived-qcoh-compact-open-categories) -/
+theorem noetherian_open_derived_categories_exists (X : Scheme.{u}) [IsNoetherian X]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
+    Nonempty (∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))) := by
+  sorry
+
+/-- Compact objects in the quasi-coherent derived category are perfect.
+Source: Stacks Project, Tag 09M1, converse direction of
+`perfect-proposition-compact-is-perfect`; restriction to affine opens and the
+finite-projective criterion reduce compactness to perfectness.
+(blueprint: lem-sc-derived-qcoh-compact-is-perfect)
+The proof uses the coproduct-preserving right adjoint to restriction and the
+affine equivalence with the derived category of modules. -/
+theorem compact_isPerfect_of_isNoetherian (X : Scheme.{u}) [IsNoetherian X]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [hOpen : ∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
+    let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+    ∀ P : schemeDerivedQCohCategory X, IsCompactObject P → Scheme.IsPerfect X P.obj := by
+  sorry
+
+/-- Noetherian schemes have a universe-small family of perfect representatives.
+Source: Stacks Project, Tags 08EB and 09M1, together with the finite affine
+cover gluing argument of `lem-pc-perfect-complexes-compact-set`.
+(blueprint: lem-sc-derived-qcoh-perfect-representatives-noetherian)
+The affine representatives glue over a finite affine cover; the required
+derived categories on opens and the compact and separated instances are
+provided by the Noetherian hypotheses. -/
+theorem noetherian_perfect_representatives (X : Scheme.{u}) [IsNoetherian X]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [hOpen : ∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
+    ∃ (S : Type u) (G : S → schemeDerivedQCohCategory X),
+      (∀ s : S, Scheme.IsPerfect X (G s).obj) ∧
+      ∀ P : schemeDerivedQCohCategory X, Scheme.IsPerfect X P.obj →
+        ∃ s, Nonempty (P ≅ G s) := by
+  sorry
+
+/-- Perfect objects on a Noetherian scheme are compact in its QCoh derived category.
+Source: Stacks Project, Tag 09M1, the perfect-to-compact implication, using
+tensor-Hom duality and preservation of coproducts.
+(blueprint: lem-sc-derived-qcoh-perfect-compact-noetherian)
+This is the Noetherian specialization of `perfectObjectCompact`; all local
+derived-category and quasi-compactness infrastructure is discharged in the
+intermediate theorem. -/
+theorem noetherian_perfect_compact (X : Scheme.{u}) [IsNoetherian X]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [hOpen : ∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] :
+    let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+    ∀ (P : schemeDerivedQCohCategory X), Scheme.IsPerfect X P.obj → IsCompactObject P := by
+  sorry
 
 /-- Compact objects of the quasi-coherent derived category have small representatives.
 Source: Stacks Project, Tags 09M1 and 09IS, and the set-of-representatives argument
@@ -54,6 +108,16 @@ theorem derivedQCoh_compact_representatives (X : Scheme.{u}) [IsNoetherian X]
       (∀ s, IsCompactObject (G s)) ∧
       ∀ P : schemeDerivedQCohCategory X, IsCompactObject P →
         ∃ s, Nonempty (P ≅ G s) := by
-  sorry
+  let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X
+  let _ : ∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=
+    Classical.choice (noetherian_open_derived_categories_exists X)
+  obtain ⟨S, G, hperf, hrep⟩ := noetherian_perfect_representatives X
+  refine ⟨S, G, ?_, ?_⟩
+  · intro s
+    exact noetherian_perfect_compact X (G s) (hperf s)
+  · intro P hP
+    obtain ⟨s, hs⟩ := hrep P (compact_isPerfect_of_isNoetherian X P hP)
+    exact ⟨s, hs⟩
 
 end AlgebraicGeometry

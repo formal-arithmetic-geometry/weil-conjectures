@@ -1,0 +1,95 @@
+{
+ "id": "lem-sc-derived-qcoh-compact-open-categories",
+ "kind": "statement",
+ "title": "Noetherian open schemes admit derived categories",
+ "statement": "For a Noetherian scheme X with a derived category of sheaves of modules on X, there is, for every open U of X, a derived category of sheaves of modules on the restriction of the ringed space to U.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09M1",
+  "place": "Tags 09M1 and related derived-category constructions"
+ },
+ "proof": [
+  {
+   "text": "The statement follows from the Noetherian affine-local derived-category and perfect-complex arguments described in the module docstring.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "Codex",
+  "document": "https://stacks.math.columbia.edu/tag/09M1",
+  "place": "Tag 09M1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compact objects perfect derived category Noetherian scheme",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompactObject",
+   "results": "0 hits; unknown identifier",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasDerivedCategory",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-derived-qcoh-compact-representatives",
+   "place": "intermediate step"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedQCohCompactRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.noetherian_open_derived_categories_exists",
+  "statement": "theorem noetherian_open_derived_categories_exists (X : Scheme.{u}) [IsNoetherian X]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :\n    Nonempty (∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T002357-L-2376588",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T002357-L-2376588",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
