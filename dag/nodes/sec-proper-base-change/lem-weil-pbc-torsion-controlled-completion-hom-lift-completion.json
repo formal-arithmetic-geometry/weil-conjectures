@@ -69,32 +69,45 @@
  },
  "id": "lem-weil-pbc-torsion-controlled-completion-hom-lift-completion",
  "title": "Completion compatibility of the lift",
- "statement": "Under the hypotheses of lem-weil-pbc-torsion-controlled-completion-hom-lift-exists, if g:F→F′ satisfies g≫a′=a then completion.map g=θ.",
+ "statement": "Let X be Noetherian, J a quasi-coherent ideal, and a:F→H, a′:F′→H coherent arrows with power-torsion kernel and cokernel for a′. Given θ:F^→F′^ with θ≫a′^=a^, choose n such that ker(a′)→F′/J^(n+1)F′ is monomorphic. In P=F×_H F′ let E be the kernel of p₂≫q′−p₁≫q≫θ_n, with q,q′ the quotient projections. The first projection p:E→F is an isomorphism. For the explicitly constructed g=p⁻¹≫q₂, both g≫a′=a and completion.map(g)=θ hold. The completion functor and quotient systems are those of [def-weil-pbc-coherent-formal-module].",
  "proof": [
   {
-   "text": "Identify the localized comparison maps with θ after completion and use formal gluing exactness and sheaf gluing to preserve the equality globally.",
+   "text": "Define the finite graph as the kernel of the residual on the pullback F×_H F′. Its first projection is epi by the finite-graph surjectivity lemma.",
    "uses": [
-    "lem-weil-pbc-torsion-controlled-completion-hom-lift-raw"
+    "lem-weil-pbc-torsion-controlled-finite-graph-epi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If a map into the graph has zero first projection, its second projection factors through ker(a′). The graph condition kills its composite with the separating quotient, hence it is zero. Pullback extensionality and monomorphy of the kernel inclusion kill the original map, proving the first projection mono. In the abelian module category it is therefore an isomorphism. Define g using its uniquely determined inverse.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The pullback condition, composed with the inverse first projection, gives g≫a′=a. The kernel condition similarly gives equality with θ at level n+1 after cancelling the source quotient epimorphism. Functoriality gives agreement after completion(a′); finite-level torsion detection gives equality of the full completed maps.",
+   "uses": [
+    "lem-weil-pbc-formal-map-torsion-finite-detection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-torsion-controlled-completion-hom-lift-raw"
+  "lem-weil-pbc-torsion-controlled-finite-graph-epi",
+  "lem-weil-pbc-formal-map-torsion-finite-detection"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0889(1), affine gluing argument"
+  "place": "Tag 0889(1), comparison argument; finite graph and Artin--Rees separation repair"
  },
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion",
   "file": "lean/Sheaf/AlgebraicGeometry/TorsionControlledCompletionHomLiftCompletion.lean",
-  "declaration": "AlgebraicGeometry.torsionControlled_completion_hom_lift_completion",
-  "statement": "theorem torsionControlled_completion_hom_lift_completion\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (H F F' : CoherentModules X) (a : F ⟶ H) (a' : F' ⟶ H)\n    (ha : (∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (kernel a.hom)) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (cokernel a.hom))))\n    (ha' : (∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (kernel a'.hom)) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (cokernel a'.hom))))\n    (θ : (completion X J).obj F ⟶ (completion X J).obj F')\n    (hθ : θ ≫ (completion X J).map a' = (completion X J).map a)\n    (g : F ⟶ F') (hg : g ≫ a' = a) :\n    (completion X J).map g = θ",
+  "declaration": "AlgebraicGeometry.torsionControlled_completion_hom_lift_constructed",
+  "statement": "theorem torsionControlled_completion_hom_lift_constructed\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)\n    (ha' : ∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (kernel a'.hom)) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (cokernel a'.hom)))\n    (θ : (completion X J).obj F ⟶ (completion X J).obj F')\n    (hθ : θ ≫ (completion X J).map a' = (completion X J).map a)\n    (n : ℕ) (hsep : Mono (kernel.ι a'.hom ≫ formalModuleQuotientπ J (n + 1) F'.obj)) :\n    torsionControlledCompletionHomLift J a a' ha' θ hθ n hsep ≫ a' = a ∧\n      (completion X J).map\n        (torsionControlledCompletionHomLift J a a' ha' θ hθ n hsep) = θ",
   "branch": "sheaf-dag",
-  "by": "R1",
+  "by": "S1",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -108,13 +121,36 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
+  "reviewer": "X-b3649",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T234223-L-2126460",
+  "landing": "20261013T054236-L-448895",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures, constructions and proof dependencies with the nodes and change record; all four modules and the adapted direct importer compile cleanly, the original caller fails at the removed theorem, and axiom checks show only permitted axioms plus expected sorryAx."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "S1 stage 2",
+  "old_statement": "Under the hypotheses of lem-weil-pbc-torsion-controlled-completion-hom-lift-exists, if g:F→F′ satisfies g≫a′=a then completion.map g=θ.",
+  "what": "Repair requested by reviewer X-18d42: the arbitrary-lift conclusion is false at J=0, a=a′=g=0, θ=id. Retire it and prove both equations for an explicit finite-graph construction retaining θ. The separating quotient is supplied by Artin--Rees in the unchanged caller, not by monicity of completion(a′).",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Tag 0889(1), affine gluing argument"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Identify the localized comparison maps with θ after completion and use formal gluing exactness and sheaf gluing to preserve the equality globally.",
+    "uses": [
+     "lem-weil-pbc-torsion-controlled-completion-hom-lift-raw"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-torsion-controlled-completion-hom-lift-raw"
+  ]
  }
 }

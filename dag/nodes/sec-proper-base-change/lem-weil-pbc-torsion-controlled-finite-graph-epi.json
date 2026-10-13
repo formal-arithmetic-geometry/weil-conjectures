@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-torsion-controlled-finite-graph-epi",
+ "kind": "statement",
+ "title": "Surjectivity of the finite θ-graph projection",
+ "statement": "For a Noetherian scheme X, ideal J, coherent modules F,F′,H and arrows a:F→H, a′:F′→H, assume ker(a′) and coker(a′) are killed by a positive power of J. For θ:F^→F′^ compatible with a,a′ and n≥0, define E=ker(p₂≫q′−p₁≫q≫θ_n) on F×_H F′, where q,q′ are the J^(n+1) quotient maps. The first projection E→F is an epimorphism. Completion and quotients are from [def-weil-pbc-coherent-formal-module].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine comparison and uniqueness; Tags 05EK and 088A"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open the coherent pullback and its graph kernel correspond to finite modules. Use the affine tilde-sections dictionary, and identify θ with its map between finite completed modules.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness of Noetherian completion preserves the finite pullback and graph kernel. The pair (id,θ) maps into the completed graph, so its first projection is surjective. The finite cokernel therefore vanishes at primes containing J by reduction modulo J and Nakayama.",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At primes not containing J, a′ is an isomorphism because its kernel and cokernel are J-power torsion, and the quotient condition is zero. The graph projection is an isomorphism there. Thus its cokernel is zero at every stalk, which proves epimorphy.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-exact-finite-modules"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), finite-graph comparison repair"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of a finite graph projection determined by a prescribed completion morphism",
+   "results": "Internal Server Error; unavailable. No mathematical search verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal map into a finite coherent module whose comparison kernel is ideal power torsion is determined by one separating quotient and its comparison composite",
+   "results": "Generic AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, IsHausdorff.funext, AdicCompletion.ext, and quotient compatibility lemmas; none gives the coherent graph epi or separating torsion formal-map detection theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Preadditive.mono_of_cancel_zero",
+   "results": "Exact categorical cancellation lemma found and used to prove graph monomorphy in the item. Does not supply either new statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*completion|completion.*graph|formalMap_torsion_finite_detection",
+   "results": "msearch returned zero hits. Direct searches of both library roots find no matching declaration; Mathlib supplies generic pullback and kernel APIs.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsion-controlled-completion-hom-lift-completion",
+   "place": "θ-preserving finite-graph repair",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorsionControlledFiniteGraphEpi",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionControlledFiniteGraphEpi.lean",
+  "declaration": "AlgebraicGeometry.torsionControlledGraphFst_epi",
+  "statement": "theorem torsionControlledGraphFst_epi\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    {H F F' : CoherentModules X} (a : F ⟶ H) (a' : F' ⟶ H)\n    (ha' : ∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (kernel a'.hom)) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (cokernel a'.hom)))\n    (θ : (completion X J).obj F ⟶ (completion X J).obj F')\n    (hθ : θ ≫ (completion X J).map a' = (completion X J).map a)\n    (n : ℕ) : Epi (torsionControlledGraphFst J a a' θ n)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b3649",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T054236-L-448895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b3649",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T054236-L-448895",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, constructions and proof dependencies with the nodes and change record; all four modules and the adapted direct importer compile cleanly, the original caller fails at the removed theorem, and axiom checks show only permitted axioms plus expected sorryAx."
+ }
+}

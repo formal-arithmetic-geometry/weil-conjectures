@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-formal-map-torsion-finite-detection",
+ "kind": "statement",
+ "title": "One finite quotient detects formal maps with a torsion comparison",
+ "statement": "For X Noetherian and J an ideal, let b:Q→R be a coherent arrow whose kernel T is killed by a positive power of J. Suppose T→Q/J^(n+1)Q is monomorphic. For any coherent formal module M and formal maps f,g:M→Q^, equality f≫b^=g≫b^ and equality f_n=g_n at level n+1 imply f=g. Formal modules and completion are those of [def-weil-pbc-coherent-formal-module].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine comparison and uniqueness; Tags 05EK and 088A"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to an affine open and apply the affine equivalence to interpret the formal maps as maps of finite completed modules.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness of completion identifies ker(b^) with T^. Since J^s T=0, the canonical completion map identifies T^ with T. The prescribed separating quotient is injective on that kernel.",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The difference f−g has image in this kernel by the composition equation. Its n-th component is zero, so injectivity of T→Q/J^(n+1)Q kills the difference. Transport back to the affine formal systems, then check equality locally on an affine cover at every component.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-exact-finite-modules"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), finite-graph comparison repair"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of a finite graph projection determined by a prescribed completion morphism",
+   "results": "Internal Server Error; unavailable. No mathematical search verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formal map into a finite coherent module whose comparison kernel is ideal power torsion is determined by one separating quotient and its comparison composite",
+   "results": "Generic AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, IsHausdorff.funext, AdicCompletion.ext, and quotient compatibility lemmas; none gives the coherent graph epi or separating torsion formal-map detection theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Preadditive.mono_of_cancel_zero",
+   "results": "Exact categorical cancellation lemma found and used to prove graph monomorphy in the item. Does not supply either new statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*completion|completion.*graph|formalMap_torsion_finite_detection",
+   "results": "msearch returned zero hits. Direct searches of both library roots find no matching declaration; Mathlib supplies generic pullback and kernel APIs.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftCompletion",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-torsion-controlled-completion-hom-lift-completion",
+   "place": "θ-preserving finite-graph repair",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalMapTorsionFiniteDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalMapTorsionFiniteDetection.lean",
+  "declaration": "AlgebraicGeometry.formalMap_torsion_finite_detection",
+  "statement": "theorem formalMap_torsion_finite_detection\n    {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)\n    (Q R : CoherentModules X) (b : Q ⟶ R)\n    (hker : ∃ s : ℕ, 1 ≤ s ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n        (kernel b.hom)))\n    (n : ℕ) (hsep : Mono (kernel.ι b.hom ≫ formalModuleQuotientπ J (n + 1) Q.obj))\n    (M : CoherentFormalModule X J) (f g : M ⟶ (completion X J).obj Q)\n    (hcomp : f ≫ (completion X J).map b = g ≫ (completion X J).map b)\n    (hlevel : f.hom.app (op n) = g.hom.app (op n)) : f = g",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b3649",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T054236-L-448895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b3649",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T054236-L-448895",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, constructions and proof dependencies with the nodes and change record; all four modules and the adapted direct importer compile cleanly, the original caller fails at the removed theorem, and axiom checks show only permitted axioms plus expected sorryAx."
+ }
+}
