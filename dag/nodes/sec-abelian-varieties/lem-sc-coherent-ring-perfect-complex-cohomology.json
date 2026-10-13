@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "Each finite projective term P^q is finitely presented [lem-weil-pbc-finite-projective-finitely-presented]. Since R is coherent, [lem-sc-coherent-ring-fp-kernel-cokernel] applies to every differential d^q:P^q\\to P^{q+1}, so Z^q=\\operatorname{Ker}(d^q) and B^q=\\operatorname{Im}(d^{q-1}) are finitely presented.",
+   "text": "For every n, install the finite and projective hypotheses hterms n and apply Mathlib Module.finitePresentation_of_projective. Let S=P.sc q, with the terms at the preceding, current and following degree. Apply Module.finitePresentation_ker_range_cokernel_of_fg_ideals to S.g.hom to obtain finite presentation of the cycle module LinearMap.ker S.g.hom.",
    "uses": [
     "lem-weil-pbc-finite-projective-finitely-presented",
     "lem-sc-coherent-ring-fp-kernel-cokernel"
@@ -32,18 +32,18 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemmas 05CW and 05CX applied to the differentials"
+    "place": "Lemma 00NX and Lemmas 05CW, 05CX"
    }
   },
   {
-   "text": "The inclusion B^q\\hookrightarrow Z^q is a map between finitely presented modules. Applying [lem-sc-coherent-ring-fp-kernel-cokernel] shows its cokernel is finitely presented; this cokernel is H^q(P^\\bullet)=Z^q/B^q.",
+   "text": "The incoming differential factors through cycles by the square-zero identity, using Mathlib ShortComplex.moduleCatToCycles. Its source S.X₁ and target LinearMap.ker S.g.hom are finitely presented. Apply the cokernel clause of Module.finitePresentation_ker_range_cokernel_of_fg_ideals to this map. The resulting quotient is the explicit homology module. Transport finite presentation to P.homology q along ShortComplex.moduleCatHomologyIso.toLinearEquiv.symm by Module.FinitePresentation.of_equiv. No separate finite-presentation calculation for the boundary module and no use of boundedness are required.",
    "uses": [
     "lem-sc-coherent-ring-fp-kernel-cokernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemmas 05CW and 05CX, closure under cokernels"
+    "place": "Lemmas 05CW and 05CX, applied to the incoming differential with codomain restricted to cycles"
    }
   }
  ],
@@ -54,7 +54,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemmas 05CW and 05CX"
+  "place": "Lemmas 00NX, 05CW, 05CX; implemented using the Mathlib short-complex kernel/quotient description of homology"
  },
  "mathlib_searches": [
   {
@@ -157,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T025302-L-3422774",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

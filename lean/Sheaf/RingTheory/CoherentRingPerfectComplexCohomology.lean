@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Sheaf.RingTheory.FinitePresentationKerRangeCokernel
 
 /-! # Cohomology of finite projective complexes over coherent rings
@@ -48,6 +49,26 @@ theorem finitePresentation_homology_of_coherent
     (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))
     (hterms : ∀ n : ℤ, Module.Finite R (P.X n) ∧ Module.Projective R (P.X n))
     (q : ℤ) : Module.FinitePresentation R (P.homology q) := by
-  sorry
+  -- Finite presentation of homology uses only the three terms adjacent to q.
+  have _ := hbounded
+  have hfp (n : ℤ) : Module.FinitePresentation R (P.X n) := by
+    have := (hterms n).1
+    have := (hterms n).2
+    exact Module.finitePresentation_of_projective R (P.X n)
+  let S := P.sc q
+  have : Module.FinitePresentation R S.X₁ := hfp _
+  have : Module.FinitePresentation R S.X₂ := hfp _
+  have : Module.FinitePresentation R S.X₃ := hfp _
+  have : Module.FinitePresentation R (LinearMap.ker S.g.hom) :=
+    (Module.finitePresentation_ker_range_cokernel_of_fg_ideals hR S.g.hom).1
+  have : Module.FinitePresentation R
+      (LinearMap.ker S.g.hom ⧸ LinearMap.range S.moduleCatToCycles) :=
+    (Module.finitePresentation_ker_range_cokernel_of_fg_ideals
+      hR S.moduleCatToCycles).2.2
+  have : Module.FinitePresentation R S.moduleCatLeftHomologyData.H := by
+    change Module.FinitePresentation R
+      (LinearMap.ker S.g.hom ⧸ LinearMap.range S.moduleCatToCycles)
+    infer_instance
+  exact Module.FinitePresentation.of_equiv S.moduleCatHomologyIso.toLinearEquiv.symm
 
 end CochainComplex
