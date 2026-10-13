@@ -253,9 +253,7 @@ noncomputable def ctfLowerShriekCongr {f g : X ⟶ Y} (e : f = g) [HasCompactifi
     (h₂ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
       DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A g).obj K)) :
     ctfLowerShriek f h₁ ≅ ctfLowerShriek g h₂ :=
-  eqToIso <| by
-    subst e
-    rfl
+  by subst e; exact Iso.refl _
 
 /-- A natural transformation between functors into `Dᵇctf(X)`, given by one between their
 composites with the inclusion into `D(X, A)`. -/
@@ -329,6 +327,11 @@ lemma id_source {f : X ⟶ Y} (hf : IsGeometricHom s f) : IsGeometricHom s (𝟙
   obtain ⟨a, _, _⟩ := hf
   exact .id (f ≫ a)
 
+/-- The target of a morphism of geometric schemes is geometric. -/
+lemma id_target {f : X ⟶ Y} (hf : IsGeometricHom s f) : IsGeometricHom s (𝟙 Y) := by
+  obtain ⟨a, _, _⟩ := hf
+  exact .id a
+
 /-- Morphisms of geometric schemes are stable under composition. -/
 lemma comp {f : X ⟶ Y} {g : Y ⟶ Z} (hf : IsGeometricHom s f) (hg : IsGeometricHom s g) :
     IsGeometricHom s (f ≫ g) := by
@@ -343,8 +346,8 @@ end IsGeometricHom
 /-- Coefficients and geometric categories (blueprint: `sk-d-setup`): the stability of the
 categories `Dᵇctf(X, A)` of bounded constructible objects of finite Tor amplitude
 (`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`) on geometric schemes over
-`s` under the operations: they contain `A_X`, are stable under `⊗ᴸ`, `Lf^*`, `Rf_!`, `Rf^!`
-and, for `f` proper, `Rf_*`. These are the stability theorems of the six functors chapter
+`s` under the operations: they contain `A_X`, are stable under `⊗ᴸ`, `RHom`, `Lf^*`, `Rf_!`,
+`Rf^!` and, for `f` proper, `Rf_*`. These are the stability theorems of the six functors chapter
 (blueprint `sk-thm-sf-ctf-stability`, `sk-prop-sf-rf-shriek-preservation`), which hold at the
 finite coefficient stages `A = 𝒪_E/ϖⁿ` over a field in which `ℓ` is invertible. A scheme `X` is
 geometric when `𝟙 X` is a morphism of geometric schemes. -/
@@ -358,6 +361,13 @@ structure GeometricCoefficients (s : Scheme.{u}) : Prop where
     (hK : DerivedCategory.constructibleFiniteTor A X K)
     (hL : DerivedCategory.constructibleFiniteTor A X L) :
     DerivedCategory.constructibleFiniteTor A X (K ⊗ L)
+  /-- `Dᵇctf(X)` is stable under the internal hom `RHom` (blueprint `prop-functor-package`: at
+  the finite stages internal Hom preserves `Dᵇctf` in both variables). -/
+  ctf_ihom {X : Scheme.{u}} (hX : IsGeometricHom s (𝟙 X))
+    {K L : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    (hK : DerivedCategory.constructibleFiniteTor A X K)
+    (hL : DerivedCategory.constructibleFiniteTor A X L) :
+    DerivedCategory.constructibleFiniteTor A X ((ihom K).obj L)
   /-- `Dᵇctf` is stable under `Lf^*`. -/
   ctf_upperStar {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsGeometricHom s f)
     {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)}
@@ -585,7 +595,8 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   /-- the normalisation `ω_s ≃ A_s` of the dualizing complex of the base. -/
   dualizingBase :
     dualizing (𝟙 s) ≅ 𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))
-  /-- dualizing composition: `f^! ω_Y ≃ ω_X`. -/
+  /-- dualizing composition: `f^! ω_Y ≃ ω_X` (blueprint `thm-trf-dualizing-complex-composition`;
+  it is functorial in `f` by `dualizingComp_comp` and canonical by `dualizingComp_eq`). -/
   dualizingComp {X Y : Scheme.{u}} (f : X ⟶ Y) (a : Y ⟶ s) [IsGeometric a]
       [IsGeometric (f ≫ a)] [HasCompactification f] :
     (rightDerivedUpperShriek A f).obj (dualizing a) ≅ dualizing (f ≫ a)
@@ -747,6 +758,35 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
               (.mk (aY := a) rfl))).app ⟨dualizing a, ctf_dualizing a⟩) ≪≫
         (rightDerivedUpperShriek A f).mapIso (dualizingComp g a) ≪≫ dualizingComp f (g ≫ a) ≪≫
         eqToIso (congrArg dualizing (Category.assoc f g a).symm)
+  /-- `dualizingComp` is the canonical isomorphism of blueprint
+  `thm-trf-dualizing-complex-composition`: when `a` and `f ≫ a` admit compactifications it is
+  the composite
+
+  ```
+    f^! ω_a ≃ f^! a^! A ≃ (f ≫ a)^! A ≃ ω_{f ≫ a}
+  ```
+
+  of `dualizingIso a`, the composition isomorphism of `(-)^!` on `Dᵇctf` (the conjugate of
+  `lowerShriekComp f a`) and `dualizingIso (f ≫ a)`. -/
+  dualizingComp_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (a : Y ⟶ s) [IsGeometric a]
+      [IsGeometric (f ≫ a)] [HasCompactification f] [HasCompactification a]
+      [HasCompactification (f ≫ a)] :
+    dualizingComp f a =
+      (rightDerivedUpperShriek A f).mapIso (dualizingIso a) ≪≫
+        (DerivedCategory.constructibleFiniteTor A X).ι.mapIso
+          (X := (toGeometricCoefficients.upperShriekCtf f (.mk (aY := a) rfl)).obj
+            ((toGeometricCoefficients.upperShriekCtf a (.of_isGeometric a)).obj
+              ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩))
+          (Y := (toGeometricCoefficients.upperShriekCtf (f ≫ a) (.of_isGeometric (f ≫ a))).obj
+            ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩)
+          ((conjugateIsoEquiv
+            (toGeometricCoefficients.exceptionalAdjunction (f ≫ a) (.of_isGeometric (f ≫ a)))
+            ((toGeometricCoefficients.exceptionalAdjunction f (.mk (aY := a) rfl)).comp
+              (toGeometricCoefficients.exceptionalAdjunction a (.of_isGeometric a)))
+            (lowerShriekComp f a (.mk (aY := a) rfl) (.of_isGeometric a)
+              (.of_isGeometric (f ≫ a)))).symm.app
+            ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩) ≪≫
+        (dualizingIso (f ≫ a)).symm
   /-- `properComparison` is compatible with the shifts: the identification `Rf_! ≃ Rf_*` at
   `K⟦n⟧` is, through the commutation of `Rf_!` and `Rf_*` with the shift, the shift of the
   identification at `K`. The two functors are triangulated and the identification is one of
@@ -775,7 +815,8 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
           ((rightDerivedLowerShriek A f).obj K.obj) ≫
         ((lowerShriekComp f g hf hg hfg).hom.app K).hom⟦n⟧'
   /-- `!`-base change along a Cartesian square of geometric schemes: `Lg^* Rf_! ≃ Rf'_! Lg'^*`
-  on `Dᵇctf`, for
+  on `Dᵇctf` (for open immersions `f`, `f'` this is the exchange isomorphism
+  `b_g : Lg^* j_! ≃ j'_! Lg_U^*` of blueprint `lem-trf-open-square-exchange`), for
 
   ```
      X' ──g'──→ X
@@ -844,6 +885,15 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
   identity isomorphism `L(𝟙 X)^* ≃ 𝟭`. -/
   upperStarUnit_id (X : Scheme.{u}) :
     (upperStarMonoidal (𝟙 X)).εIso.inv = (leftDerivedUpperStarId A X).hom.app (𝟙_ _)
+  /-- the unit of the monoidal structure of the pullback is compatible with composition: the
+  identification `L(f ≫ g)^* A_Z ≃ A_X` is `L(f ≫ g)^* A_Z ≃ Lf^* Lg^* A_Z ≃ Lf^* A_Y ≃ A_X`, read
+  through the composition isomorphism `leftDerivedUpperStarComp` (the pullbacks form a monoidal
+  pseudofunctor; blueprint `prop-functor-package`). -/
+  upperStarUnit_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (upperStarMonoidal (f ≫ g)).εIso.inv =
+      (leftDerivedUpperStarComp A f g).hom.app (𝟙_ _) ≫
+        ((upperStar A f).leftDerivedFunctor).map (upperStarMonoidal g).εIso.inv ≫
+        (upperStarMonoidal f).εIso.inv
   /-- the monoidal structure of `Lf^*` is braided: its tensor map `μ` commutes with the
   braidings `β` of `D(Y, A)` and `D(X, A)`, that is, the square
 
@@ -928,6 +978,22 @@ noncomputable def bidualityMap {X : Scheme.{u}} (a : X ⟶ s)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
     K ⟶ G.verdierDual a (G.verdierDual a K) :=
   MonoidalClosed.curry ((β_ (G.verdierDual a K) K).hom ≫ (ihom.ev K).app (G.dualizing a))
+
+/-- Blueprint `thm-trf-verdier-biduality`: Verdier biduality `K ≃ D_X D_X K` for `K ∈ Dᵇctf(X)`
+on a geometric scheme: the evaluation-adjoint map `GeometricOperations.bidualityMap`, the
+tensor-hom adjoint of the evaluation `ev_K : D_X K ⊗ᴸ K ⟶ ω_X` preceded by the braiding, is
+invertible (the field `isIso_bidualityMap`). It is natural in `K`. -/
+noncomputable def bidualityIso {X : Scheme.{u}} (a : X ⟶ s) [IsGeometric a]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) :
+    K ≅ G.verdierDual a (G.verdierDual a K) :=
+  haveI : IsIso (G.bidualityMap a K) := G.isIso_bidualityMap a K hK
+  asIso (G.bidualityMap a K)
+
+@[simp]
+lemma bidualityIso_hom {X : Scheme.{u}} (a : X ⟶ s) [IsGeometric a]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) (hK : G.ctf X K) :
+    (G.bidualityIso a K hK).hom = G.bidualityMap a K :=
+  rfl
 
 /-- Transport of the dualizing complex along an equality of structure morphisms:
 `ω_a ≅ ω_b` for `a = b`. -/

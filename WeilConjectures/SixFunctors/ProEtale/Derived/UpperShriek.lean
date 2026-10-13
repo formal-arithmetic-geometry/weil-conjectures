@@ -115,9 +115,8 @@ lemma rightDerivedUpperShriek_obj (L : DerivedCategory (Sheaf (Scheme.ProEt.topo
 noncomputable def rightDerivedUpperShriekCongr {f g : X ⟶ Y} (h : f = g)
     [HasCompactification f] [HasCompactification g] [Etale.HasBoundedBelowUpperShriek A f]
     [Etale.HasBoundedBelowUpperShriek A g] : R(f)^![A] ≅ R(g)^![A] :=
-  eqToIso <| by
-    subst h
-    rfl
+  -- not `eqToIso`: the kernel would compare `Rf^!` and `Rg^!` when reducing the transport
+  by subst h; exact Iso.refl _
 
 @[simp]
 lemma rightDerivedUpperShriekCongr_rfl :
