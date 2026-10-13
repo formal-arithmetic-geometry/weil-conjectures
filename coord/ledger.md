@@ -12126,3 +12126,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/H2/Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteHomEquality (stage 3; reviewer PASS; first push; landing 20261013T111852-L-3052493 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/H2/Sheaf.AlgebraicGeometry.Morphisms.FlatPowerSeriesChartGenericImage (stage 3; reviewer PASS; first push; landing 20261013T111852-L-3052687 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:18 L: merged deliver/H3/Sheaf.RingTheory.PowerSeriesSubringFiniteBasis (stage 3; reviewer PASS; first push; landing 20261013T111853-L-3052825 (interface); batch 20261013T111833; modules 3; new nodes 2)
+- 11:18 L: merged deliver/H3/Sheaf.RingTheory.PrincipalPrimeQuotientFractionFinite (stage 3; reviewer PASS; first push; landing 20261013T111853-L-3052929 (proof); batch 20261013T111833; modules 1; new nodes 0)

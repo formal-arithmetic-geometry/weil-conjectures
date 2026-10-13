@@ -14,15 +14,12 @@
  ],
  "proof": [
   {
-   "text": "If x=0, localize S by the nonzero elements of R. This is a K-subalgebra of L, hence finite-dimensional and a domain, so a field. Since Q avoids these denominators, its localization is a prime of this field and is zero; injectivity of localization forces Q=0. The quotient fraction fields then identify compatibly with K and L.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-finite-dimensional-domain-is-field"
-   ],
-   "elementary": false
+   "text": "If x=0, the contraction p is zero. For any s in Q, finite-dimensionality of L/K gives algebraicity of its image in L over K. IsFractionRing.isAlgebraic_iff clears denominators to give algebraicity over R, and isAlgebraic_algebraMap_iff pulls this back along the injection S -> L. If s were nonzero, Ideal.comap_ne_bot_of_algebraic_mem would contradict p=0. Thus Q=0. Use quotientBot to equip K and L with the quotient algebra structures and identify their fraction rings. IsFractionRing.algEquiv_commutes proves compatibility of the two field equivalences; Module.Finite.of_equiv_equiv transports the given finiteness.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "If x is nonzero, the prime xR has height one. The principal ideal height theorem bounds its height by one; the chain (0) < xR bounds it below. Therefore R_(xR) is a one-dimensional Noetherian local domain.",
+   "text": "If x is nonzero, x is a nonunit because p=xR is prime. Mathlib Ideal.height_span_singleton_eq_one_of_mem_nonZeroDivisors gives p.height=1, using that a nonzero element of a domain is a non-zero-divisor. IsLocalization.AtPrime.ringKrullDim_eq_height identifies this with the dimension of Rp=R_p. The localization is Noetherian.",
    "uses": [
     "lem-weil-pbc-noetherian-height-quotient-bound",
     "lem-weil-pbc-localization-dimension-chains-below-prime",
@@ -31,7 +28,7 @@
    "elementary": false
   },
   {
-   "text": "The canonical local map R_(xR) -> S_Q is injective; its maximal ideal contracts to the base maximal ideal. The fraction fields remain K and L. Apply Tag 031F to this map to get finite-dimensionality of kappa(Q) over kappa(xR).",
+   "text": "Set Sp=S_Q and let phi:Rp -> Sp be Localization.localRingHom. Equip Rp -> K and Sp -> L with localizationAlgebraOfSubmonoidLe and use isFractionRing_of_isDomain_of_isLocalization to retain the fraction fields. IsLocalization.ringHom_ext, the original scalar towers, and localRingHom_to_map show algebraMap K L composed with Rp -> K equals Sp -> L composed with phi. This implies phi is injective. Its maximal ideal contracts to the base maximal ideal by IsLocalRing.maximalIdeal_comap. Apply Ideal.dim_one_residue_fields_finite to the maximal prime of Sp, obtaining finiteness of the residue extension.",
    "uses": [
     "lem-weil-pbc-dim-one-residue-field-extensions-finite",
     "def-weil-pbc-localization-at-prime"
@@ -39,7 +36,7 @@
    "elementary": false
   },
   {
-   "text": "A prime residue field is a fraction field of its quotient domain. The canonical equivalences with FractionRing(R/(Q contraction)) and FractionRing(S/Q) commute with the field map, since they agree on R and the quotient generators. Transport finite-dimensionality across these equivalences.",
+   "text": "The maps from R to Rp and S to Sp are surjective on stalks. RingHom.SurjectiveOnStalks.residueFieldMap_bijective supplies ring equivalences from p.ResidueField to the residue field of the maximal prime of Rp, and from Q.ResidueField to the analogous field for Sp. Give the latter fields their quotient algebras using these maps. On quotient generators, three applications of Ideal.ResidueField.map_algebraMap and localRingHom_to_map verify the scalar tower between the two quotient rings and these fields. IsFractionRing.of_algEquiv makes them fraction fields of R/p and S/Q. Finally, IsFractionRing.algEquiv_commutes and Module.Finite.of_equiv_equiv transport finite-dimensionality to the canonical FractionRing extension, via the proved private helper finite_fraction_transport.",
    "uses": [
     "lem-weil-pbc-prime-residue-field-algebra"
    ],
@@ -49,7 +46,6 @@
  "proof_deps": [
   "def-weil-pbc-localization-at-prime",
   "lem-weil-pbc-dim-one-residue-field-extensions-finite",
-  "lem-weil-pbc-finite-dimensional-domain-is-field",
   "lem-weil-pbc-localization-dimension-chains-below-prime",
   "lem-weil-pbc-localization-noetherian",
   "lem-weil-pbc-noetherian-height-quotient-bound",
@@ -58,7 +54,8 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 032P, the application of Tag 031F and identification of prime residue fields (steps 4-5 of the parent); x=0 uses finite-dimensional domains over a field"
+  "place": "Tag 032P, the application of Tag 031F and identification of prime residue fields (steps 4-5 of the parent); x=0 uses finite-dimensional domains over a field",
+  "summary": "H3: completed the localization route in Lean; the zero case uses Mathlib algebraic contraction instead of a finite-dimensional localization field. Read Stacks 031F and 032P on the official website because the local literature copy is absent."
  },
  "mathlib_searches": [
   {
@@ -136,10 +133,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T100126-L-2487203",
-  "kind": "interface",
+  "landing": "20261013T111853-L-3052929",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
