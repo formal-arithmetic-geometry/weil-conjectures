@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-e2-open-pullback-counit-representative",
+ "kind": "statement",
+ "title": "Pullback-square route localizes the underived restricted counit",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism [def-pc-scheme], $V\\subset Y$ open, $U=f^{-1}V$, and $f_0:U\\to V$. Use the same notation $F,F_0,r_X,r_Y,e_h,Q_h,\\rho_X,\\rho_Y$ from [def-pc-e2-open-homotopy-direct-image-iso], [def-weil-abstract-derived-category], [def-pc-ringed-spaces-derived-direct-image] and [def-pc-derived-open-restriction-maps]. Put $t_I=\\rho_Y(F_hI)\\gg R_Y(\\beta_F(I))$. Let $a_f$ be the pinned derived adjunction [def-pc-t2-open-pinned-adjunction], $c$ the pinned pullback composition [def-pc-t2-open-pinned-composition], and $\\varepsilon_{f_0}$ its left-derived counit [lem-pc-ringed-spaces-derived-pullback-composition]. For every homotopy-category object $I$, the composite $Lf_0^*(t_I)$, followed by the explicit five pullback-square factors (inverse open comparison on Y, c along f0 and the open inclusion, transport along commutativity, inverse c along the inclusion of U and f, open comparison on X), followed by $R_X(a_f.\\mathrm{counit}(Q_hI))$, equals $Lf_0^*(Q_h(e_h(I)))\\gg\\varepsilon_{f_0}(F_{0h}r_{Xh}I)\\gg Q_h(\\mathrm{counit}_{f_0,h}(r_{Xh}I))\\gg\\rho_X(I)$. The latter counit is the homotopy-category image of the chosen underived tensor-pullback adjunction. This assertion involves no derived open direct-image comparison b and requires no boundedness or K-injectivity of I.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-t2-open-pinned-adjunction",
+  "def-pc-t2-open-pinned-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-single-complex-open-restriction-data",
+  "def-pc-e2-open-homotopy-direct-image-iso",
+  "def-weil-abstract-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE, 08BS, 08HY and 0D5S; explicit representative calculation for the open counit compatibility"
+ },
+ "proof": [
+  {
+   "text": "On the homotopy category, transpose the sectionwise open direct-image comparison using the chosen tensor-pullback adjunctions. The tensor composition comparisons are conjugates of direct-image composition; the open pullback comparison is the left-adjoint uniqueness comparison with exact restriction. The resulting counit composites agree: on local generators a tensor x both evaluate as a times the restriction of x, and hence agree after sheafification.",
+   "uses": [
+    "def-pc-e2-open-homotopy-direct-image-iso",
+    "def-pc-single-complex-open-restriction-data",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Qh to that underived identity. Use the canonical left-derived counit factorization equations for the pinned composition comparisons and exact-open comparison. Use naturality of the recorded right-derived unit and the Hom-equivalence pinning of the adjunction to identify its derived counit after the unit with the left-derived counit followed by Qh of the underived counit. Reassociate and cancel exact-restriction factorization isomorphisms to obtain the displayed representative identity. The unit is used without inversion, so this holds for all I, including zero complexes and empty opens.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-t2-open-pinned-adjunction",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-e2-open-homotopy-direct-image-iso",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-single-complex-open-restriction-data",
+  "def-pc-t2-open-pinned-adjunction",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE, 08BS, 08HY and 0D5S; explicit representative calculation for the open counit compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived open restriction comparison is compatible with the unit of right derived functors and the counit of derived pullback",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction counit compatibility with open restriction and derived direct image comparisons",
+   "date": "2026-10-13",
+   "results": "Actual results: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Adjunction.derivedε_fac_app",
+   "verdict": "generic tools; no exact match for the fixed open comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans.*fac|rightDerivedUnique|derivedε_fac_app",
+   "date": "2026-10-13",
+   "results": "Actual results: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "verdict": "generic tools; no exact match for the fixed open comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenCounitCompatibility",
+  "date": "2026-10-14",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 first paragraph, locality on the target: representative calculation in the open counit compatibility",
+   "via": [
+    "lem-pc-t2-open-counit-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenPullbackCounitRepresentative.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpen_pullback_counit_representative",
+  "statement": "theorem singleComplexOpen_pullback_counit_representative [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) (I : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) : let _ := (Classical.choose exists_derivedPullbackComposition) (f ∣_ V) let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom let rY := schemeOpenRestriction Y V let rX := schemeOpenRestriction X (f ⁻¹ᵁ V) let a := @singleComplexOpenPinnedAdjunction.{u, w} _ let c := @singleComplexOpenPinnedComposition.{u, w} _ let ε := @Classical.choose _ _ (Classical.choose_spec exists_derivedPullbackComposition) (derivedPullback (f ∣_ V)).map (rY.mapDerivedCategoryFactorsh.inv.app ((F.mapHomotopyCategory (.up ℤ)).obj I) ≫ rY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app I)) ≫ ((derivedPullback (f ∣_ V)).mapIso ((singleComplexOpenPullbackIso Y V).symm.app ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I))) ≪≫ (c (f ∣_ V) V.ι).app ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫ eqToIso (congrArg (fun k ↦ (derivedPullback k).obj ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I))) (morphismRestrict_ι f V)) ≪≫ (c (f ⁻¹ᵁ V).ι f).symm.app ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)) ≪≫ (singleComplexOpenPullbackIso X (f ⁻¹ᵁ V)).app ((derivedPullback f).obj ((schemeDerivedDirectImage f).obj (DerivedCategory.Qh.obj I)))).hom ≫ rX.mapDerivedCategory.map ((a f).counit.app (DerivedCategory.Qh.obj I)) = (derivedPullback (f ∣_ V)).map (DerivedCategory.Qh.map ((singleComplexOpenHomotopyDirectImageIso f V).hom.app I)) ≫ (ε (f ∣_ V)).app ((F₀.mapHomotopyCategory (.up ℤ)).obj ((rX.mapHomotopyCategory (.up ℤ)).obj I)) ≫ DerivedCategory.Qh.map (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ∣_ V))) |>.mapHomotopyCategory (.up ℤ)).counit.app ((rX.mapHomotopyCategory (.up ℤ)).obj I)) ≫ rX.mapDerivedCategoryFactorsh.inv.app I",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T171511-L-1981002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T171511-L-1981002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

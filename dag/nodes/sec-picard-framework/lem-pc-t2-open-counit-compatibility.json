@@ -72,36 +72,46 @@
  },
  "proof": [
   {
-   "text": "Compute the explicit direct-image comparison on a K-injective representative. Exact restriction preserves K-injectives; the underived comparison is the sectionwise identity on inverse-image opens. Under the pinned tensor adjunction, both counit composites evaluate the same restricted tensor on sections.",
+   "text": "Use the open direct-image unit identity to evaluate the direct-image-comparison/counit composite after precomposition by the representative map t. Naturality of the restricted counit moves the exact-restriction factorization past it. The pinned Hom-equivalence specification, with the underived counit as its argument, and the adjunction triangle identity give the derived counit/unit factorization. This yields Qh of the sectionwise counit after the left-derived counit.",
    "uses": [
-    "lem-sc-derived-k-injective-restrict-open",
-    "def-pc-n3-open-base-change-comparisons"
+    "lem-pc-e2-open-direct-image-unit",
+    "def-pc-t2-open-pinned-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Use the left and right derived factorization identities to descend this equation. The open pullback square is built from the same derived composition counits, and exists_schemeDerivedAdjunction pins the adjunction to them and the recorded right-derived units. Therefore the descended equation is the displayed equality. All identities are natural, so zero coefficients and empty opens are included.",
+   "text": "The pullback-square representative identity evaluates the other composite to the same morphism. On a K-injective complex the right-derived unit is an isomorphism, so the representative map t and its pullback image are isomorphisms. Cancel this image to obtain equality on Qh of every K-injective complex.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "def-pc-t2-open-pullback-square-iso",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-ringed-spaces-derived-direct-image"
+    "lem-pc-e2-open-pullback-counit-representative",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pc-t2-open-pullback-square-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every derived object is isomorphic to Q of a K-injective complex by the existing DerivedCategory.exists_iso_Q_obj_of_isKInjective theorem. Convert Q to Qh using quotientCompQhIso. Assemble both composites as natural transformations, apply their naturality to the representing isomorphism, and cancel its image under exact restriction. This proves the original statement for every K.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-k-injective-restrict-open",
-  "def-pc-n3-open-base-change-comparisons",
-  "def-pc-derived-base-change-map",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-t2-open-pinned-adjunction",
   "def-pc-t2-open-pullback-square-iso",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "def-pc-ringed-spaces-derived-direct-image"
+  "def-weil-abstract-derived-category",
+  "lem-pc-e2-open-direct-image-unit",
+  "lem-pc-e2-open-pullback-counit-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 08FE (cohomology-lemma-restrict-direct-image-open), 08BS (cohomology-lemma-restrict-K-injective-to-open), and 08HY (cohomology-remark-base-change)"
+  "place": "Tags 08FE, 08BS, 08HY and 0D5S; formal decomposition into unit and pullback representative identities, with naturality descent"
  },
  "blueprint": {
   "is": null,
@@ -141,11 +151,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-8be00",
-  "group": "T2",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261013T161321-L-1424247",
+  "landing": "20261013T171511-L-1981002",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target signature and existing declarations remain unchanged, interface importers compile, proofs and DAG/report metadata satisfy the stage-3 review rules."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

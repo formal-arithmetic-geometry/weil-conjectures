@@ -1,0 +1,96 @@
+{
+ "id": "def-pc-e2-open-underived-direct-image-iso",
+ "kind": "definition",
+ "title": "Sectionwise open direct-image isomorphism",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $V\\subset Y$ an open, with $U=f^{-1}V$ and $f_0:U\\to V$. For the module direct-image functors $F=f_*$, $F_0=f_{0*}$ [def-pc-ringed-spaces-derived-direct-image] and exact open restriction $r_X,r_Y$ [def-pc-derived-open-restriction-maps], construct $e:F\\mathbin{\\star}r_Y\\cong r_X\\mathbin{\\star}F_0$. Here star means functor sequencing. Its sections are the canonical identification on the same inverse-image open. This is the underived isomorphism used in [def-pc-n3-open-base-change-comparisons].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE, 08BS, 08HY and 0D5S; explicit representative calculation for the open counit compatibility"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08FE, 08BS, 08HY and 0D5S; explicit representative calculation for the open counit compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived open restriction comparison is compatible with the unit of right derived functors and the counit of derived pullback",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction counit compatibility with open restriction and derived direct image comparisons",
+   "date": "2026-10-13",
+   "results": "Actual results: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, CategoryTheory.Adjunction.derivedε_fac_app",
+   "verdict": "generic tools; no exact match for the fixed open comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans.*fac|rightDerivedUnique|derivedε_fac_app",
+   "date": "2026-10-13",
+   "results": "Actual results: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "verdict": "generic tools; no exact match for the fixed open comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenCounitCompatibility",
+  "date": "2026-10-14",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ9 first paragraph, locality on the target: representative calculation in the open counit compatibility",
+   "via": [
+    "lem-pc-t2-open-counit-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenDirectImageUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenDirectImageUnit.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenUnderivedDirectImageIso",
+  "statement": "def singleComplexOpenUnderivedDirectImageIso {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) : RingedSpace.moduleDirectImage f.toLRSHom.toShHom ⋙ schemeOpenRestriction Y V ≅ schemeOpenRestriction X (f ⁻¹ᵁ V) ⋙ RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T171511-L-1981002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261013T171511-L-1981002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
