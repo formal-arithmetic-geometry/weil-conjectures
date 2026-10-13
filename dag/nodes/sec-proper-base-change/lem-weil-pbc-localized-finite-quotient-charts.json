@@ -14,22 +14,21 @@
  },
  "proof": [
   {
-   "text": "Realize B as the localization of S at the image of R minus p. The localization prime correspondence identifies primes of B containing J with primes q of S over p: contraction contains p, and disjointness from the denominators forces it to be contained in p. A prime contains J^n precisely when it contains J for n>0. The quotient prime correspondence therefore gives Q equivalent to the primes of B/J^n.",
+   "text": "Use IsLocalization.tensorRight to realize B as the localization of S at the image M of R minus p. For each prime q over p, disjoint_primeCompl_of_liesOver, isPrime_of_isPrime_disjoint and under_map_of_isPrime_disjoint give its prime extension P and contraction P back to q. Since J is contained in P, so is J^n. Map P through the quotient map pi to define e0(q). Conversely, contract a maximal ideal of B/J^n to a prime P of B. Ideal.IsPrime.le_of_pow_le gives J contained in P. Contract to S; its contraction to R contains p, and a base element outside p is a unit in B, so cannot lie in P. Thus this contraction is a prime over p. Localization extension-contraction and quotient extension-contraction give the two inverse identities, hence Equiv.ofBijective e0 and the required contraction formula.",
    "uses": [
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-prime-residue-field-iso"
+    "lem-weil-pbc-localization-base-change"
    ],
    "elementary": false
   },
   {
-   "text": "A/(pA)^n is local with just one prime: every prime containing the nth power contains pA and is equal to this maximal ideal. B/J^n is finite over this quotient by base change and passage to quotients. The finite-over-zero-dimensional-local theorem makes every prime of B/J^n maximal. The resulting equivalence e is uniquely characterized by the displayed contraction back to S. This argument needs no Noetherian hypothesis.",
+   "text": "Every prime P of B containing J contracts to a prime of A containing pA, which is the maximal ideal of A. Hence its contraction is exactly this maximal ideal. The finite A-algebra B is integral. Apply Ideal.isMaximal_of_isIntegral_of_isMaximal_comap, the maximal-ideal consequence of integral incomparability, to show P maximal. Its quotient image is maximal by Ideal.IsMaximal.map_of_surjective_of_ker_le. No discrete-spectrum theorem or Noetherian hypothesis is used.",
    "uses": [
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+    "lem-weil-pbc-integral-incomparability"
    ],
    "elementary": false
   },
   {
-   "text": "The local ring of B at the extension of q is S_q by localization in stages and uniqueness of localization. Its S-algebra map agrees with psi: both agree on S, hence agree on the inverted denominators and every fraction. Quotienting commutes with localization and map preserves powers. Thus under the quotientMap algebra structure, S_q/K_q^n is the localization of B/J^n at e(q). The empty index case corresponds to a zero quotient ring.",
+   "text": "For fixed q give T=S_q its B-algebra structure through psi(q). The S-algebra compatibility gives a scalar tower. Since M is contained in the complement of q, isLocalization_of_submonoid_le makes T the localization of B at the image of that complement. The contraction of the maximal ideal of T to B is P: both ideals contract to q in S, and localization contraction is injective. Therefore all elements outside P map to units in T. IsLocalization.of_le enlarges the denominators to the complement of P. Apply IsLocalization.of_surjective to pi:B->B/J^n and T->T/K^n. The compatibility square is the defining quotientMap identity, and the kernel condition is Ideal.map_pow. Finally map_primeCompl_comap_of_surjective identifies the image of the complement of P with the complement of e(q), since the quotient contraction of e(q) is P. This proves the precise IsLocalization.AtPrime predicate for the stated quotientMap algebra structure. The construction and inverse maps require no nonempty assumption and cover empty fibres.",
    "uses": [
     "lem-weil-pbc-localization-of-localization",
     "lem-weil-pbc-localization-at-prime-of-quotient"
@@ -38,16 +37,15 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-integral-incomparability",
   "lem-weil-pbc-localization-at-prime-of-quotient",
   "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-localization-of-localization",
-  "lem-weil-pbc-localization-prime-residue-field-iso"
+  "lem-weil-pbc-localization-of-localization"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 07N9, finite quotient prime correspondence, combined with Tags 00E3 and 00CT; Lean interface written by X2"
+  "place": "Tags 07N9, 00E3, 00CT; D4 Lean proof uses direct integral maximality (Mathlib Ideal.isMaximal_of_isIntegral_of_isMaximal_comap) instead of the finite discrete-spectrum detour."
  },
  "mathlib_searches": [
   {
@@ -141,10 +139,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T022436-L-3223492",
-  "kind": "interface",
+  "landing": "20261013T032957-L-3674531",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

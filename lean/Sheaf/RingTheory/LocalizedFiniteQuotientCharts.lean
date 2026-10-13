@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Spectrum.Maximal.Defs
 
+import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.RingTheory.Localization.LocalizationLocalization
+import Mathlib.RingTheory.Ideal.GoingUp
+
 /-!
 # Local charts of the finite algebra quotient
 
@@ -63,6 +67,138 @@ theorem localized_finite_quotient_charts
             rw [← Ideal.map_le_iff_le_comap, Ideal.map_pow])
           letI := f.toAlgebra
           IsLocalization.AtPrime (Localization.AtPrime q.1 ⧸ (K q) ^ n) (e q).asIdeal := by
-  sorry
+  classical
+  dsimp only
+  let A := Localization.AtPrime p
+  let B := A ⊗[R] S
+  let := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)
+  let J := p.map (algebraMap R B)
+  let Q := p.primesOver S
+  let M := Algebra.algebraMapSubmonoid S p.primeCompl
+  have : IsLocalization M B := inferInstance
+  intro ψ n hn
+  let π := Ideal.Quotient.mk (J ^ n)
+  have hJ (P : Ideal B) [P.IsPrime] (hP : J ≤ P) : P.IsMaximal := by
+    apply Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (R := A) P
+    have hm : IsLocalRing.maximalIdeal A ≤ P.comap (algebraMap A B) := by
+      rw [← IsLocalization.AtPrime.map_eq_maximalIdeal p A,
+        Ideal.map_le_iff_le_comap, Ideal.comap_comap,
+        ← IsScalarTower.algebraMap_eq]
+      exact Ideal.map_le_iff_le_comap.mp hP
+    have he := (IsLocalRing.maximalIdeal.isMaximal A).eq_of_le
+      (Ideal.IsPrime.ne_top (inferInstance : (P.comap (algebraMap A B)).IsPrime)) hm
+    rw [← he]
+    infer_instance
+  have hd (q : Q) : Disjoint (M : Set S) (q.1 : Set S) := by
+    exact Ideal.disjoint_primeCompl_of_liesOver q.1 p
+  have hqprime (q : Q) : (q.1.map (algebraMap S B)).IsPrime :=
+    IsLocalization.isPrime_of_isPrime_disjoint M B q.1 inferInstance (hd q)
+  have hqcomap (q : Q) : (q.1.map (algebraMap S B)).comap (algebraMap S B) = q.1 :=
+    IsLocalization.under_map_of_isPrime_disjoint M B inferInstance (hd q)
+  have hqJ (q : Q) : J ≤ q.1.map (algebraMap S B) := by
+    dsimp [J]
+    rw [IsScalarTower.algebraMap_eq R S B, ← Ideal.map_map]
+    exact Ideal.map_mono (Ideal.map_le_iff_le_comap.mpr (Ideal.over_def q.1 p).le)
+  have hqmax (q : Q) : (q.1.map (algebraMap S B)).IsMaximal := by
+    have := hqprime q
+    exact hJ _ (hqJ q)
+  have hqn (q : Q) : J ^ n ≤ q.1.map (algebraMap S B) :=
+    (Ideal.pow_le_self hn).trans (hqJ q)
+  let e₀ : Q → MaximalSpectrum (B ⧸ J ^ n) := fun q ↦
+    ⟨(q.1.map (algebraMap S B)).map π, by
+      have := hqmax q
+      apply Ideal.IsMaximal.map_of_surjective_of_ker_le Ideal.Quotient.mk_surjective
+      simpa [π] using hqn q⟩
+  have he₀ (q : Q) : (e₀ q).asIdeal.comap π = q.1.map (algebraMap S B) := by
+    exact Ideal.comap_map_mk (hqn q)
+  have hcon (q : Q) :
+      (e₀ q).asIdeal.comap (π.comp (algebraMap S B)) = q.1 := by
+    rw [← Ideal.comap_comap, he₀, hqcomap]
+  have hinj : Function.Injective e₀ := by
+    intro q r h
+    apply Subtype.ext
+    rw [← hcon q, ← hcon r, h]
+  have hsurj : Function.Surjective e₀ := by
+    intro m
+    let P := m.asIdeal.comap π
+    have : P.IsPrime := inferInstance
+    have hpow : J ^ n ≤ P := by
+      intro x hx
+      change π x ∈ m.asIdeal
+      simp [π, Ideal.Quotient.eq_zero_iff_mem.mpr hx]
+    have hJP : J ≤ P := Ideal.IsPrime.le_of_pow_le hpow
+    let q := P.comap (algebraMap S B)
+    have : q.IsPrime := inferInstance
+    have hqp : q.LiesOver p := by
+      constructor
+      apply le_antisymm
+      · change p ≤ (P.comap (algebraMap S B)).comap (algebraMap R S)
+        rw [Ideal.comap_comap, ← IsScalarTower.algebraMap_eq]
+        exact Ideal.map_le_iff_le_comap.mp hJP
+      · intro x hx
+        by_contra hxp
+        have hu : IsUnit (algebraMap R B x) := by
+          rw [IsScalarTower.algebraMap_apply R S B]
+          exact IsLocalization.map_units (M := M) B
+            ⟨algebraMap R S x, ⟨x, hxp, rfl⟩⟩
+        exact (inferInstance : P.IsPrime).ne_top (P.eq_top_of_isUnit_mem hx
+          (by simpa only [IsScalarTower.algebraMap_apply R S B] using hu))
+    let q' : Q := ⟨q, inferInstance, inferInstance⟩
+    refine ⟨q', ?_⟩
+    apply MaximalSpectrum.ext
+    change (q.map (algebraMap S B)).map π = m.asIdeal
+    rw [IsLocalization.map_under M B P]
+    exact Ideal.map_comap_of_surjective π Ideal.Quotient.mk_surjective m.asIdeal
+  let e : Q ≃ MaximalSpectrum (B ⧸ J ^ n) := Equiv.ofBijective e₀ ⟨hinj, hsurj⟩
+  refine ⟨e, hcon, ?_⟩
+  intro q
+  let T := Localization.AtPrime q.1
+  let P := q.1.map (algebraMap S B)
+  let K := J.map (ψ q).toRingHom
+  let f : (B ⧸ J ^ n) →+* (T ⧸ K ^ n) :=
+    Ideal.quotientMap (K ^ n) (ψ q).toRingHom (by
+      rw [← Ideal.map_le_iff_le_comap, Ideal.map_pow])
+  change letI := f.toAlgebra; IsLocalization.AtPrime (T ⧸ K ^ n) (e q).asIdeal
+  let := (ψ q).toAlgebra
+  have : IsScalarTower S B T := IsScalarTower.of_algebraMap_eq fun x ↦
+    ((ψ q).commutes x).symm
+  have hle : M ≤ q.1.primeCompl := by
+    intro x hx
+    exact Set.disjoint_left.mp (hd q) hx
+  have : IsLocalization (q.1.primeCompl.map (algebraMap S B)) T :=
+    IsLocalization.isLocalization_of_submonoid_le B T M q.1.primeCompl hle
+  have hPT : (IsLocalRing.maximalIdeal T).comap (algebraMap B T) = P := by
+    apply (IsLocalization.orderEmbedding M B).injective
+    change ((IsLocalRing.maximalIdeal T).comap (algebraMap B T)).comap
+      (algebraMap S B) = P.comap (algebraMap S B)
+    rw [Ideal.comap_comap, ← IsScalarTower.algebraMap_eq]
+    exact (IsLocalization.AtPrime.under_maximalIdeal T q.1).trans (hqcomap q).symm
+  have : IsLocalization P.primeCompl T := by
+    apply IsLocalization.of_le (q.1.primeCompl.map (algebraMap S B)) P.primeCompl
+    · rintro x ⟨s, hs, rfl⟩
+      change algebraMap S B s ∉ P
+      change s ∉ q.1 at hs
+      change algebraMap S B s ∉ q.1.map (algebraMap S B)
+      simpa only [← Ideal.mem_comap, hqcomap] using hs
+    · intro x hx
+      change x ∉ P at hx
+      rw [← hPT] at hx
+      exact (IsLocalRing.mem_maximalIdeal _).not.mp hx |> not_not.mp
+  let := f.toAlgebra
+  have hquot : IsLocalization (P.primeCompl.map π) (T ⧸ K ^ n) := by
+    apply IsLocalization.of_surjective P.primeCompl T π Ideal.Quotient.mk_surjective
+      (Ideal.Quotient.mk (K ^ n)) Ideal.Quotient.mk_surjective
+    · apply RingHom.ext
+      intro x
+      change Ideal.Quotient.mk (K ^ n) ((ψ q) x) = f (π x)
+      rfl
+    · rw [Ideal.mk_ker, Ideal.mk_ker, Ideal.map_pow]
+      exact le_rfl
+  have hcompl : P.primeCompl.map π = (e q).asIdeal.primeCompl := by
+    have hPe : (e q).asIdeal.comap π = P := he₀ q
+    simpa only [hPe] using
+      Ideal.map_primeCompl_comap_of_surjective π Ideal.Quotient.mk_surjective (e q).asIdeal
+  rw [hcompl] at hquot
+  exact hquot
 
 end AdicCompletion
