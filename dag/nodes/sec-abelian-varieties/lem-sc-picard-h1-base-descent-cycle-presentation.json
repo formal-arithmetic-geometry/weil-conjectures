@@ -1,0 +1,157 @@
+{
+ "id": "lem-sc-picard-h1-base-descent-cycle-presentation",
+ "kind": "statement",
+ "title": "Finite-free degree-zero cycle presentation for the Picard H1 argument",
+ "statement": "Let $f:X\\to S$ and $f_i:X_i\\to S$, indexed by $i\\in\\operatorname{Fin}(n)$, be flat proper morphisms locally of finite presentation [def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation], with $u_i:X_i\\to X$ satisfying $u_i f=f_i$. Assume that after every base change their canonical tensor-pullback adjunction units on the structure module are isomorphisms [def-pc-base-change, def-pc-module-pullback, lem-pc-module-pullback-adjunction]. Let $L$ be invertible [def-sc-invertible-module], $k:W\\to S$ an immersion, $w\\in W$, $s=k(w)$ [def-weil-residue-field]. Assume that each $u_i^*L$ after base change to $W$ descends from a finite locally free module on $W$, and $L$ on $X_s$ descends from a finite locally free module on $\\operatorname{Spec}\\kappa(s)$ [def-amb-finite-locally-free-module]. Assume joint injectivity on structure-sheaf $H^1$ at $s$ [def-sc-structure-sheaf-cohomology-pullback]. Put $Y=X\\times_S\\operatorname{Spec}\\kappa(w)$ and $L_Y$ for the tensor pullback of $L$. There exist an open $U\\subset W$ containing $w$, integers $m,q\\geq0$, a vector $d\\in\\Gamma(W,U)^m$, and a linear map $b:\\Gamma(W,U)^m\\to\\Gamma(W,U)^q$, such that for the prime $p=\\ker(\\Gamma(W,U)\\to\\kappa(w))$ the map $b\\otimes\\kappa(p)$ is injective and $b(d)=0$. There also exists an additive equivalence $c:\\Gamma(Y,L_Y)\\simeq\\kappa(w)$ with this cycle-realization property: for every open $V\\subset U$ containing $w$, there is $j:Y\\to X_V=X\\times_S V$ hitting every point above $w$, and $e:j^*L_V\\cong L_Y$, such that every scalar $a\\in\\Gamma(W,V)$ satisfying $(d_i|_V)a=0$ for every $i$ gives a global section $\\sigma$ of $L_V$ whose canonical adjunction-unit restriction along $j$, transported by $e$, is $c^{-1}(a(w))$. Neither vanishing of $d$ near $w$ nor lifting arbitrary residue scalars is part of this conclusion.",
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-weil-residue-field",
+  "def-amb-finite-locally-free-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, proof after replacing S by the intersection, through d = 0 and lifting the fibre generator; https://stacks.math.columbia.edu/tag/0BF2"
+ },
+ "proof": [
+  {
+   "text": "Base change to W and identify marked residue fields. Universal structure pushforward implies that each flat source and target is surjective: an empty residue fibre would have zero pushforward, contrary to the unit isomorphism from the nonzero residue structure module. Therefore these maps are faithfully flat, and the finite locally free descended target modules have rank one. Trivialize them on a common affine neighbourhood and use hLs to trivialize the source residue bundle.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-amb-finite-locally-free-module",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply perfect direct-image base change to L and the target bundles, then choose finite-free residue models. Their negative terms vanish and their degree-zero terms have rank one. Take common affine refinements. Represent the derived pullback arrows between these fixed models by chain maps using the affine strictly perfect map representative theorem.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-pc-perfect-affine-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The global trivializing sections on the targets give degree-zero cycles whose residue coefficients are nonzero. Invert these coefficients near w to conclude that all target degree-zero differentials vanish. Let d be the source degree-zero differential of 1, and let b be the finite joint degree-one map, expressed in finite free bases. The chain equations imply b(d)=0. After identifying the source fibre bundle with the structure module, hH identifies its residue map with an injective map. The evaluation kernel p is prime and its residue field agrees with kappa(w), since U is affine.",
+   "uses": [
+    "def-sc-structure-sheaf-cohomology-pullback",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the chosen fibre generator and universal structure pushforward to identify its global section group additively with kappa(w), giving c. For every smaller open V and scalar a annihilated by the restricted d, the degree-zero cycle gives a section through the perfect direct-image comparison. Derived base change computes its residue as c inverse of evaluation(a). The canonical residue-fibre inclusion hits all points above w; composition of module pullbacks gives e and the canonical adjunction unit realizes section restriction. No localization of b, vanishing of d, or lift of arbitrary residue scalars is asserted here.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-amb-finite-locally-free-module",
+  "def-weil-residue-field",
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-pc-perfect-affine-map-representative",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF2, finite-free models and chain maps before the degree-one minor localization; canonical degree-zero base-change comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lift sections of a line bundle from a fibre locally on the base when first cohomology pullbacks are jointly injective",
+   "results": "8 hits: TopCat.Presheaf.section_ext, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, StructureGroupoid.LocalInvariantProp.section_spec, PresheafOfModules.IsLocallyInjective, TopCat.Sheaf.existsUnique_gluing', AlgebraicGeometry.Scheme.OpenCover.ext_elem, TopCat.Presheaf.IsSheaf.section_ext",
+   "date": "2026-10-13",
+   "verdict": "No exact geometric cycle-presentation theorem; component sheaf and tensor APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded finite free complex cohomology base change section degree zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_le_germ_eq|piScalarRightHom_tmul",
+   "results": "5 hits: Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/Topology/Sheaves/EtaleSpace.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean, Mathlib/RingTheory/TensorProduct/Pi.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact geometric cycle-presentation theorem; component sheaf and tensor APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardH1BaseDescentSectionLifting",
+  "date": "2026-10-13",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF2, finite-free complexes and their chain maps in the multiple Picard locus argument",
+   "via": [
+    "lem-sc-picard-h1-base-descent-section-lifting",
+    "lem-sc-picard-h1-local-section-base-descent",
+    "lem-sc-picard-h1-intersection-section",
+    "lem-sc-picard-h1-multiple-locus",
+    "lem-sc-picard-product-open"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardH1BaseDescentCyclePresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardH1BaseDescentCyclePresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_h1_base_descent_cycle_presentation",
+  "statement": "theorem picard_h1_base_descent_cycle_presentation {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}\n    (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]\n    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)\n    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (hOi : ∀ i, ∀ {T : Scheme.{v}} (g : T ⟶ S),\n      IsIso ((Classical.choose\n        (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd (fi i) g))).unit.app\n          (SheafOfModules.unit T.ringCatSheaf)))\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (hLi : ∀ i, ∃ (N : W.Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst (fi i) k)).obj\n        ((Modules.tensorPullback (ui i)).obj L) ≅\n        (Modules.tensorPullback (pullback.snd (fi i) k)).obj N))\n    (hLs : ∃ (N : (Spec (S.residueField s)).Modules) (_ : N.IsFiniteLocallyFree),\n      Nonempty ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n        (Modules.tensorPullback (pullback.snd f (S.fromSpecResidueField s))).obj N))\n    (hH : Function.Injective (fun x :\n        Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1 ↦ fun i ↦\n      structureSheafCohomologyPullback\n        (((Over.pullback (S.fromSpecResidueField s)).map\n          (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f) (ui i) (hui i))).left) 1 x)) :\n    ∃ (U : W.Opens) (hwU : w ∈ U) (m q : ℕ)\n      (d : Fin m → Γ(W, U))\n      (b : (Fin m → Γ(W, U)) →ₗ[Γ(W, U)] (Fin q → Γ(W, U))),\n      let p := RingHom.ker (W.evaluation U w hwU).hom\n      ∃ hp : p.IsPrime,\n        (letI := hp; Function.Injective (b.baseChange p.ResidueField)) ∧ b d = 0 ∧\n      ∃ c : Γ((Modules.tensorPullback\n          (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L, ⊤) ≃+\n            W.residueField w,\n        ∀ (V : W.Opens) (hwV : w ∈ V) (hVU : V ≤ U),\n          ∃ j : pullback f (W.fromSpecResidueField w ≫ k) ⟶ pullback f (V.ι ≫ k),\n            (∀ x : (pullback f (V.ι ≫ k) : Scheme.{v}),\n              (pullback.snd f (V.ι ≫ k)) x = (⟨w, hwV⟩ : V.toScheme) →\n                ∃ y, j y = x) ∧\n            ∃ e : (Modules.tensorPullback j).obj\n                ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L) ≅\n                (Modules.tensorPullback\n                  (pullback.fst f (W.fromSpecResidueField w ≫ k))).obj L,\n              ∀ a : Γ(W, V),\n                (∀ i, W.presheaf.map (homOfLE hVU).op (d i) * a = 0) →\n                ∃ σ : Γ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L, ⊤),\n                  e.hom.app ⊤\n                    (((Modules.tensorPullback j).obj\n                      ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).presheaf.map\n                        (homOfLE j.preimage_top.ge).op\n                          (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app\n                            ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app\n                              (Opposite.op ⊤) σ)) =\n                    c.symm (W.evaluation V w hwV a)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T040759-L-3952259",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261013T040759-L-3952259",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

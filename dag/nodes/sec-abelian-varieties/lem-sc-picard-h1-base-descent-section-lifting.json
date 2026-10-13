@@ -21,50 +21,37 @@
  },
  "proof": [
   {
-   "text": "Base change to W, identify marked residue fields, and trivialize the finite locally free modules descended from the target bundles after faithfully flat descent shows that they have rank one. The fibre bundle is trivial by hLs.",
+   "text": "Obtain the degree-zero vector d, joint map b with injective residue base change, additive fibre coefficient equivalence c, and restriction-compatible cycle realization on all smaller opens.",
    "uses": [
-    "def-pc-base-change",
-    "def-pc-module-pullback",
-    "def-weil-residue-field",
-    "def-sc-invertible-module",
-    "def-amb-finite-locally-free-module"
+    "lem-sc-picard-h1-base-descent-cycle-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Use perfect direct-image base change and finite-free residue models for the source and all targets. Represent pullback maps by chain maps; invert their degree-zero maps and a nonzero maximal minor of the joint degree-one map. In degree-one rank zero no minor is required, including the empty-family case. Target degree-zero differentials vanish after the trivial target generators span the rank-one terms; the chain-map identities and joint degree-one injectivity force the source differential to vanish.",
+   "text": "Apply the existing finite-free residue localization criterion to b at the kernel of evaluation. Obtain r outside that prime for which b becomes injective over the away localization B. Base change b(d)=0 and injectivity give 1 tensor d = 0; applying piScalarRightHom coefficientwise yields algebraMap(d_i)=0 in B.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-perfect-finite-free-residue-model",
     "lem-pc-finite-free-map-residue-localization"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Lift the scalar coefficient of the prescribed tau in the degree-zero term by additionally inverting its denominator, nonzero at w. Identify the marked residue fibres of V and W to obtain j, which hits every point over w. Pullback composition gives e, and the canonical adjunction unit computes section restriction, giving the displayed equality.",
+   "text": "The condition r outside the evaluation kernel means its germ at w is a unit, so w lies in its basic open. Lift c(tau) to the structure-sheaf stalk by residue_surjective, then represent that germ on an open V contained in this basic open using exists_le_germ_eq. Restriction of r to V is a unit, giving an away-localization ring map B to Gamma(W,V). Hence every restricted d_i vanishes. Apply cycle realization to the chosen scalar section a. Its evaluation is c(tau); cancel the additive equivalence to obtain the required equation, retaining the fibre coverage and comparison isomorphism.",
    "uses": [
-    "def-pc-base-change",
-    "def-pc-module-pullback",
-    "lem-pc-module-pullback-adjunction"
+    "lem-sc-picard-h1-base-descent-cycle-presentation",
+    "def-weil-residue-field"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
-  "def-pc-module-pullback",
-  "def-weil-residue-field",
-  "def-sc-invertible-module",
-  "def-amb-finite-locally-free-module",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-finite-free-residue-model",
+  "lem-sc-picard-h1-base-descent-cycle-presentation",
   "lem-pc-finite-free-map-residue-localization",
-  "lem-pc-module-pullback-adjunction"
+  "def-weil-residue-field"
  ],
  "proof_origin": {
-  "by": "J1 worker repair",
+  "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0BF2, fibre triviality and perfect-complex argument; Modules Tag 01CY"
+  "place": "Tag 0BF2, explicit residue-minor localization followed by the stalk-germ scalar lift; R4 stage-3 reduction"
  },
  "mathlib_searches": [
   {
@@ -138,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-74813",
-  "group": "J1",
+  "reviewer": "COMPILER",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T022417-L-3214746",
+  "landing": "20261013T040759-L-3952259",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered declarations, proofs and dependencies with their DAG records and Stacks Tag 0BF2 (https://stacks.math.columbia.edu/tag/0BF2); existing signatures are unchanged, all five modules and the sole direct importer compile cleanly, and axiom checks show only permitted axioms plus sorryAx for the two documented holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

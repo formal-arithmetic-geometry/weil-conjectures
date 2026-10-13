@@ -14,9 +14,9 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
+import Sheaf.AlgebraicGeometry.PicardH1BaseDescentCyclePresentation
 import Sheaf.RingTheory.FiniteFreeMapResidueLocalization
+import Mathlib.LinearAlgebra.TensorProduct.Pi
 
 /-! # Local lifting of arbitrary marked-fibre sections
 Source: Stacks Project, Tag 0BF2, the degree-zero differential argument.
@@ -28,6 +28,8 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+set_option maxHeartbeats 800000 in
+-- The dependent section types require extra elaboration heartbeats.
 /-- Every marked-fibre section lifts after shrinking the base around the marked point.
 This asserts surjectivity of restriction, not existence of a generating section.
 Source: Stacks Project, Tag 0BF2, the perfect-complex argument through d = 0.
@@ -97,6 +99,55 @@ theorem picard_h1_base_descent_section_lifting {X S : Scheme.{v}} (f : X ⟶ S) 
                     (homOfLE j.preimage_top.ge).op
                       (((Classical.choose (Modules.exists_tensorPullbackAdjunction j)).unit.app
                         ((Modules.tensorPullback (pullback.fst f (V.ι ≫ k))).obj L)).val.app
-                          (Opposite.op ⊤) σ)) = τ := by sorry
+                          (Opposite.op ⊤) σ)) = τ := by
+  classical
+  obtain ⟨U, hwU, m, q, d, b, hp, hb, hbd, c, hcycles⟩ :=
+    picard_h1_base_descent_cycle_presentation f Xi fi ui hui hO hOi L W k w s hw hLi hLs hH
+  let A := Γ(W, U)
+  let p : Ideal A := RingHom.ker (W.evaluation U w hwU).hom
+  let : p.IsPrime := hp
+  obtain ⟨r, hr, hbr, _, _⟩ :=
+    (Module.finiteFreeMap_residue_localization m q b p).1 hb
+  let B := Localization.Away r
+  have hdB : (1 : B) ⊗ₜ[A] d = 0 := by
+    apply hbr
+    change (b.baseChange B) ((1 : B) ⊗ₜ[A] d) = (b.baseChange B) 0
+    rw [LinearMap.baseChange_tmul, hbd, TensorProduct.tmul_zero, map_zero]
+  have hd : ∀ i, algebraMap A B (d i) = 0 := by
+    intro i
+    have h := congrArg (fun z ↦ TensorProduct.piScalarRightHom A B B (Fin m) z i) hdB
+    simpa [TensorProduct.piScalarRightHom_tmul, Algebra.smul_def] using h
+  have hwr : w ∈ W.basicOpen r := by
+    apply (W.mem_basicOpen r w hwU).mpr
+    apply (IsLocalRing.residue_ne_zero_iff_isUnit _).mp
+    exact hr
+  intro τ
+  obtain ⟨t, ht⟩ := W.residue_surjective w (c τ)
+  obtain ⟨V, hVr, hwV, a, ha⟩ := W.presheaf.exists_le_germ_eq t hwr
+  have hVU : V ≤ U := hVr.trans (W.basicOpen_le r)
+  have hrV : IsUnit (W.presheaf.map (homOfLE hVU).op r) := by
+    have hunit := W.toRingedSpace.isUnit_res_basicOpen r
+    have hmap := hunit.map (W.presheaf.map (homOfLE hVr).op).hom
+    change IsUnit ((W.presheaf.map (homOfLE hVr).op)
+      ((W.presheaf.map (homOfLE (W.basicOpen_le r)).op) r)) at hmap
+    rw [← CommRingCat.comp_apply, ← Functor.map_comp] at hmap
+    exact hmap
+  let ρ : B →+* Γ(W, V) :=
+    IsLocalization.Away.lift r (g := (W.presheaf.map (homOfLE hVU).op).hom) hrV
+  have hdV : ∀ i, W.presheaf.map (homOfLE hVU).op (d i) = 0 := by
+    intro i
+    have h := congrArg ρ (hd i)
+    have hρ : ρ (algebraMap A B (d i)) =
+        W.presheaf.map (homOfLE hVU).op (d i) :=
+      IsLocalization.Away.lift_eq r hrV (d i)
+    rw [hρ, map_zero] at h
+    exact h
+  obtain ⟨j, hj, e, hσ⟩ := hcycles V hwV hVU
+  obtain ⟨σ, hσ⟩ := hσ a (by intro i; rw [hdV i, zero_mul])
+  refine ⟨V, hwV, j, hj, e, σ, ?_⟩
+  have heval : W.evaluation V w hwV a = c τ := by
+    change W.residue w (W.presheaf.germ V w hwV a) = c τ
+    rw [ha, ht]
+  simpa only [heval, AddEquiv.symm_apply_apply] using hσ
 
 end AlgebraicGeometry.Scheme
