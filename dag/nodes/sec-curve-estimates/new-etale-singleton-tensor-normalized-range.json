@@ -1,0 +1,108 @@
+{
+ "kind": "statement",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "new-etale-singleton-tensor-normalized-range",
+ "title": "Pure normalized sections lie in the evaluated comparison range.",
+ "statement": "Let $X$ be a scheme, $\\mathcal F$ a quasi-coherent $\\mathcal O_X$-module, $U,W$ objects of its small etale site, $g:W\\to U$ a morphism, and $n\\in\\mathbf N$. Let $f$ be an additive homomorphism from degree $n$ of the singleton Amitsur complex to degree $n$ of the singleton tensor-section Cech complex satisfying [new-etale-affine-singleton-tensor-degree-comparison-hom-normalization]. Put $P=W\\times_U\\cdots\\times_U W$ with $n+1$ factors and let $q$ evaluate the target at its unique outer index, followed by $\\mathrm{ULift.down}$. Every section $(\\prod_k\\pi_k^*b_k)\\rho(m)$ belongs to the range of $q\\circ f$, where $m\\in\\Gamma(U,u^*\\mathcal F)$, $b_k\\in\\Gamma(W,\\mathcal O_W)$ and $\\rho$ is the normalized restriction to $P$. No affineness hypothesis is required.",
+ "stmt_deps": [
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2, affine tensor calculation; explicit pure-tensor normalization"
+ },
+ "proof": [
+  {
+   "text": "For the generator attached to m and b, take ULift.up(m tensor tprod(b)) in the source degree. The normalization equation identifies its image under evaluation after f with the desired section. This supplies the witness of range membership for every generator.",
+   "uses": [
+    "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 03P2 affine calculation, expanded as the indicated part of the tensor-section argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized pure tensor generators belong to the range of an additive comparison map",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.mem_range",
+   "results": "AddMonoidHom.mem_range identifies range membership with existence of a preimage; no scheme-specific normalization lemma.",
+   "date": "2026-10-13",
+   "verdict": "generic range criterion only"
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*normaliz.*range|tensor.*normaliz.*range",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeSurjective",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-qcoherent",
+   "place": "Pure normalized sections lie in the evaluated comparison range.",
+   "via": [
+    "new-etale-affine-singleton-tensor-degree-surjective",
+    "new-etale-affine-singleton-tensor-amitsur",
+    "new-etale-affine-singleton-tensor-degree-comparison",
+    "new-etale-affine-singleton-tensor-degree-comparison-inverse",
+    "new-etale-affine-singleton-tensor-degree-comparison-bijective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSingletonTensorNormalizedRange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.singletonTensorDegreeComparisonHom_normalized_range",
+  "statement": "theorem singletonTensorDegreeComparisonHom_normalized_range\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U) (n : ℕ)\n    (f : (singletonTensorAmitsur X F U W g).X n ⟶\n      (singletonTensorCech X F U W g).X n)\n    (hf : IsSingletonTensorDegreeComparisonHom X F U W g n f) :\n    let P := ∏ᶜ (fun _ : Fin (n + 1) ↦ Over.mk g)\n    let N := Γ((Modules.tensorPullback P.left.hom).obj F, ⊤)\n    let D : (Fin (n + 1) → Fin 1) → AddCommGrpCat.{u + 1} :=\n      fun _ ↦ AddCommGrpCat.of (ULift.{u + 1} N)\n    let q : (singletonTensorCech X F U W g).X n →+ N :=\n      (AddEquiv.ulift : ULift.{u + 1} N ≃+ N).toAddMonoidHom.comp\n        (Pi.π D (fun _ ↦ 0)).hom\n    Set.range (fun p : Γ((Modules.tensorPullback U.hom).obj F, ⊤) ×\n      (Fin (n + 1) → Γ(W.left, ⊤)) ↦\n        (∏ k : Fin (n + 1),\n          (Pi.π (fun _ : Fin (n + 1) ↦ Over.mk g) k).left.left.appTop (p.2 k)) •\n            Modules.etaleTensorSectionsRestriction F P.hom p.1) ⊆\n      (q.comp f.hom).range",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100013-L-2464855",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T100013-L-2464855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
