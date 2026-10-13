@@ -1,0 +1,179 @@
+{
+ "id": "lem-sbc-root-algebra-regular-at-root",
+ "kind": "statement",
+ "title": "Root-algebra localizations along the root divisor are regular",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $f\\in R$ have injective multiplication, and suppose $R/(f)$ is regular [def-weil-regular-scheme]. For $n>0$ put $B=R[T]/(T^n-f)$ and let $t$ be the image of $T$. For every prime ideal $q$ of $B$ containing $t$, the prime localization $B_q$ [def-weil-pbc-localization-at-prime] is a regular local ring [def-weil-regular-scheme]. No assumption that $n$ is invertible or that $R$ is regular is imposed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYH and 0EYG, local verification over the divisor; Algebra Tag 00NU"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "The positive exponent gives a monic polynomial and the power basis makes B finite free over R. It is Noetherian. Multiplication by f is injective on this free module; t^n=f implies multiplication by t is injective. Localization preserves this injectivity. In Lean, use monic_X_pow_sub_C and Polynomial.Monic.free_adjoinRoot; IsSMulRegular.of_flat and IsSMulRegular.pow_iff give root-coordinate injectivity, and of_flat applies again to the prime localization.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at T=0 identifies B/(t) with R/(f), since the relation T^n-f becomes -f. Quotienting B_q by the image of t therefore gives the localization of R/(f) at the prime induced by q. This is regular local by regularity of R/(f). The equivalence is constructed explicitly by AdjoinRoot.lift at zero in R/(f) and the quotient map of the constants in the other direction. Checking their composites on constants and the root proves they are inverse. Map q into B/(t); comap-map and quotient-localization identify the local quotient with the prime localization of B/(t). Transport IsRegularRing across the explicit equivalence, then IsRegularLocalRing across IsLocalization.algEquiv.",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image of t is in the maximal ideal and is a nonzerodivisor. Tag 00NU lifts regularity from its regular local quotient: lift minimal generators of the quotient maximal ideal and adjoin t; the nonzerodivisor dimension formula identifies their number with the dimension of B_q. The private Lean proof lifts a finite set of minimal generators using surjectivity of the quotient map. Adjoin x to these lifts; comap-map proves this set generates the original maximal ideal. Its cardinality is at most the quotient embedding dimension plus one. Mathlib ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_jacobson gives exactly the quotient dimension plus one. Apply of_spanFinrank_maximalIdeal_le. No lifting theorem is assumed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0EYH/0EYG local root-algebra calculation and Tag 00NU regularity lifting, all proved explicitly in Lean",
+  "agent": "G3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite product of root algebras T^e-f over a regular ring with regular divisor f has normal local rings",
+   "results": "8 hits; Polynomial.instEtaleUniversalCoprimeFactorizationRing, StandardEtalePair, Algebra.IsStandardEtale, StandardEtalePair.instCommRingRing, StandardEtalePair.instEtaleRing, StandardEtalePresentation, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.instIsStandardEtaleRing",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularRing",
+   "results": "10 hits; IsRegularRing, instIsRegularRingOfIsDedekindDomain, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, IsRegularRing.toIsNoetherian, IsRegularRing.of_ringEquiv, IsRegularRing.isRegularLocalRing_localization, isRegularRing_iff, IsRegularRing.mk",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|IsRegularRing",
+   "results": "10 hits; Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The localization of R[t]/(t^n-f) at a prime containing t is regular if R is Noetherian and f is a nonzerodivisor and R/f is regular",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, IsRegularLocalRing",
+   "results": "0 hits; ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*regular|regular.*quotient|AdjoinRoot",
+   "results": "0 hits; ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian local ring regular if quotient by nonzerodivisor is regular",
+   "results": "Eight hits: regular-sequence results and the quotient dimension formula; no regular-local lifting or root-algebra theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (second reading by G3)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, IsSMulRegular",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (second reading by G3)"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*nonzerodivisor|nonzerodivisor.*regular|regular.*AdjoinRoot|AdjoinRoot.*regular; repository quotient/regular/lifting searches",
+   "results": "Mathlib regular-element and dimension ingredients only. Repository HypersurfaceDerivationRegular requires a globally unit derivative and cannot handle the containing-root case. No duplicate of the new root-localization statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match (second reading by G3)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorRootModelNormal",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: regularity of the standard full root algebra at primes containing the root coordinate, in the local verification of Tag 0EYH",
+   "via": [
+    "lem-sbc-regular-divisor-root-model-normal",
+    "lem-sbc-trait-generic-root-model",
+    "lem-sbc-trait-generic-normalization-charts",
+    "lem-sbc-stalk-normalization-trait-charts",
+    "lem-sbc-stalk-normalization-trait-flat",
+    "lem-sbc-stalk-normalization-trait-section-source",
+    "lem-sbc-stalk-normalization-section-neighbourhood",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RootAlgebraRegularAtRoot",
+  "file": "lean/Sheaf/RingTheory/RootAlgebraRegularAtRoot.lean",
+  "declaration": "AdjoinRoot.isRegularLocalRing_atPrime_of_root_mem",
+  "statement": "theorem isRegularLocalRing_atPrime_of_root_mem\n    (R : Type u) [CommRing R] [IsNoetherianRing R] (f : R)\n    (hf : IsSMulRegular R f) [IsRegularRing (R ⧸ Ideal.span {f})]\n    (n : ℕ) (hn : 0 < n)\n    (q : Ideal (AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C f)))\n    [q.IsPrime]\n    (ht : AdjoinRoot.root ((Polynomial.X : Polynomial R) ^ n - Polynomial.C f) ∈ q) :\n    IsRegularLocalRing (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T082346-L-1636053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261013T082346-L-1636053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
