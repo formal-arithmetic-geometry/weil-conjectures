@@ -18,28 +18,24 @@
  ],
  "proof": [
   {
-   "text": "Factor the supplied immersion through its scheme-theoretic image P, a closed subscheme of projective space, obtaining an open immersion j. Properness over the Noetherian A makes P Noetherian. Pull G back termwise; the formal pullback theorem gives coherence and quotient compatibility. Finite-type pullback support and the constant formal support lemma identify every term support with q inverse Supp(G_0), proper over A. Its image in the separated P is closed.",
+   "text": "Take the concrete scheme-theoretic image of the immersion as compactification. Pull G back, transport its constant support to a closed ambient subset T using proper-support preimage and image properties, and form the concrete direct-image formal system using closed-support pushforward.",
    "uses": [
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "lem-weil-pbc-formal-system-support-constant",
     "lem-weil-pbc-formal-systems-pullback",
     "lem-weil-pbc-support-pullback-finite-type",
-    "lem-weil-pbc-formal-system-support-constant",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "lem-weil-pbc-formal-system-closed-support-pushforward"
    ],
    "elementary": false
   },
   {
-   "text": "Extend the pulled terms by j_*. The coherent open pushforward lemma applies to their common closed support; all terms vanish off that support. Quotient compatibility on j(Y) and vanishing outside give a coherent formal system on P. Apply projective existence to obtain F prime. Restriction commutes with completion and yields F, the restriction isomorphism, and the desired completion isomorphism.",
+   "text": "Use projective completion equivalence and restrict along the open immersion. The coherent and formal pullback functors and their inclusion equalities give both required isomorphisms. The closed-fibre support lemma sends a point of the algebraization support on V(I) to the support of its first quotient. The completion isomorphism transports that stalk to the first direct-image term; closed ambient support puts it in T, hence in the open image.",
    "uses": [
-    "lem-weil-pbc-pushforward-coherent-on-open",
     "lem-weil-pbc-grothendieck-existence-projective",
-    "lem-weil-pbc-formal-systems-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Nakayama at each point of the adic closed fibre identifies the support of F prime there with the support of its quotient by I. This quotient is the extended first term and is supported in j(Y). Thus the closed-fibre support containment holds. Boundary removal and proper-support transport are deliberately deferred to the proved support theorem.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators"
+    "lem-weil-pbc-formal-systems-pullback",
+    "new-closed-support-pushforward-support",
+    "new-coherent-adic-closed-fibre-support"
    ],
    "elementary": false
   }
@@ -49,9 +45,11 @@
   "lem-weil-pbc-formal-system-support-constant",
   "lem-weil-pbc-formal-systems-pullback",
   "lem-weil-pbc-grothendieck-existence-projective",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-pushforward-coherent-on-open",
-  "lem-weil-pbc-support-pullback-finite-type"
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+  "lem-weil-pbc-formal-system-closed-support-pushforward",
+  "new-closed-support-pushforward-support",
+  "new-coherent-adic-closed-fibre-support"
  ],
  "proof_origin": {
   "by": "document",
@@ -141,11 +139,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-a094a",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T024033-L-3334100",
+  "landing": "20261013T060410-L-581077",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures and proofs match the corrected nodes and Stacks 088E; all modules and direct importers compile, axioms are permitted, and the original caller failure confirms the minimal forced adaptation."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

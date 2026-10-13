@@ -1,0 +1,96 @@
+{
+ "id": "new-closed-support-pushforward-support",
+ "kind": "statement",
+ "title": "Direct image support stays in closed ambient support",
+ "statement": "For any scheme morphism j:Y → X, module F on Y and closed subset T of X, if Supp(F) is contained in j inverse T then Supp(j_*F) is contained in T.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0CYJ",
+  "place": "Proof: vanishing on the complement of T"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "/-- Direct image has support inside the given closed ambient support.\nSource: Stacks Project, Lemma 0CYJ, proof (vanishing on the complement).\n(blueprint: new-closed-support-pushforward-support)\n\nProof: At a point outside T, shrink each representative of a direct-image stalk\nsection to the complement of T. Its sections are sections of F on the inverse image.\nEvery stalk there is zero by the support hypothesis; the sheaf section extensionality\nlemma makes each such section zero. Every germ at the original point is therefore zero.\nThis also covers empty schemes, empty supports and zero modules. -/",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "0CYJ proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compactification.*support|support.*compactification",
+   "results": "0 Mathlib hits. Local library search inspected FormalSystemsPullback, GrothendieckExistenceProjective, ChowAlgebraizationCoreCandidate, and FiniteTypeModuleSupportPullback; no theorem supplies the retained compactification data.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaf algebraization on projective closure of an open subscheme formal completion support",
+   "results": "Second reader: 8 hits, all Proj constructions/basic properties; none supplies coherent compactification algebraization with closed-fibre support.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "\"IsOpenImmersion\", \"CoherentModules\"",
+   "results": "Second reader: 0 hits.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowAlgebraizationCompactificationData",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-chow-algebraization-core",
+   "place": "Support steps of new-chow-algebraization-core-support-data",
+   "via": [
+    "new-chow-algebraization-core-support-data",
+    "new-chow-algebraization-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportPushforwardSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportPushforwardSupport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pushforward_support_subset_of_closed_support",
+  "statement": "theorem pushforward_support_subset_of_closed_support {Y X : Scheme.{u}} (j : Y ⟶ X) (F : Y.Modules) (T : TopologicalSpace.Closeds X) (hSupp : {y : Y | ¬ Subsingleton (F.presheaf.stalk y)} ⊆ j.base ⁻¹' (T : Set X)) : {x : X | ¬ Subsingleton (((pushforward j).obj F).presheaf.stalk x)} ⊆ (T : Set X)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T060410-L-581077",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261013T060410-L-581077",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
