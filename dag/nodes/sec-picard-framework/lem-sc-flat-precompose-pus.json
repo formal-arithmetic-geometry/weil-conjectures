@@ -30,53 +30,37 @@
  ],
  "proof": [
   {
-   "text": "Expand c using the definition of the canonical right-adjoint base-change map [def-sc-duality-equation-base-change-map]. Its three factors are the pullback of the unit for Lg^* ⊣ Rg_*, the inverse of the conjugate theta of beta, and the counit for Lg_X^* ⊣ Rg_{X,*}. Applying the natural global Hom adjunction isomorphisms for a and a' [lem-pc-global-hom-adjunction] and the global Hom adjunction (M,Rg_{X,*}E)_X\\cong(Lg_X^*M,E)_{X'} for Lg_X^* ⊣ Rg_{X,*} [lem-pc-global-hom-pullback-adjunction] (whose H^0 is the adjunction bijection, so it is given by applying Lg_X^* and then the counit) to the first composite identifies the resulting map with postcomposition by this displayed representative of c.",
+   "text": "Expand dualityEquationBaseChangeMap and apply the generic mate_counit calculation. This is proved in Lean from Mathlib conjugateEquiv_counit, naturality of beta and of the right-adjoint counit, and the pullback adjunction triangle identity. Passing to underlying morphisms gives beta_(aK);Rf prime(c);epsilon prime = Lg*(epsilon). No global Hom result is needed for this step.",
    "uses": [
-    "def-sc-duality-equation-base-change-map",
-    "lem-pc-global-hom-adjunction",
-    "lem-pc-global-hom-pullback-adjunction"
+    "def-sc-duality-equation-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AA8 (Lemma 48.6.2), equation-base-change-map and final compatibility sentence in case (1)"
-   }
+   "elementary": true
   },
   {
-   "text": "The mate defining theta is the conjugate of beta, so the triangle identities for the two pullback/direct-image adjunctions, transported to global Hom complexes by [lem-pc-global-hom-pullback-adjunction] (for g_X; its isomorphism is applying Lg_X^* followed by the counit), identify the middle two factors above with the map obtained by first applying the pullback comparison to M and then applying the RHom map induced by c. Extending A'-linearly (the comparison is the A'-linear extension of the map induced by derived pullback, and postcomposition by a map in D(A') commutes with this extension), this is precisely the first displayed morphism in the statement.",
+   "text": "Apply the general global Hom counit-square transport lemma to N=a(K), E=a prime(Lg*K), t=c, and the two right-adjoint counits, using the equation proved in the first step and invertibility of beta_M.",
    "uses": [
-    "def-sc-duality-equation-base-change-map",
-    "lem-pc-global-hom-adjunction",
-    "lem-pc-global-hom-pullback-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AA8 (Lemma 48.6.2), final compatibility sentence in case (1)"
-   }
-  },
-  {
-   "text": "By definition, the algebraic RHom base-change morphism is adjoint to the map induced by Lg^*. Transporting it through the adjunction isomorphism for a, the inverse of beta_M, and the adjunction isomorphism for a' gives exactly the same composite as in Steps 1--2. Hence the pullback-then-c map and the adjunction/RHom-base-change/beta_M^{-1}/adjunction composite are equal.",
-   "uses": [
-    "def-sc-duality-equation-base-change-map",
+    "lem-sc-global-hom-base-change-counit-transport",
     "lem-pc-global-hom-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AA8 (Lemma 48.6.2), final compatibility sentence in case (1)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Postcompose both sides of the desired equality with scalar restriction of the Hom adjunction isomorphism on X prime. Cancel its inverse on the right. Its hom is definitionally the direct-image Hom comparison followed by Hom of the counit, so the resulting equation is exactly the transport equality from the second step.",
+   "uses": [
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-duality-equation-base-change-map",
   "lem-pc-global-hom-adjunction",
-  "lem-pc-global-hom-pullback-adjunction"
+  "lem-sc-global-hom-base-change-counit-transport"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AA8 (Lemma 48.6.2), case (1), final compatibility sentence"
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex; Mathlib.CategoryTheory.Adjunction.Mates",
+  "place": "Tag 0AA8 final compatibility diagrams; conjugateEquiv_counit and the triangle identities, with a separately stated global Hom transport step"
  },
  "mathlib_searches": [
   {
@@ -159,5 +143,15 @@
   "group": "V1",
   "result": "pass",
   "note": "independent Codex review: Matched the item’s hypotheses, objects, c-map, and both explicit A-linear composite factors to the node; verified the pinned tensor–Hom family replaces prior arbitrary choices and all four modules compile together cleanly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T054224-L-444815",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
