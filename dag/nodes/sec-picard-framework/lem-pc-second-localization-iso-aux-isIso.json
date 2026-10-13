@@ -12,20 +12,49 @@
  },
  "proof": [
   {
-   "text": "Use the same flat resolution and comparison as in the existence step. Localization makes every denominator of B a unit after extension to Bp, so the comparison is an isomorphism on localized homology. Tensor associativity transports its inverse to D; the generator formula and IsSecondLocalizationMap.ext identify the transported map with the given characterized map, proving it is an isomorphism.",
+   "text": "For any R-module complex V, take the actual reduced functorial flat resolution provided by ModuleCat.hasFunctorialFlatResolution. Its quasi-isomorphism to V and kFlat_resolutionFunctor_obj give a common K-flat complex P. Convert the source K-flat property to the acyclic-tensor hypothesis and apply scalarExtensionCounit_isIso_of_kFlat to both model counits on P. The defining leftDerived_fac_app equation for secondLocalizationDerivedMap expresses its component on P as a composite of these counits and scalar-extension associators, so that component is invertible. Naturality and inversion of the resolution quasi-isomorphism transport invertibility to V.",
+   "uses": [
+    "lem-pc-second-localization-map",
+    "lem-pc-kflat-scalar-extension-counit",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At V equal to the R-restriction of Q, the scalar-extension adjoint beta of secondLocalizationCohomologyMap is a composite of the invertible derived comparison, flatDerivedHomologyIso, and the two model cohomology isomorphisms, so beta is invertible. Prove IsBaseChange Bp for the underlying B-linear comparison by its universal property: every B-linear map to a Bp-module factors uniquely by applying adjunction and composing with beta inverse.",
    "uses": [
     "lem-pc-second-localization-map"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Convert IsBaseChange Bp into IsLocalizedModule T. The A-semilinearity proved by naturality gives an (A tensor_R B)-linear comparison gamma. Apply IsLocalizedModule.of_restrictScalars to gamma and IsLocalization.tensorProduct_tensorProduct_right to A tensor_R Bp; then IsLocalizedModule.isBaseChange shows that the adjoint of gamma is invertible. Identify its underlying function with the base-change equivalence by tensor induction and IsBaseChange.equiv_tmul.",
+   "uses": [
+    "lem-pc-second-localization-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend this invertible adjoint to D and compose with the scalar-extension associator and equality transport exactly as in the existence construction. Check the generator formula explicitly. IsSecondLocalizationMap.ext identifies every characterized map with this constructed isomorphism. Reuse the existing private RingTensorCohomology.extendScalars_eqToIso_one_tmul from FirstLocalizationMap (via a proof-only import all) for transport of the generator along the equality of coefficient maps; do not prove a duplicate transport lemma.",
+   "uses": [
+    "lem-pc-second-localization-map",
+    "lem-pc-first-localization-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-second-localization-map"
+  "lem-pc-second-localization-map",
+  "lem-pc-kflat-scalar-extension-counit",
+  "def-pc-module-kflat-complex",
+  "lem-pc-first-localization-map"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ8"
+  "place": "Tags 0DJ8 and 06Y6; complete Lean proof using the existing universal K-flat counit theorem, source-library functorial flat resolution, and Mathlib localization base-change universal properties. Official Stacks pages read online because this remote clone omits the literature sources. Repair of the duplicate-helper return: coefficient-map transport now reuses FirstLocalizationMap rather than declaring the same lemma again."
  },
  "mathlib_searches": [
   {
@@ -91,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N2",
+  "reviewer": "X-6627f",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T224516-L-1474124",
+  "landing": "20261013T234526-L-2168759",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Both proofs match their unchanged Lean signatures and DAG statements; proof metadata and repair agree with the code. Delivery and sole direct importer compile cleanly; all proved declarations use only permitted axioms, with no sorryAx."
  }
 }

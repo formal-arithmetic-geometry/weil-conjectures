@@ -12,20 +12,31 @@
  },
  "proof": [
   {
-   "text": "Choose an R-K-flat resolution used by the two model counits. Flat extension from B to Bp identifies the homology after extension with the homology of the extended resolution. The tensor associator and counit comparison give a morphism between the two cohomology modules, and adjunction for scalar extension gives the generator formula, which is exactly IsSecondLocalizationMap.",
+   "text": "The cohomology comparison defined in SecondLocalizationMap commutes with multiplication by A: conjugate by the model cohomology isomorphisms, use naturality of flatDerivedHomologyIso and secondLocalizationDerivedMap, and transpose the naturality square through scalar-extension adjunction. B-linearity is built into that comparison. Tensor induction then proves semilinearity over the map A tensor_R B to A tensor_R Bp.",
    "uses": [
     "lem-pc-second-localization-map"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Regard this semilinear comparison as a morphism to the restriction of scalars from A tensor_R Bp and take its scalar-extension adjoint. The two maps from A tensor_R B to D agree, by tensor induction and the scalar-tower hypotheses. Compose the resulting equality transport, extendScalarsComp associator, and further extension to D of the adjoint. The associator formula on 1 tensor x and the adjunction generator formula prove IsSecondLocalizationMap. Reuse the existing private RingTensorCohomology.extendScalars_eqToIso_one_tmul from FirstLocalizationMap (via a proof-only import all) for transport of the generator along the equality of coefficient maps; do not prove a duplicate transport lemma.",
+   "uses": [
+    "lem-pc-second-localization-map",
+    "lem-pc-first-localization-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-second-localization-map"
+  "lem-pc-second-localization-map",
+  "lem-pc-first-localization-map"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-14",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ8"
+  "place": "Tags 0DJ8 and 06Y6; complete Lean proof by naturality of the derived comparison and flat homology isomorphism, scalar-extension adjunction, tensor induction, and the scalar-extension associator. No K-flat resolution or counit invertibility is used for existence. Official Stacks pages read online by the first worker because this remote clone omits the literature sources. Repair of the duplicate-helper return: coefficient-map transport now reuses FirstLocalizationMap rather than declaring the same lemma again."
  },
  "mathlib_searches": [
   {
@@ -91,11 +102,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N2",
+  "reviewer": "X-6627f",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T224516-L-1474124",
+  "landing": "20261013T234526-L-2168759",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Both proofs match their unchanged Lean signatures and DAG statements; proof metadata and repair agree with the code. Delivery and sole direct importer compile cleanly; all proved declarations use only permitted axioms, with no sorryAx."
  }
 }
