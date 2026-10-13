@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-bounded-ring-hom-extension-degree",
+ "kind": "statement",
+ "title": "Finite-support assembly of degreewise tensor-Hom comparisons",
+ "statement": "Let A,B be commutative rings, φ:A→B a ring map, F:RingSiteModules(A)→RingSiteModules(B) an additive functor with objects equal to the specified scalar extensions [def-pc-perfect-rhom-base-change-map], and P,Q cochain complexes of A-module sheaves. Fix n∈ℤ and assume P^p is zero for p outside some integer interval [a,b]. Suppose for each p there exists an isomorphism g_p:F(Hom_A(P^p,Q^(p+n)))→Hom_B(F(P^p),F(Q^(p+n))) satisfying the normalized equation g_p(b⊗f)(c⊗x)=bc⊗f(x) on the identity slice object over every site object. Let t:F(Hom_A^bullet(P,Q)^n)→Hom_B^bullet(F(P),F(Q))^n be any module-sheaf map. Suppose every product coordinate of t satisfies (t(b⊗f))_p(c⊗x)=bc⊗f_p(x), using the shared product projections of [def-pur-hom-complex] and the pure tensors and evaluations of [def-pc-perfect-rhom-base-change-map]. Then t is an isomorphism. There is no projectivity hypothesis on P and no chain-map hypothesis on t; those belong to separate steps.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 0A6A (lemma-base-change-RHom), clause (1), via 0ATK (lemma-evaluate-isomorphism), finite-projective calculation"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "The projections of homComplex_exists give a limiting product fan. Outside [a,b], P^p=0, so both Hom_A(P^p,Q^(p+n)) and Hom_B(F(P^p),F(Q^(p+n))) are zero; scalar extension preserves zero modules. Products of these families thus identify with their products over the finite integer interval. The empty interval is permitted.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-perfect-rhom-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ordinary scalar extension at the unique object and lem-weil-pbc-tensor-finite-product, with the commutativity isomorphism if needed, to commute scalar extension with this finite product. Follow by the finite product of the supplied g_p isomorphisms to obtain an isomorphism k with t's source and target.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied formula for each g_p shows that each projection of k sends b tensor f, evaluated on c tensor x, to bc tensor f_p(x). The hypothesis on t gives the identical formula. Pure tensors generate both scalar extensions, and evaluation at the identity slice object detects internal-Hom sections on this one-object site. Hence all product projections of t and k agree; the product universal property gives t=k, so t is invertible.",
+   "uses": [
+    "def-pc-perfect-rhom-base-change-map",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-rhom-base-change-map",
+  "def-pur-hom-complex",
+  "lem-weil-pbc-tensor-finite-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Expansion of lem-pc-perfect-ring-hom-scalar-extension parent step 2: one degree of the finite-product Hom-complex comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor product distributes over a finite product of modules",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T03:56:40Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product distributes over a finite product of modules\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with a product of module Hom spaces when the source family has finite support",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T03:56:39Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension commutes with a product of module Hom spaces when the source family has finite support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.directSum\", \"TensorProduct.piScalarRightHom\", \"IsBaseChange.directSumPow\", \"TensorProduct.piScalarRight_apply\", \"TensorProduct.piScalarRight\", \"IsBaseChange.finsuppPow\", \"TensorProduct.coe_finsuppScalarRight'\", \"IsBaseChange.pi\"], \"digest\": \"507956bf75f11035\"}",
+   "verdict": "IsBaseChange.pi and TensorProduct.piScalarRight found; neither includes shared Hom-complex products, zero-factor truncation or normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "piRight|isBaseChange_map_of_finite_free",
+   "date": "2026-10-13",
+   "results": "{\"t\": \"2026-10-13T03:56:40Z\", \"tool\": \"grep\", \"query\": \"piRight|isBaseChange_map_of_finite_free\", \"sub\": \"LinearAlgebra/TensorProduct\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\"], \"digest\": \"f613a075815b7024\"}",
+   "verdict": "TensorProduct.piRight supplies ordinary finite-product distribution; sheaf transport and finite-support assembly remain"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.PerfectRingHomScalarExtension",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 proof through 0AA7 clause (1), expanded 0A6A (1): parent step 2: one degree of the finite-product Hom-complex comparison",
+   "via": [
+    "lem-pc-perfect-ring-hom-scalar-extension",
+    "lem-pc-base-change-rhom-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedRingHomExtensionDegree",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedRingHomExtensionDegree.lean",
+  "declaration": "CategoryTheory.boundedRingHom_extension_degree_isIso",
+  "statement": "theorem boundedRingHom_extension_degree_isIso\n    {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)\n    (F : RingSiteModules A ⥤ RingSiteModules B)\n    (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M)\n    (hadd : F.Additive) (P Q : CochainComplex (RingSiteModules A) ℤ) (n : ℤ)\n    (hb : ∃ a b : ℤ, ∀ p : ℤ, p < a ∨ b < p → IsZero (P.X p))\n    (hterms : ∀ p : ℤ,\n      ∃ g : F.obj (SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf A)\n          (P.X p) (Q.X (p + n))) ⟶\n        SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf B)\n          (F.obj (P.X p)) (F.obj (Q.X (p + n))),\n        IsIso g ∧ ∀ (U : (Discrete PUnit.{u + 1})ᵒᵖ) (b c : B)\n          (f : (SheafOfModules.homObj (R := CochainComplex.onePointRingSheaf A)\n            (P.X p) (Q.X (p + n))).val.obj U) (x : (P.X p).val.obj U),\n          ((g.val.app U (ringExtensionPure φ F hF _ U b f)).app\n            (op (Over.mk (𝟙 U.unop)))) (ringExtensionPure φ F hF (P.X p) U c x) =\n          ringExtensionPure φ F hF (Q.X (p + n)) U (b * c)\n            ((f.app (op (Over.mk (𝟙 U.unop)))) x))\n    (t : F.obj ((homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n) ⟶\n      (homComplex (R := CochainComplex.onePointRingSheaf B)\n        ((ringExtensionComplex F hadd).obj P) ((ringExtensionComplex F hadd).obj Q)).X n)\n    (ht : ∀ (p : ℤ) (U : (Discrete PUnit.{u + 1})ᵒᵖ) (b c : B)\n      (f : (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n |>.val.obj U)\n      (x : (P.X p).val.obj U),\n      ringHomEvaluate ((ringExtensionComplex F hadd).obj P)\n        ((ringExtensionComplex F hadd).obj Q) n p U\n        (t.val.app U (ringExtensionPure φ F hF _ U b f))\n        (ringExtensionPure φ F hF (P.X p) U c x) =\n      ringExtensionPure φ F hF (Q.X (p + n)) U (b * c)\n        (ringHomEvaluate P Q n p U f x)) : IsIso t",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T045546-L-133347",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T045546-L-133347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

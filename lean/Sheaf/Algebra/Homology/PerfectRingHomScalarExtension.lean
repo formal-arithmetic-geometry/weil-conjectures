@@ -6,6 +6,8 @@ Authors: SHEAF group U4
 module
 
 public import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
+import Sheaf.Algebra.Homology.FiniteProjectiveRingHomExtension
+import Sheaf.Algebra.Homology.BoundedRingHomExtensionDegree
 
 /-! # Scalar extension of a Hom complex with bounded finite-projective source
 
@@ -52,6 +54,13 @@ theorem perfectRingHom_scalarExtension_isIso
     (hp : ∀ n : ℤ, Module.Projective A ((P.X n).val.obj (op ⟨PUnit.unit⟩)))
     (hf : ∀ n : ℤ, Module.Finite A ((P.X n).val.obj (op ⟨PUnit.unit⟩))) :
     IsIso (d.homMap P Q) := by
-  sorry
+  have hcomponents : ∀ n : ℤ, IsIso ((d.homMap P Q).f n) := by
+    intro n
+    apply boundedRingHom_extension_degree_isIso φ d.extension d.objects d.additive P Q n hb
+    · intro p
+      exact finiteProjectiveRingHom_extension_exists φ d.extension d.objects
+        (P.X p) (Q.X (p + n)) (hp p) (hf p)
+    · exact d.homMap_pure P Q n
+  exact HomologicalComplex.Hom.isIso_of_components (d.homMap P Q)
 
 end CategoryTheory
