@@ -13,22 +13,30 @@
  ],
  "proof": [
   {
-   "text": "Write r_U,r_W for localized-site restrictions, t for overMap, e_U,e_W for the exact open-site equivalences, and S for e_U^{-1}te_W. Write q_U=D(r_Ue_U)\\cong D(r_U)D(e_U) and q_W similarly. Pull the local morphism a back to a_0=D(e_U)^{-1}(q_U^{-1}a q_U), using full faithfulness, so D(e_U)(a_0)=q_U^{-1}a q_U.",
+   "text": "Prove the composition-comparison component formulas on Q(K) from Functor.mapDerivedCategoryCompIso_fac: the complex-level comparison for the composite is the identity, as checked degreewise. Cancel the factorization isomorphisms to solve for both hom and inv. Similarly solve Functor.mapDerivedCategoryNatIso_fac for the derived natural-isomorphism component. These are the proved private helpers comp_fac, comp_hom_Q, comp_inv_Q, and nat_hom_Q.",
    "uses": [
     "def-pc-derived-category"
    ],
    "elementary": true
   },
   {
-   "text": "Let d:D(r_U)D(t)\\cong D(r_W) be the comparison defined by mapDerivedCategoryCompIso inverse followed by mapDerivedCategoryNatIso(overFunctorMap). Define k:D(e_U)D(S)\\cong D(t)D(e_W) by the derived composition comparisons and the underived unit e_Ue_U^{-1}\\cong id. The canonical scheme comparison alpha equals the path q_U whiskered with D(S), then k whiskered with D(r_U), then d whiskered with D(e_W), then q_W^{-1}, with associators inserted. To verify this equality precompose with the localization Q. mapDerivedCategoryCompIso_fac and mapDerivedCategoryNatIso_fac reduce its components to the original unit and overFunctorMap on cochain complexes; unit cancellation and associativity give equality there. Full faithfulness of precomposition along Q gives equality of the natural transformations.",
+   "text": "For exact functors A:C→D, e:D→E, S:E→I, T:D→H, v:H→I, B:C→H, and isomorphisms κ:eS≅Tv and γ:AT≅B, form α by pasting κ and γ with associators. Put k=q(e,S)⁻¹ D(κ) q(T,v) and d=q(A,T)⁻¹ D(γ). Prove q(Ae,S)⁻¹ D(α) q(B,v) = (q(A,e) whiskered with D(S)) (D(A) whiskered with k) (d whiskered with D(v)). Apply Localization.natTrans_ext along DerivedCategory.Q. Use the preceding component formulas. Move k across A.mapDerivedCategoryFactors.inv by naturality; expand k and d at Q(K) and cancel the factorization inverse pairs. Naturality of v.mapDerivedCategoryFactors.inv moves the remaining γ component into Q. The resulting equality of complex morphisms follows degreewise from the definition of α and the identity associators. This is the fully proved private helper pasting.",
    "uses": [
     "def-pc-derived-category"
    ],
    "elementary": false
   },
   {
-   "text": "Apply naturality of k to a_0, substitute D(e_U)(a_0)=q_U^{-1}a q_U, and use the comparison equality from the preceding step. Cancel each q_U and its inverse. The remaining conjugation is q_W D(e_W)(d^{-1}D(t)(a_0)d) q_W^{-1}. By its definition, d^{-1}D(t)(a_0)d is derivedOpenHomRestriction(X,i,a_0). This is the displayed statement. No covering or nonemptiness assumption occurs.",
+   "text": "Prove the general morphism transport formula (private helper transport). For b=D(e).preimage(q(A,e)⁻¹ a q(A,e)), use Functor.map_preimage to obtain D(e)(b)=q(A,e)⁻¹ a q(A,e). Evaluate the pasted-square identity at F and E. Precompose the desired equality with the forward α-derived comparison at F and postcompose with q(B,v) at E. Rewrite both sides with the square identity, cancel d(F) with its inverse, rewrite a q(A,e)(E)=q(A,e)(F)D(e)(b), and apply the naturality equation of k to b. Canceling the outer isomorphisms yields the required conjugation. Only fullness of D(e) is needed; all helpers are proved without sorry.",
    "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize A and B to overFunctor at U and W, T to overMap(i), e and v to the open-site equivalence functors at U and W, and S to e_U.inverse⋙T⋙v. Take κ to be the associator, the inverse unit of overEquiv U whiskered with T⋙v, and the left unitor; take γ=overFunctorMap(i). Fullness of D(e) follows from the existing derived-equivalence instance. The pasted α-derived comparison is definitionally the eU in the statement, and d⁻¹D(T)(b)d is definitionally derivedOpenHomRestriction. Apply transport directly. No Mayer–Vietoris exactness theorem is used, and no covering or nonemptiness assumption occurs.",
+   "uses": [
+    "def-pc-derived-category",
     "lem-sc-derived-hom-mayer-vietoris"
    ],
    "elementary": true
@@ -40,10 +48,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "P2",
+  "group": "V2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BW; canonical Hom restriction under the localized-site/open-subscheme equivalence, used in step 4 of lem-sc-derived-open-gluing"
+  "place": "Tag 08BW; canonical Hom restriction; derived comparison coherence proved using the exact-functor factorization laws and localization extensionality"
  },
  "mathlib_searches": [
   {
@@ -122,10 +130,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261013T040756-L-3951170",
-  "kind": "interface",
+  "landing": "20261013T082421-L-1650634",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
