@@ -13,6 +13,10 @@ public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 import Sheaf.Paper.FreeComplexMapsToResolution
+import Sheaf.RingTheory.TorIdealConnectingFormula
+import Sheaf.RingTheory.TorIdealComparisonCompatibility
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Naturality of the ideal-kernel description of first Tor
@@ -142,6 +146,75 @@ theorem exists_tor_ideal_kernel_naturality
       (∀ t : (((Tor' (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ I))), δA (τ t) = θ (δR t))
         ∧
       (∀ x : I ⊗[R] M, x ∈ LinearMap.ker μR → θ x ∈ LinearMap.ker μA) := by
-  sorry
+  let μR : (I ⊗[R] M) →ₗ[R] M :=
+    TensorProduct.lift ((LinearMap.lsmul R M).comp I.subtype)
+  let μA : (J ⊗[A] N) →ₗ[A] N :=
+    TensorProduct.lift ((LinearMap.lsmul A N).comp J.subtype)
+  have hμR (a : I) (x : M) : μR (a ⊗ₜ[R] x) = (a : R) • x := rfl
+  have hμA (b : J) (y : N) : μA (b ⊗ₜ[A] y) = (b : A) • y := rfl
+  let fi : I →ₛₗ[f] J :=
+    { toFun := fun a => ⟨f a, hJ ▸ Ideal.mem_map_of_mem f a.property⟩
+      map_add' := fun a b => Subtype.ext (f.map_add a b)
+      map_smul' := fun r a => Subtype.ext (f.map_mul r a) }
+  let gl : M →ₛₗ[f] N := { g with map_smul' := hg }
+  let θ : (I ⊗[R] M) →+ (J ⊗[A] N) := (TensorProduct.map fi gl).toAddMonoidHom
+  have hθ (a : I) (x : M) (b : J) (hb : (b : A) = f a) :
+      θ (a ⊗ₜ[R] x) = b ⊗ₜ[A] g x := by
+    change fi a ⊗ₜ[A] g x = b ⊗ₜ[A] g x
+    have hab : fi a = b := Subtype.ext hb.symm
+    rw [hab]
+  obtain ⟨δR, hiR, hrR, hfR⟩ := exists_tor_ideal_connecting_formula I M P hP μR hμR
+  obtain ⟨δA, hiA, hrA, hfA⟩ := exists_tor_ideal_connecting_formula J N G hG μA hμA
+  have hlift : ∃ φ : ∀ n : ℕ, (P.complex.X n) →+ (G.complex.X n),
+      (∀ (n : ℕ) (r : R) (p : P.complex.X n), φ n (r • p) = f r • φ n p) ∧
+      (∀ (n : ℕ) (p : P.complex.X (n + 1)),
+        G.complex.d (n + 1) n (φ (n + 1) p) = φ n (P.complex.d (n + 1) n p)) ∧
+      (∀ p : P.complex.X 0, G.π.f 0 (φ 0 p) = g (P.π.f 0 p)) := by
+    let S := restrictScalars f
+    let γ : M ⟶ S.obj N := ofHom (X := M) (Y := S.obj N)
+      { toFun := fun x => g x
+        map_add' := g.map_add
+        map_smul' := hg }
+    let d : ∀ n : ℕ, S.obj (G.complex.X (n + 1)) ⟶ S.obj (G.complex.X n) :=
+      fun n => S.map (G.complex.d (n + 1) n)
+    let η := S.map (G.π.f 0)
+    have hd0 : d 0 ≫ η = 0 := by
+      change S.map (G.complex.d 1 0) ≫ S.map (G.π.f 0) = 0
+      rw [← S.map_comp, G.complex_d_comp_π_f_zero, S.map_zero]
+    have hd (n : ℕ) : d (n + 1) ≫ d n = 0 := by
+      change S.map (G.complex.d (n + 2) (n + 1)) ≫
+        S.map (G.complex.d (n + 1) n) = 0
+      rw [← S.map_comp, G.complex.d_comp_d, S.map_zero]
+    have hη : Function.Surjective η := by
+      exact (epi_iff_surjective (G.π.f 0)).mp inferInstance
+    have hex0 : (ShortComplex.mk (d 0) η hd0).Exact := by
+      apply (ShortComplex.moduleCat_exact_iff _).mpr
+      exact (ShortComplex.moduleCat_exact_iff
+        (ShortComplex.mk _ _ G.complex_d_comp_π_f_zero)).mp G.exact₀
+    have hex (n : ℕ) : (ShortComplex.mk (d (n + 1)) (d n) (hd n)).Exact := by
+      apply (ShortComplex.moduleCat_exact_iff _).mpr
+      exact (ShortComplex.moduleCat_exact_iff
+        (ShortComplex.mk _ _ (G.complex.d_comp_d (n + 2) (n + 1) n))).mp (G.exact_succ n)
+    obtain ⟨α, hα₀, hα⟩ := free_complex_maps_to_resolution R M (S.obj N) γ
+      (fun n => S.obj (G.complex.X n)) d η hd0 hd hη hex0 hex
+      (fun n => P.complex.X n) (fun n => P.complex.d (n + 1) n) (P.π.f 0)
+      P.complex_d_comp_π_f_zero (fun n => P.complex.d_comp_d (n + 2) (n + 1) n) hP
+    refine ⟨fun n => (α n).hom.toAddMonoidHom, ?_, ?_, ?_⟩
+    · intro n r p
+      exact (α n).hom.map_smul r p
+    · intro n p
+      exact congrArg (fun k => k p) (hα n)
+    · intro p
+      exact congrArg (fun k => k p) hα₀
+  obtain ⟨φ, hφ, hdφ, hπφ⟩ := hlift
+  obtain ⟨τ, hτ, hcomm⟩ := exists_tor_ideal_comparison_compatibility f I J hJ M N g hg
+    P G hP hG δR δA θ hθ hiA hfR hfA φ hφ hdφ hπφ
+  refine ⟨μR, μA, θ, δR, δA, τ, hμR, hμA, hθ, hiR, hrR, hiA, hrA, hfR, hfA,
+    ⟨φ, hφ, hdφ, hπφ⟩, hτ, hcomm, ?_⟩
+  intro x hx
+  rw [← hrR] at hx
+  obtain ⟨t, rfl⟩ := hx
+  rw [← hcomm, ← hrA]
+  exact ⟨τ t, rfl⟩
 
 end ModuleCat

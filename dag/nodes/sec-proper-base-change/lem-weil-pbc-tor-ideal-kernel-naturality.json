@@ -33,87 +33,67 @@
  ],
  "proof": [
   {
-   "text": "Short exact rows. Each $P_n$ is free, hence projective [lem-weil-pbc-free-module-projective], hence flat [lem-weil-pbc-projective-module-flat]. Tensoring the exact sequence $0\\to I\\to R\\to R/I\\to0$ with $P_n$ gives the exact sequence $0\\to P_n\\otimes_RI\\xrightarrow{\\lambda_n}P_n\\otimes_RR=P_n\\to P_n\\otimes_RR/I\\to0$: injectivity of $\\lambda_n$ ($p\\otimes a\\mapsto ap$) by flatness [lem-weil-pbc-flat-tensor-exact], exactness at $P_n$ and surjectivity by right exactness [lem-weil-pbc-tensor-right-exact]. So $\\lambda_n$ is an isomorphism onto $IP_n$ and $P_n\\otimes_RR/I=P_n/IP_n$. The maps $d_n\\otimes1$ make the three columns complexes and the squares commute. The same holds for $G_n$ over $A$ with $J$: $0\\to G_n\\otimes_AJ\\xrightarrow{\\lambda'_n}G_n\\to G_n/JG_n\\to0$ exact, $\\lambda'_n$ an isomorphism onto $JG_n$.",
+   "text": "Construct μR and μA explicitly by TensorProduct.lift of scalar multiplication composed with the ideal subtype, and construct θ by TensorProduct.map of the semilinear ideal map induced by f and g. Their pure-tensor formulas follow by computation and subtype extensionality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
+   }
+  },
+  {
+   "text": "Apply the single-ring connecting-formula theorem over R and over A to the constructed multiplication maps and the given free resolutions. This gives δR, δA, their injectivity, range descriptions, and both universal cycle formulas.",
    "uses": [
-    "lem-weil-pbc-free-module-projective",
-    "lem-weil-pbc-projective-module-flat",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-tensor-right-exact"
+    "lem-weil-pbc-tor-ideal-connecting-formula"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "proof of Lemma 00M5, lines 18675--18684, and of Lemma 00M0 (the resolution of M tensored with 0 -> I -> R -> R/I -> 0)"
+    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
    }
   },
   {
-   "text": "The cokernels. Tensoring the exact sequence $P_1\\xrightarrow{d_1}P_0\\xrightarrow{\\varepsilon}M\\to0$ with $I$ [lem-weil-pbc-tensor-right-exact] gives $\\operatorname{coker}(d_1\\otimes1_I:P_1\\otimes I\\to P_0\\otimes I)\\cong M\\otimes_RI$, $[p\\otimes a]\\mapsto\\varepsilon(p)\\otimes a$; composing with the symmetry $M\\otimes_RI\\cong I\\otimes_RM$ we get $c_R:\\operatorname{coker}(d_1\\otimes1_I)\\xrightarrow{\\sim}I\\otimes_RM$, $[p\\otimes a]\\mapsto a\\otimes\\varepsilon(p)$. Also $\\varepsilon$ induces $\\operatorname{coker}(d_1)=P_0/d_1P_1\\cong M$, as the resolution is exact at $P_0$ and $\\varepsilon$ is onto. Under these isomorphisms the map $\\operatorname{coker}(d_1\\otimes1_I)\\to\\operatorname{coker}(d_1)$ induced by $\\lambda_0$ is $\\mu_R$, since $[p\\otimes a]\\mapsto[ap]\\mapsto a\\varepsilon(p)=\\mu_R(a\\otimes\\varepsilon(p))$. The same for $G$, giving $c_A$ and $\\mu_A$.",
-   "uses": [
-    "lem-weil-pbc-tensor-right-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "proof of Lemma 00M5, line 18686 ('obviously M (x)_R R = M')"
-   }
-  },
-  {
-   "text": "Proof of (a). Apply [lem-weil-pbc-snake-lemma-modules] ($\\Lambda=R$) to the diagram with top row $P_1\\otimes I\\xrightarrow{\\lambda_1}P_1\\to P_1/IP_1\\to0$ (exact, Step 1), bottom row $0\\to P_0\\otimes I\\xrightarrow{\\lambda_0}P_0\\to P_0/IP_0$ (exact, Step 1) and vertical maps $\\alpha=d_1\\otimes1_I$, $\\beta=d_1$, $\\gamma=\\bar d_1$. Here $\\ker\\gamma=Z_1$ is the module of $1$-cycles of $P_\\bullet\\otimes R/I$, and the snake map $\\partial:Z_1\\to\\operatorname{coker}\\alpha$ is: lift $z$ to $y\\in P_1$, write $d_1y=\\lambda_0(w)$, $\\partial z=[w]$; with $w=\\sum p_k\\otimes a_k$ this is $d_1y=\\sum a_kp_k$. Exactness of $\\ker\\beta\\to\\ker\\gamma\\xrightarrow{\\partial}\\operatorname{coker}\\alpha\\to\\operatorname{coker}\\beta$: (i) $\\ker\\beta=\\ker d_1=d_2P_2$ (the resolution is exact at $P_1$), whose image in $P_1/IP_1$ is exactly the module of boundaries $B_1=\\bar d_2(P_2/IP_2)$; so $\\ker\\partial=B_1$ and $\\partial$ induces an injective $R$-linear map $H_1(P_\\bullet\\otimes R/I)\\to\\operatorname{coker}\\alpha$; (ii) its image is the kernel of $\\operatorname{coker}\\alpha\\to\\operatorname{coker}\\beta$. Put $\\partial_R=c_R\\circ\\partial\\circ\\iota$, where $\\iota:\\operatorname{Tor}_1^R(M,R/I)\\xrightarrow{\\sim}H_1(P_\\bullet\\otimes R/I)$ is the identification of [def-weil-pbc-tor-modules]. By Step 2, $\\partial_R$ is injective with image $\\ker\\mu_R$, and $\\partial_R[z]=c_R[\\sum p_k\\otimes a_k]=\\sum a_k\\otimes\\varepsilon(p_k)$, independent of the choices by the snake lemma. The same argument over $A$ gives $\\partial_A$.",
-   "uses": [
-    "lem-weil-pbc-snake-lemma-modules",
-    "def-weil-pbc-tor-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "proof of Lemma 00M5, lines 18675--18688 (the exact sequence Tor_1(M,R) = 0 -> Tor_1(M,R/I) -> M (x) I -> M), and Remark 00M6"
-   }
-  },
-  {
-   "text": "The lift $\\varphi$. Regard $N$ and the $G_n$ as $R$-modules through $f$ ($r\\cdot y=f(r)y$); then $g:M\\to N$ is $R$-linear, $\\cdots\\to G_1\\to G_0\\xrightarrow{\\eta}N\\to0$ is an exact sequence of $R$-modules, and $P_\\bullet\\to M$ is a complex of free $R$-modules over $M$. By [lem-weil-pbc-free-complex-maps-to-resolution] there are $R$-linear $\\varphi_n:P_n\\to G_n$ with $\\eta\\varphi_0=g\\varepsilon$ and $e_n\\varphi_n=\\varphi_{n-1}d_n$; $R$-linearity for the restricted structure is $\\varphi_n(rp)=f(r)\\varphi_n(p)$.",
+   "text": "Restrict N and G along f. Define g as an R-linear morphism to the restricted N. The augmentation is still surjective, and the restricted complex is exact since the underlying additive maps do not change (ShortComplex.moduleCat_exact_iff). Use the free-complex comparison theorem with P to obtain R-linear maps into the restricted G; their R-linearity, chain identities and augmentation identity are exactly the required semilinear lift.",
    "uses": [
     "lem-weil-pbc-free-complex-maps-to-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma 00LS (lemma-compare-resolutions, line 17500), as used for the functoriality of Tor (lines 18598--18620)"
+    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
    }
   },
   {
-   "text": "Induced maps. Let $\\varphi$ be as in (b). For $a\\in I$, $\\varphi_n(ap)=f(a)\\varphi_n(p)\\in JG_n$, so $\\bar\\varphi_n:P_n/IP_n\\to G_n/JG_n$ is well defined, and $\\bar e_n\\bar\\varphi_n=\\bar\\varphi_{n-1}\\bar d_n$ since $e_n\\varphi_n=\\varphi_{n-1}d_n$: a chain map, inducing $H_1(\\bar\\varphi)$ and $\\tau=\\iota_G^{-1}H_1(\\bar\\varphi)\\iota$. The map $\\psi_n:P_n\\otimes_RI\\to G_n\\otimes_AJ$, $p\\otimes a\\mapsto\\varphi_n(p)\\otimes f(a)$, is well defined: it is biadditive and $\\varphi_n(rp)\\otimes f(a)=\\varphi_n(p)\\otimes f(r)f(a)=\\varphi_n(p)\\otimes f(ra)$. One has $\\lambda'_n\\psi_n=\\varphi_n\\lambda_n$ (both send $p\\otimes a$ to $f(a)\\varphi_n(p)$) and $(e_n\\otimes1)\\psi_n=\\psi_{n-1}(d_n\\otimes1)$. On cokernels, $c_A[\\psi_0(p\\otimes a)]=f(a)\\otimes\\eta\\varphi_0(p)=f(a)\\otimes g(\\varepsilon(p))=\\theta(c_R[p\\otimes a])$. Finally $\\mu_A\\theta=g\\mu_R$ on generators: $f(a)g(x)=g(ax)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "hypothesis (3) of Lemma 00MO (lines 23933--23944): the map Tor_1^R(M,R/I) -> Tor_1^{R'}(M',R'/I')"
-   }
-  },
-  {
-   "text": "Proof of (b). Let $z\\in Z_1$ (for $P$), and choose $y\\in P_1$ lifting $z$ and $w\\in P_0\\otimes I$ with $\\lambda_0(w)=d_1y$, so $\\partial[z]=[w]$ (Step 3). By Step 5, $\\varphi_1(y)\\in G_1$ lifts $\\bar\\varphi_1(z)$, which is a cycle, and $\\lambda'_0(\\psi_0w)=\\varphi_0\\lambda_0(w)=\\varphi_0d_1y=e_1\\varphi_1(y)$. These are admissible choices in the formula of [lem-weil-pbc-snake-lemma-modules] for $G$, whose value does not depend on the choices; hence $\\partial^G[\\bar\\varphi_1z]=[\\psi_0w]$. Applying $c_A$ and Step 5, $\\partial_A\\tau(\\iota^{-1}[z])=c_A[\\psi_0w]=\\theta(c_R[w])=\\theta\\partial_R(\\iota^{-1}[z])$. So $\\partial_A\\tau=\\theta\\partial_R$. Since $\\partial_R,\\partial_A$ are injective with images $\\ker\\mu_R,\\ker\\mu_A$ (Step 3), $\\theta$ maps $\\ker\\mu_R$ into $\\ker\\mu_A$ and $\\tau=\\partial_A^{-1}\\circ\\theta|_{\\ker\\mu_R}\\circ\\partial_R$, which does not involve $\\varphi$.",
+   "text": "Apply the comparison compatibility theorem to the two connecting formulas, the explicit θ, injectivity of δA and the constructed semilinear lift. Obtain τ, its universal quotient-chain-map cycle-class formula, and δA τ=θ δR.",
    "uses": [
-    "lem-weil-pbc-snake-lemma-modules"
+    "lem-weil-pbc-tor-ideal-comparison-compatibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "functoriality of the long exact sequence of Lemma 00M0 (the map of short exact sequences 0 -> I -> R -> R/I -> 0 to 0 -> J -> A -> A/J -> 0), as required by Lemma 00MO; written by the agent"
+    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
+   }
+  },
+  {
+   "text": "Assemble all witnesses. If x∈ker μR, the range description writes x=δR(t). Then θ(x)=δA(τ(t)) by commutation, and this belongs to ker μA by its range description. This proves the last clause without a new hole.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-module-projective",
-  "lem-weil-pbc-projective-module-flat",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-tensor-right-exact",
-  "lem-weil-pbc-snake-lemma-modules",
-  "def-weil-pbc-tor-modules",
-  "lem-weil-pbc-free-complex-maps-to-resolution"
+  "lem-weil-pbc-tor-ideal-connecting-formula",
+  "lem-weil-pbc-free-complex-maps-to-resolution",
+  "lem-weil-pbc-tor-ideal-comparison-compatibility"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "U3",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), which refers to the proof of Lemma Tag 00M5 (lemma-characterize-flat, lines 18664--18688: the long exact sequence of Lemma Tag 00M0 (lemma-long-exact-sequence-tor, line 18291, proved 'as for Ext': a resolution of M tensored with the short exact sequence 0 -> I -> R -> R/I -> 0) and M (x) R = M); the naturality is the functoriality required in hypothesis (3) and the proof of Lemma Tag 00MO (lines 23921--23969), not proved in the source; the chain-level naturality (Steps 4--6) is written by the agent from the source's functoriality of Tor (lines 18598--18620) and Lemma 00LS"
+  "place": "Reduction of the original six-step plan into a single-ring connecting formula and compatibility of prescribed connecting formulas; restriction-of-scalars lift and final range argument are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -213,5 +193,15 @@
   "group": "U1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T082417-L-1649508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,178 @@
+{
+ "id": "lem-weil-pbc-tor-ideal-comparison-compatibility",
+ "kind": "statement",
+ "title": "Homology comparison compatible with prescribed first Tor connecting formulas",
+ "statement": "Let f:R → A be a homomorphism of commutative rings, I ⊆ R, J=map(f,I) ⊆ A, and g:M → N an additive f-semilinear map. Let P,G be projective resolutions of M,N with free terms [def-weil-pbc-free-module]. Suppose δR:Tor_1^R(M,R/I) → I ⊗_R M and δA:Tor_1^A(N,A/J) → J ⊗_A N are linear maps with δA injective, and both satisfy the universal cycle formula: a lift y of a cycle with d y=Σ a_j p_j maps to Σ a_j ⊗ ε(p_j), using the corresponding resolution's isoLeftDerivedObj for Tor [def-weil-pbc-tor-modules]. Suppose θ:I ⊗_R M → J ⊗_A N is additive and θ(a ⊗ x)=b ⊗ g(x) whenever b∈J has underlying value f(a). Given one additive semilinear resolution comparison φ₀ commuting with consecutive differentials and augmentations, there exists an additive τ:Tor_1^R(M,R/I) → Tor_1^A(N,A/J) satisfying δA(τ(t))=θ(δR(t)). For EVERY semilinear resolution comparison φ, there is a chain map ψ between the underlying additive quotient tensor complexes, with ψ_n(p ⊗ mk_I(r))=φ_n(p) ⊗ mk_J(f(r)); whenever ψ_1(iCycles z)=iCycles w, τ sends the Tor class of z to that of w. No range or multiplication assertions, nor existence of a comparison lift, are asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Parent ideal-kernel naturality node, Steps 5–6; Stacks Algebra, functoriality in Section 00LY, Remark 00M6, and comparison Tag 00LS (https://stacks.math.columbia.edu/tag/00LS)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "For the supplied comparison φ₀, map each quotient tensor by p ⊗ mk r ↦ φ₀(p) ⊗ mk(f r). The map f sends I into J. Semilinearity preserves balancing and sends IP_n into JG_n, so this map is well defined, additive, and commutes with the differentials. Apply homology and the supplied resolution isomorphisms to define τ.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
+   }
+  },
+  {
+   "text": "Represent a degree-one cycle by y ⊗ 1 and express d y as a finite sum of I-multiples. Tensor right exactness for the quotient sequence provides the lift and the expression. Send them by φ₀: semilinearity gives d(φ₀ y)=Σ f(a_j) φ₀(p_j). Apply the assumed connecting formulas. The θ formula and augmentation identity give δA τ=θ δR on cycle classes. Surjectivity of homologyπ and the resolution isomorphism give it on all Tor elements.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
+   }
+  },
+  {
+   "text": "Repeat the quotient-chain-map construction for any other comparison φ, giving τφ and δA τφ=θ δR by the preceding calculation. Injectivity of δA gives τφ=τ. Thus this φ has a ψ with the universal cycle-class formula for the common τ.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Remark Tag 00M6 (remark-Tor-ring-mod-ideal, lines 18690--18696), with the functoriality required in the hypothesis and proof of Lemma Tag 00MO (lemma-another-variant-local-criterion-flatness, lines 23921--23969); naturality follows from the morphism of the two ideal short exact sequences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U3",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Parent ideal-kernel naturality node, Steps 5–6; Stacks Algebra, functoriality in Section 00LY, Remark 00M6, and comparison Tag 00LS (https://stacks.math.columbia.edu/tag/00LS).",
+  "note": "The detailed formula argument follows the parent node plan; official Stacks pages 00M5, 00M6, and 00LS were read because the local literature source is not materialized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor first quotient ideal kernel multiplication connecting map",
+   "results": "Service unavailable: Internal Server Error (msearch.py recorded unavailable).",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor first quotient ideal kernel multiplication naturality",
+   "results": "Ideal.to_quotient_square_comp_toCotangent; TensorProduct.tensorQuotEquivQuotSMul_comp_mk; LinearMap.ker_tensorProductMk. No connecting formula or change-of-rings Tor compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor'",
+   "results": "CategoryTheory.Tor', isZero_Tor'_succ_of_projective, Tor'_obj_obj, Tor'_obj_map, Tor'_map_app. No connecting formula or cross-ring compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n Tor'|Tor\\b|tor_ideal lean/WeilConjectures lean/Sheaf/RingTheory Mathlib/CategoryTheory/Monoidal/Tor.lean; rg -l connecting.*Tor|Tor.*connecting|Tor.*naturality|first Tor dag/nodes",
+   "results": "Tor.lean defines Tor and projective vanishing only. Existing TorKernelBoundary modules concern a fixed ring and Tor in the other variable, not the formula from the supplied free resolution. TorLongExactFirstVariable is existential, without this cycle formula. No duplicate of either new statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "connecting|naturality|quotient",
+   "results": "Second reading: Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/End.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean. Inspected candidate types: quotient tensor and cotangent results do not give the asserted Tor formula or cross-ring comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Ideal.Quotient.mk",
+   "results": "Second reading: TensorProduct.quotTensorEquivQuotSMul_mk_tmul, TensorProduct.tensorQuotEquivQuotSMul_tmul_mk, Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, Algebra.TensorProduct.quotIdealMapEquivQuotTensor_mk, Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk, Algebra.TensorProduct.tensorQuotientEquiv_apply_tmul, Algebra.TensorProduct.tensorQuotientEquiv_symm_apply_tmul, Algebra.TensorProduct.quotientTensorEquiv_apply_tmul. Inspected candidate types: quotient tensor and cotangent results do not give the asserted Tor formula or cross-ring comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology tensor quotient ideal connecting homomorphism kernel scalar multiplication",
+   "results": "Second reading: Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq, Algebra.Extension.tensorCotangentInvFun_smul_mk, KaehlerDifferential.cotangentComplexBaseChange_tmul, tensorKaehlerQuotKerSqEquiv_tmul_D, Algebra.Generators.H1Cotangent.δ, Algebra.Extension.contangentEquiv_tmul, KaehlerDifferential.D_tensorProductTo. Inspected candidate types: quotient tensor and cotangent results do not give the asserted Tor formula or cross-ring comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorIdealKernelNaturality",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Parent ideal-kernel naturality node, Steps 5–6; Stacks Algebra, functoriality in Section 00LY, Remark 00M6, and comparison Tag 00LS (https://stacks.math.columbia.edu/tag/00LS).",
+   "via": [
+    "lem-weil-pbc-tor-ideal-kernel-naturality",
+    "lem-weil-pbc-flat-another-variant-local-criterion",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorIdealComparisonCompatibility",
+  "file": "lean/Sheaf/RingTheory/TorIdealComparisonCompatibility.lean",
+  "declaration": "ModuleCat.exists_tor_ideal_comparison_compatibility",
+  "statement": "theorem exists_tor_ideal_comparison_compatibility\n    {R A : Type u} [CommRing R] [CommRing A]\n    (f : R →+* A) (I : Ideal R) (J : Ideal A) (hJ : J = Ideal.map f I)\n    (M : ModuleCat.{u} R) (N : ModuleCat.{u} A)\n    (g : M →+ N) (hg : ∀ (r : R) (x : M), g (r • x) = f r • g x)\n    (P : ProjectiveResolution M) (G : ProjectiveResolution N)\n    (hP : ∀ n : ℕ, Module.Free R (P.complex.X n))\n    (hG : ∀ n : ℕ, Module.Free A (G.complex.X n))\n    (δR : (((Tor' (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ I))) →ₗ[R] (I ⊗[R] M))\n    (δA : (((Tor' (ModuleCat.{u} A) 1).obj N).obj (ModuleCat.of A (A ⧸ J))) →ₗ[A] (J ⊗[A] N))\n    (θ : (I ⊗[R] M) →+ (J ⊗[A] N))\n    (hθ : ∀ (a : I) (x : M) (b : J), (b : A) = f a →\n      θ (a ⊗ₜ[R] x) = b ⊗ₜ[A] g x)\n    (hδA : Function.Injective δA)\n    (hformulaR : ∀ (z : ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸\n        I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex).cycles 1)\n        (y : P.complex.X 1) (k : ℕ) (a : Fin k → I) (p : Fin k → P.complex.X 0),\n        ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n          (ComplexShape.down ℕ)).obj P.complex).iCycles 1 z = y ⊗ₜ[R] (1 : R ⧸ I) →\n        P.complex.d 1 0 y = ∑ j, (a j : R) • p j →\n        δR ((P.isoLeftDerivedObj ((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ I)))\n          1).inv (((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸\n          I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex).homologyπ 1 z)) =\n          ∑ j, a j ⊗ₜ[R] P.π.f 0 (p j))\n    (hformulaA : ∀ (z : ((((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸\n        J))).mapHomologicalComplex (ComplexShape.down ℕ)).obj G.complex).cycles 1)\n        (y : G.complex.X 1) (k : ℕ) (b : Fin k → J) (p : Fin k → G.complex.X 0),\n        ((((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸ J))).mapHomologicalComplex\n          (ComplexShape.down ℕ)).obj G.complex).iCycles 1 z = y ⊗ₜ[A] (1 : A ⧸ J) →\n        G.complex.d 1 0 y = ∑ j, (b j : A) • p j →\n        δA ((G.isoLeftDerivedObj ((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸ J)))\n          1).inv (((((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸\n          J))).mapHomologicalComplex (ComplexShape.down ℕ)).obj G.complex).homologyπ 1 z)) =\n          ∑ j, b j ⊗ₜ[A] G.π.f 0 (p j))\n    (φ₀ : ∀ n : ℕ, (P.complex.X n) →+ (G.complex.X n))\n    (hφ₀ : ∀ (n : ℕ) (r : R) (p : P.complex.X n), φ₀ n (r • p) = f r • φ₀ n p)\n    (hdφ₀ : ∀ (n : ℕ) (p : P.complex.X (n + 1)),\n      G.complex.d (n + 1) n (φ₀ (n + 1) p) = φ₀ n (P.complex.d (n + 1) n p))\n    (hπφ₀ : ∀ p : P.complex.X 0, G.π.f 0 (φ₀ 0 p) = g (P.π.f 0 p)) :\n    ∃ τ : (((Tor' (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ I))) →+ (((Tor'\n        (ModuleCat.{u} A) 1).obj N).obj (ModuleCat.of A (A ⧸ J))),\n      (∀ φ : ∀ n : ℕ, (P.complex.X n) →+ (G.complex.X n),\n        (∀ (n : ℕ) (r : R) (p : P.complex.X n), φ n (r • p) = f r • φ n p) →\n        (∀ (n : ℕ) (p : P.complex.X (n + 1)),\n          G.complex.d (n + 1) n (φ (n + 1) p) = φ n (P.complex.d (n + 1) n p)) →\n        (∀ p : P.complex.X 0, G.π.f 0 (φ 0 p) = g (P.π.f 0 p)) →\n        ∃ ψ :\n          ((forget₂ (ModuleCat.{u} R) AddCommGrpCat).mapHomologicalComplex\n            (ComplexShape.down ℕ)).obj ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R\n              ⧸ I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex) ⟶\n          ((forget₂ (ModuleCat.{u} A) AddCommGrpCat).mapHomologicalComplex\n            (ComplexShape.down ℕ)).obj ((((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A\n              ⧸ J))).mapHomologicalComplex (ComplexShape.down ℕ)).obj G.complex),\n          (∀ (n : ℕ) (p : P.complex.X n) (r : R),\n            ψ.f n (p ⊗ₜ[R] Ideal.Quotient.mk I r) =\n              φ n p ⊗ₜ[A] Ideal.Quotient.mk J (f r)) ∧\n          (∀ (z : ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸\n            I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex).cycles 1)\n            (w : ((((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸\n              J))).mapHomologicalComplex (ComplexShape.down ℕ)).obj G.complex).cycles 1),\n            ψ.f 1 (((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸\n              I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex).iCycles 1 z) =\n              ((((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸\n                J))).mapHomologicalComplex (ComplexShape.down ℕ)).obj G.complex).iCycles 1 w →\n            τ ((P.isoLeftDerivedObj ((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸\n              I))) 1).inv (((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸\n              I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex).homologyπ 1 z)) =\n              ((G.isoLeftDerivedObj ((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸\n                J))) 1).inv (((((tensoringRight (ModuleCat.{u} A)).obj (ModuleCat.of A (A ⧸\n                J))).mapHomologicalComplex (ComplexShape.down ℕ)).obj G.complex).homologyπ 1 w)))) ∧\n      (∀ t : (((Tor' (ModuleCat.{u} R) 1).obj M).obj (ModuleCat.of R (R ⧸ I))), \n        δA (τ t) = θ (δR t))",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T082417-L-1649508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T082417-L-1649508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11720,3 +11720,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitSectionRootPresentation (stage 3; reviewer PASS; first push; landing 20261013T082416-L-1649049 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:24 L: merged deliver/U3/Sheaf.Algebra.ExtOneDirectSum (stage 3; reviewer PASS; first push; landing 20261013T082416-L-1649222 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:24 L: merged deliver/U3/Sheaf.AlgebraicGeometry.AffineSourceGeometricIrreducibilityShrink (stage 3; reviewer PASS; first push; landing 20261013T082417-L-1649396 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:24 L: merged deliver/U3/Sheaf.RingTheory.TorIdealKernelNaturality (stage 3; reviewer PASS; first push; landing 20261013T082417-L-1649508 (interface); batch 20261013T082326; modules 3; new nodes 2)
