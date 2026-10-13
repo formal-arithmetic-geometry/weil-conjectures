@@ -6,12 +6,12 @@ Authors: SHEAF group G4
 module
 
 public import Sheaf.Paper.ModuleCupNaiveMap
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
-import Sheaf.Paper.ModuleCupGlobalTensorPullback
+public import Sheaf.Paper.ModuleCupGlobalTensorPullback
+import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import Sheaf.Paper.ModuleCupAdjunctionPolygon
 import Sheaf.Paper.ModuleCupGlobalCounitComparison
 import Sheaf.Paper.ModuleCupGlobalTensorComparison
 
@@ -62,8 +62,7 @@ local instance : Abelian.HasFunctorialFlatResolution
 /-- The canonical lax tensor comparison of localization, specialized to module sheaves.
 This names the existing instance so the compatibility calculation and its use share
 one transparent interface. -/
-@[instance_reducible]
-def moduleCup_sourceLax :
+abbrev moduleCup_sourceLax :
     (DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))).LaxMonoidal :=
   inferInstance
 
@@ -87,6 +86,20 @@ def moduleCup_comparisonNatTrans :
     (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))) S.rightDerivedFunctor).hom
 
+attribute [local irreducible] CategoryTheory.Adjunction.derived
+  CategoryTheory.Functor.rightDerivedFunctor
+  moduleCup_naiveMap moduleCup_naiveMapComponent
+
+
+-- Share the tensor instances when checking the theorem and its proof.
+attribute [local instance 2000] globalPullbackCommRing globalPullbackMonoidal
+  globalPullbackSymmetric globalPullbackColimits globalPullbackPreadditive
+  globalPullbackClosed globalPullbackFlatResolution
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option maxHeartbeats 300000 in
+-- Matching the canonical sheaf and derived tensor instances needs extra heartbeats.
 /-- Construct the natural derived cup and calculate it with a K-injective target.
 Source: Stacks, Tag 0FP3, Lemma 20.31.3, and Tag 0B68 (relative cup by adjunction).
 (blueprint: lem-sc-module-cup-kinjective-target)
@@ -131,7 +144,48 @@ theorem moduleCup_exists_kinjective_target_pairing :
               DerivedCategory.Q.map φ) =
           Functor.LaxMonoidal.μ DerivedCategory.Q (T.obj K) (T.obj L) ≫
             DerivedCategory.Q.map (moduleCup_naiveMap X K L ≫ T.map φ) ≫
-              (moduleCup_comparisonNatTrans X).app I := by sorry
+              (moduleCup_comparisonNatTrans X).app I := by
+  dsimp only
+  obtain ⟨e, he, P, hP, hm, hadd, mon, adj, hcounit, D, α, hD, habs, hflat,
+    δ, hδ, hflatδ⟩ := globalRingedSpace_derivedTensor_pullback_comparison X
+  have := hadd
+  let := mon
+  have := adj.isLeftAdjoint
+  have := hD
+  let S := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  let R := S.rightDerivedFunctor
+  have := habs R
+  have : (R ⋙ D).IsRightDerivedFunctor
+      (Functor.whiskerRight S.rightDerivedFunctorUnit D ≫
+        (Functor.associator _ _ _).hom)
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) :=
+    (HomotopyCategory.KInjectives.localizerMorphism
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+      |>.isRightDerivedFunctor_comp_of_isRightDerivabilityStructure
+        _ (fun I ↦ (HomotopyCategory.KInjectives.localizerMorphism_derives
+          _).isIso_of_isRightDerivedFunctor _ I) _
+  let dAdj : D ⊣ R := (adj.mapHomotopyCategory (ComplexShape.up ℤ)).derived
+    (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
+    (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) α S.rightDerivedFunctorUnit
+  let μ := fun A B ↦ dAdj.homEquiv (R.obj A ⊗ R.obj B) (A ⊗ B)
+    ((δ (R.obj A) (R.obj B)).hom ≫ (dAdj.counit.app A ⊗ₘ dAdj.counit.app B))
+  refine ⟨μ, ?_, ?_⟩
+  · intro A A' B B' f g
+    apply dAdj.homEquiv_naturality_left_square
+    rw [← Category.assoc,
+      hδ (R.obj A) (R.obj A') (R.obj B) (R.obj B') (R.map f) (R.map g)]
+    simp only [Category.assoc, tensorHom_comp_tensorHom]
+    have hf : D.map (R.map f) ≫ dAdj.counit.app A' = dAdj.counit.app A ≫ f :=
+      dAdj.counit.naturality f
+    have hg : D.map (R.map g) ≫ dAdj.counit.app B' = dAdj.counit.app B ≫ g :=
+      dAdj.counit.naturality g
+    exact congrArg (fun t ↦ (δ (R.obj A) (R.obj B)).hom ≫ t)
+      (congrArg₂
+        (fun (a : D.obj (R.obj A) ⟶ A') (b : D.obj (R.obj B) ⟶ B') ↦ a ⊗ₘ b) hf hg)
+  · exact moduleCup_adjunction_polygon X (cupSourceLax X) (by rfl)
+      (moduleCup_comparisonNatTrans X) (by rfl) P adj D α dAdj δ hδ
+      (globalRingedSpace_tensor_comparison_diagram X P D α δ hδ hflatδ)
+      (globalRingedSpace_derivedCounit_comparison X P D α adj) hcounit μ (by rfl)
 
 end
 end AlgebraicGeometry.Scheme.Modules

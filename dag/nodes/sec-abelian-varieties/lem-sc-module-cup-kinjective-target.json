@@ -17,42 +17,32 @@
  ],
  "proof": [
   {
-   "text": "For the ringed-space morphism to (pt,Γ(X,O_X)), use the derived pullback/direct-image adjunction of lem-pc-ringed-spaces-derived-adjoint-general, transported through def-pc-global-derived-rhom. Use the canonical bifunctorial tensor isomorphism of lem-sc-module-cup-global-tensor-pullback. This node constructs ordinary pullback via point evaluation, inverse image and change of rings, fixes its tensor constraint by the ordinary evaluation equation, and normalizes the derived tensor isomorphism on K-flat representatives. Transpose that tensor comparison followed by the tensor of the counits to define μ. Naturality of the counits and of the comparison proves naturality of μ.",
+   "text": "Obtain the actual ordinary pullback, its adjunction and ordinary tensor/counit normalization, together with the absolute left derived pullback, comparison α and normalized natural tensor isomorphisms δ, from lem-sc-module-cup-global-tensor-pullback. The K-injective right derivability structure proves absoluteness of RΓ after D, so Mathlib Adjunction.derived induces D ⊣ RΓ. Define μ in this theorem proof by the Hom-equivalence transpose of δ followed by the tensor of the induced counits. Naturality follows from Adjunction.homEquiv_naturality_left_square, the naturality of δ and the counit, and tensorHom_comp_tensorHom. No arbitrary existential data is installed in a definition.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "def-pc-global-derived-rhom",
     "lem-sc-module-cup-global-tensor-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Fix K,L,I,φ with I K-injective. Compute R(QI) by QΓ(I). Resolve the two complexes of global sections by K-flat complexes and take the derived pullback transpose of each displayed composite. By lem-sc-module-cup-global-counit-comparison the counit of the induced derived adjunction composed with the right-derived unit equals the derived-to-ordinary pullback comparison followed by ordinary evaluation. Its absolute-derived-functor hypotheses hold by the absolute K-flat comparison in lem-sc-module-cup-global-tensor-pullback and by the K-injective construction of RΓ. lem-sc-module-cup-global-tensor-comparison supplies the full tensor polygon for arbitrary complexes, with the same comparison maps and the K-flat normalization furnished by lem-sc-module-cup-global-tensor-pullback. Both transposes on each summand are ordinary evaluation on tensor sections, followed by φ. The coproduct formula of lem-sc-module-cup-naive-map-chain identifies this with the naive pairing. The adjunction Hom equivalence is injective, so the transposes give equality. Transport back by β_I gives the displayed equation. This is the polygon argument of Tag 0FP3 with its final map composed with φ; the K-injective target ensures every final morphism is represented by an actual chain map.",
+   "text": "Apply lem-sc-module-cup-global-tensor-comparison to extend the K-flat normalization to the full tensor polygon. Apply lem-sc-module-cup-global-counit-comparison to the induced derived adjunction to obtain its counit square. Together with the ordinary normalization, these are exactly the hypotheses of lem-sc-module-cup-adjunction-polygon for the explicit μ constructed in step 1. Supply moduleCup_comparisonNatTrans as the polygon’s β argument and the constructed μ as its pairing argument, with both canonical normalization equations proved by reflexivity. Its conclusion is definitionally the target compatibility. Pass the local localization lax instance explicitly to the polygon; its canonical equality is reflexivity, and δ naturality is hδ from the pullback data.",
    "uses": [
-    "lem-sc-module-cup-naive-map-chain",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product",
-    "def-sc-ringed-space-module-cohomology",
+    "lem-sc-module-cup-global-tensor-comparison",
     "lem-sc-module-cup-global-counit-comparison",
-    "lem-sc-module-cup-global-tensor-comparison"
+    "lem-sc-module-cup-adjunction-polygon"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "def-pc-global-derived-rhom",
-  "lem-sc-module-cup-naive-map-chain",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-sc-ringed-space-module-cohomology",
   "lem-sc-module-cup-global-tensor-pullback",
+  "lem-sc-module-cup-global-tensor-comparison",
   "lem-sc-module-cup-global-counit-comparison",
-  "lem-sc-module-cup-global-tensor-comparison"
+  "lem-sc-module-cup-adjunction-polygon"
  ],
  "proof_origin": {
-  "by": "G4 stage-3 worker, following the source",
+  "by": "A2 repair worker, following the source",
   "document": "https://stacks.math.columbia.edu/tag/0FP3",
-  "place": "Lemma 20.31.3 and its proof, with the global specialization and a K-injective target; repair of X-c21c2 C1/C4: explicit global tensor and counit comparison nodes"
+  "place": "Explicit adjunction transpose and proved naturality; remaining compatibility polygon split off with the comparison equations as hypotheses"
  },
  "status": "split",
  "created": {
@@ -135,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-db1a8",
-  "group": "G4",
+  "reviewer": "X-c2c7f",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261013T153500-L-1085119",
+  "landing": "20261013T234503-L-2160123",
   "kind": "interface",
-  "note": "independent Codex review: Delivered six-module set matches its DAG statements and report; all delivered modules and direct importer ModuleCupEqualDerivedMapsClass compile cleanly, with permitted sorryAx only through named open theorems."
+  "note": "independent Codex review: Delivered files match their DAG statements and recorded change; all modules and the required direct importer compile cleanly, with only permitted sorryAx in the named polygon theorem."
  }
 }
