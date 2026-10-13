@@ -15,41 +15,41 @@
  ],
  "proof": [
   {
-   "text": "The local-spectrum property gives c^{-1}V=top; the pullback-square open identity gives W=top. Hence restriction on cohomology is an isomorphism.",
+   "text": "Mathlib Scheme.range_fromSpecStalk and specialization membership show c inverse image V is top. flatBaseChangeOpenEquality then makes W top.",
    "uses": [
-    "lem-weil-pbc-spec-local-ring-canonical-morphism",
-    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove restriction to top is an isomorphism. Pushforward along the top inclusion is an equivalence, and its restriction unit is invertible. In the concrete cohomology-map data the augmentation square makes beta a quasi-isomorphism. Both complexes are degreewise injective, so Mathlib quasiIso_iff_of_injective makes beta a homotopy equivalence. Global sections sends this to a homotopy equivalence; every factor of the recorded map is invertible.",
+   "uses": [
     "def-weil-pbc-module-cohomology-fmap"
    ],
    "elementary": false
   },
   {
-   "text": "Lift xi uniquely to a global class eta. Expand the specified map b and D.targetClass. The target section components and augmentation force their comparisons to be the same restriction map on cohomology: comparison lifts between injective resolutions are homotopic, and homotopies induce the same homology maps. Thus b eta = germ(D.targetClass p xi).",
+   "text": "Apply the inverse of this restriction map to xi, giving eta with r eta = xi. Apply the restriction compatibility theorem and replace r eta with xi by congruence.",
    "uses": [
-    "def-weil-pbc-local-direct-image-stalk-class-map",
-    "def-weil-pbc-flat-base-change-open-choices",
-    "def-weil-pbc-flat-base-change-resolution-construction",
-    "def-weil-pbc-module-cohomology-fmap"
+    "lem-weil-pbc-local-direct-image-stalk-class-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Substitute e eta=b eta, apply e.symm, and restrict eta to W to recover xi.",
+   "text": "Use the pointwise equation e eta=b eta, apply e.symm to the compatibility equality, and apply restriction to recover xi.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-flat-base-change-open-choices",
-  "def-weil-pbc-flat-base-change-resolution-construction",
-  "def-weil-pbc-local-direct-image-stalk-class-map",
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+  "lem-weil-pbc-local-direct-image-stalk-class-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01E4",
-  "place": "Lemma 20.7.3 (Tag 01E4); Remark 20.14.2 (Tag 01FB), computing the map by augmented resolution comparisons; Tag 02OD for the local-spectrum open equality.; detailed construction and reduction by S3, 2026-10-13."
+  "place": "Q1 stage-3 reduction, 2026-10-13: restriction invertibility proved directly with Mathlib; resolution class compatibility split off."
  },
  "mathlib_searches": [
   {
@@ -131,12 +131,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T230802-L-1910647",
+  "landing": "20261013T022422-L-3216867",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
