@@ -10,7 +10,8 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapLifts
+import Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility
 
 /-! # Local finite-presentation descent data
 
@@ -26,8 +27,45 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+private theorem cancel_recovery
+    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
+    (A : C ⥤ D) (B : D ⥤ E) (L : C ⥤ E) (e : L ≅ A ⋙ B) (T : E ⥤ H)
+    {F G : C} (φ : L.obj F ⟶ L.obj G) (α : A.obj F ⟶ A.obj G)
+    (h : T.map (B.map α) = T.map (e.inv.app F ≫ φ ≫ e.hom.app G)) :
+    T.map (e.hom.app F ≫ B.map α) = T.map (φ ≫ e.hom.app G) := by
+  rw [T.map_comp, h, ← T.map_comp]
+  simp only [Iso.hom_inv_id_app_assoc]
+
+set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem local_recovery
+    {X Y : Scheme.{u}} (p : Y ⟶ X) (U : X.OpenCover.{u})
+    {F G : X.Modules}
+    (r : ∀ a, (Scheme.Modules.pullback (U.f a)).obj F ⟶
+      (Scheme.Modules.pullback (U.f a)).obj G)
+    (θ : (Scheme.Modules.tensorPullback p).obj F ⟶
+      (Scheme.Modules.tensorPullback p).obj G)
+    (hr : ∀ a,
+      let t := Scheme.Modules.openCoverTensorPullbackComparison p U a
+      t.inv.app F ≫ (Scheme.Modules.pullback (U.pullbackHom p a)).map (r a) ≫
+        t.hom.app G = (Scheme.Modules.pullback ((U.pullback₁ p).f a)).map θ)
+    (α : F ⟶ G) (hα : ∀ a, (Scheme.Modules.pullback (U.f a)).map α = r a) :
+    ∀ a, (Scheme.Modules.pullback ((U.pullback₁ p).f a)).map
+        ((Scheme.Modules.tensorPullback p).map α) =
+      (Scheme.Modules.pullback ((U.pullback₁ p).f a)).map θ := by
+  intro a
+  let t := Scheme.Modules.openCoverTensorPullbackComparison p U a
+  calc
+    _ = t.inv.app F ≫ (Scheme.Modules.pullback (U.pullbackHom p a)).map
+        ((Scheme.Modules.pullback (U.f a)).map α) ≫ t.hom.app G := by
+      have hn := t.hom.naturality α
+      dsimp only [Functor.comp_map] at hn
+      rw [hn, Iso.inv_hom_id_app_assoc]
+    _ = _ := by rw [hα a]; exact hr a
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Local maps between fixed models descend compatibly on a cover.
 Source: Stacks Project, Limits, Tag 01ZR, first proof, map descent on overlaps.
 (blueprint: lem-pc-fp-local-map-datum).
@@ -106,6 +144,25 @@ theorem exists_finitePresentation_local_map_datum
             ∀ α : A.obj Fj ⟶ A.obj Gj, Q.map α = ψ →
               ∀ a, (Scheme.Modules.pullback (V.f a)).map (e.hom.app Fj ≫ B.map α) =
                 (Scheme.Modules.pullback (V.f a)).map (φ ≫ e.hom.app Gj)) := by
-  sorry
+  classical
+  intro j hij Fj Gj hF hFq hG hGq φ
+  obtain ⟨k, hjk, hk⟩ := exists_finitePresentation_local_map_lifts
+    R c hc i f j hij Fj Gj hF hFq hG hGq φ
+  extract_lets (descend := false) A₀ B₀ at hk
+  rcases hk with ⟨e₀, he₀, U₀, hfinite, haffine, r₀, hr₀⟩
+  obtain ⟨l, hkl, hl⟩ := finitePresentation_local_maps_eventually_compatible
+    R c hc i f j hij Fj Gj hF hFq hG hGq φ k hjk
+    e₀ he₀ U₀ hfinite haffine r₀ hr₀
+  extract_lets (descend := false) hjl A B e q z U Q p V r at hl
+  rcases hl with ⟨haffine', ⟨ψ, hψ⟩, hr⟩
+  refine ⟨l, hjl, e, rfl, U, hfinite, haffine', ψ, ?_⟩
+  intro α hα a
+  have hcomponents : ∀ b, (Scheme.Modules.pullback (U.f b)).map α = r b := by
+    intro b
+    exact (congrArg (fun β ↦ β.hom b) hα).trans (hψ b)
+  apply cancel_recovery (F := Fj) (G := Gj) A B _ e
+    (Scheme.Modules.pullback (V.f a)) φ α
+  exact local_recovery (F := A.obj Fj) (G := A.obj Gj) p U r
+    (e.inv.app Fj ≫ φ ≫ e.hom.app Gj) hr α hcomponents a
 
 end AlgebraicGeometry

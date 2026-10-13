@@ -1,0 +1,101 @@
+{
+ "id": "def-pc-open-cover-tensor-pullback-comparison",
+ "kind": "definition",
+ "title": "Open-cover restriction and tensor pullback comparison",
+ "statement": "For a scheme morphism p:Y→X [def-pc-scheme], an open cover U of X, and its member a, define the natural isomorphism between restriction to U_a followed by ordinary pullback along the base-changed chart map and tensor pullback [def-pc-module-pullback] along p followed by restriction to its pulled-back chart. Construct it by ordinary pullback composition, the chart commutativity equation, and uniqueness of the left adjoint to pushforward [lem-pc-module-pullback-adjunction].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tags 0095 and 0096; uniqueness of adjoints"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local morphisms of finitely presented sheaves descend along inverse limits of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local morphisms between finitely presented quasicoherent sheaves descend to a finite stage on an affine cover",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*map.*descent|pullbackComp|leftAdjointUniq",
+   "results": "Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/Basic.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Pullbacks.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationLocalMapDatum",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation: local finite-presentation map lifting and agreement on overlaps before gluing",
+   "via": [
+    "lem-pc-fp-local-map-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenCoverTensorPullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverTensorPullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.openCoverTensorPullbackComparison",
+  "statement": "def openCoverTensorPullbackComparison {X Y : Scheme.{u}} (p : Y ⟶ X) (U : X.OpenCover.{u}) (a : U.I₀) : pullback (U.f a) ⋙ pullback (U.pullbackHom p a) ≅ tensorPullback p ⋙ pullback ((U.pullback₁ p).f a)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T140823-L-315298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261013T140823-L-315298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

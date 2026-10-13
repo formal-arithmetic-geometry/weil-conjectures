@@ -16,27 +16,36 @@
  },
  "proof": [
   {
-   "text": "On a finite affine cover of Xi (or Xj for fixed models), identify base changes of coordinate rings with tensor products and the limit ring with their directed colimit. Apply the affine finite-presentation descent theorem to the local objects or maps. For a preorder pass to its partial-order quotient; the fixed i provides nonemptiness. Lift finite generators, relation matrices, and maps at a common later stage.",
+   "text": "Obtain local component lifts on a finite affine cover.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-local-map-lifts"
    ],
    "elementary": false
   },
   {
-   "text": "For map data, cover pairwise overlaps by finitely many affines and apply the equality clause so local lifted maps agree. Pass to one later stage for this finite collection. Form their descent-data morphism psi. On the limit cover their components agree with phi through the canonical comparison, giving the asserted equality for any alpha with components psi. Only the local maps and compatibility equations are constructed.",
+   "text": "Pull the given components to a later stage where they form the component family of a descent-data morphism psi, and recovery persists.",
    "uses": [
-    "lem-pc-fp-module-map-descent-affine"
+    "lem-pc-fp-local-map-overlap-compatibility"
    ],
    "elementary": false
+  },
+  {
+   "text": "Equality Q.map alpha = psi gives equality of each component. Naturality of the restriction/tensor comparison transports these equalities to the pulled-back components. Cancel the canonical composition isomorphism to obtain the required recovery equation.",
+   "uses": [
+    "def-pc-open-cover-tensor-pullback-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-fp-module-map-descent-affine"
+  "lem-pc-fp-local-map-lifts",
+  "lem-pc-fp-local-map-overlap-compatibility",
+  "def-pc-open-cover-tensor-pullback-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZR, first proof; details of the finite overlap construction expanded by H3 following the parent node"
+  "place": "Tag 01ZR first proof, split affine map lifting and eventual overlap agreement; Lean assembly by P2"
  },
  "mathlib_searches": [
   {
@@ -105,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-1df3a",
-  "group": "H3",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T100005-L-2462316",
+  "landing": "20261013T140823-L-315298",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered statements and proofs with their nodes and Stacks 01ZR/05N7; verified original-signature equivalence, four modules and both direct importers compile cleanly, and axioms are permitted with the two documented theorem holes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
