@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.DirectSum.Module
+import Sheaf.Algebra.Homology.TensorHomologyPairing
+import Sheaf.Algebra.Homology.TensorHomologyMapBijective
 
 /-!
 # The field-linear Kunneth isomorphism
@@ -71,6 +73,30 @@ theorem tensor_kunneth {k : Type u} [Field k]
               (mapBifunctor A B (curriedTensor (ModuleCat.{u} k))
                 (ComplexShape.up ℤ)).homologyπ n z :=
   by
-  sorry
+  classical
+  let T := mapBifunctor A B (curriedTensor (ModuleCat.{u} k)) (ComplexShape.up ℤ)
+  let S := {pq : ℤ × ℤ // pq.1 + pq.2 = n}
+  choose c hc using fun s : S ↦ tensor_homology_pairing A B s.1.1 s.1.2 n s.2
+  let f : (⨁ s : S, (A.homology s.1.1) ⊗[k] (B.homology s.1.2)) →ₗ[k]
+      T.homology n := DirectSum.toModule k S _ (fun s ↦ TensorProduct.lift (c s))
+  have hf : ∀ (s : S) (a : A.cycles s.1.1) (b : B.cycles s.1.2)
+      (z : T.cycles n),
+      T.iCycles n z =
+        ιMapBifunctor A B (curriedTensor (ModuleCat.{u} k)) (ComplexShape.up ℤ)
+          s.1.1 s.1.2 n s.2 ((A.iCycles s.1.1 a) ⊗ₜ[k] (B.iCycles s.1.2 b)) →
+      f (DirectSum.lof k _ _ s
+        ((A.homologyπ s.1.1 a) ⊗ₜ[k] (B.homologyπ s.1.2 b))) = T.homologyπ n z := by
+    intro s a b z hz
+    obtain ⟨z', hz', hc'⟩ := hc s a b
+    have hzz : z' = z := by
+      apply (ModuleCat.mono_iff_injective (T.iCycles n)).mp inferInstance
+      exact hz'.trans hz.symm
+    subst z'
+    simpa only [f, DirectSum.toModule_lof, TensorProduct.lift.tmul] using hc'
+  refine ⟨LinearEquiv.ofBijective f
+    (tensor_homology_map_bijective A B hA hB n f hf), ?_⟩
+  intro s a b
+  obtain ⟨z, hz, _⟩ := hc s a b
+  exact ⟨z, hz, hf s a b z hz⟩
 
 end HomologicalComplex
