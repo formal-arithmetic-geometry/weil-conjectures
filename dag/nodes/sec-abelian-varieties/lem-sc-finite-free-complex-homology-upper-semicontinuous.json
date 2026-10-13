@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "Because $K$ is bounded and each term is finite free, choose bases of $K^{i-1},K^i,K^{i+1}$; the differentials $d^{i-1}$ and $d^i$ are represented by finite matrices $M_{i-1},M_i$ over $A$, and $K\\otimes_A\\kappa(\\mathfrak p)$ in these degrees is the complex of finite-dimensional $\\kappa(\\mathfrak p)$-vector spaces with matrices $M_{i-1}(\\mathfrak p),M_i(\\mathfrak p)$ (entries reduced at $\\mathfrak p$). Put $c=\\operatorname{rank}K^i$ and $r_j(\\mathfrak p)=\\operatorname{rank}M_j(\\mathfrak p)$ [def-weil-matrix-rank]. By [lem-weil-pbc-idempotent-charpoly-rank-nullity] applied to $d^i\\otimes\\kappa(\\mathfrak p)$, $\\dim\\ker=c-r_i(\\mathfrak p)$; the image of $d^{i-1}\\otimes\\kappa(\\mathfrak p)$ is a subspace of this kernel of dimension $r_{i-1}(\\mathfrak p)$, and applying the same rank-nullity statement to the quotient map from the kernel onto $H^i$ gives $b_i(\\mathfrak p)=c-r_i(\\mathfrak p)-r_{i-1}(\\mathfrak p)$.",
+   "text": "Choose finite bases of $K^{i-1},K^i,K^{i+1}$ by reindexing the finite chosen basis index sets to $\\operatorname{Fin}(a),\\operatorname{Fin}(c),\\operatorname{Fin}(b)$. Let $M,N$ be the outgoing and incoming differential matrices. The private proved helper finiteFreeComplex_fibre_rank_formula transports the tensor-product bases through the scalar-extension equivalence and applies LinearMap.toMatrix_baseChange. Thus the residue-field matrices are $M(\\mathfrak p),N(\\mathfrak p)$ [def-weil-matrix-rank]. The source library's ShortComplex.finrank_homology_add_finrank_range_add_finrank_range applies rank-nullity [lem-weil-pbc-idempotent-charpoly-rank-nullity] to the outgoing map and the quotient of its kernel by the incoming image. Transport through homologyIsoSc' and rank_eq_finrank_range_toLin gives the additive identity $b_i(\\mathfrak p)+\\operatorname{rank}M(\\mathfrak p)+\\operatorname{rank}N(\\mathfrak p)=c$. Only three terms are needed; the zero ring is handled since its prime spectrum is empty.",
    "uses": [
     "def-weil-matrix-rank",
     "lem-weil-pbc-idempotent-charpoly-rank-nullity"
@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "Fix a matrix $M$ over $A$ and an integer $s\\ge0$. By [def-weil-matrix-rank], $\\operatorname{rank}M(\\mathfrak p)$ is the largest $k$ with a nonzero $k\\times k$ minor of $M(\\mathfrak p)$; since a nonzero $k\\times k$ minor with $k\\ge s$ has, by Laplace expansion, a nonzero $s\\times s$ sub-minor, $\\operatorname{rank}M(\\mathfrak p)\\ge s$ iff some $s\\times s$ minor of $M(\\mathfrak p)$ is nonzero (the $0\\times0$ minor is $1$). The determinant commutes with the ring map $A\\to\\kappa(\\mathfrak p)$, so an $s\\times s$ minor $\\Delta$ of $M$ reduces to a nonzero element iff $\\Delta\\notin\\mathfrak p$, i.e. $\\mathfrak p\\in D(\\Delta)$. Hence $\\{\\mathfrak p:\\operatorname{rank}M(\\mathfrak p)\\ge s\\}$ is the finite union of $D(\\Delta)$ over the $s\\times s$ minors $\\Delta$ of $M$ (empty if there are none). Intersections of two such finite unions are finite unions of principal opens since $D(f)\\cap D(g)=D(fg)$.",
+   "text": "For each natural number $s$, the private proved helper matrix_rank_locus applies the source library's Matrix.le_rank_map_iff to a finite matrix [def-weil-matrix-rank]. Its rank at a prime is at least $s$ exactly when some $s$ by $s$ minor has nonzero image in the residue field. Ideal.algebraMap_residueField_eq_zero identifies this with the prime not containing its determinant. The determinants of all pairs of functions from Fin s into the row and column index sets form a finite set, so the rank locus is a finite union of principal opens. This includes the size-zero determinant $1$; repeated rows or columns simply give zero determinants. The private proved helper principal_union_inter takes the finite image of products of two determinant families and uses $D(fg)=D(f)\\cap D(g)$.",
    "uses": [
     "def-weil-matrix-rank"
    ],
@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "By Step 1, $b_i(\\mathfrak p)<r$ iff $r_i(\\mathfrak p)+r_{i-1}(\\mathfrak p)>c-r$. Each $r_j(\\mathfrak p)$ lies in $\\{0,\\dots,N_j\\}$ with $N_j$ the smaller dimension of $M_j$, so $\\{\\mathfrak p:b_i(\\mathfrak p)<r\\}$ is the finite union over pairs $(a,b)$ with $0\\le a\\le N_i$, $0\\le b\\le N_{i-1}$, $a+b>c-r$ of $\\{r_i\\ge a\\}\\cap\\{r_{i-1}\\ge b\\}$ (take $(a,b)=(r_i(\\mathfrak p),r_{i-1}(\\mathfrak p))$ for one inclusion). By Step 2 each term, hence the union, is a finite union of principal opens $D(f)$; such a set is open, and quasi-compact because each $D(f)$ is. Thus $b_i$ is upper semicontinuous.",
+   "text": "The additive identity of Step 1 bounds both adjacent fibre ranks by $c$. For an integer threshold $r$, take the finite set of pairs $(x,y)\\in\\{0,\\ldots,c\\}^2$ satisfying $c<r+x+y$. The sublevel set $\\{b_i<r\\}$ equals the union, over these pairs, of the intersections of the rank loci $\\{\\operatorname{rank}M\\ge x\\}$ and $\\{\\operatorname{rank}N\\ge y\\}$. One inclusion uses the pair of actual ranks; the other uses the two lower rank bounds and the dimension identity. Lean's omega checks these natural-number and integer inequalities. Step 2 and the private proved helper principal_finite_union express this finite union as a finite union of principal opens. Each basic open is open and compact, and finite unions preserve both properties. Taking the nonnegative integer thresholds corresponding to natural-number thresholds proves upper semicontinuity. No new unfinished lemma is used.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -152,5 +152,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T045523-L-127334",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -11107,3 +11107,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/E1/Sheaf.AlgebraicGeometry.FiniteAffineCechModelDerivedComparison (stage 3; reviewer PASS; first push; landing 20261013T045522-L-126864 (interface); batch 20261013T045507; modules 2; new nodes 2)
 - 04:55 L: merged deliver/E2/Sheaf.AlgebraicGeometry.CechSheafConstruction (stage 3; reviewer PASS; first push; landing 20261013T045522-L-126983 (interface); batch 20261013T045507; modules 4; new nodes 3)
 - 04:55 L: merged deliver/E3/Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHomMapExistence (stage 3; reviewer PASS; first push; landing 20261013T045523-L-127105 (interface); batch 20261013T045507; modules 4; new nodes 3)
+- 04:55 L: merged deliver/F1/Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous (stage 3; reviewer PASS; first push; landing 20261013T045523-L-127334 (proof); batch 20261013T045507; modules 1; new nodes 0)
