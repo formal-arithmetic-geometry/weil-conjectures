@@ -1,0 +1,141 @@
+{
+ "id": "lem-sc-koszul-open-hom-chain-representatives",
+ "kind": "statement",
+ "title": "KoszulOpenHomChainRepresentatives",
+ "statement": "Let A be a commutative ring and f:Fin r to A a finite sequence. Use the extended tails and termwise tilde complexes of [def-sc-koszul-open-system], the module Hom complex [def-sc-module-total-hom-complex], and the specified stage diagram and object isomorphisms of [def-sc-koszul-cech-comparison-construction]. Let F be a termwise quasi-coherent sheaf complex on Spec A, with both sheaf and module derived categories [def-pc-derived-category]. For a chain map t:tilde I_e to F, define its module transpose through the ordinary affine tilde/sections adjunction. Define its stage class by the Hom cocycle of that transpose, the cycle-kernel isomorphism and homology projection, the inverse localization/homology isomorphism, and H^0(Q(koszulCechHomObjIso.inv)). There are equivalences a_e:Hom(Q(tilde I_e),Q(F)) to H^0(Q(D_e)) taking Q(t) to exactly this constructed class. Every derived arrow Q(tilde I_e) to Q(F) equals Q(t) for some sheaf chain map t. No restriction or comparison to sections on U is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DD",
+  "place": "Proposition 36.9.5, stage derived-Hom identification; Tags 06Z0 and 0A8H"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-sc-koszul-open-system",
+  "def-sc-koszul-cech-comparison-construction",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "For L the extended Koszul module tail, each negative term is an exterior power of the free module on Fin r; Mathlib LinearAlgebra/ExteriorPower/Basis.lean, Module.Free.exteriorPower, supplies a free basis, hence categorical projectivity. The extension is strictly at most zero. Apply bounded-above projective K-projectivity to L.",
+   "uses": [
+    "def-sc-koszul-open-system",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the affine derived equivalence. The termwise tilde/global-sections counit on F is invertible because hF gives quasi-coherence in every degree. Consequently derived maps from tilde L to Q(F) are derived module maps from L to the top-sections complex M. K-projectivity represents every such map by a module chain map; the adjunction counit gives its sheaf chain map to F. This proves the representative clause.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cycles of the module Hom complex in degree zero are chain maps; its boundaries are null homotopies. The K-projective localization bijection therefore identifies its homology with derived Hom. The ordinary complex adjunction computes the transpose of a sheaf chain map. Compose the inverse Hom identification with the inverse localization/homology factor iso and the inverse of koszulCechHomObjIso. This gives the equivalences a and exactly koszulOpenHomStageClass on Q.map t. The class itself is constructed by the module cycle-kernel iso and homology projection; it involves no chosen data from an existence theorem. Zero tails and zero rings give singleton groups.",
+   "uses": [
+    "lem-sc-bounded-above-projective-kprojective",
+    "def-sc-module-total-hom-complex",
+    "def-sc-koszul-cech-comparison-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-koszul-open-system",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-sc-module-total-hom-complex",
+  "def-sc-koszul-cech-comparison-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "document": "https://stacks.math.columbia.edu/tag/08DD",
+  "place": "Proposition 36.9.5; 06Z0 and module Hom cycles",
+  "note": "Expansion of the assigned node proof, with the chain-map class constructed explicitly and the transport along the representative isomorphism proved in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from a K-projective Koszul complex to a quasi-coherent complex are chain maps modulo homotopy",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohomologyClass\", \"equivOfIsKProjective\"",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.KProjective: CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective and its apply lemmas",
+   "date": "2026-10-13",
+   "verdict": "Generic K-projective identification, without the affine transport, module-valued homology normalization, or specified Koszul stage."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*Cech|koszul.*cech|tilde.*adjunction|HomComplex.*leftHomologyData in Mathlib; chain_representatives|chain_evaluation|koszulOpenHom in lean/Sheaf and lean/WeilConjectures; blueprint_refs search Koszul derived Hom",
+   "results": "Mathlib HomComplexCohomology.leftHomologyData and tilde.adjunction provide generic ingredients. Existing KoszulOpenHomHomologyComparison identifies stages but specifies only power naturality and restriction-zero behavior, not the chain-map normalization needed here. No duplicate of this normalized statement. No blueprint nodes matched the concept query.",
+   "date": "2026-10-13",
+   "verdict": "no exact statement; use existing constructions in the definitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulOpenHomComparisonSquare",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Degree-zero Hom comparison: normalized affine chain representatives",
+   "via": [
+    "lem-sc-koszul-open-hom-comparison-square",
+    "lem-sc-koszul-open-hom-restriction-surjective",
+    "lem-sc-affine-perfect-open-represent-cohomology-colimit",
+    "lem-sc-affine-perfect-open-represent-cohomology",
+    "lem-sc-affine-perfect-map-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulOpenHomChainRepresentatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulOpenHomChainRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.koszulOpenHom_chain_representatives",
+  "statement": "theorem koszulOpenHom_chain_representatives\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [HasDerivedCategory.{v} (ModuleCat.{u} A)]\n    (F : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent) :\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0\n    let D := koszulCechHomDiagram A r f\n      (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F)\n    ∃ a : ∀ e : ℕ, (koszulOpenObject A r f e ⟶ DerivedCategory.Q.obj F) ≃\n        H.obj (DerivedCategory.Q.obj (D.obj e)),\n      (∀ (e : ℕ) (t : koszulOpenSheafComplex A r f e ⟶ F),\n        a e (DerivedCategory.Q.map t) = koszulOpenHomStageClass A r f F e t) ∧\n      ∀ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ DerivedCategory.Q.obj F),\n        ∃ t : koszulOpenSheafComplex A r f e ⟶ F, DerivedCategory.Q.map t = φ",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.koszulHomChainClass",
+   "AlgebraicGeometry.koszulOpenHomTranspose",
+   "AlgebraicGeometry.koszulOpenHomStageClass",
+   "AlgebraicGeometry.koszulOpenHom_chain_representatives"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T072404-L-1124568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T072404-L-1124568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
