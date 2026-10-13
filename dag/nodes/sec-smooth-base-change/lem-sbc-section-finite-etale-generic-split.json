@@ -14,12 +14,12 @@
  ],
  "proof": [
   {
-   "text": "U is a nonempty normal integral open of S, with the same function field. The cartesian square for ψ and the section equations identify the generic fibre of the section pullback with the pullback of Z along sη. A rational point and its G-translates give the constant G-indexed generic cover; base-changing the torsor identity along the point proves this is an isomorphism. This includes disconnected torsors and the trivial group.",
+   "text": "The open U is nonempty because it contains the generic point. Its generic point is the subtype point η of S. The map k:Spec k(U) → Spec k(S) induced by the stalk map of U → S satisfies k;aη=aU;ιU. Pick the rational point z in hZ and put r=k;z. Cancel the monomorphism C_U → C in the section compatibility equations to obtain (r;πZ);jU=aU;b. The torsor identity, composed with pullback symmetry, has components (id,smul g). Apply the proved FinitaryPreExtensive.isIso_sigmaDesc_lift_comp to base change it along r; this gives a splitting ∐_G Spec k(U) ≅ Z ×_{Cη} Spec k(U), over Spec k(U). Universality of finite coproducts similarly identifies the generic fibre of ∐_G U with ∐_G Spec k(U). Paste the pullback square for ψ with the rational section fibre, and paste the two canonical squares defining the generic fibre of PA ×_{C_U} U. The equation just proved gives a common cospan. Its canonical pullback isomorphism, composed with the two splittings, is an isomorphism between the generic fibres of the two covers over Spec k(U).",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Both the section cover and ∐_G U are finite étale over U. Apply finiteEtale_normalIntegral_generic_hom_full to the generic isomorphism and to its inverse, using the canonical identification of the function fields of U and S. Uniqueness proves the two composites are identities. The extended maps are over U, giving the required projection equation.",
+   "text": "The local rings of U are integrally closed by transport through the stalk isomorphisms of its open immersion. Both covers are finite etale: the constant cover uses IsFinite.sigmaDesc and locality of etaleness; the section cover is a base change of PA. Apply finiteEtale_normalIntegral_generic_hom_full over U to the generic isomorphism and its inverse to obtain f and g over U. For f;g, apply uniqueness in that same theorem to the generic identity of the constant cover; its compatibility equation follows by composing the two extension equations and cancelling the generic inverse pair. The identity itself has the same compatibility, so f;g=id. Repeat over the section cover to get g;f=id. These maps form the claimed scheme isomorphism, and the over-U equation from the first extension is precisely the required projection equation.",
    "uses": [
     "lem-sbc-normal-integral-generic-hom-full"
    ],
@@ -31,9 +31,10 @@
  ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "F4",
-  "document": "Stacks Project",
-  "place": "Tags 0EYJ and 0BQM; generic torsor splitting extended over the normal open U."
+  "by": "R4",
+  "document": "Stacks Project and existing Lean libraries",
+  "place": "Tags 0EYJ (section fibre splitting) and 0BQM (generic-point full faithfulness).",
+  "note": "Complete Lean proof with private proved categorical helpers; no new sorries or signature changes."
  },
  "mathlib_searches": [
   {
@@ -116,10 +117,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261013T163535-L-1619838",
-  "kind": "interface",
+  "landing": "20261013T171515-L-1982532",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

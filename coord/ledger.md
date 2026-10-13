@@ -13231,3 +13231,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:15 L: merged deliver/M4/Sheaf.RingTheory.StrictHenselizationRegular (stage 3; reviewer PASS; first push; landing 20261013T171513-L-1981977 (proof); batch 20261013T171508; modules 1; new nodes 0)
 - 17:15 L: merged deliver/Q2/Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingAffineSections (stage 3; reviewer PASS; first push; landing 20261013T171514-L-1982152 (interface); batch 20261013T171508; modules 2; new nodes 1)
 - 17:15 L: merged deliver/R4/Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairSingleStage (stage 3; reviewer PASS; first push; landing 20261013T171514-L-1982296 (interface); batch 20261013T171508; modules 2; new nodes 1)
+- 17:15 L: merged deliver/R4/Sheaf.AlgebraicGeometry.Morphisms.SectionFiniteEtaleGenericSplit (stage 3; reviewer PASS; first push; landing 20261013T171515-L-1982532 (proof); batch 20261013T171508; modules 1; new nodes 0)
