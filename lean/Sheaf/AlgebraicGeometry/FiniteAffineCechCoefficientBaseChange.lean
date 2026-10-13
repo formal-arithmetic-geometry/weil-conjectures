@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechModel
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonBijective
+import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # Base change for individual affine Čech coefficients
 
@@ -78,6 +78,50 @@ theorem finiteAffineCech_coefficient_baseChange {X T : Scheme.{u}} (f : X ⟶ T)
             (alternatingCechIntersection_face_le V p t j)).op)).app B s) =
           M.presheaf.map (homOfLE (inf_le_inf
             (alternatingCechIntersection_face_le (fun i ↦ W₀ ⟨i⟩) p t j) le_rfl)).op
-              (c p ((Fin.succAboveOrderEmb j).trans t) B s)) := by sorry
+              (c p ((Fin.succAboveOrderEmb j).trans t) B s)) := by
+  classical
+  let G := (F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat
+  let H := ModuleCat.restrictScalars
+    (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫
+      ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom) ⋙
+    tilde.functor Γ(U.toScheme, ⊤) ⋙
+    Modules.pullback U.toScheme.toSpecΓ ⋙ Modules.pullback g
+  let M := (Modules.pullback g').obj F
+  let W := fun (p : ℕ) (t : Fin (p + 1) ↪o Fin r) ↦
+    alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t
+  obtain ⟨q, hq, hf⟩ := exists_coefficientComparison_maps f F U V g g' f' sq.w W₀ hW
+  have hZ (p : ℕ) (t : Fin (p + 1) ↪o Fin r) :
+      IsAffineOpen (alternatingCechIntersection V t) := by
+    have : IsAffine U.toScheme := hU
+    have : IsSeparated (f ∣_ U) := inferInstance
+    have : IsSeparated ((f ∣_ U) ≫ terminal.from U.toScheme) := inferInstance
+    have : (f ⁻¹ᵁ U).toScheme.IsSeparated := ⟨by rwa [terminal.comp_from] at this⟩
+    exact IsAffineOpen.iInf fun i ↦ hV (t i)
+  have hi (p : ℕ) (t : Fin (p + 1) ↪o Fin r) : IsIso (q p t) := by
+    apply isIso_of_bijective_app_of_isAffineOpen
+    exact coefficientComparison_affine_bijective f F U hU
+      (alternatingCechIntersection V t) (hZ p t) g g' f' sq (W p t)
+      (coefficientIntersection_preimage _ V g' W₀ hW p t) (q p t) (hq p t)
+  let c (p : ℕ) (t : Fin (p + 1) ↪o Fin r) (B : T'.Opens) :=
+    let e := asIso ((q p t).app B) ≪≫ coefficientSupportIso f' M (W p t) B
+    e.addCommGroupIsoToAddEquiv
+  refine ⟨c, ?_, ?_, ?_⟩
+  · intro p t B C i s
+    change (coefficientSupportIso f' M (W p t) B).hom
+      ((q p t).app B ((H.obj (G.obj (op (alternatingCechIntersection V t)))).presheaf.map
+        i.op s)) = _
+    have hn : (q p t).app B
+        ((H.obj (G.obj (op (alternatingCechIntersection V t)))).presheaf.map i.op s) =
+        (((pushforward ((W p t).ι ≫ f')).obj (M.restrict (W p t).ι)).presheaf.map i.op)
+          ((q p t).app C s) :=
+      congrArg (fun a ↦ a s) ((q p t).mapPresheaf.naturality i.op)
+    rw [hn]
+    exact coefficientSupportIso_naturality f' M (W p t) i _
+  · intro p t B b s
+    change (coefficientSupportIso f' M (W p t) B).hom ((q p t).app B (b • s)) = _
+    rw [Hom.app_smul]
+    exact coefficientSupportIso_smul f' M (W p t) B b _
+  · intro p t j B s
+    exact hf p t j B s
 
 end AlgebraicGeometry.Scheme.Modules

@@ -17,40 +17,40 @@
  },
  "proof": [
   {
-   "text": "Separatedness over affine U makes every nonempty finite intersection Z of the V_i affine. Apply the affine intersection base-change statement to Z. Its base change has an affine map to Tprime, hence its inverse image over affine B is affine. The given equations for W identify this inverse image with intersection W_t intersect fprime inverse image B.",
+   "text": "Obtain module-sheaf comparison morphisms q_t with their fixed generator formula and face compatibility. The concrete intersection identity gives the open required for that formula.",
    "uses": [
-    "lem-pc-finite-affine-cech-intersection-base-change"
+    "lem-pc-finite-affine-cech-coefficient-comparison-map"
    ],
    "elementary": false
   },
   {
-   "text": "On affine B use the affine pullback section comparison for F restricted to Z. Both its base-changed coefficient sections and the sections of H(G(Z)) identify with Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,F). The ring maps from GammaSpecIso and the canonical affine chart are the same structural maps. Tensor associativity identifies the two presentations; the comparison sends b tensor s to b times the pullback of s. Its inverse comes from the bijective affine pullback comparison.",
+   "text": "Separatedness over the affine U makes f inverse image U separated. Its finite nonempty intersections of affine V_i are affine (Mathlib IsAffineOpen.iInf). Apply the single-coefficient affine bijectivity criterion to each q_t. The upstream isIso_of_bijective_app_of_isAffineOpen applies the sheaf-on-basis isomorphism criterion, so each q_t is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "def-pc-finite-affine-cech-model"
+    "lem-pc-finite-affine-cech-coefficient-comparison-bijective",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality of the pullback unit and restriction functor gives compatibility on pure tensors under restriction of B and of Z to a smaller affine intersection. Multiplication on the first tensor factor gives the local scalar formula. Extend the equations by additivity to every tensor. On overlaps restrict to affine basis subopens; the equations give agreement of the maps and their inverses. The sheaf gluing axiom gives maps and inverse maps on all B; their identities and the three equations are sheaf-local and therefore hold there. Empty coefficient intersections give zero sections. When r=0 or p+1 exceeds r there is no tuple, so no coefficient to construct.",
+   "text": "Evaluate each q_t on B and compose its additive equivalence with coefficientSupportIso. Naturality of q_t and the proved support-restriction identity give the first equation. Module linearity and coefficientSupportIso_smul give the exact scalar equation. The face equation is the construction theorem specialized to these same q_t. All these steps are Lean proofs; no inverse maps are glued by a new existence assertion.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-pullback-affine-sections"
+    "lem-pc-finite-affine-cech-coefficient-comparison-map",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-finite-affine-cech-intersection-base-change",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "def-pc-finite-affine-cech-model",
+  "lem-pc-finite-affine-cech-coefficient-comparison-map",
+  "lem-pc-finite-affine-cech-coefficient-comparison-bijective",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 02KE, Lemma 30.5.1",
-  "note": "Intermediate statement split from the target proof; it is strictly one part of the termwise coordinate argument."
+  "place": "Tag 02KE, Lemmas 30.5.1 and 30.5.2; Tag 0097",
+  "note": "A3 Lean reduction: construction of normalized module morphisms and single-open affine bijectivity are separate remaining items; affine intersections, sheaf locality, and all section-level assembly are proved."
  },
  "mathlib_searches": [
   {
@@ -158,9 +158,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261013T060424-L-584921",
+  "landing": "20261013T072337-L-1114642",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,186 @@
+{
+ "id": "lem-pc-finite-affine-cech-coefficient-comparison-map",
+ "kind": "statement",
+ "title": "Construction and unit normalization of coefficient comparison morphisms",
+ "statement": "Let f:X -> T be any morphism, F any module sheaf on X, U an open of T, and V_i (i in Fin r) any opens of Y=f^{-1}U. Let g:T' -> U, g':X' -> X and f':X' -> T' satisfy g' f = f' g U.ι. Let W_i=g'^{-1}(Y.ι(V_i)). Use the module sheaf, pullback and coefficient conventions of [def-weil-sheaf-of-modules-category], [def-pc-module-pullback], [def-pc-finite-affine-cech-model] and [def-sc-alternating-cech-total-complex]. Put G=(F|Y).presheafModuleCat and H=restriction of scalars through GammaSpecIso^{-1} followed by (f|U followed by U.toSpecGamma).appTop, then tilde over A=Gamma(U,O), then pullbacks along U.toSpecGamma and g. Put M=g'^*F. For every p and increasing tuple t let Z_t=intersection_i V_{t(i)} and W_t=intersection_i W_{t(i)}. Then there are O_{T'}-linear sheaf morphisms q_t:H(G(Z_t)) -> (W_t -> T')_*(M|W_t). Under the canonical support section identification with M(W_t intersect f'^{-1}B), they commute with every face restriction. On global sections they send the canonical generator of s in F|Y(Z_t), obtained successively from tilde.toOpen and the two pullback units (restricted from inverse images of the full opens to full opens), to the restriction to W_t intersect f'^{-1}T' of eta_{g'}(s), where s is first identified with F(Y.ι(Z_t)). No bijectivity, affine hypothesis or quasi-coherence is asserted.",
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-finite-affine-cech-model",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02KE (Section 30.5), 02KG (Lemma 30.5.1), 01I9, 01IA and 0097"
+ },
+ "proof": [
+  {
+   "text": "For each Z form P_Z=(Z -> U)_*(F|Z). Restriction along inclusions of opens gives its coefficient restriction morphisms. The tilde/Gamma counit and pullback/direct-image counit of U -> Spec A give tilde(F(Z)) pulled back to U -> P_Z, with the scalar map specified in H.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-finite-affine-cech-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull this morphism back along g and compose with the adjoint-defined base-change map for Z -> U. Pullback composition and open-immersion restriction identify its target with the direct image of M|W_Z. These are canonical module morphisms, with no affine or cartesian hypothesis.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The triangle identities give the unit formula on s. Naturality of the counits and restriction units gives commutation with each inclusion Z_t -> Z_face. The support section maps are restrictions along the proved equality W_t intersect fprime inverse image B = image in Xprime of its corresponding open in W_t. This proves the displayed face equation, including empty opens and empty tuple families.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-pc-finite-affine-cech-model",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Section 30.5, affine coefficient calculation; adjunction and tensor details supplied explicitly",
+  "note": "A3: split of a strictly smaller part of the coefficient comparison argument, with the Lean normalization fixed by explicit units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural map from associated module of sections to pushforward of pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module sheaf morphism affine pullback bijective sections pure tensor adjunction unit",
+   "results": "pullbackPushforwardAdjunction and bijective_pushforwardSections are related infrastructure; neither states this coefficient comparison or its normalization criterion.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.adjunction",
+   "results": "tilde.adjunction and its invertible unit provide the associated-module adjunction; no coefficient comparison with inverse-image intersections.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientGenerator|coefficientComparison|coefficientSupportIso|exists_coefficientComparison_maps in lean/Sheaf and lean/WeilConjectures",
+   "results": "No existing declarations. AffinePushforwardBaseChange, ModulePullbackAffineSections, and AffineSectionsComplexCounit provide related calculations with different interfaces.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated sheaf global sections counit base change direct image natural transformation",
+   "results": "Second reader: restrictAdjunction_counit_app_app and general sheaf adjunction/unit infrastructure; no normalized coefficient family or affine bijectivity criterion.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.fromTildeΓ",
+   "results": "Second reader: fromTildeΓ, fromTildeΓNatTrans, toOpen_fromTildeΓ_app and quasi-coherent counit isomorphism. Read against the coefficient signatures; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "fromTildeΓ|pullbackPushforwardAdjunction|restrictFunctorIsoPullback",
+   "results": "Second reader: Mathlib Modules.Sheaf and Modules.Tilde adjunctions/counits; also inspected local affine base-change and tensor sections modules. No theorem with the standard-unit coefficient normalization and face interface.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientBaseChange",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), termwise finite affine Cech calculation",
+   "via": [
+    "lem-pc-finite-affine-cech-coefficient-base-change",
+    "lem-pc-finite-affine-cech-base-change-coordinates",
+    "lem-pc-finite-affine-cech-section-base-change",
+    "lem-pc-finite-affine-cech-model-comparison",
+    "lem-pc-proper-flat-cech-model",
+    "lem-pc-proper-flat-cohomology-model",
+    "lem-pc-proper-flat-cohomology-model-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCechCoefficientComparisonMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_coefficientComparison_maps",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.coefficientSupportIso",
+   "AlgebraicGeometry.Scheme.Modules.coefficientSupportIso_naturality",
+   "AlgebraicGeometry.Scheme.Modules.coefficientSupportIso_smul",
+   "AlgebraicGeometry.Scheme.Modules.coefficientGenerator",
+   "AlgebraicGeometry.Scheme.Modules.coefficientPullbackGenerator",
+   "AlgebraicGeometry.Scheme.Modules.coefficientIntersection_preimage",
+   "AlgebraicGeometry.Scheme.Modules.exists_coefficientComparison_maps"
+  ],
+  "statement": "theorem exists_coefficientComparison_maps {X T : Scheme.{u}} (f : X ⟶ T)\n    (F : X.Modules) (U : T.Opens) {r : ℕ}\n    (V : Fin r → (f ⁻¹ᵁ U).toScheme.Opens)\n    {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n    (w : g' ≫ f = f' ≫ (g ≫ U.ι))\n    (W₀ : ULift.{u} (Fin r) → X'.Opens)\n    (hW : ∀ i, W₀ i = g' ⁻¹ᵁ ((f ⁻¹ᵁ U).ι ''ᵁ V i.down)) :\n    let G := (F.restrict (f ⁻¹ᵁ U).ι).presheafModuleCat\n    let H := ModuleCat.restrictScalars\n      (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫\n        ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom) ⋙\n      tilde.functor Γ(U.toScheme, ⊤) ⋙\n      Modules.pullback U.toScheme.toSpecΓ ⋙ Modules.pullback g\n    let M := (Modules.pullback g').obj F\n    let W := fun (p : ℕ) (t : Fin (p + 1) ↪o Fin r) ↦\n      alternatingCechIntersection (fun i ↦ W₀ ⟨i⟩) t\n    ∃ q : ∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r),\n      H.obj (G.obj (op (alternatingCechIntersection V t))) ⟶\n        (pushforward ((W p t).ι ≫ f')).obj (M.restrict (W p t).ι),\n      (∀ (p : ℕ) (t : Fin (p + 1) ↪o Fin r)\n        (s : Γ(F.restrict (f ⁻¹ᵁ U).ι, alternatingCechIntersection V t)),\n        (coefficientSupportIso f' M (W p t) ⊤).hom\n          ((q p t).app ⊤ (coefficientGenerator g _ s)) =\n        M.presheaf.map (homOfLE (inf_le_left : W p t ⊓ f' ⁻¹ᵁ ⊤ ≤ W p t)).op\n          (coefficientPullbackGenerator F (f ⁻¹ᵁ U) (alternatingCechIntersection V t)\n            g' (W p t) (coefficientIntersection_preimage _ V g' W₀ hW p t) s)) ∧\n      (∀ (p : ℕ) (t : Fin (p + 2) ↪o Fin r) (j : Fin (p + 2)) (B : T'.Opens)\n        (s : Γ(H.obj (G.obj (op (alternatingCechIntersection V\n          ((Fin.succAboveOrderEmb j).trans t)))), B)),\n        (coefficientSupportIso f' M (W (p + 1) t) B).hom\n          ((q (p + 1) t).app B\n            ((H.map (G.map (homOfLE\n              (alternatingCechIntersection_face_le V p t j)).op)).app B s)) =\n        M.presheaf.map (homOfLE (inf_le_inf\n          (alternatingCechIntersection_face_le (fun i ↦ W₀ ⟨i⟩) p t j) le_rfl)).op\n            ((coefficientSupportIso f' M (W p ((Fin.succAboveOrderEmb j).trans t)) B).hom\n              ((q p ((Fin.succAboveOrderEmb j).trans t)).app B s)))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T072337-L-1114642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261013T072337-L-1114642",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
