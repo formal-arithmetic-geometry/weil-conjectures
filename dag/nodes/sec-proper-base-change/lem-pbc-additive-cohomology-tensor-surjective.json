@@ -1,0 +1,157 @@
+{
+ "id": "lem-pbc-additive-cohomology-tensor-surjective",
+ "kind": "statement",
+ "title": "Surjectivity of additive cohomology tensor pullback",
+ "statement": "Let $k\\to k'$ be an algebra map of fields. Let $f:C\\to\\operatorname{Spec}k$ be a separated finite-type scheme of dimension at most one [def-sc-curves], and let $C'$ with maps $f',j$ be a displayed cartesian base change along $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$. Let $G,G'$ be abelian sheaves on the respective small etale sites [def-weil-pbc-abelian-etale-sheaves], with natural additive section equivalences $a_U:G(U)\\simeq\\Gamma(U,\\mathcal O_U)$ and $a'_{U'}:G'(U')\\simeq\\Gamma(U',\\mathcal O_{U'})$. Let $q:j^*G\\to G'$ [def-weil-pbc-inverse-image] have adjoint section map given under these coordinates by structural pullback. Equip $H^1(G)$ and $H^1(G')$ [def-weil-pbc-etale-cohomology] with $k$- and $k'$-module structures, respectively. Assume that for every scalar there is a sheaf endomorphism which multiplies section coordinates by its structural image and induces that scalar action on cohomology. Let $\\beta:k'\\otimes_k H^1(G)\\to H^1(G')$ be any $k'$-linear map such that $\\beta(b\\otimes x)=b\\cdot H^1(q)(j^*x)$ for every $b\\in k'$ and $x\\in H^1(G)$. The map $\\beta$ is surjective: every $y\\in H^1(G')$ is $\\beta(z)$ for some $z\\in k'\\otimes_k H^1(G)$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "coherent-lemma-flat-base-change-cohomology, separated-case finite affine cover proof; Theorem 03P2, separated-case cohomology comparison"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Identify G and G' with the lifted associated structure sheaves by their natural section coordinates. The section scalar formulas determine the scalar endomorphisms uniquely, so the scalar-natural coefficient and etale/Zariski comparisons give the structural scalar actions on cohomology.",
+   "uses": [
+    "lem-sc-etale-tensor-unit-sections-natural",
+    "lem-sc-etale-qcoherent-source-comparison-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a finite affine cover of C; quasi-compactness and separatedness follow from IsCurve. All finite intersections and their inverse images on C' are affine. Affine tensor sections identify the pulled-back Cech complex with k' tensor the original. The adjoint section formula hq and the natural inverse-image Cech comparison identify the induced cohomology map with H(q) after canonical etale Ext pullback. Its tensor-linear extension is β because the two maps agree on all pure tensors.",
+   "uses": [
+    "lem-pc-flat-cech-base-change",
+    "lem-pc-affine-cech-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent each target class by a cocycle of the pulled-back Cech complex. Exactness of tensoring over k writes its corresponding tensor cycle as a finite sum of pure tensors of original cycles. The tensor of their original cohomology classes maps to the chosen target class under β. This proves surjectivity. The unique isomorphism to the categorical pullback transports the construction to the displayed square.",
+   "uses": [
+    "lem-pc-flat-cech-cohomology-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-cech-inverse-image",
+  "lem-pc-flat-cech-base-change",
+  "lem-pc-flat-cech-cohomology-square",
+  "lem-sc-etale-qcoherent-source-comparison-natural",
+  "lem-sc-etale-tensor-unit-sections-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Separated-case Cech proof, surjective component, with coefficient/etale comparison from 03P2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor extension of pullback on first cohomology of the additive structure sheaf is injective and surjective under field extension",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error; ",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor-linear extension of pullback on first cohomology of the additive structure sheaf has zero kernel and is surjective",
+   "date": "2026-10-13",
+   "results": "; Algebra.Extension.tensorH1Cotangent, groupCohomology.instEpiModuleCatH1π, groupCohomology.shortComplexH0_exact, groupCohomology.instEpiModuleCatH2π, groupCohomology.epi_δ_of_isZero, Algebra.FormallySmooth.kerCotangentToTensor_injective_iff, groupCohomology.isIso_δ_of_isZero, groupCohomology.H1InfRes_exact",
+   "verdict": "No matching geometric cohomology base-change assertion; generic tensor and group cohomology tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*tensor|tensor.*cohomology|baseChange.*bijective",
+   "date": "2026-10-13",
+   "results": "; Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean, Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean, Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean, Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean, Mathlib/LinearAlgebra/TensorProduct/Decomposition.lean, Mathlib/RingTheory/LocalRing/Module.lean, Mathlib/RingTheory/LocalRing/Module.lean, Mathlib/RingTheory/Etale/Kaehler.lean",
+   "verdict": "No matching geometric cohomology base-change assertion; generic tensor and group cohomology tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of fields pullback etale cohomology quasi coherent sheaf canonical tensor map injective",
+   "date": "2026-10-13",
+   "results": "8 hits; Algebra.Extension.tensorH1Cotangent, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "verdict": "Second reader: generic algebra tools only, no normalized geometric etale H1 base change theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.AlgebraTensorModule.lift",
+   "date": "2026-10-13",
+   "results": "5 hits; TensorProduct.AlgebraTensorModule.lift, TensorProduct.AlgebraTensorModule.lift_tmul, TensorProduct.AlgebraTensorModule.lift_apply, TensorProduct.AlgebraTensorModule.uncurry_apply, Algebra.FormallyUnramified.comp_sec",
+   "verdict": "Second reader: generic algebra tools only, no normalized geometric etale H1 base change theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange_bijective|mapHomologyIso|lift_tmul",
+   "date": "2026-10-13",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/LinearAlgebra/CliffordAlgebra/Prod.lean, Mathlib/LinearAlgebra/CliffordAlgebra/Prod.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "verdict": "Second reader: generic algebra tools only, no normalized geometric etale H1 base change theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyLinearBaseChange",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Characteristic-p proper base change: flat base change of additive structure-sheaf H1 in the Artin-Schreier argument (surjective component).",
+   "via": [
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyTensorSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AdditiveCohomologyTensorSurjective.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.additive_cohomology_tensor_surjective",
+  "statement": "theorem additive_cohomology_tensor_surjective\n    {k k' : Type u}\n    [Field k] [Field k'] [Algebra k k']\n    {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    [IsCurve f]\n    {C' : Scheme.{u}} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}\n    (h : IsPullback ι' f' f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))\n    (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (G' : Sheaf C'.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (a' : ∀ U : C'.Etaleᵒᵖ, G'.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n    (ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n      a V (G.obj.map g x) = g.unop.left.appTop (a U x))\n    (ha' : ∀ (U V : C'.Etaleᵒᵖ) (g : U ⟶ V) (x : G'.obj.obj U),\n      a' V (G'.obj.map g x) = g.unop.left.appTop (a' U x))\n    (q : (Etale.upperStar AddCommGrpCat.{u + 1} ι').obj G ⟶ G')\n    (hq : (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n        a' (Opposite.op ((MorphismProperty.Over.pullback @Etale ⊤ ι').obj U.unop))\n          (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} ι').homEquiv\n            G G' q).hom.app U x) =\n          (Limits.pullback.fst U.unop.hom ι').appTop (a U x)))\n    [Module k (Sheaf.H G 1)] [Module k' (Sheaf.H G' 1)]\n    (hscalar : ∀ c : k, ∃ μ : G ⟶ G,\n        (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U),\n          let ρ : k →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp\n            (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)\n          a U (μ.hom.app U x) = a U x * ρ c) ∧\n        ∀ x : Sheaf.H G 1,\n          Sheaf.H.map μ 1 x = c • x)\n    (hscalar' : ∀ c : k', ∃ μ : G' ⟶ G',\n        (∀ (U : C'.Etaleᵒᵖ) (x : G'.obj.obj U),\n          let ρ : k' →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp\n            (f'.appTop.hom.comp (Scheme.ΓSpecIso (.of k')).inv.hom)\n          a' U (μ.hom.app U x) = a' U x * ρ c) ∧\n        ∀ x : Sheaf.H G' 1,\n          Sheaf.H.map μ 1 x = c • x)\n    (β : (k' ⊗[k] Sheaf.H G 1) →ₗ[k'] Sheaf.H G' 1)\n    (hβ : ∀ (b : k') (x : Sheaf.H G 1),\n      β (b ⊗ₜ[k] x) = b • Sheaf.H.map q 1 (Etale.cohomologyMap ι' G 1 x)) :\n    Function.Surjective β",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T054245-L-451773",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T054245-L-451773",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,34 +15,32 @@
  ],
  "proof": [
   {
-   "text": "Use the unit-module section coordinates to identify each of G and G' with the lifted associated structure sheaf. IsCurve supplies quasi-compactness and separatedness for C, and these properties persist under the displayed base change. The section formulas determine every scalar sheaf map uniquely. The natural coefficient and ordinary-cohomology comparisons intertwine those maps and give linear comparisons for the given actions.",
+   "text": "For each k-scalar, choose the two supplied structural scalar sheaf maps. Apply upperStarLowerStarAdjunction.homEquiv to their composites with q. The section equations and the displayed pullback square show the adjoint maps agree. Naturality of cohomologyMap and functoriality of H.map then prove scalar compatibility of canonical additive cohomology pullback.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Give H1(G') its restricted k-action. Build the k-linear canonical pullback and its bilinear map (b,x) mapping to b times pullback(x). AlgebraTensorModule.lift constructs β with the pure tensor formula. The kernel theorem gives injectivity by applying it to z-w, and the surjectivity theorem supplies surjectivity.",
    "uses": [
-    "lem-sc-etale-tensor-unit-sections-natural",
-    "lem-sc-etale-qcoherent-source-comparison-natural"
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-tensor-surjective"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a finite affine open cover of C. Its intersections and their pullbacks to C' are affine. The affine tensor-section identifications identify the pulled-back cochain complex with scalar extension. The adjoint section formula hq says that the cochain map is s mapping to 1 tensor s. By the natural Cech/cohomology construction the induced map is H(q) composed with the canonical etale cohomology pullback, in the specified Ext model. Tensoring over a field is exact, giving the canonical linear isomorphism and its displayed normalization. Transport from the chosen pullback to the displayed square by the universal-property isomorphism.",
-   "uses": [
-    "lem-pc-cech-computes",
-    "lem-sc-flat-base-change-coherent",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
-   ],
-   "elementary": false
+   "text": "Construct LinearEquiv.ofBijective β and take its inverse. The pure tensor formula at b=1, the inverse identities, and one_smul give the required normalization on every original class.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-cech-computes",
-  "lem-sc-etale-qcoherent-source-comparison-natural",
-  "lem-sc-etale-tensor-unit-sections-natural",
-  "lem-sc-flat-base-change-coherent",
-  "lem-weil-pbc-sheafH-ext-derived-comparison"
+  "lem-pbc-additive-cohomology-tensor-kernel",
+  "lem-pbc-additive-cohomology-tensor-surjective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/02KH",
-  "place": "Separated-case finite affine cover proof and natural comparisons of 03P2; specialization and scalar hypotheses encoded by Q3."
+  "place": "X2 stage 3: structural scalar compatibility is proved directly by adjunction; tensor kernel and surjectivity are split off; the tensor extension and normalized inverse equivalence are constructed in Lean."
  },
  "mathlib_searches": [
   {
@@ -123,9 +121,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T045553-L-135077",
+  "landing": "20261013T054245-L-451773",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
