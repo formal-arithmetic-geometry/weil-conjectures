@@ -119,7 +119,8 @@ lemma sectionsCechResolutionIso_inv_f_d {Z : Scheme.{u}} {ι' : Type u} (V : ι'
         (((TopCat.Presheaf.cechComplex V).obj
           (cechPresheaf M ⋙ sectionsModuleFunctor W ⋙ forget₂ _ AddCommGrpCat.{u})).d k (k + 1)
             c) =
-      Hom.app ((cechResolution V M).d k (k + 1)) W ((sectionsCechResolutionIso V M W).inv.f k c) := by
+      Hom.app ((cechResolution V M).d k (k + 1)) W
+        ((sectionsCechResolutionIso V M W).inv.f k c) := by
   apply (bijective_sectionsCechResolutionIso_hom_f V M W (k + 1)).injective
   rw [sectionsCechResolutionIso_hom_inv_f_apply, sectionsCechResolutionIso_d,
     sectionsCechResolutionIso_hom_inv_f_apply]

@@ -17,7 +17,7 @@ sections `A = Γ(S, ⊤)` is Noetherian, and `𝒢` an `𝒪_Y`-module of finite
 `S`. Every point of `S` has a basic open neighbourhood `D(a)` over which there is a bounded
 complex `P` of finite free `𝒪_{D(a)}`-modules whose pullback along every `g : T' ⟶ D(a)` computes
 the higher direct images of the base change of `𝒢`
-(`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`).
+(`exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`).
 
 The Čech complex `Č(U, 𝒢)` of a finite affine cover is quasi-isomorphic, compatibly with every
 base change, to its truncation, a perfect complex of flat `A`-modules; locally on `Spec A` it is
@@ -133,21 +133,26 @@ theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : 
   refine ⟨s, freeComplexOfBasis P b σ, d, hs₀,
     isFiniteFreeComplex_freeComplexOfBasis P b σ d hr, ?_⟩
   intro T' X' g g' f' _ H q
-  letI : Algebra R Γ(T', ⊤) := (g.appTop.hom.comp σ).toAlgebra
-  letI : Algebra Γ(S, ⊤) Γ(T', ⊤) := (g ≫ V.ι).appTop.hom.toAlgebra
-  haveI : IsScalarTower Γ(S, ⊤) R Γ(T', ⊤) := IsScalarTower.of_algebraMap_eq fun a ↦ by
+  let _ : Algebra R Γ(T', ⊤) := (g.appTop.hom.comp σ).toAlgebra
+  let _ : Algebra Γ(S, ⊤) Γ(T', ⊤) := (g ≫ V.ι).appTop.hom.toAlgebra
+  have : IsScalarTower Γ(S, ⊤) R Γ(T', ⊤) := IsScalarTower.of_algebraMap_eq fun a ↦ by
     change (g ≫ V.ι).appTop a = g.appTop (σ (algebraMap Γ(S, ⊤) R a))
     rw [← RingHom.comp_apply σ, hσ, Scheme.Hom.comp_appTop]
     rfl
   have hg : algebraMap Γ(S, ⊤) Γ(T', ⊤) =
       ((g ≫ V.ι).appLE ⊤ ⊤ (le_top.trans (g ≫ V.ι).preimage_top.ge)).hom := by
     rw [RingHom.algebraMap_toAlgebra, Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+    rfl
   have hκ (n : ℤ) (hn : n < 0) : IsEmpty (ULift.{u} (Fin (r n))) := by
     rw [hr n (Or.inl hn)]
     infer_instance
   obtain ⟨e⟩ := nonempty_homology_freeComplexOfBasis_iso H 𝒢 U hg P b Φ
     (isAffineOpen_iInf_of_isSeparated p U hU) hU' hκ hΦ q
-  exact ⟨HomologicalComplex.homologyMapIso
-    (pullbackFreeComplexIso (fun n ↦ (P.dMatrix b n).map σ) _ g) q ≪≫ e⟩
+  let e₁ : ((Modules.pullback g).mapHomologicalComplex _).obj (freeComplexOfBasis P b σ) ≅
+      freeComplexOfBasis P b (algebraMap R Γ(T', ⊤)) :=
+    pullbackFreeComplexIso _ _ g ≪≫ eqToIso (by
+      unfold freeComplexOfBasis
+      congr 1)
+  exact ⟨HomologicalComplex.homologyMapIso e₁ q ≪≫ e⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -97,8 +97,10 @@ theorem exists_isFiniteFreeComplex_higherDirectImage [IsProper f] [LocallyOfFini
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
           (higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ)) := by
   -- an affine open neighbourhood `V` of `t`
-  obtain ⟨V, hV, htV, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.1 T.isBasis_affineOpens)
-    (show t ∈ (⊤ : T.Opens) from trivial)
+  obtain ⟨V, hV, htV⟩ : ∃ V : T.Opens, IsAffineOpen V ∧ t ∈ V := by
+    obtain ⟨V, hV, htV, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.1 T.isBasis_affineOpens)
+      (show t ∈ (⊤ : T.Opens) from trivial)
+    exact ⟨V, hV, htV⟩
   have : IsAffine V.toScheme := hV
   -- the restriction of `(f, ℱ)` over `V`
   set fV := f ∣_ V
