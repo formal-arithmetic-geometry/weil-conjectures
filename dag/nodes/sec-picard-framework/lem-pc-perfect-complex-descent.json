@@ -23,57 +23,31 @@
  ],
  "proof": [
   {
-   "text": "Let $f:X\\to X_i$ be the projection and, for $j\\ge i$, $X_j=X_i\\times_{\\operatorname{Spec}R_i}\\operatorname{Spec}R_j$. $X_i$ is finitely presented over $R_i$, hence quasi-compact and quasi-separated; choose a finite cover of $X_i$ by affine opens $V^{(1)},\\dots,V^{(n)}$ and put $W^{(k)}=V^{(1)}\\cup\\dots\\cup V^{(k)}$. Each $W^{(k)}$ and each $W^{(k)}\\cap V^{(k+1)}$ is a quasi-compact open of $X_i$ (quasi-separatedness), hence finitely presented over $R_i$, and its preimages in $X_j$ and $X$ are its base changes. We prove by induction on $k$ the assertion for $W^{(k)}$: after increasing $i$ there are a perfect $E_W$ on the preimage $W^{(k)}_i$ and an isomorphism $Lf^*E_W\\cong E|_{f^{-1}W^{(k)}}$. The case $k=n$ is the lemma.",
+   "text": "Use Mathlib compact_open_induction_on for P(U) = [def-pc-perfect-descent-on-open]. The quasi-compact morphism s to an affine scheme makes X_i compact (QuasiCompact.compactSpace_of_compactSpace), so the top open is compact. The empty-open case follows from [lem-pc-perfect-descent-affine-open]. Each affine generator satisfies the same lemma, and [lem-pc-perfect-descent-open-union] supplies the induction step adjoining an affine open to a compact open. Hence P(top).",
    "uses": [
-    "def-pc-scheme"
+    "def-pc-perfect-descent-on-open",
+    "lem-pc-perfect-descent-affine-open",
+    "lem-pc-perfect-descent-open-union"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.29.3, Tag 09RF, reduction to quasi-compact opens; induction along a finite affine cover (Cohomology of Schemes, Tag 01OY induction principle, case of finitely many affines)"
-   }
+   "elementary": true
   },
   {
-   "text": "Affine case. For an affine member $V=V^{(k)}$, write $V_j=\\operatorname{Spec}A_j$ for its preimage in $X_j$ and $f^{-1}V=\\operatorname{Spec}A$ with $A=\\operatorname{colim}_jA_j$ (affine transition morphisms). By [lem-pc-perfect-affine-bounded-projective], $E|_{f^{-1}V}\\cong\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $A$-modules. By [lem-pc-affine-perfect-colimit-descent] there are $j$ and a bounded complex $P_j^\\bullet$ of finite projective $A_j$-modules with $P_j^\\bullet\\otimes_{A_j}A\\cong P^\\bullet$. Then $E_V=\\widetilde{P_j^\\bullet}$ is strictly perfect, hence perfect [def-pc-perfect-complex], and since its terms are flat, $Lf^*\\widetilde{P_j^\\bullet}=\\widetilde{P_j^\\bullet\\otimes_{A_j}A}\\cong E|_{f^{-1}V}$.",
+   "text": "Present the top open by the identity of X_i: its opensRange is top. Specialize P(top) to this presentation, then E and its perfectness proof. The identity composite with s is definitionally s, including the chosen pullback objects and canonical base-change map, so this is precisely the unchanged conclusion.",
    "uses": [
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-pc-affine-perfect-colimit-descent",
-    "def-pc-perfect-complex"
+    "def-pc-perfect-descent-on-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.29.3, Tag 09RF, affine case via Lemmas 06Z0, 08EB and More on Algebra 0BC7"
-   }
-  },
-  {
-   "text": "Induction step. Let $W=W^{(k)}$, $V=V^{(k+1)}$ and, after increasing $i$, let $E_W$ on $W_i$ and $E_V$ on $V_i$ be perfect with isomorphisms $\\phi_W:Lf^*E_W\\to E|_{f^{-1}W}$ and $\\phi_V:Lf^*E_V\\to E|_{f^{-1}V}$ (induction hypothesis and Step 2). On the finitely presented $R_i$-scheme $W_i\\cap V_i$ apply [lem-pc-perfect-descend-morphisms] to the isomorphism $\\phi_V^{-1}\\circ\\phi_W$ restricted to $f^{-1}(W\\cap V)$: after increasing $i$ there is an isomorphism $c:E_W|_{W_i\\cap V_i}\\to E_V|_{W_i\\cap V_i}$ with $Lf^*c=\\phi_V^{-1}\\circ\\phi_W$ there. Let $a:E_W\\to(Rf_*E)|_{W_i}$ and $b:E_V\\to(Rf_*E)|_{V_i}$ be adjoint to $\\phi_W,\\phi_V$ by [lem-pc-ringed-spaces-derived-adjoint], using $(Rf_*E)|_{W_i}=R(f|_{f^{-1}W})_*(E|_{f^{-1}W})$ (Cohomology, Lemma 08FE); then $a=b\\circ c$ on $W_i\\cap V_i$ because $\\phi_W=\\phi_V\\circ Lf^*c$ there. By [lem-sc-derived-open-gluing] on $W_i\\cup V_i$ there are $F$ restricting to $E_W$ and $E_V$ with transition $c$, and a map $d:F\\to(Rf_*E)|_{W_i\\cup V_i}$ restricting to $a$ and $b$. $F$ is perfect, since perfectness is defined on an open cover [def-pc-perfect-complex]. The adjoint $Lf^*F\\to E|_{f^{-1}(W\\cup V)}$ of $d$ restricts to $\\phi_W$ and $\\phi_V$ on $f^{-1}W$ and $f^{-1}V$, which are isomorphisms; an arrow of a derived category of modules that is an isomorphism on each member of an open cover is an isomorphism (its cone has zero cohomology sheaves). This gives the assertion for $W^{(k+1)}$.",
-   "uses": [
-    "lem-pc-perfect-descend-morphisms",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-sc-derived-open-gluing",
-    "def-pc-perfect-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.29.3, Tag 09RF, condition (2) of the induction principle: full faithfulness (09RE), adjunction, Cohomology lemma-glue (08DG)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-pc-perfect-complex",
-  "lem-pc-perfect-affine-bounded-projective",
-  "lem-pc-affine-perfect-colimit-descent",
-  "lem-pc-perfect-descend-morphisms",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-sc-derived-open-gluing"
+  "def-pc-perfect-descent-on-open",
+  "lem-pc-perfect-descent-affine-open",
+  "lem-pc-perfect-descent-open-union"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 36.29.3, Tag 09RF"
+  "place": "Tag 09RF: quasi-compact open induction; Lean combination by K4 using Mathlib compact_open_induction_on"
  },
  "mathlib_searches": [
   {
@@ -182,5 +156,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T072355-L-1121927",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

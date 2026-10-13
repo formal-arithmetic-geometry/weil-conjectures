@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-perfect-descent-open-union",
+ "kind": "statement",
+ "title": "Two-open induction step for perfect-complex descent",
+ "statement": "Let I be a directed preorder, (R_i) a directed system of Noetherian rings, c a colimit cocone, i an index and s:X_i → Spec R_i finitely presented. Let W be a quasi-compact open and V an affine open of X_i. If P(W) and P(V), then P(W ∪ V), for the explicitly fixed descent predicate [def-pc-perfect-descent-on-open]. No hypothesis of descent of objects on the intersection is needed: only descent of the overlap morphism is used.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, proof: two-open gluing induction step (Tags 09RE, 079W, 08FE, 08DG)"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-descent-on-open"
+ ],
+ "proof": [
+  {
+   "text": "Fix an open-immersion presentation of W ∪ V and a perfect object E on its limit base change. Restrict E to the inverse images of W and V and apply the two descent hypotheses. Directedness puts their stage objects at a common later index. Derived pullback of local strictly perfect models preserves perfectness. Because X_i is quasi-separated and W,V are quasi-compact, W ∩ V is quasi-compact and its stage morphism is finitely presented. Apply [lem-pc-perfect-descend-morphisms] on this stage overlap to the comparison isomorphism between the restrictions of the two descended perfect objects, and increase the stage to get an isomorphism c whose pullback is the prescribed overlap identification.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-perfect-descend-morphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the adjoints a,b of the two comparison isomorphisms by [lem-pc-ringed-spaces-derived-adjoint]. Use [lem-pc-restrict-derived-direct-image-open] to regard both as maps into the restrictions of the same Rf_* E. Naturality of adjunction and the equation specifying the limit pullback of c make these maps compatible on the overlap. Apply both the object and morphism clauses of [lem-sc-derived-open-gluing] on the stage union. This gives an object F restricting to the two perfect objects, and a map d:F → Rf_* E restricting to a,b.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-sc-derived-open-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "F is perfect because this property is local on the two opens. The adjoint Lf*F → E of d restricts on each open to the given comparison isomorphism. Its cone has zero cohomology locally and hence globally, so it is an isomorphism. The open-subscheme pullback identifications identify f with the exact canonical stage-to-limit map in P(W ∪ V). Transport along the given open-immersion presentation supplies the claimed predicate. Empty W, empty V, equal opens and disjoint opens cause no extra hypotheses: all restrictions and compatibility equations exist on the empty overlap.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-category",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-descend-morphisms",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-open-gluing",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RF, proof: two-open gluing induction step (Tags 09RE, 079W, 08FE, 08DG)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Induction on quasi compact schemes using affine schemes and unions of two quasi compact open subschemes",
+   "results": "AlgebraicGeometry.compact_open_induction_on; AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover; AlgebraicGeometry.quasiSeparatedSpace_iff_affine; AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens; AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen; AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat; AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat; AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+   "date": "2026-10-13",
+   "verdict": "No descent-on-open predicate or affine/union descent theorem; compact_open_induction_on supplies the outer induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen",
+   "results": "AlgebraicGeometry.IsAffineOpen; AlgebraicGeometry.IsAffineOpen.Spec_basicOpen; AlgebraicGeometry.isAffineOpen_opensRange; AlgebraicGeometry.Scheme.AffineOpenCover.ofIsOpenCover; AlgebraicGeometry.Scheme.AffineOpenCover.ofIsOpenCover_I₀; AlgebraicGeometry.IsAffineOpen.isCompact; AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion; AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion",
+   "date": "2026-10-13",
+   "verdict": "No descent-on-open predicate or affine/union descent theorem; compact_open_induction_on supplies the outer induction"
+  },
+  {
+   "tool": "grep",
+   "query": "compact_open_induction_on|perfect.*descend",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+   "date": "2026-10-13",
+   "verdict": "No descent-on-open predicate or affine/union descent theorem; compact_open_induction_on supplies the outer induction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes descend along filtered colimits of Noetherian rings on a finitely presented scheme",
+   "results": "localCohomology.hasColimitDiagram; AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone; localCohomology.ofDiagram; AlgebraicGeometry.Scheme.Modules.instHasColimits; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; CommRingCat.preservesFilteredColimits_coyoneda; CategoryTheory.Limits.Concrete.colimit_rep_eq_zero; preservesFilteredColimits_coyoneda",
+   "date": "2026-10-13",
+   "verdict": "No descent-on-open predicate or affine/union descent theorem; compact_open_induction_on supplies the outer induction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.compact_open_induction_on",
+   "results": "AlgebraicGeometry.compact_open_induction_on",
+   "date": "2026-10-13",
+   "verdict": "No descent-on-open predicate or affine/union descent theorem; compact_open_induction_on supplies the outer induction"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*descend|PerfectDescentOnOpen",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "No descent-on-open predicate or affine/union descent theorem; compact_open_induction_on supplies the outer induction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of perfect complexes on affine opens and gluing across a union of two opens along a filtered colimit of rings",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectComplexDescent",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Noetherian approximation proof step: descent of the perfect object (Tag 09RF); Tag 09RF, proof: two-open gluing induction step (Tags 09RE, 079W, 08FE, 08DG)",
+   "via": [
+    "lem-pc-perfect-complex-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectDescentOpenUnion",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectDescentOpenUnion.lean",
+  "declaration": "AlgebraicGeometry.perfect_descent_open_union",
+  "statement": "theorem perfect_descent_open_union\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]\n    (c : Cocone R) (hc : IsColimit c) (i : I) (Xi : Scheme.{u}) (s : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation s] [QuasiCompact s] [QuasiSeparated s]\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [∀ (Z : Scheme.{u}) (U : Z.Opens),\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]\n    (W V : Xi.Opens) (hW : IsCompact (W : Set Xi)) (hV : IsAffineOpen V)\n    (dW : PerfectDescentOnOpen R c i Xi s W)\n    (dV : PerfectDescentOnOpen R c i Xi s V) :\n    PerfectDescentOnOpen R c i Xi s (W ⊔ V)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T072355-L-1121927",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T072355-L-1121927",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

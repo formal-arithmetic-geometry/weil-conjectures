@@ -4,11 +4,8 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
-import Sheaf.Algebra.Homology.AffinePerfectColimitDescent
-import Sheaf.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.DerivedOpenGluing
-import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
+import Sheaf.AlgebraicGeometry.PerfectDescentAffineOpen
+import Sheaf.AlgebraicGeometry.PerfectDescentOpenUnion
 
 /-! # Descent of a perfect complex
 
@@ -73,6 +70,20 @@ theorem perfect_complex_descends
           (T' := Over.mk (Spec.map (c.ι.app i)))
           (Over.homMk (Spec.map (c.ι.app j))
             (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])))).obj Ej ≅ E) := by
-  sorry
+  let : CompactSpace Xi := QuasiCompact.compactSpace_of_compactSpace s
+  have htop : PerfectDescentOnOpen R c i Xi s ⊤ := by
+    refine compact_open_induction_on
+      (P := PerfectDescentOnOpen R c i Xi s) (⊤ : Xi.Opens) ?_ ?_ ?_
+    · exact isCompact_univ
+    · exact perfect_descent_affine_open R c hc i Xi s ⊥ (Or.inr rfl)
+    · intro W hW V dW
+      exact perfect_descent_open_union R c hc i Xi s W V hW V.property dW
+        (perfect_descent_affine_open R c hc i Xi s V (Or.inl V.property))
+  have hid : (𝟙 Xi : Xi ⟶ Xi).opensRange = ⊤ := by
+    ext x
+    simp
+  have ht := htop Xi (𝟙 Xi) hid
+  dsimp only at ht
+  exact ht E hE
 
 end AlgebraicGeometry

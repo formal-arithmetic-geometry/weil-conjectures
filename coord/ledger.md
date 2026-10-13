@@ -11538,3 +11538,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/K2/Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAcyclic (stage 3; reviewer PASS; first push; landing 20261013T072354-L-1121467 (interface); batch 20261013T072335; modules 2; new nodes 1)
 - 07:23 L: merged deliver/K3/Sheaf.AlgebraicGeometry.ResidueHomologyRankOneCoefficient (stage 3; reviewer PASS; first push; landing 20261013T072355-L-1121607 (interface); batch 20261013T072335; modules 2; new nodes 1)
 - 07:23 L: merged deliver/K4/Sheaf.Algebra.Homology.OpenSupportedHomologyApproximation (stage 3; reviewer PASS; first push; landing 20261013T072355-L-1121813 (proof); batch 20261013T072335; modules 1; new nodes 0)
+- 07:23 L: merged deliver/K4/Sheaf.AlgebraicGeometry.PerfectComplexDescent (stage 3; reviewer PASS; first push; landing 20261013T072355-L-1121927 (interface); batch 20261013T072335; modules 4; new nodes 3)
