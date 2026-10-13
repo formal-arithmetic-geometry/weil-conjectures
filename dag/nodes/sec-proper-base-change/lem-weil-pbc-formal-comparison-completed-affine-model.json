@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-formal-comparison-completed-affine-model",
+ "kind": "statement",
+ "title": "Completed affine formal comparison model",
+ "statement": "For a Noetherian scheme Y, proper f : X ⟶ Y, ideals J K, formal system G, coherent F, comparison data satisfying the quotient and adjunction equations, and an affine U, writing B = Γ(Y,U), R = AdicCompletion (J.ideal U) B and L = (K.ideal U).map (algebraMap B R), there exist coherent modules A,D over Spec R and c : A.obj ⟶ D.obj, invertible after restricting away from V(L), together with scalar-restriction isomorphisms eA,eD identifying the affine limits and making the comparison square commute.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Lemma 30.25.3 (088B), proof after reduction to an affine completed base"
+ },
+ "proof": [
+  {
+   "text": "Restrict to U=Spec B. The equations uniquely characterize kappa and alpha: quotient projections are epimorphisms, lim kappa is invertible by formal functions, and the affine equivalence is fully faithful.",
+   "uses": [
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-formal-systems-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change to the J-adic completion B-prime. It is flat and Noetherian; quotients by J^n are unchanged. Degree-zero flat base change identifies the pushed quotient maps and adjunction units. Uniqueness identifies the comparison after base change. The equivalence on J-power-torsion modules identifies every term and its transition maps, hence the inverse-limit maps before and after completion.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-pc-flat-base-change-cohom",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over the complete affine base the affine equivalence algebraizes G. Compatibility of tensor pullback with completion and coherence of the pullback allow full faithfulness of completion over the proper source to algebraize beta to an isomorphism b:f*G->F. The equations identify alpha with the completion of the adjunction map followed by f_*b.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-formal-systems-pullback",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper",
+    "lem-pc-coherent-hi",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the completed base the algebraized adjunction map is invertible outside the extended exceptional closed set, since the base changed proper morphism is an isomorphism there. The affine equivalence and completeness of finite modules identify its sections with the two original affine limits, naturally on the comparison map. This produces the stated commuting square; no power-annihilation conclusion is used.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-theorem-formal-functions",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-pc-flat-base-change-cohom",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-formal-completion-fully-faithful-proper",
+  "lem-pc-coherent-hi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Lemma 30.25.3 (088B), paragraphs 43--50"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Completed affine formal comparison model",
+   "results": "No exact Mathlib declaration; proof uses the stated Sheaf lemmas.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Completed affine formal comparison model",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed affine formal comparison model",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed affine formal comparison model",
+   "results": "No exact match returned.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite modules over adic completion inverse limit coherent formal systems comparison map isomorphism outside closed subset",
+   "results": "Found AdicCompletion.ofLinearEquiv, piEquivFin and evaluation lemmas; none supplies the geometric comparison construction. Second-reader search via msearch.py.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalSystemsPushPullAffineAnnihilation",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-systems-push-pull-affine-annihilation",
+   "place": "proof steps 1--4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalComparisonCompletedAffineModel.lean",
+  "declaration": "AlgebraicGeometry.formalComparison_completed_affine_model",
+  "statement": "theorem formalComparison_completed_affine_model\n    {X Y : Scheme.{u}} [IsNoetherian Y]\n    (J K : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]\n    (hV : IsIso (pullback.snd f (Scheme.Opens.ι K.support.compl)))\n    (adj : Scheme.Modules.tensorPullback f ⊣ Scheme.Modules.pushforward f)\n    (G : CoherentFormalModule Y J) (F : CoherentModules X)\n    (β : G.obj ⋙ Scheme.Modules.tensorPullback f ≅\n      formalCompletionSystem (J.comap f) F.obj)\n    (h : RingedSpace.IsCoherent Y.toRingedSpace\n      ((Scheme.Modules.pushforward f).obj F.obj))\n    (κ : formalCompletionSystem J ((Scheme.Modules.pushforward f).obj F.obj) ⟶\n      formalCompletionSystem (J.comap f) F.obj ⋙ Scheme.Modules.pushforward f)\n    (α : G ⟶ (completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩)\n    (hκ : ∀ n : ℕ,\n      formalModuleQuotientπ J (n + 1) ((Scheme.Modules.pushforward f).obj F.obj) ≫\n        κ.app (op n) =\n      (Scheme.Modules.pushforward f).map\n        (formalModuleQuotientπ (J.comap f) (n + 1) F.obj))\n    (hα : ∀ n : ℕ, α.hom.app (op n) ≫ κ.app (op n) =\n      adj.unit.app (G.obj.obj (op n)) ≫\n        (Scheme.Modules.pushforward f).map (β.hom.app (op n))) :\n    ∀ U : Y.affineOpens,\n      let B := Γ(Y, U.1)\n      let R := AdicCompletion (J.ideal U) B\n      let L := (K.ideal U).map (algebraMap B R)\n      let Q := Scheme.IdealSheafData.ofIdealTop\n        (L.map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom)\n      ∃ (A D : CoherentModules (Spec (CommRingCat.of R))) (c : A.obj ⟶ D.obj),\n        IsIso ((Scheme.Modules.restrictFunctor (Scheme.Opens.ι Q.support.compl)).map c) ∧\n        ∃ eA : limit (G.obj ⋙ SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≅\n            (ModuleCat.restrictScalars (algebraMap B R)).obj\n              ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj A.obj),\n        ∃ eD : limit (((completion Y J).obj\n            ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩).obj ⋙\n              SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≅\n            (ModuleCat.restrictScalars (algebraMap B R)).obj\n              ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj D.obj),\n          lim.map (Functor.whiskerRight α.hom\n            (SheafOfModules.evaluation Y.ringCatSheaf (op U.1))) ≫ eD.hom =\n          eA.hom ≫ (ModuleCat.restrictScalars (algebraMap B R)).map\n            ((moduleSpecΓFunctor (R := CommRingCat.of R)).map c)",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T015555-L-3020706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T015555-L-3020706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

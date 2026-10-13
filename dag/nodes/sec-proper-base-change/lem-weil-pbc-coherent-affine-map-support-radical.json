@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-coherent-affine-map-support-radical",
+ "kind": "statement",
+ "title": "Affine support radical criterion for a coherent map",
+ "statement": "For a Noetherian commutative ring R, an ideal L, coherent modules A,D on Spec R and a morphism c : A.obj ⟶ D.obj invertible on the complement of V(L), the ideal L is contained in the radicals of the annihilators of the kernel and cokernel of the induced map on affine module sections.",
+ "stmt_deps": [],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Lemma 30.25.3 (088B), proof after reduction to an affine completed base"
+ },
+ "proof": [
+  {
+   "text": "Coherence implies quasi-coherence and finite affine section modules. For a in L, the basic open D(a) lies outside V(L), so the section map on D(a) is bijective. Localization gives elementwise a-power torsion for its global kernel and quotient by its range: injectivity treats the kernel, while surjectivity and clearing denominators treat the quotient. For each finite module, vanishing of its localization at a implies its support lies in V(a); support equals V of the annihilator, hence a is in the annihilator radical.",
+   "uses": [
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/088B",
+  "place": "Lemma 30.25.3 (088B), paragraphs 43--50"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Affine support radical criterion for a coherent map",
+   "results": "No exact Mathlib declaration; proof uses the stated Sheaf lemmas.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Affine support radical criterion for a coherent map",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine support radical criterion for a coherent map",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine support radical criterion for a coherent map",
+   "results": "No exact match returned.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.support_eq_zeroLocus",
+   "results": "Module.support_eq_zeroLocus is exactly the finite-module support/annihilator step used, not the sheaf-map assertion.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of coherent sheaves isomorphism on complement closed set section kernel cokernel annihilator radical",
+   "results": "Restriction-vanishing lemmas for structure sheaf sections and tilde local representations; no matching coherent-map theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "support_eq_zeroLocus|subsingleton_iff_support_subset|exists_pow_le_of_le_radical",
+   "results": "Found Mathlib finite-module support, localization, and finite-generation power lemmas used in the proof. Repository search support.*radical|radical.*annihilator found no duplicate affine-map theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalSystemsPushPullAffineAnnihilation",
+  "date": "2026-10-13",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-systems-push-pull-affine-annihilation",
+   "place": "proof steps 1--4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentAffineMapSupportRadical",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentAffineMapSupportRadical.lean",
+  "declaration": "AlgebraicGeometry.coherentAffineMap_support_radical",
+  "statement": "theorem coherentAffineMap_support_radical\n    (R : Type u) [CommRing R] [IsNoetherianRing R] (L : Ideal R)\n    (A D : CoherentModules (Spec (CommRingCat.of R))) (c : A.obj ⟶ D.obj)\n    (hc : IsIso ((Scheme.Modules.restrictFunctor\n      (Scheme.Opens.ι (Scheme.IdealSheafData.ofIdealTop\n        (L.map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom)).support.compl)).map c)) :\n    L ≤ (Module.annihilator R\n      (LinearMap.ker ((moduleSpecΓFunctor (R := CommRingCat.of R)).map c).hom)).radical ∧\n    L ≤ (Module.annihilator R\n      (((moduleSpecΓFunctor (R := CommRingCat.of R)).obj D.obj) ⧸\n        LinearMap.range ((moduleSpecΓFunctor (R := CommRingCat.of R)).map c).hom)).radical",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T015555-L-3020706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261013T015555-L-3020706",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
