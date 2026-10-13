@@ -13,29 +13,41 @@
  ],
  "proof": [
   {
-   "text": "Evaluate at the one object of the bottom-topology site. Sheafification is invertible there. Remove the zero factors outside the finite interval: restriction and extension by the unique zero-factor maps preserve the universal property.",
+   "text": "Restrict the limiting fan to the finite integer interval s = Finset.Icc a b. Extend any cone on s by zero maps outside s and apply the original limit. The factorization and uniqueness equations outside s hold because those factors are zero. Conversely, a limiting restricted fan is limiting over all integers when the omitted factors are zero. These universal-property constructions are proved directly in restrictFan_isLimit and extendFan_isLimit, including the empty interval.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the canonical scalar-extension functor E from the given changeOfRingsPresheaf and sectionwise maps ModuleCat.extendScalars.map, followed by PresheafOfModules.sheafification. The naturality of the sectionwise maps is changeOfRingsHom_naturality. Prove E additive: ModuleCat.extendRestrictScalarsAdj and PresheafOfModules.sheafificationAdjunction have additive right adjoints, so Mathlib Adjunction.left_adjoint_additive gives additivity of each stage. Apply Mathlib Functor.preservesFiniteProductsOfAdditive and isLimitOfPreserves to the restricted fan, using Fan.isLimitMapConeEquiv. Additivity also gives E.map_isZero for the omitted factors, so restore the full limiting fan.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this fan through eqToIso (hF T) and eqToIso (hF (M p)). The explicit projections are eqToHom (hF T) followed by E.map (π p) followed by eqToHom (hF (M p)).symm. The universal property is transported directly by composing lifts with these isomorphisms; no information about F.map is used.",
    "uses": [
     "def-pc-perfect-rhom-base-change-map"
    ],
    "elementary": false
   },
   {
-   "text": "Commute ordinary tensor product with the finite product using TensorProduct.piRight (or piLeft followed by the tensor symmetry). Transport the limiting fan and its pure-tensor formula through the sheafification unit and the object equalities for F. The empty interval is included.",
+   "text": "Expand ringExtensionPure and the projections. Cancel the two inverse transports at the source. Apply toSheafify_naturality to the underlying sectionwise extension of π p and evaluate at U and b tensor x. ModuleCat.extendScalars.map acts as id tensor π p on pure tensors by its definition, so the resulting equality is exactly the required normalized formula.",
    "uses": [
-    "lem-weil-pbc-tensor-finite-product",
-    "def-pc-perfect-rhom-base-change-map"
+    "def-pc-perfect-rhom-base-change-map",
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-perfect-rhom-base-change-map",
-  "lem-weil-pbc-tensor-finite-product"
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Detailed expansion of the finite-product and pure-tensor steps of Lemma 0A6A (1)"
+  "place": "Lemma 0A6A (1), finite-product step, formalized by N4 using additivity and Mathlib finite-product preservation instead of the explicit tensor-product Pi comparison"
  },
  "mathlib_searches": [
   {
@@ -126,10 +138,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T082352-L-1638370",
-  "kind": "interface",
+  "landing": "20261013T100043-L-2473297",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
