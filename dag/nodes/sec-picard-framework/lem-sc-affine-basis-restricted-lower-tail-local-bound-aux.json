@@ -12,10 +12,30 @@
  },
  "proof": [
   {
-   "text": "Identify the homology of the restricted lower truncation with the restricted homology sheaf below the cutoff and with zero at or above it, then transfer the positive open module cohomology vanishing from the source module-cohomology hypothesis using the module/abelian comparison.",
+   "text": "Use Functor.mapDerivedCategoryHomologyFunctorIso for exact schemeOpenRestriction to move homology before restriction. Split on q < a.",
    "uses": [
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "lem-weil-pbc-truncation-cohomology",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Below a, the truncation inclusion induces an isomorphism on degree-q homology; homologyFunctorFactors identifies the untruncated object with F.homology q. At or above a, truncLT a is IsLE (a - 1), so its degree-q homology is zero and the additive restriction and cohomology functors preserve that zero object.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let W be the image of U under V.ι. It is affine and contained in V. Choose an injective resolution of F.homology q using enough injectives. Its transported open restriction remains an injective resolution by restrict_injectiveResolution and the equivalence overEquiv V. overFunctorEquiv V and restrictAppIso identify sections on U of each restricted term with sections on W of the original term. Applying homology and isoRightDerivedObj gives an isomorphism of the two open cohomology objects.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-ringed-space-restrict-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply nonempty_openModuleCohomology_addEquiv_restrict_H on X and W. Write p = r + 1 using p > 0; the supplied hhomology makes this abelian cohomology subsingleton. Transport subsingletonness and then IsZero back along the comparison isomorphisms.",
+   "uses": [
     "lem-pqf-open-module-cohomology-comparison"
    ],
    "elementary": false
@@ -24,14 +44,16 @@
  "proof_deps": [
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-truncation-cohomology",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-ringed-space-restrict-injective-resolution",
   "lem-pqf-open-module-cohomology-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B4",
+  "group": "M1",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "restriction, truncation and module/abelian comparison"
+  "place": "Tags 01E1 and 03FD; exact restriction, truncation, and injective-resolution comparison; completed during independent second reading"
  },
  "mathlib_searches": [
   {
@@ -106,10 +128,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261013T162409-L-1518831",
-  "kind": "interface",
+  "landing": "20261013T165644-L-1809034",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
