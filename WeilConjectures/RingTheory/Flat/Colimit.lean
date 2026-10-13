@@ -53,6 +53,10 @@ theorem Flat.of_isColimit {J : Type u} [SmallCategory J] [IsFiltered J]
   refine ⟨m, fun i t ↦ c.ι.app K.pt (a' i t), y, fun i ↦ ?_, fun t ↦ ?_⟩
   · rw [hy i]
     rfl
-  · simp_rw [← hb, ← map_mul, ← map_sum, ha' t, map_zero]
+  · have h0 := congr((c.ι.app K.pt).hom $(ha' t))
+    simp only [map_sum, map_mul, map_zero] at h0
+    rw [← h0]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    rw [← hb i]
 
 end RingHom
