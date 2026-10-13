@@ -16,47 +16,43 @@
  },
  "proof": [
   {
-   "text": "Identify the restriction of H to the affine open V with the associated module of its sections M. For each point of K choose a principal open D(f) contained in K. Finite type restricts to D(f); the affine criterion makes M_f finitely generated. Compactness of K gives a finite such cover.",
+   "text": "Choose n and a map from the finite free sheaf on V to H restricted to V which is epimorphic after restriction to K. This is exactly the finite-numerator selection step; it asserts no submodule and no monomorphism.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-module-finite-type-affine-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct Q as the abelian image of this finite free map, namely the kernel of its cokernel map. The slice/open-subscheme equivalence preserves kernels and cokernels. Apply Mathlib's existing isQuasicoherent_pushforward_of_isLeftAdjoint theorem directly to transport the source and target to the open subscheme, and to transport the resulting image back; the unit isomorphism identifies that inverse transport with Q. No duplicate slice/open equivalence theorem is declared. The proved source-library quasi-coherent kernel and cokernel closure theorems therefore give quasi-coherence of Q. The finite standard basis of the free sheaf maps through the epimorphic image factorization to global generators of Q. Its local-generators data proves finite type, without using the general finite-type epimorphic-image theorem. The image inclusion is monic by the kernel construction.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-module-finite-type-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Choose finite generating families for these localized modules and write each generator as m/f^n. Let N be the submodule of M spanned by all their numerators. For every cover member N_f -> M_f is injective by exactness of localization and surjective because its image contains each chosen generator. Associate sheaves and use the counit isomorphism to obtain a monomorphism Q -> H restricted to V. N is finitely generated, so Q is quasi-coherent and finite type.",
+   "text": "Restrict the image inclusion to K. The shared moduleOverMap finite-limit-preservation instance preserves its monomorphism. The restricted finite free map factors through it and is epi, so epi_of_epi_fac makes the restricted inclusion epi too. In the abelian category of module sheaves a morphism both mono and epi is an isomorphism. This proves the required witness with no localization-injectivity or inverse-gluing lemma. Empty K and n = 0 are covered by the same categorical argument.",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The inclusion is an isomorphism on the principal cover, hence on K: inverse images of sections glue uniquely, and injectivity follows by separation. Transfer to the slice site Over V. For empty K take the zero submodule and an empty generating family.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-sc-derived-hom-mayer-vietoris",
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-module-finite-type-affine-generators",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-sc-derived-hom-mayer-vietoris"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Properties, Lemma 01PF (label lemma-extend), proof: affine finite-numerator argument using Lemma 01PB (lemma-finite-type-module); read at https://stacks.math.columbia.edu/tag/01PF"
+  "place": "Properties, Lemma 01PF, final paragraph; Lean recombination via the abelian image of a finite free numerator map, with source-library kernel/cokernel closure and shared exact open restriction. Repair: removed the duplicate private slice/open equivalence theorem and directly applied Mathlib quasi-coherent pushforward transport in the image proof."
  },
  "mathlib_searches": [
   {
@@ -143,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261013T082355-L-1639702",
+  "landing": "20261013T095941-L-2454617",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

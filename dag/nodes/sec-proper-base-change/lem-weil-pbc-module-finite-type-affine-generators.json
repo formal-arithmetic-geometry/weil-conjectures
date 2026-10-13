@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-module-finite-type-affine-generators",
+ "kind": "statement",
+ "title": "Finite affine sections generating on a compact open",
+ "statement": "Let X be a scheme [def-pc-scheme], V an affine open, and K a compact open with K contained in V [def-weil-pbc-quasi-compact-scheme]. Let H be a quasi-coherent O_X-module [def-weil-sheaf-of-modules-category, pqf-def-coherent] whose restriction to K is of finite type [def-weil-pbc-module-finite-type-presentation]. There are n natural and an O_V-linear map from the free module sheaf on ULift(Fin n) to H restricted to V whose restriction to K is epimorphic. No submodule, monomorphism, or restricted isomorphism is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PF (label lemma-extend), final paragraph: finite principal cover, fractional generators, and their numerators; Lemma 01PB (label lemma-finite-type-module). Read at https://stacks.math.columbia.edu/tag/01PF"
+ },
+ "proof": [
+  {
+   "text": "Use the affine counit to identify H restricted to V with the associated sheaf of M = H(V). Refine the finite-type local generating cover on K by principal opens D(f) contained in K. On each such open the affine criterion gives finite generation of M_f. Compactness of K selects finitely many principal opens covering K.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each of these finitely many localizations choose finite module generators and express them as m/f^a. Collect all numerators m into a finite family indexed by Fin n. On every cover member the image of this family contains each fraction generator after multiplication by the inverse of the unit f^a. Thus the numerators generate the whole localized module. This is only a family of elements of M, not a constructed submodule.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the standard basis of the free sheaf on ULift(Fin n) to the chosen sections on V. Its restriction is surjective on sections over each principal cover member, so every section on K is locally in its image and the map restricted to K is epimorphic. Transport through the open-subscheme/slice equivalence, preserving the free-module comparison and its standard basis. For K empty use n = 0: the restricted source and target are zero; for K = V this is a finite free surjection onto H on V.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PF, final paragraph, finite-numerator choice before taking its span; the epimorphism is the equivalent free-module formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely many global sections of a quasi coherent sheaf on an affine open generate on a compact open where the sheaf is finite type",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many global sections of a quasi coherent sheaf on an affine open generate on a compact open where the sheaf is finite type",
+   "results": "Search returned 8 hits: SheafOfModules.IsFiniteType.exists_localGeneratorsData, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, SheafOfModules.localGeneratorsDataOfIsFiniteType. No finite affine generating-on-compact-open theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generat.*compact|finite.*global.*section|exists.*finite.*generat",
+   "results": "Search returned 0 hits: . No finite affine generating-on-compact-open theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineCapture",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Affine-union construction: choosing finitely many numerator sections before taking their image",
+   "via": [
+    "lem-weil-pbc-module-finite-type-affine-capture",
+    "lem-weil-pbc-module-finite-type-affine-union",
+    "lem-weil-pbc-module-finite-type-affine-enlargement",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "lem-weil-pbc-module-finite-type-submodule-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleFiniteTypeAffineGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFiniteTypeAffineGenerators.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finiteType_affine_generators",
+  "statement": "theorem exists_finiteType_affine_generators\n    (X : Scheme.{u}) (V : X.affineOpens) (K : X.Opens)\n    (hK : IsCompact (K : Set X)) (hKV : K ≤ V.1)\n    (H : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [H.IsQuasicoherent]\n    [(H.over K).IsFiniteType] :\n    ∃ (n : ℕ) (φ : SheafOfModules.free\n        (R := (moduleRings X.toRingedSpace).over V.1) (ULift.{u} (Fin n)) ⟶ H.over V.1),\n      Epi ((SheafOfModules.overMap (moduleRings X.toRingedSpace)\n        (homOfLE hKV)).map φ)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T095941-L-2454617",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T095941-L-2454617",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
