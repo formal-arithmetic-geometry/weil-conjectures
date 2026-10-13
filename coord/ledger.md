@@ -13093,3 +13093,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:07 L: merged deliver/C3/Sheaf.Paper.EtaleCERowOrdinaryComparison (stage 3; reviewer PASS; first push; landing 20261013T160709-L-1371142 (interface); batch 20261013T160705; modules 4; new nodes 3)
 - 16:07 L: merged deliver/E2/Sheaf.AlgebraicGeometry.EtaleLimitOpenCohomologyCocone (stage 3; reviewer PASS; first push; landing 20261013T160710-L-1371252 (proof); batch 20261013T160705; modules 1; new nodes 0)
 - 16:07 L: merged deliver/E2/Sheaf.Paper.FiniteStructureUnitQuotientSystem (stage 3; reviewer PASS; first push; landing 20261013T160710-L-1371353 (interface); batch 20261013T160705; modules 2; new nodes 1)
+- 16:07 L: merged deliver/K2/Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveRepresentation (stage 3; reviewer PASS; first push; landing 20261013T160711-L-1371599 (proof); batch 20261013T160705; modules 1; new nodes 0)

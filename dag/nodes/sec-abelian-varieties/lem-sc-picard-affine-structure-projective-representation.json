@@ -20,32 +20,50 @@
  },
  "proof": [
   {
-   "text": "Exact restriction and open base change identify the specified restricted image with R(f_U)_* of the coefficient on X×S U. Use the given trivialization to identify the coefficient with O. The base-changed f is flat, proper and of finite presentation; O is finitely presented and relatively flat. Tag 0B91(2) makes its direct image perfect.",
+   "text": "Put R=Gamma(W,U), j=isoSpec.inv followed by U.ι, Y=X times S Spec R, and p=X times S W -> W. Construct q:Y -> X times S W by the pullback universal property. Cancellation of the outer pullback squares proves IsPullback q r p j; hence q is an open immersion. The exact functor H from W-modules to Spec R-modules, obtained by restriction to U followed by inverse affine-site transport, is naturally ordinary restriction along j. The proved sectionwise square pushforward_restrict_square, from WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections, identifies p_* H with restriction along q followed by r_*. Derive this square using exactness of H, K-injective preservation of q-restriction, and the right-derived composition comparisons. Tensor pullback composition and the unit pullback isomorphism transport the given coefficient trivialization to Y. Commutation of exact derived functors with the single functor then identifies the displayed localized image with affine-site transport of Rr_* O_Y[0]. The transport equivalence counit cancels H followed by forward transport.",
    "uses": [
-    "lem-pc-rf-perfect-base-change"
+    "lem-pc-open-immersion-restriction-derived-properties",
+    "def-pc-derived-direct-image",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the perfect image to Spec Gamma(W,U) through isoSpec and the equivalence of localized-site modules with modules on U. Use the affine derived quasi-coherent dictionary and the affine bounded-projective characterization to get a bounded finite-projective module complex. Transport the representing isomorphism back; termwise transport is the stated affinePerfectSheafification functor. The empty affine and zero ring give the zero complex.",
+   "text": "The base-changed r is proper, flat and locally of finite presentation. Its structure sheaf is invertible, hence finitely presented and relatively flat. Apply properFlat_single_derivedDirectImage_perfect to r and O_Y, the perfectness-only specialization of Tag 0B91(2). Perfectness supplies quasi-coherent cohomology. Apply perfect_iff_affine_bounded_projective to the resulting object on Spec R to obtain a bounded complex P of finite projective R-modules and its representing isomorphism.",
    "uses": [
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-pc-affine-localized-derived-sheafification"
+    "lem-pc-proper-flat-single-derived-direct-image-perfect",
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-perfect-affine-bounded-projective"
    ],
    "elementary": false
+  },
+  {
+   "text": "Map the representing isomorphism through the explicit exact affine-site equivalence. Its mapDerivedCategoryFactors comparison and mapHomologicalComplexCompIso identify the image with Q of affinePerfectSheafification W U hU applied termwise to P. Compose with the open comparison from the first step. Retain exactly the bounds, finiteness and projectivity witnesses furnished in the second step. All the maps and constructions exist for empty U and the zero ring as well.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-localized-derived-sheafification",
+  "def-pc-derived-direct-image",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-affine-perfect-module-model",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-open-immersion-restriction-derived-properties",
   "lem-pc-perfect-affine-bounded-projective",
-  "lem-pc-rf-perfect-base-change"
+  "lem-pc-proper-flat-single-derived-direct-image-perfect",
+  "lem-sc-perfect-qcoherent",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "E1",
+  "group": "K2",
   "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 0BF2 (perfect-image paragraph), 0B91(2), 08EB and 06Z0; second-reader reduction of the fixed-affine projective-model argument"
+  "place": "Tags 08FE, 0B91(2), 08EB and 06Z0; explicit derived open-square transport and existing perfectness-only direct-image theorem"
  },
  "mathlib_searches": [
   {
@@ -143,10 +161,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261013T153220-L-1059242",
-  "kind": "interface",
+  "landing": "20261013T160711-L-1371599",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
