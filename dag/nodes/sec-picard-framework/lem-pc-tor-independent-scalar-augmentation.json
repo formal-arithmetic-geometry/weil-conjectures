@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-tor-independent-scalar-augmentation",
+ "kind": "statement",
+ "title": "Tor-independent scalar extension of a K-flat augmentation",
+ "statement": "Let R, A, B be commutative rings and A, B be R-algebras. Suppose Tor_i^R(A,B)=0 for all i>0 [def-weil-pbc-tor-modules]. Let F be an R-K-flat cochain complex [def-pc-module-kflat-complex] and f:F -> B[0] a quasi-isomorphism [def-pc-quasi-iso-modules], where B is restricted to R. Then termwise extension of scalars A tensor_R f is a quasi-isomorphism of A-complexes [def-weil-module-base-change]. No boundedness assumption on F is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/perfect.tex",
+  "place": "Section 06Y5 and Tag 06Y6, lemma-derived-base-change; Tag 08IB, lemma-compare-base-change, final affine Tor calculation. Official Stacks pages read online because this clone omits the source files."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-pc-module-kflat-complex",
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Take the upstream functorial K-flat resolution p:P -> A[0]. Apply the existing single-support Tor-acyclic tensor lemma in degree zero, transporting hTor along the single-complex degree-zero isomorphism. It proves the termwise tensor of p with B is a quasi-isomorphism. The natural single-factor total tensor isomorphism identifies this with p tensor B[0]. The identity R-linear equivalence on B identifies its algebra R-module structure with restriction of its B-module structure, and whisker exchange gives the natural tensor-square compatibility of that identification.",
+   "uses": [
+    "lem-pc-single-support-tor-acyclic-tensor",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the tensor square for p and f, K-flatness of F makes p tensor F a quasi-isomorphism, and K-flatness of P makes P tensor f a quasi-isomorphism. Whisker exchange gives commutativity. The composite through P tensor B[0] is a quasi-isomorphism by the first step. Two-out-of-three therefore gives A[0] tensor f. Transport through the natural single-factor isomorphism to termwise tensor with A. The natural composition comparison identifies this with restriction of scalar extension of f, and restriction detects quasi-isomorphisms. The identity linear equivalence between restriction of A and its algebra R-module structure gives the coefficient comparison. Extension of scalars is additive by its adjunction to restriction, so the functor-composition comparison applies.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-single-support-tor-acyclic-tensor",
+  "def-pc-module-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/perfect.tex",
+  "place": "Section 06Y5 and Tag 06Y6, lemma-derived-base-change; Tag 08IB, lemma-compare-base-change, final affine Tor calculation. Official Stacks pages read online because this clone omits the source files.",
+  "note": "Resolution tensor square using the existing one-term Tor calculation; no new sorry is required."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor independent algebra tensor K flat resolution augmentation quasi isomorphism",
+   "results": "Eight flat-module exactness hits; no complex augmentation comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor vanishing implies extension of scalars of a K flat resolution is a quasi isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*quasiIso|quasiIso.*Tor",
+   "results": "Mathlib Tor.lean lacks balancing. The library single-support Tor lemma suffices after applying it to a resolution of A[0] and using the tensor square with F -> B[0].",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TorIndependentTensorAugmentation",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Scalar Tor calculation in steps 1 and 3 of lem-pc-tor-independent-tensor-augmentation.",
+   "via": [
+    "lem-pc-tor-independent-kflat-resolution-tensor",
+    "lem-pc-tor-independent-kflat-localized-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-tensor-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TorIndependentScalarAugmentation",
+  "file": "lean/Sheaf/Algebra/Homology/TorIndependentScalarAugmentation.lean",
+  "declaration": "ModuleCat.scalarAugmentation_quasiIso_of_torIndependent",
+  "statement": "theorem scalarAugmentation_quasiIso_of_torIndependent\n    {R A B : Type u} [CommRing R] [CommRing A] [CommRing B]\n    [Algebra R A] [Algebra R B]\n    (hTor : ∀ i : ℕ, 0 < i →\n      IsZero (((CategoryTheory.Tor' (ModuleCat.{u} R) i).obj (ModuleCat.of R A)).obj\n        (ModuleCat.of R B)))\n    (F : CochainComplex (ModuleCat.{u} R) ℤ)\n    (hF : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat F)\n    (f : F ⟶ (CochainComplex.singleFunctor (ModuleCat.{u} R) (0 : ℤ)).obj\n      ((restrictScalars (algebraMap R B)).obj (of B B)))\n    (hf : QuasiIso f) :\n    QuasiIso (((extendScalars (algebraMap R A)).mapHomologicalComplex (.up ℤ)).map f)",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T125010-L-3837108",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T125010-L-3837108",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
