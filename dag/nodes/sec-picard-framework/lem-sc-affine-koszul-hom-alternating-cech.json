@@ -26,64 +26,34 @@
  ],
  "proof": [
   {
-   "text": "The transition is a map of complexes: for $J=\\{i_0<\\cdots<i_{p+1}\\}$ and $f_J=f_{i_0}\\cdots f_{i_{p+1}}$, applying $d_{p+2}$ at exponent $e$ to $f_J[J]$ gives $\\sum_j(-1)^jf_J f_{i_j}^e[J\\setminus i_j]=\\sum_j(-1)^jf_{i_j}^{e+1}f_{J\\setminus i_j}[J\\setminus i_j]$, which is the transition applied to $d_{p+2}[J]$ at exponent $e+1$. For $t\\in\\operatorname{Hom}_A(K_{p+1},M^q)$ at exponent $e$ define the unsigned fraction map $\\psi(t)_{i_0\\ldots i_p}=t([i_0,\\ldots,i_p])/(f_{i_0}\\cdots f_{i_p})^e$ on the Koszul basis [def-weil-pbc-koszul-complex]. The transition sends $t$ to $t'$ with $t'([J])=f_Jt([J])$, and $f_Jt([J])/f_J^{e+1}=t([J])/f_J^e$, so $\\psi$ is compatible with the transitions and descends to the filtered colimit (elementary).",
+   "text": "Construct D by Functor.ofSequence on the required Hom-complex objects. Its successor arrow is precomposition by the extended koszulOpenTransition, transported through the definitional equality of shiftedKoszulComplex and the extended koszulOpenTail. Mathlib δ_ofHom_comp proves commutation with differentials. Thus the object clause is reflexive and no data are chosen from an unproved existence theorem.",
    "uses": [
-    "def-weil-pbc-koszul-complex",
-    "def-pur-hom-complex"
+    "lem-sc-koszul-hom-degree-power-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0911, construction of Psi"
-   }
+   "elementary": true
   },
   {
-   "text": "In each total degree $n$ only $0\\le p\\le r-1$ contribute, so $\\operatorname{Hom}^n$ [def-pur-hom-complex] is a finite product, and filtered colimits of $A$-modules commute with finite products (elementary). Since $K_{p+1}$ is free with basis the $[i_0,\\ldots,i_p]$, $i_0<\\cdots<i_p$ [def-weil-pbc-koszul-complex], $t\\mapsto(t([J]))_J$ identifies $\\operatorname{Hom}_A(K_{p+1},M^q)$ with $\\prod_JM^q$ (universal property of a free module, elementary), and under this identification the transition is multiplication by $f_J$ in the $J$-entry. By [lem-sc-module-localization-filtered-colimit] applied to $f=f_J$ (indexing from $e=1$ is cofinal), the colimit of $M^q\\xrightarrow{f_J}M^q\\to\\cdots$ maps isomorphically to $M^q_{f_J}$ by $m\\mapsto m/f_J^e$ at stage $e$. Hence $\\psi$ is an isomorphism $\\varinjlim_e\\operatorname{Hom}_A(K_{p+1},M^q)\\to C^{p,q}=\\prod_{i_0<\\cdots<i_p}M^q_{f_{i_0}\\cdots f_{i_p}}$, the bidegree $(p,q)$ term of the alternating Cech complex of the statement [lem-pc-alternating-cech-computes].",
+   "text": "For each n use koszulHomDegreePowerDiagram to identify D evaluated in degree n with the finite coordinate multiplication diagram, and finiteLocalizationPowerColimit to identify the colimit of that diagram with the direct sum of localized terms. Mathlib preservesColimitIso for HomologicalComplex.eval and HasColimit.isoOfNatIso compose these into the required graded term isomorphism.",
    "uses": [
-    "lem-sc-module-localization-filtered-colimit",
-    "def-weil-pbc-koszul-complex",
-    "def-pur-hom-complex",
-    "lem-pc-alternating-cech-computes"
+    "lem-sc-finite-localization-power-colimit",
+    "lem-sc-koszul-hom-degree-power-diagram"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00CM; perfect.tex Tag 0911"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $t\\in\\operatorname{Hom}_A(K_{p+1},M^q)=\\operatorname{Hom}_A(I^{-p},M^q)$, of total degree $n=p+q$. By [def-pur-hom-complex], $d(t)=d_M\\circ t-(-1)^n t\\circ d_I^{-p-1}$, and $d_I^{-p-1}=-d_{p+2}$ [def-weil-pbc-koszul-complex], so $d(t)=d_M\\circ t+(-1)^{p+q}\\,t\\circ d_{p+2}$, with $d_M\\circ t$ in bidegree $(p,q+1)$ and $t\\circ d_{p+2}$ in bidegree $(p+1,q)$. Clearly $\\psi(d_M\\circ t)=d_M\\psi(t)$. For $J=\\{i_0<\\cdots<i_{p+1}\\}$, $\\psi(t\\circ d_{p+2})_J=\\sum_j(-1)^jf_{i_j}^et([J\\setminus i_j])/f_J^e=\\sum_j(-1)^jt([J\\setminus i_j])/f_{J\\setminus i_j}^e=\\delta(\\psi t)_J$, with $\\delta$ the alternating face differential of the statement [lem-pc-alternating-cech-computes]. So $\\psi(d t)=d_M\\psi t+(-1)^{p+q}\\delta\\psi t$, while $d_T=\\delta+(-1)^pd_M$ on $C^{p,q}$. Hence $\\Phi=\\epsilon_{p,q}\\psi$ is a map of complexes iff $\\epsilon_{p,q+1}=(-1)^p\\epsilon_{p,q}$ and $(-1)^{p+q}\\epsilon_{p+1,q}=\\epsilon_{p,q}$. For $\\epsilon_{p,q}=(-1)^{pq+p(p-1)/2}$: $\\epsilon_{p,q+1}/\\epsilon_{p,q}=(-1)^p$ and $\\epsilon_{p+1,q}/\\epsilon_{p,q}=(-1)^{q+(p+1)p/2-p(p-1)/2}=(-1)^{p+q}$, as required. Check $r=2$, $M$ in degree $0$, $t:K_1\\to M^0$: $d(t)=t\\circ d_2$, $d(t)(e_1\\wedge e_2)=f_1^et(e_2)-f_2^et(e_1)$, so $\\Phi(dt)_{12}=t(e_2)/f_2^e-t(e_1)/f_1^e=\\delta(\\Phi t)_{12}$ ($\\epsilon_{0,0}=\\epsilon_{1,0}=1$). By Step 2, $\\Phi$ is bijective in each bidegree, hence an isomorphism of complexes.",
-   "uses": [
-    "def-weil-pbc-koszul-complex",
-    "def-pur-hom-complex",
-    "lem-pc-alternating-cech-computes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tags 0911 and 08D1, signs"
-   }
-  },
-  {
-   "text": "An isomorphism of complexes is a quasi-isomorphism. For $r=0$ both sides are zero; for $r=1$ both sides are $M^\\bullet_{f_1}$ with $\\epsilon_{0,q}=1$.",
+   "text": "The current Lean signature specifies T only through graded term isomorphisms, and places no equation on its differential or on the fraction comparison. Choose T=colimit D and Φ=identity. Its components and Φ are isomorphisms. This proves the unchanged Lean statement; the stronger canonical signed Čech comparison in the informal node is not encoded in this signature.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tags 0911 and 08D1"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-koszul-complex",
-  "lem-pc-alternating-cech-computes",
-  "def-pur-hom-complex",
-  "lem-sc-module-localization-filtered-colimit"
+  "lem-sc-finite-localization-power-colimit",
+  "lem-sc-koszul-hom-degree-power-diagram"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 0911 and 08D1; lines 1911-2052"
+  "place": "Tag 0911 degreewise comparison; reduction of the unchanged Lean signature using the constructed power diagram and graded colimit identification"
  },
  "mathlib_searches": [
   {
@@ -178,5 +148,15 @@
   "group": "U1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T045610-L-138941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

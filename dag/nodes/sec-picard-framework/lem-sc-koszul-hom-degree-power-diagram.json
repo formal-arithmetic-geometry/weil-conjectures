@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-koszul-hom-degree-power-diagram",
+ "kind": "statement",
+ "title": "KoszulHomDegreePowerDiagram",
+ "statement": "Let A be a commutative ring, f : Fin r -> A, and M an integer-indexed cochain complex of A-modules. Form koszulAdditiveHomPowerDiagram using the Hom complexes of shiftedKoszulComplex for exponents e+1, with successor maps precomposition by the extended diagonal exterior-power transition from exponent e+2 to exponent e+1. For every total degree n, evaluating this diagram in degree n is naturally isomorphic to the constant-object sequential diagram whose object is the direct sum over p : Fin r of the products over strictly increasing tuples t : Fin(p+1) -> Fin r of M^(n-p), and whose successor map multiplies the t-coordinate by the product over i of f(t i).",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section Koszul complexes, equation-system and proof of lemma-alternating-cech-complex (Tag 0911); following total Hom paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-shifted-koszul-augmentation",
+  "def-sc-koszul-open-system",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the exterior basis of the free rank-r module to evaluate each map I^(-p) -> M^(n-p) on strictly increasing (p+1)-tuples. I^j vanishes for j>0 and for j<=-r, so only p in Fin r contributes. Identify this finite product over p with its direct sum.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The extended power transition is the exterior power of the diagonal e_i -> f_i e_i. It multiplies the wedge indexed by t by product_i f(t i). Precomposition therefore multiplies that evaluation coordinate by the same product. This makes the degreewise basis isomorphisms commute with each successor arrow, and hence with all arrows in the sequential diagram.",
+   "uses": [
+    "def-sc-koszul-open-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Hom precomposition maps commute with the Hom differential by Mathlib HomComplex.delta_ofHom_comp (written δ_ofHom_comp), so they define actual maps of complexes. Functor.ofSequence gives the diagram without choosing any unproved existence witness. The shifted tail equality is definitional. For r=0 the complex is zero, for r=1 its only coordinate is M^n.",
+   "uses": [
+    "def-pc-shifted-koszul-augmentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-shifted-koszul-augmentation",
+  "def-sc-koszul-open-system",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0911 degreewise basis and localization argument, applied to the existing Lean interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimit of Hom from shifted Koszul complexes identifies with localized module terms of alternating Cech complex",
+   "results": "localCohomology and generic filtered colimit results; no degree-diagram match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex",
+   "results": "Mathlib HomComplex and cochain API; no basis power-diagram comparison",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]ech|koszul.*[Cc]ech|shiftedKoszulComplex",
+   "results": "Existing module-valued comparison construction, but no additive degreewise natural isomorphism",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation on the exterior power basis identifies Koszul Hom complex power transitions with multiplication on increasing tuples",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "compare Koszul Hom complexes with alternating Cech complex: degreewise exterior basis and transitions",
+   "via": [
+    "lem-sc-affine-koszul-hom-alternating-cech"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulHomDegreePowerDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulHomDegreePowerDiagram.lean",
+  "declaration": "AlgebraicGeometry.koszulHomDegreePowerDiagram",
+  "statement": "theorem koszulHomDegreePowerDiagram (n : ℤ) :\n    Nonempty ((koszulAdditiveHomPowerDiagram A r f M ⋙\n      HomologicalComplex.eval AddCommGrpCat.{u} (ComplexShape.up ℤ) n) ≅\n      finiteLocalizationPowerDiagram A (Fin r)\n        (fun p ↦ {t : Fin (p.val + 1) → Fin r // StrictMono t})\n        (fun p ↦ M.X (n - (p.val : ℤ)))\n        (fun p t ↦ ∏ i : Fin (p.val + 1), f (t.1 i)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T045610-L-138941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T045610-L-138941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

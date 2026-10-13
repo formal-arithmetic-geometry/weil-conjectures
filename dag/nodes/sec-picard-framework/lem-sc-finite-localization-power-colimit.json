@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-finite-localization-power-colimit",
+ "kind": "statement",
+ "title": "FiniteLocalizationPowerColimit",
+ "statement": "Let A be a commutative ring, iota a finite index type, kappa i a finite type for every i, N i an A-module, and g i t an element of A for each (i,t). Form the sequential diagram of additive groups with constant object the direct sum over i of the products over t of N i, whose successor map sends x_i(t) to g i t times x_i(t). Its colimit is isomorphic to the additive group of the direct sum over i of the products over t of LocalizedModule.Away (g i t) (N i).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Module localization universal property; perfect.tex lemma-alternating-cech-complex, finite-coordinate colimit calculation (Tag 0911)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply ModuleCat.localization_away_colimit separately to each coordinate (i,t), obtaining the fraction isomorphism for the power sequence with multiplier g i t.",
+   "uses": [
+    "lem-sc-module-localization-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget the coordinate module diagrams to additive groups. Mathlib's forgetful functor preserves filtered colimits, so the coordinate colimits are still the additive groups of the localizations.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Finite products commute with these sequential filtered colimits: move the finitely many representatives to the maximum of their stages for surjectivity; move finitely many coordinate equalities to the maximum of their witness stages for injectivity. Colimits commute with direct sums by the universal property, hence assembling the coordinate isomorphisms yields the displayed isomorphism. Empty coordinate families contribute the zero additive group.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-localization-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0911 degreewise basis and localization argument, applied to the existing Lean interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite direct sum of finite products of module multiplication sequences has colimit equal to the same family of localizations away from the multipliers",
+   "results": "IsLocalizedModule.pi and generic localization/colimit results; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, CategoryTheory.Limits.colimit",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*colimit|colimit.*localization|finite.*product",
+   "results": "Existing one-coordinate ModuleCat.localization_away_colimit, no finite-family statement",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite products of module multiplication sequences have colimit equal to products of localizations away from the multipliers",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "localization of the finite family of Koszul Hom cochain entries",
+   "via": [
+    "lem-sc-affine-koszul-hom-alternating-cech"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocalizationPowerColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalizationPowerColimit.lean",
+  "declaration": "AlgebraicGeometry.finiteLocalizationPowerColimit",
+  "statement": "theorem finiteLocalizationPowerColimit [Finite ι] [∀ i, Finite (κ i)] :\n    Nonempty (colimit (finiteLocalizationPowerDiagram A ι κ N g) ≅\n      AddCommGrpCat.of (DirectSum ι\n        (fun i ↦ ∀ t : κ i, LocalizedModule.Away (g i t) (N i))))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T045610-L-138941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261013T045610-L-138941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

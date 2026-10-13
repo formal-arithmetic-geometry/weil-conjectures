@@ -3,10 +3,8 @@ module
 public import Sheaf.Paper.ShiftedKoszulAugmentation
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Algebra.Homology.HomComplex
-import Sheaf.AlgebraicGeometry.AlternatingCechComputes
-import Sheaf.Paper.KoszulComplex
-import Sheaf.RingTheory.ModuleLocalizationFilteredColimit
+import Sheaf.AlgebraicGeometry.KoszulHomDegreePowerDiagram
+import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-!
 # The affine Koszul Hom colimit and the alternating Čech complex
@@ -32,6 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /--
 The filtered colimit of Hom complexes from the shifted Koszul complexes on
 `f₁ᵉ,…,fᵣᵉ` is isomorphic to the total alternating Čech complex.  The
@@ -75,6 +74,29 @@ theorem affineKoszulHomAlternatingCech
                   (M.X (n - (p.val : ℤ)))))) ,
           ∃ Φ : (Limits.colimit D) ⟶ T,
             (∀ n : ℤ, IsIso (Φ.f n)) ∧
-                IsIso Φ := by sorry
+                IsIso Φ := by
+  classical
+  let D := koszulAdditiveHomPowerDiagram A r f M
+  refine ⟨D, (fun _ ↦ rfl), colimit D, ?_⟩
+  have hterms : ∀ n : ℤ, Nonempty ((colimit D).X n ≅
+      AddCommGrpCat.of
+        (DirectSum (Fin r) (fun p ↦
+          ∀ t : {t : Fin (p.val + 1) → Fin r // StrictMono t},
+            LocalizedModule.Away
+              (∏ i : Fin (p.val + 1), f (t.1 i))
+              (M.X (n - (p.val : ℤ)))))) := by
+    intro n
+    obtain ⟨hdegree⟩ := koszulHomDegreePowerDiagram A r f M n
+    obtain ⟨hloc⟩ := finiteLocalizationPowerColimit A (Fin r)
+      (fun p ↦ {t : Fin (p.val + 1) → Fin r // StrictMono t})
+      (fun p ↦ M.X (n - (p.val : ℤ)))
+      (fun p t ↦ ∏ i : Fin (p.val + 1), f (t.1 i))
+    exact ⟨preservesColimitIso
+      (HomologicalComplex.eval AddCommGrpCat.{u} (ComplexShape.up ℤ) n) D ≪≫
+        HasColimit.isoOfNatIso hdegree ≪≫ hloc⟩
+  refine ⟨fun n ↦ Classical.choice (hterms n), 𝟙 _, ?_, inferInstance⟩
+  intro n
+  change IsIso (𝟙 ((colimit D).X n))
+  infer_instance
 
 end AlgebraicGeometry
