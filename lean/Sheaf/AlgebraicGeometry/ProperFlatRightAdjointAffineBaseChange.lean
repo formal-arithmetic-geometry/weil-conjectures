@@ -8,14 +8,10 @@ public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.Algebra.Homology.BaseChangeRHomPerfect
-import Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect
-import Sheaf.AlgebraicGeometry.FlatPrecomposePus
-import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
-import Sheaf.AlgebraicGeometry.PerfectGeneratorExists
-import Sheaf.AlgebraicGeometry.PerfectGeneratorPullback
-import Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage
-import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffinePullbackPerfectDetectsIso
+import Sheaf.AlgebraicGeometry.ProperFlatAffineBaseChangeHomBijective
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 
 @[expose] public section
 
@@ -40,17 +36,16 @@ isomorphism used in that definition.
 Source: Stacks Project, duality.tex, Tag 0AA8 (Lemma 48.6.2), case (1).
 (blueprint: lem-sc-proper-flat-right-adjoint-affine-basechange).
 
-Proof plan: (1) write the affine schemes as spectra.  Flatness and the
-flat-complex base-change lemma make the base-change transformation for
-`Rf_*` an isomorphism, and flatness gives the required Tor-independence.
-(2) Choose a perfect generator of `D_QCoh(X)`, pull it back along the affine
-map `g_X`, and apply the proper-support perfect direct-image theorem to obtain
-perfectness and arbitrary base change for its direct image.  (3) Apply the
-flat-precomposition comparison to the canonical mate map; the pullback Hom
-comparison, global Hom adjunctions, the perfect RHom base-change theorem, and
-the inverse of the base-change isomorphism identify its image as an
-isomorphism.  (4) The pulled-back perfect generator detects zero cones, so the
-mate map is an isomorphism; this holds for every `K`.
+Proof: Supply derived localizations on opens using
+`nonempty_derivedOpenLocalization`. Since both base schemes are affine, g is affine,
+and so is its base change. The theorem
+`proper_flat_rightAdjoint_affine_baseChange_hom_bijective` gives bijectivity of
+composition with the canonical mate map on all shifted Hom groups from affine
+pullbacks of perfect complexes. Apply `affinePullbackPerfect_detects_iso`.
+That theorem chooses a perfect generator, pulls it back, and proves directly by
+exactness of Hom for a distinguished triangle that the cone is zero. The underlying
+map is therefore invertible, and the fully faithful quasi-coherent inclusion reflects
+this invertibility.
 -/
 theorem proper_flat_rightAdjoint_affine_baseChange
     [∀ Z : Scheme.{u},
@@ -78,6 +73,18 @@ theorem proper_flat_rightAdjoint_affine_baseChange
         (pullback.fst f g) pullback.condition E.obj))
     (K : schemeDerivedQCohCategory Y) :
     IsIso (dualityEquationBaseChangeMap f g a a' adjf adjf' hβ K) := by
-  sorry
+  classical
+  let : ∀ U : X.Opens,
+      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=
+    Classical.choice (nonempty_derivedOpenLocalization X)
+  have : QuasiSeparatedSpace (pullback f g : Scheme.{u}) :=
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)
+  have : IsAffineHom g := inferInstance
+  have : IsAffineHom (pullback.fst f g) := MorphismProperty.pullback_fst f g ‹_›
+  apply affinePullbackPerfect_detects_iso (pullback.fst f g)
+    (dualityEquationBaseChangeMap f g a a' adjf adjf' hβ K)
+  intro M hM m n
+  exact proper_flat_rightAdjoint_affine_baseChange_hom_bijective
+    g f a a' adjf adjf' hβ K M hM m n
 
 end AlgebraicGeometry

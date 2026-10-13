@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-affine-pullback-perfect-detects-iso",
+ "kind": "statement",
+ "title": "Affine pullbacks of perfect complexes detect isomorphisms",
+ "statement": "Let $g:X'\\to X$ be an affine morphism of quasi-compact quasi-separated schemes [def-pc-scheme], and let $\\varphi:A\\to B$ be a morphism in $D_{QCoh}(X')$ [def-pc-derived-category]. Suppose for every perfect $M\\in D_{QCoh}(X)$ [def-pc-perfect-complex] and all integers $m,n$ the map $\\operatorname{Hom}(Lg^*M[m],A[n])\\to\\operatorname{Hom}(Lg^*M[m],B[n])$ induced by $\\varphi[n]$ is bijective [def-pc-derived-pullback]. Then $\\varphi$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8 (lemma-more-base-change), first paragraph: affine pullback generator and zero-cone detection"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose a perfect generator on X; its affine pullback detects zero objects on X prime.",
+   "uses": [
+    "lem-pc-perfect-generator-exists",
+    "lem-pc-perfect-generator-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quasi-coherent property is triangulated. Complete the underlying morphism to a distinguished triangle whose third term Z is quasi-coherent.",
+   "uses": [
+    "lem-pc-derived-qcoh-compact-generation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each shifted pulled-back generator Q[m], injectivity of Hom(Q[m],phi[1]) makes t composed with the third triangle arrow zero. Exactness makes t factor through the second triangle term; surjectivity at shift zero and zero composition of the first two triangle arrows then make t zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The pulled-back generator makes Z zero; a distinguished triangle with zero third term has invertible first arrow. The fully faithful inclusion reflects invertibility.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-generator-exists",
+  "lem-pc-perfect-generator-pullback",
+  "lem-pc-derived-qcoh-compact-generation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, first paragraph: affine pullback generator and zero-cone detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper flat affine base change right adjoint induces isomorphism on derived Hom from perfect complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper flat morphism affine base change right adjoint derived category perfect generator detects isomorphism",
+   "results": "AlgebraicGeometry.flat_iff; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine; AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat.instIsMultiplicativeScheme; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Flat.flat_appLE",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, Yoneda",
+   "results": "loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjoint.*baseChange|generator.*[Ii]so|[Ii]so.*generator",
+   "results": "Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean; Mathlib/RingTheory/Ideal/Norm/RelNorm.lean; Mathlib/RingTheory/Ideal/IsPrincipal.lean; Mathlib/RingTheory/Ideal/IsPrincipal.lean; Mathlib/RingTheory/Ideal/IsPrincipal.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatRightAdjointAffineBaseChange",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "first paragraph: affine pullback generator and zero-cone detection",
+   "via": [
+    "lem-sc-affine-pullback-perfect-detects-iso",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePullbackPerfectDetectsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePullbackPerfectDetectsIso.lean",
+  "declaration": "AlgebraicGeometry.affinePullbackPerfect_detects_iso",
+  "statement": "theorem affinePullbackPerfect_detects_iso\n    [∀ Z : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X X' : Scheme.{u}}\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    [CompactSpace X'] [QuasiSeparatedSpace X']\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (g : X' ⟶ X) [IsAffineHom g]\n    {A B : schemeDerivedQCohCategory X'} (φ : A ⟶ B)\n    (htest : ∀ (M : schemeDerivedQCohCategory X), Scheme.IsPerfect X M.obj →\n      ∀ m n : ℤ, Function.Bijective\n        (fun t : ((derivedPullback g).obj M.obj)⟦m⟧ ⟶ A.obj⟦n⟧ ↦ t ≫ φ.hom⟦n⟧')) :\n    IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T022433-L-3222259",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261013T022433-L-3222259",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
