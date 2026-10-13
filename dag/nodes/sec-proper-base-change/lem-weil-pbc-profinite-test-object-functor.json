@@ -24,9 +24,163 @@
   "def-weil-size-convention",
   "def-weil-pbc-proetale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any finite-quotient presentation $S=\\varprojlim S_i$ and ring $R$, the pullback maps exhibit $\\operatorname{LC}(S,R)=\\varinjlim R^{S_i}$ as rings. Indeed [lem-weil-pbc-profinite-limit-function-factorization] factors every locally constant function through a stage. Two representatives at different stages can be pulled back to a common stage by cofilteredness; if their pullbacks to $S$ agree, they agree there because its quotient projection is surjective. This proves the colimit universal property, including addition and multiplication. The same assertion holds for the directed system of all finite clopen partitions of $S$: the values of a locally constant function give a finite clopen partition, since compactness makes its image finite. These partitions are a small directed set under refinement. They separate points by [lem-weil-pbc-profinite-clopen-basis] and Hausdorffness; a compatible choice of nonempty partition cells has nonempty intersection by compactness, so $S$ is their topological limit. For $S=\\varnothing$ the unique partition has no cells.",
+   "uses": [
+    "lem-weil-pbc-profinite-limit-function-factorization",
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering)"
+   }
+  },
+  {
+   "text": "First form the inverse system $X[P]=\\coprod_{p\\in P}X$ over the directed set of finite clopen partitions $P$ of $S$. Adjoin $X$ as a least stage, with the structure maps $X[P]\\to X$; this also works when $S$ is empty. On an affine open $U=\\operatorname{Spec}R\\subset X$, the inverse image of $U$ in $X[P]$ is $\\coprod_P\\operatorname{Spec}R=\\operatorname{Spec}(R^P)$ by [lem-weil-pbc-finite-affine-coproduct-spectrum]. The same calculation on each target component shows that every transition is affine: the preimage of a copy of an affine open is a finite coproduct of that affine open. Apply [lem-weil-pbc-morphism-affine-schemes-affine] on each such affine target open and [pqf-lem-affine-local-target] to conclude affineness globally. Thus [lem-weil-pbc-limit-affine-transition-core] supplies a scheme limit, with a map to the adjoined stage $X$; call it $X[S]$. A cone in schemes to this augmented diagram is exactly a cone of $X$-schemes to the original diagram, so it is also the required relative limit.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-limit-affine-transition-core",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX (lemma-directed-inverse-system-has-limit) and 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-limit-cone-affine-projections-opens] to the least stage $X$: the structure map $X[S]\\to X$ is affine, and its inverse image $U[S]$ over every affine open $U=\\operatorname{Spec}R$ is the limit of $\\operatorname{Spec}(R^P)$. Step 1 and [lem-weil-pbc-spec-small-colimit-limit] therefore identify it canonically with $\\operatorname{Spec}\\operatorname{LC}(S,R)$. For any other small cofiltered finite-quotient presentation $(S_i)$, step 1 and that same spectrum theorem show that this identical affine scheme is the limit of $\\coprod_{S_i}U$. The compatible cone legs glue over the affine opens of $X$ by [lem-weil-pbc-scheme-morphism-gluing]. Given a competing cone over $X$, restrict its source to the preimages of these affine opens. The local limit properties give unique factorization maps; on intersections they agree by further restriction to affine opens and uniqueness. The same gluing theorem gives a unique global factorization. Thus $X[S]$ is the limit for every such presentation, canonically and compatibly with the cone legs. No quasi-compactness or quasi-separatedness of $X$ was used.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YX and 01YW, restriction to opens and affine computation"
+   }
+  },
+  {
+   "text": "For a continuous map $f:S\\to T$, precomposition is a ring map $\\operatorname{LC}(T,R)\\to\\operatorname{LC}(S,R)$, giving the local map $U[S]\\to U[T]$ by [def-weil-affine-spectrum]. These maps agree on overlaps: for each finite clopen partition of $T$, its preimage partition of $S$ prescribes the map to the corresponding finite coproduct of the overlap, and uniqueness of the local limit determines the map. [lem-weil-pbc-scheme-morphism-gluing] gives $X[f]$. On functions $(g f)^*=f^*g^*$ and $\\mathrm{id}^*=\\mathrm{id}$, so the induced maps satisfy identity and composition laws. This also proves independence is natural in $S$. With $X=\\operatorname{Spec}\\mathbf Z$, step 3 is the required functorial identification with $\\operatorname{Spec}\\operatorname{LC}(S,\\mathbf Z)$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
+   }
+  },
+  {
+   "text": "The algebra formulas needed for products can be checked on finite partitions. For a ring map $R\\to A$, the map $A\\otimes_R\\operatorname{LC}(S,R)\\to\\operatorname{LC}(S,A)$ sends $a\\otimes h$ to $(s\\mapsto a h(s))$. A function constant with value $a_P$ on partition cells has inverse $\\sum_P a_P\\otimes 1_P$; refinement does not change this sum since $1_P=\\sum_{Q\\subset P}1_Q$. Conversely a tensor is a finite sum, so one common partition for its finitely many functions verifies the inverse identity. Likewise $\\operatorname{LC}(S,R)\\otimes_R\\operatorname{LC}(T,R)\\cong\\operatorname{LC}(S\\times T,R)$ sends $h\\otimes k$ to $(s,t)\\mapsto h(s)k(t)$. The product is compact by [lem-weil-pbc-tychonoff-product-quasi-compact], and clopen rectangles form a basis by [lem-weil-pbc-profinite-clopen-basis]. A finite rectangular cover on which a function is constant refines to the cells of the product of two finite clopen partitions; its inverse is $\\sum_{P,Q}a_{PQ}1_P\\otimes1_Q$. The same refinement identity verifies both inverses. The empty-space cases give the zero ring. Applying [lem-weil-pbc-spec-small-colimit-limit] to the ring pushout diagram (the tensor product, by its ring-homomorphism universal property) identifies its spectrum with the scheme fibre product. Hence $U[S\\times T]\\cong U[S]\\times_U U[T]$, and these identifications glue over $X$ by [lem-weil-pbc-scheme-morphism-gluing].",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-weil-pbc-profinite-clopen-basis",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
+   }
+  },
+  {
+   "text": "For a closed subset $E\\subset S$, restriction $\\operatorname{LC}(S,R)\\to\\operatorname{LC}(E,R)$ is surjective. A function on $E$ has finitely many values by compactness. Each value fibre is compact and relatively clopen; [lem-weil-pbc-profinite-clopen-basis] supplies a finite union of clopen neighbourhoods in $S$ whose intersection with $E$ is that fibre. Disjointify these finitely many clopens, and give the complement value $0$. This extends the function. Its kernel consists of functions whose clopen support misses $E$. For continuous $f,g:S\\to T$, let $E=\\{s:f(s)=g(s)\\}$, which is closed since $T$ is Hausdorff. The ideal $I$ generated by $f^*h-g^*h$ for $h\\in\\operatorname{LC}(T,R)$ is exactly this kernel. At $s\\notin E$, choose a clopen of $T$ separating $f(s),g(s)$; for its characteristic function the difference is $1$ or $-1$ on a clopen neighbourhood $W$ of $s$ contained in $S\\setminus E$. Multiplying by $1_W$ shows $1_W\\in I$. Cover the compact support of any kernel function by finitely many such $W$, disjointify, and multiply their characteristic functions by the function to express it in $I$. Therefore $\\operatorname{LC}(E,R)=\\operatorname{LC}(S,R)/I$. The quotient is the coequalizer of the two ring maps by the elementary ring-homomorphism universal property; [lem-weil-pbc-spec-small-colimit-limit] makes its spectrum their scheme equalizer. Glue these equalizers over $X$ by [lem-weil-pbc-scheme-morphism-gluing]. Together with step 5 and $\\operatorname{LC}(*,R)=R$, this proves finite-limit preservation: every finite cone is the equalizer of the two maps between the product over its objects and the product over its arrows, so terminal objects, binary products and equalizers suffice.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-locally-constant-prime-spectrum], points of $U[S]=\\operatorname{Spec}\\operatorname{LC}(S,R)$ are $(s,\\mathfrak p)$ with prime ideal $Q=\\{h:h(s)\\in\\mathfrak p\\}$. Its local ring is $R_{\\mathfrak p}$. Indeed [lem-weil-pbc-affine-open-stalk-localization] computes the stalk as $\\operatorname{LC}(S,R)_Q$. Evaluation induces the map to $R_{\\mathfrak p}$, and constants give an inverse: each fraction $h/k$ agrees with the constant fraction $h(s)/k(s)$ after multiplication by the characteristic function of a clopen neighbourhood where both $h,k$ are constant. This characteristic function is outside $Q$ and becomes $1$ in the localization, since it is idempotent and invertible. Conversely, if a constant numerator becomes zero in $R_{\\mathfrak p}$, it is killed by a constant denominator outside $Q$. Thus the maps are mutually inverse. Under $X[f]$ points map as $(s,\\mathfrak p)\\mapsto(f(s),\\mathfrak p)$, directly from the displayed evaluation ideals, and the local-ring map becomes the identity of $R_{\\mathfrak p}$. It is therefore flat by [def-weil-flat-morphism], as the rank-one free module over itself. The same argument for $S\\to *$ proves $X[S]\\to X$ flat.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-prime-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
+   }
+  },
+  {
+   "text": "For any $f:S\\to T$, form $E=S\\times_T S$. It is a closed subspace of $S\\times S$, hence compact; it is Hausdorff and totally disconnected as a subspace, so profinite. Step 6 identifies $X[E]=X[S]\\times_{X[T]}X[S]$. The diagonal of $X[f]$ is precisely $X[\\delta]$ for $\\delta:S\\to E$, since both of its projections are identities. Step 7 applies to this continuous map and makes the diagonal flat. By [def-weil-weakly-etale-morphism], $X[f]$ is weakly etale. In particular take $T=*$: the structure morphism is weakly etale, so $X[S]$ is an object and $X[f]$ a morphism of [def-weil-pbc-proetale-site]. The finite limits proved above are also limits in this full subcategory of $X$-schemes, because their vertices are now known to be weakly etale.",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
+   }
+  },
+  {
+   "text": "For a finite jointly surjective family $f_a:S_a\\to T$, step 7 makes the images of $U[S_a]\\to U[T]$ jointly cover: every $(t,\\mathfrak p)$ lifts to $(s,\\mathfrak p)$ once $f_a(s)=t$. Each arrow is affine. On $U[T]$ this follows from the explicit spectra in step 3; on an arbitrary affine open $V\\subset X[T]$, cover $V$ by affine opens $W$ contained in such $U[T]$: for each point of the affine $V$, choose a principal open contained in its intersection with one member of the open cover by the $U[T]$. Their preimages are affine: every morphism between affine schemes is affine, and affineness is local on the target, by [lem-weil-pbc-morphism-affine-schemes-affine] and [pqf-lem-affine-local-target]. Thus the inverse image of $V$ in each $X[S_a]$ is an affine open. Together with flatness from step 7 these finitely many affine opens verify the precise covering criterion in [def-weil-pbc-fpqc-covering]. By [def-weil-pbc-proetale-site] and weak étaleness from step 8, this is a pro-etale covering. If the family is empty then joint surjectivity forces $T=\\varnothing$; its test object is empty, so the criterion is vacuous.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
+   }
+  },
+  {
+   "text": "Finally, restriction to the summands is the ring isomorphism $\\operatorname{LC}(S\\sqcup T,R)=\\operatorname{LC}(S,R)\\times\\operatorname{LC}(T,R)$: the inverse joins the two functions. [lem-weil-pbc-finite-affine-coproduct-spectrum] identifies its spectrum with $U[S]\\sqcup U[T]$, and [lem-weil-pbc-scheme-morphism-gluing] glues these identifications over $X$. For the empty union $\\operatorname{LC}(\\varnothing,R)=0$, whose spectrum is empty, so finite disjoint unions, including the nullary one, are preserved.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097D (lemma-construct-profinite), explicit locally constant special construction; details supplied here for RefactorInstruction Section 4 lem:XS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-limit-affine-transition-core",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-weil-pbc-locally-constant-prime-spectrum",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-flat-morphism",
+  "def-weil-weakly-etale-morphism",
+  "def-weil-pbc-proetale-site",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Details of the finite-quotient argument in RefactorInstruction Section 4 lem:XS; related Tag 097D"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,12 +219,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-profinite-point-pullback",
   "by": "worker",
   "date": "2026-10-13"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-profinite-test-object-functor",
+  "worker": "stage1",
+  "summary": "Expanded the finite-quotient construction on affine charts, supplied the equalizer and local-ring arguments and checked finite fpqc covers without qcqs hypotheses on X. Reused the general inverse-limit and spectrum facts. Added two Mathlib topology leaves and a closed Lean spectrum attachment. No statement change.",
+  "blueprint": "Coefficient realization below thm-weil-pbc-finite-extension through nt-target-proetale-e: RefactorInstruction Section 4 equations finite-XI, XS, Lemma lem:XS. Steps 1–4 construct the test functor; steps 5–6 prove finite limits, steps 7–9 prove weak étaleness and covers, step 10 proves disjoint unions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition-core",
+    "why": "Generic scheme construction used on finite-coproduct affine charts; no node in sk-thm-properbasechange supplies this tool, and it does not replace a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-ND-33917f684",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-33917f684 (reviewer sub-agent of L); spot-checked: Read all mathematics and cited statements; checked master coefficient/category and base-change definitions, finite-limit calculations, flatness, fpqc covers, duplicates and edge cases. Repaired three incomplete new-node records, including the independently verified closed spectrum attachment. Statements and proof unchanged. Concrete checks are in review.md; corrected JSON files are under fixes/dag/nodes/sec-proper-base-change/.; 3 file(s) fixed by the reviewer"
+ }
 }
