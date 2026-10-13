@@ -15,30 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Fix U and s. Their images are morphisms of module presheaves on the localized site Over U. Restrict these morphisms to every (i,j) total tensor summand with i+j=p. Pure-tensor equality and the bilinear universal property give equality on each presheaf tensor. Sheafification commutes with localization to Over U, so its adjunction extends this equality to each sheaf tensor summand. This uses the canonical comparison homTensorSectionMap, not a claim that sheaf tensor sections are globally sums of pure tensors.",
+   "text": "Transpose a map X -> Hom(T,N) to a map T -> Hom(X,N): use the concrete presheaf tensor-Hom equivalence, the presheaf symmetry, and the same equivalence again. The transpose is a sheaf-module morphism because its target is the existing internal Hom sheaf. This operation is injective: forget to presheaf morphisms and cancel the two equivalences and the symmetry isomorphism. The private helpers reproduce the proved source tensor-Hom construction with independent site universes; each helper lemma explicitly binds C : Type u, Category.{v} C, the CommRingCat.{max u v} coefficient functor and its presheaves, distinguishing this generalization from the single-universe source lemmas; no unproved existence result is used.",
    "uses": [
-    "lem-sc-hom-tensor-degreewise",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-sc-hom-tensor-degreewise"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restriction to Over U preserves coproducts. Thus the coproduct universal property for T^p gives equality of the two localized morphisms. Extensionality in W, s and U gives equality of internal-Hom sections and then of the original sheaf-module morphisms a,b.",
+   "text": "Apply HomologicalComplex.mapBifunctor.hom_ext to the transposed maps. For each (i,j) summand, precompose with tensorObjIsoSheafification.inv and apply the injectivity of the sheafification adjunction homEquiv. Presheaf morphism extensionality and ModuleCat.MonoidalCategory.tensor_ext reduce equality to sectionwise pure tensors. This proves the tensor universal-property step directly rather than using the abstract tensorClosed statement.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "lem-sc-hom-tensor-degreewise"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Expand the transpose at U and W -> U. Its value is a at the base W, evaluated at the identity object of Over W, on the restriction of the tensor-summand image. Naturality of homTensorSectionMap followed by the summand inclusion moves that restriction inside the sectionwise tensor. The restriction of x tensor y is the tensor of the two restrictions. Apply the given hypothesis with base W, identity localization and these restricted sections. Injectivity of the transpose yields a=b.",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
-  "lem-pc-sheaf-modules-tensor-closed",
   "lem-sc-hom-tensor-degreewise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A90: expanded localized component proof by A4; tensor universal property from Modules on Sites, Section 03EK"
+  "place": "Tag 0A90, pure-tensor extensionality; P1 implements it by transposition using the proved source Presheaf.InternalHom tensor-Hom construction and the module sheafification adjunction (Modules on Sites, Section 03EK)."
  },
  "mathlib_searches": [
   {
@@ -122,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
+  "reviewer": "X-31c57",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261013T031529-L-3567700",
+  "landing": "20261013T062527-L-734371",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged theorem signature and proof with its node; verified independent-universe helpers against the source API, permitted axioms only, clean compilation of the delivery and sole direct importer, DAG changes and report."
  }
 }
