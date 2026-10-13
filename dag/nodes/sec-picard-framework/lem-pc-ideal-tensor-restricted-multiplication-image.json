@@ -18,35 +18,42 @@
  ],
  "proof": [
   {
-   "text": "The affine tensor comparison and ideal product formula compute the range of multiplication on I(U)^m T(U) as I(U)^m I(U)^n H(U)=I(U)^(n+m) H(U), including exponents zero.",
+   "text": "Prove quasi-coherence of the ideal realization by the affine basic-open localization criterion for its closed-subscheme pushforward, then quasi-coherence of its kernel. Tensor comparison and kernel/cokernel closure give quasi-coherence of all product and recursive-power objects. The affine pushforward argument is proved locally to avoid a circular import of proper-cohomology modules.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "pqf-lem-qcoh-principal-open-criterion",
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
     "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "The affine quasi-coherent image formula identifies the categorical image range with this multiplication range.",
+   "text": "Tensor induction computes the affine product-inclusion range for any quasi-coherent ideal inclusion i. The generalized product lemma also maps this range through any module morphism phi, giving range(product inclusion followed by phi) = range(i) times range(phi). Quasi-coherence and an induction for arbitrary ideal inclusions compute all recursive-power ranges as range(i)^m, including zero via the identity inclusion. Transfer the abelian-image affine formula through an arbitrary isomorphic image presentation. Apply the product lemma with phi = mu directly to j followed by mu, and specialize the ideal range to I(U)^m. Multiplication has range I(U)^n H(U); hence the composite has range I(U)^m I(U)^n H(U) = I(U)^(n+m) H(U), which is the higher-product inclusion range.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
    ],
    "elementary": false
   },
   {
-   "text": "Both inclusions are monic. Equal ranges on an affine basis supply unique local preimages which agree on overlaps and glue, producing inverse factorizations. They define e with the specified inclusion identity.",
+   "text": "On any topological basis of opens, sheaf separatedness detects zero morphisms. Consequently range containment for monomorphisms on that basis gives subobject containment: the composite with the other cokernel projection vanishes, and kernel lifting followed by the mono-image isomorphism gives a factorization. Specializing this general basis criterion to the affine basis and the equal computed ranges gives equal subobjects. Subobject.isoOfMkEqMk supplies the isomorphism; Subobject.ofMkLEMk_comp supplies its inclusion identity.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
   "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "pqf-lem-qcoh-principal-open-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, coherent.tex",
-  "place": "Tags 01YA and 01YB; omitted balancing and image-identification details expanded by E1"
+  "place": "Tag 01YB, last displayed map; affine multiplication and local range comparison expanded in Lean by R2; repair generalizes duplicated helpers to composite ranges, arbitrary recursive ideal inclusions including zero, arbitrary image presentations, and arbitrary topological bases. The affine pushforward argument uses lower-level imports to avoid a source import cycle."
  },
  "mathlib_searches": [
   {
@@ -160,10 +167,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261013T082338-L-1633312",
-  "kind": "interface",
+  "landing": "20261013T111917-L-3060847",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
