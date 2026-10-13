@@ -1,0 +1,163 @@
+{
+ "id": "lem-sp-filtered-complex-successor-boundary-representatives",
+ "kind": "statement",
+ "title": "Epimorphic covers of successor boundaries by incoming cycle representatives",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K$ an integer-indexed cochain complex and $F$ a decreasing filtration by subcomplexes [def-sp-filtration]. Let $r\\ge1$ and $i,j\\in\\mathbb Z^2$ satisfy $i+(r,1-r)=j$. Use the graded cycles and boundaries of [def-sp-filtered-complex-subquotients], writing $n_i=i_1+i_2$ and $n_j=j_1+j_2$ and $\\pi_p:F^pK^n\\to\\operatorname{gr}^pK^n$. There exist an object $A$, an epimorphism $e:A\\to B_{r+1}^{j_1,n_j}$, maps $t:A\\to F^{i_1}K^{n_i}$ and $t\\prime:A\\to F^{j_1}K^{n_j}$, and $x:A\\to Z_r^{i_1,n_i}$ such that $t\\,\\iota_{i_1}\\,d=t\\prime\\,\\iota_{j_1}$, $x\\,\\iota_{Z_r}=t\\,\\pi_{i_1}$, and $e\\,\\iota_{B_{r+1}\\to Z_{r+1}}\\,\\iota_{Z_{r+1}}=t\\prime\\,\\pi_{j_1}$, where the boundary-to-cycle inclusion is [lem-sp-filtered-complex-boundaries-le-cycles]. This assertion is independent of any page differential or homology object.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-boundaries-le-cycles"
+ ],
+ "proof": [
+  {
+   "text": "Let j=(p,q), n=p+q. The relation gives i=(p-r,q+r-1) and incoming degree n-1. Let U=F^p K^n intersect image(d restricted to F^(p-r) K^(n-1)), and V its pullback to F^p K^n. Since U and F^(p+1) lie in F^p, pulling back their sum is the sum of their pullbacks. Image pushforward preserves this sum. The graded projection kills F^(p+1), so image(V -> gr^p K^n) equals B_(r+1). Use the image factorization to obtain an epimorphism e0:V -> B_(r+1).",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "The map V -> K^n factors through the image of d restricted to F^(p-r) K^(n-1), by the right-hand intersection inclusion. Refine this map along the epimorphic factor of the differential image factorization. Mathlib surjective_up_to_refinements_of_epi gives an object A, an epimorphism e1:A -> V, and t:A -> F^(p-r) K^(n-1) whose differential equals tprime=e1 followed by V -> F^p K^n. The composite e=e1 e0 is epic.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "Because dt=tprime lies in F^p, the map t factors through the incoming r-cycle representative subobject. Include it into the sum with F^(p-r+1) used to define graded cycles, and use the image factorization of the graded projection to obtain x:A -> Z_r at i. This gives the source representative equation.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "The factorization defining e0 gives e followed by the boundary arrow equal to tprime followed by the graded projection. The successor-boundary inclusion followed by the successor-cycle arrow is the boundary arrow. This gives the target representative equation.",
+   "uses": [
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-boundaries-le-cycles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex; finite-image and epimorphic-refinement proof written and checked in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every boundary on the next filtered complex page locally lifts to the differential of a filtered cycle representative",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every boundary on the next filtered complex page locally lifts to the differential of a filtered cycle representative",
+   "results": "8 hits: HomologicalComplex.toCycles_i, HomologicalComplex.liftCycles_i, ComplexShape.Embedding.HasLift, HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary, HomologicalComplex.p_fromOpcycles, HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff', HomologicalComplex.extend.leftHomologyData.lift_d_comp_eq_zero_iff, HomologicalComplex.pOpcycles_opcyclesToCycles_iCycles; none states successor-boundary representative covers.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(boundar|representative)|complexCycleRepresentatives",
+   "results": "0 hits: ; none states successor-boundary representative covers.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImageGe",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Tag 012K successor-page boundary image calculation: lifting successor boundaries to incoming r-cycle representatives.",
+   "via": [
+    "new-filtered-complex-successor-boundaries-image-ge",
+    "lem-sp-filtered-complex-successor-boundaries-image",
+    "lem-sp-filtered-complex-page-homology",
+    "lem-sp-filtered-complex-positive-pages",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexSuccessorBoundaryRepresentatives",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexSuccessorBoundaryRepresentatives.lean",
+  "declaration": "CategoryTheory.filteredComplex_successor_boundary_representatives",
+  "statement": "theorem filteredComplex_successor_boundary_representatives\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (_hr : 1 ≤ r)\n    (i j : ℤ × ℤ) (hij : (ComplexShape.up' (r, 1 - r)).Rel i j) :\n    ∃ (A : C) (e : A ⟶ (F.complexBoundaries j.1 (j.1 + j.2) (r + 1) : C)),\n      Epi e ∧\n      ∃ (t : A ⟶ (F.step i.1 : CochainComplex C ℤ).X (i.1 + i.2))\n        (t' : A ⟶ (F.step j.1 : CochainComplex C ℤ).X (j.1 + j.2))\n        (x : A ⟶ (F.complexCycles i.1 (i.1 + i.2) r : C)),\n        t ≫ (F.step i.1).arrow.f (i.1 + i.2) ≫ K.d (i.1 + i.2) (j.1 + j.2) =\n          t' ≫ (F.step j.1).arrow.f (j.1 + j.2) ∧\n        x ≫ (F.complexCycles i.1 (i.1 + i.2) r).arrow =\n          t ≫ (F.complexQuotientπ i.1 (i.1 + 1) (by omega)).f (i.1 + i.2) ∧\n        e ≫ Subobject.ofLE _ _\n            (filteredComplex_boundaries_le_cycles K F j.1 (j.1 + j.2) (r + 1)) ≫\n            (F.complexCycles j.1 (j.1 + j.2) (r + 1)).arrow =\n          t' ≫ (F.complexQuotientπ j.1 (j.1 + 1) (by omega)).f (j.1 + j.2)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T000906-L-2281039",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T000906-L-2281039",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

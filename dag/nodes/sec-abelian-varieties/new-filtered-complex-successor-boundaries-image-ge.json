@@ -16,26 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Componentwise representative chase proving the stated containment.",
+   "text": "Apply the successor-boundary representative-cover theorem at the preceding bidegree. It provides an epic cover e, source cycle class x and representatives t,tprime with dt=tprime. Compose the successor boundary inclusion with the given successor-cycle inclusion to regard its class as an r-cycle.",
    "uses": [
-    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-successor-boundary-representatives",
     "lem-sp-filtered-complex-boundaries-le-cycles"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012K"
+    "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "Apply D.on_representatives. The hypothesis on f identifies the target page class with e followed by the boundary inclusion and f. Postcompose with the cycle inclusion and use toCycles_i; cancel that monomorphism. The covered boundary map therefore factors through the incoming toCycles map.",
+   "uses": [
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex"
+   }
+  },
+  {
+   "text": "Precomposition with the epimorphism e does not change the image subobject. The image of a composite through toCycles is contained in image toCycles. Apply the image factorization criterion and the pullback factorization criterion to obtain the asserted containment. These are the proved WeilConjectures Subobject.Limits lemmas and Mathlib pullback_factors_iff.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed boundary and differential formulas before lemma-spectral-sequence-filtered-complex"
    }
   }
  ],
  "proof_deps": [
+  "def-sp-abelian",
+  "lem-sp-filtered-complex-boundaries-le-cycles",
   "lem-sp-filtered-complex-page-differential",
-  "lem-sp-filtered-complex-boundaries-le-cycles"
+  "lem-sp-filtered-complex-successor-boundary-representatives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "H2: componentwise kernel/image extraction from Tag 012K and steps 1–2 of lem-sp-filtered-complex-page-homology"
+  "place": "Tag 012K; representative equation followed by cancellation of a cycle mono and image descent along an epimorphism"
  },
  "mathlib_searches": [
   {
@@ -111,12 +135,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T223422-L-1642868",
+  "landing": "20261013T000906-L-2281039",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
