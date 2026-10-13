@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-module-restriction-open-immersion-limits",
+ "kind": "statement",
+ "title": "Ordinary module restriction along an open immersion preserves limits",
+ "statement": "Let $f:X\\to Y$ be an open immersion [def-weil-open-immersion] of schemes [def-pc-scheme]. The restriction functor on sheaves of modules [lem-weil-pbc-module-restriction-open-immersion-colimits] preserves all small limits of diagrams with object and morphism universes $u$, where $X,Y:\\mathrm{Scheme}_u$; in particular it preserves kernels. Modules are those of [def-weil-sheaf-of-modules-category].",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 01AH (lemma-limits-colimits), sectionwise limits; restriction to an open is sectionwise by Sheaves Lemma 00A0. Existing Lean proof: WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:95-106."
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The underlying presheaf of abelian groups of a restricted module is obtained by precomposition with the open-image functor. Right whiskering by the forgetful functor and precomposition preserve limits pointwise. The forgetful functor from scheme modules to presheaves of abelian groups preserves and reflects limits. Apply preservesLimits_of_reflects_of_preserves. This is the existing proof at WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:95-106, with no sorry.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Lemma 01AH (lemma-limits-colimits), sectionwise limits; restriction to an open is sectionwise by Sheaves Lemma 00A0. Existing Lean proof: WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:95-106."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-13",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean",
+  "place": "lines 95-106, existing source-library proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules along an open immersion of schemes preserves limits",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. No search verdict is asserted.",
+   "date": "2026-10-13",
+   "unavailable": true,
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules along an open immersion of schemes preserves limits",
+   "results": "Scheme.Modules.toPresheaf preserves limits, Scheme.Modules.restrictFunctor, SheafOfModules.forgetPreservesLimitsOfShape. Read source proof of Scheme.Modules.preservesLimitsOfSize_restrictFunctor at lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:95.",
+   "date": "2026-10-13",
+   "verdict": "existing source-library theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimitsOfSize_restrictFunctor|restrictFunctor.*PreservesLimits",
+   "results": "Mathlib service grep returned no hits. Local rg found Scheme.Modules.preservesLimitsOfSize_restrictFunctor in lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:95-106; proof read in full. No node records this declaration as its lean.declaration.",
+   "date": "2026-10-13",
+   "verdict": "existing source-library theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesRestrictionLimits",
+  "group": "S1",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7: essential surjectivity via formal completion; kernel restriction in Lemma 087X, construction (a)--(d), used by local exactness.",
+   "via": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-limits",
+    "lem-weil-pbc-coherent-formal-modules-local-exactness",
+    "lem-weil-pbc-formal-completion-exact",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.preservesLimitsOfSize_restrictFunctor",
+  "statement": "noncomputable instance preservesLimitsOfSize_restrictFunctor {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] : PreservesLimitsOfSize.{u, u} (restrictFunctor f)",
+  "branch": "slopmaster2",
+  "by": "S1",
+  "date": "2026-10-13",
+  "note": "Existing fully proved source-library instance; read lines 95-106. Used for PreservesKernel.iso_inv_ι in the restricted zero-transition proof. No duplicate Lean statement or new hole."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.preservesLimitsOfSize_restrictFunctor",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel"
+    }
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T022428-L-3218574",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T022428-L-3218574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

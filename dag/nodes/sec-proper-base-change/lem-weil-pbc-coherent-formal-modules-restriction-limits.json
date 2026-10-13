@@ -13,52 +13,73 @@
  ],
  "proof": [
   {
-   "text": "Cokernels are termwise by the abelian theorem, and ordinary module restriction preserves them as a left adjoint.",
+   "text": "Use abelianness on X and U to supply finite products, equalizers, finite coproducts, coequalizers and zero objects. Transport the finite biproduct instance across the unique zero-morphism structures.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-abelian",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
-   }
-  },
-  {
-   "text": "For the stabilized kernel construction, restrict sectionwise kernels, locally defined images and ideal products. Restriction preserves the cokernel quotients. A global stabilization bound works locally; a common larger bound identifies constructions using different bounds, including their maps into the source. The restricted fork is therefore a kernel fork.",
-   "uses": [
-    "lem-weil-pbc-coherent-formal-module-kernel",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
-   }
-  },
-  {
-   "text": "Finite biproduct identities restrict termwise. In abelian categories finite products together with kernels give finite limits; finite coproducts together with cokernels give finite colimits. Apply these criteria to the explicit additive lift.",
-   "uses": [
-    "lem-weil-pbc-coherent-formal-modules-restriction-objects",
     "lem-weil-pbc-coherent-formal-modules-abelian"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), construction (a)--(d), part (2) and final sentence of the proof; read at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "The inclusion preserves cokernels by ambient cokernel closure. Right whiskering by ordinary restriction preserves colimits. The restricted inclusion composite is definitionally the original inclusion followed by right whiskering. Since the target inclusion is fully faithful it reflects colimits, so the formal restriction functor preserves cokernels.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-cokernel-closure",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), construction (a)--(d), part (2) and final sentence of the proof; read at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "From the stabilized kernel construction obtain the zero-transition property of its levelwise kernel. Reuse formalMono_of_kernel_transition_zero from CoherentFormalModuleKernel (a proof-only import all exposes this private helper) to make the constructed arrow mono: an annihilated map vanishes after precomposition with each epi transition. Ordinary module restriction preserves kernels, so PreservesKernel.iso_inv_ι transports the zero-transition equations and proves the restricted constructed arrow mono. Build the global limiting fork using the existing factorization theorem; compare it with any given limiting fork and transport restricted monicity through the comparison isomorphism.",
+   "uses": [
+    "lem-weil-pbc-formal-kernel-construction",
+    "lem-weil-pbc-formal-kernel-factorization",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "lem-weil-pbc-coherent-formal-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), construction (a)--(d), part (2) and final sentence of the proof; read at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+   }
+  },
+  {
+   "text": "For every fork over the restricted alpha, the new factorization-existence lemma supplies a lift. Restricted monicity proves uniqueness by cancellation. Fork.IsLimit.mk' builds the limiting restricted fork; KernelFork.isLimitMapConeEquiv yields preservation of kernels. Mathlib Functor.preservesFiniteLimits_of_preservesKernels and Functor.preservesFiniteColimits_of_preservesCokernels complete both conclusions.",
+   "uses": [
+    "lem-weil-pbc-formal-restriction-kernel-factorization",
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 087X (lemma-inverse-systems-abelian), construction (a)--(d), part (2) and final sentence of the proof; read at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-formal-modules-abelian",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-coherent-formal-cokernel-closure",
   "lem-weil-pbc-coherent-formal-module-kernel",
-  "lem-weil-pbc-coherent-formal-modules-restriction-objects"
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-formal-kernel-construction",
+  "lem-weil-pbc-formal-kernel-factorization",
+  "lem-weil-pbc-formal-restriction-kernel-factorization",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-open-immersion-limits"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 087X (30.23.2), part (2) and the final sentence of the proof; verified at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
+  "place": "Lemma 087X (lemma-inverse-systems-abelian), construction (a)--(d), part (2) and final sentence of the proof; read at https://stacks.math.columbia.edu/tag/087X on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -130,12 +151,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G4",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T225312-L-1806258",
+  "landing": "20261013T022428-L-3218574",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
