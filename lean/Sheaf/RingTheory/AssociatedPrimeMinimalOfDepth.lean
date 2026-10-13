@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 import Sheaf.RingTheory.DepthLeDimAssociatedPrime
+import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 
 /-!
 # Associated primes of a Cohen–Macaulay local ring are minimal
@@ -42,6 +43,30 @@ theorem mem_minimalPrimes_of_depth_ge {T : Type u} [CommRing T] [IsNoetherianRin
     (hdepth : (e : ℕ∞) ≤ IsLocalRing.depth (R := T) T) (p : Ideal T)
     (hp : p ∈ associatedPrimes T T) :
     p ∈ minimalPrimes T := by
-  sorry
+  have hquot : (e : WithBot ℕ∞) ≤ ringKrullDim (T ⧸ p) := by
+    exact (WithBot.coe_le_coe.mpr hdepth).trans
+      (IsLocalRing.depth_le_ringKrullDim_quotient_of_mem_associatedPrimes p hp)
+  rw [minimalPrimes_eq_minimals]
+  refine ⟨hp.isPrime, ?_⟩
+  intro q hq hqp
+  by_contra hpq
+  obtain ⟨x, hxp, hxq⟩ := SetLike.not_le_iff_exists.mp hpq
+  let : q.IsPrime := hq
+  have hdrop : ringKrullDim (T ⧸ p) + 1 ≤ ringKrullDim (T ⧸ q) := by
+    apply ringKrullDim_succ_le_of_surjective (Ideal.Quotient.factor hqp)
+      (Ideal.Quotient.factor_surjective hqp) (r := Ideal.Quotient.mk q x)
+    · exact mem_nonZeroDivisors_iff_ne_zero.mpr
+        (fun heq ↦ hxq (Ideal.Quotient.eq_zero_iff_mem.mp heq))
+    · simpa only [Ideal.Quotient.factor_mk, Ideal.Quotient.eq_zero_iff_mem] using hxp
+  have hbad : (e : WithBot ℕ∞) + 1 ≤ (e : WithBot ℕ∞) := by
+    calc
+      (e : WithBot ℕ∞) + 1 ≤ ringKrullDim (T ⧸ p) + 1 := by
+        simpa only [add_comm] using add_le_add_right hquot 1
+      _ ≤ ringKrullDim (T ⧸ q) := hdrop
+      _ ≤ ringKrullDim T := ringKrullDim_quotient_le q
+      _ = (e : WithBot ℕ∞) := hdim
+  have : ((e + 1 : ℕ) : WithBot ℕ∞) ≤ (e : WithBot ℕ∞) := by
+    simpa only [Nat.cast_add, Nat.cast_one] using hbad
+  exact Nat.not_succ_le_self e (by exact_mod_cast this)
 
 end Ideal
