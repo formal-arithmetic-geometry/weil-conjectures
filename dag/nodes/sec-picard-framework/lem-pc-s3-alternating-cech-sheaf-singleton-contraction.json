@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-s3-alternating-cech-sheaf-singleton-contraction",
+ "kind": "statement",
+ "title": "Nonnegative signed insertion equations with singleton degree-zero projection",
+ "statement": "Let $X$ be a scheme, $r\\in\\mathbb N$, $U:\\operatorname{Fin}(r)\\to X.\\mathrm{Opens}$, $G$ an $\\mathcal O_X$-module, and $i:\\operatorname{Fin}(r)$. Let $A$ and $C$ be the restrictions to $U_i$ of the integer extensions of $G[0]$ and the alternating complex of [def-pc-s3-alternating-cech-sheaf-construction], and let $a:A\\to C$ be its restricted augmentation. There exist a morphism $\\pi:C^0\\to A^0$ and module-sheaf morphisms $h_k:C^{k+1}\\to C^k$ such that $d_0h_0+\\pi a^0=1_{C^0}$ and $d_kh_k+h_{k-1}d_{k-1}=1_{C^k}$ for every integer $k>0$. Composites use Lean order, and the second term uses $C^k\\cong C^{k-1+1}$. No equation for $k<0$, no chain retraction, and no adjustment to any other projection are required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 02FU, local insertion and cancellation; increasing-tuple adaptation of the alternating convention of Tag 01FM"
+ },
+ "stmt_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof": [
+  {
+   "text": "On a test open V contained in U i, project degree zero onto the singleton i.\nSince V intersect U i equals V, this gives a map to G on V. In all other degrees\nuse zero. For an increasing tuple not containing i, insert i in its unique\nincreasing position b and take the corresponding\ncoordinate with sign (-1)^b; for a tuple already containing i, use zero. Intersection\nwith U i does not change the test-open intersection, giving a canonical linear map.\nThese maps commute with restrictions. In the differential-insertion sum, deletion\nof the inserted i contributes the identity, while every other deletion pairs with\ninsertion after deletion, with identical restriction and opposite sign. For tuples\ncontaining i, only deleting that i contributes. In degree zero the remaining term\nis singleton projection followed by augmentation. Restriction and module\nsheafification commute by the canonical local\nsheafification identification: the same compatible germs and their local gluing\ncompute both sides. Thus sheafify these natural linear maps on the restricted\nsite; additivity retains the equations. The sheafification\nunit on G is inverse to the counit, so the augmented degree-zero term agrees with\nthe specified augmentation. Transport the nonnegative-degree maps across extendXIso. The degree-zero\nequation includes the singleton projection and augmentation. In positive degrees\nthe two insertion terms sum to the identity; no equation in negative degree and\nno adjustment to an arbitrary retraction is asserted here. Empty test opens have\nzero modules; r=0 admits no i.",
+   "uses": [
+    "def-pc-s3-alternating-cech-sheaf-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-s3-alternating-cech-sheaf-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 02FU insertion; adaptation to increasing tuples by C1, extracted from the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Homotopy.compLeftId",
+   "results": "2 hits: Homotopy.compLeftId, Homotopy.compLeftId_hom",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match; homotopy composition used in parent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex augmented by a module supported in degree zero has a local signed insertion contracting homotopy for the alternating Cech complex",
+   "results": "8 hits: ChainComplex.alternatingConstHomotopyEquiv, Homotopy.mkCoinductive, AlgebraicTopology.DoldKan.homotopyPInftyToId, Homotopy.mkCoinductiveAux₂, AlgebraicTopology.DoldKan.Hσ, AlgebraicTopology.DoldKan.homotopyPToId, AlgebraicTopology.DoldKan.homotopyQToZero, Homotopy.mkCoinductiveAux₃",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match; homotopy composition used in parent"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*homotopy|homotopy.*cech|cech.*kernel",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact geometric match; homotopy composition used in parent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "signed insertion homotopy for increasing tuples in the alternating Cech complex of module sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechSheafInsertionIdentities",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Local insertion contraction: nonnegative signed face cancellation before adjustment to an arbitrary retraction",
+   "via": [
+    "lem-pc-s3-alternating-cech-sheaf-insertion-identities",
+    "lem-pc-s3-alternating-cech-sheaf-insertion-homotopy",
+    "lem-pc-s3-alternating-cech-sheaf-local-contraction",
+    "lem-pc-s3-affine-alternating-cech-augmented-construction",
+    "lem-pc-s3-affine-alternating-cech-resolution-core",
+    "lem-pc-affine-alternating-cech-exchange-resolution",
+    "lem-pc-affine-alternating-cech-pinned-mate",
+    "lem-pc-affine-alternating-cech-base-change-factorization",
+    "lem-pc-affine-relatively-flat-canonical-module-base-change",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSheafSingletonContraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSheafSingletonContraction.lean",
+  "declaration": "AlgebraicGeometry.alternatingCechSheafAugmentation_restrict_singleton_contraction",
+  "statement": "theorem alternatingCechSheafAugmentation_restrict_singleton_contraction\n    {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :\n    let F := Scheme.Modules.restrictFunctor (U i).ι\n    let A := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      (((CochainComplex.single₀ X.Modules).obj G).extend ComplexShape.embeddingUpNat)\n    let C := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n      ((alternatingCechSheafComplex U G).extend ComplexShape.embeddingUpNat)\n    let a : A ⟶ C := (F.mapHomologicalComplex (ComplexShape.up ℤ)).map\n      (HomologicalComplex.extendMap (alternatingCechSheafAugmentation U G)\n        ComplexShape.embeddingUpNat)\n    ∃ π : C.X 0 ⟶ A.X 0,\n      ∃ h : ∀ k : ℤ, C.X (k + 1) ⟶ C.X k,\n        (C.d (0 : ℤ) (0 + 1) ≫ h 0 + π ≫ a.f 0 = 𝟙 (C.X 0)) ∧\n        ∀ k : ℤ, 0 < k → C.d k (k + 1) ≫ h k +\n          (C.XIsoOfEq (show k = k - 1 + 1 by omega)).hom ≫\n            h (k - 1) ≫ C.d (k - 1) k = 𝟙 (C.X k)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T111837-L-3047262",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T111837-L-3047262",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
