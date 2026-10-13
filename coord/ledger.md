@@ -10812,3 +10812,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:53 L: merged deliver/H4/Sheaf.RingTheory.AnnihilatorAssociatedPrimesExactSequence (stage 3; reviewer PASS; first push; landing 20261013T025303-L-3423190 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:53 L: merged deliver/H4/Sheaf.RingTheory.FiniteMaximalsOverElement (stage 3; reviewer PASS; first push; landing 20261013T025303-L-3423339 (proof); batch 20261013T025255; modules 1; new nodes 0)
 - 02:53 L: merged deliver/J4/Sheaf.AlgebraicGeometry.CoherentSerreVanishing (stage 3; reviewer PASS; first push; landing 20261013T025304-L-3423446 (interface); batch 20261013T025255; modules 2; new nodes 1)
+- 02:53 L: merged deliver/K1/Sheaf.AlgebraicGeometry.SectionRingQuotientChartOverlapSheaf (stage 3; reviewer PASS; after a return; landing 20261013T025304-L-3423552 (interface); batch 20261013T025255; modules 2; new nodes 1)

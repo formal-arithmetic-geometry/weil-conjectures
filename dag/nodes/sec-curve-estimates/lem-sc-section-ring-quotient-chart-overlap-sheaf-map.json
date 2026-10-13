@@ -16,26 +16,22 @@
  ],
  "proof": [
   {
-   "text": "On the common inverse image of a positive homogeneous a-chart, the fraction identity with numerator s^r and denominator a^d shows a is nonvanishing at every overlap point there. Nonvanishing-section trivialization makes a and all its positive tensor powers free generators on this source open. For n=0 use the tensor unit.",
+   "text": "For a positive homogeneous chart a, use sectionRing_chart_denominator_generator on its common inverse image inside U intersect V. Equality of underlying maps identifies the inverse images. Restrict the original g and h fraction equations to this ambient open using presheaf functoriality and compatibility with scalar multiplication.",
    "uses": [
-    "def-pc-proj",
-    "def-sc-invertible-section-ring",
-    "lem-weil-pbc-nonvanishing-section-trivializes"
+    "lem-sc-section-ring-chart-denominator-generator"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict hg and hh to the common inverse image intersected with U intersect V. The equality b identifies the source opens. For each xi/a^n the same generator a^n multiplies each scalar pullback to the same restricted xi; injectivity of multiplication by a^n gives equal pullbacks. All elements of S_(a) have such representatives, so the maps from S_(a) to source sections agree. The affine morphism correspondence gives equality of the restrictions into D_+(a), in particular of the sheaf maps.",
+   "text": "Cancel the free generator a^n in the two restricted equations. Away.mk_surjective expresses every element of the degree-zero homogeneous localization as xi/a^n, including the empty-chart case. The isomorphism basicOpenIsoAway makes awayToSection an epimorphism, so equality on all fractions gives equality of appLE maps. Using resLE_app_top and ext_of_isAffine proves equality of the restricted morphisms into D_+(a).",
    "uses": [
     "def-pc-proj",
-    "def-sc-invertible-section-ring",
-    "lem-weil-pbc-nonvanishing-section-trivializes",
     "lem-weil-pbc-morphism-into-affine-scheme"
    ],
    "elementary": false
   },
   {
-   "text": "The inverse images of the positive homogeneous charts cover the overlap. Restrict a section of any target open to this cover and compare its pullbacks using the preceding equality of sheaf maps. Sheaf locality gives equality on its entire inverse image. The eqToHom in Lean is exactly restriction transport along b.",
+   "text": "Proj.affineOpenCover supplies a positive homogeneous chart at each image point. Apply Scheme.hom_ext_of_forall to the inverse images of these charts. Finally Scheme.Hom.congr_app gives equality on every target open; composition of eqToHom restrictions cancels the transport against its inverse.",
    "uses": [
     "def-pc-proj"
    ],
@@ -43,15 +39,14 @@
   }
  ],
  "proof_deps": [
+  "lem-sc-section-ring-chart-denominator-generator",
   "def-pc-proj",
-  "def-sc-invertible-section-ring",
-  "lem-weil-pbc-nonvanishing-section-trivializes",
   "lem-weil-pbc-morphism-into-affine-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01N8 (lemma-converse-construction), local quotient construction and uniqueness; 01NK (lemma-invertible-map-into-proj), differing degrees"
+  "place": "Tags 01N8 and 01NK, uniqueness arguments. K1 formalizes chart cancellation, affine extensionality and local morphism equality; denominator generation is proved in the new node."
  },
  "mathlib_searches": [
   {
@@ -146,12 +141,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T225339-L-1816126",
+  "landing": "20261013T025304-L-3423552",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
