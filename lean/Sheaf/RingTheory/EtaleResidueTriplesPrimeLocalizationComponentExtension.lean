@@ -6,9 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.Paper.EtaleFiniteDataDescent
-import Sheaf.RingTheory.EtaleResidueTripleUnitRefinement
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionExists
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtensionUnique
 
 /-! # Extension of a single pointed étale cocone leg
 
@@ -72,6 +71,13 @@ theorem etaleResidueTriples_primeLocalization_component_extension
           t.α →
         β ≫ (ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ =
           (ΓSpecIso s.B).inv ≫ (Spec s.B).Γevaluation s.q ≫ s.φ →
-        β ≫ b = η.app s := by sorry
+        β ≫ b = η.app s := by
+  obtain ⟨b, hb⟩ :=
+    etaleResidueTriples_primeLocalization_component_extension_exists
+      R p K χ q ψ hψ hK V η t
+  refine ⟨b, hb, ?_⟩
+  intro b' hb'
+  exact (etaleResidueTriples_primeLocalization_component_extension_unique
+    R p K χ q ψ hψ hK V η t b b' hb hb').symm
 
 end AlgebraicGeometry.Scheme
