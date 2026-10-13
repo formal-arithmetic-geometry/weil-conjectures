@@ -7,11 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
-import Sheaf.AlgebraicGeometry.SectionBoundaryExact
 import Sheaf.Paper.BoundaryDerivationSquareZero
+import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryGradedRealization
 
 /-! # The two-section product identity for transported tensor boundaries
 
@@ -91,7 +88,40 @@ theorem transportedTensorBoundary_product
       δ e x = b e cx → δ 0 (tensorPowSection f 1) = b 0 cf →
       δ (e + 1) ((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) = b (e + 1) cp →
       cp = H.map (mulTensorPowSection f F e 1) cx +
-        H.map ((ρ_ F).inv ≫ F ◁ x) (H.map (ρ_ F).hom cf) := by sorry
+        H.map ((ρ_ F).inv ≫ F ◁ x) (H.map (ρ_ F).hom cf) := by
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      intro F N H b δ e f x cx cf cp hx hf hp
+      obtain ⟨B, C, p, I, i, hw, hS, hsq, hcompare⟩ :=
+        tensorBoundary_graded_realization j L hI n hshort D hD e f x
+      obtain ⟨IA, IB, IC, α, β, hαβ, hιA, hιB, hH, hΓ, σ, μ, ρ, δ',
+        hlocal, hrestrict, hglobal, haction, hboundary, hLeibniz⟩ :=
+        boundary_derivation_square_zero X B C p I i hw hS hsq
+      obtain ⟨s, t, P, Px, Pf, hproduct, hinputx, hinputf, hleft, hright⟩ :=
+        hcompare IA IB IC α β hαβ hιA hιB hH hΓ σ μ ρ δ'
+          hlocal hrestrict hglobal haction hboundary
+      have hx' : (b e).symm (δ e x) = cx :=
+        (congrArg (b e).symm hx).trans ((b e).symm_apply_apply cx)
+      have hf' : (b 0).symm (δ 0 (tensorPowSection f 1)) = cf :=
+        (congrArg (b 0).symm hf).trans ((b 0).symm_apply_apply cf)
+      have hp' : (b (e + 1)).symm
+          (δ (e + 1) ((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x))) = cp :=
+        (congrArg (b (e + 1)).symm hp).trans ((b (e + 1)).symm_apply_apply cp)
+      have hl : P (ρ s (δ' t)) = H.map (mulTensorPowSection f F e 1) cx :=
+        (hleft (δ' t)).trans
+          (congrArg (H.map (mulTensorPowSection f F e 1)) (hinputx.trans hx'))
+      have hr : P (ρ t (δ' s)) =
+          H.map ((ρ_ F).inv ≫ F ◁ x) (H.map (ρ_ F).hom cf) :=
+        (hright (δ' s)).trans (congrArg
+          (fun a ↦ H.map ((ρ_ F).inv ≫ F ◁ x) (H.map (ρ_ F).hom a))
+          (hinputf.trans hf'))
+      calc
+        cp = P (δ' (s * t)) := (hproduct.trans hp').symm
+        _ = P (ρ s (δ' t) + ρ t (δ' s)) := congrArg P (hLeibniz s t)
+        _ = P (ρ s (δ' t)) + P (ρ t (δ' s)) := P.map_add _ _
+        _ = H.map (mulTensorPowSection f F e 1) cx +
+            H.map ((ρ_ F).inv ≫ F ◁ x) (H.map (ρ_ F).hom cf) :=
+          congrArg₂ (· + ·) hl hr
 
 end
 end AlgebraicGeometry.Scheme.Modules

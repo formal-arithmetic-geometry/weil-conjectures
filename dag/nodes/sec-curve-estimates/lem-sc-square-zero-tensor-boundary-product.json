@@ -24,45 +24,34 @@
  },
  "proof": [
   {
-   "text": "Sum the invertible-tensor ideal sequences in all degrees. Local line-bundle frames identify the algebra with a polynomial algebra, its quotient with the graded algebra on Z, and its kernel products with products of two ideal factors. Thus the kernel is square zero. The unit-quotient and ideal-kernel comparisons identify these sequences with the canonical unit kernel sequences.",
+   "text": "Apply tensorBoundary_graded_realization to obtain a square-zero short exact algebra-sheaf extension and the universal homogeneous comparison property.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-sc-square-zero-ideal-tensor-unit",
-    "def-sbc-ideal-sheaf-powers"
+    "lem-sc-square-zero-tensor-boundary-graded-realization"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the square-zero boundary derivation theorem to arbitrary homogeneous sections f in degree n and x in degree n(e+1). Include their summands and project to degree n(e+2). The boundary of their product is f times the boundary of x plus x times the boundary of f. No power recurrence or exponent induction is used.",
+   "text": "Apply boundary_derivation_square_zero to that extension. It provides compatible resolutions, quotient actions and the actual snake boundary, together with its Leibniz identity. Supply the five boundary/action specifications to the homogeneous comparison property to obtain s,t and the additive degree projections P,Px,Pf.",
    "uses": [
-    "lem-sc-boundary-derivation-square-zero"
+    "lem-sc-boundary-derivation-square-zero",
+    "lem-sc-square-zero-tensor-boundary-graded-realization"
    ],
    "elementary": false
   },
   {
-   "text": "The explicitly constructed section comparisons identify the product with lambda inverse followed by f tensor x. The coefficient comparisons identify the two ideal actions with mulTensorPowSection f F e 1 and rho_F inverse followed by F whiskered with x. Naturality of the affine cohomology edge carries these actions to the displayed H maps. Resolution connecting maps identify with the canonical triangle connecting map defining moduleSectionBoundary. These equalities give the displayed product identity.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "def-sc-module-cohomology-boundary",
-    "lem-sc-module-section-boundary-exact",
-    "lem-sc-square-zero-ideal-tensor-unit"
-   ],
-   "elementary": false
+   "text": "Apply P to the Leibniz identity and use its additivity. The two action squares identify the projected action terms via Px and Pf. Apply the inverse laws of b_e,b_0,b_(e+1) to the three supplied boundary equations for cx,cf,cp and substitute them by congrArg. The resulting equality is the claimed product identity.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-sc-square-zero-ideal-tensor-unit",
-  "def-sbc-ideal-sheaf-powers",
-  "lem-sc-boundary-derivation-square-zero",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "def-sc-module-cohomology-boundary",
-  "lem-sc-module-section-boundary-exact"
+  "lem-sc-square-zero-tensor-boundary-graded-realization",
+  "lem-sc-boundary-derivation-square-zero"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, coherent-equation-ses and the graded direct-sum sequence following it; Tag 0B8S, the two-section Cech cocycle product calculation."
+  "place": "Tag 09MS, coherent-equation-ses and the direct-sum exact sequence following it; Tag 0B8S, cohomology-lemma-boundary-derivation-over-cup-product, the quotient action in the first paragraph of its proof."
  },
  "mathlib_searches": [
   {
@@ -149,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-b5c67",
-  "group": "P1",
+  "reviewer": "COMPILER",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T072401-L-1123526",
+  "landing": "20261013T211122-L-398178",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures, comparison constructions and product identity with the nodes and Stacks 09MS/0B8S; all three modules and the sole direct importer compile cleanly, with permitted axioms and the reported product-lemma sorry."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
