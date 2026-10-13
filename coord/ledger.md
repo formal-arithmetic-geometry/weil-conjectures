@@ -11723,3 +11723,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/U3/Sheaf.RingTheory.TorIdealKernelNaturality (stage 3; reviewer PASS; first push; landing 20261013T082417-L-1649508 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:24 L: merged deliver/U4/Sheaf.AlgebraicGeometry.OpenModuleImageAmalgamation (stage 3; reviewer PASS; first push; landing 20261013T082418-L-1649699 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:24 L: merged deliver/U4/Sheaf.AlgebraicGeometry.PerfectJumpLoci (stage 3; reviewer PASS; first push; landing 20261013T082418-L-1649844 (interface); batch 20261013T082326; modules 3; new nodes 2)
+- 08:24 L: merged deliver/U4/Sheaf.AlgebraicGeometry.ScalarCupCoefficientNaturality (stage 3; reviewer PASS; first push; landing 20261013T082419-L-1649990 (proof); batch 20261013T082326; modules 1; new nodes 0)

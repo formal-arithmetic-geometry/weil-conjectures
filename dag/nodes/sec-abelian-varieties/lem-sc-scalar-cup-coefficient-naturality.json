@@ -14,30 +14,46 @@
  },
  "proof": [
   {
-   "text": "Choose injective resolutions of the four coefficient modules and comparison\nchain maps lifting phi and psi. Evaluation at 1 intertwines a comparison chain map\nwith the global-sections map, since an O-linear map sends the image of 1 to the\nimage of that section. Thus the moduleExtEquiv comparison intertwines the recorded\nright-derived-functor coefficient map with postcomposition in Ext. Restriction to\nk and precomposition by scalarUnitMorphism preserve this equality by associativity\nof Yoneda composition, giving the same assertion for scalarCohomologyExtEquiv.",
+   "text": "Use scalarCohomologyExtEquiv_map to identify each recorded coefficient map with postcomposition by mk₀ of scalarHom. This is the existing injective-resolution comparison naturality theorem; no new comparison choice is made.",
+   "uses": [
+    "lem-sc-scalar-cohomology-ext-coefficient-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove exact-functor Ext naturality for a natural transformation by induction on the Ext degree. In degree zero use mk₀_bijective and ordinary naturality. In positive degree take an injective presentation of the target, use covariant_sequence_exact₁ and vanishing of positive Ext into the injective object to express the class as composition with extClass. Apply mapExactFunctor_comp, mapExactFunctor_extClass and extClass_naturality to the mapped short exact sequences, followed by the induction hypothesis and Ext associativity. Mathlib GrothendieckAxioms.Sheaf, ModuleCat.AB and GrothendieckCategory.EnoughInjectives supply enough injectives for sheaves of k-vector spaces. Apply this lemma to curriedTensor.map of the first coefficient morphism; functoriality handles the second. Expand scalarExtCup and reassociate the Yoneda compositions to obtain Ext cup naturality.",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations"
    ],
    "elementary": false
   },
   {
-   "text": "For the tensor coefficient, both orders send s tensor t to phi(s) tensor psi(t).\nThe tensor universal property and sheafification adjunction make this an equality\nof sheaf morphisms. Apply this square to the tensor pairing of resolution complexes:\ncomparison chain maps have degree zero, so the signs of Tag 07MB agree in both\norders. Tag 0FKV identifies its augmentation with the ordinary coefficient tensor\nmap and the derived cup product. Equivalently, associativity and naturality of\nYoneda composition identify postcomposition of scalarExtCup with the cup of the\ntwo postcompositions. Compose with scalarTensorCoefficient, use its square, and\ntransport through the injective scalarCohomologyExtEquiv. The comparison with the\nrecorded coefficient maps proved above gives the displayed equality. No acyclic\ncover or quasi-coherence assumption is used. In degree zero this is precisely the\npure-tensor identity; if a morphism or a coefficient is zero both sides are zero.",
+   "text": "Prove the scalarTensorCoefficient square by the sheafification adjunction. Express Sheaf.tensorLeftIso through inverse counit components and the lax monoidal tensor comparison. Counit naturality and μ_natural give the square for the tensor source. The adjunction reduces the remaining square to presheaf tensor extensionality, where tensorHom_app_tmulSection says both paths send s tensor t to φ(s) tensor ψ(t).",
    "uses": [
     "def-sc-field-linear-module-cohomology-operations"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply injectivity of scalarCohomologyExtEquiv in degree p+q. Expand scalarCohomologyCup, cancel apply_symm_apply, and rewrite all coefficient maps using the comparison theorem. Combine the tensor-coefficient square with Ext cup naturality using mk₀_comp_mk₀ and comp_assoc_of_third_deg_zero. This proves the original equality in every degree.",
+   "uses": [
+    "lem-sc-scalar-cohomology-ext-coefficient-naturality",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-field-linear-module-cohomology-operations"
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-sc-scalar-cohomology-ext-coefficient-naturality"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "N4",
+  "group": "U4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology Tags 01F7, 01FD, 07MB, 0FKV; Modules Tag 01CD for the normalized tensor-pullback map. Official sources https://stacks.math.columbia.edu/tag/01F7 and https://stacks.math.columbia.edu/tag/0FKV",
-  "note": "Source resolution and tensor-section argument specialized to the actual scalar Ext definitions; normalization details written by N4. This is a strict part of the combined naturality argument."
+  "note": "Completed earlier sandbox helpers, using the now-proved coefficient comparison theorem. Lean proof follows the Yoneda Ext and tensor-section route with no new holes."
  },
  "mathlib_searches": [
   {
@@ -120,10 +136,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N4",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T024042-L-3337114",
-  "kind": "interface",
+  "landing": "20261013T082419-L-1649990",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
