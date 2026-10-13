@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-r-lim-levelwise-isomorphism",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Limits preserve compatible levelwise isomorphisms",
@@ -17,20 +17,80 @@
  ],
  "proof": [
   {
-   "text": "The maps $\\prod_nu_n$ are isomorphisms and commute with\n$1-\\mathrm{shift}$. Taking fibres in the homotopy-limit triangles preserves\nthe isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "By the definition of the sequential derived inverse limit, a compatible map of towers acts componentwise on the two product terms and therefore induces a morphism between the corresponding Roos triangles. The component maps are all isomorphisms by hypothesis, so the product map is an isomorphism. Applying the existing levelwise-isomorphism lemma [lem-weil-derived-limit-levelwise-iso] to this morphism of Roos triangles yields that the induced map on derived inverse limits is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-adic-derived-inverse-limit",
+    "lem-weil-derived-limit-levelwise-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-r-lim-levelwise-isomorphism.md",
+    "place": "## Proof"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-weil-pbc-adic-derived-inverse-limit",
+  "lem-weil-derived-limit-levelwise-iso"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-r-lim-levelwise-isomorphism.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit of compatible levelwise isomorphisms is an isomorphism",
+   "results": "8 hits: general limit and inverse-system declarations, including CategoryTheory.Limits.IsLimit.isIso_limMap_π; no derived-limit/Roos theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃, Limits.Pi.mapIso",
+   "results": "0 hits; loogle reports unknown identifier 'Limits.Pi.mapIso'.",
+   "date": "2026-10-14",
+   "verdict": "invalid query: unknown identifier; no evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₁_of_isIso₂₃|Pi.mapIso (Mathlib/CategoryTheory)",
+   "results": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:526 isIso₁_of_isIso₂₃; Mathlib/CategoryTheory/Limits/Shapes/Products.lean:394 Pi.mapIso and lines 398-404 projection lemmas.",
+   "date": "2026-10-14",
+   "verdict": "general categorical ingredients only; no derived-limit theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism of derived inverse limits from a morphism of inverse systems with isomorphic components",
+   "results": "8 hits: InverseSystem inverse-limit equivalences and generic limit presentations; no derived-limit/Roos theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "isIso₁_of_isIso₂₃",
+   "results": "0 hits; loogle reports unknown identifier 'isIso₁_of_isIso₂₃'.",
+   "date": "2026-10-14",
+   "verdict": "invalid query: unknown identifier; no evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₁_of_isIso₂₃|Pi\\.mapIso|distinguished_iff_of_iso (Mathlib/CategoryTheory/Triangulated)",
+   "results": "Pretriangulated.lean:526 isIso₁_of_isIso₂₃; Pretriangulated.lean:97 distinguished_iff_of_iso; Products.lean:394 Pi.mapIso.",
+   "date": "2026-10-14",
+   "verdict": "general categorical ingredients only; no exact item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible levelwise isomorphism of inverse systems induces an isomorphism of their derived limits via the Roos triangles",
+   "results": "service unavailable: Internal Server Error (fresh maintainer search; local log search-audit/searches.jsonl)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +115,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-r-lim-levelwise-isomorphism",
+  "worker": "stage1",
+  "summary": "Audited the imported one-line proof against the master blueprint and the existing DAG. No finished Lean declaration exists in the source. The item is a direct specialization of existing node lem-weil-derived-limit-levelwise-iso: compatibility gives the morphism of Roos triangles by the derived-inverse-limit definition, and its levelwise components are isomorphisms. Added that existing node to proof_deps, replaced the incomplete imported proof by one complete step, recorded Mathlib searches, and left no new nodes. The product and triangle arguments are covered by the cited existing levelwise-isomorphism node and the explicit componentwise-map clause of the cited definition.",
+  "blueprint": "Entire proof paragraph of the blueprint node: componentwise product maps commute with 1-shift, then the morphism of homotopy-limit/Roos triangles gives an isomorphism on fibres."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NF-69b484010",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NF-69b484010 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements and sources, and chapter/unit route. The Roos-triangle argument is sound; no new nodes or target weakening. Corrected the proof-only statement dependency and missing/invalid search metadata. Exact master condensed coefficients and base-change morphism were checked; no comparison theorem is certified. Details and corrected JSON are in review.md and fixes/dag/nodes/.; 1 file(s) fixed by the reviewer"
+ }
 }
