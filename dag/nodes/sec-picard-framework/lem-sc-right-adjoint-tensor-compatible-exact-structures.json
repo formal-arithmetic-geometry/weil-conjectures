@@ -18,41 +18,54 @@
  },
  "proof": [
   {
-   "text": "On K-flat representatives, pullback followed by tensoring with a K-flat representative of E commutes coherently with all integer shifts and sends mapping cones to mapping cones. Localize these comparisons to obtain s_F and the asserted preservation of ambient distinguished triangles with quasi-coherent vertices.",
+   "text": "Specialize supported_qcoh_isTriangulated to the whole space. The stalk-support condition is vacuous, giving the triangulated property of quasi-coherent cohomology on Z and Y.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-supported-qcoh-triangulated"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Compute R on injective resolutions to obtain its coherent exact shift structure. Its quasi-coherent restriction is exact because quasi-coherent cohomology is stable under shifts and extensions. Transport shifts through the specified adjunction b using the Hom adjunction and Yoneda. Apply the right-adjoint triangulated-functor argument: complete the image of the first arrow to a triangle, transpose the counit maps to a comparison with c of the original triangle, and use the exact Hom sequences and Yoneda to show that its third component is an isomorphism. The ambient inclusion gives s_G and triangle preservation.",
+   "text": "Set Q to the quasi-coherent pullback/tensor lift and R to restricted direct image. Construct nu = whiskerRight tau R followed by the adj-counit. Apply the inverse adjunction hom equivalence to the pinned tau component equation. Equiv.symm_apply_apply gives the required projection/counit component formula for nu. Apply pinnedProjectionCounit_exactShift with E = c(O_Y) and epsilon = adj.counit at O_Y to obtain exact coherent shifts for Q and R and shift compatibility of nu.",
    "uses": [
-    "def-pc-derived-direct-image",
-    "def-pc-derived-category"
+    "lem-sc-pinned-projection-counit-exact-shift"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Expand the pinned projection and adjunction-mate component equations. On shifted K-flat representatives move translation through tensor and pullback. Naturality of the counits and both adjunction triangle identities identify the resulting component with the translate of the original component. The zero/addition coherences come from those of the representative shifts. Transport these structures along the monoidal and adjunction comparison isomorphisms for the specified choices; uniqueness of mates preserves the pinned formulas. This gives NatTrans.CommShift for the ambient transformation with s_F and s_G simultaneously. No component of tau is cancelled, so zero objects and zero triangles are included.",
+   "text": "Give c the structure adj.rightAdjointCommShift induced by R. The theorem adj.commShift_of_leftAdjoint makes the adjunction compatible. Mathlib Adjunction.isTriangulated_rightAdjoint then proves c exact, since R is exact. This proves the right-adjoint exactness step rather than postponing it in the new geometric theorem.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-sc-pinned-projection-counit-exact-shift"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Triangulated/Adjunction.lean",
+    "place": "Adjunction.isTriangulated_rightAdjoint, line 60; Mathlib/CategoryTheory/Shift/Adjunction.lean, rightAdjointCommShift and commShift_of_leftAdjoint"
+   }
+  },
+  {
+   "text": "Recover tau from nu as the composite of the Q right unitor inverse, Q whiskered with the adj-unit, the associator inverse, nu whiskered with c, and the c left unitor. At each component the equality is the adjunction hom-equivalence inverse law, or equivalently unit naturality and the right triangle identity. Each factor commutes with shifts, so the composite does. Whisker tau with the ambient inclusion.",
+   "uses": [
+    "lem-sc-pinned-projection-counit-exact-shift"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the exact Q and c with the exact ambient inclusion to obtain F and G. Distinguished triangles in the quasi-coherent full subcategory are defined as those whose ambient images are distinguished. The hypothesis on S is therefore precisely S being distinguished; apply F.map_distinguished and G.map_distinguished.",
+   "uses": [
+    "lem-pc-supported-qcoh-triangulated",
+    "lem-sc-pinned-projection-counit-exact-shift"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-category",
-  "def-pc-derived-direct-image",
-  "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure"
+  "lem-pc-supported-qcoh-triangulated",
+  "lem-sc-pinned-projection-counit-exact-shift"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Expansion of the first two paragraphs of the parent triangle proof, implementing the implicit compatibility in Tag 0A9U"
+  "document": "lean/Sheaf/AlgebraicGeometry/RightAdjointTensorCompatibleExactStructures.lean",
+  "place": "Q1 reduction: geometric projection/counit shifts followed by proved adjunction-mate compatibility and Mathlib right-adjoint exactness"
  },
  "mathlib_searches": [
   {
@@ -144,9 +157,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261013T022421-L-3216326",
+  "landing": "20261013T054233-L-447816",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

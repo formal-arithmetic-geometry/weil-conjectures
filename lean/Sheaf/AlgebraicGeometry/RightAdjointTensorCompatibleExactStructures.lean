@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import Mathlib.CategoryTheory.Triangulated.Adjunction
+import Sheaf.AlgebraicGeometry.PinnedProjectionCounitExactShift
 
 /-! # Compatible exact structures for the pinned right-adjoint tensor comparison
 
@@ -23,6 +26,43 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
+
+private theorem qc_triangulated (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
+    (schemeDerivedQCohProperty X).IsTriangulated := by
+  have he : supportedProperty X Set.univ = schemeDerivedQCohProperty X := by
+    ext K
+    simp [supportedProperty]
+  rw [← he]
+  exact supported_qcoh_isTriangulated X Set.univ
+
+private theorem commShift_of_transpose
+    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
+    {R : C ⥤ D} {c : D ⥤ C} (adj : R ⊣ c) (Q : D ⥤ C) (τ : Q ⟶ c)
+    [R.CommShift ℤ] [c.CommShift ℤ] [Q.CommShift ℤ] [adj.CommShift ℤ]
+    [NatTrans.CommShift (Functor.whiskerRight τ R ≫ adj.counit) ℤ] :
+    NatTrans.CommShift τ ℤ := by
+  let ν := Functor.whiskerRight τ R ≫ adj.counit
+  let : NatTrans.CommShift ν ℤ := inferInstance
+  have ht : τ = Q.rightUnitor.inv ≫ Functor.whiskerLeft Q adj.unit ≫
+      (Functor.associator Q R c).inv ≫ Functor.whiskerRight ν c ≫
+      c.leftUnitor.hom := by
+    apply NatTrans.ext
+    funext K
+    simp only [ν, NatTrans.comp_app, Functor.rightUnitor_inv_app,
+      Functor.leftUnitor_hom_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_inv_app, Category.id_comp]
+    simp
+  let : NatTrans.CommShift Q.rightUnitor.inv ℤ := inferInstance
+  let : NatTrans.CommShift (Functor.whiskerLeft Q adj.unit) ℤ := inferInstance
+  let : NatTrans.CommShift (Functor.associator Q R c).inv ℤ := inferInstance
+  let : NatTrans.CommShift (Functor.whiskerRight ν c) ℤ := inferInstance
+  let : NatTrans.CommShift c.leftUnitor.hom ℤ := inferInstance
+  have h : NatTrans.CommShift (Q.rightUnitor.inv ≫
+      Functor.whiskerLeft Q adj.unit ≫ (Functor.associator Q R c).inv ≫
+      Functor.whiskerRight ν c ≫ c.leftUnitor.hom) ℤ := by
+    infer_instance
+  exact ht.symm ▸ h
 
 /-- Compatible shift structures and exactness for the two ambient-valued comparison functors.
 Source: Stacks Project, Tag 0A9U, triangulated-subcategory assertion and equation (48.8.0.1).
@@ -99,6 +139,56 @@ theorem rightAdjointTensor_compatibleExactStructures
         (schemeDerivedQCohProperty Y).ι.mapTriangle.obj S ∈
           Pretriangulated.distinguishedTriangles →
         F.mapTriangle.obj S ∈ Pretriangulated.distinguishedTriangles ∧
-        G.mapTriangle.obj S ∈ Pretriangulated.distinguishedTriangles := by sorry
+        G.mapTriangle.obj S ∈ Pretriangulated.distinguishedTriangles := by
+  classical
+  let := qc_triangulated Z
+  let := qc_triangulated Y
+  let Q := (schemeDerivedQCohProperty Z).lift
+    ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙
+      tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj)
+    (fun K ↦ hTensor K (c.obj ⟨𝟙_ _, hO⟩))
+  let R := (schemeDerivedQCohProperty Y).lift
+    ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage f) hRf
+  let ν : Q ⋙ R ⟶ 𝟭 (schemeDerivedQCohCategory Y) :=
+    Functor.whiskerRight τ R ≫ adj.counit
+  have hν : ∀ K : schemeDerivedQCohCategory Y,
+      ∃ pf : (schemeDerivedDirectImage f).obj
+            (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅
+          K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj,
+        pf.inv = (a.homEquiv _ _)
+          ((Functor.Monoidal.μIso (derivedPullback f) K.obj
+            ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫
+            (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧
+        (ν.app K).hom = pf.hom ≫
+          K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom := by
+    intro K
+    obtain ⟨pf, hinv, hcomp⟩ := hτ K
+    refine ⟨pf, hinv, ?_⟩
+    change ((adj.homEquiv (Q.obj K) K).symm (τ.app K)).hom = _
+    rw [hcomp]
+    exact congrArg (fun g : R.obj (Q.obj K) ⟶ K ↦ g.hom)
+      ((adj.homEquiv (Q.obj K) K).symm_apply_apply (ObjectProperty.homMk _))
+  obtain ⟨sQ, sR, hQ, hR, hshift⟩ := pinnedProjectionCounit_exactShift f hRf hO
+    (c.obj ⟨𝟙_ _, hO⟩) (fun K ↦ hTensor K (c.obj ⟨𝟙_ _, hO⟩)) a
+    (adj.counit.app ⟨𝟙_ _, hO⟩) ν hν
+  let := sQ
+  let := sR
+  let : Q.IsTriangulated := hQ
+  let : R.IsTriangulated := hR
+  let : NatTrans.CommShift ν ℤ := hshift
+  let := adj.rightAdjointCommShift ℤ
+  let := adj.commShift_of_leftAdjoint ℤ
+  let : c.IsTriangulated := adj.isTriangulated_rightAdjoint
+  let : NatTrans.CommShift τ ℤ := commShift_of_transpose adj Q τ
+  let F := Q ⋙ (schemeDerivedQCohProperty Z).ι
+  let G := c ⋙ (schemeDerivedQCohProperty Z).ι
+  let : F.CommShift ℤ := inferInstance
+  let : G.CommShift ℤ := inferInstance
+  let : F.IsTriangulated := inferInstance
+  let : G.IsTriangulated := inferInstance
+  refine ⟨inferInstance, inferInstance, inferInstance, ?_⟩
+  intro S hS
+  have hS' : S ∈ Pretriangulated.distinguishedTriangles := hS
+  exact ⟨F.map_distinguished S hS', G.map_distinguished S hS'⟩
 
 end AlgebraicGeometry

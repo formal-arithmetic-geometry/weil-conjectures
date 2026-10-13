@@ -1,0 +1,148 @@
+{
+ "id": "lem-sc-pinned-projection-counit-exact-shift",
+ "kind": "statement",
+ "title": "Exact shifts for the pinned projection followed by a map to the tensor unit",
+ "statement": "Let $f:Z\\to Y$ be a proper morphism of Noetherian schemes [def-weil-proper-morphism, def-pc-scheme]. Fix derived categories of their module sheaves in one localization universe, and derived categories of modules on every open of $Y$ [def-pc-derived-category]. Use the recorded derived pullback $L=Lf^*$ [def-pc-derived-pullback], derived direct image $R_0=Rf_*$ [def-pc-derived-direct-image], and K-flat derived tensor [def-pc-scheme-derived-tensor-structure]. Assume the full subcategories $D_{\\mathrm{QCoh}}(Y)$ and $D_{\\mathrm{QCoh}}(Z)$ are triangulated for their induced shifts and ambient distinguished triangles. Assume $R_0$ carries quasi-coherent objects to quasi-coherent objects, and $\\mathcal O_Y$ is quasi-coherent. Fix $E\\in D_{\\mathrm{QCoh}}(Z)$, and assume $LK\\otimes E$ is quasi-coherent for every $K\\in D_{\\mathrm{QCoh}}(Y)$. Give $L$ a specified monoidal structure and fix $a:L\\dashv R_0$. Put $Q(K)=LK\\otimes E$ as a quasi-coherent functor, and let $R$ be the quasi-coherent restriction of $R_0$. Fix $\\epsilon:RE\\to\\mathcal O_Y$ and a natural transformation $\\nu:Q\\circ R\\Rightarrow\\mathrm{id}$, where $Q\\circ R$ denotes applying $Q$ first and then $R$. For every $K$, suppose there is an isomorphism $p_K:R_0(LK\\otimes E)\\cong K\\otimes R_0E$ satisfying $p_K^{-1}=a.\\operatorname{homEquiv}(\\mu_L(K,R_0E)^{-1}\\mathbin{;} (LK\\otimes\\epsilon^a_E))$ and whose composite with $K\\otimes\\epsilon$ and the right unitor equals the ambient map of $\\nu_K$. Here semicolon denotes composition in the order written. Then there are coherent integer shift structures on $Q$ and $R$ for which both functors preserve distinguished triangles and $\\nu$ commutes with every integer shift. This statement makes no assertion about a right adjoint of $R$, and involves no comparison map to such a right adjoint.",
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U, triangulated-subcategory assertion; Tag 0A9S, equation-compare-with-pullback, before taking its right-adjoint mate"
+ },
+ "proof": [
+  {
+   "text": "On K-flat representatives, pullback followed by tensoring E commutes coherently with translation and takes mapping cones to mapping cones. Direct image computed on K-injectives also commutes with translation and mapping cones. The assumed triangulated quasi-coherent properties allow restriction to Q and R. For the specified monoidal structure, transport the pullback translation comparison using K[n] = K tensor the shifted unit and the tensorator. The associativity and unit equations give addition and zero coherence. Transport the direct-image comparison through the adjunction a. The representative mapping-cone identifications give preservation of distinguished triangles for these structures.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the pinned inverse projection as the adjunction mate of the inverse tensorator followed by the pullback counit. Move translation through those factors with the transported comparisons of step 1. Counit naturality and the adjunction triangle identities identify the component on K[n] with the translated component on K. Invert this equality using p_K. Tensoring the fixed morphism epsilon is natural in the translated first variable, and the right unitor has the same comparison. Composing these compatibility equations gives the shift equation for nu via its specified component equation. No component of nu or epsilon is cancelled; the argument includes zero E, zero epsilon, and zero triangles.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Expansion of Tags 0A9U and 0A9S at the projection/counit transpose stage; the right-adjoint exactness argument is separated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived projection formula followed by tensoring a morphism to the tensor unit commutes with shifts and defines exact functors",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift_rightAdjointProjectionMap_app|commShift_projectionMap_app|rightDerivedFunctor.CommShift|isTriangulated_tensorRight",
+   "date": "2026-10-13",
+   "results": "Search returned 0 hits: . No statement of pinned derived projection/counit exact shift choices.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback tensor a fixed quasi coherent complex and derived pushforward admit compatible exact shifts for the projection formula composite with a morphism to the tensor unit",
+   "date": "2026-10-13",
+   "results": "Search returned 8 hits: SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, SheafOfModules.pullback_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. No statement of pinned derived projection/counit exact shift choices.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionMapShift; DerivedCategory.Monoidal.ShiftComparison; CommShift in DerivedPullback",
+   "date": "2026-10-13",
+   "results": "Source-library search found commShift_rightAdjointProjectionMap_app and commShift_projectionMap_app, which assume compatible shifts for the adjunction and comparison. commShift_of_tensorLeft_fac and commShift_of_tensorRight_fac require a factorization through the underived oplax comparison. exists_derivedPullback supplies exactness but no simultaneous compatibility with the specified monoidal structure.",
+   "verdict": "Useful generic tools for proving this node; no theorem with this conclusion and hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointTensorCompatibleExactStructures",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Shift and triangle compatibility in the localizing-locus step of the smooth-proper relative dualizing tensor formula, before passage from the projection/counit map to its right-adjoint mate",
+   "via": [
+    "lem-sc-right-adjoint-tensor-compatible-exact-structures",
+    "lem-sc-right-adjoint-tensor-comparison-triangle",
+    "lem-sc-right-adjoint-tensor-comparison-diagrams",
+    "lem-sc-right-adjoint-tensor-locus-triangles",
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PinnedProjectionCounitExactShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/PinnedProjectionCounitExactShift.lean",
+  "declaration": "AlgebraicGeometry.pinnedProjectionCounit_exactShift",
+  "statement": "theorem pinnedProjectionCounit_exactShift\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    [(schemeDerivedQCohProperty Y).IsTriangulated]\n    [(schemeDerivedQCohProperty Z).IsTriangulated]\n    (hRf : ∀ E : schemeDerivedQCohCategory Z,\n      schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj))\n    (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y)))\n    (E : schemeDerivedQCohCategory Z)\n    (hTensor : ∀ K : schemeDerivedQCohCategory Y,\n      schemeDerivedQCohProperty Z (((derivedPullback f).obj K.obj) ⊗ E.obj))\n    [Functor.Monoidal (derivedPullback f)]\n    (a : derivedPullback f ⊣ schemeDerivedDirectImage f)\n    (ε : (⟨(schemeDerivedDirectImage f).obj E.obj, hRf E⟩ :\n      schemeDerivedQCohCategory Y) ⟶ ⟨𝟙_ _, hO⟩)\n    (ν : (schemeDerivedQCohProperty Z).lift\n      ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙ tensorRight E.obj)\n      hTensor ⋙ (schemeDerivedQCohProperty Y).lift\n        ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage f) hRf ⟶\n      𝟭 (schemeDerivedQCohCategory Y))\n    (hν : ∀ K : schemeDerivedQCohCategory Y,\n      ∃ pf : (schemeDerivedDirectImage f).obj\n            (((derivedPullback f).obj K.obj) ⊗ E.obj) ≅\n          K.obj ⊗ (schemeDerivedDirectImage f).obj E.obj,\n        pf.inv = (a.homEquiv _ _)\n          ((Functor.Monoidal.μIso (derivedPullback f) K.obj\n            ((schemeDerivedDirectImage f).obj E.obj)).inv ≫\n            (derivedPullback f).obj K.obj ◁ a.counit.app E.obj) ∧\n        (ν.app K).hom = pf.hom ≫ K.obj ◁ ε.hom ≫ (ρ_ K.obj).hom) :\n    let Q := (schemeDerivedQCohProperty Z).lift\n      ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙ tensorRight E.obj) hTensor\n    let R := (schemeDerivedQCohProperty Y).lift\n      ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage f) hRf\n    ∃ (sQ : Q.CommShift ℤ) (sR : R.CommShift ℤ),\n      letI := sQ\n      letI := sR\n      Q.IsTriangulated ∧ R.IsTriangulated ∧ NatTrans.CommShift ν ℤ",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T054233-L-447816",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T054233-L-447816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
