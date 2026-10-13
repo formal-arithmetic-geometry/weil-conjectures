@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 import all Sheaf.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import Sheaf.Algebra.Homology.BaseTensorOrdinaryIso
+import Sheaf.Algebra.Homology.AffineTensorCohomologyLifts
+import Sheaf.Algebra.Homology.AffineTensorCohomologyLocalizationIsos
 
 /-!
 # Affine derived base change and localization
@@ -363,6 +365,16 @@ theorem exists_affineDerivedBaseChangeLocalization
             Nonempty (Tl ⋙ ModuleCat.extendScalars f ≅
               resolution Aq ⋙ extend Aq D ⋙
                 HomologicalComplex.homologyFunctor (ModuleCat.{u} D) (.up ℤ) i) := by
-  sorry
+  obtain ⟨S, T, eS, eT, c, hS, hT, hc⟩ := exists_affineTensorCohomologyLifts R A B i
+  refine ⟨S, T, eS, eT, c, hS, hT, hc, ?_⟩
+  intro q' Rp Aq Bp D
+  intros
+  obtain ⟨Sl, Tl, eSl, eTl, cl, hSl, hTl, hcl⟩ :=
+    exists_affineTensorCohomologyLifts Rp Aq Bp i
+  refine ⟨Sl, Tl, eSl, eTl, cl, hSl, hTl, hcl, ?_⟩
+  apply affineTensorCohomology_localization R A B i S T eS eT c hS hT hc q'
+    Rp Aq Bp D
+  all_goals assumption
+
 
 end RingTensorCohomology
