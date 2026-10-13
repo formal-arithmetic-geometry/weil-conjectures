@@ -15,43 +15,30 @@
  ],
  "proof": [
   {
-   "text": "The affine equivalence identifies C with the sheafification of P. Kernels and cokernels of quasi-coherent sheaves are quasi-coherent; hence this equivalence computes homology of these complexes as module homology.",
+   "text": "Set A=Gamma(S,top), P=Gamma(C,top), and B=TrivSqZeroExt A N, the explicit square-zero algebra. The A-linear maps j:N->B, x|->(0,x), and p:B->N, (a,x)|->x, satisfy j followed by p=id. TensoringRight sends them to natural transformations; mapHomologicalComplex sends their composite to the identity, giving a retraction of P tensor N from P tensor B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply affine_tensor_pullback_homology_comparison to B. The universal hypothesis gives zero homology after pullback along Spec B -> Spec A -> S. Global sections and restriction of scalars are additive, hence carry a zero object to a zero object. Transport zero through the comparison to get zero homology for P tensor B.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+    "lem-pc-affine-tensor-pullback-homology-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "For a fixed A-module N use the explicit trivial square-zero A-algebra B=A direct-sum N: (a,x)(b,y)=(ab,ay+bx), with unit (1,0) and the inclusion of A. The spectrum of its inclusion maps to S through the canonical affine isomorphism. The natural affine pullback comparison identifies the global-sections complex of g*C with B tensor_A P. Compatibility with every differential follows from naturality. The homology of this complex is zero by the hypothesis and the preceding affine equivalence.",
-   "uses": [
-    "def-pc-base-change",
-    "lem-weil-pbc-tilde-pullback-base-change",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "As A-modules N is a retract of B, via x -> (0,x) and (a,x) -> x. Tensor these two A-linear maps with P in every degree, and commute factors to use right tensoring. They are complex maps and their composite is the identity. Applying homology gives a retraction of H^a(P tensor N) from the zero module. Therefore this homology is zero, equivalently the tensor complex is ExactAt a. The splitting uses only additive A-linearity; the projection to N need not be a ring map.",
-   "uses": [
-    "lem-weil-pbc-retract-of-zero-object"
-   ],
+   "text": "Apply homologyFunctor to the retraction. Its composite is the identity of H^a(P tensor N), while its inclusion is zero because its target H^a(P tensor B) is zero. Thus this identity is zero. IsZero.iff_id_eq_zero and HomologicalComplex.exactAt_iff_isZero_homology give ExactAt a.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-base-change",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "lem-weil-pbc-retract-of-zero-object",
-  "lem-weil-pbc-tilde-pullback-base-change"
+  "lem-pc-affine-tensor-pullback-homology-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 01IB (affine equivalence), Tag 01I9 (affine pullback); steps 1--2 of lem-pc-affine-universally-exact-opcycles-flat, square-zero test.; detailed affine specialization by H1"
+  "place": "Tags 01IB and 01I9(1); square-zero specialization in steps 1--2 of lem-pc-affine-universally-exact-opcycles-flat. Formal categorical assembly by G2, using proved Mathlib and source-library declarations."
  },
  "mathlib_searches": [
   {
@@ -137,12 +124,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T235554-L-2201213",
+  "landing": "20261013T031538-L-3570529",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

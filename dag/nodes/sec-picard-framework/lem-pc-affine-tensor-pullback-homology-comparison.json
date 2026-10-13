@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-affine-tensor-pullback-homology-comparison",
+ "kind": "statement",
+ "title": "Affine tensor pullback comparison of homology",
+ "statement": "Let S be an affine scheme [def-pc-scheme], C a cochain complex of quasi-coherent O_S-modules [def-pc-cochain-complex-modules] [pqf-def-coherent], A=Gamma(S,top), B any commutative A-algebra, a an integer, and P the termwise global-sections complex. The A-module H^a(P tensor_A B) is isomorphic to the scalar restriction from B to A of the B-module of global sections of H^a(g*C), where g:Spec B -> S is Spec(algebraMap A B) followed by S.isoSpec.inv [def-pc-base-change]. Here tensor, scalar extension and pullback are ordinary, not derived. No vanishing, flatness or boundedness hypothesis is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01IB and 01I9."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "pqf-def-coherent",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The tilde functor T is left adjoint and fully faithful. For a morphism f of B-modules, kernel(T.map f) is quasi-coherent by isQuasicoherent_kernel. Its affine counit is an isomorphism, so it lies in the image of T. Lift the kernel inclusion through full faithfulness, prove its composite with f is zero using map_injective, and transport the kernel limit cone through the counit. Full faithfulness reflects this limit. Thus T preserves every kernel. Functor.preservesFiniteLimits_of_preservesKernels gives finite-limit preservation; its left adjunction supplies finite-colimit preservation.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let P be the section complex and Q its scalar extension to B. Restrict scalars from B to A. TensorProduct.comm followed by TensorProduct.congr for the identity scalar-restriction linear equivalence gives component isomorphisms P.X n tensor B -> restricted Q.X n. TensorProduct.induction_on proves compatibility with every differential (the pure tensor case is definitional), so isoOfComponents gives an isomorphism of these complexes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use affine_tensor_pullback_complex_comparison to identify T(Q) with the scheme pullback complex. The exact functors T and restrictScalars commute with homology by mapHomologicalComplexHomologyIso. The affine unit tilde.toTildeGammaNatIso identifies Q.homology a with global sections of T(Q.homology a). Apply global sections to the inverse T-homology comparison and to the pullback complex comparison, then restrict scalars and compose with the tensor-commutation homology isomorphism. Only kernels of quasi-coherent objects and colimits preserved by the left adjoint are used; no separate quasi-coherent cokernel-closure lemma is needed.",
+   "uses": [
+    "lem-pc-affine-tensor-pullback-complex-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-tensor-pullback-complex-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01IB and 01I9(1); square-zero specialization in steps 1--2 of lem-pc-affine-universally-exact-opcycles-flat. Formal categorical assembly by G2, using proved Mathlib and source-library declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine quasi coherent sheaf pullback comparison global sections complex tensor product",
+   "results": "Service unavailable: Internal Server Error; no results obtained.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of quasi coherent complex on affine scheme is associated sheaf of extension of scalars of global sections complex",
+   "results": "Found pullback, pullbackPushforwardAdjunction and additive pullback, but no complete complex comparison.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\", \"Iso\"",
+   "results": "Found NatIso.mapHomologicalComplex and Functor.mapHomologicalComplexCompIso; both used.",
+   "date": "2026-10-13",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsRestrictFromSpecLinearEquiv|tildePullbackIso|mapHomologicalComplexHomologyIso",
+   "results": "msearch grep returned no hits; direct rg of lean/WeilConjectures found sectionsRestrictFromSpecLinearEquiv in Modules.LocallyFreeAffine, tildePullbackIso in Modules.PullbackTilde, and mapHomologicalComplexHomologyIso in FromJoel.Algebra.Homology.PreservesQuasiIso. The source signatures were read and reused.",
+   "date": "2026-10-13",
+   "verdict": "used proved source ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineUniversalTensorExact",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), construction of a flat cohomology model: steps 1--2 of lem-pc-affine-universally-exact-opcycles-flat, via its square-zero affine tensor test.",
+   "via": [
+    "lem-pc-affine-universal-tensor-exact",
+    "lem-pc-affine-universally-exact-opcycles-flat",
+    "lem-pc-affine-flat-connective-truncation",
+    "lem-pc-proper-flat-finite-presentation-model",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineTensorPullbackHomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineTensorPullbackHomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_tensor_pullback_homology_comparison",
+  "statement": "theorem affine_tensor_pullback_homology_comparison (S : Scheme.{u}) [IsAffine S]\n    (C : CochainComplex S.Modules ℤ)\n    (hqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)\n    (B : Type u) [CommRing B] [Algebra Γ(S, ⊤) B] (a : ℤ) :\n    Nonempty (\n      ((((tensorRight (ModuleCat.of Γ(S, ⊤) B)).mapHomologicalComplex (.up ℤ)).obj\n        (((SheafOfModules.evaluation (R := S.ringCatSheaf) (.op ⊤) :\n          S.Modules ⥤ ModuleCat.{u} Γ(S, ⊤)).mapHomologicalComplex\n          (.up ℤ)).obj C)).homology a) ≅\n      (ModuleCat.restrictScalars (algebraMap Γ(S, ⊤) B)).obj\n        ((moduleSpecΓFunctor (R := CommRingCat.of B)).obj\n          ((((Modules.pullback\n            (Spec.map (CommRingCat.ofHom (algebraMap Γ(S, ⊤) B)) ≫\n              S.isoSpec.inv)).mapHomologicalComplex\n              (.up ℤ)).obj C).homology a)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T031538-L-3570529",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T031538-L-3570529",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
