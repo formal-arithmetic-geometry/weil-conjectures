@@ -1,0 +1,156 @@
+{
+ "id": "new-module-cup-godement-tensor-coordinates-exists",
+ "kind": "statement",
+ "title": "Construction of the Godement map with prescribed tensor coordinates",
+ "statement": "For every scheme $X$ there is a family $b(H,K):T(H)\\otimes T(K)\\to T(H\\otimes K)$ satisfying ModuleCupGodementTensorCoordinates [new-module-cup-godement-tensor-coordinates]. Here $T$ is the product of stalk skyscrapers [def-sc-module-cup-godement-model]. No naturality, unit or multiplication law is asserted.",
+ "source": {
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4, Godement resolution tensor construction; Stacks Tag 0FKR"
+ },
+ "stmt_deps": [
+  "new-module-cup-godement-tensor-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "For stalk elements choose section representatives and intersect their neighbourhoods. Send the pair to the germ of the sectionwise tensor under tau. If either representative is changed, equality of germs supplies a smaller neighbourhood on which the sections agree; restricting both factors there and using naturality of tau gives the same output. The same common-neighbourhood calculation proves additivity and stalk-ring bilinearity.",
+   "uses": [
+    "new-module-cup-godement-tensor-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each point x, compose the two skyscraper-projection section maps with this stalk bilinear operation. Over an open U containing x the result is bilinear over O(U), since scalars act through the ring germ; if x is absent all skyscraper sections are zero. Restriction preserves the evaluated coordinates, so tensor universality gives a presheaf map from T(H) tensor T(K) to the skyscraper of (H tensor K)_x. The sheafification adjunction extends it to the sheaf tensor product, uniquely agreeing on pure section tensors. The product universal property assembles these maps into b with the required coordinates. Empty products and zero inputs obey the same universal properties.",
+   "uses": [
+    "new-module-cup-godement-tensor-coordinates",
+    "def-sc-module-cup-godement-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cup-godement-model",
+  "new-module-cup-godement-tensor-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/abs/1004.1491",
+  "place": "§1.1.4; explicit refinement of the coordinate construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Godement resolution tensor pairing product of stalk skyscrapers",
+   "results": "CategoryTheory.Sheaf.tensorProd_isSheaf; PresheafOfModules.Monoidal.tensorObj_obj; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "Generic infrastructure only; no exact coordinatewise module Godement tensor map."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "results": "CategoryTheory.Functor.LaxMonoidal.μ_natural",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "Generic infrastructure only; no exact coordinatewise module Godement tensor map."
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper.*tensor|tensor.*skyscraper",
+   "results": "No hits.",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "Generic infrastructure only; no exact coordinatewise module Godement tensor map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinatewise tensor pairing from a product of stalk skyscrapers of module sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf tensor product germ of a pure tensor equals tensor of germs",
+   "results": "PresheafOfModules.Monoidal.tensorObj_obj; CategoryTheory.Sheaf.tensorProd_isSheaf; PresheafOfModules.Monoidal.tensorObj; ModuleCat.Tilde.toOpen_germ_apply; ModuleCat.Tilde.stalkToFiberLinearMap_germ; ModuleCat.Tilde.toOpen_germ_assoc; ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap; ModuleCat.Tilde.toOpen_germ",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "Generic infrastructure only; no exact coordinatewise module Godement tensor map."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification|stalk.*tensor|tensor.*stalk",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean; Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-14",
+   "available": true,
+   "verdict": "Generic infrastructure only; no exact coordinatewise module Godement tensor map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleCupGodementBetaExists",
+  "date": "2026-10-14",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Godement tensor pairing used in the sheaf cup-product construction supporting the theorem of the cube; coordinate construction and laws.",
+   "via": [
+    "new-module-cup-godement-beta-exists",
+    "new-module-cup-godement-iterate-pairings-canonical-exists",
+    "lem-sc-module-cup-godement-cosimplicial-input",
+    "lem-sc-module-cup-godement-aw",
+    "def-sc-module-cohomology-cup-product",
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleCupGodementTensorCoordinatesExists",
+  "file": "lean/Sheaf/Paper/ModuleCupGodementTensorCoordinatesExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCup_godement_tensor_coordinates_exists",
+  "statement": "theorem moduleCup_godement_tensor_coordinates_exists (X : Scheme.{u}) :\n    ∃ b : ∀ H K : X.Modules,\n      moduleCup_godementObject X H ⊗ moduleCup_godementObject X K ⟶\n        moduleCup_godementObject X (H ⊗ K),\n      ModuleCupGodementTensorCoordinates X b",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T172653-L-2098937",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T172653-L-2098937",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
