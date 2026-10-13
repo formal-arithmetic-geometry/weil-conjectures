@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-power-series-punctured-thickening-sections",
+ "kind": "statement",
+ "title": "Compatible scalar thickening sections determine one power series",
+ "statement": "Let A be a Noetherian local commutative ring of depth at least two [def-weil-pbc-noetherian-ring, def-weil-pbc-depth], d>0, B=A[[x_1,...,x_d]] [def-weil-pbc-multivariate-power-series], f:B→A constant coefficient and I=ker(f). Let V⊂Spec(B) be open whose zero-section inverse image is the punctured spectrum of A [def-weil-pbc-scheme-conventions]. Put V_n=V×_{Spec(B)}Spec(B/I^(n+1)), with transitions u_n and projections v_n to V. For each family t_n∈Γ(V_n,O) satisfying u_n^sharp(t_(n+1))=t_n, there is a unique b∈B whose canonical restrictions from Spec(B) through V and v_n equal t_n for every n. This is a scalar formal calculation and makes no assertion about sections of a finite étale cover.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, first displayed inverse-limit calculation; Mathlib adic completeness replaces the coefficient-by-coefficient assembly."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Use the combined-ideal coefficient theorem at base ideal zero and exponent one to identify ker(constantCoeff) with the variable ideal. Mathlib gives adic completeness for this ideal.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "lem-weil-pbc-power-series-variables-complete"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Invert the bijective finite-index restriction map k_n to obtain q_n in B/I^(n+1) from t_n. These are uniquely determined quotient classes. Naturality of ΓSpecIso and pullback.snd shows that k_n composed with the quotient transition equals the section transition composed with k_(n+1). Injectivity of k_n and compatibility of t give compatibility of q.",
+   "uses": [
+    "lem-sbc-power-series-punctured-thickening-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take c_n to be the actual Quotient.out representative of q_n. Consecutive representatives agree modulo I^(n+1). Induction gives agreement of c_m and c_n modulo I^(m+1) for m≤n, hence modulo I^m. Apply Mathlib IsPrecomplete.prec to construct b. Its congruence to c_(n+1), together with consecutive compatibility, gives mk_(I^(n+1))(b)=q_n.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The pullback square and ΓSpecIso naturality identify the canonical restriction of b to V_n with k_n(mk(b)), hence t_n. For any other a with the same restrictions, injectivity of k_n makes mk(a)=q_n=mk(b) at every positive exponent. Project to exponent n and apply IsHausdorff.eq_iff_smodEq to conclude a=b. All these steps are proved in the delivered Lean.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-power-series-variables-complete",
+  "lem-sbc-power-series-punctured-thickening-restriction"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "S1",
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, first displayed inverse-limit calculation; Mathlib adic completeness replaces the coefficient-by-coefficient assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of sections on punctured power series thickenings equals the multivariate power series ring",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of global sections of punctured power series quotient thickenings is the power series ring by Hartogs",
+   "results": "8 hits about Laurent series and univariate series; none identifies sections of the punctured thickenings.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "MvPowerSeries IsAdicComplete; toAdicCompletion; punctured.*thickening; quotient.*truncation",
+   "results": "Mathlib.RingTheory.AdicCompletion.Completeness provides completeness for the variable ideal; MvPowerSeries.Equiv supplies the polynomial completion equivalence. No punctured-scheme restriction result. Existing formal approximation starts with a section on V, rather than an arbitrary thickening section. Blueprint searches for quotient power series and formal sections have zero matches.",
+   "date": "2026-10-13",
+   "verdict": "Mathlib supplies completeness; no geometric restriction comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedCoverSectionsComparison",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the compatible-family scalar calculation inside Tag 0EY9; step 1 of lem-sbc-power-series-punctured-cover-sections-comparison",
+   "via": [
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesPuncturedThickeningSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.existsUnique_powerSeries_punctured_thickening_sections",
+  "statement": "theorem existsUnique_powerSeries_punctured_thickening_sections\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    (d : ℕ) (hd : 0 < d)\n    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens)\n    (hV : ∀ x : Spec (.of A),\n      (Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))) x ∈ V ↔\n        x ≠ IsLocalRing.closedPoint A)\n    (s : ∀ n : ℕ, Γ(FiniteEtale.Adic.openThickening\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V n, ⊤))\n    (hs : ∀ n, (FiniteEtale.Adic.openThickeningTransition\n      (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V n).appTop\n        (s (n + 1)) = s n) :\n    ∃! b : MvPowerSeries (Fin d) A, ∀ n,\n      ((ΓSpecIso (.of (MvPowerSeries (Fin d) A))).inv ≫ V.ι.appTop ≫\n        (FiniteEtale.Adic.openThickeningMap\n          (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) V n).appTop) b = s n",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T150353-L-810369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T150353-L-810369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

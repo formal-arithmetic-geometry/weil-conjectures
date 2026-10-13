@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-power-series-punctured-thickening-restriction",
+ "kind": "statement",
+ "title": "Sections of a single punctured power-series thickening equal its quotient ring",
+ "statement": "Let A be a Noetherian local commutative ring of depth at least two [def-weil-pbc-noetherian-ring, def-weil-pbc-depth], d>0, B=A[[x_1,...,x_d]] [def-weil-pbc-multivariate-power-series], f:B→A the constant coefficient map, and I=ker(f). Let V⊂Spec(B) be open whose inverse image under Spec(f) is the punctured spectrum of A [def-weil-pbc-scheme-conventions]. For every n≥0, let V_n=V×_{Spec(B)}Spec(B/I^(n+1)) and q_n:V_n→Spec(B/I^(n+1)) its second projection. Then the canonical restriction B/I^(n+1)=Γ(Spec(B/I^(n+1)),O)→Γ(V_n,O) induced by q_n is bijective.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, first displayed inverse-limit calculation at a fixed finite index; depth-two Hartogs, Tag 0BK0."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Let U be Spec(A) minus the closed point. Apply depth-two Hartogs to the structure sheaf to identify Γ(U,O_U) with A.",
+   "uses": [
+    "lem-sbc-depth-two-hartogs-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The variable ideal equals ker(constantCoeff); B/I^(n+1) is the truncated polynomial ring with monomials of total degree ≤n as a finite A-basis. Its nilpotent variable ideal identifies its underlying spectrum with Spec(A), so the inverse image of V is the thickening of U.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Push the structure sheaf of that thickening to U via the affine constants projection. The finite basis identifies it with the finite direct sum of O_U on those monomials. Taking sections and the Hartogs identification gives B/I^(n+1). On each monomial the resulting map is its canonical restriction, so this identifies the specified q_n section map, not merely an abstract isomorphism. The index n=0 gives the usual Hartogs calculation; no compatible-family comparison is assumed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-depth-two-hartogs-restriction"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "S1",
+  "document": "Stacks Project",
+  "place": "Tag 0EY9, first displayed inverse-limit calculation at a fixed finite index; depth-two Hartogs, Tag 0BK0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit of sections on punctured power series thickenings equals the multivariate power series ring",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of global sections of punctured power series quotient thickenings is the power series ring by Hartogs",
+   "results": "8 hits about Laurent series and univariate series; none identifies sections of the punctured thickenings.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "MvPowerSeries IsAdicComplete; toAdicCompletion; punctured.*thickening; quotient.*truncation",
+   "results": "Mathlib.RingTheory.AdicCompletion.Completeness provides completeness for the variable ideal; MvPowerSeries.Equiv supplies the polynomial completion equivalence. No punctured-scheme restriction result. Existing formal approximation starts with a section on V, rather than an arbitrary thickening section. Blueprint searches for quotient power series and formal sections have zero matches.",
+   "date": "2026-10-13",
+   "verdict": "Mathlib supplies completeness; no geometric restriction comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedCoverSectionsComparison",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Formal splitting paragraph: the finite-index scalar calculation inside Tag 0EY9; step 1 of lem-sbc-power-series-punctured-cover-sections-comparison",
+   "via": [
+    "lem-sbc-power-series-punctured-cover-sections-comparison",
+    "lem-sbc-power-series-punctured-formal-hom-algebraization",
+    "lem-sbc-power-series-punctured-section-surjective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PowerSeriesPuncturedThickeningRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.bijective_powerSeries_punctured_thickening_restriction",
+  "statement": "theorem bijective_powerSeries_punctured_thickening_restriction\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    (d : ℕ) (hd : 0 < d)\n    (V : (Spec (.of (MvPowerSeries (Fin d) A))).Opens)\n    (hV : ∀ x : Spec (.of A),\n      (Spec.map (CommRingCat.ofHom\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)))) x ∈ V ↔\n        x ≠ IsLocalRing.closedPoint A)\n    (n : ℕ) :\n    Function.Bijective\n      ((ΓSpecIso (.of (MvPowerSeries (Fin d) A ⧸ FiniteEtale.Adic.ideal\n        (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n))).inv ≫\n        (pullback.snd V.ι (FiniteEtale.Adic.baseMap\n          (MvPowerSeries.constantCoeff (σ := Fin d) (R := A)) n)).appTop).hom",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T150353-L-810369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T150353-L-810369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
