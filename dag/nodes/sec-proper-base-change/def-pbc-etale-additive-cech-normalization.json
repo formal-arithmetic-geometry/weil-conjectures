@@ -1,0 +1,134 @@
+{
+ "id": "def-pbc-etale-additive-cech-normalization",
+ "kind": "definition",
+ "title": "Augmentation normalization of additive etale Cech edges",
+ "statement": "For a scheme X [def-pc-scheme], an open family U, and an injective resolution I [def-sp-injective-resolutions] of the fixed lifted additive structure sheaf [def-sc-etale-additive-structure-restriction], form the open inclusion i(W)=(W→X), its section Cech-resolution double complex [def-sc-etale-open-cech-resolution-double-complex] and its total complex T. Alpha in degree n restricts a global resolution section to each degree-zero Cech tuple and includes into T at (0,n). Beta sends an ordinary unit-module Cech cochain [lem-pc-flat-cech-base-change] to lifted functions on open subschemes using restrictFunctorGamma inverse, then to I^0 by the resolution augmentation, then includes into T at (n,0). An equivalence a from Sheaf.H(A_X,n) to ordinary Cech homology is normalized when, for every I and every canonical resolution comparison c [def-weil-pbc-etale-resolution-section-canonical-comparison], every global cycle s and ordinary Cech cycle z with total cycles t_alpha,t_beta whose inclusions equal alpha(s) and beta(z), equality of their total classes implies a(c.globalEquiv([s]))=[z]. No scalar or inverse-image law is part of this definition.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, separated affine-cover proof; Tag 01EQ, augmentation construction; Tag 01FD, Lemma 20.15.1, commuting augmented double-complex diagram. Worker-written explicit normalization of this argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-additive-structure-restriction",
+  "def-sc-etale-open-cech-resolution-double-complex",
+  "lem-pc-flat-cech-base-change",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized Cech cohomology comparison commutes with inverse image and multiplication",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology Cech comparison natural pullback affine open cover",
+   "results": "8 hits: Scheme.OpenCover pullback affine refinement identities; TopCat.Sheaf.interUnionPullbackConeLift identities; MayerVietorisSquare.toPullbackObj and SheafCondition.glue. No normalized lifted additive comparison.",
+   "date": "2026-10-13",
+   "verdict": "No statement of the required normalized edge laws."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\"",
+   "results": "12 hits concerning ShortComplex.leftHomologyπ, its epi instance, naturality and boundaries.",
+   "date": "2026-10-13",
+   "verdict": "The epi and naturality APIs suffice for choosing representatives, not the normalized etale edge."
+  },
+  {
+   "tool": "grep",
+   "query": "cechOverMap|cechCoordinate|homologyπ.*surject|surjective.*homologyπ; normalized.*Cech|Cech.*normalized; blueprint search Cech normalization and 01FD",
+   "results": "ModuleCat.epi_iff_surjective applications, CechComparisonSystem and CechComparisonInverseImageCompatibility (ordinary abelian coefficients), EtaleQcoherentULiftFiniteCechComparison (unnormalized lifted equivalence). No normalized fixed-additive-sheaf edge. Blueprint searches returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "Reuse existing ordinary cochain transfer and module/abelian cycle transport; state only the missing normalized edge laws."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology edge isomorphism natural in coefficients via injective resolution augmentation",
+   "results": "8 hits: injective-resolution iso hom/inv naturality and Hom.hom'_f APIs, and group-cohomology cochain maps. These support comparison lifts but do not state the additive etale alpha/beta normalization or its scalar/refinement laws.",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: no exact replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": "1 hit: CategoryTheory.cechComplexFunctor in Mathlib.CategoryTheory.Sites.SheafCohomology.Cech; this defines the cochain functor, with no normalized cohomology comparison.",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: construction reused, no theorem replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Aa]ugment|[Aa]ugment.*Cech|cech.*[Aa]ugment|[Aa]ugment.*cech",
+   "results": "19 hits in group resolution, ExtraDegeneracy, CechNerve, and FormalCoproducts.ExtraDegeneracy. These concern augmented nerves and contractions, not the etale fixed additive cohomology edge laws.",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: no exact replacement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechInverseImage",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison in the smooth-curve proper base-change argument: Augmentation normalization of additive etale Cech edges.",
+   "via": [
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsEtaleAdditiveCechNormalized",
+  "statement": "def IsEtaleAdditiveCechNormalized {X : Scheme.{u}} {ι : Type u}\n    (U : ι → X.Opens) (n : ℕ)\n    (a : Sheaf.H X.etaleAdditiveSheaf n ≃+\n      (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homology n) : Prop",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T111841-L-3048799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T111841-L-3048799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

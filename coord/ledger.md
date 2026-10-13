@@ -12096,3 +12096,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:18 L: merged deliver/D2/Sheaf.AlgebraicGeometry.OrderedCechModuleFirstSortingBoundary (stage 3; reviewer PASS; first push; landing 20261013T111840-L-3048460 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:18 L: merged deliver/D2/Sheaf.AlgebraicGeometry.PicardBaseChangeCounit (stage 3; reviewer PASS; first push; landing 20261013T111840-L-3048598 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:18 L: merged deliver/D3/Sheaf.AlgebraicGeometry.CoefficientComparisonConstruction (stage 3; reviewer PASS; first push; landing 20261013T111841-L-3048700 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:18 L: merged deliver/D3/Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechInverseImage (stage 3; reviewer PASS; first push; landing 20261013T111841-L-3048799 (interface); batch 20261013T111833; modules 5; new nodes 4)

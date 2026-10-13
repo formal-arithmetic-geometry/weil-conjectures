@@ -16,37 +16,40 @@
  ],
  "proof": [
   {
-   "text": "Use the natural unit section coordinates to identify the fixed lifted additive structure sheaf with lifted unit tensor sections. Restrict to the affine opens of U and V. The coefficient-lift finite Cech comparison is obtained from affine etale acyclicity and the injective Cech double complex. Lower each finite product coordinate, restrict scalars along Z.toSpecGamma and take homology to produce additive equivalences a and aprime to the ordinary unit Cech complexes. In degree zero use sections and gluing. Empty schemes, empty intersections and empty index types give zero groups.",
+   "text": "Obtain augmentation-normalized additive edge equivalences separately for X and Y. Apply scalar compatibility to each supplied endomorphism family.",
    "uses": [
-    "lem-sc-etale-tensor-unit-sections-natural",
-    "lem-sc-etale-qcoherent-ulift-finite-cech-comparison"
+    "lem-pbc-etale-additive-cech-normalized-existence",
+    "lem-pbc-etale-additive-cech-normalized-scalar"
    ],
    "elementary": false
   },
   {
-   "text": "Fix these equivalences using the coefficient and global-section augmentations. The stipulated mu maps act on each coordinate by multiplication with the restriction of r. This commutes with the Cech differential, both augmentations and lowering the lift. Therefore the edge equivalences take Sheaf.H.map(mu r) to multiplication by r on cechOver homology. The canonical map to Spec of global functions has scalar homomorphism the identity by GammaSpecIso.inv_hom_id.",
-   "uses": [],
+   "text": "Choose a source cycle representing a(x) using ModuleCat.epi_iff_surjective for homologyPi. The proved private additiveOrdinaryCechIso and additiveOrdinaryCyclesIso transport ordinary module Cech cycles to explicit abelian Cech cycles; additiveOrdinaryCyclesIso_i identifies their coordinate inclusions. Apply the existing refined-cover cechInverseImageCochainMap with the unitToPushforwardObjUnit coefficient map, apply cyclesMap, and invert the target cycles iso. Naturality of cyclesMap_i and the inverse iso identity give exactly the required target coordinates. This proves existence_additiveOrdinary_cycle_transfer without any new sorry and without an etale cohomology comparison.",
+   "uses": [
+    "def-pc-cech-inverse-image-cochain-map",
+    "def-pc-cech-comparison-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply normalized inverse-image compatibility to these matched cycles. Substitute homologyPi(z)=a(x) and simplify a.symm(a(x))=x. Assemble the two equivalences, scalar laws, source and target class equalities, and coordinate equality.",
+   "uses": [
+    "lem-pbc-etale-additive-cech-normalized-inverse-image"
+   ],
    "elementary": true
-  },
-  {
-   "text": "Form the section chain map for the refined cover by structural pullback on each tuple intersection. The refinement inclusion lets each source tuple section restrict to the target tuple. The adjunction equation identifies the underlying coefficient section map with the adjoint of etaleAdditiveSheafToLowerStar. Choose normalized section comparisons by exists_resolutionSection_canonical_comparison. Lift this map to resolutions and compare the coefficient and global-section augmentations in the double-complex diagram of 01FD. The normalized resolution transfer identifies the global-resolution map with Etale.cohomologyMap; compose with an augmentation-preserving lift of the adjoint coefficient map into a resolution of the target additive sheaf. Its extMk cocycle formula identifies the induced homology map with Sheaf.H.map of that coefficient map. Naturality here is established from the augmentation diagram, not inferred from the bare Nonempty finite-Cech equivalence. Invert the augmentation quasi-isomorphisms; the resulting homology map is conjugated by a and aprime. Represent a(x) by a cycle z (homologyPi is surjective in ModuleCat), and let zprime be its section-chain-map image. The chain-map property makes it a cycle and its coordinates and classes have exactly the stated three identities.",
-   "uses": [
-    "lem-weil-pbc-etale-resolution-section-canonical-data",
-    "lem-weil-pbc-etale-resolution-section-canonical-transfer"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-etale-qcoherent-ulift-finite-cech-comparison",
-  "lem-sc-etale-tensor-unit-sections-natural",
-  "lem-weil-pbc-etale-resolution-section-canonical-data",
-  "lem-weil-pbc-etale-resolution-section-canonical-transfer"
+  "def-pc-cech-comparison-system",
+  "def-pc-cech-inverse-image-cochain-map",
+  "lem-pbc-etale-additive-cech-normalized-existence",
+  "lem-pbc-etale-additive-cech-normalized-inverse-image",
+  "lem-pbc-etale-additive-cech-normalized-scalar"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/03P2",
-  "place": "Theorem 59.22.4, separated-case affine-cover proof; Tag 01FD, Lemma 20.15.1, cocycle-coordinate rule and augmented double-complex diagram; the same argument on the small etale site."
+  "by": "D3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Cycle representatives transferred through the explicit ordinary cochain map; normalized edge existence, scalar law and inverse-image class law split into three independent statements. No unit route changed."
  },
  "mathlib_searches": [
   {
@@ -148,9 +151,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T100113-L-2482740",
+  "landing": "20261013T111841-L-3048799",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -1,0 +1,146 @@
+{
+ "id": "lem-pbc-etale-additive-cech-normalized-scalar",
+ "kind": "statement",
+ "title": "Scalar compatibility of augmentation-normalized additive etale Cech edges",
+ "statement": "Let X be a quasi-compact separated scheme [def-pc-scheme], let U be a finite open cover whose intersections indexed by every positive-length tuple are affine, and let n≥0, and let a be any additive equivalence satisfying augmentation normalization [def-pbc-etale-additive-cech-normalization]. Let mu(r) be an endomorphism of the fixed lifted additive structure sheaf [def-sc-etale-additive-structure-restriction] whose every section component multiplies by the structural pullback of r∈Gamma(X,O_X). Then a(H^n(mu(r))(x))=r•a(x) in the ordinary unit Cech homology [lem-pc-flat-cech-base-change]. This asserts only the endomorphism compatibility of supplied normalized equivalences.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03P2",
+  "place": "Theorem 59.22.4, separated affine-cover proof; Tag 01EQ, augmentation construction; Tag 01FD, Lemma 20.15.1, commuting augmented double-complex diagram. Worker-written explicit normalization of this argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pbc-etale-additive-cech-normalization",
+  "def-sc-etale-additive-structure-restriction",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Choose a resolution and a canonical global comparison. Lift mu(r) to an augmentation-preserving resolution endomorphism. The coefficient augmentation acts coordinatewise by multiplication with the structural restriction of r; the scalar map for X.toSpecGamma is the identity by GammaSpecIso.inv_hom_id. The extMk cocycle formula identifies the global-resolution homology endomorphism with Sheaf.H.map(mu(r)). Apply the endomorphism to the alpha/beta class equation and invoke normalization. Homology of the coefficient scalar map is scalar multiplication. This includes zero degree, r=0 and r=1, and zero complexes from empty covers.",
+   "uses": [
+    "lem-weil-pbc-etale-resolution-section-canonical-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-resolution-section-canonical-data"
+ ],
+ "proof_origin": {
+  "by": "D3 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Augmented double-complex diagram of Lemma 20.15.1, with Tag 03P2 affine acyclicity and explicit alpha/beta section normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized Cech cohomology comparison commutes with inverse image and multiplication",
+   "results": "UNAVAILABLE: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology Cech comparison natural pullback affine open cover",
+   "results": "8 hits: Scheme.OpenCover pullback affine refinement identities; TopCat.Sheaf.interUnionPullbackConeLift identities; MayerVietorisSquare.toPullbackObj and SheafCondition.glue. No normalized lifted additive comparison.",
+   "date": "2026-10-13",
+   "verdict": "No statement of the required normalized edge laws."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\"",
+   "results": "12 hits concerning ShortComplex.leftHomologyπ, its epi instance, naturality and boundaries.",
+   "date": "2026-10-13",
+   "verdict": "The epi and naturality APIs suffice for choosing representatives, not the normalized etale edge."
+  },
+  {
+   "tool": "grep",
+   "query": "cechOverMap|cechCoordinate|homologyπ.*surject|surjective.*homologyπ; normalized.*Cech|Cech.*normalized; blueprint search Cech normalization and 01FD",
+   "results": "ModuleCat.epi_iff_surjective applications, CechComparisonSystem and CechComparisonInverseImageCompatibility (ordinary abelian coefficients), EtaleQcoherentULiftFiniteCechComparison (unnormalized lifted equivalence). No normalized fixed-additive-sheaf edge. Blueprint searches returned zero matches.",
+   "date": "2026-10-13",
+   "verdict": "Reuse existing ordinary cochain transfer and module/abelian cycle transport; state only the missing normalized edge laws."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology edge isomorphism natural in coefficients via injective resolution augmentation",
+   "results": "8 hits: injective-resolution iso hom/inv naturality and Hom.hom'_f APIs, and group-cohomology cochain maps. These support comparison lifts but do not state the additive etale alpha/beta normalization or its scalar/refinement laws.",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: no exact replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": "1 hit: CategoryTheory.cechComplexFunctor in Mathlib.CategoryTheory.Sites.SheafCohomology.Cech; this defines the cochain functor, with no normalized cohomology comparison.",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: construction reused, no theorem replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Aa]ugment|[Aa]ugment.*Cech|cech.*[Aa]ugment|[Aa]ugment.*cech",
+   "results": "19 hits in group resolution, ExtraDegeneracy, CechNerve, and FormalCoproducts.ExtraDegeneracy. These concern augmented nerves and contractions, not the etale fixed additive cohomology edge laws.",
+   "date": "2026-10-13",
+   "verdict": "Independent second reading: no exact replacement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechInverseImage",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-proper-base-change-one",
+   "place": "Artin-Schreier structure-sheaf comparison in the smooth-curve proper base-change argument: Scalar compatibility of augmentation-normalized additive etale Cech edges.",
+   "via": [
+    "lem-pbc-etale-additive-cech-inverse-image",
+    "lem-pbc-canonical-additive-cohomology-square",
+    "lem-pbc-additive-cohomology-pullback-comparison",
+    "lem-pbc-additive-cohomology-tensor-kernel",
+    "lem-pbc-additive-cohomology-linear-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveCechNormalizedScalar",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/EtaleAdditiveCechNormalizedScalar.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleAdditiveCech_normalized_scalar",
+  "statement": "theorem etaleAdditiveCech_normalized_scalar\n    (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]\n    {ι : Type u} [Finite ι] (U : ι → X.Opens)\n    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l)))\n    (hcover : iSup U = ⊤)\n    (μ : Γ(X, ⊤) → (X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf))\n    (hμ : ∀ r (W : X.Etaleᵒᵖ) (x : X.etaleAdditiveSheaf.obj.obj W),\n      (μ r).hom.app W x =\n        ULift.up ((show Γ(W.unop.left, ⊤) from x.down) *\n          (show Γ(W.unop.left, ⊤) from W.unop.hom.appTop r)))\n    (n : ℕ)\n    (a : Sheaf.H X.etaleAdditiveSheaf n ≃+\n      (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)).homology n)\n    (ha : IsEtaleAdditiveCechNormalized U n a) :\n    ∀ r x, a (Sheaf.H.map (μ r) n x) = r • a x",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T111841-L-3048799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T111841-L-3048799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
