@@ -1,0 +1,146 @@
+{
+ "id": "new-formal-kernel-affine-bound",
+ "kind": "statement",
+ "title": "Affine Artin--Rees stabilization of coherent formal kernel images",
+ "statement": "theorem coherentFormalModule_kernel_affine_bound {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (U : X.affineOpens) :\n    ∃ c : ℕ, ∀ (l m : ℕ) (h : m + c ≤ l) (W : X.Opens), W ≤ U.1 →\n      Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n        F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)).app W) =\n      Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op)).app W)",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, proof of claim (a): affine localization and Artin--Rees calculation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the formal systems and morphism to the affine open U. Restriction preserves coherence, annihilation and the defining quotient-transition isomorphisms. Identify U with Spec of its section ring and use the affine formal-module equivalence to obtain finite modules M,N over its adic completion and a linear map f, with level n equal to reduction modulo I^(n+1).",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completion is Noetherian. Apply Artin--Rees to im(f) inside N: choose c such that I^r N intersect im(f) equals I^(r-c)(I^c N intersect im(f)) for r >= c. Lift the summands through f to obtain f inverse(I^r N) = ker(f) + I^(r-c) f inverse(I^c N).",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put r=l+1. If l >= m+c, then r-c >= m+1, so the second summand vanishes modulo I^(m+1) M. The image of the reduced kernel in level m is exactly the image of ker(f), independent of l, and in particular equal to its value at l=m+c. The same calculation covers c=0 and the zero and unit ideals.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Kernels and images of maps of quasi-coherent modules are quasi-coherent. The affine module/sheaf correspondence and ideal-product comparison identify the two image subsheaves over U. Equality of monic subsheaves identifies the ranges of their section maps on every subopen W of U, not only on affine subopens.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, proof of claim (a): affine localization and Artin--Rees calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "uniform stabilization of images of kernels in coherent adic inverse systems on an affine noetherian scheme",
+   "results": "LeanSearch returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees uniform stabilization images kernels inverse systems finite modules noetherian adic completion",
+   "results": "AdicCompletion.map_exact and completion definitions; no theorem for formal kernel images on an affine open.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_pow_inf_eq_pow_smul",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul in Mathlib.RingTheory.Filtration is the algebraic Artin--Rees ingredient, not the sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*stabil|stabil.*kernel|coherent_artin_rees",
+   "results": "No matching declarations in Mathlib. Separate repository searches found no affine kernel bound.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilizedBound",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Lemma 087X, claim (a), affine-local Artin--Rees computation before globalization",
+   "via": [
+    "new-kernel-stabilized-bound",
+    "lem-weil-pbc-formal-kernel-stabilized-aux",
+    "lem-weil-pbc-formal-kernel-construction",
+    "lem-weil-pbc-coherent-formal-module-kernel"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelAffineBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelAffineBound.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_affine_bound",
+  "statement": "theorem coherentFormalModule_kernel_affine_bound {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)\n    (U : X.affineOpens) :\n    ∃ c : ℕ, ∀ (l m : ℕ) (h : m + c ≤ l) (W : X.Opens), W ≤ U.1 →\n      Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫\n        F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)).app W) =\n      Set.range ((Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫\n        F.obj.map (homOfLE (Nat.le_add_right m c)).op)).app W)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T022407-L-3210574",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T022407-L-3210574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

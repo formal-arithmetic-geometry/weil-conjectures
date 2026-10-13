@@ -55,18 +55,35 @@
  "statement": "theorem coherentFormalModule_kernel_stabilized_bound {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) : ∃ c : ℕ, ∀ (l m : ℕ) (h : m + c ≤ l), Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op l)) ≫ F.obj.map (homOfLE (Nat.le_trans (Nat.le_add_right m c) h)).op)) = Subobject.mk (Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op))",
  "proof": [
   {
-   "text": "Choose a finite affine cover and take the maximum of the affine Artin--Rees bounds.",
+   "text": "Use compactness of the Noetherian scheme and the affine-open basis to choose a finite affine subcover s. For each affine U obtain a local bound c(U) from new-formal-kernel-affine-bound. Set C to the finite supremum of these bounds (zero for the empty cover).",
+   "uses": [
+    "new-formal-kernel-affine-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix l >= m+C and U in s. Since c(U) <= C, apply the local bound both at l and at m+C, with the same base level m. Both local section ranges equal the range at m+c(U), hence they equal each other on every W contained in U. No monotonicity or surjectivity of images is assumed here; equality is transitive.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply module_subobject_eq_on_cover to the two image inclusions and the chosen finite cover. The local equalities from the preceding step identify their global subobjects. This proves the original signature unchanged.",
+   "uses": [
+    "new-module-subobject-eq-on-cover"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "new-formal-kernel-affine-bound",
+  "new-module-subobject-eq-on-cover"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "R1",
+  "group": "B3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X, claims (a)--(b)"
+  "place": "Lemma 087X, proof of claim (a): affine localization and Artin--Rees calculation"
  },
  "lean": {
   "existing": false,
@@ -89,12 +106,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T235557-L-2202051",
+  "landing": "20261013T022407-L-3210574",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
