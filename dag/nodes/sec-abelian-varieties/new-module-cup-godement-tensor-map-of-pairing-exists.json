@@ -13,22 +13,48 @@
  },
  "proof": [
   {
-   "text": "For each point compose the skyscraper projections with the pairing. Tensor universality gives a presheaf map, sheafification extends it to a sheaf map, and the product universal property assembles the coordinates.",
+   "text": "Choose the canonical stalk tensor isomorphisms from stalkTensorIso. Their pure-tensor germ formula agrees definitionally with moduleCup_sectionTensor.",
    "uses": [
-    "new-module-cup-godement-tensor-coordinates",
-    "def-sc-module-cup-godement-model"
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "new-module-cup-godement-tensor-coordinates"
    ],
    "elementary": false
+  },
+  {
+   "text": "Represent any two stalk elements on open neighbourhoods and restrict both representatives to their intersection. The hypothesis ht and the tensor comparison germ formula imply that the given t is the inverse comparison applied to a pure tensor.",
+   "uses": [
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "new-module-cup-godement-tensor-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose each Godement projection on stalks with skyscraperStalkEval. Tensor these two linear maps and compose with the forward tensor comparison on the Godement objects and the inverse comparison on H and K. Apply toSkyscraper to the resulting linear map and assemble all coordinates with Pi.lift.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "lem-pc-ringed-space-module-stalk-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Pi.lift_π, toSkyscraper_app_apply, the stalk tensor germ formula, TensorProduct.map_tmul, and the identification with t. Hom.stalkLinearMap_germ and skyscraperStalkEval_germ reduce the two factors to the displayed section coordinates.",
+   "uses": [
+    "def-sc-module-cup-godement-model",
+    "lem-pc-ringed-space-module-stalk-tensor",
+    "new-module-cup-godement-tensor-coordinates"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "new-module-cup-godement-tensor-coordinates",
-  "def-sc-module-cup-godement-model"
+  "def-sc-module-cup-godement-model",
+  "lem-pc-ringed-space-module-stalk-tensor"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "https://arxiv.org/abs/1004.1491",
-  "place": "§1.1.4; Stacks Tag 0FKR"
+  "place": "§1.1.4, pp. 15–16; Stacks Tags 0FKR and 01CB; E3 second reader uses the existing stalkTensorIso and stalk–skyscraper adjunction to construct the coordinate maps."
  },
  "mathlib_searches": [
   {
@@ -106,10 +132,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H4",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261013T181101-L-2600848",
-  "kind": "interface",
+  "landing": "20261013T190138-L-3215360",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
