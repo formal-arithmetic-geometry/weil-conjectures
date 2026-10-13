@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.MvPolynomial.Basic
 
+import Sheaf.AlgebraicGeometry.GenericFibreHypersurfaceFunctionFieldModel
+import Sheaf.AlgebraicGeometry.AffineBirationalOfFractionRingEquiv
+
 /-! # A birational hypersurface model of a geometrically integral generic fibre
 
 Source: Stacks Project, Tag 0559, first proof, field generators and polynomial numerator;
@@ -59,6 +62,20 @@ theorem exists_generic_fibre_birational_hypersurface_model
       GeometricallyIrreducible (g.fiberToSpecResidueField η) ∧
         GeometricallyReduced (g.fiberToSpecResidueField η) ∧
         Scheme.BirationalOver (f.fiberToSpecResidueField η)
-          (g.fiberToSpecResidueField η) := by sorry
+          (g.fiberToSpecResidueField η) := by
+  obtain ⟨n, P, hgeomH, hredH, hX, hH, hft, e, he⟩ :=
+    exists_generic_fibre_hypersurface_function_field_model f η hη hgeom hred
+  let H := Spec (.of (MvPolynomial (Fin n) Γ(S, ⊤) ⧸ Ideal.span {P}))
+  let g : H ⟶ S := Spec.map (CommRingCat.ofHom
+    ((Ideal.Quotient.mk (Ideal.span {P})).comp MvPolynomial.C)) ≫ S.isoSpec.inv
+  have : IsIntegral (f.fiber η) := hX
+  have : IsIntegral (g.fiber η) := hH
+  have : LocallyOfFiniteType (g.fiberToSpecResidueField η) := hft
+  have : LocallyOfFiniteType (f.fiberToSpecResidueField η) :=
+    show LocallyOfFiniteType (Limits.pullback.snd f (S.fromSpecResidueField η)) from
+      inferInstance
+  refine ⟨n, P, hgeomH, hredH, ?_⟩
+  exact birationalOver_of_fractionRing_equiv
+    (f.fiberToSpecResidueField η) (g.fiberToSpecResidueField η) e he
 
 end AlgebraicGeometry

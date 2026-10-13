@@ -12416,3 +12416,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:27 L: merged deliver/J2/Sheaf.AlgebraicGeometry.AffineOpenSupportedModelTorsion (stage 3; reviewer PASS; first push; landing 20261013T122727-L-3632509 (interface); batch 20261013T122724; modules 2; new nodes 1)
 - 12:27 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ZeroBottomArrowAffineChainModel (stage 3; reviewer PASS; first push; landing 20261013T122728-L-3632709 (proof); batch 20261013T122724; modules 1; new nodes 0)
 - 12:27 L: merged deliver/N2/Sheaf.AlgebraicGeometry.Morphisms.RootFactorStalkLocalization (stage 3; reviewer PASS; first push; landing 20261013T122728-L-3632897 (proof); batch 20261013T122724; modules 1; new nodes 0)
+- 12:27 L: merged deliver/R3/Sheaf.AlgebraicGeometry.GenericFibreBirationalHypersurfaceModel (stage 3; reviewer PASS; first push; landing 20261013T122729-L-3633058 (interface); batch 20261013T122724; modules 3; new nodes 2)
