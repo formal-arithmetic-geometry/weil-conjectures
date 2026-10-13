@@ -14,41 +14,42 @@
  ],
  "proof": [
   {
-   "text": "Nonemptiness of X_η puts η in V. Factor f through V; the map between affine schemes is finite type. Reduce source and base and use generic flat finite presentation to arrange a reduced affine source over an integral affine base with flat finitely presented morphism.",
+   "text": "Use the radicial reduced model to obtain an integral affine base and a reduced flat locally finitely presented affine source with geometrically reduced generic fibre. Transfer geometric irreducibility of the generic fibre using the model's pointwise equivalence.",
    "uses": [
-    "lem-sbc-generic-flat-finite-presentation"
+    "lem-sbc-generic-radicial-geometrically-reduced-model"
    ],
    "elementary": false
   },
   {
-   "text": "Write the affine rings as A and B. Make the generic source fraction field separably generated after a finite purely inseparable base extension. Spread this extension by scaling a generator b with b^q=a/d to db, whose q-th power is integral over A. The generated finite radicial algebra has the chosen fraction field and defines a universal homeomorphism. Base change, reduce, and restore flat finite presentation by generic flatness.",
+   "text": "Choose the spreading affine chart in this model. It is generically geometrically irreducible because its base neighbourhood contains the generic point.",
    "uses": [
-    "lem-sbc-generic-flat-finite-presentation"
+    "lem-sbc-generic-geometrically-integral-affine-chart"
    ],
    "elementary": false
   },
   {
-   "text": "A separating transcendence basis and a final algebraic generator give an absolutely irreducible hypersurface with the same generic function field. Clear denominators to obtain a common affine open. Apply the geometric fibre density theorem to this open on both sides. Tag 0557 spreads absolute irreducibility by making the polynomial monic, constructing finite coefficient algebras for positive monic factor-degree pairs, applying Nullstellensatz at the generic fibre, and killing these algebras by inverting a finite product of nonzero base elements.",
+   "text": "Apply geometric fibre density to the chart and intersect its neighbourhood with the chart's irreducibility neighbourhood. After any residue-field extension the dense chart is irreducible. Its continuous image has irreducible closure, which is the full fibre, proving geometric irreducibility of that fibre.",
    "uses": [
     "lem-sbc-generic-open-geometric-fibre-density"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The common dense open transfers irreducibility from the hypersurface to the original fibres. Shrink to the open image of the flat finitely presented map for nonemptiness. Descend the neighbourhood through universal homeomorphisms and then through V→T; it contains η because every nonempty open of the irreducible base contains its generic point.",
+   "text": "The base universal homeomorphism takes the intersection open to an open of the original base neighbourhood. Include this open in T. Its image contains the generic point. For a point in it, choose its preimage and apply the model's pointwise equivalence to descend geometric fibre irreducibility.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sbc-generic-radicial-geometrically-reduced-model",
+  "lem-sbc-generic-geometrically-integral-affine-chart",
   "lem-sbc-generic-open-geometric-fibre-density"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0559, second proof, affine-source case; Tags 0557 and 054X.",
-  "note": "Source read online; explicit agent-written specialization and geometric-base-change glue."
+  "place": "Tag 0559, second proof; Tag 0557 and Tag 054X.",
+  "note": "U3 stage 3: separate the radicial geometrically reduced model and common affine chart; write geometric density transfer and descent in Lean."
  },
  "mathlib_searches": [
   {
@@ -134,9 +135,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T065112-L-899769",
+  "landing": "20261013T082417-L-1649396",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
