@@ -15,30 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Work in an affine neighbourhood of i(z) in the finite type scheme X_t over the residue field. Its closed inverse image in Z_t is affine and finite type over the same field. The affine local-dimension component formula expresses the dimension at each point as the maximum of the dimensions of components through that point.",
-   "uses": [
-    "lem-weil-pbc-dimension-at-point-components"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Each closed-fibre component maps to a closed irreducible subset of an ambient component. Empty interior excludes equality with an ambient component, since the finite union of the other ambient components has open complement meeting that component. Append the ambient component to a maximal irreducible chain in the proper closed subset to obtain a strict dimension inequality.",
+   "text": "Base-change the closed immersion i to the fibre at s = f(i(z)) = t. Construct the fibre map j with pullback.map and its pullback square. IsClosedImmersion is stable under this pullback, Scheme.Pullback.range_map identifies its range with the inverse image of i(Z), and injectivity of the ambient fibre inclusion identifies j((i composed with f).asFiber z) with f.asFiber(i z). These identifications are proved in Lean in the main theorem.",
    "uses": [],
    "elementary": false
   },
   {
-   "text": "The closed-fibre component dimensions are bounded strictly by dimensions of ambient components through i(z). Finite type over a field gives finite dimensions, and there are finitely many components. Taking the finite attained maximum and using locality gives the asserted strict inequality.",
+   "text": "A point of a noetherian quasi-sober space specializes from the generic point of its irreducible component. If that generic point lies in a closed subset W, its whole component lies in W. NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent supplies a nonempty ambient open in the component, contradicting interior W = empty. The private proved helper exists_generalization_outside_closed carries out this argument.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source-library theorem topologicalKrullDim_lt_of_forall_exists_specializes with Z the whole space: a chain in W extends by an outside generalization. Thus dim B < n+1 implies dim W < n. The private proved helper closed_nowhere_dense_dimension_lt assembles this specialization and the subspace bound for the whole-space subtype.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a closed embedding j:A into B with nowhere dense range, noetherian sober T0 target B and finite dim B, the local dimension at j(a) is neither bottom (every neighbourhood contains a) nor top (it is bounded by dim B), so equals a natural n. The iInf_lt_iff characterization supplies an open neighbourhood U containing j(a) with dim U < n+1. Restrict j to its inverse image V of U. The restricted map is an embedding with closed range, and its range is nowhere dense by the interior-preimage formula for the open subtype inclusion. The preceding chain-extension bound gives dim V = dim range(j restricted) < n; the infimum defining dim_a A is bounded by dim V. This proves the private helper local_dimension_lt_of_closed_embedding without using the affine component formula.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The ambient fibre is compact by quasi-compactness of f and locally of finite type over the residue field by base change. Mathlib LocallyOfFiniteType.isLocallyNoetherian and IsNoetherian.noetherianSpace give a noetherian target; schemes are sober T0. The proved source-library theorem topologicalKrullDim_ne_top_of_compactSpace gives finite dimension. Apply the private local-dimension helper to the fibre map j and rewrite the point identification from step 1.",
    "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-dimension-at-point-components"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tag 054X, final dimension contradiction; Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field) and Tag 00OS, local dimension and finite type domain dimension."
+  "document": "Stacks Project, Tags 054X and 0052; proved source-library topology and finite-type dimension theorems",
+  "place": "Tag 054X final dimension contradiction, proved below the unit level by specialization-chain extension. Lean implementation H1: the private helpers are completely proved; uses NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent, topologicalKrullDim_lt_of_forall_exists_specializes, and AlgebraicGeometry.topologicalKrullDim_ne_top_of_compactSpace. No affine component/local-ring comparison is required."
  },
  "mathlib_searches": [
   {
@@ -134,10 +140,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T111901-L-3055754",
-  "kind": "interface",
+  "landing": "20261013T115024-L-3324028",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
