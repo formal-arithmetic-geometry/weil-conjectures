@@ -17,6 +17,9 @@ public import Sheaf.Paper.FiniteStructureAdjointTransitions
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
+import Sheaf.Paper.FiniteStructureProductExists
+import Sheaf.Paper.FiniteStructureTensorTestsFaithful
+
 /-! # Lift multiplication of finite structure sheaves
 
 Source: Stacks Project, Tag 09ZT
@@ -116,6 +119,40 @@ theorem finite_structure_multiplication_lift
           (pullback.fst f (Spec.map (CommRingCat.ofHom
             (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U x
         ∀ (x y : Γ(G, U)),
-          a (μ.app U (tmulSection x y)) = a x * a y) := by sorry
+          a (μ.app U (tmulSection x y)) = a x * a y) := by
+  obtain ⟨μ, hμ⟩ := finite_structure_product_exists A I X f i hi hp c hc
+    Yn fnY gn hcart hw G hG hproper ψ hψ
+  obtain ⟨hsquare, hcube⟩ := finite_structure_tensor_tests_faithful A I X f i hi hp
+    Yn fnY G hG hproper ψ
+  dsimp only at hμ
+  have hcomm : (β_ G G).hom ≫ μ = μ := by
+    apply hsquare
+    intro n U x y
+    simp only [Scheme.Modules.Hom.comp_app, ConcreteCategory.comp_apply,
+      braiding_hom_app_tmulSection]
+    rw [hμ n U y x, hμ n U x y, mul_comm]
+  have hassoc : (μ ▷ G) ≫ μ = (α_ G G G).hom ≫ (G ◁ μ) ≫ μ := by
+    apply hcube
+    intro n U x y z
+    simp only [Scheme.Modules.Hom.comp_app, ConcreteCategory.comp_apply,
+      whiskerRight_app_tmulSection, associator_hom_app_tmulSection,
+      whiskerLeft_app_tmulSection]
+    rw [hμ n U, hμ n U, hμ n U, hμ n U, mul_assoc]
+  refine ⟨μ, ⟨?_, ?_, hμ⟩, ?_⟩
+  · intro U x y z
+    simpa only [Scheme.Modules.Hom.comp_app, ConcreteCategory.comp_apply,
+      whiskerRight_app_tmulSection, associator_hom_app_tmulSection,
+      whiskerLeft_app_tmulSection] using
+      congrArg (fun v : (G ⊗ G) ⊗ G ⟶ G ↦ v.app U (tmulSection (tmulSection x y) z))
+        hassoc
+  · intro U x y
+    exact (congrArg (fun v : G ⊗ G ⟶ G ↦ v.app U (tmulSection x y)) hcomm).symm.trans
+      (by simp only [Scheme.Modules.Hom.comp_app, ConcreteCategory.comp_apply,
+        braiding_hom_app_tmulSection])
+  · intro ν hν
+    apply hsquare
+    intro n U x y
+    exact (hν.2.2 n U x y).trans (hμ n U x y).symm
+
 
 end AlgebraicGeometry

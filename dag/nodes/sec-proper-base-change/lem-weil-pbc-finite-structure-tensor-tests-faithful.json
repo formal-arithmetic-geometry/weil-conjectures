@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-finite-structure-tensor-tests-faithful",
+ "kind": "statement",
+ "title": "Faithfulness of finite-structure adjoint tests on tensor powers",
+ "statement": "Let A be Noetherian and I-adically complete [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring]. Let f:X to Spec A be separated and finite type [def-weil-proper-morphism, def-weil-finite-type-morphism]. Put X_n = X times_{Spec A} Spec(A/I^(n+1)) and j_n:X_n to X [def-pc-base-change], and let i_n:X_n to X_(n+1) satisfy the two canonical projection equations. Let G be coherent with support proper over Spec A [pqf-def-coherent, def-weil-pbc-closed-subset-proper-over-base]. For arbitrary schemes Y_n and maps p_n:Y_n to X_n suppose isomorphisms psi_n:j_n^*G isomorphic to p_(n,*) O_Yn [def-pc-module-pullback]. Write a_n:G to (p_n j_n)_* O_Yn for the pinned adjoint of psi_n and pushforward composition [lem-weil-pbc-finite-structure-adjoint-transitions]. (1) Maps v,w:G tensor G to G are equal if a_n(v(x tensor y)) = a_n(w(x tensor y)) for all n, opens U and x,y in G(U). (2) Maps v,w:(G tensor G) tensor G to G are equal if a_n(v((x tensor y) tensor z)) = a_n(w((x tensor y) tensor z)) for all n, opens U and x,y,z in G(U) [def-pur-sheaf-tensor-product]. No compatibility of psi_n, finiteness of p_n, or multiplication on G is assumed. This is detection of global module morphisms, not injectivity on sections over arbitrary opens.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09ZT (multiplication paragraph), 088E and 088F; read https://stacks.math.columbia.edu/tag/09ZT and /tag/088F on 2026-10-13"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "pqf-def-coherent",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-finite-structure-adjoint-transitions",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The tensor square and cube are coherent with proper support. X is Noetherian, hence G is quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-finite-structure-tensor-powers-supported",
+    "pqf-lem-coherent-ft-locnoeth",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n compare v followed by a_n and w followed by a_n. On an affine open every square section comes from the tensor-sections map; tensor induction extends equality from pure tensors to all sections. For the cube use surjectivity of the outer and inner tensor-sections maps and induction twice. Naturality and the sheaf condition on the covering by contained affine opens extend equality to every open, so the two composite morphisms coincide.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the invertible pushforward composition comparison from the equal composites. Express the remaining composites under the pinned tensor-pullback adjunction hom equivalence, using naturality of its unit. Injectivity of that equivalence gives equality of j_n^*v followed by psi_n and j_n^*w followed by psi_n; cancel psi_n.",
+   "uses": [
+    "lem-weil-pbc-finite-structure-adjoint-transitions",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invoke the Hom full-faithfulness clause of grothendieck_existence, choosing exactly the auxiliary comparison required by its interface. Naturality makes the reductions of w a compatible family for this comparison. Both v and w lift that same family, hence the uniqueness clause equates them. No identification of the auxiliary comparison with the pinned composition mate is used.",
+   "uses": [
+    "prop-weil-pbc-grothendieck-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-structure-tensor-powers-supported",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-finite-structure-adjoint-transitions",
+  "def-pc-module-pullback",
+  "prop-weil-pbc-grothendieck-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 09ZT (multiplication paragraph), 088E and 088F; read https://stacks.math.columbia.edu/tag/09ZT and /tag/088F on 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completion is faithful on coherent modules with proper support and detects maps on elementary tensor sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.ext",
+   "results": "1 hits: TensorProduct.ext",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scheme-module statement. Existing library declarations are used for its individual steps."
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext|tensorSectionsMap",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for this scheme-module statement. Existing library declarations are used for its individual steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStructureMultiplicationLift",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-structure-multiplication-lift",
+   "place": "Faithfulness of finite-structure adjoint tests on tensor powers",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteStructureTensorTestsFaithful",
+  "file": "lean/Sheaf/Paper/FiniteStructureTensorTestsFaithful.lean",
+  "declaration": "AlgebraicGeometry.finite_structure_tensor_tests_faithful",
+  "statement": "theorem finite_structure_tensor_tests_faithful\n    (A : Type u) [CommRing A] (I : Ideal A)\n    [IsNoetherianRing A] [IsAdicComplete I A]\n    (X : Scheme.{u}) (f : X ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (i : ∀ n : ℕ, pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) ⟶\n      pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))))\n    (hi : ∀ n : ℕ, i n ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n\n      + 1 + 1))))) = pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +\n      1))))))\n    (hp : ∀ n : ℕ, i n ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n\n      + 1 + 1))))) = pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n +\n      1))))) ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I :=\n      I) (Nat.le_succ (n + 1))))))\n    (Yn : ℕ → Scheme.{u})\n    (fnY : ∀ n, Yn n ⟶ pullback f\n      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))\n    (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (hproper : Scheme.Modules.HasSupportProperOver f G)\n    (ψ : ∀ n, (Scheme.Modules.tensorPullback (pullback.fst f\n      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G ≅\n        (Scheme.Modules.pushforward (fnY n)).obj\n          (SheafOfModules.unit (Yn n).ringCatSheaf)) :\n    (∀ (v w : G ⊗ G ⟶ G),\n      (∀ (n : ℕ) (U : X.Opens) (x y : Γ(G, U)),\n        (Scheme.Modules.finiteStructureAdjoint\n          (pullback.fst f (Spec.map (CommRingCat.ofHom\n            (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U\n          (v.app U (tmulSection x y)) =\n        (Scheme.Modules.finiteStructureAdjoint\n          (pullback.fst f (Spec.map (CommRingCat.ofHom\n            (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U\n          (w.app U (tmulSection x y))) → v = w) ∧\n    (∀ (v w : (G ⊗ G) ⊗ G ⟶ G),\n      (∀ (n : ℕ) (U : X.Opens) (x y z : Γ(G, U)),\n        (Scheme.Modules.finiteStructureAdjoint\n          (pullback.fst f (Spec.map (CommRingCat.ofHom\n            (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U\n          (v.app U (tmulSection (tmulSection x y) z)) =\n        (Scheme.Modules.finiteStructureAdjoint\n          (pullback.fst f (Spec.map (CommRingCat.ofHom\n            (Ideal.Quotient.mk (I ^ (n + 1)))))) (fnY n) G (ψ n).hom).app U\n          (w.app U (tmulSection (tmulSection x y) z))) → v = w)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T145723-L-750006",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T145723-L-750006",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
