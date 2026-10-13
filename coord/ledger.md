@@ -10833,3 +10833,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 11:10 L: batch 20261013T025255 dependency take-out
 - 03:15 L: returned deliver/C1/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore (reviewer RETURN: (the landing tools, head d8cd9e6f9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 03:15 L: returned deliver/H4/Sheaf.AlgebraicGeometry.CoherentIdealPowerSupportedOnClosed (reviewer RETURN: (the landing tools, head 3e7341378) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
