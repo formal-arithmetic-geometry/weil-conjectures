@@ -1,0 +1,142 @@
+{
+ "id": "new-t4-koszul-ideal-alternating-products",
+ "kind": "statement",
+ "title": "Alternating ideal products realized by a chosen Koszul family before conormal descent",
+ "statement": "Let A be a commutative ring, I an ideal, n a natural number and P a projective resolution of A/I. There exist an augmentation-preserving family b(r,g) of maps from finite Koszul complexes to P and an A-multilinear alternating n-argument map F on I, with values in the I-annihilated submodule of H_n(P tensor A/I), such that for every actual Koszul wedge-cycle s of [new-e1-koszul-conormal-cycle-presentation], F applied to the ideal linear combinations of its vectors equals its image in homology under b(s.r,s.g). This only constructs ideal products for one family; it asserts neither descent to I/I squared nor relation vanishing for arbitrary specified families.",
+ "stmt_deps": [
+  "new-e1-koszul-conormal-cycle-presentation"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09PQ",
+  "place": "Lemma 23.6.12, Tate-resolution Tor products; Tag 00LS, Lemma 10.71.4(1), comparison with P"
+ },
+ "proof": [
+  {
+   "text": "Choose a free strictly commutative Tate resolution Q of A/I with degree zero A. Lift each x in I to degree one with differential x. Differences of lifts are cycles and hence boundaries by exactness of Q. Adding and scaling lifts establishes A-linearity of the resulting degree-one classes after tensoring with A/I.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Multiply n degree-one classes in the quotient-tensored Tate algebra. Strict commutativity gives alternation, including squares of odd classes being zero in characteristic two. Each value is annihilated by I. For n=0 take the quotient unit. Transport these products to P by a comparison chain map Q to P, which exists by freeness and exactness as in Tag 00LS(1). This defines F on I, without any quotient-descent assertion.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For each tuple g, send Koszul generators to the chosen degree-one lifts of its entries in Q. The differential and exterior relations hold by construction and strict commutativity, giving a dg algebra map. Compose with the comparison Q to P to define b. It preserves augmentation, and evaluation on a wedge of arbitrary vectors v is the product of the corresponding ideal linear combinations by multilinearity. The cycle representative is unambiguous because iCycles is monic. For I=A the target homology is zero; for I=0 the positive products vanish.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T4",
+  "date": "2026-10-14",
+  "based_on": {
+   "document": "https://stacks.math.columbia.edu/tag/09PQ",
+   "place": "Lemma 23.6.12, Tate-resolution Tor products; Tag 00LS, Lemma 10.71.4(1), comparison with P"
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ideal elements have alternating products in homology after tensoring a projective resolution of a quotient ring, realized by augmentation preserving Koszul maps",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly commutative Tate resolution gives alternating products of degree one ideal classes in Tor realized by Koszul chain maps",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Algebra.Presentation.differentials.comm₁₂",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux",
+     "Algebra.H1Cotangent.δ",
+     "Algebra.Generators.H1Cotangent.δ_eq",
+     "Algebra.Generators.H1Cotangent.δAux",
+     "Algebra.Extension.cotangentComplex_mk",
+     "Algebra.Generators.H1Cotangent.δ",
+     "Algebra.Generators.H1Cotangent.δ_eq_δAux"
+    ],
+    "digest": "306583052e07edce"
+   },
+   "verdict": "No alternating Koszul-product construction among returned results",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlternatingMap, Ideal.Cotangent",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "verdict": "No matching product construction",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bTate\\b|\\bKoszul\\b|strictly graded commutative",
+   "results": {
+    "n_hits": 1,
+    "top": [
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "digest": "c9ca54f8aea9f997"
+   },
+   "verdict": "No matching product construction",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulConormalCycleRelations",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-e1-koszul-conormal-cycle-relations",
+   "place": "Original proof steps 1 and 2: products on ideal elements before conormal descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulIdealAlternatingProducts",
+  "file": "lean/Sheaf/RingTheory/KoszulIdealAlternatingProducts.lean",
+  "declaration": "AlgebraicGeometry.koszul_ideal_alternating_products",
+  "statement": "theorem koszul_ideal_alternating_products (A : Type u) [CommRing A]\n    (I : Ideal A) (n : ℕ) (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I))) :\n    ∃ (b : ∀ (r : ℕ) (g : Fin r → I),\n      ExteriorAlgebra.koszulComplex A r (fun j ↦ (g j : A)) ⟶ P.complex)\n      (F : I [⋀^Fin n]→ₗ[A]\n        (Submodule.torsionBySet A\n          ((((tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)).obj\n            P.complex).homology n) (I : Set A))),\n      (∀ (r : ℕ) (g : Fin r → I), (b r g).f 0 ≫ P.π.f 0 =\n        ModuleCat.ofHom (I.mkQ.comp\n          (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap)) ∧\n      (∀ s : KoszulConormalWedgeCycle A I n,\n        (F (fun j ↦ Finsupp.linearCombination A s.g (s.v j))).val =\n          ((HomologicalComplex.homologyFunctor (ModuleCat.{u} A) (.down ℕ) n).map\n            (((tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex (.down ℕ)).map\n              (b s.r s.g)))\n            ((((tensorRight (ModuleCat.of A (A ⧸ I))).mapHomologicalComplex\n              (.down ℕ)).obj\n              (ExteriorAlgebra.koszulComplex A s.r\n                (fun j ↦ (s.g j : A)))).homologyπ n s.z))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476511",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476511",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
