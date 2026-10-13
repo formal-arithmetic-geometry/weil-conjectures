@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-picard-left-cech-cup-naturality",
+ "kind": "statement",
+ "title": "Naturality of extended external cup components in the left coefficient",
+ "statement": "Let k be a field [def-weil-field], f:X→Spec k and g:Y→Spec k quasi-compact schemes [def-pc-scheme], G any Y-module, a:F→H any X-module morphism, and cF:T(F)→P(F), cH:T(H)→P(H) cochain maps satisfying IsPicardLeftCechCupComponent [lem-sc-picard-left-cech-cup-component]. Then T(a) followed by cH equals cF followed by P(a). There is no quasi-coherence or affine diagonal hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, equation-kunneth-on-cech and following coefficient diagram; Cohomology Tags 01FD and 07MB. Official pages https://stacks.math.columbia.edu/tag/0BED and https://stacks.math.columbia.edu/tag/07MB read."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "lem-sc-picard-left-cech-cup-component"
+ ],
+ "proof": [
+  {
+   "text": "Test each degree after all tensor-total summand inclusions. When either index is outside the natural numbers its extended term, hence its tensor summand, is zero. Otherwise transport the inputs through the extension isomorphisms and test pure tensors and product tuples. The extension-map component formula reduces P(a) to the scalar Cech map. This map acts on each coordinate by the coefficient morphism. The hypotheses identify both cup coordinates.",
+   "uses": [
+    "lem-sc-picard-left-cech-cup-component"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the first-projection tensor-pullback adjunction unit, then presheaf restriction naturality. They move a through the pulled-back front-face section. Tensor-section naturality moves it through the final tensor, while the back section stays fixed. Thus every coordinate agrees. Tensor, product, coproduct and cochain-map extensionality finish the equality.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-sc-cech-cup-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-left-cech-cup-component",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-cech-cup-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, equation-kunneth-on-cech and following coefficient diagram; Cohomology Tags 01FD and 07MB. Official pages https://stacks.math.columbia.edu/tag/0BED and https://stacks.math.columbia.edu/tag/07MB read.; direct Lean construction and verification by T2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "External Alexander Whitney Cech cup cochain map natural in the left coefficient sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no absence verdict inferred"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "External Alexander Whitney Cech cup naturality in coefficient modules and tensor total extension by zero",
+   "results": "8 hits, DoldKan projection and Gamma functor naturality; none states the geometric coefficient formula.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; use the existing project natural-index component and Mathlib extension and tensor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ιMapBifunctor",
+   "results": "12 hits including ιMapBifunctor, ι_mapBifunctorMap, ι_mapBifunctorDesc and mapBifunctor.hom_ext. Their source signatures were read.",
+   "date": "2026-10-13",
+   "verdict": "Generic summand maps and extensionality are useful, but do not provide the external cup construction."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*cup|cup.*cech",
+   "results": "0 Mathlib hits; project rg found PicardExternalCechCupComponent and right-coefficient naturality.",
+   "date": "2026-10-13",
+   "verdict": "Use the existing natural-index component; no existing left-coefficient naturality statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardLeftCechCupConstruction",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The external Cech cup cochain map and its functoriality in the left coefficient in the Tag 0BED Kunneth argument used inside the cube theorem.",
+   "via": [
+    "lem-sc-picard-left-cech-cup-construction",
+    "lem-sc-picard-external-cup-left-cech-generators"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardLeftCechCupNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardLeftCechCupNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardLeftCechCupComponent_naturality",
+  "statement": "theorem picardLeftCechCupComponent_naturality\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [CompactSpace X] [CompactSpace Y] (G : Y.Modules)\n    {F H : X.Modules} (a : F ⟶ H)\n    (cF : (picardLeftTensorCechFunctor f g G).obj F ⟶\n      (picardLeftProductCechFunctor f g G).obj F)\n    (cH : (picardLeftTensorCechFunctor f g G).obj H ⟶\n      (picardLeftProductCechFunctor f g G).obj H)\n    (hF : IsPicardLeftCechCupComponent f g F G cF)\n    (hH : IsPicardLeftCechCupComponent f g H G cH) :\n    (picardLeftTensorCechFunctor f g G).map a ≫ cH =\n      cF ≫ (picardLeftProductCechFunctor f g G).map a",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardLeftCechCupComponent_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T140826-L-316541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T140826-L-316541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

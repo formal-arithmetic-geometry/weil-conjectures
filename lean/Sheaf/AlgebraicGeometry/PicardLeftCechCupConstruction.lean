@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact
 public import Sheaf.AlgebraicGeometry.PicardRightCechCupConstruction
+import Sheaf.AlgebraicGeometry.PicardLeftCechCupNaturality
 
 /-! # Left external Cech cup specified on cochains
 
@@ -98,7 +99,16 @@ theorem picardLeftCechCup_exists
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     [CompactSpace X] [CompactSpace Y] (G : Y.Modules) :
     ∃ θ : picardLeftTensorCechFunctor f g G ⟶ picardLeftProductCechFunctor f g G,
-      IsPicardLeftCechCup f g G θ := by sorry
+      IsPicardLeftCechCup f g G θ := by
+  classical
+  choose c hc using (fun F ↦ picardLeftCechCupComponent_exists f g F G)
+  let θ : picardLeftTensorCechFunctor f g G ⟶ picardLeftProductCechFunctor f g G :=
+    { app := c
+      naturality := fun F H a ↦
+        picardLeftCechCupComponent_naturality f g G a (c F) (c H) (hc F) (hc H) }
+  refine ⟨θ, ?_⟩
+  intro F
+  exact hc F
 
 end
 end AlgebraicGeometry.Scheme.Modules
