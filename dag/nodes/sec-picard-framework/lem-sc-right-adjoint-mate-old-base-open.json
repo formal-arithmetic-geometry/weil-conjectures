@@ -22,38 +22,50 @@
  ],
  "proof": [
   {
-   "text": "The restriction square U→X over V→Y is cartesian. Since g₀ factors through V, pasting identifies X×_Y T with U×_V T. Cancel the mono U→X and use the supplied projection equations to identify r and q after this isomorphism.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Use [lem-sc-proper-flat-right-adjoint-restriction-open] for f and V. The invertible restricted open unit, open counit, and direct-image composition give the restriction comparison between a and b. Transport the direct images over T along the scheme isomorphism; right-adjoint uniqueness supplies the comparison between c and b′. Pullback composition gives the source comparison.",
+   "text": "Properness supplies compactness and quasi-separatedness of X. The canonical lifted direct image pullback(f,V inclusion)→V has a right adjoint by the qcqs direct-image theorem. Choose its functor and adjunction locally inside the proof; right-adjoint uniqueness determines it up to natural isomorphism. Apply proper_flat_rightAdjoint_baseChange_hbeta to f along V inclusion and rightAdjoint_mate_affineOpen_isIso to get an invertible ambient open mate O.",
    "uses": [
-    "lem-sc-proper-flat-right-adjoint-restriction-open",
-    "lem-pc-ringed-spaces-derived-pullback-composition"
+    "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "lem-sc-proper-flat-right-adjoint-basechange-hbeta",
+    "lem-sc-right-adjoint-mate-affine-open-is-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Expand the mate for f,g₀ into its unit, inverse conjugate of ordinary base change and counit. In the factorization through V, composite adjunction units and counits match those of the two successive squares by their triangle identities. The ordinary base-change compositions agree; conjugation and inversion preserve the equality. Thus the mate for f,g₀ equals the mate for U→V,g_V composed with the invertible open comparison. This yields an arrow isomorphism over X×_Y T. Apply derived pullback along r, and the r,q projection equalities and pullback composition transport it to the asserted arrow isomorphism over Z. This is the old-base-open part of 0E9S and the composition calculation in 0ATR. Functors preserve isomorphisms, so r and q need not be isomorphisms.",
+   "text": "Use morphismRestrict_iota and the pullback condition to prove the common projection equation. Construct s:U times_V T→X times_Y T and t:U times_V T→X times_Y V using pullback.lift, and prove all four projection identities with lift_fst and lift_snd.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply rightAdjoint_mate_oldBase_open_factorization to obtain e0,e1,e2 and the equality G then e2 = e0 then Lt(O) then e1 then L. The morphism e0 then Lt(O) then e1 is invertible because functors preserve isomorphisms. Use asIso and Arrow.isoMk with the symmetry of the factorization equation to build the unpulled arrow isomorphism.",
    "uses": [
-    "def-sc-duality-equation-base-change-map",
-    "def-pc-derived-base-change-map",
+    "lem-sc-right-adjoint-mate-old-base-open-factorization",
+    "def-sc-duality-equation-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied r,q projection equations and the equations for s give q composed with s = r by pullback.hom_ext. The derived-pullback composition comparison and equality transport identify Ls followed by Lq with Lr. Apply Arrow.isoOfNatIso to this comparison and Functor.mapArrow.mapIso to the unpulled arrow isomorphism. Compose them to obtain exactly the required comparison on Z, without inverting r,q or either base-change mate.",
+   "uses": [
     "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-base-change-map",
   "def-sc-duality-equation-base-change-map",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-proper-flat-right-adjoint-restriction-open"
+  "lem-sc-proper-flat-right-adjoint-basechange-hbeta",
+  "lem-sc-right-adjoint-mate-affine-open-is-iso",
+  "lem-sc-right-adjoint-mate-old-base-open-factorization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "H4",
+  "date": "2026-10-13",
   "document": "Stacks Project, Duality for Schemes",
-  "place": "Tags 0E9S, 0ATR and 0E4J"
+  "place": "Tags 0E4J, 0ATR, 0E9S; Tag 0D5S for final derived-pullback transport",
+  "note": "Complete Lean assembly of open-mate invertibility and noninvertible pasting factorization; two strictly smaller remaining statements."
  },
  "mathlib_searches": [
   {
@@ -135,9 +147,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T082402-L-1643017",
+  "landing": "20261013T100008-L-2463498",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
