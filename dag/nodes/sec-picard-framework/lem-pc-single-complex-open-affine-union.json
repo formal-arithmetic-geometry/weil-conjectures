@@ -1,0 +1,135 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9 (lemma-single-complex-base-change), induction step, applied to the source U union V"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-single-complex-open-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Since V is affine it is compact. Since f is quasi-separated over affine S, X is quasi-separated; QuasiSeparatedSpace.inter_isCompact makes U∩V compact. Set W=U∪V; W is compact by IsCompact.union. The open immersion W→X is quasi-compact and W→S is qcqs. Form the restricted square by pullback pasting. Inside W put A=(W→X)⁻¹U and B=(W→X)⁻¹V. They cover W; compactness of A, B and A∩B follows from quasi-compactness of W→X and the three compactness statements. These are direct Mathlib geometric instances and inverse-image lemmas.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict K along W→X and K′ along the projection X′×_X W→X′; the derived pullback preservation theorem supplies quasi-coherent cohomology. Construct the restricted coefficient arrow explicitly by the same pullback-composition expression in singleComplexOpenComparison.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "def-pc-single-complex-open-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the nested-comparison invariance theorem to U⊆W, V⊆W and U∩V⊆W. Its forward direction transports the three given ambient isomorphisms to the three hypotheses of relative Mayer–Vietoris on A, B and A∩B.",
+   "uses": [
+    "lem-pc-single-complex-open-nested-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply relativeMayerVietoris to the restricted square and cover A∪B=W. Its conclusion is definitionally the ambient singleComplexOpenComparison on W: the definition uses exactly this square, these restricted complexes and this coefficient arrow. Proof irrelevance identifies the commutativity witnesses. Thus the required isomorphism follows.",
+   "uses": [
+    "lem-pc-rf-single-complex-relative-mayer-vietoris",
+    "def-pc-single-complex-open-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-single-complex-open-comparison",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-rf-single-complex-relative-mayer-vietoris",
+  "lem-pc-single-complex-open-nested-comparison"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "id": "lem-pc-single-complex-open-affine-union",
+ "title": "Affine-adjoining gluing for the single-complex open comparison",
+ "statement": "Let f:X→S, f′:X′→S′, g:S′→S, g′:X′→X be a cartesian square of schemes [def-pc-scheme], with both bases affine and f quasi-compact and quasi-separated. Let K and K′ have quasi-coherent derived cohomology [def-pc-derived-category], and let φ:L(g′)*K→K′ [def-pc-derived-pullback]. For a quasi-compact open U and an affine open V in X, if the canonical open comparisons b_U, b_V and b_(U∩V) [def-pc-single-complex-open-comparison] are isomorphisms, then b_(U∪V) is an isomorphism. No stalk condition and no cover of the entire X are assumed.",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexQcqsHomologyMono",
+  "date": "2026-10-14",
+  "group": "R1"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 0DJ9, induction step inside U union V; isolated affine-adjoining specialization because the existing union module imports the parent item transitively."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "The qcqs single-complex comparison used in the relatively flat degree-zero base-change argument: Mayer--Vietoris induction step adjoining one affine open.",
+   "via": [
+    "lem-pc-single-complex-qcqs-homology-mono",
+    "lem-pc-standard-flat-single-base-change-mono",
+    "lem-pc-standard-flat-single-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenAffineUnion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenAffineUnion.lean",
+  "declaration": "AlgebraicGeometry.singleComplexOpenComparison_affine_union",
+  "statement": "theorem singleComplexOpenComparison_affine_union\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g) [IsAffine S] [IsAffine S']\n    [QuasiCompact f] [QuasiSeparated f]\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (U V : X.Opens)\n    (hUqc : IsCompact (U : Set X)) (hVaff : IsAffineOpen V)\n    (hU : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ U))\n    (hV : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ V))\n    (hUV : IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ (U ⊓ V))) :\n    IsIso (singleComplexOpenComparison f f' g g' sq.w K K' φ (U ⊔ V))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-14"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived base change comparison on a union of a quasi compact open and an affine open is an isomorphism if it is an isomorphism on each open and their intersection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris gluing canonical derived base change comparison isomorphisms on a union of open subschemes",
+   "results": "Candidates: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₃₄_op_glue, AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle, AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst, AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd, AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_snd, AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_snd, AlgebraicGeometry.Scheme.Cover.gluedCoverT'_fst_fst. None is the derived comparison gluing theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(union|sup)|MayerVietoris.*[Ii]so",
+   "results": "Candidates: Mathlib/RingTheory/TensorProduct/IsBaseChangePi.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangePi.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangePi.lean, Mathlib/RingTheory/TensorProduct/IsBaseChangeFree.lean, Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/LinearAlgebra/TensorProduct/Free.lean. None is the derived comparison gluing theorem.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T211111-L-394340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T211111-L-394340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -33,9 +33,9 @@
    "elementary": false
   },
   {
-   "text": "For quasi-compact U and affine V, V is compact and U intersection V is compact by Mathlib QuasiSeparatedSpace.inter_isCompact. The source-open union theorem then combines P(U), P(V), P(U intersection V) into P(U union V). Apply quasiCompactOpen_induction to obtain P(top).",
+   "text": "Use affine-adjoining gluing for compact U and affine V with P(U), P(V), P(U∩V). This gives P(U∪V). Apply quasiCompactOpen_induction and compactness of the top open to obtain P(top).",
    "uses": [
-    "lem-pc-single-complex-open-union",
+    "lem-pc-single-complex-open-affine-union",
     "lem-sc-invert-s-cohomology-induction"
    ],
    "elementary": false
@@ -57,14 +57,14 @@
   "lem-pc-single-complex-target-locality",
   "def-pc-single-complex-open-comparison",
   "lem-pc-single-complex-open-affine",
-  "lem-pc-single-complex-open-union",
+  "lem-pc-single-complex-open-affine-union",
   "lem-sc-invert-s-cohomology-induction",
   "lem-pc-single-complex-open-top"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 0DJ9; extracted the degreewise monomorphism part; the existing qcqs implementation cannot be imported here because it reaches the parent item"
+  "place": "Tag 0DJ9; R1 implements target locality, affine base cases, quasi-compact-open induction and top normalization, with only the affine-adjoining gluing step split off to avoid the existing union module’s import cycle. Functorial preservation of isomorphisms gives the homology monomorphism."
  },
  "mathlib_searches": [
   {
@@ -141,11 +141,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-85dbd",
-  "group": "M2",
+  "reviewer": "COMPILER",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261013T201801-L-3973939",
+  "landing": "20261013T211111-L-394340",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean modules, DAG nodes, proof dependencies, report, and direct importer matched the stated item and compiled cleanly in the isolated dependency-complete build."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
