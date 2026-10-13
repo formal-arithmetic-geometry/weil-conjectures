@@ -7,6 +7,9 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Mathlib.Data.Finset.Order
+import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
+import Sheaf.AlgebraicGeometry.FinitePresentationZeroMapAffineOpen
 
 /-!
 # Eventual vanishing of one finitely generated module map
@@ -65,6 +68,43 @@ theorem finitePresentation_zero_map_descent
         (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))
         (Over.homMk (Spec.map (R.map (homOfLE hjj')))
           (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map δ = 0 := by
-  sorry
+  classical
+  let : CompactSpace Xi := QuasiCompact.compactSpace_of_compactSpace f
+  let 𝒰 := Xi.affineCover.finiteSubcover
+  have one (a : 𝒰.I₀) := finitePresentation_zero_map_affine_open_eventually
+    R c hc i f j hij F G hF_ft hF_qc hG_fp hG_qc δ hδ
+    (𝒰.f a).opensRange (by
+      exact isAffineOpen_opensRange (Xi.affineCover.f (Xi.affineCover.idx a.val)))
+  choose stage hstage hzero using one
+  let : Nonempty I := ⟨j⟩
+  obtain ⟨l, hl⟩ := (insert j (Finset.univ.image stage)).exists_le
+  have hjl : j ≤ l := hl j (Finset.mem_insert_self _ _)
+  refine ⟨l, hjl, ?_⟩
+  let p := pullback.fst f (Spec.map (R.map (homOfLE (hij.trans hjl))))
+  let d := (Scheme.Modules.moduleBaseChange f
+    (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+    (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjl)))))
+    (Over.homMk (Spec.map (R.map (homOfLE hjl)))
+      (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map δ
+  have hz (a : 𝒰.I₀) (W) (hW : W ≤ p ⁻¹ᵁ (𝒰.f a).opensRange) : d.app W = 0 := by
+    apply hzero a l hjl _ W hW
+    exact hl (stage a)
+      (Finset.mem_insert_of_mem (Finset.mem_image.mpr ⟨a, Finset.mem_univ a, rfl⟩))
+  apply Scheme.Modules.hom_ext
+  intro W
+  ext s
+  change d.app W s = 0
+  refine TopCat.Sheaf.eq_of_locally_eq' ⟨_, (Scheme.Modules.isSheaf _)⟩
+    (fun a : 𝒰.I₀ ↦ W ⊓ p ⁻¹ᵁ (𝒰.f a).opensRange) W
+    (fun _ ↦ homOfLE inf_le_left) ?_ (d.app W s) 0 ?_
+  · intro x hx
+    obtain ⟨a, y, hy⟩ := 𝒰.exists_eq (p x)
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨a, hx, ⟨y, hy⟩⟩
+  · intro a
+    have hn := congrArg (fun q ↦ q s)
+      (d.mapPresheaf.naturality (homOfLE
+        (inf_le_left : W ⊓ p ⁻¹ᵁ (𝒰.f a).opensRange ≤ W)).op)
+    rw [Scheme.Modules.mapPresheaf_app, hz a _ inf_le_right] at hn
+    simpa using hn.symm
 
 end AlgebraicGeometry

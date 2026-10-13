@@ -25,44 +25,30 @@
  ],
  "proof": [
   {
-   "text": "The quasi-compact morphism f has quasi-compact source X_i since its target is affine. Choose a finite affine open cover of X_i. Inverse images of these opens in X_j, later X_l, and X are affine and cover, since all base change maps come from affine morphisms. The restricted source module is finitely generated and the restricted target module is finitely presented. A module map is zero if it is zero on every open of this cover.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
-   }
-  },
-  {
-   "text": "Fix a. By [lem-weil-pbc-spec-colimit-limit] applied to the directed system (R_{j'})_{j'\\ge i}, \\operatorname{Spec}(\\varinjlim R_{j'}) with the induced maps is a limit of the system (S_{j'}); by uniqueness of limits it is identified with S=\\operatorname{Spec}R compatibly with the projections, so, taking global sections, R=\\varinjlim_{j'}R_{j'} as rings. Since A^a\\otimes_{R_i}- commutes with colimits, B^a=\\varinjlim_{j'\\ge j}B^a_{j'}. On U^a_j the source F_j corresponds to a finitely generated B^a_j-module M with generators s_1,\\dots,s_n, and the target G_j to a finitely presented B^a_j-module N=\\operatorname{coker}(P:(B^a_j)^m\\to(B^a_j)^p); the pullbacks to U^a_{j'} and U^a_X correspond to M\\otimes B^a_{j'}, N\\otimes B^a_{j'}=\\operatorname{coker}(P\\otimes B^a_{j'}) and similarly over B^a (right exactness of tensor product). Lift each \\delta_j(s_k) to v_k\\in(B^a_j)^p. Vanishing of the base change to X means that the image of v_k in (B^a)^p is P c_k for some c_k\\in(B^a)^m. By clause (1) of [lem-pc-filtered-colimit-commrings-elementwise] for the directed set \\{j'\\ge j\\} (a filtered category) and directedness, all finitely many entries of all c_k lift to some B^a_{j'}, giving \\tilde c_k; each entry of v_k-P\\tilde c_k\\in(B^a_{j'})^p maps to 0 in B^a, so by clause (2) of the same statement (comparison with 0) it vanishes in some later B^a_{j''}, and by directedness one j'' serves for all of them. Then \\delta_{j''}(s_k\\otimes1)=0 for all k, and since the s_k\\otimes1 generate M\\otimes B^a_{j''}, \\delta_{j''} vanishes on U^a_{j''}.",
+   "text": "The quasi-compact morphism f to the affine base gives CompactSpace X_i. Take the finite subcover of the standard affine open cover. Apply eventual vanishing on one affine open separately to each member, obtaining stages stage(a), each at least j, with vanishing on all subopens at every later stage.",
    "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-pc-filtered-colimit-commrings-elementwise"
+    "lem-pc-fp-zero-map-affine-open-eventually"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose a common upper bound of the finitely many stages obtained for the affine cover. A zero linear map remains zero under tensor pullback. At this common stage the restricted map is therefore zero on every affine of the pulled-back cover, and hence the whole sheaf map is zero. This concerns one fixed map rather than a finite family of relations.",
+   "text": "The finite set consisting of j and all stage(a) has an upper bound l by directedness. At l, the stage map is zero on every subopen contained in the inverse image of any cover member. The inverse images cover X_l: for a point x choose a cover member containing its projection p_l(x).",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For any open W of X_l and section s of the source, cover W by its intersections with these inverse images. Naturality restricts the image of s to the image of the restricted s; this is zero on each intersection by the affine-open result. Separatedness of the target sheaf gives zero on W. Extensionality on sections, then opens, proves the stage module map is zero.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-spec-colimit-limit",
-  "lem-pc-filtered-colimit-commrings-elementwise"
+  "lem-pc-fp-zero-map-affine-open-eventually"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument"
+  "place": "Tag 01ZR (3), first proof: Zariski gluing from the affine case; finite affine cover, directed upper bound, and sheaf-separatedness argument formalized by U3."
  },
  "mathlib_searches": [
   {
@@ -134,9 +120,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261013T100048-L-2474554",
+  "landing": "20261013T111933-L-3066783",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
