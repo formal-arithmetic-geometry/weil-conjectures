@@ -11472,3 +11472,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 15:13 L: batch 20261013T065054 dependency take-out
 - 07:13 L: returned deliver/G4/Sheaf.AlgebraicGeometry.CoherentKernelIntersectionFiniteType (reviewer RETURN: (reviewer X-17292, head 172923660) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Co)
+- 07:22 L: returned deliver/N3/Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition (reviewer RETURN: (reviewer X-e92d2, head e92d2a5cf) C4: In dag/nodes/sec-picard-framework/lem-pc-single-complex-tensor-stalk-coordinates.)
