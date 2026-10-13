@@ -6,6 +6,7 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalMate
 
 /-! # Horizontal composition of derived base-change squares
 
@@ -57,6 +58,8 @@ theorem schemeDerivedBaseChange_horizontal
         (relativeMVImageComp j' f').hom.app ((derivedPullback v).obj E) =
       (derivedPullback g).map ((relativeMVImageComp j f).hom.app E) ≫
         schemeDerivedBaseChangeMap (j ≫ f) (j' ≫ f') g v
-          (by rw [← Category.assoc, hj, Category.assoc, h, ← Category.assoc]) E := by sorry
+          (by rw [← Category.assoc, hj, Category.assoc, h, ← Category.assoc]) E  := by
+  rw [← Category.assoc, schemeDerivedBaseChange_horizontal_mate j f j' f' g g' v h hj E]
+  simp
 
 end AlgebraicGeometry
