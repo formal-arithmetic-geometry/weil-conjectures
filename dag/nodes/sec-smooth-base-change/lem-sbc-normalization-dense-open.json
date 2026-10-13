@@ -1,0 +1,119 @@
+{
+ "id": "lem-sbc-normalization-dense-open",
+ "kind": "statement",
+ "title": "Relative normalization in a dense open of a normal locally Noetherian scheme is trivial",
+ "statement": "Let X be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring] all of whose stalks are integrally closed domains [def-weil-pbc-normal-ring]. Let V be an open subset dense in X. The canonical integral morphism from the relative normalization of X in V [lem-weil-pbc-relative-normalization] to X is an isomorphism. X may be empty or disconnected.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0357 (normal components), 035I (relative normalization), 0AB1 (normal birational comparison), applied componentwise to a dense open"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof": [
+  {
+   "text": "This is local on X. On an affine open Spec A, the Noetherian normal ring A is a finite product of integrally closed domains A_i (0357). The intersection of V with each Spec A_i is a nonempty open, since V is dense. It therefore contains the generic point. Its section ring embeds in Frac(A_i), by restriction to the generic point: sections on an integral scheme are determined by their generic germ. Every section integral over A_i then lies in A_i by integral closedness. Conversely, every element of A_i gives an integral section. Taking the finite product shows that the integral closure of A in the sections on V intersect Spec A is exactly A. The relative normalization over Spec A is the spectrum of this integral closure (035I), so its canonical map to Spec A is an isomorphism. These local assertions show the canonical map is an isomorphism on X. Empty affine opens contribute the zero ring; if X is empty the same assertion holds. No nonemptiness of X is needed.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0357, 035I and 0AB1; affine integral-closure argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normal locally Noetherian scheme is its relative normalization in any dense open subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative normalization of a locally Noetherian normal scheme in a dense open subscheme is an isomorphism",
+   "results": "Mathlib.AlgebraicGeometry.Normalization: instIsIsoToNormalizationOfIsIntegralHom, instIsIntegralNormalization, instIsIntegralHomFromNormalization, normalizationDesc. The first concerns toNormalization for an integral morphism, not fromNormalization of an open immersion; none states the result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fromNormalization, CategoryTheory.IsIso",
+   "results": "Only instIsIsoNormalizationPullbackOfSmooth: normalization commutes with smooth base change, not the required triviality statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromNormalization.*IsIso|IsIso.*fromNormalization|dense.*normalization; rg on lean/Sheaf and lean/WeilConjectures/Mathlib/AlgebraicGeometry/Normalization.lean",
+   "results": "Upstream isIso_fromNormalization_restrict and isIso_fromNormalization_app concern normalization in the function field of an integral scheme. They do not apply to possibly empty or disconnected normal schemes normalized in an arbitrary dense open. Read Mathlib normalization source and upstream complements; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Integral-closure identification of the finite normal model in the trait-case step; normal schemes are determined by the common dense open",
+   "via": [
+    "lem-sbc-finite-normal-dense-open-iso",
+    "lem-sbc-finite-normal-trait-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationDenseOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalizationDenseOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_fromNormalization_denseOpen",
+  "statement": "theorem isIso_fromNormalization_denseOpen\n    {X : Scheme.{u}} [IsLocallyNoetherian X]\n    (hnormal : ∀ z : X, IsDomain (X.presheaf.stalk z) ∧\n      IsIntegrallyClosed (X.presheaf.stalk z))\n    (V : X.Opens) (hV : Dense (V : Set X)) :\n    IsIso V.ι.fromNormalization",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T010611-L-2669226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T010611-L-2669226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

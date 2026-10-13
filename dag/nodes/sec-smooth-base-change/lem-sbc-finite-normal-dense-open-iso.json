@@ -15,17 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Work over an affine open Spec R of L. Finiteness gives affine inverse\nimages Spec B and Spec C. These are Noetherian normal rings: normality of all\nlocal rings implies normality of the affine rings, and Noetherian normal rings\nare finite products of integrally closed domains. The inverse image of U is\nopen dense in each source, so it contains every generic point. The given\nisomorphism over U identifies the products of the fraction fields of B and C\nas R-algebras. Both B and C are the integral closure of the image of R in this\ncommon product: every element of either finite R-algebra is integral over R;\nconversely, an element of the product integral over R is integral over B (or C)\nand lies in B (or C), by integral closedness in the total ring of fractions.\nThus B and C agree inside that product and the resulting R-algebra isomorphism\nextends the given isomorphism over U. The extension is unique, since a map into\na separated L-scheme is determined on a schematically dense open of a reduced\nsource. The affine isomorphisms therefore agree on intersections and glue.\nIf one source is empty, density and the restricted isomorphism force the other\nsource empty as well, and the same conclusion holds.",
+   "text": "The finite morphisms imply the source schemes are locally Noetherian. Their domain stalks imply they are reduced. Apply isIso_fromNormalization_denseOpen to the dense opens V=n^{-1}U and W=p^{-1}U to identify the relative normalizations of their inclusions with N and E.",
+   "uses": [
+    "lem-sbc-normalization-dense-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the given isomorphism e over U to form a map V to E over L, then the pair of this map with V→N gives a map V→E×_L N. The second projection is finite, hence integral. Mathlib normalizationDesc extends the pair through the relative normalization of V→N; compose with the inverse of its canonical isomorphism to N and with the first projection to obtain f:N→E, with f;p=n and V.ι;f=e.hom;W.ι. Apply the same construction to e.inv to obtain g:E→N. This uses the canonical normalization and its inverse, not arbitrary data chosen from an existence hole.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The composites f;g and g;f restrict to identities on V and W, by the two extension equations and the inverse identities for e. The source schemes are reduced, their dense open inclusions are dominant, and n and p are separated because they are finite. Mathlib ext_of_isDominant_of_isSeparated therefore identifies these composites with the global identities. Package f and g as an isomorphism over L.",
    "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-normalization-dense-open"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "U1",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 0BQL, componentwise integral-closure argument"
+  "place": "Tags 035I and 0AB1; normalization universal property followed by density and separatedness"
  },
  "mathlib_searches": [
   {
@@ -99,13 +113,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-02391",
-  "group": "U1",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T235558-L-2202589",
+  "landing": "20261013T010611-L-2669226",
   "kind": "interface",
-  "note": "independent Codex review: Delivered declarations, node signatures, proofs, imports, report, and direct importer match the review requirements and compile cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
