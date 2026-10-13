@@ -16,24 +16,27 @@
  ],
  "proof": [
   {
-   "text": "Choose representatives in G of the images under chi of the finitely many germs of the sections f(e_i) at x. Intersect their neighborhoods with U.",
+   "text": "Evaluate f on each basis inclusion at the terminal object of Over U. Apply chi to the germs. Mathlib TopCat.Presheaf.exists_le_germ_eq gives representatives t_k on D_k contained in U. Set V = U intersect the finite infimum of the D_k. Opens.coe_iInf proves x belongs to V, also for the empty index type.",
    "uses": [
     "def-weil-pbc-module-stalk",
-    "def-pc-module-stalk-functor",
-    "def-pur-localized-ringed-site",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-module-finite-type-presentation"
+    "def-pc-module-stalk-functor"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Use preservation of free coproducts by restriction and freeHomEquiv to construct psi from these image sections.",
-   "uses": [],
    "elementary": true
   },
   {
-   "text": "Finite coproducts of module sheaves are computed sectionwise, so every germ of a local free section is a finite linear combination of the basis germs. Linearity and naturality give the asserted formula; the empty index set gives the zero map.",
-   "uses": [],
+   "text": "For each k, form a compatible section sigma_k of G.over V by restricting t_k to each object of Over V. Naturality follows from map_comp_apply and uniqueness of arrows of opens. Use unitHomEquiv.symm and overMapUnitIso to get g_k from the restricted unit. Define psi as the finite sum of the restricted coordinate projections free_pi_k followed by g_k. All objects and maps are actual constructions from Mathlib and the proved source-library free-sheaf coordinate maps.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The proved SheafOfModules.freeSectionsLinearEquiv in WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free decomposes every section s into the sum of its coordinates times the basis inclusions. unitHomEquiv and sections_property compute f on a basis coordinate as that coordinate times the restriction of f(e_k), and compute g_k as the coordinate times the restriction of t_k. sum_val_app_apply expands psi. Apply additivity, PresheafOfModules.germ_smul, linearity of chi, and germ_res_apply; the representative equations ht_k give equality term by term. The empty family gives empty sums, hence the same proof.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pur-localized-ringed-site"
+   ],
    "elementary": true
   }
  ],
@@ -41,16 +44,15 @@
   "def-weil-pbc-module-stalk",
   "def-pc-module-stalk-functor",
   "def-pur-localized-ringed-site",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-module-finite-type-presentation"
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "R3",
+  "group": "N4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Tag 01CP, lemma-stalk-internal-hom; read at https://stacks.math.columbia.edu/tag/01CP",
-  "note": "Categorical expansion of the finite-coordinate argument by R3; full proof in declaration docstring."
+  "place": "Tag 01CP, lemma-stalk-internal-hom, finite-coordinate argument; read at https://stacks.math.columbia.edu/tag/01CP",
+  "note": "Complete Lean proof from Mathlib germ representatives, unitHomEquiv, and the proved source-library freeSectionsLinearEquiv. No new holes or nodes."
  },
  "mathlib_searches": [
   {
@@ -145,10 +147,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261013T100114-L-2482925",
-  "kind": "interface",
+  "landing": "20261013T111908-L-3057651",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
