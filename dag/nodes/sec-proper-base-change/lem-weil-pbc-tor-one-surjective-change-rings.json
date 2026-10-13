@@ -32,79 +32,60 @@
  ],
  "proof": [
   {
-   "text": "Base change of the resolution. Let $\\cdots\\to F_2\\xrightarrow{d_2}F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\varepsilon}M\\to0$ be the given free $R$-resolution and put $F'_i=F_i\\otimes_RA$, $d'_i=d_i\\otimes1_A$, $\\varepsilon'=\\varepsilon\\otimes1_A:F'_0\\to N$. Each $F'_i$ is a free $A$-module [lem-weil-pbc-free-module-base-change-free], $F'_\\bullet$ is a complex ($d'_{i-1}d'_i=(d_{i-1}d_i)\\otimes1=0$, $\\varepsilon'd'_1=0$), and $F'_1\\xrightarrow{d'_1}F'_0\\xrightarrow{\\varepsilon'}N\\to0$ is exact, by right exactness of $-\\otimes_RA$ applied to $F_1\\to F_0\\to M\\to0$ [lem-weil-pbc-tensor-right-exact]; in degrees $\\ge2$ it need not be exact. Write $P=A/J$. The isomorphisms $c_i:(F_i\\otimes_RA)\\otimes_AP\\cong P\\otimes_A(A\\otimes_RF_i)\\xrightarrow{\\sim}P\\otimes_RF_i\\cong F_i\\otimes_RP$ [lem-weil-pbc-module-tensor-cancel-base-change] (composed with the symmetry isomorphisms of the tensor product) are natural in $F_i$, hence commute with the differentials and give an isomorphism of complexes $F'_\\bullet\\otimes_AP\\cong F_\\bullet\\otimes_RP$, so $H_1(F_\\bullet\\otimes_RP)\\cong H_1(F'_\\bullet\\otimes_AP)$; through it the map of the statement is $H_1(\\varphi\\otimes_A1_P):H_1(F'_\\bullet\\otimes_AP)\\to H_1(G_\\bullet\\otimes_AP)$, where $\\varphi:F'_\\bullet\\to G_\\bullet$ is the given chain map with $\\varepsilon_G\\varphi_0=\\varepsilon'$. It suffices to show that $H_1(\\varphi\\otimes1_P)$ is surjective.",
+   "text": "Put E = extendScalars(f), K = E(F), and ε = E(F.π₀). The augmentation ε is epi and K₁ → K₀ → E(M) is exact: F.exact₀ and E being a left adjoint give preservation of the cokernel by ShortComplex.Exact.map_of_epi_of_preservesCokernel. This is the categorical form of tensor right exactness [lem-weil-pbc-tensor-right-exact]. The statement already uses K tensor A/J, so no further tensor cancellation is required.",
    "uses": [
-    "lem-weil-pbc-free-module-base-change-free",
     "lem-weil-pbc-tensor-right-exact",
-    "lem-weil-pbc-module-tensor-cancel-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MN, proof, lines 23888--23891 ('Let $F_2\\to F_1\\to F_0\\to M\\to0$ be a free resolution ... Set $F_i'=F_i\\otimes_RR'$. The sequence ... may no longer be exact at $F_1'$') and 23897--23899 ('$F_i\\otimes_RR'/I'=F_i'/I'F_i'$ ... computes $\\mathrm{Tor}_1^R(M,R'/I')$')"
-   }
-  },
-  {
-   "text": "A free resolution of $N$ containing $F'_\\bullet$ (the source's '$F_2'\\oplus F_2''\\to F_1'\\to F_0'\\to M'\\to0$', continued in all degrees). Define $A$-modules $G'_k$ with differentials $\\partial_k:G'_k\\to G'_{k-1}$ and $A$-linear inclusions $j_k:F'_k\\to G'_k$ by induction on $k$. Put $G'_0=F'_0$, $G'_1=F'_1$, $\\partial_1=d'_1$, $j_0,j_1$ the identities, and augmentation $\\varepsilon'$. For $k\\ge2$, assuming $G'_{k-1},\\partial_{k-1},j_{k-1}$ constructed with $\\partial_{k-1}j_{k-1}=j_{k-2}d'_{k-1}$, let $Z_{k-1}=\\ker\\partial_{k-1}\\subseteq G'_{k-1}$, let $E_k$ be the free $A$-module with basis $(e_z)_{z\\in Z_{k-1}}$ [def-weil-pbc-free-module] and $\\iota_k:E_k\\to G'_{k-1}$ the $A$-linear map $e_z\\mapsto z$, whose image is $Z_{k-1}$. Put $G'_k=F'_k\\oplus E_k$, $j_k(x)=(x,0)$ and $\\partial_k(x,y)=j_{k-1}(d'_kx)+\\iota_k(y)$. Then $\\partial_kj_k=j_{k-1}d'_k$, and $\\partial_{k-1}\\partial_k(x,y)=\\partial_{k-1}j_{k-1}d'_kx+\\partial_{k-1}\\iota_ky=j_{k-2}d'_{k-1}d'_kx+0=0$ (for $k=2$ read $\\partial_1\\partial_2(x,y)=d'_1d'_2x+d'_1\\iota_2y=0$; also $\\varepsilon'\\partial_1=\\varepsilon'd'_1=0$). Exactness [def-weil-pbc-exact-sequence]: at $N$ and at $G'_0$ by Step 1; at $G'_{k-1}$ for $k\\ge2$ because $Z_{k-1}=\\iota_k(E_k)\\subseteq\\operatorname{im}\\partial_k\\subseteq Z_{k-1}$. So $(G'_\\bullet,\\partial,\\varepsilon')$ is a free $A$-resolution of $N$ (each $G'_k$ is a direct sum of two free modules, a basis being the union of the two bases) and $j:F'_\\bullet\\to G'_\\bullet$ is a morphism of complexes, the identity in degrees $0,1$, compatible with the augmentations.",
-   "uses": [
-    "def-weil-pbc-free-module",
     "def-weil-pbc-exact-sequence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MN, proof, lines 23892--23896 ('A free resolution of $M'$ over $R'$ therefore looks like $F_2'\\oplus F_2''\\to F_1'\\to F_0'\\to M'\\to0$ for a suitable free module $F_2''$'); the continuation in degrees $\\ge3$ is written out here, the source leaves it implicit"
+    "place": "Algebra, Lemma Tag 00MN, proof, lines 23888--23919; partial comparison argument written by T2 in stage 3"
    }
   },
   {
-   "text": "$H_1(j\\otimes1_P)$ is surjective (the source's 'clearly induces a surjection'). In degrees $1$ and $0$ the complexes $F'_\\bullet\\otimes_AP$ and $G'_\\bullet\\otimes_AP$ coincide, with the same differential $d'_1\\otimes1_P$, and $j_1\\otimes1_P$, $j_0\\otimes1_P$ are identities. So both have the same module of $1$-cycles $Z=\\ker(d'_1\\otimes1_P)$, and $H_1(F'_\\bullet\\otimes P)=Z/\\operatorname{im}(d'_2\\otimes1_P)$, $H_1(G'_\\bullet\\otimes P)=Z/\\operatorname{im}(\\partial_2\\otimes1_P)$. Since $\\partial_2j_2=d'_2$, $\\operatorname{im}(d'_2\\otimes1)=\\operatorname{im}((\\partial_2\\otimes1)(j_2\\otimes1))\\subseteq\\operatorname{im}(\\partial_2\\otimes1)$, and $H_1(j\\otimes1_P)$ is the projection $Z/\\operatorname{im}(d'_2\\otimes1)\\to Z/\\operatorname{im}(\\partial_2\\otimes1)$, which is surjective.",
+   "text": "The fully proved private helper epi_homology_one_of_right_exact applies to any right-exact augmented complex K mapping to a projective resolution G of the same object, and any additive functor T. Lift G.π₀ through ε using projectivity of G₀ [def-weil-pbc-projective-module], obtaining b₀ : G₀ → K₀ with b₀ ≫ ε = G.π₀. Since d_G ≫ b₀ ≫ ε = 0, exactness at K₀ [def-weil-pbc-exact-sequence] and projectivity of G₁ give b₁ : G₁ → K₁ with b₁ ≫ d_K = d_G ≫ b₀. Mathlib Projective.factorThru and ShortComplex.Exact.liftFromProjective construct these maps.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MN, proof, lines 23888--23919; partial comparison argument written by T2 in stage 3"
+   }
+  },
+  {
+   "text": "The augmentation condition makes (b₀ ≫ φ₀ - 1) ≫ G.π₀ = 0. Exactness at G₀ and projectivity of G₀ give s₀ : G₀ → G₁ with s₀ ≫ d_G = b₀ ≫ φ₀ - 1. The chain map identity and the equation for b₁ imply (b₁ ≫ φ₁ - 1 - d_G ≫ s₀) ≫ d_G = 0. Exactness at G₁ and projectivity of G₁ give s₁ : G₁ → G₂ with s₁ ≫ d_G = b₁ ≫ φ₁ - 1 - d_G ≫ s₀. This is a partial homotopy right inverse; no map b₂ or replacement resolution is needed.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MN, proof, lines 23888--23919; partial comparison argument written by T2 in stage 3"
+   }
+  },
+  {
+   "text": "Apply the additive functor T = tensoringRight(A/J). The equation for b₁ constructs z from cycles of T(G) to cycles of T(K). The homotopy equations give z ≫ cyclesMap(Tφ) = 1 + (iCycles ≫ T(s₁)) ≫ toCycles₂₁: the term through d_G vanishes on cycles. Compose with homologyπ; the boundary term vanishes by HomologicalComplex.toCycles_comp_homologyπ, and naturality gives (z ≫ homologyπ) ≫ homologyMap(Tφ) = homologyπ of T(G). This last projection is epi, so epi_of_epi makes homologyMap(Tφ) epi. ModuleCat.epi_iff_surjective proves the unchanged conclusion. The freeness assumptions are retained but unnecessary; projectivity comes directly from ProjectiveResolution.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MN, proof, lines 23899--23919 (the two complexes $F_2'/I'F_2'\\oplus F_2''/I'F_2''\\to F_1'/I'F_1'\\to F_0'/I'F_0'$, the vertical map of complexes, 'clearly induces a surjection on cohomology')"
-   }
-  },
-  {
-   "text": "Extension of $\\varphi$ to $G'_\\bullet$. Let $(G_\\bullet,\\delta,\\varepsilon_G)$ be the given free $A$-resolution of $N$ and $\\varphi:F'_\\bullet\\to G_\\bullet$ the given chain map, $\\varepsilon_G\\varphi_0=\\varepsilon'$. Define $a_k:G'_k\\to G_k$ by induction: $a_0=\\varphi_0$, $a_1=\\varphi_1$; for $k\\ge2$, $a_k(x,y)=\\varphi_k(x)+b_k(y)$ where $b_k:E_k\\to G_k$ is the $A$-linear map with $b_k(e_z)=g_z$ for a chosen $g_z\\in G_k$ with $\\delta_kg_z=a_{k-1}(z)$ [def-weil-pbc-free-module]. Such $g_z$ exists: by induction $a$ is a chain map in degrees $\\le k-1$ with $a_{k-1}j_{k-1}=\\varphi_{k-1}$, so for $z\\in Z_{k-1}$ one has $\\delta_{k-1}a_{k-1}(z)=a_{k-2}\\partial_{k-1}z=0$ (for $k=2$: $\\delta_1\\varphi_1z=\\varphi_0d'_1z=0$), and $G_\\bullet$ is exact at $G_{k-1}$ ($k-1\\ge1$) [def-weil-pbc-exact-sequence]. Then $a_kj_k=\\varphi_k$ and $\\delta_ka_k(x,y)=\\varphi_{k-1}d'_kx+a_{k-1}\\iota_ky=a_{k-1}(j_{k-1}d'_kx+\\iota_ky)=a_{k-1}\\partial_k(x,y)$. So $a:G'_\\bullet\\to G_\\bullet$ is a morphism of complexes with $\\varepsilon_Ga_0=\\varepsilon'$ (a lift of $\\mathrm{id}_N$) and $a\\circ j=\\varphi$.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MN, proof: the source computes $\\mathrm{Tor}_1^{R'}$ with the particular resolution of lines 23892--23896; this step compares it with an arbitrary resolution and lift, as the node's statement requires (written by the agent)"
-   }
-  },
-  {
-   "text": "Conclusion. Free modules are projective [lem-weil-pbc-free-module-projective], so $G'_\\bullet$ and $G_\\bullet$ are projective $A$-resolutions of $N$. By [lem-weil-pbc-tor-map-via-resolution-lift] (1), applied over $A$ with $M=M'=N$, the map $\\mathrm{id}_N$ and the lift $a$, one has $H_1(a\\otimes1_P)\\circ\\iota_{G',P}=\\iota_{G,P}\\circ\\operatorname{Tor}^A_1(\\mathrm{id}_N,P)=\\iota_{G,P}$ (functoriality of Tor [def-weil-pbc-tor-modules]), with $\\iota_{G',P},\\iota_{G,P}$ isomorphisms; hence $H_1(a\\otimes1_P)$ is an isomorphism. Since $(a\\otimes1_P)\\circ(j\\otimes1_P)=\\varphi\\otimes1_P$, $H_1(\\varphi\\otimes1_P)=H_1(a\\otimes1_P)\\circ H_1(j\\otimes1_P)$ is an isomorphism composed with the surjection of Step 3, hence surjective; by Step 1 so is the map $\\operatorname{Tor}_1^R(M,A/J)=H_1(F_\\bullet\\otimes_R(A/J))\\to H_1(G_\\bullet\\otimes_A(A/J))=\\operatorname{Tor}_1^A(N,A/J)$. (Nothing about $J=IA$ was used: the argument holds for every $A$-module $P$ in place of $A/J$.)",
-   "uses": [
-    "lem-weil-pbc-free-module-projective",
-    "lem-weil-pbc-tor-map-via-resolution-lift",
-    "def-weil-pbc-tor-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MN, proof, lines 23917--23919 ('clearly induces a surjection on cohomology we win')"
+    "place": "Algebra, Lemma Tag 00MN, proof, lines 23888--23919; partial comparison argument written by T2 in stage 3"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-module-base-change-free",
   "lem-weil-pbc-tensor-right-exact",
-  "lem-weil-pbc-module-tensor-cancel-base-change",
-  "def-weil-pbc-free-module",
   "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-free-module-projective",
-  "lem-weil-pbc-tor-map-via-resolution-lift",
-  "def-weil-pbc-tor-modules"
+  "def-weil-pbc-projective-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00MN (lemma-surjective-on-tor-one-trivial), proof, lines 23888--23919; Step 4 (comparison with an arbitrary resolution and lift) written by the agent"
+  "place": "Algebra, Lemma Tag 00MN, proof, lines 23888--23919; partial comparison argument written by T2 in stage 3"
  },
  "mathlib_searches": [
   {
@@ -197,5 +178,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-18cf3",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261013T100131-L-2488677",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged Lean signature to its node and Stacks 00MN; proof, DAG updates, import change record, and report agree. Delivery and sole direct importer compile cleanly; both proved declarations use only the three allowed axioms."
  }
 }
