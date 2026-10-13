@@ -14,19 +14,45 @@
  ],
  "proof": [
   {
-   "text": "Full faithfulness of open direct image and the triangle identity make restriction of the unit to U invertible. On V, supported E restricts to zero, and the open restriction/direct-image comparison identifies the other endpoint with the image of the zero restriction on U intersect V. The unit on V is therefore between zero objects. Stalkwise vanishing detects zero cohomology, and cohomology detects zero derived objects. These arguments include empty U and T.",
+   "text": "The underived open direct image is fully faithful by Modules.restrictAdjunction. Its exact left adjoint makes it preserve K-injectives. The proved full_rightDerivedFunctor and faithful_rightDerivedFunctor instances give full faithfulness of schemeDerivedDirectImage. Hence any supplied adjunction has invertible counit; its left triangle identity makes derived scheme restriction of the unit invertible. The exact derived over-site equivalence and mapDerivedCategoryCompIso reflect this to the stated over-site restriction.",
    "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact restriction commutes with homology. Modules.overFunctorEquiv and restrictStalkNatIso identify every stalk of the homology of E restricted to U with its original stalk. Thus the support hypothesis passes from E to its scheme restriction.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary direct image of an object supported over the closed T, restrict the source to the inverse image of X minus T. Supported derived restriction makes it zero; transport through the derived over-site equivalence. Open base change identifies target restriction with derived direct image of this zero object, hence zero. Exact homology and stalk comparisons recover support of the direct image.",
+   "uses": [
+    "lem-pc-supported-derived-restriction-zero",
     "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both E and the direct image of its restriction are therefore zero after over-site restriction to V. Any map between zero objects is invertible. Split W = U or W = V and combine with the triangle-identity proof on U. Empty opens and empty T use the same arguments.",
+   "uses": [
+    "lem-pc-supported-derived-restriction-zero"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-supported-derived-restriction-zero",
   "lem-pc-restrict-derived-direct-image-open"
  ],
  "proof_origin": {
-  "by": "N1",
-  "reason": "Separate the independent unit and left/right comparison obligations in Tag 08DF; second reading supplied complete component arguments."
+  "by": "agent",
+  "agent": "X3",
+  "date": "2026-10-13",
+  "based_on": "Stacks Tags 08DF, 08FE, 08BS and 00A7; complete Lean proofs using exact restriction, stalk comparisons, and adjoint uniqueness."
  },
  "mathlib_searches": [
   {
@@ -104,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T015603-L-3023568",
+  "landing": "20261013T040806-L-3954613",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -16,21 +16,50 @@
  ],
  "proof": [
   {
-   "text": "Exact extension by zero induces a left adjoint to derived restriction with invertible unit. Uniqueness of left adjoints transports this to S. Full faithfulness of open direct image makes its counit invertible. The adjunct equation therefore makes L(phi) invertible. On V, Tag 08FE and the support hypothesis make R(F) zero; the restriction formula for extension by zero and uniqueness of left adjoints make S(F) zero. Thus phi on V is invertible between zero objects.",
+   "text": "Construct the exact functor L as the inverse over-site equivalence followed by the concrete extension-by-zero presheaf and module sheafification. The exact extension/restriction adjunction derives to L.mapDerivedCategory left adjoint to scheme derived restriction. Uniqueness of left adjoints gives a natural isomorphism from this concrete functor to the supplied S.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The underived adjoint triple consists of concrete extension by zero, scheme restriction, and open direct image. The last functor is fully faithful by Modules.restrictAdjunction, so its counit is invertible. Mathlib Triple.isIso_unit_iff_isIso_counit makes the concrete left unit invertible and gives restriction of extension by zero isomorphic to the identity, without using lem-pc-open-extension-restriction-iso. Inside U this identifies the cohomology stalks with those of F by exact functor homology compatibility and restrictStalkNatIso; outside U they are zero by ModuleExtensionByZeroStalkOutside. Thus the concrete derived extension has cohomology supported on T. Transport support through the left-adjoint isomorphism to S(F).",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-pc-derived-open-restriction-maps",
+    "lem-sc-module-extension-by-zero-stalk-maps-outside"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Underived open direct image is fully faithful and preserves K-injectives, so the proved source-library derived full and faithful instances make its derived direct image fully faithful. The supplied counit is invertible. For the adjoint triple S left adjoint to restriction left adjoint to direct image, Triple.isIso_unit_iff_isIso_counit makes the supplied left unit invertible. The stated equation then makes the right adjunct of phi invertible. Expanding homEquiv_counit and cancelling the invertible counit proves scheme restriction of phi invertible. The derived over-site equivalence reflects invertibility to the stated restriction on U.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The support hypothesis and open base change show R(F) has cohomology supported on T: its restriction to the complement is direct image of a zero object. Supported derived restriction therefore makes both S(F) and R(F) zero on V. The restricted phi is invertible between zero objects. Split the two choices of W and combine. Neither perfectness nor containment of T in U is needed for this local calculation, but both original hypotheses remain unchanged.",
    "uses": [
     "lem-pc-restrict-derived-direct-image-open",
-    "lem-sc-derived-open-restriction-adjunction-exact"
+    "lem-pc-supported-derived-restriction-zero"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-pc-derived-open-restriction-maps",
+  "lem-sc-module-extension-by-zero-stalk-maps-outside",
   "lem-pc-restrict-derived-direct-image-open",
-  "lem-sc-derived-open-restriction-adjunction-exact"
+  "lem-pc-supported-derived-restriction-zero"
  ],
  "proof_origin": {
-  "by": "N1",
-  "reason": "Separate the independent unit and left/right comparison obligations in Tag 08DF; second reading supplied complete component arguments."
+  "by": "agent",
+  "agent": "X3",
+  "date": "2026-10-13",
+  "based_on": "Stacks Tags 08DF, 08FE, 08BS and 00A7; exact restriction, stalk comparisons, and adjoint uniqueness. Second reading replaces the extension/restriction isomorphism dependency with Mathlib adjoint-triple unit/counit invertibility."
  },
  "mathlib_searches": [
   {
@@ -108,9 +137,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T015603-L-3023568",
+  "landing": "20261013T040806-L-3954613",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
