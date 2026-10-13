@@ -2,6 +2,9 @@ module
 
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Mathlib.LinearAlgebra.TensorProduct.Pi
+import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 @[expose] public section
 
@@ -43,6 +46,62 @@ theorem finite_relation_quotient_comparison
         (ModuleCat.of (F.obj i) (ULift.{v} ((Fin n → F.obj i) ⧸ LinearMap.range qi))) ≅
         ModuleCat.of (colimit F : CommRingCat)
           (ULift.{v} ((Fin n → (colimit F : CommRingCat)) ⧸ LinearMap.range q))) := by
-  sorry
+  classical
+  let R := F.obj i
+  let S := (colimit F : CommRingCat)
+  let f : R →+* S := (colimit.ι F i).hom
+  let := f.toAlgebra
+  let en := TensorProduct.piScalarRight R S S (Fin n)
+  let em := TensorProduct.piScalarRight R S S (Fin m)
+  have hcoord (x : Fin m → R) (j : Fin n) :
+      f (qi x j) = q (fun k ↦ f (x k)) j := by
+    have hx : x = ∑ k : Fin m, x k • Pi.single k (1 : R) := by
+      ext k
+      simp [Pi.single_apply]
+    have hy : (fun k ↦ f (x k)) = ∑ k : Fin m, f (x k) • Pi.single k (1 : S) := by
+      ext k
+      simp [Pi.single_apply]
+    have hqi : qi x = ∑ k : Fin m, x k • qi (Pi.single k 1) := by
+      conv_lhs => rw [hx]
+      simp only [map_sum, map_smul]
+    rw [hqi, hy]
+    simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, map_sum, map_mul,
+      LinearMap.map_smul]
+    apply Finset.sum_congr rfl
+    intro k _
+    rw [show f (qi (Pi.single k 1) j) = q (Pi.single k 1) j from hcoeff j k]
+  have hmatrix : en.toLinearMap ∘ₗ qi.baseChange S = q ∘ₗ em.toLinearMap := by
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro a x
+    ext j
+    change en (a ⊗ₜ[R] qi x) j = q (em (a ⊗ₜ[R] x)) j
+    simp only [en, em, TensorProduct.piScalarRight_apply,
+      TensorProduct.piScalarRightHom_tmul]
+    change f (qi x j) * a = q (fun k ↦ f (x k) * a) j
+    have hy : (fun k ↦ f (x k) * a) = a • (fun k ↦ f (x k)) := by
+      ext k
+      simp [mul_comm]
+    rw [hy, map_smul, Pi.smul_apply, smul_eq_mul, hcoord]
+    exact mul_comm _ _
+  have hrange : LinearMap.range (qi.baseChange S) =
+      LinearMap.range ((LinearMap.range qi).subtype.baseChange S) := by
+    have hf : qi = (LinearMap.range qi).subtype ∘ₗ qi.rangeRestrict := rfl
+    nth_rewrite 1 [hf]
+    rw [LinearMap.baseChange_comp]
+    apply LinearMap.range_comp_of_range_eq_top
+    apply LinearMap.range_eq_top.mpr
+    exact LinearMap.baseChange_surjective S qi.surjective_rangeRestrict
+  have hmap : (LinearMap.range ((LinearMap.range qi).subtype.baseChange S)).map
+      en.toLinearMap = LinearMap.range q := by
+    rw [← hrange, ← LinearMap.range_comp, hmatrix]
+    exact LinearMap.range_comp_of_range_eq_top _
+      (LinearMap.range_eq_top.mpr em.surjective)
+  let eqt := TensorProduct.AlgebraTensorModule.tensorQuotientEquiv (R := R) S R S
+    (LinearMap.range qi)
+  let eqf := Submodule.Quotient.equiv _ _ en hmap
+  let eu := (ULift.moduleEquiv : ULift.{v} ((Fin n → R) ⧸ LinearMap.range qi) ≃ₗ[R]
+    ((Fin n → R) ⧸ LinearMap.range qi)).baseChange R S _ _
+  let e := eu.trans (eqt.trans (eqf.trans ULift.moduleEquiv.symm))
+  exact ⟨e.toModuleIso⟩
 
 end ModuleCat
