@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonEvaluationIsIso",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "id": "lem-sbc-raw-restricted-homotopy-sections-iso",
+ "title": "Represented homotopy classes and termwise sections",
+ "statement": "Let $h:Y\\to S$ be any morphism of schemes, $U\\to S$ an etale object, $W=U\\times_S Y$, $A=h^*\\mathbb Z[U]$, and $I$ any cochain complex of abelian sheaves on $Y_{\\mathrm{et}}$. Here $\\mathbb Z[U]$, its identity generator $g\\in\\Gamma(W,A|_W)$, and restriction are those of [def-sbc-raw-restricted-cohomology-comparison-map]. There is an additive group isomorphism\n$$\\operatorname{Hom}_{K(Y_{\\mathrm{et}})}(A[0],I)\\cong H^0(\\Gamma(W,I|_W))$$\nwhich sends the homotopy class of a chain map $f$ to the image of the generator's single-complex class under $H^0(\\Gamma(W,f|_W))$. This latter map is exactly `chainEvaluation h U I f`. No boundedness or injectivity is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Tag 03Q8; Cohomology on Sites Tags 072W (injective section complexes), 0BKV and 0D6F (restricted K-injective computation)"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map"
+ ],
+ "proof": [
+  {
+   "text": "The inverse-image/direct-image adjunction, sheafification adjunction, free-abelian adjunction and Yoneda identify Hom(A,G) with sections over W for every abelian sheaf G. The unit formula and identity formula show this equivalence sends f to its evaluation on the pulled-back represented identity. Naturality makes these additive equivalences commute with the differentials of I.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the from-single cochain equivalence in each degree to obtain an isomorphism HomComplex(A[0],I) with the termwise sections complex. Zeroth Hom-complex cohomology is homotopy classes (Mathlib CohomologyClass.homAddEquiv and leftHomologyData); take zeroth homology of the chain isomorphism. On a chain map, the single-complex homology isomorphism gives exactly chainEvaluation, including zero complexes and empty W.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent Q1",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8, 072W, 0BKV and 0D6F; explicit Yoneda/unit glue supplied by Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homotopy classes from a single free represented sheaf are isomorphic to zeroth cohomology of sections complex",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homotopy classes from a single free represented sheaf are isomorphic to zeroth cohomology of sections complex",
+   "results": "8 hits, including CochainComplex.HomComplex.CohomologyClass.homAddEquiv; no represented sections comparison",
+   "verdict": "generic ingredient only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "preadditiveCoyoneda|homology.*homEquiv|rightDerived.*[Yy]oneda",
+   "results": "25 generic hits, preadditive Coyoneda and homological functor results; no restricted sheaf evaluation theorem",
+   "verdict": "no complete match",
+   "date": "2026-10-13"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Restricted cohomology identification in the affine cohomology-class representative step; explicit chain evaluation refinement of Tag 03Q8",
+   "via": [
+    "lem-sbc-raw-restricted-cohomology-comparison-evaluation-is-iso",
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedHomotopySectionsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedHomotopySectionsIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.exists_rawRestrictedHomotopySectionsIso",
+  "statement": "theorem exists_rawRestrictedHomotopySectionsIso {S Y : Scheme.{v}}\n    (h : Y ⟶ S) (U : S.Etale)\n    (I : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :\n    ∃ e : AddCommGrpCat.of\n        ((HomotopyCategory.quotient _ (.up ℤ)).obj\n          ((CochainComplex.singleFunctor _ 0).obj\n            ((upperStar AddCommGrpCat.{v + 1} h).obj (freeSheaf S U))) ⟶\n          (HomotopyCategory.quotient _ (.up ℤ)).obj I) ≅\n        (((underivedSections\n        ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U)).mapHomologicalComplex\n           (.up ℤ)).obj I).homology 0,\n      ∀ f, e.hom ((HomotopyCategory.quotient _ (.up ℤ)).map f) =\n        chainEvaluation h U I f",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

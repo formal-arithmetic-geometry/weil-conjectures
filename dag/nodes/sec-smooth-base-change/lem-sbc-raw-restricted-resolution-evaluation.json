@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonEvaluationIsIso",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "id": "lem-sbc-raw-restricted-resolution-evaluation",
+ "title": "Evaluation compatibility with the canonical resolution comparison",
+ "statement": "Let $h:Y\\to S$ be a morphism of schemes, $U\\to S$ etale, $W=U\\times_S Y$, $A=h^*\\mathbb Z[U]$, and $I$ a bounded-below complex of abelian sheaves on $Y_{\\mathrm{et}}$ whose restriction to $W$ is K-injective. Use the generator $g$, the functor $T=H^0R\\Gamma(W,-|_W)$ and $x=\\mathrm{zeroIso}^{-1}(g)$ of [def-sbc-raw-restricted-cohomology-comparison-map]. Let $\\delta:T(QI)\\cong H^0(\\Gamma(W,I|_W))$ be the canonical `resolutionSectionsIso`, the composite of exact restriction's localization comparison, the inverse derived-sections unit on the K-injective restriction, and homology's localization comparison. For every chain map $f:A[0]\\to I$,\n$$\\delta(T(Qf)(x))=\\mathrm{chainEvaluation}(f),$$\nwhere `chainEvaluation` is the explicit chain-level map of [lem-sbc-raw-restricted-homotopy-sections-iso]. The inclusion of the bounded-below derived category is used to regard $Qf$ as a morphism there. This statement is an equality of maps on chain representatives, and asserts no bijectivity of evaluation.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03Q8",
+  "place": "Tag 03Q8; Cohomology on Sites Tags 072W (injective section complexes), 0BKV and 0D6F (restricted K-injective computation)"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-raw-restricted-homotopy-sections-iso"
+ ],
+ "proof": [
+  {
+   "text": "Unfold resolutionSectionsIso: its three factors are the exact restriction localization comparison, the inverse right-derived sections unit on the K-injective restricted complex, and the homology localization comparison. Naturality identifies their composite with H^0 of the termwise restricted sections chain map.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the source A[0], zeroIso is the degree-zero derived-to-underived comparison followed by the single-complex homology isomorphism. Their compatibility sends zeroIso.inv(generator) to the generator class used in underivedSingleIso.inv(generator). Naturality with f therefore gives chainEvaluation exactly. This calculation uses no existence or choice of the homotopy isomorphism and works for zero maps and empty W.",
+   "uses": [
+    "def-sbc-raw-restricted-cohomology-comparison-map",
+    "lem-sbc-raw-restricted-homotopy-sections-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-restricted-cohomology-comparison-map",
+  "lem-sbc-raw-restricted-homotopy-sections-iso"
+ ],
+ "proof_origin": {
+  "by": "agent Q1",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8, 072W, 0BKV and 0D6F; explicit Yoneda/unit glue supplied by Q1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived sections comparison evaluated on a chain map agrees with cohomology of termwise sections",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorObjQIso\"",
+   "results": "0 hits",
+   "verdict": "no complete match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorObjQIso|singleObjHomologySelfIso|HomComplex.CohomologyClass",
+   "results": "25 hits, including singleObjHomologySelfIso and HomComplex comparisons; no evaluation compatibility for this generator",
+   "verdict": "generic ingredients only",
+   "date": "2026-10-13"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Restricted cohomology identification in the affine cohomology-class representative step; explicit chain evaluation refinement of Tag 03Q8",
+   "via": [
+    "lem-sbc-raw-restricted-cohomology-comparison-evaluation-is-iso",
+    "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
+    "lem-sbc-raw-restricted-cohomology-natural-iso",
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+    "lem-sbc-higher-direct-image-raw-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-affine-class-rep",
+    "lem-sbc-higher-direct-image-limit-presheaf-class-cover",
+    "sbc-lem-higher-direct-image-limit-class-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedResolutionEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedResolutionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Etale.RawRestrictedComparison.rawRestricted_resolution_evaluation",
+  "statement": "theorem rawRestricted_resolution_evaluation {S Y : Scheme.{v}}\n    (h : Y ⟶ S) (U : S.Etale)\n    (I : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))\n    [CochainComplex.IsKInjective\n      (((upperStar AddCommGrpCat.{v + 1}\n      ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U).hom).mapHomologicalComplex\n         (.up ℤ)).obj I.obj)]\n    (f : (CochainComplex.singleFunctor _ 0).obj\n      ((upperStar AddCommGrpCat.{v + 1} h).obj (freeSheaf S U)) ⟶ I.obj) :\n    let W := (MorphismProperty.Over.pullback @Etale ⊤ h).obj U\n    let A := (upperStar AddCommGrpCat.{v + 1} h).obj (freeSheaf S U)\n    let T := sectionsFunctor W ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0\n    let x := (zeroIso W A).inv (generator h U)\n    (resolutionSectionsIso W I).hom\n        (T.map (DerivedCategory.Plus.ι.preimage\n          (DerivedCategory.Q.map f) :\n            (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶\n              DerivedCategory.Plus.Q.obj I) x) =\n      chainEvaluation h U I.obj f",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261013T024044-L-3337594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
