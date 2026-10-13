@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-graded-scalar-extension-coherence",
+ "kind": "statement",
+ "title": "Colimit coherence of a transported graded scalar-extension map",
+ "statement": "Let I be a preorder, F : I → CRing [def-weil-pbc-category-colimit], i₀ ∈ I, and P,Q cochain complexes of F(i₀)-modules [def-pc-cochain-complex-modules]. Let i,j ≥ i₀ with i ≤ j, and vⁿ arbitrary graded maps from Pᵢⁿ to Qᵢⁿ. Let c be the natural scalar-extension comparison from direct extension i₀ → j to extension through i, using functoriality of F, and let eᵢ,eⱼ be the canonical complex comparisons from direct extension i₀ → colimit F to extension through i,j. For wⁿ = c_Pⁿ followed by extension of vⁿ from i to j followed by the inverse of c_Qⁿ, conjugating extension of wⁿ to the colimit by eⱼ equals conjugating extension of vⁿ by eᵢ, in every degree. There are no finite-presentation, directedness or chain-square hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine comparisons; Mathlib ModuleCat.extendScalars_assoc"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "For ring maps f : R → S, g : S → T, h : T → A, evaluate ModuleCat.extendScalars_assoc at M and N. It equates the two isomorphisms from direct extension R → A to iterated extension R → S → T → A. Equality of their inverses and naturality_2 of extendScalarsComp g h show that extending the conjugate of v by extendScalarsComp f g and then conjugating to direct extension equals conjugating its direct S → A extension.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Allow additional ring maps k : R → T, r : R → A, s : S → A with k = g.comp f, r = s.comp f, s = h.comp g. Substitute these equalities. The remaining equation r = h.comp k is reflexive by associativity, so its eqToIso is the identity. The complex components reduce to the module identity in the preceding step.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize to the transition ring maps i₀ → i → j and the colimit cocone. F.map_comp gives the first relation and colimit.w gives the others. Apply the comparison identity independently to each v n. No finite-presentation or commutativity hypotheses are involved.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine comparisons; Mathlib ModuleCat.extendScalars_assoc; explicit Lean proof by W3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associativity coherence for iterated scalar extension of module maps",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "ModuleCat.extendScalars_assoc, extendScalars_assoc', extendScalarsComp_hom_app_one_tmul.",
+   "verdict": "The componentwise conjugation identity follows from associativity and naturality, but is not stated directly.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|scalar.*extension.*coher; blueprint_refs.py search coherence",
+   "results": "Mathlib Algebra/Category/ModuleCat/ChangeOfRings.lean:1015 extendScalars_assoc. The 28 imported blueprint matches for coherence concern other constructions, not this graded module-map identity.",
+   "verdict": "Use Mathlib associativity; no existing statement with these comparisons.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteChainSquaresColimitDescent",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE affine calculation: imposing the finitely many chain-square relations",
+   "via": [
+    "lem-pc-finite-chain-squares-colimit-descent",
+    "lem-pc-affine-perfect-chain-map-descent",
+    "lem-pc-affine-perfect-hom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.GradedScalarExtensionCoherence",
+  "file": "lean/Sheaf/Algebra/Homology/GradedScalarExtensionCoherence.lean",
+  "declaration": "CochainComplex.graded_scalarExtension_colimit_coherence",
+  "statement": "theorem graded_scalarExtension_colimit_coherence\n    {I : Type u} [Preorder I] (F : I ⥤ CommRingCat.{u}) (i₀ : I)\n    (P Q : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)\n    (i j : Set.Ici i₀) (hij : i.val ≤ j.val)\n    (hc : (F.map (homOfLE j.property)).hom =\n      (F.map (homOfLE hij)).hom.comp (F.map (homOfLE i.property)).hom)\n    (v : ∀ n : ℤ,\n      (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (P.X n) ⟶\n        (ModuleCat.extendScalars (F.map (homOfLE i.property)).hom).obj (Q.X n)) :\n    let c := eqToIso (congrArg ModuleCat.extendScalars hc) ≪≫\n      ModuleCat.extendScalarsComp (F.map (homOfLE i.property)).hom\n        (F.map (homOfLE hij)).hom\n    let e (t : Set.Ici i₀) (C : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ) :=\n      eqToIso (congrArg (fun r ↦\n        ((ModuleCat.extendScalars r).mapHomologicalComplex (.up ℤ)).obj C)\n        (congrArg CommRingCat.Hom.hom (colimit.w F (homOfLE t.property)).symm)) ≪≫\n      (NatIso.mapHomologicalComplex\n        (ModuleCat.extendScalarsComp (F.map (homOfLE t.property)).hom\n          (colimit.ι F t.val).hom) (.up ℤ)).app C\n    ∀ n : ℤ, (e j P).hom.f n ≫\n      (ModuleCat.extendScalars (colimit.ι F j.val).hom).map\n        (c.hom.app (P.X n) ≫\n          (ModuleCat.extendScalars (F.map (homOfLE hij)).hom).map (v n) ≫\n            c.inv.app (Q.X n)) ≫ (e j Q).inv.f n =\n      (e i P).hom.f n ≫\n        (ModuleCat.extendScalars (colimit.ι F i.val).hom).map (v n) ≫\n          (e i Q).inv.f n",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T100214-L-2500997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T100214-L-2500997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

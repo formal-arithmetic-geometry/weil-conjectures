@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-preorder-module-map-equality-descent",
+ "kind": "statement",
+ "title": "Equality descent for module maps over a directed preorder",
+ "statement": "Let I be a directed preorder, F : I → CRing a functor [def-weil-pbc-category-colimit], i ∈ I, and M,N finitely presented F(i)-modules [def-sc-finitely-presented-module]. If f,g : M → N agree after scalar extension to colimit F, there are j ≥ i such that their scalar extensions along F(i) → F(j) agree. No antisymmetry is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7 (3); preorder reduction through antisymmetrization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Form the partial order J = Antisymmetrization I (≤), and the monotone representative functor H : J → I. The quotient is directed, by applying the quotient map to a common upper bound of representatives. The given i ensures nonemptiness. Every x ≤ H([x]), so Monotone.final_functor_iff makes H final and colimit.pre F H an isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend M,N,f,g from i to its representative p. Tensor extension preserves finite presentation. Naturality of extendScalarsComp and colimit.w show the two extended maps agree after extension to colimit F. Extension along the colimit comparison isomorphism reflects equality: apply extension by the inverse, use extendScalarsComp, and then extendScalarsId. This supplies equality over colimit (H ⋙ F).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the equality clause of lem-pc-fp-module-map-descent-affine to H ⋙ F, obtaining a later quotient index j. Lift to H(j), which lies above p and thus i. Naturality of extendScalarsComp and F.map_comp identifies equality of the iterated extensions with equality of direct extensions from i to H(j).",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7 (3); preorder reduction through antisymmetrization; explicit Lean proof by W3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of module maps after extension of scalars to a directed colimit is detected at a finite stage",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many equalities of module maps over a directed colimit of rings hold at a later stage",
+   "results": "Module.DirectLimit.exists_eq_of_of_eq; Module.DirectLimit.exists_of₂; ModuleCat.directLimitIsColimit. These concern modules over a fixed ring, not scalar extension over varying rings.",
+   "verdict": "No direct match.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|finitePresentation_descent|eventually_commuting; antisymmetrization in Mathlib CategoryTheory and Order",
+   "results": "ModuleCat.extendScalarsComp; Monotone.final_functor_iff; OrderEmbedding.ofAntisymmetrization. Sheaf.Algebra.FinitePresentationColimit has the partial-order statement but no preorder equality clause. Blueprint search 05N7 returned no imported node duplicating this specialization.",
+   "verdict": "The existing partial-order descent theorem is used through antisymmetrization.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteChainSquaresColimitDescent",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RE affine calculation: imposing the finitely many chain-square relations",
+   "via": [
+    "lem-pc-finite-chain-squares-colimit-descent",
+    "lem-pc-affine-perfect-chain-map-descent",
+    "lem-pc-affine-perfect-hom-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PreorderModuleMapEqualityDescent",
+  "file": "lean/Sheaf/Algebra/Homology/PreorderModuleMapEqualityDescent.lean",
+  "declaration": "ModuleCat.eventually_equal_maps_of_directed_preorder_colimit",
+  "statement": "theorem eventually_equal_maps_of_directed_preorder_colimit\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (i : I) (M N : ModuleCat.{u} (F.obj i))\n    (hM : Module.FinitePresentation (F.obj i) M)\n    (hN : Module.FinitePresentation (F.obj i) N) (f g : M ⟶ N)\n    (h : (extendScalars (colimit.ι F i).hom).map f =\n      (extendScalars (colimit.ι F i).hom).map g) :\n    ∃ (j : I) (hij : i ≤ j),\n      (extendScalars (F.map (homOfLE hij)).hom).map f =\n        (extendScalars (F.map (homOfLE hij)).hom).map g",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T100214-L-2500997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T100214-L-2500997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
