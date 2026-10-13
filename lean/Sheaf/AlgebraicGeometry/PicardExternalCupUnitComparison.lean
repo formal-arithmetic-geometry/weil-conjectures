@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyCoordinates
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
-import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.Paper.ModuleCohomologyCupProduct
+import Sheaf.AlgebraicGeometry.ScalarUnitCohomologyPullbackComparison
+import Sheaf.AlgebraicGeometry.ExternalCupUnitCoefficientIdentities
 
 /-! # Comparison of external cup products with the degree-zero unit class
 
@@ -63,6 +62,31 @@ theorem picard_external_cup_unit_comparison (k : Type u) [Field k] (X Y : Scheme
       (∀ b : scalarCohomology g G 1,
         eP (externalCup f g F G 0 1 (scalarUnitCohomologyClass f) b) =
           structureSheafCohomologyPullback (pullback.snd f g) 1 (eY b)) := by
-  sorry
+  classical
+  let P := pullback f g
+  let p := pullback.fst f g ≫ f
+  let : MonoidalCategory (SheafOfModules.{u} P.ringCatSheaf) :=
+    SheafOfModules.monoidalCategory P.sheaf
+  let x := tensorPullbackObjUnitToUnit (pullback.fst f g)
+  let y := tensorPullbackObjUnitToUnit (pullback.snd f g)
+  have : IsIso x := (tensorPullbackObjUnitToUnit_isIso (pullback.fst f g)).1
+  have : IsIso y := (tensorPullbackObjUnitToUnit_isIso (pullback.snd f g)).1
+  let m := CategoryTheory.MonoidalCategory.tensorHom x y ≫
+    (CategoryTheory.MonoidalCategory.leftUnitor (SheafOfModules.unit P.ringCatSheaf)).hom
+  let c := (ModuleCat.restrictScalars (scalarMap p ⊤)).mapIso
+    ((RingedSpace.moduleCohomology P.toRingedSpace 1).mapIso (asIso m))
+  obtain ⟨e, he⟩ := scalar_unit_cohomology_pullback_comparison k
+  obtain ⟨hx, hy⟩ := external_cup_unit_coefficient_identities k X Y f g
+  refine ⟨e X f, e Y g, c.toLinearEquiv.toAddEquiv.trans (e P p), ?_, ?_⟩
+  · intro a
+    change e P p (scalarCohomologyMap p m 1
+      (externalCup f g _ _ 1 0 a (scalarUnitCohomologyClass g))) = _
+    rw [hx a]
+    exact he f p (pullback.fst f g) rfl a
+  · intro b
+    change e P p (scalarCohomologyMap p m 1
+      (externalCup f g _ _ 0 1 (scalarUnitCohomologyClass f) b)) = _
+    rw [hy b]
+    exact he g p (pullback.snd f g) pullback.condition.symm b
 
 end AlgebraicGeometry.Scheme
