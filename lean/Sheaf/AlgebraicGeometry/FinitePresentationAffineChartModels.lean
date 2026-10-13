@@ -6,7 +6,9 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.FinitePresentationAffineChartSectionsModel
+import Sheaf.AlgebraicGeometry.FinitePresentationAffineSectionsRealization
+import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Object models on one fixed affine chart
 
@@ -65,6 +67,40 @@ theorem exists_finitePresentation_affine_chart_object_models
       ∃ N : (U.X a).Modules,
         N.IsFinitePresentation ∧ N.IsQuasicoherent ∧
         Nonempty ((Scheme.Modules.pullback (U.pullbackHom p a)).obj N ≅
-          (Scheme.Modules.pullback ((U.pullback₁ p).f a)).obj M) := by sorry
+          (Scheme.Modules.pullback ((U.pullback₁ p).f a)).obj M) := by
+  obtain ⟨j, hij, Q, hQ, e⟩ :=
+    exists_finitePresentation_affine_chart_sections_model R c hc i f M hM hMq V a ha
+  let U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u} :=
+    V.pullback₁ (pullback.fst f (Spec.map (R.map (homOfLE hij))))
+  let p := baseChangeMap f
+    (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+    (T' := Over.mk (c.π.app (op i)))
+    (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))
+  have : IsAffine (V.X a) := ha
+  have hstage : IsAffineHom (Spec.map (R.map (homOfLE hij))) := inferInstance
+  have hfst : IsAffineHom (pullback.fst f (Spec.map (R.map (homOfLE hij)))) :=
+    MorphismProperty.pullback_fst _ _ hstage
+  have hU : IsAffine (U.X a) := by
+    change IsAffine (pullback (pullback.fst f _) (V.f a))
+    exact isAffine_of_isAffineHom (pullback.snd _ _)
+  have : IsAffine (U.X a) := hU
+  have hcmap : IsAffineHom (c.π.app (op j)) := by
+    exact @isAffineHom_of_isAffine c.pt (Spec (R.obj j)) (c.π.app (op j))
+      ‹IsAffine c.pt› inferInstance
+  have hp : IsAffineHom p := by
+    dsimp [p]
+    exact MorphismProperty.of_isPullback (P := @IsAffineHom)
+      (isPullback_baseChangeMap f
+        (T := Over.mk (Spec.map (R.map (homOfLE hij))))
+        (T' := Over.mk (c.π.app (op i)))
+        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).flip hcmap
+  have hY : IsAffine ((U.pullback₁ p).X a) := by
+    change IsAffine (pullback p (U.f a))
+    exact isAffine_of_isAffineHom (pullback.snd _ _)
+  have : IsAffine ((U.pullback₁ p).X a) := hY
+  have : M.IsQuasicoherent := hMq
+  refine ⟨j, hij, ?_⟩
+  exact exists_finitePresentation_affine_sections_realization (U.pullbackHom p a)
+    ((Scheme.Modules.pullback ((U.pullback₁ p).f a)).obj M) (by infer_instance) Q hQ e
 
 end AlgebraicGeometry

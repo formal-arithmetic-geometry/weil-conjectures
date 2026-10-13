@@ -1,0 +1,109 @@
+{
+ "id": "lem-pc-fp-affine-chart-sections-model",
+ "kind": "statement",
+ "title": "Algebraic descent of sections on an affine chart",
+ "statement": "Let I be a directed preorder, R : I → CommRing a functor, and c an affine limit cone of Spec of R. Fix i, f : Xi → Spec(R_i), and a finitely presented quasi-coherent module M on Xi × Spec(R_i) c.pt. Fix an affine chart V_a of an open cover V of Xi. For some j ≥ i, let U_a be its pullback to Xi × Spec(R_i) Spec(R_j), let p be the limit-to-stage base-change map, let Y be the further pullback chart, g : Y → U_a its chart map, and P the pullback of M to Y. There exists a finitely presented algebraic module Q over Γ(U_a, top) together with an isomorphism Γ(Y, top) tensor over Γ(U_a, top) Q ≅ Γ(P, top), where scalar extension uses g.appTop. No sheaf on U_a is asserted. These are the scheme and base-change conventions of def-pc-scheme, def-pc-morphism-conventions and def-pc-base-change, with finite presentation as in pqf-def-coherent.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR first proof, affine case; Algebra Tag 05N7; Modules on Schemes Tag 01I6"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "On the upper tail above i the stage chart rings are base changes of the fixed\nchart ring. Affine pullback identifies these with tensor products, which commute\nwith directed colimits. Uniqueness of the affine limit identifies the limit chart\nring with that colimit. The restriction of M has finitely presented sections since\nit is finitely presented and the chart is affine. Apply the object clause of module\ndescent over a directed preorder: lift a finite relation matrix and form its range\nquotient at a stage. Its scalar extension is the original sections module. The\npullback pasting isomorphism identifies the limit chart with the iterated chart\nin the conclusion, and transports the section comparison. Zero rings and modules\nare treated by the same relation quotient; no choice of unspecified sheaf data\nis made.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR first proof, affine case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented modules on affine inverse limits descend to a finite stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented quasi coherent sheaf on an affine inverse limit descends to a finite stage",
+   "results": "Eight generic quasicoherent finite-presentation declarations; no descent theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "Twelve scalar extension declarations; generic algebraic comparisons only.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*colimit",
+   "results": "No msearch hits; local rg finds FinitePresentationPreorderColimitModel and FiniteDescent.",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationAffineChartModels",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-fp-affine-chart-object-models",
+   "place": "Algebraic sections descent and affine sheaf realization"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationAffineChartSectionsModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationAffineChartSectionsModel.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_affine_chart_sections_model",
+  "statement": "theorem exists_finitePresentation_affine_chart_sections_model\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    (M : (pullback f (c.π.app (op i))).Modules)\n    (hM : M.IsFinitePresentation) (hMq : M.IsQuasicoherent)\n    (V : Xi.OpenCover.{u}) (a : V.I₀) (ha : IsAffine (V.X a)) :\n    ∃ (j : I) (hij : i ≤ j),\n      let U : (pullback f (Spec.map (R.map (homOfLE hij)))).OpenCover.{u} :=\n        V.pullback₁ (pullback.fst f (Spec.map (R.map (homOfLE hij))))\n      let p := baseChangeMap f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))\n      let Y := (U.pullback₁ p).X a\n      let P := (Scheme.Modules.pullback ((U.pullback₁ p).f a)).obj M\n      ∃ Q : ModuleCat.{u} Γ(U.X a, ⊤),\n        Module.FinitePresentation Γ(U.X a, ⊤) Q ∧\n        Nonempty ((ModuleCat.extendScalars (U.pullbackHom p a).appTop.hom).obj Q ≅\n          ModuleCat.of Γ(Y, ⊤) Γ(P, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T130351-L-3952794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T130351-L-3952794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

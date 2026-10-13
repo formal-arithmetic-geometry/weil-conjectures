@@ -1,0 +1,105 @@
+{
+ "id": "lem-pc-fp-affine-sections-realization",
+ "kind": "statement",
+ "title": "Realization of a finite-presentation affine sections model",
+ "statement": "Let X and Y be affine schemes and g : Y → X a morphism (def-pc-scheme, def-pc-morphism-conventions). Let P be a quasi-coherent module on Y (pqf-def-coherent), and Q a finitely presented module over Γ(X, top). Assume a supplied isomorphism from scalar extension of Q along g.appTop to Γ(P, top), as Γ(Y, top)-modules. There is a finitely presented quasi-coherent module N on X with g-pullback N isomorphic to P (def-pc-base-change). The input Q and the supplied sections isomorphism determine the construction; there is no inverse-limit hypothesis or choice of a finite stage.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Section 26.7, Tag 01I6, Lemmas 26.7.1, 26.7.3 and 26.7.4; finite global presentation argument; also Limits Tag 01ZR affine proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Transport Q to Spec of the global-section ring of X and take its associated\nquasi-coherent sheaf; pull it back along the canonical isomorphism X to that\nspectrum. A finite presentation of Q gives a finite global presentation of the\nassociated sheaf, so it is finitely presented. The affine pullback/tensor comparison\nidentifies the sections of its pullback along g with scalar extension of Q.\nCompose this with e. Both sheaves on Y are quasi-coherent, hence the affine module\nequivalence lifts that section isomorphism to an isomorphism of sheaves. The\nconstruction uses Q itself and its associated sheaf, not an arbitrary witness of\nexistence. Empty affine schemes and zero modules follow from the same equivalence.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01I6 affine module equivalence and pullback/tensor comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Realize a finitely presented module of global sections as a quasicoherent sheaf on an affine scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented quasi coherent sheaf on an affine inverse limit descends to a finite stage",
+   "results": "Eight generic quasicoherent finite-presentation declarations; no descent theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "Twelve scalar extension declarations; generic algebraic comparisons only.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePresentation.*colimit",
+   "results": "No msearch hits; local rg finds FinitePresentationPreorderColimitModel and FiniteDescent.",
+   "date": "2026-10-13",
+   "verdict": "supporting lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationAffineChartModels",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-fp-affine-chart-object-models",
+   "place": "Algebraic sections descent and affine sheaf realization"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationAffineSectionsRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationAffineSectionsRealization.lean",
+  "declaration": "AlgebraicGeometry.exists_finitePresentation_affine_sections_realization",
+  "statement": "theorem exists_finitePresentation_affine_sections_realization\n    {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (g : Y ⟶ X)\n    (P : Y.Modules) (hPq : P.IsQuasicoherent)\n    (Q : ModuleCat.{u} Γ(X, ⊤)) (hQ : Module.FinitePresentation Γ(X, ⊤) Q)\n    (e : Nonempty ((ModuleCat.extendScalars g.appTop.hom).obj Q ≅\n      ModuleCat.of Γ(Y, ⊤) Γ(P, ⊤))) :\n    ∃ N : X.Modules, N.IsFinitePresentation ∧ N.IsQuasicoherent ∧\n      Nonempty ((Scheme.Modules.pullback g).obj N ≅ P)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T130351-L-3952794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261013T130351-L-3952794",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
