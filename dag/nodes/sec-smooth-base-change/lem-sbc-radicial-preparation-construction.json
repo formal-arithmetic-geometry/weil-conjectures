@@ -18,36 +18,39 @@
  ],
  "proof": [
   {
-   "text": "Factor through V, reduce source and base, and use the generic point to make the reduced affine base integral. Reduction maps are universal homeomorphisms.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "Apply generic flat finite presentation and choose a principal open, lifting its defining element across the base reduction. The affine reduced flat source ring embeds in its generic ring, a domain.",
+   "text": "Geometric irreducibility gives a nonempty generic fibre, hence eta lies in V. Apply reduced flat affine preparation to obtain U, S0, Z and the universal homeomorphism h0 onto the original pullback.",
    "uses": [
-    "lem-sbc-generic-flat-finite-presentation"
+    "lem-sbc-reduced-flat-affine-preparation"
    ],
    "elementary": false
   },
   {
-   "text": "For the generic fraction fields K and L, use Tag 0559 to choose a finite purely inseparable K′/K making the reduced tensor field separably generated. Scale generators b with b^q=a/d to db and form their finite radicial A-subalgebra A′. Its spectrum is integral affine and universally homeomorphic to the reduced base. In characteristic zero use K′=K.",
-   "uses": [],
+   "text": "Use universal-homeomorphism fibre comparison to transfer geometric irreducibility to the generic fibre of the reduced flat family over S0. Apply radicial reduced flat generic fibre construction to obtain S and q1, and geometric reducedness of the canonical reduced pullback.",
+   "uses": [
+    "lem-sbc-radicial-preparation-fibre-comparison",
+    "lem-sbc-radicial-reduced-flat-generic-fibre"
+   ],
    "elementary": false
   },
   {
-   "text": "Take Y to be the reduction of X×_T S and h its canonical map; set g=h followed by projection. Reduction is a universal homeomorphism. Localization commutes with reduction; the generic ring embeds in the separably generated reduced tensor field, so is geometrically reduced. Lift the generic point along q. Affineness and local finite type are preserved by pullback and closed immersion.",
-   "uses": [],
+   "text": "Set Y to the actual reduction of Z times_S0 S; its reduction map a is a universal homeomorphism. The pullback of h0 is a universal homeomorphism. Compose a with it and the two pullback pasting isomorphisms to construct h:Y to X times_T S. The projection identities prove h followed by the second projection equals g. Composition gives q=q1 followed by q0 and the generic-point equalities compose. Affineness, reducedness and local finite type follow from the reduction construction and base-change instances.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sbc-generic-flat-finite-presentation"
+  "lem-sbc-reduced-flat-affine-preparation",
+  "lem-sbc-radicial-reduced-flat-generic-fibre",
+  "lem-sbc-radicial-preparation-fibre-comparison",
+  "lem-weil-pbc-reduction-universal-homeomorphism"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 0559, second proof; Lemma 37.27.2 and Tag 04DF for fibre comparison",
-  "note": "J2 second reading repaired the missing relation between Y and the original family. The fibre comparison is proved; only the construction remains sorry."
+  "place": "Tag 0559, second proof",
+  "note": "The construction is assembled from the two new intermediate construction statements and the existing fibre-comparison and reduction universal-homeomorphism declarations."
  },
  "mathlib_searches": [
   {
@@ -145,9 +148,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T111856-L-3053914",
+  "landing": "20261013T122229-L-3591345",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
