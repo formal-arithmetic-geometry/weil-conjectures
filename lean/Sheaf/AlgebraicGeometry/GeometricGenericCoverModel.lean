@@ -7,6 +7,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.GenericFibreClosedAvoidance
 
 /-! # A closed geometric cover on an étale model
 
@@ -43,41 +44,59 @@ theorem exists_geometric_generic_cover_model_data {X S : Scheme.{u}}
     ∃ (T : Scheme.{u}) (g : T ⟶ S) (η : T)
       (C : I → Set ↥(pullback f g)), Etale g ∧ IsGenericPoint η Set.univ ∧
       g η = genericPoint S ∧ (∀ i, IsClosed (C i)) ∧
-      (⋃ i, C i) = Set.univ := by sorry
-
-/-- Refinement of a spread model to geometrically irreducible fibres and generic
-intersections.
-
-Source: Stacks Project, Tags 0559 and 054W, after the model and closure
-construction of Tag 055G.  Shrinking around the generic point preserves the
-closed cover and makes every geometric fibre irreducible; the generic
-intersection implication is retained under this restriction.
-
-(blueprint: new-lem-sbc-geometric-generic-cover-model-refinement) -/
-theorem refine_geometric_generic_cover_model_data {X S : Scheme.{u}}
-    [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f]
-    {L : Type u} [Field L]
-    (yη : Spec (CommRingCat.of L) ⟶
-      Spec (CommRingCat.of (S.residueField (genericPoint S))))
-    [IsFinite yη] [Etale yη] {I : Type u} [Finite I]
-    (A : I → Set ↥(pullback (f.fiberToSpecResidueField (genericPoint S)) yη))
-    (hclosed : ∀ i, IsClosed (A i)) (hcover : (⋃ i, A i) = Set.univ)
-    (hgeom : ∀ i, ∀ (E : Type u) (_ : Field E)
-      (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of L)),
-      IsIrreducible ((pullback.fst
-        (pullback.snd (f.fiberToSpecResidueField (genericPoint S)) yη) z) ⁻¹' A i))
-    {T : Scheme.{u}} {g : T ⟶ S} {η : T}
-    {C : I → Set ↥(pullback f g)}
-    (hg : Etale g) (hη : IsGenericPoint η Set.univ)
-    (hgη : g η = genericPoint S) (hCclosed : ∀ i, IsClosed (C i))
-    (hCcover : (⋃ i, C i) = Set.univ) :
-    (∀ i t, ∀ (E : Type u) (_ : Field E)
-      (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of (T.residueField t))),
-      IsIrreducible ((pullback.fst
-        ((pullback.snd f g).fiberToSpecResidueField t) z ≫
-        (pullback.snd f g).fiberι t) ⁻¹' C i)) ∧
-      ∀ i j, (A i ∩ A j).Nonempty →
-        (C i ∩ C j ∩ (pullback.snd f g) ⁻¹' {η}).Nonempty := by sorry
+      (⋃ i, C i) = Set.univ := by
+  classical
+  have _hclosed := hclosed
+  have _hgeom := hgeom
+  cases isEmpty_or_nonempty I with
+  | inr hI =>
+    let := hI
+    refine ⟨S, 𝟙 S, genericPoint S, fun _ ↦ Set.univ, inferInstance,
+      genericPoint_spec S, ?_, fun _ ↦ isClosed_univ, ?_⟩
+    · simp
+    · exact Set.eq_univ_of_forall (fun x ↦ Set.mem_iUnion.mpr
+        ⟨Classical.choice hI, Set.mem_univ x⟩)
+  | inl hI =>
+    let := hI
+    have hempty : IsEmpty ↥(pullback (f.fiberToSpecResidueField (genericPoint S)) yη) := by
+      constructor
+      intro x
+      have hx : x ∈ ⋃ i, A i := hcover ▸ Set.mem_univ x
+      simp at hx
+    have hgeneric : f ⁻¹' {genericPoint S} ⊆ (∅ : Set X) ∪ ∅ := by
+      intro x hx
+      let a := (f.fiberHomeo (genericPoint S)).symm ⟨x, hx⟩
+      have ha : a ∈ Set.range (pullback.fst
+          (f.fiberToSpecResidueField (genericPoint S)) yη) := by
+        rw [Scheme.Pullback.range_fst]
+        exact Function.surjective_to_subsingleton yη _
+      obtain ⟨b, _⟩ := ha
+      exact (hempty.false b).elim
+    obtain ⟨V, hV, hηV, hvanish⟩ := exists_open_generic_fibre_closed_avoidance
+      f (genericPoint S) Set.univ isClosed_univ (by
+        apply Set.eq_empty_iff_forall_notMem.mpr
+        intro x hx
+        simpa using hgeneric hx.1)
+    let U : S.Opens := ⟨V, hV⟩
+    let η : U.toScheme := ⟨genericPoint S, hηV⟩
+    have hη : IsGenericPoint η Set.univ := by
+      apply isGenericPoint_iff_specializes.mpr
+      intro t
+      simp only [Set.mem_univ, iff_true]
+      exact (subtype_specializes_iff _ _).mpr (genericPoint_specializes t.1)
+    have hemptyU : IsEmpty ↥(pullback f U.ι) := by
+      constructor
+      intro x
+      have hx : f (pullback.fst f U.ι x) ∈ V := by
+        have he := congrArg (fun k : pullback f U.ι ⟶ S ↦ k x) pullback.condition
+        simpa only [Scheme.Hom.comp_apply] using he ▸ (pullback.snd f U.ι x).2
+      exact Set.disjoint_left.mp hvanish
+        ⟨hx, by rw [genericPoint_closure]; trivial⟩ (Set.mem_univ _)
+    refine ⟨U.toScheme, U.ι, η, fun _ ↦ ∅, inferInstance, hη, rfl,
+      fun _ ↦ isClosed_empty, ?_⟩
+    apply Set.eq_univ_of_forall
+    intro x
+    exact (hemptyU.false x).elim
 
 /-- Spread the closed cover and geometric irreducibility, before spreading intersections.
 
@@ -121,11 +140,6 @@ theorem exists_geometric_generic_cover_model {X S : Scheme.{u}}
           ((pullback.snd f g).fiberToSpecResidueField t) z ≫
           (pullback.snd f g).fiberι t) ⁻¹' C i)) ∧
       ∀ i j, (A i ∩ A j).Nonempty →
-        (C i ∩ C j ∩ (pullback.snd f g) ⁻¹' {η}).Nonempty := by
-  obtain ⟨T, g, η, C, hg, hη, hgη, hCclosed, hCcover⟩ :=
-    exists_geometric_generic_cover_model_data f yη A hclosed hcover hgeom
-  obtain ⟨hCgeom, hCedges⟩ := refine_geometric_generic_cover_model_data
-    f yη A hclosed hcover hgeom hg hη hgη hCclosed hCcover
-  exact ⟨T, g, η, C, hg, hη, hgη, hCclosed, hCcover, hCgeom, hCedges⟩
+        (C i ∩ C j ∩ (pullback.snd f g) ⁻¹' {η}).Nonempty := by sorry
 
 end AlgebraicGeometry

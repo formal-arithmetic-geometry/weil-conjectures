@@ -9,7 +9,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 055G; strict decomposition of the model construction."
+  "place": "Tag 054W; existing closed-avoidance theorem proved via Tag 02JQ; elementary identity-model shortcut for nonempty I. The conclusion has no generic-fibre compatibility requirement."
  },
  "mathlib_searches": [
   {
@@ -65,12 +65,31 @@
  "statement": "The model-data existence assertion used in the proof of lem-sbc-geometric-generic-cover-model.",
  "proof": [
   {
-   "text": "This is the corresponding construction step in the cited Stacks argument; the theorem is isolated as a strict intermediate assertion so the main theorem combines two independent parts.",
+   "text": "If I is nonempty, take T = S, g the identity, eta its generic point and every C_i the entire pullback. This is an etale model and a finite closed cover. The stated conclusion asks for no compatibility with A.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If I is empty, the supplied covering identity forces the geometric generic fibre to be empty. The projection from its base change along y_eta is surjective because Spec L is nonempty and the spectrum of the residue field is a singleton. Hence the original generic fibre is empty, using Scheme.Pullback.range_fst and f.fiberHomeo.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_open_generic_fibre_closed_avoidance to f at the generic point with the closed subset equal to the entire source. Its generic fibre is empty by the preceding step. Since the closure of the generic point is S, the resulting open V contains that point and has empty inverse image. The avoidance theorem is already proved without sorry by the quasi-compact image specialization theorem (Tag 02JQ).",
+   "uses": [
+    "lem-sbc-generic-fibre-closed-avoidance"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Take T to be the open subscheme V, g its inclusion, eta the original generic point viewed in V, and the empty family of closed subsets. Specialization in the subtype proves eta is generic. The pullback is empty by the pullback commutative square, so the empty family covers it.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-generic-fibre-closed-avoidance"
+ ],
  "lean": {
   "existing": false,
   "module": "Sheaf.AlgebraicGeometry.GeometricGenericCoverModel",
@@ -94,11 +113,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V4",
+  "reviewer": "X-71740",
+  "group": "W4",
   "result": "pass",
-  "landing": "20261013T011937-L-2766808",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T025312-L-3426067",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered signatures and node metadata match the recorded repair; module and sole direct importer compile cleanly; model-data proof uses only permitted axioms; main theorem remains a documented named sorry."
  }
 }
