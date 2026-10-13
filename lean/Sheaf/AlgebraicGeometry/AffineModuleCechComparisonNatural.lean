@@ -8,7 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
 import Sheaf.Paper.CechComparisonMapNaturality
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-! # Naturality of the affine-cover Čech comparison isomorphisms
 
@@ -51,6 +50,22 @@ theorem moduleCechComparison_natural_affine (X : Scheme.{u}) {ι : Type u}
           ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map φ.val)) p ≫
           e'.hom =
         (RingedSpace.moduleCohomology X.toRingedSpace p).map φ := by
-  sorry
+  classical
+  obtain ⟨hexists, hnatural⟩ := (cechComparisonMapNaturality X U hcover).2 p
+  choose c hc using hexists
+  let cF := c F
+  let cF' := c F'
+  have hF : IsIso cF := moduleCechComparison_isIso_of_affine X U hU hcover F p cF (hc F)
+  have hF' : IsIso cF' :=
+    moduleCechComparison_isIso_of_affine X U hU hcover F' p cF' (hc F')
+  let e : ((CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat).homology p ≅
+      (RingedSpace.moduleCohomology X.toRingedSpace p).obj F := asIso cF
+  let e' : ((CategoryTheory.cechComplexFunctor U).obj F'.presheafModuleCat).homology p ≅
+      (RingedSpace.moduleCohomology X.toRingedSpace p).obj F' := asIso cF'
+  refine ⟨e, e', hc F, hc F', ?_⟩
+  have hn := hnatural F F' φ cF cF' (hc F) (hc F')
+  change inv cF ≫ _ ≫ cF' = _
+  have hn' := congrArg (fun k => inv cF ≫ k) hn
+  simpa only [Category.assoc, IsIso.inv_hom_id_assoc] using hn'
 
 end AlgebraicGeometry.Scheme.Modules

@@ -37,10 +37,9 @@
    }
   },
   {
-   "text": "Under the affine-intersection and quasi-coherence hypotheses, [lem-sc-cech-comparison-map-iso-affine] says that the canonical comparison maps $c_{\\mathcal F}$ and $c_{\\mathcal F'}$ of [lem-sc-cech-comparison-map-naturality] are isomorphisms and are the identifications $\\check H^p(\\mathcal U,\\mathcal F)\\cong H^p(X,\\mathcal F)$ and $\\check H^p(\\mathcal U,\\mathcal F')\\cong H^p(X,\\mathcal F')$ of [lem-pc-cech-computes]. The commuting square of Step 1, $c_{\\mathcal F'}\\circ\\check H^p(\\mathcal U,\\varphi)=H^p(X,\\varphi)\\circ c_{\\mathcal F}$, then gives $c_{\\mathcal F'}\\circ\\check H^p(\\mathcal U,\\varphi)\\circ c_{\\mathcal F}^{-1}=H^p(X,\\varphi)$, which is exactly that the Cech map induced by $\\varphi$ is carried to $H^p(X,\\varphi)$.",
+   "text": "Under the affine-intersection and quasi-coherence hypotheses, [lem-sc-cech-comparison-map-iso-affine] makes each canonical comparison supplied by [lem-sc-cech-comparison-map-naturality] invertible. Package the two comparisons as isomorphisms, retaining their IsModuleCechComparison properties. Precompose the naturality square with the inverse of the source comparison; associativity and inverse cancellation give precisely the stated conjugation formula. No separate application of the abstract Cech-computes theorem is needed.",
    "uses": [
     "lem-sc-cech-comparison-map-iso-affine",
-    "lem-pc-cech-computes",
     "lem-sc-cech-comparison-map-naturality"
    ],
    "elementary": false,
@@ -51,7 +50,6 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-cech-computes",
   "lem-sc-cech-comparison-map-iso-affine",
   "lem-sc-cech-comparison-map-naturality"
  ],
@@ -139,5 +137,15 @@
   "group": "K1",
   "result": "fix",
   "note": "R-ccn: H5 fixed (moduleCechComparison took inv of a sorried IsIso; now the predicate IsModuleCechComparison, for every injective resolution c ≫ isoRightDerivedObj.hom ≫ H(alpha) = H(beta)); second spelling moduleCechFunctor dropped for the source's (cechComplexFunctor U).obj F.presheafModuleCat; re-pointed lem-pc-cech-computes record reverted and its module left out; upstream 7d675a263 and Mathlib have no canonical Cech-to-cohomology map (only Nonempty isos); reverted the delivery's change of existing node(s) lem-pc-cech-computes (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T005900-L-2608388",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
