@@ -1,0 +1,142 @@
+{
+ "id": "lem-sbc-punctured-injective-restriction-exact",
+ "kind": "statement",
+ "title": "Kernel and surjectivity of restriction of a single injective module",
+ "statement": "Let R be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], W an open of Spec R whose points are exactly those different from the closed point [def-weil-pbc-scheme-conventions], and M an injective R-module. The kernel of the concrete map tilde.toOpen M W is Ideal.primaryComponent M m, the submodule of elements killed by some power of m [def-sbc-ideal-power-torsion-functor], where m is the maximal ideal. The same map is surjective.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09T2, Lemma 36.8.1; Tag 0A6T, proof of Lemma 51.2.1 (principal open covering and localization)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-ideal-power-torsion-functor"
+ ],
+ "proof": [
+  {
+   "text": "A prime containing m equals m, hence W is the union of the principal opens of a finite generating set f_i of m. Noetherianity gives this finite set.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Vanishing on each D(f_i) is equivalent to some f_i^e_i annihilating the element, by the localization model tilde.toOpen. Increase all e_i to be positive; every monomial of total degree sum e_i contains a factor f_i^e_i, so that power of m kills the element. The converse follows from localization. This identifies the kernel with Ideal.primaryComponent. For an empty family m=0, m^1 kills everything and W is empty.",
+   "uses": [
+    "def-sbc-ideal-power-torsion-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact equivalence between modules and quasi-coherent sheaves on an affine scheme preserves injectivity. Tag 09T2 makes the associated sheaf of M flasque; restrict its global sections to W. The global sections identify with M by tilde.isoTop, and the restriction is tilde.toOpen M W, proving surjectivity.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-power-torsion-functor",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09T2, Lemma 36.8.1; Tag 0A6T, proof of Lemma 51.2.1 (principal open covering and localization); assembly written by T4 from the concrete Mathlib APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of an open punctured affine scheme computed by sections of the sheaf associated to a module injective resolution",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.injective_germ_basicOpen, CategoryTheory.Sheaf.instAddCommGroupH, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.toOpen",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.tilde.toOpen, AlgebraicGeometry.tilde.isIso_toOpen_top, AlgebraicGeometry.tilde.isoTop_hom, AlgebraicGeometry.tilde.toOpen_res, AlgebraicGeometry.tilde.instAwayCarrierCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecModuleCatPresheafModulesSheafModulesSpecToSheafOpBasicOpenHomToOpen, AlgebraicGeometry.tilde.toOpen_res_assoc, AlgebraicGeometry.tilde.toOpen_map_app, AlgebraicGeometry.tilde.toOpen_map_app_assoc",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "grep",
+   "query": "flasque|Flasque|tilde.*Injective",
+   "date": "2026-10-14",
+   "results": "Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "injective module associated sheaf flasque cohomology on open affine",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.functor|toOpen_map_app|moduleCat_exact_iff_range_eq_ker",
+   "date": "2026-10-14",
+   "results": "Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveQuotientCohomology",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-three puncture computation: Kernel and surjectivity of restriction of a single injective module",
+   "via": [
+    "lem-sbc-punctured-injective-quotient-cohomology",
+    "lem-sbc-punctured-h-one-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveRestrictionExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedInjectiveRestrictionExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.injective_punctured_restriction_exact",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.injective_punctured_restriction_exact"
+  ],
+  "statement": "theorem injective_punctured_restriction_exact\n    (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (W : (Spec (.of R)).Opens)\n    (hW : ∀ x : Spec (.of R), x ∈ W ↔ x ≠ IsLocalRing.closedPoint R)\n    (M : ModuleCat.{u} R) [Injective M] :\n    (tilde.toOpen M W).hom.ker = Ideal.primaryComponent M (IsLocalRing.maximalIdeal R) ∧\n      Function.Surjective (tilde.toOpen M W)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476302",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

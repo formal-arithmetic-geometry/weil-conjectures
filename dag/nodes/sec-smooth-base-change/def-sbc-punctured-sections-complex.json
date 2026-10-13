@@ -1,0 +1,124 @@
+{
+ "id": "def-sbc-punctured-sections-complex",
+ "kind": "definition",
+ "title": "Concrete complex of sections of associated module sheaves",
+ "statement": "Let R be a commutative ring and W an open of Spec R [def-weil-pbc-scheme-conventions]. Define T_W:ModuleCat R -> ModuleCat R by associating Mathlib tilde M to a module M, forgetting to its sheaf of R-modules with modulesSpecToSheaf, and evaluating at W. It acts on morphisms by evaluation of tilde.map. For a nonnegative cochain complex K, define C_W(K) degreewise by this functor and its mapped differentials. The maps tilde.toOpen give a natural cochain map K -> C_W(K). All objects, maps and differentials are explicit constructions, with no existence choice.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09T2; associated sheaves and their sections, using Mathlib Modules.Tilde"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Compose the existing tilde, forgetful and evaluation functors. The composite preserves zero maps by tilde.map_zero. Apply mapHomologicalComplex. The components tilde.toOpen commute with differentials by tilde.toOpen_map_app, giving the restriction cochain map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09T2; associated sheaves and their sections, using Mathlib Modules.Tilde; assembly written by T4 from the concrete Mathlib APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of an open punctured affine scheme computed by sections of the sheaf associated to a module injective resolution",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.injective_germ_basicOpen, CategoryTheory.Sheaf.instAddCommGroupH, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.toOpen",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.tilde.toOpen, AlgebraicGeometry.tilde.isIso_toOpen_top, AlgebraicGeometry.tilde.isoTop_hom, AlgebraicGeometry.tilde.toOpen_res, AlgebraicGeometry.tilde.instAwayCarrierCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecModuleCatPresheafModulesSheafModulesSpecToSheafOpBasicOpenHomToOpen, AlgebraicGeometry.tilde.toOpen_res_assoc, AlgebraicGeometry.tilde.toOpen_map_app, AlgebraicGeometry.tilde.toOpen_map_app_assoc",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "grep",
+   "query": "flasque|Flasque|tilde.*Injective",
+   "date": "2026-10-14",
+   "results": "Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "injective module associated sheaf flasque cohomology on open affine",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.functor|toOpen_map_app|moduleCat_exact_iff_range_eq_ker",
+   "date": "2026-10-14",
+   "results": "Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveQuotientCohomology",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-three puncture computation: Concrete complex of sections of associated module sheaves",
+   "via": [
+    "lem-sbc-punctured-injective-quotient-cohomology",
+    "lem-sbc-punctured-h-one-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedSectionsComplex.lean",
+  "declaration": "AlgebraicGeometry.Scheme.puncturedSectionsComplex",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.puncturedSectionsFunctor",
+   "AlgebraicGeometry.Scheme.puncturedSectionsFunctor_preservesZeroMorphisms",
+   "AlgebraicGeometry.Scheme.puncturedSectionsComplex",
+   "AlgebraicGeometry.Scheme.puncturedSectionsRestriction"
+  ],
+  "statement": "def puncturedSectionsComplex (R : Type u) [CommRing R] (W : (Spec (.of R)).Opens)\n    (K : CochainComplex (ModuleCat.{u} R) ℕ) : CochainComplex (ModuleCat.{u} R) ℕ",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476302",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

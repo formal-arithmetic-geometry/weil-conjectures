@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Sheaf.Algebra.Homology.IdealPowerTorsionCocomplexInclusion
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedFlasqueResolutionCohomology
+import Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsTorsionQuotient
 
 /-! # Computing puncture cohomology by the quotient of an injective resolution
 
@@ -55,6 +57,10 @@ theorem nonempty_punctured_h_addEquiv_injective_quotient
     Nonempty (Modules.H (X := W.toScheme)
       (SheafOfModules.unit W.toScheme.ringCatSheaf) n ≃+
       ((cokernel (ModuleCat.idealPowerTorsionCocomplexι
-        (IsLocalRing.maximalIdeal R) I.cocomplex)).homology n).carrier) := by sorry
+        (IsLocalRing.maximalIdeal R) I.cocomplex)).homology n).carrier) := by
+  obtain ⟨e⟩ := nonempty_open_h_addEquiv_injective_sections R W I n
+  obtain ⟨q⟩ := nonempty_injective_quotient_iso_punctured_sections R W hW I
+  let h := (HomologicalComplex.homologyFunctor (ModuleCat.{u} R) (ComplexShape.up ℕ) n).mapIso q
+  exact ⟨e.trans h.symm.toLinearEquiv.toAddEquiv⟩
 
 end AlgebraicGeometry.Scheme

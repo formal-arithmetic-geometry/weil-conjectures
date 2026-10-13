@@ -1,0 +1,141 @@
+{
+ "id": "lem-sbc-punctured-sections-torsion-quotient",
+ "kind": "statement",
+ "title": "Chain-level torsion quotient equals the punctured sections complex",
+ "statement": "Let R be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], W the open complement of its closed point in Spec R [def-weil-pbc-scheme-conventions], and I any injective resolution of R. There is an isomorphism of nonnegative cochain complexes between the cokernel of the explicit torsion inclusion Gamma_m(I) -> I [def-sbc-ideal-power-torsion-cocomplex-inclusion] and C_W(I) [def-sbc-punctured-sections-complex]. This statement compares complexes, and does not assert any sheaf cohomology comparison.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09T2, 0A6T and 0BK0"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-ideal-power-torsion-cocomplex-inclusion",
+  "def-sbc-punctured-sections-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete restriction cochain map r:I -> C_W(I). In every degree, the injective restriction lemma identifies ker(r_k) with Gamma_m(I_k) and gives surjectivity. This makes the composite of the torsion inclusion with r zero.",
+   "uses": [
+    "lem-sbc-punctured-injective-restriction-exact",
+    "def-sbc-punctured-sections-complex",
+    "def-sbc-ideal-power-torsion-cocomplex-inclusion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The degreewise sequence is short exact: the range of the subtype map equals its submodule, the kernel is that submodule, the subtype map is monic and r_k is epic. Mathlib shortExact_of_degreewise_shortExact gives short exactness of complexes. Therefore r exhibits C_W(I) as the cokernel of the torsion inclusion. Uniqueness of colimits supplies the claimed isomorphism.",
+   "uses": [
+    "lem-sbc-punctured-injective-restriction-exact",
+    "def-sbc-punctured-sections-complex",
+    "def-sbc-ideal-power-torsion-cocomplex-inclusion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-power-torsion-cocomplex-inclusion",
+  "def-sbc-punctured-sections-complex",
+  "lem-sbc-punctured-injective-restriction-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 09T2, 0A6T and 0BK0; assembly written by T4 from the concrete Mathlib APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of an open punctured affine scheme computed by sections of the sheaf associated to a module injective resolution",
+   "date": "2026-10-14",
+   "results": "CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.injective_germ_basicOpen, CategoryTheory.Sheaf.instAddCommGroupH, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde.toOpen",
+   "date": "2026-10-14",
+   "results": "AlgebraicGeometry.tilde.toOpen, AlgebraicGeometry.tilde.isIso_toOpen_top, AlgebraicGeometry.tilde.isoTop_hom, AlgebraicGeometry.tilde.toOpen_res, AlgebraicGeometry.tilde.instAwayCarrierCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecModuleCatPresheafModulesSheafModulesSpecToSheafOpBasicOpenHomToOpen, AlgebraicGeometry.tilde.toOpen_res_assoc, AlgebraicGeometry.tilde.toOpen_map_app, AlgebraicGeometry.tilde.toOpen_map_app_assoc",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "grep",
+   "query": "flasque|Flasque|tilde.*Injective",
+   "date": "2026-10-14",
+   "results": "Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "injective module associated sheaf flasque cohomology on open affine",
+   "date": "2026-10-14",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.functor|toOpen_map_app|moduleCat_exact_iff_range_eq_ker",
+   "date": "2026-10-14",
+   "results": "Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean",
+   "verdict": "General sheaf, localization, and exactness APIs; no complete puncture comparison. Use the concrete tilde and evaluation functors for the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedInjectiveQuotientCohomology",
+  "date": "2026-10-14",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Depth-three puncture computation: Chain-level torsion quotient equals the punctured sections complex",
+   "via": [
+    "lem-sbc-punctured-injective-quotient-cohomology",
+    "lem-sbc-punctured-h-one-derived-torsion",
+    "lem-sbc-depth-three-puncture-h-one-comparison",
+    "lem-sbc-depth-three-puncture-h-one",
+    "lem-sbc-punctured-principal-eventual-scalar-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedSectionsTorsionQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedSectionsTorsionQuotient.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_injective_quotient_iso_punctured_sections",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.nonempty_injective_quotient_iso_punctured_sections"
+  ],
+  "statement": "theorem nonempty_injective_quotient_iso_punctured_sections\n    (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (W : (Spec (.of R)).Opens)\n    (hW : ∀ x : Spec (.of R), x ∈ W ↔ x ≠ IsLocalRing.closedPoint R)\n    (I : InjectiveResolution (ModuleCat.of R R : ModuleCat.{u} R)) :\n    Nonempty (cokernel (ModuleCat.idealPowerTorsionCocomplexι\n        (IsLocalRing.maximalIdeal R) I.cocomplex) ≅\n      puncturedSectionsComplex R W I.cocomplex)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476302",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T224522-L-1476302",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
