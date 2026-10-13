@@ -10,9 +10,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.RingTheory.Depth
 
-public import Mathlib.Algebra.Category.ModuleCat.Stalk
-
 public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
+import Sheaf.RingTheory.DepthOneOfMaximalNotAssociated
+import Sheaf.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated
 
 /-! # Positive depth of finite boundary submodules
 
@@ -60,6 +60,16 @@ theorem depth_one_affine_boundary_submodule
     ∃ hfinite : Module.Finite (Localization.AtPrime p) (LocalizedModule.AtPrime p S),
       letI := hfinite
       (1 : ℕ∞) ≤ IsLocalRing.depth (R := Localization.AtPrime p)
-        (LocalizedModule.AtPrime p S) := by sorry
+        (LocalizedModule.AtPrime p S) := by
+  classical
+  let R := L.presheaf.obj (op V)
+  have : IsNoetherianRing R :=
+    IsLocallyNoetherian.component_noetherian ⟨V, hV⟩
+  have : Module.Finite R S := Module.Finite.of_fg hS
+  have hfinite : Module.Finite (Localization.AtPrime p)
+      (LocalizedModule.AtPrime p S) := inferInstance
+  refine ⟨hfinite, ?_⟩
+  exact depth_one_of_finite_localized_module_of_no_maximal_associated
+    (boundary_maximal_not_associated U N hqc V hV S hS p hy)
 
 end AlgebraicGeometry.Scheme

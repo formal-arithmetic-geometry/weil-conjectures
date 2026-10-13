@@ -1,0 +1,125 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "The Noetherian affine V makes U intersect V quasi-compact; choose a finite cover by basic opens D(f_i) inside U intersect V. Each f_i belongs to p because y lies outside U. The direct image is quasi-coherent by the qcqs pushforward theorem. Its affine module P therefore localizes on basic opens. Restriction from P to the product of the P[1/f_i] is injective by sheaf separatedness on U intersect V.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-affine-module-basic-open-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization is exact and commutes with finite products, so P_p injects into the product of (P[1/f_i])_p. An element killed by pR_p has zero image in each factor, since f_i lies in p and is invertible in that factor. Hence it is zero. The localized inclusion S_p into P_p is injective, so the same is true in S_p. In particular pR_p is not associated to S_p.",
+   "uses": [
+    "lem-weil-pbc-associated-prime-submodule"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-associated-prime-submodule",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "T4",
+  "document": "Stacks Project",
+  "place": "Tag 0AVN, finite basic-open argument; Tags 01LC and 05AM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "weaklyAssociated|associatedPrimes.*(restrict|push)|boundary_maximal",
+   "results": "[]",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact public statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weakly associated points of pushforward by open immersion are inside the open subset",
+   "results": "['AlgebraicGeometry.Scheme.Hom.apply_mem_image_iff', 'AlgebraicGeometry.Scheme.Hom.map_mem_image_iff', 'AlgebraicGeometry.Scheme.Hom.image_le_image_iff', 'AlgebraicGeometry.Scheme.image_zeroLocus', 'AlgebraicGeometry.Scheme.Hom.image_le_opensRange', 'AlgebraicGeometry.Scheme.Hom.mem_opensRange', 'AlgebraicGeometry.Scheme.Hom.image_preimage_le', 'AlgebraicGeometry.Scheme.Hom.image_le_image_of_le']",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact public statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, Function.Injective",
+   "results": "['associatedPrimes.subset_of_injective', 'associatedPrimes.subset_union_of_exact']",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact public statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The direct image of a quasicoherent module under a quasi compact open immersion has no associated point outside its image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoAffineBoundarySubmoduleDepth",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-restriction-boundary-submodule-depth",
+   "place": "proof steps 1 and 2: finite basic-open injection and associated-prime exclusion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "id": "stage3-boundary-maximal-not-associated",
+ "title": "boundary localized submodule has no maximal associated prime",
+ "statement": "Let $L$ be a locally Noetherian scheme [def-weil-pbc-scheme-conventions, def-weil-pbc-noetherian-ring], $U$ an open subscheme, $N$ a quasi-coherent module [pqf-def-coherent], and $V$ an affine open. Write $R=\\mathcal O_L(V)$ and $P=(j_*(N|_U))(V)$ for $j:U\\hookrightarrow L$. Let $S\\subseteq P$ be a finitely generated $R$-submodule [def-weil-finitely-generated-module] and $p$ a prime ideal of $R$. Set $y=h_V.\\mathrm{fromSpec}(p)$, the corresponding point of $V$. If $y\\notin U$, then the maximal ideal of R_p is not in the associated primes of S_p.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.BoundaryMaximalNotAssociated",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/BoundaryMaximalNotAssociated.lean",
+  "declaration": "AlgebraicGeometry.Scheme.boundary_maximal_not_associated",
+  "statement": "theorem boundary_maximal_not_associated\n    {L : Scheme.{u}} [IsLocallyNoetherian L] (U : L.Opens) (N : L.Modules)\n    (hqc : N.IsQuasicoherent) (V : L.Opens) (hV : IsAffineOpen V)\n    (S : Submodule (L.presheaf.obj (op V))\n      (((Modules.pushforward U.ι).obj\n        ((Modules.restrictFunctor U.ι).obj N)).val.obj (op V)))\n    (hS : S.FG) (p : Ideal (L.presheaf.obj (op V))) [p.IsPrime]\n    (hy : hV.fromSpec ⟨p, inferInstance⟩ ∉ U) :\n    IsLocalRing.maximalIdeal (Localization.AtPrime p) ∉\n      associatedPrimes (Localization.AtPrime p) (LocalizedModule.AtPrime p S)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0AVN, finite basic-open argument; Tags 01LC and 05AM"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-0c7d7",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T123549-L-3712479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-0c7d7",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T123549-L-3712479",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with their DAG nodes and cited sources; all three modules, the sole direct importer, and axiom probes compile cleanly. Only the documented geometric hole contributes sorryAx."
+ }
+}

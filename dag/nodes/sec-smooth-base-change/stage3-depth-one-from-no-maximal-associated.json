@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "stmt_deps": [
+  "def-weil-pbc-depth",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "For a zero module the definition gives infinite depth. Otherwise use the maximal-not-associated regular-element theorem, and the Mathlib singleton weak-regularity and Nakayama regularity lemmas. The singleton has length one and witnesses the depth supremum.",
+   "uses": [
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "T4",
+  "document": "Stacks Project",
+  "place": "Tags 00LL and 00LI"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsRegular.of_isWeaklyRegular_of_mem_maximalIdeal",
+   "results": "['Mathlib/RingTheory/Regular/RegularSequence.lean']",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact public statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "injective scalar multiplication in maximal ideal gives singleton regular sequence and depth at least one",
+   "results": "['RingTheory.Sequence.isRegular_iff', 'IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal', 'RingTheory.Sequence.isWeaklyRegular_iff_Fin', 'RingTheory.Sequence.isWeaklyRegular_iff', 'RingTheory.Sequence.IsRegular.top_ne_smul', 'RingTheory.Sequence.isRegular_cons_iff', 'RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev', 'RingTheory.Sequence.isWeaklyRegular_cons_iff']",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact public statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSMulRegular",
+   "results": "['IsSMulRegular', 'IsLeftRegular.isSMulRegular', 'IsSMulRegular.all', 'IsSMulRegular.isLeftRegular', 'isLeftRegular_iff', 'IsRightRegular.isSMulRegular', 'IsSMulRegular.isRightRegular', 'isRightRegular_iff']",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact public statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite module over a local Noetherian ring has positive depth if its maximal ideal is not an associated prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.DepthTwoAffineBoundarySubmoduleDepth",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-affine-restriction-boundary-submodule-depth",
+   "place": "proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "id": "stage3-depth-one-from-no-maximal-associated",
+ "title": "positive depth from no maximal associated prime",
+ "statement": "Let R be a Noetherian [def-weil-pbc-noetherian-ring] local commutative ring and M a finite R-module [def-weil-finitely-generated-module]. If the maximal ideal of R is not an associated prime of M, then the depth of M [def-weil-pbc-depth] is at least one, including the zero module, whose depth is infinity.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DepthOneOfMaximalNotAssociated",
+  "file": "lean/Sheaf/RingTheory/DepthOneOfMaximalNotAssociated.lean",
+  "declaration": "AlgebraicGeometry.Scheme.depth_one_of_finite_localized_module_of_no_maximal_associated",
+  "statement": "theorem depth_one_of_finite_localized_module_of_no_maximal_associated\n    {R M : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    [AddCommGroup M] [Module R M] [Module.Finite R M]\n    (h : IsLocalRing.maximalIdeal R ∉ associatedPrimes R M) :\n    (1 : ℕ∞) ≤ IsLocalRing.depth (R := R) M",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 00LL and 00LI"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-0c7d7",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T123549-L-3712479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-0c7d7",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T123549-L-3712479",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with their DAG nodes and cited sources; all three modules, the sole direct importer, and axiom probes compile cleanly. Only the documented geometric hole contributes sorryAx."
+ }
+}
