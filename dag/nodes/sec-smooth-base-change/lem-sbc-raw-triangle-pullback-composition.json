@@ -15,30 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Normalize hy=b≫h and hx=a≫b≫h using the triangle equations. Expand both triangle pullbacks as rawTriangleMap and distribute the outer derived pullback over the inner factors.",
+   "text": "Substitute wy and wx to normalize hy=b≫h and hx=a≫b≫h. Use the proved private rawTriangleMap_comp calculation, stated over arbitrary categories, functors, single-comparison isomorphisms, and a shift-compatible composition isomorphism. Its statement preserves rawTriangleMap and comparison-isomorphism heads so that the concrete derived-category specialization does not normalize localized morphism projections.",
    "uses": [
     "sbc-lem-higher-image-raw-triangle-restriction"
    ],
    "elementary": true
   },
   {
-   "text": "Use naturality of the inverse single-functor comparison to move the inner source comparison to the left. Composition of the single comparisons and associativity of upperStarComp identify the two source factors with the composite source factor followed by upperStarPlusComp.hom. The already proved generic sourceComp calculation in AbelianRawPullbackComposition realizes this part over ModuleCat Λ.",
+   "text": "Instantiate sourceComp from AbelianRawPullbackComposition at ModuleCat Λ, h, b, a, and the free sheaf on U. This supplies exactly the source-factor equality required by rawTriangleMap_comp. sourceComp is already proved generically for Grothendieck abelian coefficient categories and uses inverse-single naturality, upperStarComp associativity, and the proved single-comparison composition calculations.",
    "uses": [
-    "lem-sbc-abelian-raw-pullback-composition",
-    "lem-sbc-pullback-single-comp"
+    "lem-sbc-abelian-raw-pullback-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Move upperStarPlusComp.hom through the arbitrary class by naturality. Its compatibility with shifts follows from the exact-functor derived natural-isomorphism and composition comparisons. The proved plusNatIso_commShift and plusCompIso_commShift helpers in AbelianDerivedDirectImageTransitionShift supply these compatibilities. Naturality of commShiftIso moves v through the outer shift factor; commShiftIso_comp_hom_app and NatTrans.shift_app_comm combine the shifts.",
+   "text": "Install NatTrans.CommShift for upperStarPlusComp.hom by composing the proved Functor.plusNatIso_commShift and Functor.plusCompIso_commShift instances from AbelianDerivedDirectImageTransitionShift. These apply to module sheaves and arbitrary bounded-below complexes.",
    "uses": [
-    "lem-sbc-abelian-derived-transition-shift",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "lem-sbc-abelian-derived-transition-shift"
    ],
    "elementary": false
   },
   {
-   "text": "Functoriality of the shift functor combines the remaining factors into shift of upperStarPlusComp.hom.app K ≫ D⁺(a*).map v ≫ w. Reassociate to obtain exactly the composite triangle pullback. This uses no single-complex presentation or invertibility of K,L,M,v,w.",
+   "text": "In the generic rawTriangleMap_comp proof, expand rawTriangleMap, distribute the outer functor over composition, move the inner coefficient map through the outer commShiftIso by naturality, and rewrite the source-factor equality. Naturality of the composition comparison at z replaces the iterated pullback by the composite pullback. NatTrans.shift_app_comm, expanded with commShiftIso_comp_hom_app, identifies the remaining shift factors. Functoriality of shift combines the coefficient maps. Instantiate with K,L,M,v,w,q,z; no single-complex presentation or invertibility of coefficient maps is assumed.",
    "uses": [],
    "elementary": true
   }
@@ -46,14 +44,12 @@
  "proof_deps": [
   "sbc-lem-higher-image-raw-triangle-restriction",
   "lem-sbc-abelian-raw-pullback-composition",
-  "lem-sbc-pullback-single-comp",
-  "lem-sbc-abelian-derived-transition-shift",
-  "lem-weil-pbc-exact-functor-derived-factorization"
+  "lem-sbc-abelian-derived-transition-shift"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project, Tags 03CB and 09Z1; proved library comparison calculations",
-  "place": "D4: source and shift parts of the original five-factor plan, using proved comparison tools; the arbitrary-derived-coefficient triangle identity remains to formalize."
+  "document": "Stacks Project, Tags 03CB and 09Z1; proved generic source and exact-functor shift comparison tools",
+  "place": "H4: implemented the four-factor source and arbitrary-coefficient shift composition calculation in Lean, preserving rawTriangleMap and isomorphism heads for bounded kernel checking."
  },
  "mathlib_searches": [
   {
@@ -129,10 +125,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D4",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T150350-L-809111",
-  "kind": "interface",
+  "landing": "20261013T155934-L-1302851",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
