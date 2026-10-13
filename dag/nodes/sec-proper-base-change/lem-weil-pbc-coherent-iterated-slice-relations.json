@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-coherent-iterated-slice-relations",
+ "kind": "statement",
+ "title": "Finite type coherent relations on an iterated open slice",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $U\\subseteq X$ open, and $\\mathcal G$ a coherent module [pqf-def-coherent] in the module category [def-weil-sheaf-of-modules-category]. Let $V=(W\\hookrightarrow U)$ be an object of the open slice, so $W\\subseteq U$ is open. For every finite set $I$ and morphism $f:((\\mathcal O_X|_U)|_V)^{\\oplus I}\\to (\\mathcal G|_U)|_V$ on the iterated slice, $\\ker f$ is of finite type.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Definition 01BV (definition-coherent), condition (2), applied to W; open-restriction convention in Lemma 01BY (lemma-coherent-abelian), proof of (2). Verified at https://stacks.math.columbia.edu/tag/01BV and /tag/01BY."
+ },
+ "stmt_deps": [
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Write V as W contained in U. Forgetting the intermediate inclusion into U identifies an object Z -> V of the iterated slice with Z -> W in the slice over W; the inverse inserts Z -> U. Because inclusions in the poset of opens are unique, these functors are inverse up to the canonical isomorphisms. Both sites have the same rings, restriction maps and covering sieves. The identification transports sheaves of modules, finite free modules and their maps.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a bijection I with ULift(Fin n), where n is the finite cardinality of I. Transport f to the resulting map from the rank-n free module to G restricted to W. The second clause of coherence at W makes its kernel finite type. Identify the kernels by their sectionwise universal properties. Pull back the finite local generator families along the site identification; the cover and epi conditions are unchanged because all section maps and covering sieves agree. Thus kernel f is finite type, including I empty or W empty.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Definition 01BV (definition-coherent), condition (2), applied to W; open-restriction convention in Lemma 01BY (lemma-coherent-abelian), proof of (2). Verified at https://stacks.math.columbia.edu/tag/01BV and /tag/01BY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a coherent module restricted to an iterated open slice has finite type kernels of maps from finite free sheaves",
+   "results": "Service returned Internal Server Error; msearch recorded UNAVAILABLE 0 hits.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaf finite type relations on iterated open slice",
+   "results": "Eight hits: Presentation.IsFinite, IsFiniteType, finite local generator data, finite presentation. No iterated coherent relation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel|IsFiniteType|iteratedSlice in Mathlib/Algebra/Category/ModuleCat/Sheaf/{Generators,Free,PushforwardContinuous}.lean",
+   "results": "Generators has finite generating data and maps of generating families, Free has freeFunctor, PushforwardContinuous has overFunctor. No theorem transporting coherent relations. Sites/Over.lean:578-597 gives continuous and cocontinuous iteratedSlice functors, but no finite type transport theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFiniteTypeKernelOver",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the coherent-module closure argument, extension relations; the extension relation argument, applying 01BY (2) on the open U; open-slice kernel argument, step 1: transporting finite free relations",
+   "via": [
+    "lem-weil-pbc-coherent-finite-type-kernel-over",
+    "lem-weil-pbc-coherent-extension-relations",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentIteratedSliceRelations",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIteratedSliceRelations.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.coherent_iterated_slice_relations",
+  "statement": "theorem coherent_iterated_slice_relations (X : RingedSpace.{u})\n    (U : Opens X) (G : SheafOfModules.{u} (moduleRings X))\n    (hG : IsCoherent X G) (V : Over U) (I : Type u) [Finite I]\n    (f : SheafOfModules.free (R := ((moduleRings X).over U).over V) I ⟶\n      (G.over U).over V) : (kernel f).IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T000049-L-2232653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T000049-L-2232653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

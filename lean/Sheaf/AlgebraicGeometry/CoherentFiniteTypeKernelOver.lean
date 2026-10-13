@@ -6,7 +6,8 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel
+import Sheaf.AlgebraicGeometry.CoherentIteratedSliceRelations
+import Sheaf.AlgebraicGeometry.FiniteTypeKernelLocalGenerators
 
 /-! # Finite type kernels into a coherent module on an open slice
 
@@ -35,12 +36,18 @@ composite into G is finite type by the relation condition. Each section of the
 kernel of φ lifts locally through this epimorphism, and its lift lies in L. Thus L
 maps epimorphically onto the kernel of φ. Images of finite type modules are finite
 type, so these local kernels are finite type; the neighborhoods cover U. This is
-the proof of coherent_finiteType_submodule_kernel (2) on the open slice, with no
+the local free relations and image argument of Lemma 01BY (2) on the slice, with no
 assumption on the behavior of F at the boundary of U. -/
 theorem coherent_finiteType_kernel_over (X : RingedSpace.{u})
     (U : Opens X) (G : SheafOfModules.{u} (moduleRings X))
     (F : SheafOfModules.{u} ((moduleRings X).over U))
     (φ : F ⟶ G.over U) (hF : F.IsFiniteType) (hG : IsCoherent X G) :
-    (kernel φ).IsFiniteType := by sorry
+    (kernel φ).IsFiniteType := by
+  obtain ⟨q, hq⟩ := hF.exists_localGeneratorsData
+  apply finiteType_kernel_local_generators X U φ q
+  intro i
+  have : (q.generators i).IsFiniteType := hq.isFiniteType i
+  exact coherent_iterated_slice_relations X U G hG (q.X i)
+    (q.generators i).I ((q.generators i).π ≫ φ.over (q.X i))
 
 end AlgebraicGeometry.RingedSpace

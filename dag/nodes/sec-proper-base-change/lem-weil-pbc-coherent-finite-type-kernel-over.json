@@ -13,30 +13,30 @@
  ],
  "proof": [
   {
-   "text": "The open slice has objects the opens V of X contained in U, with the same rings, restrictions and covering families. These are the opens of the open ringed space U. The induced identification of module categories preserves finite free sheaves, epimorphisms, kernels and local generating data, since all are defined by these same rings, maps and coverings. G restricted to U is coherent: restrict its local generators to intersections with U; a finite free map over any V contained in U has finite type kernel by the relation clause for G on X.",
+   "text": "Extract finite local generating data q for F from hF. For every i, the finite-type property of q.generators i supplies a finite index type. Compose its generating epimorphism with phi restricted to q.X i. Apply the iterated-slice coherent relation lemma to this finite free map into G restricted twice, obtaining a finite type kernel for each composite.",
    "uses": [
     "pqf-def-coherent",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-coherent-iterated-slice-relations"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Under this identification apply part (2) of the finite type submodule and kernel lemma on the ringed space U to F -> G restricted to U. For completeness, near each point choose a finite free epimorphism P -> F. Its composite into G has finite type kernel L by coherence. Local lifts of sections killed by phi lie in L, so L maps epimorphically to kernel phi. Its image is finite type. These neighborhoods cover U, proving the claimed finite type condition; transport the local generators back to the slice.",
+   "text": "Apply the local-generator kernel criterion to phi and q using these finite type composite kernels. It descends their quotient generators to the kernel of phi on U, proving the desired finite type condition.",
    "uses": [
-    "lem-weil-pbc-coherent-finite-type-sub-kernel"
+    "lem-weil-pbc-finite-type-kernel-local-generators"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-coherent-finite-type-sub-kernel"
+  "lem-weil-pbc-coherent-iterated-slice-relations",
+  "lem-weil-pbc-finite-type-kernel-local-generators"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Definition 01BV and Lemma 01BY (2), proof using finite free local presentations"
+  "place": "Modules, Definition 01BV (2) and Lemma 01BY (2), local finite free relations and their image; formalized as the two explicit slice lemmas, combined by V4."
  },
  "mathlib_searches": [
   {
@@ -117,12 +117,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261012T223409-L-1638181",
+  "landing": "20261013T000049-L-2232653",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

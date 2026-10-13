@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-finite-type-kernel-local-generators",
+ "kind": "statement",
+ "title": "Kernel finiteness from local generating epimorphisms",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and $U\\subseteq X$ open. Let $\\varphi:\\mathcal F\\to\\mathcal H$ be a morphism of module sheaves on the open slice over $U$ [def-weil-sheaf-of-modules-category]. Let $q$ be local generating data for $\\mathcal F$: objects $V_i$ covering the terminal object of that slice and generating epimorphisms $p_i:\\mathcal O_{V_i}^{\\oplus I_i}\\twoheadrightarrow\\mathcal F|_{V_i}$, with no finiteness assumption on $I_i$. If $\\ker(\\varphi|_{V_i}\\circ p_i)$ is of finite type [pqf-def-coherent] for every $i$ (composition in categorical order: first $p_i$, then $\\varphi|_{V_i}$), then $\\ker\\varphi$ is of finite type on the slice over $U$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BY (lemma-coherent-abelian), proof of (2), second paragraph: kernel is the image of the composite from local free relations; Lemma 01B7 (lemma-extension-finite-type), part (1), and Definition 01B5 (definition-finite-type). Verified at https://stacks.math.columbia.edu/tag/01BY."
+ },
+ "stmt_deps": [
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For each i put L_i = kernel(p_i then phi restricted to V_i). The composite L_i -> free(I_i) -> F restricted to V_i is killed by phi, hence factors through kernel(phi restricted to V_i). Sectionwise kernels identify this latter module with the restriction of kernel phi. These identifications are valid on iterated slices because they only forget an intermediate inclusion of opens.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The factor L_i -> kernel(phi restricted to V_i) is epi. Given a section of the latter kernel, local lifting through p_i supplies preimages of its underlying F section. The image of each preimage under the composite is zero, so the preimage is a section of L_i. Thus every section of the kernel lifts locally through the factor, which is exactly the epimorphism criterion. This is the local lifting argument of the cited node applied to the open ringed space underlying V_i.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Push finite local generating families of L_i through this epimorphism. They generate kernel(phi restricted to V_i), proving it finite type by the image lemma. Refine the covering family V_i by the finite generating covers just obtained. Composition of coverings gives a cover of U. The forgetful identification of successive slices transports each generating family to the restriction of kernel phi on that cover, with the same finite index set and epimorphism. These form LocalGeneratorsData.IsFiniteType for kernel phi, hence kernel phi is finite type. No finiteness of I_i is used; an empty cover only occurs over the empty open and gives the vacuous finite type condition.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-image-extension",
+    "pqf-def-coherent",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "lem-weil-pbc-module-finite-type-image-extension",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BY (lemma-coherent-abelian), proof of (2), second paragraph: kernel is the image of the composite from local free relations; Lemma 01B7 (lemma-extension-finite-type), part (1), and Definition 01B5 (definition-finite-type). Verified at https://stacks.math.columbia.edu/tag/01BY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type kernel follows from finite type kernels of composites with local free epimorphisms",
+   "results": "Service returned Internal Server Error; msearch recorded UNAVAILABLE 0 hits.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local generating epimorphisms and finite type kernels of their composites imply finite type kernel of a sheaf morphism",
+   "results": "Eight hits: IsFiniteType, IsFinitePresentation, LocalGeneratorsData.IsFiniteType, GeneratingSections.IsFiniteType, and related definitions. No kernel descent criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel|IsFiniteType in Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "results": "Read Generators.lean in full: ofEpi transports global generating families (lines 63-101); LocalGeneratorsData and IsFiniteType at lines 114-144. No kernel criterion or local finite type descent theorem. Local repository search found the ringed-space CoherentFiniteTypeSubKernel theorem but not a slice-local criterion.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFiniteTypeKernelOver",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); the coherent-module closure argument, extension relations; the extension relation argument, applying 01BY (2) on the open U; open-slice kernel argument, step 2: local kernel quotient and finite generator descent",
+   "via": [
+    "lem-weil-pbc-coherent-finite-type-kernel-over",
+    "lem-weil-pbc-coherent-extension-relations",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeKernelLocalGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeKernelLocalGenerators.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.finiteType_kernel_local_generators",
+  "statement": "theorem finiteType_kernel_local_generators (X : RingedSpace.{u})\n    (U : Opens X) {F H : SheafOfModules.{u} ((moduleRings X).over U)}\n    (φ : F ⟶ H) (q : SheafOfModules.LocalGeneratorsData.{u, u, u, u} F)\n    (h : ∀ i : q.I, (kernel ((q.generators i).π ≫ φ.over (q.X i))).IsFiniteType) :\n    (kernel φ).IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T000049-L-2232653",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T000049-L-2232653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
