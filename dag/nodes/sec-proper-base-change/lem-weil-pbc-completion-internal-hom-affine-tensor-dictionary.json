@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-completion-internal-hom-affine-tensor-dictionary",
+ "kind": "statement",
+ "title": "Affine tensor dictionary for completed internal-Hom sections",
+ "statement": "Let $X$ be a Noetherian scheme, $I$ a quasi-coherent ideal sheaf, and $F,G$ coherent modules [pqf-def-coherent]. Use the quotient systems and transitions of [def-weil-pbc-coherent-formal-module], and put $H=\\mathcal Hom(G,F)$ [def-pur-sheaf-hom]. For each $n$ suppose $e_n:H/I^{n+1}H\\to\\mathcal Hom(G/I^{n+1}G,F/I^{n+1}F)$ satisfies the equation obtained by precomposing by the quotient projection of $G$ and postcomposing by the quotient projection of $H$: its result is postcomposition by the quotient projection of $F$. For an affine open $U$ [def-weil-affine-spectrum], set $A=\\mathcal O_X(U)$, $J=I(U)$, $B=\\widehat A$, $N=G(U)$ and $M=F(U)$. There are a bijection $\\rho$ from compatible families of sections of $H/I^{n+1}H$ over $U$ to $B\\otimes_A\\operatorname{Hom}_A(N,M)$ and a $B$-linear map $\\beta$ from this tensor product to $\\operatorname{Hom}_B(B\\otimes_A N,B\\otimes_A M)$, such that $\\beta(1\\otimes h)$ is scalar extension of $h$. For every compatible family $t_n:G/I^{n+1}G\\to F/I^{n+1}F$ there is an element $v$ of that last Hom module such that for every compatible section family $s$, the equations $e_n(U)(s_n)=t_n|_U$ for all $n$ are equivalent to $\\beta(\\rho(s))=v$. No bijectivity of $\\beta$ is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0882",
+  "place": "Tag 0882, lemma-completion-internal-hom, affine identification in its proof; Tag 087W, lemma-inverse-systems-affine; Tag 00MA, lemma-completion-finite, part (3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-pur-sheaf-hom",
+  "pqf-def-coherent",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_X(U)$, $J=\\mathcal I(U)$, $N=\\mathcal G(U)$, $M=\\mathcal F(U)$, and $H=\\operatorname{Hom}_A(N,M)$. The affine open is a spectrum [def-weil-affine-spectrum], with Noetherian section ring [pqf-lem-affine-open-locnoeth]. The internal Hom is coherent [lem-weil-pbc-coherent-sheaf-hom-coherent]. Coherence gives quasi-coherence and finite type [pqf-lem-coherent-ft-locnoeth], so $N,M,H$ are finite by the affine sections comparison [lem-weil-pbc-quasi-coherent-finite-type-affine]. The tilde-sections adjunction [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies morphisms and sections over U with module linear maps. Ideal products and quotient sections identify with $J^{n+1}$-products and module quotients [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections]. The source quotient on affine sections is surjective, and precomposition by the quotient of G is an isomorphism [lem-weil-pbc-completion-internal-hom-quotient]. Thus he forces $e_n(U)$ to be $h\\bmod J^{n+1}H\\mapsto (x\\bmod J^{n+1}N\\mapsto h(x)\\bmod J^{n+1}M)$. The affine formal-module equivalence [lem-weil-pbc-coherent-formal-modules-affine] applies to these quotient systems.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-completion-internal-hom-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-weil-pbc-coherent-formal-modules-affine], compatible maps between the quotient systems on U identify with $\\operatorname{Hom}_{A^\\wedge}(N^\\wedge,M^\\wedge)$, and compatible source sections identify with $H^\\wedge$. The evaluation map under these identifications is the componentwise map $\\beta:(h_n)_n\\mapsto ((x_n)_n\\mapsto(h_n(x_n))_n)$. It is $A^\\wedge$-linear since scalar multiplication and evaluation are componentwise. For $h\\in H$, its value on the image of h in $H^\\wedge$ is the completed linear map $h^\\wedge$. Componentwise evaluation commutes with all quotient transitions, so it induces the completed-ring-linear map on the inverse limits.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For P=N,M,H use the natural completion-tensor equivalences c_P. Set rho=c_H^{-1} composed with the compatible-section/limit identification. Conjugating componentwise evaluation by c_N and c_M yields beta. On 1 tensor h, evaluation is the completed map h, so tensor-completion naturality gives the stated baseChangeHom formula. Apply the affine formal-module equivalence to t restricted to U to define v, then conjugate by c_N and c_M. Faithfulness and naturality of the limit projections identify beta(rho(s))=v with all componentwise evaluation equations, in both directions. This step uses no flatness or Hom base-change bijection.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-coherent-formal-modules-affine"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-completion-internal-hom-quotient",
+  "lem-weil-pbc-completion-finite-module-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0882",
+  "place": "Tag 0882, lemma-completion-internal-hom, affine identification in its proof; Tag 087W, lemma-inverse-systems-affine; Tag 00MA, lemma-completion-finite, part (3). The local literature checkout is absent; the three cited Stacks web pages were read. The explicit evaluation and naturality checks expand the source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic completion internal Hom affine compatible sections tensor evaluation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of Hom of finite modules over a noetherian ring is Hom of the adic completions",
+   "results": "AdicCompletion.map, AdicCompletion.congr, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian and completion naturality lemmas; no sheaf-level evaluation dictionary.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.baseChangeHom",
+   "results": "Module.FinitePresentation.isBaseChange_map supplies the separate algebraic bijection, not the affine section/evaluation dictionary.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isBaseChange_map|flat_of_isNoetherian",
+   "results": "FinitePresentation.lean:696 and AsTensorProduct.lean:379 give the algebraic bijection and completion flatness used in the parent proof; no sheaf dictionary.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompletionInternalHomAffineSectionsLift",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite etale lifting: internal-Hom comparison, the affine section and completed-module identifications in Tag 0882 before flat base change for Hom.",
+   "via": [
+    "lem-weil-pbc-completion-internal-hom-affine-sections-lift",
+    "lem-weil-pbc-completion-internal-hom-sections-lift",
+    "lem-weil-pbc-completion-internal-hom",
+    "lem-weil-pbc-formal-completion-fully-faithful-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompletionInternalHomAffineTensorDictionary",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletionInternalHomAffineTensorDictionary.lean",
+  "declaration": "AlgebraicGeometry.completion_internal_hom_affine_tensor_dictionary",
+  "statement": "theorem completion_internal_hom_affine_tensor_dictionary {X : Scheme.{u}} [IsNoetherian X]\n    (I : X.IdealSheafData) (F G : CoherentModules X)\n    (e : ∀ n : ℕᵒᵖ,\n      formalModuleQuotient I (n.unop + 1) (SheafOfModules.homObj\n        (R := X.toRingedSpace.sheaf) G.obj F.obj) ⟶\n        SheafOfModules.homObj\n          (R := X.toRingedSpace.sheaf) (formalModuleQuotient I (n.unop + 1) G.obj)\n          (formalModuleQuotient I (n.unop + 1) F.obj))\n    (he : ∀ n : ℕᵒᵖ,\n        formalModuleQuotientπ I (n.unop + 1) (SheafOfModules.homObj\n          (R := X.toRingedSpace.sheaf) G.obj F.obj) ≫\n          e n ≫ SheafOfModules.homObjMap\n            (R := X.toRingedSpace.sheaf) (formalModuleQuotientπ I (n.unop + 1) G.obj)\n            (𝟙 (formalModuleQuotient I (n.unop + 1) F.obj)) =\n        SheafOfModules.homObjMap\n          (R := X.toRingedSpace.sheaf) (𝟙 G.obj) (formalModuleQuotientπ I (n.unop + 1) F.obj))\n    (U : X.affineOpens) :\n    let A := Γ(X, U.val)\n    let B := AdicCompletion (I.ideal U) A\n    let N := Γ(G.obj, U.val)\n    let M := Γ(F.obj, U.val)\n    ∃ ρ : {s : ∀ n : ℕᵒᵖ,\n          (formalModuleQuotient I (n.unop + 1) (SheafOfModules.homObj\n            (R := X.toRingedSpace.sheaf) G.obj F.obj)).val.obj (op U.val) //\n          ∀ (a b : ℕᵒᵖ) (f : a ⟶ b),\n            ((formalCompletionSystem I (SheafOfModules.homObj\n              (R := X.toRingedSpace.sheaf) G.obj F.obj)).map f).val.app (op U.val)\n              (s a) = s b} ≃ (B ⊗[A] (N →ₗ[A] M)),\n    ∃ β : B ⊗[A] (N →ₗ[A] M) →ₗ[B] (B ⊗[A] N →ₗ[B] B ⊗[A] M),\n      (∀ h : N →ₗ[A] M, β (1 ⊗ₜ[A] h) = LinearMap.baseChangeHom A B N M h) ∧\n      ∀ (t : ∀ n : ℕᵒᵖ, formalModuleQuotient I (n.unop + 1) G.obj ⟶\n        formalModuleQuotient I (n.unop + 1) F.obj),\n        (∀ (a b : ℕᵒᵖ) (f : a ⟶ b),\n          t a ≫ (formalCompletionSystem I F.obj).map f =\n            (formalCompletionSystem I G.obj).map f ≫ t b) →\n        ∃ v : B ⊗[A] N →ₗ[B] B ⊗[A] M, ∀ s,\n          (∀ n : ℕᵒᵖ, (e n).val.app (op U.val) (s.val n) =\n            ((SheafOfModules.homObjSectionsEquiv (R := X.toRingedSpace.sheaf)\n              (formalModuleQuotient I (n.unop + 1) G.obj)\n              (formalModuleQuotient I (n.unop + 1) F.obj)).symm (t n)).val (op U.val)) ↔\n            β (ρ s) = v",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T004333-L-2508901",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T004333-L-2508901",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

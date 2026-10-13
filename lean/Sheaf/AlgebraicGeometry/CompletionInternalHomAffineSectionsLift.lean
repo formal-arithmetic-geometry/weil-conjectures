@@ -7,11 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.AlgebraicGeometry.CompletionInternalHomQuotient
+import Sheaf.AlgebraicGeometry.CompletionInternalHomAffineTensorDictionary
+import all Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentSheafHom
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.Algebra.Module.FinitePresentation
@@ -89,6 +87,49 @@ theorem completion_internal_hom_affine_sections_lift {X : Scheme.{u}} [IsNoether
         ((SheafOfModules.homObjSectionsEquiv (R := X.toRingedSpace.sheaf)
           (formalModuleQuotient I (n.unop + 1) G.obj)
           (formalModuleQuotient I (n.unop + 1) F.obj)).symm (t n)).val (op U.val) := by
-  sorry
+  let A := Γ(X, U.val)
+  let B := AdicCompletion (I.ideal U) A
+  let N := Γ(G.obj, U.val)
+  let M := Γ(F.obj, U.val)
+  have : IsNoetherianRing A := IsLocallyNoetherian.component_noetherian U
+  have hG := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X G.obj).mp G.property
+  have : G.obj.IsQuasicoherent := hG.1
+  have : G.obj.IsFiniteType := hG.2
+  obtain ⟨ρ, β, hβ, hd⟩ :=
+    completion_internal_hom_affine_tensor_dictionary I F G e he U
+  have : (G.obj.over U.val).IsFiniteType :=
+    Scheme.Modules.isFiniteType_over X G.obj U.val
+  have : Module.Finite A N :=
+    (((Scheme.Modules.quasicoherent_finite_type_affine.{u, u} X).2 G.obj hG.1).1
+      U.val U.property).1.mp inferInstance
+  have : Module.FinitePresentation A N := Module.finitePresentation_of_finite A N
+  let θ := (Module.FinitePresentation.isBaseChange_map A N M B).equiv
+  have hβθ : β = θ.toLinearMap := by
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro b h
+    calc
+      β (TensorProduct.tmul A b h) = β (b • (TensorProduct.tmul A 1 h)) := by
+        rw [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+      _ = b • β (TensorProduct.tmul A 1 h) := β.map_smul b _
+      _ = b • LinearMap.baseChangeHom A B N M h := by rw [hβ]
+      _ = θ (TensorProduct.tmul A b h) := (IsBaseChange.equiv_tmul _ _ _).symm
+  have hbij : Function.Bijective β := by
+    rw [hβθ]
+    exact θ.bijective
+  obtain ⟨v, hv⟩ := hd t ht
+  obtain ⟨w, hw⟩ := hbij.2 v
+  let s := ρ.symm w
+  refine ⟨s, ?_, ?_⟩
+  · have hsβ : β (ρ s) = v := by
+      simpa [s] using hw
+    exact (hv s).2 hsβ
+  · intro s' hs'
+    have hsβ : β (ρ s) = v := by
+      simpa [s] using hw
+    have hs'β : β (ρ s') = v := (hv s').1 hs'
+    apply ρ.injective
+    apply hbij.1
+    exact hs'β.trans hsβ.symm
 
 end AlgebraicGeometry
