@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechExact
 public import Mathlib.Algebra.DirectSum.Module
+import Sheaf.AlgebraicGeometry.PicardLeftCechCupHomology
+import Sheaf.Algebra.Homology.TensorKunnethNat
 
 /-! # External Cech cup on the factor homology generators
 
@@ -79,6 +81,26 @@ theorem picardExternalCup_left_cech_generators
                 (externalCupCoefficients f g F G) d)) i.property)
                 (externalCup f g F G i.val.1 i.val.2
                   (picardScalarModelEquiv f F i.val.1 x)
-                  (picardScalarModelEquiv g G i.val.2 y)) := by sorry
+                  (picardScalarModelEquiv g G i.val.2 y)) := by
+  obtain ⟨θ, hθ⟩ := picardLeftCechCup_exists f g G
+  refine ⟨θ, ?_⟩
+  intro F hF n
+  let A := picardScalarModel f F
+  let B := picardScalarModel g G
+  obtain ⟨a, b, hab⟩ := picardLeftCechCup_homology f g G θ hθ F
+  obtain ⟨e, he⟩ := HomologicalComplex.tensor_kunneth_nat A B
+    (picardScalarModel_negative f F) (picardScalarModel_negative g G) n
+  refine ⟨e.trans (a n).symm.toLinearEquiv, b n, ?_⟩
+  intro i x y
+  obtain ⟨u, rfl⟩ := (ModuleCat.epi_iff_surjective (A.homologyπ _)).mp inferInstance x
+  obtain ⟨v, rfl⟩ := (ModuleCat.epi_iff_surjective (B.homologyπ _)).mp inferInstance y
+  obtain ⟨z, hz, hez⟩ := he i u v
+  change picardScalarModelEquiv (pullback.fst f g ≫ f)
+    (externalCupCoefficients f g F G) n
+    ((b n).hom (HomologicalComplex.homologyMap (θ.app F) (n : ℤ)
+      ((a n).inv (e (DirectSum.lof k _ _ i
+        ((A.homologyπ _ u) ⊗ₜ[k] (B.homologyπ _ v))))))) = _
+  rw [hez]
+  exact hab n i u v z hz
 
 end AlgebraicGeometry.Scheme.Modules
