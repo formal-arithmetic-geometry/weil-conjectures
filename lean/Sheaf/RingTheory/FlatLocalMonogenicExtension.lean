@@ -2,12 +2,50 @@ module
 
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+import Mathlib.RingTheory.Flat.Localization
+import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Mathlib.RingTheory.AdjoinRoot
+import Mathlib.RingTheory.Ideal.MonicSpan
 
 @[expose] public section
 
 universe u v
 
 namespace IsLocalRing
+
+private theorem localize_flat_field_kernel
+    (A : Type (max u v)) [CommRing A] [IsLocalRing A]
+    (K : Type v) [Field K] (ψ : A →+* K)
+    (S : Type (max u v)) [CommRing S] [Algebra A S]
+    (q : S →+* K) (hflat : (algebraMap A S).Flat)
+    (hker : RingHom.ker q = (maximalIdeal A).map (algebraMap A S))
+    (hcomp : q.comp (algebraMap A S) = ψ) (x : K) (s : S) (hs : q s = x) :
+    ∃ (B : Type (max u v)) (_ : CommRing B) (_ : IsLocalRing B)
+      (_ : Algebra A B) (φ : B →+* K),
+      (algebraMap A B).Flat ∧
+      (maximalIdeal A).map (algebraMap A B) = maximalIdeal B ∧
+      RingHom.ker φ = maximalIdeal B ∧
+      φ.comp (algebraMap A B) = ψ ∧ ∃ b, φ b = x := by
+  let P := RingHom.ker q
+  let : P.IsPrime := RingHom.ker_isPrime q
+  let B := Localization.AtPrime P
+  let φ : B →+* K := IsLocalization.lift (S := B) (M := P.primeCompl)
+    (g := q) (fun y ↦ isUnit_iff_ne_zero.mpr y.property)
+  have hφ : φ.comp (algebraMap S B) = q := IsLocalization.lift_comp _
+  have hmax : (maximalIdeal A).map (algebraMap A B) = maximalIdeal B := by
+    rw [IsScalarTower.algebraMap_eq A S B, ← Ideal.map_map, ← hker]
+    exact Localization.AtPrime.map_eq_maximalIdeal (I := P)
+  have hφker : RingHom.ker φ = maximalIdeal B := by
+    ext b
+    obtain ⟨⟨t, y⟩, rfl⟩ := IsLocalization.mk'_surjective P.primeCompl b
+    rw [RingHom.mem_ker, IsLocalization.lift_mk', mul_eq_zero]
+    simp only [Units.ne_zero, or_false]
+    exact (IsLocalization.AtPrime.mk'_mem_maximal_iff B P t y).symm
+  refine ⟨B, inferInstance, inferInstance, inferInstance, φ, ?_, hmax, hφker, ?_, ?_⟩
+  · rw [IsScalarTower.algebraMap_eq A S B]
+    exact hflat.comp (RingHom.flat_algebraMap_iff.mpr (IsLocalization.flat B P.primeCompl))
+  · rw [IsScalarTower.algebraMap_eq A S B, ← RingHom.comp_assoc, hφ, hcomp]
+  · exact ⟨algebraMap S B s, (DFunLike.congr_fun hφ s).trans hs⟩
 
 /-- Source: Stacks Project, Algebra, Lemma 10.159.1 (Tag 03C3), first proof paragraph.
 (blueprint: new-flat-local-monogenic-extension)
@@ -36,6 +74,43 @@ theorem exists_flat_local_monogenic_extension
       (algebraMap A B).Flat ∧
       (maximalIdeal A).map (algebraMap A B) = maximalIdeal B ∧
       RingHom.ker φ = maximalIdeal B ∧
-      φ.comp (algebraMap A B) = ψ ∧ ∃ b, φ b = x := by sorry
+      φ.comp (algebraMap A B) = ψ ∧ ∃ b, φ b = x := by
+  classical
+  let q : Polynomial A →+* K := Polynomial.eval₂RingHom ψ x
+  have hqcomp : q.comp Polynomial.C = ψ := Polynomial.eval₂RingHom_comp_C ψ x
+  have hcomap : (RingHom.ker q).comap Polynomial.C = maximalIdeal A := by
+    rw [RingHom.comap_ker, hqcomp, hker]
+  by_cases heq : RingHom.ker q = (maximalIdeal A).map Polynomial.C
+  · have hflat : (algebraMap A (Polynomial A)).Flat :=
+      RingHom.flat_algebraMap_iff.mpr (Module.Flat.of_free (R := A) (M := Polynomial A))
+    exact localize_flat_field_kernel A K ψ (Polynomial A) q hflat heq hqcomp
+      x Polynomial.X (Polynomial.eval₂_X ψ x)
+  · obtain ⟨f, hf, hspan⟩ := Polynomial.exists_monic_span_sup_map_eq A
+      (RingHom.ker q) (by rw [hcomap]; infer_instance) (by rwa [hcomap])
+    rw [hcomap] at hspan
+    have hfx : f.eval₂ ψ x = 0 := by
+      change q f = 0
+      apply RingHom.mem_ker.mp
+      rw [hspan]
+      exact Ideal.mem_sup_right (Ideal.subset_span (Set.mem_singleton f))
+    let φ : AdjoinRoot f →+* K := AdjoinRoot.lift ψ x hfx
+    have hφmk : φ.comp (AdjoinRoot.mk f) = q := by
+      apply RingHom.ext
+      intro p
+      exact AdjoinRoot.lift_mk hfx p
+    have hφker : RingHom.ker φ =
+        (maximalIdeal A).map (algebraMap A (AdjoinRoot f)) := by
+      apply Ideal.comap_injective_of_surjective (AdjoinRoot.mk f) (AdjoinRoot.mk_surjective)
+      rw [RingHom.comap_ker, hφmk, hspan]
+      have halg : algebraMap A (AdjoinRoot f) = (AdjoinRoot.mk f).comp Polynomial.C := rfl
+      rw [halg, ← Ideal.map_map, Ideal.comap_map_of_surjective _ AdjoinRoot.mk_surjective]
+      rw [AdjoinRoot.mk, ← RingHom.ker_eq_comap_bot, Ideal.mk_ker]
+    let := hf.free_adjoinRoot
+    have hflat : (algebraMap A (AdjoinRoot f)).Flat :=
+      RingHom.flat_algebraMap_iff.mpr (Module.Flat.of_free (R := A) (M := AdjoinRoot f))
+    have hφcomp : φ.comp (algebraMap A (AdjoinRoot f)) = ψ :=
+      AdjoinRoot.lift_comp_of hfx
+    exact localize_flat_field_kernel A K ψ (AdjoinRoot f) φ hflat hφker hφcomp
+      x (AdjoinRoot.root f) (AdjoinRoot.lift_root hfx)
 
 end IsLocalRing
