@@ -27,54 +27,44 @@
  ],
  "proof": [
   {
-   "text": "Read the hypothesis as in its citers: there are integers a <= b with H^i(K \\otimes^L_{\\mathcal O_S} \\mathcal F)=0 for every \\mathcal O_S-module \\mathcal F and every i outside [a,b]. Perfectness is local on the scheme by [def-pc-perfect-complex], and by the local definition [def-pur-pseudo-coherent-complex] there is an open cover of S on whose members K is quasi-isomorphic to a bounded-above complex of finite free modules; refine it to a cover by affine opens V = Spec(R), on which the same holds. For an \\mathcal O_V-module G, with j: V -> S the inclusion, part (1) of [lem-pc-affine-derived-pullback-tensor-tilde] gives (K \\otimes^L j_*G)|_V \\cong K|_V \\otimes^L_{\\mathcal O_V} G, so H^i(K|_V \\otimes^L G)=0 for i outside [a,b].",
+   "text": "For each point choose a bounded-above finite-free representative from [def-pur-pseudo-coherent-complex]. Refine to an affine open V and restrict the complex termwise, preserving the bound and free terms. The derived restriction composition isomorphism transports its representing isomorphism. Lift the differentials through the full faithful affine sheafification functor of [lem-pc-affine-perfect-module-model], using the finite-free tilde comparison [lem-weil-pbc-spec-module-tilde-sections]. Faithfulness verifies the shape and square-zero equations. This gives a bounded-above finite-free module complex M and an actual sheaf-complex isomorphism.",
    "uses": [
-    "def-pc-perfect-complex",
     "def-pur-pseudo-coherent-complex",
-    "lem-pc-affine-derived-pullback-tensor-tilde"
+    "lem-pc-affine-perfect-module-model",
+    "lem-weil-pbc-spec-module-tilde-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 20.49.5 (Tag 08CQ), proof: locality on the scheme"
-   }
+   "elementary": false
   },
   {
-   "text": "On V = Spec(R) let K|_V \\cong F^\\bullet with F^\\bullet a bounded-above complex of finite free \\mathcal O_V-modules. By [lem-weil-pbc-spec-module-tilde-sections] (with N = R) the global sections of \\mathcal O_V are R, so \\mathcal O_V^n = \\widetilde{R^n} and each differential \\mathcal O_V^{n} -> \\mathcal O_V^{m} is a matrix over R; hence F^\\bullet = \\widetilde{P^\\bullet} for a bounded-above complex P^\\bullet of finite free R-modules. The construction \\widetilde{(-)} is exact (its sections over the basic opens D(r) are localizations, [lem-weil-pbc-spec-module-tilde-sections]) and \\widetilde M = 0 only for M = 0 (global sections recover M). For an R-module M, part (3) of [lem-pc-affine-derived-pullback-tensor-tilde] gives \\widetilde{P^\\bullet} \\otimes^L \\widetilde M \\cong \\widetilde{P^\\bullet \\otimes^L_R M}, so by Step 1 applied to G = \\widetilde M and exactness, H^i(P^\\bullet \\otimes^L_R M) = 0 for i outside [a,b]. Thus C = P^\\bullet satisfies the hypotheses of the ring criterion [lem-pc-ring-pseudo-coherent-finite-tor-perfect], which gives an isomorphism in D(R) between P^\\bullet and a bounded complex E^\\bullet of finitely generated projective R-modules.",
+   "text": "The lifted M is pseudo-coherent by its own bounded-above finite-free model. Apply [lem-pc-affine-sheafification-tor-amplitude] to transfer Tor bounds to Q(M), and then [lem-pc-ring-pseudo-coherent-finite-tor-perfect] to obtain a bounded finite-projective E with Q(E) isomorphic to Q(M).",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-sheafification-tor-amplitude",
     "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 20.49.5 (Tag 08CQ), proof: reduce to the affine case and apply More on Algebra, Lemma 15.76.2 (Tag 0658)"
-   }
+   "elementary": false
   },
   {
-   "text": "Since \\widetilde{(-)} is exact (Step 2) it carries the quasi-isomorphisms of a roof between P^\\bullet and E^\\bullet to quasi-isomorphisms, so K|_V \\cong \\widetilde{P^\\bullet} \\cong \\widetilde{E^\\bullet} in D(\\mathcal O_V). Each E^i is a direct summand of some R^n, so \\widetilde{E^i} is a direct summand of \\mathcal O_V^n and \\widetilde{E^\\bullet} is strictly perfect; hence K|_V is perfect by [def-pc-perfect-complex]. Since this holds on every member of the affine cover, K is perfect on S.",
+   "text": "Split each finite-projective term of E off a finite free module by Module.Finite.exists_comp_eq_id_of_projective. Affine sheafification preserves the splitting equations, finite-free identifications and zero objects, so it gives a strictly perfect complex in the sense of [def-pc-perfect-complex]. Transport the derived isomorphism through the functor and factorization of [lem-pc-affine-localized-derived-sheafification]. Compose with the original representing isomorphism and use the pointwise definition of perfectness.",
    "uses": [
-    "def-pc-perfect-complex"
+    "def-pc-perfect-complex",
+    "lem-pc-affine-localized-derived-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 20.49.5 (Tag 08CQ), conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
   "def-pur-pseudo-coherent-complex",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-perfect-module-model",
   "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-pc-ring-pseudo-coherent-finite-tor-perfect"
+  "lem-pc-affine-sheafification-tor-amplitude",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "def-pc-perfect-complex",
+  "lem-pc-affine-localized-derived-sheafification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 20.49.5 (Tag 08CQ; cohomology-lemma-perfect)"
+  "place": "Tag 08CQ, scheme specialization via Tag 0658; X2 Lean realization with explicit affine sheafification and separate Tor transport"
  },
  "mathlib_searches": [
   {
@@ -169,5 +159,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T045618-L-140791",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
