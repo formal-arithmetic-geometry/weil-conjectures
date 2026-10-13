@@ -16,100 +16,35 @@
  ],
  "proof": [
   {
-   "text": "Use the trivial finite purely inseparable extension to obtain regularity of A and identify its conormal dimension d; the universe lift of k and tensor left-unit equivalence implement the trivial extension. The family is already indexed by Fin n, and this argument includes n=0.",
+   "text": "Apply pthRoot_cotangent_dimension to obtain finiteness of L/K and equality of the scalar-extended lower and upper cotangent dimensions. The upper quotient is Noetherian by the finite-variable polynomial and quotient instances.",
    "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "def-weil-pbc-g-ring",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-regular-local-cotangent-dimension"
+    "lem-weil-pbc-pth-root-cotangent-dimension"
    ],
    "elementary": false
   },
   {
-   "text": "*The extension $k'$.* By [lem-weil-pbc-pth-roots-extension-degree] the subfield $k(a_1^{1/p},\\dots,a_n^{1/p})$ of an algebraic closure of $k$ has degree $p^n$. Let $k'=k[x_1,\\dots,x_n]/(x_1^p-a_1,\\dots,x_n^p-a_n)$ [def-weil-pbc-mv-polynomial-ring]. Using $x_j^p=a_j$, $k'$ is spanned over $k$ by the $p^n$ monomials $x^e$, $0\\le e_j<p$, so $\\dim_kk'\\le p^n$; the $k$-algebra map $k'\\to k(a_1^{1/p},\\dots,a_n^{1/p})$, $x_j\\mapsto a_j^{1/p}$, is surjective (its image $k[a_1^{1/p},\\dots,a_n^{1/p}]$ is a field, being a domain finite over $k$ [lem-weil-pbc-finite-dimensional-domain-is-field], and contains the generators). Comparing dimensions it is an isomorphism: $k'$ is a field with $[k':k]=p^n$. For $y=\\sum_e\\lambda_ex^e\\in k'$, $y^p=\\sum_e\\lambda_e^pa^e\\in k$ ($p$-th power is additive in characteristic $p$), so $k'/k$ is finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension].",
+   "text": "Apply residue_conormal_snake_sequence to the given local map. Cartier equality for the finite residue extension supplies finite H1(L/K) and Omega[L/K] of equal dimensions. The conormal spaces are finite because the local rings are Noetherian. Exactness then makes the kernel and cokernel of beta finite: restrict the kernel-to-H1 map to its range for the former, and use the final surjection for the latter.",
    "uses": [
-    "lem-weil-pbc-pth-roots-extension-degree",
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-finite-dimensional-domain-is-field",
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*The ring $A'$ and its dimension.* Put $A'=A\\otimes_kk'\\cong A[x_1,\\dots,x_n]/(x_1^p-a_1,\\dots,x_n^p-a_n)$ (tensoring the presentation of step 2 with $A$). By [lem-weil-pbc-purely-inseparable-base-change-local-ring]: $A\\to A'$ is finite and free, $A'$ is a Noetherian local ring whose maximal ideal $\\mathfrak m'$ is the only prime containing $\\mathfrak mA'$, and $K'=A'/\\mathfrak m'$ is a finite extension of $K$, with $A'/\\mathfrak mA'\\cong K\\otimes_kk'$ finite dimensional over $K$. By geometric regularity [def-weil-pbc-g-ring] ($k'/k$ finite purely inseparable, step 2) $A'$ is regular, hence a regular local ring [def-weil-regular-scheme]. By [lem-weil-pbc-flat-height-formula] for the flat map $A\\to A'$ [def-weil-pbc-flat-ring-map] and $\\mathfrak m'$ over $\\mathfrak m$, $\\dim A'=\\dim A+\\dim A'/\\mathfrak mA'$; every prime of the finite-dimensional $K$-algebra $A'/\\mathfrak mA'$ is maximal (a domain finite over $K$ is a field [lem-weil-pbc-finite-dimensional-domain-is-field]), so $\\dim A'/\\mathfrak mA'=0$ and $\\dim A'=d$. By [lem-weil-pbc-regular-local-cotangent-dimension] $\\dim_{K'}\\mathfrak m'/\\mathfrak m'^2=d$.",
-   "uses": [
-    "lem-weil-pbc-purely-inseparable-base-change-local-ring",
-    "def-weil-pbc-g-ring",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-flat-height-formula",
-    "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-finite-dimensional-domain-is-field",
-    "lem-weil-pbc-regular-local-cotangent-dimension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use [lem-weil-pbc-pth-root-residue-differentials] for the beta defined in the statement. Its kernel is finitely generated and its cokernel has dimension n. The local instance in that theorem agrees with the given instance by proof irrelevance.",
-   "uses": [
-    "lem-weil-pbc-pth-root-residue-differentials"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*The conormal rows.* Let $(B,\\mathfrak n,L)$ be a local $\\mathbf F_p$-algebra; we apply this to $(A,\\mathfrak m,K)$ and $(A',\\mathfrak m',K')$. The Jacobi-Zariski sequence of $\\mathbf F_p\\to B\\to L$ [lem-weil-pbc-jacobi-zariski-homology-sequence] is exact: $H_1(L_{L/\\mathbf F_p})\\to H_1(L_{L/B})\\xrightarrow{\\partial_B}L\\otimes_B\\Omega_{B/\\mathbf F_p}\\xrightarrow{w}\\Omega_{L/\\mathbf F_p}\\to\\Omega_{L/B}\\to0$. Here $H_1(L_{L/\\mathbf F_p})=0$ [lem-weil-pbc-field-char-p-h1-cotangent-vanishing], $\\Omega_{L/B}=0$ and $\\theta:H_1(L_{L/B})\\cong\\mathfrak n/\\mathfrak n^2$ [lem-weil-pbc-jacobi-zariski-surjection-h1], and $\\partial_B=\\delta\\circ\\theta$ with $\\delta(f)=1\\otimes\\mathrm df$ (the case $S=B$ of [lem-weil-pbc-jacobi-zariski-connecting-map-naturality]; there $\\iota$ is the identity by [lem-weil-pbc-nl-presentation-h1-functoriality] (2)). Hence $0\\to\\mathfrak n/\\mathfrak n^2\\xrightarrow{\\delta}L\\otimes_B\\Omega_{B/\\mathbf F_p}\\xrightarrow{w}\\Omega_{L/\\mathbf F_p}\\to0$ is exact. For $B=A$ tensor this sequence of $K$-vector spaces with $K'$ over $K$ (exact, as $K'$ is a free $K$-module): $0\\to\\mathfrak m/\\mathfrak m^2\\otimes_KK'\\to K'\\otimes_A\\Omega_{A/\\mathbf F_p}\\to K'\\otimes_K\\Omega_{K/\\mathbf F_p}\\to0$ is exact.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
-    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-    "lem-weil-pbc-jacobi-zariski-surjection-h1",
-    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-    "lem-weil-pbc-nl-presentation-h1-functoriality"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "*The map $\\gamma$.* Let $\\gamma:K'\\otimes_K\\Omega_{K/\\mathbf F_p}\\to\\Omega_{K'/\\mathbf F_p}$, $x\\otimes\\mathrm db\\mapsto x\\,\\mathrm db$. The Jacobi-Zariski sequence of $\\mathbf F_p\\to K\\to K'$ [lem-weil-pbc-jacobi-zariski-homology-sequence], $H_1(L_{K'/\\mathbf F_p})\\to H_1(L_{K'/K})\\xrightarrow{\\partial}K'\\otimes_K\\Omega_{K/\\mathbf F_p}\\xrightarrow{\\gamma}\\Omega_{K'/\\mathbf F_p}\\to\\Omega_{K'/K}\\to0$, is exact and $H_1(L_{K'/\\mathbf F_p})=0$ [lem-weil-pbc-field-char-p-h1-cotangent-vanishing]; so $\\ker\\gamma\\cong H_1(L_{K'/K})$ and $\\operatorname{coker}\\gamma\\cong\\Omega_{K'/K}$. Since $K'/K$ is finite (step 3, [lem-weil-pbc-purely-inseparable-base-change-local-ring]), [lem-weil-pbc-cartier-equality] gives $\\dim_{K'}\\Omega_{K'/K}=\\dim_{K'}H_1(L_{K'/K})<\\infty$. So $\\ker\\gamma$ and $\\operatorname{coker}\\gamma$ have the same finite dimension.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
-    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-    "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+    "lem-weil-pbc-residue-conormal-snake-sequence",
     "lem-weil-pbc-cartier-equality"
    ],
    "elementary": false
   },
   {
-   "text": "*Snake lemma.* Consider the commutative diagram of $K'$-vector spaces with exact rows $0\\to\\mathfrak m/\\mathfrak m^2\\otimes_KK'\\to K'\\otimes_A\\Omega_{A/\\mathbf F_p}\\to K'\\otimes_K\\Omega_{K/\\mathbf F_p}\\to0$ and $0\\to\\mathfrak m'/\\mathfrak m'^2\\to K'\\otimes_{A'}\\Omega_{A'/\\mathbf F_p}\\to\\Omega_{K'/\\mathbf F_p}\\to0$ (step 5) and vertical maps $\\alpha$ (induced by $A\\to A'$, which maps $\\mathfrak m$ into $\\mathfrak m'$), $\\beta$ (step 4), $\\gamma$ (step 6). The squares commute because $\\Omega_{A/\\mathbf F_p}\\to\\Omega_{A'/\\mathbf F_p}$, $\\mathrm db\\mapsto\\mathrm d(b\\otimes1)$, is compatible with $\\mathrm d$ and with the residue maps [def-weil-pbc-kahler-differentials]: $\\beta(1\\otimes\\mathrm df)=1\\otimes\\mathrm d(f\\otimes1)=\\delta'(\\alpha(f))$ for $f\\in\\mathfrak m$, and $\\gamma(1\\otimes\\mathrm d\\bar b)=\\mathrm d\\bar b=w'(\\beta(1\\otimes\\mathrm db))$ for $b\\in A$. The snake lemma [lem-weil-pbc-snake-lemma-modules] gives an exact sequence $0\\to\\ker\\alpha\\to\\ker\\beta\\to\\ker\\gamma\\to\\operatorname{coker}\\alpha\\to\\operatorname{coker}\\beta\\to\\operatorname{coker}\\gamma\\to0$ of finite-dimensional $K'$-vector spaces: $\\alpha$ goes between spaces of the same dimension $d$ (steps 1, 3), so $\\dim\\ker\\alpha=\\dim\\operatorname{coker}\\alpha$; $\\dim\\ker\\gamma=\\dim\\operatorname{coker}\\gamma<\\infty$ (step 6); $\\dim\\ker\\beta\\le n$, $\\dim\\operatorname{coker}\\beta=n$ (step 4). The alternating sum of dimensions in a finite exact sequence of finite-dimensional vector spaces is $0$, so $\\dim\\ker\\beta-\\dim\\operatorname{coker}\\beta=(\\dim\\ker\\alpha-\\dim\\operatorname{coker}\\alpha)+(\\dim\\ker\\gamma-\\dim\\operatorname{coker}\\gamma)=0$, hence the kernel and cokernel dimensions of beta agree.",
-   "uses": [
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-snake-lemma-modules"
-   ],
-   "elementary": false
+   "text": "Rank-nullity and the cotangent dimension equality make ker alpha and coker alpha have equal finranks. Apply Mathlib Module.sum_neg_one_pow_finrank_eq_zero_of_exact_six to the five snake maps. Cancel the alpha dimensions and the equal H1/Omega dimensions, obtaining finrank ker beta = finrank coker beta.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-g-ring",
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-cartier-equality",
-  "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
-  "lem-weil-pbc-finite-dimensional-domain-is-field",
-  "lem-weil-pbc-flat-height-formula",
-  "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
-  "lem-weil-pbc-jacobi-zariski-homology-sequence",
-  "lem-weil-pbc-jacobi-zariski-surjection-h1",
-  "lem-weil-pbc-nl-presentation-h1-functoriality",
-  "lem-weil-pbc-pth-root-residue-differentials",
-  "lem-weil-pbc-pth-roots-extension-degree",
-  "lem-weil-pbc-purely-inseparable-base-change-local-ring",
-  "lem-weil-pbc-regular-local-cotangent-dimension",
-  "lem-weil-pbc-snake-lemma-modules"
+  "lem-weil-pbc-pth-root-cotangent-dimension",
+  "lem-weil-pbc-residue-conormal-snake-sequence",
+  "lem-weil-pbc-cartier-equality"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07E5, proof of (2) => (4); read at https://stacks.math.columbia.edu/tag/07E5 because the local literature checkout is absent. The big conormal diagram and its snake sequence; original node steps 1-3 and 5-7."
+  "place": "Tag 07E5, proof of (2) => (4), conormal diagram; F1 Lean reduction to cotangent dimension comparison and the conormal snake sequence, combined with Cartier equality and Mathlib six-term Euler characteristic"
  },
  "mathlib_searches": [
   {
@@ -194,9 +129,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T082401-L-1642632",
+  "landing": "20261013T095948-L-2457160",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

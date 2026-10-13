@@ -7,8 +7,12 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.PthRootResidueDifferentials
-import Sheaf.FieldTheory.PthRootsExtensionDegree
+import Sheaf.RingTheory.PthRootCotangentDimension
+import Sheaf.RingTheory.ResidueConormalSnakeSequence
 import Sheaf.Paper.CartierEquality
+import Mathlib.Algebra.Module.LinearMap.Index
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+import Sheaf.FieldTheory.PthRootsExtensionDegree
 import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
 import Sheaf.RingTheory.JacobiZariskiHomologySequence
 import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
@@ -26,6 +30,19 @@ universe u v
 open scoped TensorProduct
 
 namespace Algebra
+
+private theorem finite_of_exact
+    {F M N P : Type*} [Field F]
+    [AddCommGroup M] [AddCommGroup N] [AddCommGroup P]
+    [Module F M] [Module F N] [Module F P]
+    [Module.Finite F M] [Module.Finite F P]
+    (f : M →ₗ[F] N) (g : N →ₗ[F] P) (hex : Function.Exact f g) :
+    Module.Finite F N := by
+  have hex' : Function.Exact f g.rangeRestrict := by
+    intro x
+    change (⟨g x, g.mem_range_self x⟩ : g.range) = 0 ↔ _
+    simpa only [Subtype.ext_iff, ZeroMemClass.coe_zero] using hex x
+  exact Module.Finite.of_exact hex' g.surjective_rangeRestrict
 
 /-- For the p-root extension associated to independent base-field differentials,
 geometric regularity balances the kernel and cokernel dimensions of the residue
@@ -51,7 +68,8 @@ where beta is residueDifferentialComparison. Alpha goes between equally dimensio
 conormal spaces. For gamma the field Jacobi-Zariski sequence identifies its kernel
 with H1(L/K) and its cokernel with Omega[L/K]; Cartier equality makes these finite
 and equally dimensional. The snake sequence is exact and all its terms are finite:
-for beta use the p-root residue presentation. The alternating sum of dimensions in
+for beta use exactness and the finite conormal and field-homology terms. The
+alternating sum of dimensions in
 this sequence gives dim ker beta = dim coker beta. This argument includes n = 0,
 when beta is an isomorphism. It assumes no finiteness of the absolute differential
 modules themselves. -/
@@ -68,6 +86,36 @@ theorem pthRoot_residue_dimension_balance
     let β := residueDifferentialComparison p A B
     Module.finrank L β.ker =
       Module.finrank L ((L ⊗[B] KaehlerDifferential (ZMod p) B) ⧸ β.range) := by
-  sorry
+  let := ZMod.algebra k p
+  let := ((algebraMap k A).comp (algebraMap (ZMod p) k)).toAlgebra
+  let B := pthRootAlgebra p n A (fun i ↦ algebraMap k A (a i))
+  dsimp only
+  intro hlocal hmap hind
+  let K := IsLocalRing.ResidueField A
+  let L := IsLocalRing.ResidueField B
+  obtain ⟨hfinite, hdim⟩ := pthRoot_cotangent_dimension k A p hA n a hind
+  let : Module.Finite K L := hfinite
+  have : IsNoetherianRing B := inferInstance
+  obtain ⟨α, f₀, f₁, f₂, f₃, f₄, hinj, hex₁, hex₂, hex₃, hex₄, hsurj⟩ :=
+    residue_conormal_snake_sequence p A B
+  obtain ⟨hΩ, hH, _, hcartier⟩ := cartier_equality K L (IntermediateField.fg_top K L)
+  let := hΩ
+  let := hH
+  let β := residueDifferentialComparison p A B
+  have : Module.Finite L β.ker := finite_of_exact f₀ f₁ hex₁
+  have : Module.Finite L ((L ⊗[B] KaehlerDifferential (ZMod p) B) ⧸ β.range) :=
+    Module.Finite.of_exact hex₄ hsurj
+  have hα : Module.finrank L α.ker =
+      Module.finrank L (IsLocalRing.CotangentSpace B ⧸ α.range) := by
+    have hi := LinearMap.index_eq_of_finiteDimensional (f := α)
+    rw [LinearMap.index_eq_finrank_sub, hdim] at hi
+    dsimp only [L, B] at *
+    omega
+  have heuler := Module.sum_neg_one_pow_finrank_eq_zero_of_exact_six
+    f₀ f₁ f₂ f₃ f₄ hinj hex₁ hex₂ hex₃ hex₄ hsurj
+  have hγ := hcartier inferInstance
+  change Module.finrank L β.ker = _
+  dsimp only [β, L, K, B] at *
+  omega
 
 end Algebra

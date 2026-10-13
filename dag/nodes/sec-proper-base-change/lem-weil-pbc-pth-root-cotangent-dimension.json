@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-pth-root-cotangent-dimension",
+ "kind": "statement",
+ "title": "Cotangent dimensions and residue finiteness for the regular p-root quotient",
+ "statement": "Let $k$ be a field of prime characteristic $p$, $A$ a Noetherian local $k$-algebra [def-weil-pbc-noetherian-ring] geometrically regular over $k$ [def-weil-pbc-g-ring], $n\\ge 0$, and $a:\\operatorname{Fin}n\\to k$ with the differentials $\\mathrm da_i$ linearly independent over $k$ in $\\Omega_{k/\\mathbf F_p}$ [def-weil-pbc-kahler-differentials]. Give $A$ its composite $\\mathbf F_p$-algebra structure. Put $B=A[X_i]/(X_i^p-a_i)$, the actual quotient [lem-weil-pbc-pth-root-algebra-local]. For every local-ring structure on $B$ for which $A\\to B$ is local, put $K=A/\\mathfrak m_A$ and $L=B/\\mathfrak m_B$, with the induced field map $K\\to L$. Then $L$ is finite-dimensional over $K$, and $\\dim_L(L\\otimes_K(\\mathfrak m_A/\\mathfrak m_A^2))=\\dim_L(\\mathfrak m_B/\\mathfrak m_B^2)$. The cotangent spaces carry their residue field scalar actions, and $\\dim$ denotes Module.finrank.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07E5, proof of (2) => (4), construction of k prime and A prime and equality of their local dimensions; original item steps 1-3; Algebra 00ON for flat height equality; read online at https://stacks.math.columbia.edu/tag/07E5 (local checkout absent)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-pth-root-algebra-local"
+ ],
+ "proof": [
+  {
+   "text": "Independence gives a degree p^n extension obtained by adjoining the p-th roots. The quotient over k has at most p^n reduced monomials and surjects onto the extension: its finite-dimensional domain image is a field containing the roots. Comparing dimensions identifies the quotient with this field. Frobenius of a reduced polynomial lies in k, so the extension is purely inseparable.",
+   "uses": [
+    "lem-weil-pbc-pth-roots-extension-degree",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the quotient presentation with A to identify B with the base change. The purely inseparable locality theorem gives finiteness and flatness of A -> B, the induced finite residue-field extension, and the finite-dimensional closed fibre. The fibre has dimension zero because each of its prime quotients is a finite domain over K and hence a field.",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Geometric regularity applied to the trivial extension and the p-root field extension makes A and B regular. Lift the fields to universe max u v as required by the definition and transport regularity through the tensor-unit and quotient isomorphisms. The flat height formula gives equal local dimensions, since the closed fibre has dimension zero. The regular-local cotangent criterion gives equal cotangent dimensions. A basis of the finite lower cotangent space remains a basis after scalar extension K -> L. This proves the asserted equality, including n=0.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-pth-roots-extension-degree",
+  "lem-weil-pbc-purely-inseparable-base-change-local-ring",
+  "lem-weil-pbc-regular-local-cotangent-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07E5, proof of (2) => (4), construction of k prime and A prime and equality of their local dimensions; original item steps 1-3; Algebra 00ON for flat height equality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cotangent dimensions preserved by finite purely inseparable base change of geometrically regular local rings",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cotangent dimensions preserved by finite purely inseparable base change of geometrically regular local rings",
+   "results": "IsLocalRing.finrank_cotangentSpace_eq_zero and its iff; smooth cotangent criteria; no geometrically regular p-root base-change comparison.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*finrank|finrank.*cotangent",
+   "results": "25 hits, including IsRegularLocalRing.iff_finrank_cotangentSpace in Mathlib/RingTheory/RegularLocalRing/Defs.lean:75 and spanFinrank_maximalIdeal_eq_finrank_cotangentSpace in SpanRankOperations.lean:93.",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PthRootResidueDimensionBalance",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); finite differential family argument in 07E5 (2) => (4), used for residue differential injectivity; Tag 07E5, proof of (2) => (4); read at https://stacks.math.columbia.edu/tag/07E5 because the local literature checkout is absent. The big conormal diagram and its snake sequence; original node steps 1-3 and 5-7.; Tag 07E5, proof of (2) => (4), construction of k prime and A prime and equality of their local dimensions; original item steps 1-3; Algebra 00ON for flat height equality",
+   "via": [
+    "lem-weil-pbc-pth-root-residue-dimension-balance",
+    "lem-weil-pbc-geometrically-regular-differential-family",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PthRootCotangentDimension",
+  "file": "lean/Sheaf/RingTheory/PthRootCotangentDimension.lean",
+  "declaration": "Algebra.pthRoot_cotangent_dimension",
+  "statement": "theorem pthRoot_cotangent_dimension\n    (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]\n    [IsLocalRing A] [IsNoetherianRing A] (p : ℕ) [Fact p.Prime] [CharP k p]\n    (hA : IsGeometricallyRegular k A) (n : ℕ) (a : Fin n → k) :\n    letI := ZMod.algebra k p\n    letI := ((algebraMap k A).comp (algebraMap (ZMod p) k)).toAlgebra\n    let B := pthRootAlgebra p n A (fun i ↦ algebraMap k A (a i))\n    ∀ [IsLocalRing B] [IsLocalHom (algebraMap A B)],\n    LinearIndependent k (fun i ↦ KaehlerDifferential.D (ZMod p) k (a i)) →\n    let K := IsLocalRing.ResidueField A\n    let L := IsLocalRing.ResidueField B\n    Module.Finite K L ∧\n      Module.finrank L (L ⊗[K] IsLocalRing.CotangentSpace A) =\n        Module.finrank L (IsLocalRing.CotangentSpace B)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095948-L-2457160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095948-L-2457160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

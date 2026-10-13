@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-residue-conormal-snake-sequence",
+ "kind": "statement",
+ "title": "Conormal snake exact sequence for the absolute residue differential comparison",
+ "statement": "Let $p$ be prime and $A\\to B$ a local homomorphism of local commutative $\\mathbf F_p$-algebras with compatible scalar structures. Put $K=A/\\mathfrak m_A$, $L=B/\\mathfrak m_B$, with the induced field map $K\\to L$. Let $C=L\\otimes_K(\\mathfrak m_A/\\mathfrak m_A^2)$, $D=\\mathfrak m_B/\\mathfrak m_B^2$, and let $\\beta:L\\otimes_A\\Omega_{A/\\mathbf F_p}\\to L\\otimes_B\\Omega_{B/\\mathbf F_p}$ be residueDifferentialComparison [lem-weil-pbc-pth-root-residue-differentials], using [def-weil-pbc-kahler-differentials]. There exist an $L$-linear map $\\alpha:C\\to D$ and five $L$-linear maps making an exact sequence $0\\to\\ker\\alpha\\to\\ker\\beta\\to H_1(L_{L/K})\\to D/\\operatorname{im}\\alpha\\to (L\\otimes_B\\Omega_{B/\\mathbf F_p})/\\operatorname{im}\\beta\\to\\Omega_{L/K}\\to0$. Here $H_1$ is the first homology of the naive cotangent complex [def-weil-pbc-smooth-ring-map]; endpoint exactness means injection at the left and surjection at the right. No finite-dimensionality or regularity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07E5, proof of (2) => (4), big conormal diagram and the Jacobi-Zariski identification of the field-comparison defects; original item steps 5-7; read online at https://stacks.math.columbia.edu/tag/07E5 (local checkout absent)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-pth-root-residue-differentials",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Jacobi-Zariski for F_p -> A -> K, the vanishing of H1(K/F_p), and H1(K/A) = m_A/m_A^2 give a short exact conormal row. The connecting-map naturality theorem identifies its first arrow with f mod m^2 -> 1 tensor df. Repeat this construction for B and L.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+    "lem-weil-pbc-jacobi-zariski-surjection-h1",
+    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
+    "lem-weil-pbc-nl-presentation-h1-functoriality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the lower row with L over K: field extensions are flat. Tensor cancellation gives its middle term L tensor_A Omega[A/F_p]. The local homomorphism induces alpha on conormal spaces and gamma on field differentials. Naturality gives the square for alpha and beta. The square for beta and gamma commutes on 1 tensor da by compatibility with the residue map; these generators span the tensor differential modules.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-jacobi-zariski-connecting-map-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Jacobi-Zariski for F_p -> K -> L and H1(L/F_p)=0 identify ker gamma with H1(L/K); right exactness identifies coker gamma with Omega[L/K]. Apply the snake lemma to the two short exact conormal rows and transport its maps through these equivalences. Its endpoint injection and surjection and its four internal exactness assertions are precisely the conclusion.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-homology-sequence",
+    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+    "lem-weil-pbc-snake-lemma-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+  "lem-weil-pbc-jacobi-zariski-connecting-map-naturality",
+  "lem-weil-pbc-jacobi-zariski-homology-sequence",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "lem-weil-pbc-nl-presentation-h1-functoriality",
+  "lem-weil-pbc-snake-lemma-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07E5, proof of (2) => (4), big conormal diagram and the Jacobi-Zariski identification of the field-comparison defects; original item steps 5-7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "snake exact sequence of residue conormal differential comparison of local rings",
+   "results": "Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "snake exact sequence of residue conormal differential comparison of local rings",
+   "results": "H1Cotangent.exact_map_δ, exact_δ_mapBaseChange and presentation exactness are available, but no assembled residue conormal snake sequence.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "kerCotangentToTensor|exact_δ_mapBaseChange|SnakeInput.snake_lemma",
+   "results": "24 hits, including KaehlerDifferential.kerCotangentToTensor in Basic.lean:776, H1Cotangent.exact_δ_mapBaseChange in JacobiZariski.lean:556 and ShortComplex.SnakeInput.snake_lemma; only the separate ingredients.",
+   "date": "2026-10-13",
+   "verdict": "generic ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PthRootResidueDimensionBalance",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); finite differential family argument in 07E5 (2) => (4), used for residue differential injectivity; Tag 07E5, proof of (2) => (4); read at https://stacks.math.columbia.edu/tag/07E5 because the local literature checkout is absent. The big conormal diagram and its snake sequence; original node steps 1-3 and 5-7.; Tag 07E5, proof of (2) => (4), big conormal diagram and the Jacobi-Zariski identification of the field-comparison defects; original item steps 5-7",
+   "via": [
+    "lem-weil-pbc-pth-root-residue-dimension-balance",
+    "lem-weil-pbc-geometrically-regular-differential-family",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ResidueConormalSnakeSequence",
+  "file": "lean/Sheaf/RingTheory/ResidueConormalSnakeSequence.lean",
+  "declaration": "Algebra.residue_conormal_snake_sequence",
+  "statement": "theorem residue_conormal_snake_sequence\n    (p : ℕ) [Fact p.Prime] (A : Type u) (B : Type v)\n    [CommRing A] [CommRing B] [Algebra (ZMod p) A] [Algebra A B]\n    [Algebra (ZMod p) B] [IsScalarTower (ZMod p) A B]\n    [IsLocalRing A] [IsLocalRing B] [IsLocalHom (algebraMap A B)] :\n    let K := IsLocalRing.ResidueField A\n    let L := IsLocalRing.ResidueField B\n    let β := residueDifferentialComparison p A B\n    ∃ (α : (L ⊗[K] IsLocalRing.CotangentSpace A) →ₗ[L] IsLocalRing.CotangentSpace B)\n      (f₀ : α.ker →ₗ[L] β.ker)\n      (f₁ : β.ker →ₗ[L] H1Cotangent K L)\n      (f₂ : H1Cotangent K L →ₗ[L] (IsLocalRing.CotangentSpace B ⧸ α.range))\n      (f₃ : (IsLocalRing.CotangentSpace B ⧸ α.range) →ₗ[L]\n        ((L ⊗[B] KaehlerDifferential (ZMod p) B) ⧸ β.range))\n      (f₄ : ((L ⊗[B] KaehlerDifferential (ZMod p) B) ⧸ β.range) →ₗ[L]\n        KaehlerDifferential K L),\n      Function.Injective f₀ ∧ Function.Exact f₀ f₁ ∧ Function.Exact f₁ f₂ ∧\n        Function.Exact f₂ f₃ ∧ Function.Exact f₃ f₄ ∧ Function.Surjective f₄",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095948-L-2457160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T095948-L-2457160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
