@@ -13,33 +13,40 @@
  ],
  "proof": [
   {
-   "text": "Both faces of a degree-one simplex have the same image under f. Linearizing and subtracting shows that the augmentation composed with the first differential is zero.",
+   "text": "Both faces of an edge have the same base map. Expand the first alternating-face differential as the difference of the two faces and use functoriality to prove augmentation_zero.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "At each object factor the set map through its image. The nerve is unchanged, and the surjective set map has an exact augmented free integer-module complex by [lem-weil-pbc-set-cech-nerve-free-resolution]. Identify its tuples with the evaluated wide pullbacks and its free integer modules with the free abelian groups. Evaluation is exact and detects exactness, so the presheaf augmentation resolves the free image presheaf.",
-   "uses": [
-    "lem-weil-pbc-set-cech-nerve-free-resolution"
-   ],
-   "elementary": false
+   "text": "For a set map factor through its range. Choose a section only of the resulting surjection, whose existence is proved by Function.Surjective.hasRightInverse. Mathlib Arrow.AugmentedCechNerve.extraDegeneracy supplies an extra degeneracy and its map under the free abelian functor. Its degree-zero identity s_0 d_1 = id - epsilon s_prime gives every element of the kernel as d_1(s_0 x). The nerve is unchanged by postcomposition with the range inclusion: construct inverse wide-pullback lifts and verify their naturality. Transfer exactness through this nerve isomorphism and the monomorphism obtained by free abelianizing the range inclusion, using ShortComplex.exact_iff_of_epi_of_isIso_of_mono.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The inclusion of the image in the target is locally surjective by the hypothesis on f and is objectwise injective. Its free abelianization is objectwise injective: distinct basis generators remain distinct. Every section of the free target is a finite integer combination of generators, each of which lifts over a covering sieve; the finite intersection of those covering sieves is covering and lifts their sum. Thus the free image inclusion is locally bijective. Its abelian sheafification is therefore an isomorphism. Exact sheafification [lem-weil-pbc-sheafification-exact] carries the presheaf augmentation exact sequence to an exact and epic augmentation onto the free target sheaf.",
+   "text": "Construct nerveMapIso for every finite-limit-preserving functor using preservesLimitIso and HasLimit.isoOfNatIso. Verify the projection and base formulas. Apply this to evaluation of set presheaves. After free abelianization, evaluation commutes with the first differential because it preserves finite sums and integer scalar multiplication. Construct a short-complex map with isomorphic first two components and identity third component. Objectwise exactness and jointly faithful evaluation, via JointlyReflectsIsomorphisms.exact_iff, give exactness of the presheaf augmentation for any presheaf map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Sheafification is exact by its finite-limit preservation and left adjoint structure. Map the exact presheaf short complex through presheafToSheaf and identify its differential with the sheafified alternating differential using map_sum and map_zsmul.",
    "uses": [
     "lem-weil-pbc-sheafification-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove locally_surjective_hom_ext: maps from the target of a locally surjective set-presheaf map to a sheaf agree when their precompositions agree, by separatedness on the covering image sieve. Compose the whiskered free-forgetful adjunction with the sheafification adjunction. Its natural hom equivalence reduces cancellation for the sheafified free map to locally_surjective_hom_ext; the underlying set presheaf of an abelian sheaf is a sheaf by coyonedaObjIsoForget. Finally the degree-zero wide-pullback projection has an explicit section, hence is locally surjective, so its composite with the original locally surjective map (the base augmentation) is locally surjective. The cancellation result supplies Epi epsilon.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-set-cech-nerve-free-resolution",
   "lem-weil-pbc-sheafification-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/hypercovering.tex",
-  "place": "Tag 01GC, Lemma 25.4.2 and its proof; checked at https://stacks.math.columbia.edu/tag/01GC."
+  "place": "Tag 01GC, degree-zero image-factorization and exact-sheafification argument; K1 uses Mathlib extra degeneracy for the contraction and an adjunction cancellation proof of epimorphy."
  },
  "mathlib_searches": [
   {
@@ -118,13 +125,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T230751-L-1906656",
-  "kind": "interface",
+  "landing": "20261013T011928-L-2763496",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
