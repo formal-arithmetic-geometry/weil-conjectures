@@ -123,7 +123,7 @@ theorem nonempty_iso_leftDerivedUpperStar_dualizingComplex_geometricGenericPoint
   sorry
 
 set_option maxHeartbeats 1000000 in
--- unifying the categories of `δ_{g^* K}` and of `g^* K` unfolds the derived category instances
+-- unifying the categories of `δ_{g^* K}` and of `g^* K` unfolds the derived-category instances
 /-- Blueprint `lem-weil-geometric-generic-duality`: The double dual on a geometric generic
 fibre.
 
