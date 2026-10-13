@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-exterior-tensor-local-pairing",
+ "kind": "statement",
+ "title": "Exterior tensor pairing from a local natural linear map",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $A,B,C$ sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], $f:A\\to B$ a morphism, $r,s,n\\in\\mathbb N$ with $n=r+s$, and $U\\subseteq X$ open. For every $W\\subseteq U$ let $t_W:C(W)\\to B(W)$ be $\\mathcal O_X(W)$-linear, and assume these maps commute with every restriction $W\\supseteq Z$. Using exterior sheaves [def-sc-sheaf-exterior-power] and their sheaf tensor product [def-pur-sheaf-tensor-product], there exists a natural family of linear maps $d_W:(\\bigwedge^r A\\otimes\\bigwedge^s C)(W)\\to(\\bigwedge^n B)(W)$ such that $d_W((\\bigwedge_i a_i)\\otimes(\\bigwedge_j c_j))=\\bigwedge(f_W(a_1),\\ldots,f_W(a_r),t_W(c_1),\\ldots,t_W(c_s))$ for all tuples $a\\in A(W)^r$ and $c\\in C(W)^s$, in this order and reindexed by $n=r+s$. No splitting, exactness, rank or local freeness is assumed, and no uniqueness is asserted.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: exterior and tensor universal properties, linear construction before independence of lifts"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-sheaf-exterior-power",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For the open inclusion j:U→X put V(W)=j(image)(j(preimage)(W))=U∩W and H=j_*(exteriorSheaf B (r+s)|U). On each V contained in U, exteriorPower.map for f and t, multiplication in the exterior algebra, and the target sheafification unit define a bilinear map beta_V from the two exterior presheaf sections. Degree closure follows from pow_add and Submodule.mul_mem_mul. The formula on pure wedges follows from exteriorPower.map_apply_ιMulti and ExteriorAlgebra.ιMulti_mul_ιMulti. Verify naturality on pure wedges using naturality of f,t and the unit, then extend to arbitrary exterior presheaf sections by exteriorPower.ιMulti_span and span induction in each factor.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any W, restrict both exterior presheaf inputs to V(W) and apply beta_V(W), obtaining a bilinear map b_W into H(W). Its O_X(W)-linearity follows because Scheme.Hom.app_appIso_inv identifies the scalar action in the pushforward of an open restriction with ordinary restriction O_X(W)→O_X(V(W)). For Z contained in W, V(Z) is contained in V(W); equality of the two inclusion composites and naturality of beta prove naturality of b. Apply existsUnique_bilinear_sheafification_extension for the identity ring map, locally injective and locally surjective, then tensor_bilinear_universal to obtain phi: exteriorSheaf A r tensor exteriorSheaf C s → H.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On every W contained in U, the unit of the open-restriction adjunction on exteriorSheaf B n is bijective: Scheme.Modules.restrictAdjunction_unit_app_app identifies it with restriction to V(W)=W, hence with an isomorphism. Define d_W by composing phi_W with the inverse of this linear equivalence. Naturality of phi and the unit proves naturality of d after applying the injective unit component. The pure-tensor equation of phi, the unit equation of the bilinear sheafification extension, naturality of beta along V(W)→W, and beta_W pure-wedge formula give the asserted formula, again after applying that injective component. Empty blocks, empty opens and zero rings introduce no exceptional assumptions.",
+   "uses": [
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-sheaf-exterior-power",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "proof_origin": {
+  "by": "worker H1",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: linear construction before independence of lifts",
+  "note": "Explicit pushforward construction avoids any uncharacterized comparison isomorphism. The source determinant construction is expressed using existing sheafification and tensor universal properties."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural linear maps between tensor products of exterior power sheaves determined on pure wedges locally",
+   "results": "ModuleCat.exteriorPower.hom_ext_iff, hom_ext; exteriorPower.linearMap_ext, linearMap_ext_iff; ExteriorAlgebra.lhom_ext, lhom_ext_iff; PiTensorProduct.ext; ModuleCat.exteriorPower.desc_mk. Ordinary module universal properties, no local sheaf pairing.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlternatingMap\", \"update\"",
+   "results": "AlternatingMap.map_update_self, map_update_update, map_update_zero, map_update_sum, map_update_neg, map_update_add, map_update_smul, map_update_sub, and corresponding continuous variants. No sheaf pairing.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorSheaf.*(split|lift)|ιMulti.*append|AlternatingMap.*update",
+   "results": "Mathlib/LinearAlgebra/ExteriorPower/Basic.lean lines 442 and 446; ExteriorAlgebra/Basic.lean line 322. Repository rg found the global wedge-map construction and sheaf morphism extensionality, but no natural local pairing family.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural linear maps between exterior power sheaves on an open set induced by two natural families of linear maps, wedge product",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.DeterminantSplitLinearMaps",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "Proof of (*), determinant paragraph, linear wedge construction on a splitting open",
+   "via": [
+    "lem-sc-split-determinant-linear-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorTensorLocalPairing",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorTensorLocalPairing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorTensor_local_pairing",
+  "statement": "theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}\n    (f : A ⟶ B) (r n s : ℕ) (hr : n = r + s) (U : X.Opens)\n    (t : ∀ W : X.Opens, W ≤ U →\n      C.val.obj (op W) →ₗ[X.presheaf.obj (op W)] B.val.obj (op W))\n    (ht : ∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) b,\n      B.val.map (homOfLE hZW).op (t W hW b) =\n        t Z (hZW.trans hW) (C.val.map (homOfLE hZW).op b)) :\n    ∃ d : ∀ W : X.Opens, W ≤ U →\n      (exteriorSheaf A r ⊗ exteriorSheaf C s).val.obj (op W)\n        →ₗ[X.presheaf.obj (op W)] (exteriorSheaf B n).val.obj (op W),\n      (∀ W hW (a : Fin r → A.val.obj (op W)) (b : Fin s → C.val.obj (op W)),\n        d W hW (tmulSection (exteriorSheafSection A r W a)\n          (exteriorSheafSection C s W b)) =\n        exteriorSheafSection B n W\n          (fun i ↦ Fin.append (fun j ↦ f.val.app (op W) (a j))\n            (fun j ↦ t W hW (b j)) (Fin.cast hr i))) ∧\n      (∀ (W Z : X.Opens) (hW : W ≤ U) (hZW : Z ≤ W) y,\n        (exteriorSheaf B n).val.map (homOfLE hZW).op (d W hW y) =\n          d Z (hZW.trans hW)\n            ((exteriorSheaf A r ⊗ exteriorSheaf C s).val.map (homOfLE hZW).op y))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T100000-L-2460952",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T100000-L-2460952",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

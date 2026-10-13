@@ -15,38 +15,37 @@
  ],
  "proof": [
   {
-   "text": "On U use the linear second-summand inclusion followed by e inverse. Construct the wedge morphism by exterior and tensor universal properties and sheafification, and transport it to the original restricted exterior and tensor sheaves. Evaluate on each subopen W.",
+   "text": "Use the open-restriction adjunction unit, bijective on sections W contained in U, to evaluate each restricted morphism as an O_X(W)-linear map. Prove identity, composition, addition and naturality of evaluation. Evaluate biprod.inr followed by e.inv to obtain a natural linear lift t. Apply the local exterior tensor pairing construction to f and t, producing the natural family d and its formula for these linear lifts.",
    "uses": [
-    "lem-sc-exterior-sheaf-wedge-map",
-    "lem-sc-exterior-sheaf-restrict-iso"
+    "lem-sc-exterior-tensor-local-pairing"
    ],
    "elementary": false
   },
   {
-   "text": "The difference of an arbitrary lift and the canonical lift lies in the first summand. Multilinearity expands the change of lifts into terms with r+1 first-summand factors, all zero by rank vanishing. This proves the formula for arbitrary lifts.",
+   "text": "The splitting identity (e.hom followed by fst) followed by f plus g followed by (inr followed by e.inv) equals the identity. Evaluate this identity on each subopen. It proves that t is a right inverse to g and that every section killed by g is the image under f of its first coordinate. Thus t(b)-l(b) is such an image. Replace lifted entries one at a time, using induction on the finite set of replaced indices and multilinearity. Each error term vanishes by the rank wedge-zero theorem. This establishes the given arbitrary-lift formula.",
    "uses": [
     "new-j1-exterior-sheaf-rank-wedge-zero"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality comes from the constructed sheaf morphism. For uniqueness locally express sections as sums of pure wedges and their tensors using the sheafification units, compare on these generators, then use separatedness. This includes empty opens, zero rings, and r=0 or s=0.",
+   "text": "For uniqueness compare two natural linear families on pure tensors of wedges, where their displayed formulas agree. Prove one general induction lemma for any locally surjective morphism from a module presheaf Q to a module sheaf E and sectionwise spanning generators: the image sieve is covering, and span induction establishes the property on its local preimages. Apply it to the exterior sheafification unit first in the second factor and then in the first, using exteriorPower.ιMulti_span. Apply it to the tensor sheafification unit composed with the tensor comparison inverse, using TensorProduct.span_tmul_eq_top. At each local extension, naturality and separatedness identify the original sections. Use PresheafOfModules.naturality_apply and tmulSection_map directly for restriction compatibility. Extensionality proves equality of the families. The generalized induction helper is proved locally; no duplicate special-case helper or additional hypothesis is introduced.",
    "uses": [
     "def-sc-sheaf-exterior-power"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-sheaf-exterior-power",
-  "lem-sc-exterior-sheaf-restrict-iso",
-  "lem-sc-exterior-sheaf-wedge-map",
+  "lem-sc-exterior-tensor-local-pairing",
   "new-j1-exterior-sheaf-rank-wedge-zero"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "worker H1",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts"
+  "place": "Proof of (*), determinant paragraph, split exterior comparison and independence of quotient lifts",
+  "note": "Lean proof: local adjunction evaluation, finite replacement induction for lift independence, and one generalized locally-surjective generated induction for exterior and tensor uniqueness. Repair removes all four duplicate helpers; no import cycle or public interface change. The pairing construction remains a generic split theorem."
  },
  "mathlib_searches": [
   {
@@ -123,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-ddc35",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T072409-L-1126183",
+  "landing": "20261013T100000-L-2460952",
   "kind": "interface",
-  "note": "independent Codex review: Matched all five Lean declarations with their nodes and proof routes; verified the recorded statement correction, unchanged target/caller signatures, minimal forced adaptation, clean compilation of all four modules and direct importers DeterminantSplitComparison and DeterminantWedgeMorphismSplit, original caller failure, and expected axioms."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
