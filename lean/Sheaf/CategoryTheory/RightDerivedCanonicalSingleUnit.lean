@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.RightDerivedSingleDegreeComparison
 import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift
 
 @[expose] public section
 
@@ -51,6 +52,14 @@ theorem rightDerivedFunctorPlusUnit_canonical_single (X : B) (n : ℕ) :
       (G.rightDerivedSingleDegreeComparison n).hom.app X =
     GS.obj.iCycles n ≫
       G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom := by
-  sorry
+  have h := G.rightDerivedFunctorPlusUnit_canonical_single_shift X n
+  dsimp only at h ⊢
+  dsimp only [rightDerivedSingleDegreeComparison, Iso.trans_hom, NatTrans.comp_app]
+  simp only [Iso.trans_hom, NatTrans.comp_app, ← Category.assoc] at h ⊢
+  rw [h]
+  simp only [Category.assoc]
+  rw [← Category.assoc (G.rightDerivedPlusSingleUnitHomology X),
+    rightDerivedPlusSingleUnitHomology_comp_comparison,
+    rightDerivedZeroIsoSelf_inv_hom_id_app, Category.comp_id]
 
 end CategoryTheory.Functor

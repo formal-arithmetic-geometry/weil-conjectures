@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-right-derived-canonical-single-unit-shift",
+ "kind": "statement",
+ "title": "Shift transport of the single-complex derived unit to degree zero",
+ "statement": "Let B and C be abelian categories with chosen derived categories [def-weil-abstract-derived-category], and assume B has enough injectives. Let G : B → C be additive, X : B and n : ℕ. Put S = single_n X as a bounded-below cochain complex, GS = G(S), and let e : single_n X ≅ Q(S) be the canonical singleFunctorIsoCompQ composed with quotientCompQhIso inverse and lifted through the full inclusion. Let c : H^n(RG(single_n(-))) ≅ H^0(RG(single_0(-))) be the three-factor shift transport: inverse singleFunctors.shiftIso at -n, the RG.commShiftIso at -n, and the H^0 homology shift comparison. Then homologyπ(GS,n) followed by homologyFunctorObjQIso(GS,n) inverse, H^n of the derived unit on S, H^n(RG(e inverse)), and c.hom at X equals iCycles(GS,n) followed by G(singleObjXSelf.hom) and the degree-zero map rightDerivedPlusSingleUnitHomology G X defined in [lem-sbc-right-derived-single-unit-homology-comparison].",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+  "place": "Functor.commShift_rightDerivedFunctorPlusUnit (lines 245-281); single-complex specialization using the homology and single-functor shift comparisons. Background: Stacks Tag 015J, proof remark (1)."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sbc-right-derived-single-unit-homology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify single_n X with single_0 X shifted by -n. Naturality of the derived unit along the canonical single/quotient identification and its commShift equation move the unit through this shift. Applying H^n and its shift comparison gives exactly the three-factor isomorphism c on the target side.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the source side, the quotient homology comparison, single-complex homology comparison, and the mapped sole-term identification take the cycles projection to iCycles followed by G(singleObjXSelf.hom) and the inverse degree-zero single homology comparison. The remaining H^0 unit is rightDerivedPlusSingleUnitHomology as defined in [lem-sbc-right-derived-single-unit-homology-comparison]. No classical augmentation comparison or left exactness is used.",
+   "uses": [
+    "lem-sbc-right-derived-single-unit-homology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sbc-right-derived-single-unit-homology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
+  "place": "Functor.commShift_rightDerivedFunctorPlusUnit (lines 245-281); single-complex specialization using the homology and single-functor shift comparisons. Background: Stacks Tag 015J, proof remark (1).",
+  "note": "Canonical normalization from the proved unit shift compatibility; strictly the shift-transport step, before the classical augmentation comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology shift compatibility of derived functor unit natural transformation",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.mapCochainComplexShiftIso, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-13",
+   "verdict": "Supporting shift lemmas only; no single-unit homology transport statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commShiftIso\"",
+   "results": "12 hits: CategoryTheory.Functor.CommShift.commShiftIso, CategoryTheory.Functor.commShiftIso_zero', CategoryTheory.Functor.CommShift.commShiftIso_zero, CategoryTheory.Functor.commShiftIso_add', CategoryTheory.Functor.CommShift.commShiftIso_add, CategoryTheory.Functor.commShiftIso_id_hom_app, CategoryTheory.Functor.commShiftIso_id_inv_app, CategoryTheory.Functor.CommShift.id_commShiftIso_hom_app",
+   "date": "2026-10-13",
+   "verdict": "Supporting shift lemmas only; no single-unit homology transport statement."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedPlusSingleUnitHomology|rightDerivedFunctorPlusUnit.*shift",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "Supporting shift lemmas only; no single-unit homology transport statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived unit on a single complex transported along shifts equals degree zero unit on homology",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnit",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-right-derived-canonical-single-unit",
+   "place": "Step 1: transport the single-complex unit to degree zero before applying the classical derived comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnitShift",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedCanonicalSingleUnitShift.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorPlusUnit_canonical_single_shift",
+  "statement": "theorem rightDerivedFunctorPlusUnit_canonical_single_shift (X : B) (n : ℕ) :\n    let S : CochainComplex.Plus B :=\n      ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩\n    let e : (DerivedCategory.Plus.singleFunctor B n).obj X ≅\n        DerivedCategory.Plus.Q.obj S :=\n      DerivedCategory.Plus.ι.preimageIso\n        ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫\n          (DerivedCategory.quotientCompQhIso B).symm.app _)\n    let GS := G.mapCochainComplexPlus.obj S\n    let H₀ := DerivedCategory.Plus.homologyFunctor C 0\n    let RG := G.rightDerivedFunctorPlus\n    let c := Functor.isoWhiskerRight\n      ((DerivedCategory.Plus.singleFunctors B).shiftIso (-(n : ℤ)) n 0 (by simp)).symm\n      (RG ⋙ H₀.shift (n : ℤ)) ≪≫\n      Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor B 0)\n        (Functor.isoWhiskerRight (RG.commShiftIso (-(n : ℤ))) (H₀.shift (n : ℤ))) ≪≫\n      Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor B 0 ⋙ RG)\n        (H₀.shiftIso (-(n : ℤ)) (n : ℤ) 0 (by ring))\n    GS.obj.homologyπ n ≫ (DerivedCategory.Plus.homologyFunctorObjQIso GS n).inv ≫\n      (DerivedCategory.Plus.homologyFunctor C n).map\n        (G.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient B).obj S)) ≫\n      (DerivedCategory.Plus.homologyFunctor C n).map (G.rightDerivedFunctorPlus.map e.inv) ≫\n      c.hom.app X =\n    GS.obj.iCycles n ≫\n      G.map (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) n X).hom ≫\n      G.rightDerivedPlusSingleUnitHomology X",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T011923-L-2761889",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T011923-L-2761889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

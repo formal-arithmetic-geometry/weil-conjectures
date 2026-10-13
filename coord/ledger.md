@@ -10448,3 +10448,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:19 L: merged deliver/A3/Sheaf.AlgebraicGeometry.AlternatingCechTailDeletionCorrespondence (stage 3; reviewer PASS; first push; landing 20261013T011922-L-2761526 (proof); batch 20261013T011921; modules 1; new nodes 0)
 - 01:19 L: merged deliver/A4/Sheaf.AlgebraicGeometry.CoherentHomsOverOpen (stage 3; reviewer PASS; first push; landing 20261013T011922-L-2761679 (proof); batch 20261013T011921; modules 1; new nodes 3)
 - 01:19 L: merged deliver/B3/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilizedSystem (stage 3; reviewer PASS; first push; landing 20261013T011923-L-2761788 (proof); batch 20261013T011921; modules 1; new nodes 0)
+- 01:19 L: merged deliver/B3/Sheaf.CategoryTheory.RightDerivedCanonicalSingleUnit (stage 3; reviewer PASS; first push; landing 20261013T011923-L-2761889 (interface); batch 20261013T011921; modules 2; new nodes 1)
