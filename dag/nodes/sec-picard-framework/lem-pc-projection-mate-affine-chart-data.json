@@ -1,0 +1,114 @@
+{
+ "id": "lem-pc-projection-mate-affine-chart-data",
+ "kind": "statement",
+ "title": "Geometric affine chart square",
+ "statement": "For schemes X,Y [def-pc-scheme], a quasi-compact quasi-separated f:X→Y and an affine open V of Y, there exist a commutative ring A in universe u, a compact quasi-separated scheme Z, quasi-compact quasi-separated g:Z→Spec A, and isomorphisms eV:Spec A≅V and eZ:Z≅f inverse image of V with g;eV=eZ;(f restricted to V). There are no derived-category or complex inputs.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EU, lemma-cohomology-base-change"
+ },
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "/-- The geometric square of an affine chart, independently of derived categories.\nSource: Stacks Project, Tag 08EU, first sentence of the proof.\n(blueprint: lem-pc-projection-mate-affine-chart-data).\n\nProof: take the section ring A on V and the inverse-image open Z. Affineness makes\nV compact and quasi-separated. Quasi-compactness of f makes Z compact, and the\nrestricted quasi-separated morphism over the quasi-separated target makes Z\nquasi-separated. Compose the restricted morphism with the canonical affine\nisomorphism to obtain g. Restriction and composition with an isomorphism preserve\nthe morphism properties. Take eV to be the inverse chart isomorphism and eZ the\nidentity; cancellation proves the square. The empty open uses the zero ring. -/\n",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08EU",
+  "place": "Parent certificate step 1, proved explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "quasi compact inverse image affine open scheme compact chart isoSpec",
+   "results": "8 hits: AlgebraicGeometry.quasiCompact_iff_forall_affine, AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.isCompact_iff_exists, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion. ",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen.isoSpec\"",
+   "results": "12 hits: AlgebraicGeometry.IsAffineOpen.isoSpec, AlgebraicGeometry.IsAffineOpen.isoSpec_hom, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_fromSpec, AlgebraicGeometry.IsAffineOpen.isoSpec_inv_ι, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_fromSpec_assoc, AlgebraicGeometry.IsAffineOpen.isoSpec_inv_ι_assoc, AlgebraicGeometry.IsAffineOpen.isoSpec_inv_toSpecΓ_assoc, AlgebraicGeometry.IsAffineOpen.isoSpec_inv_toSpecΓ. ",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiCompact_restrict|quasiSeparated_restrict|isCompact_preimage",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean. ",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasi compact quasi separated scheme morphism, construct a compact inverse image of an affine open and its commuting spectrum chart square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectionMateAffineChartCertificate",
+  "date": "2026-10-13",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0A9Q Hom chain, fourth equality: the derived projection formula; projection formula affine reduction, generators and closure; comparison on one affine chart before invoking the affine theorem",
+   "via": [
+    "lem-pc-qcqs-projection-mate-affine-descent",
+    "lem-pc-qcqs-derived-projection-mate",
+    "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "lem-pc-global-hom-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectionMateAffineChartData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectionMateAffineChartData.lean",
+  "declaration": "AlgebraicGeometry.exists_projectionMate_affineChart_data",
+  "statement": "theorem exists_projectionMate_affineChart_data\n    (X Y : Scheme.{u}) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]\n    (V : Y.Opens) (hV : IsAffineOpen V) :\n    ∃ (A : Type u) (hA : CommRing A),\n      letI := hA\n      ∃ (Z : Scheme.{u}) (hZ : CompactSpace Z) (hZqs : QuasiSeparatedSpace Z),\n        letI := hZ\n        letI := hZqs\n        ∃ (g : Z ⟶ Spec (.of A)) (hg : QuasiCompact g) (hgqs : QuasiSeparated g),\n          letI := hg\n          letI := hgqs\n          ∃ (eV : Spec (.of A) ≅ V.toScheme)\n            (eZ : Z ≅ (f ⁻¹ᵁ V).toScheme),\n            g ≫ eV.hom = eZ.hom ≫ (f ∣_ V) ",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T132737-L-4152442",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261013T132737-L-4152442",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

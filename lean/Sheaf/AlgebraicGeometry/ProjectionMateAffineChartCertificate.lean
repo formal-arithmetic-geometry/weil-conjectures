@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.ProjectionMateAffineChartData
+import Sheaf.AlgebraicGeometry.ProjectionMateAffineChartTransport
 
 /-! # A local affine comparison certificate for a supplied projection mate
 
@@ -23,6 +25,8 @@ universe u w
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Eliminating the nested chart witnesses elaborates two standard localization instances.
 /-- Every affine chart supplies an affine projection mate whose invertibility implies
 invertibility of the original mate on the cohomology sheaves restricted to that chart.
 There is no affine projection-formula hypothesis in this comparison theorem.
@@ -98,6 +102,16 @@ theorem exists_projectionMate_affineChart_certificate
               (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)
               ((derivedPullback f).obj M.obj ⊗ L.obj)
               (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫
-                (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))).over V) := by sorry
+                (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))).over V) := by
+  obtain ⟨A, hA, Z, hZ, hZqs, g, hg, hgqs, eV, eZ, hcomm⟩ :=
+    exists_projectionMate_affineChart_data X Y f V hV
+  let := hA
+  let := hZ
+  let := hZqs
+  let := hg
+  let := hgqs
+  obtain ⟨q, s, N, E, htransport⟩ :=
+    projectionMate_affineChart_transport X Y f p t M L V A Z g eV eZ hcomm
+  exact ⟨A, hA, Z, hZ, hZqs, g, hg, hgqs, eV, eZ, hcomm, q, s, N, E, htransport⟩
 
 end AlgebraicGeometry
