@@ -6,6 +6,8 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeMVMaps
+import Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangePrefix
+import Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangeTargetTranspose
 
 /-! # The counit for base change of a composite morphism
 
@@ -18,6 +20,17 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 set_option autoImplicit false
 namespace AlgebraicGeometry
+
+private theorem prefix_glue {D : Type*} [Category D]
+    {A B C D₁ D₂ D₃ D₄ D₅ D₆ D₇ D₈ D₉ Y : D}
+    {a₁ : A ⟶ B} {a₂ : B ⟶ C}
+    {b₁ : A ⟶ D₁} {b₂ : D₁ ⟶ D₂} {b₃ : D₂ ⟶ D₃} {b₄ : D₃ ⟶ D₄}
+    {b₅ : D₄ ⟶ D₅} {b₆ : D₅ ⟶ D₆} {b₇ : D₆ ⟶ D₇} {b₈ : D₇ ⟶ C}
+    (h : a₁ ≫ a₂ = b₁ ≫ b₂ ≫ b₃ ≫ b₄ ≫ b₅ ≫ b₆ ≫ b₇ ≫ b₈)
+    (c₁ : C ⟶ D₈) (c₂ : D₈ ⟶ D₉) (c₃ : D₉ ⟶ Y) :
+    a₁ ≫ a₂ ≫ c₁ ≫ c₂ ≫ c₃ =
+      b₁ ≫ b₂ ≫ b₃ ≫ b₄ ≫ b₅ ≫ b₆ ≫ b₇ ≫ b₈ ≫ c₁ ≫ c₂ ≫ c₃ := by
+  simpa only [Category.assoc] using congrArg (fun t ↦ t ≫ c₁ ≫ c₂ ≫ c₃) h
 
 /-- The first part of the target transpose: compute the composite base change and
 its f-counit, leaving the single open-square base change and target open counit intact.
@@ -89,6 +102,10 @@ theorem relativeMV_composite_baseChange_counit
       (derivedPullback (relativeMVOpenLift g' i)).map
         ((relativeMVAdj (pullback.fst g' U.ι)).counit.app
           ((derivedPullback (pullback.fst g' U.ι)).obj ((derivedPullback g').obj K))) ≫
-      c'.hom.app ((derivedPullback g').obj K) := by sorry
+      c'.hom.app ((derivedPullback g').obj K) := by
+  dsimp only
+  rw [relativeMV_composite_baseChange_target_transpose]
+  exact prefix_glue (relativeMV_composite_baseChange_prefix f f' g g' hpull K W U)
+    _ _ _
 
 end AlgebraicGeometry

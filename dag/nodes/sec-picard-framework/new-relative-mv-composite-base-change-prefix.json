@@ -1,0 +1,137 @@
+{
+ "id": "new-relative-mv-composite-base-change-prefix",
+ "kind": "statement",
+ "title": "Composite base-change prefix before applying the open counit",
+ "statement": "Let gprime:Xprime→X, fprime:Xprime→Sprime, f:X→S and g:Sprime→S form a cartesian square of schemes [def-pc-scheme, def-pc-base-change]. Choose the derived categories, pullbacks, adjunctions, and comparison mates of [def-pc-derived-category, def-pc-derived-pullback, def-pc-relative-mv-maps]. Let K be in D(X), and let W and U be arbitrary opens of X. Put C=R(U→X)L(U→X)K and A=R(U→S)L(U→X)K. Take the fprime-transpose of the canonical local U base-change arrow followed by the inverse Uprime,fprime direct-image comparison. Pull it back along Wprime→Xprime and precompose with the inverse Wprime,fprime pullback comparison. This equals the W composite-square comparison at A, followed by pullback along Wprime→W of the inverse W,f pullback comparison and LW of the f counit precomposed with Lf of the inverse U,f direct-image comparison, then the W coefficient comparison at C, and finally L(Wprime→Xprime) of the single U-open base-change arrow followed by the U coefficient comparison. No inclusion W⊆U is required. No target open counit is applied on either side.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08HY (remark-base-change), 08BV (lemma-unbounded-mayer-vietoris), and 08HZ (lemma-unbounded-relative-mayer-vietoris)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-relative-mv-maps"
+ ],
+ "proof": [
+  {
+   "text": "Expand the U local arrow and the base-change map for U→X→S by its adjoint counit description. The mate identity for the inverse U,f direct-image comparison and the composite-adjunction counit formula express the fprime transpose as the f-counit factor followed by the single U-open base-change arrow and coefficient comparison. Naturality moves the U coefficient comparison through the transpose; the triangle identity cancels the intermediate fprime unit.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the resulting expression back along Wprime→Xprime and precompose with the inverse Wprime,fprime comparison. Apply associativity coherence for the pinned pullback composition comparisons to W→X→S and to the commutative base-change squares. Projection identities and hpull.w identify the scheme composites; proof irrelevance identifies equality transports. The result is the displayed W square comparison, pulled-back f-counit factor, W coefficient comparison at C, and pulled-back single U-open arrow. No inclusion or open counit occurs. Equal or empty opens and zero complexes satisfy the same equations.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-relative-mv-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-relative-mv-maps",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V3",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Composite base-change prefix before applying the open counit; separation of the two parts of the original counit calculation."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangeCounit",
+  "date": "2026-10-14",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Composite base-change prefix before applying the open counit within the composite-base-change-counit calculation.",
+   "via": [
+    "new-relative-mv-composite-base-change-counit",
+    "new-relative-mv-restriction-target-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homEquiv_symm_rightAdjointUniq|rightAdjointUniq_hom_app_counit|mateEquiv_vcomp",
+   "results": "14 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-13",
+   "verdict": "General adjunction building blocks only; no pinned derived scheme formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transpose an adjunction mate for composition, then compose with a restricted counit",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.conjugateEquiv_counit, CategoryTheory.conjugateEquiv_counit_symm",
+   "date": "2026-10-13",
+   "verdict": "General adjunction building blocks only; no pinned derived scheme formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "date": "2026-10-13",
+   "verdict": "General adjunction building blocks only; no pinned derived scheme formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for a composite morphism and transposition of restriction under the composite adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangePrefix",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMVCompositeBaseChangePrefix.lean",
+  "declaration": "AlgebraicGeometry.relativeMV_composite_baseChange_prefix",
+  "statement": "theorem relativeMV_composite_baseChange_prefix\n    [∀ Z : Scheme.{u}, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (hpull : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (W U : X.Opens) :\n    let C := (schemeDerivedDirectImage U.ι).obj ((derivedPullback U.ι).obj K)\n    let A := (schemeDerivedDirectImage (U.ι ≫ f)).obj ((derivedPullback U.ι).obj K)\n    let θ := (relativeMVComp (pullback.snd g' U.ι) U.ι).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n        (pullback.condition (f := g') (g := U.ι)).symm) ≫\n      (relativeMVComp (pullback.fst g' U.ι) g').inv.app K\n    (relativeMVComp (pullback.fst g' W.ι) f').inv.app\n      (relativeMVLocalArrow f f' g g' hpull K ((derivedPullback g').obj K) (𝟙 _) U).left ≫\n      (derivedPullback (pullback.fst g' W.ι)).map\n        (((relativeMVAdj f').homEquiv _ _).symm\n          ((relativeMVLocalArrow f f' g g' hpull K ((derivedPullback g').obj K)\n              (𝟙 _) U).hom ≫\n            (relativeMVImageComp (pullback.fst g' U.ι) f').inv.app\n              ((derivedPullback (pullback.fst g' U.ι)).obj\n                ((derivedPullback g').obj K)))) =\n      (relativeMVComp (pullback.fst g' W.ι ≫ f') g).hom.app A ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj A)\n        (show pullback.snd g' W.ι ≫ (W.ι ≫ f) =\n            (pullback.fst g' W.ι ≫ f') ≫ g by\n          rw [← pullback.condition_assoc, Category.assoc, hpull.w, ← Category.assoc]).symm) ≫\n      (relativeMVComp (pullback.snd g' W.ι) (W.ι ≫ f)).inv.app A ≫\n      (derivedPullback (pullback.snd g' W.ι)).map\n        ((relativeMVComp W.ι f).inv.app A ≫\n          (derivedPullback W.ι).map\n            ((derivedPullback f).map ((relativeMVImageComp U.ι f).inv.app\n                ((derivedPullback U.ι).obj K)) ≫ (relativeMVAdj f).counit.app C)) ≫\n      (relativeMVComp (pullback.snd g' W.ι) W.ι).hom.app C ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj C)\n        (pullback.condition (f := g') (g := W.ι)).symm) ≫\n      (relativeMVComp (pullback.fst g' W.ι) g').inv.app C ≫\n      (derivedPullback (pullback.fst g' W.ι)).map\n        (schemeDerivedBaseChangeMap U.ι (pullback.fst g' U.ι) g'\n            (pullback.snd g' U.ι) (pullback.condition (f := g') (g := U.ι)).symm\n            ((derivedPullback U.ι).obj K) ≫\n          (schemeDerivedDirectImage (pullback.fst g' U.ι)).map θ)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T165652-L-1811756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261013T165652-L-1811756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
