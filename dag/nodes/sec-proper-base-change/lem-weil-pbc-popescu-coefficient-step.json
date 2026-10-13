@@ -1,0 +1,161 @@
+{
+ "id": "lem-weil-pbc-popescu-coefficient-step",
+ "kind": "statement",
+ "title": "Single fixed-parameter coefficient rescaling and kernel stabilization",
+ "statement": "Let k:Type u be a field of characteristic p>0, Lambda:Type v a Noetherian commutative k-algebra, q a prime, L=Lambda_q, m its maximal ideal, N>0, n at least N, c>0, and S=L/m^n [def-weil-pbc-localization-at-prime, def-weil-pbc-algebra-hom-quotient]. Let u_j (j in Fin d) be elements of q whose images form a regular sequence in L [def-weil-pbc-regular-sequence]. Let z_j (j in Fin s) be elements of Lambda with m^N contained in their extended ideal. Let D:Type w be a commutative local Artinian k-algebra, S local, and g:D to S a flat local homomorphism commuting with k [def-weil-pbc-flat-ring-map]. Suppose b_j in D map to the residues of z_j, and all residues of u_j lie in g(D). Fix i in Fin d and t:Fin d to Lambda with t_j outside q whenever j<i. There exist l outside q, ell_j in Lambda, and a commutative local Artinian k-algebra D':Type(max u v w), a k-algebra map h:D to D', and a flat local map g':D' to S, with g'h=g, such that D' is essentially smooth over D via h [def-weil-pbc-essentially-smooth-ring-map], (u_i l)^(2N)=sum_j ell_j z_j in Lambda, and multiplication by u_i l and its square have equal kernels on Lambda modulo the span of (u_j t_j)^(8c) for j<i. The residues of l and all ell_j belong to g'(D').",
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ, lemma-resolve-general, item-choose-deltai, ad (13): one successor step"
+ },
+ "proof": [
+  {
+   "text": "Flat locality gives faithful flatness and injectivity. Ideal contraction applied to u_i^N in S gives coefficients d_j in D because u_i and the z_j have lifts. Lift g(d_j) to c_j in L. The error is in m^n=m^(n-N)m^N, contained in m^(n-N) times the ideal of the z_j. Write it as sum z_j cprime_j, cprime_j in m^(n-N). Set w_j=u_i^N(c_j+cprime_j). Then u_i^(2N)=sum w_j z_j exactly in L, while the correction u_i^N cprime_j vanishes in S, so the residues of w_j lie in g(D).",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write w_j=v_j/s0 with a common denominator s0 outside q. Choose s1 outside q killing the cleared equation error. For s=s0*s1 set mu_j=s^(2N-1)*s1*v_j. The equality (s*u_i)^(2N)=sum mu_j*z_j holds in Lambda, and mu_j/s^(2N)=w_j in L. Use the generic Artinian enlargement to capture the residue of s^r for r>0. Replace s by s^r and mu_j by s^(2N(r-1))*mu_j. Residue membership follows by multiplication, and the equation persists.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-artinian-coefficient-enlargement",
+    "lem-weil-pbc-essentially-smooth-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The preceding t_j and s are units after localization. Unit multiplication preserves the regular sequence, and positive powers of preceding parameters preserve regularity. Thus the current s*u_i has equal first and square kernels in the localized preceding-power quotient. Ogoma gives s' outside q whose every positive power stabilizes the kernels in the Lambda quotient. Capture a positive power of s' by the generic Artinian enlargement, multiply s by it and each mu_j by its 2N-th power. This gives l and ell_j with the kernel equality and both residue memberships. Compose the two extensions; give D' the k-structure through D, making h a k-algebra map.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-powers",
+    "lem-weil-pbc-ogoma",
+    "lem-weil-pbc-artinian-coefficient-enlargement",
+    "lem-weil-pbc-essentially-smooth-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The target S is local Artinian: n>0 and Lambda is Noetherian. The enlargement constructions use finite polynomial rings, quotients and localizations over D, so all carriers can be taken in max u v w. No earlier coefficient rows are modified. Empty coefficient families are valid because the same error argument applies to the zero ideal.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-artinian-coefficient-enlargement",
+  "lem-weil-pbc-essentially-smooth-composition",
+  "lem-weil-pbc-regular-sequence-powers",
+  "lem-weil-pbc-ogoma",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ, lemma-resolve-general, item-choose-deltai, ad (13): one successor step",
+  "note": "Formal argument of the cited source steps, with explicit universe transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "rescale one regular parameter to stabilize kernels and include relation coefficients in a local Artinian extension",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rescale one regular parameter in a Noetherian ring to stabilize annihilators and lift coefficients into a flat local Artinian ring",
+   "date": "2026-10-13",
+   "results": "8 results, on regularity and power series; no combined one-parameter coefficient step.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ogoma|Ogoma|exists.*rescal|rescal.*coefficient",
+   "date": "2026-10-13",
+   "results": "No Mathlib coefficient-rescaling match. Library Ogoma and RegularSequencePowers have the kernel and regularity ingredients.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuCoefficientInduction",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07FJ, lemma-resolve-general, item-choose-deltai, ad (13): one successor step",
+   "via": [
+    "lem-weil-pbc-popescu-coefficient-induction",
+    "lem-weil-pbc-popescu-coefficient-rescaling",
+    "lem-weil-pbc-popescu-rescaling-data",
+    "lem-weil-pbc-popescu-unpadded-coefficient-chart",
+    "lem-weil-pbc-popescu-rescaled-coefficient-chart",
+    "lem-weil-pbc-popescu-parameter-coefficient-model",
+    "lem-weil-pbc-popescu-parameter-coefficients",
+    "lem-weil-pbc-popescu-parameter-solution",
+    "lem-weil-pbc-popescu-char-p-preparation-global",
+    "popescu-char-p-preparation-core",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuCoefficientStep",
+  "file": "lean/Sheaf/RingTheory/PopescuCoefficientStep.lean",
+  "declaration": "Algebra.exists_popescu_coefficient_step",
+  "statement": "theorem exists_popescu_coefficient_step\n    {k : Type u} {Λ : Type v} [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)\n    (q : PrimeSpectrum Λ) (N n : ℕ) (hN : 0 < N) (hn : N ≤ n)\n    (d s c : ℕ) (hc : 0 < c)\n    (uΛ : Fin d → Λ) (hu : ∀ j, uΛ j ∈ q.asIdeal)\n    (hsequence : RingTheory.Sequence.IsRegular (Localization.AtPrime q.asIdeal)\n      (List.ofFn (fun j ↦ algebraMap Λ (Localization.AtPrime q.asIdeal) (uΛ j))))\n    (z : Fin s → Λ)\n    (hpower : IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ N ≤\n      (Ideal.span (Set.range z)).map (algebraMap Λ (Localization.AtPrime q.asIdeal)))\n    (D : Type w) [CommRing D] [IsLocalRing D] [IsArtinianRing D] [Algebra k D]\n    (g : D →+* Localization.AtPrime q.asIdeal ⧸\n      IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n    [IsLocalRing (Localization.AtPrime q.asIdeal ⧸\n      IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)]\n    [IsLocalHom g] (hgflat : g.Flat)\n    (hgk : ∀ x : k, g (algebraMap k D x) = algebraMap k _ x)\n    (b : Fin s → D)\n    (hb : ∀ j, g (b j) = Ideal.Quotient.mk\n      (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n      (algebraMap Λ (Localization.AtPrime q.asIdeal) (z j)))\n    (hinc : ∀ j, Ideal.Quotient.mk\n      (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n      (algebraMap Λ (Localization.AtPrime q.asIdeal) (uΛ j)) ∈ Set.range g)\n    (i : Fin d) (t : Fin d → Λ) (ht : ∀ j, j.val < i.val → t j ∉ q.asIdeal) :\n    ∃ (l : Λ) (ell : Fin s → Λ),\n      l ∉ q.asIdeal ∧\n      (uΛ i * l) ^ (2 * N) = ∑ j : Fin s, ell j * z j ∧\n      (∀ x : Λ ⧸ Ideal.span {y | ∃ j : Fin d, j.val < i.val ∧\n        y = (uΛ j * t j) ^ (c * 8)},\n        (uΛ i * l) • x = 0 ↔ (uΛ i * l) ^ 2 • x = 0) ∧\n      ∃ (D' : Type (max u v w)) (_ : CommRing D') (_ : IsLocalRing D')\n        (_ : IsArtinianRing D') (_ : Algebra k D')\n        (h : D →ₐ[k] D')\n        (g' : D' →+* Localization.AtPrime q.asIdeal ⧸\n          IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n),\n        IsLocalHom g' ∧ g'.Flat ∧\n        (letI : Algebra D D' := h.toRingHom.toAlgebra; EssentiallySmooth D D') ∧\n        g'.comp h.toRingHom = g ∧\n        Ideal.Quotient.mk (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n          (algebraMap Λ (Localization.AtPrime q.asIdeal) l) ∈ Set.range g' ∧\n        (∀ j, Ideal.Quotient.mk\n          (IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ n)\n          (algebraMap Λ (Localization.AtPrime q.asIdeal) (ell j)) ∈ Set.range g')",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T124311-L-3776635",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T124311-L-3776635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

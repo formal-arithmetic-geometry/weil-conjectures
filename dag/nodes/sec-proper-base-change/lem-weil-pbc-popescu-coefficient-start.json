@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-popescu-coefficient-start",
+ "kind": "statement",
+ "title": "Initial coefficient solution over the unlocalized polynomial quotient",
+ "statement": "Let k be a field, A and Lambda commutative k-algebras, alpha:A to Lambda a k-algebra map, q a prime of Lambda, n>0, and f:k[X:Fin r] to A a surjective k-algebra map [def-weil-pbc-mv-polynomial-ring]. Put P=k[Y:Fin m0], p0=phi0 inverse image q for a k-algebra map phi0:P to Lambda, R0=P_(p0), L=Lambda_q, I=p0 R0, J=qL, Q0=R0/I^n, B=P/p0^n and K=m_L^n [def-weil-pbc-localization-at-prime, def-weil-pbc-algebra-hom-quotient]. Suppose psi0:R0 to L commutes with P to Lambda to L. Suppose D0:Type(max u w) is a commutative local Artinian Q0-algebra, Q0 to D0 and g0:D0 to L/J^n are local homomorphisms, Q0 to D0 is essentially smooth [def-weil-pbc-essentially-smooth-ring-map], g0 is flat [def-weil-pbc-flat-ring-map], and their composite on R0 is quotient after psi0. Suppose every quotient image of alpha(f(X_i)) lies in g0(D0). There is D:Type(max u v w), a local Artinian k- and B-algebra with a compatible scalar tower, essentially smooth over B, a k-algebra map fA:A to D, and a flat local map g:D to L/K. The target L/K is local; g on P to B to D is quotient after phi0, and g(fA(x)) is quotient after alpha for every x in A. Here k,A,Lambda live in universes u,v,w respectively.",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ, lemma-resolve-general, steps 9 and 25; initial A-map in the coefficient induction"
+ },
+ "proof": [
+  {
+   "text": "Localization identifies qL with the maximal ideal of L. Its positive power is proper, hence L/K is a nontrivial local quotient. Use quotientEquivAlgOfEq to identify the given target with L/K.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Localization commutes with quotient: Q1=R0/(p0^n R0) is a localization of B. The identity B-algebra is smooth, so Q1 is essentially smooth. Ideal.map_pow identifies Q1 with Q0. Compose the essentially smooth Q0 to D0 map with this localization, giving the B-algebra structure. Its k-structure is through B. The two given homomorphism equations verify the B and k compatibility on polynomial classes.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "lem-weil-pbc-essentially-smooth-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The flat local map D0 to L/K is faithfully flat and injective. Evaluate the chosen lifts of alpha(f(X_i)) in D0 to obtain fP. Equality after g with alpha composed with f follows on generators by MvPolynomial.algHom_ext. Injectivity gives ker(f) contained in ker(fP), so AlgHom.liftOfSurjective constructs fA and proves its target equation.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "ULift D0 to universe max u v w. Transport local and Artinian properties via the ring equivalence. ULift the smooth model too, pull back its denominator submonoid, and use ringEquivOfRingEquiv on the localizations. Its scalar compatibility is the scalar-tower equality. Compose with the original presentation to retain essential smoothness; inverse laws preserve the displayed map equations.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-weil-pbc-essentially-smooth-composition",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ, lemma-resolve-general, steps 9 and 25; initial A-map in the coefficient induction",
+  "note": "Formal argument of the cited source steps, with explicit universe transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lift a polynomial presentation into a flat local Artinian coefficient algebra",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lift an algebra map from a polynomial presentation through an injective faithfully flat local map when its generators are in the image",
+   "date": "2026-10-13",
+   "results": "8 results; no combined setup theorem. AlgHom.liftOfSurjective found by separate Loogle search.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "local_artinian_prime_pow|exists_popescu_coefficient_start|coefficient_step|essentiallySmooth.*localization",
+   "date": "2026-10-13",
+   "results": "No matching theorem in Mathlib; library PopescuSolutionModulo has only a private local-Artinian quotient helper.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuCoefficientInduction",
+  "date": "2026-10-13",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lemma 07FJ, lemma-resolve-general, steps 9 and 25; initial A-map in the coefficient induction",
+   "via": [
+    "lem-weil-pbc-popescu-coefficient-induction",
+    "lem-weil-pbc-popescu-coefficient-rescaling",
+    "lem-weil-pbc-popescu-rescaling-data",
+    "lem-weil-pbc-popescu-unpadded-coefficient-chart",
+    "lem-weil-pbc-popescu-rescaled-coefficient-chart",
+    "lem-weil-pbc-popescu-parameter-coefficient-model",
+    "lem-weil-pbc-popescu-parameter-coefficients",
+    "lem-weil-pbc-popescu-parameter-solution",
+    "lem-weil-pbc-popescu-char-p-preparation-global",
+    "popescu-char-p-preparation-core",
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuCoefficientStart",
+  "file": "lean/Sheaf/RingTheory/PopescuCoefficientStart.lean",
+  "declaration": "Algebra.exists_popescu_coefficient_start",
+  "statement": "theorem exists_popescu_coefficient_start\n    {k : Type u} {A : Type v} {Λ : Type w}\n    [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]\n    (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ)\n    (n : ℕ) (hn : 0 < n)\n    (r : ℕ) (f : MvPolynomial (Fin r) k →ₐ[k] A) (hf : Function.Surjective f)\n    (m₀ : ℕ) (φ₀ : MvPolynomial (Fin m₀) k →ₐ[k] Λ)\n    (ψ₀ : Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) →+*\n      Localization.AtPrime q.asIdeal)\n    (hψ₀ : ψ₀.comp (algebraMap (MvPolynomial (Fin m₀) k)\n        (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom))) =\n      (algebraMap Λ (Localization.AtPrime q.asIdeal)).comp φ₀.toRingHom)\n    (D₀ : Type (max u w)) [CommRing D₀] [IsLocalRing D₀] [IsArtinianRing D₀]\n    [Algebra (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸\n      ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)\n        (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^ n) D₀]\n    (g₀ : D₀ →+* Localization.AtPrime q.asIdeal ⧸\n      (q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal))) ^\n        n)\n    [IsLocalHom (algebraMap (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸\n      ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)\n        (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^\n          n) D₀)]\n    [IsLocalHom g₀]\n    (hsmooth₀ : EssentiallySmooth\n      (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸\n        ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)\n          (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^\n            n) D₀)\n    (hgflat₀ : g₀.Flat)\n    (hfactor₀ : (g₀.comp (algebraMap\n      (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸\n        ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)\n          (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^\n            n) D₀)).comp\n      (Ideal.Quotient.mk (((q.asIdeal.comap φ₀.toRingHom).map\n        (algebraMap (MvPolynomial (Fin m₀) k)\n          (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)))) ^\n            n)) =\n      (Ideal.Quotient.mk ((q.asIdeal.map\n        (algebraMap Λ (Localization.AtPrime q.asIdeal))) ^\n          n)).comp ψ₀)\n    (hinc₀ : ∀ i : Fin r, Ideal.Quotient.mk\n      ((q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal))) ^\n        n)\n      (algebraMap Λ (Localization.AtPrime q.asIdeal) (α (f (MvPolynomial.X i)))) ∈\n        Set.range g₀)\n :\n    let P := MvPolynomial (Fin m₀) k\n    let p₀ := q.asIdeal.comap φ₀.toRingHom\n    let B := P ⧸ p₀ ^ n\n    let L := Localization.AtPrime q.asIdeal\n    let K := IsLocalRing.maximalIdeal L ^ n\n    ∃ (D : Type (max u v w)) (_ : CommRing D) (_ : IsLocalRing D)\n      (_ : IsArtinianRing D) (_ : Algebra k D) (_ : Algebra B D)\n      (_ : IsScalarTower k B D),\n      EssentiallySmooth B D ∧\n      ∃ (fA : A →ₐ[k] D) (g : D →+* L ⧸ K),\n        IsLocalRing (L ⧸ K) ∧ IsLocalHom g ∧ g.Flat ∧\n        (∀ z : P, g (algebraMap B D (Ideal.Quotient.mk (p₀ ^ n) z)) =\n          Ideal.Quotient.mk K (algebraMap Λ L (φ₀ z))) ∧\n        (∀ x, g (fA x) = Ideal.Quotient.mk K (algebraMap Λ L (α x)))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T124311-L-3776635",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261013T124311-L-3776635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

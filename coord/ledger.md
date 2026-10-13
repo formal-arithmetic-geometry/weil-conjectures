@@ -12481,3 +12481,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:43 L: merged deliver/H4/Sheaf.Algebra.Homology.DerivedTensorFirstLocalizationModels (stage 3; reviewer PASS; first push; landing 20261013T124310-L-3776097 (interface); batch 20261013T124305; modules 4; new nodes 3)
 - 12:43 L: merged deliver/J1/Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineData (stage 3; reviewer PASS; first push; landing 20261013T124310-L-3776321 (interface); batch 20261013T124305; modules 3; new nodes 2)
 - 12:43 L: merged deliver/K2/Sheaf.AlgebraicGeometry.PicardRankMatchDirectImage (stage 3; reviewer PASS; first push; landing 20261013T124311-L-3776469 (proof); batch 20261013T124305; modules 1; new nodes 0)
+- 12:43 L: merged deliver/K4/Sheaf.RingTheory.PopescuCoefficientInduction (stage 3; reviewer PASS; first push; landing 20261013T124311-L-3776635 (interface); batch 20261013T124305; modules 5; new nodes 4)

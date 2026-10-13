@@ -21,69 +21,46 @@
  },
  "proof": [
   {
-   "text": "The flat local Artinian coefficient map is faithfully flat and injective. Lift the images of the finite presentation generators of A to D0. The commuting quotient diagram checks scalar compatibility; injectivity checks all presentation relations, giving A to D0.",
+   "text": "Apply exists_popescu_coefficient_start at n=N+d(8c). It yields the initial local Artinian k/B coefficient ring, its A-map, and flat local target map, with the polynomial and A compatibility equations.",
    "uses": [
-    "lem-weil-pbc-flat-local-hom-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "def-weil-pbc-finitely-presented-algebra"
+    "lem-weil-pbc-popescu-coefficient-start"
    ],
    "elementary": false
   },
   {
-   "text": "Induct on i while retaining all previous factors, coefficients and kernel claims. In the current coefficient ring, faithful-flat contraction writes the residue of phi0(uP_i)^N as sum a_j d_j. Lift d_j to L. The error in m_L^n lies in m_L^(n-N) times the singular ideal, because hpower and n>=N imply m_L^n=m_L^(n-N)m_L^N. Write it as sum a_j cprime_j with cprime_j in m_L^(n-N). Multiplication by phi0(uP_i)^N makes all correction residues zero and gives an exact 2N-th-power relation with coefficient residues in the current ring.",
+   "text": "Induct over j<=d. Retain factor and coefficient functions together with their equations, kernel equalities and range memberships for indices less than j, and the local essentially smooth coefficient ring and maps. At j<d apply the single-parameter coefficient step to index i=j, z_j=alpha(a_j), b_j=fA(a_j), and uLambda_j=phi0(uP_j). The singular ideal generation equality identifies hpower with the step's span hypothesis, and polynomial compatibility supplies the parameter residue memberships.",
    "uses": [
-    "lem-weil-pbc-faithfully-flat-ideal-contraction",
-    "def-weil-pbc-singular-ideal"
+    "lem-weil-pbc-popescu-coefficient-step"
    ],
    "elementary": false
   },
   {
-   "text": "For coefficients w_j choose a common denominator s0 outside q with w_j=v_j/s0, then s1 outside q killing the cleared equation error. Set s=s0*s1 and mu_j=s^(2N-1)*s1*v_j. Direct multiplication gives (s*phi0(uP_i))^(2N)=sum mu_j*alpha(a_j) in Lambda and mu_j/s^(2N)=w_j in L. Use 07FI to include s^r for some r>0 in an essentially smooth coefficient enlargement, replacing s by s^r and mu_j by s^(2N(r-1))*mu_j. The equations persist. Their residues are (s^r)^(2N) times residues of w_j, hence lie in the coefficient ring.",
+   "text": "Update only factor i and coefficient row i. The private proved prefix_span_update shows that each preceding-parameter ideal is unchanged. For old indices transport the range witnesses through h and g'h=g; for the new index use the supplied step conclusions. Compose the A-map with h. Give the new ring its B-structure through h and verify the k/B scalar tower from h.commutes. Essentially smooth composition preserves the induction invariant. The base j=0 has no parameter claims.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-popescu-enlarge-solution-modulo",
     "lem-weil-pbc-essentially-smooth-composition"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Powers of preceding parameters followed by the current parameter are regular in L by hsequence. Ogoma gives a clearing factor whose every positive power equalizes first and square kernels on the corresponding Lambda quotient. Use 07FI again to include a positive power of this factor, multiply s by it, and multiply mu_j by its 2N-th power. This gives tLambda_i, ell_ij and both required coefficient memberships. Earlier conditions persist through the enlargements. Locality of the coefficient map makes every lift of tLambda_i a unit.",
+   "text": "Apply the proved small local model at j=d, obtaining a B-algebra equivalent coefficient ring in Type(max u v). Define its k-structure through B and transport the A and target maps. Inverse laws preserve flatness, locality, all scalar identities and every range membership. Choose lifts of the factors and coefficients from those memberships. Each factor residue is a unit because the factor is outside q, and the local homomorphism reflects units; this gives delta_i. Assemble the required conjunctions.",
    "uses": [
-    "lem-weil-pbc-regular-sequence-powers",
-    "lem-weil-pbc-ogoma",
-    "lem-weil-pbc-popescu-enlarge-solution-modulo",
-    "lem-weil-pbc-essentially-smooth-composition"
+    "lem-weil-pbc-essentially-smooth-small-local-model"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The finite tower is essentially smooth over the localization of B=P/p0^n, and hence over B by composition with localization. For a small model, express the smooth finite-presentation B-algebra as a quotient of a finite polynomial B-algebra. Since the resulting coefficient ring is local and a localization of that model, it is the localization at the inverse image of its maximal ideal. Both the finite polynomial quotient and that localization are in Type(max u v). Transport the coefficient maps, local and flat properties, units and identities along the resulting algebra equivalence. For d=0 retain D0 and its lifted A-map, and perform the same small-model replacement.",
-   "uses": [
-    "lem-weil-pbc-essentially-smooth-composition",
-    "lem-weil-pbc-localization-base-change",
-    "def-weil-pbc-essentially-smooth-ring-map",
-    "def-weil-pbc-finitely-presented-algebra"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-local-hom-faithfully-flat",
-  "lem-weil-pbc-faithfully-flat-ideal-contraction",
-  "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-singular-ideal",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-popescu-enlarge-solution-modulo",
+  "lem-weil-pbc-popescu-coefficient-start",
+  "lem-weil-pbc-popescu-coefficient-step",
   "lem-weil-pbc-essentially-smooth-composition",
-  "lem-weil-pbc-regular-sequence-powers",
-  "lem-weil-pbc-ogoma",
-  "lem-weil-pbc-localization-base-change",
-  "def-weil-pbc-essentially-smooth-ring-map"
+  "lem-weil-pbc-essentially-smooth-small-local-model"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "K4",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma 07FJ, lemma-resolve-general, item-choose-deltai; coefficient quotient in item 25"
+  "place": "Lemma 07FJ, item-choose-deltai, ad (13), and step 25",
+  "note": "Finite prefix induction is written in Lean; setup and small-model transport are proved. Only the strictly single-parameter successor step remains a separate named theorem."
  },
  "mathlib_searches": [
   {
@@ -167,9 +144,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261013T111835-L-3046469",
+  "landing": "20261013T124311-L-3776635",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

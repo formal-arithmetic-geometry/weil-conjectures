@@ -11,10 +11,11 @@ public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
+import Sheaf.RingTheory.PopescuCoefficientStart
+import Sheaf.RingTheory.PopescuCoefficientStep
+import Sheaf.RingTheory.EssentiallySmoothSmallLocalModel
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
 import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.RegularSequencePowers
-import Sheaf.AlgebraicGeometry.Ogoma
 
 /-!
 # Coefficient enlargement along fixed parameters
@@ -30,6 +31,21 @@ set_option autoImplicit false
 universe u v w
 namespace Algebra
 
+private theorem prefix_span_update
+    {R : Type u} [CommRing R] {d : ℕ} (uΛ t : Fin d → R)
+    (i : Fin d) (l : R) (e : ℕ) (j : Fin d) (hji : j.val ≤ i.val) :
+    Ideal.span {y | ∃ k : Fin d, k.val < j.val ∧
+      y = (uΛ k * Function.update t i l k) ^ e} =
+    Ideal.span {y | ∃ k : Fin d, k.val < j.val ∧ y = (uΛ k * t k) ^ e} := by
+  congr 1
+  ext y
+  constructor <;> rintro ⟨k, hk, hy⟩
+  · have hki : k ≠ i := by intro h; subst k; omega
+    exact ⟨k, hk, by simpa only [Function.update_of_ne hki] using hy⟩
+  · have hki : k ≠ i := by intro h; subst k; omega
+    exact ⟨k, hk, by simpa only [Function.update_of_ne hki] using hy⟩
+
+set_option linter.unusedVariables false in
 /-- Rescale fixed polynomial parameters in Lambda while retaining an Artinian coefficient
 solution. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ,
 `item-choose-deltai`, together with localization and the coefficient descent in item 25.
@@ -61,14 +77,21 @@ and multiply the rescaling factor and coefficients by this power and its 2N-th p
 Previous claims persist because only the new index is changed and coefficient maps
 remain injective. Locality makes lifts of all rescaling factors units.
 
-Compose the finite coefficient tower with the localization of B at the complement of
-p0, obtaining essential smoothness over B. To fit Type(max u v), present its smooth
-finite-presentation model over B and realize it as a quotient of a finite polynomial
-ring over B, then localize at the contracted maximal ideal. This ring has the required
-universe, and the equivalence with the original coefficient ring transports all maps
-and identities. The case d=0 has no induction steps: retain D0, construct the A-map,
-and perform the same small-model replacement. No polynomial reindexing or polynomial
-kernel conclusion is asserted. -/
+The initial coefficient algebra is essentially smooth over B by localization and
+composition. At each successor step, compose its B-algebra structure with the new
+k-algebra map and use essential-smoothness composition. Update only the current factor
+and coefficient row; the span of preceding powered parameters is unchanged, as proved
+by prefix_span_update. Transport earlier coefficient witnesses through the commuting
+ring maps. Finite induction gives the state at d, including the case d=0.
+
+Finally apply exists_essentiallySmooth_small_local_model to shrink the coefficient
+ring and its smooth localization model into Type(max u v). Transport the B-algebra
+structure, form the compatible k-structure through B, and transport the A-map and
+flat local target map along the algebra equivalence. Choose lifts of the factors and
+coefficients from their proved range memberships. The factor residues are units,
+since tLambda_i is outside q; a local homomorphism reflects units, so these lifts
+supply delta_i. All displayed identities follow by the equivalence's commutation and
+inverse laws. No polynomial reindexing or polynomial kernel conclusion is asserted. -/
 theorem exists_popescu_coefficient_induction
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]
@@ -163,6 +186,193 @@ theorem exists_popescu_coefficient_induction
             Ideal.Quotient.mk K (algebraMap Λ L (φ₀ z))) ∧
           (∀ i, g (δ i : D) = Ideal.Quotient.mk K (algebraMap Λ L (tΛ i))) ∧
           (∀ x, g (f₀ x) = Ideal.Quotient.mk K (algebraMap Λ L (α x))) ∧
-          (∀ ij, g (coeff ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by sorry
+          (∀ ij, g (coeff ij) = Ideal.Quotient.mk K (algebraMap Λ L (ell ij))) := by
+  classical
+  let P := MvPolynomial (Fin m₀) k
+  let p₀ := q.asIdeal.comap φ₀.toRingHom
+  let n := N + d * (8 * c)
+  let B := P ⧸ p₀ ^ n
+  let L := Localization.AtPrime q.asIdeal
+  let K := IsLocalRing.maximalIdeal L ^ n
+  let uΛ : Fin d → Λ := fun i ↦ φ₀ (uP i)
+  let res : Λ →+* L ⧸ K := (Ideal.Quotient.mk K).comp (algebraMap Λ L)
+  have hn : 0 < n := by dsimp [n]; omega
+  have hnN : N ≤ n := by dsimp [n]; omega
+  have hu : ∀ i, uΛ i ∈ q.asIdeal := huP
+  have hz : Ideal.span (Set.range (fun j ↦ α (a j))) =
+      Ideal.map α.toRingHom (singularIdeal k A) := by
+    rw [← ha, Ideal.map_span, ← Set.range_comp]
+    rfl
+  have hpower' : IsLocalRing.maximalIdeal L ^ N ≤
+      (Ideal.span (Set.range (fun j ↦ α (a j)))).map (algebraMap Λ L) := by
+    rw [hz]
+    exact hpower
+  let T (j : ℕ) : Prop :=
+    ∃ (D : Type (max u v w)) (_ : CommRing D) (_ : IsLocalRing D)
+      (_ : IsArtinianRing D) (_ : Algebra k D) (_ : Algebra B D)
+      (_ : IsScalarTower k B D),
+      EssentiallySmooth B D ∧
+      ∃ (fA : A →ₐ[k] D) (g : D →+* L ⧸ K),
+        IsLocalRing (L ⧸ K) ∧ IsLocalHom g ∧ g.Flat ∧
+        (∀ z : P, g (algebraMap B D (Ideal.Quotient.mk (p₀ ^ n) z)) =
+          res (φ₀ z)) ∧
+        (∀ x, g (fA x) = res (α x)) ∧
+        ∃ (t : Fin d → Λ) (ell : Fin d × Fin s → Λ),
+          ∀ i, i.val < j →
+            t i ∉ q.asIdeal ∧
+            (uΛ i * t i) ^ (2 * N) = ∑ k : Fin s, ell (i, k) * α (a k) ∧
+            (∀ x : Λ ⧸ Ideal.span {y | ∃ k : Fin d, k.val < i.val ∧
+              y = (uΛ k * t k) ^ (c * 8)},
+              (uΛ i * t i) • x = 0 ↔ (uΛ i * t i) ^ 2 • x = 0) ∧
+            res (t i) ∈ Set.range g ∧
+            (∀ k, res (ell (i, k)) ∈ Set.range g)
+  have hT : ∀ j, j ≤ d → T j := by
+    intro j
+    induction j with
+    | zero =>
+      intro _
+      obtain ⟨D, hD, hlocal, hart, hkD, hBD, htower, hsmooth, fA, g,
+        hS, hg, hflat, hB, hA⟩ :=
+        exists_popescu_coefficient_start α q n hn r f hf m₀ φ₀ ψ₀ hψ₀
+          D₀ g₀ hsmooth₀ hgflat₀ hfactor₀ hinc₀
+      refine ⟨D, hD, hlocal, hart, hkD, hBD, htower, hsmooth, fA, g,
+        hS, hg, hflat, hB, hA, fun _ ↦ 1, fun _ ↦ 0, ?_⟩
+      intro i hi
+      omega
+    | succ j ih =>
+      intro hj
+      obtain ⟨D, hD, hlocal, hart, hkD, hBD, htower, hsmooth, fA, g,
+        hS, hg, hflat, hB, hA, t, ell, hprev⟩ := ih (by omega)
+      let : CommRing D := hD
+      let : Algebra k D := hkD
+      let : Algebra B D := hBD
+      have : IsLocalRing D := hlocal
+      have : IsArtinianRing D := hart
+      have : IsScalarTower k B D := htower
+      have : IsLocalRing (L ⧸ K) := hS
+      have : IsLocalHom g := hg
+      have hgk (x : k) : g (algebraMap k D x) = algebraMap k (L ⧸ K) x := by
+        rw [IsScalarTower.algebraMap_apply k B D]
+        change g (algebraMap B D (Ideal.Quotient.mk (p₀ ^ n) (MvPolynomial.C x))) = _
+        rw [hB]
+        change Ideal.Quotient.mk K (algebraMap Λ L (φ₀ (algebraMap k P x))) = _
+        rw [φ₀.commutes]
+        rfl
+      have hinc (i : Fin d) : res (uΛ i) ∈ Set.range g :=
+        ⟨algebraMap B D (Ideal.Quotient.mk (p₀ ^ n) (uP i)), hB (uP i)⟩
+      let i : Fin d := ⟨j, by omega⟩
+      obtain ⟨l, e, hl, he, hker, D', hD', hlocal', hart', hkD', h, g',
+        hg', hflat', hsmooth', hcomp, hlift, helift⟩ :=
+        exists_popescu_coefficient_step p hp q N n hN hnN d s c hc uΛ hu hsequence
+          (fun k ↦ α (a k)) hpower' D g hflat hgk (fun k ↦ fA (a k))
+          (fun k ↦ hA (a k)) hinc i t (fun k hk ↦ (hprev k hk).1)
+      let : CommRing D' := hD'
+      let : Algebra k D' := hkD'
+      let : Algebra B D' := (h.toRingHom.comp (algebraMap B D)).toAlgebra
+      have : IsLocalRing D' := hlocal'
+      have : IsArtinianRing D' := hart'
+      have : IsScalarTower k B D' := IsScalarTower.of_algebraMap_eq fun x ↦ by
+        change algebraMap k D' x = h (algebraMap B D (algebraMap k B x))
+        rw [← IsScalarTower.algebraMap_apply k B D, h.commutes]
+      have hAlg : (algebraMap B D).toAlgebra = (inferInstance : Algebra B D) :=
+        Algebra.algebra_ext _ _ fun _ ↦ rfl
+      have hsmooth0 : letI : Algebra B D := (algebraMap B D).toAlgebra;
+          EssentiallySmooth B D := by
+        rw [hAlg]
+        exact hsmooth
+      have hsm : EssentiallySmooth B D' :=
+        RingHom.essentiallySmooth_comp (algebraMap B D) h.toRingHom hsmooth0 hsmooth'
+      have hge (x : D) : g' (h x) = g x := congrArg (fun f ↦ f x) hcomp
+      have preserve {x : L ⧸ K} (hx : x ∈ Set.range g) : x ∈ Set.range g' := by
+        obtain ⟨y, rfl⟩ := hx
+        exact ⟨h y, hge y⟩
+      let t' := Function.update t i l
+      let ell' : Fin d × Fin s → Λ := fun ij ↦ if ij.1 = i then e ij.2 else ell ij
+      refine ⟨D', hD', hlocal', hart', hkD', inferInstance, inferInstance, hsm,
+        h.comp fA, g', hS, hg', hflat', ?_, ?_, t', ell', ?_⟩
+      · intro z
+        exact (hge _).trans (hB z)
+      · intro x
+        exact (hge _).trans (hA x)
+      · intro k hk
+        have hkji : k.val ≤ i.val := by dsimp [i]; omega
+        have hI := prefix_span_update uΛ t i l (c * 8) k hkji
+        by_cases hki : k = i
+        · subst k
+          refine ⟨?_, ?_, ?_, ?_, ?_⟩
+          · simpa [t'] using hl
+          · simpa [t', ell'] using he
+          · change ∀ x : Λ ⧸ Ideal.span {y | ∃ k : Fin d, k.val < i.val ∧
+                y = (uΛ k * Function.update t i l k) ^ (c * 8)}, _
+            rw [hI]
+            simpa only [t', Function.update_self] using hker
+          · simpa [t', res] using hlift
+          · simpa [ell', res] using helift
+        · have hkj : k.val < j := by
+            have : k.val ≠ i.val := fun heq ↦ hki (Fin.ext heq)
+            dsimp [i] at hkji this
+            omega
+          obtain ⟨hkt, hke, hkk, hklift, hkell⟩ := hprev k hkj
+          refine ⟨?_, ?_, ?_, ?_, ?_⟩
+          · simpa [t', Function.update_of_ne hki] using hkt
+          · simpa [t', ell', hki, Function.update_of_ne hki] using hke
+          · change ∀ x : Λ ⧸ Ideal.span {y | ∃ j : Fin d, j.val < k.val ∧
+                y = (uΛ j * Function.update t i l j) ^ (c * 8)}, _
+            rw [hI]
+            simpa only [t', Function.update_of_ne hki] using hkk
+          · simpa [t', Function.update_of_ne hki] using preserve hklift
+          · intro a
+            simpa [ell', hki] using preserve (hkell a)
+  obtain ⟨D, hD, hlocal, hart, hkD, hBD, htower, hsmooth, fA, g,
+    hS, hg, hflat, hB, hA, t, ell, hprev⟩ := hT d le_rfl
+  let : CommRing D := hD
+  let : Algebra k D := hkD
+  let : Algebra B D := hBD
+  have : IsLocalRing D := hlocal
+  have : IsArtinianRing D := hart
+  have : IsScalarTower k B D := htower
+  have : IsLocalRing (L ⧸ K) := hS
+  have : IsLocalHom g := hg
+  obtain ⟨D', hD', hBD', hlocal', hart', hsmooth', ⟨e⟩⟩ :=
+    exists_essentiallySmooth_small_local_model.{u, max u v w, v} D hsmooth
+  let : CommRing D' := hD'
+  let : Algebra B D' := hBD'
+  let : Algebra k D' := ((algebraMap B D').comp (algebraMap k B)).toAlgebra
+  have : IsLocalRing D' := hlocal'
+  have : IsArtinianRing D' := hart'
+  have : IsScalarTower k B D' := IsScalarTower.of_algebraMap_eq' rfl
+  let ek := e.restrictScalars k
+  let g' := g.comp e.symm.toRingHom
+  have hg' : IsLocalHom g' := by dsimp [g']; infer_instance
+  have hflat' : g'.Flat := (RingHom.Flat.of_bijective e.symm.bijective).comp hflat
+  have preserve {x : L ⧸ K} (hx : x ∈ Set.range g) : x ∈ Set.range g' := by
+    obtain ⟨y, rfl⟩ := hx
+    exact ⟨e y, by simp [g']⟩
+  have htunit (i : Fin d) : IsUnit (res (t i)) := by
+    apply (Ideal.Quotient.mk K).isUnit_map
+    exact IsLocalization.map_units (M := q.asIdeal.primeCompl) L
+      ⟨t i, (hprev i i.isLt).1⟩
+  choose delta hdelta using fun i ↦ preserve (hprev i i.isLt).2.2.2.1
+  choose coeff hcoeff using fun (ij : Fin d × Fin s) ↦
+    preserve ((hprev ij.1 ij.1.isLt).2.2.2.2 ij.2)
+  have hdeltaunit (i : Fin d) : IsUnit (delta i) :=
+    isUnit_of_map_unit g' (delta i) (by rw [hdelta i]; exact htunit i)
+  let δ : Fin d → D'ˣ := fun i ↦ (hdeltaunit i).unit
+  refine ⟨t, ell, fun i ↦ (hprev i i.isLt).1,
+    fun i ↦ (hprev i i.isLt).2.1, fun i ↦ (hprev i i.isLt).2.2.1,
+    D', hD', hlocal', hart', inferInstance, hBD', inferInstance, hsmooth',
+    ek.toAlgHom.comp fA, g', δ, coeff, hS, hg', hflat', ?_, ?_, ?_, hcoeff⟩
+  · intro z
+    change g (e.symm (algebraMap B D' (Ideal.Quotient.mk (p₀ ^ n) z))) = res (φ₀ z)
+    rw [e.symm.commutes]
+    exact hB z
+  · intro i
+    change g' ((hdeltaunit i).unit : D') = res (t i)
+    rw [IsUnit.unit_spec]
+    exact hdelta i
+  · intro x
+    change g (e.symm (e (fA x))) = res (α x)
+    rw [e.symm_apply_apply]
+    exact hA x
 
 end Algebra
