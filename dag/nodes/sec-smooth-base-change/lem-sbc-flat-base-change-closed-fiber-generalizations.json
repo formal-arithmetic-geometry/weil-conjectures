@@ -1,0 +1,134 @@
+{
+ "id": "lem-sbc-flat-base-change-closed-fiber-generalizations",
+ "kind": "statement",
+ "title": "Generalizations lift in the original closed fibre of a flat base-changed chart",
+ "statement": "Let $A,B$ be commutative local rings, $R$ a commutative ring, $\\varphi:A\\to B$ a local homomorphism (the inverse image of the maximal ideal of B is the maximal ideal of A), and $c:B\\to R$ a homomorphism. Let $q:L\\to\\operatorname{Spec}A$ be a scheme morphism [def-weil-pbc-scheme-conventions], and let $X=L\\times_{\\operatorname{Spec}A}\\operatorname{Spec}B$ [def-pc-fibre-product]. Suppose $t:\\operatorname{Spec}R\\to X$ is flat [def-weil-flat-morphism] and its composite with $\\operatorname{pr}_B$ is $\\operatorname{Spec}c$. If $v\\in\\operatorname{Spec}R$ contracts to the closed point of $\\operatorname{Spec}B$, then there exists $\\eta\\in L_{\\mathfrak m_A}$ with image $\\operatorname{pr}_L(t(v))$ in L such that every generalization $\\eta^{\\prime}$ of $\\eta$ lifts to $w\\in\\operatorname{Spec}R$ generalizing v, contracting to $\\mathfrak m_B$, and with image $\\operatorname{pr}_L(t(w))=\\eta^{\\prime}$ in L. No smoothness, Noetherian hypothesis, or flatness of $\\varphi$ is required.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, closed-fibre power-series image argument; Tag 00HS (flat going down)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write g=Spec(phi), b for the closed point of Spec B, r for X to Spec B, and f=t followed by r. Localness identifies g(b) with the closed point of Spec A. The induced map d from the fibre of f at b to the fibre of r at b is a base change of t: cancellation of the two fibre pullback squares proves the required cartesian square (IsPullback.of_right). Thus d is flat.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The pullback.map e from the fibre of r at b to the fibre of q at g(b) is cartesian over the residue field map by Mathlib isPullback_fiberToSpecResidueField_of_isPullback. That residue field map is flat by the field-extension leaf, so e is flat by MorphismProperty.of_isPullback. Hence d followed by e is flat by Mathlib Flat.comp.",
+   "uses": [
+    "lem-pc-field-extension-flat"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the fibre homeomorphism to lift v to the fibre of f at b. Going down, in Mathlib Flat.generalizingMap, lifts each generalization of its image along the flat composite d followed by e. Project the lifted point back using the fibre inclusion. Continuity proves specialization to v, the fibre homeomorphism proves contraction to b, and pullback commutativity proves its image is the desired original-fibre point.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-field-extension-flat",
+  "lem-sc-flat-going-down"
+ ],
+ "proof_origin": {
+  "kind": "agent-written",
+  "by": "H2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYB, original generic-image node steps 1-3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of a scheme along a local homomorphism lifts generalizations in the closed fiber",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat.generalizingMap",
+   "results": "AlgebraicGeometry.Flat.generalizingMap",
+   "date": "2026-10-13",
+   "verdict": "no exact match; supporting declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "GeneralizingMap|MvPowerSeries.*ker|irreducibleComponents.*closure",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean; Mathlib/RingTheory/Spectrum/Prime/Topology.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; supporting declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FlatPowerSeriesChartGenericImage",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYB, sentence on the image of the extended maximal ideal; Tag 00HS (flat going down)",
+   "via": [
+    "lem-sbc-flat-power-series-chart-generic-image",
+    "lem-sbc-smooth-section-power-series-chart",
+    "lem-sbc-closed-fiber-power-series-test",
+    "lem-sbc-smooth-local-depth-two-closed-fiber-flat",
+    "lem-sbc-smooth-local-depth-two-finite-flat",
+    "lem-sbc-smooth-local-depth-two-finite-purity",
+    "lem-sbc-smooth-local-depth-two-etale-extension",
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FlatBaseChangeClosedFiberGeneralizations",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FlatBaseChangeClosedFiberGeneralizations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_closed_fiber_generalization_lifts",
+  "statement": "theorem exists_closed_fiber_generalization_lifts\n    (A B R : Type u) [CommRing A] [IsLocalRing A]\n    [CommRing B] [IsLocalRing B] [CommRing R]\n    {L : Scheme.{u}} (q : L ⟶ Spec (.of A))\n    (φ : A →+* B) [IsLocalHom φ] (c : B →+* R)\n    (t : Spec (.of R) ⟶ Limits.pullback q (Spec.map (CommRingCat.ofHom φ))) [Flat t]\n    (ht : t ≫ Limits.pullback.snd q (Spec.map (CommRingCat.ofHom φ)) =\n      Spec.map (CommRingCat.ofHom c))\n    (v : Spec (.of R)) (hv : PrimeSpectrum.comap c v = IsLocalRing.closedPoint B) :\n    ∃ η : q.fiber (IsLocalRing.closedPoint A),\n      (t ≫ Limits.pullback.fst q (Spec.map (CommRingCat.ofHom φ))) v =\n        q.fiberι (IsLocalRing.closedPoint A) η ∧\n      ∀ η', η' ⤳ η → ∃ w : Spec (.of R), w ⤳ v ∧\n        PrimeSpectrum.comap c w = IsLocalRing.closedPoint B ∧\n        (t ≫ Limits.pullback.fst q (Spec.map (CommRingCat.ofHom φ))) w =\n          q.fiberι (IsLocalRing.closedPoint A) η'",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T111852-L-3052687",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261013T111852-L-3052687",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
