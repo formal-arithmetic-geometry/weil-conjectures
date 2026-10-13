@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.FormalModuleQuotientAffineProjectionSurjective
+import Sheaf.AlgebraicGeometry.FormalModuleQuotientAffineProjectionKernel
 
 /-!
 # Affine sections of the explicit formal quotient projection
@@ -49,6 +48,8 @@ theorem formalModuleQuotient_affine_projection
       (moduleSpecΓFunctor (R := CommRingCat.of A)).map
         (formalModuleQuotientπ J m ((tilde.functor (CommRingCat.of A)).obj M))
     Function.Surjective p ∧ LinearMap.ker p.hom = I ^ m • (⊤ : Submodule A M) := by
-  sorry
+  dsimp
+  exact ⟨formalModuleQuotient_affine_projection_surjective A I J hJ M m hm,
+    formalModuleQuotient_affine_projection_kernel A I J hJ M m hm⟩
 
 end AlgebraicGeometry

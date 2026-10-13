@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-formal-module-quotient-affine-projection-surj",
+ "kind": "statement",
+ "title": "Surjectivity component of affine formal quotient projection",
+ "statement": "Let A be a commutative ring, I an ideal of A, J the ideal sheaf on Spec A associated with I through GammaSpecIso, M any A-module, and m>0. Define p as the tilde/global-sections unit M to Gamma(Spec A, tilde M), followed by global sections of the explicit cokernel projection formalModuleQuotientπ J m (tilde M) of def-weil-pbc-coherent-formal-module. Then p is surjective.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I8 and 01IC; Tag 087W in coherent.tex, affine module correspondence"
+ },
+ "proof": [
+  {
+   "text": "Use the ideal-times theorem for quasi-coherence of the positive ideal power. The tensor-product theorem and preservation of quasi-coherence under cokernels and kernels show quasi-coherence of the image defining its product with tilde M. Apply the affine cokernel-image theorem at the whole spectrum to obtain sectionwise surjectivity, and compose with the bijective tilde unit. No ideal-power range computation is needed.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K1",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I8, 01IC and 087W; second reading checked affine cokernel exactness and tilde unit transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PreservesColimits.*moduleSpecΓ|surjective.*cokernel|map.*cokernel",
+   "results": "No exact match. 1 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjectivity of global sections of a cokernel morphism between quasicoherent modules on an affine scheme",
+   "results": "No exact match. 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective, AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective, SheafOfModules.generatorsOfIsCokernelFree_π, TopModuleCat.cokerπ_surjective, PresheafOfModules.instIsLocallySurjectiveToSheafify, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_I, AlgebraicGeometry.Scheme.Hom.app_surjective",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.ker, LinearEquiv",
+   "results": "No exact match. 12 hits: LinearEquiv.ker, LinearEquiv.ker_comp, LinearMap.kerComplementEquivRange, LinearMap.kerComplementEquivRange_apply_coe, LinearMap.kerComplementEquivRange_symm_apply, LinearMap.iInfKerProjEquiv, LinearMap.quotKerEquivOfSurjective, LinearMap.quotKerEquivRange",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of global sections of a quotient by an ideal sheaf power on an affine scheme is the ideal power times the module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalModuleQuotientAffineProjection",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-formal-modules-affine-complete",
+   "place": "Tag 087W implicit converse: affine sheaf quotients correspond to module quotients; step 2 of the quotient cone node",
+   "via": [
+    "lem-weil-pbc-coherent-formal-modules-affine-complete",
+    "lem-weil-pbc-coherent-formal-modules-affine-quotient-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalModuleQuotientAffineProjectionSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalModuleQuotientAffineProjectionSurjective.lean",
+  "declaration": "AlgebraicGeometry.formalModuleQuotient_affine_projection_surjective",
+  "statement": "theorem formalModuleQuotient_affine_projection_surjective\n    (A : Type u) [CommRing A] (I : Ideal A)\n    (J : (Spec (CommRingCat.of A)).IdealSheafData)\n    (hJ : J = Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom))\n    (M : ModuleCat.{u} A) (m : ℕ) (hm : 0 < m) :\n    let p := (tilde.toTildeΓNatIso (R := CommRingCat.of A)).hom.app M ≫\n      (moduleSpecΓFunctor (R := CommRingCat.of A)).map\n        (formalModuleQuotientπ J m ((tilde.functor (CommRingCat.of A)).obj M))\n    Function.Surjective p",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T100022-L-2467393",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T100022-L-2467393",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
