@@ -11671,3 +11671,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:23 L: merged deliver/M2/Sheaf.FieldTheory.FieldExtensionCompleteIntersectionSubalgebras (stage 3; reviewer PASS; first push; landing 20261013T082356-L-1640039 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:23 L: merged deliver/M3/Sheaf.AlgebraicGeometry.PerfectStalkQuasiIsoDetection (stage 3; reviewer PASS; first push; landing 20261013T082356-L-1640239 (interface); batch 20261013T082326; modules 3; new nodes 2)
 - 08:23 L: merged deliver/M4/Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic (stage 3; reviewer PASS; after a return; landing 20261013T082356-L-1640436 (proof); batch 20261013T082326; modules 1; new nodes 0)
+- 08:23 L: merged deliver/N1/Sheaf.AlgebraicGeometry.PicardExternalCupRightExactLadder (stage 3; reviewer PASS; first push; landing 20261013T082357-L-1640578 (interface); batch 20261013T082326; modules 2; new nodes 1)

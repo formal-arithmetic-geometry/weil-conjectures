@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.PicardExternalCupCochain
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.ExactSequence
 
+import Sheaf.Algebra.Homology.TensorKunnethNat
+import Sheaf.AlgebraicGeometry.PicardExternalCupRightCechDiagram
+import Mathlib.Algebra.Homology.HomologySequenceLemmas
+
 /-! # Exact homology ladders for external cup in the right coefficient
 
 Source: Stacks Project, Varieties, Tag 0BED, the short exact sequence argument
@@ -21,6 +25,45 @@ following equation 33.29.1.1, applied in the right variable.
 universe w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
+
+private theorem normalized_homology_unique
+    {k : Type w} [Field k] {X Y : Scheme.{w}}
+    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
+    (F : X.Modules) (G : Y.Modules)
+    (c d : picardExternalTotal f g F G ⟶
+      picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G))
+    (hc : IsPicardExternalCupCochain f g F G c)
+    (hd : IsPicardExternalCupCochain f g F G d) (n : ℕ) :
+    HomologicalComplex.homologyMap c (n : ℤ) =
+      HomologicalComplex.homologyMap d (n : ℤ) := by
+  classical
+  let A := picardScalarModel f F
+  let B := picardScalarModel g G
+  obtain ⟨e, he⟩ := HomologicalComplex.tensor_kunneth_nat A B
+    (picardScalarModel_negative f F) (picardScalarModel_negative g G) n
+  apply ModuleCat.hom_ext
+  apply (LinearMap.cancel_right e.surjective).mp
+  apply DirectSum.linearMap_ext
+  intro i
+  apply TensorProduct.ext'
+  intro a b
+  obtain ⟨a, rfl⟩ := (ModuleCat.epi_iff_surjective (A.homologyπ (i.val.1 : ℤ))).mp
+    inferInstance a
+  obtain ⟨b, rfl⟩ := (ModuleCat.epi_iff_surjective (B.homologyπ (i.val.2 : ℤ))).mp
+    inferInstance b
+  obtain ⟨z, hz, hez⟩ := he i a b
+  change HomologicalComplex.homologyMap c (n : ℤ)
+      (e (DirectSum.lof k _ _ i
+        (TensorProduct.tmul k (A.homologyπ (i.val.1 : ℤ) a)
+          (B.homologyπ (i.val.2 : ℤ) b)))) =
+    HomologicalComplex.homologyMap d (n : ℤ)
+      (e (DirectSum.lof k _ _ i
+        (TensorProduct.tmul k (A.homologyπ (i.val.1 : ℤ) a)
+          (B.homologyπ (i.val.2 : ℤ) b))))
+  rw [hez]
+  apply (picardScalarModelEquiv (pullback.fst f g ≫ f)
+    (externalCupCoefficients f g F G) n).injective
+  exact (hc n i a b z hz).trans (hd n i a b z hz).symm
 
 /-- The external-cup comparison gives an exact five-term homology ladder for a
 short exact sequence of right coefficients. Its middle vertical arrow is the
@@ -86,6 +129,53 @@ theorem picardExternalCupCochain_right_exact_ladder
       ((∀ m : ℕ, IsIso (HomologicalComplex.homologyMap c2 (m : ℤ))) →
         (∀ m : ℕ, IsIso (HomologicalComplex.homologyMap c3 (m : ℤ))) →
         IsIso (ComposableArrows.app' φ 0) ∧ IsIso (ComposableArrows.app' φ 1) ∧
-          IsIso (ComposableArrows.app' φ 3) ∧ IsIso (ComposableArrows.app' φ 4)) := by sorry
+          IsIso (ComposableArrows.app' φ 3) ∧ IsIso (ComposableArrows.app' φ 4)) := by
+  classical
+  obtain ⟨d1, d2, d3, T, U, ψ, a1, b1, a2, b2, a3, b3,
+    hd1, hd2, hd3, hT, hU, hneg, h1, h2, h3⟩ :=
+    picardExternalCup_right_cech_diagram k X Y f g F S hS
+  let i : ℤ := (n : ℤ) - 1
+  have hij : (ComplexShape.up ℤ).Rel i (n : ℤ) := by
+    change i + 1 = (n : ℤ)
+    dsimp [i]
+    omega
+  let A := (HomologicalComplex.HomologySequence.composableArrows₅ hT i (n : ℤ) hij).δ₀
+  let B := (HomologicalComplex.HomologySequence.composableArrows₅ hU i (n : ℤ) hij).δ₀
+  let φ : A ⟶ B := ComposableArrows.δ₀Functor.map
+    (HomologicalComplex.HomologySequence.mapComposableArrows₅ ψ hT hU i (n : ℤ) hij)
+  refine ⟨A, B, φ, a1 n, b1 n,
+    (HomologicalComplex.HomologySequence.composableArrows₅_exact hT i (n : ℤ) hij).δ₀,
+    (HomologicalComplex.HomologySequence.composableArrows₅_exact hU i (n : ℤ) hij).δ₀,
+    ?_, ?_⟩
+  · change HomologicalComplex.homologyMap ψ.τ₁ (n : ℤ) = _
+    rw [h1, normalized_homology_unique f g F S.X₁ d1 c1 hd1 hc1 n]
+  · intro hc2iso hc3iso
+    have h₂ (m : ℕ) : IsIso (HomologicalComplex.homologyMap ψ.τ₂ (m : ℤ)) := by
+      have := hc2iso m
+      rw [h2, normalized_homology_unique f g F S.X₂ d2 c2 hd2 hc2 m]
+      infer_instance
+    have h₃ (m : ℕ) : IsIso (HomologicalComplex.homologyMap ψ.τ₃ (m : ℤ)) := by
+      have := hc3iso m
+      rw [h3, normalized_homology_unique f g F S.X₃ d3 c3 hd3 hc3 m]
+      infer_instance
+    have hi₂ : IsIso (HomologicalComplex.homologyMap ψ.τ₂ i) := by
+      cases n with
+      | zero =>
+        obtain ⟨hT₂, _, hU₂, _⟩ := hneg (-1) (by omega)
+        exact hT₂.isIso hU₂ _
+      | succ m =>
+        have hi : i = (m : ℤ) := by dsimp [i]; omega
+        rw [hi]
+        exact h₂ m
+    have hi₃ : IsIso (HomologicalComplex.homologyMap ψ.τ₃ i) := by
+      cases n with
+      | zero =>
+        obtain ⟨_, hT₃, _, hU₃⟩ := hneg (-1) (by omega)
+        exact hT₃.isIso hU₃ _
+      | succ m =>
+        have hi : i = (m : ℤ) := by dsimp [i]; omega
+        rw [hi]
+        exact h₃ m
+    exact ⟨hi₂, hi₃, h₂ n, h₃ n⟩
 
 end AlgebraicGeometry.Scheme.Modules
