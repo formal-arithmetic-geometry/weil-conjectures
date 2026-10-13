@@ -12,44 +12,65 @@
  ],
  "proof": [
   {
-   "text": "Restrict both coherent formal objects and their morphism to U. Transport across U = Spec Gamma(U,O_X) and use the affine formal-module equivalence to obtain finite completed modules M,N and f. The level projections are quotient projections modulo the extended ideal powers and commute with f and transitions.",
+   "text": "Apply coherentFormalModule_affine_open_sections_adic on U to both formal systems. This existing proved theorem supplies finite section modules, level annihilation and surjective successor transitions with the ideal-power kernel. No transport of formal objects to Spec A is needed.",
    "uses": [
-    "lem-weil-pbc-coherent-formal-modules-restriction-objects",
-    "lem-weil-pbc-coherent-formal-modules-affine",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+    "lem-weil-pbc-formal-module-affine-open-sections-adic"
    ],
    "elementary": false
   },
   {
-   "text": "Lifting through the level-l projection identifies the image of the reduced kernel in level m with the image of f inverse(J^(l+1)N) in M/J^(m+1)M. Kernels and images are quasi-coherent and their affine sections compute the linear kernels and images.",
+   "text": "Apply the completed-scalar-limit construction to both section towers, then the finite-limit theorem. This supplies finite completed modules and surjective additive projections with specified A-module kernels. Ideal.map_pow and Submodule.restrictScalars_map_smul_eq identify their kernels with the extended ideal powers J^(n+1) over R.",
+   "uses": [
+    "lem-weil-pbc-adic-tower-completed-scalar-limit",
+    "lem-weil-pbc-adic-tower-finite-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct f by conjugating the map of section-tower limits induced by alpha with the two limit comparison isomorphisms. Naturality gives the projection square. Check completion-linearity in every projection: choose an A-representative of the completed scalar at the given level, apply both scalar residue formulas, and use A-linearity of alpha. Joint injectivity of limit projections gives R-linearity. Limit-cone naturality gives compatibility of the projections with every transition.",
+   "uses": [
+    "lem-weil-pbc-adic-tower-completed-scalar-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For l >= m, the additive image under p_m of f inverse(J^(l+1)N) equals the section range of kernel(alpha_l) -> F_m. In one direction, the projection square and the q_l kernel formula show that p_l(x) lies in the section kernel, so lift through the categorical kernel inclusion. In the other, lift a kernel section through the surjective p_l and use the same square. Transition compatibility gives the claimed range in both directions. The sectionwise kernel calculation is the existing range_map_kernelι theorem.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Two quotient-submodule images under mkQ are equal exactly when their additive images under p_m are equal. Both maps have the same fibers: p_m(x)=p_m(y) if and only if x-y lies in its kernel J^(m+1)M, if and only if mkQ(x)=mkQ(y). Transfer image inclusions in both directions by this equivalence and apply antisymmetry. This is the proved private quotient_map_eq_iff_additive_image_eq lemma, with no finiteness or stabilization used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Kernels of the level maps and their abelian images are quasi-coherent, and the abelian-image range on U equals the ordinary section range. Equality of the image inclusions on U extends to every W contained in U: compose one inclusion with the cokernel of the other. This composite vanishes on U. Every section on a basic open D(g) becomes a restricted U-section after multiplication by a power of g; since g is invertible on D(g), the composite vanishes there. Basic opens cover W, so sheaf separatedness makes it vanish on W. Sectionwise kernel exactness and invertibility of the mono map to its abelian image give the desired section-range inclusion. Swap the inclusions for equality. The reverse implication takes W=U. This is the proved private mono_range_eq_below_affine lemma; W need not be affine.",
    "uses": [
     "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The affine tilde equivalence identifies these quotient submodule inclusions with the corresponding image subsheaf inclusions. Equal submodules yield equal subsheaves, hence equal section ranges on all W inside U. The converse follows by taking W=U and the same affine quotient identification.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-module-basic-open-localization",
+    "pqf-lem-coherent-ft-locnoeth"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-formal-modules-restriction-objects",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-adic-tower-completed-scalar-limit",
+  "lem-weil-pbc-adic-tower-finite-limit",
+  "lem-weil-pbc-affine-module-basic-open-localization",
+  "lem-weil-pbc-formal-module-affine-open-sections-adic",
   "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-module-kernel"
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "worker",
   "group": "S3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X, proof of claim (a)"
+  "place": "Lemma 087W, module-limit proof, and Lemma 087X, affine kernel-image description; direct sections on U and explicit kernel/quotient and basic-open glue formalized by S3"
  },
  "mathlib_searches": [
   {
@@ -128,8 +149,8 @@
   "reviewer": "COMPILER",
   "group": "S3",
   "result": "pass",
-  "landing": "20261013T033007-L-3678215",
-  "kind": "interface",
+  "landing": "20261013T045602-L-137135",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
