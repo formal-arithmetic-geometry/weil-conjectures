@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-principal-localization-restriction-model",
+ "kind": "statement",
+ "title": "Concrete localization complex as exact open restriction",
+ "statement": "Let $A$ be a commutative ring and $P$ any cochain complex of $A$-modules [def-pc-cochain-complex-modules]. Let $U\\subseteq\\operatorname{Spec}(A)$ be open [def-pc-scheme], and $f\\in A$ with $D(f)\\subseteq U$. Choose independent derived categories on $\\operatorname{Spec}(A)$, $U$, and $\\operatorname{Spec}(A_f)$ [def-pc-derived-category]. There exists an open immersion $j:\\operatorname{Spec}(A_f)\\to U$ and an additive exact module-sheaf functor $R$, naturally isomorphic to restriction along $j$ [lem-weil-pbc-module-restriction-open-immersion-colimits], such that $R_D(E_U)\\cong Q(\\widetilde{P_f})$. Here $E_U$ is exact canonical restriction to $U$ of $Q(\\widetilde P)$; $P_f$ is the concrete termwise Mathlib localizedModuleFunctor at powers of $f$, including its Shrink equivalences. No Tor-amplitude, boundedness, freeness or quasi-compactness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-pc-cochain-complex-modules",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Affine pullback comparison (2), specialized to exact principal localization"
+ },
+ "proof": [
+  {
+   "text": "Identify the localization spectrum with D(f), and factor its open immersion through U. Ordinary restriction along this map is additive and exact; the open-immersion restriction comparisons identify its composite with restriction from Spec(A) to Spec(A_f).",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural tilde pullback comparison for A to A_f and identify ordinary scalar extension with module localization by its universal property and the canonical Shrink equivalences. The natural comparison lifts to complexes and respects differentials. Localization is exact, so termwise localization computes derived localization. The exact functor localization factorizations give the displayed derived isomorphism.",
+   "uses": [
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "The corresponding step of the parent proof, expanded in the declaration docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Termwise associated sheaf of a localized module complex equals exact restriction to the principal localization spectrum",
+   "results": "Tilde localization stalk and section constructions returned; no complex comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.localizedModuleFunctor",
+   "results": "Found exact localizedModuleFunctor and its additive, finite limit and finite colimit instances; no sheaf model comparison.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctor|localizedModuleFunctor",
+   "results": "25 Mathlib hits: restriction, restriction adjunction counit and exact module localization; no combined tensor vanishing or derived localization model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated sheaf complex of termwise principal localization is the restriction to the localization spectrum",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalLocalizationSheafTorBounds",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EG lower truncation paragraph: restrict the Tor interval to a principal affine open before applying affine tensor computation",
+   "via": [
+    "lem-sc-principal-localization-sheaf-tor-bounds",
+    "lem-sc-affine-open-localized-tensor-exact",
+    "lem-sc-affine-truncation-kernel-flat",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalLocalizationRestrictionModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalLocalizationRestrictionModel.lean",
+  "declaration": "AlgebraicGeometry.principalLocalization_restriction_model",
+  "statement": "theorem principalLocalization_restriction_model\n    (A : Type u) [CommRing A]\n    (P : CochainComplex (ModuleCat.{u} A) ℤ)\n    (U : (Spec (.of A)).Opens)\n    [HasDerivedCategory.{wX}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [HasDerivedCategory.{wU}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]\n    (f : A) (hf : PrimeSpectrum.basicOpen f ≤ U)\n    [HasDerivedCategory.{wF}\n      (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))] :\n    ∃ j : Spec (.of (Localization.Away f)) ⟶ U.toScheme,\n      ∃ hj : IsOpenImmersion j,\n        letI := hj\n        ∃ R : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) ⥤\n            SheafOfModules.{u}\n              (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace),\n          Nonempty (R ≅ Scheme.Modules.restrictFunctor j) ∧\n          ∃ hAdd : R.Additive, ∃ hLim : PreservesFiniteLimits R,\n            ∃ hCol : PreservesFiniteColimits R,\n              letI := hAdd\n              letI := hLim\n              letI := hCol\n              Nonempty ((R.mapDerivedCategory.obj\n          ((@Functor.mapDerivedCategory\n            (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _\n            (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) _ _ _\n            ((SheafOfModules.overFunctor.{u}\n                (moduleRings (Spec (.of A)).toRingedSpace) U) ⋙\n              Equivalence.functor\n                (C := SheafOfModules.{u}\n                  ((moduleRings (Spec (.of A)).toRingedSpace).over U))\n                (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n                (Scheme.Modules.overEquiv U))\n            (Functor.additive_of_preserves_binary_products _)\n            (comp_preservesFiniteLimits _ _) (comp_preservesFiniteColimits _ _)).obj\n            (DerivedCategory.Q.obj\n              ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n                (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) _ _ _ _\n                (tilde.functor (.of A)) ⟨fun _ _ ↦ tilde.map_zero⟩\n                (ComplexShape.up ℤ)).obj P)))) ≅\n          (DerivedCategory.Q.obj\n            ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Localization.Away f))\n              (SheafOfModules.{u}\n                (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace)) _ _ _ _\n              (tilde.functor (.of (Localization.Away f))) ⟨fun _ _ ↦ tilde.map_zero⟩\n              (ComplexShape.up ℤ)).obj\n              (((ModuleCat.localizedModuleFunctor (Submonoid.powers f)).mapHomologicalComplex\n                (.up ℤ)).obj P))))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T113353-L-3187457",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T113353-L-3187457",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

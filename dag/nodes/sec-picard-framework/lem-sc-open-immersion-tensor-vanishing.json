@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-open-immersion-tensor-vanishing",
+ "kind": "statement",
+ "title": "Tensor vanishing in one degree under an open immersion",
+ "statement": "Let $j:X\\to Y$ be an open immersion of schemes [def-pc-scheme], with independently chosen derived categories [def-pc-derived-category]. Let $R$ be an additive exact functor from module sheaves on $Y$ to those on $X$, naturally isomorphic to ordinary restriction along $j$ [lem-weil-pbc-module-restriction-open-immersion-colimits]. For $E\\in D(\\mathcal O_Y)$ and any integer $i$, assume that $H^i(E\\otimes^{\\mathbf L}H)=0$ for every module sheaf $H$ on $Y$, in [def-pc-derived-tensor-cohomology-vanishes]. Then $H^i(R_D(E)\\otimes^{\\mathbf L}G)=0$ for every module sheaf $G$ on $X$, where $R_D$ is the exact functor induced on derived categories.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-tensor-cohomology-vanishes",
+  "def-pc-cochain-complex-modules",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09U8",
+  "place": "Open-immersion specialization, degreewise direct-image testing argument"
+ },
+ "proof": [
+  {
+   "text": "For a test sheaf G on X apply h to the ordinary direct image j_*G. Unpack the K-flat representative P, its Q isomorphism, and its zero tensor homology. Use isKFlat_restrict and transport along the natural isomorphism R ≅ restrictFunctor j to make R(P) K-flat. Compose the exact functor mapDerivedCategoryFactors comparison with R_D applied to the representing isomorphism.",
+   "uses": [
+    "lem-pc-kflat-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport Scheme.Modules.pullbackMonoidal along R ≅ restrictFunctor j ≅ pullback j. Restriction preserves all coproducts by its left adjunction. HomologicalComplex₂.mapTotalIso and the natural tensorators give the total tensor complex comparison, including its signed differentials. Exact R sends zero homology to zero by mapHomologyIso. The open-immersion adjunction counit and singleMapHomologicalComplex identify R(j_*G[0]) with G[0]. Transport this zero homology to the tensor of R(P) with G[0].",
+   "uses": [
+    "lem-pc-scheme-pullback-monoidal-existing",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-scheme-pullback-monoidal-existing",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09U8",
+  "place": "S2 second reading: degreewise direct-image testing proof, reusing the proved tensorator totalization calculation from AffineSheafificationTensorVanishingTest.lean; the printed proof of 09U8 instead uses a bounded flat representative."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact open immersion restriction preserves vanishing of derived tensor with every module sheaf",
+   "results": "Flat-module tensor exactness and Scheme.Modules.restrict were returned; no all-module derived vanishing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "results": "Found the restriction counit isomorphism, but no theorem of tensor vanishing.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctor|localizedModuleFunctor",
+   "results": "25 Mathlib hits: restriction, restriction adjunction counit and exact module localization; no combined tensor vanishing or derived localization model.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of derived tensor cohomology is preserved by exact restriction to an open subscheme",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalLocalizationSheafTorBounds",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EG lower truncation paragraph: restrict the Tor interval to a principal affine open before applying affine tensor computation",
+   "via": [
+    "lem-sc-principal-localization-sheaf-tor-bounds",
+    "lem-sc-affine-open-localized-tensor-exact",
+    "lem-sc-affine-truncation-kernel-flat",
+    "lem-sc-affine-perfect-plus-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenImmersionTensorVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenImmersionTensorVanishing.lean",
+  "declaration": "AlgebraicGeometry.openImmersion_tensor_vanishing",
+  "statement": "theorem openImmersion_tensor_vanishing {X Y : Scheme.{u}} (j : X ⟶ Y)\n    [IsOpenImmersion j]\n    [HasDerivedCategory.{wU} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [HasDerivedCategory.{wF} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    (R : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤\n      SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (eR : Nonempty (R ≅ Scheme.Modules.restrictFunctor j))\n    [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]\n    (E : schemeDerivedCategory Y) (i : ℤ)\n    (h : ∀ H : SheafOfModules.{u} (moduleRings Y.toRingedSpace),\n      schemeDerivedTensorCohomologyVanishes Y E H i) :\n    ∀ H : SheafOfModules.{u} (moduleRings X.toRingedSpace),\n      schemeDerivedTensorCohomologyVanishes X\n        (R.mapDerivedCategory.obj E) H i",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T113353-L-3187457",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T113353-L-3187457",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

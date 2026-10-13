@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.OpenImmersionTensorVanishing
+import Sheaf.AlgebraicGeometry.PrincipalLocalizationRestrictionModel
 
 /-! # Sheaf Tor bounds on principal localizations
 
@@ -91,6 +92,15 @@ theorem principal_localization_sheaf_tor_bounds
               (tilde.functor (.of (Localization.Away f))) ⟨fun _ _ ↦ tilde.map_zero⟩
               (ComplexShape.up ℤ)).obj
               (((ModuleCat.localizedModuleFunctor (Submonoid.powers f)).mapHomologicalComplex
-                (.up ℤ)).obj P))) G i := by sorry
+                (.up ℤ)).obj P))) G i := by
+  obtain ⟨j, hj, R, eR, hAdd, hLim, hCol, ⟨e⟩⟩ := principalLocalization_restriction_model A P U f hf
+  let := hj
+  let := hAdd
+  let := hLim
+  let := hCol
+  intro G i hi
+  have h := openImmersion_tensor_vanishing j R eR _ i (fun H ↦ hamp H i hi) G
+  obtain ⟨K, hK, ⟨eK⟩, hz⟩ := h
+  exact ⟨K, hK, ⟨eK ≪≫ e⟩, hz⟩
 
 end AlgebraicGeometry
