@@ -7,12 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
-import Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension
-import Sheaf.AlgebraicGeometry.DerivedOpenGluing
+import Sheaf.AlgebraicGeometry.SupportedMapAffineUnionGluing
+import Sheaf.AlgebraicGeometry.OpenDerivedLocalizationAdjunction
 import Sheaf.AlgebraicGeometry.SupportedMapInitialAmbientLift
-import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
-import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # One affine attachment for supported stabilized maps
 
@@ -29,6 +26,29 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+private theorem restrict_map_comparison
+    {C D B : Type*} [Category C] [Category D] [Category B]
+    (L : C ⥤ D) (H : D ⥤ B) (J : C ⥤ B) (c : L ⋙ H ≅ J)
+    {R E : C} {F : D} {S : B} (β : R ⟶ E) (α : F ⟶ L.obj E)
+    (d : L.obj R ≅ F) (e : H.obj F ≅ S) (a : S ⟶ J.obj E)
+    (hd : L.map β = d.hom ≫ α) (he : H.map α ≫ c.hom.app E = e.hom ≫ a) :
+    J.map β = (c.symm.app R ≪≫ H.mapIso d ≪≫ e).hom ≫ a := by
+  have hn := c.hom.naturality β
+  calc
+    J.map β = c.inv.app R ≫ H.map (L.map β) ≫ c.hom.app E := by
+      simpa only [Functor.comp_map, Category.assoc, Iso.inv_hom_id_app_assoc] using
+        (congrArg (fun f ↦ c.inv.app R ≫ f) hn).symm
+    _ = c.inv.app R ≫ H.map d.hom ≫ e.hom ≫ a := by
+      rw [hd, H.map_comp]
+      simp only [Category.assoc]
+      rw [he]
+    _ = _ := by
+      simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom,
+        Functor.mapIso_hom, Category.assoc]
+
+set_option synthInstance.maxSize 2048 in
+set_option maxHeartbeats 1600000 in
+-- The three-fold exact restriction comparison needs a larger elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- Attaching a single affine open extends the source plus its shift.
 The input source need only be perfect and supported on the old open; its behaviour
@@ -114,6 +134,59 @@ theorem exists_supported_map_affine_attachment
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
             (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-            (Modules.overEquiv U)).mapDerivedCategory.map β := by sorry
+            (Modules.overEquiv U)).mapDerivedCategory.map β := by
+  classical
+  let Y := W ⊔ V
+  obtain ⟨hY, hYO, _G, _adj⟩ := open_derived_localization_adjunction X Y
+  let := hY
+  let := hYO
+  let L := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Y ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over Y))
+      (D := SheafOfModules.{u} (moduleRings Y.toScheme.toRingedSpace))
+      (Modules.overEquiv Y)
+  let H := Equivalence.inverse
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over Y))
+      (D := SheafOfModules.{u} (moduleRings Y.toScheme.toRingedSpace))
+      (Modules.overEquiv Y) ⋙
+    SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)
+      (homOfLE (le_trans hUW le_sup_left)) ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Modules.overEquiv U)
+  let J := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Modules.overEquiv U)
+  let c₀ : L ⋙ H ≅ J :=
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft
+      (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) Y)
+      ((Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (Modules.overEquiv Y).unitIso.symm _ ≪≫
+          Functor.leftUnitor _) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace)
+        (homOfLE (le_trans hUW le_sup_left)))
+      (Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Modules.overEquiv U))
+  let c : L.mapDerivedCategory ⋙ H.mapDerivedCategory ≅ J.mapDerivedCategory :=
+    (Functor.mapDerivedCategoryCompIso L H).symm ≪≫
+      Functor.mapDerivedCategoryNatIso c₀
+  obtain ⟨F, α, hF, hFT, e, he⟩ :=
+    exists_supported_map_affine_union_gluing X U W V hUW hW hV T hT hTc E R β hR hRT c
+  obtain ⟨R', β', hR', hRT', d, hd⟩ :=
+    exists_supported_map_initial_ambient_lift X Y T E F hF hFT α
+  refine ⟨R', β', hR', hRT', c.symm.app R' ≪≫ H.mapDerivedCategory.mapIso d ≪≫ e, ?_⟩
+  change J.mapDerivedCategory.map β' =
+    (c.symm.app R' ≪≫ H.mapDerivedCategory.mapIso d ≪≫ e).hom ≫
+      biprod.fst ≫ J.mapDerivedCategory.map β
+  exact restrict_map_comparison L.mapDerivedCategory H.mapDerivedCategory
+    J.mapDerivedCategory c β' α d e (biprod.fst ≫ J.mapDerivedCategory.map β) hd he
 
 end AlgebraicGeometry.Scheme

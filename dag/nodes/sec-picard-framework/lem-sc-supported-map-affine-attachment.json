@@ -14,50 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Restrict the ambient R and beta to W. For x in W restrict its given strictly perfect local model to W; its bounded finite-free retract terms give perfectness on W. Restriction computes the same cohomology stalks, giving support on T intersect W. Restrict E to W and V; quasi-coherent cohomology is preserved by [lem-pc-derived-open-restriction-qcoh-iff] and ordinary open restriction. The needed local derived category choices in the ambient universe are supplied by [lem-pc-derived-open-localization-universe], transported through Modules.overEquiv.",
+   "text": "Set Y = W union V. Apply [lem-pc-open-derived-localization-adjunction] to obtain derived localizations on Y and every localized open site of Y in the ambient Hom universe. Build L: D(X) -> D(Y), H: D(Y) -> D(U) and J: D(X) -> D(U). The unit of Modules.overEquiv Y, the associators and overFunctorMap give L composed with H naturally isomorphic to J; mapDerivedCategoryCompIso and mapDerivedCategoryNatIso yield the derived comparison c. These are explicit isomorphisms, not chosen existence witnesses.",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-derived-open-restriction-qcoh-iff",
-    "lem-pc-derived-open-localization-universe"
+    "lem-pc-open-derived-localization-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "The intersection W intersect V is quasi-compact: both opens are quasi-compact and X is quasi-separated (Mathlib IsCompact.inter_of_isOpen). The same argument applies to V intersect the open complement of T, since V is affine and the complement of T is quasi-compact. Closedness of T restricts to V. On the affine V apply [lem-sc-affine-perfect-support-extension] to the source on W intersect V. It gives Q supported on T intersect V restricting to R plus R[1] on the intersection.",
+   "text": "Apply [lem-sc-supported-map-affine-union-gluing] with the explicit comparison c. Obtain a perfect object F on Y, supported on T intersect Y, a map alpha: F -> E restricted to Y, and an isomorphism e: H(F) -> J(R) plus J(R)[1] with H(alpha) followed by c_E equal to e followed by first projection followed by J(beta). This step stops on Y.",
    "uses": [
-    "lem-sc-affine-perfect-support-extension"
+    "lem-sc-supported-map-affine-union-gluing"
    ],
    "elementary": false
   },
   {
-   "text": "On W use R plus R[1] and first projection followed by beta. Compose this map with the overlap identification for Q. Apply [lem-sc-affine-perfect-map-lift] on V: its tensor augmentation is invertible on the overlap and remains perfect and supported on T intersect V. The lifting equation identifies the maps on the intersection.",
+   "text": "Apply [lem-sc-supported-map-initial-ambient-lift] on Y to F and alpha. Obtain R prime and beta prime on X, the required local perfectness and support on Y, and d: L(R prime) -> F with L(beta prime) = d followed by alpha.",
    "uses": [
-    "lem-sc-affine-perfect-map-lift"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-sc-derived-open-gluing] on the two-open cover of W union V. The resulting source and map restrict on W to R plus R[1] with its first-projection map and on V to the augmented source. Perfectness and support follow from these local models and cohomology stalks. Apply [lem-sc-supported-map-initial-ambient-lift] to this source and map on W union V, obtaining R prime and beta prime on X with the same local properties on the union. Restrict its isomorphism to U and compose the iterated restriction, biproduct and shift comparison isomorphisms. This gives e into R|U plus (R|U)[1], and the gluing and initial-lift equations give beta prime restricted to U = e.hom followed by first projection followed by beta restricted to U.",
-   "uses": [
-    "lem-sc-derived-open-gluing",
     "lem-sc-supported-map-initial-ambient-lift"
    ],
    "elementary": false
+  },
+  {
+   "text": "Define the final isomorphism as c_Rprime inverse followed by H(d) followed by e. Naturality of c gives J(beta prime) = c_Rprime inverse followed by H(L(beta prime)) followed by c_E. Substitute the initial ambient lift equation, use functoriality of H and then the union map equation. Associativity identifies the result with the final isomorphism followed by first projection followed by J(beta). This categorical calculation is the fully proved private helper restrict_map_comparison.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
-  "lem-pc-derived-open-restriction-qcoh-iff",
-  "lem-pc-derived-open-localization-universe",
-  "lem-sc-affine-perfect-support-extension",
-  "lem-sc-affine-perfect-map-lift",
-  "lem-sc-derived-open-gluing",
+  "lem-pc-open-derived-localization-adjunction",
+  "lem-sc-supported-map-affine-union-gluing",
   "lem-sc-supported-map-initial-ambient-lift"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/09IM",
-  "place": "Tag 09IM, proof paragraph assuming a two-open cover with the second open affine, applied on W union V; initial ambient extension by Tag 08BT"
+  "place": "two-open construction on W union V, followed by Tag 08BT ambient extension; explicit derived comparison naturality calculation"
  },
  "mathlib_searches": [
   {
@@ -126,12 +117,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S4",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T234224-L-2126666",
+  "landing": "20261013T025313-L-3426449",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
