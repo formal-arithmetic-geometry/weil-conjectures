@@ -1,0 +1,103 @@
+{
+ "id": "lem-pc-derived-endpoint-cone-presentation",
+ "kind": "statement",
+ "title": "Strict cone presentations with prescribed endpoint components",
+ "statement": "Let C be an abelian category with a derived category. Given two distinguished triangles in its derived category and maps on the first and third vertices commuting with the connecting morphisms, there are cochain complexes A,B,A',B', strict maps t,t',α,β with t≫β=α≫t' and isomorphisms from A,B,Cone(t),A',B',Cone(t') to the six triangle vertices, transporting the first maps, cone inclusions, and the prescribed first and third components.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014D, cone functoriality for homotopy-commuting squares"
+ },
+ "proof": [
+  {
+   "text": "Rotate the triangles, represent the finite diagram by roofs of complexes, refine roofs to a homotopy-commuting square, and choose chain representatives for the maps and homotopy.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Replace one arrow by the cylinder factorization, use cone functoriality to strictify, and rotate back. The resulting cone isomorphisms preserve the endpoint maps and establish every displayed identity.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014D, cone functoriality for homotopy-commuting squares"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.map",
+   "results": "mappingCone.map and triangleMap declarations found",
+   "date": "2026-10-13",
+   "verdict": "partial",
+   "how": "Inspected declarations and types."
+  },
+  {
+   "tool": "grep",
+   "query": "mem_distTriang_iff|complete_distinguished_triangle_morphism",
+   "results": "Existing cone and triangle declarations found",
+   "date": "2026-10-13",
+   "verdict": "partial",
+   "how": "Inspected source lines."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict mapping cone presentation of a morphism of derived triangles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeMVConePresentation",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-relative-mv-cone-presentation",
+   "place": "Tag 014D, cone functoriality for homotopy-commuting squares",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.EndpointConePresentation",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/EndpointConePresentation.lean",
+  "declaration": "derived_endpoint_cone_presentation",
+  "statement": "theorem derived_endpoint_cone_presentation\n    {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]\n    (T T' : Triangle (DerivedCategory C))\n    (hT : T ∈ distTriang (DerivedCategory C))\n    (hT' : T' ∈ distTriang (DerivedCategory C))\n    (a : T.obj₁ ⟶ T'.obj₁) (c : T.obj₃ ⟶ T'.obj₃)\n    (h : T.mor₃ ≫ a⟦(1 : ℤ)⟧' =\n      c ≫ T'.mor₃) :\n    ∃ (A B A' B' : CochainComplex C ℤ)\n      (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶ B')\n      (hc : t ≫ β = α ≫ t')\n      (e₁ : DerivedCategory.Q.obj A ≅ T.obj₁)\n      (e₂ : DerivedCategory.Q.obj B ≅ T.obj₂)\n      (e₃ : DerivedCategory.Q.obj (CochainComplex.mappingCone t) ≅ T.obj₃)\n      (e₁' : DerivedCategory.Q.obj A' ≅ T'.obj₁)\n      (e₂' : DerivedCategory.Q.obj B' ≅ T'.obj₂)\n      (e₃' : DerivedCategory.Q.obj (CochainComplex.mappingCone t') ≅ T'.obj₃),\n      DerivedCategory.Q.map t ≫ e₂.hom = e₁.hom ≫ T.mor₁ ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.inr t) ≫ e₃.hom =\n        e₂.hom ≫ T.mor₂ ∧\n      DerivedCategory.Q.map t' ≫ e₂'.hom = e₁'.hom ≫ T'.mor₁ ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.inr t') ≫ e₃'.hom =\n        e₂'.hom ≫ T'.mor₂ ∧\n      DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ a ∧\n      DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =\n        e₃.hom ≫ c",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T145124-L-697540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T145124-L-697540",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

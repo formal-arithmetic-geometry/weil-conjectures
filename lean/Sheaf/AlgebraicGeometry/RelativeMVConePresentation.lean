@@ -10,10 +10,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
-import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
-import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.RelativeMVPinnedTriangleComparison
+import Sheaf.CategoryTheory.DerivedCategory.EndpointConePresentation
 
 /-! # A mapping-cone model of the relative Mayer--Vietoris diagram -/
 
@@ -91,6 +89,19 @@ theorem relativeMV_cone_presentation
         e₂'.hom ≫ relativeMVTargetSecond g' f' U V K' ∧
       DerivedCategory.Q.map α ≫ e₁'.hom = e₁.hom ≫ aX.hom ∧
       DerivedCategory.Q.map (CochainComplex.mappingCone.map t t' α β hc) ≫ e₃'.hom =
-        e₃.hom ≫ (a (U ⊓ V)).hom := by sorry
+        e₃.hom ≫ (a (U ⊓ V)).hom  := by
+  dsimp only
+  obtain ⟨δ, δ', hT, hT', m, h₁, _, h₃⟩ :=
+    relativeMV_pinned_triangle_comparison f f' g g' hpull K K' φ hK hK'
+      U V hUqc hVqc hUVqc hcover
+  have hc := m.comm₃
+  rw [h₁, h₃] at hc
+  exact derived_endpoint_cone_presentation
+    (Pretriangulated.Triangle.mk (relativeMVSourceFirst f g U V K)
+      (relativeMVSourceSecond f g U V K) δ)
+    (Pretriangulated.Triangle.mk (relativeMVTargetFirst g' f' U V K')
+      (relativeMVTargetSecond g' f' U V K') δ')
+    hT hT' (relativeMVGlobalArrow f f' g g' hpull K K' φ).hom
+    (relativeMVLocalArrow f f' g g' hpull K K' φ (U ⊓ V)).hom hc
 
 end AlgebraicGeometry
