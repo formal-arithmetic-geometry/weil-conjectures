@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-mayer-vietoris-direct-image-chain-squares",
+ "kind": "statement",
+ "title": "Ordinary direct-image chain squares for Mayer–Vietoris",
+ "statement": "Let $h:X\\to Y$ be a scheme morphism and $U,V\\subseteq Y$ arbitrary opens. Let $I$ be an unbounded cochain complex of $\\mathcal O_X$-modules and $J$ one of $\\mathcal O_Y$-modules. Write $F=h_*$ applied termwise [def-pc-ringed-spaces-derived-direct-image], and let $f:F(I)\\to J$ be a supplied chain map. For the open-image complexes, units $\\eta$ and unsigned restriction maps $\\rho$ of [def-pc-kinjective-mayer-vietoris-data], there exist chain maps $a:F(j_{h^{-1}U,*}I|_{h^{-1}U})\\to j_{U,*}J|_U$, $b:F(j_{h^{-1}V,*}I|_{h^{-1}V})\\to j_{V,*}J|_V$, and $c:F(j_{h^{-1}U\\cap h^{-1}V,*}I|_{h^{-1}U\\cap h^{-1}V})\\to j_{U\\cap V,*}J|_{U\\cap V}$ satisfying $f;\\eta_U=F(\\eta_{h^{-1}U});a$, $f;\\eta_V=F(\\eta_{h^{-1}V});b$, $a;\\rho_{U,U\\cap V}=F(\\rho_{h^{-1}U,h^{-1}U\\cap h^{-1}V});c$, and $b;\\rho_{V,U\\cap V}=F(\\rho_{h^{-1}V,h^{-1}U\\cap h^{-1}V});c$. No cover, injectivity, derived category, or resolution is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), displayed complex, and 08FE (lemma-restrict-direct-image-open), underived sectionwise identity; official Stacks pages read online"
+ },
+ "stmt_deps": [
+  "def-pc-kinjective-mayer-vietoris-data",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the underived open restriction and open composition isomorphisms of def-pc-derived-mayer-vietoris-open-counit-model. For an open A of Y, their composite identifies h_*j_{h^{-1}A,*}(I|h^{-1}A) with j_{A,*}((h_*I)|A). On a test open B both evaluate to I(h^{-1}(B intersect A)); the equality of inverse image with intersection identifies the section groups and their scalar actions. Apply this degreewise to complexes: naturality of the isomorphisms makes the section identifications commute with differentials.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-open-counit-model",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For A equal to U, V, or U intersect V, compose the preceding comparison with j_{A,*} of restriction of the supplied chain map f. For the intersection use h^{-1}(U intersect V)=h^{-1}U intersect h^{-1}V. These are a, b, and c. No localized representative or derived resolution is chosen.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Under the section identifications, the transported unit is restriction from B to B intersect A: unfold the definition schemeOpenModuleAdjunction and its transport along overFunctorEquiv. The first two equations are f_B followed by this restriction equals the same restriction followed by f_{B intersect A}, which is naturality of the sheaf morphism f in each degree. Equality on all section modules and in all degrees proves the two chain equations.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the mate formula for schemeOpenModuleImageRestriction. The inverse nested restriction comparison restricts twice, the counit removes the repeated larger-open restriction, and the forward comparison identifies the result with the smaller-open restriction. Thus its section component is restriction from B intersect U or B intersect V to B intersect U intersect V. Naturality of f at these two inclusions proves the last two equations. The construction uses no covering or injectivity, and the same section computations apply to empty and repeated opens and zero complexes.",
+   "uses": [
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-mayer-vietoris-open-counit-model",
+  "def-pc-kinjective-mayer-vietoris-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "C4",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), displayed complex, and 08FE (lemma-restrict-direct-image-open), underived sectionwise identity; official Stacks pages read online",
+  "note": "Detailed sectionwise chain-map expansion of the underived identity in Tag 08FE and the diagram in Tag 08BV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct image Mayer Vietoris open restriction chain map commuting units restrictions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary direct image of module sheaf complexes commutes with open restriction units and Mayer Vietoris restrictions",
+   "results": "8 hits, including Scheme.Modules.restrictFunctorComp_hom_app_app, ModuleCat.Tilde.toOpen_res and generic sheaf restriction/gluing equations; no comparison squares for these transported module complex functors.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeMV_directImage_chain_squares|MayerVietoris.*map|map.*MayerVietoris",
+   "results": "0 hits in the search service; direct repository searches found same-scheme concrete_map (private) in DerivedMayerVietorisFunctorial, and homotopy-only counit compatibility in DerivedMayerVietorisUnderivedOpenCounitSquare. Neither supplies the chain squares after direct image.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComparisonFirst",
+  "date": "2026-10-14",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "base-change proof via lem-pc-rf-base-change-flat-module: finite open cover induction, concrete relative Mayer–Vietoris direct-image comparison",
+   "via": [
+    "lem-pc-mayer-vietoris-image-resolution-comparison-first",
+    "lem-pc-mayer-vietoris-image-resolution-comparison",
+    "lem-pc-derived-mayer-vietoris-functorial"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MayerVietorisDirectImageChainSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/MayerVietorisDirectImageChainSquares.lean",
+  "declaration": "AlgebraicGeometry.schemeMV_directImage_chain_squares",
+  "statement": "theorem schemeMV_directImage_chain_squares\n    (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)\n    (f : ((RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj I ⟶ J) :\n    let F := (RingedSpace.moduleDirectImage h.toLRSHom.toShHom).mapHomologicalComplex\n      (ComplexShape.up ℤ)\n    ∃ (a : F.obj (schemeOpenModuleImageComplex X (h ⁻¹ᵁ U) I) ⟶\n        schemeOpenModuleImageComplex Y U J)\n      (b : F.obj (schemeOpenModuleImageComplex X (h ⁻¹ᵁ V) I) ⟶\n        schemeOpenModuleImageComplex Y V J)\n      (c : F.obj (schemeOpenModuleImageComplex X ((h ⁻¹ᵁ U) ⊓ (h ⁻¹ᵁ V)) I) ⟶\n        schemeOpenModuleImageComplex Y (U ⊓ V) J),\n      f ≫ schemeOpenModuleImageComplexUnit Y U J =\n        F.map (schemeOpenModuleImageComplexUnit X (h ⁻¹ᵁ U) I) ≫ a ∧\n      f ≫ schemeOpenModuleImageComplexUnit Y V J =\n        F.map (schemeOpenModuleImageComplexUnit X (h ⁻¹ᵁ V) I) ≫ b ∧\n      a ≫ schemeOpenModuleImageComplexRestriction Y (homOfLE inf_le_left) J =\n        F.map (schemeOpenModuleImageComplexRestriction X (homOfLE inf_le_left) I) ≫ c ∧\n      b ≫ schemeOpenModuleImageComplexRestriction Y (homOfLE inf_le_right) J =\n        F.map (schemeOpenModuleImageComplexRestriction X (homOfLE inf_le_right) I) ≫ c",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T211056-L-389440",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261013T211056-L-389440",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,21 +12,44 @@
  ],
  "proof": [
   {
-   "text": "Construct the comparison on fixed K-injective resolutions and represent the localized direct-image map by a concrete chain map.",
+   "text": "Put I=schemeMVResolution X E, J=schemeMVResolution Y (Rh_* E), eI=derivedModuleDirectImageKInjectiveIso h I and eJ=schemeMVResolutionIso Y (Rh_* E). The required localized chain map is phi=eI.inv;Rh_*(schemeMVResolutionIso X E).hom;eJ.inv. J is K-injective. Apply Mathlib Qh_map_bijective to the morphism conjugated by quotientCompQhIso, then fullness of the homotopy quotient gives a chain map f with Q(f)=phi. Naturality of quotientCompQhIso proves that exact equality.",
    "uses": [
-    "def-pc-derived-mayer-vietoris-canonical-data"
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-sc-kinjective-quasi-iso-comparison",
+    "lem-pc-derived-functor-termwise-split-ses-triangle"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply schemeMV_directImage_chain_squares to f, obtaining the three open components a, b, c and their four commuting squares. Since termwise direct image is additive it preserves binary biproducts. Define the middle component as F.mapBiprod.hom followed by biprod.map a b. Define the short-complex morphism with components f, this middle map, and c. Projection onto each summand verifies the first square from the two unit equations. Precomposition by each biproduct inclusion verifies the second square from the two restriction equations, using preservation of negation for the V summand. All assembly is proved in Lean.",
+   "uses": [
+    "lem-pc-mayer-vietoris-direct-image-chain-squares",
+    "def-pc-kinjective-mayer-vietoris-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The first component of the constructed short-complex map is definitionally f. Substitute Q(f)=phi into the requested equation. Associativity and eI.hom;eI.inv=id and eJ.inv;eJ.hom=id cancel the two inverse comparisons, leaving exactly Rh_*(schemeMVResolutionIso X E).hom. No normalization of an intersection derived comparison or connecting morphism is needed.",
+   "uses": [
+    "def-pc-derived-mayer-vietoris-canonical-data",
+    "lem-pc-derived-functor-termwise-split-ses-triangle"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-mayer-vietoris-canonical-data"
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-pc-derived-functor-termwise-split-ses-triangle",
+  "lem-pc-mayer-vietoris-direct-image-chain-squares",
+  "def-pc-kinjective-mayer-vietoris-data"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "P2",
+  "by": "agent",
+  "agent": "C4",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BV"
+  "place": "Tags 08BV (lemma-exact-sequence-j-star), displayed complex, and 08FE (lemma-restrict-direct-image-open), underived sectionwise identity; official Stacks pages read online",
+  "note": "Lean proof by K-injective target fullness, ordinary open chain squares, explicit biproduct assembly and cancellation of resolution isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -94,9 +117,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "C4",
   "result": "pass",
-  "landing": "20261013T201805-L-3975473",
+  "landing": "20261013T211056-L-389440",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
