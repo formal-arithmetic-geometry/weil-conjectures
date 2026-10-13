@@ -10,16 +10,43 @@
  },
  "proof": [
   {
-   "text": "Use the Artinian product decomposition of the finite quotient algebra and localization at its maximal ideals; the resulting product map is injective and has the stated pure-tensor formula.",
+   "text": "Set A = R_p, m = its maximal ideal, B = A tensor_R S, and I = m^n B. Mathlib Algebra.TensorProduct.quotientTensorEquiv identifies (A/m^n) tensor_R S with B/I. For each q over p, construct the R-algebra map psi_q : B -> S_q by tensor-product lifting of Localization.localRingHom and S -> S_q. Ideal.map_map identifies I S_q with m^n S_q, so Ideal.quotientMapₐ induces g_q : B/I -> S_q/(m^n S_q). Compose the product of the underlying R-linear maps with the quotient-tensor equivalence to construct phi.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each maximal ideal P of B, base-change finiteness (Mathlib Module.Finite.base_change) makes B finite, hence integral, over A. By [lem-weil-pbc-integral-maximal-contracts-maximal], P contracts to a maximal ideal of A, necessarily m. Thus q = P intersect S is prime and contracts to p; this follows from the scalar-tower identities and IsLocalization.AtPrime.under_maximalIdeal.",
+   "uses": [
+    "lem-weil-pbc-integral-maximal-contracts-maximal"
+   ],
    "elementary": false
+  },
+  {
+   "text": "B is a localization of S at the image of R minus p (Mathlib IsLocalization.tensorRight). Therefore B_P is a localization of S at q by IsLocalization.isLocalization_isLocalization_atPrime_isLocalization, giving the canonical S-algebra equivalence B_P -> S_q. Its composite with B -> B_P agrees with psi_q: IsLocalization.ringHom_ext reduces equality to S, where both maps are the structural localization map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If psi_q(b) belongs to I S_q for every q over p, apply the preceding identification to every maximal ideal P of B. Transporting ideal membership along the equivalence B_P -> S_q shows b/1 belongs to I B_P. Then [lem-weil-pbc-ideal-membership-at-maximal-localizations] gives b in I.",
+   "uses": [
+    "lem-weil-pbc-ideal-membership-at-maximal-localizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If phi(x) = phi(y), represent the difference of their images in B/I by b in B. Each g_q kills the class of b, so psi_q(b) lies in I S_q. The preceding ideal-membership criterion gives b in I, hence equality in B/I and then x = y by injectivity of the quotient-tensor equivalence. The pure-tensor formula follows from quotientTensorEquiv_apply_tmul, quotientMapₐ on representatives and Algebra.TensorProduct.lift_tmul.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-membership-at-maximal-localizations",
+  "lem-weil-pbc-integral-maximal-contracts-maximal"
+ ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 07N9, quotient-product argument"
+  "document": "https://stacks.math.columbia.edu/tag/07N9",
+  "place": "Quotient-product argument; K3 proves the required injectivity directly by the Mathlib maximal-localization criterion instead of Artinian decomposition."
  },
  "mathlib_searches": [
   {
@@ -85,10 +112,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N2",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T000423-L-2252192",
-  "kind": "interface",
+  "landing": "20261013T010616-L-2671456",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
