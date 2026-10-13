@@ -1,0 +1,113 @@
+{
+ "id": "lem-sbc-punctured-root-base-change",
+ "kind": "statement",
+ "title": "A punctured root chart commutes with one ring base change",
+ "statement": "Let R and S be commutative rings, b:R → S a ring homomorphism, f an element of R, and n a natural number. Write A_R=R[T]/(T^n-f), A_S=S[T]/(T^n-b(f)), q_R:Spec A_R → Spec R and q_S:Spec A_S → Spec S for the structural maps [def-weil-affine-spectrum]. Put V_R=D(f) inside Spec A_R and V_S=D(b(f)) inside Spec A_S, with their open inclusions i_R and i_S. There is an isomorphism e:V_S ≅ Spec S ×_{Spec R} V_R, where the pullback uses Spec b and i_R;q_R, such that e followed by the first projection equals i_S;q_S. There are no regularity, positivity, nonzero-ring or nonzero-coefficient assumptions.",
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Polynomial quotient base change implicit in Tag 05N9; lem-sbc-punctured-root-colimit-continuity step 1; Mathlib AdjoinRoot.lift, AdjoinRoot.eval₂_root, isPullback_SpecMap_of_isPushout, isPullback_morphismRestrict. The explicit universal-property argument is written and fully proved by J1."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "For arbitrary p in R[T] and q=p.map(b), prove the canonical square R → S, AdjoinRoot p → AdjoinRoot q is a pushout. For a cocone to C, lift the S-map using the image of root(p) under the other cocone leg. The cocone equation and eval₂_root show q vanishes there. The lift has the required coefficient and root formulas; these formulas also prove uniqueness. This is the private Lean theorem root_pushout, proved without dependencies beyond Mathlib.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Specialize p to T^n-f, take Spec of the pushout and identify the inverse image of D(f) with D(b(f)) by AdjoinRoot.map_of. Paste the basic-open restriction pullback square with the root-chart pullback square. Its isoPullback comparison and first-projection identity give the required isomorphism and equality.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J1",
+  "document": "Stacks Project and Mathlib",
+  "place": "Polynomial quotient base change implicit in Tag 05N9; lem-sbc-punctured-root-colimit-continuity step 1; Mathlib AdjoinRoot.lift, AdjoinRoot.eval₂_root, isPullback_SpecMap_of_isPushout, isPullback_morphismRestrict. The explicit universal-property argument is written and fully proved by J1.",
+  "note": "The universal-property proof and pullback assembly are fully proved in Lean; no sorry remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "AdjoinRoot base change polynomial quotient spectrum pullback",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the spectrum of a polynomial root quotient localized away from the coefficient is the punctured root chart over the new ring",
+   "results": "Eight hits include RingHom.IsStandardOpenImmersion.isStableUnderBaseChange and Weierstrass coordinate-ring maps, but no exact root-chart comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.*pullback|pullback.*AdjoinRoot; tensor.*AdjoinRoot|AdjoinRoot.*tensor|baseChange.*AdjoinRoot; isPullback_morphismRestrict",
+   "results": "No root-chart pullback theorem found in Mathlib, Sheaf or WeilConjectures. Mathlib supplies AdjoinRoot.lift and map, spectrum pushout-to-pullback, and basic-open restriction pullback; these are assembled directly in the fully proved module. Whole DAG search for root/base-change and quotient/base-change found no exact statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match; direct proof from Mathlib primitives"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootLimitPunctures",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Trait paragraph: root-chart inverse limit; polynomial quotient and basic-open base change in step 1 of lem-sbc-punctured-root-colimit-continuity.",
+   "via": [
+    "lem-sbc-punctured-root-colimit-continuity",
+    "lem-sbc-punctured-root-limit-presentation",
+    "lem-sbc-punctured-root-section-etale-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PuncturedRootBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PuncturedRootBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.punctured_root_base_change",
+  "statement": "theorem punctured_root_base_change\n    (R S : CommRingCat.{u}) (f : R) (n : ℕ) (b : R ⟶ S) :\n    let A₀ := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C f)\n    let N₀ := Spec (CommRingCat.of A₀)\n    let q₀ := Spec.map (CommRingCat.ofHom (algebraMap R A₀))\n    let V₀ : N₀.Opens := PrimeSpectrum.basicOpen (algebraMap R A₀ f)\n    let A := AdjoinRoot ((Polynomial.X : Polynomial S) ^ n - Polynomial.C (b.hom f))\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap S A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap S A (b.hom f))\n    ∃ e : V.toScheme ≅ pullback (Spec.map b) (V₀.ι ≫ q₀),\n      e.hom ≫ pullback.fst (Spec.map b) (V₀.ι ≫ q₀) = V.ι ≫ q ",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T145121-L-696379",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261013T145121-L-696379",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

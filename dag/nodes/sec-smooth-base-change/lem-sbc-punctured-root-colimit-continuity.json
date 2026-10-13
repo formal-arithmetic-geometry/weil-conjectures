@@ -13,32 +13,42 @@
  ],
  "proof": [
   {
-   "text": "At j form F(j)[T]/(T^n-a_j(f))[1/a_j(f)]. Naturality supplies the transition maps: they preserve the polynomial relation and inverted coefficient. The universal property of polynomial quotient and localization identifies maps from these rings to B with maps F(j)->B, a root and an inverse. Filteredness and nonemptiness make compatible roots and inverses single elements. The colimit property of c and e identifies the resulting colimit with H[T]/(T^n-b(f))[1/b(f)], using the compatibility hypothesis on a. This works for n=0 and for localization at zero.",
+   "text": "Use punctured_root_base_change to identify each chart, including the H chart, with the pullback of the fixed basic-open root chart over R. The base chart is affine by Mathlib IsAffineOpen.Spec_basicOpen.",
    "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply Spec to the colimit cocone to obtain a limiting cone of affine schemes. Identify spectra of the localized algebras with the displayed basic opens. The quotient and localization universal properties show these isomorphisms respect the base-ring maps, proving both leg equations.",
-   "uses": [
-    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-sbc-punctured-root-base-change",
     "def-weil-affine-spectrum"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply Spec to c₀ and its colimit proof. Extend the resulting limit cone along Spec(e₀). Use ha and contravariant functoriality to verify each leg followed by Spec(a_j) is Spec(b). Lift this limiting cone to Over(Spec R) using Over.isLimitLiftCone.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-weil-pbc-category-colimit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Over.pullback of the fixed root-chart map, which preserves limits as a right adjoint, then Over.forget, which preserves connected limits. Cofilteredness implies connectedness. Define the stage base maps by the first projections. Pullbacks of the affine stages and the affine root chart over Spec R are affine. Use the chart isomorphisms at H and at each stage, their first-projection formulas, and the cone-leg equations to verify both requested structural equalities.",
+   "uses": [
+    "lem-sbc-punctured-root-base-change"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-category-colimit",
+  "lem-sbc-punctured-root-base-change",
+  "def-weil-affine-spectrum",
   "lem-weil-pbc-spec-small-colimit-limit",
-  "def-weil-affine-spectrum"
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Y3",
-  "document": "Stacks Project",
-  "place": "Tags 05N9 (finite-presentation colimits), 01YW (limits of affine schemes); explicit universal-property calculation in the proof of lem-sbc-punctured-root-limit-presentation",
-  "note": "Universal-property details written by the worker; the pointed presentation is fully proved in Lean."
+  "group": "J1",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 05N9 and 01YW; root-chart base-change universal property and preservation of connected limits under pullback, assembled from Mathlib.",
+  "note": "Fully proved via the fixed-chart base-change route. The unit route is unchanged; its realized arrays are empty and this argument is below the unit level."
  },
  "mathlib_searches": [
   {
@@ -109,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T140829-L-317383",
+  "landing": "20261013T145121-L-696379",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
