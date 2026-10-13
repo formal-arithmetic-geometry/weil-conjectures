@@ -17,15 +17,16 @@
  ],
  "proof": [
   {
-   "text": "Restrict t to filtration steps and descend to the graded complex. Preservation of the pullback defining successor cycle representatives induces the restriction k on their graded image. The analogous restriction at r commutes with the successor cycle inclusion by cancelling the graded cycle inclusion.",
+   "text": "Choose step restrictions s from the preservation property of t. Cancel the target step inclusion to obtain the square between consecutive steps, and use cokernel.map to construct a single graded map g with its quotient projection equation. Apply filteredQuotient_map_restrictions at r and r+1, using filteredComplex_boundaries_le_cycles for its containment hypothesis, to obtain current and successor cycle restrictions and quotient maps.",
    "uses": [
     "def-sp-filtration",
-    "def-sp-filtered-complex-subquotients"
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-quotient-map-restrictions"
    ],
    "elementary": false
   },
   {
-   "text": "After the monic target page cycle inclusion, the first equation follows from the representative square of m0 and the defining equations of fU and fV; cancel that monomorphism.",
+   "text": "Apply the universal property hypotheses hm0 and hm1 to these restriction squares, identifying the constructed quotient maps with the components of m0 and m1. Cancel the target graded cycle inclusion and use Subobject.ofLE_arrow to show that the successor restriction commutes with inclusion into current cycles. Postcompose the proposed fU/fV square with the monic target page cycle inclusion. Rewrite hfU, hfV, the current quotient projection square, and HomologicalComplex.cyclesMap_i; associativity and the cycle inclusion square prove the equality. Cancel the page cycle inclusion.",
    "uses": [
     "lem-sp-filtered-quotient-page-maps",
     "lem-sp-filtered-complex-normalized-homology"
@@ -33,25 +34,26 @@
    "elementary": true
   },
   {
-   "text": "The same filtered map preserves successor boundary images. Descend k to the successor quotient and apply the universal square property of m1 to identify that descent with m1. This gives the second projection equation.",
+   "text": "The successor quotient projection square supplied by filteredQuotient_map_restrictions, after replacing its quotient map by m1 via hm1, is exactly the second asserted equation. Pair the two equations with the successor cycle restriction witness.",
    "uses": [
-    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-quotient-map-restrictions",
     "lem-sp-filtered-quotient-page-maps"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-filtered-complex-subquotients",
   "def-sp-filtration",
   "lem-sp-filtered-complex-normalized-homology",
+  "lem-sp-filtered-quotient-map-restrictions",
   "lem-sp-filtered-quotient-page-maps"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Homological Algebra",
-  "place": "Tag 012K; parent proof step 3, the successor-cycle equation before taking homology",
-  "note": "Componentwise expansion of the explicit representative construction; no direct sums."
+  "place": "Tag 012K, Lemmas 12.24.2 and 12.24.4; successor-cycle compatibility",
+  "note": "P4: reuse the existing filteredQuotient_map_restrictions construction at both pages; the remaining argument is monic cancellation, the given universal page-map properties, and associativity."
  },
  "mathlib_searches": [
   {
@@ -174,10 +176,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T024054-L-3340967",
-  "kind": "interface",
+  "landing": "20261013T072402-L-1123859",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
