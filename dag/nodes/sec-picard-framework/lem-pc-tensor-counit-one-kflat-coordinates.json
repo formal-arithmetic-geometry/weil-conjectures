@@ -52,33 +52,28 @@
  },
  "proof": [
   {
-   "text": "The canonical localization tensor map is invertible with the first factor P K-flat, giving a. Termwise tensor pullback commutes with the total tensor complex by its degreewise module comparison. Pullback preserves K-flatness, so the localization tensor map at k^*P and k^*G is invertible; the universal counit at P is invertible. Compose these isomorphisms to construct b.",
+   "text": "Construct the total-complex chain isomorphism from derivedPullback_tensorProduct. The localization tensor map with first factor P is invertible by K-flatness and the derived monoidal counit computation, giving a. Pullback preserves K-flatness; the analogous localization map on T and the shared universal counit at P are invertible. Their inverses composed with the chain isomorphism define b. The shared counit computation follows from uniqueness of left-derived functors, comparing with the K-flat counit of exists_derivedPullback.",
    "uses": [
     "def-pc-scheme-derived-tensor-structure",
     "lem-pc-derived-pullback-tensor-product",
     "lem-pc-kflat-pullback-preservation",
     "def-pc-derived-pullback",
-    "lem-weil-pbc-module-pullback-tensor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For K-flat G the required equation is the defining coordinate equation of the canonical comparison, after canceling the invertible counit at P and the target localization tensor map.",
-   "uses": [
-    "def-pc-derived-pullback-tensor-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For arbitrary G, take a K-flat resolution N -> G. Tensoring with P preserves this quasi-isomorphism. Naturality of the localization tensor maps, the termwise pullback tensor comparison, the universal counits and the canonical family τ gives the desired equation after precomposing by Lk^* of the induced derived tensor isomorphism. Cancel that isomorphism. Naturality uses the ordinary pulled-back map k^*N -> k^*G without requiring it to be a quasi-isomorphism.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
-    "lem-pc-derived-pullback-tensor-product",
-    "def-pc-derived-pullback-tensor-comparison",
     "def-pc-single-complex-base-change-stalk-condition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the raw tensor counit coordinate equation to the chain comparison, whose prescribed summand equations are supplied by derivedPullback_tensorProduct. Normalize its identity object casts. This step requires neither G nor its ordinary pullback to be K-flat.",
+   "uses": [
+    "lem-pc-tensor-counit-coordinate-equation",
+    "lem-pc-derived-pullback-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the raw equation with the inverse target localization tensor map and the tensor of the inverse counit at P with the identity. Cancel the two isomorphisms using associativity and tensorHom composition. The resulting equation is precisely the displayed equation for a and b.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -86,19 +81,16 @@
   "lem-pc-derived-pullback-tensor-product",
   "lem-pc-kflat-pullback-preservation",
   "def-pc-derived-pullback",
-  "lem-weil-pbc-module-pullback-tensor",
-  "def-pc-derived-pullback-tensor-comparison",
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
-  "def-pc-single-complex-base-change-stalk-condition"
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-tensor-counit-coordinate-equation"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "T4",
+  "group": "K3",
   "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 079U (lemma-pullback-tensor-product); perfect.tex Tag 0DJA(1), and Tag 0A1D (lemma-base-change-tensor)",
-  "note": "Coordinate transport written out from the cited universal counit and representative equations."
+  "note": "Explicit representative isomorphisms and tensor cancellation proved in Lean; arbitrary-complex raw counit coherence split off as a separate equation."
  },
  "mathlib_searches": [
   {
@@ -146,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T4",
+  "reviewer": "X-1d6a9",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T040802-L-3953194",
+  "landing": "20261013T100025-L-2468000",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, proof steps with cited declarations and Stacks sources; both delivered modules and sole direct importer RelativelyFlatDerivedBaseChangeComplex compile cleanly. Private helpers use only standard axioms; the parent additionally uses sorryAx through the documented coherence theorem. Existing interfaces and unit route are preserved."
  }
 }

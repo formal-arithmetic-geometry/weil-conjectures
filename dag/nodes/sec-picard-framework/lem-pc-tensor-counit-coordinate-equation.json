@@ -1,0 +1,145 @@
+{
+ "id": "lem-pc-tensor-counit-coordinate-equation",
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TensorCounitOneKFlatCoordinates",
+  "date": "2026-10-13",
+  "group": "K3"
+ },
+ "title": "Raw tensor coordinate equation for the universal pullback counit",
+ "statement": "Let $k:T\\to X$ be a scheme morphism [def-pc-scheme], with the recorded derived tensor structures [def-pc-scheme-derived-tensor-structure] and derived pullback [def-pc-derived-pullback]. Let $P,G$ be arbitrary cochain complexes of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules], and let $\\tau$ satisfy the canonical comparison predicate [def-pc-derived-pullback-tensor-comparison]. Write $\\mu$ for the localization tensor map, $H=\\operatorname{Tot}(P\\otimes G)$ [def-pc-tensor-complex-sheaves], and $\\epsilon$ for the shared universal counit [def-pc-single-complex-base-change-stalk-condition]. Every chain isomorphism $\\phi:k^*H\\cong\\operatorname{Tot}(k^*P\\otimes k^*G)$ whose maps on all tensor summands are the recorded module pullback tensor isomorphisms [lem-weil-pbc-module-pullback-tensor] satisfies $Lk^*(\\mu_X(P,G));\\epsilon(H);Q(\\phi)=\\tau(QP,QG);(\\epsilon(P)\\otimes\\epsilon(G));\\mu_T(k^*P,k^*G)$. No K-flatness or invertibility of $\\mu$ or $\\epsilon$ is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-derived-pullback",
+  "def-pc-cochain-complex-modules",
+  "def-pc-derived-pullback-tensor-comparison",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U (lemma-pullback-tensor-product); perfect.tex Tag 0DJA(1); K-flat resolutions Tag 06YS"
+ },
+ "proof": [
+  {
+   "text": "For K-flat P and G the canonical predicate supplies the coordinate equation for a pinned chain comparison. Two pinned comparisons agree: compose one with the inverse of the other, check each total-complex coproduct summand, and cancel the invertible module tensor comparison. Thus the given φ has the canonical coordinate equation.",
+   "uses": [
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-derived-pullback-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose K-flat resolutions r:P0 → P and s:G0 → G, put t=Tot(r tensor s), v=Tot(k*r tensor k*s), and d=Lk*(Qr tensor Qs). The pinned summand equations and module naturality give k*(t);phi=phi0;v. Naturality of the source localization map and the total counit identifies d followed by the left side of the desired equation with Lk*(mu(P0,G0));epsilon(H0);Q(phi0);Q(v). Naturality of tau, the factor counits, and the target localization map identifies d followed by the right side with tau(QP0,QG0);(epsilon(P0) tensor epsilon(G0));mu(k*P0,k*G0);Q(v). The K-flat coordinate equation equates these expressions. Qr and Qs, their tensor, and hence d are invertible, so d cancels. Neither t nor v nor either ordinary pulled-back resolution map is asserted to be a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-scheme-derived-tensor-structure",
+    "lem-pc-derived-pullback-tensor-product",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K3",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U; perfect.tex Tag 0DJA(1)",
+  "note": "Isolates coherence of the universal counit on arbitrary total-complex representatives, rather than their invertibility or construction."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "base-change step, Tag 0A1D: identify the derived tensor comparison with its total-complex representative; the canonical tensor map of Tag 079U",
+   "via": [
+    "lem-pc-rf-base-change-complex",
+    "lem-pc-tensor-counit-one-kflat-coordinates"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatibility of derived pullback counit with localization tensor map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "counit of derived pullback respects tensor comparison on arbitrary complexes",
+   "results": "8 hits, including CategoryTheory.Adjunction.derived_counit and derived prime counit and ordinary pullback counits; no raw tensor coordinate equation for arbitrary sheaf complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison.*unique|tensor.*counit",
+   "results": "25 hits chiefly coalgebra and Hopf algebra tensor counits; local source searches found private K-flat isomorphism helpers but no arbitrary-complex raw tensor coordinate equation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorCounitCoordinateEquation",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorCounitCoordinateEquation.lean",
+  "declaration": "AlgebraicGeometry.tensorCounit_coordinateEquation",
+  "statement": "theorem tensorCounit_coordinateEquation\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X T : Scheme.{u}} (k : T ⟶ X)\n    [@MonoidalPreadditive _ _ _ (SheafOfModules.monoidalCategory X.sheaf)]\n    (P G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (τ : ∀ A B : schemeDerivedCategory X,\n      (derivedPullback k).obj (A ⊗ B) ⟶\n        (derivedPullback k).obj A ⊗ (derivedPullback k).obj B)\n    (hτ : IsCanonicalPullbackTensorComparison k τ) :\n    letI := SheafOfModules.monoidalCategory X.sheaf\n    letI := SheafOfModules.monoidalCategory T.sheaf\n    letI := Classical.choice (SheafOfModules.tensorClosed T.sheaf).1\n    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf\n    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor T.sheaf\n    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf\n    letI := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj T.sheaf\n    ∀ φ : ((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj\n        (pullbackTensorTotal X P G) ≅\n      pullbackTensorTotal T\n        (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj P)\n        (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj G),\n      (∀ (p q n : ℤ) (h : p + q = n),\n        (Scheme.Modules.tensorPullback k).map\n            (HomologicalComplex.ιMapBifunctor P G (curriedTensor _) (.up ℤ) p q n h) ≫\n          φ.hom.f n =\n        ((Classical.choose (Scheme.Modules.module_pullback_tensor k)) (P.X p) (G.X q)).hom ≫\n          HomologicalComplex.ιMapBifunctor\n            (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj P)\n            (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj G)\n            (curriedTensor (SheafOfModules.{u} (moduleRings T.toRingedSpace)))\n            (.up ℤ) p q n h) →\n      (derivedPullback k).map (pullbackTensorModelMap X P G) ≫\n          (SingleComplexBaseChange.counit k).app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj (pullbackTensorTotal X P G)) ≫\n          DerivedCategory.Q.map φ.hom =\n        τ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj G) ≫\n          ((SingleComplexBaseChange.counit k).app\n              ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ⊗ₘ\n            (SingleComplexBaseChange.counit k).app\n              ((HomotopyCategory.quotient _ (.up ℤ)).obj G)) ≫\n          pullbackTensorModelMap T\n            (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj P)\n            (((Scheme.Modules.tensorPullback k).mapHomologicalComplex (.up ℤ)).obj G)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-pc-derived-pullback-tensor-product",
+  "lem-pc-kflat-resolution",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-single-complex-base-change-stalk-condition"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1d6a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T100025-L-2468000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-1d6a9",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261013T100025-L-2468000",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures with their nodes, proof steps with cited declarations and Stacks sources; both delivered modules and sole direct importer RelativelyFlatDerivedBaseChangeComplex compile cleanly. Private helpers use only standard axioms; the parent additionally uses sorryAx through the documented coherence theorem. Existing interfaces and unit route are preserved."
+ }
+}
