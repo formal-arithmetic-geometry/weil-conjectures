@@ -2,26 +2,14 @@
 
 ## Reason
 
-Repair upstream review #1424, queued in coord/repairs.txt. The theorem proves existence
-of a limit of a tower of cochain complexes. Its derived-category, exactness,
-enough-injectives and K-injectivity hypotheses do not enter the proof.
-The corrected statement removes all five unused hypotheses and the unused universe w.
-Countable products and abelianness remain: they supply the products and equalizers.
+The repository already landed the upstream repair removing derived-category,
+exactness, enough-injectives, and K-injectivity hypotheses. This follow-up repair
+removes the remaining unused `Abelian` assumption; the second reader also removed
+the first worker's unnecessary `Preadditive` assumption. The Mathlib construction only
+needs zero morphisms to form cochain complexes, countable products
+to provide the two required products, and equalizers for the equalizer construction.
 
 ## Old
-
-```lean
-theorem derivedCategory_towerLimit_cone
-    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
-    [HasCountableProducts A] [CountableAB4Star A]
-    (hP : HasCountableProducts (DerivedCategory A)) :
-    letI : HasCountableProducts (DerivedCategory A) := hP
-    ∀ (_ : EnoughInjectives A)
-      (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective],
-      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)
-```
-
-## New
 
 ```lean
 theorem derivedCategory_towerLimit_cone
@@ -30,37 +18,30 @@ theorem derivedCategory_towerLimit_cone
       ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)
 ```
 
-## Users
+## New
 
-`tools/downstream.py Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone
---uses derivedCategory_towerLimit_cone` identifies exactly the two modules below
-as textual users. Its 1537 transitive downstream modules have no other calls.
-The sole direct importer is DerivedLimitTower, which already publicly imports all
-three removed public dependencies independently. No downstream statement changes.
-The cone node is not a unit realization. Its sole DAG citer remains valid because
-all its original hypotheses still suffice for the generalized cone-existence theorem.
-No target declaration or definition changes, so no target meaning review is reopened.
+```lean
+theorem derivedCategory_towerLimit_cone
+    (A : Type u) [Category.{v} A] [HasZeroMorphisms A]
+    [HasCountableProducts A] [HasEqualizers A] :
+    ∀ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ),
+      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)
+```
+
+## Users
 
 | module | group holding it | effect |
 | --- | --- | --- |
-| Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone | Q4 | Hypotheses removed as requested; proof retained. |
-| Sheaf.CategoryTheory.Triangulated.DerivedLimitTower | unclaimed | Forced one-line proof adaptation; signature and visibility unchanged. |
+| Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone | P2 | Reviewed generalization; no target statement or definition changes. |
+| Sheaf.CategoryTheory.Triangulated.DerivedLimitTower | unclaimed | Existing Abelian assumptions synthesize the generalized assumptions; no source change required. |
 
-The forced adaptation changes line 50 only, from
-`have hc' := (derivedCategory_towerLimit_cone A hP) hI I` to
-`have hc' := (derivedCategory_towerLimit_cone A) I`.
-The original fails against the changed dependency with:
-
-```
-Application type mismatch: The argument hP has type
-HasCountableProducts (DerivedCategory A)
-but is expected to have type CochainComplex (ℕᵒᵖ ⥤ A) ℤ
-in the application derivedCategory_towerLimit_cone A hP
-```
-
-The adapted module compiles against the changed dependency. No other line of that
-module changes. No additional claim is required under the forced-adaptation exception.
+The read-only downstream check finds 1566 transitive importers and exactly these
+two textual users (including the theorem itself). The only direct importer is
+DerivedLimitTower, whose unchanged proof compiles against the new signature. All
+transitive statements retain their text and definitions. The cone node realizes no
+unit statement or step, and its sole DAG citer remains valid. No target meaning
+review is reopened.
 
 ## Status
 
-landed 20261013T201807-L-3976112 2026-10-13 (merge of deliver/Q4/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone)
+landed 20261013T211110-L-394062 2026-10-13 (merge of deliver/P2/Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone)

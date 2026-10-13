@@ -59,7 +59,7 @@
  ],
  "id": "lem-weil-derived-limit-tower-core-cone",
  "title": "Limit cone for a K-injective tower",
- "statement": "Let A be an abelian category with countable products. For every cochain complex I of inverse systems indexed by the opposite of the natural numbers, its associated functor from that indexing category to cochain complexes over A has a limit cone.",
+ "statement": "Let A be a category with zero morphisms, countable products, and equalizers. For every cochain complex I of inverse systems indexed by the opposite of the natural numbers, its associated functor from that indexing category to cochain complexes over A has a limit cone.",
  "stmt_deps": [],
  "proof": [
   {
@@ -73,16 +73,16 @@
   "by": "worker",
   "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerCone.lean",
   "place": "theorem derivedCategory_towerLimit_cone",
-  "note": "Proved from Mathlib countable products and equalizers; no derived category, exactness, enough injectives, or K-injectivity hypotheses are needed."
+  "note": "Proved from Mathlib countable products and equalizers, lifted degreewise to complexes; only zero morphisms, countable products and equalizers are needed in A."
  },
  "lean": {
   "existing": false,
   "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimitTowerCone",
   "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitTowerCone.lean",
   "declaration": "CategoryTheory.derivedCategory_towerLimit_cone",
-  "statement": "theorem derivedCategory_towerLimit_cone\n    (A : Type u) [Category.{v} A] [Abelian A] [HasCountableProducts A] :\n    ∀ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ),\n      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)",
+  "statement": "theorem derivedCategory_towerLimit_cone\n    (A : Type u) [Category.{v} A] [HasZeroMorphisms A]\n    [HasCountableProducts A] [HasEqualizers A] :\n    ∀ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ),\n      ∃ c : Cone I.asFunctor, Nonempty (IsLimit c)",
   "branch": "sheaf-dag",
-  "by": "Q4",
+  "by": "P2",
   "date": "2026-10-14"
  },
  "reviewed": {
@@ -98,31 +98,48 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-ddf33",
-  "group": "Q4",
+  "reviewer": "X-9ffbb",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T201807-L-3976112",
+  "landing": "20261013T211110-L-394062",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, node, change record, report, adapted importer, original failure, and allowed axioms all agree; compilation succeeds."
+  "note": "independent Codex review: Delivered theorem matches the generalized node and change record; Mathlib supports the proof, delivered module and unchanged direct importer compile cleanly, and axioms are exactly propext, Classical.choice, Quot.sound."
  },
  "statement_change": {
   "date": "2026-10-14",
-  "by": "Q4 stage 2",
-  "old_statement": "Let A be an abelian category with exact countable products and enough injectives, with derived category D(A) [def-weil-abstract-derived-category] equipped with any chosen countable products. For every K-injective cochain complex I of inverse systems indexed by the opposite of the natural numbers, its associated functor from that indexing category to cochain complexes over A has a limit cone.",
-  "what": "Upstream review #1424: HasDerivedCategory, CountableAB4Star, chosen countable products hP on the derived category, EnoughInjectives, and IsKInjective are unused. Remove these hypotheses, preserving the existence-of-limit-cone conclusion.",
+  "by": "P2 stage 2",
+  "old_statement": "Let A be an abelian category with countable products. For every cochain complex I of inverse systems indexed by the opposite of the natural numbers, its associated functor from that indexing category to cochain complexes over A has a limit cone.",
+  "what": "Abelianness and preadditivity are unnecessary. Zero morphisms suffice to form cochain complexes; countable products and equalizers lift to complexes and give the limit by the Mathlib equalizer-and-product construction.",
   "source": {
    "document": "Mathlib",
-   "place": "CategoryTheory.Limits.hasLimit_of_equalizer_and_product, Stacks Tag 002N"
+   "place": "CategoryTheory.Limits.hasLimit_of_equalizer_and_product"
   },
   "citers": [
    {
     "id": "lem-weil-derived-limit-tower-core",
     "holds": true,
-    "note": "The generalized cone-existence theorem applies to the same K-injective complex; only the proof call loses hP and hI. Its derived-limit statement and property argument are unchanged."
+    "note": "The existing caller supplies an Abelian category, which provides all generalized assumptions."
    }
   ],
-  "old_stmt_deps": [
-   "def-weil-abstract-derived-category"
-  ]
+  "previous": {
+   "date": "2026-10-14",
+   "by": "Q4 stage 2",
+   "old_statement": "Let A be an abelian category with exact countable products and enough injectives, with derived category D(A) [def-weil-abstract-derived-category] equipped with any chosen countable products. For every K-injective cochain complex I of inverse systems indexed by the opposite of the natural numbers, its associated functor from that indexing category to cochain complexes over A has a limit cone.",
+   "what": "Upstream review #1424: HasDerivedCategory, CountableAB4Star, chosen countable products hP on the derived category, EnoughInjectives, and IsKInjective are unused. Remove these hypotheses, preserving the existence-of-limit-cone conclusion.",
+   "source": {
+    "document": "Mathlib",
+    "place": "CategoryTheory.Limits.hasLimit_of_equalizer_and_product, Stacks Tag 002N"
+   },
+   "citers": [
+    {
+     "id": "lem-weil-derived-limit-tower-core",
+     "holds": true,
+     "note": "The generalized cone-existence theorem applies to the same K-injective complex; only the proof call loses hP and hI. Its derived-limit statement and property argument are unchanged."
+    }
+   ],
+   "old_stmt_deps": [
+    "def-weil-abstract-derived-category"
+   ]
+  }
  }
 }
