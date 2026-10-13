@@ -1,0 +1,133 @@
+{
+ "id": "new-dense-etale-stalk-map-injective-of-domain-stalks",
+ "kind": "statement",
+ "title": "Injective stalk maps from a dense etale source open into a target with domain stalks",
+ "statement": "Let $X,Y$ be schemes [def-weil-pbc-scheme-conventions], with $Y$ locally Noetherian [def-weil-pbc-noetherian-ring]. Assume each stalk of $Y$ is a domain (a nonzero commutative ring with no zero divisors). Let $f:X\\to Y$ and let $V\\subseteq Y$ be open such that $f^{-1}V$ is dense in $X$ and the restriction of $f$ over $V$ is etale [def-weil-etale-morphism]. For every $x\\in X$, the ring map $\\mathcal O_{Y,f(x)}\\to\\mathcal O_{X,x}$ is injective. Finiteness, source normality and integral closedness are not required.",
+ "source": {
+  "document": "Supplied DAG proof and Mathlib source",
+  "place": "new-finite-normal-dense-etale-stalk-going-down, steps 1 and 2; Mathlib/AlgebraicGeometry/FunctionField.lean:55, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:102, and the proved source WeilConjectures/Mathlib/AlgebraicGeometry/Noetherian.lean component theorems."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For an integral target, represent a germ r killed by f.stalkMap x as the germ of a section s on U. Naturality gives zero germ of f.app U s at x. The germ_eq theorem gives an open W around x on which this pullback is zero. Density supplies z in W with f(z) in V. Its stalk map is flat because the restricted etale morphism is flat; morphismRestrictStalkMap transports this flatness.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A flat local stalk map is faithfully flat and injective, by Module.FaithfullyFlat.of_flat_of_isLocalHom and FaithfulSMul.algebraMap_injective. Thus s has zero germ at f(z). Injectivity of germs on an integral scheme gives s=0 and hence r=0. This is the fully proved private helper stalkMap_injective_of_integral_dense_flat.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved source instance IsLocallyNoetherian.locallyConnectedSpace makes each connected component C of Y open. Transfer the domain stalk condition across its open-immersion stalk isomorphisms. The proved irreducibleSpace_of_isDomain_stalk makes C irreducible; domain stalks make it reduced, hence integral. These are the direct applications in hC and the five local instances of the Lean proof.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict f to the component C containing f(x). Dense.preimage along the open source inclusion preserves density of the original etale source open. Transport flatness of the original restricted stalk maps to the C-restricted maps using the two morphismRestrictStalkMap isomorphisms. Apply the private integral-target helper and transport injectivity back with RingHom.injective_respectsIso.arrow_mk_iso_iff.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "lem-sc-integral-scheme-stalks-in-function-field"
+ ],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "agent",
+  "document": "Supplied DAG proof and Mathlib source",
+  "place": "new-finite-normal-dense-etale-stalk-going-down, steps 1 and 2; Mathlib/AlgebraicGeometry/FunctionField.lean:55, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean:102, and the proved source WeilConjectures/Mathlib/AlgebraicGeometry/Noetherian.lean component theorems.",
+  "note": "Complete kernel-checked Lean proof by U2; no postponed proof dependencies."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism with dense etale locus into a locally Noetherian normal scheme has injective stalk maps",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dense etale locus of a scheme morphism to a locally Noetherian scheme with domain stalks implies every stalk map is injective",
+   "results": "The search found stalkMap_injective_of_isOpenMap_of_injective, requiring unrelated global injectivity assumptions, and germ-injective scheme results. No matching theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkMap.*injective|injective.*stalkMap|stalk.*integral",
+   "results": "AffineScheme stalkMap_injective reduces to section germs; ClosedImmersion has an unrelated injectivity theorem. No dense-etale stalk injectivity result. Source Noetherian and FunctionField provide the proved component and germ ingredients.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseEtaleGoingDown",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Unit sk-prop-input-spreading, Extension in depth >=2 and the local computation: transfer of boundary local dimension along the finite localized normalization, by going down on normal affine components. Injective stalk maps from a dense etale source open into a target with domain stalks.",
+   "via": [
+    "new-finite-normal-dense-etale-stalk-going-down",
+    "new-stalk-normalization-boundary-dimension-two-transfer",
+    "lem-sbc-stalk-normalization-boundary-dimension-two",
+    "lem-sbc-stalk-normalization-formal-boundary-depths",
+    "lem-sbc-stalk-normalization-formal-split",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.DenseEtaleStalkMapInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/DenseEtaleStalkMapInjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.dense_etale_stalkMap_injective_of_domain_stalks",
+  "statement": "theorem dense_etale_stalkMap_injective_of_domain_stalks {X Y : Scheme.{u}}\n    [IsLocallyNoetherian Y] (f : X ⟶ Y)\n    (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y))\n    (V : Y.Opens) (hdense : Dense (↑(f ⁻¹ᵁ V) : Set X))\n    (hetale : Etale (f ∣_ V)) (x : X) :\n    Function.Injective (f.stalkMap x).hom",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T160712-L-1372204",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T160712-L-1372204",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

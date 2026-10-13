@@ -11,9 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.GoingDown
 
-import Sheaf.AlgebraicGeometry.NormalSectionsFiniteProduct
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteStalkIntegralDomainFactorization
+import Sheaf.AlgebraicGeometry.Morphisms.DenseEtaleStalkMapInjective
 import Mathlib.RingTheory.IntegralClosure.GoingDown
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-!
 # Going down on stalks of a finite map with dense etale locus
@@ -62,6 +62,27 @@ theorem finite_normal_dense_etale_stalk_goingDown {X Y : Scheme.{u}}
     (V : Y.Opens) (hdense : Dense (↑(f ⁻¹ᵁ V) : Set X))
     (hetale : Etale (f ∣_ V)) (x : X) :
     letI := (f.stalkMap x).hom.toAlgebra
-    Algebra.HasGoingDown (Y.presheaf.stalk (f x)) (X.presheaf.stalk x) := by sorry
+    Algebra.HasGoingDown (Y.presheaf.stalk (f x)) (X.presheaf.stalk x) := by
+  let R := Y.presheaf.stalk (f x)
+  let T := X.presheaf.stalk x
+  let : Algebra R T := (f.stalkMap x).hom.toAlgebra
+  have hinj := dense_etale_stalkMap_injective_of_domain_stalks f
+    (fun y ↦ (hY y).1) V hdense hetale x
+  obtain ⟨B, a, b, hB, ha, hb, hab⟩ :=
+    finite_stalk_integral_domain_factorization f x (hX x).1
+  let : IsDomain B := hB
+  let : IsIntegrallyClosed R := (hY (f x)).2
+  let : Algebra R B := a.toAlgebra
+  let : Algebra B T := b.toAlgebra
+  have : FaithfulSMul R B :=
+    (faithfulSMul_iff_algebraMap_injective R B).mpr fun r s hrs ↦
+      hinj (by
+        change a r = a s at hrs
+        simpa only [← hab, RingHom.comp_apply] using congrArg b hrs)
+  have : Algebra.IsIntegral R B := ⟨ha⟩
+  have : Module.Flat B T := hb
+  have : IsScalarTower R B T := IsScalarTower.of_algebraMap_eq' hab.symm
+  exact Algebra.HasGoingDown.trans R B T
 
 end AlgebraicGeometry.Scheme
+

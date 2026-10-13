@@ -1,0 +1,140 @@
+{
+ "id": "new-finite-stalk-integral-domain-factorization",
+ "kind": "statement",
+ "title": "Integral-domain factorization of a finite map at a domain source stalk",
+ "statement": "Let $f:X\\to Y$ be a finite morphism of schemes [def-weil-finite-integral-morphism, def-weil-pbc-scheme-conventions], and let $x\\in X$ have a domain local ring $T=\\mathcal O_{X,x}$ (a nonzero commutative ring with no zero divisors). Put $R=\\mathcal O_{Y,f(x)}$. There exist a commutative domain $B$ and ring homomorphisms $a:R\\to B$, $b:B\\to T$ such that every element of $B$ is integral over $R$ via $a$, the map $b$ is flat [def-weil-pbc-flat-ring-map], and $b\\circ a=f_x^\\sharp$. No target normality, Noetherianity or dominance is assumed.",
+ "source": {
+  "document": "Supplied DAG proof and Mathlib source",
+  "place": "new-finite-normal-dense-etale-stalk-going-down, steps 1 and 3 (affine integral algebra and stalk localization); Mathlib/RingTheory/Localization/Integral.lean:205 and Mathlib/RingTheory/Unramified/Finite.lean:275 (Iversen I.2.7)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood U=Spec A of f(x), with finite affine preimage Spec C. Its map A -> C is finite by the definition of finite morphism, and hence integral by the finite-algebra integrality lemma. Write p for f(x), q for x, R=A_p and T=C_q using the affine stalk localization instances.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let M be the image in C of A minus p, and S=M^{-1}C. The localization of A -> C gives a0:R -> S, integral by Mathlib isIntegral_localization. Elements of M become units in T: map the units of R along f.stalkMap x and use germ_stalkMap_apply. IsLocalization.lift therefore constructs b0:S -> T.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The affine stalk localization makes T flat over C. Since S is a localization of C, Module.flat_iff_of_isLocalization makes T flat over S. IsLocalization.ringHom_ext reduces b0.comp a0 = f.stalkMap x to its equality on A. IsLocalization.map_eq and lift_eq reduce that equality to germ_stalkMap_apply.",
+   "uses": [
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take B to be the image subring of b0 in the domain T, so B is a domain. Let a be a0 followed by the range restriction, and b be the inclusion in T. Every element of B has a preimage in S. Mapping its monic integral equation by RingHom.IsIntegralElem.map proves a.IsIntegral.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The range restriction S -> B is surjective, hence formally unramified and finite as an S-module. Apply the proved Mathlib theorem Algebra.FormallyUnramified.flat_of_restrictScalars (Unramified/Finite.lean:275, Iversen I.2.7) to the tower S -> B -> T, using T flat over S. It proves b.Flat. The range inclusion composed with range restriction is b0, so the required composite equality follows from the equality already proved.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-localization-flat"
+ ],
+ "proof_origin": {
+  "kind": "written-by-agent",
+  "by": "agent",
+  "document": "Supplied DAG proof and Mathlib source",
+  "place": "new-finite-normal-dense-etale-stalk-going-down, steps 1 and 3 (affine integral algebra and stalk localization); Mathlib/RingTheory/Localization/Integral.lean:205 and Mathlib/RingTheory/Unramified/Finite.lean:275 (Iversen I.2.7).",
+  "note": "Complete kernel-checked Lean proof by U2; no postponed proof dependencies."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An integral domain stalk of a finite scheme morphism factors through an integral domain algebra and a flat map",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite map with normal source has a stalk map factoring through an integral domain algebra followed by a localization",
+   "results": "LocallyOfFiniteType.stalkMap, local stalk homomorphism and HasRingHomProperty results; no factorization theorem.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Ff]actor|[Ii]ntegral.*localization|flat_of_restrictScalars",
+   "results": "The search found IsLocalization.isIntegral_localization. Direct source reads found Algebra.FormallyUnramified.flat_of_restrictScalars and affine stalk localizations. Library and blueprint searches found no matching factorization declaration.",
+   "date": "2026-10-13",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseEtaleGoingDown",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Unit sk-prop-input-spreading, Extension in depth >=2 and the local computation: transfer of boundary local dimension along the finite localized normalization, by going down on normal affine components. Integral-domain factorization of a finite map at a domain source stalk.",
+   "via": [
+    "new-finite-normal-dense-etale-stalk-going-down",
+    "new-stalk-normalization-boundary-dimension-two-transfer",
+    "lem-sbc-stalk-normalization-boundary-dimension-two",
+    "lem-sbc-stalk-normalization-formal-boundary-depths",
+    "lem-sbc-stalk-normalization-formal-split",
+    "lem-sbc-stalk-normalization-split-formal-test",
+    "lem-sbc-stalk-normalization-depth-two-section-flat-core",
+    "lem-sbc-stalk-normalization-depth-two-section-flat"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteStalkIntegralDomainFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteStalkIntegralDomainFactorization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_stalk_integral_domain_factorization",
+  "statement": "theorem finite_stalk_integral_domain_factorization {X Y : Scheme.{u}}\n    (f : X ⟶ Y) [IsFinite f] (x : X) (hX : IsDomain (X.presheaf.stalk x)) :\n    ∃ (B : CommRingCat.{u}) (a : Y.presheaf.stalk (f x) →+* B)\n      (b : B →+* X.presheaf.stalk x),\n      IsDomain B ∧ a.IsIntegral ∧ b.Flat ∧ b.comp a = (f.stalkMap x).hom",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T160712-L-1372204",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T160712-L-1372204",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
