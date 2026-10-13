@@ -1,0 +1,116 @@
+{
+ "id": "lem-sc-cech-refinement-comparison-square",
+ "kind": "statement",
+ "title": "Refinement comparison square",
+ "statement": "Let $f:X'\\to X$ be a scheme morphism, let $U$ and $U'$ be arbitrary open covers, and let refine be a specified index map with $U'_i\\subseteq f^{-1}(U_{\\mathrm{refine}(i)})$. For a quasi-coherent module $F$ and $n\\ge 0$, let gamma be any cochain map satisfying the tuplewise refinement formula [def-sc-cech-refinement-cochain-map], and let c and c' be the canonical comparisons [def-sc-module-cech-comparison] for F and its pullback. Then the refinement homology map, transported through the forgetting-scalars homology isomorphisms, followed by c' equals c followed by the usual module-cohomology pullback [def-weil-pbc-module-cohomology-fmap]. No comparison is required to be invertible.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-sc-cech-refinement-cochain-map",
+  "def-sc-module-cech-comparison",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Stacks Tag 01FD"
+ },
+ "proof": [
+  {
+   "text": "Choose injective resolutions of F and f*F. Resolve the pushed-forward source resolution and lift the target resolution over the adjunction unit, as in Tag 01FD. Use the specified tuple formula to map the refinement double complexes. The augmentation pentagon commutes by the lift equation and the global-section squares by restriction naturality. Invert the global-section-to-total quasi-isomorphisms defining the canonical comparisons [lem-sc-cech-comparison-map-naturality]; the outer square is the stated cohomology pullback square.",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-comparison-map-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FD, Lemma 20.15.1 and its resolution diagram, specialized to the adjunction unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Refinement of open covers commutes with the canonical map from Cech cohomology to sheaf cohomology",
+   "results": "Service unavailable: Internal Server Error. No mathematical verdict; leanfinder, loogle and grep searches were completed instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Cech cohomology comparison commutes with restriction to a refining open cover and inverse image of sheaves",
+   "results": "8 hits; no result states this intermediate comparison. Nearest results: TopCat.Presheaf.SheafConditionEqualizerProducts.w, TopCat.Sheaf.interUnionPullbackConeLift_left, TopCat.Sheaf.interUnionPullbackConeLift_right, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom, TopCat.Sheaf.interUnionPullbackCone_snd, TopCat.Sheaf.interUnionPullbackCone_fst, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"homology\"",
+   "results": "0 hits; no result states this intermediate comparison. No hits.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|flasque|cup.*(resolution|comparison)|comparison.*cup|cech.*naturality",
+   "results": "5 hits; no result states this intermediate comparison. Nearest results: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechCupPullbackCompat",
+  "date": "2026-10-13",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general theorem of the cube; Kunneth comparison on the special fibre",
+   "via": [
+    "lem-sc-picard-cech-cup-pullback-compat",
+    "lem-sc-picard-kunneth-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.Paper.CechRefinementComparisonSquare",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechRefinement_comparison_square",
+  "file": "lean/Sheaf/Paper/CechRefinementComparisonSquare.lean",
+  "statement": "theorem cechRefinement_comparison_square (X X' : Scheme.{v}) (f : X' ⟶ X)\n    {ι ι' : Type v} (U : ι → X.Opens) (hU : iSup U = ⊤)\n    (U' : ι' → X'.Opens) (hU' : iSup U' = ⊤)\n    (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i))\n    (F : X.Modules) [F.IsQuasicoherent] (p : ℕ)\n    (cF : ((cechComplexFunctor U).obj F.presheafModuleCat).homology p ⟶\n      (RingedSpace.moduleCohomology X.toRingedSpace p).obj F)\n    (hcF : IsModuleCechComparison U F p cF)\n    (cF' : ((cechComplexFunctor U').obj\n        ((tensorPullback f).obj F).presheafModuleCat).homology p ⟶\n      (RingedSpace.moduleCohomology X'.toRingedSpace p).obj ((tensorPullback f).obj F))\n    (hcF' : IsModuleCechComparison U' ((tensorPullback f).obj F) p cF')\n    (gamma : ((forget₂ (ModuleCat.{v} Γ(X, ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj ((cechComplexFunctor U).obj F.presheafModuleCat) ⟶\n      ((forget₂ (ModuleCat.{v} Γ(X', ⊤)) AddCommGrpCat.{v}).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj\n          ((cechComplexFunctor U').obj ((tensorPullback f).obj F).presheafModuleCat))\n    (hgamma : IsCechRefinementMap f U U' refine hrefine F gamma)\n :\n    cechRefinementHomology gamma p ≫ (forget₂ _ AddCommGrpCat).map cF' =\n      (forget₂ _ AddCommGrpCat).map cF ≫ moduleCohomologyPullback f F p",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c6cfc",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T161727-L-1459870",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c6cfc",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261013T161727-L-1459870",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the proof, new theorem signatures, DAG records, sources, and report; existing signatures remain unchanged, all three delivered modules and all three direct importers compile cleanly, and axiom checks pass with recorded sorry dependencies."
+ }
+}

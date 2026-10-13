@@ -5,12 +5,14 @@ Authors: SHEAF group T1
 -/
 module
 
-public import Sheaf.Paper.CechComparisonMapNaturality
+import Sheaf.Paper.CechComparisonMapNaturality
 public import Sheaf.Paper.CechRefinementCochainMap
 public import Sheaf.Paper.CechCupProduct
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.Paper.CechRefinementComparisonSquare
+import Sheaf.Paper.CechCupResolutionRepresentatives
 
 /-! # Cech cup products and pullback
 
@@ -287,7 +289,28 @@ theorem cechCupPullbackCompat (X X' : Scheme.{v}) (f : X' ⟶ X)
     (∀ (hF : IsIso cF) (hG : IsIso cG) (hFG : IsIso cFG) a b,
       cup (inv (I := hF) cF a) (inv (I := hG) cG b) =
         inv (I := hFG) cFG (sheafCup a b)) := by
-  sorry
+  have hpull := cechRefinement_comparison_square X X' f U hU U' hU'
+    refine hrefine F p cF hcF cF' hcF' gamma hgamma
+  have hproducts : ∀ a b, cFG (cup a b) = sheafCup (cF a) (cG b) := by
+    intro x y
+    obtain ⟨a, rfl⟩ := cycle_class_surjective
+      ((cechComplexFunctor U).obj F.presheafModuleCat) p x
+    obtain ⟨b, rfl⟩ := cycle_class_surjective
+      ((cechComplexFunctor U).obj G.presheafModuleCat) q y
+    let c := cup_cycle U F G p q a b
+    have hc : c.val = cechCupCochain U F G p q a.val b.val := rfl
+    obtain ⟨D, a', b', c', ha', hb', hc', hpair⟩ :=
+      cechCup_resolution_representatives X U hU F G p q
+        cF hcF cG hcG cFG hcFG a b c hc
+    rw [hcup a b c hc, ← hc', ← ha', ← hb']
+    exact (hsheafCup D a' b' c' hpair).symm
+  refine ⟨hpull, hproducts, ?_⟩
+  intro hF hG hFG a b
+  apply (ModuleCat.mono_iff_injective cFG).1 inferInstance
+  have h := hproducts (inv (I := hF) cF a) (inv (I := hG) cG b)
+  simpa only [← ConcreteCategory.comp_apply, IsIso.inv_hom_id,
+    ConcreteCategory.id_apply] using h
+
 
 /-- The sheaf cup product is natural in both coefficient sheaves.
 Source: Stacks Project, Tags 07MB and 0FKV
