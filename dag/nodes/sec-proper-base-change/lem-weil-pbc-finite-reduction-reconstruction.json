@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "lem-weil-pbc-finite-reduction-reconstruction",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lemma-weil-pbc-adic-completion-reduction"
+  ]
  },
  "kind": "statement",
  "title": "Finite reduction of reconstruction",
- "statement": "For every $a\\geq1$, the derived counit from inverse limit to evaluation\ninduces a functorial isomorphism\n\n$$\n (\\Rlim K_\\bullet)\\otimes_A^LP_a\\xrightarrow{\\sim}K_a.\n$$\n\nMoreover, $(-)\\otimes_A^LP_a$ commutes with the two derived countable\nproducts occurring in the Roos triangle attached to the derived inverse-limit\nconstruction.\n\n(*Source note:* the reduction isomorphism is the finite-level form of derived\ncompleteness in Stacks Project, Lemma 61.20.1 (Tag\n[099M](https://stacks.math.columbia.edu/tag/099M):\n$K=\\Rlim(K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n})$ for a derived complete\n$K$, for a Noetherian ring $\\Lambda$ with an ideal $I$ on an arbitrary site)\nand of the Koszul form of Lemma 15.93.17 (Tag\n[091Z](https://stacks.math.columbia.edu/tag/091Z): $K$ is derived complete if\nand only if $K\\to\\Rlim(K\\otimes_A^{\\mathbf L}K_n^\\bullet)$ is an\nisomorphism). Those entries concern a single derived complete object of\n$D(\\mathcal C,\\Lambda)$; the form used here is tower-level, being stated for\nthe strict quotient tower of [def-weil-pbc-adic-coefficient-datum], and it\nadds the commutation of $(-)\\otimes_A^LP_a$ with the two derived products of\nthe Roos triangle, which the verified entries do not state.)",
+ "statement": "Let $T$ be a scheme and let $A,I,P_n,(P_n)_T,A_T$ be the Noetherian coefficient datum of [def-weil-pbc-adic-coefficient-datum]. Let $K\\in D(\\operatorname{Mod}(T_{\\Proet},A_T))$ be derived $I$-complete, meaning that its Koszul completion map of [def-weil-pbc-intrinsic-completion] is an isomorphism. Let $K_\\bullet$ be its strict quotient tower, obtained from a functorial K-flat representative $QK$ by $QK\\otimes_{A_T}(P_n)_T$, as in [def-weil-pbc-adic-coefficient-datum]. Write $L=\\Rlim K_\\bullet$ for [def-weil-pbc-derived-inverse-limit]. In this statement $M\\otimes_A^L P_a$ abbreviates $M\\otimes_{A_T}^L(P_a)_T$; no identification of ordinary $D(A)$ with this sheaf derived category is intended.\n\nFor every $a\\geq1$, evaluation $L\\to K_a$, with $K_a$ regarded as an object over $(P_a)_T$, has adjoint the derived counit, and this is a functorial isomorphism\n$$\nL\\otimes_{A_T}^L(P_a)_T\\xrightarrow{\\sim}K_a.\n$$\nMoreover $(-)\\otimes_{A_T}^L(P_a)_T$ commutes with the two derived countable products in the Roos triangle of this strict tower, all products and tensors being computed in $D(\\operatorname{Mod}(T_{\\Proet},A_T))$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
   "place": "node lem-weil-pbc-finite-reduction-reconstruction, order 1249",
@@ -24,19 +26,63 @@
  },
  "stmt_deps": [
   "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
   "def-weil-pbc-derived-inverse-limit"
  ],
  "proof": [
   {
-   "text": "By [prop-weil-pbc-koszul-reconstruction] the Koszul completion is identified\nwith $\\Rlim K_\\bullet$, so we verify the statement for the Koszul completion:\ntensoring the strict Koszul tower with the bounded finite-projective\nrepresentative of $P_a$ and evaluating at the $a$-th stage gives the\ncanonical isomorphism. The commutation with the two derived products is the\ncompatibility of tensor with products in the Roos triangle of\n[prop-weil-pbc-roos-triangle].",
+   "text": "Apply [lem-weil-pbc-completed-constant-sheaf-reduction] to the datum of [def-weil-pbc-adic-coefficient-datum]. It identifies $A_T\\otimes_{\\underline A}^L\\underline{P_a}$ with $(P_a)_T$. Choose a bounded finite-projective resolution $F_a^\\bullet\\to P_a$, which exists by the perfectness assumption. The same lemma gives a bounded representative $E_a^\\bullet=A_T\\otimes_{\\underline A}\\underline{F_a^\\bullet}$ of $(P_a)_T$, with each term a direct summand of a finite sum of $A_T$. Thus the perfect complex used below is a complex of sheaves over $A_T$, not an ordinary $A$-module complex.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "coefficient interpretation required for the bounded finite-projective representative"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-koszul-reconstruction] the completion map $\\eta:K\\to L$ agrees with the strict quotient-tower completion map and is an isomorphism because $K$ is derived $I$-complete. For each $a$ its composite with the evaluation $p_a:L\\to K_a$ is the canonical reduction map $u_a:K\\to K_a$ of [def-weil-pbc-adic-coefficient-datum]. This uses the map compatibility in the reconstruction statement, not merely an abstract isomorphism between the objects.",
    "uses": [
     "prop-weil-pbc-koszul-reconstruction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, first sentence: Koszul completion and quotient-tower completion map"
+   }
+  },
+  {
+   "text": "Let $\\epsilon_a:L\\otimes_{A_T}^L(P_a)_T\\to K_a$ be adjoint to $p_a$ under derived extension and restriction of scalars. The identity $p_a\\eta=u_a$ from [prop-weil-pbc-koszul-reconstruction] implies that $\\epsilon_a(\\eta\\otimes^L1)$ is adjoint to $u_a$. Since $K_a=K\\otimes_{A_T}^L(P_a)_T$ by [def-weil-pbc-adic-coefficient-datum], that adjoint is $1_{K_a}$. Tensoring the isomorphism $\\eta$ with $(P_a)_T$ gives an isomorphism, so $\\epsilon_a=(\\eta\\otimes^L1)^{-1}$. This identifies the specified counit, not just some isomorphism. The completion and reduction maps are functorial, so their inverses and this counit are functorial.",
+   "uses": [
+    "prop-weil-pbc-koszul-reconstruction",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, finite-level identification, with completeness made explicit"
+   }
+  },
+  {
+   "text": "For the two products $R\\!\\prod_nK_n$ in [prop-weil-pbc-roos-triangle], apply [lem-weil-pbc-finite-projective-tensor-products] with the representative $E_a^\\bullet$ of step 1. It yields the canonical product comparison isomorphism for each occurrence. Naturality with respect to every transition $K_{n+1}\\to K_n$ implies compatibility with the shift $s$, and hence with $1-s$: the $n$-th projection of either composite is the tensor of the transition composed with the $(n+1)$-st projection. Thus both product comparisons are precisely those attached to the Roos triangle; no assertion that the reduced tower is constant is used.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-tensor-products",
     "prop-weil-pbc-roos-triangle"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
+    "place": "proof, last sentence: the two products of the Roos triangle"
+   }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-finite-projective-tensor-products",
   "prop-weil-pbc-koszul-reconstruction",
   "prop-weil-pbc-roos-triangle"
  ],
@@ -45,9 +91,73 @@
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-finite-reduction-reconstruction.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite reduction derived inverse limit tensor quotient tower",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse limit tensor finite projective commutes countable products",
+   "results": "CategoryTheory.Tor and HomologicalComplex.HasGoodTensor declarations; no matching theorem",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct _ (iProd _)",
+   "results": "Unknown identifier iProd; 0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*product [Mathlib/Algebra]",
+   "results": "none relevant",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLimits.*tensor|tensor.*PreservesLimits|tensor.*prod",
+   "results": "25 hits: Mathlib/CategoryTheory/CopyDiscardCategory/Basic.lean, Mathlib/CategoryTheory/CopyDiscardCategory/Basic.lean, Mathlib/CategoryTheory/CopyDiscardCategory/Basic.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean; grep subdirectory CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match: Tor, internally projective condensed objects, ring equalizers and coproduct constructions do not state this derived sheaf product comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor by a perfect complex of module sheaves commutes with countable products",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a bounded complex of finite projective sheaves with a countable product in the derived category commutes with that product",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'",
+   "date": "2026-10-14",
+   "verdict": "no match: Tor, internally projective condensed objects, ring equalizers and coproduct constructions do not state this derived sheaf product comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimits\", \"tensor\"",
+   "results": "1 hits: CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier",
+   "date": "2026-10-14",
+   "verdict": "no match: Tor, internally projective condensed objects, ring equalizers and coproduct constructions do not state this derived sheaf product comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable perfect complex on a ringed site preserves products under derived tensor",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-14",
+   "verdict": "no match: Tor, internally projective condensed objects, ring equalizers and coproduct constructions do not state this derived sheaf product comparison"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -75,5 +185,24 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-finite-reduction-reconstruction",
+  "worker": "stage1",
+  "summary": "Repair of E1/E4/E7: explicitly quantified a derived-complete object and its strict reduction tower, corrected the coefficient category to sheaves over A_T, added the completed-constant-sheaf scalar comparison, and proved the specified counit is the inverse of the reduced completion map. All steps are non-elementary with explicit inputs. Creation metadata is complete in the sandbox; the delivery script strips by/date in its generated commit (reported separately).",
+  "blueprint": "First proof sentence: completion-map isomorphism (steps 2–3); bounded finite-projective representative with coefficient comparison (step 1); final sentence on the two Roos products (step 4).",
+  "source_correction": {
+   "reason": "STATEMENT-DISPUTED in the unrestricted reading: the source omits K and derived completeness from the statement, although its source note expressly assumes a derived-complete K and its proof invokes its strict quotient tower. This repair restores those hypotheses and makes all tensors over A_T explicit.",
+   "counterexample": "A=Z, I=(2), K_1=F_2, K_n=0 for n>1, all transition maps zero: 1-s is the identity on the product F_2, so Rlim=0 but K_1 is nonzero. This is not the strict quotient tower of a derived-complete object."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-1f357c6dc",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-1f357c6dc (reviewer sub-agent of L); spot-checked: Mathematics checked in full against the master blueprint, detailed source, Stacks 093J/093M/091Z/099M, all cited DAG statements, and small cases. The corrected completeness hypotheses, A_T coefficient category, counit argument, and finite-projective product comparison are sound. Repairs written: restore created.by/date on both new nodes, and record existing lemma-weil-pbc-adic-completion-reduction in the item's blueprint.same_as. Full review is in review.md.; 3 file(s) fixed by the reviewer"
+ }
 }
