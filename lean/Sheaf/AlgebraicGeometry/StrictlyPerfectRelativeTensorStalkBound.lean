@@ -12,7 +12,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Projective
-public import Mathlib.Topology.Sheaves.Abelian
+import Sheaf.AlgebraicGeometry.OpenModuleStalkFreeProjective
+import Sheaf.Algebra.Homology.BoundedProjectiveRestrictionTorAmplitude
+import Sheaf.AlgebraicGeometry.RelativeTensorStalkLocalModelHomology
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
@@ -100,6 +102,37 @@ theorem strictlyPerfect_relativeTensor_stalk_bound
                 ((CochainComplex.mapBifunctor P
                   ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)
                   (@MonoidalCategory.curriedTensor _ _ (SheafOfModules.monoidalCategory
-                    (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)))).homology i))) := by sorry
+                    (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)))).homology i))) := by
+  let S := openModuleStalkFunctor X V ⟨y, hy⟩
+  let C := (S.mapHomologicalComplex (.up ℤ)).obj L
+  have hCdegrees : ∀ t : ℤ, t < r ∨ s < t → IsZero (C.X t) :=
+    fun t ht ↦ S.map_isZero (hdegrees t ht)
+  have hCprojective : ∀ t : ℤ, Projective (C.X t) := by
+    intro t
+    obtain ⟨m, ι, π, hιπ⟩ := hL.2 t
+    have : Projective (S.obj (SheafOfModules.free
+        (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin m)))) :=
+      openModuleStalk_free_projective X V ⟨y, hy⟩ m
+    exact (show Retract (C.X t) (S.obj (SheafOfModules.free
+      (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin m)))) from
+        ⟨S.map ι, S.map π, by
+          change S.map ι ≫ S.map π = 𝟙 (S.obj (L.X t))
+          rw [← S.map_comp, hιπ, S.map_id]⟩).projective
+  let : HasDerivedCategory (ModuleCat.{u} (Y.presheaf.stalk (f y))) :=
+    HasDerivedCategory.standard _
+  have hAmp := CochainComplex.boundedProjective_restriction_torAmplitude
+    (f.stalkMap y).hom C r s hCdegrees hCprojective d hTor
+  intro F i hi
+  obtain ⟨M, hM⟩ := relativeTensor_stalk_localModel_homology_iso
+    f K V L eL y hy P hP q hq F
+  obtain ⟨e⟩ := hM i
+  apply IsZero.of_iso _ e
+  apply (forget₂ (ModuleCat.{u} (Y.presheaf.stalk (f y))) AddCommGrpCat.{u}).map_isZero
+  obtain ⟨hge, hle⟩ := hAmp M
+  rcases hi with hi | hi
+  · have := hge
+    exact DerivedCategory.isZero_of_isGE _ (r - (d : ℤ)) i hi
+  · have := hle
+    exact DerivedCategory.isZero_of_isLE _ s i hi
 
 end AlgebraicGeometry.Scheme

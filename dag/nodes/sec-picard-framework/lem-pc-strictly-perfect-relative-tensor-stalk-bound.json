@@ -17,48 +17,43 @@
  ],
  "proof": [
   {
-   "text": "Take the stalk of each retraction exhibiting a term of L as a direct summand of a finite free structure module. Scalar restriction preserves those retractions. Additivity and retract invariance of Tor give amplitude [-d,0] for each restricted term. The finite filtration of L by degree has successive quotients its terms in their original degrees t, of amplitude [t-d,t]. The long exact cohomology sequence of derived tensor and induction over the nonzero degrees give amplitude [r-d,s]. If r>s, every term is zero and the conclusion holds in every degree.",
+   "text": "Construct C by applying openModuleStalkFunctor X V y termwise to L. Its preservation of zero objects carries hdegrees to C. Apply the stalk functor to the finite-free retractions in hL.2; openModuleStalk_free_projective makes their targets projective, and Retract.projective makes each term of C projective. The resulting C is explicit, without choosing a witness from an unproved existence theorem.",
    "uses": [
-    "def-pc-perfect-complex"
+    "def-pc-perfect-complex",
+    "def-sc-open-module-stalk-functor",
+    "lem-sc-open-module-stalk-free-projective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0B6G, lemma-perfect-proper-perfect-direct-image, verification of condition (3); Cohomology Tags 08CG, 09U9, 06YB; More on Algebra Tag 064L; https://stacks.math.columbia.edu/tag/0B6G"
-   }
+   "elementary": true
   },
   {
-   "text": "Because y lies in V, exact restriction and stalks send the representative isomorphism to an isomorphism between the stalk derived objects of K and L. Apply the K-flat stalk criterion to the ringed space with ring sheaf f inverse image O_Y. The given quasi-isomorphism identifies the K-flat stalk of P with the scalar-restricted stalk of K. A common K-flat replacement of the local model, and K-flat tensor quasi-isomorphism invariance transported from the one-point-site module presentation, identify their derived tensor homology. Exactness of stalks and the stalk-total-tensor isomorphism identify this with the displayed abelian-group stalk. The amplitude from the first step gives its vanishing.",
+   "text": "Choose the standard module derived-category instance and apply boundedProjective_restriction_torAmplitude to C with the actual stalk map, endpoints r,s, and hTor. This gives amplitude [r-d,s] for the scalar-restricted stalk model.",
    "uses": [
-    "def-pc-kflat-complex",
-    "def-pc-quasi-iso-modules",
-    "lem-pc-kflat-stalk-criterion",
-    "lem-pc-kflat-tensor-quasi-iso",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-stalk-tensor-complex",
-    "lem-pc-kflat-resolution"
+    "lem-pc-bounded-projective-restriction-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0B6G, lemma-perfect-proper-perfect-direct-image, verification of condition (3); Cohomology Tags 08CG, 09U9, 06YB; More on Algebra Tag 064L; https://stacks.math.columbia.edu/tag/0B6G"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For the given test sheaf F apply relativeTensor_stalk_localModel_homology_iso and obtain M and its homology comparison e in degree i. The amplitude supplies IsGE (r-d) and IsLE s of the derived tensor. In the two cases i<r-d or s<i use DerivedCategory.isZero_of_isGE or isZero_of_isLE. Forgetting to abelian groups preserves zero objects; IsZero.of_iso transfers the result across e.",
+   "uses": [
+    "lem-pc-relative-tensor-stalk-local-model-homology"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
   "def-pc-perfect-complex",
-  "def-pc-quasi-iso-modules",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-stalk-criterion",
-  "lem-pc-kflat-tensor-quasi-iso",
-  "lem-pc-stalk-tensor-complex",
-  "lem-weil-pbc-module-stalk-exact"
+  "def-sc-open-module-stalk-functor",
+  "lem-pc-bounded-projective-restriction-tor-amplitude",
+  "lem-pc-relative-tensor-stalk-local-model-homology",
+  "lem-sc-open-module-stalk-free-projective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0B6G, lemma-perfect-proper-perfect-direct-image, verification of condition (3); Cohomology Tags 08CG, 09U9, 06YB; More on Algebra Tag 064L; https://stacks.math.columbia.edu/tag/0B6G; source checked online; proof expanded by B3"
+  "place": "Tag 0B6G, lemma-perfect-proper-perfect-direct-image, verification of condition (3); Cohomology Tags 08CG, 09U9, 06YB; More on Algebra Tag 064L; https://stacks.math.columbia.edu/tag/0B6G",
+  "group": "H3",
+  "date": "2026-10-13",
+  "note": "H3 Lean proof: explicit projective stalk complex, algebraic amplitude, local-model tensor homology comparison, and zero-object transport."
  },
  "mathlib_searches": [
   {
@@ -131,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "X-8d8c0",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261013T045513-L-124618",
+  "landing": "20261013T100005-L-2462550",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all three Lean signatures with their nodes, the reduction with its dependencies and sources, and the import change with its record; delivered modules and sole direct importer PerfectRelativeTensorLocallyBounded compile cleanly, with expected axioms. Accepted as a decomposition leaving two named lower holes."
  }
 }

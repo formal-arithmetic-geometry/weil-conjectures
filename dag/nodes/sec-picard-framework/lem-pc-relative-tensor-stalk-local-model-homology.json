@@ -1,0 +1,182 @@
+{
+ "id": "lem-pc-relative-tensor-stalk-local-model-homology",
+ "kind": "statement",
+ "title": "Relative tensor stalk homology identified with a local derived module tensor",
+ "statement": "Let X,Y be schemes [def-pc-scheme], f:X\\to Y a morphism, K a cochain complex of structure modules, V an open subset of X, and L any cochain complex of structure modules on the site over V. Choose the global and open derived categories [def-pc-derived-category] and an isomorphism between the restriction of QK to V and QL. Fix y in V and a derived category of modules over A=O_{Y,f(y)}. Let P be a K-flat complex of f^{-1}O_Y-modules [def-pc-kflat-complex] and q:P\\to K restricted along f^{-1}O_Y\\to O_X a quasi-isomorphism [def-pc-quasi-iso-modules]. For each f^{-1}O_Y-module sheaf F there exists an A-module M such that, for every integer i, the underlying abelian-group stalk at y of H^i(Tot(P tensor F[0])) [def-pc-tensor-complex-sheaves] is isomorphic to the underlying abelian group of H^i(Q(restrict_{f_y} S_{V,y} L) tensor_A^L M[0]). Here S_{V,y} is the explicit open module stalk functor [def-sc-open-module-stalk-functor]. M is the stalk of F transported along the canonical inverse-image ring stalk isomorphism. No boundedness, projectivity, perfectness or Tor assumption is made on L.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-sc-open-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the inverse-image ring stalk isomorphism to transport F_y to the A-module M. Exact restriction to V and the open stalk functor send eL to a derived isomorphism between the global stalk of K and S_{V,y}L; cofinality of the neighbourhoods inside V and the open immersion stalk ring isomorphism identify these stalks. Scalar restriction along the actual f.stalkMap preserves homology and quasi-isomorphisms.",
+   "uses": [
+    "def-sc-open-module-stalk-functor",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-ringed-inverse-image-stalk-scalar-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online."
+   }
+  },
+  {
+   "text": "Apply the K-flat stalk criterion to the ringed space with ring sheaf f inverse image O_Y. Transport its K-flat stalk to A and take the stalk of q, a quasi-isomorphism onto the scalar-restricted stalk of K. Therefore its derived object is the scalar-restricted S_{V,y}L. Tensoring with M[0] preserves this derived isomorphism. A common K-flat resolution and invariance of tensor under quasi-isomorphisms between K-flat complexes compute the left tensor by the prescribed stalk complex.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion",
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-tensor-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online."
+   }
+  },
+  {
+   "text": "Stalks commute with total tensor and the degree-zero single complex. Exactness of stalks commutes with degree-i homology. Compose these identifications with the derived tensor comparison from the preceding step, and forget A-module structure. The resulting abelian-group isomorphism holds for every i with the same M. This includes acyclic or zero models and all negative degrees.",
+   "uses": [
+    "lem-pc-stalk-tensor-complex",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-open-module-stalk-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-stalk-criterion",
+  "lem-pc-kflat-tensor-quasi-iso",
+  "lem-pc-ringed-inverse-image-stalk-scalar-transport",
+  "lem-pc-stalk-tensor-complex",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 06YB (lemma-check-K-flat-stalks), 08CG and 09U9; Modules Tag 01AG; Sheaves Tags 008H and 0098; comparison step in Tag 0B6G condition (3). Sources checked online.",
+  "group": "H3",
+  "date": "2026-10-13",
+  "note": "Complete source argument specialized and expanded by H3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Tor'",
+   "results": "0 hits: ; loogle: unknown identifier 'Tor''",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex whose terms have Tor dimension at most d has derived tensor homology only in degrees r minus d through s",
+   "results": "8 hits: DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|Tor.*retract|Tor.*[Aa]dditive",
+   "results": "25 hits: Mathlib/Algebra/BigOperators/Finprod.lean, Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean, Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/Algebra/MonoidAlgebra/Basic.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/Topology/Algebra/Ring/Basic.lean, Mathlib/Algebra/Category/Grp/Ulift.lean, Mathlib/Algebra/Category/Grp/Ulift.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of a bounded complex of projective modules has Tor amplitude r minus d to s when the algebra has Tor dimension d",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of tensor homology of a K-flat sheaf complex is derived tensor homology of a local stalk model",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, AlgebraicGeometry.Flat.stalkMap, Module.rankAtStalk_tensorProduct, Module.rankAtStalk_tensorProduct_of_isScalarTower, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*restrict|torAmplitude|Tor.*coproduct",
+   "results": "25 hits: Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Hh]omology|[Hh]omology.*stalk|stalk.*[Tt]ensor",
+   "results": "4 hits: Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictlyPerfectRelativeTensorStalkBound",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Step 2 (identification with the prescribed K-flat representative) of lem-pc-strictly-perfect-relative-tensor-stalk-bound, in the relative finite Tor verification below the proper perfect pushforward argument.",
+   "via": [
+    "lem-pc-strictly-perfect-relative-tensor-stalk-bound",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeTensorStalkLocalModelHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTensorStalkLocalModelHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.relativeTensor_stalk_localModel_homology_iso",
+  "statement": "theorem relativeTensor_stalk_localModel_homology_iso\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ U : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (V : X.Opens)\n    (L : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ)\n    (eL : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj\n        (DerivedCategory.Q.obj K) ≅ DerivedCategory.Q.obj L))\n    (y : X) (hy : y ∈ V)\n    [HasDerivedCategory.{v} (ModuleCat.{u} (Y.presheaf.stalk (f y)))]\n    (P : CochainComplex (SheafOfModules.{u} ((sheafCompose\n      (Opens.grothendieckTopology X)\n      (forget₂ CommRingCat.{u} RingCat.{u})).obj\n        (TopCat.Sheaf.inverseImageRing f.base Y.sheaf))) ℤ)\n    (hP : CochainComplex.IsKFlat (R := TopCat.Sheaf.inverseImageRing f.base Y.sheaf) P)\n    (q : P ⟶ ((SheafOfModules.restrictScalars\n      ((sheafCompose (Opens.grothendieckTopology X)\n        (forget₂ CommRingCat.{u} RingCat.{u})).map\n          (Modules.tensorPullbackRingMap f))).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K) (hq : QuasiIso q) :\n    ∀ F : SheafOfModules.{u} ((sheafCompose\n          (Opens.grothendieckTopology X)\n          (forget₂ CommRingCat.{u} RingCat.{u})).obj\n            (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)),\n      ∃ M : ModuleCat.{u} (Y.presheaf.stalk (f y)), ∀ i : ℤ,\n          Nonempty ((TopCat.Sheaf.forget AddCommGrpCat.{u} X.carrier ⋙\n            TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} y).obj\n              ((SheafOfModules.toSheaf _).obj\n                ((CochainComplex.mapBifunctor P\n                  ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj F)\n                  (@MonoidalCategory.curriedTensor _ _ (SheafOfModules.monoidalCategory\n                    (TopCat.Sheaf.inverseImageRing f.base Y.sheaf)))).homology i)) ≅\n            (forget₂ (ModuleCat.{u} (Y.presheaf.stalk (f y))) AddCommGrpCat.{u}).obj\n              ((DerivedCategory.homologyFunctor\n                (ModuleCat.{u} (Y.presheaf.stalk (f y))) i).obj\n                  (DerivedCategory.Q.obj\n                    (((ModuleCat.restrictScalars (f.stalkMap y).hom).mapHomologicalComplex\n                      (.up ℤ)).obj\n                        (((openModuleStalkFunctor X V ⟨y, hy⟩).mapHomologicalComplex\n                          (.up ℤ)).obj L)) ⊗\n                    (DerivedCategory.singleFunctor\n                      (ModuleCat.{u} (Y.presheaf.stalk (f y))) 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8d8c0",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8d8c0",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462550",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures with their nodes, the reduction with its dependencies and sources, and the import change with its record; delivered modules and sole direct importer PerfectRelativeTensorLocallyBounded compile cleanly, with expected axioms. Accepted as a decomposition leaving two named lower holes."
+ }
+}

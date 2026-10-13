@@ -1,0 +1,169 @@
+{
+ "id": "lem-pc-bounded-projective-restriction-tor-amplitude",
+ "kind": "statement",
+ "title": "Tor amplitude of a bounded projective complex after scalar restriction",
+ "statement": "Let $A,B$ be commutative rings, $\\rho:A\\to B$ a ring homomorphism, and $C^\\bullet$ a cochain complex of $B$-modules [def-pc-cochain-complex-modules]. Let $r,s\\in\\mathbf Z$ and $d\\in\\mathbf N$. Assume $C^t=0$ whenever $t<r$ or $s<t$, every $C^t$ is projective (maps out of it lift through surjective module maps), and $\\operatorname{Tor}^A_j(B,M)=0$ for every $A$-module $M$ and $j>d$, with B restricted along rho [def-weil-pbc-tor-modules]. In a chosen derived category of A-modules [def-pc-derived-category], scalar restriction of $C^\\bullet$ has Tor amplitude $[r-d,s]$: its derived tensor with every A-module in degree zero has vanishing homology in each degree $i<r-d$ or $s<i$. No order hypothesis on r and s and no finite generation are imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H."
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-tor-modules",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For an A-module M choose a free resolution F concentrated in nonpositive cochain degrees. It is bounded above and flat, hence K-flat, so Tot(C restricted to A tensor_A F) computes the derived tensor. The tensor balancing isomorphism identifies this double complex with C tensor_B (B tensor_A F). Its column in C-degree p has homology C^p tensor_B Tor^A_{-q}(B,M): tensor_B with a projective B-module is exact. This is zero for q>0 or q<-d by the resolution and assumed Tor bound.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H."
+   }
+  },
+  {
+   "text": "Filter the total complex by C-degree. Since C has only finitely many nonzero degrees, this is a finite filtration and its spectral sequence converges with E1^{p,q} the column homology just computed. For n<r-d or s<n and p+q=n, either p lies outside [r,s] and the whole column is zero, or q lies outside [-d,0] and E1 is zero. Later pages are subquotients, so every associated graded piece of H^n is zero. A finite filtration with zero graded pieces is zero. This proves the required bound for each M.",
+   "uses": [
+    "thm-sp-spectral-object-yields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H."
+   }
+  },
+  {
+   "text": "If r>s, for each integer t either t<r or s<t; hence all C terms vanish. The double complex is zero, so the same conclusion holds in every degree. This also covers zero rings, zero modules, and empty support intervals.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-pc-module-bounded-flat-kflat",
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 066H (lemma-tor-amplitude-finite-complex), 066K (lemma-tor-amplitude-change-rings), and 0655; bounded-projective special case of 066K used in Tag 0B6G condition (3). Source checked at https://stacks.math.columbia.edu/tag/066K and https://stacks.math.columbia.edu/tag/066H.",
+  "group": "H3",
+  "date": "2026-10-13",
+  "note": "Complete source argument specialized and expanded by H3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Tor'",
+   "results": "0 hits: ; loogle: unknown identifier 'Tor''",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex whose terms have Tor dimension at most d has derived tensor homology only in degrees r minus d through s",
+   "results": "8 hits: DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isLE, DerivedCategory.isZero_of_isGE, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|Tor.*retract|Tor.*[Aa]dditive",
+   "results": "25 hits: Mathlib/Algebra/BigOperators/Finprod.lean, Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean, Mathlib/Algebra/MonoidAlgebra/Ideal.lean, Mathlib/Algebra/MonoidAlgebra/Basic.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/Topology/Algebra/Ring/Basic.lean, Mathlib/Algebra/Category/Grp/Ulift.lean, Mathlib/Algebra/Category/Grp/Ulift.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of a bounded complex of projective modules has Tor amplitude r minus d to s when the algebra has Tor dimension d",
+   "results": "0 hits: ; service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of tensor homology of a K-flat sheaf complex is derived tensor homology of a local stalk model",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, AlgebraicGeometry.Flat.stalkMap, Module.rankAtStalk_tensorProduct, Module.rankAtStalk_tensorProduct_of_isScalarTower, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*restrict|torAmplitude|Tor.*coproduct",
+   "results": "25 hits: Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/CofilteredSystem.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean, Mathlib/CategoryTheory/Preadditive/LeftExact.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Hh]omology|[Hh]omology.*stalk|stalk.*[Tt]ensor",
+   "results": "4 hits: Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Topology/Sheaves/Abelian.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; component results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictlyPerfectRelativeTensorStalkBound",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Step 1 (bounded-model amplitude) of lem-pc-strictly-perfect-relative-tensor-stalk-bound, in the relative finite Tor verification below the proper perfect pushforward argument.",
+   "via": [
+    "lem-pc-strictly-perfect-relative-tensor-stalk-bound",
+    "lem-pc-perfect-relative-tensor-locally-bounded",
+    "lem-pc-perfect-relative-finite-tor",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BoundedProjectiveRestrictionTorAmplitude",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedProjectiveRestrictionTorAmplitude.lean",
+  "declaration": "CochainComplex.boundedProjective_restriction_torAmplitude",
+  "statement": "theorem boundedProjective_restriction_torAmplitude\n    {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)\n    [HasDerivedCategory.{w} (ModuleCat.{u} A)]\n    (C : CochainComplex (ModuleCat.{u} B) ℤ)\n    (r s : ℤ) (hdegrees : ∀ t : ℤ, t < r ∨ s < t → IsZero (C.X t))\n    (hprojective : ∀ t : ℤ, Projective (C.X t)) (d : ℕ)\n    (hTor : ∀ M : ModuleCat.{u} A, ∀ j : ℕ, d < j →\n      IsZero (((Tor' (ModuleCat.{u} A) j).obj\n        ((ModuleCat.restrictScalars ρ).obj (ModuleCat.of B B))).obj M)) :\n    DerivedCategory.torAmplitudeIn (ModuleCat.{u} A) (r - (d : ℤ)) s\n      (DerivedCategory.Q.obj\n        (((ModuleCat.restrictScalars ρ).mapHomologicalComplex (.up ℤ)).obj C))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8d8c0",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-8d8c0",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261013T100005-L-2462550",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all three Lean signatures with their nodes, the reduction with its dependencies and sources, and the import change with its record; delivered modules and sole direct importer PerfectRelativeTensorLocallyBounded compile cleanly, with expected axioms. Accepted as a decomposition leaving two named lower holes."
+ }
+}
