@@ -50,6 +50,43 @@ theorem annihilatorAssociatedPrimes_of_shortExact
       (⊥ : Submodule R M').colon {z'}) ∧
     (annihilatorAssociatedPrimes R M ⊆
       annihilatorAssociatedPrimes R M' ∪ annihilatorAssociatedPrimes R M'') := by
-  sorry
+  classical
+  have _ := hg
+  have hann (z' : M') : (⊥ : Submodule R M).colon {f z'} =
+      (⊥ : Submodule R M').colon {z'} := by
+    ext a
+    simp only [Submodule.mem_colon_singleton, Submodule.mem_bot]
+    rw [← map_smul, map_eq_zero_iff f hf]
+  refine ⟨?_, hann, ?_⟩
+  · rintro q ⟨hq, z', hz'⟩
+    exact ⟨hq, f z', hz'.trans (hann z').symm⟩
+  · rintro q ⟨hq, z, hz⟩
+    have hmem (a : R) : a ∈ q ↔ a • z = 0 := by
+      rw [hz, Submodule.mem_colon_singleton, Submodule.mem_bot]
+    by_cases h : ∃ s : R, s ∉ q ∧ ∃ z' : M', f z' = s • z
+    · obtain ⟨s, hs, z', hz'⟩ := h
+      left
+      refine ⟨hq, z', ?_⟩
+      rw [← hann z', hz']
+      ext a
+      rw [Submodule.mem_colon_singleton, Submodule.mem_bot, ← mul_smul]
+      rw [← hmem]
+      exact ⟨fun ha ↦ q.mul_mem_right s ha,
+        fun has ↦ (hq.mem_or_mem has).resolve_right hs⟩
+    · right
+      refine ⟨hq, g z, ?_⟩
+      ext a
+      rw [Submodule.mem_colon_singleton, Submodule.mem_bot]
+      constructor
+      · intro ha
+        rw [← map_smul, (hmem a).mp ha, map_zero]
+      · intro ha
+        by_contra haq
+        apply h
+        refine ⟨a, haq, ?_⟩
+        have hker : a • z ∈ LinearMap.ker g := by
+          rw [LinearMap.mem_ker, map_smul, ha]
+        rw [hfg.linearMap_ker_eq] at hker
+        exact hker
 
 end RingTheory
