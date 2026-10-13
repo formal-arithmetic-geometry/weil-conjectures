@@ -12378,3 +12378,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:12 L: merged deliver/T3/Sheaf.AlgebraicGeometry.FlatModuleDescentPreorder (stage 3; reviewer PASS; first push; landing 20261013T121224-L-3506619 (interface); batch 20261013T121219; modules 2; new nodes 1)
 - 12:12 L: merged deliver/T4/Sheaf.AlgebraicGeometry.GenericFibrePartialIsoSpreadOpen (stage 3; reviewer PASS; first push; landing 20261013T121224-L-3506763 (interface); batch 20261013T121219; modules 3; new nodes 2)
 - 12:12 L: merged deliver/W3/Sheaf.AlgebraicGeometry.AffineOpenRealizationScalar (stage 3; reviewer PASS; first push; landing 20261013T121225-L-3506969 (interface); batch 20261013T121219; modules 2; new nodes 1)
+- 12:12 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ResidueRankModelDifferential (stage 3; reviewer PASS; first push; landing 20261013T121225-L-3507132 (interface); batch 20261013T121219; modules 2; new nodes 1)
