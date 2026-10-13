@@ -129,7 +129,6 @@ public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.BaseChangeField
 public import WeilConjectures.AlgebraicGeometry.BaseChangeNorm
 public import WeilConjectures.AlgebraicGeometry.Bertini
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.CechNerve
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
@@ -407,12 +406,10 @@ public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponentBase
-public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Functoriality
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.RankOne
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineDescent
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
