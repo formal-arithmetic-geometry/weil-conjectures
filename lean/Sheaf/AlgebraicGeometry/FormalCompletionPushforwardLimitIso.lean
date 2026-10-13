@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
-import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.FormalCompletionPushforwardLimitAppBijective
+import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # The proper pushforward comparison is invertible on inverse limits
 
@@ -57,6 +57,9 @@ theorem formalCompletion_pushforward_limit_isIso {X Y : Scheme.{u}} [IsNoetheria
       formalModuleQuotientπ J (n + 1) ((Scheme.Modules.pushforward f).obj F.obj) ≫
         κ.app (op n) = (Scheme.Modules.pushforward f).map
           (formalModuleQuotientπ (J.comap f) (n + 1) F.obj)) :
-    IsIso (lim.map κ) := by sorry
+    IsIso (lim.map κ) := by
+  apply Scheme.Modules.isIso_of_bijective_app_of_isAffineOpen (lim.map κ)
+  intro U hU
+  exact formalCompletion_pushforward_limit_app_bijective J f F h κ hκ U hU
 
 end AlgebraicGeometry
