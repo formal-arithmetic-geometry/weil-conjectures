@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-local-perfect-supported-stabilization",
+ "kind": "statement",
+ "title": "Supported local perfect restriction and its stabilization",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $W$ an open and $T\\subseteq X$ any subset. Choose derived localizations in Hom universe $w$ on $X,W$ and their localized open sites [def-pc-derived-category]. Let $R\\in D(\\mathcal O_X)$ have strictly perfect neighbourhood models [def-pc-perfect-complex] at every point of $W$, and suppose every cohomology stalk vanishes on $W\\setminus T$. Put $F=J_W(R)$ for canonical derived open restriction [def-pc-derived-open-restriction-maps]. Both $F$ and $F\\oplus F[1]$ are perfect on $W$, and all their cohomology stalks vanish at every $x\\in W$ with $x\\notin T$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08CM",
+  "place": "Definition-perfect and restriction of the models; stabilization as used in Tag 09IM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "At x in W, intersect its given neighbourhood O with W. Apply the existing restrict_strictlyPerfect and restrict_model helpers from\nPerfectCommonAffineModels to restrict K to this intersection and transport it through the equivalence between the\nlocalized site and the open scheme. Restriction and this equivalence carry finite free\nmodules to finite free modules, preserve their retract equations, and preserve zero\nterms. The exact restriction composition comparison therefore gives a strictly perfect\nmodel for the restriction of R near x. Apply the existing perfect_shift helper from PerfectTwoOutOfThree with shift one;\nits shifted local models have degree bounds a-1 and b-1 and reindexed finite free retracts. The split\nbiproduct triangle with first term F, middle term F plus F[1], and last term F[1]\nis distinguished. Apply perfect two-out-of-three to obtain perfectness of the middle term.\nExactness identifies homology of the restriction with\nrestriction of homology. The stalk comparison identifies its stalk at x with the ambient\nstalk at x.val, which is zero off T by hRT. Homology of a biproduct is the biproduct of\nhomologies, and homology of a shift is the shifted homology; both summands thus have zero\nstalks off T. This proves both support clauses. The construction is pointwise and includes\nempty W and empty support without any choice of a point.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-open-restriction-maps",
+    "lem-pc-perfect-two-out-of-three",
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-supported-qcoh-stable-shift",
+    "lem-pc-perfect-common-affine-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-derived-open-restriction-maps",
+  "lem-pc-perfect-two-out-of-three",
+  "lem-sc-perfect-qcoherent",
+  "lem-pc-supported-qcoh-stable-shift",
+  "lem-pc-perfect-common-affine-models"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08CM",
+  "place": "Definition-perfect and restriction of the models; stabilization as used in Tag 09IM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open subscheme preserves locally perfect complexes and vanishing homology stalks; affine supported extension plus shift",
+   "results": "8 hits: AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor, DerivedCategory.isGE_Q_obj_iff, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.to_basicOpen, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overMapCompOverEquiv|restrictFunctorComp|IsCompact.inter_of_isOpen",
+   "results": "12 hits: Mathlib/Topology/QuasiSeparated.lean, Mathlib/Topology/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex restricts to a perfect complex on an open subscheme; the direct sum with its shift has the same closed support.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedAffineOverlapMap",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalPerfectSupportedStabilization",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalPerfectSupportedStabilization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.local_perfect_supported_stabilization",
+  "statement": "theorem local_perfect_supported_stabilization (X : Scheme.{u}) (W : X.Opens) (T : Set X) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ O : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] [∀ O : W.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over O))] (R : schemeDerivedCategory X) (hR : ∀ x : X, x ∈ W → ∃ O : X.Opens, x ∈ O ∧ ∃ K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over O)) ℤ, IsStrictlyPerfect X O K ∧ Nonempty ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) O).mapDerivedCategory.obj R ≅ DerivedCategory.Q.obj K)) (hRT : ∀ (i : ℤ) (x : X), x ∈ W → x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj R).val.presheaf x))) : let F := (schemeOpenRestriction X W).mapDerivedCategory.obj R IsPerfect W.toScheme F ∧ (∀ (i : ℤ) (x : W.toScheme), x.val ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj F).val.presheaf x))) ∧ IsPerfect W.toScheme (F ⊞ F⟦(1 : ℤ)⟧) ∧ (∀ (i : ℤ) (x : W.toScheme), x.val ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj (F ⊞ F⟦(1 : ℤ)⟧)).val.presheaf x)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Supported local perfect restriction and its stabilization",
+   "via": [
+    "lem-sc-supported-affine-overlap-map",
+    "lem-sc-supported-map-affine-union-gluing",
+    "lem-sc-supported-map-affine-attachment",
+    "lem-sc-perfect-supported-stabilized-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100050-L-2475126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100050-L-2475126",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

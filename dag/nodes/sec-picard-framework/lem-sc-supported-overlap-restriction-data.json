@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-supported-overlap-restriction-data",
+ "kind": "statement",
+ "title": "Supported perfect restriction data on a compact-open overlap model",
+ "statement": "Let $X$ be a quasi-separated scheme [def-pc-scheme], $W$ a compact open and $V$ an affine open, and let $T\\subseteq X$ be closed with compact complement. Choose derived localizations [def-pc-derived-category] with common Hom universe $w$ on $W,V$, their localized open sites, and $W\\cap V$. Let $F\\in D(\\mathcal O_W)$ be perfect [def-pc-perfect-complex] with every cohomology stalk vanishing outside $T$. Write $S_W,S_V$ for transported overlap restriction [def-pc-derived-open-restriction-maps]. There exist a compact open $U\\subseteq V$, chosen derived localizations on $U$ and every localized open site of $U$ in universe $w$, and a perfect $G\\in D(\\mathcal O_U)$ such that the inverse image $T_V$ of $T$ in $V$ is closed with compact complement and every cohomology stalk of $G$ vanishes outside the inverse image of $T_V$. There is an equivalence $e:D(\\mathcal O_U)\\simeq D(\\mathcal O_{W\\cap V})$, a natural isomorphism $J_U\\mathbin{\\ggg}e\\cong S_V$, and an isomorphism $e(G\\oplus G[1])\\cong S_W(F\\oplus F[1])$. No object on all of $V$ and no morphism lifting is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09IM",
+  "place": "Overlap restriction input to the supported affine extension step using Tag 08EK"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Set U to the open range of the inclusion of W intersect V into V. The intersection\nis compact by quasi-separatedness and compactness of W and affine V, so U is compact.\nThe inverse image of T in V is closed. Its complement identifies through the open\nembedding with V intersect the compact open complement of T, hence is compact by the\nsame intersection criterion. The inclusion U.toScheme into W is an open immersion.\nDefine G by exact restriction of F along that inclusion. At each point of U, pull back\na strictly perfect neighbourhood model of F, preserving the degree bounds, finite free\nmodules and retract equations. These give perfectness of G. Exact homology and the\nrestriction-stalk comparison identify each stalk of G with the corresponding stalk of F,\nso support restricts as stated. The scheme isomorphism from the ambient overlap to U\nsupplies the exact module equivalence and the derived equivalence e. Transport the\nchosen derived localization along it, and transport the localized-site localizations\nthrough the corresponding equivalences on each open of U to supply hO. The natural\nrestriction composition comparisons identify ordinary restriction from V followed by e\nwith SV, and identify e(G) with SW(F). Both comparisons arise by deriving the underived\nrestriction comparisons, so commute with shifts and biproducts. Apply those comparisons\nto G plus G[1] to obtain the last isomorphism. Empty opens and empty support need no\nseparate case: the same scheme isomorphism, exact restrictions and zero stalks apply.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-pc-derived-category",
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-open-restriction-maps"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/09IM",
+  "place": "Overlap restriction input to the supported affine extension step using Tag 08EK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to an open subscheme preserves locally perfect complexes and vanishing homology stalks; affine supported extension plus shift",
+   "results": "8 hits: AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor, DerivedCategory.isGE_Q_obj_iff, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.to_basicOpen, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Modules.overMapCompOverEquiv",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "overMapCompOverEquiv|restrictFunctorComp|IsCompact.inter_of_isOpen",
+   "results": "12 hits: Mathlib/Topology/QuasiSeparated.lean, Mathlib/Topology/QuasiSeparated.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "ingredients only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex restricts to a perfect complex on an open subscheme; the direct sum with its shift has the same closed support.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedAffineOverlapMap",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedOverlapRestrictionData",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedOverlapRestrictionData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_supported_overlap_restriction_data",
+  "statement": "theorem exists_supported_overlap_restriction_data (X : Scheme.{u}) [QuasiSeparatedSpace X] (W V : X.Opens) (hW : IsCompact (W : Set X)) (hV : IsAffineOpen V) (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace))] [∀ O : W.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings W.toScheme.toRingedSpace).over O))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] [∀ O : V.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings V.toScheme.toRingedSpace).over O))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (W ⊓ V).toScheme.toRingedSpace))] (F : schemeDerivedCategory W.toScheme) (hF : IsPerfect W.toScheme F) (hFT : (∀ (i : ℤ) (x : W.toScheme), x.val ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) i).obj F).val.presheaf x)))) : let SW := (schemeOpenOverlapRestriction X (homOfLE inf_le_left : W ⊓ V ⟶ W)).mapDerivedCategory let SV := (schemeOpenOverlapRestriction X (homOfLE inf_le_right : W ⊓ V ⟶ V)).mapDerivedCategory ∃ U : V.toScheme.Opens, IsCompact (U : Set V.toScheme) ∧ IsClosed (Subtype.val ⁻¹' T : Set V.toScheme) ∧ IsCompact (Subtype.val ⁻¹' T : Set V.toScheme)ᶜ ∧ ∃ hD : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)), letI := hD ∃ hO : ∀ O : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over O)), letI := hO ∃ G : schemeDerivedCategory U.toScheme, IsPerfect U.toScheme G ∧ (∀ (i : ℤ) (x : U.toScheme), x.val.val ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) i).obj G).val.presheaf x))) ∧ ∃ e : schemeDerivedCategory U.toScheme ≌ schemeDerivedCategory (W ⊓ V).toScheme, Nonempty ((schemeOpenRestriction V.toScheme U).mapDerivedCategory ⋙ e.functor ≅ SV) ∧ Nonempty (e.functor.obj (G ⊞ G⟦(1 : ℤ)⟧) ≅ SW.obj (F ⊞ F⟦(1 : ℤ)⟧))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Supported perfect restriction data on a compact-open overlap model",
+   "via": [
+    "lem-sc-supported-affine-overlap-map",
+    "lem-sc-supported-map-affine-union-gluing",
+    "lem-sc-supported-map-affine-attachment",
+    "lem-sc-perfect-supported-stabilized-lift",
+    "lem-sc-perfect-support-map-lift",
+    "lem-sc-proper-flat-right-adjoint-open-support"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100050-L-2475126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T100050-L-2475126",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

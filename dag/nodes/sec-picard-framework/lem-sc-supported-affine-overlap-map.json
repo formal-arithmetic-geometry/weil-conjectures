@@ -15,38 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Restrict the strictly perfect local models to W, intersecting their neighbourhoods with W and transporting their bounded finite-free retract data through the module over-equivalence. Biproducts and shifts of these models prove perfectness of A. Exact restriction/homology and restriction stalk comparisons prove its support on T intersect W. Restriction of E is quasi-coherent by [lem-pc-derived-open-restriction-qcoh-iff].",
+   "text": "Apply local_perfect_supported_stabilization to R. This gives perfectness and support of its restriction F on W and of A=F plus F[1].",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-pc-derived-open-restriction-qcoh-iff"
+    "lem-sc-local-perfect-supported-stabilization"
    ],
    "elementary": false
   },
   {
-   "text": "Transport W intersect V to an open of V. Quasi-separatedness and IsCompact.inter_of_isOpen show it is compact, as is V intersect the complement of T. Pullback of T to V is closed. Apply [lem-sc-affine-perfect-support-extension] to the overlap restriction of R. Its resulting affine perfect supported source Q restricts to the stabilized overlap of R; exact biproduct and shift comparisons identify this with SW(A).",
+   "text": "Apply exists_supported_overlap_perfect_extension to F, giving a supported perfect Q on V and q:SV(Q) isomorphic to SW(A). Use exists_compact_overlap_restriction_model to express SV as a compact-open restriction L followed by an exact equivalence e.",
    "uses": [
-    "lem-sc-affine-perfect-support-extension"
+    "lem-sc-supported-overlap-perfect-extension",
+    "lem-sc-compact-overlap-restriction-model"
    ],
    "elementary": false
   },
   {
-   "text": "Compose Q on the overlap with the inverse stabilization identification, SW(a), and the canonical target comparison. Apply [lem-sc-affine-perfect-map-lift] on V; its new source B stays perfect and supported on T intersect V. The invertible overlap augmentation identifies SV(B) with SW(A). Take its inverse for c. The map-lifting equation, reassociated through the canonical restriction comparisons, gives SW(a) kW_E = c SV(b) kV_E.",
+   "text": "Restrict E to the quasi-coherent object EV. Conjugate q.hom followed by SW(a), kW.hom and kV.inv through the natural comparison d:L then e isomorphic to SV, and take the fully faithful preimage. Apply exists_perfect_map_lift_of_isAffine on V. Map the lifting isomorphism through e and conjugate by d to obtain bS:SV(B) isomorphic to SV(Q). The private proved map_lift_transport lemma uses naturality of d to transport the lifting equation. Take c=q inverse followed by bS inverse. Associativity and inverse identities prove the required compatibility. Apply the lifting support clause to the closed inverse image of T in V.",
    "uses": [
+    "lem-pc-derived-open-restriction-qcoh-iff",
     "lem-sc-affine-perfect-map-lift"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex",
+  "lem-sc-local-perfect-supported-stabilization",
+  "lem-sc-supported-overlap-perfect-extension",
+  "lem-sc-compact-overlap-restriction-model",
   "lem-pc-derived-open-restriction-qcoh-iff",
-  "lem-sc-affine-perfect-map-lift",
-  "lem-sc-affine-perfect-support-extension"
+  "lem-sc-affine-perfect-map-lift"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/09IM",
-  "place": "Two-open construction; explicit relative restriction transport as detailed in the Lean docstring"
+  "place": "Affine extension and map lift; compact-open comparison and naturality calculations made explicit in Lean"
  },
  "mathlib_searches": [
   {
@@ -122,7 +124,7 @@
   "reviewer": "COMPILER",
   "group": "P3",
   "result": "pass",
-  "landing": "20261013T045549-L-134127",
+  "landing": "20261013T100050-L-2475126",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
