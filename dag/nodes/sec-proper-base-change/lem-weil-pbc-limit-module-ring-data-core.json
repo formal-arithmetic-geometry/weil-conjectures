@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-limit-module-ring-data-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Core ring descent data without explicit cocone representatives",
+ "statement": "Under the hypotheses of the ring descent theorem, there exist a tail functor B and cocone β to T, with colimit, local stage rings and local transition maps, together with finite-type maps τ₀ compatible with β and the original system.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00QX (lemma-limit-module-essentially-finite-presentation, line 32427) and its proof ('We leave it to the reader to see that this works'), with the construction of the proof of Lemma Tag 00QV (lemma-limit-essentially-finite-presentation, line 32346): $T\\cong(A[x_1,\\dots,x_n]/(f_1,\\dots,f_m))_{\\mathfrak q}$, $f_j$ descended to $A_{\\lambda}[x_1,\\dots,x_n]$, $T_\\lambda=(A_\\lambda[x]/(f_{1,\\lambda},\\dots,f_{m,\\lambda}))_{\\mathfrak q_\\lambda}$ with $\\mathfrak q_\\lambda$ the inverse image of $\\mathfrak q$, and $N_\\lambda=\\operatorname{Coker}(A_\\lambda\\text{-matrix})$ for a matrix descending the presentation matrix of $N$. Here the system $(A_\\lambda)$ is given, not constructed, which is the form in which the proof of Lemma Tag 00R7 (lemma-criterion-flatness-fibre, line 32992) uses the construction twice (for $R\\to S$ over the $R_\\lambda$, and for $S\\to S'$ with $M$ over the $S_\\lambda$). Clause (4) asks a localization at some multiplicative subset (00QX (5): at a prime ideal); clause (5) is the essentially-of-finite-presentation form of the 'in particular $M=M_\\lambda\\otimes_{S_\\lambda}S$' of Lemma Tag 00R1 (lemma-limit-module-finite-presentation, line 32593)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Descend the finite coefficients of the presentation and localization prime to a common stage, then verify the cocone, locality, and compatibility assertions elementwise.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "stage3-worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemmas 00QV and 00QX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "descend a finitely presented algebra localized at a prime and a finitely presented module to a stage of a directed colimit of local rings",
+   "results": "RingHom.finitePresentation_localizationPreserves (Mathlib.RingTheory.RingHom.FinitePresentation); instFinitePresentationLocalizationLocalizedModule (Mathlib.Algebra.Module.FinitePresentation); Algebra.FinitePresentation.of_isLocalizationAway (Mathlib.RingTheory.Localization.Away.AdjoinRoot); Module.Finite.instLocalizationLocalizedModule (Mathlib.RingTheory.Localization.Finiteness); ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor; LocalizedModule.AtPrime: localization statements only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely presented module over a filtered colimit of rings descends to a finitely presented module over some stage, base change isomorphism",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, CommRingCat.preservesFilteredColimits_coyoneda, preservesFilteredColimits_coyoneda, isFinitelyPresentable, CommRingCat.preservesColimit_coyoneda_of_finitePresentation (Mathlib.Algebra.Category.Ring.FinitePresentation); Module.FinitePresentation.trans: factorization of maps out of a finitely presented algebra through a stage (lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit), not descent of an algebra or module to the stages",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, Module.DirectLimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssFinitePresentation\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'FinitePresentation' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib filtered by 'directlimit|colimit|filtered'; grep -rnE 'EssFinitePresentation|essentially of finite presentation' in Mathlib",
+   "results": "AlgebraicGeometry/AffineTransitionLimit.lean:1165,1233 (schemes, cofiltered limits); Algebra/Category/Ring/FinitePresentation.lean:81 (factorization through a stage); RingTheory/Smooth/Fiber.lean:146 'we don't have an \"essentially of finite presentation\" type class yet': no descent lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LimitModuleRingData",
+  "date": "2026-10-14",
+  "group": "N1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "long statement; when splitting, follow the 00QV construction (descend the presentation and the prime) and 00QX for the module; the 00QX text leaves the verification to the reader, so write it out",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-limit-module-essentially-finite-presentation-over-system",
+  "worker": "stage1",
+  "summary": "Expanded the 00QV ring construction and the 00QX matrix construction over the given directed system, checking the local maps, colimits, localization transition maps, and module base-change isomorphisms against existing DAG tools.",
+  "blueprint": {
+   "steps": [
+    "Finite-etale-lifting step 7 reaches the 00R7 limit-tower construction through the approximation branch; limit-tower step 2 applies this lemma to R -> S with the zero module and step 3 applies it to S -> S' with M",
+    "The 00QV construction descends the finite quotient presentation and prime and verifies colimit and localization transition maps",
+    "The 00QX construction descends the finite presentation matrix and verifies module base change and the colimit of underlying abelian groups"
+   ],
+   "same_as_search": "Searched the whole master blueprint across chapters for the item id, 'essentially of finite presentation', 'limit module', and the 00QV/00QX construction; no imported blueprint node states this directed-system module lemma. The nearest imported ancestor is thm-weil-pbc-finite-etale-lifting."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LimitModuleRingDataCore",
+  "file": "lean/Sheaf/RingTheory/LimitModuleRingDataCore.lean",
+  "declaration": "RingHom.exists_limit_module_ring_data_core",
+  "statement": "theorem exists_limit_module_ring_data_core\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)\n    [∀ i : I, IsLocalRing (F.obj i)] [IsLocalRing c.pt]\n    (hF : ∀ (i j : I) (h : i ≤ j), IsLocalHom (F.map (homOfLE h)).hom)\n    (hcLocal : ∀ i : I, IsLocalHom (c.ι.app i).hom)\n    (T : CommRingCat.{u}) [IsLocalRing T] (τ : c.pt →+* T) [IsLocalHom τ]\n    (P : Type p) [CommRing P] [Algebra c.pt P] [Algebra.FinitePresentation c.pt P]\n    (W : Submonoid P) (f : P →+* T)\n    (hf : f.comp (algebraMap c.pt P) = τ)\n    (hT : letI := f.toAlgebra; IsLocalization W T) :\n    ∃ i₀ : I,\n      ∃ (B : {i : I // i₀ ≤ i} ⥤ CommRingCat.{u})\n        (β : B ⟶ (Functor.const _).obj T),\n        Nonempty (IsColimit (Cocone.mk T β)) ∧\n        ∃ (τ₀ : ∀ i : {i : I // i₀ ≤ i}, F.obj i.1 →+* B.obj i),\n          (∀ i, IsLocalHom (τ₀ i)) ∧ (∀ i, (τ₀ i).EssFiniteType) ∧\n          (∀ i, (β.app i).hom.comp (τ₀ i) = τ.comp (c.ι.app i.1).hom) ∧\n          (∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n            (B.map (homOfLE h)).hom.comp (τ₀ i) =\n              (τ₀ j).comp (F.map (homOfLE h)).hom) ∧\n          (∀ i, IsLocalRing (B.obj i)) ∧\n          (∀ i, IsLocalHom ((β.app i).hom)) ∧\n          (∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),\n            IsLocalHom (B.map (homOfLE h)).hom)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T222407-L-1224402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261013T222407-L-1224402",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

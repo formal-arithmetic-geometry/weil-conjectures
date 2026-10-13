@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
 import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.RingTheory.LimitModuleRingDataCore
 @[expose] public section
 universe u v p
 open CategoryTheory CategoryTheory.Limits
@@ -46,5 +47,11 @@ theorem exists_limit_module_ring_data
             (∀ (i j : {i : I // i₀ ≤ i}) (h : i ≤ j),
               (B.map (homOfLE h)).hom.comp (τ₀ i) =
                 (τ₀ j).comp (F.map (homOfLE h)).hom) := by
-  sorry
+  obtain ⟨i₀, B, β, hcol, τ₀, hτlocal, hτfinite, hτcomp, hτnat,
+      hBlocal, hβlocal, hBmap⟩ :=
+    exists_limit_module_ring_data_core F c hc hF hcLocal T τ P W f hf hT
+  refine ⟨i₀, B, β, hcol, (fun i => (β.app i).hom), ?_, hBlocal, hβlocal, hBmap,
+    τ₀, hτlocal, hτfinite, hτcomp, hτnat⟩
+  intro i x
+  rfl
 end RingHom
