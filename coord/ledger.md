@@ -12026,3 +12026,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/V1/Sheaf.CategoryTheory.FilteredHomologyCoupleExactness (stage 3; reviewer PASS; first push; landing 20261013T100155-L-2495424 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/V1/Sheaf.CategoryTheory.FilteredQuotientFirstConnecting (stage 3; reviewer PASS; first push; landing 20261013T100156-L-2495688 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 10:01 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyTensorSurjective (stage 3; reviewer PASS; after a return; landing 20261013T100157-L-2495899 (proof); batch 20261013T095923; modules 1; new nodes 0)
+- 10:01 L: merged deliver/V2/Sheaf.AlgebraicGeometry.FinitePresentationLocalComparison (stage 3; reviewer PASS; first push; landing 20261013T100157-L-2496040 (proof); batch 20261013T095923; modules 1; new nodes 0)
