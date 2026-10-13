@@ -22,52 +22,39 @@
  },
  "proof": [
   {
-   "text": "Construct coefficient pullback via the module adjunction, apply the derived direct-image functors, restrict to U and conjugate by the representing isomorphisms, defining a_i. Use the base-change maps with their canonical characterising property so their naturality squares are preserved.",
+   "text": "Apply the natural geometric comparison on the explicitly constructed residue homology quotients to obtain eK, eCi and a.",
    "uses": [
-    "lem-pc-module-pullback-adjunction",
-    "lem-pc-rf-perfect-base-change"
+    "lem-sc-picard-residue-homology-geometric-naturality"
    ],
    "elementary": false
   },
   {
-   "text": "Strictly perfect models have bounded flat terms, so termwise residue tensor computes derived tensor. Identify the affine residue field kappa(p) with kappa(w), then use the immersion to identify kappa(w) with kappa(s). Arbitrary derived base change identifies the resulting homology with the fibre direct-image homology. The affine-base comparison identifies its global sections with fibre cohomology.",
+   "text": "Define gamma=eK composed with the source quotient projection and beta_i=eCi composed with the target projection. Quotient projection surjectivity and eK bijectivity prove gamma is onto. Injectivity of eK and preservation of zero reduce the gamma-kernel formula to the independently proved incoming-boundary formula.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-pc-cohomology-sections-affine-base",
-    "def-weil-residue-field"
+    "lem-sc-affine-residue-cycle-class-quotient"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use tau on the source and its pullbacks along ui_s on all targets. Compose the quotient from source cycles to degree-one homology with the geometric identification to obtain gamma. It is surjective, and has exactly the incoming residue boundaries as its kernel. Compose the target cycle quotient with the target geometric identification to obtain beta_i.",
+   "text": "Apply homology-level naturality to the class of x. The proved formula H(phi)(qK(x))=qCi(phi1(x)) gives the desired equality. The cycle membership proof supplied by the original statement agrees by proof irrelevance with the one constructed from the chain-map commutation equation.",
    "uses": [
-    "lem-pc-cohomology-sections-affine-base"
+    "lem-sc-affine-residue-cycle-homology-map",
+    "lem-sc-picard-residue-homology-geometric-naturality"
    ],
-   "elementary": false
-  },
-  {
-   "text": "For each chain representative of a_i, its localized homology map is the homology map of a_i. Naturality of the canonical base-change and affine cohomology identifications gives the equality on cycles. The common source trivialization tau ensures that coefficient pullback becomes structure-sheaf pullback.",
-   "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-pc-cohomology-sections-affine-base",
-    "def-sc-structure-sheaf-cohomology-pullback"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-structure-sheaf-cohomology-pullback",
-  "def-weil-residue-field",
-  "lem-pc-cohomology-sections-affine-base",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-rf-perfect-base-change"
+  "lem-sc-affine-residue-cycle-class-quotient",
+  "lem-sc-affine-residue-cycle-homology-map",
+  "lem-sc-picard-residue-homology-geometric-naturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A4",
+  "group": "T2",
   "date": "2026-10-14",
   "document": "Stacks Project and Mathlib",
-  "place": "Tags 0BF2 (functoriality and common fibre trivialization), 0B91 (derived base change), 01XK (affine-base cohomology); parent proof steps 1, 3 and naturality part of step 4"
+  "place": "Tags 010V, 0B91, 0BF2, 01XK; explicit Lean quotient construction"
  },
  "mathlib_searches": [
   {
@@ -147,9 +134,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A4",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T211052-L-388082",
+  "landing": "20261013T222415-L-1227371",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

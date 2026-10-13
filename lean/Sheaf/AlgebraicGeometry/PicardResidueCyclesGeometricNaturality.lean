@@ -18,9 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturality
 
 /-! # Geometric comparison on residue cycles, before minimality -/
 
@@ -31,6 +29,12 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
+set_option Elab.async false in
+-- Preserve the original interface, including hypotheses unnecessary for this comparison.
+set_option linter.unusedVariables false in
+set_option linter.style.haveILetI false in
+set_option maxHeartbeats 600000 in
+-- The interface and its specialization include chosen derived localizations.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Residue cycles map naturally to geometric fibre cohomology, and the source
@@ -127,6 +131,31 @@ theorem picard_residue_cycles_geometric_naturality
           β i ⟨_, hy⟩ = structureSheafCohomologyPullback
             (((Over.pullback (S.fromSpecResidueField s)).map
               (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
-                (ui i) (hui i))).left) 1 (γ x) := by sorry
+                (ui i) (hui i))).left) 1 (γ x) := by
+  clear htrivial hnegative hCnegative hCzero
+  let p := RingHom.ker (W.evaluation U w hwU).hom
+  letI : p.IsPrime := RingHom.ker_isPrime (W.evaluation U w hwU).hom
+  have hgeom :=
+    picard_residue_homology_geometric_naturality.{v} f Xi fi ui hui L W k w s hw τ
+      U hwU hU p rfl K hK hE C hC hCi
+  refine Exists.elim hgeom ?_
+  intro eK heK
+  refine Exists.elim heK ?_
+  intro eC heC
+  refine Exists.elim heC ?_
+  intro a hnatural
+  let qK := affineResidueCycleClass W U p K
+  let γ := eK.toAddMonoidHom.comp qK
+  let β := fun i ↦ (eC i).toAddMonoidHom.comp (affineResidueCycleClass W U p (C i))
+  refine ⟨γ, a, β, ?_, ?_, ?_⟩
+  · exact eK.surjective.comp (affineResidueCycleClass_surjective_kernel W U p K).1
+  · intro x
+    change eK (qK x) = 0 ↔ _
+    exact eK.map_eq_zero_iff.trans
+      ((affineResidueCycleClass_surjective_kernel W U p K).2 x)
+  · intro i φ hφ x hy
+    have hclass := hnatural i φ hφ (qK x)
+    exact (congrArg (eC i)
+      (affineResidueCycleHomologyMap_class (W := W) (U := U) (p := p) φ x)).symm.trans hclass
 
 end AlgebraicGeometry.Scheme
