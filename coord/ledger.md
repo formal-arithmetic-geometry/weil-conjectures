@@ -12212,3 +12212,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/T3/Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition (stage 3; reviewer PASS; first push; landing 20261013T111928-L-3064943 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/T4/Sheaf.AlgebraicGeometry.CoherentSupportProperHigherDirectImage (stage 3; reviewer PASS; first push; landing 20261013T111929-L-3065151 (proof); batch 20261013T111833; modules 1; new nodes 0)
 - 11:19 L: merged deliver/T4/Sheaf.AlgebraicGeometry.FormalAffineSectionLimit (stage 3; reviewer PASS; first push; landing 20261013T111929-L-3065350 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/T4/Sheaf.AlgebraicGeometry.FormalModuleQuotientAffineProjectionKernel (stage 3; reviewer PASS; first push; landing 20261013T111930-L-3065514 (proof); batch 20261013T111833; modules 1; new nodes 0)
