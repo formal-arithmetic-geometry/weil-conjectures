@@ -20,54 +20,41 @@
  },
  "proof": [
   {
-   "text": "On the affine chart A=Γ(Y,U), I=ker(i)(U), B=A/I, take the actual finite free Koszul projective resolution of B and its quotient augmentation. Sheafify using the closed immersion quotient-spectrum identification. The exterior basis makes this a bounded finite free complex.",
+   "text": "Obtain a global morphism φ from the exterior sheaf E to the restricted tensor pullback T of self Ext, surjective on every stalk. This is the generation part of the intrinsic Yoneda-product construction.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "lem-sc-koszul-self-ext-yoneda-surjection"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict derived internal Hom and use the bounded finite free model to identify its natural coefficient morphisms with those of the sheafified Hom complex. The common K-injective model compares the supplied derived universe.",
+   "text": "At z∈V choose a regular affine chart of length m. The local stalk-bases theorem supplies bases of T_z and E_z indexed by the same finite set. Module.Finite.of_basis proves that T_z is finite, and Module.Basis.equiv gives an injective O_{V,z}-linear map E_z→T_z. Apply Mathlib OrzechProperty.bijective_of_surjective_of_injective to this map and φ_z; CommRing.orzechProperty supplies the ring hypothesis. Hence φ_z is bijective. No comparison or compatibility of the chosen bases is needed.",
    "uses": [
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-derived-hom-finite-free-model"
+    "lem-sc-koszul-self-ext-stalk-bases"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Hom(K,B) has zero differentials since every f_j acts as zero on B. The conormal basis identifies degree-one contractions with Hom_B(I/I²,B). Products of contractions give the nth exterior power in every degree, including n=0 and n exceeding the local length. Affine conormal frames and finite free sheaf Hom and exterior formulas identify the resulting sheaf with the stated target.",
+   "text": "Apply Scheme.Modules.isIso_of_bijective_stalkLinearMap to φ. Its inverse is the requested isomorphism T≅E. Empty V has no stalks to check; n=0 and degrees above the local length are covered by the same finite-basis argument.",
    "uses": [
-    "lem-sc-koszul-conormal-basis",
-    "lem-sc-affine-conormal-frame",
-    "lem-sc-exterior-sheaf-local-free-comparison"
+    "lem-weil-pbc-module-iso-on-stalks"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The degree-one boundary of the second-order thickening 0→I/I²→O_Y/I²→i_*O_Z→0 is intrinsic, and its alternating Yoneda products define the exterior comparison. A change of generators acts by the dual conormal matrix on contractions and its nth exterior power on products; localization preserves the formulas. Thus the affine comparisons and their inverses agree on standard affine refinements of overlaps and glue on V. No quasi-separatedness is required. Tensor pullback after cohomology leaves the quotient-module action unchanged. Empty V is vacuous.",
-   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "new-j3-koszul-projective-resolution",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-derived-hom-finite-free-model",
-  "lem-sc-koszul-conormal-basis",
-  "lem-sc-affine-conormal-frame",
-  "lem-sc-exterior-sheaf-local-free-comparison"
+  "lem-sc-koszul-self-ext-yoneda-surjection",
+  "lem-sc-koszul-self-ext-stalk-bases",
+  "lem-weil-pbc-module-iso-on-stalks"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "P3",
+  "agent": "J3",
   "date": "2026-10-13",
   "based_on": {
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
-   "place": "Lemma 48.15.4, self Ext algebra; Tag 0BQW, intrinsic degree-one comparison"
+   "place": "Lemma 48.15.4, contraction products and zero-differential Hom calculation; Tag 0BQW, degree-one boundary"
   },
-  "note": "The cited Koszul calculation expanded for the precise derived sheaf and tensor-pullback interface; no arbitrary object chosen from existence."
+  "note": "Compiling reduction separates global Yoneda generation from the local finite-basis calculation; Mathlib OrzechProperty supplies injectivity and the source-library stalk criterion supplies the global isomorphism. The unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -143,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T100050-L-2474954",
+  "landing": "20261013T111857-L-3054171",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
