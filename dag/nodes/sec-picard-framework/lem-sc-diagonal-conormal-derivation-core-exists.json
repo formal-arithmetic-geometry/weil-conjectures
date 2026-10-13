@@ -14,22 +14,49 @@
  ],
  "proof": [
   {
-   "text": "Construct the difference of the two splittings of the square-zero diagonal extension and identify its local kernel class with the tensor-pullback unit.",
+   "text": "For each open U set W_U = p₁⁻¹(U) ∩ p₂⁻¹(U). The composites δ ≫ pᵢ are identities, so U ≤ δ⁻¹(W_U). The section p₂*(a) − p₁*(a) is killed by δ.app W_U, by appLE composition. The proved upstream Scheme.Modules.range_map_kernelι therefore supplies a section k_U(a) of the actual kernel I on W_U; Scheme.Modules.injective_map_kernelι makes it unique. Injectivity also proves k_U is additive.",
+   "uses": [
+    "def-sc-diagonal-conormal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the unit η : I → δ_*δ*I of the chosen tensor-pullback adjunction. Define c(U,W,hδ)(s) by restricting η_W(s) to U, and d_U(a) = c(U,W_U,hδ)(k_U(a)). These are explicit additive maps, using only a uniquely determined kernel lift. Naturality of η and functoriality of restriction show c is compatible with shrinking W or U. If s on a compatible W has image p₂*(a) − p₁*(a), then W ≤ W_U and naturality plus injectivity of the kernel inclusion identifies s with k_U(a)|_W. This gives exactly the required normalized local formula.",
    "uses": [
     "def-sc-diagonal-conormal",
-    "def-sc-relative-differential-sheaf"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Write p and q for the two projection maps on sections of W_U. Injectivity of the kernel inclusion and the ring identity p(ab) − q(ab) = p(a)(p(b) − q(b)) + q(b)(p(a) − q(a)) give k_U(ab) = p(a)·k_U(b) + q(b)·k_U(a). Linearity of η, followed by semilinearity of restriction, sends a scalar r to δ.appLE(r). Since δ ≫ pᵢ = id, the scalars p(a) and q(b) become a and b on U. Thus d_U(ab) = a·d_U(b) + b·d_U(a).",
+   "uses": [
+    "def-sc-diagonal-conormal",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For V ≤ U, the inclusion W_V ≤ W_U and naturality of the two projection maps identify k_U(a)|_{W_V} with k_V(a|_V), again by injectivity. The restriction identities for c then show d commutes with restrictions. For a section from an open of S, the equality p₁ ≫ f = p₂ ≫ f makes the projection difference zero; its kernel lift and hence d are zero. Apply the proved source constructor Scheme.Hom.derivationMk to these additive maps, their Leibniz rule, restriction compatibility and base vanishing. Its section maps are the constructed d_U, so the formula from step 2 proves the theorem.",
+   "uses": [
+    "def-sc-diagonal-conormal",
+    "def-sc-relative-differential-sheaf",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-diagonal-conormal",
+  "lem-pc-module-pullback-adjunction",
   "def-sc-relative-differential-sheaf"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 08S2"
+  "place": "Tag 08S2 (https://stacks.math.columbia.edu/tag/08S2), global difference construction; direct kernel-and-tensor-unit realization written in Lean by B4, using the proved upstream sectionwise kernel lemmas."
  },
  "mathlib_searches": [
   {
@@ -92,13 +119,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261012T225311-L-1805731",
-  "kind": "interface",
+  "landing": "20261013T022407-L-3210725",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

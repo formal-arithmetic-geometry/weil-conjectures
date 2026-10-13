@@ -10642,3 +10642,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/A3/Sheaf.RingTheory.AdjoinSingletonPrincipalQuotientConditions (stage 3; reviewer PASS; after a return; landing 20261013T022406-L-3210226 (interface); batch 20261013T022404; modules 4; new nodes 3)
 - 02:24 L: merged deliver/A4/Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesHeight (stage 3; reviewer PASS; first push; landing 20261013T022406-L-3210444 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/B3/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelStabilizedBound (stage 3; reviewer PASS; first push; landing 20261013T022407-L-3210574 (interface); batch 20261013T022404; modules 3; new nodes 2)
+- 02:24 L: merged deliver/B4/Sheaf.AlgebraicGeometry.DiagonalConormalDerivationCore (stage 3; reviewer PASS; first push; landing 20261013T022407-L-3210725 (proof); batch 20261013T022404; modules 1; new nodes 0)
