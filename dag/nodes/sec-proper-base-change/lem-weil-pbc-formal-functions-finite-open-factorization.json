@@ -15,7 +15,14 @@
  ],
  "proof": [
   {
-   "text": "Put g′=pullback.snd(c,f), j=formalFunctionsFiniteι, U=f⁻¹V, U′=g′⁻¹U, W=i_n⁻¹U. The proved projection identity j≫g′=i_n gives W=j⁻¹U′. Apply moduleCohomologyFMap_restriction to j and formalFunctionsFiniteFMap at U′. Transport the restricted target along W=j⁻¹U′, and take the induced cohomology map as t. Its restriction square gives t(res_U′ z)=res_W(formalFunctionsFinitePullback z) for every z.",
+   "text": "Use formalFunctionsFiniteι_snd and inverse-image composition to prove W=j inverse Uprime. Restrict j to r:W->Uprime and g to s:Uprime->U. Cancel the monomorphism U.ι, rewrite the resLE_comp_ι identities, and use j followed by g=i to prove r followed by s=q, the restricted finite projection.",
+   "uses": [
+    "def-weil-pbc-formal-functions-finite-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply moduleCohomologyFMap_restriction to j and formalFunctionsFiniteFMap at Uprime, transporting its inverse-image open to W by equality elimination. Obtain a restricted coefficient map tau, its restriction-unit square and its cohomology restriction square. Set t to the additive map moduleCohomologyFMap(r,tau,p). Evaluating the cohomology square on any global z proves the first required equality.",
    "uses": [
     "def-weil-pbc-formal-functions-finite-pullback",
     "def-weil-pbc-module-cohomology-fmap",
@@ -24,11 +31,10 @@
    "elementary": false
   },
   {
-   "text": "Transpose formalFunctionsFiniteFMap under the specified tensorPullback adjunction; apply_symm_apply identifies its transpose with the i_n-unit, transported across the projection equality and pushforward composition. Restrict to W and substitute E.unit_square and D.unit_square. Both the composite of E.psi with the restricted finite h-map and D.psi transpose under the U-restriction adjunction to this same restricted i_n-unit. Naturality of pushforwardComp and pushforwardCongr gives the identifications, and injectivity of the restriction homEquiv gives equality of these h-maps. Apply moduleCohomologyFMap_comp and transport along the equality of their underlying scheme maps to obtain t(E.psi* xi)=D.psi* xi. The construction uses no stalk or germ, no hy, and no coherent/proper/Noetherian hypotheses. Degree zero is section-map composition; zero modules and empty opens give zero maps.",
+   "text": "Apply lem-weil-pbc-formal-functions-finite-open-unit-pasting to E, D, tau and its restriction-unit square. This identifies E.psi followed by s_*tau with D.psi after the canonical composition and projection-equality identifications. moduleCohomologyFMap_comp and congruence under equality of scheme morphisms identify the composite cohomology maps. Evaluate the equality on xi to prove the second clause. Congruence is proved by equality elimination and the identity pushforwardCongr component. No germ/stalk argument or extra geometric hypothesis is used.",
    "uses": [
-    "def-weil-pbc-formal-functions-finite-pullback",
     "def-weil-pbc-flat-base-change-open-choices",
-    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-formal-functions-finite-open-unit-pasting",
     "lem-weil-pbc-module-cohomology-fmap-functorial"
    ],
    "elementary": false
@@ -38,13 +44,13 @@
   "def-weil-pbc-flat-base-change-open-choices",
   "def-weil-pbc-formal-functions-finite-pullback",
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-formal-functions-finite-open-unit-pasting",
   "lem-weil-pbc-module-cohomology-fmap-functorial"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/coherent.tex and cohomology.tex",
-  "place": "Tag 02OD, proof: c_n factors through c; Tags 01F7 and 01FB: composition and restriction of cohomology h-maps (read at https://stacks.math.columbia.edu/tag/02OD and /01FB). Expanded the omitted finite-neighbourhood verification into restriction and adjunction-unit identities."
+  "document": "Stacks Project, Tags 02OD, 01F7 and 01FB",
+  "place": "Tag 02OD proof, factorization of c_n through c; Section 01F7 and Remark 01FB, composition and restriction of coefficient h-maps. Read https://stacks.math.columbia.edu/tag/02OD, /01F7 and /01FB. The restriction-unit diagram chase expands the omitted finite-neighbourhood verification. Lean proof by X2: restriction and cohomology composition are complete; the coefficient-unit pasting step is isolated as one strictly smaller statement."
  },
  "mathlib_searches": [
   {
@@ -148,11 +154,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-58bf1",
-  "group": "X3",
+  "reviewer": "X-c0607",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T062536-L-736941",
+  "landing": "20261013T100218-L-2502377",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG nodes; helper checked against its definitions and cited sources; both modules and the sole direct importer compiled cleanly; axiom checks showed only standard axioms and expected sorryAx."
+  "note": "independent Codex review: Unchanged factorization signature and delivered proof matched their DAG records; coefficient-pasting statement matched its definitions and source context; both modules and sole direct importer compiled cleanly; axioms were standard with the expected sorryAx."
  }
 }

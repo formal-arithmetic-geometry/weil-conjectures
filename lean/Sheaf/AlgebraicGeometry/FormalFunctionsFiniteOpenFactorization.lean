@@ -6,9 +6,10 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenUnitPasting
 import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Finite pullback on the inverse-image opens
@@ -22,11 +23,75 @@ Tags 01F7 and 01FB, composition and restriction of cohomology maps.
 
 universe u
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry
+
+attribute [local irreducible] Scheme.Modules.moduleCohomologyFMap
+
+private theorem cohomology_congr {A B : Scheme.{u}} {h k : A ⟶ B}
+    (e : h = k) {G : B.Modules} {F : A.Modules}
+    (φ : G ⟶ (Scheme.Modules.pushforward h).obj F) (p : ℕ) :
+    Scheme.Modules.moduleCohomologyFMap h φ p =
+      Scheme.Modules.moduleCohomologyFMap k
+        (φ ≫ (Scheme.Modules.pushforwardCongr e).hom.app F) p := by
+  subst k
+  have hc : (Scheme.Modules.pushforwardCongr (rfl : h = h)).hom.app F = 𝟙 _ := by
+    ext U
+    simp
+  rw [hc]
+  exact congrArg (fun a ↦ Scheme.Modules.moduleCohomologyFMap h a p) (Category.comp_id φ).symm
+
+private theorem cohomology_comp_congr {A B C : Scheme.{u}}
+    (h : A ⟶ B) (k : B ⟶ C) (j : A ⟶ C) (hj : h ≫ k = j)
+    {G : C.Modules} {H : B.Modules} {F : A.Modules}
+    (ψ : G ⟶ (Scheme.Modules.pushforward k).obj H)
+    (φ : H ⟶ (Scheme.Modules.pushforward h).obj F)
+    (χ : G ⟶ (Scheme.Modules.pushforward j).obj F)
+    (hc : ψ ≫ (Scheme.Modules.pushforward k).map φ ≫
+      (Scheme.Modules.pushforwardComp h k).hom.app F ≫
+      (Scheme.Modules.pushforwardCongr hj).hom.app F = χ) (p : ℕ) :
+    Scheme.Modules.moduleCohomologyFMap k ψ p ≫
+      Scheme.Modules.moduleCohomologyFMap h φ p =
+        Scheme.Modules.moduleCohomologyFMap j χ p := by
+  have hh := Scheme.Modules.moduleCohomologyFMap_comp h k ψ φ p
+  have ht := cohomology_congr hj
+    (G := G) (F := F)
+    (ψ ≫ (Scheme.Modules.pushforward k).map φ ≫
+      (Scheme.Modules.pushforwardComp h k).hom.app F) p
+  have hc' : (ψ ≫ (Scheme.Modules.pushforward k).map φ ≫
+      (Scheme.Modules.pushforwardComp h k).hom.app F) ≫
+      (Scheme.Modules.pushforwardCongr hj).hom.app F = χ := by
+    simpa only [Category.assoc] using hc
+  exact hh.symm.trans (ht.trans
+    (congrArg (fun a ↦ Scheme.Modules.moduleCohomologyFMap j (G := G) (F := F) a p) hc'))
+
+
+private theorem restriction_data {A B : Scheme.{u}} (h : A ⟶ B)
+    {G : B.Modules} {F : A.Modules}
+    (φ : G ⟶ (Scheme.Modules.pushforward h).obj F)
+    (U : B.Opens) (W : A.Opens) (he : W = h ⁻¹ᵁ U) (hle : W ≤ h ⁻¹ᵁ U) :
+    ∃ φU : (Scheme.Modules.restrictFunctor U.ι).obj G ⟶
+      (Scheme.Modules.pushforward (h.resLE U W hle)).obj
+        ((Scheme.Modules.restrictFunctor W.ι).obj F),
+      (Scheme.Modules.restrictAdjunction U.ι).unit.app G ≫
+        (Scheme.Modules.pushforward U.ι).map φU ≫
+        (Scheme.Modules.pushforwardComp (h.resLE U W hle) U.ι).hom.app
+          ((Scheme.Modules.restrictFunctor W.ι).obj F) ≫
+        (Scheme.Modules.pushforwardCongr (h.resLE_comp_ι hle)).hom.app
+          ((Scheme.Modules.restrictFunctor W.ι).obj F) =
+      φ ≫ (Scheme.Modules.pushforward h).map
+        ((Scheme.Modules.restrictAdjunction W.ι).unit.app F) ≫
+        (Scheme.Modules.pushforwardComp W.ι h).hom.app
+          ((Scheme.Modules.restrictFunctor W.ι).obj F) ∧
+      ∀ p : ℕ, Scheme.Modules.moduleCohomologyFMap h φ p ≫
+        Scheme.Modules.moduleCohomologyRestriction W F p =
+      Scheme.Modules.moduleCohomologyRestriction U G p ≫
+        Scheme.Modules.moduleCohomologyFMap (h.resLE U W hle) φU p := by
+  subst W
+  exact Scheme.Modules.moduleCohomologyFMap_restriction h φ U
 
 /-- A single additive map on open cohomology intertwines global finite pullback
 with restriction and the two restricted pullbacks. No germ or stalk comparison
@@ -88,6 +153,49 @@ theorem formalFunctions_finite_open_factorization {X Y : Scheme.{u}} (f : X ⟶ 
           ((pullback.snd (Y.fromSpecStalk y) f).resLE (f ⁻¹ᵁ V)
             ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) E.psi p xi) =
         Scheme.Modules.moduleCohomologyFMap ((formalFibreι f y n).resLE (f ⁻¹ᵁ V)
-          ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi) := by sorry
+          ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi) := by
+  let g := pullback.snd (Y.fromSpecStalk y) f
+  let j := formalFunctionsFiniteι f y n
+  let i := formalFibreι f y n
+  let U := f ⁻¹ᵁ V
+  let U' := g ⁻¹ᵁ U
+  let W := i ⁻¹ᵁ U
+  let F' := (Scheme.Modules.tensorPullback g).obj F
+  let Fₙ := (Scheme.Modules.tensorPullback i).obj F
+  have hw : W = j ⁻¹ᵁ U' := by
+    change i ⁻¹ᵁ U = j ⁻¹ᵁ (g ⁻¹ᵁ U)
+    exact (congrArg (fun a : formalFibre f y n ⟶ X ↦ a ⁻¹ᵁ U)
+      (formalFunctionsFiniteι_snd f y n)).symm.trans (j.comp_preimage g U)
+  have hle : W ≤ j ⁻¹ᵁ U' := hw.le
+  let r := j.resLE U' W hle
+  let s := g.resLE U U' le_rfl
+  let q := i.resLE U W le_rfl
+  have hrs : r ≫ s = q := by
+    apply (cancel_mono U.ι).1
+    calc
+      (r ≫ s) ≫ U.ι = W.ι ≫ (j ≫ g) := by
+        rw [Category.assoc, g.resLE_comp_ι, ← Category.assoc,
+          j.resLE_comp_ι, Category.assoc]
+      _ = W.ι ≫ i := congrArg (fun a : formalFibre f y n ⟶ X ↦ W.ι ≫ a)
+        (formalFunctionsFiniteι_snd f y n)
+      _ = q ≫ U.ι := (i.resLE_comp_ι le_rfl).symm
+  have hres := restriction_data j (G := F') (F := Fₙ)
+    (formalFunctionsFiniteFMap f y F n) U' W hw hle
+  rcases hres with ⟨τ, hτ, hc⟩
+  refine ⟨(Scheme.Modules.moduleCohomologyFMap r τ p).hom, ?_, ?_⟩
+  · intro z
+    exact (congrArg (fun a ↦ a.hom z) (hc p)).symm
+  · have hs : E.psi ≫ (Scheme.Modules.pushforward s).map τ ≫
+        (Scheme.Modules.pushforwardComp r s).hom.app
+          ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) ≫
+        (Scheme.Modules.pushforwardCongr hrs).hom.app
+          ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) = D.psi :=
+      formalFunctions_finite_open_unit_pasting f y F n I K J V E D hle hrs τ hτ
+    have hh := cohomology_comp_congr r s q hrs
+      (G := (Scheme.Modules.restrictFunctor U.ι).obj F)
+      (H := (Scheme.Modules.restrictFunctor U'.ι).obj F')
+      (F := (Scheme.Modules.restrictFunctor W.ι).obj Fₙ) E.psi τ D.psi hs p
+    intro xi
+    exact congrArg (fun a ↦ a.hom xi) hh
 
 end AlgebraicGeometry

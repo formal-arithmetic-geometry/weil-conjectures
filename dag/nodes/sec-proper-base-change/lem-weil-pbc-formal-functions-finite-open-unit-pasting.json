@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-formal-functions-finite-open-unit-pasting",
+ "kind": "statement",
+ "title": "Restricted finite coefficient map pastes the two pullback unit squares",
+ "statement": "For any scheme morphism f:X->Y, point y, module F, level n, resolutions I,K,J and open V, let E and D be the local and finite FlatBaseChangeOpenChoices [def-weil-pbc-flat-base-change-open-choices]. Write g for the local projection, j=formalFunctionsFiniteiota, i=formalFibreIota, U=f inverse V, Uprime=g inverse U, W=i inverse U, Fprime=g tensor-pullback F and F_n=i tensor-pullback F [def-weil-pbc-formal-functions-finite-pullback]. Given hle:W subset j inverse Uprime, put r=j.resLE(Uprime,W,hle), s=g.resLE(U,Uprime), q=i.resLE(U,W). For every equality hrs:r followed by s=q and sheaf map tau:Fprime restricted to Uprime -> r_* of F_n restricted to W whose restriction-unit square equals the restriction of formalFunctionsFiniteFMap, E.psi followed by s_*tau followed by pushforwardComp(r,s) and pushforwardCongr(hrs) equals D.psi. The restriction-unit square is u_Uprime followed by b_*tau followed by pushforwardComp(r,b) and pushforwardCongr(r followed by b=a followed by j) = formalFunctionsFiniteFMap followed by j_*u_W followed by pushforwardComp(a,j), where b and a are the open inclusions. No cohomology or properness assumption occurs.",
+ "source": {
+  "document": "Stacks Project, Tags 02OD, 01F7 and 01FB",
+  "place": "Tag 02OD proof, factorization of c_n through c; Section 01F7 and Remark 01FB, composition and restriction of coefficient h-maps. Read https://stacks.math.columbia.edu/tag/02OD, /01F7 and /01FB. The restriction-unit diagram chase expands the omitted finite-neighbourhood verification."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-functions-finite-pullback",
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof": [
+  {
+   "text": "Write g for the local projection, j for the finite map and i for the finite projection, so j followed by g equals i. Let u_g and u_i be the units of the chosen tensor-pullback adjunctions, and phi the specified formalFunctionsFiniteFMap. Transposing the definition of phi by apply_symm_apply gives u_g followed by g_*phi = u_i followed by the equality identification i_* -> (j followed by g)_* and the inverse composition identification. Multiplying by the forward composition and equality identifications gives u_g followed by g_*phi followed by pushforwardComp(j,g) and pushforwardCongr(jg=i) = u_i.",
+   "uses": [
+    "def-weil-pbc-formal-functions-finite-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put U=f inverse V, Uprime=g inverse U and W=i inverse U, with inclusions c,b,a respectively, and r=j restricted W->Uprime, s=g restricted Uprime->U, q=i restricted W->U. Let M be Fprime restricted to Uprime and N be F_n restricted to W. Define the comparison isomorphisms A: s_* followed by c_* -> b_* followed by g_*, B: r_* followed by b_* -> a_* followed by j_*, C: q_* followed by c_* -> a_* followed by i_* by pushforwardComp, the resLE_comp_iota equality, and inverse pushforwardComp. Cancel the last composition isomorphism from E.unit_square, the assumed restriction square of tau, and D.unit_square. The resulting equations are u_U followed by c_*E.psi followed by A_M = u_g followed by g_*u_Uprime; u_Uprime followed by b_*tau followed by B_N = phi followed by j_*u_W; and u_U followed by c_*D.psi followed by C_N = u_i followed by i_*u_W.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-formal-functions-finite-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let Q=pushforwardComp(r,s)_N followed by pushforwardCongr(hrs)_N. The coherence identity is c_*Q followed by C_N = A_(r_*N) followed by g_*B_N followed by pushforwardComp(j,g)_(a_*N) followed by pushforwardCongr(jg=i)_(a_*N). Check it on each open T of X: every pushforwardComp component is the identity, and each pushforwardCongr component is the presheaf restriction for the equality of inverse-image opens. Both composites are the same restriction from r inverse (s inverse (c inverse T)) to a inverse (i inverse T). The presheaf map-composition law and proof irrelevance identify them. Naturality of A in tau then gives u_U followed by c_*(E.psi followed by s_*tau followed by Q) followed by C_N = u_g followed by g_*(u_Uprime followed by b_*tau followed by B_N) followed by the global composition and equality identifications.",
+   "uses": [
+    "def-weil-pbc-formal-functions-finite-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Insert the tau-square from the preceding step. Naturality of pushforwardComp(j,g) followed by pushforwardCongr(jg=i) in u_W moves that restriction unit to the last factor. The global unit identity of step 1 turns the remaining initial composite into u_i. The resulting map is u_i followed by i_*u_W, which is the transpose of D.psi followed by C_N by step 2. Cancel the invertible C_N and use injectivity of the restriction adjunction homEquiv for U to conclude E.psi followed by s_*tau followed by Q = D.psi. This is only a coefficient sheaf-map identity: there is no cohomology degree, global class, or existential additive map in the statement. Zero coefficients and empty opens make all components zero; none of the steps assumes V contains y.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-formal-functions-finite-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-formal-functions-finite-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 02OD, 01F7 and 01FB",
+  "place": "Tag 02OD proof, factorization of c_n through c; Section 01F7 and Remark 01FB, composition and restriction of coefficient h-maps. Read https://stacks.math.columbia.edu/tag/02OD, /01F7 and /01FB. The restriction-unit diagram chase expands the omitted finite-neighbourhood verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a morphism of sheaves to open subsets preserves composition of morphisms over different continuous maps",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback commutes with restriction to inverse image opens and composition of scheme maps",
+   "results": [
+    "AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc",
+    "AlgebraicGeometry.Scheme.Hom.map_appLE_assoc"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Scheme restriction identities, no module-sheaf unit-pasting theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"resLE\", \"comp\"",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.resLE_comp_ι",
+    "AlgebraicGeometry.Scheme.Hom.resLE_comp_resLE"
+   ],
+   "date": "2026-10-13",
+   "verdict": "Proves the underlying restricted scheme identity only."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyFMap.*restriction|pushforward.*pasting; restriction.*comp|restrict.*hmap|unit.*pasting|restricted.*unit.*composition in Mathlib, lean/Sheaf, lean/WeilConjectures and dag/nodes; blueprint_refs search restriction cohomology composition",
+   "results": "Mathlib has pushforwardComp, pushforwardCongr and restriction adjunction units. Sheaf.ModuleCohomologyFMapFunctorial proves restriction and composition separately, not the restricted coefficient-map identity. No duplicate DAG/blueprint statement found (0 blueprint matches).",
+   "date": "2026-10-13",
+   "verdict": "The finite restricted-unit compatibility remains a distinct coefficient step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenFactorization",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Finite-level compatibility of canonical stalk maps: the restriction-unit and finite-map composition step in the omitted finite-neighbourhood verification.",
+   "via": [
+    "lem-weil-pbc-formal-functions-finite-open-factorization",
+    "lem-weil-pbc-formal-functions-finite-quotient-maps",
+    "lem-weil-pbc-formal-functions-finite-quotient-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsFiniteOpenUnitPasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteOpenUnitPasting.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_finite_open_unit_pasting",
+  "statement": "theorem formalFunctions_finite_open_unit_pasting {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (y : Y) (F : X.Modules) (n : ℕ) (I : InjectiveResolution F)\n    (K : InjectiveResolution\n      ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))\n    (J : InjectiveResolution ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F))\n    (V : Y.Opens)\n    (E : Scheme.Modules.FlatBaseChangeOpenChoices f (Y.fromSpecStalk y) F I K V)\n    (D : Scheme.Modules.FlatBaseChangeOpenChoices f (formalFibreBaseMap Y y n) F I J V) :\n    let g := pullback.snd (Y.fromSpecStalk y) f\n    let j := formalFunctionsFiniteι f y n\n    let i := formalFibreι f y n\n    let U := f ⁻¹ᵁ V\n    let U' := g ⁻¹ᵁ U\n    let W := i ⁻¹ᵁ U\n    let F' := (Scheme.Modules.tensorPullback g).obj F\n    let Fₙ := (Scheme.Modules.tensorPullback i).obj F\n    ∀ (hle : W ≤ j ⁻¹ᵁ U'),\n      let r := j.resLE U' W hle\n      let s := g.resLE U U' le_rfl\n      let q := i.resLE U W le_rfl\n      ∀ (hrs : r ≫ s = q)\n        (τ : (Scheme.Modules.restrictFunctor U'.ι).obj F' ⟶\n          (Scheme.Modules.pushforward r).obj ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ)),\n        (Scheme.Modules.restrictAdjunction U'.ι).unit.app F' ≫\n          (Scheme.Modules.pushforward U'.ι).map τ ≫\n          (Scheme.Modules.pushforwardComp r U'.ι).hom.app\n            ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) ≫\n          (Scheme.Modules.pushforwardCongr (j.resLE_comp_ι hle)).hom.app\n            ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) =\n        formalFunctionsFiniteFMap f y F n ≫ (Scheme.Modules.pushforward j).map\n          ((Scheme.Modules.restrictAdjunction W.ι).unit.app Fₙ) ≫\n          (Scheme.Modules.pushforwardComp W.ι j).hom.app\n            ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) →\n        E.psi ≫ (Scheme.Modules.pushforward s).map τ ≫\n          (Scheme.Modules.pushforwardComp r s).hom.app\n            ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) ≫\n          (Scheme.Modules.pushforwardCongr hrs).hom.app\n            ((Scheme.Modules.restrictFunctor W.ι).obj Fₙ) = D.psi",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c0607",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T100218-L-2502377",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-c0607",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T100218-L-2502377",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged factorization signature and delivered proof matched their DAG records; coefficient-pasting statement matched its definitions and source context; both modules and sole direct importer compiled cleanly; axioms were standard with the expected sorryAx."
+ }
+}
