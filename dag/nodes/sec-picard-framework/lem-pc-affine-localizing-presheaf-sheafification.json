@@ -1,0 +1,155 @@
+{
+ "id": "lem-pc-affine-localizing-presheaf-sheafification",
+ "kind": "statement",
+ "title": "Affine sections of a localizing presheaf survive sheafification",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $P$ a presheaf of $\\mathcal O_T$-modules [def-weil-sheaf-of-modules-category]. Assume that for every affine open $W\\subseteq T$ and every $a\\in\\Gamma(T,W)$, the restriction $P(W)\\to P(D(a))$ is module localization at powers of $a$, with scalar action obtained by restriction from $\\Gamma(T,W)$. Then for every affine open $W$, the component $P(W)\\to P^\\#(W)$ of the canonical module sheafification unit [def-weil-pbc-sheafification] is an isomorphism of $\\Gamma(T,W)$-modules.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01HV",
+  "place": "Tags 01HV and 009N/009Q (lemma-extend-off-basis, lemma-extend-off-basis-structures): principal-open localization and basis extension."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "For fixed W=Spec A and N=P(W), the localization hypotheses identify P(D(a)) with N[1/a]. Uniqueness of maps out of localization and presheaf naturality identify all further principal restrictions with those of tilde N. Thus the presheaf on the principal basis agrees with the associated module sheaf.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The principal-basis presheaf is a sheaf on that basis. Extend it uniquely by the sheaf-on-basis extension theorem. Its stalks and hence its associated sheaf agree with those of P restricted to W. The canonical unit induces the basis agreement. Since W=D(1), its component on W is an isomorphism. Sheafification commutes with restriction by its universal property and the same stalk description. This does not assume that T is separated.",
+   "uses": [
+    "lem-weil-pbc-sheaf-on-basis-extends",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-sheaf-on-basis-extends",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 09MR, 01E4, 01HV, 009N and 009Q",
+  "place": "Tensor-unit localization and extension from the principal-open basis, as in the original item plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A section of a higher direct image of a quasi coherent module that vanishes on a principal open is killed by a power of its defining function",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, ModuleCat.Tilde.exists_const, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, ModuleCat.Tilde.sectionsSubmodule, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-13",
+   "verdict": "No exact match; localization and ring-valued basis tools only."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.eq_zero_iff",
+   "results": "IsLocalizedModule.eq_zero_iff",
+   "date": "2026-10-13",
+   "verdict": "No exact match; localization and ring-valued basis tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionCohomologyPresheaf|sheafificationUnit.*localiz|localiz.*sheafification|isIso.*[Bb]asis",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; localization and ring-valued basis tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology presheaf of the pushforward of an injective resolution of a quasi coherent module along a qcqs scheme morphism restricts on principal opens by module localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A presheaf of modules on a scheme whose restrictions from affine opens to principal opens are localizations has bijective sheafification unit on affine opens",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor, AlgebraicGeometry.isLocalization_away_of_isAffine, AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen, AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen, AlgebraicGeometry.Γ_restrict_isLocalization, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine",
+   "date": "2026-10-13",
+   "verdict": "No exact match; localization and ring-valued basis tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule|sheafification.*[Bb]asis|[Bb]asis.*sheafification",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; localization and ring-valued basis tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presheaf of modules whose restriction maps on affine principal opens are localizations has isomorphic sheafification unit on affine opens",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction of module cohomology from the inverse image of an affine open to the inverse image of a principal open along a qcqs morphism is localization of a quasi coherent module cohomology group",
+   "results": "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map",
+   "date": "2026-10-13",
+   "verdict": "No exact match; localization and ring-valued basis tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageSectionTorsion",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-finite-support-hi",
+   "place": "Proof of clause (1), quasi-coherence: the principal-open localization criterion, realized here by separate lifting and kernel assertions.",
+   "via": [
+    "lem-pc-higher-direct-image-section-torsion",
+    "new-higher-direct-image-affine-local-qcoherent",
+    "lem-pc-sections-higher-direct-image-quasi-coherent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLocalizingPresheafSheafification",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalizingPresheafSheafification.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_sheafificationUnit_app_of_affine_localizing",
+  "statement": "theorem isIso_sheafificationUnit_app_of_affine_localizing\n    (T : Scheme.{u}) (P : _root_.PresheafOfModules.{u} T.ringCatSheaf.obj)\n    (hP : ∀ (W : T.Opens), IsAffineOpen W → ∀ a : Γ(T, W),\n      IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom)\n    (W : T.Opens) (hW : IsAffineOpen W) :\n    IsIso (((PresheafOfModules.sheafificationAdjunction\n      (𝟙 T.ringCatSheaf.obj)).unit.app P).app (op W))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T045526-L-128091",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261013T045526-L-128091",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
