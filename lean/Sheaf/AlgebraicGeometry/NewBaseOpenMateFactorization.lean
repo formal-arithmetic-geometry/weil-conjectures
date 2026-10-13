@@ -8,9 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.CategoryTheory.Comma.Arrow
+import Mathlib.AlgebraicGeometry.Restrict
 
 
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+import Sheaf.AlgebraicGeometry.HorizontalDualityMatePasting
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Horizontal factorization at a new-base open
@@ -25,6 +26,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- The QCoh lifts and three arrow transports need additional definitional-equality checks.
+set_option backward.isDefEq.respectTransparency true in
 /-- Horizontal pasting compares the outer mate with the composite of the
 restricted first mate and the actual canonical open-square mate. Only qcqs hypotheses
 on the morphism are needed. No invertibility
@@ -139,6 +143,61 @@ theorem newBase_open_mate_factorization
             (@dualityEquationBaseChangeMap _ X Y W.toScheme
               (QuasiCompact.compactSpace_of_compactSpace f)
               (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _
-              f (W.ι ≫ g) a c adjf adjc hβW K)))) := by sorry
+              f (W.ι ≫ g) a c adjf adjc hβW K)))) := by
+  classical
+  let μ := ((schemeDerivedQCohProperty (pullback f g)).ι.map
+            (@dualityEquationBaseChangeMap _ X Y Y'
+              (QuasiCompact.compactSpace_of_compactSpace f)
+              (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _
+              f g a a' adjf adjf' hβ K))
+  let ν := ((schemeDerivedQCohProperty (pullback (pullback.snd f g) W.ι)).ι.map
+            (@dualityEquationBaseChangeMap _ (pullback f g) Y' W.toScheme
+              (QuasiCompact.compactSpace_of_compactSpace (pullback.snd f g))
+              (quasiSeparatedSpace_of_quasiSeparated (pullback.snd f g)) _ _ _ _
+              (pullback.snd f g) W.ι a' d adjf' adjd hβO
+              (((schemeDerivedQCohProperty Y').lift
+                ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback g)
+                (fun E ↦ (derivedPullback_tensor_preserve_QCoh g).1
+                  E.obj E.property)).obj K)))
+  let lam := ((schemeDerivedQCohProperty (pullback f (W.ι ≫ g))).ι.map
+            (@dualityEquationBaseChangeMap _ X Y W.toScheme
+              (QuasiCompact.compactSpace_of_compactSpace f)
+              (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _
+              f (W.ι ≫ g) a c adjf adjc hβW K))
+  let p := pullback.fst (pullback.snd f g) W.ι
+  let e := pullbackLeftPullbackSndIso f g W.ι
+  have hq : q ≫ e.hom = r := by
+    apply pullback.hom_ext
+    · simp only [e, Category.assoc, pullbackLeftPullbackSndIso_hom_fst,
+        reassoc_of% hq₁]
+      exact hr₁.symm
+    · apply (cancel_mono W.ι).mp
+      simp only [e, Category.assoc, pullbackLeftPullbackSndIso_hom_snd_assoc,
+        reassoc_of% hq₂, morphismRestrict_ι]
+      exact hr₂.symm
+  have ht : Nonempty (Arrow.mk ((derivedPullback p).map μ ≫ ν) ≅
+      Arrow.mk ((derivedPullback e.hom).map lam)) :=
+    horizontal_duality_mate_pasting g f a a' adjf adjf' hβ K W.ι
+      c adjc hβW d adjd hβO
+  let t := Classical.choice ht
+  let comp : ∀ {A B C : Scheme.{u}} (s : A ⟶ B) (v : B ⟶ C),
+      derivedPullback v ⋙ derivedPullback s ≅ derivedPullback (s ≫ v) :=
+    @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))
+  let α := comp q e.hom ≪≫ eqToIso (congrArg (fun k ↦ derivedPullback k) hq)
+  let first : Arrow.mk
+      (((schemeOpenRestriction (pullback f g) ((pullback.snd f g) ⁻¹ᵁ W)).mapDerivedCategory.map
+        μ) ≫ δ.hom.app _ ≫ (derivedPullback q).map ν) ≅
+      Arrow.mk ((derivedPullback q).map ((derivedPullback p).map μ ≫ ν)) :=
+    Arrow.isoMk (δ.app _) (Iso.refl _) (by
+      dsimp only [Arrow.mk_hom, Iso.app_hom, Iso.refl_hom, p]
+      simpa only [Functor.map_comp, Functor.comp_map, Category.comp_id,
+        Category.assoc] using
+        congrArg (fun k ↦ k ≫ (derivedPullback q).map ν) (δ.hom.naturality μ).symm)
+  let last : Arrow.mk ((derivedPullback q).map ((derivedPullback e.hom).map lam)) ≅
+      Arrow.mk ((derivedPullback r).map lam) :=
+    Arrow.isoMk (α.app _) (α.app _) (by exact (α.hom.naturality lam).symm)
+  exact ⟨first ≪≫ (derivedPullback q).mapArrow.mapIso t ≪≫ last⟩
 
 end AlgebraicGeometry
+
