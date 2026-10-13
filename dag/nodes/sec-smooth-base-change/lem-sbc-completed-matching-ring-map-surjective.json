@@ -15,27 +15,31 @@
  ],
  "proof": [
   {
-   "text": "Choose finitely many generators f_i of the maximal ideal.\nTheir principal opens cover U\nby hU. The finite affine charts of q give B_i, and finite s gives B' = Γ(E).\nThe overlap isomorphism and the transition maps yield the gluing object of\nTag 05ER. The sheaf equalizer identifies its H⁰ with matchingRing. Completion\nis flat and is an isomorphism modulo the maximal ideal. In the proof of 05ER,\nthe localized comparison is invertible, and its cokernel is (Q,0,0,0), with\nQ maximal-ideal-power torsion. Lemma 15.91.8 lifts the extension of Q by\nH⁰ tensor_A C to an extension of Q by H⁰ over A. The resulting module has\ncanonical gluing object equal to the given one. Applying H⁰ and its canonical\nidentification forces Q = 0. Therefore H⁰ tensor_A C → B' is surjective.\nBy Tag 05EU this map is the algebra map completedRingMap, characterized by\nthe second projection and the C-structure. For empty U, A is Artinian and\ncomplete and the comparison is the identity; zero algebras satisfy the same\ncokernel argument. -/",
+   "text": "Use the second pushout injection to give the source its C-algebra structure. The comparison is C-linear by pushout.inr_desc. Its target is finite over C because s is finite and the affine global-sections counit is an isomorphism.",
    "uses": [
     "def-sbc-completed-matching-ring-map",
-    "def-sbc-punctured-completion-matching-sections",
-    "def-weil-pbc-noetherian-ring",
     "def-weil-finite-integral-morphism"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Residue lifting says the comparison composed with the quotient by m_C times the target is surjective. The completion C is local. Apply Mathlib LinearMap.surjective_of_surjective_comp_mkQ and IsLocalRing.maximalIdeal_le_jacobson to obtain surjectivity of the original comparison.",
+   "uses": [
+    "lem-sbc-completed-matching-ring-map-residue-lift"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sbc-completed-matching-ring-map",
-  "def-sbc-punctured-completion-matching-sections",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-finite-integral-morphism"
+  "def-weil-finite-integral-morphism",
+  "lem-sbc-completed-matching-ring-map-residue-lift"
  ],
  "proof_origin": {
   "kind": "from-source",
-  "by": "H2",
+  "by": "Q2",
   "document": "Stacks Project",
-  "place": "Tags 05ER and 05EU, as applied in 0BLH"
+  "place": "0BLH and 05ER for the residue step; 00DV (Nakayama) for the finite-module upgrade"
  },
  "mathlib_searches": [
   {
@@ -127,9 +131,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T162410-L-1519171",
+  "landing": "20261013T165647-L-1810221",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
