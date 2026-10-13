@@ -15,20 +15,43 @@
  },
  "proof": [
   {
-   "text": "Proof: Choose V, P and the given derived isomorphism from hlocal. The residue-point\nmorphism factors through V, so restriction followed by derived pullback identifies the\nfibre of E with the derived pullback of Q(P). Each term of P is a finite-free retract,\nhence flat; its boundedness makes P K-flat. Consequently ordinary termwise pullback\ncomputes this derived pullback. The inverse image of V is the whole one-point spectrum\nof the residue field. Pullback carries the finite-free retract maps to splitting maps\nof the same rank. Evaluation on the whole spectrum is exact: sheaves of modules there\nare modules over its global ring. Transport along GammaSpecIso is also exact. Thus\nderivedFiberCohomology is isomorphic to homology of the resulting complex of\nresidue-field vector spaces. Choose a and b from the boundedness conjunct of IsStrictlyPerfect. Additive pullback,\nevaluation and scalar transport preserve zero terms, so the resulting complex is zero\nin degree i whenever i < a or b < i. Its cycles and homology in that degree are zero.\nTransfer this vanishing across the cohomology isomorphism: the finrank defining\nderivedFiberBetti is zero. The same a and b work for all i, including the zero complex\nand a > b (when every term is zero).",
+   "text": "Choose the open V, strictly perfect complex P and restriction isomorphism. Take the original bounds a,b from IsStrictlyPerfect. The residue morphism g has constant value x, hence its inverse image of V is the whole spectrum W. Transport P through Modules.overEquiv V to a complex C on V.toScheme; additivity preserves its zero terms and the equivalence identifies the finite free sheaves with free sheaves of the same ranks.",
    "uses": [
     "def-pc-perfect-complex"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Equip the sheaf-module category with the tensor-closed structure of lem-pc-sheaf-modules-tensor-closed. Finite free sheaves are coproducts of the tensor unit and are flat by ObjectProperty.flat_coproduct and ObjectProperty.prop_unit. Apply ObjectProperty.flat_of_retract to the transported retraction maps to prove every term of C flat. This is the proved private helper flat_of_finiteFree_retract and its application to C.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Use standard derived categories on the open subschemes, independently of the ambient localization universe. Apply lem-pc-flat-complex-derived-pullback to g.resLE V W and C. Its additive ordinary functor F gives the explicit complex FC termwise. Compose its Qh comparison with quotientCompQhIso and mapHomotopyCategoryFactors to obtain Lf*(Q(C)) isomorphic to Q(FC). Map the given local derived isomorphism through the open-site equivalence. The universe-aware open-restriction comparison identifies (S followed by B).mapDerivedCategory(Lg*E) with Q(FC), where S restricts to W and B is its over equivalence.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-derived-pullback-open-restriction-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For i outside [a,b], FC.X i is zero because both A and F preserve zero objects. ShortComplex.isZero_homology_of_isZero_X₂ makes its homology zero. Transfer through the displayed derived isomorphism and homologyFunctorFactors. Restriction to W=top is faithful: equality of restricted maps evaluated on Over.mk(U→top) is equality of the original maps on U. The equivalence B is faithful too, so the faithful exact functor S followed by B reflects vanishing of derived homology. Evaluation and scalar restriction are additive and preserve zero objects; no exactness of evaluation is needed. The residue cohomology module is therefore subsingleton and Module.finrank_zero_of_subsingleton gives the required Betti-number zero. The original a,b work also for a>b and zero complexes.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "lem-pc-derived-pullback-open-restriction-universes",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BCD"
+  "by": "worker V4",
+  "document": "https://stacks.math.columbia.edu/tag/0BCD",
+  "place": "First paragraph of proof, expanded using strictly perfect complexes (08C4), flat computation of derived pullback (06YJ), and open restriction (08DW); the Lean proof transfers zero cohomology sheaves, so evaluation exactness is unnecessary."
  },
  "mathlib_searches": [
   {
@@ -100,10 +123,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261013T015552-L-3019655",
-  "kind": "interface",
+  "landing": "20261013T033010-L-3679082",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
