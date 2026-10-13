@@ -11709,3 +11709,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AffineLocalizingPresheafBasisSheaf (stage 3; reviewer PASS; first push; landing 20261013T082411-L-1646994 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:24 L: merged deliver/S1/Sheaf.AlgebraicGeometry.ProperFlatDerivedDirectImagePerfect (stage 3; reviewer PASS; first push; landing 20261013T082412-L-1647177 (proof); batch 20261013T082326; modules 1; new nodes 0)
 - 08:24 L: merged deliver/S2/Sheaf.RingTheory.QuasiFiniteLocusOpen (stage 3; reviewer PASS; after a return; landing 20261013T082412-L-1647285 (proof); batch 20261013T082326; modules 1; new nodes 0)
+- 08:24 L: merged deliver/S3/Sheaf.AlgebraicGeometry.RestrictedScalarConeSplit (stage 3; reviewer PASS; first push; landing 20261013T082412-L-1647503 (proof); batch 20261013T082326; modules 1; new nodes 0)
