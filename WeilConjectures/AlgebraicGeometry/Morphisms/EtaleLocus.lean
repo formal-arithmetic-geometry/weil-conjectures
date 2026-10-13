@@ -84,4 +84,21 @@ lemma mem_etaleLocus_of_specializes [IsIntegralHom f] {y y' : Y} (h : y' ⤳ y)
   obtain ⟨x, hx, rfl⟩ := h.mem_closed hcl ⟨x', hx, hx'⟩
   exact hx (H x rfl)
 
+/-- If an integral morphism `f` is étale at every point over `y` and `U ∋ y` is an affine open,
+then `f` is étale over a basic open `D(r) ∋ y` of `U`: the image of the closed complement of the
+étale locus is closed and does not contain `y`. -/
+lemma exists_basicOpen_le_etaleLocus [IsIntegralHom f] {U : Y.Opens} (hU : IsAffineOpen U)
+    {y : Y} (hyU : y ∈ U) (H : ∀ x : X, f x = y → x ∈ f.etaleLocus) :
+    ∃ r : Γ(Y, U), y ∈ Y.basicOpen r ∧ f ⁻¹ᵁ Y.basicOpen r ≤ f.etaleLocus := by
+  have hcl : IsClosed (f.base '' (f.etaleLocus : Set X)ᶜ) :=
+    f.isClosedMap _ f.etaleLocus.isOpen.isClosed_compl
+  have hy : y ∉ f.base '' (f.etaleLocus : Set X)ᶜ := by
+    rintro ⟨x, hx, hxy⟩
+    exact hx (H x hxy)
+  obtain ⟨r, hrO, hyr⟩ :=
+    hU.exists_basicOpen_le (V := ⟨_, hcl.isOpen_compl⟩) ⟨y, hy⟩ hyU
+  refine ⟨r, hyr, fun x hx ↦ ?_⟩
+  by_contra hxE
+  exact hrO hx ⟨x, hxE, rfl⟩
+
 end AlgebraicGeometry.Scheme.Hom

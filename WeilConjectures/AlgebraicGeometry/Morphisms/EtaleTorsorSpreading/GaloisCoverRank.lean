@@ -27,9 +27,7 @@ universe u
 
 open CategoryTheory Limits TensorProduct
 
-namespace AlgebraicGeometry.Scheme.GaloisCover
-
-variable {G : Type (u + 1)} [Group G] [Finite G] {Y : Scheme.{u}}
+namespace Algebra.Etale
 
 /-- A finite étale algebra `A` over a separably closed field `Ω` of dimension `n` has at least
 `n` distinct points with values in `Ω`, given by the evaluations of `A ≅ Ωⁿ`. -/
@@ -48,11 +46,17 @@ lemma exists_injective_algHom_of_isSepClosed (Ω A : Type*) [Field Ω] [IsSepClo
   have h' : Fin.cast hn i ≠ Fin.cast hn j := fun h'' ↦ h (Fin.cast_injective hn h'')
   simp [h'] at this
 
+end Algebra.Etale
+
+namespace AlgebraicGeometry.Scheme.GaloisCover
+
+variable {G : Type (u + 1)} [Group G] [Finite G] {Y : Scheme.{u}}
+
 set_option backward.isDefEq.respectTransparency false in
 /-- **The rank of a Galois cover.** For a Galois cover `Z` of `Y` with group `G` and an affine
-open `V ⊆ Y`, the rank of `Γ(Z.P, π⁻¹ V)` over `Γ(Y, V)` is at most `|G|` at every prime: the
-geometric points of the fibre form a single orbit under the free action of `G`. This is used in
-the proof of blueprint `sbc-thm-spreading-finite-etale-galois`. -/
+open `V ⊆ Y`, the rank of `Γ(Z.P, π⁻¹ V)` over `Γ(Y, V)` is at most `|G|` at every prime:
+the geometric points of the fibre form a single orbit under the free action of `G`. This is used
+in the proof of blueprint `sbc-thm-spreading-finite-etale-galois`. -/
 theorem rankAtStalk_app_le (Z : GaloisCover G Y) {V : Y.Opens} (hV : IsAffineOpen V)
     (p : PrimeSpectrum Γ(Y, V)) :
     letI := (Z.π.app V).hom.toAlgebra
@@ -75,12 +79,13 @@ theorem rankAtStalk_app_le (Z : GaloisCover G Y) {V : Y.Opens} (hV : IsAffineOpe
     have hp : PrimeSpectrum.comap (algebraMap Γ(Y, V) Ω) ⟨⊥, Ideal.isPrime_bot⟩ = p := by
       ext1
       rw [PrimeSpectrum.comap_asIdeal, ← RingHom.ker_eq_comap_bot,
-        IsScalarTower.algebraMap_eq Γ(Y, V) p.asIdeal.ResidueField Ω, RingHom.ker_comp_of_injective
-          _ (algebraMap p.asIdeal.ResidueField Ω).injective, Ideal.ker_algebraMap_residueField]
+        IsScalarTower.algebraMap_eq Γ(Y, V) p.asIdeal.ResidueField Ω,
+        RingHom.ker_comp_of_injective _ (algebraMap p.asIdeal.ResidueField Ω).injective,
+        Ideal.ker_algebraMap_residueField]
     rw [hp, Module.rankAtStalk_eq_finrank_of_free] at h
     exact h.symm
   rw [hrank]
-  obtain ⟨ψ, hψ⟩ := exists_injective_algHom_of_isSepClosed Ω A
+  obtain ⟨ψ, hψ⟩ := Algebra.Etale.exists_injective_algHom_of_isSepClosed Ω A
   -- the corresponding geometric points of `Z.P`
   let f (i : Fin (Module.finrank Ω A)) : Γ(Z.P, Z.π ⁻¹ᵁ V) →+* Ω :=
     (((ψ i).restrictScalars Γ(Y, V)).comp Algebra.TensorProduct.includeRight).toRingHom

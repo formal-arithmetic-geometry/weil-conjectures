@@ -451,6 +451,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorPullback
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Datum
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.DepthTwo
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GaloisCoverRank
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GenericFibre
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.GenericPoint
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Limit
@@ -1519,6 +1520,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+public import WeilConjectures.Mathlib.AlgebraicGeometry.NormalizationBasicOpen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
