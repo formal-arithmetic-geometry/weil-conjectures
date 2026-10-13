@@ -12972,3 +12972,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:24 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FinitePresentationOverlapChartEquations (stage 3; reviewer PASS; first push; landing 20261013T152439-L-992233 (interface); batch 20261013T152436; modules 3; new nodes 2)
 - 15:24 L: merged deliver/Q3/Sheaf.Paper.FiniteStructureProductExists (stage 3; reviewer PASS; first push; landing 20261013T152440-L-992404 (interface); batch 20261013T152436; modules 3; new nodes 2)
 - 15:24 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Morphisms.DepthThreePuncturedFiniteFlatModel (stage 3; reviewer PASS; first push; landing 20261013T152440-L-992627 (interface); batch 20261013T152436; modules 3; new nodes 2)
+- 15:25 L: returned deliver/S1/Sheaf.AlgebraicGeometry.ReducedGenericFibreMapCore (reviewer RETURN: (reviewer X-07e79, head 07e79bf0a) E1 / H3 (brief points 4 and 6): the retained theorem is false and omits the node's in)
