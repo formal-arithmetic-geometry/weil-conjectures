@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-finite-tensor-kernel-generators",
+ "kind": "statement",
+ "title": "Finite generators for the ideal multiplication kernel over a Noetherian algebra",
+ "statement": "Let R and S be Noetherian commutative rings [def-weil-pbc-noetherian-ring], M a finite S-module [def-weil-finitely-generated-module], phi:R->S a ring map, and I an ideal of R. Give M its R-action through phi and M tensor_R I its S-action on M. Let mu:I tensor_R M->M be multiplication, and e:M tensor_R I->I tensor_R M the tensor symmetry. There is a finite subset s of M tensor_R I such that mu(e(k))=0 for every k in s, and every k with mu(e(k))=0 lies in span_S(s).",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00R6, proof from choosing a fixed index through vanishing of the Tor transition map; Remark 00M6. Official text checked at https://stacks.math.columbia.edu/tag/00R6."
+ },
+ "proof": [
+  {
+   "text": "Choose finite spanning sets X of M over S and Y of I over R. The set of x tensor y with x in X and y in Y is finite. Span induction in each variable shows it spans M tensor_R I over S: x tensor a*y = phi(a)*(x tensor y). Tensor induction then proves the span is the whole tensor product.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The map pi=mu composed with symmetry is S-linear: pi(b*x tensor a)=phi(a)*b*x=b*pi(x tensor a), with additivity and tensor induction extending this to all tensors. Its kernel is a submodule of the finite S-module just constructed. Apply [lem-weil-pbc-noetherian-submodule-finite] and extract a finite spanning set of the kernel. Membership in the kernel gives the claimed zero equations.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00R6, the finite-generation paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite generators for the multiplication kernel of an ideal tensor a finite module over a Noetherian algebra",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite generation of tensor product over a smaller ring as module over larger ring",
+   "date": "2026-10-13",
+   "results": "Module.Finite.base_change, Module.Finite.tensorProduct, RingHom.Finite.tensorProductMap, Algebra.EssFiniteType.baseChange, Algebra.FiniteType.baseChange, Algebra.QuasiFinite.baseChange, TensorProduct.Algebra.exists_of_fg, exists_fg_and_mem_baseChange",
+   "verdict": "no exact match; signatures inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*kernel|exists_finset_lTensor_eq_zero|kernel_vanishes|Finite.tensorProduct",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean",
+   "verdict": "no exact match; signatures inspected"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
+   "via": [
+    "lem-weil-pbc-colimit-maximal-kernel-descent",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteTensorKernelGenerators",
+  "file": "lean/Sheaf/RingTheory/FiniteTensorKernelGenerators.lean",
+  "declaration": "RingTheory.exists_finite_tensor_kernel_generators",
+  "statement": "theorem exists_finite_tensor_kernel_generators\n    {R : Type u} {S : Type v} {M : Type w}\n    [CommRing R] [CommRing S] [AddCommGroup M]\n    [IsNoetherianRing R] [IsNoetherianRing S]\n    [Module S M] [Module.Finite S M]\n    (φ : R →+* S) (I : Ideal R) :\n    letI := Module.compHom M φ\n    letI : SMulCommClass R S M := ⟨fun a b x ↦ smul_comm (φ a) b x⟩\n    let μ := TensorProduct.lift ((LinearMap.lsmul R M).comp I.subtype)\n    ∃ s : Finset (M ⊗[R] I),\n      (∀ k ∈ s, μ (TensorProduct.comm R M I k) = 0) ∧\n      (∀ k : M ⊗[R] I, μ (TensorProduct.comm R M I k) = 0 →\n        k ∈ Submodule.span S (s : Set (M ⊗[R] I)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T115023-L-3323872",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T115023-L-3323872",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

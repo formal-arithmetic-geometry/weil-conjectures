@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-finite-ideal-kernel-descent",
+ "kind": "statement",
+ "title": "Finite subsets of an ideal multiplication kernel die at a later stage",
+ "statement": "Let Lambda be a nonempty directed preorder, A and B functors to commutative rings, N a functor to abelian groups, and take their categorical colimits [def-weil-pbc-category-colimit]. Each N_i is a B_i-module; the transition maps are semilinear over those of B. Let phi_i:A_i->B_i commute with all transitions, and psi:colimit A->colimit B commute with the coprojections. Equip colimit N with a colimit B-module structure compatible with its coprojections. Suppose colimit N is flat over colimit A through psi [def-weil-pbc-flat-ring-map]. Fix i and any ideal I of A_i. For every finite subset E of I tensor_{A_i} N_i whose elements multiply to zero, there are j, f:i->j and an additive map theta:I tensor_{A_i} N_i -> (I.map alpha_f) tensor_{A_j} N_j with theta(a tensor x)=alpha_f(a) tensor eta_f(x) and theta(k)=0 for every k in E. The A_i and A_j actions on N are through phi_i and phi_j. No Noetherian, local-ring or finite-module assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00R6, proof from choosing a fixed index through vanishing of the Tor transition map; Remark 00M6. Official text checked at https://stacks.math.columbia.edu/tag/00R6."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-ideal-kernel-element-descent] separately to every member of the finite subset. Each has zero multiplication by hypothesis, so obtain a witness stage and an additive map with the canonical pure-tensor formula that kills that element.",
+   "uses": [
+    "lem-weil-pbc-ideal-kernel-element-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By induction on a finite set of indices, directedness gives one l above i and all witness stages. Construct the canonical tensor map theta_l using TensorProduct.map on the semilinear ideal and module transitions. For the empty subset take l=i.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a witness map f:i->j and g:j->l, A.map(g) comp A.map(f)=A.map(i->l), because the shape is a preorder. Ideal.map_map gives (I A_j) A_l=I A_l. Construct the additive tensor transition delta from the extended ideal tensor module at j to the one at l. Its composition with the witness map equals theta_l: verify on pure tensors by A and N functoriality, and extend by tensor induction. Therefore theta_l kills every element of the prescribed subset.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ideal-kernel-element-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00R6, taking one common stage for the finitely many xi; tensor transition construction and composition are formalized explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a directed colimit of rings and modules with flat limit any finite subset of an ideal multiplication kernel vanishes at a later stage",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed colimit of rings and modules with flat limit any finite subset of an ideal multiplication kernel vanishes at a later stage",
+   "date": "2026-10-13",
+   "results": "AdicCompletion.flat_of_isNoetherian, localCohomology.hasColimitDiagram, Module.FaithfullyFlat.iff_flat_and_proper_ideal, Module.Flat.of_forall_exists_factorization, localCohomology.ofDiagram, Module.Flat.iff_forall_exists_factorization, Module.DirectLimit.of.zero_exact, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top",
+   "verdict": "no exact match; the equational flatness criterion and direct-limit zero criterion are partial tools"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*kernel|exists_finset_lTensor_eq_zero|kernel_vanishes|Finite.tensorProduct",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean, Mathlib/RingTheory/TensorProduct/Finite.lean",
+   "verdict": "no exact match; signatures inspected"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitMaximalKernelDescent",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Finite-generator kernel descent in Tag 00R6, steps 1–6 of lem-weil-pbc-colimit-eventually-flat, before applying Tag 00MO.",
+   "via": [
+    "lem-weil-pbc-colimit-maximal-kernel-descent",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteIdealKernelDescent",
+  "file": "lean/Sheaf/RingTheory/FiniteIdealKernelDescent.lean",
+  "declaration": "RingTheory.exists_stage_finite_ideal_kernel_vanishes",
+  "statement": "theorem exists_stage_finite_ideal_kernel_vanishes\n    {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]\n    (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})\n    (N : Λ ⥤ AddCommGrpCat.{z}) [HasColimit A] [HasColimit B] [HasColimit N]\n    [∀ i, Module (B.obj i) (N.obj i)]\n    (φ : ∀ i, A.obj i →+* B.obj i)\n    (hcomm : ∀ (i j : Λ) (f : i ⟶ j),\n      (B.map f).hom.comp (φ i) = (φ j).comp (A.map f).hom)\n    (hscalar : ∀ (i j : Λ) (f : i ⟶ j) (b : B.obj i) (x : N.obj i),\n      (N.map f).hom (b • x) = (B.map f).hom b • (N.map f).hom x)\n    (ψ : (colimit A : CommRingCat.{v}) →+* (colimit B : CommRingCat.{w}))\n    (hψ : ∀ i, ψ.comp (colimit.ι A i).hom = (colimit.ι B i).hom.comp (φ i))\n    [Module (colimit B : CommRingCat.{w}) (colimit N : AddCommGrpCat.{z})]\n    (hlimitScalar : ∀ (i : Λ) (b : B.obj i) (x : N.obj i),\n      (colimit.ι N i).hom (b • x) = (colimit.ι B i).hom b • (colimit.ι N i).hom x)\n    (hflat : letI := Module.compHom (colimit N : AddCommGrpCat.{z}) ψ\n      Module.Flat (colimit A : CommRingCat.{v}) (colimit N : AddCommGrpCat.{z}))\n    (i : Λ) (I : Ideal (A.obj i)) :\n    letI := Module.compHom (N.obj i) (φ i)\n    ∀ (s : Finset (I ⊗[A.obj i] N.obj i)),\n      (∀ k ∈ s,\n        TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0) →\n    ∃ (j : Λ) (f : i ⟶ j),\n      letI := Module.compHom (N.obj i) (φ i)\n      letI := Module.compHom (N.obj j) (φ j)\n      ∃ θ : I ⊗[A.obj i] N.obj i →+\n          (I.map (A.map f).hom) ⊗[A.obj j] N.obj j,\n        (∀ (a : I) (x : N.obj i), θ (a ⊗ₜ[A.obj i] x) =\n          (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ :\n            I.map (A.map f).hom) ⊗ₜ[A.obj j] (N.map f).hom x) ∧\n        (∀ k ∈ s, θ k = 0)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T115023-L-3323872",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T115023-L-3323872",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

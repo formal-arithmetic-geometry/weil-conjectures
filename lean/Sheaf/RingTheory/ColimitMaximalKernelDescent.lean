@@ -14,6 +14,9 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 
+import Sheaf.RingTheory.FiniteTensorKernelGenerators
+import Sheaf.RingTheory.FiniteIdealKernelDescent
+
 /-!
 # Descent of the maximal-ideal multiplication kernel
 
@@ -87,6 +90,60 @@ theorem exists_stage_maximal_kernel_vanishes
         (∀ k : I ⊗[A.obj i] N.obj i,
           TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype) k = 0 →
             θ k = 0) := by
-  sorry
+  classical
+  let := Module.compHom (N.obj i) (φ i)
+  let : SMulCommClass (A.obj i) (B.obj i) (N.obj i) :=
+    ⟨fun a b x ↦ smul_comm ((φ i) a) b x⟩
+  let I := IsLocalRing.maximalIdeal (A.obj i)
+  let μ := TensorProduct.lift ((LinearMap.lsmul (A.obj i) (N.obj i)).comp I.subtype)
+  let e := TensorProduct.comm (A.obj i) (N.obj i) I
+  obtain ⟨s, hs, hspan⟩ := exists_finite_tensor_kernel_generators (M := N.obj i) (φ i) I
+  obtain ⟨j, f, θ, hθ, hz⟩ := exists_stage_finite_ideal_kernel_vanishes
+    A B N φ hcomm hscalar ψ hψ hlimitScalar hflat i I (s.image e) (by
+      intro k hk
+      obtain ⟨x, hx, heq⟩ := Finset.mem_image.mp hk
+      subst k
+      exact hs x hx)
+  let := Module.compHom (N.obj j) (φ j)
+  let : SMulCommClass (A.obj j) (B.obj j) (N.obj j) :=
+    ⟨fun a b x ↦ smul_comm ((φ j) a) b x⟩
+  let J := I.map (A.map f).hom
+  let e' := TensorProduct.comm (A.obj j) J (N.obj j)
+  let τ := e'.toAddMonoidHom.comp (θ.comp e.toAddMonoidHom)
+  have ht (x : N.obj i) (a : I) :
+      τ (x ⊗ₜ[A.obj i] a) = (N.map f).hom x ⊗ₜ[A.obj j]
+        (⟨(A.map f).hom a, Ideal.mem_map_of_mem (A.map f).hom a.property⟩ : J) := by
+    change e' (θ (e (x ⊗ₜ[A.obj i] a))) = _
+    simp only [e, TensorProduct.comm_tmul]
+    rw [hθ]
+    exact TensorProduct.comm_tmul _ _ _ _ _
+  have hτscalar (b : B.obj i) (k : N.obj i ⊗[A.obj i] I) :
+      τ (b • k) = (B.map f).hom b • τ k := by
+    induction k with
+    | zero => simp
+    | tmul x a =>
+      simp only [TensorProduct.smul_tmul', ht, hscalar]
+    | add k l hk hl => simp only [smul_add, map_add, hk, hl]
+  refine ⟨j, f, θ, hθ, ?_⟩
+  intro k hk
+  have hmem := hspan (e.symm k) (by
+    change μ (e (e.symm k)) = 0
+    simpa only [LinearEquiv.apply_symm_apply] using hk)
+  have hall : ∀ x ∈ Submodule.span (B.obj i) (s : Set (N.obj i ⊗[A.obj i] I)),
+      τ x = 0 := by
+    intro x hx
+    induction hx using Submodule.span_induction with
+    | mem x hx =>
+      have hxzero := hz (e x) (Finset.mem_image.mpr ⟨x, hx, rfl⟩)
+      change e' (θ (e x)) = 0
+      rw [hxzero, map_zero]
+    | zero => exact map_zero τ
+    | add x y _ _ hx hy => simp only [map_add, hx, hy, add_zero]
+    | smul b x _ hx => simp only [hτscalar, hx, smul_zero]
+  have hzero := hall (e.symm k) hmem
+  apply e'.injective
+  change e' (θ k) = e' 0
+  change e' (θ (e (e.symm k))) = 0 at hzero
+  simpa only [LinearEquiv.apply_symm_apply, map_zero] using hzero
 
 end RingTheory
