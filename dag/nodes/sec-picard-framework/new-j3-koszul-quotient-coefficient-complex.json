@@ -1,0 +1,126 @@
+{
+ "id": "new-j3-koszul-quotient-coefficient-complex",
+ "kind": "definition",
+ "title": "Explicit quotient-valued Koszul dual complex and reduction morphism",
+ "statement": "Let A be a commutative ring, I an ideal, r a natural number and f:Fin r→A. Let K=K_A(f) [def-weil-pbc-koszul-complex] and L=Hom_A(K,A) with the signed differential [def-sc-koszul-dual-complex]. Define T^p=Hom_A(K_p,A/I), with differential x↦(-1)^(p+1)x∘d_(p+1). Define c:L→T by c^p(x)=(A→A/I)∘x. These explicit differentials square to zero and c commutes with them. No regularity or generation hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-sc-koszul-dual-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "lemma-regular-immersion-ext, affine dual Koszul coefficient comparison"
+ },
+ "proof": [
+  {
+   "text": "Signed precomposition squares to zero because consecutive Koszul differentials compose to zero. Postcomposition with the A-linear quotient map commutes with precomposition and with the sign scalar. Apply CochainComplex.of and CochainComplex.ofHom to these proved identities; this constructs the complex and morphism as data, with no existential choice.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-sc-koszul-dual-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-sc-koszul-dual-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "J3",
+  "group": "J3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "lemma-regular-immersion-ext, affine dual Koszul coefficient comparison",
+  "note": "The coefficient comparison from the source, expanded for the precise Lean interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Reduction from the ring to the quotient by the Koszul generators induces an isomorphism on the top cohomology of the dual Koszul complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.ofHom",
+   "results": "1 hits: CochainComplex.ofHom. ",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison found; applicable general constructors are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "CochainComplex.ofHom|rightComp",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean. ",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison found; applicable general constructors are used in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkIso",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Explicit quotient-valued Koszul dual complex and reduction morphism in the coefficient-comparison argument of lem-sc-koszul-ext-coefficient-stalk-iso",
+   "via": [
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulQuotientCoefficientComplex",
+  "file": "lean/Sheaf/RingTheory/KoszulQuotientCoefficientComplex.lean",
+  "declaration": "ExteriorAlgebra.koszulCoefficientReduction",
+  "statement": "def koszulCoefficientReduction\n    (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) :\n    koszulDualComplex A r f ⟶ koszulQuotientDualComplex A I r f",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13",
+  "declarations": [
+   "ExteriorAlgebra.koszulQuotientDualBoundary",
+   "ExteriorAlgebra.koszulQuotientDualBoundary_comp",
+   "ExteriorAlgebra.koszulQuotientDualComplex",
+   "ExteriorAlgebra.koszulCoefficientReductionDegree",
+   "ExteriorAlgebra.koszulCoefficientReductionDegree_comm",
+   "ExteriorAlgebra.koszulCoefficientReduction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T113344-L-3184606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T113344-L-3184606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

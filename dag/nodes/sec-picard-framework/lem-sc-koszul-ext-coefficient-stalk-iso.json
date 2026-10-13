@@ -19,50 +19,37 @@
  },
  "proof": [
   {
-   "text": "On the affine chart A=Γ(Y,U), I=ker(i)(U), B=A/I, take the actual finite free Koszul projective resolution of B and its quotient augmentation. Sheafify using the closed immersion quotient-spectrum identification. The exterior basis makes this a bounded finite free complex.",
+   "text": "Apply the commuting affine Koszul stalk model in cohomology degree equal to the sequence length. It supplies explicit additive coordinates on the two stalks and identifies the specified coefficient stalk map with scalar extension of algebraic coefficient reduction.",
    "uses": [
-    "new-j3-koszul-projective-resolution",
-    "lem-sc-affine-quotient-resolution-sheafification"
+    "new-j3-koszul-ext-coefficient-stalk-model"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict derived internal Hom and use the bounded finite free model to identify its natural coefficient morphisms with those of the sheafified Hom complex. The common K-injective model compares the supplied derived universe.",
+   "text": "The independently proved algebraic top-cohomology calculation makes reduction an isomorphism. Its underlying linear map is bijective. Turn it into a LinearEquiv and apply LinearEquiv.baseChange along the actual germ/stalk A-algebra structure on O_(V,z). This produces a bijective tensor map without any flatness assumption.",
    "uses": [
-    "lem-sc-derived-internal-hom-restrict-open",
-    "lem-sc-derived-hom-finite-free-model"
+    "new-j3-koszul-coefficient-top-homology"
    ],
    "elementary": false
   },
   {
-   "text": "The degree-n term of Hom(K,A) is the top exterior dual, a free module of rank one. Its outgoing term is zero and its incoming image is I times that term: the differential is the row of f up to signs. The complex Hom(K,B) has all differentials zero, and its degree-n term is that same module modulo I. Reduction of coefficients therefore induces an isomorphism in degree n. At n=0, I=0 and this is identity. The point over U excludes the empty preimage.",
-   "uses": [
-    "lem-weil-pbc-exterior-power-free-basis"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Exact associated-module sheafification transports the cohomology comparison. Both top cohomology modules are B-modules; tensoring with B leaves them unchanged. Restrict to V and take the stalk at z. Naturality identifies this map with the specified map obtained from the adjunction unit; thus its stalk map is bijective.",
+   "text": "For injectivity, apply the target additive equivalence to equality of outputs, use the commuting square and injectivity of the base-changed linear equivalence, then cancel the source additive equivalence. For surjectivity, lift the target coordinate through the base-changed map and use the inverse source coordinate; the commuting square and target-coordinate injectivity give the desired preimage.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "new-j3-koszul-projective-resolution",
-  "lem-sc-affine-quotient-resolution-sheafification",
-  "lem-sc-derived-internal-hom-restrict-open",
-  "lem-sc-derived-hom-finite-free-model",
-  "lem-weil-pbc-exterior-power-free-basis"
+  "new-j3-koszul-ext-coefficient-stalk-model",
+  "new-j3-koszul-coefficient-top-homology"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "P3",
+  "agent": "J3",
+  "group": "J3",
   "date": "2026-10-13",
-  "based_on": {
-   "document": "https://stacks.math.columbia.edu/tag/0BQZ",
-   "place": "Lemma 48.15.5 (lemma-regular-immersion-ext), final coefficient comparison"
-  },
-  "note": "The cited Koszul calculation expanded for the precise derived sheaf and tensor-pullback interface; no arbitrary object chosen from existence."
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "lemma-regular-immersion-ext, affine dual Koszul coefficient comparison",
+  "note": "Real Lean transport proof; algebraic top-degree calculation proved directly, only the degree-independent commuting geometric stalk model split off."
  },
  "mathlib_searches": [
   {
@@ -138,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T100050-L-2474954",
+  "landing": "20261013T113344-L-3184606",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

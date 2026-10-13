@@ -15,11 +15,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
-import Sheaf.RingTheory.KoszulProjectiveResolution
-import Sheaf.AlgebraicGeometry.AffineQuotientResolutionSheafification
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-import Mathlib.LinearAlgebra.ExteriorPower.Basis
+import Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkModel
+import Sheaf.RingTheory.KoszulCoefficientTopHomology
 
 /-! # Coefficient comparison for scalar Koszul Ext
 
@@ -68,6 +65,8 @@ noncomputable def koszulScalarExtCoefficientMap
         (𝟙 _, (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map μ)))
 
+set_option maxHeartbeats 800000 in
+-- Matching the derived stalk model unfolds both coefficient objects and tensor pullback.
 /-- The canonical coefficient comparison is bijective on a stalk in a length-n
 Koszul-regular affine chart. This is solely a local assertion about a specified map.
 
@@ -100,6 +99,37 @@ theorem koszulRegularImmersion_ext_coefficient_stalk_iso
     (hreg : RingTheory.Sequence.IsKoszulRegular f) :
     Function.Bijective
       (((Scheme.Modules.restrictFunctor V.ι).map
-        (koszulScalarExtCoefficientMap i n)).stalkLinearMap z) := by sorry
+        (koszulScalarExtCoefficientMap i n)).stalkLinearMap z) := by
+  let A := (Γ(Y, U.1) : Type u)
+  let R := (V.toScheme.presheaf.stalk z : Type u)
+  let ρ : A →+* R := ((Y.presheaf.germ U.1 (i z.1) hzU) ≫
+    i.stalkMap z.1 ≫ V.ι.stalkMap z).hom
+  let : Algebra A R := ρ.toAlgebra
+  let a : SheafOfModules.unit Y.ringCatSheaf ⟶
+      (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) :=
+    (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫
+      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom
+  obtain ⟨eF, eG, hcomm⟩ :=
+    koszulExtCoefficient_stalk_model i V n n z U hzU f hf hreg a rfl
+  let q := HomologicalComplex.homologyMap
+    (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) n
+  have hq : IsIso q :=
+    ExteriorAlgebra.koszulCoefficientReduction_isIso_top_homology A (i.ker.ideal U) n f hf
+  have hbij : Function.Bijective q.hom := by
+    exact (ConcreteCategory.isIso_iff_bijective q).mp hq
+  let e := LinearEquiv.ofBijective q.hom hbij
+  have hbase : Function.Bijective (q.hom.baseChange R) := by
+    exact (LinearEquiv.baseChange A R _ _ e).bijective
+  constructor
+  · intro x y hxy
+    apply eF.injective
+    apply hbase.1
+    exact (hcomm x).symm.trans ((congrArg eG hxy).trans (hcomm y))
+  · intro y
+    obtain ⟨t, ht⟩ := hbase.2 (eG y)
+    refine ⟨eF.symm t, eG.injective ?_⟩
+    have hc := hcomm (eF.symm t)
+    simp only [eF.apply_symm_apply] at hc
+    exact hc.trans ht
 
 end AlgebraicGeometry

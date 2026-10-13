@@ -1,0 +1,151 @@
+{
+ "id": "new-j3-koszul-ext-coefficient-stalk-model",
+ "kind": "statement",
+ "title": "Commuting affine Koszul model for every Ext coefficient stalk",
+ "statement": "Let i:Z→Y be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], V⊆Z an open, z∈V, U⊆Y an affine open containing i(z), and f:Fin n→A=O_Y(U) a Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence] generating I=ker(i)(U) [def-sbc-closed-immersion-ideal-sheaf]. Let m≥0 be arbitrary, independently of n. Let a:O_Y→i_*O_Z be the actual adjunction-unit coefficient morphism. Its map on degree-m cohomology of derived internal Hom [def-pur-derived-internal-hom, def-pc-derived-category], followed by tensor pullback [def-pc-module-pullback] and restriction to V, is φ. Let R=O_(V,z), with A-algebra map given by the germ on U followed by i and V-inclusion stalk maps [def-pc-module-stalk-functor]. There exist additive equivalences eF:source(φ)_z≃R⊗_A H^m(Hom_A(K_A(f),A)) and eG:target(φ)_z≃R⊗_A H^m(Hom_A(K_A(f),A/I)), using the explicit complexes [new-j3-koszul-quotient-coefficient-complex], such that eG∘φ_z=(R⊗_A H^m(c))∘eF. No invertibility of H^m(c) or of φ_z is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-pc-module-stalk-functor",
+  "new-j3-koszul-quotient-coefficient-complex"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "lemma-regular-immersion-ext, affine dual Koszul coefficient comparison"
+ },
+ "proof": [
+  {
+   "text": "Use the quotient augmentation of the finite free Koszul resolution, and the affine quotient-spectrum presentation of the closed immersion, to sheafify a resolution of i_*O_Z on U. The exterior basis makes it bounded and finite free.",
+   "uses": [
+    "new-j3-koszul-projective-resolution",
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-weil-pbc-exterior-power-free-basis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict derived internal Hom to U and use the finite free model for each coefficient module. Use the same resolution and K-injective comparison in both cases. Naturality in the coefficient variable carries the actual adjunction unit to postcomposition by A→A/I, giving the morphism of the two explicit Hom complexes. This construction is independent of the degree m and is performed in the supplied derived universe.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-hom-finite-free-model",
+    "new-j3-koszul-quotient-coefficient-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact sheafification computes cohomology locally; exactness of module stalks identifies its stalk with localization of the algebraic cohomology. The inverse-image scalar-transport comparison followed by the change-of-rings tensor stalk comparison is natural in the module. Tensor associativity removes the intermediate localization, giving R⊗_A of each algebraic cohomology module. The ring map is the displayed composite of germ and scheme stalk maps. Restriction to V preserves the stalk, and the pure-tensor formulas give the claimed commuting square.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-ringed-inverse-image-stalk-scalar-transport",
+    "lem-weil-pbc-stalk-change-of-rings-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-j3-koszul-projective-resolution",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-derived-hom-finite-free-model",
+  "new-j3-koszul-quotient-coefficient-complex",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-ringed-inverse-image-stalk-scalar-transport",
+  "lem-weil-pbc-stalk-change-of-rings-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "J3",
+  "group": "J3",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/0BQZ",
+  "place": "lemma-regular-immersion-ext, affine dual Koszul coefficient comparison",
+  "note": "The coefficient comparison from the source, expanded for the precise Lean interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Reduction from the ring to the quotient by the Koszul generators induces an isomorphism on the top cohomology of the dual Koszul complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a derived internal Hom coefficient morphism computed by a bounded finite free Koszul resolution is the scalar extension of the Hom complex coefficient morphism",
+   "results": "8 hits: ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.localizationToStalk, CategoryTheory.ProjectiveResolution.extMk_hom. ",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison found; applicable general constructors are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|homComplex",
+   "results": "0 hits: . ",
+   "date": "2026-10-13",
+   "verdict": "No exact comparison found; applicable general constructors are used in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkIso",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Commuting affine Koszul model for every Ext coefficient stalk in the coefficient-comparison argument of lem-sc-koszul-ext-coefficient-stalk-iso",
+   "via": [
+    "lem-sc-koszul-ext-coefficient-stalk-iso",
+    "lem-sc-koszul-ext-constant-rank-top",
+    "lem-sc-koszul-regular-immersion-ext-pullback",
+    "lem-sc-koszul-regular-immersion-ext-sheaf-nonnegative",
+    "lem-sc-koszul-regular-immersion-ext-sheaf",
+    "lem-sc-koszul-regular-immersion-derived-hom",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulExtCoefficientStalkModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulExtCoefficientStalkModel.lean",
+  "declaration": "AlgebraicGeometry.koszulExtCoefficient_stalk_model",
+  "statement": "theorem koszulExtCoefficient_stalk_model\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [IsClosedImmersion i] (V : Z.Opens) (n m : ℕ) (z : V.toScheme)\n    (U : Y.affineOpens) (hzU : i z.1 ∈ U.1) (f : Fin n → Γ(Y, U.1))\n    (hf : Ideal.span (Set.range f) = i.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f)\n    (a : SheafOfModules.unit Y.ringCatSheaf ⟶\n      (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))\n    (ha : a = (Scheme.Modules.pullbackPushforwardAdjunction i).unit.app _ ≫\n      (Scheme.Modules.pushforward i).map (Scheme.Modules.pullbackObjUnitIso i).hom) :\n    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)\n    let S := DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0\n    let H := derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf\n    let F := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (m : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj (SheafOfModules.unit Y.ringCatSheaf)))\n    let G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (m : ℤ)).obj\n        (H.obj (op (S.obj B), S.obj B))\n    let c : F ⟶ G := (DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (m : ℤ)).map\n        (H.map (𝟙 (op (S.obj B)), S.map a))\n    let φ := (Scheme.Modules.restrictFunctor V.ι).map\n      ((Scheme.Modules.tensorPullback i).map c)\n    let A := (Γ(Y, U.1) : Type u)\n    let R := (V.toScheme.presheaf.stalk z : Type u)\n    let ρ : A →+* R := ((Y.presheaf.germ U.1 (i z.1) hzU) ≫\n      i.stalkMap z.1 ≫ V.ι.stalkMap z).hom\n    letI : Algebra A R := ρ.toAlgebra\n    ∃ (eF : ((Scheme.Modules.restrictFunctor V.ι).obj\n        ((Scheme.Modules.tensorPullback i).obj F)).presheaf.stalk z ≃+\n        R ⊗[A] (ExteriorAlgebra.koszulDualComplex A n f).homology m)\n      (eG : ((Scheme.Modules.restrictFunctor V.ι).obj\n        ((Scheme.Modules.tensorPullback i).obj G)).presheaf.stalk z ≃+\n        R ⊗[A] (ExteriorAlgebra.koszulQuotientDualComplex A (i.ker.ideal U) n f).homology m),\n      ∀ x, eG (φ.stalkLinearMap z x) =\n        (HomologicalComplex.homologyMap\n          (ExteriorAlgebra.koszulCoefficientReduction A (i.ker.ideal U) n f) m).hom.baseChange R\n            (eF x)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T113344-L-3184606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T113344-L-3184606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
