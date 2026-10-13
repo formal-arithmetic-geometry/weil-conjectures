@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-presentation-connecting-map-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7, essential-surjectivity approximation route: the p-th-root differential computation of 07E5, steps 5 and 6; use the connecting map for the chosen presentation directly.",
+   "via": [
+    "lem-weil-pbc-pth-root-presentation-differentials",
+    "lem-weil-pbc-geometrically-regular-h1-injective",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The connecting map for a chosen polynomial presentation is exact and differentiates coefficients",
+ "statement": "Let $R\\to S\\to T$ be homomorphisms of commutative rings. Choose surjective polynomial presentations $P:R[X_\\sigma]\\to S$ and $Q:S[Y_\\iota]\\to T$ with sections [def-weil-pbc-mv-polynomial-ring]. Put $J=\\ker Q$, $H_Q=\\ker(J/J^2\\to T\\otimes_{S[Y]}\\Omega_{S[Y]/S})$, with conormal differential $[g]\\mapsto1\\otimes\\mathrm dg$ [def-weil-pbc-kahler-differentials]. The presentation-level Jacobi-Zariski connecting map $\\delta_{Q,P}:H_Q\\to T\\otimes_S\\Omega_{S/R}$ has image the kernel of $w:T\\otimes_S\\Omega_{S/R}\\to\\Omega_{T/R}$, $w(t\\otimes\\mathrm ds)=t\\,\\mathrm d(s\\cdot1_T)$. Define $c_Q:S[Y]\\to T\\otimes_S\\Omega_{S/R}$ by $c_Q(\\sum_\\alpha b_\\alpha Y^\\alpha)=\\sum_\\alpha Q(Y^\\alpha)\\otimes\\mathrm db_\\alpha$. For $g\\in J$ whose conormal class is a cycle, $\\delta_{Q,P}([g])=c_Q(g)$. In particular $c_Q(bY^\\alpha)=Q(Y^\\alpha)\\otimes\\mathrm db$, $c_Q(b)=1\\otimes\\mathrm db$, and $c_Q(fg)=Q(f)c_Q(g)+Q(g)c_Q(f)$ for all $f,g\\in S[Y]$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), the connecting map for chosen polynomial presentations and exactness at C tensor_B Omega_{B/A}. Read online at https://stacks.math.columbia.edu/tag/00S2; Mathlib supplies the explicit omitted map."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib Algebra.Generators.H1Cotangent.exact_δ_map to Q and P for exactness. Its δ_eq_δAux identifies the connecting map on each cycle represented by g. The coefficient map is δAux; its monomial and constant formulas are δAux_monomial and δAux_C, and its product formula is δAux_mul. These are exactly the stated clauses, with no flatness, finite-type or smoothness assumption.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), the connecting map for chosen polynomial presentations and exactness at C tensor_B Omega_{B/A}. Read online at https://stacks.math.columbia.edu/tag/00S2; Mathlib supplies the explicit omitted map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S2 (lemma-exact-sequence-NL), the connecting map for chosen polynomial presentations and exactness at C tensor_B Omega_{B/A}. Read online at https://stacks.math.columbia.edu/tag/00S2; Mathlib supplies the explicit omitted map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Jacobi Zariski connecting map for polynomial generators coefficient differential exact sequence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Generators.H1Cotangent.δ",
+   "results": "Algebra.Generators.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_eq_δ, Algebra.Generators.H1Cotangent.δ_comp_equiv, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Generators.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ_C",
+   "date": "2026-10-13",
+   "verdict": "exact components read in Mathlib.RingTheory.Kaehler.JacobiZariski"
+  },
+  {
+   "tool": "grep",
+   "query": "δAux|exact_δ_map",
+   "results": "Mathlib/RingTheory/Etale/Kaehler.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+   "date": "2026-10-13",
+   "verdict": "exact components read in Mathlib.RingTheory.Kaehler.JacobiZariski"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.H1Cotangent.δ_eq_δAux, Algebra.Generators.H1Cotangent.δAux_monomial, Algebra.Generators.H1Cotangent.δAux_C, Algebra.Generators.H1Cotangent.δAux_mul",
+  "file": "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+  "line": 370,
+  "how": "Exact, one declaration per clause: exact_δ_map (370) proves image equals kernel for arbitrary chosen generators Q and P; δ_eq_δAux (396) identifies the connecting map on a conormal cycle; δAux_monomial (239), δAux_C (261) and δAux_mul (248) give the coefficient formulas. All signatures and their hypotheses were read in the pinned Mathlib."
+ },
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PthRootPresentationDifferentials",
+  "date": "2026-10-13",
+  "group": "B3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.RingTheory.Kaehler.JacobiZariski",
+  "declaration": "Algebra.Generators.H1Cotangent.exact_δ_map",
+  "declarations": [
+   "Algebra.Generators.H1Cotangent.exact_δ_map",
+   "Algebra.Generators.H1Cotangent.δ_eq_δAux",
+   "Algebra.Generators.H1Cotangent.δAux_monomial",
+   "Algebra.Generators.H1Cotangent.δAux_C",
+   "Algebra.Generators.H1Cotangent.δAux_mul"
+  ],
+  "statement": "lemma exact_δ_map :\n    Function.Exact (δ Q P) (mapBaseChange R S T)",
+  "branch": "mathlib",
+  "by": "B3",
+  "date": "2026-10-13",
+  "note": "The variables R, S, T are commutative rings with compatible algebra structures; Q : Generators S T ι and P : Generators R S σ. The remaining clauses are the additional declarations recorded above. No new Lean file or sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045514-L-124840",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045514-L-124840",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

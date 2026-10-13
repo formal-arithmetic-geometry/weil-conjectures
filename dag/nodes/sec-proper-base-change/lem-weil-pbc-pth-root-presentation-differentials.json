@@ -30,20 +30,19 @@
  ],
  "proof": [
   {
-   "text": "*Notation; $\\mathrm d f_j=0$.* Let $P=A[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring], $f_j=x_j^p-a_j\\in P$ ($a_j$ meaning $a_j\\cdot1_P$), $I=(f_1,\\dots,f_n)\\subseteq P$, and $\\alpha:P\\to A'=P/I$ the quotient map; write $\\bar x_i=\\alpha(x_i)$. By [lem-weil-pbc-polynomial-ring-kahler-basis] $\\Omega_{P/A}$ is free on $\\mathrm dx_1,\\dots,\\mathrm dx_n$ and $\\mathrm df_j=\\sum_k\\frac{\\partial f_j}{\\partial x_k}\\mathrm dx_k=p\\,x_j^{p-1}\\,\\mathrm dx_j=0$, because $\\partial a_j/\\partial x_k=0$ ($a_j$ is a constant) and $p\\cdot1_A=0$. Consequently, for every $g\\in I$, written $g=\\sum_jh_jf_j$ with $h_j\\in P$, the Leibniz rule [def-weil-pbc-kahler-differentials] gives $\\mathrm dg=\\sum_j(h_j\\,\\mathrm df_j+f_j\\,\\mathrm dh_j)=\\sum_jf_j\\,\\mathrm dh_j$, hence $1\\otimes\\mathrm dg=\\sum_j\\alpha(f_j)\\otimes\\mathrm dh_j=0$ in $A'\\otimes_P\\Omega_{P/A}$.",
+   "text": "For P=A[X_j] and I=(X_j^p-C(a_j)), the ZMod p-algebra structure gives p=0 in P. Leibniz and differentiation of constants give d(X_j^p-C(a_j))=0 over A. Submodule.span_induction then proves 1 tensor dg=0 for every g in I: in the scalar case d(rg)=r dg+g dr, and g acts by zero on B=P/I. This is the proved helper relative_relation_zero.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-polynomial-ring-kahler-basis",
     "def-weil-pbc-kahler-differentials"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition 07E5 (more-algebra-proposition-characterization-geometrically-regular), (2) => (4), lines 8785-8825 ('d(x_j^p - a_j) = 0 in Omega_{k[x_1,...,x_n]/k}')"
+    "place": "More on Algebra, proof of Proposition Tag 07E5, (2) => (4) (lines 8785-8825): 'By Algebra, Lemma 00S4 we see that NL_{A'/A} is homotopy equivalent to ... zero differential, i.e. H_1(L_{A'/A}) and Omega_{A'/A} are free of rank n. The Jacobi-Zariski sequence for F_p -> A -> A' ... the jth basis vector of H_1(L_{A'/A}) maps to da_j (x) 1'; tags 00S4 (algebra-lemma-change-base-NL) and 00S2 verified in stacks-project/tags/tags"
    }
   },
   {
-   "text": "*Proof of (1).* Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $A\\to P$ and the ideal $\\mathfrak a=I$, so $C=P/I=A'$: the sequence $I/I^2\\xrightarrow{\\delta}A'\\otimes_P\\Omega_{P/A}\\xrightarrow{w_0}\\Omega_{A'/A}\\to0$, $\\delta(g\\bmod I^2)=1\\otimes\\mathrm dg$, $w_0(c\\otimes\\mathrm dq)=c\\,\\mathrm d\\alpha(q)$, is exact. By step 1, $\\delta=0$, so $w_0$ is injective and surjective, an isomorphism of $A'$-modules, with $w_0(1\\otimes\\mathrm dx_i)=\\mathrm d\\bar x_i$. By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] (with $T=\\{1,\\dots,n\\}$ and the $P$-algebra $S=A'$) the $A'$-module $A'\\otimes_P\\Omega_{P/A}$ is free with basis $1\\otimes\\mathrm dx_1,\\dots,1\\otimes\\mathrm dx_n$. An isomorphism carries a basis to a basis, so $\\Omega_{A'/A}$ is free with basis $\\mathrm d\\bar x_1,\\dots,\\mathrm d\\bar x_n$.",
+   "text": "The conormal map kerCotangentToTensor A P B is zero: lift each conormal class to a kernel representative and use the preceding computation. exact_kerCotangentToTensor_mapBaseChange then makes mapBaseChange A P B injective, while mapBaseChange_surjective makes it surjective. Base-change mvPolynomialBasis A (Fin n) to B and transport along LinearEquiv.ofBijective. Basis.map_apply, Basis.baseChange_apply and map_D identify its vectors with the differentials of the quotient variables. This proves relative_basis.",
    "uses": [
     "lem-weil-pbc-jacobi-zariski-differential-maps",
     "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
@@ -51,72 +50,57 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition 07E5 (more-algebra-proposition-characterization-geometrically-regular), (2) => (4), lines 8785-8825 ('NL_{A'/A} is homotopy equivalent to the complex ... with the zero differential, i.e. ... Omega_{A'/A} [is] free of rank n')"
+    "place": "More on Algebra, proof of Proposition Tag 07E5, (2) => (4) (lines 8785-8825): 'By Algebra, Lemma 00S4 we see that NL_{A'/A} is homotopy equivalent to ... zero differential, i.e. H_1(L_{A'/A}) and Omega_{A'/A} are free of rank n. The Jacobi-Zariski sequence for F_p -> A -> A' ... the jth basis vector of H_1(L_{A'/A}) maps to da_j (x) 1'; tags 00S4 (algebra-lemma-change-base-NL) and 00S2 verified in stacks-project/tags/tags"
    }
   },
   {
-   "text": "*$H_1$ of the presentation $\\alpha$.* The map $\\alpha:P\\to A'$ is a presentation of $A'$ over $A$ in the sense of [lem-weil-pbc-nl-presentation-h1-functoriality], with naive cotangent complex $\\mathrm{NL}(\\alpha):I/I^2\\xrightarrow{\\mathrm d_\\alpha}A'\\otimes_P\\Omega_{P/A}$, $\\mathrm d_\\alpha(g\\bmod I^2)=1\\otimes\\mathrm dg$. By step 1, $\\mathrm d_\\alpha=0$, so $H_1(\\mathrm{NL}(\\alpha))=\\ker\\mathrm d_\\alpha=I/I^2$. As an $A'$-module it is generated by $f_1\\bmod I^2,\\dots,f_n\\bmod I^2$: for $g=\\sum_jh_jf_j\\in I$ one has $g\\bmod I^2=\\sum_j\\alpha(h_j)\\cdot(f_j\\bmod I^2)$.",
+   "text": "Construct the chosen generators Q for the quotient using the actual surjective quotient map and its section. Polynomial extensionality identifies aeval Q.val with the quotient algebra map, hence Q.ker=I. Every conormal class is a cycle by the first step. Use the presentation connecting map and coefficient map c from [lem-weil-pbc-presentation-connecting-map-exact]. The monomial and constant formulas compute c(X_j^p-C(a_j))=-1 tensor d(a_j). No assertion that H1 is free or comparison with the canonical presentation is needed.",
    "uses": [
-    "lem-weil-pbc-nl-presentation-h1-functoriality"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition 07E5 (more-algebra-proposition-characterization-geometrically-regular), (2) => (4), lines 8785-8825 ('Using the presentation A[x_1, ..., x_n] -> A' with kernel (x_j^p - a_j)')"
-   }
-  },
-  {
-   "text": "*Comparison with the canonical presentation.* Let $\\gamma:A[A']\\to A'$, $[c]\\mapsto c$, be the canonical presentation with kernel $I_{A'/A}$, used in [def-weil-pbc-smooth-ring-map] to define $\\mathrm{NL}_{A'/A}$ and $H_1(L_{A'/A})$. It is a presentation in the sense of [lem-weil-pbc-nl-presentation-h1-functoriality] (a polynomial ring on the set $A'$), and $\\mathrm{NL}(\\gamma)$ is $\\mathrm{NL}_{A'/A}$: by [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] $A'\\otimes_{A[A']}\\Omega_{A[A']/A}$ is free on the $1\\otimes\\mathrm d[c]$, and under $1\\otimes\\mathrm d[c]\\mapsto\\mathrm d[c]$ the map $\\mathrm d_\\gamma(g\\bmod I_{A'/A}^2)=1\\otimes\\mathrm dg=\\sum_c\\gamma(\\partial g/\\partial[c])\\otimes\\mathrm d[c]$ becomes $\\delta$ of [def-weil-pbc-smooth-ring-map]; so $H_1(\\mathrm{NL}(\\gamma))=H_1(L_{A'/A})$ as submodules of $I_{A'/A}/I_{A'/A}^2$. Let $\\varphi:P\\to A[A']$ be the $A$-algebra map with $\\varphi(x_i)=[\\bar x_i]$ [def-weil-pbc-mv-polynomial-ring]; then $\\gamma\\circ\\varphi$ and $\\alpha$ are $A$-algebra maps agreeing on the variables, so $\\gamma\\circ\\varphi=\\alpha$ and $\\varphi$ is a morphism of presentations from $\\alpha$ to $\\gamma$ over the identity square ($R=R'=A$, $\\psi=\\mathrm{id}_{A'}$). Choose for every $c\\in A'$ some $\\sigma(c)\\in P$ with $\\alpha(\\sigma(c))=c$ ($\\alpha$ is surjective) and let $\\chi:A[A']\\to P$ be the $A$-algebra map $[c]\\mapsto\\sigma(c)$; then $\\alpha\\circ\\chi=\\gamma$ (agreement on the variables), so $\\chi$ is a morphism of presentations from $\\gamma$ to $\\alpha$. By clause (2) of [lem-weil-pbc-nl-presentation-h1-functoriality], $\\chi\\circ\\varphi$ is a morphism from $\\alpha$ to $\\alpha$ and $\\varphi\\circ\\chi$ one from $\\gamma$ to $\\gamma$, with $(\\chi\\circ\\varphi)_*=\\chi_*\\varphi_*$ and $(\\varphi\\circ\\chi)_*=\\varphi_*\\chi_*$; by clause (1) they equal $(\\mathrm{id}_P)_*$ and $(\\mathrm{id}_{A[A']})_*$, which are identities by clause (2). Hence $\\varphi_*:H_1(\\mathrm{NL}(\\alpha))\\to H_1(L_{A'/A})$, $g\\bmod I^2\\mapsto\\varphi(g)\\bmod I_{A'/A}^2$, is an isomorphism of $A'$-modules. With step 3: $H_1(L_{A'/A})$ is generated as an $A'$-module by the classes $h_j=\\varphi(f_j)\\bmod I_{A'/A}^2$ of $\\varphi(f_j)=[\\bar x_j]^p-a_j\\in I_{A'/A}$, $j=1,\\dots,n$.",
-   "uses": [
-    "def-weil-pbc-smooth-ring-map",
-    "lem-weil-pbc-nl-presentation-h1-functoriality",
-    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
-    "def-weil-pbc-mv-polynomial-ring"
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-presentation-connecting-map-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition 07E5 (more-algebra-proposition-characterization-geometrically-regular), (2) => (4), lines 8785-8825 ('By Algebra, Lemma 00S4 we see that NL_{A'/A} is homotopy equivalent to ...'; here the comparison of the presentation alpha with the canonical one, Algebra 00S1)"
+    "place": "More on Algebra, proof of Proposition Tag 07E5, (2) => (4) (lines 8785-8825): 'By Algebra, Lemma 00S4 we see that NL_{A'/A} is homotopy equivalent to ... zero differential, i.e. H_1(L_{A'/A}) and Omega_{A'/A} are free of rank n. The Jacobi-Zariski sequence for F_p -> A -> A' ... the jth basis vector of H_1(L_{A'/A}) maps to da_j (x) 1'; tags 00S4 (algebra-lemma-change-base-NL) and 00S2 verified in stacks-project/tags/tags"
    }
   },
   {
-   "text": "*The Jacobi-Zariski sequence and the connecting map on $h_j$.* Apply [lem-weil-pbc-jacobi-zariski-homology-sequence] to $\\mathbf F_p\\to A\\to A'$ (its $A,B,C$ being $\\mathbf F_p,A,A'$): the sequence $H_1(L_{A'/A})\\xrightarrow{\\partial}A'\\otimes_A\\Omega_{A/\\mathbf F_p}\\xrightarrow{w}\\Omega_{A'/\\mathbf F_p}\\xrightarrow{z}\\Omega_{A'/A}\\to0$ is exact, where $w(c\\otimes\\mathrm da)=c\\,\\mathrm d(a\\cdot1_{A'})$ and $z(c\\,\\mathrm dc')=c\\,\\mathrm dc'$ are exactly the maps $w,z$ of the statement, and $\\partial(g\\bmod I_{A'/A}^2)=\\sum_\\alpha\\gamma([c]^\\alpha)\\otimes\\mathrm db_\\alpha$ for $g=\\sum_\\alpha b_\\alpha[c]^\\alpha\\in I_{A'/A}$ written in the monomials of $A[A']$ with coefficients $b_\\alpha\\in A$. For $g=\\varphi(f_j)=1\\cdot[\\bar x_j]^p+(-a_j)\\cdot1$ (two distinct monomials, $p\\ge2$: $[\\bar x_j]^p$ with coefficient $1$ and the constant monomial with coefficient $-a_j$) this gives $\\partial(h_j)=\\gamma([\\bar x_j]^p)\\otimes\\mathrm d(1)+\\gamma(1)\\otimes\\mathrm d(-a_j)=-1\\otimes\\mathrm da_j$, since $\\mathrm d(1)=0$ and $\\mathrm d$ is additive [def-weil-pbc-kahler-differentials]. (The source says the $j$-th basis vector maps to $\\mathrm da_j\\otimes1$; with the sign convention of the cited node it maps to $-\\mathrm da_j\\otimes1$, which does not change images.)",
+   "text": "Let epsilon be the stated linear combination map. Ideal-span induction shows c(g) belongs to range epsilon for all g in I. For the generators this is the negative of epsilon(single j 1); addition follows by linearity. For rg use c(rg)=r c(g)+g c(r), where the second term vanishes in B and the first belongs to the B-submodule range epsilon. Every H1 class lifts to a conormal representative g, so its connecting image belongs to range epsilon. Conversely epsilon(single j 1) is the connecting image of the negative relation cycle. Finsupp.range_linearCombination and span_le therefore give equality of the two ranges. Exactness from [lem-weil-pbc-presentation-connecting-map-exact] now gives the first exactness assertion.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence",
-    "def-weil-pbc-kahler-differentials"
+    "lem-weil-pbc-presentation-connecting-map-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition 07E5 (more-algebra-proposition-characterization-geometrically-regular), (2) => (4), lines 8785-8825 ('The Jacobi-Zariski sequence for F_p -> A -> A' is ... unwinding the maps in Algebra, Lemma 00S2, ... the jth basis vector of H_1(L_{A'/A}) maps to da_j (x) 1')"
+    "place": "More on Algebra, proof of Proposition Tag 07E5, (2) => (4) (lines 8785-8825): 'By Algebra, Lemma 00S4 we see that NL_{A'/A} is homotopy equivalent to ... zero differential, i.e. H_1(L_{A'/A}) and Omega_{A'/A} are free of rank n. The Jacobi-Zariski sequence for F_p -> A -> A' ... the jth basis vector of H_1(L_{A'/A}) maps to da_j (x) 1'; tags 00S4 (algebra-lemma-change-base-NL) and 00S2 verified in stacks-project/tags/tags"
    }
   },
   {
-   "text": "*Proof of (2).* $\\partial$ is $A'$-linear and $H_1(L_{A'/A})$ is generated by $h_1,\\dots,h_n$ (step 4), so by step 5 $\\operatorname{im}\\partial$ is the $A'$-submodule generated by $-1\\otimes\\mathrm da_1,\\dots,-1\\otimes\\mathrm da_n$, which is the submodule generated by $1\\otimes\\mathrm da_1,\\dots,1\\otimes\\mathrm da_n$, i.e. $\\operatorname{im}\\varepsilon$ for the $A'$-linear map $\\varepsilon:A'^{\\oplus n}\\to A'\\otimes_A\\Omega_{A/\\mathbf F_p}$, $e_j\\mapsto1\\otimes\\mathrm da_j$. Hence $\\ker w=\\operatorname{im}\\partial=\\operatorname{im}\\varepsilon$; exactness at $\\Omega_{A'/\\mathbf F_p}$ and surjectivity of $z$ are part of the exact sequence of step 5. So $A'^{\\oplus n}\\xrightarrow{\\varepsilon}A'\\otimes_A\\Omega_{A/\\mathbf F_p}\\xrightarrow{w}\\Omega_{A'/\\mathbf F_p}\\xrightarrow{z}\\Omega_{A'/A}\\to0$ is exact.",
+   "text": "Mathlib KaehlerDifferential.exact_mapBaseChange_map (ZMod p) A B and map_surjective (ZMod p) A B give the remaining exactness and surjectivity. Combine these with relative_basis and coefficient_exact to prove the original four conjuncts unchanged.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-homology-sequence"
+    "lem-weil-pbc-kahler-differentials-first-exact-sequence"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition 07E5 (more-algebra-proposition-characterization-geometrically-regular), (2) => (4), lines 8785-8825"
+    "place": "More on Algebra, proof of Proposition Tag 07E5, (2) => (4) (lines 8785-8825): 'By Algebra, Lemma 00S4 we see that NL_{A'/A} is homotopy equivalent to ... zero differential, i.e. H_1(L_{A'/A}) and Omega_{A'/A} are free of rank n. The Jacobi-Zariski sequence for F_p -> A -> A' ... the jth basis vector of H_1(L_{A'/A}) maps to da_j (x) 1'; tags 00S4 (algebra-lemma-change-base-NL) and 00S2 verified in stacks-project/tags/tags"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-polynomial-ring-kahler-basis",
   "def-weil-pbc-kahler-differentials",
   "lem-weil-pbc-jacobi-zariski-differential-maps",
   "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
-  "lem-weil-pbc-nl-presentation-h1-functoriality",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-jacobi-zariski-homology-sequence"
+  "lem-weil-pbc-presentation-connecting-map-exact",
+  "lem-weil-pbc-kahler-differentials-first-exact-sequence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, proof of Proposition 07E5 (more-algebra-proposition-characterization-geometrically-regular), (2) => (4), lines 8785-8825; the source's route through Algebra 00S4 (which needs k -> A flat, k a field) is replaced, for a general F_p-algebra A, by the presentation A[x] -> A' directly, compared with the canonical presentation by Algebra 00S1; the connecting map is computed by unwinding Algebra 00S2 as the source says."
+  "place": "More on Algebra, proof of Proposition Tag 07E5 (2) => (4), the chosen p-th-root presentation and its Jacobi-Zariski connecting images. Direct presentation-level Mathlib exactness replaces the comparison with the canonical presentation. Read online at https://stacks.math.columbia.edu/tag/07E5 and https://stacks.math.columbia.edu/tag/00S2 because the local literature checkout is absent."
  },
  "mathlib_searches": [
   {
@@ -222,5 +206,15 @@
   "group": "E1",
   "result": "pass",
   "note": "p prime [Fact p.Prime]; p·1_A=0 as [Algebra (ZMod p) A] (subsingleton, allows zero ring; CharP A p would strengthen); A'=MvPolynomial (Fin n) A ⧸ span(X_j^p - C a_j); (1) Basis (Fin n) B Ω[B⁄A] with b j = D A B (mk X_j); (2) ε=linearCombination e_j↦1⊗da_j, w=mapBaseChange, z=map (ZMod p) A B B; Exact ε w, Exact w z, Surjective z; #check: Mathlib D/map/mapBaseChange, IsScalarTower inferInstance"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261013T045514-L-124840",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
