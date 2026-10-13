@@ -1,17 +1,20 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group K1
+Authors: SHEAF groups K1 and S1
 -/
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleMapIsoLocus
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkBaseChangeReflectsIso
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkIsoNeighborhood
 
 /-! # Arbitrary base change detects the isomorphism locus
 
-Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), matrix proof; Tag 0BDP,
-final determinant sentence; Tag 0095, tensor formula for pullback.
+Source: Stacks Project, Tag 00O0, Lemma 10.79.4(3), matrix proof; Tag 0BDP,
+final determinant sentence; Tag 0098, tensor formula for pullback stalks.
 -/
 
 @[expose] public section
@@ -22,23 +25,34 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- If a pulled-back vector bundle map is invertible, its topological image lies in
 the explicitly constructed locally invertible open.
-Source: Stacks Project, Tag 05GD, Lemma 10.79.4(3), and Tag 0095.
+Source: Stacks Project, Tags 00O0, 05GF and 0098.
 (blueprint: lem-sc-finite-locally-free-map-iso-locus-pullback)
 
-Proof: Work on simultaneous finite free frames of M and N. At any t of T, an
-inverse after tensor pullback gives an inverse matrix over the residue field k(t).
-The extension from k(h(t)) to k(t) reflects matrix invertibility. In particular the
-ranks at h(t) must agree. On an equal-rank frame with matrix A, det A is therefore
-nonzero in k(h(t)). The principal determinant open contains h(t), and the adjugate
-divided by det A supplies an inverse there. This open is among those in the supremum
-defining moduleMapIsoLocus, proving that h(t) belongs to it. Apply this to every t.
-For zero ranks the determinant is 1, and for empty T image containment is vacuous.
-No reducedness is required: in each local ring, an element whose residue is nonzero
-is a unit. The scalar-extension matrix is identified using the tensor formula of
-Tag 0095; thus the statement concerns tensorPullback rather than another pullback. -/
+Proof: Take a point t of T whose image is the point in the range. The stalk
+functor takes the pulled-back map to an isomorphism. The natural tensor-pullback
+stalk comparison identifies this with extension of the original stalk map along
+O_{W,h(t)} to O_{T,t}; NatIso.isIso_map_iff transports invertibility. The local
+finite-free reflection theorem makes the original map invertible at h(t). The
+stalk inverse extension theorem supplies an open neighbourhood U of h(t) on which
+tensor pullback of the map is invertible. The membership criterion for the union
+moduleMapIsoLocus inserts h(t) into that union. For empty T there is no point in
+the range. The two intermediate arguments allow zero ranks and nonreduced schemes. -/
 theorem range_subset_moduleMapIsoLocus_of_isIso_tensorPullback {W : Scheme.{u}}
     (M N : W.Modules) [M.IsFiniteLocallyFree] [N.IsFiniteLocallyFree] (φ : M ⟶ N)
     {T : Scheme.{u}} (h : T ⟶ W) (hφ : IsIso ((tensorPullback h).map φ)) :
-    Set.range h ⊆ (moduleMapIsoLocus φ : Set W) := by sorry
+    Set.range h ⊆ (moduleMapIsoLocus φ : Set W) := by
+  intro x hx
+  obtain ⟨t, rfl⟩ := hx
+  have := hφ
+  obtain ⟨e, _⟩ := exists_tensorPullback_stalk_iso h t
+  have hp : IsIso ((tensorPullback h ⋙
+      RingedSpace.moduleStalkFunctor T.toRingedSpace t).map φ) := by
+    dsimp only [Functor.comp_map]
+    infer_instance
+  have he := (NatIso.isIso_map_iff e φ).mp hp
+  have hs := isIso_moduleStalkMap_of_isIso_extendScalars M N φ h t he
+  obtain ⟨U, htU, hU⟩ :=
+    exists_isIso_tensorPullback_of_isIso_moduleStalkMap M N φ (h t) hs
+  exact (mem_moduleMapIsoLocus φ (h t)).2 ⟨U, hU, htU⟩
 
 end AlgebraicGeometry.Scheme.Modules

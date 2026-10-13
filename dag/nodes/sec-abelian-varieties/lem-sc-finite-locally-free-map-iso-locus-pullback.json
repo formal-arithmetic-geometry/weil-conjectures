@@ -15,32 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Fix t in T and choose simultaneous finite free frames near h(t). Tensor pullback replaces the matrix by scalar extension. An inverse after pullback therefore gives an inverse over k(t).",
+   "text": "For each t of T, map the given tensor pullback isomorphism through the module stalk functor at t. Transport invertibility across the natural pullback-stalk comparison by NatIso.isIso_map_iff.",
    "uses": [
-    "def-sc-finite-locally-free-sheaf",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-module-stalk-pullback"
    ],
    "elementary": true
   },
   {
-   "text": "The field extension k(h(t)) to k(t) reflects invertibility. The ranks agree and the matrix determinant is nonzero at h(t). On its principal open the adjugate divided by the determinant gives an inverse, so h(t) belongs to the union U_phi. Apply to all t; for empty T the range is empty, and in zero rank the determinant is 1.",
+   "text": "The extended original stalk map is invertible. Reflection along the local scheme stalk map makes the original map invertible at h(t).",
    "uses": [
-    "def-sc-module-map-iso-locus",
-    "def-weil-open-immersion"
+    "lem-sc-finite-locally-free-stalk-base-change-reflects-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the stalk inverse to an open neighbourhood U of h(t). The membership criterion for moduleMapIsoLocus inserts h(t) into the union of invertible opens. Every point in range h has this form.",
+   "uses": [
+    "lem-sc-finite-locally-free-stalk-iso-neighborhood",
+    "def-sc-module-map-iso-locus"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-finite-locally-free-sheaf",
-  "def-pc-module-pullback",
-  "def-sc-module-map-iso-locus",
-  "def-weil-open-immersion"
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sc-finite-locally-free-stalk-base-change-reflects-iso",
+  "lem-sc-finite-locally-free-stalk-iso-neighborhood",
+  "def-sc-module-map-iso-locus"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/05GD",
-  "place": "Lemma 10.79.4(3), matrix proof; Tag 0095, tensor pullback on matrices; explicit formalization of this part of the parent argument"
+  "document": "https://stacks.math.columbia.edu/tag/00O0",
+  "place": "Lemma 10.79.4(3), via stalk scalar-extension reflection and inverse spreading; Tag 0098 supplies the natural tensor-pullback stalk comparison. Lean assembly written by S1."
  },
  "mathlib_searches": [
   {
@@ -124,12 +130,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T225318-L-1808939",
+  "landing": "20261013T004027-L-2492171",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

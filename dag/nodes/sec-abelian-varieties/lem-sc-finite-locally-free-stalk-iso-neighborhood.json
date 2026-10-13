@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-finite-locally-free-stalk-iso-neighborhood",
+ "kind": "statement",
+ "title": "A vector bundle stalk inverse extends to an open neighbourhood",
+ "statement": "Let $W$ be a scheme [def-pc-scheme], let $M,N$ be finite locally free $\\mathcal O_W$-modules [def-sc-finite-locally-free-sheaf], let $\\varphi:M\\to N$, and let $x\\in W$. If the stalk map $\\varphi_x$ [def-pc-module-stalk-functor] is an isomorphism, then there exists an open $U\\subseteq W$ containing $x$ such that the tensor pullback [def-pc-module-pullback] of $\\varphi$ along the open immersion [def-weil-open-immersion] $U\\hookrightarrow W$ is an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05GF",
+  "place": "Lemma 10.79.2, label lemma-map-between-finitely-presented, finite inverse extension; also Tag 00O0(3)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-stalk-functor",
+  "def-pc-module-pullback",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Intersect finite free trivializing neighbourhoods at x. Write the inverse of the stalk map as a finite matrix of germs. Represent all its entries by sections and intersect their finitely many domains.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each entry of the two inverse identities holds as a germ, so the germ equality criterion gives a smaller neighbourhood where it holds as a section. Intersect the finitely many neighbourhoods. The matrix of sections gives a sheaf morphism inverse to the restricted map, since free inclusions and projections determine a morphism. Empty ranks give empty lists of equations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For the open immersion U into W, restriction is naturally isomorphic to tensor pullback, since both are left adjoints of the same pushforward. Naturality transports invertibility to the tensorPullback map in the conclusion.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-stalk-functor",
+  "def-pc-module-pullback",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/05GF",
+  "place": "Explicit stalk formulation of the matrix argument in steps 1 and 2 of lem-sc-finite-locally-free-map-iso-locus-pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism of finite locally free sheaves detected on stalks and scalar extension along local ring homomorphisms",
+   "results": "Internal Server Error; service unavailable. No conclusion drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension along a local homomorphism of local rings reflects isomorphisms of finite free modules",
+   "results": "Eight hits, including ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat and IsLocalRing.split_injective_iff_lTensor_residueField_injective. Faithful flatness is not assumed here, and the split injection lemma only supplies a residue-field algebraic ingredient.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars, CategoryTheory.IsIso",
+   "results": "Zero hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*extendScalars|extendScalars.*isIso|exists.*isIso.*stalk|stalk.*exists.*isIso",
+   "results": "Zero Mathlib hits. Local repository searches found the pullback-stalk natural isomorphism and private coordinate calculations in FiniteLocallyFreeStalkFinrank, but no public theorem with either conclusion.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finite locally free sheaves whose stalk at x is bijective is an isomorphism on an open neighborhood of x",
+   "results": "Eight hits on general stalkwise isomorphism criteria and Zariski-local morphism properties; no pointwise extension theorem for finite locally free sheaf maps.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusPullback",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Universal locally closed Picard locus, determinant isomorphism open (Stacks 0BDP, final sentence): A vector bundle stalk inverse extends to an open neighbourhood",
+   "via": [
+    "lem-sc-finite-locally-free-map-iso-locus-pullback",
+    "lem-sc-finite-locally-free-map-iso-open",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkIsoNeighborhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeStalkIsoNeighborhood.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isIso_tensorPullback_of_isIso_moduleStalkMap",
+  "statement": "theorem exists_isIso_tensorPullback_of_isIso_moduleStalkMap\n    {W : Scheme.{u}} (M N : W.Modules)\n    [M.IsFiniteLocallyFree] [N.IsFiniteLocallyFree] (φ : M ⟶ N) (x : W)\n    (hφ : IsIso ((RingedSpace.moduleStalkFunctor W.toRingedSpace x).map φ)) :\n    ∃ U : W.Opens, x ∈ U ∧ IsIso ((tensorPullback U.ι).map φ)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T004027-L-2492171",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T004027-L-2492171",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

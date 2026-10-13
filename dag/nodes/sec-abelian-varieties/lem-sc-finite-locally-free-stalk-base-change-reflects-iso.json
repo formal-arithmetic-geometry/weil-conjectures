@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-finite-locally-free-stalk-base-change-reflects-iso",
+ "kind": "statement",
+ "title": "Extension along a local scheme stalk map reflects a vector bundle isomorphism",
+ "statement": "Let $W,T$ be schemes [def-pc-scheme], let $M,N$ be finite locally free $\\mathcal O_W$-modules [def-sc-finite-locally-free-sheaf], let $\\varphi:M\\to N$, let $h:T\\to W$, and let $t\\in T$. Write $R=\\mathcal O_{W,h(t)}$ and $S=\\mathcal O_{T,t}$. If $S\\otimes_R\\varphi_{h(t)}$ is an isomorphism, where the stalk map is taken by [def-pc-module-stalk-functor] and extension uses the local ring map $h^\\sharp_t:R\\to S$, then $\\varphi_{h(t)}$ is an isomorphism of $R$-modules.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00O0",
+  "place": "Lemma 10.79.4(3), label lemma-cokernel-flat, matrix proof, applied to local rings"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite free frames near h(t); their germs identify the stalks with finite free modules of ranks m and n over R. Extension of scalars is the same matrix over S. Reduce its inverse modulo the maximal ideal of S.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The local ring map R to S induces a field extension of residue fields. Gaussian elimination shows that scalar extension of a field matrix preserves its rank. Thus m = n and the determinant is nonzero in the residue field of R. In a local ring a nonzero residue means the element is a unit. The adjugate formula gives an inverse over R. The empty matrix gives the zero-rank case.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/00O0",
+  "place": "Explicit stalk formulation of the matrix argument in steps 1 and 2 of lem-sc-finite-locally-free-map-iso-locus-pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism of finite locally free sheaves detected on stalks and scalar extension along local ring homomorphisms",
+   "results": "Internal Server Error; service unavailable. No conclusion drawn.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension along a local homomorphism of local rings reflects isomorphisms of finite free modules",
+   "results": "Eight hits, including ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat and IsLocalRing.split_injective_iff_lTensor_residueField_injective. Faithful flatness is not assumed here, and the split injection lemma only supplies a residue-field algebraic ingredient.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars, CategoryTheory.IsIso",
+   "results": "Zero hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*extendScalars|extendScalars.*isIso|exists.*isIso.*stalk|stalk.*exists.*isIso",
+   "results": "Zero Mathlib hits. Local repository searches found the pullback-stalk natural isomorphism and private coordinate calculations in FiniteLocallyFreeStalkFinrank, but no public theorem with either conclusion.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoLocusPullback",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Universal locally closed Picard locus, determinant isomorphism open (Stacks 0BDP, final sentence): Extension along a local scheme stalk map reflects a vector bundle isomorphism",
+   "via": [
+    "lem-sc-finite-locally-free-map-iso-locus-pullback",
+    "lem-sc-finite-locally-free-map-iso-open",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeStalkBaseChangeReflectsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeStalkBaseChangeReflectsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_moduleStalkMap_of_isIso_extendScalars",
+  "statement": "theorem isIso_moduleStalkMap_of_isIso_extendScalars\n    {W T : Scheme.{u}} (M N : W.Modules)\n    [M.IsFiniteLocallyFree] [N.IsFiniteLocallyFree] (φ : M ⟶ N)\n    (h : T ⟶ W) (t : T)\n    (hφ : IsIso ((ModuleCat.extendScalars (h.stalkMap t).hom).map\n      ((RingedSpace.moduleStalkFunctor W.toRingedSpace (h t)).map φ))) :\n    IsIso ((RingedSpace.moduleStalkFunctor W.toRingedSpace (h t)).map φ)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T004027-L-2492171",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T004027-L-2492171",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
