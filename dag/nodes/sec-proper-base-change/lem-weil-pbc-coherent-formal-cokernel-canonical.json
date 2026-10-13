@@ -5,32 +5,43 @@
  },
  "proof": [
   {
-   "text": "Evaluate the ambient cokernel termwise and use coherent kernel/cokernel closure for each component.",
+   "text": "Evaluation preserves cokernels. Identify each component of the ambient cokernel with the cokernel of the corresponding component of alpha using PreservesCokernel.iso. Apply coherent_kernel_cokernel_sum for cokernel closure and isomorphism invariance to obtain coherence of every component.",
    "uses": [
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
    "elementary": false
   },
   {
-   "text": "Use affine quotient descriptions and ideal-power transition calculations to establish annihilation and the adic transition isomorphisms.",
+   "text": "Prove the general multiplication-image cancellation lemma in any abelian monoidal closed category: for an epimorphism q:F to Q, a map f:Q to H kills the image of J tensor Q to Q if and only if q followed by f kills the image of J tensor F to F. Cancel both image factorizations. Tensor-left preserves epimorphisms by its right adjoint; cancel tensor-left(q), and apply left-unitor naturality and whisker exchange. Specialize this lemma to scheme modules using their existing monoidal closed structure. This replaces the three duplicated private sheaf-module helpers with one genuinely more general proved lemma.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The components of the ambient cokernel projection q are epimorphisms because evaluation preserves colimits. Apply the cancellation lemma to q_n and the identity: annihilation of G_n by I^(n+1) forces its product inclusion into Q_n to be zero. That inclusion is mono, so the ideal product is zero.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix adjacent levels and let p:Q_(n+1) to Q_(n+1)/I^(n+1)Q_(n+1). Naturality of q and the quotient description of the G transition show that Q transition kills the ideal product, giving a map a from this quotient to Q_n by cokernel.desc. The cancellation lemma shows that q_(n+1) followed by p kills the ideal product in G_(n+1); descend through its quotient and the given G quotient isomorphism to a map v:G_n to the quotient of Q_(n+1). The F transition is epi, and naturality of alpha shows alpha_n followed by v is zero. The evaluated ambient cokernel cofork is colimiting, so v descends to b:Q_n to the quotient of Q_(n+1). Cancel p and q_(n+1) to prove a followed by b is the identity. Cancel q_n and the epi G transition to prove b followed by a is the identity. The cokernel descent equation gives p followed by a equal to the Q transition, exactly the required adic condition.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 087X"
+  "by": "agent",
+  "agent": "A3",
+  "date": "2026-10-13",
+  "based_on": "Stacks Project Tag 087X, first sentence of proof (termwise cokernel; details omitted), expanded categorically using image and cokernel universal properties and the source-library tensor-Hom adjunction. Repair: the image cancellation helper is generalized to arbitrary abelian monoidal closed categories; no private theorem from CoherentFormalModule is copied."
  },
  "mathlib_searches": [
   {
@@ -116,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J1",
+  "reviewer": "X-739d9",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T203943-L-830628",
+  "landing": "20261013T005053-L-2551101",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and direct importer compile successfully; theorem signature, proof dependencies, change record, and report match the reviewed delivery."
  }
 }
