@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-finite-relation-quotient-comparison",
+ "kind": "statement",
+ "title": "Quotient comparison for a lifted finite relation matrix",
+ "statement": "A finite relation matrix lifted to a stage has quotient whose scalar extension is isomorphic to the quotient by the original colimit matrix.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7, algebra-lemma-colimit-category-fp-modules, proof of (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Use right exactness of scalar extension and identify the finite free bases; the coefficient equalities identify the induced quotient map.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05N7, algebra-lemma-colimit-category-fp-modules, proof of (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite relation matrix cokernels descend along directed colimits of commutative rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented modules over a directed colimit of rings descend to a stage by lifting a finite presentation matrix",
+   "results": "RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂; ModuleCat.FilteredColimits.M.mk_surjective; Module.FinitePresentation.exists_fin; isFinitelyPresentable; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; ModuleCat.directLimitIsColimit; Module.FinitePresentation.trans",
+   "date": "2026-10-13",
+   "verdict": "No exact match; constructions only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*cokernel.*colimit|exists.*restricted.*hom|tensor.*vanish.*colimit",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; constructions only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of elements in a filtered colimit of commutative rings lifts to one common stage",
+   "results": "Concrete filtered colimit constructions and RingHom.EssFiniteType factorization lemmas; no exact match for either intermediate statement.",
+   "date": "2026-10-13",
+   "verdict": "Use concrete representation and finite receiving stages for the matrix proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Submodule.Quotient",
+   "results": "No hits; unknown identifier Submodule.Quotient. Follow-up grep finds tensorQuotientEquiv and lTensor.equiv, neither the finite matrix comparison with ULift.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor.equiv|tensorQuotientEquiv|baseChange.*cokernel",
+   "results": "Mathlib.LinearAlgebra.TensorProduct.RightExactness and Mathlib.LinearAlgebra.TensorProduct.Quotient supply general tensor-quotient equivalences, not the stated finite matrix comparison. Library search found no duplicate.",
+   "date": "2026-10-13",
+   "verdict": "General ingredients only; remaining comparison needs the finite-free identifications and ULift transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.FiniteRelationCokernelColimit",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Finite-presentation module descent, Tag 05N7, algebra-lemma-colimit-category-fp-modules, proof of (1)",
+   "via": [
+    "lem-pc-fp-module-map-descent-affine"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.FiniteRelationQuotientComparison",
+  "file": "lean/Sheaf/Algebra/FiniteRelationQuotientComparison.lean",
+  "declaration": "ModuleCat.finite_relation_quotient_comparison",
+  "statement": "theorem finite_relation_quotient_comparison\n    {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (F : I ⥤ CommRingCat) (n m : ℕ)\n    (q : (Fin m → (colimit F : CommRingCat)) →ₗ[(colimit F : CommRingCat)]\n      (Fin n → (colimit F : CommRingCat)))\n    (i : I) (qi : (Fin m → F.obj i) →ₗ[F.obj i] (Fin n → F.obj i))\n    (hcoeff : ∀ (j : Fin n) (k : Fin m),\n      (colimit.ι F i).hom (qi (Pi.single k 1) j) = q (Pi.single k 1) j) :\n    Nonempty ((extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj\n        (ModuleCat.of (F.obj i) (ULift.{v} ((Fin n → F.obj i) ⧸ LinearMap.range qi))) ≅\n        ModuleCat.of (colimit F : CommRingCat)\n          (ULift.{v} ((Fin n → (colimit F : CommRingCat)) ⧸ LinearMap.range q)))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T111916-L-3060455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261013T111916-L-3060455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

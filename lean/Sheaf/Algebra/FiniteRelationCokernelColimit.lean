@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.Ring.Colimits
+import Sheaf.Algebra.FiniteRelationMatrixLift
+import Sheaf.Algebra.FiniteRelationQuotientComparison
 
 /-!
 # Descent of a finite relation cokernel
@@ -46,6 +48,8 @@ theorem exists_stage_finite_relation_cokernel
       Nonempty ((extendScalars (CommRingCat.Hom.hom (colimit.ι F i))).obj
         (ModuleCat.of (F.obj i) (ULift.{v} ((Fin n → F.obj i) ⧸ LinearMap.range qi))) ≅
         ModuleCat.of (colimit F : CommRingCat)
-          (ULift.{v} ((Fin n → (colimit F : CommRingCat)) ⧸ LinearMap.range q))) := by sorry
+          (ULift.{v} ((Fin n → (colimit F : CommRingCat)) ⧸ LinearMap.range q))) := by
+  obtain ⟨i, qi, hqi⟩ := exists_stage_finite_relation_matrix F n m q
+  exact ⟨i, qi, finite_relation_quotient_comparison F n m q i qi hqi⟩
 
 end ModuleCat

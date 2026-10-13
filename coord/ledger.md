@@ -12182,3 +12182,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:19 L: merged deliver/R1/Sheaf.AlgebraicGeometry.PicardExternalRightCechExact (stage 3; reviewer PASS; first push; landing 20261013T111915-L-3059923 (interface); batch 20261013T111833; modules 3; new nodes 2)
 - 11:19 L: merged deliver/R1/Sheaf.AlgebraicGeometry.QCqsProjectionMateAffineDescent (stage 3; reviewer PASS; first push; landing 20261013T111915-L-3060073 (interface); batch 20261013T111833; modules 2; new nodes 1)
 - 11:19 L: merged deliver/R2/Sheaf.Algebra.FinitePresentationRestrictedHomColimit (stage 3; reviewer PASS; first push; landing 20261013T111916-L-3060257 (proof); batch 20261013T111833; modules 1; new nodes 0)
+- 11:19 L: merged deliver/R2/Sheaf.Algebra.FiniteRelationCokernelColimit (stage 3; reviewer PASS; first push; landing 20261013T111916-L-3060455 (interface); batch 20261013T111833; modules 3; new nodes 2)
