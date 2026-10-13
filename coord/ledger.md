@@ -12988,3 +12988,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:32 L: merged deliver/G3/Sheaf.Algebra.Homology.FiniteStripConeFiltrationGradedPoint (stage 3; reviewer PASS; first push; landing 20261013T153220-L-1059341 (interface); batch 20261013T153218; modules 4; new nodes 3)
 - 15:32 L: merged deliver/H1/Sheaf.AlgebraicGeometry.DerivedOpenTensorTestObjects (stage 3; reviewer PASS; first push; landing 20261013T153221-L-1059513 (interface); batch 20261013T153218; modules 3; new nodes 2)
 - 15:32 L: merged deliver/H4/Sheaf.AlgebraicGeometry.OpenRestrictionDerivedMonoidal (stage 3; reviewer PASS; first push; landing 20261013T153221-L-1059647 (proof); batch 20261013T153218; modules 1; new nodes 0)
+- 15:32 L: merged deliver/H4/Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint (stage 3; reviewer PASS; first push; landing 20261013T153222-L-1059758 (interface); batch 20261013T153218; modules 2; new nodes 1)

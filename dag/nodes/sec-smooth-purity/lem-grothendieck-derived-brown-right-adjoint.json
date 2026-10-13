@@ -14,20 +14,30 @@
  ],
  "proof": [
   {
-   "text": "for each target object Y, the additive functor H(W) = Hom(F(W), Y) is cohomological by exactness and takes coproducts to products. The Grothendieck Brown argument represents H as follows. Present the abelian category by the Gabriel-Popescu exact localization L from modules over a ring R. Its derived right adjoint RG is fully faithful and L RG is the identity. The functor H L is represented by a module complex E, by Brown representability for the compact generator R. In the triangle M → E → RG(L(E)) → M[1], L(M) = 0, so Hom(M, E) = H(L(M)) = 0. Thus E → RG(L(E)) is a split monomorphism. Via the localization adjunction, H is consequently a natural direct summand of Hom(-, L(E)). The derived category is idempotent complete, so this summand is represented. Finally Yoneda assembles the representing objects for all Y into a functor and the natural representing bijections give the right adjunction. This is the argument of Tags 0F5X and 0F5Y; no compact-generation assertion for D(A) is used.",
+   "text": "Install the standard opposite shifts, pretriangulated structures, and opposite exactness of F as local instances within the proof. For each Y, form H = F.op ⋙ preadditiveYoneda.obj Y. Mathlib homologicality of preadditiveYoneda and exactness of F.op give H.IsHomological. For each discrete indexing category, convert hF to coproduct preservation for the opposite discrete category and hence product preservation by F.op. Yoneda preserves limits; the additive-group forgetful functor reflects them, so preadditiveYoneda preserves products. Composition gives the product-preservation hypothesis for H. These steps are implemented by Mathlib instances and preservesColimitsOfShape_of_equiv, preservesLimitsOfShape_op, and preservesLimitsOfShape_of_reflects_of_preserves.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0F5Y",
-    "place": "injectives-proposition-brown, proof, with the representability argument of Tag 0F5X"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply the cohomological Grothendieck-derived Brown theorem to H with its proven homologicality and product-preservation hypotheses. Its conclusion is definitionally (F.op ⋙ yoneda.obj Y).IsRepresentable.",
+   "uses": [
+    "lem-grothendieck-derived-brown-cohomological-representability"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Thus every object is in F.rightAdjointObjIsDefined. Function extensionality and propositional extensionality identify this property with top. Apply Mathlib Functor.isLeftAdjoint_of_rightAdjointObjIsDefined_eq_top, which constructs the adjoint from the objectwise representing natural bijections by Yoneda.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-grothendieck-derived-brown-cohomological-representability"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "https://stacks.math.columbia.edu/tag/0F5Y",
-  "place": "injectives-proposition-brown"
+  "place": "injectives-proposition-brown, using injectives-lemma-brown (Tag 0F5X); formal assembly through Mathlib PartialAdjoint"
  },
  "mathlib_searches": [
   {
@@ -102,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-4c761",
-  "group": "B2",
+  "reviewer": "COMPILER",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261013T150349-L-808767",
+  "landing": "20261013T153222-L-1059758",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the packet and compile successfully; signatures, DAG records, sorry inventory, report, and axioms satisfy the stage-3 review rules."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
