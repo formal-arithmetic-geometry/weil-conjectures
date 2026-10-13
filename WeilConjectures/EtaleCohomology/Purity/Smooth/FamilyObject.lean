@@ -45,10 +45,11 @@ namespace Scheme.Hom.DeformationToNormalConeData
 
 open _root_.AlgebraicGeometry.Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}} {d : ℕ}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} {d : ℕ}
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
   [HasInvertibleExponent Λ B]
 
+omit [HasTateTwist Λ] in
 /-- Blueprint `sk-lem-geometry` (1), the fibre over `t = 0`: the restriction of the family
 object along the zero section is the section invariant of the normal cone with its zero
 section,
@@ -66,13 +67,14 @@ end Scheme.Hom.DeformationToNormalConeData
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}}
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}}
 
 section Construction
 
 variable {d : ℕ} (g : V ⟶ B) [IsSeparated g] [SmoothOfRelativeDimension d g]
   [HasCompactification g] [HasInvertibleExponent Λ V] (s : B ⟶ V) [IsClosedImmersion s]
 
+omit [HasTateTwist Λ] in
 include d in
 /-- Blueprint `sk-lem-geometry` (3), the punctured trivialisation: over the punctured line
 `j : 𝔾_{m,B} ⊆ 𝔸¹_B` the family object `ℱ = Ls̃^* ω_{g̃}` of the deformation space of `s` is
@@ -115,6 +117,7 @@ variable (n : Type u) (B : Scheme.{u}) {d : ℕ} [IsSeparated (𝔸(n; B) ↘ B)
   [SmoothOfRelativeDimension d (𝔸(n; B) ↘ B)] [HasCompactification (𝔸(n; B) ↘ B)]
   [HasInvertibleExponent Λ 𝔸(n; B)]
 
+omit [HasTateTwist Λ] in
 include d in
 /-- Blueprint `sk-lem-geometry` (4), the family object of the standard pair: for the zero section
 `0` of `𝔸^n_B ⟶ B`, the deformation space is `𝔸^n_{𝔸¹_B}`
@@ -156,7 +159,8 @@ family object is the constant Tate twist,
 
 where `0^* ω = Λ(c)[2c]` is vector-bundle purity for the trivial bundle
 (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`). -/
-theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist.IsNormalized Λ]
+theorem nonempty_iso_familyObject_standardPair_twistShift [HasTateTwist Λ]
+    [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] (c : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
     [LocallyOfFiniteType aB] [HasInvertibleExponent Λ B]
     [SmoothOfRelativeDimension c (𝔸(ULift.{u} (Fin c); B) ↘ B)]
