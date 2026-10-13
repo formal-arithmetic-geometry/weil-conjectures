@@ -19,6 +19,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
+import Sheaf.AlgebraicGeometry.NormalizedInternalHomPullbackComparison
+import Sheaf.AlgebraicGeometry.AffineSectionsPushforwardNormalization
 
 /-!
 REPAIR: Construct affineDerivedExtensionAdjunction and canonicalPullbackAdjunction
@@ -243,6 +245,10 @@ def canonicalTensorHomAdjunction (S : Scheme.{u}) (K : schemeDerivedCategory S) 
         (derivedInternalHom (Opens.grothendieckTopology S) S.toRingedSpace.sheaf)).obj (op K) :=
   (Classical.choose (exists_canonicalTensorHomAdjunction S)) K
 
+set_option linter.unusedVariables false in
+-- The construction is valid without perfectness or quasi-coherence; retain the public API.
+set_option maxHeartbeats 800000 in
+-- Unfolding affine scalar restriction comparisons requires extra elaboration heartbeats.
 /-- The canonical comparison is specified by four equations, not mere existence of
 an arrow. Gamma satisfies the evaluation-mate equation of the shared internal-Hom
 pullback adjunction; s is the identity on underived sections; c commutes with the
@@ -347,7 +353,38 @@ theorem exists_globalHomPullbackComparison
             (pullback f g).toRingedSpace.sheaf).obj
               (op ((derivedPullback (pullback.fst f g)).obj M),
                 (derivedPullback (pullback.fst f g)).obj K)) := by
-  sorry
+  let a := canonicalPullbackAdjunction (pullback.fst f g)
+  let bS := canonicalTensorHomAdjunction X
+  let bT := canonicalTensorHomAdjunction (pullback f g)
+  have hS : IsCanonicalDerivedTensorHom X
+      (fun A K L => ((bS K).homEquiv A L).symm) :=
+    (Classical.choose_spec (exists_canonicalTensorHomAdjunction X)).1
+  have hT : IsCanonicalDerivedTensorHom (pullback f g)
+      (fun A K L => ((bT K).homEquiv A L).symm) :=
+    (Classical.choose_spec (exists_canonicalTensorHomAdjunction (pullback f g))).1
+  have h₀ := @exists_normalizedInternalHomPullbackComparison.{u, w}
+    ‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))›
+    (pullback f g) X (pullback.fst f g)
+  have h₁ := h₀ a
+  have h₂ := h₁ bS
+  have h₃ := h₂ bT
+  have h₄ := h₃ hS
+  have h₅ := h₄ hT
+  obtain ⟨t, γ, ht, hγ⟩ := h₅
+  have hs₀ := @exists_affineSectionsPushforwardNormalization.{u, w}
+    ‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))›
+    ‹∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)› R B X f g
+  dsimp only at hs₀
+  rcases hs₀ with ⟨s, c, hs, hc⟩
+  exact ⟨(affineDerivedGlobalSections f).map (γ.app (op M, K)) ≫
+      c.hom.app
+        ((derivedInternalHom (Opens.grothendieckTopology (pullback f g).toRingedSpace)
+          (pullback f g).toRingedSpace.sheaf).obj
+            (op ((derivedPullback (pullback.fst f g)).obj M),
+              (derivedPullback (pullback.fst f g)).obj K)),
+    a, bS, bT, t, γ, s, c, rfl, (fun _ => rfl), (fun _ => rfl), ht, hγ, hs, hc, rfl⟩
 
 /-- Restricted global sections of gamma followed by the canonical pushforward comparison.
 The chosen phi satisfies all equations of exists_globalHomPullbackComparison.

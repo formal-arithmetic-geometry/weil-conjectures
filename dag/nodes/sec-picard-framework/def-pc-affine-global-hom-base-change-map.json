@@ -32,29 +32,39 @@
  },
  "proof": [
   {
-   "text": "Partial stage-3 proof: for exists_canonicalTensorHomAdjunction, use the chosen canonical tensor-Hom family. Specialize its three-variable naturality to the first and third variables with the middle variable fixed. Feed the inverse equivalences into Mathlib Adjunction.mkOfHomEquiv. Its homEquiv is the specified inverse family, so the canonical representative characterization transfers unchanged. Adjunction.homEquiv_symm_id identifies the counit with the canonical family applied to identity. The obligation exists_globalHomPullbackComparison remains open with its existing Lean docstring plan; this step does not prove the entire definition node.",
+   "text": "For exists_canonicalTensorHomAdjunction, use the chosen canonical tensor-Hom family. Specialize its three-variable naturality to the first and third variables with the middle variable fixed. Feed the inverse equivalences into Mathlib Adjunction.mkOfHomEquiv. Its homEquiv is the specified inverse family, so the canonical representative characterization transfers unchanged. Adjunction.homEquiv_symm_id identifies the counit with the canonical family applied to identity.",
    "uses": [
     "def-pc-canonical-derived-tensor-hom-bijection"
    ],
    "elementary": false
   },
   {
-   "text": "For exists_affineDerivedExtension, specialize mixedTensor_kFlat_quasiIso to the B-module tensor unit in degree zero. Use CochainComplex.map₂HomologicalComplexFlipObjSingleIso and the left unitor, with naturality and Arrow.isoMk, to transport its first quasi-isomorphism clause to termwise extension of scalars. This supplies Functor.PreservesKFlatQuasiIso. Apply the existing source-library Adjunction.derivedAdjunction to ModuleCat.extendRestrictScalarsAdj, using ModuleCat functorial flat resolutions and K-injective resolutions. Restriction is exact, so transport its right derived functor along rightDerivedFunctorIsoMapDerivedCategory by Adjunction.ofNatIsoRight. The existential witness is the source-library leftDerivedFunctor, not arbitrary data from a new existence theorem. The global comparison remains unproved; its complete plan stays in the original Lean docstring.",
+   "text": "For exists_affineDerivedExtension, specialize mixedTensor_kFlat_quasiIso to the B-module tensor unit in degree zero. Use CochainComplex.map₂HomologicalComplexFlipObjSingleIso and the left unitor, with naturality and Arrow.isoMk, to transport its first quasi-isomorphism clause to termwise extension of scalars. This supplies Functor.PreservesKFlatQuasiIso. Apply the existing source-library Adjunction.derivedAdjunction to ModuleCat.extendRestrictScalarsAdj, using ModuleCat functorial flat resolutions and K-injective resolutions. Restriction is exact, so transport its right derived functor along rightDerivedFunctorIsoMapDerivedCategory by Adjunction.ofNatIsoRight. The existential witness is the source-library leftDerivedFunctor, not arbitrary data from a new existence theorem.",
    "uses": [
     "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix a as canonicalPullbackAdjunction and bS,bT as canonicalTensorHomAdjunction. The chosen-spec equations supply IsCanonicalDerivedTensorHom for both inverse Hom families. Apply exists_normalizedInternalHomPullbackComparison to these fixed adjunctions, obtaining t and gamma with the canonical tensor predicate and evaluation-mate equation. Apply exists_affineSectionsPushforwardNormalization to obtain the identity s on underived sections and c with the exact right-derived-unit equation. Define phi explicitly as restricted derived global sections of gamma followed by c, and assemble the existential witnesses and all eight required equations. Perfectness, quasi-coherence and qcqs are not needed for the construction, but every original hypothesis stays in the signature.",
+   "uses": [
+    "lem-pc-normalized-internal-hom-pullback-comparison",
+    "lem-pc-affine-sections-pushforward-normalization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-canonical-derived-tensor-hom-bijection",
-  "lem-pc-mixed-tensor-kflat-quasi-iso"
+  "lem-pc-mixed-tensor-kflat-quasi-iso",
+  "lem-pc-normalized-internal-hom-pullback-comparison",
+  "lem-pc-affine-sections-pushforward-normalization"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "G2",
+  "group": "N2",
   "date": "2026-10-13",
-  "note": "Partial Lean proof: preserve the previously landed tensor-Hom adjunction proof, and prove scalar-extension adjunction using Stacks Tags 064L and 06Y6 and the source-library DerivedCategory/Adjunction.lean. Only exists_globalHomPullbackComparison remains sorry."
+  "note": "Complete Lean assembly of the global comparison, with two proved normalized helpers and no new holes. Preserve the previously landed scalar-extension and tensor-Hom adjunction proofs."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -167,13 +177,13 @@
   "note": "independent Codex review: Matched qcqs schemes, affine bases, pullback projections, stalkwise Tor independence, perfect M, unbounded QCoh K, and the canonical comparison in D(B); all earlier normalization repairs are present, and both modules compile together cleanly in 25.6 s."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T223405-L-1636623",
-  "kind": "proof",
+  "landing": "20261013T045544-L-132877",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

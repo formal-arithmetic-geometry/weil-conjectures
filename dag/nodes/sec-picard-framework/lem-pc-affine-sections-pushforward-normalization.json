@@ -1,0 +1,168 @@
+{
+ "id": "lem-pc-affine-sections-pushforward-normalization",
+ "kind": "statement",
+ "title": "Affine scalar compatibility of sections of a derived pushforward",
+ "status": "split",
+ "statement": "Let R,B be commutative rings, X a scheme [def-pc-scheme], f:X→Spec R, g:Spec B→Spec R, and X′ the fibre product [def-pc-fibre-product]. Put rho=GammaSpec_R.inv followed by g.appTop followed by GammaSpec_B.hom. Let G be sections on X restricted to R along f, H sections on X′ restricted to B along the second projection, DG and DH their global-section right derived functors followed by exact restriction [def-pc-global-derived-rhom], and uG,uH the exact-restriction right-derived comparisons. There exist s:(g_X)* followed by G ≅ H followed by restriction along rho and c:R(g_X)* followed by DG ≅ DH followed by derived exact restriction [def-pc-derived-direct-image]. The map s.hom is identity on every element of sections. For every homotopy complex J, the composite right-derived unit for ((g_X)*,G), followed by uG and c at Qh(J), equals Qh(s.hom on J), followed by the unit for H followed by restriction, and uH. This retains the R action and pins c to the right-derived units; no qcqs, Tor-independence, perfectness, boundedness or quasi-coherence is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-global-derived-rhom",
+  "def-pc-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D5T (composition), 08D5 proof of (2) (sections comparison), and 0AA7 (affine scalar restriction)"
+ },
+ "proof": [
+  {
+   "text": "Expand the two scalar ring maps. Cancel GammaSpec_B.hom followed by GammaSpec_B.inv and use Scheme.Hom.comp_appTop and pullback.condition. The resulting equality delta composed with alpha = beta composed with rho identifies the two restrictions. Use ModuleCat.restrictScalarsComp and restrictScalarsComp', whiskered by sections on X′, to construct s. Both maps act identically on elements. The direct-image/sections composite is definitionally the same underived restriction composite.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use isIso_directImage_globalSections_unit_on_kInjective for g_X. The private helper exactComp_unit_isIso uses rightDerivedUnique to compare the unit for global sections followed by exact R restriction with the composite unit; the latter is invertible since exact restriction has invertible unit everywhere and it preserves isomorphisms. Thus the unit for G is invertible on (g_X)*I for every K-injective I. The private helper composite_isRightDerived_of_acyclic uses the K-injective localizer derivability criterion: both factors of the composite unit are invertible on I, so the composite RF followed by RG is itself a right-derived functor.",
+   "uses": [
+    "lem-pc-direct-image-global-sections-kinjective-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let eD:R(F followed by G) ≅ RF followed by RG be rightDerivedUnique. Define c by whiskering uG inverse with RF, then eD inverse, then rightDerivedFunctorNatIso s, then uH. Its sources and targets are exactly DG and DH with the specified restrictions. The rightDerivedNatTrans_app identity for eD says the underived-composite unit followed by eD.hom is the composite unit. Cancel eD.inv and uG.inv in the displayed equation. Apply rightDerivedNatTrans_app to s; the remaining whiskerRight app and Qh.map are definitionally equal. This proves the exact unit equation, for every J, not merely K-injectives.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-direct-image-global-sections-kinjective-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0D5T (composition), 08D5 proof of (2) (sections comparison), and 0AA7 (affine scalar restriction); explicit naturality and unit-factorization calculations implemented by N2"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural comparison derived global sections pushforward with restriction of scalars",
+   "results": "; hits: SheafOfModules.pushforwardSections_coe, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived normalized comparison; use generic adjunction and scalar-restriction tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv",
+   "results": "loogle: unknown identifier 'Adjunction.homEquiv'; hits: ",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived normalized comparison; use generic adjunction and scalar-restriction tools."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*[Cc]omp|[Cc]omp.*globalSections|canonical.*[Pp]ullback.*[Hh]om",
+   "results": "; hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived normalized comparison; use generic adjunction and scalar-restriction tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural derived internal Hom pullback comparison tensor Hom adjunction evaluation",
+   "results": "service unavailable: Internal Server Error; hits: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*pullback|pullback.*internalHom|rightDerivedFunctorCompUnit",
+   "results": "; hits: Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived normalized comparison; use generic adjunction and scalar-restriction tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback internal Hom evaluation mate from tensor Hom adjunction",
+   "results": "; hits: CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.MonoidalClosed.pre, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.coev_app_comp_pre_app",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived normalized comparison; use generic adjunction and scalar-restriction tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived global sections pushforward scalar restriction canonical unit comparison",
+   "results": "service unavailable: Internal Server Error; hits: ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*pushforward|pushforward.*globalSections|restrictScalarsComp",
+   "results": "; hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-derived normalized comparison; use generic adjunction and scalar-restriction tools."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tags 0D5T (composition), 08D5 proof of (2) (sections comparison), and 0AA7 (affine scalar restriction)",
+   "via": [
+    "def-pc-affine-global-hom-base-change-map",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSectionsPushforwardNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSectionsPushforwardNormalization.lean",
+  "declaration": "AlgebraicGeometry.exists_affineSectionsPushforwardNormalization",
+  "statement": "theorem exists_affineSectionsPushforwardNormalization {R B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) : let ρ := ((Scheme.ΓSpecIso R).inv ≫ g.appTop ≫ (Scheme.ΓSpecIso B).hom).hom let r := ModuleCat.restrictScalars.{u} ((Scheme.ΓSpecIso R).inv ≫ f.appTop).hom let b := ModuleCat.restrictScalars.{u} ((Scheme.ΓSpecIso B).inv ≫ (pullback.snd f g).appTop).hom let G := RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙ r let H := RingedSpace.globalSectionsFunctor (pullback f g).toRingedSpace ⋙ b let DG := schemeDerivedGlobalSections X ⋙ r.mapDerivedCategory let DH := schemeDerivedGlobalSections (pullback f g) ⋙ b.mapDerivedCategory let uG := Functor.rightDerivedFunctorCompMapDerivedCategoryIso (RingedSpace.globalSectionsFunctor X.toRingedSpace) r let uH := Functor.rightDerivedFunctorCompMapDerivedCategoryIso H (ModuleCat.restrictScalars.{u} ρ) ≪≫ Functor.isoWhiskerRight (Functor.rightDerivedFunctorCompMapDerivedCategoryIso (RingedSpace.globalSectionsFunctor (pullback f g).toRingedSpace) b) (ModuleCat.restrictScalars.{u} ρ).mapDerivedCategory ∃ (s : RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom ⋙ G ≅ H ⋙ ModuleCat.restrictScalars.{u} ρ) (c : schemeDerivedDirectImage (pullback.fst f g) ⋙ DG ≅ DH ⋙ (ModuleCat.restrictScalars.{u} ρ).mapDerivedCategory), (∀ (F : SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) (x : (H).obj F), (s.hom.app F) x = x) ∧ (∀ J : HomotopyCategory (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) (ComplexShape.up ℤ), (Functor.rightDerivedFunctorCompUnit (RingedSpace.moduleDirectImage (pullback.fst f g).toLRSHom.toShHom) (G)).app J ≫ uG.hom.app ((schemeDerivedDirectImage (pullback.fst f g)).obj (DerivedCategory.Qh.obj J)) ≫ c.hom.app (DerivedCategory.Qh.obj J) = DerivedCategory.Qh.map ((s.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫ (H ⋙ ModuleCat.restrictScalars.{u} ρ).rightDerivedFunctorUnit.app J ≫ uH.hom.app (DerivedCategory.Qh.obj J))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T045544-L-132877",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T045544-L-132877",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

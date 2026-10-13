@@ -11140,3 +11140,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/M3/Sheaf.AlgebraicGeometry.GeometricGenericCoverModel (stage 3; reviewer PASS; first push; landing 20261013T045542-L-132423 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:55 L: merged deliver/M3/Sheaf.CategoryTheory.ColimitStageKanCocone (stage 3; reviewer PASS; after a return; landing 20261013T045543-L-132584 (interface); batch 20261013T045507; modules 2; new nodes 1)
 - 04:55 L: merged deliver/N1/Sheaf.AlgebraicGeometry.PicardUniversalRankMatchConjunction (stage 3; reviewer PASS; first push; landing 20261013T045543-L-132725 (proof); batch 20261013T045507; modules 1; new nodes 0)
+- 04:55 L: merged deliver/N2/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261013T045544-L-132877 (interface); batch 20261013T045507; modules 3; new nodes 2)
