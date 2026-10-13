@@ -13,26 +13,39 @@
  },
  "proof": [
   {
-   "text": "Choose a free A-resolution Q of N. Natural Tor symmetry and the resolution computation identify Tor_j(B,N) and Tor_j(C,N) with H_j(B tensor_A Q) and H_j(C tensor_A Q). Tensor-localization compatibility identifies C tensor_A Q with localization of B tensor_A Q. Represent x by a cycle in that localization. Clear its denominator to get a chain z over B; since dz becomes zero, multiply by another denominator to annihilate dz. The resulting chain is a cycle over B, defining y. The product s of the denominators belongs to S and its image u in C is a unit. Thus u times the original class is the image of y. Naturality of the resolution computation and of symmetry translates these two maps to the Tor maps in the statement. This is the elementwise surjectivity part of localization of homology; no vanishing or finiteness hypothesis is used.",
+   "text": "Choose a projective A-resolution P of N. Use the natural isomorphism Tor′ ≅ (Tor′).flip from lem-weil-pbc-tor-symmetry, then ProjectiveResolution.isoLeftDerivedObj for tensorRight. Naturality of the symmetry and ProjectiveResolution.leftDerived_app_eq give an identification of Tor_j(M,N) with H_j(P tensor_A M) commuting with every coefficient map M → M′.",
    "uses": [
     "def-weil-pbc-tor-modules",
-    "lem-weil-pbc-tor-symmetry",
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-localization-tensor-product"
+    "lem-weil-pbc-tor-symmetry"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each module P_i, swap tensor factors and apply Mathlib IsLocalizedModule.rTensor to the localization map B → C. This is the tensor-localization compatibility of lem-weil-pbc-localization-tensor-product (heterobasic rTensor form, tensoring over A while localizing the coefficient B). IsLocalizedModule.surj clears a denominator of each element, and IsLocalizedModule.exists_of_eq clears an element of the kernel. Swapping back expresses these equations using the coefficient multiplication maps.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the homology class by a cycle v using surjectivity of homologyπ. Clear its denominator s to obtain z over B. Commutation of the coefficient map and multiplication maps with the differentials shows that dz lies in the kernel of localization. Clear this kernel element with a second denominator s′; then s′z is a cycle. The product s′s lies in S, and IsLocalization.map_units supplies its image as a unit u of C. Naturality of cyclesMap and homologyMap identifies multiplication by u on the original class with the image of the homology class of s′z. Transport the resulting equation through the coefficient-natural Tor computation isomorphisms, using injectivity of an isomorphism and its inverse identities.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-tor-modules",
   "lem-weil-pbc-tor-symmetry",
-  "lem-weil-pbc-localization-module-exact",
-  "lem-weil-pbc-localization-tensor-product"
+  "lem-weil-pbc-localization-tensor-product",
+  "def-weil-pbc-module-localization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0B67, lemma-tor-amplitude-localization, localized derived-tensor homology identity in its proof; specialized to B in degree zero and expanded to clearing denominators of classes; expansion by Q1, source read online https://stacks.math.columbia.edu/tag/0B67"
+  "place": "Tag 0B67, lemma-tor-amplitude-localization, localized derived-tensor homology identity in its proof; cycle-level expansion implemented by J1 with IsLocalizedModule.rTensor, surj and exists_of_eq; source read at https://stacks.math.columbia.edu/tag/0B67 on 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -116,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q1",
+  "reviewer": "X-00333",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T111912-L-3058997",
+  "landing": "20261013T121510-L-3529412",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module and sole importer compiled cleanly; theorem statement unchanged; proof uses only permitted axioms; interface changes are recorded and validated."
  }
 }
