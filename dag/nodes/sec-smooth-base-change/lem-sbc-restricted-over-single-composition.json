@@ -15,11 +15,23 @@
  ],
  "proof": [
   {
-   "text": "Substitute ha to replace the third arrow by g followed by f. Expand the\nthree explicit transition homs. The second pullback projections satisfy the\ncommuting triangles with f.left, g.left, and their composite. Apply the associativity\nlaw of upperStarComp to these triangles and to the structure arrows to W. Naturality\nmoves each sheaf comparison across inverse image, and the inverse comparisons\ncancel. Thus the composite of the two coefficient maps is the coefficient map\nfor the composite, preceded by upperStarComp for the restricted maps. Applying\nthe single functor and naturality of mapCochainComplexSingleFunctor gives the stated\ncomplex identity. Its composition compatibility is checked in degree zero, where\nit is the original functor composition identity; in other degrees the source is\nzero. Transport along hq identifies the composite restricted map with that for a.\nNo cone, limiting property, or category structure on an indexing type is required;\nzero sheaves, empty schemes and identity arrows satisfy the same calculation.",
+   "text": "Name the three restricted maps qf,qg,qa and second projections rA,rB,rC. The pullback projection equations give qa ≫ rA = rC ≫ a.left, qg ≫ rB = rC ≫ g.left, and qf ≫ rA = rB ≫ f.left. The hypothesis ha gives a.left = g.left ≫ f.left. Name the inverse-image comparison isomorphisms ef,eg,ea for f.left,A.hom; g.left,B.hom; and a.left,A.hom. Associativity of upperStarComp, followed by cancellation of ef and eg, gives the identity coefficient map on C as ea.hom followed by the g,f comparison, g inverse image of ef.inv, and eg.inv.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the proved local square_coefficient calculation to rC, a.left, g.left, f.left, qa, qg, qf, rA, rB, and the preceding identity. Its square_triangle helper follows from three applications of upperStarComp associativity and cancellation; naturality moves the coefficient maps across the comparisons. The resulting identity is 1 = Ei.hom ≫ upperStarComp(qg,qf,qa).hom ≫ qg inverse image of the restricted coefficient for f ≫ Ej.inv. Ei and Ej are obtained from rC inverse image of ea and eg by the second-projection square comparisons. Their inverses are precisely the explicit restricted coefficients for a and g.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel Ei.hom in the coefficient identity using the proved local inverse_eq_of_triangle lemma to obtain Ei.inv = upperStarComp(qg,qf,qa).hom followed by qg inverse image of the restricted coefficient for f and Ej.inv. Apply HomologicalComplex.hom_ext to the desired complex identity. In degree zero, expose the explicit transition homs with restricted_single_iso_hom, proved using the defining equation restrictedOverSingleIso.eq_1 and asIso_hom. Mathlib component formulas evaluate mapHomologicalComplex, mapHomologicalComplex of the natural comparison, and the inverse-image single comparison. The proved private single_map_zero evaluates singleFunctor maps. The degree-zero evaluation isomorphisms become identities; cancel the identity morphisms. Unfold the explicit coefficient maps and Ei.inv, Ej.inv, using Iso.trans_inv and mapIso_inv. The resulting equation is exactly the cancelled coefficient identity. In every other degree, the target is a single complex with zero component, so isZero_single_obj_X.eq_of_tgt proves equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -28,7 +40,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project and library inverse-image coherence",
-  "place": "09Z1 affine-object restriction and 0EZM coefficient transition compatibility; explicit unit/associativity calculation"
+  "place": "Tags 09Z1, 0EZM and 03CB; explicit Lean associativity and square naturality calculations adapted from the proved private geometric helpers of RestrictedAffineSingleConeNaturality, followed by a direct degree-zero/zero-target complex calculation (X3, 2026-10-13)"
  },
  "mathlib_searches": [
   {
@@ -122,11 +134,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-dcce6",
-  "group": "B2",
+  "reviewer": "X-ea4c5",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261013T143543-L-559896",
+  "landing": "20261013T161323-L-1424713",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, node statements, change record, report, and downstream importer matched the review brief; all delivered modules and the direct importer compile successfully."
+  "note": "independent Codex review: Matched the unchanged theorem signature with its node, the proof with the recorded route and dependencies, and local attributes with their change record; delivered module and sole direct importer compile cleanly, and all seven proved declarations use only permitted axioms."
  }
 }
