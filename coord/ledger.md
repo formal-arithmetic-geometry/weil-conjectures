@@ -13310,3 +13310,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:11 L: merged deliver/K1/Sheaf.Paper.CechRefinementResolutionDiagram (stage 3; reviewer PASS; first push; landing 20261013T181108-L-2603015 (interface); batch 20261013T181050; modules 2; new nodes 1)
 - 18:11 L: merged deliver/K2/Sheaf.Algebra.Homology.ResidueKernelUnitMinor (stage 3; reviewer PASS; first push; landing 20261013T181108-L-2603170 (interface); batch 20261013T181050; modules 4; new nodes 3)
 - 18:11 L: merged deliver/K2/Sheaf.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale (stage 3; reviewer PASS; first push; landing 20261013T181109-L-2603378 (interface); batch 20261013T181050; modules 2; new nodes 1)
+- 18:11 L: merged deliver/K3/Sheaf.AlgebraicGeometry.FinitePresentationChartMapZeroEventually (stage 3; reviewer PASS; first push; landing 20261013T181110-L-2603579 (proof); batch 20261013T181050; modules 1; new nodes 0)

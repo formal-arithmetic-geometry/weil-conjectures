@@ -15,25 +15,29 @@
  ],
  "proof": [
   {
-   "text": "The map X_k→X_j is affine, being a base change of a map of spectra. Its inverse image W of the affine chart U.X a is affine. The structural map b:W→Spec(R_k) is consequently quasi-compact. Pull W back along the identity map of Spec(R_k); the first projection is an isomorphism. Transport F,G,δ to that pullback. Finite type, quasi-coherence and finite presentation are invariant under this isomorphism.",
+   "text": "Let V be U pulled back to X_k and W=V.X a. Its structural map is b=V.f a followed by pullback.snd to Spec(R_k). isPullback_baseChangeMap and stability of IsAffineHom under base change prove that X_k→X_j is affine; the affine-chart pullback instance proves W affine, hence b quasi-compact. Keep the exact self-stage arrow t₀=Spec(R.map(homOfLE(k≤k))) and prove t₀=id. Construct F₀,G₀,δ₀ by tensor pullback along p=pullback.fst b t₀. Use tensorPullback_isFiniteType for F₀; use the tensor/native adjoint comparison and the proved source instances isQuasicoherent_pullback and isFinitePresentation_pullback for the other properties.",
    "uses": [
     "def-pc-base-change",
     "def-pc-local-overlap-transitions",
-    "pqf-def-coherent"
+    "pqf-def-coherent",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-finite-type"
    ],
    "elementary": false
   },
   {
-   "text": "The limit chart is canonically isomorphic to W×Spec(R_k)c.pt: paste the chart pullback square with the base-change square for X. The same construction at l identifies the stage chart with W×Spec(R_k)Spec(R_l). The maps to W are the canonical cover projection and overlapRefinementHom respectively, because both pullback projections agree. On modules, pullbackComp and pullbackCongr give the corresponding natural comparisons. The tensor pullback defining moduleBaseChange and native pullback are naturally isomorphic by uniqueness of left adjoints to module pushforward; naturality preserves and reflects zero equations.",
+   "text": "Prove the comparison for any cartesian square IsPullback q s b t, with t≫t₀=t. Let g=baseChangeMap b (Over.homMk t) from the t-base change to the t₀-base change. Its composite with p is pullback.fst b t. nonempty_tensorPullbackAdjunction and pullbackPushforwardAdjunction, followed by Adjunction.leftAdjointUniq, compare each tensor pullback with native pullback. Naturality of a natural isomorphism and cancellation of its component isomorphisms preserve and reflect the equation map δ=0. pullbackComp identifies the composite pullback. The cartesian square gives isoPullback with hom followed by the first projection equal to q. Pullback along this scheme isomorphism reflects zero: pull back further along its inverse, use pullbackComp and inv_hom_id. Thus base change of δ₀ is zero if and only if native pullback of δ along q is zero. These are the proved private helpers in the delivered module; no existence witness for a module is chosen.",
    "uses": [
     "def-pc-base-change",
-    "def-pc-local-overlap-transitions"
+    "def-pc-module-pullback"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply finitePresentation_zero_map_descent to b with initial indices both k and to the transported source, target and map. The preceding limit comparison turns the hypothesis into the required limit-zero equation. Zero-map descent supplies l≥k. The stage comparison turns its conclusion into vanishing along the prescribed canonical refinement chart map. Zero modules and empty affine charts are covered without modification.",
+   "text": "The pullback-cover square for V along overlapLimitMap, pasted vertically with isPullback_baseChangeMap, is cartesian over b and c.π_k. Apply the previous comparison to hδ. Apply finitePresentation_zero_map_descent R c hc k b k (le_refl k) to the constructed models and δ₀; obtain l≥k and its base-change zero equation. For the finite-stage chart, IsPullback.of_right cancels the original chart square from the later chart square: overlapRefinementHom_map and overlapRefinementHom_comp verify the two projections and overlapStageMap_comp verifies the base composite. Paste this square vertically with the finite-stage base-change square. The same comparison turns the supplied zero equation into vanishing along the required overlapRefinementHom. All arguments also cover zero modules, empty charts, and singleton directed systems.",
    "uses": [
+    "def-pc-base-change",
+    "def-pc-local-overlap-transitions",
     "lem-pc-fp-zero-map-descent"
    ],
    "elementary": false
@@ -43,12 +47,14 @@
   "def-pc-base-change",
   "def-pc-local-overlap-transitions",
   "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-finite-type",
   "lem-pc-fp-zero-map-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZR (3), affine vanishing; explicit pullback comparison glue in steps 1–2 of lem-pc-fp-overlap-diagonal-eventually"
+  "place": "Tag 01ZR (3), first proof (affine vanishing); canonical chart comparison glue formalized using pullback pasting, adjoint uniqueness, and naturality. Tensor pullback is the construction of Stacks Tag 0095."
  },
  "mathlib_searches": [
   {
@@ -130,10 +136,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261013T165637-L-1806701",
-  "kind": "interface",
+  "landing": "20261013T181110-L-2603579",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
