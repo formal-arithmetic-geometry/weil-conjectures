@@ -14,7 +14,14 @@
  },
  "proof": [
   {
-   "text": "Use the defining currying equation [lem-sc-hom-tensor-degreewise] at n+1, then the outer Hom differential projection identity [def-pur-hom-complex]. Evaluate on localized sections x of K^p and y of L^q: the postcomposition term applies the inner differential to f(x); the precomposition term is minus (-1)^n f(d_K x)(y). Apply the inner Hom projection identity to the first term, giving d_M(f(x)(y)) minus (-1)^(p+n) f(x)(d_L y).",
+   "text": "Apply localized pure-tensor extensionality to the two maps into internal Hom from K^p tensor L^q. Evaluation is an additive homomorphism and preserves integer scalar multiplication.",
+   "uses": [
+    "lem-sc-hom-tensor-summand-pure-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the degreewise currying specification and the outer and inner Hom-complex differential projection formulas to expand the left-hand side as target differential minus the two input differentials.",
    "uses": [
     "lem-sc-hom-tensor-degreewise",
     "def-pur-hom-complex"
@@ -22,30 +29,28 @@
    "elementary": false
   },
   {
-   "text": "The tensor summand maps d1 and d2 have the values stated above [def-pc-tensor-complex-sheaves]. Identify the degree-n evaluations using the currying equation [lem-sc-hom-tensor-degreewise]. The integer sign identity (-1)^(p+n)=(-1)^n*(-1)^p makes the localized calculation exactly the three-term formula, with d2 already carrying the sign (-1)^p. This identity also holds for negative n,p.",
+   "text": "Use the pure-tensor summand differential formulas on the right-hand side and apply the degreewise currying equation to each term.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
+    "lem-sc-hom-tensor-pure-differentials",
     "lem-sc-hom-tensor-degreewise"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Bilinearity extends the calculation on pure tensors to the presheaf tensor. The sheafification adjunction and tensor-Hom adjunction [lem-pc-sheaf-modules-tensor-closed] extend equality to the sheaf tensor on each localized site, hence to the internal Hom factor of this summand. No coproduct assembly or combination of d1 and d2 is claimed here. If K,L,M or their differentials vanish the same computation gives zero terms.",
-   "uses": [
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false
+   "text": "Combine (-1)^(p+n)=(-1)^p*(-1)^n with commutation of integer scalar multiplication. Abelian-group rearrangement gives the evaluated equality and extensionality finishes. Integer signs cover negative degrees as well.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-hom-tensor-degreewise",
   "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-sc-hom-tensor-degreewise",
+  "lem-sc-hom-tensor-pure-differentials",
+  "lem-sc-hom-tensor-summand-pure-ext"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "N3",
+  "group": "Q2",
   "date": "2026-10-13",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma sites-cohomology-lemma-compose (Tag 0A90), referring to More on Algebra Tag 0A5Y"
@@ -116,11 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N3",
+  "reviewer": "X-06668",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T040754-L-3950618",
+  "landing": "20261013T100057-L-2477512",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean signatures match all three nodes; existing signature unchanged; proofs and dependencies agree; all delivered modules and the sole direct importer compile cleanly; axiom checks show only permitted axioms and sorryAx from existing open dependencies."
  }
 }

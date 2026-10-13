@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-hom-tensor-summand-pure-ext",
+ "kind": "statement",
+ "title": "Localized pure-tensor extensionality for a single tensor internal Hom",
+ "statement": "Let (C,J) be a site, R a sheaf of commutative rings, and A,B,N,X sheaves of R-modules. Use the internal Hom, tensor and section map from [lem-sc-hom-tensor-degreewise]. Let a,b:X→internalHom(A tensor B,N). Suppose for every U, s in X(U), W→U, x in A(W), y in B(W), the localized maps a_U(s),b_U(s) agree on the section-map image of x tensor y. Then a=b. This tests localized pure tensors, not arbitrary global generation of sheaf tensor sections.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK and Lemma 03EO; tensor and internal-Hom universal properties"
+ },
+ "stmt_deps": [
+  "lem-sc-hom-tensor-degreewise"
+ ],
+ "proof": [
+  {
+   "text": "Form constant graded complexes with A and B in every degree and all differentials zero. The coproduct universal property gives a codiagonal π:T^0→A tensor B whose composite with every summand inclusion is identity.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose a,b by internalHom(π,id). Apply localized total-tensor extensionality; each summand restriction simplifies by the codiagonal identity to the given hypothesis.",
+   "uses": [
+    "lem-sc-hom-tensor-localized-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the arguments along the (0,0) summand inclusion. Contravariant functoriality of internal Hom and the codiagonal identity recover a=b.",
+   "uses": [
+    "lem-sc-hom-tensor-degreewise"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-hom-tensor-degreewise",
+  "lem-sc-hom-tensor-localized-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK and Lemma 03EO; tensor and internal-Hom universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localized pure tensor evaluation determines internal Hom morphisms and tensor cochain differentials act on pure tensors",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms into internal Hom from a sheaf tensor product are determined by evaluation on localized pure tensors",
+   "digest": "cb512fd01135aa9f",
+   "date": "2026-10-13",
+   "results": "Hits: CategoryTheory.sheafHomSectionsEquiv, SheafOfModules.unitHomEquiv, LightCondensed.ihomPoints, SheafOfModules.unitHomEquiv_comp_apply, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.sheafifyHomEquiv, SheafOfModules.unitHomEquiv_symm_comp",
+   "verdict": "No exact sheaf-level match; general tensor and adjunction lemmas used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "ιMapBifunctor.*tmul|homTensorSectionMap.*natural|tensorObjIsoSheafification.*natural",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "No matching declarations.",
+   "verdict": "No exact sheaf-level match; general tensor and adjunction lemmas used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorDifferentialSummand",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-tensor-iterated-differential-summand",
+   "place": "Localized pure-tensor extensionality for a single tensor internal Hom",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorSummandPureExt",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorSummandPureExt.lean",
+  "declaration": "CategoryTheory.homTensorSummandPure_ext",
+  "statement": "theorem homTensorSummandPure_ext (A B N X : Mod) :\n    letI := SheafOfModules.monoidalCategory R\n    ∀ (a b : X ⟶ SheafOfModules.homObj (R := R) (A ⊗ B) N),\n    (∀ (U : Cᵒᵖ) (s : X.val.obj U) (W : (Over U.unop)ᵒᵖ)\n      (x : A.val.obj (op W.unop.left)) (y : B.val.obj (op W.unop.left)),\n      (((a.val.app U).hom s).app W).hom\n        (((homTensorSectionMap R A B).app (op W.unop.left)).hom\n          (x ⊗ₜ[R.obj.obj (op W.unop.left)] y)) =\n      (((b.val.app U).hom s).app W).hom\n        (((homTensorSectionMap R A B).app (op W.unop.left)).hom\n          (x ⊗ₜ[R.obj.obj (op W.unop.left)] y))) → a = b",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-06668",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100057-L-2477512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-06668",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100057-L-2477512",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures match all three nodes; existing signature unchanged; proofs and dependencies agree; all delivered modules and the sole direct importer compile cleanly; axiom checks show only permitted axioms and sorryAx from existing open dependencies."
+ }
+}

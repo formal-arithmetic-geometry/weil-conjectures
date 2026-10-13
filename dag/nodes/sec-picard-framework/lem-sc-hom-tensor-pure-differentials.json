@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-hom-tensor-pure-differentials",
+ "kind": "statement",
+ "title": "Tensor summand differentials on localized pure tensors",
+ "statement": "Let K,L be cochain complexes of R-module sheaves on a site, and p,q,t integers with p+q=t. The summand differentials d1,d2 from K^p tensor L^q to Tot(K tensor L)^(t+1) are those of [def-pc-tensor-complex-sheaves]. At every object V, d1 sends the section-map image of x tensor y to the (p+1,q) summand image of dK(x) tensor y. The map d2 sends it to (-1)^p times the (p,q+1) summand image of x tensor dL(y). The section map is [lem-sc-hom-tensor-degreewise].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, functoriality of tensor sheafification; More on Algebra Tag 0A5Y, tensor differential"
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-hom-tensor-degreewise"
+ ],
+ "proof": [
+  {
+   "text": "Use mapBifunctor.d₁_eq and d₂_eq to express each summand differential as its whiskering followed by the next summand inclusion. The cochain signs reduce definitionally to one and p.negOnePow.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate tensor section-map naturality on x tensor y. ModuleCat tensorHom_tmul identifies the tensor map with the tensor of its component values.",
+   "uses": [
+    "lem-sc-hom-tensor-section-natural"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use f tensor identity for d1 and identity tensor g for d2, then evaluate the summand inclusions. Evaluation is additive and preserves integer scalar multiplication, so the second sign passes through unchanged.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-hom-tensor-section-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, functoriality of tensor sheafification; More on Algebra Tag 0A5Y, tensor differential"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localized pure tensor evaluation determines internal Hom morphisms and tensor cochain differentials act on pure tensors",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.map_tmul",
+   "digest": "18a60c253dc3701e",
+   "date": "2026-10-13",
+   "results": "Hits: TensorProduct.map_tmul",
+   "verdict": "No exact sheaf-level match; general tensor and adjunction lemmas used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "ιMapBifunctor.*tmul|homTensorSectionMap.*natural|tensorObjIsoSheafification.*natural",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "No matching declarations.",
+   "verdict": "No exact sheaf-level match; general tensor and adjunction lemmas used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomTensorDifferentialSummand",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-tensor-iterated-differential-summand",
+   "place": "Tensor summand differentials on localized pure tensors",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomTensorPureDifferentials",
+  "file": "lean/Sheaf/Algebra/Homology/HomTensorPureDifferentials.lean",
+  "declaration": "CategoryTheory.homTensor_pure_differentials",
+  "statement": "theorem homTensor_pure_differentials (K L : CochainComplex Mod ℤ)\n    (p q t : ℤ) (h : p + q = t) :\n    letI := SheafOfModules.monoidalCategory R\n    ∀ (V : Cᵒᵖ) (x : (K.X p).val.obj V) (y : (L.X q).val.obj V),\n      ((HomologicalComplex.mapBifunctor.d₁ K L (curriedTensor Mod)\n          (ComplexShape.up ℤ) p q (t + 1)).val.app V).hom\n        (((homTensorSectionMap R (K.X p) (L.X q)).app V).hom\n          (x ⊗ₜ[R.obj.obj V] y)) =\n        ((CochainComplex.ιMapBifunctor K L (curriedTensor Mod)\n          (p + 1) q (t + 1) (by omega)).val.app V).hom\n          (((homTensorSectionMap R (K.X (p + 1)) (L.X q)).app V).hom\n            (((K.d p (p + 1)).val.app V).hom x ⊗ₜ[R.obj.obj V] y)) ∧\n      ((HomologicalComplex.mapBifunctor.d₂ K L (curriedTensor Mod)\n          (ComplexShape.up ℤ) p q (t + 1)).val.app V).hom\n        (((homTensorSectionMap R (K.X p) (L.X q)).app V).hom\n          (x ⊗ₜ[R.obj.obj V] y)) =\n        p.negOnePow • ((CochainComplex.ιMapBifunctor K L (curriedTensor Mod)\n          p (q + 1) (t + 1) (by omega)).val.app V).hom\n          (((homTensorSectionMap R (K.X p) (L.X (q + 1))).app V).hom\n            (x ⊗ₜ[R.obj.obj V] ((L.d q (q + 1)).val.app V).hom y))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-06668",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100057-L-2477512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-06668",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100057-L-2477512",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures match all three nodes; existing signature unchanged; proofs and dependencies agree; all delivered modules and the sole direct importer compile cleanly; axiom checks show only permitted axioms and sorryAx from existing open dependencies."
+ }
+}
