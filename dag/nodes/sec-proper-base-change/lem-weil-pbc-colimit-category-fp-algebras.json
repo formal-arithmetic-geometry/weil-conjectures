@@ -32,33 +32,19 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the base-changed target is a colimit).* Restrict the system to the directed upper set $\\Lambda_{\\ge\\lambda}=\\{\\mu:\\mu\\ge\\lambda\\}$, which is cofinal: for any $\\nu$ choose a common upper bound of $\\nu$ and $\\lambda$. Write $B_\\mu=A'\\otimes_{R_\\lambda}R_\\mu$ and $B=A'\\otimes_{R_\\lambda}R$. We verify that $B$, with the maps $B_\\mu\\to B$, is a colimit in commutative $R_\\lambda$-algebras [def-weil-pbc-category-colimit]. For any commutative $R_\\lambda$-algebra $T$, an $R_\\lambda$-algebra map $B_\\mu\\to T$ is, by the tensor-product pushout property [lem-weil-pbc-algebra-tensor-pushout-universal-property], exactly a pair of $R_\\lambda$-algebra maps $A'\\to T$ and $R_\\mu\\to T$. A compatible family over $\\mu\\ge\\lambda$ has one common map $A'\\to T$ and a compatible family $R_\\mu\\to T$; the colimit property of $R$ yields exactly one $R_\\lambda$-algebra map $R\\to T$ for the latter. Such pairs correspond by the same pushout property to maps $B\\to T$, and the correspondence respects the coprojections. Thus $B=\\varinjlim_{\\mu\\ge\\lambda}B_\\mu$ in $R_\\lambda$-algebras and, by [lem-weil-pbc-filtered-colimit-algebras-elementwise](1), also in commutative rings. The upper-set colimit of the $R_\\mu$ is $R$: a cocone on the upper set extends to the whole directed system by choosing a common upper bound with $\\lambda$, and independence of that choice follows at a further common upper bound. (This is the base-change colimit used in the proof of Stacks 05N8(3).)",
+   "text": "Work on the nonempty directed upper tail J of i. Define B(j) = A' tensor_S F(j), its transition maps f(j,k) = id tensor F(j,k), and q(j) = id tensor colimit.ι(j). Functoriality and colimit cocone naturality give compatibility and composition of these maps, verified on pure tensors. Tensor commutativity transfers the two clauses of directedColimitBaseChangeElementwise to this right-tensor convention: every element of A' tensor_S R is represented in B(j), and an element of B(j) mapping to zero becomes zero at a later stage.",
    "uses": [
     "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit, lines 32149-32166), proof of (3), using the colimit of base changes; Lemma Tag 05N9 (lemma-colimit-category-fp-algebras), proof line 32215"
+    "place": "Tags 05N8(3),(1) and 05N9(2),(3), finite generators and finite relations argument"
    }
   },
   {
-   "text": "*Step 2 (a map descends: clause (2)).* Choose a presentation $A\\cong R_\\lambda[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ from [def-weil-pbc-finitely-presented-algebra]. Restrict $u:A_R\\to A'_R=B$ to $A\\to A_R$, $a\\mapsto a\\otimes1$; this is an $R_\\lambda$-algebra map $g:A\\to B$. Apply [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] to $R_\\lambda$, the presentation of $A$, and the colimit $(B_\\mu)_{\\mu\\ge\\lambda}$ from step 1. It gives $\\mu\\ge\\lambda$ and an $R_\\lambda$-algebra map $g_\\mu:A\\to B_\\mu$ whose composite to $B$ is $g$. Since $B_\\mu$ is an $R_\\mu$-algebra, the base-change adjunction [lem-weil-pbc-algebra-tensor-base-change-universal-property] extends $g_\\mu$ uniquely to an $R_\\mu$-algebra map $u_\\mu:A\\otimes_{R_\\lambda}R_\\mu\\to B_\\mu$ with $u_\\mu(a\\otimes r)=g_\\mu(a)(1\\otimes r)$. Its extension to $R$ agrees with $u$ on $a\\otimes1$ by construction and on $1\\otimes r$ since both are $R$-algebra maps. Pure tensors are products of these elements, so $u_\\mu\\otimes1_R=u$.",
-   "uses": [
-    "def-weil-pbc-finitely-presented-algebra",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-    "lem-weil-pbc-algebra-tensor-base-change-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 05N9 (lemma-colimit-category-fp-algebras, lines 32187-32193), proof line 32215 via Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit), part (3), lines 32119-32123 and 32149-32166"
-   }
-  },
-  {
-   "text": "*Step 3 (equality descends: clause (3)).* Choose generators $x_1,\\dots,x_n$ of $A$ as an $R_\\lambda$-algebra from its finite presentation [def-weil-pbc-finitely-presented-algebra], and put $d_j=v(x_j)-w(x_j)\\in A'$. The hypothesis $v\\otimes1_R=w\\otimes1_R$ gives $1\\otimes d_j=0$ in $A'\\otimes_{R_\\lambda}R$ for each $j$. Apply [lem-weil-pbc-directed-colimit-base-change-elementwise](2) with initial index $\\lambda$ and $M_0=A'$ as an $R_\\lambda$-module: for each $j$ there is $\\mu_j\\ge\\lambda$ where $1\\otimes d_j=0$ in $A'\\otimes_{R_\\lambda}R_{\\mu_j}$. Directedness gives a common $\\mu\\ge\\mu_1,\\dots,\\mu_n$; the same equalities hold there by the transition maps. The maps $v\\otimes1_{R_\\mu}$ and $w\\otimes1_{R_\\mu}$ agree on $x_j\\otimes1$, and both are $R_\\mu$-algebra maps, hence agree on $1\\otimes r$ for $r\\in R_\\mu$. These elements generate $A\\otimes_{R_\\lambda}R_\\mu$ as a ring, so the two maps agree. For $n=0$ they agree on the coefficient ring already, and one may take $\\mu=\\lambda$.",
+   "text": "Use a finite polynomial presentation π : S[X_1,...,X_n] → A with surjective π and finitely generated kernel. Represent g(π(X_a)) at stages of B and take a common upper bound ν. Polynomial evaluation gives p : S[X_1,...,X_n] → B(ν) with q(ν) p = g π. Every member of a finite kernel-generating set maps to zero over R, hence vanishes at a later stage by step 1. A common later stage ω kills all relations. Transition-map composition and Ideal.span_le show ker π ≤ ker p_ω. AlgHom.liftOfSurjective factors p_ω through π, producing g_ω : A → B(ω), and surjectivity of π proves q(ω) g_ω = g. Empty sets of variables or relations are handled by the nonempty directed-tail common-upper-bound lemma.",
    "uses": [
     "def-weil-pbc-finitely-presented-algebra",
     "lem-weil-pbc-directed-colimit-base-change-elementwise"
@@ -66,23 +52,45 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 05N9 (lemma-colimit-category-fp-algebras, lines 32194-32200), proof line 32215 via Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit), part (1), lines 32108-32112 and 32129-32136"
+    "place": "Tags 05N8(3),(1) and 05N9(2),(3), finite generators and finite relations argument"
+   }
+  },
+  {
+   "text": "Restrict u to A using includeLeft, and apply the proved private factorization helper from step 2. The tensor-product lift of g_μ and includeRight defines an S-algebra map A tensor_S F(μ) → A' tensor_S F(μ); its value on 1 tensor r shows it commutes with F(μ), so it is an F(μ)-algebra map. On a pure tensor its composite to the colimit is u(a tensor 1) times (1 tensor t(r)), equal to u(a tensor t(r)) because u commutes with R. Tensor induction proves the commuting-square equation for all elements.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05N8(3),(1) and 05N9(2),(3), finite generators and finite relations argument"
+   }
+  },
+  {
+   "text": "For equality descent, evaluate the assumed equality on a tensor 1. Swap tensor factors to show 1 tensor (v(a)-w(a)) = 0. The elementwise theorem supplies a stage at which each difference vanishes. Finite presentation implies finite type, so choose a finite algebra-generating set and a common upper bound for its vanishing stages and i. Transition maps preserve the equalities. AlgHom.ext_of_adjoin_eq_top shows includeLeft composed with v and w agree at this stage. Multiplication by 1 tensor r and tensor induction then prove equality of the tensor maps. The empty generating set is covered by choosing an upper bound with i.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05N8(3),(1) and 05N9(2),(3), finite generators and finite relations argument"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
   "def-weil-pbc-finitely-presented-algebra",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
-  "lem-weil-pbc-algebra-tensor-base-change-universal-property",
-  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "P4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 05N9 (lemma-colimit-category-fp-algebras), parts (2)-(3), proof line 32215 referring to Lemma Tag 05N8 (lemma-algebra-map-property-in-colimit), parts (3) and (1); the colimit identification is written out from the tensor pushout and colimit universal properties"
+  "place": "Tags 05N8(1),(3) and 05N9(2),(3); implemented directly by finite polynomial generators and relations using the proved tensor elementwise colimit theorem, without constructing a categorical algebra colimit"
  },
  "mathlib_searches": [
   {
@@ -173,5 +181,15 @@
   "group": "G1",
   "result": "pass",
   "note": "directed preorder Λ + F : Λ ⥤ CommRingCat + HasColimit = node's directed system and ring colimit; i, A, A' with Algebra.FinitePresentation (F.obj i) = λ and the two fp R_λ-algebras; rightAlgebra tensors = A_μ, A'_μ, A_R, A'_R; clause (2): ∀u ∃μ≥i ∃uμ with (id⊗t)∘uμ = u∘(id⊗t), equivalent to uμ⊗1_R = u since ι(x)·(1⊗r) span A_R and u is R-linear; clause (3): map v id_R = map w id_R → ∃μ≥i map v id_{R_μ} = map w id_{R_μ}; spellings match F1 6e8479f20; #check and axioms verified"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T082403-L-1643220",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
