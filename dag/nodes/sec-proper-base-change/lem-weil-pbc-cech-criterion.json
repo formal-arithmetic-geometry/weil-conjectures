@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-pbc-cech-criterion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Injectives and the Cech acyclicity criterion",
- "statement": "On a site with a basis closed under fibre products, suppose every covering of\na basis object has a finite basis refinement. An injective module sheaf has\nvanishing positive Cech cohomology [def-weil-pbc-cover-cech] for every finite\nbasis covering. If a module sheaf $M$ has this same vanishing for every such\ncovering, then $H^q(U,M)=0$ for every basis object $U$ and $q>0$, where\ncohomology is derived sections.",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], small relative to a universe in which its hom-sets, coefficients and covering index sets lie, and let $\\mathcal O$ be a sheaf of rings on it. Module sheaves mean sheaves of left $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]; injectivity is in that category [def-sp-injective-resolutions]. Let $\\mathcal B$ be a basis of objects closed under the iterated fibre products of its covering families: for a covering $\\{V_a\\to U\\}$ with $U,V_a\\in\\mathcal B$, all $V_{a_0}\\times_U\\cdots\\times_U V_{a_p}$ lie in $\\mathcal B$. Suppose every covering of an object $U\\in\\mathcal B$ admits a finite covering refinement $\\{V_a\\to U\\}_{a=1}^m$ with $V_a\\in\\mathcal B$. For such a covering write $\\check H^p(\\mathcal V,M)$ for the cohomology of the alternating restriction complex of the underlying abelian presheaf of $M$ [def-weil-pbc-site-cech-complex], using all ordered tuples including repetitions. Then every injective module sheaf $I$ has $\\check H^p(\\mathcal V,I)=0$ for $p>0$ and every finite basis covering. If a module sheaf $M$ has this same vanishing for every finite basis covering, then $H^q(U,M)=0$ for every $U\\in\\mathcal B$ and $q>0$. Here $H^q(U,M)=R^q\\Gamma(U,-)(M)$ [def-sp-left-exact-additive], with $\\Gamma(U,-):\\Mod(\\mathcal O)\\to\\mathbf{Ab}$ the additive left exact evaluation functor $N\\mapsto N(U)$; these right derived functors are computed by injective resolutions in module sheaves, not by assuming the underlying abelian sheaf of an injective module sheaf is injective.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-cech-criterion.md",
   "place": "node lem-weil-pbc-cech-criterion, order 1282",
@@ -19,34 +19,162 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-cover-cech",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-left-exact-additive"
  ],
  "proof": [
   {
-   "text": "For a covering $V=\\coprod_aV_a\\to U$, form the augmented complex of free\nmodule sheaves on $V^{p+1}_U$, ending in the free module sheaf on $U$. It is\nexact: locally on a test object mapping to $U$, the cover has a lift to $V$.\nInsert that lift as first coordinate. The alternating-face differential\nsatisfies $\\partial h+h\\partial=1$, since adjacent inserted faces cancel. A\nlocal chain has finite support, so one common cover suffices for all its\ngenerators. Applying $\\operatorname{Hom}(-,I)$ for an injective sheaf $I$\ngives the augmented complex of [def-weil-pbc-cover-cech], which is\nconsequently exact. This argument uses local lifts, not a choice of points of\nthe topos.",
+   "text": "Let $\\mathrm{Cov}$ consist of all finite basis coverings. The refinement hypothesis says precisely that, for each $U\\in\\mathcal B$, these coverings are cofinal among coverings of $U$: each member of the refinement maps over $U$ to a member of the original covering. Closure under fibre products puts every object occurring in their Cech complexes in $\\mathcal B$. Use the chosen products, alternating restrictions and ordered tuples of [def-weil-pbc-site-cech-complex]. No coproduct object $\\coprod_a V_a$ in the site is needed.",
    "uses": [
-    "def-weil-pbc-cover-cech"
+    "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9 (lemma-cech-vanish-collection), assumptions (1) and (2)"
+   }
   },
   {
-   "text": "Embed $M$ into an injective $I$ and put $Q=I/M$. A section of $Q(U)$ lifts to\n$I$ on a finite basis cover. Differences of these lifts form a Cech\none-cocycle in $M$. Its vanishing in $\\check H^1$ lets us adjust the lifts by\nsections of $M$ so that they agree. They then glue in $I$. Thus $I(U)\\to\nQ(U)$ is surjective for every basis object. This yields a short exact\nsequence of Cech complexes on every basis covering, including all its\nintersections. The first paragraph and the assumed vanishing for $M$ imply\nthe same positive Cech vanishing for $Q$. Repeat with an injective embedding\nof $Q$. The long exact sequences for derived sections give $H^1(U,M)=0$ and\n$H^q(U,M)=H^{q-1}(U,Q)$ for $q>1$. Iteration proves the assertion in every\nfinite degree. This is the Cech acyclicity criterion of\n[Stacks Project, Tag 03F9](https://stacks.math.columbia.edu/tag/03F9), with\nits dimension-shifting proof included.",
-   "uses": [],
-   "elementary": null
+   "text": "If $I$ is an injective module sheaf, [lem-weil-pbc-ringed-site-injective-module-injective-presheaf] makes its underlying module presheaf injective. For every finite basis covering and every $p>0$, apply [lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift] with $q=p-1$: a closed degree-$p$ cochain $c$ is $\\delta b$ for a degree-$(p-1)$ cochain $b$. Thus every positive cocycle is a boundary, proving the first assertion. The common universe convention ensures that the free module presheaves required by this cited lifting theorem belong to the very presheaf category in which $I$ is injective; a finite index set lies in that universe.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FB (lemma-injective-module-injective-presheaf) and 03FC (lemma-injective-module-trivial-cech), proof via 03AS and 03F5"
+   }
+  },
+  {
+   "text": "Let $A$ be any module sheaf whose positive Cech cohomology vanishes for every member of $\\mathrm{Cov}$. The category $\\Mod(\\mathcal O)$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], and has enough injectives by [lem-sp-grothendieck-enough-injectives]. Choose a monomorphism $A\\to I$ with $I$ injective and its cokernel $Q$, giving $0\\to A\\to I\\to Q\\to0$ in module sheaves. This also gives a short exact sequence of underlying abelian sheaves: kernels are sectionwise by [def-weil-sheaf-of-modules-category], and its cokernel is the sheafification of the sectionwise quotient; [def-weil-presheaf-modules-sheafification] specifies that module sheafification is the abelian sheafification equipped with the extended module action. Consequently the underlying cokernel and kernel are exactly the abelian ones, without asserting that $I_{ab}$ is injective.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9, proof, injective embedding and quotient; module embedding: Injectives Tag 01DU (theorem-sheaves-modules-injectives)"
+   }
+  },
+  {
+   "text": "For each $U\\in\\mathcal B$, apply [lem-weil-pbc-site-ses-cech-h1-surjective] to this short exact sequence of underlying abelian sheaves and the cofinal set of finite basis coverings of $U$. Its degree-one vanishing hypothesis holds for $A$, so $I(U)\\to Q(U)$ is surjective. Explicitly, locally lift $s\\in Q(U)$ to sections $i_a\\in I(V_a)$ on such a finite refinement. On overlaps $i_b-i_a$ is the image of a unique section $c_{ab}$ of $A$, and $c_{bc}-c_{ac}+c_{ab}=0$ on triple products by cancellation and the injectivity of $A\\to I$ on sections. Vanishing of $\\check H^1$ gives $c_{ab}=b_b-b_a$. Replacing $i_a$ by $i_a-b_a$ makes the lifts agree on overlaps; they glue in $I$ to a preimage of $s$. Left exactness on sections follows from the sectionwise kernel description, so $0\\to A(U)\\to I(U)\\to Q(U)\\to0$ is short exact for every basis object.",
+   "uses": [
+    "lem-weil-pbc-site-ses-cech-h1-surjective",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F8 (lemma-ses-cech-h1), proof; Tag 03F9, proof, surjectivity on the collection"
+   }
+  },
+  {
+   "text": "For each $\\mathcal V\\in\\mathrm{Cov}$ all its iterated intersections are in $\\mathcal B$ by step 1. Taking in degree $p$ the finite product of the section sequences of step 4 gives a short exact sequence of Cech cochain groups: kernels are coordinatewise, and a tuple in the quotient has a preimage obtained by choosing a preimage in each of its finitely many coordinates. The maps commute with alternating restrictions by naturality. Hence $0\\to\\check C^\\bullet(\\mathcal V,A)\\to\\check C^\\bullet(\\mathcal V,I)\\to\\check C^\\bullet(\\mathcal V,Q)\\to0$ is degreewise short exact. By [lem-weil-pbc-complex-ses-homology-long-exact], for $p>0$ the sequence $\\check H^p(\\mathcal V,I)\\to\\check H^p(\\mathcal V,Q)\\to\\check H^{p+1}(\\mathcal V,A)$ is exact. Both outside groups vanish, the first by step 2 and the last by the hypothesis on $A$. Thus $Q$ has the same positive Cech vanishing property as $A$.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9, proof, short exact Cech complexes; Homology Tag 0117 (lemma-long-exact-sequence-cochain)"
+   }
+  },
+  {
+   "text": "For each basis object $U$, evaluation $\\Gamma(U,-):\\Mod(\\mathcal O)\\to\\mathbf{Ab}$ is additive and preserves kernels, since addition and kernels are sectionwise [def-weil-sheaf-of-modules-category]; it is left exact [def-sp-left-exact-additive]. Apply [lem-weil-pbc-derived-functor-long-exact] to $0\\to A\\to I\\to Q\\to0$, and [lem-weil-pbc-derived-functor-injective-vanishing] to $I$, in the category of module sheaves. The surjectivity in step 4 and the identification $R^0\\Gamma(U,-)=\\Gamma(U,-)$ give $H^1(U,A)=0$. For $q>1$ the adjacent zero groups $H^{q-1}(U,I)$ and $H^q(U,I)$ give an isomorphism $H^{q-1}(U,Q)\\simeq H^q(U,A)$. Now induct on $q\\ge1$ with the claim for every sheaf $A$ having the Cech vanishing property and every basis object $U$. The case $q=1$ has just been proved. For $q>1$, step 5 shows that the quotient $Q$ again has the property, so the induction hypothesis gives $H^{q-1}(U,Q)=0$, and the displayed isomorphism gives $H^q(U,A)=0$. Taking $A=M$ proves the second assertion in every positive degree.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-derived-functor-injective-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9, proof, final dimension-shifting argument, in module sheaves as in Section 03FA (cohomology of modules)"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-cover-cech"
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-site-ses-cech-h1-surjective",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-derived-functor-injective-vanishing"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-cech-criterion.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9 (lemma-cech-vanish-collection), dimension-shifting proof in module sheaves; Lemmas Tags 03FB and 03FC for injective Cech vanishing"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*(injective|vanish)|(injective|vanish).*cech",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no theorem states both the ringed-site injective Cech clause and finite-basis module-derived acyclicity criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cech\", \"injective\"",
+   "results": "Hits: injective_stoneCechUnit_of_t35Space",
+   "date": "2026-10-14",
+   "verdict": "no match: no theorem states both the ringed-site injective Cech clause and finite-basis module-derived acyclicity criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech acyclicity of injective module sheaves and vanishing cohomology on basis objects from finite cover Cech vanishing",
+   "results": "Hits: CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex, CochainComplex.IsKInjective, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.cm5b.I, CochainComplex.isKInjective_of_injective_aux",
+   "date": "2026-10-14",
+   "verdict": "no match: no theorem states both the ringed-site injective Cech clause and finite-basis module-derived acyclicity criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech|Čech|cech",
+   "results": "Hits: Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: no theorem states both the ringed-site injective Cech clause and finite-basis module-derived acyclicity criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplex\"",
+   "results": "Hits: CategoryTheory.cechComplexFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: no theorem states both the ringed-site injective Cech clause and finite-basis module-derived acyclicity criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules with zero higher Cech cohomology for all finite coverings has vanishing right derived sections on basis objects",
+   "results": "Hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, SheafOfModules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-14",
+   "verdict": "no match: no theorem states both the ringed-site injective Cech clause and finite-basis module-derived acyclicity criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech acyclicity criterion for sheaves on a site",
+   "results": "Service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -74,5 +202,49 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-cech-criterion",
+  "worker": "stage1",
+  "summary": "Corrected general-site definition citations and made the ringed-site, size and module-derived-sections conventions explicit. Reused existing presheaf cocycle lifting and Grothendieck inputs; wrote cofinality, underlying exactness, H1 gluing, quotient Cech vanishing and a degree induction. No new nodes.",
+  "blueprint": "Steps 1-2 realize the first paragraph (injective Cech vanishing); steps 3-6 realize the second paragraph (finite-cover lifting, quotient and dimension shifting).",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-site-cech-complex",
+    "why": "Generic ringed-site or homological input for the explicit dimension-shifting argument; the unit has no statement giving this general input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "why": "Generic ringed-site or homological input for the explicit dimension-shifting argument; the unit has no statement giving this general input."
+   },
+   {
+    "node": "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+    "why": "Generic ringed-site or homological input for the explicit dimension-shifting argument; the unit has no statement giving this general input."
+   },
+   {
+    "node": "lem-weil-pbc-site-ses-cech-h1-surjective",
+    "why": "Generic ringed-site or homological input for the explicit dimension-shifting argument; the unit has no statement giving this general input."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic ringed-site or homological input for the explicit dimension-shifting argument; the unit has no statement giving this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+  "lem-weil-pbc-site-ses-cech-h1-surjective",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-12c2583f2",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-12c2583f2 (reviewer sub-agent of L); spot-checked: Read the complete governance files, packet, report, item, unit/chapter route, all cited node statements, Stacks Tags 03F8/03F9/03FB/03FC, and archived target declarations. Verified each proof step, module coefficient category, derived evaluation, Cech signs, finite-product exactness, dimension shifting, edge cases, duplicate searches, Mathlib searches, and five declared generic tool uses. Recorded the general-site coproduct issue and its valid tuple-lifting replacement in review.md. No DAG repair is needed."
+ }
 }
