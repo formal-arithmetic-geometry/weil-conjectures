@@ -4,8 +4,9 @@ public import Sheaf.Paper.PQFCohomology
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.Algebra.Homology.HomologySequence
-import Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts
-import Sheaf.AlgebraicGeometry.CechH1MapNatural
+import Sheaf.Paper.SquareZeroQuotientLocalAction
+import Sheaf.Paper.SquareZeroHorseshoeBoundaryLeibniz
+import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 
 @[expose] public section
 
@@ -17,6 +18,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The algebraic Čech and derivation identities for fixed compatible resolutions.
 This is the local algebra step in the proof of the square-zero boundary derivation theorem.
 Source: Stacks Project, Cohomology, Lemma 0B8S.
@@ -67,6 +69,101 @@ theorem boundary_derivation_algebraic_data (X : Scheme.{u})
           (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv).hom
             f)) ∧
       ∀ f g : C.right.obj.obj (op ⊤), δ (f * g) = ρ f (δ g) + ρ g (δ f) := by
-  sorry
+  classical
+  obtain ⟨σ, hσ, hres⟩ := square_zero_quotient_local_action X B C p I i hw _hS _hsq
+  let μ : C.right.obj.obj (op ⊤) →+* End I :=
+    { toFun := fun f ↦
+        { val :=
+            { app := fun U ↦ ModuleCat.ofHom
+                (σ U.unop (C.right.obj.map (homOfLE le_top).op f))
+              naturality := by
+                intro U V j
+                ext x
+                change σ V.unop (C.right.obj.map (homOfLE le_top).op f)
+                    (I.val.map j x) =
+                  I.val.map j (σ U.unop (C.right.obj.map (homOfLE le_top).op f) x)
+                have hr := hres U.unop V.unop j.unop
+                  (C.right.obj.map (homOfLE le_top).op f) x
+                change I.val.map j _ = _ at hr
+                rw [hr]
+                congr 2
+                simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+                rfl } }
+      map_one' := by
+        apply SheafOfModules.hom_ext
+        apply PresheafOfModules.hom_ext
+        intro U
+        apply ModuleCat.hom_ext
+        ext x
+        change σ U.unop (C.right.obj.map (homOfLE le_top).op 1) x = x
+        simp
+      map_mul' := by
+        intro f g
+        apply SheafOfModules.hom_ext
+        apply PresheafOfModules.hom_ext
+        intro U
+        apply ModuleCat.hom_ext
+        ext x
+        change σ U.unop (C.right.obj.map (homOfLE le_top).op (f * g)) x =
+          σ U.unop (C.right.obj.map (homOfLE le_top).op f)
+            (σ U.unop (C.right.obj.map (homOfLE le_top).op g) x)
+        simp
+      map_zero' := by
+        apply SheafOfModules.hom_ext
+        apply PresheafOfModules.hom_ext
+        intro U
+        apply ModuleCat.hom_ext
+        ext x
+        change σ U.unop (C.right.obj.map (homOfLE le_top).op 0) x = 0
+        simp
+      map_add' := by
+        intro f g
+        apply SheafOfModules.hom_ext
+        apply PresheafOfModules.hom_ext
+        intro U
+        apply ModuleCat.hom_ext
+        ext x
+        change σ U.unop (C.right.obj.map (homOfLE le_top).op (f + g)) x =
+          σ U.unop (C.right.obj.map (homOfLE le_top).op f) x +
+            σ U.unop (C.right.obj.map (homOfLE le_top).op g) x
+        simp }
+  let : (RingedSpace.moduleCohomology X.toRingedSpace 1).Additive := by
+    unfold RingedSpace.moduleCohomology
+    infer_instance
+  let H := RingedSpace.moduleCohomology X.toRingedSpace 1
+  let e : End I →+* End (H.obj I) :=
+    { __ := H.mapEnd I
+      map_zero' := H.map_zero I I
+      map_add' := fun f g ↦ H.map_add }
+  let ρ : C.right.obj.obj (op ⊤) →+*
+      Module.End ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) (H.obj I) :=
+    (ModuleCat.endRingEquiv (H.obj I)).toRingHom.comp (e.comp μ)
+  let d :=
+    (RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
+        (commAlgebraSheafModule X.sheaf C) ≫
+      (IC.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 0).hom ≫
+      hΓ.δ 0 1 rfl ≫
+      (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv
+  let δ : C.right.obj.obj (op ⊤) →+
+      ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj I) := d.hom.toAddMonoidHom
+  refine ⟨σ, μ, ρ, δ, hσ, hres, ?_, ?_, ?_, ?_⟩
+  · intro f U x
+    rfl
+  · intro f
+    rfl
+  · intro f
+    rfl
+  · have hlift : ∀ (f : C.right.obj.obj (op ⊤)) (U : X.Opens)
+        (b : B.right.obj.obj (op U)) (x : I.val.obj (op U)),
+        p.right.hom.app (op U) b = C.right.obj.map (homOfLE le_top).op f →
+        @id (B.right.obj.obj (op U)) (i.val.app (op U) ((μ f).val.app (op U) x)) =
+          b * @id (B.right.obj.obj (op U)) (i.val.app (op U) x) := by
+      intro f U b x hb
+      change i.val.app (op U)
+          (σ U (C.right.obj.map (homOfLE le_top).op f) x) = _
+      rw [← hb]
+      exact hσ U b x
+    exact square_zero_horseshoe_boundary_leibniz X B C p I i hw _hS _hsq
+      IA IB IC α β hαβ _hιA _hιB _hH hΓ μ hlift
 
 end AlgebraicGeometry

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-square-zero-quotient-local-action",
+ "kind": "statement",
+ "title": "Local quotient action on a square-zero ideal",
+ "statement": "Let X be a scheme [def-pc-scheme], B and C sheaves of commutative O_X-algebras [def-weil-pbc-ringed-space-algebra-module], p:B -> C an algebra morphism, and i:I -> B an O_X-module map [def-weil-sheaf-of-modules-category] forming a short exact sequence 0 -> I -> B -> C -> 0 [def-weil-pbc-exact-sequence]. Suppose products of any two kernel sections of p are zero. Then for every open U there is a unital ring homomorphism sigma_U:C(U) -> End_{O_X(U)}(I(U)), such that i(sigma_U(p(b))(x)) = b*i(x). These actions commute with restriction: res(sigma_U(f)(x)) = sigma_V(res(f))(res(x)) for every inclusion V subset U.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 0B8S proof; https://stacks.math.columbia.edu/tag/0B8S"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-ringed-space-algebra-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "By module_exactness_local_lifting, epimorphic p admits local lifts of every quotient section. The short exact sequence identifies I with kernel p. Evaluation preserves kernels and monomorphisms, so i is injective on sections and every section killed by p has a unique preimage under i on the same open.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f in C(U) and x in I(U), choose local lifts b_a of f. The sections b_a*i(x) lie in kernel p. Lift them uniquely to I on each member of the cover. If b_a and b_b are two lifts on an overlap, p(b_a-b_b)=0 and p(i(x))=0, hence (b_a-b_b)*i(x)=0 by the square-zero hypothesis. Thus the lifted sections agree on overlaps; the sheaf axiom glues them uniquely. Define sigma_U(f)(x) by this gluing, independent of all lifts.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check O_X(U)-linearity, sigma(f+g)=sigma(f)+sigma(g), sigma(0)=0, sigma(1)=id, and sigma(fg)=sigma(f) composed with sigma(g) locally on common covers with lifts. Apply the injective i and use respectively distributivity, multiplication by zero and one, and associativity in B. These local equalities glue to equalities on U. Restricting the construction gives the restriction identity by uniqueness. Taking a global-on-U lift b proves i(sigma_U(p(b))(x))=b*i(x). The empty open and zero ideal have unique sections and satisfy the same argument.",
+   "uses": [
+    "def-weil-pbc-ringed-space-algebra-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-space-algebra-module",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 0B8S proof; https://stacks.math.columbia.edu/tag/0B8S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A square zero ideal of a sheaf of rings is a module over the quotient sheaf",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero ideal in a sheaf of commutative algebras has a canonical module action by the quotient algebra",
+   "results": "Ideal.instModuleQuotientCotangent and derivationToSquareZeroOfLift concern individual rings, not sheaf quotient actions.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero|squareZero|boundary.*derivation|lift.*action|action.*lift",
+   "results": "Local rg and msearch found no corresponding sheaf quotient action or cohomology Leibniz theorem; the repository only contains the parent BoundaryDerivationSquareZero and BoundaryDerivationAlgebraicData. Blueprint searches for 0B8S and boundary derivation gave no matches.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BoundaryDerivationAlgebraicData",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-boundary-derivation-square-zero",
+   "place": "0B8S proof, quotient action by multiplication with local lifts",
+   "via": [
+    "lem-sc-boundary-derivation-square-zero-algebraic-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SquareZeroQuotientLocalAction",
+  "file": "lean/Sheaf/Paper/SquareZeroQuotientLocalAction.lean",
+  "declaration": "AlgebraicGeometry.square_zero_quotient_local_action",
+  "statement": "theorem square_zero_quotient_local_action (X : Scheme.{u})\n    (B C : X.CommAlgebraSheaf) (p : B ⟶ C)\n    (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (i : I ⟶ commAlgebraSheafModule X.sheaf B)\n    (hw : i ≫ (commAlgebraSheafModuleFunctor X.sheaf).map p = 0)\n    (hS : (ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw).ShortExact)\n    (hsq : ∀ (U : X.Opens) (x y : B.right.obj.obj (op U)),\n      p.right.hom.app (op U) x = 0 → p.right.hom.app (op U) y = 0 → x * y = 0) :\n    ∃ (σ : ∀ U : X.Opens, C.right.obj.obj (op U) →+*\n        Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (I.val.obj (op U))),\n      (∀ (U : X.Opens) (b : B.right.obj.obj (op U)) (x : I.val.obj (op U)),\n        @id (B.right.obj.obj (op U)) (i.val.app (op U) (σ U (p.right.hom.app (op U) b) x)) =\n          b * @id (B.right.obj.obj (op U)) (i.val.app (op U) x)) ∧\n      (∀ (U V : X.Opens) (j : V ⟶ U) (f : C.right.obj.obj (op U)) (x : I.val.obj (op U)),\n        I.val.map j.op (σ U f x) = σ V (C.right.obj.map j.op f) (I.val.map j.op x))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T000046-L-2231942",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261013T000046-L-2231942",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

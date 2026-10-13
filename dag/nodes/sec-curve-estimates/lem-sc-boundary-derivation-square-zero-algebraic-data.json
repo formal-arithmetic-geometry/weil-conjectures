@@ -9,22 +9,36 @@
  },
  "proof": [
   {
-   "text": "Construct the action from multiplication by local lifts, use square-zero independence of lifts, and transport the Cech cocycle product identity through the natural Cech-to-H1 comparison and the horseshoe boundary formula.",
+   "text": "Apply square_zero_quotient_local_action to obtain local ring actions sigma satisfying the lift and restriction equations. This construction has no injective-resolution or cohomology input.",
    "uses": [
-    "lem-sc-boundary-cech-local-lifts",
-    "lem-sc-cech-h1-map-natural"
+    "lem-sc-square-zero-quotient-local-action"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the endomorphism mu(f) on each open U by sigma_U(f restricted to U). The restriction identity supplies naturality; pointwise ring-homomorphism laws give a ring homomorphism mu:C(X)->End(I). Define rho by composing mu, the endomorphism ring map of the additive H1 functor, and ModuleCat.endRingEquiv. Define delta as the underlying additive map of the displayed composite of degree-zero comparison, resolution isomorphisms, and snake boundary. The restriction, H1 comparison, and boundary comparison identities are then definitional.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a local lift b of global f, rewrite the restricted f as p(b) in the definition of mu(f), then apply the local multiplication identity for sigma. This proves precisely the lift-action hypothesis for square_zero_horseshoe_boundary_leibniz. Apply that theorem to the fixed compatible resolutions to close Leibniz for the explicit rho and delta.",
+   "uses": [
+    "lem-sc-square-zero-horseshoe-boundary-leibniz"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-boundary-cech-local-lifts",
-  "lem-sc-cech-h1-map-natural"
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-square-zero-horseshoe-boundary-leibniz",
+  "lem-sc-square-zero-quotient-local-action"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology Lemma 0B8S proof"
+  "place": "Cohomology, Lemma 0B8S proof; https://stacks.math.columbia.edu/tag/0B8S"
  },
  "mathlib_searches": [
   {
@@ -94,12 +108,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T194134-L-462844",
+  "landing": "20261013T000046-L-2231942",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
