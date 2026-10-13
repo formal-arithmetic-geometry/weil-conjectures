@@ -113,17 +113,36 @@ instance associatedGradedGOne (J : Ideal A) :
     GradedMonoid.GOne (associatedGradedPiece J) where
   one := Submodule.Quotient.mk (⟨1, by simp⟩ : (J ^ 0 : Ideal A))
 
+private theorem associatedGraded_mk_eq (J : Ideal A) (n m : ℕ) (h : n = m)
+    (a : (J ^ n : Ideal A)) (b : (J ^ m : Ideal A)) (hab : a.1 = b.1) :
+    GradedMonoid.mk (A := associatedGradedPiece J) n (Submodule.Quotient.mk a) =
+      GradedMonoid.mk (A := associatedGradedPiece J) m (Submodule.Quotient.mk b) := by
+  subst m
+  have : a = b := Subtype.ext hab
+  subst b
+  rfl
+
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The unit is a
 left unit (Stacks, Algebra, Lemma 05GH). Proof: on a class `b mod J^(m+1)` the
 product is `1·b mod J^(0+m+1) = b mod J^(m+1)`, the degree `0 + m = m`. -/
 theorem associatedGraded_gone_mul (J : Ideal A)
-    (a : GradedMonoid (associatedGradedPiece J)) : 1 * a = a := by sorry
+    (a : GradedMonoid (associatedGradedPiece J)) : 1 * a = a := by
+  obtain ⟨n, a⟩ := a
+  induction a using Submodule.Quotient.induction_on with
+  | _ a =>
+    apply associatedGraded_mk_eq J (0 + n) n (Nat.zero_add n)
+    simp
 
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The unit is a
 right unit (Stacks, Algebra, Lemma 05GH). Proof: on a class `a mod J^(n+1)`
 the product is `a·1 mod J^(n+0+1) = a mod J^(n+1)`, the degree `n + 0 = n`. -/
 theorem associatedGraded_mul_gone (J : Ideal A)
-    (a : GradedMonoid (associatedGradedPiece J)) : a * 1 = a := by sorry
+    (a : GradedMonoid (associatedGradedPiece J)) : a * 1 = a := by
+  obtain ⟨n, a⟩ := a
+  induction a using Submodule.Quotient.induction_on with
+  | _ a =>
+    apply associatedGraded_mk_eq J (n + 0) n (Nat.add_zero n)
+    simp
 
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The graded
 multiplication is associative (Stacks, Algebra, Lemma 05GH). Proof: on
@@ -131,14 +150,34 @@ representatives both sides are `abc mod J^(n+m+k+1)` in degree `n+m+k`, by
 associativity of the multiplication of `A`. -/
 theorem associatedGraded_gmul_assoc (J : Ideal A)
     (a b c : GradedMonoid (associatedGradedPiece J)) :
-    a * b * c = a * (b * c) := by sorry
+    a * b * c = a * (b * c) := by
+  obtain ⟨n, a⟩ := a
+  obtain ⟨m, b⟩ := b
+  obtain ⟨k, c⟩ := c
+  induction a using Submodule.Quotient.induction_on with
+  | _ a =>
+    induction b using Submodule.Quotient.induction_on with
+    | _ b =>
+      induction c using Submodule.Quotient.induction_on with
+      | _ c =>
+        apply associatedGraded_mk_eq J (n + m + k) (n + (m + k))
+          (Nat.add_assoc n m k)
+        exact mul_assoc a.1 b.1 c.1
 
 /-- (blueprint: lem-weil-pbc-associated-graded-ring-structure) The graded
 multiplication is commutative (Stacks, Algebra, Lemma 05GH). Proof: on
 representatives both sides are `ab = ba mod J^(n+m+1)` in degree
 `n + m = m + n`, since `A` is commutative. -/
 theorem associatedGraded_gmul_comm (J : Ideal A)
-    (a b : GradedMonoid (associatedGradedPiece J)) : a * b = b * a := by sorry
+    (a b : GradedMonoid (associatedGradedPiece J)) : a * b = b * a := by
+  obtain ⟨n, a⟩ := a
+  obtain ⟨m, b⟩ := b
+  induction a using Submodule.Quotient.induction_on with
+  | _ a =>
+    induction b using Submodule.Quotient.induction_on with
+    | _ b =>
+      apply associatedGraded_mk_eq J (n + m) (m + n) (Nat.add_comm n m)
+      exact mul_comm a.1 b.1
 
 /-- (blueprint: def-weil-pbc-associated-graded-ring) The graded commutative
 ring structure on the pieces `J^n/J^(n+1)`, with the integers mapped to the
@@ -262,7 +301,15 @@ theorem associatedGraded_smul (J : Ideal A) (a : A) (n : ℕ)
         (Submodule.Quotient.mk x) =
     DirectSum.of (fun k : ℕ => associatedGradedPiece J k) n
       (Submodule.Quotient.mk
-        (⟨a * x.1, (J ^ n).mul_mem_left a x.2⟩ : (J ^ n : Ideal A))) := by sorry
+        (⟨a * x.1, (J ^ n).mul_mem_left a x.2⟩ : (J ^ n : Ideal A))) := by
+  rw [Algebra.smul_def]
+  change associatedGradedRingHom J a * _ = _
+  change DirectSum.of (fun k : ℕ => associatedGradedPiece J k) 0
+    (Submodule.Quotient.mk (⟨a, by simp⟩ : (J ^ 0 : Ideal A))) * _ = _
+  rw [associatedGraded_mul]
+  exact congrArg (fun y : GradedMonoid (associatedGradedPiece J) =>
+    DirectSum.of (fun k : ℕ => associatedGradedPiece J k) y.1 y.2)
+    (associatedGraded_mk_eq J (0 + n) n (Nat.zero_add n) _ _ rfl)
 
 /-- (blueprint: def-weil-pbc-associated-graded-ring) An ideal of the associated
 graded ring is homogeneous when it contains every homogeneous component of
