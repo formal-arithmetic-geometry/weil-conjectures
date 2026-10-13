@@ -1,6 +1,6 @@
 # Work queue
 
-206 items; claim with `tools/claim.py next <group> [--stage N]`.
+203 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (23)
 
@@ -45,7 +45,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (175)
+## Stage 3: modules to prove (172)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -75,7 +75,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf` | 10 | 0 | repair |
 | `Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf` | 11 | 0 | repair |
 | `Sheaf.CategoryTheory.SiteSystemStrictificationData` | 10 | 1 | disputed |
-| `Sheaf.Paper.FiniteStructureAlgebraLift` | 11 | 1 | disputed |
 | `Sheaf.AlgebraicGeometry.GluedEffectiveModelChartPullbackSingle` | 14 | 1 | disputed |
 | `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 20 | 1 | disputed |
 | `Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial` | 30 | 1 | disputed |
@@ -99,30 +98,31 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.EtaleSingletonTensorCechCofaceEvaluation` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSingletonTensorNormalizedRestriction` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations` | 17 | 2 | proof |
-| `Sheaf.AlgebraicGeometry.FlatBaseChangeModuleLerayComparison` | 17 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.HigherDirectImageRawTrianglePullbackComposition` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleCohomologyExtPullbackComparison` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedAffineNaturalCoefficientSystem` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedAffineSingleIdentityLaw` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedOverSingleComposition` | 17 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedOverSingleUnit` | 17 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatBaseChangeChartCohomologyTransport` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HomotopyPullbackSquareLocalization` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.NormalizedTensorHomCochainComponents` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapSurjective` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryProduct` | 18 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedSectionPullbackZero` | 19 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction` | 19 | 1 | proof |
 | `Sheaf.CategoryTheory.DerivedSourceComparisonInjective` | 19 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FinitePresentationLocalMapLifts` | 20 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationLocalMapOverlapCompatibility` | 20 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FinitePresentationOneChartMapLift` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalZeroSliceSplit` | 21 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.OpenPinnedSingleDegreeZeroCounit` | 21 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenBaseChangeCalculation` | 21 | 1 | proof |
 | `Sheaf.Paper.EtaleCERowOrdinaryComparison` | 21 | 1 | proof |
-| `Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritance` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairMapLifting` | 22 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounit` | 22 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.OpenPinnedCounitHomotopyRestriction` | 22 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.OpenPinnedSingleTensorRestrictionFactors` | 22 | 1 | proof |
+| `Sheaf.Algebra.Homology.LocalizedTensorComparisonInheritanceFixedDegree` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ExactSourceKInjectiveEvaluationOpenModels` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationOverlapDiagonalEventually` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleEventually` | 23 | 1 | proof |
@@ -130,100 +130,97 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.OrdinaryEvaluationPostcomposition` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardFixedModelResidueDerivedComparison` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorStalkFixedMapSquare` | 23 | 1 | proof |
-| `Sheaf.CategoryTheory.GrothendieckDerivedBrownCohomologicalRepresentability` | 23 | 1 | proof |
 | `Sheaf.Paper.CechCupPullbackCompat` | 23 | 3 | proof |
-| `Sheaf.Algebra.Homology.ConnectiveUniversalH0ZeroDifferential` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedPullbackTranslatedUnitTriangles` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleFiniteFreeLocalSupport` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveHomology` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardAffineStructureProjectiveRepresentation` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardDirectImageUnitMorphismPullback` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionAugmentation` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionBijective` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionDifferential` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetRowPrimitive` | 24 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftAssociator` | 24 | 1 | proof |
+| `Sheaf.CategoryTheory.GrothendieckDerivedBrownRetract` | 24 | 1 | proof |
 | `Sheaf.Algebra.Homology.ResidueConnectiveProjectiveOpcycles` | 25 | 1 | proof |
+| `Sheaf.Algebra.Homology.UniversalH0SplitDifferential` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumMateCompatibility` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedPullbackTranslatedUnitKFlatCones` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormalization` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.MixedTensorPairingBaseChangeTransport` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenExtensionProjectionFormula` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PicardAffineProjectiveBaseChange` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardTermwiseCompositeCounit` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SchemeDerivedStandardEquivalenceMonoidal` | 25 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.SchemeIsoSecondMateNormalizedSquare` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PrincipalOpenCechSingletonAugmentationComponent` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionHorizontal` | 25 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftAssociatorKFlatOne` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineFiniteFreeDualNaturality` | 26 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineSpectrumRepresentativeMap` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit` | 26 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionNatural` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HomComplexRestrictSchemeNaturalComponents` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HorizontalInverseSquareFixedPasting` | 26 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.MixedPullbackSquareTensorCoherence` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.MixedSectionsCompositionKInjective` | 26 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionFiniteGluing` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport` | 26 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RectangleOrdinaryGeometricComparisons` | 26 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SchemeIsoInverseBaseChangeTransport` | 26 | 1 | proof |
 | `Sheaf.RingTheory.ColimitFlatRelationDescent` | 26 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso` | 27 | 1 | proof |
-| `Sheaf.Algebra.Homology.FiniteStripConeGradedMapDifferential` | 27 | 1 | proof |
-| `Sheaf.Algebra.Homology.FiniteStripConeGradedMapIsIso` | 27 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineKoszulSignedDualCoefficientSquare` | 27 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineSectionsUnitTransport` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCanonicalComparisonSquare` | 27 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.CompletedPuncturedQuotientFullyFaithful` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.CompletedQuotientCoverLift` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleAdicSectionsKernel` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningRestrictionIso` | 27 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingCompletedIso` | 27 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.PuncturedCompletionMatchingPuncturedIso` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootTameNormalization` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel` | 27 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.OpenSectionsStructureClass` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectLocalModelsStageComparisons` | 27 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 27 | 1 | proof |
 | `Sheaf.Paper.ModuleCupEqualDerivedMapsClass` | 27 | 1 | proof |
-| `Sheaf.Paper.ModuleCupResolutionExistence` | 27 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineBaseChangeOrdinaryStalkComparison` | 28 | 1 | proof |
-| `Sheaf.Algebra.Homology.AffineBaseChangeTildeCanonicalGlobalComparison` | 28 | 1 | proof |
 | `Sheaf.Algebra.Homology.AffineTensorPullbackStalkCoordinates` | 28 | 1 | proof |
+| `Sheaf.Algebra.Homology.FiniteStripConeGradedMapEpi` | 28 | 1 | proof |
+| `Sheaf.Algebra.Homology.FiniteStripConeGradedMapMono` | 28 | 1 | proof |
 | `Sheaf.Algebra.Homology.SingleSupportTorAcyclicTensor` | 28 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.AffineBasisLowerTailSectionsReconstruction` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineFiniteFreeCoefficientComparisons` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPushforwardSquareMateUnit` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientNoetherian` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegular` | 28 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootOrbitDescent` | 28 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.OpenSectionsOrdinaryStructureClass` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardScalarCechExternalCup` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVCompositeBaseChangeCounit` | 28 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RelativeMVOpenSquareCounit` | 28 | 1 | proof |
+| `Sheaf.Paper.ModuleCupComponentChainEquation` | 28 | 1 | proof |
+| `Sheaf.Paper.ModuleCupComponentSectionMap` | 28 | 1 | proof |
+| `Sheaf.Algebra.Homology.AffineBaseChangeTildeOrdinaryComparison` | 29 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBound` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffinePullbackModelComparisonsIsIso` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffinePullbackSectionsUnitUncancelled` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundary` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootInvariants` | 29 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.AffineTorsorFixedPunctureDescent` | 29 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorProperties` | 29 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.OpenDerivedSectionsTruncationTowerComparison` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ReducedGenericFibreMapCore` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.RelativeMVPinnedVertexComparisons` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfExtTorDualChart` | 29 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SelfTorConormalDualChart` | 29 | 1 | proof |
 | `Sheaf.Paper.ModuleCupKInjectiveTarget` | 29 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.DerivedOpenTensorHomBijective` | 30 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.OpenUnionModuleImagePullbackCore` | 30 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryData` | 30 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.Morphisms.RootPowerMapInvariants` | 30 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardExternalCechCupDifferentialCoordinate` | 30 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.RelativeMVInverseOpenComparisons` | 30 | 1 | proof |
 | `Sheaf.Paper.ModuleCupGlobalTensorComparison` | 30 | 1 | proof |
 | `Sheaf.Paper.ModuleCupGlobalTensorPullback` | 30 | 1 | proof |
-| `Sheaf.Paper.ModuleCupNaiveMap` | 30 | 1 | proof |
 | `Sheaf.RingTheory.StrictHenselizationTriplesPresentation` | 30 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.CohenMacaulayFlatQuasiFiniteChart` | 31 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PolynomialChartFibreFlatCriterion` | 31 | 1 | proof |
 | `Sheaf.Paper.ModuleCupGodementCosimplicialExists` | 31 | 1 | proof |
 | `Sheaf.Paper.ModuleCupGodementIteratePairings` | 31 | 1 | proof |
-| `Sheaf.RingTheory.StrictHenselizationLocalMaximalIdeal` | 31 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineBaseFlatQuasiFiniteChartCore` | 32 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PolynomialChartLocalAlgebra` | 32 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.Chart` | 32 | 1 | proof |
 | `Sheaf.RingTheory.PointedEtaleCompletionStageFlat` | 32 | 1 | proof |
-| `Sheaf.RingTheory.PointedEtaleSmallFiltered` | 32 | 1 | proof |
+| `Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom` | 32 | 1 | proof |
 | `Sheaf.RingTheory.AssociatedGradedRing` | 33 | 5 | proof |
 | `Sheaf.RingTheory.EtaleTripleToStrictHenselizationCompletionFlat` | 33 | 1 | proof |
+| `Sheaf.RingTheory.PointedEtaleEssentiallySmall` | 33 | 1 | proof |
+| `Sheaf.RingTheory.PointedEtaleFiltered` | 33 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpecifiedModelChainComparison` | 34 | 1 | proof |
-| `Sheaf.RingTheory.EtaleTripleStrictHenselizationIdentification` | 34 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisTriangleCocone` | 35 | 1 | proof |
-| `Sheaf.RingTheory.FlatModuleCompletion` | 35 | 1 | proof |
-| `Sheaf.RingTheory.StrictHenselizationQuotientBases` | 36 | 1 | proof |
+| `Sheaf.RingTheory.StrictHenselizationComparison` | 35 | 1 | proof |
 
 Waiting, not claimable: 14 modules whose proof uses a node that has no Lean declaration yet.
 
