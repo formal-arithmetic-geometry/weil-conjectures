@@ -10,16 +10,20 @@
  },
  "proof": [
   {
-   "text": "Proof: on `S = ⨁ n, F n`, define `a : S → S` on summand `n` as its inclusion into\nsummand `n` minus `step n` followed by inclusion into summand `n + 1`. Define `b : S → P`\nusing the compatible inclusions. The map `a` is injective, as seen by the smallest nonzero\ncoordinate of a finitely supported element. Exhaustion makes `b` surjective; compatibility\nand a finite telescoping calculation identify its kernel with the image of `a`.\nChoose degreewise retractions `r_i` in `hsplit`, and let `r_{j,i}` be their composite\nfrom stage `j` to stage `i < j`. Define `l` on summand `j` by component `-r_{j,i}`\nfor `i < j` and zero otherwise. Its support is finite. In `l a` on summand `n`,\ncomponents below `n` cancel, component `n` is `r_n step_n = id`, and all later\ncomponents vanish. Thus `l a = id`, giving the required graded-module splitting.\nThus `0 → S → S → P → 0` is an admissible exact sequence and gives a distinguished\ntriangle in the homotopy category (Stacks Tags 09KL and 09KJ). For every acyclic `N`, the maps from\n`S` to `N`, and to its shifts, vanish: restrict to each summand, use `hstage`, and assemble\nthe null homotopies by the coproduct universal property. The exact Hom sequence of the\ntriangle then gives zero maps from `P` to `N` up to homotopy, which is `IsKProjective`.\nThis argument uses the degreewise splitting essentially; exhaustion alone does not suffice.",
-   "uses": [],
+   "text": "Apply the checked assembly theorem: it constructs the explicit telescope maps, obtains their degreewise splitting, proves coproduct K-projectivity and applies the distinguished triangle. Obtain Q with Q.IsKProjective and Q ≅ P, then transfer K-projectivity by isKProjective_of_iso.",
+   "uses": [
+    "lem-pc-filtered-free-kprojective-assembly"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pc-filtered-free-kprojective-assembly"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/dga.tex",
-  "place": "Tags 09KL--09KM"
+  "by": "worker",
+  "document": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjective.lean",
+  "place": "Checked telescope proof via the repaired assembly: the remaining dependency is only the explicit degreewise splitting construction, not a holed K-projectivity restatement."
  },
  "mathlib_searches": [
   {
@@ -89,13 +93,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-5bc94",
-  "group": "F1",
+  "reviewer": "COMPILER",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T205629-L-931775",
+  "landing": "20261013T022430-L-3220211",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean files, DAG nodes, change record, and report match the stated proof/interface changes; all modules and the direct importer compile cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

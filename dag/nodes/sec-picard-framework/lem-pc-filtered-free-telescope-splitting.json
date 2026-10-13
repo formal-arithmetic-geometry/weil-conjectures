@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KL--09KM"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredFreeKProjective",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "id": "lem-pc-filtered-free-telescope-splitting",
+ "title": "Degreewise splitting of the explicit telescope sequence",
+ "statement": "For universes u and v, let A : Type u be a commutative ring, P : CochainComplex (ModuleCat.{max u v} A) ℤ, F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ, ι n : F n ⟶ P, and step n : F n ⟶ F (n+1). Assume every ι n is monic, step n ≫ ι (n+1) = ι n, every x : P.X k equals (ι n).f k y for some n and y : (F n).X k, and every (step n).f k has a retraction r with (step n).f k ≫ r = id. Set S = ∐ F. Define a : S ⟶ S by a on summand n equal to Sigma.ι F n minus step n ≫ Sigma.ι F (n+1), and b : S ⟶ P by b on summand n equal to ι n. Compatibility gives a ≫ b = 0. Then for every k : ℤ the evaluated short complex S.X k → S.X k → P.X k admits a ShortComplex.Splitting: maps r_k and s_k with a_k ≫ r_k = id, s_k ≫ b_k = id and r_k ≫ a_k + b_k ≫ s_k = id. There is no K-projectivity hypothesis or conclusion.",
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The explicitly constructed telescope sequence is split exact in each degree.\nSource: Stacks Project, Tags 09KL--09KM, admissible telescope sequence.\n(blueprint: lem-pc-filtered-free-telescope-splitting)\n\nProof: write S = direct sum of F n, a = identity minus successor, and b for the\naugmentation induced by the compatible inclusions. These are precisely the maps\nin the statement; they commute with differentials because their summand maps do.\nCompatibility gives b a = 0. Work in an arbitrary degree k, identifying S.X k\nwith the direct sum of (F n).X k by preservation of coproducts by evaluation.\nEvery vector has finite support. The zeroth coordinate of a(x) is x_0; once the\ncoordinates before n vanish, its nth coordinate is x_n. Induction therefore\nproves that a is injective. Exhaustion proves that b is surjective.\nFor exactness at S, take z with b(z) = 0 and choose N containing its finite support.\nFor i <= N let t(i,N) be the composite of the transition maps, with t(N,N) = id.\nThe relations e_i(x) - e_(i+1)(step_i(x)) = a(e_i(x)) show, by a finite\nsum, that z is congruent modulo image(a) to e_N(sum_i t(i,N)(z_i)).\nThe image of this last coefficient under ι_N is b(z) = 0. Since ι_N is monic,\nthe coefficient is zero. Thus kernel(b) = image(a), in every degree.\n\nChoose the given degree-k retractions r_i of step_i. For i < j define r(j,i)\nby composing r_(j-1), ..., r_i, and put r(i,i) = id. Define a linear map\nl : S.X k -> S.X k on the jth summand by giving its ith coordinate as\n-r(j,i) for i < j, and zero for i >= j. This has finite support on every\nsummand and hence defines a map out of the direct sum. In l a on summand n,\nthe coordinates below n cancel using step_n followed by r_n = id; coordinate\nn is id and coordinates above n vanish. Hence l a = id.\nLet p = id - a l. It kills image(a). By the kernel calculation and surjectivity\nof b, it factors uniquely as s b for a linear s : P.X k -> S.X k.\nEquivalently s(x) = p(z) for any lift b(z) = x; differences of lifts lie in\nimage(a), which p kills, so this formula is independent of the lift and linear.\nThen b s = id by surjectivity, and a l + s b = id by definition of p.\nThese three identities give the required ShortComplex.Splitting. The retractions\nneed not commute with differentials: the splitting is only degreewise. No\nK-projectivity, zero initial stage or boundedness assumption is used here.\n\nFor its downstream use, the coproduct S is K-projective whenever the stages are:\nrestrict a map to an acyclic complex to each summand, choose a null homotopy,\nand assemble the components by degreewise coproducts. The split exact sequence\ngives a distinguished triangle S -> S -> P -> S[1] in the homotopy category.\nK-projectivity is left orthogonality to acyclic complexes, stable under shifts\nand extensions; the exact Hom sequence then makes P K-projective. These final\ntwo arguments are separate checked proofs in the assembly, not hypotheses or\nconclusions of this construction lemma. Zero rings and zero filtrations are included.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KL--09KM; the proof is detailed in the Lean declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "identity minus successor on direct sum of a split exhaustive filtration has a degreewise split exact augmentation sequence",
+   "results": "Only unrelated simplicial splitting results.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Splitting",
+   "results": "Found ShortComplex.Splitting, Splitting.exact and the section and retraction API; no telescope construction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope.*[Ss]plit|[Ss]plit.*telescope|isKProjective_coproduct",
+   "results": "No matches.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exhaustive degreewise split filtration gives a degreewise split telescope exact sequence",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error. Used leanfinder, loogle and local grep instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degreewise split telescope exact sequence of increasing split submodules direct sum identity minus shift",
+   "results": "Second reader: simplicial splitting lemmas and ShortComplex.Splitting identities only; no telescope construction.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Splitting",
+   "results": "Second reader: splitting data, exactness, homology, section and retraction API; none constructs the telescope splitting.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|mapping.?telescope|split.*[Ff]iltration",
+   "results": "Second reader: msearch returned tactic telescopes; targeted rg in Mathlib algebra, upstream algebra and lean/Sheaf/Algebra found no theorem constructing this degreewise splitting. Existing FlatTruncationTelescopeComparison concerns quasi-isomorphisms, not a splitting.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-filtered-free-kprojective-assembly"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredFreeTelescopeSplitting",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredFreeTelescopeSplitting.lean",
+  "declaration": "CochainComplex.filteredTelescope_degreewise_splitting",
+  "statement": "theorem filteredTelescope_degreewise_splitting {A : Type u} [CommRing A]\n    (P : CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1))\n    (hmono : ∀ n, Mono (ι n))\n    (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n)\n    (hexhaustive : ∀ (k : ℤ) (x : P.X k),\n      ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x)\n    (hsplit : ∀ (n : ℕ) (k : ℤ),\n      ∃ r : (F (n + 1)).X k ⟶ (F n).X k,\n        (step n).f k ≫ r = 𝟙 ((F n).X k)) :\n    ∀ k : ℤ, Nonempty\n      (((ShortComplex.mk (filteredTelescopeMap F step)\n        (filteredTelescopeAugmentation P F ι)\n        (filteredTelescope_comp_zero P F ι step hcompat)).map\n          (HomologicalComplex.eval (ModuleCat.{max u v} A) (.up ℤ) k)).Splitting)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T022430-L-3220211",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T022430-L-3220211",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

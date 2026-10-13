@@ -10699,3 +10699,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:24 L: merged deliver/S3/Sheaf.Algebra.Homology.DerivedOpenShriekAdjunction (stage 3; reviewer PASS; first push; landing 20261013T022429-L-3219327 (proof); batch 20261013T022404; modules 1; new nodes 0)
 - 02:24 L: merged deliver/T2/Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationDescent (stage 3; reviewer PASS; first push; landing 20261013T022429-L-3219585 (interface); batch 20261013T022404; modules 3; new nodes 2)
 - 02:24 L: merged deliver/T2/Sheaf.RingTheory.FiniteNormalCoverSupNormal (stage 3; reviewer PASS; first push; landing 20261013T022430-L-3219945 (proof); batch 20261013T022404; modules 1; new nodes 0)
+- 02:24 L: merged deliver/T3/Sheaf.Algebra.Homology.FilteredFreeKProjective (stage 3; reviewer PASS; after a return; landing 20261013T022430-L-3220211 (interface); batch 20261013T022404; modules 4; new nodes 3)

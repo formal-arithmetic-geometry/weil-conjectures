@@ -1,0 +1,110 @@
+{
+ "id": "lem-pc-filtered-free-kprojective-assembly",
+ "kind": "statement",
+ "title": "Telescope assembly yields a K-projective model",
+ "statement": "For universes u and v, let A : Type u be a commutative ring, P : CochainComplex (ModuleCat.{max u v} A) ℤ, F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ, ι n : F n ⟶ P, and step n : F n ⟶ F (n+1). Assume IsZero (F 0), Mono (ι n) for every n, step n ≫ ι (n+1) = ι n for every n, and exhaustive images: for every k : ℤ and x : P.X k there are n : ℕ and y : (F n).X k with (ι n).f k y = x. Assume also that for every n : ℕ and k : ℤ there is r : (F (n+1)).X k ⟶ (F n).X k with (step n).f k ≫ r = id, and that every F n is K-projective. Then there exists Q : CochainComplex (ModuleCat.{max u v} A) ℤ with Q.IsKProjective and Nonempty (Q ≅ P).",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KL--09KM"
+ },
+ "proof": [
+  {
+   "text": "Form the explicit maps a and b on S = ∐ F. Apply the degreewise-splitting construction lemma, which has no K-projectivity assumptions or conclusion.",
+   "uses": [
+    "lem-pc-filtered-free-telescope-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The checked coproduct null-homotopy argument proves S K-projective from the stages.",
+   "uses": [
+    "lem-pc-coproduct-kprojective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mathlib trianglehOfDegreewiseSplit and distinguished_iff_iso_trianglehOfDegreewiseSplit. Rewrite K-projectivity as left orthogonality to acyclic complexes; this orthogonal is triangulated, so ext_of_isTriangulatedClosed₃ proves P K-projective. Return Q = P and its identity isomorphism.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-free-telescope-splitting",
+  "lem-pc-coproduct-kprojective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjectiveAssembly.lean",
+  "place": "Checked assembly from explicit degreewise telescope splitting, proved coproduct closure and Mathlib triangulated orthogonality; repair of return D1/D2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of K-projective complex isomorphic to telescope filtered union",
+   "results": "No exact result",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-projective isomorphic complex filtered union",
+   "results": "No exact result",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered_free_telescope_assembly",
+   "results": "No existing declaration",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FilteredFreeKProjective",
+  "date": "2026-10-13",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-filtered-free-kprojective-telescope"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FilteredFreeKProjectiveAssembly",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredFreeKProjectiveAssembly.lean",
+  "declaration": "CochainComplex.filtered_free_telescope_assembly",
+  "statement": "theorem filtered_free_telescope_assembly\n    {A : Type u} [CommRing A]\n    (P : CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)\n    (ι : ∀ n, F n ⟶ P) (step : ∀ n, F n ⟶ F (n + 1))\n    (hzero : IsZero (F 0)) (hmono : ∀ n, Mono (ι n))\n    (hcompat : ∀ n, step n ≫ ι (n + 1) = ι n)\n    (hexhaustive : ∀ (k : ℤ) (x : P.X k),\n      ∃ (n : ℕ) (y : (F n).X k), (ι n).f k y = x)\n    (hsplit : ∀ (n : ℕ) (k : ℤ),\n      ∃ r : (F (n + 1)).X k ⟶ (F n).X k,\n        (step n).f k ≫ r = 𝟙 ((F n).X k))\n    (hstage : ∀ n, (F n).IsKProjective) :\n    ∃ Q : CochainComplex (ModuleCat.{max u v} A) ℤ,\n      Q.IsKProjective ∧ Nonempty (Q ≅ P)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T022430-L-3220211",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261013T022430-L-3220211",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
