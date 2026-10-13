@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-!
 
@@ -42,7 +43,8 @@ which is taken as an instance argument.
   only at the torsion coefficients `ModuleCat Λ`, `[Finite Λ]`
   (`isLeftAdjoint_rightDerivedLowerShriek`). That instance is the blueprint theorem
   `thm-amb-etale-exceptional-adjoint` of the smooth-purity chapter (Brown representability,
-  Stacks `0F5Y`, applied to the coproduct-preserving `Rf_!`), and is not proved here.
+  Stacks `0F5Y`, applied to the coproduct-preserving `Rf_!`), proved in
+  `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint`.
 * `Rf^!` is `Functor.rightAdjoint`, i.e. an arbitrary choice of right adjoint extracted from
   the instance, not a construction. Only the adjunction `rightDerivedUpperShriekAdjunction`
   should be used about it; it has no definitional content.
@@ -97,7 +99,7 @@ Grothendieck abelian category of étale sheaves of `Λ`-modules (Stacks `0F5Y`) 
 right adjoint [SGA 4, Exp. XVIII, Thm 3.1.4]. -/
 instance isLeftAdjoint_rightDerivedLowerShriek [Finite Λ] :
     (R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint :=
-  sorry
+  isLeftAdjoint_rightDerivedLowerShriekOfCompactification Λ _
 
 end TorsionCoefficients
 
