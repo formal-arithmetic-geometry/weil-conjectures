@@ -48,20 +48,26 @@
  ],
  "proof": [
   {
-   "text": "Define each map by the universal property of the inverse limit after checking that componentwise application preserves compatible families.",
-   "uses": [
-    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
-   ],
-   "elementary": false
+   "text": "For any family in the target tower compatible with successor transitions, use Mathlib CategoryTheory.NatTrans.ofOpSequence from the constant PUnit functor to the underlying-type tower. Naturality on all arrows proves that the family is a section. This is the proved private helper tower_family_compatible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For x in limit F, apply alpha to all its projections. The successor compatibility follows from h_alpha and limit.w. Transfer this section back to an element of limit G using Types.isLimitEquivSections for the limit cone preserved by ModuleCat.forget. Types.isLimitEquivSections_symm_apply gives every projection equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove additivity and scalar compatibility by Concrete.limit_ext: each projection of the constructed map agrees with alpha composed with the corresponding projection, and both maps are linear. This completes the proved private helper tower_induced_map. Apply it to alpha and beta and assemble the two maps and their projection equations.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra Lemma 03CA, componentwise construction"
+  "document": "Mathlib.CategoryTheory.Functor.OfSequence; Mathlib.CategoryTheory.Limits.Types.Limits; Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic",
+  "place": "NatTrans.ofOpSequence; Types.isLimitEquivSections and isLimitEquivSections_symm_apply; Concrete.limit_ext; componentwise construction of Stacks Algebra Lemma 03CA"
  },
  "lean": {
   "existing": false,
@@ -84,13 +90,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "X-5f645",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261012T225303-L-1802796",
+  "landing": "20261013T082421-L-1650733",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Unchanged theorem signature matches new-tower-limit-induced-maps; proof and node agree; delivery and sole direct importer compile without warnings; all three proofs use only permitted axioms."
  }
 }
