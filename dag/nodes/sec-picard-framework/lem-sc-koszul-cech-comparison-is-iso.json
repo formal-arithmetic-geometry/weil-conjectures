@@ -1,0 +1,109 @@
+{
+ "id": "lem-sc-koszul-cech-comparison-is-iso",
+ "kind": "statement",
+ "title": "The specified Koszul-to-Cech chain comparison is an isomorphism",
+ "statement": "Let A be a commutative ring, r a natural number, f : Fin r → A, and F an integer-indexed complex of sheaves of modules on Spec(A), all of whose terms are quasi-coherent. The chain map koszulCechComparison A r f F [def-sc-koszul-cech-comparison-construction], from the specified Koszul Hom colimit to the principal alternating Cech total, is an isomorphism of A-module complexes.",
+ "stmt_deps": [
+  "def-sc-koszul-cech-comparison-construction",
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D1, canonical isomorphism of complexes and its sign calculation"
+ },
+ "proof": [
+  {
+   "text": "Identify F termwise with the associated sheaf of its global-section complex. Apply the localization identification of lem-sc-affine-koszul-hom-alternating-cech to the specified power transition system: on the ordered wedge indexed by J its coordinate is m/(product f_j)^(e+1). The defining cocone formula is this fraction multiplied by (-1)^(pq+p(p-1)/2). The sign matches the Hom and Cech total differentials. Finitely many rows and subsets allow the identification degreewise; invert its components to get the inverse chain map. For r=0 both complexes are zero, and r=1 is the single localization colimit.",
+   "uses": [
+    "lem-sc-affine-koszul-hom-alternating-cech"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-koszul-hom-alternating-cech"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D1, canonical isomorphism of complexes and its sign calculation; specialization to the library's specified maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The filtered colimit of Hom complexes from powers of a Koszul complex is isomorphic to the alternating Cech total complex by localization.",
+   "results": "Service unavailable: HTTP endpoint returned Internal Server Error. No mathematical verdict from this search; used leanfinder, loogle, and local rg instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit finite free Hom complexes localization principal opens isomorphism",
+   "results": "8 generic localization, free locus, and derived category hits; no specified Koszul cocone comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Functor.map",
+   "results": "Generic Functor.map_isIso and iso identities; no theorem establishing invertibility of this comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "principalCech|koszulCech|alternating.*[Cc]ech.*[Qq]uasi",
+   "results": "msearch upstream index: 0 hits. Local rg lean/Sheaf and lean/WeilConjectures: construction and original comparison only; no invertibility of the specified Koszul chain map.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-koszul-cech-derived-comparison",
+   "place": "Koszul-to-Cech comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulCechComparisonIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulCechComparisonIsIso.lean",
+  "declaration": "AlgebraicGeometry.koszulCechComparison_isIso",
+  "statement": "theorem koszulCechComparison_isIso\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (F : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent) :\n    IsIso (koszulCechComparison A r f F)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

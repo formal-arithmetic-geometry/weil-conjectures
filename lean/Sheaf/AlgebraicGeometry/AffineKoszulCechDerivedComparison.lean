@@ -6,8 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
-import Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech
-import Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections
+import Sheaf.AlgebraicGeometry.KoszulCechComparisonIsIso
+import Sheaf.AlgebraicGeometry.PrincipalCechResolutionQuasiIso
 
 /-! # Koszul Hom colimits compute derived sections on a principal-open union
 
@@ -57,6 +57,31 @@ theorem affine_koszul_cech_derived_comparison
     (e : DerivedCategory.Q.obj F ≅ E.obj) :
     IsIso (koszulCechDerivedComparison A r f F ≫
       (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.map e.hom) := by
-  sorry
+  have : IsIso (koszulCechComparison A r f F) :=
+    koszulCechComparison_isIso A r f F hF
+  obtain ⟨J, hJ, i, _, hi⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective F
+  let _ := hJ
+  let _ := hi
+  have : QuasiIso ((principalCechFunctor r f).map i) :=
+    principalCech_resolution_quasiIso A r f F J hF i
+  have : QuasiIso ((principalCechAugmentation r f).app J) :=
+    principalCechAugmentation_quasiIso r f J
+  have hβ := (principalCechDerivedComparison_exists r f F).choose_spec J i
+  have : IsIso (principalCechDerivedComparison r f F ≫
+      (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.map
+        (DerivedCategory.Q.map i) ≫
+      ((affineOpenSections A (koszulOpen A r f)).rightDerivedFunctorObjQIso J).hom ≫
+      DerivedCategory.Q.map ((principalCechAugmentation r f).app J)) := by
+    dsimp only [koszulOpen, principalCechDerivedComparison]
+    rw [hβ]
+    infer_instance
+  have : IsIso (principalCechDerivedComparison r f F) :=
+    IsIso.of_isIso_comp_right _
+      ((affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor.map
+          (DerivedCategory.Q.map i) ≫
+        ((affineOpenSections A (koszulOpen A r f)).rightDerivedFunctorObjQIso J).hom ≫
+        DerivedCategory.Q.map ((principalCechAugmentation r f).app J))
+  dsimp only [koszulCechDerivedComparison]
+  infer_instance
 
 end AlgebraicGeometry

@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-principal-cech-resolution-quasi-iso",
+ "kind": "statement",
+ "title": "Principal Cech totalization compares a quasi-coherent complex with a K-injective resolution",
+ "statement": "Let A be a commutative ring, r a natural number, f : Fin r → A, and F and J integer-indexed complexes of sheaves of modules on Spec(A). Suppose every F.X n is quasi-coherent, J is K-injective, and i : F → J is a quasi-isomorphism. Then (principalCechFunctor r f).map i [def-sc-principal-open-alternating-total] is a quasi-isomorphism of A-module complexes. No boundedness assumption or quasi-coherence hypothesis on J is imposed.",
+ "stmt_deps": [
+  "def-sc-principal-open-alternating-total",
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08D2 and 08C2, affine specialization and the finite Cech total comparison with a resolution"
+ },
+ "proof": [
+  {
+   "text": "Use the intersectionwise affine section comparison in the proof of lem-sc-qcoh-complex-alternating-cech-derived-sections: each nonempty principal intersection is affine; restriction of i is a quasi-isomorphism into a K-injective complex, and the terms, differential cokernels, and cohomology of F on that intersection are quasi-coherent and have vanishing higher cohomology. Thus the section map is a quasi-isomorphism, without a vertical boundedness assumption.",
+   "uses": [
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Filter the totals by Cech degree. Each graded map is a shifted finite product of the preceding section quasi-isomorphisms. Starting with the zero terminal filtration step, the long exact sequences of the short exact filtration sequences show inductively that each preceding step is a quasi-isomorphism. There are only r rows. The r=0 totals are zero and r=1 has one affine section map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-qcoh-complex-alternating-cech-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08D2 and 08C2, affine specialization and the finite Cech total comparison with a resolution; specialization to the library's specified maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Alternating Cech totalization of a quasi coherent complex on a finite affine open cover maps by a quasi isomorphism to the totalization of its K injective resolution.",
+   "results": "Service unavailable: HTTP endpoint returned Internal Server Error. No mathematical verdict from this search; used leanfinder, loogle, and local rg instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "alternating Cech totalization map to K injective resolution quasi isomorphism quasi coherent complex finite affine cover",
+   "results": "8 generic injective-resolution and derived-functor hits; none about principal Cech totalization of this resolution.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, CategoryTheory.Functor.map",
+   "results": "Generic quasiIso_map_of_preservesHomology, shifts, and DerivedCategory.isIso_Q_map_iff_quasiIso. Sections on arbitrary module sheaves do not preserve homology, so the generic lemma does not close the needed affine quasi-coherent comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*[Rr]esolution|[Rr]esolution.*Cech",
+   "results": "msearch: 0 hits. Local rg: PrincipalOpenCechTotal supplies augmentation quasiIso on K-injectives and the derived characterization, not quasiIso of principalCechFunctor.map i. ModuleCechResolutionColumnZero concerns a single module/injective resolution, not unbounded coefficient complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-koszul-cech-derived-comparison",
+   "place": "Cech comparison on a K-injective resolution",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalCechResolutionQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalCechResolutionQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.principalCech_resolution_quasiIso",
+  "statement": "theorem principalCech_resolution_quasiIso\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (F J : CochainComplex\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)\n    (hF : ∀ n : ℤ, (F.X n).IsQuasicoherent)\n    [J.IsKInjective] (i : F ⟶ J) [QuasiIso i] :\n    QuasiIso ((principalCechFunctor r f).map i)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -29,45 +29,37 @@
  ],
  "proof": [
   {
-   "text": "By the affine module/sheaf identification, write $M^\\bullet=\\Gamma(X,\\mathcal F^\\bullet)$. For each $e$, the shifted Koszul complex $I^\\bullet(f_1^e,\\ldots,f_r^e)$ is bounded and finite free. The transition $I^\\bullet(f_1^{e+1},\\ldots,f_r^{e+1})\\to I^\\bullet(f_1^e,\\ldots,f_r^e)$ multiplies the basis vector indexed by a subset $J$ by $\\prod_{j\\in J}f_j$; precomposition gives the filtered system of Hom complexes. The Koszul-to-alternating-Cech map sends a cochain to the corresponding localized cochains, and this multiplication makes these maps commute with the transition maps and with the Koszul and Cech differentials. By [lem-sc-affine-koszul-hom-alternating-cech], the induced map from $\\varinjlim_e\\operatorname{Hom}_A^\\bullet(I^\\bullet(f_1^e,\\ldots,f_r^e),M^\\bullet)$ to the alternating Cech total complex with $p$-th row $\\prod_{i_0<\\cdots<i_p}M^\\bullet_{f_{i_0}\\cdots f_{i_p}}$ is a quasi-isomorphism.",
+   "text": "Apply lem-sc-koszul-cech-comparison-is-iso to the explicit Koszul-to-Cech chain map, using the termwise quasi-coherence hypothesis. Its derived-category image is invertible because functors preserve isomorphisms.",
    "uses": [
-    "lem-sc-affine-koszul-hom-alternating-cech"
+    "lem-sc-koszul-cech-comparison-is-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D1, Koszul-to-alternating-Cech comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\mathcal U:U=\\bigcup_{i=1}^rD(f_i)$. It is a finite open covering, and $D(f_{i_0})\\cap\\cdots\\cap D(f_{i_p})=D(f_{i_0}\\cdots f_{i_p})$ is affine, isomorphic to $\\operatorname{Spec}(A_{f_{i_0}\\cdots f_{i_p}})$ (Stacks Tag 01HS). The restriction $\\mathcal F^\\bullet|_U$ is a complex of quasi-coherent $\\mathcal O_U$-modules, with no boundedness assumption. Hence [lem-sc-qcoh-complex-alternating-cech-derived-sections] applies to $U$, $\\mathcal U$ and $\\mathcal F^\\bullet|_U$: the canonical map $\\operatorname{Tot}(\\check{\\mathcal C}^\\bullet_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^\\bullet|_U))\\to R\\Gamma(U,\\mathcal F^\\bullet)$ is an isomorphism in $D(\\Gamma(U,\\mathcal O_U))$, hence in $D(A)$ via $A\\to\\Gamma(U,\\mathcal O_U)$, functorially in $\\mathcal F^\\bullet$.",
+   "text": "Choose a K-injective resolution i:F→J using the ringed-space module Grothendieck structure and HasKInjectiveResolutions. By lem-sc-principal-cech-resolution-quasi-iso the induced Cech total map is a quasi-isomorphism. principalCechAugmentation_quasiIso makes the augmentation on J a quasi-isomorphism. The defining equation of principalCechDerivedComparison equates its composite with RΓ(i), the K-injective section computation isomorphism, and Q(augmentation), to Q(Cech(i)). All the other factors and the right side are invertible, so IsIso.of_isIso_comp_right proves that the derived Cech comparison is invertible.",
    "uses": [
-    "lem-sc-qcoh-complex-alternating-cech-derived-sections"
+    "lem-sc-principal-cech-resolution-quasi-iso",
+    "def-sc-principal-open-alternating-total",
+    "def-pc-ringed-spaces-derived-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D2, alternating-Cech complex computes cohomology (via Cohomology, Lemma 08C2 and Cohomology of Schemes, Lemma 01XB)"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $i_0<\\cdots<i_p$, since $\\mathcal F^q\\cong\\widetilde{M^q}$ on the affine scheme $X$ (Stacks Tag 01IA), the sections over $D(f_{i_0}\\cdots f_{i_p})$ are $\\Gamma(D(f_{i_0}\\cdots f_{i_p}),\\widetilde{M^q})=M^q_{f_{i_0}\\cdots f_{i_p}}$ (Stacks Tag 01HV). Restriction from a larger principal intersection is the canonical localization map, so these identifications commute term by term with every Cech face map and with the differentials of $M^\\bullet$, hence identify $\\operatorname{Tot}(\\check{\\mathcal C}^\\bullet_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^\\bullet|_U))$ with the module total complex of step 1. Composing the quasi-isomorphism of step 1 with the isomorphism of step 2 gives the canonical map of the item, which is therefore a quasi-isomorphism (an isomorphism in $D(A)$). With the empty-cover convention, $r=0$ gives the zero alternating Cech complex and the corresponding colimit is zero; if $\\mathcal F^\\bullet=0$, both complexes are zero.",
+   "text": "Unfold koszulCechDerivedComparison as Q(koszulCechComparison) followed by principalCechDerivedComparison. Compose the two established isomorphisms and the derived-functor image of e.hom. Functor.map_isIso and comp_isIso discharge the final IsIso.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D2, identification of affine sections with localizations"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-affine-koszul-hom-alternating-cech",
-  "lem-sc-qcoh-complex-alternating-cech-derived-sections"
+  "lem-sc-koszul-cech-comparison-is-iso",
+  "lem-sc-principal-cech-resolution-quasi-iso",
+  "def-sc-principal-open-alternating-total",
+  "def-pc-ringed-spaces-derived-direct-image"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Reconstruction of the arguments referenced by Tags 08D1 and 08D2; source packet unavailable locally"
+  "place": "Tags 08D1 and 08D2; Lean reduction via the specified K-injective comparison equation, second reading by Y2"
  },
  "mathlib_searches": [
   {
@@ -149,5 +141,15 @@
   "group": "T1",
   "result": "pass",
   "note": "A CommRing, r:Nat incl 0, f, U=koszulOpen=sup D(f_i), F complex with all terms quasi-coherent, E in D_QCoh with e: Q F iso E; M=Gamma(X,F) with A-action; diagram e -> Hom_A(I_(e+1) tail, M) by precomposition with koszulOpenTransition; cocone pinned by (prod f_j)^(e+1) x image_J = (-1)^(pq+p(p-1)/2) z(e_J)|D_J, checked by hand to be a chain map for d_I=-d_K, delta of Mathlib and Cech total d_1+(-1)^p d_2; beta pinned by every K-injective resolution; conclusion IsIso in D(A); 3 new def nodes read against 0A8H, 08C2, 08D0-08D2, no existing def (grep of lean/Sheaf, upstream)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261013T011938-L-2767111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
