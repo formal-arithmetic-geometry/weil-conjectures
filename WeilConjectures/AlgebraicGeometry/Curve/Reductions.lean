@@ -194,6 +194,51 @@ theorem IsCurve.bijective_cohomologyMap_of_isConstructibleSheaf_of_forall_isRedu
     A q).2 h₁
   exact (Function.Bijective.of_comp_iff' (cohomologyMap_bijective _ _ q) _).1 h₂
 
+/-- An abelian étale sheaf *admits a prime-field dévissage* if it is built by the following two
+rules (compare blueprint `def-v2-prime-field-filtration`):
+
+1. a sheaf whose underlying abelian sheaf is isomorphic to that of a constructible sheaf of
+  `𝐅_r`-modules (modules over `ULift (ZMod r)`), for a prime `r`, admits a prime-field
+  dévissage;
+2. if `0 → G₁ → G → G₃ → 0` is a short exact sequence and `G₁` and `G₃` admit prime-field
+  dévissages, then so does `G`.
+
+On a noetherian scheme every constructible abelian sheaf, killed by some `n ≥ 1`, admits one,
+by induction on `n` along `0 → rG → G → G/rG → 0`. -/
+inductive Scheme.HasPrimeFieldDevissage {X : Scheme.{u}} :
+    Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} → Prop
+  /-- A sheaf isomorphic to the underlying abelian sheaf of a constructible sheaf of
+  `𝐅_r`-modules, `r` prime. -/
+  | of_iso (r : ℕ) (hr : r.Prime)
+      (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))
+      (hG : IsConstructibleSheaf G) (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+      (e : A ≅ (sheafCompose _
+        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) AddCommGrpCat.{u + 1})).obj G) :
+      HasPrimeFieldDevissage A
+  /-- An extension of two sheaves admitting prime-field dévissages. -/
+  | extension (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (hS : S.ShortExact) (h₁ : HasPrimeFieldDevissage S.X₁)
+      (h₃ : HasPrimeFieldDevissage S.X₃) : HasPrimeFieldDevissage S.X₂
+
+/-- **Constructible approximation and dévissage of a torsion sheaf.** On a noetherian scheme
+`X`, the underlying abelian sheaf of a torsion sheaf `F` of `Λ`-modules is the filtered colimit
+of its constructible abelian subsheaves [Stacks 03SA], and each of these, being killed by some
+`n ≥ 1`, admits a prime-field dévissage (`AlgebraicGeometry.Scheme.HasPrimeFieldDevissage`):
+along `0 → rG → G → G/rG → 0` for a prime `r ∣ n`, the quotient `G/rG` is a constructible sheaf
+of `𝐅_r`-modules and `rG` is killed by `n / r`.
+(blueprint: `lem-weil-pbc-curve-constructible-reduction`, constructible approximation and
+primary dévissage) -/
+@[stacks 03SA]
+theorem Scheme.exists_isColimit_hasPrimeFieldDevissage {X : Scheme.{u}} [IsNoetherian X]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] :
+    ∃ (J : Type (u + 1)) (_ : Category.{u + 1} J) (_ : IsFiltered J)
+      (D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (c : Cocone D),
+      Nonempty (IsColimit c) ∧
+      Nonempty (c.pt ≅
+        (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) ∧
+      ∀ j, Scheme.HasPrimeFieldDevissage (D.obj j) :=
+  sorry
+
 /-- **Reduction of `C₇` to constructible prime torsion on reduced curves.** Let `k` be
 algebraically closed. Suppose that `C₇` holds for every reduced proper curve `X` over `k`,
 every prime `r` and every constructible sheaf `G` of `𝐅_r`-modules on `X` (modules over
@@ -222,8 +267,26 @@ theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field 
     {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι)
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace C := quasiSeparatedSpace_of_quasiSeparated f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsNoetherian C := {}
+  have : IsProper f' := MorphismProperty.of_isPullback (P := @IsProper) h inferInstance
+  have : CompactSpace C' := QuasiCompact.compactSpace_of_compactSpace f'
+  have : QuasiSeparatedSpace C' := quasiSeparatedSpace_of_quasiSeparated f'
+  have key (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
+      (hG : Scheme.HasPrimeFieldDevissage G) (q : ℕ) :
+      Function.Bijective (cohomologyMap ι' G q) := by
+    induction hG generalizing q with
+    | of_iso r hr G hG A e =>
+      have : Fact r.Prime := ⟨hr⟩
+      exact bijective_cohomologyMap_of_retract _ e.hom e.inv e.hom_inv_id q
+        (bijective_cohomologyMap_of_isConstructibleSheaf_of_forall_isReduced H f k' h r G q)
+    | extension S hS _ _ ih₁ ih₃ => exact bijective_cohomologyMap_X₂_of_shortExact ι' hS ih₁ ih₃ q
+  obtain ⟨J, _, _, D, c, ⟨hc⟩, ⟨e⟩, hD⟩ := Scheme.exists_isColimit_hasPrimeFieldDevissage Λ F
+  exact bijective_cohomologyMap_of_retract _ e.inv e.hom e.inv_hom_id q
+    (Etale.bijective_cohomologyMap_of_isColimit ι' hc q fun j ↦ key _ (hD j) q)
 
 /-- **Constructible and primary reduction of the eight assertions.** Let `k` be algebraically
 closed. Suppose that the eight assertions `C(X, G)` hold for every reduced curve `X` over `k`,
