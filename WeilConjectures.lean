@@ -1887,6 +1887,7 @@ public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 public import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Chevalley
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
+public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Jacobson
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.RingHom

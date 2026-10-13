@@ -124,4 +124,11 @@ theorem Scheme.exists_pow_eq_zero_of_isNilpotent (X : Scheme.{u}) [CompactSpace 
   exact (Ideal.mem_bot.mp ((Ideal.pow_le_pow_right (Finset.le_sup hxt)).trans
     (hN x y hyx).le hmem))
 
+/-- A Noetherian scheme has finitely many irreducible components
+(blueprint: `lem-weil-pbc-noetherian-finite-components`). This restates Mathlib's
+`AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian`. -/
+theorem IsNoetherian.finite_irreducibleComponents (X : Scheme.{u}) [IsNoetherian X] :
+    (irreducibleComponents X).Finite :=
+  finite_irreducibleComponents_of_isNoetherian
+
 end AlgebraicGeometry
