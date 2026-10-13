@@ -1,0 +1,138 @@
+{
+ "id": "new-picard-residue-homology-comparison-targets",
+ "kind": "statement",
+ "title": "Target geometric comparison equivalences",
+ "statement": "Under the derived localization instances and geometric hypotheses in the following signature, the explicit residue cycle quotient has an additive equivalence to degree-one structure-sheaf fibre cohomology: theorem picard_residue_homology_geometric_comparison_targets\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}\n    (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)\n    [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]\n    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n      SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (p : Ideal Γ(W, U)) [p.IsPrime]\n    (hp : p = RingHom.ker (W.evaluation U w hwU).hom)\n    (C : Fin n → CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hC : ∀ i, IsStrictlyPerfect W U (C i))\n    (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n      ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst (fi i) k)).obj\n            ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) :\n    Nonempty (∀ i, affineResidueCycleHomology W U p (C i) ≃+\n        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)",
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-module-pullback",
+  "def-pc-perfect-complex",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-invertible-module",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "lem-sc-affine-residue-cycle-class-quotient",
+  "lem-sc-affine-residue-cycle-homology-map"
+ ],
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0B91, 0BF2, 01XK; parent steps 1, 2 and 4 on homology rather than cycles"
+ },
+ "proof": [
+  {
+   "text": "For each i construct the fibre morphism by pullback.lift, using hui for its commutativity equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Combine successive/composite tensor pullback isomorphisms, pullback of tau, and the unit comparison to trivialize the target fibre coefficient. Pullback preserves invertibility.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source comparison to fi(i), its pulled-back coefficient and C(i), and use choice to assemble the family.",
+   "uses": [
+    "new-picard-residue-homology-comparison-source"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "new-picard-residue-homology-comparison-source"
+ ],
+ "proof_origin": {
+  "by": "Q4",
+  "kind": "written-by-agent",
+  "date": "2026-10-14",
+  "document": "Stacks Project",
+  "place": "proved by source comparison, fibre pullback.lift, tensor composition, unit preservation and invertibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homology.*(baseChange|extendScalars)|IsImmersion.*residueField",
+   "results": "1 hits: Mathlib/RingTheory/Extension/ExtendScalars.lean",
+   "date": "2026-10-14",
+   "verdict": "No statement identifying this project-specific quotient and geometric fibre cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"tensor\"",
+   "results": "3 hits: groupHomology.H1ToTensorOfIsTrivial, groupHomology.H1ToTensorOfIsTrivial_H1π_single, groupHomology.coinvariantsTensorResProjectiveResolutionIso",
+   "date": "2026-10-14",
+   "verdict": "No statement identifying this project-specific quotient and geometric fibre cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded complex finite projective modules tensor residue field homology derived proper direct image fibre comparison",
+   "results": "8 hits: LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, Rep.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective",
+   "date": "2026-10-14",
+   "verdict": "No statement identifying this project-specific quotient and geometric fibre cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree one cohomology of a proper flat scheme fibre computed by residue tensor of a bounded finite projective direct image complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparison",
+  "date": "2026-10-14",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-picard-residue-homology-comparison",
+   "place": "decomposition of proof",
+   "via": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonTargets",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardResidueHomologyGeometricComparisonTargets.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_residue_homology_geometric_comparison_targets",
+  "statement": "theorem picard_residue_homology_geometric_comparison_targets\n    [∀ Y : Scheme.{v},\n      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]\n    [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}\n      (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]\n    {X S : Scheme.{v}} (f : X ⟶ S) {n : ℕ}\n    (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)\n    [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]\n    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)\n    (L : X.Modules) [L.IsInvertible]\n    (W : Scheme.{v}) (k : W ⟶ S) [IsImmersion k]\n    (w : W) (s : S) (hw : k w = s)\n    (τ : (Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj L ≅\n      SheafOfModules.unit (pullback f (S.fromSpecResidueField s)).ringCatSheaf)\n    (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)\n    (p : Ideal Γ(W, U)) [p.IsPrime]\n    (hp : p = RingHom.ker (W.evaluation U w hwU).hom)\n    (C : Fin n → CochainComplex\n      (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)\n    (hC : ∀ i, IsStrictlyPerfect W U (C i))\n    (hCi : ∀ i, Nonempty ((SheafOfModules.overFunctor.{v}\n      (moduleRings W.toRingedSpace) U).mapDerivedCategory.obj\n      ((schemeDerivedDirectImage (pullback.snd (fi i) k)).obj\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{v} (moduleRings (pullback (fi i) k).toRingedSpace)) 0).obj\n          ((Modules.tensorPullback (pullback.fst (fi i) k)).obj\n            ((Modules.tensorPullback (ui i)).obj L)))) ≅ DerivedCategory.Q.obj (C i))) :\n    Nonempty (∀ i, affineResidueCycleHomology W U p (C i) ≃+\n        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T234517-L-2165452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261013T234517-L-2165452",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

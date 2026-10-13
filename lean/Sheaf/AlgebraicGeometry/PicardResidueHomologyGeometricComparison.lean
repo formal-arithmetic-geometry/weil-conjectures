@@ -19,9 +19,8 @@ public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonSource
+import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricComparisonTargets
 
 /-! # Geometric naturality after passing to residue homology
 
@@ -36,16 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-/-! Auxiliary geometric comparison, split from the naturality theorem.
-(blueprint: new-picard-residue-homology-comparison) -/
-
-/-- Auxiliary split theorem.
-Proof: Restrict the strictly perfect direct-image models to the affine open and use
-finite-projective retractions to obtain K-flat complexes. Derived residue pullback is
-then computed termwise by the explicit residue-cycle quotient. Base-change identifies
-its degree-one homology with the corresponding fibre structure-sheaf cohomology;
-the coefficient trivialization and the equality of residue fields transport these
-identifications to additive equivalences for K and every C i.
+set_option linter.unusedVariables false in
+/-- Combine the source and target geometric comparison equivalences.
 (blueprint: new-picard-residue-homology-comparison) -/
 theorem picard_residue_homology_geometric_comparison
     [∀ Y : Scheme.{v},
@@ -88,6 +79,13 @@ theorem picard_residue_homology_geometric_comparison
     ∃ (eK : affineResidueCycleHomology W U p K ≃+
         Sheaf.H (structureSheafAb (pullback f (S.fromSpecResidueField s))) 1)
       (eC : ∀ i, affineResidueCycleHomology W U p (C i) ≃+
-        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1), True := by sorry
+        Sheaf.H (structureSheafAb (pullback (fi i) (S.fromSpecResidueField s))) 1), True := by
+  obtain ⟨eK⟩ :=
+    picard_residue_homology_geometric_comparison_source f L W k w s hw τ U
+      hwU hU p hp K hK hE
+  obtain ⟨eC⟩ :=
+    picard_residue_homology_geometric_comparison_targets f Xi fi ui hui L W k w s hw τ U
+      hwU hU p hp C hC hCi
+  exact ⟨eK, eC, True.intro⟩
 
 end AlgebraicGeometry.Scheme
