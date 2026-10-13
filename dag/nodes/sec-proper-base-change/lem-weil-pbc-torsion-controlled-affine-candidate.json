@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-torsion-controlled-affine-candidate",
+ "kind": "statement",
+ "title": "Quasi-coherent affine candidate from torsion-controlled formal gluing",
+ "statement": "Let X be affine Noetherian, J ideal sheaf data, H coherent, N a coherent formal module, and delta:N -> completion(H). Assume a single positive power of J annihilates the kernels and cokernels of every component of delta [def-weil-pbc-coherent-formal-module]. There exist a quasi-coherent X-module F, a map a:F -> H, and an isomorphism beta:N.obj -> formalCompletionFunctor(J)(F), factoring delta through completion(a). One positive power of J annihilates both kernel(a) and cokernel(a). No coherence or finite generation of F is asserted.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine construction, using Tags 087W, 0888, 00MA and 0ALK(1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Identify the affine scheme with Spec A via its canonical isomorphism. Use the affine formal-module equivalence to represent N by a finite completed module Q and the coherent H by a finite A-module P. The natural completion tensor comparison identifies the map with Q -> S tensor P, where S is the I-adic completion. Transfer the componentwise bound to a positive annihilating power for its kernel and cokernel; the exponent may change.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completion ring map is flat and has the same quotient modulo I. Formal gluing 0ALK(1) provides an A-module T, a map T -> P and Q isomorphic to S tensor T, with the required factorization. Its comparison isomorphisms identify the kernel and cokernel with those of Q -> S tensor P as A-modules. Transfer the positive uniform annihilating power through these linear equivalences. No finite generation of T is asserted.",
+   "uses": [
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-formal-glueing-isogeny"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify T and its map; tilde is quasi-coherent and exact. The affine ideal-product and kernel/cokernel formulas transfer the uniform bound to sheaves. For every positive n, A/I^n -> S/I^n S is an isomorphism (apply the completion quotient comparison to I^n, or iterate the I-adic quotient comparison). Right exactness of tensor identifies T/I^n T with (S tensor T)/I^n(S tensor T), even for arbitrary T. Compose these identifications with Q and the affine formal equivalence reconstruction to produce beta. Naturality makes its components compatible with reduction and proves the factorization. This avoids using completion-as-tensor for the possibly infinite T.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For I=A, the coherent formal system is zero; choose T=P, the identity map and the unique isomorphism of zero quotient systems. For I=0, the constant formal system is its own limit; the affine equivalence gives the original map and T=Q. The zero ring or empty spectrum has the same construction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-formal-systems-annihilated-by-power",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-formal-glueing-isogeny",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), affine construction, using Tags 087W, 0888, 00MA and 0ALK(1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Formal gluing constructs a quasi coherent module on a Noetherian affine scheme with prescribed completed quotient system and a map whose kernel and cokernel are annihilated by an ideal power",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite completed module mapping to the completion of a finite module with ideal power torsion kernel and cokernel algebraizes over a Noetherian affine scheme",
+   "results": "AdicCompletion.flat_of_isNoetherian; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; Algebra.QuasiFiniteAt; AlgebraicGeometry.IsFinite.finite_app",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_map_to_of_torsion_baseChange|coherent_of_formalQuotients|torsionControlled_affine_candidate",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledAffineAlgebraization",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine construction and finiteness parts of Tag 0889(1)",
+   "via": [
+    "lem-weil-pbc-torsion-controlled-affine-algebraization",
+    "new-stage3-torsion-controlled-easy-algebraization-bridge",
+    "lem-weil-pbc-torsion-controlled-algebraization-construction",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorsionControlledAffineCandidate",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionControlledAffineCandidate.lean",
+  "declaration": "AlgebraicGeometry.torsionControlled_affine_candidate",
+  "statement": "theorem torsionControlled_affine_candidate\n    {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)\n    (H : CoherentModules X) (N : CoherentFormalModule X J)\n    (δ : N ⟶ (completion X J).obj H)\n    (htorsion : ∃ t : ℕ, 1 ≤ t ∧ ∀ e : ℕ,\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι t).2\n        (kernel (δ.hom.app (op e)))) ∧\n      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι t).2\n        (cokernel (δ.hom.app (op e))))) :\n    ∃ (F : X.Modules) (_ : F.IsQuasicoherent) (a : F ⟶ H.obj)\n      (β : N.obj ≅ (formalCompletionFunctor J).obj F),\n      δ.hom = β.hom ≫ (formalCompletionFunctor J).map a ∧\n      (∃ s : ℕ, 1 ≤ s ∧\n        IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n          (kernel a)) ∧\n        IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n          (cokernel a)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T045519-L-126002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T045519-L-126002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

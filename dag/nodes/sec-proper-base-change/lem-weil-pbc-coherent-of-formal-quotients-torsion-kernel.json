@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-coherent-of-formal-quotients-torsion-kernel",
+ "kind": "statement",
+ "title": "Coherence from a single formal quotient and an annihilated map kernel",
+ "statement": "Let X be affine Noetherian, J ideal sheaf data, F a quasi-coherent module, H coherent, and a:F -> H [def-weil-pbc-coherent-formal-module]. Let s>=1. If the quotient of F by J^s F (the formal completion component at index s-1) is coherent and J^s annihilates kernel(a), then F is coherent. No cokernel bound or other formal quotient condition is needed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0889(1), finiteness paragraph; elementary finite-generator argument replacing the use of Tag 05EU"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [
+  {
+   "text": "Let U be the top affine open and A its Noetherian ring of sections. Put I=J(U)^s. Quasi-coherence of the kernel and the affine ideal-power vanishing criterion show that I kills the kernel of the linear map a on sections.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-ideal-power-product-zero-affine-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse Scheme.Modules.multiplication_range from IdealTimesQuasiCoherentAffineSections (a proof-only import all exposes its private theorem), rather than proving the multiplication-range calculation again. The ideal-power section comparison identifies its ideal with I=J(U)^s. Use the tensor and image comparisons for quasi-coherence of the product, and the affine cokernel comparison to identify sections of F/J^s F with P/IP. The formal quotient at index s-1 is exactly this cokernel because s>=1. Its assumed coherence makes P/IP finite; coherence of H makes Gamma(H) finite.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image of P -> Gamma(H) is finite over Noetherian A. Choose a finite submodule L1 of P mapping onto it by lifting a finite generating family. Choose a finite submodule L2 mapping onto P/IP in the same way, and set L=L1+L2. For r in I and x in P, choose y in L1 with a(y)=a(x); I kills x-y, so rx=ry belongs to L. Thus IP is contained in L. Since L2 maps onto P/IP, IP+L2=P. Therefore L=P, proving finite generation. This argument is implemented by proved private helpers exists_fg_lift and finite_of_quotient_and_torsion_kernel.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The affine finite-type criterion gives finite type of F from its finite sections on the singleton cover by U. Combine quasi-coherence with finite type on the Noetherian scheme to obtain coherence. For I=0 the quotient already is P; for I=A the kernel is zero and P embeds in a finite module. The empty spectrum presents no exception.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-ideal-power-product-zero-affine-cover",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-13",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Tag 0889(1), finiteness paragraph; elementary finite-generator argument replacing the use of Tag 05EU"
+  },
+  "note": "Direct finite-generator argument; fully written in Lean, reusing the existing Scheme.Modules.multiplication_range theorem via proof-only import all. Repair removes the duplicate local multiplication-range proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent module on an affine Noetherian scheme is coherent if its formal quotients are coherent and it maps to a coherent module with kernel killed by a power of an ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module mapping to a finite module whose kernel is annihilated by an ideal is finite if its quotient by that ideal is finite",
+   "results": "Submodule.finite_quotient_smul; Module.Finite.of_submodule_quotient; Module.Finite.quotient; Ideal.finite_quotient_pow; Module.Grassmannian.finite_quotient; module_finite_of_liesOver; Submodule.Quotient.fintype; Module.exists_surjective_quotient_of_finite",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*torsion.*kernel|torsion.*kernel.*finite|formalCompletionFunctor",
+   "results": "",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorsionControlledAffineAlgebraization",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Affine construction and finiteness parts of Tag 0889(1)",
+   "via": [
+    "lem-weil-pbc-torsion-controlled-affine-algebraization",
+    "new-stage3-torsion-controlled-easy-algebraization-bridge",
+    "lem-weil-pbc-torsion-controlled-algebraization-construction",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentOfFormalQuotientsAndTorsionKernel.lean",
+  "declaration": "AlgebraicGeometry.coherent_of_formalQuotients_and_torsionKernel",
+  "statement": "theorem coherent_of_formalQuotients_and_torsionKernel\n    {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)\n    (F : X.Modules) [F.IsQuasicoherent] (H : CoherentModules X) (a : F ⟶ H.obj)\n    (s : ℕ) (hs : 1 ≤ s)\n    (hquot : RingedSpace.IsCoherent X.toRingedSpace\n      (((formalCompletionFunctor J).obj F).obj (op (s - 1))))\n    (hker : IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2\n      (kernel a))) :\n    RingedSpace.IsCoherent X.toRingedSpace F",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T045519-L-126002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261013T045519-L-126002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

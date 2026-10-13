@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.TorsionControlledAffineCandidate
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesIsoInvariant
+import Sheaf.AlgebraicGeometry.CoherentOfFormalQuotientsAndTorsionKernel
 
 /-! # The affine part of torsion-controlled algebraization
 
@@ -58,6 +61,20 @@ theorem torsionControlled_affine_algebraization
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2
           (kernel a.hom)) ∧
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι s).2
-          (cokernel a.hom))) := by sorry
+          (cokernel a.hom))) := by
+  obtain ⟨F, hqc, a, β, hδ, s, hs, hk, hc⟩ :=
+    torsionControlled_affine_candidate J H N δ htorsion
+  have : F.IsQuasicoherent := hqc
+  have hquot : RingedSpace.IsCoherent X.toRingedSpace
+      (((formalCompletionFunctor J).obj F).obj (op (s - 1))) :=
+    (coherentFormalModules_of_iso X J β N.property).1 (s - 1)
+  have hF := coherent_of_formalQuotients_and_torsionKernel J F H a s hs hquot hk
+  let Fc : CoherentModules X := ⟨F, hF⟩
+  let ac : Fc ⟶ H := ObjectProperty.homMk a
+  let βc : N ≅ (completion X J).obj Fc :=
+    (IsCoherentFormalModule J).isoMk β
+  refine ⟨Fc, ac, βc, ?_, s, hs, hk, hc⟩
+  apply (ObjectProperty.ι (IsCoherentFormalModule J)).map_injective
+  exact hδ
 
 end AlgebraicGeometry

@@ -11098,3 +11098,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:55 L: merged deliver/C3/Sheaf.AlgebraicGeometry.AffinePerfectPlusShift (stage 3; reviewer PASS; first push; landing 20261013T045517-L-125679 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:55 L: merged deliver/C3/Sheaf.AlgebraicGeometry.HigherDirectImageSectionDenominators (stage 3; reviewer PASS; first push; landing 20261013T045518-L-125778 (interface); batch 20261013T045507; modules 3; new nodes 2)
 - 04:55 L: merged deliver/C3/Sheaf.AlgebraicGeometry.OpenImageComplexComparisonRestriction (stage 3; reviewer PASS; after a return; landing 20261013T045518-L-125894 (proof); batch 20261013T045507; modules 1; new nodes 0)
+- 04:55 L: merged deliver/C3/Sheaf.AlgebraicGeometry.TorsionControlledAffineAlgebraization (stage 3; reviewer PASS; after a return; landing 20261013T045519-L-126002 (interface); batch 20261013T045507; modules 3; new nodes 2)
