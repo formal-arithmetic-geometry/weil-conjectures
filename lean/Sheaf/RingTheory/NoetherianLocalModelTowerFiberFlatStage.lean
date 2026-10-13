@@ -2,6 +2,9 @@ module
 
 public import Sheaf.RingTheory.NoetherianLocalModelTower
 public import Mathlib.RingTheory.Flat.Basic
+import Sheaf.RingTheory.NoetherianLocalModelTowerFiberDiagram
+import Sheaf.RingTheory.ColimitEventuallyFlat
+import Sheaf.RingTheory.FlatSemilinearEquiv
 
 @[expose] public section
 
@@ -35,6 +38,38 @@ theorem NoetherianLocalModelTower.exists_fiberFlat_stage
         (IsLocalRing.maximalIdeal (X.R₀ i)))
       ((X.S₀ i ⧸ Ideal.map (algebraMap (X.R₀ i) (X.S₀ i))
         (IsLocalRing.maximalIdeal (X.R₀ i))) ⊗[X.S₀ i] X.N₀ i) := by
-  sorry
+  classical
+  let := X.preorder
+  let := X.nonempty
+  let := X.directed
+  let := X.commR
+  let := X.commS
+  let := X.localR
+  let := X.algRS
+  let := X.addN
+  let := X.moduleS
+  obtain ⟨A, B, D, act, φ, ψ, limitAct, hdata⟩ := X.exists_fiber_diagram
+  let := act
+  let := limitAct
+  rcases hdata with
+    ⟨hlocalA, hlocalB, hnoethA, hnoethB, hfinite, hφ, hA, hB, hcomm,
+      hscalar, hψ, hlimitScalar, hloc, hbase, hstage, hlimit⟩
+  let := hlocalA
+  let := hlocalB
+  let := hnoethA
+  let := hnoethB
+  let := hfinite
+  obtain ⟨eA, eD, he⟩ := hlimit
+  have hflat : let := Module.compHom (CategoryTheory.Limits.colimit D : AddCommGrpCat) ψ
+      Module.Flat (CategoryTheory.Limits.colimit A : CommRingCat)
+        (CategoryTheory.Limits.colimit D : AddCommGrpCat) := by
+    let := Module.compHom (CategoryTheory.Limits.colimit D : AddCommGrpCat) ψ
+    exact (Module.Flat.semilinearEquiv_iff eA eD he).mpr h_fibre
+  obtain ⟨i, hi⟩ := RingTheory.exists_flat_stage A B D φ hφ hA hB hcomm
+    hscalar ψ hψ hlimitScalar hloc hbase hflat
+  obtain ⟨eAi, eDi, hei⟩ := hstage i
+  refine ⟨i, ?_⟩
+  let := Module.compHom (D.obj i) (φ i)
+  exact (Module.Flat.semilinearEquiv_iff eAi eDi hei).mp hi
 
 end Module
