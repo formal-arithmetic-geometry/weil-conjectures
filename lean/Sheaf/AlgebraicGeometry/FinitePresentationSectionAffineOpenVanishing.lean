@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.AffineSectionZeroAtStage
+import Sheaf.AlgebraicGeometry.SectionBaseChangeZeroPersists
 
 /-!
 # Descent of the vanishing of one module section
@@ -83,6 +85,10 @@ theorem finitePresentation_section_affine_open_eventually_zero
     ∃ (l : I), j ≤ l ∧ ∀ (k : I) (hjk : j ≤ k), l ≤ k →
       ((adjstage k hjk).unit.app G).val.app
         (op ((pullback.fst f (Spec.map (R.map (homOfLE hij)))) ⁻¹ᵁ U)) y = 0 := by
-  sorry
+  have hG : G.IsFinitePresentation ∧ G.IsQuasicoherent := ⟨hG_fp, hG_qc⟩
+  obtain ⟨l, hjl, hl⟩ := section_affine_open_zero_at_stage
+    R c hc i f j hij G hG.2 U hU y adjlim adjstage hy
+  refine ⟨l, hjl, ?_⟩
+  exact section_baseChange_zero_persists R i f j hij G U y adjstage l hjl hl
 
 end AlgebraicGeometry

@@ -16,49 +16,23 @@
  ],
  "proof": [
   {
-   "text": "The inverse images of U are affine by the affine base-change property. Restrict the base diagram to the upper tail of j. Apply the scheme-over-limit theorem to the affine scheme U over Spec(R_i) and this tail to identify its base change at the limit with the limit of its stage base changes. These schemes are the inverse images in question by pullback pasting. The affine Spec/Gamma equivalence now identifies the coordinate ring of the limit with the colimit of the stage coordinate rings, compatibly with the projections.",
+   "text": "Apply the one-stage affine section vanishing theorem to get l ≥ j with zero unit at l. Apply persistence of zero sections under further base change to every k ≥ l. The finite-presentation assumption is not needed.",
    "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-scheme-over-limit",
-    "lem-weil-pbc-affine-morphism-permanence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The natural affine pullback-sections comparison identifies the image of y under the canonical unit with y tensor 1 in the scalar extension of G(V_j). Its bijectivity preserves and reflects zero.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the proved TensorProduct.directedColimitBaseChangeElementwise to the unit tensor of y, over the coordinate-ring diagram from step 1. The eventual-zero clause applies directly to preorder indices and supplies a later stage. For any further transition, its linear tensor map preserves zero and sends the unit tensor to the later unit tensor. No finite presentation or matrix argument is needed for this step.",
-   "uses": [
-    "lem-weil-pbc-directed-colimit-base-change-elementwise"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For any adjunction with these same pullback and pushforward functors, uniqueness of adjoints supplies a natural automorphism of the left adjoint intertwining its unit with the canonical unit. This automorphism is an isomorphism, so the zero-section condition is preserved and reflected. This proves the claim for the arbitrary adjunctions supplied in the signature. Empty affines, zero modules, and singleton directed preorders require no exception.",
-   "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-pc-affine-section-zero-at-stage",
+    "lem-pc-section-base-change-zero-persists"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-directed-colimit-base-change-elementwise",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-scheme-over-limit",
-  "lem-weil-pbc-spec-colimit-limit"
+  "lem-pc-affine-section-zero-at-stage",
+  "lem-pc-section-base-change-zero-persists"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
   "place": "Limits, Lemma limits-lemma-descend-modules-finite-presentation, Tag 01ZR (3), first proof; Algebra Tag 05N7 (3), finite-generator vanishing argument; shorter tensor route: Algebra Tag 05LI (1), lemma-module-map-property-in-colimit",
-  "note": "Use the already proved preorder tensor-element theorem; only affine geometric comparisons remain to be formalized."
+  "note": "Separate detection at one stage from propagation, and combine them by explicit Lean application."
  },
  "mathlib_searches": [
   {
@@ -150,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T123213-L-3679446",
+  "landing": "20261013T131950-L-4087997",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
