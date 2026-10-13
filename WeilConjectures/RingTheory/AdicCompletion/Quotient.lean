@@ -78,7 +78,7 @@ lemma map_subtype_mem_map_algebraMap [IsNoetherianRing A] (I J : Ideal A)
   | zero => simp
   | tmul r j =>
     rw [LinearMap.comp_apply, TensorProduct.AlgebraTensorModule.map_tmul, ofTensorProduct_tmul,
-      LinearMap.id_apply, Submodule.subtype_apply, smul_eq_mul, ← algebraMap_apply]
+      LinearMap.id_apply, Submodule.subtype_apply, smul_eq_mul]
     exact Ideal.mul_mem_left _ _ (Ideal.mem_map_of_mem _ j.2)
   | add t₁ t₂ h₁ h₂ =>
     rw [map_add]
@@ -93,15 +93,12 @@ theorem ker_mapRingHom [IsNoetherianRing A] {f : A →+* B} (hf : Function.Surje
   refine le_antisymm (fun x hx ↦ ?_) ?_
   · obtain ⟨a, rfl⟩ := mk_surjective I A x
     have hex : Function.Exact K.subtype K.mkQ := LinearMap.exact_subtype_mkQ K
-    obtain ⟨z, hz⟩ := (map_exact Subtype.val_injective hex K.mkQ_surjective
-      (I := I) (mk I A a)).mp ?_
-    · rw [← hz]
-      exact map_subtype_mem_map_algebraMap I K z
-    · ext n
+    have hmk : map I K.mkQ (mk I A a) = 0 := by
+      ext n
       rw [map_mk, mk_apply_coe, val_zero_apply, Submodule.mkQ_apply,
         Submodule.Quotient.mk_eq_zero, AdicCauchySequence.map_apply_coe]
       have h0 : evalₐ (I.map f) n (mapRingHom f I (mk I A a)) = 0 := by
-        rw [RingHom.mem_ker.mp hx, map_zero]
+        rw [RingHom.mem_ker.mp hx, _root_.map_zero]
       rw [evalₐ_mapRingHom, evalₐ_mk, Ideal.quotientMap_mk, Ideal.Quotient.eq_zero_iff_mem,
         ← Ideal.map_pow] at h0
       obtain ⟨c, hc, hfc⟩ := (Ideal.mem_map_iff_of_surjective f hf).mp h0
@@ -113,10 +110,14 @@ theorem ker_mapRingHom [IsNoetherianRing A] {f : A →+* B} (hf : Function.Surje
         exact hk
       rw [this]
       exact Submodule.smul_mem_smul hc Submodule.mem_top
+    obtain ⟨z, hz⟩ := (map_exact Subtype.val_injective hex K.mkQ_surjective
+      (I := I) (mk I A a)).mp hmk
+    rw [← hz]
+    exact map_subtype_mem_map_algebraMap I K z
   · rw [Ideal.map_le_iff_le_comap]
     intro k hk
     rw [Ideal.mem_comap, RingHom.mem_ker, mapRingHom_algebraMap, RingHom.mem_ker.mp hk,
-      map_zero]
+      _root_.map_zero]
 
 /-- For `A` Noetherian and `f : A → B` surjective with kernel `J`, the induced map of adic
 completions identifies `Â_I ⧸ J Â_I` with `B̂_{IB}`. -/
@@ -142,9 +143,10 @@ theorem exists_local_completion_quotient [IsNoetherianRing A] [IsLocalRing A] (f
     ∃ θ : AdicCompletion (IsLocalRing.maximalIdeal A) A →+*
         AdicCompletion ((IsLocalRing.maximalIdeal A).map f) B,
       (∀ a, θ (algebraMap A _ a) = algebraMap B _ (f a)) ∧ Function.Surjective θ ∧
-      RingHom.ker θ = (RingHom.ker f).map (algebraMap A _) ∧
+      RingHom.ker θ =
+        (RingHom.ker f).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) ∧
       Nonempty (AdicCompletion (IsLocalRing.maximalIdeal A) A ⧸
-          (RingHom.ker f).map (algebraMap A _) ≃+*
+          (RingHom.ker f).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) ≃+*
         AdicCompletion ((IsLocalRing.maximalIdeal A).map f) B) :=
   ⟨mapRingHom f _, mapRingHom_algebraMap f _, mapRingHom_surjective hf _, ker_mapRingHom hf _,
     ⟨quotientKerEquiv hf _⟩⟩
