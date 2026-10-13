@@ -8,13 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 
 /-! # Resolution-normalized module/Ext comparisons
 
@@ -308,6 +309,57 @@ def siteSectionsObjIso
         (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived q).obj F :=
   (siteSectionsNatIso J U q).app F
 
+/-- Identify evaluated sheaf cohomology with its fixed Ext functor before specialization.
+Source: Stacks Project, Tag 06XR; this is the definition of sheaf cohomology.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def siteExtNatIso
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
+    (U : C) (q : ℕ) :
+    Sheaf.cohomologyPresheafFunctor J q ⋙
+      (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U) ≅
+      (CategoryTheory.Abelian.extFunctor q).obj
+        (op ((presheafToSheaf J AddCommGrpCat.{u}).obj
+          (yoneda.obj U ⋙ AddCommGrpCat.free))) :=
+  Iso.refl _
+
+/-- Use the native H functor after identifying its constant Ext source.
+Source: Stacks Project, Tag 06XR; this is the definition of `Sheaf.functorH`.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def siteHNatIso
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
+    (q : ℕ) :
+    (CategoryTheory.Abelian.extFunctor q).obj
+      (op ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ≅
+        Sheaf.functorH J q :=
+  Iso.refl _
+
+set_option backward.isDefEq.respectTransparency true in
+/-- The original additive Ext source-change equivalence, packaged naturally in coefficients.
+Source: Stacks Project, Tag 06XR; functoriality of Ext in its two arguments.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def extSourceNatIso
+    {A : Type u₁} [Category.{u} A] [Abelian A] [HasExt.{u} A]
+    {M N : A} (e : M ≅ N) (q : ℕ) :
+    (Abelian.extFunctor q).obj (op M) ≅ (Abelian.extFunctor q).obj (op N) :=
+  NatIso.ofComponents
+    (F := (Abelian.extFunctor q).obj (op M))
+    (G := (Abelian.extFunctor q).obj (op N))
+    (fun (Z : A) ↦ (Abelian.Ext.precompAddEquiv e Z q).symm.toAddCommGrpIso)
+    (by
+      intro Z W f
+      apply AddCommGrpCat.hom_ext
+      apply AddMonoidHom.ext
+      intro x
+      change (Abelian.Ext.mk₀ e.inv).comp
+          (x.comp (Abelian.Ext.mk₀ f) (add_zero q)) (zero_add q) =
+        ((Abelian.Ext.mk₀ e.inv).comp x (zero_add q)).comp
+          (Abelian.Ext.mk₀ f) (add_zero q)
+      exact (Abelian.Ext.comp_assoc_of_third_deg_zero
+        (Abelian.Ext.mk₀ e.inv) x (Abelian.Ext.mk₀ f) (zero_add q)).symm)
+
+
 def terminalSourceIso (X : Scheme.{u}) :
     (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
       (yoneda.obj (⊤ : X.Opens) ⋙ AddCommGrpCat.free) ≅
@@ -340,49 +392,207 @@ theorem forgottenInjectiveAcyclic (X : Scheme.{u})
   exact (AddCommGrpCat.isZero_of_subsingleton _).of_iso
     (siteSectionsObjIso _ ⊤ _ (n + 1)).symm
 
+/-- Forgetting scalars in the standard derived-functor resolution comparison.
+Source: Stacks Project, Tag 03FD; exact forgetting commutes with homology.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def resolutionForgetObjIso
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
+    (G : A ⥤ B) (V : B ⥤ D) [G.Additive] [V.Additive] [V.PreservesHomology]
+    {M : A} (I : InjectiveResolution M) (q : ℕ) :
+    V.obj ((G.rightDerived q).obj M) ≅
+      ((V.mapHomologicalComplex (ComplexShape.up ℕ)).obj
+        ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)).homology q :=
+  V.mapIso (I.isoRightDerivedObj G q) ≪≫
+    ((((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).sc q).mapHomologyIso
+      V).symm
+
+/-- The two ways of forming abelian section homology agree degreewise.
+This identification is checked before substituting an injective resolution.
+Source: Stacks Project, Tag 03FD, common section complex.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def sectionHomologyIso (X : Scheme.{u}) (q : ℕ) :
+    ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+        (ComplexShape.up ℕ) ⋙
+      (forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+        AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) q) ≅
+    ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).mapHomologicalComplex
+        (ComplexShape.up ℕ) ⋙
+      (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
+        (evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)).mapHomologicalComplex
+          (ComplexShape.up ℕ) ⋙
+      HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) q) :=
+  Iso.refl _
+
+/-- Common-resolution comparison for exact forgetting of scalars.
+Source: Stacks Project, Tags 03FD and 015E.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def resolutionSectionsObjIso
+    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
+    [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
+    [Abelian E] [HasInjectiveResolutions E]
+    (S : A ⥤ B) (V : B ⥤ D) (T : A ⥤ E) (Γ : E ⥤ D)
+    [S.Additive] [V.Additive] [V.PreservesHomology]
+    [T.Additive] [T.PreservesHomology] [Γ.Additive] [PreservesFiniteLimits Γ]
+    (q : ℕ)
+    (s : (S.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      V.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      HomologicalComplex.homologyFunctor D (ComplexShape.up ℕ) q) ≅
+      (T.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      Γ.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      HomologicalComplex.homologyFunctor D (ComplexShape.up ℕ) q))
+    {M : A} (I : InjectiveResolution M)
+    (hI : ∀ n, Γ.rightAcyclic (T.obj (I.cocomplex.X n))) :
+    V.obj ((S.rightDerived q).obj M) ≅ (Γ.rightDerived q).obj (T.obj M) := by
+  let ι := (HomologicalComplex.singleMapHomologicalComplex T (ComplexShape.up ℕ) 0).inv.app M ≫
+    (T.mapHomologicalComplex (ComplexShape.up ℕ)).map I.ι
+  have : QuasiIso ι := by
+    dsimp only [ι]
+    exact quasiIso_comp _ _
+  exact resolutionForgetObjIso S V I q ≪≫ s.app I.cocomplex ≪≫
+    (Γ.rightDerivedObjIsoOfResolution ι hI q).symm
+
+/-- Naturality packaged before substituting concrete chosen resolutions.
+Source: Stacks Project, Tags 03FD and 015E.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def resolutionSectionsNatIso
+    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
+    [Abelian A] [HasInjectiveResolutions A] [Abelian B] [Abelian D]
+    [Abelian E] [HasInjectiveResolutions E]
+    (S : A ⥤ B) (V : B ⥤ D) (T : A ⥤ E) (Γ : E ⥤ D)
+    [S.Additive] [V.Additive] [V.PreservesHomology]
+    [T.Additive] [T.PreservesHomology] [Γ.Additive] [PreservesFiniteLimits Γ]
+    (q : ℕ)
+    (s : (S.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      V.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      HomologicalComplex.homologyFunctor D (ComplexShape.up ℕ) q) ≅
+      (T.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      Γ.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
+      HomologicalComplex.homologyFunctor D (ComplexShape.up ℕ) q))
+    (h : ∀ (M : A) [Injective M], Γ.rightAcyclic (T.obj M)) :
+    S.rightDerived q ⋙ V ≅ T ⋙ Γ.rightDerived q :=
+  NatIso.ofComponents
+    (fun M ↦ resolutionSectionsObjIso S V T Γ q s (injectiveResolution M)
+      (fun n ↦ h _)) (by
+    intro M N f
+    let I := injectiveResolution M
+    let J := injectiveResolution N
+    let hI := fun n ↦ h (I.cocomplex.X n)
+    let hJ := fun n ↦ h (J.cocomplex.X n)
+    let ψ : I.cocomplex ⟶ J.cocomplex := InjectiveResolution.desc f J I
+    let ι := (HomologicalComplex.singleMapHomologicalComplex T (ComplexShape.up ℕ) 0).inv.app M ≫
+      (T.mapHomologicalComplex (ComplexShape.up ℕ)).map I.ι
+    let ι' := (HomologicalComplex.singleMapHomologicalComplex T (ComplexShape.up ℕ) 0).inv.app N ≫
+      (T.mapHomologicalComplex (ComplexShape.up ℕ)).map J.ι
+    have : QuasiIso ι := by dsimp only [ι]; exact quasiIso_comp _ _
+    have : QuasiIso ι' := by dsimp only [ι']; exact quasiIso_comp _ _
+    have hw : ι ≫ (T.mapHomologicalComplex _).map ψ =
+        (CochainComplex.single₀ _).map (T.map f) ≫ ι' := by
+      dsimp only [ι, ι']
+      rw [Category.assoc, ← Functor.map_comp, InjectiveResolution.desc_commutes,
+        Functor.map_comp, ← Category.assoc]
+      simpa only [Functor.comp_map, Category.assoc] using
+        congrArg (fun k ↦ k ≫ (T.mapHomologicalComplex _).map J.ι)
+          ((HomologicalComplex.singleMapHomologicalComplex T
+            (ComplexShape.up ℕ) 0).inv.naturality f).symm
+    have hc := acyclicComparison_naturality Γ ι ι' hI hJ (T.map f)
+      ((T.mapHomologicalComplex _).map ψ) hw q
+    have hforget : V.map ((S.rightDerived q).map f) ≫
+        (resolutionForgetObjIso S V J q).hom =
+          (resolutionForgetObjIso S V I q).hom ≫ HomologicalComplex.homologyMap
+            ((V.mapHomologicalComplex _).map ((S.mapHomologicalComplex _).map ψ)) q := by
+      dsimp only [resolutionForgetObjIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+      rw [← Category.assoc, ← V.map_comp,
+        InjectiveResolution.isoRightDerivedObj_hom_naturality f I J ψ
+          (InjectiveResolution.desc_commutes_zero f J I) S q, V.map_comp]
+      simp only [Category.assoc]
+      exact congrArg (fun k ↦ V.map (I.isoRightDerivedObj S q).hom ≫ k)
+        (ShortComplex.mapHomologyIso_inv_naturality
+          ((HomologicalComplex.shortComplexFunctor _ _ q).map
+            ((S.mapHomologicalComplex _).map ψ)) V)
+    dsimp only [Functor.comp_map, resolutionSectionsObjIso, Iso.trans_hom, Iso.symm_hom]
+    rw [← Category.assoc, ← Category.assoc,
+      hforget, Category.assoc]
+    have hs := s.hom.naturality ψ
+    simp only [Functor.comp_map, HomologicalComplex.homologyFunctor_map] at hs
+    simp only [Category.assoc, Iso.app_hom]
+    apply congrArg (fun k ↦ (resolutionForgetObjIso S V I q).hom ≫ k)
+    calc
+      _ = (HomologicalComplex.homologyMap
+          ((V.mapHomologicalComplex _).map ((S.mapHomologicalComplex _).map ψ)) q ≫
+            s.hom.app J.cocomplex) ≫ (Γ.rightDerivedObjIsoOfResolution ι' hJ q).inv :=
+        (Category.assoc _ _ _).symm
+      _ = (s.hom.app I.cocomplex ≫ HomologicalComplex.homologyMap
+          ((Γ.mapHomologicalComplex _).map ((T.mapHomologicalComplex _).map ψ)) q) ≫
+            (Γ.rightDerivedObjIsoOfResolution ι' hJ q).inv :=
+        congrArg (fun k ↦ k ≫ (Γ.rightDerivedObjIsoOfResolution ι' hJ q).inv) hs
+      _ = s.hom.app I.cocomplex ≫
+          (HomologicalComplex.homologyMap
+            ((Γ.mapHomologicalComplex _).map ((T.mapHomologicalComplex _).map ψ)) q ≫
+              (Γ.rightDerivedObjIsoOfResolution ι' hJ q).inv) := Category.assoc _ _ _
+      _ = _ := congrArg (fun k ↦ s.hom.app I.cocomplex ≫ k) hc)
+
+
+/-- Convert a natural comparison to an additive equivalence before specializing its functors.
+Source: Stacks Project, Tags 03FD and 06XR; only categorical packaging is forgotten.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+noncomputable def moduleComparisonEquiv
+    {C : Type*} [Category C] {R : Type u} [Ring R]
+    {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
+    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L) (M : C) : K.obj M ≃+ L.obj M :=
+  (η.app M).addCommGroupIsoToAddEquiv
+
+set_option backward.isDefEq.respectTransparency true in
+private theorem moduleComparisonEquiv_naturality
+    {C : Type*} [Category C] {R : Type u} [Ring R]
+    {K : C ⥤ ModuleCat.{u} R} {L : C ⥤ AddCommGrpCat.{u}}
+    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L)
+    {M N : C} (f : M ⟶ N) (x : K.obj M) :
+    moduleComparisonEquiv η N ((K.map f).hom x) =
+      (L.map f) (moduleComparisonEquiv η M x) := by
+  exact ConcreteCategory.congr_hom (η.hom.naturality f) x
+
 end ExtEdgeResolution
 
-set_option backward.isDefEq.respectTransparency false in
-/-- The module/Ext equivalence computed on the standard module resolution.
-Every ingredient is a concrete resolution, Hom-complex, section, or homology
-isomorphism. The only choice is Mathlib's standard injective resolution; comparisons
-out of acyclic resolutions determine the induced map uniquely up to homotopy.
-Source: Stacks Project, Tags 03FD, 01FT, 06XR.
+/-- The coefficient comparison as a natural isomorphism of additive functors.
+Source: Stacks Project, Tags 03FD, 015E and 06XR; the same common resolution.
 (blueprint: new-module-cohomology-ext-resolution-naturality) -/
-def moduleCohomologyExtResolutionEquiv (X : Scheme.{u}) (F : X.Modules) (q : ℕ) :
-    ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+ H F q := by
+@[irreducible]
+noncomputable def moduleCohomologyExtResolutionNatIso (X : Scheme.{u}) (q : ℕ) :
+    RingedSpace.moduleCohomology X.toRingedSpace q ⋙
+      forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+        AddCommGrpCat.{u} ≅
+      SheafOfModules.toSheaf (moduleRings X.toRingedSpace) ⋙
+        Sheaf.functorH (Opens.grothendieckTopology X) q := by
   let : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
     (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
   let Γ := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
     (evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
   let G := RingedSpace.globalSectionsFunctor X.toRingedSpace
-  have : G.Additive := inferInstanceAs
-    (RingedSpace.globalSectionsFunctor X.toRingedSpace).Additive
   let V := forget₂ (ModuleCat.{u}
     ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
-  let I := injectiveResolution
-    (show SheafOfModules.{u} (moduleRings X.toRingedSpace) from F)
-  let ι := (HomologicalComplex.singleMapHomologicalComplex T (ComplexShape.up ℕ) 0).inv.app F ≫
-    (T.mapHomologicalComplex (ComplexShape.up ℕ)).map I.ι
-  have : QuasiIso ι := by
-    dsimp only [ι]
-    have : QuasiIso ((T.mapHomologicalComplex (ComplexShape.up ℕ)).map I.ι) :=
-      inferInstance
-    exact quasiIso_comp _ _
-  let c := Γ.rightDerivedObjIsoOfResolution ι
-    (fun n ↦ ExtEdgeResolution.forgottenInjectiveAcyclic X (I.cocomplex.X n)) q
-  let a : V.obj ((G.rightDerived q).obj F) ≅
-      ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj
-        ((T.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)).homology q :=
-    V.mapIso (I.isoRightDerivedObj G q) ≪≫
-      ((((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).sc q).mapHomologyIso
-        V).symm
-  let d := ExtEdgeResolution.siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) q
-  let t := (Abelian.Ext.precompAddEquiv (ExtEdgeResolution.terminalSourceIso X) (T.obj F) q).symm
-  exact ((a ≪≫ c.symm ≪≫ d.symm).addCommGroupIsoToAddEquiv).trans t
+  change (G.rightDerived q ⋙ V) ≅ T ⋙ Sheaf.functorH (Opens.grothendieckTopology X) q
+  exact ExtEdgeResolution.resolutionSectionsNatIso G V T Γ q
+    (ExtEdgeResolution.sectionHomologyIso X q)
+    (fun M _ ↦ ExtEdgeResolution.forgottenInjectiveAcyclic X M) ≪≫
+      Functor.isoWhiskerLeft T
+        ((ExtEdgeResolution.siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ q).symm ≪≫
+          ExtEdgeResolution.siteExtNatIso (Opens.grothendieckTopology X) ⊤ q ≪≫
+            ExtEdgeResolution.extSourceNatIso (ExtEdgeResolution.terminalSourceIso X) q ≪≫
+              ExtEdgeResolution.siteHNatIso (Opens.grothendieckTopology X) q)
 
-set_option backward.isDefEq.respectTransparency false in
+/-- The same resolution-normalized module/Ext comparison, read from its natural square.
+Its terminal-source map is Ext precomposition by the inverse of `terminalSourceIso`.
+Source: Stacks Project, Tags 03FD, 015E and 06XR.
+(blueprint: new-module-cohomology-ext-resolution-naturality) -/
+@[irreducible]
+def moduleCohomologyExtResolutionEquiv (X : Scheme.{u}) (F : X.Modules) (q : ℕ) :
+    ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+ H F q :=
+  ExtEdgeResolution.moduleComparisonEquiv (moduleCohomologyExtResolutionNatIso X q) F
+
+set_option backward.isDefEq.respectTransparency true in
 /-- The explicitly resolution-normalized comparisons are natural in coefficients.
 Source: Stacks Project, Tag 03FD; Tag 015E for acyclic-resolution naturality;
 Tag 06XR for Ext computed by injective resolutions.
@@ -404,6 +614,9 @@ theorem moduleCohomologyExtResolutionEquiv_naturality (X : Scheme.{u}) (q : ℕ)
     (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :
     moduleCohomologyExtResolutionEquiv X G q
       (((RingedSpace.moduleCohomology X.toRingedSpace q).map φ).hom x) =
-      H.map φ q (moduleCohomologyExtResolutionEquiv X F q x) := by sorry
+      H.map φ q (moduleCohomologyExtResolutionEquiv X F q x) := by
+  unfold moduleCohomologyExtResolutionEquiv
+  exact ExtEdgeResolution.moduleComparisonEquiv_naturality
+    (moduleCohomologyExtResolutionNatIso X q) φ x
 
 end AlgebraicGeometry.Scheme.Modules
