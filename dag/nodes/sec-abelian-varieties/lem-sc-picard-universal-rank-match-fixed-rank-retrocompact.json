@@ -20,52 +20,48 @@
  ],
  "proof": [
   {
-   "text": "On an affine open U, the inverse image is quasi-compact and E has finitely many open-and-closed rank loci. Since f is flat and locally finitely presented it is open, and since it is proper it is closed. The images of the finitely many rank loci are therefore clopen in U. Subtract the images of all ranks different from r and intersect with the image of f to obtain the clopen nonempty constant-r fibre locus. The complement of the image of f is the clopen empty-fibre locus. No connectedness is assumed, and the images of different ranks need not be disjoint.",
+   "text": "Use the clopen fibre-rank and empty-fibre loci A and B. A closed subset meets each compact open in a compact set, so each clopen locus is retrocompact and an open retrocompact set is constructible and locally constructible.",
    "uses": [
-    "def-sc-finite-locally-free-sheaf",
-    "def-weil-flat-morphism",
-    "def-weil-proper-morphism",
-    "def-sbc-locally-finite-presentation"
+    "lem-sc-picard-fiber-rank-clopen"
    ],
    "elementary": true
   },
   {
-   "text": "Apply perfect direct image and arbitrary base change to E and its dual: both are finitely presented and relatively flat because E is finite locally free and f is flat. Their degree-zero derived fibres compute ordinary direct images on residue fields. The jump-locus theorem makes their dimension-r level sets locally constructible.",
+   "text": "Apply ordinary fibre-direct-image rank constructibility to E and to its dual, which is finite locally free by Modules.IsFiniteLocallyFree.dual. Call the resulting rank-r loci C and D.",
    "uses": [
-    "lem-pc-rf-perfect-base-change",
-    "lem-sc-perfect-jump-loci"
+    "lem-sc-picard-fiber-direct-image-rank-constructible",
+    "def-sc-finite-locally-free-sheaf"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "On the nonempty constant-r fibre locus, simultaneous dimension r of those two degree-zero fibres is equivalent to the universal rank condition over Spec kappa(s). To prove universality, take finite-free residue models of the two perfect complexes on the one-point scheme. Negative terms vanish; the degree-zero term has rank r and its outgoing matrix is zero over the field, so remains zero under every further base change. Thus degree-zero cohomology is free of rank r on each such base change. The pullback of E retains rank r. Conversely, evaluating the universal condition at the identity gives those dimensions, and the nonempty fibre makes its chosen rank equal to r.",
+   "text": "The residue criterion proves that the target set is exactly A intersect (B union (C intersect D)). This includes empty fibres of every fixed rank. Finite intersections and unions preserve local constructibility.",
    "uses": [
-    "lem-sc-perfect-finite-free-residue-model",
-    "lem-pc-rf-perfect-base-change",
+    "lem-sc-picard-universal-rank-match-residue-criterion",
     "def-sc-picard-universal-rank-match"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Adjoin the empty-fibre locus: it satisfies the universal condition with rank zero, while E on an empty fibre has every fixed rank r. The resulting fixed-rank point locus is locally constructible on U, hence constructible on the affine U. A constructible subset of an affine scheme is a finite union of differences of compact opens, each a closed subset of a compact open, hence compact. Every compact open of S is a finite union of affine opens; compactness for each piece and finite union give retrocompactness.",
-   "uses": [],
+   "text": "On each affine open V, restrict the locally constructible set along the open embedding V into S. Affineness makes the restriction constructible on a compact spectral space. Constructible implies retrocompact, hence compact there, and its image is the intersection with V. Every compact open U is a finite union of affine basis opens by Mathlib eq_finite_iUnion_of_isTopologicalBasis_of_isCompact_open applied to Scheme.isBasis_affineOpens. Distribute intersection over that finite union and apply compactness of a finite union. This proves retrocompactness with no quasi-separatedness hypothesis on S. The private Lean helper proves these steps explicitly.",
+   "uses": [
+    "lem-weil-pbc-constructible-is-retrocompact"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-picard-fiber-rank-clopen",
+  "lem-sc-picard-fiber-direct-image-rank-constructible",
   "def-sc-finite-locally-free-sheaf",
-  "def-weil-flat-morphism",
-  "def-weil-proper-morphism",
-  "def-sbc-locally-finite-presentation",
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-jump-loci",
-  "lem-sc-perfect-finite-free-residue-model",
-  "def-sc-picard-universal-rank-match"
+  "lem-sc-picard-universal-rank-match-residue-criterion",
+  "def-sc-picard-universal-rank-match",
+  "lem-weil-pbc-constructible-is-retrocompact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "Tag 0BDP, first three proof paragraphs: rank decomposition and perfect direct images"
+  "place": "First three proof paragraphs, split into clopen fibre ranks, ordinary fibre-direct-image rank constructibility, and the residue criterion; topological assembly by K1 using Mathlib and Tag 09YH"
  },
  "mathlib_searches": [
   {
@@ -146,9 +142,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T010614-L-2670563",
+  "landing": "20261013T024038-L-3335821",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

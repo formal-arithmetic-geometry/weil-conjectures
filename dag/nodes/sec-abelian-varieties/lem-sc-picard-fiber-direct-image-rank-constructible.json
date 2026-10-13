@@ -1,0 +1,147 @@
+{
+ "id": "lem-sc-picard-fiber-direct-image-rank-constructible",
+ "kind": "statement",
+ "title": "Locally constructible ordinary direct-image ranks on residue-field fibres",
+ "statement": "Let $f:X\\to S$ be flat proper and locally of finite presentation, with $X,S$ schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation], and $E$ a finite locally free $\\mathcal O_X$-module [def-sc-finite-locally-free-sheaf]. Fix $r\\in\\mathbb N$. Write $q_s:X_s\\to X$ and $p_s:X_s\\to\\operatorname{Spec}\\kappa(s)$ for the fibre projections [def-pc-fibre-product, def-weil-residue-field]. Then $\\{s\\in S\\mid p_{s,*}q_s^*E\\text{ is finite locally free of rank }r\\}$ is locally constructible [def-weil-constructible-subset]. Here $q_s^*$ is tensor pullback [def-pc-module-pullback], $p_{s,*}$ is ordinary module pushforward [lem-pc-module-pullback-adjunction], and fixed rank means [def-amb-finite-locally-free-module]. No constant-rank assumption is imposed on E along a whole fibre.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDI",
+  "place": "Clause (3), applied to Rf_*E from Tag 0B91(2), as in Tag 0BDP second proof paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finite-locally-free-sheaf",
+  "def-amb-finite-locally-free-module",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [
+  {
+   "text": "E is finitely presented and flat over S: it is finite locally free on X and f is flat. Properness and local finite presentation give finite presentation of f. Apply perfect direct image and arbitrary base change (Tag 0B91(2)) to E.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "def-weil-flat-morphism",
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On Spec kappa(s), its derived fibre has degree-zero cohomology equal to the ordinary direct image of E pulled back to X_s. This uses the canonical derived-to-ordinary pullback comparison and degree-zero direct-image identification.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A quasi-coherent module on the spectrum of a field is finite locally free of rank r exactly when its vector space of global sections has dimension r. The vector spaces here are finite dimensional by perfectness.",
+   "uses": [
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Consequently the displayed locus is the degree-zero Betti-number level set of Rf_*E. Perfect implies pseudo-coherent, and Tag 0BDI(3) makes this set locally constructible. On an empty fibre the vector space is zero, so such points occur precisely in the level r=0.",
+   "uses": [
+    "lem-sc-perfect-jump-loci"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-weil-flat-morphism",
+  "lem-pc-rf-perfect-base-change",
+  "def-amb-finite-locally-free-module",
+  "lem-sc-perfect-jump-loci"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDI",
+  "place": "Clause (3), applied to Rf_*E from Tag 0B91(2), as in Tag 0BDP second proof paragraph",
+  "note": "Stage-3 specialization of the cited literature; no connectedness or surjectivity assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The fixed rank locus of the direct image on fibres of a finite locally free sheaf under a proper flat finitely presented morphism is locally constructible",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus of a given rank for the ordinary pushforward of a finite locally free sheaf on residue field fibres of a proper flat finitely presented scheme morphism is locally constructible",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, PrimeSpectrum.exists_range_eq_of_isConstructible, Module.isLocallyConstant_rankAtStalk, PrimeSpectrum.isConstructible_comap_C; no exact match for this fibre-sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(rank|Rank).*(fiber|fibre|clopen|Clopen|constructible)|PicardUniversalRank",
+   "results": "0 hits: ; no exact match for this fibre-sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchFixedRankRetrocompact",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: use Tag 0BDP to obtain the universal locally closed subscheme; fixed-rank retrocompactness: Clause (3), applied to Rf_*E from Tag 0B91(2), as in Tag 0BDP second proof paragraph",
+   "via": [
+    "lem-sc-picard-universal-rank-match-fixed-rank-retrocompact",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-universal-rank-match-locus-qc"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardFiberDirectImageRankConstructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardFiberDirectImageRankConstructible.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardFiberDirectImageRank_locallyConstructible",
+  "statement": "theorem picardFiberDirectImageRank_locallyConstructible {X S : Scheme.{u}}\n    (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (r : ℕ) :\n    Topology.IsLocallyConstructible {s : S |\n      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n        ((Modules.pushforward (pullback.snd f (S.fromSpecResidueField s))).obj\n          ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj E)) r}",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T024038-L-3335821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T024038-L-3335821",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

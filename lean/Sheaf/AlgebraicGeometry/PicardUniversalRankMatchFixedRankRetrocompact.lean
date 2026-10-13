@@ -11,6 +11,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.Topology.Constructible
+import Sheaf.AlgebraicGeometry.PicardFiberRankClopen
+import Sheaf.AlgebraicGeometry.PicardFiberDirectImageRankConstructible
+import Sheaf.AlgebraicGeometry.PicardUniversalRankMatchResidueCriterion
+import Sheaf.Topology.ConstructibleIsRetrocompact
 
 /-! # Retrocompactness of a fixed-rank Picard point locus
 
@@ -25,6 +29,26 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem locallyConstructible_isRetrocompact (S : Scheme.{u})
+    (Z : Set S) (hZ : Topology.IsLocallyConstructible Z) : IsRetrocompact Z := by
+  intro U hUc hUo
+  have hcompact (V : S.affineOpens) : IsCompact (Z ∩ (V.1 : Set S)) := by
+    have : IsAffine V.1.toScheme := V.2
+    have hc := (hZ.preimage_of_isOpenEmbedding V.1.ι.isOpenEmbedding).isConstructible
+    have hk := hc.isRetrocompact.isCompact
+    have hi := hk.image V.1.ι.continuous
+    simpa only [Set.image_preimage_eq_inter_range, Scheme.Opens.range_ι, Set.inter_comm]
+      using hi
+  have hb : TopologicalSpace.IsTopologicalBasis
+      (Set.range (fun V : S.affineOpens ↦ (V.1 : Set S))) := by
+    simpa only [TopologicalSpace.Opens.IsBasis, Set.image_eq_range]
+      using S.isBasis_affineOpens
+  obtain ⟨T, hT, hUT⟩ :=
+    eq_finite_iUnion_of_isTopologicalBasis_of_isCompact_open _ hb U hUc hUo
+  rw [hUT]
+  simp only [Set.inter_iUnion]
+  exact hT.isCompact_biUnion fun V _ ↦ hcompact V
 
 /-- Fixing the rank on the fibre makes the universal rank-matching point locus
 retrocompact. This concerns points of S and does not assume a representing immersion.
@@ -61,6 +85,41 @@ theorem picardUniversalRankMatch_fixedRank_retrocompact {X S : Scheme.{u}}
     (E : X.Modules) [E.IsFiniteLocallyFree] (r : ℕ) :
     IsRetrocompact {s : S | PicardUniversalRankMatch f E (S.fromSpecResidueField s) ∧
       SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
-        ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj E) r} := by sorry
+        ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj E) r} := by
+  let A : Set S := {s | SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+    ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj E) r}
+  let B : Set S := {s | IsEmpty (pullback f (S.fromSpecResidueField s) : Scheme.{u})}
+  let C : Set S := {s | SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+    ((Modules.pushforward (pullback.snd f (S.fromSpecResidueField s))).obj
+      ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj E)) r}
+  let D : Set S := {s | SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+    ((Modules.pushforward (pullback.snd f (S.fromSpecResidueField s))).obj
+      ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj
+        (Modules.dual E))) r}
+  obtain ⟨hB, hA⟩ := picardFiberRank_clopen f E r
+  have hAlc : Topology.IsLocallyConstructible A :=
+    IsRetrocompact.isLocallyConstructible hA.isOpen
+      (show IsRetrocompact A from fun _ hUc _ ↦ hUc.inter_left hA.isClosed)
+  have hBlc : Topology.IsLocallyConstructible B :=
+    IsRetrocompact.isLocallyConstructible hB.isOpen
+      (show IsRetrocompact B from fun _ hUc _ ↦ hUc.inter_left hB.isClosed)
+  have hClc : Topology.IsLocallyConstructible C :=
+    picardFiberDirectImageRank_locallyConstructible f E r
+  have : (Modules.dual E).IsFiniteLocallyFree := Modules.IsFiniteLocallyFree.dual E
+  have hDlc : Topology.IsLocallyConstructible D :=
+    picardFiberDirectImageRank_locallyConstructible f (Modules.dual E) r
+  have heq : {s : S | PicardUniversalRankMatch f E (S.fromSpecResidueField s) ∧
+      SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}
+        ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj E) r} =
+      A ∩ (B ∪ (C ∩ D)) := by
+    ext s
+    change (_ ∧ s ∈ A) ↔ (s ∈ A ∧ (s ∈ B ∨ (s ∈ C ∧ s ∈ D)))
+    constructor
+    · rintro ⟨hR, hEr⟩
+      exact ⟨hEr, (picardUniversalRankMatch_residue_iff f E r s hEr).mp hR⟩
+    · rintro ⟨hEr, h⟩
+      exact ⟨(picardUniversalRankMatch_residue_iff f E r s hEr).mpr h, hEr⟩
+  rw [heq]
+  exact locallyConstructible_isRetrocompact S _ (hAlc.inter (hBlc.union (hClc.inter hDlc)))
 
 end AlgebraicGeometry.Scheme

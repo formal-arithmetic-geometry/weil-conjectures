@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-picard-fiber-rank-clopen",
+ "kind": "statement",
+ "title": "Clopen empty-fibre and constant fibre-rank loci",
+ "statement": "Let $f:X\\to S$ be a flat proper locally finitely presented morphism of schemes [def-pc-scheme, def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation], and $E$ a finite locally free $\\mathcal O_X$-module [def-sc-finite-locally-free-sheaf]. Fix $r\\in\\mathbb N$. For $s\\in S$, write $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ and $E_s=q_s^*E$ for tensor pullback along its first projection [def-pc-fibre-product, def-weil-residue-field, def-pc-module-pullback]. Both $\\{s\\mid X_s=\\varnothing\\}$ and $\\{s\\mid E_s\\text{ is finite locally free of rank }r\\}$ are open and closed in $S$; fixed rank means [def-amb-finite-locally-free-module]. Empty fibres belong to the second set for every $r$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "First proof paragraph, open-and-closed rank decomposition; apply the same open/closed image argument without connectedness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finite-locally-free-sheaf",
+  "def-amb-finite-locally-free-module",
+  "def-weil-residue-field",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Finite local trivializations of E show that the rank of its stalk at each point is locally constant: at a trivializing neighbourhood O^n the rank is n, and ranks agree on overlaps by reducing to the residue field. Thus the rank-r subset A and its complement B in X are open and closed. On X_s tensor pullback retains rank at stalks by extension of residue fields; every point over s lifts to the fibre, since its residue field is a field extension of kappa(s). Hence E_s has constant rank r iff s is not in f(B), also for an empty fibre.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "def-pc-module-pullback",
+    "def-weil-residue-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flat local finite presentation makes f open, and properness makes it closed. The images f(B) and f(X) are therefore open and closed. Their complements are respectively the constant-r fibre locus and the empty-fibre locus. The images of distinct rank loci need not be disjoint, and the proof assumes neither connectedness nor surjectivity.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "def-pc-module-pullback",
+  "def-weil-residue-field",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "First proof paragraph, open-and-closed rank decomposition; apply the same open/closed image argument without connectedness",
+  "note": "Stage-3 specialization of the cited literature with empty fibres and disconnected fibres retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a proper flat finitely presented family the empty fibre locus and the locus where a finite locally free sheaf has constant fibre rank r are open and closed",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant rank fibre locus of a finite locally free sheaf in a proper flat finitely presented family is clopen",
+   "results": "8 hits: Algebra.QuasiFiniteAt.isClopen_singleton, PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen, PrimeSpectrum.isClopen_iff_mul_add_zeroLocus, PrimeSpectrum.isClopen_basicOpen_of_mul_add, Module.isLocallyConstant_rankAtStalk, AlgebraicGeometry.UniversallyOpen.of_flat, PrimeSpectrum.isClopen_iff_mul_add, AlgebraicGeometry.Flat; no exact match for this fibre-sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(rank|Rank).*(fiber|fibre|clopen|Clopen|constructible)|PicardUniversalRank",
+   "results": "0 hits: ; no exact match for this fibre-sheaf statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardUniversalRankMatchFixedRankRetrocompact",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: use Tag 0BDP to obtain the universal locally closed subscheme; quasi-compactness of the fixed-rank pieces in the rank decomposition; fixed-rank retrocompactness proof: First proof paragraph, open-and-closed rank decomposition; apply the same open/closed image argument without connectedness",
+   "via": [
+    "lem-sc-picard-universal-rank-match-fixed-rank-retrocompact",
+    "lem-sc-general-theorem-of-cube",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-universal-rank-match-locus",
+    "lem-sc-picard-universal-rank-match-locus-qc"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardFiberRankClopen",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardFiberRankClopen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardFiberRank_clopen",
+  "statement": "theorem picardFiberRank_clopen {X S : Scheme.{u}}\n    (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (r : ℕ) :\n    IsClopen {s : S | IsEmpty (pullback f (S.fromSpecResidueField s) : Scheme.{u})} ∧\n      IsClopen {s : S | SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u}\n        ((Modules.tensorPullback (pullback.fst f (S.fromSpecResidueField s))).obj E) r}",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T024038-L-3335821",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T024038-L-3335821",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
