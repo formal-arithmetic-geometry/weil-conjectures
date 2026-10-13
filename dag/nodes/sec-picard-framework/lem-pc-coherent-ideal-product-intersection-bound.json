@@ -1,0 +1,193 @@
+{
+ "id": "lem-pc-coherent-ideal-product-intersection-bound",
+ "kind": "statement",
+ "title": "High ideal multiples intersect a submodule inside any prescribed ideal multiple",
+ "statement": "Let X be a Noetherian scheme [pqf-def-locnoeth], I ideal-sheaf data [def-sbc-closed-immersion-ideal-sheaf], H a coherent module, T a quasi-coherent module [pqf-def-coherent, def-weil-sheaf-of-modules-category], and a:T -> H a monomorphism. For any natural number r there is a natural number k such that on every open W the intersection of the section ranges of I^k H -> H and a lies in the section range of I^r T -> T -> H. Products and powers mean the existing recursive multiplication images [lem-weil-pbc-ideal-module-product-stalk].",
+ "source": {
+  "document": "Stacks Project, coherent.tex",
+  "place": "Tag 01YA, affine proof and inclusion consequence, applied in Tag 01YB. Proof adapted from the proved CoherentKernelIdealIntersectionBound, replacing a kernel inclusion by an arbitrary monomorphism."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Coherence supplies quasi-coherence and finite affine sections. Apply Mathlib Ideal.exists_pow_inf_eq_pow_smul on each affine section module to the range of a. Choose a finite affine cover and let c be the maximum of its constants. Set k=c+r.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a cover member with constant d<=c, Artin-Rees rewrites the intersection as I^(k-d)(I^d H intersect T). Factor k-d=r+(c-d) and use I^(c-d) T contained in T to obtain the module inclusion into I^r T.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the affine ideal-intersection inclusion theorem to obtain the inclusion on all subopens of a cover member. Restrict a section in both ranges on W to the intersections of W with the covering affines.",
+   "uses": [
+    "lem-pc-affine-ideal-intersection-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resulting preimages in I^r T agree on overlaps by monicity of the composite inclusion. Glue them using the sheaf axiom and use separatedness of H to check the glued section maps to the original one.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-ideal-intersection-inclusion",
+  "lem-weil-pbc-artin-rees",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "N3",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 01YA, affine proof and inclusion consequence, applied in Tag 01YB. Proof adapted from the proved CoherentKernelIdealIntersectionBound, replacing a kernel inclusion by an arbitrary monomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A high power of an ideal times a finite module over a noetherian ring has no ideal power torsion",
+   "results": {
+    "t": "2026-10-13T12:37:34Z",
+    "tool": "leanfinder",
+    "query": "A high power of an ideal times a finite module over a noetherian ring has no ideal power torsion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree",
+     "Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors",
+     "Ideal.iInf_pow_smul_eq_bot_of_isLocalRing",
+     "Ideal.exists_pow_inf_eq_pow_smul",
+     "Ideal.mem_iInf_smul_pow_eq_bot_iff",
+     "IsHausdorff.of_isTorsionFree",
+     "Ideal.iInf_pow_smul_eq_bot_of_le_jacobson",
+     "Submodule.isPrimary_iff_zero_divisor_quotient_imp_nilpotent_smul"
+    ],
+    "digest": "59e825f8f4b4eed1"
+   },
+   "date": "2026-10-13",
+   "verdict": "Mathlib supplies module Artin-Rees but no exact sheaf statement; the existing sheaf APIs were inspected for usable import direction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.exists_pow_inf_eq_pow_smul",
+   "results": {
+    "t": "2026-10-13T12:38:18Z",
+    "tool": "loogle",
+    "query": "Ideal.exists_pow_inf_eq_pow_smul",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Ideal.exists_pow_inf_eq_pow_smul"
+    ],
+    "digest": "af5eee87ffffb666"
+   },
+   "date": "2026-10-13",
+   "verdict": "Mathlib supplies module Artin-Rees but no exact sheaf statement; the existing sheaf APIs were inspected for usable import direction."
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*pow|pow.*annihilator",
+   "results": {
+    "t": "2026-10-13T12:38:18Z",
+    "tool": "grep",
+    "query": "annihilator.*pow|pow.*annihilator",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/SpreadingOut.lean",
+     "Mathlib/RingTheory/HopkinsLevitzki.lean",
+     "Mathlib/RingTheory/Support.lean"
+    ],
+    "digest": "490f63858b61de45"
+   },
+   "date": "2026-10-13",
+   "verdict": "Mathlib supplies module Artin-Rees but no exact sheaf statement; the existing sheaf APIs were inspected for usable import direction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a noetherian scheme a coherent sheaf has a stabilized ideal power annihilator and Artin Rees bounds its intersection with a high ideal multiple",
+   "results": {
+    "t": "2026-10-13T13:02:56Z",
+    "tool": "leansearch",
+    "query": "On a noetherian scheme a coherent sheaf has a stabilized ideal power annihilator and Artin Rees bounds its intersection with a high ideal multiple",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIdealPowerTorsionFreeProduct",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-ideal-power-torsion-free-product",
+   "place": "Tag 01YA, affine proof and inclusion consequence, applied in Tag 01YB. Proof adapted from the proved CoherentKernelIdealIntersectionBound, replacing a kernel inclusion by an arbitrary monomorphism."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentIdealProductIntersectionBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIdealProductIntersectionBound.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_ideal_product_intersection_bound",
+  "statement": "theorem coherent_ideal_product_intersection_bound\n    {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)\n    (H T : X.Modules) (hH : RingedSpace.IsCoherent X.toRingedSpace H)\n    (a : T ⟶ H) [Mono a] (hT : T.IsQuasicoherent) (r : ℕ) :\n    ∃ k : ℕ, ∀ W : X.Opens,\n      Set.range ((idealModuleProductι (idealSheafPower I.toModulesι k).2 H).app W) ∩\n          Set.range (a.app W) ⊆\n        Set.range ((idealModuleProductι (idealSheafPower I.toModulesι r).2 T ≫\n          a).app W)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T133227-L-4193783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261013T133227-L-4193783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

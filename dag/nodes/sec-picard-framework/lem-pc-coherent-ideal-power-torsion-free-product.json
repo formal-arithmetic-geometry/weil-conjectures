@@ -16,42 +16,53 @@
  ],
  "proof": [
   {
-   "text": "For each n the subsheaf H_n of sections of H locally annihilated by I^n is quasi-coherent, since powers of the ideal are finite type on the Noetherian scheme. The power inclusions show H_n is increasing. Apply ACC to obtain r and T=H_r containing every H_n.",
+   "text": "Obtain a stabilized annihilator a:T -> H and an exponent r killing its ideal product. Apply the uniform intersection bound to get k with I^k H intersect T contained in I^r T=0. Define P and j as the existing multiplication image and inclusion.",
    "uses": [
-    "lem-weil-pbc-sections-annihilated-by-ideal",
-    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "lem-pc-coherent-ideal-power-stable-annihilator",
+    "lem-pc-coherent-ideal-product-intersection-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal-data recursive-power comparison gives quasi-coherence of the kth power; tensor quasi-coherence and the image comparison give quasi-coherence of P. Its inclusion is mono as an image inclusion.",
+   "uses": [
+    "lem-pc-ideal-data-recursive-power-comparison",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal module is finite type. Identify the support complement with a subset of the surjective-stalk open furnished by the power-complement theorem. Lift the unit section through the kth power inclusion on U. The image-factorization applied to its tensor with any section of H lifts that section through j. Monicity gives injectivity.",
+   "uses": [
     "lem-pqf-finite-type-ideal-module",
-    "lem-pc-ideal-data-recursive-power-comparison"
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "lem-weil-pbc-ideal-power-complement"
    ],
    "elementary": false
   },
   {
-   "text": "Apply coherent Artin-Rees to T inside H to obtain c. At k=r+c the sectionwise intersection I^k H intersect T is contained in I^r T=0. Define P as the existing multiplication image I^k H; its canonical inclusion j is mono.",
-   "uses": [
-    "lem-weil-pbc-coherent-artin-rees"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The affine product and power formulas give quasi-coherence of P and identify recursive powers with ideal-sheaf-data powers. On U, I restricts to the unit ideal, so j restricts to an isomorphism and is bijective on U-sections. For x locally killed by I^n, naturality and linearity show j(x) lies in H_n and hence T. It also lies in P, so the zero intersection gives j(x)=0. Monomorphisms of module sheaves are injective on sections; therefore x=0. At n=0, multiplication by one gives zero directly.",
-   "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
-   ],
-   "elementary": false
+   "text": "Naturality and linearity send a locally annihilated section x of P to a locally annihilated section j(x) of H. It lies in T by the stabilized-annihilator clause and in I^k H by construction. The intersection bound puts it in the range of the zero morphism I^r T -> H, so j(x)=0. Sectionwise injectivity of j gives x=0.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-coherent-ideal-power-stable-annihilator",
+  "lem-pc-coherent-ideal-product-intersection-bound",
   "lem-pc-ideal-data-recursive-power-comparison",
   "lem-pqf-finite-type-ideal-module",
-  "lem-weil-pbc-coherent-artin-rees",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-noetherian-acc-quasi-coherent",
-  "lem-weil-pbc-sections-annihilated-by-ideal"
+  "lem-weil-pbc-ideal-power-complement",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, coherent.tex",
-  "place": "Second paragraph of Tag 01YB; Tags 01Y8 and 01YA."
+  "agent": "N3",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 01YB, 01YA, 01Y8",
+  "place": "Original second-paragraph argument, with explicit tensor image lift over the complement; general Artin-Rees equality replaced by the proved uniform intersection inclusion."
  },
  "mathlib_searches": [
   {
@@ -195,9 +206,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "N3",
   "result": "pass",
-  "landing": "20261013T123544-L-3711186",
+  "landing": "20261013T133227-L-4193783",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
