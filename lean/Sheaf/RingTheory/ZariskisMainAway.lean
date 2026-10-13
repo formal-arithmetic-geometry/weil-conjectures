@@ -43,6 +43,7 @@ theorem zariskisMainProperty_of_isQuasiFiniteAtPrime
     (hq : IsQuasiFiniteAtPrime R S q) : QuasiFiniteAt R q.asIdeal := by
   let p := q.comap (algebraMap R S)
   let e := PrimeSpectrum.preimageHomeomorphFiber R S p
+  change IsOpen ({e ⟨q, rfl⟩} : Set (PrimeSpectrum (p.asIdeal.Fiber S))) at hq
   apply QuasiFiniteAt.of_isOpen_singleton_fiber q
   rw [← e.isOpen_image, Set.image_singleton]
   exact hq
