@@ -12754,3 +12754,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:15 L: merged deliver/D3/Sheaf.RingTheory.ElementwiseFpModuleEquivDescent (stage 3; reviewer PASS; first push; landing 20261013T141524-L-378429 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/E3/Sheaf.Algebra.Homology.OpenRestrictionKFlat (stage 3; reviewer PASS; first push; landing 20261013T141524-L-378527 (proof); batch 20261013T141520; modules 1; new nodes 0)
 - 14:15 L: merged deliver/F1/Sheaf.Algebra.Homology.FiniteStripConeFiltration (stage 3; reviewer PASS; first push; landing 20261013T141525-L-378626 (proof); batch 20261013T141520; modules 1; new nodes 0)
+- 14:15 L: merged deliver/F1/Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetComparison (stage 3; reviewer PASS; first push; landing 20261013T141525-L-378725 (interface); batch 20261013T141520; modules 3; new nodes 2)

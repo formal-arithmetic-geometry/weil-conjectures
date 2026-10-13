@@ -14,29 +14,30 @@
  },
  "proof": [
   {
-   "text": "Restrict J to V by the overFunctor followed by the module equivalence overEquiv V. Sections of the restricted module on an open W of V identify with original sections on the corresponding open of Spec A. Forgetting scalar actions makes these identifications additive and natural in coefficient maps. Composing with sigma gives a degreewise isomorphism from K, after forgetting A, to global sections of the restricted J. The source differential equation makes it a chain isomorphism.",
+   "text": "Compose the forgotten sigma components with the explicit canonical restriction-section transport. Its proved coefficient naturality and the source differential hypothesis intertwine the consecutive differentials. The complex shape reduces every required differential relation to this consecutive case; assemble the source chain isomorphism using HomologicalComplex.Hom.isoOfComponents.",
    "uses": [
-    "def-sc-alternating-cech-total-complex"
+    "lem-sc-principal-open-cech-section-transport"
    ],
    "elementary": false
   },
   {
-   "text": "For an increasing tuple t:Fin(p+1) order-embedding into Fin r, let S be its range. The inverse is the unique increasing enumeration of S. This bijects such tuples with subsets of cardinality p+1. The intersection of their principal opens is D(product over S of f_j), by the product formula for basic opens, and its preimage on V is the corresponding intersection there. Use the section identifications from restriction and the equality q=n+1-card S for p+q=n. Only p=0,...,r-1 can occur, so regrouping this finite family identifies the diagonal coproduct in the tuple total with the displayed subset product. Grouping coordinates by cardinality gives the inverse. Compose with tau to identify T degreewise with the forgotten tuple total.",
+   "text": "Apply the tuple total coordinate theorem to T and tau, obtaining degreewise isomorphisms and their consecutive differential equations. Assemble the target chain isomorphism using HomologicalComplex.Hom.isoOfComponents.",
    "uses": [
-    "def-sc-alternating-cech-total-complex"
+    "lem-sc-principal-open-cech-subset-coordinates"
    ],
    "elementary": false
   },
   {
-   "text": "Under the increasing enumeration of S, deletion of tuple position k erases its value j and k equals card {i in S | i<j}. Consequently the tuple face restriction and its sign (-1)^k agree with the displayed subset face term. The vertical sign (-1)^p agrees with (-1)^(card S-1). Naturality identifies the coefficient differential and degree equality transports agree by proof irrelevance. The target differential equation thus makes the degreewise identification a chain isomorphism. Singleton terms of the augmentation equation agree with the global section restrictions; all higher terms vanish on both sides. Hence the two chain isomorphisms commute with alpha and give the required arrow isomorphism. For r=0 all target terms vanish and sections on V=empty are zero by the sheaf axiom. Repeated opens retain distinct indices and empty intersections have zero sections, so neither changes the bijection or formulas.",
+   "text": "Use injectivity of tau to recover alpha(s) as tau inverse of the singleton restriction function. The coordinate theorem augmentation equation then shows that the two assembled complex isomorphisms form a commuting square. Apply Arrow.isoMk′ to construct the claimed arrow isomorphism.",
    "uses": [
-    "def-sc-alternating-cech-total-complex"
+    "lem-sc-principal-open-cech-subset-coordinates"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-alternating-cech-total-complex"
+  "lem-sc-principal-open-cech-section-transport",
+  "lem-sc-principal-open-cech-subset-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
@@ -123,9 +124,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261013T131330-L-4035507",
+  "landing": "20261013T141525-L-378725",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

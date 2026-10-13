@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-principal-open-cech-subset-coordinates",
+ "kind": "statement",
+ "title": "Subset coordinates of the tuple total, differential and singleton restriction",
+ "statement": "Let $A$ be a commutative ring, $X=\\operatorname{Spec}(A)$ [def-pc-scheme], $r\\in\\mathbb N$, and $f:\\operatorname{Fin}(r)\\to A$. Put $V=\\bigcup_iD(f_i)$ and $D_S=D(\\prod_{j\\in S}f_j)$. Let $J$ be an arbitrary unbounded complex of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules], let $J'$ be its termwise restriction to $V$, and put $U_i=V\\cap D(f_i)$ as opens of $V$. Let $T$ be a complex of $A$-modules and let $\\tau_n:T^n\\cong\\prod_{\\varnothing\\ne S\\subseteq\\operatorname{Fin}(r)}\\Gamma(D_S,J^{n+1-|S|})$ be degreewise $A$-linear isomorphisms. Assume the transported differential at $S$ is the sum of $(-1)^{|S|-1}d_J$ on the $S$ coordinate and, for each $j\\in S$ with nonempty deletion, restriction of the $S\\setminus\\{j\\}$ coordinate multiplied by $(-1)^{|\\{i\\in S:i<j\\}|}$. The restriction inequalities $D_S\\subseteq D_{S\\setminus\\{j\\}}$ and $D_S\\subseteq V$ for singleton $S$, and the equalities $n+1-|S\\setminus\\{j\\}|=n+2-|S|$ and $n=n+1-|S|$ for singleton $S$, provide the transports appearing in these formulas. Let $B$ be the alternating increasing-tuple total complex of $J'$ for $U$ [def-sc-alternating-cech-total-complex], after forgetting scalar actions. There exist additive isomorphisms $b_n:T^n\\cong B^n$ intertwining consecutive differentials. For every $s\\in\\Gamma(V,J^n)$, let $c_n(s)$ be the subset-coordinate function equal to restriction of $s$ on singleton subsets, with the indicated coefficient-degree transport, and zero otherwise. Then $b_n(\\tau_n^{-1}(c_n(s)))$ is the degree-$n$ tuple augmentation applied to the canonical restriction-section transport of $s$ [lem-sc-principal-open-cech-section-transport].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-sc-alternating-cech-total-complex",
+  "lem-sc-principal-open-cech-section-transport"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, equation (20.40.0.1), compatibility of the section augmentation with the alternating total; Tag 01FM, increasing-tuple convention. The coordinate verification is written by X2."
+ },
+ "proof": [
+  {
+   "text": "For an increasing tuple t:Fin(p+1) order-embedding into Fin r, let S be its range. The inverse is the unique increasing enumeration of S. This bijects such tuples with subsets of cardinality p+1. The intersection of their principal opens is D(product over S of f_j), by the product formula for basic opens, and its preimage on V is the corresponding intersection there. Use the section identifications from restriction and the equality q=n+1-card S for p+q=n. Only p=0,...,r-1 can occur, so regrouping this finite family identifies the diagonal coproduct in the tuple total with the displayed subset product. Grouping coordinates by cardinality gives the inverse. Compose with tau to identify T degreewise with the forgotten tuple total.",
+   "uses": [
+    "lem-sc-principal-open-cech-section-transport",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use increasing enumeration to compare face deletion and its sign, and identify the coefficient degree and vertical sign. Naturality of the section transports gives the differential equation. Expanding the explicit augmentation in the singleton column gives the section restriction equation. Empty families give zero totals; empty intersections give zero sections and repeated opens preserve distinct indices.",
+   "uses": [
+    "lem-sc-principal-open-cech-section-transport",
+    "def-sc-alternating-cech-total-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-alternating-cech-total-complex",
+  "lem-sc-principal-open-cech-section-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, equation (20.40.0.1), compatibility of the section augmentation with the alternating total; Tag 01FM, increasing-tuple convention. The coordinate verification is written by X2."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The finite subset indexed Cech complex is isomorphic to increasing tuple total complex",
+   "results": "{\"t\": \"2026-10-13T13:37:19Z\", \"tool\": \"leanfinder\", \"query\": \"The finite subset indexed Cech complex is isomorphic to increasing tuple total complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.Γ₀NondegComplexIso\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\", \"ChainComplex.mk'XIso\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"ChainComplex.mkXIso\", \"HomologicalComplex.restrictionXIso\", \"ComplexShape.r\", \"HomologicalComplex₂.XXIsoOfEq_hom_ιTotal\"], \"digest\": \"50dd826f657abeaa\"}",
+   "date": "2026-10-13",
+   "verdict": "No existing theorem supplies the subset total differential and singleton augmentation coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "subset.*[Cc]ech|[Cc]ech.*subset",
+   "results": "{\"t\": \"2026-10-13T13:43:22Z\", \"tool\": \"grep\", \"query\": \"subset.*[Cc]ech|[Cc]ech.*subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/Separation/CompletelyRegular.lean\"], \"digest\": \"866404389c516f5a\"}",
+   "date": "2026-10-13",
+   "verdict": "No existing theorem supplies the subset total differential and singleton augmentation coordinates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite subset coordinates of the alternating Cech total differential and augmentation",
+   "results": "{\"t\": \"2026-10-13T13:48:55Z\", \"tool\": \"leansearch\", \"query\": \"The finite subset coordinates of the alternating Cech total differential and augmentation\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetComparison",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-principal-open-cech-subset-comparison",
+   "place": "Subset coordinates of the tuple total, differential and singleton restriction"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetCoordinates.lean",
+  "declaration": "AlgebraicGeometry.principalOpenCech_subset_coordinates",
+  "statement": "theorem principalOpenCech_subset_coordinates (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (J : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) : let V : (Spec (.of A)).Opens := ⨆ i : Fin r, PrimeSpectrum.basicOpen (f i) let D : Finset (Fin r) → (Spec (.of A)).Opens := fun S ↦ PrimeSpectrum.basicOpen (∏ j ∈ S, f j) ∀ (T : CochainComplex (ModuleCat.{u} A) ℤ) (τ : ∀ n : ℤ, T.X n ≅ ModuleCat.of A (∀ S : {S : Finset (Fin r) // S.Nonempty}, (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.obj (op (D S.val)))) (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j)) (hls : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → D S.val ≤ V) (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ, n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ)) (hes : ∀ S : {S : Finset (Fin r) // S.Nonempty}, S.val.card = 1 → ∀ n : ℤ, n = n + 1 - (S.val.card : ℤ)), (∀ (n : ℤ) (s : T.X n) (S : {S : Finset (Fin r) // S.Nonempty}), (τ (n + 1)).hom (T.d n (n + 1) s) S = (-1 : A) ^ (S.val.card - 1) • (modulesSpecToSheaf.map (J.d (n + 1 - (S.val.card : ℤ)) (n + 1 + 1 - (S.val.card : ℤ)))).hom.app (op (D S.val)) ((τ n).hom s S) + ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) • (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map (homOfLE (hle S.val j.val)).op ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app (op (D (S.val.erase j.val))) ((τ n).hom s ⟨S.val.erase j.val, h⟩)) else 0) → let R := SheafOfModules.overFunctor.{u} (moduleRings (Spec (.of A)).toRingedSpace) V ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V)) (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv V) let J' := (R.mapHomologicalComplex (ComplexShape.up ℤ)).obj J let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i) let F := (forget₂ (ModuleCat.{u} A) AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℤ) let G := (forget₂ (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℤ) let B := G.obj ((alternatingCechTotalFunctor U).obj J') ∃ b : ∀ n : ℤ, (F.obj T).X n ≅ B.X n, (∀ n : ℤ, (b n).hom ≫ B.d n (n + 1) = (F.obj T).d n (n + 1) ≫ (b (n + 1)).hom) ∧ (∀ (n : ℤ) (s : (modulesSpecToSheaf.obj (J.X n)).obj.obj (op V)), (b n).hom ((τ n).inv (fun S ↦ if h : S.val.card = 1 then (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map (homOfLE (hls S h)).op ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S h n)))).hom.app (op V) s) else 0)) = (G.map ((alternatingCechAugmentation U).app J')).f n (by change (forget₂ (ModuleCat.{u} ((moduleRings V.toScheme.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat).obj ((RingedSpace.globalSectionsFunctor V.toScheme.toRingedSpace).obj (R.obj (J.X n))) exact (principalOpenSectionTransport A V (J.X n)).hom s))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T141525-L-378725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T141525-L-378725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

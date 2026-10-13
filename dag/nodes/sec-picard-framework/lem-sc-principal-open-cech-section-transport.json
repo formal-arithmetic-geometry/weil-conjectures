@@ -1,0 +1,99 @@
+{
+ "id": "lem-sc-principal-open-cech-section-transport",
+ "kind": "statement",
+ "title": "Canonical restriction section transport is natural in coefficients",
+ "statement": "For a commutative ring A, an open V of Spec A and a sheaf module M, construct the additive isomorphism from M(V) to global sections of the restriction of M to V by the open-image equality, restrictAppIso, and the inverse of overFunctorEquiv. For every coefficient morphism g:M→N and section s of M on V, transporting g(s) equals applying the restricted g to the transported s.",
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, equation (20.40.0.1), compatibility of the section augmentation with the alternating total; Tag 01FM, increasing-tuple convention. The coordinate verification is written by X2."
+ },
+ "proof": [
+  {
+   "text": "Transport the open equality using coefficient presheaf naturality. Apply naturality of the inverse of overFunctorEquiv, evaluated at the top open. Composing these two equations proves the claimed equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08C1, equation (20.40.0.1), compatibility of the section augmentation with the alternating total; Tag 01FM, increasing-tuple convention. The coordinate verification is written by X2."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "overFunctorEquiv|restrictAppIso",
+   "results": "{\"t\": \"2026-10-13T13:51:30Z\", \"tool\": \"grep\", \"query\": \"overFunctorEquiv|restrictAppIso\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"10b3cd56018dedfe\"}",
+   "date": "2026-10-13",
+   "verdict": "Mathlib restriction equivalences supply the explicit transport; naturality is proved from them in Lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of section identification for restriction of sheaf modules to an open subscheme",
+   "results": "{\"t\": \"2026-10-13T13:51:31Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of section identification for restriction of sheaf modules to an open subscheme\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of restriction to an open subscheme identify naturally with sections of original module on the open",
+   "results": "{\"t\": \"2026-10-13T13:51:31Z\", \"tool\": \"leanfinder\", \"query\": \"Sections of restriction to an open subscheme identify naturally with sections of original module on the open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.res_apply\", \"AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app\", \"AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj\", \"AlgebraicGeometry.Scheme.Opens.ι_appTop\", \"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.Scheme.Opens.ι_app_self\", \"AlgebraicGeometry.Scheme.Opens.ι_app\", \"AlgebraicGeometry.Γ_map_morphismRestrict\"], \"digest\": \"1c70b67732dc66bd\"}",
+   "date": "2026-10-13",
+   "verdict": "Mathlib restriction equivalences supply the explicit transport; naturality is proved from them in Lean."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetComparison",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-principal-open-cech-subset-comparison",
+   "place": "Canonical restriction section transport is natural in coefficients"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenSectionTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenSectionTransport.lean",
+  "declaration": "AlgebraicGeometry.principalOpenSectionTransport_natural",
+  "statement": "theorem principalOpenSectionTransport_natural (A : Type u) [CommRing A] (V : (Spec (.of A)).Opens) {M N : (Spec (.of A)).Modules} (g : M ⟶ N) (s : (modulesSpecToSheaf.obj M).obj.obj (op V)) : (principalOpenSectionTransport A V N).hom ((modulesSpecToSheaf.map g).hom.app (op V) s) = ((SheafOfModules.overFunctor (moduleRings (Spec (.of A)).toRingedSpace) V ⋙ (Scheme.Modules.overEquiv V).functor).map g).app ⊤ ((principalOpenSectionTransport A V M).hom s)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.principalOpenSectionTransport"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T141525-L-378725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T141525-L-378725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
