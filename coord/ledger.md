@@ -13280,3 +13280,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:01 L: batch 20261013T172648 dependency take-out
 - 18:01 L: returned deliver/R1/Sheaf.RingTheory.ColimitFlatRelationDescent (reviewer RETURN: (reviewer X-78644, head 786440492) E2/E5 (brief point 4): RingTheory.preserves_colimit_of_filtered_commring is false wit)
 - 18:09 L: returned deliver/P1/Sheaf.Algebra.Homology.AffineScalarLocalizedTensorSquare (reviewer RETURN: (reviewer X-37d32, head 37d32d642) C: AffineDirectLocalizedTensorSquare omits three stated proof dependencies from its i)
+- 18:10 L: merged deliver/A2/Sheaf.Algebra.Homology.LocalizedTensorComparisonUnit (stage 3; reviewer PASS; first push; landing 20261013T181051-L-2597412 (interface); batch 20261013T181050; modules 2; new nodes 1)

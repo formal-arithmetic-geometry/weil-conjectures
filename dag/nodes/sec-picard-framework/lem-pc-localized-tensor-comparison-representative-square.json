@@ -1,0 +1,161 @@
+{
+ "id": "lem-pc-localized-tensor-comparison-representative-square",
+ "kind": "statement",
+ "title": "Localized tensor comparison square under change of K-flat representative",
+ "statement": "Let $R,A,B,C$ be commutative rings in one universe, let $A$ and $B$ be $R$-algebras, and let $C$ be an $E=A\\otimes_R B$-algebra. Fix derived categories of $R$-, $A$- and $B$-modules [def-weil-abstract-derived-category]. Write $F$ for termwise extension of scalars from $A$ to $C$. Let $Q$ be a K-flat $A$-complex [def-pc-module-kflat-complex], $N$ any $C$-complex, and $t:F(Q)\\to N$ a chain map. Let $U,V$ be K-flat $A$-complexes, with $Q_A(U)\\simeq Q_A(V)$ in the derived category. Choose base-derived tensor cohomology models $m_U,m_V$ [def-pc-base-derived-tensor-cohomology-model] for $U\\otimes_A Q$ and $V\\otimes_A Q$. For each $i\\in\\mathbf Z$, there exist $C$-linear isomorphisms $e:C\\otimes_E m_U.cohomology_i\\simeq C\\otimes_E m_V.cohomology_i$ and $d:H^i(F(U)\\otimes_C N)\\simeq H^i(F(V)\\otimes_C N)$ such that $\\alpha_U d=e\\alpha_V$. Here $\\alpha_P=m_P.localizedComparison_i$ followed by $H^i(\\mu^{-1}_{P,Q};F(P)\\otimes t)$, and $\\mu$ is the canonical monoidal scalar-extension tensorator. Neither comparison is assumed invertible; no flatness of $C$ or $N$ is assumed.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 064L (lemma-derived-tor-quasi-isomorphism-other-side), 06Y1 (K-flat extension of scalars), and 06Y6 (lemma-derived-base-change); used for the representative-invariance step of perfect.tex Tag 0DJA(1)"
+ },
+ "proof": [
+  {
+   "text": "Convert the acyclic-test K-flat hypotheses to the source-library MorphismProperty.kFlat predicate using HomotopyCategory.kFlat_quotient_obj_iff, kFlat_iff_preserves_acyclic, and the braiding. The reverse conversion takes the second conjunct. No new notion of K-flatness is introduced.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a quasi-isomorphism s:P→G of K-flat A-complexes, tensoring s with the K-flat Q preserves quasi-isomorphisms. Apply the localized base-derived model quasi-isomorphism comparison to s tensor Q and extend its source isomorphism to C.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-pc-base-derived-tensor-model-quasiiso-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Termwise extension F preserves quasi-isomorphisms between K-flat complexes: apply mixedTensor_kFlat_quasiIso with the C-unit in degree zero. mapBifunctorSingle₂Iso and the termwise left-unitor natural isomorphism identify this tensor map with F.map s. Extension preserves K-flatness by acyclic_mapBifunctor_extendScalars_of_kFlat. Hence the existing generic MorphismProperty.whiskerRight_of_kFlat makes F.map s tensor N a quasi-isomorphism, even for arbitrary N.",
+   "uses": [
+    "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "lem-pc-kflat-extension-of-scalars",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker exchange and OplaxMonoidal.δ_natural_left give the chain equality (μ.inv; F(P) tensor t); (F(s) tensor N) = F(s tensor Q); (μ.inv; F(G) tensor t). Apply homology, reassociate, and substitute the model comparison square from step 2. This constructs the source and target isomorphisms and their comparison square for a single quasi-isomorphism.",
+   "uses": [
+    "lem-pc-base-derived-tensor-model-quasiiso-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use Mathlib DerivedCategory.right_fac to represent the given derived isomorphism by a roof U←L→V. Q reflects quasi-isomorphisms and the right-leg image equals the left-leg image followed by eUV, so both legs are quasi-isomorphisms. Use the proved source-library ModuleCat.hasFunctorialFlatResolution and the reduced resolution functor, its quasi-isomorphic augmentation, and LeftResolution.kFlat_resolutionFunctor_obj to replace L by a K-flat L′. Composing its augmentation with either leg gives quasi-isomorphisms between K-flat objects. The proof uses a base-derived model of L′ tensor Q only locally inside an existential proposition; it defines no data from an arbitrary witness.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-module-kflat-complex",
+    "def-pc-base-derived-tensor-cohomology-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the single-leg square to the two refined roof legs. If they give αL;dL=eL;αU and αL;dR=eR;αV, take e=eL⁻¹;eR and d=dL⁻¹;dR. Cancel eL and dL and reassociate to get αU;d=e;αV. This is the asserted square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-base-derived-tensor-model-quasiiso-comparison",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA(1), refined K-flat roof and canonical comparison naturality; implemented from existing declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K flat tensor comparison invariant under isomorphism in the derived category and tensor unit",
+   "results": "8 hits: Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_flat_tensorProduct, CategoryTheory.RepresentablyFlat.of_iso, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; no exact comparison-square theorem. Reuse existing model transport, mixed K-flat tensor and scalar-extension K-flat lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat representatives derived isomorphism natural tensor comparison square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.δ_natural_left",
+   "results": "1 hits: CategoryTheory.Functor.OplaxMonoidal.δ_natural_left",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; no exact comparison-square theorem. Reuse existing model transport, mixed K-flat tensor and scalar-extension K-flat lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "right_fac|whiskerRight_of_kFlat",
+   "results": "11 hits: Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean, Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean, Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean, Mathlib/Algebra/Homology/DerivedCategory/Fractions.lean",
+   "date": "2026-10-14",
+   "verdict": "Ingredients only; no exact comparison-square theorem. Reuse existing model transport, mixed K-flat tensor and scalar-extension K-flat lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonUnit",
+  "date": "2026-10-14",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJA(1), unit step: independence of the K-flat representative and of the base-derived tensor cohomology model",
+   "via": [
+    "lem-pc-localized-tensor-comparison-unit",
+    "lem-pc-localized-tensor-comparison-generators",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree",
+    "lem-pc-localized-tensor-comparison-inheritance"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedTensorComparisonRepresentativeSquare.lean",
+  "declaration": "ModuleCat.exists_localizedTensorComparison_representative_square",
+  "statement": "theorem exists_localizedTensorComparison_representative_square\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    (U V : CochainComplex (ModuleCat.{u} A) ℤ)\n    (hU : ∀ W : CochainComplex (ModuleCat.{u} A) ℤ, W.Acyclic →\n      (CochainComplex.mapBifunctor W U (curriedTensor _)).Acyclic)\n    (hV : ∀ W : CochainComplex (ModuleCat.{u} A) ℤ, W.Acyclic →\n      (CochainComplex.mapBifunctor W V (curriedTensor _)).Acyclic)\n    (eUV : DerivedCategory.Q.obj U ≅ DerivedCategory.Q.obj V)\n    (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C)\n    (mV : BaseDerivedTensorCohomologyModel R A B (V ⊗ Q) C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∃ (e : (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mU.cohomology i) ≅\n        (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mV.cohomology i))\n      (d : (F.obj U ⊗ N).homology i ≅ (F.obj V ⊗ N).homology i),\n      (mU.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F U Q).inv ≫ (F.obj U ◁ t)) i) ≫ d.hom =\n      e.hom ≫ mV.localizedComparison i ≫ HomologicalComplex.homologyMap\n        ((Functor.Monoidal.μIso F V Q).inv ≫ (F.obj V ◁ t)) i",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T181051-L-2597412",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261013T181051-L-2597412",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
