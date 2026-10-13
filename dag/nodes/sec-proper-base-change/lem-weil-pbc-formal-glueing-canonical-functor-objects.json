@@ -21,7 +21,7 @@
  ],
  "proof": [
   {
-   "text": "Take the prescribed scalar extension and localized chart modules. The restricted chart agrees with the localized R-module by algebraMap_smul. Use compare_properties and swap_properties to turn the canonical comparison and swap maps into linear equivalences, transported along those module equalities; compare_smul proves alpha_smul.",
+   "text": "Take the prescribed scalar extension and localized chart modules. Prove the literal equality of each restricted chart with the localized R-module by Module.ext' and algebraMap_smul. Use compare_properties for comparison bijectivity, compare_smul for S-linearity, and the inverse identities in swap_properties for swap bijectivity. Transport these equivalences along the chart equalities, retaining heterogeneous equalities of their linear maps.",
    "uses": [
     "lem-weil-pbc-formal-glueing-canonical-maps",
     "def-weil-pbc-formal-glueing-data"
@@ -29,7 +29,7 @@
    "elementary": false
   },
   {
-   "text": "The square is equal on fractions of pure tensors by the comparison and swap formulas. Tensor induction and localization induction extend the equality to all elements. The two cocycle paths on a triple fraction both reverse its three denominators. These equations provide the proof fields of Data.",
+   "text": "Every denominator acts bijectively on the target of the square and cocycle: outer localization inverts its denominator, localization preserves scalar bijectivity, and scalar extension preserves it by tensoring a linear equivalence. Apply localization uniqueness twice to the square and three times to the cocycle. On images of pure tensors the square follows from the denominator-one formulas of exists_compare, localMap and exists_swap, with additivity extending to arbitrary tensors. On the original module the cocycle follows from the same denominator-one swap and localized-map formulas. Transport the two equations along the chart equalities and the heterogeneous linear-map identifications to fill Data.square and Data.cocycle.",
    "uses": [
     "lem-weil-pbc-formal-glueing-canonical-maps"
    ],
@@ -43,7 +43,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Remark 05EL, https://stacks.math.columbia.edu/tag/05EL; second reader repaired decomposition"
+  "place": "Remark 05EL, https://stacks.math.columbia.edu/tag/05EL; S3 Lean proof by localization uniqueness, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -114,10 +114,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261013T111919-L-3061569",
-  "kind": "interface",
+  "landing": "20261013T120802-L-3470545",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
