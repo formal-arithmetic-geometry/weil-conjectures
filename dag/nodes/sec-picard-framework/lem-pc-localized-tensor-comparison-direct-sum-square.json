@@ -14,36 +14,31 @@
  },
  "proof": [
   {
-   "text": "Resolve the restrictions of U_j tensor Q over R K-flatly and sum these resolutions. Exactness of module sums makes the sum augmentation a quasi-isomorphism, and tensor commuting with sums makes the sum K-flat. Compute the universal R-to-B derived extension on these resolutions. The derived module direct-sum and homology-coproduct theorems identify its degree-i homology with the sum of summand homologies. Compare each supplied universal model with this common computation by uniqueness of counit-compatible derived functors. Naturality at multiplication by A lifts the B-linear comparison to E-linear maps as in the model-map theorem; their inverses are E-linear too. Thus the coproduct of the model cohomologies is isomorphic to the sum model cohomology. Extension from E to C is a left adjoint, so it preserves this coproduct and produces e.",
+   "text": "The proved BifunctorColimits preservation instances, with ModuleCat tensorRight preserving each coproduct via monoidal closedness and braiding, show that tensorRight Q sends the standard cofan of U to a colimiting cofan on U_j tensor Q. Apply the source-only coproduct theorem to this cofan, m_j and m_S, obtaining e and its summand localized-comparison equations.",
    "uses": [
-    "lem-pc-base-derived-extension-resolution",
-    "lem-pc-derived-module-direct-sums",
-    "lem-pc-derived-module-homology-coproduct",
-    "lem-pc-base-derived-tensor-cohomology-model-map",
-    "lem-pc-base-derived-tensor-cohomology-model-localized-independence"
+    "lem-pc-localized-comparison-coproduct-source"
    ],
    "elementary": false
   },
   {
-   "text": "Extension from A to C and total tensor with N preserve termwise coproducts. Exactness of module coproducts commutes with cycles, boundaries and homology. Combine these comparisons to obtain d. This works for unbounded complexes and needs no flatness of N or of A to C.",
+   "text": "Reuse the already proved generic shortComplexHomologyColimit and complexHomologyColimit helpers in Sheaf.AlgebraicGeometry.DerivedAmbientDirectSumsHomology (import all), specialized to ModuleCat C and Discrete I. ModuleCat AB4 gives exact coproducts. Compose termwise scalar extension, tensorRight N (using the proved BifunctorColimits instances), and degree-i complex homology. This composite T preserves the coproduct; (PreservesCoproduct.iso T U).symm gives d. Sigma.ι_desc proves the summand equation Sigma.ι_j followed by d.hom equals H^i(F(Sigma.ι_j) tensor id_N). Only the generic proved helpers of the cited module are used, not its scheme theorem.",
    "uses": [
-    "lem-pc-derived-module-homology-coproduct"
+    "lem-pc-derived-ambient-direct-sums-homology"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the desired square to each coprojection. Naturality of the universal counit and of the ordinary tensor associator gives the ordinary comparison square. The model generator equations fix the coefficient-extension maps. Transpose through extension/restriction adjunction and use localized_eq to obtain the localized square. Naturality of the monoidal tensorator and tensoring with t gives the final comparison square. Coproduct extensionality proves the stated equation. For an empty index set all four objects are zero.",
+   "text": "Functor.OplaxMonoidal.δ_natural_left_assoc and whisker_exchange give F(ι_j tensor Q);μ_inverse;F(sum U) tensor t = μ_inverse;F(U_j) tensor t;F(ι_j) tensor N. Apply Sigma.hom_ext to the desired square, rewrite Sigma.ι_map_assoc, substitute the two summand equations, combine homology maps with homologyMap_comp, and rewrite by this tensorator naturality equation. All remaining glue is Lean categorical composition, including the vacuous empty-family extensionality case.",
    "uses": [
-    "lem-pc-base-derived-tensor-cohomology-model-map",
-    "def-pc-base-derived-tensor-cohomology-model"
+    "lem-pc-localized-comparison-coproduct-source"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Detailed coproduct specialization of the tensor-transitivity computation in Tag 0DJA(1), using Tag 0BYJ; written by C1"
+  "place": "Tag 0DJA(1) coproduct specialization, with Tag 0BYJ functorial tensor transitivity; Y3 Lean reduction proving target coproduct and tensorator naturality, isolating the universal-model source calculation."
  },
  "mathlib_searches": [
   {
@@ -109,12 +104,8 @@
   "date": "2026-10-14"
  },
  "proof_deps": [
-  "def-pc-base-derived-tensor-cohomology-model",
-  "lem-pc-base-derived-extension-resolution",
-  "lem-pc-base-derived-tensor-cohomology-model-localized-independence",
-  "lem-pc-base-derived-tensor-cohomology-model-map",
-  "lem-pc-derived-module-direct-sums",
-  "lem-pc-derived-module-homology-coproduct"
+  "lem-pc-derived-ambient-direct-sums-homology",
+  "lem-pc-localized-comparison-coproduct-source"
  ],
  "reviewed": {
   "date": "2026-10-13",
@@ -129,11 +120,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-03187",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T190135-L-3214267",
+  "landing": "20261013T201814-L-3978983",
   "kind": "interface",
-  "note": "independent Codex review: Existing signatures and section binders are byte-identical; delivered statements match their nodes, proof records match the Lean, both modules and the sole direct importer compile cleanly, and axioms are permitted with documented sorry dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,146 @@
+{
+ "id": "lem-pc-localized-comparison-coproduct-source",
+ "kind": "statement",
+ "title": "Localized comparison source models preserve complex coproducts",
+ "statement": "Let R,A,B,C be commutative rings in universe u, with R-algebras A,B and an E=A tensor_R B-algebra C. Choose derived categories of R- and B-modules [def-weil-abstract-derived-category]. Let I be a type in u, M_j cochain complexes of A-modules, S another such complex, and s_j:M_j to S a colimiting cofan in the cochain-complex category. For arbitrary universal base-derived tensor cohomology models m_j of M_j and m_S of S [def-pc-base-derived-tensor-cohomology-model], and every integer i, let F be termwise extension along A to E to C. There is a C-module isomorphism e from the coproduct of C tensor_E m_j.cohomology(i) to C tensor_E m_S.cohomology(i), such that for every j, coprojection_j followed by e.hom followed by m_S.localizedComparison(i) equals m_j.localizedComparison(i) followed by H^i(F(s_j)). No K-flatness or flatness assumption is made, and the empty family is included.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-base-derived-tensor-cohomology-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, derived change of rings, K-flat computation and independence of choices; coproduct specialization of Tag 0DJA(1). Official online versions read at https://stacks.math.columbia.edu/tag/06Y6 and https://stacks.math.columbia.edu/tag/0DJA."
+ },
+ "proof": [
+  {
+   "text": "Choose K-flat R-resolutions of the restricted complexes using the proved ModuleCat.hasFunctorialFlatResolution, its reduced resolutionFunctor, quasi-isomorphic augmentation, and kFlat_resolutionFunctor_obj APIs. Their coproduct has a quasi-isomorphic augmentation by exactness of module sums, and is K-flat because tensor with every acyclic complex commutes with sums. Specialize the fixed-second-factor derived tensor theorem to the complex B concentrated in degree zero. The ordinary one-term tensor is canonically ordinary R-to-B extension; its K-flat computation clause computes the universal derived functor on each P_j and their sum. Compare it with the supplied universal functors by counit uniqueness (pass between the homotopy-quotient counit and its whiskering along the full, object-surjective quotient). Ordinary extension preserves the coproduct of P_j, and the derived direct-sum theorem identifies its localized cofan as colimiting. Naturality of the counit and of the sum augmentation identifies this cofan with the derived images of the given s_j.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply derived module homology to the computed coproduct. Compare supplied universal models with the common computation by uniqueness of derived functors and localized model independence. The model-map construction yields E-linear summand maps: derived-functor naturality at multiplication by a in A and cohomologyIso_smul prove compatibility with a tensor 1, while B-linearity supplies 1 tensor b; tensor induction gives E-linearity. The inverse of the B-linear sum comparison commutes with the same actions, hence is E-linear. Thus the E-module cohomologies form a coproduct. Extension from E to C is a left adjoint and preserves this coproduct, giving e.",
+   "uses": [
+    "lem-pc-derived-module-homology-coproduct",
+    "lem-pc-base-derived-tensor-cohomology-model-map",
+    "lem-pc-base-derived-tensor-cohomology-model-localized-independence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every summand map s_j, naturality of the universal counit gives the comparison_eq square. The pure-tensor values ordinaryIso_tmul and ordinaryToLocalized_tmul imply naturality of these fixed maps by tensor generator extensionality. Transpose through extension/restriction adjunction and use localized_eq and adjunction naturality to obtain the claimed localized square. No exactness of E-to-C extension is used. For empty I, the computed complexes and homologies are zero, and the coproduct equations are vacuous.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-base-derived-tensor-cohomology-model-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-base-derived-tensor-cohomology-model-localized-independence",
+  "lem-pc-base-derived-tensor-cohomology-model-map",
+  "lem-pc-derived-module-direct-sums",
+  "lem-pc-derived-module-homology-coproduct",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, derived change of rings, K-flat computation and independence of choices; coproduct specialization of Tag 0DJA(1). Official online versions read at https://stacks.math.columbia.edu/tag/06Y6 and https://stacks.math.columbia.edu/tag/0DJA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A universal derived tensor cohomology model has a coproduct compatible with its localized comparison map",
+   "results": "Service unavailable: Internal Server Error. Other searches and source grep were used.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal derived tensor cohomology models preserve coproducts compatibly with the comparison from derived to ordinary scalar extension",
+   "results": "Tor_obj, Tor, Tor_prime and Rep.torIso concern bounded-derived Tor calculations; HomologicalComplex.HasGoodTensor concerns tensor construction. None supplies arbitrary universal model cohomology or the localized comparison coproduct equation.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "BaseDerivedTensorCohomologyModel",
+   "results": "Unknown identifier in search index; the project declaration was read directly instead.",
+   "date": "2026-10-14",
+   "verdict": "no indexed match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedComparison.*coproduct|coproduct.*localizedComparison; BaseDerivedTensorCohomologyModel; homologyFunctor.*Colimit in lean/Sheaf, lean/WeilConjectures and Mathlib",
+   "results": "No existing source-only coproduct statement. Existing model-map theorem has no colimit or localized naturality clause; model independence handles one fixed complex. DerivedModuleHomologyCoproduct supplies homology preservation, but not derived extension coproducts with E-linear coefficient actions. Blueprint keyword searches found no duplicate.",
+   "date": "2026-10-14",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LocalizedTensorComparisonDirectSumSquare",
+  "date": "2026-10-14",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Source cohomology coproduct identification and localized comparison naturality in the direct-sum square (original steps 1 and the counit portion of step 3).",
+   "via": [
+    "lem-pc-localized-tensor-comparison-direct-sum-square",
+    "lem-pc-localized-tensor-comparison-closure-coproducts",
+    "lem-pc-localized-tensor-comparison-closure",
+    "lem-pc-localized-tensor-comparison-inheritance-fixed-degree"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedComparisonCoproductSource",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedComparisonCoproductSource.lean",
+  "declaration": "ModuleCat.exists_localizedComparison_coproduct_source",
+  "statement": "theorem exists_localizedComparison_coproduct_source\n    (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]\n    [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} B)]\n    {I : Type u} (M : I → CochainComplex (ModuleCat.{u} A) ℤ)\n    (S : CochainComplex (ModuleCat.{u} A) ℤ) (s : ∀ j, M j ⟶ S)\n    (hs : IsColimit (Cofan.mk S s))\n    (m : ∀ j, BaseDerivedTensorCohomologyModel R A B (M j) C)\n    (mS : BaseDerivedTensorCohomologyModel R A B S C) (i : ℤ) :\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    ∃ e : (∐ fun j ↦ (extendScalars (algebraMap (A ⊗[R] B) C)).obj\n        ((m j).cohomology i)) ≅\n      (extendScalars (algebraMap (A ⊗[R] B) C)).obj (mS.cohomology i),\n      ∀ j, Sigma.ι _ j ≫ e.hom ≫ mS.localizedComparison i =\n        (m j).localizedComparison i ≫ HomologicalComplex.homologyMap (F.map (s j)) i",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T201814-L-3978983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T201814-L-3978983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
