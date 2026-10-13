@@ -15,27 +15,51 @@
  ],
  "proof": [
   {
-   "text": "Use open_derived_restriction_comparison to restrict the quasi-coherent source\nand to choose localizations on the open subscheme. Intersect each strictly perfect\nneighbourhood of E with U. Exact restriction preserves the bounds and finite-free\nretract equations, so the restricted source is perfect. Transport it through\nU.toScheme ≅ Spec Gamma(U,O_X); this preserves perfectness by transporting the same\nopen neighbourhoods, complexes, bounds and retract equations. Apply\nperfect_iff_affine_bounded_projective to obtain P and its bounded finite-projective\nterms. The affine_localized_site_derived_transport comparison identifies its tilde\nmodel on the spectrum with Q of affinePerfectSheafification(P). The given natural\ncomparison at P then gives the required isomorphism. The empty open has zero section\nring, and the same argument applies to its zero category. No support or scalar\ncompatibility is asserted here.",
+   "text": "Construct the module equivalence e0 from sheaves on Spec Gamma(U,O_X) to the localized site of U by composing restriction along isoSpec.hom with overEquiv.inverse. The restriction-composition and identity isomorphisms provide its unit and counit. First choose the standard derived localization on the spectrum; e0.mapDerivedCategory transports local w-smallness from the supplied over-site localization. Mathlib hasLocalizationOfLocallySmall then supplies the spectrum localization in universe w. Apply nonempty_derivedOpenLocalization for its localized opens. These are constructions from proved localization and equivalence facts, not arbitrary witnesses of unproved existence.",
    "uses": [
-    "lem-pc-open-derived-restriction-comparison",
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-pc-affine-localized-site-derived-transport",
-    "lem-pc-scheme-iso-perfect-transport"
+    "lem-pc-derived-open-localization-universe"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let j be isoSpec.inv followed by U.ι, and H be ambient overFunctor followed by e0.inverse. overFunctorEquiv and restrictFunctorComp identify H with restrictFunctor j. restrictFunctorIsoPullback and uniqueness of left adjoints identify this with tensorPullback j. Its exactness makes H.mapDerivedCategory a left derived realization. Compare it to derivedPullback j by leftDerivedUnique and apply derivedPullback_preserve_perfect. The composition comparison identifies H(E) with C=e0.mapDerivedCategory.inverse(R(E)); transport the local model isomorphisms to prove C perfect.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-derived-pullback-perfect"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply schemeDerivedQCohProperty_of_isPerfect to C and regard it as an object of D_QCoh on the spectrum. Apply the forward implication of perfect_iff_affine_bounded_projective to get a complex P, finite degree bounds, finite projective terms, and C isomorphic to Q(tilde(P)).",
+   "uses": [
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker e0.functor.mapDerivedCategoryFactors by termwise tilde and compose associators with mapHomologicalComplexCompIso. This constructs the comparison between derived transport of Q(tilde(P)) and Q(affinePerfectSheafification(P)). Compose its inverse with the given comparison Q followed by F, the transported inverse model isomorphism, and the derived counit. The resulting isomorphism F(Q(P)) ≅ R(E), together with the unchanged bounds and term properties, proves the assertion. The same construction works for empty U without a nonempty-point hypothesis.",
+   "uses": [
+    "lem-pc-affine-perfect-module-model"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-open-derived-restriction-comparison",
+  "def-pc-derived-pullback",
+  "lem-pc-affine-perfect-module-model",
+  "lem-pc-derived-open-localization-universe",
+  "lem-pc-derived-pullback-perfect",
   "lem-pc-perfect-affine-bounded-projective",
-  "lem-pc-affine-localized-site-derived-transport",
-  "lem-pc-scheme-iso-perfect-transport"
+  "lem-sc-perfect-qcoherent"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "X3",
+  "group": "W3",
   "date": "2026-10-13",
-  "note": "Formal interface for a strictly separate part of the parent affine model argument; canonical Stacks text checked online."
+  "document": "https://stacks.math.columbia.edu/tag/08EB",
+  "place": "Tags 08EB and 06Z0; perfect pullback Tag 09UA.",
+  "note": "Complete Lean proof through exact open pullback and the explicit affine sheaf equivalence; no new holes. Checked canonical Stacks tag pages. Localization and left-derived uniqueness comparisons use Mathlib and the existing source exact-functor API."
  },
  "mathlib_searches": [
   {
@@ -122,10 +146,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T100220-L-2502922",
-  "kind": "interface",
+  "landing": "20261013T111941-L-3069635",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
