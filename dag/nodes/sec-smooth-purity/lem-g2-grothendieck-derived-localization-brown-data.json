@@ -10,27 +10,42 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use Gabriel-Popescu and its derived form (Stacks Tag 0F5V) to obtain the exact derived localization L with fully faithful right adjoint R and invertible counit. Use modules in universe max(w,vH), and lift objects to the stated larger object universe if necessary.",
-   "uses": [],
+   "text": "Obtain the compactly generated triangulated source B, its coproducts, and the exact localization adjunction L left adjoint to R with invertible counit from lem-g2-grothendieck-derived-compact-localization-model. Install the returned structures locally.",
+   "uses": [
+    "lem-g2-grothendieck-derived-compact-localization-model"
+   ],
    "elementary": false
   },
   {
-   "text": "Because L is an exact left adjoint, the pullback H L is homological and sends coproducts to products. The free rank-one module compactly generates the module derived category. Apply [lem-pc-brown-cohomological-representability] with the universe transfer [lem-pc-brown-representability-universe-transfer] to obtain the natural representation. Lift underlying sets to the common universe max(w,vH). The given larger discrete-limit hypothesis includes the sums required by this construction.",
+   "text": "Set K = L.op composed with H. The opposite of a triangulated functor is triangulated, so K is homological. For each index type I in Type max(w,vH), transfer hH for ULift I in Type max(w,vA,vH) along the discrete equivalence. L is a left adjoint, hence L.op preserves limits, so K preserves the required discrete limits.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply brownCohomologicalRepresentabilityUniverseTransfer to B and K, supplying brownCohomologicalRepresentability as the common-universe Brown principle. Obtain a representing object E and representing-by structure.",
    "uses": [
     "lem-pc-brown-cohomological-representability",
     "lem-pc-brown-representability-universe-transfer"
    ],
    "elementary": false
+  },
+  {
+   "text": "Lift the representing-by structure through uliftFunctor and convert it to the displayed lifted-Yoneda isomorphism using Mathlib representableByUliftFunctorEquiv and RepresentableBy.equivUliftYonedaIso. Return B, L, R, adjunction, invertible counit and E.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-g2-grothendieck-derived-compact-localization-model",
   "lem-pc-brown-cohomological-representability",
   "lem-pc-brown-representability-universe-transfer"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "U1",
+  "date": "2026-10-14",
   "document": "https://stacks.math.columbia.edu/tag/0F5X",
-  "place": "injectives-lemma-brown, first paragraph"
+  "place": "First paragraph; complete Lean reduction to the compact localization source, with the Brown and universe-transfer applications and lifted representation transport proved."
  },
  "mathlib_searches": [
   {
@@ -98,9 +113,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261013T163535-L-1619990",
+  "landing": "20261013T171516-L-1983142",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

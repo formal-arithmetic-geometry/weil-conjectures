@@ -8,6 +8,11 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.CategoryTheory.GrothendieckDerivedCompactLocalizationModel
+import Sheaf.CategoryTheory.BrownCohomologicalRepresentability
+import Sheaf.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer
+import Mathlib.CategoryTheory.Limits.Preserves.Opposites
+import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 
 /-! # Localization data preceding the Grothendieck Brown retract
 
@@ -51,6 +56,35 @@ theorem grothendieckDerived_localization_brown_data
       ∃ (L : B ⥤ DerivedCategory A) (R : DerivedCategory A ⥤ B)
         (adj : L ⊣ R), IsIso adj.counit ∧
         ∃ E : B, Nonempty (uliftYoneda.{vH}.obj E ≅
-          L.op ⋙ H ⋙ forget AddCommGrpCat ⋙ uliftFunctor.{w}) := by sorry
+          L.op ⋙ H ⋙ forget AddCommGrpCat ⋙ uliftFunctor.{w}) := by
+  obtain ⟨B, cB, zB, sB, pB, aB, tB, iB, sumsB, hB, L, R, adj, sL, hL, hc⟩ :=
+    grothendieckDerived_compact_localization_model.{w, uA, vA, vH} (A := A)
+  let := cB
+  let := zB
+  let := sB
+  let := pB
+  let := aB
+  let := tB
+  let := iB
+  let := sumsB
+  let := sL
+  have := hL
+  let K := L.op ⋙ H
+  have : K.IsHomological := by dsimp [K]; infer_instance
+  have : L.IsLeftAdjoint := adj.isLeftAdjoint
+  have hK : ∀ I : Type (max w vH), PreservesLimitsOfShape (Discrete I) K := by
+    intro I
+    have := hH (ULift.{max w vA vH} I)
+    have : PreservesLimitsOfShape (Discrete I) H :=
+      preservesLimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) H
+    dsimp [K]
+    infer_instance
+  have hrep := brownCohomologicalRepresentabilityUniverseTransfer.{0} B hB K hK
+    (fun C _ _ _ _ _ _ _ _ hC F _ hF ↦
+      brownCohomologicalRepresentability C hC F hF)
+  obtain ⟨E, ⟨rE⟩⟩ := hrep
+  refine ⟨B, cB, L, R, adj, hc, E, ⟨?_⟩⟩
+  exact (Functor.RepresentableBy.equivUliftYonedaIso _ E)
+    (Functor.representableByUliftFunctorEquiv.symm rE)
 
 end CategoryTheory
