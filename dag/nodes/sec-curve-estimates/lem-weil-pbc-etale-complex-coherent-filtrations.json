@@ -15,36 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Construct functorial termwise presentations for F_i and L.pt. Exact inverse image and degreewise colimits preserve the common lower bound a. The coefficient identity and composition equations assemble E0 and v0. Swap coordinates so resolution degree comes first; the first-page equations and negative-degree vanishing follow from the presentation.",
+   "text": "Apply etaleComplex_colimit_below to obtain the common lower bound for L.pt, and package F_i and L.pt as bounded-below complexes. Apply exists_etaleHypercohomology_uniform_bound with the canonical derived pullback-plus-coefficient map. Functoriality of the presentation maps and etale_page_map_coherence assemble the inverse-indexed page functor and its cocone maps.",
    "uses": [
-    "thm-sp-if-e1",
-    "def-sp-kinjective-bridge",
-    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
+    "lem-weil-pbc-etale-complex-colimit-below",
+    "lem-weil-pbc-hypercohomology-uniform-bound",
+    "lem-weil-pbc-etale-page-map-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "Use each presentation's canonical image filtration in degree p to define V_i and W. The target step at a is top because L.pt is zero below a; steps above p are zero because derived global sections of a complex supported above p have zero cohomology in degree p. If p<a the whole degree-p cohomology is zero, giving the bottom bound at max(a,p+1) also in this case.",
+   "text": "Swap the two integer coordinates by a complex-shape embedding. Mathlib HomologicalComplex.restrictionHomologyIso identifies the restricted homology with homology at the swapped bidegree. Its naturality follows by cancellation of homologyπ and iCycles using their naturality equations; restrict page maps to obtain a functor. First-page comparison and negative-resolution-degree vanishing are the corresponding fields of the fixed presentations.",
    "uses": [
-    "thm-sp-if-e1",
+    "def-sp-spectral-sequence",
+    "lem-weil-pbc-hypercohomology-uniform-bound"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the canonical presentation filtrations in degree p. The image-filtration characterization at a is surjective because the identity of L.pt supplies a supported witness for every class. Epi_iff_mk_eq_top gives W.step a = top. Every element of W.step max(a,p+1) belongs to the image filtration, hence vanishes since p < max(a,p+1); this proves the step is bottom. This includes p<a and the zero-length case.",
+   "uses": [
     "lem-weil-pbc-etale-presentation-image-filtration",
     "lem-weil-pbc-etale-hypercohomology-filtration-zero"
    ],
    "elementary": false
   },
   {
-   "text": "Keep those presentations fixed for every q. Choose r>=1 with r>max(p-q+1,q-a). In the support region resolution degree >=0 and complex degree >=a, both incident differentials at (p-q,q) vanish uniformly over all stages and the target. Canonical subquotient convergence identifies that page with the categorical graded piece. This does not assert a page comparison is invertible.",
+   "text": "For each q take N=max(1,max(q-a+2,p-q+2)). The uniform bound applies to every stage and to L.pt; its eInf isomorphisms identify the swapped N-pages at (p-q,q) with the chosen graded pieces. Its filtered comparison theorem supplies the step maps, commuting squares and cokernel.map equation. Expand the specified hP formula, cohomology, and the global-sections composition isomorphism; functoriality and associativity identify the canonical total map with P followed by the coefficient cohomology map.",
    "uses": [
-    "def-sp-spectral-sequence",
-    "thm-sp-spectral-object-yields",
-    "thm-sp-if-e1"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The canonical abutment maps restrict to all filtration steps. Monicity gives commutation with adjacent-step inclusions. Naturality of the stable-page comparison gives the displayed cokernel.map equation. The formula hP identifies the underlying abutment map with P followed by the coefficient map.",
-   "uses": [
-    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
+    "lem-weil-pbc-hypercohomology-uniform-bound"
    ],
    "elementary": false
   }
@@ -52,7 +50,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tags 015J, 015K and the finite-support argument of 0EZM; explicit coherent diagram interface written by D2"
+  "place": "Tags 015J, 015K, 0EZM; D2 Lean assembly from fixed functorial hypercohomology presentations, coordinate restriction, image-filtration bounds and uniform stabilization."
  },
  "mathlib_searches": [
   {
@@ -117,13 +115,12 @@
   "date": "2026-10-12"
  },
  "proof_deps": [
-  "def-sp-kinjective-bridge",
   "def-sp-spectral-sequence",
+  "lem-weil-pbc-etale-complex-colimit-below",
   "lem-weil-pbc-etale-hypercohomology-filtration-zero",
+  "lem-weil-pbc-etale-page-map-coherence",
   "lem-weil-pbc-etale-presentation-image-filtration",
-  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
-  "thm-sp-if-e1",
-  "thm-sp-spectral-object-yields"
+  "lem-weil-pbc-hypercohomology-uniform-bound"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -136,13 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-62e52",
   "group": "D2",
   "result": "pass",
-  "landing": "20261012T184247-L-3998606",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T060413-L-581805",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged Lean signature with its node, proof with recorded dependencies, and report with the delivery; module and sole direct importer compile cleanly, with permitted axioms and inherited sorryAx only."
  }
 }

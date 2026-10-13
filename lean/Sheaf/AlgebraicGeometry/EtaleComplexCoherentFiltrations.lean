@@ -7,12 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleComplexFiltrationPageData
 public import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
+import Mathlib.Algebra.Homology.Embedding.RestrictionHomology
+import Sheaf.AlgebraicGeometry.EtaleHypercohomologyUniformBound
+import Sheaf.AlgebraicGeometry.EtalePageMapCoherence
+import Sheaf.AlgebraicGeometry.EtaleComplexColimitBelow
 import Sheaf.AlgebraicGeometry.EtalePresentationImageFiltration
-import Sheaf.AlgebraicGeometry.EtaleHypercohomologyFiltration
-import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
 
 /-! # Coherent categorical filtrations for an etale complex diagram
 
@@ -28,6 +27,89 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+/-- Swapping bidegrees interchanges the differential vectors. -/
+private def coherentSwapEmbedding (r : ℤ) :
+    (ComplexShape.up' ((1 - r, r) : ℤ × ℤ)).Embedding
+      (ComplexShape.up' ((r, 1 - r) : ℤ × ℤ)) :=
+  ComplexShape.Embedding.mk' _ _ Prod.swap Prod.swap_injective (by
+    intro i j
+    change i + (1 - r, r) = j ↔ i.swap + (r, 1 - r) = j.swap
+    constructor <;> intro h
+    · simpa using congrArg Prod.swap h
+    · simpa using congrArg Prod.swap h)
+
+private instance (r : ℤ) : (coherentSwapEmbedding r).IsRelIff := by
+  unfold coherentSwapEmbedding
+  infer_instance
+
+/-- The restriction homology isomorphism for the coordinate swap. -/
+private noncomputable def coherentSwapHomologyIso
+    (r : ℤ) (K : HomologicalComplex AddCommGrpCat.{u + 1}
+      (ComplexShape.up' ((r, 1 - r) : ℤ × ℤ))) (j : ℤ × ℤ) :
+    (K.restriction (coherentSwapEmbedding r)).homology j ≅ K.homology j.swap :=
+  K.restrictionHomologyIso (coherentSwapEmbedding r)
+    (j - (1 - r, r)) j (j + (1 - r, r))
+    (ComplexShape.prev_eq' _ (by simp [ComplexShape.up', sub_add_cancel]))
+    (ComplexShape.next_eq' _ rfl) rfl rfl rfl
+    (ComplexShape.prev_eq' _ (by ext <;> simp [ComplexShape.up', coherentSwapEmbedding,
+      ComplexShape.Embedding.mk']))
+    (ComplexShape.next_eq' _ (by rfl))
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem coherentSwapHomologyIso_naturality
+    (r : ℤ) (K L : HomologicalComplex AddCommGrpCat.{u + 1}
+      (ComplexShape.up' ((r, 1 - r) : ℤ × ℤ))) (f : K ⟶ L) (j : ℤ × ℤ) :
+    HomologicalComplex.homologyMap (HomologicalComplex.restrictionMap f
+      (coherentSwapEmbedding r)) j ≫ (coherentSwapHomologyIso r L j).hom =
+      (coherentSwapHomologyIso r K j).hom ≫ HomologicalComplex.homologyMap f j.swap := by
+  rw [← cancel_epi ((K.restriction (coherentSwapEmbedding r)).homologyπ j)]
+  simp only [HomologicalComplex.homologyπ_naturality_assoc,
+    coherentSwapHomologyIso, HomologicalComplex.homologyπ_restrictionHomologyIso_hom,
+    HomologicalComplex.homologyπ_restrictionHomologyIso_hom_assoc]
+  erw [HomologicalComplex.homologyπ_naturality f j.swap]
+  simp only [← Category.assoc]
+  apply congrArg (fun t => t ≫ L.homologyπ j.swap)
+  rw [← cancel_mono (L.iCycles j.swap)]
+  simp only [Category.assoc]
+  erw [HomologicalComplex.restrictionCyclesIso_hom_iCycles,
+    HomologicalComplex.cyclesMap_i]
+  erw [HomologicalComplex.cyclesMap_i f j.swap,
+    HomologicalComplex.restrictionCyclesIso_hom_iCycles_assoc]
+  simp only [HomologicalComplex.restrictionXIso, HomologicalComplex.restrictionMap_f,
+    eqToIso_refl, Iso.refl_hom, Category.id_comp]
+  rfl
+
+/-- Reindex every page, and transport the successive homology isomorphisms. -/
+private noncomputable def coherentSwapSequence
+    (E : CohomologicalSpectralSequence AddCommGrpCat.{u + 1} 1) :
+    SpectralSequence AddCommGrpCat.{u + 1}
+      (fun r ↦ ComplexShape.up' ((1 - r, r) : ℤ × ℤ)) 1 where
+  page r hr := (E.page r hr).restriction (coherentSwapEmbedding r)
+  iso r r' j h hr := coherentSwapHomologyIso r (E.page r hr) j ≪≫ E.iso r r' j.swap h hr
+
+/-- Restrict page maps along the coordinate swap. -/
+private noncomputable def coherentSwapSequenceMap
+    {E E' : CohomologicalSpectralSequence AddCommGrpCat.{u + 1} 1} (f : E ⟶ E') :
+    coherentSwapSequence E ⟶ coherentSwapSequence E' where
+  hom r hr := HomologicalComplex.restrictionMap (f.hom r hr) (coherentSwapEmbedding r)
+  comm r r' j h hr := by
+    dsimp [coherentSwapSequence]
+    rw [← Category.assoc, coherentSwapHomologyIso_naturality, Category.assoc,
+      f.comm r r' j.swap h hr]
+    rfl
+
+/-- The coordinate swap is functorial on spectral sequences. -/
+private noncomputable def coherentSwapSequenceFunctor :
+    CohomologicalSpectralSequence AddCommGrpCat.{u + 1} 1 ⥤
+      SpectralSequence AddCommGrpCat.{u + 1}
+        (fun r ↦ ComplexShape.up' ((1 - r, r) : ℤ × ℤ)) 1 where
+  obj := coherentSwapSequence
+  map := coherentSwapSequenceMap
+  map_id E := by apply SpectralSequence.hom_ext; intros; rfl
+  map_comp f g := by apply SpectralSequence.hom_ext; intros; rfl
+
+
+set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent page isomorphisms and all filtration-degree witnesses.
 set_option linter.unusedVariables false in
@@ -159,6 +241,118 @@ theorem exists_etale_complex_coherent_filtrations
                 t (z + 1) ≫ Subobject.ofLE (W.step (z + 1)) (W.step z)
                   (W.antitone_step (Int.le_add_one (le_refl z)))),
             ((v0 (op i)).hom r hr).f ⟨p - q, q⟩ ≫ e'.hom =
-              (e i).hom ≫ cokernel.map _ _ (t (q + 1)) (t q) (hc q) := by sorry
+              (e i).hom ≫ cokernel.map _ _ (t (q + 1)) (t q) (hc q) := by
+  classical
+  have hlimit := etaleComplex_colimit_below D c F a hbelow G eG L hL
+  have hFK : ∀ i : I, CochainComplex.plus
+      (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) (F i) := by
+    intro i
+    exact ⟨a, (CochainComplex.isStrictlyGE_iff _ _).mpr (hbelow i)⟩
+  have hLK : CochainComplex.plus
+      (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) L.pt := by
+    exact ⟨a, (CochainComplex.isStrictlyGE_iff _ _).mpr hlimit⟩
+  let P₀ := fun {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+    (J : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+    (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj K ⟶ J) (n : ℤ) ↦
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map
+      ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map
+        ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app
+          (DerivedCategory.Q.obj K)) ≫
+      (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+        AddCommGrpCat.{u + 1} f).hom.app
+          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj
+            (DerivedCategory.Q.obj K)) ≫
+      (rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map
+        ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K ≫
+          DerivedCategory.Q.map v))
+  have hP₀ : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
+      (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+      (J : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
+      (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj K ⟶ J),
+      P₀ f K J v p = P f K ≫
+        (cohomology AddCommGrpCat.{u + 1} Y p).map (DerivedCategory.Q.map v) := by
+    intro X Y f K J v
+    rw [hP]
+    set_option backward.isDefEq.respectTransparency false in
+      simp only [P₀, rightDerivedLowerStarCompRightDerivedGlobalSectionsIso,
+        lowerStarCompGlobalSectionsIso, cohomology, Functor.comp_map,
+        Functor.map_comp, Category.assoc]
+  obtain ⟨T₀, M, bound, eInf, ⟨hfirst, hfiltered, hid, hcomp⟩, hbound⟩ :=
+    exists_etaleHypercohomology_uniform_bound P₀ (by intros; rfl)
+  obtain ⟨hmid, hmcomp, hmcone⟩ := etale_page_map_coherence D c F φ hidentity
+    hcomposition G eG hG L hFK hLK T₀ M (fun X K ↦ (hid X K).1)
+      (fun f g K J V t w ↦ (hcomp f g K J V t w).1)
+  let R : Iᵒᵖ ⥤ CohomologicalSpectralSequence AddCommGrpCat.{u + 1} 1 :=
+    { obj i := (T₀ (D.obj i.unop) ⟨F i.unop, hFK i.unop⟩).sequence
+      map {i j} f := M (D.map f.unop) ⟨F i.unop, hFK i.unop⟩
+        ⟨F j.unop, hFK j.unop⟩ (φ f.unop)
+      map_id i := hmid i.unop
+      map_comp {i j k} f g := hmcomp i.unop j.unop k.unop f.unop g.unop }
+  let E := R ⋙ coherentSwapSequenceFunctor
+  let E' := coherentSwapSequence (T₀ c.pt ⟨L.pt, hLK⟩).sequence
+  let v : ∀ i : Iᵒᵖ, E.obj i ⟶ E' := fun i =>
+    coherentSwapSequenceMap (M (c.π.app i.unop) ⟨F i.unop, hFK i.unop⟩ ⟨L.pt, hLK⟩
+      ((eG i.unop).inv ≫ L.ι.app i))
+  let V := fun i ↦ (T₀ (D.obj i) ⟨F i, hFK i⟩).H p
+  let W := (T₀ c.pt ⟨L.pt, hLK⟩).H p
+  have htop : W.step a = ⊤ := by
+    have hepi : Epi (W.step a).arrow := by
+      apply (AddCommGrpCat.epi_iff_surjective _).2
+      intro x
+      apply (etalePresentation_image_filtration c.pt ⟨L.pt, hLK⟩
+        (T₀ c.pt ⟨L.pt, hLK⟩) p a x).1
+      refine ⟨L.pt, hlimit, 𝟙 _, x, ?_⟩
+      simp
+    let := hepi
+    simpa only [Subobject.mk_arrow] using
+      (Subobject.epi_iff_mk_eq_top (W.step a).arrow).1 hepi
+  have hbot : W.step (max a (p + 1)) = ⊥ := by
+    rw [← Subobject.mk_arrow (W.step (max a (p + 1))), Subobject.mk_eq_bot_iff_zero]
+    apply AddCommGrpCat.hom_ext
+    apply AddMonoidHom.ext
+    intro x
+    have hx := (etalePresentation_image_filtration c.pt ⟨L.pt, hLK⟩
+      (T₀ c.pt ⟨L.pt, hLK⟩) p (max a (p + 1)) _).2 ⟨x, rfl⟩
+    exact eq_zero_of_inEtaleHypercohomologyFiltration c.pt L.pt p
+      (max a (p + 1)) (by omega) _ hx
+  refine ⟨E, E', v, ?_,
+    (fun i r s ↦ (T₀ (D.obj i) ⟨F i, hFK i⟩).firstPageIso r s),
+    (fun r s ↦ (T₀ c.pt ⟨L.pt, hLK⟩).firstPageIso r s),
+    ?_, ?_, ?_, ?_, V, W, htop, hbot, ?_⟩
+  · intro i j f
+    change coherentSwapSequenceMap _ ≫ coherentSwapSequenceMap _ =
+      coherentSwapSequenceMap _
+    exact congrArg coherentSwapSequenceMap (hmcone i.unop j.unop f.unop)
+  · intro i j f r s
+    exact hfirst (D.map f) ⟨F i, hFK i⟩ ⟨F j, hFK j⟩ (φ f) r s
+  · intro i r s
+    exact hfirst (c.π.app i) ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩
+      ((eG i).inv ≫ L.ι.app (op i)) r s
+  · intro i r s hr
+    exact (T₀ (D.obj i.unop) ⟨F i.unop, hFK i.unop⟩).negative s r hr
+  · intro r s hr
+    exact (T₀ c.pt ⟨L.pt, hLK⟩).negative s r hr
+  · intro q
+    let N := max 1 (max (q - a + 2) (p - q + 2))
+    have one_le : 1 ≤ N := le_max_left _ _
+    have hR : ∀ i : I, bound (D.obj i) ⟨F i, hFK i⟩ q p ≤ N := by
+      intro i
+      exact hbound (D.obj i) ⟨F i, hFK i⟩ a q p (hbelow i)
+    have hR' : bound c.pt ⟨L.pt, hLK⟩ q p ≤ N :=
+      hbound c.pt ⟨L.pt, hLK⟩ a q p hlimit
+    let e := fun i ↦ eInf (D.obj i) ⟨F i, hFK i⟩ q p N one_le (hR i)
+    let e' := eInf c.pt ⟨L.pt, hLK⟩ q p N one_le hR'
+    refine ⟨N, one_le, e, e', ?_⟩
+    intro i
+    obtain ⟨t, ht, hc, hs⟩ := hfiltered (X := D.obj i) (Y := c.pt) (c.π.app i)
+      ⟨F i, hFK i⟩ ⟨L.pt, hLK⟩ ((eG i).inv ≫ L.ι.app (op i)) p
+    refine ⟨t, ?_, hc, ?_⟩
+    · intro z
+      simpa only [hP₀, Category.assoc] using ht z
+    · exact hs q N one_le (hR i) hR'
+
 
 end AlgebraicGeometry.Etale
