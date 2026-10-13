@@ -15,38 +15,48 @@
  ],
  "proof": [
   {
-   "text": "Put Y=f^{-1}U, g=f|_U, and G=F|_Y. Restrict an injective resolution of F to Y. Restriction is exact and preserves injectives, so it is an injective resolution of G. Degreewise sections on g^{-1}V are sections of the original resolution on f^{-1}(U.ι(V)); the section identifications commute with differentials. Applying termwise direct image and exact target open restriction gives an isomorphism between the restricted ordinary higher direct image and the ordinary higher direct image of G along g.",
+   "text": "Put Y = f inverse-image U, T = U.toScheme, g = f restricted to U, and G = F restricted to Y. Supply EnoughInjectives on Y using moduleSheaves_abelian_enoughInjectives and take Mathlib injectiveResolution G. Let K = g_*I and P = sectionCohomologyPresheaf K p. For each affine V of T, exact evaluation gives (L.sc p).mapHomologyIso E, where L is the underlying presheaf-module complex and E is abelian evaluation at V. Composing its inverse with the inverse of I.isoRightDerivedObj for openModuleSections Y (g inverse-image V) identifies P(V) with the cohomology object in the hypothesis. Transport IsZero along this isomorphism. Termwise equality of the section complexes is definitional for moduleDirectImage.",
    "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "def-sc-open-module-cohomology",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-weil-pbc-flat-base-change-open-choices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any x of T, represent a stalk element of P by a germ on an open V using TopCat.Presheaf.exists_germ_eq. Mathlib exists_isAffineOpen_mem_and_subset gives an affine W containing x and contained in V. The value P(W) is zero by step 1, so its carrier is subsingleton. By germ_res_apply the original germ is the germ of the restriction to W, which equals zero. Thus every element of the module stalk is zero. The third clause of higherDirectImagePresheaf makes the stalk map of sectionCohomologyTheta followed by the inverse resolution comparison an isomorphism onto the stalk of R^p g_*G. Transport IsZero through this isomorphism and forget the scalar action to obtain zero abelian stalks.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-scheme",
+    "lem-weil-pbc-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero to the underlying abelian sheaf of R^p g_*G, then use faithfulness of SheafOfModules.toSheaf to reflect the zero identity. To compare with restriction of R^p f_*F, resolve F on X. Restriction along the source open preserves injectives by restrict_injectiveResolution and overEquiv; transport through overFunctorEquiv. Restriction preserves limits because its underlying abelian presheaf is precomposition by the open-image functor, and preserves colimits because it is a left adjoint. Its mapped augmented complex is therefore an injective resolution J of G. Construct the underived pushforward/restriction natural isomorphism using pushforwardComp, the image-preimage equality for the cartesian square, and pushforwardCongr2. The equality of scalar maps follows from the square equality via appLE_comp_appLE. Apply this isomorphism termwise, take homology, commute homology with exact target restriction, and compose isoRightDerivedObj for J and the original resolution. Transport IsZero along the inverse of the resulting isomorphism. The comparison is constructed locally; no import of DirectImage.Sections or HigherDirectImageOpenRestriction is needed. Degree zero and empty opens are included.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
     "lem-sc-ringed-space-restrict-injective-resolution"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "By the cohomology-presheaf theorem, the latter higher direct image is the sheafification of V ↦ H^p(g^{-1}V,G), with the same resolution-derived restriction maps. At every point choose affine neighbourhoods inside any given neighbourhood. The hypothesis makes all values on these affine neighbourhoods zero. Every germ has an affine representative and is the germ of zero; hence every stalk of this presheaf is zero. The cohomology-presheaf comparison is an isomorphism on stalks.",
-   "uses": [
-    "lem-weil-pbc-higher-direct-image-presheaf",
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply zero detection by module stalks to the higher direct image on U, then transport its zero object property through the restriction comparison of step 1. Degree zero uses the same resolution and comparison. For empty U or empty Y there are no nonzero germs, so these cases are included.",
-   "uses": [
-    "pqf-lem-sheaf-zero-stalks"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-scheme",
+  "def-sc-open-module-cohomology",
+  "def-weil-pbc-flat-base-change-open-choices",
   "def-weil-pbc-module-stalk",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
   "lem-sc-ringed-space-restrict-injective-resolution",
-  "lem-weil-pbc-higher-direct-image-presheaf",
-  "pqf-lem-sheaf-zero-stalks"
+  "lem-weil-pbc-higher-direct-image-presheaf"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 01E1 and 01E4, restricted resolution and affine-basis specialization"
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 01E1 and 01E4; termwise open-restriction comparison as in the proof of lem-pc-sections-open-base-change, constructed locally to avoid its module import cycle; Mathlib abelian-sheaf stalk-zero criterion; Lean proof repaired by Q4"
  },
  "mathlib_searches": [
   {
@@ -131,13 +141,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "Q4",
   "result": "pass",
-  "landing": "20261012T203949-L-832748",
-  "kind": "interface",
+  "landing": "20261013T003200-L-2429900",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
