@@ -10524,3 +10524,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:55 L: merged deliver/A4/Sheaf.CategoryTheory.ColimitSiteRawSectionCompatibility (stage 3; reviewer PASS; after a return; landing 20261013T015543-L-3016460 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:55 L: merged deliver/B2/Sheaf.AlgebraicGeometry.CoherentMapReductionTorsionKernel (stage 3; reviewer PASS; first push; landing 20261013T015544-L-3016612 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:55 L: merged deliver/B3/Sheaf.AlgebraicGeometry.AlternatingCechPrefixDeletionBijection (stage 3; reviewer PASS; first push; landing 20261013T015544-L-3016720 (interface); batch 20261013T015540; modules 3; new nodes 2)
+- 01:55 L: merged deliver/B3/Sheaf.RingTheory.EquationCountLocalizeRGCI (stage 3; reviewer PASS; first push; landing 20261013T015544-L-3016882 (proof); batch 20261013T015540; modules 1; new nodes 0)
