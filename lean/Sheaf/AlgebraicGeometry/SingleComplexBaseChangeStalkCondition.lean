@@ -84,11 +84,21 @@ abbrev rightAlgebra (z : X') : Algebra (R f g' z) (B f' z) :=
   ((S.presheaf.stalkCongr (.of_eq (congrArg (fun k : X' ⟶ S => k z) sq.w))).hom ≫
     g.stalkMap (f' z)).hom.toAlgebra
 
+/-- The two stalk projection maps form compatible algebra maps over the base stalk.
+Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
+(blueprint: lem-single-complex-stalk-algebra-maps). -/
+theorem exists_stalk_algebra_maps (z : X') :
+    letI := leftAlgebra f g' z
+    letI := rightAlgebra f f' g g' sq z
+    letI := (f.stalkMap (g' z) ≫ g'.stalkMap z).hom.toAlgebra
+    ∃ l : A g' z →ₐ[R f g' z] C z,
+      ∃ r : B f' z →ₐ[R f g' z] C z,
+        (∀ a, l a = (g'.stalkMap z).hom a) ∧
+        (∀ b, r b = (f'.stalkMap z).hom b) ∧
+        ∀ a b, Commute (l a) (r b) := by
+  sorry
+
 /-- Existence of the tensor-to-stalk map with its two specified restrictions.
-Proof: functoriality of scheme stalk maps and the commutative square imply that
-both projection stalk maps agree on R. The tensor-product universal property
-supplies their unique common extension to A tensor-over-R B. Its restriction
-along each inclusion is the corresponding projection stalk map.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.
 (blueprint: def-pc-single-complex-base-change-stalk-condition). -/
 theorem exists_tensorMap (z : X') :
@@ -98,7 +108,17 @@ theorem exists_tensorMap (z : X') :
       a.comp (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)) =
         (g'.stalkMap z).hom ∧
       a.comp Algebra.TensorProduct.includeRight.toRingHom = (f'.stalkMap z).hom := by
-  sorry
+  let _ := leftAlgebra f g' z
+  let _ := rightAlgebra f f' g g' sq z
+  let _ := (f.stalkMap (g' z) ≫ g'.stalkMap z).hom.toAlgebra
+  obtain ⟨l, r, hl, hr, hcomm⟩ := exists_stalk_algebra_maps f f' g g' sq z
+  let a : A g' z ⊗[R f g' z] B f' z →ₐ[R f g' z] C z :=
+    Algebra.TensorProduct.lift l r hcomm
+  refine ⟨a.toRingHom, ?_, ?_⟩
+  · ext x
+    simp [a, hl]
+  · ext y
+    simp [a, hr]
 
 /-- The canonical tensor-to-stalk map, chosen from its universal property.
 Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc; Tag 0DJ9.

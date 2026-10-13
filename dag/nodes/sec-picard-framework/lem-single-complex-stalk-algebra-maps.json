@@ -1,0 +1,109 @@
+{
+ "id": "lem-single-complex-stalk-algebra-maps",
+ "kind": "statement",
+ "title": "Compatible stalk algebra maps for a cartesian square",
+ "statement": "For a cartesian square of schemes and a point z of the upper-left scheme, the stalk maps from the two factors to the upper-left stalk are algebra maps over the base stalk, agree with the displayed projection stalk maps, and have commuting images.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Equation-bc preceding Tag 0DJ8"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Construct the two algebra homomorphisms from the scheme stalk maps. The equality of the two composites around the cartesian square, transported to stalks, proves the scalar compatibility; commutativity follows because the target stalk is commutative.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "T4 stage 3",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Equation-bc preceding Tag 0DJ8",
+  "note": "The compatibility argument is isolated as an intermediate theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of compatible stalk algebra maps for a cartesian square",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; intermediate theorem remains necessary."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.lift stalkMap",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible stalk algebra maps pullback square",
+   "results": "No exact theorem found.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkMap.*toAlgebra|stalkMap.*cartesian",
+   "results": "No exact theorem found in pinned Mathlib source.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition",
+  "date": "2026-10-13",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-single-complex-base-change-stalk-condition",
+   "place": "tensor-to-stalk construction",
+   "via": [
+    "def-pc-single-complex-base-change-stalk-condition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexBaseChangeStalkCondition.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.exists_stalk_algebra_maps",
+  "statement": "theorem exists_stalk_algebra_maps (z : X') :\n    letI := leftAlgebra f g' z\n    letI := rightAlgebra f f' g g' sq z\n    letI := (f.stalkMap (g' z) ≫ g'.stalkMap z).hom.toAlgebra\n    ∃ l : A g' z →ₐ[R f g' z] C z,\n      ∃ r : B f' z →ₐ[R f g' z] C z,\n        (∀ a, l a = (g'.stalkMap z).hom a) ∧\n        (∀ b, r b = (f'.stalkMap z).hom b) ∧\n        ∀ a b, Commute (l a) (r b)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T002358-L-2376943",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261013T002358-L-2376943",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
