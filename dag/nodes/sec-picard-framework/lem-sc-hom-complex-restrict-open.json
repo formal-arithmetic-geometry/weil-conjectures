@@ -16,25 +16,26 @@
  },
  "proof": [
   {
-   "text": "For each degree n, the term of the Hom complex is the product over p in Z of Hom(L^p,M^(p+n)) [def-pur-hom-complex]. Restriction to the localized open site is precomposition on sections. Products of sheaves of modules are computed sectionwise, and coverings in the localized site are precisely coverings over that open, so restriction preserves this product. No assertion that infinite products are exact is used.",
+   "text": "Use homComplex_projections_exists on the global and localized sites. Restriction preserves integer-indexed products: compose with the forgetful functor to additive-group presheaves, where restriction is precomposition and preserves limits; reflect limits back through the forgetful functor. Apply isLimitFanMkObjOfIsLimit to the global product fan.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pur-localized-ringed-site"
+    "lem-sc-hom-complex-projections",
+    "def-pur-localized-ringed-site",
+    "def-pur-hom-complex"
    ],
    "elementary": true
   },
   {
-   "text": "Use the internal sheaf Hom identification on the localized site [def-pur-sheaf-hom]: on an object V over U the local maps on V are unchanged. The source-library SheafOfModules.overHomObjIso realizes this identification. Apply these isomorphisms to every factor of the product in Step 1; the product universal property gives inverse isomorphisms in degree n.",
+   "text": "For each integer degree, apply overHomObjIso to every factor of the restricted global product. Construct the forward and inverse product maps with Fan.IsLimit.lift. Their composites are identities by Fan.IsLimit.hom_ext and the factorwise inverse identities. The resulting degreewise isomorphisms satisfy every product-projection comparison, including the reindexed forms p+n=q.",
    "uses": [
-    "def-pur-sheaf-hom"
+    "def-pur-sheaf-hom",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true
   },
   {
-   "text": "The factor isomorphisms commute with precomposition by d_L and postcomposition by d_M, since both are compositions of the same local module maps. Restriction is additive and preserves integer multiples. Thus the degreewise isomorphisms identify d_M f - (-1)^n f d_L on both sides [def-pur-hom-complex]. They assemble into a chain isomorphism; take its inverse for the orientation in the Lean statement. Zero complexes, the empty open and arbitrary unbounded complexes obey the same product formulas.",
+   "text": "Apply lem-sc-hom-complex-restrict-open-differential to the constructed degreewise isomorphisms and their projection equations. HomologicalComplex.Hom.isoOfComponents assembles them into a chain isomorphism; take its inverse to match the statement.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pur-sheaf-hom"
+    "lem-sc-hom-complex-restrict-open-differential"
    ],
    "elementary": true
   }
@@ -42,12 +43,13 @@
  "proof_deps": [
   "def-pur-hom-complex",
   "def-pur-localized-ringed-site",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-complex-restrict-open-differential"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma lemma-restriction-RHom-to-U (Tag 08DL), construction of the ordinary Hom complex; sites-cohomology.tex, Section 0A8X"
+  "by": "agent",
+  "description": "G1: implemented the degreewise product construction and chain assembly in Lean; split only differential compatibility from the cited Stacks construction."
  },
  "mathlib_searches": [
   {
@@ -122,12 +124,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T202251-L-708469",
+  "landing": "20261013T015553-L-3020017",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

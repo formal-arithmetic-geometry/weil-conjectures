@@ -1,0 +1,129 @@
+{
+ "id": "lem-sc-hom-complex-restrict-open-differential",
+ "kind": "statement",
+ "title": "Differential compatibility of the factorwise open-restriction comparison",
+ "statement": "Let $X$ be a ringed space [def-weil-locally-ringed-space-morphism], $U$ an open of $X$, and $L,M$ arbitrary integer-indexed cochain complexes of sheaves of modules [def-pc-cochain-complex-modules, def-weil-sheaf-of-modules-category]. Let $F$ be restriction to the localized ringed site over $U$ [def-pur-localized-ringed-site], let $L_F=F(L)$ and $M_F=F(M)$, and write $H=\\mathcal Hom^\\bullet(L,M)$ and $K=\\mathcal Hom^\\bullet(L_F,M_F)$ [def-pur-hom-complex]. Choose the projection families $\\pi$ and $\\tau$ specified by [lem-sc-hom-complex-projections] on the global and localized sites. Suppose given isomorphisms $e_n:F(H^n)\\to K^n$ for every integer $n$ such that for all integers $p,q$ with $p+n=q$, $e_n\\tau_{n,p,q}=F(\\pi_{n,p,q})c_{p,q}$, where $c_{p,q}$ is the canonical restriction isomorphism of internal sheaf Hom [def-pur-sheaf-hom] furnished by SheafOfModules.overHomObjIso. Then for all $n,m$ with $n+1=m$, $e_n d_K^{n,m}=F(d_H^{n,m})e_m$. This statement assumes the degreewise isomorphisms and asserts only compatibility with the differential; it constructs no isomorphisms.",
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X (section-hom-complexes), defining signed differential; cohomology.tex, Lemma lemma-restriction-RHom-to-U (Tag 08DL), compatibility of the underlying construction with restriction"
+ },
+ "proof": [
+  {
+   "text": "For adjacent n,m, postcompose the claimed identity with each projection tau in degree m. These projections are jointly monic because the chosen localized fan is a limit. Use the localized differential-projection formula to expand the left side into postcomposition by d_M minus n.negOnePow times precomposition by d_L. Apply the assumed projection equations to both summands.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the right side using the projection equation in degree m and functoriality of restriction. Apply the global differential-projection formula. Restriction is additive since its maps are precomposed sectionwise, so it preserves subtraction and multiplication by the sign.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The internal Hom comparison is natural in both arguments: at a localized object W its forward map precomposes module morphisms with Over.iteratedSliceForward W. Functoriality of precomposition preserves pre- and post-composition. Thus both expanded summands agree, with identical signs. Joint monicity proves the claimed differential identity. Empty opens, zero complexes and unbounded complexes require no additional assumption.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "G1: projectionwise expansion of the signed differential in Stacks Tag 0A8X and the underlying restriction construction in Tag 08DL; only the third step of the parent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A degreewise internal Hom comparison under open restriction compatible with product projections commutes with the Hom complex differential",
+   "results": "See the search log: service result recorded by msearch.py.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Product comparison of restricted sheaf Hom complexes respects each factor projection and intertwines the signed differential",
+   "results": "Eight results about topological sheaf restriction and equalizer-product projections. None supplies the internal Hom-complex differential comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictOverHomObj|overHomObjIso",
+   "results": "No Mathlib matches. Repository rg finds the ordinary internal Hom restriction iso in the source library, but no differential compatibility theorem for Hom complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomComplexRestrictOpen",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Localize the internal Hom complex in the projective-line Ext-vanishing argument; compatibility of its signed differential with open restriction.",
+   "via": [
+    "lem-sc-hom-complex-restrict-open",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-derived-internal-hom-stalk-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexRestrictOpenDifferential",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexRestrictOpenDifferential.lean",
+  "declaration": "CategoryTheory.homComplex_restrict_open_differential",
+  "statement": "theorem homComplex_restrict_open_differential (X : RingedSpace.{u}) (U : Opens X)\n    (L M : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) :\n    let F := SheafOfModules.overFunctor.{u} (moduleRings X) U\n    let LF := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj L\n    let MF := (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj M\n    let H := homComplex (R := X.sheaf) L M\n    let K := homComplex (R := X.sheaf.over U) LF MF\n    let π := Classical.choose (homComplex_projections_exists (R := X.sheaf))\n    let τ := Classical.choose (homComplex_projections_exists (R := X.sheaf.over U))\n    ∀ (e : ∀ n : ℤ, F.obj (H.X n) ≅ K.X n),\n      (∀ (n p q : ℤ) (hpq : p + n = q),\n        (e n).hom ≫ τ LF MF n p q hpq =\n          F.map (π L M n p q hpq) ≫\n            (SheafOfModules.overHomObjIso (L.X p) (M.X q) U).hom) →\n      ∀ (n m : ℤ), n + 1 = m →\n        (e n).hom ≫ K.d n m = F.map (H.d n m) ≫ (e m).hom",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T015553-L-3020017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261013T015553-L-3020017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
