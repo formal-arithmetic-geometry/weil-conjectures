@@ -1,0 +1,114 @@
+{
+ "id": "new-s2-affine-model-stalk-transport-linear",
+ "kind": "statement",
+ "title": "Coordinate scalar compatibility of explicit affine stalk transport",
+ "statement": "Let Y be a scheme [def-pc-scheme], x a point, and U an affine open containing x. Put A=Gamma(Y,U) and q=isoSpec(x). For an O_Y-module F [def-weil-sheaf-of-modules-category], an A-module M, and a model isomorphism e:F|U -> tilde(M)|U [lem-weil-pbc-spec-module-tilde-sections], construct E:(tilde M)_q -> F_x as the inverse chart restriction-stalk isomorphism, the stalk of e inverse, then the open inclusion restriction-stalk isomorphism. E is an additive equivalence. For every a in A and m in (tilde M)_q, E(a*m)=germ_U,x(a)*E(m), using the canonical A-action on the tilde stalk and the local-ring action [def-pc-module-stalk-functor] on F_x.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-stalk-functor",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01HV",
+  "place": "Lemma 26.5.4 (7); Tag 01BH, Lemma 17.10.5 (3); transport along open immersion stalk maps"
+ },
+ "proof": [
+  {
+   "text": "Restriction-stalk isomorphisms are semilinear over inverse stalk ring maps. Represent a scalar and module element by germs on a common open. smul_restrictAppIso_hom and germ_smul prove scalar compatibility on sections; germ_restrictStalkNatIso_hom_app carries it to stalks. Inverse compatibility follows by bijectivity. The stalk of e.inv is linear over the chart stalk ring. Composing these three identities gives the formula, since isoSpec_hom_appTop and germ_stalkMap_apply identify the composite image of a with its germ on U. The canonical A-action on the tilde stalk agrees with the action through StructureSheaf.toStalk, by the structure-presheaf germ scalar formula. No finite generation, flatness or global quasi-coherence is required.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "S2 second reader",
+  "group": "S2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/01HV",
+  "place": "(7) and 01BH (3)",
+  "note": "Scalar compatibility only, for an explicit construction; not arbitrary chosen equivalences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural tensor presentation of a module sheaf stalk on an affine open",
+   "results": "Eight hits, older ModuleCat.Tilde.stalkIso and localization names. Pinned Mathlib has tilde.toStalk; no assembled chart scalar-transport formula.",
+   "date": "2026-10-13",
+   "verdict": "Components only."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "results": "Three hits: additive restriction-stalk isomorphism and two germ formulas. None is scalar compatibility for the assembled model transport.",
+   "date": "2026-10-13",
+   "verdict": "Components only."
+  },
+  {
+   "tool": "grep",
+   "query": "smul_restrictAppIso|germ_restrictStalkNatIso|isoSpec_hom_appTop",
+   "results": "Nine Mathlib hits: section scalar formulas, restriction-stalk germ formulas, chart ring formula. Also searched lean/Sheaf and lean/WeilConjectures for stalk equivalences; tensor comparisons and affine-section presentations do not state this explicit transport scalar identity.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of module sheaves to an affine chart induces a scalar compatible stalk equivalence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModelStalkPresentation",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-e3-affine-model-stalk-presentation",
+   "place": "Scalar compatibility part of the first proof step; the additive maps are explicit constructions."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModelStalkTransportLinear",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModelStalkTransportLinear.lean",
+  "declaration": "AlgebraicGeometry.affineModelStalkAddEquiv_smul",
+  "declarations": [
+   "AlgebraicGeometry.affineModelStalkAddEquiv",
+   "AlgebraicGeometry.affineModelStalkAddEquiv_smul"
+  ],
+  "statement": "theorem affineModelStalkAddEquiv_smul\n    {Y : Scheme.{u}} (x : Y) (U : Y.affineOpens) (hx : x ∈ U.1)\n    (F : Y.Modules) (M : ModuleCat.{u} Γ(Y, U.1))\n    (e : (Scheme.Modules.restrictFunctor U.1.ι).obj F ≅\n      (Scheme.Modules.restrictFunctor U.2.isoSpec.hom).obj (tilde M))\n    (a : Γ(Y, U.1)) (m : (tilde M).presheaf.stalk (U.2.primeIdealOf ⟨x, hx⟩)) :\n    affineModelStalkAddEquiv x U hx F M e (a • m) =\n      Y.presheaf.germ U.1 x hx a • affineModelStalkAddEquiv x U hx F M e m",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T140825-L-316058",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T140825-L-316058",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
