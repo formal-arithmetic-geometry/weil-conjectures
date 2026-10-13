@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "Since a one-dimensional local domain is not a field, its maximal ideal $\\mathfrak m$ contains a nonzero element $x$. The injection of fraction fields identifies $S$ with an $R$-submodule of $L$, and a $K$-basis identifies $L$ with $K^{\\oplus n}$ for $n=[L:K]$. Apply [lem-weil-pbc-dim-one-submodule-quotient-finite-length] to this submodule and $x$; $S/xS$ has finite length as an $R$-module.",
+   "text": "Give S its R-algebra structure via φ. A local domain of dimension one is not a field (Mathlib ringKrullDim_eq_zero_of_isField), so its maximal ideal m contains a nonzero x. Give L its R-action through K; hcompat makes the R,S,L tower commute. Compose S → L with the coordinate equivalence of a finite K-basis of L. This is an injective R-linear map, identifying S with a submodule M of K^r. Apply [lem-weil-pbc-dim-one-submodule-quotient-finite-length] to M and x, and transport finite length along QuotSMulTop.congr to S/xS.",
    "uses": [
     "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
     "def-pc-field-extension",
@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "Because $x\\in\\mathfrak m$, $xS\\subseteq\\mathfrak mS$, and the quotient map $q:S/xS\\twoheadrightarrow B=S/\\mathfrak mS$ is surjective. For any strict chain $U_0\\subsetneq\\cdots\\subsetneq U_a$ of $R$-submodules of $B$, the preimages $q^{-1}(U_i)$ are $R$-submodules of $S/xS$ and remain strict: choose an element of $U_{i+1}\\setminus U_i$ and lift it through $q$. Hence $B$ has finite $R$-length [def-weil-pbc-module-length]. The action of $R$ on $B$ factors through the field $k=R/\\mathfrak m$, and its $R$-submodules are exactly its $k$-linear subspaces. If $B$ had arbitrarily large $k$-linearly independent families, their successive spans would give arbitrarily long strict chains, contrary to finite length. Thus $B$ is finite-dimensional over $k$.",
+   "text": "Work directly with the tensor closed fibre B = κ(m) ⊗_R S. Since m is maximal, R → κ(m) is surjective, so S → B, s ↦ 1 ⊗ s, is surjective (Mathlib includeRight_surjective). Multiplication by x is zero on B, so this R-linear map factors through S/xS. Finite length descends along this surjection (IsFiniteLength.of_surjective), hence B is Noetherian over R and finitely generated over R. Enlarging scalars makes B finitely generated over κ(m), by Module.Finite.of_restrictScalars_finite. This proves the finite-dimensional closed fibre claim, including B = 0.",
    "uses": [
     "def-weil-pbc-module-length"
    ],
@@ -58,11 +58,10 @@
    }
   },
   {
-   "text": "The finite-dimensional $k$-algebra $B$ is Artinian by [lem-weil-pbc-finite-dim-algebra-artinian]. More precisely for the prime conclusions, $k$ is a local ring with the sole prime $(0)$ and $B$ is a finite $k$-algebra, so [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] gives finitely many prime ideals of $B$, all maximal. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus] for $S\\to B$, these correspond to the primes $\\mathfrak n$ of $S$ containing $\\mathfrak m S$, equivalently those with inverse image $\\mathfrak m$ under $R\\to S$ (the inverse image is a proper ideal containing the maximal ideal $\\mathfrak m$). A prime $\\mathfrak n$ in this correspondence is maximal because $S/\\mathfrak n\\cong B/\\bar{\\mathfrak n}$ is a field. If $B=0$, there are no such primes. This proves (1) and (2).",
+   "text": "By [lem-weil-pbc-finite-dim-algebra-artinian], B is Artinian. Mathlib IsArtinianRing.isPrime_iff_isMaximal and the Finite (PrimeSpectrum B) instance give maximality and finiteness of its primes directly. PrimeSpectrum.preimageEquivFiber R S ⟨m, inferInstance⟩ identifies this finite spectrum with the primes n of S with comap φ n = m. Its inverse takes comap under the surjection S → B. Maximal ideals pull back to maximal ideals under a surjection (Ideal.comap_isMaximal_of_surjective), so every such n is maximal. Transport Finite across the equivalence and rewrite the subtype condition to prove Set.Finite of the fibre.",
    "uses": [
     "lem-weil-pbc-finite-dim-algebra-artinian",
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+    "def-weil-pbc-localization-at-prime"
    ],
    "elementary": false,
    "source": {
@@ -71,7 +70,7 @@
    }
   },
   {
-   "text": "For a prime $\\mathfrak n$ from Step 3, the field $S/\\mathfrak n=B/\\bar{\\mathfrak n}$ is a quotient of the finite-dimensional $k$-vector space $B$, hence has finite $k$-dimension. The field map $k\\to S/\\mathfrak n$ is injective, because it sends $1$ to $1$. Since $\\mathfrak n$ is maximal, every $s\\notin\\mathfrak n$ has nonzero image and thus becomes a unit in $S/\\mathfrak n$; the fraction formula $a/s\\mapsto(a\\bmod\\mathfrak n)/(s\\bmod\\mathfrak n)$ therefore gives a map $S_{\\mathfrak n}\\to S/\\mathfrak n$ [def-weil-pbc-localization-at-prime]. It is surjective since $a/1\\mapsto a\\bmod\\mathfrak n$, and its kernel is $\\mathfrak nS_{\\mathfrak n}$ since a fraction maps to zero exactly when its numerator lies in $\\mathfrak n$. Thus $S_{\\mathfrak n}/\\mathfrak nS_{\\mathfrak n}\\cong S/\\mathfrak n$ as $k$-algebras, proving (3).",
+   "text": "For n over m, use its proved maximality. Equip κ(n) with the algebra structure of the statement using Ideal.ResidueField.map m n φ hn.symm. The map identity on κ(m) and S → κ(n) agree on R by Ideal.ResidueField.map_algebraMap, so the tensor-product universal property gives a κ(m)-linear algebra map B → κ(n). It is surjective: maximality of n makes S → κ(n) surjective, and a lift s gives the tensor 1 ⊗ s. Thus Module.Finite.of_surjective applied to this map proves the exact finite-dimensional residue extension in the statement.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
@@ -87,14 +86,12 @@
   "def-pc-field-extension",
   "def-weil-pbc-module-length",
   "lem-weil-pbc-finite-dim-algebra-artinian",
-  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
   "def-weil-pbc-localization-at-prime"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 031F (lemma-finite-extension-residue-fields-dimension-1), proof; Lemma Tag 00PE for the submodule length bound"
+  "place": "Algebra, Lemma Tag 031F, proof; formalized using tensor closed fibre and Mathlib Artinian/fibre/residue-field APIs, retaining the Tag 00PE finite-length step."
  },
  "mathlib_searches": [
   {
@@ -172,5 +169,15 @@
   "group": "K1",
   "result": "pass",
   "note": "domains R,S + injective φ; fraction fields via IsFractionRing; induced K→L as [Algebra K L]+hcompat extending φ; dim_K L<∞ as FiniteDimensional; Noetherian local R, ringKrullDim R = 1; (1) primes over m maximal, (2) Set.Finite of the fibre, (3) FiniteDimensional of Ideal.ResidueField over κ(m) via Ideal.ResidueField.map φ (Localization.AtPrime residue field per def-weil-pbc-localization-at-prime); empty fibre vacuous"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T024054-L-3341089",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
