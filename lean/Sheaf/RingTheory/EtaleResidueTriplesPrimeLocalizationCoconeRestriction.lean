@@ -7,7 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRelation
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestrictionExists
+import Sheaf.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestrictionUnique
 
 /-! # Compatible cocone legs across prime localization -/
 
@@ -48,6 +49,12 @@ theorem etaleResidueTriples_primeLocalization_cocone_restriction
       (CommRingCat.of (Localization.AtPrime p.asIdeal)) q K ψ ⟶
         (Functor.const _).obj V) :
     ∃! η : etaleResidueTriplesRingDiagram R p K χ ⟶ (Functor.const _).obj V,
-      etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η θ := by sorry
+      etaleResidueTriples_primeLocalization_coconeRelation R p K χ q ψ V η θ := by
+  obtain ⟨η, hη⟩ := etaleResidueTriples_primeLocalization_cocone_restriction_exists
+    R p K χ q ψ hψ hK V θ
+  refine ⟨η, hη, ?_⟩
+  intro η' hη'
+  exact (etaleResidueTriples_primeLocalization_cocone_restriction_unique
+    R p K χ q ψ hψ hK V θ η η' hη hη').symm
 
 end AlgebraicGeometry.Scheme
