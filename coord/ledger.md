@@ -10537,3 +10537,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:55 L: merged deliver/E3/Sheaf.RingTheory.CohenRingModPowFormallySmoothStep (stage 3; reviewer PASS; after a return; landing 20261013T015549-L-3018550 (interface); batch 20261013T015540; modules 3; new nodes 2)
 - 01:55 L: merged deliver/E4/Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives (stage 3; reviewer PASS; first push; landing 20261013T015549-L-3018711 (proof); batch 20261013T015540; modules 1; new nodes 0)
 - 01:55 L: merged deliver/E4/Sheaf.CategoryTheory.DerivedCoupleMapUniqueness (stage 3; reviewer PASS; first push; landing 20261013T015549-L-3018860 (proof); batch 20261013T015540; modules 1; new nodes 0)
+- 01:55 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Cohomology.OpenEmbeddingSheafPullbackMonomorphisms (stage 3; reviewer PASS; first push; landing 20261013T015550-L-3018983 (proof); batch 20261013T015540; modules 1; new nodes 0)
