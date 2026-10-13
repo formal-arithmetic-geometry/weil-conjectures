@@ -23,15 +23,21 @@
  ],
  "proof": [
   {
-   "text": "Represent finitely many separating elements at stages and use filteredness to find one stage receiving all of them; contractions of prime ideals are prime and the representatives preserve strictness.",
+   "text": "For each ordered pair a < b in the finite chain, choose x in p(b) outside p(a), using SetLike.exists_of_lt. Represent x at a stage by Concrete.colimit_exists_rep, with preservation of filtered colimits by the forgetful functor CommRingCat.FilteredColimits.forget_preservesFilteredColimits.",
    "uses": [
     "lem-pc-filtered-colimit-commrings-elementwise"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 06LK"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply IsFiltered.sup_objs_exists to the finite set of representing stages and transport each representative along a morphism to the common receiving stage. Naturality colimit.w preserves its image. The empty set when n = 0 is covered by nonemptiness of the filtered category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Contractions are prime by Ideal.comap_isPrime. For a < b, Ideal.comap_mono gives inclusion and the transported separator belongs to the contraction of p(b) but not that of p(a). Thus the inclusion is strict, establishing StrictMono.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -97,10 +103,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261013T172658-L-2100608",
-  "kind": "interface",
+  "landing": "20261013T181052-L-2597603",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
