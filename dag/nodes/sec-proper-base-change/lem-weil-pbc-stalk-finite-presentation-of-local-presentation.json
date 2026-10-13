@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-stalk-finite-presentation-of-local-presentation",
+ "kind": "statement",
+ "title": "A supplied finite local presentation gives a finitely presented stalk",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $F$ a module sheaf, $x\\in U\\subseteq X$ an open neighborhood. Suppose a finite presentation $P$ of $F|_U$ is supplied, with finite generator and relation index sets [def-weil-pbc-module-finite-type-presentation], using slice-site restriction [def-pur-localized-ringed-site]. Then the module stalk $F_x$ over $\\mathcal O_{X,x}$ [def-pc-module-stalk-functor] is finitely presented: it is the quotient of a finite free module by a finitely generated submodule.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, proof, third paragraph: the right exact source-stalk presentation; Definition 01BN."
+ },
+ "stmt_deps": [
+  "def-pc-module-stalk-functor",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The forgetful functor to abelian sheaves preserves colimits. Abelian sheaf stalks are left adjoints to skyscrapers. Forgetting modules reflects colimits, so the module stalk functor preserves the coproducts and cokernel defining the presentation.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the unit stalk with the regular module through the forgetful-colimit isomorphism. Prove scalar compatibility on simultaneous scalar and vector germs. Finite coproduct preservation identifies free stalks with finite products of regular modules. Applying the stalk functor to P.isColimit gives a surjection with kernel the image of the finite relation module. Apply Module.finitePresentation_of_surjective and Submodule.fg_range.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass from the slice site to the open subspace through the module equivalence. Transport scalars along the inverse ring-stalk isomorphism; restriction of scalars along a ring equivalence preserves colimits and takes the regular module to the regular module. Apply the preceding argument, then transfer finite presentation along the linear restriction-stalk isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-stalk-iso",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-module-restriction-stalk-iso",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CP, third paragraph; restriction comparison also Sheaves Tag 00A0 (3). Categorical expansion by Q2; source read online 2026-10-13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The stalk of the restriction of a module sheaf to an open neighborhood is isomorphic to its original stalk",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open restriction of a sheaf of modules preserves its stalk at a point in that open after transport of scalars",
+   "results": "ModuleCat.Tilde.toStalk, ModuleCat.Tilde.toOpen_germ_apply, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, ModuleCat.Tilde.toOpen_germ, ModuleCat.Tilde.toOpen_germ_assoc, ModuleCat.Tilde.stalkToFiberLinearMap_germ, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, ModuleCat.Tilde.stalkIso_hom",
+   "verdict": "related declarations; no exact module-ringed-space comparison",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkIso|sheafOfModulesEquivOverUnit",
+   "results": "Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean, Mathlib/Geometry/RingedSpace/LocallyRingedSpace.lean",
+   "verdict": "related declarations; no exact module-ringed-space comparison",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalk, TopCat.Presheaf.restrict",
+   "results": "Second-reader search: 0 hits. Independent rg found PresheafedSpace.restrictStalkIso and the scheme-specific Scheme.Modules.restrictStalkNatIso, but no ringed-space module comparison or finite-presentation stalk theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationSourceStalk",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs; the coherent stalk-map extension used in the coherent devissage route); this refinement serves Finite-presentation coordinate kernel on module stalks in the proof of 01CP; refinement: Tag 01CP, proof, third paragraph: the right exact source-stalk presentation; Definition 01BN. Refinement: the open restriction and finite-presentation transport used in the source-stalk sequence of Tag 01CP.",
+   "via": [
+    "lem-weil-pbc-finite-presentation-source-stalk",
+    "lem-weil-pbc-finite-presentation-stalk-kernel",
+    "lem-weil-pbc-stalk-internal-hom-finite-presentation",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationStalkOfLocalPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationStalkOfLocalPresentation.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.finitePresentation_stalk_of_localPresentation",
+  "statement": "theorem finitePresentation_stalk_of_localPresentation\n    (X : RingedSpace.{u}) (F : Modules X) (x : X)\n    (U : Opens X) (_hxU : x ∈ U)\n    (P : (F.over U).Presentation) [P.IsFinite] :\n    Module.FinitePresentation (X.presheaf.stalk x)\n      ((moduleStalkFunctor X x).obj F)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100059-L-2478229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T100059-L-2478229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

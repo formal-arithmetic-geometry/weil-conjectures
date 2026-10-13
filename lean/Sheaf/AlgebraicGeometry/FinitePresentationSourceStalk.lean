@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Pi
 public import Mathlib.Algebra.Exact.Basic
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.FinitePresentationStalkOfLocalPresentation
 
 /-! # Finite presentations of module stalks
 
@@ -26,6 +25,32 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.RingedSpace
 
+private theorem exists_common_germ_sections (X : RingedSpace.{u}) (F : Modules X)
+    (x : X) (n : ℕ) (t : Fin n → (moduleStalkFunctor X x).obj F) :
+    ∃ (U : Opens X) (hxU : x ∈ U) (s : Fin n → F.val.obj (op U)),
+      ∀ i, TopCat.Presheaf.germ F.val.presheaf U x hxU (s i) = t i := by
+  classical
+  induction n with
+  | zero =>
+    exact ⟨⊤, by simp, fun i ↦ Fin.elim0 i, fun i ↦ Fin.elim0 i⟩
+  | succ n ih =>
+    obtain ⟨U, hxU, s, hs⟩ := ih (fun i ↦ t i.succ)
+    obtain ⟨V, hxV, z, hz⟩ := TopCat.Presheaf.exists_germ_eq F.val.presheaf (t 0)
+    have hx : x ∈ U ⊓ V := ⟨hxU, hxV⟩
+    refine ⟨U ⊓ V, hx, Fin.cases
+      (F.val.map (homOfLE inf_le_right).op z)
+      (fun i ↦ F.val.map (homOfLE inf_le_left).op (s i)), ?_⟩
+    intro i
+    refine Fin.cases ?_ (fun j ↦ ?_) i
+    · change TopCat.Presheaf.germ F.val.presheaf (U ⊓ V) x hx
+        (F.val.presheaf.map (homOfLE inf_le_right).op z) = t 0
+      rw [TopCat.Presheaf.germ_res_apply]
+      exact hz
+    · change TopCat.Presheaf.germ F.val.presheaf (U ⊓ V) x hx
+        (F.val.presheaf.map (homOfLE inf_le_left).op (s j)) = t j.succ
+      rw [TopCat.Presheaf.germ_res_apply]
+      exact hs j
+
 /-- A finite local presentation gives a finite presentation of the source stalk,
 with basis vectors sent to germs of the local generating sections.
 
@@ -33,19 +58,16 @@ Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third
 paragraph, the last displayed right exact sequence; Definition 01BN.
 (blueprint: lem-weil-pbc-finite-presentation-source-stalk)
 
-Proof: Choose a finite presentation P of F on an open neighborhood U of x from
-IsFinitePresentation.exists_quasicoherentData and its covering property. Reindex
-its finite generator and relation sets by Fin n and Fin m. Let s_i be the values
-at U of its generating sections. Restriction to U does not change stalks at x,
-since the neighborhoods contained in U are cofinal. The component-germ maps
-identify the stalk of a finite free sheaf with the corresponding finite power
-of O_x: finitely many germs have simultaneous representatives, and finitely
-many equalities of germs hold on a common neighborhood. Apply exactness of
-module stalks to P.isColimit, transporting the resulting maps through these
-finite free identifications. This gives a and b, surjectivity of b, and
-exactness of a,b. The generator formula follows from functoriality of germs.
-For an empty generator or relation set the same construction uses the zero
-module, and no representatives need to be chosen. -/
+Proof: Choose a supplied finite local presentation around x from
+IsFinitePresentation.exists_quasicoherentData and its covering property.
+The local-presentation stalk theorem makes F_x finitely presented over O_x.
+Apply Module.FinitePresentation.exists_fin' to get maps a and b between
+finite powers, with b surjective and a,b exact. Represent each basis image
+b(e_i) by a germ. Induction on the finite generator count puts all these
+representatives on one common neighborhood, intersecting opens and using
+germ_res_apply at each successor step. This gives the required sections
+and basis formula. For n = 0 use the top open and the empty family; empty
+relation sets and zero stalk rings are already covered by exists_fin'. -/
 theorem exists_finitePresentation_source_stalk
     (X : RingedSpace.{u})
     (F : SheafOfModules.{u}
@@ -59,6 +81,17 @@ theorem exists_finitePresentation_source_stalk
         (moduleStalkFunctor X x).obj F),
       Function.Surjective b ∧ Function.Exact a b ∧
       (∀ i, b (Pi.single i 1) = TopCat.Presheaf.germ F.val.presheaf U x hxU (s i)) := by
-  sorry
+  classical
+  obtain ⟨q, hq⟩ := SheafOfModules.IsFinitePresentation.exists_quasicoherentData F
+  have hcover : IsOpenCover q.X := (Opens.coversTop_iff _ q.X).mp q.coversTop
+  obtain ⟨i, hxi⟩ := hcover.exists_mem x
+  have : Module.FinitePresentation (X.presheaf.stalk x)
+      ((moduleStalkFunctor X x).obj F) :=
+    finitePresentation_stalk_of_localPresentation X F x (q.X i) hxi (q.presentation i)
+  obtain ⟨n, m, b, a, hb, hab⟩ := Module.FinitePresentation.exists_fin'
+    (X.presheaf.stalk x) ((moduleStalkFunctor X x).obj F)
+  obtain ⟨U, hxU, s, hs⟩ := exists_common_germ_sections X F x n
+    (fun i ↦ b (Pi.single i 1))
+  exact ⟨U, hxU, m, n, s, a, b, hb, hab, fun i ↦ (hs i).symm⟩
 
 end AlgebraicGeometry.RingedSpace
