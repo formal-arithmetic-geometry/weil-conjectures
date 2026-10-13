@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-local-cotangent-comparison-naturality",
+ "kind": "statement",
+ "title": "Naturality of the local H₁-to-conormal comparison",
+ "statement": "Let k,B,A be commutative rings, with B and A local [def-weil-regular-scheme], and a tower k→B→A in which B→A is local. Put K₀=κ(B), K=κ(A), and let P₀=(B→K₀) and P=(A→K) be the surjective extensions. Using the canonical surjection isomorphisms [lem-weil-pbc-jacobi-zariski-surjection-h1], define c₀:H₁(L_{K₀/k})→P₀.Cotangent and c:H₁(L_{K/k})→P.Cotangent. There exists a K-linear map μ:K⊗_{K₀}P₀.Cotangent→P.Cotangent satisfying μ(r⊗[x])=r[image(x)] for x∈ker(B→K₀) and μ∘(c₀⊗K)=c∘(H₁(L_{K₀/k})⊗K→H₁(L_{K/k})). Cotangent means the kernel modulo its square [def-weil-regular-scheme]; H₁ and its canonical maps use the polynomial presentations [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Build the morphism f between the residue surjection extensions using B→A and the induced residue-field map. Extension.Cotangent.map f is K₀-linear; liftBaseChange gives μ. Cotangent.map_mk and the pure-tensor formula for liftBaseChange prove the displayed generator identity.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-jacobi-zariski-surjection-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+   }
+  },
+  {
+   "text": "Reinterpret the two residue surjections as extensions Q₀,Q over k. Their cotangent modules and surjection isomorphisms are definitionally the same as those for P₀,P. h1CotangentEquivCotangent_comp_map expresses each c as the canonical presentation H₁ map followed by the kernel inclusion. Cotangent.map commutes with that inclusion.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-surjection-h1",
+    "lem-weil-pbc-nl-presentation-h1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+   }
+  },
+  {
+   "text": "The composite presentation morphisms from k[K₀] to Q through Q₀ and through k[K] induce equal maps on H₁ by Extension.H1Cotangent.map_eq. map_comp_apply identifies their factorizations, proving the square on pure tensors. Tensor induction, additivity and K-linearity prove the entire square.",
+   "uses": [
+    "lem-weil-pbc-nl-presentation-h1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-jacobi-zariski-surjection-h1",
+  "lem-weil-pbc-nl-presentation-h1-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the canonical map from residue field first cotangent homology to the maximal ideal conormal space under a local algebra map",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the canonical map from residue field first cotangent homology to the maximal ideal conormal space under a local algebra map",
+   "date": "2026-10-13",
+   "results": "Algebra.Extension.Cotangent.map_mk, Algebra.Extension.CotangentSpace.map_cotangentComplex, Algebra.Extension.CotangentSpace.map_comp_cotangentComplex, Algebra.Extension.H1Cotangent.map_apply_coe, Algebra.Extension.H1Cotangent.map, Algebra.Extension.Cotangent.map, Algebra.Extension.CotangentSpace.map_comp_apply, Algebra.H1Cotangent.map; components used in the proof, no one-line match.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "h1CotangentEquivCotangent_comp_map|map_comp_h1Cotangentι",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean; components used in the proof, no one-line match.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DifferentialCoordinatesCotangentIndependent",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07E6, proof: right vertical cotangent map is injective, before extending parameters",
+   "via": [
+    "lem-weil-pbc-differential-coordinates-cotangent-independent",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalCotangentComparisonNaturality",
+  "file": "lean/Sheaf/RingTheory/LocalCotangentComparisonNaturality.lean",
+  "declaration": "Algebra.exists_localCotangentComparison_naturality",
+  "statement": "theorem exists_localCotangentComparison_naturality\n    (k : Type u) (B : Type v) (A : Type w)\n    [CommRing k] [CommRing B] [CommRing A]\n    [Algebra k B] [Algebra B A] [Algebra k A] [IsScalarTower k B A]\n    [IsLocalRing B] [IsLocalRing A] [IsLocalHom (algebraMap B A)] :\n    let K₀ := IsLocalRing.ResidueField B\n    let K := IsLocalRing.ResidueField A\n    let P₀ := Extension.ofSurjective (Algebra.ofId B K₀) IsLocalRing.residue_surjective\n    let P := Extension.ofSurjective (Algebra.ofId A K) IsLocalRing.residue_surjective\n    let c₀ := P₀.h1CotangentEquivCotangent.toLinearMap.comp (H1Cotangent.map k B K₀ K₀)\n    let c := P.h1CotangentEquivCotangent.toLinearMap.comp (H1Cotangent.map k A K K)\n    ∃ μ : K ⊗[K₀] P₀.Cotangent →ₗ[K] P.Cotangent,\n      (∀ (r : K) (x : P₀.ker),\n        μ (r ⊗ₜ[K₀] Extension.Cotangent.mk x) =\n        r • Extension.Cotangent.mk (P := P) ⟨algebraMap B A x.val, by\n          change IsLocalRing.residue A (algebraMap B A x.val) = 0\n          rw [← IsLocalRing.ResidueField.algebraMap_residue]\n          have hx : IsLocalRing.residue B x.val = 0 := x.2\n          rw [hx, map_zero]⟩) ∧\n      μ.comp (c₀.baseChange K) =\n        c.comp ((H1Cotangent.map k k K₀ K).liftBaseChange K)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T100037-L-2471427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T100037-L-2471427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

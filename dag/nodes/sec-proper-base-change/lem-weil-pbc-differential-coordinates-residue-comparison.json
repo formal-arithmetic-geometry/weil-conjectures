@@ -1,0 +1,174 @@
+{
+ "id": "lem-weil-pbc-differential-coordinates-residue-comparison",
+ "kind": "statement",
+ "title": "Injectivity of the polynomial-localization residue differential comparison",
+ "statement": "Let k be a field and A a local commutative k-algebra, with residue field K. Let F be an intermediate field k⊆F⊆K [def-pc-field-extension]. Let φ:R=k[y_1,...,y_m]→A be a k-algebra map [def-weil-pbc-mv-polynomial-ring], and let a_i∈F have image res_A(φ(y_i)). Suppose da_i is an F-basis of Ω[F/k] [def-weil-pbc-kahler-differentials]. Set p=φ⁻¹(m_A), B=R_p [def-weil-pbc-localization-at-prime], and K₀=κ(B) [def-weil-regular-scheme]. Then the canonical map K₀⊗_B Ω[B/k]→Ω[K₀/k] is injective. No geometric regularity, characteristic hypothesis or finite-generation hypothesis on F is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Define f:R→F by y_i↦a_i. The equation on residues shows that its composite to K is res_A∘φ. Elements outside p therefore have nonzero, hence invertible, f-images. Localization gives g:B→F. If x∈m_B, express x=r/s, so r∈p; then f(r)=0 and g(x)=0. Conversely g(x) invertible forces x invertible. Thus g is local and descends to the field embedding ρ:K₀→F, preserving the k-structure.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-field-extension",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+   }
+  },
+  {
+   "text": "Localize the polynomial differential basis dX_i and extend its scalars to K₀. Mathlib mvPolynomialBasis, KaehlerDifferential.isLocalizedModule_map, Basis.ofIsLocalizedModule and Basis.baseChange give the basis e_i=1⊗dX_i of K₀⊗_B Ω[B/k].",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+   }
+  },
+  {
+   "text": "Lift Ω[B/k]→Ω[F/k] across scalar extension to a K₀-linear map t. On e_i it gives da_i=b_i. The family b is independent over F and remains independent over K₀ by restriction along the injective field map ρ. Therefore t is injective by its values on a basis.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+   }
+  },
+  {
+   "text": "On every e_i, the composite of the residue differential comparison and Ω[K₀/k]→Ω[F/k] equals t, since ρ(res_B(x))=g(x). Basis extensionality proves equality of these linear maps. Injectivity of t implies injectivity of the residue comparison.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07E6, proof (lines 8866-8894), from the construction of A_0 to injectivity of the right vertical cotangent comparison; https://stacks.math.columbia.edu/tag/07E6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The residue differential comparison for a polynomial localization is injective when the residue coordinates form a differential basis in an intermediate field",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The residue differential comparison for a polynomial localization is injective when the residue coordinates form a differential basis in an intermediate field",
+   "date": "2026-10-13",
+   "results": "Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway, Algebra.Generators.CotangentSpace.map_toComp_injective, Ideal.injective_algebraMap_quotient_residueField, Algebra.SubmersivePresentation.cotangentComplex_injective, Algebra.SubmersivePresentation.cotangentComplexAux_injective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.Generators.cotangentRestrict_mk, Algebra.Extension.σ_injective; components used in the proof, no one-line match.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsLocalizedModule|mvPolynomialBasis|mapBaseChange_surjective",
+   "date": "2026-10-13",
+   "results": "Mathlib/NumberTheory/NumberField/FractionalIdeal.lean, Mathlib/NumberTheory/NumberField/FractionalIdeal.lean, Mathlib/NumberTheory/NumberField/FractionalIdeal.lean, Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/Module.lean, Mathlib/RingTheory/Localization/Module.lean; components used in the proof, no one-line match.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DifferentialCoordinatesCotangentIndependent",
+  "date": "2026-10-13",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07E6, proof: right vertical cotangent map is injective, before extending parameters",
+   "via": [
+    "lem-weil-pbc-differential-coordinates-cotangent-independent",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DifferentialCoordinatesResidueComparison",
+  "file": "lean/Sheaf/RingTheory/DifferentialCoordinatesResidueComparison.lean",
+  "declaration": "Algebra.injective_residue_differential_comparison_of_basis",
+  "statement": "theorem injective_residue_differential_comparison_of_basis\n    (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]\n    [IsLocalRing A]\n    (F : IntermediateField k (IsLocalRing.ResidueField A))\n    (m : ℕ) (φ : MvPolynomial (Fin m) k →ₐ[k] A)\n    (a : Fin m → F)\n    (ha : ∀ i : Fin m, (a i : IsLocalRing.ResidueField A) =\n      IsLocalRing.residue A (φ (MvPolynomial.X i)))\n    (b : Module.Basis (Fin m) F (KaehlerDifferential k F))\n    (hb : ∀ i : Fin m, b i = KaehlerDifferential.D k F (a i)) :\n    let p := (IsLocalRing.maximalIdeal A).comap φ.toRingHom\n    Function.Injective (KaehlerDifferential.mapBaseChange k\n      (Localization.AtPrime p) (IsLocalRing.ResidueField (Localization.AtPrime p)))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T100037-L-2471427",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261013T100037-L-2471427",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

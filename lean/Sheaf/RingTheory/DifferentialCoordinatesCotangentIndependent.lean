@@ -12,13 +12,11 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
 import Sheaf.RingTheory.GeometricallyRegularH1Injective
-import Sheaf.RingTheory.JacobiZariskiHomologySequence
 import Sheaf.RingTheory.TransitivityGamma
-import Mathlib.RingTheory.Kaehler.Polynomial
-import Mathlib.RingTheory.Etale.Kaehler
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.TensorProduct.MvPolynomial
-import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.RingTheory.DifferentialCoordinatesResidueComparison
+import Sheaf.RingTheory.LocalCotangentComparisonNaturality
+import Mathlib.RingTheory.Flat.Basic
+import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-!
 # Cotangent independence from differential coordinates
@@ -33,6 +31,35 @@ set_option autoImplicit false
 universe u v
 namespace Algebra
 
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def residueCotangentEquiv
+    (R : Type*) [CommRing R] [IsLocalRing R] :
+    let P := Extension.ofSurjective (Algebra.ofId R (IsLocalRing.ResidueField R))
+      IsLocalRing.residue_surjective
+    P.Cotangent ≃ₗ[IsLocalRing.ResidueField R] IsLocalRing.CotangentSpace R := by
+  let P := Extension.ofSurjective (Algebra.ofId R (IsLocalRing.ResidueField R))
+    IsLocalRing.residue_surjective
+  have hp : P.ker = IsLocalRing.maximalIdeal R :=
+    show RingHom.ker (IsLocalRing.residue R) = _ from IsLocalRing.ker_residue
+  exact (P.cotangentEquivCotangentKer.trans
+    (Ideal.Cotangent.equivOfEq P.ker (IsLocalRing.maximalIdeal R) hp)).extendScalarsOfSurjective
+      IsLocalRing.residue_surjective
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem residueCotangentEquiv_mk
+    (R : Type*) [CommRing R] [IsLocalRing R] :
+    let P := Extension.ofSurjective (Algebra.ofId R (IsLocalRing.ResidueField R))
+      IsLocalRing.residue_surjective
+    ∀ x : P.ker, residueCotangentEquiv R (Extension.Cotangent.mk x) =
+      (IsLocalRing.maximalIdeal R).toCotangent
+        ⟨x.val, (IsLocalRing.residue_eq_zero_iff _).mp x.2⟩ := by
+  intro P x
+  simp only [residueCotangentEquiv, LinearEquiv.extendScalarsOfSurjective_apply,
+    LinearEquiv.trans_apply, Extension.cotangentEquivCotangentKer_apply,
+    Extension.Cotangent.val_mk, Ideal.Cotangent.equivOfEq_toCotangent]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
 /-- A residue differential basis preserves independence of cotangent classes from the
 polynomial localization after extending coefficients to the target residue field.
 Source: Stacks Project, More on Algebra, Tag 07E6, proof, the differential comparison
@@ -87,6 +114,75 @@ theorem linearIndepOn_of_residue_differential_basis
         LinearIndepOn (IsLocalRing.ResidueField A)
           (fun x : IsLocalRing.maximalIdeal (Localization.AtPrime p) ↦
             (IsLocalRing.maximalIdeal A).toCotangent
-            ⟨ψ x, map_nonunit ψ x x.2⟩) s := by sorry
+            ⟨ψ x, map_nonunit ψ x x.2⟩) s := by
+  classical
+  have _hF := hF
+  intro p ψ _ hψ s hs
+  let B := Localization.AtPrime p
+  let K₀ := IsLocalRing.ResidueField B
+  let K := IsLocalRing.ResidueField A
+  let : Algebra B A := ψ.toAlgebra
+  have : IsLocalHom (algebraMap B A) := ‹IsLocalHom ψ›
+  have : IsScalarTower k B A := IsScalarTower.of_algebraMap_eq fun r ↦ by
+    change algebraMap k A r = ψ (algebraMap k B r)
+    rw [IsScalarTower.algebraMap_apply k (MvPolynomial (Fin m) k) B]
+    exact (φ.commutes r).symm.trans
+      (RingHom.congr_fun hψ (algebraMap k (MvPolynomial (Fin m) k) r)).symm
+  let P₀ := Extension.ofSurjective (Algebra.ofId B K₀) IsLocalRing.residue_surjective
+  let P := Extension.ofSurjective (Algebra.ofId A K) IsLocalRing.residue_surjective
+  let c₀ := P₀.h1CotangentEquivCotangent.toLinearMap.comp (H1Cotangent.map k B K₀ K₀)
+  let c := P.h1CotangentEquivCotangent.toLinearMap.comp (H1Cotangent.map k A K K)
+  have hw : Function.Injective (KaehlerDifferential.mapBaseChange k B K₀) :=
+    injective_residue_differential_comparison_of_basis k A F m φ a ha b hb
+  have hc₀ : Function.Surjective c₀ := by
+    intro y
+    let z := P₀.h1CotangentEquivCotangent.symm y
+    have hz : H1Cotangent.δ k B K₀ z = 0 := by
+      apply hw
+      rw [map_zero]
+      exact (H1Cotangent.exact_δ_mapBaseChange k B K₀).apply_apply_eq_zero z
+    obtain ⟨x, hx⟩ := (H1Cotangent.exact_map_δ k B K₀ z).mp hz
+    refine ⟨x, ?_⟩
+    change P₀.h1CotangentEquivCotangent ((H1Cotangent.map k B K₀ K₀) x) = y
+    rw [hx]
+    exact P₀.h1CotangentEquivCotangent.apply_symm_apply y
+  obtain ⟨μ, hμ, hcomm⟩ := exists_localCotangentComparison_naturality k B A
+  have hc : Function.Injective c :=
+    (isRegularLocalRing_and_injective_h1Cotangent_of_isGeometricallyRegular
+      k A pchar hreg).2
+  have hleft := (transitivityGamma k K₀ K).1
+  have hμinj : Function.Injective μ := by
+    intro x y hxy
+    obtain ⟨x', rfl⟩ := LinearMap.baseChange_surjective K hc₀ x
+    obtain ⟨y', rfl⟩ := LinearMap.baseChange_surjective K hc₀ y
+    have he : (μ.comp (c₀.baseChange K)) x' = (μ.comp (c₀.baseChange K)) y' := hxy
+    rw [hcomm] at he
+    exact congrArg (c₀.baseChange K) (hleft (hc he))
+  let q₀ := residueCotangentEquiv B
+  let q := residueCotangentEquiv A
+  let v : s → P₀.Cotangent := fun x ↦ q₀.symm
+    ((IsLocalRing.maximalIdeal B).toCotangent x.val)
+  have hv : LinearIndependent K₀ v := hs.linearIndependent.map' q₀.symm.toLinearMap
+    (LinearMap.ker_eq_bot.mpr q₀.symm.injective)
+  have hvt := Module.Flat.linearIndependent_one_tmul (S := K) hv
+  have hli := (hvt.map' μ (LinearMap.ker_eq_bot.mpr hμinj)).map' q.toLinearMap
+    (LinearMap.ker_eq_bot.mpr q.injective)
+  change LinearIndependent K (fun x : s ↦ q (μ (_root_.TensorProduct.tmul K₀ (1 : K) (v x)))) at hli
+  change LinearIndependent K _
+  convert hli using 1
+  ext x
+  symm
+  let z : P₀.ker := ⟨x.val.val, by
+    change IsLocalRing.residue B x.val.val = 0
+    exact (IsLocalRing.residue_eq_zero_iff _).mpr x.val.2⟩
+  have hz : q₀ (Extension.Cotangent.mk z) =
+      (IsLocalRing.maximalIdeal B).toCotangent x.val := residueCotangentEquiv_mk B z
+  have hvz : v x = Extension.Cotangent.mk z := by
+    apply q₀.injective
+    exact (q₀.apply_symm_apply _).trans hz.symm
+  change q (μ (_root_.TensorProduct.tmul K₀ (1 : K) (v x))) = _
+  rw [hvz, hμ, one_smul, residueCotangentEquiv_mk]
+  rfl
+
 
 end Algebra
