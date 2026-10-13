@@ -19,43 +19,54 @@
  },
  "proof": [
   {
-   "text": "Use the explicitly chosen adjunctions and the sectionwise pushforward comparison α. Conjugating α under the two composite adjunctions gives the explicitly specified c. The ordinary exchange B is the adjoint of f_* of the q-unit followed by α. Naturality of the q-unit and the pushforward comparison, followed by naturality of the g Hom equivalence, proves naturality of B on all modules.",
+   "text": "Choose injective resolutions I of M and J of q-star M in the reversed pullback model. Obtain an augmented lift t from flatBaseChangeResolutionLift. Properness supplies quasi-compactness and quasi-separatedness, while flatness of g supplies flatness of the other projection. Apply flatBaseChangeResolutionBeta_isIso in degree zero. The degree-zero comparison identifies g-star of the canonical toRightDerivedZero map followed by beta with ordinary moduleBaseChangeMap followed by the target toRightDerivedZero map. Both toRightDerivedZero maps are invertible because pushforward preserves finite limits. Cancellation proves invertibility of ordinary base change in this model.",
    "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-base-change-map-open-restriction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-flat-base-change-lift",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-flat-base-change-resolution-degree-zero",
+    "def-weil-proper-morphism",
+    "def-weil-flat-morphism"
    ],
    "elementary": false
   },
   {
-   "text": "The conjugate unit equation says that the composite f,q unit followed by α equals the composite g,p unit followed by p_*g_* of c. Expand the composite units. Take the g-adjoint of g*η^a_N followed by B_(f*N); naturality of the g-unit moves η^a_N before the g-unit at f_*f*N. The defining adjoint equation for B identifies the remaining composite with f_* of the q-unit followed by α. Apply the preceding conjugate unit equation. This is the g-adjoint of the claimed right side, so injectivity of the Hom equivalence proves the unit identity.",
+   "text": "Transport along pullbackSymmetry f g. Its top-isomorphism square is an open square with full inverse-image range, so moduleBaseChangeMap_open_square_isIso applies. moduleBaseChangeMap_pasting expresses the outer exchange as the original exchange, the pushforward of this open-square exchange, and tensor composition isomorphisms. All factors are invertible. Rewrite the projections using pullbackSymmetry_hom_comp_fst and pullbackSymmetry_hom_comp_snd. Proof irrelevance transports the commutativity witness, giving precisely B.app M.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-pasting",
+    "lem-weil-pbc-module-open-square-isiso",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the unit identity, apply injectivity of the chosen g-adjunction Hom equivalence. homEquiv_naturality_left moves the supplied f-unit before the adjoint of B. Unfold moduleBaseChangeMap and cancel homEquiv with its inverse. Apply unit_conjugateEquiv_symm to the supplied f-adjunction composed with the chosen q-adjunction and to the chosen g-adjunction composed with the chosen p-adjunction, at the displayed pushforward-square isomorphism. Expanding comp_unit_app, composition isomorphisms and conjugateIsoEquiv gives the claimed equation after reassociation.",
    "uses": [
     "def-pc-module-pullback",
     "lem-weil-pbc-module-base-change-map-open-restriction",
     "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": true
-  },
-  {
-   "text": "Compare B with the resolution comparison in degree zero. Choose resolutions and an augmented lift as in the base-change section theorem. The canonical zeroth-derived-functor identifications send the two augmentations to the identity on the ordinary modules; the augmentation equation identifies the degree-zero adjoint with f_* of the q-unit followed by α. Therefore, after exchanging the two fibre-product models by symmetry, the degree-zero resolution beta is B. Proper f is quasi-compact and quasi-separated, and q is flat as a base change of g. The resolution comparison is invertible on each quasi-coherent M by flatBaseChangeResolutionBeta_isIso; transport through the zeroth-derived identifications and symmetry proves invertibility of B_M. No injectivity of completion or nonempty scheme is used.",
-   "uses": [
-    "lem-weil-pbc-flat-base-change-map-sections",
-    "lem-weil-pbc-flat-base-change-resolution-iso"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-flat-base-change-lift",
+  "lem-weil-pbc-flat-base-change-resolution-iso",
+  "lem-weil-pbc-flat-base-change-resolution-degree-zero",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-module-base-change-map-pasting",
+  "lem-weil-pbc-module-open-square-isiso",
+  "def-pc-fibre-product",
   "def-pc-module-pullback",
   "lem-weil-pbc-module-base-change-map-open-restriction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-flat-base-change-map-sections",
-  "lem-weil-pbc-flat-base-change-resolution-iso"
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/02KH",
-  "place": "Degree-zero specialization of part (1); 02N7 augmented resolution diagram, with 0B65 for the explicit adjunction conjugate"
+  "document": "https://stacks.math.columbia.edu/tag/02N7",
+  "place": "Augmentation diagram, specialized to degree zero; Tag 02KH part (1); explicit composite-unit calculation using Mathlib unit_conjugateEquiv_symm"
  },
  "mathlib_searches": [
   {
@@ -135,9 +146,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261013T142853-L-496460",
+  "landing": "20261013T150354-L-810490",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

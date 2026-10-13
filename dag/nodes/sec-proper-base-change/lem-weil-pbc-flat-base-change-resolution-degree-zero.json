@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-flat-base-change-resolution-degree-zero",
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "title": "Degree-zero resolution base change equals ordinary module base change",
+ "statement": "Let f:X→S and g:S′→S be morphisms of schemes with g flat [def-weil-flat-morphism]. Put Z=S′×_S X, q=pullback.snd g f and p=pullback.fst g f [def-pc-fibre-product]. Let F be an O_X-module, I an injective resolution of F and J an injective resolution of q^*F, using tensor pullback [def-pc-module-pullback]. Let t:I→q_*J be a cochain map with I.ι⁰ t⁰ = η_q,F q_*(J.ι⁰). Let beta⁰ be flatBaseChangeResolutionBeta f g I J t 0 [def-weil-pbc-flat-base-change-resolution-construction] and B the ordinary moduleBaseChangeMap f p g q pullback.condition.symm F [lem-weil-pbc-module-base-change-map-open-restriction]. Let ζ_f,F:f_*F→R⁰f_*F and ζ_p,q^*F:p_*q^*F→R⁰p_*q^*F be the canonical toRightDerivedZero maps. Then g^*(ζ_f,F) beta⁰ = B ζ_p,q^*F, with diagrammatic composition. No properness, quasi-coherence or flatness of q is assumed beyond the displayed data.",
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02N7",
+  "place": "Lemma 20.17.1, augmentation diagram and termwise adjunction in its proof"
+ },
+ "proof": [
+  {
+   "text": "Write Q=f_*t followed by the pushforward-square comparison and C for its termwise g-adjoint, as in the resolution construction. Taking degree zero of the complex adjunction identity gives homEquiv_g(C⁰)=Q⁰. Apply homEquiv_g to g^*(f_*(I.ι⁰)) C⁰. Naturality on the left gives f_*(I.ι⁰) Q⁰. Substitute the augmentation equation for t and use naturality of the pushforward-square comparison on J.ι⁰. This equals homEquiv_g(B) g_*p_*(J.ι⁰). Naturality on the right and injectivity give g^*f_*(I.ι⁰) C⁰=B p_*(J.ι⁰).",
+   "uses": [
+    "def-weil-pbc-flat-base-change-resolution-construction",
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Flat pullback preserves finite limits and colimits. For any short complex K, its mapHomologyIso and mapCyclesIso obey π_(g*K) mapHomologyIso.hom = mapCyclesIso.hom g^*(π_K). This follows by writing mapHomologyIso using LeftHomologyData.mapHomologyIso_eq and applying homologyπ_comp_homologyIso_hom and π_comp_homologyIso_inv. For the two pushed-forward resolution complexes, move the source augmentation across mapCyclesIso.inv and cyclesMap C. Postcomposition with the monic target iCycles reduces this to the component identity from the previous step. Then homologyπ_naturality gives the corresponding homology identity. These are the completely proved private helpers map_homologyπ and augmented_homology.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "def-weil-pbc-flat-base-change-resolution-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib InjectiveResolution.toRightDerivedZero_eq expresses each canonical ζ as toRightDerivedZero′, the degree-zero cycles-to-homology map, and the inverse resolution-computation isomorphism. Substitute these expressions and the definition of beta⁰. Cancel the image of the source resolution isomorphism and its inverse. The homology identity from the previous step, postcomposed with the inverse target resolution-computation isomorphism, is exactly the required equality.",
+   "uses": [
+    "def-weil-pbc-flat-base-change-resolution-construction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02N7",
+  "place": "Degree-zero specialization of the augmented complex adjunction diagram; kernel and homology comparison calculations supplied explicitly in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The degree zero right derived functor comparison of flat base change equals ordinary base change on sheaves of modules",
+   "results": "Service unavailable: Internal Server Error; no absence conclusion drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero resolution base change comparison agrees with the ordinary adjunction mate",
+   "results": "Eight hits for generic adjunction mates and unrelated resolution computations; no scheme module comparison.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "results": "One exact generic resolution-computation identity; used in the proof.",
+   "date": "2026-10-13",
+   "verdict": "Generic tool, not the base-change comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero|mapHomologyIso; flatBaseChangeResolutionBeta.*0 in Mathlib and local library; blueprint_refs.py search degree-zero resolution base change",
+   "results": "Mathlib contains the generic cycles, homology and zeroth-derived identities; no comparison with this project-specific map. Blueprint search has no match. The parent node describes this step but does not give a declaration for it.",
+   "date": "2026-10-13",
+   "verdict": "New comparison needed; fully proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFlatExchangePrescribedAdjunction",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Ordinary flat exchange: parent node proof step 3, degree-zero identification of the augmented-resolution comparison with the ordinary mate",
+   "via": [
+    "lem-weil-pbc-ordinary-flat-exchange-prescribed-adjunction",
+    "lem-weil-pbc-formal-flat-quotient-mate-data",
+    "lem-weil-pbc-formal-comparison-flat-transport-square",
+    "lem-weil-pbc-formal-comparison-completed-affine-data",
+    "lem-weil-pbc-formal-comparison-completed-affine-restriction-iso",
+    "lem-weil-pbc-formal-comparison-completed-affine-model",
+    "lem-weil-pbc-formal-systems-push-pull-affine-annihilation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionDegreeZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatBaseChangeResolutionDegreeZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.flatBaseChangeResolutionBeta_degree_zero",
+  "statement": "theorem flatBaseChangeResolutionBeta_degree_zero\n    {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) [Flat g]\n    (F : X.Modules) (I : InjectiveResolution F)\n    (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F))\n    (t : I.cocomplex ⟶ ((pushforward (pullback.snd g f)).mapHomologicalComplex\n      (ComplexShape.up ℕ)).obj J.cocomplex)\n    (ht : I.ι.f 0 ≫ t.f 0 =\n      (Classical.choose (exists_tensorPullbackAdjunction (pullback.snd g f))).unit.app F ≫\n        (pushforward (pullback.snd g f)).map (J.ι.f 0)) :\n    (tensorPullback g).map ((pushforward f).toRightDerivedZero.app F) ≫\n        flatBaseChangeResolutionBeta f g I J t 0 =\n      moduleBaseChangeMap f (pullback.fst g f) g (pullback.snd g f)\n        pullback.condition.symm F ≫\n          (pushforward (pullback.fst g f)).toRightDerivedZero.app\n            ((tensorPullback (pullback.snd g f)).obj F)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "def-weil-pbc-flat-base-change-resolution-construction",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T150354-L-810490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T150354-L-810490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

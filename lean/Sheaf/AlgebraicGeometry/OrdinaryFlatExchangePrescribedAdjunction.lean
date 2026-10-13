@@ -10,7 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
+import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
+import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionDegreeZero
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeOpenSquareIso
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
 
 /-! # Ordinary flat exchange with a prescribed adjunction
@@ -25,6 +28,41 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem baseChange_isIso_of_iso_top {A B A' A'' T : Scheme.{u}}
+    (p : A ⟶ B) (p' : A' ⟶ T) (p'' : A'' ⟶ T) (h : T ⟶ B) (v : A' ⟶ A)
+    (e : A'' ≅ A') (w : v ≫ p = p' ≫ h) (we : e.hom ≫ p' = p'') (F : A.Modules)
+    (hbc : IsIso (Scheme.Modules.moduleBaseChangeMap p p' h v w F)) :
+    IsIso (Scheme.Modules.moduleBaseChangeMap p p'' h (e.hom ≫ v)
+      (by rw [Category.assoc, w, ← Category.assoc, we]) F) := by
+  have w' : e.hom ≫ p' = p'' ≫ 𝟙 T := by simpa only [Category.comp_id] using we
+  have hrange : Set.range e.hom = p' ⁻¹' Set.range (𝟙 T) := by
+    have hs : Function.Surjective e.hom := by
+      intro x
+      refine ⟨e.inv x, ?_⟩
+      exact congrArg (fun k : A' ⟶ A' ↦ k x) e.inv_hom_id
+    rw [Set.range_eq_univ.mpr hs]
+    change Set.univ = p' ⁻¹' Set.range (id : T → T)
+    rw [Set.range_id, Set.preimage_univ]
+  have hi : IsIso (Scheme.Modules.moduleBaseChangeMap p' p'' (𝟙 T) e.hom w'
+      ((Scheme.Modules.tensorPullback v).obj F)) :=
+    Scheme.Modules.moduleBaseChangeMap_open_square_isIso p' p'' (𝟙 T) e.hom w' hrange _
+  have hout : IsIso (Scheme.Modules.moduleBaseChangeMap p p'' (𝟙 T ≫ h) (e.hom ≫ v)
+      ((Category.assoc e.hom v p).trans
+        ((congrArg (fun k ↦ e.hom ≫ k) w).trans
+          ((Category.assoc e.hom p' h).symm.trans
+            ((congrArg (fun k ↦ k ≫ h) w').trans (Category.assoc p'' (𝟙 T) h))))) F) := by
+    rw [Scheme.Modules.moduleBaseChangeMap_pasting p p' p'' h v (𝟙 T) e.hom w w' F]
+    infer_instance
+  have heq : 𝟙 T ≫ h = h := Category.id_comp h
+  cases heq
+  exact hout
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- The prescribed composite adjunction comparison requires additional elaboration.
 /-- Ordinary flat exchange, normalized for the supplied adjunction on f.
 Source: Stacks Project, Tags 02KH (part (1), degree zero) and 02N7 (mate construction).
 (blueprint: lem-weil-pbc-ordinary-flat-exchange-prescribed-adjunction).
@@ -72,6 +110,60 @@ theorem ordinary_flat_exchange_prescribed_adjunction
         (Scheme.Modules.tensorPullback g).map (adj.unit.app N) ≫
           B.app ((Scheme.Modules.tensorPullback f).obj N) =
         adjR.unit.app ((Scheme.Modules.tensorPullback g).obj N) ≫
-          (Scheme.Modules.pushforward p).map (c.hom.app N)) := by sorry
+          (Scheme.Modules.pushforward p).map (c.hom.app N)) := by
+  classical
+  dsimp only
+  constructor
+  · intro M hM
+    have := hM
+    have := Scheme.Modules.enoughInjectives (X := X)
+    have := Scheme.Modules.enoughInjectives (X := pullback g f)
+    let I := injectiveResolution M
+    let J := injectiveResolution
+      ((Scheme.Modules.tensorPullback (pullback.snd g f)).obj M)
+    obtain ⟨t, ht⟩ := Scheme.Modules.flatBaseChangeResolutionLift f g I J
+    have hi := Scheme.Modules.flatBaseChangeResolutionBeta_isIso f g M I J t ht 0
+    have he := Scheme.Modules.flatBaseChangeResolutionBeta_degree_zero f g M I J t ht
+    have hcomp : IsIso (Scheme.Modules.moduleBaseChangeMap f (pullback.fst g f) g
+        (pullback.snd g f) pullback.condition.symm M ≫
+          (Scheme.Modules.pushforward (pullback.fst g f)).toRightDerivedZero.app
+            ((Scheme.Modules.tensorPullback (pullback.snd g f)).obj M)) := by
+      rw [← he]
+      infer_instance
+    have hbc : IsIso (Scheme.Modules.moduleBaseChangeMap f (pullback.fst g f) g
+        (pullback.snd g f) pullback.condition.symm M) :=
+      IsIso.of_isIso_comp_right _
+        ((Scheme.Modules.pushforward (pullback.fst g f)).toRightDerivedZero.app
+          ((Scheme.Modules.tensorPullback (pullback.snd g f)).obj M))
+    have hout := baseChange_isIso_of_iso_top f (pullback.fst g f) (pullback.snd f g)
+      g (pullback.snd g f) (pullbackSymmetry f g) pullback.condition.symm
+      (pullbackSymmetry_hom_comp_fst f g) M hbc
+    have hall : ∀ w : ((pullbackSymmetry f g).hom ≫ pullback.snd g f) ≫ f =
+        pullback.snd f g ≫ g,
+      IsIso (Scheme.Modules.moduleBaseChangeMap f (pullback.snd f g) g
+        ((pullbackSymmetry f g).hom ≫ pullback.snd g f) w M) := fun _ ↦ hout
+    have htransport := congrArg (fun v ↦ ∀ w : v ≫ f = pullback.snd f g ≫ g,
+      IsIso (Scheme.Modules.moduleBaseChangeMap f (pullback.snd f g) g v w M))
+        (pullbackSymmetry_hom_comp_snd f g)
+    exact (htransport.mp hall) pullback.condition
+  · intro N
+    apply ((Classical.choose
+      (Scheme.Modules.exists_tensorPullbackAdjunction g)).homEquiv _ _).injective
+    rw [Adjunction.homEquiv_naturality_left]
+    unfold Scheme.Modules.moduleBaseChangeMap
+    dsimp only [Functor.comp_obj, Functor.id_obj]
+    erw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
+    have key := unit_conjugateEquiv_symm
+      (adj.comp (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction
+        (pullback.fst f g))))
+      ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp
+        (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction
+          (pullback.snd f g))))
+      (Scheme.Modules.pushforwardComp (pullback.fst f g) f ≪≫
+        Scheme.Modules.pushforwardCongr pullback.condition ≪≫
+        (Scheme.Modules.pushforwardComp (pullback.snd f g) g).symm).hom N
+    simpa only [Adjunction.comp_unit_app, Functor.comp_map, Functor.comp_obj,
+      Functor.map_comp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
+      conjugateIsoEquiv, Equiv.coe_fn_symm_mk] using key
 
 end AlgebraicGeometry
