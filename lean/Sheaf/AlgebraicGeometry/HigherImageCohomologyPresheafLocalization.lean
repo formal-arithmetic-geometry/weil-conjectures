@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Mathlib.Algebra.Module.LocalizedModule.Away
+import Sheaf.AlgebraicGeometry.SectionCohomologyPrincipalLocalization
 
 /-! # Principal localization of the higher-image cohomology presheaf
 
@@ -49,6 +50,7 @@ theorem higherImageCohomologyPresheaf_isLocalized
     (W : T.Opens) (hW : IsAffineOpen W) (a : Γ(T, W)) :
     let P := sectionCohomologyPresheaf
       (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex) q
-    IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom := by sorry
+    IsLocalizedModule.Away a (P.map (homOfLE (T.basicOpen_le a)).op).hom := by
+  exact sectionCohomologyPresheaf_isLocalized_away f F I q W hW a
 
 end AlgebraicGeometry.Scheme.Modules
