@@ -6,6 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.PicardCanonicalBaseChange
+import Sheaf.AlgebraicGeometry.PicardPairingPullbackCoherence
 
 /-! # Compatibility of the cup pairing with arbitrary base change
 Source: Stacks Project, Tag 0BDP, final two paragraphs.
@@ -17,6 +18,52 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+@[reassoc]
+private theorem tensorIso_inv_naturality {W T : Scheme.{u}} (h : T ⟶ W)
+    {A B C D : W.Modules} (a : A ⟶ B) (b : C ⟶ D) :
+    ((Modules.tensorPullback h).map a ⊗ₘ (Modules.tensorPullback h).map b) ≫
+        (Modules.picardTensorObjIso h B D).inv =
+      (Modules.picardTensorObjIso h A C).inv ≫
+        (Modules.tensorPullback h).map (a ⊗ₘ b) := by
+  simp only [Modules.picardTensorObjIso, Iso.trans_inv, Iso.symm_inv, tensorIso_inv]
+  simp only [Category.assoc]
+  rw [tensorHom_comp_tensorHom_assoc]
+  erw [(Modules.picardTensorComparison h).hom.naturality a,
+    (Modules.picardTensorComparison h).hom.naturality b]
+  rw [← tensorHom_comp_tensorHom_assoc, Functor.Monoidal.μIso_hom,
+    Functor.LaxMonoidal.μ_natural_assoc]
+  erw [(Modules.picardTensorComparison h).inv.naturality]
+  rfl
+
+@[reassoc]
+private theorem tensorIso_hom_naturality {W T : Scheme.{u}} (h : T ⟶ W)
+    {A B C D : W.Modules} (a : A ⟶ B) (b : C ⟶ D) :
+    (Modules.tensorPullback h).map (a ⊗ₘ b) ≫
+        (Modules.picardTensorObjIso h B D).hom =
+      (Modules.picardTensorObjIso h A C).hom ≫
+        ((Modules.tensorPullback h).map a ⊗ₘ (Modules.tensorPullback h).map b) := by
+  apply (cancel_epi (Modules.picardTensorObjIso h A C).inv).1
+  rw [← tensorIso_inv_naturality_assoc]
+  simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp, Category.comp_id]
+
+private theorem pairing_pullback_injective {X Y : Scheme.{u}} (p : X ⟶ Y)
+    (hO : IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction p)).unit.app
+      (SheafOfModules.unit Y.ringCatSheaf))) {A : Y.Modules}
+    {a b : A ⟶ SheafOfModules.unit Y.ringCatSheaf}
+    (hab : (Modules.tensorPullback p).map a ≫ (Modules.picardTensorUnitIso p).hom =
+      (Modules.tensorPullback p).map b ≫ (Modules.picardTensorUnitIso p).hom) :
+    a = b := by
+  let adj := Classical.choose (Modules.exists_tensorPullbackAdjunction p)
+  let : IsIso (adj.unit.app (SheafOfModules.unit Y.ringCatSheaf)) := hO
+  have hh : (Modules.tensorPullback p).map a = (Modules.tensorPullback p).map b :=
+    (cancel_mono (Modules.picardTensorUnitIso p).hom).1 hab
+  apply (cancel_mono (adj.unit.app (SheafOfModules.unit Y.ringCatSheaf))).1
+  rw [← adj.unit_naturality a, ← adj.unit_naturality b, hh]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The degree-zero cup pairing commutes with the canonical direct-image maps.
 This statement does not assume the direct-image maps are invertible and does not
 assert any dual-pullback comparison is invertible.
@@ -57,6 +104,38 @@ theorem picardCupPairing_baseChange
       ((Modules.pushforward (pullback.snd f j)).obj
         ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E)))).inv ≫
       (Modules.tensorPullback h).map (MonoidalClosed.uncurry (picardCupProductMap f E j hO)) ≫
-        (Modules.picardTensorUnitIso h).hom := by sorry
+        (Modules.picardTensorUnitIso h).hom := by
+  apply pairing_pullback_injective (pullback.snd f (h ≫ j)) hOT
+  simp only [picardCupProductMap, MonoidalClosed.uncurry_curry]
+  have hc := Modules.picardPairing_pullback_coherence f j h E (Modules.dual E)
+    (Modules.dualEvaluation E)
+    ((Modules.pushforward (pullback.snd f j)).obj
+      ((Modules.tensorPullback (pullback.fst f j)).obj E))
+    ((Modules.pushforward (pullback.snd f j)).obj
+      ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E)))
+    ((Classical.choose (Modules.exists_tensorPullbackAdjunction
+      (pullback.snd f j))).counit.app ((Modules.tensorPullback (pullback.fst f j)).obj E))
+    ((Classical.choose (Modules.exists_tensorPullbackAdjunction
+      (pullback.snd f j))).counit.app
+        ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E)))
+    (Modules.picardPushforwardPairing (pullback.snd f j) hO
+      ((Modules.tensorPullback (pullback.fst f j)).obj E)
+      ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))
+    ((Modules.picardTensorObjIso (pullback.fst f j) E (Modules.dual E)).inv ≫
+      (Modules.tensorPullback (pullback.fst f j)).map (Modules.dualEvaluation E) ≫
+      (Modules.picardTensorUnitIso (pullback.fst f j)).hom))
+    (Modules.picardPushforwardPairing_counit (pullback.snd f j) hO
+      ((Modules.tensorPullback (pullback.fst f j)).obj E)
+      ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))
+    ((Modules.picardTensorObjIso (pullback.fst f j) E (Modules.dual E)).inv ≫
+      (Modules.tensorPullback (pullback.fst f j)).map (Modules.dualEvaluation E) ≫
+      (Modules.picardTensorUnitIso (pullback.fst f j)).hom))
+  conv_lhs => rw [Functor.map_comp, Category.assoc]
+  conv_lhs => rw [Modules.picardPushforwardPairing_counit]
+  conv_lhs => rw [tensorIso_hom_naturality_assoc]
+  conv_lhs => rw [tensorHom_comp_tensorHom_assoc]
+  conv_lhs => simp only [Modules.picardDirectImageBaseChangeMap_counit f j h E,
+    Modules.picardDirectImageBaseChangeMap_counit f j h (Modules.dual E)]
+  exact hc.symm
 
 end AlgebraicGeometry.Scheme

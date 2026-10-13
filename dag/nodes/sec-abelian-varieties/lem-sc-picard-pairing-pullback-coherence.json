@@ -1,0 +1,135 @@
+{
+ "id": "lem-sc-picard-pairing-pullback-coherence",
+ "kind": "statement",
+ "title": "Tensor and unit coherence for arbitrary pulled pairings",
+ "statement": "Let f:X→S, j:W→S, h:T→W be scheme morphisms [def-pc-scheme], with projections p_W,q_W,p_T,q_T and top map v [lem-sc-picard-canonical-base-change-comparisons]. Let M,N be O_X-modules, ev:M⊗N→O_X an arbitrary pairing, A,B O_W-modules, a:P_pW A→P_qW M and b:P_pW B→P_qW N arbitrary maps, and g:A⊗B→O_W. Write δ_k=picardTensorObjIso(k).hom and u_k=picardTensorUnitIso(k).hom [def-sc-picard-cup-product-map]. Assume P_pW(g) u_pW = δ_pW (a⊗b) δ_qW^(-1) P_qW(ev) u_qW. With C and D the explicitly constructed square and coefficient comparisons [lem-sc-picard-base-change-counit], the pullback along p_T of δ_h^(-1) P_h(g) u_h, followed by u_pT, equals δ_pT ((C_A P_v(a) D_M)⊗(C_B P_v(b) D_N)) δ_qT^(-1) P_qT(ev) u_qT. There are no adjunction or base-change maps in this conclusion. The exact formula is the lean.statement below.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0095",
+  "place": "Tensor formula, with composition from Tag 0096 and the evaluation formula in Tag 0BDP."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "lem-sc-picard-base-change-counit"
+ ],
+ "proof": [
+  {
+   "text": "Write e_W=δ_qW^(-1) P_qW(ev) u_qW and e_T similarly. Transport by picardTensorComparison to ordinary pullback. Tensor and unit comparisons for ordinary pullback compose, and its composition isomorphism is monoidal (the sectionwise map sends an iterated pure tensor r⊗(s⊗m) to rs⊗m). Transport back. The square comparison C is therefore monoidal, as is the coefficient comparison D. These facts include identity, zero-module and empty-scheme cases.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-sc-picard-canonical-base-change-comparisons",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Square tensor/unit coherence and naturality express the left side as δ_pT (C_A⊗C_B) δ_v^(-1) P_v(δ_pW^(-1) P_pW(g) u_pW) u_v. Substitute the assumed equation hg; δ_pW^(-1) δ_pW cancels, giving δ_pT (C_A⊗C_B) δ_v^(-1) P_v((a⊗b) e_W) u_v.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-sc-picard-base-change-counit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Functoriality and tensor naturality change the latter expression to δ_pT ((C_A P_v(a))⊗(C_B P_v(b))) δ_v^(-1) P_v(e_W) u_v. Coefficient tensor/unit coherence says δ_v^(-1) P_v(e_W) u_v = (D_M⊗D_N) e_T. Substitute and combine the two tensor morphisms by tensorHom_comp_tensorHom to give exactly the right side. This uses no β, adjunction counit or inverse structure unit.",
+   "uses": [
+    "def-sc-picard-cup-product-map",
+    "lem-sc-picard-base-change-counit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-cup-product-map",
+  "lem-sc-picard-canonical-base-change-comparisons",
+  "def-pc-module-pullback",
+  "lem-sc-picard-base-change-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "Categorical glue for the final degree-zero cup-product paragraph, expanded using Tags 0095, 0096 and 08HY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The adjoint of a base change map is the pullback of the original adjunction counit, transported by the pullback composition comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor comparison and unit comparison for composition of pullback functors are coherent",
+   "results": "Hits: CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.Over.μ_pullback_left_fst_snd', CategoryTheory.Over.μ_pullback_left_fst_fst', CategoryTheory.Over.μ_pullback_left_fst_snd, CategoryTheory.Over.μ_pullback_left_snd', CategoryTheory.Over.μ_pullback_left_snd, CategoryTheory.Over.μ_pullback_left_fst_fst",
+   "date": "2026-10-13",
+   "verdict": "No exact match for either explicit Picard identity. Generic mate and pullback composition tools were read in Mathlib source."
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv_counit",
+   "results": "loogle: unknown identifier 'mateEquiv_counit'",
+   "date": "2026-10-13",
+   "verdict": "No exact match for either explicit Picard identity. Generic mate and pullback composition tools were read in Mathlib source."
+  },
+  {
+   "tool": "grep",
+   "query": "picardPairing_pullback_coherence|picardDirectImageBaseChangeMap_counit|pullbackComp.*[Mm]onoidal",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match for either explicit Picard identity. Generic mate and pullback composition tools were read in Mathlib source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupPairingBaseChange",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Degree-zero cup-pairing base-change compatibility in Tag 0BDP",
+   "via": [
+    "lem-sc-picard-cup-pairing-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardPairingPullbackCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardPairingPullbackCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardPairing_pullback_coherence",
+  "statement": "theorem picardPairing_pullback_coherence\n    {X S W T : Scheme.{u}} (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W)\n    (M N : X.Modules) (ev : M ⊗ N ⟶ SheafOfModules.unit X.ringCatSheaf)\n    (A B : W.Modules)\n    (a : (tensorPullback (Limits.pullback.snd f j)).obj A ⟶\n      (tensorPullback (Limits.pullback.fst f j)).obj M)\n    (b : (tensorPullback (Limits.pullback.snd f j)).obj B ⟶\n      (tensorPullback (Limits.pullback.fst f j)).obj N)\n    (g : A ⊗ B ⟶ SheafOfModules.unit W.ringCatSheaf)\n    (hg : (tensorPullback (Limits.pullback.snd f j)).map g ≫\n        (picardTensorUnitIso (Limits.pullback.snd f j)).hom =\n      (picardTensorObjIso (Limits.pullback.snd f j) A B).hom ≫ (a ⊗ₘ b) ≫\n        (picardTensorObjIso (Limits.pullback.fst f j) M N).inv ≫\n        (tensorPullback (Limits.pullback.fst f j)).map ev ≫\n        (picardTensorUnitIso (Limits.pullback.fst f j)).hom) :\n    (tensorPullback (Limits.pullback.snd f (h ≫ j))).map\n      ((picardTensorObjIso h A B).inv ≫ (tensorPullback h).map g ≫\n        (picardTensorUnitIso h).hom) ≫\n      (picardTensorUnitIso (Limits.pullback.snd f (h ≫ j))).hom =\n    (picardTensorObjIso (Limits.pullback.snd f (h ≫ j))\n      ((tensorPullback h).obj A) ((tensorPullback h).obj B)).hom ≫\n      (((picardBaseChangeSquareIso f j h A).hom ≫\n          (tensorPullback (picardBaseChangeTop f j h)).map a ≫\n          (picardBaseChangeCoefficientIso f j h M).hom) ⊗ₘ\n        ((picardBaseChangeSquareIso f j h B).hom ≫\n          (tensorPullback (picardBaseChangeTop f j h)).map b ≫\n          (picardBaseChangeCoefficientIso f j h N).hom)) ≫\n      (picardTensorObjIso (Limits.pullback.fst f (h ≫ j)) M N).inv ≫\n      (tensorPullback (Limits.pullback.fst f (h ≫ j))).map ev ≫\n      (picardTensorUnitIso (Limits.pullback.fst f (h ≫ j))).hom",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T082423-L-1651346",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T082423-L-1651346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

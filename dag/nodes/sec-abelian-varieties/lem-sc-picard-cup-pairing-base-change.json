@@ -15,33 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Expand picardCupProductMap and cancel uncurry with curry. Both pairings are the explicit picardPushforwardPairing formed from the pulled evaluation of E and dual E.",
+   "text": "Expand picardCupProductMap and cancel uncurry/curry. The existing picardPushforwardPairing_counit computes the pullback of each pairing. The private pairing_pullback_injective follows by cancellation of the invertible structure-sheaf adjunction unit, using its naturality. It reduces the desired equality to the pulled-back pairing equation.",
    "uses": [
-    "def-sc-picard-cup-product-map"
+    "def-sc-picard-cup-product-map",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-picard-canonical-base-change-comparisons"
    ],
    "elementary": true
   },
   {
-   "text": "Take the adjoint along p_T of both sides. Expand the canonical base-change maps as mates of the top pullback unit, followed by the specified tensor-composition comparison. Naturality of the unit and counit and their triangle identities identify each base-change map followed by the p_T counit with the pullback of the p_W counit. The two adjoints are the same evaluation pulled to X_T and applied to these two counits. Tensor-comparison naturality and associativity commute all comparison maps. The structure-unit comparison is compatible because its section formula is m mapped to 1 tensor m; inverse units are compatible by invertibility. Injectivity of the adjunction Hom equivalence proves the displayed pairing equality. The calculation applies to zero objects and empty schemes, and uses no flatness.",
+   "text": "Apply picardPairing_pullback_coherence to the two p_W counits and the pushed-forward evaluation. Its hypothesis is exactly picardPushforwardPairing_counit. Tensor-comparison naturality and tensorHom_comp_tensorHom turn the pulled left pairing into a tensor of the two base-change counit composites. Apply picardDirectImageBaseChangeMap_counit separately to E and dual E; the resulting expression is the right side of the coherence equality. This completes the proof without assuming β invertible or dual-pullback invertible.",
    "uses": [
-    "lem-sc-picard-canonical-base-change-comparisons",
-    "lem-weil-pbc-module-base-change-map-open-restriction",
-    "lem-weil-pbc-module-base-change-map-pasting"
+    "lem-sc-picard-base-change-counit",
+    "lem-sc-picard-pairing-pullback-coherence",
+    "def-sc-picard-cup-product-map"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-picard-cup-product-map",
+  "lem-pc-module-pullback-adjunction",
   "lem-sc-picard-canonical-base-change-comparisons",
-  "lem-weil-pbc-module-base-change-map-open-restriction",
-  "lem-weil-pbc-module-base-change-map-pasting"
+  "lem-sc-picard-base-change-counit",
+  "lem-sc-picard-pairing-pullback-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "Final two proof paragraphs: arbitrary base change and the degree-zero cup pairing; categorical transpose glue expanded here.",
-  "note": "The source motivates the claim; the omitted categorical glue is expanded in the proof steps."
+  "place": "Final degree-zero cup-product paragraph. W3 implements the reduction to the one-coefficient mate identity and tensor/unit coherence, with the cup counit and injectivity proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -123,9 +125,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261013T054220-L-443854",
+  "landing": "20261013T082423-L-1651346",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
