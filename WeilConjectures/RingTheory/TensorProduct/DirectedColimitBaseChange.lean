@@ -66,7 +66,7 @@ instance : Algebra (F.obj i₀) (Point F c) := (c.ι.app i₀).hom.toAlgebra
 
 lemma ι_app_map_apply {i j : I} (f : i ⟶ j) (x : F.obj i) :
     c.ι.app j (F.map f x) = c.ι.app i x := by
-  rw [← CommRingCat.comp_apply, c.w f]
+  exact Cocone.w_apply c f x
 
 /-- The coprojection `A_i → A`, as an `A_{i₀}`-algebra map. -/
 noncomputable def toPoint (i : {i // i₀ ≤ i}) : Stage F i₀ i →ₐ[F.obj i₀] Point F c where
