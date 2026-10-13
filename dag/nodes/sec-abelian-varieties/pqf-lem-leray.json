@@ -24,60 +24,44 @@
  ],
  "proof": [
   {
-   "text": "Put $F=f_*:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_Y)$ and $G=\\Gamma(Y,-):\\operatorname{Mod}(\\mathcal O_Y)\\to\\mathbf{Ab}$. The module categories are Grothendieck abelian, hence have enough injectives, by [prop-pur-kinjective-resolutions-exist], and $\\mathbf{Ab}=\\operatorname{Mod}(\\mathbb Z)$ is Grothendieck abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian] with $R=\\mathbb Z$. The pushforward $F$ is the additive functor of [def-pc-module-pullback]; for a kernel or finite product, its sections on an open $V\\subseteq Y$ are the corresponding kernel or product of sections on $f^{-1}(V)$, so $F$ preserves kernels and finite products and is left exact. The global-sections functor $G$ is additive and left exact by [lem-sc-global-sections-left-exact]. For every injective $\\mathcal I$ on $X$, [lem-weil-pbc-module-pushforward-injective-acyclic] says that $f_*\\mathcal I$ is $G$-acyclic. Thus $(F,G)$ satisfies [def-sp-composite-acyclicity].",
+   "text": "Set D to RingedSpace.moduleDirectImage f and G to RingedSpace.globalSectionsFunctor Y followed by forgetting scalars. Mathlib infers additivity and finite-limit preservation from pushforward and evaluation. For an injective I, use module_pushforward_injective_acyclic at the top open. The private proved helper derived_forget_iso compares derived G with the scalar-forgotten moduleCohomology, via InjectiveResolution.isoRightDerivedObj on a common resolution and ShortComplex.mapHomologyIso for the exact forgetful functor. Transport the cohomology vanishing through this isomorphism to prove D.IsAcyclicComposablePair G.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-ring-modules-grothendieck-abelian",
-    "def-pc-module-pullback",
-    "lem-sc-global-sections-left-exact",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-sc-ringed-space-module-cohomology",
     "lem-weil-pbc-module-pushforward-injective-acyclic",
-    "def-sp-composite-acyclicity"
+    "lem-sp-derived-well-defined"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-leray.md",
-    "place": "## Proof, application of the Grothendieck spectral sequence"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [thm-sp-grothendieck] to this composable pair and the object $\\mathcal F$. It gives a functorial first-quadrant spectral sequence with $E_2^{p,q}=R^pG(R^qF(\\mathcal F))$ converging to $R^{p+q}(G\\circ F)(\\mathcal F)$.",
+   "text": "Apply the existing source-library Functor.exists_grothendieckSpectralSequence to D, G and F. It gives the required natural-number sequence, derived second page and derived-composite abutment. This objectwise interface is recorded in src-grothendieck-spectral-sequence-nat; no Cartan–Eilenberg comparison or edge maps are used. Compose each second-page isomorphism with derived_forget_iso to identify it with the scalar-forgotten module cohomology in the statement.",
    "uses": [
-    "thm-sp-grothendieck"
+    "src-grothendieck-spectral-sequence-nat",
+    "def-sc-ringed-space-module-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-leray.md",
-    "place": "## Proof, application of the Grothendieck spectral sequence"
-   }
+   "elementary": false
   },
   {
-   "text": "By [pqf-def-cohomology], $R^qF(\\mathcal F)=R^qf_*\\mathcal F$ and $R^pG(-)=\\mathrm H^p(Y,-)$. Termwise $\\Gamma(Y,f_*\\mathcal G)=\\Gamma(X,\\mathcal G)$, so the composite is global sections on $X$ and its right derived functors are $\\mathrm H^{p+q}(X,\\mathcal F)$; resolution-independent identification is supplied by [lem-sp-derived-well-defined]. Substitution gives the displayed Leray spectral sequence.",
+   "text": "D followed by scalar-forgotten global sections on Y is definitionally the scalar-forgotten global-sections functor on X (inverse image of the top open is definitionally top). Use Iso.refl for this functor isomorphism and NatTrans.rightDerived on its two directions; NatTrans.rightDerived_comp and rightDerived_id prove the inverse identities. Compose its component in degree n with derived_forget_iso for X. Apply SpectralSequence.AbutsTo.of_nonempty_iso to transport the abutment. The declared cohomology functors are exactly the right derived global sections of pqf-def-cohomology; no hypotheses or definitions change.",
    "uses": [
     "pqf-def-cohomology",
     "lem-sp-derived-well-defined"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-leray.md",
-    "place": "## Proof, identification of the E2 page and abutment"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-ring-modules-grothendieck-abelian",
-  "def-pc-module-pullback",
-  "lem-sc-global-sections-left-exact",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology",
   "lem-weil-pbc-module-pushforward-injective-acyclic",
-  "def-sp-composite-acyclicity",
-  "thm-sp-grothendieck",
-  "pqf-def-cohomology",
-  "lem-sp-derived-well-defined"
+  "lem-sp-derived-well-defined",
+  "src-grothendieck-spectral-sequence-nat",
+  "pqf-def-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-leray.md",
-  "place": "## Proof"
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/SpectralSequence/Grothendieck.lean",
+  "place": "Functor.exists_grothendieckSpectralSequence specialized to module direct image and scalar-forgotten global sections; Mathlib injective-resolution and homology comparison"
  },
  "mathlib_searches": [
   {
@@ -193,5 +177,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T024053-L-3340831",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
