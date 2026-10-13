@@ -1,0 +1,145 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentsFiniteSeparableDescent",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "finite descent of the geometric components in the slicing argument",
+   "via": [
+    "lem-sbc-components-finite-separable-descent",
+    "lem-sbc-generic-components-split",
+    "lem-sbc-generic-fibre-incidence-spread",
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "new-lem-sbc-finite-field-closed-component-descent",
+ "title": "Finite field for simultaneous descent of closed geometric components",
+ "statement": "Let k be a field with separable closure Omega [def-kun-separably-closed], and let X -> Spec k be locally of finite type [def-weil-finite-type-morphism, def-weil-affine-spectrum]. If X_Omega has finitely many irreducible components [def-weil-irreducible-components], there is a finite intermediate field L [def-pc-field-extension] for which the iterated base change Y = X_L times_L Omega [def-pc-fibre-product] has finitely many irreducible components and its projection p:Y -> X_L is surjective. For every irreducible component C of Y there is a closed subset A of X_L with p^{-1}(A)=C. No maximality of A is asserted.",
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-irreducible-components",
+  "def-pc-field-extension"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 04KZ (1),(2), 038B, and 054R proof; https://stacks.math.columbia.edu/tag/04KZ and https://stacks.math.columbia.edu/tag/038B"
+ },
+ "proof": [
+  {
+   "text": "For each component of X_Omega choose an affine open U of X whose base change meets it. The coordinate ring of U is finite type over k; its Omega base change is noetherian. The minimal prime defining the restricted component has finitely many generators, each a finite sum of tensors. Collect their Omega coefficients for the finite family of components. Their generated intermediate field L is finite over k because Omega/k is algebraic. Every automorphism fixing L preserves each chosen chart and its defining ideal, so fixes the closure of the restricted component, the entire component.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Omega/L is Galois: it is algebraic and separable, and is normal since Omega is a separable closure. Apply Galois descent of invariant closed subsets (Stacks Tag 038B, the existing declaration AlgebraicGeometry.exists_closed_subset_of_galois_invariant) over L to X_L. It gives a closed subset for each component with exactly that inverse image. No maximality of the descended subset is asserted.",
+   "uses": [
+    "lem-weil-pbc-galois-invariant-closed-subset-descends"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Field extension is faithfully flat, so the projection is surjective. The projection-compatible pullback tower isomorphism identifies Y with X_Omega, preserving irreducible components and their finiteness. For empty X use the bottom field.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-galois-invariant-closed-subset-descends",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-cartesian-square-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 04KZ (1),(2), 038B, and 054R proof; https://stacks.math.columbia.edu/tag/04KZ and https://stacks.math.columbia.edu/tag/038B"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite intermediate field descent of closed irreducible components separable closure",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField, Module.Finite",
+   "digest": "6b2c5360dd7b29d3",
+   "date": "2026-10-13",
+   "results": "12 hits: IntermediateField.instFiniteSubtypeMemBot, IntermediateField.finInsepDegree_le_of_left_le, IntermediateField.LinearDisjoint.finrank_left_eq_finrank, IntermediateField.LinearDisjoint.finrank_right_eq_finrank, IsDedekindDomain.differentIdeal_dvd_map_differentIdeal, IsDedekindDomain.differentIdeal_eq_map_differentIdeal, IsDedekindDomain.differentIdeal_eq_differentIdeal_mul_differentIdeal_of_isCoprime, Module.Basis.ofIsCoprimeDifferentIdeal",
+   "verdict": "Bottom-field finiteness exists, but it does not supply component descent."
+  },
+  {
+   "tool": "grep",
+   "query": "component.*descen|descen.*component|Galois.*IsClosed|IsClosed.*Galois",
+   "digest": "11a21a500b5f4744",
+   "date": "2026-10-13",
+   "results": "6 hits: Mathlib/Data/FunLike/Graded.lean, Mathlib/Data/FunLike/Graded.lean, Mathlib/CategoryTheory/Sites/Descent/DescentDataPrime.lean, Mathlib/FieldTheory/Galois/Infinite.lean, Mathlib/RingTheory/GradedAlgebra/RingHom.lean, Mathlib/RingTheory/GradedAlgebra/RingHom.lean",
+   "verdict": "No finite simultaneous scheme-component descent theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFieldClosedComponentDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFieldClosedComponentDescent.lean",
+  "declaration": "AlgebraicGeometry.exists_finite_intermediateField_closed_component_descent",
+  "statement": "theorem exists_finite_intermediateField_closed_component_descent {k : Type u} [Field k]\n    {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f]\n    (hfinite : (irreducibleComponents\n      ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k (SeparableClosure k)))))).Finite) :\n    ∃ L : IntermediateField k (SeparableClosure k),\n      Module.Finite k L ∧\n      let Z := pullback f (Spec.map (CommRingCat.ofHom (algebraMap k L)))\n      let Y := pullback\n        (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k L))))\n        (Spec.map (CommRingCat.ofHom L.subtype))\n      let p : Y ⟶ Z := pullback.fst\n        (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k L))))\n        (Spec.map (CommRingCat.ofHom L.subtype))\n      Function.Surjective p ∧ (irreducibleComponents ↥Y).Finite ∧\n        ∀ C ∈ irreducibleComponents ↥Y,\n          ∃ A : Set Z, IsClosed A ∧ p ⁻¹' A = C",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e65f2",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T024032-L-3333733",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e65f2",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T024032-L-3333733",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three nodes, cited dependencies, Stacks 04KZ/038B/054R, and the earlier return; compilation and axiom checks pass. This remains a decomposition with one documented geometric sorry."
+ }
+}

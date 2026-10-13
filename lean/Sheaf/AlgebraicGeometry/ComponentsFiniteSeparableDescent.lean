@@ -6,6 +6,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.AlgebraicGeometry.FiniteFieldClosedComponentDescent
+import Sheaf.AlgebraicGeometry.ClosedComponentDescentTopology
 
 /-!
 # Finite descent of irreducible components from a separable closure
@@ -55,6 +57,10 @@ theorem exists_finite_intermediateField_component_preimages {k : Type u} [Field 
             irreducibleComponents
               ↥(pullback
                 (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k L))))
-                (Spec.map (CommRingCat.ofHom L.subtype))) := by sorry
+                (Spec.map (CommRingCat.ofHom L.subtype))) := by
+  obtain ⟨L, hL, hsurj, hfin, hdesc⟩ :=
+    exists_finite_intermediateField_closed_component_descent f hfinite
+  refine ⟨L, hL, ?_⟩
+  exact component_preimages_of_closed_descent _ (Scheme.Hom.continuous _) hsurj hfin hdesc
 
 end AlgebraicGeometry

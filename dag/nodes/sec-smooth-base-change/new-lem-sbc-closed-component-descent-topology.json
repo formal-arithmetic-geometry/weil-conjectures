@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentsFiniteSeparableDescent",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "finite descent of the geometric components in the slicing argument",
+   "via": [
+    "lem-sbc-components-finite-separable-descent",
+    "lem-sbc-generic-components-split",
+    "lem-sbc-generic-fibre-incidence-spread",
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "new-lem-sbc-closed-component-descent-topology",
+ "title": "Component preimages from finite closed descent under a surjection",
+ "statement": "Let p:Y -> Z be a continuous surjection of topological spaces. Suppose Y has finitely many irreducible components [def-weil-irreducible-components], and each component C is the full inverse image of some closed subset of Z. Then for every irreducible component A of Z, p^{-1}(A) is an irreducible component of Y.",
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-irreducible-components",
+  "def-pc-field-extension"
+ ],
+ "source": {
+  "document": "Mathlib/Topology/Irreducible.lean; Stacks Project",
+  "place": "isIrreducible_iff_sUnion_isClosed, IsIrreducible.image; finite descent conclusion in Tag 054R. Topological proof written by the second reader."
+ },
+ "proof": [
+  {
+   "text": "The images p(C) of upstairs components form a finite closed cover of Z. Surjectivity shows p(p^{-1}(D))=D for each descended subset D, so each image is closed. The component cover of Y and surjectivity imply these images cover Z.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a component A of Z, the finite closed-cover criterion isIrreducible_iff_sUnion_isClosed gives A contained in p(C) for some component C of Y. Continuous images of irreducible sets are irreducible, so maximality of A gives A=p(C). The descent equality for C and surjectivity give p^{-1}(p(C))=C. Thus p^{-1}(A)=C, as required. For empty Z there is no A.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Topology/Irreducible.lean; Stacks Project",
+  "place": "isIrreducible_iff_sUnion_isClosed, IsIrreducible.image; finite descent conclusion in Tag 054R. Topological proof written by the second reader."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous surjection finite irreducible components descend closed subsets inverse images",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous surjective map saturated irreducible components descend closed subsets finite components",
+   "digest": "2fb11d8b83d53d4d",
+   "date": "2026-10-13",
+   "results": "8 hits: image_mem_irreducibleComponents_of_isPreirreducible_fiber, preimage_mem_irreducibleComponents_of_isPreirreducible_fiber, irreducibleComponentsEquivOfIsPreirreducibleFiber, genericPoints.component_surjective, TopologicalSpace.IrreducibleCloseds.map, exists_compact_surjective_zorn_subset, TopologicalSpace.noetherianSpace_of_surjective, IsIrreducible.image",
+   "verdict": "Irreducible-fibre component lemmas require different hypotheses; IsIrreducible.image is used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isIrreducible_iff_sUnion_isClosed|saturated.*component|component.*saturated",
+   "digest": "c7393e8605feb304",
+   "date": "2026-10-13",
+   "results": "3 hits: Mathlib/Topology/NoetherianSpace.lean, Mathlib/Topology/Irreducible.lean, Mathlib/Topology/Irreducible.lean",
+   "verdict": "Finite closed-cover criterion found and used, but no exact saturated-component theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedComponentDescentTopology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedComponentDescentTopology.lean",
+  "declaration": "AlgebraicGeometry.component_preimages_of_closed_descent",
+  "statement": "theorem component_preimages_of_closed_descent {Y : Type u} {Z : Type v}\n    [TopologicalSpace Y] [TopologicalSpace Z] (p : Y → Z)\n    (hp : Continuous p) (hsurj : Function.Surjective p)\n    (hfinite : (irreducibleComponents Y).Finite)\n    (hdesc : ∀ C ∈ irreducibleComponents Y, ∃ A : Set Z, IsClosed A ∧ p ⁻¹' A = C) :\n    ∀ A ∈ irreducibleComponents Z, p ⁻¹' A ∈ irreducibleComponents Y",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e65f2",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T024032-L-3333733",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-e65f2",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T024032-L-3333733",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three nodes, cited dependencies, Stacks 04KZ/038B/054R, and the earlier return; compilation and axiom checks pass. This remains a decomposition with one documented geometric sorry."
+ }
+}
