@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-replace-prime",
+ "kind": "statement",
+ "title": "Replace the prime module of formal glueing data along chartwise isomorphisms",
+ "statement": "Let $R,S$ be commutative rings, $\\phi:R\\to S$ a ring map, $t\\in\\mathbf N$, and $f:\\mathrm{Fin}(t)\\to R$. Let $X$ be a formal glueing datum for these rings and charts [def-weil-pbc-formal-glueing-data], with prime $S$-module $X^{\\prime}$. Let $Q$ be an $S$-module and $\\gamma:X^{\\prime}\\to Q$ an $S$-linear map. Suppose the induced $R$-linear map $\\gamma_{f_i}:(X^{\\prime})_{f_i}\\to Q_{f_i}$ is bijective for every $i$ [def-weil-pbc-module-localization-away]. Then there are a formal glueing datum $Y$ with $Y^{\\prime}=Q$ and a morphism $\\mu:X\\to Y$ whose prime component, after that equality, is $\\gamma$, and whose chart maps are bijective. No flatness, finite generation, or quotient-isomorphism hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 0ALK (lemma-application-formal-glueing), proof of part (2): construction of the modified datum and the morphism out of the canonical datum; Remark 05EL (remark-glueing-data), generalized to an arbitrary starting datum."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "For each chart set $\\delta_i=\\gamma_{f_i}$ and $\\alpha_i^{Y}=\\alpha_i^{X}\\delta_i^{-1}$. Keep the chart modules and overlap equivalences of $X$, and put $Y^{\\prime}=Q$. Localization preserves $S$-linearity [lem-weil-pbc-formal-glueing-canonical-maps]. Applying the injective map $\\delta_i$ shows that its inverse also respects the localized $S$-action, so the new comparison maps do as well. This construction allows zero generators and the empty chart family.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Interchange is natural for a localized map: on double fractions both sides send $(x/f_i^a)/f_j^b$ to $(\\gamma(x)/f_j^b)/f_i^a$, by the fraction formula [lem-weil-pbc-formal-glueing-canonical-maps]. Localization preserves composition. Thus $(\\alpha_i^{Y})_{f_j}(\\delta_i)_{f_j}=(\\alpha_i^{X})_{f_j}$. Precompose the new square with the surjective map $(\\delta_i)_{f_j}$, use naturality of interchange, and cancel the two localized inverses. The result is the square of $X$. Surjectivity proves the new square, and the cocycle is unchanged.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define $\\mu$ to have prime map $\\gamma$ and identity chart maps. Its prime compatibility is $\\alpha_i^{Y}\\delta_i=\\alpha_i^{X}$, with the base change of the identity equal to the identity. Its overlap compatibility is the identity equation on the unchanged overlaps. The chart identities are bijective and its prime component is the required map.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 0ALK, proof of part (2), and Remark 05EL; the same explicit construction for an arbitrary datum."
+ },
+ "proof_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "lem-weil-pbc-formal-glueing-canonical-maps"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "glueing|gluing|Glueing|Gluing",
+   "results": "Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Ring.lean, Mathlib/Algebra/Colimit/Ring.lean, Mathlib/Topology/CWComplex/Classical/Basic.lean, Mathlib/Topology/FiberBundle/Basic.lean, Mathlib/Topology/FiberBundle/Basic.lean, Mathlib/Topology/FiberBundle/Basic.lean, Mathlib/Topology/Sheaves/Flasque.lean; no matching formal module-glueing datum replacement theorem",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "replace one component of gluing data along a map which is an isomorphism after localization",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "replace one component of gluing data along a map which is an isomorphism after localization",
+   "results": "CategoryTheory.GlueData.t'_isIso, CategoryTheory.GlueData.ofGlueData', CategoryTheory.instIsIsoF', CategoryTheory.GlueData.t_isIso, CategoryTheory.GlueData.gluedIso, CategoryTheory.GlueData.mapGlueData_J, CategoryTheory.GlueData.f_id, AlgebraicGeometry.Scheme.GlueData.isoCarrier; no matching formal module-glueing datum replacement theorem",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormalGlueingMapFromAlgebraization",
+  "group": "U2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of the finite-etale lifting split, the essential-surjectivity paragraphs; the modified datum and its morphism in Lemma 0ALK part (2), before algebraization",
+   "via": [
+    "lem-weil-pbc-formal-glueing-map-from-algebraization",
+    "lem-weil-pbc-formal-glueing-isogeny",
+    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalGlueingReplacePrime",
+  "file": "lean/Sheaf/RingTheory/FormalGlueingReplacePrime.lean",
+  "declaration": "FormalGlueing.exists_replace_prime",
+  "statement": "theorem exists_replace_prime {R : Type u} {S : Type v} [CommRing R] [CommRing S] (φ : R →+* S) {t : ℕ} (f : Fin t → R) (X : Data.{u, v, max u v w} φ f) (Q : ModuleCat.{max u v w} S) (γ : X.M' →ₗ[S] Q) (hγ : ∀ i, Function.Bijective (localMap (f i) (restrictMap φ γ))) : ∃ (Y : Data.{u, v, max u v w} φ f) (hQ : Y.M' = Q) (μ : X ⟶ Y), (eqToIso hQ).hom.hom.comp μ.prime = γ ∧ ∀ i, Function.Bijective (μ.chart i)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T100147-L-2493229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261013T100147-L-2493229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
