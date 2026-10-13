@@ -12,41 +12,25 @@
  ],
  "proof": [
   {
-   "text": "On the directed tail above j, Yj is quasi-separated over its affine base. Thus the intersection of the two compact opens is compact. Its quasi-compact open inclusion followed by the finite-presentation structure map is finitely presented. Restrict A and B to the overlap; perfect pullback preserves perfectness. The two specified limit isomorphisms determine the overlap isomorphism, under pullback composition and exact restriction comparisons.",
+   "text": "Apply perfect_overlap_transition_comparison to obtain a stage k, a coherent two-open diagram d, an overlap isomorphism e and local comparisons thetaU,thetaV with the prescribed overlap equation. This is the finite-stage descent part, with no F or realization.",
    "uses": [
-    "lem-pc-derived-pullback-perfect",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-pullback-open-restriction-universes"
+    "lem-pc-perfect-overlap-transition-comparison-diagram"
    ],
    "elementary": false
   },
   {
-   "text": "Apply perfect_descend_morphisms on this tail to the prescribed overlap isomorphism. Its invertibility clause gives an isomorphism at k; equivalently descend the inverse and stabilize both inverse identities at a common upper bound. Transport the result through the cartesian identifications of open base changes. This produces e between the exact overlap restrictions of the actual pullbacks A′ and B′, with prescribed limit pullback.",
+   "text": "Given any F,iU,iV satisfying the exact realization equation, apply TwoOpenComparisonDiagram.realization to d.toDiagram. Its isomorphisms are betaU at F composed with HU.mapIso iU and thetaU, and the corresponding V composite. The conclusion is definitionally the displayed derivedOpenHomRestriction equality, because the tau comparisons in SchemeTwoOpenComparisonDiagram are exactly those defining this restriction.",
    "uses": [
-    "lem-pc-perfect-descend-morphisms",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-pullback-open-restriction-universes"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For any F,iU,iV satisfying the realization equation, pull iU and iV to the limit and compose with the transported original comparisons. Restrict these composites to the common overlap. The realization equation, pullback of e and naturality of composition comparisons imply equality. Conjugate by mapDerivedCategoryCompIso and take preimageIso through the fully faithful derived open equivalences. Apply scheme_derived_hom_restriction_transport to both local maps and cancel the common comparison components; faithfulness yields exactly equality of their derivedOpenHomRestriction maps. This produces only local comparisons for a supplied realization, never an existential global object.",
-   "uses": [
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-derived-pullback-open-restriction-universes",
-    "def-pc-derived-open-restriction-maps",
-    "lem-sc-scheme-derived-hom-restriction-transport"
+    "lem-pc-two-open-comparison-realization",
+    "lem-sc-derived-hom-mayer-vietoris"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-open-restriction-maps",
-  "lem-pc-derived-pullback-open-restriction-universes",
-  "lem-pc-derived-pullback-perfect",
-  "lem-pc-perfect-descend-morphisms",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-sc-scheme-derived-hom-restriction-transport"
+  "lem-pc-perfect-overlap-transition-comparison-diagram",
+  "lem-pc-two-open-comparison-realization",
+  "lem-sc-derived-hom-mayer-vietoris"
  ],
  "source": {
   "document": "https://stacks.math.columbia.edu/tag/09RF",
@@ -54,9 +38,10 @@
  },
  "proof_origin": {
   "by": "agent",
-  "agent": "F1 stage-3 worker",
+  "agent": "G2 second reader",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
   "date": "2026-10-14",
-  "note": "Formal-interface refinement of Tags 09RE and 09RF: quantify over realizations to separate overlap descent and comparison transport from object gluing."
+  "note": "Real reduction: isolate only overlap descent, then prove transport to every realization using a fully proved abstract naturality calculation. One hole closed, one smaller hole added: decomposition, net zero. Existing signature unchanged."
  },
  "mathlib_match": null,
  "status": "split",
@@ -133,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-c541c",
-  "group": "F1",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T190139-L-3215863",
+  "landing": "20261013T201750-L-3969597",
   "kind": "interface",
-  "note": "independent Codex review: Matched unchanged item signature and delivered transition with their nodes and Stacks 09RE/09RF; both modules compile, axiom checks pass, and direct importer PerfectLocalModelsStageGluing compiles against delivered artifacts."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

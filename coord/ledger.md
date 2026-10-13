@@ -13472,3 +13472,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:17 L: merged deliver/F4/Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounitTransport (stage 3; reviewer PASS; first push; landing 20261013T201749-L-3969127 (proof); batch 20261013T201736; modules 1; new nodes 0)
 - 20:17 L: merged deliver/F4/Sheaf.Paper.EtaleRowSectionsEvaluationSquare (stage 3; reviewer PASS; first push; landing 20261013T201749-L-3969272 (proof); batch 20261013T201736; modules 1; new nodes 0)
 - 20:17 L: merged deliver/G2/Sheaf.AlgebraicGeometry.OpenRestrictedCanonicalSquare (stage 3; reviewer PASS; first push; landing 20261013T201749-L-3969378 (interface); batch 20261013T201736; modules 4; new nodes 3)
+- 20:17 L: merged deliver/G2/Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition (stage 3; reviewer PASS; first push; landing 20261013T201750-L-3969597 (interface); batch 20261013T201736; modules 4; new nodes 3)

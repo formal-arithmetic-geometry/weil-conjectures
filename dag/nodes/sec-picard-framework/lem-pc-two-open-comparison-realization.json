@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-two-open-comparison-realization",
+ "kind": "statement",
+ "title": "Compatible overlap maps act on every realization",
+ "statement": "Fix categories, functors and a coherent diagram d as in [def-pc-two-open-comparison-diagram]. Let A' be in A, B' in B, E in D, e:SU A' isomorphic to SV B', thetaU:HU A' isomorphic to RU E and thetaV:HV B' isomorphic to RV E. Suppose gammaU inverse at A' followed by SP(thetaU.hom) and tauU at E equals HW(e.hom) followed by gammaV inverse at B', SQ(thetaV.hom) and tauV at E. For every F in C and isomorphisms iU:TU F to A', iV:TV F to B' with alphaU inverse at F followed by SU(iU.hom) and e.hom equal to alphaV inverse at F followed by SV(iV.hom), there exist isomorphisms pU:RU(LF) to RU E and pV:RV(LF) to RV E such that tauU inverse at LF followed by SP(pU.hom) and tauU at E equals tauV inverse at LF followed by SQ(pV.hom) and tauV at E. No global gluing assertion or faithfulness assumption is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Tag 09RF, the compatibility calculation from local identifications; proved abstractly by naturality and associativity."
+ },
+ "stmt_deps": [
+  "def-pc-two-open-comparison-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Construct pU by composing betaU at F, HU.mapIso iU and thetaU, and pV by the analogous V composition.",
+   "uses": [
+    "def-pc-two-open-comparison-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the transported restrictions. Postcompose each coherence equation with gamma inverse; cancel gamma with its inverse. Naturality of gamma inverse moves each local realization map through that comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Substitute the overlap equation for theta, apply HW to the realization equation, and use preservation of composition and associativity to conclude equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-two-open-comparison-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "G2 second reader",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "date": "2026-10-14",
+  "note": "Formal reduction of the prescribed overlap descent and its realization transport, using Tags 09RE, 08DW and 0D5S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism coherent square transports compatible local isomorphisms to equal restrictions",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι; CategoryTheory.GrothendieckTopology.diagramCompIso; CategoryTheory.Functor.IsCoverDense.iso_of_restrict_iso; CategoryTheory.LocalizerMorphism.catCommSq; CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc; CategoryTheory.Functor.IsCoverDense.Types.appIso; CategoryTheory.CatCommSq.iso; CategoryTheory.Functor.IsCoverDense.Types.appIso_hom",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback preserves compatibility of local isomorphisms on an overlap of two opens",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "CatCommSq|NatTrans.naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Parametrized.lean; Mathlib/CategoryTheory/Linear/LinearFunctor.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: prescribed overlap identification before gluing, and transport of compatible local comparisons.",
+   "via": [
+    "lem-pc-perfect-local-models-descended-transition",
+    "lem-pc-perfect-local-models-stage-comparisons",
+    "lem-pc-perfect-local-models-stage-gluing",
+    "lem-pc-perfect-local-models-eventually-compatible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TwoOpenComparisonRealization",
+  "file": "lean/Sheaf/AlgebraicGeometry/TwoOpenComparisonRealization.lean",
+  "declaration": "AlgebraicGeometry.TwoOpenComparisonDiagram.realization",
+  "statement": "theorem TwoOpenComparisonDiagram.realization\n    {C D A B W P Q T : Type*}\n    [Category* C] [Category* D] [Category* A] [Category* B]\n    [Category* W] [Category* P] [Category* Q] [Category* T]\n    {L : C ⥤ D} {TU : C ⥤ A} {TV : C ⥤ B} {TW : C ⥤ W}\n    {SU : A ⥤ W} {SV : B ⥤ W}\n    {RU : D ⥤ P} {RV : D ⥤ Q} {RW : D ⥤ T}\n    {SP : P ⥤ T} {SQ : Q ⥤ T}\n    {αU : TU ⋙ SU ≅ TW} {αV : TV ⋙ SV ≅ TW}\n    {τU : RU ⋙ SP ≅ RW} {τV : RV ⋙ SQ ≅ RW}\n    (d : TwoOpenComparisonDiagram L TU TV TW SU SV RU RV RW SP SQ αU αV τU τV)\n    {A' : A} {B' : B} {E : D}\n    (e : SU.obj A' ≅ SV.obj B')\n    (θU : d.HU.obj A' ≅ RU.obj E) (θV : d.HV.obj B' ≅ RV.obj E)\n    (hθ : d.γU.inv.app A' ≫ SP.map θU.hom ≫ τU.hom.app E =\n      d.HW.map e.hom ≫ d.γV.inv.app B' ≫ SQ.map θV.hom ≫ τV.hom.app E)\n    (F : C) (iU : TU.obj F ≅ A') (iV : TV.obj F ≅ B')\n    (hi : αU.inv.app F ≫ SU.map iU.hom ≫ e.hom =\n      αV.inv.app F ≫ SV.map iV.hom) :\n    ∃ (pU : RU.obj (L.obj F) ≅ RU.obj E) (pV : RV.obj (L.obj F) ≅ RV.obj E),\n      τU.inv.app (L.obj F) ≫ SP.map pU.hom ≫ τU.hom.app E =\n        τV.inv.app (L.obj F) ≫ SQ.map pV.hom ≫ τV.hom.app E",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T201750-L-3969597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T201750-L-3969597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

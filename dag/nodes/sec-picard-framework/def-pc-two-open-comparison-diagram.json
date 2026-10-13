@@ -1,0 +1,112 @@
+{
+ "id": "def-pc-two-open-comparison-diagram",
+ "kind": "definition",
+ "title": "Coherent diagram of two restrictions and their overlap",
+ "statement": "Let C,D,A,B,W,P,Q,T be categories, with functors L:C to D, TU:C to A, TV:C to B, TW:C to W, SU:A to W, SV:B to W, RU:D to P, RV:D to Q, RW:D to T, SP:P to T and SQ:Q to T. Fix natural isomorphisms alphaU:TU SU to TW, alphaV:TV SV to TW, tauU:RU SP to RW and tauV:RV SQ to RW. A two-open comparison diagram consists of functors HU:A to P, HV:B to Q, HW:W to T, natural isomorphisms betaU:L RU to TU HU, betaV:L RV to TV HV, betaW:L RW to TW HW, gammaU:HU SP to SU HW, gammaV:HV SQ to SV HW, with, for each F, tauU inverse at LF followed by SP(betaU at F) and gammaU at TU F equal to betaW at F followed by HW(alphaU inverse at F), and the analogous V equation. For schemes X,Y, g:X to Y and opens U,V of Y and P,Q of X [def-pc-scheme], SchemeTwoOpenComparisonDiagram fixes L to derivedPullback g [def-pc-derived-pullback], TU,TV,TW,SU,SV and alphaU,alphaV to the exact open-subscheme restrictions and their canonical comparisons [def-pc-derived-open-restriction-maps], and RU,RV,RW,SP,SQ,tauU,tauV to localized-site restriction and its canonical derived comparison [lem-sc-derived-hom-mayer-vietoris], using shared derived categories [def-pc-derived-category]. This is a structure of data, with no selection of an inhabitant.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "place": "Tags 08DW and 0D5S, canonical restriction and pullback comparison paths; records their two coherence equations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-pullback",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-category",
+  "lem-sc-derived-hom-mayer-vietoris"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "G2 second reader",
+  "document": "https://stacks.math.columbia.edu/tag/09RF",
+  "date": "2026-10-14",
+  "note": "Formal reduction of the prescribed overlap descent and its realization transport, using Tags 09RE, 08DW and 0D5S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism coherent square transports compatible local isomorphisms to equal restrictions",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι; CategoryTheory.GrothendieckTopology.diagramCompIso; CategoryTheory.Functor.IsCoverDense.iso_of_restrict_iso; CategoryTheory.LocalizerMorphism.catCommSq; CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc; CategoryTheory.Functor.IsCoverDense.Types.appIso; CategoryTheory.CatCommSq.iso; CategoryTheory.Functor.IsCoverDense.Types.appIso_hom",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback preserves compatibility of local isomorphisms on an overlap of two opens",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "CatCommSq|NatTrans.naturality",
+   "results": "25 hits: Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Parametrized.lean; Mathlib/CategoryTheory/Linear/LinearFunctor.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+   "date": "2026-10-14",
+   "verdict": "No exact matching theorem; tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition",
+  "date": "2026-10-14",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 09RF two-open induction: prescribed overlap identification before gluing, and transport of compatible local comparisons.",
+   "via": [
+    "lem-pc-perfect-local-models-descended-transition",
+    "lem-pc-perfect-local-models-stage-comparisons",
+    "lem-pc-perfect-local-models-stage-gluing",
+    "lem-pc-perfect-local-models-eventually-compatible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TwoOpenComparisonDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/TwoOpenComparisonDiagram.lean",
+  "declaration": "AlgebraicGeometry.TwoOpenComparisonDiagram",
+  "statement": "structure TwoOpenComparisonDiagram\n    {C D A B W P Q T : Type*}\n    [Category* C] [Category* D] [Category* A] [Category* B]\n    [Category* W] [Category* P] [Category* Q] [Category* T]\n    (L : C ⥤ D) (TU : C ⥤ A) (TV : C ⥤ B) (TW : C ⥤ W)\n    (SU : A ⥤ W) (SV : B ⥤ W)\n    (RU : D ⥤ P) (RV : D ⥤ Q) (RW : D ⥤ T)\n    (SP : P ⥤ T) (SQ : Q ⥤ T)\n    (αU : TU ⋙ SU ≅ TW) (αV : TV ⋙ SV ≅ TW)\n    (τU : RU ⋙ SP ≅ RW) (τV : RV ⋙ SQ ≅ RW)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.SchemeTwoOpenComparisonDiagram"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T201750-L-3969597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T201750-L-3969597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

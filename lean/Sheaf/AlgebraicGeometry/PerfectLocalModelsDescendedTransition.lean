@@ -12,11 +12,8 @@ public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
-import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import Sheaf.AlgebraicGeometry.SchemeDerivedHomRestrictionTransport
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
+import Sheaf.AlgebraicGeometry.PerfectOverlapTransitionComparisonDiagram
+import Sheaf.AlgebraicGeometry.TwoOpenComparisonRealization
 
 /-! # Descent of the prescribed overlap transition
 
@@ -41,6 +38,8 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
   schemeOpenOverlapRestriction_preservesFiniteLimits
   schemeOpenOverlapRestriction_preservesFiniteColimits
 
+-- Preserve the existing names of unused dependent Pi binders in the statement.
+set_option linter.unusedVariables false in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Elaborating the transported overlap restrictions needs this instance-search budget.
 set_option maxHeartbeats 800000 in
@@ -178,6 +177,13 @@ theorem perfect_local_models_descended_transition
           derivedOpenHomRestriction X.toRingedSpace
             (homOfLE (show P ⊓ Q ≤ Q from inf_le_right)) (E := L) (F := E)
         ∃ (pU : RU.obj L ≅ RU.obj E) (pV : RV.obj L ≅ RV.obj E),
-          rU pU.hom = rV pV.hom := by sorry
+          rU pU.hom = rV pV.hom := by
+  intro Yj X gj U V hcover hU hV A B hA hB E instP instQ instX PU PV φU φV
+  obtain ⟨k, hjk, d, e, θU, θV, hθ⟩ :=
+    perfect_overlap_transition_comparison R c hc i Z t j hij
+      U V hcover hU hV A B hA hB E φU φV
+  refine ⟨k, hjk, e, ?_⟩
+  intro F iU iV hi
+  exact d.toDiagram.realization e θU θV hθ F iU iV hi
 
 end AlgebraicGeometry
