@@ -1,0 +1,163 @@
+{
+ "id": "lem-pc-single-complex-open-stalk-conjugacy",
+ "kind": "statement",
+ "title": "Source-open conjugacy of the canonical stalk-comparison arrow",
+ "statement": "Let $f:X\\to S$, $f\\prime:X\\prime\\to S\\prime$, $g:S\\prime\\to S$, and $g\\prime:X\\prime\\to X$ form a cartesian square of schemes [def-pc-scheme, def-pc-base-change], with derived categories and derived pullback [def-pc-derived-category, def-pc-derived-pullback]. Let $K\\in D(\\mathcal O_X)$, $K\\prime\\in D(\\mathcal O_{X\\prime})$, and $\\phi:L(g\\prime)^*K\\to K\\prime$, and let $c$ be any coordinates for $\\phi$ [def-pc-single-complex-base-change-stalk-condition]. For an open $U\\subset X$, set $j:U\\to X$, $P=X\\prime\\times_X U$, $p:P\\to X\\prime$, $q:P\\to U$, and take the cartesian restricted square $(q,pf\\prime,jf,g)$. Put $K_U=Lj^*K$ and $K\\prime_U=Lp^*K\\prime$. Define $\\phi_U:Lq^*K_U\\to K\\prime_U$ by the canonical derived pullback composition comparisons for $(q,j)$ and $(p,g\\prime)$, the equation $qj=pg\\prime$, and $Lp^*\\phi$ [lem-pc-ringed-spaces-derived-pullback-composition]. For any coordinates $d$ for $\\phi_U$, any $z\\in P$, and any $i\\in\\mathbb Z$, the underlying additive-group arrow of $\\operatorname{stalkComparison}(c,pz,i)$ is isomorphic in the arrow category of abelian groups to the underlying additive-group arrow of the restricted $\\operatorname{stalkComparison}(d,z,i)$. In particular the conclusion supplies two additive isomorphisms of sources and targets forming a commuting square; it assumes no invertibility of either comparison and no affine, boundedness, or quasi-coherence hypothesis.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, proof: locality of condition (1) on X′; Tag 0DJ9, source-open induction paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Write j=U.ι, p=pullback.fst(g′,j), q=pullback.snd(g′,j). The map p is an open immersion because it is a base change of j. Restrict c.P and c.N along j and p. Exact restriction preserves K-flatness. Identify its derived functor with derived pullback by uniqueness of the left derived functor of the exact restriction functor, using the tensor-pullback/restriction adjunction comparison. Use the underived pullback composition comparison to restrict c.t; the defining universal-counit equation for derivedPullbackComposition gives the represents equation for the displayed composite phi_U. Thus these data give coordinates r for phi_U, without requiring any original stalk comparison to be invertible.",
+   "uses": [
+    "lem-pc-kflat-open-restriction",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At z, the open-immersion stalk maps j.stalkMap(qz) and p.stalkMap(z) are ring isomorphisms. The pullback equation identifies their composites, while stalkMap_comp identifies the two base actions. Apply the restriction-stalk extension isomorphisms degreewise. Derived tensor of these identified complexes over the identified R with the identified B gives an isomorphism on the model cohomology objects. Multiplication commutes with the input maps and the universal derived counits, so this isomorphism respects the transported A tensor_R B action. Extend it to C for the source vertical isomorphism. Exact stalks, homology and the representative isomorphism r.e′ give the target vertical isomorphism. The model equations comparison_eq and localized_eq identify their comparison maps with the counits and scalar-extension transposes. Naturality of those counits and of tensorStalkIso, followed by the stalk of the restricted chain map, gives a commuting square for c and r.",
+   "uses": [
+    "lem-pc-open-restriction-stalk-extension-iso",
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare r and d by the derived isomorphisms r.e followed by d.e inverse and r.e′ followed by d.e′ inverse. The specified source transport is tensor-algebra linear, and pullback naturality gives its commuting square into derived pullback. Normalize both target homology objects by their representative isomorphisms and the exact-stalk homology factors. Their represents equations identify both resulting maps with phi_U. This gives a commuting square for r and d with invertible vertical maps. Compose with the preceding square for c and r, forget scalars, and bundle the two additive isomorphisms and the commutativity equation with Arrow.isoMk. This proves the stated isomorphism of additive arrows even when neither horizontal map is invertible.",
+   "uses": [
+    "lem-pc-stalk-comparison-source-transport",
+    "lem-pc-stalk-comparison-pullback-naturality",
+    "def-pc-single-complex-base-change-stalk-condition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-open-restriction",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "lem-pc-stalk-comparison-source-transport",
+  "lem-pc-stalk-comparison-pullback-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Expansion of locality of equation-bc on X′ into a commuting square with invertible vertical maps; Tag 0DJ9 source-open paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor cohomology comparison is natural for restriction to an open subscheme",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived tensor cohomology stalk comparison commutes with restriction to an open subscheme",
+   "results": "8 hits, including Scheme.Modules.restrictStalkNatIso and Scheme.Hom.resLEStalkMap. These give underived stalk/ring identifications, not a conjugacy of the derived tensor-cohomology arrows.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkComparison.*open|open.*stalkComparison|restrict.*localizedComparison",
+   "results": "msearch grep: 0 hits. Additional rg in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology: 0 hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism of derived base change arrows after an open immersion on the source, compatible with the coefficient morphism",
+   "results": "Second reader: 8 hits for open-immersion section isomorphisms and morphismRestrictOpensRange (scheme arrows). None compares the derived tensor-cohomology arrows.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Arrow.mk _ ≅ CategoryTheory.Arrow.mk _",
+   "results": "Second reader: Arrow.isoMk', Arrow.iso_w' and morphism-property transport package an existing commuting square, but do not construct the required source-open stalk square.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|stalkComparison",
+   "results": "Second reader: Mathlib restrictStalkNatIso identifies underived module stalks. rg on Sheaf and upstream WeilConjectures found coordinate invariance and target-open restriction, but no source-open derived comparison conjugacy.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenStalkCondition",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Source-open restriction of the single-complex stalk condition in the base-change route (Tag 0DJ9 affine-open induction paragraph).",
+   "via": [
+    "lem-pc-single-complex-open-stalk-condition",
+    "lem-pc-single-complex-open-affine",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexOpenStalkConjugacy",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexOpenStalkConjugacy.lean",
+  "declaration": "AlgebraicGeometry.SingleComplexBaseChange.nonempty_stalkComparison_open_arrow_iso",
+  "statement": "theorem nonempty_stalkComparison_open_arrow_iso\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')\n    (φ : (derivedPullback g').obj K ⟶ K')\n    (c : Coordinates g' K K' φ)\n    (U : X.Opens)\n    (sqU : IsPullback (pullback.snd g' U.ι) (pullback.fst g' U.ι ≫ f') (U.ι ≫ f) g) :\n    let φU :=\n      ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition))))\n        (pullback.snd g' U.ι) U.ι).hom.app K ≫\n      eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)\n        (pullback.condition (f := g') (g := U.ι)).symm) ≫\n      ((Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition))))\n        (pullback.fst g' U.ι) g').inv.app K ≫\n      (derivedPullback (pullback.fst g' U.ι)).map φ\n    ∀ (d : Coordinates (pullback.snd g' U.ι) ((derivedPullback U.ι).obj K)\n        ((derivedPullback (pullback.fst g' U.ι)).obj K') φU)\n      (z : (pullback g' U.ι : Scheme.{u})) (i : ℤ),\n      Nonempty\n        (Arrow.mk ((forget₂ (ModuleCat.{u} (X'.presheaf.stalk (pullback.fst g' U.ι z)))\n            AddCommGrpCat.{u}).map\n              (stalkComparison f f' g g' sq c (pullback.fst g' U.ι z) i)) ≅\n          Arrow.mk ((forget₂ (ModuleCat.{u} ((pullback g' U.ι).presheaf.stalk z))\n            AddCommGrpCat.{u}).map\n              (stalkComparison (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')\n                g (pullback.snd g' U.ι) sqU d z i)))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T111908-L-3057750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T111908-L-3057750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

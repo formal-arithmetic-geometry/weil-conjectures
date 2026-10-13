@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
+import Sheaf.AlgebraicGeometry.SingleComplexOpenStalkConjugacy
 
 /-! # Restriction of the single-complex stalk condition to a source open
 
@@ -75,6 +76,22 @@ theorem singleComplexStalkCondition_open
       (derivedPullback (pullback.fst g' U.ι)).map φ
     SingleComplexBaseChange.StalkCondition (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
       g (pullback.snd g' U.ι) sqU ((derivedPullback U.ι).obj K)
-      ((derivedPullback (pullback.fst g' U.ι)).obj K') φU := by sorry
+      ((derivedPullback (pullback.fst g' U.ι)).obj K') φU := by
+  let c := Classical.choice
+    (SingleComplexBaseChange.nonempty_coordinates.{u, w} g' K K' φ)
+  dsimp only [SingleComplexBaseChange.StalkCondition]
+  intro d z i
+  let e := Classical.choice
+    (SingleComplexBaseChange.nonempty_stalkComparison_open_arrow_iso.{u, w}
+      f f' g g' sq K K' φ c U sqU d z i)
+  have h_original := h_stalk c (pullback.fst g' U.ι z) i
+  let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk (pullback.fst g' U.ι z)))
+    AddCommGrpCat.{u}
+  let FU := forget₂ (ModuleCat.{u} ((pullback g' U.ι).presheaf.stalk z)) AddCommGrpCat.{u}
+  have h_map : IsIso (F.map
+      (SingleComplexBaseChange.stalkComparison f f' g g' sq c
+        (pullback.fst g' U.ι z) i)) := inferInstance
+  have h_restricted := (Arrow.isIso_iff_isIso_of_isIso e.hom).mp h_map
+  exact isIso_of_reflects_iso _ FU
 
 end AlgebraicGeometry
