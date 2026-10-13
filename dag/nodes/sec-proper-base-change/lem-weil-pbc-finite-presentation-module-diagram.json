@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-module-diagram",
+ "kind": "statement",
+ "title": "Descent of a finite module presentation along a given finite-type ring diagram",
+ "statement": "Let $I$ be a nonempty directed preordered set, $B:I\\to\\mathrm{CommRing}$ a ring diagram, and $\\kappa_i:B_i\\to S$ a colimit cocone [def-weil-pbc-category-colimit]. Assume every $B_i$ is a finite-type $\\mathbf Z$-algebra [def-weil-pbc-finite-type-algebra]. Let $M$ be a finitely presented $S$-module (the cokernel of a map between finite free $S$-modules). Then there are a nonempty directed preordered set $J$, a final functor $F:J\\to I$ (restriction along $F$ preserves colimits), an additive-group diagram $D:J\\to\\mathrm{Ab}$, compatible maps $\\nu_j:D_j\\to M$, and $B_{Fj}$-module structures on $D_j$, such that: $M$ with these maps is a colimit of $D$; every $D_j$ is finitely generated [def-weil-finitely-generated-module]; for $i\\le j$, the transition $d_{ji}$ obeys $d_{ji}(yx)=B(F(i\\to j))(y)d_{ji}(x)$; $\\nu_j(yx)=\\kappa_{Fj}(y)\\nu_j(x)$; the canonical maps $B_{Fj}\\otimes_{B_{Fi}}D_i\\to D_j$, $y\\otimes x\\mapsto yd_{ji}(x)$, and $S\\otimes_{B_{Fj}}D_j\\to M$, $y\\otimes x\\mapsto y\\nu_j(x)$, are module isomorphisms [def-weil-pbc-module-tensor-product]. If the rings and indices live in universe $u$ and $M$ in universe $v$, the index set $J$ lives in $u$ and the groups $D_j$ can be chosen in $v$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00QX (lemma-limit-module-essentially-finite-presentation), presentation-matrix paragraph, non-local construction used in Tag 00R1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite free presentation of M; represent each of its finitely many matrix coefficients in the given ring colimit, and move them to a common upper stage i₀. If the matrix is empty choose any index.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the upper tail J above i₀ and its inclusion F. It is nonempty and directed, every index maps to a tail index, and F is fully faithful and final. The ring colimit restricts to this tail.",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each tail stage form the quotient of the finite free module by the image of the transported matrix. Entrywise ring maps carry relations to relations and induce semilinear additive maps, giving D and its cocone ν. These maps respect identities and composition on quotient representatives. Images of the standard basis finitely generate the quotient. To respect the universe v, choose actual small models of the quotients and transport all maps and actions: a finite-type integer algebra is a quotient of a polynomial ring over ℤ in finitely many variables, which is countable; finite powers and their quotients are countable as well, hence small in every universe.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Tensor each presentation with a later stage or with S. Right exactness and the finite-product tensor equivalence identify the resulting presentation with its transported matrix. The quotient isomorphism sends y tensor x to y times the image of x, giving both base-change clauses.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the directed tensor-colimit elementwise theorem at the least tail index, identifying the chosen ring colimit with S. The base-change isomorphisms intertwine the tensor transition maps and D on pure tensors. Transport representatives and eventual-zero statements to D. Equal images of two representatives become equal at a common later stage: first move both to a common stage and then apply the zero criterion to their difference. For any additive cocone to an abelian group X, assign to an element of M the cocone value of a representative. Eventual equality makes this well-defined; common upper stages prove additivity; the cocone laws give factorization and representatives give uniqueness. This is the elementwise module-colimit criterion implemented directly for abelian groups, with no small-index restriction even if u exceeds v.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise",
+    "lem-weil-pbc-filtered-colimit-modules-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00QX (lemma-limit-module-essentially-finite-presentation), presentation-matrix paragraph, non-local construction used in Tag 00R1; omitted details expanded using the cited Mathlib statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented module over a directed colimit of rings descends to a cofinal tail of finitely generated modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented module over a directed colimit of rings descends to a finitely presented module at some stage",
+   "results": "FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; FGModuleCat.instHasColimitsOfShapeOfFinCategory; isFinitelyPresentable; Module.FinitePresentation.exists_fin; ModuleCat.FilteredColimits.M.mk_surjective; ModuleCat.directLimitIsColimit; FGModuleCat.instHasFiniteColimits",
+   "date": "2026-10-13",
+   "verdict": "partial matches; no single declaration states this result"
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*[Dd]esc|[Dd]esc.*FinitePresentation",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/RingTheory/Finiteness/Descent.lean; Mathlib/RingTheory/Finiteness/Descent.lean",
+   "date": "2026-10-13",
+   "verdict": "partial matches; no single declaration states this result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.LimitModuleFinitePresentation",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "blueprint proof of lemma-weil-pbc-h1-constructible-representation, first paragraph: 'Constructible approximation therefore supplies a constructible sheaf F, a map alpha:F to I, and lifts ... satisfying the same equations' (the finite-presentation descent below that approximation); finite-presentation descent, Algebra, Tag 00QX (lemma-limit-module-essentially-finite-presentation), presentation-matrix paragraph, non-local construction used in Tag 00R1",
+   "via": [
+    "lem-weil-pbc-limit-module-finite-presentation",
+    "lem-weil-pbc-openness-of-flatness",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FinitePresentationModuleDiagram",
+  "file": "lean/Sheaf/RingTheory/FinitePresentationModuleDiagram.lean",
+  "declaration": "Module.exists_finitePresentation_module_diagram",
+  "statement": "theorem exists_finitePresentation_module_diagram\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (B : I ⥤ CommRingCat.{u}) (S : Type u) [CommRing S]\n    (κ : B ⟶ (Functor.const I).obj (CommRingCat.of S))\n    (hκ : Nonempty (IsColimit (Cocone.mk (CommRingCat.of S) κ)))\n    (hfinite : ∀ i, Algebra.FiniteType ℤ (B.obj i))\n    (M : Type v) [AddCommGroup M] [Module S M] [Module.FinitePresentation S M] :\n    ∃ (J : Type u) (_ : Preorder J) (_ : Nonempty J) (_ : IsDirected J (· ≤ ·))\n      (F : J ⥤ I) (_ : F.Final)\n      (D : J ⥤ AddCommGrpCat.{v})\n      (ν : D ⟶ (Functor.const J).obj (AddCommGrpCat.of M))\n      (_ : ∀ j, Module (B.obj (F.obj j)) (D.obj j)),\n      Nonempty (IsColimit (Cocone.mk (AddCommGrpCat.of M) ν)) ∧\n      (∀ (i j : J) (h : i ≤ j) (y : B.obj (F.obj i)) (x : D.obj i),\n        (D.map (homOfLE h)).hom (y • x) =\n          (B.map (F.map (homOfLE h))).hom y • (D.map (homOfLE h)).hom x) ∧\n      (∀ j (y : B.obj (F.obj j)) (x : D.obj j),\n        (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) (y • x) =\n          (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app (F.obj j))) y •\n            (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) x) ∧\n      (∀ j, Module.Finite (B.obj (F.obj j)) (D.obj j)) ∧\n      (∀ (i j : J) (h : i ≤ j),\n        letI := (B.map (F.map (homOfLE h))).hom.toAlgebra\n        ∃ e : B.obj (F.obj j) ⊗[B.obj (F.obj i)] D.obj i ≃ₗ[B.obj (F.obj j)] D.obj j,\n          ∀ (y : B.obj (F.obj j)) (x : D.obj i),\n            e (y ⊗ₜ[B.obj (F.obj i)] x) = y • (D.map (homOfLE h)).hom x) ∧\n      (∀ j,\n        letI := (@CommRingCat.Hom.hom _ (CommRingCat.of S) (κ.app (F.obj j))).toAlgebra\n        ∃ e : S ⊗[B.obj (F.obj j)] D.obj j ≃ₗ[S] M,\n          ∀ (y : S) (x : D.obj j),\n            e (y ⊗ₜ[B.obj (F.obj j)] x) =\n              y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app j)) x)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T082402-L-1642824",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T082402-L-1642824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -35,107 +35,44 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-limit-finite-presentation] (Stacks 00R0) to the finitely presented ring map $\\varphi:R\\to S$ [def-weil-pbc-finitely-presented-algebra]. It gives a nonempty directed set $(\\Lambda,\\le)$, ring maps $\\rho_\\lambda:R_\\lambda\\to S_\\lambda$, transition ring maps $r_{\\mu\\lambda}:R_\\lambda\\to R_\\mu$, $s_{\\mu\\lambda}:S_\\lambda\\to S_\\mu$ ($\\lambda\\le\\mu$) compatible with the $\\rho$'s, and ring maps $\\pi_\\lambda:R_\\lambda\\to R$, $\\kappa_\\lambda:S_\\lambda\\to S$ with $\\varphi\\pi_\\lambda=\\kappa_\\lambda\\rho_\\lambda$, such that $(R,(\\pi_\\lambda))$ and $(S,(\\kappa_\\lambda))$ are colimits of the systems $(R_\\lambda)$, $(S_\\lambda)$ in commutative rings, $R_\\lambda$ is of finite type over $\\mathbf Z$, $S_\\lambda$ is of finite type over $R_\\lambda$, $S_\\lambda\\otimes_{R_\\lambda}R_\\mu\\to S_\\mu$ is an isomorphism for $\\lambda\\le\\mu$, and $S_\\lambda\\otimes_{R_\\lambda}R\\to S$, $s\\otimes r\\mapsto\\kappa_\\lambda(s)\\varphi(r)$, is an isomorphism for every $\\lambda$. This is the first sentence of the proof of 00QX ('write $R=\\operatorname{colim}R_\\lambda$ ... $S=\\operatorname{colim}S_\\lambda$'), in its non-local form.",
+   "text": "Apply Algebra.exists_limit_finite_presentation to algebraMap R S. Identify the cocone points with R and S by their supplied equalities. The result gives finite-type ring stages, both ring colimits, compatibility, and transition and final categorical pushouts.",
    "uses": [
-    "lem-weil-pbc-limit-finite-presentation",
-    "def-weil-pbc-finitely-presented-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00QX (lemma-limit-module-essentially-finite-presentation), proof, first two sentences ('As in the proof of Lemma 00QV we may first write R = colim R_lambda ... S = colim S_lambda'), non-local version 00R0"
-   }
-  },
-  {
-   "text": "Choose a presentation of $M$: an $S$-linear map $u:S^{\\oplus a}\\to S^{\\oplus b}$ with cokernel $q:S^{\\oplus b}\\to M$, and let $(u_{kl})\\in\\operatorname{Mat}(b\\times a,S)$ be its matrix ($u(e_l)=\\sum_ku_{kl}e_k$). By clause (1) of [lem-pc-filtered-colimit-commrings-elementwise], applied to the directed set $\\Lambda$ (a small filtered category) and the colimit $(S,(\\kappa_\\lambda))$ of step 1, each of the finitely many entries $u_{kl}$ is $\\kappa_{\\lambda_{kl}}(x_{kl})$ for some $\\lambda_{kl}\\in\\Lambda$ and $x_{kl}\\in S_{\\lambda_{kl}}$. Since $\\Lambda$ is nonempty and directed, there is $\\lambda_0\\in\\Lambda$ with $\\lambda_0\\ge\\lambda_{kl}$ for all $k,l$ (any $\\lambda_0$ if $ab=0$); put $u_{\\lambda_0,kl}=s_{\\lambda_0\\lambda_{kl}}(x_{kl})\\in S_{\\lambda_0}$. Then $\\kappa_{\\lambda_0}(u_{\\lambda_0,kl})=u_{kl}$ for all $k,l$, because $\\kappa_{\\lambda_0}s_{\\lambda_0\\lambda_{kl}}=\\kappa_{\\lambda_{kl}}$. For $\\lambda\\ge\\lambda_0$ let $u_\\lambda:S_\\lambda^{\\oplus a}\\to S_\\lambda^{\\oplus b}$ be the $S_\\lambda$-linear map with matrix $(s_{\\lambda\\lambda_0}(u_{\\lambda_0,kl}))$; then $s_{\\mu\\lambda}$ applied entrywise carries the matrix of $u_\\lambda$ to that of $u_\\mu$ ($\\lambda_0\\le\\lambda\\le\\mu$), and $\\kappa_\\lambda$ carries it to $(u_{kl})$.",
-   "uses": [
-    "lem-pc-filtered-colimit-commrings-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00QX (lemma-limit-module-essentially-finite-presentation), proof, 'Choose a presentation S^s -> S^t -> M -> 0 ... we can find a matrix A_{lambda_2} in Mat(t x s, S_{lambda_2}) which maps to A'"
-   }
-  },
-  {
-   "text": "Put $\\Lambda_0=\\{\\lambda\\in\\Lambda:\\lambda\\ge\\lambda_0\\}$. It is nonempty ($\\lambda_0\\in\\Lambda_0$) and directed (an upper bound in $\\Lambda$ of $\\lambda,\\lambda'\\in\\Lambda_0$ is $\\ge\\lambda_0$), and every $\\lambda\\in\\Lambda$ has some $\\mu\\in\\Lambda_0$ with $\\lambda\\le\\mu$ (an upper bound of $\\lambda,\\lambda_0$). Regard $\\Lambda$ as a category with a morphism $\\lambda\\to\\mu$ iff $\\lambda\\le\\mu$; then $\\mathcal I=\\Lambda^{\\mathrm{op}}$ is cofiltered and its full subcategory $\\mathcal J=\\Lambda_0^{\\mathrm{op}}$ satisfies the hypothesis of clause (1) of [lem-weil-pbc-colimit-initial-full-subcategory] (every object $\\lambda$ of $\\mathcal I$ receives the morphism $\\mu\\to\\lambda$ of $\\mathcal I$ from the $\\mu\\in\\Lambda_0$ just found). That clause, applied to the systems $(R_\\lambda)$ and $(S_\\lambda)$ in commutative rings, shows that $(R,(\\pi_\\lambda)_{\\lambda\\in\\Lambda_0})$ and $(S,(\\kappa_\\lambda)_{\\lambda\\in\\Lambda_0})$ are still colimits [def-weil-pbc-category-colimit] of the restricted systems over $\\Lambda_0$. The other properties of step 1 hold for all $\\lambda\\le\\mu$ in $\\Lambda_0$, being properties of single indices or pairs. From now on the index set is $\\Lambda_0$; this gives the ring part of clauses (1)-(4) of the statement: (2) and the ring isomorphisms of (3) and (4) are those of step 1.",
-   "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-pbc-category-colimit",
     "lem-weil-pbc-limit-finite-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00QX (lemma-limit-module-essentially-finite-presentation), proof, 'For all lambda >= lambda_2 we let M_lambda = ...' (restriction of the system to the indices above lambda_2)"
-   }
+   "elementary": false
   },
   {
-   "text": "For $\\lambda\\in\\Lambda_0$ set $M_\\lambda=\\operatorname{coker}(u_\\lambda)=S_\\lambda^{\\oplus b}/u_\\lambda(S_\\lambda^{\\oplus a})$, with quotient map $q_\\lambda$. It is generated by the $b$ classes $q_\\lambda(e_k)$, so it is a finitely generated $S_\\lambda$-module [def-weil-finitely-generated-module] (clause (2) for $M_\\lambda$). For $\\lambda\\le\\mu$ in $\\Lambda_0$ the additive map $S_\\lambda^{\\oplus b}\\to S_\\mu^{\\oplus b}$, $(y_k)\\mapsto(s_{\\mu\\lambda}(y_k))$, sends $u_\\lambda(z)$ to $u_\\mu(s_{\\mu\\lambda}(z))$ because $s_{\\mu\\lambda}$ is a ring map carrying the matrix of $u_\\lambda$ to that of $u_\\mu$ (step 2); hence it induces an additive map $n_{\\mu\\lambda}:M_\\lambda\\to M_\\mu$ with $n_{\\mu\\lambda}(yx)=s_{\\mu\\lambda}(y)n_{\\mu\\lambda}(x)$, $n_{\\lambda\\lambda}=\\mathrm{id}$, $n_{\\nu\\mu}n_{\\mu\\lambda}=n_{\\nu\\lambda}$ (these hold on $S_\\lambda^{\\oplus b}$, since the $s$'s form a system). Likewise $(y_k)\\mapsto(\\kappa_\\lambda(y_k))$ sends $u_\\lambda(S_\\lambda^{\\oplus a})$ into $u(S^{\\oplus a})$ (step 2: $\\kappa_\\lambda$ carries the matrix of $u_\\lambda$ to $(u_{kl})$), so it induces $\\nu_\\lambda:M_\\lambda\\to M$, $\\nu_\\lambda q_\\lambda(y)=q(\\kappa_\\lambda(y))$, with $\\nu_\\lambda(yx)=\\kappa_\\lambda(y)\\nu_\\lambda(x)$ and $\\nu_\\mu n_{\\mu\\lambda}=\\nu_\\lambda$ (as $\\kappa_\\mu s_{\\mu\\lambda}=\\kappa_\\lambda$). These are the module data of the statement, compatible with the module actions.",
+   "text": "Each B-stage is finite type over ℤ by transitivity through its A-stage. Apply the finite-presentation module-diagram descent theorem to this given B-diagram and its S-colimit, obtaining a final directed reindexing F, the finite module stages, their colimit, semilinearity, and module tensor isomorphisms.",
    "uses": [
-    "def-weil-finitely-generated-module"
+    "lem-weil-pbc-finite-presentation-module-diagram"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00QX (lemma-limit-module-essentially-finite-presentation), proof, 'For all lambda >= lambda_2 we let M_lambda = Coker(S_lambda^s --A_lambda--> S_lambda^t)'"
-   }
+   "elementary": false
   },
   {
-   "text": "Base change of the cokernels. Let $\\sigma:S_\\lambda\\to T$ be either $s_{\\mu\\lambda}:S_\\lambda\\to S_\\mu$ ($\\lambda\\le\\mu$ in $\\Lambda_0$, $T=S_\\mu$, $u_T=u_\\mu$, $q_T=q_\\mu$) or $\\kappa_\\lambda:S_\\lambda\\to S$ ($T=S$, $u_T=u$, $q_T=q$); in both cases $\\sigma$ carries the matrix of $u_\\lambda$ to that of $u_T$ (step 2). By [lem-weil-pbc-tensor-right-exact], tensoring the exact sequence $S_\\lambda^{\\oplus a}\\xrightarrow{u_\\lambda}S_\\lambda^{\\oplus b}\\xrightarrow{q_\\lambda}M_\\lambda\\to0$ with $T$ over $S_\\lambda$ gives an exact sequence $S_\\lambda^{\\oplus a}\\otimes_{S_\\lambda}T\\to S_\\lambda^{\\oplus b}\\otimes_{S_\\lambda}T\\to M_\\lambda\\otimes_{S_\\lambda}T\\to0$. By [lem-weil-pbc-tensor-finite-product] (with all $P_k=S_\\lambda$, $N=T$) followed by the isomorphism $S_\\lambda\\otimes_{S_\\lambda}T\\to T$, $y\\otimes t\\mapsto\\sigma(y)t$, in each coordinate, $\\theta_n:S_\\lambda^{\\oplus n}\\otimes_{S_\\lambda}T\\xrightarrow{\\sim}T^{\\oplus n}$, $(y_k)\\otimes t\\mapsto(\\sigma(y_k)t)$, an isomorphism which is $T$-linear (check on generators). On generators $e_l\\otimes1$ one computes $\\theta_b((u_\\lambda\\otimes1)(e_l\\otimes1))=\\sum_k\\sigma(u_{\\lambda,kl})e_k=u_T(e_l)=u_T(\\theta_a(e_l\\otimes1))$, so $\\theta_b(u_\\lambda\\otimes1)=u_T\\theta_a$ ($T$-linear maps agreeing on generators). Hence $M_\\lambda\\otimes_{S_\\lambda}T\\cong\\operatorname{coker}(u_\\lambda\\otimes1)\\cong\\operatorname{coker}(u_T)$, and the resulting $T$-linear isomorphism $M_\\lambda\\otimes_{S_\\lambda}T\\to\\operatorname{coker}(u_T)$ is $q_\\lambda(y)\\otimes t\\mapsto t\\,q_T(\\sigma(y))$. For $T=S_\\mu$ this is $x\\otimes t\\mapsto t\\,n_{\\mu\\lambda}(x)$, $M_\\lambda\\otimes_{S_\\lambda}S_\\mu\\xrightarrow{\\sim}M_\\mu$ (module part of clause (3)); for $T=S$ it is $x\\otimes t\\mapsto t\\,\\nu_\\lambda(x)$, $M_\\lambda\\otimes_{S_\\lambda}S\\xrightarrow{\\sim}M$ (module part of clause (4)).",
+   "text": "Restrict both ring diagrams and cocones along F; whisker η by F. Finality preserves their colimits. Their finiteness and compatibility follow from the corresponding old stage clauses. Apply the tensor-product pushout universal property and uniqueness of categorical pushouts to the transition and final squares. The comparison ring equivalences take a pure tensor x tensor y to the product of the two images, since x tensor y=(x tensor 1)(1 tensor y). The functor F sends a comparable pair to a comparable pair, so all transition properties apply.",
    "uses": [
-    "lem-weil-pbc-tensor-right-exact",
-    "lem-weil-pbc-tensor-finite-product"
+    "lem-weil-pbc-colimit-initial-full-subcategory"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00QX (lemma-limit-module-essentially-finite-presentation), proof, 'We leave it to the reader to see that this works' (the base change assertions (6) and the 'in particular' of 00R1, written out)"
-   }
+   "elementary": false
   },
   {
-   "text": "$M$ is the colimit of the $M_\\lambda$ (module part of clause (1)). Apply [lem-weil-pbc-directed-colimit-base-change-elementwise] to the directed set $\\Lambda_0$ with least element $0=\\lambda_0$, the rings $A_\\lambda=S_\\lambda$ with transition maps $s_{\\mu\\lambda}$ and colimit $(S,(\\kappa_\\lambda)_{\\lambda\\in\\Lambda_0})$ (step 3), and the $S_{\\lambda_0}$-module $M_0=M_{\\lambda_0}$: every element of $S\\otimes_{S_{\\lambda_0}}M_{\\lambda_0}$ is $(\\kappa_\\lambda\\otimes1)(t)$ for some $\\lambda\\in\\Lambda_0$ and $t\\in S_\\lambda\\otimes_{S_{\\lambda_0}}M_{\\lambda_0}$, and $(\\kappa_\\lambda\\otimes1)(t)=0$ implies $(s_{\\mu\\lambda}\\otimes1)(t)=0$ for some $\\mu\\ge\\lambda$. Let $\\phi_\\lambda:S_\\lambda\\otimes_{S_{\\lambda_0}}M_{\\lambda_0}\\to M_\\lambda$, $y\\otimes x\\mapsto y\\,n_{\\lambda\\lambda_0}(x)$, and $\\phi:S\\otimes_{S_{\\lambda_0}}M_{\\lambda_0}\\to M$, $y\\otimes x\\mapsto y\\,\\nu_{\\lambda_0}(x)$; these are the isomorphisms of step 5 (for the pairs $\\lambda_0\\le\\lambda$ and for $\\kappa_{\\lambda_0}$) composed with the swap of the tensor factors, hence bijective. They intertwine the two systems: $n_{\\mu\\lambda}\\phi_\\lambda=\\phi_\\mu(s_{\\mu\\lambda}\\otimes1)$ and $\\nu_\\lambda\\phi_\\lambda=\\phi(\\kappa_\\lambda\\otimes1)$, checked on generators $y\\otimes x$ using the semilinearity of $n_{\\mu\\lambda},\\nu_\\lambda$ and $n_{\\mu\\lambda}n_{\\lambda\\lambda_0}=n_{\\mu\\lambda_0}$, $\\nu_\\lambda n_{\\lambda\\lambda_0}=\\nu_{\\lambda_0}$ (step 4). Transporting along these bijections: every element of $M$ is $\\nu_\\lambda(x)$ for some $\\lambda\\in\\Lambda_0$, $x\\in M_\\lambda$, and $\\nu_\\lambda(x)=0$ implies $n_{\\mu\\lambda}(x)=0$ for some $\\mu\\ge\\lambda$. These are hypotheses (1), (2) of [lem-weil-pbc-filtered-colimit-modules-criterion] for $\\mathbf Z$-modules (abelian groups) and the cocone $(M,(\\nu_\\lambda))$ (a cocone by step 4), which therefore is a colimit of $(M_\\lambda,n_{\\mu\\lambda})_{\\Lambda_0}$ in abelian groups [def-weil-pbc-category-colimit]; the module actions are compatible by the semilinearity of the $\\nu_\\lambda$ (step 4).",
+   "text": "At each restricted stage apply moduleBaseChangeAcrossPushout to the canonical final ring tensor equivalence and the module tensor equivalence. This gives the final R-linear tensor isomorphism with the prescribed formula. Assemble all clauses with the module-diagram theorem clauses to prove the original existential statement.",
    "uses": [
-    "lem-weil-pbc-directed-colimit-base-change-elementwise",
-    "lem-weil-pbc-filtered-colimit-modules-criterion",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-module-base-change-across-pushout"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00QX (lemma-limit-module-essentially-finite-presentation), proof, 'We leave it to the reader to see that this works' (assertion (1), 'the colimit of the system M_lambda is M', written out)"
-   }
-  },
-  {
-   "text": "The isomorphism $M_\\lambda\\otimes_{R_\\lambda}R\\cong M$ (end of clause (4); the 'in particular' $M=M_\\lambda\\otimes_{R_\\lambda}R$ of 00R1). Fix $\\lambda\\in\\Lambda_0$; $M_\\lambda$ is an $R_\\lambda$-module via $\\rho_\\lambda$ and $R$ an $R_\\lambda$-algebra via $\\pi_\\lambda$. By [lem-weil-pbc-module-tensor-cancel-base-change] (with $R\\to S$ there being $\\rho_\\lambda:R_\\lambda\\to S_\\lambda$, $M=M_\\lambda$, $N=R$), $M_\\lambda\\otimes_{S_\\lambda}(S_\\lambda\\otimes_{R_\\lambda}R)\\cong M_\\lambda\\otimes_{R_\\lambda}R$ via $x\\otimes(y\\otimes r)\\mapsto yx\\otimes r$, with inverse $x\\otimes r\\mapsto x\\otimes(1\\otimes r)$. Compose this inverse with $1\\otimes\\beta_\\lambda$, where $\\beta_\\lambda:S_\\lambda\\otimes_{R_\\lambda}R\\xrightarrow{\\sim}S$, $y\\otimes r\\mapsto\\kappa_\\lambda(y)\\varphi(r)$, is the ring isomorphism of step 1 (an isomorphism of $S_\\lambda$-modules, so $1\\otimes\\beta_\\lambda$ is an isomorphism), and then with the isomorphism $M_\\lambda\\otimes_{S_\\lambda}S\\to M$ of step 5. The composite $M_\\lambda\\otimes_{R_\\lambda}R\\to M$ is $x\\otimes r\\mapsto x\\otimes(1\\otimes r)\\mapsto x\\otimes\\varphi(r)\\mapsto\\varphi(r)\\nu_\\lambda(x)$, a bijective $R$-linear map, i.e. an isomorphism of $R$-modules.",
-   "uses": [
-    "lem-weil-pbc-module-tensor-cancel-base-change",
-    "lem-weil-pbc-limit-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma 00R1, displayed 'In particular, for every lambda we have M = M_lambda tensor_{S_lambda} S = M_lambda tensor_{R_lambda} R'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-limit-finite-presentation",
-  "def-weil-pbc-finitely-presented-algebra",
-  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-finite-presentation-module-diagram",
   "lem-weil-pbc-colimit-initial-full-subcategory",
-  "def-weil-pbc-category-colimit",
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-tensor-right-exact",
-  "lem-weil-pbc-tensor-finite-product",
-  "lem-weil-pbc-directed-colimit-base-change-elementwise",
-  "lem-weil-pbc-filtered-colimit-modules-criterion",
-  "lem-weil-pbc-module-tensor-cancel-base-change"
+  "lem-weil-pbc-module-base-change-across-pushout"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00R1 (lemma-limit-module-finite-presentation), whose proof refers to the proof of Lemma 00QX (lemma-limit-module-essentially-finite-presentation, lines 32427-32482) in its non-local form (ring system from Lemma 00R0); the steps 00QX leaves to the reader ('We leave it to the reader to see that this works') are written out by the worker"
+  "place": "Algebra, Tag 00R1, using the non-local presentation-matrix construction of Tag 00QX; P3 formalization separates module descent from the existing ring-approximation theorem and proves the tensor-cancellation step directly from Mathlib."
  },
  "mathlib_searches": [
   {
@@ -215,5 +152,15 @@
   "group": "H1",
   "result": "fix",
   "note": "FinitePresentation R S / Module.FinitePresentation S M hyps; Λ : Type u preorder nonempty directed; R,S,M colimits as IsColimit cocones (CommRingCat.{u}, AddCommGrpCat.{v}); compat with algebraMap and module actions; FiniteType ℤ, FiniteType A B, Module.Finite; (3),(4) tensor isos fixed on pure tensors"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T082402-L-1642824",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

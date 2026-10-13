@@ -14,7 +14,8 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.FinitePresentation
 import Sheaf.Algebra.LimitFinitePresentation
-import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import Sheaf.RingTheory.FinitePresentationModuleDiagram
+import Sheaf.RingTheory.ModuleBaseChangeAcrossPushout
 
 /-!
 # Finite-presentation approximation of modules
@@ -31,6 +32,25 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 
 namespace Algebra
+
+private theorem tensorEquivOfPushout
+    {A B C E : CommRingCat.{u}} (f : A ⟶ B) (g : A ⟶ C)
+    (k : B ⟶ E) (l : C ⟶ E) (h : CategoryTheory.IsPushout f g k l) :
+    let := f.hom.toAlgebra
+    let := g.hom.toAlgebra
+    ∃ e : B ⊗[A] C ≃+* E,
+      ∀ (x : B) (y : C), e (x ⊗ₜ[A] y) = k.hom x * l.hom y := by
+  let := f.hom.toAlgebra
+  let := g.hom.toAlgebra
+  let ht := CommRingCat.isPushout_tensorProduct A B C
+  let e := (ht.isoIsPushout _ _ h).commRingCatIsoToRingEquiv
+  refine ⟨e, fun x y ↦ ?_⟩
+  have hx : e (x ⊗ₜ[A] (1 : C)) = k.hom x := by
+    exact ConcreteCategory.congr_hom (ht.inl_isoIsPushout_hom _ _ h) x
+  have hy : e ((1 : B) ⊗ₜ[A] y) = l.hom y := by
+    exact ConcreteCategory.congr_hom (ht.inr_isoIsPushout_hom _ _ h) y
+  rw [← hx, ← hy, ← map_mul]
+  simp
 
 /-- Simultaneous finite-type approximation of a finitely presented algebra and module.
 The three colimits are colimit cocones over the directed set `Λ` (in `CommRingCat` and
@@ -118,6 +138,65 @@ theorem limitModuleFinitePresentation
           ∀ (y : R) (x : D.obj i),
             e (y ⊗ₜ[A.obj i] x) =
               algebraMap R S y • (@AddCommGrpCat.Hom.hom _ (AddCommGrpCat.of M) (ν.app i)) x) := by
-  sorry
+  classical
+  have hφ : RingHom.FinitePresentation (algebraMap R S) :=
+    RingHom.finitePresentation_algebraMap.mpr inferInstance
+  obtain ⟨I, hpo, hne, hdir, A, B, η, cR, cS, hR, hS, hcompat, hft,
+      hAft, hpush, hfinal, hcolR, hcolS⟩ :=
+    exists_limit_finite_presentation (algebraMap R S) hφ
+  let := hne
+  let := hdir
+  rcases cR with ⟨r, π⟩
+  rcases cS with ⟨s, κ⟩
+  dsimp only at hR hS
+  subst r
+  subst s
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id] at hcompat hfinal
+  have hBft (i : I) : Algebra.FiniteType ℤ (B.obj i) := by
+    let := (η.app i).hom.toAlgebra
+    have : Algebra.FiniteType (A.obj i) (B.obj i) :=
+      RingHom.finiteType_algebraMap.mp (hft i)
+    have : Algebra.FiniteType ℤ (A.obj i) :=
+      RingHom.finiteType_algebraMap.mp (hAft i)
+    exact Algebra.FiniteType.trans (R := ℤ) (S := A.obj i) (A := B.obj i)
+      inferInstance inferInstance
+  obtain ⟨J, hpoJ, hneJ, hdirJ, F, hF, D, ν, hmod, hcolD, hsem,
+      hν, hDft, hDtrans, hDfinal⟩ :=
+    Module.exists_finitePresentation_module_diagram B S κ hcolS hBft M
+  let := hneJ
+  let := hdirJ
+  let := hF
+  let := hmod
+  let π' := (Cocone.mk (CommRingCat.of R) π).whisker F
+  let κ' := (Cocone.mk (CommRingCat.of S) κ).whisker F
+  refine ⟨J, hpoJ, hneJ, hdirJ, F ⋙ A, F ⋙ B, Functor.whiskerLeft F η,
+    π'.ι, κ'.ι, D, ν, hmod, ?_, ?_, hcolD, ?_, hsem, hν, ?_, ?_, hDft,
+    ?_, hDtrans, ?_, hDfinal, ?_⟩
+  · exact ⟨(Functor.Final.isColimitWhiskerEquiv F _).symm hcolR.some⟩
+  · exact ⟨(Functor.Final.isColimitWhiskerEquiv F _).symm hcolS.some⟩
+  · intro j
+    exact hcompat (F.obj j) trivial trivial
+  · intro j
+    exact RingHom.finiteType_algebraMap.mp (hAft (F.obj j))
+  · intro j
+    let := ((Functor.whiskerLeft F η).app j).hom.toAlgebra
+    exact RingHom.finiteType_algebraMap.mp (hft (F.obj j))
+  · intro i j hij
+    exact tensorEquivOfPushout (η.app (F.obj i)) (A.map (F.map (homOfLE hij)))
+      (B.map (F.map (homOfLE hij))) (η.app (F.obj j))
+      (hpush (F.obj i) (F.obj j) (leOfHom (F.map (homOfLE hij)))).some
+  · intro j
+    exact tensorEquivOfPushout (η.app (F.obj j)) (π.app (F.obj j))
+      (κ.app (F.obj j)) (CommRingCat.ofHom (algebraMap R S))
+      (hfinal (F.obj j) trivial trivial).some
+  · intro j
+    apply TensorProduct.moduleBaseChangeAcrossPushout
+      (A.obj (F.obj j)) (B.obj (F.obj j)) R S (D.obj j) M
+      (η.app (F.obj j)).hom (π.app (F.obj j)).hom (κ.app (F.obj j)).hom
+      (ν.app j).hom
+    · exact tensorEquivOfPushout (η.app (F.obj j)) (π.app (F.obj j))
+        (κ.app (F.obj j)) (CommRingCat.ofHom (algebraMap R S))
+        (hfinal (F.obj j) trivial trivial).some
+    · exact hDfinal j
 
 end Algebra

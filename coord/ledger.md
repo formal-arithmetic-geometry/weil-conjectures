@@ -11683,3 +11683,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:24 L: merged deliver/P2/Sheaf.AlgebraicGeometry.GlobalHomBaseChangeCounitTransport (stage 3; reviewer PASS; first push; landing 20261013T082400-L-1642277 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:24 L: merged deliver/P3/Sheaf.RingTheory.FormalGlueingH0Localization (stage 3; reviewer PASS; first push; landing 20261013T082401-L-1642464 (interface); batch 20261013T082326; modules 2; new nodes 1)
 - 08:24 L: merged deliver/P3/Sheaf.RingTheory.GeometricallyRegularDifferentialFamily (stage 3; reviewer PASS; first push; landing 20261013T082401-L-1642632 (interface); batch 20261013T082326; modules 4; new nodes 3)
+- 08:24 L: merged deliver/P3/Sheaf.RingTheory.LimitModuleFinitePresentation (stage 3; reviewer PASS; first push; landing 20261013T082402-L-1642824 (interface); batch 20261013T082326; modules 3; new nodes 2)
