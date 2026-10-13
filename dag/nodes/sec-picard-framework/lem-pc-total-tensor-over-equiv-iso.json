@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-total-tensor-over-equiv-iso",
+ "kind": "statement",
+ "title": "Total tensor commutes with the open-site equivalence",
+ "statement": "Let X be a scheme and U an open [def-pc-scheme]. Let A,K be arbitrary cochain complexes of modules on the over-U site. Let T be the degreewise functor of Modules.overEquiv U. There is an isomorphism T(Tot(A tensor K)) to Tot(T(A) tensor T(K)), where each total tensor is the actual coproduct total complex [def-pc-tensor-complex-sheaves]. No acyclicity, boundedness, K-flatness, or evaluation map is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DL, 08DJ and 08DQ; ordinary complex constructions"
+ },
+ "proof": [
+  {
+   "text": "Apply the proved exists_localizedOpen_tensor_equivalence to the two terms in each bidegree. Naturality with an identity in one variable gives compatibility with each differential; HomologicalComplex.Hom.isoOfComponents twice constructs the bicomplex isomorphism.",
+   "uses": [
+    "lem-sc-localized-open-tensor-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equivalence is additive and preserves all coproducts. Compose the inverse of HomologicalComplex₂.mapTotalIso with HomologicalComplex₂.total.mapIso of the bicomplex comparison. Totalization incorporates the signs, so this is the displayed chain isomorphism. These are applications of the proved totalization interfaces; no boundedness or homological property is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-localized-open-tensor-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DL, 08DJ and 08DQ; ordinary complex constructions",
+  "description": "Second reader U4 closed the total tensor hole using the proved localized-open tensor comparison and the existing totalization isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A monoidal equivalence preserves K flat complexes and internal Hom complexes",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaves of modules under open site reindexing preserves tensor products of cochain complexes and their total complexes",
+   "results": "HomologicalComplex.HasTensor and HasGoodTensor describe the total tensor. No result supplies its open-site tensor comparison or the ordinary evaluation component equation.",
+   "verdict": "No exact match; use the existing tensor and totalization constructions.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, HomologicalComplex",
+   "results": "Equivalence.mapHomologicalComplex gives the degreewise equivalence but does not compare total tensors or internal Hom.",
+   "verdict": "No exact comparison statement.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv.*tensor|Monoidal.*overEquiv|homComplex.*overEquiv",
+   "results": "InternalHomOverEquiv proves the termwise Hom comparison. OpenRestrictionTensorNatural concerns overFunctor, not overEquiv. TotalComplexMap gives mapTotalIso. No existing theorem states these ordinary comparisons. Blueprint searches tensor equivalence and ordinary evaluation found no matching blueprint statement.",
+   "verdict": "No duplicate; explicit comparison lemma is needed.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafOfModulesEquivOver|mapCochainComplexμIso|mapBifunctorComparison",
+   "results": "Found the unit comparison in Mathlib Topology/Sheaves/Module.lean; subsequent local review found exists_localizedOpen_tensor_equivalence in Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence. It supplies the termwise comparison and naturality. The new total statement is proved by lifting it to the bicomplex and totalizing; no new termwise lemma is added.",
+   "date": "2026-10-14",
+   "verdict": "Existing termwise result used; total statement now proved."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTransport",
+  "date": "2026-10-14",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Total tensor commutes with the open-site equivalence; parent ordinary transport proof steps 1-3",
+   "via": [
+    "lem-pc-ordinary-evaluation-over-transport",
+    "lem-pc-exact-source-kinjective-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TotalTensorOverEquivIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/TotalTensorOverEquivIso.lean",
+  "declaration": "AlgebraicGeometry.exists_totalTensor_overEquiv_iso",
+  "statement": "theorem exists_totalTensor_overEquiv_iso (X : Scheme.{u}) (U : X.Opens)\n    (A K : CochainComplex (localEvaluationModules X U) ℤ) :\n    let L := Equivalence.functor\n      (C := SheafOfModules.{u} (X.ringCatSheaf.over U))\n      (D := SheafOfModules.{u} U.toScheme.ringCatSheaf)\n      (Scheme.Modules.overEquiv U)\n    let T := L.mapHomologicalComplex (.up ℤ)\n    Nonempty (T.obj (CochainComplex.mapBifunctor A K (curriedTensor _)) ≅\n      CochainComplex.mapBifunctor (T.obj A) (T.obj K) (curriedTensor _))",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T181125-L-2608184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T181125-L-2608184",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

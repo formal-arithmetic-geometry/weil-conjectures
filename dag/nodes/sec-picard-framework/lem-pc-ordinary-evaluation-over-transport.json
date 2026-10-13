@@ -20,49 +20,41 @@
  },
  "proof": [
   {
-   "text": "Reindex local tensor pure sections and the unit action along Modules.overEquiv. The inverse reindexing is the inverse map. Preserve the tensor coproducts and the degree-zero unit; additivity identifies the signed total differential. This constructs the chain isomorphism t, not merely a derived comparison.",
+   "text": "Obtain compatible Hom comparisons b, their naturality hb, a dual comparison d, and a total evaluation comparison t from exists_ordinaryEvaluation_over_comparisons. Use its component formula for the specified f.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-ordinary-evaluation-over-comparisons"
    ],
    "elementary": false
   },
   {
-   "text": "Apply internalHom_overEquiv to each pair of terms. Its pre- and postcomposition naturality, together with product preservation, identifies the Hom differentials and gives b. Use the exact inverse to transport acyclicity and quasi-isomorphisms; conjugate Hom(P,-) to get hhom on P'. The tensor comparison in both directions transports K-flatness. The Hom homotopy comparison and the exact inverse transport K-injectivity.",
+   "text": "For any quasi-isomorphism a on the scheme site, pull it back through the exact inverse degreewise equivalence G. Apply hhom to G(a) and map the resulting quasi-isomorphism through the exact functor T. Hom naturality identifies this arrow with Hom(Pprime,T(G(a))); map the counit isomorphisms through Hom(Pprime,-) to identify it with Hom(Pprime,a). Mathlib quasiIso_of_arrow_mk_iso carries the property across both squares. This is completely proved by hom_quasiIso_over_transport.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an acyclic scheme test complex A, its inverse image G(A) is acyclic. K-flatness of the local dual makes Tot(G(A) tensor D) acyclic, and exact T preserves that. The arbitrary-complex total comparison, tensoring the counit T(G(A)) to A, and tensoring d identify it with Tot(A tensor Dprime). ExactAt.of_iso proves acyclicity in each degree. This is completely proved by kFlat_over_transport.",
    "uses": [
-    "lem-sc-internal-hom-over-equiv",
-    "lem-sc-hom-complex-projections",
-    "def-pur-kinjective-complex",
-    "def-pc-kflat-complex"
+    "lem-pc-total-tensor-over-equiv-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Follow t.inverse;T(f);b by every product projection and precede it by every tensor summand inclusion. The first two steps send those inclusions, projections, symmetries, associators and the unit action to their canonical comparisons. The given component equation therefore becomes the identical one on the scheme site. The r+q=0 branch uses the transported single-unit isomorphism; the other branch remains zero.",
-   "uses": [
-    "def-pc-ordinary-evaluation-data",
-    "def-pc-scheme-ordinary-evaluation-formula"
-   ],
-   "elementary": false
+   "text": "The proved source-library instance Functor.preservesKInjectiveComplexes_of_isEquivalence applies to the additive overEquiv functor and proves K-injectivity of T(F). Combine this with the previous conclusions and the compatible component formula.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pc-ordinary-evaluation-data",
-  "def-pc-scheme-ordinary-evaluation-formula",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-kinjective-complex",
-  "lem-sc-hom-complex-projections",
-  "lem-sc-internal-hom-over-equiv",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+  "lem-pc-ordinary-evaluation-over-comparisons",
+  "lem-pc-total-tensor-over-equiv-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "W2",
+  "group": "U4",
   "date": "2026-10-14",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tags 08DL, 08DJ and 08DQ; ordinary complex constructions",
-  "description": "Explicit part of the original node plan; official Stacks pages 08DJ, 08DM and 08DQ read online."
+  "description": "The ordinary comparison construction is isolated from the homological consequences. Hom quasi-isomorphism preservation, K-flat transport from total comparisons, and K-injective transport are complete Lean proofs."
  },
  "mathlib_searches": [
   {
@@ -151,9 +143,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261013T164050-L-1668798",
+  "landing": "20261013T181125-L-2608184",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

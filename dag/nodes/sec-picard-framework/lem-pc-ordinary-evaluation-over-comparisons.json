@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-ordinary-evaluation-over-comparisons",
+ "kind": "statement",
+ "title": "Compatible ordinary Hom, dual and evaluation comparisons",
+ "statement": "Let X be a scheme, U an open [def-pc-scheme], P an arbitrary cochain complex of modules on the over-U site, and T the degreewise Modules.overEquiv U functor. Write Pprime=T(P), Oprime for the scheme single unit, and Dprime=Hom(Pprime,Oprime) [def-pur-hom-complex]. There is a family b(M):T(Hom(P,M)) isomorphic to Hom(Pprime,T(M)), natural in every chain map M to N. There is an isomorphism d:T(Hom(P,O_U[0])) to Dprime. For every complex F there is an isomorphism t:T(Tot(F tensor Hom(P,O_U[0]))) to Tot(T(F) tensor Dprime), chosen so that for every f satisfying [def-pc-ordinary-evaluation-data], t.inverse;T(f);b(F) satisfies [def-pc-scheme-ordinary-evaluation-formula]. No preservation of quasi-isomorphisms, K-flatness or K-injectivity is assumed or asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-hom-complex",
+  "def-pc-ordinary-evaluation-data",
+  "def-pc-scheme-ordinary-evaluation-formula",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DL, 08DJ and 08DQ; ordinary complex constructions"
+ },
+ "proof": [
+  {
+   "text": "Use internalHom_overEquiv on every pair of terms and extend across the Hom product projections. Pre- and postcomposition naturality and additivity identify d_M phi minus (-1)^n phi d_P; this gives b(M) and its naturality. At the single unit compose b with Hom(Pprime,-) of the transported-unit chain isomorphism to get d.",
+   "uses": [
+    "lem-sc-internal-hom-over-equiv",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the total tensor comparison then tensor with d to get t for each F. Precompose with each tensor summand inclusion and postcompose with each Hom projection. If r+q=0, both formulas curry (y,phi,x) mapped to y*phi(x); reindexing commutes with composition, symmetries, associators, the transported single unit and its unit action. Otherwise both sides are zero. Degree-equality isomorphisms are natural. Product and coproduct universal properties prove the component equation for every f, also for zero complexes and the empty open.",
+   "uses": [
+    "lem-pc-total-tensor-over-equiv-iso",
+    "def-pc-ordinary-evaluation-data",
+    "def-pc-scheme-ordinary-evaluation-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ordinary-evaluation-data",
+  "def-pc-scheme-ordinary-evaluation-formula",
+  "lem-pc-total-tensor-over-equiv-iso",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-internal-hom-over-equiv"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U4",
+  "date": "2026-10-14",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DL, 08DJ and 08DQ; ordinary complex constructions",
+  "description": "Explicit ordinary-complex part of the parent proof, retaining its route. Official Stacks Tags 08DL, 08DJ, 08DQ and 06YN read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A monoidal equivalence preserves K flat complexes and internal Hom complexes",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sheaves of modules under open site reindexing preserves tensor products of cochain complexes and their total complexes",
+   "results": "HomologicalComplex.HasTensor and HasGoodTensor describe the total tensor. No result supplies its open-site tensor comparison or the ordinary evaluation component equation.",
+   "verdict": "No exact match; use the existing tensor and totalization constructions.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, HomologicalComplex",
+   "results": "Equivalence.mapHomologicalComplex gives the degreewise equivalence but does not compare total tensors or internal Hom.",
+   "verdict": "No exact comparison statement.",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "overEquiv.*tensor|Monoidal.*overEquiv|homComplex.*overEquiv",
+   "results": "InternalHomOverEquiv proves the termwise Hom comparison. OpenRestrictionTensorNatural concerns overFunctor, not overEquiv. TotalComplexMap gives mapTotalIso. No existing theorem states these ordinary comparisons. Blueprint searches tensor equivalence and ordinary evaluation found no matching blueprint statement.",
+   "verdict": "No duplicate; explicit comparison lemma is needed.",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverTransport",
+  "date": "2026-10-14",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Compatible ordinary Hom, dual and evaluation comparisons; parent ordinary transport proof steps 1-3",
+   "via": [
+    "lem-pc-ordinary-evaluation-over-transport",
+    "lem-pc-exact-source-kinjective-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-open-models",
+    "lem-pc-exact-source-evaluation-local-comparisons",
+    "lem-pc-strictly-perfect-evaluation-local-retraction",
+    "lem-pc-strictly-perfect-kinjective-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-comparisons",
+    "lem-pc-strictly-perfect-evaluation-model",
+    "lem-pc-strictly-perfect-rhom-evaluation-local",
+    "lem-pc-perfect-rhom-evaluation-isomorphisms",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationOverComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEvaluationOverComparisons.lean",
+  "declaration": "AlgebraicGeometry.exists_ordinaryEvaluation_over_comparisons",
+  "statement": "theorem exists_ordinaryEvaluation_over_comparisons (X : Scheme.{u}) (U : X.Opens)\n    (P : CochainComplex (localEvaluationModules X U) ℤ) :\n    let L := Equivalence.functor\n      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))\n      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))\n      (Scheme.Modules.overEquiv U)\n    let T := L.mapHomologicalComplex (.up ℤ)\n    let P' := T.obj P\n    let O' := (HomologicalComplex.single _ (.up ℤ) 0).obj\n      (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))\n    let D' := homComplex (R := U.toScheme.sheaf) P' O'\n    ∃ b : ∀ M : CochainComplex (localEvaluationModules X U) ℤ,\n        T.obj (homComplex (R := X.sheaf.over U) P M) ≅\n          homComplex (R := U.toScheme.sheaf) P' (T.obj M),\n      (∀ (M N : CochainComplex (localEvaluationModules X U) ℤ) (a : M ⟶ N),\n        T.map (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map a) ≫\n            (b N).hom =\n          (b M).hom ≫\n            ((homComplexFunctor (R := U.toScheme.sheaf)).obj (op P')).map (T.map a)) ∧\n      ∃ d : T.obj (localEvaluationDual X U P) ≅ D',\n        ∀ F : CochainComplex (localEvaluationModules X U) ℤ,\n          ∃ t : T.obj (localEvaluationTensor X U P F) ≅\n              pullbackTensorTotal U.toScheme (T.obj F) D',\n            ∀ f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F,\n              IsLocalOrdinaryEvaluation X U P F f →\n                IsSchemeOrdinaryEvaluation U.toScheme P' (T.obj F)\n                  (t.inv ≫ T.map f ≫ (b F).hom)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T181125-L-2608184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261013T181125-L-2608184",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
