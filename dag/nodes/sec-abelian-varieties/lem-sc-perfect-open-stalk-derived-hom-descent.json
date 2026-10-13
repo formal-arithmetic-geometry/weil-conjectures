@@ -1,0 +1,152 @@
+{
+ "id": "lem-sc-perfect-open-stalk-derived-hom-descent",
+ "kind": "statement",
+ "title": "Descent of derived Hom between open strictly perfect stalks",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $x$ a point, and $U$ an affine open containing $x$. Let $P,Q$ be strictly perfect complexes on the localized module-sheaf site over $U$ [def-pc-perfect-complex]. Write $S_U$ for the open module stalk functor at $x$ [def-sc-open-module-stalk-functor]. Given an arrow $t:Q(S_U P)\\to Q(S_U Q)$ in the derived category of modules over the stalk ring [def-pc-derived-category], there are an affine open $V$ containing $x$ with $V\\subseteq U$, derived stalk isomorphisms $c_P:Q(S_V(P|_V))\\cong Q(S_U P)$ and $c_Q:Q(S_V(Q|_V))\\cong Q(S_U Q)$, and a derived arrow $g:Q(P|_V)\\to Q(Q|_V)$ on $V$, whose image under the exact derived open stalk functor, conjugated by its localization factorization isomorphisms, is $c_P\\circ t\\circ c_Q^{-1}$ in diagrammatic order. No chain-map representative or global complex is part of this assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-sc-open-module-stalk-functor",
+  "def-pc-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine full faithfulness; More on Algebra Tag 0BC7 (2); Tags 00CR and 06Z0"
+ },
+ "proof": [
+  {
+   "text": "Finite-free retract terms on the affine open are quasi-coherent. The affine sheaf/module correspondence identifies the bounded complexes P and Q with bounded finite projective section complexes. The open stalk is their scalar extension to the localization at the prime of x.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-sc-open-module-stalk-functor",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Present that localization as the filtered colimit of principal localizations outside the prime. Apply surjectivity of the affine perfect derived Hom comparison to the transported arrow. A colimit element is represented at a principal stage, giving a derived arrow over one principal localization.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-pc-affine-perfect-hom-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The corresponding basic open V is affine, contains x, and is contained in U. Transport the descended arrow through the affine derived equivalence to an arrow g between Q(P restricted to V) and Q(Q restricted to V). Open restriction preserves the stalk, giving cP and cQ. Naturality of the restriction and affine scalar-extension comparisons identifies the conjugated derived stalk image of g with cP.hom followed by t followed by cQ.inv, as stated.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-open-restriction-stalk-extension-iso",
+    "def-sc-open-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-sc-open-module-stalk-functor",
+  "lem-pc-affine-perfect-hom-colimit",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "lem-weil-pbc-localization-colimit-principal-localizations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09RE affine proof, specialized to a stalk localization with Tags 0BC7 (2), 00CR and 06Z0; transport on localized sites spelled out by M3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived morphism between perfect complexes over a stalk extends to an affine neighborhood",
+   "results": "8 hits.  AlgebraicGeometry.exists_lift_of_germInjective; AlgebraicGeometry.stalkMap_injective_of_isAffine; AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion; AlgebraicGeometry.IsAffineOpen.stalkMap_injective; AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE; AlgebraicGeometry.IsAffineOpen.fromSpecStalk; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "openModuleStalkFunctor|stalk.*derived.*[Hh]om|perfect.*[Hh]om.*descent",
+   "results": "0 hits.  ",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms between the stalks of strictly perfect complexes on an affine open descend to a smaller affine neighborhood",
+   "results": "0 hits. service unavailable: Internal Server Error ",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map between bounded complexes of finite projective sheaves at a local ring spreads out to an open neighborhood",
+   "results": "8 hits. Module.basicOpen_subset_freeLocus_iff; ModuleCat.Tilde.exists_const; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; AlgebraicGeometry.exists_lift_of_germInjective_aux; CochainComplex.isKProjective_of_projective; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal; SheafOfModules.IsFiniteType.exists_localGeneratorsData; AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "verdict": "no exact match (independent second reading)",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\"",
+   "results": "12 hits. RingHom.SurjectiveOnStalks; RingHom.surjectiveOnStalks_of_isLocalization; RingEquiv.surjectiveOnStalks; RingHom.surjectiveOnStalks_of_surjective; RingHom.SurjectiveOnStalks.of_comp; RingHom.SurjectiveOnStalks.comp; RingHom.surjectiveOnStalks_iff_of_isLocalHom; RingHom.surjectiveOnStalks_of_exists_div",
+   "verdict": "no exact match (independent second reading)",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*stalk|stalk.*perfect|stalk.*[Dd]erived",
+   "results": "1 hits. Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "verdict": "no exact match (independent second reading)",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectStalkDerivedHomLift",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: descent of a derived stalk morphism between existing perfect models, before choosing a chain-map representative",
+   "via": [
+    "lem-sc-perfect-stalk-derived-hom-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOpenStalkDerivedHomDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_perfect_open_stalk_derived_hom_descent",
+  "statement": "theorem exists_affine_perfect_open_stalk_derived_hom_descent\n    (X : Scheme.{u})\n    [∀ W : X.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W))]\n    (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]\n    (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q)\n    :\n    let SU : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤\n        ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X U ⟨x, hxU⟩\n    letI : SU.PreservesZeroMorphisms :=\n      AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X U ⟨x, hxU⟩\n    ∀ t : DerivedCategory.Q.obj ((SU.mapHomologicalComplex (.up ℤ)).obj P) ⟶\n      DerivedCategory.Q.obj ((SU.mapHomologicalComplex (.up ℤ)).obj Q),\n    ∃ (V : X.Opens) (hxV : x ∈ V) (_hV : IsAffineOpen V) (hVU : V ≤ U),\n      let T := (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hVU : V ⟶ U)).mapHomologicalComplex (.up ℤ)\n      let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V) ⥤\n          ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X V ⟨x, hxV⟩\n      letI : S.PreservesZeroMorphisms :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩\n      letI : S.Additive :=\n        AlgebraicGeometry.openModuleStalkFunctor_additive X V ⟨x, hxV⟩\n      letI : PreservesFiniteLimits S :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteLimits X V ⟨x, hxV⟩\n      letI : PreservesFiniteColimits S :=\n        AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteColimits X V ⟨x, hxV⟩\n      ∃ (cP : DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj (T.obj P)) ≅\n          DerivedCategory.Q.obj\n            ((SU.mapHomologicalComplex (.up ℤ)).obj P))\n        (cQ : DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj (T.obj Q)) ≅\n          DerivedCategory.Q.obj\n            ((SU.mapHomologicalComplex (.up ℤ)).obj Q))\n        (g : DerivedCategory.Q.obj (T.obj P) ⟶ DerivedCategory.Q.obj (T.obj Q)),\n        (S.mapDerivedCategoryFactors.app (T.obj P)).inv ≫\n          S.mapDerivedCategory.map g ≫ (S.mapDerivedCategoryFactors.app (T.obj Q)).hom =\n            cP.hom ≫ t ≫ cQ.inv",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100032-L-2469938",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261013T100032-L-2469938",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

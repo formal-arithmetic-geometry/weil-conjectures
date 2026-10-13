@@ -8,10 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
-import Sheaf.AlgebraicGeometry.AffinePerfectHomColimit
-import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.PerfectOpenStalkDerivedHomDescent
+import Sheaf.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso
 
 /-! # Lifting a derived stalk morphism to a chain map between local perfect models
 
@@ -25,6 +23,87 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
+
+-- Generalizes restriction: no inclusion V ≤ U or geometric origin of T is required.
+private theorem map_strictlyPerfect_of_mapFree
+    (X : Scheme.{u}) (U V : X.Opens)
+    (T : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
+      SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))
+    [T.PreservesZeroMorphisms]
+    (e : ∀ m : ℕ, T.obj (SheafOfModules.free
+        (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin m))) ≅
+      SheafOfModules.free
+        (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin m)))
+    (K : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
+    (hK : IsStrictlyPerfect X U K) :
+    IsStrictlyPerfect X V ((T.mapHomologicalComplex (.up ℤ)).obj K) := by
+  constructor
+  · obtain ⟨a, b, hab⟩ := hK.1
+    exact ⟨a, b, fun n hn ↦ T.map_isZero (hab n hn)⟩
+  · intro n
+    obtain ⟨m, i, r, hir⟩ := hK.2 n
+    refine ⟨m, T.map i ≫ (e m).hom, (e m).inv ≫ T.map r, ?_⟩
+    change (T.map i ≫ (e m).hom) ≫ (e m).inv ≫ T.map r = 𝟙 (T.obj (K.X n))
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← Functor.map_comp, hir]
+    exact T.map_id _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem local_model_stalk_comparison
+    (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (x : X) [HasDerivedCategory.{v} (ModuleCat.{u} (X.presheaf.stalk x))]
+    (U : X.Opens) (hx : x ∈ U)
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
+    (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (P : CochainComplex
+      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)
+    (eP : (SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj
+        (DerivedCategory.Q.obj G) ≅ DerivedCategory.Q.obj P) :
+    let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
+        ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X U ⟨x, hx⟩
+    letI : S.PreservesZeroMorphisms :=
+      AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X U ⟨x, hx⟩
+    Nonempty (DerivedCategory.Q.obj ((S.mapHomologicalComplex (.up ℤ)).obj P) ≅
+      DerivedCategory.Q.obj
+        (((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
+          (.up ℤ)).obj G)) := by
+  let S : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
+      ModuleCat.{u} (X.presheaf.stalk x) := openModuleStalkFunctor X U ⟨x, hx⟩
+  have : S.PreservesZeroMorphisms :=
+    AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X U ⟨x, hx⟩
+  have : S.Additive := AlgebraicGeometry.openModuleStalkFunctor_additive X U ⟨x, hx⟩
+  have : PreservesFiniteLimits S :=
+    AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteLimits X U ⟨x, hx⟩
+  have : PreservesFiniteColimits S :=
+    AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteColimits X U ⟨x, hx⟩
+  let R := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
+  let Gu := (R.mapHomologicalComplex (.up ℤ)).obj G
+  let d := (S.mapDerivedCategoryFactors.app P).symm ≪≫
+    (S.mapDerivedCategory.mapIso eP).symm ≪≫
+    S.mapDerivedCategory.mapIso (R.mapDerivedCategoryFactors.app G) ≪≫
+    S.mapDerivedCategoryFactors.app Gu
+  let ρ := (U.ι.stalkMap ⟨x, hx⟩).hom
+  let A := ModuleCat.restrictScalars ρ
+  let H := RingedSpace.moduleStalkFunctor U.toScheme.toRingedSpace ⟨x, hx⟩
+  let C := ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).mapHomologicalComplex
+    (.up ℤ)).obj G
+  have : (Scheme.Modules.restrictFunctor U.ι).Additive :=
+    Functor.additive_of_iso (Scheme.Modules.restrictFunctorIsoPullback U.ι).symm
+  obtain ⟨c⟩ := nonempty_restriction_stalk_extension_iso U.ι ⟨x, hx⟩ G
+  let eρ := RingEquiv.ofBijective ρ
+    (ConcreteCategory.bijective_of_isIso (U.ι.stalkMap ⟨x, hx⟩))
+  have : A.IsEquivalence := ModuleCat.restrictScalars_isEquivalence_of_ringEquiv eρ
+  let ev := (NatIso.mapHomologicalComplex (Scheme.Modules.overFunctorEquiv U)
+    (.up ℤ)).app G
+  let q : (S.mapHomologicalComplex (.up ℤ)).obj Gu ≅ C :=
+    (A.mapHomologicalComplex (.up ℤ)).mapIso
+      ((H.mapHomologicalComplex (.up ℤ)).mapIso ev) ≪≫
+    ((A.mapHomologicalComplex (.up ℤ)).mapIso c).symm ≪≫
+    ((NatIso.mapHomologicalComplex
+      (asIso (ModuleCat.extendRestrictScalarsAdj ρ).unit) (.up ℤ)).app C).symm
+  exact ⟨d ≪≫ DerivedCategory.Q.mapIso q⟩
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An arbitrary derived stalk morphism lifts to a chain map between strictly perfect
@@ -91,7 +170,44 @@ theorem exists_affine_perfect_stalk_hom_lift
         (f : T.obj P ⟶ T.obj Q),
         DerivedCategory.Q.map
           ((S.mapHomologicalComplex (.up ℤ)).map f) =
-            cG.hom ≫ t ≫ cH.inv := by sorry
+            cG.hom ≫ t ≫ cH.inv := by
+  obtain ⟨a⟩ := local_model_stalk_comparison X x U hxU G P iG
+  obtain ⟨b⟩ := local_model_stalk_comparison X x U hxU H Q iH
+  obtain ⟨V, hxV, hV, hVU, cP, cQ, g, hg⟩ :=
+    exists_affine_perfect_open_stalk_derived_hom_descent
+      X x U hxU hU P Q hP hQ (a.hom ≫ t ≫ b.inv)
+  let R := moduleRings X.toRingedSpace
+  let T := (SheafOfModules.overMap.{u} R (homOfLE hVU : V ⟶ U)).mapHomologicalComplex
+    (.up ℤ)
+  let S : SheafOfModules.{u} (R.over V) ⥤ ModuleCat.{u} (X.presheaf.stalk x) :=
+    openModuleStalkFunctor X V ⟨x, hxV⟩
+  have : S.PreservesZeroMorphisms :=
+    AlgebraicGeometry.openModuleStalkFunctor_preservesZeroMorphisms X V ⟨x, hxV⟩
+  have : S.Additive := AlgebraicGeometry.openModuleStalkFunctor_additive X V ⟨x, hxV⟩
+  have : PreservesFiniteLimits S :=
+    AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteLimits X V ⟨x, hxV⟩
+  have : PreservesFiniteColimits S :=
+    AlgebraicGeometry.openModuleStalkFunctor_preservesFiniteColimits X V ⟨x, hxV⟩
+  let F := SheafOfModules.overMap.{u} R (homOfLE hVU : V ⟶ U)
+  let e := fun m : ℕ ↦ (SheafOfModules.mapFreeIso F (ULift.{u} (Fin m))
+    (SheafOfModules.overMapUnitIso (R := R) (homOfLE hVU)).symm).symm
+  obtain ⟨f, hf⟩ := perfect_affine_map_representative X V hV (T.obj P) (T.obj Q)
+    (map_strictlyPerfect_of_mapFree X U V F e P hP)
+    (map_strictlyPerfect_of_mapFree X U V F e Q hQ) g
+  refine ⟨V, hxV, hV, hVU, cP ≪≫ a, cQ ≪≫ b, f, ?_⟩
+  have hn := S.mapDerivedCategoryFactors.hom.naturality f
+  change S.mapDerivedCategory.map (DerivedCategory.Q.map f) ≫
+      (S.mapDerivedCategoryFactors.app (T.obj Q)).hom =
+    (S.mapDerivedCategoryFactors.app (T.obj P)).hom ≫
+      DerivedCategory.Q.map ((S.mapHomologicalComplex (.up ℤ)).map f) at hn
+  rw [hf] at hn
+  have he : DerivedCategory.Q.map ((S.mapHomologicalComplex (.up ℤ)).map f) =
+      (S.mapDerivedCategoryFactors.app (T.obj P)).inv ≫
+        S.mapDerivedCategory.map g ≫ (S.mapDerivedCategoryFactors.app (T.obj Q)).hom := by
+    rw [hn]
+    simp
+  rw [he, hg]
+  simp only [Iso.trans_hom, Iso.trans_inv, Category.assoc]
 
 end
 end AlgebraicGeometry.Scheme

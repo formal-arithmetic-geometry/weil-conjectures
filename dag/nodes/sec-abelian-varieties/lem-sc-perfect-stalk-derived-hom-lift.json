@@ -44,30 +44,45 @@
  ],
  "proof": [
   {
-   "text": "On an affine chart, finite-free retract presentations give bounded finite projective section complexes. Exact stalk comparisons identify their prime localizations with the stalk complexes. The localization at the prime is a filtered colimit of principal localizations; surjectivity of perfect Hom continuity descends the transported morphism to one principal stage. The affine derived equivalence and the chain-map representative theorem transport this representative back to the sheaf models and give the displayed equality.",
+   "text": "Apply the exact open stalk functor to iG and iH and compose its derived localization factorization with the restriction-stalk-extension complex isomorphism. Restriction of scalars along the invertible stalk ring map cancels extension of scalars by the adjunction unit. This constructs isomorphisms a:Q(S_U P) to Q(G_x) and b:Q(S_U Q) to Q(H_x).",
    "uses": [
-    "def-pc-perfect-complex",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-pc-affine-qcoh-derived-equivalence",
-    "lem-weil-pbc-localization-colimit-principal-localizations",
-    "lem-pc-affine-perfect-hom-colimit",
-    "lem-pc-perfect-affine-map-representative"
+    "def-sc-open-module-stalk-functor",
+    "lem-pc-open-restriction-stalk-extension-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport t to a.hom followed by t followed by b.inv. Apply the open-stalk derived Hom descent theorem to get V, cP, cQ and g in the derived category on V.",
+   "uses": [
+    "lem-sc-perfect-open-stalk-derived-hom-descent"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the proved general functor lemma map_strictlyPerfect_of_mapFree: any zero-morphism-preserving functor with finite-free comparison isomorphisms preserves boundedness and transports the termwise finite-free retractions. Specialize it to restriction using mapFreeIso and overMapUnitIso. Apply perfect_affine_map_representative on V to obtain a chain map f with Q(f)=g.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-perfect-affine-map-representative"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of S.mapDerivedCategoryFactors gives Q(S(f)) as its inverse factor on the source followed by S.mapDerivedCategory(g) followed by its factor on the target. Substitute the descent equation. Choose cG=cP followed by a and cH=cQ followed by b; associativity gives exactly the requested equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-perfect-complex",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-weil-pbc-localization-colimit-principal-localizations",
-  "lem-pc-affine-perfect-hom-colimit",
-  "lem-pc-perfect-affine-map-representative"
+  "def-sc-open-module-stalk-functor",
+  "lem-pc-open-restriction-stalk-extension-iso",
+  "lem-pc-perfect-affine-map-representative",
+  "lem-sc-perfect-open-stalk-derived-hom-descent"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE affine proof, with Tags 0BC7 (2), 00CR and 06Z0"
+  "place": "M3 Lean reduction of Tag 09RE affine lifting route: derived open-stalk descent separated from proved stalk comparisons and chain representatives; repaired duplicate helper by generalizing to arbitrary zero-morphism-preserving functors with finite-free comparisons"
  },
  "mathlib_searches": [
   {
@@ -123,9 +138,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261013T060424-L-584813",
+  "landing": "20261013T100032-L-2469938",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
