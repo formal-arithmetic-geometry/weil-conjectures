@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.Bifunctor
 public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.CategoryTheory.Functor.Currying
+import Mathlib.Tactic.DSimpPercent
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 
 /-!
@@ -38,11 +40,10 @@ abbrev tensorBicomplex (P Q : ChainComplex (ModuleCat.{u} R) ℕ) :
 Source: Stacks Project, Algebra, Tag 00M3, functoriality paragraph.
 (blueprint: def-weil-pbc-tensor-bicomplex) -/
 abbrev tensorBicomplexMap {P P' Q Q' : ChainComplex (ModuleCat.{u} R) ℕ}
-    (a : P ⟶ P') (b : Q ⟶ Q') : tensorBicomplex P Q ⟶ tensorBicomplex P' Q' :=
-  ((Functor.mapBifunctorHomologicalComplex (curriedTensor (ModuleCat.{u} R)) (.down ℕ)
-      (.down ℕ)).map a).app Q ≫
-    ((Functor.mapBifunctorHomologicalComplex (curriedTensor (ModuleCat.{u} R)) (.down ℕ)
-      (.down ℕ)).obj P').map b
+    (a : P ⟶ P') (b : Q ⟶ Q') :=
+  dsimp% only [Functor.uncurry] (Functor.uncurry.obj
+    (Functor.mapBifunctorHomologicalComplex (curriedTensor (ModuleCat.{u} R))
+      (.down ℕ) (.down ℕ))).map (X := (P, Q)) (Y := (P', Q')) (a, b)
 
 /-- The tensor of a chain map with a module map, formed by mapping the chain map
 and then the module map.

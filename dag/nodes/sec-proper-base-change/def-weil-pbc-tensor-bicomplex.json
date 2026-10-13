@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Use Mathlib Functor.mapBifunctorHomologicalComplex with curriedTensor to construct the unsigned bicomplex. Its terms are P_p tensor Q_q, and its two differentials are tensoring the respective differential with the identity. Map the first chain map and then the second using this bifunctor; tensor functoriality gives a_p tensor b_q. Retain mapHomologicalComplex followed by NatTrans.mapHomologicalComplex for chainTensorMap.",
+   "text": "Use Mathlib Functor.mapBifunctorHomologicalComplex with curriedTensor to construct the unsigned bicomplex; tensorBicomplex is only a compatibility abbreviation of its object. Its terms are P_p tensor Q_q, and its two differentials tensor the respective differential with the identity. Use the map of Functor.uncurry.obj applied to this bifunctor for a pair of chain maps (a,b); tensorBicomplexMap is only an abbreviation of this existing Mathlib map, with its return type inferred. Normalize only Functor.uncurry during elaboration with dsimp% so that existing callers retain their differential and map simplification API without any adaptation. The uncurrying map is definitionally the first-variable map followed by the second-variable map, hence its components are a_p tensor b_q. Retain mapHomologicalComplex followed by NatTrans.mapHomologicalComplex for chainTensorMap.",
    "uses": [
     "def-weil-pbc-chain-complex-tensor-module",
     "def-weil-pbc-module-tensor-product"
@@ -28,7 +28,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00M3, proof and functoriality paragraph; canonical implementation via Mathlib.Algebra.Homology.Bifunctor"
+  "place": "Tag 00M3, proof and functoriality paragraph; canonical implementation via Mathlib.Algebra.Homology.Bifunctor and Mathlib.CategoryTheory.Functor.Currying"
  },
  "mathlib_searches": [
   {
@@ -110,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-4d3ad",
-  "group": "N2",
+  "reviewer": "X-89350",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T201804-L-3975120",
+  "landing": "20261013T222408-L-1224751",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target and declaration interfaces, forced adaptations, imports, DAG metadata, report, and axioms satisfy the review requirements."
+  "note": "independent Codex review: Delivered files matched the packet and clone diffs; compilation, direct-importer checks, definitional equality, and permitted axiom checks all passed."
  }
 }
