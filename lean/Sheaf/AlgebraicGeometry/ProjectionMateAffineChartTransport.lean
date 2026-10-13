@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison
+import Sheaf.AlgebraicGeometry.ProjectionMateSchemeIsoTransport
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Derived transport on a fixed affine chart
 
@@ -25,6 +28,10 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- The two comparisons elaborate several independently chosen derived localizations.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived transport on a supplied commuting affine chart square.
 The chart geometry is input; the affine adjunction, comparison and objects are
 constructed together, rather than asserting an implication for arbitrary objects.
@@ -87,6 +94,51 @@ theorem projectionMate_affineChart_transport
         (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)
         ((derivedPullback f).obj M.obj ⊗ L.obj)
         (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫
-          (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))).over V) := by sorry
+          (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))).over V) := by
+  let _ := hZ
+  let _ := hZqs
+  let _ := hg
+  let _ := hgqs
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings Z.toRingedSpace))
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+  obtain ⟨pV, tV, MV, LV, ⟨a⟩⟩ :=
+    exists_derivedProjectionMate_openRestriction_comparison f p t M L V
+      (f ⁻¹ᵁ V).toScheme (f ∣_ V) rfl HEq.rfl
+  obtain ⟨e, q, s, N, E, ⟨b⟩⟩ :=
+    projectionMate_schemeIso_transport (f ⁻¹ᵁ V).toScheme V.toScheme Z (Spec (.of A))
+      (f ∣_ V) g eZ eV hcomm pV tV MV LV
+  refine ⟨q, s, N, E, ?_⟩
+  intro hmate n
+  have := hmate
+  have hlocal := (Arrow.isIso_iff_isIso_of_isIso b.hom).mp
+    (show IsIso (e.functor.map _) from inferInstance)
+  have hrestricted : IsIso ((schemeOpenRestriction Y V).mapDerivedCategory.map
+      (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)
+        ((derivedPullback f).obj M.obj ⊗ L.obj)
+        (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫
+          (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))) :=
+    (Arrow.isIso_iff_isIso_of_isIso a.hom).mpr hlocal
+  have := hrestricted
+  have hhom : IsIso ((schemeOpenRestriction Y V).map
+      ((DerivedCategory.homologyFunctor _ n).map
+        (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)
+          ((derivedPullback f).obj M.obj ⊗ L.obj)
+          (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫
+            (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj))))) :=
+    (NatIso.isIso_map_iff
+      ((schemeOpenRestriction Y V).mapDerivedCategoryHomologyFunctorIso n) _).mpr
+      (by
+        change IsIso ((DerivedCategory.homologyFunctor _ n).map
+          ((schemeOpenRestriction Y V).mapDerivedCategory.map _))
+        infer_instance)
+  have : IsIso ((Scheme.Modules.overEquiv V).functor.map
+      (((DerivedCategory.homologyFunctor _ n).map
+        (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)
+          ((derivedPullback f).obj M.obj ⊗ L.obj)
+          (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫
+            (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))).over V)) := hhom
+  exact isIso_of_reflects_iso _ (Scheme.Modules.overEquiv V).functor
 
 end AlgebraicGeometry

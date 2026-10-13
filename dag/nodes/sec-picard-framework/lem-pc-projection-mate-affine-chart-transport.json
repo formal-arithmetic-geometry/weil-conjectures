@@ -16,40 +16,41 @@
  ],
  "proof": [
   {
-   "text": "Apply the existing open-restriction arrow comparison to the actual inverse-image open. It constructs a local adjunction, comparison, objects and an arrow isomorphism identifying the restricted original mate with their mate.",
+   "text": "Apply exists_derivedProjectionMate_openRestriction_comparison to Z0 = (f inverse image V).toScheme and f restricted to V, with the two identity witnesses. Obtain the local pV,tV,MV,LV and arrow isomorphism a from restriction of the original mate to the local mate.",
    "uses": [
     "lem-pc-derived-projection-mate-open-restriction-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "/-- Derived transport on a supplied commuting affine chart square.\nThe chart geometry is input; the affine adjunction, comparison and objects are\nconstructed together, rather than asserting an implication for arbitrary objects.\nSource: Stacks Project, Tag 08EU, first sentence; the parent node steps 2--3.\n(blueprint: lem-pc-projection-mate-affine-chart-transport).\n\nProof: first apply exists_derivedProjectionMate_openRestriction_comparison to\nthe actual inverse-image open and restricted morphism. It constructs a local\nadjunction, tensor comparison and restricted quasi-coherent objects, together with\nan arrow isomorphism from restriction of the supplied p,t mate to their mate.\nIts construction uses exact restrictions as reflective localizations. Pullback,\ntensor and direct image commute naturally with restriction; consequently they\npreserve the inverted maps. Descend p's unit and counit, retaining their triangles.\nDescend t and its inverse through the product localization. The localized counit\nformula and naturality of t identify the original restricted mate with the local\nmate, conjugated by invertible source and target comparisons.\nNext pushforward along eV and eZ and their inverses gives exact module equivalences.\nDerive them and compose with canonical equivalences between the chosen and standard\nlocalizations. K-flat computations and derived-functor universal properties identify\ntensor, pullback and direct image after transport; the commuting square identifies\nthe transported restricted morphism with g. Conjugate the local adjunction and tensor\ncomparison to obtain q and s, and transport the two objects to obtain N and E.\nExact equivalences along scheme isomorphisms preserve quasi-coherent cohomology.\nExpanding homEquiv in terms of unit and counit shows that the transported mate is\nconjugate to the q,s mate. Thus invertibility of the latter implies invertibility\nof the original restricted mate. Apply homology in each degree. Exact restriction\ncommutes naturally with homology, and the over equivalence reflects isomorphisms,\nso each original homology map restricted as an over-site morphism is invertible.\nEmpty opens and unbounded complexes are covered by the same constructions. No\nprojection-formula invertibility is used to obtain the chart data. -/\n",
+   "text": "Apply the scheme-isomorphism projection-mate arrow transport to pV,tV,MV,LV and the given commuting square eZ,eV. It supplies a derived equivalence e, affine q,s,N,E, and an arrow isomorphism b from e applied to the affine mate to the local mate.",
    "uses": [
-    "def-pc-derived-category",
-    "def-pc-scheme-derived-tensor-structure",
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image",
-    "lem-pc-derived-open-restriction-qcoh-iff",
-    "lem-pc-scheme-iso-derived-localizations",
-    "lem-pc-derived-localization-tensor-comparison"
+    "lem-pc-projection-mate-scheme-iso-transport"
    ],
    "elementary": false
+  },
+  {
+   "text": "If the affine mate is invertible, its image under e.functor is invertible. Arrow.isIso_iff_isIso_of_isIso applied to b.hom makes the local mate invertible, and the same lemma applied to a.hom makes the original restricted derived mate invertible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each integer n use schemeOpenRestriction.mapDerivedCategoryHomologyFunctorIso and NatIso.isIso_map_iff to transfer invertibility to schemeOpenRestriction applied to the original homology map. By the definition of schemeOpenRestriction this is overEquiv.functor applied to the over morphism. Reflect invertibility through overEquiv.functor.",
+   "uses": [
+    "def-pc-derived-open-restriction-maps"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-derived-projection-mate-open-restriction-comparison",
-  "def-pc-derived-category",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-pc-derived-pullback",
-  "def-pc-derived-direct-image",
-  "lem-pc-derived-open-restriction-qcoh-iff",
-  "lem-pc-scheme-iso-derived-localizations",
-  "lem-pc-derived-localization-tensor-comparison"
+  "lem-pc-projection-mate-scheme-iso-transport",
+  "def-pc-derived-open-restriction-maps"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/08EU",
-  "place": "Parent certificate steps 2--3, using the existing open comparison and conjugation by chart/localization equivalences"
+  "place": "First sentence of the proof, expanded into open arrow comparison, scheme-isomorphism arrow transport, and exact restriction/homology compatibility; T3 Lean reduction."
  },
  "mathlib_searches": [
   {
@@ -129,9 +130,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V4",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261013T132737-L-4152442",
+  "landing": "20261013T140827-L-316716",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
