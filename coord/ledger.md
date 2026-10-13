@@ -13233,3 +13233,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:15 L: merged deliver/R4/Sheaf.AlgebraicGeometry.FinitePresentationOverlapPairSingleStage (stage 3; reviewer PASS; first push; landing 20261013T171514-L-1982296 (interface); batch 20261013T171508; modules 2; new nodes 1)
 - 17:15 L: merged deliver/R4/Sheaf.AlgebraicGeometry.Morphisms.SectionFiniteEtaleGenericSplit (stage 3; reviewer PASS; first push; landing 20261013T171515-L-1982532 (proof); batch 20261013T171508; modules 1; new nodes 0)
 - 17:15 L: merged deliver/S4/Sheaf.Algebra.Homology.AffineLocalizedTensorStalkSquare (stage 3; reviewer PASS; first push; landing 20261013T171515-L-1982714 (interface); batch 20261013T171508; modules 3; new nodes 2)
+- 17:15 L: merged deliver/T4/Sheaf.RingTheory.PrincipalCokernelProjectiveDescent (stage 3; reviewer PASS; first push; landing 20261013T171516-L-1982904 (proof); batch 20261013T171508; modules 1; new nodes 0)

@@ -2,6 +2,8 @@ module
 
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.Module.FinitePresentation
+import Mathlib.RingTheory.Flat.Localization
+import Mathlib.RingTheory.Flat.EquationalCriterion
 
 /-! # Descent of injectivity and projectivity from principal neighborhoods
 
@@ -44,6 +46,59 @@ theorem injective_projective_cokernel_of_principal_cover
       Module.Projective (Localization.Away s)
         (TensorProduct R (Localization.Away s) N ⧸
           LinearMap.range (f.baseChange (Localization.Away s)))) :
-    Function.Injective f ∧ Module.Projective R (N ⧸ LinearMap.range f) := by sorry
+    Function.Injective f ∧ Module.Projective R (N ⧸ LinearMap.range f) := by
+  constructor
+  · let S : Set R := {s | Function.Injective (f.baseChange (Localization.Away s))}
+    have hS : Ideal.span S = ⊤ := by
+      by_contra hne
+      obtain ⟨p, hp, hle⟩ := Ideal.exists_le_maximal (Ideal.span S) hne
+      let : p.IsMaximal := hp
+      obtain ⟨s, hs, hinj, _⟩ := h p
+      exact hs (hle (Ideal.subset_span hinj))
+    intro x y hxy
+    apply Module.eq_of_isLocalized_span S hS
+      (fun s : S ↦ TensorProduct R (Localization.Away s.1) M)
+      (fun s : S ↦ TensorProduct.mk R (Localization.Away s.1) M 1) x y
+    intro s
+    apply s.2
+    change f.baseChange (Localization.Away s.1) (1 ⊗ₜ[R] x) =
+      f.baseChange (Localization.Away s.1) (1 ⊗ₜ[R] y)
+    simpa only [LinearMap.baseChange_tmul] using
+      congrArg (fun z ↦ TensorProduct.tmul R (1 : Localization.Away s.1) z) hxy
+  · let Q := N ⧸ LinearMap.range f
+    have : Module.FinitePresentation R Q :=
+      Module.finitePresentation_of_surjective (LinearMap.range f).mkQ
+        (Submodule.mkQ_surjective _) (by
+          rw [Submodule.ker_mkQ]
+          exact Submodule.fg_range f)
+    let S : Set R := {s | Module.Projective (Localization.Away s)
+      (TensorProduct R (Localization.Away s) N ⧸ LinearMap.range
+        (f.baseChange (Localization.Away s)))}
+    have hS : Ideal.span S = ⊤ := by
+      by_contra hne
+      obtain ⟨p, hp, hle⟩ := Ideal.exists_le_maximal (Ideal.span S) hne
+      let : p.IsMaximal := hp
+      obtain ⟨s, hs, _, hproj⟩ := h p
+      exact hs (hle (Ideal.subset_span hproj))
+    have : Module.Flat R Q := by
+      apply Module.flat_of_isLocalized_span (R := R) R Q S hS
+        (fun s : S ↦ TensorProduct R (Localization.Away s.1) Q)
+        (fun s : S ↦ TensorProduct.mk R (Localization.Away s.1) Q 1)
+      intro s
+      let A := Localization.Away s.1
+      let C := TensorProduct R A N ⧸ LinearMap.range (f.baseChange A)
+      have : Module.Projective A C := s.2
+      have : Module.Flat A C := Module.Flat.of_projective
+      have : Module.Flat R C :=
+        (Module.flat_iff_of_isLocalization A (Submonoid.powers s.1) C).mp inferInstance
+      let e₀ := lTensor.equiv A
+        (f.exact_map_mkQ_range) (Submodule.mkQ_surjective (LinearMap.range f))
+      have hr : (LinearMap.range (f.baseChange A)).restrictScalars R =
+          LinearMap.range (f.lTensor A) := rfl
+      let e : C ≃ₗ[R] TensorProduct R A Q :=
+        (Submodule.Quotient.restrictScalarsEquiv R (LinearMap.range (f.baseChange A))).symm
+          ≪≫ₗ Submodule.quotEquivOfEq _ _ hr ≪≫ₗ e₀
+      exact Module.Flat.of_linearEquiv e.symm
+    exact Module.Flat.projective_of_finitePresentation
 
 end Module
