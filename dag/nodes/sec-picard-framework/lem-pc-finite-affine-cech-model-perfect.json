@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-finite-affine-cech-model-perfect",
+ "kind": "statement",
+ "title": "Perfection of a specified finite affine Cech complex",
+ "statement": "Let $f:X\\to T$ be proper, locally of finite presentation and quasi-compact, and let $F$ be a finitely presented $\\mathcal O_X$-module flat over $f$ [def-pc-scheme, def-pc-morphism-conventions]. Assume injective resolutions in $X.\\mathrm{Modules}$. Fix an affine open $U\\subseteq T$ and the supplied derived localization of $\\mathcal O_U$-modules and its localized open sites [def-pc-derived-category]. For any finite affine covering $V:\\operatorname{Fin}(r)\\to (f^{-1}U).\\mathrm{Opens}$, the derived image of the explicit complex $C(f|_U,F|_{f^{-1}U},V)$ [def-pc-finite-affine-cech-model] is perfect on $U$ [def-pc-perfect-complex]. No existence of a complex or base-change comparison is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 01XB, 01XD and 01FK (derived affine Cech comparison); 0B91(2) and proof of 0A1H (proper perfect direct image)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-pc-finite-affine-cech-model",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Restrict f and F to the inverse image of U and identify the affine U with Spec Gamma(U,O). Base change preserves properness, finite presentation and relative flatness; finite presentation of F gives quasi-coherence. Apply lem-pc-cech-resolution to the finite affine cover V of this separated quasi-compact morphism: its augmented sheaf resolution is a quasi-isomorphism, its direct-image terms are acyclic, and applying direct image computes the derived direct image of the restricted F. This uses a derived augmentation comparison, rather than inferring a derived isomorphism from abstract cohomology isomorphisms.",
+   "uses": [
+    "lem-pc-cech-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The increasing-tuple comparison identifies that resolution with the explicitly constructed alternating section complex. Associate sheaves and transport by the canonical affine chart, including its specified scalar restriction. Thus the derived image of finiteAffineCechModel is isomorphic to the restricted derived direct image. This is a chain-level augmentation comparison, not an inference from unrelated isomorphisms of cohomology objects.",
+   "uses": [
+    "lem-pc-alternating-cech-computes",
+    "def-pc-finite-affine-cech-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply proper perfect direct image, Tag 0B91(2), to the restricted module. Its Noetherian approximation proof 0A1H descends the proper finitely presented morphism and the finitely presented relatively flat module, applies proper coherence and finite Tor dimension at the Noetherian stage, and pulls the perfect object back. Compose each local strictly perfect comparison with the restriction of the preceding derived isomorphism to obtain perfection of the specified model. The zero complex treats empty inverse image and the empty covering; use exactly the supplied localization and open-localization family.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-affine-cech-model",
+  "def-pc-perfect-complex",
+  "lem-pc-alternating-cech-computes",
+  "lem-pc-cech-resolution",
+  "lem-pc-rf-perfect-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 01XB, 01XD and 01FK (derived affine Cech comparison); 0B91(2) and proof of 0A1H (proper perfect direct image)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite affine Cech complex of a proper relatively flat finitely presented sheaf represents a perfect object in the derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite affine Cech complex of a relatively flat finitely presented sheaf over a proper morphism represents a perfect derived object",
+   "results": "8 unrelated hits: affine transition limit section vanishing, DerivedCategory.exists_iso_Q_obj_of_isGE/LE, their IsGE/LE instances, and CochainComplex.IsKProjective",
+   "date": "2026-10-13",
+   "verdict": "No statement establishing perfection of the specified affine Cech model"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsPerfect",
+   "results": "0 hits; unknown identifier (project notion not indexed)",
+   "date": "2026-10-13",
+   "verdict": "No indexed match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteAffineCechModel.*[Pp]erfect|[Pp]erfect.*finiteAffineCechModel; perfect.*[Cc]ech|[Cc]ech.*perfect",
+   "results": "No matching result in project roots or Mathlib algebraic geometry and homology; blueprint_refs search finite Cech perfect returned 0 blueprint nodes",
+   "date": "2026-10-13",
+   "verdict": "No existing theorem for the fixed explicit model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatAffineCechPerfectModel",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), perfection of the bounded affine Cech model before replacing it by finite projective terms",
+   "via": [
+    "lem-pc-proper-flat-affine-cech-perfect-model",
+    "lem-pc-proper-flat-bounded-presentation-comparison-core",
+    "lem-pc-proper-flat-bounded-presentation-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteAffineCechModelPerfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteAffineCechModelPerfect.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteAffineCechModel_perfect",
+  "statement": "theorem finiteAffineCechModel_perfect {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules) [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f] [HasInjectiveResolutions X.Modules] [F.IsFinitePresentation] (hF : F.IsFlatOver f) (U : T.Opens) (hU : IsAffine U.toScheme) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ W : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over W))] {r : ℕ} (V : Fin r → (f ⁻¹ᵁ U).toScheme.Opens) (hV : ∀ i, IsAffineOpen (V i)) (hcover : iSup V = ⊤) : U.toScheme.IsPerfect ((DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))).obj (finiteAffineCechModel (f ∣_ U) (F.restrict (f ⁻¹ᵁ U).ι) V))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T022428-L-3218738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261013T022428-L-3218738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

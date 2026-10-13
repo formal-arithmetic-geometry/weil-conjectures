@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
+import Sheaf.AlgebraicGeometry.FiniteAffineCechModelFlatOver
+import Sheaf.AlgebraicGeometry.FiniteAffineCechModelComparison
+import Sheaf.AlgebraicGeometry.FiniteAffineCechModelPerfect
+
 /-! # A perfect nonnegative flat cohomology model on a specified affine open -/
 
 @[expose] public section
@@ -67,6 +71,44 @@ theorem exists_proper_flat_affine_cech_perfect_model
       ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj D).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by sorry
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by
+  classical
+  have : IsAffine U.toScheme := hU
+  have hUopen : IsAffineOpen U := hU
+  let Y := (f ⁻¹ᵁ U).toScheme
+  have : CompactSpace Y :=
+    isCompact_iff_compactSpace.mp (f.isCompact_preimage hUopen.isCompact)
+  let cover := Y.affineCover.finiteSubcover
+  let r := Fintype.card cover.I₀
+  let index : Fin r ≃ cover.I₀ := (Fintype.equivFin cover.I₀).symm
+  let V : Fin r → Y.Opens := fun i ↦ (cover.f (index i)).opensRange
+  have hcover : iSup V = ⊤ := by
+    simpa [V] using (index.iSup_comp (g := fun i ↦ (cover.f i).opensRange)).trans
+      cover.iSup_opensRange
+  have hV : ∀ i, IsAffineOpen (V i) := fun i ↦
+    isAffineOpen_opensRange (cover.f (index i))
+  let G := F.restrict (f ⁻¹ᵁ U).ι
+  let C := finiteAffineCechModel (f ∣_ U) G V
+  have hflat : G.IsFlatOver (f ∣_ U) := by
+    intro V0 U0 e
+    let V1 : T.affineOpens := ⟨U.ι ''ᵁ V0.1, V0.2.image_of_isOpenImmersion U.ι⟩
+    let U1 : X.affineOpens :=
+      ⟨(f ⁻¹ᵁ U).ι ''ᵁ U0.1, U0.2.image_of_isOpenImmersion (f ⁻¹ᵁ U).ι⟩
+    have e1 : U1.1 ≤ f ⁻¹ᵁ V1.1 :=
+      ((f ⁻¹ᵁ U).ι.image_mono e).trans (image_morphismRestrict_preimage f U V0.1).le
+    have hh := hF V1 U1 e1
+    rw [morphismRestrict_appLE]
+    convert hh using 1 <;> try rfl
+    ext a m
+    change (F.smul (((f ⁻¹ᵁ U).ι.appIso U0.1).inv.hom
+      ((f.appLE V1.1 U1.1 e1).hom a))).hom m =
+        (F.smul ((f.appLE V1.1 U1.1 e1).hom a)).hom m
+    rw [Scheme.Opens.ι_appIso]
+    rfl
+  refine ⟨C, r, finiteAffineCechModel_ge _ _ _, finiteAffineCechModel_le _ _ _,
+    finiteAffineCechModel_flatOver _ _ hflat V hV,
+    finiteAffineCechModel_quasicoherent _ _ _, ?_, ?_⟩
+  · exact finiteAffineCechModel_perfect f F hF U hU V hV hcover
+  · exact finiteAffineCechModel_comparison f F U hU V hV hcover
 
 end AlgebraicGeometry.Scheme.Modules
