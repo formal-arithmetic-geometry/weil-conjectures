@@ -1,0 +1,110 @@
+{
+ "id": "lem-sbc-etale-abelian-restriction-injectives",
+ "kind": "statement",
+ "title": "Etale inverse image preserves injective abelian sheaves",
+ "statement": "For any etale morphism v:W → X of schemes [def-pc-scheme] and any injective abelian sheaf I on the small etale site of X [def-weil-pbc-etale-site], the inverse image v*I [def-weil-pbc-inverse-image] is injective on W. The coefficients are AddCommGrpCat, not a separately chosen category of module sheaves.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean",
+  "place": "injective_upperStar_obj_of_etale_addCommGrp, lines 45–74; exact left adjoint to localization restriction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved injective_upperStar_obj_of_etale_addCommGrp. Its proof constructs the left adjoint by left Kan extension along the localization functor followed by sheafification. The source theorem SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian gives left exactness of this Kan extension for abelian groups; inclusion of sheaves and sheafification preserve finite limits. The localization restriction comparison transports the sheaf adjunction to v*. By the exact-left-adjoint criterion, this right adjoint preserves injectives. The declaration is already proved in the source library and contains no sorry.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-sheafification",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification",
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "proof_origin": {
+  "by": "worker S2, attachment of existing proved declaration",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Sites/TorsionAcyclic.lean",
+  "place": "injective_upperStar_obj_of_etale_addCommGrp"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image along an etale morphism preserves injective sheaves of abelian groups",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along an etale morphism preserves injective sheaves of abelian groups",
+   "results": "Eight unrelated locally-injective sheaf/Yoneda results. Read the source library and found the exact abelian-coefficient theorem in TorsionAcyclic.",
+   "date": "2026-10-14",
+   "verdict": "Exact existing source-library declaration; no new Lean declaration needed"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*upperStar|upperStar.*injective",
+   "results": "No Mathlib matches. Local rg finds injective_upperStar_obj_of_etale_addCommGrp at TorsionAcyclic.lean:45. Blueprint search finds the module-coefficient analogue lem-weil-pbc-etale-restriction-injectives, whose signature does not apply to abelian sheaves.",
+   "date": "2026-10-14",
+   "verdict": "Reuse existing abelian specialization, rather than the module-coefficient analogue"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CyclicDerivedHomComparisonBijective",
+  "date": "2026-10-14",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-presheaf",
+   "place": "Identification of restricted cohomology with derived evaluation: restriction of injective abelian sheaves to an etale object",
+   "via": [
+    "lem-sbc-abelian-representable-cohomology-map-bijective",
+    "lem-sbc-cyclic-derived-hom-cohomology-comparison",
+    "lem-sbc-cyclic-higher-direct-image-local-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic",
+  "declaration": "AlgebraicGeometry.Etale.injective_upperStar_obj_of_etale_addCommGrp",
+  "statement": "theorem injective_upperStar_obj_of_etale_addCommGrp (v : W ⟶ X) [AlgebraicGeometry.Etale v] (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) [Injective I] : Injective ((v)^*[AddCommGrpCat.{u + 1}].obj I)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T222413-L-1226714",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261013T222413-L-1226714",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
