@@ -15,27 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Use beta to identify the pullback of the torsor with a finite etale cover of D(f). At each generic point of V(f), regularity and the regular quotient give a DVR local ring. The stabilizer of a connected generic component is its Galois group. The ramification index and residue degree divide its order by the Galois degree formula, hence divide the invertible order of G. The inseparable residue degree is a residue-characteristic power, hence one. The cover is tame in codimension one.",
-   "uses": [],
+   "text": "Apply regular_divisor_root_splitting to the original torsor. It supplies a pointed affine etale neighborhood with the image g of f and a punctured n-th root cover splitting the torsor.",
+   "uses": [
+    "lem-sbc-regular-divisor-galois-root-splitting"
+   ],
    "elementary": false
   },
   {
-   "text": "At y on V(f) pass to the strict henselization. Apply the prescribed-equation construction in the proof of Abhyankar's lemma for a regular divisor: adjoin roots of this f, kill the ramification, extend the unramified cover by purity and split it. Each intermediate field is a root extension of f. Normality identifies its punctured algebra with the corresponding punctured root algebra. For the component exponent n, etaleness gives invertibility in the principal localization and tameness gives invertibility at the height-one prime (f). Unique factorization in the regular local ring then makes n a unit in the strictly henselian base. Descend the finitely presented isomorphisms and unit exponents to an affine etale neighborhood psi. The resulting equation is g=psi^#(f), with no replacement by an unrelated equation.",
+   "text": "Factor the pulled-back torsor projection through D(g) using beta and the open immersion lifting property. Transport f in y to g in z.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Etale ascent preserves regularity of S, etale base change preserves regularity of S/(g), and flatness preserves the injectivity of multiplication by g. Enumerate the finite components by Fin m. The spectrum of the product of full root algebras has basic open D(g) equal to the union of the punctured covers. Pullback pasting gives gamma and the structural equality over Spec S. If the cover is empty, use m=0; the divisor-point hypothesis excludes unit f and the zero ring.",
-   "uses": [],
+   "text": "Apply root_split_cover_prescribed_cyclic_charts to the displayed root splitting. Compose the two pointed etale neighborhoods and paste the pullbacks. Use full faithfulness of Spec to identify the prescribed equation with the image of f under the composite.",
+   "uses": [
+    "lem-sbc-root-split-cover-prescribed-cyclic-charts"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-regular-divisor-galois-root-splitting",
+  "lem-sbc-root-split-cover-prescribed-cyclic-charts"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "N1",
+  "by": "G2",
   "document": "Stacks Project",
-  "place": "Tags 09EB (lemma-galois-conclusion) and 0EYG (lemma-abhyankar-one-divisor), strict henselization and descent paragraphs; https://stacks.math.columbia.edu/tag/0EYG"
+  "place": "Tag 0EYG, root splitting followed by intermediate-root classification and descent"
  },
  "mathlib_searches": [
   {
@@ -140,9 +147,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T111905-L-3056913",
+  "landing": "20261013T123204-L-3676463",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

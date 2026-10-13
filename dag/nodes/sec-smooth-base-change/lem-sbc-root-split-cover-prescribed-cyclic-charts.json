@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-root-split-cover-prescribed-cyclic-charts",
+ "kind": "statement",
+ "title": "Prescribed-equation cyclic charts of a root-split cover",
+ "statement": "Let R be a commutative regular ring [def-weil-regular-scheme], g a nonzerodivisor with regular R/(g), n a positive invertible integer, and y a prime containing g. For schemes [def-weil-pbc-scheme-conventions], let p:Y → Spec R factor through D(g). Suppose its pullback [def-pc-fibre-product] to the punctured n-th root cover of g is a finite disjoint union of d copies of that punctured root cover, with the given isomorphism commuting with the projections. Then after a pointed affine etale neighborhood psi:Spec S → Spec R of y, put h=psi#(g). The pullback of Y is the punctured spectrum of a finite product of S[T]/(T^e-h), with positive unit exponents e, and its isomorphism commutes with the base projections. S and S/(h) are regular, and h is a nonzerodivisor. Empty products are allowed. No group, torsor or ramification hypothesis is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-regular-scheme",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, intermediate-root and descent paragraphs; Tags 02LA and 02VN"
+ },
+ "proof": [
+  {
+   "text": "The positive unit n makes its punctured root cover finite etale and faithfully flat over D(g). Descend finiteness and etaleness of the factorization of p from the supplied splitting.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "At the strict henselization at y, the image of g is prime and the n-th root ring is regular local and strictly henselian. Roots of unity identify its punctured cover as a connected cyclic torsor. Interpret the split descent datum as a cyclic action on Fin d and enumerate its orbits. An orbit of length e dividing n corresponds to the intermediate root t^(n/e), whose e-th power is exactly the image of g; normality identifies the punctured algebra.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Descend the finite presentation isomorphisms, inverses and projection equalities to a pointed affine etale neighborhood. The equation is always the image of g, and all orbit lengths are units. Etale base change preserves regularity, flatness preserves the nonzerodivisor, and Spec of the finite product joins the orbit covers. For d=0 use the empty product; n=1 gives only trivial orbits.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "G2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG, intermediate-root and descent paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cyclic.*chart|split.*root|root.*split",
+   "results": "25 hits: Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/Topology/Algebra/Polynomial.lean, Mathlib/Topology/Algebra/Polynomial.lean, Mathlib/Topology/Algebra/Polynomial.lean, Mathlib/Topology/Algebra/Polynomial.lean, Mathlib/Topology/Algebra/Polynomial.lean, Mathlib/Algebra/CubicDiscriminant.lean",
+   "date": "2026-10-13",
+   "verdict": "No prescribed-equation cyclic chart theorem. Field Kummer automorphisms alone do not give a scheme chart or pointed etale descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale cover split by a cyclic Kummer extension decomposes into intermediate root covers retaining the chosen equation",
+   "results": "8 hits: adjoinRootXPowSubCEquiv, autEquivRootsOfUnity_apply_rootOfSplit, autEquivRootsOfUnity, adjoinRootXPowSubCEquiv_symm_eq_root, autAdjoinRootXPowSubCEquiv, adjoinRootXPowSubCEquiv_root, autAdjoinRootXPowSubC, AdjoinRootXPowSubCEquivToRootsOfUnity",
+   "date": "2026-10-13",
+   "verdict": "No prescribed-equation cyclic chart theorem. Field Kummer automorphisms alone do not give a scheme chart or pointed etale descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, AlgebraicGeometry.Scheme",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No prescribed-equation cyclic chart theorem. Field Kummer automorphisms alone do not give a scheme chart or pointed etale descent."
+  },
+  {
+   "tool": "grep",
+   "query": "prescribed.*cyclic|cyclic.*prescribed in lean/Sheaf and lean/WeilConjectures",
+   "results": "Only unrelated acyclic complex lemmas. RootSplitCoverCyclicCharts allows an arbitrary equation h, so does not retain the prescribed g.",
+   "date": "2026-10-13",
+   "verdict": "Existing root splitting is reused; a prescribed-equation classification variant is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cover split by a punctured root extension has etale local cyclic root charts with the original divisor equation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "available": false
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorPrescribedPuncturedRootChart",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-regular-divisor-prescribed-punctured-root-chart",
+   "place": "Classify the cover after the existing root-splitting construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCyclicCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/RootSplitCoverPrescribedCyclicCharts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.root_split_cover_prescribed_cyclic_charts",
+  "statement": "theorem root_split_cover_prescribed_cyclic_charts\n    (R : CommRingCat.{u}) (g : R) (n : ℕ) (hn : 0 < n ∧ IsUnit (n : R))\n    [IsRegularRing R] (hg : IsSMulRegular R g)\n    [IsRegularRing (R ⧸ Ideal.span {g})]\n    {Y : Scheme.{u}} (p : Y ⟶ Spec R)\n    (hj : ∃ j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g),\n      j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)\n    (d : ℕ) (y : Spec R) (hy : g ∈ y.asIdeal) :\n    let A := AdjoinRoot ((Polynomial.X : Polynomial R) ^ n - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap R A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap R A g)\n    ∀ (δ : pullback p (V.ι ≫ q) ≅ ∐ fun _ : Fin d ↦ V.toScheme),\n      δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 V.toScheme) =\n        pullback.snd p (V.ι ≫ q) →\n    ∃ (S : CommRingCat.{u}) (ψ : Spec S ⟶ Spec R) (z : Spec S),\n      Etale ψ ∧ ψ z = y ∧\n      let h := (Spec.preimage ψ).hom g\n      ∃ (m : ℕ) (e : Fin m → ℕ),\n        (∀ k, 0 < e k ∧ IsUnit (e k : S)) ∧\n        IsRegularRing S ∧ IsSMulRegular S h ∧\n        IsRegularRing (S ⧸ Ideal.span {h}) ∧\n        let N := Spec (CommRingCat.of (∀ k : Fin m,\n          AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h)))\n        let q := Spec.map (CommRingCat.ofHom\n          (algebraMap S (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h))))\n        let V : N.Opens := PrimeSpectrum.basicOpen\n          (algebraMap S (∀ k : Fin m,\n            AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C h)) h)\n        ∃ γ : pullback p ψ ≅ V.toScheme,\n          γ.hom ≫ V.ι ≫ q = pullback.snd p ψ",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T123204-L-3676463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261013T123204-L-3676463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

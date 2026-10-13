@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
+import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCyclicCharts
 
 /-! # Punctured Kummer charts retaining a prescribed divisor equation
 
@@ -79,7 +81,60 @@ theorem GaloisCover.regular_divisor_prescribed_punctured_root_chart
           (algebraMap S (∀ k : Fin m,
             AdjoinRoot ((Polynomial.X : Polynomial S) ^ e k - Polynomial.C g)) g)
         ∃ γ : pullback (W.π ≫ i) (ψ ≫ φ) ≅ V.toScheme,
-          γ.hom ≫ V.ι ≫ q = pullback.snd (W.π ≫ i) (ψ ≫ φ) := by sorry
-
+          γ.hom ≫ V.ι ≫ q = pullback.snd (W.π ≫ i) (ψ ≫ φ) := by
+  obtain ⟨S, a, z, hψ, hz, n, hn, hS, hg, hSg, d, δ, hδ⟩ :=
+    W.regular_divisor_root_splitting i G R φ f hG hf β hβ y
+  let ψ := Spec.map a
+  let g := a.hom f
+  let p := pullback.snd (W.π ≫ i) (ψ ≫ φ)
+  let t := pullback.lift
+    (pullback.fst (W.π ≫ i) (ψ ≫ φ) ≫ W.π) (p ≫ ψ)
+    (by simp only [Category.assoc]; exact pullback.condition)
+  have ht : (t ≫ β.hom) ≫ Scheme.Opens.ι (X := Spec R)
+      (PrimeSpectrum.basicOpen f) = p ≫ ψ := by
+    simp only [Category.assoc, hβ, t, pullback.lift_snd]
+  have hp : Set.range p ⊆ Set.range
+      (Scheme.Opens.ι (X := Spec S) (PrimeSpectrum.basicOpen g)) := by
+    rintro _ ⟨x, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    change ψ (p x) ∈ PrimeSpectrum.basicOpen f
+    have hx : ψ (p x) ∈ Set.range
+        (Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f)) := by
+      refine ⟨(t ≫ β.hom) x, ?_⟩
+      simpa only [Scheme.Hom.comp_apply] using congrArg (fun k ↦ k x) ht
+    rw [Scheme.Opens.range_ι] at hx
+    exact hx
+  have hj : ∃ j : pullback (W.π ≫ i) (ψ ≫ φ) ⟶
+      Scheme.Opens.toScheme (X := Spec S) (PrimeSpectrum.basicOpen g),
+      j ≫ Scheme.Opens.ι (X := Spec S) (PrimeSpectrum.basicOpen g) = p :=
+    ⟨IsOpenImmersion.lift _ p hp, IsOpenImmersion.lift_fac _ p hp⟩
+  have hgz : g ∈ z.asIdeal := by
+    change f ∈ (PrimeSpectrum.comap a.hom z).asIdeal
+    change f ∈ ((Spec.map a) z).asIdeal
+    rw [hz]
+    exact hy
+  have : IsRegularRing S := hS
+  have : IsRegularRing (S ⧸ Ideal.span {g}) := hSg
+  obtain ⟨T, θ, w, hθ, hw, m, e, he, hT, hh, hTh, γ, hγ⟩ :=
+    root_split_cover_prescribed_cyclic_charts S g n hn hg
+      (pullback.snd (W.π ≫ i) (ψ ≫ φ)) hj d z hgz δ hδ
+  have : Etale ψ := hψ
+  have : Etale θ := hθ
+  let ε := pullback.congrHom (rfl : W.π ≫ i = W.π ≫ i) (Category.assoc θ ψ φ)
+  let α := (ε ≪≫ (pullbackLeftPullbackSndIso (W.π ≫ i) (ψ ≫ φ) θ).symm) ≪≫ γ
+  have heq : (Spec.preimage (θ ≫ ψ)).hom f = (Spec.preimage θ).hom g := by
+    have hmap : Spec.preimage (θ ≫ ψ) = a ≫ Spec.preimage θ := by
+      apply Spec.map_injective
+      simp only [Spec.map_preimage, Spec.map_comp, ψ]
+    rw [hmap]
+    rfl
+  refine ⟨T, θ ≫ ψ, w, inferInstance, ?_, ?_⟩
+  · rw [Scheme.Hom.comp_apply, hw, hz]
+  · dsimp only
+    rw [heq]
+    refine ⟨m, e, he, hT, hh, hTh, α, ?_⟩
+    simp only [α, Iso.trans_hom, Iso.symm_hom, Category.assoc, hγ,
+      pullbackLeftPullbackSndIso_inv_snd_snd, ε, pullback.congrHom_hom,
+      pullback.map, pullback.lift_snd, Category.comp_id]
 
 end AlgebraicGeometry.Scheme
