@@ -50,6 +50,11 @@ morphisms are morphisms over `Spec k`. The compactification `Z` of `f` and its b
   theorem for the compactly supported direct image of bounded constructible `E`-sheaves.
 - `ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl`: the same
   for bounded constructible `ℚ̄_ℓ`-sheaves.
+- `ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChangeSelf` and
+  `ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChangeSelf_padicAlgCl`: for a
+  cartesian square whose two vertical maps are the same `f`, the base change theorem with the
+  compactification `c` on both sides, through the identification of the base-changed
+  compactification with `c`.
 
 -/
 
@@ -118,5 +123,46 @@ theorem isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl (c : Compacti
     (c.baseChange_isPullback_g sq)
   rw [boundedConstructibleLowerShriekBaseChange_eq]
   infer_instance
+
+section Self
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+  [IsSeparated (X ↘ Spec (.of k))]
+  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+  [IsSeparated (Y ↘ Spec (.of k))]
+  {f : X ⟶ Y} {g : Y ⟶ Y} {g' : X ⟶ X} [f.IsOver (Spec (.of k))]
+  [g.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
+
+include ℓ k in
+/-- **The base change theorem for the compactly supported direct image** of bounded
+constructible `E`-sheaves, with the same compactification on both sides: for a cartesian square
+`sq : IsPullback g' f f g` whose two vertical maps are the same `f` and a compactification `c` of
+`f`, the compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf_!^c` is an
+isomorphism. It is `isIso_boundedConstructibleLowerShriekBaseChange` composed with the
+identification of the base-changed compactification with `c`. -/
+theorem isIso_boundedConstructibleLowerShriekBaseChangeSelf (c : Compactification f)
+    (sq : IsPullback g' f f g) :
+    IsIso (boundedConstructibleLowerShriekBaseChangeSelf
+      (Profinite.continuousMapRingObj E) ℓ k c sq) := by
+  have := isIso_boundedConstructibleLowerShriekBaseChange ℓ E k c sq
+  rw [boundedConstructibleLowerShriekBaseChangeSelf_eq]
+  infer_instance
+
+/-- **The base change theorem for the compactly supported direct image** of bounded
+constructible `ℚ̄_ℓ`-sheaves, with the same compactification on both sides: for a cartesian
+square `sq : IsPullback g' f f g` whose two vertical maps are the same `f` and a
+compactification `c` of `f`, the compact-support base-change morphism
+`Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf_!^c` is an isomorphism of functors
+`Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧`. -/
+theorem isIso_boundedConstructibleLowerShriekBaseChangeSelf_padicAlgCl (c : Compactification f)
+    (sq : IsPullback g' f f g) :
+    IsIso (boundedConstructibleLowerShriekBaseChangeSelf
+      (Profinite.padicAlgClRingObj ℓ) ℓ k c sq) := by
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ k c sq
+  rw [boundedConstructibleLowerShriekBaseChangeSelf_eq]
+  infer_instance
+
+end Self
 
 end AlgebraicGeometry.ProEtale.CondensedRing
