@@ -9,13 +9,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
-import Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
-import Sheaf.Paper.HigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Ordinary higher direct images of quasi-coherent modules
 
@@ -55,6 +49,8 @@ theorem ordinaryHigherImage_isQuasicoherent
     (p : ℕ) :
     SheafOfModules.IsQuasicoherent.{u}
       (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj M) := by
-  sorry
+  let : IsGrothendieckAbelian.{u} X.Modules := Scheme.Modules.isGrothendieckAbelian X
+  let := hM
+  exact Scheme.Modules.isQuasicoherent_higherDirectImage f M p
 
 end AlgebraicGeometry
