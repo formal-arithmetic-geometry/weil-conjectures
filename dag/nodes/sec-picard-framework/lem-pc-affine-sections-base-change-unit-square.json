@@ -19,39 +19,33 @@
  },
  "proof": [
   {
-   "text": "Expand BC_E by its canonical counit definition. Transpose under the adjunctions of g and g_X. The canonical pullback-composition comparisons identify the two paths around the square; naturality of the adjunction units and the triangle identities of f and f' cancel the counit/unit pairs. This yields the direct-image unit description of the same base-change map.",
+   "text": "Form the canonical pullback-square comparison k and its conjugate δ under the pinned composite adjunctions. The private, proved mate_unit_square specializes Mathlib unit_mateEquiv and iterated_mateEquiv_conjugateEquiv. Expand k and schemeDerivedBaseChangeMap to identify its first mate with the base-change map. This proves η_g(Rf_*E);Rg_*(BC_E)=Rf_*(η_p(E));δ_(Lp*E), entirely in Lean.",
    "uses": [
     "def-pc-derived-base-change-map",
     "lem-pc-ringed-spaces-derived-pullback-composition",
     "def-pc-affine-global-hom-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply sections to that unit identity. On underived sheaves t,z,v,s act identically on sections and account for the R-action. The equations hb,hd,hr,hc identify their derived counterparts with these underived maps after composing with the right-derived units. Compute on K-injective resolutions and use the right-derived universal property to identify the composites on every derived object E. The resulting equality is the displayed unit square, without an extension isomorphism or an arbitrary m.",
+   "text": "Apply RΓ_R to the proved unit identity. Naturality of r moves the base-change map past r, and functoriality combines the mapped morphisms. Use the normalized square-comparison coherence at F=Lp*E to replace RΓ_R(δ_F);r;Dρ(d_F) by b_(Rp*F);c_F. Naturality of b with η_p(E) yields the asserted right side. Every rewrite and the final naturality step are proved in Lean.",
    "uses": [
+    "lem-pc-affine-sections-square-comparison-coherence",
     "def-pc-affine-global-hom-base-change-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pc-affine-global-hom-base-change-map",
   "def-pc-derived-base-change-map",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "def-pc-affine-global-hom-base-change-map"
+  "lem-pc-affine-sections-square-comparison-coherence",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction; explicit normalization refinement of parent proof steps"
+  "place": "Tag 08HY, remark-base-change; Tag 0D5T, lemma-derived-pushforward-composition; perfect.tex Tag 0AA7, scalar restriction; P2 Lean proof using Mathlib iterated mates and normalization coherence"
  },
  "blueprint": {
   "is": null,
@@ -125,9 +119,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261013T100024-L-2467844",
+  "landing": "20261013T111909-L-3058048",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
