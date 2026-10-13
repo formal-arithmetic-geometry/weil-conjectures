@@ -1,6 +1,6 @@
 # Work queue
 
-179 items; claim with `tools/claim.py next <group> [--stage N]`.
+178 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (23)
 
@@ -45,7 +45,7 @@
 
 Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (148)
+## Stage 3: modules to prove (147)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -113,6 +113,7 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.OverlapPairRefinementPersistence` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardFixedModelResidueDerivedComparison` | 23 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenPullbackCounitRepresentative` | 23 | 1 | proof |
+| `Sheaf.Paper.CechCupPullbackCompat` | 23 | 2 | proof |
 | `Sheaf.Paper.EtaleRowIntegerSections` | 23 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocalizedTensorComparisonClosure` | 24 | 1 | proof |
 | `Sheaf.Algebra.Homology.LocalizedTensorComparisonGenerators` | 24 | 1 | proof |
@@ -126,8 +127,6 @@ Not open yet: 238 nodes that wait for stage 1, 28 nodes that wait for a statemen
 | `Sheaf.AlgebraicGeometry.PicardDirectImageUnitMorphismPullback` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorStalkChainCoordinates` | 24 | 1 | proof |
 | `Sheaf.Paper.CechCupResolutionRepresentatives` | 24 | 1 | proof |
-| `Sheaf.Paper.ModuleCupCoefficientResolutionMaps` | 24 | 1 | proof |
-| `Sheaf.Paper.ModuleCupPullbackResolutionMaps` | 24 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PicardTermwiseSingleMapComposition` | 25 | 1 | proof |
 | `Sheaf.Paper.CechRefinementResolutionDiagram` | 25 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumComparisonCancellation` | 26 | 1 | proof |
