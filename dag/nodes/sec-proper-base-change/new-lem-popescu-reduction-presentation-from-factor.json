@@ -2,7 +2,7 @@
  "id": "new-lem-popescu-reduction-presentation-from-factor",
  "kind": "statement",
  "title": "Polynomial lifting from a reduced standard smooth factor",
- "statement": "theorem exists_popescu_reduction_presentation_of_factor\n    (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]\n    (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A]\n    (φ : A →ₐ[R] Λ)\n    (C : Type (max u v w)) [CommRing C] [Algebra (R ⧸ I) C]\n    (hC : IsStandardSmooth (R ⧸ I) C)\n    (β : A ⧸ I.map (algebraMap R A) →ₐ[R ⧸ I] C)\n    (δ : C →ₐ[R ⧸ I] Λ ⧸ I.map (algebraMap R Λ))\n    (hfactor : δ.comp β = reducedAlgHom R Λ I A φ) :\n    ∃ (n m : ℕ) (g : Fin m → MvPolynomial (Fin n) A) (lifts : Fin n → Λ),\n      (∀ i, MvPolynomial.eval₂ φ.toRingHom lifts (g i) ∈\n        I.map (algebraMap R Λ)) ∧\n      IsStandardSmooth (R ⧸ I)\n        (MvPolynomial (Fin n) (A ⧸ I.map (algebraMap R A)) ⧸\n          Ideal.span (Set.range fun i ↦\n            MvPolynomial.map (Ideal.Quotient.mk (I.map (algebraMap R A))) (g i))) ",
+ "statement": "theorem exists_popescu_reduction_presentation_of_factor\n    (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]\n    (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A] [FinitePresentation R A]\n    (φ : A →ₐ[R] Λ)\n    (C : Type (max u v w)) [CommRing C] [Algebra (R ⧸ I) C]\n    (hC : IsStandardSmooth (R ⧸ I) C)\n    (β : A ⧸ I.map (algebraMap R A) →ₐ[R ⧸ I] C)\n    (δ : C →ₐ[R ⧸ I] Λ ⧸ I.map (algebraMap R Λ))\n    (hfactor : δ.comp β = reducedAlgHom R Λ I A φ) :\n    ∃ (n m : ℕ) (g : Fin m → MvPolynomial (Fin n) A) (lifts : Fin n → Λ),\n      (∀ i, MvPolynomial.eval₂ φ.toRingHom lifts (g i) ∈\n        I.map (algebraMap R Λ)) ∧\n      IsStandardSmooth (R ⧸ I)\n        (MvPolynomial (Fin n) (A ⧸ I.map (algebraMap R A)) ⧸\n          Ideal.span (Set.range fun i ↦\n            MvPolynomial.map (Ideal.Quotient.mk (I.map (algebraMap R A))) (g i)))",
  "stmt_deps": [],
  "source": {
   "document": "literature/stacks-project/smoothing.tex",
@@ -10,7 +10,17 @@
  },
  "proof": [
   {
-   "text": "Choose a finite polynomial presentation of C over A/IA, lift its finitely many coefficients and variable images through the quotient maps, and use equality of the two reduced evaluations to show each lifted equation evaluates into IΛ.",
+   "text": "Use beta to give C an A/IA-algebra structure and the compatible R/I scalar tower. Finite presentation of A over R implies A/IA is finite type over R/I. Standard smoothness implies C is finitely presented over R/I. Apply Mathlib Algebra.FinitePresentation.of_restrict_scalars_finitePresentation and Algebra.Presentation.exists_presentation_fin to choose a finite presentation P of C over A/IA.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Lift each P.relation coefficientwise through A to A/IA using MvPolynomial.map_surjective, and lift each delta(P.val i) through Lambda to Lambda/ILambda using quotient surjectivity. The equation delta.comp beta = reducedAlgHom identifies coefficient evaluation after reduction with delta after beta. MvPolynomial.hom_eval₂ and eval₂_map identify the evaluations of all polynomials. Each P.relation evaluates to zero, hence each lifted relation evaluates into ILambda by Ideal.Quotient.eq_zero_iff_mem.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The ideal of reduced lifted relations equals P.ker by P.span_range_relation_eq_ker. Compose Ideal.quotientEquivAlgOfEq with P.quotientEquiv restricted to R/I. Transport standard smoothness from C along the inverse of this algebra equivalence using Algebra.IsStandardSmooth.of_algEquiv.",
    "uses": [],
    "elementary": false
   }
@@ -19,7 +29,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Tag 07CK"
+  "place": "Tag 07CK, finite presentation and lifting; Tag 00F4(4); direct Mathlib finite presentation and quotient-equivalence proof by Y3"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -68,9 +78,9 @@
   "module": "Sheaf.RingTheory.PopescuReductionPresentationFromFactor",
   "file": "lean/Sheaf/RingTheory/PopescuReductionPresentationFromFactor.lean",
   "declaration": "Algebra.exists_popescu_reduction_presentation_of_factor",
-  "statement": "theorem exists_popescu_reduction_presentation_of_factor\n    (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]\n    (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A]\n    (φ : A →ₐ[R] Λ)\n    (C : Type (max u v w)) [CommRing C] [Algebra (R ⧸ I) C]\n    (hC : IsStandardSmooth (R ⧸ I) C)\n    (β : A ⧸ I.map (algebraMap R A) →ₐ[R ⧸ I] C)\n    (δ : C →ₐ[R ⧸ I] Λ ⧸ I.map (algebraMap R Λ))\n    (hfactor : δ.comp β = reducedAlgHom R Λ I A φ) :\n    ∃ (n m : ℕ) (g : Fin m → MvPolynomial (Fin n) A) (lifts : Fin n → Λ),\n      (∀ i, MvPolynomial.eval₂ φ.toRingHom lifts (g i) ∈\n        I.map (algebraMap R Λ)) ∧\n      IsStandardSmooth (R ⧸ I)\n        (MvPolynomial (Fin n) (A ⧸ I.map (algebraMap R A)) ⧸\n          Ideal.span (Set.range fun i ↦\n            MvPolynomial.map (Ideal.Quotient.mk (I.map (algebraMap R A))) (g i))) ",
+  "statement": "theorem exists_popescu_reduction_presentation_of_factor\n    (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]\n    (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A] [FinitePresentation R A]\n    (φ : A →ₐ[R] Λ)\n    (C : Type (max u v w)) [CommRing C] [Algebra (R ⧸ I) C]\n    (hC : IsStandardSmooth (R ⧸ I) C)\n    (β : A ⧸ I.map (algebraMap R A) →ₐ[R ⧸ I] C)\n    (δ : C →ₐ[R ⧸ I] Λ ⧸ I.map (algebraMap R Λ))\n    (hfactor : δ.comp β = reducedAlgHom R Λ I A φ) :\n    ∃ (n m : ℕ) (g : Fin m → MvPolynomial (Fin n) A) (lifts : Fin n → Λ),\n      (∀ i, MvPolynomial.eval₂ φ.toRingHom lifts (g i) ∈\n        I.map (algebraMap R Λ)) ∧\n      IsStandardSmooth (R ⧸ I)\n        (MvPolynomial (Fin n) (A ⧸ I.map (algebraMap R A)) ⧸\n          Ideal.span (Set.range fun i ↦\n            MvPolynomial.map (Ideal.Quotient.mk (I.map (algebraMap R A))) (g i)))",
   "branch": "sheaf-dag",
-  "by": "D3",
+  "by": "Y3",
   "date": "2026-10-13"
  },
  "reviewed": {
@@ -86,17 +96,35 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-292c5",
-  "group": "F1",
+  "reviewer": "X-00ce9",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261013T004023-L-2490730",
-  "kind": "proof",
-  "note": "independent Codex review: Matched the delivered module and report against the unchanged node statement, prior return requirements, and scratch compilation with axioms check.",
-  "sorry_before": [
-   "Algebra.exists_popescu_reduction_presentation_of_factor"
+  "landing": "20261013T024055-L-3341242",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with the corrected node, source, change record, report, unit route, clean compilation and unchanged direct importer; verified permitted axioms only."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "Y3 stage 2",
+  "old_statement": "theorem exists_popescu_reduction_presentation_of_factor\n    (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]\n    (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A]\n    (φ : A →ₐ[R] Λ)\n    (C : Type (max u v w)) [CommRing C] [Algebra (R ⧸ I) C]\n    (hC : IsStandardSmooth (R ⧸ I) C)\n    (β : A ⧸ I.map (algebraMap R A) →ₐ[R ⧸ I] C)\n    (δ : C →ₐ[R ⧸ I] Λ ⧸ I.map (algebraMap R Λ))\n    (hfactor : δ.comp β = reducedAlgHom R Λ I A φ) :\n    ∃ (n m : ℕ) (g : Fin m → MvPolynomial (Fin n) A) (lifts : Fin n → Λ),\n      (∀ i, MvPolynomial.eval₂ φ.toRingHom lifts (g i) ∈\n        I.map (algebraMap R Λ)) ∧\n      IsStandardSmooth (R ⧸ I)\n        (MvPolynomial (Fin n) (A ⧸ I.map (algebraMap R A)) ⧸\n          Ideal.span (Set.range fun i ↦\n            MvPolynomial.map (Ideal.Quotient.mk (I.map (algebraMap R A))) (g i))) ",
+  "what": "The original statement omitted finite presentation of A over R, which Tag 07CK assumes. For R = Lambda = C = Z, I = 0 and A the polynomial ring in infinitely many variables, augmentation satisfies the hypotheses, but any finite list of relations leaves infinitely many free variables in the nonzero displayed quotient, contradicting standard smoothness and finite generation. Add [FinitePresentation R A], as in the source and the sole caller.",
+  "source": {
+   "document": "literature/stacks-project/smoothing.tex",
+   "place": "Tag 07CK, hypothesis that A is of finite presentation over R; presentation and coefficient lifting in the proof"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-popescu-reduction-presentation",
+    "holds": true,
+    "note": "Its statement already assumes A finitely presented over R, so its application and conclusion remain unchanged."
+   }
   ],
-  "sorry_after": [
-   "Algebra.exists_popescu_reduction_presentation_of_factor"
+  "old_proof": [
+   {
+    "text": "Choose a finite polynomial presentation of C over A/IA, lift its finitely many coefficients and variable images through the quotient maps, and use equality of the two reduced evaluations to show each lifted equation evaluates into IΛ.",
+    "uses": [],
+    "elementary": false
+   }
   ]
  }
 }

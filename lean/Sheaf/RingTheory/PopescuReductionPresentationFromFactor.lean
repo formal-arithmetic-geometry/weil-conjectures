@@ -1,10 +1,12 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Y3
+-/
 module
 
-public import Mathlib.Algebra.Category.CommAlgCat.Basic
-public import Mathlib.CategoryTheory.ObjectProperty.Ind
-public import Mathlib.RingTheory.Ideal.Over
-public import Mathlib.RingTheory.Smooth.StandardSmooth
 public import Sheaf.RingTheory.PopescuReductionPresentationCore
+import Mathlib.RingTheory.Extension.Presentation.Basic
 
 /-! Lifting a finite polynomial presentation from a reduced standard smooth factor. -/
 
@@ -16,36 +18,23 @@ open CategoryTheory
 
 namespace Algebra
 
-/--
-STATEMENT-DISPUTED: The claim is false without a finite-presentation hypothesis on A.
-Take R = Λ = C = ℤ, I = 0, and A = ℤ[x₀,x₁,…]. Let φ be the augmentation xⱼ ↦ 0.
-Since I = 0, its images in A and Λ are zero; identify all quotients by these ideals
-with the original rings. Give C its resulting ℤ/0-algebra structure. Then hC holds
-because ℤ is standard smooth over itself. Take β to be the induced augmentation
-A/0 → ℤ and δ to be the identity ℤ → ℤ/0 under these identifications. The definition
-of reducedAlgHom gives the induced augmentation, so δ.comp β equals it and hfactor holds.
+/-- Lift a finite presentation of the standard smooth reduced factor.
+Source: Stacks Project, Tag 07CK, steps 3--4; Tag 00F4(4).
 
-For any proposed finite n, m, relations gᵢ, and integer lifts aₖ, the evaluation condition
-is gᵢ(xⱼ = 0, yₖ = aₖ) = 0, since membership in IΛ = 0 means equality to zero.
-Thus each gᵢ has zero augmentation when the added variables yₖ are sent to their lifts
-(not necessarily when yₖ = 0). Only finitely many xⱼ occur in all coefficients of all gᵢ;
-call their index set S. Put B = ℤ[xⱼ : j ∈ S] and D = B[y₀,…,yₙ₋₁]/(g₀,…,gₘ₋₁).
-The preceding evaluation descends to a unital map D → ℤ, so D is nonzero. The displayed
-quotient in the conclusion is D[xⱼ : j ∉ S], since every relation belongs to B[y].
-Infinitely many remaining xⱼ are therefore freely adjoined. Any finite collection of
-quotient elements involves only finitely many of these variables. Pick an unused j;
-the ℤ-subalgebra they generate omits xⱼ, by uniqueness of polynomial coefficients over
-the nonzero ring D. Hence this quotient is not finitely generated, and consequently not
-finitely presented, over ℤ. This contradicts IsStandardSmooth.finitePresentation.
-
-The coefficient and variable lifting argument is Tag 07CK, steps 3--4. Choose a finite
-polynomial presentation of the reduced standard smooth factor, lift its coefficients and
-variable images through the quotient maps, and compare evaluations in the reduced target.
+Regard `C` as an `A/IA`-algebra via `β`. Since `A/IA` is finite type over
+`R/I` and `C` is finitely presented over `R/I`, `C` is finitely presented over
+`A/IA`. Choose a finite presentation. Lift each relation coefficientwise to `A`
+and each generator image under `δ` to `Λ`, using quotient surjectivity. The
+factorization identity identifies evaluation modulo `IΛ` with evaluation in `C`
+followed by `δ`, so each lifted relation evaluates into `IΛ`. The reduced quotient
+is isomorphic to `C` over `R/I`, and standard smoothness transports along this
+isomorphism. The finite-presentation hypothesis on `A` is essential (the old
+statement failed for the augmentation from infinitely many polynomial variables).
 (blueprint: new-lem-popescu-reduction-presentation-from-factor)
 -/
 theorem exists_popescu_reduction_presentation_of_factor
     (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]
-    (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A]
+    (I : Ideal R) (A : Type w) [CommRing A] [Algebra R A] [FinitePresentation R A]
     (φ : A →ₐ[R] Λ)
     (C : Type (max u v w)) [CommRing C] [Algebra (R ⧸ I) C]
     (hC : IsStandardSmooth (R ⧸ I) C)
@@ -59,6 +48,44 @@ theorem exists_popescu_reduction_presentation_of_factor
         (MvPolynomial (Fin n) (A ⧸ I.map (algebraMap R A)) ⧸
           Ideal.span (Set.range fun i ↦
             MvPolynomial.map (Ideal.Quotient.mk (I.map (algebraMap R A))) (g i))) := by
-  sorry
+  classical
+  let A₀ := A ⧸ I.map (algebraMap R A)
+  let qA := Ideal.Quotient.mk (I.map (algebraMap R A))
+  let qΛ := Ideal.Quotient.mk (I.map (algebraMap R Λ))
+  let : Algebra A₀ C := β.toRingHom.toAlgebra
+  have : IsScalarTower (R ⧸ I) A₀ C := IsScalarTower.of_algHom β
+  have : FiniteType (R ⧸ I) A₀ :=
+    FiniteType.of_restrictScalars_finiteType R (R ⧸ I) A₀
+  have : IsStandardSmooth (R ⧸ I) C := hC
+  have : FinitePresentation A₀ C :=
+    FinitePresentation.of_restrict_scalars_finitePresentation (R ⧸ I) A₀ C
+  obtain ⟨n, m, ⟨P⟩⟩ := Presentation.exists_presentation_fin A₀ C
+  have hrel := fun i ↦ MvPolynomial.map_surjective qA
+    Ideal.Quotient.mk_surjective (P.relation i)
+  choose g hg using hrel
+  have hval := fun i ↦ Ideal.Quotient.mk_surjective (δ (P.val i))
+  choose lifts hlifts using hval
+  refine ⟨n, m, g, lifts, ?_, ?_⟩
+  · have hcoeff : qΛ.comp φ.toRingHom = δ.toRingHom.comp (β.toRingHom.comp qA) := by
+      ext a
+      have h := DFunLike.congr_fun hfactor (qA a)
+      simpa [reducedAlgHom, qA, qΛ] using h.symm
+    have hev (p : MvPolynomial (Fin n) A) :
+        qΛ (MvPolynomial.eval₂ φ.toRingHom lifts p) =
+          δ (MvPolynomial.aeval P.val (MvPolynomial.map qA p)) := by
+      rw [MvPolynomial.hom_eval₂, hcoeff]
+      change _ = δ.toRingHom (MvPolynomial.eval₂ (algebraMap A₀ C) P.val
+        (MvPolynomial.map qA p))
+      rw [MvPolynomial.hom_eval₂, MvPolynomial.eval₂_map]
+      simp only [qΛ, hlifts]
+      rfl
+    intro i
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    rw [hev, hg, P.aeval_val_relation, map_zero]
+  · have hI : Ideal.span (Set.range fun i ↦ MvPolynomial.map qA (g i)) = P.ker := by
+      simpa only [hg] using P.span_range_relation_eq_ker
+    let e := (Ideal.quotientEquivAlgOfEq (R ⧸ I) hI).trans
+      (P.quotientEquiv.restrictScalars (R ⧸ I))
+    exact IsStandardSmooth.of_algEquiv e.symm
 
 end Algebra
