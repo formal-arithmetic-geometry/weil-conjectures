@@ -14,7 +14,7 @@
  },
  "proof": [
   {
-   "text": "apply hf to evaluate the input section as the product of pulled-back\nfunctions times the restriction of m from U. Semilinearity of\netaleTensorSectionsRestriction moves that scalar product outside restriction.\nA ring homomorphism preserves finite products. For each k, the product map\nomitting j followed by the k-th projection is the j.succAbove(k)-th projection,\nby Pi.lift_π. Functoriality of appTop therefore identifies each pulled-back\nscalar with the corresponding retained projection function on the larger\nproduct. Composition of etaleTensorSectionsRestriction and the over-U\ntriangle identify the restricted coefficient with direct restriction from U.\nApply hf' to evaluate the inserted-unit pure section. Its j-th scalar factor\nis the pullback of one and equals one. Fin.prod_univ_succAbove, together with\ninsertNth at j and at j.succAbove(k), identifies its remaining factors with\nthose just computed. Thus the evaluated sections agree. This argument has\nno Čech coface and no injectivity assertion. It works in degree zero, for\nboth possible omitted factors, and for zero modules and empty schemes.",
+   "text": "apply hf to evaluate the input section as the product of pulled-back\nfunctions times the restriction of m from U. Semilinearity of\netaleTensorSectionsRestriction moves that scalar product outside restriction.\nA ring homomorphism preserves finite products. For each k, the product map\nomitting j followed by the k-th projection is the j.succAbove(k)-th projection,\nby Pi.lift_π. Functoriality of appTop therefore identifies each pulled-back\nscalar with the corresponding retained projection function on the larger\nproduct. Composition of etaleTensorSectionsRestriction and the over-U\ntriangle identify the restricted coefficient with direct restriction from U.\nApply hf' to evaluate the inserted-unit pure section. Its j-th scalar factor\nis the pullback of one and equals one. Fin.prod_univ_succAbove, together with\ninsertNth at j and at j.succAbove(k), identifies its remaining factors with\nthose just computed. Thus the evaluated sections agree. This argument has\nno Čech coface and no injectivity assertion. It works in degree zero, for\nboth possible omitted factors, and for zero modules and empty schemes. Lean implementation: the fully proved private equality-witness wrapper pinnedValue fixes each restriction map by equality to its original value. Apply semilinearity and composition to these equal maps, using comp_over_pinned_apply for the over-U triangle. This avoids kernel reduction of the normalized adjunction maps during evaluation. Evaluate hf and hf-prime and transport their coefficient restrictions to the pinned maps using seal_eq. Pi.lift_π proves projection composition, map_prod and Fin.prod_univ_succAbove compute the scalars, and equality transitivity combines these calculations. Every private helper and the equality witness theorem are fully proved; no mathematical definition or statement changes.",
    "uses": [
     "new-etale-affine-singleton-tensor-degree-comparison-hom-normalization",
     "lem-sc-etale-qcoherent-presheaf-functorial"
@@ -29,7 +29,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Explicit part of the original coface node proof, using Tags 03P2 and 03DR, both read on 2026-10-13."
+  "place": "Explicit part of the original coface node proof, using Tags 03P2 and 03DR, both read on 2026-10-13. B2 formalized the existing restriction argument in Lean on 2026-10-13. Equality-witness wrappers are an implementation device only, with every defining witness proved equal to the original map; no holes were added."
  },
  "mathlib_searches": [
   {
@@ -112,11 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-2f18a",
   "group": "B2",
   "result": "pass",
-  "landing": "20261013T121839-L-3557958",
+  "landing": "20261013T160708-L-1370637",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, unchanged theorem signature, node proof metadata, change record, report, compilation, direct importer compilation, and axioms all match the stage-3 brief."
  }
 }
