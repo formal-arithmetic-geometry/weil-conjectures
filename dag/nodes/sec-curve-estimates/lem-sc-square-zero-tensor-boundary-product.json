@@ -1,0 +1,159 @@
+{
+ "id": "lem-sc-square-zero-tensor-boundary-product",
+ "kind": "statement",
+ "title": "The two-section product identity for canonical transported tensor boundaries",
+ "statement": "Let $j:Z\\to X$ be a square-zero closed immersion with ideal $I$, $L$ an invertible module, $n\\geq0$, and assume all canonical unit kernel sequences for $L^d$ are short exact, with the derived-category instances required by the canonical section boundary [def-weil-abstract-derived-category, lem-sc-module-section-boundary-exact]. Put $N=(j^*L)^n$, $F=j^*(I\\otimes L^n)$, and $H=H^1(Z,-)$ [def-sc-ringed-space-module-cohomology]. Use the explicit comparisons constructed in [lem-sc-square-zero-ideal-tensor-unit]: $a_e:j^*(L^{n(e+1)})\\cong N^{e+1}$ and $b_e:H(F\\otimes N^e)\\cong H^1(X,\\ker\\eta_{L^{n(e+1)}})$. For an arbitrary morphism $x:\\mathcal O_Z\\to N^{e+1}$ define $D_e(x)=b_e^{-1}(\\partial((x;a_e^{-1})(1)))$. For every $f:\\mathcal O_Z\\to N$, $e\\geq0$, and arbitrary $x:\\mathcal O_Z\\to N^{e+1}$, one has $D_{e+1}(\\lambda^{-1};f\\otimes x)=H(\\mathrm{mulTensorPowSection}(f,F,e,1))(D_e(x))+H(\\rho_F^{-1};\\mathrm{id}_F\\otimes x)(H(\\rho_F)(D_0(f^{\\otimes1})))$. This is a two-section identity; no power sequence is chosen and no recurrence of powers is assumed.",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-quasi-coherent-sheaf",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-module-section-boundary-exact",
+  "def-sc-module-cohomology-boundary",
+  "def-weil-abstract-derived-category",
+  "lem-sc-square-zero-ideal-tensor-unit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the graded direct-sum sequence following it; Tag 0B8S, the two-section Cech cocycle product calculation."
+ },
+ "proof": [
+  {
+   "text": "Sum the invertible-tensor ideal sequences in all degrees. Local line-bundle frames identify the algebra with a polynomial algebra, its quotient with the graded algebra on Z, and its kernel products with products of two ideal factors. Thus the kernel is square zero. The unit-quotient and ideal-kernel comparisons identify these sequences with the canonical unit kernel sequences.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-sc-square-zero-ideal-tensor-unit",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the square-zero boundary derivation theorem to arbitrary homogeneous sections f in degree n and x in degree n(e+1). Include their summands and project to degree n(e+2). The boundary of their product is f times the boundary of x plus x times the boundary of f. No power recurrence or exponent induction is used.",
+   "uses": [
+    "lem-sc-boundary-derivation-square-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The explicitly constructed section comparisons identify the product with lambda inverse followed by f tensor x. The coefficient comparisons identify the two ideal actions with mulTensorPowSection f F e 1 and rho_F inverse followed by F whiskered with x. Naturality of the affine cohomology edge carries these actions to the displayed H maps. Resolution connecting maps identify with the canonical triangle connecting map defining moduleSectionBoundary. These equalities give the displayed product identity.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-sc-module-cohomology-boundary",
+    "lem-sc-module-section-boundary-exact",
+    "lem-sc-square-zero-ideal-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-sc-square-zero-ideal-tensor-unit",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-sc-boundary-derivation-square-zero",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "def-sc-module-cohomology-boundary",
+  "lem-sc-module-section-boundary-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the graded direct-sum sequence following it; Tag 0B8S, the two-section Cech cocycle product calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sheaf cohomology boundary of the tensor product of two line bundle sections satisfies the Leibniz rule for a square zero closed immersion",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology boundary for powers of sections of a line bundle on a square zero closed subscheme is a derivation",
+   "results": "Eight cotangent connecting map and derivation results, no sheaf-cohomology tensor product identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*tensor.*unit|square_zero.*ideal|boundary.*product",
+   "results": "Three manifold boundary-product hits; repository search found the square-zero boundary derivation theorem but no transported two-section product identity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryLeibniz",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, coherent-equation-ses and the graded direct-sum sequence following it; Tag 0B8S, the two-section Cech cocycle product calculation.",
+   "via": [
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryProduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorBoundaryProduct.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.transportedTensorBoundary_product",
+  "statement": "theorem transportedTensorBoundary_product\n    {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]\n    [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wD}\n      (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (Opposite.op ⊤)))]\n    (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥) (n : ℕ)\n    (hshort : ∀ d : ℕ, (ShortComplex.kernelSequence\n      ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n        (L.tensorPow d))).ShortExact)\n    (D : TensorBoundaryComparisonData j L n)\n    (hD : canonicalTensorBoundaryComparisons j L hI n = D) :\n    let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)\n    let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n\n    let H := RingedSpace.moduleCohomology Z.toRingedSpace 1\n    let b : ∀ e : ℕ, H.obj (show Z.Modules from F ⊗ N.tensorPow e) ≃+\n        (RingedSpace.moduleCohomology X.toRingedSpace 1).obj\n          (kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n            (L.tensorPow (n * (e + 1))))) :=\n      fun e ↦ Iso.addCommGroupIsoToAddEquiv (D.k e)\n    let δ : ∀ e : ℕ, (𝟙_ Z.Modules ⟶ N.tensorPow (e + 1)) →\n        (RingedSpace.moduleCohomology X.toRingedSpace 1).obj\n          (kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n            (L.tensorPow (n * (e + 1))))) :=\n      fun (e : ℕ) (x : 𝟙_ Z.Modules ⟶ N.tensorPow (e + 1)) ↦\n      RingedSpace.moduleSectionBoundary X.toRingedSpace\n        (ShortComplex.kernelSequence\n          ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n            (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1)))\n        ((x ≫ (D.a e).inv).app ⊤ (1 : Γ(Z, ⊤)))\n    ∀ (e : ℕ) (f : 𝟙_ Z.Modules ⟶ N) (x : 𝟙_ Z.Modules ⟶ N.tensorPow (e + 1))\n      (cx : H.obj (show Z.Modules from F ⊗ N.tensorPow e))\n      (cf : H.obj (show Z.Modules from F ⊗ N.tensorPow 0))\n      (cp : H.obj (show Z.Modules from F ⊗ N.tensorPow (e + 1))),\n      δ e x = b e cx → δ 0 (tensorPowSection f 1) = b 0 cf →\n      δ (e + 1) ((λ_ (𝟙_ Z.Modules)).inv ≫ (f ⊗ₘ x)) = b (e + 1) cp →\n      cp = H.map (mulTensorPowSection f F e 1) cx +\n        H.map ((ρ_ F).inv ≫ F ◁ x) (H.map (ρ_ F).hom cf)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b5c67",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T072401-L-1123526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b5c67",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T072401-L-1123526",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, comparison constructions and product identity with the nodes and Stacks 09MS/0B8S; all three modules and the sole direct importer compile cleanly, with permitted axioms and the reported product-lemma sorry."
+ }
+}

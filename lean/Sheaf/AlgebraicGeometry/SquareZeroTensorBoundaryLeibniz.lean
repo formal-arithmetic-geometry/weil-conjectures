@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.SectionBoundaryExact
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryProduct
 
 /-! # The graded Leibniz recurrence for square-zero tensor boundaries
 
@@ -18,11 +19,14 @@ Source: Stacks Project, Tags 09MS and 0B8S.
 
 @[expose] public section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 universe u wC wD
+attribute [local irreducible] RingedSpace.moduleCohomology
+  RingedSpace.moduleSectionBoundary boundaryCoefficientCohomologyIso
+  canonicalTensorBoundaryComparisons
 
 /-- The degreewise canonical boundaries, transported through the kernel and closed-immersion
 cohomology comparisons, satisfy the two-term Leibniz recurrence. This asserts only the
@@ -90,6 +94,40 @@ theorem exists_square_zero_tensor_boundary_leibniz
           ∀ e : ℕ,
             c (e + 1) = H.map (mulTensorPowSection f F e 1) (c e) +
               H.map ((ρ_ F).inv ≫ F ◁ tensorPowSection f (e + 1))
-                (H.map (ρ_ F).hom (c 0)) := by sorry
+                (H.map (ρ_ F).hom (c 0)) := by
+  let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
+  let H := RingedSpace.moduleCohomology Z.toRingedSpace 1
+  let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
+  let f := homOfGlobalSection N s
+  let D : TensorBoundaryComparisonData j L n := canonicalTensorBoundaryComparisons j L hI n
+  have hD : canonicalTensorBoundaryComparisons j L hI n = D := rfl
+  let a : ∀ e : ℕ, (tensorPullback j).obj (L.tensorPow (n * (e + 1))) ≅
+      N.tensorPow (e + 1) := D.a
+  let b : ∀ e : ℕ, H.obj (show Z.Modules from F ⊗ N.tensorPow e) ≃+
+      (RingedSpace.moduleCohomology X.toRingedSpace 1).obj
+        (kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
+          (L.tensorPow (n * (e + 1))))) :=
+    fun e ↦ Iso.addCommGroupIsoToAddEquiv (D.k e)
+  let δ : ∀ e : ℕ,
+      (RingedSpace.moduleCohomology X.toRingedSpace 1).obj
+        (kernel ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
+          (L.tensorPow (n * (e + 1))))) := fun e ↦
+    RingedSpace.moduleSectionBoundary.{u, wC, wD} X.toRingedSpace
+      (ShortComplex.kernelSequence
+        ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app
+          (L.tensorPow (n * (e + 1))))) (hshort (n * (e + 1)))
+      ((tensorPowSection f (e + 1) ≫ (a e).inv).app ⊤ (1 : Γ(Z, ⊤)))
+  let c : ∀ e : ℕ, H.obj (show Z.Modules from F ⊗ N.tensorPow e) :=
+    fun e ↦ (b e).symm (δ e)
+  have hc (e : ℕ) : δ e = b e (c e) := ((b e).apply_symm_apply (δ e)).symm
+  refine ⟨a, b, c, ?_, ?_⟩
+  · intro e
+    exact hc e
+  · intro e
+    apply transportedTensorBoundary_product.{u, wC, wD} j L hI n hshort D hD e f
+      (tensorPowSection f (e + 1)) (c e) (c 0) (c (e + 1))
+    · exact hc e
+    · exact hc 0
+    · exact hc (e + 1)
 
 end AlgebraicGeometry.Scheme.Modules

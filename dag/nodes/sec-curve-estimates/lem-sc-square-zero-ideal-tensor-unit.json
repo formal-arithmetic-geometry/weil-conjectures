@@ -1,0 +1,165 @@
+{
+ "id": "lem-sc-square-zero-ideal-tensor-unit",
+ "kind": "statement",
+ "title": "The square-zero ideal tensor powers have invertible adjunction units",
+ "statement": "Let $j:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion], $I=j.\\mathrm{ker}$ its ideal [def-sbc-closed-immersion-ideal-sheaf], and $L$ an invertible module [def-sc-invertible-module]. Suppose $I^2=0$ [def-sbc-ideal-sheaf-powers]. For every $d\\geq0$, the unit of the canonical tensor-pullback adjunction [def-pc-module-pullback, lem-pc-module-pullback-adjunction] on $I\\otimes L^d$ is an isomorphism. The accompanying Lean constructions compare tensor pullback with Mathlib monoidal pullback by uniqueness of left adjoints, construct its tensor and degree-zero power isomorphisms recursively, identify the ideal-tensor kernel by its inclusion equation, and compose the inverse unit and inverse affine edge with those maps to form the additive coefficient-cohomology equivalence.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-invertible-module",
+  "def-sbc-ideal-sheaf-powers",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the paragraph identifying the ideal tensor as a module on Z; Tag 08KS (unit for a module killed by the defining ideal)."
+ },
+ "proof": [
+  {
+   "text": "The ideal module is the kernel of the structure-sheaf map to the closed-subscheme pushforward; closed pushforward and kernel preserve quasi-coherence. Tensoring with the invertible L^d preserves quasi-coherence. Multiplication I tensor L^d -> L^d is mono because tensoring by an invertible module preserves monomorphisms.",
+   "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On an affine open U, the image of multiplication on sections is I(U) times Gamma(U,L^d), by the affine ideal-product description. For a in I(U), multiplying that image lands in I(U)^2 times Gamma(U,L^d), which is zero. Injectivity of the multiplication map on sections implies a t=0 in I tensor L^d.",
+   "uses": [
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary open V, cover V by affine opens. Restrict a and t to each member. The ideal inclusion commutes with restriction, so the restricted a belongs to the affine ideal. The preceding calculation gives zero locally; sheaf separation gives zero on V. Apply the annihilated-module unit theorem to I tensor L^d.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each invertible M, the unit-quotient theorem identifies the image of ideal multiplication as the limiting kernel of its adjunction unit. Multiplication is mono by the invertible tensor inverse, so its image factor is invertible. Transfer the kernel fork and compare adjunction units by leftAdjointUniq. This determines the ideal-kernel isomorphism by its inclusion equation. Build section and coefficient degree isomorphisms recursively from the monoidal Mathlib pullback, including its unit isomorphism in degree zero. Compose the inverse coefficient isomorphism on cohomology with the inverse affine edge, inverse ideal-tensor unit, and ideal-kernel isomorphism to construct the coefficient comparison package.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-tensor-dual-invertible",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-pc-tensor-dual-invertible",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 09MS, coherent-equation-ses and the paragraph identifying the ideal tensor as a module on Z; Tag 08KS (unit for a module killed by the defining ideal)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The adjunction unit on an ideal tensor an invertible sheaf is an isomorphism if the closed immersion ideal is square zero",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Square zero ideal tensor invertible module is annihilated by ideal so pullback pushforward unit is invertible",
+   "results": "Eight ring-theoretic cotangent and invertible module results, no sheaf adjunction statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*tensor.*unit|square_zero.*ideal|boundary.*product",
+   "results": "Three manifold boundary-product hits; no sheaf result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryLeibniz",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Tag 09MS, coherent-equation-ses and the paragraph identifying the ideal tensor as a module on Z; Tag 08KS (unit for a module killed by the defining ideal).",
+   "via": [
+    "lem-sc-square-zero-tensor-boundary-leibniz",
+    "lem-sc-square-zero-tensor-power-boundary",
+    "lem-sc-square-zero-section-power-obstruction-core",
+    "lem-sc-square-zero-section-power-obstruction",
+    "lem-sc-square-zero-section-power-lift",
+    "lem-sc-square-zero-section-power-locus",
+    "lem-sc-ample-square-zero-thickening",
+    "lem-sc-ample-on-reduction-noetherian",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareZeroTensorBoundaryComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.square_zero_ideal_tensor_unit_isIso",
+  "statement": "theorem square_zero_ideal_tensor_unit_isIso {X Z : Scheme.{u}} (j : Z ⟶ X)\n    [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)\n    (d : ℕ) :\n    IsIso ((Classical.choose (exists_tensorPullbackAdjunction j)).unit.app\n      (j.ker.toModules ⊗ L.tensorPow d))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b5c67",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T072401-L-1123526",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-b5c67",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261013T072401-L-1123526",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, comparison constructions and product identity with the nodes and Stacks 09MS/0B8S; all three modules and the sole direct importer compile cleanly, with permitted axioms and the reported product-lemma sorry."
+ }
+}

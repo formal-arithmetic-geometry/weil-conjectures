@@ -23,52 +23,40 @@
  },
  "proof": [
   {
-   "text": "Tensor the closed-immersion ideal sequence with each invertible L^d. The multiplication inclusion identifies I tensor L^d with the categorical kernel of the canonical tensor-pullback unit, and the unit-quotient theorem supplies its quotient. Compare tensor pullback and Mathlib pullback by uniqueness of left adjoints, and use their tensor-power comparisons and tensorPowMulIso to obtain the degree comparisons a_e. Include degree zero throughout.",
+   "text": "Construct a_e by the recursive monoidal pullback and tensorPowMulIso comparisons. Construct b_e by the explicit coefficient-degree isomorphism, inverse affine cohomology edge, inverse square-zero ideal-tensor unit, and the unique ideal-kernel comparison. The constructions include exponent zero and do not choose arbitrary cohomology witnesses.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The ideal-tensor kernels are quasi-coherent and annihilated by I because I^2=0. The annihilated-module unit identifies each kernel with the pushforward of its pullback. The affine-morphism cohomology edge and the generic module-pullback tensor comparison (applied to the ideal-tensor module, which need not be invertible) identify the degree n(e+1) kernel cohomology with H^1(Z,F tensor N^e). Let b_e be the inverse additive equivalence, and let c_e be the inverse image under b_e of the canonical boundary of the section s^(e+1) transported by a_e; hence boundary_e=b_e(c_e). This determines c_e uniquely.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-sc-square-zero-ideal-tensor-unit",
     "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-sbc-ideal-sheaf-powers",
-    "lem-sc-module-section-boundary-exact",
-    "lem-weil-pbc-module-pullback-tensor"
+    "lem-weil-pbc-closed-immersion-unit-quotient"
    ],
    "elementary": false
   },
   {
-   "text": "Sum the ideal sequences in all nonnegative tensor degrees. Local frames identify the middle graded algebra with a polynomial algebra; thus it and the quotient are commutative. The summed kernel is square zero since each product has two ideal factors. Apply the square-zero boundary derivation theorem to s times s^(e+1), without inducting on e. Include and project graded summands to identify the degree n(e+2) boundary. Naturality transports its first term to H^1(mulTensorPowSection f F e 1)(c_e) and its second to H^1(rho_F^-1; id_F tensor tensorPowSection f (e+1))(H^1(rho_F)(c_0)). The degree-zero right unitor identifies F tensor N^0 with F. Comparison of resolution boundaries with the canonical triangle boundary gives precisely the displayed recurrence.",
+   "text": "Define c_e=b_e inverse of the canonical section boundary of the transported tensorPowSection f (e+1). The inverse law of the additive equivalence gives boundary_e=b_e(c_e).",
    "uses": [
-    "lem-sc-boundary-derivation-square-zero",
-    "def-sc-module-cohomology-boundary",
     "lem-sc-module-section-boundary-exact"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Specialize the two-section product theorem to x=tensorPowSection f (e+1). The recursive definition of tensorPowSection identifies lambda inverse followed by f tensor x with tensorPowSection f (e+2), giving exactly the required recurrence. Introduce the existential witnesses and conjunction.",
+   "uses": [
+    "lem-sc-square-zero-tensor-boundary-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-unit-quotient",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-sc-square-zero-ideal-tensor-unit",
   "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
   "lem-sc-module-section-boundary-exact",
-  "lem-sc-boundary-derivation-square-zero",
-  "def-sc-module-cohomology-boundary",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-sc-square-zero-tensor-boundary-product"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 09MS, graded exact sequence; Cohomology Tag 0B8S, two-term Leibniz calculation"
+  "place": "Tag 09MS, explicit degreewise comparisons followed by specialization of the two-section derivation identity (0B8S)."
  },
  "mathlib_searches": [
   {
@@ -154,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S3",
+  "reviewer": "X-b5c67",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261013T015614-L-3027133",
+  "landing": "20261013T072401-L-1123526",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched Lean signatures, comparison constructions and product identity with the nodes and Stacks 09MS/0B8S; all three modules and the sole direct importer compile cleanly, with permitted axioms and the reported product-lemma sorry."
  }
 }
