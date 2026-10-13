@@ -12,16 +12,26 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This is the corresponding rank consequence of the split conormal sequence and tensor base change described in the source.",
+   "text": "Put P = R[X_1,...,X_n], J = (f), C = P/J, F = kappa(p) tensor_R C, and K = kappa(q). The quotient map P -> C is surjective with kernel J. Mathlib Algebra.FormallySmooth.iff_split_injection gives a left inverse to the conormal map. KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange and Function.Exact.split_tfae' give C tensor_P Omega(P/R) isomorphic to J/J^2 times Omega(C/R). Extend its scalars from P to C using the surjective quotient map. The polynomial differential basis identifies the middle term with C^n.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Base change the preceding C-linear equivalence to K and distribute tensor product over the product with TensorProduct.prodRight. Base changing the given conormal basis and the coordinate basis gives ranks c and n. The differential module is finite because C is smooth, hence of finite type, over R. Module.finrank_prod and LinearEquiv.finrank_eq therefore give c + finrank_K(K tensor_C Omega(C/R)) = n.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "KaehlerDifferential.tensorKaehlerEquiv identifies F tensor_C Omega(C/R) with Omega(F/kappa(p)). Base change this equivalence to K and use TensorProduct.AlgebraTensorModule.cancelBaseChange to identify K tensor_C Omega(C/R) with K tensor_F Omega(F/kappa(p)). LinearEquiv.finrank_eq and natural-number arithmetic give the required rank n - c.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma Tags 07CG and 07CH."
+  "place": "Lemmas Tags 07CG and 07CH; split conormal sequence and differential base change, implemented using the corresponding proved Mathlib declarations."
  },
  "mathlib_searches": [
   {
@@ -85,13 +95,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T225333-L-1814033",
-  "kind": "interface",
+  "landing": "20261013T010622-L-2673737",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
