@@ -1,0 +1,144 @@
+{
+ "id": "lem-pc-scalar-extension-homology-square",
+ "kind": "statement",
+ "title": "Transposition of an ordinary homology square by scalar extension",
+ "statement": "Let $E,F,D$ be commutative rings, $f:E\\to D$ and $g:F\\to D$ ring homomorphisms, $M$ an $E$-module and $N$ an $F$-module [def-weil-module-base-change]. Let $X,Y$ be cochain complexes of $E$- and $F$-modules, $X_D,Y_D$ cochain complexes of $D$-modules, and $i\\in\\mathbf Z$. Suppose $a:M\\to H^i(X)$, $b:N\\to H^i(Y)$, coefficient maps $v_X:X\\to(X_D)_E$, $v_Y:Y\\to(Y_D)_F$, and $D$-linear maps $a_D:D\\otimes_E M\\to H^i(X_D)$, $b_D:D\\otimes_F N\\to H^i(Y_D)$ have adjoint transposes $a;H^i(v_X);s_{X_D,E}$ and $b;H^i(v_Y);s_{Y_D,F}$, respectively. Here $s$ denotes the canonical homology isomorphism for restriction of scalars. Write $U$ for forgetting scalar actions. Suppose an additive map $c:UM\\to UN$ and additive chain map $\\phi:UX\\to UY$ satisfy $U(a);s_{X,U}^{-1};H^i(\\phi)=c;U(b);s_{Y,U}^{-1}$. Suppose a $D$-linear chain map $\\tau:X_D\\to Y_D$ satisfies $U(v_X);U(\\tau)=\\phi;U(v_Y)$. Finally suppose $e:D\\otimes_E M\\to D\\otimes_F N$ is $D$-linear and sends $1\\otimes m$ to $1\\otimes c(m)$ for every $m$. Then $a_D;H^i(\\tau)=e;b_D$. No map is assumed invertible and $D$ is not assumed flat.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 06Y6 (lemma-derived-base-change), 0DJ8 (affine localization identity), and 05G3 (extension/restriction adjunction); explicit formal homology naturality argument"
+ },
+ "stmt_deps": [
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Prove compatibility of mapHomologyIso with homologyπ from LeftHomologyData.mapHomologyIso_eq, mapCyclesIso_eq and π_comp_homologyIso_inv. Prove the two-stage cycles identification by cancellation against the mono image of iCycles. Cancel the epi homologyπ and use its compatibility to prove the two-stage homology identification. All helpers are proved private lemmas.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forget both adjunction identities, use homology naturality and the two-stage identification to rewrite their values through additive ordinary homology. Apply homology to the given coefficient-complex square. Compose it with the assumed ordinary cohomology square, using naturality for tau to transport the target homology identifications. The result equates the additive transposes. Test the desired D-linear maps on 1 tensor m, substitute he and evaluate that equality.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D3",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tags 06Y6, 0DJ8, 05G3; explicit decomposition of the comparison proof",
+  "note": "Fully proved from Mathlib; private projection, cycles and homology coherence helpers plus scalar-extension generator extensionality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived tensor counit comparison under extension of scalars and homology",
+   "results": "Rep.Tor_map, CategoryTheory.Tor'_map_app, ModuleCat.extendScalarsComp_hom_app_one_tmul, CategoryTheory.Tor_map, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, Rep.torIso, CategoryTheory.Tor'_obj_map, ModuleCat.extendScalars_comp_id_assoc",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact stated square."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "HomologicalComplex.homologyMap, HomologicalComplex.homologyMap_id, HomologicalComplex.instIsIsoHomologyMap, HomologicalComplex.epi_homologyMap_of_epi_of_not_rel, HomologicalComplex.mono_homologyMap_of_mono_of_not_rel, HomologicalComplex.homologyMapIso_hom, HomologicalComplex.homologyMapIso_inv, HomologicalComplex.homologyFunctor_map",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact stated square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary cohomology square gives a scalar extension cohomology square by adjunction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologyIso_hom_naturality|leftDerivedNatTrans.*fac|leftDerivedNatIso.*hom",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact stated square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the cohomology comparison of a universal derived functor counit",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact stated square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "results": "CategoryTheory.ShortComplex.mapHomologyIso_hom_naturality",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact stated square."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left_square|homologyπ_comp_homologyIso_hom|mapHomologicalComplexCompIso",
+   "results": "Mathlib/Condensed/Light/Epi.lean, Mathlib/Algebra/Homology/HomotopyCategory.lean, Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean, Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic tools only; no exact stated square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FirstLocalizationComparison",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "affine localization identity: naturality of the derived-to-ordinary comparison and subsequent scalar extension",
+   "via": [
+    "lem-pc-first-localization-comparison",
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-derived-tensor-first-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarExtensionHomologySquare",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarExtensionHomologySquare.lean",
+  "declaration": "ModuleCat.scalarExtension_homology_square",
+  "statement": "theorem scalarExtension_homology_square\n    (E F D : Type u) [CommRing E] [CommRing F] [CommRing D]\n    (f : E →+* D) (g : F →+* D)\n    (M : ModuleCat.{u} E) (N : ModuleCat.{u} F)\n    (X : CochainComplex (ModuleCat.{u} E) ℤ)\n    (Y : CochainComplex (ModuleCat.{u} F) ℤ)\n    (XL YL : CochainComplex (ModuleCat.{u} D) ℤ) (i : ℤ)\n    (a : M ⟶ X.homology i) (b : N ⟶ Y.homology i)\n    (vX : X ⟶ ((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj XL)\n    (vY : Y ⟶ ((restrictScalars g).mapHomologicalComplex (.up ℤ)).obj YL)\n    (aD : (extendScalars f).obj M ⟶ XL.homology i)\n    (bD : (extendScalars g).obj N ⟶ YL.homology i)\n    (ha : (extendRestrictScalarsAdj f).unit.app M ≫ (restrictScalars f).map aD =\n      a ≫ HomologicalComplex.homologyMap vX i ≫\n        (XL.sc i |>.mapHomologyIso (restrictScalars f)).hom)\n    (hb : (extendRestrictScalarsAdj g).unit.app N ≫ (restrictScalars g).map bD =\n      b ≫ HomologicalComplex.homologyMap vY i ≫\n        (YL.sc i |>.mapHomologyIso (restrictScalars g)).hom)\n    (c : (forget₂ (ModuleCat.{u} E) AddCommGrpCat.{u}).obj M ⟶\n      (forget₂ (ModuleCat.{u} F) AddCommGrpCat.{u}).obj N)\n    (φ : ((forget₂ (ModuleCat.{u} E) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).obj X ⟶\n      ((forget₂ (ModuleCat.{u} F) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).obj Y)\n    (hφ : (forget₂ (ModuleCat.{u} E) AddCommGrpCat.{u}).map a ≫\n        (X.sc i |>.mapHomologyIso (forget₂ (ModuleCat.{u} E) AddCommGrpCat.{u})).inv ≫\n          HomologicalComplex.homologyMap φ i =\n      c ≫ (forget₂ (ModuleCat.{u} F) AddCommGrpCat.{u}).map b ≫\n        (Y.sc i |>.mapHomologyIso (forget₂ (ModuleCat.{u} F) AddCommGrpCat.{u})).inv)\n    (τ : XL ⟶ YL)\n    (hv : ((forget₂ (ModuleCat.{u} E) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).map vX ≫\n        ((forget₂ (ModuleCat.{u} D) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).map τ =\n      φ ≫ ((forget₂ (ModuleCat.{u} F) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).map vY)\n    (e : (extendScalars f).obj M ⟶ (extendScalars g).obj N)\n    (he : ∀ m : M, e ((1 : D) ⊗ₜ[E,f] m) = (1 : D) ⊗ₜ[F,g] (show N from c m)) :\n    aD ≫ HomologicalComplex.homologyMap τ i = e ≫ bD",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T140815-L-312078",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261013T140815-L-312078",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

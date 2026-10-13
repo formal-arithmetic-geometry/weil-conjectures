@@ -14,16 +14,24 @@
  ],
  "proof": [
   {
-   "text": "Apply naturality of the derived-functor counit to u_Q and its unique comparison zeta. The ordinary associativity maps commute on b tensor x. Substitute comparison_eq for L and K to obtain the ordinary cohomology square.",
+   "text": "Use firstLocalization_ordinary_square to obtain the additive ordinary cohomology square before extension to D.",
    "uses": [
-    "def-pc-base-derived-tensor-cohomology-model",
-    "lem-pc-first-localization-map"
+    "lem-pc-first-localization-ordinary-square"
    ],
    "elementary": false
   },
   {
-   "text": "On d tensor x the coefficient-extension maps followed by tau agree. Use localized_eq and extension/restriction adjunction to transpose the ordinary square. The generator formula for e identifies the transpose with e followed by K.localizedComparison. Equality of tau with the associativity map follows termwise from equality on pure tensors.",
+   "text": "Prove the coefficient-complex square termwise. Represent every input by L.ordinaryIso.hom using its degreewise surjectivity and induct on tensors b tensor x. Cancel L.ordinaryIso.inv, substitute both ordinaryIso_tmul and ordinaryToLocalized_tmul and the formula for tau. Both coefficients equal algebraMap B D b by tBD and tBqD. Zero and sum cases follow additivity.",
    "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-first-localization-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply scalarExtension_homology_square with the ordinary cohomology square, the coefficient-complex square, both localized_eq identities and the generator equation he. This gives the required D-linear comparison square.",
+   "uses": [
+    "lem-pc-scalar-extension-homology-square",
     "def-pc-base-derived-tensor-cohomology-model",
     "lem-pc-first-localization-map"
    ],
@@ -31,13 +39,17 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-first-localization-ordinary-square",
   "def-pc-base-derived-tensor-cohomology-model",
-  "lem-pc-first-localization-map"
+  "lem-pc-first-localization-map",
+  "lem-pc-scalar-extension-homology-square"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "D3",
+  "date": "2026-10-13",
   "document": "Stacks Project",
-  "place": "Tags 0DJ8 and 06Y6; explicit arbitrary-model transport using the universal counit"
+  "place": "Tags 06Y6 and 0DJ8; ordinary naturality and scalar transposition isolated, coefficient square proved by tensor induction"
  },
  "mathlib_searches": [
   {
@@ -149,9 +161,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H4",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261013T124310-L-3776097",
+  "landing": "20261013T140815-L-312078",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

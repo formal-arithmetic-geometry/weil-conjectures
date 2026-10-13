@@ -5,6 +5,8 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Algebra.Homology.FirstLocalizationMap
+import Sheaf.Algebra.Homology.FirstLocalizationOrdinarySquare
+import Sheaf.Algebra.Homology.ScalarExtensionHomologySquare
 /-! # Comparison square for the characterized localization map
 
 Source: Stacks Project, Tag 06Y6; Tag 0DJ8.
@@ -37,6 +39,7 @@ variable (R A B Aq D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
+set_option linter.unusedSectionVars false in
 include tAD tBD tAqD tBqD tAAqD in
 /-- Comparison square for the characterized localization map.
 Source: Stacks Project, Tag 06Y6; Tag 0DJ8, affine localization identity.
@@ -70,6 +73,63 @@ theorem firstLocalization_comparison (i : ℤ)
                 (algebraMap Aq (Aq ⊗[R] B))] ((1 : Aq) ⊗ₜ[A,algebraMap A Aq] x)) :
           L.localizedComparison i ≫ HomologicalComplex.homologyMap τ.hom i =
             e.hom ≫ K.localizedComparison i := by
-  sorry
+  let X := ((ModuleCat.extendScalars (algebraMap A (A ⊗[R] B))).mapHomologicalComplex (.up ℤ)).obj Q
+  let Y := ((ModuleCat.extendScalars (algebraMap Aq (Aq ⊗[R] B))).mapHomologicalComplex
+    (.up ℤ)).obj ((extend A Aq).obj Q)
+  let φB := L.ordinaryIso.inv ≫ ((ModuleCat.extendScalars
+    (algebraMap R B)).mapHomologicalComplex (.up ℤ)).map
+      (firstLocalizationUnit R A Aq Q) ≫
+      K.ordinaryIso.hom
+  let φ := ((forget₂ (ModuleCat.{u} B) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).map φB
+  have hφ := firstLocalization_ordinary_square R A B Aq D i Q L K
+  have hv : ((forget₂ (ModuleCat.{u} (A ⊗[R] B)) AddCommGrpCat.{u}).mapHomologicalComplex
+      (.up ℤ)).map L.ordinaryToLocalized ≫
+        ((forget₂ (ModuleCat.{u} D) AddCommGrpCat.{u}).mapHomologicalComplex (.up ℤ)).map τ.hom =
+    φ ≫ ((forget₂ (ModuleCat.{u} (Aq ⊗[R] B)) AddCommGrpCat.{u}).mapHomologicalComplex
+      (.up ℤ)).map K.ordinaryToLocalized := by
+    apply HomologicalComplex.Hom.ext
+    funext j
+    apply AddCommGrpCat.hom_ext
+    ext z
+    obtain ⟨z, rfl⟩ := (CategoryTheory.Iso.toLinearEquiv
+      ((HomologicalComplex.eval (ModuleCat.{u} B) (.up ℤ) j).mapIso
+        L.ordinaryIso)).surjective z
+    induction z using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b x =>
+      change B at b
+      change Q.X j at x
+      let : Module R (Q.X j) := Module.compHom (Q.X j) (algebraMap R A)
+      change τ.hom.f j (L.ordinaryToLocalized.f j
+        (L.ordinaryIso.hom.f j (b ⊗ₜ[R,algebraMap R B] x))) =
+        K.ordinaryToLocalized.f j (K.ordinaryIso.hom.f j
+          ((ModuleCat.extendScalars (algebraMap R B)).map
+            ((firstLocalizationUnit R A Aq Q).f j)
+              (L.ordinaryIso.inv.f j (L.ordinaryIso.hom.f j
+                (b ⊗ₜ[R,algebraMap R B] x)))))
+      have hi : L.ordinaryIso.inv.f j (L.ordinaryIso.hom.f j
+          (b ⊗ₜ[R,algebraMap R B] x)) = b ⊗ₜ[R,algebraMap R B] x := by
+        exact (((HomologicalComplex.eval (ModuleCat.{u} B) (.up ℤ) j).mapIso
+          L.ordinaryIso).toLinearEquiv).symm_apply_apply _
+      rw [hi]
+      rw [L.ordinaryIso_tmul, L.ordinaryToLocalized_tmul, hτ,
+        ModuleCat.ExtendScalars.map_tmul]
+      change _ = K.ordinaryToLocalized.f j (K.ordinaryIso.hom.f j
+        (b ⊗ₜ[R,algebraMap R B] ((1 : Aq) ⊗ₜ[A,algebraMap A Aq] x)))
+      rw [K.ordinaryIso_tmul, K.ordinaryToLocalized_tmul]
+      congr 1
+      change algebraMap (A ⊗[R] B) D (algebraMap B (A ⊗[R] B) b) =
+        algebraMap (Aq ⊗[R] B) D (algebraMap B (Aq ⊗[R] B) b)
+      rw [← IsScalarTower.algebraMap_apply B (A ⊗[R] B) D,
+        ← IsScalarTower.algebraMap_apply B (Aq ⊗[R] B) D]
+    | add z z' hz hz' => simp only [map_add] at hz hz' ⊢; rw [hz, hz']
+  exact ModuleCat.scalarExtension_homology_square (A ⊗[R] B) (Aq ⊗[R] B) D
+    (algebraMap (A ⊗[R] B) D) (algebraMap (Aq ⊗[R] B) D)
+    (L.cohomology i) (K.cohomology i) X Y _ _ i
+    (L.comparison i) (K.comparison i) L.ordinaryToLocalized K.ordinaryToLocalized
+    (L.localizedComparison i) (K.localizedComparison i) (L.localized_eq i) (K.localized_eq i)
+    ((forget₂ (ModuleCat.{u} B) AddCommGrpCat.{u}).map
+      (firstLocalizationCohomologyMap R A Aq B D Q L K i))
+    φ hφ τ.hom hv e.hom he
 
 end RingTensorCohomology
