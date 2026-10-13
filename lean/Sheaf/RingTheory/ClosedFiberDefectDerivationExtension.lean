@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.ClosedFiberDerivationExtension
+import Mathlib.Tactic.LinearCombination
 
 /-! # Extending a parameter-vanishing defect derivation
 
@@ -64,6 +66,68 @@ theorem exists_closedFiber_defect_derivation
       ∃ δ : T →+ D, δ 1 = 0 ∧ (∀ x, δ x ∈ J) ∧
         (∀ x z, δ (x * z) = f x * δ z + f z * δ x) ∧
         ∀ r : R, δ (algebraMap R T r) =
-          f (algebraMap R T r) - algebraMap R D r := by sorry
+          f (algebraMap R T r) - algebraMap R D r := by
+  intro L hclosed D _ _ J hJ g f hf htAgree hann
+  have hfq (x : T) : Ideal.Quotient.mk J (f x) = g x :=
+    RingHom.congr_fun hf x
+  have hmem (r : R) : f (algebraMap R T r) - algebraMap R D r ∈ J := by
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    rw [map_sub, hfq, g.commutes]
+    exact sub_self _
+  have hmul (a b : D) (ha : a ∈ J) (hb : b ∈ J) : a * b = 0 := by
+    have hab : a * b ∈ J ^ 2 := by
+      rw [pow_two]
+      exact Ideal.mul_mem_mul ha hb
+    simpa [hJ] using hab
+  -- Use the lift action, rather than the original R-algebra action, on J.
+  let : Algebra T D := f.toAlgebra
+  let : SMul R D := ⟨fun r x ↦ f (algebraMap R T r) * x⟩
+  let : Module T J := Module.compHom J f
+  let : Module R J := Module.compHom J (algebraMap R T)
+  let dadd : R →+ J :=
+    { toFun := fun r ↦ ⟨f (algebraMap R T r) - algebraMap R D r, hmem r⟩
+      map_zero' := by apply Subtype.ext; simp
+      map_add' := by intro a b; apply Subtype.ext; simp [sub_add_sub_comm] }
+  have hdLeibniz (a b : R) : dadd (a * b) = a • dadd b + b • dadd a := by
+    apply Subtype.ext
+    change f (algebraMap R T (a * b)) - algebraMap R D (a * b) =
+      f (algebraMap R T a) * (f (algebraMap R T b) - algebraMap R D b) +
+      f (algebraMap R T b) * (f (algebraMap R T a) - algebraMap R D a)
+    have hab := hmul _ _ (hmem a) (hmem b)
+    simp only [map_mul]
+    linear_combination -hab
+  let d : Derivation ℤ R J := Derivation.mk' dadd.toIntLinearMap hdLeibniz
+  have hannT (x : T) (hx : x ∈ maximalIdeal T) (j : J) : x • j = 0 := by
+    apply Subtype.ext
+    exact hann x hx (f x) (hfq x) j j.property
+  have hannR (r : R) (hr : r ∈ maximalIdeal R) (j : J) : r • j = 0 := by
+    exact hannT (algebraMap R T r) (by
+      rw [← maximalIdeal_comap (algebraMap R T)] at hr
+      exact hr) j
+  have hdt (r : R) (hr : r ∈ t) : d r = 0 := by
+    apply Subtype.ext
+    exact sub_eq_zero.mpr (htAgree r hr)
+  have hkill (r : R) (hr : r ∈ maximalIdeal R) : d r = 0 := by
+    rw [← ht] at hr
+    induction hr using Submodule.span_induction with
+    | mem r hr => exact hdt r hr
+    | zero => exact map_zero d
+    | add a b ha hb hda hdb => simp only [map_add, hda, hdb, add_zero]
+    | smul a b hb hdb =>
+      change d (a * b) = 0
+      rw [d.leibniz, hdb, smul_zero, zero_add]
+      exact hannR b (by rw [← ht]; exact hb) (d a)
+  obtain ⟨d', hd'⟩ := Derivation.exists_extension_of_closedFiber R T hclosed J hannT d hkill
+  let δ : T →+ D := J.subtype.toAddMonoidHom.comp d'.toLinearMap.toAddMonoidHom
+  refine ⟨δ, ?_, ?_, ?_, ?_⟩
+  · change (d' 1 : D) = 0
+    rw [d'.map_one_eq_zero]
+    rfl
+  · intro x
+    exact (d' x).property
+  · intro x z
+    exact congrArg Subtype.val (d'.leibniz x z)
+  · intro r
+    exact congrArg Subtype.val (hd' r)
 
 end Algebra

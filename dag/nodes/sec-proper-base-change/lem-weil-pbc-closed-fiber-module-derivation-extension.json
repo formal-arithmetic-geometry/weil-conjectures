@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-closed-fiber-module-derivation-extension",
+ "kind": "statement",
+ "title": "Extending a closed-point-valued absolute derivation across a smooth closed fibre",
+ "statement": "Let $R\\to T$ be a local homomorphism of commutative local rings, with $T$ Noetherian [def-weil-pbc-noetherian-ring]. Put $L=\\mathfrak m_RT$, $k=R/\\mathfrak m_R$, and $C=T/L$, with its induced $k$-algebra structure. Assume $C$ is formally smooth over $k$ for the image of $\\mathfrak m_T$ [def-weil-pbc-formally-smooth-adic]. Let $M$ be any $T$-module with $\\mathfrak m_TM=0$, viewed as an $R$-module through $R\\to T$. Every absolute derivation $d:R\\to M$ [def-weil-pbc-kahler-differentials] which vanishes on $\\mathfrak m_R$ extends to an absolute derivation $d\\prime:T\\to M$ satisfying $d\\prime(r_T)=d(r)$ for every $r\\in R$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07NQ, final differential extension argument (from the base defect D to D\\prime), using Tag 07EL (2) implies (5); module-valued formulation of that argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Locality gives $L\\subseteq\\mathfrak m_T$. The quotient $C=T/L$ is nonzero local and Noetherian, and its maximal ideal is the image of $\\mathfrak m_T$. Since $\\mathfrak m_T$ annihilates $M$, the action factors through $C$ and then $K=C/\\mathfrak m_C$. Give $M$ the $k$-action through $k\\to C$. The additive map of $d$ descends to $k$ because it kills $\\mathfrak m_R$. On residue classes represented by $a,b\\in R$, the Leibniz rule descends as well, since their $k$-actions agree with their original $R$-actions.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal property of differentials sends the descended derivation to a $k$-linear functional $\\Omega_{k/\\mathbf Z}\\to M$. Extend scalars to obtain a $K$-linear functional $\\phi:K\\otimes_k\\Omega_{k/\\mathbf Z}\\to M$, taking $a\\otimes\\mathrm db$ to $a\\,d(b)$. The tensor universal property gives this map; on $1\\otimes\\mathrm db$ it agrees with the descended derivation.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-module-tensor-hom-currying"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Adic formal smoothness gives injectivity of $\\iota:K\\otimes_k\\Omega_{k/\\mathbf Z}\\to K\\otimes_C\\Omega_{C/\\mathbf Z}$. Choose a linear left inverse $s$ of $\\iota$: vector spaces have bases and complementary subspaces (equivalently, the quotient of the codomain by its image is projective). Mathlib supplies this as LinearMap.leftInverse with leftInverse_apply_of_inj. Thus $\\psi=\\phi\\circ s$ extends $\\phi$. Precompose $\\psi$ with $c\\mapsto 1\\otimes\\mathrm dc$ and $T\\to C$ to obtain $d\\prime$. These are a linear map following the universal derivation and a composition with a ring map, so the result is an absolute derivation. On $r_T$, the differential equals $\\iota(1\\otimes\\mathrm d\\bar r)$; applying $s\\iota=1$ gives $d\\prime(r_T)=d(r)$.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-field-differentials-injective",
+    "lem-weil-pbc-vector-space-projective",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07NQ final differential extension argument, using 07EL; direct quotient descent replaces the conormal exact-sequence factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An absolute derivation vanishing on the maximal ideal of a base local ring extends to a formally smooth closed fibre into any module supported at the closed point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An absolute derivation vanishing on an ideal extends to a local algebra with formally smooth closed fibre and values in a module annihilated by the maximal ideal",
+   "results": "Returned 8 hits: derivationToSquareZeroOfLift_apply, derivationToSquareZeroOfLift, derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero_mk_apply', Algebra.Extension.homInfinitesimal, liftOfDerivationToSquareZero_mk_apply, liftOfDerivationToSquareZero_apply, liftOfDerivationToSquareZero. None states this module-valued closed-fibre extension theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closedFiber|closed_fiber|exists_extension_of",
+   "results": "Returned 18 hits: Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/FiberPartition.lean, Mathlib/Analysis/LocallyConvex/HahnBanach.lean, Mathlib/Analysis/LocallyConvex/HahnBanach.lean, Mathlib/Analysis/LocallyConvex/HahnBanach.lean, Mathlib/Analysis/LocallyConvex/HahnBanach.lean, Mathlib/Analysis/LocallyConvex/HahnBanach.lean. None states this module-valued closed-fibre extension theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ClosedFiberDefectDerivationExtension",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 07NQ, final coordinate lifting argument: Tags 07NQ and 07EL, factorization through residue-field differentials and extension of the defect functional; extension of an arbitrary absolute derivation vanishing on the base maximal ideal into a module annihilated by the target maximal ideal",
+   "via": [
+    "lem-weil-pbc-closed-fiber-defect-derivation-extension",
+    "lem-weil-pbc-power-series-parameter-map-fs-adic",
+    "lem-weil-pbc-flat-fs-closed-fibre-complete-case",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ClosedFiberDerivationExtension",
+  "file": "lean/Sheaf/RingTheory/ClosedFiberDerivationExtension.lean",
+  "declaration": "Derivation.exists_extension_of_closedFiber",
+  "statement": "theorem exists_extension_of_closedFiber\n    (R : Type u) (T : Type v) [CommRing R] [CommRing T]\n    [IsLocalRing R] [IsLocalRing T] [IsNoetherianRing T]\n    [Algebra R T] [IsLocalHom (algebraMap R T)] :\n    let L : Ideal T := (maximalIdeal R).map (algebraMap R T)\n    letI : Algebra (R ⧸ maximalIdeal R) (T ⧸ L) :=\n      Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map :\n        maximalIdeal R ≤ L.comap (algebraMap R T))\n    Algebra.FormallySmoothAdic (R ⧸ maximalIdeal R) (T ⧸ L)\n        ((maximalIdeal T).map (Ideal.Quotient.mk L)) →\n    ∀ (M : Type w) [AddCommGroup M] [Module T M],\n      (∀ x ∈ maximalIdeal T, ∀ m : M, x • m = 0) →\n      letI : Module R M := Module.compHom M (algebraMap R T)\n      ∀ d : Derivation ℤ R M, (∀ r ∈ maximalIdeal R, d r = 0) →\n        ∃ d' : Derivation ℤ T M, ∀ r : R, d' (algebraMap R T r) = d r",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-module-tensor-hom-currying",
+  "lem-weil-pbc-fs-adic-field-differentials-injective",
+  "lem-weil-pbc-vector-space-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T082353-L-1638989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261013T082353-L-1638989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
