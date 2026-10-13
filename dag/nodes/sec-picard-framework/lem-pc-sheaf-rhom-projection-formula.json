@@ -29,53 +29,41 @@
  ],
  "proof": [
   {
-   "text": "The adjunction [lem-pc-ringed-spaces-derived-adjoint-general] supplies the unit and counit of Lf^* ⊣ Rf_*. The tensor-internal-Hom adjunction [lem-sc-derived-internal-hom-adjunction] supplies the evaluation morphism R\\mathcal Hom_{\\mathcal O_X}(L,M)\\otimes^L L\\to M corresponding to the identity of R\\mathcal Hom_{\\mathcal O_X}(L,M).",
+   "text": "Obtain the scheme pullback/direct-image adjunction a from nonempty_derivedPullbackAdjunction. Obtain canonical natural tensor-Hom equivalences ex and ey from exists_canonicalDerivedTensorHom; their inverses give adjunctions bX and bY via Mathlib Adjunction.mkOfHomEquiv. Both required naturality laws are proved from the three-variable naturality equation.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "lem-sc-derived-internal-hom-adjunction"
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-canonical-derived-tensor-hom-bijection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Remark remark-projection-formula-for-internal-hom, construction from the derived adjunction and evaluation"
-   }
+   "elementary": false
   },
   {
-   "text": "Test against an arbitrary A in D(O_Y) and a map \\alpha:A\\to Rf_*R\\mathcal Hom_X(L,M). By the adjunction [lem-pc-ringed-spaces-derived-adjoint-general], \\alpha corresponds to Lf^*A\\to R\\mathcal Hom_X(L,M), which by [lem-sc-derived-internal-hom-adjunction] gives an evaluation composite Lf^*A\\otimes^L L\\to M. The adjunction transposes a map A\\otimes^L Rf_*L\\to Rf_*M to a map Lf^*(A\\otimes^L Rf_*L)\\to M. Using [lem-pc-derived-pullback-tensor-product] to identify this source with Lf^*A\\otimes^L Lf^*Rf_*L, compose 1\\otimes the counit Lf^*Rf_*L\\to L with the evaluation composite. This constructs naturally a map A\\otimes^L Rf_*L\\to Rf_*M for every \\alpha, hence by Yoneda a canonical morphism Rf_*R\\mathcal Hom_X(L,M)\\to R\\mathcal Hom_Y(Rf_*L,Rf_*M).",
+   "text": "Obtain a canonical monoidal model m of derivedPullback f. Define t at (A,B) to be the inverse of m.μIso A B. Prove its product-category naturality by cancellation of the tensorator isomorphisms and the left and right tensorator naturality laws.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "lem-sc-derived-internal-hom-adjunction",
-    "lem-pc-derived-pullback-tensor-product"
+    "def-pc-derived-pullback-monoidal-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Remark remark-projection-formula-for-internal-hom, projection comparison induced by evaluation"
-   }
+   "elementary": false
   },
   {
-   "text": "All arrows in the construction are the natural unit, counit, tensor comparison, and evaluation maps supplied by the cited adjunction and tensor-Hom statements. Their functoriality in L and M therefore makes the resulting morphism natural in both variables; no invertibility is asserted.",
+   "text": "For L,M define c(L,M) by transposing the identity map of Rf_*RHom(L,M): apply the pullback adjunction inverse, ex, identity tensor the pullback counit after t, then transpose by a and ey. Naturality in the test map alpha proves the required mate equation. To prove naturality in L,M, apply ey injectivity to the naturality square and use ex and ey naturality, t naturality, and counit naturality. These computations are implemented in the private internalHomMate_of_tensorComparison helper. Unlike the private isomorphism-based helper of GlobalHomAdjunctionIso, it accepts an arbitrary natural tensor comparison, with no inverse or invertibility hypothesis; apply it to t.hom. Package a,bX,bY,t,c and rewrite the homEquiv of mkOfHomEquiv to get exactly the original target statement.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
-    "lem-sc-derived-internal-hom-adjunction",
-    "lem-pc-derived-pullback-tensor-product"
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-pc-derived-pullback-monoidal-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Remark remark-projection-formula-for-internal-hom, naturality clause"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-sc-derived-internal-hom-adjunction",
-  "lem-pc-derived-pullback-tensor-product"
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-pc-derived-pullback-monoidal-model"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "Y3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Remark remark-projection-formula-for-internal-hom (source text unavailable in checkout; construction reconstructed from the cited adjunction and evaluation)"
+  "place": "Remark remark-projection-formula-for-internal-hom; categorical mate argument generalized to any natural tensor comparison (no invertibility assumption), specialized to the forward map of the canonical scheme tensor comparison; repair of return X-b3441"
  },
  "mathlib_searches": [
   {
@@ -161,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9c847",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T062537-L-737388",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged Lean signature and evaluation-mate proof with the node and dependency interfaces; delivery and sole direct importer compile cleanly; axioms, node changes, pruning report, and earlier-return repair checked."
  }
 }
