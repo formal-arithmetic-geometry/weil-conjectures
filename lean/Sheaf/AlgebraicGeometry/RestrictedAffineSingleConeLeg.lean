@@ -20,6 +20,16 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
+private theorem mapped_iso_inv_leg {A B C : Type*}
+    [Category A] [Category B] [Category C] (P : A ⥤ B) (J : B ⥤ C)
+    {X Y X' : A} {Z W : B} {V : C}
+    (e : X ≅ Y) (b : Z ≅ P.obj Y) (a : Z ≅ W) (s : V ≅ J.obj W)
+    (f : X ⟶ X') :
+    (J.mapIso (P.mapIso e ≪≫ b.symm ≪≫ a) ≪≫ s.symm).inv ≫ J.map (P.map f) =
+      s.hom ≫ J.map (a.inv ≫ b.hom ≫ P.map (e.inv ≫ f)) := by
+  simp only [Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv,
+    Functor.map_comp, Category.assoc]
+
 /-- The explicit cone comparison carries the restricted colimit leg to the
 canonical restricted coefficient map.
 Source: Stacks Project, Tags 09Z1 and 0EZM.
@@ -48,6 +58,20 @@ theorem restrictedAffineSingleConeIso_inv_leg {S : Scheme.{v}}
         (CochainComplex.singleFunctor _ 0).map
           (rawAffineRestrictedCoefficient (c.π.app i).left (D.obj i).hom c.pt.hom
             (Over.w (c.π.app i)) (F i.unop) (colimit H)
-            ((eH i.unop).inv ≫ colimit.ι H i.unop) U) := by sorry
+            ((eH i.unop).inv ≫ colimit.ι H i.unop) U) := by
+  let q := (restrictedAffineCone D c U).π.app i
+  let r := pullback.snd U.hom (D.obj i).hom
+  let r' := pullback.snd U.hom c.pt.hom
+  have hw : q ≫ r = r' ≫ (c.π.app i).left := by
+    simp [q, r, r', restrictedAffineCone, rawAffineRestrictedMap]
+  let P := upperStar AddCommGrpCat.{v + 1} r'
+  let J := CochainComplex.singleFunctor
+    (Sheaf (pullback U.hom c.pt.hom).smallEtaleTopology AddCommGrpCat.{v + 1}) 0
+  let a := (upperStarComp AddCommGrpCat.{v + 1} q r).app (F i.unop)
+  let b := (upperStarComp AddCommGrpCat.{v + 1} r' (c.π.app i).left
+    (q ≫ r) hw).app (F i.unop)
+  let s := ((upperStar AddCommGrpCat.{v + 1} q).mapCochainComplexSingleFunctor 0).app
+    ((upperStar AddCommGrpCat.{v + 1} r).obj (F i.unop))
+  exact mapped_iso_inv_leg P J (eH i.unop) b a s (colimit.ι H i.unop)
 
 end AlgebraicGeometry.Etale
