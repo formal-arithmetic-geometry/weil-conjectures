@@ -13,37 +13,45 @@
  },
  "proof": [
   {
-   "text": "The cokernel projection is epi. Use local lifting to lift each of the finitely many basis sections defining g on a neighbourhood of x and intersect those neighbourhoods with U. Restrict all lifts to that common neighbourhood. This also works for n = 0, when there are no sections to lift.",
+   "text": "Choose a member of the finite local-generators cover of F containing x and intersect it with U. Restrict g to that intersection using mapFreeIso and overFunctorMap. Apply the already proved finite_sections_lift helper of ModuleFiniteTypeImageExtension to the cokernel projection and the n basis sections. It returns a common smaller neighbourhood V and simultaneous lifts, including when n is zero. The helper is proved from the local lifting criterion, not from a finite-type image assertion.",
    "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
     "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
    ],
    "elementary": false
   },
   {
-   "text": "The image of f is an epimorphic image of F, hence is finite type. Choose a neighbourhood of x with finitely many image generators, intersect it with the lifting neighbourhood and restrict the generators. Finite type is precisely the local finite-generator condition.",
+   "text": "Restrict the chosen generators of F to V with the proved generators_over and generators_over_finite helpers of ModuleFiniteTypeImageExtension. Convert each lifted section to a global section on the over-site using section_on_open. The tuple_over_eval helper, basis compatibility of mapFreeIso, and sections_ext_top show that the resulting free morphism lifts the restricted tuple. The restriction comparison isomorphisms put this lift and the generators in the literal objects of the statement.",
    "uses": [
-    "lem-weil-pbc-sheaf-finite-type-epi-image",
-    "def-weil-pbc-module-finite-type-presentation"
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-sc-derived-hom-mayer-vietoris"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "On the resulting V, generate the pullback by the pairs (e_i,s_i), where s_i is the chosen lift of the i-th basis section, together with the pairs (0,t_j) for the image generators. For a section (a,b) of the pullback, subtract the linear combination of the (e_i,s_i) with coefficients a_i. The remainder has first coordinate zero; its second coordinate is annihilated by the cokernel projection, hence locally comes from F. The image generators locally express this remainder. Therefore the finite-free map to the pullback is locally surjective, and hence epi. Enumerate the disjoint union of the finite lists as ULift (Fin m) and return the cover map.",
+   "text": "Map the exact cokernel sequence F → G → cokernel f through overFunctor followed by overMap; finite-colimit preservation and ShortComplex.Exact.map_of_epi_of_preservesCokernel preserve exactness. The private exact_pullback helper proves by Mathlib refinements that F_V → pullback(g_V,q_V) → free_V^n is exact. For a map out of this pullback killed by the proposed coproduct map, cancel the epimorphism from the chosen generators of F_V. Exactness factors the map through free_V^n. Its composite with the chosen lifted basis map is zero; since the latter projects to the free-module restriction isomorphism, cancel that isomorphism. The original map is zero, proving the coproduct map epi by Preadditive.epi_iff_cancel_zero.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-derived-hom-mayer-vietoris"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The sum of the finite index type of the generators and ULift (Fin n) is finite. Enumerate it by ULift (Fin m) using Fintype.equivFin; map the enumeration through freeFunctor and use freeSumIso to identify the resulting free sheaf with the coproduct. Compose these isomorphisms with the proved epimorphism. Return V, its inclusion in U, x in V, m and that composite. All constructions allow empty finite lists; the hypothesis x in U already excludes an empty U.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
   "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-  "lem-weil-pbc-sheaf-finite-type-epi-image",
-  "def-weil-pbc-module-finite-type-presentation"
+  "lem-sc-derived-hom-mayer-vietoris",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BY, proof of (3), cokernel paragraph. The pullback packages the source construction from image generators and lifts."
+  "place": "Stacks Modules, Tag 01BY, cokernel paragraph: use images of chosen local generators of F directly, and the pullback exact sequence. Lean proof by J1 reuses the proved local-lifting and restriction helpers in ModuleFiniteTypeImageExtension; no new holes."
  },
  "mathlib_searches": [
   {
@@ -116,10 +124,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261013T062520-L-732369",
-  "kind": "interface",
+  "landing": "20261013T072352-L-1120603",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
