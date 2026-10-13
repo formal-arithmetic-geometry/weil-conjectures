@@ -23,6 +23,24 @@ theorem strictHenselization_surjective_quotient_data
       (_ : IsSepClosure (IsLocalRing.ResidueField B) L)
       (_ : Algebra B L) (_ : IsScalarTower B (IsLocalRing.ResidueField B) L)
       (_ : Algebra B (C ⧸ I.map (algebraMap A C))), True := by
-  sorry
+  have _ := hI
+  let L := SeparableClosure (IsLocalRing.ResidueField B)
+  let : Field L := inferInstance
+  let : Algebra (IsLocalRing.ResidueField B) L := inferInstance
+  let : IsSepClosure (IsLocalRing.ResidueField B) L := inferInstance
+  let : Algebra B L := RingHom.toAlgebra
+    ((algebraMap (IsLocalRing.ResidueField B) L).comp (IsLocalRing.residue B))
+  let : IsScalarTower B (IsLocalRing.ResidueField B) L :=
+    IsScalarTower.of_algebraMap_eq' (R := B) (S := IsLocalRing.ResidueField B) (A := L)
+      (by ext; rfl)
+  let J := I.map (algebraMap A C)
+  let f : A →+* C ⧸ J := (Ideal.Quotient.mk J).comp (algebraMap A C)
+  have hf : RingHom.ker π ≤ RingHom.ker f := by
+    intro a ha
+    apply RingHom.mem_ker.mpr
+    exact Ideal.Quotient.eq_zero_iff_mem.mpr
+      (Ideal.mem_map_of_mem (algebraMap A C) (hker ▸ ha))
+  let hC : Algebra B (C ⧸ J) := (π.liftOfSurjective hπ ⟨f, hf⟩).toAlgebra
+  exact ⟨L, inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, hC, trivial⟩
 
 end Algebra
