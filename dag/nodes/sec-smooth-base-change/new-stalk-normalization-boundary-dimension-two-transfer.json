@@ -1,0 +1,118 @@
+{
+ "id": "new-stalk-normalization-boundary-dimension-two-transfer",
+ "kind": "statement",
+ "title": "Finite normalization transfers boundary dimension",
+ "statement": "For the finite localized relative normalization, a boundary target stalk of Krull dimension at least two implies that every source stalk above it has Krull dimension at least two.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0337, 00LK, 033C and 00H8"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [
+  {
+   "text": "On normal affine components the finite normalization is an integral extension with going down; lift a strict prime chain of length two from the target stalk to the source stalk.",
+   "uses": [
+    "lem-sbc-stalk-normalization-normal-dense",
+    "lem-weil-pbc-going-down-normal-integral"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-stalk-normalization-normal-dense",
+  "lem-weil-pbc-going-down-normal-integral"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E4",
+  "document": "Stacks Project",
+  "place": "Tags 0337, 00LK, 033C and 00H8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "boundary stalk dimension two",
+   "results": "No exact theorem found",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim going down",
+   "results": "No exact theorem found",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*boundary.*dimension",
+   "results": "No exact theorem found",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwo",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-stalk-normalization-boundary-dimension-two",
+   "place": "proof steps 2-3",
+   "via": [
+    "lem-sbc-stalk-normalization-boundary-dimension-two"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationBoundaryDimensionTwoTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationBoundaryDimensionTwoTransfer.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_boundary_dimension_two_transfer",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13",
+  "statement": "theorem stalk_normalization_boundary_dimension_two_transfer {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s)\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth\n      (R := S.presheaf.stalk s) (S.presheaf.stalk s))\n    (hboundary : let a := S.fromSpecStalk s\n      ∀ y : (pullback c a : Scheme.{u}),\n        y ∉ (pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) →\n        (2 : WithBot ℕ∞) ≤ ringKrullDim ((pullback c a).presheaf.stalk y)) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let a := S.fromSpecStalk s\n    let n := pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a)\n    IsFinite n → ∀ z : (pullback\n      (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization (pullback.fst c a) : Scheme.{u}),\n      n z ∉ (pullback.fst c a) ⁻¹ᵁ (c ⁻¹ᵁ U) →\n      (2 : WithBot ℕ∞) ≤ ringKrullDim\n        ((pullback (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n          (pullback.fst c a) : Scheme.{u}).presheaf.stalk z)"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T145119-L-695680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T145119-L-695680",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
