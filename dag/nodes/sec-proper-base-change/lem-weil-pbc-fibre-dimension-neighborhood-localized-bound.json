@@ -22,24 +22,46 @@
  ],
  "proof": [
   {
-   "text": "Identify each localized fibre with the principal open D(g ⊗ 1) in the original fibre using tensor localization base change and the affine-spectrum localization homeomorphism; transfer local bounds via the fibre-prime order isomorphism and apply the supremum formula for Krull dimension.",
+   "text": "For each base prime p set k = κ(p), F = k tensor_R S and a = 1 tensor g. Apply IsLocalization.Away.tensorProductEquivTMulRight to identify the localized fibre k tensor_R S_g with F_a, and take the homeomorphism of prime spectra induced by this ring equivalence.",
    "uses": [
-    "lem-weil-pbc-fibre-dimension-neighborhood"
+    "lem-weil-pbc-algebra-localization-away-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00DK, 00DL and 00E4"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The contraction f : Spec F_a → Spec F is an open embedding with range D(a). For a point Qg let Q = f(Qg); then a is not in Q. Use the inverse of PrimeSpectrum.preimageEquivFiber to obtain its corresponding prime q of S over p. The inverse contracts along includeRight, so g is not in q. Surjectivity of the fibre equivalence and substitution of q ∩ R = p allow hV to give local dimension at Q at most d. This reindexing is the proved private helper fibre_bound_at_fixed_base.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any inducing map f, pull back an open neighbourhood U of f(x). The restricted map from its inverse image into U is inducing, so Topology.IsInducing.topologicalKrullDim_le bounds its global dimension by that of U. Taking infima gives the local-dimension inequality, proved in the private helper dimAt_inducing_le. This applies even to noninjective, nonsurjective inducing maps. Apply it to the fibre homeomorphism and the homeomorphism onto the localization embedding range. The open-subspace local-dimension equality identifies the dimension in that range with that at Q in Spec F. Combine with step 2 to bound each point of the localized fibre by d.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite the dimension of the localized fibre as the supremum of its pointwise local dimensions and apply iSup_le to the bounds in step 3. An empty spectrum gives an empty supremum, so the supplied nontriviality hypothesis is not needed by the proof; its statement is retained unchanged.",
+   "uses": [
+    "lem-weil-pbc-dimension-supremum-local-dimensions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fibre-dimension-neighborhood"
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-supremum-local-dimensions"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 00DK, 00DL and 00E4"
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/topology.tex",
+  "place": "Tags 00DK, 00DL, 00E4, 00E6; Definition 0055 and Tag 0B7I; formalized by U1, 2026-10-13; returned duplicate helper repaired using inducing-map monotonicity"
  },
  "mathlib_searches": [
   {
@@ -96,13 +118,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T194150-L-468048",
-  "kind": "interface",
+  "landing": "20261013T062533-L-736221",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
