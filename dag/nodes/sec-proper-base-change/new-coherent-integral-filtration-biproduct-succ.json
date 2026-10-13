@@ -12,11 +12,26 @@
  ],
  "proof": [
   {
-   "text": "Construct the filtration by composing the old chain with the split inclusion into the biproduct, append the full object, and transport coherence and quotient witnesses across the resulting isomorphisms.",
+   "text": "Unpack the given chain c of length m. Set f to the first biproduct inclusion followed by e.inv. Map each chain arrow along the monomorphism f and append the top subobject with Fin.lastCases, giving a length m+1 chain. Subobject.mk_le_mk_of_comm proves monotonicity; Subobject.map_bot proves the bottom endpoint, and lastCases gives the top endpoint. This also covers m=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Recover coherence of F from its top chain member. Apply coherence closure under short exact extensions to the standard split biproduct short exact sequence, and transport across e to obtain coherence of G. The mapped old members are canonically isomorphic to the original members; the appended top is isomorphic to G. Transport coherence along these isomorphisms.",
    "uses": [
     "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each old adjacent pair, Subobject.underlyingIso identifies the two mapped members with their original members. The resulting square commutes by cancellation against the mapped target arrow and Subobject.ofLE_arrow. Use cokernel.mapIso to transport the old quotient witness. Equality transport handles the Fin.lastCases indices without changing the inclusion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "At the final adjacent pair, c(last m)=top identifies the lower member with Subobject.mk f. The upper member is top. Use cokernel.mapIso to identify its quotient with cokernel f, then cokernelCompIsIso and cokernelBiprodInlIso identify this with A. Compose with the supplied integral-ideal pushforward isomorphism and retain all its witnesses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -107,13 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P4",
+  "reviewer": "X-94323",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T231638-L-1963099",
+  "landing": "20261013T022413-L-3213195",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered proof and unchanged signature with the node, dependency declarations, source route, report, clean compilation, axiom probes, and unchanged direct importer."
  }
 }
