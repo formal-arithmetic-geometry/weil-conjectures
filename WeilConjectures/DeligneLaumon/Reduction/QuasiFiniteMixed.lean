@@ -34,13 +34,17 @@ universe u
 
 open CategoryTheory Limits
 
+/- Through `Mathlib.AlgebraicGeometry.Group.Affine`, `Spec k₀` is also an object over itself via
+`specOverSpec`; prefer the identity structure `CategoryTheory.instOverClass`. -/
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry.WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {ι : PadicAlgCl l →+* ℂ} {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The constant Weil sheaf `ℚ̄_ℓ` is punctually `ι`-pure of weight `0`: its local Frobenius is
-the identity. -/
+the identity (blueprint: `lem-zl-constant-sheaf-weight-zero`). -/
 theorem isPunctuallyPureOfWeight_adicConstant :
     (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 := by
   intro x α hα

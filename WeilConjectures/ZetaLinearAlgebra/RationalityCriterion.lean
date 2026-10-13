@@ -77,7 +77,7 @@ theorem finiteDimensional_shiftSpan_of_forall_add_eq_zero {a : ℕ → K} {m d :
 namespace PowerSeries
 
 /-- The **Hankel matrix** `(c_{r+s})_{r,s ≥ 0}` of a power series `∑ cₙ Tⁿ`
-(blueprint `def-weil-hankel-matrix`). -/
+(blueprints `def-weil-hankel-matrix`, `sk-def-roots`). -/
 noncomputable def hankel {R : Type*} [Semiring R] (f : R⟦X⟧) : Matrix ℕ ℕ R :=
   Matrix.of fun r s => coeff (r + s) f
 

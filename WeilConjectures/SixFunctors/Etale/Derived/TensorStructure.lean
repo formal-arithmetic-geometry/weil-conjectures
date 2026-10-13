@@ -69,6 +69,11 @@ noncomputable def derivedTensorAssociator
       ((derivedTensor A X).obj K).obj (((derivedTensor A X).obj M).obj N) :=
   α_ K M N
 
+/-- `AlgebraicGeometry.Etale.derivedTensorAssociator` is the associator of `D(X_ét)`. -/
+lemma derivedTensorAssociator_eq (K M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    derivedTensorAssociator A X K M N = α_ K M N :=
+  rfl
+
 /-- The left unitor `Λ_X ⊗ᴸ K ≅ K` of the derived tensor product, `Λ_X = 𝟙_` being the
 constant complex. -/
 noncomputable def derivedTensorLeftUnitor
@@ -88,6 +93,11 @@ noncomputable def derivedTensorRightUnitor
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedTensor A X).obj K).obj (𝟙_ _) ≅ K :=
   ρ_ K
+
+/-- `AlgebraicGeometry.Etale.derivedTensorRightUnitor` is the right unitor of `D(X_ét)`. -/
+lemma derivedTensorRightUnitor_eq (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    derivedTensorRightUnitor A X K = ρ_ K :=
+  rfl
 
 /-- The symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of the derived tensor product, natural in both variables:
 an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗ᴸ K`. The derived

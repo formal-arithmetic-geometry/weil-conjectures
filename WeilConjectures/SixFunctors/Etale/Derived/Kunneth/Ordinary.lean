@@ -7,9 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarId
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
@@ -197,6 +199,7 @@ noncomputable def rightDerivedLowerStarCompIsoOfComp (p : W ⟶ X) (f : X ⟶ S)
       (derivedUpperStarLowerStarAdjunction A p)) (derivedUpperStarLowerStarAdjunction A c)
     (leftDerivedUpperStarComp A p f c hp.symm)
 
+omit [Etale.UpperStarPreservesFlat A] in
 /-- The counit of `Lc^* ⊣ Rc_*` composed with `Lc^*` of the composition isomorphism
 `Rf_* Rp_* ≅ Rc_*` is the counit of the composite adjunction `Lf^* ⋙ Lp^* ⊣ Rp_* ⋙ Rf_*`. -/
 @[reassoc]
@@ -308,12 +311,6 @@ end Maps
 section Constant
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
-
-/-- The constant sheaf functor preserves finite limits: it is the constant presheaf functor
-followed by sheafification. -/
-instance preservesFiniteLimits_constantSheaf :
-    PreservesFiniteLimits (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  comp_preservesFiniteLimits (Functor.const _) (presheafToSheaf _ _)
 
 /-- Blueprint `def-kun-constant-sheaf`: constant sheaves and constant complexes.
 
@@ -499,19 +496,6 @@ noncomputable def etaleTerminal (X : Scheme.{u}) : X.Etale :=
 noncomputable def isTerminalEtaleTerminal (X : Scheme.{u}) : IsTerminal (etaleTerminal X) :=
   MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X
 
-/-- The base change of the terminal object of `Y.Etale` along `f : X ⟶ Y` is terminal in
-`X.Etale`. -/
-noncomputable def isTerminalPullbackEtaleTerminal {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    IsTerminal ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj
-      (etaleTerminal Y)) :=
-  have : IsIso ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj
-      (etaleTerminal Y)).hom := by
-    rw [MorphismProperty.Over.pullback_obj_hom]
-    exact inferInstanceAs (IsIso (pullback.snd (𝟙 Y) f))
-  (isTerminalEtaleTerminal X).ofIso (MorphismProperty.Over.isoMk
-    (asIso ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj
-      (etaleTerminal Y)).hom) (Category.comp_id _)).symm
-
 /-- The evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F`, `1_s ↦ s`, of an étale sheaf of
 `Λ`-modules. -/
 noncomputable def globalSectionsEvaluation (X : Scheme.{u})
@@ -526,17 +510,6 @@ generated* if its evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F` is an ep
 def IsGloballyGenerated (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Prop :=
   Epi (globalSectionsEvaluation Λ X F)
-
-/-- Blueprint `lem-kun-pullback-constant` (underived): the inverse image of a constant sheaf is
-the constant sheaf, `f^*(M_Y) ≅ M_X`. Both functors are left adjoint to the global sections
-functor on `X_ét`, since `Γ(Y, f_* G) = Γ(X, G)`. -/
-noncomputable def constantSheafCompUpperStarIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ (f)^*[ModuleCat.{u + 1} Λ] ≅
-      constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
-  (((constantSheafAdj _ _ (isTerminalEtaleTerminal Y)).comp
-      (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)).ofNatIsoRight
-    (NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦ rfl)).leftAdjointUniq
-    (constantSheafAdj _ _ (isTerminalPullbackEtaleTerminal f))
 
 /-- Blueprint `lem-kun-pullback-constant`: the inverse image of a constant complex is the
 constant complex, `Lf^*(C_Y) ≅ C_X`. -/

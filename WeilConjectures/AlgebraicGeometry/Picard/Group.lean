@@ -118,9 +118,12 @@ noncomputable def oneIso : (fromSkeleton Y.Modules).obj (1 : Y.Pic).val ≅ 𝟙
   ofIsInvertibleIso _
 
 /-- **The group law on the Picard group**, induced by the tensor product of invertible modules.
-The inverse of a class is the class of the dual module.
+The unit is the class of `𝒪_Y` and the inverse of a class is the class of the dual module;
+tensor products and duals of invertible modules are invertible by
+`AlgebraicGeometry.Scheme.Modules.IsInvertible.tensorObj` and
+`AlgebraicGeometry.Scheme.Modules.IsInvertible.dual`.
 
-(blueprint: `lem-sc-pic-group`) -/
+(blueprint: `lem-sc-pic-group`, `def-sc-picard-group`) -/
 noncomputable instance instCommGroup : CommGroup Y.Pic where
   mul_assoc L L' L'' := by
     refine eq_iff_nonempty_iso.2 ⟨mulIso _ _ ≪≫ whiskerRightIso (mulIso _ _) _ ≪≫ α_ _ _ _ ≪≫
@@ -189,6 +192,19 @@ lemma ofIsInvertible_dual (M : Y.Modules) [Modules.IsInvertible M] :
   obtain ⟨d⟩ := Modules.nonempty_tensorObj_dual_iso_unit M
   refine eq_inv_of_mul_eq_one_right ?_
   rw [← ofIsInvertible_tensorObj, ofIsInvertible_eq_of_iso d, ofIsInvertible_unit]
+
+/-- **The Picard group of a one-point scheme is trivial**: an invertible module on a scheme with
+a single point is trivial on a neighbourhood of that point, which is the whole scheme. -/
+theorem eq_one_of_subsingleton [Subsingleton Y] (y : Y) (L : Y.Pic) : L = 1 := by
+  obtain ⟨e⟩ := Modules.IsInvertible.nonempty_iso_unit y ((fromSkeleton Y.Modules).obj L.val)
+  exact eq_iff_nonempty_iso.2 ⟨e ≪≫ oneIso.symm⟩
+
+/-- **The Picard group of a field is trivial**: `Pic(Spec K) = 1` for a field `K`.
+
+(blueprint: `lem-pc-pic-of-field`) -/
+instance subsingleton_spec_field (K : Type u) [Field K] : Subsingleton (Spec (.of K)).Pic :=
+  ⟨fun L L' ↦ (eq_one_of_subsingleton default L).trans
+    (eq_one_of_subsingleton default L').symm⟩
 
 end Scheme.Pic
 

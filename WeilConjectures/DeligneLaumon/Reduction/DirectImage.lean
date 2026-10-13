@@ -62,6 +62,10 @@ universe u
 
 open CategoryTheory TopologicalSpace
 
+/- Through `Mathlib.AlgebraicGeometry.Group.Affine`, `Spec k₀` is also an object over itself via
+`specOverSpec`; prefer the identity structure `CategoryTheory.instOverClass`. -/
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry
 
 section Generic
@@ -72,6 +76,11 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
+set_option maxHeartbeats 400000 in
+-- The Noether normalisation step elaborates slowly.
+set_option synthInstance.maxHeartbeats 80000 in
+-- Instance search for the quasi-finiteness of the composite immersions is slow in the presence
+-- of the many morphism-property instances in scope.
 /-- Let `g₀ : T ⟶ Y₀` be a morphism of finite type from an integral affine scheme to an affine
 scheme, followed by an immersion `a : Y₀ ⟶ Y`. Then the direct-image weight assertion holds for
 `g₀ ≫ a` restricted to some nonempty affine open `V` of `T` (blueprint: `cor-zl-rfshriek-sheaf`,

@@ -91,7 +91,8 @@ theorem constructibleFiniteTor_derivedHom [HasInvertibleExponent Λ X]
 omit [Finite Λ] in
 /-- A Tate twisting object `Λ_X(m)` is a constructible flat sheaf placed in degree `0`, every
 fibre of which at a geometric point is free of rank one. -/
-lemma exists_tateObject_iso_singleFunctor [HasTateTwist Λ] (X : Scheme.{u}) (m : ℤ) :
+lemma exists_tateObject_iso_singleFunctor [HasTateTwist Λ] (X : Scheme.{u})
+    [HasInvertibleExponent Λ X] (m : ℤ) :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf L ∧
       ObjectProperty.flat L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
@@ -132,8 +133,11 @@ theorem not_forall_torAmplitudeIn_derivedHom [IsAlgClosed k] [Nontrivial Λ] [Ha
   let aZ := 𝔸(ULift.{u} (Fin 1); B) ↘ B
   let s := 𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι {AffineSpace.coord B (ULift.up 0)}
   have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); B) := HasInvertibleExponent.of_hom aZ
+  have : HasInvertibleExponent Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubscheme
+      {AffineSpace.coord B (ULift.up 0)}) := HasInvertibleExponent.of_hom (s ≫ aZ)
   -- the normalization of the twist: `Λ_V ≅ Rs^!(Λ(1)[2])`
   have := HasKummerClass.IsNormalized.isIso_supportedClassMap_kummerBoundary_coord (Λ := Λ) B
+    (𝟙 B)
   let ι := asIso (supportedClassMap Λ s (shiftSupportedClass (ModuleCat.{u + 1} Λ) s 2
     (kummerBoundary Λ (AffineSpace.coord B (ULift.up 0)))))
   -- the unit of `D(V_ét)` is bounded constructible of Tor amplitude `[0, 0]`

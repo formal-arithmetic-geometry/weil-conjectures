@@ -8,6 +8,7 @@ module
 public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
+public import Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.ToMatrix
 
 /-!
@@ -74,6 +75,14 @@ noncomputable def frobeniusEnd (M : FrobeniusModule.{u, v} K) :
     Module.End K M.carrier :=
   M.frobenius.toLinearMap
 
+/-- The Frobenius of a Frobenius module is an automorphism, so its eigenvalues are nonzero. -/
+theorem ne_zero_of_hasEigenvalue {M : FrobeniusModule.{u, v} K} {β : K}
+    (hβ : M.frobeniusEnd.HasEigenvalue β) : β ≠ 0 := by
+  rintro rfl
+  obtain ⟨x, hx⟩ := hβ.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff, zero_smul] at hx
+  exact hx.2 (M.frobenius.injective (hx.1.trans (map_zero _).symm))
+
 /-- An isomorphism of Frobenius modules: a `K`-linear isomorphism intertwining the two
 Frobenius automorphisms. -/
 structure Equiv (M N : FrobeniusModule.{u, v} K) where
@@ -82,6 +91,27 @@ structure Equiv (M N : FrobeniusModule.{u, v} K) where
   /-- The isomorphism intertwines the two Frobenius automorphisms. -/
   map_frobenius (x : M.carrier) :
     toLinearEquiv (M.frobenius x) = N.frobenius (toLinearEquiv x)
+
+/-- The identity isomorphism of a Frobenius module. -/
+@[simps toLinearEquiv]
+def Equiv.refl (M : FrobeniusModule.{u, v} K) : M.Equiv M where
+  toLinearEquiv := LinearEquiv.refl K M.carrier
+  map_frobenius _ := rfl
+
+/-- The inverse of an isomorphism of Frobenius modules. -/
+@[simps toLinearEquiv]
+def Equiv.symm {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) : N.Equiv M where
+  toLinearEquiv := e.toLinearEquiv.symm
+  map_frobenius y := e.toLinearEquiv.injective (by
+    rw [e.map_frobenius, LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply])
+
+/-- The composite of two isomorphisms of Frobenius modules. -/
+@[simps toLinearEquiv]
+def Equiv.trans {M N P : FrobeniusModule.{u, v} K} (e : M.Equiv N) (e' : N.Equiv P) :
+    M.Equiv P where
+  toLinearEquiv := e.toLinearEquiv.trans e'.toLinearEquiv
+  map_frobenius x := by
+    rw [LinearEquiv.trans_apply, LinearEquiv.trans_apply, e.map_frobenius, e'.map_frobenius]
 
 /-- `M` is *`ι`-pure of weight `w` relative to `q`* if every eigenvalue `α` of its geometric
 Frobenius satisfies `|ι α| = q ^ (w / 2)`. -/
@@ -135,6 +165,19 @@ theorem Equiv.frobeniusEnd_eq_conj {M N : FrobeniusModule.{u, v} K} (e : M.Equiv
 theorem Equiv.charpoly_frobeniusEnd {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
     N.frobeniusEnd.charpoly = M.frobeniusEnd.charpoly := by
   rw [e.frobeniusEnd_eq_conj, LinearEquiv.charpoly_conj]
+
+/-- Isomorphic Frobenius modules have the same traces of the powers of the Frobenius. -/
+theorem Equiv.trace_frobeniusEnd_pow {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) (m : ℕ) :
+    LinearMap.trace K _ (N.frobeniusEnd ^ m) = LinearMap.trace K _ (M.frobeniusEnd ^ m) := by
+  have hpow : ∀ k : ℕ, e.toLinearEquiv.conj M.frobeniusEnd ^ k =
+      e.toLinearEquiv.conj (M.frobeniusEnd ^ k) := by
+    intro k
+    induction k with
+    | zero => simp only [pow_zero, Module.End.one_eq_id, LinearEquiv.conj_id]
+    | succ k ih =>
+      rw [pow_succ, pow_succ, ih, Module.End.mul_eq_comp, Module.End.mul_eq_comp,
+        LinearEquiv.conj_comp]
+  rw [e.frobeniusEnd_eq_conj, hpow, LinearMap.trace_conj']
 
 /-- A Frobenius module isomorphic to one with weights at most `w` has weights at most `w`. -/
 theorem HasWeightsAtMost.of_equiv {ι : K →+* ℂ} {q : ℕ} {M N : FrobeniusModule.{u, v} K}
