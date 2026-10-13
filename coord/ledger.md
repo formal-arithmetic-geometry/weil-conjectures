@@ -11393,3 +11393,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:25 L: merged deliver/B2/Sheaf.AlgebraicGeometry.DerivedBaseChangeTopIso (stage 3; reviewer PASS; first push; landing 20261013T062515-L-731174 (interface); batch 20261013T062512; modules 2; new nodes 1)
 - 06:25 L: merged deliver/B3/Sheaf.AlgebraicGeometry.PicardRankMatchDerivedTruncationData (stage 3; reviewer PASS; first push; landing 20261013T062516-L-731308 (interface); batch 20261013T062512; modules 3; new nodes 2)
 - 06:25 L: merged deliver/C2/Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor (stage 3; reviewer PASS; first push; landing 20261013T062516-L-731480 (interface); batch 20261013T062512; modules 3; new nodes 2)
+- 06:25 L: merged deliver/C3/Sheaf.AlgebraicGeometry.PicardExternalCupShiftRight (stage 3; reviewer PASS; first push; landing 20261013T062517-L-731650 (interface); batch 20261013T062512; modules 3; new nodes 2)
