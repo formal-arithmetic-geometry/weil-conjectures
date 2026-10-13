@@ -1,0 +1,126 @@
+{
+ "id": "lem-sbc-common-field-fibre-comparison",
+ "kind": "statement",
+ "title": "A common-field fibre of a pulled-back family surjects onto a prescribed field fibre",
+ "statement": "Let f:X\\to S and g:T\\to S be arbitrary scheme morphisms and t in T, s in S with g(t)=s. Fix a field K and a morphism y:Spec K\\to Spec kappa(s). There exist a field E in the same universe, a morphism z:Spec E\\to Spec kappa(t), and a surjective morphism p:(X times_S T)_t times_{kappa(t)} Spec E\\to X_s times_{kappa(s)} Spec K [def-pc-scheme-fibre, def-pc-fibre-product]. There are no finite type or etaleness hypotheses and no subsets or covering families in this statement.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055G, transfer from the model to field fibres; Mathlib PullbackCarrier and pullback pasting."
+ },
+ "stmt_deps": [
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose the unique points of Spec kappa(t) and Spec K. They have equal image s in S. Mathlib Scheme.Pullback.exists_preimage_pullback gives a point r of the product of these field spectra over S. Its residue field E has compatible maps z to Spec kappa(t) and k to Spec K, by the pullback condition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply pullbackLeftPullbackSndIso twice on each side and pullback.congrHom to the compatibility equation. This identifies the geometric fibre of the pulled-back family over t with the k-base change of the prescribed K-fibre. The map k between nonempty singleton field spectra is surjective. Its base-change first projection is surjective, as is the composite with the pullback isomorphism; this composite is p. All objects in the proof are constructed by pullbacks, residue fields, and canonical isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 055G, transfer from the model to field fibres; Mathlib PullbackCarrier and pullback pasting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two field valued fibres at the same scheme point have a common field extension and a surjective comparison",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullbackLeftPullbackSndIso",
+   "digest": "e7f7d22efd0b9dd2",
+   "results": "12 hits: CategoryTheory.Limits.pullbackLeftPullbackSndIso, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_snd_snd, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_fst, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_fst, CategoryTheory.Limits.pullbackLeftPullbackSndIso_hom_snd_assoc, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_snd_snd_assoc, CategoryTheory.Limits.pullbackLeftPullbackSndIso_inv_fst_snd",
+   "date": "2026-10-13",
+   "verdict": "pasting lemmas used in complete proof; no single exact theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_preimage_pullback|pullbackLeftPullbackSndIso",
+   "digest": "11cde9815ac2f25a",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/RelativeGluing.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean",
+   "date": "2026-10-13",
+   "verdict": "pullback carrier and pasting lemmas used in complete proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricGenericCoverSpread",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 055G, transfer from the model to field fibres; Mathlib PullbackCarrier and pullback pasting.",
+   "via": [
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread",
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CommonFieldFibreComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommonFieldFibreComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_common_field_fibre_comparison",
+  "statement": "theorem exists_common_field_fibre_comparison {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (t : T) (s : S) (ht : g t = s) (K : Type u) [Field K] (y : Spec (CommRingCat.of K) ⟶ Spec (CommRingCat.of (S.residueField s))) : ∃ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of (T.residueField t))) (p : pullback ((pullback.snd f g).fiberToSpecResidueField t) z ⟶ pullback (f.fiberToSpecResidueField s) y), Surjective p",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T003200-L-2429639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T003200-L-2429639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

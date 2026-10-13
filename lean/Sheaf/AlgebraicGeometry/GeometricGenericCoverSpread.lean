@@ -8,6 +8,11 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Sheaf.AlgebraicGeometry.GeometricGenericCoverModel
+import Sheaf.AlgebraicGeometry.GenericClosedSubsetFibreNonempty
+import Sheaf.AlgebraicGeometry.CommonFieldFibreComparison
+
 /-!
 # Spreading a supplied geometric generic cover
 
@@ -69,6 +74,48 @@ theorem exists_open_spreading_geometric_generic_cover {X S : Scheme.{u}}
         ∃ (Z : Scheme.{u}) (p : Z ⟶ pullback (f.fiberToSpecResidueField s) y)
           (B : I → Set Z), Surjective p ∧
           (∀ i, IsIrreducible (B i)) ∧ (⋃ i, B i) = Set.univ ∧
-          ∀ i j, (A i ∩ A j).Nonempty → (B i ∩ B j).Nonempty := by sorry
+          ∀ i j, (A i ∩ A j).Nonempty → (B i ∩ B j).Nonempty  := by
+  classical
+  obtain ⟨T, g, η, C, hg, hη, hgη, hCclosed, hCcover, hCgeom, hCedges⟩ :=
+    exists_geometric_generic_cover_model f yη A hclosed hcover hgeom
+  have : Etale g := hg
+  let h := pullback.snd f g
+  have hneighbourhood (ij : I × I) :
+      ∃ V : Set T, IsOpen V ∧ η ∈ V ∧
+        ∀ t ∈ V, (A ij.1 ∩ A ij.2).Nonempty →
+          (C ij.1 ∩ C ij.2 ∩ h ⁻¹' {t}).Nonempty := by
+    by_cases hedge : (A ij.1 ∩ A ij.2).Nonempty
+    · obtain ⟨V, hV, hηV, hnonempty⟩ :=
+        exists_open_closed_subset_fibre_nonempty h η hη (C ij.1 ∩ C ij.2)
+          ((hCclosed ij.1).inter (hCclosed ij.2)) (hCedges ij.1 ij.2 hedge)
+      exact ⟨V, hV, hηV, fun t ht _ ↦ hnonempty t ht⟩
+    · exact ⟨Set.univ, isOpen_univ, Set.mem_univ η,
+        fun _ _ he ↦ (hedge he).elim⟩
+  choose V hV hηV hnonempty using hneighbourhood
+  let U : Set T := ⋂ ij, V ij
+  have hU : IsOpen U := isOpen_iInter_of_finite hV
+  have hηU : η ∈ U := Set.mem_iInter.mpr hηV
+  refine ⟨g '' U, g.isOpenMap U hU, ⟨η, hηU, hgη⟩, ?_⟩
+  intro s hs K hK y
+  obtain ⟨t, htU, hts⟩ := hs
+  obtain ⟨E, hE, z, p, hp⟩ := exists_common_field_fibre_comparison f g t s hts K y
+  let q := pullback.fst (h.fiberToSpecResidueField t) z ≫ h.fiberι t
+  let B : I → Set ↥(pullback (h.fiberToSpecResidueField t) z) := fun i ↦ q ⁻¹' C i
+  refine ⟨pullback (h.fiberToSpecResidueField t) z, p, B, hp,
+    fun i ↦ hCgeom i t E hE z, ?_, ?_⟩
+  · change (⋃ i, q ⁻¹' C i) = Set.univ
+    rw [← Set.preimage_iUnion, hCcover, Set.preimage_univ]
+  · intro i j hedge
+    obtain ⟨x, hxC, hxt⟩ := hnonempty (i, j) t (Set.mem_iInter.mp htU (i, j)) hedge
+    have hxrange : x ∈ Set.range (h.fiberι t) := by
+      rw [h.range_fiberι t]
+      exact hxt
+    obtain ⟨v, hv⟩ := hxrange
+    have : Surjective z :=
+      ⟨fun w ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
+    obtain ⟨w, hw⟩ := (pullback.fst (h.fiberToSpecResidueField t) z).surjective v
+    refine ⟨w, ?_⟩
+    change q w ∈ C i ∧ q w ∈ C j
+    simpa only [q, Scheme.Hom.comp_apply, hw, hv, Set.mem_inter_iff] using hxC
 
 end AlgebraicGeometry

@@ -1,0 +1,129 @@
+{
+ "id": "lem-sbc-geometric-generic-cover-model",
+ "kind": "statement",
+ "title": "A supplied geometric generic cover spreads on an etale model before incidences are spread",
+ "statement": "Let f:X\\to S be finite type [def-weil-finite-type-morphism], with S irreducible. Fix a field L and a finite etale morphism y_eta:Spec L\\to Spec kappa(eta_S) [def-weil-etale-morphism]. Let I be finite and A_i a closed cover of G=X_eta_S times_{kappa(eta_S)} Spec L [def-pc-scheme-fibre, def-pc-fibre-product]. Assume each A_i has irreducible nonempty inverse image under every field base change of G over L [def-pc-geometrically-irreducible]. There exist a scheme T, an etale map g:T\\to S, a generic point eta_T of T, and closed subsets C_i of P=X times_S T such that g(eta_T)=eta_S, the C_i cover P, and for every t in T and every field-valued z:Spec E\\to Spec kappa(t), the inverse image of C_i in P_t times_{kappa(t)} Spec E is irreducible nonempty. For every i,j with A_i intersect A_j nonempty, C_i intersect C_j meets the fibre over eta_T. No persistence of nongeneric intersections is asserted.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055G, model and closure construction before intersection images; Tags 0551, 054Y, 0559, 054W."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Over an affine generic neighbourhood, use the supplied finite separable extension L and the monic-polynomial construction of Tag 0551. Localize away from the image of the non-etale locus to obtain an irreducible affine etale model whose unique generic residue field is the supplied L. This is an existence assertion inside a theorem; no definition chooses data from an unproved existence theorem.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "On the reduction of the model, take the reduced closures of the A_i in the pulled-back family. Their generic fibres are the supplied A_i, since the fibre inclusion is a preimmersion and A_i are closed. Tag 054Y gives a nonempty open where the closures cover. Tag 0559, applied to each of the finitely many reduced closures, gives a further nonempty open where every geometric fibre is irreducible and nonempty. Represent this open in the original model under the reduction homeomorphism and restrict that etale model to it. Pull back the C_i. Their generic intersections contain the corresponding supplied intersections. For empty I use Tag 054W to make the total space empty, so the cover and all universal assertions remain valid.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 055G, model and closure construction before intersection images; Tags 0551, 054Y, 0559, 054W."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "spread supplied finite geometric generic closed cover on an etale model with geometrically irreducible fibres",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite closed cover of geometric generic fibre spreads to geometrically irreducible fibres preserving intersections",
+   "digest": "77c8dff5158acb80",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.Scheme.Cover.exists_eq, AlgebraicGeometry.Scheme.JointlySurjective.exists_eq, AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'_f, AlgebraicGeometry.Scheme.RationalMap.openCoverDomain, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*irreducib|spread.*cover",
+   "digest": "adec2bb64039906f",
+   "results": "6 hits: Mathlib/Topology/Sober.lean, Mathlib/Topology/Sober.lean, Mathlib/Topology/Sober.lean, Mathlib/Topology/Sober.lean, Mathlib/Topology/Sober.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricGenericCoverSpread",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 055G, model and closure construction before intersection images; Tags 0551, 054Y, 0559, 054W.",
+   "via": [
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread",
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeometricGenericCoverModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricGenericCoverModel.lean",
+  "declaration": "AlgebraicGeometry.exists_geometric_generic_cover_model",
+  "statement": "theorem exists_geometric_generic_cover_model {X S : Scheme.{u}} [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] {L : Type u} [Field L] (yη : Spec (CommRingCat.of L) ⟶ Spec (CommRingCat.of (S.residueField (genericPoint S)))) [IsFinite yη] [Etale yη] {I : Type u} [Finite I] (A : I → Set ↥(pullback (f.fiberToSpecResidueField (genericPoint S)) yη)) (hclosed : ∀ i, IsClosed (A i)) (hcover : (⋃ i, A i) = Set.univ) (hgeom : ∀ i, ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of L)), IsIrreducible ((pullback.fst (pullback.snd (f.fiberToSpecResidueField (genericPoint S)) yη) z) ⁻¹' A i)) : ∃ (T : Scheme.{u}) (g : T ⟶ S) (η : T) (C : I → Set ↥(pullback f g)), Etale g ∧ IsGenericPoint η Set.univ ∧ g η = genericPoint S ∧ (∀ i, IsClosed (C i)) ∧ (⋃ i, C i) = Set.univ ∧ (∀ i t, ∀ (E : Type u) (_ : Field E) (z : Spec (CommRingCat.of E) ⟶ Spec (CommRingCat.of (T.residueField t))), IsIrreducible ((pullback.fst ((pullback.snd f g).fiberToSpecResidueField t) z ≫ (pullback.snd f g).fiberι t) ⁻¹' C i)) ∧ ∀ i j, (A i ∩ A j).Nonempty → (C i ∩ C j ∩ (pullback.snd f g) ⁻¹' {η}).Nonempty",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T003200-L-2429639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T003200-L-2429639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

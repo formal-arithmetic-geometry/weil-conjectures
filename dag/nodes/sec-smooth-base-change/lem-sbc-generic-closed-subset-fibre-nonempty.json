@@ -1,0 +1,126 @@
+{
+ "id": "lem-sbc-generic-closed-subset-fibre-nonempty",
+ "kind": "statement",
+ "title": "A closed subset meeting the generic fibre meets all nearby fibres",
+ "statement": "Let h:P\\to T be finite type [def-weil-finite-type-morphism], let eta be a generic point of all of T, and let C be a closed subset of P. If C intersect h^{-1}({eta}) is nonempty, there is an open V containing eta such that C intersect h^{-1}({t}) is nonempty for every t in V. The set-theoretic fibres agree with the images of the scheme fibres [def-pc-scheme-fibre]. No noetherianity, reducedness, or separatedness is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 055G, nonempty-intersection image argument; Tags 052A and 01UA."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Base change along the reduction of the irreducible base T. Give the inverse image of C its reduced closed subscheme structure. A closed immersion is locally finite type and quasi-compact, so its composite to the integral base is finite type. The generic fibre is nonempty by the hypothesis and the reduction homeomorphism.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Tag 052A supplies a nonempty affine open of the integral base on which the reduced closed subscheme map is flat and of finite presentation. Tag 01UA makes its image open. This image contains the generic point because its fibre there is nonempty. On that image every fibre meets the closed subscheme. Transfer the image-open to T via its reduction homeomorphism to get V and the claimed set-theoretic nonemptiness.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 055G, nonempty-intersection image argument; Tags 052A and 01UA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite type morphism to an irreducible scheme and a closed subset meeting its generic fibre has nonempty fibres over an open neighbourhood",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a closed subset meeting the generic fibre of a finite type morphism meets every fibre on a dense open",
+   "digest": "a5685c631d5c9071",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range, AlgebraicGeometry.IsDominant, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.isDominant_iff, AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*flat|flat.*generic|generic.*nonempty",
+   "digest": "6d1486a7b93f6aab",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricGenericCoverSpread",
+  "date": "2026-10-13",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Tag 055G, nonempty-intersection image argument; Tags 052A and 01UA.",
+   "via": [
+    "lem-sbc-geometric-generic-cover-spread",
+    "lem-sbc-generic-fibre-incidence-spread",
+    "new-lem-sbc-generic-pointed-clopen-fibres-core",
+    "lem-sbc-generic-pointed-clopen-fibres",
+    "lem-sbc-section-component-generic-clopen",
+    "lem-sbc-section-component-generic-dichotomy",
+    "lem-sbc-section-component-locally-constructible",
+    "lem-sbc-smooth-section-component-open",
+    "lem-sbc-generic-geometrically-connected-spread"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GenericClosedSubsetFibreNonempty",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericClosedSubsetFibreNonempty.lean",
+  "declaration": "AlgebraicGeometry.exists_open_closed_subset_fibre_nonempty",
+  "statement": "theorem exists_open_closed_subset_fibre_nonempty {P T : Scheme.{u}} (h : P ⟶ T) [LocallyOfFiniteType h] [QuasiCompact h] (η : T) (hη : IsGenericPoint η Set.univ) (C : Set P) (hC : IsClosed C) (hne : (C ∩ h ⁻¹' {η}).Nonempty) : ∃ V : Set T, IsOpen V ∧ η ∈ V ∧ ∀ t ∈ V, (C ∩ h ⁻¹' {t}).Nonempty",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T003200-L-2429639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261013T003200-L-2429639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
