@@ -1,0 +1,102 @@
+{
+ "id": "lem-sbc-strict-local-root-torsor-unique",
+ "kind": "statement",
+ "title": "Unique rotations of field-valued points",
+ "statement": "For the same H, h, n, regularity, nonzerodivisor, and maximal-ideal hypotheses, let C = AdjoinRoot ((Polynomial.X : Polynomial H)^n - Polynomial.C h). For every field Ω and ring homomorphisms a b : C →+* Ω agreeing after restriction along algebraMap H C, if a (algebraMap H C h) ≠ 0, there exists a unique ζ : rootsOfUnity n H such that a.comp (rootRotation H h n ζ).toRingHom = b.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYG and Tag 09EV"
+ },
+ "proof": [
+  {
+   "text": "Strict henselianity lifts each of the n simple roots of X^n - 1 from the separably closed residue field to H; distinct lifted roots differ by units and exhaust rootsOfUnity n H. The root t of C has nonzero images under a and b because their h-images are nonzero. Their ratio is therefore an n-th root of unity in Ω, hence the image of exactly one lifted ζ in H. Evaluation on the H-algebra generators proves the displayed equality, and the same ratio argument proves uniqueness.",
+   "uses": [
+    "lem-sbc-root-algebra-regular-at-root"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-root-algebra-regular-at-root"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYG and Tag 09EV",
+  "note": "Intermediate theorem split from parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict local root torsor",
+   "results": "No exact theorem",
+   "date": "2026-10-14",
+   "verdict": "none"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot.etale_X_pow_sub_C",
+   "results": "criterion found",
+   "date": "2026-10-14",
+   "verdict": "ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity rootRotation",
+   "results": "No exact theorem",
+   "date": "2026-10-14",
+   "verdict": "none"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorProperties",
+  "date": "2026-10-14",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-strict-local-root-torsor-properties",
+   "place": "intermediate part of proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorUnique",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictLocalRootTorsorUnique.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strict_local_root_torsor_unique",
+  "statement": "theorem strict_local_root_torsor_unique\n    (H : Type u) [CommRing H] [IsStrictlyHenselianLocalRing H]\n    [IsRegularLocalRing H] (h : H)\n    [IsRegularLocalRing (H ⧸ Ideal.span {h})]\n    (hh : IsSMulRegular H h) (hhm : h ∈ IsLocalRing.maximalIdeal H)\n    (n : ℕ) (hn : 0 < n ∧ IsUnit (n : H)) :\n    let C := AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C h)\n    ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),\n      a.comp (algebraMap H C) = b.comp (algebraMap H C) →\n      a (algebraMap H C h) ≠ 0 →\n      ∃! ζ : rootsOfUnity n H,\n        a.comp (rootRotation H h n ζ).toRingHom = b",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T161729-L-1460480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T161729-L-1460480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

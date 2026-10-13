@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
 
 import Sheaf.RingTheory.RootAlgebraRegularAtRoot
+import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootDomainEtale
+import Sheaf.AlgebraicGeometry.Morphisms.StrictLocalRootTorsorUnique
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-! # The connected torsor properties of a strict local root cover
@@ -62,9 +64,13 @@ theorem strict_local_root_torsor_properties
     let q := Spec.map (CommRingCat.ofHom (algebraMap H C))
     let V : (Spec (CommRingCat.of C)).Opens := PrimeSpectrum.basicOpen (algebraMap H C h)
     IsDomain C ∧ Etale (V.ι ≫ q) ∧
-      (∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
+    (∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
         a.comp (algebraMap H C) = b.comp (algebraMap H C) →
         a (algebraMap H C h) ≠ 0 →
-        ∃! ζ : rootsOfUnity n H, a.comp (rootRotation H h n ζ).toRingHom = b) := by sorry
+        ∃! ζ : rootsOfUnity n H, a.comp (rootRotation H h n ζ).toRingHom = b) := by
+  dsimp only
+  obtain ⟨hdom, het⟩ := strict_local_root_domain_etale H h hh hhm n hn
+  have huniq := strict_local_root_torsor_unique H h hh hhm n hn
+  exact ⟨hdom, het, huniq⟩
 
 end AlgebraicGeometry.Scheme
