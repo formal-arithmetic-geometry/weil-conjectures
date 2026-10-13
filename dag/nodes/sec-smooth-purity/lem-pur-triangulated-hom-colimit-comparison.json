@@ -12,28 +12,28 @@
  ],
  "proof": [
   {
-   "text": "For W in D apply Hom(-,W) to every distinguished triangle H(j) and to U. Use the shifted five-term sequence Hom(H(j)_2[1],W) -> Hom(H(j)_1[1],W) -> Hom(H(j)_3,W) -> Hom(H(j)_2,W) -> Hom(H(j)_1,W). Triangle morphisms make these sequences functorial over J opposite. Their exactness is the contravariant Hom exactness of distinguished triangles.",
+   "text": "For each distinguished triangle, triangle_hom_exact proves the three exact pairs in the sequence Hom(second[1],W) -> Hom(first[1],W) -> Hom(third,W) -> Hom(second,W) -> Hom(first,W). Use Mathlib Triangle.yoneda_exact₂, yoneda_exact₃ and the two rotations; absorb the minus sign of the second rotation into the lifting morphism.",
    "uses": [
     "def-weil-triangulated-category"
    ],
    "elementary": false
   },
   {
-   "text": "Since J opposite is filtered, take the filtered colimit of the five-term exact sequences of abelian groups. It remains exact. If necessary lift all Hom groups into a common larger universe; the canonical colimit representative maps identify the underlying filtered colimit with ColimitType.",
+   "text": "Construct homDiagram by the preadditive Yoneda functor followed by ULift to the universe max(uJ,vJ,vD), and take its actual abelian-group colimit. homColimMap_exact proves exactness by representing a kernel element, refining to a stage where its image is zero, and lifting using the pointwise exact pair. homColim_rep_eq_iff identifies equality in this group colimit with equality in the original ColimitType through the common-stage criterion; homComparison_bijective_iff transfers bijectivity.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Precompose with the five components m_2[1], m_1[1], m_3, m_2, m_1 at j0 to obtain a map from the five-term exact sequence of U into the colimit sequence. All four squares commute by the three triangle-morphism equations and their shifts. The last two vertical maps are bijective by hypothesis. For the first two use the same hypothesis with W[-1], transported by the natural Hom equivalence for the shift autoequivalence. Naturality identifies the transported maps with precomposition by m_i[1].",
+   "text": "The four natural transformations are the shifted first triangle arrow and the third, second and first arrows. homComparison_comm proves the corresponding four squares commute by colimit.ι_map and the triangle morphism equations; for the first square apply shiftFunctor.map to m.comm₁. homComparison_equivalence transports the first and second Hom comparisons across shiftEquiv D 1 using its adjunction Hom equivalence at W and its inverse image. This supplies the four outer bijections without any extra hypothesis.",
    "uses": [
     "def-weil-triangulated-category"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the five lemma to the two exact sequences of abelian groups with the four outer maps isomorphisms. The middle map is an isomorphism, hence bijective on underlying sets. Its representative formula is phi mapped to the class of m_3 followed by phi at j0, exactly the stated third comparison.",
+   "text": "Apply Mathlib AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective to these exact rows and commuting squares, using surjectivity of the first outer map, bijectivity of the second and fourth, and injectivity of the fifth. Transfer the resulting bijectivity of homComparison for the third component back to the stated ColimitType map.",
    "uses": [
     "lem-weil-pbc-five-lemma"
    ],
@@ -43,7 +43,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05SC, displayed Hom comparison and exact filtered colimits; LF dual"
+  "place": "Lemma 05SC, displayed five-term Hom comparison, dualized; the element argument for exact filtered colimits is Tag 00DB, and the five lemma is Tag 05QB. Read from the Stacks tag pages because the local literature checkout is absent."
  },
  "mathlib_searches": [
   {
@@ -126,13 +126,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T1",
+  "reviewer": "X-164a7",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T225330-L-1813101",
+  "landing": "20261013T024033-L-3333948",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged Lean signature to the node; verified the five-term proof, DAG updates, clean compilation of the delivery and both direct importers, necessary imports, and permitted axioms only."
  }
 }
