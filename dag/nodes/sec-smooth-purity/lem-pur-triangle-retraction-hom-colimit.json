@@ -14,69 +14,51 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-pur-triangle-morphism-category-05r9] for the distinguished source triangle U. Its category I of incoming distinguished denominator triangles is cofiltered and its three denominator projections are initial. Compose denominators with the components of sigma to obtain initial projections to the denominator categories of T. Initiality of denominator postcomposition follows from MS2 square completion and MS3 equalization in [def-pur-saturated-triangulated-localization]. Restrict the supplied first two cones along these initial functors by [lem-pur-essential-constant-cofinal-0a1s].",
+   "text": "Use the cofiltered category I of incoming distinguished denominator triangles over T, with initial vertex projections p1, p2, p3. Regard sigma:U -> T as its object i0. Restrict the supplied cones uX and uY along p1 and p2. Initial essential-constancy restriction supplies essential constancy of the restricted diagrams and the common-stage certificates for those particular restricted cones. No denominator postcomposition functor is needed.",
    "uses": [
     "lem-pur-triangle-morphism-category-05r9",
     "def-pur-saturated-triangulated-localization",
     "lem-pur-essential-constant-cofinal-0a1s"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SC, LF clause, dual of the RF proof"
-   }
+   "elementary": false
   },
   {
-   "text": "For each W, apply Hom(-,W) to the F-images of triangles in I. Their five-term sequences are exact by [def-weil-triangulated-category], and their filtered colimit is exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. The supplied rho gives a morphism from the five-term sequence of the fixed cone (LX,LY,K) to this colimit, by representatives at the identity denominator triangle over U. Triangle-morphism squares give commutativity.",
+   "text": "Apply the canonical Hom-colimit bijection to each restricted cone. The representative map induced at i0 by rho.hom1 or rho.hom2 is its inverse: the composite with the canonical bijection is precomposition with uX(i0) followed by rho.hom1, or uY(i0) followed by rho.hom2, hence the identity by the supplied retraction identities. Injectivity of the canonical bijection gives surjectivity of the representative map, and its left inverse gives injectivity. This is the proved private helper retraction_homColimit_bijective.",
+   "uses": [
+    "lem-pc-essentially-constant-pro-hom-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Form the functor G:I -> Triangle(D) by taking the F-image of each distinguished source triangle. The functor F is triangulated, so every value is distinguished. Apply triangulated_hom_colimit_comparison to G, the fixed distinguished triangle (LX,LY,K), i0 and rho, using the two all-W bijections just proved. This gives the third-vertex Hom-colimit bijection over I opposite.",
    "uses": [
     "def-weil-triangulated-category",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+    "lem-pur-triangulated-hom-colimit-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SC, LF clause, dual of the RF proof"
-   }
+   "elementary": false
   },
   {
-   "text": "The first and second value comparisons are inverse to the cone Hom-colimit bijections of [lem-pc-essentially-constant-pro-hom-colimit]: the retraction equations make their composites identities. For the shifted positions apply the same comparison to W[-1] and the shift equivalence. No derived shift theorem is required. The outer four comparisons are bijective, so [lem-weil-pbc-five-lemma] makes the middle comparison bijective.",
+   "text": "The third projection p3 is initial, so p3.op is final. Compose the third comparison with Mathlib Functor.bijective_colimitTypePrecomp. Its representative formula sends the object i0 exactly to the denominator sigma.hom3 and rho.hom3 followed by phi to the same morphism, giving the function of the original theorem definitionally.",
    "uses": [
-    "lem-pc-essentially-constant-pro-hom-colimit",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-five-lemma"
+    "lem-pur-triangle-morphism-category-05r9"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SC, LF clause, dual of the RF proof"
-   }
-  },
-  {
-   "text": "The third vertex projection and postcomposition with sigma3 are initial. Their opposites are final. Mathlib Functor.bijective_colimitTypePrecomp and colimitTypePrecomp_ιColimitType transport the middle bijection to the full third denominator Hom-colimit of T. The identity triangle over U maps to sigma3 and the representative is rho.hom3 followed by phi, exactly the displayed function.",
-   "uses": [
-    "lem-pur-triangle-morphism-category-05r9",
-    "def-pur-saturated-triangulated-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 05SC, LF clause, dual of the RF proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pur-triangle-morphism-category-05r9",
   "def-pur-saturated-triangulated-localization",
   "lem-pur-essential-constant-cofinal-0a1s",
-  "def-weil-triangulated-category",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
   "lem-pc-essentially-constant-pro-hom-colimit",
-  "lem-weil-pbc-five-lemma"
+  "def-weil-triangulated-category",
+  "lem-pur-triangulated-hom-colimit-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "X3",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05SC, LF clause, dual of the RF proof"
+  "place": "Lemma 05SC LF dual: existing five-term comparison; use the denominator-triangle category over T directly rather than postcomposing denominators over U"
  },
  "mathlib_searches": [
   {
@@ -145,13 +127,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T225317-L-1808388",
-  "kind": "interface",
+  "landing": "20261013T015624-L-3030345",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

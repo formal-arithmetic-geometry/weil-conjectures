@@ -8,6 +8,11 @@ module
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 public import Mathlib.CategoryTheory.Limits.Types.ColimitType
 public import Mathlib.CategoryTheory.Yoneda
+import Sheaf.CategoryTheory.TriangleMorphismCategory
+import Sheaf.CategoryTheory.TriangulatedHomColimitComparison
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
+import Mathlib.CategoryTheory.Limits.Final.Type
 
 /-! # Five-lemma comparison for a triangle retraction
 
@@ -22,32 +27,51 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace CategoryTheory.Functor
 
+private theorem retraction_homColimit_bijective
+    {J : Type u} {E : Type uD} [Category.{v} J] [Category.{vD} E]
+    (M : J ⥤ E) (X : E) (hM : IsEssentiallyConstantProDiagram M X)
+    (u : (Functor.const J).obj X ⟶ M)
+    (hu : ∃ j0 : J, ∃ r : M.obj j0 ⟶ X, u.app j0 ≫ r = 𝟙 X ∧
+      ∀ j : J, ∃ k : J, ∃ a : k ⟶ j0, ∃ b : k ⟶ j,
+        M.map b = M.map a ≫ r ≫ u.app j)
+    (j : J) (r : M.obj j ⟶ X) (hr : u.app j ≫ r = 𝟙 X) (W : E) :
+    Function.Bijective (fun f : X ⟶ W ↦
+      (M.op ⋙ yoneda.obj W).ιColimitType (Opposite.op j) (r ≫ f)) := by
+  obtain ⟨q, hq, hrep⟩ := essentiallyConstantPro_hom_colimit M X hM u hu W
+  let g := fun f : X ⟶ W ↦
+    (M.op ⋙ yoneda.obj W).ιColimitType (Opposite.op j) (r ≫ f)
+  have hcomp (f : X ⟶ W) : q (g f) = f := by
+    rw [hrep]
+    rw [← Category.assoc, hr]
+    exact Category.id_comp f
+  constructor
+  · intro f f' he
+    exact (hcomp f).symm.trans ((congrArg q he).trans (hcomp f'))
+  · intro x
+    exact ⟨q x, hq.1 (hcomp (q x))⟩
+
 /-- A triangle retraction on the first two vertices induces a third Hom-colimit bijection.
 Source: Stacks Project, Derived Categories, Lemma 05SC, the five-term Hom diagram,
 dualized to LF; Categories, Tag 05PZ and the initial colimit comparison Tag 0A1T.
 (blueprint: lem-pur-triangle-retraction-hom-colimit).
 
-Proof: Let I be the cofiltered category of distinguished denominator triangles over U
-in Tag 05R9. Its three vertex projections are initial. Compose its objects with sigma
-and restrict the first two supplied cones along their vertex projections. Composition
-with each sigma_i in S is initial by the fraction calculus (MS2 and MS3), so the
-restricted diagrams are essentially constant with values LX and LY. Their cone
-Hom-colimit maps are bijections by 05PZ. The chosen triangle U is the identity object
-of I; rho supplies a comparison from the five-term Hom(-,W) sequence for (LX,LY,K)
-to the filtered colimit of the sequences for the F-images of objects of I. At the
-first two vertices the comparisons are inverse to the cone Hom-colimit maps:
-the given retraction identities make each composite the identity. For the shifted
-vertices use the shift equivalence with W[-1] and F's shift comparison; the same
-retraction identities give the inverse comparisons there. Each F-image triangle
-is distinguished, so its Hom sequence is exact. Filtered colimits of abelian groups
-are exact. The squares of the comparison diagram commute because rho is a triangle
-morphism. The five lemma therefore makes its middle comparison a bijection.
-The third vertex projection is initial, as is denominator postcomposition with
-sigma_3. Their opposites are final. Compose the canonical colimit bijections and
-use their representative equations: the identity object of I goes to the denominator
-sigma_3, and the middle comparison sends phi to the class of rho.hom3 followed by
-phi. This is the stated function, for every W. This proof uses neither a third value,
-a cone at K, nor any value-triangle completion theorem.
+Proof: Take I to be the cofiltered category of incoming distinguished denominator
+triangles over T from Tag 05R9. Its three vertex projections p1, p2, p3 are initial.
+The supplied sigma defines an object i0 of I with source U. Restrict uX and uY
+along p1 and p2; initial_iff_essentiallyConstantProDiagram gives both essential
+constancy and the common-stage certificates for these very cones. Tag 05PZ gives
+a bijection from each restricted Hom-colimit to Hom(LX,W) or Hom(LY,W), with its
+representative formula. At i0, precomposition with rho.hom1 or rho.hom2 is its
+inverse: composing with the canonical bijection gives the identity by hretract1
+or hretract2. Hence both first-vertex and second-vertex comparisons are bijective
+for every W. The functor G sends each source triangle to its F-image; exactness of
+F makes every G(i) distinguished. Apply triangulated_hom_colimit_comparison to G,
+the fixed distinguished triangle, i0 and rho to obtain the third comparison.
+Finally p3.op is final, so Mathlib's bijective_colimitTypePrecomp transports this
+bijection to the full third denominator Hom-colimit. Its representative equation
+sends i0 to sigma.hom3 and leaves rho.hom3 followed by phi unchanged. Working over
+T directly avoids denominator postcomposition with sigma and its initiality proof.
+No third derived value or completion theorem is used.
 
 Edge cases: when rho is the identity comparison and S contains only isomorphisms,
 the function is the ordinary canonical Hom-colimit bijection. Contractible and split
@@ -97,6 +121,60 @@ theorem leftDerived_triangle_retraction_homColimit
         yoneda.obj W).ιColimitType
           (Opposite.op (MorphismProperty.Over.mk ⊤ sigma.hom₃ hsigma₃))
           (rho.hom₃ ≫ phi)) := by
-  sorry
+  classical
+  let : S.HasLeftCalculusOfFractions := hS.1.1.1
+  let : S.IsCompatibleWithTriangulation := hS.2
+  let V : MorphismProperty (Triangle C) :=
+    S.inverseImage Triangle.π₁ ⊓ (S.inverseImage Triangle.π₂ ⊓ S.inverseImage Triangle.π₃)
+  let P : ObjectProperty (V.Over V T) := fun x ↦ x.left ∈ distTriang C
+  let p1 : P.FullSubcategory ⥤ S.Over ⊤ T.obj₁ := {
+    obj := fun x ↦ MorphismProperty.Over.mk ⊤ x.obj.hom.hom₁ x.obj.prop.1
+    map := fun f ↦ MorphismProperty.Over.homMk f.hom.left.hom₁
+      (Triangle.π₁.congr_map (MorphismProperty.Over.w f.hom)) }
+  let p2 : P.FullSubcategory ⥤ S.Over ⊤ T.obj₂ := {
+    obj := fun x ↦ MorphismProperty.Over.mk ⊤ x.obj.hom.hom₂ x.obj.prop.2.1
+    map := fun f ↦ MorphismProperty.Over.homMk f.hom.left.hom₂
+      (Triangle.π₂.congr_map (MorphismProperty.Over.w f.hom)) }
+  let p3 : P.FullSubcategory ⥤ S.Over ⊤ T.obj₃ := {
+    obj := fun x ↦ MorphismProperty.Over.mk ⊤ x.obj.hom.hom₃ x.obj.prop.2.2
+    map := fun f ↦ MorphismProperty.Over.homMk f.hom.left.hom₃
+      (Triangle.π₃.congr_map (MorphismProperty.Over.w f.hom)) }
+  obtain ⟨hI, hp1, hp2, hp3⟩ := triangle_morphism_category_cofiltered_initial S hS.1 T hT
+  let : IsCofiltered P.FullSubcategory := hI
+  let : p1.Initial := hp1
+  let : p2.Initial := hp2
+  let : p3.Initial := hp3
+  let MX := MorphismProperty.Over.forget S ⊤ T.obj₁ ⋙ Over.forget T.obj₁ ⋙ F
+  let MY := MorphismProperty.Over.forget S ⊤ T.obj₂ ⋙ Over.forget T.obj₂ ⋙ F
+  let : IsCofiltered (S.Over ⊤ T.obj₁) := hX.1
+  let : IsCofiltered (S.Over ⊤ T.obj₂) := hY.1
+  let vx : (Functor.const P.FullSubcategory).obj LX ⟶ p1 ⋙ MX := {
+    app := fun i ↦ uX.app (p1.obj i)
+    naturality := fun _ _ f ↦ by simpa [MX] using uX.naturality (p1.map f) }
+  let vy : (Functor.const P.FullSubcategory).obj LY ⟶ p2 ⋙ MY := {
+    app := fun i ↦ uY.app (p2.obj i)
+    naturality := fun _ _ f ↦ by simpa [MY] using uY.naturality (p2.map f) }
+  have hx := initial_iff_essentiallyConstantProDiagram p1 MX LX
+  have hy := initial_iff_essentiallyConstantProDiagram p2 MY LY
+  let G : P.FullSubcategory ⥤ Triangle D :=
+    P.ι ⋙ MorphismProperty.Over.forget V V T ⋙ Over.forget T ⋙ F.mapTriangle
+  let i0 : P.FullSubcategory :=
+    ⟨MorphismProperty.Over.mk V sigma ⟨hsigma₁, hsigma₂, hsigma₃⟩, hU⟩
+  have h1 (W : D) : Function.Bijective (fun f : LX ⟶ W ↦
+      ((G ⋙ Triangle.π₁).op ⋙ yoneda.obj W).ιColimitType
+        (Opposite.op i0) (rho.hom₁ ≫ f)) := by
+    exact retraction_homColimit_bijective (p1 ⋙ MX) LX (hx.1.mp hX) vx
+      (hx.2.1 uX huX) i0 rho.hom₁ hretract₁ W
+  have h2 (W : D) : Function.Bijective (fun f : LY ⟶ W ↦
+      ((G ⋙ Triangle.π₂).op ⋙ yoneda.obj W).ιColimitType
+        (Opposite.op i0) (rho.hom₂ ≫ f)) := by
+    exact retraction_homColimit_bijective (p2 ⋙ MY) LY (hy.1.mp hY) vy
+      (hy.2.1 uY huY) i0 rho.hom₂ hretract₂ W
+  have hmid := triangulated_hom_colimit_comparison G
+    (fun i ↦ F.map_distinguished _ i.property) (Triangle.mk lf b c) hK i0 rho h1 h2
+  intro W
+  let H := (MorphismProperty.Over.forget S ⊤ T.obj₃ ⋙ Over.forget T.obj₃ ⋙ F).op ⋙
+    yoneda.obj W
+  exact (p3.op.bijective_colimitTypePrecomp H).comp (hmid W)
 
 end CategoryTheory.Functor
