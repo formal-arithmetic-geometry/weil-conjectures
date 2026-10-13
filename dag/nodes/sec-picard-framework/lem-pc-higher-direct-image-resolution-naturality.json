@@ -56,10 +56,10 @@
  },
  "proof_origin": {
   "by": "worker",
-  "group": "Y3",
+  "group": "W2",
   "date": "2026-10-13",
   "document": "https://stacks.math.columbia.edu/tag/01E4",
-  "place": "Lemma 20.7.3, naturality of the section-class comparison under augmentation-preserving resolution maps"
+  "place": "Lemma 20.7.3, naturality of the specified resolution section-class map, implemented with Mathlib homology and adjunction naturality"
  },
  "mathlib_searches": [
   {
@@ -101,14 +101,14 @@
  "statement": "Let f:X→Y be a morphism of schemes [def-pc-scheme], p a natural number, V an open of Y, and a:M→N a map of module sheaves [def-weil-sheaf-of-modules-category]. Let I and J be arbitrary injective resolutions of M and N [def-sp-injective-resolutions]. Define b_I by the real construction higherDirectImageResolutionSectionMap: isoRightDerivedObj for sections on f⁻¹V [def-sc-open-module-cohomology], then the exact evaluation mapHomologyIso for the presheaf complex underlying f_*I, then sectionCohomologyTheta [def-weil-pbc-flat-base-change-open-choices], then evaluation of the inverse isoRightDerivedObj for f_*. Define b_J the same way. Then R^pΓ(f⁻¹V,a) followed by b_J equals b_I followed by Γ(V,R^p f_*(a)). This is a fixed equality of specified maps, not existence of an unspecified comparison.",
  "proof": [
   {
-   "text": "Lift a to a map g:I→J preserving the augmentations. By isoRightDerivedObj_hom_naturality the source derived-sections map followed by the resolution identification equals the resolution identification followed by homology of the sectionwise map g.",
+   "text": "Choose Mathlib's augmentation-preserving lift g = InjectiveResolution.desc a J I, with desc_commutes_zero. Apply isoRightDerivedObj_hom_naturality to openModuleSections on the inverse-image open; this gives the source resolution square.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
    "elementary": false
   },
   {
-   "text": "Exact evaluation commutes with homology by mapHomologyIso, naturally in g. Theta is adjoint to the comparison from sheafification of presheaf homology to sheaf homology. This comparison is built from mapHomologyIso for exact sheafification and the counit; both are natural in the complex. Naturality of the adjunction homEquiv therefore makes theta commute with f_*g.",
+   "text": "Use ShortComplex.mapHomologyIso_hom_naturality for exact evaluation of the underlying direct-image presheaf complex. Prove the theta square in the private helper sectionCohomologyTheta_naturality: the generic private adjoint_homology_naturality combines ShortComplex.mapHomologyIso_inv_naturality with the homology map of the counit naturality square, then applies Adjunction.homEquiv_naturality_left_square. Specialize its exact left adjoint to PresheafOfModules.sheafification and its right adjoint to forgetting the sheaf condition. Evaluate the resulting theta square at V.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
     "def-weil-pbc-flat-base-change-open-choices"
@@ -116,7 +116,7 @@
    "elementary": false
   },
   {
-   "text": "Use isoRightDerivedObj_inv_naturality for direct image to move the map f_*g through the inverse target resolution comparison. Evaluate at V and combine with the two preceding squares by associativity. Any two augmentation-preserving lifts are homotopic, so their induced homology maps agree. This also proves the assertion for identity maps between different resolutions and for zero maps, degree zero, and empty inverse-image opens.",
+   "text": "Apply isoRightDerivedObj_inv_naturality to moduleDirectImage, then apply forgetting to presheaves and evaluation at V. Unfold the specified higherDirectImageResolutionSectionMap and combine the source, evaluation, theta, and target squares using associativity. The last identification is definitional: sections of the module direct image on V are sections on the inverse-image open. The proof uses no vanishing, degree restriction, or nonemptiness assumption, and therefore includes p = 0 and empty opens.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
@@ -156,10 +156,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y3",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261013T060432-L-586812",
-  "kind": "interface",
+  "landing": "20261013T072411-L-1126731",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
