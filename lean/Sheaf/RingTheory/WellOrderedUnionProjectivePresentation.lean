@@ -4,6 +4,8 @@ public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Order.RelClasses
 public import Mathlib.LinearAlgebra.Quotient.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.RingTheory.WellOrderedPresentationKernelFiltration
+import Sheaf.RingTheory.ProjectiveResolutionAugmentationKernel
 
 /-! Projective presentations for the successor well-ordered filtration argument. -/
 
@@ -15,6 +17,26 @@ namespace ModuleCat
 
 open CategoryTheory
 
+private theorem resolution_bound_of_isZero
+    {R : Type u} [CommRing R] (M : ModuleCat.{v} R) (n : ℕ)
+    (hM : CategoryTheory.Limits.IsZero M) : HasProjectiveResolutionLE M n := by
+  have := hM.projective
+  refine ⟨ProjectiveResolution.self M, fun i hi ↦ ?_⟩
+  exact HomologicalComplex.isZero_single_obj_X _ _ _ _ (by omega)
+
+private theorem resolution_bound_of_iso
+    {R : Type u} [CommRing R] {M N : ModuleCat.{v} R} (n : ℕ)
+    (e : M ≅ N) (hN : HasProjectiveResolutionLE N n) :
+    HasProjectiveResolutionLE M n := by
+  obtain ⟨P, hP⟩ := hN
+  refine ⟨{
+    complex := P.complex
+    projective := P.projective
+    π := P.π ≫ (ChainComplex.single₀ (ModuleCat.{v} R)).map e.inv
+    quasiIso := inferInstance }, hP⟩
+
+-- The names of the hypotheses bound inside hIH are kept for interface compatibility.
+set_option linter.unusedVariables false in
 /-- The filtration argument supplies a short exact projective presentation whose
 kernel has the inductive bound. Source: Stacks Project, Algebra, Lemma 0D1U.
 (blueprint: lem-weil-pbc-well-ordered-union-succ-data).
@@ -49,13 +71,12 @@ vector whose image in `Q e` is zero and subtract that lift. The difference is
 in `K`. Injectivity is the equality of the intersection with the preceding
 partial sum and the predecessor kernel union. Surjectivity is that of `a e`.
 
-Dimension shifting for this projective presentation gives a length-`n` resolution
-of `G e / G_{<e}`. Concretely, compare the presentation with the initial arrow
-of the supplied resolution of `Q e`; Schanuel identifies their kernels after
-adding the projective degree-zero terms. The supplied kernel has the truncated
-length-`n` resolution, so adding projectives and taking the complementary direct
-summand gives the required bound (the argument of Lemma 065S (1)). This argument
-stays in `ModuleCat.{v} R` and needs no enough-projectives instance.
+The kernel-filtration theorem identifies `G e / G_{<e}` with the augmentation
+kernel of the chosen resolution of `Q e` at every active index; at an inactive
+index it is zero. Truncate that chosen resolution, deleting degree zero, to
+obtain a length-`n` resolution of its augmentation kernel. Transport it along
+the supplied isomorphism. At an inactive index use the identity resolution of
+the zero object. No Schanuel comparison or enough-projectives instance is needed.
 Apply `hIH` to `K` and `G`, obtaining its length-`n` resolution.
 Take the short complex with objects `K`, `P`, and exactly `M`, and arrows
 the kernel inclusion and `pi`. The inclusion is injective, `pi` is surjective,
@@ -80,6 +101,16 @@ theorem exists_shortExact_projective_middle_of_wellOrderedUnion_succ
         ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) (n + 1)) :
     ∃ S : ShortComplex (ModuleCat.{v} R), S.X₃ = M ∧ S.ShortExact ∧
       Projective S.X₂ ∧ HasProjectiveResolutionLE S.X₁ n := by
-  sorry
+  classical
+  choose P hP using hquot
+  obtain ⟨S, hM, hS, hproj, G, hG, hGcover, hGquot⟩ :=
+    exists_projective_presentation_kernel_filtration M F hF hcover P
+  refine ⟨S, hM, hS, hproj, hIH S.X₁ G hG hGcover ?_⟩
+  intro e
+  rcases hGquot e with hzero | hiso
+  · exact resolution_bound_of_isZero _ n hzero
+  · obtain ⟨a⟩ := hiso
+    exact resolution_bound_of_iso n a
+      (hasProjectiveResolutionLE_augmentation_kernel n (P e) (hP e))
 
 end ModuleCat
