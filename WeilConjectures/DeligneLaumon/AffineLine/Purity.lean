@@ -197,6 +197,12 @@ theorem exists_isPunctuallyPureOfWeight_of_correction {ι : PadicAlgCl l →+* �
     GeometricallyConnected.of_geometricallyIrreducible _
   have := W.locallyOfFiniteType (k₀ := k₀)
   have := W.isSeparated (k₀ := k₀)
+  -- `W` is quasi-compact, as an open of the noetherian scheme `U'`
+  have : IsLocallyNoetherian D'.U :=
+    LocallyOfFiniteType.isLocallyNoetherian (D'.U ↘ Spec (.of k₀))
+  have : QuasiCompact (W.toScheme ↘ Spec (.of k₀)) := by
+    rw [← comp_over W.ι]
+    infer_instance
   have := SmoothOfRelativeDimension.smooth 1 (W.toScheme ↘ Spec (.of k₀))
   have := irreducibleSpace_geometricFiber_of_smooth (k₀ := k₀) W.toScheme
   let G := (upperStar W.ι).obj ((upperStar D'.j).obj H)
