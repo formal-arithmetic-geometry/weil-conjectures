@@ -20,9 +20,60 @@
   "lem-weil-pbc-module-stalk-pullback",
   "lem-weil-pbc-module-stalk-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For exists_tensorMap use the compatible algebra maps of [lem-single-complex-stalk-algebra-maps] and Algebra.TensorProduct.lift; tensor extensionality and the lift formulas give both required restrictions. This proof was already present and is retained.",
+   "uses": [
+    "lem-single-complex-stalk-algebra-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For exists_tensorStalkIso let a be the A-to-C restriction of tensorMap and use its already-proved restriction equality a = (g′.stalkMap z).hom. Prove the transport assertion for an arbitrary ring map a with this equality, eliminating the equality. The inverse of the natural stalk isomorphism [lem-weil-pbc-module-stalk-pullback], mapped to homological complexes with NatIso.mapHomologicalComplex, supplies the chain isomorphism. Its components are definitionally the displayed inverse components after the equality transport. Zero-preservation instances are pinned at the stalk-module universe.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonempty_coordinates first represent K by Q.objPreimage K and apply [lem-pc-kflat-resolution]. Its augmentation becomes an isomorphism under Q, and composition with objObjPreimageIso gives e. Apply [prop-pur-kinjective-resolutions-exist] to Q.objPreimage K′; invert the localized augmentation and compose with objObjPreimageIso to obtain a K-injective N and e′.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The selected composition counit of [lem-pc-ringed-spaces-derived-pullback-composition] is not required by that theorem’s signature to be invertible on K-flat complexes. Extract instead the K-flat-computing counit from exists_derivedPullback [def-pc-derived-pullback], identify its underived functor with tensorPullback by Functor.ext, and compare the two universal counits. Mathlib’s isLeftDerivedFunctor_iff_isIso_leftDerivedLift makes the comparison an isomorphism, while leftDerived_fac_app expresses the selected counit as its component followed by the K-flat-computing counit. Both factors are invertible.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Invert the selected counit at P and compose with Lg′(e.hom), phi, and e′.inv. By [lem-weil-pbc-kinjective-hom-derived], this derived map has a preimage under Qh; quotient fullness gives a chain map t. Naturality of quotientCompQhIso converts the Qh equation to Q.map t equal to the displayed composite. Package P, N, e, e′, K-flatness, counit invertibility, and t into Coordinates; associativity and inverse cancellation prove represents.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-single-complex-stalk-algebra-maps",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-pc-derived-pullback",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "worker T4",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Equation-bc preceding Tag 0DJ8; Tags 0098, 06YS, 079P and 070I for the representative and stalk constructions",
+  "note": "Lean assembly of the existing documented construction; all three remaining holes closed without new statements."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -138,18 +189,8 @@
   "reviewer": "COMPILER",
   "group": "T4",
   "result": "pass",
-  "landing": "20261013T002358-L-2376943",
+  "landing": "20261013T015617-L-3027912",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.SingleComplexBaseChange.exists_tensorMap",
-   "AlgebraicGeometry.SingleComplexBaseChange.exists_tensorStalkIso",
-   "AlgebraicGeometry.SingleComplexBaseChange.nonempty_coordinates"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.SingleComplexBaseChange.exists_stalk_algebra_maps",
-   "AlgebraicGeometry.SingleComplexBaseChange.exists_tensorStalkIso",
-   "AlgebraicGeometry.SingleComplexBaseChange.nonempty_coordinates"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
