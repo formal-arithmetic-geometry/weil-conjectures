@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-filtered-canonical-page-descent",
+ "kind": "statement",
+ "title": "Filtered descent for normalized pages without finiteness",
+ "statement": "Let $C$ be an abelian category [def-sp-abelian]. Let $(K,F)$ and $(K\\prime,F\\prime)$ be integer cochain complexes with decreasing filtrations by subcomplexes [def-sp-filtration, def-sp-filtered-complex-subquotients]. Let $E,E\\prime$ be cohomological spectral sequences starting at page one [def-sp-spectral-sequence]. For every $r\\ge1$ supply representative differential data $D_r,D\\prime_r$ on their actual cycle/boundary cokernels [lem-sp-filtered-complex-page-differential], and complex isomorphisms $j_r:E_r\\cong D_r.page$, $j\\prime_r:E\\prime_r\\cong D\\prime_r.page$. Assume that transporting the successor homology isomorphisms through these complex isomorphisms gives normalized comparisons on successor cycles [lem-sp-filtered-complex-normalized-homology]. Any chain map $b:K\\to K\\prime$ restricting to every filtration step induces a spectral-sequence morphism $N:E\\to E\\prime$ such that, for every test object $A$, bidegree $(q,p)$, $r\\ge1$, step representatives $x,y$ and graded cycles $z,z\\prime$, the equations $x\\iota_F b=y\\iota_{F\\prime}$, $z\\iota_Z=x\\pi_F$ and $z\\prime\\iota_{Z\\prime}=y\\pi_{F\\prime}$ imply $z\\pi_rj_r^{-1}N_r=z\\prime\\pi\\prime_r(j\\prime_r)^{-1}$. This requires no boundedness or finiteness of either filtration.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-spectral-sequence",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-normalized-homology"
+ ],
+ "source": {
+  "document": "Stacks Project, Derived Categories and Homological Algebra",
+  "place": "Tag 012K, lemma-functorial and the explicit cycle formulas. Step 2 of lem-weil-pbc-ce-prescribed-quotient-page-descent, componentwise descent and normalized successor compatibility."
+ },
+ "proof": [
+  {
+   "text": "Use the proved generic private declarations quotientPageSquares and quotientPageMap of FilteredQuotientPageMaps: their signatures take arbitrary FilteredObject complexes and contain no IsFinite hypothesis. These restrict a filtered map to steps, descend to graded pieces, restrict to cycles and descend through boundary cokernels. The representative differential equation on an epic cover proves the chain-map equation. The finite-filtration public theorem filteredQuotient_page_maps is not invoked.",
+   "uses": [
+    "lem-sp-filtered-quotient-page-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the step restrictions at r and r+1 by cancelling monic step inclusions. Compare the graded maps by cancelling the graded cokernel projection. Cancel the graded cycle inclusion to obtain compatibility of the successor-cycle restrictions with their inclusions in r-cycles.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-normalized-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the epic successor-cycle covers. Cancel the target page cycle inclusion to relate the successor restriction to the cycles map of the quotient-page map. Precompose homology naturality with the epic cover followed by homology projection; normalization on successor representatives and the quotient projection square give the same composites.",
+   "uses": [
+    "lem-sp-filtered-complex-successor-cycles-cover",
+    "lem-sp-filtered-complex-normalized-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate quotient-page maps by j and jprime. Apply functoriality of homology to the preceding square, and cancel the homology images and component maps of the inverse isomorphisms. This defines the spectral-sequence morphism.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary representatives, cancel the target step inclusion to identify y with x followed by the canonical restriction. Cancel the graded cycle inclusion to identify zprime with z followed by the canonical cycle map. The boundary cokernel square and inverse-isomorphism identities prove the desired representative equation.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "lem-sp-filtered-complex-normalized-homology",
+  "lem-sp-filtered-complex-successor-cycles-cover",
+  "lem-sp-filtered-quotient-page-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "date": "2026-10-13",
+  "document": "Stacks Project, Tags 015J, 015K and 012K",
+  "place": "Tag 012K, lemma-functorial and the explicit cycle formulas. Step 2 of lem-weil-pbc-ce-prescribed-quotient-page-descent, componentwise descent and normalized successor compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial quotient pages of filtered complexes and prescribed Cartan Eilenberg hypercohomology spectral sequences",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, HomotopyCategory.spectralObjectMappingCone_ω₁, DerivedCategory.homologyFunctor, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism_functor, HomotopyCategory.singleFunctor, HomologicalComplex.gradedHomologyFunctor, HomologicalComplexUpToQuasiIso.homologyFunctor, HomotopyCategory.singleFunctors",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohomologicalSpectralSequence\"",
+   "date": "2026-10-13",
+   "results": "6 hits: CategoryTheory.E₂CohomologicalSpectralSequence, CategoryTheory.E₂CohomologicalSpectralSequenceNat, CategoryTheory.CohomologicalSpectralSequence, CategoryTheory.CohomologicalSpectralSequenceNat, CategoryTheory.E₂CohomologicalSpectralSequenceFin, CategoryTheory.CohomologicalSpectralSequenceFin",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredComplex.*[Mm]ap|prescribed.*[Pp]age",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical spectral sequence of a filtered complex functorial without finite filtration",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCEPrescribedQuotientPageDescent",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 012K, lemma-functorial and the explicit cycle formulas. Step 2 of lem-weil-pbc-ce-prescribed-quotient-page-descent, componentwise descent and normalized successor compatibility.",
+   "via": [
+    "lem-weil-pbc-ce-prescribed-quotient-page-descent",
+    "lem-weil-pbc-ce-coherent-prescribed-resolutions",
+    "lem-weil-pbc-ce-supported-first-page-lifts",
+    "lem-weil-pbc-supported-ce-filtered-totals",
+    "lem-weil-pbc-supported-resolution-maps"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": null,
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredCanonicalPageDescent",
+  "file": "lean/Sheaf/CategoryTheory/FilteredCanonicalPageDescent.lean",
+  "declaration": "CategoryTheory.exists_filteredCanonical_page_descent",
+  "statement": "theorem exists_filteredCanonical_page_descent\n    (K K' : CochainComplex C ℤ) (F : DecreasingFiltration K) (F' : DecreasingFiltration K')\n    (E E' : CohomologicalSpectralSequence C 1)\n    (D : ∀ (r : ℤ) (_hr : 1 ≤ r), FilteredComplexPageDifferential K F r)\n    (D' : ∀ (r : ℤ) (_hr : 1 ≤ r), FilteredComplexPageDifferential K' F' r)\n    (j : ∀ (r : ℤ) (hr : 1 ≤ r), E.page r hr ≅ (D r hr).page)\n    (j' : ∀ (r : ℤ) (hr : 1 ≤ r), E'.page r hr ≅ (D' r hr).page)\n    (hj : ∀ (r : ℤ) (hr : 1 ≤ r) (pq : ℤ × ℤ),\n      FilteredComplexHomologyNormalized K F r (D r hr) pq\n        ((HomologicalComplex.homologyFunctor C (ComplexShape.up' (r, 1 - r)) pq).mapIso\n          (j r hr).symm ≪≫ E.iso r (r + 1) pq rfl hr ≪≫\n          (HomologicalComplex.eval C (ComplexShape.up' (r + 1, 1 - (r + 1))) pq).mapIso\n            (j (r + 1) (by omega))))\n    (hj' : ∀ (r : ℤ) (hr : 1 ≤ r) (pq : ℤ × ℤ),\n      FilteredComplexHomologyNormalized K' F' r (D' r hr) pq\n        ((HomologicalComplex.homologyFunctor C (ComplexShape.up' (r, 1 - r)) pq).mapIso\n          (j' r hr).symm ≪≫ E'.iso r (r + 1) pq rfl hr ≪≫\n          (HomologicalComplex.eval C (ComplexShape.up' (r + 1, 1 - (r + 1))) pq).mapIso\n            (j' (r + 1) (by omega))))\n    (b : K ⟶ K')\n    (hb : ∀ q : ℤ, ∃ s : (F.step q : CochainComplex C ℤ) ⟶\n        (F'.step q : CochainComplex C ℤ), s ≫ (F'.step q).arrow = (F.step q).arrow ≫ b) :\n    ∃ N : E ⟶ E',\n      ∀ (A : C) (q p r : ℤ) (hr : 1 ≤ r)\n        (x : A ⟶ (F.step q : CochainComplex C ℤ).X (q + p))\n        (y : A ⟶ (F'.step q : CochainComplex C ℤ).X (q + p))\n        (z : A ⟶ (F.complexCycles q (q + p) r : C))\n        (z' : A ⟶ (F'.complexCycles q (q + p) r : C)),\n        x ≫ (F.step q).arrow.f (q + p) ≫ b.f (q + p) =\n          y ≫ (F'.step q).arrow.f (q + p) →\n        z ≫ (F.complexCycles q (q + p) r).arrow =\n          x ≫ (F.complexQuotientπ q (q + 1) (by omega)).f (q + p) →\n        z' ≫ (F'.complexCycles q (q + p) r).arrow =\n          y ≫ (F'.complexQuotientπ q (q + 1) (by omega)).f (q + p) →\n        z ≫ filteredComplexPageπ K F r (q, p) ≫ (j r hr).inv.f (q, p) ≫\n          (N.hom r hr).f (q, p) =\n        z' ≫ filteredComplexPageπ K' F' r (q, p) ≫ (j' r hr).inv.f (q, p)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T100115-L-2483175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261013T100115-L-2483175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

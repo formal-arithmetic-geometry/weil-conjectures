@@ -6,6 +6,8 @@ Authors: SHEAF group X2
 module
 
 public import Sheaf.Paper.EtaleCEStationaryPageNaturality
+import Sheaf.Paper.EtaleCEPrescribedNormalizedFirstPages
+import Sheaf.CategoryTheory.FilteredCanonicalPageDescent
 import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import Sheaf.AlgebraicGeometry.ExtPullbackResolutionSections
 import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
@@ -27,6 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent CE totals and representative equations together.
 /-- Retain prescribed CE bicomplexes in quotient-page presentations and descend supplied
@@ -150,6 +153,30 @@ theorem exists_etaleCE_prescribed_quotient_page_descent
           (D.firstPageIso p q).hom ≫
             AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp
               (cohomologyMap f (K.obj.X q) p))) ∧
-        EtaleCEPageMapOnRepresentatives D D' (e X K) (e Y L) b N := by sorry
+        EtaleCEPageMapOnRepresentatives D D' (e X K) (e Y L) b N := by
+  classical
+  obtain ⟨P, δ, j, hI, hj, hfirst⟩ :=
+    exists_etaleCE_prescribed_normalized_first_pages I a hbelow hrows hterms
+      hhorizontal hquasi
+  let e : ∀ (X : Scheme.{uNatural})
+      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),
+      EtaleCEQuotientRealization (P X K) :=
+    fun X K q p r hr ↦
+      (HomologicalComplex.eval AddCommGrpCat.{uNatural + 1}
+        (ComplexShape.up' (r, 1 - r)) (q, p)).mapIso (j X K r hr)
+  refine ⟨P, e, hI, ?_⟩
+  intro X Y f K L v
+  dsimp only
+  intro φ hφ u hu hb
+  obtain ⟨N, hN⟩ := exists_filteredCanonical_page_descent
+    (P X K).sectionsTotal (P Y L).sectionsTotal (P X K).L (P Y L).L
+    (P X K).sequence (P Y L).sequence (δ X K) (δ Y L) (j X K) (j Y L)
+    (hj X K) (hj Y L)
+    ((P X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫ (P Y L).totalSectionsIso.inv) hb
+  refine ⟨N, ?_, ?_⟩
+  · apply hfirst f K L v φ hφ u hu hb (N.hom 1)
+    intro A q p x y z z' hxy hz hz'
+    exact hN A q p 1 (by omega) x y z z' hxy hz hz'
+  · exact hN
 
 end AlgebraicGeometry.Etale
