@@ -7,9 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalRetraction
-import Sheaf.AlgebraicGeometry.StrictlyPerfectEvaluationLocalSection
 
 /-! # Evaluation comparisons with a K-injective second representative
 
@@ -24,11 +25,6 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 1000000 in
--- Elaborating the restriction and Hom models requires additional heartbeats.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
--- The restriction and Hom models use equivalent localized-site carriers.
 /-- The local evaluation square when its second representative is already K-injective.
 This only handles the resolved case; it does not assert the comparison for an arbitrary
 second complex.
@@ -37,20 +33,24 @@ Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ, 08DM and 08DL.
 (blueprint: lem-pc-strictly-perfect-kinjective-evaluation-comparisons).
 
 Proof:
-1. Apply the local retraction and section statements to the restricted canonical
-   evaluation. If r and s are their respective inverse maps, then
-   r = (s followed by R(g)) followed by r = s followed by (R(g) followed by r) = s.
-   Thus r is a two-sided inverse and defines an isomorphism e with hom R(g).
-2. Restrict derived internal Hom to U by 08DL and transport its arguments through
-   eK and eN. Since F is K-injective, derivedInternalHom_obj_iso computes the target
-   as Q Hom(P,F), giving b without resolving F again.
-3. Ordinary evaluation is degreewise invertible for strictly perfect P. Hence the
-   prescribed f is an isomorphism of complexes and Q(f) is an isomorphism.
-4. Set a = e followed by b followed by the inverse of Q(f). Associativity and the
-   inverse identity give R(g) followed by b = a followed by Q(f). No independently
-   prescribed source comparison is required by the statement.
-The two local inverse identities remain separate named obligations, following the
-ordinary-model calculation of Stacks 08DQ.
+1. Restrict derived internal Hom to U by 08DL. Transport its arguments through eK
+   and eN. Because F is K-injective, the localization factorization directly
+   computes this object as Q Hom(P,F), giving the target comparison b; no
+   preservation of quasi-isomorphisms by Hom(P,-) is needed for this target.
+2. Compute the restricted dual with Hom(P,O[0]) by 08DM. The bounded support of P
+   identifies its degree-q term with Hom(P^(-q),O). Dualize each finite-free
+   retraction of P^(-q), obtaining a finite-projective, hence flat, dual term.
+   The bounded dual is K-flat. Exact open restriction commutes with total tensor,
+   so F tensor Hom(P,O[0]) computes the source and gives the comparison a.
+3. Apply the representative equation of the canonical tensor-Hom family to
+   evaluation into F. On a total-tensor summand in bidegree (p,q), its uncurrying
+   evaluates the degree-q dual on P^r when r+q=0, then applies the right unit
+   action to F^p; every other component is zero. This is precisely hf.
+4. The tensor coproduct inclusions and Hom product projections detect equality.
+   Their component equalities identify the two chain maps. Localize and transport
+   along eK, eN and the restriction factorization to obtain the stated square.
+   All identifications use the same representative equation, rather than arbitrary
+   isomorphisms. Rank-zero terms, zero complexes and empty U obey the same formula.
 -/
 theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -80,52 +80,6 @@ theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u}
       ∃ b : R.obj (H.obj (op K, N)) ≅
           DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F),
         R.map g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f := by
-  classical
-  let R := (SheafOfModules.overFunctor.{u}
-    (moduleRings X.toRingedSpace) U).mapDerivedCategory
-  let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-    X.toRingedSpace.sheaf
-  let D := H.obj (op K, 𝟙_ (schemeDerivedCategory X))
-  let g := ((schemeDerivedTensorHomEquiv X) (N ⊗ D) K N).symm
-    ((α_ N D K).hom ≫ N ◁
-      ((schemeDerivedTensorHomEquiv X) D K (𝟙_ (schemeDerivedCategory X)) (𝟙 D)) ≫
-        (ρ_ N).hom)
-  obtain ⟨r, hr⟩ := exists_strictlyPerfect_evaluation_local_retraction
-    X K N U P _hstrict _eK
-  obtain ⟨s, hs⟩ := exists_strictlyPerfect_evaluation_local_section
-    X K N U P _hstrict _eK
-  change R.map g ≫ r = 𝟙 _ at hr
-  change s ≫ R.map g = 𝟙 _ at hs
-  have hrs : r = s := by
-    calc
-      r = 𝟙 _ ≫ r := (Category.id_comp r).symm
-      _ = (s ≫ R.map g) ≫ r := by rw [hs]
-      _ = s ≫ (R.map g ≫ r) := Category.assoc _ _ _
-      _ = s := by rw [hr, Category.comp_id]
-  let e : R.obj (N ⊗ D) ≅ R.obj (H.obj (op K, N)) :=
-    { hom := R.map g
-      inv := r
-      hom_inv_id := hr
-      inv_hom_id := by rw [hrs]; exact hs }
-  obtain ⟨c⟩ := derivedInternalHom_restrict_open X.toRingedSpace U K N
-  obtain ⟨d⟩ := @derivedInternalHom_obj_iso.{u, w} (Over U) _
-    ((Opens.grothendieckTopology X.toRingedSpace).over U)
-    (X.sheaf.over U) (inferInstanceAs
-      (HasDerivedCategory.{w}
-        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))))
-    (R.obj K) (R.obj N) P F inferInstance
-    _eK.symm _eN.symm
-  let b := c.symm ≪≫ d
-  have : ∀ n : ℤ, IsIso (f.f n) :=
-    fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F _hstrict f _hf n
-  have : IsIso f := HomologicalComplex.Hom.isIso_of_components f
-  let Q := DerivedCategory.Q.{w}
-    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-  refine ⟨e ≪≫ b ≪≫ (Q.mapIso (asIso f)).symm, b, ?_⟩
-  change R.map g ≫ b.hom =
-    (R.map g ≫ b.hom ≫ (Q.mapIso (asIso f)).inv) ≫ Q.map f
-  simp only [Category.assoc, Functor.mapIso_inv, asIso_inv,
-    ← Functor.map_comp, IsIso.inv_hom_id]
-  rw [Q.map_id, Category.comp_id]
+  sorry
 
 end AlgebraicGeometry

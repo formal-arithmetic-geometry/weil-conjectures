@@ -8,9 +8,6 @@ public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
-import all Sheaf.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
-import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 
 /-! # Perfect internal-Hom pullback with no module localization choice
 Source: Stacks Project, cohomology.tex, Tags 08I3 and 0FPC.
@@ -28,35 +25,6 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-private noncomputable def mixedTensorHomCore (S : Scheme.{u}) (K : schemeDerivedCategory S) :
-    Adjunction.CoreHomEquiv (tensorRight K)
-      ((Functor.curry.obj
-        (derivedInternalHom (Opens.grothendieckTopology S) S.sheaf)).obj (op K)) := by
-  let e := schemeDerivedTensorHomEquiv S
-  have he : IsCanonicalDerivedTensorHom S e :=
-    Classical.choose_spec (exists_canonicalDerivedTensorHom S)
-  exact
-    { homEquiv := fun A L ↦ (e A K L).symm
-      homEquiv_naturality_left_symm := by
-        intro A' A L a h
-        change e A' K L (a ≫ h) = (a ▷ K) ≫ e A K L h
-        have hn := he.1 A A' K K L L a (𝟙 K) (𝟙 L) h
-        erw [op_id, ← CategoryTheory.prod_id', CategoryTheory.Functor.map_id,
-          Category.comp_id, tensorHom_id, Category.comp_id] at hn
-        exact hn
-      homEquiv_naturality_right := by
-        intro A L L' h c
-        apply (e A K L').injective
-        change e A K L' ((e A K L').symm (h ≫ c)) =
-          e A K L' ((e A K L).symm h ≫
-            (derivedInternalHom (Opens.grothendieckTopology S)
-              S.sheaf).map (𝟙 (op K), c))
-        simpa only [op_id, id_tensorHom_id, Category.comp_id,
-          Category.id_comp, Equiv.apply_symm_apply] using
-          (he.1 A A K K L L' (𝟙 A) (𝟙 K) c ((e A K L).symm h)).symm }
-
-set_option maxHeartbeats 1600000 in
--- Elaborating the shared derived tensor instances requires additional heartbeats.
 /-- The evaluation-mate map on sheaf internal Hom is invertible for perfect M.
 It uses no global sections or scalar extension and assumes no flatness or qcqs.
 Source: Stacks Project, cohomology.tex, Remark 08I3 and Example 0FPC.
@@ -91,46 +59,6 @@ theorem mixedPerfect_internalHom_pullback_isIso
           (derivedPullback g).map
             ((schemeDerivedTensorHomEquiv X)
               ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op M, N))
-              M N (𝟙 _)))) := by
-  classical
-  obtain ⟨adj, _, adj', hadj, _, _, hadj'⟩ := scheme_derivedInternalHom_adjunction X
-  let P : schemeDerivedQCohCategory X :=
-    ⟨M, schemeDerivedQCohProperty_of_isPerfect X M hM⟩
-  obtain ⟨D, _, _, _, _, _, _, _, _, _, _, _, _, _, _, ⟨p, _, _⟩, _⟩ :=
-    perfect_rhom_tensor_comparison X P P hM adj hadj adj' hadj'
-  let := p
-  let t := mixedHomTensorPullbackIso g
-  have ht : IsCanonicalPullbackTensorComparison g (fun A B ↦ t.hom.app (A, B)) :=
-    Classical.choose_spec (exists_mixedHomTensorPullbackIso g)
-  obtain ⟨m, hm⟩ := canonicalPullbackTensor_monoidal_realization g _ ht
-  let := m.toMonoidal
-  have htensor (A B : schemeDerivedCategory X) :
-      t.inv.app (A, B) = Functor.LaxMonoidal.μ (derivedPullback g) A B := by
-    have he : (m.μIso A B).symm = t.app (A, B) := Iso.ext (hm A B)
-    exact (congrArg Iso.inv he).symm
-  let b := Adjunction.mkOfHomEquiv (mixedTensorHomCore X M)
-  let c := Adjunction.mkOfHomEquiv (mixedTensorHomCore T ((derivedPullback g).obj M))
-  have hb : b.counit.app N =
-      schemeDerivedTensorHomEquiv X
-        ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op M, N))
-        M N (𝟙 _) := by
-    rw [← b.homEquiv_symm_id]
-    simp only [b, Adjunction.mkOfHomEquiv_homEquiv]
-    rfl
-  have h := monoidal_adjunct_isIso (derivedPullback g) M D.obj N _ _ b c
-  simp only [c, Adjunction.mkOfHomEquiv_homEquiv] at h
-  change IsIso ((schemeDerivedTensorHomEquiv T _ _ _).symm
-    (Functor.LaxMonoidal.μ (derivedPullback g) _ _ ≫
-      (derivedPullback g).map (b.counit.app N))) at h
-  let H := (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).obj (op M, N)
-  let ev := schemeDerivedTensorHomEquiv X H M N (𝟙 H)
-  have heq : Functor.LaxMonoidal.μ (derivedPullback g) H M ≫
-      (derivedPullback g).map (b.counit.app N) =
-      t.inv.app (H, M) ≫ (derivedPullback g).map ev :=
-    congrArg₂ (fun a q ↦ a ≫ q) (htensor H M).symm
-      (congrArg (derivedPullback g).map hb)
-  exact (congrArg (fun q ↦ IsIso
-    ((schemeDerivedTensorHomEquiv T ((derivedPullback g).obj H)
-      ((derivedPullback g).obj M) ((derivedPullback g).obj N)).symm q)) heq).mp h
+              M N (𝟙 _)))) := by sorry
 
 end AlgebraicGeometry

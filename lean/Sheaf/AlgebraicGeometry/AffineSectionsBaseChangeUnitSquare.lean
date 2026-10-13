@@ -6,7 +6,6 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
-import Sheaf.AlgebraicGeometry.AffineSectionsSquareComparisonCoherence
 
 /-! # Affine sections of the base-change unit square
 
@@ -20,32 +19,10 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem mate_unit_square
-    {S X T Y : Type*} [Category* S] [Category* X] [Category* T] [Category* Y]
-    {Lf : S ⥤ X} {Rf : X ⥤ S} {Lq : T ⥤ Y} {Rq : Y ⥤ T}
-    {Lg : S ⥤ T} {Rg : T ⥤ S} {Lp : X ⥤ Y} {Rp : Y ⥤ X}
-    (af : Lf ⊣ Rf) (aq : Lq ⊣ Rq) (ag : Lg ⊣ Rg) (ap : Lp ⊣ Rp)
-    (k : Lg ⋙ Lq ⟶ Lf ⋙ Lp) (E : X) :
-    ag.unit.app (Rf.obj E) ≫ Rg.map
-        (aq.homEquiv _ _ (k.app (Rf.obj E) ≫ Lp.map (af.counit.app E))) =
-      Rf.map (ap.unit.app E) ≫
-        (conjugateEquiv (af.comp ap) (ag.comp aq) k).app (Lp.obj E) := by
-  let α : TwoSquare Lg Lf Lq Lp := .mk _ _ _ _ k
-  have h := unit_mateEquiv ap ag (mateEquiv af aq α) E
-  change Rf.map (ap.unit.app E) ≫
-      ((mateEquiv ap ag (mateEquiv af aq α)).natTrans).app (Lp.obj E) = _ at h
-  rw [iterated_mateEquiv_conjugateEquiv] at h
-  simpa [α, mateEquiv, Adjunction.homEquiv_unit, Functor.map_comp,
-    Category.assoc] using h.symm
-
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The right-adjoint base-change unit square after taking affine sections.
 This is an identity of maps over R, for arbitrary E. It constructs no extension
 isomorphism and requires no quasi-coherence. Only the canonical pullback unit
@@ -167,58 +144,6 @@ theorem affineSectionsBaseChange_unit_square
           d.hom.app ((derivedPullback (pullback.fst f g)).obj E)) =
       b.hom.app E ≫ (affineDerivedGlobalSections f).map
           ((canonicalPullbackAdjunction (pullback.fst f g)).unit.app E) ≫
-        c.hom.app ((derivedPullback (pullback.fst f g)).obj E) := by
-  classical
-  let a := fun {A D : Scheme.{u}} (h : A ⟶ D) ↦ canonicalPullbackAdjunction h
-  let p := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec
-    (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))
-  let k := p (pullback.snd f g) g ≪≫
-    eqToIso (congrArg (fun h ↦ derivedPullback h) (pullback.condition (f := f) (g := g)).symm) ≪≫
-      (p (pullback.fst f g) f).symm
-  let δ := conjugateEquiv ((a f).comp (a (pullback.fst f g)))
-    ((a g).comp (a (pullback.snd f g))) k.hom
-  have hu := mate_unit_square (a f) (a (pullback.snd f g))
-    (a g) (a (pullback.fst f g)) k.hom E
-  have hβ : (a (pullback.snd f g)).homEquiv _ _
-      (k.hom.app ((schemeDerivedDirectImage f).obj E) ≫
-        (derivedPullback (pullback.fst f g)).map ((a f).counit.app E)) =
-      schemeDerivedBaseChangeMap f (pullback.snd f g) g
-        (pullback.fst f g) pullback.condition E := by
-    simp only [k, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom, eqToHom_app,
-      Iso.symm_hom, Category.assoc]
-    rfl
-  rw [hβ] at hu
-  change (a g).unit.app ((schemeDerivedDirectImage f).obj E) ≫
-      (schemeDerivedDirectImage g).map
-        (schemeDerivedBaseChangeMap f (pullback.snd f g) g
-          (pullback.fst f g) pullback.condition E) =
-    (schemeDerivedDirectImage f).map ((a (pullback.fst f g)).unit.app E) ≫
-      δ.app ((derivedPullback (pullback.fst f g)).obj E) at hu
-  let U := affineDerivedGlobalSections (𝟙 (Spec R))
-  let V := affineDerivedGlobalSections (𝟙 (Spec B))
-  let ρ := (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory
-  let β := schemeDerivedBaseChangeMap f (pullback.snd f g) g
-    (pullback.fst f g) pullback.condition E
-  let F := (derivedPullback (pullback.fst f g)).obj E
-  have hn := r.hom.naturality β
-  change U.map ((schemeDerivedDirectImage g).map β) ≫
-      r.hom.app ((schemeDerivedDirectImage (pullback.snd f g)).obj F) =
-    r.hom.app ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)) ≫
-      ρ.map (V.map β) at hn
-  have hcoh := affineSections_square_comparison_coherence f g
-    t b ht hb z d hz hd v r hv hr s c hs hc F
-  change U.map (δ.app F) ≫
-      r.hom.app ((schemeDerivedDirectImage (pullback.snd f g)).obj F) ≫
-      ρ.map (d.hom.app F) =
-    b.hom.app ((schemeDerivedDirectImage (pullback.fst f g)).obj F) ≫ c.hom.app F at hcoh
-  change U.map ((a g).unit.app ((schemeDerivedDirectImage f).obj E)) ≫
-      r.hom.app ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj E)) ≫
-      ρ.map (V.map β ≫ d.hom.app F) = _
-  rw [Functor.map_comp, ← reassoc_of% hn]
-  rw [← Functor.map_comp_assoc, hu, Functor.map_comp, Category.assoc]
-  rw [hcoh, ← Category.assoc]
-  simpa only [Functor.comp_map, Functor.comp_obj, Functor.id_obj, a, F, U, ρ,
-    Category.assoc] using congrArg (fun h ↦ h ≫ c.hom.app F)
-    (b.hom.naturality ((a (pullback.fst f g)).unit.app E))
+        c.hom.app ((derivedPullback (pullback.fst f g)).obj E) := by sorry
 
 end AlgebraicGeometry
