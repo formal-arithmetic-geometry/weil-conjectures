@@ -1,0 +1,120 @@
+{
+ "id": "lem-sbc-raw-scalar-pullback-formulas",
+ "kind": "statement",
+ "title": "Factorization of the two explicit raw pullbacks",
+ "statement": "For Λ commutative, k:W→S, G a module sheaf, q a natural degree, U etale over S, A,B over W and f:A→B, the module raw pullback of z equals moduleSourceFactor followed by derived inverse image of z followed by moduleCoefficientFactor. Independently, for every abelian raw class x on B, its abelian raw pullback equals abelianSourceFactor followed by derived inverse image of x followed by abelianCoefficientFactor. No relation between z and x is assumed.",
+ "source": {
+  "document": "Stacks Project; proof of lem-sbc-raw-module-abelian-hom-map-naturality",
+  "place": "Tags 03FD and 03Q8; explicit raw-map formula expansion"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-abelian-hom-map",
+  "lem-sbc-raw-scalar-source-square",
+  "lem-sbc-raw-scalar-coefficient-square"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate higherDirectImageRawOverFunctor.map via higherDirectImageRawOverPullbackHom_apply and expand higherDirectImageRawOverPullback and higherDirectImageRawTrianglePullback. The first two factors are moduleSourceFactor and the last two are moduleCoefficientFactor. Associativity joins the first two, leaving the derived image of z in the middle. Expand abelianHigherDirectImageRawPullback on the arbitrary abelian class x. Its first two factors are abelianSourceFactor and its last two are abelianCoefficientFactor, so the same associativity equation gives the second identity. These are formulas for the two maps separately; scalar comparison, its coherence and any relationship between z and x are not used. All zero and identity cases follow from the same expansions.",
+   "uses": [
+    "def-sbc-raw-module-abelian-hom-map",
+    "def-sbc-higher-image-raw-diagram"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-module-abelian-hom-map",
+  "def-sbc-higher-image-raw-diagram"
+ ],
+ "proof_origin": {
+  "by": "M2",
+  "document": "Stacks Project",
+  "place": "Tags 03FD and 03Q8, original formula-expansion step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived scalar forgetting with inverse image and free represented sheaves",
+   "date": "2026-10-14",
+   "results": "Eight results, including SheafOfModules.map_ιFree_mapFree_hom and freeHomEquiv_freeMap, concern free sheaves in a different coefficient encoding. No match for either derived source or coefficient square.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-14",
+   "results": "Nine hits including generic naturality, which is used to combine the squares but does not identify their fixed comparison factors.",
+   "verdict": "generic middle step only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIso.*comp|rawModuleAbelianHomMap_naturality",
+   "date": "2026-10-14",
+   "results": "msearch returned seven unrelated pullbackIso matches. Local rg located the exact derived single and composition APIs and EtalePullbackSingleComp, whose generic helpers are private; none supplies coherence for RawModuleScalarComparison.pullbackIso. ScalarInverseImageCompositionCoherence concerns Zariski module sheaves over a field, a different site and coefficients.",
+   "verdict": "no existing scalar etale square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation and naturality of scalar forgetting on derived Hom with inverse image and shifted coefficients",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; msearch returned zero hits and instructed that no verdict be recorded."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-module-abelian-hom-map-naturality",
+   "place": "Explicit map evaluation and raw pullback expansion in the original naturality proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_pullback_formulas",
+  "statement": "theorem rawModuleScalar_pullback_formulas\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z =\n      moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)\n        (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U) ≫\n      (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z ≫\n        moduleCoefficientFactor Λ G (q : ℤ) A B f) ∧\n    (∀ (x : (abelianHigherDirectImageRawPresheaf (B.hom ≫ k) q\n      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B)).obj\n        (op U)),\n      abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n        (by rw [← Category.assoc, Over.w]) q _ _\n        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n          (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G)) U x =\n      abelianSourceFactor f.left (B.hom ≫ k) (A.hom ≫ k)\n        (by rw [← Category.assoc, Over.w]) (RawModuleScalarComparison.freeAbelian S U) ≫\n      (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map x ≫\n      abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)\n        (q : ℤ) A B f)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T211109-L-393940",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T211109-L-393940",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

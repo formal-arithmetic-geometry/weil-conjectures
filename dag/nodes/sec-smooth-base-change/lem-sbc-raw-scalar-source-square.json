@@ -1,0 +1,128 @@
+{
+ "id": "lem-sbc-raw-scalar-source-square",
+ "kind": "statement",
+ "title": "The source factors of scalar forgetting commute with pullback",
+ "statement": "Let $\\Lambda$ be a commutative ring in $\\operatorname{Type}(u+1)$, $S,Y,Y'$ schemes in universe $u$, $a:Y'\\to Y$, $h:Y\\to S$, $h':Y'\\to S$ with $a\\gg h=h'$. Let $L$ be an etale $\\Lambda$-module sheaf on $S$, $E$ an abelian etale sheaf on $S$, and $t:E\\to V_S L$, where $V_X$ forgets scalars [def-sbc-raw-module-scalar-pullback-comparison]. Write $M=D^+a^*_{\\Lambda}$, $H=D^+a^*_{\\mathbf{Ab}}$, $V_A=D^+V_{Y'}$, $V_B=D^+V_Y$, and $\\epsilon:M\\gg V_A\\cong V_B\\gg H$ for the derived scalar comparison obtained from pullbackIso by derived composition and natural-isomorphism comparisons. Set $L_B=h^*_{\\Lambda}L$, $L_A=h'^*_{\\Lambda}L$. For $i=A,B$, let $c_i$ be singleFunctor of the composite $h_i^*t$ followed by the inverse scalar pullback comparison, then the inverse single comparison for $V_i$ at $L_i$. Let $m_S$ be singleFunctor of upperStarComp for $(a,h,h')$ at $L$, followed by the inverse single comparison for $a^*_{\\Lambda}$ at $L_B$. Let $a_S$ be the corresponding abelian composite at $E$ [lem-weil-pbc-inverse-image-composition]. Then $c_A\\gg V_A(m_S)=a_S\\gg H(c_B)\\gg\\epsilon^{-1}_{L_B[0]}$. This involves no coefficient object, cohomology class or degree.",
+ "source": {
+  "document": "Stacks Project; proof of lem-sbc-raw-module-abelian-hom-map-naturality",
+  "place": "Tags 03D7 and 03Q8; source generator and single-complex comparison factors"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "The inverse of the scalar Kan-extension comparison commutes with the Kan-extension unit, and the sheafification comparison commutes with the sheafification unit. Hence pullbackIso is the mate of the scalar-forgetting comparison on direct images. The composition unit equation for upperStarComp then identifies the two ways of forgetting a composite inverse image. Apply this equation to L; naturality of upperStarComp applied to t moves t across the source comparison. Apply singleFunctor to the resulting sheaf square. Naturality of mapDerivedCategoryPlusSingleFunctor and its compatibility with the derived composition comparison identify the single factors with the components of derivedPullbackIso. Cancel the single comparison isomorphisms. This gives the displayed square. It holds for arbitrary E,L,t, including zero objects and zero maps, and also for identity scheme arrows. No coefficient sheaf, degree, cohomology class, or invertibility of t is used.",
+   "uses": [
+    "def-sbc-raw-module-scalar-pullback-comparison",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-14",
+  "document": "Stacks Project; proof of lem-sbc-raw-module-abelian-hom-map-naturality",
+  "place": "Tags 03D7 and 03Q8; source generator and single-complex comparison factors"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived scalar forgetting with inverse image and free represented sheaves",
+   "date": "2026-10-14",
+   "results": "Eight results, including SheafOfModules.map_ιFree_mapFree_hom and freeHomEquiv_freeMap, concern free sheaves in a different coefficient encoding. No match for either derived source or coefficient square.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "date": "2026-10-14",
+   "results": "Nine hits including generic naturality, which is used to combine the squares but does not identify their fixed comparison factors.",
+   "verdict": "generic middle step only"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIso.*comp|rawModuleAbelianHomMap_naturality",
+   "date": "2026-10-14",
+   "results": "msearch returned seven unrelated pullbackIso matches. Local rg located the exact derived single and composition APIs and EtalePullbackSingleComp, whose generic helpers are private; none supplies coherence for RawModuleScalarComparison.pullbackIso. ScalarInverseImageCompositionCoherence concerns Zariski module sheaves over a field, a different site and coefficients.",
+   "verdict": "no existing scalar etale square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation and naturality of scalar forgetting on derived Hom with inverse image and shifted coefficients",
+   "date": "2026-10-14",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error; msearch returned zero hits and instructed that no verdict be recorded."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomMapNaturality",
+  "date": "2026-10-14",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-module-abelian-hom-map-naturality",
+   "place": "Tags 03D7 and 03Q8; source generator and single-complex comparison factors",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarSourceSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarSourceSquare.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_source_square",
+  "statement": "theorem rawModuleScalar_source_square\n    (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' : Scheme.{u}}\n    (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')\n    (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (E : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (t : E ⟶ (RawModuleScalarComparison.forget Λ S).obj L) :\n  let VA := (RawModuleScalarComparison.forget Λ Y').mapDerivedCategoryPlus\n  let H := (upperStar AddCommGrpCat.{u + 1} a).mapDerivedCategoryPlus\n  let LB := (upperStar (ModuleCat.{u + 1} Λ) h).obj L\n  let cA := scalarSourceFactor Λ h' L E t\n  let cB := scalarSourceFactor Λ h L E t\n  let mS := moduleSourceFactor Λ a h h' w L\n  let aS := abelianSourceFactor a h h' w E\n  cA ≫ VA.map mS = aS ≫ H.map cB ≫\n    (RawModuleScalarComparison.derivedPullbackIso Λ a).inv.app\n      ((DerivedCategory.Plus.singleFunctor _ 0).obj LB)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RawModuleScalarComparison.derivedPullbackIso",
+   "AlgebraicGeometry.Etale.scalarSourceFactor",
+   "AlgebraicGeometry.Etale.moduleSourceFactor",
+   "AlgebraicGeometry.Etale.abelianSourceFactor",
+   "AlgebraicGeometry.Etale.rawModuleScalar_source_square"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T211109-L-393940",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261013T211109-L-393940",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
