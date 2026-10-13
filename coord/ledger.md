@@ -11811,3 +11811,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:59 L: merged deliver/D2/Sheaf.AlgebraicGeometry.KoszulChainRestrictionFormula (stage 3; reviewer PASS; first push; landing 20261013T095938-L-2454004 (proof); batch 20261013T095923; modules 1; new nodes 0)
 - 09:59 L: merged deliver/D3/Sheaf.AlgebraicGeometry.EtaleLimitAffineStageEventualZero (stage 3; reviewer PASS; first push; landing 20261013T095939-L-2454116 (interface); batch 20261013T095923; modules 2; new nodes 1)
 - 09:59 L: merged deliver/D3/Sheaf.RingTheory.Derivation.PowerSeriesPolynomialDifferential (stage 3; reviewer PASS; first push; landing 20261013T095940-L-2454376 (interface); batch 20261013T095923; modules 2; new nodes 1)
+- 09:59 L: merged deliver/E1/Sheaf.AlgebraicGeometry.GlobalHomBaseChangeExchange (stage 3; reviewer PASS; first push; landing 20261013T095940-L-2454496 (interface); batch 20261013T095923; modules 3; new nodes 2)

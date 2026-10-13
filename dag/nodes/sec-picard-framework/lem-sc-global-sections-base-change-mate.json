@@ -1,0 +1,155 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "mathlib_match": null,
+ "merged_into": null,
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GlobalHomBaseChangeExchange",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-global-sections-base-change-mate",
+ "title": "Leray transfers the base-change mate of a map of sheaf complexes",
+ "statement": "Let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of schemes [def-pc-scheme], with $X'=X\\times_Y Y'$ and projections $g_X:X'\\to X$, $f':X'\\to Y'$ [def-pc-fibre-product]. Use the derived categories [def-pc-derived-category], $Lh^*$ [def-pc-derived-pullback], $Rh_*$ [def-pc-derived-direct-image], and canonical adjunctions and base-change map $\\beta:L g^*R f_*\\to R f'_*L g_X^*$ [def-pc-derived-base-change-map]. Write $G_Z=R\\Gamma(Z,-)$ [def-pc-global-derived-rhom], $S_h$ for exact restriction of global scalars, $e_h:G_SRh_*\\cong S_hG_T$ for the canonical Leray comparison [lem-pc-global-hom-adjunction], and $s:S_fS_{g_X}\\cong S_gS_{f'}$ for the scalar-square identification [def-pc-global-hom-pullback-comparison]. If $E\\in D(\\mathcal O_X)$, $E'\\in D(\\mathcal O_{X'})$, and $a:L g_X^*E\\to E'$ is any morphism, write $\\operatorname{adj}_h$ for the Hom bijection from $Lh^*\\dashv Rh_*$. Then $$S_f\\bigl(G_X(\\operatorname{adj}_{g_X}(a));e_{g_X}(E')\\bigr);s_{G_{X'}E'};S_g(e_{f'}^{-1}(E'))=e_f^{-1}(E);G_Y\\bigl(\\operatorname{adj}_g(\\beta_E;Rf'_*(a))\\bigr);e_g(Rf'_*E').$$ This is an identity for arbitrary sheaf complexes and maps; no internal-Hom or tensor-Hom input, and no isomorphism hypothesis on beta or a, is present.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-base-change-map",
+  "def-pc-global-derived-rhom",
+  "lem-pc-global-hom-adjunction",
+  "def-pc-global-hom-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Expand adj_gX(a) as the gX unit followed by RgX_*(a). Naturality of each canonical Leray comparison moves a through the two scalar paths. It suffices to check the identity when a is the identity of LgX^*E.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand beta_E as the f' adjunction transpose of the pullback-composition comparison followed by LgX^* of the f counit. Transpose under g, then use counit naturality and the triangle identities of f and f'. This recovers the direct-image-composition form Rf_*(unit_gX,E) followed by the canonical identification Rf_*RgX_* = Rg_*Rf'_*. All comparisons are the mates of the same pinned pullback composition comparisons.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Leray comparisons for the two composite direct images are unique right-derived comparisons extending the identity on underived global sections. On K-injective representatives their derived-unit equations agree; uniqueness therefore identifies the two composites. The restriction-of-global-scalars composition maps are the identity module maps, and their square identification is precisely s. Apply derived global sections to the preceding unit identity and use this identification. Finally restore a using the naturality from the first step.",
+   "uses": [
+    "lem-pc-global-hom-adjunction",
+    "def-pc-global-derived-rhom",
+    "def-pc-global-hom-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-global-derived-rhom",
+  "def-pc-global-hom-pullback-comparison",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, lemma-more-base-change, passage to global Hom in the final comparison diagrams; cohomology.tex Remark 08HY and Lemma 0D5T"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, lemma-more-base-change, passage to global Hom in the final comparison diagrams; cohomology.tex Remark 08HY and Lemma 0D5T",
+  "note": "Details supplied for the indicated part of the parent exchange argument; no invertibility assumption."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 final comparison diagrams: exchange of the evaluation-mate global Hom comparisons with base change in both Hom entries; Leray transfers the base-change mate of a map of sheaf complexes",
+   "via": [
+    "lem-sc-global-hom-base-change-exchange",
+    "lem-sc-global-hom-base-change-counit-transport",
+    "lem-sc-flat-precompose-pus",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Leray isomorphism global sections commutes with the canonical base change adjunction mate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray isomorphism global sections base change adjunction mate compatibility",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.sheafificationCompPullback, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackComp. No exact derived scheme exchange/coherence statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections.*baseChange|baseChange.*globalSections|Leray.*mate",
+   "results": "0 hits: . No exact derived scheme exchange/coherence statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsBaseChangeMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsBaseChangeMate.lean",
+  "declaration": "AlgebraicGeometry.schemeGlobalSections_baseChange_mate",
+  "statement": "theorem schemeGlobalSections_baseChange_mate\n    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)\n    (E : schemeDerivedCategory X) (E' : schemeDerivedCategory (pullback f g))\n    (a : (derivedPullback (pullback.fst f g)).obj E ⟶ E') :\n    (schemeGlobalScalarRestriction f).map\n        ((schemeDerivedGlobalSections X).map\n          ((schemeHomPullbackAdjunction (pullback.fst f g)).homEquiv _ _ a) ≫\n          (schemeGlobalSectionsDirectImageIso (pullback.fst f g)).hom.app E') ≫\n      (schemeGlobalScalarSquareIso f (pullback.snd f g) g (pullback.fst f g)\n        pullback.condition).hom.app ((schemeDerivedGlobalSections (pullback f g)).obj E') ≫\n      (schemeGlobalScalarRestriction g).map\n        ((schemeGlobalSectionsDirectImageIso (pullback.snd f g)).inv.app E') =\n    (schemeGlobalSectionsDirectImageIso f).inv.app E ≫\n      (schemeDerivedGlobalSections Y).map\n        ((schemeHomPullbackAdjunction g).homEquiv _ _\n          (schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)\n            pullback.condition E ≫\n            (schemeDerivedDirectImage (pullback.snd f g)).map a)) ≫\n      (schemeGlobalSectionsDirectImageIso g).hom.app\n        ((schemeDerivedDirectImage (pullback.snd f g)).obj E')",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "split_report": {
+  "date": "2026-10-13",
+  "item": "Sheaf.AlgebraicGeometry.GlobalHomBaseChangeExchange",
+  "worker": "E1",
+  "summary": "One strictly partial coherence statement in the decomposition of the parent.",
+  "blueprint": "The Leray transfers the base-change mate of a map of sheaf complexes part of the evaluation-mate exchange argument in Tag 0AA8 final comparison diagrams."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T095940-L-2454496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261013T095940-L-2454496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
