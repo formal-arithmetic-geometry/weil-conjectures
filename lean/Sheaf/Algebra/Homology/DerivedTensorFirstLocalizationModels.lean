@@ -7,6 +7,8 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.Basic
+import Sheaf.Algebra.Homology.FirstLocalizationComparison
+import Sheaf.Algebra.Homology.FirstLocalizationNaturality
 /-! # First-factor localization of base-derived tensor cohomology
 
 Source: Stacks Project, perfect.tex, Tag 0DJ8, first localization identity;
@@ -127,6 +129,22 @@ theorem derivedTensor_first_localization_models
             (e Q' L' K').hom =
           (e Q L K).hom ≫
             (ModuleCat.extendScalars (algebraMap (Aq ⊗[R] B) D)).map h) := by
-  sorry
+  classical
+  have hex (Q : CochainComplex (ModuleCat.{u} A) ℤ)
+      (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
+      (K : ModuleCat.BaseDerivedTensorCohomologyModel R Aq B ((extend A Aq).obj Q) D) :=
+    exists_firstLocalization_iso R A Aq B D S i Q L K
+  let e := fun Q L K ↦ (hex Q L K).choose
+  have he (Q : CochainComplex (ModuleCat.{u} A) ℤ)
+      (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
+      (K : ModuleCat.BaseDerivedTensorCohomologyModel R Aq B ((extend A Aq).obj Q) D) :
+      IsFirstLocalizationMap R A Aq B D Q L K i (e Q L K).hom :=
+    (hex Q L K).choose_spec
+  refine ⟨e, ?_, ?_⟩
+  · intro Q L K τ hτ
+    exact firstLocalization_comparison R A B Aq D i Q L K (e Q L K) (he Q L K) τ hτ
+  · intro Q Q' f L K L' K' δ ε g h hδ hg hε hh
+    exact firstLocalization_naturality R A B Aq D i Q Q' f L K L' K' δ ε g h
+      (e Q L K) (e Q' L' K') (he Q L K) (he Q' L' K') hδ hg hε hh
 
 end RingTensorCohomology

@@ -1,0 +1,171 @@
+{
+ "id": "lem-pc-first-localization-map",
+ "kind": "statement",
+ "title": "The characterized first-factor localization isomorphism",
+ "statement": "Let R,A,B,Aq,D be commutative rings with compatible R-algebra structures and maps A -> Aq, A tensor_R B -> D and Aq tensor_R B -> D as in [def-pc-base-derived-tensor-cohomology-model]. Let Q be an A-module cochain complex, L a base-derived tensor cohomology model of Q tensor-derived_R B, and K such a model of (Aq tensor_A Q) tensor-derived_R B. Let i be an integer. Define u_Q on the underlying R-complex by x |-> 1 tensor x. Let zeta:L.derived -> K.derived be the unique counit-compatible derived-functor isomorphism. Define c_(L,K) as (L.cohomologyIso i).hom followed by H^i(L.derived(u_Q)), H^i(zeta at Aq tensor_A Q), and (K.cohomologyIso i).inv. A D-linear morphism e is characterized when e(1 tensor x)=1 tensor c_(L,K)(x) for every x. Assume S is a submonoid of A and Aq is its localization, and that all maps to D commute with the A, B and Aq maps. Then there exists a D-linear isomorphism D tensor_(A tensor_R B) L.cohomology(i) -> D tensor_(Aq tensor_R B) K.cohomology(i) characterized by this formula. The formula determines the map uniquely.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0DJ8, affine localization identity; Tag 06Y6, lemma-derived-base-change"
+ },
+ "stmt_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Construct u_Q from the extension/restriction adjunction unit and the restriction-of-scalars composition isomorphism. Apply the derived functor and the unique counit-compatible model comparison to construct c_(L,K). Equality on scalar-extension generators gives uniqueness.",
+   "uses": [
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-ring-tensor-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compute Q tensor-derived_R B with a K-flat R-resolution F of B[0]. The balanced model has the A and B actions fixed by the given cohomologyIso_smul equations. Tensoring Q with F preserves quasi-isomorphisms in Q, so Q need not be K-flat over R.",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-action-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the A-module total complex at S. Localization is exact and commutes with its direct sums, hence with cohomology. The tensor-localization formula identifies this with the total complex for Aq tensor_A Q. Thus c_(L,K) is the localization map on cohomology. Extend to D, where all s in S are units, and tensor associativity gives the inverse and the generator formula.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-ring-tensor-cohomology",
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-action-naturality",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0DJ8 and 06Y6; explicit arbitrary-model transport using the universal counit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor cohomology localization in first factor natural isomorphism",
+   "results": "[\"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_obj\", 'CategoryTheory.Tor_map', \"CategoryTheory.Tor'\", 'CategoryTheory.Tor', \"CategoryTheory.Tor'_obj_map\", 'CategoryTheory.Tor_obj', 'CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app']",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "['ModuleCat.extendScalars', 'ModuleCat.instIsLeftAdjointExtendScalars', 'ModuleCat.extendRestrictScalarsAdj', 'ModuleCat.extendScalarsId', 'ModuleCat.ExtendRestrictScalarsAdj.Counit.map', 'ModuleCat.ExtendRestrictScalarsAdj.Unit.map', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars']",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*homology|homology.*localization",
+   "results": "['Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean', 'Mathlib/Algebra/Homology/Localization.lean', 'Mathlib/Algebra/Homology/Localization.lean', 'Mathlib/Algebra/Homology/DerivedCategory/Basic.lean']",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived tensor localization natural cohomology morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_ext",
+   "results": "['CategoryTheory.Functor.leftDerived_ext']",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatTrans_comp|leftDerived_ext",
+   "results": "['Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean']",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact scalar extension induces an isomorphism on homology and commutes with tensor products",
+   "results": "['Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.lTensor_shortComplex_exact', 'LinearMap.rTensor_exact_iff_lTensor_exact', 'Module.Flat.iff_rTensor_preserves_shortComplex_exact', 'Module.Flat.iff_lTensor_preserves_shortComplex_exact', 'lTensor_exact', 'rTensor_exact', 'Module.Flat.rTensor_exact']",
+   "date": "2026-10-13",
+   "verdict": "second-reader search: generic tools only, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex, CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "[]",
+   "date": "2026-10-13",
+   "verdict": "second-reader search: generic tools only, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteLimits_extendScalars_of_flat|mapHomologyIso|extendScalarsComp",
+   "results": "['Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean', 'Mathlib/Topology/Sheaves/Abelian.lean', 'Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean', 'Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean']",
+   "date": "2026-10-13",
+   "verdict": "second-reader search: generic tools only, no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedTensorFirstLocalizationModels",
+  "date": "2026-10-13",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 0DJ8 affine localization identity; first-factor localization and its comparison maps",
+   "via": [
+    "lem-pc-derived-tensor-localization-cohomology",
+    "lem-pc-derived-tensor-first-localization-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FirstLocalizationMap",
+  "file": "lean/Sheaf/Algebra/Homology/FirstLocalizationMap.lean",
+  "declaration": "RingTensorCohomology.exists_firstLocalization_iso",
+  "statement": "theorem exists_firstLocalization_iso (S : Submonoid A) [IsLocalization S Aq] (i : ℤ)\n    (Q : CochainComplex (ModuleCat.{u} A) ℤ)\n    (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)\n    (K : ModuleCat.BaseDerivedTensorCohomologyModel R Aq B ((extend A Aq).obj Q) D)\n    : ∃ e : (ModuleCat.extendScalars (algebraMap (A ⊗[R] B) D)).obj (L.cohomology i) ≅\n      (ModuleCat.extendScalars (algebraMap (Aq ⊗[R] B) D)).obj (K.cohomology i),\n      IsFirstLocalizationMap R A Aq B D Q L K i e.hom",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T124310-L-3776097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261013T124310-L-3776097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
