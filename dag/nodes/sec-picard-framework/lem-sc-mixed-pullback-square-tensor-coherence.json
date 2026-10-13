@@ -19,33 +19,40 @@
  ],
  "proof": [
   {
-   "text": "Prove that compatibility on K-flat representatives: the termwise pullback-composition comparison is the mate of the ordinary direct-image composition comparison, and the ordinary pullback tensor comparison sends pulled-back pure tensors to the tensor of their pulled-back sections. Both composition paths give those same sections. The normalization equations of the tensorators and composition comparisons transport this equation through their invertible derived counits. K-flat resolutions and naturality extend it to every A,B.",
+   "text": "Apply the K-flat composition/tensor triangle to any two composable scheme arrows on localized K-flat complexes. Use the already constructed SingleComplexBaseChange K-flat coordinates to represent arbitrary P,Q. Form the two natural transformations from tensor followed by the composite pullback to the tensor of composite-arrow pullbacks: the composite tensorator followed by the tensor of c, and c at the tensor followed by the composite-arrow tensorator. Their components agree on the representatives by the triangle. Precompose both arbitrary-input components with the invertible map induced by the pair of representative isomorphisms; naturality transports the representative equality, and cancellation proves the triangle for arbitrary inputs. This extension is the proved private composition_tensor helper.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "def-pc-derived-pullback-tensor-comparison",
+    "lem-sc-derived-pullback-composition-tensor-kflat",
+    "def-pc-single-complex-base-change-stalk-condition",
     "lem-sc-mixed-hom-tensor-pullback-iso",
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pc-kflat-tensor-product"
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compatibility of an isomorphism with tensor comparisons is closed under composition: expand the tensor of two composites with tensorHom_comp_tensorHom and substitute the two compatibility equations. It is closed under inverse: precompose the desired inverse equation with c at the tensor, substitute the forward equation, and cancel hom followed by inv, including its tensor product. For equal scheme arrows, eliminate their equality proof; eqToIso becomes the identity and compatibility is id_tensorHom_id and the category identity laws. These are the proved generic trans/symm and equality_tensor helpers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the arbitrary-input triangle to snd followed by g and to fst followed by f. Apply equality_tensor to the symmetric square condition snd≫g=fst≫f. Compose the first triangle, this equality compatibility, and the inverse of the second triangle. The resulting compatible comparison is (c(snd,g) followed by equality transport) followed by c(fst,f) inverse. Iso.trans_assoc identifies it with the original right-associated mixedPullbackSquareComparison. Expand only composite tensorator components and reassociate categorical compositions to obtain the unchanged displayed square equality. No base-change map is used or cancelled.",
+   "uses": [
+    "lem-sc-derived-pullback-composition-tensor-kflat",
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-module-pullback-tensor",
+  "def-pc-single-complex-base-change-stalk-condition",
   "lem-pc-ringed-spaces-derived-pullback-composition",
-  "def-pc-derived-pullback-tensor-comparison",
-  "lem-sc-mixed-hom-tensor-pullback-iso",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pc-kflat-tensor-product"
+  "lem-sc-derived-pullback-composition-tensor-kflat",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Remark 08HY and Lemma 079U; duality.tex Tag 0AA8 final comparison diagrams",
-  "note": "Isolate tensor compatibility of left pullbacks; no right adjoints or base-change morphisms in this statement."
+  "place": "079U and 0D5S, with 08HY square comparison; actual Lean reduction through the K-flat composition triangle, naturality, inverse/composite compatibility and equality transport."
  },
  "mathlib_searches": [
   {
@@ -128,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "X-edb84",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261013T155941-L-1305263",
+  "landing": "20261013T172654-L-2099053",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged square statement and definition, K-flat lemma, DAG records, and report; both delivered modules and direct importer MixedTensorPairingBaseChangeTransport compile cleanly, with only permitted axioms and expected sorryAx dependencies."
  }
 }

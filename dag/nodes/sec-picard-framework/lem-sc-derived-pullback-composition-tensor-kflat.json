@@ -1,0 +1,166 @@
+{
+ "id": "lem-sc-derived-pullback-composition-tensor-kflat",
+ "kind": "statement",
+ "title": "Tensor compatibility of derived pullback composition on K-flat representatives",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "Let X,Y,Z be arbitrary schemes [def-pc-scheme], f:X→Y and g:Y→Z. Fix the derived category localizations [def-pc-derived-category], derived pullbacks [def-pc-derived-pullback], and the canonical composition comparison c selected by [lem-pc-ringed-spaces-derived-pullback-composition]. Let P,N be K-flat cochain complexes of O_Z-modules [def-pc-kflat-complex]. For the normalized tensor comparisons tau of [lem-sc-mixed-hom-tensor-pullback-iso], Lf*(tau_g(QP,QN));tau_f(Lg*QP,Lg*QN);(c_(QP) tensor c_(QN)) equals c_(QP tensor QN);tau_(fg)(QP,QN). This is the composable-arrow triangle only, on localized K-flat inputs; there is no cartesian square, equality transport or inverse composition map.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-mixed-hom-tensor-pullback-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 079U (lemma-pullback-tensor-product), Lemma 0D5S (lemma-derived-pullback-composition), and Remark 08HY (remark-base-change); the tensor triangle in the parent proof, expanded through ordinary adjunction units."
+ },
+ "proof": [
+  {
+   "text": "For K-flat P and N, their total tensor and all termwise pullbacks are K-flat. Therefore the localization tensor model maps and the shared left-derived counits used in the canonical tensor comparison equations are invertible. The counit in SingleComplexBaseChange is exactly the epsilon selected from exists_derivedPullbackComposition, not an independently chosen counit. Obtain the three normalization equations from the chosen mixedHomTensorPullbackIso.",
+   "uses": [
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let beta be the termwise pullback composition isomorphism, the inverse conjugate of pushforwardComp under the pinned tensor-pullback adjunctions. The leftDerivedLift equation characterizing the selected c yields, at each localized complex, c followed by the composite-arrow counit equals the g-counit mapped by Lf, followed by the f-counit at the termwise g-pullback and Q(beta). This is the standard left-derived factorization equation.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At ordinary module level compare f*(tau_g) followed by tau_f and beta_M tensor beta_N with beta_(M tensor N) followed by tau_(fg). Transpose under the successive pinned adjunctions, then use the sheaf tensor universal property to test on sections s tensor t. Each tau sends the unit image of s tensor t to the tensor of the unit images of s and t. By the conjugate definition of beta, beta followed by the composite-arrow unit equals the successive units followed by pushforwardComp. Thus both transposes are the tensor of the same successive unit sections. Injectivity of the adjunction Hom bijection and the sheaf tensor universal property give equality. Apply this degreewise on every (p,q)-summand of the total tensor complex; all maps preserve p and q, so the differential signs agree. The summand inclusions are jointly epimorphic, giving equality of chain maps.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-derived-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the chain-map equality. Naturality of c along the invertible source localization tensor map mu_Z(P,N) replaces c at QP tensor QN by its component at Q(Tot(P tensor N)). Naturality of the f-tensorator along epsilon_g(P), epsilon_g(N) replaces its inputs Lg QP,Lg QN by Q(g*P),Q(g*N). Postcompose both routes with epsilon_(fg)(P) tensor epsilon_(fg)(N) and the localization tensor map at the termwise composite pullbacks; all are invertible. Substitute the c-factorization at P,N and Tot(P tensor N), and the g-, f-, and fg-tensorator normalization equations. Naturality of the counits moves the chain comparison maps through these expressions. The resulting equation is the localized ordinary tensor/composition chain equality from step 3. Cancel the input localization map and the invertible output maps to obtain exactly the displayed triangle. No base-change morphism is cancelled and no representative is selected by a definition.",
+   "uses": [
+    "lem-sc-mixed-hom-tensor-pullback-iso",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-tensor-product",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-mixed-hom-tensor-pullback-iso",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "079U and 0D5S proofs; explicit unit and pure-tensor calculation expanding the parent node step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom",
+   "results": "['CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom']",
+   "date": "2026-10-14",
+   "verdict": "No exact normalized derived composition/tensor compatibility; generic composition and tensor calculus only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between composite derived pullback functors preserves the tensor product comparison",
+   "results": "['PresheafOfModules.pullbackComp', 'SheafOfModules.pullbackComp', 'PresheafOfModules.pullback_comp_id', 'SheafOfModules.conjugateEquiv_pullbackComp_inv', 'PresheafOfModules.pullback_id_comp', 'AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv', 'CategoryTheory.GrothendieckTopology.overMapPullbackComp', 'SheafOfModules.pullback_comp_id']",
+   "date": "2026-10-14",
+   "verdict": "No exact normalized derived composition/tensor compatibility; generic composition and tensor calculus only."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*tensor|tensor.*derivedPullbackComposition|pullbackComp_tensor",
+   "results": "[]; direct rg found only the ordinary pullbackComp_tensor theorem in Sheaf.AlgebraicGeometry.PullbackTensorComposition, whose adjoint-defined pullback/monoidal interface does not state the tensor-formula derived triangle.",
+   "date": "2026-10-14",
+   "verdict": "No exact normalized derived composition/tensor compatibility; generic composition and tensor calculus only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom",
+   "results": "['CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom']",
+   "date": "2026-10-14",
+   "verdict": "No exact normalized derived composition/tensor compatibility; generic composition and tensor calculus only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composition isomorphism for derived pullback is compatible with the canonical tensor comparison on K-flat complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable; no absence verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MixedPullbackSquareTensorCoherence",
+  "date": "2026-10-14",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AA8 final comparison diagrams: tensor compatibility underlying the internal Hom exchange; K-flat composition/tensor triangle inside the square calculation.",
+   "via": [
+    "lem-sc-mixed-pullback-square-tensor-coherence",
+    "lem-sc-mixed-internal-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-exchange",
+    "lem-sc-mixed-global-hom-base-change-counit-transport",
+    "lem-sc-proper-flat-global-hom-composite-isIso",
+    "lem-sc-proper-flat-affine-basechange-hom-bijective",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackCompositionTensorKFlat.lean",
+  "declaration": "AlgebraicGeometry.derivedPullbackComposition_tensor_kFlat",
+  "statement": "theorem derivedPullbackComposition_tensor_kFlat\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)\n    (hP : P.IsKFlat) (hN : N.IsKFlat) :\n    let c : ∀ {U V W : Scheme.{u}} (a : U ⟶ V) (b : V ⟶ W),\n        derivedPullback b ⋙ derivedPullback a ≅ derivedPullback (a ≫ b) :=\n      fun a b ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec\n        (Classical.choose_spec exists_derivedPullbackComposition)))) a b\n    (derivedPullback f).map ((mixedHomTensorPullbackIso g).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)) ≫\n      (mixedHomTensorPullbackIso f).hom.app\n        ((derivedPullback g).obj (DerivedCategory.Q.obj P),\n          (derivedPullback g).obj (DerivedCategory.Q.obj N)) ≫\n      ((c f g).hom.app (DerivedCategory.Q.obj P) ⊗ₘ\n        (c f g).hom.app (DerivedCategory.Q.obj N)) =\n    (c f g).hom.app (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj N) ≫\n      (mixedHomTensorPullbackIso (f ≫ g)).hom.app\n        (DerivedCategory.Q.obj P, DerivedCategory.Q.obj N)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-edb84",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T172654-L-2099053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-edb84",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261013T172654-L-2099053",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged square statement and definition, K-flat lemma, DAG records, and report; both delivered modules and direct importer MixedTensorPairingBaseChangeTransport compile cleanly, with only permitted axioms and expected sorryAx dependencies."
+ }
+}
