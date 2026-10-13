@@ -1,5 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.EtaleCoefficientInjectiveSystemData
+import Sheaf.AlgebraicGeometry.EtaleCoefficientProductCompositionComponent
+import Sheaf.AlgebraicGeometry.EtaleCoefficientProductIdentityComponent
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
@@ -63,6 +65,19 @@ theorem etale_coefficient_product_transition_laws
             (etaleCoefficientInjectiveTarget D F i) ≫
         (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map
           (etaleCoefficientProductTransition D F f) ≫ etaleCoefficientProductTransition D F g)
-    := by sorry
+    := by
+  constructor
+  · intro i
+    apply Pi.hom_ext
+    intro t
+    dsimp only [etaleCoefficientProductTransition]
+    refine (Pi.lift_π _ t).trans ?_
+    exact etale_coefficient_product_identity_component D F i t
+  · intro i j k f g
+    apply Pi.hom_ext
+    intro t
+    dsimp only [etaleCoefficientProductTransition]
+    rw [Category.assoc, Category.assoc, Pi.lift_π, Pi.lift_π]
+    exact etale_coefficient_product_composition_component D F f g t
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EXZ",
+  "place": "Proof of Lemma 21.16.5, canonical components of psi and the adjoint components of gamma; coherence expanded using Stacks Tags 03CB and 0B65 and the existing Lean upper/lower-star comparison laws."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-coefficient-injective-target"
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-etale-coefficient-product-composition-component",
+ "title": "Composition calculation at one outgoing-arrow factor",
+ "statement": "Let $I$ be a preordered set, $D:I^{op}\\to\\mathrm{Sch}$ [def-pc-scheme], and $F_i$ abelian sheaves [def-weil-pbc-abelian-etale-sheaves] on the small etale sites of $D_i$. Put $J_l=\\mathrm{Injective.under}(F_l)$ and $P_i=\\prod_{h:i\\to l}(D(h^{op}))_*J_l$ [def-weil-pbc-etale-coefficient-injective-target], with projection $p_{i,h}$. For $f:i\\to j$ and $h:j\\to l$ define $a_{f,h}$ as the inverse transpose along $D(f^{op})$ [def-weil-pbc-inverse-image] of $p_{i,f\\gg h}$ followed by $\\mathrm{lowerStarComp}(D(h^{op}),D(f^{op}),D((f\\gg h)^{op}),D.map\\_comp)^{-1}_{J_l}$. All comparisons have the explicit transports supplied by $D.map\\_comp$. For every $f:i\\to j$, $g:j\\to k$ and outgoing $h:k\\to l$, let $q_f=\\mathrm{Pi.lift}(a_{f,s})_{s:j\\to m}$. Then $a_{f\\gg g,h}=\\mathrm{upperStarComp}(D(g^{op}),D(f^{op}),D((f\\gg g)^{op}),D.map\\_comp)_{P_i}\\gg (D(g^{op}))^*(q_f)\\gg a_{g,h}$. This is an equality of morphisms to the single factor $(D(h^{op}))_*J_l$, and does not assert any identity law.",
+ "proof": [
+  {
+   "text": "Apply the generic comparison transpose equation, proved by applying the injective adjunction homEquiv and using its unit formula together with upperStarComp_hom_app_unit_app. For the composite adjunction, homEquiv_naturality_left removes the inverse-image map of the intermediate product transition; homEquiv_naturality_right then moves the final direct-image comparison. Pi.lift_π gives the intermediate projection equation. Evaluate lowerStarComp_assoc′ at Injective.under(F_l), and invert its commutative square by cancellation of the component isomorphisms. The resulting inverse comparison equation identifies the direct transpose with the double transpose. Transport the outgoing-arrow index using Category.assoc, compose with the initial product projection, and apply congrArg to the inverse homEquiv. This proves one component, without product extensionality.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-direct-image-composition-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-direct-image-composition-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tag 0EXZ",
+  "place": "W3 stage 3: generic adjunction transpose calculation and inverse square cancellation, specialized to the named direct-image comparisons and product projections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction inverse transpose of outgoing arrow product projection satisfies identity and composition",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transposes of maps into products respect composition of pullback and pushforward functors",
+   "date": "2026-10-13",
+   "results": "ExponentiableMorphism comp and unit/counit identities for slice categories; no etale outgoing product component statement",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-13",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_right in Mathlib.CategoryTheory.Adjunction.Basic",
+   "verdict": "ingredient, not the component calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|lowerStarComp_assoc|product.*transition",
+   "date": "2026-10-13",
+   "results": "Mathlib adjunction naturality and the source UpperLowerStar.Coherence unit/mate/associativity equations; the strict-site ArrowProductTransitions modules have different comparisons",
+   "verdict": "no duplicate component theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCoefficientProductTransitions",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Compatible injective embeddings of etale coefficient systems: product transition laws and compatibility of adjoint embeddings.",
+   "via": [
+    "lem-weil-pbc-etale-coefficient-injective-system-embedding",
+    "lem-weil-pbc-etale-replacement-stage-diagram",
+    "lem-weil-pbc-etale-limit-replacement-exact-systems",
+    "lem-weil-pbc-etale-limit-acyclic-replacement",
+    "lem-weil-pbc-etale-limit-cohomology-connecting-ladder",
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoefficientProductCompositionComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoefficientProductCompositionComponent.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_coefficient_product_composition_component",
+  "statement": "theorem etale_coefficient_product_composition_component\n    {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    {i j k : I} (f : i ⟶ j) (g : j ⟶ k) (t : Σ l : I, k ⟶ l) :\n    ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map (f ≫ g).op)).homEquiv _ _).symm\n      (Pi.π (fun t : Σ l : I, i ⟶ l ↦\n          (lowerStar AddCommGrpCat.{u + 1} (D.map t.2.op)).obj\n            (Injective.under (F t.1))) ⟨t.1, (f ≫ g) ≫ t.2⟩ ≫\n        (lowerStarComp AddCommGrpCat.{u + 1} (D.map t.2.op) (D.map (f ≫ g).op)\n          (D.map ((f ≫ g) ≫ t.2).op) (D.map_comp t.2.op (f ≫ g).op)).inv.app\n            (Injective.under (F t.1))) =\n      (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n        (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app\n          (etaleCoefficientInjectiveTarget D F i) ≫\n      (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map\n        (Pi.lift fun s : Σ l : I, j ⟶ l ↦\n          ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map f.op)).homEquiv _ _).symm\n      (Pi.π (fun t : Σ l : I, i ⟶ l ↦\n          (lowerStar AddCommGrpCat.{u + 1} (D.map t.2.op)).obj\n            (Injective.under (F t.1))) ⟨s.1, f ≫ s.2⟩ ≫\n        (lowerStarComp AddCommGrpCat.{u + 1} (D.map s.2.op) (D.map f.op)\n          (D.map (f ≫ s.2).op) (D.map_comp s.2.op f.op)).inv.app\n            (Injective.under (F s.1)))) ≫\n      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (D.map g.op)).homEquiv _ _).symm\n      (Pi.π (fun t : Σ l : I, j ⟶ l ↦\n          (lowerStar AddCommGrpCat.{u + 1} (D.map t.2.op)).obj\n            (Injective.under (F t.1))) ⟨t.1, g ≫ t.2⟩ ≫\n        (lowerStarComp AddCommGrpCat.{u + 1} (D.map t.2.op) (D.map g.op)\n          (D.map (g ≫ t.2).op) (D.map_comp t.2.op g.op)).inv.app\n            (Injective.under (F t.1)))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T100215-L-2501389",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261013T100215-L-2501389",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
