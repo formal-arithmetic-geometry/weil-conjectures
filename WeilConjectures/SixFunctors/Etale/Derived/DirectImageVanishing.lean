@@ -89,11 +89,7 @@ noncomputable def Etale.upperStarForget₂Iso {X : Scheme.{u}} (V : X.Etale)
       (sheafCompose V.left.smallEtaleTopology
         (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
           ((V.hom)^*[ModuleCat.{u + 1} Λ].obj F) :=
-  (Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} V.hom V.prop).app _ ≪≫
-    Iso.refl _ ≪≫
-    (sheafCompose V.left.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).mapIso
-      ((Etale.upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) V.hom V.prop).app F).symm
+  Etale.upperStarForget₂Iso' V F
 
 variable {Λ} in
 /-- **Cohomology of sheaves of `Λ`-modules versus abelian sheaf cohomology.** Let `Λ` be a finite
@@ -110,36 +106,9 @@ theorem Etale.subsingleton_ext_freeSheaf_of_subsingleton_H [Finite Λ] {X : Sche
     (hF : Subsingleton (Sheaf.H ((sheafCompose V.left.smallEtaleTopology
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         ((V.hom)^*[ModuleCat.{u + 1} Λ].obj F)) (n + 1))) :
-    Subsingleton (Abelian.Ext.{u + 1} ((Etale.freeSheaf Λ X).obj V) F (n + 1)) := by
-  have hV : AlgebraicGeometry.Etale V.hom := V.prop
-  let Φ := (V.hom)^*[ModuleCat.{u + 1} Λ] ⋙ sheafCompose V.left.smallEtaleTopology
-    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
-  refine Abelian.Ext.subsingleton_of_subsingleton_map Φ
-    (fun S hS ↦ Etale.shortExact_map_forget₂ Λ
-      (hS.map_of_exact ((V.hom)^*[ModuleCat.{u + 1} Λ]))) _
-    ((constantSheaf _ AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift ℤ))) ?_ ?_ n F hF
-  · intro I _ n
-    have := Etale.injective_upperStar_obj_of_etale Λ V.hom I
-    exact Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ _ n
-  · intro S hS _ h₁
-    change Subsingleton (Sheaf.H ((sheafCompose V.left.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        ((V.hom)^*[ModuleCat.{u + 1} Λ].obj S.X₁)) 1) at h₁
-    have : Subsingleton (Sheaf.H ((V.hom)^*[AddCommGrpCat.{u + 1}].obj
-        (S.map (sheafCompose X.smallEtaleTopology
-          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).X₁) 1) :=
-      @Function.Injective.subsingleton _ _ _
-        (Etale.injective_sheafHMap_of_isIso (Etale.upperStarForget₂Iso V S.X₁).hom 1) h₁
-    have hsurj := Etale.surjective_app_of_subsingleton_H_one (X := X)
-      (S := S.map (sheafCompose X.smallEtaleTopology
-        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})))
-      (Etale.shortExact_map_forget₂ Λ hS) V
-    intro g
-    obtain ⟨x, hx⟩ := hsurj (Etale.freeSheafHomEquiv Λ V S.X₃ g)
-    refine ⟨(Etale.freeSheafHomEquiv Λ V S.X₂).symm x, ?_⟩
-    apply (Etale.freeSheafHomEquiv Λ V S.X₃).injective
-    rw [Etale.freeSheafHomEquiv_comp, Equiv.apply_symm_apply]
-    exact hx
+    Subsingleton (Abelian.Ext.{u + 1} ((Etale.freeSheaf Λ X).obj V) F (n + 1)) :=
+  Etale.subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic V F n
+    (fun I _ m ↦ Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ I m) hF
 
 variable {Λ} in
 /-- **Higher direct images vanish when the cohomology over affine opens does.** For
@@ -152,39 +121,8 @@ theorem Etale.isZero_higherDirectImage_of_forall_isAffine {X Y : Scheme.{u}} (h 
     (q : ℤ) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (H : ∀ W : X.Etale, IsAffine W.left → Subsingleton ((Etale.higherDirectImagePresheaf Λ h q
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op W))) :
-    IsZero (Etale.higherDirectImage Λ h q F) := by
-  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj F
-  let G := (sheafCompose X.smallEtaleTopology
-    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj (Etale.higherDirectImage Λ h q F)
-  let GT := (sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G
-  let φ := Etale.higherDirectImagePresheafToSheaf Λ h q K
-  obtain ⟨-, hφ⟩ := Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ h q K
-  -- the classes coming from the presheaf vanish, as they vanish over affine schemes
-  have h₁ (U : X.Etale) (t : (Etale.higherDirectImagePresheaf Λ h q K).obj (op U)) :
-      φ.app (op U) t = 0 := by
-    refine Functor.IsCoverDense.ext (Scheme.AffineEtale.Spec X) GT U fun Z f ↦ ?_
-    change G.obj.map f.op (φ.app _ t) = G.obj.map f.op 0
-    have : Subsingleton ((Etale.higherDirectImagePresheaf Λ h q K).obj
-        (op ((Scheme.AffineEtale.Spec X).obj Z))) :=
-      H _ (by
-        dsimp [Scheme.AffineEtale.Spec, MorphismProperty.CostructuredArrow.toOver]
-        exact (inferInstance : IsAffine (Spec _)))
-    have hn := ConcreteCategory.congr_hom (φ.naturality f.op) t
-    simp only [ConcreteCategory.comp_apply] at hn
-    rw [map_zero]
-    erw [← hn, Subsingleton.elim ((Etale.higherDirectImagePresheaf Λ h q K).map f.op t) 0,
-      map_zero]
-  -- hence every section vanishes, being locally such a class
-  have h₂ (U : X.Etale) (s : G.obj.obj (op U)) : s = 0 := by
-    refine ((isSheaf_iff_isSheaf_of_type _ _).1 GT.property _
-      (hφ.imageSieve_mem s)).isSeparatedFor.ext fun V f hf ↦ ?_
-    obtain ⟨t, ht⟩ := hf
-    change G.obj.map f.op s = G.obj.map f.op 0
-    rw [map_zero]
-    exact ht.symm.trans (h₁ _ _)
-  rw [IsZero.iff_id_eq_zero]
-  ext U x
-  exact h₂ U.unop x
+    IsZero (Etale.higherDirectImage Λ h q F) :=
+  Etale.isZero_higherDirectImage_of_forall_isAffine_of_subsingleton h q F H
 
 /-- Blueprint `lem-sf-etale-direct-image-vanishing`: Vanishing of the higher direct images above
 the dimension.
