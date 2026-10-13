@@ -1,0 +1,111 @@
+{
+ "id": "lem-pc-ordinary-dual-projection-differential",
+ "kind": "statement",
+ "title": "Dual Hom differential after projection",
+ "statement": "For a scheme X, open U and arbitrary cochain complex P of localized structure-sheaf modules, put D=Hom(P,O_U[0]). For integers q,r with r+(q+1)=0, the composite d_D(q,q+1) followed by the projection to Hom(P^r,O_U[0]^0) equals -(-1)^q times the degree-q projection to Hom(P^(r+1),O_U[0]^0) followed by precomposition with d_P(r,r+1).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes, differential formula; Tag 08DQ, ordinary evaluation"
+ },
+ "stmt_deps": [
+  "def-pc-ordinary-evaluation-data"
+ ],
+ "proof": [
+  {
+   "text": "apply the differential clause of homComplex_projections_exists to\nP and the structure sheaf in degree zero, with output indices r+q and 0,\nand input indices r and r+1. The single complex has zero differential, so\nits postcomposition term vanishes. The remaining term is precomposition\nby d_P with coefficient -(-1)^q. This uses no finiteness or nonzero condition.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "def-pc-ordinary-evaluation-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "def-pc-ordinary-evaluation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-13",
+  "description": "Extracted a strict part of the projected input differential calculation, following the cited evaluation and Hom differential formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "tensor evaluation naturality precomposition Hom complex differential",
+   "date": "2026-10-13",
+   "results": "['HomologicalComplex.tensorHom', 'HomologicalComplex.unit_tensor_d₁', 'HomologicalComplex.ιTensorObj', 'HomologicalComplex.HasTensor', 'HomologicalComplex.tensorObj', 'HomologicalComplex.tensor_unit_d₂', 'ChainComplex.linearYonedaObj_d', 'HomologicalComplex.HasGoodTensor₁₂']",
+   "verdict": "No exact projected identity; sign identity found."
+  },
+  {
+   "tool": "loogle",
+   "query": "Int.negOnePow_add",
+   "date": "2026-10-13",
+   "results": "['Int.negOnePow_add']",
+   "verdict": "No exact projected identity; sign identity found."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHomEquiv.*(natur|whisker|comp)",
+   "date": "2026-10-13",
+   "results": "['Mathlib/LinearAlgebra/Contraction.lean']",
+   "verdict": "No exact projected identity; sign identity found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor dual evaluation naturality precomposition",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryEvaluationPreDifferential",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ordinary-evaluation-pre-differential",
+   "place": "dual projection calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryDualProjectionDifferential",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryDualProjectionDifferential.lean",
+  "declaration": "AlgebraicGeometry.ordinaryEvaluation_dual_projection_differential",
+  "statement": "theorem ordinaryEvaluation_dual_projection_differential (X : Scheme.{u}) (U : X.Opens)\n    (P : CochainComplex (localEvaluationModules X U) ℤ)\n    (q r : ℤ) (h : r + (q + 1) = 0) :\n    (localEvaluationDual X U P).d q (q + 1) ≫\n        localEvaluationProjection X U P (localEvaluationUnit X U) (q + 1) r 0 h =\n      (-q.negOnePow) •\n        (localEvaluationProjection X U P (localEvaluationUnit X U) q (r + 1) 0\n          (by omega) ≫ SheafOfModules.homObjMap (R := X.sheaf.over U)\n            (P.d r (r + 1)) (𝟙 ((localEvaluationUnit X U).X 0)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T124309-L-3775644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261013T124309-L-3775644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

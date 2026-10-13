@@ -6,6 +6,8 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembly
+import Sheaf.AlgebraicGeometry.OrdinaryDualProjectionDifferential
+import Sheaf.AlgebraicGeometry.OrdinaryEvaluationPrecompositionNaturality
 
 /-! # Ordinary evaluation and one part of the differential
 
@@ -32,6 +34,12 @@ local instance ordinaryPreMonoidalPreadditive (X : Scheme.{u}) (U : X.Opens) :
     MonoidalPreadditive (localEvaluationModules X U) :=
   Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
 
+private theorem evaluation_sign {A : Type*} [AddCommGroup A]
+    (p q n : ℤ) (h : p + q = n) (x : A) :
+    p.negOnePow • ((-q.negOnePow) • x) = -(n.negOnePow • x) := by
+  rw [smul_smul, mul_neg, ← Int.negOnePow_add, h, Units.neg_smul]
+
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The signed dual differential gives precomposition in the input complex.
 Source: Stacks Project, Tag 08DQ, ordinary evaluation calculation, and Section 20.41.
 (blueprint: lem-pc-ordinary-evaluation-pre-differential).
@@ -53,6 +61,17 @@ theorem ordinaryEvaluation_pre_differential (X : Scheme.{u}) (U : X.Opens)
         localEvaluationComponent X U P F p (q + 1) m r (by omega)) =
       -(n.negOnePow • (localEvaluationComponent X U P F p q n (r + 1) hpq ≫
         SheafOfModules.homObjMap (R := X.sheaf.over U) (P.d r (r + 1))
-          (F.XIsoOfEq (by omega : (r + 1) + n = r + m)).hom))  := by sorry
+          (F.XIsoOfEq (by omega : (r + 1) + n = r + m)).hom))  := by
+  classical
+  by_cases h : r + (q + 1) = 0
+  · have hd := ordinaryEvaluation_dual_projection_differential X U P q r h
+    have hc := ordinaryEvaluation_precomposition_naturality X U P F p q (q + 1)
+      n m r (r + 1) hpq (by omega) h (by omega) (by omega)
+      (P.d r (r + 1)) ((localEvaluationDual X U P).d q (q + 1)) (-q.negOnePow) hd
+    rw [hc]
+    exact evaluation_sign p q n hpq _
+  · have h' : ¬ (r + 1) + q = 0 := by omega
+    simp only [localEvaluationComponent, dif_neg h, dif_neg h', comp_zero,
+      zero_comp, smul_zero, neg_zero]
 
 end AlgebraicGeometry
