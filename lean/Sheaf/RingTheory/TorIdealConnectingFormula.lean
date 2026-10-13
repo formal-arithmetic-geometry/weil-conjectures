@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.RingTheory.TorIdealHomologyFormula
+import Sheaf.RingTheory.TorIdealHomologyExactness
 
 /-! # The ideal connecting map for first Tor
 Source: Stacks Project, Algebra, Tags 00M5 and 00M6.
@@ -57,6 +59,20 @@ theorem exists_tor_ideal_connecting_formula
         δR ((P.isoLeftDerivedObj ((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ I)))
           1).inv (((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸
           I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex).homologyπ 1 z)) =
-          ∑ j, a j ⊗ₜ[R] P.π.f 0 (p j)) := by sorry
+          ∑ j, a j ⊗ₜ[R] P.π.f 0 (p j)) := by
+  obtain ⟨δH, hδH⟩ := exists_tor_ideal_homology_formula I M P hP
+  obtain ⟨hiH, hrH⟩ := tor_ideal_homology_exactness I M P hP μR hμR δH hδH
+  let e := P.isoLeftDerivedObj
+    ((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ I))) 1
+  let δR := δH.comp e.hom.hom
+  refine ⟨δR, ?_, ?_, ?_⟩
+  · exact hiH.comp ((ModuleCat.mono_iff_injective e.hom).mp inferInstance)
+  · change LinearMap.range (δH.comp e.hom.hom) = LinearMap.ker μR
+    rw [LinearMap.range_comp, LinearMap.range_eq_top.mpr
+      ((ModuleCat.epi_iff_surjective e.hom).mp inferInstance), Submodule.map_top, hrH]
+  · intro z y k a p hz hy
+    change δH (e.hom (e.inv (_))) = _
+    simpa only [← ModuleCat.comp_apply, e.inv_hom_id, ModuleCat.id_apply] using
+      hδH z y k a p hz hy
 
 end ModuleCat

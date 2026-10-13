@@ -1,0 +1,183 @@
+{
+ "id": "lem-weil-pbc-tor-ideal-homology-exactness",
+ "kind": "statement",
+ "title": "Injectivity and kernel image of the ideal homology cycle map",
+ "statement": "Let $R$ be a commutative ring, $I$ an ideal, $M$ an $R$-module and $P$ a projective resolution of $M$ with free terms [def-weil-pbc-free-module]. Put $C=P\\otimes_R R/I$. Let $\\mu:I\\otimes_R M\\to M$ be $R$-linear with $\\mu(a\\otimes x)=ax$. Suppose $\\delta_H:H_1(C)\\to I\\otimes_R M$ is $R$-linear and satisfies the following formula: for every cycle $z$, lift $y\\in P_1$ with $z=y\\otimes1$ and every finite expression $d_1y=\\sum_j a_jp_j$, its value on $[z]$ is $\\sum_j a_j\\otimes\\epsilon(p_j)$. Then $\\delta_H$ is injective and its image is $\\ker\\mu$. This statement assumes the formula, not the existence of such a map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Parent ideal-kernel naturality node, Steps 1–3; Stacks Algebra, proof of Tag 00M5 and Remark 00M6 (https://stacks.math.columbia.edu/tag/00M6)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Represent each quotient cycle by y tensor 1 as in the finite tensor expansion. Its differential lies in I P_0 and therefore has a finite expression sum a_j p_j. The formula and epsilon d = 0 give mu delta_H = 0.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Parent ideal-kernel naturality node, Steps 1–3; Stacks Algebra, proof of Tag 00M5 and Remark 00M6 (https://stacks.math.columbia.edu/tag/00M6)."
+   }
+  },
+  {
+   "text": "For t in ker mu, lift t to I tensor P_0 using right exactness and the surjective augmentation. Its multiplication image in P_0 is killed by epsilon, hence equals d y by resolution exactness in degree zero. The element y tensor 1 is a quotient cycle and the formula sends its class to t. This proves the image equality.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Parent ideal-kernel naturality node, Steps 1–3; Stacks Algebra, proof of Tag 00M5 and Remark 00M6 (https://stacks.math.columbia.edu/tag/00M6)."
+   }
+  },
+  {
+   "text": "If the formula gives zero for a cycle class, right exactness for I tensor P identifies its ideal-tensor lift as a differential from I tensor P_1. Subtract its multiplication image from y. The result is an actual cycle in P_1, hence a boundary by exactness of the resolution in degree one. Reduction modulo I shows the original quotient cycle is a boundary. Since delta_H is linear, this proves injectivity.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-free-module-projective",
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Parent ideal-kernel naturality node, Steps 1–3; Stacks Algebra, proof of Tag 00M5 and Remark 00M6 (https://stacks.math.columbia.edu/tag/00M6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-free-module-projective",
+  "lem-weil-pbc-projective-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J4",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Parent ideal-kernel naturality node, Steps 1–3; Stacks Algebra, proof of Tag 00M5 and Remark 00M6 (https://stacks.math.columbia.edu/tag/00M6).",
+  "note": "Direct cycle construction and exactness argument, separating the construction from its kernel and image; both remain to be formalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "first Tor quotient ideal connecting homomorphism cycle formula",
+   "results": "; Algebra.Generators.H1Cotangent.δ, Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δ_map, Algebra.Generators.H1Cotangent.δ_eq, Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ', SnakeLemma.δ, Algebra.Generators.H1Cotangent.δ_eq_δAux",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tor_ideal|connecting.*[Tt]or|[Tt]or.*connecting",
+   "results": "; Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean, Mathlib/Algebra/Homology/Embedding/Connect.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor'",
+   "results": "; CategoryTheory.Tor', CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A linear map from first homology of a free resolution tensored with R/I to I tensor M sends a cycle with lifted differential sum a_j p_j to sum a_j tensor augmentation p_j",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, LinearMap.ker",
+   "results": "Independent second reading: lTensor_mkQ, rTensor_mkQ, TensorProduct.map_ker, LinearMap.ker_tensorProductMk, LinearMap.tensorKer. Tensor-exactness ingredients only; no specified-resolution cycle map or homology injectivity statement.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "free resolution modulo an ideal first homology embeds into ideal tensor module",
+   "results": "Independent second reading: Algebra.Extension.h1Cotangentι, Algebra.Extension.tensorH1Cotangent, Module.free_of_lTensor_residueField_injective, Rep.torIso. Different complexes or only homology identification, not the required formula.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologyπ|isoLeftDerivedObj",
+   "results": "Independent second reading: Derived-functor resolution isomorphisms and homology universal-property lemmas, not the specialized ideal formula or its exactness. Repository TorKernelBoundaryConstruction resolves the other factor, not the specified P.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.TorIdealConnectingFormula",
+  "date": "2026-10-13",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Parent ideal-kernel naturality node, Steps 1–3; Stacks Algebra, proof of Tag 00M5 and Remark 00M6 (https://stacks.math.columbia.edu/tag/00M6).; prove injectivity and image by resolution exactness",
+   "via": [
+    "lem-weil-pbc-tor-ideal-connecting-formula",
+    "lem-weil-pbc-tor-ideal-kernel-naturality",
+    "lem-weil-pbc-flat-another-variant-local-criterion",
+    "lem-weil-pbc-colimit-eventually-flat",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TorIdealHomologyExactness",
+  "file": "lean/Sheaf/RingTheory/TorIdealHomologyExactness.lean",
+  "declaration": "ModuleCat.tor_ideal_homology_exactness",
+  "statement": "theorem tor_ideal_homology_exactness\n    {R : Type u} [CommRing R] (I : Ideal R) (M : ModuleCat.{u} R)\n    (P : ProjectiveResolution M) (hP : ∀ n : ℕ, Module.Free R (P.complex.X n))\n    (μR : (I ⊗[R] M) →ₗ[R] M)\n    (hμR : ∀ (a : I) (x : M), μR (a ⊗ₜ[R] x) = (a : R) • x)\n    (δH : ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex).homology 1 →ₗ[R] (I ⊗[R] M))\n    (hδH : ∀ (z : ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸\n        I))).mapHomologicalComplex (ComplexShape.down ℕ)).obj P.complex).cycles 1)\n        (y : P.complex.X 1) (k : ℕ) (a : Fin k → I) (p : Fin k → P.complex.X 0),\n        ((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n          (ComplexShape.down ℕ)).obj P.complex).iCycles 1 z = y ⊗ₜ[R] (1 : R ⧸ I) →\n        P.complex.d 1 0 y = ∑ j, (a j : R) • p j →\n        δH\n          (((((tensoringRight (ModuleCat.{u} R)).obj (ModuleCat.of R (R ⧸ I))).mapHomologicalComplex\n        (ComplexShape.down ℕ)).obj P.complex).homologyπ 1 z) =\n          ∑ j, a j ⊗ₜ[R] P.π.f 0 (p j)) :\n    Function.Injective δH ∧ LinearMap.range δH = LinearMap.ker μR",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T111859-L-3054895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261013T111859-L-3054895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
