@@ -8,6 +8,9 @@ module
 public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.Algebra.Module.Projective
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
+import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Scalar extension of bounded projective complexes on the one-object site
 
@@ -57,6 +60,58 @@ theorem ringBoundedProjectiveExtension {A B : Type u} [CommRing A] [CommRing B]
       (∀ n : ℤ, Module.Projective B
         ((((F.mapHomologicalComplex (.up ℤ)).obj P).X n).val.obj
           (op ⟨PUnit.unit⟩))) := by
-  sorry
+  constructor
+  · apply isKFlat_of_boundedAbove_flat P
+    · obtain ⟨a, b, h⟩ := hb
+      exact ⟨b, fun n hn ↦ h n (Or.inr hn)⟩
+    · intro n
+      let R := onePointRingSheaf A
+      let O := (sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj R
+      let M := P.X n
+      have hflat (V : (Discrete PUnit.{u + 1})ᵒᵖ) : Module.Flat A (M.val.obj V) := by
+        have hV : V = op ⟨PUnit.unit⟩ := Subsingleton.elim _ _
+        subst V
+        have := hp n
+        infer_instance
+      have hM : PreservesFiniteLimits (MonoidalCategory.tensorRight M.val) := by
+        constructor
+        intro K _ _
+        have (V : (Discrete PUnit.{u + 1})ᵒᵖ) :
+            Module.Flat (R.obj.obj V) (M.val.obj V) := hflat V
+        exact ⟨⟨fun hc ↦ ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _
+          (fun V ↦ isLimitOfPreserves
+            (MonoidalCategory.tensorRight (show ModuleCat (R.obj.obj V) from M.val.obj V))
+            (isLimitOfPreserves (PresheafOfModules.evaluation O.obj V) hc))⟩⟩⟩
+      have : Presheaf.IsLocallyInjective ⊥ (𝟙 O.obj) :=
+        Presheaf.isLocallyInjective_of_injective ⊥ _ (fun _ ↦ Function.injective_id)
+      have : Presheaf.IsLocallySurjective ⊥ (𝟙 O.obj) :=
+        Presheaf.isLocallySurjective_of_surjective ⊥ _ (fun _ ↦ Function.surjective_id)
+      have hf := (PresheafOfModules.isFlat_sheafification_obj
+        (R := R) (𝟙 O.obj) M.val hM).2
+      let := SheafOfModules.monoidalCategory R
+      let e : (PresheafOfModules.sheafification (𝟙 O.obj)).obj M.val ≅ M :=
+        (asIso (PresheafOfModules.sheafificationAdjunction (𝟙 O.obj)).counit).app M
+      exact (exactFunctor _ _).prop_of_iso
+        ((MonoidalCategory.curriedTensor _).flip.mapIso e) hf
+  · intro n
+    change Module.Projective B ((F.obj (P.X n)).val.obj (op ⟨PUnit.unit⟩))
+    rw [hF (P.X n)]
+    let R := onePointRingSheaf B
+    let O := (sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj R
+    let α : onePointRingSheaf A ⟶ R := ⟨(Functor.const _).map (CommRingCat.ofHom φ)⟩
+    let N : SheafOfModules O :=
+      ⟨SheafOfModules.changeOfRingsPresheaf.{u, u, u} α (P.X n), Presheaf.isSheaf_bot _⟩
+    let e : SheafOfModules.changeOfRings.{u, u, u} α (P.X n) ≅ N :=
+      (asIso (PresheafOfModules.sheafificationAdjunction (𝟙 O.obj)).counit).app N
+    have hn : Module.Projective B (N.val.obj (op ⟨PUnit.unit⟩)) := by
+      let := φ.toAlgebra
+      have := hp n
+      change Module.Projective B
+        (TensorProduct A B ((P.X n).val.obj (op ⟨PUnit.unit⟩)))
+      infer_instance
+    have : Module.Projective B
+        ((SheafOfModules.evaluation (R := O) (op ⟨PUnit.unit⟩)).obj N) := hn
+    exact Module.Projective.of_equiv'
+      (((SheafOfModules.evaluation (R := O) (op ⟨PUnit.unit⟩)).mapIso e).symm.toLinearEquiv)
 
 end CochainComplex

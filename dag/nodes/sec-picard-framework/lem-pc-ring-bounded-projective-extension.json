@@ -15,7 +15,7 @@
  },
  "proof": [
   {
-   "text": "Evaluation at the unique object, with inverse constant presheaf, identifies module sheaves with ordinary modules. There is no nonidentity restriction map and the bottom topology imposes no extra condition. The same holds on its slice. Evaluation identifies the shared sheafified tensor with ordinary tensor: sheafification is the identity up to its unit on this site. It identifies total tensor complexes termwise, including their differentials and acyclicity.",
+   "text": "For each term M = P.X n, every object V of the opposite one-object site equals the unique object. Transport hp n along that equality and apply Mathlib Module.Flat.of_projective to obtain Module.Flat A (M.val.obj V). TensorRight M.val preserves finite limits: evaluate each candidate limiting cone at V, use the Mathlib finite-limit preservation instance for tensorRight of a flat module, and apply PresheafOfModules.evaluationJointlyReflectsLimits.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pur-sheaf-tensor-product"
@@ -23,34 +23,47 @@
    "elementary": true
   },
   {
-   "text": "Each projective module is a retract of a free module, hence flat. The given upper bound makes the evaluated complex bounded above. Apply the bounded-above flat module theorem to each evaluated acyclic complex. The tensor identification from the first step and reflection of acyclicity give the shared K-flat predicate.",
+   "text": "Apply PresheafOfModules.isFlat_sheafification_obj to M.val and the identity ring map. The identity is locally injective and locally surjective by sectionwise injectivity and surjectivity. The module sheafification adjunction has an invertible counit at M, identifying sheafification of M.val with M. Map this isomorphism by curriedTensor.flip and transport exactFunctor across the resulting natural isomorphism. This proves SheafOfModules.IsFlat (P.X n) for every n.",
    "uses": [
-    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-sites-modules-sheafification-flat",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Discard the lower bound in hb to obtain a bounded-above complex. Apply CochainComplex.isKFlat_of_boundedAbove_flat directly to the sheaf complex and the termwise flatness proved above. This avoids transporting total complexes and acyclicity through an evaluation equivalence.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
     "def-pc-kflat-complex"
    ],
    "elementary": true
   },
   {
-   "text": "For every projective term choose a splitting P^n(*)→A^(I)→P^n(*) whose composite is the identity. Tensor the two maps with B; functoriality preserves their composite. Since B⊗_A A^(I)=B^(I), the extended term is a retract of a free B-module and is projective. The specified object equalities for F and the tensor identification of step one identify it with F(P^n)(*). This works for arbitrary ranks, zero rings and zero terms, with no flatness assumption on B over A.",
+   "text": "For a fixed degree n, rewrite F.obj (P.X n) using hF. Construct N as changeOfRingsPresheaf applied to P.X n, equipped with Presheaf.isSheaf_bot; this is an actual construction, not an existential witness. The sheafification counit identifies changeOfRings with N. At the unique object N evaluates definitionally to B tensor_A P.X n, using the algebra structure phi.toAlgebra. Mathlib Module.Projective.tensorProduct gives projectivity over B from freeness of B over itself and hp n. Evaluate the counit isomorphism and apply Module.Projective.of_equiv' to transfer projectivity to the changeOfRings object. Termwise functor application is definitionally the term of the extended complex. Both conclusions are combined by And.intro.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pur-sheaf-tensor-product",
   "def-weil-sheaf-of-modules-category",
-  "lem-pc-module-bounded-flat-kflat"
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-modules-sheafification-flat",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pc-kflat-complex"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C3",
+  "group": "E4",
   "date": "2026-10-13",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma 064K (lemma-derived-tor-quasi-isomorphism), bounded-above flat complexes; Lemma 0A6A (lemma-base-change-RHom), perfect-source computation, with algebra.tex Section 05CD projective modules",
-  "note": "Explicit one-object-site specialization of the cited algebraic argument."
+  "place": "Tags 064K and 0A6A; sites-modules.tex Tag 03ET; sites-cohomology.tex Tag 06YQ",
+  "note": "Lean proof uses the existing bounded-above flat sheaf theorem directly, sectionwise flatness and the sheafification counit, and Mathlib projective tensor products. Local literature files were unavailable; the cited Stacks tags were read on the Stacks website."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -136,10 +149,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C3",
+  "group": "E4",
   "result": "pass",
-  "landing": "20261013T054211-L-441333",
-  "kind": "interface",
+  "landing": "20261013T072345-L-1117824",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
