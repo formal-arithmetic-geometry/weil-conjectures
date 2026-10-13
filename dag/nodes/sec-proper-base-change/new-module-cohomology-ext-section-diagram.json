@@ -1,0 +1,152 @@
+{
+ "id": "new-module-cohomology-ext-section-diagram",
+ "kind": "statement",
+ "title": "Abelian Ext map in the common section-complex diagram",
+ "statement": "For a scheme morphism f:X -> Y [def-pc-scheme], module F on X [def-weil-sheaf-of-modules-category], any identity h-map resolution data D=(I,J,K,lambda,beta,a) [def-weil-pbc-module-cohomology-fmap], and natural degree p, let bI,bJ be the explicit abelianResolutionIso of [new-module-cohomology-ext-resolution-normalization]. Let v be exact inverse image on abelian Ext followed by coeff(f,identity), with constIso(f).symm [def-pc-flat-cohomology-comparison]. Then bJ followed by H(section(beta)) equals v followed by bI and H(a followed by section(lambda)), as morphisms into H(section(K)). This is an equality of abelian Ext/section homology maps. It contains neither the fixed module/Ext equivalence nor the module edge map and does not assume acyclicity of f_*F.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "Tag 01FB, common section diagram; Tag 01F7, canonical cohomology functoriality; Tag 03FD, forgotten injective acyclicity."
+ },
+ "stmt_deps": [
+  "new-module-cohomology-ext-resolution-normalization",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Forget I,J,K and the compatible augmentations. Forgotten injective modules are acyclic for abelian sections on every open, so forgotten I computes derived abelian direct image. Use the canonical acyclic comparisons to identify abelian Ext with section homology.",
+   "uses": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "new-module-cohomology-ext-resolution-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lift beta computes the morphism into the derived abelian direct image. Derived adjunction evaluated on the constant integer source identifies this with inverse image on Ext followed by the counit; terminal evaluation at 1 gives constIso(f).symm. The terminal section map is D.a by D.sections. Thus the common section diagram gives the asserted square.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of acyclic comparisons and homotopy invariance remove resolution and lift choices.",
+   "uses": [
+    "lem-sc-acyclic-comparison-natural",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-sc-acyclic-comparison-natural",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "new-module-cohomology-ext-resolution-normalization"
+ ],
+ "proof_origin": {
+  "by": "C2 worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FB",
+  "place": "Tag 01FB, common section diagram; Tag 01F7, canonical cohomology functoriality; Tag 03FD, forgotten injective acyclicity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image on sheaf Ext followed by the counit is represented by the common diagram of section complexes",
+   "results": "8 hits including Sheaf.H and Ext.mapExactFunctor_hom; no common section diagram theorem.",
+   "date": "2026-10-14",
+   "verdict": "No exact match; project resolution API is used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapExtAddHom\"",
+   "results": "3 hits: Functor.mapExtAddHom, mapExtAddHom_coe, mapExtAddHom_apply; these define the Ext map but do not compute its section square.",
+   "date": "2026-10-14",
+   "verdict": "No exact match; project resolution API is used."
+  },
+  {
+   "tool": "grep",
+   "query": "mapFunctor|homEquiv.*Ext|Ext.*homEquiv",
+   "results": "25 hits, chiefly adjunction/free-module homEquiv lemmas; no abelian section diagram.",
+   "date": "2026-10-14",
+   "verdict": "No exact match; project resolution API is used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "resolution normalization common section Ext edge compatibility",
+   "results": "service unavailable; no exact theorem found.",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionEdge",
+  "date": "2026-10-14",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Step 3 (abelian common-section diagram) of new-module-cohomology-ext-resolution-edge",
+   "via": [
+    "new-module-cohomology-ext-resolution-edge",
+    "new-module-cohomology-ext-edge-comparison",
+    "new-module-cohomology-ext-pullback-comparison",
+    "new-flat-base-change-target-leray-comparison",
+    "new-flat-base-change-affine-canonical-comparisons",
+    "new-flat-base-change-affine-target",
+    "lem-weil-pbc-flat-base-change-affine-dictionary",
+    "lem-weil-pbc-flat-base-change-resolution-affine-sections",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-weil-pbc-formal-functions-local-stalk-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyExtSectionDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyExtSectionDiagram.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution.abelianEdge_section_diagram",
+  "statement": "theorem abelianEdge_section_diagram {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules)\n    (D : ModuleCohomologyFMapData f ((pushforward f).obj F) F\n      (𝟙 ((pushforward f).obj F))) (p : ℕ) :\n    (abelianResolutionIso Y D.J p).hom ≫\n        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map\n          (((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.β) =\n      abelianEdgeHom f F p ≫ (abelianResolutionIso X D.I p).hom ≫\n        (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map\n          (D.a.hom ≫\n            ((moduleSections Y).mapHomologicalComplex (ComplexShape.up ℕ)).map D.lambda)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T211055-L-388999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261013T211055-L-388999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
