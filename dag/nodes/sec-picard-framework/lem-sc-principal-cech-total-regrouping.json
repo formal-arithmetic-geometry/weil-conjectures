@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-principal-cech-total-regrouping",
+ "kind": "statement",
+ "title": "Degreewise invertibility of explicit principal Cech regrouping",
+ "statement": "Let $A$ be a commutative ring, $r\\in\\mathbb N$, $f:\\operatorname{Fin}r\\to A$, and $F$ an integer-indexed cochain complex of module sheaves on $\\operatorname{Spec}A$. Write $C_p(F)$ for the product column of [def-sc-principal-cech-columns] and $T^n(F)=\\prod_{J\\ne\\varnothing}\\Gamma(D(\\prod_{j\\in J}f_j),F^{n+1-|J|})$ for the explicit terms of [def-sc-principal-open-alternating-total]. Let $B$ be an integer-indexed bicomplex of $A$-modules and let $e_p:B^{p,\\bullet}\\cong C_p(F)$ be arbitrary isomorphisms of vertical complexes. Define $R^n:(\\operatorname{Tot}B)^n\\to T^n(F)$ by the diagonal coproduct universal property [def-sp-double-complex-total]: on the $(p,q)$ summand, where $p+q=n$, apply $e_p$ in degree $q$, project to the coordinate $J$ if $|J|=p+1$, transport along $q=n+1-|J|$, and set all other coordinates to zero. Then every $R^n$ is an isomorphism of $A$-modules. No compatibility of the $e_p$ with horizontal differentials is required.",
+ "stmt_deps": [
+  "def-sc-principal-cech-columns",
+  "def-sc-principal-open-alternating-total",
+  "def-sp-double-complex-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D1, lemma-alternating-cech-complex-complex, proof: double complex and total differential signs; Cohomology Tag 01FP, alternating total cochains"
+ },
+ "proof": [
+  {
+   "text": "evaluate each categorical product of section complexes in degree q. Its\nprojections exhibit a product of the section modules in that degree, since evaluation\npreserves products. Nonempty subsets have cardinalities between 1 and r, so only\nrows 0 through r-1 are nonzero. The diagonal coproduct therefore has finite support.\nFor each subset J, put its coordinate in the unique summand p=card(J)-1,\nq=n+1-card(J), using the inverse of e p and the degreewise product identification.\nSum these finitely many coordinate insertions. This is an inverse of the displayed\nmap: after a subset projection only its own row survives, and on each coproduct\nsummand all its product projections are recovered. Empty rows are zero objects;\nfor r=0 both families are empty and the same argument identifies zero modules.\nThe proof uses no differential or boundedness of F.",
+   "uses": [
+    "def-sc-principal-cech-columns",
+    "def-sc-principal-open-alternating-total",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-principal-cech-columns",
+  "def-sc-principal-open-alternating-total",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D1; explicit reconstruction of assigned comparison steps 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite alternating Cech total regrouping commutes with differential and coefficient maps",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Cech product columns diagonal coproduct total regrouping isomorphism",
+   "date": "2026-10-13",
+   "results": "8 hits: CategoryTheory.Limits.ProductsFromFiniteCofiltered.finiteSubproductsCocone_π_app_eq_sum, Profinite.NobelingProof.GoodProducts.sum_equiv, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, CompHausLike.LocallyConstant.sigmaIso, CompHausLike.sigmaComparison_eq_comp_isos, Profinite.NobelingProof.GoodProducts.sum_to, Profinite.NobelingProof.GoodProducts.square_commutes, Profinite.NobelingProof.GoodProducts.smaller_factorization",
+   "verdict": "no exact match; generic total-complex infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.totalDesc",
+   "date": "2026-10-13",
+   "results": "3 hits: HomologicalComplex₂.totalDesc, HomologicalComplex₂.ι_totalDesc, HomologicalComplex₂.ι_totalDesc_assoc",
+   "verdict": "no exact match; generic total-complex infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "principalCech.*(Regroup|Comparison)|total.*[Ii]so",
+   "date": "2026-10-13",
+   "results": "25 hits: Mathlib/NumberTheory/SelbergSieve.lean, Mathlib/SetTheory/ZFC/Ordinal.lean, Mathlib/Algebra/Homology/TotalComplexSymmetry.lean, Mathlib/Algebra/Homology/TotalComplexSymmetry.lean, Mathlib/Algebra/Homology/TotalComplexSymmetry.lean, Mathlib/Algebra/Homology/TotalComplexSymmetry.lean, Mathlib/Algebra/Homology/TotalComplexSymmetry.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean",
+   "verdict": "no exact match; generic total-complex infrastructure only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PrincipalCechBicomplexComparison",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Inherited affine supported-perfect-complex comparison route: regroup the finite alternating Cech total by subset cardinality (assigned comparison steps 2 through 4)",
+   "via": [
+    "lem-sc-principal-cech-bicomplex-comparison",
+    "lem-sc-principal-cech-finite-column-model",
+    "lem-sc-principal-cech-resolution-quasi-iso",
+    "lem-sc-affine-koszul-cech-derived-comparison",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrincipalCechTotalRegrouping",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalCechTotalRegrouping.lean",
+  "declaration": "AlgebraicGeometry.principalCechTotalRegroup_isIso",
+  "statement": "theorem principalCechTotalRegroup_isIso\n    (B : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ))\n    (e : ∀ p, B.X p ≅ (principalCechColumnFunctor r f p).obj F) (n : ℤ) :\n    IsIso (principalCechTotalRegroup r f F B e n)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T065121-L-902242",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261013T065121-L-902242",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

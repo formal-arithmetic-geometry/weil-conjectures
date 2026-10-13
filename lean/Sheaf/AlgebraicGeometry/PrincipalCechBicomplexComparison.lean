@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PrincipalCechColumns
 public import Mathlib.Algebra.Homology.TotalComplex
 import Sheaf.AlgebraicGeometry.PrincipalCechHorizontalSquare
+import Sheaf.AlgebraicGeometry.PrincipalCechRegroupDifferential
+import Sheaf.AlgebraicGeometry.PrincipalCechRegroupNaturality
 
 /-! # The explicit Čech bicomplex and its total comparison
 
@@ -74,7 +76,45 @@ theorem principalCechBicomplexComparison_exists :
     Nonempty (principalCechFunctor r f ≅ principalCechBicomplexFunctor r f ⋙
       HomologicalComplex₂.totalFunctor (ModuleCat.{u} A)
         (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) := by
-  sorry
+  let B := principalCechBicomplexFunctor r f ⋙
+    HomologicalComplex₂.totalFunctor (ModuleCat.{u} A)
+      (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+  let e (F : CochainComplex (SheafOfModules.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (p : ℤ) :
+      (principalCechBicomplex r f F).X p ≅
+        (principalCechColumnFunctor r f p).obj F := Iso.refl _
+  have he (F : CochainComplex (SheafOfModules.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (p : ℤ) :
+      (principalCechBicomplex r f F).d p (p + 1) ≫ (e F (p + 1)).hom =
+        (e F p).hom ≫ (principalCechHorizontal r f p).app F := by
+    simp [e, principalCechBicomplex]
+  have hi (F : CochainComplex (SheafOfModules.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (n : ℤ) :
+      IsIso (principalCechTotalRegroup r f F (principalCechBicomplex r f F) (e F) n) :=
+    principalCechTotalRegroup_isIso r f F _ (e F) n
+  let E (F : CochainComplex (SheafOfModules.{u}
+      (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) :
+      B.obj F ≅ (principalCechFunctor r f).obj F :=
+    HomologicalComplex.Hom.isoOfComponents
+      (C₁ := (principalCechBicomplex r f F).total (ComplexShape.up ℤ))
+      (C₂ := principalCechTotal r f F)
+      (fun n ↦ asIso (principalCechTotalRegroup r f F
+        (principalCechBicomplex r f F) (e F) n)) (by
+          intro n m hnm
+          obtain rfl : n + 1 = m := hnm
+          simpa only [asIso_hom, principalCechTotal, CochainComplex.of_d] using
+            principalCechTotalRegroup_comm r f F _ (e F) (he F) n) ≪≫
+      (principalCechObjIso r f F).symm
+  refine ⟨(NatIso.ofComponents E ?_).symm⟩
+  intro F G g
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply (cancel_mono ((principalCechObjIso r f G).hom.f n)).1
+  have hn := principalCechTotalRegroup_naturality r f F G g
+    (principalCechBicomplex r f F) (principalCechBicomplex r f G) (e F) (e G)
+    ((principalCechBicomplexFunctor r f).map g)
+    (by intro p; simp [e, principalCechBicomplexFunctor]) n
+  simpa [E, B, Category.assoc] using hn.symm
 
 end
 end AlgebraicGeometry

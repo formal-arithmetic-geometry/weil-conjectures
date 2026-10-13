@@ -23,25 +23,24 @@
    "elementary": false
   },
   {
-   "text": "In total degree n regroup the subset coordinates by p=card(S)-1 and q=n-p. The row index is empty outside 0,...,r-1, by nonempty cardinality and card(S)≤r. The diagonal coproduct is therefore a finite product of the degreewise section coordinates. Its degreewise inverse sends each coordinate to its unique column summand.",
+   "text": "Construct the regrouping maps explicitly with principalCechTotalRegroup; apply the degreewise invertibility theorem to the identity column identifications.",
    "uses": [
-    "def-sc-principal-cech-columns",
+    "lem-sc-principal-cech-total-regrouping"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The bicomplex definition has horizontal differential principalCechHorizontal. Apply regrouping differential compatibility. Assemble the resulting degreewise isomorphisms using HomologicalComplex.Hom.isoOfComponents, and compose with principalCechObjIso.symm.",
+   "uses": [
+    "lem-sc-principal-cech-regroup-differential",
     "def-sc-principal-open-alternating-total"
    ],
    "elementary": false
   },
   {
-   "text": "Check the differentials on the degreewise coordinates. Mathlib totalization has horizontal sign 1 and vertical sign (-1)^p, giving the same alternating restrictions and vertical differential as principalCechDifferentialValue. The specification of principalCechDifferential_exists identifies the chosen differential with this formula.",
+   "text": "Apply proved regrouping naturality to the coefficient bicomplex map and the identity column identifications. Cancel principalCechObjIso.hom degreewise to obtain naturality of the chain isomorphisms, use NatIso.ofComponents, and invert the resulting natural isomorphism to give the requested orientation.",
    "uses": [
-    "def-sc-principal-cech-columns",
-    "def-sc-principal-open-alternating-total"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compose with principalCechObjIso. The coefficient map specification in principalCechFunctor_exists and the product-map formula show that the degreewise comparison commutes with all coefficient chain maps. Thus the chain isomorphisms form a natural isomorphism. For the empty cover both sides are zero.",
-   "uses": [
-    "def-sc-principal-cech-columns",
+    "lem-sc-principal-cech-regroup-naturality",
     "def-sc-principal-open-alternating-total"
    ],
    "elementary": false
@@ -50,12 +49,15 @@
  "proof_deps": [
   "def-sc-principal-cech-columns",
   "lem-sc-principal-cech-horizontal-square",
-  "def-sc-principal-open-alternating-total"
+  "lem-sc-principal-cech-total-regrouping",
+  "lem-sc-principal-cech-regroup-differential",
+  "def-sc-principal-open-alternating-total",
+  "lem-sc-principal-cech-regroup-naturality"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01FP (Section 20.25), total cochains and restriction differential; perfect.tex, Tag 08D1, alternating double complex and signs; explicit reconstruction of the parent proof step 3, grouping coordinates by cardinality and checking the total differential signs"
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D1, explicit regrouping, signed differential, coefficient naturality; Lean assembly by X2, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -137,9 +139,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261013T045604-L-137640",
+  "landing": "20261013T065121-L-902242",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
