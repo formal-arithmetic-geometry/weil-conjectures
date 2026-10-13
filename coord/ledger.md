@@ -11017,3 +11017,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/M4/Sheaf.AlgebraicGeometry.CoherentSupportAdicChain (stage 3; reviewer PASS; after a return; landing 20261013T040752-L-3950019 (interface); batch 20261013T040738; modules 2; new nodes 1)
 - 04:07 L: merged deliver/M4/Sheaf.AlgebraicGeometry.FiniteFieldClosedComponentDescent (stage 3; reviewer PASS; first push; landing 20261013T040752-L-3950134 (proof); batch 20261013T040738; modules 1; new nodes 0)
 - 04:07 L: merged deliver/N1/Sheaf.Paper.EtaleCESupportedFirstPageLifts (stage 3; reviewer PASS; first push; landing 20261013T040753-L-3950359 (interface); batch 20261013T040738; modules 3; new nodes 2)
+- 04:07 L: merged deliver/N1/Sheaf.Paper.ObjectCohomologyResolutionCocycleEquivalence (stage 3; reviewer PASS; first push; landing 20261013T040753-L-3950469 (proof); batch 20261013T040738; modules 1; new nodes 0)
