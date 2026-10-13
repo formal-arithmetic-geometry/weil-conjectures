@@ -18,9 +18,33 @@ Source: Stacks Project, Tag 06YH, K-flat total tensor localization.
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-universe u w
+universe u v w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
+
+open Functor.LaxMonoidal in
+private theorem tensorator_isIso
+    (C : Type*) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{u} C]
+    [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
+    [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+    [HasColimitsOfSize.{0, 0} C]
+    [DerivedCategory.Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (.up ℤ))]
+    (P T : CochainComplex C ℤ)
+    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
+    IsIso (μ DerivedCategory.Q P T) := by
+  have : IsIso (μ DerivedCategory.Qh
+      ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+      ((HomotopyCategory.quotient C (.up ℤ)).obj T)) :=
+    inferInstanceAs (IsIso
+      (((DerivedCategory.IndependentTensorShift.TensorCommShift₂.liftingIsoHom C).app
+        ⟨P, hP⟩).app T))
+  change IsIso
+    (((DerivedCategory.quotientCompQhIso C).inv.app P ⊗ₘ
+        (DerivedCategory.quotientCompQhIso C).inv.app T) ≫
+      μ (HomotopyCategory.quotient C (.up ℤ) ⋙ DerivedCategory.Qh) P T ≫
+      (DerivedCategory.quotientCompQhIso C).hom.app (P ⊗ T))
+  rw [Functor.LaxMonoidal.comp_μ]
+  infer_instance
 
 variable (X : Scheme.{u})
 
@@ -49,6 +73,21 @@ local instance : DerivedCategory.Qh.HasDerivedMonoidalCategory
     (HomotopyCategory.quasiIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)) :=
   DerivedCategory.hasDerivedMonoidalCategory _
+
+omit [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
+private theorem upstreamKFlat
+    (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (hP : CochainComplex.IsKFlat (R := X.sheaf) P) :
+    (HomologicalComplex.quasiIso
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ)).kFlat P := by
+  rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+    HomotopyCategory.kFlat_iff_preserves_acyclic]
+  intro N hN
+  obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
+  rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
+  have hr := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic
+    (CochainComplex.mapBifunctor N P (curriedTensor _))).2 (hP N hN)
+  exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) hr, hr⟩
 
 open Functor.LaxMonoidal in
 /-- The comparison from a translated derived triple tensor to its total tensor representative.
@@ -81,6 +120,7 @@ factor is an isomorphism, as are the shift comparison maps.  The displayed map i
 their composite, so `infer_instance` supplies its `IsIso` instance after unfolding.
 Source: Stacks Project, Tag 06YH, localization normalization calculation.
 (blueprint: aux-sc-target-comparison-isIso) -/
+set_option linter.unusedVariables false in
 theorem schemeTensorShift_targetComparison_isIso
     (P T U : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsKFlat (R := X.sheaf) P)
@@ -89,7 +129,15 @@ theorem schemeTensorShift_targetComparison_isIso
     letI := schemeCanonicalTensorShift X
     letI : ∀ B : schemeDerivedCategory X, (tensorRight B).CommShift ℤ :=
       fun B ↦ Functor.CommShift₂.commShiftFlipObj (h := .int) B
-    IsIso (schemeTensorShiftTargetComparison X P T U) := by sorry
+    IsIso (schemeTensorShiftTargetComparison X P T U) := by
+  have hp := upstreamKFlat X P hP
+  have ht := upstreamKFlat X T hT
+  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q T U) :=
+    tensorator_isIso (SheafOfModules.{u} (moduleRings X.toRingedSpace)) T U ht
+  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q P (T ⊗ U)) :=
+    tensorator_isIso (SheafOfModules.{u} (moduleRings X.toRingedSpace)) P (T ⊗ U) hp
+  dsimp only [schemeTensorShiftTargetComparison]
+  infer_instance
 
 /-- First route normalization component.  Expand `c` and `v`, then use lax
 monoidal associativity for `DerivedCategory.Q`.  Naturality of the shift

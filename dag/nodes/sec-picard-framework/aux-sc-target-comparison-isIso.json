@@ -7,7 +7,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/06YH",
-  "place": "Split components of localization normalization"
+  "place": "K-flat localization comparisons; S4 reuses the independent-universe lifting isomorphism and the homotopy acyclicity characterization"
  },
  "mathlib_searches": [
   {
@@ -63,9 +63,22 @@
  ],
  "proof": [
   {
-   "text": "Use the K-flat localization comparison theorem: tensorators with a K-flat factor are isomorphisms, and the localization shift comparison is an isomorphism. The target comparison is their composite, so IsIso follows by composition.",
+   "text": "Convert the sheaf IsKFlat hypotheses for P and T to the monoidal quasi-isomorphism kFlat predicate. The homotopy-category characterization asks that tensoring preserve acyclic objects on both sides; the given hypothesis proves the right-tensor case and the braiding gives the left-tensor case.",
    "uses": [
-    "def-pc-kflat-complex",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a kFlat complex V, the component of IndependentTensorShift.TensorCommShift₂.liftingIsoHom at V and any W is the Qh tensorator and is invertible. Transport through quotientCompQhIso; the tensorator of the quotient functor is invertible, so the composite tensorator of Q is invertible as well.",
+   "uses": [
+    "lem-sc-derived-tensor-shift-independent-universe"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this to (T,U) and (P,T tensor U). The target comparison is the shift of the composite of the whiskered first tensorator and the second tensorator, followed by the inverse localization shift comparison. All these maps are isomorphisms, hence so is their composite. No K-flatness of U is needed for this component.",
+   "uses": [
     "def-pc-scheme-derived-tensor-structure"
    ],
    "elementary": false
@@ -73,6 +86,7 @@
  ],
  "proof_deps": [
   "def-pc-kflat-complex",
+  "lem-sc-derived-tensor-shift-independent-universe",
   "def-pc-scheme-derived-tensor-structure"
  ],
  "reviewed": {
@@ -88,11 +102,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E4",
+  "reviewer": "X-711bf",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261013T201746-L-3968356",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T222415-L-1227118",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean module, node metadata, report, axioms, standalone compilation, and direct importer compilation all match the stage-3 requirements."
  }
 }
