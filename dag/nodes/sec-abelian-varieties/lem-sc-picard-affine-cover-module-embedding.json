@@ -14,34 +14,52 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite affine open cover of X using quasi-compactness. Let U be the finite coproduct of the affine members, and j its morphism to X. The finite coproduct is affine, including the empty coproduct when X is empty.",
+   "text": "Set C to X.affineCover.finiteSubcover, using quasi-compactness. Each C.X i is affine. Set U to the actual finite coproduct of C.X and j to Sigma.desc C.f. The finite affine coproduct instance gives IsAffine U, including the empty cover case.",
    "uses": [
     "lem-weil-pbc-affine-morphism-permanence"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The preimage of an affine open V under j is the finite disjoint union of its intersections with the cover members. The affine-diagonal intersection criterion over Spec k makes each intersection affine. Finite affine coproducts are affine, so j is affine.",
+   "text": "For each i and affine open V in X, use Hom.isAffineOpen_iff_of_isOpenImmersion to identify affineness of its preimage with affineness of (C.f i).opensRange inf V. Apply isAffineHom_diagonal_iff to the given relative diagonal and the top affine open of Spec k. Thus every component C.f i is affine. The existing proved isAffineHom_sigmaDesc uses the finite disjoint union of these affine preimages to show that j is affine.",
    "uses": [
     "lem-sc-picard-affine-diagonal-intersections",
     "lem-weil-pbc-affine-morphism-permanence"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Set G to the actual tensor pullback j*F and use the pullback-pushforward adjunction unit i: F → j_*G. Pullback preserves quasi-coherence. For each x in X choose a cover member containing it. Evaluation in its copy in U followed by the open-immersion stalk identification gives a left inverse to i_x. Hence i is injective on every stalk and is a monomorphism. On the empty scheme this condition is vacuous. No acyclicity is asserted here.",
+   "text": "Open immersions are flat. The existing flat-cover reflection theorem, specialized to C.f and C.covers, shows that the pullback functors jointly reflect isomorphisms. Transfer this statement to the restriction functors through restrictFunctorIsoPullback. Restriction preserves equalizers, and Mathlib JointlyReflectIsomorphisms.jointlyFaithful therefore makes this family jointly faithful.",
+   "uses": [
+    "lem-sc-flat-cover-module-isomorphism-reflection",
+    "lem-weil-pbc-module-restriction-open-immersion-limits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pullback along each C.f i is naturally isomorphic to pullback along j followed by pullback along Sigma.ι C.X i, using Sigma.ι_desc, pullbackCongr and pullbackComp. An equality after pullback along j thus gives equal restrictions on all cover members, and joint faithfulness gives the original equality. Hence pullback along j is faithful.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set G to the actual functor value (Modules.pullback j).obj F. Pullback preserves quasi-coherence. Take i to be (Modules.pullbackPushforwardAdjunction j).unit.app F; Mathlib Adjunction.unit_mono_of_L_faithful gives Mono i. Assemble U, j, G and these witnesses to prove the unchanged existential statement.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-flat-cover-module-isomorphism-reflection",
   "lem-sc-picard-affine-diagonal-intersections",
-  "lem-weil-pbc-affine-morphism-permanence"
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-restriction-open-immersion-limits"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 0BDY, proof of Lemma 30.4.3 (1), finite affine cover and stalk-injective adjunction unit; verified at https://stacks.math.columbia.edu/tag/0BDY"
+  "place": "Tag 0BDY geometric construction; module unit injectivity formalized through proved flat-cover conservativity, limit-preserving restriction, joint faithfulness, and faithful-adjoint monic units"
  },
  "mathlib_searches": [
   {
@@ -158,10 +176,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261013T031541-L-3571311",
-  "kind": "interface",
+  "landing": "20261013T045614-L-139821",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

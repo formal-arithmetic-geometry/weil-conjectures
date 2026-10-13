@@ -11188,3 +11188,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:56 L: merged deliver/V2/Sheaf.AlgebraicGeometry.CompletionThickeningCokernelReflection (stage 3; reviewer PASS; first push; landing 20261013T045612-L-139492 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:56 L: merged deliver/V2/Sheaf.AlgebraicGeometry.DQCoheratorAdjunction (stage 3; reviewer PASS; first push; landing 20261013T045613-L-139600 (proof); batch 20261013T045507; modules 1; new nodes 0)
 - 04:56 L: merged deliver/V2/Sheaf.AlgebraicGeometry.PicardUniversalSingleRankLocus (stage 3; reviewer PASS; first push; landing 20261013T045613-L-139716 (interface); batch 20261013T045507; modules 4; new nodes 3)
+- 04:56 L: merged deliver/V3/Sheaf.AlgebraicGeometry.AffineCoverModuleEmbedding (stage 3; reviewer PASS; first push; landing 20261013T045614-L-139821 (proof); batch 20261013T045507; modules 1; new nodes 1)
