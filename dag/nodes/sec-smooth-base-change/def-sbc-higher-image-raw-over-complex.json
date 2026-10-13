@@ -1,0 +1,96 @@
+{
+ "id": "def-sbc-higher-image-raw-over-complex",
+ "kind": "definition",
+ "title": "Shared single complex of a restricted coefficient sheaf",
+ "statement": "Let Λ be a commutative ring, W a scheme [def-weil-pbc-scheme-conventions], G a sheaf of Λ-modules on the small etale site of W [def-weil-pbc-etale-sheaves], and B an object over W. The shared bounded-below complex [def-weil-pbc-derived-categories] is the actual degree-zero single complex (B^*G)[0], formed using the existing inverse image [def-weil-pbc-inverse-image] and Mathlib DerivedCategory.Plus.singleFunctor. It contains no chosen existence witness.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1, fixed cohomology comparison and inverse-image composition"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functor preserves composition and evaluation of a morphism of sheaves on a section commutes with composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero single complex of a sheaf pulled back through composed scheme morphisms and the canonical coefficient identification",
+   "results": "Eight hits about Scheme.Modules.pullbackComp and structure-sheaf pullback coherence; none about this fixed small-etale module-sheaf construction.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory.Plus.singleFunctor\"",
+   "results": "DerivedCategory.Plus.singleFunctor, singleFunctorιIso and singleFunctors. The construction uses singleFunctor directly.",
+   "verdict": "existing constituent",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor|mapDerivedCategoryPlusSingleFunctor|higherDirectImageRawOver in Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "results": "singleFunctor is the existing Mathlib single complex; no raw-over helper is named there. The helper shares the existing construction and adds no notion.",
+   "verdict": "existing constituent",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality",
+  "date": "2026-10-14",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-image-raw-over-comparison",
+   "place": "Definitional sharing of the existing raw pullback data"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawOverComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawOverComplex.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawOverComplex",
+  "statement": "def higherDirectImageRawOverComplex (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}} (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (B : Over W) : DerivedCategory.Plus (Sheaf B.left.smallEtaleTopology (ModuleCat.{u + 1} Λ))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fa61b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T215608-L-899550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fa61b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T215608-L-899550",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements and proof routes, original signatures and constructions, declared interface changes, forced adaptation, report, and independent compile/axiom checks."
+ }
+}

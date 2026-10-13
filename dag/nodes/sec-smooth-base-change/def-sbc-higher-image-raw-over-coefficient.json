@@ -1,0 +1,95 @@
+{
+ "id": "def-sbc-higher-image-raw-over-coefficient",
+ "kind": "definition",
+ "title": "Shared coefficient morphism for raw over pullback",
+ "statement": "For Λ, W and G as in [def-sbc-higher-image-raw-over-complex] and f:A→B in Over W, construct a map f^*((B^*G)[0])→(A^*G)[0]. It is the hom component of the fixed single-complex comparison, followed by the single functor applied to the inverse of the canonical inverse-image composition isomorphism f^*B^*G≅A^*G [lem-weil-pbc-inverse-image-composition]. The source and target use the shared actual single complexes of [def-sbc-higher-image-raw-over-complex].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1, fixed cohomology comparison and inverse-image composition"
+ },
+ "stmt_deps": [
+  "def-sbc-higher-image-raw-over-complex",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functor preserves composition and evaluation of a morphism of sheaves on a section commutes with composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero single complex of a sheaf pulled back through composed scheme morphisms and the canonical coefficient identification",
+   "results": "Eight hits about Scheme.Modules.pullbackComp and structure-sheaf pullback coherence; none about this fixed small-etale module-sheaf construction.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory.Plus.singleFunctor\"",
+   "results": "DerivedCategory.Plus.singleFunctor, singleFunctorιIso and singleFunctors. The construction uses singleFunctor directly.",
+   "verdict": "existing constituent",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor|mapDerivedCategoryPlusSingleFunctor|higherDirectImageRawOver in Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "results": "singleFunctor is the existing Mathlib single complex; no raw-over helper is named there. The helper shares the existing construction and adds no notion.",
+   "verdict": "existing constituent",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality",
+  "date": "2026-10-14",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-image-raw-over-comparison",
+   "place": "Definitional sharing of the existing raw pullback data"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawOverCoefficient",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawOverCoefficient.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawOverCoefficient",
+  "statement": "def higherDirectImageRawOverCoefficient (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}} (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {A B : Over W} (f : A ⟶ B) : D+((f.left)^*[ModuleCat.{u + 1} Λ]).obj (higherDirectImageRawOverComplex Λ G B) ⟶ higherDirectImageRawOverComplex Λ G A",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fa61b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T215608-L-899550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fa61b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T215608-L-899550",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements and proof routes, original signatures and constructions, declared interface changes, forced adaptation, report, and independent compile/axiom checks."
+ }
+}

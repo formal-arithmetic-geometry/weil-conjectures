@@ -21,6 +21,27 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local irreducible] higherDirectImageRawOverComplex
+  higherDirectImageRawOverCoefficient
+
+private theorem restrictedCoefficient_comp
+    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
+    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    {A B C : Over W} (f : A ⟶ B) (g : B ⟶ C) :
+    (upperStarPlusComp (ModuleCat.{u + 1} Λ) f.left g.left).hom.app
+        (higherDirectImageRawOverComplex Λ G C) ≫
+      D+((f.left)^*[ModuleCat.{u + 1} Λ]).map
+        (higherDirectImageRawOverCoefficient Λ G g) ≫
+      higherDirectImageRawOverCoefficient Λ G f =
+        higherDirectImageRawOverCoefficient Λ G (f ≫ g) := by
+  convert (closePre := false) (closePost := false) (typeEqs := true) (sameFun := false)
+    higherDirectImageRestrictedCoefficient_comp Λ G f g using 12
+  all_goals first
+    | exact higherDirectImageRawOverCoefficient_heq Λ G _
+    | exact higherDirectImageRawOverComplex_eq Λ G _
+
 /-- The explicit raw pullback formula is compositional as a function on classes.
 Source: Stacks Project, Tag 09Z1, canonical comparison maps. The proof expands the
 five factors, applies derived inverse-image composition, upper-star associativity,
@@ -34,30 +55,25 @@ theorem higherDirectImageRawOverPullback_function_comp
       (higherDirectImageRawOverPullback Λ k G q f U) ∘
         (higherDirectImageRawOverPullback Λ k G q g U)  := by
   funext z
-  let KC := (DerivedCategory.Plus.singleFunctor _ 0).obj
-    (((C.hom)^*[ModuleCat.{u + 1} Λ]).obj G)
-  let KB := (DerivedCategory.Plus.singleFunctor _ 0).obj
-    (((B.hom)^*[ModuleCat.{u + 1} Λ]).obj G)
-  let KA := (DerivedCategory.Plus.singleFunctor _ 0).obj
-    (((A.hom)^*[ModuleCat.{u + 1} Λ]).obj G)
-  let vg : D+((g.left)^*[ModuleCat.{u + 1} Λ]).obj KC ⟶ KB :=
-    (((g.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
-      (DerivedCategory.Plus.singleFunctor _ 0).map
-        ((upperStarComp (ModuleCat.{u + 1} Λ) g.left C.hom B.hom
-          (Over.w g).symm).inv.app G)
-  let vf : D+((f.left)^*[ModuleCat.{u + 1} Λ]).obj KB ⟶ KA :=
-    (((f.left)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
-      (DerivedCategory.Plus.singleFunctor _ 0).map
-        ((upperStarComp (ModuleCat.{u + 1} Λ) f.left B.hom A.hom
-          (Over.w f).symm).inv.app G)
-  have hc := higherDirectImageRestrictedCoefficient_comp Λ G f g
-  have h := higherDirectImageRawTrianglePullback_comp Λ f.left g.left
-    (C.hom ≫ k) (B.hom ≫ k) (A.hom ≫ k)
-    (by rw [← Category.assoc, Over.w])
-    (by rw [← Category.assoc, Over.w]) q KC KB KA vg vf U z
-  dsimp only [vg, vf] at h
-  rw [hc] at h
-  simpa only [higherDirectImageRawOverPullback, Function.comp_apply,
-    Over.comp_left, KC, KB, KA] using h
+  change higherDirectImageRawTrianglePullback Λ (f.left ≫ g.left)
+      (C.hom ≫ k) (A.hom ≫ k)
+      (by rw [Category.assoc, ← Category.assoc g.left C.hom k, Over.w,
+        ← Category.assoc, Over.w]) q
+      (higherDirectImageRawOverComplex Λ G C) (higherDirectImageRawOverComplex Λ G A)
+      (higherDirectImageRawOverCoefficient Λ G (f ≫ g)) U z = _
+  exact (congrArg (fun v ↦ higherDirectImageRawTrianglePullback Λ (f.left ≫ g.left)
+      (C.hom ≫ k) (A.hom ≫ k)
+      (by rw [Category.assoc, ← Category.assoc g.left C.hom k, Over.w,
+        ← Category.assoc, Over.w]) q
+      (higherDirectImageRawOverComplex Λ G C) (higherDirectImageRawOverComplex Λ G A)
+      v U z) (restrictedCoefficient_comp Λ G f g)).symm.trans
+    (higherDirectImageRawTrianglePullback_comp Λ f.left g.left
+      (C.hom ≫ k) (B.hom ≫ k) (A.hom ≫ k)
+      (by rw [← Category.assoc, Over.w])
+      (by rw [← Category.assoc, Over.w]) q
+      (higherDirectImageRawOverComplex Λ G C) (higherDirectImageRawOverComplex Λ G B)
+      (higherDirectImageRawOverComplex Λ G A)
+      (higherDirectImageRawOverCoefficient Λ G g)
+      (higherDirectImageRawOverCoefficient Λ G f) U z)
 
 end AlgebraicGeometry.Etale

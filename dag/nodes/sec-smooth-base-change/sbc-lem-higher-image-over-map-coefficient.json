@@ -1,0 +1,140 @@
+{
+ "id": "sbc-lem-higher-image-over-map-coefficient",
+ "kind": "statement",
+ "title": "The over-W transition as homology of a coefficient composite",
+ "statement": "Let Λ be a commutative ring, W and S schemes, k:W→S, G a sheaf of Λ-modules on W_et, q an integer, and f:A→B in Over W. Put K_B=(B^*G)[0], K_A=(A^*G)[0], and K_M=(f^*B^*G)[0]. Let s:f^*K_B→K_M be the canonical single-complex comparison and c:K_M→K_A the single-functor image of the canonical coefficient identification f^*B^*G≅A^*G. Let l: R(B→S)_*K_B→R(A→S)_*(f^*K_B) be the fixed derived triangle transition. Then H^q(l ≫ R(A→S)_*(s ≫ c)) equals the fixed higherDirectImageOverMap from the higher image of B^*G to the higher image of A^*G. This is an equality of sheaf morphisms, without test objects, raw classes or evaluation maps.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1, canonical transition constructions; the functoriality identification in the proof of sbc-lem-higher-image-raw-over-comparison"
+ },
+ "stmt_deps": [
+  "def-sbc-module-higher-image-transitions",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-higher-image-raw-over-complex",
+  "def-sbc-higher-image-raw-over-coefficient"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the shared coefficient and single-complex constructions. Write R for the derived direct image along A→S and H for degree-q homology. Functoriality of R gives R(s ≫ c)=R(s) ≫ R(c); associativity gives l ≫ R(s ≫ c)=(l ≫ R(s)) ≫ R(c); functoriality of H gives H(l ≫ R(s ≫ c))=H(l ≫ R(s)) ≫ H(R(c)). The two factors are the unchanged higherDirectImageTransition and its coefficient identification, whose composite defines higherDirectImageOverMap. The argument works for every integer degree, zero sheaves and identity arrows.",
+   "uses": [
+    "def-sbc-module-higher-image-transitions",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-sbc-higher-image-raw-over-complex",
+    "def-sbc-higher-image-raw-over-coefficient"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-module-higher-image-transitions",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-sbc-higher-image-raw-over-complex",
+  "def-sbc-higher-image-raw-over-coefficient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 03Q8 and 09Z1; P3 writes out the elementary functoriality of the existing canonical transition definitions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functor preserves composition and evaluation of a morphism of sheaves on a section commutes with composition",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero single complex of a sheaf pulled back through composed scheme morphisms and the canonical coefficient identification",
+   "results": "Eight hits about Scheme.Modules.pullbackComp and structure-sheaf pullback coherence; none about this fixed small-etale module-sheaf construction.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory.Plus.singleFunctor\"",
+   "results": "DerivedCategory.Plus.singleFunctor, singleFunctorιIso and singleFunctors. The construction uses singleFunctor directly.",
+   "verdict": "existing constituent",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor|mapDerivedCategoryPlusSingleFunctor|higherDirectImageRawOver in Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "results": "singleFunctor is the existing Mathlib single complex; no raw-over helper is named there. The helper shares the existing construction and adds no notion.",
+   "verdict": "existing constituent",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Found CategoryTheory.Functor.map_comp in Mathlib.CategoryTheory.Functor.Basic: F.map (f ≫ g) = F.map f ≫ F.map g. Constituent for the two functoriality steps, not the fixed higher-image identity.",
+   "verdict": "existing constituent; checked against statement",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Applying two functors to a composite morphism with a fixed prefix equals the composite of their mapped morphisms",
+   "results": "Eight hits including CategoryTheory.FunctorToTypes.map_comp_apply and CategoryTheory.Functorial.map_comp; none compares the concrete derived transition with higherDirectImageOverMap.",
+   "verdict": "no exact match",
+   "date": "2026-10-14"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImageOverMap.*=|= *higherDirectImageOverMap|map_coefficient in lean/Sheaf and lean/WeilConjectures",
+   "results": "HigherDirectImageOverCoherence has identity and composition laws, HigherDirectImageTransitionIdentity uses the same functoriality rearrangement in an identity proof, and AbelianHigherDirectImageTransitionComp has private coefficient laws for abelian sheaves. No existing theorem states this fixed module-sheaf coefficient-composite identity.",
+   "verdict": "no exact match; existing functoriality route confirmed",
+   "date": "2026-10-14"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality",
+  "date": "2026-10-14",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-image-raw-over-comparison",
+   "place": "Identification of the mapped coefficient composite with the over-W transition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageOverMapCoefficient",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageOverMapCoefficient.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageOverMap_coefficient",
+  "statement": "theorem higherDirectImageOverMap_coefficient\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    {A B : Over W} (f : A ⟶ B) :\n    (DerivedCategory.Plus.homologyFunctor\n      (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).map\n      (lowerStarPlusTransition Λ f.left (B.hom ≫ k) (A.hom ≫ k)\n        (by rw [← Category.assoc, Over.w])\n        (higherDirectImageRawOverComplex Λ G B) ≫\n        R+((A.hom ≫ k)_*[ModuleCat.{u + 1} Λ]).map\n          (higherDirectImageRawOverCoefficient Λ G f)) =\n      higherDirectImageOverMap Λ k G q f",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fa61b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T215608-L-899550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-fa61b",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261013T215608-L-899550",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with node statements and proof routes, original signatures and constructions, declared interface changes, forced adaptation, report, and independent compile/axiom checks."
+ }
+}

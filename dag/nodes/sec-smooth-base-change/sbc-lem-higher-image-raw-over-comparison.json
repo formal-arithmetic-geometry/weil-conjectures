@@ -18,26 +18,37 @@
  ],
  "proof": [
   {
-   "text": "Expand ToHom as derived adjunction, zero-degree homology, and homology shift comparison. Expand the transition as unit, pullback composition and counit. Naturality of the unit and the triangle identity identify its adjunct with pullback of the class. The single-complex composition comparison gives the first two raw factors. Compatibility with shifts of these canonical derived adjunctions and composition maps gives the shift factor and identifies zero-degree shifted homology with degree-q homology. Naturality in the specified coefficient morphism v gives the final factor and H^q(Rh′_*v).",
+   "text": "Use the shared actual complexes (B^*G)[0] and (A^*G)[0] and the shared fixed coefficient composite as the parameters of higherDirectImageRawTransition_toHom. The raw over pullback is definitionally this triangle pullback. Rewrite higherDirectImageOverMap with higherDirectImageOverMap_coefficient at the level of its action on sections.",
    "uses": [
-    "sbc-lem-higher-image-raw-triangle-restriction",
-    "def-sbc-module-higher-image-transitions",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-inverse-image-composition"
+    "sbc-lem-higher-image-raw-transition-to-hom",
+    "def-sbc-higher-image-raw-over-complex",
+    "def-sbc-higher-image-raw-over-coefficient"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply higherDirectImageOverMap_coefficient to identify the degree-q homology of the derived transition followed by the combined coefficient map with the canonical higherDirectImageOverMap. This is exactly the morphism on the right of the specialized raw triangle comparison.",
+   "uses": [
+    "sbc-lem-higher-image-over-map-coefficient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the fixed raw-to-sheaf comparison as ToHom followed by freeSheafSections. Apply section evaluation to the specialized ToHom equality. The private proved evaluation_postcomp is the component at U of the existing freeSheafSections_naturality, and identifies evaluation after postcomposition with the transition applied after evaluation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sbc-lem-higher-image-raw-triangle-restriction",
-  "def-sbc-module-higher-image-transitions",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "lem-weil-pbc-inverse-image-composition"
+  "sbc-lem-higher-image-raw-transition-to-hom",
+  "def-sbc-higher-image-raw-over-complex",
+  "def-sbc-higher-image-raw-over-coefficient",
+  "sbc-lem-higher-image-over-map-coefficient"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 03Q8 and 09Z1; canonical derived-Hom comparison, argument written by E2"
+  "place": "Tags 03Q8 and 09Z1; P3 specializes the existing pre-evaluation triangle comparison, identifies the transition by functoriality, and uses free-sheaf evaluation naturality."
  },
  "mathlib_searches": [
   {
@@ -110,18 +121,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "X-ec309",
-  "group": "V1",
+  "reviewer": "X-fa61b",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T100155-L-2495270",
+  "landing": "20261013T215608-L-899550",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with corrected node statements, recorded proof dependencies, original public signatures and definition, change records, and report; delivery and all six direct importers compile cleanly.",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.higherDirectImageRawOverPullback_comparison",
-   "AlgebraicGeometry.Etale.higherDirectImageRawOverPullback_restriction"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.higherDirectImageRawOverPullback_comparison"
-  ]
+  "note": "independent Codex review: Matched delivered Lean with node statements and proof routes, original signatures and constructions, declared interface changes, forced adaptation, report, and independent compile/axiom checks."
  }
 }

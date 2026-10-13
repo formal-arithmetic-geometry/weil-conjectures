@@ -14,30 +14,34 @@
  ],
  "proof": [
   {
-   "text": "Apply function extensionality. Name the single coefficients KC,KB,KA and the canonical coefficient maps vg and vf.",
+   "text": "Transport the existing restricted-single coefficient composition identity to the shared complexes and coefficient maps. Apply congruence with type equalities; each object equation is higherDirectImageRawOverComplex_eq and each heterogeneous coefficient equation is higherDirectImageRawOverCoefficient_heq. The helpers are the original concrete constructions.",
    "uses": [
-    "sbc-lem-higher-image-raw-over-naturality"
+    "lem-sbc-restricted-single-coefficient-composition",
+    "def-sbc-higher-image-raw-over-complex",
+    "def-sbc-higher-image-raw-over-coefficient"
    ],
    "elementary": true
   },
   {
-   "text": "Apply the arbitrary-derived-coefficient triangle composition theorem to f.left,g.left,vg,vf. Rewrite the composite coefficient by the proved restricted-single coefficient composition identity. Unfold higherDirectImageRawOverPullback, normalize Over.comp_left and the named single coefficients, and obtain the pointwise equality.",
+   "text": "Apply function extensionality. Apply congrArg to the coefficient identity under the raw triangle pullback for the composite arrow; reverse this equality and compose it with higherDirectImageRawTrianglePullback_comp specialized to the same shared objects and coefficients. The raw-over wrapper is its concrete implicit-reducible definition and Over.comp_left identifies the composite scheme map.",
    "uses": [
-    "lem-sbc-raw-triangle-pullback-composition",
-    "lem-sbc-restricted-single-coefficient-composition"
+    "sbc-lem-higher-image-raw-over-naturality",
+    "lem-sbc-raw-triangle-pullback-composition"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sbc-restricted-single-coefficient-composition",
+  "def-sbc-higher-image-raw-over-complex",
+  "def-sbc-higher-image-raw-over-coefficient",
   "sbc-lem-higher-image-raw-over-naturality",
-  "lem-sbc-raw-triangle-pullback-composition",
-  "lem-sbc-restricted-single-coefficient-composition"
+  "lem-sbc-raw-triangle-pullback-composition"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project, Tags 03CB and 09Z1; existing proved raw source and single/shift coherence calculations",
-  "place": "D4: combine arbitrary-derived-coefficient triangle composition with fully proved restricted single-coefficient composition; function extensionality completes the original unchanged statement. One remaining general triangle-composition hole."
+  "document": "Stacks Project, Tags 03CB and 09Z1",
+  "place": "P3 repairs the representation conversion using the proved equations of the concrete data, then composes coefficient congruence with the existing triangle composition theorem."
  },
  "mathlib_searches": [
   {
@@ -105,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "X-fa61b",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261013T150350-L-809111",
+  "landing": "20261013T215608-L-899550",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean with node statements and proof routes, original signatures and constructions, declared interface changes, forced adaptation, report, and independent compile/axiom checks."
  }
 }
