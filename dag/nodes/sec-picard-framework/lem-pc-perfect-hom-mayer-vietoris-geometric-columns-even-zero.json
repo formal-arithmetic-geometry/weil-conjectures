@@ -20,21 +20,44 @@
  ],
  "proof": [
   {
-   "text": "Apply the geometric outer-column recognition argument to the fixed outer index 0.",
+   "text": "Apply the existing single-open stage presentation at shift -1 separately to U and V. Both are compact and contained in the image of t. Map the actual representing cocone through each open restriction/direct-image functor and shifted additive Hom, then ULift. Its underlying canonical group-colimit cocone is a set colimit by filtered-colimit preservation of the forgetful functor, after universe shrinking. The inclusion/desc equation gives the pinning equation. Thus each single-open comparison is basic local-map data. Reuse the proved private localComparison_of_stage_presentation helper from PerfectHomMayerVietorisGeometricColumnsOdd via a proof-only import all, rather than duplicating its theorem and proof.",
    "uses": [
-    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even"
+    "lem-pc-perfect-hom-open-stage-presentation",
+    "def-pc-perfect-hom-local-comparison",
+    "def-pc-perfect-hom-local-map",
+    "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-odd"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Project column 0 to the two single-open Hom diagrams via the shifted biproduct projections. Naturality and the cocone equations follow from the prescribed hom2 component of the geometric family and biprod.map_fst/map_snd. The inverse shifted Hom splitting is the sum of the two shifted injections.",
+   "uses": [
+    "lem-pc-perfect-hom-mayer-vietoris-diagram",
+    "lem-pc-perfect-hom-triangle-row-presentations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The induced map from the column colimit to the product of the local colimits is bijective. For surjectivity, move two stage representatives to a common stage and use the stagewise biproduct splitting. For injectivity, represent two elements at one stage, use eventual equality in each local filtered colimit, then move both equalities to a common later stage. Stagewise injectivity and the cocone laws identify the original elements. Transport the product of the two basic local maps through this source equivalence and the inverse apex splitting. The transport agrees with the original colimit.desc by checking stage representatives.",
+   "uses": [
+    "def-pc-perfect-hom-local-map"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even"
+  "def-pc-perfect-hom-local-comparison",
+  "def-pc-perfect-hom-local-map",
+  "lem-pc-perfect-hom-mayer-vietoris-diagram",
+  "lem-pc-perfect-hom-mayer-vietoris-geometric-columns-odd",
+  "lem-pc-perfect-hom-open-stage-presentation",
+  "lem-pc-perfect-hom-triangle-row-presentations"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "H4",
+  "group": "D4",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 09RE"
+  "place": "Tag 09RE; Tag 08BW two-open Hom sum, with explicit filtered-colimit and biproduct projection proof; returned-delivery repair reuses the existing odd-column local-comparison helper"
  },
  "mathlib_searches": [
   {
@@ -92,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M2",
+  "reviewer": "X-44dc5",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261013T201801-L-3973764",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261013T222401-L-1221970",
+  "kind": "proof",
+  "note": "independent Codex review: Matched the unchanged target signature and node metadata to the delivered two-open product proof; delivery compiles cleanly with no forbidden constructs or new sorry declarations."
  }
 }
