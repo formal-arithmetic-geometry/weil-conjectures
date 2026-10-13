@@ -6,6 +6,8 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.RingTheory.IsStrictHenselization
+import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotientData
+import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotientCore
 
 /-! # Strict henselization and surjective local quotients
 
@@ -15,9 +17,11 @@ Source: Stacks Project, Tag 05WS (strict henselization of a quotient).
 
 @[expose] public section
 
+
 universe u
 namespace Algebra
 
+set_option linter.style.haveILetI false in
 /-- A surjective quotient of a local base commutes with algebraic strict henselization.
 Source: Stacks Project, Tag 05WS, and the first isomorphism theorem.
 (blueprint: lem-sbc-strict-henselization-surjective-quotient)
@@ -57,6 +61,16 @@ theorem IsStrictHenselization.surjective_quotient
       (_ : IsSepClosure (IsLocalRing.ResidueField B) L)
       (_ : Algebra B L) (_ : IsScalarTower B (IsLocalRing.ResidueField B) L)
       (_ : Algebra B (C ⧸ I.map (algebraMap A C))),
-      IsStrictHenselization B L (C ⧸ I.map (algebraMap A C)) := by sorry
+      IsStrictHenselization B L (C ⧸ I.map (algebraMap A C)) := by
+  obtain ⟨L, fL, aL, sL, bL, tL, qB, _⟩ :=
+    strictHenselization_surjective_quotient_data A K C B π hπ I hI hker
+  letI : Field L := fL
+  letI : Algebra (IsLocalRing.ResidueField B) L := aL
+  letI : IsSepClosure (IsLocalRing.ResidueField B) L := sL
+  letI : Algebra B L := bL
+  letI : IsScalarTower B (IsLocalRing.ResidueField B) L := tL
+  letI : Algebra B (C ⧸ I.map (algebraMap A C)) := qB
+  exact ⟨L, fL, aL, sL, bL, tL, qB,
+    strictHenselization_surjective_quotient_core A K C B L hC π hπ I hI hker⟩
 
 end Algebra
