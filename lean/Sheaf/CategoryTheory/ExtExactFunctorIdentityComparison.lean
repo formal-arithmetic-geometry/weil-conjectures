@@ -114,8 +114,7 @@ theorem exactFunctorIdentityComparison
     simp only [ShiftedHom.comp_mk₀, ShiftedHom.mk₀_comp, ShiftedHom.id_map]
     change 𝟙 _ ≫ z.hom ≫ (shiftFunctor _ _).map (𝟙 _) = z.hom
     simp
-  -- Specialize the composition comparison to the identity functor.
-  have h := exactFunctorCompositionComparison (𝟭 C) (𝟭 C) F
+  have h := mapExactFunctor_comp_mk₀_eq (𝟭 C) (𝟭 C) F
     (e ≪≫ (𝟭 C).rightUnitor.symm) x
   simpa [hid] using h
 
