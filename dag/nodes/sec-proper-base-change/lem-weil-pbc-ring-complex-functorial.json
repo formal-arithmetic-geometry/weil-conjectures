@@ -1,0 +1,84 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "item": "lem-weil-pbc-extended-cech-completion-model",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "status": "unsplit",
+ "mathlib_match": null,
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "id": "lem-weil-pbc-ring-complex-functorial",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The global construction invokes Lemma 099D (lemma-all-rings): construct K(A,I), its augmentation, functorial maps, derived base change, and the localization Cech comparison.",
+   "via": [
+    "lem-weil-pbc-extended-cech-completion-model"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Functorial ring complex for a finitely generated ideal",
+ "statement": "For every commutative ring $A$ and finitely generated ideal $I\\subset A$, there is a complex $K(A,I)$ of $A$-modules and an augmentation $K(A,I)\\to A[0]$. Complexes and $D(A)$ use [def-weil-abstract-derived-category]; modules use [def-weil-sheaf-of-modules-category] on the one-object site. For every ring map $\\varphi:A\\to B$ there is a $\\varphi$-linear chain map $K(A,I)\\to K(B,IB)$, compatible with compositions and augmentations. The induced map $K(A,I)\\otimes_A^{\\mathbf L}B\\to K(B,IB)$ is an isomorphism in $D(B)$; derived tensor is the total tensor complex [def-pc-tensor-complex-sheaves] after a K-flat replacement [def-pc-kflat-complex]. If $I=(f_1,\\ldots,f_r)$, allowing $r=0$, let $C_A(f)$ have degree-zero term $A$, degree-$q$ term $\\prod_{i_1<\\cdots<i_q}A[1/(f_{i_1}\\cdots f_{i_q})]$ for $1\\leq q\\leq r$, and zero terms otherwise. Here $A[1/g]$ is localization at the powers of $g$; the differential is the alternating sum of localization maps, and the augmentation to $A[0]$ is identity in degree zero. There is an augmentation-compatible isomorphism $C_A(f)\\cong K(A,I)$ in $D(A)$.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D (lemma-all-rings), clauses (a)-(d)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial construction of a complex K(A,I) for every ring and finitely generated ideal, compatible with base change and localization Cech complex",
+   "results": "localCohomology.diagram, localCohomology, localCohomology.ofDiagram; none states the required functorial complex and base-change/localization properties",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor ModuleCat",
+   "results": "no hits (application type mismatch); no matching declaration",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|Koszul|Cech [Mathlib/Algebra/Homology]",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean:45-46 discusses Koszul/local-cohomology characterizations, but no functorial ring-level complex construction",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial ring complex for finitely generated ideals with augmentation and base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial local cohomology complex of ideals commutes with extension of scalars",
+   "results": "localCohomology.diagram; localCohomology; localCohomology.ofDiagram; localCohomology.ofSelfLERadical; localCohomology.isoSelfLERadical; localCohomology.ringModIdeals; AdicCompletion.ofTensorProduct_naturality; ModuleCat.extendScalars_assoc'",
+   "date": "2026-10-14",
+   "verdict": "no exact match: inspected signatures; localCohomology is a fixed-ring Ext colimit; dense-subsite equivalence requires translating the Stacks covering conditions, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology with supports as a functor of a commutative ring and a finite ideal, represented by a base change compatible complex",
+   "results": "localCohomology; localCohomology.ofSelfLERadical; localCohomology.diagram; localCohomology.ofDiagram; localCohomology.ringModIdeals; localCohomology.idealPowersDiagram; localCohomology.isoSelfLERadical; localCohomology.hasColimitDiagram",
+   "date": "2026-10-14",
+   "verdict": "no match: LocalCohomology.lean lines 42-48 explicitly list the derived-functor and Cech characterizations as future work; returned declarations are fixed-ring Ext colimits."
+  }
+ ]
+}

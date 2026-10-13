@@ -1,0 +1,81 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "item": "lem-weil-pbc-extended-cech-completion-model",
+  "by": "worker",
+  "date": "2026-10-13"
+ },
+ "status": "unsplit",
+ "mathlib_match": null,
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "id": "lem-weil-pbc-special-cocontinuous-sheaf-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The proof of Tag 099E first replaces the site by the full subcategory of objects on which the ideal is finitely generated, using that the inclusion is special cocontinuous and hence an equivalence of topoi.",
+   "via": [
+    "lem-weil-pbc-extended-cech-completion-model"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Special cocontinuous restriction preserves sheaves",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology] and $u:\\mathcal C\\to\\mathcal D$ a special cocontinuous functor, meaning that it is cocontinuous, continuous, locally faithful, locally full, and cover-dense with precisely the covering conditions of [def-weil-pbc-special-cocontinuous-functor]. Then the associated morphism of topoi $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ is an equivalence. Its inverse-image functor is precomposition with $u$, so precomposition is an equivalence between the categories of sheaves of sets on $\\mathcal D$ and $\\mathcal C$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03A0 (lemma-equivalence), hypotheses (1)-(5) and conclusion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A special cocontinuous functor of sites induces an equivalence of sheaf categories",
+   "results": "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv and sheafEquiv_functor in Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv; Mathlib requires IsDenseSubsite structure, not the Stacks special-cocontinuous hypotheses directly",
+   "date": "2026-10-14",
+   "verdict": "generalization: Mathlib dense-subsite theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDenseSubsite.sheafEquiv",
+   "results": "no hits (unknown identifier in query syntax)",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDenseSubsite|sheafEquiv [Mathlib/CategoryTheory/Sites]",
+   "results": "DenseSubsite/SheafEquiv.lean lines 31-62 defines sheafEquiv under IsDenseSubsite",
+   "date": "2026-10-14",
+   "verdict": "generalization: Mathlib dense-subsite theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Special cocontinuous functor induces equivalence of sheaf topoi",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cover dense locally full faithful continuous cocontinuous functor equivalence of sheaves",
+   "results": "CategoryTheory.Functor.IsDenseSubsite.instIsCocontinuous; CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous; CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv; CategoryTheory.Functor.IsCoverDense.isContinuous; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor; CategoryTheory.Functor.IsDenseSubsite.instIsContinuous; CategoryTheory.Equivalence.isDenseSubsite_inverse_of_isCocontinuous",
+   "date": "2026-10-14",
+   "verdict": "no exact match: inspected signatures; localCohomology is a fixed-ring Ext colimit; dense-subsite equivalence requires translating the Stacks covering conditions, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison lemma for sites: locally full locally faithful dense continuous functor induces equivalence on sheaves",
+   "results": "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv_functor; CategoryTheory.Functor.IsDenseSubsite.sheafEquiv; CategoryTheory.Functor.IsDenseSubsite.instIsEquivalenceSheafSheafPushforwardContinuous; CategoryTheory.Functor.IsCoverDense.compatiblePreserving; CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful; CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful'; CategoryTheory.Equivalence.isDenseSubsite_functor_of_isCocontinuous",
+   "date": "2026-10-14",
+   "verdict": "no exact match: DenseSubsite/Basic.lean lines 538-542 requires a sieve pushforward covering iff condition; deriving that structure from the five family-cover hypotheses is a theorem, not an inferred instance or one-line specialization."
+  }
+ ]
+}
