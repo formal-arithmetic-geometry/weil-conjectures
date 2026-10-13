@@ -31,21 +31,44 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat resolution P^\\bullet\\to E on Y. Restrict it to V; this is pullback along the open immersion V\\hookrightarrow Y, so [lem-pc-kflat-pullback-preservation] makes P^\\bullet|_V K-flat. Pulling this resolution back along f|_U:U\\to V and applying [def-pc-derived-pullback] gives (Lf^*E)|_U\\cong L(f|_U)^*(E|_V). For K,L on X, choose a K-flat resolution Q^\\bullet\\to K. Restriction along U\\hookrightarrow X preserves K-flatness by the same cited lemma, and restriction commutes termwise with the sheaf tensor product and its direct-sum totalization [def-pc-tensor-complex-sheaves]; hence the defining K-flat computation gives (K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U\\cong K|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}L|_U.",
+   "text": "Extract the tensor-pullback counit and K-flat computation from def-pc-derived-pullback. For composable f and g, use the already proved ordinary tensor-pullback composition isomorphism (lem-pc-module-pullback-identity-composition), lift it to homotopy categories, and compose the three counits to obtain the left-derived lift into L(f composed with g). It is invertible on K-flat representatives because pullback preserves K-flatness (lem-pc-kflat-pullback-preservation). For every derived object, take a K-flat resolution (lem-pc-kflat-resolution); naturality and the invertible localized resolution transport this invertibility to that object. This proves the private composition comparison with only the three local derived-category instances, without needing a family of instances on every scheme.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-pullback-preservation",
     "def-pc-derived-pullback",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D5S, composition of derived pullbacks; the same resolving-class argument as lem-pc-derived-pullback-comparison-is-iso"
+   }
+  },
+  {
+   "text": "Tensor pullback along an open inclusion and exact over-site restriction followed by overEquiv are naturally isomorphic: the proved nonempty_tensorPullbackAdjunction in def-pc-module-pullback and Mathlib restrictAdjunction make both left adjoint to ordinary pushforward, and Mathlib overFunctorEquiv identifies the restriction descriptions. Lift this ordinary isomorphism to homotopy categories. Exact restriction has the localized functor mapDerivedCategory as a left derived functor by Mathlib isLeftDerivedFunctor_of_inverts and mapDerivedCategoryFactorsh. Uniqueness of left derived functors identifies it with the chosen derivedPullback of the open inclusion. Apply the composition comparison twice to the equality U.ι composed with f = f.resLE V U hUV composed with V.ι. Whiskering the two open-inclusion identifications gives derivedPullback_openRestriction_iso, naturally in the derived object.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-module-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.3.8 (Tag 08DW), proof of compatibility with restriction; Lemma 36.3.9 (Tag 08DX), restriction of the tensor complex"
+    "place": "Tag 08DW, compatibility with restriction to open subschemes"
    }
   },
   {
-   "text": "For affine pullback on K-flat module models, convert the categorical module K-flat predicate to acyclicity of tensor with an acyclic complex using the homotopy-category K-flat criterion. Apply [lem-pc-affine-tilde-kflat]. Extract the tensor-pullback part of the chosen derived pullback specification (without unpacking its unused inverse-image witnesses). The object and morphism equations prove equality of the recorded ordinary functor with tensorPullback. Unpack its counit [def-pc-derived-pullback]; it is invertible on those tilde complexes. Whisker this invertible counit and the natural tilde/base-change comparison [lem-weil-pbc-tilde-pullback-base-change], lifted degreewise to complexes. Compose with quotientCompQhIso and mapHomotopyCategoryFactors to obtain derivedPullback_tilde_kFlat_natIso.",
+   "text": "Use def-pc-derived-pullback-monoidal-model for the open inclusion U.ι. Transport its strong monoidal structure through the exact-open-restriction isomorphism just proved. Mathlib Functor.curriedTensorPreIsoPost gives the natural tensor comparison for the transported restriction functor. Its inverse is exactly derivedTensor_openRestriction_iso. Thus both variables are natural without selecting nonfunctorial resolutions or assembling arbitrary objectwise isomorphisms.",
+   "uses": [
+    "def-pc-derived-pullback-monoidal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08DX, restriction of derived tensor; cohomology Tag 079U for derived pullback and tensor"
+   }
+  },
+  {
+   "text": "For affine pullback on K-flat module models, convert the categorical module K-flat predicate to acyclicity of tensor with an acyclic complex using the homotopy-category K-flat criterion. Apply [lem-pc-affine-tilde-kflat]. Use the proved private tensorDerivedCounit helper to extract the tensor-pullback part of the chosen derived pullback specification. The object and morphism equations prove equality of the recorded ordinary functor with tensorPullback. Unpack its counit [def-pc-derived-pullback]; it is invertible on those tilde complexes. Whisker this invertible counit and the natural tilde/base-change comparison [lem-weil-pbc-tilde-pullback-base-change], lifted degreewise to complexes. Compose with quotientCompQhIso and mapHomotopyCategoryFactors to obtain derivedPullback_tilde_kFlat_natIso. The private complexDerivedCounitIso and complexFunctorSquareIso prove the two formal comparisons over abstract categories; complexDerivedSquareIso composes them before specialization. Its application explicitly pins both shared sheaf-module categories and passes the proved counit-isomorphism instance, avoiding unnecessary concrete definitional reductions. These helpers have complete proofs and introduce no new assumptions or unresolved nodes.",
    "uses": [
     "lem-pc-affine-tilde-kflat",
     "def-pc-derived-pullback",
@@ -71,10 +94,12 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-pullback-preservation",
   "def-pc-derived-pullback",
-  "def-pc-tensor-complex-sheaves",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-kflat-resolution",
+  "def-pc-module-pullback",
+  "def-pc-derived-pullback-monoidal-model",
   "lem-pc-affine-tilde-kflat",
   "lem-weil-pbc-tilde-pullback-base-change",
   "lem-pc-kflat-derived-tensor-comparison",
@@ -84,7 +109,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemmas 36.3.6, 36.3.8(2), 36.3.9(2) (Tags 08DV, 08DW, 08DX); A3 implements the natural affine pullback computation and transports both affine object formulas along a given resolution. Restriction remains to prove. S2 reduces the natural affine tensor computation to the generic K-flat derived counit and the underived tilde total-tensor comparison."
+  "place": "Tags 08DV, 08DW, 08DX; composition via Cohomology Tag 0D5S, and the recorded monoidal pullback model via Tag 079U. J3 completes both natural open-restriction comparisons using local composition, exact-open derived identification, and monoidal transport. The four earlier affine comparisons remain proved; their pullback counit extraction now shares a proved private helper. The localized affine pullback comparison is assembled in a proved private generic square-comparison helper before specialization; all helper statements and proofs remain within this module."
  },
  "mathlib_searches": [
   {
@@ -190,13 +215,13 @@
   "note": "clause (1): Lf* ⋙ R_U ≅ R_V ⋙ L(f.resLE V U hUV)* with R = overFunctor ⋙ overEquiv.functor, mapDerivedCategory; (K⊗L)|U ≅ K|U⊗L|U as curried natIso via global schemeDerivedTensorMonoidal; (2) Spec.map φ, Lf* Q(tilde M) ≅ Q(tilde (extendScalars φ P)) for any K-flat qis P→M (recorded MorphismProperty.kFlat), plus natIso on ιKFlat; (3) Q tilde M ⊗ Q tilde N ≅ Q tilde (mapBifunctor P N), natIso via map₂CochainComplex; tilde form as landed 5adffa6dd/qcoh-equivalence; no let/choose/local notation; stmt_deps gained 2 landed used nodes; check_dag unchanged"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "X-0c939",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T095923-L-324492",
+  "landing": "20261013T060419-L-583582",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all six unchanged public signatures and delivered proofs with the node and recorded dependencies; verified axioms, clean compilation, and all ten direct importers."
  }
 }
