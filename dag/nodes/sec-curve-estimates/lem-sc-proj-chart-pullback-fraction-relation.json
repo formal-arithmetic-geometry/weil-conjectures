@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-proj-chart-pullback-fraction-relation",
+ "kind": "statement",
+ "title": "Pullback of a homogeneous fraction relation between projective charts",
+ "statement": "Let $A=\\bigoplus_{i\\geq0}A_i$ be a nonnegatively graded commutative ring, $X$ a scheme [def-pc-scheme], $d>0$, $s\\in A_d$, and $U\\subseteq X$ an open subscheme. Write $A_{(s)}$ for the degree-zero homogeneous localization and $D_+(s)\\cong\\operatorname{Spec}A_{(s)}$ for the projective chart [def-pc-proj]. Let $\\rho:A_{(s)}\\to\\Gamma(U,\\mathcal O_X)$ be a ring map and $q:U\\to\\operatorname{Spec}A_{(s)}$ a morphism whose map on global sections agrees with $\\rho$ under the canonical Spec and restriction identifications [lem-weil-pbc-morphism-into-affine-scheme]. Put $g=\\iota_s\\circ q$. Let $e,n,N\\geq0$, $t\\in A_e$, $\\xi\\in A_{ne}$, and $p,r\\in A_{Nd}$, with $\\xi p=rt^n$ in $A$. Put $W=\\operatorname{image}_X(g^{-1}D_+(t))$. Then in $\\Gamma(W,\\mathcal O_X)$ one has $g^\\sharp(\\xi/t^n)\\,\\rho(p/s^N)|_W=\\rho(r/s^N)|_W$. Here $\\xi/t^n$ denotes the canonical degree-zero fraction section on $D_+(t)$, also when $e=0$.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N8, lemma-converse-construction, proof: comparison through D_+(ff'); Tag 01NK, lemma-invertible-map-into-proj, proof: degree-zero map from homogeneous localization"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-proj",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Pass both chart fractions to the homogeneous localization at ts. The maps send xi/t^n to xi*s^n/(ts)^n, and p/s^N and r/s^N to p*t^N/(ts)^N and r*t^N/(ts)^N. Cross multiplication, with localization witness 1, reduces their product equality to xi*p=r*t^n multiplied by s^n*t^N*(ts)^N. Lean uses awayMap_mk, Away.val_mk, val_injective, Localization.mk_mul, mk_eq_mk_iff and r_iff_exists, followed by ring. No denominator cancellation occurs.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The inverse s-chart map pulls D_+(s) back to the whole affine chart, so g inverse image of D_+(t) lies over D_+(ts). Pull back the canonical map from the localization at ts to its projective basic-open sections. Proj.awayMap_awayToSection and Scheme.Hom.map_appLE identify the two localization maps with the original chart-section pullbacks.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use basicOpenToSpec_app_top and the inverse chart isomorphism to show that the s-chart pullback on global sections is GammaSpecIso.inv. Composition with q and hq identifies this with rho followed by U.topIso.inv. Restrict and use topIso to obtain the ambient restriction on W. Apply this ring map to the fraction product equality. It preserves multiplication, giving the conclusion. The private Lean helpers inclusion_top and away_top prove the restriction and inverse-chart identifications.",
+   "uses": [
+    "def-pc-proj",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N8, lemma-converse-construction, proof: comparison through D_+(ff'); Tag 01NK, lemma-invertible-map-into-proj, proof: degree-zero map from homogeneous localization",
+  "note": "Q2 explicit common-localization calculation; complete Lean proof from Mathlib, without sorry. Online Stacks texts and downloaded constructions.tex read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback a homogeneous fraction relation between two basic opens of Proj",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.awayMap_awayToSection",
+   "results": "One result: AlgebraicGeometry.Proj.awayMap_awayToSection in Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic; supplies compatibility of chart sections, not the combined relation pullback.",
+   "date": "2026-10-13",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "awayMap_awayToSection|basicOpenToSpec_app_top|appLE_comp_appLE",
+   "results": "Mathlib ProjectiveSpectrum/Basic.lean:144,222 and Scheme.lean:396 supply chart and composition identities. Source ProjectiveSpace/TransitionUnits.lean:79,107,115 gives coordinate-ratio specializations. No complete generic statement found. Blueprint searches fraction and homogeneous localization yielded 31 and 5 entries, none stating this relation.",
+   "date": "2026-10-13",
+   "verdict": "prove from Mathlib chart identities"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SectionRingChartCrossMultiplication",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "## Proof, first sentence: choose powers and sections on each component with affine nonvanishing locus containing T; the canonical-map chart construction and its pointwise verification; single-quotient-chart proof step 2: arbitrary-degree chart verification; chart-transfer proof: cleared numerator identity before tensor cancellation; scalar fraction relation in cross-multiplication steps 1 and 2",
+   "via": [
+    "lem-sc-section-ring-chart-cross-multiplication",
+    "lem-sc-section-ring-quotient-chart-transfer",
+    "lem-sc-section-ring-single-quotient-chart",
+    "lem-sc-ample-proj-compatible-quotient-charts",
+    "lem-sc-ample-proj-canonical-map-chart-formula",
+    "lem-sc-ample-proj-canonical-map",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjChartPullbackFractionRelation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjChartPullbackFractionRelation.lean",
+  "declaration": "AlgebraicGeometry.Proj.chart_pullback_fraction_relation",
+  "statement": "theorem Proj.chart_pullback_fraction_relation (A : Type v) [CommRing A] (𝒜 : ℕ → AddSubgroup A) [GradedRing 𝒜] (X : Scheme.{v}) (d : ℕ) (s : 𝒜 d) (hd : 0 < d) (U : X.Opens) (ρ : HomogeneousLocalization.Away 𝒜 s.val →+* Γ(X, U)) (q : U.toScheme ⟶ Spec (.of (HomogeneousLocalization.Away 𝒜 s.val))) (hq : (Scheme.ΓSpecIso (.of (HomogeneousLocalization.Away 𝒜 s.val))).inv ≫ q.appTop = CommRingCat.ofHom ρ ≫ U.topIso.inv) (e : ℕ) (t : 𝒜 e) (n N : ℕ) (ξ : 𝒜 (n • e)) (p r : 𝒜 (N • d)) (h : ξ.val * p.val = r.val * t.val ^ n) : let g := q ≫ Proj.awayι 𝒜 s.val s.property hd let W := U.ι ''ᵁ (g ⁻¹ᵁ Proj.basicOpen 𝒜 t.val) (show Γ(X, W) from g.app (Proj.basicOpen 𝒜 t.val) (Proj.awayToSection 𝒜 t.val (HomogeneousLocalization.Away.mk 𝒜 t.property n ξ.val ξ.property))) * X.presheaf.map (homOfLE (U.ι_image_le _)).op (ρ (HomogeneousLocalization.Away.mk 𝒜 s.property N p.val p.property)) = X.presheaf.map (homOfLE (U.ι_image_le _)).op (ρ (HomogeneousLocalization.Away.mk 𝒜 s.property N r.val r.property))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T045552-L-134745",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261013T045552-L-134745",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -17,57 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Put i=ne, j=n(d-1)e and η=ξ*t^(n(d-1)). This numerator has degree i+j=ned. On the intersection of the s- and t-charts set r=t^d/s^e. The homogeneous fraction identity (ξ/t^n)*r^n=η/s^(ne) follows by multiplying numerators and denominators and n+n(d-1)=nd.",
+   "text": "Set k=n(d-1) and N=ne. Positivity of d gives ne+ke=Nd. Let p=t^n*t^k and r=xi*t^k, both regraded to degree Nd. Commutative ring arithmetic gives xi*p=r*t^n. Apply the generic scalar fraction relation to get a*rho(p/s^N)|_W=rho(r/s^N)|_W.",
    "uses": [
-    "def-sc-invertible-section-ring",
-    "def-pc-proj"
+    "lem-sc-proj-chart-pullback-fraction-relation",
+    "def-sc-invertible-section-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
-   }
+   "elementary": true
   },
   {
-   "text": "Pull the fraction identity back along q. Restriction from the s-chart is localization at r; hq identifies the map on global sections with ρ. On a local basis z of L write s=b*z^d and t=c*z^e; hs makes b a unit. The two applications of hρ to η and t^d give a*(c^d/b^e)^n=η_coeff/b^(ne). Multiply by b^(ne), a unit, to obtain a*c^(nd)=η_coeff. No cancellation of c is needed.",
+   "text": "Restrict hρ(N,p) and hρ(N,r) from U to W. Restriction respects scalar multiplication and composes. Rewrite a•p|_W as a•(rho(p/s^N)|_W•s^N|_W), use smul_smul and the scalar relation, then hρ(N,r) to obtain r|_W. This does not cancel any section or need hs.",
    "uses": [
-    "def-sc-invertible-module",
-    "def-sc-local-free-generator",
-    "def-sc-invertible-section-ring",
-    "def-pc-proj",
-    "lem-weil-pbc-morphism-into-affine-scheme"
+    "def-sc-invertible-section-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
-   }
+   "elementary": true
   },
   {
-   "text": "Tensor multiplication and tensorPowAddIso identify c^(nd)*z^(ned) with the product of the restricted sections t^n and t^k. Naturality of these maps turns the local coefficient equality into the displayed equality in L.tensorPow(i+j); sheaf separation glues the local identities. The exponent-zero, d=1 and empty-open cases obey the same formulas.",
+   "text": "Transport degree Nd back to ne+ke. Expand the homogeneous powers as single-component direct sums; DirectSum.of_mul_of identifies p in this degree with tensorPowAddIso.inv applied to t^n tensor t^k. Naturality and tmulSection_map move restriction inside this expression, giving exactly the displayed equality.",
    "uses": [
-    "def-sc-invertible-section-ring",
-    "def-sc-local-free-generator"
+    "def-sc-invertible-section-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-proj",
-  "def-sc-invertible-module",
   "def-sc-invertible-section-ring",
-  "def-sc-local-free-generator",
-  "lem-weil-pbc-morphism-into-affine-scheme"
+  "lem-sc-proj-chart-pullback-fraction-relation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01N8 (local quotient construction and comparison) and 01NK (different positive degrees)",
-  "note": "Y2 expansion of the chart-comparison argument, checked against the online Stacks texts of Tags 01N8 and 01NK."
+  "place": "Tag 01N8, lemma-converse-construction, proof: comparison through D_+(ff'); Tag 01NK, lemma-invertible-map-into-proj, proof: degree-zero map from homogeneous localization",
+  "note": "Q2 common-localization route followed by two restrictions of hρ and tensor naturality; no local basis, generator cancellation, or sheaf gluing."
  },
  "mathlib_searches": [
   {
@@ -152,9 +132,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261013T022436-L-3223590",
+  "landing": "20261013T045552-L-134745",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
