@@ -1,0 +1,147 @@
+{
+ "id": "lem-pc-overlap-stage-model-restriction",
+ "kind": "statement",
+ "title": "Restriction of an arbitrary stage model morphism",
+ "statement": "Let $X,Y,Z$ be schemes [def-pc-scheme], $U$ an open cover of $X$, and $q:Y\\to X$, $p:Z\\to Y$, $t:Z\\to X$ with $p\\mathbin{\\gg}q=t$ [def-pc-base-change]. Write $V=U\\times_XY$, $W=V\\times_YZ$, $U^t=U\\times_XZ$, with chart projections $v_d:V_d\\to U_d$, $w_d:W_d\\to V_d$, $u_d:U^t_d\\to U_d$. Let $d_d:W_d\\to U^t_d$ be the universal lift with projections $W_d\\to Z$ and $w_d\\mathbin{\\gg}v_d$, as in [def-pc-overlap-pair-canonical-comparisons]. Fix $a,b\\in U.I_0$ and module sheaves $N_d$ on $U_d$ [def-pc-module-pullback]. Put $K= W_a\\times_ZW_b$ with projections $r_a,r_b$ [def-pc-fibre-product]. All products and comparisons are the canonical chosen pullbacks. Write $P_f$ for tensor pullback and $f^*$ for abstract module pullback. Let $C_d:w_d^*v_d^*N_d\\simeq d_d^*u_d^*N_d$ be pullback composition along $w_d,v_d$, followed by congruence along $d_d\\mathbin{\\gg}u_d=w_d\\mathbin{\\gg}v_d$, followed by inverse composition along $d_d,u_d$. Given a scheme $H$, maps $h_d:H\\to U^t_d$ for $d=a,b$, $z:K\\to H$ with $z\\mathbin{\\gg}h_d=r_d\\mathbin{\\gg}d_d$, module sheaves $S_d$ on $H$, and isomorphisms $\\tau_d:S_d\\simeq h_d^*u_d^*N_d$, define $\\xi_d:z^*S_d\\simeq r_d^*w_d^*v_d^*N_d$ by pullback of $\\tau_d$, composition and congruence along $z\\mathbin{\\gg}h_d=r_d\\mathbin{\\gg}d_d$, inverse composition along $r_d,d_d$, and pullback of $C_d^{-1}$. Composition in all displayed formulas is Lean order, written $\\mathbin{\\gg}$ [def-pc-local-overlap-transitions]. The canonical comparisons may be supplied as named isomorphisms together with equations identifying them with the prescribed composites. Now take schemes $H_0,H_k,H$ and maps $q_0:H_k\\to H_0$, $p_0:H\\to H_k$, $t_0:H\\to H_0$ with $p_0\\mathbin{\\gg}q_0=t_0$, maps $r_{0d}:H_0\\to U_d$, $d:V_a\\times_YV_b\\to H_k$, and $k_d:H\\to U_d$, for $d=a,b$. Require $(d\\mathbin{\\gg}q_0)\\mathbin{\\gg}r_{0d}=s_d\\mathbin{\\gg}v_d$ where $s_a,s_b$ are the stage overlap projections, $t_0\\mathbin{\\gg}r_{0d}=k_d=h_d\\mathbin{\\gg}u_d$, and $z\\mathbin{\\gg}p_0=l\\mathbin{\\gg}d$ where $l:K\\to V_a\\times_YV_b$ is the universal lift of $r_a\\mathbin{\\gg}w_a,r_b\\mathbin{\\gg}w_b$. Put $F_d=r_{0d}^*N_d$, $S_d=P_{t_0}F_d$, and let $\\eta_f:P_f\\simeq f^*$ be the unique adjunction comparison [lem-pc-module-pullback-adjunction]. In the definition of $\\xi_d$ take $\\tau_d$ to be $\\eta_{t_0}(F_d)$ followed by composition/congruence from $t_0^*r_{0d}^*N_d$ to $k_d^*N_d$, followed by inverse composition/congruence to $h_d^*u_d^*N_d$. Let $s'_d:d^*P_{q_0}F_d\\simeq s_d^*v_d^*N_d$ be pullback of $\\eta_{q_0}$, composition along $d,q_0$, composition/congruence along $(d\\mathbin{\\gg}q_0)\\mathbin{\\gg}r_{0d}=s_d\\mathbin{\\gg}v_d$, and inverse composition along $s_d,v_d$. Let $\\sigma:P_{t_0}\\simeq P_{q_0}P_{p_0}$ be the tensor composition comparison [def-pc-tensor-pullback-composition-iso]. For any alpha:P_q0 F_a -> P_q0 F_b, any theta:P_t0 F_a -> P_t0 F_b satisfying sigma_Fa.hom followed by P_p0(alpha) equals theta followed by sigma_Fb.hom, and any pair morphism phi equal to s'_a.inv followed by d^*alpha followed by s'_b.hom, the canonical overlap base change BC(phi) equals xi_a.inv followed by z^*theta followed by xi_b.hom. The four supplied comparison isomorphisms are required to equal the explicit canonical composites above. This statement concerns an arbitrary theta, not a prescribed descent transition: no limit module M or component isomorphisms e are arguments. All compositions are in Lean order.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR (2), first proof; Tags 0095 and 0096, inverse image and its canonical adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-overlap-conjugate-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the four equations identifying the supplied comparison isomorphisms with overlapDirectModelComparison and overlapStageModelComparison. Their data are explicit adjunction and inverse-image composition maps, with prescribed projection equations.Expand the transported stage map, using functoriality to separate source comparison, pullback of alpha, and target comparison. Expand canonical pair base change as conjugated pullHom along l. The projection equations identify each composite chart map in this expression.",
+   "uses": [
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality and the pullback associativity pentagon identify the route l then d with z then p_0. For each chart, composition along q_0 and r_0 followed by this square agrees with the composition along t_0 and r_0 and then z, because p_0 followed by q_0 is t_0 and the stated chart projections agree.",
+   "uses": [
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify tensor and abstract inverse image via leftAdjointUniq. For the composite comparison, conjugate both candidate maps under the canonical adjunctions. Naturality of conjugation and associativity of composition send both to the same pushforward composition followed by congruence along p_0 followed by q_0 equals t_0. The conjugation bijection therefore identifies these comparisons. Substitute this identity into the expanded map and cancel the exterior comparisons. The middle expression is sigma_F.hom followed by P_p0(alpha) followed by sigma_G.inv, conjugated by xi_a and xi_b, as asserted. Postcompose the supplied tensor compatibility equation by sigma_G.inv and use sigma_G.hom_inv_id to replace the tensor conjugate by theta. Substitute the equation naming phi.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-tensor-pullback-composition-iso",
+    "lem-sc-left-adjoint-composition-iso-associativity",
+    "lem-pc-overlap-conjugate-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-overlap-pair-canonical-comparisons",
+  "lem-sc-left-adjoint-composition-iso-associativity",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-overlap-conjugate-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Full expansion of the omitted restriction/gluing comparison; canonical adjunctions from Tag 0096"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical transport of a tensor pullback morphism to the base changed pairwise overlap, compatible with iterated inverse images",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.t', AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|pseudofunctor_associativity|pullHom_hom",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a conjugated descent transition to an iterated pullback overlap commutes with the canonical component isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData.pullHom_hom",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.pullHom_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OverlapPairModelTransport",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR first-proof restriction/gluing, model transport step 2: restriction of the arbitrary stage map",
+   "via": [
+    "lem-pc-overlap-pair-model-transport",
+    "lem-pc-fp-overlap-pair-single-stage",
+    "lem-pc-fp-overlap-pair-map-lifting",
+    "lem-pc-fp-overlap-map-lifting",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapStageModelRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapStageModelRestriction.lean",
+  "declaration": "AlgebraicGeometry.overlap_stage_model_restriction",
+  "statement": "theorem overlap_stage_model_restriction\n    {X Y Z H₀ Hₖ Hlim : Scheme.{u}} (U : X.OpenCover.{u})\n    (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)\n    (N : (d : U.I₀) → (U.X d).Modules) (a b : U.I₀)\n    (q₀ : Hₖ ⟶ H₀) (p₀ : Hlim ⟶ Hₖ) (t₀ : Hlim ⟶ H₀) (h₀ : p₀ ≫ q₀ = t₀)\n    (r₀a : H₀ ⟶ U.X a) (r₀b : H₀ ⟶ U.X b)\n    (d : pullback ((U.pullback₁ q).f a) ((U.pullback₁ q).f b) ⟶ Hₖ)\n    (ha : Hlim ⟶ (U.pullback₁ t).X a) (hb : Hlim ⟶ (U.pullback₁ t).X b)\n    (hka : (d ≫ q₀) ≫ r₀a = pullback.fst _ _ ≫ U.pullbackHom q a)\n    (hkb : (d ≫ q₀) ≫ r₀b = pullback.snd _ _ ≫ U.pullbackHom q b)\n    (ka : Hlim ⟶ U.X a) (kb : Hlim ⟶ U.X b)\n    (hla : t₀ ≫ r₀a = ka) (hlb : t₀ ≫ r₀b = kb)\n    (hda : ha ≫ U.pullbackHom t a = ka)\n    (hdb : hb ≫ U.pullbackHom t b = kb)\n    (z : pullback (((U.pullback₁ q).pullback₁ p).f a)\n      (((U.pullback₁ q).pullback₁ p).f b) ⟶ Hlim)\n    (hza : z ≫ ha = pullback.fst _ _ ≫ overlapIteratedChartHom U q p t h a)\n    (hzb : z ≫ hb = pullback.snd _ _ ≫ overlapIteratedChartHom U q p t h b)\n    (hz : z ≫ p₀ =\n      pullback.lift\n        (pullback.fst _ _ ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) p a)\n        (pullback.snd _ _ ≫ Scheme.Cover.pullbackHom (U.pullback₁ q) p b) (by\n          rw [Category.assoc, Category.assoc, Scheme.Cover.pullbackHom_map,\n            Scheme.Cover.pullbackHom_map, ← Category.assoc, ← Category.assoc,\n            pullback.condition]) ≫ d) :\n    let F := (Scheme.Modules.pullback r₀a).obj (N a)\n    let G := (Scheme.Modules.pullback r₀b).obj (N b)\n    let σ := Scheme.Modules.tensorPullbackCompositionIso p₀ q₀ t₀ h₀\n    let canonicalτa := overlapDirectModelComparison t₀ r₀a ka ha\n      (U.pullbackHom t a) hla hda (N a)\n    let canonicalτb := overlapDirectModelComparison t₀ r₀b kb hb\n      (U.pullbackHom t b) hlb hdb (N b)\n    let canonicalsa := overlapStageModelComparison d q₀ r₀a\n      (pullback.fst _ _) (U.pullbackHom q a) hka (N a)\n    let canonicalsb := overlapStageModelComparison d q₀ r₀b\n      (pullback.snd _ _) (U.pullbackHom q b) hkb (N b)\n    ∀ (τa : (Scheme.Modules.tensorPullback t₀).obj F ≅\n        (Scheme.Modules.pullback ha).obj\n          ((Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a)))\n      (τb : (Scheme.Modules.tensorPullback t₀).obj G ≅\n        (Scheme.Modules.pullback hb).obj\n          ((Scheme.Modules.pullback (U.pullbackHom t b)).obj (N b)))\n      (sa : (Scheme.Modules.pullback d).obj ((Scheme.Modules.tensorPullback q₀).obj F) ≅\n        (Scheme.Modules.pullback\n          (pullback.fst ((U.pullback₁ q).f a) ((U.pullback₁ q).f b))).obj\n          ((Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a)))\n      (sb : (Scheme.Modules.pullback d).obj ((Scheme.Modules.tensorPullback q₀).obj G) ≅\n        (Scheme.Modules.pullback\n          (pullback.snd ((U.pullback₁ q).f a) ((U.pullback₁ q).f b))).obj\n          ((Scheme.Modules.pullback (U.pullbackHom q b)).obj (N b))),\n      τa = canonicalτa → τb = canonicalτb → sa = canonicalsa → sb = canonicalsb →\n    let ξa := overlapDirectRestrictionIso U q p t h N a b a ha z\n      (pullback.fst _ _) hza ((Scheme.Modules.tensorPullback t₀).obj F) τa\n    let ξb := overlapDirectRestrictionIso U q p t h N a b b hb z\n      (pullback.snd _ _) hzb ((Scheme.Modules.tensorPullback t₀).obj G) τb\n    ∀ α : (Scheme.Modules.tensorPullback q₀).obj F ⟶\n        (Scheme.Modules.tensorPullback q₀).obj G,\n    ∀ θ : (Scheme.Modules.tensorPullback t₀).obj F ⟶\n        (Scheme.Modules.tensorPullback t₀).obj G,\n      σ.hom.app F ≫ (Scheme.Modules.tensorPullback p₀).map α = θ ≫ σ.hom.app G →\n    ∀ φ : (Scheme.Modules.pullback\n        (pullback.fst ((U.pullback₁ q).f a) ((U.pullback₁ q).f b))).obj\n        ((Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a)) ⟶\n      (Scheme.Modules.pullback\n        (pullback.snd ((U.pullback₁ q).f a) ((U.pullback₁ q).f b))).obj\n        ((Scheme.Modules.pullback (U.pullbackHom q b)).obj (N b)),\n      φ = sa.inv ≫ (Scheme.Modules.pullback d).map α ≫ sb.hom →\n      modulesPseudofunctor.overlapPairBaseChangeHom\n        ((U.pullback₁ q).f a) ((U.pullback₁ q).f b) p\n        (Scheme.Cover.pullbackHom (U.pullback₁ q) p a)\n        (Scheme.Cover.pullbackHom (U.pullback₁ q) p b)\n        (((U.pullback₁ q).pullback₁ p).f a) (((U.pullback₁ q).pullback₁ p).f b)\n        (Scheme.Cover.pullbackHom_map (U.pullback₁ q) p a)\n        (Scheme.Cover.pullbackHom_map (U.pullback₁ q) p b)\n        ((Scheme.Modules.pullback (U.pullbackHom q a)).obj (N a))\n        ((Scheme.Modules.pullback (U.pullbackHom q b)).obj (N b))\n        φ = ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5aa55",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T215606-L-898885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5aa55",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T215606-L-898885",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded nodes and change record; all three modules and the required downstream importer compile cleanly, with only the three documented sorry theorems and allowed axioms."
+ }
+}

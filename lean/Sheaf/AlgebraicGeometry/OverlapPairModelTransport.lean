@@ -5,8 +5,9 @@ Authors: SHEAF group R4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.OverlapPairCanonicalComparisons
+public import Sheaf.AlgebraicGeometry.OverlapConjugateRestriction
 public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
+import Sheaf.AlgebraicGeometry.OverlapStageModelRestriction
 
 /-! # The fixed overlap model and its canonical comparison
 
@@ -24,6 +25,7 @@ namespace AlgebraicGeometry
 
 noncomputable section
 
+set_option linter.unusedSimpArgs false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -31,11 +33,9 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- The tensor and abstract pullbacks are canonically identified by their adjunctions.
 Source: Stacks Project, Tag 0096.
 (blueprint: lem-pc-overlap-pair-model-transport). -/
-def overlapTensorComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
+abbrev overlapTensorComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
     Scheme.Modules.tensorPullback p ≅ Scheme.Modules.pullback p :=
-  Adjunction.leftAdjointUniq
-    (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p))
-    (Scheme.Modules.pullbackPushforwardAdjunction p)
+  overlapAdjunctionComparison p
 
 variable {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
   (c : Cone (R.op ⋙ Scheme.Spec)) {i : I} {Xi : Scheme.{u}}
@@ -112,7 +112,7 @@ def overlapModelLimitChart (d : U.I₀)
 /-- The canonical comparison on a chart of the limit overlap model.
 Source: Stacks Project, Tags 01ZR (2) and 0096.
 (blueprint: lem-pc-overlap-pair-model-transport). -/
-def overlapModelLimitComparison
+abbrev overlapModelLimitComparison
     (N : (d : U.I₀) → (U.X d).Modules) (d : U.I₀)
     (r : pullback (U.f a) (U.f b) ⟶ U.X d)
     (hr : r ≫ U.f d = pullback.fst (U.f a) (U.f b) ≫ U.f a) :
@@ -122,21 +122,21 @@ def overlapModelLimitComparison
     (Scheme.Modules.pullback (overlapModelLimitChart R c f hij U a b d r hr)).obj
       ((Scheme.Modules.pullback (U.pullbackHom (overlapLimitMap R c f hij) d)).obj
         (N d)) :=
-  (overlapTensorComparison _).app _ ≪≫
-    (pullbackCompOfEq _ _ (pullback.fst _ _ ≫ r)
-      (by
+  overlapDirectModelComparison
+    (overlapLimitMap R c (overlapModelHom R f hij U a b) (le_refl j))
+    (overlapModelChart R f hij U a b d r) (pullback.fst _ _ ≫ r)
+    (overlapModelLimitChart R c f hij U a b d r hr)
+    (U.pullbackHom (overlapLimitMap R c f hij) d) (by
         dsimp only [overlapLimitMap, overlapModelChart, baseChangeMap, pullback.map,
           Over.mk_hom, Over.homMk_left]
         simp only [← Category.assoc, pullback.lift_fst, Category.comp_id])
-      (N d)) ≪≫
-    (pullbackCompOfEq _ _ (pullback.fst _ _ ≫ r)
-      (by exact pullback.lift_snd _ _ _) (N d)).symm
+      (by exact pullback.lift_snd _ _ _) (N d)
 
 /-- The conjugated transition on the limit of the fixed overlap model.
 This is an explicit map, without choosing a witness of map descent.
 Source: Stacks Project, Tag 01ZR (2), first proof.
 (blueprint: lem-pc-overlap-pair-model-transport). -/
-def overlapModelConjugate
+abbrev overlapModelConjugate
     (N : (d : U.I₀) → (U.X d).Modules)
     (M : (pullback f (c.π.app (op i))).Modules)
     (e : ∀ d, (Scheme.Modules.pullback
@@ -156,12 +156,9 @@ def overlapModelConjugate
   let hb := overlapModelLimitChart R c f hij U a b b rb pullback.condition.symm
   let ta := overlapModelLimitComparison R c f hij U a b N a ra rfl
   let tb := overlapModelLimitComparison R c f hij U a b N b rb pullback.condition.symm
-  let W := U.pullback₁ (overlapLimitMap R c f hij)
-  let D := (modulesPseudofunctor.toDescentData W.f).obj M
-  exact ta.hom ≫ (Scheme.Modules.pullback ha).map (e a).hom ≫
-    D.hom (overlapModelLimitToBase R c f hij U a b) ha hb
-      (pullback.lift_fst _ _ _) (pullback.lift_fst _ _ _) ≫
-    (Scheme.Modules.pullback hb).map (e b).inv ≫ tb.inv
+  exact overlapConjugatedTransition U (overlapLimitMap R c f hij) N M e a b
+    (overlapModelLimitToBase R c f hij U a b) ha hb
+    (pullback.lift_fst _ _ _) (pullback.lift_fst _ _ _) _ _ ta tb
 
 
 /-- The map from a stage overlap to the original overlap, by its two projections.
@@ -204,7 +201,7 @@ def overlapPairToModel {k : I} (hjk : j ≤ k) :
 /-- Compare the restriction of a stage overlap model module with the chart restriction.
 Source: Stacks Project, Tags 01ZR (2), 0095 and 0096.
 (blueprint: lem-pc-overlap-pair-model-transport). -/
-def overlapModelStageComparison {k : I} (hjk : j ≤ k)
+abbrev overlapModelStageComparison {k : I} (hjk : j ≤ k)
     (N : (d : U.I₀) → (U.X d).Modules) (d : U.I₀)
     (r : pullback (U.f a) (U.f b) ⟶ U.X d)
     (s : pullback ((U.pullback₁ (overlapStageMap R f hij hjk)).f a)
@@ -219,9 +216,10 @@ def overlapModelStageComparison {k : I} (hjk : j ≤ k)
       (Scheme.Modules.pullback s).obj
         ((Scheme.Modules.pullback (U.pullbackHom (overlapStageMap R f hij hjk) d)).obj
           (N d)) :=
-  (Scheme.Modules.pullback _).mapIso ((overlapTensorComparison _).app _) ≪≫
-    (Scheme.Modules.pullbackComp _ _).app _ ≪≫
-    pullbackCompOfEq _ _ (s ≫ U.pullbackHom (overlapStageMap R f hij hjk) d) (by
+  overlapStageModelComparison (overlapPairToModel R f hij U a b hjk)
+    (overlapStageMap R (overlapModelHom R f hij U a b) (le_refl j) hjk)
+    (overlapModelChart R f hij U a b d r) s
+    (U.pullbackHom (overlapStageMap R f hij hjk) d) (by
       have hq : overlapStageMap R (overlapModelHom R f hij U a b)
           (le_refl j) hjk ≫ pullback.fst (overlapModelHom R f hij U a b)
             (Spec.map (R.map (homOfLE (le_refl j)))) =
@@ -239,13 +237,12 @@ def overlapModelStageComparison {k : I} (hjk : j ≤ k)
         _ = overlapPairToOriginal R f hij U a b hjk ≫ r := by
           rw [← Category.assoc]
           exact congrArg (fun z ↦ z ≫ r) (pullback.lift_fst _ _ _)
-        _ = _ := hr) (N d) ≪≫
-    ((Scheme.Modules.pullbackComp s
-      (U.pullbackHom (overlapStageMap R f hij hjk) d)).app (N d)).symm
+        _ = _ := hr) (N d)
 
 /-- An explicit map on the stage overlap, transported from a fixed-model map.
 Source: Stacks Project, Tag 01ZR (2), first proof.
 (blueprint: lem-pc-overlap-pair-model-transport). -/
+@[irreducible]
 def overlapPairMapOfModel {k : I} (hjk : j ≤ k)
     (N : (d : U.I₀) → (U.X d).Modules)
     (α : (Scheme.Modules.tensorPullback (overlapStageMap R
@@ -269,6 +266,33 @@ def overlapPairMapOfModel {k : I} (hjk : j ≤ k)
     (pullback.snd (U.f a) (U.f b)) (pullback.snd (V.f a) (V.f b))
     (pullback.lift_snd _ _ _)
   ta.inv ≫ (Scheme.Modules.pullback (overlapPairToModel R f hij U a b hjk)).map α ≫ tb.hom
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local implicit_reducible] Precoverage.ZeroHypercover.pullback₁
+  PreZeroHypercover.pullback₁ Scheme.Modules.pseudofunctor
+  CategoryTheory.Pseudofunctor.comp CategoryTheory.PrelaxFunctor.comp
+  CategoryTheory.Bicategory.Adj.forget₁ CategoryTheory.LocallyDiscrete.mkPseudofunctor
+  CategoryTheory.PrelaxFunctorStruct.comp Prefunctor.comp
+  CategoryTheory.pseudofunctorOfIsLocallyDiscrete CategoryTheory.Cat.of
+  CategoryTheory.Bundled.of CategoryTheory.Adjunction.toCat
+  overlapLimitMap overlapStageMap CategoryTheory.Pseudofunctor.toDescentData
+  CategoryTheory.Pseudofunctor.DescentData.ofObj Quiver.Hom.toLoc
+
+attribute [local irreducible] Scheme.Modules.pullback Scheme.Modules.tensorPullback
+  Scheme.Modules.tensorPullbackCompositionIso Adjunction.leftAdjointUniq
+  Scheme.Modules.pullbackComp pullbackCompOfEq Scheme.Modules.pullbackCongr
+  overlapDirectRestrictionIso overlapIteratedComparison
+  CategoryTheory.Pseudofunctor.overlapPairBaseChangeHom limit.cone
+  overlapPairSquare CategoryTheory.Pseudofunctor.overlapPairBaseChangeSquare
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+
+
+
 
 /-- A lifted map on the fixed overlap model gives the required pair square.
 This is only transport of a given map at a given stage: it does not lift a map
@@ -344,7 +368,7 @@ theorem overlap_pair_square_of_model_recovery
           ext
           simpa using c.w (homOfLE hjk).op) N M e
       overlapPairSquare V A p D ε a b
-        (overlapPairMapOfModel R f hij U a b hjk N α) := by sorry
+        (overlapPairMapOfModel R f hij U a b hjk N α) :=  by sorry
 
 end
 end AlgebraicGeometry

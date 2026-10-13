@@ -1,0 +1,149 @@
+{
+ "id": "lem-pc-overlap-conjugate-restriction",
+ "kind": "statement",
+ "title": "Conjugated transition restriction to an iterated overlap",
+ "statement": "Let $X,Y,Z$ be schemes [def-pc-scheme], $U$ an open cover of $X$, and $q:Y\\to X$, $p:Z\\to Y$, $t:Z\\to X$ with $p\\mathbin{\\gg}q=t$ [def-pc-base-change]. Write $V=U\\times_XY$, $W=V\\times_YZ$, $U^t=U\\times_XZ$, with chart projections $v_d:V_d\\to U_d$, $w_d:W_d\\to V_d$, $u_d:U^t_d\\to U_d$. Let $d_d:W_d\\to U^t_d$ be the universal lift with projections $W_d\\to Z$ and $w_d\\mathbin{\\gg}v_d$, as in [def-pc-overlap-pair-canonical-comparisons]. Fix $a,b\\in U.I_0$ and module sheaves $N_d$ on $U_d$ [def-pc-module-pullback]. Put $K= W_a\\times_ZW_b$ with projections $r_a,r_b$ [def-pc-fibre-product]. All products and comparisons are the canonical chosen pullbacks. Write $P_f$ for tensor pullback and $f^*$ for abstract module pullback. Let $C_d:w_d^*v_d^*N_d\\simeq d_d^*u_d^*N_d$ be pullback composition along $w_d,v_d$, followed by congruence along $d_d\\mathbin{\\gg}u_d=w_d\\mathbin{\\gg}v_d$, followed by inverse composition along $d_d,u_d$. Given a scheme $H$, maps $h_d:H\\to U^t_d$ for $d=a,b$, $z:K\\to H$ with $z\\mathbin{\\gg}h_d=r_d\\mathbin{\\gg}d_d$, module sheaves $S_d$ on $H$, and isomorphisms $\\tau_d:S_d\\simeq h_d^*u_d^*N_d$, define $\\xi_d:z^*S_d\\simeq r_d^*w_d^*v_d^*N_d$ by pullback of $\\tau_d$, composition and congruence along $z\\mathbin{\\gg}h_d=r_d\\mathbin{\\gg}d_d$, inverse composition along $r_d,d_d$, and pullback of $C_d^{-1}$. Composition in all displayed formulas is Lean order, written $\\mathbin{\\gg}$ [def-pc-local-overlap-transitions]. Take a module sheaf $M$ on $Z$ and isomorphisms $e_d:u_d^*N_d\\simeq (U^t_d\\to Z)^*M$. Assume a map $\\nu:H\\to Z$ with $h_a\\mathbin{\\gg}(U^t_a\\to Z)=\\nu=h_b\\mathbin{\\gg}(U^t_b\\to Z)$. Let $D^t$ and $D^W$ be the canonical descent data of $M$ on $U^t$ and $W$, and $\\epsilon_d:w_d^*v_d^*N_d\\simeq(W_d\\to Z)^*M$ the iterated component comparisons [def-pc-overlap-pair-canonical-comparisons]. For $\\theta=\\tau_a.\\mathrm{hom}\\mathbin{\\gg}h_a^*(e_a.\\mathrm{hom})\\mathbin{\\gg}D^t.\\mathrm{hom}(\\nu,h_a,h_b)\\mathbin{\\gg}h_b^*(e_b.\\mathrm{inv})\\mathbin{\\gg}\\tau_b.\\mathrm{inv}$, take the chart modules A_d = v_d^*N_d and any pair morphism phi:s_a^*A_a -> s_b^*A_b on L = V_a times_Y V_b, where s_a,s_b are its projections. Suppose its canonical base change BC(phi) to K [def-pc-overlap-pair-canonical-comparisons] equals xi_a.inv followed by z^*theta followed by xi_b.hom. Then r_a^*(epsilon_a.hom) followed by D^W.hom(r_a followed by W.f a,r_a,r_b) equals BC(phi) followed by r_b^*(epsilon_b.hom). That is exactly the canonical overlapPairSquare with A, p, D^W and epsilon. This statement contains no tensor stage morphism, model recovery equation or existence assertion. All morphisms and comparisons above are in Lean composition order.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Tag 01ZR (2), first proof; Tags 0095 and 0096, inverse image and its canonical adjunction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-local-overlap-transitions",
+  "def-pc-overlap-pair-canonical-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the equation identifying theta with the explicit conjugated transition. Expand the direct restriction comparisons. Functor naturality moves the pullbacks of e across the composition comparisons; functoriality and inverse identities cancel both arbitrary tau comparisons.",
+   "uses": [
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the pullHom_hom equation of the direct descent datum to z and the prescribed composites r_a followed by d_a and r_b followed by d_b. Their maps to Z agree: z followed by nu equals r_a followed by W.f a, by the stated projection identities. Thus the restricted direct transition is the transition on these composite chart maps.",
+   "uses": [
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand toDescentData as inverse source composition followed by target composition. The inverse-image associativity pentagon identifies the transition on the composite chart maps with the iterated transition. Its exterior component comparisons are C_d, pullback of e_d, then composition with the chart structure map, precisely epsilon_d. Cancel the inverse target against epsilon_b.hom to get the stated identity. Substitute the supplied identity for the base change of phi and apply associativity; this is precisely the pair square.",
+   "uses": [
+    "def-pc-overlap-pair-canonical-comparisons",
+    "lem-sc-left-adjoint-composition-iso-associativity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-overlap-pair-canonical-comparisons",
+  "def-pc-local-overlap-transitions",
+  "lem-sc-left-adjoint-composition-iso-associativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01ZR",
+  "place": "Full expansion of the omitted restriction/gluing comparison; canonical adjunctions from Tag 0096"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical transport of a tensor pullback morphism to the base changed pairwise overlap, compatible with iterated inverse images",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.t', AlgebraicGeometry.Scheme.Pullback.t, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|pseudofunctor_associativity|pullHom_hom",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a conjugated descent transition to an iterated pullback overlap commutes with the canonical component isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pseudofunctor.DescentData.pullHom_hom",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.pullHom_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Read the pullHom_hom, pullbackComp and adjunction composition APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OverlapPairModelTransport",
+  "date": "2026-10-14",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "Tag 01ZR first-proof restriction/gluing, model transport step 3: conjugated transition",
+   "via": [
+    "lem-pc-overlap-pair-model-transport",
+    "lem-pc-fp-overlap-pair-single-stage",
+    "lem-pc-fp-overlap-pair-map-lifting",
+    "lem-pc-fp-overlap-map-lifting",
+    "lem-pc-fp-local-overlap-models",
+    "lem-pc-fp-local-descent-datum",
+    "lem-pc-fp-module-map-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OverlapConjugateRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/OverlapConjugateRestriction.lean",
+  "declaration": "AlgebraicGeometry.overlap_conjugate_restriction",
+  "statement": "theorem overlap_conjugate_restriction {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})\n    (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)\n    (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)\n    (e : ∀ d, (Scheme.Modules.pullback (U.pullbackHom t d)).obj (N d) ≅\n      (Scheme.Modules.pullback ((U.pullback₁ t).f d)).obj M)\n    (a b : U.I₀) (ν : H ⟶ Z)\n    (ha : H ⟶ (U.pullback₁ t).X a) (hb : H ⟶ (U.pullback₁ t).X b)\n    (hνa : ha ≫ (U.pullback₁ t).f a = ν) (hνb : hb ≫ (U.pullback₁ t).f b = ν)\n    (z : pullback (((U.pullback₁ q).pullback₁ p).f a)\n      (((U.pullback₁ q).pullback₁ p).f b) ⟶ H)\n    (hza : z ≫ ha = pullback.fst _ _ ≫ overlapIteratedChartHom U q p t h a)\n    (hzb : z ≫ hb = pullback.snd _ _ ≫ overlapIteratedChartHom U q p t h b)\n    (S T : H.Modules)\n    (τa : S ≅ (Scheme.Modules.pullback ha).obj\n      ((Scheme.Modules.pullback (U.pullbackHom t a)).obj (N a)))\n    (τb : T ≅ (Scheme.Modules.pullback hb).obj\n      ((Scheme.Modules.pullback (U.pullbackHom t b)).obj (N b))) :\n    ∀ (θ : S ⟶ T),\n      θ = overlapConjugatedTransition U t N M e a b ν ha hb hνa hνb S T τa τb →\n    let ξa := overlapDirectRestrictionIso U q p t h N a b a ha z\n      (pullback.fst _ _) hza S τa\n    let ξb := overlapDirectRestrictionIso U q p t h N a b b hb z\n      (pullback.snd _ _) hzb T τb\n    let W := (U.pullback₁ q).pullback₁ p\n    let D := (modulesPseudofunctor.toDescentData W.f).obj M\n    let ε := overlapIteratedComparison U q p t h N M e\n    let V : Y.OpenCover.{u} := U.pullback₁ q\n    let A := fun d ↦ (Scheme.Modules.pullback (U.pullbackHom q d)).obj (N d)\n    ∀ (φ : (Scheme.Modules.pullback (pullback.fst (V.f a) (V.f b))).obj (A a) ⟶\n        (Scheme.Modules.pullback (pullback.snd (V.f a) (V.f b))).obj (A b)),\n      modulesPseudofunctor.overlapPairBaseChangeHom (V.f a) (V.f b) p\n        (V.pullbackHom p a) (V.pullbackHom p b) (W.f a) (W.f b)\n        (V.pullbackHom_map p a) (V.pullbackHom_map p b) (A a) (A b) φ =\n        ξa.inv ≫ (Scheme.Modules.pullback z).map θ ≫ ξb.hom →\n      overlapPairSquare V A p D ε a b φ",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-14",
+  "declarations": [
+   "AlgebraicGeometry.overlapAdjunctionComparison",
+   "AlgebraicGeometry.overlapDirectModelComparison",
+   "AlgebraicGeometry.overlapStageModelComparison",
+   "AlgebraicGeometry.overlapIteratedRestrictionIso",
+   "AlgebraicGeometry.overlapDirectRestrictionIso",
+   "AlgebraicGeometry.overlapConjugatedTransition",
+   "AlgebraicGeometry.overlap_conjugate_restriction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5aa55",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T215606-L-898885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-5aa55",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261013T215606-L-898885",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded nodes and change record; all three modules and the required downstream importer compile cleanly, with only the three documented sorry theorems and allowed axioms."
+ }
+}

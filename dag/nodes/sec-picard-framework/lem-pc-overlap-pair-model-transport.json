@@ -18,45 +18,43 @@
  ],
  "proof": [
   {
-   "text": "Construct the map $H_\\infty\\to X$ by the two projections to $X_i$ and $c.\\mathrm{pt}$; cone naturality makes them compatible. Lift it to the direct limit charts and compose inverse-image comparisons with pullback of $e_a,e_b$. This gives the explicit conjugated map theta. Similarly construct $d_k$ using the pair projections. The universal property supplies all projection equations; the definitions overlapModelConjugate and overlapPairMapOfModel implement exactly these maps.",
+   "text": "Construct the canonical map z from the iterated universal overlap to the fixed limit model by pullback.lift. Prove its two chart equations and its commutative square z followed by p_0 equals l followed by d_k by comparing the overlap projection and the base projection. These proofs use the explicit definitions, the cone equations, and pullback uniqueness.",
    "uses": [
     "def-pc-fibre-product",
-    "def-pc-overlap-pair-canonical-comparisons",
-    "lem-pc-module-pullback-adjunction"
+    "def-pc-overlap-pair-canonical-comparisons"
    ],
    "elementary": true
   },
   {
-   "text": "On the universal overlap of the iterated limit cover, let $l$ be the canonical map to $K_k$ and $d_\\infty$ the canonical map to $H_\\infty$. Comparing the projections to $H$ and the base shows $d_\\infty\\circ p_0=l\\circ d_k$ (Lean order). Pull back the given recovery equality along $d_\\infty$. Naturality of the tensor/abstract adjunction comparison and the inverse-image associativity pentagon identify the resulting pullback of $P_{p_0}(\\alpha)$ with the canonical base change of the explicit map phi. The two tensor-composition comparisons cancel against their source and target comparison isomorphisms. Their compatibility with abstract composition follows because both are conjugates of the same pushforward composition under the canonical adjunctions.",
+   "text": "Identify the supplied stage and limit comparison isomorphisms with the generic explicit constructors by definitional equality. Unfold overlapPairMapOfModel once to obtain its defining equation. Apply the arbitrary-theta stage restriction theorem to alpha, the given overlapModelConjugate, and the supplied tensor compatibility (recovery) equation. It concludes that the canonical base change of the transported pair map equals the direct restriction of that conjugated model map. The tensor inverse cancellation is part of this strictly smaller stage restriction statement; it has no limit module or descent transition.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-pc-tensor-pullback-composition-iso",
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-overlap-pair-canonical-comparisons"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Expand theta as source comparison, pullback of $e_a.\\mathrm{hom}$, the canonical transition of $M$, pullback of $e_b.\\mathrm{inv}$, and inverse target comparison. The map of the iterated limit overlap to the direct one respects its two chart projections. Naturality of toDescentData identifies the pulled-back transition of M with the transition on the iterated overlap. The pseudofunctor pentagon identifies the exterior comparisons with overlapIteratedComparison. Cancel the target component inverse; the remaining equation is exactly overlapPairSquare for overlapPairMapOfModel. This does not use any map lifting. The same projection and cancellation identities apply to empty or repeated charts.",
-   "uses": [
-    "def-pc-local-overlap-transitions",
-    "def-pc-overlap-pair-canonical-comparisons",
+    "lem-pc-overlap-stage-model-restriction",
     "def-pc-tensor-pullback-composition-iso"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Identify overlapModelConjugate with the generic explicit conjugated transition by definitional equality. Apply the conjugated-transition restriction theorem to the already constructed geometric model map and to overlapPairMapOfModel. The stage identity, after substitution of the cancelled recovery equation, supplies its base-change premise. Its conclusion is exactly overlapPairSquare; no stage morphism or recovery argument is hidden in this restriction theorem.",
+   "uses": [
+    "lem-pc-overlap-conjugate-restriction",
+    "def-pc-local-overlap-transitions",
+    "def-pc-overlap-pair-canonical-comparisons"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
   "def-pc-overlap-pair-canonical-comparisons",
-  "lem-pc-module-pullback-adjunction",
+  "lem-pc-overlap-stage-model-restriction",
   "def-pc-tensor-pullback-composition-iso",
+  "lem-pc-overlap-conjugate-restriction",
   "def-pc-local-overlap-transitions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/01ZR",
-  "place": "Expansion of first-proof restriction identifications, using the canonical adjunction of Tag 0096"
+  "place": "First proof restriction calculation, reduced to separate stage-map and conjugated-transition identities; geometric projections and cancellation proved in Lean by J3"
  },
  "mathlib_searches": [
   {
@@ -130,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-13",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R4",
+  "reviewer": "X-5aa55",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261013T171514-L-1982296",
+  "landing": "20261013T215606-L-898885",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match the recorded nodes and change record; all three modules and the required downstream importer compile cleanly, with only the three documented sorry theorems and allowed axioms."
  }
 }
