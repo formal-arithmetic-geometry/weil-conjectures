@@ -18,7 +18,27 @@
  ],
  "proof": [
   {
-   "text": "The inverse image U' of the affine U is affine since both bases are affine.\nRestriction preserves quasi-coherent cohomology and the stalk condition: the local\nrings at points of an open subscheme are the original local rings, and the canonical\npullback composition maps transport phi to its restriction. Identify U, U', S, S'\nwith the spectra of their global section rings. Transport the cartesian square,\nobjects and phi along these isomorphisms. Apply singleComplexAffineBaseChange.\nNaturality of the derived adjunction counits and pullback composition comparisons\nidentifies its comparison with singleComplexOpenComparison. Transport invertibility\nback. For the empty affine open both derived categories are zero and the same\ncomparison is invertible. No boundedness hypothesis is used.",
+   "text": "Paste the canonical source-open pullback square with sq, using IsPullback.flip.paste_vert. U is affine by hU; since g is affine, IsAffine.of_isPullback makes its inverse-image scheme affine.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use derivedPullback_tensor_preserve_QCoh for U.ι and pullback.fst to obtain quasi-coherent cohomology of the two restricted coefficient objects. Define the restricted coefficient map by the exact expression used in singleComplexOpenComparison. Apply the open stalk-condition transport lemma to this restricted square.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-single-complex-open-stalk-condition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the spectrum square by IsPullback.of_iso with the four canonical isoSpec maps and Scheme.isoSpec_hom_naturality. Apply the spectrum-coordinate transport lemma to this square. Obtain the coefficient objects and map, their quasi-coherence, the transported stalk condition, and the two endpoint isomorphisms with their commuting equation.",
+   "uses": [
+    "lem-pc-single-complex-affine-spectrum-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply singleComplexAffineBaseChange to the four global-section rings and the maps induced by the restricted square. Derived pullback along S′.toSpecΓ preserves this isomorphism. Rewrite the original comparison by the commuting equation and compose the resulting isomorphism with the two endpoint isomorphisms.",
    "uses": [
     "lem-pc-rf-single-complex-affine-base-change"
    ],
@@ -26,12 +46,15 @@
   }
  ],
  "proof_deps": [
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-single-complex-open-stalk-condition",
+  "lem-pc-single-complex-affine-spectrum-coordinates",
   "lem-pc-rf-single-complex-affine-base-change"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0DJ9, affine-open paragraph; canonical transport details expanded by B4"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ9",
+  "place": "Affine-open paragraph: explicit restricted square, spectrum-coordinate transport, and existing affine criterion; two transport lemmas split off by C1"
  },
  "mathlib_searches": [
   {
@@ -123,9 +146,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261013T082332-L-1631244",
+  "landing": "20261013T095933-L-2452466",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

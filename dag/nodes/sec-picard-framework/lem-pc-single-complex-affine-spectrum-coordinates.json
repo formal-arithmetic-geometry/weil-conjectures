@@ -1,0 +1,142 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "lemma-single-complex-base-change-condition, proof: locality on X′ and affine spectrum reduction; Tag 0DJ9 affine-open paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change on affine schemes is invariant under scheme isomorphisms and restriction to open subschemes",
+   "results": "8 hits: AlgebraicGeometry.AffineTargetMorphismProperty.arrow_mk_iso_iff, AlgebraicGeometry.AffineTargetMorphismProperty.cancel_right_of_respectsIso, AlgebraicGeometry.AffineTargetMorphismProperty.respectsIso_mk, AlgebraicGeometry.AffineTargetMorphismProperty.cancel_left_of_respectsIso, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.instRespectsIsoSchemeTargetAffineLocallyOfToProperty, AlgebraicGeometry.AffineTargetMorphismProperty.respectsIso_of, AlgebraicGeometry.HasAffineProperty.instRespectsIsoScheme. No declaration states the derived comparison transport or the restricted canonical stalk condition.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StalkCondition|singleComplexOpenComparison",
+   "results": "0 hits: . No declaration states the derived comparison transport or the restricted canonical stalk condition.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineHom",
+   "results": "12 hits: AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.IsAffineHom, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.isAffineHom_of_isAffine, AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.instIsAffineHomOfIsIsoScheme. No declaration states the derived comparison transport or the restricted canonical stalk condition.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of derived tensor stalk comparison to an open subscheme and invariance under affine spectrum coordinate isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SingleComplexOpenAffine",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "id": "lem-pc-single-complex-affine-spectrum-coordinates",
+ "title": "Spectrum coordinates and comparison naturality for an affine square",
+ "statement": "Let $X',X,S',S$ be affine schemes [def-pc-scheme] in a cartesian square $g',f',f,g$. Let $K,K'$ have quasi-coherent derived cohomology [def-pc-derived-category] and let $\\phi:L(g')^*K\\to K'$ [def-pc-derived-pullback]. Write $X_0=\\operatorname{Spec}\\Gamma(X,\\mathcal O_X)$ and similarly for the other three schemes; each coordinate arrow is $\\operatorname{Spec}$ of the given arrow's global-section ring map. Fix a pullback proof for this coordinate square. There exist objects $K_0,K'_0$ with quasi-coherent cohomology and $\\phi_0:L(g'_0)^*K_0\\to K'_0$, such that the stalk condition [def-pc-single-complex-base-change-stalk-condition] for the coordinate data is equivalent to that for the original data. Write $b=\\mathrm{BC}(K);Rf'_*\\phi$ and $b_0=\\mathrm{BC}_0(K_0);Rf'_{0*}\\phi_0$ for the canonical comparisons [def-pc-derived-base-change-map] and [def-pc-derived-direct-image]. If $t:S'\\to S'_0$ is the canonical spectrum isomorphism, there are endpoint isomorphisms $e_L:\\operatorname{source}(b)\\simeq Lt^*\\operatorname{source}(b_0)$ and $e_R:\\operatorname{target}(b)\\simeq Lt^*\\operatorname{target}(b_0)$ with $b=e_L;Lt^*(b_0);e_R^{-1}$. This asserts a commuting coordinate identification and does not assert invertibility of either comparison.",
+ "proof": [
+  {
+   "text": "Use the canonical isomorphisms of affine schemes to their global-section spectra. Naturality identifies the arrows with Spec.map of appTop; The supplied coordinate pullback proof agrees with the transported one by proof irrelevance. Pull back K and K′ along their inverse spectrum isomorphisms and use composition and identity comparisons to define phi0. Pullback preserves quasi-coherent cohomology.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The isomorphisms identify points, local rings and all four stalk maps. The natural tensor-pullback stalk isomorphisms and functoriality of the base derived tensor comparison identify the two canonical stalk comparisons. Changes of K-flat coordinates induce the same cohomology morphisms through the equations representing phi; hence the stalk conditions are equivalent.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "def-pc-single-complex-base-change-stalk-condition",
+    "lem-pc-stalk-comparison-coordinate-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived equivalences along the four spectrum isomorphisms and composition comparisons give the source and target identifications. Expand the canonical adjoint counit base-change construction: naturality of the counits and coherence of the pullback composition isomorphisms identify both paths, yielding the displayed equation. The zero ring and empty schemes are included by the same equivalences.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-direct-image"
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-stalk-comparison-coordinate-invariance",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0DJ8",
+  "place": "Canonical transport expansion by C1 of the affine argument and locality on X′; https://stacks.math.columbia.edu/tag/0DJ9 affine-open paragraph"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "The affine spectrum transport and comparison identification sentences of lem-pc-single-complex-open-affine; Tag 0DJ8 affine spectrum reduction",
+   "via": [
+    "lem-pc-single-complex-open-affine",
+    "lem-pc-rf-single-complex-qcqs-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SingleComplexAffineSpectrumCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/SingleComplexAffineSpectrumCoordinates.lean",
+  "declaration": "AlgebraicGeometry.exists_singleComplexAffineSpectrumCoordinates",
+  "statement": "theorem exists_singleComplexAffineSpectrumCoordinates\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X X' S S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)\n    (sq : IsPullback g' f' f g)\n    [IsAffine X] [IsAffine X'] [IsAffine S] [IsAffine S']\n    (sq0 : IsPullback (Spec.map g'.appTop) (Spec.map f'.appTop)\n      (Spec.map f.appTop) (Spec.map g.appTop))\n    (K : schemeDerivedCategory X) (hK : schemeDerivedQCohProperty X K)\n    (K' : schemeDerivedCategory X') (hK' : schemeDerivedQCohProperty X' K')\n    (φ : (derivedPullback g').obj K ⟶ K') :\n    let f0 := Spec.map f.appTop\n    let f0' := Spec.map f'.appTop\n    let g0 := Spec.map g.appTop\n    let g0' := Spec.map g'.appTop\n    ∃ (K0 : schemeDerivedCategory (Spec Γ(X, ⊤)))\n      (K0' : schemeDerivedCategory (Spec Γ(X', ⊤)))\n      (φ0 : (derivedPullback g0').obj K0 ⟶ K0'),\n      schemeDerivedQCohProperty (Spec Γ(X, ⊤)) K0 ∧\n      schemeDerivedQCohProperty (Spec Γ(X', ⊤)) K0' ∧\n      (SingleComplexBaseChange.StalkCondition f f' g g' sq K K' φ ↔\n        SingleComplexBaseChange.StalkCondition f0 f0' g0 g0' sq0 K0 K0' φ0) ∧\n      ∃ (eL : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj K) ≅\n          (derivedPullback S'.toSpecΓ).obj\n            ((derivedPullback g0).obj ((schemeDerivedDirectImage f0).obj K0)))\n        (eR : (schemeDerivedDirectImage f').obj K' ≅\n          (derivedPullback S'.toSpecΓ).obj ((schemeDerivedDirectImage f0').obj K0')),\n        schemeDerivedBaseChangeMap f f' g g' sq.w K ≫\n            (schemeDerivedDirectImage f').map φ =\n          eL.hom ≫ (derivedPullback S'.toSpecΓ).map\n            (schemeDerivedBaseChangeMap f0 f0' g0 g0' sq0.w K0 ≫\n              (schemeDerivedDirectImage f0').map φ0) ≫ eR.inv",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095933-L-2452466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261013T095933-L-2452466",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
