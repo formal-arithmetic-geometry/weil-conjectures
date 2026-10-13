@@ -19,56 +19,58 @@
  },
  "proof": [
   {
-   "text": "Use formal-systems pullback to form the coherent formal system on Y for Q.comap q. Use constant support and finite-type pullback support to identify the support of every level with the inverse image of the support of G at op 0. Proper inverse images of closed subsets proper over S are proper over S.",
+   "text": "Obtain the formal pullback functor P along q. Its equality with termwise tensor pullback determines F = P(G) as the pulled system. Choose the closed support R at level op 0 from hR. Proper inverse-image stability gives RY = q inverse image R proper over S. Its image T under j is closed in X by separatedness of p, and T lies in the range of j.",
    "uses": [
     "lem-weil-pbc-formal-systems-pullback",
-    "lem-weil-pbc-formal-system-support-constant",
+    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coherence at level op 0 implies quasi-coherence and finite type. The finite-type support pullback theorem identifies the support of F at op 0 with RY. Constancy of formal-system support identifies every level with that support, so each lies in j inverse image T.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-support-pullback-finite-type",
-    "lem-weil-pbc-closed-subset-proper-over-base-union-preimage"
+    "lem-weil-pbc-formal-system-support-constant"
    ],
    "elementary": false
   },
   {
-   "text": "Map this support under j. Since p is proper and hence separated, closed-subset proper-over-base properties make its image T closed in X. It lies inside j(Y). Identify Y with the open range U of j, and use coherent pushforward on an open with closed ambient support to extend every level by zero, coherently on X.",
+   "text": "Use comap_comp, hj and hQ to identify (J.comap p).comap j with Q.comap q. The closed-support direct-image lemma proves that the concrete system F.obj composed with pushforward j satisfies the coherent formal object conditions. Package this system and that proof as H.",
    "uses": [
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-pushforward-coherent-on-open"
+    "lem-weil-pbc-formal-system-closed-support-pushforward",
+    "def-weil-pbc-coherent-formal-module",
+    "def-nagata-extended-ideal"
    ],
    "elementary": false
   },
   {
-   "text": "Direct image sends the transition maps to compatible transition maps. The covering U and X minus T detects all required identities. On U, pullback is restriction and the ideal is Q.comap q by comap_comp, hQ and hj. Restriction preserves colimits, and the ideal-power-product image identity identifies the restricted power product; consequently the quotient-transition isomorphisms are the given ones. On X minus T, every extended level, its power product, and its quotient are zero. The power-product annihilation identity therefore holds globally. The transition factors through the quotient globally since it kills the power-product image; its factor is an isomorphism on both opens and hence globally. This gives IsCoherentFormalModule (J.comap p) for the extended system.",
+   "text": "The tensor pullback and restriction functors are left adjoints of pushforward j, hence uniquely naturally isomorphic. The restriction adjunction counit is an isomorphism. Whisker this counit comparison by F.obj, use associators and the right unitor, and compose with the equality identifying F.obj with the tensor pullback of G.obj. This gives the required system isomorphism.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-module-pullback-ideal-power-product-image",
-    "def-weil-pbc-coherent-formal-module"
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The restriction/direct-image counit for the open immersion is an isomorphism at every level and is natural in each transition map. Identify tensor pullback with restriction using the open-immersion part of exists_formalSystemsPullback. Assemble its component isomorphisms as a natural isomorphism of the two inverse systems. Package the extended system with the verified adic conditions to obtain H.",
-   "uses": [
-    "lem-weil-pbc-formal-systems-pullback",
-    "lem-weil-pbc-pushforward-coherent-on-open"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-formal-systems-pullback",
-  "lem-weil-pbc-formal-system-support-constant",
-  "lem-weil-pbc-support-pullback-finite-type",
   "lem-weil-pbc-closed-subset-proper-over-base-union-preimage",
   "lem-weil-pbc-closed-subset-proper-over-base-properties",
-  "lem-weil-pbc-pushforward-coherent-on-open",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-pullback-ideal-power-product-image",
-  "def-weil-pbc-coherent-formal-module"
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-formal-system-support-constant",
+  "lem-weil-pbc-formal-system-closed-support-pushforward",
+  "def-weil-pbc-coherent-formal-module",
+  "def-nagata-extended-ideal",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Theorem 088E, theorem-grothendieck-existence, extension paragraph; the same support argument does not require completeness or an affine base"
+  "place": "Theorem 088E, extension paragraph; K1 Lean reduction with explicit support transport and the adjunction counit"
  },
  "mathlib_searches": [
   {
@@ -147,9 +149,9 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261013T010620-L-2672982",
+  "landing": "20261013T024038-L-3335713",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

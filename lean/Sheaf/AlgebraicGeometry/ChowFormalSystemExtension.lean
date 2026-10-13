@@ -8,6 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.AlgebraicGeometry.FormalSystemsPullback
+import Sheaf.AlgebraicGeometry.FormalModuleSupportConstant
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.AlgebraicGeometry.FormalSystemClosedSupportPushforward
 
 /-! # Extension of pulled formal systems across a proper compactification
 
@@ -52,6 +59,64 @@ theorem exists_chow_formal_system_extension
     (j : Y ⟶ X) [IsOpenImmersion j] (hj : j ≫ p = q ≫ f) :
     ∃ H : CoherentFormalModule X (J.comap p),
       Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅
-        H.obj ⋙ Scheme.Modules.tensorPullback j) := by sorry
+        H.obj ⋙ Scheme.Modules.tensorPullback j) := by
+  classical
+  obtain ⟨⟨P, _, hP, _, _⟩, _⟩ := exists_formalSystemsPullback q Q
+  let F := P.obj G
+  have hF : F.obj = G.obj ⋙ Scheme.Modules.tensorPullback q :=
+    congrArg (fun R ↦ R.obj G) hP
+  obtain ⟨R, hRset, hRproper⟩ := hR
+  let RY := R.preimage (f := q.base) q.continuous
+  have hRY : Scheme.IsClosedSubsetProperOver (q ≫ f) RY :=
+    (Scheme.isClosedSubsetProperOver_union_preimage (q ≫ f)).2 q f rfl R hRproper
+  obtain ⟨T, hTset, _⟩ :=
+    (Scheme.closed_subset_proper_over_base_properties (q ≫ f) RY).2.2.2 j p hj hRY
+  have hT : (T : Set X) ⊆ Set.range j.base := by
+    rw [hTset]
+    exact Set.image_subset_range _ _
+  have hcoh := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType Z
+    (G.obj.obj (op 0))).mp (G.property.1 0)
+  have : (G.obj.obj (op 0)).IsQuasicoherent := hcoh.1
+  have : (G.obj.obj (op 0)).IsFiniteType := hcoh.2
+  have hsupport : ∀ n : ℕ,
+      {y : Y | ¬ Subsingleton ((F.obj.obj (op n)).presheaf.stalk y)} ⊆
+        j.base ⁻¹' (T : Set X) := by
+    intro n y hy
+    have hy0 : y ∈ {y : Y | ¬ Subsingleton ((F.obj.obj (op 0)).presheaf.stalk y)} := by
+      rw [← formalModule_support_eq (Q.comap q) F n]
+      exact hy
+    have hyR : y ∈ (RY : Set Y) := by
+      change y ∈ q.base ⁻¹' (R : Set Z)
+      rw [hRset]
+      have hs := (Scheme.Modules.finiteType_module_support_pullback
+        (G.obj.obj (op 0))).2.2 Y q |>.2
+      rw [hF] at hy0
+      rw [← hs]
+      exact hy0
+    rw [hTset]
+    exact ⟨y, hyR, rfl⟩
+  have hK : (J.comap p).comap j = Q.comap q := by
+    rw [← Scheme.IdealSheafData.comap_comp, hj,
+      Scheme.IdealSheafData.comap_comp, ← hQ]
+  have hpush : IsCoherentFormalModule (J.comap p)
+      (F.obj ⋙ Scheme.Modules.pushforward j) := by
+    apply coherentFormal_pushforward_of_closed_support j (J.comap p) F.obj
+      T hT hsupport
+    rw [hK]
+    exact F.property
+  let H : CoherentFormalModule X (J.comap p) :=
+    ⟨F.obj ⋙ Scheme.Modules.pushforward j, hpush⟩
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction j
+  let α : Scheme.Modules.tensorPullback j ≅ Scheme.Modules.restrictFunctor j :=
+    adj.leftAdjointUniq (Scheme.Modules.restrictAdjunction j)
+  let ε : Scheme.Modules.pushforward j ⋙ Scheme.Modules.tensorPullback j ≅ 𝟭 Y.Modules :=
+    Functor.isoWhiskerLeft (Scheme.Modules.pushforward j) α ≪≫
+      asIso (Scheme.Modules.restrictAdjunction j).counit
+  refine ⟨H, ⟨?_⟩⟩
+  change G.obj ⋙ Scheme.Modules.tensorPullback q ≅
+    (F.obj ⋙ Scheme.Modules.pushforward j) ⋙ Scheme.Modules.tensorPullback j
+  exact (eqToIso hF).symm ≪≫ (Functor.rightUnitor F.obj).symm ≪≫
+    Functor.isoWhiskerLeft F.obj ε.symm ≪≫
+      (Functor.associator F.obj _ _).symm
 
 end AlgebraicGeometry

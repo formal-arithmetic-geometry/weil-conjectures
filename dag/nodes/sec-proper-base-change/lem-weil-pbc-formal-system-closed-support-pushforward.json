@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-formal-system-closed-support-pushforward",
+ "kind": "statement",
+ "title": "Coherent adic conditions for direct image with closed ambient support",
+ "statement": "Let $j:Y\\to X$ be an open immersion [def-weil-open-immersion] of Noetherian schemes [pqf-def-locnoeth], $K$ a quasi-coherent ideal sheaf on $X$ [def-nagata-extended-ideal], and $F:\\mathbb N^{op}\\to\\operatorname{Mod}(\\mathcal O_Y)$ an inverse system [def-weil-sheaf-of-modules-category]. Suppose $F$ satisfies the coherent formal object conditions for $K\\mathcal O_Y$ [def-weil-pbc-coherent-formal-module]. Let $T\\subseteq X$ be closed and contained in $j(Y)$, and suppose the nonzero-stalk support of every $F_n$ [def-weil-pbc-closed-subset-proper-over-base] is contained in $j^{-1}(T)$. Then the actual inverse system $(j_*F_n)$, with the direct images of the given transition maps [def-pc-module-pullback], satisfies the coherent formal object conditions for $K$. No formal-system existence or algebraization conclusion is asserted.",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "pqf-def-locnoeth",
+  "def-nagata-extended-ideal",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem Tag 088E, theorem-grothendieck-existence, proof: paragraph after Chow’s lemma, through formation of the extended coherent formal system; Lemma Tag 0CYJ, lemma-pushforward-coherent-on-open"
+ },
+ "proof": [
+  {
+   "text": "Identify Y with the open range U of j via j.isoOpensRange, and transport each module and transition through this isomorphism. The closed subset T lies in U. Apply coherent pushforward on an open to each coherent F_n; its direct image is coherent on X and zero on X minus T. Direct-image composition identifies this with the actual j_*F_n.",
+   "uses": [
+    "lem-weil-pbc-pushforward-coherent-on-open",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On U the natural restriction/direct-image counit identifies the direct-image system with F, and identifies the restricted ideal with K.comap j. Restriction preserves cokernels and ideal-power multiplication images, so the given annihilation and quotient-transition identities hold there. On X minus T the system is zero, hence so are its ideal-power products and quotient objects.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-module-pullback-ideal-power-product-image",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "U and X minus T cover X. The multiplication images are zero on both opens and therefore globally. By multiplication naturality, each transition kills the indicated ideal-power multiplication image since its target is annihilated. Factor it through the cokernel projection. The factor is an isomorphism on U by the given quotient-transition condition and on X minus T between zero objects. It is an isomorphism globally by the sheaf-module open-cover isomorphism criterion. The factor equations with the quotient projections hold by the cokernel construction. Together with coherence these give precisely IsCoherentFormalModule K of the direct-image system.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Details of the sentence that the extended system is an object of Coh in Theorem 088E, following Lemma 0CYJ; read at https://stacks.math.columbia.edu/tag/088E and https://stacks.math.columbia.edu/tag/0CYJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pushforward coherent formal adic system across open immersion closed support",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le",
+   "date": "2026-10-13",
+   "verdict": "No matching direct-image formal-system theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "coherentFormal.*pushforward|formal.*closed.*support|closed.*support.*formal",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "No matching direct-image formal-system theorem found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward coherent adic inverse system along open immersion with closed ambient support",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowFormalSystemExtension",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Grothendieck existence auxiliary route: verify the coherent adic conditions for the direct image in the Chow extension paragraph",
+   "via": [
+    "lem-weil-pbc-chow-formal-system-extension",
+    "new-chow-algebraization-core-candidate",
+    "new-chow-algebraization-core",
+    "new-chow-algebraization-data",
+    "lem-weil-pbc-chow-pullback-algebraization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalSystemClosedSupportPushforward",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemClosedSupportPushforward.lean",
+  "declaration": "AlgebraicGeometry.coherentFormal_pushforward_of_closed_support",
+  "statement": "theorem coherentFormal_pushforward_of_closed_support {Y X : Scheme.{u}} [IsNoetherian Y] [IsNoetherian X] (j : Y ⟶ X) [IsOpenImmersion j] (K : X.IdealSheafData) (F : ℕᵒᵖ ⥤ Y.Modules) (T : TopologicalSpace.Closeds X) (hT : (T : Set X) ⊆ Set.range j.base) (hSupp : ∀ n : ℕ, {y : Y | ¬ Subsingleton ((F.obj (op n)).presheaf.stalk y)} ⊆ j.base ⁻¹' (T : Set X)) (hF : IsCoherentFormalModule (K.comap j) F) : IsCoherentFormalModule K (F ⋙ Scheme.Modules.pushforward j)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "proof_deps": [
+  "lem-weil-pbc-pushforward-coherent-on-open",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-pullback-ideal-power-product-image",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T024038-L-3335713",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261013T024038-L-3335713",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
