@@ -2108,6 +2108,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExch
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
+public import WeilConjectures.SixFunctors.Etale.Derived.BidualitySupport
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
