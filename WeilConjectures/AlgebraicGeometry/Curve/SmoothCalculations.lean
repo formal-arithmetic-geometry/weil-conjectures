@@ -9,12 +9,16 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.AlgebraicGeometry.Curve.AssertionsTransfer
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.ExtensionInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantModSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 
 /-!
 # The curve assertions for constant coefficients on smooth curves
@@ -54,7 +58,7 @@ under the hypotheses of the smooth-curve calculations:
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
@@ -86,6 +90,147 @@ lemma Etale.isTorsion_constantModSheaf (X : Scheme.{u}) {n : ℕ} (hn : 0 < n) :
   simp only [ModuleCat.hom_nsmul, ModuleCat.hom_zero] at hx
   exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, hx⟩
 
+/-- The pullback of the underlying abelian sheaf of the constant sheaf `Λ/nΛ` along
+`g : X ⟶ Y` is the underlying abelian sheaf of the constant sheaf `Λ/nΛ` on `X`. -/
+noncomputable def Etale.upperStarConstantModSheafForgetIso {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (n : ℕ) :
+    (Etale.upperStar AddCommGrpCat.{u + 1} g).obj
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+          (Etale.constantModSheaf Λ Y n)) ≅
+      (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ X n) :=
+  (Etale.upperStar AddCommGrpCat.{u + 1} g).mapIso (Etale.constantModSheafForgetIso Λ Y n) ≪≫
+    (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).app _ ≪≫
+    (Etale.constantModSheafForgetIso Λ X n).symm
+
+/-- The étale cohomology of the empty scheme vanishes. -/
+lemma Etale.subsingleton_sheafH_of_isEmpty {X : Scheme.{u}} [IsEmpty X]
+    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
+    Subsingleton (Sheaf.H G q) :=
+  Etale.subsingleton_H_of_isClopen (ι := PEmpty.{u + 1}) (fun i ↦ i.elim) (fun i ↦ i.elim)
+    (fun i ↦ i.elim) (fun x ↦ isEmptyElim x) G q fun i ↦ i.elim
+
+/-- Let `X` be a nonempty scheme. If every element of every geometric stalk of the constant
+sheaf `Λ/nΛ` is killed by an integer prime to `n`, then `Λ/nΛ = 0`: the stalks are `Λ/nΛ`,
+which is killed by `n`. -/
+lemma Etale.subsingleton_quotient_of_forall_sheafFiber (X : Scheme.{u}) [Nonempty X] (n : ℕ)
+    (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
+      (x : ↥((Scheme.pointSmallEtale s).sheafFiber.obj (Etale.constantModSheaf Λ X n))),
+      ∃ m : ℕ, m.Coprime n ∧ m • x = 0) :
+    Subsingleton (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ)) := by
+  obtain ⟨x₀⟩ := ‹Nonempty X›
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : LocallySmall.{u} X.Etale := ⟨fun _ _ ↦ small_self _⟩
+  let e := (Scheme.pointSmallEtale (X.algClosurePoint x₀)).sheafFiberConstantSheafIso
+    (ModuleCat.of Λ (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ)))
+  suffices hy : ∀ y : Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ), y = 0 from
+    ⟨fun a b ↦ (hy a).trans (hy b).symm⟩
+  intro y
+  obtain ⟨m, hm, hx⟩ := h _ (X.algClosurePoint x₀) (e.inv y)
+  have h₁ : m • y = 0 := by
+    have := congrArg e.hom.hom hx
+    rwa [map_nsmul, map_zero, ← ModuleCat.comp_apply, e.inv_hom_id, ModuleCat.id_apply] at this
+  have h₂ : n • y = 0 := Etale.nsmul_quotient_span_eq_zero Λ n y
+  rw [← AddMonoid.addOrderOf_eq_one_iff]
+  exact Nat.eq_one_of_dvd_coprimes hm (addOrderOf_dvd_of_nsmul_eq_zero h₁)
+    (addOrderOf_dvd_of_nsmul_eq_zero h₂)
+
+/-- The constant sheaf `Λ/nΛ` vanishes if `Λ/nΛ = 0`. -/
+lemma Etale.isZero_constantModSheaf (X : Scheme.{u}) (n : ℕ)
+    [Subsingleton (Λ ⧸ (Ideal.span {(n : Λ)} : Ideal Λ))] :
+    IsZero (Etale.constantModSheaf Λ X n) :=
+  Functor.map_isZero _ (ModuleCat.isZero_of_subsingleton _)
+
+/-- Every pullback map into the étale cohomology of the empty scheme is bijective. -/
+lemma Etale.bijective_cohomologyMap_of_isEmpty {X Y : Scheme.{u}} [IsEmpty X] (g : Y ⟶ X)
+    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap g G q) := by
+  have : IsEmpty Y := ⟨fun y ↦ isEmptyElim (g y)⟩
+  have := Etale.subsingleton_sheafH_of_isEmpty G q
+  have := Etale.subsingleton_sheafH_of_isEmpty ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj G) q
+  exact ⟨fun _ _ _ ↦ Subsingleton.elim _ _, fun _ ↦ ⟨0, Subsingleton.elim _ _⟩⟩
+
+/-- Surjectivity of the pullback map only depends on the coefficient sheaf up to isomorphism. -/
+lemma Etale.surjective_cohomologyMap_iff_of_iso {X Y : Scheme.{u}} (g : X ⟶ Y)
+    {F G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} (e : F ≅ G) (n : ℕ) :
+    Function.Surjective (Etale.cohomologyMap g F n) ↔
+      Function.Surjective (Etale.cohomologyMap g G n) := by
+  have h : Etale.cohomologyMap g G n ∘ Sheaf.H.map e.hom n =
+      Sheaf.H.map ((Etale.upperStar AddCommGrpCat.{u + 1} g).mapIso e).hom n ∘
+        Etale.cohomologyMap g F n :=
+    funext fun x ↦ Etale.cohomologyMap_map g n e.hom x
+  rw [← Function.Surjective.of_comp_iff (Etale.cohomologyMap g G n)
+    (Sheaf.H.map_bijective_of_iso e n).2, h,
+    Function.Surjective.of_comp_iff' (Sheaf.H.map_bijective_of_iso _ n)]
+
+section Clopen
+
+variable {σ : Type u} [Finite σ] {X : Scheme.{u}} (U : σ → X.Opens)
+  (hU : ∀ i, IsClosed (U i : Set X)) (hdisj : Pairwise fun i j ↦ Disjoint (U i : Set X) (U j))
+  (hcov : ∀ x : X, ∃ i, x ∈ U i)
+include hU hdisj hcov
+
+/-- Let `U` be a finite clopen decomposition of `X`. If the cohomology of the constant sheaf
+`Λ/nΛ` on every `Uᵢ` is finite in degree `q`, then so is that on `X`. -/
+lemma Etale.finite_sheafH_constantModSheaf_of_isClopen (n q : ℕ)
+    (h : ∀ i, Finite (Sheaf.H
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ (U i) n)) q)) :
+    Finite (Sheaf.H
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ X n)) q) := by
+  obtain ⟨e⟩ := Etale.nonempty_equiv_pi_H_of_isClopen U hU hdisj hcov
+    ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+      (Etale.constantModSheaf Λ X n)) q
+  have (i : σ) := have := h i
+    Finite.of_surjective _ (Sheaf.H.map_bijective_of_iso
+      (Etale.upperStarConstantModSheafForgetIso Λ (U i).ι n).symm q).2
+  exact Finite.of_equiv _ e.symm
+
+/-- Let `U` be a finite clopen decomposition of `X`. If the cohomology of the constant sheaf
+`Λ/nΛ` on every `Uᵢ` vanishes in degree `q`, then so does that on `X`. -/
+lemma Etale.subsingleton_sheafH_constantModSheaf_of_isClopen (n q : ℕ)
+    (h : ∀ i, Subsingleton (Sheaf.H
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ (U i) n)) q)) :
+    Subsingleton (Sheaf.H
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ X n)) q) :=
+  Etale.subsingleton_H_of_isClopen U hU hdisj hcov _ q fun i ↦ have := h i
+    (Sheaf.H.map_bijective_of_iso
+      (Etale.upperStarConstantModSheafForgetIso Λ (U i).ι n) q).1.subsingleton
+
+/-- Let `U` be a finite clopen decomposition of `X` and `g : Y ⟶ X`. If the pullback maps of
+the constant sheaf `Λ/nΛ` along the restrictions `g⁻¹(Uᵢ) ⟶ Uᵢ` are bijective in degree `q`,
+then so is the pullback map along `g`. -/
+lemma Etale.bijective_cohomologyMap_constantModSheaf_of_isClopen {Y : Scheme.{u}} (g : Y ⟶ X)
+    (n q : ℕ) (h : ∀ i, Function.Bijective (Etale.cohomologyMap (g ∣_ U i)
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ (U i) n)) q)) :
+    Function.Bijective (Etale.cohomologyMap g
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ X n)) q) :=
+  Etale.bijective_cohomologyMap_of_isClopen U hU hdisj hcov g _ q fun i ↦
+    (Etale.bijective_cohomologyMap_iff_of_iso (g ∣_ U i)
+      (Etale.upperStarConstantModSheafForgetIso Λ (U i).ι n) q).2 (h i)
+
+/-- Let `U` be a finite clopen decomposition of `X` and `g : Y ⟶ X`. If the pullback maps of
+the constant sheaf `Λ/nΛ` along the restrictions `g⁻¹(Uᵢ) ⟶ Uᵢ` are surjective in degree `q`,
+then so is the pullback map along `g`. -/
+lemma Etale.surjective_cohomologyMap_constantModSheaf_of_isClopen {Y : Scheme.{u}} (g : Y ⟶ X)
+    (n q : ℕ) (h : ∀ i, Function.Surjective (Etale.cohomologyMap (g ∣_ U i)
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ (U i) n)) q)) :
+    Function.Surjective (Etale.cohomologyMap g
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ X n)) q) :=
+  Etale.surjective_cohomologyMap_of_isClopen U hU hdisj hcov g _ q fun i ↦
+    (Etale.surjective_cohomologyMap_iff_of_iso (g ∣_ U i)
+      (Etale.upperStarConstantModSheafForgetIso Λ (U i).ι n) q).2 (h i)
+
+end Clopen
+
 namespace IsCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
@@ -98,6 +243,57 @@ lemma compactSpace_and_quasiSeparatedSpace [IsCurve f] :
     CompactSpace C ∧ QuasiSeparatedSpace C :=
   ⟨(quasiCompact_iff_compactSpace f).mp inferInstance,
     (quasiSeparated_iff_quasiSeparatedSpace f).mp inferInstance⟩
+
+omit [IsAlgClosed k] in
+/-- **The connected components of a curve.** The connected components of a curve over a field
+form a finite decomposition into pairwise disjoint clopen connected opens. -/
+lemma exists_isClopen_connectedSpace [IsCurve f] :
+    ∃ (σ : Type u) (_ : Finite σ) (U : σ → C.Opens), (∀ i, IsClosed (U i : Set C)) ∧
+      (Pairwise fun i j ↦ Disjoint (U i : Set C) (U j)) ∧ (∀ x : C, ∃ i, x ∈ U i) ∧
+      ∀ i, ConnectedSpace (U i) := by
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := (quasiCompact_iff_compactSpace f).mp inferInstance
+  have : IsNoetherian C := ⟨⟩
+  choose x hx using _root_.ConnectedComponents.surjective_coe (α := C)
+  let U (c : _root_.ConnectedComponents C) : C.Opens :=
+    ⟨connectedComponent (x c), TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _⟩
+  have hU (y : C) : y ∈ U y := by
+    change y ∈ connectedComponent (x y)
+    rw [_root_.ConnectedComponents.coe_eq_coe.mp (hx y)]
+    exact mem_connectedComponent
+  refine ⟨_root_.ConnectedComponents C, inferInstance, U, fun c ↦ isClosed_connectedComponent,
+    fun c d hcd ↦ ?_, fun y ↦ ⟨y, hU y⟩, fun c ↦
+      isConnected_iff_connectedSpace.mp isConnected_connectedComponent⟩
+  refine Set.disjoint_left.mpr fun y (hyc : y ∈ connectedComponent (x c))
+    (hyd : y ∈ connectedComponent (x d)) ↦ hcd ?_
+  rw [← hx c, ← hx d, _root_.ConnectedComponents.coe_eq_coe,
+    connectedComponent_eq hyc, connectedComponent_eq hyd]
+
+omit [IsAlgClosed k] in
+/-- An open subscheme of a curve is a curve. -/
+lemma isCurve_ι [IsCurve f] (V : C.Opens) : IsCurve (V.ι ≫ f) := by
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := (quasiCompact_iff_compactSpace f).mp inferInstance
+  have : IsNoetherian C := ⟨⟩
+  exact { krullDim_le_one :=
+    (topologicalKrullDim_subspace_le C V).trans (IsCurve.krullDim_le_one f) }
+
+omit [IsAlgClosed k] in
+variable (k C) in
+/-- If `p = char k`, a sheaf `Λ/pΛ` on a nonempty `k`-scheme with torsion of orders invertible
+in `k` vanishes: `Λ/pΛ = 0`. -/
+lemma subsingleton_quotient_of_isTorsionSheafOfInvertibleOrder [Nonempty C] (p : ℕ)
+    [Fact p.Prime] [CharP k p]
+    [Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) (Etale.constantModSheaf Λ C p)] :
+    Subsingleton (Λ ⧸ (Ideal.span {(p : Λ)} : Ideal Λ)) := by
+  refine Etale.subsingleton_quotient_of_forall_sheafFiber Λ C p fun Ω _ _ s x ↦ ?_
+  obtain ⟨m, -, hm, hx⟩ :=
+    Scheme.IsTorsionSheafOfInvertibleOrder.exists_isUnit_nsmul_eq_zero (S := Spec (.of k)) Ω s x
+  refine ⟨m, ?_, hx⟩
+  have hmk : IsUnit (m : k) := by
+    simpa using hm.map (Scheme.ΓSpecIso (CommRingCat.of k)).hom.hom
+  have hnd : ¬ p ∣ m := fun hd ↦ hmk.ne_zero ((CharP.cast_eq_zero_iff k p m).2 hd)
+  exact Nat.Coprime.symm (((Fact.out : p.Prime).coprime_iff_not_dvd).2 hnd)
 
 /-- If the structure morphism of `C` is an isomorphism, so that `C` is the point `Spec k` with
 `k` separably closed, every étale sheaf on `C` has no cohomology in positive degrees. -/
@@ -197,6 +393,39 @@ lemma bijective_fieldExtensionCohomologyMap_constantZMod_of_charP [IsCurve f] [S
         (Limits.pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))).obj
           (C.constantZMod p)) q) := E.toEquiv.subsingleton
     exact ⟨hinj, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
+
+/-- **`H¹(C, ℤ/p)` of a smooth proper curve in characteristic `p` is finite.** Let `C` be a
+smooth proper connected curve over an algebraically closed field `k` of characteristic `p > 0`.
+Then `H¹(C, ℤ/p)` is finite: since `H⁰(C, 𝒪_C) = k` and `F - 1` is surjective on `k`, the
+Artin–Schreier sequence `0 → ℤ/p → 𝔾ₐ → 𝔾ₐ → 0` (blueprint `lem-sc-as-sequence`) identifies
+`H¹(C, ℤ/p)` with the kernel of `F - 1` on the finite-dimensional `H¹(C, 𝒪_C)`, which is finite
+(blueprint `lem-sc-fixed-points-finite`). This is the degree-one, characteristic-`p` case of
+blueprint `lem-sc-c5`.
+
+TODO: the étale sheaf `𝔾ₐ`, the Artin–Schreier sequence and the comparison of the étale and
+Zariski cohomology of `𝒪_C` are not available yet; the statement is recorded without proof. -/
+theorem finite_sheafH_one_constantZMod_of_charP [IsCurve f] [Smooth f] [ConnectedSpace C]
+    [IsProper f] (p : ℕ) [Fact p.Prime] [CharP k p] :
+    Finite (Sheaf.H (C.constantZMod p) 1) :=
+  sorry
+
+/-- **`H¹(C, ℤ/p)` of a smooth proper curve in characteristic `p` under an algebraically closed
+extension.** Let `C` be a smooth proper connected curve over an algebraically closed field `k`
+of characteristic `p > 0` and `k'/k` an algebraically closed extension. Then the pullback
+`H¹(C, ℤ/p) ⟶ H¹(C_{k'}, ℤ/p)` is bijective: by the Artin–Schreier sequence (blueprint
+`lem-sc-as-sequence`) it is the map `V^F ⟶ (V ⊗_k k')^{F ⊗ σ}` of Frobenius-fixed points of
+`V = H¹(C, 𝒪_C)`, using `H¹(C_{k'}, 𝒪) = H¹(C, 𝒪) ⊗_k k'`
+(blueprint `lem-sc-flat-base-change-coherent`), and this map is bijective (blueprint
+`lem-sc-frobenius-fixed-invariance`). This is the degree-one, characteristic-`p` case of
+blueprint `lem-sc-c7`.
+
+TODO: the étale sheaf `𝔾ₐ`, the Artin–Schreier sequence and the comparison of the étale and
+Zariski cohomology of `𝒪_C` are not available yet; the statement is recorded without proof. -/
+theorem bijective_fieldExtensionCohomologyMap_one_constantZMod_of_charP [IsCurve f] [Smooth f]
+    [ConnectedSpace C] [IsProper f] (p : ℕ) [Fact p.Prime] [CharP k p] (k' : Type u)
+    [Field k'] [IsAlgClosed k'] [Algebra k k'] :
+    Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod p) 1) :=
+  sorry
 
 /-- **Opens of a smooth connected curve.** Let `C` be a smooth separated connected curve over
 an algebraically closed field, possibly a point, and `a : W ⟶ C` an open immersion. Then either
@@ -317,10 +546,8 @@ theorem finite_sheafH_constantModSheaf_of_isProper [IsCurve f] [Smooth f] [Conne
     rcases (show q = 0 ∨ q = 1 ∨ 1 < q by omega) with rfl | rfl | hq
     · obtain ⟨e₀⟩ := C.nonempty_addEquiv_sheafH_zero_constantZMod r
       exact Etale.finite_sheafH_constantModSheaf Λ r 0 (Finite.of_equiv _ e₀.symm.toEquiv)
-    · -- `H¹(C, 𝐅_p) = ker(F - 1 : H¹(C, 𝒪_C) ⟶ H¹(C, 𝒪_C))` by the Artin–Schreier sequence,
-      -- which is finite by `lem-sc-fixed-points-finite`; the étale sheaf `𝔾ₐ`, the
-      -- Artin–Schreier sequence and the comparison with Zariski cohomology are missing.
-      sorry
+    · exact Etale.finite_sheafH_constantModSheaf Λ r 1
+        (finite_sheafH_one_constantZMod_of_charP f r)
     · have := subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP Λ f r q hq
       infer_instance
   · exact finite_sheafH_constantModSheaf_of_ne_zero Λ f r hr q
@@ -385,12 +612,9 @@ theorem bijective_cohomologyMap_constantModSheaf_of_isProper [IsCurve f] [Smooth
     obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace_pullback f a
     rw [bijective_cohomologyMap_iff_of_isPullback f h]
     by_cases hq : q = 1
-    · -- `H¹(C, 𝐅_p)` is the kernel of `F - 1` on `H¹(C, 𝒪_C)` by the Artin–Schreier
-      -- sequence, compatibly with the base change `H¹(C_{k'}, 𝒪) = H¹(C, 𝒪) ⊗_k k'`, and the
-      -- Frobenius-fixed points are invariant (`lem-sc-frobenius-fixed-invariance`); the étale
-      -- sheaf `𝔾ₐ`, the Artin–Schreier sequence and the comparison with Zariski cohomology
-      -- are missing.
-      sorry
+    · subst hq
+      exact Etale.bijective_cohomologyMap_constantModSheaf Λ r 1 _
+        (bijective_fieldExtensionCohomologyMap_one_constantZMod_of_charP f r k')
     · exact Etale.bijective_cohomologyMap_constantModSheaf Λ r q _
         (bijective_fieldExtensionCohomologyMap_constantZMod_of_charP f r k' q hq)
   · exact bijective_cohomologyMap_constantModSheaf_of_ne_zero Λ f r hr k' h q
@@ -476,8 +700,49 @@ compactification of `C` and purity for the boundary points.
 (blueprint: `lemma-weil-pbc-smooth-curve-kummer-localization`) -/
 theorem assertions_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] (ℓ : ℕ) [Fact ℓ.Prime]
     (hℓ : (ℓ : k) ≠ 0) [Finite (Λ ⧸ (Ideal.span {(ℓ : Λ)} : Ideal Λ))] :
-    IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C ℓ) :=
-  sorry
+    IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C ℓ) := by
+  obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace f
+  obtain ⟨σ, _, U, hU, hdisj, hcov, hconn⟩ := exists_isClopen_connectedSpace f
+  have hcurve (i : σ) : IsCurve ((U i).ι ≫ f) := isCurve_ι f (U i)
+  have htors := Etale.isTorsion_constantModSheaf Λ C (Fact.out : ℓ.Prime).pos
+  -- the base change assertions, componentwise
+  have hbc (k' : Type u) [Field k'] [IsAlgClosed k'] {C' : Scheme.{u}}
+      {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
+      (h : IsPullback ι' f' f ι) (q : ℕ) :=
+    Etale.bijective_cohomologyMap_constantModSheaf_of_isClopen Λ U hU hdisj hcov ι' ℓ q
+      fun i ↦ have := hconn i; have := hcurve i
+      bijective_cohomologyMap_constantModSheaf_of_ne_zero Λ ((U i).ι ≫ f) ℓ hℓ k'
+        ((isPullback_morphismRestrict ι' (U i)).paste_vert h) q
+  refine ⟨fun q hq ↦ subsingleton_sheafH_of_three_le f _ htors q hq,
+    fun q hq ↦ subsingleton_sheafH_of_two_le_of_isAffine f _ htors q hq, ?_,
+    fun q ↦ ?_, fun q ↦ ?_, fun k' _ _ _ _ _ _ h q ↦ hbc k' h q,
+    fun k' _ _ _ _ _ _ h q ↦ hbc k' h q, fun a _ ↦ ?_⟩
+  · -- `C₃`: a `p`-primary sheaf `Λ/ℓΛ` with `p ≠ ℓ` vanishes
+    intro p _ _ hF q hq
+    rcases isEmpty_or_nonempty C with hC | hC
+    · exact Etale.subsingleton_sheafH_of_isEmpty _ q
+    have hpℓ : p ≠ ℓ := by
+      rintro rfl
+      exact hℓ (CharP.cast_eq_zero k p)
+    have hcop : p.Coprime ℓ := (Nat.coprime_primes Fact.out Fact.out).2 hpℓ
+    have : Subsingleton (Λ ⧸ (Ideal.span {(ℓ : Λ)} : Ideal Λ)) :=
+      Etale.subsingleton_quotient_of_forall_sheafFiber Λ C ℓ fun Ω _ _ s x ↦
+        have ⟨m, hm⟩ := hF Ω s x
+        ⟨p ^ m, hcop.pow_left m, hm⟩
+    exact Etale.subsingleton_H_of_isZero
+      (Functor.map_isZero _ (Etale.isZero_constantModSheaf Λ C ℓ)) q
+  · -- `C₄`, componentwise
+    exact Etale.finite_sheafH_constantModSheaf_of_isClopen Λ U hU hdisj hcov ℓ q fun i ↦
+      have := hconn i; have := hcurve i
+      finite_sheafH_constantModSheaf_of_ne_zero Λ ((U i).ι ≫ f) ℓ hℓ q
+  · -- `C₅`, componentwise
+    exact Etale.finite_sheafH_constantModSheaf_of_isClopen Λ U hU hdisj hcov ℓ q fun i ↦
+      have := hconn i; have := hcurve i
+      finite_sheafH_constantModSheaf_of_ne_zero Λ ((U i).ι ≫ f) ℓ hℓ q
+  · -- `C₈`, componentwise
+    exact Etale.surjective_cohomologyMap_constantModSheaf_of_isClopen Λ U hU hdisj hcov a ℓ 2
+      fun i ↦ have := hconn i; have := hcurve i
+      surjective_cohomologyMap_constantModSheaf_two Λ ((U i).ι ≫ f) ℓ (a ∣_ U i)
 
 /-- **The eight assertions for `𝐅_p`, `p = char k`, on a smooth curve.** Let `k` be
 algebraically closed of characteristic `p > 0` and `C` a smooth separated `k`-scheme of finite
@@ -491,8 +756,53 @@ not stated).
 (blueprint: `lemma-weil-pbc-smooth-curve-artin-schreier`) -/
 theorem assertions_constantModSheaf_of_charP [IsCurve f] [Smooth f] (p : ℕ) [Fact p.Prime]
     [CharP k p] [Finite (Λ ⧸ (Ideal.span {(p : Λ)} : Ideal Λ))] :
-    IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C p) :=
-  sorry
+    IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C p) := by
+  obtain ⟨_, _⟩ := compactSpace_and_quasiSeparatedSpace f
+  obtain ⟨σ, _, U, hU, hdisj, hcov, hconn⟩ := exists_isClopen_connectedSpace f
+  have hcurve (i : σ) : IsCurve ((U i).ι ≫ f) := isCurve_ι f (U i)
+  have hproper [IsProper f] (i : σ) : IsProper ((U i).ι ≫ f) := by
+    have : IsClosedImmersion (U i).ι := .of_isOpenImmersion _ (by simpa using hU i)
+    infer_instance
+  have htors := Etale.isTorsion_constantModSheaf Λ C (Fact.out : p.Prime).pos
+  refine ⟨fun q hq ↦ subsingleton_sheafH_of_three_le f _ htors q hq,
+    fun q hq ↦ subsingleton_sheafH_of_two_le_of_isAffine f _ htors q hq, ?_,
+    fun q ↦ ?_, fun q ↦ ?_, fun k' _ _ _ _ _ _ h q ↦ ?_,
+    fun k' _ _ _ _ _ _ h q ↦ ?_, fun a _ ↦ ?_⟩
+  · -- `C₃`, componentwise
+    intro p' _ _ _ q hq
+    obtain rfl := CharP.eq k ‹CharP k p'› ‹CharP k p›
+    exact Etale.subsingleton_sheafH_constantModSheaf_of_isClopen Λ U hU hdisj hcov p' q
+      fun i ↦ have := hconn i; have := hcurve i
+      subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP Λ ((U i).ι ≫ f) p' q hq
+  · -- `C₄`: a sheaf `Λ/pΛ` with torsion prime to `p` vanishes
+    rcases isEmpty_or_nonempty C with hC | hC
+    · have := Etale.subsingleton_sheafH_of_isEmpty
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+          (Etale.constantModSheaf Λ C p)) q
+      infer_instance
+    have := subsingleton_quotient_of_isTorsionSheafOfInvertibleOrder Λ k C p
+    have := Etale.subsingleton_H_of_isZero
+      (Functor.map_isZero (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))
+        (Etale.isZero_constantModSheaf Λ C p)) q
+    infer_instance
+  · -- `C₅`, componentwise
+    exact Etale.finite_sheafH_constantModSheaf_of_isClopen Λ U hU hdisj hcov p q fun i ↦
+      have := hconn i; have := hcurve i; have := hproper i
+      finite_sheafH_constantModSheaf_of_isProper Λ ((U i).ι ≫ f) p q
+  · -- `C₆`: a sheaf `Λ/pΛ` with torsion prime to `p` vanishes
+    rcases isEmpty_or_nonempty C with hC | hC
+    · exact Etale.bijective_cohomologyMap_of_isEmpty _ _ q
+    have := subsingleton_quotient_of_isTorsionSheafOfInvertibleOrder Λ k C p
+    exact (Assertions.of_isZero (f := f) (Etale.isZero_constantModSheaf Λ C p)).6 k' h q
+  · -- `C₇`, componentwise
+    exact Etale.bijective_cohomologyMap_constantModSheaf_of_isClopen Λ U hU hdisj hcov _ p q
+      fun i ↦ have := hconn i; have := hcurve i; have := hproper i
+      bijective_cohomologyMap_constantModSheaf_of_isProper Λ ((U i).ι ≫ f) p k'
+        ((isPullback_morphismRestrict _ (U i)).paste_vert h) q
+  · -- `C₈`, componentwise
+    exact Etale.surjective_cohomologyMap_constantModSheaf_of_isClopen Λ U hU hdisj hcov a p 2
+      fun i ↦ have := hconn i; have := hcurve i
+      surjective_cohomologyMap_constantModSheaf_two Λ ((U i).ι ≫ f) p (a ∣_ U i)
 
 end IsCurve
 
