@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-flat-polynomial-append-fibre-regular-sequence",
+ "kind": "statement",
+ "title": "Appending closed-fibre regular coordinates preserves flatness",
+ "statement": "Let $k$ be a field, $\\Lambda$ a Noetherian $k$-algebra [def-weil-pbc-noetherian-ring], and $q$ a prime ideal. Fix $t,e\\geq0$, $x:\\operatorname{Fin}(t)\\to\\Lambda$ and $z:\\operatorname{Fin}(e)\\to q$. Put $P_0=k[X_j]$, $\\varphi_0(X_j)=x_j$, $p_0=\\varphi_0^{-1}(q)$, $L=\\Lambda_q$, and $I=p_0L$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-localization-at-prime]. Suppose $\\varphi_0$ induces a flat local map $(P_0)_{p_0}\\to L$ [def-weil-pbc-flat-ring-map], and the images of $z_i/1$ form a regular sequence in $L/I$ [def-weil-pbc-regular-sequence]. Put $P_1=k[X_j,Y_i]$ and $\\varphi_1(X_j)=x_j$, $\\varphi_1(Y_i)=z_i$, $p_1=\\varphi_1^{-1}(q)$. Then the canonical local map $(P_1)_{p_1}\\to L$ is flat.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FH, lemma-solution-modulo, parameter selection for property (1); algebra.tex Tags 00NQ, 00OP, 07DY and 00MP"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation on the first variables agrees with the original map, by extensionality on polynomial generators. Thus p₀ is the contraction of p₁ under variable renaming. Localization gives α:A₀→A₁, β:A₁→L and γ:A₀→L. The localization universal property proves β∘α=γ. The maps α and β are local.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite polynomial rings over a field and their prime localizations, as well as L, are Noetherian local rings. Equip the rings with the algebra structures from α, β and γ and the scalar tower from their composition.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed regular sequence gives flatness of (A₁/m₀A₁)⊗[A₁]L over A₁/m₀A₁ by the polynomial-append tensor-fibre lemma.",
+   "uses": [
+    "lem-weil-pbc-flat-polynomial-append-tensor-fibre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Noetherian fibre criterion with R=A₀, S=A₁, S′=L and M=L. The module is finite over itself and nonzero because L is local. Its A₀-flatness is hflat. The second conclusion is L flat over A₁, exactly flatness of the canonical localization map β.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-criterion-flatness-fibre-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-polynomial-append-tensor-fibre",
+  "lem-weil-pbc-localization-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07FH, lemma-solution-modulo, parameter selection for property (1); algebra.tex Tags 00NQ, 00OP, 07DY and 00MP; explicit polynomial closed-fibre and tensor identifications"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Appending polynomial variables evaluated in a regular sequence on the closed fibre preserves flatness of a local ring homomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Appending polynomial variables evaluated in a regular sequence on the closed fibre preserves flatness of a local ring homomorphism",
+   "results": "Candidates: RingTheory.Sequence.IsWeaklyRegular.of_flat, RingTheory.Sequence.IsRegular.of_faithfullyFlat, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, Algebra.Smooth.flat, RingHom.Flat.propertyIsLocal, RingHom.Flat.ofLocalizationSpanTarget, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing. No statement identifies the appended polynomial closed-fibre map or proves its flatness from regularity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(aeval|polynomial).*[Ff]lat|[Ff]lat.*(aeval|polynomial)|regular.*fibre|regular.*fiber",
+   "results": "Candidates: Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean. No statement identifies the appended polynomial closed-fibre map or proves its flatness from regularity.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FlatRegularFibreParameterSelection",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); coordinate construction (steps 1–9 of 07FH); fixed differential coordinates and parameter append for property (1); selection of fibre parameters and the fibre flatness criterion; remaining polynomial append closed-fibre argument",
+   "via": [
+    "lem-weil-pbc-flat-regular-fibre-parameter-selection",
+    "lem-weil-pbc-popescu-append-flat-parameters",
+    "lem-weil-pbc-popescu-flat-coordinates-given-admissible",
+    "lem-weil-pbc-popescu-flat-coordinates",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FlatPolynomialAppendOfFibreRegularSequence",
+  "file": "lean/Sheaf/RingTheory/FlatPolynomialAppendOfFibreRegularSequence.lean",
+  "declaration": "Algebra.flat_polynomial_append_of_fibre_regular_sequence",
+  "statement": "theorem flat_polynomial_append_of_fibre_regular_sequence\n    (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]\n    [IsNoetherianRing Λ] (q : Ideal Λ) [q.IsPrime]\n    (t e : ℕ) (xs : Fin t → Λ) (zs : Fin e → Λ)\n    (hzq : ∀ i, zs i ∈ q)\n    (hflat : (Localization.localRingHom\n      (q.comap (MvPolynomial.aeval (R := k) xs).toRingHom) q\n      (MvPolynomial.aeval (R := k) xs).toRingHom rfl).Flat)\n    (hseq : RingTheory.Sequence.IsRegular (Localization.AtPrime q ⧸\n      (q.comap (MvPolynomial.aeval (R := k) xs).toRingHom).map\n        ((algebraMap Λ (Localization.AtPrime q)).comp\n          (MvPolynomial.aeval (R := k) xs).toRingHom))\n      (List.ofFn (fun i : Fin e ↦ Ideal.Quotient.mk\n        ((q.comap (MvPolynomial.aeval (R := k) xs).toRingHom).map\n          ((algebraMap Λ (Localization.AtPrime q)).comp\n            (MvPolynomial.aeval (R := k) xs).toRingHom))\n        (algebraMap Λ (Localization.AtPrime q) (zs i))))) :\n    let φ : MvPolynomial (Fin (t + e)) k →ₐ[k] Λ :=\n      MvPolynomial.aeval (Fin.addCases xs zs)\n    (Localization.localRingHom (q.comap φ.toRingHom) q φ.toRingHom rfl).Flat",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T045534-L-129912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T045534-L-129912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
