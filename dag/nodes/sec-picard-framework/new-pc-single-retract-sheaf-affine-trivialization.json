@@ -13,22 +13,47 @@
  },
  "proof": [
   {
-   "text": "Choose an affine neighbourhood W inside U, restrict the finite free splitting, and identify its ambient idempotent with an idempotent matrix by affine tilde-Gamma. The image module is finite projective, and applying tilde to the module splitting recovers the sheaf splitting by uniqueness of splittings of the idempotent. Choose a principal open containing x from the finite projective standard free cover. On that affine principal open the module has a finite basis. The sections-localization and tilde restriction comparisons give the free sheaf isomorphism. Compose nested restrictions back to U.",
+   "text": "Choose an affine neighbourhood W of x contained in U. Map the given splitting through overMap, the overEquiv functor, and restriction along W.isoSpec.inv. The functors preserve finite coproducts and take the unit to the unit, so mapFreeIso identifies the ambient sheaf with a finite free sheaf on Spec Gamma(X,W). Functoriality preserves the splitting equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the affine global-sections functor to the splitting. By tildeFinsupp and the tilde-Gamma unit its ambient module is the finite free module indexed by ULift(Fin m). Module.Finite.of_surjective and Module.Projective.of_split give finiteness and projectivity of the retract sections. Naturality of the affine counit (NatTrans.retractArrowApp) makes its component at the retract a retract of its invertible component at the free sheaf. Isomorphisms are stable under retracts; isQuasicoherent_iff_isIso_fromTildeGamma proves quasi-coherence. This is the private helper affine_retract_sections.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-finite-projective-standard-free-cover"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Represent x by a prime p of Gamma(X,W). Apply exists_localizationAway_equiv_finsupp_of_finite_projective to the finite projective module of sections, obtaining f outside p and an equivalence of its localization with Fin r ->0 Gamma(X,W)_f. Reindex by ULift(Fin r). This pointwise result suffices; no finite standard cover is needed.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-prime-local-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Scheme.Modules.nonempty_restrict_iso_free_of_localizedModule to identify the restriction of the quasi-coherent sheaf to Spec Gamma(X,W)_f with the finite free sheaf on ULift(Fin r). The comparison uses sections-localization on principal opens and the affine counit. Since f is outside p, p lifts to a point of this localized spectrum.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let k be the composite open immersion from the localized spectrum to X through W, and set V=k.opensRange. The lifted point maps to x, and V is affine and contained in W and U. Restrict the free-sheaf isomorphism along k.isoOpensRange.inv and compose restrictCompIso and restrictFreeIso. After cancellation against W.iota, this composite map into W equals X.homOfLE (V <= W). Apply overMapCompOverEquiv and mapFreeIso for overEquiv V, then its fully faithful preimageIso. Nested overMap restrictions are definitionally the single restriction from U to V.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-finite-projective-standard-free-cover"
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-weil-pbc-spec-module-tilde-sections"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00NX (3) implies (7); schemes.tex Tags 01IA and 01IB; finite induction below the unit level"
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+  "place": "Stacks Tags 00NX (3) implies (2) and (7), 01IA and 01IB; compiled B2 proof using the affine counit retract and the pointwise principal neighbourhood, with explicit restriction comparisons"
  },
  "mathlib_searches": [
   {
@@ -99,13 +124,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T225311-L-1805916",
-  "kind": "interface",
+  "landing": "20261013T003154-L-2427903",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
