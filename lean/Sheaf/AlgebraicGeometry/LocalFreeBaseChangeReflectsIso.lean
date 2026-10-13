@@ -3,6 +3,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.LinearAlgebra.FreeModule.Basic
+import Mathlib.RingTheory.TensorProduct.Free
+import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 @[expose] public section
 universe u v
 open CategoryTheory
@@ -27,5 +29,47 @@ theorem isIso_of_isIso_extendScalars_of_finite_free
     {M N : ModuleCat R} [Module.Free R M] [Module.Finite R M]
     [Module.Free R N] [Module.Finite R N] (φ : M ⟶ N)
     (hφ : IsIso ((ModuleCat.extendScalars f).map φ)) : IsIso φ := by
-  sorry
+  classical
+  algebraize [f]
+  rw [ConcreteCategory.isIso_iff_bijective] at hφ ⊢
+  have h : Function.Bijective (φ.hom.baseChange S) := hφ
+  let e := LinearEquiv.ofBijective (φ.hom.baseChange S) h
+  let bM := Module.Free.chooseBasis R M
+  let bN := Module.Free.chooseBasis R N
+  let eι := ((Algebra.TensorProduct.basis S bM).map e).indexEquiv
+    (Algebra.TensorProduct.basis S bN)
+  let bN' := bN.reindex eι.symm
+  let cM := Algebra.TensorProduct.basis S bM
+  let cN := Algebra.TensorProduct.basis S bN'
+  let A := LinearMap.toMatrix bM bN' φ.hom
+  have hA : LinearMap.toMatrix cM cN (φ.hom.baseChange S) =
+      A.map (algebraMap R S) := LinearMap.toMatrix_baseChange S φ.hom bM bN'
+  have hmul : A.map (algebraMap R S) *
+      LinearMap.toMatrix cN cM e.symm.toLinearMap = 1 := by
+    rw [← hA, ← LinearMap.toMatrix_comp]
+    have he : (φ.hom.baseChange S).comp e.symm.toLinearMap = LinearMap.id := by
+      apply LinearMap.ext
+      intro x
+      exact e.apply_symm_apply x
+    rw [he, LinearMap.toMatrix_id]
+  have hdetS : IsUnit ((A.map (algebraMap R S)).det) :=
+    Matrix.isUnit_det_of_right_inverse hmul
+  have hdet : IsUnit A.det := by
+    apply (isUnit_map_iff (algebraMap R S) A.det).mp
+    simpa only [RingHom.map_det, RingHom.mapMatrix_apply] using hdetS
+  let ψ := Matrix.toLin bN' bM A⁻¹
+  have hleft : ψ.comp φ.hom = LinearMap.id := by
+    apply (LinearMap.toMatrix bM bM).injective
+    rw [LinearMap.toMatrix_comp bM bN' bM, LinearMap.toMatrix_id]
+    change (LinearMap.toMatrix bN' bM) (Matrix.toLin bN' bM A⁻¹) * A = 1
+    rw [LinearMap.toMatrix_toLin]
+    exact Matrix.nonsing_inv_mul A hdet
+  have hright : φ.hom.comp ψ = LinearMap.id := by
+    apply (LinearMap.toMatrix bN' bN').injective
+    rw [LinearMap.toMatrix_comp bN' bM bN', LinearMap.toMatrix_id]
+    change A * (LinearMap.toMatrix bN' bM) (Matrix.toLin bN' bM A⁻¹) = 1
+    rw [LinearMap.toMatrix_toLin]
+    exact Matrix.mul_nonsing_inv A hdet
+  exact ⟨Function.HasLeftInverse.injective ⟨ψ, LinearMap.congr_fun hleft⟩,
+    Function.HasRightInverse.surjective ⟨ψ, LinearMap.congr_fun hright⟩⟩
 end AlgebraicGeometry.Scheme.Modules

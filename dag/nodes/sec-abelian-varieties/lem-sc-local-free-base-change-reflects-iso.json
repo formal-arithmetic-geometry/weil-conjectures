@@ -10,7 +10,17 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Choose finite bases for M and N. The scalar extension is represented by the same matrix over S; its inverse implies equal ranks and that the determinant maps to a unit of S. Locality of f reflects units, so the determinant is a unit in R. The adjugate identity then supplies an inverse matrix over R, hence φ is an isomorphism (including the zero-rank case).",
+   "text": "Convert the categorical scalar-extension isomorphism to bijectivity of the base-changed linear map and form its linear equivalence. Choose the finite bases supplied by Module.Free.chooseBasis. Transport the extended source basis through this equivalence and compare it with the extended target basis using Module.Basis.indexEquiv (the invariant basis number theorem for the nontrivial commutative ring S). Reindex the original target basis so both bases have the same finite index type.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Let A be the square representing matrix. LinearMap.toMatrix_baseChange identifies the extended matrix with A.map (algebraMap R S). The matrix of the inverse linear equivalence is a right inverse, by LinearMap.toMatrix_comp. Matrix.isUnit_det_of_right_inverse makes its determinant a unit. RingHom.map_det and isUnit_map_iff for the local homomorphism then show that det A is a unit in R.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Construct the reverse linear map from the nonsingular inverse matrix A⁻¹ using Matrix.toLin. Apply the injective matrix representation to both composites. Matrix.nonsing_inv_mul and Matrix.mul_nonsing_inv show that both composites are identities. These give injectivity and surjectivity of the original morphism, hence its categorical IsIso instance. The construction covers an empty basis index set without a case split.",
    "uses": [],
    "elementary": false
   }
@@ -19,7 +29,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/00O0",
-  "place": "Explicit stalk formulation of the matrix argument in steps 1 and 2 of lem-sc-finite-locally-free-map-iso-locus-pullback"
+  "place": "Lemma 10.79.4(3), adapted finite-free matrix argument; rank comparison via Mathlib invariant basis number, determinant and nonsingular inverse identities"
  },
  "mathlib_searches": [
   {
@@ -104,10 +114,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "G4",
   "result": "pass",
-  "landing": "20261013T022421-L-3216439",
-  "kind": "interface",
+  "landing": "20261013T034206-L-3766344",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
