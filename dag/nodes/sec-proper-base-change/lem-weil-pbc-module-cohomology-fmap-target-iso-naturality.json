@@ -12,23 +12,23 @@
  ],
  "proof": [
   {
-   "text": "Choose the data D and E defining the two canonical maps. Lift e.hom between their target resolutions and id_G between their source resolutions, respecting augmentations.",
+   "text": "Choose the data C and C′ defining the two canonical maps. Use InjectiveResolution.desc to lift e.hom between the target resolutions and id_G between the source resolutions, respecting augmentations. Scheme module categories have enough injectives, as required for the derived-functor comparisons.",
    "uses": [
     "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-derived-functor-map-via-lift"
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-scheme-modules-enough-injectives"
    ],
    "elementary": false
   },
   {
-   "text": "Extend by zero to integer indices. K-injectivity of E.K and the quasi-isomorphism D.lambda give t : D.K -> E.K making the lambda square homotopy commutative. Compatibility of beta and the augmentation equations then give the beta square by uniqueness up to homotopy after the quasi-isomorphic source augmentation.",
+   "text": "Reuse lift_nat_quasiIso and unique_nat_quasiIso from ModuleCohomologyFMapComparison through a proof-only import all. The first helper lifts the pushforward coefficient descent followed by C′.lambda across C.lambda, producing the lambda homotopy. Compatibility of beta and the augmentation equations identify the composites of the beta square with C.J.ι. The second existing helper reflects homotopy uniqueness after this quasi-isomorphic augmentation, producing the beta homotopy. These helpers already implement extension by zero and K-injective localization; they are not proved again here.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+    "lem-weil-pbc-module-cohomology-fmap-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Apply sections and homology to both homotopies. The canonical sections comparisons commute with the resolution lift by naturality of restrictions. Cancel the invertible vertical homology maps supplied by D and E, then transport through isoRightDerivedObj naturality for e.hom and id_G and the forgetful homology comparisons. Substituting the definition of map yields the claimed equality.",
+   "text": "Apply additive global sections and homology to both homotopies. Prove the sections-comparison square componentwise using the sections fields and presheaf naturality. isoRightDerivedObj_hom_naturality and mapHomologyIso_inv_naturality identify the resolution transports with H^p(e.hom) and id on H^p(G). Cancel the invertible vertical maps and resolution comparisons in the resulting two squares. Unfold ModuleCohomologyFMapData.map and apply this equality to the two canonical choices. The private helper proves the same comparison for any coefficient morphism, without using h-map functoriality or the restriction theorem.",
    "uses": [
     "def-weil-pbc-module-cohomology-fmap",
     "lem-weil-pbc-derived-functor-map-via-lift"
@@ -39,13 +39,13 @@
  "proof_deps": [
   "def-weil-pbc-module-cohomology-fmap",
   "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-cohomology-fmap-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 01F8 and 01FB; direct resolution-comparison argument expanded by Y2, without the cyclic h-map functoriality theorem."
+  "place": "Tags 01F8 and 01FB; target coefficient comparison implemented by G2 using the existing private lift_nat_quasiIso and unique_nat_quasiIso from ModuleCohomologyFMapComparison via import all. Sections transport and cancellation are proved locally. Repair removes the two duplicate helper proofs, with no cyclic import or interface change."
  },
  "mathlib_searches": [
   {
@@ -156,10 +156,10 @@
   "date": "2026-10-13",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261013T001618-L-2331922",
-  "kind": "interface",
+  "landing": "20261013T015554-L-3020430",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
